@@ -9,20 +9,20 @@ using System;
 
 class Class1
 {
-    public static int Main() 
-    {
-            object o1 = new short[3];
-            object o2 = new char[3];
-            
-            if(o1 is char[] || o2 is short[])
-            {
-            Console.WriteLine("FAIL: Was able to cast short[] to char[] or char[] to short[]");
-            return 101;
-            }
-        else
-        {
-               Console.WriteLine("PASS");
-            return 100;
-        }                       
-    }
+	public static int Main() 
+	{
+	        object o1 = new short[3];
+	        object o2 = new char[3];
+			
+	        if(o1 is char[] || o2 is short[])
+	        {
+			Console.WriteLine("FAIL: Was able to cast short[] to char[] or char[] to short[]");
+			return 101;
+	        }
+		else
+		{
+	       	Console.WriteLine("PASS");
+			return 100;
+		}                       
+	}
 }

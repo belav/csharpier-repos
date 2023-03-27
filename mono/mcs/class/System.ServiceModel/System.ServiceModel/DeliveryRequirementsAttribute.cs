@@ -2,7 +2,7 @@
 // DeliveryRequirementsAttribute.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,59 +33,59 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel
 {
-    [MonoTODO]
-    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true, Inherited = false)]
-    public sealed class DeliveryRequirementsAttribute : Attribute,
-        IContractBehaviorAttribute, IContractBehavior
-    {
-        QueuedDeliveryRequirementsMode queued_delivery_req;
-        bool require_ordered;
-        Type target_contract;
+	[MonoTODO]
+	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true, Inherited = false)]
+	public sealed class DeliveryRequirementsAttribute : Attribute,
+		IContractBehaviorAttribute, IContractBehavior
+	{
+		QueuedDeliveryRequirementsMode queued_delivery_req;
+		bool require_ordered;
+		Type target_contract;
 
-        public QueuedDeliveryRequirementsMode QueuedDeliveryRequirements {
-            get { return queued_delivery_req; }
-            set { queued_delivery_req = value; }
-        }
+		public QueuedDeliveryRequirementsMode QueuedDeliveryRequirements {
+			get { return queued_delivery_req; }
+			set { queued_delivery_req = value; }
+		}
 
-        public bool RequireOrderedDelivery {
-            get { return require_ordered; }
-            set { require_ordered = value; }
-        }
+		public bool RequireOrderedDelivery {
+			get { return require_ordered; }
+			set { require_ordered = value; }
+		}
 
-        public Type TargetContract {
-            get { return target_contract; }
-            set { target_contract = value; }
-        }
+		public Type TargetContract {
+			get { return target_contract; }
+			set { target_contract = value; }
+		}
 
-        void IContractBehavior.AddBindingParameters (
-            ContractDescription description,
-            ServiceEndpoint endpoint,
-            BindingParameterCollection parameters)
-        {
-            throw new NotImplementedException ();
-        }
+		void IContractBehavior.AddBindingParameters (
+			ContractDescription description,
+			ServiceEndpoint endpoint,
+			BindingParameterCollection parameters)
+		{
+			throw new NotImplementedException ();
+		}
 
-        void IContractBehavior.ApplyClientBehavior (
-            ContractDescription description,
-            ServiceEndpoint endpoint,
-            ClientRuntime proxy)
-        {
-            throw new NotImplementedException ();
-        }
+		void IContractBehavior.ApplyClientBehavior (
+			ContractDescription description,
+			ServiceEndpoint endpoint,
+			ClientRuntime proxy)
+		{
+			throw new NotImplementedException ();
+		}
 
-        void IContractBehavior.ApplyDispatchBehavior (
-            ContractDescription description,
-            ServiceEndpoint endpoint,
-            DispatchRuntime dispatch)
-        {
-            throw new NotImplementedException ();
-        }
+		void IContractBehavior.ApplyDispatchBehavior (
+			ContractDescription description,
+			ServiceEndpoint endpoint,
+			DispatchRuntime dispatch)
+		{
+			throw new NotImplementedException ();
+		}
 
-        void IContractBehavior.Validate (
-            ContractDescription description,
-            ServiceEndpoint endpoint)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		void IContractBehavior.Validate (
+			ContractDescription description,
+			ServiceEndpoint endpoint)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

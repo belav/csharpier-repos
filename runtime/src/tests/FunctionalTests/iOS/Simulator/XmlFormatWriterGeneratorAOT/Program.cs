@@ -20,7 +20,7 @@ public static class Program
 
         var ds = new DataContractSerializer (typeof (IEnumerable<int>));
         using (var xw = XmlWriter.Create (System.IO.Stream.Null))
-            ds.WriteObject (xw, new int [] { 1, 2, 3 });
+	        ds.WriteObject (xw, new int [] { 1, 2, 3 });
 
         Console.WriteLine("Done!");
         await Task.Delay(5000);

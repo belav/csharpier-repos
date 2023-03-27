@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -31,20 +31,20 @@ using System.Windows.Markup;
 
 namespace System.Windows.Markup.Primitives {
 
-    public abstract class MarkupObject {
-        internal MarkupObject ()
-        {
-        }
+	public abstract class MarkupObject {
+		internal MarkupObject ()
+		{
+		}
 
-        public abstract AttributeCollection Attributes { get; }
-        public abstract object Instance { get; }
-        public abstract Type ObjectType { get; }
+		public abstract AttributeCollection Attributes { get; }
+		public abstract object Instance { get; }
+		public abstract Type ObjectType { get; }
 
-        public virtual IEnumerable<MarkupProperty> Properties {
-            get { throw new NotImplementedException (); }
-        }
+		public virtual IEnumerable<MarkupProperty> Properties {
+			get { throw new NotImplementedException (); }
+		}
 
-        public abstract void AssignRootContext (IValueSerializerContext context);
-    }
+		public abstract void AssignRootContext (IValueSerializerContext context);
+	}
 }
 

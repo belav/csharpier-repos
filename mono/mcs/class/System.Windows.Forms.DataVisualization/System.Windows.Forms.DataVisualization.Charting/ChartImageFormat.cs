@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,15 +27,15 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum ChartImageFormat
-    {
-        Jpeg = 0,
-        Png = 1,
-        Bmp = 2,
-        Tiff = 3,
-        Gif = 4,
-        Emf = 5,
-        EmfDual = 6,
-        EmfPlus = 7
-    }
+	public enum ChartImageFormat
+	{
+		Jpeg = 0,
+		Png = 1,
+		Bmp = 2,
+		Tiff = 3,
+		Gif = 4,
+		Emf = 5,
+		EmfDual = 6,
+		EmfPlus = 7
+	}
 }

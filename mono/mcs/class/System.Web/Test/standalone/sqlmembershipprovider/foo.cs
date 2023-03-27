@@ -4,32 +4,32 @@ using System.Text;
 using System;
 
 public class foo {
-        static byte ToHexValue (char c, bool high)
-        {
-            byte v;
-            if (c >= '0' && c <= '9')
-                v = (byte) (c - '0');
-            else if (c >= 'a' && c <= 'f')
-                v = (byte) (c - 'a' + 10);
-            else if (c >= 'A' && c <= 'F')
-                v = (byte) (c - 'A' + 10);
-            else
-                throw new ArgumentException ("Invalid hex character");
+		static byte ToHexValue (char c, bool high)
+		{
+			byte v;
+			if (c >= '0' && c <= '9')
+				v = (byte) (c - '0');
+			else if (c >= 'a' && c <= 'f')
+				v = (byte) (c - 'a' + 10);
+			else if (c >= 'A' && c <= 'F')
+				v = (byte) (c - 'A' + 10);
+			else
+				throw new ArgumentException ("Invalid hex character");
 
-            if (high)
-                v <<= 4;
+			if (high)
+				v <<= 4;
 
-            return v;
-        }
-        
-        internal static byte [] GetBytes (string key, int len)
-        {
-            byte [] result = new byte [len / 2];
-            for (int i = 0; i < len; i += 2)
-                result [i / 2] = (byte) (ToHexValue (key [i], true) + ToHexValue (key [i + 1], false));
+			return v;
+		}
+		
+		internal static byte [] GetBytes (string key, int len)
+		{
+			byte [] result = new byte [len / 2];
+			for (int i = 0; i < len; i += 2)
+				result [i / 2] = (byte) (ToHexValue (key [i], true) + ToHexValue (key [i + 1], false));
 
-            return result;
-        }
+			return result;
+		}
 
 
   static void decrypt () {
@@ -78,7 +78,7 @@ public class foo {
   }
 
   public static void Main (string[] args) {
-    decrypt();
-    encrypt();
+	decrypt();
+	encrypt();
   }
 }

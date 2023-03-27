@@ -2,7 +2,7 @@
 // System.Web.UI.Design.DesignTimeResourceProviderFactory
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -32,17 +32,17 @@ using System.Web.Compilation;
 
 namespace System.Web.UI.Design
 {
-    public abstract class DesignTimeResourceProviderFactory
-    {
-        protected DesignTimeResourceProviderFactory ()
-        {
-        }
+	public abstract class DesignTimeResourceProviderFactory
+	{
+		protected DesignTimeResourceProviderFactory ()
+		{
+		}
 
-        public abstract IResourceProvider CreateDesignTimeGlobalResourceProvider (IServiceProvider serviceProvider, string classKey);
+		public abstract IResourceProvider CreateDesignTimeGlobalResourceProvider (IServiceProvider serviceProvider, string classKey);
 
-        public abstract IResourceProvider CreateDesignTimeLocalResourceProvider (IServiceProvider serviceProvider);
+		public abstract IResourceProvider CreateDesignTimeLocalResourceProvider (IServiceProvider serviceProvider);
 
-        public abstract IDesignTimeResourceWriter CreateDesignTimeLocalResourceWriter (IServiceProvider serviceProvider);
-    }
+		public abstract IDesignTimeResourceWriter CreateDesignTimeLocalResourceWriter (IServiceProvider serviceProvider);
+	}
 }
 

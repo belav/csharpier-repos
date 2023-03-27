@@ -1,4 +1,4 @@
-//
+﻿//
 // MonoBtlsX509NameEntryType.cs
 //
 // Author:
@@ -27,25 +27,25 @@
 using System;
 namespace Mono.Btls
 {
-    enum MonoBtlsX509NameEntryType : int
-    {
-        Unknown = 0,
-        CountryName,
-        OrganizationName,
-        OrganizationalUnitName,
-        CommonName,
-        LocalityName,
-        StateOrProvinceName,
-        StreetAddress,
-        SerialNumber,
-        DomainComponent,
-        UserId,
-        Email,
-        DnQualifier,
-        Title,
-        Surname,
-        GivenName,
-        Initial
-    }
+	enum MonoBtlsX509NameEntryType : int
+	{
+		Unknown = 0,
+		CountryName,
+		OrganizationName,
+		OrganizationalUnitName,
+		CommonName,
+		LocalityName,
+		StateOrProvinceName,
+		StreetAddress,
+		SerialNumber,
+		DomainComponent,
+		UserId,
+		Email,
+		DnQualifier,
+		Title,
+		Surname,
+		GivenName,
+		Initial
+	}
 }
 #endif

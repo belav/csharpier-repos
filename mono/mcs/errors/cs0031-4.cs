@@ -3,12 +3,12 @@
 
 public class Blah {
 
-    public enum MyEnum : byte {
-        Foo = 256,
-        Bar
-    }
+	public enum MyEnum : byte {
+		Foo = 256,
+		Bar
+	}
 
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }

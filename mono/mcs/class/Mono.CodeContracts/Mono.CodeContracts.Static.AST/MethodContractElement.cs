@@ -2,7 +2,7 @@
 // MethodContractElement.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,13 +27,13 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    abstract class MethodContractElement : Node {
-        public Expression UserMessage;
+	abstract class MethodContractElement : Node {
+		public Expression UserMessage;
 
-        protected MethodContractElement (NodeType nodeType) : base (nodeType)
-        {
-        }
+		protected MethodContractElement (NodeType nodeType) : base (nodeType)
+		{
+		}
 
-        public Expression Assertion { get; set; }
-    }
+		public Expression Assertion { get; set; }
+	}
 }

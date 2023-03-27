@@ -6,5 +6,5 @@ using System;
 
 readonly struct S
 {
-    event Action e;
+	event Action e;
 }

@@ -1,4 +1,4 @@
-//
+﻿//
 // ProjectOutputElement.cs
 //
 // Author:

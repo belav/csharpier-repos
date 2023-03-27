@@ -4,13 +4,13 @@
 using System.Collections;
 
 class Test {
-    static IEnumerable foo () { return null; }
+	static IEnumerable foo () { return null; }
 
-    static void Main ()
-    {
-        IEnumerable f = foo ();
-        if (f != null)
-            foreach (int i in f)
-                i = 0;
-    }
+	static void Main ()
+	{
+		IEnumerable f = foo ();
+		if (f != null)
+			foreach (int i in f)
+				i = 0;
+	}
 }

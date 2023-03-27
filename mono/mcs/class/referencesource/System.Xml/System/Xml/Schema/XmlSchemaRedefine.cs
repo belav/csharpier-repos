@@ -20,10 +20,10 @@ namespace System.Xml.Schema {
         XmlSchemaObjectTable groups = new XmlSchemaObjectTable();
 
         
-        /// <include file='doc\XmlSchemaRedefine.uex' path='docs/doc[@for="XmlSchemaRedefine.XmlSchemaRedefine"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+		/// <include file='doc\XmlSchemaRedefine.uex' path='docs/doc[@for="XmlSchemaRedefine.XmlSchemaRedefine"]/*' />
+		/// <devdoc>
+		///    <para>[To be supplied.]</para>
+		/// </devdoc>
         public XmlSchemaRedefine() {
             Compositor = Compositor.Redefine;
         }

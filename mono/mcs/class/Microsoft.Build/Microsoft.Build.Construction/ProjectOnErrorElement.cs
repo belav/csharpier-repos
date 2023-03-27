@@ -1,4 +1,4 @@
-//
+﻿//
 // ProjectOnErrorElement.cs
 //
 // Author:

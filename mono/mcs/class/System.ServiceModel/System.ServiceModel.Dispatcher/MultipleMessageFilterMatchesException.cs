@@ -32,29 +32,29 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Dispatcher
 {
-    [Serializable]
-    public class MultipleFilterMatchesException : SystemException
-    {
-        Collection<MessageFilter> filters;
+	[Serializable]
+	public class MultipleFilterMatchesException : SystemException
+	{
+		Collection<MessageFilter> filters;
 
-        public MultipleFilterMatchesException () : base () {}
-        public MultipleFilterMatchesException (string message) : base (message) {}
-        public MultipleFilterMatchesException (string message, Exception innerException) : base (message, innerException) {}        
-        protected MultipleFilterMatchesException (SerializationInfo info, StreamingContext context)
-            : base (info, context) {}
+		public MultipleFilterMatchesException () : base () {}
+		public MultipleFilterMatchesException (string message) : base (message) {}
+		public MultipleFilterMatchesException (string message, Exception innerException) : base (message, innerException) {}		
+		protected MultipleFilterMatchesException (SerializationInfo info, StreamingContext context)
+			: base (info, context) {}
 
-        public MultipleFilterMatchesException (string message, Collection<MessageFilter> filters)
-            : base (message)
-        {
-            this.filters = filters;
-        }
+		public MultipleFilterMatchesException (string message, Collection<MessageFilter> filters)
+			: base (message)
+		{
+			this.filters = filters;
+		}
 
-        public MultipleFilterMatchesException (string message, Exception innerException, Collection<MessageFilter> filters)
-            : base (message, innerException)
-        {
-            this.filters = filters;
-        }
-        
-        public Collection<MessageFilter> Filters { get { return filters; } }
-    }
+		public MultipleFilterMatchesException (string message, Exception innerException, Collection<MessageFilter> filters)
+			: base (message, innerException)
+		{
+			this.filters = filters;
+		}
+		
+		public Collection<MessageFilter> Filters { get { return filters; } }
+	}
 }

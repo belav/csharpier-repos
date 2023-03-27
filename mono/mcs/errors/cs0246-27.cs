@@ -3,5 +3,5 @@
 
 class X
 {
-    NotExist<float> foo;
+	NotExist<float> foo;
 }

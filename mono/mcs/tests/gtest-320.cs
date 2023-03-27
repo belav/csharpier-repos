@@ -7,13 +7,13 @@ partial class B
 
 partial class B : Foo<B.C>
 {
-    public class C
-    { }
+	public class C
+	{ }
   
 }
 
 class X
 {
-    public static void Main ()
-    { }
+	public static void Main ()
+	{ }
 }

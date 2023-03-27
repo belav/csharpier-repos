@@ -3,9 +3,9 @@
 
 class M
 {
-    public static void Main ()
-    {
-        int[,,] i = { { { 0, 0 }, { 1, 1} },
-            { { 2, 2 } } };
-    }
+	public static void Main ()
+	{
+		int[,,] i = { { { 0, 0 }, { 1, 1} },
+			{ { 2, 2 } } };
+	}
 }

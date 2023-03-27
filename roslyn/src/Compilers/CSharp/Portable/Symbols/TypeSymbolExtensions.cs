@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -229,7 +229,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             // Spec (17.1.3)
             // The types of positional and named parameters for an attribute class are limited to the attribute parameter types, which are:
-            //     1) One of the following types: bool, byte, char, double, float, int, long, sbyte, short, string, uint, ulong, ushort.
+            // 	1) One of the following types: bool, byte, char, double, float, int, long, sbyte, short, string, uint, ulong, ushort.
             //     2) The type object.
             //     3) The type System.Type.
             //     4) An enum type, provided it has public accessibility and the types in which it is nested (if any) also have public accessibility.
@@ -555,8 +555,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public static ConstantValue? GetDefaultValue(this TypeSymbol type)
         {
-            // SPEC:    A default-value-expression is a constant expression (§7.19) if the type
-            // SPEC:    is a reference type or a type parameter that is known to be a reference type (§10.1.5). 
+            // SPEC:    A default-value-expression is a constant expression (Â§7.19) if the type
+            // SPEC:    is a reference type or a type parameter that is known to be a reference type (Â§10.1.5). 
             // SPEC:    In addition, a default-value-expression is a constant expression if the type is
             // SPEC:    one of the following value types:
             // SPEC:    sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, bool, or any enumeration type.

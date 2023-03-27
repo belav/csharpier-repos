@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,205 +32,205 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("004b6882-2df1-49df-bb5f-0fb81a5b1edf")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIAccessible {
+	[Guid ("004b6882-2df1-49df-bb5f-0fb81a5b1edf")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIAccessible {
 
 #region nsIAccessible
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getParent ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getParent ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getNextSibling ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getNextSibling ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getPreviousSibling ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getPreviousSibling ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getFirstChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getFirstChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getLastChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getLastChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getChildren ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getChildren ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getChildCount (out int ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getChildCount (out int ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getIndexInParent (out int ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getIndexInParent (out int ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getName ( /*AString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getName ( /*AString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setName (/*AString*/ HandleRef value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setName (/*AString*/ HandleRef value);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getValue ( /*AString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getValue ( /*AString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getDescription ( /*AString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getDescription ( /*AString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getKeyboardShortcut ( /*AString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getKeyboardShortcut ( /*AString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getDefaultKeyBinding ( /*AString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getDefaultKeyBinding ( /*AString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getKeyBindings ( char aActionIndex,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIDOMDOMStringList ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getKeyBindings ( char aActionIndex,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIDOMDOMStringList ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getRole (out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getRole (out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getFinalRole (out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getFinalRole (out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getFinalState (out uint aState,
-                out uint aExtraState);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getFinalState (out uint aState,
+				out uint aExtraState);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getHelp ( /*AString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getHelp ( /*AString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getFocusedChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getFocusedChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getAttributes ([MarshalAs (UnmanagedType.Interface) ] out nsIPersistentProperties ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getAttributes ([MarshalAs (UnmanagedType.Interface) ] out nsIPersistentProperties ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int groupPosition (out int aGroupLevel,
-                out int aSimilarItemsInGroup,
-                out int aPositionInGroup);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int groupPosition (out int aGroupLevel,
+				out int aSimilarItemsInGroup,
+				out int aPositionInGroup);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getChildAtPoint ( int x,
-                 int y,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getChildAtPoint ( int x,
+				 int y,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getChildAt ( int aChildIndex,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getChildAt ( int aChildIndex,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getAccessibleToRight ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getAccessibleToRight ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getAccessibleToLeft ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getAccessibleToLeft ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getAccessibleAbove ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getAccessibleAbove ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getAccessibleBelow ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getAccessibleBelow ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getAccessibleRelated ( uint aRelationType,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getAccessibleRelated ( uint aRelationType,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getRelationsCount (out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getRelationsCount (out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getRelation ( uint index,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessibleRelation ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getRelation ( uint index,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessibleRelation ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getRelations ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getRelations ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getBounds (out int x,
-                out int y,
-                out int width,
-                out int height);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getBounds (out int x,
+				out int y,
+				out int width,
+				out int height);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setSelected ( bool isSelected);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setSelected ( bool isSelected);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int extendSelection ();
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int extendSelection ();
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int takeSelection ();
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int takeSelection ();
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int takeFocus ();
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int takeFocus ();
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getNumActions (out char ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getNumActions (out char ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getActionName ( char index,
-                 /*AString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getActionName ( char index,
+				 /*AString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getActionDescription ( char aIndex,
-                 /*AString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getActionDescription ( char aIndex,
+				 /*AString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int doAction ( char index);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int doAction ( char index);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getNativeInterface (out IntPtr aOutAccessible);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getNativeInterface (out IntPtr aOutAccessible);
 
 #endregion
-    }
+	}
 
 
-    internal class nsAccessible {
-        public static nsIAccessible GetProxy (Mono.WebBrowser.IWebBrowser control, nsIAccessible obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIAccessible).GUID, obj);
-            return o as nsIAccessible;
-        }
-    }
+	internal class nsAccessible {
+		public static nsIAccessible GetProxy (Mono.WebBrowser.IWebBrowser control, nsIAccessible obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIAccessible).GUID, obj);
+			return o as nsIAccessible;
+		}
+	}
 }
 #if example
 
@@ -239,297 +239,297 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-    internal class Accessible : nsIAccessible {
+	internal class Accessible : nsIAccessible {
 
 #region nsIAccessible
-        int nsIAccessible.getParent ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		int nsIAccessible.getParent ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getNextSibling ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		int nsIAccessible.getNextSibling ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getPreviousSibling ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		int nsIAccessible.getPreviousSibling ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getFirstChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		int nsIAccessible.getFirstChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getLastChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		int nsIAccessible.getLastChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getChildren ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret)
+		int nsIAccessible.getChildren ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getChildCount (out int ret)
+		int nsIAccessible.getChildCount (out int ret)
 
-        {
-            return 0;
-        }
+		{
+			return 0;
+		}
 
-        int nsIAccessible.getIndexInParent (out int ret)
+		int nsIAccessible.getIndexInParent (out int ret)
 
-        {
-            return 0;
-        }
+		{
+			return 0;
+		}
 
-        int nsIAccessible.getName ( /*AString*/ HandleRef ret)
+		int nsIAccessible.getName ( /*AString*/ HandleRef ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.setName (/*AString*/ HandleRef value)
+		int nsIAccessible.setName (/*AString*/ HandleRef value)
 
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getValue ( /*AString*/ HandleRef ret)
+		int nsIAccessible.getValue ( /*AString*/ HandleRef ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getDescription ( /*AString*/ HandleRef ret)
+		int nsIAccessible.getDescription ( /*AString*/ HandleRef ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getKeyboardShortcut ( /*AString*/ HandleRef ret)
+		int nsIAccessible.getKeyboardShortcut ( /*AString*/ HandleRef ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getDefaultKeyBinding ( /*AString*/ HandleRef ret)
+		int nsIAccessible.getDefaultKeyBinding ( /*AString*/ HandleRef ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getKeyBindings ( char aActionIndex,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIDOMDOMStringList ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getKeyBindings ( char aActionIndex,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIDOMDOMStringList ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getRole (out uint ret)
+		int nsIAccessible.getRole (out uint ret)
 
-        {
-            return 0;
-        }
+		{
+			return 0;
+		}
 
-        int nsIAccessible.getFinalRole (out uint ret)
+		int nsIAccessible.getFinalRole (out uint ret)
 
-        {
-            return 0;
-        }
+		{
+			return 0;
+		}
 
-        int nsIAccessible.getFinalState (out uint aState,
-                out uint aExtraState)
-        {
-            return ;
-        }
+		int nsIAccessible.getFinalState (out uint aState,
+				out uint aExtraState)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getHelp ( /*AString*/ HandleRef ret)
+		int nsIAccessible.getHelp ( /*AString*/ HandleRef ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getFocusedChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		int nsIAccessible.getFocusedChild ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getAttributes ([MarshalAs (UnmanagedType.Interface) ] out nsIPersistentProperties ret)
+		int nsIAccessible.getAttributes ([MarshalAs (UnmanagedType.Interface) ] out nsIPersistentProperties ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.groupPosition (out int aGroupLevel,
-                out int aSimilarItemsInGroup,
-                out int aPositionInGroup)
-        {
-            return ;
-        }
+		int nsIAccessible.groupPosition (out int aGroupLevel,
+				out int aSimilarItemsInGroup,
+				out int aPositionInGroup)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getChildAtPoint ( int x,
-                 int y,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getChildAtPoint ( int x,
+				 int y,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getChildAt ( int aChildIndex,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getChildAt ( int aChildIndex,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getAccessibleToRight ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getAccessibleToRight ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getAccessibleToLeft ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getAccessibleToLeft ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getAccessibleAbove ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getAccessibleAbove ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getAccessibleBelow ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getAccessibleBelow ([MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getAccessibleRelated ( uint aRelationType,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getAccessibleRelated ( uint aRelationType,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getRelationsCount (out uint ret)
+		int nsIAccessible.getRelationsCount (out uint ret)
 
-        {
-            return 0;
-        }
+		{
+			return 0;
+		}
 
-        int nsIAccessible.getRelation ( uint index,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessibleRelation ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getRelation ( uint index,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessibleRelation ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getRelations ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getRelations ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getBounds (out int x,
-                out int y,
-                out int width,
-                out int height)
-        {
-            return ;
-        }
+		int nsIAccessible.getBounds (out int x,
+				out int y,
+				out int width,
+				out int height)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.setSelected ( bool isSelected)
-        {
-            return ;
-        }
+		int nsIAccessible.setSelected ( bool isSelected)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.extendSelection ()
-        {
-            return ;
-        }
+		int nsIAccessible.extendSelection ()
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.takeSelection ()
-        {
-            return ;
-        }
+		int nsIAccessible.takeSelection ()
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.takeFocus ()
-        {
-            return ;
-        }
+		int nsIAccessible.takeFocus ()
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getNumActions (out char ret)
+		int nsIAccessible.getNumActions (out char ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIAccessible.getActionName ( char index,
-                 /*AString*/ HandleRef ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getActionName ( char index,
+				 /*AString*/ HandleRef ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getActionDescription ( char aIndex,
-                 /*AString*/ HandleRef ret)
-        {
-            return ;
-        }
+		int nsIAccessible.getActionDescription ( char aIndex,
+				 /*AString*/ HandleRef ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.doAction ( char index)
-        {
-            return ;
-        }
+		int nsIAccessible.doAction ( char index)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessible.getNativeInterface (out IntPtr aOutAccessible)
-        {
-            return ;
-        }
+		int nsIAccessible.getNativeInterface (out IntPtr aOutAccessible)
+		{
+			return ;
+		}
 
 
 
 #endregion
-    }
+	}
 #endif

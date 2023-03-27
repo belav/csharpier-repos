@@ -2,7 +2,7 @@
 // Test.Mono.Messaging.RabbitMQ
 //
 // Authors:
-//      Michael Barker (mike@middlesoft.co.uk)
+//	  Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -38,29 +38,29 @@ using NUnit.Framework;
 
 namespace MonoTests.Mono.Messaging.RabbitMQ
 {
-    [TestFixture]
-    public class FailuresTest {
+	[TestFixture]
+	public class FailuresTest {
 
-        [Test]
-        [ExpectedException (typeof (MessageQueueException))]
-        public void SendWithPathNotSet ()
-        {
-            MessageQueue q = new MessageQueue ();
-            Message m = new Message ("foobar", new BinaryMessageFormatter ());
-            
-            q.Send (m);
-        }
-        
-        [Test]
-        [ExpectedException (typeof (MessageQueueException))]
-        public void SendInTransactionWithPathNotSet ()
-        {
-            MessageQueue q = new MessageQueue ();
-            Message m = new Message ("foobar", new BinaryMessageFormatter ());
-            MessageQueueTransaction tx = new MessageQueueTransaction ();
-            
-            q.Send (m, tx);
-        }
-        
-    }
+		[Test]
+		[ExpectedException (typeof (MessageQueueException))]
+		public void SendWithPathNotSet ()
+		{
+			MessageQueue q = new MessageQueue ();
+			Message m = new Message ("foobar", new BinaryMessageFormatter ());
+			
+			q.Send (m);
+		}
+		
+		[Test]
+		[ExpectedException (typeof (MessageQueueException))]
+		public void SendInTransactionWithPathNotSet ()
+		{
+			MessageQueue q = new MessageQueue ();
+			Message m = new Message ("foobar", new BinaryMessageFormatter ());
+			MessageQueueTransaction tx = new MessageQueueTransaction ();
+			
+			q.Send (m, tx);
+		}
+		
+	}
 }

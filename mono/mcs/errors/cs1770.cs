@@ -5,7 +5,7 @@ using System;
 
 class C
 {
-    public static void Foo (DateTime? d = new DateTime ())
-    {
-    }
+	public static void Foo (DateTime? d = new DateTime ())
+	{
+	}
 }

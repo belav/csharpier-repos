@@ -2,7 +2,7 @@
 // System.Net.Mail.MailPriority
 //
 // Authors:
-//    John Luke (john.luke@gmail.com)
+//	John Luke (john.luke@gmail.com)
 //
 // (C) 2005 John Luke
 //
@@ -30,12 +30,12 @@
 
 namespace System.Net.Mail {
 
-    public enum MailPriority
-    {
-        Normal,
-        Low,
-        High,
-    }
+	public enum MailPriority
+	{
+		Normal,
+		Low,
+		High,
+	}
 
 }
 

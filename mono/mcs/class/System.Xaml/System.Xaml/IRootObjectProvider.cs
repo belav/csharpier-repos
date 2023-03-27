@@ -25,8 +25,8 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-    public interface IRootObjectProvider
-    {
-        object RootObject { get; }
-    }
+	public interface IRootObjectProvider
+	{
+		object RootObject { get; }
+	}
 }

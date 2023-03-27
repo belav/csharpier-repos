@@ -1,4 +1,4 @@
-/* ****************************************************************************
+﻿/* ****************************************************************************
  *
  * Copyright (c) Microsoft Corporation. 
  *
@@ -142,7 +142,7 @@ namespace System.Runtime.CompilerServices {
 #if !CLR2 && !SILVERLIGHT
             // We cannot compile rules in the heterogeneous app domains since they
             // may come from less trusted sources
-            // Silverlight always uses a homogenous appdomain, so we don�t need this check
+            // Silverlight always uses a homogenous appdomain, so we don’t need this check
             if (!AppDomain.CurrentDomain.IsHomogenous) {
                 throw Error.HomogenousAppDomainRequired();
             }

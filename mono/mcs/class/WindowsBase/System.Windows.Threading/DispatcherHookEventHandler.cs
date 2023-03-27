@@ -20,13 +20,13 @@
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Miguel de Icaza (miguel@novell.com)
+//	Miguel de Icaza (miguel@novell.com)
 //
 using System;
 
 namespace System.Windows.Threading {
 
-    public delegate void DispatcherHookEventHandler (object sender, DispatcherHookEventArgs e);
+	public delegate void DispatcherHookEventHandler (object sender, DispatcherHookEventArgs e);
 
 }
 

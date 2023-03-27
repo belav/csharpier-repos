@@ -33,10 +33,10 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-    public enum DesignerActionUIStateChangeType
-    {
-        Show,
-        Hide,
-        Refresh
-    }
+	public enum DesignerActionUIStateChangeType
+	{
+		Show,
+		Hide,
+		Refresh
+	}
 }

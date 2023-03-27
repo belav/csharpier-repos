@@ -7,21 +7,21 @@ using System.Collections.Generic;
 
 namespace CrashRepro.Core
 {
-    public class X
-    {        
-        async void Foo ()
-        {
-            var pushes = await Run ().ContinueWith (l =>
-            {
-                for (int i = 0; i < 1; ++i)
-                    Run ().ContinueWith(() => { });
-            });
-        }
+	public class X
+	{		
+		async void Foo ()
+		{
+			var pushes = await Run ().ContinueWith (l =>
+			{
+				for (int i = 0; i < 1; ++i)
+					Run ().ContinueWith(() => { });
+			});
+		}
 
-        Task Run ()
-        {
-            return null;
-        }
-    }
+		Task Run ()
+		{
+			return null;
+		}
+	}
 }
 

@@ -1,4 +1,4 @@
-namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc {
     public class ModelClientValidationRequiredRule : ModelClientValidationRule {
         public ModelClientValidationRequiredRule(string errorMessage) {
             ErrorMessage = errorMessage;

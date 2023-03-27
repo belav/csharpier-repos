@@ -39,149 +39,149 @@ namespace MonoTests.System.Data.OracleClient
 [Category ("NotWorking")]
 public class OracleParameter_ctor_SOtype : ADONetTesterClass
 {
-    private Exception exp;
-    // transaction use was add for PostgreSQL
-    OracleTransaction tr;
+	private Exception exp;
+	// transaction use was add for PostgreSQL
+	OracleTransaction tr;
 
-    public static void Main()
-    {
-        OracleParameter_ctor_SOtype tc = new OracleParameter_ctor_SOtype();
-        tc.exp = null;
-        try
-        {
-            tc.BeginTest("OracleParameter_ctor_SOtype on " + ConnectedDataProvider.GetDbType().ToString());
-            tc.run();
-        }
-        catch(Exception ex){tc.exp = ex;}
-        finally    {tc.EndTest(tc.exp);}
-    }
+	public static void Main()
+	{
+		OracleParameter_ctor_SOtype tc = new OracleParameter_ctor_SOtype();
+		tc.exp = null;
+		try
+		{
+			tc.BeginTest("OracleParameter_ctor_SOtype on " + ConnectedDataProvider.GetDbType().ToString());
+			tc.run();
+		}
+		catch(Exception ex){tc.exp = ex;}
+		finally	{tc.EndTest(tc.exp);}
+	}
 
-    public void run()
-    {
-        Log(string.Format("DB Server={0}.", ConnectedDataProvider.GetDbType()));
-        AllTypes();
-        SimpleTypesWithDBNull();
-    }
+	public void run()
+	{
+		Log(string.Format("DB Server={0}.", ConnectedDataProvider.GetDbType()));
+		AllTypes();
+		SimpleTypesWithDBNull();
+	}
 
-    [Test]
-    public void AllTypes()
-    {
-        exp = null;
-        OracleParameter param = null;
+	[Test]
+	public void AllTypes()
+	{
+		exp = null;
+		OracleParameter param = null;
 
-        foreach (OracleType dbtype in Enum.GetValues(typeof(OracleType)))
-        {
+		foreach (OracleType dbtype in Enum.GetValues(typeof(OracleType)))
+		{
 
-            param = new OracleParameter("myParam",dbtype);
+			param = new OracleParameter("myParam",dbtype);
 
-            try
-            {
-                BeginCase("ctor " + dbtype.ToString());
-                Compare(param != null, true);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("ctor " + dbtype.ToString());
+				Compare(param != null, true);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("name " + dbtype.ToString());
-                Compare(param.ParameterName ,"myParam");
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("name " + dbtype.ToString());
+				Compare(param.ParameterName ,"myParam");
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-        }
-    }
+		}
+	}
 
-    [Test]
-    public void SimpleTypesWithDBNull()
-    {
-        OracleConnection con=null;
-        OracleCommand cmd=null;
-        OracleDataReader rdr=null;
-        try
-        {
-            exp = null;
-            BeginCase("Test simple types with DBNull");
+	[Test]
+	public void SimpleTypesWithDBNull()
+	{
+		OracleConnection con=null;
+		OracleCommand cmd=null;
+		OracleDataReader rdr=null;
+		try
+		{
+			exp = null;
+			BeginCase("Test simple types with DBNull");
 
-            string connectionString = ConnectedDataProvider.ConnectionString;
-            con = new    OracleConnection(connectionString);
-            cmd = new OracleCommand();
-            con.Open();
-            // transaction use was add for PostgreSQL
-            tr = con.BeginTransaction();
-            
-            cmd = new OracleCommand("", con, tr);
-            cmd.CommandText = "GHSP_TYPES_SIMPLE_1";
-            cmd.CommandType = CommandType.StoredProcedure;
+			string connectionString = ConnectedDataProvider.ConnectionString;
+			con = new	OracleConnection(connectionString);
+			cmd = new OracleCommand();
+			con.Open();
+			// transaction use was add for PostgreSQL
+			tr = con.BeginTransaction();
+			
+			cmd = new OracleCommand("", con, tr);
+			cmd.CommandText = "GHSP_TYPES_SIMPLE_1";
+			cmd.CommandType = CommandType.StoredProcedure;
 
-            AddSimpleTypesNullParams(cmd);
-            cmd.Parameters.Add(new OracleParameter("result",OracleType.Cursor)).Direction = ParameterDirection.Output;
+			AddSimpleTypesNullParams(cmd);
+			cmd.Parameters.Add(new OracleParameter("result",OracleType.Cursor)).Direction = ParameterDirection.Output;
 
 #if !JAVA
-            if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL)
-            {
+			if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL)
+			{
 #if DAAB
 
-                rdr = Microsoft.ApplicationBlocks.Data.PostgresOracleHelper.OLEDB4ODBCExecuteReader(cmd,true);
+				rdr = Microsoft.ApplicationBlocks.Data.PostgresOracleHelper.OLEDB4ODBCExecuteReader(cmd,true);
 #endif
 
-            }
-            else
+			}
+			else
 #endif
-            {
+			{
 
-                rdr = cmd.ExecuteReader();
-            }
+				rdr = cmd.ExecuteReader();
+			}
 
-            rdr.Read();
-            for (int i=0; i<rdr.FieldCount; i++)
-            {
-                Compare(DBNull.Value, rdr.GetValue(i));
-            }
-            rdr.Close();
-        }
-        catch (Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            if(rdr != null && !rdr.IsClosed)
-            {
-                rdr.Close();
-            }
-            if (con != null && con.State == ConnectionState.Open)
-            {
-                con.Close();
-            }
-            exp=null;
-        }
-    }
+			rdr.Read();
+			for (int i=0; i<rdr.FieldCount; i++)
+			{
+				Compare(DBNull.Value, rdr.GetValue(i));
+			}
+			rdr.Close();
+		}
+		catch (Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			if(rdr != null && !rdr.IsClosed)
+			{
+				rdr.Close();
+			}
+			if (con != null && con.State == ConnectionState.Open)
+			{
+				con.Close();
+			}
+			exp=null;
+		}
+	}
 
-    private void AddSimpleTypesNullParams(OracleCommand cmd)
-    {
-        OracleParameter tmpParam;
-        tmpParam = new OracleParameter("T_NUMBER", OracleType.Number);
-        cmd.Parameters.Add(tmpParam);
-        tmpParam = new OracleParameter("T_LONG", OracleType.LongVarChar);
-        cmd.Parameters.Add(tmpParam);
-        tmpParam = new OracleParameter("T_FLOAT", OracleType.Float);
-        cmd.Parameters.Add(tmpParam);
-        tmpParam = new OracleParameter("T_VARCHAR", OracleType.VarChar);
-        cmd.Parameters.Add(tmpParam);
-        tmpParam = new OracleParameter("T_NVARCHAR", OracleType.NVarChar);
-        cmd.Parameters.Add(tmpParam);
-        tmpParam = new OracleParameter("T_CHAR", OracleType.Char);
-        cmd.Parameters.Add(tmpParam);
-        tmpParam = new OracleParameter("T_NCHAR", OracleType.NChar);
-        cmd.Parameters.Add(tmpParam);
+	private void AddSimpleTypesNullParams(OracleCommand cmd)
+	{
+		OracleParameter tmpParam;
+		tmpParam = new OracleParameter("T_NUMBER", OracleType.Number);
+		cmd.Parameters.Add(tmpParam);
+		tmpParam = new OracleParameter("T_LONG", OracleType.LongVarChar);
+		cmd.Parameters.Add(tmpParam);
+		tmpParam = new OracleParameter("T_FLOAT", OracleType.Float);
+		cmd.Parameters.Add(tmpParam);
+		tmpParam = new OracleParameter("T_VARCHAR", OracleType.VarChar);
+		cmd.Parameters.Add(tmpParam);
+		tmpParam = new OracleParameter("T_NVARCHAR", OracleType.NVarChar);
+		cmd.Parameters.Add(tmpParam);
+		tmpParam = new OracleParameter("T_CHAR", OracleType.Char);
+		cmd.Parameters.Add(tmpParam);
+		tmpParam = new OracleParameter("T_NCHAR", OracleType.NChar);
+		cmd.Parameters.Add(tmpParam);
 
-        foreach (OracleParameter current in cmd.Parameters)
-        {
-            current.Value = DBNull.Value;
-        }
-    }
+		foreach (OracleParameter current in cmd.Parameters)
+		{
+			current.Value = DBNull.Value;
+		}
+	}
 }
 }

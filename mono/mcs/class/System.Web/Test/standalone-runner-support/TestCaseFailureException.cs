@@ -29,28 +29,28 @@ using System;
 
 namespace StandAloneRunnerSupport
 {
-    public class TestCaseFailureException : Exception
-    {
-        public string Details {
-            get; set;
-        }
+	public class TestCaseFailureException : Exception
+	{
+		public string Details {
+			get; set;
+		}
 
-        public TestCaseFailureException (string message)
-            : this (message, null, null)
-        {}
+		public TestCaseFailureException (string message)
+			: this (message, null, null)
+		{}
 
-        public TestCaseFailureException (string message, string details)
-            : this (message, details, null)
-        {}
+		public TestCaseFailureException (string message, string details)
+			: this (message, details, null)
+		{}
 
-        public TestCaseFailureException (string message, Exception innerException)
-            : this (message, null, innerException)
-        {}
-        
-        public TestCaseFailureException (string message, string details, Exception innerException)
-            : base (message, innerException)
-        {
-            Details = details;
-        }    
-    }
+		public TestCaseFailureException (string message, Exception innerException)
+			: this (message, null, innerException)
+		{}
+		
+		public TestCaseFailureException (string message, string details, Exception innerException)
+			: base (message, innerException)
+		{
+			Details = details;
+		}	
+	}
 }

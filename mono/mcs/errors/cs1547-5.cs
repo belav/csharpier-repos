@@ -2,7 +2,7 @@
 // Line: 6
 
 class C {
-    static void Main () {
-        int i = sizeof (void);
-    }
+	static void Main () {
+		int i = sizeof (void);
+	}
 }

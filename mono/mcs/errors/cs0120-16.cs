@@ -3,20 +3,20 @@
 
 class App
 {
-    Test a = new Test ();
+	Test a = new Test ();
 
-    public Test Test
-    {
-        get { return a; }
-    }
+	public Test Test
+	{
+		get { return a; }
+	}
 
-    public static void Main (string[] args)
-    {
-        Test.Run ();
-    }
+	public static void Main (string[] args)
+	{
+		Test.Run ();
+	}
 }
 
 class Test
 {
-    public void Run () { }
+	public void Run () { }
 }

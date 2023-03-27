@@ -3,15 +3,15 @@
 
 public class C
 {
-    delegate void D (dynamic d);
-    
-    static void Method (ref dynamic d)
-    {
-    }
+	delegate void D (dynamic d);
+	
+	static void Method (ref dynamic d)
+	{
+	}
 
-    public static void Main ()
-    {
-        D d = Method;
-    }
+	public static void Main ()
+	{
+		D d = Method;
+	}
 }
 

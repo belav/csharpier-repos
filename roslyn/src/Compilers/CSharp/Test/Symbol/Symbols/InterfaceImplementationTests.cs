@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -2427,23 +2427,23 @@ public class Derived : Base, I
             var source = @"
 interface IDerived
 {
-    object P1 {get;set;}
-    object P2 {get;set;}
+	object P1 {get;set;}
+	object P2 {get;set;}
 }
 
 class Derived : Base, IDerived
 {
-    static void Main()
-    {
-        object val;
-        IDerived x = new Derived();
+	static void Main()
+	{
+		object val;
+		IDerived x = new Derived();
 
-        x.P1 = null;
-        val = x.P1;
+		x.P1 = null;
+		val = x.P1;
 
-        x.P2 = null;
-        val = x.P2;
-    }
+		x.P2 = null;
+		val = x.P2;
+	}
 }";
 
             var comp = CreateCompilationWithILAndMscorlib40(source, il, options: TestOptions.DebugExe);

@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -256,7 +256,7 @@ namespace System.Web.WebPages.Deployment.Test
                 PreApplicationStartCode.StartCore(fileSystem, "", "bin", nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, null),
 @"Could not determine which version of ASP.NET Web Pages to use.
 
-In order to use this site, specify a version in the site�s web.config file. For more information, see the following article on the Microsoft support site: http://go.microsoft.com/fwlink/?LinkId=254126");
+In order to use this site, specify a version in the site’s web.config file. For more information, see the following article on the Microsoft support site: http://go.microsoft.com/fwlink/?LinkId=254126");
             Assert.False(registeredForChangeNotification);
             Assert.Equal(0, buildManager.Stream.Length);
         }

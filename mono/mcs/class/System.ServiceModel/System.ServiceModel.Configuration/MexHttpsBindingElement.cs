@@ -2,7 +2,7 @@
 // MexHttpsBindingElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,22 +54,22 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MexHttpsBindingElement
-         : MexBindingElement<WSHttpBinding>,  IBindingConfigurationElement
-    {
+	public partial class MexHttpsBindingElement
+		 : MexBindingElement<WSHttpBinding>,  IBindingConfigurationElement
+	{
 
-        public MexHttpsBindingElement ()
-            : this (String.Empty) {
-        }
+		public MexHttpsBindingElement ()
+			: this (String.Empty) {
+		}
 
-        public MexHttpsBindingElement (string name)
-            : base (name) {
-        }
-
-
-        // Properties
+		public MexHttpsBindingElement (string name)
+			: base (name) {
+		}
 
 
-    }
+		// Properties
+
+
+	}
 
 }

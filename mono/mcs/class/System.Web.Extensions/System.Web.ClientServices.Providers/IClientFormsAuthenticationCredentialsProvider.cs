@@ -39,8 +39,8 @@ using System.Web.UI;
 
 namespace System.Web.ClientServices.Providers
 {
-    public interface IClientFormsAuthenticationCredentialsProvider
-    {        
-        ClientFormsAuthenticationCredentials GetCredentials ();
-    }
+	public interface IClientFormsAuthenticationCredentialsProvider
+	{		
+		ClientFormsAuthenticationCredentials GetCredentials ();
+	}
 }

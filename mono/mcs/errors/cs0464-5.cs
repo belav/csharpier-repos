@@ -8,9 +8,9 @@ enum E
 
 class X
 {
-    public static void Main ()
-    {
-        E u = 0;
-        var b = u < (E?) null;
-    }
+	public static void Main ()
+	{
+		E u = 0;
+		var b = u < (E?) null;
+	}
 }

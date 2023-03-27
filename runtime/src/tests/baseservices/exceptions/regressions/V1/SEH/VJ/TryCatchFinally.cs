@@ -5,26 +5,26 @@ using System;
 
 
 public class TryCatchFinally{
-    public static int Main() {
-            int i = 1;
-            String m_str = "Failed";
-            String str = "Done";
-            
-            try {
-                throw new ArithmeticException();
-            }
-            catch ( ArithmeticException ) {
-                m_str = "Passed Catch";
-                i = 1;
-            }
-            finally {
-                m_str = m_str + " and Passed Finally";
-                i = 100;                
-            }
-        
-            Console.WriteLine( "TryCatch Test " + m_str );
-            Console.WriteLine(str);
+	public static int Main() {
+			int i = 1;
+			String m_str = "Failed";
+			String str = "Done";
+			
+			try {
+				throw new ArithmeticException();
+			}
+			catch ( ArithmeticException ) {
+				m_str = "Passed Catch";
+				i = 1;
+			}
+			finally {
+				m_str = m_str + " and Passed Finally";
+				i = 100;				
+			}
+		
+			Console.WriteLine( "TryCatch Test " + m_str );
+			Console.WriteLine(str);
                         return i;
-            
-    }
+			
+	}
 }

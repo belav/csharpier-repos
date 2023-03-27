@@ -32,56 +32,56 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [Guid("89a86e7b-c229-4008-9baa-2f5c8411d7e0")]
-    public sealed class RegistrationHelper : MarshalByRefObject, IRegistrationHelper {
+	[Guid("89a86e7b-c229-4008-9baa-2f5c8411d7e0")]
+	public sealed class RegistrationHelper : MarshalByRefObject, IRegistrationHelper {
 
-        #region Constructors
+		#region Constructors
 
-        public RegistrationHelper ()
-        {
-        }
+		public RegistrationHelper ()
+		{
+		}
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        public void InstallAssembly (string assembly, ref string application, ref string tlb, InstallationFlags installFlags)
-        {
-            application = String.Empty;
-            tlb = String.Empty;
+		public void InstallAssembly (string assembly, ref string application, ref string tlb, InstallationFlags installFlags)
+		{
+			application = String.Empty;
+			tlb = String.Empty;
 
-            InstallAssembly (assembly, ref application, null, ref tlb, installFlags);
-        }
+			InstallAssembly (assembly, ref application, null, ref tlb, installFlags);
+		}
 
-        [MonoTODO]
-        public void InstallAssembly (string assembly, ref string application, string partition, ref string tlb, InstallationFlags installFlags)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void InstallAssembly (string assembly, ref string application, string partition, ref string tlb, InstallationFlags installFlags)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void InstallAssemblyFromConfig ([MarshalAs(UnmanagedType.IUnknown)] ref RegistrationConfig regConfig)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void InstallAssemblyFromConfig ([MarshalAs(UnmanagedType.IUnknown)] ref RegistrationConfig regConfig)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public void UninstallAssembly (string assembly, string application)
-        {
-            UninstallAssembly (assembly, application, null);
-        }
+		public void UninstallAssembly (string assembly, string application)
+		{
+			UninstallAssembly (assembly, application, null);
+		}
 
-        [MonoTODO]
-        public void UninstallAssembly (string assembly, string application, string partition)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void UninstallAssembly (string assembly, string application, string partition)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void UninstallAssemblyFromConfig ([MarshalAs(UnmanagedType.IUnknown)] ref RegistrationConfig regConfig)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void UninstallAssemblyFromConfig ([MarshalAs(UnmanagedType.IUnknown)] ref RegistrationConfig regConfig)
+		{
+			throw new NotImplementedException ();
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

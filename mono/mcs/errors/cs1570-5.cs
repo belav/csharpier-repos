@@ -6,13 +6,13 @@ using System;
 
 namespace Testing
 {
-    ///<summary>
-    /// comment for enum type
-    ///</incorrect>
-    enum EnumTest2
-    {
-        Foo,
-        Bar,
-    }
+	///<summary>
+	/// comment for enum type
+	///</incorrect>
+	enum EnumTest2
+	{
+		Foo,
+		Bar,
+	}
 }
 

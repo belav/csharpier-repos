@@ -2,7 +2,7 @@
 // System.Web.UI.WebResourceAttribute
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
 //
 // (C) 2003 Ben Maurer
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
@@ -29,31 +29,31 @@
 
 namespace System.Web.UI {
 
-    [AttributeUsage (AttributeTargets.Assembly, AllowMultiple = true)]
-    public sealed class WebResourceAttribute : Attribute
-    {
-        public WebResourceAttribute (string webResource, string contentType)
-        {
-            this.webResource = webResource;
-            this.contentType = contentType;
-        }
+	[AttributeUsage (AttributeTargets.Assembly, AllowMultiple = true)]
+	public sealed class WebResourceAttribute : Attribute
+	{
+		public WebResourceAttribute (string webResource, string contentType)
+		{
+			this.webResource = webResource;
+			this.contentType = contentType;
+		}
 
-        
-        public string ContentType {
-            get { return contentType; }
-        }
+		
+		public string ContentType {
+			get { return contentType; }
+		}
 
-        public bool PerformSubstitution {
-            get { return performSubstitution; }
-            set { performSubstitution = value; }
-        }
+		public bool PerformSubstitution {
+			get { return performSubstitution; }
+			set { performSubstitution = value; }
+		}
 
-        public string WebResource {
-            get { return webResource; }
-        }
+		public string WebResource {
+			get { return webResource; }
+		}
 
 
-        bool performSubstitution;
-        string webResource, contentType;
-    }
+		bool performSubstitution;
+		string webResource, contentType;
+	}
 }

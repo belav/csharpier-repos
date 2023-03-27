@@ -1,9 +1,9 @@
 //
 // HttpRequestValidationExceptionCas.cs 
-//    - CAS unit tests for System.Web.HttpRequestValidationException
+//	- CAS unit tests for System.Web.HttpRequestValidationException
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,36 +41,36 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HttpRequestValidationExceptionCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HttpRequestValidationExceptionCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            new HttpRequestValidationException ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			new HttpRequestValidationException ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            new HttpRequestValidationException ("message");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			new HttpRequestValidationException ("message");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2_Deny_Unrestricted ()
-        {
-            new HttpRequestValidationException ("message", new Exception ());
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2_Deny_Unrestricted ()
+		{
+			new HttpRequestValidationException ("message", new Exception ());
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (HttpRequestValidationException); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HttpRequestValidationException); }
+		}
+	}
 }
 

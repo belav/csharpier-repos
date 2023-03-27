@@ -10,7 +10,7 @@
 // avoiding the need for instantiation.
 // 
 // Author:
-//    Gary Barnett (gary.barnett.mono@gmail.com)
+//	Gary Barnett (gary.barnett.mono@gmail.com)
 // 
 // Copyright (C) Gary Barnett (2012)
 //
@@ -38,64 +38,64 @@ using System.ComponentModel.Design;
 using System.Reflection;
 
 namespace System.Resources {
-    internal interface IWritableHandler {
-        string DataString { get;}
-    }
+	internal interface IWritableHandler {
+		string DataString { get;}
+	}
 
-    internal abstract class ResXDataNodeHandler {
-        protected ResXDataNodeHandler ()
-        {
-        }
+	internal abstract class ResXDataNodeHandler {
+		protected ResXDataNodeHandler ()
+		{
+		}
 
-        public abstract object GetValue (ITypeResolutionService typeResolver);
-        
-        public abstract object GetValue (AssemblyName [] assemblyNames);
+		public abstract object GetValue (ITypeResolutionService typeResolver);
+		
+		public abstract object GetValue (AssemblyName [] assemblyNames);
 
-        public abstract string GetValueTypeName (ITypeResolutionService typeResolver);
+		public abstract string GetValueTypeName (ITypeResolutionService typeResolver);
 
-        public abstract string GetValueTypeName (AssemblyName [] assemblyNames);
+		public abstract string GetValueTypeName (AssemblyName [] assemblyNames);
 
-        //override by any inheritor that doesnt want to send the default output of GetValue to be written to ResXFile
-        public virtual object GetValueForResX ()
-        {
-            return GetValue ((AssemblyName []) null);
-        }
+		//override by any inheritor that doesnt want to send the default output of GetValue to be written to ResXFile
+		public virtual object GetValueForResX ()
+		{
+			return GetValue ((AssemblyName []) null);
+		}
 
-        protected Type ResolveType (string typeString) 
-        {
-            // FIXME: check the test that shows you cant load a type with just a fullname from current assembly is valid
-            return Type.GetType (typeString);
-        }
+		protected Type ResolveType (string typeString) 
+		{
+			// FIXME: check the test that shows you cant load a type with just a fullname from current assembly is valid
+			return Type.GetType (typeString);
+		}
 
-        protected Type ResolveType (string typeString, AssemblyName [] assemblyNames) 
-        {
-            Type result = null;
+		protected Type ResolveType (string typeString, AssemblyName [] assemblyNames) 
+		{
+			Type result = null;
 
-            if (assemblyNames != null) {
-                foreach (AssemblyName assem in assemblyNames) {
-                        Assembly myAssembly = Assembly.Load (assem);
-                        result = myAssembly.GetType (typeString, false);
-                        if (result != null)
-                            return result;
-                    }
-            }
-            if (result == null)
-                result = ResolveType (typeString);
+			if (assemblyNames != null) {
+				foreach (AssemblyName assem in assemblyNames) {
+						Assembly myAssembly = Assembly.Load (assem);
+						result = myAssembly.GetType (typeString, false);
+						if (result != null)
+							return result;
+					}
+			}
+			if (result == null)
+				result = ResolveType (typeString);
 
-            return result;
-        }
+			return result;
+		}
 
-        protected Type ResolveType (string typeString, ITypeResolutionService typeResolver) 
-        {
-            Type result = null;
+		protected Type ResolveType (string typeString, ITypeResolutionService typeResolver) 
+		{
+			Type result = null;
 
-            if (typeResolver != null)
-                result = typeResolver.GetType (typeString);
+			if (typeResolver != null)
+				result = typeResolver.GetType (typeString);
 
-            if (result == null)
-                result = ResolveType (typeString);
+			if (result == null)
+				result = ResolveType (typeString);
 
-            return result;
-        }
-    }
+			return result;
+		}
+	}
 }

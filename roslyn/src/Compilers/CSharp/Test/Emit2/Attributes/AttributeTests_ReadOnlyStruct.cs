@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -327,7 +327,7 @@ public class Test
 [IsReadOnly]
 public class Test
 {
-    ref struct S1{}
+	ref struct S1{}
 }";
 
             CreateCompilation(code).VerifyDiagnostics(
@@ -354,7 +354,7 @@ namespace System.Runtime.CompilerServices
             var code2 = CreateCompilation(@"
 public class Test1
 {
-    public readonly struct S1{}
+	public readonly struct S1{}
 }", references: new[] { code1.ToMetadataReference() }, options: options);
 
             CompileAndVerify(code2, verify: Verification.Passes, symbolValidator: module =>
@@ -367,7 +367,7 @@ public class Test1
             var code3 = CreateCompilation(@"
 public class Test2
 {
-    public readonly struct S1{}
+	public readonly struct S1{}
 }", references: new[] { code2.ToMetadataReference() }, options: options);
 
             CompileAndVerify(code3, symbolValidator: module =>
@@ -447,7 +447,7 @@ public class Test
 [assembly:System.Runtime.CompilerServices.InternalsVisibleToAttribute(""Assembly2"")]
 public class Test1
 {
-    public readonly struct S1{}
+	public readonly struct S1{}
 }";
 
             var comp1 = CompileAndVerify(code1, options: options, verify: Verification.Passes, symbolValidator: module =>
@@ -459,7 +459,7 @@ public class Test1
             var code2 = @"
 public class Test2
 {
-    public readonly struct S1{}
+	public readonly struct S1{}
 }";
 
             CompileAndVerify(code2, options: options.WithModuleName("Assembly2"), references: new[] { comp1.Compilation.ToMetadataReference() }, symbolValidator: module =>

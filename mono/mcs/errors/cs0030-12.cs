@@ -5,8 +5,8 @@ struct S {
 }
 
 class X {
-    static void Main ()
-    {
-        S s = (S)default(X);
-    }
+	static void Main ()
+	{
+		S s = (S)default(X);
+	}
 }

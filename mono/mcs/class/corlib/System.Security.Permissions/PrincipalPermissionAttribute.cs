@@ -2,8 +2,8 @@
 // System.Security.Permissions.PrincipalPermissionAttribute.cs
 //
 // Authors:
-//    Duncan Mak <duncan@ximian.com>
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Duncan Mak <duncan@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002 Ximian, Inc. http://www.ximian.com
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -32,48 +32,48 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-    [ComVisible (true)]
-    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
-    [Serializable]
-    public sealed class PrincipalPermissionAttribute : CodeAccessSecurityAttribute {
+	[ComVisible (true)]
+	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
+	[Serializable]
+	public sealed class PrincipalPermissionAttribute : CodeAccessSecurityAttribute {
 
-        // Fields
-        private bool authenticated;
-        private string name;
-        private string role;
-        
-        // Constructor
-        public PrincipalPermissionAttribute (SecurityAction action)
-            : base (action)
-        {
-            authenticated = true; // strange but true ;)
-        }
+		// Fields
+		private bool authenticated;
+		private string name;
+		private string role;
+		
+		// Constructor
+		public PrincipalPermissionAttribute (SecurityAction action)
+			: base (action)
+		{
+			authenticated = true; // strange but true ;)
+		}
 
-        // Properties
-        public bool Authenticated {
-            get { return authenticated; }
-            set { authenticated = value; }
-        }
+		// Properties
+		public bool Authenticated {
+			get { return authenticated; }
+			set { authenticated = value; }
+		}
 
-        public string Name {
-            get { return name; }
-            set { name = value; }
-        }
+		public string Name {
+			get { return name; }
+			set { name = value; }
+		}
 
-        public string Role {
-            get { return role; }
-            set { role = value; }
-        }
+		public string Role {
+			get { return role; }
+			set { role = value; }
+		}
 
-        // Method
-        public override IPermission CreatePermission ()
-        {
-            PrincipalPermission perm = null;
-            if (this.Unrestricted)
-                perm = new PrincipalPermission (PermissionState.Unrestricted);
-            else
-                perm = new PrincipalPermission (name, role, authenticated);
-            return perm;
-        }
-    }
+		// Method
+		public override IPermission CreatePermission ()
+		{
+			PrincipalPermission perm = null;
+			if (this.Unrestricted)
+				perm = new PrincipalPermission (PermissionState.Unrestricted);
+			else
+				perm = new PrincipalPermission (name, role, authenticated);
+			return perm;
+		}
+	}
 }

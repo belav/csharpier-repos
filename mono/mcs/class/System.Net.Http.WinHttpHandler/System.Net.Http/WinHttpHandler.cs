@@ -37,56 +37,56 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net.Http
 {
-    public class WinHttpHandler : HttpMessageHandler
-    {
-        public WinHttpHandler() { throw new PlatformNotSupportedException (); }
+	public class WinHttpHandler : HttpMessageHandler
+	{
+		public WinHttpHandler() { throw new PlatformNotSupportedException (); }
 
-        public DecompressionMethods AutomaticDecompression { get { throw new PlatformNotSupportedException ();  } set { throw new PlatformNotSupportedException (); } }
+		public DecompressionMethods AutomaticDecompression { get { throw new PlatformNotSupportedException ();  } set { throw new PlatformNotSupportedException (); } }
 
-        public bool AutomaticRedirection { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public bool AutomaticRedirection { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public bool CheckCertificateRevocationList { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public bool CheckCertificateRevocationList { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public ClientCertificateOption ClientCertificateOption { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public ClientCertificateOption ClientCertificateOption { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public X509Certificate2Collection ClientCertificates { get { throw new PlatformNotSupportedException (); } }
+		public X509Certificate2Collection ClientCertificates { get { throw new PlatformNotSupportedException (); } }
 
-        public CookieContainer CookieContainer { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public CookieContainer CookieContainer { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public CookieUsePolicy CookieUsePolicy { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public CookieUsePolicy CookieUsePolicy { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public ICredentials DefaultProxyCredentials { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public ICredentials DefaultProxyCredentials { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public int MaxAutomaticRedirections { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public int MaxAutomaticRedirections { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public int MaxConnectionsPerServer { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public int MaxConnectionsPerServer { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public int MaxResponseDrainSize { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public int MaxResponseDrainSize { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public int MaxResponseHeadersLength { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public int MaxResponseHeadersLength { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public bool PreAuthenticate { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public bool PreAuthenticate { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public IDictionary<string, object> Properties { get { throw new PlatformNotSupportedException (); } }
+		public IDictionary<string, object> Properties { get { throw new PlatformNotSupportedException (); } }
 
-        public IWebProxy Proxy { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public IWebProxy Proxy { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public TimeSpan ReceiveDataTimeout { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public TimeSpan ReceiveDataTimeout { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public TimeSpan ReceiveHeadersTimeout { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public TimeSpan ReceiveHeadersTimeout { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public TimeSpan SendTimeout { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public TimeSpan SendTimeout { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> ServerCertificateValidationCallback { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> ServerCertificateValidationCallback { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public ICredentials ServerCredentials { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public ICredentials ServerCredentials { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public SslProtocols SslProtocols { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public SslProtocols SslProtocols { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        public WindowsProxyUsePolicy WindowsProxyUsePolicy { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
+		public WindowsProxyUsePolicy WindowsProxyUsePolicy { get { throw new PlatformNotSupportedException (); } set { throw new PlatformNotSupportedException (); } }
 
-        protected override void Dispose (bool disposing) { }
+		protected override void Dispose (bool disposing) { }
 
-        protected override Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, Threading.CancellationToken cancellationToken) { throw new PlatformNotSupportedException (); }
-    }
+		protected override Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, Threading.CancellationToken cancellationToken) { throw new PlatformNotSupportedException (); }
+	}
 }

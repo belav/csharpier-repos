@@ -28,12 +28,12 @@ using System;
 
 namespace System.ServiceModel.Activation
 {
-    public abstract class HostedTransportConfiguration
-    {
-        protected HostedTransportConfiguration ()
-        {
-        }
+	public abstract class HostedTransportConfiguration
+	{
+		protected HostedTransportConfiguration ()
+		{
+		}
 
-        public abstract Uri[] GetBaseAddresses (string virtualPath);
-    }
+		public abstract Uri[] GetBaseAddresses (string virtualPath);
+	}
 }

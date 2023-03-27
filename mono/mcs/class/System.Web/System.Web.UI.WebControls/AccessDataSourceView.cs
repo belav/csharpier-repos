@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.AccessDataSourceView
 //
 // Authors:
-//    Sanjay Gupta (gsanjay@novell.com)
+//	Sanjay Gupta (gsanjay@novell.com)
 //
 // (C) Novell, Inc. (http://www.novell.com)
 //
@@ -38,46 +38,46 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class AccessDataSourceView : SqlDataSourceView
-    {
-        OleDbConnection oleConnection;
-        OleDbCommand oleCommand;
-        AccessDataSource dataSource;
-        public AccessDataSourceView (AccessDataSource owner, string name, HttpContext context)
-            : base (owner, name, context)
-        {
-            dataSource = owner;
-            oleConnection = new OleDbConnection (owner.ConnectionString);
-        }
+	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class AccessDataSourceView : SqlDataSourceView
+	{
+		OleDbConnection oleConnection;
+		OleDbCommand oleCommand;
+		AccessDataSource dataSource;
+		public AccessDataSourceView (AccessDataSource owner, string name, HttpContext context)
+			: base (owner, name, context)
+		{
+			dataSource = owner;
+			oleConnection = new OleDbConnection (owner.ConnectionString);
+		}
 
-        [MonoTODO ("Handle arguments")]
-        protected internal override IEnumerable ExecuteSelect (
-                        DataSourceSelectArguments arguments)
-        {
-            oleCommand = new OleDbCommand (this.SelectCommand, oleConnection);
-            SqlDataSourceSelectingEventArgs cmdEventArgs = new SqlDataSourceSelectingEventArgs (oleCommand, arguments);
-            OnSelecting (cmdEventArgs);
-            IEnumerable enums = null; 
-            Exception exception = null;
-            OleDbDataReader reader = null;
-            try {
-                System.IO.File.OpenRead (dataSource.DataFile).Close ();
-                oleConnection.Open ();
-                reader = (OleDbDataReader)oleCommand.ExecuteReader ();
-            
-                //enums = reader.GetEnumerator ();
-                throw new NotImplementedException("OleDbDataReader doesnt implements GetEnumerator method yet");
-            } catch (Exception e) {
-                exception = e;
-            }
-            SqlDataSourceStatusEventArgs statusEventArgs = 
-                new SqlDataSourceStatusEventArgs (oleCommand, reader.RecordsAffected, exception);
-            OnSelected (statusEventArgs);
-            if (exception !=null)
-                throw exception;
-            return enums;            
-        }                        
-    }    
+		[MonoTODO ("Handle arguments")]
+		protected internal override IEnumerable ExecuteSelect (
+						DataSourceSelectArguments arguments)
+		{
+			oleCommand = new OleDbCommand (this.SelectCommand, oleConnection);
+			SqlDataSourceSelectingEventArgs cmdEventArgs = new SqlDataSourceSelectingEventArgs (oleCommand, arguments);
+			OnSelecting (cmdEventArgs);
+			IEnumerable enums = null; 
+			Exception exception = null;
+			OleDbDataReader reader = null;
+			try {
+				System.IO.File.OpenRead (dataSource.DataFile).Close ();
+				oleConnection.Open ();
+				reader = (OleDbDataReader)oleCommand.ExecuteReader ();
+			
+				//enums = reader.GetEnumerator ();
+				throw new NotImplementedException("OleDbDataReader doesnt implements GetEnumerator method yet");
+			} catch (Exception e) {
+				exception = e;
+			}
+			SqlDataSourceStatusEventArgs statusEventArgs = 
+				new SqlDataSourceStatusEventArgs (oleCommand, reader.RecordsAffected, exception);
+			OnSelected (statusEventArgs);
+			if (exception !=null)
+				throw exception;
+			return enums;			
+		}						
+	}	
 }
 

@@ -37,71 +37,71 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class ConstraintCollection_GetEnumerator : GHTBase
 {
-    [Test] public void Main()
-    {
-        ConstraintCollection_GetEnumerator tc = new ConstraintCollection_GetEnumerator();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("ConstraintCollection_GetEnumerator");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
+	[Test] public void Main()
+	{
+		ConstraintCollection_GetEnumerator tc = new ConstraintCollection_GetEnumerator();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("ConstraintCollection_GetEnumerator");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("ConstraintCollection_GetEnumerator");
-            ConstraintCollection_GetEnumerator1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-    private void ConstraintCollection_GetEnumerator1()
-    {
-        DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
-        dt.Constraints.Add("constraint2",dt.Columns["String1"],false);
-
-        int counter=0;
-        System.Collections.IEnumerator myEnumerator = dt.Constraints.GetEnumerator();
-        while (myEnumerator.MoveNext())
-        {
-            counter++;
-
-        }
-        Compare(counter,2);
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    }
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("ConstraintCollection_GetEnumerator");
+			ConstraintCollection_GetEnumerator1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
+	private void ConstraintCollection_GetEnumerator1()
+	{
+		DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
+		dt.Constraints.Add("constraint2",dt.Columns["String1"],false);
+
+		int counter=0;
+		System.Collections.IEnumerator myEnumerator = dt.Constraints.GetEnumerator();
+		while (myEnumerator.MoveNext())
+		{
+			counter++;
+
+		}
+		Compare(counter,2);
+
+
+	}
 }
 }

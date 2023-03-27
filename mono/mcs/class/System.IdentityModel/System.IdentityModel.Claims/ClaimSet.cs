@@ -2,7 +2,7 @@
 // ClaimSet.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,52 +32,52 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Claims
 {
-    [DataContract (Namespace="http://schemas.xmlsoap.org/ws/2005/05/identity")]
-    public abstract class ClaimSet : IEnumerable<Claim>, IEnumerable
-    {
-        static ClaimSet system = DefaultClaimSet.CreateSystemClaimSet ();
-        static ClaimSet win;
+	[DataContract (Namespace="http://schemas.xmlsoap.org/ws/2005/05/identity")]
+	public abstract class ClaimSet : IEnumerable<Claim>, IEnumerable
+	{
+		static ClaimSet system = DefaultClaimSet.CreateSystemClaimSet ();
+		static ClaimSet win;
 
-        public static ClaimSet System {
-            get { return system; }
-        }
+		public static ClaimSet System {
+			get { return system; }
+		}
 
-        [MonoTODO]
-        public static ClaimSet Windows {
-            get { return win; }
-        }
+		[MonoTODO]
+		public static ClaimSet Windows {
+			get { return win; }
+		}
 
-        protected ClaimSet ()
-        {
-        }
+		protected ClaimSet ()
+		{
+		}
 
-        public abstract int Count { get; }
+		public abstract int Count { get; }
 
-        public abstract ClaimSet Issuer { get; }
+		public abstract ClaimSet Issuer { get; }
 
-        public abstract Claim this [int index] { get; }
+		public abstract Claim this [int index] { get; }
 
-        public virtual bool ContainsClaim (Claim claim)
-        {
-            return ContainsClaim (claim, Claim.DefaultComparer);
-        }
+		public virtual bool ContainsClaim (Claim claim)
+		{
+			return ContainsClaim (claim, Claim.DefaultComparer);
+		}
 
-        public virtual bool ContainsClaim (Claim claim, IEqualityComparer<Claim> comparer)
-        {
-            foreach (Claim c in this)
-                if (comparer.Equals (claim, c))
-                    return true;
-            return false;
-        }
+		public virtual bool ContainsClaim (Claim claim, IEqualityComparer<Claim> comparer)
+		{
+			foreach (Claim c in this)
+				if (comparer.Equals (claim, c))
+					return true;
+			return false;
+		}
 
-        public abstract IEnumerable<Claim> FindClaims (
-            string claimType, string right);
+		public abstract IEnumerable<Claim> FindClaims (
+			string claimType, string right);
 
-        public abstract IEnumerator<Claim> GetEnumerator ();
+		public abstract IEnumerator<Claim> GetEnumerator ();
 
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return GetEnumerator ();
-        }
-    }
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			return GetEnumerator ();
+		}
+	}
 }

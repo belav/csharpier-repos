@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -32,26 +32,26 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Markup {
 
-    [TestFixture]
-    public class ContentWrapperAttributeTest
-    {
-        [Test]
-        public void CtorTest1 ()
-        {
-            ContentWrapperAttribute attr = new ContentWrapperAttribute (typeof (ValueSerializer));
-            Assert.AreEqual ("ValueSerializer", attr.ContentWrapper.Name);
+	[TestFixture]
+	public class ContentWrapperAttributeTest
+	{
+		[Test]
+		public void CtorTest1 ()
+		{
+			ContentWrapperAttribute attr = new ContentWrapperAttribute (typeof (ValueSerializer));
+			Assert.AreEqual ("ValueSerializer", attr.ContentWrapper.Name);
 
-            attr = new ContentWrapperAttribute (null);
-            Assert.IsNull (attr.ContentWrapper);
-        }
+			attr = new ContentWrapperAttribute (null);
+			Assert.IsNull (attr.ContentWrapper);
+		}
 
-        [Test]
-        public void TypeId ()
-        {
-            ContentWrapperAttribute attr = new ContentWrapperAttribute (typeof (ValueSerializer));
-            Assert.AreSame (attr, attr.TypeId);
-        }
+		[Test]
+		public void TypeId ()
+		{
+			ContentWrapperAttribute attr = new ContentWrapperAttribute (typeof (ValueSerializer));
+			Assert.AreSame (attr, attr.TypeId);
+		}
 
-    }
+	}
 
 }

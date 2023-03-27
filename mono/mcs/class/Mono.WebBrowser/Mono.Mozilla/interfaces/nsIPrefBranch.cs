@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,119 +32,119 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("56c35506-f14b-11d3-99d3-ddbfac2ccf65")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIPrefBranch {
+	[Guid ("56c35506-f14b-11d3-99d3-ddbfac2ccf65")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIPrefBranch {
 
 #region nsIPrefBranch
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getRoot ( ref IntPtr ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getRoot ( ref IntPtr ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getPrefType (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName, out int ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getPrefType (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName, out int ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getBoolPref (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName, out bool ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getBoolPref (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName, out bool ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setBoolPref (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName,
-                   int aValue);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setBoolPref (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName,
+				   int aValue);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCharPref (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName,[MarshalAs (UnmanagedType.LPStr)]  ref string ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getCharPref (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName,[MarshalAs (UnmanagedType.LPStr)]  ref string ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setCharPref (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName,
-                [MarshalAs (UnmanagedType.LPStr)]   string aValue);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setCharPref (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName,
+				[MarshalAs (UnmanagedType.LPStr)]   string aValue);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getIntPref (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName, out int ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getIntPref (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName, out int ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setIntPref (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName,
-                   int aValue);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setIntPref (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName,
+				   int aValue);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getComplexValue (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName,
-                [MarshalAs (UnmanagedType.LPStruct)]   Guid aType,
-                  out IntPtr aValue);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getComplexValue (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName,
+				[MarshalAs (UnmanagedType.LPStruct)]   Guid aType,
+				  out IntPtr aValue);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setComplexValue (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName,
-                [MarshalAs (UnmanagedType.LPStruct)]   Guid aType,
-                   IntPtr aValue);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setComplexValue (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName,
+				[MarshalAs (UnmanagedType.LPStruct)]   Guid aType,
+				   IntPtr aValue);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int clearUserPref (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int clearUserPref (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int lockPref (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int lockPref (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int prefHasUserValue (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName, out bool ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int prefHasUserValue (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName, out bool ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int prefIsLocked (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName, out bool ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int prefIsLocked (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName, out bool ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int unlockPref (
-                [MarshalAs (UnmanagedType.LPStr)]   string aPrefName);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int unlockPref (
+				[MarshalAs (UnmanagedType.LPStr)]   string aPrefName);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int deleteBranch (
-                [MarshalAs (UnmanagedType.LPStr)]   string aStartingAt);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int deleteBranch (
+				[MarshalAs (UnmanagedType.LPStr)]   string aStartingAt);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getChildList (
-                [MarshalAs (UnmanagedType.LPStr)]   string aStartingAt,
-                  out uint aCount,
-                [MarshalAs (UnmanagedType.LPStr)]  out string[] aChildArray);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getChildList (
+				[MarshalAs (UnmanagedType.LPStr)]   string aStartingAt,
+				  out uint aCount,
+				[MarshalAs (UnmanagedType.LPStr)]  out string[] aChildArray);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int resetBranch (
-                [MarshalAs (UnmanagedType.LPStr)]   string aStartingAt);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int resetBranch (
+				[MarshalAs (UnmanagedType.LPStr)]   string aStartingAt);
 
 #endregion
-    }
+	}
 
 
-    internal class nsPrefBranch {
-        public static nsIPrefBranch GetProxy (Mono.WebBrowser.IWebBrowser control, nsIPrefBranch obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIPrefBranch).GUID, obj);
-            return o as nsIPrefBranch;
-        }
-    }
+	internal class nsPrefBranch {
+		public static nsIPrefBranch GetProxy (Mono.WebBrowser.IWebBrowser control, nsIPrefBranch obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIPrefBranch).GUID, obj);
+			return o as nsIPrefBranch;
+		}
+	}
 }

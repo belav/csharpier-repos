@@ -33,21 +33,21 @@ using System.ServiceModel.Channels;
 namespace System.ServiceModel.Dispatcher
 {
 
-    [DataContract]
-    public class MatchAllMessageFilter : MessageFilter
-    {
-        public MatchAllMessageFilter () {}
+	[DataContract]
+	public class MatchAllMessageFilter : MessageFilter
+	{
+		public MatchAllMessageFilter () {}
 
-        public override bool Match (Message message)
-        {
-            // as documented
-            return true; 
-        }
+		public override bool Match (Message message)
+		{
+			// as documented
+			return true; 
+		}
 
-        public override bool Match (MessageBuffer messageBuffer)
-        {
-            // as documented
-            return true; 
-        }
-    }
+		public override bool Match (MessageBuffer messageBuffer)
+		{
+			// as documented
+			return true; 
+		}
+	}
 }

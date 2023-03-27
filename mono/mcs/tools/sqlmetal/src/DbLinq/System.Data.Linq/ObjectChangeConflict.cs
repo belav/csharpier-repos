@@ -33,48 +33,48 @@ using System.Reflection;
 
 namespace System.Data.Linq
 {
-    public sealed class ObjectChangeConflict
-    {
-        internal ObjectChangeConflict ()
-        {
-        }
+	public sealed class ObjectChangeConflict
+	{
+		internal ObjectChangeConflict ()
+		{
+		}
 
-        [MonoTODO]
-        public bool IsDeleted {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public bool IsDeleted {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public bool IsResolved {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public bool IsResolved {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public ReadOnlyCollection<MemberChangeConflict> MemberConflicts {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public ReadOnlyCollection<MemberChangeConflict> MemberConflicts {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public object Object {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public object Object {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public void Resolve ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void Resolve ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void Resolve (RefreshMode refreshMode)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void Resolve (RefreshMode refreshMode)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void Resolve (RefreshMode refreshMode, bool autoResolveDeletes)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public void Resolve (RefreshMode refreshMode, bool autoResolveDeletes)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // System.IO.IsolatedStorage.IsolatedStorageFileEnumerator
 //
 // Author
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,40 +30,40 @@ using System.Collections;
 
 namespace System.IO.IsolatedStorage {
 
-    internal class IsolatedStorageFileEnumerator : IEnumerator {
+	internal class IsolatedStorageFileEnumerator : IEnumerator {
 
-        private IsolatedStorageScope _scope;
-        private string[] _storages;
-        private int _pos;
+		private IsolatedStorageScope _scope;
+		private string[] _storages;
+		private int _pos;
 
-        public IsolatedStorageFileEnumerator (IsolatedStorageScope scope, string root)
-        {
-            _scope = scope;
-            // skip application-isolated storages
-            if (Directory.Exists (root))
-                _storages = Directory.GetDirectories (root, "d.*");
-            _pos = -1;
-        }
+		public IsolatedStorageFileEnumerator (IsolatedStorageScope scope, string root)
+		{
+			_scope = scope;
+			// skip application-isolated storages
+			if (Directory.Exists (root))
+				_storages = Directory.GetDirectories (root, "d.*");
+			_pos = -1;
+		}
 
-        public object Current {
-            get {
-                if ((_pos < 0) || (_storages == null) || (_pos >= _storages.Length))
-                    return null;
-                // recreates a IsolatedStorageFile from the file
-                return new IsolatedStorageFile (_scope, _storages [_pos]);
-            }
-        }
+		public object Current {
+			get {
+				if ((_pos < 0) || (_storages == null) || (_pos >= _storages.Length))
+					return null;
+				// recreates a IsolatedStorageFile from the file
+				return new IsolatedStorageFile (_scope, _storages [_pos]);
+			}
+		}
 
-        public bool MoveNext ()
-        {
-            if (_storages == null)
-                return false;
-            return (++_pos < _storages.Length);
-        }
+		public bool MoveNext ()
+		{
+			if (_storages == null)
+				return false;
+			return (++_pos < _storages.Length);
+		}
 
-        public void Reset ()
-        {
-            _pos = -1;
-        }
-    }
+		public void Reset ()
+		{
+			_pos = -1;
+		}
+	}
 }

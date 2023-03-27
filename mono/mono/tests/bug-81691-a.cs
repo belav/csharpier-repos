@@ -1,6 +1,6 @@
 namespace NS.A
 {
-    public class TestA
-    {
-    }
+	public class TestA
+	{
+	}
 }

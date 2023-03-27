@@ -1,9 +1,9 @@
 //
 // TimerElapsedEventArgsCas.cs 
-//    - CAS unit tests for Microsoft.Win32.TimerElapsedEventArgs
+//	- CAS unit tests for Microsoft.Win32.TimerElapsedEventArgs
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,61 +37,61 @@ using Microsoft.Win32;
 
 namespace MonoCasTests.Microsoft.Win32 {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TimerElapsedEventArgsCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TimerElapsedEventArgsCas {
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            TimerElapsedEventArgs teea = new TimerElapsedEventArgs (IntPtr.Zero);
-            Assert.AreEqual (IntPtr.Zero, teea.TimerId, "TimerId");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			TimerElapsedEventArgs teea = new TimerElapsedEventArgs (IntPtr.Zero);
+			Assert.AreEqual (IntPtr.Zero, teea.TimerId, "TimerId");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        // we use reflection to call this class as it is protected by a LinkDemand 
-        // (which will be converted into full demand, i.e. a stack walk) when 
-        // reflection is used (i.e. it gets testable).
+		// we use reflection to call this class as it is protected by a LinkDemand 
+		// (which will be converted into full demand, i.e. a stack walk) when 
+		// reflection is used (i.e. it gets testable).
 
-        public virtual object Create ()
-        {
-            Type[] t = new Type[1] { typeof (IntPtr) };
-            ConstructorInfo ci = typeof (TimerElapsedEventArgs).GetConstructor (t);
-            Assert.IsNotNull (ci, ".ctor(IntPtr)");
-            return ci.Invoke (new object[1] { IntPtr.Zero });
-        }
+		public virtual object Create ()
+		{
+			Type[] t = new Type[1] { typeof (IntPtr) };
+			ConstructorInfo ci = typeof (TimerElapsedEventArgs).GetConstructor (t);
+			Assert.IsNotNull (ci, ".ctor(IntPtr)");
+			return ci.Invoke (new object[1] { IntPtr.Zero });
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            Assert.IsNotNull (Create ());
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			Assert.IsNotNull (Create ());
+		}
 
-        [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-        [ExpectedException (typeof (SecurityException))]
-        public void LinkDemand_Deny_Anything ()
-        {
-            // denying any permissions -> not full trust!
-            Assert.IsNotNull (Create ());
-        }
+		[Test]
+		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
+		[ExpectedException (typeof (SecurityException))]
+		public void LinkDemand_Deny_Anything ()
+		{
+			// denying any permissions -> not full trust!
+			Assert.IsNotNull (Create ());
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
-        public void LinkDemand_PermitOnly_Unrestricted ()
-        {
-            Assert.IsNotNull (Create ());
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
+		public void LinkDemand_PermitOnly_Unrestricted ()
+		{
+			Assert.IsNotNull (Create ());
+		}
+	}
 }

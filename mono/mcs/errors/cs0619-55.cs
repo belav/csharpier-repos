@@ -10,8 +10,8 @@ interface ObsoleteInterface<T>
 
 class C
 {
-    public static void Main ()
-    {
-        var v = typeof (ObsoleteInterface<>);
-    }
+	public static void Main ()
+	{
+		var v = typeof (ObsoleteInterface<>);
+	}
 }

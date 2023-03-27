@@ -19,7 +19,7 @@ namespace System.Net.Configuration
         public SmtpSection Smtp
         {
             get { return (SmtpSection)Sections["smtp"]; }
-    }
+	}
     }
 
     internal sealed class MailSettingsSectionGroupInternal

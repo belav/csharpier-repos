@@ -4,8 +4,8 @@
 
 class X
 {
-    int Test ()
-    {
-        var i = 1_0;
-    }
+	int Test ()
+	{
+		var i = 1_0;
+	}
 }

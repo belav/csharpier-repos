@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsLoadedEventHandler.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,6 +30,6 @@ using System;
 
 namespace System.Configuration
 {
-    public delegate void SettingsLoadedEventHandler (object sender, SettingsLoadedEventArgs e);
+	public delegate void SettingsLoadedEventHandler (object sender, SettingsLoadedEventArgs e);
 }
 

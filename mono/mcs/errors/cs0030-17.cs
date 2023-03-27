@@ -8,8 +8,8 @@ ref struct S
 
 class X
 {
-    public static void Foo (object o)
-    {
-        var res = (S) o;
-    }
+	public static void Foo (object o)
+	{
+		var res = (S) o;
+	}
 }

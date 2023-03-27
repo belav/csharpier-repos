@@ -5,5 +5,5 @@ delegate void D ();
 
 class C
 {
-    const object c = new D (delegate {});
+	const object c = new D (delegate {});
 }

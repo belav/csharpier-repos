@@ -5,13 +5,13 @@ using System;
 
 namespace Test
 {
-    public delegate void SomeDel (Action a);
+	public delegate void SomeDel (Action a);
 
-    public class TestClass
-    {
-        public void TestMethod ()
-        {
-            SomeDel (() => { });
-        }
-    }
+	public class TestClass
+	{
+		public void TestMethod ()
+		{
+			SomeDel (() => { });
+		}
+	}
 }

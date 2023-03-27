@@ -2,7 +2,7 @@
 // System.Web.Configuration.ProfilePropertySettingsCollection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,129 +35,129 @@ using System.Xml;
 
 namespace System.Web.Configuration
 {
-    [ConfigurationCollection (typeof (ProfilePropertySettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public class ProfilePropertySettingsCollection : ConfigurationElementCollection
-    {
-        static ConfigurationPropertyCollection properties;
+	[ConfigurationCollection (typeof (ProfilePropertySettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public class ProfilePropertySettingsCollection : ConfigurationElementCollection
+	{
+		static ConfigurationPropertyCollection properties;
 
-        static ProfilePropertySettingsCollection ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
-        
-        public void Add (ProfilePropertySettings propertySettings)
-        {
-            BaseAdd (propertySettings);
-        }
+		static ProfilePropertySettingsCollection ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
+		
+		public void Add (ProfilePropertySettings propertySettings)
+		{
+			BaseAdd (propertySettings);
+		}
 
-        public void Clear ()
-        {
-            BaseClear ();
-        }
-        
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new ProfilePropertySettings ();
-        }
+		public void Clear ()
+		{
+			BaseClear ();
+		}
+		
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new ProfilePropertySettings ();
+		}
 
-        public ProfilePropertySettings Get (int index)
-        {
-            return (ProfilePropertySettings) BaseGet (index);
-        }
+		public ProfilePropertySettings Get (int index)
+		{
+			return (ProfilePropertySettings) BaseGet (index);
+		}
 
-        public ProfilePropertySettings Get (string name)
-        {
-            return (ProfilePropertySettings) BaseGet (name);
-        }
+		public ProfilePropertySettings Get (string name)
+		{
+			return (ProfilePropertySettings) BaseGet (name);
+		}
 
-        protected override object GetElementKey (ConfigurationElement element)
-        {
-            return ((ProfilePropertySettings)element).Name;
-        }
+		protected override object GetElementKey (ConfigurationElement element)
+		{
+			return ((ProfilePropertySettings)element).Name;
+		}
 
-        protected override bool OnDeserializeUnrecognizedElement (string elementName, XmlReader reader) 
-        {
-            /* Disabled: pending investigation
-             *
-            if (elementName == "clear" || elementName == "group") {
-                throw new ConfigurationErrorsException (String.Format ("{0} is not permitted here", elementName), reader);
-            }
-            */
-            
-            return base.OnDeserializeUnrecognizedElement (elementName, reader);
-        }
+		protected override bool OnDeserializeUnrecognizedElement (string elementName, XmlReader reader) 
+		{
+			/* Disabled: pending investigation
+			 *
+			if (elementName == "clear" || elementName == "group") {
+				throw new ConfigurationErrorsException (String.Format ("{0} is not permitted here", elementName), reader);
+			}
+			*/
+			
+			return base.OnDeserializeUnrecognizedElement (elementName, reader);
+		}
 
-        public string GetKey (int index)
-        {
-            ProfilePropertySettings s = Get (index);
-            if (s == null)
-                return null;
+		public string GetKey (int index)
+		{
+			ProfilePropertySettings s = Get (index);
+			if (s == null)
+				return null;
 
-            return s.Name;
-        }
+			return s.Name;
+		}
 
-        public int IndexOf (ProfilePropertySettings propertySettings)
-        {
-            return BaseIndexOf (propertySettings);
-        }
+		public int IndexOf (ProfilePropertySettings propertySettings)
+		{
+			return BaseIndexOf (propertySettings);
+		}
 
-        public void Remove (string name)
-        {
-            BaseRemove (name);
-        }
+		public void Remove (string name)
+		{
+			BaseRemove (name);
+		}
 
-        public void RemoveAt (int index)
-        {
-            BaseRemoveAt (index);
-        }
+		public void RemoveAt (int index)
+		{
+			BaseRemoveAt (index);
+		}
 
-        public void Set (ProfilePropertySettings propertySettings)
-        {
-            ProfilePropertySettings existing = Get (propertySettings.Name);
+		public void Set (ProfilePropertySettings propertySettings)
+		{
+			ProfilePropertySettings existing = Get (propertySettings.Name);
 
-            if (existing == null) {
-                Add (propertySettings);
-            }
-            else {
-                int index = BaseIndexOf (existing);
-                RemoveAt (index);
-                BaseAdd (index, propertySettings);
-            }
-        }
+			if (existing == null) {
+				Add (propertySettings);
+			}
+			else {
+				int index = BaseIndexOf (existing);
+				RemoveAt (index);
+				BaseAdd (index, propertySettings);
+			}
+		}
 
-        public string[ ] AllKeys {
-            get {
-                string[] keys = new string[Count];
-                for (int i = 0; i < Count; i ++)
-                    keys[i] = this[i].Name;
-                return keys;
-            }
-        }
+		public string[ ] AllKeys {
+			get {
+				string[] keys = new string[Count];
+				for (int i = 0; i < Count; i ++)
+					keys[i] = this[i].Name;
+				return keys;
+			}
+		}
 
-        protected virtual bool AllowClear {
-            get {
-                return false;
-            }
-        }
+		protected virtual bool AllowClear {
+			get {
+				return false;
+			}
+		}
 
-        public ProfilePropertySettings this[int index] {
-            get { return Get (index); }
-            set { if (Get (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-        }
-        
-        public new ProfilePropertySettings this [string name] {
-            get { return (ProfilePropertySettings) base.BaseGet (name); }
-        }
-        
-        protected override bool ThrowOnDuplicate {
-            get {
-                return true;
-            }
-        }
+		public ProfilePropertySettings this[int index] {
+			get { return Get (index); }
+			set { if (Get (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+		}
+		
+		public new ProfilePropertySettings this [string name] {
+			get { return (ProfilePropertySettings) base.BaseGet (name); }
+		}
+		
+		protected override bool ThrowOnDuplicate {
+			get {
+				return true;
+			}
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+	}
 }
 

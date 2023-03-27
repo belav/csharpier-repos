@@ -20,10 +20,10 @@ public class FooCollection <T> : IFoo <T>
 
 class X
 {
-    public static void Main ()
-    {
-        IFoo<int> foo = new FooCollection<int> ();
-        int a = foo [3];
-        Console.WriteLine (a);
-    }
+	public static void Main ()
+	{
+		IFoo<int> foo = new FooCollection<int> ();
+		int a = foo [3];
+		Console.WriteLine (a);
+	}
 }

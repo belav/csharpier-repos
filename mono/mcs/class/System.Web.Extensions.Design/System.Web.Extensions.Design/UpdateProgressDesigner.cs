@@ -32,37 +32,37 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-    public class UpdateProgressDesigner : ControlDesigner
-    {
-        [MonoNotSupported ("")]
-        public UpdateProgressDesigner ()
-        {
-            throw new NotImplementedException ();
-        }
+	public class UpdateProgressDesigner : ControlDesigner
+	{
+		[MonoNotSupported ("")]
+		public UpdateProgressDesigner ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public override string GetDesignTimeHtml (DesignerRegionCollection regions)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public override string GetDesignTimeHtml (DesignerRegionCollection regions)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public override string GetEditableDesignerRegionContent (EditableDesignerRegion region)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public override string GetEditableDesignerRegionContent (EditableDesignerRegion region)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public override void SetEditableDesignerRegionContent (EditableDesignerRegion region, string content)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public override void SetEditableDesignerRegionContent (EditableDesignerRegion region, string content)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        protected override bool UsePreviewControl {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-    }
+		[MonoNotSupported ("")]
+		protected override bool UsePreviewControl {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
+	}
 }

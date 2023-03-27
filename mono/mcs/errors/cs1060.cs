@@ -4,19 +4,19 @@
 
 public class C
 {
-    public int v;
+	public int v;
 }
 
 public struct S
 {
-    public C c;
+	public C c;
 }
 
 public class Test
 {
-    static void Main ()
-    {
-        S s;
-        s.c.v = 5;
-    }
+	static void Main ()
+	{
+		S s;
+		s.c.v = 5;
+	}
 }

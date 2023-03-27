@@ -2,7 +2,7 @@
 // System.Web.Compilation.Directive
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -35,118 +35,118 @@ using System.Web.Util;
 
 namespace System.Web.Compilation
 {
-    sealed class Directive
-    {
-        static Hashtable directivesHash;
-        static string [] page_atts = {  "AspCompat", "AutoEventWireup", "Buffer",
-                        "ClassName", "ClientTarget", "CodePage",
-                        "CompilerOptions", "ContentType", "Culture", "Debug",
-                        "Description",
-                        "EnableEventValidation", "MaintainScrollPositionOnPostBack",
-                        "EnableSessionState", "EnableViewState",
-                        "EnableViewStateMac", "ErrorPage", "Explicit",
-                        "Inherits", "Language", "LCID", "ResponseEncoding",
-                        "Src", "SmartNavigation", "Strict", "Trace",
-                        "TraceMode", "Transaction", "UICulture",
-                        "WarningLevel", "CodeBehind" , "ValidateRequest" };
+	sealed class Directive
+	{
+		static Hashtable directivesHash;
+		static string [] page_atts = {  "AspCompat", "AutoEventWireup", "Buffer",
+						"ClassName", "ClientTarget", "CodePage",
+						"CompilerOptions", "ContentType", "Culture", "Debug",
+						"Description",
+						"EnableEventValidation", "MaintainScrollPositionOnPostBack",
+						"EnableSessionState", "EnableViewState",
+						"EnableViewStateMac", "ErrorPage", "Explicit",
+						"Inherits", "Language", "LCID", "ResponseEncoding",
+						"Src", "SmartNavigation", "Strict", "Trace",
+						"TraceMode", "Transaction", "UICulture",
+						"WarningLevel", "CodeBehind" , "ValidateRequest" };
 
-        static string [] control_atts = { "AutoEventWireup", "ClassName", "CompilerOptions",
-                          "Debug", "Description", "EnableViewState",
-                          "Explicit", "Inherits", "Language", "Strict", "Src",
-                          "WarningLevel", "CodeBehind", "TargetSchema", "LinePragmas" };
+		static string [] control_atts = { "AutoEventWireup", "ClassName", "CompilerOptions",
+						  "Debug", "Description", "EnableViewState",
+						  "Explicit", "Inherits", "Language", "Strict", "Src",
+						  "WarningLevel", "CodeBehind", "TargetSchema", "LinePragmas" };
 
-        static string [] import_atts = { "namespace" };
-        static string [] implements_atts = { "interface" };
-        static string [] assembly_atts = { "name", "src" };
-        static string [] register_atts = { "tagprefix", "tagname", "Namespace", "Src", "Assembly" };
+		static string [] import_atts = { "namespace" };
+		static string [] implements_atts = { "interface" };
+		static string [] assembly_atts = { "name", "src" };
+		static string [] register_atts = { "tagprefix", "tagname", "Namespace", "Src", "Assembly" };
 
-        static string [] outputcache_atts = { "Duration", "Location", "VaryByControl", 
-                              "VaryByCustom", "VaryByHeader", "VaryByParam" };
+		static string [] outputcache_atts = { "Duration", "Location", "VaryByControl", 
+						      "VaryByCustom", "VaryByHeader", "VaryByParam" };
 
-        static string [] reference_atts = { "page", "control" };
+		static string [] reference_atts = { "page", "control" };
 
-        static string [] webservice_atts = { "class", "codebehind", "debug", "language" };
+		static string [] webservice_atts = { "class", "codebehind", "debug", "language" };
 
-        static string [] application_atts = { "description", "inherits", "codebehind" };
+		static string [] application_atts = { "description", "inherits", "codebehind" };
 
-        static string [] mastertype_atts = { "virtualpath", "typename" };
-        static string [] previouspagetype_atts = { "virtualpath", "typename" };
-        
-        static Directive ()
-        {
-            InitHash ();
-        }
-        
-        static void InitHash ()
-        {
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-            directivesHash = new Hashtable (comparer);
+		static string [] mastertype_atts = { "virtualpath", "typename" };
+		static string [] previouspagetype_atts = { "virtualpath", "typename" };
+		
+		static Directive ()
+		{
+			InitHash ();
+		}
+		
+		static void InitHash ()
+		{
+			StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+			directivesHash = new Hashtable (comparer);
 
-            // Use Hashtable 'cause is O(1) in Contains (ArrayList is O(n))
-            Hashtable valid_attributes = new Hashtable (comparer);
-            foreach (string att in page_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("PAGE", valid_attributes);
+			// Use Hashtable 'cause is O(1) in Contains (ArrayList is O(n))
+			Hashtable valid_attributes = new Hashtable (comparer);
+			foreach (string att in page_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("PAGE", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in control_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("CONTROL", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in control_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("CONTROL", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in import_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("IMPORT", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in import_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("IMPORT", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in implements_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("IMPLEMENTS", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in implements_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("IMPLEMENTS", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in register_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("REGISTER", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in register_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("REGISTER", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in assembly_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("ASSEMBLY", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in assembly_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("ASSEMBLY", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in outputcache_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("OUTPUTCACHE", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in outputcache_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("OUTPUTCACHE", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in reference_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("REFERENCE", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in reference_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("REFERENCE", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in webservice_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("WEBSERVICE", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in webservice_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("WEBSERVICE", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            // same attributes as webservice
-            foreach (string att in webservice_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("WEBHANDLER", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			// same attributes as webservice
+			foreach (string att in webservice_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("WEBHANDLER", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in application_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("APPLICATION", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in application_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("APPLICATION", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in mastertype_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("MASTERTYPE", valid_attributes);
-            
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in control_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("MASTER", valid_attributes);
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in mastertype_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("MASTERTYPE", valid_attributes);
+			
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in control_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("MASTER", valid_attributes);
 
-            valid_attributes = new Hashtable (comparer);
-            foreach (string att in previouspagetype_atts) valid_attributes.Add (att, null);
-            directivesHash.Add ("PREVIOUSPAGETYPE", valid_attributes);
-        }
-        
-        Directive () { }
+			valid_attributes = new Hashtable (comparer);
+			foreach (string att in previouspagetype_atts) valid_attributes.Add (att, null);
+			directivesHash.Add ("PREVIOUSPAGETYPE", valid_attributes);
+		}
+		
+		Directive () { }
 
-        public static bool IsDirective (string id)
-        {
-            return directivesHash.Contains (id);
-        }
-    }
+		public static bool IsDirective (string id)
+		{
+			return directivesHash.Contains (id);
+		}
+	}
 }
 

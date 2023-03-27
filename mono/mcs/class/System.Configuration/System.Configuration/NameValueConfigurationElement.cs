@@ -2,7 +2,7 @@
 // System.Configuration.NameValueConfigurationElement.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -33,43 +33,43 @@ using System.Reflection;
 
 namespace System.Configuration {
 
-    public sealed class NameValueConfigurationElement : ConfigurationElement
-    {
-        private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propName;
-        private static readonly ConfigurationProperty _propValue;
+	public sealed class NameValueConfigurationElement : ConfigurationElement
+	{
+		private static ConfigurationPropertyCollection _properties;
+		private static readonly ConfigurationProperty _propName;
+		private static readonly ConfigurationProperty _propValue;
 
-        static NameValueConfigurationElement ()
-        {
-            _properties = new ConfigurationPropertyCollection ();
-            
-            _propName = new ConfigurationProperty ("name", typeof (string), "", ConfigurationPropertyOptions.IsKey);
-            _propValue = new ConfigurationProperty ("value", typeof (string), "");
+		static NameValueConfigurationElement ()
+		{
+			_properties = new ConfigurationPropertyCollection ();
+			
+			_propName = new ConfigurationProperty ("name", typeof (string), "", ConfigurationPropertyOptions.IsKey);
+			_propValue = new ConfigurationProperty ("value", typeof (string), "");
 
-            _properties.Add (_propName);
-            _properties.Add (_propValue);
-        }
+			_properties.Add (_propName);
+			_properties.Add (_propValue);
+		}
 
-        public NameValueConfigurationElement (string name, string value)
-        {
-            this [_propName] = name;
-            this [_propValue] = value;
-        }
+		public NameValueConfigurationElement (string name, string value)
+		{
+			this [_propName] = name;
+			this [_propValue] = value;
+		}
 
-        [ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
-        public string Name {
-            get { return (string) this [_propName]; }
-        }
+		[ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+		public string Name {
+			get { return (string) this [_propName]; }
+		}
 
-        [ConfigurationProperty ("value", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
-        public string Value {
-            get { return (string) this [_propValue]; }
-            set { this [_propValue] = value; }
-        }
+		[ConfigurationProperty ("value", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+		public string Value {
+			get { return (string) this [_propValue]; }
+			set { this [_propValue] = value; }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return _properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return _properties; }
+		}
+	}
 }
 

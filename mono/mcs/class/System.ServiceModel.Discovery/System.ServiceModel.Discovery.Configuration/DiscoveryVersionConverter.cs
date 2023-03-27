@@ -29,86 +29,86 @@ using System.Globalization;
 
 namespace System.ServiceModel.Discovery.Configuration
 {
-    public class DiscoveryVersionConverter : TypeConverter
-    {
-        public DiscoveryVersionConverter ()
-        {
-        }
-        
-        private bool CanConvert (Type type)
-        {
-            if (type == typeof (string))
-                return true;
-            if (type == typeof (DiscoveryVersion))
-                return true;
-            return false;
-        }
-        
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-        {
-            if (sourceType == null)
-                throw new ArgumentNullException ("sourceType");
+	public class DiscoveryVersionConverter : TypeConverter
+	{
+		public DiscoveryVersionConverter ()
+		{
+		}
+		
+		private bool CanConvert (Type type)
+		{
+			if (type == typeof (string))
+				return true;
+			if (type == typeof (DiscoveryVersion))
+				return true;
+			return false;
+		}
+		
+		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+		{
+			if (sourceType == null)
+				throw new ArgumentNullException ("sourceType");
 
-            return CanConvert (sourceType);
-        }
-        
-        public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
-        {
-            if (destinationType == null)
-                return false;
+			return CanConvert (sourceType);
+		}
+		
+		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
+		{
+			if (destinationType == null)
+				return false;
 
-            return CanConvert (destinationType);
-        }
-        
-        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
-            if (value == null)
-                throw new ArgumentNullException ("value");
+			return CanConvert (destinationType);
+		}
+		
+		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+		{
+			if (value == null)
+				throw new ArgumentNullException ("value");
 
-            if (!CanConvertFrom (context, value.GetType ()))
-                throw new NotSupportedException ("Cannot convert from value.");
+			if (!CanConvertFrom (context, value.GetType ()))
+				throw new NotSupportedException ("Cannot convert from value.");
 
-            if (value is DiscoveryVersion)
-                return value;
+			if (value is DiscoveryVersion)
+				return value;
 
-            string s = (value as string);
-            if (s != null) {
-                switch (s) {
-                case "WSDiscovery11":
-                    return DiscoveryVersion.WSDiscovery11;
-                case "WSDiscoveryApril2005":
-                    return DiscoveryVersion.WSDiscoveryApril2005;
-                case "WSDiscoveryCD1":
-                    return DiscoveryVersion.WSDiscoveryCD1;
-                }
-                throw new NotSupportedException ("Cannot convert from value.");
-            }
+			string s = (value as string);
+			if (s != null) {
+				switch (s) {
+				case "WSDiscovery11":
+					return DiscoveryVersion.WSDiscovery11;
+				case "WSDiscoveryApril2005":
+					return DiscoveryVersion.WSDiscoveryApril2005;
+				case "WSDiscoveryCD1":
+					return DiscoveryVersion.WSDiscoveryCD1;
+				}
+				throw new NotSupportedException ("Cannot convert from value.");
+			}
 
-            return base.ConvertFrom (context, culture, value);
-        }
+			return base.ConvertFrom (context, culture, value);
+		}
 
-        public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            if (!CanConvertTo (context, destinationType))
-                throw new NotSupportedException (Locale.GetText ("Cannot convert to destination type."));
+		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+		{
+			if (!CanConvertTo (context, destinationType))
+				throw new NotSupportedException (Locale.GetText ("Cannot convert to destination type."));
 
-            var ver = (value as DiscoveryVersion);
-            if (ver != null) {
-                if (destinationType == typeof (DiscoveryVersion))
-                    return ver;
+			var ver = (value as DiscoveryVersion);
+			if (ver != null) {
+				if (destinationType == typeof (DiscoveryVersion))
+					return ver;
 
-                if (destinationType == typeof (string)) {
-                    if (ver.Equals (DiscoveryVersion.WSDiscovery11))
-                        return "WSDiscovery11";
-                    if (ver.Equals (DiscoveryVersion.WSDiscoveryApril2005))
-                        return "WSDiscoveryApril2005";
-                    if (ver.Equals (DiscoveryVersion.WSDiscoveryCD1))
-                        return "WSDiscoveryCD1";
-                }
-                throw new NotSupportedException ("Cannot convert to destination type.");
-            }
-            return base.ConvertTo (context, culture, value, destinationType);
-        }
-    }
+				if (destinationType == typeof (string)) {
+					if (ver.Equals (DiscoveryVersion.WSDiscovery11))
+						return "WSDiscovery11";
+					if (ver.Equals (DiscoveryVersion.WSDiscoveryApril2005))
+						return "WSDiscoveryApril2005";
+					if (ver.Equals (DiscoveryVersion.WSDiscoveryCD1))
+						return "WSDiscoveryCD1";
+				}
+				throw new NotSupportedException ("Cannot convert to destination type.");
+			}
+			return base.ConvertTo (context, culture, value, destinationType);
+		}
+	}
 }
 

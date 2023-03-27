@@ -2,7 +2,7 @@
 // SignerInfoCollectionTest.cs - NUnit tests for SignerInfoCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,100 +38,100 @@ using System.Security.Cryptography.Xml;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs {
 
-    [TestFixture]
-    public class SignerInfoCollectionTest {
+	[TestFixture]
+	public class SignerInfoCollectionTest {
 
-        private SignerInfoCollection GetCollection ()
-        {
-            SignerInfo si = SignerInfoTest.GetSignerInfo (SignerInfoTest.subjectKeyIdentifierSignature);
-            return si.CounterSignerInfos;
-        }
+		private SignerInfoCollection GetCollection ()
+		{
+			SignerInfo si = SignerInfoTest.GetSignerInfo (SignerInfoTest.subjectKeyIdentifierSignature);
+			return si.CounterSignerInfos;
+		}
 
-        [Test]
-        public void EmptyCollection ()
-        {
-            SignerInfoCollection sic = GetCollection ();
-            Assert.AreEqual (0, sic.Count, "Count");
-            Assert.IsFalse (sic.IsSynchronized, "IsSynchronized");
-            Assert.IsNotNull (sic.SyncRoot, "SyncRoot");
-            Assert.IsNotNull (sic.GetEnumerator (), "GetEnumerator");
-        }
+		[Test]
+		public void EmptyCollection ()
+		{
+			SignerInfoCollection sic = GetCollection ();
+			Assert.AreEqual (0, sic.Count, "Count");
+			Assert.IsFalse (sic.IsSynchronized, "IsSynchronized");
+			Assert.IsNotNull (sic.SyncRoot, "SyncRoot");
+			Assert.IsNotNull (sic.GetEnumerator (), "GetEnumerator");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Indexer_MinusOne ()
-        {
-            SignerInfoCollection sic = GetCollection ();
-            Assert.IsNotNull (sic[-1]);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void Indexer_MinusOne ()
+		{
+			SignerInfoCollection sic = GetCollection ();
+			Assert.IsNotNull (sic[-1]);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Indexer_One ()
-        {
-            SignerInfoCollection sic = GetCollection ();
-            Assert.IsNotNull (sic[1]);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void Indexer_One ()
+		{
+			SignerInfoCollection sic = GetCollection ();
+			Assert.IsNotNull (sic[1]);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void CopyTo_ArrayInt_Null ()
-        {
-            SignerInfoCollection sic = GetCollection ();
-            sic.CopyTo ((Array)null, 0);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void CopyTo_ArrayInt_Null ()
+		{
+			SignerInfoCollection sic = GetCollection ();
+			sic.CopyTo ((Array)null, 0);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void CopyTo_ArrayInt_MinusOne ()
-        {
-            ArrayList al = new ArrayList ();
-            SignerInfoCollection sic = GetCollection ();
-            sic.CopyTo (al.ToArray (), -1);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void CopyTo_ArrayInt_MinusOne ()
+		{
+			ArrayList al = new ArrayList ();
+			SignerInfoCollection sic = GetCollection ();
+			sic.CopyTo (al.ToArray (), -1);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void CopyTo_ArrayInt_One ()
-        {
-            ArrayList al = new ArrayList ();
-            SignerInfoCollection sic = GetCollection ();
-            sic.CopyTo (al.ToArray (), 1);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void CopyTo_ArrayInt_One ()
+		{
+			ArrayList al = new ArrayList ();
+			SignerInfoCollection sic = GetCollection ();
+			sic.CopyTo (al.ToArray (), 1);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void CopyTo_SignerInfoInt_Null ()
-        {
-            SignerInfoCollection sic = GetCollection ();
-            sic.CopyTo ((SignerInfo[])null, 0);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void CopyTo_SignerInfoInt_Null ()
+		{
+			SignerInfoCollection sic = GetCollection ();
+			sic.CopyTo ((SignerInfo[])null, 0);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void CopyTo_SignerInfoInt_MinusOne ()
-        {
-            SignerInfo[] sis = new SignerInfo[1];
-            SignerInfoCollection sic = GetCollection ();
-            sic.CopyTo (sis, -1);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void CopyTo_SignerInfoInt_MinusOne ()
+		{
+			SignerInfo[] sis = new SignerInfo[1];
+			SignerInfoCollection sic = GetCollection ();
+			sic.CopyTo (sis, -1);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void CopyTo_SignerInfoInt_One ()
-        {
-            SignerInfo[] sis = new SignerInfo[1];
-            SignerInfoCollection sic = GetCollection ();
-            sic.CopyTo (sis, 1);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void CopyTo_SignerInfoInt_One ()
+		{
+			SignerInfo[] sis = new SignerInfo[1];
+			SignerInfoCollection sic = GetCollection ();
+			sic.CopyTo (sis, 1);
+		}
 
-        [Test]
-        public void CopyTo_SignerInfoInt_Zero ()
-        {
-            SignerInfo[] sis = new SignerInfo[1];
-            SignerInfoCollection sic = GetCollection ();
-            sic.CopyTo (sis, 0);
-        }
-    }
+		[Test]
+		public void CopyTo_SignerInfoInt_Zero ()
+		{
+			SignerInfo[] sis = new SignerInfo[1];
+			SignerInfoCollection sic = GetCollection ();
+			sic.CopyTo (sis, 0);
+		}
+	}
 }
 #endif

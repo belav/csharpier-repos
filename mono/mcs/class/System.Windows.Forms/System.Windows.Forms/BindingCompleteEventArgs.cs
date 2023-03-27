@@ -23,78 +23,78 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-    public class BindingCompleteEventArgs : CancelEventArgs
-    {
-        private Binding binding;
-        private BindingCompleteState state;
-        private BindingCompleteContext context;
-        private string error_text;
-        private Exception exception;
+	public class BindingCompleteEventArgs : CancelEventArgs
+	{
+		private Binding binding;
+		private BindingCompleteState state;
+		private BindingCompleteContext context;
+		private string error_text;
+		private Exception exception;
 
-        #region Public Constructors
-        public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context)
-            : this (binding, state, context, String.Empty, null, false)
-        {
-        }
+		#region Public Constructors
+		public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context)
+			: this (binding, state, context, String.Empty, null, false)
+		{
+		}
 
-        public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context, string errorText)
-            : this (binding, state, context, errorText, null, true)
-        {
-        }
+		public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context, string errorText)
+			: this (binding, state, context, errorText, null, true)
+		{
+		}
 
-        public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context, string errorText, Exception exception)
-            : this (binding, state, context, errorText, exception, true)
-        {
-        }
+		public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context, string errorText, Exception exception)
+			: this (binding, state, context, errorText, exception, true)
+		{
+		}
 
-        public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context, string errorText, Exception exception, bool cancel)
-            : base (cancel)
-        {
-            this.binding = binding;
-            this.state = state;
-            this.context = context;
-            this.error_text = errorText;
-            this.exception = exception;
-        }
-        #endregion    // Public Constructors
+		public BindingCompleteEventArgs(Binding binding, BindingCompleteState state, BindingCompleteContext context, string errorText, Exception exception, bool cancel)
+			: base (cancel)
+		{
+			this.binding = binding;
+			this.state = state;
+			this.context = context;
+			this.error_text = errorText;
+			this.exception = exception;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public Binding Binding {
-            get { return this.binding; }
-        }
+		#region Public Instance Properties
+		public Binding Binding {
+			get { return this.binding; }
+		}
 
-        public BindingCompleteContext BindingCompleteContext {
-            get { return this.context; }
-        }
+		public BindingCompleteContext BindingCompleteContext {
+			get { return this.context; }
+		}
 
-        public BindingCompleteState BindingCompleteState {
-            get { return this.state; }
-        }
+		public BindingCompleteState BindingCompleteState {
+			get { return this.state; }
+		}
 
-        public string ErrorText {
-            get { return this.error_text; }
-        }
+		public string ErrorText {
+			get { return this.error_text; }
+		}
 
-        public Exception Exception {
-            get { return this.exception; }
-        }
-        #endregion    // Public Instance Properties
+		public Exception Exception {
+			get { return this.exception; }
+		}
+		#endregion	// Public Instance Properties
 
-        internal void SetErrorText (string error_text)
-        {
-            this.error_text = error_text;
-        }
+		internal void SetErrorText (string error_text)
+		{
+			this.error_text = error_text;
+		}
 
-        internal void SetException (Exception exception)
-        {
-            this.exception = exception;
-        }
-    }
+		internal void SetException (Exception exception)
+		{
+			this.exception = exception;
+		}
+	}
 }

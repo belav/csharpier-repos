@@ -3,12 +3,12 @@
 
 class Test
 {
-    static void Foo (int a, bool b)
-    {
-    }
+	static void Foo (int a, bool b)
+	{
+	}
 
-    static void Main ()
-    {
-        Foo (, 1);
-    }
+	static void Main ()
+	{
+		Foo (, 1);
+	}
 }

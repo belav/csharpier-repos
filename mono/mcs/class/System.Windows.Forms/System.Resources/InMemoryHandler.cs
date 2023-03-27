@@ -4,7 +4,7 @@
 // as string resources stored in resx file
 // 
 // Author:
-//    Gary Barnett (gary.barnett.mono@gmail.com)
+//	Gary Barnett (gary.barnett.mono@gmail.com)
 // 
 // Copyright (C) Gary Barnett (2012)
 //
@@ -32,43 +32,43 @@ using System.Reflection;
 using System.ComponentModel.Design;
 
 namespace System.Resources {
-    internal class InMemoryHandler : ResXDataNodeHandler {
+	internal class InMemoryHandler : ResXDataNodeHandler {
 
-        object value;
+		object value;
 
-        public InMemoryHandler (object valueObject)
-        {
-            value = valueObject;
-        }
+		public InMemoryHandler (object valueObject)
+		{
+			value = valueObject;
+		}
 
-        #region implemented abstract members of System.Windows.Formsnet_2_0.ResXDataNodeHandler
-        public override object GetValue (ITypeResolutionService typeResolver)
-        {
-            return value;
-        }
+		#region implemented abstract members of System.Windows.Formsnet_2_0.ResXDataNodeHandler
+		public override object GetValue (ITypeResolutionService typeResolver)
+		{
+			return value;
+		}
 
-        public override object GetValue (AssemblyName [] assemblyNames)
-        {
-            return value;
-        }
+		public override object GetValue (AssemblyName [] assemblyNames)
+		{
+			return value;
+		}
 
-        public override string GetValueTypeName (ITypeResolutionService typeResolver)
-        {
-            if (value == null)
-                return null;
-            else
-                return value.GetType ().AssemblyQualifiedName;
-        }
+		public override string GetValueTypeName (ITypeResolutionService typeResolver)
+		{
+			if (value == null)
+				return null;
+			else
+				return value.GetType ().AssemblyQualifiedName;
+		}
 
-        public override string GetValueTypeName (AssemblyName [] assemblyNames)
-        {
-            if (value  == null)
-                return null;
-            else
-                return value.GetType ().AssemblyQualifiedName;
-        }
-        #endregion
+		public override string GetValueTypeName (AssemblyName [] assemblyNames)
+		{
+			if (value  == null)
+				return null;
+			else
+				return value.GetType ().AssemblyQualifiedName;
+		}
+		#endregion
 
-    }
+	}
 }
 

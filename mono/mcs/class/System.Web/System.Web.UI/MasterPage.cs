@@ -40,124 +40,124 @@ using System.IO;
 
 namespace System.Web.UI
 {
-    [ParseChildren (false)]
+	[ParseChildren (false)]
 #if notyet
-    [Designer (...)]
+	[Designer (...)]
 #endif
-    [ControlBuilder (typeof (MasterPageControlBuilder))]
-    public class MasterPage: UserControl
-    {
-        Hashtable definedContentTemplates = new Hashtable ();
-        Hashtable templates = new Hashtable ();
-        List <string> placeholders;
-        string parentMasterPageFile = null;
-        MasterPage parentMasterPage;
+	[ControlBuilder (typeof (MasterPageControlBuilder))]
+	public class MasterPage: UserControl
+	{
+		Hashtable definedContentTemplates = new Hashtable ();
+		Hashtable templates = new Hashtable ();
+		List <string> placeholders;
+		string parentMasterPageFile = null;
+		MasterPage parentMasterPage;
 
-        [EditorBrowsable (EditorBrowsableState.Advanced)]
-        protected internal void AddContentTemplate (string templateName, ITemplate template)
-        {
-            // LAMESPEC: should be ArgumentException
-            if (definedContentTemplates.ContainsKey (templateName))
-                throw new HttpException ("Multiple contents applied to " + templateName);
+		[EditorBrowsable (EditorBrowsableState.Advanced)]
+		protected internal void AddContentTemplate (string templateName, ITemplate template)
+		{
+			// LAMESPEC: should be ArgumentException
+			if (definedContentTemplates.ContainsKey (templateName))
+				throw new HttpException ("Multiple contents applied to " + templateName);
 
-            definedContentTemplates [templateName] = template;
-        }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Advanced)]
-        protected internal IList ContentPlaceHolders {
-            get {
-                if (placeholders == null)
-                    placeholders = new List <string> ();
-                return placeholders;
-            }
-        }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Advanced)]
-        protected internal IDictionary ContentTemplates {
-            get { return templates; }
-        }
-        
-        [DefaultValueAttribute ("")]
-        public string MasterPageFile {
-            get { return parentMasterPageFile; }
-            set {
-                parentMasterPageFile = value;
-                parentMasterPage = null;
-            }
-        }
+			definedContentTemplates [templateName] = template;
+		}
+		
+		[Browsable (false)]
+		[EditorBrowsable (EditorBrowsableState.Advanced)]
+		protected internal IList ContentPlaceHolders {
+			get {
+				if (placeholders == null)
+					placeholders = new List <string> ();
+				return placeholders;
+			}
+		}
+		
+		[Browsable (false)]
+		[EditorBrowsable (EditorBrowsableState.Advanced)]
+		protected internal IDictionary ContentTemplates {
+			get { return templates; }
+		}
+		
+		[DefaultValueAttribute ("")]
+		public string MasterPageFile {
+			get { return parentMasterPageFile; }
+			set {
+				parentMasterPageFile = value;
+				parentMasterPage = null;
+			}
+		}
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [BrowsableAttribute (false)]
-        public MasterPage Master {
-            get {
-                if (parentMasterPage == null && parentMasterPageFile != null)
-                    parentMasterPage = MasterPage.CreateMasterPage (this, Context, parentMasterPageFile, definedContentTemplates);
-            
-                return parentMasterPage;
-            }
-        }        
-        public void InstantiateInContentPlaceHolder (Control contentPlaceHolder, ITemplate template)
-        {
-            // .NET compatibility...
-            if (contentPlaceHolder == null || template == null)
-                throw new NullReferenceException ();
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[BrowsableAttribute (false)]
+		public MasterPage Master {
+			get {
+				if (parentMasterPage == null && parentMasterPageFile != null)
+					parentMasterPage = MasterPage.CreateMasterPage (this, Context, parentMasterPageFile, definedContentTemplates);
+			
+				return parentMasterPage;
+			}
+		}		
+		public void InstantiateInContentPlaceHolder (Control contentPlaceHolder, ITemplate template)
+		{
+			// .NET compatibility...
+			if (contentPlaceHolder == null || template == null)
+				throw new NullReferenceException ();
 
-            if (contentPlaceHolder != null && template != null)
-                template.InstantiateIn (contentPlaceHolder);
-        }
-        internal static MasterPage CreateMasterPage (TemplateControl owner, HttpContext context,
-                                 string masterPageFile, IDictionary contentTemplateCollection)
-        {
-            var req = context.Request;
-            if (req != null)
-                masterPageFile = HostingEnvironment.VirtualPathProvider.CombineVirtualPaths (req.CurrentExecutionFilePath, masterPageFile);
-            MasterPage masterPage = BuildManager.CreateInstanceFromVirtualPath (masterPageFile, typeof (MasterPage)) as MasterPage;
-            if (masterPage == null)
-                throw new HttpException ("Failed to create MasterPage instance for '" + masterPageFile + "'.");
+			if (contentPlaceHolder != null && template != null)
+				template.InstantiateIn (contentPlaceHolder);
+		}
+		internal static MasterPage CreateMasterPage (TemplateControl owner, HttpContext context,
+							     string masterPageFile, IDictionary contentTemplateCollection)
+		{
+			var req = context.Request;
+			if (req != null)
+				masterPageFile = HostingEnvironment.VirtualPathProvider.CombineVirtualPaths (req.CurrentExecutionFilePath, masterPageFile);
+			MasterPage masterPage = BuildManager.CreateInstanceFromVirtualPath (masterPageFile, typeof (MasterPage)) as MasterPage;
+			if (masterPage == null)
+				throw new HttpException ("Failed to create MasterPage instance for '" + masterPageFile + "'.");
 
-            if (contentTemplateCollection != null) {
-                foreach (string templateName in contentTemplateCollection.Keys) {
-                    if (masterPage.ContentTemplates [templateName] == null)
-                        masterPage.ContentTemplates [templateName] = contentTemplateCollection[templateName];
-                }
-            }
-            
-            masterPage.Page = owner.Page;
-            masterPage.InitializeAsUserControlInternal ();
+			if (contentTemplateCollection != null) {
+				foreach (string templateName in contentTemplateCollection.Keys) {
+					if (masterPage.ContentTemplates [templateName] == null)
+						masterPage.ContentTemplates [templateName] = contentTemplateCollection[templateName];
+				}
+			}
+			
+			masterPage.Page = owner.Page;
+			masterPage.InitializeAsUserControlInternal ();
 
-            List <string> placeholders = masterPage.placeholders;
-            if (contentTemplateCollection != null && placeholders != null && placeholders.Count > 0) {
-                foreach (string templateName in contentTemplateCollection.Keys) {
-                    if (!placeholders.Contains (templateName.ToLowerInvariant ())) {
-                        throw new HttpException (
-                            String.Format ("Cannot find ContentPlaceHolder '{0}' in the master page '{1}'",
-                                       templateName, masterPageFile));
-                    }
-                }
-            }
+			List <string> placeholders = masterPage.placeholders;
+			if (contentTemplateCollection != null && placeholders != null && placeholders.Count > 0) {
+				foreach (string templateName in contentTemplateCollection.Keys) {
+					if (!placeholders.Contains (templateName.ToLowerInvariant ())) {
+						throw new HttpException (
+							String.Format ("Cannot find ContentPlaceHolder '{0}' in the master page '{1}'",
+								       templateName, masterPageFile));
+					}
+				}
+			}
 
-            return masterPage;
-        }
+			return masterPage;
+		}
 
-        internal static void ApplyMasterPageRecursive (string currentFilePath, VirtualPathProvider vpp, MasterPage master, Dictionary <string, bool> appliedMasterPageFiles)
-        {
-            /* XXX need to use virtual paths here? */
-            string mpFile = master.MasterPageFile;
-            if (!String.IsNullOrEmpty (mpFile)) {
-                mpFile = vpp.CombineVirtualPaths (currentFilePath, mpFile);
-                if (appliedMasterPageFiles.ContainsKey (mpFile))
-                    throw new HttpException ("circular dependency in master page files detected");
+		internal static void ApplyMasterPageRecursive (string currentFilePath, VirtualPathProvider vpp, MasterPage master, Dictionary <string, bool> appliedMasterPageFiles)
+		{
+			/* XXX need to use virtual paths here? */
+			string mpFile = master.MasterPageFile;
+			if (!String.IsNullOrEmpty (mpFile)) {
+				mpFile = vpp.CombineVirtualPaths (currentFilePath, mpFile);
+				if (appliedMasterPageFiles.ContainsKey (mpFile))
+					throw new HttpException ("circular dependency in master page files detected");
 
-                MasterPage innerMaster = master.Master;
-                if (innerMaster != null) {
-                    master.Controls.Clear ();
-                    master.Controls.Add (innerMaster);
-                    appliedMasterPageFiles.Add (mpFile, true);
-                    MasterPage.ApplyMasterPageRecursive (currentFilePath, vpp, innerMaster, appliedMasterPageFiles);
-                }
-            }
-        }
-    }
+				MasterPage innerMaster = master.Master;
+				if (innerMaster != null) {
+					master.Controls.Clear ();
+					master.Controls.Add (innerMaster);
+					appliedMasterPageFiles.Add (mpFile, true);
+					MasterPage.ApplyMasterPageRecursive (currentFilePath, vpp, innerMaster, appliedMasterPageFiles);
+				}
+			}
+		}
+	}
 }

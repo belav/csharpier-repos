@@ -2,7 +2,7 @@
 // System.Security.PermissionBuilder.cs
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,66 +30,66 @@ using System.Security.Permissions;
 
 namespace System.Security {
 
-    internal static class PermissionBuilder {
-        private static object[] psNone = new object [1] { PermissionState.None };
+	internal static class PermissionBuilder {
+		private static object[] psNone = new object [1] { PermissionState.None };
 
-        // can be used to create an empty or an unrestricted permission from any valid type
-        static public IPermission Create (string fullname, PermissionState state)
-        {
-            if (fullname == null)
-                throw new ArgumentNullException ("fullname");
+		// can be used to create an empty or an unrestricted permission from any valid type
+		static public IPermission Create (string fullname, PermissionState state)
+		{
+			if (fullname == null)
+				throw new ArgumentNullException ("fullname");
 
-            SecurityElement se = new SecurityElement ("IPermission");
-            se.AddAttribute ("class", fullname);
-            se.AddAttribute ("version", "1");
-            if (state == PermissionState.Unrestricted)
-                se.AddAttribute ("Unrestricted", "true");
+			SecurityElement se = new SecurityElement ("IPermission");
+			se.AddAttribute ("class", fullname);
+			se.AddAttribute ("version", "1");
+			if (state == PermissionState.Unrestricted)
+				se.AddAttribute ("Unrestricted", "true");
 
-            return CreatePermission (fullname, se);
-        }
+			return CreatePermission (fullname, se);
+		}
 
-        static public IPermission Create (SecurityElement se)
-        {
-            if (se == null)
-                throw new ArgumentNullException ("se");
+		static public IPermission Create (SecurityElement se)
+		{
+			if (se == null)
+				throw new ArgumentNullException ("se");
 
-            string className = se.Attribute ("class");
-            if ((className == null) || (className.Length == 0))
-                throw new ArgumentException ("class");
+			string className = se.Attribute ("class");
+			if ((className == null) || (className.Length == 0))
+				throw new ArgumentException ("class");
 
-            return CreatePermission (className, se);
-        }
+			return CreatePermission (className, se);
+		}
 
-        // to use in case where the "class" attribute isn't a fully qualified class name
-        static public IPermission Create (string fullname, SecurityElement se)
-        {
-            if (fullname == null)
-                throw new ArgumentNullException ("fullname");
-            if (se == null)
-                throw new ArgumentNullException ("se");
+		// to use in case where the "class" attribute isn't a fully qualified class name
+		static public IPermission Create (string fullname, SecurityElement se)
+		{
+			if (fullname == null)
+				throw new ArgumentNullException ("fullname");
+			if (se == null)
+				throw new ArgumentNullException ("se");
 
-            return CreatePermission (fullname, se);
-        }
+			return CreatePermission (fullname, se);
+		}
 
-        static public IPermission Create (Type type)
-        {
-            // note: unification is handled in lower levels
-            // http://blogs.msdn.com/shawnfa/archive/2004/08/05/209320.aspx
-            return (IPermission) Activator.CreateInstance (type, psNone);
-        }
+		static public IPermission Create (Type type)
+		{
+			// note: unification is handled in lower levels
+			// http://blogs.msdn.com/shawnfa/archive/2004/08/05/209320.aspx
+			return (IPermission) Activator.CreateInstance (type, psNone);
+		}
 
-        // internal stuff
+		// internal stuff
 
-        internal static IPermission CreatePermission (string fullname, SecurityElement se)
-        {
-            Type classType = Type.GetType (fullname);
-            if (classType == null) {
-                string msg = Locale.GetText ("Can't create an instance of permission class {0}.");
-                throw new TypeLoadException (String.Format (msg, fullname));
-            }
-            IPermission p = Create (classType);
-            p.FromXml (se);
-            return p;
-        }
-    }
+		internal static IPermission CreatePermission (string fullname, SecurityElement se)
+		{
+			Type classType = Type.GetType (fullname);
+			if (classType == null) {
+				string msg = Locale.GetText ("Can't create an instance of permission class {0}.");
+				throw new TypeLoadException (String.Format (msg, fullname));
+			}
+			IPermission p = Create (classType);
+			p.FromXml (se);
+			return p;
+		}
+	}
 }

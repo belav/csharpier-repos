@@ -13,44 +13,44 @@ using System.Runtime.CompilerServices;
 
 public class FriendClass
 {
-    // Static members
-    
-    internal static int StaticFriendField;
-    
-    internal static int StaticFriendProperty {
-        get {
-            return 1;
-        }
-    }
+	// Static members
+	
+	internal static int StaticFriendField;
+	
+	internal static int StaticFriendProperty {
+		get {
+			return 1;
+		}
+	}
 
-    internal static int StaticFriendMethod ()
-    {
-        return 2;
-    }
+	internal static int StaticFriendMethod ()
+	{
+		return 2;
+	}
 
-    // Instance members
-    
-    internal int InstanceFriendField;
-    
-    internal int InstanceFriendProperty {
-        get {
-            return 1;
-        }
-    }
+	// Instance members
+	
+	internal int InstanceFriendField;
+	
+	internal int InstanceFriendProperty {
+		get {
+			return 1;
+		}
+	}
 
-    internal int InstanceFriendMethod () 
-    {
-        return 2;
-    }
+	internal int InstanceFriendMethod () 
+	{
+		return 2;
+	}
 
-    // Nested classes
-    internal class NestedInternalClass
-    {
-    }
+	// Nested classes
+	internal class NestedInternalClass
+	{
+	}
 
-    protected internal class NestedProtectedInternalClass
-    {
-    }
+	protected internal class NestedProtectedInternalClass
+	{
+	}
 }
 
 //

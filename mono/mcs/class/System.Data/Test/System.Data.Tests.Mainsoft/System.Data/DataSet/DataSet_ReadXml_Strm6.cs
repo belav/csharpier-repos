@@ -39,66 +39,66 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataSet_ReadXml_Strm6 : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataSet_ReadXml_Strm6 tc = new DataSet_ReadXml_Strm6();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("NoName");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataSet_ReadXml_Strm6 tc = new DataSet_ReadXml_Strm6();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("NoName");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("TC1");
-            DataSet ds = new DataSet();
-            string xmlData = string.Empty;
-            xmlData += "<a>";
-            xmlData +=    "<b>";
-            xmlData +=         "<c>1</c>";
-            xmlData +=         "<c>2</c>";
-            xmlData +=         "<c>3</c>";
-            xmlData +=    "</b>";
-            xmlData +=     "</a>";
-            System.IO.StringReader sr = new System.IO.StringReader(xmlData) ;
-            System.Xml.XmlTextReader xReader = new System.Xml.XmlTextReader(sr) ;
-            ds.ReadXml (xReader);
-            Compare(ds.Tables["c"].Rows.Count, 3);
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("TC1");
+			DataSet ds = new DataSet();
+			string xmlData = string.Empty;
+			xmlData += "<a>";
+			xmlData +=    "<b>";
+			xmlData += 		"<c>1</c>";
+			xmlData += 		"<c>2</c>";
+			xmlData += 		"<c>3</c>";
+			xmlData +=    "</b>";
+			xmlData += 	"</a>";
+			System.IO.StringReader sr = new System.IO.StringReader(xmlData) ;
+			System.Xml.XmlTextReader xReader = new System.Xml.XmlTextReader(sr) ;
+			ds.ReadXml (xReader);
+			Compare(ds.Tables["c"].Rows.Count, 3);
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
 }
 }

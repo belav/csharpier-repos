@@ -1,9 +1,9 @@
 //
 // MonthChangedEventArgsCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.MonthChangedEventArgs
+//	- CAS unit tests for System.Web.UI.WebControls.MonthChangedEventArgs
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,29 +39,29 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class MonthChangedEventArgsCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class MonthChangedEventArgsCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            MonthChangedEventArgsTest unit = new MonthChangedEventArgsTest ();
-            unit.Ctor ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			MonthChangedEventArgsTest unit = new MonthChangedEventArgsTest ();
+			unit.Ctor ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (DateTime), typeof (DateTime) });
-            Assert.IsNotNull (ci, ".ctor(DateTime,DateTime)");
-            return ci.Invoke (new object[2] { DateTime.MinValue, DateTime.MaxValue });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (DateTime), typeof (DateTime) });
+			Assert.IsNotNull (ci, ".ctor(DateTime,DateTime)");
+			return ci.Invoke (new object[2] { DateTime.MinValue, DateTime.MaxValue });
+		}
 
-        public override Type Type {
-            get { return typeof (MonthChangedEventArgs); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (MonthChangedEventArgs); }
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // System.Management.EventQuery
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,31 +30,31 @@
 
 namespace System.Management
 {
-    public class EventQuery : ManagementQuery
-    {
-        [MonoTODO]
-        public EventQuery ()
-        {
-            throw new NotImplementedException ();
-        }
+	public class EventQuery : ManagementQuery
+	{
+		[MonoTODO]
+		public EventQuery ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public EventQuery (string query)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public EventQuery (string query)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public EventQuery (string language, string query)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public EventQuery (string language, string query)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override object Clone ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override object Clone ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

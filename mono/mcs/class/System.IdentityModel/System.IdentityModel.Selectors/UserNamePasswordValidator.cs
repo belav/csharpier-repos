@@ -3,7 +3,7 @@
 // UserNamePasswordValidator.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,51 +34,51 @@ using System.Web.Security;
 
 namespace System.IdentityModel.Selectors
 {
-    public abstract class UserNamePasswordValidator
-    {
-        protected UserNamePasswordValidator ()
-        {
-        }
+	public abstract class UserNamePasswordValidator
+	{
+		protected UserNamePasswordValidator ()
+		{
+		}
 
-        static UserNamePasswordValidator none_validator =
-            new NoneValidator ();
+		static UserNamePasswordValidator none_validator =
+			new NoneValidator ();
 
-        public static UserNamePasswordValidator None {
-            get { return none_validator; }
-        }
+		public static UserNamePasswordValidator None {
+			get { return none_validator; }
+		}
 
-        public static UserNamePasswordValidator
-            CreateMembershipProviderValidator (MembershipProvider provider)
-        {
-            if (provider == null)
-                throw new ArgumentNullException ("provider");
-            return new MembershipUserNameValidator (provider);
-        }
+		public static UserNamePasswordValidator
+			CreateMembershipProviderValidator (MembershipProvider provider)
+		{
+			if (provider == null)
+				throw new ArgumentNullException ("provider");
+			return new MembershipUserNameValidator (provider);
+		}
 
-        public abstract void Validate (string userName, string password);
+		public abstract void Validate (string userName, string password);
 
-        class NoneValidator : UserNamePasswordValidator
-        {
-            public override void Validate (string user, string pass)
-            {
-            }
-        }
+		class NoneValidator : UserNamePasswordValidator
+		{
+			public override void Validate (string user, string pass)
+			{
+			}
+		}
 
-        class MembershipUserNameValidator : UserNamePasswordValidator
-        {
-            MembershipProvider provider;
+		class MembershipUserNameValidator : UserNamePasswordValidator
+		{
+			MembershipProvider provider;
 
-            public MembershipUserNameValidator (MembershipProvider provider)
-            {
-                this.provider = provider;
-            }
+			public MembershipUserNameValidator (MembershipProvider provider)
+			{
+				this.provider = provider;
+			}
 
-            public override void Validate (string user, string pass)
-            {
-                if (!provider.ValidateUser (user, pass))
-                    throw new SecurityTokenException ("The user does not exist or was not validated with the given password.");
-            }
-        }
-    }
+			public override void Validate (string user, string pass)
+			{
+				if (!provider.ValidateUser (user, pass))
+					throw new SecurityTokenException ("The user does not exist or was not validated with the given password.");
+			}
+		}
+	}
 }
 #endif

@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,26 +32,26 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("d94ac0a0-bb18-46b8-844e-84159064b0bd")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsICancelable {
+	[Guid ("d94ac0a0-bb18-46b8-844e-84159064b0bd")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsICancelable {
 
 #region nsICancelable
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int cancel (
-                   int aReason);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int cancel (
+				   int aReason);
 
 #endregion
-    }
+	}
 
 
-    internal class nsCancelable {
-        public static nsICancelable GetProxy (Mono.WebBrowser.IWebBrowser control, nsICancelable obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsICancelable).GUID, obj);
-            return o as nsICancelable;
-        }
-    }
+	internal class nsCancelable {
+		public static nsICancelable GetProxy (Mono.WebBrowser.IWebBrowser control, nsICancelable obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsICancelable).GUID, obj);
+			return o as nsICancelable;
+		}
+	}
 }

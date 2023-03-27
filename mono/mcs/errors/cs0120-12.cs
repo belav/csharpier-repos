@@ -5,20 +5,20 @@ using System;
 
 public class Foo
 {
-    public string Bar ()
-    {
-        return "hello";
-    }
-    public static string Bar (string thing)
-    {
-        return string.Format ("hello {0}", thing);
-    }
+	public string Bar ()
+	{
+		return "hello";
+	}
+	public static string Bar (string thing)
+	{
+		return string.Format ("hello {0}", thing);
+	}
 }
 
 public class MainClass
 {
-    public static void Main ()
-    {
-        Console.WriteLine (Foo.Bar ());
-    }
+	public static void Main ()
+	{
+		Console.WriteLine (Foo.Bar ());
+	}
 }

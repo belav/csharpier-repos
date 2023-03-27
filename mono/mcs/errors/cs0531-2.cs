@@ -2,5 +2,5 @@
 // Line:
 
 public interface Interface {        
-    int P { get {} }
+	int P { get {} }
 }

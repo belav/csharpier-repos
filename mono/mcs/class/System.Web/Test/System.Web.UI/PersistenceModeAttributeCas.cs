@@ -1,9 +1,9 @@
 //
 // PersistenceModeAttributeCas.cs 
-//    - CAS unit tests for System.Web.UI.PersistenceModeAttribute
+//	- CAS unit tests for System.Web.UI.PersistenceModeAttribute
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,42 +38,42 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class PersistenceModeAttributeCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class PersistenceModeAttributeCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            PersistenceModeAttribute pma = new PersistenceModeAttribute (PersistenceMode.Attribute);
-            Assert.AreEqual (PersistenceMode.Attribute, pma.Mode, "Mode");
-            Assert.IsTrue (pma.Equals (pma), "Equals");
-            Assert.IsTrue (pma.IsDefaultAttribute (), "IsDefaultAttribute");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			PersistenceModeAttribute pma = new PersistenceModeAttribute (PersistenceMode.Attribute);
+			Assert.AreEqual (PersistenceMode.Attribute, pma.Mode, "Mode");
+			Assert.IsTrue (pma.Equals (pma), "Equals");
+			Assert.IsTrue (pma.IsDefaultAttribute (), "IsDefaultAttribute");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Static_Deny_Unrestricted ()
-        {
-            Assert.IsNotNull (PersistenceModeAttribute.Default, "Default");
-            Assert.IsNotNull (PersistenceModeAttribute.Attribute, "Attribute");
-            Assert.IsNotNull (PersistenceModeAttribute.EncodedInnerDefaultProperty, "EncodedInnerDefaultProperty");
-            Assert.IsNotNull (PersistenceModeAttribute.InnerDefaultProperty, "InnerDefaultProperty");
-            Assert.IsNotNull (PersistenceModeAttribute.InnerProperty, "InnerProperty");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Static_Deny_Unrestricted ()
+		{
+			Assert.IsNotNull (PersistenceModeAttribute.Default, "Default");
+			Assert.IsNotNull (PersistenceModeAttribute.Attribute, "Attribute");
+			Assert.IsNotNull (PersistenceModeAttribute.EncodedInnerDefaultProperty, "EncodedInnerDefaultProperty");
+			Assert.IsNotNull (PersistenceModeAttribute.InnerDefaultProperty, "InnerDefaultProperty");
+			Assert.IsNotNull (PersistenceModeAttribute.InnerProperty, "InnerProperty");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (PersistenceMode) });
-            Assert.IsNotNull (ci, ".ctor(PersistenceMode)");
-            return ci.Invoke (new object[1] { PersistenceMode.Attribute });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (PersistenceMode) });
+			Assert.IsNotNull (ci, ".ctor(PersistenceMode)");
+			return ci.Invoke (new object[1] { PersistenceMode.Attribute });
+		}
 
-        public override Type Type {
-            get { return typeof (PersistenceModeAttribute); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (PersistenceModeAttribute); }
+		}
+	}
 }

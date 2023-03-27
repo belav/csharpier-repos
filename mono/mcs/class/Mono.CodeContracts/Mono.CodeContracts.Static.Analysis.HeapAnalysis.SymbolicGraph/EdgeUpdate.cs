@@ -2,7 +2,7 @@
 // EdgeUpdate.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,69 +29,69 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph {
-    class EdgeUpdate<TFunc, TAbstractDomain> : Update<TFunc, TAbstractDomain>
-        where TFunc : IEquatable<TFunc>, IConstantInfo
-        where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
-        private readonly SymValue from;
-        private readonly TFunc function;
+	class EdgeUpdate<TFunc, TAbstractDomain> : Update<TFunc, TAbstractDomain>
+		where TFunc : IEquatable<TFunc>, IConstantInfo
+		where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
+		private readonly SymValue from;
+		private readonly TFunc function;
 
-        public EdgeUpdate (SymValue from, TFunc function)
-        {
-            this.from = from;
-            this.function = function;
-        }
+		public EdgeUpdate (SymValue from, TFunc function)
+		{
+			this.from = from;
+			this.function = function;
+		}
 
-        #region Overrides of Update
-        public override void Replay (MergeInfo<TFunc, TAbstractDomain> merge)
-        {
-            if (!merge.IsCommon (this.from))
-                return;
+		#region Overrides of Update
+		public override void Replay (MergeInfo<TFunc, TAbstractDomain> merge)
+		{
+			if (!merge.IsCommon (this.from))
+				return;
 
-            SymValue sv1 = merge.Graph1.LookupWithoutManifesting (this.from, this.function);
-            SymValue sv2 = merge.Graph2.LookupWithoutManifesting (this.from, this.function);
-            if (DebugOptions.Debug)
-            {
-                Console.WriteLine ("Replay edge update: {0} -{1} -> [ {2}, {3} ]",
-                                   this.from, this.function, sv1, sv2);
-            }
-            if (sv1 == null) {
-                if (this.function.KeepAsBottomField && merge.Graph1.HasAllBottomFields (this.from))
-                    sv1 = merge.Graph1.BottomPlaceHolder;
-                else {
-                    if (sv2 == null || merge.Widen || !this.function.ManifestField)
-                        return;
-                    if (DebugOptions.Debug)
-                    {
-                        Console.WriteLine ("---SymGraph changed due to manifestation of a top edge in Graph1");
-                    }
-                    merge.Changed = true;
-                }
-            }
-            if (sv2 == null) {
-                if (this.function.KeepAsBottomField && merge.Graph2.HasAllBottomFields (this.from))
-                    sv2 = merge.Graph2.BottomPlaceHolder;
-                else {
-                    if (merge.Widen || !this.function.ManifestField)
-                        return;
-                    if (DebugOptions.Debug)
-                    {
-                        Console.WriteLine ("---SymGraph changed due to manifestation of due to missing target in Graph2");
-                    }
-                    merge.Changed = true;
-                    return;
-                }
-            }
+			SymValue sv1 = merge.Graph1.LookupWithoutManifesting (this.from, this.function);
+			SymValue sv2 = merge.Graph2.LookupWithoutManifesting (this.from, this.function);
+			if (DebugOptions.Debug)
+			{
+				Console.WriteLine ("Replay edge update: {0} -{1} -> [ {2}, {3} ]",
+				                   this.from, this.function, sv1, sv2);
+			}
+			if (sv1 == null) {
+				if (this.function.KeepAsBottomField && merge.Graph1.HasAllBottomFields (this.from))
+					sv1 = merge.Graph1.BottomPlaceHolder;
+				else {
+					if (sv2 == null || merge.Widen || !this.function.ManifestField)
+						return;
+					if (DebugOptions.Debug)
+					{
+						Console.WriteLine ("---SymGraph changed due to manifestation of a top edge in Graph1");
+					}
+					merge.Changed = true;
+				}
+			}
+			if (sv2 == null) {
+				if (this.function.KeepAsBottomField && merge.Graph2.HasAllBottomFields (this.from))
+					sv2 = merge.Graph2.BottomPlaceHolder;
+				else {
+					if (merge.Widen || !this.function.ManifestField)
+						return;
+					if (DebugOptions.Debug)
+					{
+						Console.WriteLine ("---SymGraph changed due to manifestation of due to missing target in Graph2");
+					}
+					merge.Changed = true;
+					return;
+				}
+			}
 
-            SymValue r = merge.AddJointEdge (sv1, sv2, this.function, this.from);
-            if (r == null || r.UniqueId <= merge.LastCommonVariable)
-                return;
+			SymValue r = merge.AddJointEdge (sv1, sv2, this.function, this.from);
+			if (r == null || r.UniqueId <= merge.LastCommonVariable)
+				return;
 
-            merge.JoinSymbolicValue (sv1, sv2, r);
-        }
+			merge.JoinSymbolicValue (sv1, sv2, r);
+		}
 
-        public override void ReplayElimination (MergeInfo<TFunc, TAbstractDomain> merge)
-        {
-        }
-        #endregion
-    }
+		public override void ReplayElimination (MergeInfo<TFunc, TAbstractDomain> merge)
+		{
+		}
+		#endregion
+	}
 }

@@ -1,9 +1,9 @@
 //
 // ProfilePropertySettingsTest.cs 
-//    - unit tests for System.Web.Configuration.ProfilePropertySettings
+//	- unit tests for System.Web.Configuration.ProfilePropertySettings
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,48 +38,48 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-    [TestFixture]
-    public class ProfilePropertySettingsTest {
+	[TestFixture]
+	public class ProfilePropertySettingsTest {
 
-        [Test]
-        public void Defaults ()
-        {
-            ProfilePropertySettings p = new ProfilePropertySettings ("Hi");
+		[Test]
+		public void Defaults ()
+		{
+			ProfilePropertySettings p = new ProfilePropertySettings ("Hi");
 
-            Assert.AreEqual ("Hi", p.Name, "A1");
-            Assert.IsFalse (p.AllowAnonymous, "A2");
-            Assert.AreEqual ("", p.CustomProviderData, "A3");
-            Assert.AreEqual ("", p.DefaultValue, "A4");
-            Assert.AreEqual ("", p.Provider, "A5");
-            Assert.IsFalse (p.ReadOnly, "A6");
-            Assert.AreEqual (SerializationMode.ProviderSpecific, p.SerializeAs, "A7");
-            Assert.AreEqual ("string", p.Type, "A8");
-        }
+			Assert.AreEqual ("Hi", p.Name, "A1");
+			Assert.IsFalse (p.AllowAnonymous, "A2");
+			Assert.AreEqual ("", p.CustomProviderData, "A3");
+			Assert.AreEqual ("", p.DefaultValue, "A4");
+			Assert.AreEqual ("", p.Provider, "A5");
+			Assert.IsFalse (p.ReadOnly, "A6");
+			Assert.AreEqual (SerializationMode.ProviderSpecific, p.SerializeAs, "A7");
+			Assert.AreEqual ("string", p.Type, "A8");
+		}
 
-        [Test]
-        public void NameValidatorSuccess ()
-        {
-            ProfilePropertySettings p = new ProfilePropertySettings ("Hi");
+		[Test]
+		public void NameValidatorSuccess ()
+		{
+			ProfilePropertySettings p = new ProfilePropertySettings ("Hi");
 
-            p.Name = "hi";
-            p.Name = "hi_there";
-            p.Name = "string";
-            p.Name = "Type";
-            p.Name = "Property";
-        }
+			p.Name = "hi";
+			p.Name = "hi_there";
+			p.Name = "string";
+			p.Name = "Type";
+			p.Name = "Property";
+		}
 
-        [Test]
-        public void NameValidatorFailures ()
-        {
-            ProfilePropertySettings p = new ProfilePropertySettings ("Hi");
-            bool f;
+		[Test]
+		public void NameValidatorFailures ()
+		{
+			ProfilePropertySettings p = new ProfilePropertySettings ("Hi");
+			bool f;
 
-            f = false; try { p.Name = ""; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A1");
-            //            f = false; try { p.Name = "1Hi"; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A2");
-            //            f = false; try { p.Name = "Hi$"; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A3");
-            //            f = false; try { p.Name = "12345"; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A3");
-        }
-    }
+			f = false; try { p.Name = ""; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A1");
+			//			f = false; try { p.Name = "1Hi"; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A2");
+			//			f = false; try { p.Name = "Hi$"; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A3");
+			//			f = false; try { p.Name = "12345"; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A3");
+		}
+	}
 
 }
 

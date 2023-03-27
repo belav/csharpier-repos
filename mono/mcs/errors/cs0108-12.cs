@@ -6,17 +6,17 @@ using System;
 using System.Runtime.InteropServices;
  
 class Test {
-    [DllImport (Libs.MyLib)]
-    private static extern void foo ();
+	[DllImport (Libs.MyLib)]
+	private static extern void foo ();
  
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }
  
 class Libs : Foo {
-    internal const string MyLib = "SomeLibrary";
+	internal const string MyLib = "SomeLibrary";
 }
 class Foo {
-    internal const string MyLib = "Foo";
+	internal const string MyLib = "Foo";
 }

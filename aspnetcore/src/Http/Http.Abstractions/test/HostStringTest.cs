@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Testing;
@@ -21,11 +21,11 @@ public class HostStringTests
     [InlineData("localhost", "localhost")]
     [InlineData("1.2.3.4", "1.2.3.4")]
     [InlineData("[2001:db8:a0b:12f0::1]", "[2001:db8:a0b:12f0::1]")]
-    [InlineData("????", "????")]
+    [InlineData("本地主機", "本地主機")]
     [InlineData("localhost:5000", "localhost")]
     [InlineData("1.2.3.4:5000", "1.2.3.4")]
     [InlineData("[2001:db8:a0b:12f0::1]:5000", "[2001:db8:a0b:12f0::1]")]
-    [InlineData("????:5000", "????")]
+    [InlineData("本地主機:5000", "本地主機")]
     public void Domain_ExtractsHostFromValue(string sourceValue, string expectedDomain)
     {
         // Arrange
@@ -42,11 +42,11 @@ public class HostStringTests
     [InlineData("localhost", null)]
     [InlineData("1.2.3.4", null)]
     [InlineData("[2001:db8:a0b:12f0::1]", null)]
-    [InlineData("????", null)]
+    [InlineData("本地主機", null)]
     [InlineData("localhost:5000", 5000)]
     [InlineData("1.2.3.4:5000", 5000)]
     [InlineData("[2001:db8:a0b:12f0::1]:5000", 5000)]
-    [InlineData("????:5000", 5000)]
+    [InlineData("本地主機:5000", 5000)]
     public void Port_ExtractsPortFromValue(string sourceValue, int? expectedPort)
     {
         // Arrange
@@ -78,7 +78,7 @@ public class HostStringTests
     [InlineData("1.2.3.4", 5000, "1.2.3.4", 5000)]
     [InlineData("[2001:db8:a0b:12f0::1]", 5000, "[2001:db8:a0b:12f0::1]", 5000)]
     [InlineData("2001:db8:a0b:12f0::1", 5000, "[2001:db8:a0b:12f0::1]", 5000)]
-    [InlineData("????", 5000, "????", 5000)]
+    [InlineData("本地主機", 5000, "本地主機", 5000)]
     public void Ctor_CreatesFromHostAndPort(string sourceHost, int sourcePort, string expectedHost, int expectedPort)
     {
         // Arrange
@@ -135,7 +135,7 @@ public class HostStringTests
     [InlineData("127.0.0.1", "127.0.0.1")]
     [InlineData("127.0.0.1:443", "127.0.0.1")]
     [InlineData("xn--c1yn36f:443", "xn--c1yn36f")]
-    [InlineData("??", "??")]
+    [InlineData("點看", "點看")]
     [InlineData("[::ABC]", "[::aBc]")]
     [InlineData("[::1]:80", "[::1]")]
     [InlineData("[::1]:", "[::1]")]
@@ -155,7 +155,7 @@ public class HostStringTests
     [InlineData("foo.com:443", "*.example.com")]
     [InlineData("foo.example.com.bar:443", "*.example.com")]
     [InlineData(".com:443", "*.com")]
-    [InlineData("xn--c1yn36f:443", "??")]
+    [InlineData("xn--c1yn36f:443", "點看")]
     [InlineData("[::1", "[::1]")]
     [InlineData("[::1:80", "[::1]")]
     [InlineData("::1", "::1")] // Brackets are added to the host before the comparison

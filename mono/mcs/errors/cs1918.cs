@@ -4,17 +4,17 @@
 
 struct S
 {
-    public int X;
+	public int X;
 }
 
 class C
 {
-    public S Value {
-        set; get;
-    }
+	public S Value {
+		set; get;
+	}
 
-    static void Main ()
-    {
-        C c = new C { Value = { X = 2 } };
-    }
+	static void Main ()
+	{
+		C c = new C { Value = { X = 2 } };
+	}
 }

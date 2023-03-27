@@ -2,7 +2,7 @@
 // MethodSubroutine.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -34,103 +34,103 @@ using Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines {
-    class MethodSubroutine<Label, Handler> : SubroutineWithHandlers<Label, Handler>, IMethodInfo {
-        private readonly Method method;
-        private HashSet<BlockWithLabels<Label>> blocks_ending_in_return_point;
+	class MethodSubroutine<Label, Handler> : SubroutineWithHandlers<Label, Handler>, IMethodInfo {
+		private readonly Method method;
+		private HashSet<BlockWithLabels<Label>> blocks_ending_in_return_point;
 
-        public MethodSubroutine (SubroutineFacade subroutineFacade, Method method)
-            : base (subroutineFacade)
-        {
-            this.method = method;
-        }
+		public MethodSubroutine (SubroutineFacade subroutineFacade, Method method)
+			: base (subroutineFacade)
+		{
+			this.method = method;
+		}
 
-        public MethodSubroutine (SubroutineFacade SubroutineFacade,
-                                 Method method, Label startLabel,
-                                 SubroutineWithHandlersBuilder<Label, Handler> builder) : base (SubroutineFacade, startLabel, builder)
-        {
-            this.method = method;
-            IMetaDataProvider metaDataProvider = this.SubroutineFacade.MetaDataProvider;
-            builder.BuildBlocks (startLabel, this);
-            BlockWithLabels<Label> targetBlock = GetTargetBlock (startLabel);
-            Commit ();
+		public MethodSubroutine (SubroutineFacade SubroutineFacade,
+		                         Method method, Label startLabel,
+		                         SubroutineWithHandlersBuilder<Label, Handler> builder) : base (SubroutineFacade, startLabel, builder)
+		{
+			this.method = method;
+			IMetaDataProvider metaDataProvider = this.SubroutineFacade.MetaDataProvider;
+			builder.BuildBlocks (startLabel, this);
+			BlockWithLabels<Label> targetBlock = GetTargetBlock (startLabel);
+			Commit ();
 
-            TypeNode type = metaDataProvider.DeclaringType (method);
-            Subroutine invariant = this.SubroutineFacade.GetInvariant (type);
-            if (invariant != null && !metaDataProvider.IsConstructor (method) && !metaDataProvider.IsStatic (method)) {
-                AddEdgeSubroutine (Entry, targetBlock, invariant, EdgeTag.Entry);
-                Subroutine requires = this.SubroutineFacade.GetRequires (method);
-                if (requires != null)
-                    AddEdgeSubroutine (Entry, targetBlock, requires, EdgeTag.Entry);
-            } else
-                AddEdgeSubroutine (Entry, targetBlock, this.SubroutineFacade.GetRequires (method), EdgeTag.Entry);
+			TypeNode type = metaDataProvider.DeclaringType (method);
+			Subroutine invariant = this.SubroutineFacade.GetInvariant (type);
+			if (invariant != null && !metaDataProvider.IsConstructor (method) && !metaDataProvider.IsStatic (method)) {
+				AddEdgeSubroutine (Entry, targetBlock, invariant, EdgeTag.Entry);
+				Subroutine requires = this.SubroutineFacade.GetRequires (method);
+				if (requires != null)
+					AddEdgeSubroutine (Entry, targetBlock, requires, EdgeTag.Entry);
+			} else
+				AddEdgeSubroutine (Entry, targetBlock, this.SubroutineFacade.GetRequires (method), EdgeTag.Entry);
 
-            if (this.blocks_ending_in_return_point == null)
-                return;
+			if (this.blocks_ending_in_return_point == null)
+				return;
 
-            Subroutine ensures = this.SubroutineFacade.GetEnsures (method);
-            bool putInvariantAfterExit = !metaDataProvider.IsStatic (method) 
-                && !metaDataProvider.IsFinalizer (method) && !metaDataProvider.IsDispose (method);
-            foreach (var block in this.blocks_ending_in_return_point) {
-                if (putInvariantAfterExit)
-                    AddEdgeSubroutine (block, Exit, invariant, EdgeTag.Exit);
-                AddEdgeSubroutine (block, Exit, ensures, EdgeTag.Exit);
-            }
+			Subroutine ensures = this.SubroutineFacade.GetEnsures (method);
+			bool putInvariantAfterExit = !metaDataProvider.IsStatic (method) 
+				&& !metaDataProvider.IsFinalizer (method) && !metaDataProvider.IsDispose (method);
+			foreach (var block in this.blocks_ending_in_return_point) {
+				if (putInvariantAfterExit)
+					AddEdgeSubroutine (block, Exit, invariant, EdgeTag.Exit);
+				AddEdgeSubroutine (block, Exit, ensures, EdgeTag.Exit);
+			}
 
-            if (ensures != null) {
-                throw new NotImplementedException();
-            }
+			if (ensures != null) {
+				throw new NotImplementedException();
+			}
 
-            this.blocks_ending_in_return_point = null;
-        }
+			this.blocks_ending_in_return_point = null;
+		}
 
-        #region Overrides of Subroutine
-        public override void Initialize ()
-        {
-        }
-        #endregion
+		#region Overrides of Subroutine
+		public override void Initialize ()
+		{
+		}
+		#endregion
 
-        #region Overrides of SubroutineBase<Label>
-        public override void AddReturnBlock (BlockWithLabels<Label> block)
-        {
-            if (this.blocks_ending_in_return_point == null)
-                this.blocks_ending_in_return_point = new HashSet<BlockWithLabels<Label>> ();
+		#region Overrides of SubroutineBase<Label>
+		public override void AddReturnBlock (BlockWithLabels<Label> block)
+		{
+			if (this.blocks_ending_in_return_point == null)
+				this.blocks_ending_in_return_point = new HashSet<BlockWithLabels<Label>> ();
 
-            this.blocks_ending_in_return_point.Add (block);
+			this.blocks_ending_in_return_point.Add (block);
 
-            base.AddReturnBlock (block);
-        }
-        #endregion
+			base.AddReturnBlock (block);
+		}
+		#endregion
 
-        #region Implementation of IMethodInfo<Method>
-        public Method Method
-        {
-            get { return this.method; }
-        }
-        #endregion
+		#region Implementation of IMethodInfo<Method>
+		public Method Method
+		{
+			get { return this.method; }
+		}
+		#endregion
 
-        public override SubroutineKind Kind
-        {
-            get { return SubroutineKind.Method; }
-        }
+		public override SubroutineKind Kind
+		{
+			get { return SubroutineKind.Method; }
+		}
 
-        public override bool HasReturnValue
-        {
-            get { return !this.SubroutineFacade.MetaDataProvider.IsVoidMethod (this.method); }
-        }
+		public override bool HasReturnValue
+		{
+			get { return !this.SubroutineFacade.MetaDataProvider.IsVoidMethod (this.method); }
+		}
 
-        public override bool IsMethod
-        {
-            get { return true; }
-        }
+		public override bool IsMethod
+		{
+			get { return true; }
+		}
 
-        public override bool IsConstructor
-        {
-            get { return this.SubroutineFacade.MetaDataProvider.IsConstructor (this.method); }
-        }
+		public override bool IsConstructor
+		{
+			get { return this.SubroutineFacade.MetaDataProvider.IsConstructor (this.method); }
+		}
 
-        public override string Name
-        {
-            get { return this.SubroutineFacade.MetaDataProvider.FullName (this.method); }
-        }
-    }
+		public override string Name
+		{
+			get { return this.SubroutineFacade.MetaDataProvider.FullName (this.method); }
+		}
+	}
 }

@@ -32,9 +32,9 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public enum ExtendedDNFlag
-    {
-        HexString,
-        StandardString
-    }
+	public enum ExtendedDNFlag
+	{
+		HexString,
+		StandardString
+	}
 }

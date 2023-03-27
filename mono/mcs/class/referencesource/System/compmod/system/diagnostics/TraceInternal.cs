@@ -318,7 +318,7 @@ namespace System.Diagnostics {
             InitializeSettings();
         }
 
-        public static void TraceEvent(TraceEventType eventType, int id, string format, params object[] args) {
+    	public static void TraceEvent(TraceEventType eventType, int id, string format, params object[] args) {
 
             TraceEventCache EventCache = new TraceEventCache();
 
@@ -368,8 +368,8 @@ namespace System.Diagnostics {
                     }
                 }
             }
-        }
-        
+    	}
+    	
 
         public static void Write(string message) {
             if (UseGlobalLock) {

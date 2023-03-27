@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -973,9 +973,9 @@ public class C
             var sources1 = @"
 struct S
 {
-    public I F(object x)
-    {
-        return /*<bind>*/new I(x)/*</bind>*/;
+	public I F(object x)
+	{
+		return /*<bind>*/new I(x)/*</bind>*/;
     }
 }
 ";
@@ -993,7 +993,7 @@ IInvalidOperation (OperationKind.Invalid, Type: I, IsInvalid) (Syntax: 'new I(x)
 ";
             var expectedDiagnostics = new DiagnosticDescription[] {
                 // (6,24): error CS1729: 'I' does not contain a constructor that takes 1 arguments
-                //         return /*<bind>*/new I(x)/*</bind>*/;
+                // 		return /*<bind>*/new I(x)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "I").WithArguments("I", "1").WithLocation(6, 24)
             };
 

@@ -32,64 +32,64 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-    [TestFixture]
-    public class OracleCommand_Connection : GHTBase
-    {
-        OracleCommand cmd;
-        OracleConnection con;
+	[TestFixture]
+	public class OracleCommand_Connection : GHTBase
+	{
+		OracleCommand cmd;
+		OracleConnection con;
 
-        [SetUp]
-        public void SetUp()
-        {
-            cmd = new OracleCommand("SELECT * FROM Employees");
-            con = new OracleConnection();
-        }
+		[SetUp]
+		public void SetUp()
+		{
+			cmd = new OracleCommand("SELECT * FROM Employees");
+			con = new OracleConnection();
+		}
 
-        [TearDown]
-        public void TearDown()
-        {
-            if (con != null)
-            {
-                if (con.State == ConnectionState.Open) con.Close();
-            }
-        }
+		[TearDown]
+		public void TearDown()
+		{
+			if (con != null)
+			{
+				if (con.State == ConnectionState.Open) con.Close();
+			}
+		}
 
-        public static void Main()
-        {
-            OracleCommand_Connection tc = new OracleCommand_Connection();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OracleCommand_Connection");
-                tc.SetUp();
-                tc.run();
-                tc.TearDown();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+		public static void Main()
+		{
+			OracleCommand_Connection tc = new OracleCommand_Connection();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OracleCommand_Connection");
+				tc.SetUp();
+				tc.run();
+				tc.TearDown();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            Exception exp = null;
-            try
-            {
-                BeginCase("Command Connection - set");
-                cmd.Connection = con;    
-                Compare(cmd.Connection ,con);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+		[Test]
+		public void run()
+		{
+			Exception exp = null;
+			try
+			{
+				BeginCase("Command Connection - set");
+				cmd.Connection = con;	
+				Compare(cmd.Connection ,con);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Command Connection - ctor");
-                cmd = new OracleCommand("",con);
-                Compare(cmd.Connection ,con);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-        }
-    }
+			try
+			{
+				BeginCase("Command Connection - ctor");
+				cmd = new OracleCommand("",con);
+				Compare(cmd.Connection ,con);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
+		}
+	}
 }

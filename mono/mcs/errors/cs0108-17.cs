@@ -4,10 +4,10 @@
 
 public abstract class Base
 {
-    public delegate void Action<U> (U val);
+	public delegate void Action<U> (U val);
 }
 
 public class Derived : Base
 {
-    public delegate void Action<U> (U i);
+	public delegate void Action<U> (U i);
 }

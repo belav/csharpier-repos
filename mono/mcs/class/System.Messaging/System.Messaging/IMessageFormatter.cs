@@ -4,7 +4,7 @@
 // Authors:
 //      Peter Van Isacker (sclytrack@planetinternet.be)
 //
-//    (C) Ximian, Inc.  http://www.ximian.com
+//	(C) Ximian, Inc.  http://www.ximian.com
 //
 
 //
@@ -34,19 +34,19 @@ using System.Messaging.Design;
 
 namespace System.Messaging 
 {
-    [TypeConverter (typeof(MessageFormatterConverter))]
-    public interface IMessageFormatter: ICloneable 
-    {
-        bool CanRead(Message message);
-        
-        object Read(Message message);
-        
-        void Write(Message message, object obj);
-    }
-    
-    internal enum FormatterTypes
-    {
-        Xml = 0,
-        Binary = 768
-    }
+	[TypeConverter (typeof(MessageFormatterConverter))]
+	public interface IMessageFormatter: ICloneable 
+	{
+		bool CanRead(Message message);
+		
+		object Read(Message message);
+		
+		void Write(Message message, object obj);
+	}
+	
+	internal enum FormatterTypes
+	{
+		Xml = 0,
+		Binary = 768
+	}
 }

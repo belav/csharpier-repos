@@ -3,10 +3,10 @@
 
 class A
 {
-    public static void Main ()
-    {
-        using (var undo ())
-        {
-        }
-    }
+	public static void Main ()
+	{
+		using (var undo ())
+		{
+		}
+	}
 }

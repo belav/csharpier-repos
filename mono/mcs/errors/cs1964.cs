@@ -3,7 +3,7 @@
 
 class C
 {
-    public static implicit operator C (dynamic d)
-    {
-    }
+	public static implicit operator C (dynamic d)
+	{
+	}
 }

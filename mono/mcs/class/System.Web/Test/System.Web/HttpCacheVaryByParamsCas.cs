@@ -1,9 +1,9 @@
 //
 // HttpCacheVaryByParamsCas.cs 
-//    - CAS unit tests for System.Web.HttpCacheVaryByParams
+//	- CAS unit tests for System.Web.HttpCacheVaryByParams
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,41 +36,41 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HttpCacheVaryByParamsCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HttpCacheVaryByParamsCas : AspNetHostingMinimal {
 
-        private HttpResponse response;
+		private HttpResponse response;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            response = new HttpResponse (Console.Out);
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			response = new HttpResponse (Console.Out);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HttpCacheVaryByParams cache = response.Cache.VaryByParams;
-            Assert.IsFalse (cache.IgnoreParams, "IgnoreParams");
-            cache.IgnoreParams = true;
-            Assert.IsFalse (cache["mono"], "this[string]");
-            cache["mono"] = true;
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HttpCacheVaryByParams cache = response.Cache.VaryByParams;
+			Assert.IsFalse (cache.IgnoreParams, "IgnoreParams");
+			cache.IgnoreParams = true;
+			Assert.IsFalse (cache["mono"], "this[string]");
+			cache["mono"] = true;
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            // no public ctor is available but we know that it's properties don't have any restrictions
-            MethodInfo mi = this.Type.GetProperty ("IgnoreParams").GetGetMethod ();
-            Assert.IsNotNull (mi, "get_IgnoreParams");
-            return mi.Invoke (response.Cache.VaryByParams, null);
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			// no public ctor is available but we know that it's properties don't have any restrictions
+			MethodInfo mi = this.Type.GetProperty ("IgnoreParams").GetGetMethod ();
+			Assert.IsNotNull (mi, "get_IgnoreParams");
+			return mi.Invoke (response.Cache.VaryByParams, null);
+		}
 
-        public override Type Type {
-            get { return typeof (HttpCacheVaryByParams); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HttpCacheVaryByParams); }
+		}
+	}
 }

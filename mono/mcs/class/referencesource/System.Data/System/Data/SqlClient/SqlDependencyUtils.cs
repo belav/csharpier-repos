@@ -74,7 +74,7 @@ namespace System.Data.SqlClient {
         //
         // LOCKS: don't update _nextTimeout outside of the _dependencyHash.SyncRoot lock.
 
-        private bool     _SqlDependencyTimeOutTimerStarted = false;
+		private bool     _SqlDependencyTimeOutTimerStarted = false;
         // Next timeout for any of the dependencies in the dependency table.
         private DateTime _nextTimeout;
         // Timer to periodically check the dependencies in the table and see if anyone needs

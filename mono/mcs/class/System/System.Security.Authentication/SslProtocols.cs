@@ -2,8 +2,8 @@
 // System.Net.Security.SslProtocolType.cs
 //
 // Authors:
-//    Tim Coleman (tim@timcoleman.com)
-//    Sebastien Pouliot  <sebastien@xamarin.com>
+//	Tim Coleman (tim@timcoleman.com)
+//	Sebastien Pouliot  <sebastien@xamarin.com>
 //
 // Copyright (C) Tim Coleman, 2004
 // Copyright (C) 2004, 2006 Novell, Inc (http://www.novell.com)
@@ -31,18 +31,18 @@
 
 namespace System.Security.Authentication {
 
-    [Flags]
-    public enum SslProtocols {
-        None,
-        Ssl2 = 12,
-        Ssl3 = 48,
-        Tls = 192,
-        [MonoTODO ("unsupported")]
-        Tls11 = 768,
-        [MonoTODO ("unsupported")]
-        Tls12 = 3072,
-        Tls13 = 12288,
-        Default = Ssl3 | Tls
-    }
+	[Flags]
+	public enum SslProtocols {
+		None,
+		Ssl2 = 12,
+		Ssl3 = 48,
+		Tls = 192,
+		[MonoTODO ("unsupported")]
+		Tls11 = 768,
+		[MonoTODO ("unsupported")]
+		Tls12 = 3072,
+		Tls13 = 12288,
+		Default = Ssl3 | Tls
+	}
 }
 

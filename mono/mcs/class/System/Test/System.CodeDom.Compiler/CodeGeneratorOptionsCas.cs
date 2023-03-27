@@ -1,9 +1,9 @@
 //
 // CodeGeneratorOptionsCas.cs 
-//    - CAS unit tests for System.CodeDom.Compiler.CodeGeneratorOptions
+//	- CAS unit tests for System.CodeDom.Compiler.CodeGeneratorOptions
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,45 +39,45 @@ using MonoTests.System.CodeDom.Compiler;
 
 namespace MonoCasTests.System.CodeDom.Compiler {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeGeneratorOptionsCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeGeneratorOptionsCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests ()
-        {
-            CodeGeneratorOptionsTest unit = new CodeGeneratorOptionsTest ();
-            unit.Defaults ();
-            unit.ReSetDefault ();
-            unit.Nullify ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTests ()
+		{
+			CodeGeneratorOptionsTest unit = new CodeGeneratorOptionsTest ();
+			unit.Defaults ();
+			unit.ReSetDefault ();
+			unit.Nullify ();
+		}
 
-        [Test]
-        // no restriction
-        public void LinkDemand ()
-        {
-            ConstructorInfo ci = typeof (CodeGeneratorOptions).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor()");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
+		[Test]
+		// no restriction
+		public void LinkDemand ()
+		{
+			ConstructorInfo ci = typeof (CodeGeneratorOptions).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor()");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
 
-        [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "Mono")]
-        [ExpectedException (typeof (SecurityException))]
-        public void LinkDemand_Deny_Anything ()
-        {
-            // denying anything results in a non unrestricted permission set
-            ConstructorInfo ci = typeof (CodeGeneratorOptions).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor()");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[EnvironmentPermission (SecurityAction.Deny, Read = "Mono")]
+		[ExpectedException (typeof (SecurityException))]
+		public void LinkDemand_Deny_Anything ()
+		{
+			// denying anything results in a non unrestricted permission set
+			ConstructorInfo ci = typeof (CodeGeneratorOptions).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor()");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

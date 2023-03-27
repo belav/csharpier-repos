@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.NetworkInterface
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //      Miguel de Icaza (miguel@novell.com)
 //      Eric Butler (eric@extremeboredom.net)
 //      Marek Habersack (mhabersack@novell.com)
@@ -41,52 +41,52 @@ using System.IO;
 using System.Globalization;
 
 namespace System.Net.NetworkInformation {
-    static class SystemNetworkInterface {
+	static class SystemNetworkInterface {
 
-        static readonly NetworkInterfaceFactory nif = NetworkInterfaceFactory.Create ();
+		static readonly NetworkInterfaceFactory nif = NetworkInterfaceFactory.Create ();
 
-        public static NetworkInterface [] GetNetworkInterfaces ()
-        {
-            try {
-                return nif.GetAllNetworkInterfaces ();
-            } catch {
-                return new NetworkInterface [0];
-            }
-        }
+		public static NetworkInterface [] GetNetworkInterfaces ()
+		{
+			try {
+				return nif.GetAllNetworkInterfaces ();
+			} catch {
+				return new NetworkInterface [0];
+			}
+		}
 
-        public static bool InternalGetIsNetworkAvailable ()
-        {
-            // TODO:
-            return true;
-        }
+		public static bool InternalGetIsNetworkAvailable ()
+		{
+			// TODO:
+			return true;
+		}
 
-        public static int InternalLoopbackInterfaceIndex {
-            get {
-                return nif.GetLoopbackInterfaceIndex ();
-            }
-        }
+		public static int InternalLoopbackInterfaceIndex {
+			get {
+				return nif.GetLoopbackInterfaceIndex ();
+			}
+		}
 
-        public static int InternalIPv6LoopbackInterfaceIndex {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		public static int InternalIPv6LoopbackInterfaceIndex {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        public static IPAddress GetNetMask (IPAddress address)
-        {
-            return nif.GetNetMask (address);
-        }
-    }
+		public static IPAddress GetNetMask (IPAddress address)
+		{
+			return nif.GetNetMask (address);
+		}
+	}
 
-    abstract class NetworkInterfaceFactory
-    {
-        public abstract NetworkInterface [] GetAllNetworkInterfaces ();
-        public abstract int GetLoopbackInterfaceIndex ();
-        public abstract IPAddress GetNetMask (IPAddress address);
+	abstract class NetworkInterfaceFactory
+	{
+		public abstract NetworkInterface [] GetAllNetworkInterfaces ();
+		public abstract int GetLoopbackInterfaceIndex ();
+		public abstract IPAddress GetNetMask (IPAddress address);
 
-        public static NetworkInterfaceFactory Create ()
-        {
-            return NetworkInterfaceFactoryPal.Create ();
-        }
-    }
+		public static NetworkInterfaceFactory Create ()
+		{
+			return NetworkInterfaceFactoryPal.Create ();
+		}
+	}
 }

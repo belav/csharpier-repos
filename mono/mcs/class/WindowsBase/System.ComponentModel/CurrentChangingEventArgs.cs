@@ -20,8 +20,8 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
-//    Brian O'Keefe (zer0keefie@gmail.com)
+//	Chris Toshok (toshok@ximian.com)
+//	Brian O'Keefe (zer0keefie@gmail.com)
 //
 
 using System;
@@ -29,35 +29,35 @@ using System.Windows;
 
 namespace System.ComponentModel {
 
-    public class CurrentChangingEventArgs : EventArgs
-    {
-        private bool canCancelEvent;
-        private bool canceled;
-    
-        public CurrentChangingEventArgs ()
-            :this(true)
-        {
-        }
+	public class CurrentChangingEventArgs : EventArgs
+	{
+		private bool canCancelEvent;
+		private bool canceled;
+	
+		public CurrentChangingEventArgs ()
+			:this(true)
+		{
+		}
 
-        public CurrentChangingEventArgs (bool isCancelable)
-        {
-            canCancelEvent = isCancelable;
-            canceled = false;
-        }
+		public CurrentChangingEventArgs (bool isCancelable)
+		{
+			canCancelEvent = isCancelable;
+			canceled = false;
+		}
 
-        public bool Cancel {
-            get { return canceled; }
-            set {
-                if(!IsCancelable && value)
-                    throw new InvalidOperationException("Cannot cancel an event that is not Cancelable.");
-                canceled = value; 
-            }
-        }
+		public bool Cancel {
+			get { return canceled; }
+			set {
+				if(!IsCancelable && value)
+					throw new InvalidOperationException("Cannot cancel an event that is not Cancelable.");
+				canceled = value; 
+			}
+		}
 
-        public bool IsCancelable {
-            get { return canCancelEvent; }
-        }
-        
-    }
+		public bool IsCancelable {
+			get { return canCancelEvent; }
+		}
+		
+	}
 
 }

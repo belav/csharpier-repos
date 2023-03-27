@@ -38,13 +38,13 @@ using System.EnterpriseServices;
 
 // General Information about the System.EnterpriseServices assembly
 
-    [assembly: AssemblyTitle ("System.EnterpriseServices.dll")]
-    [assembly: AssemblyDescription ("System.EnterpriseServices.dll")]
-    [assembly: AssemblyDefaultAlias ("System.EnterpriseServices.dll")]
+	[assembly: AssemblyTitle ("System.EnterpriseServices.dll")]
+	[assembly: AssemblyDescription ("System.EnterpriseServices.dll")]
+	[assembly: AssemblyDefaultAlias ("System.EnterpriseServices.dll")]
 
-    [assembly: AssemblyCompany (Consts.MonoCompany)]
-    [assembly: AssemblyProduct (Consts.MonoProduct)]
-    [assembly: AssemblyCopyright (Consts.MonoCopyright)]
+	[assembly: AssemblyCompany (Consts.MonoCompany)]
+	[assembly: AssemblyProduct (Consts.MonoProduct)]
+	[assembly: AssemblyCopyright (Consts.MonoCopyright)]
 [assembly: AssemblyVersion (Consts.FxVersion)]
 [assembly: SatelliteContractVersion (Consts.FxVersion)]
 

@@ -2,8 +2,8 @@
 // System.Web.UI.LiteralControl.cs
 //
 // Author:
-//     Bob Smith <bob@thestuff.net>
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+// 	Bob Smith <bob@thestuff.net>
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) Bob Smith
 // Copyright (C) 2002-2010 Novell, Inc (http://www.novell.com)
@@ -33,27 +33,27 @@ using System.Security.Permissions;
 
 namespace System.Web.UI {
 
-    // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [ToolboxItem(false)]
+	// CAS
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[ToolboxItem(false)]
         public class LiteralControl : Control, ITextControl
         {
                 string _text;
 
-            public LiteralControl ()
-            {
-                EnableViewState = false;
-                AutoID = false;
+			public LiteralControl ()
+			{
+				EnableViewState = false;
+				AutoID = false;
 
-            }
+			}
 
-            public LiteralControl (string text)
-                : this ()
-            {
-                Text = text;
-            }
+			public LiteralControl (string text)
+				: this ()
+			{
+				Text = text;
+			}
 
                 public virtual string Text {
                         get { return _text; }
@@ -62,15 +62,15 @@ namespace System.Web.UI {
                         }
                 }
 
-        protected internal override void Render (HtmlTextWriter output)
+		protected internal override void Render (HtmlTextWriter output)
                 {
                         output.Write (_text);
                 }
 
-        protected override ControlCollection CreateControlCollection ()
-        {
-            return new EmptyControlCollection (this);
-        }
+		protected override ControlCollection CreateControlCollection ()
+		{
+			return new EmptyControlCollection (this);
+		}
         }
 }
 

@@ -2,7 +2,7 @@
 // System.Web.Hosting.AppDomainFactory.cs 
 // 
 // Author:
-//    Miguel de Icaza (miguel@novell.com)
+//	Miguel de Icaza (miguel@novell.com)
 //
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -31,21 +31,21 @@ using System.Security.Permissions;
 
 namespace System.Web.Hosting {
 
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class AppDomainFactory : IAppDomainFactory {
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class AppDomainFactory : IAppDomainFactory {
 
-        [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Minimal)]
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        public AppDomainFactory ()
-        {
-        }
+		[AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Minimal)]
+		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+		public AppDomainFactory ()
+		{
+		}
 
-        [MonoTODO ("Not implemented")]
-        public object Create (string module, string typeName, string appId, string appPath, string strUrlOfAppOrigin, int iZone)
-        {
-            throw new NotImplementedException ();
-        }
-    }
-    
+		[MonoTODO ("Not implemented")]
+		public object Create (string module, string typeName, string appId, string appPath, string strUrlOfAppOrigin, int iZone)
+		{
+			throw new NotImplementedException ();
+		}
+	}
+	
 }

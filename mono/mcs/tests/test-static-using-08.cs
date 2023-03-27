@@ -3,15 +3,15 @@ using static A;
 
 class A
 {
-    public class N
-    {
-    }
+	public class N
+	{
+	}
 }
 
 class Test
 {
-    public static void Main ()
-    {
-        N n = default (N); // Am I Int32 or A.N
-    }
+	public static void Main ()
+	{
+		N n = default (N); // Am I Int32 or A.N
+	}
 }

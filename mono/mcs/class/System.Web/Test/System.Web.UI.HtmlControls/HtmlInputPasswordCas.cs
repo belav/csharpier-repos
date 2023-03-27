@@ -1,9 +1,9 @@
 //
 // HtmlInputPasswordCas.cs 
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlInputPassword
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlInputPassword
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,26 +38,26 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlInputPasswordCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlInputPasswordCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HtmlInputPasswordTest unit = new HtmlInputPasswordTest ();
-            unit.DefaultProperties ();
-            unit.RenderAttributes ();
-            unit.IPostBackDataHandler_RaisePostBackEvent ();
-            unit.IPostBackDataHandler_LoadPostData ();
-            unit.RaisePostBackEvent ();
-            unit.LoadPostData ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HtmlInputPasswordTest unit = new HtmlInputPasswordTest ();
+			unit.DefaultProperties ();
+			unit.RenderAttributes ();
+			unit.IPostBackDataHandler_RaisePostBackEvent ();
+			unit.IPostBackDataHandler_LoadPostData ();
+			unit.RaisePostBackEvent ();
+			unit.LoadPostData ();
+		}
 
-        public override Type Type {
-            get { return typeof (HtmlInputPassword); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlInputPassword); }
+		}
+	}
 }
 

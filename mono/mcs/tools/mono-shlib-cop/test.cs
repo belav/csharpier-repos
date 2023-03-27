@@ -36,35 +36,35 @@ using System.Runtime.InteropServices;
 
 namespace Mono.Unmanaged.Check {
 
-    class Test {
-        // OK
-        [DllImport ("libgmodule-2.0.so")]
-        private static extern int g_module_close (IntPtr handle);
+	class Test {
+		// OK
+		[DllImport ("libgmodule-2.0.so")]
+		private static extern int g_module_close (IntPtr handle);
 
-        // Warning
-        [DllImport ("libMonoPosixHelper.so")]
-        private static extern int Mono_Posix_Stdlib_TMP_MAX ();
+		// Warning
+		[DllImport ("libMonoPosixHelper.so")]
+		private static extern int Mono_Posix_Stdlib_TMP_MAX ();
 
-        // Error: no such library
-        [DllImport ("does-not-exist")]
-        private static extern void Foo ();
+		// Error: no such library
+		[DllImport ("does-not-exist")]
+		private static extern void Foo ();
 
-        // Error: no such method (library name remapped in .dll.config)
-        [DllImport ("renamed-lib")]
-        private static extern void RenameMe ();
+		// Error: no such method (library name remapped in .dll.config)
+		[DllImport ("renamed-lib")]
+		private static extern void RenameMe ();
 
-        // Error: no such method
-        [DllImport ("libc")]
-        private static extern void DoesNotExist ();
+		// Error: no such method
+		[DllImport ("libc")]
+		private static extern void DoesNotExist ();
 
-        Test ()
-        {
-            g_module_close (IntPtr.Zero);
-            Mono_Posix_Stdlib_TMP_MAX ();
-            Foo ();
-            RenameMe ();
-            DoesNotExist ();
-        }
-    }
+		Test ()
+		{
+			g_module_close (IntPtr.Zero);
+			Mono_Posix_Stdlib_TMP_MAX ();
+			Foo ();
+			RenameMe ();
+			DoesNotExist ();
+		}
+	}
 }
 

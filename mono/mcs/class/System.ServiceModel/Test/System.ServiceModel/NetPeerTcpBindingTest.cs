@@ -2,7 +2,7 @@
 // NetPeerTcpBindingTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -37,85 +37,85 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class NetPeerTcpBindingTest
-    {
-        [Test]
-        public void DefaultValues ()
-        {
-            if (!NetPeerTcpBinding.IsPnrpAvailable)
-                Assert.Ignore ("PNRP is not available."); // yes, we actually don't test it.
+	[TestFixture]
+	public class NetPeerTcpBindingTest
+	{
+		[Test]
+		public void DefaultValues ()
+		{
+			if (!NetPeerTcpBinding.IsPnrpAvailable)
+				Assert.Ignore ("PNRP is not available."); // yes, we actually don't test it.
 
-            var n = new NetPeerTcpBinding ();
-            Assert.AreEqual (EnvelopeVersion.Soap12, n.EnvelopeVersion, "#1");
-            Assert.IsNull (n.ListenIPAddress, "#2");
-            Assert.AreEqual (0x10000, n.MaxReceivedMessageSize, "#3");
-            Assert.AreEqual (0, n.Port, "#4");
-            Assert.IsNotNull (n.ReaderQuotas, "#5");
+			var n = new NetPeerTcpBinding ();
+			Assert.AreEqual (EnvelopeVersion.Soap12, n.EnvelopeVersion, "#1");
+			Assert.IsNull (n.ListenIPAddress, "#2");
+			Assert.AreEqual (0x10000, n.MaxReceivedMessageSize, "#3");
+			Assert.AreEqual (0, n.Port, "#4");
+			Assert.IsNotNull (n.ReaderQuotas, "#5");
 
-            var bec = n.CreateBindingElements ();
-            Assert.IsNotNull (bec.Find<PnrpPeerResolverBindingElement> (), "#bec0");
-            Assert.IsNotNull (bec.Find<BinaryMessageEncodingBindingElement> (), "#bec1");
-            Assert.AreEqual (3, bec.Count, "#bec2");
+			var bec = n.CreateBindingElements ();
+			Assert.IsNotNull (bec.Find<PnrpPeerResolverBindingElement> (), "#bec0");
+			Assert.IsNotNull (bec.Find<BinaryMessageEncodingBindingElement> (), "#bec1");
+			Assert.AreEqual (3, bec.Count, "#bec2");
 
-            var tr = bec.Find<PeerTransportBindingElement> ();
-            Assert.IsNotNull (tr, "#tr1");
-        }
+			var tr = bec.Find<PeerTransportBindingElement> ();
+			Assert.IsNotNull (tr, "#tr1");
+		}
 
-        [Test]
-        public void DefaultValuesForCustom ()
-        {
-            var n = new NetPeerTcpBinding ();
-            n.Resolver.Mode = PeerResolverMode.Custom;
-            n.Resolver.Custom.Resolver = new DummyResolver ();
+		[Test]
+		public void DefaultValuesForCustom ()
+		{
+			var n = new NetPeerTcpBinding ();
+			n.Resolver.Mode = PeerResolverMode.Custom;
+			n.Resolver.Custom.Resolver = new DummyResolver ();
 
-            Assert.AreEqual (EnvelopeVersion.Soap12, n.EnvelopeVersion, "#1");
-            Assert.IsNull (n.ListenIPAddress, "#2");
-            Assert.AreEqual (0x10000, n.MaxReceivedMessageSize, "#3");
-            Assert.AreEqual (0, n.Port, "#4");
-            Assert.IsNotNull (n.ReaderQuotas, "#5");
+			Assert.AreEqual (EnvelopeVersion.Soap12, n.EnvelopeVersion, "#1");
+			Assert.IsNull (n.ListenIPAddress, "#2");
+			Assert.AreEqual (0x10000, n.MaxReceivedMessageSize, "#3");
+			Assert.AreEqual (0, n.Port, "#4");
+			Assert.IsNotNull (n.ReaderQuotas, "#5");
 
-            Assert.IsFalse (((IBindingRuntimePreferences) n).ReceiveSynchronously, "#6");
+			Assert.IsFalse (((IBindingRuntimePreferences) n).ReceiveSynchronously, "#6");
 
-            var bec = n.CreateBindingElements ();
-            Assert.IsNotNull (bec.Find<PeerCustomResolverBindingElement> (), "#bec0");
-            Assert.IsNotNull (bec.Find<BinaryMessageEncodingBindingElement> (), "#bec1");
-            Assert.AreEqual (3, bec.Count, "#bec2");
+			var bec = n.CreateBindingElements ();
+			Assert.IsNotNull (bec.Find<PeerCustomResolverBindingElement> (), "#bec0");
+			Assert.IsNotNull (bec.Find<BinaryMessageEncodingBindingElement> (), "#bec1");
+			Assert.AreEqual (3, bec.Count, "#bec2");
 
-            var tr = bec.Find<PeerTransportBindingElement> ();
-            Assert.IsNotNull (tr, "#tr1");
-        }
-    }
+			var tr = bec.Find<PeerTransportBindingElement> ();
+			Assert.IsNotNull (tr, "#tr1");
+		}
+	}
 
-    class DummyResolver : PeerResolver
-    {
-        public override bool CanShareReferrals {
-            get { throw new NotImplementedException (); }
-        }
+	class DummyResolver : PeerResolver
+	{
+		public override bool CanShareReferrals {
+			get { throw new NotImplementedException (); }
+		}
 
-        public override object Register (string meshId,
-            PeerNodeAddress nodeAddress, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		public override object Register (string meshId,
+			PeerNodeAddress nodeAddress, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override ReadOnlyCollection<PeerNodeAddress> Resolve (
-            string meshId, int maxAddresses, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		public override ReadOnlyCollection<PeerNodeAddress> Resolve (
+			string meshId, int maxAddresses, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void Unregister (object registrationId,
-            TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		public override void Unregister (object registrationId,
+			TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void Update (object registrationId,
-            PeerNodeAddress updatedNodeAddress, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public override void Update (object registrationId,
+			PeerNodeAddress updatedNodeAddress, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 #endif

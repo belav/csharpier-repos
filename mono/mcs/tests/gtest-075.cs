@@ -1,7 +1,7 @@
 public interface IExtensible<T>
 {
-    void AddAll<U> (U item)
-        where U : T;
+	void AddAll<U> (U item)
+		where U : T;
 }
 
 public class ArrayList<T> : IExtensible<T>
@@ -12,6 +12,6 @@ public class ArrayList<T> : IExtensible<T>
 
 class X
 {
-    public static void Main ()
-    { }
+	public static void Main ()
+	{ }
 }

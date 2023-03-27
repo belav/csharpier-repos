@@ -2,7 +2,7 @@
 // ICFG.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -34,34 +34,34 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.ControlFlow {
-    interface ICFG {
-        APC Entry { get; }
-        APC EntryAfterRequires { get; }
-        APC NormalExit { get; }
-        APC ExceptionExit { get; }
-        Subroutine Subroutine { get; }
-        
-        APC Next (APC pc);
-        
-        IEnumerable<APC> Successors (APC pc);
-        bool HasSingleSuccessor (APC pc, out APC ifFound);
+	interface ICFG {
+		APC Entry { get; }
+		APC EntryAfterRequires { get; }
+		APC NormalExit { get; }
+		APC ExceptionExit { get; }
+		Subroutine Subroutine { get; }
+		
+		APC Next (APC pc);
+		
+		IEnumerable<APC> Successors (APC pc);
+		bool HasSingleSuccessor (APC pc, out APC ifFound);
 
-        IEnumerable<APC> Predecessors (APC pc);
-        bool HasSinglePredecessor (APC pc, out APC ifFound);
+		IEnumerable<APC> Predecessors (APC pc);
+		bool HasSinglePredecessor (APC pc, out APC ifFound);
 
-        bool IsJoinPoint (APC pc);
-        bool IsSplitPoint (APC pc);
+		bool IsJoinPoint (APC pc);
+		bool IsSplitPoint (APC pc);
 
-        bool IsBlockStart (APC pc);
-        bool IsBlockEnd (APC pc);
+		bool IsBlockStart (APC pc);
+		bool IsBlockEnd (APC pc);
 
-        IILDecoder<APC, Dummy, Dummy, IMethodContextProvider, Dummy> GetDecoder (IMetaDataProvider metaDataProvider);
+		IILDecoder<APC, Dummy, Dummy, IMethodContextProvider, Dummy> GetDecoder (IMetaDataProvider metaDataProvider);
 
-        void Print (TextWriter tw, ILPrinter<APC> printer,
-                    Func<CFGBlock, IEnumerable<Sequence<Edge<CFGBlock, EdgeTag>>>> contextLookup,
-                    Sequence<Edge<CFGBlock, EdgeTag>> context);
+		void Print (TextWriter tw, ILPrinter<APC> printer,
+		            Func<CFGBlock, IEnumerable<Sequence<Edge<CFGBlock, EdgeTag>>>> contextLookup,
+		            Sequence<Edge<CFGBlock, EdgeTag>> context);
 
-        bool IsForwardBackEdge (APC @from, APC to);
-            APC Post (APC pc);
-    }
+	    bool IsForwardBackEdge (APC @from, APC to);
+	        APC Post (APC pc);
+	}
 }

@@ -2,7 +2,7 @@
 // ResourceManager representing an integer, used by other test cases
 //
 // Author:
-//    Ankit Jain    <JAnkit@novell.com>
+//	Ankit Jain	<JAnkit@novell.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -44,9 +44,9 @@ namespace MonoTests.System.Transactions
         public bool IgnoreSPC = false;
         public bool FailSPC = false;
         public bool FailCommit = false;
-        public bool FailRollback = false;
+		public bool FailRollback = false;
         public bool UseSingle = false;
-        public Exception ThrowThisException = null;
+		public Exception ThrowThisException = null;
 
         Guid guid;
 
@@ -156,13 +156,13 @@ namespace MonoTests.System.Transactions
         public void Commit ( Enlistment enlistment )
         {
             resource.NumCommit++;
-            if (resource.FailCommit)
-            {
-                if (resource.FailWithException)
-                    throw (resource.ThrowThisException ?? new NotSupportedException());
-                else
-                    return;
-            }
+			if (resource.FailCommit)
+			{
+				if (resource.FailWithException)
+					throw (resource.ThrowThisException ?? new NotSupportedException());
+				else
+					return;
+			}
 
             resource.Commit ();
             enlistment.Done ();
@@ -171,13 +171,13 @@ namespace MonoTests.System.Transactions
         public void Rollback ( Enlistment enlistment )
         {
             resource.NumRollback++;
-            if (resource.FailRollback)
-            {
-                if (resource.FailWithException)
-                    throw (resource.ThrowThisException ?? new NotSupportedException());
-                else
-                    return;
-            }
+			if (resource.FailRollback)
+			{
+				if (resource.FailWithException)
+					throw (resource.ThrowThisException ?? new NotSupportedException());
+				else
+					return;
+			}
 
             resource.Rollback ();
         }

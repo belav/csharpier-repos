@@ -40,133 +40,133 @@ using NUnit.Framework;
 
 namespace StandAloneTests.WebFormsRouting
 {
-    [TestCase ("WebFormsRouting 01", "Web forms routing")]
-    public sealed class WebFormsRouting_01 : ITestCase
-    {
-        public string PhysicalPath {
-            get {
-                return Path.Combine (Consts.BasePhysicalDir, "WebFormsRouting");
-            }
-        }
-        
-        public string VirtualPath  {
-            get { return "/"; }
-        }
+	[TestCase ("WebFormsRouting 01", "Web forms routing")]
+	public sealed class WebFormsRouting_01 : ITestCase
+	{
+		public string PhysicalPath {
+			get {
+				return Path.Combine (Consts.BasePhysicalDir, "WebFormsRouting");
+			}
+		}
+		
+		public string VirtualPath  {
+			get { return "/"; }
+		}
 
-        public bool SetUp (List <TestRunItem> runItems)
-        {
-            runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
-            runItems.Add (new TestRunItem ("/search/test", Search_Test));
-            runItems.Add (new TestRunItem ("/search/true", Search_True));
-            runItems.Add (new TestRunItem ("/search/red", Search_Red));
-            
-            return true;
-        }
-    
-        void Default_Aspx (string result, TestRunItem runItem)
-        {
-            string originalHtml = @"<a href=""/search/test"">Search for 'test'</a>";
-            
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-        }
+		public bool SetUp (List <TestRunItem> runItems)
+		{
+			runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
+			runItems.Add (new TestRunItem ("/search/test", Search_Test));
+			runItems.Add (new TestRunItem ("/search/true", Search_True));
+			runItems.Add (new TestRunItem ("/search/red", Search_Red));
+			
+			return true;
+		}
+	
+		void Default_Aspx (string result, TestRunItem runItem)
+		{
+			string originalHtml = @"<a href=""/search/test"">Search for 'test'</a>";
+			
+			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+		}
 
-        void Search_Test (string result, TestRunItem runItem)
-        {
-            string originalHtml = @"Search term is: <span id=""label1"">test</span><br />
-    Search term from expression is: <span id=""label2"">test</span><br />
-    <pre id=""testLog"">.: Missing key (key: &#39;SearchTermd&#39;)
-    Returned null.
+		void Search_Test (string result, TestRunItem runItem)
+		{
+			string originalHtml = @"Search term is: <span id=""label1"">test</span><br />
+	Search term from expression is: <span id=""label2"">test</span><br />
+	<pre id=""testLog"">.: Missing key (key: &#39;SearchTermd&#39;)
+	Returned null.
 .: Missing property (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: test
+	Returned value of type &#39;System.String&#39;: test
 .: No converter (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: test
+	Returned value of type &#39;System.String&#39;: test
 .: Valid conversion to target (key: &#39;SearchTerm&#39;)
-    Exception &#39;System.FormatException&#39; caught
+	Exception &#39;System.FormatException&#39; caught
 .: Invalid conversion to target (key: &#39;SearchTerm&#39;)
-    Exception &#39;System.Exception&#39; caught
+	Exception &#39;System.Exception&#39; caught
 .: Complex type converter (key: &#39;SearchTerm&#39;)
-    Exception &#39;System.Exception&#39; caught
+	Exception &#39;System.Exception&#39; caught
 .: Null controlType (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: test
+	Returned value of type &#39;System.String&#39;: test
 .: Null propertyName (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: test
+	Returned value of type &#39;System.String&#39;: test
 .: Empty propertyName (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: test
+	Returned value of type &#39;System.String&#39;: test
 .: Non-string value (key: &#39;intValue&#39;)
-    Returned value of type &#39;System.Int32&#39;: 123
+	Returned value of type &#39;System.Int32&#39;: 123
 .: Non-string value (key: &#39;boolValue&#39;)
-    Returned value of type &#39;System.Boolean&#39;: False
+	Returned value of type &#39;System.Boolean&#39;: False
 .: Non-string value (key: &#39;doubleValue&#39;)
-    Returned value of type &#39;System.Double&#39;: 1,23
+	Returned value of type &#39;System.Double&#39;: 1,23
 </pre>";
-            
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-        }
+			
+			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+		}
 
-        void Search_True (string result, TestRunItem runItem)
-        {
-            string originalHtml = @"Search term is: <span id=""label1"">true</span><br />
-    Search term from expression is: <span id=""label2"">true</span><br />
-    <pre id=""testLog"">.: Missing key (key: &#39;SearchTermd&#39;)
-    Returned null.
+		void Search_True (string result, TestRunItem runItem)
+		{
+			string originalHtml = @"Search term is: <span id=""label1"">true</span><br />
+	Search term from expression is: <span id=""label2"">true</span><br />
+	<pre id=""testLog"">.: Missing key (key: &#39;SearchTermd&#39;)
+	Returned null.
 .: Missing property (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: true
+	Returned value of type &#39;System.String&#39;: true
 .: No converter (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: true
+	Returned value of type &#39;System.String&#39;: true
 .: Valid conversion to target (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.Boolean&#39;: True
+	Returned value of type &#39;System.Boolean&#39;: True
 .: Invalid conversion to target (key: &#39;SearchTerm&#39;)
-    Exception &#39;System.Exception&#39; caught
+	Exception &#39;System.Exception&#39; caught
 .: Complex type converter (key: &#39;SearchTerm&#39;)
-    Exception &#39;System.Exception&#39; caught
+	Exception &#39;System.Exception&#39; caught
 .: Null controlType (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: true
+	Returned value of type &#39;System.String&#39;: true
 .: Null propertyName (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: true
+	Returned value of type &#39;System.String&#39;: true
 .: Empty propertyName (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: true
+	Returned value of type &#39;System.String&#39;: true
 .: Non-string value (key: &#39;intValue&#39;)
-    Returned value of type &#39;System.Int32&#39;: 123
+	Returned value of type &#39;System.Int32&#39;: 123
 .: Non-string value (key: &#39;boolValue&#39;)
-    Returned value of type &#39;System.Boolean&#39;: False
+	Returned value of type &#39;System.Boolean&#39;: False
 .: Non-string value (key: &#39;doubleValue&#39;)
-    Returned value of type &#39;System.Double&#39;: 1,23
+	Returned value of type &#39;System.Double&#39;: 1,23
 </pre>";
-            
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-        }
+			
+			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+		}
 
-        void Search_Red (string result, TestRunItem runItem)
-        {
-            string originalHtml = @"Search term is: <span id=""label1"">red</span><br /> 
-    Search term from expression is: <span id=""label2"">red</span><br /> 
-    <pre id=""testLog"">.: Missing key (key: &#39;SearchTermd&#39;)
-    Returned null.
+		void Search_Red (string result, TestRunItem runItem)
+		{
+			string originalHtml = @"Search term is: <span id=""label1"">red</span><br /> 
+	Search term from expression is: <span id=""label2"">red</span><br /> 
+	<pre id=""testLog"">.: Missing key (key: &#39;SearchTermd&#39;)
+	Returned null.
 .: Missing property (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: red
+	Returned value of type &#39;System.String&#39;: red
 .: No converter (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: red
+	Returned value of type &#39;System.String&#39;: red
 .: Valid conversion to target (key: &#39;SearchTerm&#39;)
-    Exception &#39;System.FormatException&#39; caught
+	Exception &#39;System.FormatException&#39; caught
 .: Invalid conversion to target (key: &#39;SearchTerm&#39;)
-    Exception &#39;System.Exception&#39; caught
+	Exception &#39;System.Exception&#39; caught
 .: Complex type converter (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.Drawing.Color&#39;: Color [Red]
+	Returned value of type &#39;System.Drawing.Color&#39;: Color [Red]
 .: Null controlType (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: red
+	Returned value of type &#39;System.String&#39;: red
 .: Null propertyName (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: red
+	Returned value of type &#39;System.String&#39;: red
 .: Empty propertyName (key: &#39;SearchTerm&#39;)
-    Returned value of type &#39;System.String&#39;: red
+	Returned value of type &#39;System.String&#39;: red
 .: Non-string value (key: &#39;intValue&#39;)
-    Returned value of type &#39;System.Int32&#39;: 123
+	Returned value of type &#39;System.Int32&#39;: 123
 .: Non-string value (key: &#39;boolValue&#39;)
-    Returned value of type &#39;System.Boolean&#39;: False
+	Returned value of type &#39;System.Boolean&#39;: False
 .: Non-string value (key: &#39;doubleValue&#39;)
-    Returned value of type &#39;System.Double&#39;: 1,23
+	Returned value of type &#39;System.Double&#39;: 1,23
 </pre>";
-            
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-        }
-    }
+			
+			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+		}
+	}
 }

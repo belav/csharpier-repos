@@ -1,4 +1,4 @@
-//
+﻿//
 // RouteValueExpressionBuilder.cs
 //
 // Authors:
@@ -42,37 +42,37 @@ using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.Compilation
 {
-    [TestFixture]
-    public class BuildProviderTest
-    {
-        [Test]
-        public void RegisterBuildProvider ()
-        {
-            Assert.Throws<ArgumentException> (() => {
-                BuildProvider.RegisterBuildProvider (null, typeof (FooBuildProvider));
-            }, "#A1-1");
+	[TestFixture]
+	public class BuildProviderTest
+	{
+		[Test]
+		public void RegisterBuildProvider ()
+		{
+			Assert.Throws<ArgumentException> (() => {
+				BuildProvider.RegisterBuildProvider (null, typeof (FooBuildProvider));
+			}, "#A1-1");
 
-            Assert.Throws<ArgumentException> (() => {
-                BuildProvider.RegisterBuildProvider (String.Empty, typeof (FooBuildProvider));
-            }, "#A1-2");
+			Assert.Throws<ArgumentException> (() => {
+				BuildProvider.RegisterBuildProvider (String.Empty, typeof (FooBuildProvider));
+			}, "#A1-2");
 
-            Assert.Throws<ArgumentNullException> (() => {
-                BuildProvider.RegisterBuildProvider (".foo", null);
-            }, "#A1-3");
+			Assert.Throws<ArgumentNullException> (() => {
+				BuildProvider.RegisterBuildProvider (".foo", null);
+			}, "#A1-3");
 
-            Assert.Throws<ArgumentException> (() => {
-                BuildProvider.RegisterBuildProvider (".foo", typeof (string));
-            }, "#A1-4");
+			Assert.Throws<ArgumentException> (() => {
+				BuildProvider.RegisterBuildProvider (".foo", typeof (string));
+			}, "#A1-4");
 
-            // This would have worked if we called the method during the pre-application start stage
-            // (we have a test for this in the standalone test suite)
-            Assert.Throws<InvalidOperationException> (() => {
-                BuildProvider.RegisterBuildProvider (".foo", typeof (BuildProvider));
-            }, "#A1-5");
-        }
-    }
+			// This would have worked if we called the method during the pre-application start stage
+			// (we have a test for this in the standalone test suite)
+			Assert.Throws<InvalidOperationException> (() => {
+				BuildProvider.RegisterBuildProvider (".foo", typeof (BuildProvider));
+			}, "#A1-5");
+		}
+	}
 
-    class FooBuildProvider : BuildProvider
-    {
-    }
+	class FooBuildProvider : BuildProvider
+	{
+	}
 }

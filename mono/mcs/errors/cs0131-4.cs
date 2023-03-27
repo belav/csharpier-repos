@@ -3,17 +3,17 @@
 
 public class Person
 {
-    string _name;
+	string _name;
 
-    public string Name
-    {
-        get { return _name; }
-        set { _name = value; }
-    }
+	public string Name
+	{
+		get { return _name; }
+		set { _name = value; }
+	}
 
-    public static void Main ()
-    {
-        Person johnDoe = new Person ();
-        (string) johnDoe.Name = "John Doe";
-    }
+	public static void Main ()
+	{
+		Person johnDoe = new Person ();
+		(string) johnDoe.Name = "John Doe";
+	}
 }

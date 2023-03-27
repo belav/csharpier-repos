@@ -36,99 +36,99 @@ using System.Web.Services.Configuration;
 
 namespace System.Web.Services.Description 
 {
-    [XmlFormatExtensionPoint ("Extensions")]
-    public sealed class Operation :
-        NamedItem
-    {
-        #region Fields
+	[XmlFormatExtensionPoint ("Extensions")]
+	public sealed class Operation :
+		NamedItem
+	{
+		#region Fields
 
-        OperationFaultCollection faults;
-        OperationMessageCollection messages;
-        string[] parameterOrder;
-        PortType portType;
-        ServiceDescriptionFormatExtensionCollection extensions;
+		OperationFaultCollection faults;
+		OperationMessageCollection messages;
+		string[] parameterOrder;
+		PortType portType;
+		ServiceDescriptionFormatExtensionCollection extensions;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
-        
-        public Operation ()
-        {
-            faults = new OperationFaultCollection (this);
-            messages = new OperationMessageCollection (this);
-            parameterOrder = null;
-            portType = null;
-            extensions = new ServiceDescriptionFormatExtensionCollection (this);
-        }
-        
-        #endregion // Constructors
+		#region Constructors
+		
+		public Operation ()
+		{
+			faults = new OperationFaultCollection (this);
+			messages = new OperationMessageCollection (this);
+			parameterOrder = null;
+			portType = null;
+			extensions = new ServiceDescriptionFormatExtensionCollection (this);
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [XmlElement ("fault")]
-        public OperationFaultCollection Faults {
-            get { return faults; }
-        }
+		[XmlElement ("fault")]
+		public OperationFaultCollection Faults {
+			get { return faults; }
+		}
 
-        [XmlElement ("output", typeof (OperationOutput))]
-        [XmlElement ("input", typeof (OperationInput))]
-        public OperationMessageCollection Messages {
-            get { return messages; }
-        }
+		[XmlElement ("output", typeof (OperationOutput))]
+		[XmlElement ("input", typeof (OperationInput))]
+		public OperationMessageCollection Messages {
+			get { return messages; }
+		}
 
 
-        [XmlIgnore]
-        public string[] ParameterOrder {
-            get { return parameterOrder; }
-            set { parameterOrder = value; }
-        }
+		[XmlIgnore]
+		public string[] ParameterOrder {
+			get { return parameterOrder; }
+			set { parameterOrder = value; }
+		}
 
-        static readonly char [] wsChars = new char [] {' ', '\r', '\n', '\t'};
+		static readonly char [] wsChars = new char [] {' ', '\r', '\n', '\t'};
 
-        [DefaultValue ("")]
-        // LAMESPEC: it could simply use xs:NMTOKENS
-        [XmlAttribute ("parameterOrder")]
-        public string ParameterOrderString {
-            get { 
-                if (parameterOrder == null)
-                    return String.Empty;
-                return String.Join (" ", parameterOrder); 
-            }
-            set {
-                ArrayList al = new ArrayList ();
-                foreach (string s in value.Split (' ')) {
-                    value = s.Trim (wsChars);
-                    if (value.Length > 0)
-                        al.Add (value);
-                }
-                ParameterOrder = (string []) al.ToArray (typeof (string));
-            }
-        }
+		[DefaultValue ("")]
+		// LAMESPEC: it could simply use xs:NMTOKENS
+		[XmlAttribute ("parameterOrder")]
+		public string ParameterOrderString {
+			get { 
+				if (parameterOrder == null)
+					return String.Empty;
+				return String.Join (" ", parameterOrder); 
+			}
+			set {
+				ArrayList al = new ArrayList ();
+				foreach (string s in value.Split (' ')) {
+					value = s.Trim (wsChars);
+					if (value.Length > 0)
+						al.Add (value);
+				}
+				ParameterOrder = (string []) al.ToArray (typeof (string));
+			}
+		}
 
-//        [XmlIgnore]
-        public PortType PortType {
-            get { return portType; }
-        }
+//		[XmlIgnore]
+		public PortType PortType {
+			get { return portType; }
+		}
 
-        [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions {
-            get { return extensions; }
-        }
+		[XmlIgnore]
+		public override ServiceDescriptionFormatExtensionCollection Extensions {
+			get { return extensions; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        public bool IsBoundBy (OperationBinding operationBinding)
-        {
-            return (operationBinding.Name == Name);
-        }
+		public bool IsBoundBy (OperationBinding operationBinding)
+		{
+			return (operationBinding.Name == Name);
+		}
 
-        internal void SetParent (PortType portType)
-        {
-            this.portType = portType;
-        }
+		internal void SetParent (PortType portType)
+		{
+			this.portType = portType;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

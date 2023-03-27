@@ -36,41 +36,41 @@ using System.Web.Security;
 
 namespace System.Web.Script.Services
 {
-    sealed class AuthenticationService
-    {
-        public const string DefaultWebServicePath = "/Authentication_JSON_AppService.axd";
+	sealed class AuthenticationService
+	{
+		public const string DefaultWebServicePath = "/Authentication_JSON_AppService.axd";
 
-        readonly ScriptingAuthenticationServiceSection _section;
+		readonly ScriptingAuthenticationServiceSection _section;
 
-        public AuthenticationService () {
-            _section = (ScriptingAuthenticationServiceSection) WebConfigurationManager.GetSection ("system.web.extensions/scripting/webServices/authenticationService");
-        }
+		public AuthenticationService () {
+			_section = (ScriptingAuthenticationServiceSection) WebConfigurationManager.GetSection ("system.web.extensions/scripting/webServices/authenticationService");
+		}
 
-        void EnsureEnabled() {
-            if (_section == null || !_section.Enabled)
-                throw new InvalidOperationException ("Authentication service is disabled.");
+		void EnsureEnabled() {
+			if (_section == null || !_section.Enabled)
+				throw new InvalidOperationException ("Authentication service is disabled.");
 
-            if (_section.RequireSSL && !HttpContext.Current.Request.IsSecureConnection)
-                throw new HttpException ("SSL is required for this operation.");
-        }
+			if (_section.RequireSSL && !HttpContext.Current.Request.IsSecureConnection)
+				throw new HttpException ("SSL is required for this operation.");
+		}
 
-        [WebMethod ()]
-        public bool Login (string userName, string password, bool createPersistentCookie) {
-            EnsureEnabled ();
+		[WebMethod ()]
+		public bool Login (string userName, string password, bool createPersistentCookie) {
+			EnsureEnabled ();
 
-            if (!Membership.Provider.ValidateUser (userName, password))
-                return false;
+			if (!Membership.Provider.ValidateUser (userName, password))
+				return false;
 
-            FormsAuthentication.SetAuthCookie (userName, createPersistentCookie);
+			FormsAuthentication.SetAuthCookie (userName, createPersistentCookie);
 
-            return true;
-        }
+			return true;
+		}
 
-        [WebMethod ()]
-        public void Logout () {
-            EnsureEnabled ();
+		[WebMethod ()]
+		public void Logout () {
+			EnsureEnabled ();
 
-            FormsAuthentication.SignOut ();
-        }
-    }
+			FormsAuthentication.SignOut ();
+		}
+	}
 }

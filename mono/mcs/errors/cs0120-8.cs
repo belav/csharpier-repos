@@ -4,9 +4,9 @@
 using System.Collections;
 
 public class Test  {
-    ArrayList ArrayList;
+	ArrayList ArrayList;
 
-    public static void Main () {
-        ArrayList.Capacity = 5;
-    }
+	public static void Main () {
+		ArrayList.Capacity = 5;
+	}
 }

@@ -34,27 +34,27 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public abstract class BaseChannelWithProperties :
-        BaseChannelObjectWithProperties
-    {
-        protected IChannelSinkBase SinksWithProperties;
-        
-        protected BaseChannelWithProperties ()
-        {
-        }
-        
-        public override IDictionary Properties
-        {
-            get
-            {
-                if (SinksWithProperties == null || SinksWithProperties.Properties == null)
-                    return base.Properties;
-                else {
-                    IDictionary[] dics = new IDictionary [] { base.Properties, SinksWithProperties.Properties };
-                    return new AggregateDictionary (dics);
-                }
-            }
-        }
-    }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public abstract class BaseChannelWithProperties :
+		BaseChannelObjectWithProperties
+	{
+		protected IChannelSinkBase SinksWithProperties;
+		
+		protected BaseChannelWithProperties ()
+		{
+		}
+		
+		public override IDictionary Properties
+		{
+			get
+			{
+				if (SinksWithProperties == null || SinksWithProperties.Properties == null)
+					return base.Properties;
+				else {
+					IDictionary[] dics = new IDictionary [] { base.Properties, SinksWithProperties.Properties };
+					return new AggregateDictionary (dics);
+				}
+			}
+		}
+	}
 }

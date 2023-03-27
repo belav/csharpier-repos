@@ -36,56 +36,56 @@ using NUnit.Framework;
 
 namespace MonoTests.Remoting
 {
-    [TestFixture]
-    public class IpcSyncCallTest : SyncCallTest
-    {
-        public override ChannelManager CreateChannelManager ()
-        {
-            return new IpcChannelManager ();
-        }
-    }
+	[TestFixture]
+	public class IpcSyncCallTest : SyncCallTest
+	{
+		public override ChannelManager CreateChannelManager ()
+		{
+			return new IpcChannelManager ();
+		}
+	}
 
-    [TestFixture]
-    public class IpcAsyncCallTest : AsyncCallTest
-    {
-        public override ChannelManager CreateChannelManager ()
-        {
-            return new IpcChannelManager ();
-        }
-    }
+	[TestFixture]
+	public class IpcAsyncCallTest : AsyncCallTest
+	{
+		public override ChannelManager CreateChannelManager ()
+		{
+			return new IpcChannelManager ();
+		}
+	}
 
-    [TestFixture]
-    public class IpcReflectionCallTest : ReflectionCallTest
-    {
-        public override ChannelManager CreateChannelManager ()
-        {
-            return new IpcChannelManager ();
-        }
-    }
+	[TestFixture]
+	public class IpcReflectionCallTest : ReflectionCallTest
+	{
+		public override ChannelManager CreateChannelManager ()
+		{
+			return new IpcChannelManager ();
+		}
+	}
 
-    [TestFixture]
-    public class IpcDelegateCallTest : DelegateCallTest
-    {
-        public override ChannelManager CreateChannelManager ()
-        {
-            return new IpcChannelManager ();
-        }
-    }
+	[TestFixture]
+	public class IpcDelegateCallTest : DelegateCallTest
+	{
+		public override ChannelManager CreateChannelManager ()
+		{
+			return new IpcChannelManager ();
+		}
+	}
 
-    [Serializable]
-    public class IpcChannelManager : ChannelManager
-    {
-        public override IChannelSender CreateClientChannel ()
-        {
-            return new IpcChannel ();
-        }
+	[Serializable]
+	public class IpcChannelManager : ChannelManager
+	{
+		public override IChannelSender CreateClientChannel ()
+		{
+			return new IpcChannel ();
+		}
 
-        public override IChannelReceiver CreateServerChannel ()
-        {
-            // simulate the Tcp/HttpChannel(0) semantics with a GUID.
-            string portName = "ipc" + Guid.NewGuid ().ToString ("N");
-            return new IpcChannel (portName);
-        }
-    }
+		public override IChannelReceiver CreateServerChannel ()
+		{
+			// simulate the Tcp/HttpChannel(0) semantics with a GUID.
+			string portName = "ipc" + Guid.NewGuid ().ToString ("N");
+			return new IpcChannel (portName);
+		}
+	}
 }
 

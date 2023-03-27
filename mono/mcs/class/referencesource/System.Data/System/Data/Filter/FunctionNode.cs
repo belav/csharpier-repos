@@ -404,7 +404,7 @@ namespace System.Data {
                             return DBNull.Value;
 
                         if (argumentValues[0] is SqlString)
-                            argumentValues[0] = ((SqlString)argumentValues[0]).Value;
+                        	argumentValues[0] = ((SqlString)argumentValues[0]).Value;
 
                         return(((string)argumentValues[0]).Trim());
 

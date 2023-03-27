@@ -2,7 +2,7 @@
 // Commons.Xml.Relaxng.General.cs
 //
 // Author:
-//    Atsushi Enomoto <ginga@kit.hi-ho.ne.jp>
+//	Atsushi Enomoto <ginga@kit.hi-ho.ne.jp>
 //
 // 2003 Atsushi Enomoto "No rights reserved."
 //
@@ -39,66 +39,66 @@ using Commons.Xml.Relaxng.Derivative;
 
 namespace Commons.Xml.Relaxng
 {
-    internal class Util
-    {
-        public static string NormalizeWhitespace (string s)
-        {
-            if (s.Length == 0)
-                return s;
+	internal class Util
+	{
+		public static string NormalizeWhitespace (string s)
+		{
+			if (s.Length == 0)
+				return s;
 
-            StringBuilder sb = null;
-            int noSpaceIndex = 0;
-            bool inSpace = false;
+			StringBuilder sb = null;
+			int noSpaceIndex = 0;
+			bool inSpace = false;
 
-            for (int i = 0; i < s.Length; i++) {
-                switch (s [i]) {
-                case ' ':
-                case '\r':
-                case '\t':
-                case '\n':
-                    if (inSpace)
-                        continue;
-                    if (sb == null)
-                        sb = new StringBuilder (s.Length);
-                    if (noSpaceIndex < i) {
-                        if (sb.Length > 0)
-                            sb.Append (' ');
-                        sb.Append (s, noSpaceIndex, i - noSpaceIndex);
-                    }
-                    inSpace = true;
-                    break;
-                default:
-                    if (inSpace) {
-                        noSpaceIndex = i;
-                        inSpace = false;
-                    }
-                    break;
-                }
-            }
-            if (sb == null)
-                return s;
-            if (!inSpace && noSpaceIndex < s.Length) {
-                sb.Append (' ');
-                sb.Append (s, noSpaceIndex, s.Length - noSpaceIndex);
-            }
-            return sb.ToString ();
-        }
+			for (int i = 0; i < s.Length; i++) {
+				switch (s [i]) {
+				case ' ':
+				case '\r':
+				case '\t':
+				case '\n':
+					if (inSpace)
+						continue;
+					if (sb == null)
+						sb = new StringBuilder (s.Length);
+					if (noSpaceIndex < i) {
+						if (sb.Length > 0)
+							sb.Append (' ');
+						sb.Append (s, noSpaceIndex, i - noSpaceIndex);
+					}
+					inSpace = true;
+					break;
+				default:
+					if (inSpace) {
+						noSpaceIndex = i;
+						inSpace = false;
+					}
+					break;
+				}
+			}
+			if (sb == null)
+				return s;
+			if (!inSpace && noSpaceIndex < s.Length) {
+				sb.Append (' ');
+				sb.Append (s, noSpaceIndex, s.Length - noSpaceIndex);
+			}
+			return sb.ToString ();
+		}
 
-        public static bool IsWhitespace (string s)
-        {
-            for (int i = 0; i < s.Length; i++) {
-                switch (s [i]) {
-                case ' ':
-                case '\t':
-                case '\n':
-                case '\r':
-                    continue;
-                default:
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
+		public static bool IsWhitespace (string s)
+		{
+			for (int i = 0; i < s.Length; i++) {
+				switch (s [i]) {
+				case ' ':
+				case '\t':
+				case '\n':
+				case '\r':
+					continue;
+				default:
+					return false;
+				}
+			}
+			return true;
+		}
+	}
 }
 

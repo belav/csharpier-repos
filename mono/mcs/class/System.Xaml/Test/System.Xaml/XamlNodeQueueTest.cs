@@ -28,32 +28,32 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-    [TestFixture]
-    public class XamlNodeQueueTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNull ()
-        {
-            new XamlNodeQueue (null);
-        }
-    
-        [Test]
-        public void Read ()
-        {
-            var q = new XamlNodeQueue (new XamlSchemaContext ());
-            Assert.IsFalse (q.Reader.Read (), "#1");
-            Assert.IsTrue (q.Reader.IsEof, "#1-2");
+	[TestFixture]
+	public class XamlNodeQueueTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void ConstructorNull ()
+		{
+			new XamlNodeQueue (null);
+		}
+	
+		[Test]
+		public void Read ()
+		{
+			var q = new XamlNodeQueue (new XamlSchemaContext ());
+			Assert.IsFalse (q.Reader.Read (), "#1");
+			Assert.IsTrue (q.Reader.IsEof, "#1-2");
 
-            q.Writer.WriteStartObject (XamlLanguage.String);
-            Assert.IsTrue (q.Reader.Read (), "#2");
-            Assert.IsFalse (q.Reader.IsEof, "#2-2");
-            Assert.AreEqual (XamlLanguage.String, q.Reader.Type, "#2-3");
-            Assert.IsNull (q.Reader.Member, "#2-4");
-            Assert.IsNull (q.Reader.Value, "#2-5");
+			q.Writer.WriteStartObject (XamlLanguage.String);
+			Assert.IsTrue (q.Reader.Read (), "#2");
+			Assert.IsFalse (q.Reader.IsEof, "#2-2");
+			Assert.AreEqual (XamlLanguage.String, q.Reader.Type, "#2-3");
+			Assert.IsNull (q.Reader.Member, "#2-4");
+			Assert.IsNull (q.Reader.Value, "#2-5");
 
-            Assert.IsFalse (q.Reader.Read (), "#3");
-            Assert.IsTrue (q.Reader.IsEof, "#3-2");
-        }
-    }
+			Assert.IsFalse (q.Reader.Read (), "#3");
+			Assert.IsTrue (q.Reader.IsEof, "#3-2");
+		}
+	}
 }

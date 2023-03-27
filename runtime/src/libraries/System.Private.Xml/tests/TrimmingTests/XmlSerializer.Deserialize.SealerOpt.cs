@@ -24,8 +24,8 @@ namespace System.Xml.Serialization.TrimmingTests
                 .SetValue(null, ReflectionOnly);
 
             using StringReader stringReader = new StringReader(@"<?xml version=""1.0"" encoding=""UTF-8""?>
-                <Response DataType=""Data"">
-                </Response>");
+				<Response DataType=""Data"">
+				</Response>");
 
             Response obj = (Response)new XmlSerializer(typeof(Response)).Deserialize(stringReader);
             if (obj.DataType == "Data")

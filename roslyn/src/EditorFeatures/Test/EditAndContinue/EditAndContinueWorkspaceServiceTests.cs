@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -495,7 +495,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var sourceB1 = "class B { int F() => 1; }";
             var sourceB2 = "class B { int F() => 2; }";
             var sourceB3 = "class B { int F() => 3; }";
-            var sourceC1 = "class C { const char L = '?'; }";
+            var sourceC1 = "class C { const char L = 'ワ'; }";
             var sourceD1 = "dummy code";
             var sourceE1 = "class E { }";
             var sourceBytesA1 = encodingA.GetBytesWithPreamble(sourceA1);
@@ -1148,17 +1148,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         /// <code>
         ///                         F5   build
         ///                              complete
-        ///                         �    �
-        /// Workspace    -----0-----+----+----------1---
-        ///                   ?     �               ? src file watcher
-        ///                   �     �               �
-        /// dll/pdb      -0---+-----+----1----------+---
-        ///                   �     �    ?          �
-        ///               +---+     �    �          �
-        ///               �      +--+---------------+
-        /// Source file  -0------1--+-------------------
-        ///                         �
-        /// Committed    -----------+----0----------1---
+        ///                         │    │
+        /// Workspace    ═════0═════╪════╪══════════1═══
+        ///                   ▲     │               ▲ src file watcher
+        ///                   │     │               │
+        /// dll/pdb      ═0═══╪═════╪════1══════════╪═══
+        ///                   │     │    ▲          │
+        ///               ┌───┘     │    │          │
+        ///               │      ┌──┼────┴──────────┘
+        /// Source file  ═0══════1══╪═══════════════════
+        ///                         │
+        /// Committed    ═══════════╪════0══════════1═══
         /// solution
         /// </code>
         /// </summary>
@@ -1327,7 +1327,7 @@ class C1
         [Fact]
         public async Task Encodings()
         {
-            var source1 = "class C1 { void M() { System.Console.WriteLine(\"�\"); } }";
+            var source1 = "class C1 { void M() { System.Console.WriteLine(\"ã\"); } }";
 
             var encoding = Encoding.GetEncoding(1252);
 

@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,83 +32,83 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("a6cf90c3-15b3-11d2-932e-00805f8add32")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMUIEvent : nsIDOMEvent {
+	[Guid ("a6cf90c3-15b3-11d2-932e-00805f8add32")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMUIEvent : nsIDOMEvent {
 #region nsIDOMEvent
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getType (  /*DOMString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getType (  /*DOMString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getTarget ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMEventTarget ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getTarget ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMEventTarget ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCurrentTarget ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMEventTarget ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getCurrentTarget ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMEventTarget ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getEventPhase ( out ushort ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getEventPhase ( out ushort ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getBubbles ( out bool ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getBubbles ( out bool ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCancelable ( out bool ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getCancelable ( out bool ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getTimeStamp ( out int ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getTimeStamp ( out int ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int stopPropagation ();
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int stopPropagation ();
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int preventDefault ();
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int preventDefault ();
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int initEvent (
-                   /*DOMString*/ HandleRef eventTypeArg,
-                   bool canBubbleArg,
-                   bool cancelableArg);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int initEvent (
+				   /*DOMString*/ HandleRef eventTypeArg,
+				   bool canBubbleArg,
+				   bool cancelableArg);
 
 #endregion
 
 #region nsIDOMUIEvent
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getView ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMAbstractView ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getView ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMAbstractView ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getDetail ( out int ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getDetail ( out int ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int initUIEvent (
-                   /*DOMString*/ HandleRef typeArg,
-                   bool canBubbleArg,
-                   bool cancelableArg,
-                [MarshalAs (UnmanagedType.Interface)]   nsIDOMAbstractView viewArg,
-                   int detailArg);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int initUIEvent (
+				   /*DOMString*/ HandleRef typeArg,
+				   bool canBubbleArg,
+				   bool cancelableArg,
+				[MarshalAs (UnmanagedType.Interface)]   nsIDOMAbstractView viewArg,
+				   int detailArg);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMUIEvent {
-        public static nsIDOMUIEvent GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMUIEvent obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMUIEvent).GUID, obj);
-            return o as nsIDOMUIEvent;
-        }
-    }
+	internal class nsDOMUIEvent {
+		public static nsIDOMUIEvent GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMUIEvent obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMUIEvent).GUID, obj);
+			return o as nsIDOMUIEvent;
+		}
+	}
 }

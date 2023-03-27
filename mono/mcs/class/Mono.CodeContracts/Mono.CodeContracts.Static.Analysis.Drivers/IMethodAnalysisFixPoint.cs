@@ -2,7 +2,7 @@
 // IMethodAnalysisFixPoint.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,8 +31,8 @@ using Mono.CodeContracts.Static.Lattices;
 using Mono.CodeContracts.Static.Proving;
 
 namespace Mono.CodeContracts.Static.Analysis.Drivers {
-    interface IMethodAnalysisFixPoint<Variable> {
-        IFactQuery<BoxedExpression, Variable> FactQuery { get; }
-        FlatDomain<bool> ValidateExplicitAssertion (APC pc, Variable value);
-    }
+	interface IMethodAnalysisFixPoint<Variable> {
+		IFactQuery<BoxedExpression, Variable> FactQuery { get; }
+		FlatDomain<bool> ValidateExplicitAssertion (APC pc, Variable value);
+	}
 }

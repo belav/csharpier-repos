@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.Serialization.EventCodeDomSerializer
 //
-// Authors:     
-//      Ivan N. Zlatev (contact i-nZ.net)
+// Authors:	 
+//	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
 
@@ -36,52 +36,52 @@ using System.CodeDom;
 
 namespace System.ComponentModel.Design.Serialization
 {
-    internal class EventCodeDomSerializer : MemberCodeDomSerializer
-    {
+	internal class EventCodeDomSerializer : MemberCodeDomSerializer
+	{
 
-        private CodeThisReferenceExpression _thisReference;
+		private CodeThisReferenceExpression _thisReference;
 
-        public EventCodeDomSerializer ()
-        {
-            // don't waste memory on something that is constant when generating the
-            // event codedom code - keep it as a field.
-            _thisReference = new CodeThisReferenceExpression ();
-        }
+		public EventCodeDomSerializer ()
+		{
+			// don't waste memory on something that is constant when generating the
+			// event codedom code - keep it as a field.
+			_thisReference = new CodeThisReferenceExpression ();
+		}
 
 
-        public override void Serialize (IDesignerSerializationManager manager, object value, MemberDescriptor descriptor, 
-                        CodeStatementCollection statements)
-        {
-            if (statements == null)
-                throw new ArgumentNullException ("statements");
-            if (manager == null)
-                throw new ArgumentNullException ("manager");
-            if (value == null)
-                throw new ArgumentNullException ("value");
-            if (descriptor == null)
-                throw new ArgumentNullException ("descriptor");
+		public override void Serialize (IDesignerSerializationManager manager, object value, MemberDescriptor descriptor, 
+						CodeStatementCollection statements)
+		{
+			if (statements == null)
+				throw new ArgumentNullException ("statements");
+			if (manager == null)
+				throw new ArgumentNullException ("manager");
+			if (value == null)
+				throw new ArgumentNullException ("value");
+			if (descriptor == null)
+				throw new ArgumentNullException ("descriptor");
 
-            IEventBindingService service = manager.GetService (typeof (IEventBindingService)) as IEventBindingService;
-            if (service != null) {
-                EventDescriptor eventDescriptor = (EventDescriptor) descriptor;
-                string methodName = (string) service.GetEventProperty (eventDescriptor).GetValue (value);
+			IEventBindingService service = manager.GetService (typeof (IEventBindingService)) as IEventBindingService;
+			if (service != null) {
+				EventDescriptor eventDescriptor = (EventDescriptor) descriptor;
+				string methodName = (string) service.GetEventProperty (eventDescriptor).GetValue (value);
 
-                if (methodName != null) {
-                    CodeDelegateCreateExpression listener = new CodeDelegateCreateExpression (new CodeTypeReference (eventDescriptor.EventType),
-                                                                                               _thisReference, methodName);
-                    CodeExpression targetObject = base.SerializeToExpression (manager, value);
-                    CodeEventReferenceExpression eventRef = new CodeEventReferenceExpression (targetObject, eventDescriptor.Name);
-                    statements.Add (new CodeAttachEventStatement (eventRef, listener));
-                }
-            }
-        }
+				if (methodName != null) {
+					CodeDelegateCreateExpression listener = new CodeDelegateCreateExpression (new CodeTypeReference (eventDescriptor.EventType),
+																							   _thisReference, methodName);
+					CodeExpression targetObject = base.SerializeToExpression (manager, value);
+					CodeEventReferenceExpression eventRef = new CodeEventReferenceExpression (targetObject, eventDescriptor.Name);
+					statements.Add (new CodeAttachEventStatement (eventRef, listener));
+				}
+			}
+		}
 
-        public override bool ShouldSerialize (IDesignerSerializationManager manager, object value, MemberDescriptor descriptor)
-        {
-            IEventBindingService service = manager.GetService (typeof (IEventBindingService)) as IEventBindingService;
-            if (service != null) // serialize only if there is an event to serialize
-                return service.GetEventProperty ((EventDescriptor)descriptor).GetValue (value) != null;
-            return false;
-        }
-    }
+		public override bool ShouldSerialize (IDesignerSerializationManager manager, object value, MemberDescriptor descriptor)
+		{
+			IEventBindingService service = manager.GetService (typeof (IEventBindingService)) as IEventBindingService;
+			if (service != null) // serialize only if there is an event to serialize
+				return service.GetEventProperty ((EventDescriptor)descriptor).GetValue (value) != null;
+			return false;
+		}
+	}
 }

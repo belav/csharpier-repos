@@ -1,9 +1,9 @@
 //
 // OutputCacheParametersTest.cs
-//    - Unit tests for System.Web.UI.OutputCacheParameters
+//	- Unit tests for System.Web.UI.OutputCacheParameters
 //
 // Author:
-//    Noam Lampert  (noaml@mainsoft.com)
+//	Noam Lampert  (noaml@mainsoft.com)
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -35,23 +35,23 @@ using System.Collections;
 
 namespace MonoTests.System.Web.UI
 {
-    [TestFixture]
-    public class OutputCacheParametersTest
-    {
-        [Test]
-        public void InitialValues () {
-            OutputCacheParameters o = new OutputCacheParameters ();
-            Assert.IsNull (o.CacheProfile, "CacheProfile");
-            Assert.IsTrue (o.Duration == 0, "Duration");
-            Assert.IsTrue (o.Enabled, "Enabled");
-            Assert.IsTrue (o.Location == OutputCacheLocation.Any, "OutputCacheLocation");
-            Assert.IsFalse (o.NoStore, "NoStore");
-            Assert.IsNull (o.SqlDependency, "SqlDependency");
-            Assert.IsNull (o.VaryByControl, "VaryByControl");
-            Assert.IsNull (o.VaryByCustom, "VaryByCustom");
-            Assert.IsNull (o.VaryByHeader, "VaryByHeader");
-            Assert.IsNull (o.VaryByParam, "VaryByParam");
-        }
-    }
+	[TestFixture]
+	public class OutputCacheParametersTest
+	{
+		[Test]
+		public void InitialValues () {
+			OutputCacheParameters o = new OutputCacheParameters ();
+			Assert.IsNull (o.CacheProfile, "CacheProfile");
+			Assert.IsTrue (o.Duration == 0, "Duration");
+			Assert.IsTrue (o.Enabled, "Enabled");
+			Assert.IsTrue (o.Location == OutputCacheLocation.Any, "OutputCacheLocation");
+			Assert.IsFalse (o.NoStore, "NoStore");
+			Assert.IsNull (o.SqlDependency, "SqlDependency");
+			Assert.IsNull (o.VaryByControl, "VaryByControl");
+			Assert.IsNull (o.VaryByCustom, "VaryByCustom");
+			Assert.IsNull (o.VaryByHeader, "VaryByHeader");
+			Assert.IsNull (o.VaryByParam, "VaryByParam");
+		}
+	}
 }
 

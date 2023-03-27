@@ -2,7 +2,7 @@
 // RequiresSubroutine.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -32,53 +32,53 @@ using Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines {
-    sealed class RequiresSubroutine<TLabel> : MethodContractSubroutine<TLabel>, IEquatable<RequiresSubroutine<TLabel>>
-    {
-        public override SubroutineKind Kind { get { return SubroutineKind.Requires; } }
+	sealed class RequiresSubroutine<TLabel> : MethodContractSubroutine<TLabel>, IEquatable<RequiresSubroutine<TLabel>>
+	{
+		public override SubroutineKind Kind { get { return SubroutineKind.Requires; } }
 
-        public override bool IsContract { get { return true; } }
-        public override bool IsRequires { get { return true; } }
+		public override bool IsContract { get { return true; } }
+		public override bool IsRequires { get { return true; } }
 
-        public RequiresSubroutine(SubroutineFacade subroutineFacade,
-                                  Method method,
-                                  IImmutableSet<Subroutine> inherited)
-            : base(subroutineFacade, method)
-        {
-            AddSuccessor(Entry, EdgeTag.Entry, Exit);
-            AddBaseRequires(Exit, inherited);
-            Commit();
-        }
+		public RequiresSubroutine(SubroutineFacade subroutineFacade,
+		                          Method method,
+		                          IImmutableSet<Subroutine> inherited)
+			: base(subroutineFacade, method)
+		{
+			AddSuccessor(Entry, EdgeTag.Entry, Exit);
+			AddBaseRequires(Exit, inherited);
+			Commit();
+		}
 
-        public RequiresSubroutine(SubroutineFacade subroutineFacade,
-                                  Method method,
-                                  SimpleSubroutineBuilder<TLabel> builder,
-                                  TLabel entryLabel,
-                                  IImmutableSet<Subroutine> inheritedRequires)
-            : base(subroutineFacade, method, builder, entryLabel)
-        {
-            AddBaseRequires(this.GetTargetBlock(entryLabel), inheritedRequires);
-        }
+		public RequiresSubroutine(SubroutineFacade subroutineFacade,
+		                          Method method,
+		                          SimpleSubroutineBuilder<TLabel> builder,
+		                          TLabel entryLabel,
+		                          IImmutableSet<Subroutine> inheritedRequires)
+			: base(subroutineFacade, method, builder, entryLabel)
+		{
+			AddBaseRequires(this.GetTargetBlock(entryLabel), inheritedRequires);
+		}
 
-        public override void Initialize()
-        {
-            if (this.Builder == null)
-                return;
+		public override void Initialize()
+		{
+			if (this.Builder == null)
+				return;
 
-            this.Builder.BuildBlocks(this.StartLabel, this);
-            this.Commit();
+			this.Builder.BuildBlocks(this.StartLabel, this);
+			this.Commit();
 
-            this.Builder = null;
-        }
+			this.Builder = null;
+		}
 
-        private void AddBaseRequires(CFGBlock targetOfEntry, IImmutableSet<Subroutine> inherited)
-        {
-            foreach (var subroutine in inherited.Elements)
-                this.AddEdgeSubroutine(this.Entry, targetOfEntry, subroutine, EdgeTag.Inherited);
-        }
+		private void AddBaseRequires(CFGBlock targetOfEntry, IImmutableSet<Subroutine> inherited)
+		{
+			foreach (var subroutine in inherited.Elements)
+				this.AddEdgeSubroutine(this.Entry, targetOfEntry, subroutine, EdgeTag.Inherited);
+		}
 
-        public bool Equals(RequiresSubroutine<TLabel> that)
-        {
-            return this.Id == that.Id;
-        }
-    }
+		public bool Equals(RequiresSubroutine<TLabel> that)
+		{
+			return this.Id == that.Id;
+		}
+	}
 }

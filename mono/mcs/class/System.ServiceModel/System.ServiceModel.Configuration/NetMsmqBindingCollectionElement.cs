@@ -2,7 +2,7 @@
 // NetMsmqBindingCollectionElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public partial class NetMsmqBindingCollectionElement
-         : StandardBindingCollectionElement<NetMsmqBinding, NetMsmqBindingElement>
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
+	[MonoTODO]
+	public partial class NetMsmqBindingCollectionElement
+		 : StandardBindingCollectionElement<NetMsmqBinding, NetMsmqBindingElement>
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
 
-        static NetMsmqBindingCollectionElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static NetMsmqBindingCollectionElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public NetMsmqBindingCollectionElement ()
-        {
-        }
-
-
-        // Properties
+		public NetMsmqBindingCollectionElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+
+	}
 
 }

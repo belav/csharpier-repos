@@ -5,22 +5,22 @@ using System;
 
 public class Test
 {
-    struct Container
-    {
-        public int this[int arg] {
-            set {
-            }
-        }
-    }
-    
-    readonly Container p;
-    
-    void Foo ()
-    {
-        p[0] = 0;
-    }
+	struct Container
+	{
+		public int this[int arg] {
+			set {
+			}
+		}
+	}
+	
+	readonly Container p;
+	
+	void Foo ()
+	{
+		p[0] = 0;
+	}
 
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }

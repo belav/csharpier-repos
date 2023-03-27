@@ -2,7 +2,7 @@
 // System.Security.Cryptography.AesCryptoServiceProvider class
 //
 // Authors:
-//    Sebastien Pouliot (sebastien@xamarin.com)
+//	Sebastien Pouliot (sebastien@xamarin.com)
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 // Copyright 2013 Xamarin Inc (http://www.xamarin.com)
@@ -32,92 +32,92 @@ using System.Security.Permissions;
 using Mono.Security.Cryptography;
 
 namespace System.Security.Cryptography {
-    
-    [HostProtection (SecurityAction.LinkDemand, MayLeakOnAbort=true)]
-    public sealed class AesCryptoServiceProvider : Aes {
-        
-        public AesCryptoServiceProvider ()
-        {
-            FeedbackSizeValue = 8;
-        }
-        
-        public override void GenerateIV ()
-        {
-            IVValue = KeyBuilder.IV (BlockSizeValue >> 3);
-        }
-        
-        public override void GenerateKey ()
-        {
-            KeyValue = KeyBuilder.Key (KeySizeValue >> 3);
-        }
-        
-        public override ICryptoTransform CreateDecryptor (byte[] key, byte[] iv) 
-        {
-            if ((Mode == CipherMode.CFB) && (FeedbackSize > 64))
-                throw new CryptographicException ("CFB with Feedbaack > 64 bits");
-            return new AesTransform (this, false, key, iv);
-        }
-        
-        public override ICryptoTransform CreateEncryptor (byte[] key, byte[] iv) 
-        {
-            if ((Mode == CipherMode.CFB) && (FeedbackSize > 64))
-                throw new CryptographicException ("CFB with Feedbaack > 64 bits");
-            return new AesTransform (this, true, key, iv);
-        }
+	
+	[HostProtection (SecurityAction.LinkDemand, MayLeakOnAbort=true)]
+	public sealed class AesCryptoServiceProvider : Aes {
+		
+		public AesCryptoServiceProvider ()
+		{
+			FeedbackSizeValue = 8;
+		}
+		
+		public override void GenerateIV ()
+		{
+			IVValue = KeyBuilder.IV (BlockSizeValue >> 3);
+		}
+		
+		public override void GenerateKey ()
+		{
+			KeyValue = KeyBuilder.Key (KeySizeValue >> 3);
+		}
+		
+		public override ICryptoTransform CreateDecryptor (byte[] key, byte[] iv) 
+		{
+			if ((Mode == CipherMode.CFB) && (FeedbackSize > 64))
+				throw new CryptographicException ("CFB with Feedbaack > 64 bits");
+			return new AesTransform (this, false, key, iv);
+		}
+		
+		public override ICryptoTransform CreateEncryptor (byte[] key, byte[] iv) 
+		{
+			if ((Mode == CipherMode.CFB) && (FeedbackSize > 64))
+				throw new CryptographicException ("CFB with Feedbaack > 64 bits");
+			return new AesTransform (this, true, key, iv);
+		}
 
-        // I suppose some attributes differs ?!? because this does not look required
+		// I suppose some attributes differs ?!? because this does not look required
 
-        public override byte[] IV {
-            get { return base.IV; }
-            set { base.IV = value; }
-        }
+		public override byte[] IV {
+			get { return base.IV; }
+			set { base.IV = value; }
+		}
 
-        public override byte[] Key {
-            get { return base.Key; }
-            set { base.Key = value; }
-        }
+		public override byte[] Key {
+			get { return base.Key; }
+			set { base.Key = value; }
+		}
 
-        public override int KeySize {
-            get { return base.KeySize; }
-            set { base.KeySize = value; }
-        }
+		public override int KeySize {
+			get { return base.KeySize; }
+			set { base.KeySize = value; }
+		}
 
-        public override int FeedbackSize {
-            get { return base.FeedbackSize; }
-            set { base.FeedbackSize = value; }
-        }
+		public override int FeedbackSize {
+			get { return base.FeedbackSize; }
+			set { base.FeedbackSize = value; }
+		}
 
-        public override CipherMode Mode {
-            get { return base.Mode; }
-            set {
-                switch (value) {
-                case CipherMode.CTS:
-                    throw new CryptographicException ("CTS is not supported");
-                default:
-                    base.Mode = value;
-                    break;
-                }
-            }
-        }
+		public override CipherMode Mode {
+			get { return base.Mode; }
+			set {
+				switch (value) {
+				case CipherMode.CTS:
+					throw new CryptographicException ("CTS is not supported");
+				default:
+					base.Mode = value;
+					break;
+				}
+			}
+		}
 
-        public override PaddingMode Padding {
-            get { return base.Padding; }
-            set { base.Padding = value; }
-        }
+		public override PaddingMode Padding {
+			get { return base.Padding; }
+			set { base.Padding = value; }
+		}
 
-        public override ICryptoTransform CreateDecryptor () 
-        {
-            return CreateDecryptor (Key, IV);
-        }
+		public override ICryptoTransform CreateDecryptor () 
+		{
+			return CreateDecryptor (Key, IV);
+		}
 
-        public override ICryptoTransform CreateEncryptor() 
-        {
-            return CreateEncryptor (Key, IV);
-        }
+		public override ICryptoTransform CreateEncryptor() 
+		{
+			return CreateEncryptor (Key, IV);
+		}
 
-        protected override void Dispose (bool disposing) 
-        {
-            base.Dispose (disposing);
-        }
-    }
+		protected override void Dispose (bool disposing) 
+		{
+			base.Dispose (disposing);
+		}
+	}
 }

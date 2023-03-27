@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.FormParameter
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
 //
 // (C) 2003 Ben Maurer
 //
@@ -36,64 +36,64 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    [DefaultPropertyAttribute ("FormField")]
-    public class FormParameter : Parameter
-    {
-        public FormParameter () : base ()
-        {
-        }
+	[DefaultPropertyAttribute ("FormField")]
+	public class FormParameter : Parameter
+	{
+		public FormParameter () : base ()
+		{
+		}
 
-        protected FormParameter (FormParameter original) : base (original)
-        {
-            this.FormField = original.FormField;
-        }
-        
-        public FormParameter (string name, string formField) : base (name)
-        {
-            FormField = formField;
-        }
-        
-        public FormParameter (string name, TypeCode type, string formField) : base (name, type)
-        {
-            FormField = formField;
-        }
+		protected FormParameter (FormParameter original) : base (original)
+		{
+			this.FormField = original.FormField;
+		}
+		
+		public FormParameter (string name, string formField) : base (name)
+		{
+			FormField = formField;
+		}
+		
+		public FormParameter (string name, TypeCode type, string formField) : base (name, type)
+		{
+			FormField = formField;
+		}
 
-        public FormParameter (string name, DbType dbType, string formField) : base (name, dbType)
-        {
-            FormField = formField;
-        }
-        
-        protected override Parameter Clone ()
-        {
-            return new FormParameter (this);
-        }
-        protected internal
-        override object Evaluate (HttpContext context, Control control)
-        {
-            HttpRequest req = context != null ? context.Request : null;
-            if (req == null)
-                return null;
-            
-            return req.Form [FormField];
-        }
-        
-        [DefaultValueAttribute ("")]
-        public string FormField {
-            get {
-                string s = ViewState ["FormField"] as string;
-                if (s != null)
-                    return s;
-                
-                return String.Empty;
-            }
-            set {
-                if (FormField != value) {
-                    ViewState ["FormField"] = value;
-                    OnParameterChanged ();
-                }
-            }
-        }
-    }
+		public FormParameter (string name, DbType dbType, string formField) : base (name, dbType)
+		{
+			FormField = formField;
+		}
+		
+		protected override Parameter Clone ()
+		{
+			return new FormParameter (this);
+		}
+		protected internal
+		override object Evaluate (HttpContext context, Control control)
+		{
+			HttpRequest req = context != null ? context.Request : null;
+			if (req == null)
+				return null;
+			
+			return req.Form [FormField];
+		}
+		
+		[DefaultValueAttribute ("")]
+		public string FormField {
+			get {
+				string s = ViewState ["FormField"] as string;
+				if (s != null)
+					return s;
+				
+				return String.Empty;
+			}
+			set {
+				if (FormField != value) {
+					ViewState ["FormField"] = value;
+					OnParameterChanged ();
+				}
+			}
+		}
+	}
 }
 
 

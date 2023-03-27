@@ -6,11 +6,11 @@ using System;
 
 namespace TopNS
 {
-    class Foo
-    {
-        Foo /** incorrect */ ()
-        {
-        }
-    }
+	class Foo
+	{
+		Foo /** incorrect */ ()
+		{
+		}
+	}
 
 }

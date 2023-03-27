@@ -28,12 +28,12 @@
 
 namespace System.Web.UI 
 {
-    internal class PageThemeBuilder : UserControlControlBuilder
-    {
-        public override void AppendLiteralString (string s)
-        {
-            throw new HttpException (String.Format ("Literal content ('{0}') not allowed within a skin file", s));
-        }
-    }
+	internal class PageThemeBuilder : UserControlControlBuilder
+	{
+		public override void AppendLiteralString (string s)
+		{
+			throw new HttpException (String.Format ("Literal content ('{0}') not allowed within a skin file", s));
+		}
+	}
 
 }

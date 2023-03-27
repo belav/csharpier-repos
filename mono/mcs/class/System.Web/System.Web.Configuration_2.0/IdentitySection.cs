@@ -2,7 +2,7 @@
 // System.Web.Configuration.IdentitySection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,62 +34,62 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class IdentitySection : ConfigurationSection
-    {
-        static ConfigurationProperty impersonateProp;
-        static ConfigurationProperty passwordProp;
-        static ConfigurationProperty userNameProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class IdentitySection : ConfigurationSection
+	{
+		static ConfigurationProperty impersonateProp;
+		static ConfigurationProperty passwordProp;
+		static ConfigurationProperty userNameProp;
+		static ConfigurationPropertyCollection properties;
 
-        static IdentitySection ()
-        {
-            impersonateProp = new ConfigurationProperty ("impersonate", typeof (bool), false);
-            passwordProp = new ConfigurationProperty ("password", typeof (string), "");
-            userNameProp = new ConfigurationProperty ("userName", typeof (string), "");
-            properties = new ConfigurationPropertyCollection ();
+		static IdentitySection ()
+		{
+			impersonateProp = new ConfigurationProperty ("impersonate", typeof (bool), false);
+			passwordProp = new ConfigurationProperty ("password", typeof (string), "");
+			userNameProp = new ConfigurationProperty ("userName", typeof (string), "");
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (impersonateProp);
-            properties.Add (passwordProp);
-            properties.Add (userNameProp);
-        }
+			properties.Add (impersonateProp);
+			properties.Add (passwordProp);
+			properties.Add (userNameProp);
+		}
 
-        [MonoTODO ("why override this?")]
-        protected internal override object GetRuntimeObject ()
-        {
-            return this;
-        }
+		[MonoTODO ("why override this?")]
+		protected internal override object GetRuntimeObject ()
+		{
+			return this;
+		}
 
-        protected internal override void Reset (ConfigurationElement parentElement)
-        {
-        }
+		protected internal override void Reset (ConfigurationElement parentElement)
+		{
+		}
 
-        protected internal override void Unmerge (ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)
-        {
-        }
+		protected internal override void Unmerge (ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)
+		{
+		}
 
-        [ConfigurationProperty ("impersonate", DefaultValue = "False")]
-        public bool Impersonate {
-            get { return (bool) base [impersonateProp];}
-            set { base[impersonateProp] = value; }
-        }
+		[ConfigurationProperty ("impersonate", DefaultValue = "False")]
+		public bool Impersonate {
+			get { return (bool) base [impersonateProp];}
+			set { base[impersonateProp] = value; }
+		}
 
-        [ConfigurationProperty ("password", DefaultValue = "")]
-        public string Password {
-            get { return (string) base [passwordProp];}
-            set { base[passwordProp] = value; }
-        }
+		[ConfigurationProperty ("password", DefaultValue = "")]
+		public string Password {
+			get { return (string) base [passwordProp];}
+			set { base[passwordProp] = value; }
+		}
 
-        [ConfigurationProperty ("userName", DefaultValue = "")]
-        public string UserName {
-            get { return (string) base [userNameProp];}
-            set { base[userNameProp] = value; }
-        }
+		[ConfigurationProperty ("userName", DefaultValue = "")]
+		public string UserName {
+			get { return (string) base [userNameProp];}
+			set { base[userNameProp] = value; }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-    }
+	}
 
 }
 

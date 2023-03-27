@@ -32,50 +32,50 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {
-    public class BinaryClientFormatterSinkProvider :
-        IClientFormatterSinkProvider, IClientChannelSinkProvider
-    {
-        IClientChannelSinkProvider next = null;
-        BinaryCore _binaryCore;
+	public class BinaryClientFormatterSinkProvider :
+		IClientFormatterSinkProvider, IClientChannelSinkProvider
+	{
+		IClientChannelSinkProvider next = null;
+		BinaryCore _binaryCore;
 
-        static string[] allowedProperties = new string [] { "includeVersions", "strictBinding", "typeFilterLevel" };
+		static string[] allowedProperties = new string [] { "includeVersions", "strictBinding", "typeFilterLevel" };
 
-        public BinaryClientFormatterSinkProvider ()
-        {
-            _binaryCore = BinaryCore.DefaultClientInstance;
-        }
+		public BinaryClientFormatterSinkProvider ()
+		{
+			_binaryCore = BinaryCore.DefaultClientInstance;
+		}
 
-        public BinaryClientFormatterSinkProvider (IDictionary properties,
-                              ICollection providerData)
-        {
-            _binaryCore = new BinaryCore (this, properties, allowedProperties);
-        }
+		public BinaryClientFormatterSinkProvider (IDictionary properties,
+							  ICollection providerData)
+		{
+			_binaryCore = new BinaryCore (this, properties, allowedProperties);
+		}
 
-        public IClientChannelSinkProvider Next
-        {
-            get {
-                return next;
-            }
-            
-            set {
-                next = value;
-            }
-        }
+		public IClientChannelSinkProvider Next
+		{
+			get {
+				return next;
+			}
+			
+			set {
+				next = value;
+			}
+		}
 
-        public IClientChannelSink CreateSink (IChannelSender channel,
-                              string url,
-                              object remoteChannelData)
-        {
-            IClientChannelSink next_sink = null;
-            BinaryClientFormatterSink result;
-            
-            if (next != null)
-                next_sink = next.CreateSink (channel, url, remoteChannelData);
-            
-            result = new BinaryClientFormatterSink (next_sink);
-            result.BinaryCore = _binaryCore;
+		public IClientChannelSink CreateSink (IChannelSender channel,
+						      string url,
+						      object remoteChannelData)
+		{
+			IClientChannelSink next_sink = null;
+			BinaryClientFormatterSink result;
+			
+			if (next != null)
+				next_sink = next.CreateSink (channel, url, remoteChannelData);
+			
+			result = new BinaryClientFormatterSink (next_sink);
+			result.BinaryCore = _binaryCore;
 
-            return result;
-        }        
-    }
+			return result;
+		}		
+	}
 }

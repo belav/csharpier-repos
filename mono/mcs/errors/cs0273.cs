@@ -4,13 +4,13 @@
 
  class Error0273
  {
-     protected internal string Message {
-         public get {
-             return "Hi";
-         }
-         set {
-         }
-     }
+	 protected internal string Message {
+		 public get {
+			 return "Hi";
+		 }
+		 set {
+		 }
+	 }
 
  }
 

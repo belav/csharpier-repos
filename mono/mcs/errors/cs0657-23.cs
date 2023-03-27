@@ -10,5 +10,5 @@ public class FieldAttribute : System.Attribute
 
 class X ([field:FieldAttribute] int foo)
 {
-    int v = foo;
+	int v = foo;
 }

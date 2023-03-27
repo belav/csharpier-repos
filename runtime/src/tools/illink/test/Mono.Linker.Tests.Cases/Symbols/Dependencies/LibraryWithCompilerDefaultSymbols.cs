@@ -1,13 +1,13 @@
-namespace Mono.Linker.Tests.Cases.Symbols.Dependencies
+﻿namespace Mono.Linker.Tests.Cases.Symbols.Dependencies
 {
-    public class LibraryWithCompilerDefaultSymbols
-    {
-        public static void SomeMethod ()
-        {
-        }
+	public class LibraryWithCompilerDefaultSymbols
+	{
+		public static void SomeMethod ()
+		{
+		}
 
-        static void NotUsed ()
-        {
-        }
-    }
+		static void NotUsed ()
+		{
+		}
+	}
 }

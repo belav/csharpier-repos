@@ -2,7 +2,7 @@
 // BinaryMessageEncodingBindingElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -34,48 +34,48 @@ using System.Text;
 
 namespace System.ServiceModel.Channels
 {
-    [MonoTODO]
-    public sealed class CompositeDuplexBindingElement
-        : BindingElement
-    {
-        EndpointAddress endpoint;
+	[MonoTODO]
+	public sealed class CompositeDuplexBindingElement
+		: BindingElement
+	{
+		EndpointAddress endpoint;
 
-        public CompositeDuplexBindingElement ()
-        {
-        }
+		public CompositeDuplexBindingElement ()
+		{
+		}
 
-        private CompositeDuplexBindingElement (EndpointAddress endpoint)
-        {
-            this.endpoint = endpoint;
-        }
+		private CompositeDuplexBindingElement (EndpointAddress endpoint)
+		{
+			this.endpoint = endpoint;
+		}
 
-        public Uri ClientBaseAddress {
-            get { return endpoint.Uri; }
-            set { endpoint = new EndpointAddress (value); }
-        }
+		public Uri ClientBaseAddress {
+			get { return endpoint.Uri; }
+			set { endpoint = new EndpointAddress (value); }
+		}
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
-            BindingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
+			BindingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
-            BindingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		public override IChannelListener<TChannel>
+			BuildChannelListener<TChannel> (
+			BindingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override BindingElement Clone ()
-        {
-            return new CompositeDuplexBindingElement (endpoint);
-        }
+		public override BindingElement Clone ()
+		{
+			return new CompositeDuplexBindingElement (endpoint);
+		}
 
-        [MonoTODO]
-        public override T GetProperty<T> (BindingContext context)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override T GetProperty<T> (BindingContext context)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

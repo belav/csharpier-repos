@@ -33,48 +33,48 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-    [TestFixture]
-    public class OracleDataAdapter_ContinueUpdateOnError : ADONetTesterClass
-    {
-        public static void Main()
-        {
-            OracleDataAdapter_ContinueUpdateOnError tc = new OracleDataAdapter_ContinueUpdateOnError();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OracleDataAdapter_ContinueUpdateOnError");
-                tc.run();
-            }
-            catch(Exception ex)
-            {
-                exp = ex;
-            }
-            finally
-            {
-                tc.EndTest(exp);
-            }
-        }
+	[TestFixture]
+	public class OracleDataAdapter_ContinueUpdateOnError : ADONetTesterClass
+	{
+		public static void Main()
+		{
+			OracleDataAdapter_ContinueUpdateOnError tc = new OracleDataAdapter_ContinueUpdateOnError();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OracleDataAdapter_ContinueUpdateOnError");
+				tc.run();
+			}
+			catch(Exception ex)
+			{
+				exp = ex;
+			}
+			finally
+			{
+				tc.EndTest(exp);
+			}
+		}
 
 
-        //public TestClass():base(true){}
+		//public TestClass():base(true){}
 
-        //Activate this constructor to log Failures to a log file
-        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-        //Activate this constructor to log All to a log file
-        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-        [Test]
-        public void run()
-        {
-            OracleDataAdapter oleDBda = new OracleDataAdapter();
-            oleDBda.SelectCommand = new OracleCommand("",new OracleConnection());
+		//Activate this constructor to log Failures to a log file
+		//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-            base.DataAdapter_ContinueUpdateOnError((DbDataAdapter)oleDBda);
-        }
-    }
+		//Activate this constructor to log All to a log file
+		//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+		//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+		[Test]
+		public void run()
+		{
+			OracleDataAdapter oleDBda = new OracleDataAdapter();
+			oleDBda.SelectCommand = new OracleCommand("",new OracleConnection());
+
+
+			base.DataAdapter_ContinueUpdateOnError((DbDataAdapter)oleDBda);
+		}
+	}
 }

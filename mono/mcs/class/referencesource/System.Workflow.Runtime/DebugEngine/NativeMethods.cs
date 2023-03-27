@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corp., 2004. All rights reserved.
+﻿// Copyright (c) Microsoft Corp., 2004. All rights reserved.
 #region Using directives
 
 using System;

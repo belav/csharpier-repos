@@ -4,8 +4,8 @@
 
 class C
 {
-    public static void Main ()
-    {
-        A.Test (new B ());
-    }
+	public static void Main ()
+	{
+		A.Test (new B ());
+	}
 }

@@ -52,7 +52,7 @@ namespace MyTemplateControls
       TestTemplateItemCreatedEventHandler eh = ItemCreated;
 
       if (eh != null)
-    eh (this, new TestTemplateItemEventArgs (item));
+	eh (this, new TestTemplateItemEventArgs (item));
     }
   }
 
@@ -110,9 +110,9 @@ namespace MyTemplateControls
       ITemplate template;
 
       if (container.ItemTemplate == null)
-    template = new DefaultTemplate ();
+	template = new DefaultTemplate ();
       else
-    template = container.ItemTemplate;
+	template = container.ItemTemplate;
 
       template.InstantiateIn (this);
       container.Owner.OnItemCreated (this);

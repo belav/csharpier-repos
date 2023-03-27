@@ -23,7 +23,7 @@
 // Copyright (C) 2004-2005, Novell, Inc.
 //
 // Authors:
-//    Jordi Mas i Hernandez    jordi@ximian.com
+//	Jordi Mas i Hernandez	jordi@ximian.com
 //
 
 
@@ -33,46 +33,46 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms 
 {
-    [ClassInterface (ClassInterfaceType.AutoDispatch)]
-    [ComVisible (true)]
-    public class VScrollBar : ScrollBar 
-    {        
-        #region events
-        
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [Browsable (false)]
-        public new event EventHandler RightToLeftChanged {
-            add { base.RightToLeftChanged += value; }
-            remove { base.RightToLeftChanged -= value; }
-        }
-        
-        #endregion Events
+	[ClassInterface (ClassInterfaceType.AutoDispatch)]
+	[ComVisible (true)]
+	public class VScrollBar : ScrollBar 
+	{		
+		#region events
+		
+		[EditorBrowsable (EditorBrowsableState.Never)]
+		[Browsable (false)]
+		public new event EventHandler RightToLeftChanged {
+			add { base.RightToLeftChanged += value; }
+			remove { base.RightToLeftChanged -= value; }
+		}
+		
+		#endregion Events
 
-        public VScrollBar()
-        {            
-            vert = true;
-        }
+		public VScrollBar()
+		{			
+			vert = true;
+		}
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [Browsable (false)]
-        public override RightToLeft RightToLeft {
-            get { return base.RightToLeft; }
-            set {
-                if (RightToLeft == value)
-                    return;
+		[EditorBrowsable (EditorBrowsableState.Never)]
+		[Browsable (false)]
+		public override RightToLeft RightToLeft {
+			get { return base.RightToLeft; }
+			set {
+				if (RightToLeft == value)
+					return;
 
-                base.RightToLeft = value;
+				base.RightToLeft = value;
 
-                OnRightToLeftChanged (EventArgs.Empty);
-            }
-        }
+				OnRightToLeftChanged (EventArgs.Empty);
+			}
+		}
 
-        protected override Size DefaultSize {
-            get { return ThemeEngine.Current.VScrollBarDefaultSize; }
-        }    
+		protected override Size DefaultSize {
+			get { return ThemeEngine.Current.VScrollBarDefaultSize; }
+		}	
 
-        protected override CreateParams CreateParams {
-            get { return base.CreateParams; }
-        }        
-    }
+		protected override CreateParams CreateParams {
+			get { return base.CreateParams; }
+		}		
+	}
 }

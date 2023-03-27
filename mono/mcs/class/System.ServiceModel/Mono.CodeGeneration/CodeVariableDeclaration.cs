@@ -28,29 +28,29 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeVariableDeclaration: CodeStatement
-    {
-        CodeVariableReference var;
-        
-        public CodeVariableDeclaration (Type type, string name)
-        {
-            var = new CodeVariableReference (type, name);
-        }
-        
-        public override void Generate (ILGenerator gen)
-        {
-            var.LocalBuilder = gen.DeclareLocal (var.Type);
-        }
-        
-        public override void PrintCode (CodeWriter cp)
-        {
-            cp.Write (var.Type.FullName + " " + var.Name);
-        }
-        
-        public CodeVariableReference Variable
-        {
-            get { return var; }
-        }
-    }
+	public class CodeVariableDeclaration: CodeStatement
+	{
+		CodeVariableReference var;
+		
+		public CodeVariableDeclaration (Type type, string name)
+		{
+			var = new CodeVariableReference (type, name);
+		}
+		
+		public override void Generate (ILGenerator gen)
+		{
+			var.LocalBuilder = gen.DeclareLocal (var.Type);
+		}
+		
+		public override void PrintCode (CodeWriter cp)
+		{
+			cp.Write (var.Type.FullName + " " + var.Name);
+		}
+		
+		public CodeVariableReference Variable
+		{
+			get { return var; }
+		}
+	}
 }
 #endif

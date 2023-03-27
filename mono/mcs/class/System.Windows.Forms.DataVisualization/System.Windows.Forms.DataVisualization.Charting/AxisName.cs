@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,11 +27,11 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum AxisName
-    {
-        X = 0,
-        Y = 1,
-        X2 = 2,
-        Y2 = 3
-    }
+	public enum AxisName
+	{
+		X = 0,
+		Y = 1,
+		X2 = 2,
+		Y2 = 3
+	}
 }

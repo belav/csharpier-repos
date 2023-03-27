@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DesignerAutoFormat
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -37,17 +37,17 @@ using System.Collections;
 
 namespace System.Web.UI.Design
 {
-    public class DesignerAutoFormatStyle : Style
-    {
-        public DesignerAutoFormatStyle ()
-        {
-        }
+	public class DesignerAutoFormatStyle : Style
+	{
+		public DesignerAutoFormatStyle ()
+		{
+		}
 
-        [MonoTODO]
-        public VerticalAlign VerticalAlign {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
-    }
+		[MonoTODO]
+		public VerticalAlign VerticalAlign {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
+	}
 }
 

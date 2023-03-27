@@ -2,7 +2,7 @@
 // System.Web.Security.DefaultAuthenticationModule
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -36,48 +36,48 @@ using System.Threading;
 //
 namespace System.Web.Security
 {
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class DefaultAuthenticationModule : IHttpModule
-    {
-        static readonly object authenticateEvent = new object ();
-        static IPrincipal generic_principal = new GenericPrincipal (new GenericIdentity ("", ""), new string [0]);
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class DefaultAuthenticationModule : IHttpModule
+	{
+		static readonly object authenticateEvent = new object ();
+		static IPrincipal generic_principal = new GenericPrincipal (new GenericIdentity ("", ""), new string [0]);
 
-        EventHandlerList events = new EventHandlerList ();
-        
-        public event DefaultAuthenticationEventHandler Authenticate {
-            add { events.AddHandler (authenticateEvent, value); }
-            remove { events.RemoveHandler (authenticateEvent, value); }
-        }
-        
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        public DefaultAuthenticationModule ()
-        {
-        }
+		EventHandlerList events = new EventHandlerList ();
+		
+		public event DefaultAuthenticationEventHandler Authenticate {
+			add { events.AddHandler (authenticateEvent, value); }
+			remove { events.RemoveHandler (authenticateEvent, value); }
+		}
+		
+		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+		public DefaultAuthenticationModule ()
+		{
+		}
 
-        public void Dispose ()
-        {
-        }
+		public void Dispose ()
+		{
+		}
 
-        public void Init (HttpApplication app)
-        {
-            app.DefaultAuthentication += new EventHandler (OnDefaultAuthentication);
-        }
+		public void Init (HttpApplication app)
+		{
+			app.DefaultAuthentication += new EventHandler (OnDefaultAuthentication);
+		}
 
-        void OnDefaultAuthentication (object sender, EventArgs args)
-        {
-            HttpApplication app = (HttpApplication) sender;
-            HttpContext context = app.Context;
+		void OnDefaultAuthentication (object sender, EventArgs args)
+		{
+			HttpApplication app = (HttpApplication) sender;
+			HttpContext context = app.Context;
 
-            DefaultAuthenticationEventHandler eh = events [authenticateEvent] as DefaultAuthenticationEventHandler;
-            if (context.User == null && eh != null)
-                eh (this, new DefaultAuthenticationEventArgs (context));
+			DefaultAuthenticationEventHandler eh = events [authenticateEvent] as DefaultAuthenticationEventHandler;
+			if (context.User == null && eh != null)
+				eh (this, new DefaultAuthenticationEventArgs (context));
 
-            if (context.User == null)
-                context.User = generic_principal;
+			if (context.User == null)
+				context.User = generic_principal;
 
-            Thread.CurrentPrincipal = context.User;
-        }
-    }
+			Thread.CurrentPrincipal = context.User;
+		}
+	}
 }
 

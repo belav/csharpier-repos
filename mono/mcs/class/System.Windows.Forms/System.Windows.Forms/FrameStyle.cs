@@ -20,15 +20,15 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public enum FrameStyle {
-        Dashed    = 0,
-        Thick    = 1
-    }
+	public enum FrameStyle {
+		Dashed	= 0,
+		Thick	= 1
+	}
 }

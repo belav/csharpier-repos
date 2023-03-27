@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,38 +29,38 @@ using System.Threading;
 
 namespace System.Windows.Threading {
 
-    public sealed class DispatcherSynchronizationContext : SynchronizationContext
-    {
-        public DispatcherSynchronizationContext ()
-        {
-            throw new NotImplementedException ();
-        }
+	public sealed class DispatcherSynchronizationContext : SynchronizationContext
+	{
+		public DispatcherSynchronizationContext ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public DispatcherSynchronizationContext (Dispatcher dispatcher)
-        {
-            throw new NotImplementedException ();
-        }
+		public DispatcherSynchronizationContext (Dispatcher dispatcher)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override SynchronizationContext CreateCopy ()
-        {
-            throw new NotImplementedException ();
-        }
+		public override SynchronizationContext CreateCopy ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void Post (SendOrPostCallback d, object state)
-        {
-            throw new NotImplementedException ();
-        }
+		public override void Post (SendOrPostCallback d, object state)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void Send (SendOrPostCallback d, object state)
-        {
-            throw new NotImplementedException ();
-        }
+		public override void Send (SendOrPostCallback d, object state)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [SecurityCritical]
-        public override int Wait (IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[SecurityCritical]
+		public override int Wait (IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 
 }

@@ -30,15 +30,15 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public enum SecurityProtocol
-    {
-        Pct1Server,
-        Pct1Client,
-        Ssl2Server,
-        Ssl2Client,
-        Ssl3Server,
-        Ssl3Client,
-        Tls1Server,
-        Tls1Client,
-    }
+	public enum SecurityProtocol
+	{
+		Pct1Server,
+		Pct1Client,
+		Ssl2Server,
+		Ssl2Client,
+		Ssl3Server,
+		Ssl3Client,
+		Tls1Server,
+		Tls1Client,
+	}
 }

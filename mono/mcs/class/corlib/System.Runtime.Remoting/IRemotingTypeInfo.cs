@@ -34,10 +34,10 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IRemotingTypeInfo
-    {
-        string TypeName { get; set; }
-        bool CanCastTo (Type fromType, object o);
-    }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IRemotingTypeInfo
+	{
+		string TypeName { get; set; }
+		bool CanCastTo (Type fromType, object o);
+	}
 }

@@ -5,21 +5,21 @@ using System.Runtime.CompilerServices;
 public class Gen<T> {
     [MethodImplAttribute(MethodImplOptions.Synchronized)]
     public int synch () {
-    return 123;
+	return 123;
     }
 
     public int callSynch () {
-    return synch ();
+	return synch ();
     }
 }
 
 public class main {
     public static int Main () {
-    Gen<string> gs = new Gen<string> ();
+	Gen<string> gs = new Gen<string> ();
 
-    gs.synch ();
-    gs.callSynch ();
+	gs.synch ();
+	gs.callSynch ();
 
-    return 0;
+	return 0;
     }
 }

@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,14 +27,14 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum CalloutStyle
-    {
-        SimpleLine = 0,
-        Borderline = 1,
-        Cloud = 2,
-        Rectangle = 3,
-        RoundedRectangle = 4,
-        Ellipse = 5,
-        Perspective = 6
-    }
+	public enum CalloutStyle
+	{
+		SimpleLine = 0,
+		Borderline = 1,
+		Cloud = 2,
+		Rectangle = 3,
+		RoundedRectangle = 4,
+		Ellipse = 5,
+		Perspective = 6
+	}
 }

@@ -2,7 +2,7 @@
 // CatchFilter.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,19 +27,19 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    class CatchFilter : Statement {
-        public CatchFilter () : base (NodeType.Filter)
-        {
-        }
+	class CatchFilter : Statement {
+		public CatchFilter () : base (NodeType.Filter)
+		{
+		}
 
-        public CatchFilter (Block block, Expression expression)
-            : base (NodeType.Filter)
-        {
-            Block = block;
-            Expression = expression;
-        }
+		public CatchFilter (Block block, Expression expression)
+			: base (NodeType.Filter)
+		{
+			Block = block;
+			Expression = expression;
+		}
 
-        public Block Block { get; set; }
-        public Expression Expression { get; set; }
-    }
+		public Block Block { get; set; }
+		public Expression Expression { get; set; }
+	}
 }

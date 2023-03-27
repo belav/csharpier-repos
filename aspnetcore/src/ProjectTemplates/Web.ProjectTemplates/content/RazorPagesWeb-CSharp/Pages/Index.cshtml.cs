@@ -1,4 +1,4 @@
-#if (GenerateApiOrGraph)
+﻿#if (GenerateApiOrGraph)
 using System.Net;
 #endif
 using Microsoft.AspNetCore.Mvc;

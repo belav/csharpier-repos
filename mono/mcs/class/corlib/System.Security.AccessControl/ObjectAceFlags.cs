@@ -2,7 +2,7 @@
 // System.Security.AccessControl.ObjectAceFlags enum
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -27,11 +27,11 @@
 //
 
 namespace System.Security.AccessControl {
-    [Flags]
-    public enum ObjectAceFlags {
-        None = 0,
-        ObjectAceTypePresent = 1,
-        InheritedObjectAceTypePresent = 2,
-    }
+	[Flags]
+	public enum ObjectAceFlags {
+		None = 0,
+		ObjectAceTypePresent = 1,
+		InheritedObjectAceTypePresent = 2,
+	}
 }
 

@@ -20,16 +20,16 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.Windows.Media {
 
-    [AttributeUsage (AttributeTargets.Assembly, AllowMultiple = false)]
-    public sealed class DisableDpiAwarenessAttribute : Attribute
-    {
-    }
+	[AttributeUsage (AttributeTargets.Assembly, AllowMultiple = false)]
+	public sealed class DisableDpiAwarenessAttribute : Attribute
+	{
+	}
 }
 

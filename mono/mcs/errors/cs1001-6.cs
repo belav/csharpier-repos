@@ -3,7 +3,7 @@
 
 public class MonoRuntime
 {
-    public static void Main (A, B)
-    {
-    }
+	public static void Main (A, B)
+	{
+	}
 }

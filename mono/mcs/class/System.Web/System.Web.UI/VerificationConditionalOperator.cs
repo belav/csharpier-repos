@@ -2,7 +2,7 @@
 // System.Web.UI.VerificationConditionalOperator.cs
 //
 // Authors:
-//    Sanjay Gupta (gsanjay@novell.com)
+//	Sanjay Gupta (gsanjay@novell.com)
 //
 // Copyright (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -29,10 +29,10 @@
 
 namespace System.Web.UI 
 {
-    public enum VerificationConditionalOperator 
-    {
-        Equals = 0,
-        NotEquals = 1
-    } 
+	public enum VerificationConditionalOperator 
+	{
+		Equals = 0,
+		NotEquals = 1
+	} 
 }
 

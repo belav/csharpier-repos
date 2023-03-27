@@ -17,14 +17,14 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Repro
 {
-    [SkipKeptItemsValidation]
-    [ExpectedNoWarnings]
-    public class Program
-    {
+	[SkipKeptItemsValidation]
+	[ExpectedNoWarnings]
+	public class Program
+	{
 
-        public static void Main ()
-        {
-            Console.WriteLine ("HelloWorld");
-        }
-    }
+		public static void Main ()
+		{
+			Console.WriteLine ("HelloWorld");
+		}
+	}
 }

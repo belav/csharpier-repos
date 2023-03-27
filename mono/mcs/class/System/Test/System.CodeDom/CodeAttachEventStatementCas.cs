@@ -1,9 +1,9 @@
 //
 // CodeAttachEventStatementCas.cs
-//    - CAS unit tests for System.CodeDom.CodeAttachEventStatement
+//	- CAS unit tests for System.CodeDom.CodeAttachEventStatement
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,64 +37,64 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeAttachEventStatementCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeAttachEventStatementCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeAttachEventStatement caes = new CodeAttachEventStatement ();
-            Assert.AreEqual (String.Empty, caes.Event.EventName, "Event.EventName");
-            Assert.IsNull (caes.Event.TargetObject, "Event.TargetObject");
-            caes.Event = new CodeEventReferenceExpression ();
-            Assert.IsNull (caes.Listener, "Listener");
-            caes.Listener = new CodeExpression ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeAttachEventStatement caes = new CodeAttachEventStatement ();
+			Assert.AreEqual (String.Empty, caes.Event.EventName, "Event.EventName");
+			Assert.IsNull (caes.Event.TargetObject, "Event.TargetObject");
+			caes.Event = new CodeEventReferenceExpression ();
+			Assert.IsNull (caes.Listener, "Listener");
+			caes.Listener = new CodeExpression ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeEventReferenceExpression eventref = new CodeEventReferenceExpression ();
-            CodeExpression listener = new CodeExpression ();
-            CodeAttachEventStatement caes = new CodeAttachEventStatement (eventref, listener);
-            Assert.AreSame (eventref, caes.Event, "Event");
-            caes.Event = new CodeEventReferenceExpression ();
-            Assert.AreSame (listener, caes.Listener, "Listener");
-            caes.Listener = new CodeExpression ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeEventReferenceExpression eventref = new CodeEventReferenceExpression ();
+			CodeExpression listener = new CodeExpression ();
+			CodeAttachEventStatement caes = new CodeAttachEventStatement (eventref, listener);
+			Assert.AreSame (eventref, caes.Event, "Event");
+			caes.Event = new CodeEventReferenceExpression ();
+			Assert.AreSame (listener, caes.Listener, "Listener");
+			caes.Listener = new CodeExpression ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2_Deny_Unrestricted ()
-        {
-            CodeExpression target = new CodeExpression ();
-            string eventName = "Mono";
-            CodeExpression listener = new CodeExpression ();
-            CodeAttachEventStatement caes = new CodeAttachEventStatement (target, eventName, listener);
-            Assert.AreEqual (eventName, caes.Event.EventName, "Event.EventName");
-            Assert.AreSame (target, caes.Event.TargetObject, "Event.TargetObject");
-            caes.Event = new CodeEventReferenceExpression ();
-            Assert.AreSame (listener, caes.Listener, "Listener");
-            caes.Listener = new CodeExpression ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2_Deny_Unrestricted ()
+		{
+			CodeExpression target = new CodeExpression ();
+			string eventName = "Mono";
+			CodeExpression listener = new CodeExpression ();
+			CodeAttachEventStatement caes = new CodeAttachEventStatement (target, eventName, listener);
+			Assert.AreEqual (eventName, caes.Event.EventName, "Event.EventName");
+			Assert.AreSame (target, caes.Event.TargetObject, "Event.TargetObject");
+			caes.Event = new CodeEventReferenceExpression ();
+			Assert.AreSame (listener, caes.Listener, "Listener");
+			caes.Listener = new CodeExpression ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeAttachEventStatement).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeAttachEventStatement).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

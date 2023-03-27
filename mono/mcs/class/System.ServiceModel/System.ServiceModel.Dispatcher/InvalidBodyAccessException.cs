@@ -31,12 +31,12 @@ using System.Runtime.Serialization;
 
 namespace System.ServiceModel.Dispatcher
 {
-    [Serializable]
-    public abstract class InvalidBodyAccessException : SystemException
-    {
-        protected InvalidBodyAccessException (string message) : base (message) {}
-        protected InvalidBodyAccessException (string message, Exception innerException) : base (message, innerException) {}
-        protected InvalidBodyAccessException (SerializationInfo info, StreamingContext context)
-            : base (info, context) {}
-    }
+	[Serializable]
+	public abstract class InvalidBodyAccessException : SystemException
+	{
+		protected InvalidBodyAccessException (string message) : base (message) {}
+		protected InvalidBodyAccessException (string message, Exception innerException) : base (message, innerException) {}
+		protected InvalidBodyAccessException (SerializationInfo info, StreamingContext context)
+			: base (info, context) {}
+	}
 }

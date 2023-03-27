@@ -37,71 +37,71 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class ConstraintCollection_Count : GHTBase
 {
-    [Test] public void Main()
-    {
-        ConstraintCollection_Count tc = new ConstraintCollection_Count();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("ConstraintCollection_Count");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
+	[Test] public void Main()
+	{
+		ConstraintCollection_Count tc = new ConstraintCollection_Count();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("ConstraintCollection_Count");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("ConstraintCollection_Count");
-            ConstraintCollection_Count1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-    private void ConstraintCollection_Count1()
-    {
-        DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
-        Compare(dt.Constraints.Count,1);
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("ConstraintCollection_Count");
+			ConstraintCollection_Count1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
+	private void ConstraintCollection_Count1()
+	{
+		DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
+		Compare(dt.Constraints.Count,1);
 
-        //Add
+		//Add
 
-        dt.Constraints.Add("constraint2",dt.Columns["String1"],false);
-        Compare(dt.Constraints.Count,2);
+		dt.Constraints.Add("constraint2",dt.Columns["String1"],false);
+		Compare(dt.Constraints.Count,2);
 
-        //Remove
+		//Remove
 
-        dt.Constraints.Remove("constraint2");
-        Compare(dt.Constraints.Count,1);
+		dt.Constraints.Remove("constraint2");
+		Compare(dt.Constraints.Count,1);
 
-    }
+	}
 }
 }

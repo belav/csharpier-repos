@@ -32,13 +32,13 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class DirectoryAttributeModification : DirectoryAttribute
-    {
-        public DirectoryAttributeModification ()
-        {
-        }
+	public class DirectoryAttributeModification : DirectoryAttribute
+	{
+		public DirectoryAttributeModification ()
+		{
+		}
 
-        public DirectoryAttributeOperation Operation { get; set; }
+		public DirectoryAttributeOperation Operation { get; set; }
 
-    }
+	}
 }

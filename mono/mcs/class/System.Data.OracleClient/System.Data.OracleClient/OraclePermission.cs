@@ -8,8 +8,8 @@
 // Namespace: System.Data.OracleClient
 //
 // Authors:
-//    Tim Coleman <tim@timcoleman.com>
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Tim Coleman <tim@timcoleman.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) Tim Coleman, 2003
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -24,30 +24,30 @@ using System.Security.Permissions;
 
 namespace System.Data.OracleClient {
 
-    [Serializable]
-    [MonoTODO ("Current MS implementation of Data Provider requires FullTrust")]
-    public sealed class OraclePermission : DBDataPermission {
+	[Serializable]
+	[MonoTODO ("Current MS implementation of Data Provider requires FullTrust")]
+	public sealed class OraclePermission : DBDataPermission {
 
-        public OraclePermission (PermissionState state)
-            : base (state)
-        {
-        }
+		public OraclePermission (PermissionState state)
+			: base (state)
+		{
+		}
 
-        // required for Copy method
-        internal OraclePermission (DBDataPermission permission)
-            : base (permission)
-        {
-        }
+		// required for Copy method
+		internal OraclePermission (DBDataPermission permission)
+			: base (permission)
+		{
+		}
 
-        // easier (and common) permission creation from attribute class
-        internal OraclePermission (DBDataPermissionAttribute attribute)
-            : base (attribute)
-        {
-        }
+		// easier (and common) permission creation from attribute class
+		internal OraclePermission (DBDataPermissionAttribute attribute)
+			: base (attribute)
+		{
+		}
 
-        public override IPermission Copy ()
-        {
-            return new OraclePermission (this);
-        }
-    }
+		public override IPermission Copy ()
+		{
+			return new OraclePermission (this);
+		}
+	}
 }

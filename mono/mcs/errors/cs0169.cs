@@ -3,7 +3,7 @@
 // Compiler options: -warnaserror -warn:4
 
 class X {
-    int x;
+	int x;
 
-    static void Main () {}
+	static void Main () {}
 }

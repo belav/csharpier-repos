@@ -2,7 +2,7 @@
 // ClaimTypeRequirement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -28,28 +28,28 @@
 
 namespace System.ServiceModel.Security.Tokens
 {
-    public class ClaimTypeRequirement
-    {
-        public ClaimTypeRequirement (string claimType)
-            : this (claimType, false)
-        {
-        }
+	public class ClaimTypeRequirement
+	{
+		public ClaimTypeRequirement (string claimType)
+			: this (claimType, false)
+		{
+		}
 
-        public ClaimTypeRequirement (string claimType, bool isOptional)
-        {
-            claim_type = claimType;
-            is_optional = isOptional;
-        }
+		public ClaimTypeRequirement (string claimType, bool isOptional)
+		{
+			claim_type = claimType;
+			is_optional = isOptional;
+		}
 
-        public string ClaimType {
-            get { return claim_type; }
-        }
+		public string ClaimType {
+			get { return claim_type; }
+		}
 
-        public bool IsOptional {
-            get { return is_optional; }
-        }
+		public bool IsOptional {
+			get { return is_optional; }
+		}
 
-        string claim_type;
-        bool is_optional;
-    }
+		string claim_type;
+		bool is_optional;
+	}
 }

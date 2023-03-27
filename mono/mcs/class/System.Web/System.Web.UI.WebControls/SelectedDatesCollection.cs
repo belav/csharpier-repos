@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SelectedDatesCollection
 //
 // Authors:
-//    Ben Maurer (bmaurer@novell.com)
+//	Ben Maurer (bmaurer@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,89 +31,89 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
 
-    // CAS - no inheritance demand required because the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class SelectedDatesCollection : ICollection {
+	// CAS - no inheritance demand required because the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class SelectedDatesCollection : ICollection {
 
-        ArrayList l;
-        
-        public SelectedDatesCollection (ArrayList dateList)
-        {
-            l = dateList;
-        }
-        
-    
-        public void Add (DateTime date)
-        {
-            date = date.Date;
-            if (!l.Contains (date))
-                l.Add (date);
-        }
-        
-        public void Clear ()
-        {
-            l.Clear ();
-        }
-        
-        public bool Contains (DateTime date)
-        {
-            return l.Contains (date.Date);
-        }
-        
-        public void CopyTo (Array array, int index)
-        {
-            l.CopyTo (array, index);
-        }
-        
-        public IEnumerator GetEnumerator ()
-        {
-            return l.GetEnumerator ();
-        }
-        
-        public void Remove (DateTime date)
-        {
-            l.Remove (date.Date);
-        }
-        
-        public void SelectRange (DateTime fromDate, DateTime toDate)
-        {
-            fromDate = fromDate.Date;
-            toDate = toDate.Date;
-            
-            l.Clear ();
-            for (DateTime dt = fromDate; dt <= toDate; dt = dt.AddDays (1))
-                Add (dt);
-        }
-            
-        public int Count {
-            get {
-                return l.Count;
-            }
-        }
-        
-        public bool IsReadOnly {
-            get {
-                return l.IsReadOnly;
-            }
-        }
-        
-        public bool IsSynchronized {
-            get {
-                return l.IsSynchronized;
-            }
-        }
-        
-        public DateTime this [int index] {
-            get {
-                return (DateTime) l [index];
-            }
-        }
-        
-        public object SyncRoot {
-            get {
-                return this;
-            }
-        }
+		ArrayList l;
+		
+		public SelectedDatesCollection (ArrayList dateList)
+		{
+			l = dateList;
+		}
+		
+	
+		public void Add (DateTime date)
+		{
+			date = date.Date;
+			if (!l.Contains (date))
+				l.Add (date);
+		}
+		
+		public void Clear ()
+		{
+			l.Clear ();
+		}
+		
+		public bool Contains (DateTime date)
+		{
+			return l.Contains (date.Date);
+		}
+		
+		public void CopyTo (Array array, int index)
+		{
+			l.CopyTo (array, index);
+		}
+		
+		public IEnumerator GetEnumerator ()
+		{
+			return l.GetEnumerator ();
+		}
+		
+		public void Remove (DateTime date)
+		{
+			l.Remove (date.Date);
+		}
+		
+		public void SelectRange (DateTime fromDate, DateTime toDate)
+		{
+			fromDate = fromDate.Date;
+			toDate = toDate.Date;
+			
+			l.Clear ();
+			for (DateTime dt = fromDate; dt <= toDate; dt = dt.AddDays (1))
+				Add (dt);
+		}
+			
+		public int Count {
+			get {
+				return l.Count;
+			}
+		}
+		
+		public bool IsReadOnly {
+			get {
+				return l.IsReadOnly;
+			}
+		}
+		
+		public bool IsSynchronized {
+			get {
+				return l.IsSynchronized;
+			}
+		}
+		
+		public DateTime this [int index] {
+			get {
+				return (DateTime) l [index];
+			}
+		}
+		
+		public object SyncRoot {
+			get {
+				return this;
+			}
+		}
 
-    }
+	}
 }

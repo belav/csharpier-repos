@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,12 +28,12 @@ using System.ComponentModel;
 
 namespace System.Windows {
 
-    [TypeConverter (typeof (ExpressionConverter))]
-    public class Expression
-    {
-        internal Expression ()
-        {
-        }
-    }
+	[TypeConverter (typeof (ExpressionConverter))]
+	public class Expression
+	{
+		internal Expression ()
+		{
+		}
+	}
 
 }

@@ -32,50 +32,50 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Class)]
-    [ComVisible(false)]
-    public sealed class TransactionAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class)]
+	[ComVisible(false)]
+	public sealed class TransactionAttribute : Attribute {
 
-        #region Fields
+		#region Fields
 
-        TransactionIsolationLevel isolation;
-        int timeout;
-        TransactionOption val;
+		TransactionIsolationLevel isolation;
+		int timeout;
+		TransactionOption val;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public TransactionAttribute ()
-            : this (TransactionOption.Required)
-        {
-        }
+		public TransactionAttribute ()
+			: this (TransactionOption.Required)
+		{
+		}
 
-        public TransactionAttribute (TransactionOption val)
-        {
-            this.isolation = TransactionIsolationLevel.Serializable;
-            this.timeout = -1;
-            this.val = val;
-        }
+		public TransactionAttribute (TransactionOption val)
+		{
+			this.isolation = TransactionIsolationLevel.Serializable;
+			this.timeout = -1;
+			this.val = val;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public TransactionIsolationLevel Isolation {
-            get { return isolation; }
-            set { isolation = value; }
-        }
+		public TransactionIsolationLevel Isolation {
+			get { return isolation; }
+			set { isolation = value; }
+		}
 
-        public int Timeout {
-            get { return timeout; }
-            set { timeout = value; }
-        }
+		public int Timeout {
+			get { return timeout; }
+			set { timeout = value; }
+		}
 
-        public TransactionOption Value {
-            get { return val; }
-        }
+		public TransactionOption Value {
+			get { return val; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

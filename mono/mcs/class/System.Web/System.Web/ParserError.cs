@@ -2,7 +2,7 @@
 // System.Web.ParserError.cs
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004-2009 Novell, Inc (http://www.novell.com)
 //
@@ -33,38 +33,38 @@ using System.Runtime.Serialization;
 
 namespace System.Web
 {
-    [Serializable]
-    public sealed class ParserError
-    {
-        string _errorText;
-        string _virtualPath;
-        int _line;
+	[Serializable]
+	public sealed class ParserError
+	{
+		string _errorText;
+		string _virtualPath;
+		int _line;
 
-        public ParserError ()
-        {
-        }
+		public ParserError ()
+		{
+		}
 
-        public ParserError (string errorText, string virtualPath, int line)
-        {
-            _errorText = errorText;
-            _virtualPath = virtualPath;
-            _line = line;
-        }
+		public ParserError (string errorText, string virtualPath, int line)
+		{
+			_errorText = errorText;
+			_virtualPath = virtualPath;
+			_line = line;
+		}
 
-        public string ErrorText {
-            get { return _errorText; }
-            set { _errorText = value; }
-        }
-        
-        public string VirtualPath {
-            get { return _virtualPath; }
-            set { _virtualPath = value; }
-        }
+		public string ErrorText {
+			get { return _errorText; }
+			set { _errorText = value; }
+		}
+		
+		public string VirtualPath {
+			get { return _virtualPath; }
+			set { _virtualPath = value; }
+		}
 
-        public int Line {
-            get { return _line; }
-            set { _line = value; }
-        }
-    }
+		public int Line {
+			get { return _line; }
+			set { _line = value; }
+		}
+	}
 }
 

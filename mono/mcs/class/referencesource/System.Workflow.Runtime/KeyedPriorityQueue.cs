@@ -1,4 +1,4 @@
-// <copyright file="KeyedPriorityQueue.cs" company="Microsoft">Copyright (c) Microsoft Corporation.  All rights reserved.</copyright>
+﻿// <copyright file="KeyedPriorityQueue.cs" company="Microsoft">Copyright (c) Microsoft Corporation.  All rights reserved.</copyright>
 
 using System;
 using System.Diagnostics;

@@ -39,69 +39,69 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRelation_nested : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRelation_nested tc = new DataRelation_nested();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRelation_nested");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRelation_nested tc = new DataRelation_nested();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRelation_nested");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        DataSet ds = new DataSet();
-        DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable();
-        DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
-        ds.Tables.Add(dtParent);
-        ds.Tables.Add(dtChild);
-
-        DataRelation dRel;
-        dRel = new DataRelation(null,dtParent.Columns[0],dtChild.Columns[0]);
-        ds.Relations.Add(dRel);
-                
-        try
-        {
-            BeginCase("Nested default ");
-            Compare(dRel.Nested  , false);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-        dRel.Nested = true;
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-        try
-        {
-            BeginCase("Nested get/set");
-            Compare(dRel.Nested ,true);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    
-    }
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	public void run()
+	{
+		Exception exp = null;
+		DataSet ds = new DataSet();
+		DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable();
+		DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+		ds.Tables.Add(dtParent);
+		ds.Tables.Add(dtChild);
+
+		DataRelation dRel;
+		dRel = new DataRelation(null,dtParent.Columns[0],dtChild.Columns[0]);
+		ds.Relations.Add(dRel);
+				
+		try
+		{
+			BeginCase("Nested default ");
+			Compare(dRel.Nested  , false);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+
+		dRel.Nested = true;
+
+		try
+		{
+			BeginCase("Nested get/set");
+			Compare(dRel.Nested ,true);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	
+	}
 }
 }

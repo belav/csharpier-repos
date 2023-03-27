@@ -2,7 +2,7 @@
 // CacheCas.cs - CAS unit tests for System.Web.Caching.Cache
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,28 +36,28 @@ using System.Web.Caching;
 
 namespace MonoCasTests.System.Web.Caching {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CacheCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CacheCas : AspNetHostingMinimal {
 
-        // LAMESPEC: using Cache also requires permission for UnmanagedCode
-        // this shows up only for PermitOnly (expected) unless Level is None
-        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-        private object UnmanagedCreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            return base.CreateControl (action, level);
-        }
+		// LAMESPEC: using Cache also requires permission for UnmanagedCode
+		// this shows up only for PermitOnly (expected) unless Level is None
+		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
+		private object UnmanagedCreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			return base.CreateControl (action, level);
+		}
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            if ((level != AspNetHostingPermissionLevel.None) && (action == SecurityAction.PermitOnly))
-                return UnmanagedCreateControl (action, level);
-            else
-                return base.CreateControl (action, level);
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			if ((level != AspNetHostingPermissionLevel.None) && (action == SecurityAction.PermitOnly))
+				return UnmanagedCreateControl (action, level);
+			else
+				return base.CreateControl (action, level);
+		}
 
-        public override Type Type {
-            get { return typeof (Cache); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (Cache); }
+		}
+	}
 }

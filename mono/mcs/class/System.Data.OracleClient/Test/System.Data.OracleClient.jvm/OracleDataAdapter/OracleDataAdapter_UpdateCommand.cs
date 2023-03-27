@@ -38,56 +38,56 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleDataAdapter_UpdateCommand : GHTBase
 {
-    public static void Main()
-    {
-        OracleDataAdapter_UpdateCommand tc = new OracleDataAdapter_UpdateCommand();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OracleDataAdapter_UpdateCommand");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
+	public static void Main()
+	{
+		OracleDataAdapter_UpdateCommand tc = new OracleDataAdapter_UpdateCommand();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OracleDataAdapter_UpdateCommand");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
 
-    }
-
-
-    //public TestClass():base(true){}
-
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//public TestClass():base(true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
-        
-        OracleDataAdapter oleDBda = new OracleDataAdapter();
 
-        OracleCommand Cmd = new OracleCommand();
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-        oleDBda.UpdateCommand  = Cmd;
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-        try
-        {
-            BeginCase("UpdateCommand - Get");
-            Compare(oleDBda.UpdateCommand , Cmd);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}    
-    }
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
+		
+		OracleDataAdapter oleDBda = new OracleDataAdapter();
+
+		OracleCommand Cmd = new OracleCommand();
+
+		oleDBda.UpdateCommand  = Cmd;
+
+		try
+		{
+			BeginCase("UpdateCommand - Get");
+			Compare(oleDBda.UpdateCommand , Cmd);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}	
+	}
 }
 }

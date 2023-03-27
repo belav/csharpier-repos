@@ -2,7 +2,7 @@
 // WorkList.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,33 +29,33 @@ using System;
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    sealed class WorkList<T> : AbstractWorkList<T> {
-        private readonly Queue<T> queue;
+	sealed class WorkList<T> : AbstractWorkList<T> {
+		private readonly Queue<T> queue;
 
-        public WorkList ()
-        {
-            this.queue = new Queue<T> ();
-        }
+		public WorkList ()
+		{
+			this.queue = new Queue<T> ();
+		}
 
-        #region Overrides of AbstractWorkList<T>
-        protected override IEnumerable<T> Collection
-        {
-            get { return this.queue; }
-        }
+		#region Overrides of AbstractWorkList<T>
+		protected override IEnumerable<T> Collection
+		{
+			get { return this.queue; }
+		}
 
-        protected override void AddToCollection (T o)
-        {
-            this.queue.Enqueue (o);
-        }
+		protected override void AddToCollection (T o)
+		{
+			this.queue.Enqueue (o);
+		}
 
-        public override T Pull ()
-        {
-            if (this.queue.Count == 0)
-                throw new InvalidOperationException ();
-            T a = this.queue.Dequeue ();
-            this.Elements.Remove (a);
-            return a;
-        }
-        #endregion
-    }
+		public override T Pull ()
+		{
+			if (this.queue.Count == 0)
+				throw new InvalidOperationException ();
+			T a = this.queue.Dequeue ();
+			this.Elements.Remove (a);
+			return a;
+		}
+		#endregion
+	}
 }

@@ -4631,7 +4631,7 @@ window.onload = WebForm_RestoreScrollPosition;
                 if (IsInAspCompatMode)
                     AspCompatApplicationStep.OnPageStartSessionObjects();
 #else // !FEATURE_PAL
-                throw new NotImplementedException ("ROTORTODO");
+				throw new NotImplementedException ("ROTORTODO");
 #endif // !FEATURE_PAL
 
                 // Is it a GET, POST or initial request?
@@ -4927,7 +4927,7 @@ window.onload = WebForm_RestoreScrollPosition;
                 if (IsInAspCompatMode)
                     AspCompatApplicationStep.OnPageStartSessionObjects();
 #else // !FEATURE_PAL
-                throw new NotImplementedException ("ROTORTODO");
+				throw new NotImplementedException ("ROTORTODO");
 #endif // !FEATURE_PAL
 
                 // Is it a GET, POST or initial request?

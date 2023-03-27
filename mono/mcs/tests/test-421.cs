@@ -35,7 +35,7 @@ public class X {
     // Tests that C.SetObject is called here
     i.SetObject ("hi");
     if (!C.ok)
-    return 1;
+	return 1;
     return 0;
   }
 }

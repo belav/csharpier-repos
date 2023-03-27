@@ -2,7 +2,7 @@
 // System.Configuration.DpapiProtectedConfigurationProvider.cs
 //
 // Authors:
-//     Chris Toshok (toshok@ximian.com)
+// 	Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,38 +31,38 @@ using System.Collections.Specialized;
 
 namespace System.Configuration
 {
-    public sealed class DpapiProtectedConfigurationProvider: ProtectedConfigurationProvider
-    {
-        bool useMachineProtection;
-        const string NotSupportedReason = @"DpapiProtectedConfigurationProvider depends on the Microsoft Data
+	public sealed class DpapiProtectedConfigurationProvider: ProtectedConfigurationProvider
+	{
+		bool useMachineProtection;
+		const string NotSupportedReason = @"DpapiProtectedConfigurationProvider depends on the Microsoft Data
 Protection API, and is unimplemented in Mono.  For portability's sake,
 it is suggested that you use the RsaProtectedConfigurationProvider.";
-        [MonoNotSupported (NotSupportedReason)]
-        public override XmlNode Decrypt (XmlNode encryptedNode)
-        {
-            throw new NotSupportedException (NotSupportedReason);
-        }
+		[MonoNotSupported (NotSupportedReason)]
+		public override XmlNode Decrypt (XmlNode encryptedNode)
+		{
+			throw new NotSupportedException (NotSupportedReason);
+		}
 
-        [MonoNotSupported (NotSupportedReason)]
-        public override XmlNode Encrypt (XmlNode node)
-        {
-            throw new NotSupportedException (NotSupportedReason);
-        }
+		[MonoNotSupported (NotSupportedReason)]
+		public override XmlNode Encrypt (XmlNode node)
+		{
+			throw new NotSupportedException (NotSupportedReason);
+		}
 
-        [MonoTODO]
-        public override void Initialize (string name, NameValueCollection configurationValues)
-        {
-            base.Initialize (name, configurationValues);
+		[MonoTODO]
+		public override void Initialize (string name, NameValueCollection configurationValues)
+		{
+			base.Initialize (name, configurationValues);
 
-            string flag;
+			string flag;
 
-            flag = configurationValues ["useMachineProtection"];
-            if (flag != null && flag.ToLowerInvariant () == "true")
-                useMachineProtection = true;
-        }
+			flag = configurationValues ["useMachineProtection"];
+			if (flag != null && flag.ToLowerInvariant () == "true")
+				useMachineProtection = true;
+		}
 
-        public bool UseMachineProtection {
-            get { return useMachineProtection; }
-        }
-    }
+		public bool UseMachineProtection {
+			get { return useMachineProtection; }
+		}
+	}
 }

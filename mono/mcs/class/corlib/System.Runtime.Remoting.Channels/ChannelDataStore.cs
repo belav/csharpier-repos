@@ -34,52 +34,52 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {
-    [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public class ChannelDataStore : IChannelDataStore
-    {
-        string[] _channelURIs;
-        DictionaryEntry[] _extraData;
-        
-        public ChannelDataStore (string[] channelURIs)
-        {
-            _channelURIs = channelURIs;
-        }
+	[Serializable]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public class ChannelDataStore : IChannelDataStore
+	{
+		string[] _channelURIs;
+		DictionaryEntry[] _extraData;
+		
+		public ChannelDataStore (string[] channelURIs)
+		{
+			_channelURIs = channelURIs;
+		}
 
-        public string[] ChannelUris
-        {
-            get {
-                return _channelURIs;
-            }
-            set {
-                _channelURIs = value;
-            }
-        }
+		public string[] ChannelUris
+		{
+			get {
+				return _channelURIs;
+			}
+			set {
+				_channelURIs = value;
+			}
+		}
 
-        public object this[object key]
-        {
-            get {
-                if (_extraData == null) return null;
+		public object this[object key]
+		{
+			get {
+				if (_extraData == null) return null;
 
-                foreach (DictionaryEntry entry in _extraData)
-                    if (entry.Key.Equals (key)) return entry.Value;
+				foreach (DictionaryEntry entry in _extraData)
+					if (entry.Key.Equals (key)) return entry.Value;
 
-                return null;
-            }
+				return null;
+			}
 
-            set {
-                if (_extraData == null)
-                {
-                    _extraData = new DictionaryEntry [] { new DictionaryEntry (key, value) };
-                }
-                else
-                {
-                    DictionaryEntry[] tmpData = new DictionaryEntry [_extraData.Length + 1];
-                    _extraData.CopyTo (tmpData, 0);
-                    tmpData [_extraData.Length] = new DictionaryEntry (key, value);
-                    _extraData = tmpData;
-                }
-            }
-        }
-    }
+			set {
+				if (_extraData == null)
+				{
+					_extraData = new DictionaryEntry [] { new DictionaryEntry (key, value) };
+				}
+				else
+				{
+					DictionaryEntry[] tmpData = new DictionaryEntry [_extraData.Length + 1];
+					_extraData.CopyTo (tmpData, 0);
+					tmpData [_extraData.Length] = new DictionaryEntry (key, value);
+					_extraData = tmpData;
+				}
+			}
+		}
+	}
 }

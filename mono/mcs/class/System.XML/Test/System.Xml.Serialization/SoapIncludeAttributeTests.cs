@@ -13,14 +13,14 @@ using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization
 {
-    [TestFixture]
-    public class SoapIncludeAttributeTests
-    {
-        [Test]
-        public void TypeDefault ()
-        {
-            SoapIncludeAttribute attr = new SoapIncludeAttribute (null);
-            Assert.IsNull (attr.Type);
-        }
-    }
+	[TestFixture]
+	public class SoapIncludeAttributeTests
+	{
+		[Test]
+		public void TypeDefault ()
+		{
+			SoapIncludeAttribute attr = new SoapIncludeAttribute (null);
+			Assert.IsNull (attr.Type);
+		}
+	}
 }

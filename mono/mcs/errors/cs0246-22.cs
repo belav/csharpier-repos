@@ -3,8 +3,8 @@
 
 class C
 {
-    public static void Main ()
-    {
-        var[] v = new int[0];
-    }
+	public static void Main ()
+	{
+		var[] v = new int[0];
+	}
 }

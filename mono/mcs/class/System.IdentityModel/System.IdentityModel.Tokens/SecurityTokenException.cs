@@ -31,13 +31,13 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Tokens
 {
-    [Serializable]
-    public class SecurityTokenException : SystemException
-    {
-        public SecurityTokenException () : base () {}
-        public SecurityTokenException (string message) : base (message) {}
-        public SecurityTokenException (string message, Exception innerException) : base (message, innerException) {}
-        protected SecurityTokenException (SerializationInfo info, StreamingContext context) :
-            base (info, context) {}
-    }
+	[Serializable]
+	public class SecurityTokenException : SystemException
+	{
+		public SecurityTokenException () : base () {}
+		public SecurityTokenException (string message) : base (message) {}
+		public SecurityTokenException (string message, Exception innerException) : base (message, innerException) {}
+		protected SecurityTokenException (SerializationInfo info, StreamingContext context) :
+			base (info, context) {}
+	}
 }

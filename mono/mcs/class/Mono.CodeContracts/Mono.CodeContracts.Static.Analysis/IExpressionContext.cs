@@ -2,7 +2,7 @@
 // IExpressionContext.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -32,19 +32,19 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Analysis {
-    interface IExpressionContext<Expression, Variable> {
-        Expression Refine (APC pc, Variable variable);
-        Variable Unrefine (Expression expression);
+	interface IExpressionContext<Expression, Variable> {
+		Expression Refine (APC pc, Variable variable);
+		Variable Unrefine (Expression expression);
 
-        Result Decode<Data, Result, Visitor> (Expression expr, Visitor visitor, Data data)
-            where Visitor : ISymbolicExpressionVisitor<Expression, Expression, Variable, Data, Result>;
+		Result Decode<Data, Result, Visitor> (Expression expr, Visitor visitor, Data data)
+			where Visitor : ISymbolicExpressionVisitor<Expression, Expression, Variable, Data, Result>;
 
-        FlatDomain<TypeNode> GetType (Expression expr);
+		FlatDomain<TypeNode> GetType (Expression expr);
 
-        APC GetPC (Expression pc);
+		APC GetPC (Expression pc);
 
-        Expression For (Variable variable);
+		Expression For (Variable variable);
 
-        bool IsZero (Expression expression);
-    }
+		bool IsZero (Expression expression);
+	}
 }

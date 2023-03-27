@@ -32,17 +32,17 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
 
-    public class ProductBuilder : IProductBuilder {
-    
-        Product    product;
+	public class ProductBuilder : IProductBuilder {
+	
+		Product	product;
 
-        ProductBuilder ()
-        {
-        }
-        
-        public Product Product {
-            get { return product; }
-        }
-    }
+		ProductBuilder ()
+		{
+		}
+		
+		public Product Product {
+			get { return product; }
+		}
+	}
 }
 

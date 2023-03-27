@@ -2,7 +2,7 @@
 // GZipStreamCas.cs -CAS unit tests for System.IO.Compression.GZipStream
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,103 +38,103 @@ using System.Threading;
 
 namespace MonoCasTests.System.IO.Compression {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class GZipStreamCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class GZipStreamCas {
 
-        private const int timeout = 30000;
-        private string message;
+		private const int timeout = 30000;
+		private string message;
 
-        static ManualResetEvent reset;
+		static ManualResetEvent reset;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            // this occurs with a "clean" stack (full trust)
-            reset = new ManualResetEvent (false);
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			// this occurs with a "clean" stack (full trust)
+			reset = new ManualResetEvent (false);
+		}
 
-        [TestFixtureTearDown]
-        public void FixtureTearDown ()
-        {
-            reset.Close ();
-        }
+		[TestFixtureTearDown]
+		public void FixtureTearDown ()
+		{
+			reset.Close ();
+		}
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        // async tests (for stack propagation)
+		// async tests (for stack propagation)
 
-        private void ReadCallback (IAsyncResult ar)
-        {
-            GZipStream s = (GZipStream)ar.AsyncState;
-            s.EndRead (ar);
-            try {
-                // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
-                message = "Expected a SecurityException";
-            }
-            catch (SecurityException) {
-                message = null;
-                reset.Set ();
-            }
-            catch (Exception e) {
-                message = e.ToString ();
-            }
-        }
+		private void ReadCallback (IAsyncResult ar)
+		{
+			GZipStream s = (GZipStream)ar.AsyncState;
+			s.EndRead (ar);
+			try {
+				// can we do something bad here ?
+				Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+				message = "Expected a SecurityException";
+			}
+			catch (SecurityException) {
+				message = null;
+				reset.Set ();
+			}
+			catch (Exception e) {
+				message = e.ToString ();
+			}
+		}
 
-        [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncRead ()
-        {
-            GZipStream cs = new GZipStream (new MemoryStream (), CompressionMode.Decompress);
-            message = "AsyncRead";
-            reset.Reset ();
-            IAsyncResult r = cs.BeginRead (new byte[0], 0, 0, new AsyncCallback (ReadCallback), cs);
-            Assert.IsNotNull (r, "IAsyncResult");
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
-            cs.Close ();
-        }
+		[Test]
+		[EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
+		public void AsyncRead ()
+		{
+			GZipStream cs = new GZipStream (new MemoryStream (), CompressionMode.Decompress);
+			message = "AsyncRead";
+			reset.Reset ();
+			IAsyncResult r = cs.BeginRead (new byte[0], 0, 0, new AsyncCallback (ReadCallback), cs);
+			Assert.IsNotNull (r, "IAsyncResult");
+			if (!reset.WaitOne (timeout, true))
+				Assert.Ignore ("Timeout");
+			Assert.IsNull (message, message);
+			cs.Close ();
+		}
 
-        private void WriteCallback (IAsyncResult ar)
-        {
-            GZipStream s = (GZipStream)ar.AsyncState;
-            s.EndWrite (ar);
-            try {
-                // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
-                message = "Expected a SecurityException";
-            }
-            catch (SecurityException) {
-                message = null;
-                reset.Set ();
-            }
-            catch (Exception e) {
-                message = e.ToString ();
-            }
-        }
+		private void WriteCallback (IAsyncResult ar)
+		{
+			GZipStream s = (GZipStream)ar.AsyncState;
+			s.EndWrite (ar);
+			try {
+				// can we do something bad here ?
+				Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+				message = "Expected a SecurityException";
+			}
+			catch (SecurityException) {
+				message = null;
+				reset.Set ();
+			}
+			catch (Exception e) {
+				message = e.ToString ();
+			}
+		}
 
-        [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncWrite ()
-        {
-            GZipStream cs = new GZipStream (new MemoryStream (), CompressionMode.Compress);
-            message = "AsyncWrite";
-            reset.Reset ();
-            IAsyncResult r = cs.BeginWrite (new byte[0], 0, 0, new AsyncCallback (WriteCallback), cs);
-            Assert.IsNotNull (r, "IAsyncResult");
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
+		[Test]
+		[EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
+		public void AsyncWrite ()
+		{
+			GZipStream cs = new GZipStream (new MemoryStream (), CompressionMode.Compress);
+			message = "AsyncWrite";
+			reset.Reset ();
+			IAsyncResult r = cs.BeginWrite (new byte[0], 0, 0, new AsyncCallback (WriteCallback), cs);
+			Assert.IsNotNull (r, "IAsyncResult");
+			if (!reset.WaitOne (timeout, true))
+				Assert.Ignore ("Timeout");
+			Assert.IsNull (message, message);
 // the Close is currently buggy in Mono
-//            cs.Close ();
-        }
-    }
+//			cs.Close ();
+		}
+	}
 }
 

@@ -2,7 +2,7 @@
 // WSDualHttpSecurity.cs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -30,28 +30,28 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-    public sealed class WSDualHttpSecurity
-    {
-        WSDualHttpSecurityMode mode;
-        MessageSecurityOverHttp message;
+	public sealed class WSDualHttpSecurity
+	{
+		WSDualHttpSecurityMode mode;
+		MessageSecurityOverHttp message;
 
-        internal WSDualHttpSecurity (WSDualHttpSecurityMode mode)
-        {
-            this.Mode = mode;
-            message = new MessageSecurityOverHttp ();
-        }
+		internal WSDualHttpSecurity (WSDualHttpSecurityMode mode)
+		{
+			this.Mode = mode;
+			message = new MessageSecurityOverHttp ();
+		}
 
-        [MonoTODO]
-        public MessageSecurityOverHttp Message {
-            get { return message; }
-        }
+		[MonoTODO]
+		public MessageSecurityOverHttp Message {
+			get { return message; }
+		}
 
-        [MonoTODO]
-        public WSDualHttpSecurityMode Mode {
-            get { return mode; }
-            set {
-                mode = value;
-            }
-        }
-    }
+		[MonoTODO]
+		public WSDualHttpSecurityMode Mode {
+			get { return mode; }
+			set {
+				mode = value;
+			}
+		}
+	}
 }

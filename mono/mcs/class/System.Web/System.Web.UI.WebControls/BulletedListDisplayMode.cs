@@ -29,10 +29,10 @@
 //
 namespace System.Web.UI.WebControls
 {
-    public enum BulletedListDisplayMode
-    {
-        Text,
-        HyperLink,
-        LinkButton,
-    }
+	public enum BulletedListDisplayMode
+	{
+		Text,
+		HyperLink,
+		LinkButton,
+	}
 }

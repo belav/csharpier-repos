@@ -1,4 +1,4 @@
-#define DbLinqGuidTest
+﻿#define DbLinqGuidTest
 
 using System;
 using System.Collections.Generic;

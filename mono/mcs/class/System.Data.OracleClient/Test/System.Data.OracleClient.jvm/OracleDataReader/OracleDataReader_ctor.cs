@@ -35,47 +35,47 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleDataReader_ctor : GHTBase
 {
-    public static void Main()
-    {
-        OracleDataReader_ctor tc = new OracleDataReader_ctor();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OracleDataReader_ctor");
-            tc.run();
-        }
-        catch(Exception ex){exp = ex;}
-        finally    {tc.EndTest(exp);}
-    }
+	public static void Main()
+	{
+		OracleDataReader_ctor tc = new OracleDataReader_ctor();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OracleDataReader_ctor");
+			tc.run();
+		}
+		catch(Exception ex){exp = ex;}
+		finally	{tc.EndTest(exp);}
+	}
 
-    [Test]
-    [Category("NotWorking")]
-    public void run()
-    {
-        Exception exp = null;
-        OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-        con.Open();
-        OracleCommand cmd = new OracleCommand("Select * From Orders", con);
-        OracleDataReader rdr = cmd.ExecuteReader();
+	[Test]
+	[Category("NotWorking")]
+	public void run()
+	{
+		Exception exp = null;
+		OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+		con.Open();
+		OracleCommand cmd = new OracleCommand("Select * From Orders", con);
+		OracleDataReader rdr = cmd.ExecuteReader();
 
-        //change a connection's state without closing the datareader (should fail
-        try
-        {
-            BeginCase("InvalidOperationException");
-            try
-            {
-                ((IDbConnection)con).ChangeDatabase("msdb");
-                ExpectedExceptionNotCaught(typeof(InvalidOperationException).FullName);
-            }
-            catch (InvalidOperationException ex) 
-            {
-                ExpectedExceptionCaught(ex);
-            }
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
+		//change a connection's state without closing the datareader (should fail
+		try
+		{
+			BeginCase("InvalidOperationException");
+			try
+			{
+				((IDbConnection)con).ChangeDatabase("msdb");
+				ExpectedExceptionNotCaught(typeof(InvalidOperationException).FullName);
+			}
+			catch (InvalidOperationException ex) 
+			{
+				ExpectedExceptionCaught(ex);
+			}
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
 
-        if (con.State == ConnectionState.Open) con.Close();
-    }
+		if (con.State == ConnectionState.Open) con.Close();
+	}
 }
 }

@@ -20,20 +20,20 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
 
 namespace Mono.WebBrowser.DOM
 {
-    public interface IDocumentType : INode
-    {
-        string Name { get; }
-        INamedNodeMap Entities { get; }
-        INamedNodeMap Notations { get; }
-        string PublicId { get; }
-        string SystemId { get; }
-        string InternalSubset { get; }    
-    }
+	public interface IDocumentType : INode
+	{
+		string Name { get; }
+		INamedNodeMap Entities { get; }
+		INamedNodeMap Notations { get; }
+		string PublicId { get; }
+		string SystemId { get; }
+		string InternalSubset { get; }	
+	}
 }

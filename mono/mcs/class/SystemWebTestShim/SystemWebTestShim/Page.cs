@@ -32,20 +32,20 @@ using Orig = System.Web.UI;
 using System.Web;
 
 namespace SystemWebTestShim {
-    public class Page : Orig.Page {
-        public new string RawViewState {
+	public class Page : Orig.Page {
+		public new string RawViewState {
 #if TARGET_DOTNET
-            set; private get;
+			set; private get;
 #else
-            set { base.RawViewState = value; }
+			set { base.RawViewState = value; }
 #endif
-        }
+		}
 
-        public new void SetContext (HttpContext ctx)
-        {
+		public new void SetContext (HttpContext ctx)
+		{
 #if !TARGET_DOTNET
-            base.SetContext (ctx);
+			base.SetContext (ctx);
 #endif
-        }
-    }
+		}
+	}
 }

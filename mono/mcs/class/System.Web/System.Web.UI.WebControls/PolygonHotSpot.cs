@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.PolygonHotSpot.cs
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,27 +33,27 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    public sealed class PolygonHotSpot: HotSpot
-    {
-        public override string GetCoordinates ()
-        {
-            return Coordinates;
-        }
-        
-        protected internal override string MarkupName {
-            get { return "poly"; }
-        }
-        
-        [DefaultValueAttribute ("")]
-        public string Coordinates {
-            get {
-                object o = ViewState ["Coordinates"];
-                return o != null ? (string) o : string.Empty;
-            }
-            set {
-                ViewState ["Coordinates"] = value;
-            }
-        }
-    }
+	public sealed class PolygonHotSpot: HotSpot
+	{
+		public override string GetCoordinates ()
+		{
+			return Coordinates;
+		}
+		
+		protected internal override string MarkupName {
+			get { return "poly"; }
+		}
+		
+	    [DefaultValueAttribute ("")]
+		public string Coordinates {
+			get {
+				object o = ViewState ["Coordinates"];
+				return o != null ? (string) o : string.Empty;
+			}
+			set {
+				ViewState ["Coordinates"] = value;
+			}
+		}
+	}
 }
 

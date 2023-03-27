@@ -32,45 +32,45 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-    public class DiscoveryEndpoint : ServiceEndpoint
-    {
-        public DiscoveryEndpoint ()
-            : this (null, null)
-        {
-        }
+	public class DiscoveryEndpoint : ServiceEndpoint
+	{
+		public DiscoveryEndpoint ()
+			: this (null, null)
+		{
+		}
 
-        public DiscoveryEndpoint (Binding binding, EndpointAddress endpointAddress)
-            : this (DiscoveryVersion.WSDiscovery11, ServiceDiscoveryMode.Managed, binding, endpointAddress)
-        {
-        }
+		public DiscoveryEndpoint (Binding binding, EndpointAddress endpointAddress)
+			: this (DiscoveryVersion.WSDiscovery11, ServiceDiscoveryMode.Managed, binding, endpointAddress)
+		{
+		}
 
-        public DiscoveryEndpoint (DiscoveryVersion discoveryVersion, ServiceDiscoveryMode discoveryMode)
-            : this (discoveryVersion, discoveryMode, null, null)
-        {
-        }
+		public DiscoveryEndpoint (DiscoveryVersion discoveryVersion, ServiceDiscoveryMode discoveryMode)
+			: this (discoveryVersion, discoveryMode, null, null)
+		{
+		}
 
-        public DiscoveryEndpoint (DiscoveryVersion discoveryVersion, ServiceDiscoveryMode discoveryMode, Binding binding, EndpointAddress endpointAddress)
-            : base (GetContract (discoveryVersion, discoveryMode), binding, endpointAddress)
-        {
-            DiscoveryVersion = discoveryVersion;
-            DiscoveryMode = discoveryMode;
+		public DiscoveryEndpoint (DiscoveryVersion discoveryVersion, ServiceDiscoveryMode discoveryMode, Binding binding, EndpointAddress endpointAddress)
+			: base (GetContract (discoveryVersion, discoveryMode), binding, endpointAddress)
+		{
+			DiscoveryVersion = discoveryVersion;
+			DiscoveryMode = discoveryMode;
 
-            IsSystemEndpoint = true;
-        }
+			IsSystemEndpoint = true;
+		}
 
-        static ContractDescription GetContract (DiscoveryVersion discoveryVersion, ServiceDiscoveryMode mode)
-        {
-            if (discoveryVersion == null)
-                throw new ArgumentNullException ("discoveryVersion");
-            // Provide different contract type for Adhoc mode and Managed mode, respectively.
-            if (mode == ServiceDiscoveryMode.Managed)
-                return ContractDescription.GetContract (discoveryVersion.DiscoveryProxyContractType);
-            else
-                return ContractDescription.GetContract (discoveryVersion.DiscoveryTargetContractType);
-        }
+		static ContractDescription GetContract (DiscoveryVersion discoveryVersion, ServiceDiscoveryMode mode)
+		{
+			if (discoveryVersion == null)
+				throw new ArgumentNullException ("discoveryVersion");
+			// Provide different contract type for Adhoc mode and Managed mode, respectively.
+			if (mode == ServiceDiscoveryMode.Managed)
+				return ContractDescription.GetContract (discoveryVersion.DiscoveryProxyContractType);
+			else
+				return ContractDescription.GetContract (discoveryVersion.DiscoveryTargetContractType);
+		}
 
-        public ServiceDiscoveryMode DiscoveryMode { get; private set; }
-        public DiscoveryVersion DiscoveryVersion { get; private set; }
-        public TimeSpan MaxResponseDelay { get; set; }
-    }
+		public ServiceDiscoveryMode DiscoveryMode { get; private set; }
+		public DiscoveryVersion DiscoveryVersion { get; private set; }
+		public TimeSpan MaxResponseDelay { get; set; }
+	}
 }

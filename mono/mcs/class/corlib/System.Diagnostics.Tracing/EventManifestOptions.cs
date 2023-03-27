@@ -2,7 +2,7 @@
 // EventManifestOptions.cs
 //
 // Authors:
-//    Alexander Köplinger <alexander.koeplinger@xamarin.com>
+//	Alexander Köplinger <alexander.koeplinger@xamarin.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,13 +30,13 @@ using System;
 
 namespace System.Diagnostics.Tracing
 {
-    [Flags]
-    public enum EventManifestOptions
-    {
-        AllCultures = 2,
-        AllowEventSourceOverride = 8,
-        None = 0,
-        OnlyIfNeededForRegistration = 4,
-        Strict = 1
-    }
+	[Flags]
+	public enum EventManifestOptions
+	{
+		AllCultures = 2,
+		AllowEventSourceOverride = 8,
+		None = 0,
+		OnlyIfNeededForRegistration = 4,
+		Strict = 1
+	}
 }

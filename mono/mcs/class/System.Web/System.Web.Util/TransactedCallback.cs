@@ -28,5 +28,5 @@
 
 namespace System.Web.Util
 {
-    public delegate void TransactedCallback ();
+	public delegate void TransactedCallback ();
 }

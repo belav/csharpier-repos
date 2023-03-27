@@ -39,36 +39,36 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.Remoting.Proxies {
 
-    [AttributeUsage (AttributeTargets.Class)]
-    [ComVisible (true)]
-    public class ProxyAttribute : Attribute, IContextAttribute
-    {
-        public ProxyAttribute ()
-        {
-        }
+	[AttributeUsage (AttributeTargets.Class)]
+	[ComVisible (true)]
+	public class ProxyAttribute : Attribute, IContextAttribute
+	{
+		public ProxyAttribute ()
+		{
+		}
 
-        public virtual MarshalByRefObject CreateInstance (Type serverType)
-        {
-            RemotingProxy proxy = new RemotingProxy (serverType, ChannelServices.CrossContextUrl, null);
-            return (MarshalByRefObject) proxy.GetTransparentProxy();
-        }
+		public virtual MarshalByRefObject CreateInstance (Type serverType)
+		{
+			RemotingProxy proxy = new RemotingProxy (serverType, ChannelServices.CrossContextUrl, null);
+			return (MarshalByRefObject) proxy.GetTransparentProxy();
+		}
 
-        public virtual RealProxy CreateProxy (ObjRef objRef, Type serverType, object serverObject, Context serverContext)
-        {
-            return RemotingServices.GetRealProxy (RemotingServices.GetProxyForRemoteObject (objRef, serverType));
-        }
+		public virtual RealProxy CreateProxy (ObjRef objRef, Type serverType, object serverObject, Context serverContext)
+		{
+			return RemotingServices.GetRealProxy (RemotingServices.GetProxyForRemoteObject (objRef, serverType));
+		}
 
-        [ComVisible (true)]
-        public void GetPropertiesForNewContext (IConstructionCallMessage msg)
-        {
-            // Nothing to add
-        }
+		[ComVisible (true)]
+		public void GetPropertiesForNewContext (IConstructionCallMessage msg)
+		{
+			// Nothing to add
+		}
 
-        [ComVisible (true)]
-        public bool IsContextOK (Context ctx, IConstructionCallMessage msg)
-        {
-            return true;
-        }
-    }
+		[ComVisible (true)]
+		public bool IsContextOK (Context ctx, IConstructionCallMessage msg)
+		{
+			return true;
+		}
+	}
 }
 

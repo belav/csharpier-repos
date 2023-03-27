@@ -3,8 +3,8 @@
 // Fixes #52019, #79064
 //
 class X {
-    static void e(params object[] args\u03c4) {
+	static void e(params object[] args\u03c4) {
         }
-    public static void Main () {
+	public static void Main () {
 }
 }

@@ -6,12 +6,12 @@ using System;
 
 namespace Testing
 {
-    public class Test
-    {
-        /// <summary>
-        /// invalid comment for const declaration
-        /// </invalid>
-        const string Constant2 = "CONSTANT STRING";
-    }
+	public class Test
+	{
+		/// <summary>
+		/// invalid comment for const declaration
+		/// </invalid>
+		const string Constant2 = "CONSTANT STRING";
+	}
 }
 

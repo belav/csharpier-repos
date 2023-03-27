@@ -4,9 +4,9 @@
 
 class C
 {
-    public static void Main ()
-    {
-        int i = 44;
-        i <<= null;
-    }
+	public static void Main ()
+	{
+		int i = 44;
+		i <<= null;
+	}
 }

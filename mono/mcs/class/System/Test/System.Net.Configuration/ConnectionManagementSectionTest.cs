@@ -2,7 +2,7 @@
 // ConnectionManagementSectionTest.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.
 
@@ -38,24 +38,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Net.Configuration
 {
-    [TestFixture]
-    public class ConnectionManagementSectionTest
-    {
-        [Test]
-        public void GetConfigSection ()
-        {
-            object cfg = ConfigurationManager.GetSection ("system.net/connectionManagement");
-            Assert.IsTrue (cfg is ConnectionManagementSection, "config type was " + cfg);
-        }
+	[TestFixture]
+	public class ConnectionManagementSectionTest
+	{
+		[Test]
+		public void GetConfigSection ()
+		{
+			object cfg = ConfigurationManager.GetSection ("system.net/connectionManagement");
+			Assert.IsTrue (cfg is ConnectionManagementSection, "config type was " + cfg);
+		}
 
-        /*
-        [Test]
-        public void CollectionCreateNewElement ()
-        {
-            Assert.IsTrue (new ConnectionManagementElementCollection ().CreateNewElement () is ConnectionManagementElement);
-        }
-        */
-    }
+		/*
+		[Test]
+		public void CollectionCreateNewElement ()
+		{
+			Assert.IsTrue (new ConnectionManagementElementCollection ().CreateNewElement () is ConnectionManagementElement);
+		}
+		*/
+	}
 }
 
 #endif

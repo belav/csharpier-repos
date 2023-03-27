@@ -2,9 +2,9 @@
 // System.Web.UI.WebControls.SiteMapDataSourceView
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
-//    Sanjay Gupta (gsanjay@novell.com)
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
+//	Sanjay Gupta (gsanjay@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2003 Ben Maurer
 // (C) 2004 Novell, Inc. (http://www.novell.com)
@@ -38,37 +38,37 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    public class SiteMapDataSourceView : DataSourceView
-    {
-        SiteMapNodeCollection collection;
-        
-        public SiteMapDataSourceView (SiteMapDataSource owner, string name, SiteMapNode node)
-        : this (owner, name, new SiteMapNodeCollection (node))
-        {
-        }
-        
-        public SiteMapDataSourceView (SiteMapDataSource owner, string name, SiteMapNodeCollection collection)
-        : base (owner, name)
-        {
-            this.collection = collection;
-        }
-        
-        public IEnumerable Select (DataSourceSelectArguments arguments)
-        {
-            return ExecuteSelect (arguments);
-        }
+	public class SiteMapDataSourceView : DataSourceView
+	{
+		SiteMapNodeCollection collection;
+		
+		public SiteMapDataSourceView (SiteMapDataSource owner, string name, SiteMapNode node)
+		: this (owner, name, new SiteMapNodeCollection (node))
+		{
+		}
+		
+		public SiteMapDataSourceView (SiteMapDataSource owner, string name, SiteMapNodeCollection collection)
+		: base (owner, name)
+		{
+			this.collection = collection;
+		}
+		
+		public IEnumerable Select (DataSourceSelectArguments arguments)
+		{
+			return ExecuteSelect (arguments);
+		}
 
-        protected internal override IEnumerable ExecuteSelect (DataSourceSelectArguments arguments)
-        {
-            arguments.RaiseUnsupportedCapabilitiesError (this);
-            return collection;
-        }
+		protected internal override IEnumerable ExecuteSelect (DataSourceSelectArguments arguments)
+		{
+			arguments.RaiseUnsupportedCapabilitiesError (this);
+			return collection;
+		}
 
-        protected override void OnDataSourceViewChanged (EventArgs e)
-        {
-            base.OnDataSourceViewChanged (e);
-        }
+		protected override void OnDataSourceViewChanged (EventArgs e)
+		{
+			base.OnDataSourceViewChanged (e);
+		}
 
-    }
+	}
 }
 

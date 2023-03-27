@@ -1,9 +1,9 @@
 //
 // HtmlInputButtonTest.cs
-//    - Unit tests for System.Web.UI.HtmlControls.HtmlInputButton
+//	- Unit tests for System.Web.UI.HtmlControls.HtmlInputButton
 //
 // Author:
-//    Jackson Harper    (jackson@ximian.com)
+//	Jackson Harper	(jackson@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,216 +37,216 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.HtmlControls {
 
-    public class HtmlInputButtonPoker : HtmlInputButton {
+	public class HtmlInputButtonPoker : HtmlInputButton {
 
-        public HtmlInputButtonPoker ()
-        {
-            TrackViewState ();
-        }
+		public HtmlInputButtonPoker ()
+		{
+			TrackViewState ();
+		}
 
-        public HtmlInputButtonPoker (string type) : base (type)
-        {
-            TrackViewState ();
-        }
+		public HtmlInputButtonPoker (string type) : base (type)
+		{
+			TrackViewState ();
+		}
 
-        public object SaveState ()
-        {
-            return SaveViewState ();
-        }
+		public object SaveState ()
+		{
+			return SaveViewState ();
+		}
 
-        public void LoadState (object state)
-        {
-            LoadViewState (state);
-        }
+		public void LoadState (object state)
+		{
+			LoadViewState (state);
+		}
 
-        public void DoRenderAttributes (HtmlTextWriter writer)
-        {
-            RenderAttributes (writer);
-        }
+		public void DoRenderAttributes (HtmlTextWriter writer)
+		{
+			RenderAttributes (writer);
+		}
 
-        public string RenderToString ()
-        {
-            StringWriter sr = new StringWriter ();
-            RenderAttributes (new HtmlTextWriter (sr));
-            return sr.ToString ();
-        }
-    }
+		public string RenderToString ()
+		{
+			StringWriter sr = new StringWriter ();
+			RenderAttributes (new HtmlTextWriter (sr));
+			return sr.ToString ();
+		}
+	}
 
-    [TestFixture]
-    public class HtmlInputButtonTest {
+	[TestFixture]
+	public class HtmlInputButtonTest {
 
-        [Test]
-        public void Defaults ()
-        {
-            HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
+		[Test]
+		public void Defaults ()
+		{
+			HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
 
-            Assert.IsTrue (p.CausesValidation, "A1");
-        }
+			Assert.IsTrue (p.CausesValidation, "A1");
+		}
 
-        [Test]
-        public void CleanProperties ()
-        {
-            HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
+		[Test]
+		public void CleanProperties ()
+		{
+			HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
 
-            p.CausesValidation = false;
-            Assert.IsFalse (p.CausesValidation, "A1");
+			p.CausesValidation = false;
+			Assert.IsFalse (p.CausesValidation, "A1");
 
-            p.CausesValidation = true;
-            Assert.IsTrue (p.CausesValidation, "A2");
+			p.CausesValidation = true;
+			Assert.IsTrue (p.CausesValidation, "A2");
 
-            p.CausesValidation = false;
-            Assert.IsFalse (p.CausesValidation, "A3");
-        }
+			p.CausesValidation = false;
+			Assert.IsFalse (p.CausesValidation, "A3");
+		}
 
-        [Test]
-        public void ViewState ()
-        {
-            HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
-            p.CausesValidation = false;
-            p.ValidationGroup = "VG";
-            object s = p.SaveState();
-            HtmlInputButtonPoker copy = new HtmlInputButtonPoker ();
-            copy.LoadState (s);
+		[Test]
+		public void ViewState ()
+		{
+			HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
+			p.CausesValidation = false;
+			p.ValidationGroup = "VG";
+			object s = p.SaveState();
+			HtmlInputButtonPoker copy = new HtmlInputButtonPoker ();
+			copy.LoadState (s);
 
-            Assert.IsFalse (copy.CausesValidation, "A1");
-            Assert.AreEqual ("VG", p.ValidationGroup, "A2");
-        }
+			Assert.IsFalse (copy.CausesValidation, "A1");
+			Assert.AreEqual ("VG", p.ValidationGroup, "A2");
+		}
 
-        [Test]
-        public void RenderAttributes ()
-        {
-            StringWriter sw = new StringWriter ();
-            HtmlTextWriter tw = new HtmlTextWriter (sw);
+		[Test]
+		public void RenderAttributes ()
+		{
+			StringWriter sw = new StringWriter ();
+			HtmlTextWriter tw = new HtmlTextWriter (sw);
 
-            HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
-            
-            p.Page = new Page ();
+			HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
+			
+			p.Page = new Page ();
 
-            p.CausesValidation = false;
-            p.ValidationGroup = "VG";
+			p.CausesValidation = false;
+			p.ValidationGroup = "VG";
 
-            Assert.AreEqual (3, p.Attributes.Count, "A1");
+			Assert.AreEqual (3, p.Attributes.Count, "A1");
 
-            tw.WriteBeginTag ("dummy");
-            p.DoRenderAttributes (tw);
-            tw.Write ('>');
-            HtmlDiff.AssertAreEqual ("<dummy name type=\"button\" ValidationGroup=\"VG\" />", sw.ToString (), "A2");
-        }
+			tw.WriteBeginTag ("dummy");
+			p.DoRenderAttributes (tw);
+			tw.Write ('>');
+			HtmlDiff.AssertAreEqual ("<dummy name type=\"button\" ValidationGroup=\"VG\" />", sw.ToString (), "A2");
+		}
 
-        [Test]
-        public void OnClickAttribute ()
-        {
-            StringWriter sw = new StringWriter ();
-            HtmlTextWriter tw = new HtmlTextWriter (sw);
+		[Test]
+		public void OnClickAttribute ()
+		{
+			StringWriter sw = new StringWriter ();
+			HtmlTextWriter tw = new HtmlTextWriter (sw);
 
-            HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
-            p.Page = new Page ();
-            p.DoRenderAttributes (tw);
-            string str = sw.ToString ();
-            int found = str.IndexOf ("onclick");
-            Assert.AreEqual (-1, found, "#01");
-            p.ServerClick += new EventHandler (EmptyHandler);
-            sw = new StringWriter ();
-            tw = new HtmlTextWriter (sw);
-            p.DoRenderAttributes (tw);
-            str = sw.ToString ();
-            found = str.IndexOf ("onclick");
-            Assert.IsTrue (found >= 0, "#02");
-        }
+			HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
+			p.Page = new Page ();
+			p.DoRenderAttributes (tw);
+			string str = sw.ToString ();
+			int found = str.IndexOf ("onclick");
+			Assert.AreEqual (-1, found, "#01");
+			p.ServerClick += new EventHandler (EmptyHandler);
+			sw = new StringWriter ();
+			tw = new HtmlTextWriter (sw);
+			p.DoRenderAttributes (tw);
+			str = sw.ToString ();
+			found = str.IndexOf ("onclick");
+			Assert.IsTrue (found >= 0, "#02");
+		}
 
-        [Test]
-        public void OnClickAttributeWithSpecials ()
-        {
-            string origHtml = "alert(&#39;&lt;&amp;&#39;);";
-            string origHtml2 = "alert('<&');";
+		[Test]
+		public void OnClickAttributeWithSpecials ()
+		{
+			string origHtml = "alert(&#39;&lt;&amp;&#39;);";
+			string origHtml2 = "alert('<&');";
 
-            StringWriter sw = new StringWriter ();
-            HtmlTextWriter tw = new HtmlTextWriter (sw);
+			StringWriter sw = new StringWriter ();
+			HtmlTextWriter tw = new HtmlTextWriter (sw);
 
-            HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
-            p.Page = new Page ();
-            p.Attributes["onclick"] = "alert('<&');";
-            p.DoRenderAttributes (tw);
-            string str = sw.ToString ();
-            int found = str.IndexOf (origHtml);
-            Assert.IsTrue (found >= 0, "#01");
-            p.ServerClick += new EventHandler (EmptyHandler);
-            sw = new StringWriter ();
-            tw = new HtmlTextWriter (sw);
-            p.DoRenderAttributes (tw);
-            str = sw.ToString ();
-            found = str.IndexOf (origHtml2);
-            Assert.IsTrue (found >= 0, "#02" + str);
-        }
+			HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
+			p.Page = new Page ();
+			p.Attributes["onclick"] = "alert('<&');";
+			p.DoRenderAttributes (tw);
+			string str = sw.ToString ();
+			int found = str.IndexOf (origHtml);
+			Assert.IsTrue (found >= 0, "#01");
+			p.ServerClick += new EventHandler (EmptyHandler);
+			sw = new StringWriter ();
+			tw = new HtmlTextWriter (sw);
+			p.DoRenderAttributes (tw);
+			str = sw.ToString ();
+			found = str.IndexOf (origHtml2);
+			Assert.IsTrue (found >= 0, "#02" + str);
+		}
 
-        private static void EmptyHandler (object sender, EventArgs e)
-        {
-        }
+		private static void EmptyHandler (object sender, EventArgs e)
+		{
+		}
 
-        [Test]
-        public void RenderOnclick1 ()
-        {
-            HtmlInputButtonPoker it = new HtmlInputButtonPoker ("button");
-            it.ID = "id1";
-            it.ServerClick += new EventHandler (EmptyHandler);
-            string rendered = it.RenderToString ();
-            Assert.IsTrue (rendered.IndexOf ("onclick") == -1, "#01");
-        }
+		[Test]
+		public void RenderOnclick1 ()
+		{
+			HtmlInputButtonPoker it = new HtmlInputButtonPoker ("button");
+			it.ID = "id1";
+			it.ServerClick += new EventHandler (EmptyHandler);
+			string rendered = it.RenderToString ();
+			Assert.IsTrue (rendered.IndexOf ("onclick") == -1, "#01");
+		}
 
-        [Test]
-        public void RenderOnclick2 ()
-        {
-            Page page = new Page ();
-            page.EnableEventValidation = false;
-            HtmlInputButtonPoker it = new HtmlInputButtonPoker ("button");
-            page.Controls.Add (it);
-            it.ID = "id1";
-            it.ServerClick += new EventHandler (EmptyHandler);
-            string rendered = it.RenderToString ();
-            Assert.IsTrue (rendered.IndexOf ("onclick") != -1, "#01");
-        }
+		[Test]
+		public void RenderOnclick2 ()
+		{
+			Page page = new Page ();
+			page.EnableEventValidation = false;
+			HtmlInputButtonPoker it = new HtmlInputButtonPoker ("button");
+			page.Controls.Add (it);
+			it.ID = "id1";
+			it.ServerClick += new EventHandler (EmptyHandler);
+			string rendered = it.RenderToString ();
+			Assert.IsTrue (rendered.IndexOf ("onclick") != -1, "#01");
+		}
 
-        [Test]
-        public void RenderOnclick3 ()
-        {
-            HtmlInputButtonPoker it = new HtmlInputButtonPoker ("submit");
-            it.ID = "id1";
-            it.ServerClick += new EventHandler (EmptyHandler);
-            string rendered = it.RenderToString ();
-            Assert.IsTrue (rendered.IndexOf ("onclick") == -1, "#01");
-        }
+		[Test]
+		public void RenderOnclick3 ()
+		{
+			HtmlInputButtonPoker it = new HtmlInputButtonPoker ("submit");
+			it.ID = "id1";
+			it.ServerClick += new EventHandler (EmptyHandler);
+			string rendered = it.RenderToString ();
+			Assert.IsTrue (rendered.IndexOf ("onclick") == -1, "#01");
+		}
 
-        [Test]
-        [Category ("NotWorking")]
-        public void RenderOnclick4 ()
-        {
-            Page page = new Page ();
-            page.EnableEventValidation = false;
-            HtmlInputButtonPoker it = new HtmlInputButtonPoker ("submit");
-            page.Controls.Add (it);
-            it.ID = "id1";
-            it.ServerClick += new EventHandler (EmptyHandler);
-            string rendered = it.RenderToString ();
-            Assert.IsTrue (rendered.IndexOf ("onclick") != -1, "#01");
-            Assert.IsTrue (rendered.IndexOf ("__doPostBack") != -1, "#02");
-            Assert.IsTrue (rendered.IndexOf ("type=\"submit\"") != -1, "#03");
-        }
+		[Test]
+		[Category ("NotWorking")]
+		public void RenderOnclick4 ()
+		{
+			Page page = new Page ();
+			page.EnableEventValidation = false;
+			HtmlInputButtonPoker it = new HtmlInputButtonPoker ("submit");
+			page.Controls.Add (it);
+			it.ID = "id1";
+			it.ServerClick += new EventHandler (EmptyHandler);
+			string rendered = it.RenderToString ();
+			Assert.IsTrue (rendered.IndexOf ("onclick") != -1, "#01");
+			Assert.IsTrue (rendered.IndexOf ("__doPostBack") != -1, "#02");
+			Assert.IsTrue (rendered.IndexOf ("type=\"submit\"") != -1, "#03");
+		}
 
-        [Test]
-        public void RenderOnclick5 ()
-        {
-            Page page = new Page ();
-            page.EnableEventValidation = false;
-            RequiredFieldValidator val = new RequiredFieldValidator ();
-            val.ControlToValidate = "id1";
-            page.Validators.Add (val);
-            HtmlInputButtonPoker it = new HtmlInputButtonPoker ("submit");
-            page.Controls.Add (it);
-            it.ID = "id1";
-            it.ServerClick += new EventHandler (EmptyHandler);
-            string rendered = it.RenderToString ();
-            Assert.IsTrue (rendered.IndexOf ("onclick") != -1, "#01");
-        }
-    }    
+		[Test]
+		public void RenderOnclick5 ()
+		{
+			Page page = new Page ();
+			page.EnableEventValidation = false;
+			RequiredFieldValidator val = new RequiredFieldValidator ();
+			val.ControlToValidate = "id1";
+			page.Validators.Add (val);
+			HtmlInputButtonPoker it = new HtmlInputButtonPoker ("submit");
+			page.Controls.Add (it);
+			it.ID = "id1";
+			it.ServerClick += new EventHandler (EmptyHandler);
+			string rendered = it.RenderToString ();
+			Assert.IsTrue (rendered.IndexOf ("onclick") != -1, "#01");
+		}
+	}	
 }
 

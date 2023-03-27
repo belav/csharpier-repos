@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -54,7 +54,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="source">The source <see cref="JToken"/> to test.</param>
         /// <param name="schema">The schema to test with.</param>
         /// <returns>
-        ///     <c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
         /// </returns>
         [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
         public static bool IsValid(this JToken source, JsonSchema schema)
@@ -76,7 +76,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="schema">The schema to test with.</param>
         /// <param name="errorMessages">When this method returns, contains any error messages generated while validating. </param>
         /// <returns>
-        ///     <c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
         /// </returns>
         [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
         public static bool IsValid(this JToken source, JsonSchema schema, out IList<string> errorMessages)

@@ -2,7 +2,7 @@
 // System.Web.Compilation.ResourceExpressionBuilder
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006-2010 Novell, Inc (http://www.novell.com)
 //
@@ -38,123 +38,123 @@ using System.Web.UI;
 
 namespace System.Web.Compilation
 {
-    [ExpressionEditor("System.Web.UI.Design.ResourceExpressionEditor, " + Consts.AssemblySystem_Design)]
-    [ExpressionPrefix("Resources")]
-    public class ResourceExpressionBuilder : ExpressionBuilder
-    {
-        public ResourceExpressionBuilder ()
-        {
-        }
+	[ExpressionEditor("System.Web.UI.Design.ResourceExpressionEditor, " + Consts.AssemblySystem_Design)]
+	[ExpressionPrefix("Resources")]
+	public class ResourceExpressionBuilder : ExpressionBuilder
+	{
+		public ResourceExpressionBuilder ()
+		{
+		}
 
-        public override object EvaluateExpression (object target, BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
-        {
-            ResourceExpressionFields fields = parsedData as ResourceExpressionFields;
-            return HttpContext.GetGlobalResourceObject (fields.ClassKey, fields.ResourceKey);
-        }
+		public override object EvaluateExpression (object target, BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
+		{
+			ResourceExpressionFields fields = parsedData as ResourceExpressionFields;
+			return HttpContext.GetGlobalResourceObject (fields.ClassKey, fields.ResourceKey);
+		}
 
-        public override CodeExpression GetCodeExpression (BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
-        {
-            ResourceExpressionFields fields = parsedData as ResourceExpressionFields;
-            CodeExpression[] expr;
+		public override CodeExpression GetCodeExpression (BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
+		{
+			ResourceExpressionFields fields = parsedData as ResourceExpressionFields;
+			CodeExpression[] expr;
 
-            // TODO: check what MS runtime does in this situation
-            if (entry == null)
-                return null;
-            
-            if (!String.IsNullOrEmpty (fields.ClassKey)) {
-                if (! (entry.PropertyInfo is PropertyInfo))
-                    return null; // TODO: check what MS runtime does here
-                
-                expr = new CodeExpression [] {
-                    new CodePrimitiveExpression (fields.ClassKey),
-                    new CodePrimitiveExpression (fields.ResourceKey)
-                };
-                CodeMethodInvokeExpression getgro = new CodeMethodInvokeExpression (new CodeThisReferenceExpression (), "GetGlobalResourceObject", expr);
-                return new CodeCastExpression (entry.PropertyInfo.PropertyType, getgro);
-            } else
-                return CreateGetLocalResourceObject (entry, fields.ResourceKey);
-        }
+			// TODO: check what MS runtime does in this situation
+			if (entry == null)
+				return null;
+			
+			if (!String.IsNullOrEmpty (fields.ClassKey)) {
+				if (! (entry.PropertyInfo is PropertyInfo))
+					return null; // TODO: check what MS runtime does here
+				
+				expr = new CodeExpression [] {
+					new CodePrimitiveExpression (fields.ClassKey),
+					new CodePrimitiveExpression (fields.ResourceKey)
+				};
+				CodeMethodInvokeExpression getgro = new CodeMethodInvokeExpression (new CodeThisReferenceExpression (), "GetGlobalResourceObject", expr);
+				return new CodeCastExpression (entry.PropertyInfo.PropertyType, getgro);
+			} else
+				return CreateGetLocalResourceObject (entry, fields.ResourceKey);
+		}
 
-        public static ResourceExpressionFields ParseExpression (string expression)
-        {
-            int comma = expression.IndexOf (',');
-            if (comma == -1)
-                return new ResourceExpressionFields (expression.Trim ());
-            else
-                return new ResourceExpressionFields (expression.Substring (0, comma).Trim (),
-                                     expression.Substring (comma + 1).Trim ());
-        }
+		public static ResourceExpressionFields ParseExpression (string expression)
+		{
+			int comma = expression.IndexOf (',');
+			if (comma == -1)
+				return new ResourceExpressionFields (expression.Trim ());
+			else
+				return new ResourceExpressionFields (expression.Substring (0, comma).Trim (),
+								     expression.Substring (comma + 1).Trim ());
+		}
 
-        public override object ParseExpression (string expression, Type propertyType, ExpressionBuilderContext context)
-        {
-            //FIXME: not sure what the propertyType should be used for
-            return ParseExpression (expression);
-        }
+		public override object ParseExpression (string expression, Type propertyType, ExpressionBuilderContext context)
+		{
+			//FIXME: not sure what the propertyType should be used for
+			return ParseExpression (expression);
+		}
 
-        public override bool SupportsEvaluate {
-            get { return true; }
-        }
+		public override bool SupportsEvaluate {
+			get { return true; }
+		}
 
-        internal static CodeExpression CreateGetLocalResourceObject (BoundPropertyEntry bpe, string resname)
-        {
-            if (bpe == null || String.IsNullOrEmpty (resname))
-                return null;
+		internal static CodeExpression CreateGetLocalResourceObject (BoundPropertyEntry bpe, string resname)
+		{
+			if (bpe == null || String.IsNullOrEmpty (resname))
+				return null;
 
-            if (bpe.UseSetAttribute)
-                return CreateGetLocalResourceObject (bpe.Type, typeof (string), null, resname);
-            else
-                return CreateGetLocalResourceObject (bpe.PropertyInfo, resname);
-        }
-        
-        internal static CodeExpression CreateGetLocalResourceObject (MemberInfo mi, string resname)
-        {
-            if (String.IsNullOrEmpty (resname))
-                return null;
-            
-            Type member_type = null;
-            if (mi is PropertyInfo)
-                member_type = ((PropertyInfo)mi).PropertyType;
-            else if (mi is FieldInfo)
-                member_type = ((FieldInfo)mi).FieldType;
-            else
-                return null; // an "impossible" case
+			if (bpe.UseSetAttribute)
+				return CreateGetLocalResourceObject (bpe.Type, typeof (string), null, resname);
+			else
+				return CreateGetLocalResourceObject (bpe.PropertyInfo, resname);
+		}
+		
+		internal static CodeExpression CreateGetLocalResourceObject (MemberInfo mi, string resname)
+		{
+			if (String.IsNullOrEmpty (resname))
+				return null;
+			
+			Type member_type = null;
+			if (mi is PropertyInfo)
+				member_type = ((PropertyInfo)mi).PropertyType;
+			else if (mi is FieldInfo)
+				member_type = ((FieldInfo)mi).FieldType;
+			else
+				return null; // an "impossible" case
 
-            return CreateGetLocalResourceObject (member_type, mi.DeclaringType, mi.Name, resname);
-        }
-        
-        static CodeExpression CreateGetLocalResourceObject (Type member_type, Type declaringType, string memberName, string resname)
-        {
-            TypeConverter converter;
+			return CreateGetLocalResourceObject (member_type, mi.DeclaringType, mi.Name, resname);
+		}
+		
+		static CodeExpression CreateGetLocalResourceObject (Type member_type, Type declaringType, string memberName, string resname)
+		{
+			TypeConverter converter;
 
-            if (!String.IsNullOrEmpty (memberName))
-                converter = TypeDescriptor.GetProperties (declaringType) [memberName].Converter;
-            else
-                converter = null;
+			if (!String.IsNullOrEmpty (memberName))
+				converter = TypeDescriptor.GetProperties (declaringType) [memberName].Converter;
+			else
+				converter = null;
 
-            if (member_type != typeof (System.Drawing.Color) &&
-                (converter == null || converter.CanConvertFrom (typeof (String)))) {
-                CodeMethodInvokeExpression getlro = new CodeMethodInvokeExpression (
-                    new CodeThisReferenceExpression (),
-                    "GetLocalResourceObject",
-                    new CodeExpression [] { new CodePrimitiveExpression (resname) });
-                
-                return TemplateControlCompiler.CreateConvertToCall (Type.GetTypeCode (member_type), getlro);
-            } else if (!String.IsNullOrEmpty (memberName)) {
-                CodeMethodInvokeExpression getlro = new CodeMethodInvokeExpression (
-                    new CodeThisReferenceExpression (),
-                    "GetLocalResourceObject",
-                    new CodeExpression [] {
-                        new CodePrimitiveExpression (resname),
-                        new CodeTypeOfExpression (new CodeTypeReference (declaringType)),
-                        new CodePrimitiveExpression (memberName)
-                    }
-                );
+			if (member_type != typeof (System.Drawing.Color) &&
+			    (converter == null || converter.CanConvertFrom (typeof (String)))) {
+				CodeMethodInvokeExpression getlro = new CodeMethodInvokeExpression (
+					new CodeThisReferenceExpression (),
+					"GetLocalResourceObject",
+					new CodeExpression [] { new CodePrimitiveExpression (resname) });
+				
+				return TemplateControlCompiler.CreateConvertToCall (Type.GetTypeCode (member_type), getlro);
+			} else if (!String.IsNullOrEmpty (memberName)) {
+				CodeMethodInvokeExpression getlro = new CodeMethodInvokeExpression (
+					new CodeThisReferenceExpression (),
+					"GetLocalResourceObject",
+					new CodeExpression [] {
+						new CodePrimitiveExpression (resname),
+						new CodeTypeOfExpression (new CodeTypeReference (declaringType)),
+						new CodePrimitiveExpression (memberName)
+					}
+				);
 
-                return new CodeCastExpression (member_type, getlro);
-            } else
-                return null;
-        }
-    }
+				return new CodeCastExpression (member_type, getlro);
+			} else
+				return null;
+		}
+	}
 
 }
 

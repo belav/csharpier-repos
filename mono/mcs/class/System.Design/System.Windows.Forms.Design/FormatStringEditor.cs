@@ -37,11 +37,11 @@ using System.Windows.Forms.Design;
 namespace System.Windows.Forms.Design
 {
 
-    [MonoTODO]
-    internal sealed class FormatStringEditor : UITypeEditor
-    {
-        public FormatStringEditor ()
-        {
-        }
-    }
+	[MonoTODO]
+	internal sealed class FormatStringEditor : UITypeEditor
+	{
+		public FormatStringEditor ()
+		{
+		}
+	}
 }

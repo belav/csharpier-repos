@@ -21,7 +21,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 // Authors:
-//        Jordi Mas i Hernandez, jordi@ximian.com
+//		Jordi Mas i Hernandez, jordi@ximian.com
 //
 // Copyright (C) Novell Inc., 2004
 //
@@ -30,11 +30,11 @@
 
 namespace System.Windows.Forms
 {
-    public enum TickStyle
-    {
-        None         = 0,
-        TopLeft     = 1,
-        BottomRight     = 2,
-        Both         = 3,
-    }
+	public enum TickStyle
+	{
+		None 		= 0,
+		TopLeft 	= 1,
+		BottomRight 	= 2,
+		Both 		= 3,
+	}
 }

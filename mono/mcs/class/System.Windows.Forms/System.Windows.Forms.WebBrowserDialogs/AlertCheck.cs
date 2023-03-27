@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita    <avidigal@novell.com>
+//	Andreia Gaita	<avidigal@novell.com>
 
 
 using System;
@@ -29,33 +29,33 @@ using System.Text;
 
 namespace System.Windows.Forms.WebBrowserDialogs
 {
-    internal class AlertCheck : Generic
-    {
-        private bool check;
-        public bool Checked {
-            get { return check; }
-        }
+	internal class AlertCheck : Generic
+	{
+		private bool check;
+		public bool Checked {
+			get { return check; }
+		}
 
-        public AlertCheck (string title, string text, string checkMessage, bool checkState)
-            : base (title)
-        {
-            InitTable (3, 1);
+		public AlertCheck (string title, string text, string checkMessage, bool checkState)
+			: base (title)
+		{
+			InitTable (3, 1);
 
-            AddLabel (0, 0, 0, text, -1, -1);
-            AddCheck (1, 0, 0, checkMessage, checkState, -1, -1, new EventHandler (CheckedChanged));
-            AddButton (2, 0, 0, "OK", -1, -1, true, false, new EventHandler (OkClick));
-        }
+			AddLabel (0, 0, 0, text, -1, -1);
+			AddCheck (1, 0, 0, checkMessage, checkState, -1, -1, new EventHandler (CheckedChanged));
+			AddButton (2, 0, 0, "OK", -1, -1, true, false, new EventHandler (OkClick));
+		}
 
-        private void OkClick (object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-            this.Close ();
-        }
+		private void OkClick (object sender, EventArgs e)
+		{
+			this.DialogResult = DialogResult.OK;
+			this.Close ();
+		}
 
-        private void CheckedChanged (object sender, EventArgs e)
-        {
-            CheckBox c = sender as CheckBox;
-            check = c.Checked;
-        }
-    }
+		private void CheckedChanged (object sender, EventArgs e)
+		{
+			CheckBox c = sender as CheckBox;
+			check = c.Checked;
+		}
+	}
 }

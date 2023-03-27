@@ -1,7 +1,7 @@
 // System.Web.Configuration.CompilerProviderOptionsCollection.cs
 //
 // Authors:
-//    Marek Habersack (mhabersack@novell.com)
+//	Marek Habersack (mhabersack@novell.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -33,37 +33,37 @@ using System.Configuration;
 
 namespace System.CodeDom.Compiler
 {
-    internal sealed class CompilerProviderOption : ConfigurationElement
-    {
-        static ConfigurationProperty nameProp;
-        static ConfigurationProperty valueProp;
-        static ConfigurationPropertyCollection properties;
-        
-        static CompilerProviderOption ()
-        {
-            nameProp = new ConfigurationProperty ("name", typeof (string), "",
-                                  ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-            valueProp = new ConfigurationProperty ("value", typeof (string), "",
-                                   ConfigurationPropertyOptions.IsRequired);
+	internal sealed class CompilerProviderOption : ConfigurationElement
+	{
+		static ConfigurationProperty nameProp;
+		static ConfigurationProperty valueProp;
+		static ConfigurationPropertyCollection properties;
+		
+		static CompilerProviderOption ()
+		{
+			nameProp = new ConfigurationProperty ("name", typeof (string), "",
+							      ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+			valueProp = new ConfigurationProperty ("value", typeof (string), "",
+							       ConfigurationPropertyOptions.IsRequired);
 
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (nameProp);
-            properties.Add (valueProp);
-        }
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (nameProp);
+			properties.Add (valueProp);
+		}
 
-        [ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Name {
-            get { return (string) base [nameProp]; }
-            set { base [nameProp] = value; }
-        }
+		[ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+		public string Name {
+			get { return (string) base [nameProp]; }
+			set { base [nameProp] = value; }
+		}
 
-        [ConfigurationProperty ("value", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-        public string Value {
-            get { return (string) base [valueProp]; }
-            set { base [valueProp] = value; }
-        }
+		[ConfigurationProperty ("value", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
+		public string Value {
+			get { return (string) base [valueProp]; }
+			set { base [valueProp] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties => properties;
-    }
+		protected override ConfigurationPropertyCollection Properties => properties;
+	}
 }
 #endif

@@ -1,9 +1,9 @@
 //
 // DesignTimeTemplateParserCas.cs 
-//    - CAS unit tests for System.Web.UI.DesignTimeTemplateParser
+//	- CAS unit tests for System.Web.UI.DesignTimeTemplateParser
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,125 +38,125 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class DesignTimeTemplateParserCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class DesignTimeTemplateParserCas : AspNetHostingMinimal {
 
-        private DesignTimeParseData dtpd;
+		private DesignTimeParseData dtpd;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            dtpd = new DesignTimeParseData (null, "parseText");
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			dtpd = new DesignTimeParseData (null, "parseText");
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void ParseControl_Deny_ControlThread ()
-        {
-            DesignTimeTemplateParser.ParseControl (dtpd);
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, ControlThread = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void ParseControl_Deny_ControlThread ()
+		{
+			DesignTimeTemplateParser.ParseControl (dtpd);
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void ParseControl_Deny_UnmanagedCode ()
-        {
-            DesignTimeTemplateParser.ParseControl (dtpd);
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void ParseControl_Deny_UnmanagedCode ()
+		{
+			DesignTimeTemplateParser.ParseControl (dtpd);
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, ControlThread = true, UnmanagedCode = true)]
-        public void ParseControl_PermitOnly_ControlThreadUnmanagedCode ()
-        {
-            DesignTimeTemplateParser.ParseControl (dtpd);
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, ControlThread = true, UnmanagedCode = true)]
+		public void ParseControl_PermitOnly_ControlThreadUnmanagedCode ()
+		{
+			DesignTimeTemplateParser.ParseControl (dtpd);
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void ParseTemplate_Deny_ControlThread ()
-        {
-            DesignTimeTemplateParser.ParseTemplate (dtpd);
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, ControlThread = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void ParseTemplate_Deny_ControlThread ()
+		{
+			DesignTimeTemplateParser.ParseTemplate (dtpd);
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void ParseTemplate_Deny_UnmanagedCode ()
-        {
-            DesignTimeTemplateParser.ParseTemplate (dtpd);
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void ParseTemplate_Deny_UnmanagedCode ()
+		{
+			DesignTimeTemplateParser.ParseTemplate (dtpd);
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, ControlThread = true, UnmanagedCode = true)]
-        public void ParseTemplate_PermitOnly_ControlThreadUnmanagedCode ()
-        {
-            DesignTimeTemplateParser.ParseTemplate (dtpd);
-        }
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void ParseControls_Deny_ControlThread ()
-        {
-            DesignTimeTemplateParser.ParseControls (dtpd);
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, ControlThread = true, UnmanagedCode = true)]
+		public void ParseTemplate_PermitOnly_ControlThreadUnmanagedCode ()
+		{
+			DesignTimeTemplateParser.ParseTemplate (dtpd);
+		}
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, ControlThread = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void ParseControls_Deny_ControlThread ()
+		{
+			DesignTimeTemplateParser.ParseControls (dtpd);
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void ParseControls_Deny_UnmanagedCode ()
-        {
-            DesignTimeTemplateParser.ParseControls (dtpd);
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void ParseControls_Deny_UnmanagedCode ()
+		{
+			DesignTimeTemplateParser.ParseControls (dtpd);
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, ControlThread = true, UnmanagedCode = true)]
-        public void ParseControls_PermitOnly_ControlThreadUnmanagedCode ()
-        {
-            DesignTimeTemplateParser.ParseControls (dtpd);
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, ControlThread = true, UnmanagedCode = true)]
+		public void ParseControls_PermitOnly_ControlThreadUnmanagedCode ()
+		{
+			DesignTimeTemplateParser.ParseControls (dtpd);
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlThread = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void ParseTheme_Deny_ControlThread ()
-        {
-            try {
-                DesignTimeTemplateParser.ParseTheme (null, "theme", "path");
-            }
-            catch (Exception) {
-                // security exception gets hidden :-(
-                Assert.Ignore ("security exception gets hidden :-(");
-            }
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, ControlThread = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void ParseTheme_Deny_ControlThread ()
+		{
+			try {
+				DesignTimeTemplateParser.ParseTheme (null, "theme", "path");
+			}
+			catch (Exception) {
+				// security exception gets hidden :-(
+				Assert.Ignore ("security exception gets hidden :-(");
+			}
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, ControlThread = true)]
-        public void ParseTheme_PermitOnly_ControlThread ()
-        {
-            DesignTimeTemplateParser.ParseTheme (null, "theme", "path");
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, ControlThread = true)]
+		public void ParseTheme_PermitOnly_ControlThread ()
+		{
+			DesignTimeTemplateParser.ParseTheme (null, "theme", "path");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true, ControlThread = true)]
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            try {
-                // static class 2.0 / no public ctor before (1.x)
-                MethodInfo mi = this.Type.GetMethod ("ParseTemplate");
-                Assert.IsNotNull (mi, "ParseTemplate");
-                return mi.Invoke (null, new object[1] { dtpd });
-            }
-            catch (TargetInvocationException tie) {
-                throw tie;
-            }
-        }
+		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true, ControlThread = true)]
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			try {
+				// static class 2.0 / no public ctor before (1.x)
+				MethodInfo mi = this.Type.GetMethod ("ParseTemplate");
+				Assert.IsNotNull (mi, "ParseTemplate");
+				return mi.Invoke (null, new object[1] { dtpd });
+			}
+			catch (TargetInvocationException tie) {
+				throw tie;
+			}
+		}
 
-        public override Type Type {
-            get { return typeof (DesignTimeTemplateParser); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (DesignTimeTemplateParser); }
+		}
+	}
 }

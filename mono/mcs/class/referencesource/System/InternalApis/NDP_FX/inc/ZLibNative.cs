@@ -335,10 +335,10 @@ internal static class ZLibNative {
     [SecurityCritical]
     private class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid {
 
-        [SecurityCritical]
+		[SecurityCritical]
         internal SafeLibraryHandle()
             : base(true) {
-        }        
+        }		
                 
 #if !FEATURE_NETCORE
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]

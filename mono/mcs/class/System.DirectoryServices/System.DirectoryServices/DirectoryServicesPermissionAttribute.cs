@@ -27,8 +27,8 @@
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
 // Authors
-//    Raja R Harinath <rharinath@novell.com>
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Raja R Harinath <rharinath@novell.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 
 using System.Security;
@@ -36,44 +36,44 @@ using System.Security.Permissions;
 
 namespace System.DirectoryServices {
 
-    [AttributeUsage(AttributeTargets.Assembly
-            | AttributeTargets.Class | AttributeTargets.Struct
-            | AttributeTargets.Constructor | AttributeTargets.Method
-            | AttributeTargets.Event, AllowMultiple=true, Inherited=false)]
-    [Serializable]
-    public class DirectoryServicesPermissionAttribute : CodeAccessSecurityAttribute {
+	[AttributeUsage(AttributeTargets.Assembly
+			| AttributeTargets.Class | AttributeTargets.Struct
+			| AttributeTargets.Constructor | AttributeTargets.Method
+			| AttributeTargets.Event, AllowMultiple=true, Inherited=false)]
+	[Serializable]
+	public class DirectoryServicesPermissionAttribute : CodeAccessSecurityAttribute {
 
-        string path;
-        DirectoryServicesPermissionAccess access;
+		string path;
+		DirectoryServicesPermissionAccess access;
 
-        public DirectoryServicesPermissionAttribute (SecurityAction action)
-            : base (action)
-        {
-            path = ResourcePermissionBase.Any;
-            access = DirectoryServicesPermissionAccess.Browse;
-        }
+		public DirectoryServicesPermissionAttribute (SecurityAction action)
+			: base (action)
+		{
+			path = ResourcePermissionBase.Any;
+			access = DirectoryServicesPermissionAccess.Browse;
+		}
 
-        public string Path {
-            get { return path; }
-            set {
-                if (value == null)
-                    throw new ArgumentNullException ("Path");
-                path = value;
-            }
-        }
+		public string Path {
+			get { return path; }
+			set {
+				if (value == null)
+					throw new ArgumentNullException ("Path");
+				path = value;
+			}
+		}
 
-        public DirectoryServicesPermissionAccess PermissionAccess {
-            get { return access; }
-            set { access = value; }
-        }
+		public DirectoryServicesPermissionAccess PermissionAccess {
+			get { return access; }
+			set { access = value; }
+		}
 
-        public override IPermission CreatePermission ()
-        {
-            if (base.Unrestricted)
-                return new DirectoryServicesPermission (PermissionState.Unrestricted);
-            else
-                return new DirectoryServicesPermission (access, path);
-        }
-    }
+		public override IPermission CreatePermission ()
+		{
+			if (base.Unrestricted)
+				return new DirectoryServicesPermission (PermissionState.Unrestricted);
+			else
+				return new DirectoryServicesPermission (access, path);
+		}
+	}
 }
 

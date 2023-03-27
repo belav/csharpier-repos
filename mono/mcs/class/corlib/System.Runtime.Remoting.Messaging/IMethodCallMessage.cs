@@ -34,19 +34,19 @@ using System.Reflection;
 
 namespace System.Runtime.Remoting.Messaging {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IMethodCallMessage : IMethodMessage {
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IMethodCallMessage : IMethodMessage {
 
-        int InArgCount {
-            get;
-        }
-        
-        object [] InArgs {
-            get;
-        }
-        
-        object GetInArg (int argNum);
-        string GetInArgName (int index);
-    }
+		int InArgCount {
+			get;
+		}
+		
+		object [] InArgs {
+			get;
+		}
+		
+		object GetInArg (int argNum);
+		string GetInArgName (int index);
+	}
 }
 

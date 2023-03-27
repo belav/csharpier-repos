@@ -133,7 +133,7 @@ namespace System.Net.Configuration
         internal const string WebProxyScript = "webProxyScript";
         internal const string WebRequestModulesSectionName = "webRequestModules";
         internal const string WebUtility = "webUtility";
-        internal const string maximumUnauthorizedUploadLength = "maximumUnauthorizedUploadLength";
+    	internal const string maximumUnauthorizedUploadLength = "maximumUnauthorizedUploadLength";
         internal const string UnescapeRequestUrl = "unescapeRequestUrl";
         internal const string Timeouts = "timeouts";
         internal const string EntityBody = "entityBody";

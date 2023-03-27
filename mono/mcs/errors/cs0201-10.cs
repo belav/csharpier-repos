@@ -3,9 +3,9 @@
 
 public class X
 {
-    public static void Main ()
-    {
-        return;
-        1+1;
-    }
+	public static void Main ()
+	{
+		return;
+		1+1;
+	}
 }

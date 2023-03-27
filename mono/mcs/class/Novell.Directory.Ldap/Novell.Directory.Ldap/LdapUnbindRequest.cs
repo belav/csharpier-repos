@@ -34,25 +34,25 @@ using Novell.Directory.Ldap.Rfc2251;
 
 namespace Novell.Directory.Ldap
 {
-    
-    /// <summary> Represents an Ldap Unbind Request.
-    /// 
-    /// </summary>
-    /// <seealso cref="LdapConnection.SendRequest">
-    /// </seealso> 
+	
+	/// <summary> Represents an Ldap Unbind Request.
+	/// 
+	/// </summary>
+	/// <seealso cref="LdapConnection.SendRequest">
+	/// </seealso> 
    /*
-    *       UnbindRequest ::= [APPLICATION 2] NULL
-    */
-    public class LdapUnbindRequest:LdapMessage
-    {
-        /// <summary> Constructs an Ldap Unbind Request.
-        /// 
-        /// </summary>
-        /// <param name="cont">Any controls that apply to the unbind request
-        /// </param>
-        public LdapUnbindRequest(LdapControl[] cont):base(LdapMessage.UNBIND_REQUEST, new RfcUnbindRequest(), cont)
-        {
-            return ;
-        }
-    }
+	*       UnbindRequest ::= [APPLICATION 2] NULL
+	*/
+	public class LdapUnbindRequest:LdapMessage
+	{
+		/// <summary> Constructs an Ldap Unbind Request.
+		/// 
+		/// </summary>
+		/// <param name="cont">Any controls that apply to the unbind request
+		/// </param>
+		public LdapUnbindRequest(LdapControl[] cont):base(LdapMessage.UNBIND_REQUEST, new RfcUnbindRequest(), cont)
+		{
+			return ;
+		}
+	}
 }

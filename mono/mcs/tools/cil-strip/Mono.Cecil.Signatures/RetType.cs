@@ -28,12 +28,12 @@
 
 namespace Mono.Cecil.Signatures {
 
-    internal sealed class RetType : InputOutputItem {
+	internal sealed class RetType : InputOutputItem {
 
-        public bool Void;
+		public bool Void;
 
-        public RetType ()
-        {
-        }
-    }
+		public RetType ()
+		{
+		}
+	}
 }

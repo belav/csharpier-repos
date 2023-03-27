@@ -20,27 +20,27 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 
 
 using System;
 
 namespace System.Windows.Forms {
 
-    public class StatusBarPanelClickEventArgs : MouseEventArgs {
+	public class StatusBarPanelClickEventArgs : MouseEventArgs {
 
-        private StatusBarPanel panel;
+		private StatusBarPanel panel;
 
-        public StatusBarPanelClickEventArgs (StatusBarPanel statusBarPanel,
-                MouseButtons button, int clicks, int x, int y) :
-            base (button, clicks, x, y, 0)
-        {
-            this.panel = statusBarPanel;
-        }
+		public StatusBarPanelClickEventArgs (StatusBarPanel statusBarPanel,
+				MouseButtons button, int clicks, int x, int y) :
+			base (button, clicks, x, y, 0)
+		{
+			this.panel = statusBarPanel;
+		}
 
-        public StatusBarPanel StatusBarPanel {
-            get { return panel; }
-        }
-    }
+		public StatusBarPanel StatusBarPanel {
+			get { return panel; }
+		}
+	}
 }
 

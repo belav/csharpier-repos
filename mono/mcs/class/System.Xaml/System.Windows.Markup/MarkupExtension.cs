@@ -29,9 +29,9 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-    public abstract class MarkupExtension
-    {
-        public abstract object ProvideValue (IServiceProvider serviceProvider);
-    }
+	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+	public abstract class MarkupExtension
+	{
+		public abstract object ProvideValue (IServiceProvider serviceProvider);
+	}
 }

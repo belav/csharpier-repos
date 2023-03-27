@@ -2,7 +2,7 @@
 // MessageContractMemberAttribute.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,32 +30,32 @@ using System.Net.Security;
 
 namespace System.ServiceModel
 {
-    public abstract class MessageContractMemberAttribute : Attribute
-    {
-        bool has_protection_level;
-        string name, ns;
-        ProtectionLevel protection_level;
+	public abstract class MessageContractMemberAttribute : Attribute
+	{
+		bool has_protection_level;
+		string name, ns;
+		ProtectionLevel protection_level;
 
-        public bool HasProtectionLevel {
-            get { return has_protection_level; }
-        }
+		public bool HasProtectionLevel {
+			get { return has_protection_level; }
+		}
 
-        public string Name {
-            get { return name; }
-            set { name = value; }
-        }
+		public string Name {
+			get { return name; }
+			set { name = value; }
+		}
 
-        public string Namespace {
-            get { return ns; }
-            set { ns = value; }
-        }
+		public string Namespace {
+			get { return ns; }
+			set { ns = value; }
+		}
 
-        public ProtectionLevel ProtectionLevel {
-            get { return protection_level; }
-            set {
-                has_protection_level = true;
-                protection_level = value;
-            }
-        }
-    }
+		public ProtectionLevel ProtectionLevel {
+			get { return protection_level; }
+			set {
+				has_protection_level = true;
+				protection_level = value;
+			}
+		}
+	}
 }

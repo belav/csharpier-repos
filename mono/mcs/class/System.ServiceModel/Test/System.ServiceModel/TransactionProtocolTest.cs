@@ -1,8 +1,8 @@
-//
+﻿//
 // TransactionProtocolTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -36,22 +36,22 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class TransactionProtocolTest
-    {
-        [Test]
-        public void StaticMembers ()
-        {
-            Assert.IsNotNull (TransactionProtocol.WSAtomicTransactionOctober2004, "#1");
+	[TestFixture]
+	public class TransactionProtocolTest
+	{
+		[Test]
+		public void StaticMembers ()
+		{
+			Assert.IsNotNull (TransactionProtocol.WSAtomicTransactionOctober2004, "#1");
 
-            // This is not worthy of assuring, just for checking
-            // implementation details.
-            //
-            // ... and anyways it is not testable under Mono since
-            // access to Default raises an exception.
-            //
-            Assert.IsTrue (TransactionProtocol.WSAtomicTransactionOctober2004 != TransactionProtocol.Default, "#2");
-        }
-    }
+			// This is not worthy of assuring, just for checking
+			// implementation details.
+			//
+			// ... and anyways it is not testable under Mono since
+			// access to Default raises an exception.
+			//
+			Assert.IsTrue (TransactionProtocol.WSAtomicTransactionOctober2004 != TransactionProtocol.Default, "#2");
+		}
+	}
 }
 #endif

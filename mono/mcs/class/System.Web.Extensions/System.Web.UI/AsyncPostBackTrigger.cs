@@ -1,4 +1,4 @@
-//
+﻿//
 // AsyncPostBackTrigger.cs
 //
 // Author:
@@ -35,96 +35,96 @@ using System.Reflection;
 
 namespace System.Web.UI
 {
-    public class AsyncPostBackTrigger : UpdatePanelControlTrigger
-    {
-        static readonly MethodInfo _eventHandler = typeof (AsyncPostBackTrigger).GetMethod ("OnEvent");
-        static readonly char[] _controlIdSeparators = {'_', '$'};
-        
-        string _eventName;
+	public class AsyncPostBackTrigger : UpdatePanelControlTrigger
+	{
+		static readonly MethodInfo _eventHandler = typeof (AsyncPostBackTrigger).GetMethod ("OnEvent");
+		static readonly char[] _controlIdSeparators = {'_', '$'};
+		
+		string _eventName;
 
-        public new string ControlID {
-            get {
-                return base.ControlID;
-            }
-            set {
-                base.ControlID = value;
-            }
-        }
+		public new string ControlID {
+			get {
+				return base.ControlID;
+			}
+			set {
+				base.ControlID = value;
+			}
+		}
 
-        [DefaultValue ("")]
-        [Category ("Behavior")]
-        public string EventName {
-            get {
-                if (_eventName == null)
-                    return String.Empty;
-                return _eventName;
-            }
-            set {
-                _eventName = value;
-            }
-        }
+		[DefaultValue ("")]
+		[Category ("Behavior")]
+		public string EventName {
+			get {
+				if (_eventName == null)
+					return String.Empty;
+				return _eventName;
+			}
+			set {
+				_eventName = value;
+			}
+		}
 
-        protected internal override bool HasTriggered ()
-        {
-            Control ctrl = FindTargetControl (true);
-            string ctrlUniqueID = ctrl != null ? ctrl.UniqueID : null;
-            if (ctrlUniqueID == null)
-                return false;
+		protected internal override bool HasTriggered ()
+		{
+			Control ctrl = FindTargetControl (true);
+			string ctrlUniqueID = ctrl != null ? ctrl.UniqueID : null;
+			if (ctrlUniqueID == null)
+				return false;
 
-            string asyncPostBackElementID = Owner.ScriptManager.AsyncPostBackSourceElementID;
-            if (String.Compare (asyncPostBackElementID, ctrlUniqueID, StringComparison.Ordinal) == 0)
-                return true;
-            else {
-                int sep = asyncPostBackElementID.IndexOfAny (_controlIdSeparators);
-                if (sep > -1 && String.Compare (asyncPostBackElementID, 0, ctrlUniqueID, 0, ctrlUniqueID.Length, StringComparison.Ordinal) == 0)
-                    return true;
-            }
-            
-            return false;
-        }
+			string asyncPostBackElementID = Owner.ScriptManager.AsyncPostBackSourceElementID;
+			if (String.Compare (asyncPostBackElementID, ctrlUniqueID, StringComparison.Ordinal) == 0)
+				return true;
+			else {
+				int sep = asyncPostBackElementID.IndexOfAny (_controlIdSeparators);
+				if (sep > -1 && String.Compare (asyncPostBackElementID, 0, ctrlUniqueID, 0, ctrlUniqueID.Length, StringComparison.Ordinal) == 0)
+					return true;
+			}
+			
+			return false;
+		}
 
-        protected internal override void Initialize ()
-        {
-            Control c = FindTargetControl (true);
-            ScriptManager sm = Owner.ScriptManager;
-            string eventName = EventName;
-            if (String.IsNullOrEmpty (eventName)) {
-                object[] attrs = c.GetType ().GetCustomAttributes (typeof (DefaultEventAttribute), true);
-                if (attrs != null && attrs.Length > 0) {
-                    var dea = attrs [0] as DefaultEventAttribute;
-                    if (dea != null)
-                        eventName = dea.Name;
-                }
-            }
+		protected internal override void Initialize ()
+		{
+			Control c = FindTargetControl (true);
+			ScriptManager sm = Owner.ScriptManager;
+			string eventName = EventName;
+			if (String.IsNullOrEmpty (eventName)) {
+				object[] attrs = c.GetType ().GetCustomAttributes (typeof (DefaultEventAttribute), true);
+				if (attrs != null && attrs.Length > 0) {
+					var dea = attrs [0] as DefaultEventAttribute;
+					if (dea != null)
+						eventName = dea.Name;
+				}
+			}
 
-            if (!String.IsNullOrEmpty (eventName)) {
-                EventInfo evi = c.GetType ().GetEvent (eventName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
-                if (evi == null)
-                    throw new InvalidOperationException (String.Format ("Could not find an event named '{0}' on associated control '{1}' for the trigger in UpdatePanel '{2}'.", eventName, c.ID, Owner.ID));
+			if (!String.IsNullOrEmpty (eventName)) {
+				EventInfo evi = c.GetType ().GetEvent (eventName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
+				if (evi == null)
+					throw new InvalidOperationException (String.Format ("Could not find an event named '{0}' on associated control '{1}' for the trigger in UpdatePanel '{2}'.", eventName, c.ID, Owner.ID));
 
-                Delegate d = null;
-                try {
-                    d = Delegate.CreateDelegate (evi.EventHandlerType, this, _eventHandler);
-                }
-                catch (ArgumentException) {
-                    throw new InvalidOperationException (String.Format ("The event '{0}' in '{1}' for the control '{2}' does not match a standard event handler signature.", eventName, c.GetType (), c.ID));
-                }
+				Delegate d = null;
+				try {
+					d = Delegate.CreateDelegate (evi.EventHandlerType, this, _eventHandler);
+				}
+				catch (ArgumentException) {
+					throw new InvalidOperationException (String.Format ("The event '{0}' in '{1}' for the control '{2}' does not match a standard event handler signature.", eventName, c.GetType (), c.ID));
+				}
 
-                evi.AddEventHandler (c, d);
-            }
-            
-            sm.RegisterAsyncPostBackControl (c);
-        }
+				evi.AddEventHandler (c, d);
+			}
+			
+			sm.RegisterAsyncPostBackControl (c);
+		}
 
-        public void OnEvent (object sender, EventArgs e)
-        {
-            UpdatePanel owner = Owner;
-            if (owner != null && owner.UpdateMode != UpdatePanelUpdateMode.Always)
-                owner.Update ();
-        }
+		public void OnEvent (object sender, EventArgs e)
+		{
+			UpdatePanel owner = Owner;
+			if (owner != null && owner.UpdateMode != UpdatePanelUpdateMode.Always)
+				owner.Update ();
+		}
 
-        public override string ToString () {
-            return String.Format ("AsyncPostBackTrigger: {0}.{1}", ControlID, EventName);
-        }
-    }
+		public override string ToString () {
+			return String.Format ("AsyncPostBackTrigger: {0}.{1}", ControlID, EventName);
+		}
+	}
 }

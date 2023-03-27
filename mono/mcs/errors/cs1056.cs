@@ -3,8 +3,8 @@
 
 public class C
 {
-    void Update ()
-    {
-        int a = $7;
-    }
+	void Update ()
+	{
+		int a = $7;
+	}
 }

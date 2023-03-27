@@ -2,7 +2,7 @@
 // DLinqAssociationProvider.cs
 //
 // Author:
-//    Marek Habersack <mhabersack@novell.com>
+//	Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2009 Novell Inc. http://novell.com
 //
@@ -41,10 +41,10 @@ using DMetaTable = System.Data.Linq.Mapping.MetaTable;
 
 namespace System.Web.DynamicData.ModelProviders
 {
-    class DLinqAssociationProvider : AssociationProvider
-    {
-        public DLinqAssociationProvider (DLinqColumnProvider provider)
-        {
-        }
-    }
+	class DLinqAssociationProvider : AssociationProvider
+	{
+		public DLinqAssociationProvider (DLinqColumnProvider provider)
+		{
+		}
+	}
 }

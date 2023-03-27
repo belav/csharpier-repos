@@ -29,68 +29,68 @@
 //
 
 namespace System.Web.Services.Description {
-    public sealed class OperationBindingCollection : ServiceDescriptionBaseCollection {
+	public sealed class OperationBindingCollection : ServiceDescriptionBaseCollection {
 
-        #region Constructors
+		#region Constructors
 
-        internal OperationBindingCollection (Binding binding)
-            : base (binding)
-        {
-        }
+		internal OperationBindingCollection (Binding binding)
+			: base (binding)
+		{
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public OperationBinding this [int index] {
-            get { 
-                if (index < 0 || index > Count)
-                    throw new ArgumentOutOfRangeException ();
-                return (OperationBinding) List[index]; 
-            }
-            set { List[index] = value; }
-        }
+		public OperationBinding this [int index] {
+			get { 
+				if (index < 0 || index > Count)
+					throw new ArgumentOutOfRangeException ();
+				return (OperationBinding) List[index]; 
+			}
+			set { List[index] = value; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        public int Add (OperationBinding bindingOperation) 
-        {
-            Insert (Count, bindingOperation);
-            return (Count - 1);
-        }
+		public int Add (OperationBinding bindingOperation) 
+		{
+			Insert (Count, bindingOperation);
+			return (Count - 1);
+		}
 
-        public bool Contains (OperationBinding bindingOperation)
-        {
-            return List.Contains (bindingOperation);
-        }
+		public bool Contains (OperationBinding bindingOperation)
+		{
+			return List.Contains (bindingOperation);
+		}
 
-        public void CopyTo (OperationBinding[] array, int index) 
-        {
-            List.CopyTo (array, index);
-        }
+		public void CopyTo (OperationBinding[] array, int index) 
+		{
+			List.CopyTo (array, index);
+		}
 
-        public int IndexOf (OperationBinding bindingOperation)
-        {
-            return List.IndexOf (bindingOperation);
-        }
+		public int IndexOf (OperationBinding bindingOperation)
+		{
+			return List.IndexOf (bindingOperation);
+		}
 
-        public void Insert (int index, OperationBinding bindingOperation)
-        {
-            List.Insert (index, bindingOperation);
-        }
-    
-        public void Remove (OperationBinding bindingOperation)
-        {
-            List.Remove (bindingOperation);
-        }
+		public void Insert (int index, OperationBinding bindingOperation)
+		{
+			List.Insert (index, bindingOperation);
+		}
+	
+		public void Remove (OperationBinding bindingOperation)
+		{
+			List.Remove (bindingOperation);
+		}
 
-        protected override void SetParent (object value, object parent)
-        {
-            ((OperationBinding) value).SetParent ((Binding) parent);
-        }
-            
-        #endregion // Methods
-    }
+		protected override void SetParent (object value, object parent)
+		{
+			((OperationBinding) value).SetParent ((Binding) parent);
+		}
+			
+		#endregion // Methods
+	}
 }

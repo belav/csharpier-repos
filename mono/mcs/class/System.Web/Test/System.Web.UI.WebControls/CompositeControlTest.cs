@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.CompositeControl
 //
 // Author:
-//    Chris Toshok (toshok@novell.com)
+//	Chris Toshok (toshok@novell.com)
 //
 
 //
@@ -38,27 +38,27 @@ namespace MonoTests.System.Web.UI.WebControls {
 
   [TestFixture]
   public class CompositeControlTest {
-      class Poker : CompositeControl {
-        protected internal override void CreateChildControls ()
-        {
-            Controls.Clear ();
+  	class Poker : CompositeControl {
+		protected internal override void CreateChildControls ()
+		{
+			Controls.Clear ();
 
-            /* create 1 child control */
-            Label label = new Label ();
+			/* create 1 child control */
+			Label label = new Label ();
 
-            Controls.Add (label);
-        }
-    }
+			Controls.Add (label);
+		}
+	}
 
-      [Test]
-    public void ControlsAccessorTest ()
-      {
-        Poker p = new Poker();
+  	[Test]
+	public void ControlsAccessorTest ()
+  	{
+		Poker p = new Poker();
 
-        ControlCollection col = p.Controls;
+		ControlCollection col = p.Controls;
 
-        Assert.AreEqual (col.Count, 1, "Controls accessor causes child control creation.");
-    }
+		Assert.AreEqual (col.Count, 1, "Controls accessor causes child control creation.");
+	}
   }
 }
 

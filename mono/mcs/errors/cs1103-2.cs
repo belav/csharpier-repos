@@ -3,7 +3,7 @@
 
 static class S
 {
-    static void Foo (this dynamic d)
-    {
-    }
+	static void Foo (this dynamic d)
+	{
+	}
 }

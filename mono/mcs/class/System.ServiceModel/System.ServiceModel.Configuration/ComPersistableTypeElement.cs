@@ -2,7 +2,7 @@
 // ComPersistableTypeElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,65 +54,65 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public sealed partial class ComPersistableTypeElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty i_d;
-        static ConfigurationProperty name;
+	[MonoTODO]
+	public sealed partial class ComPersistableTypeElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty i_d;
+		static ConfigurationProperty name;
 
-        static ComPersistableTypeElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            i_d = new ConfigurationProperty ("ID",
-                typeof (string), null, new StringConverter (), null,
-                ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+		static ComPersistableTypeElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			i_d = new ConfigurationProperty ("ID",
+				typeof (string), null, new StringConverter (), null,
+				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
 
-            name = new ConfigurationProperty ("name",
-                typeof (string), "", new StringConverter (), null,
-                ConfigurationPropertyOptions.None);
+			name = new ConfigurationProperty ("name",
+				typeof (string), "", new StringConverter (), null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (i_d);
-            properties.Add (name);
-        }
+			properties.Add (i_d);
+			properties.Add (name);
+		}
 
-        public ComPersistableTypeElement ()
-        {
-        }
-
-
-        // Properties
-
-        [ConfigurationProperty ("ID",
-             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-            IsRequired = true,
-            IsKey = true)]
-        [StringValidator ( MinLength = 1,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string ID {
-            get { return (string) base [i_d]; }
-            set { base [i_d] = value; }
-        }
-
-        [ConfigurationProperty ("name",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "")]
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string Name {
-            get { return (string) base [name]; }
-            set { base [name] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		public ComPersistableTypeElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+		[ConfigurationProperty ("ID",
+			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+			IsRequired = true,
+			IsKey = true)]
+		[StringValidator ( MinLength = 1,
+			MaxLength = int.MaxValue,
+			 InvalidCharacters = null)]
+		public string ID {
+			get { return (string) base [i_d]; }
+			set { base [i_d] = value; }
+		}
+
+		[ConfigurationProperty ("name",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "")]
+		[StringValidator ( MinLength = 0,
+			MaxLength = int.MaxValue,
+			 InvalidCharacters = null)]
+		public string Name {
+			get { return (string) base [name]; }
+			set { base [name] = value; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+
+	}
 
 }

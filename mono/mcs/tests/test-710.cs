@@ -9,8 +9,8 @@ class Z
 
 class C
 {
-    public static void Main ()
-    {
-        Z z = new Z ();
-    }
+	public static void Main ()
+	{
+		Z z = new Z ();
+	}
 }

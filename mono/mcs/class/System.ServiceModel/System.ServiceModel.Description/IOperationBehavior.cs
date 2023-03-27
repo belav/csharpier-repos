@@ -2,7 +2,7 @@
 // IOperationBehavior.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -31,21 +31,21 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-    public interface IOperationBehavior
-    {
-        void AddBindingParameters (
-            OperationDescription operationDescription,
-            BindingParameterCollection bindingParameters);
+	public interface IOperationBehavior
+	{
+		void AddBindingParameters (
+			OperationDescription operationDescription,
+			BindingParameterCollection bindingParameters);
 
-        void ApplyDispatchBehavior (
-            OperationDescription operationDescription,
-            DispatchOperation dispatchOperation);
+		void ApplyDispatchBehavior (
+			OperationDescription operationDescription,
+			DispatchOperation dispatchOperation);
 
-        void ApplyClientBehavior (
-            OperationDescription operationDescription,
-            ClientOperation clientOperation);
+		void ApplyClientBehavior (
+			OperationDescription operationDescription,
+			ClientOperation clientOperation);
 
-        void Validate (
-            OperationDescription operationDescription);
-    }
+		void Validate (
+			OperationDescription operationDescription);
+	}
 }

@@ -32,30 +32,30 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    [MonoTODO]
-    public abstract class DirectoryResponse : DirectoryOperation
-    {
-        internal DirectoryResponse ()
-        {
-        }
+	[MonoTODO]
+	public abstract class DirectoryResponse : DirectoryOperation
+	{
+		internal DirectoryResponse ()
+		{
+		}
 
-        public virtual DirectoryControl [] Controls {
-            get { throw new NotImplementedException (); }
-        }
-        public virtual string ErrorMessage {
-            get { throw new NotImplementedException (); }
-        }
-        public virtual string MatchedDN {
-            get { throw new NotImplementedException (); }
-        }
-        public virtual Uri [] Referral {
-            get { throw new NotImplementedException (); }
-        }
-        public string RequestId {
-            get { throw new NotImplementedException (); }
-        }
-        public virtual ResultCode ResultCode {
-            get { throw new NotImplementedException (); }
-        }
-    }
+		public virtual DirectoryControl [] Controls {
+			get { throw new NotImplementedException (); }
+		}
+		public virtual string ErrorMessage {
+			get { throw new NotImplementedException (); }
+		}
+		public virtual string MatchedDN {
+			get { throw new NotImplementedException (); }
+		}
+		public virtual Uri [] Referral {
+			get { throw new NotImplementedException (); }
+		}
+		public string RequestId {
+			get { throw new NotImplementedException (); }
+		}
+		public virtual ResultCode ResultCode {
+			get { throw new NotImplementedException (); }
+		}
+	}
 }

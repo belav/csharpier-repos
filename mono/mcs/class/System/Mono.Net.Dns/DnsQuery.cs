@@ -2,7 +2,7 @@
 // Mono.Net.Dns.DnsQuery
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
+//	Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
 //
 // Copyright 2011 Gonzalo Paniagua Javier
 //
@@ -24,27 +24,27 @@ using System.IO;
 using System.Text;
 
 namespace Mono.Net.Dns {
-    class DnsQuery : DnsPacket {
-        public DnsQuery (string name, DnsQType qtype, DnsQClass qclass)
-        {
-            if (String.IsNullOrEmpty (name))
-                throw new ArgumentNullException ("name");
+	class DnsQuery : DnsPacket {
+		public DnsQuery (string name, DnsQType qtype, DnsQClass qclass)
+		{
+			if (String.IsNullOrEmpty (name))
+				throw new ArgumentNullException ("name");
 
-            int length = DnsUtil.GetEncodedLength (name);
-            if (length == -1)
-                throw new ArgumentException ("Invalid DNS name", "name");
+			int length = DnsUtil.GetEncodedLength (name);
+			if (length == -1)
+				throw new ArgumentException ("Invalid DNS name", "name");
 
-            length += 12 + 2 + 2; // Header + qtype + qclass
-            packet = new byte [length];
-            header = new DnsHeader (packet, 0);
-            position = 12;
-            WriteDnsName (name);
-            WriteUInt16 ((ushort) qtype);
-            WriteUInt16 ((ushort) qclass);
-            Header.QuestionCount = 1;
-            Header.IsQuery = true;
-            Header.RecursionDesired = true;
-        }
-    }
+			length += 12 + 2 + 2; // Header + qtype + qclass
+			packet = new byte [length];
+			header = new DnsHeader (packet, 0);
+			position = 12;
+			WriteDnsName (name);
+			WriteUInt16 ((ushort) qtype);
+			WriteUInt16 ((ushort) qclass);
+			Header.QuestionCount = 1;
+			Header.IsQuery = true;
+			Header.RecursionDesired = true;
+		}
+	}
 }
 

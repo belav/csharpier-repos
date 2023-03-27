@@ -3,7 +3,7 @@
 //
 // Author:
 //      Brendan Zagaeski 
-//    Miguel de Icaza
+//	Miguel de Icaza
 //
 // Copyright (C) 2013-2014 Xamarin Inc http://www.xamarin.com
 //
@@ -58,15 +58,15 @@ namespace MonoTests.System.Runtime.Serialization
                 [DataMember]
                 public object NameList;
         }
-    
-    [TestFixture]
-    public class DataContractSerializerTestBugs {
+	
+	[TestFixture]
+	public class DataContractSerializerTestBugs {
 
 
-        // Bug #15574
-        [Test]
-        public void SerializeMyObject ()
-        {
+		// Bug #15574
+		[Test]
+		public void SerializeMyObject ()
+		{
                         var attrs = (KnownTypeAttribute[])typeof(MyObject).
                                 GetCustomAttributes (typeof(KnownTypeAttribute), true);
 
@@ -75,64 +75,64 @@ namespace MonoTests.System.Runtime.Serialization
                         }
 
                         var ser = new DataContractSerializer (typeof(MyObject));
-        }
+		}
 
-        [Test]
-        public void Bug ()
-        {
-            var s = "<MyObject xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-                "  <NameList i:type=\"a:ArrayOfstring\" xmlns:a=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\">\n" +
-                "    <a:string>Name1</a:string>\n" +
-                "    <a:string>Name2</a:string>\n" + 
-                "  </NameList>\n" +
-                "</MyObject>";
+		[Test]
+		public void Bug ()
+		{
+			var s = "<MyObject xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+				"  <NameList i:type=\"a:ArrayOfstring\" xmlns:a=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\">\n" +
+				"    <a:string>Name1</a:string>\n" +
+				"    <a:string>Name2</a:string>\n" + 
+				"  </NameList>\n" +
+				"</MyObject>";
 
-             //<MyObject xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/ServiceTest">
+ 			//<MyObject xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/ServiceTest">
 
                         var ser = new DataContractSerializer(typeof(MyObject));
-            ser.ReadObject (XmlReader.Create(new StringReader(s)));
-        }
+			ser.ReadObject (XmlReader.Create(new StringReader(s)));
+		}
 
-        [Flags ()]
-        [Serializable]
-        public enum FlagsEnum
-        {
-            None = 0,
-            Flag1 = 0x10,
-            Flag2 = 0x20,
-            All = 0xffff,
-        };
+		[Flags ()]
+		[Serializable]
+		public enum FlagsEnum
+		{
+			None = 0,
+			Flag1 = 0x10,
+			Flag2 = 0x20,
+			All = 0xffff,
+		};
 
-        [Serializable]
-        public class ClassWithFlagsEnum
-        {
-            public FlagsEnum Flags = FlagsEnum.All;
-        }
+		[Serializable]
+		public class ClassWithFlagsEnum
+		{
+			public FlagsEnum Flags = FlagsEnum.All;
+		}
 
-        // Bug #21072
-        [Test]
-        public void FlagsEnumTest ()
-        {
-            var ser = new DataContractSerializer (typeof (ClassWithFlagsEnum));
+		// Bug #21072
+		[Test]
+		public void FlagsEnumTest ()
+		{
+			var ser = new DataContractSerializer (typeof (ClassWithFlagsEnum));
 
-            using (var m = new MemoryStream ()) {
-                ser.WriteObject (m, new ClassWithFlagsEnum ());
-                var data = m.ToArray ();
-                var s = Encoding.UTF8.GetString (data, 0, (int) data.Length);
-                Assert.IsTrue (s.Contains ("<Flags>All</Flags>"));
-            }
-        }
+			using (var m = new MemoryStream ()) {
+				ser.WriteObject (m, new ClassWithFlagsEnum ());
+				var data = m.ToArray ();
+				var s = Encoding.UTF8.GetString (data, 0, (int) data.Length);
+				Assert.IsTrue (s.Contains ("<Flags>All</Flags>"));
+			}
+		}
 
-        // Bug #37116
-        [Test]
-        public void KeyPairOfAny ()
-        {
-            var dict = new Dictionary<string, object> ();
-            dict.Add ("test", new List<string> () { "test entry" });
+		// Bug #37116
+		[Test]
+		public void KeyPairOfAny ()
+		{
+			var dict = new Dictionary<string, object> ();
+			dict.Add ("test", new List<string> () { "test entry" });
 
-            var dcs = new DataContractSerializer (typeof(Dictionary<string, object>));
-            dcs.WriteObject (new MemoryStream (), dict);
-            // Should not throw exception.
-        }
-    }
+			var dcs = new DataContractSerializer (typeof(Dictionary<string, object>));
+			dcs.WriteObject (new MemoryStream (), dict);
+			// Should not throw exception.
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // Unit tests for System.ObsoleteAttribute
 //
 // Authors:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -32,66 +32,66 @@ using NUnit.Framework;
 
 namespace MonoTests.System {
 
-    [TestFixture]
-    public class ObsoleteAttributeTest {
+	[TestFixture]
+	public class ObsoleteAttributeTest {
 
-        [Test]
-        public void Type ()
-        {
-            object[] attrs = typeof (ObsoleteAttribute).GetCustomAttributes (typeof (AttributeUsageAttribute), false);
-            AttributeUsageAttribute usage = (AttributeUsageAttribute) attrs [0];
+		[Test]
+		public void Type ()
+		{
+			object[] attrs = typeof (ObsoleteAttribute).GetCustomAttributes (typeof (AttributeUsageAttribute), false);
+			AttributeUsageAttribute usage = (AttributeUsageAttribute) attrs [0];
 
-            Assert.IsFalse (usage.AllowMultiple, "AllowMultiple");
-            Assert.IsFalse (usage.Inherited, "Inherited");
-            Assert.AreEqual (usage.ValidOn, AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum |
-                AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | 
-                AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Interface | 
-                AttributeTargets.Delegate, "ValidOn");
-        }
+			Assert.IsFalse (usage.AllowMultiple, "AllowMultiple");
+			Assert.IsFalse (usage.Inherited, "Inherited");
+			Assert.AreEqual (usage.ValidOn, AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum |
+				AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | 
+				AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Interface | 
+				AttributeTargets.Delegate, "ValidOn");
+		}
 
-        private void Check (ObsoleteAttribute attr, string message, bool error)
-        {
-            Assert.AreEqual (message, attr.Message, "Message");
-            Assert.AreEqual (error, attr.IsError, "IsError");
-            Assert.AreEqual (typeof (ObsoleteAttribute), attr.TypeId, "TypeId");
-        }
+		private void Check (ObsoleteAttribute attr, string message, bool error)
+		{
+			Assert.AreEqual (message, attr.Message, "Message");
+			Assert.AreEqual (error, attr.IsError, "IsError");
+			Assert.AreEqual (typeof (ObsoleteAttribute), attr.TypeId, "TypeId");
+		}
 
-        [Test]
-        public void Constructor ()
-        {
-            Check (new ObsoleteAttribute (), null, false);
-        }
+		[Test]
+		public void Constructor ()
+		{
+			Check (new ObsoleteAttribute (), null, false);
+		}
 
-        [Test]
-        public void ConstructorMessage_Null ()
-        {
-            Check (new ObsoleteAttribute (null), null, false);
-        }
+		[Test]
+		public void ConstructorMessage_Null ()
+		{
+			Check (new ObsoleteAttribute (null), null, false);
+		}
 
-        [Test]
-        public void ConstructorMessage_Empty ()
-        {
-            Check (new ObsoleteAttribute (String.Empty), String.Empty, false);
-        }
+		[Test]
+		public void ConstructorMessage_Empty ()
+		{
+			Check (new ObsoleteAttribute (String.Empty), String.Empty, false);
+		}
 
-        [Test]
-        public void ConstructorMessage ()
-        {
-            string message = "too late, stuff is long gone";
-            Check (new ObsoleteAttribute (message), message, false);
-        }
+		[Test]
+		public void ConstructorMessage ()
+		{
+			string message = "too late, stuff is long gone";
+			Check (new ObsoleteAttribute (message), message, false);
+		}
 
-        [Test]
-        public void ConstructorMessageBoolTrue ()
-        {
-            Check (new ObsoleteAttribute (null, true), null, true);
-        }
+		[Test]
+		public void ConstructorMessageBoolTrue ()
+		{
+			Check (new ObsoleteAttribute (null, true), null, true);
+		}
 
-        [Test]
-        public void ConstructorMessageBoolFalse ()
-        {
-            string message = "too late, stuff is long gone";
-            Check (new ObsoleteAttribute (message, false), message, false);
-        }
-    }
+		[Test]
+		public void ConstructorMessageBoolFalse ()
+		{
+			string message = "too late, stuff is long gone";
+			Check (new ObsoleteAttribute (message, false), message, false);
+		}
+	}
 }

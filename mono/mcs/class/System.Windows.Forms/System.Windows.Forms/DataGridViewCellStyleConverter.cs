@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
@@ -29,20 +29,20 @@ using System.Globalization;
 
 namespace System.Windows.Forms {
 
-    public class DataGridViewCellStyleConverter : TypeConverter {
+	public class DataGridViewCellStyleConverter : TypeConverter {
 
-        public DataGridViewCellStyleConverter () {
-        }
+		public DataGridViewCellStyleConverter () {
+		}
 
-        public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType) {
-            throw new NotImplementedException();
-        }
+		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType) {
+			throw new NotImplementedException();
+		}
 
-        public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
-            throw new NotImplementedException();
-        }
+		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
+			throw new NotImplementedException();
+		}
 
-    }
+	}
 
 }
 

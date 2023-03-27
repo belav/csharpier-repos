@@ -3,24 +3,24 @@
 
 public class C
 {
-    public int v;
+	public int v;
 }
 
 public struct S
 {
-    public C c;
+	public C c;
 }
 
 public struct S2
 {
-    S s;
+	S s;
 }
 
 public class Test
 {
-    static void Main ()
-    {
-        S s;
-        int xx = s.c.v;
-    }
+	static void Main ()
+	{
+		S s;
+		int xx = s.c.v;
+	}
 }

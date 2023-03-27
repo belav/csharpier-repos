@@ -1,9 +1,9 @@
 //
 // CodeExpressionCollectionCas.cs
-//    - CAS unit tests for System.CodeDom.CodeExpressionCollection
+//	- CAS unit tests for System.CodeDom.CodeExpressionCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,83 +37,83 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeExpressionCollectionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeExpressionCollectionCas {
 
-        private CodeExpression ce;
-        private CodeExpression[] array;
+		private CodeExpression ce;
+		private CodeExpression[] array;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            ce = new CodeExpression ();
-            array = new CodeExpression[1] { ce };
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			ce = new CodeExpression ();
+			array = new CodeExpression[1] { ce };
+		}
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            Assert.AreEqual (0, coll.Add (ce), "Add");
-            Assert.AreSame (ce, coll[0], "this[int]");
-            coll.CopyTo (array, 0);
-            coll.AddRange (array);
-            coll.AddRange (coll);
-            Assert.IsTrue (coll.Contains (ce), "Contains");
-            Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
-            coll.Insert (0, ce);
-            coll.Remove (ce);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeExpressionCollection coll = new CodeExpressionCollection ();
+			Assert.AreEqual (0, coll.Add (ce), "Add");
+			Assert.AreSame (ce, coll[0], "this[int]");
+			coll.CopyTo (array, 0);
+			coll.AddRange (array);
+			coll.AddRange (coll);
+			Assert.IsTrue (coll.Contains (ce), "Contains");
+			Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
+			coll.Insert (0, ce);
+			coll.Remove (ce);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeExpressionCollection coll = new CodeExpressionCollection (array);
-            coll.CopyTo (array, 0);
-            Assert.AreEqual (1, coll.Add (ce), "Add");
-            Assert.AreSame (ce, coll[0], "this[int]");
-            coll.AddRange (array);
-            coll.AddRange (coll);
-            Assert.IsTrue (coll.Contains (ce), "Contains");
-            Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
-            coll.Insert (0, ce);
-            coll.Remove (ce);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeExpressionCollection coll = new CodeExpressionCollection (array);
+			coll.CopyTo (array, 0);
+			Assert.AreEqual (1, coll.Add (ce), "Add");
+			Assert.AreSame (ce, coll[0], "this[int]");
+			coll.AddRange (array);
+			coll.AddRange (coll);
+			Assert.IsTrue (coll.Contains (ce), "Contains");
+			Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
+			coll.Insert (0, ce);
+			coll.Remove (ce);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2_Deny_Unrestricted ()
-        {
-            CodeExpressionCollection c = new CodeExpressionCollection ();
-            CodeExpressionCollection coll = new CodeExpressionCollection (c);
-            Assert.AreEqual (0, coll.Add (ce), "Add");
-            Assert.AreSame (ce, coll[0], "this[int]");
-            coll.CopyTo (array, 0);
-            coll.AddRange (array);
-            coll.AddRange (coll);
-            Assert.IsTrue (coll.Contains (ce), "Contains");
-            Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
-            coll.Insert (0, ce);
-            coll.Remove (ce);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2_Deny_Unrestricted ()
+		{
+			CodeExpressionCollection c = new CodeExpressionCollection ();
+			CodeExpressionCollection coll = new CodeExpressionCollection (c);
+			Assert.AreEqual (0, coll.Add (ce), "Add");
+			Assert.AreSame (ce, coll[0], "this[int]");
+			coll.CopyTo (array, 0);
+			coll.AddRange (array);
+			coll.AddRange (coll);
+			Assert.IsTrue (coll.Contains (ce), "Contains");
+			Assert.AreEqual (0, coll.IndexOf (ce), "IndexOf");
+			coll.Insert (0, ce);
+			coll.Remove (ce);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeExpressionCollection).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeExpressionCollection).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

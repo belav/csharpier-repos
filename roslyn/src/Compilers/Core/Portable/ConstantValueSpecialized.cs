@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The IEEE floating-point spec doesn't specify which bit pattern an implementation
         /// is required to use when producing NaN values.  Indeed, the spec does recommend
-        /// "diagnostic" information "left to the implementer�s discretion" be placed in the
+        /// "diagnostic" information "left to the implementer’s discretion" be placed in the
         /// undefined bits. It is therefore likely that NaNs produced on different platforms
         /// will differ even for the same arithmetic such as 0.0 / 0.0.  To ensure that the
         /// compiler behaves in a deterministic way, we force NaN values to use the

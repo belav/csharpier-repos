@@ -2,7 +2,7 @@
 // System.Configuration.ValidatorCallback.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,6 +30,6 @@ using System;
 using System.IO;
 
 namespace System.Configuration {
-    public delegate void ValidatorCallback (object value);
+	public delegate void ValidatorCallback (object value);
 }
 

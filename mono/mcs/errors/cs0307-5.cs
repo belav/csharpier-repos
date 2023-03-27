@@ -3,16 +3,16 @@
 
 class Test<T, U>
 {
-    public object Value {
-        get { return null; }
-    }
+	public object Value {
+		get { return null; }
+	}
 
-    public class B
-    {
-        public B (object arg)
-        {
-        }
-        
-        public static B Default = new B (Value<U>.Default);
-    }
+	public class B
+	{
+		public B (object arg)
+		{
+		}
+		
+		public static B Default = new B (Value<U>.Default);
+	}
 }

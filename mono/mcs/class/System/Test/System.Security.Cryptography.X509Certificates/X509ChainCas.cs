@@ -1,9 +1,9 @@
 //
 // X509ChainCas.cs - CAS unit tests for 
-//    System.Security.Cryptography.X509Certificates.X509Chain
+//	System.Security.Cryptography.X509Certificates.X509Chain
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,36 +41,36 @@ using MonoTests.System.Security.Cryptography.X509Certificates;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class X509ChainCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class X509ChainCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests_Deny_Unrestricted ()
-        {
-            X509ChainTest unit = new X509ChainTest ();
-            unit.ConstructorEmpty ();
-            unit.ConstructorMachineContextFalse ();
-            unit.ConstructorMachineContextTrue ();
-            unit.StaticCreation ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTests_Deny_Unrestricted ()
+		{
+			X509ChainTest unit = new X509ChainTest ();
+			unit.ConstructorEmpty ();
+			unit.ConstructorMachineContextFalse ();
+			unit.ConstructorMachineContextTrue ();
+			unit.StaticCreation ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (X509Chain).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (X509Chain).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }
 

@@ -1,9 +1,9 @@
 //
 // CodeConditionStatementCas.cs
-//    - CAS unit tests for System.CodeDom.CodeConditionStatement
+//	- CAS unit tests for System.CodeDom.CodeConditionStatement
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,62 +37,62 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeConditionStatementCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeConditionStatementCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeConditionStatement css = new CodeConditionStatement ();
-            Assert.IsNull (css.Condition, "Condition");
-            css.Condition = new CodeExpression ();
-            Assert.AreEqual (0, css.FalseStatements.Count, "FalseStatements");
-            Assert.AreEqual (0, css.TrueStatements.Count, "TrueStatements");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeConditionStatement css = new CodeConditionStatement ();
+			Assert.IsNull (css.Condition, "Condition");
+			css.Condition = new CodeExpression ();
+			Assert.AreEqual (0, css.FalseStatements.Count, "FalseStatements");
+			Assert.AreEqual (0, css.TrueStatements.Count, "TrueStatements");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeExpression condition = new CodeExpression ();
-            CodeStatement[] cs = new CodeStatement[1] { new CodeStatement () };
-            CodeConditionStatement css = new CodeConditionStatement (condition, cs);
-            Assert.AreSame (condition, css.Condition, "Condition");
-            css.Condition = new CodeExpression ();
-            Assert.AreEqual (0, css.FalseStatements.Count, "FalseStatements");
-            Assert.AreEqual (1, css.TrueStatements.Count, "TrueStatements");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeExpression condition = new CodeExpression ();
+			CodeStatement[] cs = new CodeStatement[1] { new CodeStatement () };
+			CodeConditionStatement css = new CodeConditionStatement (condition, cs);
+			Assert.AreSame (condition, css.Condition, "Condition");
+			css.Condition = new CodeExpression ();
+			Assert.AreEqual (0, css.FalseStatements.Count, "FalseStatements");
+			Assert.AreEqual (1, css.TrueStatements.Count, "TrueStatements");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2_Deny_Unrestricted ()
-        {
-            CodeExpression condition = new CodeExpression ();
-            CodeStatement[] cst = new CodeStatement[1] { new CodeStatement () };
-            CodeStatement[] csf = new CodeStatement[2] { new CodeStatement (), new CodeStatement () };
-            CodeConditionStatement css = new CodeConditionStatement (condition, cst, csf);
-            Assert.AreSame (condition, css.Condition, "Condition");
-            css.Condition = new CodeExpression ();
-            Assert.AreEqual (2, css.FalseStatements.Count, "FalseStatements");
-            Assert.AreEqual (1, css.TrueStatements.Count, "TrueStatements");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2_Deny_Unrestricted ()
+		{
+			CodeExpression condition = new CodeExpression ();
+			CodeStatement[] cst = new CodeStatement[1] { new CodeStatement () };
+			CodeStatement[] csf = new CodeStatement[2] { new CodeStatement (), new CodeStatement () };
+			CodeConditionStatement css = new CodeConditionStatement (condition, cst, csf);
+			Assert.AreSame (condition, css.Condition, "Condition");
+			css.Condition = new CodeExpression ();
+			Assert.AreEqual (2, css.FalseStatements.Count, "FalseStatements");
+			Assert.AreEqual (1, css.TrueStatements.Count, "TrueStatements");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeConditionStatement).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeConditionStatement).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

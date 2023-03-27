@@ -10,11 +10,11 @@ public class NullableInt
 
                  Console.WriteLine("y: '{0}'", y);
                  Console.WriteLine("y.HasValue: '{0}'", y.HasValue);
-             
-             int? b = 1 as int?;
-             if (b != 1)
-                 return 1;
-             
-             return 0;
+			 
+			 int? b = 1 as int?;
+			 if (b != 1)
+				 return 1;
+			 
+			 return 0;
          }
 }

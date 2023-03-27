@@ -2,7 +2,7 @@
 // System.Web.Configuration.ProfileSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,78 +34,78 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    public sealed class ProfileSection: ConfigurationSection
-    {
-        static ConfigurationProperty automaticSaveEnabledProp;
-        static ConfigurationProperty defaultProviderProp;
-        static ConfigurationProperty enabledProp;
-        static ConfigurationProperty inheritsProp;
-        static ConfigurationProperty propertySettingsProp;
-        static ConfigurationProperty providersProp;
+	public sealed class ProfileSection: ConfigurationSection
+	{
+		static ConfigurationProperty automaticSaveEnabledProp;
+		static ConfigurationProperty defaultProviderProp;
+		static ConfigurationProperty enabledProp;
+		static ConfigurationProperty inheritsProp;
+		static ConfigurationProperty propertySettingsProp;
+		static ConfigurationProperty providersProp;
 
-        static ConfigurationPropertyCollection properties;
-        
-        static ProfileSection ()
-        {
-            automaticSaveEnabledProp = new ConfigurationProperty ("automaticSaveEnabled", typeof (bool), true);
-            defaultProviderProp = new ConfigurationProperty ("defaultProvider", typeof (string),
-                                     "AspNetSqlProfileProvider");
-            enabledProp = new ConfigurationProperty ("enabled", typeof (bool), true);
-            inheritsProp = new ConfigurationProperty ("inherits", typeof (string), "");
-            propertySettingsProp = new ConfigurationProperty ("properties", typeof (RootProfilePropertySettingsCollection));
-            providersProp = new ConfigurationProperty ("providers", typeof (ProviderSettingsCollection));
+		static ConfigurationPropertyCollection properties;
+		
+		static ProfileSection ()
+		{
+			automaticSaveEnabledProp = new ConfigurationProperty ("automaticSaveEnabled", typeof (bool), true);
+			defaultProviderProp = new ConfigurationProperty ("defaultProvider", typeof (string),
+									 "AspNetSqlProfileProvider");
+			enabledProp = new ConfigurationProperty ("enabled", typeof (bool), true);
+			inheritsProp = new ConfigurationProperty ("inherits", typeof (string), "");
+			propertySettingsProp = new ConfigurationProperty ("properties", typeof (RootProfilePropertySettingsCollection));
+			providersProp = new ConfigurationProperty ("providers", typeof (ProviderSettingsCollection));
 
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (automaticSaveEnabledProp);
-            properties.Add (defaultProviderProp);
-            properties.Add (enabledProp);
-            properties.Add (inheritsProp);
-            properties.Add (propertySettingsProp);
-            properties.Add (providersProp);
-        }
-        
-        [ConfigurationProperty ("automaticSaveEnabled", DefaultValue = true)]
-        public bool AutomaticSaveEnabled {
-            get { return (bool) base [automaticSaveEnabledProp]; }
-            set { base [automaticSaveEnabledProp] = value; }
-        }
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (automaticSaveEnabledProp);
+			properties.Add (defaultProviderProp);
+			properties.Add (enabledProp);
+			properties.Add (inheritsProp);
+			properties.Add (propertySettingsProp);
+			properties.Add (providersProp);
+		}
+		
+		[ConfigurationProperty ("automaticSaveEnabled", DefaultValue = true)]
+		public bool AutomaticSaveEnabled {
+			get { return (bool) base [automaticSaveEnabledProp]; }
+			set { base [automaticSaveEnabledProp] = value; }
+		}
 
-        [ConfigurationProperty ("defaultProvider", DefaultValue = "AspNetSqlProfileProvider")]
-        [StringValidator (MinLength = 1)]
-        public string DefaultProvider {
-            get { return (string) base [defaultProviderProp]; }
-            set { base [defaultProviderProp] = value; }
-        }
+		[ConfigurationProperty ("defaultProvider", DefaultValue = "AspNetSqlProfileProvider")]
+		[StringValidator (MinLength = 1)]
+		public string DefaultProvider {
+			get { return (string) base [defaultProviderProp]; }
+			set { base [defaultProviderProp] = value; }
+		}
 
-        [ConfigurationProperty ("enabled", DefaultValue = true)]
-        public bool Enabled {
-            get { return (bool) base [enabledProp]; }
-            set { base [enabledProp] = value; }
-        }
+		[ConfigurationProperty ("enabled", DefaultValue = true)]
+		public bool Enabled {
+			get { return (bool) base [enabledProp]; }
+			set { base [enabledProp] = value; }
+		}
 
-        [ConfigurationProperty ("inherits", DefaultValue = "")]
-        public string Inherits {
-            get { return (string) base [inheritsProp]; }
-            set { base [inheritsProp] = value; }
-        }
+		[ConfigurationProperty ("inherits", DefaultValue = "")]
+		public string Inherits {
+			get { return (string) base [inheritsProp]; }
+			set { base [inheritsProp] = value; }
+		}
 
-        [ConfigurationProperty ("properties")]
-        public RootProfilePropertySettingsCollection PropertySettings {
-            get {
-                return (RootProfilePropertySettingsCollection) base [propertySettingsProp];
-            }
-        }
+		[ConfigurationProperty ("properties")]
+		public RootProfilePropertySettingsCollection PropertySettings {
+			get {
+				return (RootProfilePropertySettingsCollection) base [propertySettingsProp];
+			}
+		}
 
-        [ConfigurationProperty ("providers")]
-        public ProviderSettingsCollection Providers {
-            get {
-                return (ProviderSettingsCollection) base [providersProp];
-            }
-        }
+		[ConfigurationProperty ("providers")]
+		public ProviderSettingsCollection Providers {
+			get {
+				return (ProviderSettingsCollection) base [providersProp];
+			}
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+	}
 }
 

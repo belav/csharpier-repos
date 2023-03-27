@@ -33,18 +33,18 @@ using System;
 
 namespace Novell.Directory.Ldap
 {
-    
-    /// <summary> 
-    /// Shared ancestor to the two types of referral objects - LdapBindHandler and
-    /// LdapAuthHandler.
-    /// 
-    /// </summary>
-    /// <seealso cref="LdapBindHandler">
-    /// </seealso>
-    /// <seealso cref="LdapAuthHandler">
-    /// 
-    /// </seealso>
-    public interface LdapReferralHandler
-        {
-        }
+	
+	/// <summary> 
+	/// Shared ancestor to the two types of referral objects - LdapBindHandler and
+	/// LdapAuthHandler.
+	/// 
+	/// </summary>
+	/// <seealso cref="LdapBindHandler">
+	/// </seealso>
+	/// <seealso cref="LdapAuthHandler">
+	/// 
+	/// </seealso>
+	public interface LdapReferralHandler
+		{
+		}
 }

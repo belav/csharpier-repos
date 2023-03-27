@@ -2,7 +2,7 @@
 // HttpCompletionOption.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2011 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,9 +28,9 @@
 
 namespace System.Net.Http
 {
-    public enum HttpCompletionOption
-    {
-        ResponseContentRead,
-        ResponseHeadersRead
-    }
+	public enum HttpCompletionOption
+	{
+		ResponseContentRead,
+		ResponseHeadersRead
+	}
 }

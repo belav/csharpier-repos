@@ -2,7 +2,7 @@
 // System.Security.Policy.ApplicationSecurityManager class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,49 +32,49 @@ using System.Security.Permissions;
 
 namespace System.Security.Policy {
 
-    [ComVisible (true)]
-    public static class ApplicationSecurityManager {
+	[ComVisible (true)]
+	public static class ApplicationSecurityManager {
 
-//        private const string config = "ApplicationTrust.config";
+//		private const string config = "ApplicationTrust.config";
 
-        static private IApplicationTrustManager _appTrustManager;
-        static private ApplicationTrustCollection _userAppTrusts;
+		static private IApplicationTrustManager _appTrustManager;
+		static private ApplicationTrustCollection _userAppTrusts;
 
-        // properties
+		// properties
 
-        // FIXME replace MonoTrustManager with one inside SWF"
-        public static IApplicationTrustManager ApplicationTrustManager {
-            [SecurityPermission (SecurityAction.Demand, ControlPolicy = true)]
-            get {
-                if (_appTrustManager == null) {
-                    _appTrustManager = new MonoTrustManager ();
-                }
-                return _appTrustManager;
-            }
-        }
+		// FIXME replace MonoTrustManager with one inside SWF"
+		public static IApplicationTrustManager ApplicationTrustManager {
+			[SecurityPermission (SecurityAction.Demand, ControlPolicy = true)]
+			get {
+				if (_appTrustManager == null) {
+					_appTrustManager = new MonoTrustManager ();
+				}
+				return _appTrustManager;
+			}
+		}
 
-        public static ApplicationTrustCollection UserApplicationTrusts {
-            get {
-                if (_userAppTrusts == null) {
-                    _userAppTrusts = new ApplicationTrustCollection ();
-                }
-                return _userAppTrusts;
-            }
-        }
+		public static ApplicationTrustCollection UserApplicationTrusts {
+			get {
+				if (_userAppTrusts == null) {
+					_userAppTrusts = new ApplicationTrustCollection ();
+				}
+				return _userAppTrusts;
+			}
+		}
 
-        // methods
+		// methods
 
-        [MonoTODO ("Missing application manifest support")]
-        [SecurityPermission (SecurityAction.Demand, ControlPolicy = true, ControlEvidence = true)]
-        public static bool DetermineApplicationTrust (ActivationContext activationContext, TrustManagerContext context)
-        {
+		[MonoTODO ("Missing application manifest support")]
+		[SecurityPermission (SecurityAction.Demand, ControlPolicy = true, ControlEvidence = true)]
+		public static bool DetermineApplicationTrust (ActivationContext activationContext, TrustManagerContext context)
+		{
 // FIXME: a null activationContext throw a NullReferenceException but calling directly the ApplicationTrustManager.DetermineApplicationTrust doesn't
-            if (activationContext == null)
-                throw new NullReferenceException ("activationContext");
-//                throw new ArgumentNullException ("activationContext");
-            ApplicationTrust at = ApplicationTrustManager.DetermineApplicationTrust (activationContext, context);
-            return at.IsApplicationTrustedToRun;
-        }
-    }
+			if (activationContext == null)
+				throw new NullReferenceException ("activationContext");
+//				throw new ArgumentNullException ("activationContext");
+			ApplicationTrust at = ApplicationTrustManager.DetermineApplicationTrust (activationContext, context);
+			return at.IsApplicationTrustedToRun;
+		}
+	}
 }
 

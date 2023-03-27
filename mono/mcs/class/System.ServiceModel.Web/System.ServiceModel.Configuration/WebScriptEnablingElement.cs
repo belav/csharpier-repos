@@ -2,7 +2,7 @@
 // WebScriptEnablingElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc.  http://www.novell.com
 //
@@ -46,37 +46,37 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WebScriptEnablingElement
-         : BehaviorExtensionElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty behavior_type;
+	public sealed partial class WebScriptEnablingElement
+		 : BehaviorExtensionElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty behavior_type;
 
-        static WebScriptEnablingElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            behavior_type = new ConfigurationProperty ("",
-                typeof (Type), null, new TypeConverter (), null,
-                ConfigurationPropertyOptions.None);
+		static WebScriptEnablingElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			behavior_type = new ConfigurationProperty ("",
+				typeof (Type), null, new TypeConverter (), null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (behavior_type);
-        }
+			properties.Add (behavior_type);
+		}
 
-        public WebScriptEnablingElement ()
-        {
-        }
+		public WebScriptEnablingElement ()
+		{
+		}
 
-        // Properties
+		// Properties
 
-        public override Type BehaviorType {
-            get { return typeof (WebScriptEnablingBehavior); }
-        }
+		public override Type BehaviorType {
+			get { return typeof (WebScriptEnablingBehavior); }
+		}
 
-        protected internal override object CreateBehavior ()
-        {
-            return new WebScriptEnablingBehavior ();
-        }
-    }
+		protected internal override object CreateBehavior ()
+		{
+			return new WebScriptEnablingBehavior ();
+		}
+	}
 
 }

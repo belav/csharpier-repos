@@ -3,10 +3,10 @@
 
 public struct S
 {
-    int f;
+	int f;
 
-    public ref S Foo ()
-    {
-        return ref f;
-    }
+	public ref S Foo ()
+	{
+		return ref f;
+	}
 }

@@ -4,11 +4,11 @@
 
 class X {
 
-    static void Main ()
-    {
-        int a = 1;
-        
-        if (a is byte){
-        }
-    }
+	static void Main ()
+	{
+		int a = 1;
+		
+		if (a is byte){
+		}
+	}
 }

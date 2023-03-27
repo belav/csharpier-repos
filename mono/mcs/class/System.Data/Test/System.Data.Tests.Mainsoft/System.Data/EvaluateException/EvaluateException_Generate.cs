@@ -40,84 +40,84 @@ namespace tests.system_data_dll.System_Data
 [TestFixture]
 public class EvaluateException_Generate : GHTBase
 {
-    [Test]
-    [Category ("NotWorking")]
-    public void Main()
-    {
-        EvaluateException_Generate tc = new EvaluateException_Generate();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("EvaluateException");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test]
+	[Category ("NotWorking")]
+	public void Main()
+	{
+		EvaluateException_Generate tc = new EvaluateException_Generate();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("EvaluateException");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        Exception tmpEx = new Exception() ;
+	public void run()
+	{
+		Exception exp = null;
+		Exception tmpEx = new Exception() ;
 
-        DataTable tbl = new DataTable();
-        tbl.Columns.Add(new DataColumn("Column"));
-        DataColumn dc = new DataColumn();
-        dc.Expression = "something"; //invalid expression
-        
-        try
-        {
-            BeginCase("EvaluateException - Column ");
-            try
-            {
-                tbl.Columns.Add(dc);
-            }
-            catch (EvaluateException ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType().FullName ,typeof(EvaluateException).FullName );
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		DataTable tbl = new DataTable();
+		tbl.Columns.Add(new DataColumn("Column"));
+		DataColumn dc = new DataColumn();
+		dc.Expression = "something"; //invalid expression
+		
+		try
+		{
+			BeginCase("EvaluateException - Column ");
+			try
+			{
+				tbl.Columns.Add(dc);
+			}
+			catch (EvaluateException ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType().FullName ,typeof(EvaluateException).FullName );
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("EvaluateException - Column Expression");
-            try
-            {
-                tbl.Columns[0].Expression = "Min(AK47)"; //invalid expression
-            }
-            catch (EvaluateException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType().FullName ,typeof(EvaluateException).FullName );
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
+		try
+		{
+			BeginCase("EvaluateException - Column Expression");
+			try
+			{
+				tbl.Columns[0].Expression = "Min(AK47)"; //invalid expression
+			}
+			catch (EvaluateException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType().FullName ,typeof(EvaluateException).FullName );
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
 
-    }
+	}
 }
 }

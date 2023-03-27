@@ -2,28 +2,28 @@
 // Line: 25
 
 public class A {
-    public A ()
-    {
-    }
+	public A ()
+	{
+	}
 
-    protected A (A a)
-    {
-    }
+	protected A (A a)
+	{
+	}
 }
 
 public class B : A {
-    public B () : base ()
-    {
-    }
-    
-    public B (A a) : base (a)
-    {
-    }
-    
-    public A MyA {
-        get {
-            A a = new A (this);
-            return a;
-        }
-    }
+	public B () : base ()
+	{
+	}
+	
+	public B (A a) : base (a)
+	{
+	}
+	
+	public A MyA {
+		get {
+			A a = new A (this);
+			return a;
+		}
+	}
 }

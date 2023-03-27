@@ -3,8 +3,8 @@
 
 class C
 {
-    public static void Main ()
-    {
-        C c = "test" as C;
-    }
+	public static void Main ()
+	{
+		C c = "test" as C;
+	}
 }

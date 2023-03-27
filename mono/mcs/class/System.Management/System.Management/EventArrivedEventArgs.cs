@@ -2,7 +2,7 @@
 // System.Management.EventArrivedEventArgs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,18 +30,18 @@
 
 namespace System.Management
 {
-    public class EventArrivedEventArgs : ManagementEventArgs
-    {
-        ManagementBaseObject new_event;
+	public class EventArrivedEventArgs : ManagementEventArgs
+	{
+		ManagementBaseObject new_event;
 
-        internal EventArrivedEventArgs (ManagementBaseObject newEvent)
-        {
-            this.new_event = newEvent;
-        }
+		internal EventArrivedEventArgs (ManagementBaseObject newEvent)
+		{
+			this.new_event = newEvent;
+		}
 
-        public ManagementBaseObject NewEvent {
-            get { return new_event; }
-        }
-    }
+		public ManagementBaseObject NewEvent {
+			get { return new_event; }
+		}
+	}
 }
 

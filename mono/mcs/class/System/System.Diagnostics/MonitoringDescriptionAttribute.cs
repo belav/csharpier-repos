@@ -34,17 +34,17 @@ using System.Diagnostics;
 
 namespace System.Diagnostics {
 
-    [AttributeUsage (AttributeTargets.All)]
-    public class MonitoringDescriptionAttribute : DescriptionAttribute {
+	[AttributeUsage (AttributeTargets.All)]
+	public class MonitoringDescriptionAttribute : DescriptionAttribute {
 
-        public MonitoringDescriptionAttribute (string description)
-            : base (description)
-        {
-        }
+		public MonitoringDescriptionAttribute (string description)
+			: base (description)
+		{
+		}
 
-        public override string Description {
-            get {return base.Description;}
-        }
-    }
+		public override string Description {
+			get {return base.Description;}
+		}
+	}
 }
 

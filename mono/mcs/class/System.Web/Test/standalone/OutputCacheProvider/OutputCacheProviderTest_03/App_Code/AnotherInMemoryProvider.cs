@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -7,8 +7,8 @@ using System.Web.Caching;
 
 namespace Test
 {
-    public class AnotherInMemoryProvider : InMemoryProvider
-    {
-        
-    }
+	public class AnotherInMemoryProvider : InMemoryProvider
+	{
+		
+	}
 }

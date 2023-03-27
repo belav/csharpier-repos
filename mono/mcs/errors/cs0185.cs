@@ -2,10 +2,10 @@
 // Line: 7
 
 class X {
-    static void Main ()
-    {
-        lock (5) {
-        }
-    }
+	static void Main ()
+	{
+		lock (5) {
+		}
+	}
 }
       

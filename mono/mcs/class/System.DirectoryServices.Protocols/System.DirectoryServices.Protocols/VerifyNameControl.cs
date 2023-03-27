@@ -30,33 +30,33 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class VerifyNameControl : DirectoryControl
-    {
-        public VerifyNameControl ()
-            : base (null, null, false, false)
-        {
-            throw new NotImplementedException ();
-        }
+	public class VerifyNameControl : DirectoryControl
+	{
+		public VerifyNameControl ()
+			: base (null, null, false, false)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public VerifyNameControl (string serverName)
-            : this ()
-        {
-            ServerName = serverName;
-        }
+		public VerifyNameControl (string serverName)
+			: this ()
+		{
+			ServerName = serverName;
+		}
 
-        public VerifyNameControl (string serverName, int flag)
-            : this (serverName)
-        {
-            Flag = flag;
-        }
+		public VerifyNameControl (string serverName, int flag)
+			: this (serverName)
+		{
+			Flag = flag;
+		}
 
-        public int Flag { get; set; }
-        public string ServerName { get; set; }
+		public int Flag { get; set; }
+		public string ServerName { get; set; }
 
-        [MonoTODO]
-        public override byte [] GetValue ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override byte [] GetValue ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

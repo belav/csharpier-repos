@@ -69,16 +69,16 @@ namespace System.Xml {
                     return result;
                 }
                 else {
-                    throw new IndexOutOfRangeException();
-                }
+					throw new IndexOutOfRangeException();
+				}
             }
             set {
                 if (index >= 0 && index < this.used) {
-                    this.stack[index] = value;
-                }
+					this.stack[index] = value;
+				}
                 else {
-                    throw new IndexOutOfRangeException();
-                }
+					throw new IndexOutOfRangeException();
+				}
             }
         }
 

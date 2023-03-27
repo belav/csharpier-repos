@@ -12,15 +12,15 @@ using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {
-    [TestFixture]
-    public class CodeMemberFieldTest
-    {
-        [Test]
-        public void DefaultType ()
-        {
-            CodeMemberField fld = new CodeMemberField ();
-            Assert.IsNotNull (fld.Type, "#1");
-            Assert.AreEqual (new CodeTypeReference (string.Empty).BaseType, fld.Type.BaseType, "#2");
-        }
-    }
+	[TestFixture]
+	public class CodeMemberFieldTest
+	{
+		[Test]
+		public void DefaultType ()
+		{
+			CodeMemberField fld = new CodeMemberField ();
+			Assert.IsNotNull (fld.Type, "#1");
+			Assert.AreEqual (new CodeTypeReference (string.Empty).BaseType, fld.Type.BaseType, "#2");
+		}
+	}
 }

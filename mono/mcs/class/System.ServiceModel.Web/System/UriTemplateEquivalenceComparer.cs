@@ -2,7 +2,7 @@
 // UriTemplateEquivalenceComparer.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -30,23 +30,23 @@ using System.Collections.Generic;
 
 namespace System
 {
-    public class UriTemplateEquivalenceComparer : IEqualityComparer<UriTemplate>
-    {
-        public UriTemplateEquivalenceComparer ()
-        {
-        }
+	public class UriTemplateEquivalenceComparer : IEqualityComparer<UriTemplate>
+	{
+		public UriTemplateEquivalenceComparer ()
+		{
+		}
 
-        public bool Equals (UriTemplate x, UriTemplate y)
-        {
-            if (x == null)
-                return y == null;
-            return y != null && x.IsEquivalentTo (y);
-        }
+		public bool Equals (UriTemplate x, UriTemplate y)
+		{
+			if (x == null)
+				return y == null;
+			return y != null && x.IsEquivalentTo (y);
+		}
 
-        public int GetHashCode (UriTemplate obj)
-        {
-            // gets string's hash code
-            return obj.ToString ().GetHashCode ();
-        }
-    }
+		public int GetHashCode (UriTemplate obj)
+		{
+			// gets string's hash code
+			return obj.ToString ().GetHashCode ();
+		}
+	}
 }

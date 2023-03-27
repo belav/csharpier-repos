@@ -2,7 +2,7 @@
 // DuplexSessionBase.cs
 // 
 // Author: 
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 // 
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -39,46 +39,46 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-    internal abstract class DuplexSessionBase : IDuplexSession
-    {
-        delegate void AsyncHandler (TimeSpan timeout);
-        AsyncHandler async_method;
+	internal abstract class DuplexSessionBase : IDuplexSession
+	{
+		delegate void AsyncHandler (TimeSpan timeout);
+		AsyncHandler async_method;
 
-        protected DuplexSessionBase ()
-        {
-            async_method = new AsyncHandler (CloseOutputSession);
-            Id = new UniqueId ().ToString ();
-        }
+		protected DuplexSessionBase ()
+		{
+			async_method = new AsyncHandler (CloseOutputSession);
+			Id = new UniqueId ().ToString ();
+		}
 
-        public abstract TimeSpan DefaultCloseTimeout { get; }
+		public abstract TimeSpan DefaultCloseTimeout { get; }
 
-        public virtual string Id { get; private set; }
+		public virtual string Id { get; private set; }
 
-        public abstract void Close (TimeSpan timeout);
+		public abstract void Close (TimeSpan timeout);
 
-        public virtual void CloseOutputSession ()
-        {
-            CloseOutputSession (DefaultCloseTimeout);
-        }
+		public virtual void CloseOutputSession ()
+		{
+			CloseOutputSession (DefaultCloseTimeout);
+		}
 
-        public virtual void CloseOutputSession (TimeSpan timeout)
-        {
-            Close (timeout);
-        }
+		public virtual void CloseOutputSession (TimeSpan timeout)
+		{
+			Close (timeout);
+		}
 
-        public virtual IAsyncResult BeginCloseOutputSession (AsyncCallback callback, object state)
-        {
-            return BeginCloseOutputSession (DefaultCloseTimeout, callback, state);
-        }
+		public virtual IAsyncResult BeginCloseOutputSession (AsyncCallback callback, object state)
+		{
+			return BeginCloseOutputSession (DefaultCloseTimeout, callback, state);
+		}
 
-        public virtual IAsyncResult BeginCloseOutputSession (TimeSpan timeout, AsyncCallback callback, Object state)
-        {
-            return async_method.BeginInvoke (timeout, callback, state);
-        }
+		public virtual IAsyncResult BeginCloseOutputSession (TimeSpan timeout, AsyncCallback callback, Object state)
+		{
+			return async_method.BeginInvoke (timeout, callback, state);
+		}
 
-        public virtual void EndCloseOutputSession (IAsyncResult result)
-        {
-            async_method.EndInvoke (result);
-        }
-    }
+		public virtual void EndCloseOutputSession (IAsyncResult result)
+		{
+			async_method.EndInvoke (result);
+		}
+	}
 }

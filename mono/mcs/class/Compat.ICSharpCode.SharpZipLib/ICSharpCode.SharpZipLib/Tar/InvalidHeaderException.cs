@@ -38,22 +38,22 @@ using System.IO;
 using ICSharpCode.SharpZipLib.Checksums;
 
 namespace ICSharpCode.SharpZipLib.Tar {
-    
-    /// <summary>
-    /// This exception is used to indicate that there is a problem
-    /// with a TAR archive header.
-    /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-    public class InvalidHeaderException : System.IO.IOException
-    {
-        public InvalidHeaderException()
-        {
-        }
-    
-        public InvalidHeaderException(string msg) : base(msg)
-        {
-        }
-    }
+	
+	/// <summary>
+	/// This exception is used to indicate that there is a problem
+	/// with a TAR archive header.
+	/// </summary>
+	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+	public class InvalidHeaderException : System.IO.IOException
+	{
+		public InvalidHeaderException()
+		{
+		}
+	
+		public InvalidHeaderException(string msg) : base(msg)
+		{
+		}
+	}
 }
 
 /* The original Java file had this header:

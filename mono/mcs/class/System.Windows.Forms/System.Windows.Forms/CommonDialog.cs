@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2006 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 //
 
@@ -29,132 +29,132 @@
 using System.ComponentModel;
 
 namespace System.Windows.Forms {
-    [ToolboxItemFilter("System.Windows.Forms")]
-    public abstract class CommonDialog : System.ComponentModel.Component {
-        #region DialogForm
-        internal class DialogForm : Form {
-            #region DialogForm Local Variables
-            protected CommonDialog    owner;
-            #endregion DialogForm Local Variables
+	[ToolboxItemFilter("System.Windows.Forms")]
+	public abstract class CommonDialog : System.ComponentModel.Component {
+		#region DialogForm
+		internal class DialogForm : Form {
+			#region DialogForm Local Variables
+			protected CommonDialog	owner;
+			#endregion DialogForm Local Variables
 
-            #region DialogForm Constructors
-            internal DialogForm(CommonDialog owner) {
-                this.owner = owner;
-                ControlBox = true;
-                MinimizeBox = false;
-                MaximizeBox = false;
-                ShowInTaskbar = false;
-                FormBorderStyle = FormBorderStyle.Sizable;
-                StartPosition = FormStartPosition.CenterScreen;
-            }
-            #endregion DialogForm Constructors
+			#region DialogForm Constructors
+			internal DialogForm(CommonDialog owner) {
+				this.owner = owner;
+				ControlBox = true;
+				MinimizeBox = false;
+				MaximizeBox = false;
+				ShowInTaskbar = false;
+				FormBorderStyle = FormBorderStyle.Sizable;
+				StartPosition = FormStartPosition.CenterScreen;
+			}
+			#endregion DialogForm Constructors
 
-            #region Protected Instance Properties
-            protected override CreateParams CreateParams {
-                get {
-                    CreateParams    cp;
+			#region Protected Instance Properties
+			protected override CreateParams CreateParams {
+				get {
+					CreateParams	cp;
 
-                    cp = base.CreateParams;
+					cp = base.CreateParams;
 
-                    cp.Style |= (int)(WindowStyles.WS_POPUP | WindowStyles.WS_CAPTION | WindowStyles.WS_SYSMENU);
+					cp.Style |= (int)(WindowStyles.WS_POPUP | WindowStyles.WS_CAPTION | WindowStyles.WS_SYSMENU);
 
-                    return cp;
-                }
-            }
-            #endregion    // Protected Instance Properties
+					return cp;
+				}
+			}
+			#endregion	// Protected Instance Properties
 
-            #region Internal Methods
-            internal DialogResult RunDialog () {
-                owner.InitFormsSize (this);
+			#region Internal Methods
+			internal DialogResult RunDialog () {
+				owner.InitFormsSize (this);
 
-                this.ShowDialog ();
+				this.ShowDialog ();
 
-                return this.DialogResult;
+				return this.DialogResult;
 
-            }
-            #endregion Internal Methods
-        }
-        #endregion DialogForm
+			}
+			#endregion Internal Methods
+		}
+		#endregion DialogForm
 
-        #region Local Variables
-        internal DialogForm    form;
-        private object tag;
-        #endregion Local Variables
+		#region Local Variables
+		internal DialogForm	form;
+		private object tag;
+		#endregion Local Variables
 
-        #region Public Constructors
-        public CommonDialog() {
-        }
-        #endregion Public Constructors
+		#region Public Constructors
+		public CommonDialog() {
+		}
+		#endregion Public Constructors
 
-        #region Public Properties
-        [Localizable (false)]
-        [Bindable (true)]
-        [TypeConverter (typeof (StringConverter))]
-        [DefaultValue (null)]
-        [MWFCategory ("Data")]
-        public object Tag {
-            get { return this.tag; }
-            set { this.tag = value; }
-        }
-        #endregion
+		#region Public Properties
+		[Localizable (false)]
+		[Bindable (true)]
+		[TypeConverter (typeof (StringConverter))]
+		[DefaultValue (null)]
+		[MWFCategory ("Data")]
+		public object Tag {
+			get { return this.tag; }
+			set { this.tag = value; }
+		}
+		#endregion
 
-        #region Internal Methods
-        internal virtual void InitFormsSize(Form form) {
-            // Override this to set a default size for the form
-            form.Width = 200;
-            form.Height = 200;
-        }
-        #endregion Internal Methods
-    
-        #region Public Instance Methods
-        public abstract void Reset ();
+		#region Internal Methods
+		internal virtual void InitFormsSize(Form form) {
+			// Override this to set a default size for the form
+			form.Width = 200;
+			form.Height = 200;
+		}
+		#endregion Internal Methods
+	
+		#region Public Instance Methods
+		public abstract void Reset ();
 
-        public DialogResult ShowDialog() {
-            return ShowDialog (null);
-        }
+		public DialogResult ShowDialog() {
+			return ShowDialog (null);
+		}
 
-        public DialogResult ShowDialog (IWin32Window owner)
-        {
-            // This is an external derived CommonDialog
-            if (form == null) {
-                if (RunDialog (owner == null ? IntPtr.Zero : owner.Handle))
-                    return DialogResult.OK;
-                return DialogResult.Cancel;
-            }
-            
-            // This is an internal derived CommonDialog
-            if (RunDialog (form.Handle))
-                form.ShowDialog (owner);
+		public DialogResult ShowDialog (IWin32Window owner)
+		{
+			// This is an external derived CommonDialog
+			if (form == null) {
+				if (RunDialog (owner == null ? IntPtr.Zero : owner.Handle))
+					return DialogResult.OK;
+				return DialogResult.Cancel;
+			}
+			
+			// This is an internal derived CommonDialog
+			if (RunDialog (form.Handle))
+				form.ShowDialog (owner);
 
-            return form.DialogResult;
-        }
-        #endregion    // Public Instance Methods
+			return form.DialogResult;
+		}
+		#endregion	// Public Instance Methods
 
-        #region Protected Instance Methods
-        protected virtual IntPtr HookProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam) {
-            return IntPtr.Zero;
-        }
+		#region Protected Instance Methods
+		protected virtual IntPtr HookProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam) {
+			return IntPtr.Zero;
+		}
 
-        protected virtual void OnHelpRequest(EventArgs e) {
-            EventHandler eh = (EventHandler)(Events [HelpRequestEvent]);
-            if (eh != null)
-                eh (this, e);
-        }
+		protected virtual void OnHelpRequest(EventArgs e) {
+			EventHandler eh = (EventHandler)(Events [HelpRequestEvent]);
+			if (eh != null)
+				eh (this, e);
+		}
 
-        protected virtual IntPtr OwnerWndProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam) {
-            return IntPtr.Zero;
-        }
+		protected virtual IntPtr OwnerWndProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam) {
+			return IntPtr.Zero;
+		}
 
-        protected abstract bool RunDialog(IntPtr hwndOwner);
-        #endregion    // Protected Instance Methods
+		protected abstract bool RunDialog(IntPtr hwndOwner);
+		#endregion	// Protected Instance Methods
 
-        #region Events
-        static object HelpRequestEvent = new object ();
+		#region Events
+		static object HelpRequestEvent = new object ();
 
-        public event EventHandler HelpRequest {
-            add { Events.AddHandler (HelpRequestEvent, value); }
-            remove { Events.RemoveHandler (HelpRequestEvent, value); }
-        }
-        #endregion    // Events
-    }
+		public event EventHandler HelpRequest {
+			add { Events.AddHandler (HelpRequestEvent, value); }
+			remove { Events.RemoveHandler (HelpRequestEvent, value); }
+		}
+		#endregion	// Events
+	}
 }

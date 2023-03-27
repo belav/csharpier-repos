@@ -25,9 +25,9 @@ namespace System.Xml.XmlConfiguration {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     public sealed class XmlReaderSection
 #if CONFIGURATION_DEP
-        : ConfigurationSection
+		: ConfigurationSection
 #endif
-    {
+	{
 #if CONFIGURATION_DEP
         [ConfigurationProperty(XmlConfigurationString.ProhibitDefaultResolverName, DefaultValue = "false")]
         public string ProhibitDefaultResolverString {
@@ -52,7 +52,7 @@ namespace System.Xml.XmlConfiguration {
                 XmlReaderSection section = System.Configuration.ConfigurationManager.GetSection(XmlConfigurationString.XmlReaderSectionPath) as XmlReaderSection;
                 return (section != null) ? section._ProhibitDefaultResolver : false;
 #else
-            return false;
+			return false;
 #endif
             }
         }
@@ -108,9 +108,9 @@ namespace System.Xml.XmlConfiguration {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     public sealed class XsltConfigSection
 #if CONFIGURATION_DEP
-        : ConfigurationSection
+		: ConfigurationSection
 #endif
-    {
+	{
 #if CONFIGURATION_DEP
         [ConfigurationProperty(XmlConfigurationString.ProhibitDefaultResolverName, DefaultValue = "false")]
         public string ProhibitDefaultResolverString {
@@ -133,7 +133,7 @@ namespace System.Xml.XmlConfiguration {
                 XsltConfigSection section = System.Configuration.ConfigurationManager.GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
                 return (section != null) ? section._ProhibitDefaultResolver : false;
 #else
-            return false;
+			return false;
 #endif
             }
         }
@@ -171,7 +171,7 @@ namespace System.Xml.XmlConfiguration {
                 XsltConfigSection section = System.Configuration.ConfigurationManager.GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
                 return (section != null) ? section._LimitXPathComplexity : true;
 #else
-                return true;
+				return true;
 #endif
             }
         }
@@ -202,7 +202,7 @@ namespace System.Xml.XmlConfiguration {
                 XsltConfigSection section = System.Configuration.ConfigurationManager.GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
                 return (section != null) ? section._EnableMemberAccessForXslCompiledTransform : false;
 #else
-                return false;
+				return false;
 #endif
             }
         }

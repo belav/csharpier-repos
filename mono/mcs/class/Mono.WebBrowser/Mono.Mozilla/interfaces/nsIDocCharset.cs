@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,29 +32,29 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("9c18bb4e-1dd1-11b2-bf91-9cc82c275823")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDocCharset {
+	[Guid ("9c18bb4e-1dd1-11b2-bf91-9cc82c275823")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDocCharset {
 
 #region nsIDocCharset
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCharset ( ref IntPtr ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getCharset ( ref IntPtr ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setCharset ([MarshalAs (UnmanagedType.LPStr)]  string value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setCharset ([MarshalAs (UnmanagedType.LPStr)]  string value);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDocCharset {
-        public static nsIDocCharset GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDocCharset obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDocCharset).GUID, obj);
-            return o as nsIDocCharset;
-        }
-    }
+	internal class nsDocCharset {
+		public static nsIDocCharset GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDocCharset obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDocCharset).GUID, obj);
+			return o as nsIDocCharset;
+		}
+	}
 }

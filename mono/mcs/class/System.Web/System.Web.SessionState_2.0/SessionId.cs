@@ -32,23 +32,23 @@ using System.Web.Util;
 
 namespace System.Web.SessionState {
 
-    internal class SessionId {
+	internal class SessionId {
 
-        internal const int IdLength = 24;
-        const int half_len = IdLength / 2;
-        static RandomNumberGenerator rng = RandomNumberGenerator.Create ();
-        
-        internal static string Create ()
-        {
-            byte[] key = new byte [half_len];
+		internal const int IdLength = 24;
+		const int half_len = IdLength / 2;
+		static RandomNumberGenerator rng = RandomNumberGenerator.Create ();
+		
+		internal static string Create ()
+		{
+			byte[] key = new byte [half_len];
 
-            lock (rng) {
-                rng.GetBytes (key);
-            }
-            return MachineKeySectionUtils.GetHexString (key);
-        }
+			lock (rng) {
+				rng.GetBytes (key);
+			}
+			return MachineKeySectionUtils.GetHexString (key);
+		}
 
-    }
+	}
 
 }
 

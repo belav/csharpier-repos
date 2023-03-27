@@ -33,10 +33,10 @@ using System.Drawing.Design;
 
 namespace System.Windows.Forms.Design
 {
-    internal sealed class TabPageCollectionEditor : CollectionEditor
-    {
-        public TabPageCollectionEditor (Type type) : base (type)
-        {
-        }
-    }
+	internal sealed class TabPageCollectionEditor : CollectionEditor
+	{
+		public TabPageCollectionEditor (Type type) : base (type)
+		{
+		}
+	}
 }

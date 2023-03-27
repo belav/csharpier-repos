@@ -21,7 +21,7 @@
 //
 // Authors:
 //
-//  Alexander Olk    alex.olk@googlemail.com
+//  Alexander Olk	alex.olk@googlemail.com
 //
 
 // NOT COMPLETE - work in progress
@@ -32,80 +32,80 @@ using System.Drawing;
 using System.IO;
 
 namespace System.Windows.Forms {
-    [Designer ("System.Windows.Forms.Design.SaveFileDialogDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    public sealed class SaveFileDialog : FileDialog {
-        #region Public Constructors
-        public SaveFileDialog ()
-        {
-            form.SuspendLayout ();
-            
-            form.Text = Locale.GetText("Save As");
+	[Designer ("System.Windows.Forms.Design.SaveFileDialogDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+	public sealed class SaveFileDialog : FileDialog {
+		#region Public Constructors
+		public SaveFileDialog ()
+		{
+			form.SuspendLayout ();
+			
+			form.Text = Locale.GetText("Save As");
 
-            FileTypeLabel = Locale.GetText("Save as type:");
-            OpenSaveButtonText = Locale.GetText("Save");
-            SearchSaveLabel = Locale.GetText("Save in:");
-            fileDialogType = FileDialogType.SaveFileDialog;
-            
-            form.ResumeLayout (false);
-        }
-        #endregion    // Public Constructors
-        
-        #region Public Instance Properties
-        [DefaultValue(false)]
-        public bool CreatePrompt {
-            set {
-                createPrompt = value;
-            }
-            
-            get {
-                return createPrompt;
-            }
-        }
-        
-        [DefaultValue(true)]
-        public bool OverwritePrompt {
-            set {
-                overwritePrompt = value;
-            }
-            
-            get {
-                return overwritePrompt;
-            }
-        }
-        #endregion    // Public Instance Properties
-        
-        #region Public Instance Methods
-        public Stream OpenFile ()
-        {
-            if (FileName == null)
-                throw new ArgumentNullException ("OpenFile", "FileName is null");
-            
-            Stream retValue;
-            
-            try {
-                retValue = new FileStream (FileName, FileMode.Create, FileAccess.ReadWrite);
-            } catch (Exception) {
-                retValue = null;
-            }
-            
-            return retValue;
-        }
-        #endregion    // Public Instance Methods
-        
-        public override void Reset ()
-        {
-            base.Reset ();
-            overwritePrompt = true;
-            createPrompt = false;
-        }
+			FileTypeLabel = Locale.GetText("Save as type:");
+			OpenSaveButtonText = Locale.GetText("Save");
+			SearchSaveLabel = Locale.GetText("Save in:");
+			fileDialogType = FileDialogType.SaveFileDialog;
+			
+			form.ResumeLayout (false);
+		}
+		#endregion	// Public Constructors
+		
+		#region Public Instance Properties
+		[DefaultValue(false)]
+		public bool CreatePrompt {
+			set {
+				createPrompt = value;
+			}
+			
+			get {
+				return createPrompt;
+			}
+		}
+		
+		[DefaultValue(true)]
+		public bool OverwritePrompt {
+			set {
+				overwritePrompt = value;
+			}
+			
+			get {
+				return overwritePrompt;
+			}
+		}
+		#endregion	// Public Instance Properties
+		
+		#region Public Instance Methods
+		public Stream OpenFile ()
+		{
+			if (FileName == null)
+				throw new ArgumentNullException ("OpenFile", "FileName is null");
+			
+			Stream retValue;
+			
+			try {
+				retValue = new FileStream (FileName, FileMode.Create, FileAccess.ReadWrite);
+			} catch (Exception) {
+				retValue = null;
+			}
+			
+			return retValue;
+		}
+		#endregion	// Public Instance Methods
+		
+		public override void Reset ()
+		{
+			base.Reset ();
+			overwritePrompt = true;
+			createPrompt = false;
+		}
 
-        internal override string DialogTitle {
-            get {
-                string title = base.DialogTitle;
-                if (title.Length == 0)
-                    title = Locale.GetText("Save As");
-                return title;
-            }
-        }
-    }
+		internal override string DialogTitle {
+			get {
+				string title = base.DialogTitle;
+				if (title.Length == 0)
+					title = Locale.GetText("Save As");
+				return title;
+			}
+		}
+	}
 }

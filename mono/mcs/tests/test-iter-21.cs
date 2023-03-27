@@ -10,7 +10,7 @@ class X {
                         Console.WriteLine ("OUT: {0}", arg);
                         A a = delegate {
                                 Console.WriteLine ("arg: {0}", arg);
-                return;
+				return;
                         };
                         a ();
                         yield return arg;

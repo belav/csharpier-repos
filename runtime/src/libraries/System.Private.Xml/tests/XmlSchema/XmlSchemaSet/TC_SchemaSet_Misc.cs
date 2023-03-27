@@ -943,21 +943,21 @@ namespace System.Xml.XmlSchemaTests
         "<pfx0:DrawingBrush TileMode=\"Tile\" Viewbox=\"foobar\" />";
 
             string xml =
-        "    <xs:schema " +
-        "        xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"" +
-        "        xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"" +
-        "        targetNamespace=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" " +
-        "        elementFormDefault=\"qualified\" " +
-        "        attributeFormDefault=\"unqualified\"" +
-        "    >" +
+        "	<xs:schema " +
+        "		xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"" +
+        "		xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"" +
+        "		targetNamespace=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" " +
+        "		elementFormDefault=\"qualified\" " +
+        "		attributeFormDefault=\"unqualified\"" +
+        "	>" +
         "" +
-        "        <xs:element name=\"DrawingBrush\" type=\"DrawingBrushType\" />" +
+        "		<xs:element name=\"DrawingBrush\" type=\"DrawingBrushType\" />" +
         "" +
-        "        <xs:complexType name=\"DrawingBrushType\">" +
-        "            <xs:attribute name=\"Viewbox\" type=\"xs:string\" />" +
-        "            <xs:attribute name=\"TileMode\" type=\"xs:string\" />" +
-        "        </xs:complexType>" +
-        "    </xs:schema>";
+        "		<xs:complexType name=\"DrawingBrushType\">" +
+        "			<xs:attribute name=\"Viewbox\" type=\"xs:string\" />" +
+        "			<xs:attribute name=\"TileMode\" type=\"xs:string\" />" +
+        "		</xs:complexType>" +
+        "	</xs:schema>";
 
             XmlSchema schema = XmlSchema.Read(new StringReader(xml), null);
             schema.TargetNamespace = XamlPresentationNamespace;

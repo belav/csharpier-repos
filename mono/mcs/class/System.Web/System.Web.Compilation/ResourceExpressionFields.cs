@@ -2,7 +2,7 @@
 // System.Web.Compilation.ResourceExpressionFields
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006-2009 Novell, Inc (http://www.novell.com)
 //
@@ -30,29 +30,29 @@
 
 namespace System.Web.Compilation
 {
-    public sealed class ResourceExpressionFields
-    {
-        internal ResourceExpressionFields (string classKey, string resourceKey)
-        {
-            this.classKey = classKey;
-            this.resourceKey = resourceKey;
-        }
+	public sealed class ResourceExpressionFields
+	{
+		internal ResourceExpressionFields (string classKey, string resourceKey)
+		{
+			this.classKey = classKey;
+			this.resourceKey = resourceKey;
+		}
 
-        internal ResourceExpressionFields (string resourceKey) : this (null, resourceKey)
-        {
-        }
+		internal ResourceExpressionFields (string resourceKey) : this (null, resourceKey)
+		{
+		}
 
-        public string ClassKey {
-            get { return classKey; }
-        }
+		public string ClassKey {
+			get { return classKey; }
+		}
 
-        public string ResourceKey {
-            get { return resourceKey; }
-        }
+		public string ResourceKey {
+			get { return resourceKey; }
+		}
 
-        string classKey;
-        string resourceKey;
-    }
+		string classKey;
+		string resourceKey;
+	}
 
 }
 

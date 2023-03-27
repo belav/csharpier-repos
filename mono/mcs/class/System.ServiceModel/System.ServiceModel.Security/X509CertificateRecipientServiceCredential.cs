@@ -2,7 +2,7 @@
 // X509CertificateRecipientServiceCredential.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -35,41 +35,41 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-    public sealed class X509CertificateRecipientServiceCredential
-    {
-        internal X509CertificateRecipientServiceCredential ()
-        {
-        }
+	public sealed class X509CertificateRecipientServiceCredential
+	{
+		internal X509CertificateRecipientServiceCredential ()
+		{
+		}
 
-        X509Certificate2 certificate;
+		X509Certificate2 certificate;
 
-        internal X509CertificateRecipientServiceCredential Clone ()
-        {
-            return new X509CertificateRecipientServiceCredential () { certificate = this.certificate };
-        }
-        
-        public X509Certificate2 Certificate {
-            get { return certificate; }
-            set { certificate = value; }
-        }
+		internal X509CertificateRecipientServiceCredential Clone ()
+		{
+			return new X509CertificateRecipientServiceCredential () { certificate = this.certificate };
+		}
+		
+		public X509Certificate2 Certificate {
+			get { return certificate; }
+			set { certificate = value; }
+		}
 
-        public void SetCertificate (StoreLocation storeLocation,
-            StoreName storeName, X509FindType findType,
-            object findValue)
-        {
-            Certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
-        }
+		public void SetCertificate (StoreLocation storeLocation,
+			StoreName storeName, X509FindType findType,
+			object findValue)
+		{
+			Certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
+		}
 
-        public void SetCertificate (string subjectName)
-        {
-            SetCertificate (subjectName, StoreLocation.CurrentUser, StoreName.My);
-        }
+		public void SetCertificate (string subjectName)
+		{
+			SetCertificate (subjectName, StoreLocation.CurrentUser, StoreName.My);
+		}
 
-        public void SetCertificate (
-            string subjectName, StoreLocation storeLocation,
-            StoreName storeName)
-        {
-            SetCertificate (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName);
-        }
-    }
+		public void SetCertificate (
+			string subjectName, StoreLocation storeLocation,
+			StoreName storeName)
+		{
+			SetCertificate (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName);
+		}
+	}
 }

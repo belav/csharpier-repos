@@ -1902,14 +1902,14 @@ namespace System.Web.Hosting {
                                                   null /*fragments*/,
                                                   null /*fragmentLengths*/,
                                                   null /*fragmentTypes*/);
-            
+			
             // Because no buffer supplied, don't fail
             if (result != HResults.E_INSUFFICIENT_BUFFER) {
                 Misc.ThrowIfFailedHr(result);
             }
-            
+			
             return numFragments > 0;
-         }
+     	}
 
         [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "System.Web.Hosting.UnsafeIISMethods.MgdGetAnonymousUserToken(System.IntPtr,System.IntPtr@)", Justification = @"We fallback to default behavior on method failure.")]
         [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly", Justification = "This is a degenerate case that should never happen.")]

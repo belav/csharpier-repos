@@ -5,8 +5,8 @@ using System;
 
 public class Test
 {
-    public static void Main ()
-    {
-        var x = nameof (Console.WriteLINE);
-    }
+	public static void Main ()
+	{
+		var x = nameof (Console.WriteLINE);
+	}
 }

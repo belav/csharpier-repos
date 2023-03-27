@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.DefaultValueSettingAttribute.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,22 +30,22 @@ using System;
 
 namespace System.Configuration
 {
-    [AttributeUsageAttribute(AttributeTargets.Property)]
-    public sealed class DefaultSettingValueAttribute : Attribute
-    {
-        string value;
+	[AttributeUsageAttribute(AttributeTargets.Property)]
+	public sealed class DefaultSettingValueAttribute : Attribute
+	{
+		string value;
 
-        public DefaultSettingValueAttribute (string value)
-        {
-            this.value = value;
-        }
+		public DefaultSettingValueAttribute (string value)
+		{
+			this.value = value;
+		}
 
-        public string Value {
-            get {
-                return value;
-            }
-        }
+		public string Value {
+			get {
+				return value;
+			}
+		}
 
-    }
+	}
 
 }

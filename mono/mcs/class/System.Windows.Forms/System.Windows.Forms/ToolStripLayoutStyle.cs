@@ -23,18 +23,18 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum ToolStripLayoutStyle
-    {
-        StackWithOverflow = 0,
-        HorizontalStackWithOverflow = 1,
-        VerticalStackWithOverflow = 2,
-        Flow = 3,
-        Table = 4
-    }
+	public enum ToolStripLayoutStyle
+	{
+		StackWithOverflow = 0,
+		HorizontalStackWithOverflow = 1,
+		VerticalStackWithOverflow = 2,
+		Flow = 3,
+		Table = 4
+	}
 }

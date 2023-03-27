@@ -6,8 +6,8 @@ using System.Runtime.CompilerServices;
 
 static class C
 {
-    [Extension]
-    static void Foo (this string s)
-    {
-    }
+	[Extension]
+	static void Foo (this string s)
+	{
+	}
 }

@@ -285,9 +285,9 @@ namespace BindingsTestSuite
             return new Uri(uri);
         }
 
-        public unsafe void* PassReturnPtr (void *ptr)
-        {
-            return ptr;
-        }
+		public unsafe void* PassReturnPtr (void *ptr)
+		{
+			return ptr;
+		}
     }
 }

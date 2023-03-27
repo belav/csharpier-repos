@@ -2,7 +2,7 @@
 // AuthenticationMode.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -28,26 +28,26 @@
 
 namespace System.ServiceModel.Configuration
 {
-    public enum AuthenticationMode
-    {
-        AnonymousForCertificate,
-        AnonymousForSslNegotiated,
-        CertificateOverTransport,
-        IssuedToken,
-        IssuedTokenForCertificate,
-        IssuedTokenForSslNegotiated,
-        IssuedTokenOverTransport,
-        Kerberos,
-        KerberosOverTransport,
-        MutualCertificate,
-        MutualCertificateDuplex,
-        MutualSslNegotiated,
-        SecureConversation,
-        SspiNegotiated,
-        UserNameForCertificate,
-        UserNameForSslNegotiated,
-        UserNameOverTransport,
-        SspiNegotiatedOverTransport,
-    }
+	public enum AuthenticationMode
+	{
+		AnonymousForCertificate,
+		AnonymousForSslNegotiated,
+		CertificateOverTransport,
+		IssuedToken,
+		IssuedTokenForCertificate,
+		IssuedTokenForSslNegotiated,
+		IssuedTokenOverTransport,
+		Kerberos,
+		KerberosOverTransport,
+		MutualCertificate,
+		MutualCertificateDuplex,
+		MutualSslNegotiated,
+		SecureConversation,
+		SspiNegotiated,
+		UserNameForCertificate,
+		UserNameForSslNegotiated,
+		UserNameOverTransport,
+		SspiNegotiatedOverTransport,
+	}
 
 }

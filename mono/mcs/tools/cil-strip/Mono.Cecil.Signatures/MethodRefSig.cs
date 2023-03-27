@@ -28,22 +28,22 @@
 
 namespace Mono.Cecil.Signatures {
 
-    internal class MethodRefSig : MethodSig {
+	internal class MethodRefSig : MethodSig {
 
-        public int Sentinel;
+		public int Sentinel;
 
-        public MethodRefSig () : this (0)
-        {
-        }
+		public MethodRefSig () : this (0)
+		{
+		}
 
-        public MethodRefSig (uint blobIndex) : base (blobIndex)
-        {
-            Sentinel = -1;
-        }
+		public MethodRefSig (uint blobIndex) : base (blobIndex)
+		{
+			Sentinel = -1;
+		}
 
-        public override void Accept (ISignatureVisitor visitor)
-        {
-            visitor.VisitMethodRefSig (this);
-        }
-    }
+		public override void Accept (ISignatureVisitor visitor)
+		{
+			visitor.VisitMethodRefSig (this);
+		}
+	}
 }

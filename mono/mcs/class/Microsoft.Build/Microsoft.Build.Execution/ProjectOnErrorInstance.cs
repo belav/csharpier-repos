@@ -29,40 +29,40 @@ using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Execution
 {
-    public class ProjectOnErrorInstance : ProjectTargetInstanceChild
-    {
-        internal ProjectOnErrorInstance (ProjectOnErrorElement xml)
-        {
-            condition = xml.Condition;
-            ExecuteTargets = xml.ExecuteTargetsAttribute;
-            //this.FullPath = fullPath;
-            condition_location = xml.ConditionLocation;
-            ExecuteTargetsLocation = xml.ExecuteTargetsAttributeLocation;
-            location = xml.Location;
-        }
-        
-        readonly string condition;
-        
-        public override string Condition {
-            get { return condition; }
-        }
+	public class ProjectOnErrorInstance : ProjectTargetInstanceChild
+	{
+		internal ProjectOnErrorInstance (ProjectOnErrorElement xml)
+		{
+			condition = xml.Condition;
+			ExecuteTargets = xml.ExecuteTargetsAttribute;
+			//this.FullPath = fullPath;
+			condition_location = xml.ConditionLocation;
+			ExecuteTargetsLocation = xml.ExecuteTargetsAttributeLocation;
+			location = xml.Location;
+		}
+		
+		readonly string condition;
+		
+		public override string Condition {
+			get { return condition; }
+		}
 
-        public string ExecuteTargets { get; private set; }
-        
-        readonly ElementLocation condition_location, location;
-        
-        public
-        override ElementLocation ConditionLocation {
-            get { return condition_location; }
-        }
+		public string ExecuteTargets { get; private set; }
+		
+		readonly ElementLocation condition_location, location;
+		
+		public
+		override ElementLocation ConditionLocation {
+			get { return condition_location; }
+		}
 
-        public
-        ElementLocation ExecuteTargetsLocation { get; private set; }
+		public
+		ElementLocation ExecuteTargetsLocation { get; private set; }
 
-        public
-        override ElementLocation Location {
-            get { return location; }
-        }
-    }
+		public
+		override ElementLocation Location {
+			get { return location; }
+		}
+	}
 }
 

@@ -1,4 +1,4 @@
-namespace System.Net.Mime
+﻿namespace System.Net.Mime
 {
     using System.IO;
 

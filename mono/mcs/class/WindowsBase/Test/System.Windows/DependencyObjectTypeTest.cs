@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -30,37 +30,37 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows {
 
-    [TestFixture]
-    public class DependencyObjectTypeTest {
+	[TestFixture]
+	public class DependencyObjectTypeTest {
 
-        [Test]
-        public void Accessors ()
-        {
-            DependencyObjectType t = DependencyObjectType.FromSystemType (typeof (TestDepObj));
-            Assert.AreEqual ("TestDepObj", t.Name);
-            Assert.AreEqual (typeof (TestDepObj), t.SystemType);
-            Assert.AreEqual (typeof (DependencyObject), t.BaseType.SystemType);
-            // we can't test the Id field's value, as it's
-            // not guaranteed to be anything in
-            // particular.
-        }
+		[Test]
+		public void Accessors ()
+		{
+			DependencyObjectType t = DependencyObjectType.FromSystemType (typeof (TestDepObj));
+			Assert.AreEqual ("TestDepObj", t.Name);
+			Assert.AreEqual (typeof (TestDepObj), t.SystemType);
+			Assert.AreEqual (typeof (DependencyObject), t.BaseType.SystemType);
+			// we can't test the Id field's value, as it's
+			// not guaranteed to be anything in
+			// particular.
+		}
 
-        [Test]
-        public void IsInstanceOfType ()
-        {
-            DependencyObjectType t = DependencyObjectType.FromSystemType (typeof (TestDepObj));
-            DependencyObjectType t2 = DependencyObjectType.FromSystemType (typeof (TestSubclass));
-            Assert.IsTrue (t.IsInstanceOfType (new TestSubclass()));
-            Assert.IsTrue (t2.IsSubclassOf (t));
-            Assert.IsFalse (t.IsSubclassOf (t2));
-        }
+		[Test]
+		public void IsInstanceOfType ()
+		{
+			DependencyObjectType t = DependencyObjectType.FromSystemType (typeof (TestDepObj));
+			DependencyObjectType t2 = DependencyObjectType.FromSystemType (typeof (TestSubclass));
+			Assert.IsTrue (t.IsInstanceOfType (new TestSubclass()));
+			Assert.IsTrue (t2.IsSubclassOf (t));
+			Assert.IsFalse (t.IsSubclassOf (t2));
+		}
 
-        [Test]
-        public void TestCache ()
-        {
-            DependencyObjectType t = DependencyObjectType.FromSystemType (typeof (TestDepObj));
-            DependencyObjectType t2 = DependencyObjectType.FromSystemType (typeof (TestDepObj));
-            Assert.AreSame (t, t2);
-        }
-    }
+		[Test]
+		public void TestCache ()
+		{
+			DependencyObjectType t = DependencyObjectType.FromSystemType (typeof (TestDepObj));
+			DependencyObjectType t2 = DependencyObjectType.FromSystemType (typeof (TestDepObj));
+			Assert.AreSame (t, t2);
+		}
+	}
 }

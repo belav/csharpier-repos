@@ -32,71 +32,71 @@ using System.Runtime.Serialization;
 
 namespace System.Configuration
 {
-    [Serializable]
-    public sealed class PropertyInformationCollection: NameObjectCollectionBase
-    {
-        internal PropertyInformationCollection ()
-            : base (StringComparer.Ordinal)
-        {
-        }
-        
-        public void CopyTo (PropertyInformation[] array, int index)
-        {
-            ((ICollection)this).CopyTo (array, index);
-        }
-        
-        public PropertyInformation this [string propertyName] {
-            get { return (PropertyInformation) BaseGet (propertyName); }
-        }
-        
-        public override IEnumerator GetEnumerator ()
-        {
-            return new PropertyInformationEnumerator (this);
-        }
-        
-        internal void Add (PropertyInformation pi)
-        {
-            BaseAdd (pi.Name, pi);
-        }
+	[Serializable]
+	public sealed class PropertyInformationCollection: NameObjectCollectionBase
+	{
+		internal PropertyInformationCollection ()
+			: base (StringComparer.Ordinal)
+		{
+		}
+		
+		public void CopyTo (PropertyInformation[] array, int index)
+		{
+			((ICollection)this).CopyTo (array, index);
+		}
+		
+		public PropertyInformation this [string propertyName] {
+			get { return (PropertyInformation) BaseGet (propertyName); }
+		}
+		
+		public override IEnumerator GetEnumerator ()
+		{
+			return new PropertyInformationEnumerator (this);
+		}
+		
+		internal void Add (PropertyInformation pi)
+		{
+			BaseAdd (pi.Name, pi);
+		}
 
-        [MonoTODO]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override void GetObjectData (SerializationInfo info, StreamingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        class PropertyInformationEnumerator : IEnumerator
-        {
-            private PropertyInformationCollection collection;
-            private int position;
-            
-            public PropertyInformationEnumerator (PropertyInformationCollection collection)
-            {
-                this.collection = collection;
-                position = -1;
-            }
-            
-            public object Current 
-            {
-                get {
-                    if ((position < collection.Count) && (position >= 0))
-                        return collection.BaseGet (position);
-                    else 
-                        throw new InvalidOperationException();
-                }
-                
-            }
-            
-            public bool MoveNext ()
-            {
-                return (++position < collection.Count) ? true : false;
-            }
-            
-            public void Reset ()
-            {
-                position = -1;
-            }
-        }
-    }
+		class PropertyInformationEnumerator : IEnumerator
+		{
+			private PropertyInformationCollection collection;
+			private int position;
+			
+			public PropertyInformationEnumerator (PropertyInformationCollection collection)
+			{
+				this.collection = collection;
+				position = -1;
+			}
+			
+			public object Current 
+			{
+				get {
+					if ((position < collection.Count) && (position >= 0))
+						return collection.BaseGet (position);
+					else 
+						throw new InvalidOperationException();
+				}
+				
+			}
+			
+			public bool MoveNext ()
+			{
+				return (++position < collection.Count) ? true : false;
+			}
+			
+			public void Reset ()
+			{
+				position = -1;
+			}
+		}
+	}
 }
 

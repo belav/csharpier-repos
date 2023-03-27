@@ -2,7 +2,7 @@
 // LocalIdKeyIdentifierClause.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,54 +32,54 @@ using System.IdentityModel.Policy;
 
 namespace System.IdentityModel.Tokens
 {
-    public class LocalIdKeyIdentifierClause : SecurityKeyIdentifierClause
-    {
-        public LocalIdKeyIdentifierClause (string localId)
-            : this (localId, null)
-        {
-        }
+	public class LocalIdKeyIdentifierClause : SecurityKeyIdentifierClause
+	{
+		public LocalIdKeyIdentifierClause (string localId)
+			: this (localId, null)
+		{
+		}
 
-        public LocalIdKeyIdentifierClause (string localId, Type ownerType)
-            : this (localId, null, 0, ownerType)
-        {
-        }
+		public LocalIdKeyIdentifierClause (string localId, Type ownerType)
+			: this (localId, null, 0, ownerType)
+		{
+		}
 
-        public LocalIdKeyIdentifierClause (string localId, byte [] derivationNonce, int derivationLength, Type ownerType)
-            : base (localId, derivationNonce, derivationLength)
-        {
-            local_id = localId;
-            owner_type =ownerType;
-        }
+		public LocalIdKeyIdentifierClause (string localId, byte [] derivationNonce, int derivationLength, Type ownerType)
+			: base (localId, derivationNonce, derivationLength)
+		{
+			local_id = localId;
+			owner_type =ownerType;
+		}
 
-        string local_id;
-        Type owner_type;
+		string local_id;
+		Type owner_type;
 
-        public string LocalId {
-            get { return local_id; }
-        }
+		public string LocalId {
+			get { return local_id; }
+		}
 
-        public Type OwnerType {
-            get { return owner_type; }
-        }
+		public Type OwnerType {
+			get { return owner_type; }
+		}
 
-        public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
-        {
-            if (keyIdentifierClause == null)
-                throw new ArgumentNullException ("keyIdentifierClause");
-            LocalIdKeyIdentifierClause c =
-                keyIdentifierClause as LocalIdKeyIdentifierClause;
-            return c != null && Matches (c.LocalId, c.OwnerType);
-        }
+		public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
+		{
+			if (keyIdentifierClause == null)
+				throw new ArgumentNullException ("keyIdentifierClause");
+			LocalIdKeyIdentifierClause c =
+				keyIdentifierClause as LocalIdKeyIdentifierClause;
+			return c != null && Matches (c.LocalId, c.OwnerType);
+		}
 
-        public bool Matches (string localId, Type ownerType)
-        {
-            return local_id == localId && (owner_type == null || owner_type == ownerType);
-        }
+		public bool Matches (string localId, Type ownerType)
+		{
+			return local_id == localId && (owner_type == null || owner_type == ownerType);
+		}
 
-        [MonoTODO]
-        public override string ToString ()
-        {
-            return base.ToString ();
-        }
-    }
+		[MonoTODO]
+		public override string ToString ()
+		{
+			return base.ToString ();
+		}
+	}
 }

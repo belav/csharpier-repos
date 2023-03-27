@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,18 +27,18 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class SeriesCollection : ChartNamedElementCollection<Series>
-    {
-        #region Public Methods
-        public Series Add (string name)
-        {
-            Series s = new Series ();
-            s.Name = name;
+	public class SeriesCollection : ChartNamedElementCollection<Series>
+	{
+		#region Public Methods
+		public Series Add (string name)
+		{
+			Series s = new Series ();
+			s.Name = name;
 
-            this.Add (s);
+			this.Add (s);
 
-            return s;
-        }
-        #endregion
-    }
+			return s;
+		}
+		#endregion
+	}
 }

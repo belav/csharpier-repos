@@ -37,60 +37,60 @@ using Category = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.Windows.Markup
 {
-    [TestFixture]
-    public class XDataTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void GetXmlReaderWithNullText ()
-        {
-            var x = new XData ();
-            Assert.IsNull (x.Text, "#1");
-            Assert.IsNull (x.XmlReader, "#2");
-        }
+	[TestFixture]
+	public class XDataTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void GetXmlReaderWithNullText ()
+		{
+			var x = new XData ();
+			Assert.IsNull (x.Text, "#1");
+			Assert.IsNull (x.XmlReader, "#2");
+		}
 
-        [Test]
-        public void TextSetsXmlReader ()
-        {
-            var x = new XData ();
-            x.Text = "foobar";
-            Assert.IsNotNull (x.Text, "#3");
-            var r = x.XmlReader as XmlReader;
-            Assert.IsNotNull (r, "#4");
-            Assert.AreEqual (XmlNodeType.None, r.NodeType, "#5");
-            try {
-                r.Read (); // invalid xml
-                Assert.Fail ("#6");
-            } catch (XmlException) {
-            }
-        }
+		[Test]
+		public void TextSetsXmlReader ()
+		{
+			var x = new XData ();
+			x.Text = "foobar";
+			Assert.IsNotNull (x.Text, "#3");
+			var r = x.XmlReader as XmlReader;
+			Assert.IsNotNull (r, "#4");
+			Assert.AreEqual (XmlNodeType.None, r.NodeType, "#5");
+			try {
+				r.Read (); // invalid xml
+				Assert.Fail ("#6");
+			} catch (XmlException) {
+			}
+		}
 
-        [Test]
-        public void SetTextNull ()
-        {
-            var x = new XData ();
-            // allowed.
-            x.Text = null;
-        }
+		[Test]
+		public void SetTextNull ()
+		{
+			var x = new XData ();
+			// allowed.
+			x.Text = null;
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void SetNonXmlReader ()
-        {
-            var x = new XData ();
-            XmlReader r;
-            x.XmlReader = "<foo/>"; // not allowed. It does *not* raise an error, but the value becomes null.
-            r = x.XmlReader as XmlReader; // and thus it causes ANE.
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void SetNonXmlReader ()
+		{
+			var x = new XData ();
+			XmlReader r;
+			x.XmlReader = "<foo/>"; // not allowed. It does *not* raise an error, but the value becomes null.
+			r = x.XmlReader as XmlReader; // and thus it causes ANE.
+		}
 
-        [Test]
-        public void SetXmlReader ()
-        {
-            var x = new XData ();
-            x.XmlReader = XmlReader.Create (new StringReader ("<root/>"));
-            Assert.IsNull (x.Text, "#1");
-            Assert.IsNotNull (x.XmlReader, "#2");
-            x.XmlReader = null;
-        }
-    }
+		[Test]
+		public void SetXmlReader ()
+		{
+			var x = new XData ();
+			x.XmlReader = XmlReader.Create (new StringReader ("<root/>"));
+			Assert.IsNull (x.Text, "#1");
+			Assert.IsNotNull (x.XmlReader, "#2");
+			x.XmlReader = null;
+		}
+	}
 }

@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.IO;
@@ -81,9 +81,9 @@ namespace System.Web.WebPages.Test
         [InlineData(100000/7)]
         public void ProperlyCopiesLargeSetsOfText(int count)
         {
-            // The char ? turns into a two byte sequence so we end up with a
+            // The char א turns into a two byte sequence so we end up with a
             // 7 byte sequence that is not a divider or 1024.
-            string text = string.Join(string.Empty, Enumerable.Repeat("abcde?", count));
+            string text = string.Join(string.Empty, Enumerable.Repeat("abcdeא", count));
 
             Byte[] textInBytes = Encoding.UTF8.GetBytes(text);
             string outputText;

@@ -4,9 +4,9 @@
 
 class C
 {
-    static void Main ()
-    {
-        int? i = 2;
-        i *= null;
-    }
+	static void Main ()
+	{
+		int? i = 2;
+		i *= null;
+	}
 }

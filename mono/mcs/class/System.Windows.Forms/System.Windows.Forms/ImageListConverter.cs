@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc.
 //
 // Authors:
-//    Matthias Felgner     matthiasf@voelcker.com
+//	Matthias Felgner     matthiasf@voelcker.com
 //
 
 // COMPLETE
@@ -29,16 +29,16 @@ using System.ComponentModel;
 
 
 namespace System.Windows.Forms {
-    internal class ImageListConverter : ComponentConverter {
-        #region Constructors
-        public ImageListConverter() : base(typeof(ImageList)) {
-        }
-        #endregion Constructors
-        
-        #region Public Methods
-        public override bool GetPropertiesSupported(ITypeDescriptorContext context){
-            return true;
-        }
-        #endregion Public Methods
-    }    
+	internal class ImageListConverter : ComponentConverter {
+		#region Constructors
+		public ImageListConverter() : base(typeof(ImageList)) {
+		}
+		#endregion Constructors
+		
+		#region Public Methods
+		public override bool GetPropertiesSupported(ITypeDescriptorContext context){
+			return true;
+		}
+		#endregion Public Methods
+	}	
 }

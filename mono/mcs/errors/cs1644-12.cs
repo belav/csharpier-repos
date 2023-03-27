@@ -4,7 +4,7 @@
 
 public class C
 {
-    public C (int a = 0)
-    {
-    }
+	public C (int a = 0)
+	{
+	}
 }

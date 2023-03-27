@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -9,35 +9,35 @@ using ApplicationPreStartMethods;
 
 namespace ApplicationPreStartMethods.Tests
 {
-    public class PreStartMethods
-    {
-        public void PublicInstanceMethod (string param)
-        {
-        }
+	public class PreStartMethods
+	{
+		public void PublicInstanceMethod (string param)
+		{
+		}
 
-        public static void PublicStaticMethod ()
-        {
-            throw new InvalidOperationException ("test");
-        }
+		public static void PublicStaticMethod ()
+		{
+			throw new InvalidOperationException ("test");
+		}
 
-        public static void PublicStaticMethod (string val)
-        {
-        }
+		public static void PublicStaticMethod (string val)
+		{
+		}
 
-        internal void InternalInstanceMethod ()
-        {
-        }
+		internal void InternalInstanceMethod ()
+		{
+		}
 
-        static internal void InternalStaticMethod ()
-        {
-        }
+		static internal void InternalStaticMethod ()
+		{
+		}
 
-        void PrivateInstanceMethod ()
-        {
-        }
+		void PrivateInstanceMethod ()
+		{
+		}
 
-        static void PrivateStaticMethod ()
-        {
-        }
-    }
+		static void PrivateStaticMethod ()
+		{
+		}
+	}
 }

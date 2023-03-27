@@ -32,25 +32,25 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class CrossDomainMoveControl : DirectoryControl
-    {
-        public CrossDomainMoveControl ()
-            : base (null, null, false, false)
-        {
-        }
+	public class CrossDomainMoveControl : DirectoryControl
+	{
+		public CrossDomainMoveControl ()
+			: base (null, null, false, false)
+		{
+		}
 
-        public CrossDomainMoveControl (string targetDomainController)
-            : this ()
-        {
-            TargetDomainController = targetDomainController;
-        }
+		public CrossDomainMoveControl (string targetDomainController)
+			: this ()
+		{
+			TargetDomainController = targetDomainController;
+		}
 
-        public string TargetDomainController { get; set; }
+		public string TargetDomainController { get; set; }
 
-        [MonoTODO]
-        public override byte [] GetValue ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override byte [] GetValue ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

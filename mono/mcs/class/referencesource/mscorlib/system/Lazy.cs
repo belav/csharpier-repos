@@ -1,4 +1,4 @@
-#pragma warning disable 0420
+﻿#pragma warning disable 0420
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.

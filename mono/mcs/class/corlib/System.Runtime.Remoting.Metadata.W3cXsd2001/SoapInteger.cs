@@ -35,43 +35,43 @@ using System;
 
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
-    [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public sealed class SoapInteger : ISoapXsd
-    {
-        decimal _value;
-        
-        public SoapInteger ()
-        {
-        }
-        
-        public SoapInteger (decimal value)
-        {
-            _value = value;
-        }
-        
-        public decimal Value {
-            get { return _value; } 
-            set { _value = value; }
-        }
+	[Serializable]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public sealed class SoapInteger : ISoapXsd
+	{
+		decimal _value;
+		
+		public SoapInteger ()
+		{
+		}
+		
+		public SoapInteger (decimal value)
+		{
+			_value = value;
+		}
+		
+		public decimal Value {
+			get { return _value; } 
+			set { _value = value; }
+		}
 
-        public static string XsdType {
-            get { return "integer"; }
-        }
+		public static string XsdType {
+			get { return "integer"; }
+		}
 
-        public string GetXsdType()
-        {
-            return XsdType;
-        }
-        
-        public static SoapInteger Parse (string value)
-        {
-            return new SoapInteger (decimal.Parse (value));
-        }
+		public string GetXsdType()
+		{
+			return XsdType;
+		}
+		
+		public static SoapInteger Parse (string value)
+		{
+			return new SoapInteger (decimal.Parse (value));
+		}
 
-        public override string ToString()
-        {
-            return _value.ToString ();
-        }
-    }
+		public override string ToString()
+		{
+			return _value.ToString ();
+		}
+	}
 }

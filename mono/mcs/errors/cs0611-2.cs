@@ -8,7 +8,7 @@ public class Sample {
                 }
         }
 
-        static void Main () {}
+		static void Main () {}
 }
 
 

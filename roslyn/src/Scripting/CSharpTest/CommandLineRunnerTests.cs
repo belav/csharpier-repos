@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -127,9 +127,9 @@ $@"{LogoAndHelpPrompt}
 . {{
 .   return new int[] {{ 1, 2, 3, 4, 5 }};
 . }}
-«Yellow»
+Â«YellowÂ»
 (1,19): warning CS1998: {CSharpResources.WRN_AsyncLacksAwaits}
-«Gray»
+Â«GrayÂ»
 > from x in await GetStuffAsync()
 . where x > 2
 . select x * x
@@ -258,10 +258,10 @@ $@"{LogoAndHelpPrompt}
 > div(10, 2)
 5
 > div(10, 0)
-«Red»
+Â«RedÂ»
 {exception.GetType()}: {exception.Message}
   + Submission#0.div(int, int)
-«Gray»
+Â«GrayÂ»
 > ", runner.Console.Out.ToString());
 
             Assert.Equal(
@@ -287,10 +287,10 @@ $@"{LogoAndHelpPrompt}
 > C<string>.div<bool>(10, 2)
 5
 > C<string>.div<bool>(10, 0)
-«Red»
+Â«RedÂ»
 {exception.GetType()}: {exception.Message}
   + Submission#0.C<T>.div<U>(int, int)
-«Gray»
+Â«GrayÂ»
 > ", runner.Console.Out.ToString());
 
             Assert.Equal(
@@ -539,9 +539,9 @@ $@"{string.Format(CSharpScriptingResources.LogoLine1, s_compilerVersion)}
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
 $@"{LogoAndHelpPrompt}
 > nameof(Microsoft.Missing)
-«Red»
+Â«RedÂ»
 (1,8): error CS0234: {string.Format(CSharpResources.ERR_DottedTypeNameNotFoundInNS, "Missing", "Microsoft")}
-«Gray»
+Â«GrayÂ»
 > ", runner.Console.Out.ToString());
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
@@ -681,9 +681,9 @@ X
 > SourcePaths
 SearchPaths {{ }}
 > #load ""a.csx""
-«Red»
+Â«RedÂ»
 (1,7): error CS1504: {string.Format(CSharpResources.ERR_NoSourceFile, "a.csx", CSharpResources.CouldNotFindFile)}
-«Gray»
+Â«GrayÂ»
 > SourcePaths.Add(@""{dir.Path}"")
 > #load ""a.csx""
 > X
@@ -717,9 +717,9 @@ new C()
 > ReferencePaths
 SearchPaths {{ }}
 > #r ""C.dll""
-«Red»
+Â«RedÂ»
 (1,1): error CS0006: {string.Format(CSharpResources.ERR_NoMetadataFile, "C.dll")}
-«Gray»
+Â«GrayÂ»
 > ReferencePaths.Add(@""{dir.Path}"")
 > #r ""C.dll""
 > new C()
@@ -803,9 +803,9 @@ int X = 1;
             runner.RunInteractive();
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences($@"
-«Red»
+Â«RedÂ»
 {init.Path}(2,3): error CS1002: {CSharpResources.ERR_SemicolonExpected}
-«Gray»
+Â«GrayÂ»
 > new C()
 C {{ }}
 > 
@@ -917,9 +917,9 @@ $@"{LogoAndHelpPrompt}
 > var l1 = new Lib1();
 > #r ""{file2.Path}""
 > var l2 = new Lib2();
-«Red»
+Â«RedÂ»
 {string.Format(ScriptingResources.AssemblyAlreadyLoaded, libBaseName, "0.0.0.0", fileBase1.Path, fileBase2.Path)}
-«Gray»
+Â«GrayÂ»
 > ", runner.Console.Out.ToString());
         }
 
@@ -938,11 +938,11 @@ i + j + k
 $@"{LogoAndHelpPrompt}
 > int i = 100;
 > int j = 20; throw new System.Exception(""Bang!""); int k = 3;
-«Yellow»
+Â«YellowÂ»
 (1,58): warning CS0162: {CSharpResources.WRN_UnreachableCode}
-«Red»
+Â«RedÂ»
 System.Exception: Bang!
-«Gray»
+Â«GrayÂ»
 > i + j + k
 120
 > ", runner.Console.Out.ToString());

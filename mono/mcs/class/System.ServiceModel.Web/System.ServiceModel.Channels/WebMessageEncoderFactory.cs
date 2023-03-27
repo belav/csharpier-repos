@@ -2,7 +2,7 @@
 // WebMessageEncoderFactory.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -30,21 +30,21 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    internal class WebMessageEncoderFactory : MessageEncoderFactory
-    {
-        MessageEncoder encoder;
+	internal class WebMessageEncoderFactory : MessageEncoderFactory
+	{
+		MessageEncoder encoder;
 
-        public WebMessageEncoderFactory (WebMessageEncodingBindingElement source)
-        {
-            encoder = new WebMessageEncoder (source);
-        }
+		public WebMessageEncoderFactory (WebMessageEncodingBindingElement source)
+		{
+			encoder = new WebMessageEncoder (source);
+		}
 
-        public override MessageEncoder Encoder {
-            get { return encoder; }
-        }
+		public override MessageEncoder Encoder {
+			get { return encoder; }
+		}
 
-        public override MessageVersion MessageVersion {
-            get { return MessageVersion.None; }
-        }
-    }
+		public override MessageVersion MessageVersion {
+			get { return MessageVersion.None; }
+		}
+	}
 }

@@ -6,15 +6,15 @@ using System.Collections.Generic;
 
 static class C
 {
-    public static IEnumerable<int> Test (int key)
-    {
-        switch (key) {
-        case 1:
-            yield return 0;
-        case 2:
-            yield return 2;
-        default:
-            throw new ArgumentOutOfRangeException ("symbol:" + key);
-        }
-    }
+	public static IEnumerable<int> Test (int key)
+	{
+		switch (key) {
+		case 1:
+			yield return 0;
+		case 2:
+			yield return 2;
+		default:
+			throw new ArgumentOutOfRangeException ("symbol:" + key);
+		}
+	}
 }

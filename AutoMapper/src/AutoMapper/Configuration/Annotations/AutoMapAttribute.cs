@@ -1,4 +1,4 @@
-namespace AutoMapper;
+﻿namespace AutoMapper;
 
 /// <summary>
 /// Auto map to this destination type from the specified source type.

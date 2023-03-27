@@ -2,7 +2,7 @@
 // AsymmetricSecurityKey.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,22 +33,22 @@ using System.Security.Cryptography;
 
 namespace System.IdentityModel.Tokens
 {
-    public abstract class AsymmetricSecurityKey : SecurityKey
-    {
-        protected AsymmetricSecurityKey ()
-        {
-        }
+	public abstract class AsymmetricSecurityKey : SecurityKey
+	{
+		protected AsymmetricSecurityKey ()
+		{
+		}
 
-        public abstract AsymmetricAlgorithm GetAsymmetricAlgorithm (
-            string algorithm, bool privateKey);
+		public abstract AsymmetricAlgorithm GetAsymmetricAlgorithm (
+			string algorithm, bool privateKey);
 
-        public abstract HashAlgorithm GetHashAlgorithmForSignature (
-            string algorithm);
+		public abstract HashAlgorithm GetHashAlgorithmForSignature (
+			string algorithm);
 
-        public abstract AsymmetricSignatureDeformatter GetSignatureDeformatter (string algorithm);
+		public abstract AsymmetricSignatureDeformatter GetSignatureDeformatter (string algorithm);
 
-        public abstract AsymmetricSignatureFormatter GetSignatureFormatter (string algorithm);
+		public abstract AsymmetricSignatureFormatter GetSignatureFormatter (string algorithm);
 
-        public abstract bool HasPrivateKey ();
-    }
+		public abstract bool HasPrivateKey ();
+	}
 }

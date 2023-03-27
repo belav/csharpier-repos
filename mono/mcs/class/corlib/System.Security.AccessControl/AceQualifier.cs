@@ -2,7 +2,7 @@
 // System.Security.AccessControl.AceQualifier enum
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -27,11 +27,11 @@
 //
 
 namespace System.Security.AccessControl {
-    public enum AceQualifier {
-        AccessAllowed = 0,
-        AccessDenied = 1,
-        SystemAudit = 2,
-        SystemAlarm = 3,
-    }
+	public enum AceQualifier {
+		AccessAllowed = 0,
+		AccessDenied = 1,
+		SystemAudit = 2,
+		SystemAlarm = 3,
+	}
 }
 

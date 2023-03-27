@@ -3,5 +3,5 @@
 
 class Data
 {
-    public static delegate int Count ();
+	public static delegate int Count ();
 }

@@ -5,9 +5,9 @@ using System;
 
 public class MyTest : ICloneable
 {
-    object Clone()
-    {
-        return MemberwiseClone();
-    }
+	object Clone()
+	{
+		return MemberwiseClone();
+	}
 }
 

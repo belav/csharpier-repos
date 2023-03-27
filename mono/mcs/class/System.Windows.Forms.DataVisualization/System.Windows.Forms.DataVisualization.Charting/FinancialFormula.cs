@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,39 +27,39 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum FinancialFormula
-    {
-        AccumulationDistribution = 0,
-        AverageTrueRange = 1,
-        BollingerBands = 2,
-        ChaikinOscillator = 3,
-        CommodityChannelIndex = 4,
-        DetrendedPriceOscillator = 5,
-        EaseOfMovement = 6,
-        Envelopes = 7,
-        ExponentialMovingAverage = 8,
-        Forecasting = 9,
-        MovingAverageConvergenceDivergence = 10,
-        MassIndex = 11,
-        MedianPrice = 12,
-        MoneyFlow = 13,
-        NegativeVolumeIndex = 14,
-        OnBalanceVolume = 15,
-        Performance = 16,
-        PositiveVolumeIndex = 17,
-        PriceVolumeTrend = 18,
-        RateOfChange = 19,
-        RelativeStrengthIndex = 20,
-        MovingAverage = 21,
-        StandardDeviation = 22,
-        StochasticIndicator = 23,
-        TriangularMovingAverage = 24,
-        TripleExponentialMovingAverage = 25,
-        TypicalPrice = 26,
-        VolatilityChaikins = 27,
-        VolumeOscillator = 28,
-        WeightedClose = 29,
-        WeightedMovingAverage = 30,
-        WilliamsR = 31
-    }
+	public enum FinancialFormula
+	{
+		AccumulationDistribution = 0,
+		AverageTrueRange = 1,
+		BollingerBands = 2,
+		ChaikinOscillator = 3,
+		CommodityChannelIndex = 4,
+		DetrendedPriceOscillator = 5,
+		EaseOfMovement = 6,
+		Envelopes = 7,
+		ExponentialMovingAverage = 8,
+		Forecasting = 9,
+		MovingAverageConvergenceDivergence = 10,
+		MassIndex = 11,
+		MedianPrice = 12,
+		MoneyFlow = 13,
+		NegativeVolumeIndex = 14,
+		OnBalanceVolume = 15,
+		Performance = 16,
+		PositiveVolumeIndex = 17,
+		PriceVolumeTrend = 18,
+		RateOfChange = 19,
+		RelativeStrengthIndex = 20,
+		MovingAverage = 21,
+		StandardDeviation = 22,
+		StochasticIndicator = 23,
+		TriangularMovingAverage = 24,
+		TripleExponentialMovingAverage = 25,
+		TypicalPrice = 26,
+		VolatilityChaikins = 27,
+		VolumeOscillator = 28,
+		WeightedClose = 29,
+		WeightedMovingAverage = 30,
+		WilliamsR = 31
+	}
 }

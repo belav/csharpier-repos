@@ -32,32 +32,32 @@ using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-    [XmlFormatExtension ("mimeXml", "http://schemas.xmlsoap.org/wsdl/mime/", typeof (MimePart), typeof (InputBinding), typeof (OutputBinding))]
-    public sealed class MimeXmlBinding : ServiceDescriptionFormatExtension {
+	[XmlFormatExtension ("mimeXml", "http://schemas.xmlsoap.org/wsdl/mime/", typeof (MimePart), typeof (InputBinding), typeof (OutputBinding))]
+	public sealed class MimeXmlBinding : ServiceDescriptionFormatExtension {
 
-        #region Fields
+		#region Fields
 
-        string part;
+		string part;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
-        
-        public MimeXmlBinding ()
-        {
-            part = String.Empty;
-        }
-        
-        #endregion // Constructors
+		#region Constructors
+		
+		public MimeXmlBinding ()
+		{
+			part = String.Empty;
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [XmlAttribute ("part")]
-        public string Part {
-            get { return part; }
-            set { part = value; }
-        }
-        
-        #endregion // Properties
-    }
+		[XmlAttribute ("part")]
+		public string Part {
+			get { return part; }
+			set { part = value; }
+		}
+		
+		#endregion // Properties
+	}
 }

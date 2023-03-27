@@ -23,7 +23,7 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.Drawing;
@@ -32,35 +32,35 @@ using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms
 {
-    public class ToolStripDropDownItemAccessibleObject : ToolStripItem.ToolStripItemAccessibleObject
-    {
-        #region Public Constructor
-        public ToolStripDropDownItemAccessibleObject (ToolStripDropDownItem item) : base (item)
-        {
-        }
-        #endregion
+	public class ToolStripDropDownItemAccessibleObject : ToolStripItem.ToolStripItemAccessibleObject
+	{
+		#region Public Constructor
+		public ToolStripDropDownItemAccessibleObject (ToolStripDropDownItem item) : base (item)
+		{
+		}
+		#endregion
 
-        #region Public Properties
-        public override AccessibleRole Role {
-            get { return base.Role; }
-        }
-        #endregion
+		#region Public Properties
+		public override AccessibleRole Role {
+			get { return base.Role; }
+		}
+		#endregion
 
-        #region Public Methods
-        public override void DoDefaultAction ()
-        {
-            base.DoDefaultAction ();
-        }
+		#region Public Methods
+		public override void DoDefaultAction ()
+		{
+			base.DoDefaultAction ();
+		}
 
-        public override AccessibleObject GetChild (int index)
-        {
-            return (owner_item as ToolStripDropDownItem).DropDownItems[index].AccessibilityObject;
-        }
+		public override AccessibleObject GetChild (int index)
+		{
+			return (owner_item as ToolStripDropDownItem).DropDownItems[index].AccessibilityObject;
+		}
 
-        public override int GetChildCount ()
-        {
-            return (owner_item as ToolStripDropDownItem).DropDownItems.Count;
-        }
-        #endregion
-    }
+		public override int GetChildCount ()
+		{
+			return (owner_item as ToolStripDropDownItem).DropDownItems.Count;
+		}
+		#endregion
+	}
 }

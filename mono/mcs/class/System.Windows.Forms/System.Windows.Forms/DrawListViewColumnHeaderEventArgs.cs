@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Alan McGovern (alan.mcgovern@gmail.com)
+//	Alan McGovern (alan.mcgovern@gmail.com)
 //
 
 
@@ -111,20 +111,20 @@ namespace System.Windows.Forms
 
         public void DrawBackground ()
         {
-        // Always draw a non-pushed button
-        ThemeEngine.Current.CPDrawButton (graphics, bounds, ButtonState.Normal);
+		// Always draw a non-pushed button
+		ThemeEngine.Current.CPDrawButton (graphics, bounds, ButtonState.Normal);
         }
 
         public void DrawText ()
         {
-        DrawText (TextFormatFlags.EndEllipsis | TextFormatFlags.SingleLine);
+		DrawText (TextFormatFlags.EndEllipsis | TextFormatFlags.SingleLine);
         }
 
         public void DrawText (TextFormatFlags flags)
         {
-        // Text adjustments
-        Rectangle text_bounds = new Rectangle (bounds.X + 8, bounds.Y, bounds.Width - 13, bounds.Height);
-        TextRenderer.DrawText (graphics, header.Text, font, text_bounds, foreColor, flags);
+		// Text adjustments
+		Rectangle text_bounds = new Rectangle (bounds.X + 8, bounds.Y, bounds.Width - 13, bounds.Height);
+		TextRenderer.DrawText (graphics, header.Text, font, text_bounds, foreColor, flags);
         }
 
         #endregion Methods

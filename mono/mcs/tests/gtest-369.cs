@@ -26,11 +26,11 @@ namespace Db4objects.Db4o.Internal
         public abstract class ExternalObjectContainer : ObjectContainerBase, IObjectContainer
         {
         }
-        
-        class M
-        {
-            public static void Main ()
-            {
-            }
-        }
+		
+		class M
+		{
+			public static void Main ()
+			{
+			}
+		}
 }

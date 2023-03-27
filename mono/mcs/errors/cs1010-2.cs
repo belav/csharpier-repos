@@ -3,7 +3,7 @@
 
 class Foo
 {
-    static char c ='
+	static char c ='
 ';
 }
 

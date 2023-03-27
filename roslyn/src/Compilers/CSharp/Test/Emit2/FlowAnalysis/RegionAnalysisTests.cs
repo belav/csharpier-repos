@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1811,10 +1811,10 @@ unsafe public class Test
     public delegate int D(int* p);
     public static void Main()
     {
-        int i = 10;
-        int* p = &i;
-        D d = /*<bind>*/delegate { return *p;}/*</bind>*/;
-    }
+		int i = 10;
+		int* p = &i;
+		D d = /*<bind>*/delegate { return *p;}/*</bind>*/;
+	}
 }
 ");
             Assert.Null(GetSymbolNamesJoined(analysis.AlwaysAssigned));
@@ -2700,15 +2700,15 @@ class C
             var analysis = CompileAndAnalyzeDataFlowConstructorInitializer(@"
 public class BaseX
 {
-    public BaseX(out int ix, ref string i, in int s, in int s2, out int rrr)
-    {
-    }
+	public BaseX(out int ix, ref string i, in int s, in int s2, out int rrr)
+	{
+	}
 }
-    
+	
 public class X : BaseX
 {
-    public X(int r, out int ix, out int x, ref int i)/*<bind>*/  : 
-        base(out ix, ref CalcValue(""ctor"", out x), CalcInt(""int"", out var y) + CalcInt(""int2"", out var y2),
+	public X(int r, out int ix, out int x, ref int i)/*<bind>*/  : 
+		base(out ix, ref CalcValue(""ctor"", out x), CalcInt(""int"", out var y) + CalcInt(""int2"", out var y2),
         x + y + r + y2 + i++, out var rrr)
         /*</bind>*/
     {
@@ -3716,7 +3716,7 @@ class C {
         int green, blue, red, yellow, brown;
         @green = 1;
         blu\u0065 = 2;
-        re?d = 3;
+        re܏d = 3;
         yellow\uFFF9 = 4;
         @brown\uFFF9 = 5;
 /*</bind>*/
@@ -9188,12 +9188,12 @@ class C {
             var analysis = CompileAndAnalyzeDataFlowExpression(@"
 class C
 {
-    public void F(int x)
-    {
-        int a = 1, y = 2;
-        var b = stackalloc int[] /*<bind>*/{ a + x + 3 } /*</bind>*/;
-        int c = a + 4 + y;
-    }
+	public void F(int x)
+	{
+		int a = 1, y = 2;
+		var b = stackalloc int[] /*<bind>*/{ a + x + 3 } /*</bind>*/;
+		int c = a + 4 + y;
+	}
 }
 ");
             Assert.Equal("x, a", GetSymbolNamesJoined(analysis.DataFlowsIn));
@@ -9206,18 +9206,18 @@ class C
 #nullable enable
 unsafe class C
 {
-    void F()
-    {
+	void F()
+	{
         bool b = true;
-        var c = stackalloc int[] { b ? M(out var x) : x };
-    }
+		var c = stackalloc int[] { b ? M(out var x) : x };
+	}
     static int M(out int i) => throw null!;
 }
 ", options: TestOptions.UnsafeDebugDll);
 
             comp.VerifyDiagnostics(
                 // (8,49): error CS0165: Use of unassigned local variable 'x'
-                //         var c = stackalloc int[] { b ? M(out var x) : x };
+                // 		var c = stackalloc int[] { b ? M(out var x) : x };
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "x").WithArguments("x").WithLocation(8, 49)
                 );
         }
@@ -9245,7 +9245,7 @@ internal static class NoExtensionMethods
         Console.WriteLine(((object)42).AsFunc()());
     }
 }
-    ");
+	");
             Assert.True(results.Succeeded);
             Assert.Null(GetSymbolNamesJoined(results.Captured));
             Assert.Null(GetSymbolNamesJoined(results.CapturedInside));
@@ -9347,7 +9347,7 @@ static class Extension
 {
     public static string ExtensionMethod(this string s) => throw null;
 }
-    ");
+	");
             comp.VerifyDiagnostics(
                 // (4,42): error CS0165: Use of unassigned local variable 'i'
                 // _ = new Func<string>((b ? M(out var i) : i.ToString()).ExtensionMethod);

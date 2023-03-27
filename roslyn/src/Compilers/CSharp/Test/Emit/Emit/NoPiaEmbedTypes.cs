@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1128,32 +1128,32 @@ class UsePia4
 {
     public int M1(ITest21 x)
     {
-    return x.P1;
+	return x.P1;
     }
 
     public void M2(ITest22 x)
     {
-    x.P2 = 1;
+	x.P2 = 1;
     }
 
     public int M3(ITest23 x)
     {
-    return x.P3;
+	return x.P3;
     }
 
     public void M4(ITest24 x)
     {
-    x.P4 = 1;
+	x.P4 = 1;
     }
 
     public void M5(ITest25 x)
     {
-    x.E1 += null;
+	x.E1 += null;
     }
 
     public void M6(ITest26 x)
     {
-    x.E2 -= null;
+	x.E2 -= null;
     }
 }
 ";
@@ -2177,7 +2177,7 @@ class UsePia
 
     public void Test(Interface1_Event x)
     {
-        x.Goo += Handler;    
+    	x.Goo += Handler;	
     }
 
     void Handler()
@@ -2293,7 +2293,7 @@ class UsePia
 
     public void Test(Interface1 x)
     {
-        x.Goo -= Handler;    
+    	x.Goo -= Handler;	
     }
 
     void Handler()
@@ -2372,7 +2372,7 @@ class UsePia
 
     public void Test(Interface1_Event x)
     {
-        x.Goo -= Handler;    
+    	x.Goo -= Handler;	
     }
 
     void Handler()
@@ -2382,7 +2382,7 @@ class UsePia
 
             DiagnosticDescription[] expected = {
                 // (10,6): error CS1766: Source interface 'InterfaceEvents' is missing method 'Goo' which is required to embed event 'Interface1_Event.Goo'.
-                //         x.Goo -= Handler;    
+                //     	x.Goo -= Handler;	
                 Diagnostic(ErrorCode.ERR_MissingMethodOnSourceInterface, "x.Goo -= Handler").WithArguments("InterfaceEvents", "Goo", "Interface1_Event.Goo")
                                                };
 
@@ -2441,7 +2441,7 @@ class UsePia
 {
     void M1(Interface1_Event x1)
     {
-        x1.E += Handler;
+    	x1.E += Handler;
     }
     void M2(Interface2_Event x2)
     {
@@ -2451,7 +2451,7 @@ class UsePia
     }
     void M4(Interface4_Event x4)
     {
-        x4.E += Handler;
+    	x4.E += Handler;
     }
     void Handler()
     {
@@ -2460,10 +2460,10 @@ class UsePia
 
             DiagnosticDescription[] expected = {
                 // (6,6): error CS1767: Interface 'Interface1_Event' has an invalid source interface which is required to embed event 'Interface1_Event.E'.
-                //         x1.E += Handler;
+                //     	x1.E += Handler;
                 Diagnostic(ErrorCode.ERR_MissingSourceInterface, "x1.E += Handler").WithArguments("Interface1_Event", "Interface1_Event.E").WithLocation(6, 6),
                 // (16,6): error CS1767: Interface 'Interface4_Event' has an invalid source interface which is required to embed event 'Interface4_Event.E'.
-                //         x4.E += Handler;
+                //     	x4.E += Handler;
                 Diagnostic(ErrorCode.ERR_MissingSourceInterface, "x4.E += Handler").WithArguments("Interface4_Event", "Interface4_Event.E").WithLocation(16, 6)
                                                };
 
@@ -2511,7 +2511,7 @@ class UsePia
 
     public void Test(Interface1_Event x)
     {
-        x.Goo -= Handler;    
+    	x.Goo -= Handler;	
     }
 
     void Handler()
@@ -2521,7 +2521,7 @@ class UsePia
 
             DiagnosticDescription[] expected = {
                 // (10,6): error CS1756: Interop type 'Interface1_Event' cannot be embedded because it is missing the required 'System.Runtime.InteropServices.ComImportAttribute' attribute.
-                //         x.Goo -= Handler;    
+                //     	x.Goo -= Handler;	
                 Diagnostic(ErrorCode.ERR_InteropTypeMissingAttribute, "x.Goo -= Handler").WithArguments("Interface1_Event", "System.Runtime.InteropServices.ComImportAttribute")
                                                };
 
@@ -2626,7 +2626,7 @@ class UsePia
 
     public void Test(Interface1_Event x)
     {
-        x.Goo -= Handler;    
+    	x.Goo -= Handler;	
     }
 
     void Handler()
@@ -2636,7 +2636,7 @@ class UsePia
 
             DiagnosticDescription[] expected = {
                 // (10,6): error CS1756: Interop type 'Interface1_Event' cannot be embedded because it is missing the required 'System.Runtime.InteropServices.GuidAttribute' attribute.
-                //         x.Goo -= Handler;    
+                //     	x.Goo -= Handler;	
                 Diagnostic(ErrorCode.ERR_InteropTypeMissingAttribute, "x.Goo -= Handler").WithArguments("Interface1_Event", "System.Runtime.InteropServices.GuidAttribute")
                                                };
 
@@ -3677,7 +3677,7 @@ class UsePia5
 
     public void M1(ITest33 y)
     {
-    y.M1(null);
+	y.M1(null);
     }
 } 
 
@@ -4224,7 +4224,7 @@ class UsePia
 
     public void M1(ITest33 x, dynamic y)
     {
-    var z = x[y];
+	var z = x[y];
     }
 } 
 ";
@@ -4284,7 +4284,7 @@ class UsePia
 
     public void M1(ITest33 x, dynamic y)
     {
-    x[y] = 1;
+	x[y] = 1;
     }
 } 
 ";
@@ -4344,7 +4344,7 @@ class UsePia
 
     public void M1(ITest33 x, dynamic y)
     {
-    x.M1(y);
+	x.M1(y);
     }
 } 
 ";
@@ -4410,7 +4410,7 @@ class UsePia
 
     public void M1(dynamic y)
     {
-    var z = new ITest33  { y };
+	var z = new ITest33  { y };
     }
 } 
 ";
@@ -5593,7 +5593,7 @@ class UsePia
 
     public void Test(Interface1_Event x)
     {
-        x.Goo += Handler;    
+    	x.Goo += Handler;	
     }
 
     void Handler()
@@ -5606,7 +5606,7 @@ class UsePia
 
             DiagnosticDescription[] expected = {
                 // (10,6): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.ComAwareEventInfo..ctor'
-                //         x.Goo += Handler;    
+                //     	x.Goo += Handler;	
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "x.Goo += Handler").WithArguments("System.Runtime.InteropServices.ComAwareEventInfo", ".ctor").WithLocation(10, 6)
                                                };
 

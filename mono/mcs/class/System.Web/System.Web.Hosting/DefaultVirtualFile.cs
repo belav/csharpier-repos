@@ -2,7 +2,7 @@
 // System.Web.Hosting.DefaultVirtualFile
 //
 // Author:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 
 //
@@ -34,17 +34,17 @@ using System.IO;
 
 namespace System.Web.Hosting {
 
-    class DefaultVirtualFile : VirtualFile
-    {
-        internal DefaultVirtualFile (string virtualPath)
-            : base (virtualPath)
-        {
-        }
+	class DefaultVirtualFile : VirtualFile
+	{
+		internal DefaultVirtualFile (string virtualPath)
+			: base (virtualPath)
+		{
+		}
 
-        public override Stream Open ()
-        {
-            return File.OpenRead (HostingEnvironment.MapPath (VirtualPath));
-        }
-    }
+		public override Stream Open ()
+		{
+			return File.OpenRead (HostingEnvironment.MapPath (VirtualPath));
+		}
+	}
 }
 

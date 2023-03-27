@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc.
 //
 // Authors:
-//    Jonathan Chambers    jonathan.chambers@ansys.com
+//	Jonathan Chambers	jonathan.chambers@ansys.com
 //
 
 
@@ -29,12 +29,12 @@
 using System;
 namespace System.Windows.Forms.PropertyGridInternal
 {
-    public interface IRootGridEntry
-    {
-        System.ComponentModel.AttributeCollection BrowsableAttributes { get; set; }
+	public interface IRootGridEntry
+	{
+		System.ComponentModel.AttributeCollection BrowsableAttributes { get; set; }
 
-        void ShowCategories ( bool showCategories );
+		void ShowCategories ( bool showCategories );
 
-        void ResetBrowsableAttributes ();
-    }
+		void ResetBrowsableAttributes ();
+	}
 }

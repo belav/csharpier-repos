@@ -1,4 +1,4 @@
-// 
+﻿// 
 // IDataServiceQueryProvider.cs
 //  
 // Author:
@@ -31,15 +31,15 @@ using System.Linq;
 
 namespace System.Data.Services.Providers
 {
-    public interface IDataServiceQueryProvider
-    {
-        object CurrentDataSource { get; set; }
-        bool IsNullPropagationRequired { get; }
-        IQueryable GetQueryRootForResourceSet (ResourceSet resourceSet);
-        ResourceType GetResourceType (object target);
-        object GetPropertyValue (object target, ResourceProperty resourceProperty);
-        object GetOpenPropertyValue (object target, string propertyName);
-        IEnumerable <KeyValuePair <string, object>> GetOpenPropertyValues (object target);
-        object InvokeServiceOperation (ServiceOperation serviceOperation, object[] parameters);
-    }
+	public interface IDataServiceQueryProvider
+	{
+		object CurrentDataSource { get; set; }
+		bool IsNullPropagationRequired { get; }
+		IQueryable GetQueryRootForResourceSet (ResourceSet resourceSet);
+		ResourceType GetResourceType (object target);
+		object GetPropertyValue (object target, ResourceProperty resourceProperty);
+		object GetOpenPropertyValue (object target, string propertyName);
+		IEnumerable <KeyValuePair <string, object>> GetOpenPropertyValues (object target);
+		object InvokeServiceOperation (ServiceOperation serviceOperation, object[] parameters);
+	}
 }

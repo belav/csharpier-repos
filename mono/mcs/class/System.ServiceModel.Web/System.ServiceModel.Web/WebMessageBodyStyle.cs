@@ -2,7 +2,7 @@
 // WebMessageBodyStyle.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -27,11 +27,11 @@
 //
 namespace System.ServiceModel.Web
 {
-    public enum WebMessageBodyStyle
-    {
-        Bare,
-        Wrapped,
-        WrappedRequest,
-        WrappedResponse,
-    }
+	public enum WebMessageBodyStyle
+	{
+		Bare,
+		Wrapped,
+		WrappedRequest,
+		WrappedResponse,
+	}
 }

@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------
+﻿//---------------------------------------------------------------------
 // <copyright file="OrderByLifter.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -471,7 +471,7 @@ namespace System.Data.Objects.ELinq
                 internal override DbExpression Skip(DbExpression k)
                 {
                     // source.Skip(k, o).Limit(k2).Project(p).Skip(k3) ->
-                    // source.Skip(k + k3, o).Limit(k2 � k3).Project(p) when k, k2 and k3 are constants
+                    // source.Skip(k + k3, o).Limit(k2 – k3).Project(p) when k, k2 and k3 are constants
                     // otherwise -> source.Skip(k, o).Limit(k2).Skip(k3, o).Project(p)
                     if (_skip.Count.ExpressionKind == DbExpressionKind.Constant &&
                         _limit.Limit.ExpressionKind == DbExpressionKind.Constant &&

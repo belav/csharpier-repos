@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,62 +28,62 @@ using System.Windows;
 
 namespace System.Diagnostics {
 
-    public static class PresentationTraceSources {
-        public static readonly DependencyProperty TraceLevelProperty;
+	public static class PresentationTraceSources {
+		public static readonly DependencyProperty TraceLevelProperty;
 
-        public static TraceSource AnimationSource {
-            get { throw new NotImplementedException (); }
-        }
+		public static TraceSource AnimationSource {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static TraceSource DataBindingSource {
-            get { throw new NotImplementedException (); }
-        }
+		public static TraceSource DataBindingSource {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static TraceSource DependencyPropertySource {
-            get { throw new NotImplementedException (); }
-        }
+		public static TraceSource DependencyPropertySource {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static TraceSource DocumentsSource {
-            get { throw new NotImplementedException (); }
-        }
+		public static TraceSource DocumentsSource {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static TraceSource FreezableSource {
-            get { throw new NotImplementedException (); }
-        }
+		public static TraceSource FreezableSource {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static TraceSource HwndHostSource {
-            get { throw new NotImplementedException (); }
-        }
+		public static TraceSource HwndHostSource {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static TraceSource MarkupSource {
-            get { throw new NotImplementedException (); }
-        }
+		public static TraceSource MarkupSource {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static TraceSource NameScopeSource {
-            get { throw new NotImplementedException (); }
-        }
+		public static TraceSource NameScopeSource {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static TraceSource ResourceDictionarySource {
-            get { throw new NotImplementedException (); }
-        }
+		public static TraceSource ResourceDictionarySource {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static TraceSource RoutedEventSource {
-            get { throw new NotImplementedException (); }
-        }
+		public static TraceSource RoutedEventSource {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static PresentationTraceLevel GetTraceLevel (object element)
-        {
-            throw new NotImplementedException ();
-        }
+		public static PresentationTraceLevel GetTraceLevel (object element)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public static void Refresh ()
-        {
-            throw new NotImplementedException ();
-        }
+		public static void Refresh ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public static void SetTraceLevel (object element, PresentationTraceLevel traceLevel)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public static void SetTraceLevel (object element, PresentationTraceLevel traceLevel)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

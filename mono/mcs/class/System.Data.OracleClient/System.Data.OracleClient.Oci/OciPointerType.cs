@@ -18,9 +18,9 @@
 using System;
 
 namespace System.Data.OracleClient.Oci {
-    internal enum OciPointerType {
-        Name = 0x01,
-        Ref = 0x02,
-        Ptr = 0x03
-    }
+	internal enum OciPointerType {
+		Name = 0x01,
+		Ref = 0x02,
+		Ptr = 0x03
+	}
 }

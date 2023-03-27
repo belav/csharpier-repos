@@ -1,17 +1,17 @@
 // Compiler options: -doc:xml-048.xml -warnaserror
 /// <summary />
 public class A {
-    static void Main () {
-    }
+	static void Main () {
+	}
 
-    /// <summary />
-    public virtual string Level {
-        get { return null; }
-    }
+	/// <summary />
+	public virtual string Level {
+		get { return null; }
+	}
 
-    /// <summary />
-    public virtual void Test () {
-    }
+	/// <summary />
+	public virtual void Test () {
+	}
 }
 
 /// <summary>
@@ -19,12 +19,12 @@ public class A {
 /// <see cref="Test" />
 /// </summary>
 public class B : A {
-    /// <summary />
-    public override string Level {
-        get { return null; }
-    }
+	/// <summary />
+	public override string Level {
+		get { return null; }
+	}
 
-    /// <summary />
-    public override void Test () {
-    }
+	/// <summary />
+	public override void Test () {
+	}
 }

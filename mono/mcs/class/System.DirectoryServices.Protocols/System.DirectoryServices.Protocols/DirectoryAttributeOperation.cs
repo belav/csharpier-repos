@@ -32,10 +32,10 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public enum DirectoryAttributeOperation
-    {
-        Add,
-        Delete,
-        Replace
-    }
+	public enum DirectoryAttributeOperation
+	{
+		Add,
+		Delete,
+		Replace
+	}
 }

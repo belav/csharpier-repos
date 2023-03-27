@@ -8,9 +8,9 @@ class Test {
 }
 
 class T {
-    Stack<Test,Test> a;
+	Stack<Test,Test> a;
 
-    static void Main()
-    {
-    }
+	static void Main()
+	{
+	}
 }

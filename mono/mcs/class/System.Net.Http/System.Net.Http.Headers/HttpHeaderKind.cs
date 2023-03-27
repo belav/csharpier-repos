@@ -2,7 +2,7 @@
 // HttpHeaderKind.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2011 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,12 +28,12 @@
 
 namespace System.Net.Http.Headers
 {
-    [Flags]
-    enum HttpHeaderKind
-    {
-        None = 0,
-        Request = 1,
-        Response = 1 << 1,
-        Content = 1 << 2
-    }
+	[Flags]
+	enum HttpHeaderKind
+	{
+		None = 0,
+		Request = 1,
+		Response = 1 << 1,
+		Content = 1 << 2
+	}
 }

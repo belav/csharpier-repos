@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.ContentTest.cs
 //
 // Author:
-//    Yoni Klein (yonik@mainsoft.com)
+//	Yoni Klein (yonik@mainsoft.com)
 //
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -47,137 +47,137 @@ namespace MonoTests.System.Web.UI.WebControls
 {
 
 
-    class PokerContent : Content
-    {
-        public PokerContent ()
-        {
-            TrackViewState ();
-        }
-        public void DoOnDataBinding ()
-        {
-            base.OnDataBinding(new EventArgs()) ;
-        }
-        public void DoOnInit ()
-        {
-            base.OnInit (new EventArgs ());
-        }
-        public void DoOnLoad ()
-        {
-            base.OnLoad (new EventArgs ());
-        }
-        public void DoOnPreRender ()
-        {
-            base.OnPreRender (new EventArgs ());
-        }
-        public void DoOnUnLoad ()
-        {
-            base.OnUnload (new EventArgs ());
-        }
-    }
+	class PokerContent : Content
+	{
+		public PokerContent ()
+		{
+			TrackViewState ();
+		}
+		public void DoOnDataBinding ()
+		{
+			base.OnDataBinding(new EventArgs()) ;
+		}
+		public void DoOnInit ()
+		{
+			base.OnInit (new EventArgs ());
+		}
+		public void DoOnLoad ()
+		{
+			base.OnLoad (new EventArgs ());
+		}
+		public void DoOnPreRender ()
+		{
+			base.OnPreRender (new EventArgs ());
+		}
+		public void DoOnUnLoad ()
+		{
+			base.OnUnload (new EventArgs ());
+		}
+	}
 
-    
-    [TestFixture]
-    public class ContentTest
-    {
-        [Test]
-        public void Content_DefaultProperty ()
-        {
-            PokerContent pc = new PokerContent();
-            Assert.AreEqual (String.Empty, pc.ContentPlaceHolderID, "ContentPlaceHolderID");
-        }
+	
+	[TestFixture]
+	public class ContentTest
+	{
+		[Test]
+		public void Content_DefaultProperty ()
+		{
+			PokerContent pc = new PokerContent();
+			Assert.AreEqual (String.Empty, pc.ContentPlaceHolderID, "ContentPlaceHolderID");
+		}
 
-        private bool OnDataBinding;
-        private bool OnInit;
-        private bool OnLoad;
-        private bool OnPreRender;
-        private bool OnUnLoad;
+		private bool OnDataBinding;
+		private bool OnInit;
+		private bool OnLoad;
+		private bool OnPreRender;
+		private bool OnUnLoad;
 
-        private void OnUnLoadHendler (Object sender, EventArgs args)
-        {
-            OnUnLoad = true;
-        }
+		private void OnUnLoadHendler (Object sender, EventArgs args)
+		{
+			OnUnLoad = true;
+		}
 
-        private void OnPreRenderHendler (Object sender, EventArgs args)
-        {
-            OnPreRender = true;
-        }
+		private void OnPreRenderHendler (Object sender, EventArgs args)
+		{
+			OnPreRender = true;
+		}
 
-        private void OnLoadHandler (Object sender, EventArgs args)
-        {
-            OnLoad = true;
-        }
+		private void OnLoadHandler (Object sender, EventArgs args)
+		{
+			OnLoad = true;
+		}
 
-        private void OnDataBindingHandler (Object sender, EventArgs args)
-        {
-            OnDataBinding = true;
-        }
-        private void OnInitHandler (Object sender, EventArgs args)
-        {
-            OnInit = true;
-        }
+		private void OnDataBindingHandler (Object sender, EventArgs args)
+		{
+			OnDataBinding = true;
+		}
+		private void OnInitHandler (Object sender, EventArgs args)
+		{
+			OnInit = true;
+		}
 
-        [Test]
-        public void Events_DataBinding ()
-        {
-            PokerContent pc = new PokerContent ();
-            pc.DataBinding += new EventHandler (OnDataBindingHandler);
-            // DataBiding event
-            Assert.AreEqual (false, OnDataBinding, "BeforeDataBinding");
-            pc.DoOnDataBinding ();
-            Assert.AreEqual (true, OnDataBinding, "AfterDataBinding");
-        }
+		[Test]
+		public void Events_DataBinding ()
+		{
+			PokerContent pc = new PokerContent ();
+			pc.DataBinding += new EventHandler (OnDataBindingHandler);
+			// DataBiding event
+			Assert.AreEqual (false, OnDataBinding, "BeforeDataBinding");
+			pc.DoOnDataBinding ();
+			Assert.AreEqual (true, OnDataBinding, "AfterDataBinding");
+		}
 
-        [Test]
-        public void Events_Init ()
-        {
-            PokerContent pc = new PokerContent ();
-            pc.Init += new EventHandler (OnInitHandler);
-            // Init event
-            Assert.AreEqual (false, OnInit, "BeforeInit");
-            pc.DoOnInit ();
-            Assert.AreEqual (true, OnInit, "AfterInit");
-        }
+		[Test]
+		public void Events_Init ()
+		{
+			PokerContent pc = new PokerContent ();
+			pc.Init += new EventHandler (OnInitHandler);
+			// Init event
+			Assert.AreEqual (false, OnInit, "BeforeInit");
+			pc.DoOnInit ();
+			Assert.AreEqual (true, OnInit, "AfterInit");
+		}
 
-        [Test]
-        public void Events_PreRender ()
-        {
-            PokerContent pc = new PokerContent ();
-            pc.PreRender += new EventHandler (OnPreRenderHendler);
-            // PreRender event
-            Assert.AreEqual (false, OnPreRender, "BeforePreRender");
-            pc.DoOnPreRender ();
-            Assert.AreEqual (true, OnPreRender, "AfterPreRender");
-        }
+		[Test]
+		public void Events_PreRender ()
+		{
+			PokerContent pc = new PokerContent ();
+			pc.PreRender += new EventHandler (OnPreRenderHendler);
+			// PreRender event
+			Assert.AreEqual (false, OnPreRender, "BeforePreRender");
+			pc.DoOnPreRender ();
+			Assert.AreEqual (true, OnPreRender, "AfterPreRender");
+		}
 
-        [Test]
-        public void Events_Load ()
-        {
-            PokerContent pc = new PokerContent ();
-            pc.Load += new EventHandler (OnLoadHandler);
-            // Load event
-            Assert.AreEqual (false, OnLoad, "BeforeLoad");
-            pc.DoOnLoad ();
-            Assert.AreEqual (true, OnLoad, "AfterLoad");
-        }
+		[Test]
+		public void Events_Load ()
+		{
+			PokerContent pc = new PokerContent ();
+			pc.Load += new EventHandler (OnLoadHandler);
+			// Load event
+			Assert.AreEqual (false, OnLoad, "BeforeLoad");
+			pc.DoOnLoad ();
+			Assert.AreEqual (true, OnLoad, "AfterLoad");
+		}
 
-        [Test]
-        public void Events_Unload ()
-        {
-            PokerContent pc = new PokerContent ();
-            pc.Unload += new EventHandler (OnUnLoadHendler);
-            // Unload event
-            Assert.AreEqual (false, OnUnLoad, "BeforeUnLoad");
-            pc.DoOnUnLoad ();
-            Assert.AreEqual (true, OnUnLoad, "AfterUnLoad");
-        }
-            
-        [Test]
-        [ExpectedException (typeof(NotSupportedException))]
-        public void Content_PropertyExeption ()
-        {
-            PokerContent pc = new PokerContent ();
-            pc.ContentPlaceHolderID = "fake";
-        }
+		[Test]
+		public void Events_Unload ()
+		{
+			PokerContent pc = new PokerContent ();
+			pc.Unload += new EventHandler (OnUnLoadHendler);
+			// Unload event
+			Assert.AreEqual (false, OnUnLoad, "BeforeUnLoad");
+			pc.DoOnUnLoad ();
+			Assert.AreEqual (true, OnUnLoad, "AfterUnLoad");
+		}
+			
+		[Test]
+		[ExpectedException (typeof(NotSupportedException))]
+		public void Content_PropertyExeption ()
+		{
+			PokerContent pc = new PokerContent ();
+			pc.ContentPlaceHolderID = "fake";
+		}
 
-    }
+	}
 }

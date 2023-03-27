@@ -2,7 +2,7 @@
 // NetTcpBindingCollectionElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public partial class NetTcpBindingCollectionElement
-         : StandardBindingCollectionElement<NetTcpBinding, NetTcpBindingElement>
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
+	[MonoTODO]
+	public partial class NetTcpBindingCollectionElement
+		 : StandardBindingCollectionElement<NetTcpBinding, NetTcpBindingElement>
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
 
-        static NetTcpBindingCollectionElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static NetTcpBindingCollectionElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public NetTcpBindingCollectionElement ()
-        {
-        }
-
-
-        // Properties
+		public NetTcpBindingCollectionElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+
+	}
 
 }

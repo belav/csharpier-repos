@@ -28,14 +28,14 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-    [TestFixture]
-    public class NamespaceDeclarationTest
-    {
-        [Test]
-        public void ConstructorNull ()
-        {
-            // allowed.
-            new NamespaceDeclaration (null, null);
-        }
-    }
+	[TestFixture]
+	public class NamespaceDeclarationTest
+	{
+		[Test]
+		public void ConstructorNull ()
+		{
+			// allowed.
+			new NamespaceDeclaration (null, null);
+		}
+	}
 }

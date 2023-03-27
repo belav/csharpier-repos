@@ -2,7 +2,7 @@
 // System.Web.UI.Design.DataSourceBooleanViewSchemaConverter
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -35,18 +35,18 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design {
 
-    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-    public class DataSourceBooleanViewSchemaConverter : DataSourceViewSchemaConverter
-    {
-        public DataSourceBooleanViewSchemaConverter ()
-        {
-        }
+	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+	public class DataSourceBooleanViewSchemaConverter : DataSourceViewSchemaConverter
+	{
+		public DataSourceBooleanViewSchemaConverter ()
+		{
+		}
 
-        [MonoTODO]
-        public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

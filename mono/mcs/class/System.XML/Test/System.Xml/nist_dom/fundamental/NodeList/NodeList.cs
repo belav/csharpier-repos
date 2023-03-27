@@ -51,7 +51,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0001N()
+	public void core0001N()
         {
             string computedValue = "";
             string expectedValue = "employeeId";
@@ -103,7 +103,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0002N()
+	public void core0002N()
         {
             string computedValue = "";
             string expectedValue = "salary";
@@ -155,7 +155,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0003N()
+	public void core0003N()
         {
             string computedValue = "";
             string expectedValue = "employeeId";
@@ -207,7 +207,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0004N()
+	public void core0004N()
         {
             string computedValue = "";
             string expectedValue = "address";
@@ -256,7 +256,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0005N()
+	public void core0005N()
         {
             object computedValue = null;
             object expectedValue = null; 
@@ -305,7 +305,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0006N()
+	public void core0006N()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -352,7 +352,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0007N()
+	public void core0007N()
         {
             string computedValue = "0";
             string expectedValue = "6";
@@ -399,7 +399,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0008N()
+	public void core0008N()
         {
             string computedValue = "0";
             string expectedValue = "0";
@@ -447,7 +447,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0009N()
+	public void core0009N()
         {
             string computedValue = "";
             string expectedValue = "employeeId name position salary gender address ";

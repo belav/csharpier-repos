@@ -23,27 +23,27 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.Drawing;
 
 namespace System.Windows.Forms
 {
-    public class ToolStripSeparatorRenderEventArgs : ToolStripItemRenderEventArgs
-    {
-        private bool vertical;
+	public class ToolStripSeparatorRenderEventArgs : ToolStripItemRenderEventArgs
+	{
+		private bool vertical;
 
-        public ToolStripSeparatorRenderEventArgs (Graphics g, ToolStripSeparator separator, bool vertical)
-            : base (g, separator)
-        {
-            this.vertical = vertical;
-        }
-        
-        #region Public Properties
-        public bool Vertical {
-            get { return this.vertical; }
-        }
-        #endregion
-    }
+		public ToolStripSeparatorRenderEventArgs (Graphics g, ToolStripSeparator separator, bool vertical)
+			: base (g, separator)
+		{
+			this.vertical = vertical;
+		}
+		
+		#region Public Properties
+		public bool Vertical {
+			get { return this.vertical; }
+		}
+		#endregion
+	}
 }

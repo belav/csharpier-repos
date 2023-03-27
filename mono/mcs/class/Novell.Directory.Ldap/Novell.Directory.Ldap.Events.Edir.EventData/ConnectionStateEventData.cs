@@ -45,7 +45,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strConnectionDN;
+	return strConnectionDN;
       }
     }
 
@@ -54,7 +54,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return old_flags;
+	return old_flags;
       }
     }
 
@@ -63,7 +63,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return new_flags;
+	return new_flags;
       }
     }
 
@@ -72,7 +72,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return source_module;
+	return source_module;
       }
     }
 

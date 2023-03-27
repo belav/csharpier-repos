@@ -30,23 +30,23 @@ using System;
 
 namespace System.Configuration
 {
-    public class PositiveTimeSpanValidator: ConfigurationValidatorBase
-    {
-        public PositiveTimeSpanValidator ()
-        {
-        }        
-        
-        public override bool CanValidate (Type type)
-        {
-            return type == typeof(TimeSpan);
-        }
+	public class PositiveTimeSpanValidator: ConfigurationValidatorBase
+	{
+		public PositiveTimeSpanValidator ()
+		{
+		}		
+		
+		public override bool CanValidate (Type type)
+		{
+			return type == typeof(TimeSpan);
+		}
 
-        public override void Validate (object value)
-        {
-            TimeSpan s = (TimeSpan) value;
-            if (s <= new TimeSpan (0))
-                throw new ArgumentException ("The time span value must be positive");
-        }
-    }
+		public override void Validate (object value)
+		{
+			TimeSpan s = (TimeSpan) value;
+			if (s <= new TimeSpan (0))
+				throw new ArgumentException ("The time span value must be positive");
+		}
+	}
 }
 

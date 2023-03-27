@@ -42,109 +42,109 @@ using System.Net.Security;
 
 namespace Mono.Net.Security
 {
-    //
-    // Internal APIs which are used by Mono.Security.dll to avoid using reflection.
-    //
-    internal static class NoReflectionHelper
-    {
-        internal static object GetDefaultValidator (object settings)
-        {
-            #if SECURITY_DEP
-            return ChainValidationHelper.GetDefaultValidator ((MSI.MonoTlsSettings)settings);
-            #else
-            throw new NotSupportedException ();
-            #endif
-        }
+	//
+	// Internal APIs which are used by Mono.Security.dll to avoid using reflection.
+	//
+	internal static class NoReflectionHelper
+	{
+		internal static object GetDefaultValidator (object settings)
+		{
+			#if SECURITY_DEP
+			return ChainValidationHelper.GetDefaultValidator ((MSI.MonoTlsSettings)settings);
+			#else
+			throw new NotSupportedException ();
+			#endif
+		}
 
-        internal static object GetProvider ()
-        {
-            #if SECURITY_DEP
-            return MonoTlsProviderFactory.GetProvider ();
-            #else
-            throw new NotSupportedException ();
-            #endif
-        }
+		internal static object GetProvider ()
+		{
+			#if SECURITY_DEP
+			return MonoTlsProviderFactory.GetProvider ();
+			#else
+			throw new NotSupportedException ();
+			#endif
+		}
 
-        internal static bool IsInitialized {
-            get {
-                #if SECURITY_DEP
-                return MonoTlsProviderFactory.IsInitialized;
-                #else
-                throw new NotSupportedException ();
-                #endif
-            }
-        }
+		internal static bool IsInitialized {
+			get {
+				#if SECURITY_DEP
+				return MonoTlsProviderFactory.IsInitialized;
+				#else
+				throw new NotSupportedException ();
+				#endif
+			}
+		}
 
-        internal static void Initialize ()
-        {
-            #if SECURITY_DEP
-            MonoTlsProviderFactory.Initialize ();
-            #else
-            throw new NotSupportedException ();
-            #endif
-        }
+		internal static void Initialize ()
+		{
+			#if SECURITY_DEP
+			MonoTlsProviderFactory.Initialize ();
+			#else
+			throw new NotSupportedException ();
+			#endif
+		}
 
-        internal static void Initialize (string provider)
-        {
-            #if SECURITY_DEP
-            MonoTlsProviderFactory.Initialize (provider);
-            #else
-            throw new NotSupportedException ();
-            #endif
-        }
+		internal static void Initialize (string provider)
+		{
+			#if SECURITY_DEP
+			MonoTlsProviderFactory.Initialize (provider);
+			#else
+			throw new NotSupportedException ();
+			#endif
+		}
 
-        internal static HttpWebRequest CreateHttpsRequest (Uri requestUri, object provider, object settings)
-        {
-            #if SECURITY_DEP
-            return new HttpWebRequest (requestUri, (MobileTlsProvider)provider, (MSI.MonoTlsSettings)settings);
-            #else
-            throw new NotSupportedException ();
-            #endif
-        }
+		internal static HttpWebRequest CreateHttpsRequest (Uri requestUri, object provider, object settings)
+		{
+			#if SECURITY_DEP
+			return new HttpWebRequest (requestUri, (MobileTlsProvider)provider, (MSI.MonoTlsSettings)settings);
+			#else
+			throw new NotSupportedException ();
+			#endif
+		}
 
-        internal static object CreateHttpListener (object certificate, object provider, object settings)
-        {
-            #if SECURITY_DEP
-            return new HttpListener ((X509Certificate)certificate, (MSI.MonoTlsProvider)provider, (MSI.MonoTlsSettings)settings);
-            #else
-            throw new NotSupportedException ();
-            #endif
-        }
+		internal static object CreateHttpListener (object certificate, object provider, object settings)
+		{
+			#if SECURITY_DEP
+			return new HttpListener ((X509Certificate)certificate, (MSI.MonoTlsProvider)provider, (MSI.MonoTlsSettings)settings);
+			#else
+			throw new NotSupportedException ();
+			#endif
+		}
 
-        internal static object GetMonoSslStream (SslStream stream)
-        {
-            #if SECURITY_DEP
-            return stream.Impl;
-            #else
-            throw new NotSupportedException ();
-            #endif
-        }
+		internal static object GetMonoSslStream (SslStream stream)
+		{
+			#if SECURITY_DEP
+			return stream.Impl;
+			#else
+			throw new NotSupportedException ();
+			#endif
+		}
 
-        internal static object GetMonoSslStream (HttpListenerContext context)
-        {
+		internal static object GetMonoSslStream (HttpListenerContext context)
+		{
 #if SECURITY_DEP
-            return context.Connection.SslStream?.Impl;
+			return context.Connection.SslStream?.Impl;
 #else
-            throw new NotSupportedException ();
+			throw new NotSupportedException ();
 #endif
-        }
+		}
 
-        internal static bool IsProviderSupported (string name)
-        {
-            #if SECURITY_DEP
-            return MonoTlsProviderFactory.IsProviderSupported (name);
-            #else
-            throw new NotSupportedException ();
-            #endif
-        }
+		internal static bool IsProviderSupported (string name)
+		{
+			#if SECURITY_DEP
+			return MonoTlsProviderFactory.IsProviderSupported (name);
+			#else
+			throw new NotSupportedException ();
+			#endif
+		}
 
-        internal static object GetProvider (string name)
-        {
-            #if SECURITY_DEP
-            return MonoTlsProviderFactory.GetProvider (name);
-            #else
-            throw new NotSupportedException ();
-            #endif
-        }
-    }
+		internal static object GetProvider (string name)
+		{
+			#if SECURITY_DEP
+			return MonoTlsProviderFactory.GetProvider (name);
+			#else
+			throw new NotSupportedException ();
+			#endif
+		}
+	}
 }

@@ -31,8 +31,8 @@ using System.Security.Permissions;
 
 namespace System.Web.UI {
 
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
         public sealed class StateItem
         {
                 bool _isDirty = false;

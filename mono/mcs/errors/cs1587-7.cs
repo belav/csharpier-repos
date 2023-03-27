@@ -9,6 +9,6 @@ namespace TopNS
 /// invalid comment on using alias directive inside namespace.
 using Hoge = System.Xml.XmlDocument;
 
-    enum Foo {
-    }
+	enum Foo {
+	}
 }

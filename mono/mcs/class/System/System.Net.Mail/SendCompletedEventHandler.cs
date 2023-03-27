@@ -2,7 +2,7 @@
 // System.Net.Mail.SendCompletedEventHandler.cs
 //
 // Author:
-//    Tim Coleman (tim@timcoleman.com)
+//	Tim Coleman (tim@timcoleman.com)
 //
 // Copyright (C) Tim Coleman, 2004
 //
@@ -32,6 +32,6 @@ using System.ComponentModel;
 
 namespace System.Net.Mail 
 {
-    public delegate void SendCompletedEventHandler (object sender, AsyncCompletedEventArgs e);
+	public delegate void SendCompletedEventHandler (object sender, AsyncCompletedEventArgs e);
 }
 

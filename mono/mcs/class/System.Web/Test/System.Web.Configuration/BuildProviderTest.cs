@@ -1,9 +1,9 @@
 //
 // BuildProviderTest.cs 
-//    - unit tests for System.Web.Configuration.BuildProvider
+//	- unit tests for System.Web.Configuration.BuildProvider
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,52 +38,52 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-    [TestFixture]
-    public class BuildProviderTest  {
+	[TestFixture]
+	public class BuildProviderTest  {
 
-        [Test]
-        public void EqualsAndHashCode ()
-        {
-            BuildProvider b1, b2;
+		[Test]
+		public void EqualsAndHashCode ()
+		{
+			BuildProvider b1, b2;
 
-            b1 = new BuildProvider (".hi", "System.Bye");
-            b2 = new BuildProvider (".hi", "System.Bye");
+			b1 = new BuildProvider (".hi", "System.Bye");
+			b2 = new BuildProvider (".hi", "System.Bye");
 
-            Assert.IsTrue (b1.Equals (b2), "A1");
-            Assert.AreEqual (b1.GetHashCode (), b2.GetHashCode (), "A2");
-        }
+			Assert.IsTrue (b1.Equals (b2), "A1");
+			Assert.AreEqual (b1.GetHashCode (), b2.GetHashCode (), "A2");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void ctor_validationFailure1 ()
-        {
-            BuildProvider b = new BuildProvider ("", "hi");
-        }
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void ctor_validationFailure1 ()
+		{
+			BuildProvider b = new BuildProvider ("", "hi");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void ctor_validationFailure2 ()
-        {
-            BuildProvider b = new BuildProvider ("hi", "");
-        }
-        
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void Extension_validationFailure ()
-        {
-            BuildProvider b = new BuildProvider ("hi", "bye");
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void ctor_validationFailure2 ()
+		{
+			BuildProvider b = new BuildProvider ("hi", "");
+		}
+		
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void Extension_validationFailure ()
+		{
+			BuildProvider b = new BuildProvider ("hi", "bye");
 
-            b.Extension = "";
-        }
+			b.Extension = "";
+		}
 
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void Type_validationFailure ()
-        {
-            BuildProvider b = new BuildProvider ("hi", "bye");
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void Type_validationFailure ()
+		{
+			BuildProvider b = new BuildProvider ("hi", "bye");
 
-            b.Type = "";
-        }
-    }
+			b.Type = "";
+		}
+	}
 }
 

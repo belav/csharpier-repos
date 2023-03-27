@@ -30,23 +30,23 @@
 
 namespace System.Web.UI
 {
-    public class ComplexPropertyEntry : BuilderPropertyEntry
-    {
-        internal ComplexPropertyEntry (bool isCollectionItem, bool readOnly)
-        {
-            this.IsCollectionItem = isCollectionItem;
-            this.ReadOnly = readOnly;
-        }
-        
-        public bool IsCollectionItem {
-            get;
-            private set;
-        }
+	public class ComplexPropertyEntry : BuilderPropertyEntry
+	{
+		internal ComplexPropertyEntry (bool isCollectionItem, bool readOnly)
+		{
+			this.IsCollectionItem = isCollectionItem;
+			this.ReadOnly = readOnly;
+		}
+		
+		public bool IsCollectionItem {
+			get;
+			private set;
+		}
 
-        public bool ReadOnly {
-            get;
-            set;
-        }
-    }
+		public bool ReadOnly {
+			get;
+			set;
+		}
+	}
 }
 

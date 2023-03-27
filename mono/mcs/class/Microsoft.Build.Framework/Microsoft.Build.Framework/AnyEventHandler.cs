@@ -28,6 +28,6 @@
 
 
 namespace Microsoft.Build.Framework {
-    public delegate void AnyEventHandler (object sender, BuildEventArgs e);
+	public delegate void AnyEventHandler (object sender, BuildEventArgs e);
 }
 

@@ -23,8 +23,8 @@ public class NullToExistingValue : AutoMapperSpecBase
     }
     protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
-        c.CreateMap<PersonModel, Person>();
-        c.CreateMap<AddressModel, Address>();
+    	c.CreateMap<PersonModel, Person>();
+    	c.CreateMap<AddressModel, Address>();
     });
     [Fact]
     public void Should_overwrite() => Mapper.Map(new PersonModel(), new Person()).TheAddress.ShouldBeNull();

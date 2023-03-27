@@ -32,56 +32,56 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-    [TestFixture]
-    public class OleDbTransaction_Rollback : ADONetTesterClass
-    {
-        public static void Main()
-        {
-            OleDbTransaction_Rollback tc = new OleDbTransaction_Rollback();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OleDbTransaction_Rollback");
-                tc.run();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+	[TestFixture]
+	public class OleDbTransaction_Rollback : ADONetTesterClass
+	{
+		public static void Main()
+		{
+			OleDbTransaction_Rollback tc = new OleDbTransaction_Rollback();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OleDbTransaction_Rollback");
+				tc.run();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            OleDbConnection con = null;
-            OleDbTransaction txn;
-            Exception exp = null;
-            try
-            {
-                BeginCase("OleDbTransaction Rollback");
+		[Test]
+		public void run()
+		{
+			OleDbConnection con = null;
+			OleDbTransaction txn;
+			Exception exp = null;
+			try
+			{
+				BeginCase("OleDbTransaction Rollback");
 
-                //
-                //prepare data
-                base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+				//
+				//prepare data
+				base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
 
-                string Result = "";
-                con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-                con.Open();
-                txn = con.BeginTransaction();
-                OleDbCommand cmd = new OleDbCommand("Update Employees Set LastName = 'StamLastName' Where EmployeeID = 100", con, txn);
-                cmd.ExecuteNonQuery();
-                txn.Rollback();
+				string Result = "";
+				con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+				con.Open();
+				txn = con.BeginTransaction();
+				OleDbCommand cmd = new OleDbCommand("Update Employees Set LastName = 'StamLastName' Where EmployeeID = 100", con, txn);
+				cmd.ExecuteNonQuery();
+				txn.Rollback();
 
-                //
-                //
-                cmd = new OleDbCommand("Select LastName From Employees Where EmployeeID = 100", con);
-                Result = cmd.ExecuteScalar().ToString();
-                Compare(Result,"Last100" );
-                this.Log(Result);
+				//
+				//
+				cmd = new OleDbCommand("Select LastName From Employees Where EmployeeID = 100", con);
+				Result = cmd.ExecuteScalar().ToString();
+				Compare(Result,"Last100" );
+				this.Log(Result);
 
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            if (con.State == ConnectionState.Open) con.Close();
-        }
-    }
+			if (con.State == ConnectionState.Open) con.Close();
+		}
+	}
 }

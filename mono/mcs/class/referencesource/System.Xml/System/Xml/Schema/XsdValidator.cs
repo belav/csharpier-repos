@@ -492,8 +492,8 @@ namespace System.Xml.Schema {
                 schemaInfo.SchemaType = schemaType;
                 if (schemaType == SchemaType.XSD) {
                     if (SchemaCollection.EventHandler == null) {
-            SchemaCollection.EventHandler = this.EventHandler;
-                    }            
+			SchemaCollection.EventHandler = this.EventHandler;
+                    }			
                     SchemaCollection.Add(uri, schemaInfo, parser.XmlSchema, true);
                 }
                 //Add to validator's SchemaInfo

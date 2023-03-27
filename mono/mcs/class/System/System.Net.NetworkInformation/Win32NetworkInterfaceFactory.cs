@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.NetworkInterface
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //      Miguel de Icaza (miguel@novell.com)
 //      Eric Butler (eric@extremeboredom.net)
 //      Marek Habersack (mhabersack@novell.com)
@@ -32,15 +32,15 @@
 //
 #if WIN_PLATFORM
 namespace System.Net.NetworkInformation {
-    internal static class Win32NetworkInterfaceFactoryPal {
-        public static NetworkInterfaceFactory Create ()
-        {
-            Version windowsVer51 = new Version (5, 1);
-            if (Environment.OSVersion.Version >= windowsVer51)
-                return new Win32NetworkInterfaceAPI ();
+	internal static class Win32NetworkInterfaceFactoryPal {
+		public static NetworkInterfaceFactory Create ()
+		{
+			Version windowsVer51 = new Version (5, 1);
+			if (Environment.OSVersion.Version >= windowsVer51)
+				return new Win32NetworkInterfaceAPI ();
 
-            return null;
-        }
-    }
+			return null;
+		}
+	}
 }
 #endif

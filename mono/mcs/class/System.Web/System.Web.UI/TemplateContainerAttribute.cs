@@ -31,32 +31,32 @@ using System.Security.Permissions;
 
 namespace System.Web.UI
 {
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [AttributeUsage (AttributeTargets.Property)]
-    public sealed class TemplateContainerAttribute : Attribute
-    {
-        Type containerType;
-        BindingDirection direction;
-        
-        public TemplateContainerAttribute (Type containerType, BindingDirection bindingDirection)
-        {
-            this.containerType = containerType;
-            this.direction = bindingDirection;
-        }
-        
-        public BindingDirection BindingDirection {
-            get { return direction; }
-        }
-        
-        public TemplateContainerAttribute (Type containerType)
-        {
-            this.containerType = containerType;
-        }
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[AttributeUsage (AttributeTargets.Property)]
+	public sealed class TemplateContainerAttribute : Attribute
+	{
+		Type containerType;
+		BindingDirection direction;
+		
+		public TemplateContainerAttribute (Type containerType, BindingDirection bindingDirection)
+		{
+			this.containerType = containerType;
+			this.direction = bindingDirection;
+		}
+		
+		public BindingDirection BindingDirection {
+			get { return direction; }
+		}
+		
+		public TemplateContainerAttribute (Type containerType)
+		{
+			this.containerType = containerType;
+		}
 
-        public Type ContainerType {
-            get { return containerType; }
-        }
-    }
+		public Type ContainerType {
+			get { return containerType; }
+		}
+	}
 }

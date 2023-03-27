@@ -1,9 +1,9 @@
 //
 // HtmlInputCheckBoxCas.cs 
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlInputCheckBox
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlInputCheckBox
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,23 +37,23 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlInputCheckBoxCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlInputCheckBoxCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HtmlInputCheckBoxTest unit = new HtmlInputCheckBoxTest ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.CleanProperties ();
-            unit.Render ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HtmlInputCheckBoxTest unit = new HtmlInputCheckBoxTest ();
+			unit.DefaultProperties ();
+			unit.NullProperties ();
+			unit.CleanProperties ();
+			unit.Render ();
+		}
 
-        public override Type Type {
-            get { return typeof (HtmlInputCheckBox); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlInputCheckBox); }
+		}
+	}
 }

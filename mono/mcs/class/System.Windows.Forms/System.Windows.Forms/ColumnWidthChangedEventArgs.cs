@@ -23,27 +23,27 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public class ColumnWidthChangedEventArgs : EventArgs
-    {
+	public class ColumnWidthChangedEventArgs : EventArgs
+	{
 
-        private int column_index;
+		private int column_index;
 
-        #region Public Constructors
-        public ColumnWidthChangedEventArgs(int columnIndex) : base ()
-        {
-            this.column_index = columnIndex;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public ColumnWidthChangedEventArgs(int columnIndex) : base ()
+		{
+			this.column_index = columnIndex;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public int ColumnIndex {
-            get { return this.column_index; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public int ColumnIndex {
+			get { return this.column_index; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

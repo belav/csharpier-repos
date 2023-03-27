@@ -35,83 +35,83 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-    [XmlFormatExtension ("header", "http://schemas.xmlsoap.org/wsdl/soap/", typeof (InputBinding), typeof (OutputBinding))]
-    public class SoapHeaderBinding : ServiceDescriptionFormatExtension {
+	[XmlFormatExtension ("header", "http://schemas.xmlsoap.org/wsdl/soap/", typeof (InputBinding), typeof (OutputBinding))]
+	public class SoapHeaderBinding : ServiceDescriptionFormatExtension {
 
-        #region Fields
+		#region Fields
 
-        string encoding;
-        bool mapToProperty;
-        XmlQualifiedName message;
-        string ns;
-        string part;
-        SoapBindingUse use;
+		string encoding;
+		bool mapToProperty;
+		XmlQualifiedName message;
+		string ns;
+		string part;
+		SoapBindingUse use;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
-    
-        public SoapHeaderBinding ()
-        {
-            encoding = String.Empty;
-            mapToProperty = false;
-            message = XmlQualifiedName.Empty;
-            ns = String.Empty;
-            part = String.Empty;
-            use = SoapBindingUse.Default;
-        }
-        
-        #endregion // Constructors
+		#region Constructors
+	
+		public SoapHeaderBinding ()
+		{
+			encoding = String.Empty;
+			mapToProperty = false;
+			message = XmlQualifiedName.Empty;
+			ns = String.Empty;
+			part = String.Empty;
+			use = SoapBindingUse.Default;
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [DefaultValue ("")]
-        [XmlAttribute ("encodingStyle")]
-        public string Encoding {
-            get { return encoding; }
-            set { encoding = value; }
-        }
+		[DefaultValue ("")]
+		[XmlAttribute ("encodingStyle")]
+		public string Encoding {
+			get { return encoding; }
+			set { encoding = value; }
+		}
 
-        [XmlIgnore]
-        public bool MapToProperty {    
-            get { return mapToProperty; }
-            set { mapToProperty = value; }
-        }
+		[XmlIgnore]
+		public bool MapToProperty {	
+			get { return mapToProperty; }
+			set { mapToProperty = value; }
+		}
 
-        [XmlAttribute ("message")]    
-        public XmlQualifiedName Message {
-            get { return message; }
-            set { message = value; }
-        }
+		[XmlAttribute ("message")]	
+		public XmlQualifiedName Message {
+			get { return message; }
+			set { message = value; }
+		}
 
-        [DefaultValue ("")]    
-        [XmlAttribute ("namespace")]    
-        public string Namespace {
-            get { return ns; }
-            set { ns = value; }
-        }
+		[DefaultValue ("")]	
+		[XmlAttribute ("namespace")]	
+		public string Namespace {
+			get { return ns; }
+			set { ns = value; }
+		}
 
-        [XmlAttribute ("part")]
-        public string Part {
-            get { return part; }
-            set { part = value; }
-        }
+		[XmlAttribute ("part")]
+		public string Part {
+			get { return part; }
+			set { part = value; }
+		}
 
-        [DefaultValue (SoapBindingUse.Default)]
-        [XmlAttribute ("use")]
-        public SoapBindingUse Use {
-            get { return use; }
-            set { use = value; }
-        }
+		[DefaultValue (SoapBindingUse.Default)]
+		[XmlAttribute ("use")]
+		public SoapBindingUse Use {
+			get { return use; }
+			set { use = value; }
+		}
 
-        [MonoTODO]
-        [XmlElement ("headerfault")]
-        public SoapHeaderFaultBinding Fault 
-        {
-            get { return null; }
-            set { ; }
-        }
+		[MonoTODO]
+		[XmlElement ("headerfault")]
+		public SoapHeaderFaultBinding Fault 
+		{
+			get { return null; }
+			set { ; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

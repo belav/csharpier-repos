@@ -2,7 +2,7 @@
 // SequenceGenerator.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,37 +31,37 @@ using System.Collections.Generic;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.StackAnalysis {
-    class SequenceGenerator : IIndexable<int>, IEnumerable<int> {
-        private readonly short count;
-        private readonly short from;
+	class SequenceGenerator : IIndexable<int>, IEnumerable<int> {
+		private readonly short count;
+		private readonly short from;
 
-        public SequenceGenerator (int from, int count)
-        {
-            this.from = checked((short) from);
-            this.count = checked((short) count);
-        }
+		public SequenceGenerator (int from, int count)
+		{
+			this.from = checked((short) from);
+			this.count = checked((short) count);
+		}
 
-        #region Implementation of IIndexable<int>
-        public int Count {
-            get { return this.count; }
-        }
+		#region Implementation of IIndexable<int>
+		public int Count {
+			get { return this.count; }
+		}
 
-        public int this [int index] {
-            get { return this.from + index; }
-        }
-        #endregion
+		public int this [int index] {
+			get { return this.from + index; }
+		}
+		#endregion
 
-        #region Implementation of IEnumerable
-        public IEnumerator<int> GetEnumerator ()
-        {
-            for (int i = 0; i < this.count; i++)
-                yield return this [i];
-        }
+		#region Implementation of IEnumerable
+		public IEnumerator<int> GetEnumerator ()
+		{
+			for (int i = 0; i < this.count; i++)
+				yield return this [i];
+		}
 
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return GetEnumerator ();
-        }
-        #endregion
-    }
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			return GetEnumerator ();
+		}
+		#endregion
+	}
 }

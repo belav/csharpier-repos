@@ -2,7 +2,7 @@
 // System.Web.UI.PageStatePersister
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -28,46 +28,46 @@
 
 namespace System.Web.UI
 {
-    public abstract class PageStatePersister
-    {
-        object control_state;
-        object view_state;
-        Page page;
-        IStateFormatter state_formatter;
-        
-        protected PageStatePersister (Page page)
-        {
-            if (page == null)
-                throw new ArgumentNullException ("page");
-            this.page = page;
-        }
+	public abstract class PageStatePersister
+	{
+		object control_state;
+		object view_state;
+		Page page;
+		IStateFormatter state_formatter;
+		
+		protected PageStatePersister (Page page)
+		{
+			if (page == null)
+				throw new ArgumentNullException ("page");
+			this.page = page;
+		}
 
-        public object ControlState  {
-            get { return control_state; }
-            set { control_state = value; }
-        }
+		public object ControlState  {
+			get { return control_state; }
+			set { control_state = value; }
+		}
 
-        public object ViewState  {
-            get { return view_state; }
-            set { view_state = value; }
-        }
+		public object ViewState  {
+			get { return view_state; }
+			set { view_state = value; }
+		}
 
-        protected Page Page {
-            get { return page; }
-            set { page = value; }
-        }
+		protected Page Page {
+			get { return page; }
+			set { page = value; }
+		}
 
-        protected IStateFormatter StateFormatter 
-        {
-            get {
-                if (state_formatter == null)
-                    state_formatter = page.GetFormatter ();
-                return state_formatter;
-            }
-        }
+		protected IStateFormatter StateFormatter 
+		{
+			get {
+				if (state_formatter == null)
+					state_formatter = page.GetFormatter ();
+				return state_formatter;
+			}
+		}
 
-        public abstract void Load ();
+		public abstract void Load ();
 
-        public abstract void Save ();
-    }
+		public abstract void Save ();
+	}
 }

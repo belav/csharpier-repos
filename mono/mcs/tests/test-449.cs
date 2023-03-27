@@ -10,20 +10,20 @@ using System.Threading;
 
 class X {
 
-    public static void Main () 
-    {
-    }
-    
-    void Z ()
-    {
-        ThreadPool.QueueUserWorkItem (delegate {
-            Z ();
-                    
-            ThreadPool.QueueUserWorkItem (delegate {
-                Z ();
-            });    
-        });
-    }    
+	public static void Main () 
+	{
+	}
+	
+	void Z ()
+	{
+		ThreadPool.QueueUserWorkItem (delegate {
+			Z ();
+					
+			ThreadPool.QueueUserWorkItem (delegate {
+				Z ();
+			});	
+		});
+	}	
 }
 
 

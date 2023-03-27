@@ -5,16 +5,16 @@ using System;
 
 namespace Moq.Language.Flow
 {
-    internal class SetterSetupPhrase<T, TProperty> : VoidSetupPhrase<T>, ISetupSetter<T, TProperty> where T : class
-    {
-        public SetterSetupPhrase(MethodCall setup) : base(setup)
-        {
-        }
+	internal class SetterSetupPhrase<T, TProperty> : VoidSetupPhrase<T>, ISetupSetter<T, TProperty> where T : class
+	{
+		public SetterSetupPhrase(MethodCall setup) : base(setup)
+		{
+		}
 
-        public ICallbackResult Callback(Action<TProperty> callback)
-        {
-            this.Setup.SetCallbackBehavior(callback);
-            return this;
-        }
-    }
+		public ICallbackResult Callback(Action<TProperty> callback)
+		{
+			this.Setup.SetCallbackBehavior(callback);
+			return this;
+		}
+	}
 }

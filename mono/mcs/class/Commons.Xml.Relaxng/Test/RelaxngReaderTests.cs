@@ -17,52 +17,52 @@ using MonoTests.Helpers;
 
 namespace MonoTests.Commons.Xml.Relaxng
 {
-    [TestFixture]
-    public class RelaxngReaderTests
-    {
-        RelaxngReader reader;
+	[TestFixture]
+	public class RelaxngReaderTests
+	{
+		RelaxngReader reader;
 
-        [SetUp]
-        public void SetUp ()
-        {
-        }
-        
-        private void loadGrammarFromUrl (string url)
-        {
-            reader = new RelaxngReader (new XmlTextReader (url));
-        }
-        
-        [Test]
-        public void SimpleRead ()
-        {
-            loadGrammarFromUrl (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/SimpleElementPattern1.rng"));
-            RelaxngPattern p = reader.ReadPattern ();
+		[SetUp]
+		public void SetUp ()
+		{
+		}
+		
+		private void loadGrammarFromUrl (string url)
+		{
+			reader = new RelaxngReader (new XmlTextReader (url));
+		}
+		
+		[Test]
+		public void SimpleRead ()
+		{
+			loadGrammarFromUrl (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/SimpleElementPattern1.rng"));
+			RelaxngPattern p = reader.ReadPattern ();
 
-            Assert.AreEqual (RelaxngPatternType.Element, p.PatternType);
-        }
+			Assert.AreEqual (RelaxngPatternType.Element, p.PatternType);
+		}
 
-        [Test]
-        public void CompileRelaxngGrammar ()
-        {
-            loadGrammarFromUrl (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/relaxng.rng"));
-            RelaxngPattern p = reader.ReadPattern ();
+		[Test]
+		public void CompileRelaxngGrammar ()
+		{
+			loadGrammarFromUrl (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/relaxng.rng"));
+			RelaxngPattern p = reader.ReadPattern ();
 
-            Assert.AreEqual (RelaxngPatternType.Grammar, p.PatternType);
+			Assert.AreEqual (RelaxngPatternType.Grammar, p.PatternType);
 
-            p.Compile ();
-        }
+			p.Compile ();
+		}
 
-        [Test]
-        public void Bug347945 ()
-        {
-            string rng = @"
+		[Test]
+		public void Bug347945 ()
+		{
+			string rng = @"
 <element name='x' xmlns='http://relaxng.org/ns/structure/1.0'>
   <interleave>
     <element name='y'><text/></element>
     <element name='z'><text/></element>
   </interleave>
 </element>";
-            RelaxngPattern p = RelaxngPattern.Read (new XmlTextReader (rng, XmlNodeType.Document, null));
-        }
-    }
+			RelaxngPattern p = RelaxngPattern.Read (new XmlTextReader (rng, XmlNodeType.Document, null));
+		}
+	}
 }

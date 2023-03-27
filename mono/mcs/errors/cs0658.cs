@@ -4,16 +4,16 @@
 
 public class MyClass {
 
-    delegate int MyDelegate (int i, int j);
-    
-    [blah:Help("blah")]
-    public static MyClass operator/ (MyClass i, MyClass j)
-    {
-    
-    }
+	delegate int MyDelegate (int i, int j);
+	
+	[blah:Help("blah")]
+	public static MyClass operator/ (MyClass i, MyClass j)
+	{
+	
+	}
 
-    public static implicit operator MyClass (Object o)
-    {
+	public static implicit operator MyClass (Object o)
+	{
 
-    }
+	}
 }

@@ -3,9 +3,9 @@
 
 class MainClass
 {
-    public static void Main (string[] args)
-    {
-        foreach (int i in myints)
+	public static void Main (string[] args)
+	{
+		foreach (int i in myints)
 
-    }
+	}
 }

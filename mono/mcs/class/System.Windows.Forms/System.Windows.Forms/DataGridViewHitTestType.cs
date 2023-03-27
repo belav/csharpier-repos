@@ -20,20 +20,20 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 namespace System.Windows.Forms {
 
-    public enum DataGridViewHitTestType {
-        None = 0,
-        Cell = 1,
-        ColumnHeader = 2,
-        RowHeader = 3,
-        TopLeftHeader = 4,
-        HorizontalScrollBar = 5,
-        VerticalScrollBar = 6
-    }
+	public enum DataGridViewHitTestType {
+		None = 0,
+		Cell = 1,
+		ColumnHeader = 2,
+		RowHeader = 3,
+		TopLeftHeader = 4,
+		HorizontalScrollBar = 5,
+		VerticalScrollBar = 6
+	}
 
 }
 

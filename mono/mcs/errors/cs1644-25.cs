@@ -4,13 +4,13 @@
 
 class Data
 {
-    public int Value;
+	public int Value;
 }
 
 class A
 {
-    void Foo ()
-    {
-        new Data () { Value = 3 };
-    }
+	void Foo ()
+	{
+		new Data () { Value = 3 };
+	}
 }

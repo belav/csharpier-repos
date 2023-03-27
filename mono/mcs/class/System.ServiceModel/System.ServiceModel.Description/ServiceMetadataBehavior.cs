@@ -2,8 +2,8 @@
 // ServiceMetadataBehavior.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
-//    Ankit Jain  <jankit@novell.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
+//	Ankit Jain  <jankit@novell.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,81 +36,81 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Description
 {
-    [MonoTODO]
-    public class ServiceMetadataBehavior : IServiceBehavior
-    {
-        public const string MexContractName = "IMetadataExchange";
+	[MonoTODO]
+	public class ServiceMetadataBehavior : IServiceBehavior
+	{
+		public const string MexContractName = "IMetadataExchange";
 
-        MetadataExporter exporter;
+		MetadataExporter exporter;
 
-        public ServiceMetadataBehavior ()
-        {
-        }
+		public ServiceMetadataBehavior ()
+		{
+		}
 
-        public bool HttpGetEnabled { get; set; }
+		public bool HttpGetEnabled { get; set; }
 
-        public bool HttpsGetEnabled { get; set; }
+		public bool HttpsGetEnabled { get; set; }
 
-        public MetadataExporter MetadataExporter {
-            get { return exporter ?? (exporter = new WsdlExporter ()); }
-            set { exporter = value; }
-        }
+		public MetadataExporter MetadataExporter {
+			get { return exporter ?? (exporter = new WsdlExporter ()); }
+			set { exporter = value; }
+		}
 
-        public Uri ExternalMetadataLocation { get; set; }
+		public Uri ExternalMetadataLocation { get; set; }
 
-        public Uri HttpGetUrl { get; set; }
+		public Uri HttpGetUrl { get; set; }
 
-        public Uri HttpsGetUrl { get; set; }
+		public Uri HttpsGetUrl { get; set; }
 
-        public Binding HttpGetBinding { get; set; }
+		public Binding HttpGetBinding { get; set; }
 
-        public Binding HttpsGetBinding { get; set; }
+		public Binding HttpsGetBinding { get; set; }
 
-        void IServiceBehavior.AddBindingParameters (
-            ServiceDescription description,
-            ServiceHostBase serviceHostBase,
-            Collection<ServiceEndpoint> endpoints,
-            BindingParameterCollection parameters)
-        {
-        }
+		void IServiceBehavior.AddBindingParameters (
+			ServiceDescription description,
+			ServiceHostBase serviceHostBase,
+			Collection<ServiceEndpoint> endpoints,
+			BindingParameterCollection parameters)
+		{
+		}
 
-        void IServiceBehavior.ApplyDispatchBehavior (
-            ServiceDescription description,
-            ServiceHostBase serviceHostBase) {
+		void IServiceBehavior.ApplyDispatchBehavior (
+			ServiceDescription description,
+			ServiceHostBase serviceHostBase) {
 
-            ServiceMetadataExtension sme = ServiceMetadataExtension.EnsureServiceMetadataExtension (serviceHostBase);
+			ServiceMetadataExtension sme = ServiceMetadataExtension.EnsureServiceMetadataExtension (serviceHostBase);
 
-            //Find ChannelDispatcher for Mex, and add a MexInstanceContextProvider
-            //to it
-            foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers) {
-                ChannelDispatcher cd = cdb as ChannelDispatcher;
-                if (cd == null)
-                    continue;
+			//Find ChannelDispatcher for Mex, and add a MexInstanceContextProvider
+			//to it
+			foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers) {
+				ChannelDispatcher cd = cdb as ChannelDispatcher;
+				if (cd == null)
+					continue;
 
-                foreach (EndpointDispatcher ed in cd.Endpoints) {
-                    if (ed.ContractName == MexContractName)
-                        ed.DispatchRuntime.InstanceContextProvider = new MexInstanceContextProvider (serviceHostBase);
-                }
-            }
+				foreach (EndpointDispatcher ed in cd.Endpoints) {
+					if (ed.ContractName == MexContractName)
+						ed.DispatchRuntime.InstanceContextProvider = new MexInstanceContextProvider (serviceHostBase);
+				}
+			}
 
-            if (HttpGetEnabled) {
-                Uri uri = serviceHostBase.CreateUri ("http", HttpGetUrl);
-                if (uri != null)
-                    sme.EnsureChannelDispatcher (true, "http", uri, HttpGetBinding);
-            }
+			if (HttpGetEnabled) {
+				Uri uri = serviceHostBase.CreateUri ("http", HttpGetUrl);
+				if (uri != null)
+					sme.EnsureChannelDispatcher (true, "http", uri, HttpGetBinding);
+			}
 
-            if (HttpsGetEnabled) {
-                Uri uri = serviceHostBase.CreateUri ("https", HttpsGetUrl);
-                if (uri != null)
-                    sme.EnsureChannelDispatcher (true, "https", uri, HttpsGetBinding);
-            }
-        }
+			if (HttpsGetEnabled) {
+				Uri uri = serviceHostBase.CreateUri ("https", HttpsGetUrl);
+				if (uri != null)
+					sme.EnsureChannelDispatcher (true, "https", uri, HttpsGetBinding);
+			}
+		}
 
-        [MonoTODO]
-        void IServiceBehavior.Validate (
-            ServiceDescription description,
-            ServiceHostBase serviceHostBase)
-        {            
-        }
-    }
+		[MonoTODO]
+		void IServiceBehavior.Validate (
+			ServiceDescription description,
+			ServiceHostBase serviceHostBase)
+		{			
+		}
+	}
 }

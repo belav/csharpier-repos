@@ -45,7 +45,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return nFlags;
+	return nFlags;
       }
     }
 
@@ -54,7 +54,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return nProto;
+	return nProto;
       }
     }
 
@@ -63,7 +63,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return address_family;
+	return address_family;
       }
     }
 
@@ -72,7 +72,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strAddress;
+	return strAddress;
       }
     }
 
@@ -81,7 +81,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return pstk_name;
+	return pstk_name;
       }
     }
 
@@ -90,7 +90,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return source_module;
+	return source_module;
       }
     }
 

@@ -2,7 +2,7 @@
 // SamlDoNotCacheCondition.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,43 +34,43 @@ using System.IdentityModel.Selectors;
 
 namespace System.IdentityModel.Tokens
 {
-    public class SamlDoNotCacheCondition : SamlCondition
-    {
-        public SamlDoNotCacheCondition ()
-        {
-        }
+	public class SamlDoNotCacheCondition : SamlCondition
+	{
+		public SamlDoNotCacheCondition ()
+		{
+		}
 
-        bool is_readonly;
+		bool is_readonly;
 
-        public override bool IsReadOnly {
-            get { return is_readonly; }
-        }
+		public override bool IsReadOnly {
+			get { return is_readonly; }
+		}
 
-        public override void MakeReadOnly ()
-        {
-            is_readonly = true;
-        }
+		public override void MakeReadOnly ()
+		{
+			is_readonly = true;
+		}
 
-        [MonoTODO]
-        public override void ReadXml (XmlDictionaryReader reader,
-            SamlSerializer samlSerializer,
-            SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override void ReadXml (XmlDictionaryReader reader,
+			SamlSerializer samlSerializer,
+			SecurityTokenSerializer keyInfoSerializer,
+			SecurityTokenResolver outOfBandTokenResolver)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void WriteXml (
-            XmlDictionaryWriter writer,
-            SamlSerializer samlSerializer,
-            SecurityTokenSerializer keyInfoSerializer)
-        {
-            if (writer == null)
-                throw new ArgumentNullException ("writer");
-            if (samlSerializer == null)
-                throw new ArgumentNullException ("samlSerializer");
-            writer.WriteStartElement ("saml", "DoNotCacheCondition", SamlConstants.Namespace);
-            writer.WriteEndElement ();
-        }
-    }
+		public override void WriteXml (
+			XmlDictionaryWriter writer,
+			SamlSerializer samlSerializer,
+			SecurityTokenSerializer keyInfoSerializer)
+		{
+			if (writer == null)
+				throw new ArgumentNullException ("writer");
+			if (samlSerializer == null)
+				throw new ArgumentNullException ("samlSerializer");
+			writer.WriteStartElement ("saml", "DoNotCacheCondition", SamlConstants.Namespace);
+			writer.WriteEndElement ();
+		}
+	}
 }

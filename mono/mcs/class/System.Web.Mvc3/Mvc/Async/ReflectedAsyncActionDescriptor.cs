@@ -1,4 +1,4 @@
-namespace System.Web.Mvc.Async {
+﻿namespace System.Web.Mvc.Async {
     using System;
     using System.Collections.Generic;
     using System.Linq;

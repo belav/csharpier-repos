@@ -286,7 +286,7 @@ namespace System.Workflow.Activities
         #endregion
 
         #region Execution Implementation
-#if    LOG
+#if	LOG
         private static void Log(string message)
         {
             Trace.WriteLine(message);
@@ -297,7 +297,7 @@ namespace System.Workflow.Activities
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
-#if    LOG
+#if	LOG
             Log("Execute on " + this.QualifiedName);
 #endif
 
@@ -325,7 +325,7 @@ namespace System.Workflow.Activities
         {
             Debug.Assert(cag != null);
             Debug.Assert(context != null);
-#if    LOG
+#if	LOG
             Log("EvaluateConditions on " + cag.QualifiedName);
             cag.CAGState.DumpState("Before EvaluateConditions");
 #endif
@@ -337,7 +337,7 @@ namespace System.Workflow.Activities
             if ((cag.UntilCondition != null) && cag.UntilCondition.Evaluate(cag, context))
             {
                 // UNTIL condition says we're done, no need to look at children
-#if    LOG
+#if	LOG
                 Log("Until condition is true");
 #endif
                 return true;
@@ -364,7 +364,7 @@ namespace System.Workflow.Activities
                     childrenStats[act.QualifiedName].State = CAGChildState.Pending;
                 }
             }
-#if    LOG
+#if	LOG
             cag.CAGState.DumpState("After EvaluateConditions");
 #endif
 
@@ -376,12 +376,12 @@ namespace System.Workflow.Activities
             // if specified an UNTIL condition but we have nothing to do
             if (cag.UntilCondition != null)
             {
-#if    LOG
+#if	LOG
                 Log("CAG quiet, but UNTIL condition is false, so error time");
 #endif
                 throw new InvalidOperationException(SR.GetString(SR.Error_CAGQuiet, cag.QualifiedName));
             }
-#if    LOG
+#if	LOG
             Log("CAG quiet");
 #endif
             return true;
@@ -397,7 +397,7 @@ namespace System.Workflow.Activities
         /// <returns></returns>
         private bool EvaluateChildConditions(ConditionedActivityGroup cag, Activity child, ActivityExecutionContext context)
         {
-#if    LOG
+#if	LOG
             Log("EvaluateChildConditions on activity " + child.QualifiedName + " inside " + cag.QualifiedName);
 #endif
             // determine the result of the when condition (evaluate once if not specified)
@@ -425,7 +425,7 @@ namespace System.Workflow.Activities
         {
             Debug.Assert(cag != null);
             Debug.Assert(context != null);
-#if    LOG
+#if	LOG
             Log("TriggerChildren on " + cag.QualifiedName);
             cag.CAGState.DumpState("Before TriggerChildren");
 #endif
@@ -443,7 +443,7 @@ namespace System.Workflow.Activities
                 if (activity.ExecutionStatus == ActivityExecutionStatus.Initialized)
                     ExecuteChild(cag, activity, context);
             }
-#if    LOG
+#if	LOG
             cag.CAGState.DumpState("After TriggerChildren");
 #endif
         }
@@ -454,7 +454,7 @@ namespace System.Workflow.Activities
             Debug.Assert(childActivity != null);
             Debug.Assert(context != null);
             Debug.Assert(childActivity.ExecutionStatus == ActivityExecutionStatus.Initialized);
-#if    LOG
+#if	LOG
             Log("ExecuteChild " + childActivity.QualifiedName + " inside " + cag.QualifiedName);
 #endif
             ActivityExecutionContext childContext = GetChildExecutionContext(context, childActivity, true);
@@ -510,7 +510,7 @@ namespace System.Workflow.Activities
                 Debug.Assert(false, "This CAG activity handler does not handle this event");
             }
             ActivityExecutionStatusChangedEventArgs args1 = (ActivityExecutionStatusChangedEventArgs)e.Args;
-#if    LOG
+#if	LOG
             Log("HandleEvent for " + cag.QualifiedName);
             Log("event = " + e.ToString());
             Log("activity = " + args1.Activity.QualifiedName);
@@ -762,7 +762,7 @@ namespace System.Workflow.Activities
                 this.childActivityStats[act.QualifiedName] = new CAGChildStats();
         }
 
-#if    LOG
+#if	LOG
         internal void DumpState(string message)
         {
             Trace.WriteLine(message + " completed = " + Completed.ToString());

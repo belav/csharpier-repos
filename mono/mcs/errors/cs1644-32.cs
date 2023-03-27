@@ -6,9 +6,9 @@ using System;
 
 class C
 {
-    public void Foo ()
-    {
-        Func<int, int> e = l => 1;
-    }
+	public void Foo ()
+	{
+		Func<int, int> e = l => 1;
+	}
 }
 

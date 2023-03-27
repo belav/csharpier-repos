@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.Data.SqlClient;
@@ -2287,13 +2287,13 @@ WHERE [c].[CustomerID] IN (N'ABCDE', N'ALFKI', N'ANATR')
 """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[City] = N'México D.F.' AND [c].[CustomerID] IN (N'ABCDE', N'ALFKI', N'ANATR')
+WHERE [c].[City] = N'MÃ©xico D.F.' AND [c].[CustomerID] IN (N'ABCDE', N'ALFKI', N'ANATR')
 """,
             //
 """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[City] = N'México D.F.' AND [c].[CustomerID] IN (N'ABCDE', N'ALFKI', N'ANATR')
+WHERE [c].[City] = N'MÃ©xico D.F.' AND [c].[CustomerID] IN (N'ABCDE', N'ALFKI', N'ANATR')
 """);
     }
 
@@ -2341,13 +2341,13 @@ WHERE [c].[CustomerID] NOT IN (N'ABCDE', N'ALFKI', N'ANATR')
 """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[City] = N'México D.F.' AND [c].[CustomerID] NOT IN (N'ABCDE', N'ALFKI', N'ANATR')
+WHERE [c].[City] = N'MÃ©xico D.F.' AND [c].[CustomerID] NOT IN (N'ABCDE', N'ALFKI', N'ANATR')
 """,
             //
 """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[City] = N'México D.F.' AND [c].[CustomerID] NOT IN (N'ABCDE', N'ALFKI', N'ANATR')
+WHERE [c].[City] = N'MÃ©xico D.F.' AND [c].[CustomerID] NOT IN (N'ABCDE', N'ALFKI', N'ANATR')
 """);
     }
 

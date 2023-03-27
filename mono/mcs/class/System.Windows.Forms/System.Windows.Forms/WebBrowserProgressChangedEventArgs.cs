@@ -23,32 +23,32 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public class WebBrowserProgressChangedEventArgs : EventArgs
-    {
-        private long current_progress;
-        private long maximum_progress;
+	public class WebBrowserProgressChangedEventArgs : EventArgs
+	{
+		private long current_progress;
+		private long maximum_progress;
 
-        #region Public Constructors
-        public WebBrowserProgressChangedEventArgs (long currentProgress, long maximumProgress) : base ()
-        {
-            this.current_progress = currentProgress;
-            this.maximum_progress = maximumProgress;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public WebBrowserProgressChangedEventArgs (long currentProgress, long maximumProgress) : base ()
+		{
+			this.current_progress = currentProgress;
+			this.maximum_progress = maximumProgress;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public long CurrentProgress {
-            get { return this.current_progress; }
-        }
+		#region Public Instance Properties
+		public long CurrentProgress {
+			get { return this.current_progress; }
+		}
 
-        public long MaximumProgress {
-            get { return this.maximum_progress; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public long MaximumProgress {
+			get { return this.maximum_progress; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

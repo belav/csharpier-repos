@@ -4,25 +4,25 @@
 
 public class MyClass {
 
-    public int this[int ndx] 
-    {
-        get { }
-        set { }
-    }
+	public int this[int ndx] 
+	{
+		get { }
+		set { }
+	}
 
-    public event EventHandler Click 
-    {
-        add { } 
-        remove { }
-    }
+	public event EventHandler Click 
+	{
+		add { } 
+		remove { }
+	}
 
-    public static MyClass operator++ (MyClass i, MyClass j)
-    {
-    
-    }
+	public static MyClass operator++ (MyClass i, MyClass j)
+	{
+	
+	}
 
-    public static implicit operator MyClass (Object o)
-    {
+	public static implicit operator MyClass (Object o)
+	{
 
-    }
+	}
 }

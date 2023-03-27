@@ -61,10 +61,10 @@ public enum LoggingLevels
 /// </summary>
 public class ReliabilityConfig : IEnumerable, IEnumerator
 {
-    private ArrayList _testSet = new ArrayList();                    // this is the set of <Test... > tags we find.  There may be multiple test runs in one
+    private ArrayList _testSet = new ArrayList();					// this is the set of <Test... > tags we find.  There may be multiple test runs in one
     // config file.
-    private ReliabilityTestSet _curTestSet;                            // The test set we're currently filling in...
-    private int _index = -1;                                            // Current test set index
+    private ReliabilityTestSet _curTestSet;							// The test set we're currently filling in...
+    private int _index = -1;											// Current test set index
 
     // Toplevel tags for all config files
     private const string configHost = "Host";
@@ -224,10 +224,10 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     /// </summary>
     private void GetTestsToRun(string testConfig)
     {
-        int totalDepth = 0;                            // used for debugging mode so we can keep proper indentation.
-        ArrayList foundTests = new ArrayList();        // the array of tests we've found.            
-        ArrayList discoveryPaths = new ArrayList();    // the array of discovery paths we've found.
-        Stack xmlFileStack = new Stack();            // this stack keeps track of our include files.          
+        int totalDepth = 0;							// used for debugging mode so we can keep proper indentation.
+        ArrayList foundTests = new ArrayList();		// the array of tests we've found.			
+        ArrayList discoveryPaths = new ArrayList();	// the array of discovery paths we've found.
+        Stack xmlFileStack = new Stack();			// this stack keeps track of our include files.  		
         Stack testLevelStack = new Stack();
 
         try
@@ -248,7 +248,7 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
 
             if (currentXML.Depth != 0)
             {
-                IndentToDepth(totalDepth + currentXML.Depth - 1);    // -1 because we haven't done a .Read on the includes tag yet.
+                IndentToDepth(totalDepth + currentXML.Depth - 1);	// -1 because we haven't done a .Read on the includes tag yet.
                 XmlDebugOutLine("</" + configInclude + ">");
             }
 
@@ -265,7 +265,7 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
 
                         switch (currentXML.Name)
                         {
-                            case configInclude:        // user included a file in this file.  
+                            case configInclude:		// user included a file in this file.  
                                 string filename = null;
                                 bool skipInclude = false;
 
@@ -277,7 +277,7 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                         case configIncludeFilename:
                                             filename = currentXML.Value;
                                             break;
-                                        case debugConfigIncludeInlined:    // so we can consume the XML we spit out in debug mode- 
+                                        case debugConfigIncludeInlined:	// so we can consume the XML we spit out in debug mode- 
                                             // we ignore this include tag if it's been inlined.
 
                                             if (currentXML.Value.ToLower() == "true" || currentXML.Value == "1")
@@ -302,7 +302,7 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                     throw new ArgumentException("Type or Filename not set on include file!  Both attributes must be set to properly include a file.");
                                 }
 
-                                xmlFileStack.Push(currentXML);    // save our current file.
+                                xmlFileStack.Push(currentXML);	// save our current file.
                                 totalDepth += currentXML.Depth;
 
                                 filename = ConvertPotentiallyRelativeFilenameToFullPath(stripFilenameFromPath(currentXML.BaseURI), filename);
@@ -1069,14 +1069,14 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     /// </summary>
     public static string ConvertPotentiallyRelativeFilenameToFullPath(string basepath, string path)
     {
-        string trimmedPath = path.Trim();    // remove excess whitespace.
+        string trimmedPath = path.Trim();	// remove excess whitespace.
 
-        if (String.Compare("file://", 0, trimmedPath, 0, 7, StringComparison.OrdinalIgnoreCase) == 0)    // strip file:// from the front if it exists.
+        if (String.Compare("file://", 0, trimmedPath, 0, 7, StringComparison.OrdinalIgnoreCase) == 0)	// strip file:// from the front if it exists.
         {
             trimmedPath = trimmedPath.Substring(7);
         }
 
-        if (trimmedPath.Trim()[1] == ':' || (trimmedPath.Trim()[0] == '\\' && trimmedPath.Trim()[0] == '\\'))    // we have a drive & UNC
+        if (trimmedPath.Trim()[1] == ':' || (trimmedPath.Trim()[0] == '\\' && trimmedPath.Trim()[0] == '\\'))	// we have a drive & UNC
         {
             return (path);
         }
@@ -1103,7 +1103,7 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
         {
             if (trimmedPath.LastIndexOf("/") == -1)
             {
-                return (trimmedPath);    // nothing to strip.
+                return (trimmedPath);	// nothing to strip.
             }
             if (String.Compare("file://", 0, trimmedPath, 0, 7, StringComparison.OrdinalIgnoreCase) == 0)
             {
@@ -1179,7 +1179,7 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     {
         while ((depth--) > 0)
         {
-            Console.Write("    ");
+            Console.Write("	");
         }
     }
 

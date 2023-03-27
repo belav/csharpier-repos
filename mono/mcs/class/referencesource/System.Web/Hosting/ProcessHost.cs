@@ -1031,7 +1031,7 @@ namespace System.Web.Hosting {
 
             GetApplicationPreloadInfoWithAssert(ac.PreloadContext, out stillEnabled, out preloadObjTypeName, out paramsForStartupObj);
             
-            // Dev10: 782385    ASP.NET autostart implementation should be tolerant of empty string for the provider type
+            // Dev10: 782385	ASP.NET autostart implementation should be tolerant of empty string for the provider type
             if (!stillEnabled || String.IsNullOrEmpty(preloadObjTypeName)) {
                 return;
             }

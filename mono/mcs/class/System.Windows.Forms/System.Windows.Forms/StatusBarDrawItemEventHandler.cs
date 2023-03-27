@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 
 
 using System;
@@ -28,8 +28,8 @@ using System.Drawing;
 
 namespace System.Windows.Forms {
 
-    public delegate void StatusBarDrawItemEventHandler (object sender,
-            StatusBarDrawItemEventArgs sbdevent);
+	public delegate void StatusBarDrawItemEventHandler (object sender,
+			StatusBarDrawItemEventArgs sbdevent);
 
 }
 

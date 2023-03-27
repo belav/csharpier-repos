@@ -20,10 +20,10 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst    monkey@jpobst.com
+//	Jonathan Pobst	monkey@jpobst.com
 //
 
 namespace System.Windows.Forms
 {
-    public delegate void HtmlElementErrorEventHandler (object sender, HtmlElementErrorEventArgs e);
+	public delegate void HtmlElementErrorEventHandler (object sender, HtmlElementErrorEventArgs e);
 }

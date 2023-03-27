@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum MaskFormat
-    {
-        ExcludePromptAndLiterals = 0,
-        IncludePrompt = 1,
-        IncludeLiterals = 2,
-        IncludePromptAndLiterals = 3
-    }
+	public enum MaskFormat
+	{
+		ExcludePromptAndLiterals = 0,
+		IncludePrompt = 1,
+		IncludeLiterals = 2,
+		IncludePromptAndLiterals = 3
+	}
 }

@@ -2,8 +2,8 @@
 // Line: 6
 
 class Sample {
-    public Sample ()
-        : this ()
-    {
-    }
+	public Sample ()
+		: this ()
+	{
+	}
 }

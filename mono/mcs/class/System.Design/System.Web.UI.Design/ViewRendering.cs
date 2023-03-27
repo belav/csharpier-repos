@@ -31,26 +31,26 @@ using System;
 
 namespace System.Web.UI.Design
 {
-    public class ViewRendering
-    {
-        [MonoNotSupported ("")]
-        public ViewRendering (string content, DesignerRegionCollection regions)
-        {
-            throw new NotImplementedException ();
-        }
+	public class ViewRendering
+	{
+		[MonoNotSupported ("")]
+		public ViewRendering (string content, DesignerRegionCollection regions)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public string Content {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		public string Content {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        public DesignerRegionCollection Regions {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-    }
+		[MonoNotSupported ("")]
+		public DesignerRegionCollection Regions {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
+	}
 }

@@ -5,7 +5,7 @@ using System.Linq;
 
 class C
 {
-    public static void Main ()
+	public static void Main ()
     {
         var q = from i in "abcd" where i;
     }

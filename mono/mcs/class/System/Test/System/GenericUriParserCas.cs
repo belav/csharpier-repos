@@ -2,7 +2,7 @@
 // GenericUriParserCas.cs - CAS unit tests for System.GenericUriParser
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,47 +39,47 @@ using MonoTests.System;
 
 namespace MonoCasTests.System {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class GenericUriParserCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class GenericUriParserCas {
 
-        private GenericUriParserTest unit;
+		private GenericUriParserTest unit;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            unit = new GenericUriParserTest ();
-            unit.FixtureSetUp (); // fulltrust
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			unit = new GenericUriParserTest ();
+			unit.FixtureSetUp (); // fulltrust
+		}
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            unit.Generic ();
-            unit.Generic_Methods ();
-            unit.SecureGeneric ();
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			unit.Generic ();
+			unit.Generic_Methods ();
+			unit.SecureGeneric ();
 
-            unit.AllOptions ();
-            unit.InvalidOptions ();
-        }
+			unit.AllOptions ();
+			unit.InvalidOptions ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            Type[] types = new Type[1] { typeof (GenericUriParserOptions) };
-            ConstructorInfo ci = typeof (GenericUriParser).GetConstructor (types);
-            Assert.IsNotNull (ci, ".ctor(GenericUriParserOptions)");
-            Assert.IsNotNull (ci.Invoke (new object[1] { GenericUriParserOptions .Default }), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			Type[] types = new Type[1] { typeof (GenericUriParserOptions) };
+			ConstructorInfo ci = typeof (GenericUriParser).GetConstructor (types);
+			Assert.IsNotNull (ci, ".ctor(GenericUriParserOptions)");
+			Assert.IsNotNull (ci.Invoke (new object[1] { GenericUriParserOptions .Default }), "invoke");
+		}
+	}
 }
 

@@ -468,7 +468,7 @@ namespace System.Data.ProviderBase {
                             }
                             else {
 #if MONO_PARTIAL_DATA_IMPORT
-                Dispose();
+				Dispose();
 #else
 #if !MOBILE
                                 PerformanceCounters.NumberOfNonPooledConnections.Decrement();

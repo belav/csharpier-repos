@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System.Globalization;
@@ -31,118 +31,118 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows {
 
-    [TestFixture]
-    public class PointTest {
+	[TestFixture]
+	public class PointTest {
 
-        [Test]
-        public void Accessors ()
-        {
-            Point p = new Point (4, 5);
-            Assert.AreEqual (4, p.X);
-            Assert.AreEqual (5, p.Y);
-        }
+		[Test]
+		public void Accessors ()
+		{
+			Point p = new Point (4, 5);
+			Assert.AreEqual (4, p.X);
+			Assert.AreEqual (5, p.Y);
+		}
 
-        [Test]
-        public void Equals ()
-        {
-            Point p = new Point (4, 5);
-            Assert.IsTrue (p.Equals (new Point (4, 5)));
-            Assert.IsFalse (p.Equals (new Point (5, 4)));
-            Assert.IsFalse (p.Equals (new object()));
-        }
+		[Test]
+		public void Equals ()
+		{
+			Point p = new Point (4, 5);
+			Assert.IsTrue (p.Equals (new Point (4, 5)));
+			Assert.IsFalse (p.Equals (new Point (5, 4)));
+			Assert.IsFalse (p.Equals (new object()));
+		}
 
-            [Test]
-            public void GetHashCodeTest()
-            {
-                Point p1 = new Point(-5, -4);
-                Point p2 = new Point(5, 4);
-                Point p3 = new Point(5, 4);
+			[Test]
+			public void GetHashCodeTest()
+			{
+				Point p1 = new Point(-5, -4);
+				Point p2 = new Point(5, 4);
+				Point p3 = new Point(5, 4);
 
-                Assert.AreEqual (p2.GetHashCode (), p3.GetHashCode ());
-                Assert.AreEqual (p1.GetHashCode (),p2.GetHashCode ());
-            }
+				Assert.AreEqual (p2.GetHashCode (), p3.GetHashCode ());
+				Assert.AreEqual (p1.GetHashCode (),p2.GetHashCode ());
+			}
 
-        [Test]
-        public void ToStringTest ()
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
-            Point p = new Point (4, 5);
-            Assert.AreEqual ("4,5", p.ToString());
-            Point p2 = new Point(4.1, 5.1);
-            Assert.AreEqual("4.1,5.1",p2.ToString());
-            Point p3 = new Point(0, 0);
-            Assert.AreEqual("0,0", p3.ToString());
+		[Test]
+		public void ToStringTest ()
+		{
+			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
+			Point p = new Point (4, 5);
+			Assert.AreEqual ("4,5", p.ToString());
+			Point p2 = new Point(4.1, 5.1);
+			Assert.AreEqual("4.1,5.1",p2.ToString());
+			Point p3 = new Point(0, 0);
+			Assert.AreEqual("0,0", p3.ToString());
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("de-de");
-            Point p4 = new Point(4, 5);
-            Assert.AreEqual("4;5", p4.ToString());
-            Point p5 = new Point(4.1, 5.1);
-            Assert.AreEqual("4,1;5,1", p5.ToString());
-            Point p6 = new Point(0, 0);
-            Assert.AreEqual("0;0", p6.ToString());
-        }
+			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("de-de");
+			Point p4 = new Point(4, 5);
+			Assert.AreEqual("4;5", p4.ToString());
+			Point p5 = new Point(4.1, 5.1);
+			Assert.AreEqual("4,1;5,1", p5.ToString());
+			Point p6 = new Point(0, 0);
+			Assert.AreEqual("0;0", p6.ToString());
+		}
 
-        [Test]
-        public void Parse ()
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("fr-fr");
+		[Test]
+		public void Parse ()
+		{
+			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("fr-fr");
 
-            Point p = Point.Parse ("4,5");
-            Assert.AreEqual (new Point (4, 5), p);
+			Point p = Point.Parse ("4,5");
+			Assert.AreEqual (new Point (4, 5), p);
 
-            p = Point.Parse ("-4,-5");
-            Assert.AreEqual (new Point (-4, -5), p);
+			p = Point.Parse ("-4,-5");
+			Assert.AreEqual (new Point (-4, -5), p);
 
-            p = Point.Parse ("-4.4,-5.5");
-            Assert.AreEqual (new Point (-4.4, -5.5), p);
+			p = Point.Parse ("-4.4,-5.5");
+			Assert.AreEqual (new Point (-4.4, -5.5), p);
 
-            p = Point.Parse("4.4,5.5");
-            Assert.AreEqual(new Point(4.4, 5.5), p);
+			p = Point.Parse("4.4,5.5");
+			Assert.AreEqual(new Point(4.4, 5.5), p);
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
-            Assert.AreEqual(new Point(4.4, 5.5), p);
-        }
+			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
+			Assert.AreEqual(new Point(4.4, 5.5), p);
+		}
 
-        [Test]
-        public void Offset ()
-        {
-            Point p = new Point (4, 5);
-            p.Offset (3, 4);
-            Assert.AreEqual (new Point (7, 9), p);
-        }
+		[Test]
+		public void Offset ()
+		{
+			Point p = new Point (4, 5);
+			p.Offset (3, 4);
+			Assert.AreEqual (new Point (7, 9), p);
+		}
 
-        [Test]
-        public void Add ()
-        {
-            Point p = Point.Add (new Point (4, 5), new Vector (2, 3));
-            Assert.AreEqual (new Point (6, 8), p);
-        }
+		[Test]
+		public void Add ()
+		{
+			Point p = Point.Add (new Point (4, 5), new Vector (2, 3));
+			Assert.AreEqual (new Point (6, 8), p);
+		}
 
-        [Test]
-        public void Subtract1 ()
-        {
-            Point p = Point.Subtract (new Point (4, 5), new Vector (2, 3));
-            Assert.AreEqual (new Point (2, 2), p);
-        }
+		[Test]
+		public void Subtract1 ()
+		{
+			Point p = Point.Subtract (new Point (4, 5), new Vector (2, 3));
+			Assert.AreEqual (new Point (2, 2), p);
+		}
 
-        [Test]
-        public void Subtract2 ()
-        {
-            Vector v = Point.Subtract (new Point (4, 5), new Point (2, 3));
-            Assert.AreEqual (new Vector (2, 2), v);
-        }
+		[Test]
+		public void Subtract2 ()
+		{
+			Vector v = Point.Subtract (new Point (4, 5), new Point (2, 3));
+			Assert.AreEqual (new Vector (2, 2), v);
+		}
 
-        [Test]
-        public void Multiply ()
-        {
-            Matrix m = Matrix.Identity;
-            m.Scale (2, 2);
+		[Test]
+		public void Multiply ()
+		{
+			Matrix m = Matrix.Identity;
+			m.Scale (2, 2);
 
-            Point p = Point.Multiply (new Point (2, 3), m);
+			Point p = Point.Multiply (new Point (2, 3), m);
 
-            Assert.AreEqual (new Point (4, 6), p);
-        }
-    }
+			Assert.AreEqual (new Point (4, 6), p);
+		}
+	}
 
 }
 

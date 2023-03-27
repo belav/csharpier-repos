@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jonathan Chambers (jonathan.chambers@ansys.com)
+//	Jonathan Chambers (jonathan.chambers@ansys.com)
 //
 
 // COMPLETE
@@ -31,36 +31,36 @@ using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms
 {
-    [ComVisible(true)]
-    public class PropertyValueChangedEventArgs : EventArgs
-    {
-        #region    Local Variables
-        private GridItem changed_item;
-        private object old_value;
-        #endregion    // Local Variables
+	[ComVisible(true)]
+	public class PropertyValueChangedEventArgs : EventArgs
+	{
+		#region	Local Variables
+		private GridItem changed_item;
+		private object old_value;
+		#endregion	// Local Variables
 
-        #region Constructors
-        public PropertyValueChangedEventArgs ( GridItem changedItem , object oldValue )
-        {
-            changed_item = changedItem;
-            old_value = oldValue;
-        }
-        #endregion
+		#region Constructors
+		public PropertyValueChangedEventArgs ( GridItem changedItem , object oldValue )
+		{
+			changed_item = changedItem;
+			old_value = oldValue;
+		}
+		#endregion
 
-        #region Public Instance Properties
-        public GridItem ChangedItem
-        {
-            get {
-                return changed_item;
-            }
-        }
+		#region Public Instance Properties
+		public GridItem ChangedItem
+		{
+			get {
+				return changed_item;
+			}
+		}
 
-        public object OldValue
-        {
-            get {
-                return old_value;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public object OldValue
+		{
+			get {
+				return old_value;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

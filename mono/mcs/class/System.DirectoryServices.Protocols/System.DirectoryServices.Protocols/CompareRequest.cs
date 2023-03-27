@@ -33,43 +33,43 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class CompareRequest : DirectoryRequest
-    {
-        public CompareRequest ()
-        {
-        }
+	public class CompareRequest : DirectoryRequest
+	{
+		public CompareRequest ()
+		{
+		}
 
-        public CompareRequest (string distinguishedName, DirectoryAttribute assertion)
-        {
-            DistinguishedName = distinguishedName;
-            Assertion = assertion;
-        }
+		public CompareRequest (string distinguishedName, DirectoryAttribute assertion)
+		{
+			DistinguishedName = distinguishedName;
+			Assertion = assertion;
+		}
 
-        public CompareRequest (string distinguishedName, string attributeName, byte [] value)
-            : this (distinguishedName, new DirectoryAttribute (attributeName, value))
-        {
-            throw new NotImplementedException ();
-        }
+		public CompareRequest (string distinguishedName, string attributeName, byte [] value)
+			: this (distinguishedName, new DirectoryAttribute (attributeName, value))
+		{
+			throw new NotImplementedException ();
+		}
 
-        public CompareRequest (string distinguishedName, string attributeName, string value)
-            : this (distinguishedName, new DirectoryAttribute (attributeName, value))
-        {
-            throw new NotImplementedException ();
-        }
+		public CompareRequest (string distinguishedName, string attributeName, string value)
+			: this (distinguishedName, new DirectoryAttribute (attributeName, value))
+		{
+			throw new NotImplementedException ();
+		}
 
-        public CompareRequest (string distinguishedName, string attributeName, Uri value)
-            : this (distinguishedName, new DirectoryAttribute (attributeName, value))
-        {
-            throw new NotImplementedException ();
-        }
+		public CompareRequest (string distinguishedName, string attributeName, Uri value)
+			: this (distinguishedName, new DirectoryAttribute (attributeName, value))
+		{
+			throw new NotImplementedException ();
+		}
 
-        public DirectoryAttribute Assertion { get; private set; }
-        public string DistinguishedName { get; set; }
+		public DirectoryAttribute Assertion { get; private set; }
+		public string DistinguishedName { get; set; }
 
-        [MonoTODO]
-        protected override XmlElement ToXmlNode (XmlDocument doc)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected override XmlElement ToXmlNode (XmlDocument doc)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

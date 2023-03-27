@@ -2,7 +2,7 @@
 // ServiceHostingEnvironment.cs
 //
 // Author:
-//    Ankit Jain  <jankit@novell.com>
+//	Ankit Jain  <jankit@novell.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -28,8 +28,8 @@
 
 namespace System.ServiceModel {
 
-    static class ServiceHostingEnvironmentInternal
-    {
-        internal static bool InAspNet { get; set; }
-    }
+	static class ServiceHostingEnvironmentInternal
+	{
+		internal static bool InAspNet { get; set; }
+	}
 }

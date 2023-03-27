@@ -2,11 +2,11 @@
 // Line: 9
 
 struct A {
-    B b;
+	B b;
 }
 
 struct B {
-    A a;
+	A a;
 }
 
 class Y { static void Main () {} }

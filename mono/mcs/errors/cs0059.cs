@@ -7,9 +7,9 @@ class ErrorCS0059 {
 }
 
 public class Foo {
-    public delegate void ErrorCS0059Delegate (ErrorCS0059 e);
+	public delegate void ErrorCS0059Delegate (ErrorCS0059 e);
 
-    public static void Main () {
-    }
+	public static void Main () {
+	}
 }
 

@@ -6,18 +6,18 @@ interface I {}
 
 public struct S<T> : I
 {
-    public void Foo ()
-    {
-    }
+	public void Foo ()
+	{
+	}
 }
 
 class T
 {
-    public static void Main ()
-    {
-        S<int> i;
-        ExS<bool> e;
-        i.Foo ();
-        e.Bar ();
-    }
+	public static void Main ()
+	{
+		S<int> i;
+		ExS<bool> e;
+		i.Foo ();
+		e.Bar ();
+	}
 }

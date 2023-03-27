@@ -2,7 +2,7 @@
 // System.Web.Util.WebEncoding
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // (C) 2003 Novell, Inc (http://www.novell.com)
@@ -34,40 +34,40 @@ using System.Web.Configuration;
 
 namespace System.Web.Util
 {
-    internal class WebEncoding
-    {
-        static bool cached;
-        static GlobalizationSection sect;
-        static GlobalizationSection GlobalizationConfig {
-            get {
-                if (!cached) {
-                    try {
-                        sect = (GlobalizationSection) WebConfigurationManager.GetWebApplicationSection ("system.web/globalization");
-                    }
-                    catch { }
-                    cached = true;
-                }
-                return sect;
-            }
-        }
+	internal class WebEncoding
+	{
+		static bool cached;
+		static GlobalizationSection sect;
+		static GlobalizationSection GlobalizationConfig {
+			get {
+				if (!cached) {
+					try {
+						sect = (GlobalizationSection) WebConfigurationManager.GetWebApplicationSection ("system.web/globalization");
+					}
+					catch { }
+					cached = true;
+				}
+				return sect;
+			}
+		}
 
-        static public Encoding FileEncoding {
-            get {
-                return GlobalizationConfig != null ? GlobalizationConfig.FileEncoding : Encoding.Default;
-            }
-        }
+		static public Encoding FileEncoding {
+			get {
+				return GlobalizationConfig != null ? GlobalizationConfig.FileEncoding : Encoding.Default;
+			}
+		}
 
-        static public Encoding ResponseEncoding {
-            get {
-                return GlobalizationConfig != null ? GlobalizationConfig.ResponseEncoding : Encoding.Default;
-            }
-        }
+		static public Encoding ResponseEncoding {
+			get {
+				return GlobalizationConfig != null ? GlobalizationConfig.ResponseEncoding : Encoding.Default;
+			}
+		}
 
-        static public Encoding RequestEncoding {
-            get {
-                return GlobalizationConfig != null ? GlobalizationConfig.RequestEncoding : Encoding.Default;
-            }
-        }
-    }
+		static public Encoding RequestEncoding {
+			get {
+				return GlobalizationConfig != null ? GlobalizationConfig.RequestEncoding : Encoding.Default;
+			}
+		}
+	}
 }
 

@@ -20,52 +20,52 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public sealed class DataGridViewColumnDesignTimeVisibleAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+	public sealed class DataGridViewColumnDesignTimeVisibleAttribute : Attribute {
 
-        public static readonly DataGridViewColumnDesignTimeVisibleAttribute Default = new DataGridViewColumnDesignTimeVisibleAttribute(true);
+		public static readonly DataGridViewColumnDesignTimeVisibleAttribute Default = new DataGridViewColumnDesignTimeVisibleAttribute(true);
 
-        public static readonly DataGridViewColumnDesignTimeVisibleAttribute No = new DataGridViewColumnDesignTimeVisibleAttribute(false);
+		public static readonly DataGridViewColumnDesignTimeVisibleAttribute No = new DataGridViewColumnDesignTimeVisibleAttribute(false);
 
-        public static readonly DataGridViewColumnDesignTimeVisibleAttribute Yes = new DataGridViewColumnDesignTimeVisibleAttribute(true);
+		public static readonly DataGridViewColumnDesignTimeVisibleAttribute Yes = new DataGridViewColumnDesignTimeVisibleAttribute(true);
 
-        private bool visible;
+		private bool visible;
 
-        public DataGridViewColumnDesignTimeVisibleAttribute () {
-        }
+		public DataGridViewColumnDesignTimeVisibleAttribute () {
+		}
 
-        public DataGridViewColumnDesignTimeVisibleAttribute (bool visible) {
-            this.visible = visible;
-        }
+		public DataGridViewColumnDesignTimeVisibleAttribute (bool visible) {
+			this.visible = visible;
+		}
 
-        public bool Visible {
-            get { return visible; }
-        }
+		public bool Visible {
+			get { return visible; }
+		}
 
-        public override bool Equals (object obj) {
-            if (!(obj is DataGridViewColumnDesignTimeVisibleAttribute)) {
-                return false;
-            }
-            if ((obj as DataGridViewColumnDesignTimeVisibleAttribute).visible != this.visible) {
-                return false;
-            }
-            return base.Equals(obj);
-        }
+		public override bool Equals (object obj) {
+			if (!(obj is DataGridViewColumnDesignTimeVisibleAttribute)) {
+				return false;
+			}
+			if ((obj as DataGridViewColumnDesignTimeVisibleAttribute).visible != this.visible) {
+				return false;
+			}
+			return base.Equals(obj);
+		}
 
-        public override int GetHashCode () {
-            return base.GetHashCode ();
-        }
+		public override int GetHashCode () {
+			return base.GetHashCode ();
+		}
 
-        public override bool IsDefaultAttribute () {
-            return this.Equals(Default);
-        }
+		public override bool IsDefaultAttribute () {
+			return this.Equals(Default);
+		}
 
-    }
+	}
 
 }

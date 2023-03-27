@@ -27,7 +27,7 @@ namespace b424916
         GCHandle gch2;
         public Node Next;
 
-    [System.Security.SecuritySafeCritical]
+	[System.Security.SecuritySafeCritical]
         public Node()
         {
 

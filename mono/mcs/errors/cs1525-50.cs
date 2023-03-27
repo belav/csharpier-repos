@@ -5,9 +5,9 @@ using System;
 
 class MyTest
 {
-    public static void Main (string[] args)
-    {
-        try {
-        } catch (Exception)
-    }
+	public static void Main (string[] args)
+	{
+		try {
+		} catch (Exception)
+	}
 }

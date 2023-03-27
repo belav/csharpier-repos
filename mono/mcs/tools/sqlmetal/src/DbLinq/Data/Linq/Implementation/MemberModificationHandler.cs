@@ -1,4 +1,4 @@
-#region MIT license
+﻿#region MIT license
 // 
 // MIT license
 //
@@ -63,7 +63,7 @@ namespace DbLinq.Data.Linq.Implementation
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>
-        ///     <c>true</c> if the specified type is primitive type; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the specified type is primitive type; otherwise, <c>false</c>.
         /// </returns>
         protected static bool IsPrimitiveType(Type type)
         {
@@ -236,21 +236,21 @@ namespace DbLinq.Data.Linq.Implementation
             }
         }
 
-        /// <summary>
-        /// Unregisters an entity.
-        /// This is useful when the DataContext has been disposed
-        /// </summary>
-        /// <param name="entity"></param>
-        public void UnregisterAll()
-        {
-            //Duplicate the list to not modify modifiedEntities
-            var modifiedEntities = new List<object>(modifiedProperties.Keys);
-            foreach (var entity in modifiedEntities)
-            {
-                if (IsNotifying(entity))
-                    UnregisterNotification(entity);
-            }
-        }
+		/// <summary>
+		/// Unregisters an entity.
+		/// This is useful when the DataContext has been disposed
+		/// </summary>
+		/// <param name="entity"></param>
+		public void UnregisterAll()
+		{
+			//Duplicate the list to not modify modifiedEntities
+			var modifiedEntities = new List<object>(modifiedProperties.Keys);
+			foreach (var entity in modifiedEntities)
+			{
+				if (IsNotifying(entity))
+					UnregisterNotification(entity);
+			}
+		}
 
         private void UnregisterNotification(object entity)
         {
@@ -310,7 +310,7 @@ namespace DbLinq.Data.Linq.Implementation
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>
-        ///     <c>true</c> if the specified notifiying entity is modified; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the specified notifiying entity is modified; otherwise, <c>false</c>.
         /// </returns>
         private bool IsNotifyingModified(object entity)
         {
@@ -326,7 +326,7 @@ namespace DbLinq.Data.Linq.Implementation
         /// <param name="p1">The p1.</param>
         /// <param name="p2">The p2.</param>
         /// <returns>
-        ///     <c>true</c> if the specified property has changed; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the specified property has changed; otherwise, <c>false</c>.
         /// </returns>
         private static bool IsPropertyModified(object p1, object p2)
         {
@@ -339,7 +339,7 @@ namespace DbLinq.Data.Linq.Implementation
         /// <param name="entity">The entity.</param>
         /// <param name="metaModel">The meta model.</param>
         /// <returns>
-        ///     <c>true</c> if the specified raw entity has changed; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the specified raw entity has changed; otherwise, <c>false</c>.
         /// </returns>
         private bool IsRawModified(object entity, MetaModel metaModel)
         {

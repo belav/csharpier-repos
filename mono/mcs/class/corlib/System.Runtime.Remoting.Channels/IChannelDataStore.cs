@@ -31,11 +31,11 @@
 
 namespace System.Runtime.Remoting.Channels {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IChannelDataStore
-    {
-        string [] ChannelUris { get;}
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IChannelDataStore
+	{
+		string [] ChannelUris { get;}
 
-        object this [object key] { get; set; }
-    }
+		object this [object key] { get; set; }
+	}
 }

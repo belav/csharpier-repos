@@ -2,8 +2,8 @@
 // System.Web.SiteMapProviderCollection
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 //  (C) 2003 Ben Maurer
 //  (C) 2005-2009 Novell, Inc (http://www.novell.com)
@@ -37,36 +37,36 @@ using System.Configuration.Provider;
 using System.Web.UI;
 
 namespace System.Web {
-    public sealed class SiteMapProviderCollection : ProviderCollection
-    {
-        public SiteMapProviderCollection () {}
-        
-        public override void Add (ProviderBase provider)
-        {
-            if (provider == null)
-                throw new ArgumentNullException ("provider");
-            if (!(provider is SiteMapProvider))
-                throw new InvalidOperationException(String.Format ("{0} must implement {1} to act as a site map provider", provider.GetType (), typeof (SiteMapProvider)));
-            if (this [provider.Name] != null)
-                throw new ArgumentException ("Duplicate site map providers");
-            base.Add (provider);
-        }
-        
-        public void Add (SiteMapProvider provider)
-        {
-            Add ((ProviderBase)provider);
-        }
-        
-        public void AddArray (SiteMapProvider[] providerArray)
-        {
-            foreach (SiteMapProvider p in providerArray)
-                Add (p);
-        }
-        
-        public new SiteMapProvider this [string name] {
-            get { return (SiteMapProvider) base [name]; }
-        }
-    }
+	public sealed class SiteMapProviderCollection : ProviderCollection
+	{
+		public SiteMapProviderCollection () {}
+		
+		public override void Add (ProviderBase provider)
+		{
+			if (provider == null)
+				throw new ArgumentNullException ("provider");
+			if (!(provider is SiteMapProvider))
+				throw new InvalidOperationException(String.Format ("{0} must implement {1} to act as a site map provider", provider.GetType (), typeof (SiteMapProvider)));
+			if (this [provider.Name] != null)
+				throw new ArgumentException ("Duplicate site map providers");
+			base.Add (provider);
+		}
+		
+		public void Add (SiteMapProvider provider)
+		{
+			Add ((ProviderBase)provider);
+		}
+		
+		public void AddArray (SiteMapProvider[] providerArray)
+		{
+			foreach (SiteMapProvider p in providerArray)
+				Add (p);
+		}
+		
+		public new SiteMapProvider this [string name] {
+			get { return (SiteMapProvider) base [name]; }
+		}
+	}
 }
 
 

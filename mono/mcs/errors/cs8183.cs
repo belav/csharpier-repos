@@ -4,8 +4,8 @@
 
 class X
 {
-    public static void Main ()
-    {
-        _ = default;
-    }
+	public static void Main ()
+	{
+		_ = default;
+	}
 }

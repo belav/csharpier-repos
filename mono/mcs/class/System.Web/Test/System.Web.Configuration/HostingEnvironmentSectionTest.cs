@@ -1,9 +1,9 @@
 //
 // HostingEnvironmentSectionTest.cs 
-//    - unit tests for System.Web.Configuration.HostingEnvironmentSection
+//	- unit tests for System.Web.Configuration.HostingEnvironmentSection
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,34 +38,34 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-    [TestFixture]
-    public class HostingEnvironmentSectionTest  {
+	[TestFixture]
+	public class HostingEnvironmentSectionTest  {
 
-        [Test]
-        public void Defaults ()
-        {
-            HostingEnvironmentSection s = new HostingEnvironmentSection ();
+		[Test]
+		public void Defaults ()
+		{
+			HostingEnvironmentSection s = new HostingEnvironmentSection ();
 
-            Assert.AreEqual (TimeSpan.MaxValue, s.IdleTimeout, "A1");
-            Assert.IsTrue (s.ShadowCopyBinAssemblies, "A2");
-            Assert.AreEqual (TimeSpan.FromSeconds (30), s.ShutdownTimeout, "A3");
-        }
+			Assert.AreEqual (TimeSpan.MaxValue, s.IdleTimeout, "A1");
+			Assert.IsTrue (s.ShadowCopyBinAssemblies, "A2");
+			Assert.AreEqual (TimeSpan.FromSeconds (30), s.ShutdownTimeout, "A3");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void IdleTimeout_validationFailure ()
-        {
-            HostingEnvironmentSection s = new HostingEnvironmentSection ();
-            s.IdleTimeout = TimeSpan.FromSeconds (-1);
-        }
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void IdleTimeout_validationFailure ()
+		{
+			HostingEnvironmentSection s = new HostingEnvironmentSection ();
+			s.IdleTimeout = TimeSpan.FromSeconds (-1);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void ShutdownTimeout_validationFailure ()
-        {
-            HostingEnvironmentSection s = new HostingEnvironmentSection ();
-            s.ShutdownTimeout = TimeSpan.FromSeconds (-1);
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void ShutdownTimeout_validationFailure ()
+		{
+			HostingEnvironmentSection s = new HostingEnvironmentSection ();
+			s.ShutdownTimeout = TimeSpan.FromSeconds (-1);
+		}
+	}
 }
 

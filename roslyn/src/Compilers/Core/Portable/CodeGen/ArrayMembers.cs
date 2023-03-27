@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -27,7 +27,7 @@ using EmitContext = Microsoft.CodeAnalysis.Emit.EmitContext;
 //assumed.
 //
 //* A constructor that takes twice as many int32 arguments as there are dimensions of the array. These
-//arguments occur in pairs—one pair per dimension—with the first argument of each pair specifying the
+//arguments occur in pairsâ€”one pair per dimensionâ€”with the first argument of each pair specifying the
 //lower bound for that dimension, and the second argument specifying the total number of elements in that
 //dimension. Note that vectors are not created with this constructor, since a zero lower bound is assumed for
 //vectors.

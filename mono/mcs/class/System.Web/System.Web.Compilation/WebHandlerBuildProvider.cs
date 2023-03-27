@@ -2,7 +2,7 @@
 // System.Web.Compilation.WebHandlerBuildProvider
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -39,23 +39,23 @@ using System.Reflection;
 using System.Web.UI;
 
 namespace System.Web.Compilation {
-    [BuildProviderAppliesTo (BuildProviderAppliesTo.Web)]
-    sealed class WebHandlerBuildProvider : SimpleBuildProvider
-    {
-        public WebHandlerBuildProvider ()
-        {
-        }
+	[BuildProviderAppliesTo (BuildProviderAppliesTo.Web)]
+	sealed class WebHandlerBuildProvider : SimpleBuildProvider
+	{
+		public WebHandlerBuildProvider ()
+		{
+		}
 
-        protected override SimpleWebHandlerParser CreateParser (VirtualPath virtualPath, string physicalPath, TextReader reader, HttpContext context)
-        {
-            return new WebHandlerParser (context, virtualPath, physicalPath, reader);
-        }
-        
-        protected override SimpleWebHandlerParser CreateParser (VirtualPath virtualPath, string physicalPath, HttpContext context)
-        {
-            return new WebHandlerParser (context, virtualPath, physicalPath, OpenReader (virtualPath.Original));
-        }
-    }
+		protected override SimpleWebHandlerParser CreateParser (VirtualPath virtualPath, string physicalPath, TextReader reader, HttpContext context)
+		{
+			return new WebHandlerParser (context, virtualPath, physicalPath, reader);
+		}
+		
+		protected override SimpleWebHandlerParser CreateParser (VirtualPath virtualPath, string physicalPath, HttpContext context)
+		{
+			return new WebHandlerParser (context, virtualPath, physicalPath, OpenReader (virtualPath.Original));
+		}
+	}
 }
 
 

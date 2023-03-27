@@ -7,6 +7,6 @@ using System;
 
 [CLSCompliant(true)]
 public class Foo {
-    public static void Main () {}
-    public static void main () {}
+	public static void Main () {}
+	public static void main () {}
 }

@@ -2,7 +2,7 @@
 // (C) 2005 Mainsoft Corporation (http://www.mainsoft.com)
 //
 // Authors:
-//    Vladimir Krasnov <vladimirk@mainsoft.com>
+//	Vladimir Krasnov <vladimirk@mainsoft.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -32,61 +32,61 @@ using System.Text;
 
 namespace System.Web.UI.WebControls
 {
-    [ThemeableAttribute (true)]
-    [BindableAttribute (false)]
-    [PersistChildren (false)]
-    [ParseChildren (true)]
-    [ToolboxItem (false)]
-    [ControlBuilder (typeof (WizardStepControlBuilder))]
-    public class TemplatedWizardStep : WizardStepBase
-    {
-        ITemplate _contentTemplate = null;
-        Control _contentTemplateContainer = null;
-        ITemplate _customNavigationTemplate = null;
-        Control _customNavigationTemplateContainer = null;
+	[ThemeableAttribute (true)]
+	[BindableAttribute (false)]
+	[PersistChildren (false)]
+	[ParseChildren (true)]
+	[ToolboxItem (false)]
+	[ControlBuilder (typeof (WizardStepControlBuilder))]
+	public class TemplatedWizardStep : WizardStepBase
+	{
+		ITemplate _contentTemplate = null;
+		Control _contentTemplateContainer = null;
+		ITemplate _customNavigationTemplate = null;
+		Control _customNavigationTemplateContainer = null;
 
-        [DefaultValue (null)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [Browsable (false)]
-        [TemplateContainerAttribute (typeof (System.Web.UI.WebControls.Wizard))]
-        public virtual ITemplate ContentTemplate {
-            get { return _contentTemplate; }
-            set { _contentTemplate = value; }
-        }
+		[DefaultValue (null)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
+		[PersistenceMode (PersistenceMode.InnerProperty)]
+		[Browsable (false)]
+		[TemplateContainerAttribute (typeof (System.Web.UI.WebControls.Wizard))]
+		public virtual ITemplate ContentTemplate {
+			get { return _contentTemplate; }
+			set { _contentTemplate = value; }
+		}
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public Control ContentTemplateContainer {
-            get { return _contentTemplateContainer; }
-            internal set { _contentTemplateContainer = value; }
-        }
+		[Browsable (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public Control ContentTemplateContainer {
+			get { return _contentTemplateContainer; }
+			internal set { _contentTemplateContainer = value; }
+		}
 
-        [DefaultValue (null)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [Browsable (false)]
-        [TemplateContainerAttribute (typeof (System.Web.UI.WebControls.Wizard))]
-        public virtual ITemplate CustomNavigationTemplate
-        {
-            get { return _customNavigationTemplate; }
-            set { _customNavigationTemplate = value; }
-        }
+		[DefaultValue (null)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
+		[PersistenceMode (PersistenceMode.InnerProperty)]
+		[Browsable (false)]
+		[TemplateContainerAttribute (typeof (System.Web.UI.WebControls.Wizard))]
+		public virtual ITemplate CustomNavigationTemplate
+		{
+			get { return _customNavigationTemplate; }
+			set { _customNavigationTemplate = value; }
+		}
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Bindable (false)]
-        public Control CustomNavigationTemplateContainer {
-            get { return _customNavigationTemplateContainer; }
-            internal set { _customNavigationTemplateContainer = value; }
-        }
+		[Browsable (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[Bindable (false)]
+		public Control CustomNavigationTemplateContainer {
+			get { return _customNavigationTemplateContainer; }
+			internal set { _customNavigationTemplateContainer = value; }
+		}
 
-        [Browsable (true)]
-        [MonoTODO("Why override?")]
-        public override string SkinID {
-            get { return base.SkinID; }
-            set { base.SkinID = value; }
-        }
-    }
+		[Browsable (true)]
+		[MonoTODO("Why override?")]
+		public override string SkinID {
+			get { return base.SkinID; }
+			set { base.SkinID = value; }
+		}
+	}
 }
 

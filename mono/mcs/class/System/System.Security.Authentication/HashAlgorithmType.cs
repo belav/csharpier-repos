@@ -2,7 +2,7 @@
 // System.Net.Security.HashAlgorithmType.cs
 //
 // Authors:
-//    Tim Coleman (tim@timcoleman.com)
+//	Tim Coleman (tim@timcoleman.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (c) 2004, 2005 Novell, Inc. (http://www.novell.com)
@@ -32,14 +32,14 @@
 
 namespace System.Security.Authentication
 {
-    public enum HashAlgorithmType 
-    {
-        None,
-        Md5 = 0x8003,
-        Sha1 = 0x8004,
-        Sha256 = 0x800C,
-        Sha384 = 0x800D,
-        Sha512 = 0x800E,
-    }
+	public enum HashAlgorithmType 
+	{
+		None,
+		Md5 = 0x8003,
+		Sha1 = 0x8004,
+		Sha256 = 0x800C,
+		Sha384 = 0x800D,
+		Sha512 = 0x800E,
+	}
 }
 

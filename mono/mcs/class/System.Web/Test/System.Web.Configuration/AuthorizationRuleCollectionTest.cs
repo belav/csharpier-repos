@@ -1,9 +1,9 @@
 //
 // AuthorizationRuleCollectionTest.cs 
-//    - unit tests for System.Web.Configuration.AuthorizationRuleCollection
+//	- unit tests for System.Web.Configuration.AuthorizationRuleCollection
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,67 +41,67 @@ using System.Reflection;
 
 namespace MonoTests.System.Web.Configuration {
 
-    [TestFixture]
-    public class AuthorizationRuleCollectionTest  {
+	[TestFixture]
+	public class AuthorizationRuleCollectionTest  {
 
-        [Test]
-        public void AddDuplicate ()
-        {
-            AuthorizationRuleCollection col = new AuthorizationRuleCollection ();
-            AuthorizationRule rule = new AuthorizationRule (AuthorizationRuleAction.Deny);
+		[Test]
+		public void AddDuplicate ()
+		{
+			AuthorizationRuleCollection col = new AuthorizationRuleCollection ();
+			AuthorizationRule rule = new AuthorizationRule (AuthorizationRuleAction.Deny);
 
-            rule.Users.Add ("toshok");
-            rule.Verbs.Add ("GET");
+			rule.Users.Add ("toshok");
+			rule.Verbs.Add ("GET");
 
-            col.Add (rule);
-            col.Add (rule);
+			col.Add (rule);
+			col.Add (rule);
 
-            Assert.AreEqual (2, col.Count, "A1");
-            Assert.AreEqual ("toshok", col[0].Users.ToString(), "A2");
-        }
+			Assert.AreEqual (2, col.Count, "A1");
+			Assert.AreEqual ("toshok", col[0].Users.ToString(), "A2");
+		}
 
-        [Test]
-        public void AddDuplicate2 ()
-        {
-            AuthorizationRuleCollection col = new AuthorizationRuleCollection ();
-            AuthorizationRule rule1 = new AuthorizationRule (AuthorizationRuleAction.Deny);
-            AuthorizationRule rule2 = new AuthorizationRule (AuthorizationRuleAction.Allow);
+		[Test]
+		public void AddDuplicate2 ()
+		{
+			AuthorizationRuleCollection col = new AuthorizationRuleCollection ();
+			AuthorizationRule rule1 = new AuthorizationRule (AuthorizationRuleAction.Deny);
+			AuthorizationRule rule2 = new AuthorizationRule (AuthorizationRuleAction.Allow);
 
-            rule1.Users.Add ("toshok");
-            rule1.Verbs.Add ("GET");
+			rule1.Users.Add ("toshok");
+			rule1.Verbs.Add ("GET");
 
-            rule2.Users.Add ("toshok");
-            rule2.Verbs.Add ("GET");
+			rule2.Users.Add ("toshok");
+			rule2.Verbs.Add ("GET");
 
-            col.Add (rule1);
-            col.Add (rule2);
+			col.Add (rule1);
+			col.Add (rule2);
 
-            Assert.AreEqual (2, col.Count, "A1");
-            Assert.AreEqual ("toshok", col[0].Users.ToString(), "A2");
-            Assert.AreEqual (AuthorizationRuleAction.Deny, col[0].Action, "A3");
-            Assert.AreEqual (AuthorizationRuleAction.Allow, col[1].Action, "A4");
-        }
+			Assert.AreEqual (2, col.Count, "A1");
+			Assert.AreEqual ("toshok", col[0].Users.ToString(), "A2");
+			Assert.AreEqual (AuthorizationRuleAction.Deny, col[0].Action, "A3");
+			Assert.AreEqual (AuthorizationRuleAction.Allow, col[1].Action, "A4");
+		}
 
-        [Test]
-        public void GetElementKey ()
-        {
-            MethodInfo minfo = typeof (AuthorizationRuleCollection).GetMethod ("GetElementKey", BindingFlags.Instance | BindingFlags.NonPublic);
-            AuthorizationRuleCollection col = new AuthorizationRuleCollection ();
+		[Test]
+		public void GetElementKey ()
+		{
+			MethodInfo minfo = typeof (AuthorizationRuleCollection).GetMethod ("GetElementKey", BindingFlags.Instance | BindingFlags.NonPublic);
+			AuthorizationRuleCollection col = new AuthorizationRuleCollection ();
 
-            AuthorizationRule rule = new AuthorizationRule (AuthorizationRuleAction.Deny);
+			AuthorizationRule rule = new AuthorizationRule (AuthorizationRuleAction.Deny);
 
-            rule.Users.Add ("toshok");
-            rule.Verbs.Add ("GET");
+			rule.Users.Add ("toshok");
+			rule.Verbs.Add ("GET");
 
-            col.Add (rule);
+			col.Add (rule);
 
-            object[] args = new object[1];
-            args[0] = rule;
-            string key = (string)minfo.Invoke (col, args);
+			object[] args = new object[1];
+			args[0] = rule;
+			string key = (string)minfo.Invoke (col, args);
 
-            Assert.AreEqual ("Deny", key, "A1");
-        }
-    }
+			Assert.AreEqual ("Deny", key, "A1");
+		}
+	}
 
 }
 

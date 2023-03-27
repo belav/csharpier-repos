@@ -7,8 +7,8 @@ public static class TestClass {
                         a = 0;
                 };
 
-        int x = 5;
-        out_delegate (out x);
-        return x;
+		int x = 5;
+		out_delegate (out x);
+		return x;
         }
 }

@@ -2,7 +2,7 @@
 // System.Web.Hosting.IAppManagerAppDomainFactory.cs
 //
 // Authors:
-//    Duncan Mak (duncan@ximian.com)
+//	Duncan Mak (duncan@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,14 +31,14 @@ using System.Runtime.InteropServices;
 
 namespace System.Web.Hosting
 {
-    [GuidAttribute ("02998279-7175-4D59-AA5A-FB8E44D4CA9D")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImportAttribute]
+	[GuidAttribute ("02998279-7175-4D59-AA5A-FB8E44D4CA9D")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImportAttribute]
         public interface IAppManagerAppDomainFactory
         {
-        [return: MarshalAs (UnmanagedType.Interface)]
+		[return: MarshalAs (UnmanagedType.Interface)]
                 object Create ([In, MarshalAs(UnmanagedType.BStr)] string appId,
-                   [In, MarshalAs(UnmanagedType.BStr)] string appPath);
+			       [In, MarshalAs(UnmanagedType.BStr)] string appPath);
                 void Stop ();
         }
 }

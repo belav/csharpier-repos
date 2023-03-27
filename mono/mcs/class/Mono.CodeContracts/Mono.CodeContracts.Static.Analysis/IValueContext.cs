@@ -2,7 +2,7 @@
 // IValueContext.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -33,12 +33,12 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Analysis {
-    interface IValueContext<SymbolicValue> {
-        bool IsZero (APC at, SymbolicValue value);
-        bool TryLocalValue (APC at, Local local, out SymbolicValue sv);
-        bool TryParameterValue (APC at, Parameter p, out SymbolicValue sv);
-        bool IsConstant (APC readAt, SymbolicValue symbol, out TypeNode type, out object constant);
-        FlatDomain<TypeNode> GetType (APC readAt, SymbolicValue symbol);
-        Sequence<PathElement> AccessPathList (APC at, SymbolicValue value, bool allowLocal, bool preferLocal);
-    }
+	interface IValueContext<SymbolicValue> {
+		bool IsZero (APC at, SymbolicValue value);
+		bool TryLocalValue (APC at, Local local, out SymbolicValue sv);
+		bool TryParameterValue (APC at, Parameter p, out SymbolicValue sv);
+		bool IsConstant (APC readAt, SymbolicValue symbol, out TypeNode type, out object constant);
+		FlatDomain<TypeNode> GetType (APC readAt, SymbolicValue symbol);
+		Sequence<PathElement> AccessPathList (APC at, SymbolicValue value, bool allowLocal, bool preferLocal);
+	}
 }

@@ -32,10 +32,10 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class ModifyDNResponse : DirectoryResponse
-    {
-        internal ModifyDNResponse ()
-        {
-        }
-    }
+	public class ModifyDNResponse : DirectoryResponse
+	{
+		internal ModifyDNResponse ()
+		{
+		}
+	}
 }

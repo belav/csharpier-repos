@@ -4,8 +4,8 @@
 
 namespace System {
     public partial class Delegate {
-    public static Delegate Combine(Delegate a, Delegate b) { return null; }
-    public static void Remove(Delegate a, Delegate b) { return; }
+	public static Delegate Combine(Delegate a, Delegate b) { return null; }
+	public static void Remove(Delegate a, Delegate b) { return; }
     }
 }
 

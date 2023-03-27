@@ -3,8 +3,8 @@
 
 static class Converter
 {
-    static Dictionary<Options, string> options = new Dictionary<Options, string> () 
-    {
-        { Options., "I am completed!" },
-    };
+	static Dictionary<Options, string> options = new Dictionary<Options, string> () 
+	{
+		{ Options., "I am completed!" },
+	};
 }

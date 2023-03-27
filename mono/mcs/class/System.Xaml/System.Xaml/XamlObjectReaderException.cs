@@ -27,27 +27,27 @@ using System.Runtime.Serialization;
 
 namespace System.Xaml
 {
-    [Serializable]
-    public class XamlObjectReaderException : XamlException
-    {
-        public XamlObjectReaderException ()
-            : this ("XAML object reader error")
-        {
-        }
+	[Serializable]
+	public class XamlObjectReaderException : XamlException
+	{
+		public XamlObjectReaderException ()
+			: this ("XAML object reader error")
+		{
+		}
 
-        public XamlObjectReaderException (string message)
-            : this (message, null)
-        {
-        }
+		public XamlObjectReaderException (string message)
+			: this (message, null)
+		{
+		}
 
-        public XamlObjectReaderException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
+		public XamlObjectReaderException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
 
-        protected XamlObjectReaderException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-        }
-    }
+		protected XamlObjectReaderException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{
+		}
+	}
 }

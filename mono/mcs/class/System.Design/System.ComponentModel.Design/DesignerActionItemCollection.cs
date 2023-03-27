@@ -32,59 +32,59 @@ using System.Collections;
 
 namespace System.ComponentModel.Design
 {
-    public class DesignerActionItemCollection : CollectionBase
-    {
-        //
-        // Constructors
-        //
-        public DesignerActionItemCollection ()
-        {
-        }
+	public class DesignerActionItemCollection : CollectionBase
+	{
+		//
+		// Constructors
+		//
+		public DesignerActionItemCollection ()
+		{
+		}
 
-        //
-        // Properties
-        //
-        public DesignerActionItem this [int index]
-        {
-            get {
-                return (DesignerActionItem) List [index];
-            }
-            set {
-                List [index] = value;
-            }
-        }
+		//
+		// Properties
+		//
+		public DesignerActionItem this [int index]
+		{
+			get {
+				return (DesignerActionItem) List [index];
+			}
+			set {
+				List [index] = value;
+			}
+		}
 
-        //
-        // Methods
-        //
-        public int Add (DesignerActionItem value)
-        {
-            return List.Add (value); 
-        }
+		//
+		// Methods
+		//
+		public int Add (DesignerActionItem value)
+		{
+			return List.Add (value); 
+		}
 
-        public bool Contains (DesignerActionItem value)
-        {
-            return List.Contains (value);
-        }
-        
-        public void CopyTo (DesignerActionItem[] array, int index)
-        {
-            List.CopyTo (array, index);
-        }
+		public bool Contains (DesignerActionItem value)
+		{
+			return List.Contains (value);
+		}
+		
+		public void CopyTo (DesignerActionItem[] array, int index)
+		{
+			List.CopyTo (array, index);
+		}
 
-        public int IndexOf (DesignerActionItem value)
-        {
-            return List.IndexOf (value);
-        }
+		public int IndexOf (DesignerActionItem value)
+		{
+			return List.IndexOf (value);
+		}
 
-        public void Insert (int index, DesignerActionItem value)
-        {
-            List.Insert (index, value);
-        }
+		public void Insert (int index, DesignerActionItem value)
+		{
+			List.Insert (index, value);
+		}
 
-        public void Remove (DesignerActionItem value)
-        {
-            List.Remove (value);
-        }
-    }
+		public void Remove (DesignerActionItem value)
+		{
+			List.Remove (value);
+		}
+	}
 }

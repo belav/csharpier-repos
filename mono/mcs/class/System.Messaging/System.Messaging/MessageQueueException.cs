@@ -34,52 +34,52 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
 namespace System.Messaging 
-{    
-    [Serializable]
-    public class MessageQueueException: ExternalException 
-    {
-        private MessageQueueErrorCode _messageQueueErrorCode;
+{	
+	[Serializable]
+	public class MessageQueueException: ExternalException 
+	{
+		private MessageQueueErrorCode _messageQueueErrorCode;
 
-        internal MessageQueueException(MessageQueueErrorCode messageQueueErrorCode, 
-                                       String message) : base (message)
-        
-        {
-            _messageQueueErrorCode = messageQueueErrorCode;
-        }
+		internal MessageQueueException(MessageQueueErrorCode messageQueueErrorCode, 
+		                               String message) : base (message)
+		
+		{
+			_messageQueueErrorCode = messageQueueErrorCode;
+		}
 
-        internal MessageQueueException(MessageQueueErrorCode messageQueueErrorCode) 
-            : this (messageQueueErrorCode, "UnknownError")
-        {
-        }
-        
-        protected MessageQueueException (SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-            _messageQueueErrorCode = (MessageQueueErrorCode) info.GetInt32 ("NativeErrorCode");
-        }
+		internal MessageQueueException(MessageQueueErrorCode messageQueueErrorCode) 
+			: this (messageQueueErrorCode, "UnknownError")
+		{
+		}
+		
+		protected MessageQueueException (SerializationInfo info, StreamingContext context) : base(info, context)
+		{
+			_messageQueueErrorCode = (MessageQueueErrorCode) info.GetInt32 ("NativeErrorCode");
+		}
 
-        [MonoTODO]
-        private string TranslateCodeToDescription()
-        {
-            return "UnknownError";
-        }
+		[MonoTODO]
+		private string TranslateCodeToDescription()
+		{
+			return "UnknownError";
+		}
 
-        public override string Message 
-        {
-            get { return base.Message; }
-        }
-        
-        public MessageQueueErrorCode MessageQueueErrorCode 
-        {
-            get { return _messageQueueErrorCode; }
-        }
-        
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null)
-                throw new ArgumentNullException();
+		public override string Message 
+		{
+			get { return base.Message; }
+		}
+		
+		public MessageQueueErrorCode MessageQueueErrorCode 
+		{
+			get { return _messageQueueErrorCode; }
+		}
+		
+		public override void GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			if (info == null)
+				throw new ArgumentNullException();
 
-            info.AddValue ("NativeErrorCode", (int) _messageQueueErrorCode);
-            base.GetObjectData(info, context);
-        }
-    }
+			info.AddValue ("NativeErrorCode", (int) _messageQueueErrorCode);
+			base.GetObjectData(info, context);
+		}
+	}
 }

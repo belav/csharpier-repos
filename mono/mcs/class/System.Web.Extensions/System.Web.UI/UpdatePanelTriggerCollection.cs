@@ -1,4 +1,4 @@
-//
+﻿//
 // UpdatePanelTriggerCollection.cs
 //
 // Author:
@@ -34,58 +34,58 @@ using System.Collections.ObjectModel;
 
 namespace System.Web.UI
 {
-    public class UpdatePanelTriggerCollection : Collection<UpdatePanelTrigger>
-    {
-        UpdatePanel _owner;
-        bool initialized;
-        
-        public UpdatePanelTriggerCollection (UpdatePanel owner)
-        {
-            _owner = owner;
-        }
+	public class UpdatePanelTriggerCollection : Collection<UpdatePanelTrigger>
+	{
+		UpdatePanel _owner;
+		bool initialized;
+		
+		public UpdatePanelTriggerCollection (UpdatePanel owner)
+		{
+			_owner = owner;
+		}
 
-        public UpdatePanel Owner {
-            get {
-                return _owner;
-            }
-        }
+		public UpdatePanel Owner {
+			get {
+				return _owner;
+			}
+		}
 
-        protected override void ClearItems ()
-        {
-            base.ClearItems ();
-        }
+		protected override void ClearItems ()
+		{
+			base.ClearItems ();
+		}
 
-        protected override void InsertItem (int index, UpdatePanelTrigger item)
-        {
-            base.InsertItem (index, item);
-            item.Owner = Owner;
+		protected override void InsertItem (int index, UpdatePanelTrigger item)
+		{
+			base.InsertItem (index, item);
+			item.Owner = Owner;
 
-            if (!initialized || item == null)
-                return;
+			if (!initialized || item == null)
+				return;
 
-            item.Initialize ();
-        }
+			item.Initialize ();
+		}
 
-        protected override void RemoveItem (int index)
-        {
-            base.RemoveItem (index);
-        }
-        
-        protected override void SetItem (int index, UpdatePanelTrigger item)
-        {
-            base.SetItem (index, item);
-            item.Owner = Owner;
-        }
+		protected override void RemoveItem (int index)
+		{
+			base.RemoveItem (index);
+		}
+		
+		protected override void SetItem (int index, UpdatePanelTrigger item)
+		{
+			base.SetItem (index, item);
+			item.Owner = Owner;
+		}
 
-        internal void Initialize ()
-        {
-            if (initialized)
-                return;
+		internal void Initialize ()
+		{
+			if (initialized)
+				return;
 
-            for (int i = 0; i < Count; i++)
-                this [i].Initialize ();
+			for (int i = 0; i < Count; i++)
+				this [i].Initialize ();
 
-            initialized = true;
-        }
-    }
+			initialized = true;
+		}
+	}
 }

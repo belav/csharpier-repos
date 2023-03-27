@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum ToolStripItemDisplayStyle
-    {
-        None = 0,
-        Text = 1,
-        Image = 2,
-        ImageAndText = 3
-    }
+	public enum ToolStripItemDisplayStyle
+	{
+		None = 0,
+		Text = 1,
+		Image = 2,
+		ImageAndText = 3
+	}
 }

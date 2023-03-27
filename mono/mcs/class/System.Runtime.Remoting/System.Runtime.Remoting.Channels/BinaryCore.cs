@@ -35,109 +35,109 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace System.Runtime.Remoting.Channels
 {
-    internal class BinaryCore
-    {
-        BinaryFormatter _serializationFormatter;
-        BinaryFormatter _deserializationFormatter;
-        bool _includeVersions = true;
-        bool _strictBinding = false;
-        IDictionary _properties;
-        
-        TypeFilterLevel _filterLevel;
-        
-        public static BinaryCore DefaultInstance = new BinaryCore (TypeFilterLevel.Low);
-        public static readonly BinaryCore DefaultClientInstance = new BinaryCore (TypeFilterLevel.Full);
+	internal class BinaryCore
+	{
+		BinaryFormatter _serializationFormatter;
+		BinaryFormatter _deserializationFormatter;
+		bool _includeVersions = true;
+		bool _strictBinding = false;
+		IDictionary _properties;
+		
+		TypeFilterLevel _filterLevel;
+		
+		public static BinaryCore DefaultInstance = new BinaryCore (TypeFilterLevel.Low);
+		public static readonly BinaryCore DefaultClientInstance = new BinaryCore (TypeFilterLevel.Full);
 
-        public BinaryCore (object owner, IDictionary properties, string[] allowedProperties)
-        {
-            _properties = properties;
-            
-            if (_properties == null)
-            {
-                _properties = new Hashtable(10);
-            }
-            
-            foreach(DictionaryEntry property in properties)
-            {
-                string key = (string) property.Key;
-                if (Array.IndexOf (allowedProperties, key) == -1)
-                    throw new RemotingException (owner.GetType().Name + " does not recognize '" + key + "' configuration property");
-                
-                switch (key)
-                {
-                    case "includeVersions": 
-                        _includeVersions = Convert.ToBoolean (property.Value);
-                        break;
-                        
-                    case "strictBinding":
-                        _strictBinding = Convert.ToBoolean (property.Value);
-                        break;
-                        
-                    case "typeFilterLevel":
-                        if (property.Value is TypeFilterLevel)
-                            _filterLevel = (TypeFilterLevel) property.Value;
-                        else {
-                            string s = (string) property.Value;
-                            _filterLevel = (TypeFilterLevel) Enum.Parse (typeof(TypeFilterLevel), s);
-                        }
-                        break;
-                        
-                }
-            }
-            
-            Init ();
-        }
-        
-        public BinaryCore (TypeFilterLevel filterLevel)
-        {
-            _filterLevel = filterLevel;
-            _properties = new Hashtable ();
-            Init ();
-        }
-        
-        public void Init ()
-        {
-            RemotingSurrogateSelector surrogateSelector = new RemotingSurrogateSelector ();
-            StreamingContext context = new StreamingContext (StreamingContextStates.Remoting, null);
+		public BinaryCore (object owner, IDictionary properties, string[] allowedProperties)
+		{
+			_properties = properties;
+			
+			if (_properties == null)
+			{
+				_properties = new Hashtable(10);
+			}
+			
+			foreach(DictionaryEntry property in properties)
+			{
+				string key = (string) property.Key;
+				if (Array.IndexOf (allowedProperties, key) == -1)
+					throw new RemotingException (owner.GetType().Name + " does not recognize '" + key + "' configuration property");
+				
+				switch (key)
+				{
+					case "includeVersions": 
+						_includeVersions = Convert.ToBoolean (property.Value);
+						break;
+						
+					case "strictBinding":
+						_strictBinding = Convert.ToBoolean (property.Value);
+						break;
+						
+					case "typeFilterLevel":
+						if (property.Value is TypeFilterLevel)
+							_filterLevel = (TypeFilterLevel) property.Value;
+						else {
+							string s = (string) property.Value;
+							_filterLevel = (TypeFilterLevel) Enum.Parse (typeof(TypeFilterLevel), s);
+						}
+						break;
+						
+				}
+			}
+			
+			Init ();
+		}
+		
+		public BinaryCore (TypeFilterLevel filterLevel)
+		{
+			_filterLevel = filterLevel;
+			_properties = new Hashtable ();
+			Init ();
+		}
+		
+		public void Init ()
+		{
+			RemotingSurrogateSelector surrogateSelector = new RemotingSurrogateSelector ();
+			StreamingContext context = new StreamingContext (StreamingContextStates.Remoting, null);
 
-            _serializationFormatter = new BinaryFormatter (surrogateSelector, context);
-            _deserializationFormatter = new BinaryFormatter (null, context);
-            
-            _serializationFormatter.FilterLevel = _filterLevel;
-            _deserializationFormatter.FilterLevel = _filterLevel;
-            
-            if (!_includeVersions)
-            {
-                _serializationFormatter.AssemblyFormat = FormatterAssemblyStyle.Simple;
-                _deserializationFormatter.AssemblyFormat = FormatterAssemblyStyle.Simple;
-            }
+			_serializationFormatter = new BinaryFormatter (surrogateSelector, context);
+			_deserializationFormatter = new BinaryFormatter (null, context);
+			
+			_serializationFormatter.FilterLevel = _filterLevel;
+			_deserializationFormatter.FilterLevel = _filterLevel;
+			
+			if (!_includeVersions)
+			{
+				_serializationFormatter.AssemblyFormat = FormatterAssemblyStyle.Simple;
+				_deserializationFormatter.AssemblyFormat = FormatterAssemblyStyle.Simple;
+			}
 
-            if (!_strictBinding)
-            {
-                _serializationFormatter.Binder = ChannelCore.SimpleBinder;
-                _deserializationFormatter.Binder = ChannelCore.SimpleBinder;
-            }
-        }
-        
-        public BinaryFormatter Serializer
-        {
-            get { return _serializationFormatter; }
-        }
-        
-        public BinaryFormatter Deserializer
-        {
-            get { return _deserializationFormatter; }
-        }
-        
-        public IDictionary Properties
-        {
-            get { return _properties; }
-        }
-        
-        public TypeFilterLevel TypeFilterLevel
-        {
-            get { return _filterLevel; }
-        }
-    }
+			if (!_strictBinding)
+			{
+				_serializationFormatter.Binder = ChannelCore.SimpleBinder;
+				_deserializationFormatter.Binder = ChannelCore.SimpleBinder;
+			}
+		}
+		
+		public BinaryFormatter Serializer
+		{
+			get { return _serializationFormatter; }
+		}
+		
+		public BinaryFormatter Deserializer
+		{
+			get { return _deserializationFormatter; }
+		}
+		
+		public IDictionary Properties
+		{
+			get { return _properties; }
+		}
+		
+		public TypeFilterLevel TypeFilterLevel
+		{
+			get { return _filterLevel; }
+		}
+	}
 }
 

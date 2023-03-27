@@ -35,45 +35,45 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleParameter_ctor : GHTBase
 {
-    public static void Main()
-    {
-        OracleParameter_ctor tc = new OracleParameter_ctor();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OracleParameter_ctor");
-            tc.run();
-        }
-        catch(Exception ex){exp = ex;}
-        finally    {tc.EndTest(exp);}
-    }
+	public static void Main()
+	{
+		OracleParameter_ctor tc = new OracleParameter_ctor();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OracleParameter_ctor");
+			tc.run();
+		}
+		catch(Exception ex){exp = ex;}
+		finally	{tc.EndTest(exp);}
+	}
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
 
-        OracleParameter param = new OracleParameter();
+		OracleParameter param = new OracleParameter();
 
-        try
-        {
-            BeginCase("ctor");
-            Compare(param != null, true);
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
-    }
+		try
+		{
+			BeginCase("ctor");
+			Compare(param != null, true);
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
+	}
 
 
-    //public TestClass():base(true){}
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

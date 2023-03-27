@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DesignerAutoFormatCollection
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -38,147 +38,147 @@ using System.Collections;
 
 namespace System.Web.UI.Design
 {
-    public sealed class DesignerAutoFormatCollection : IList, ICollection, IEnumerable
-    {
-        public DesignerAutoFormatCollection ()
-        {
-        }
+	public sealed class DesignerAutoFormatCollection : IList, ICollection, IEnumerable
+	{
+		public DesignerAutoFormatCollection ()
+		{
+		}
 
-        [MonoTODO]
-        public int Count {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public int Count {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public DesignerAutoFormat this [int index] {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public DesignerAutoFormat this [int index] {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public Size PreviewSize {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public Size PreviewSize {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public object SyncRoot {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public object SyncRoot {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public int Add (DesignerAutoFormat format)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public int Add (DesignerAutoFormat format)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void Clear ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void Clear ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public bool Contains (DesignerAutoFormat format)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public bool Contains (DesignerAutoFormat format)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public int IndexOf (DesignerAutoFormat format)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public int IndexOf (DesignerAutoFormat format)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void Insert (int index, DesignerAutoFormat format)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void Insert (int index, DesignerAutoFormat format)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void Remove (DesignerAutoFormat format)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void Remove (DesignerAutoFormat format)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void RemoveAt (int index)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void RemoveAt (int index)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        void ICollection.CopyTo (Array array, int index)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		void ICollection.CopyTo (Array array, int index)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        int ICollection.Count {
-            get { return Count; }
-        }
+		[MonoTODO]
+		int ICollection.Count {
+			get { return Count; }
+		}
 
-        [MonoTODO]
-        bool ICollection.IsSynchronized {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		bool ICollection.IsSynchronized {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        int IList.Add (object item)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		int IList.Add (object item)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        bool IList.Contains (object item)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		bool IList.Contains (object item)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        int IList.IndexOf (object item)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		int IList.IndexOf (object item)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        void IList.Insert (int index, object item)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		void IList.Insert (int index, object item)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        void IList.Remove (object item)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		void IList.Remove (object item)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        void IList.RemoveAt (int index)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		void IList.RemoveAt (int index)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        bool IList.IsFixedSize {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		bool IList.IsFixedSize {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        bool IList.IsReadOnly {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		bool IList.IsReadOnly {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        object IList.this [int index] {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
-    }
+		[MonoTODO]
+		object IList.this [int index] {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
+	}
 }
 

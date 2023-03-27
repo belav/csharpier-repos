@@ -6,7 +6,7 @@ using System;
 using X;
 
 class T : Y {
-    public T(String test, String test1) : base(test) {
-    }
-    static void Main () {}
+	public T(String test, String test1) : base(test) {
+	}
+	static void Main () {}
 }

@@ -2,7 +2,7 @@
 // ICodeConsumer.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,7 +29,7 @@
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.AST.Visitors {
-    interface ICodeConsumer<Data, Result> {
-        Result Accept<Label> (ICodeProvider<Label> codeProvider, Label entryPoint, Data data);
-    }
+	interface ICodeConsumer<Data, Result> {
+		Result Accept<Label> (ICodeProvider<Label> codeProvider, Label entryPoint, Data data);
+	}
 }

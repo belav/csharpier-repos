@@ -3,7 +3,7 @@
 // for System.Web.Services.Configuration.WsiProfilesElement
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -34,28 +34,28 @@ using System.Web.Services.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services {
-    [TestFixture]
-    public class WsiProfilesElementTest
-    {
-        [Test]
-        public void Ctors ()
-        {
-            WsiProfilesElement el = new WsiProfilesElement ();
-            Assert.AreEqual (WsiProfiles.None, el.Name, "A1");
+	[TestFixture]
+	public class WsiProfilesElementTest
+	{
+		[Test]
+		public void Ctors ()
+		{
+			WsiProfilesElement el = new WsiProfilesElement ();
+			Assert.AreEqual (WsiProfiles.None, el.Name, "A1");
 
-            el = new WsiProfilesElement (WsiProfiles.BasicProfile1_1);
-            Assert.AreEqual (WsiProfiles.BasicProfile1_1, el.Name, "A2");
-        }
+			el = new WsiProfilesElement (WsiProfiles.BasicProfile1_1);
+			Assert.AreEqual (WsiProfiles.BasicProfile1_1, el.Name, "A2");
+		}
 
-        [Test]
-        public void GetSet ()
-        {
-            WsiProfilesElement el = new WsiProfilesElement ();
+		[Test]
+		public void GetSet ()
+		{
+			WsiProfilesElement el = new WsiProfilesElement ();
 
-            el.Name = WsiProfiles.BasicProfile1_1;
+			el.Name = WsiProfiles.BasicProfile1_1;
 
-            Assert.AreEqual (WsiProfiles.BasicProfile1_1, el.Name, "A1");
-        }
-    }
+			Assert.AreEqual (WsiProfiles.BasicProfile1_1, el.Name, "A1");
+		}
+	}
 }
 

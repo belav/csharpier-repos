@@ -28,12 +28,12 @@
 
 namespace Mono.Cecil {
 
-    using System;
+	using System;
 
-    [Flags]
-    internal enum ManifestResourceAttributes {
-        VisibilityMask    = 0x0007,
-        Public            = 0x0001,    // The resource is exported from the Assembly
-        Private            = 0x0002     // The resource is private to the Assembly
-    }
+	[Flags]
+	internal enum ManifestResourceAttributes {
+		VisibilityMask	= 0x0007,
+		Public			= 0x0001,	// The resource is exported from the Assembly
+		Private			= 0x0002	 // The resource is private to the Assembly
+	}
 }

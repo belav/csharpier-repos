@@ -32,36 +32,36 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Protocols {
-    public sealed class SoapUnknownHeader : SoapHeader {
+	public sealed class SoapUnknownHeader : SoapHeader {
 
-        #region Fields
+		#region Fields
 
-        XmlElement element;
+		XmlElement element;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public SoapUnknownHeader ()
-        {
-            element = null;
-        }
+		public SoapUnknownHeader ()
+		{
+			element = null;
+		}
 
-        internal SoapUnknownHeader (XmlElement elem): base (elem)
-        {
-            element = elem;
-        }
+		internal SoapUnknownHeader (XmlElement elem): base (elem)
+		{
+			element = elem;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [XmlIgnore]
-        public XmlElement Element {
-            get { return element; }
-            set { element = value; }
-        }
+		[XmlIgnore]
+		public XmlElement Element {
+			get { return element; }
+			set { element = value; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

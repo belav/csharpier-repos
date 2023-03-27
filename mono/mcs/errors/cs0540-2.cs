@@ -5,19 +5,19 @@ using System;
 
 namespace N
 {
-    class Nested
-    {
-        public interface I
-        {
-            bool P { get; }
-        }
+	class Nested
+	{
+		public interface I
+		{
+			bool P { get; }
+		}
 
-        public class C
-        {
-            bool I.P
-            {
-                get { return true; }
-            }
-        }
-    }
+		public class C
+		{
+			bool I.P
+			{
+				get { return true; }
+			}
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // IBasicAnalysisDriver.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,9 +30,9 @@ using Mono.CodeContracts.Static.ControlFlow.Subroutines;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis.Drivers {
-    interface IBasicAnalysisDriver {
-        SubroutineFacade SubroutineFacade { get; }
-        IMetaDataProvider MetaDataProvider { get; }
-        IContractProvider ContractProvider { get; }
-    }
+	interface IBasicAnalysisDriver {
+		SubroutineFacade SubroutineFacade { get; }
+		IMetaDataProvider MetaDataProvider { get; }
+		IContractProvider ContractProvider { get; }
+	}
 }

@@ -2,7 +2,7 @@
 // Line: 5
 
 class X {
-    void j;
+	void j;
 
-    static void Main () {}
+	static void Main () {}
 }

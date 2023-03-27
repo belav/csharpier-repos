@@ -2,7 +2,7 @@
 // System.Web.UI.Design.TypeSchema
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -34,20 +34,20 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design
 {
-    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-    public sealed class TypeSchema : IDataSourceSchema
-    {
-        [MonoTODO]
-        public TypeSchema (Type type)
-        {
-            throw new NotImplementedException ();
-        }
+	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+	public sealed class TypeSchema : IDataSourceSchema
+	{
+		[MonoTODO]
+		public TypeSchema (Type type)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public IDataSourceViewSchema[] GetViews ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public IDataSourceViewSchema[] GetViews ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

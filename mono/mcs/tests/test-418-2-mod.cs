@@ -4,10 +4,10 @@ using System;
 
 public class M1 {
 
-    public string Foo;
+	public string Foo;
 
-    public M1 (string foo) {
-        this.Foo = foo;
-    }
+	public M1 (string foo) {
+		this.Foo = foo;
+	}
 }
 

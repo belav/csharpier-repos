@@ -30,15 +30,15 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace System.ServiceModel {
-    [Serializable]
-    public class AddressAccessDeniedException : CommunicationException
-    {
-        public AddressAccessDeniedException () : base () {}
-        public AddressAccessDeniedException (string message) : base (message) {}
-        public AddressAccessDeniedException (string message, Exception innerException) : base (message, innerException) {}
-        protected AddressAccessDeniedException (SerializationInfo info, StreamingContext context) :
-            base (info, context) {}
+	[Serializable]
+	public class AddressAccessDeniedException : CommunicationException
+	{
+		public AddressAccessDeniedException () : base () {}
+		public AddressAccessDeniedException (string message) : base (message) {}
+		public AddressAccessDeniedException (string message, Exception innerException) : base (message, innerException) {}
+		protected AddressAccessDeniedException (SerializationInfo info, StreamingContext context) :
+			base (info, context) {}
 
 
-    }
+	}
 }

@@ -2,7 +2,7 @@
 // ToolboxItemCas.cs - CAS unit tests for System.Drawing.Design.ToolboxItem
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,46 +37,46 @@ using System.Security.Policy;
 
 namespace MonoCasTests.System.Drawing.Design {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ToolboxItemCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ToolboxItemCas {
 
-        private ConstructorInfo ctor;
+		private ConstructorInfo ctor;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            // this executes at fulltrust
-            ConstructorInfo[] infos = typeof (ToolboxItem).GetConstructors ();
-            ctor = infos[0];
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			// this executes at fulltrust
+			ConstructorInfo[] infos = typeof (ToolboxItem).GetConstructors ();
+			ctor = infos[0];
+		}
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Create ()
-        {
-            new ToolboxItem ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Create ()
+		{
+			new ToolboxItem ();
+		}
 
-        // we use reflection to call ToolboxItem class as it's protected by a 
-        // LinkDemand (which will be converted into full demand, i.e. a stack 
-        // walk) when reflection is used (i.e. it gets testable).
+		// we use reflection to call ToolboxItem class as it's protected by a 
+		// LinkDemand (which will be converted into full demand, i.e. a stack 
+		// walk) when reflection is used (i.e. it gets testable).
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Create_LinkDemand ()
-        {
-            // requires FullTrust, so denying anything break the requirements
-            Assert.IsNotNull (ctor, "constructor");
-            ctor.Invoke (null);
-        }
-    }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void Create_LinkDemand ()
+		{
+			// requires FullTrust, so denying anything break the requirements
+			Assert.IsNotNull (ctor, "constructor");
+			ctor.Invoke (null);
+		}
+	}
 }

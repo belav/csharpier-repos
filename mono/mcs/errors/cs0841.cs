@@ -3,9 +3,9 @@
 
 public class C
 {
-    public static void Main ()
-    {
-        const int x = y;
-        const int y = 1;
-    }
+	public static void Main ()
+	{
+	    const int x = y;
+	    const int y = 1;
+	}
 }

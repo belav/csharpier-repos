@@ -2,7 +2,7 @@
 // RsaSecurityTokenAuthenticatorTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -44,29 +44,29 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-    [TestFixture]
-    public class RsaSecurityTokenAuthenticatorTest
-    {
-        [Test]
-        public void Validation ()
-        {
-            RSA rsa = (RSA) new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.cer")).PublicKey.Key;
-            Authenticator a = new Authenticator ();
-            PolicyCollection pl = a.ValidateToken (new RsaSecurityToken (rsa));
-            Assert.AreEqual (1, pl.Count, "#1");
-            IAuthorizationPolicy p = pl [0];
-            Assert.AreEqual (ClaimSet.System, p.Issuer, "#2");
-            TestEvaluationContext ec = new TestEvaluationContext ();
-            object o = null;
-            Assert.IsTrue (p.Evaluate (ec, ref o), "#3");
-            // mhm, should this really be converted to UTC?
-            Assert.AreEqual (DateTime.MaxValue.AddDays (-1), ec.ExpirationTime, "#4");
-            Assert.AreEqual (0, ec.Properties.Count, "#5");
-            Assert.AreEqual (1, ec.ClaimSets.Count, "#6");
+	[TestFixture]
+	public class RsaSecurityTokenAuthenticatorTest
+	{
+		[Test]
+		public void Validation ()
+		{
+			RSA rsa = (RSA) new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.cer")).PublicKey.Key;
+			Authenticator a = new Authenticator ();
+			PolicyCollection pl = a.ValidateToken (new RsaSecurityToken (rsa));
+			Assert.AreEqual (1, pl.Count, "#1");
+			IAuthorizationPolicy p = pl [0];
+			Assert.AreEqual (ClaimSet.System, p.Issuer, "#2");
+			TestEvaluationContext ec = new TestEvaluationContext ();
+			object o = null;
+			Assert.IsTrue (p.Evaluate (ec, ref o), "#3");
+			// mhm, should this really be converted to UTC?
+			Assert.AreEqual (DateTime.MaxValue.AddDays (-1), ec.ExpirationTime, "#4");
+			Assert.AreEqual (0, ec.Properties.Count, "#5");
+			Assert.AreEqual (1, ec.ClaimSets.Count, "#6");
 
-            Assert.IsTrue (p.Evaluate (ec, ref o), "#7");
-            Assert.AreEqual (2, ec.ClaimSets.Count, "#8");
-        }
-    }
+			Assert.IsTrue (p.Evaluate (ec, ref o), "#7");
+			Assert.AreEqual (2, ec.ClaimSets.Count, "#8");
+		}
+	}
 }
 #endif

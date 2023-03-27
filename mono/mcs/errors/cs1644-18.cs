@@ -6,8 +6,8 @@ using System.Linq;
 
 public class C
 {
-    public static void Main ()
-    {
-        var e = from a in "aaa" select a;
-    }
+	public static void Main ()
+	{
+		var e = from a in "aaa" select a;
+	}
 }

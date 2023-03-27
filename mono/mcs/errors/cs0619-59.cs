@@ -5,14 +5,14 @@ using System;
 
 public class Test
 {
-    public static void Main()
-    {
-        var m = nameof (A.X);
-    }
+	public static void Main()
+	{
+		var m = nameof (A.X);
+	}
 }
-     
+	 
 public class A
 {
-    [Obsolete ("", true)]
-    public int X;
+	[Obsolete ("", true)]
+	public int X;
 }

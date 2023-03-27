@@ -2,7 +2,7 @@
 // SubroutineFacade.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -38,93 +38,93 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines {
-    class SubroutineFacade : IMethodCodeConsumer<Dummy, Subroutine> {
-        public readonly IContractProvider ContractProvider;
-        public readonly IMetaDataProvider MetaDataProvider;
+	class SubroutineFacade : IMethodCodeConsumer<Dummy, Subroutine> {
+		public readonly IContractProvider ContractProvider;
+		public readonly IMetaDataProvider MetaDataProvider;
 
-//        private readonly EnsuresFactory ensures_factory;
-        private readonly Dictionary<Method, ICFG> method_cache = new Dictionary<Method, ICFG> ();
-        private readonly RequiresFactory requires_factory;
+//		private readonly EnsuresFactory ensures_factory;
+		private readonly Dictionary<Method, ICFG> method_cache = new Dictionary<Method, ICFG> ();
+		private readonly RequiresFactory requires_factory;
 
-        public SubroutineFacade (IMetaDataProvider metaDataProvider,
-                                 IContractProvider contractProvider)
-        {
-            this.MetaDataProvider = metaDataProvider;
-            this.ContractProvider = contractProvider;
-            this.requires_factory = new RequiresFactory (this);
-//            this.ensures_factory = new EnsuresFactory (this);
-        }
+		public SubroutineFacade (IMetaDataProvider metaDataProvider,
+		                         IContractProvider contractProvider)
+		{
+			this.MetaDataProvider = metaDataProvider;
+			this.ContractProvider = contractProvider;
+			this.requires_factory = new RequiresFactory (this);
+//			this.ensures_factory = new EnsuresFactory (this);
+		}
 
-        #region IMethodCodeConsumer<Dummy,Subroutine> Members
-        Subroutine IMethodCodeConsumer<Dummy, Subroutine>.Accept<Label, Handler> (
-            IMethodCodeProvider<Label, Handler> codeProvider,
-            Label entry,
-            Method method,
-            Dummy data)
-        {
-            var builder = new SubroutineWithHandlersBuilder<Label, Handler> (codeProvider, this, method, entry);
-            return new MethodSubroutine<Label, Handler> (this, method, entry, builder);
-        }
-        #endregion
+		#region IMethodCodeConsumer<Dummy,Subroutine> Members
+		Subroutine IMethodCodeConsumer<Dummy, Subroutine>.Accept<Label, Handler> (
+			IMethodCodeProvider<Label, Handler> codeProvider,
+			Label entry,
+			Method method,
+			Dummy data)
+		{
+			var builder = new SubroutineWithHandlersBuilder<Label, Handler> (codeProvider, this, method, entry);
+			return new MethodSubroutine<Label, Handler> (this, method, entry, builder);
+		}
+		#endregion
 
-        public TResult ForwardDecode<TData, TResult, TVisitor> (APC pc, TVisitor visitor, TData data)
-            where TVisitor : IILVisitor<APC, Dummy, Dummy, TData, TResult>
-        {
-            var block = pc.Block as BlockBase;
-            if (block != null)
-                return block.ForwardDecode<TData, TResult, TVisitor> (pc, visitor, data);
+		public TResult ForwardDecode<TData, TResult, TVisitor> (APC pc, TVisitor visitor, TData data)
+			where TVisitor : IILVisitor<APC, Dummy, Dummy, TData, TResult>
+		{
+			var block = pc.Block as BlockBase;
+			if (block != null)
+				return block.ForwardDecode<TData, TResult, TVisitor> (pc, visitor, data);
 
-            return visitor.Nop (pc, data);
-        }
+			return visitor.Nop (pc, data);
+		}
 
-        public Subroutine GetRequires (Method method)
-        {
-            method = this.MetaDataProvider.Unspecialized (method);
-            return this.requires_factory.Get (method);
-        }
+		public Subroutine GetRequires (Method method)
+		{
+			method = this.MetaDataProvider.Unspecialized (method);
+			return this.requires_factory.Get (method);
+		}
 
-        public Subroutine GetEnsures (Method method)
-        {
-            return null;
-            //todo: implement handling this in MethodSubroutine and uncomment lines below
+		public Subroutine GetEnsures (Method method)
+		{
+			return null;
+			//todo: implement handling this in MethodSubroutine and uncomment lines below
 
-//            method = this.MetaDataProvider.Unspecialized (method);
-//            return this.ensures_factory.Get (method);
-        }
+//			method = this.MetaDataProvider.Unspecialized (method);
+//			return this.ensures_factory.Get (method);
+		}
 
-        public Subroutine GetInvariant (TypeNode type)
-        {
-            //todo: implement this
-            return null;
-        }
+		public Subroutine GetInvariant (TypeNode type)
+		{
+			//todo: implement this
+			return null;
+		}
 
-        public ICFG GetControlFlowGraph (Method method)
-        {
-            if (this.method_cache.ContainsKey (method))
-                return this.method_cache [method];
+		public ICFG GetControlFlowGraph (Method method)
+		{
+			if (this.method_cache.ContainsKey (method))
+				return this.method_cache [method];
 
-            if (!this.MetaDataProvider.HasBody (method))
-                throw new InvalidOperationException ("Method has no body");
+			if (!this.MetaDataProvider.HasBody (method))
+				throw new InvalidOperationException ("Method has no body");
 
-            return new ControlFlowGraph (this.MetaDataProvider.AccessMethodBody (method, this, Dummy.Value), this);
-        }
+			return new ControlFlowGraph (this.MetaDataProvider.AccessMethodBody (method, this, Dummy.Value), this);
+		}
 
-        public void AddReads (Method method, Field field)
-        {
-            throw new NotImplementedException ();
-        }
+		public void AddReads (Method method, Field field)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public IEnumerable<Method> GetAffectedGetters (Field field)
-        {
-            //todo: implement this
+		public IEnumerable<Method> GetAffectedGetters (Field field)
+		{
+			//todo: implement this
 
-            return new Method[0];
-        }
+			return new Method[0];
+		}
 
-        public IEnumerable<Field> GetModifies (Method method)
-        {
+		public IEnumerable<Field> GetModifies (Method method)
+		{
                         //todo: implement this
                         return Enumerable.Empty<Field> ();
-        }
-    }
+		}
+	}
 }

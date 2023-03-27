@@ -13,9 +13,9 @@ public class GitHub_19601
         return 100;
     }
 
-    // The JIT was emitting a 4-byte immediate for the shift in M9, but this form is invalid.
-    // This lead to NullReferenceException or AccessViolationException when the last part of
-    // the immediate was treated as instructions.
+	// The JIT was emitting a 4-byte immediate for the shift in M9, but this form is invalid.
+	// This lead to NullReferenceException or AccessViolationException when the last part of
+	// the immediate was treated as instructions.
     static void M9()
     {
         s_8 <<= (0 & s_2) + 186;

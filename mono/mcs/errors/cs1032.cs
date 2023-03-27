@@ -3,7 +3,7 @@
 class X {
 #define A
 
-    static void Main () {
-    }
+	static void Main () {
+	}
 }
 

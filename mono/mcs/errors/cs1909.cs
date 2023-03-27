@@ -4,7 +4,7 @@
 using System.Runtime.InteropServices;
 
 class Test {
-    void f ([DefaultParameterValue (new int[0])] int[] x)
-    {
-    }
+	void f ([DefaultParameterValue (new int[0])] int[] x)
+	{
+	}
 }

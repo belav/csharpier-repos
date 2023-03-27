@@ -31,27 +31,27 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-    public sealed class NetMsmqSecurity
-    {
-        NetMsmqSecurityMode mode;
-        MessageSecurityOverMsmq message = new MessageSecurityOverMsmq ();
-        MsmqTransportSecurity transport = new MsmqTransportSecurity ();
+	public sealed class NetMsmqSecurity
+	{
+		NetMsmqSecurityMode mode;
+		MessageSecurityOverMsmq message = new MessageSecurityOverMsmq ();
+		MsmqTransportSecurity transport = new MsmqTransportSecurity ();
 
-        internal NetMsmqSecurity (NetMsmqSecurityMode mode)
-        {
-        }
+		internal NetMsmqSecurity (NetMsmqSecurityMode mode)
+		{
+		}
 
-        public MessageSecurityOverMsmq Message {
-            get { return message; }
-        }
+		public MessageSecurityOverMsmq Message {
+			get { return message; }
+		}
 
-        public NetMsmqSecurityMode Mode {
-            get { return mode; }
-            set { mode = value; }
-        }
+		public NetMsmqSecurityMode Mode {
+			get { return mode; }
+			set { mode = value; }
+		}
 
-        public MsmqTransportSecurity Transport {
-            get { return transport; }
-        }
-    }
+		public MsmqTransportSecurity Transport {
+			get { return transport; }
+		}
+	}
 }

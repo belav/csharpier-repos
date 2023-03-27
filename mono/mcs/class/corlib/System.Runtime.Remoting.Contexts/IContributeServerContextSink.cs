@@ -33,10 +33,10 @@ using System;
 using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Contexts {
-    
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IContributeServerContextSink
-    {
-        IMessageSink GetServerContextSink (IMessageSink nextSink);
-    }
+	
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IContributeServerContextSink
+	{
+		IMessageSink GetServerContextSink (IMessageSink nextSink);
+	}
 }

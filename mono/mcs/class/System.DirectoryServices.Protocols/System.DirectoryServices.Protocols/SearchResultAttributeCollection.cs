@@ -31,33 +31,33 @@ using System.Collections;
 
 namespace System.DirectoryServices.Protocols
 {
-    [MonoTODO]
-    public class SearchResultAttributeCollection : DictionaryBase
-    {
-        internal SearchResultAttributeCollection ()
-        {
-        }
+	[MonoTODO]
+	public class SearchResultAttributeCollection : DictionaryBase
+	{
+		internal SearchResultAttributeCollection ()
+		{
+		}
 
-        public ICollection AttributeNames {
-            get { return Dictionary.Keys; }
-        }
+		public ICollection AttributeNames {
+			get { return Dictionary.Keys; }
+		}
 
-        public DirectoryAttribute this [string attributeName] {
-            get { return (DirectoryAttribute) Dictionary [attributeName]; }
-        }
+		public DirectoryAttribute this [string attributeName] {
+			get { return (DirectoryAttribute) Dictionary [attributeName]; }
+		}
 
-        public ICollection Values {
-            get { return Dictionary.Values; }
-        }
+		public ICollection Values {
+			get { return Dictionary.Values; }
+		}
 
-        public bool Contains (string attributeName)
-        {
-            return Dictionary.Contains (attributeName);
-        }
+		public bool Contains (string attributeName)
+		{
+			return Dictionary.Contains (attributeName);
+		}
 
-        public void CopyTo (DirectoryAttribute [] array, int index)
-        {
-            Values.CopyTo (array, index);
-        }
-    }
+		public void CopyTo (DirectoryAttribute [] array, int index)
+		{
+			Values.CopyTo (array, index);
+		}
+	}
 }

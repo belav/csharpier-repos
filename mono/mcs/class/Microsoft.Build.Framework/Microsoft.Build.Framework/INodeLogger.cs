@@ -33,10 +33,10 @@ using System.Collections;
 
 namespace Microsoft.Build.Framework
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface INodeLogger : ILogger
-    {
-        void Initialize (IEventSource eventSource, int nodeCount);
-    }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface INodeLogger : ILogger
+	{
+		void Initialize (IEventSource eventSource, int nodeCount);
+	}
 }
 

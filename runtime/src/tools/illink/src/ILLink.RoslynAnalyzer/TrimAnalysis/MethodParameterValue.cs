@@ -7,25 +7,25 @@ using Microsoft.CodeAnalysis;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    partial record MethodParameterValue
-    {
-        public MethodParameterValue (IParameterSymbol parameterSymbol)
-            : this (new ParameterProxy (parameterSymbol)) { }
-        public MethodParameterValue (IMethodSymbol methodSymbol, ParameterIndex parameterIndex, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
-            : this (new (new (methodSymbol), parameterIndex), dynamicallyAccessedMemberTypes) { }
+	partial record MethodParameterValue
+	{
+		public MethodParameterValue (IParameterSymbol parameterSymbol)
+			: this (new ParameterProxy (parameterSymbol)) { }
+		public MethodParameterValue (IMethodSymbol methodSymbol, ParameterIndex parameterIndex, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
+			: this (new (new (methodSymbol), parameterIndex), dynamicallyAccessedMemberTypes) { }
 
-        public MethodParameterValue (ParameterProxy parameter)
-            : this (parameter, FlowAnnotations.GetMethodParameterAnnotation (parameter)) { }
+		public MethodParameterValue (ParameterProxy parameter)
+			: this (parameter, FlowAnnotations.GetMethodParameterAnnotation (parameter)) { }
 
-        public MethodParameterValue (ParameterProxy parameter, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes, bool overrideIsThis = false)
-        {
-            Parameter = parameter;
-            DynamicallyAccessedMemberTypes = dynamicallyAccessedMemberTypes;
-            _overrideIsThis = overrideIsThis;
-        }
+		public MethodParameterValue (ParameterProxy parameter, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes, bool overrideIsThis = false)
+		{
+			Parameter = parameter;
+			DynamicallyAccessedMemberTypes = dynamicallyAccessedMemberTypes;
+			_overrideIsThis = overrideIsThis;
+		}
 
-        public override DynamicallyAccessedMemberTypes DynamicallyAccessedMemberTypes { get; }
+		public override DynamicallyAccessedMemberTypes DynamicallyAccessedMemberTypes { get; }
 
-        public IMethodSymbol MethodSymbol => Parameter.Method.Method;
-    }
+		public IMethodSymbol MethodSymbol => Parameter.Method.Method;
+	}
 }

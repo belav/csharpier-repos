@@ -31,15 +31,15 @@
 using System;
 
 namespace System.EnterpriseServices {
-    internal interface ISharedProperty {
+	internal interface ISharedProperty {
 
-        #region Properties
+		#region Properties
 
-        object Value {
-            get;
-            set;
-        }
+		object Value {
+			get;
+			set;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

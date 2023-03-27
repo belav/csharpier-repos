@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,78 +32,78 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("1A180F60-93B2-11d2-9B8B-00805F8A16D9")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIPersistentProperties : nsIProperties {
+	[Guid ("1A180F60-93B2-11d2-9B8B-00805F8A16D9")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIPersistentProperties : nsIProperties {
 #region nsIProperties
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int get ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
-                [MarshalAs (UnmanagedType.LPStruct) ]  Guid iid,
-                out IntPtr result);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int get ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
+				[MarshalAs (UnmanagedType.LPStruct) ]  Guid iid,
+				out IntPtr result);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int set ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
-                [MarshalAs (UnmanagedType.Interface) ]  IntPtr value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int set ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
+				[MarshalAs (UnmanagedType.Interface) ]  IntPtr value);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int has ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
-                out bool ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int has ([MarshalAs (UnmanagedType.LPStr) ]  string prop,
+				out bool ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int undefine ([MarshalAs (UnmanagedType.LPStr) ]  string prop);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int undefine ([MarshalAs (UnmanagedType.LPStr) ]  string prop);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getKeys (out UInt32 count,
-                [MarshalAs (UnmanagedType.LPStr) ] out string[] keys);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getKeys (out UInt32 count,
+				[MarshalAs (UnmanagedType.LPStr) ] out string[] keys);
 
 #endregion
 
 #region nsIPersistentProperties
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int load ([MarshalAs (UnmanagedType.Interface) ]  nsIInputStream input);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int load ([MarshalAs (UnmanagedType.Interface) ]  nsIInputStream input);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int save ([MarshalAs (UnmanagedType.Interface) ]  nsIOutputStream output,
-                 /*AUTF8String*/ HandleRef header);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int save ([MarshalAs (UnmanagedType.Interface) ]  nsIOutputStream output,
+				 /*AUTF8String*/ HandleRef header);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int subclass ([MarshalAs (UnmanagedType.Interface) ]  nsIPersistentProperties superclass);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int subclass ([MarshalAs (UnmanagedType.Interface) ]  nsIPersistentProperties superclass);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int enumerate ([MarshalAs (UnmanagedType.Interface) ] out nsISimpleEnumerator ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int enumerate ([MarshalAs (UnmanagedType.Interface) ] out nsISimpleEnumerator ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getStringProperty ( /*AUTF8String*/ HandleRef key,
-                 /*AString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getStringProperty ( /*AUTF8String*/ HandleRef key,
+				 /*AString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setStringProperty ( /*AUTF8String*/ HandleRef key,
-                 /*AString*/ HandleRef value,
-                 /*AString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setStringProperty ( /*AUTF8String*/ HandleRef key,
+				 /*AString*/ HandleRef value,
+				 /*AString*/ HandleRef ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsPersistentProperties {
-        public static nsIPersistentProperties GetProxy (Mono.WebBrowser.IWebBrowser control, nsIPersistentProperties obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIPersistentProperties).GUID, obj);
-            return o as nsIPersistentProperties;
-        }
-    }
+	internal class nsPersistentProperties {
+		public static nsIPersistentProperties GetProxy (Mono.WebBrowser.IWebBrowser control, nsIPersistentProperties obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIPersistentProperties).GUID, obj);
+			return o as nsIPersistentProperties;
+		}
+	}
 }
 #if example
 
@@ -112,55 +112,55 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-    internal class PersistentProperties : nsIPersistentProperties {
+	internal class PersistentProperties : nsIPersistentProperties {
 
 #region nsIPersistentProperties
-        int nsIPersistentProperties.load ([MarshalAs (UnmanagedType.Interface) ]  nsIInputStream input)
-        {
-            return ;
-        }
+		int nsIPersistentProperties.load ([MarshalAs (UnmanagedType.Interface) ]  nsIInputStream input)
+		{
+			return ;
+		}
 
 
 
-        int nsIPersistentProperties.save ([MarshalAs (UnmanagedType.Interface) ]  nsIOutputStream output,
-                 /*AUTF8String*/ HandleRef header)
-        {
-            return ;
-        }
+		int nsIPersistentProperties.save ([MarshalAs (UnmanagedType.Interface) ]  nsIOutputStream output,
+				 /*AUTF8String*/ HandleRef header)
+		{
+			return ;
+		}
 
 
 
-        int nsIPersistentProperties.subclass ([MarshalAs (UnmanagedType.Interface) ]  nsIPersistentProperties superclass)
-        {
-            return ;
-        }
+		int nsIPersistentProperties.subclass ([MarshalAs (UnmanagedType.Interface) ]  nsIPersistentProperties superclass)
+		{
+			return ;
+		}
 
 
 
-        int nsIPersistentProperties.enumerate ([MarshalAs (UnmanagedType.Interface) ] out nsISimpleEnumerator ret)
-        {
-            return ;
-        }
+		int nsIPersistentProperties.enumerate ([MarshalAs (UnmanagedType.Interface) ] out nsISimpleEnumerator ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIPersistentProperties.getStringProperty ( /*AUTF8String*/ HandleRef key,
-                 /*AString*/ HandleRef ret)
-        {
-            return ;
-        }
+		int nsIPersistentProperties.getStringProperty ( /*AUTF8String*/ HandleRef key,
+				 /*AString*/ HandleRef ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIPersistentProperties.setStringProperty ( /*AUTF8String*/ HandleRef key,
-                 /*AString*/ HandleRef value,
-                 /*AString*/ HandleRef ret)
-        {
-            return ;
-        }
+		int nsIPersistentProperties.setStringProperty ( /*AUTF8String*/ HandleRef key,
+				 /*AString*/ HandleRef value,
+				 /*AString*/ HandleRef ret)
+		{
+			return ;
+		}
 
 
 
 #endregion
-    }
+	}
 #endif

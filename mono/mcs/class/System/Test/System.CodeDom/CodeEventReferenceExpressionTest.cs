@@ -1,9 +1,9 @@
 //
 // CodeEventReferenceExpressionTest.cs
-//    - Unit tests for System.CodeDom.CodeEventReferenceExpression
+//	- Unit tests for System.CodeDom.CodeEventReferenceExpression
 //
 // Author:
-//    Gert Driesen  <drieseng@users.sourceforge.net>
+//	Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,58 +34,58 @@ using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {
-    [TestFixture]
-    public class CodeEventReferenceExpressionTest
-    {
-        [Test]
-        public void Constructor0 ()
-        {
-            CodeEventReferenceExpression cere = new CodeEventReferenceExpression ();
-            Assert.IsNotNull (cere.EventName, "#1");
-            Assert.AreEqual (string.Empty, cere.EventName, "#2");
-            Assert.IsNull (cere.TargetObject, "#3");
+	[TestFixture]
+	public class CodeEventReferenceExpressionTest
+	{
+		[Test]
+		public void Constructor0 ()
+		{
+			CodeEventReferenceExpression cere = new CodeEventReferenceExpression ();
+			Assert.IsNotNull (cere.EventName, "#1");
+			Assert.AreEqual (string.Empty, cere.EventName, "#2");
+			Assert.IsNull (cere.TargetObject, "#3");
 
-            string eventName = "mono";
-            cere.EventName = eventName;
-            Assert.IsNotNull (cere.EventName, "#4");
-            Assert.AreSame (eventName, cere.EventName, "#5");
+			string eventName = "mono";
+			cere.EventName = eventName;
+			Assert.IsNotNull (cere.EventName, "#4");
+			Assert.AreSame (eventName, cere.EventName, "#5");
 
-            cere.EventName = null;
-            Assert.IsNotNull (cere.EventName, "#6");
-            Assert.AreEqual (string.Empty, cere.EventName, "#7");
+			cere.EventName = null;
+			Assert.IsNotNull (cere.EventName, "#6");
+			Assert.AreEqual (string.Empty, cere.EventName, "#7");
 
-            CodeExpression expression = new CodeExpression ();
-            cere.TargetObject = expression;
-            Assert.IsNotNull (cere.TargetObject, "#8");
-            Assert.AreSame (expression, cere.TargetObject, "#9");
+			CodeExpression expression = new CodeExpression ();
+			cere.TargetObject = expression;
+			Assert.IsNotNull (cere.TargetObject, "#8");
+			Assert.AreSame (expression, cere.TargetObject, "#9");
 
-            cere.TargetObject = null;
-            Assert.IsNull (cere.TargetObject, "#10");
-        }
+			cere.TargetObject = null;
+			Assert.IsNull (cere.TargetObject, "#10");
+		}
 
-        [Test]
-        public void Constructor1 ()
-        {
-            CodeSnippetExpression expression = new CodeSnippetExpression("exp");
+		[Test]
+		public void Constructor1 ()
+		{
+			CodeSnippetExpression expression = new CodeSnippetExpression("exp");
 
-            CodeEventReferenceExpression cere = new CodeEventReferenceExpression (
-                expression, "mono");
-            Assert.AreEqual ("mono", cere.EventName, "#1");
-            Assert.IsNotNull (cere.TargetObject, "#2");
-            Assert.AreSame (expression, cere.TargetObject, "#3");
+			CodeEventReferenceExpression cere = new CodeEventReferenceExpression (
+				expression, "mono");
+			Assert.AreEqual ("mono", cere.EventName, "#1");
+			Assert.IsNotNull (cere.TargetObject, "#2");
+			Assert.AreSame (expression, cere.TargetObject, "#3");
 
-            cere.EventName = null;
-            Assert.IsNotNull (cere.EventName, "#4");
-            Assert.AreEqual (string.Empty, cere.EventName, "#5");
+			cere.EventName = null;
+			Assert.IsNotNull (cere.EventName, "#4");
+			Assert.AreEqual (string.Empty, cere.EventName, "#5");
 
-            cere.TargetObject = null;
-            Assert.IsNull (cere.TargetObject, "#6");
+			cere.TargetObject = null;
+			Assert.IsNull (cere.TargetObject, "#6");
 
-            cere = new CodeEventReferenceExpression ((CodeExpression) null,
-                (string) null);
-            Assert.IsNotNull (cere.EventName, "#7");
-            Assert.AreEqual (string.Empty, cere.EventName, "#8");
-            Assert.IsNull (cere.TargetObject, "#9");
-        }
-    }
+			cere = new CodeEventReferenceExpression ((CodeExpression) null,
+				(string) null);
+			Assert.IsNotNull (cere.EventName, "#7");
+			Assert.AreEqual (string.Empty, cere.EventName, "#8");
+			Assert.IsNull (cere.TargetObject, "#9");
+		}
+	}
 }

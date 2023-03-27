@@ -22,7 +22,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -30,13 +30,13 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 
 namespace Mono.Mozilla
-{    
-    internal delegate void nsIWriteSegmentFunDelegate (
-        [MarshalAs (UnmanagedType.Interface)] nsIInputStream aInStream,
-        IntPtr aClosure,
-        string aFromSegment,
-        UInt32 aToOffset,
-        UInt32 aCount,
-        out UInt32 aWriteCount        
-    );
+{	
+	internal delegate void nsIWriteSegmentFunDelegate (
+		[MarshalAs (UnmanagedType.Interface)] nsIInputStream aInStream,
+    	IntPtr aClosure,
+    	string aFromSegment,
+    	UInt32 aToOffset,
+    	UInt32 aCount,
+    	out UInt32 aWriteCount		
+	);
 }

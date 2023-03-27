@@ -2,7 +2,7 @@
 // ToolsetCollection.cs
 //
 // Author:
-//    Ankit Jain (jankit@novell.com)
+//	Ankit Jain (jankit@novell.com)
 //
 // Copyright 2010 Novell, Inc (http://www.novell.com)
 //
@@ -32,65 +32,65 @@ using System.Collections;
 namespace Microsoft.Build.BuildEngine
 {
 
-    public class ToolsetCollection : ICollection<Toolset>, IEnumerable<Toolset>, IEnumerable
-    {
-        List<Toolset> toolsets;
-        
-        internal ToolsetCollection ()
-        {
-            toolsets = new List<Toolset> ();
-        }
-        
-        public int Count
-        {
-            get { return toolsets.Count; }
-        }
-        
-        public bool IsReadOnly { get { return false; } }
-            
-        public Toolset this [string toolsVersion]
-        {
-            get { return toolsets.Find (item => item.ToolsVersion == toolsVersion); }
-        }
-        
-        public void Add (Toolset item)
-        {
-            toolsets.Add (item);
-        }
-        
-        public void Clear ()
-        {
-            toolsets.Clear ();
-        }
-        
-        public bool Contains (string toolsVersion)
-        {
-            return toolsets.Exists (item => item.ToolsVersion == toolsVersion);
-        }
-        
-        public bool Contains (Toolset item)
-        {
-            return toolsets.Contains (item);
-        }
+	public class ToolsetCollection : ICollection<Toolset>, IEnumerable<Toolset>, IEnumerable
+	{
+		List<Toolset> toolsets;
+		
+		internal ToolsetCollection ()
+		{
+			toolsets = new List<Toolset> ();
+		}
+		
+		public int Count
+		{
+			get { return toolsets.Count; }
+		}
+		
+		public bool IsReadOnly { get { return false; } }
+			
+		public Toolset this [string toolsVersion]
+		{
+			get { return toolsets.Find (item => item.ToolsVersion == toolsVersion); }
+		}
+		
+		public void Add (Toolset item)
+		{
+			toolsets.Add (item);
+		}
+		
+		public void Clear ()
+		{
+			toolsets.Clear ();
+		}
+		
+		public bool Contains (string toolsVersion)
+		{
+			return toolsets.Exists (item => item.ToolsVersion == toolsVersion);
+		}
+		
+		public bool Contains (Toolset item)
+		{
+			return toolsets.Contains (item);
+		}
 
-        public void CopyTo (Toolset[] array, int arrayIndex)
-        {
-            toolsets.CopyTo (array, arrayIndex);
-        }
-        
-        public IEnumerator<Toolset> GetEnumerator ()
-        {
-            return toolsets.GetEnumerator ();
-        }
-        
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return toolsets.GetEnumerator ();
-        }
-        
-        public bool Remove (Toolset item)
-        {
-            return toolsets.Remove (item);
-        }
-    }
+		public void CopyTo (Toolset[] array, int arrayIndex)
+		{
+			toolsets.CopyTo (array, arrayIndex);
+		}
+		
+		public IEnumerator<Toolset> GetEnumerator ()
+		{
+			return toolsets.GetEnumerator ();
+		}
+		
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			return toolsets.GetEnumerator ();
+		}
+		
+		public bool Remove (Toolset item)
+		{
+			return toolsets.Remove (item);
+		}
+	}
 }

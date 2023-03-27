@@ -2,17 +2,17 @@
 // Line: 9
 
 public class Foo<T>
-    where T : new ()
+	where T : new ()
 {
-    public T Create ()
-    {
-        return new T (8);
-    }
+	public T Create ()
+	{
+		return new T (8);
+	}
 }
 
 class X
 {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

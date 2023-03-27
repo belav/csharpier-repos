@@ -18,14 +18,14 @@ namespace Mono.ILASM {
                 private BaseTypeRef operand;
 
                 public TypeInstr (PEAPI.TypeOp op, BaseTypeRef operand, Location loc)
-            : base (loc)
+			: base (loc)
                 {
                         this.op = op;
                         this.operand = operand;
                 }
 
                 public override void Emit (CodeGen code_gen, MethodDef meth, 
-                       PEAPI.CILInstructions cil)
+					   PEAPI.CILInstructions cil)
                 {
                         operand.Resolve (code_gen);
                         cil.TypeInst (op, operand.PeapiType);

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -129,15 +129,15 @@ namespace Roslyn.Utilities
             // All matrices share the following in common:
             //
             // ------------------
-            // |8 8 8 8 8 8 8 8 8
-            // |8 0 1 2 3 4 5 6 7
-            // |8 1
-            // |8 2
-            // |8 3
-            // |8 4
-            // |8 5
-            // |8 6
-            // |8 7
+            // |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            // |∞ 0 1 2 3 4 5 6 7
+            // |∞ 1
+            // |∞ 2
+            // |∞ 3
+            // |∞ 4
+            // |∞ 5
+            // |∞ 6
+            // |∞ 7
             //
             // So we initialize this once when the matrix is created.  For pooled arrays we only
             // have to do this once, and it will retain this layout for all future computations.
@@ -237,16 +237,16 @@ namespace Roslyn.Utilities
             //
             //           s u n d a y
             //      ----------------
-            //      |8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6
-            //    s |8 1 
-            //    a |8 2
-            //    t |8 3
-            //    u |8 4
-            //    r |8 5
-            //    d |8 6
-            //    a |8 7
-            //    y |8 8
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6
+            //    s |∞ 1 
+            //    a |∞ 2
+            //    t |∞ 3
+            //    u |∞ 4
+            //    r |∞ 5
+            //    d |∞ 6
+            //    a |∞ 7
+            //    y |∞ 8
             //
             // Note that the matrix will always be square, or a rectangle that is taller htan it is 
             // longer.  Our 'source' is at the top, and our 'target' is on the left.  The edit distance
@@ -263,16 +263,16 @@ namespace Roslyn.Utilities
             //          
             //           s u n d a y <-- source
             //      ----------------
-            //      |8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6
-            //    s |8 1 0 1 2 3 4 5 
-            //    a |8 2 1 1 2 3 3 4 
-            //    t |8 3 2 2 2 3 4 4 
-            //    u |8 4 3 2 3 3 4 5 
-            //    r |8 5 4 3 3 4 4 5 
-            //    d |8 6 5 4 4 3 4 5 
-            //    a |8 7 6 5 5 4 3 4 
-            //    y |8 8 7 6 6 5 4 3 <--
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6
+            //    s |∞ 1 0 1 2 3 4 5 
+            //    a |∞ 2 1 1 2 3 3 4 
+            //    t |∞ 3 2 2 2 3 4 4 
+            //    u |∞ 4 3 2 3 3 4 5 
+            //    r |∞ 5 4 3 3 4 4 5 
+            //    d |∞ 6 5 4 4 3 4 5 
+            //    a |∞ 7 6 5 5 4 3 4 
+            //    y |∞ 8 7 6 6 5 4 3 <--
             //                     ^
             //                     |
             //
@@ -303,16 +303,16 @@ namespace Roslyn.Utilities
             //
             //           s u n d a y
             //      ----------------
-            //      |8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6
-            //    s |8 1 
-            //    a |8 2
-            //    t |8 3
-            //    u |8 4
-            //    r |8 5
-            //    d |8 6
-            //    a |8 7
-            //    y |8 8           *
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6
+            //    s |∞ 1 
+            //    a |∞ 2
+            //    t |∞ 3
+            //    u |∞ 4
+            //    r |∞ 5
+            //    d |∞ 6
+            //    a |∞ 7
+            //    y |∞ 8           *
             //
             // We want to know what the value is at *, and we want to stop as early as possible if it
             // is greater than our threshold.
@@ -327,16 +327,16 @@ namespace Roslyn.Utilities
             //
             //           s u n d a y
             //      ----------------
-            //      |8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6
-            //    s |8 1 
-            //    a |8 2
-            //    t |8 3 `
-            //    u |8 4   `
-            //    r |8 5     `
-            //    d |8 6       `
-            //    a |8 7         `
-            //    y |8 8           *
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6
+            //    s |∞ 1 
+            //    a |∞ 2
+            //    t |∞ 3 `
+            //    u |∞ 4   `
+            //    r |∞ 5     `
+            //    d |∞ 6       `
+            //    a |∞ 7         `
+            //    y |∞ 8           *
             //
             // The slashes are the "bottom" diagonal leading to the lower right.  The value in the 
             // lower right will be strictly equal to or greater than any value on this diagonal.  
@@ -348,16 +348,16 @@ namespace Roslyn.Utilities
             // 
             //           s u n d a y
             //      ----------------
-            //      |8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6
-            //    s |8 1
-            //    a |8 2
-            //    t |8 3 `
-            //    u |8 4   `       x
-            //    r |8 5     `     |
-            //    d |8 6       `   |
-            //    a |8 7         ` |
-            //    y |8 8           *
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6
+            //    s |∞ 1
+            //    a |∞ 2
+            //    t |∞ 3 `
+            //    u |∞ 4   `       x
+            //    r |∞ 5     `     |
+            //    d |∞ 6       `   |
+            //    a |∞ 7         ` |
+            //    y |∞ 8           *
             //
             // And then consider a point above that diagonal (indicated by x).  In the example
             // above, the edit distance to * from 'x' will be (x+4).  If, for example, threshold
@@ -366,16 +366,16 @@ namespace Roslyn.Utilities
             //
             //           s u n d a y
             //      ----------------
-            //      |8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6
-            //    s |8 1
-            //    a |8 2
-            //    t |8 3 `
-            //    u |8 4   `
-            //    r |8 5     `
-            //    d |8 6       `
-            //    a |8 7         `
-            //    y |8 8     y - - *
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6
+            //    s |∞ 1
+            //    a |∞ 2
+            //    t |∞ 3 `
+            //    u |∞ 4   `
+            //    r |∞ 5     `
+            //    d |∞ 6       `
+            //    a |∞ 7         `
+            //    y |∞ 8     y - - *
             //
             // Here we see that the final edit distance will be "y+3".  Again, if the edit 
             // distance threshold is less than 3, then no path from y will provide a good
@@ -386,16 +386,16 @@ namespace Roslyn.Utilities
             //
             //           s u n d a y
             //      ----------------
-            //      |8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6
-            //    s |8 1 | |
-            //    a |8 2 | | |
-            //    t |8 3 ` | | |
-            //    u |8 4 - ` | | |
-            //    r |8 5 - - ` | | |
-            //    d |8 6 - - - ` | |
-            //    a |8 7   - - - ` |
-            //    y |8 8     - - - *
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6
+            //    s |∞ 1 | |
+            //    a |∞ 2 | | |
+            //    t |∞ 3 ` | | |
+            //    u |∞ 4 - ` | | |
+            //    r |∞ 5 - - ` | | |
+            //    d |∞ 6 - - - ` | |
+            //    a |∞ 7   - - - ` |
+            //    y |∞ 8     - - - *
             //
             // Now, also consider that it will take a minimum of targetLength-sourceLength edits 
             // just to move to the lower diagonal from the upper diagonal.  That leaves
@@ -404,31 +404,31 @@ namespace Roslyn.Utilities
             //
             //           s u n d a y
             //      ----------------
-            //      |8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6
-            //    s |8 1 | |
-            //    a |8 2 | | |
-            //    t |8 3 ` | | |
-            //    u |8 4 - ` | | |
-            //    r |8 5   - ` | | |
-            //    d |8 6     - ` | |
-            //    a |8 7       - ` |
-            //    y |8 8         - *
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6
+            //    s |∞ 1 | |
+            //    a |∞ 2 | | |
+            //    t |∞ 3 ` | | |
+            //    u |∞ 4 - ` | | |
+            //    r |∞ 5   - ` | | |
+            //    d |∞ 6     - ` | |
+            //    a |∞ 7       - ` |
+            //    y |∞ 8         - *
             //
             // If we mark the upper diagonal appropriately we see the matrix as:
             //
             //           s u n d a y
             //      ----------------
-            //      |8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6
-            //    s |8 1 ` |
-            //    a |8 2   ` |
-            //    t |8 3 `   ` |
-            //    u |8 4 - `   ` |
-            //    r |8 5   - `   ` |
-            //    d |8 6     - `   `
-            //    a |8 7       - `  
-            //    y |8 8         - *
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6
+            //    s |∞ 1 ` |
+            //    a |∞ 2   ` |
+            //    t |∞ 3 `   ` |
+            //    u |∞ 4 - `   ` |
+            //    r |∞ 5   - `   ` |
+            //    d |∞ 6     - `   `
+            //    a |∞ 7       - `  
+            //    y |∞ 8         - *
             //
             // Or, effectively, we only need to examine 'threshold - (targetLength - sourceLength)' 
             // above and below the diagonals.
@@ -439,36 +439,36 @@ namespace Roslyn.Utilities
             // 
             //           a b c d e f g h i j
             //      ------------------------
-            //      |8 8 8 8 8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6 7 8 9 10
-            //    m |8 1 * * *
-            //    n |8 2 * * * *
-            //    o |8 3 * * * * *
-            //    p |8 4   * * * * *
-            //    q |8 5     * * * * *
-            //    r |8 6       * * * * *
-            //    s |8 7         * * * * *
-            //    t |8 8           * * * * *
-            //    u |8 9             * * * *
-            //    v |810               * * *
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6 7 8 9 10
+            //    m |∞ 1 * * *
+            //    n |∞ 2 * * * *
+            //    o |∞ 3 * * * * *
+            //    p |∞ 4   * * * * *
+            //    q |∞ 5     * * * * *
+            //    r |∞ 6       * * * * *
+            //    s |∞ 7         * * * * *
+            //    t |∞ 8           * * * * *
+            //    u |∞ 9             * * * *
+            //    v |∞10               * * *
             //
             // or 10+18+16=44.  Or only 44%. if our threshold is two and our strings differ by length 
             // 2 then we have:
             //
             //           a b c d e f g h
             //      --------------------
-            //      |8 8 8 8 8 8 8 8 8 8
-            //      |8 0 1 2 3 4 5 6 7 8
-            //    m |8 1 *
-            //    n |8 2 * *
-            //    o |8 3 * * *
-            //    p |8 4   * * *
-            //    q |8 5     * * *
-            //    r |8 6       * * *
-            //    s |8 7         * * *
-            //    t |8 8           * * *
-            //    u |8 9             * * 
-            //    v |810               *  
+            //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
+            //      |∞ 0 1 2 3 4 5 6 7 8
+            //    m |∞ 1 *
+            //    n |∞ 2 * *
+            //    o |∞ 3 * * *
+            //    p |∞ 4   * * *
+            //    q |∞ 5     * * *
+            //    r |∞ 6       * * *
+            //    s |∞ 7         * * *
+            //    t |∞ 8           * * *
+            //    u |∞ 9             * * 
+            //    v |∞10               *  
             //
             // Then we examine 8+8+8=24 out of 80, or only 30% of the matrix.  As the strings
             // get larger, the savings increase as well.
@@ -563,7 +563,7 @@ namespace Roslyn.Utilities
                 for (var i = 0; i < width; i++)
                 {
                     var v = matrix[i + 2, j + 2];
-                    sb.Append((v == Infinity ? "8" : v.ToString()) + " ");
+                    sb.Append((v == Infinity ? "∞" : v.ToString()) + " ");
                 }
 
                 sb.AppendLine();

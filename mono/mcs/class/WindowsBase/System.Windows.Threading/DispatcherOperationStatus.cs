@@ -21,15 +21,15 @@
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Miguel de Icaza (miguel@novell.com)
+//	Miguel de Icaza (miguel@novell.com)
 //
 
 namespace System.Windows.Threading {
 
-    public enum DispatcherOperationStatus {
-        Pending = 0,
-        Aborted = 1,
-        Completed = 2,
-        Executing = 3
-    }
+	public enum DispatcherOperationStatus {
+		Pending = 0,
+		Aborted = 1,
+		Completed = 2,
+		Executing = 3
+	}
 }

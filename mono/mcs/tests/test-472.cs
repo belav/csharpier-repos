@@ -14,11 +14,11 @@ class Test
         {
                 MethodInfo mi = typeof (Test).GetMethod ("set_Prop");
                 if (mi.GetParameters ().Length != 1)
-                    return 1;
-                if ((mi.GetParameters ()[0].Name) != "value")
-                    return 2;
-                
-                Console.WriteLine ("OK");
-                return 0;
+					return 1;
+				if ((mi.GetParameters ()[0].Name) != "value")
+					return 2;
+				
+				Console.WriteLine ("OK");
+				return 0;
         }
 }

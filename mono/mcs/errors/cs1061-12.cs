@@ -3,20 +3,20 @@
 
 interface I<T>
 {
-    void Foo<U> (U u) where U : T;
+	void Foo<U> (U u) where U : T;
 }
 
 struct S
 {
-    public void Test ()
-    {
-    }
+	public void Test ()
+	{
+	}
 }
 
 class Test : I<S>
 {
-    void I<S>.Foo<U2> (U2 u2)
-    {
-        u2.Test ();
-    }
+	void I<S>.Foo<U2> (U2 u2)
+	{
+		u2.Test ();
+	}
 }

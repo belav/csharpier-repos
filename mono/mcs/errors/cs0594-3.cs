@@ -2,7 +2,7 @@
 // Line: 6
 
 class X {
-    public static void Main() {
-        float f = 1.0e999999f;
-    }
+	public static void Main() {
+		float f = 1.0e999999f;
+	}
 }

@@ -32,69 +32,69 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-    [TestFixture]
-    public class OracleTransaction_Begin : ADONetTesterClass
-    {
-        public static void Main()
-        {
-            OracleTransaction_Begin tc = new OracleTransaction_Begin();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OracleTransaction_Begin");
-                tc.run();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+	[TestFixture]
+	public class OracleTransaction_Begin : ADONetTesterClass
+	{
+		public static void Main()
+		{
+			OracleTransaction_Begin tc = new OracleTransaction_Begin();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OracleTransaction_Begin");
+				tc.run();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
+		[Test]
+		public void run()
+		{
 
-            Exception exp = null;
+			Exception exp = null;
 
-            OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-            con.Open();
+			OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+			con.Open();
 
-            /*********************************************************
-             * OLEDB Provider for SQL Server does not allow nested transactions
-             * http://support.microsoft.com/kb/177138/EN-US/
-             * http://support.microsoft.com/default.aspx?scid=KB;EN-US;Q316872&
-            */
-            if ((ConnectedDataProvider.GetDbType(con) == DataBaseServer.SQLServer) ||
-                (ConnectedDataProvider.GetDbType(con) == DataBaseServer.Oracle) ||
-                (ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL) ||
-                (ConnectedDataProvider.GetDbType(con) == DataBaseServer.DB2))
-            {
-                Log(string.Format("Test skipped, nested transactions are not supported in {0}", ConnectedDataProvider.GetDbType(con)));
-                return;
-            }
+			/*********************************************************
+			 * OLEDB Provider for SQL Server does not allow nested transactions
+			 * http://support.microsoft.com/kb/177138/EN-US/
+			 * http://support.microsoft.com/default.aspx?scid=KB;EN-US;Q316872&
+			*/
+			if ((ConnectedDataProvider.GetDbType(con) == DataBaseServer.SQLServer) ||
+				(ConnectedDataProvider.GetDbType(con) == DataBaseServer.Oracle) ||
+				(ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL) ||
+				(ConnectedDataProvider.GetDbType(con) == DataBaseServer.DB2))
+			{
+				Log(string.Format("Test skipped, nested transactions are not supported in {0}", ConnectedDataProvider.GetDbType(con)));
+				return;
+			}
 
-            // How To Implement Nested Transactions with Oracle
-            // http://support.microsoft.com/kb/187289/EN-US/
+			// How To Implement Nested Transactions with Oracle
+			// http://support.microsoft.com/kb/187289/EN-US/
 
-            OracleTransaction txnOuter = null;
-            OracleTransaction txnInner = null;
-        
-            try
-            {
-                BeginCase("Check Outer Transaction Isoloation Level");
-            
-                txnOuter = con.BeginTransaction();
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			OracleTransaction txnOuter = null;
+			OracleTransaction txnInner = null;
+		
+			try
+			{
+				BeginCase("Check Outer Transaction Isoloation Level");
+			
+				txnOuter = con.BeginTransaction();
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Check Inner Transaction Isoloation Level");
-                Compare(txnOuter.IsolationLevel,IsolationLevel.RepeatableRead);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check Inner Transaction Isoloation Level");
+				Compare(txnOuter.IsolationLevel,IsolationLevel.RepeatableRead);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            if (con.State == ConnectionState.Open) con.Close();
-        }
-    }
+			if (con.State == ConnectionState.Open) con.Close();
+		}
+	}
 }

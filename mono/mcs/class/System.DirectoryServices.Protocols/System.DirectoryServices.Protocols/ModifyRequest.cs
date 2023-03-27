@@ -33,42 +33,42 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-    [MonoTODO]
-    public class ModifyRequest : DirectoryRequest
-    {
-        static DirectoryAttributeModification ToAttr (DirectoryAttributeOperation operation, string attributeName, params object [] values)
-        {
-            var a = new DirectoryAttributeModification ();
-            a.Name = attributeName;
-            a.Operation = operation;
-            a.AddRange (values);
-            return a;
-        }
+	[MonoTODO]
+	public class ModifyRequest : DirectoryRequest
+	{
+		static DirectoryAttributeModification ToAttr (DirectoryAttributeOperation operation, string attributeName, params object [] values)
+		{
+			var a = new DirectoryAttributeModification ();
+			a.Name = attributeName;
+			a.Operation = operation;
+			a.AddRange (values);
+			return a;
+		}
 
-        public ModifyRequest ()
-        {
-        }
+		public ModifyRequest ()
+		{
+		}
 
-        public ModifyRequest (string distinguishedName, DirectoryAttributeOperation operation, string attributeName, params object [] values)
-            : this (distinguishedName, new DirectoryAttributeModification [] {ToAttr (operation, attributeName, values)})
-        {
-        }
+		public ModifyRequest (string distinguishedName, DirectoryAttributeOperation operation, string attributeName, params object [] values)
+			: this (distinguishedName, new DirectoryAttributeModification [] {ToAttr (operation, attributeName, values)})
+		{
+		}
 
-        public ModifyRequest (string distinguishedName, params DirectoryAttributeModification [] modifications)
-            : this ()
-        {
-            DistinguishedName = distinguishedName;
-            Modifications = new DirectoryAttributeModificationCollection ();
-            Modifications.AddRange (modifications);
-        }
+		public ModifyRequest (string distinguishedName, params DirectoryAttributeModification [] modifications)
+			: this ()
+		{
+			DistinguishedName = distinguishedName;
+			Modifications = new DirectoryAttributeModificationCollection ();
+			Modifications.AddRange (modifications);
+		}
 
-        public string DistinguishedName { get; set; }
+		public string DistinguishedName { get; set; }
 
-        public DirectoryAttributeModificationCollection Modifications { get; private set; }
+		public DirectoryAttributeModificationCollection Modifications { get; private set; }
 
-        protected override XmlElement ToXmlNode (XmlDocument doc)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		protected override XmlElement ToXmlNode (XmlDocument doc)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

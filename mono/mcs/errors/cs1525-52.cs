@@ -3,10 +3,10 @@
 
 class C
 {
-    public static void Main ()
-    {
-        var somelist = new List<object>();
-        var query = from item in somelist
-            group a
-    }
+	public static void Main ()
+	{
+		var somelist = new List<object>();
+		var query = from item in somelist
+			group a
+	}
 }

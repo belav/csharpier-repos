@@ -28,40 +28,40 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-    
+	
 using System.ComponentModel;
 using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls{
-    
-    // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [ConstructorNeedsTag(true)]
-    public class HtmlGenericControl : HtmlContainerControl {
-        public HtmlGenericControl() :
-            this ("span")
-        {
-        }
-        
-        public HtmlGenericControl (string tag) :
-            base ()
-        {
-            if (tag == null)
-                tag = "";
-            _tagName = tag;
-        }
-        
-        [DefaultValue("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [WebSysDescription("")]
-        [WebCategory("Appearance")]
-        public new string TagName
-        {
-            get { return _tagName; }
-            set { _tagName = value; }
-        }
-    }
+	
+	// CAS
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[ConstructorNeedsTag(true)]
+	public class HtmlGenericControl : HtmlContainerControl {
+		public HtmlGenericControl() :
+			this ("span")
+		{
+		}
+		
+		public HtmlGenericControl (string tag) :
+			base ()
+		{
+			if (tag == null)
+				tag = "";
+			_tagName = tag;
+		}
+		
+		[DefaultValue("")]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[WebSysDescription("")]
+		[WebCategory("Appearance")]
+		public new string TagName
+		{
+			get { return _tagName; }
+			set { _tagName = value; }
+		}
+	}
 }
 

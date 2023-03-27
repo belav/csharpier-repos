@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,8 +27,8 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public interface IDataPointFilter
-    {
-        bool FilterDataPoint (DataPoint point, Series series, int pointIndex);
-    }
+	public interface IDataPointFilter
+	{
+		bool FilterDataPoint (DataPoint point, Series series, int pointIndex);
+	}
 }

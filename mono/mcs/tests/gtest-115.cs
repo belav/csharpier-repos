@@ -124,7 +124,7 @@ public class LinkedList<T> : IMyList<T> {
 
   public override bool Equals(Object that) {
     if (that != null && GetType() == that.GetType() 
-    && this.size == ((IMyList<T>)that).Count) {
+	&& this.size == ((IMyList<T>)that).Count) {
       Node thisnode = this.first;
       IEnumerator<T> thatenm = ((IMyList<T>)that).GetEnumerator();
       while (thisnode != null) {

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -4352,28 +4352,28 @@ class Program
 {
     static void Main(string[] args)
     {
-        int s = 1>2 ? return 0: return 1;     // Invalid
+        int s = 1>2 ? return 0: return 1; 	// Invalid
     }
 }
 ";
             ParseAndValidate(test,
                 // (5,23): error CS1525: Invalid expression term 'return'
-                //         int s = 1>2 ? return 0: return 1;     // Invalid
+                //         int s = 1>2 ? return 0: return 1; 	// Invalid
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "return").WithArguments("return").WithLocation(5, 23),
                 // (5,23): error CS1003: Syntax error, ':' expected
-                //         int s = 1>2 ? return 0: return 1;     // Invalid
+                //         int s = 1>2 ? return 0: return 1; 	// Invalid
                 Diagnostic(ErrorCode.ERR_SyntaxError, "return").WithArguments(":").WithLocation(5, 23),
                 // (5,23): error CS1525: Invalid expression term 'return'
-                //         int s = 1>2 ? return 0: return 1;     // Invalid
+                //         int s = 1>2 ? return 0: return 1; 	// Invalid
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "return").WithArguments("return").WithLocation(5, 23),
                 // (5,23): error CS1002: ; expected
-                //         int s = 1>2 ? return 0: return 1;     // Invalid
+                //         int s = 1>2 ? return 0: return 1; 	// Invalid
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "return").WithLocation(5, 23),
                 // (5,31): error CS1002: ; expected
-                //         int s = 1>2 ? return 0: return 1;     // Invalid
+                //         int s = 1>2 ? return 0: return 1; 	// Invalid
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ":").WithLocation(5, 31),
                 // (5,31): error CS1513: } expected
-                //         int s = 1>2 ? return 0: return 1;     // Invalid
+                //         int s = 1>2 ? return 0: return 1; 	// Invalid
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(5, 31));
         }
 

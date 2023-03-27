@@ -2,7 +2,7 @@
 // Line: 6
 
 class T {
-    static void Main () {
-        byte d = (byte)-10.1d;
-    }
+	static void Main () {
+		byte d = (byte)-10.1d;
+	}
 }

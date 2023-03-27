@@ -2,7 +2,7 @@
 // Var.cs
 //
 // Author:
-//    Martin Baulig  <martin@ximian.com>
+//	Martin Baulig  <martin@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -28,15 +28,15 @@
 
 namespace Mono.Cecil.Signatures {
 
-    using Mono.Cecil.Metadata;
+	using Mono.Cecil.Metadata;
 
-    internal sealed class VAR : SigType {
+	internal sealed class VAR : SigType {
 
-        public int Index;
+		public int Index;
 
-        public VAR (int index) : base (ElementType.Var)
-        {
-            this.Index = index;
-        }
-    }
+		public VAR (int index) : base (ElementType.Var)
+		{
+			this.Index = index;
+		}
+	}
 }

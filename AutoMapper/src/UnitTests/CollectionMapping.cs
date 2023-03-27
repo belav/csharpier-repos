@@ -15,7 +15,7 @@ public class NonPublicEnumeratorCurrent : AutoMapperSpecBase
     }
     class MyJObject : List<int>
     {
-            public new MyEnumerator GetEnumerator() => new(base.GetEnumerator());
+	        public new MyEnumerator GetEnumerator() => new(base.GetEnumerator());
     }
     class MyEnumerator : IEnumerator
     {

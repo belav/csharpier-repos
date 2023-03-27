@@ -30,74 +30,74 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {
-    [TestFixture]
-    public class ImageKeyConverterTest : TestHelper
-    {
-        [Test]
-        public void PropertyIncludeNoneAsStandardValue ()
-        {
-            PublicImageKeyConverter c = new PublicImageKeyConverter ();
-            Assert.AreEqual (true, c.PublicIncludeNoneAsStandardValue, "A1");
-        }
-        
-        private class PublicImageKeyConverter : ImageKeyConverter
-        {
-            public bool PublicIncludeNoneAsStandardValue { get { return base.IncludeNoneAsStandardValue; } }
-        }
-        
-        [Test]
-        public void GetStandardValues ()
-        {
-            ImageKeyConverter c = new ImageKeyConverter ();
-            Assert.AreEqual (1, c.GetStandardValues (null).Count, "B1");
-            Assert.AreEqual (string.Empty, c.GetStandardValues (null)[0].ToString (), "B2");
-        }
+	[TestFixture]
+	public class ImageKeyConverterTest : TestHelper
+	{
+		[Test]
+		public void PropertyIncludeNoneAsStandardValue ()
+		{
+			PublicImageKeyConverter c = new PublicImageKeyConverter ();
+			Assert.AreEqual (true, c.PublicIncludeNoneAsStandardValue, "A1");
+		}
+		
+		private class PublicImageKeyConverter : ImageKeyConverter
+		{
+			public bool PublicIncludeNoneAsStandardValue { get { return base.IncludeNoneAsStandardValue; } }
+		}
+		
+		[Test]
+		public void GetStandardValues ()
+		{
+			ImageKeyConverter c = new ImageKeyConverter ();
+			Assert.AreEqual (1, c.GetStandardValues (null).Count, "B1");
+			Assert.AreEqual (string.Empty, c.GetStandardValues (null)[0].ToString (), "B2");
+		}
 
-        [Test]
-        public void GetStandardValuesExclusive ()
-        {
-            ImageKeyConverter c = new ImageKeyConverter ();
-            Assert.AreEqual (true, c.GetStandardValuesExclusive (null), "C1");
-        }
+		[Test]
+		public void GetStandardValuesExclusive ()
+		{
+			ImageKeyConverter c = new ImageKeyConverter ();
+			Assert.AreEqual (true, c.GetStandardValuesExclusive (null), "C1");
+		}
 
-        [Test]
-        public void GetStandardValuesSupported ()
-        {
-            ImageKeyConverter c = new ImageKeyConverter ();
-            Assert.AreEqual (true, c.GetStandardValuesSupported (null), "D1");
-        }
-        
-        [Test]
-        public void CanConvertFrom ()
-        {
-            ImageKeyConverter c = new ImageKeyConverter ();
+		[Test]
+		public void GetStandardValuesSupported ()
+		{
+			ImageKeyConverter c = new ImageKeyConverter ();
+			Assert.AreEqual (true, c.GetStandardValuesSupported (null), "D1");
+		}
+		
+		[Test]
+		public void CanConvertFrom ()
+		{
+			ImageKeyConverter c = new ImageKeyConverter ();
 
-            Assert.IsTrue (c.CanConvertFrom (null, typeof (string)), "1");
-            Assert.IsFalse (c.CanConvertFrom (null, typeof (int)), "2");
-            Assert.IsFalse (c.CanConvertFrom (null, typeof (float)), "3");
-            Assert.IsFalse (c.CanConvertFrom (null, typeof (object)), "4");
-        }
-        
-        [Test]
-        public void ConvertFrom ()
-        {
-            ImageKeyConverter ikc = new ImageKeyConverter ();
-            Assert.AreEqual (string.Empty, ikc.ConvertFrom (null, null, string.Empty), "N1");
-            Assert.AreEqual (string.Empty, ikc.ConvertFrom (null, null, null), "N2");
-            Assert.AreEqual ("(none)", ikc.ConvertFrom (null, null, "(none)"), "N2-1");
-            Assert.AreEqual ("bob", ikc.ConvertFrom (null, null, "bob"), "N3");
-            Assert.AreEqual ("oSCar", ikc.ConvertFrom (null, null, "oSCar"), "N4");
-        }
+			Assert.IsTrue (c.CanConvertFrom (null, typeof (string)), "1");
+			Assert.IsFalse (c.CanConvertFrom (null, typeof (int)), "2");
+			Assert.IsFalse (c.CanConvertFrom (null, typeof (float)), "3");
+			Assert.IsFalse (c.CanConvertFrom (null, typeof (object)), "4");
+		}
+		
+		[Test]
+		public void ConvertFrom ()
+		{
+			ImageKeyConverter ikc = new ImageKeyConverter ();
+			Assert.AreEqual (string.Empty, ikc.ConvertFrom (null, null, string.Empty), "N1");
+			Assert.AreEqual (string.Empty, ikc.ConvertFrom (null, null, null), "N2");
+			Assert.AreEqual ("(none)", ikc.ConvertFrom (null, null, "(none)"), "N2-1");
+			Assert.AreEqual ("bob", ikc.ConvertFrom (null, null, "bob"), "N3");
+			Assert.AreEqual ("oSCar", ikc.ConvertFrom (null, null, "oSCar"), "N4");
+		}
 
-        [Test]
-        public void ConvertTo ()
-        {
-            ImageKeyConverter ikc = new ImageKeyConverter ();
-            Assert.AreEqual ("(none)", ikc.ConvertTo (null, null, string.Empty, typeof (string)), "N1");
-            Assert.AreEqual ("(none)", ikc.ConvertTo (null, null, null, typeof (string)), "N2");
-            Assert.AreEqual ("(none)", ikc.ConvertTo (null, null, "(none)", typeof (string)), "N2-1");
-            Assert.AreEqual ("bob", ikc.ConvertTo (null, null, "bob", typeof (string)), "N3");
-            Assert.AreEqual ("oSCar", ikc.ConvertTo (null, null, "oSCar", typeof (string)), "N4");
-        }
-    }
+		[Test]
+		public void ConvertTo ()
+		{
+			ImageKeyConverter ikc = new ImageKeyConverter ();
+			Assert.AreEqual ("(none)", ikc.ConvertTo (null, null, string.Empty, typeof (string)), "N1");
+			Assert.AreEqual ("(none)", ikc.ConvertTo (null, null, null, typeof (string)), "N2");
+			Assert.AreEqual ("(none)", ikc.ConvertTo (null, null, "(none)", typeof (string)), "N2-1");
+			Assert.AreEqual ("bob", ikc.ConvertTo (null, null, "bob", typeof (string)), "N3");
+			Assert.AreEqual ("oSCar", ikc.ConvertTo (null, null, "oSCar", typeof (string)), "N4");
+		}
+	}
 }

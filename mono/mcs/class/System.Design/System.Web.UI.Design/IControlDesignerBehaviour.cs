@@ -30,17 +30,17 @@
 
 namespace System.Web.UI.Design
 {
-    [Obsolete ("Use IControlDesignerTag interface instead")]
-    public interface IControlDesignerBehavior
-    {
-        void OnTemplateModeChanged ();
+	[Obsolete ("Use IControlDesignerTag interface instead")]
+	public interface IControlDesignerBehavior
+	{
+		void OnTemplateModeChanged ();
 
-        object DesignTimeElementView {
-            get;
-        }
-        string DesignTimeHtml {
-            get;
-            set;
-        }
-    }
+		object DesignTimeElementView {
+			get;
+		}
+		string DesignTimeHtml {
+			get;
+			set;
+		}
+	}
 }

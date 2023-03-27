@@ -32,46 +32,46 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [ComVisible (false)]
-    public sealed class SharedPropertyGroup {
+	[ComVisible (false)]
+	public sealed class SharedPropertyGroup {
 
-        #region Fields
+		#region Fields
 
-        ISharedPropertyGroup propertyGroup;
+		ISharedPropertyGroup propertyGroup;
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        internal SharedPropertyGroup (ISharedPropertyGroup propertyGroup)
-        {
-            this.propertyGroup = propertyGroup;
-        }
+		internal SharedPropertyGroup (ISharedPropertyGroup propertyGroup)
+		{
+			this.propertyGroup = propertyGroup;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Methods
+		#region Methods
 
-        public SharedProperty CreateProperty (string name, out bool fExists)
-        {
-            return new SharedProperty (propertyGroup.CreateProperty (name, out fExists));
-        }
+		public SharedProperty CreateProperty (string name, out bool fExists)
+		{
+			return new SharedProperty (propertyGroup.CreateProperty (name, out fExists));
+		}
 
-        public SharedProperty CreatePropertyByPosition (int position, out bool fExists)
-        {
-            return new SharedProperty (propertyGroup.CreatePropertyByPosition (position, out fExists));
-        }
+		public SharedProperty CreatePropertyByPosition (int position, out bool fExists)
+		{
+			return new SharedProperty (propertyGroup.CreatePropertyByPosition (position, out fExists));
+		}
 
-        public SharedProperty Property (string name)
-        {
-            return new SharedProperty (propertyGroup.Property (name));
-        }
+		public SharedProperty Property (string name)
+		{
+			return new SharedProperty (propertyGroup.Property (name));
+		}
 
-        public SharedProperty PropertyByPosition (int position)
-        {
-            return new SharedProperty (propertyGroup.PropertyByPosition (position));
-        }
+		public SharedProperty PropertyByPosition (int position)
+		{
+			return new SharedProperty (propertyGroup.PropertyByPosition (position));
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

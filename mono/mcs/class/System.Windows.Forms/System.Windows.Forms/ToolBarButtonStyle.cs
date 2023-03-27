@@ -23,7 +23,7 @@
 // Copyright (C) 2004 Novell, Inc.
 //
 // Authors:
-//    Ravindra (rkumar@novell.com)
+//	Ravindra (rkumar@novell.com)
 //
 
 
@@ -31,11 +31,11 @@
 
 namespace System.Windows.Forms
 {
-    public enum ToolBarButtonStyle
-    {
-        PushButton = 1,
-        ToggleButton = 2,
-        Separator = 3,
-        DropDownButton =4
-    }
+	public enum ToolBarButtonStyle
+	{
+		PushButton = 1,
+		ToggleButton = 2,
+		Separator = 3,
+		DropDownButton =4
+	}
 }

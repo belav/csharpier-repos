@@ -1,9 +1,9 @@
 //
 // TimersDescriptionAttributeTest.cs 
-//    - Unit tests for System.Timers.TimersDescriptionAttribute
+//	- Unit tests for System.Timers.TimersDescriptionAttribute
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,24 +34,24 @@ using System.Timers;
 
 namespace MonoTests.System.Timers {
 
-    [TestFixture]
-    public class TimersDescriptionAttributeTest {
+	[TestFixture]
+	public class TimersDescriptionAttributeTest {
 
-        [Test]
-        [Category ("NotWorking")]
-        public void AnyString ()
-        {
-            TimersDescriptionAttribute tda = new TimersDescriptionAttribute ("Mono");
-            Assert.IsNull (tda.Description, "Description");
-        }
+		[Test]
+		[Category ("NotWorking")]
+		public void AnyString ()
+		{
+			TimersDescriptionAttribute tda = new TimersDescriptionAttribute ("Mono");
+			Assert.IsNull (tda.Description, "Description");
+		}
 
-        [Test]
-        [Category ("NotWorking")]
-        public void ExistingResourceName ()
-        {
-            TimersDescriptionAttribute tda = new TimersDescriptionAttribute ("TimerEnabled");
-            Assert.IsNotNull (tda.Description, "Description");
-            Assert.IsFalse ("TimerEnabled" == tda.Description, "!Equal");
-        }
-    }
+		[Test]
+		[Category ("NotWorking")]
+		public void ExistingResourceName ()
+		{
+			TimersDescriptionAttribute tda = new TimersDescriptionAttribute ("TimerEnabled");
+			Assert.IsNotNull (tda.Description, "Description");
+			Assert.IsFalse ("TimerEnabled" == tda.Description, "!Equal");
+		}
+	}
 }

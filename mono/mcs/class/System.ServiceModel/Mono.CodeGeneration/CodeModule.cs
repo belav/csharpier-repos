@@ -30,53 +30,53 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeModule
-    {
-        ModuleBuilder module;
-        static CodeModule sharedModule;
-        
-        public CodeModule (string name)
-        {
-            AppDomain myDomain = System.Threading.Thread.GetDomain();
-            AssemblyName myAsmName = new AssemblyName();
-            myAsmName.Name = name;
+	public class CodeModule
+	{
+		ModuleBuilder module;
+		static CodeModule sharedModule;
+		
+		public CodeModule (string name)
+		{
+			AppDomain myDomain = System.Threading.Thread.GetDomain();
+			AssemblyName myAsmName = new AssemblyName();
+			myAsmName.Name = name;
 #if MOBILE
-            AssemblyBuilder myAsmBuilder = myDomain.DefineDynamicAssembly (myAsmName, AssemblyBuilderAccess.Run);
+			AssemblyBuilder myAsmBuilder = myDomain.DefineDynamicAssembly (myAsmName, AssemblyBuilderAccess.Run);
 #else
-            AssemblyBuilder myAsmBuilder = myDomain.DefineDynamicAssembly (myAsmName, AssemblyBuilderAccess.RunAndSave);
+			AssemblyBuilder myAsmBuilder = myDomain.DefineDynamicAssembly (myAsmName, AssemblyBuilderAccess.RunAndSave);
 #endif
-            module = myAsmBuilder.DefineDynamicModule (name);
-        }
-        
-        public static CodeModule Shared
-        {
-            get {
-                if (sharedModule == null)
-                    sharedModule = new CodeModule ("SharedModule");
-                return sharedModule;
-            }
-        }
-        
-        public CodeClass CreateClass (string name)
-        {
-            return CreateClass (name, TypeAttributes.Public, typeof(object));
-        }
-        
-        public CodeClass CreateClass (string name, Type baseType, params Type[] interfaces)
-        {
-            return CreateClass (name, TypeAttributes.Public, baseType, interfaces);
-        }
-        
-        public CodeClass CreateClass (string name, TypeAttributes attr, Type baseType, params Type[] interfaces)
-        {
-            return new CodeClass (module, name, attr, baseType, interfaces);
-        }
-        
-        public ModuleBuilder ModuleBuilder
-        {
-            get { return module; }
-        }
-    }
+			module = myAsmBuilder.DefineDynamicModule (name);
+		}
+		
+		public static CodeModule Shared
+		{
+			get {
+				if (sharedModule == null)
+					sharedModule = new CodeModule ("SharedModule");
+				return sharedModule;
+			}
+		}
+		
+		public CodeClass CreateClass (string name)
+		{
+			return CreateClass (name, TypeAttributes.Public, typeof(object));
+		}
+		
+		public CodeClass CreateClass (string name, Type baseType, params Type[] interfaces)
+		{
+			return CreateClass (name, TypeAttributes.Public, baseType, interfaces);
+		}
+		
+		public CodeClass CreateClass (string name, TypeAttributes attr, Type baseType, params Type[] interfaces)
+		{
+			return new CodeClass (module, name, attr, baseType, interfaces);
+		}
+		
+		public ModuleBuilder ModuleBuilder
+		{
+			get { return module; }
+		}
+	}
 }
 
 #endif

@@ -28,29 +28,29 @@
 
 namespace Mono.Cecil.Binary {
 
-    using System.Collections;
+	using System.Collections;
 
-    internal class ResourceDirectoryTable : ResourceNode {
+	internal class ResourceDirectoryTable : ResourceNode {
 
-        private ArrayList m_entries;
+		private ArrayList m_entries;
 
-        public uint Characteristics;
-        public uint TimeDateStamp;
-        public ushort MajorVersion;
-        public ushort MinorVersion;
+		public uint Characteristics;
+		public uint TimeDateStamp;
+		public ushort MajorVersion;
+		public ushort MinorVersion;
 
-        public IList Entries {
-            get { return m_entries; }
-        }
+		public IList Entries {
+			get { return m_entries; }
+		}
 
-        public ResourceDirectoryTable (int offset) : base (offset)
-        {
-            m_entries = new ArrayList ();
-        }
+		public ResourceDirectoryTable (int offset) : base (offset)
+		{
+			m_entries = new ArrayList ();
+		}
 
-        public ResourceDirectoryTable ()
-        {
-            m_entries = new ArrayList ();
-        }
-    }
+		public ResourceDirectoryTable ()
+		{
+			m_entries = new ArrayList ();
+		}
+	}
 }

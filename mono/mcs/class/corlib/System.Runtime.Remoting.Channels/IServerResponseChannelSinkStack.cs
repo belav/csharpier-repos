@@ -34,11 +34,11 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IServerResponseChannelSinkStack
-    {
-        void AsyncProcessResponse (IMessage msg, ITransportHeaders headers, Stream stream);
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IServerResponseChannelSinkStack
+	{
+		void AsyncProcessResponse (IMessage msg, ITransportHeaders headers, Stream stream);
 
-        Stream GetResponseStream (IMessage msg, ITransportHeaders headers);
-    }
+		Stream GetResponseStream (IMessage msg, ITransportHeaders headers);
+	}
 }

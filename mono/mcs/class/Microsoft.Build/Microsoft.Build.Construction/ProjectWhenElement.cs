@@ -1,4 +1,4 @@
-//
+﻿//
 // ProjectWhenElement.cs
 //
 // Author:

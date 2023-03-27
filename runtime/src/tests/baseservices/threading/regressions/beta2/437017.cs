@@ -17,11 +17,11 @@ class Test
         th.Start();
         Thread th2 = new Thread(new ThreadStart(Thread3));
         th2.Start();
-    System.Diagnostics.Stopwatch myTimer = new System.Diagnostics.Stopwatch();
-    myTimer.Start();
+	System.Diagnostics.Stopwatch myTimer = new System.Diagnostics.Stopwatch();
+	myTimer.Start();
 
         int i = 0;
-    while (!_fTestFailed && myTimer.Elapsed.Minutes < 5 && i < 25000)
+	while (!_fTestFailed && myTimer.Elapsed.Minutes < 5 && i < 25000)
         {
             i++;
             ManualResetEvent mre = new ManualResetEvent(false);
@@ -32,8 +32,8 @@ class Test
             bool bUnregisterSucceeded = false; //Used to improve speed of the test when Unregister has failed
             try
             {
-                rwh.Unregister(_mre);
-                bUnregisterSucceeded = true;
+            	rwh.Unregister(_mre);
+				bUnregisterSucceeded = true;
             }
             catch (ObjectDisposedException)
             {
@@ -60,14 +60,14 @@ class Test
         th.Join();
         th2.Join();
 
-        if (!_fTestFailed)
-        {
-            Console.WriteLine("Test Passed");
-            return 100;
-        }
-        
-        Console.WriteLine("Test Failed");
-        return 101;
+		if (!_fTestFailed)
+		{
+			Console.WriteLine("Test Passed");
+			return 100;
+		}
+		
+		Console.WriteLine("Test Failed");
+		return 101;
 
     }
 

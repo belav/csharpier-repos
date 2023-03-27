@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jordi Mas i Hernandez, jordi@ximian.com
+//	Jordi Mas i Hernandez, jordi@ximian.com
 //
 //
 
@@ -31,10 +31,10 @@
 namespace System.Windows.Forms
 {
 
-    public enum MessageBoxDefaultButton
-    {
-        Button1 = 0,
-        Button2 = 0x100,
-        Button3 = 0x200,
-    }
+	public enum MessageBoxDefaultButton
+	{
+		Button1 = 0,
+		Button2 = 0x100,
+		Button3 = 0x200,
+	}
 }

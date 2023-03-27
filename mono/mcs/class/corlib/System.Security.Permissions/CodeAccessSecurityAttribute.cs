@@ -32,25 +32,25 @@ using System.Runtime.InteropServices;
 namespace System.Security.Permissions {
 
 #if MOBILE && !MONOTOUCH
-    [Obsolete ("CAS support is not available with Silverlight applications.")]
+	[Obsolete ("CAS support is not available with Silverlight applications.")]
 #endif
-    [ComVisible (true)]
-    [AttributeUsage(
-        AttributeTargets.Assembly 
-        | AttributeTargets.Class 
-        | AttributeTargets.Struct 
-        | AttributeTargets.Constructor 
-        | AttributeTargets.Method, 
-        AllowMultiple=true, 
-        Inherited=false)
-    ]
-    [Serializable]
-    public abstract class CodeAccessSecurityAttribute : SecurityAttribute {
+	[ComVisible (true)]
+	[AttributeUsage(
+		AttributeTargets.Assembly 
+		| AttributeTargets.Class 
+		| AttributeTargets.Struct 
+		| AttributeTargets.Constructor 
+		| AttributeTargets.Method, 
+		AllowMultiple=true, 
+		Inherited=false)
+	]
+	[Serializable]
+	public abstract class CodeAccessSecurityAttribute : SecurityAttribute {
 
-        protected CodeAccessSecurityAttribute (SecurityAction action) 
-            : base (action)
-        {
-        }
-    }
+		protected CodeAccessSecurityAttribute (SecurityAction action) 
+			: base (action)
+		{
+		}
+	}
 }
 

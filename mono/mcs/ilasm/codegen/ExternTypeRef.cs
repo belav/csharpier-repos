@@ -29,7 +29,7 @@ namespace Mono.ILASM {
 
                 private ExternTypeRef (IScope extern_ref, string full_name,
                                 bool is_valuetype, ArrayList conv_list, string sig_mod)
-            : base (full_name, is_valuetype, conv_list, sig_mod)
+			: base (full_name, is_valuetype, conv_list, sig_mod)
                 {
                         this.extern_ref = extern_ref;
 

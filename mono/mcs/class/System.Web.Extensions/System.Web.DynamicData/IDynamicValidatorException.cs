@@ -34,10 +34,10 @@ using System.Web;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public interface IDynamicValidatorException
-    {
-        IDictionary<string, Exception> InnerExceptions { get; }
-    }
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public interface IDynamicValidatorException
+	{
+		IDictionary<string, Exception> InnerExceptions { get; }
+	}
 }

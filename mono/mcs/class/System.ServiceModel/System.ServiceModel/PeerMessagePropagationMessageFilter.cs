@@ -2,7 +2,7 @@
 // PeerMessagePropagationMessageFilter.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,13 +32,13 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-    public abstract class PeerMessagePropagationFilter
-    {
-        protected PeerMessagePropagationFilter ()
-        {
-        }
+	public abstract class PeerMessagePropagationFilter
+	{
+		protected PeerMessagePropagationFilter ()
+		{
+		}
 
-        public abstract PeerMessagePropagation ShouldMessagePropagate (
-            Message message, PeerMessageOrigination origination);
-    }
+		public abstract PeerMessagePropagation ShouldMessagePropagate (
+			Message message, PeerMessageOrigination origination);
+	}
 }

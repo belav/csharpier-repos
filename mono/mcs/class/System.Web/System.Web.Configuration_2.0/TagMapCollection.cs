@@ -2,7 +2,7 @@
 // System.Web.Configuration.TagMapCollection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,53 +35,53 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    [ConfigurationCollection (typeof (TagMapInfo), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class TagMapCollection : ConfigurationElementCollection
-    {
-        static ConfigurationPropertyCollection properties;
+	[ConfigurationCollection (typeof (TagMapInfo), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class TagMapCollection : ConfigurationElementCollection
+	{
+		static ConfigurationPropertyCollection properties;
 
-        static TagMapCollection ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static TagMapCollection ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public TagMapCollection ()
-        {
-        }
+		public TagMapCollection ()
+		{
+		}
 
-        public void Add (TagMapInfo tagMapInformation)
-        {
-            BaseAdd (tagMapInformation);
-        }
+		public void Add (TagMapInfo tagMapInformation)
+		{
+			BaseAdd (tagMapInformation);
+		}
 
-        public void Clear ()
-        {
-            BaseClear ();
-        }
+		public void Clear ()
+		{
+			BaseClear ();
+		}
 
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new TagMapInfo ();
-        }
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new TagMapInfo ();
+		}
 
-        protected override object GetElementKey (ConfigurationElement element)
-        {
-            return ((TagMapInfo)element).TagType;
-        }
+		protected override object GetElementKey (ConfigurationElement element)
+		{
+			return ((TagMapInfo)element).TagType;
+		}
 
-        public void Remove (TagMapInfo tagMapInformation)
-        {
-            BaseRemove (tagMapInformation.TagType);
-        }
+		public void Remove (TagMapInfo tagMapInformation)
+		{
+			BaseRemove (tagMapInformation.TagType);
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        public TagMapInfo this[int index] {
-            get { return (TagMapInfo) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-        }
-    }
+		public TagMapInfo this[int index] {
+			get { return (TagMapInfo) BaseGet (index); }
+			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+		}
+	}
 }
 

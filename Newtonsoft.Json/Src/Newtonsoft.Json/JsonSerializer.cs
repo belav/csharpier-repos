@@ -536,7 +536,7 @@ namespace Newtonsoft.Json
         /// The default value is <c>false</c>.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if there will be a check for additional JSON content after deserializing an object; otherwise, <c>false</c>.
+        /// 	<c>true</c> if there will be a check for additional JSON content after deserializing an object; otherwise, <c>false</c>.
         /// </value>
         public virtual bool CheckAdditionalContent
         {

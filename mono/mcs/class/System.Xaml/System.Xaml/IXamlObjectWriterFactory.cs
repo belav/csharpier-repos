@@ -25,9 +25,9 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-    public interface IXamlObjectWriterFactory
-    {
-        XamlObjectWriterSettings GetParentSettings ();
-        XamlObjectWriter GetXamlObjectWriter (XamlObjectWriterSettings settings);
-    }
+	public interface IXamlObjectWriterFactory
+	{
+		XamlObjectWriterSettings GetParentSettings ();
+		XamlObjectWriter GetXamlObjectWriter (XamlObjectWriterSettings settings);
+	}
 }

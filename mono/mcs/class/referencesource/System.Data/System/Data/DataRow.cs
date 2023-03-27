@@ -1295,7 +1295,7 @@ namespace System.Data {
             }
             return recordCount;
         }
-        
+		
         [Conditional("DEBUG")]
         private void VerifyValueFromStorage(DataColumn column, DataRowVersion version, object valueFromStorage) {
             // Dev11 900390: ignore deleted rows by adding "newRecord != -1" condition - we do not evaluate computed rows if they are deleted

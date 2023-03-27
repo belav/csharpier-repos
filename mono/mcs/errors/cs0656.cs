@@ -4,8 +4,8 @@
 
 class C
 {
-    static void Main ()
-    {
-        decimal d = 12M;
-    }
+	static void Main ()
+	{
+		decimal d = 12M;
+	}
 }

@@ -2,8 +2,8 @@
 // System.Web.UI.WebControls.XmlHierarchicalDataSourceView
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
-//    Sanjay Gupta (gsanjay@novell.com)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
+//	Sanjay Gupta (gsanjay@novell.com)
 //
 // (C) 2003 Ben Maurer
 // (C) 2004 Novell, Inc. (http://www.novell.com)
@@ -36,18 +36,18 @@ using System.Text;
 using System.Xml;
 
 namespace System.Web.UI.WebControls {
-    public class XmlHierarchicalDataSourceView : HierarchicalDataSourceView    {
-        internal XmlHierarchicalDataSourceView (XmlNodeList nodeList)
-        {
-            this.nodeList = nodeList;
-        }
-        
-        public override IHierarchicalEnumerable Select ()
-        {
-            return new XmlHierarchicalEnumerable (nodeList);
-        }
-        
-        XmlNodeList nodeList;
-    }
+	public class XmlHierarchicalDataSourceView : HierarchicalDataSourceView	{
+		internal XmlHierarchicalDataSourceView (XmlNodeList nodeList)
+		{
+			this.nodeList = nodeList;
+		}
+		
+		public override IHierarchicalEnumerable Select ()
+		{
+			return new XmlHierarchicalEnumerable (nodeList);
+		}
+		
+		XmlNodeList nodeList;
+	}
 }
 

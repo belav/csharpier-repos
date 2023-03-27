@@ -2,7 +2,7 @@
 // AssumeBlock.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,28 +30,28 @@ using Mono.CodeContracts.Static.ControlFlow.Subroutines;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Blocks {
-    class AssumeBlock<Label> : BlockWithLabels<Label> {
-        protected readonly Label BranchLabel;
-        protected readonly EdgeTag Tag;
+	class AssumeBlock<Label> : BlockWithLabels<Label> {
+		protected readonly Label BranchLabel;
+		protected readonly EdgeTag Tag;
 
-        public AssumeBlock (SubroutineBase<Label> subroutine, Label label, EdgeTag tag, ref int idGen)
-            : base (subroutine, ref idGen)
-        {
-            this.BranchLabel = label;
-            this.Tag = tag;
-        }
+		public AssumeBlock (SubroutineBase<Label> subroutine, Label label, EdgeTag tag, ref int idGen)
+			: base (subroutine, ref idGen)
+		{
+			this.BranchLabel = label;
+			this.Tag = tag;
+		}
 
-        public override int Count
-        {
-            get { return 1; }
-        }
+		public override int Count
+		{
+			get { return 1; }
+		}
 
-        public override Result ForwardDecode<Data, Result, Visitor> (APC pc, Visitor visitor, Data data)
-        {
-            if (pc.Index == 0)
-                return visitor.Assume (pc, this.Tag, Dummy.Value, data);
+		public override Result ForwardDecode<Data, Result, Visitor> (APC pc, Visitor visitor, Data data)
+		{
+			if (pc.Index == 0)
+				return visitor.Assume (pc, this.Tag, Dummy.Value, data);
 
-            return visitor.Nop (pc, data);
-        }
-    }
+			return visitor.Nop (pc, data);
+		}
+	}
 }

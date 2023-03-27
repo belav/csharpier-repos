@@ -18,9 +18,9 @@
 using System;
 
 namespace System.Data.OracleClient.Oci {
-    internal struct OciErrorInfo 
-    {
-        public int ErrorCode;
-        public string ErrorMessage;
-    }
+	internal struct OciErrorInfo 
+	{
+		public int ErrorCode;
+		public string ErrorMessage;
+	}
 }

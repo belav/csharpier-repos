@@ -39,129 +39,129 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataView_AddNew : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataView_AddNew tc = new DataView_AddNew();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataView_AddNew");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataView_AddNew tc = new DataView_AddNew();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataView_AddNew");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        
-        //create the source datatable
-        DataTable dt = GHTUtils.DataProvider.CreateChildDataTable();
+	public void run()
+	{
+		Exception exp = null;
+		
+		//create the source datatable
+		DataTable dt = GHTUtils.DataProvider.CreateChildDataTable();
 
-        //create the dataview for the table
-        DataView dv = new DataView(dt);
+		//create the dataview for the table
+		DataView dv = new DataView(dt);
 
-        int CountView = dv.Count ;
-        int CountTable= dt.Rows.Count ;
+		int CountView = dv.Count ;
+		int CountTable= dt.Rows.Count ;
 
-        DataRowView drv = null;
+		DataRowView drv = null;
 
-        BeginCase("AddNew - DataView Row Count");
-        try
-        {
-            drv = dv.AddNew();
-            Compare(CountView+1,dv.Count );
-        }
-        catch (Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
+		BeginCase("AddNew - DataView Row Count");
+		try
+		{
+			drv = dv.AddNew();
+			Compare(CountView+1,dv.Count );
+		}
+		catch (Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
 
-        BeginCase("AddNew - Table Row Count ");
-        try
-        {
-            Compare(CountTable,dt.Rows.Count );
-        }
-        catch (Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
+		BeginCase("AddNew - Table Row Count ");
+		try
+		{
+			Compare(CountTable,dt.Rows.Count );
+		}
+		catch (Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
 
-        BeginCase("AddNew - new row in DataTable");
-        try
-        {
-            drv.EndEdit();
-            Compare(CountTable+1,dt.Rows.Count );
-        }
-        catch (Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
+		BeginCase("AddNew - new row in DataTable");
+		try
+		{
+			drv.EndEdit();
+			Compare(CountTable+1,dt.Rows.Count );
+		}
+		catch (Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
 
-        BeginCase("AddNew - new row != null");
-        try
-        {
-            Compare(drv!=null,true);
-        }
-        catch (Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
+		BeginCase("AddNew - new row != null");
+		try
+		{
+			Compare(drv!=null,true);
+		}
+		catch (Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
 
-        BeginCase("AddNew - check table");
-        try
-        {
-            Compare(drv.Row.Table,dt);
-        }
-        catch (Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
+		BeginCase("AddNew - check table");
+		try
+		{
+			Compare(drv.Row.Table,dt);
+		}
+		catch (Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
 
-    }
+	}
 }
 }

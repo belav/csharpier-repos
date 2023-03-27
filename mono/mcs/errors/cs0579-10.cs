@@ -6,10 +6,10 @@ using System;
 [AttributeUsage (AttributeTargets.All, AllowMultiple = false)]
 public class SimpleAttribute : Attribute {
 
-    public SimpleAttribute ()
-    {
-    }
-    
+	public SimpleAttribute ()
+	{
+	}
+	
 }
 
 [Simple]

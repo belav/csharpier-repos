@@ -7,10 +7,10 @@ namespace Testing
    /// comment
    public class Test
    {
-    /// <include file='a' />
-    public static void Main ()
-    {
-    }
+	/// <include file='a' />
+	public static void Main ()
+	{
+	}
    }
 }
 

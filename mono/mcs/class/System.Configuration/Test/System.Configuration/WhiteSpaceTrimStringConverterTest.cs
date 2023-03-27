@@ -3,7 +3,7 @@
 // for System.Configuration.WhiteSpaceTrimStringConverter.
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,82 +33,82 @@ using System.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
-    [TestFixture]
-    public class WhiteSpaceTrimStringConverterTest
-    {
-        [Test]
-        public void CanConvertFrom ()
-        {
-            WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
+	[TestFixture]
+	public class WhiteSpaceTrimStringConverterTest
+	{
+		[Test]
+		public void CanConvertFrom ()
+		{
+			WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
 
-            Assert.IsTrue (cv.CanConvertFrom (null, typeof (string)), "A1");
-            Assert.IsFalse (cv.CanConvertFrom (null, typeof (TimeSpan)), "A2");
-            Assert.IsFalse (cv.CanConvertFrom (null, typeof (int)), "A3");
-            Assert.IsFalse (cv.CanConvertFrom (null, typeof (object)), "A4");
-        }
+			Assert.IsTrue (cv.CanConvertFrom (null, typeof (string)), "A1");
+			Assert.IsFalse (cv.CanConvertFrom (null, typeof (TimeSpan)), "A2");
+			Assert.IsFalse (cv.CanConvertFrom (null, typeof (int)), "A3");
+			Assert.IsFalse (cv.CanConvertFrom (null, typeof (object)), "A4");
+		}
 
-        [Test]
-        public void CanConvertTo ()
-        {
-            WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
+		[Test]
+		public void CanConvertTo ()
+		{
+			WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
 
-            Assert.IsTrue (cv.CanConvertTo (null, typeof (string)), "A1");
-            Assert.IsFalse (cv.CanConvertTo (null, typeof (TimeSpan)), "A2");
-            Assert.IsFalse (cv.CanConvertTo (null, typeof (int)), "A3");
-            Assert.IsFalse (cv.CanConvertTo (null, typeof (object)), "A4");
-        }
+			Assert.IsTrue (cv.CanConvertTo (null, typeof (string)), "A1");
+			Assert.IsFalse (cv.CanConvertTo (null, typeof (TimeSpan)), "A2");
+			Assert.IsFalse (cv.CanConvertTo (null, typeof (int)), "A3");
+			Assert.IsFalse (cv.CanConvertTo (null, typeof (object)), "A4");
+		}
 
-        [Test]
-        public void ConvertFrom ()
-        {
-            WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
-            object o;
+		[Test]
+		public void ConvertFrom ()
+		{
+			WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
+			object o;
 
-            o = cv.ConvertFrom (null, null, "hi there");
-            Assert.AreEqual (typeof (string), o.GetType(), "A1");
-            Assert.AreEqual ("hi there", (string)o, "A2");
-            o = cv.ConvertFrom (null, null, " hi there ");
-            Assert.AreEqual ("hi there", (string)o, "A3");
-        }
+			o = cv.ConvertFrom (null, null, "hi there");
+			Assert.AreEqual (typeof (string), o.GetType(), "A1");
+			Assert.AreEqual ("hi there", (string)o, "A2");
+			o = cv.ConvertFrom (null, null, " hi there ");
+			Assert.AreEqual ("hi there", (string)o, "A3");
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void ConvertFrom_TypeError ()
-        {
-            WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
-            object o;
+		[Test]
+		[ExpectedException (typeof (InvalidCastException))]
+		public void ConvertFrom_TypeError ()
+		{
+			WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
+			object o;
 
-            o = cv.ConvertFrom (null, null, 59);
-            Assert.IsNull (o, "A1");
-        }
+			o = cv.ConvertFrom (null, null, 59);
+			Assert.IsNull (o, "A1");
+		}
 
-        [Test]
-        public void ConvertTo ()
-        {
-            WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
+		[Test]
+		public void ConvertTo ()
+		{
+			WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
 
-            Assert.AreEqual ("59", cv.ConvertTo (null, null, "59", typeof (string)), "A1");
-            Assert.AreEqual ("59", cv.ConvertTo (null, null, " 59", typeof (string)), "A2");
-            Assert.AreEqual ("59", cv.ConvertTo (null, null, "59 ", typeof (string)), "A3");
-            Assert.AreEqual ("59", cv.ConvertTo (null, null, " 59 ", typeof (string)), "A4");
-        }
+			Assert.AreEqual ("59", cv.ConvertTo (null, null, "59", typeof (string)), "A1");
+			Assert.AreEqual ("59", cv.ConvertTo (null, null, " 59", typeof (string)), "A2");
+			Assert.AreEqual ("59", cv.ConvertTo (null, null, "59 ", typeof (string)), "A3");
+			Assert.AreEqual ("59", cv.ConvertTo (null, null, " 59 ", typeof (string)), "A4");
+		}
 
-        [Test]
-        public void ConvertTo_NullError ()
-        {
-            WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
+		[Test]
+		public void ConvertTo_NullError ()
+		{
+			WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
 
-            Assert.AreEqual ("", cv.ConvertTo (null, null, null, typeof (string)), "A1");
-        }
+			Assert.AreEqual ("", cv.ConvertTo (null, null, null, typeof (string)), "A1");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ConvertTo_TypeError1 ()
-        {
-            WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
+		[Test]
+		[ExpectedException (typeof (ArgumentException))]
+		public void ConvertTo_TypeError1 ()
+		{
+			WhiteSpaceTrimStringConverter cv = new WhiteSpaceTrimStringConverter ();
 
-            Assert.AreEqual ("59", cv.ConvertTo (null, null, 59, typeof (string)), "A1");
-        }
-    }
+			Assert.AreEqual ("59", cv.ConvertTo (null, null, 59, typeof (string)), "A1");
+		}
+	}
 }
 

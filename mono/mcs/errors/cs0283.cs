@@ -7,5 +7,5 @@ struct S
 
 class C
 {
-    const S s = new S();
+	const S s = new S();
 }

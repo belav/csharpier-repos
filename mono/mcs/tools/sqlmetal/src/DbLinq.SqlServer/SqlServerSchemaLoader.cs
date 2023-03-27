@@ -1,4 +1,4 @@
-#region MIT license
+﻿#region MIT license
 // 
 // MIT license
 //
@@ -97,11 +97,11 @@ SELECT
             rc.CONSTRAINT_CATALOG   = rcu.CONSTRAINT_CATALOG AND
             rc.CONSTRAINT_NAME      = rcu.CONSTRAINT_NAME
      WHERE
-        rc.CONSTRAINT_TYPE  = 'PRIMARY KEY' AND
-        rc.TABLE_CATALOG    = columns.TABLE_CATALOG AND
-        rc.TABLE_SCHEMA     = columns.TABLE_SCHEMA AND
-        rc.TABLE_NAME       = columns.TABLE_NAME AND
-        rcu.COLUMN_NAME     = columns.COLUMN_NAME
+		rc.CONSTRAINT_TYPE  = 'PRIMARY KEY' AND
+		rc.TABLE_CATALOG    = columns.TABLE_CATALOG AND
+		rc.TABLE_SCHEMA     = columns.TABLE_SCHEMA AND
+		rc.TABLE_NAME       = columns.TABLE_NAME AND
+		rcu.COLUMN_NAME     = columns.COLUMN_NAME
     ) AS 'PRIMARY_KEY',
     columns.IS_NULLABLE,
     columns.DATA_TYPE,

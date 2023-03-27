@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation and contributors. All rights reserved.
+﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,18 +13,18 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
 {
-    [SkipKeptItemsValidation]
-    [ExpectedNoWarnings]
-    public class DetectRedundantSuppressionsInAssembly
-    {
-        public static void Main ()
-        {
-            TrimmerCompatibleMethod ();
-        }
+	[SkipKeptItemsValidation]
+	[ExpectedNoWarnings]
+	public class DetectRedundantSuppressionsInAssembly
+	{
+		public static void Main ()
+		{
+			TrimmerCompatibleMethod ();
+		}
 
-        public static string TrimmerCompatibleMethod ()
-        {
-            return "test";
-        }
-    }
+		public static string TrimmerCompatibleMethod ()
+		{
+			return "test";
+		}
+	}
 }

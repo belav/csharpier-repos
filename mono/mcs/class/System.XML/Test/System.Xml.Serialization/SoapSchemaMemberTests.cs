@@ -14,24 +14,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization
 {
-    [TestFixture]
-    public class SoapSchemaMemberTests
-    {
-        [Test]
-        public void MemberNameDefault ()
-        {
-            SoapSchemaMember member = new SoapSchemaMember ();
-            Assert.AreEqual (string.Empty, member.MemberName);
+	[TestFixture]
+	public class SoapSchemaMemberTests
+	{
+		[Test]
+		public void MemberNameDefault ()
+		{
+			SoapSchemaMember member = new SoapSchemaMember ();
+			Assert.AreEqual (string.Empty, member.MemberName);
 
-            member.MemberName = null;
-            Assert.AreEqual (string.Empty, member.MemberName);
-        }
+			member.MemberName = null;
+			Assert.AreEqual (string.Empty, member.MemberName);
+		}
 
-        [Test]
-        public void MemberTypeDefault ()
-        {
-            SoapSchemaMember member = new SoapSchemaMember ();
-            Assert.AreEqual (XmlQualifiedName.Empty, member.MemberType);
-        }
-    }
+		[Test]
+		public void MemberTypeDefault ()
+		{
+			SoapSchemaMember member = new SoapSchemaMember ();
+			Assert.AreEqual (XmlQualifiedName.Empty, member.MemberType);
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // Unit tests for CmsRecipientCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -34,15 +34,15 @@ using System.Security.Cryptography.Pkcs;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs {
 
-    [TestFixture]
-    public class CmsRecipientCollectionTest {
+	[TestFixture]
+	public class CmsRecipientCollectionTest {
 
-        [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void Ctor_SubjectIdentifierType_X509Certificate2CollectionNull ()
-        {
-            new CmsRecipientCollection (SubjectIdentifierType.NoSignature, null);
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (NullReferenceException))]
+		public void Ctor_SubjectIdentifierType_X509Certificate2CollectionNull ()
+		{
+			new CmsRecipientCollection (SubjectIdentifierType.NoSignature, null);
+		}
+	}
 }
 

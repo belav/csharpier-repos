@@ -2,7 +2,7 @@
 // CspParametersTest.cs - NUnit Test Cases for CspParameters
 //
 // Author:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2015 Xamarin Inc (http://www.xamarin.com)
 //
@@ -32,14 +32,14 @@ using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography {
 
-    [TestFixture]
-    public class CspParametersTest {
+	[TestFixture]
+	public class CspParametersTest {
 
-        [Test]
-        public void Ctor () 
-        {
-            var cp = new CspParameters ();
-            Assert.AreEqual (1, cp.ProviderType);
-        }
-    }
+		[Test]
+		public void Ctor () 
+		{
+			var cp = new CspParameters ();
+			Assert.AreEqual (1, cp.ProviderType);
+		}
+	}
 }

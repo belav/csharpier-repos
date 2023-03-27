@@ -2,7 +2,7 @@
 // System.Web.SessionState.SessionStateActions.cs
 //
 // Authors:
-//    Sanjay Gupta (gsanjay@novell.com)
+//	Sanjay Gupta (gsanjay@novell.com)
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -27,9 +27,9 @@
 //
 
 namespace System.Web.SessionState {
-    public enum SessionStateActions {
-        None = 0,
-        InitializeItem    = 1
-    }
+	public enum SessionStateActions {
+		None = 0,
+		InitializeItem	= 1
+	}
 }
 

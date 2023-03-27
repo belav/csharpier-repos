@@ -1,4 +1,4 @@
-namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding {
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Web.Profile;

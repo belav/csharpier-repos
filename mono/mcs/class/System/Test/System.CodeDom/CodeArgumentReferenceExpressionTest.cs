@@ -1,9 +1,9 @@
 //
 // CodeArgumentReferenceExpressionTest.cs
-//    - Unit tests for System.CodeDom.CodeArgumentReferenceExpression
+//	- Unit tests for System.CodeDom.CodeArgumentReferenceExpression
 //
 // Author:
-//    Gert Driesen  <drieseng@users.sourceforge.net>
+//	Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,24 +33,24 @@ using System;
 using System.CodeDom;
 
 namespace MonoTests.System.CodeDom {
-    [TestFixture]
-    public class CodeArgumentReferenceExpressionTest {
-        [Test]
-        public void DefaultConstructor ()
-        {
-            CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression ();
-            Assert.AreEqual (string.Empty, care.ParameterName, "#1");
-            care.ParameterName = "mono";
-            Assert.AreEqual ("mono", care.ParameterName, "#2");
-        }
+	[TestFixture]
+	public class CodeArgumentReferenceExpressionTest {
+		[Test]
+		public void DefaultConstructor ()
+		{
+			CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression ();
+			Assert.AreEqual (string.Empty, care.ParameterName, "#1");
+			care.ParameterName = "mono";
+			Assert.AreEqual ("mono", care.ParameterName, "#2");
+		}
 
-        [Test]
-        public void NullParameter ()
-        {
-            CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression ((string) null);
-            Assert.AreEqual (string.Empty, care.ParameterName, "#1");
-            care.ParameterName = null;
-            Assert.AreEqual (string.Empty, care.ParameterName, "#2");
-        }
-    }
+		[Test]
+		public void NullParameter ()
+		{
+			CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression ((string) null);
+			Assert.AreEqual (string.Empty, care.ParameterName, "#1");
+			care.ParameterName = null;
+			Assert.AreEqual (string.Empty, care.ParameterName, "#2");
+		}
+	}
 }

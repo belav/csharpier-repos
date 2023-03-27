@@ -9,6 +9,6 @@ class T {
         static int Main (string [] args) {
                 IntPtr g;
                 Blah (out g);
-        return (int) g;
+		return (int) g;
         }
 }

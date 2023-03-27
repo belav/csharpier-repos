@@ -2,7 +2,7 @@
 // ExpiredSecurityTokenException.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,34 +32,34 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Security
 {
-    [Serializable]
-    public class ExpiredSecurityTokenException : MessageSecurityException
-    {
-        public ExpiredSecurityTokenException ()
-            : this ("The security token is expired.")
-        {
-        }
+	[Serializable]
+	public class ExpiredSecurityTokenException : MessageSecurityException
+	{
+		public ExpiredSecurityTokenException ()
+			: this ("The security token is expired.")
+		{
+		}
 
-        public ExpiredSecurityTokenException (string message)
-            : base (message)
-        {
-        }
+		public ExpiredSecurityTokenException (string message)
+			: base (message)
+		{
+		}
 
-        public ExpiredSecurityTokenException (string message,
-            Exception innerException)
-            : base (message, innerException)
-        {
-        }
+		public ExpiredSecurityTokenException (string message,
+			Exception innerException)
+			: base (message, innerException)
+		{
+		}
 
-        protected ExpiredSecurityTokenException (SerializationInfo info,
-            StreamingContext context)
-            : base (info, context)
-        {
-        }
+		protected ExpiredSecurityTokenException (SerializationInfo info,
+			StreamingContext context)
+			: base (info, context)
+		{
+		}
 
-        public override void GetObjectData (SerializationInfo info,  StreamingContext ctx)
-        {
-            base.GetObjectData (info, ctx);
-        }
-    }
+		public override void GetObjectData (SerializationInfo info,  StreamingContext ctx)
+		{
+			base.GetObjectData (info, ctx);
+		}
+	}
 }

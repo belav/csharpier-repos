@@ -6,8 +6,8 @@ using System.Web.Security;
 
 public partial class MyLoginPage : Page
 {
-    protected void loginControl_Authenticate(object sender, AuthenticateEventArgs e)
-    {
-        e.Authenticated = FormsAuthentication.Authenticate(loginControl.UserName, loginControl.Password);
+	protected void loginControl_Authenticate(object sender, AuthenticateEventArgs e)
+	{
+		e.Authenticated = FormsAuthentication.Authenticate(loginControl.UserName, loginControl.Password);
         }
 }

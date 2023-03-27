@@ -3,8 +3,8 @@
 
 class C
 {
-    public static void Main ()
-    {
-        var array = new[] { null, null };
-    }
+	public static void Main ()
+	{
+		var array = new[] { null, null };
+	}
 }

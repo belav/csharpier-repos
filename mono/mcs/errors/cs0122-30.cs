@@ -5,17 +5,17 @@ delegate int TestDelegate ();
 
 public class MainClass
 {
-    class Nested
-    {
-        static int Delegate ()
-        {
-            return 0;
-        }
-    }
+	class Nested
+	{
+		static int Delegate ()
+		{
+			return 0;
+		}
+	}
 
-    public static void Main ()
-    {
-        TestDelegate delegateInstance = new TestDelegate (Nested.Delegate);
-    }
+	public static void Main ()
+	{
+		TestDelegate delegateInstance = new TestDelegate (Nested.Delegate);
+	}
 }
 

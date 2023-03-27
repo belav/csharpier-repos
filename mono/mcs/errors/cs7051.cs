@@ -7,8 +7,8 @@ using System.Security.Permissions;
 
 public class Program {
 
-    [SecurityPermission (SecurityAction.RequestMinimum, ControlPrincipal=true, Flags=SecurityPermissionFlag.ControlPrincipal)]
-    static public void Main (string[] args)
-    {
-    }
+	[SecurityPermission (SecurityAction.RequestMinimum, ControlPrincipal=true, Flags=SecurityPermissionFlag.ControlPrincipal)]
+	static public void Main (string[] args)
+	{
+	}
 }

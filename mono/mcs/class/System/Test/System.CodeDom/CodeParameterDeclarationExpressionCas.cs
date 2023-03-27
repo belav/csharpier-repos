@@ -1,9 +1,9 @@
 //
 // CodeParameterDeclarationExpressionCas.cs
-//    - CAS unit tests for System.CodeDom.CodeParameterDeclarationExpression
+//	- CAS unit tests for System.CodeDom.CodeParameterDeclarationExpression
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,85 +37,85 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeParameterDeclarationExpressionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeParameterDeclarationExpressionCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeParameterDeclarationExpression cpde = new CodeParameterDeclarationExpression ();
-            Assert.AreEqual (0, cpde.CustomAttributes.Count, "CustomAttributes");
-            cpde.CustomAttributes = new CodeAttributeDeclarationCollection ();
-            Assert.AreEqual (FieldDirection.In, cpde.Direction, "Direction");
-            cpde.Direction = FieldDirection.Out;
-            Assert.AreEqual (String.Empty, cpde.Name, "Name");
-            cpde.Name = "mono";
-            Assert.AreEqual ("System.Void", cpde.Type.BaseType, "Type");
-            cpde.Type = new CodeTypeReference ("System.Int32");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeParameterDeclarationExpression cpde = new CodeParameterDeclarationExpression ();
+			Assert.AreEqual (0, cpde.CustomAttributes.Count, "CustomAttributes");
+			cpde.CustomAttributes = new CodeAttributeDeclarationCollection ();
+			Assert.AreEqual (FieldDirection.In, cpde.Direction, "Direction");
+			cpde.Direction = FieldDirection.Out;
+			Assert.AreEqual (String.Empty, cpde.Name, "Name");
+			cpde.Name = "mono";
+			Assert.AreEqual ("System.Void", cpde.Type.BaseType, "Type");
+			cpde.Type = new CodeTypeReference ("System.Int32");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeTypeReference type = new CodeTypeReference ("System.Void");
-            CodeParameterDeclarationExpression cpde = new CodeParameterDeclarationExpression (type, "mono");
-            Assert.AreEqual (0, cpde.CustomAttributes.Count, "CustomAttributes");
-            cpde.CustomAttributes = new CodeAttributeDeclarationCollection ();
-            Assert.AreEqual (FieldDirection.In, cpde.Direction, "Direction");
-            cpde.Direction = FieldDirection.Out;
-            Assert.AreEqual ("mono", cpde.Name, "Name");
-            cpde.Name = String.Empty;
-            Assert.AreSame (type, cpde.Type, "Type");
-            cpde.Type = new CodeTypeReference ("System.Int32");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeTypeReference type = new CodeTypeReference ("System.Void");
+			CodeParameterDeclarationExpression cpde = new CodeParameterDeclarationExpression (type, "mono");
+			Assert.AreEqual (0, cpde.CustomAttributes.Count, "CustomAttributes");
+			cpde.CustomAttributes = new CodeAttributeDeclarationCollection ();
+			Assert.AreEqual (FieldDirection.In, cpde.Direction, "Direction");
+			cpde.Direction = FieldDirection.Out;
+			Assert.AreEqual ("mono", cpde.Name, "Name");
+			cpde.Name = String.Empty;
+			Assert.AreSame (type, cpde.Type, "Type");
+			cpde.Type = new CodeTypeReference ("System.Int32");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2_Deny_Unrestricted ()
-        {
-            CodeParameterDeclarationExpression cpde = new CodeParameterDeclarationExpression ("System.Int32", "mono");
-            Assert.AreEqual (0, cpde.CustomAttributes.Count, "CustomAttributes");
-            cpde.CustomAttributes = new CodeAttributeDeclarationCollection ();
-            Assert.AreEqual (FieldDirection.In, cpde.Direction, "Direction");
-            cpde.Direction = FieldDirection.Out;
-            Assert.AreEqual ("mono", cpde.Name, "Name");
-            cpde.Name = String.Empty;
-            Assert.AreEqual ("System.Int32", cpde.Type.BaseType, "Type");
-            cpde.Type = new CodeTypeReference ("System.Int32");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2_Deny_Unrestricted ()
+		{
+			CodeParameterDeclarationExpression cpde = new CodeParameterDeclarationExpression ("System.Int32", "mono");
+			Assert.AreEqual (0, cpde.CustomAttributes.Count, "CustomAttributes");
+			cpde.CustomAttributes = new CodeAttributeDeclarationCollection ();
+			Assert.AreEqual (FieldDirection.In, cpde.Direction, "Direction");
+			cpde.Direction = FieldDirection.Out;
+			Assert.AreEqual ("mono", cpde.Name, "Name");
+			cpde.Name = String.Empty;
+			Assert.AreEqual ("System.Int32", cpde.Type.BaseType, "Type");
+			cpde.Type = new CodeTypeReference ("System.Int32");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor3_Deny_Unrestricted ()
-        {
-            CodeParameterDeclarationExpression cpde = new CodeParameterDeclarationExpression (typeof (int), "mono");
-            Assert.AreEqual (0, cpde.CustomAttributes.Count, "CustomAttributes");
-            cpde.CustomAttributes = new CodeAttributeDeclarationCollection ();
-            Assert.AreEqual (FieldDirection.In, cpde.Direction, "Direction");
-            cpde.Direction = FieldDirection.Out;
-            Assert.AreEqual ("mono", cpde.Name, "Name");
-            cpde.Name = String.Empty;
-            Assert.AreEqual ("System.Int32", cpde.Type.BaseType, "Type");
-            cpde.Type = new CodeTypeReference ("System.Int32");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor3_Deny_Unrestricted ()
+		{
+			CodeParameterDeclarationExpression cpde = new CodeParameterDeclarationExpression (typeof (int), "mono");
+			Assert.AreEqual (0, cpde.CustomAttributes.Count, "CustomAttributes");
+			cpde.CustomAttributes = new CodeAttributeDeclarationCollection ();
+			Assert.AreEqual (FieldDirection.In, cpde.Direction, "Direction");
+			cpde.Direction = FieldDirection.Out;
+			Assert.AreEqual ("mono", cpde.Name, "Name");
+			cpde.Name = String.Empty;
+			Assert.AreEqual ("System.Int32", cpde.Type.BaseType, "Type");
+			cpde.Type = new CodeTypeReference ("System.Int32");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeParameterDeclarationExpression).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeParameterDeclarationExpression).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

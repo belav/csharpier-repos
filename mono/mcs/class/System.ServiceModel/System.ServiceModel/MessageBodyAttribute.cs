@@ -2,7 +2,7 @@
 // MessageBodyMemberAttribute.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,15 +29,15 @@ using System;
 
 namespace System.ServiceModel
 {
-    [AttributeUsage (AttributeTargets.Property | AttributeTargets.Field,
-        Inherited = false)]
-    public class MessageBodyMemberAttribute : MessageContractMemberAttribute
-    {
-        int order = -1;
+	[AttributeUsage (AttributeTargets.Property | AttributeTargets.Field,
+		Inherited = false)]
+	public class MessageBodyMemberAttribute : MessageContractMemberAttribute
+	{
+		int order = -1;
 
-        public int Order {
-            get { return order; }
-            set { order = value; }
-        }
-    }
+		public int Order {
+			get { return order; }
+			set { order = value; }
+		}
+	}
 }

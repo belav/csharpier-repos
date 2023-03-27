@@ -31,19 +31,19 @@ using System;
 
 namespace System.Data.Linq.Mapping
 {
-    [AttributeUsage (AttributeTargets.Property|AttributeTargets.Field, AllowMultiple = false)]
-    public sealed class AssociationAttribute : DataAttribute
-    {
-        public bool DeleteOnNull { get; set; }
+	[AttributeUsage (AttributeTargets.Property|AttributeTargets.Field, AllowMultiple = false)]
+	public sealed class AssociationAttribute : DataAttribute
+	{
+		public bool DeleteOnNull { get; set; }
 
-        public string DeleteRule { get; set; }
+		public string DeleteRule { get; set; }
 
-        public bool IsForeignKey { get; set; }
+		public bool IsForeignKey { get; set; }
 
-        public bool IsUnique { get; set; }
+		public bool IsUnique { get; set; }
 
-        public string OtherKey { get; set; }
+		public string OtherKey { get; set; }
 
-        public string ThisKey { get; set; }
-    }
+		public string ThisKey { get; set; }
+	}
 }

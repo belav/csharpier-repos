@@ -34,38 +34,38 @@ using System.Xml.Linq;
 
 namespace System.ServiceModel.Discovery
 {
-    public class EndpointDiscoveryBehavior : IEndpointBehavior
-    {
-        public EndpointDiscoveryBehavior ()
-        {
-            Enabled = true;
-            ContractTypeNames = new Collection<XmlQualifiedName> ();
-            Extensions = new Collection<XElement> ();
-            Scopes = new Collection<Uri> ();
-        }
+	public class EndpointDiscoveryBehavior : IEndpointBehavior
+	{
+		public EndpointDiscoveryBehavior ()
+		{
+			Enabled = true;
+			ContractTypeNames = new Collection<XmlQualifiedName> ();
+			Extensions = new Collection<XElement> ();
+			Scopes = new Collection<Uri> ();
+		}
 
-        public Collection<XmlQualifiedName> ContractTypeNames { get; private set; }
+		public Collection<XmlQualifiedName> ContractTypeNames { get; private set; }
 
-        public bool Enabled { get; set; }
+		public bool Enabled { get; set; }
 
-        public Collection<XElement> Extensions { get; private set; }
+		public Collection<XElement> Extensions { get; private set; }
 
-        public Collection<Uri> Scopes { get; private set; }
+		public Collection<Uri> Scopes { get; private set; }
 
-        void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-        {
-        }
+		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+		{
+		}
 
-        void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-        {
-        }
+		void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint endpoint, ClientRuntime clientRuntime)
+		{
+		}
 
-        void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
-        {
-        }
+		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+		{
+		}
 
-        void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
-        {
-        }
-    }
+		void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
+		{
+		}
+	}
 }

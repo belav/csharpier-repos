@@ -3,5 +3,5 @@
 
 struct S<T>
 {
-    S<int> s;
+	S<int> s;
 }

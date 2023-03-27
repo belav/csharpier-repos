@@ -2,7 +2,7 @@
 // System.Web.Configuration.AuthorizationSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,51 +35,51 @@ using System.Security.Principal;
 
 namespace System.Web.Configuration {
 
-    public sealed class AuthorizationSection : ConfigurationSection
-    {
-        static ConfigurationProperty rulesProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class AuthorizationSection : ConfigurationSection
+	{
+		static ConfigurationProperty rulesProp;
+		static ConfigurationPropertyCollection properties;
 
-        static AuthorizationSection ()
-        {
-            rulesProp = new ConfigurationProperty (String.Empty, typeof (AuthorizationRuleCollection), null,
-                                   null, PropertyHelper.DefaultValidator,
-                                   ConfigurationPropertyOptions.IsDefaultCollection);
-            properties = new ConfigurationPropertyCollection ();
+		static AuthorizationSection ()
+		{
+			rulesProp = new ConfigurationProperty (String.Empty, typeof (AuthorizationRuleCollection), null,
+							       null, PropertyHelper.DefaultValidator,
+							       ConfigurationPropertyOptions.IsDefaultCollection);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (rulesProp);
-        }
+			properties.Add (rulesProp);
+		}
 
-        protected override void PostDeserialize()
-        {
-            base.PostDeserialize ();
-        }
+		protected override void PostDeserialize()
+		{
+			base.PostDeserialize ();
+		}
 
-        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public AuthorizationRuleCollection Rules {
-            get { return (AuthorizationRuleCollection) base [rulesProp];}
-        }
+		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+		public AuthorizationRuleCollection Rules {
+			get { return (AuthorizationRuleCollection) base [rulesProp];}
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
 
-        internal bool IsValidUser (IPrincipal user, string verb)
-        {
-            string username = (user == null) ? String.Empty : user.Identity.Name;
-            foreach (AuthorizationRule rule in Rules) {
-                if (rule.Verbs.Count != 0 && !rule.CheckVerb (verb))
-                    continue;
+		internal bool IsValidUser (IPrincipal user, string verb)
+		{
+			string username = (user == null) ? String.Empty : user.Identity.Name;
+			foreach (AuthorizationRule rule in Rules) {
+				if (rule.Verbs.Count != 0 && !rule.CheckVerb (verb))
+					continue;
 
-                if (rule.CheckUser (username) || (user != null && rule.CheckRole(user)))
-                    return (rule.Action == AuthorizationRuleAction.Allow);
-            }
+				if (rule.CheckUser (username) || (user != null && rule.CheckRole(user)))
+					return (rule.Action == AuthorizationRuleAction.Allow);
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-    }
+	}
 
 }
 

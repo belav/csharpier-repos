@@ -6,17 +6,17 @@ using System.Linq;
 
 public class C
 {
-    public string Name ()
-    {
-        return "aa";
-    }
+	public string Name ()
+	{
+		return "aa";
+	}
 }
 
 class Z
 {
-    void Test ()
-    {
-        List<C> l = null;
-        var r = l.OrderBy (f => f.Name).ToList ();
-    }
+	void Test ()
+	{
+		List<C> l = null;
+		var r = l.OrderBy (f => f.Name).ToList ();
+	}
 }

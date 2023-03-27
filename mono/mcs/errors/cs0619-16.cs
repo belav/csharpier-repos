@@ -4,11 +4,11 @@
 using System;
 public class Test_A
 {
-    [Obsolete ("Causes an error", true)]
-    public Test_A () {}
+	[Obsolete ("Causes an error", true)]
+	public Test_A () {}
 }
 
 public class Test_B: Test_A
 {
-    public Test_B (): base () {}
+	public Test_B (): base () {}
 }

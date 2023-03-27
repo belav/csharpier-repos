@@ -4,13 +4,13 @@
 
 class X
 {
-    public static void Main ()
-    {
-        Foo (x, out var x);
-    }
+	public static void Main ()
+	{
+		Foo (x, out var x);
+	}
 
-    static void Foo (int arg, out int value)
-    {
-        value = 3;
-    }
+	static void Foo (int arg, out int value)
+	{
+		value = 3;
+	}
 }

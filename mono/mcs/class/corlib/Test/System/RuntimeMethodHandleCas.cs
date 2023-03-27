@@ -2,7 +2,7 @@
 // RuntimeMethodHandleCas.cs - CAS unit tests for System.RuntimeMethodHandle
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,30 +34,30 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class RuntimeMethodHandleCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class RuntimeMethodHandleCas {
 
-        private RuntimeMethodHandle handle;
+		private RuntimeMethodHandle handle;
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
 
-            // we do this in SetUp because we want the security 
-            // stack to be "normal/empty" so each unit test can 
-            // mess with it as it wishes
-            handle = typeof (RuntimeMethodHandleCas).GetMethod ("SetUp").MethodHandle;
-        }
+			// we do this in SetUp because we want the security 
+			// stack to be "normal/empty" so each unit test can 
+			// mess with it as it wishes
+			handle = typeof (RuntimeMethodHandleCas).GetMethod ("SetUp").MethodHandle;
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetFunctionPointer ()
-        {
-            Assert.AreEqual (IntPtr.Zero, handle.GetFunctionPointer (), "GetFunctionPointer");
-        }
-    }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void GetFunctionPointer ()
+		{
+			Assert.AreEqual (IntPtr.Zero, handle.GetFunctionPointer (), "GetFunctionPointer");
+		}
+	}
 }

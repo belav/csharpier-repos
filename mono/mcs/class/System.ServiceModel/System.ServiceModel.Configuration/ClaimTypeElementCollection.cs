@@ -2,7 +2,7 @@
 // ClaimTypeElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,28 +54,28 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (ClaimTypeElement),
-         AddItemName = "add",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed partial class ClaimTypeElementCollection
-         : ServiceModelConfigurationElementCollection<ClaimTypeElement>,  ICollection,  IEnumerable
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
+	[ConfigurationCollection (typeof (ClaimTypeElement),
+		 AddItemName = "add",
+		 RemoveItemName = "remove",
+		 ClearItemsName = "clear",
+		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed partial class ClaimTypeElementCollection
+		 : ServiceModelConfigurationElementCollection<ClaimTypeElement>,  ICollection,  IEnumerable
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
 
-        static ClaimTypeElementCollection ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static ClaimTypeElementCollection ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public ClaimTypeElementCollection ()
-        {
-        }
+		public ClaimTypeElementCollection ()
+		{
+		}
 
 
-        // Properties
-    }
+		// Properties
+	}
 
 }

@@ -34,35 +34,35 @@ using System.Web;
 
 namespace System.Web.Caching
 {
-    [Serializable]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Unrestricted)]
-    public class SubstitutionResponseElement : ResponseElement
-    {
-        string typeName;
-        string methodName;
-        
-        public HttpResponseSubstitutionCallback Callback {
-            get;
-            private set;
-        }
-        
-        public SubstitutionResponseElement (HttpResponseSubstitutionCallback callback)
-        {
-            if (callback == null)
-                throw new ArgumentNullException ("callback");
+	[Serializable]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Unrestricted)]
+	public class SubstitutionResponseElement : ResponseElement
+	{
+		string typeName;
+		string methodName;
+		
+		public HttpResponseSubstitutionCallback Callback {
+			get;
+			private set;
+		}
+		
+		public SubstitutionResponseElement (HttpResponseSubstitutionCallback callback)
+		{
+			if (callback == null)
+				throw new ArgumentNullException ("callback");
 
-            this.Callback = callback;
+			this.Callback = callback;
 
-            MethodInfo mi = callback.Method;
-            this.typeName = mi.DeclaringType.AssemblyQualifiedName;
-            this.methodName = mi.Name;
-        }
+			MethodInfo mi = callback.Method;
+			this.typeName = mi.DeclaringType.AssemblyQualifiedName;
+			this.methodName = mi.Name;
+		}
 
-        [OnDeserialized]
-        void ObjectDeserialized (StreamingContext context)
-        {
-            Type type = Type.GetType (typeName, true);
-            Callback = Delegate.CreateDelegate (typeof (HttpResponseSubstitutionCallback), type, methodName, false, true) as HttpResponseSubstitutionCallback;
-        }
-    }
+		[OnDeserialized]
+		void ObjectDeserialized (StreamingContext context)
+		{
+			Type type = Type.GetType (typeName, true);
+			Callback = Delegate.CreateDelegate (typeof (HttpResponseSubstitutionCallback), type, methodName, false, true) as HttpResponseSubstitutionCallback;
+		}
+	}
 }

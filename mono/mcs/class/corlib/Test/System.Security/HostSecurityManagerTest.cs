@@ -2,7 +2,7 @@
 // HostSecurityManagerTest.cs - NUnit Test Cases for HostSecurityManager
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 // Copyright 2011 Xamarin Inc (http://www.xamarin.com).
@@ -38,120 +38,120 @@ using System.Security.Policy;
 
 namespace MonoTests.System.Security {
 
-    [TestFixture]
-    public class HostSecurityManagerTest {
+	[TestFixture]
+	public class HostSecurityManagerTest {
 
-        [Test]
-        public void Defaults ()
-        {
-            HostSecurityManager hsm = new HostSecurityManager ();
-            Assert.IsNull (hsm.DomainPolicy, "DomainPolicy");
-            Assert.AreEqual (HostSecurityManagerOptions.AllFlags, hsm.Flags, "Flags");
-        }
+		[Test]
+		public void Defaults ()
+		{
+			HostSecurityManager hsm = new HostSecurityManager ();
+			Assert.IsNull (hsm.DomainPolicy, "DomainPolicy");
+			Assert.AreEqual (HostSecurityManagerOptions.AllFlags, hsm.Flags, "Flags");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void DetermineApplicationTrust_Null_Evidence_TrustManagerContext ()
-        {
-            HostSecurityManager hsm = new HostSecurityManager ();
-            hsm.DetermineApplicationTrust (null, new Evidence (), new TrustManagerContext ());
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void DetermineApplicationTrust_Null_Evidence_TrustManagerContext ()
+		{
+			HostSecurityManager hsm = new HostSecurityManager ();
+			hsm.DetermineApplicationTrust (null, new Evidence (), new TrustManagerContext ());
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void DetermineApplicationTrust_Evidence_Null_TrustManagerContext ()
-        {
-            HostSecurityManager hsm = new HostSecurityManager ();
-            hsm.DetermineApplicationTrust (new Evidence (), null, new TrustManagerContext ());
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentException))]
+		public void DetermineApplicationTrust_Evidence_Null_TrustManagerContext ()
+		{
+			HostSecurityManager hsm = new HostSecurityManager ();
+			hsm.DetermineApplicationTrust (new Evidence (), null, new TrustManagerContext ());
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void DetermineApplicationTrust_Evidence_Evidence_Null ()
-        {
-            HostSecurityManager hsm = new HostSecurityManager ();
-            hsm.DetermineApplicationTrust (new Evidence (), new Evidence (), null);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentException))]
+		public void DetermineApplicationTrust_Evidence_Evidence_Null ()
+		{
+			HostSecurityManager hsm = new HostSecurityManager ();
+			hsm.DetermineApplicationTrust (new Evidence (), new Evidence (), null);
+		}
 
-        [Test]
-        public void ProvideAppDomainEvidence ()
-        {
-            HostSecurityManager hsm = new HostSecurityManager ();
-            Assert.IsNull (hsm.ProvideAppDomainEvidence (null), "null");
+		[Test]
+		public void ProvideAppDomainEvidence ()
+		{
+			HostSecurityManager hsm = new HostSecurityManager ();
+			Assert.IsNull (hsm.ProvideAppDomainEvidence (null), "null");
 
-            Evidence e = new Evidence ();
-            Evidence result = hsm.ProvideAppDomainEvidence (e);
-            Assert.IsNotNull (result, "empty");
-            Assert.AreEqual (0, result.Count, "Count-0");
+			Evidence e = new Evidence ();
+			Evidence result = hsm.ProvideAppDomainEvidence (e);
+			Assert.IsNotNull (result, "empty");
+			Assert.AreEqual (0, result.Count, "Count-0");
 
-            e.AddHost (new Zone (SecurityZone.Untrusted));
-            result = hsm.ProvideAppDomainEvidence (e);
-            Assert.AreEqual (1, result.Count, "Count-1");
-        }
+			e.AddHost (new Zone (SecurityZone.Untrusted));
+			result = hsm.ProvideAppDomainEvidence (e);
+			Assert.AreEqual (1, result.Count, "Count-1");
+		}
 
-        [Test]
-        public void ProvideAssemblyEvidence ()
-        {
-            HostSecurityManager hsm = new HostSecurityManager ();
-            Assembly a = Assembly.GetExecutingAssembly ();
+		[Test]
+		public void ProvideAssemblyEvidence ()
+		{
+			HostSecurityManager hsm = new HostSecurityManager ();
+			Assembly a = Assembly.GetExecutingAssembly ();
 
-            Evidence result = hsm.ProvideAssemblyEvidence (a, null);
-            Assert.IsNull (result, "null");
+			Evidence result = hsm.ProvideAssemblyEvidence (a, null);
+			Assert.IsNull (result, "null");
 
-            Evidence e = new Evidence ();
-            result = hsm.ProvideAssemblyEvidence (a, e);
-            Assert.AreEqual (0, result.Count, "Count-empty");
+			Evidence e = new Evidence ();
+			result = hsm.ProvideAssemblyEvidence (a, e);
+			Assert.AreEqual (0, result.Count, "Count-empty");
 
-            e.AddHost (new Zone (SecurityZone.Untrusted));
-            result = hsm.ProvideAssemblyEvidence (a, e);
-            Assert.AreEqual (1, result.Count, "Count-1");
-        }
+			e.AddHost (new Zone (SecurityZone.Untrusted));
+			result = hsm.ProvideAssemblyEvidence (a, e);
+			Assert.AreEqual (1, result.Count, "Count-1");
+		}
 
-        [Test]
-        public void ProvideAssemblyEvidence_NullAssembly ()
-        {
-            HostSecurityManager hsm = new HostSecurityManager ();
+		[Test]
+		public void ProvideAssemblyEvidence_NullAssembly ()
+		{
+			HostSecurityManager hsm = new HostSecurityManager ();
 
-            Evidence result = hsm.ProvideAssemblyEvidence (null, null);
-            Assert.IsNull (result, "null");
+			Evidence result = hsm.ProvideAssemblyEvidence (null, null);
+			Assert.IsNull (result, "null");
 
-            Evidence e = new Evidence ();
-            result = hsm.ProvideAssemblyEvidence (null, e);
-            Assert.AreEqual (0, result.Count, "Count-empty");
+			Evidence e = new Evidence ();
+			result = hsm.ProvideAssemblyEvidence (null, e);
+			Assert.AreEqual (0, result.Count, "Count-empty");
 
-            e.AddHost (new Zone (SecurityZone.Untrusted));
-            result = hsm.ProvideAssemblyEvidence (null, e);
-            Assert.AreEqual (1, result.Count, "Count-1");
-        }
+			e.AddHost (new Zone (SecurityZone.Untrusted));
+			result = hsm.ProvideAssemblyEvidence (null, e);
+			Assert.AreEqual (1, result.Count, "Count-1");
+		}
 
-        [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void ResolvePolicy_Null ()
-        {
-            HostSecurityManager hsm = new HostSecurityManager ();
-            PermissionSet ps = hsm.ResolvePolicy (null);
-        }
+		[Test]
+		[ExpectedException (typeof (NullReferenceException))]
+		public void ResolvePolicy_Null ()
+		{
+			HostSecurityManager hsm = new HostSecurityManager ();
+			PermissionSet ps = hsm.ResolvePolicy (null);
+		}
 
-        [Test]
-        public void ResolvePolicy_Empty ()
-        {
-            HostSecurityManager hsm = new HostSecurityManager ();
-            PermissionSet ps = hsm.ResolvePolicy (new Evidence ());
-            Assert.AreEqual (0, ps.Count, "Count");
-            Assert.IsFalse (ps.IsUnrestricted (), "IsUnrestricted");
-        }
+		[Test]
+		public void ResolvePolicy_Empty ()
+		{
+			HostSecurityManager hsm = new HostSecurityManager ();
+			PermissionSet ps = hsm.ResolvePolicy (new Evidence ());
+			Assert.AreEqual (0, ps.Count, "Count");
+			Assert.IsFalse (ps.IsUnrestricted (), "IsUnrestricted");
+		}
 
-        [Test]
-        public void ResolvePolicy_CurrentAssemblyEvidence ()
-        {
-            HostSecurityManager hsm = new HostSecurityManager ();
-            Assembly a = Assembly.GetExecutingAssembly ();
-            PermissionSet ps = hsm.ResolvePolicy (a.Evidence);
+		[Test]
+		public void ResolvePolicy_CurrentAssemblyEvidence ()
+		{
+			HostSecurityManager hsm = new HostSecurityManager ();
+			Assembly a = Assembly.GetExecutingAssembly ();
+			PermissionSet ps = hsm.ResolvePolicy (a.Evidence);
 
-            PermissionSet expected = SecurityManager.ResolvePolicy (a.Evidence);
-            Assert.AreEqual (expected.ToString (), ps.ToString (), "PermissionSet");
-        }
-    }
+			PermissionSet expected = SecurityManager.ResolvePolicy (a.Evidence);
+			Assert.AreEqual (expected.ToString (), ps.ToString (), "PermissionSet");
+		}
+	}
 }
 
 #endif

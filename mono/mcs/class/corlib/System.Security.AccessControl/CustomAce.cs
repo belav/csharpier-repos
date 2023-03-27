@@ -2,8 +2,8 @@
 // System.Security.AccessControl.CustomAce implementation
 //
 // Authors:
-//    Dick Porter  <dick@ximian.com>
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Dick Porter  <dick@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006-2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,55 +30,55 @@
 using System.Collections;
 
 namespace System.Security.AccessControl {
-    public sealed class CustomAce : GenericAce {
-        private byte[] opaque;
+	public sealed class CustomAce : GenericAce {
+		private byte[] opaque;
 
-        public CustomAce (AceType type, AceFlags flags, byte[] opaque)
-            : base(type, flags)
-        {
-            /* FIXME: check length of opaque >
-             * MaxOpaqueLength or !multiple of 4
-             */            
-            SetOpaque (opaque);
-        }
+		public CustomAce (AceType type, AceFlags flags, byte[] opaque)
+			: base(type, flags)
+		{
+			/* FIXME: check length of opaque >
+			 * MaxOpaqueLength or !multiple of 4
+			 */			
+			SetOpaque (opaque);
+		}
 
-        [MonoTODO]
-        public static readonly int MaxOpaqueLength;
+		[MonoTODO]
+		public static readonly int MaxOpaqueLength;
 
-        [MonoTODO]
-        public override int BinaryLength {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public override int BinaryLength {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        public int OpaqueLength {
-            get { return opaque.Length; }
-        }
+		public int OpaqueLength {
+			get { return opaque.Length; }
+		}
 
-        [MonoTODO]
-        public override void GetBinaryForm (byte[] binaryForm,
-                                            int offset)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override void GetBinaryForm (byte[] binaryForm,
+		                                    int offset)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public byte[] GetOpaque ()
-        {
-            return (byte[])opaque.Clone ();
-        }
+		public byte[] GetOpaque ()
+		{
+			return (byte[])opaque.Clone ();
+		}
 
-        public void SetOpaque (byte[] opaque)
-        {
-            if (opaque == null)
-                this.opaque = null;
-            else
-                this.opaque = (byte[])opaque.Clone ();
-        }
+		public void SetOpaque (byte[] opaque)
+		{
+			if (opaque == null)
+				this.opaque = null;
+			else
+				this.opaque = (byte[])opaque.Clone ();
+		}
 
-        internal override string GetSddlForm ()
-        {
-            throw new NotSupportedException ();
-        }
-    }
+		internal override string GetSddlForm ()
+		{
+			throw new NotSupportedException ();
+		}
+	}
 }

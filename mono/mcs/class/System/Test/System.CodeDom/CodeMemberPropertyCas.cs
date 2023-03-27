@@ -1,9 +1,9 @@
 //
 // CodeMemberPropertyCas.cs
-//    - CAS unit tests for System.CodeDom.CodeMemberProperty
+//	- CAS unit tests for System.CodeDom.CodeMemberProperty
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,43 +37,43 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeMemberPropertyCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeMemberPropertyCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeMemberProperty cmp = new CodeMemberProperty ();
-            Assert.AreEqual (0, cmp.GetStatements.Count, "GetStatements");
-            Assert.IsFalse (cmp.HasGet, "HasGet");
-            cmp.HasGet = true;
-            Assert.IsFalse (cmp.HasSet, "HasSet");
-            cmp.HasSet = true;
-            Assert.AreEqual (0, cmp.ImplementationTypes.Count, "ImplementationTypes");
-            Assert.AreEqual (0, cmp.Parameters.Count, "Parameters");
-            Assert.IsNull (cmp.PrivateImplementationType, "PrivateImplementationType");
-            cmp.PrivateImplementationType = new CodeTypeReference ("System.Int32");
-            Assert.AreEqual (0, cmp.SetStatements.Count, "SetStatements");
-            Assert.AreEqual ("System.Void", cmp.Type.BaseType, "ReturnType");
-            cmp.Type = new CodeTypeReference ("System.Int32");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeMemberProperty cmp = new CodeMemberProperty ();
+			Assert.AreEqual (0, cmp.GetStatements.Count, "GetStatements");
+			Assert.IsFalse (cmp.HasGet, "HasGet");
+			cmp.HasGet = true;
+			Assert.IsFalse (cmp.HasSet, "HasSet");
+			cmp.HasSet = true;
+			Assert.AreEqual (0, cmp.ImplementationTypes.Count, "ImplementationTypes");
+			Assert.AreEqual (0, cmp.Parameters.Count, "Parameters");
+			Assert.IsNull (cmp.PrivateImplementationType, "PrivateImplementationType");
+			cmp.PrivateImplementationType = new CodeTypeReference ("System.Int32");
+			Assert.AreEqual (0, cmp.SetStatements.Count, "SetStatements");
+			Assert.AreEqual ("System.Void", cmp.Type.BaseType, "ReturnType");
+			cmp.Type = new CodeTypeReference ("System.Int32");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeMemberProperty).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeMemberProperty).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

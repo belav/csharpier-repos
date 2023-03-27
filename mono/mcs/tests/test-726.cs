@@ -1,18 +1,18 @@
 interface IFoo
 {
-    object Clone ();
+	object Clone ();
 }
 
 class CS0102 : IFoo
 {
-    object IFoo.Clone()
-    {
-        return this;
-    }
+	object IFoo.Clone()
+	{
+		return this;
+	}
 
-    public class Clone { }
+	public class Clone { }
 
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }

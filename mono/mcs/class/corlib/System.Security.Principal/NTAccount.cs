@@ -2,8 +2,8 @@
 // System.Security.Policy.NTAccount.cs
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
-//    Kenneth Bell
+//	Sebastien Pouliot  <sebastien@ximian.com>
+//	Kenneth Bell
 //
 // Copyright (C) 2005, 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,98 +33,98 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Principal {
 
-    [ComVisible (false)]
-    public sealed class NTAccount : IdentityReference {
+	[ComVisible (false)]
+	public sealed class NTAccount : IdentityReference {
 
-        private string _value;
+		private string _value;
 
-        public NTAccount (string name)
-        {
-            if (name == null)
-                throw new ArgumentNullException ("name");
-            if (name.Length == 0)
-                throw new ArgumentException (Locale.GetText ("Empty"), "name");
-            _value = name;
-        }
+		public NTAccount (string name)
+		{
+			if (name == null)
+				throw new ArgumentNullException ("name");
+			if (name.Length == 0)
+				throw new ArgumentException (Locale.GetText ("Empty"), "name");
+			_value = name;
+		}
 
-        public NTAccount (string domainName, string accountName)
-        {
-            if (accountName == null)
-                throw new ArgumentNullException ("accountName");
-            if (accountName.Length == 0)
-                throw new ArgumentException (Locale.GetText ("Empty"), "accountName");
-            if (domainName == null)
-                _value = accountName;
-            else
-                _value = domainName + "\\" + accountName;
-        }
-
-
-        public override string Value { 
-            get { return _value; }
-        }
+		public NTAccount (string domainName, string accountName)
+		{
+			if (accountName == null)
+				throw new ArgumentNullException ("accountName");
+			if (accountName.Length == 0)
+				throw new ArgumentException (Locale.GetText ("Empty"), "accountName");
+			if (domainName == null)
+				_value = accountName;
+			else
+				_value = domainName + "\\" + accountName;
+		}
 
 
-        public override bool Equals (object o)
-        {
-            NTAccount nt = (o as NTAccount);
-            if (nt == null)
-                return false;
-            return (nt.Value == Value);
-        }
+		public override string Value { 
+			get { return _value; }
+		}
 
-        public override int GetHashCode ()
-        {
-            return Value.GetHashCode ();
-        }
 
-        public override bool IsValidTargetType (Type targetType)
-        {
-            if (targetType == typeof (NTAccount))
-                return true;
-            if (targetType == typeof (SecurityIdentifier))
-                return true;
-            return false;
-        }
+		public override bool Equals (object o)
+		{
+			NTAccount nt = (o as NTAccount);
+			if (nt == null)
+				return false;
+			return (nt.Value == Value);
+		}
 
-        public override string ToString ()
-        {
-            return Value;
-        }
+		public override int GetHashCode ()
+		{
+			return Value.GetHashCode ();
+		}
 
-        public override IdentityReference Translate (Type targetType)
-        {
-            if (targetType == typeof (NTAccount))
-                return this; // ? copy
-            
-            if(targetType == typeof(SecurityIdentifier)) {
-                WellKnownAccount acct = WellKnownAccount.LookupByName(this.Value);
-                if (acct == null || acct.Sid == null)
-                    throw new IdentityNotMappedException("Cannot map account name: " + this.Value);
+		public override bool IsValidTargetType (Type targetType)
+		{
+			if (targetType == typeof (NTAccount))
+				return true;
+			if (targetType == typeof (SecurityIdentifier))
+				return true;
+			return false;
+		}
 
-                return new SecurityIdentifier(acct.Sid);
-            }
-            
-            throw new ArgumentException("Unknown type", "targetType");
-        }
+		public override string ToString ()
+		{
+			return Value;
+		}
 
-        public static bool operator == (NTAccount left, NTAccount right)
-        {
-            if (((object)left) == null)
-                return (((object)right) == null);
-            if (((object)right) == null)
-                return false;
-            return (left.Value == right.Value);
-        }
+		public override IdentityReference Translate (Type targetType)
+		{
+			if (targetType == typeof (NTAccount))
+				return this; // ? copy
+			
+			if(targetType == typeof(SecurityIdentifier)) {
+				WellKnownAccount acct = WellKnownAccount.LookupByName(this.Value);
+				if (acct == null || acct.Sid == null)
+					throw new IdentityNotMappedException("Cannot map account name: " + this.Value);
 
-        public static bool operator != (NTAccount left, NTAccount right)
-        {
-            if (((object)left) == null)
-                return (((object)right) != null);
-            if (((object)right) == null)
-                return true;
-            return (left.Value != right.Value);
-        }
-    }
+				return new SecurityIdentifier(acct.Sid);
+			}
+			
+			throw new ArgumentException("Unknown type", "targetType");
+		}
+
+		public static bool operator == (NTAccount left, NTAccount right)
+		{
+			if (((object)left) == null)
+				return (((object)right) == null);
+			if (((object)right) == null)
+				return false;
+			return (left.Value == right.Value);
+		}
+
+		public static bool operator != (NTAccount left, NTAccount right)
+		{
+			if (((object)left) == null)
+				return (((object)right) != null);
+			if (((object)right) == null)
+				return true;
+			return (left.Value != right.Value);
+		}
+	}
 }
 

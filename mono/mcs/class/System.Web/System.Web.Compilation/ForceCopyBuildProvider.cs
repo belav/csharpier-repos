@@ -32,14 +32,14 @@ using System;
 
 namespace System.Web.Compilation
 {
-    //
-    // This class is most probably a no-op one, used by the MS.NET
-    // aspnet compiler to mark files it should merely copy instead
-    // of compiling. See
-    //
-    //  http://forums.asp.net/thread/942690.aspx
-    //
-    [BuildProviderAppliesTo (BuildProviderAppliesTo.All)]
+	//
+	// This class is most probably a no-op one, used by the MS.NET
+	// aspnet compiler to mark files it should merely copy instead
+	// of compiling. See
+	//
+	//  http://forums.asp.net/thread/942690.aspx
+	//
+	[BuildProviderAppliesTo (BuildProviderAppliesTo.All)]
         sealed class ForceCopyBuildProvider : BuildProvider
         {
         }

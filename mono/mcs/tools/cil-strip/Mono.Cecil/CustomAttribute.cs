@@ -28,172 +28,172 @@
 
 namespace Mono.Cecil {
 
-    using System.Collections;
+	using System.Collections;
 
-    internal sealed class CustomAttribute : IRequireResolving, IAnnotationProvider, IReflectionVisitable {
+	internal sealed class CustomAttribute : IRequireResolving, IAnnotationProvider, IReflectionVisitable {
 
-        MethodReference m_ctor;
-        IList m_parameters;
-        IDictionary m_fields;
-        IDictionary m_properties;
-        IDictionary m_fieldTypes;
-        IDictionary m_propTypes;
-        IDictionary m_annotations;
+		MethodReference m_ctor;
+		IList m_parameters;
+		IDictionary m_fields;
+		IDictionary m_properties;
+		IDictionary m_fieldTypes;
+		IDictionary m_propTypes;
+		IDictionary m_annotations;
 
-        bool m_resolved;
-        byte [] m_blob;
+		bool m_resolved;
+		byte [] m_blob;
 
-        public MethodReference Constructor {
-            get { return m_ctor; }
-            set { m_ctor = value; }
-        }
+		public MethodReference Constructor {
+			get { return m_ctor; }
+			set { m_ctor = value; }
+		}
 
-        public IList ConstructorParameters {
-            get {
-                if (m_parameters == null)
-                    m_parameters = new ArrayList ();
-                return m_parameters;
-            }
-        }
+		public IList ConstructorParameters {
+			get {
+				if (m_parameters == null)
+					m_parameters = new ArrayList ();
+				return m_parameters;
+			}
+		}
 
-        public IDictionary Fields {
-            get {
-                if (m_fields == null)
-                    m_fields = new Hashtable ();
+		public IDictionary Fields {
+			get {
+				if (m_fields == null)
+					m_fields = new Hashtable ();
 
-                return m_fields;
-            }
-        }
+				return m_fields;
+			}
+		}
 
-        public IDictionary Properties {
-            get {
-                if (m_properties == null)
-                    m_properties = new Hashtable ();
+		public IDictionary Properties {
+			get {
+				if (m_properties == null)
+					m_properties = new Hashtable ();
 
-                return m_properties;
-            }
-        }
+				return m_properties;
+			}
+		}
 
-        internal IDictionary FieldTypes {
-            get {
-                if (m_fieldTypes == null)
-                    m_fieldTypes = new Hashtable ();
+		internal IDictionary FieldTypes {
+			get {
+				if (m_fieldTypes == null)
+					m_fieldTypes = new Hashtable ();
 
-                return m_fieldTypes;
-            }
-        }
+				return m_fieldTypes;
+			}
+		}
 
-        internal IDictionary PropertyTypes {
-            get {
-                if (m_propTypes == null)
-                    m_propTypes = new Hashtable ();
+		internal IDictionary PropertyTypes {
+			get {
+				if (m_propTypes == null)
+					m_propTypes = new Hashtable ();
 
-                return m_propTypes;
-            }
-        }
+				return m_propTypes;
+			}
+		}
 
-        public bool Resolved {
-            get { return m_resolved; }
-            set { m_resolved = value; }
-        }
+		public bool Resolved {
+			get { return m_resolved; }
+			set { m_resolved = value; }
+		}
 
-        public byte [] Blob {
-            get { return m_blob; }
-            set { m_blob = value; }
-        }
+		public byte [] Blob {
+			get { return m_blob; }
+			set { m_blob = value; }
+		}
 
-        IDictionary IAnnotationProvider.Annotations {
-            get {
-                if (m_annotations == null)
-                    m_annotations = new Hashtable ();
-                return m_annotations;
-            }
-        }
+		IDictionary IAnnotationProvider.Annotations {
+			get {
+				if (m_annotations == null)
+					m_annotations = new Hashtable ();
+				return m_annotations;
+			}
+		}
 
-        public CustomAttribute (MethodReference ctor)
-        {
-            m_ctor = ctor;
-            m_resolved = true;
-        }
+		public CustomAttribute (MethodReference ctor)
+		{
+			m_ctor = ctor;
+			m_resolved = true;
+		}
 
-        public CustomAttribute (MethodReference ctor, byte [] blob)
-        {
-            m_ctor = ctor;
-            m_blob = blob;
-        }
+		public CustomAttribute (MethodReference ctor, byte [] blob)
+		{
+			m_ctor = ctor;
+			m_blob = blob;
+		}
 
-        public TypeReference GetFieldType (string fieldName)
-        {
-            return (TypeReference) FieldTypes [fieldName];
-        }
+		public TypeReference GetFieldType (string fieldName)
+		{
+			return (TypeReference) FieldTypes [fieldName];
+		}
 
-        public TypeReference GetPropertyType (string propertyName)
-        {
-            return (TypeReference) PropertyTypes [propertyName];
-        }
+		public TypeReference GetPropertyType (string propertyName)
+		{
+			return (TypeReference) PropertyTypes [propertyName];
+		}
 
-        public void SetFieldType (string fieldName, TypeReference type)
-        {
-            FieldTypes [fieldName] = type;
-        }
+		public void SetFieldType (string fieldName, TypeReference type)
+		{
+			FieldTypes [fieldName] = type;
+		}
 
-        public void SetPropertyType (string propertyName, TypeReference type)
-        {
-            PropertyTypes [propertyName] = type;
-        }
+		public void SetPropertyType (string propertyName, TypeReference type)
+		{
+			PropertyTypes [propertyName] = type;
+		}
 
-        public CustomAttribute Clone ()
-        {
-            return Clone (this, new ImportContext (NullReferenceImporter.Instance));
-        }
+		public CustomAttribute Clone ()
+		{
+			return Clone (this, new ImportContext (NullReferenceImporter.Instance));
+		}
 
-        static void Clone (IDictionary original, IDictionary target)
-        {
-            target.Clear ();
-            foreach (DictionaryEntry entry in original)
-                target.Add (entry.Key, entry.Value);
-        }
+		static void Clone (IDictionary original, IDictionary target)
+		{
+			target.Clear ();
+			foreach (DictionaryEntry entry in original)
+				target.Add (entry.Key, entry.Value);
+		}
 
-        internal static CustomAttribute Clone (CustomAttribute custattr, ImportContext context)
-        {
-            CustomAttribute ca = new CustomAttribute (context.Import (custattr.Constructor));
-            custattr.CopyTo (ca);
-            return ca;
-        }
+		internal static CustomAttribute Clone (CustomAttribute custattr, ImportContext context)
+		{
+			CustomAttribute ca = new CustomAttribute (context.Import (custattr.Constructor));
+			custattr.CopyTo (ca);
+			return ca;
+		}
 
-        void CopyTo (CustomAttribute target)
-        {
-            target.Resolved = Resolved;
-            if (!Resolved) {
-                target.Blob = Blob;
-                return;
-            }
+		void CopyTo (CustomAttribute target)
+		{
+			target.Resolved = Resolved;
+			if (!Resolved) {
+				target.Blob = Blob;
+				return;
+			}
 
-            foreach (object o in ConstructorParameters)
-                target.ConstructorParameters.Add (o);
-            Clone (Fields, target.Fields);
-            Clone (FieldTypes, target.FieldTypes);
-            Clone (Properties, target.Properties);
-            Clone (PropertyTypes, target.PropertyTypes);
-        }
+			foreach (object o in ConstructorParameters)
+				target.ConstructorParameters.Add (o);
+			Clone (Fields, target.Fields);
+			Clone (FieldTypes, target.FieldTypes);
+			Clone (Properties, target.Properties);
+			Clone (PropertyTypes, target.PropertyTypes);
+		}
 
-        public bool Resolve ()
-        {
-            if (Resolved)
-                return true;
+		public bool Resolve ()
+		{
+			if (Resolved)
+				return true;
 
-            ReflectionReader r = m_ctor.DeclaringType.Module.Controller.Reader;
-            CustomAttribute newCa = r.GetCustomAttribute (m_ctor, Blob, true);
-            if (!newCa.Resolved)
-                return false;
+			ReflectionReader r = m_ctor.DeclaringType.Module.Controller.Reader;
+			CustomAttribute newCa = r.GetCustomAttribute (m_ctor, Blob, true);
+			if (!newCa.Resolved)
+				return false;
 
-            newCa.CopyTo (this);
-            return true;
-        }
+			newCa.CopyTo (this);
+			return true;
+		}
 
-        public void Accept (IReflectionVisitor visitor)
-        {
-            visitor.VisitCustomAttribute (this);
-        }
-    }
+		public void Accept (IReflectionVisitor visitor)
+		{
+			visitor.VisitCustomAttribute (this);
+		}
+	}
 }

@@ -2,20 +2,20 @@
 // Line: 20
 
 public class Foo<T>
-    where T : new ()
+	where T : new ()
 {
 }
 
 class A
 {
-    private A ()
-    { }
+	private A ()
+	{ }
 }
 
 class X
 {
-    static void Main ()
-    {
-        object o = new Foo<A> ();
-    }
+	static void Main ()
+	{
+		object o = new Foo<A> ();
+	}
 }

@@ -2,7 +2,7 @@
 // System.Web.Hosting.VirtualDirectory
 //
 // Author:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 
 //
@@ -34,22 +34,22 @@ using System.Collections;
 
 namespace System.Web.Hosting {
 
-    public abstract class VirtualDirectory : VirtualFileBase
-    {
-        protected VirtualDirectory (string virtualPath)
-        {
-            SetVirtualPath (virtualPath);
-        }
+	public abstract class VirtualDirectory : VirtualFileBase
+	{
+		protected VirtualDirectory (string virtualPath)
+		{
+			SetVirtualPath (virtualPath);
+		}
 
-        public abstract IEnumerable Children { get; }
+		public abstract IEnumerable Children { get; }
 
-        public abstract IEnumerable Directories { get; }
-        
-        public abstract IEnumerable Files { get; }
+		public abstract IEnumerable Directories { get; }
+		
+		public abstract IEnumerable Files { get; }
 
-        public override bool IsDirectory {
-            get { return true; }
-        }
-    }
+		public override bool IsDirectory {
+			get { return true; }
+		}
+	}
 }
 

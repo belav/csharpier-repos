@@ -3,11 +3,11 @@
 using System;
 
 class X {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 
-    static void M (ref ArgIterator a)
-    {
-    }
+	static void M (ref ArgIterator a)
+	{
+	}
 }

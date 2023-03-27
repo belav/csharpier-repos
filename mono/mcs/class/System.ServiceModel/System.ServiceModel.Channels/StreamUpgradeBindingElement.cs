@@ -2,7 +2,7 @@
 // StreamUpgradeBindingElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -31,19 +31,19 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Channels
 {
-    public abstract class StreamUpgradeBindingElement : BindingElement
-    {
-        protected StreamUpgradeBindingElement ()
-        {
-        }
+	public abstract class StreamUpgradeBindingElement : BindingElement
+	{
+		protected StreamUpgradeBindingElement ()
+		{
+		}
 
-        protected StreamUpgradeBindingElement (StreamUpgradeBindingElement elementToBeCloned)
-        {
-        }
+		protected StreamUpgradeBindingElement (StreamUpgradeBindingElement elementToBeCloned)
+		{
+		}
 
-        public abstract StreamUpgradeProvider 
-            BuildClientStreamUpgradeProvider (BindingContext context);
-        public abstract StreamUpgradeProvider
-            BuildServerStreamUpgradeProvider (BindingContext context);
-    }
+		public abstract StreamUpgradeProvider 
+			BuildClientStreamUpgradeProvider (BindingContext context);
+		public abstract StreamUpgradeProvider
+			BuildServerStreamUpgradeProvider (BindingContext context);
+	}
 }

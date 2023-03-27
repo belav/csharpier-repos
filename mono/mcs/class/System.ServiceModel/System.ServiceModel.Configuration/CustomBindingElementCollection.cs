@@ -2,7 +2,7 @@
 // CustomBindingElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,31 +54,31 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (CustomBindingElement),
-         AddItemName = "binding",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    [MonoTODO]
-    public sealed partial class CustomBindingElementCollection
-         : ServiceModelEnhancedConfigurationElementCollection<CustomBindingElement>,  ICollection,  IEnumerable
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
+	[ConfigurationCollection (typeof (CustomBindingElement),
+		 AddItemName = "binding",
+		 RemoveItemName = "remove",
+		 ClearItemsName = "clear",
+		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	[MonoTODO]
+	public sealed partial class CustomBindingElementCollection
+		 : ServiceModelEnhancedConfigurationElementCollection<CustomBindingElement>,  ICollection,  IEnumerable
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
 
-        static CustomBindingElementCollection ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static CustomBindingElementCollection ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public CustomBindingElementCollection ()
-        {
-        }
-
-
-        // Properties
+		public CustomBindingElementCollection ()
+		{
+		}
 
 
-    }
+		// Properties
+
+
+	}
 
 }

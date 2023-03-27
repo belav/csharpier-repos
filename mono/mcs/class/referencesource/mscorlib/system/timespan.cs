@@ -434,8 +434,8 @@ namespace System {
 #if !FEATURE_CORECLR
 #if MONO
         private static bool LegacyFormatMode() {
-            return false;
-        }
+			return false;
+		}
 #else
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]

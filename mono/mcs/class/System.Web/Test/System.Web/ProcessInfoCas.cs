@@ -2,7 +2,7 @@
 // ProcessInfoCas.cs - CAS unit tests for System.Web.ProcessInfo
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,43 +35,43 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ProcessInfoCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ProcessInfoCas : AspNetHostingMinimal {
 
-        private void CheckProperties (ProcessInfo pi)
-        {
-            Assert.AreEqual (TimeSpan.Zero, pi.Age, "Age");
-            Assert.AreEqual (0, pi.PeakMemoryUsed, "PeakMemoryUsed");
-            Assert.AreEqual (0, pi.ProcessID, "ProcessID");
-            Assert.AreEqual (0, pi.RequestCount, "RequestCount");
-            Assert.AreEqual (ProcessShutdownReason.None, pi.ShutdownReason, "ShutdownReason");
-            Assert.AreEqual (DateTime.MinValue, pi.StartTime, "StartTime");
-            Assert.AreEqual (0, (int)pi.Status, "Status");
-        }
+		private void CheckProperties (ProcessInfo pi)
+		{
+			Assert.AreEqual (TimeSpan.Zero, pi.Age, "Age");
+			Assert.AreEqual (0, pi.PeakMemoryUsed, "PeakMemoryUsed");
+			Assert.AreEqual (0, pi.ProcessID, "ProcessID");
+			Assert.AreEqual (0, pi.RequestCount, "RequestCount");
+			Assert.AreEqual (ProcessShutdownReason.None, pi.ShutdownReason, "ShutdownReason");
+			Assert.AreEqual (DateTime.MinValue, pi.StartTime, "StartTime");
+			Assert.AreEqual (0, (int)pi.Status, "Status");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0 ()
-        {
-            ProcessInfo pi = new ProcessInfo ();
-            CheckProperties (pi);
-            pi.SetAll (DateTime.MinValue, TimeSpan.Zero, 0, 0, 0, ProcessShutdownReason.None, 0);
-            CheckProperties (pi);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0 ()
+		{
+			ProcessInfo pi = new ProcessInfo ();
+			CheckProperties (pi);
+			pi.SetAll (DateTime.MinValue, TimeSpan.Zero, 0, 0, 0, ProcessShutdownReason.None, 0);
+			CheckProperties (pi);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor7 ()
-        {
-            ProcessInfo pi = new ProcessInfo (DateTime.MinValue, TimeSpan.Zero, 0, 0, 0, ProcessShutdownReason.None, 0);
-            CheckProperties (pi);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor7 ()
+		{
+			ProcessInfo pi = new ProcessInfo (DateTime.MinValue, TimeSpan.Zero, 0, 0, 0, ProcessShutdownReason.None, 0);
+			CheckProperties (pi);
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (ProcessInfo); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (ProcessInfo); }
+		}
+	}
 }

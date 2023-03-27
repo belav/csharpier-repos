@@ -13,6 +13,6 @@ class Test {
 
         public IEnumerable<string> GetEnumerator ()
         {
-        return null;
+		return null;
         }
 }

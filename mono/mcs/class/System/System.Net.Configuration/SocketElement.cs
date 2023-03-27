@@ -2,7 +2,7 @@
 // System.Net.Configuration.SocketElement.cs
 //
 // Authors:
-//    Tim Coleman (tim@timcoleman.com)
+//	Tim Coleman (tim@timcoleman.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (c) 2004 Novell, Inc. (http://www.novell.com)
@@ -35,59 +35,59 @@ using System.Configuration;
 
 namespace System.Net.Configuration 
 {
-    public sealed class SocketElement : ConfigurationElement
-    {
-        #region Fields
+	public sealed class SocketElement : ConfigurationElement
+	{
+		#region Fields
 
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty alwaysUseCompletionPortsForAcceptProp;
-        static ConfigurationProperty alwaysUseCompletionPortsForConnectProp;
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty alwaysUseCompletionPortsForAcceptProp;
+		static ConfigurationProperty alwaysUseCompletionPortsForConnectProp;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public SocketElement ()
-        {
-            alwaysUseCompletionPortsForAcceptProp = new ConfigurationProperty ("alwaysUseCompletionPortsForAccept", typeof (bool), false);
-            alwaysUseCompletionPortsForConnectProp = new ConfigurationProperty ("alwaysUseCompletionPortsForConnect", typeof (bool), false);
-            properties = new ConfigurationPropertyCollection ();
+		public SocketElement ()
+		{
+			alwaysUseCompletionPortsForAcceptProp = new ConfigurationProperty ("alwaysUseCompletionPortsForAccept", typeof (bool), false);
+			alwaysUseCompletionPortsForConnectProp = new ConfigurationProperty ("alwaysUseCompletionPortsForConnect", typeof (bool), false);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (alwaysUseCompletionPortsForAcceptProp);
-            properties.Add (alwaysUseCompletionPortsForConnectProp);
-        }
+			properties.Add (alwaysUseCompletionPortsForAcceptProp);
+			properties.Add (alwaysUseCompletionPortsForConnectProp);
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [ConfigurationProperty ("alwaysUseCompletionPortsForAccept", DefaultValue = "False")]
-        public bool AlwaysUseCompletionPortsForAccept {
-            get { return (bool) base [alwaysUseCompletionPortsForAcceptProp]; }
-            set { base [alwaysUseCompletionPortsForAcceptProp] = value; }
-        }
+		[ConfigurationProperty ("alwaysUseCompletionPortsForAccept", DefaultValue = "False")]
+		public bool AlwaysUseCompletionPortsForAccept {
+			get { return (bool) base [alwaysUseCompletionPortsForAcceptProp]; }
+			set { base [alwaysUseCompletionPortsForAcceptProp] = value; }
+		}
 
-        [ConfigurationProperty ("alwaysUseCompletionPortsForConnect", DefaultValue = "False")]
-        public bool AlwaysUseCompletionPortsForConnect {
-            get { return (bool) base [alwaysUseCompletionPortsForConnectProp]; }
-            set { base [alwaysUseCompletionPortsForConnectProp] = value; }
-        }
+		[ConfigurationProperty ("alwaysUseCompletionPortsForConnect", DefaultValue = "False")]
+		public bool AlwaysUseCompletionPortsForConnect {
+			get { return (bool) base [alwaysUseCompletionPortsForConnectProp]; }
+			set { base [alwaysUseCompletionPortsForConnectProp] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        [MonoTODO]
-        protected override void PostDeserialize ()
-        {
-        }
+		[MonoTODO]
+		protected override void PostDeserialize ()
+		{
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }
 
 #endif

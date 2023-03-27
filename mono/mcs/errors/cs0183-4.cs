@@ -4,9 +4,9 @@
 
 class X
 {
-    static bool Foo<T> () where T : struct
-    {
-        T o = default (T);
-        return o is T;
-    }
+	static bool Foo<T> () where T : struct
+	{
+		T o = default (T);
+		return o is T;
+	}
 }

@@ -26,17 +26,17 @@
 //
 using System.Security.Principal;
 namespace System.Net {
-    public class HttpListenerBasicIdentity : GenericIdentity {
-        const string EXCEPTION_MESSAGE = "System.Net.HttpListenerBasicIdentity is not supported on the current platform.";
+	public class HttpListenerBasicIdentity : GenericIdentity {
+		const string EXCEPTION_MESSAGE = "System.Net.HttpListenerBasicIdentity is not supported on the current platform.";
 
-        public HttpListenerBasicIdentity (string username, string password) : base (username, "Basic")
-        {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-        }
+		public HttpListenerBasicIdentity (string username, string password) : base (username, "Basic")
+		{
+			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+		}
 
-        public virtual string Password {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-    }
+		public virtual string Password {
+			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+		}
+	}
 }
 

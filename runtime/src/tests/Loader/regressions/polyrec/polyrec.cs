@@ -72,7 +72,7 @@ public class P
     for (int i = 0; i < nthreads; i++)
     {
       Thread t = new Thread(i % 2 == 0 ? new ThreadStart(Start) : new ThreadStart(Start2));
-      t.Name = "Thread " + i;    
+      t.Name = "Thread " + i;	
       t.Start();
     }
 

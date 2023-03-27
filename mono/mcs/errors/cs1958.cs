@@ -4,9 +4,9 @@ using System;
 
 class Test
 {
-    public static void Main ()
-    {
-        var a = new Action (delegate { }) {
-        };
-    }
+	public static void Main ()
+	{
+		var a = new Action (delegate { }) {
+		};
+	}
 }

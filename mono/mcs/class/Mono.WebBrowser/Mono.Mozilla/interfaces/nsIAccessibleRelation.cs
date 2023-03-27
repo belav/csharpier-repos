@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,40 +32,40 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("f42a1589-70ab-4704-877f-4a9162bbe188")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIAccessibleRelation {
+	[Guid ("f42a1589-70ab-4704-877f-4a9162bbe188")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIAccessibleRelation {
 
 #region nsIAccessibleRelation
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getRelationType (out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getRelationType (out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getTargetsCount (out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getTargetsCount (out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getTarget ( uint index,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getTarget ( uint index,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getTargets ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getTargets ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsAccessibleRelation {
-        public static nsIAccessibleRelation GetProxy (Mono.WebBrowser.IWebBrowser control, nsIAccessibleRelation obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIAccessibleRelation).GUID, obj);
-            return o as nsIAccessibleRelation;
-        }
-    }
+	internal class nsAccessibleRelation {
+		public static nsIAccessibleRelation GetProxy (Mono.WebBrowser.IWebBrowser control, nsIAccessibleRelation obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIAccessibleRelation).GUID, obj);
+			return o as nsIAccessibleRelation;
+		}
+	}
 }
 #if example
 
@@ -74,36 +74,36 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-    internal class AccessibleRelation : nsIAccessibleRelation {
+	internal class AccessibleRelation : nsIAccessibleRelation {
 
 #region nsIAccessibleRelation
-        int nsIAccessibleRelation.getRelationType (out uint ret)
+		int nsIAccessibleRelation.getRelationType (out uint ret)
 
-        {
-            return 0;
-        }
+		{
+			return 0;
+		}
 
-        int nsIAccessibleRelation.getTargetsCount (out uint ret)
+		int nsIAccessibleRelation.getTargetsCount (out uint ret)
 
-        {
-            return 0;
-        }
+		{
+			return 0;
+		}
 
-        int nsIAccessibleRelation.getTarget ( uint index,
-                [MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
-        {
-            return ;
-        }
+		int nsIAccessibleRelation.getTarget ( uint index,
+				[MarshalAs (UnmanagedType.Interface) ] out nsIAccessible ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIAccessibleRelation.getTargets ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret)
-        {
-            return ;
-        }
+		int nsIAccessibleRelation.getTargets ([MarshalAs (UnmanagedType.Interface) ] out nsIArray ret)
+		{
+			return ;
+		}
 
 
 
 #endregion
-    }
+	}
 #endif

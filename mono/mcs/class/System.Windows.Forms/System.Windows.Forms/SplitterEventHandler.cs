@@ -20,13 +20,13 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-// Aleksandar Dezelin    adezelin@beotel.net
+// Aleksandar Dezelin	adezelin@beotel.net
 //
 
 using System;
 
 namespace System.Windows.Forms
 {
-    public delegate void SplitterEventHandler(object sender, SplitterEventArgs e);
+	public delegate void SplitterEventHandler(object sender, SplitterEventArgs e);
 }
 

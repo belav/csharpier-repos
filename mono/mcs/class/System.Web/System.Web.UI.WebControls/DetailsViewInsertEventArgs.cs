@@ -33,29 +33,29 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    public class DetailsViewInsertEventArgs : CancelEventArgs
-    {
-        object argument;
-        IOrderedDictionary values;
-        
-        public DetailsViewInsertEventArgs (object commandArgument)
-        {
-            this.argument = commandArgument;
-        }
-        
-        internal DetailsViewInsertEventArgs (object argument, IOrderedDictionary values)
-        {
-            this.argument = argument;
-            this.values = values;
-        }
-        
-        public object CommandArgument {
-            get { return argument; }
-        }
+	public class DetailsViewInsertEventArgs : CancelEventArgs
+	{
+		object argument;
+		IOrderedDictionary values;
+		
+		public DetailsViewInsertEventArgs (object commandArgument)
+		{
+			this.argument = commandArgument;
+		}
+		
+		internal DetailsViewInsertEventArgs (object argument, IOrderedDictionary values)
+		{
+			this.argument = argument;
+			this.values = values;
+		}
+		
+		public object CommandArgument {
+			get { return argument; }
+		}
 
-        public IOrderedDictionary Values {
-            get { return values; }
-        }
-    }
+		public IOrderedDictionary Values {
+			get { return values; }
+		}
+	}
 }
 

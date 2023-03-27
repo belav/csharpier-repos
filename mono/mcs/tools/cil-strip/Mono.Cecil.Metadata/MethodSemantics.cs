@@ -31,52 +31,52 @@
 
 namespace Mono.Cecil.Metadata {
 
-    using Mono.Cecil;
+	using Mono.Cecil;
 
-    internal sealed class MethodSemanticsTable : IMetadataTable {
+	internal sealed class MethodSemanticsTable : IMetadataTable {
 
-        public const int RId = 0x18;
+		public const int RId = 0x18;
 
-        RowCollection m_rows;
+		RowCollection m_rows;
 
-        public MethodSemanticsRow this [int index] {
-            get { return m_rows [index] as MethodSemanticsRow; }
-            set { m_rows [index] = value; }
-        }
+		public MethodSemanticsRow this [int index] {
+			get { return m_rows [index] as MethodSemanticsRow; }
+			set { m_rows [index] = value; }
+		}
 
-        public RowCollection Rows {
-            get { return m_rows; }
-            set { m_rows = value; }
-        }
+		public RowCollection Rows {
+			get { return m_rows; }
+			set { m_rows = value; }
+		}
 
-        public int Id {
-            get { return RId; }
-        }
+		public int Id {
+			get { return RId; }
+		}
 
-        internal MethodSemanticsTable ()
-        {
-        }
+		internal MethodSemanticsTable ()
+		{
+		}
 
-        public void Accept (IMetadataTableVisitor visitor)
-        {
-            visitor.VisitMethodSemanticsTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
-        }
-    }
+		public void Accept (IMetadataTableVisitor visitor)
+		{
+			visitor.VisitMethodSemanticsTable (this);
+			this.Rows.Accept (visitor.GetRowVisitor ());
+		}
+	}
 
-    internal sealed class MethodSemanticsRow : IMetadataRow {
+	internal sealed class MethodSemanticsRow : IMetadataRow {
 
-        public MethodSemanticsAttributes Semantics;
-        public uint Method;
-        public MetadataToken Association;
+		public MethodSemanticsAttributes Semantics;
+		public uint Method;
+		public MetadataToken Association;
 
-        internal MethodSemanticsRow ()
-        {
-        }
+		internal MethodSemanticsRow ()
+		{
+		}
 
-        public void Accept (IMetadataRowVisitor visitor)
-        {
-            visitor.VisitMethodSemanticsRow (this);
-        }
-    }
+		public void Accept (IMetadataRowVisitor visitor)
+		{
+			visitor.VisitMethodSemanticsRow (this);
+		}
+	}
 }

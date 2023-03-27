@@ -2,7 +2,7 @@
 // CallbackTimeoutsElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,35 +54,35 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class CallbackTimeoutsElement
-         : BehaviorExtensionElement
-    {
-        public CallbackTimeoutsElement () {
-        }
+	public sealed class CallbackTimeoutsElement
+		 : BehaviorExtensionElement
+	{
+		public CallbackTimeoutsElement () {
+		}
 
-        // Properties
+		// Properties
 
-        public override Type BehaviorType {
-            get { return typeof (CallbackTimeoutsBehavior); }
-        }
+		public override Type BehaviorType {
+			get { return typeof (CallbackTimeoutsBehavior); }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
 
-        [ConfigurationProperty ("transactionTimeout",
-             DefaultValue = "00:00:00",
-             Options = ConfigurationPropertyOptions.None)]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan TransactionTimeout {
-            get { return (TimeSpan) base ["transactionTimeout"]; }
-            set { base ["transactionTimeout"] = value; }
-        }
+		[ConfigurationProperty ("transactionTimeout",
+			 DefaultValue = "00:00:00",
+			 Options = ConfigurationPropertyOptions.None)]
+		[TypeConverter (typeof (TimeSpanConverter))]
+		public TimeSpan TransactionTimeout {
+			get { return (TimeSpan) base ["transactionTimeout"]; }
+			set { base ["transactionTimeout"] = value; }
+		}
 
-        protected internal override object CreateBehavior () {
-            return new CallbackTimeoutsBehavior (TransactionTimeout);
-        }
+		protected internal override object CreateBehavior () {
+			return new CallbackTimeoutsBehavior (TransactionTimeout);
+		}
 
-    }
+	}
 
 }

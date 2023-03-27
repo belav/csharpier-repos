@@ -24,7 +24,7 @@
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class EllipseAnnotation : RectangleAnnotation
-    {
-    }
+	public class EllipseAnnotation : RectangleAnnotation
+	{
+	}
 }

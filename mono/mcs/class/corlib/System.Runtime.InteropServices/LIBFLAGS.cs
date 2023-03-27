@@ -32,13 +32,13 @@ using System;
 
 namespace System.Runtime.InteropServices
 {
-    [Obsolete]
-    [Flags, Serializable]
-    public enum LIBFLAGS : short
-    {
-        LIBFLAG_FRESTRICTED = 1,
-        LIBFLAG_FCONTROL = 2,
-        LIBFLAG_FHIDDEN = 4,
-        LIBFLAG_FHASDISKIMAGE = 8
-    }
+	[Obsolete]
+	[Flags, Serializable]
+	public enum LIBFLAGS : short
+	{
+		LIBFLAG_FRESTRICTED = 1,
+		LIBFLAG_FCONTROL = 2,
+		LIBFLAG_FHIDDEN = 4,
+		LIBFLAG_FHASDISKIMAGE = 8
+	}
 }

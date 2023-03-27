@@ -2614,8 +2614,8 @@ namespace System.Xml.XslCompiledTransformApiTests
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
 
-        Test1
-        Test2: 0</result>";
+		Test1
+		Test2: 0</result>";
 
             MyObject obj = new MyObject(10, _output);
             m_xsltArg = new XsltArgumentList();
@@ -2846,8 +2846,8 @@ namespace System.Xml.XslCompiledTransformApiTests
         public void AddExtObject17(XslInputType xslInputType, ReaderType readerType, OutputType outputType, NavType navType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result xmlns:myObj=""urn:my-object"">
-        Here:End
-        </result>";
+		Here:End
+		</result>";
 
             MyObject obj = new MyObject(17, _output);
             m_xsltArg = new XsltArgumentList();

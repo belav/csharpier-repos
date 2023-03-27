@@ -111,10 +111,10 @@ public enum CLSEnum {
 
 namespace System.Web
 {
-    public partial class HttpBrowserCapabilities {
+	public partial class HttpBrowserCapabilities {
 
-    }
+	}
 
-    public partial class HttpBrowserCapabilities {
-    }
+	public partial class HttpBrowserCapabilities {
+	}
 }

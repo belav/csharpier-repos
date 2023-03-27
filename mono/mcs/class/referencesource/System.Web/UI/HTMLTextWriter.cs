@@ -1318,12 +1318,12 @@ namespace System.Web.UI {
             private bool _wrap;
             private HorizontalAlign _align;
 
-            /*
+			/*
             public Layout(Layout currentLayout) {
                 Align = currentLayout.Align;
                 Wrap = currentLayout.Wrap;
             }
-             */
+			 */
 
             public Layout(HorizontalAlign alignment, bool wrapping) {
                 Align = alignment;
@@ -1354,11 +1354,11 @@ namespace System.Web.UI {
                 }
             }
 
-            /*
+			/*
             public bool Compare(Layout layout) {
                 return Wrap == layout.Wrap && Align == layout.Align;
             }
-             
+			 
 
             public void MergeWith(Layout layout) {
                 if (Align == HorizontalAlign.NotSet) {
@@ -1368,7 +1368,7 @@ namespace System.Web.UI {
                     Wrap = layout.Wrap;
                 }
             }
-             */
+			 */
         }
 
         private struct TagStackEntry {

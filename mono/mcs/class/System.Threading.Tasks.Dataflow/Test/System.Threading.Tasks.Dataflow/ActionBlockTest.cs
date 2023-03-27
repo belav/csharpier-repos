@@ -34,74 +34,74 @@ using System.Threading.Tasks.Dataflow;
 using NUnit.Framework;
 
 namespace MonoTests.System.Threading.Tasks.Dataflow {
-    [TestFixture]
-    public class ActionBlockTest {
-        [Test]
-        public void BasicUsageTest ()
-        {
-            bool[] array = new bool[3];
-            var evt = new CountdownEvent (array.Length);
-            var block = new ActionBlock<int> (i => { array[i] = true; evt.Signal (); });
+	[TestFixture]
+	public class ActionBlockTest {
+		[Test]
+		public void BasicUsageTest ()
+		{
+			bool[] array = new bool[3];
+			var evt = new CountdownEvent (array.Length);
+			var block = new ActionBlock<int> (i => { array[i] = true; evt.Signal (); });
 
-            for (int i = 0; i < array.Length; ++i)
-                Assert.IsTrue (block.Post (i), "Not accepted");
+			for (int i = 0; i < array.Length; ++i)
+				Assert.IsTrue (block.Post (i), "Not accepted");
 
-            Assert.IsTrue (evt.Wait (1000));
-            
-            Assert.IsTrue (array.All (b => b), "Some false");
-        }
+			Assert.IsTrue (evt.Wait (1000));
+			
+			Assert.IsTrue (array.All (b => b), "Some false");
+		}
 
-        [Test]
-        public void CompleteTest ()
-        {
-            var block = new ActionBlock<int> (i => Thread.Sleep (100));
+		[Test]
+		public void CompleteTest ()
+		{
+			var block = new ActionBlock<int> (i => Thread.Sleep (100));
 
-            for (int i = 0; i < 10; i++)
-                Assert.IsTrue (block.Post (i), "Not Accepted");
+			for (int i = 0; i < 10; i++)
+				Assert.IsTrue (block.Post (i), "Not Accepted");
 
-            block.Complete ();
-            // Still element to be processed so Completion should be false
-            Assert.IsFalse (block.Completion.IsCompleted);
-            block.Completion.Wait ();
-            Assert.IsTrue (block.Completion.IsCompleted);
-        }
+			block.Complete ();
+			// Still element to be processed so Completion should be false
+			Assert.IsFalse (block.Completion.IsCompleted);
+			block.Completion.Wait ();
+			Assert.IsTrue (block.Completion.IsCompleted);
+		}
 
-        [Test]
-        public void AsyncNullTest()
-        {
-            var scheduler = new TestScheduler ();
-            var block = new ActionBlock<int> (
-                i => null,
-                new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
+		[Test]
+		public void AsyncNullTest()
+		{
+			var scheduler = new TestScheduler ();
+			var block = new ActionBlock<int> (
+				i => null,
+				new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
 
-            Assert.IsTrue (block.Post (1));
+			Assert.IsTrue (block.Post (1));
 
-            scheduler.ExecuteAll ();
+			scheduler.ExecuteAll ();
 
-            Assert.IsFalse (block.Completion.Wait (100));
+			Assert.IsFalse (block.Completion.Wait (100));
 
-            block.Complete ();
+			block.Complete ();
 
-            Assert.IsTrue (block.Completion.Wait (1000));
-        }
+			Assert.IsTrue (block.Completion.Wait (1000));
+		}
 
-        [Test]
-        public void AsyncCancelledTest()
-        {
-            var scheduler = new TestScheduler ();
-            var block = new ActionBlock<int> (
-                i =>
-                {
-                    var tcs = new TaskCompletionSource<int> ();
-                    tcs.SetCanceled ();
-                    return tcs.Task;
-                }, new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
+		[Test]
+		public void AsyncCancelledTest()
+		{
+			var scheduler = new TestScheduler ();
+			var block = new ActionBlock<int> (
+				i =>
+				{
+					var tcs = new TaskCompletionSource<int> ();
+					tcs.SetCanceled ();
+					return tcs.Task;
+				}, new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
 
-            Assert.IsTrue (block.Post (1));
+			Assert.IsTrue (block.Post (1));
 
-            scheduler.ExecuteAll ();
+			scheduler.ExecuteAll ();
 
-            Assert.IsFalse (block.Completion.Wait (100));
-        }
-    }
+			Assert.IsFalse (block.Completion.Wait (100));
+		}
+	}
 }

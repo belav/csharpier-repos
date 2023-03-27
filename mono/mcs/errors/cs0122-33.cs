@@ -7,23 +7,23 @@ interface I<T>
 
 struct S
 {
-    class P
-    {
-    }
-    
-    public class C : I<P>
-    {
-    }
+	class P
+	{
+	}
+	
+	public class C : I<P>
+	{
+	}
 }
 
 class M
 {
-    static void Test<T>(I<T> iface)
-    {
-    }
+	static void Test<T>(I<T> iface)
+	{
+	}
 
-    static void Test()
-    {
-        Test (new S.C ());
-    }
+	static void Test()
+	{
+		Test (new S.C ());
+	}
 }

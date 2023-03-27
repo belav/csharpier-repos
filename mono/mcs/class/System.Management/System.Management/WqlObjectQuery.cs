@@ -2,7 +2,7 @@
 // System.Management.WqlObjectQuery
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,34 +30,34 @@
 
 namespace System.Management
 {
-    public class WqlObjectQuery : ObjectQuery
-    {
-        [MonoTODO]
-        public WqlObjectQuery ()
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoTODO]
-        public WqlObjectQuery (string query)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        // Properties
-        
-        [MonoTODO]
-        public override string QueryLanguage {
-            get { throw new NotImplementedException (); }
-        }
+	public class WqlObjectQuery : ObjectQuery
+	{
+		[MonoTODO]
+		public WqlObjectQuery ()
+		{
+			throw new NotImplementedException ();
+		}
+		
+		[MonoTODO]
+		public WqlObjectQuery (string query)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		// Properties
+		
+		[MonoTODO]
+		public override string QueryLanguage {
+			get { throw new NotImplementedException (); }
+		}
 
-        // Methods
-        
-        [MonoTODO]
-        public override object Clone ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		// Methods
+		
+		[MonoTODO]
+		public override object Clone ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

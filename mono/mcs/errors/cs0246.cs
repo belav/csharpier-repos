@@ -4,7 +4,7 @@ interface A : B {
 }
 
 class X {
-    static void Main () {
-    }
+	static void Main () {
+	}
 }
 

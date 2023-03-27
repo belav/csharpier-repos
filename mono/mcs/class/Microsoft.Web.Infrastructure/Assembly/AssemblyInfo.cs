@@ -1,4 +1,4 @@
-// 
+﻿// 
 // AssemblyInfo.cs
 //  
 // Author:
@@ -35,7 +35,7 @@ using System.Security;
 
 [assembly: AssemblyProduct ("ASP.Net WebPages")]
 [assembly: AssemblyCompany ("Novell, Inc")]
-[assembly: AssemblyCopyright ("� Novell, Inc. All rights reserved.")]
+[assembly: AssemblyCopyright ("© Novell, Inc. All rights reserved.")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyTrademark ("")]
 [assembly: NeutralResourcesLanguage ("en-US")]

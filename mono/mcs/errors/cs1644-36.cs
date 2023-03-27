@@ -4,5 +4,5 @@
 
 class C
 {
-    public static int P { get; } = 4;
+	public static int P { get; } = 4;
 }

@@ -3,13 +3,13 @@
 
 namespace Top
 {
-    using T = System.Exception;
+	using T = System.Exception;
 
-    namespace T
-    {
-        class C
-        {
-            T t;
-        }
-    }
+	namespace T
+	{
+		class C
+		{
+			T t;
+		}
+	}
 }

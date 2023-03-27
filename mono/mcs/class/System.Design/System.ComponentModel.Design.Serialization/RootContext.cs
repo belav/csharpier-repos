@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.Serialization.RootContext
 //
-// Authors:     
-//      Ivan N. Zlatev (contact i-nZ.net)
+// Authors:	 
+//	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
 
@@ -34,29 +34,29 @@ using System.CodeDom;
 namespace System.ComponentModel.Design.Serialization
 {
 
-    public sealed class RootContext
-    {
+	public sealed class RootContext
+	{
 
-        CodeExpression _expression;
-        object _value;
+		CodeExpression _expression;
+		object _value;
 
-        public RootContext (CodeExpression expression, object value)
-        {
-            if (expression == null)
-                throw new ArgumentNullException ("expression");
-            if (value == null)
-                throw new ArgumentNullException ("value");
-            _expression = expression;
-            _value = value;
-        }
+		public RootContext (CodeExpression expression, object value)
+		{
+			if (expression == null)
+				throw new ArgumentNullException ("expression");
+			if (value == null)
+				throw new ArgumentNullException ("value");
+			_expression = expression;
+			_value = value;
+		}
 
-        public CodeExpression Expression {
-            get { return _expression; }
-        }
+		public CodeExpression Expression {
+			get { return _expression; }
+		}
 
-        public object Value {
-            get { return _value; }
-        }
+		public object Value {
+			get { return _value; }
+		}
 
-    }
+	}
 }

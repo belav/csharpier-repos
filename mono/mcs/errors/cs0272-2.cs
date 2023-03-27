@@ -3,13 +3,13 @@
 
 class C
 {
-    public int this [string i] { private set { } get { return 1; } }
+	public int this [string i] { private set { } get { return 1; } }
 }
 
 public class Test
 {
-    void Foo ()
-    {    C c = new C ();
-        c [""] = 9;
-    }
+	void Foo ()
+	{	C c = new C ();
+		c [""] = 9;
+	}
 }

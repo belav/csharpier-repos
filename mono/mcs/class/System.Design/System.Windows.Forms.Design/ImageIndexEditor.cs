@@ -33,11 +33,11 @@ using System.Drawing.Design;
 
 namespace System.Windows.Forms.Design
 {
-    [MonoTODO]
-    internal sealed class ImageIndexEditor : UITypeEditor
-    {
-        public ImageIndexEditor ()
-        {
-        }
-    }
+	[MonoTODO]
+	internal sealed class ImageIndexEditor : UITypeEditor
+	{
+		public ImageIndexEditor ()
+		{
+		}
+	}
 }

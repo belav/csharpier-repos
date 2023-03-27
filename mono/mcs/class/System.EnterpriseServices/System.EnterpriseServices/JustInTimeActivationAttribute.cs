@@ -32,36 +32,36 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Class)]
-    [ComVisible(false)]
-    public sealed class JustInTimeActivationAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class)]
+	[ComVisible(false)]
+	public sealed class JustInTimeActivationAttribute : Attribute {
 
-        #region Fields
+		#region Fields
 
-        bool val;
+		bool val;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public JustInTimeActivationAttribute () 
-            : this (true)
-        {
-        }
+		public JustInTimeActivationAttribute () 
+			: this (true)
+		{
+		}
 
-        public JustInTimeActivationAttribute (bool val)
-        {
-            this.val = val;
-        }
+		public JustInTimeActivationAttribute (bool val)
+		{
+			this.val = val;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public bool Value {
-            get { return val; }
-        }
+		public bool Value {
+			get { return val; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

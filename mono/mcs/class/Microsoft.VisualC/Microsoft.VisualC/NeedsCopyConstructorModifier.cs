@@ -23,7 +23,7 @@ using System;
 
 namespace Microsoft.VisualC
 {
-    public sealed class NeedsCopyConstructorModifier:System.Attribute
-    {
-    }
+	public sealed class NeedsCopyConstructorModifier:System.Attribute
+	{
+	}
 }

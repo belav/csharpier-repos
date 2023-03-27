@@ -33,27 +33,27 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-    public class UserControlDesigner : ControlDesigner
-    {
-        public UserControlDesigner ()
-        {
-        }
+	public class UserControlDesigner : ControlDesigner
+	{
+		public UserControlDesigner ()
+		{
+		}
 
-        public override string GetDesignTimeHtml ()
-        {
-            return base.CreatePlaceHolderDesignTimeHtml ();
-        }
+		public override string GetDesignTimeHtml ()
+		{
+			return base.CreatePlaceHolderDesignTimeHtml ();
+		}
 
 
-        public override DesignerActionListCollection ActionLists {
-            get { throw new NotImplementedException (); }
-        }
+		public override DesignerActionListCollection ActionLists {
+			get { throw new NotImplementedException (); }
+		}
 
-        public override bool AllowResize {
-            get {
-                return false;
-            }
-        }
+		public override bool AllowResize {
+			get {
+				return false;
+			}
+		}
 
-    }
+	}
 }

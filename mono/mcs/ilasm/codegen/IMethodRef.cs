@@ -19,16 +19,16 @@ namespace Mono.ILASM {
                         get;
                 }
 
-        PEAPI.CallConv CallConv {
-            get;
-            set;
-        }
+		PEAPI.CallConv CallConv {
+			get;
+			set;
+		}
 
                 void Resolve (CodeGen code_gen);
 
-        BaseTypeRef Owner {
-            get;
-        }
+		BaseTypeRef Owner {
+			get;
+		}
         }
 
 }

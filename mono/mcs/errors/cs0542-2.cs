@@ -3,8 +3,8 @@
 
 class Program
 {
-    void Program (object sender)
-    {
-    }
+	void Program (object sender)
+	{
+	}
 }
 

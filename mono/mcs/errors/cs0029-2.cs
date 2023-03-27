@@ -5,11 +5,11 @@ using System;
 
 public sealed class BoundAttribute : System.Attribute
 {
-    public double D;
+	public double D;
 }
 
 class C
 {
-    [Bound (D = "Dude!")]
-    double d2;
+	[Bound (D = "Dude!")]
+	double d2;
 }

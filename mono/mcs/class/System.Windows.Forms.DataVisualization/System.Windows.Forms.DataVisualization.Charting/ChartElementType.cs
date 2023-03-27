@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,30 +27,30 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum ChartElementType
-    {
-        Nothing = 0,
-        Title = 1,
-        PlottingArea = 2,
-        Axis = 3,
-        TickMarks = 4,
-        Gridlines = 5,
-        StripLines = 6,
-        AxisLabelImage = 7,
-        AxisLabels = 8,
-        AxisTitle = 9,
-        ScrollBarThumbTracker = 10,
-        ScrollBarSmallDecrement = 11,
-        ScrollBarSmallIncrement = 12,
-        ScrollBarLargeDecrement = 13,
-        ScrollBarLargeIncrement = 14,
-        ScrollBarZoomReset = 15,
-        DataPoint = 16,
-        DataPointLabel = 17,
-        LegendArea = 18,
-        LegendTitle = 19,
-        LegendHeader = 20,
-        LegendItem = 21,
-        Annotation = 22
-    }
+	public enum ChartElementType
+	{
+		Nothing = 0,
+		Title = 1,
+		PlottingArea = 2,
+		Axis = 3,
+		TickMarks = 4,
+		Gridlines = 5,
+		StripLines = 6,
+		AxisLabelImage = 7,
+		AxisLabels = 8,
+		AxisTitle = 9,
+		ScrollBarThumbTracker = 10,
+		ScrollBarSmallDecrement = 11,
+		ScrollBarSmallIncrement = 12,
+		ScrollBarLargeDecrement = 13,
+		ScrollBarLargeIncrement = 14,
+		ScrollBarZoomReset = 15,
+		DataPoint = 16,
+		DataPointLabel = 17,
+		LegendArea = 18,
+		LegendTitle = 19,
+		LegendHeader = 20,
+		LegendItem = 21,
+		Annotation = 22
+	}
 }

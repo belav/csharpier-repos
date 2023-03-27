@@ -6,13 +6,13 @@ using System;
 
 public class Driver 
 {
-    public static unsafe byte* Frob 
-    {
-        get { return (byte *) 0; }
-    }
+	public static unsafe byte* Frob 
+	{
+		get { return (byte *) 0; }
+	}
   
-    public static void Main () 
-    {
-        IntPtr q = (IntPtr) Frob;
-    }
+	public static void Main () 
+	{
+		IntPtr q = (IntPtr) Frob;
+	}
 }

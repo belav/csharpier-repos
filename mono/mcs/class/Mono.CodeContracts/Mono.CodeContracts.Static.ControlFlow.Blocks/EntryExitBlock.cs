@@ -2,7 +2,7 @@
 // EntryExitBlock.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,15 +29,15 @@
 using Mono.CodeContracts.Static.ControlFlow.Subroutines;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Blocks {
-    class EntryExitBlock<Label> : BlockWithLabels<Label> {
-        public EntryExitBlock (SubroutineBase<Label> subroutine, ref int idGen)
-            : base (subroutine, ref idGen)
-        {
-        }
+	class EntryExitBlock<Label> : BlockWithLabels<Label> {
+		public EntryExitBlock (SubroutineBase<Label> subroutine, ref int idGen)
+			: base (subroutine, ref idGen)
+		{
+		}
 
-        public override int Count
-        {
-            get { return 1; }
-        }
-    }
+		public override int Count
+		{
+			get { return 1; }
+		}
+	}
 }

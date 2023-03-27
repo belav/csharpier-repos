@@ -37,56 +37,56 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleDataAdapter_DeleteCommand : GHTBase
 {
-    public static void Main()
-    {
-        OracleDataAdapter_DeleteCommand tc = new OracleDataAdapter_DeleteCommand();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OracleDataAdapter_DeleteCommand");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	public static void Main()
+	{
+		OracleDataAdapter_DeleteCommand tc = new OracleDataAdapter_DeleteCommand();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OracleDataAdapter_DeleteCommand");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
 
-    //public TestClass():base(true){}
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
-        
-        OracleDataAdapter oleDBda = new OracleDataAdapter();
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
+		
+		OracleDataAdapter oleDBda = new OracleDataAdapter();
 
-        OracleCommand Cmd = new OracleCommand();
+		OracleCommand Cmd = new OracleCommand();
 
-        oleDBda.DeleteCommand = Cmd;
+		oleDBda.DeleteCommand = Cmd;
 
-        try
-        {
-            BeginCase("DeleteCommand - Get");
-            Compare(oleDBda.DeleteCommand , Cmd);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("DeleteCommand - Get");
+			Compare(oleDBda.DeleteCommand , Cmd);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-    }
+	}
 }
 }

@@ -2,7 +2,7 @@
 // ClientSection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,66 +54,66 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class ClientSection
-         : ConfigurationSection
-    {
-        static Type [] _defaultPolicyImporters = new Type [] {
-                typeof(CompositeDuplexBindingElementImporter),
-                typeof(MessageEncodingBindingElementImporter),
-                typeof(OneWayBindingElementImporter),
-                typeof(PrivacyNoticeBindingElementImporter),
-                typeof(ReliableSessionBindingElementImporter),
-                typeof(SecurityBindingElementImporter),
-                typeof(TransactionFlowBindingElementImporter),
-                typeof(TransportBindingElementImporter),
-                typeof(UseManagedPresentationBindingElementImporter)
-            };
+	public sealed class ClientSection
+		 : ConfigurationSection
+	{
+		static Type [] _defaultPolicyImporters = new Type [] {
+				typeof(CompositeDuplexBindingElementImporter),
+				typeof(MessageEncodingBindingElementImporter),
+				typeof(OneWayBindingElementImporter),
+				typeof(PrivacyNoticeBindingElementImporter),
+				typeof(ReliableSessionBindingElementImporter),
+				typeof(SecurityBindingElementImporter),
+				typeof(TransactionFlowBindingElementImporter),
+				typeof(TransportBindingElementImporter),
+				typeof(UseManagedPresentationBindingElementImporter)
+			};
 
-        static Type [] _defaultWsdlImporters = new Type [] { 
-                typeof(MessageEncodingBindingElementImporter),
-                typeof(StandardBindingImporter),
-                typeof(TransportBindingElementImporter),
-                typeof(DataContractSerializerMessageContractImporter),
-                typeof(XmlSerializerMessageContractImporter)
-            };
+		static Type [] _defaultWsdlImporters = new Type [] { 
+				typeof(MessageEncodingBindingElementImporter),
+				typeof(StandardBindingImporter),
+				typeof(TransportBindingElementImporter),
+				typeof(DataContractSerializerMessageContractImporter),
+				typeof(XmlSerializerMessageContractImporter)
+			};
 
-        public ClientSection () {
-        }
+		public ClientSection () {
+		}
 
-        // Properties
+		// Properties
 
-        [ConfigurationProperty ("",
-             Options = ConfigurationPropertyOptions.IsDefaultCollection,
-            IsDefaultCollection = true)]
-        public ChannelEndpointElementCollection Endpoints {
-            get { return (ChannelEndpointElementCollection) this [String.Empty]; }
-        }
+		[ConfigurationProperty ("",
+			 Options = ConfigurationPropertyOptions.IsDefaultCollection,
+			IsDefaultCollection = true)]
+		public ChannelEndpointElementCollection Endpoints {
+			get { return (ChannelEndpointElementCollection) this [String.Empty]; }
+		}
 
-        [ConfigurationProperty ("metadata",
-             Options = ConfigurationPropertyOptions.None)]
-        public MetadataElement Metadata {
-            get { return (MetadataElement) this ["metadata"]; }
-        }
+		[ConfigurationProperty ("metadata",
+			 Options = ConfigurationPropertyOptions.None)]
+		public MetadataElement Metadata {
+			get { return (MetadataElement) this ["metadata"]; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
 
-        protected override void InitializeDefault () {
-            base.InitializeDefault ();
+		protected override void InitializeDefault () {
+			base.InitializeDefault ();
 
-            PolicyImporterElementCollection policyImporters = Metadata.PolicyImporters;
-            for (int i = 0; i < _defaultPolicyImporters.Length; i++)
-                policyImporters.Add (new PolicyImporterElement (_defaultPolicyImporters [i]));
+			PolicyImporterElementCollection policyImporters = Metadata.PolicyImporters;
+			for (int i = 0; i < _defaultPolicyImporters.Length; i++)
+				policyImporters.Add (new PolicyImporterElement (_defaultPolicyImporters [i]));
 
-            WsdlImporterElementCollection wsdlImporters = Metadata.WsdlImporters;
-            for (int i = 0; i < _defaultWsdlImporters.Length; i++)
-                wsdlImporters.Add (new WsdlImporterElement (_defaultWsdlImporters [i]));
-        }
+			WsdlImporterElementCollection wsdlImporters = Metadata.WsdlImporters;
+			for (int i = 0; i < _defaultWsdlImporters.Length; i++)
+				wsdlImporters.Add (new WsdlImporterElement (_defaultWsdlImporters [i]));
+		}
 
-        protected override void PostDeserialize () {
-            base.PostDeserialize ();
-        }
-    }
+		protected override void PostDeserialize () {
+			base.PostDeserialize ();
+		}
+	}
 
 }

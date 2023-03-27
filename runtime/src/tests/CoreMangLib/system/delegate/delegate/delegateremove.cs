@@ -86,9 +86,9 @@ namespace DelegateTest
             {
                 DelegateRemove delctor = new DelegateRemove();
                 TestClass tcInstance = new TestClass();
-        booldelegate bStartWork_Bool = new booldelegate(tcInstance.StartWork_Bool);
-        booldelegate bWorking_Bool   = new booldelegate(tcInstance.Working_Bool);
-        booldelegate bCompleted_Bool = new booldelegate(tcInstance.Completed_Bool);
+		booldelegate bStartWork_Bool = new booldelegate(tcInstance.StartWork_Bool);
+		booldelegate bWorking_Bool   = new booldelegate(tcInstance.Working_Bool);
+		booldelegate bCompleted_Bool = new booldelegate(tcInstance.Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bWorking_Bool;
@@ -126,9 +126,9 @@ namespace DelegateTest
             try
             {
                 DelegateRemove delctor = new DelegateRemove();
-        booldelegate bStartWork_Bool = new booldelegate(new TestClass().StartWork_Bool);
-        booldelegate bWorking_Bool   = new booldelegate(new TestClass().Working_Bool);
-        booldelegate bCompleted_Bool = new booldelegate(new TestClass().Completed_Bool);
+		booldelegate bStartWork_Bool = new booldelegate(new TestClass().StartWork_Bool);
+		booldelegate bWorking_Bool   = new booldelegate(new TestClass().Working_Bool);
+		booldelegate bCompleted_Bool = new booldelegate(new TestClass().Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += null;
@@ -170,9 +170,9 @@ namespace DelegateTest
             {
                 DelegateRemove delctor = new DelegateRemove();
                 TestClass tcInstance = new TestClass();
-        booldelegate bStartWork_Bool = new booldelegate(tcInstance.StartWork_Bool);
-        booldelegate bWorking_Bool   = new booldelegate(tcInstance.Working_Bool);
-        booldelegate bCompleted_Bool = new booldelegate(tcInstance.Completed_Bool);
+		booldelegate bStartWork_Bool = new booldelegate(tcInstance.StartWork_Bool);
+		booldelegate bWorking_Bool   = new booldelegate(tcInstance.Working_Bool);
+		booldelegate bCompleted_Bool = new booldelegate(tcInstance.Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bStartWork_Bool;
@@ -212,9 +212,9 @@ namespace DelegateTest
             try
             {
                 DelegateRemove delctor = new DelegateRemove();
-        booldelegate bStartWork_Bool = new booldelegate(TestClass1.StartWork_Bool);
-        booldelegate bWorking_Bool   = new booldelegate(TestClass1.Working_Bool);
-        booldelegate bCompleted_Bool = new booldelegate(TestClass1.Completed_Bool);
+		booldelegate bStartWork_Bool = new booldelegate(TestClass1.StartWork_Bool);
+		booldelegate bWorking_Bool   = new booldelegate(TestClass1.Working_Bool);
+		booldelegate bCompleted_Bool = new booldelegate(TestClass1.Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bStartWork_Bool;
@@ -255,9 +255,9 @@ namespace DelegateTest
             {
                 DelegateRemove delctor = new DelegateRemove();
                 TestClass tcInstance = new TestClass();
-        booldelegate bStartWork_Bool = new booldelegate(tcInstance.StartWork_Bool);
-        booldelegate bWorking_Bool   = new booldelegate(tcInstance.Working_Bool);
-        booldelegate bCompleted_Bool = new booldelegate(tcInstance.Completed_Bool);
+		booldelegate bStartWork_Bool = new booldelegate(tcInstance.StartWork_Bool);
+		booldelegate bWorking_Bool   = new booldelegate(tcInstance.Working_Bool);
+		booldelegate bCompleted_Bool = new booldelegate(tcInstance.Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bWorking_Bool;

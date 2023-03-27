@@ -47,7 +47,7 @@ namespace System.ComponentModel
             }
 
             _typeName = typeName;
-            _propertyName = propertyName;
+			_propertyName = propertyName;
         }
 
         /// <include file='doc\AttributeProviderAttribute.uex' path='docs/doc[@for="AttributeProviderAttribute.AttributeProviderAttribute1"]/*' />

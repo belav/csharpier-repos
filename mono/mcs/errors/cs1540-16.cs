@@ -4,8 +4,8 @@
 
 public class Child<T> : Parent where T : Parent
 {
-    public void Bar (T p)
-    {
-        p.Foo ();
-    }
+	public void Bar (T p)
+	{
+		p.Foo ();
+	}
 }

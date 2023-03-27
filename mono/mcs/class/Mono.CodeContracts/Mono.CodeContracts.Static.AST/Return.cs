@@ -2,7 +2,7 @@
 // Return.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,21 +27,21 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    class Return : ExpressionStatement {
-        public Return ()
-        {
-            NodeType = NodeType.Return;
-        }
+	class Return : ExpressionStatement {
+		public Return ()
+		{
+			NodeType = NodeType.Return;
+		}
 
-        public Return (Expression expression)
-            : base (expression)
-        {
-            NodeType = NodeType.Return;
-        }
+		public Return (Expression expression)
+			: base (expression)
+		{
+			NodeType = NodeType.Return;
+		}
 
-        public override string ToString ()
-        {
-            return string.Format ("return {0};", Expression);
-        }
-    }
+		public override string ToString ()
+		{
+			return string.Format ("return {0};", Expression);
+		}
+	}
 }

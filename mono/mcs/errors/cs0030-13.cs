@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 class C
 {
-    IEnumerable<T> Foo<T> (T [,] a)
-    {
-        return (IEnumerable<T>) a;
-    }
+	IEnumerable<T> Foo<T> (T [,] a)
+	{
+		return (IEnumerable<T>) a;
+	}
 }

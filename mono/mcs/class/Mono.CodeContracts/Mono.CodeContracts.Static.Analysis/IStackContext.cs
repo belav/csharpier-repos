@@ -2,7 +2,7 @@
 // IStackContext.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,7 +29,7 @@
 using Mono.CodeContracts.Static.ControlFlow;
 
 namespace Mono.CodeContracts.Static.Analysis {
-    interface IStackContext {
-        int StackDepth (APC pc);
-    }
+	interface IStackContext {
+		int StackDepth (APC pc);
+	}
 }

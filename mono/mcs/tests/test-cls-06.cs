@@ -9,7 +9,7 @@ public delegate uint MyDelegate();
 
 [CLSCompliant(false)]
 public interface IFake {
-#pragma warning disable 3018    
+#pragma warning disable 3018	
         [CLSCompliant(true)]
         long AA(long arg);
 #pragma warning disable 3018        

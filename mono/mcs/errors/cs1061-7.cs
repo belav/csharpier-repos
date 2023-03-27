@@ -4,8 +4,8 @@
 
 public class M
 {
-    public static void Main ()
-    {
-        1.Foo ("foo");
-    }
+	public static void Main ()
+	{
+		1.Foo ("foo");
+	}
 }

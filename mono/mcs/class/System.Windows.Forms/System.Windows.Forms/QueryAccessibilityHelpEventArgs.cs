@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
@@ -29,56 +29,56 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-    [ComVisible(true)]
-    public class QueryAccessibilityHelpEventArgs : EventArgs {
-        private string    help_namespace;
-        private string    help_string;
-        private string    help_keyword;
+	[ComVisible(true)]
+	public class QueryAccessibilityHelpEventArgs : EventArgs {
+		private string	help_namespace;
+		private string	help_string;
+		private string	help_keyword;
 
-        #region Public Constructors
-        public QueryAccessibilityHelpEventArgs() {
-            this.help_namespace = null;
-            this.help_string = null;
-            this.help_keyword = null;
-        }
+		#region Public Constructors
+		public QueryAccessibilityHelpEventArgs() {
+			this.help_namespace = null;
+			this.help_string = null;
+			this.help_keyword = null;
+		}
 
-        public QueryAccessibilityHelpEventArgs(string helpNamespace, string helpString, string helpKeyword) {
-            this.help_namespace=helpNamespace;
-            this.help_string=helpString;
-            this.help_keyword=helpKeyword;
-        }
-        #endregion    // Public Constructors
+		public QueryAccessibilityHelpEventArgs(string helpNamespace, string helpString, string helpKeyword) {
+			this.help_namespace=helpNamespace;
+			this.help_string=helpString;
+			this.help_keyword=helpKeyword;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public string HelpKeyword {
-            get  {
-                return this.help_keyword;
-            }
+		#region Public Instance Properties
+		public string HelpKeyword {
+			get  {
+				return this.help_keyword;
+			}
 
-            set {
-                this.help_keyword = value;
-            }
-        }
+			set {
+				this.help_keyword = value;
+			}
+		}
 
-        public string HelpNamespace {
-            get {
-                return this.help_namespace;
-            }
+		public string HelpNamespace {
+			get {
+				return this.help_namespace;
+			}
 
-            set {
-                this.help_namespace = value;
-            }
-        }
+			set {
+				this.help_namespace = value;
+			}
+		}
 
-        public string HelpString {
-            get {
-                return this.help_string;
-            }
+		public string HelpString {
+			get {
+				return this.help_string;
+			}
 
-            set {
-                this.help_string = value;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+			set {
+				this.help_string = value;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

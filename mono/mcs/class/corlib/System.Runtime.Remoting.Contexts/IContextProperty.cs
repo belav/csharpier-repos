@@ -33,15 +33,15 @@
 
 namespace System.Runtime.Remoting.Contexts {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IContextProperty {
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IContextProperty {
 
-        string Name {
-            get;
-        }
+		string Name {
+			get;
+		}
 
-        void Freeze (Context newContext);
+		void Freeze (Context newContext);
 
-        bool IsNewContextOK (Context newCtx);
-    }
+		bool IsNewContextOK (Context newCtx);
+	}
 }

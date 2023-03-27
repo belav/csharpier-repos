@@ -34,59 +34,59 @@ using System.IO;
 
 namespace Microsoft.Build.Internal
 {
-    class ProjectTaskItem : ITaskItem
-    {
-        ProjectItemElement item;
-        string evaluated_include_part;
-        
-        public ProjectTaskItem (ProjectItemElement item, string evaluatedIncludePart)
-        {
-            this.item = item;
-            this.evaluated_include_part = WindowsCompatibilityExtensions.FindMatchingPath (evaluatedIncludePart);
-        }
-        #region ITaskItem implementation
-        System.Collections.IDictionary ITaskItem.CloneCustomMetadata ()
-        {
-            var ret = new System.Collections.Hashtable ();
-            foreach (var p in item.Metadata)
-                ret [p.Name] = p;
-            return ret;
-        }
-        void ITaskItem.CopyMetadataTo (ITaskItem destinationItem)
-        {
-            throw new NotImplementedException ();
-        }
-        string ITaskItem.GetMetadata (string metadataName)
-        {
-            var wk = ProjectCollection.GetWellKnownMetadata (metadataName, evaluated_include_part, Path.GetFullPath, null);
-            if (wk != null)
-                return wk;
-            var mde = item.Metadata.FirstOrDefault (m => m.Name == metadataName);
-            return mde != null ? mde.Value : string.Empty;
-        }
-        void ITaskItem.RemoveMetadata (string metadataName)
-        {
-            throw new NotImplementedException ();
-        }
-        void ITaskItem.SetMetadata (string metadataName, string metadataValue)
-        {
-            throw new NotImplementedException ();
-        }
-        string ITaskItem.ItemSpec {
-            get { return evaluated_include_part; }
-            set { throw new NotImplementedException (); }
-        }
-        int ITaskItem.MetadataCount {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-        System.Collections.ICollection ITaskItem.MetadataNames {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-        #endregion
-    }
+	class ProjectTaskItem : ITaskItem
+	{
+		ProjectItemElement item;
+		string evaluated_include_part;
+		
+		public ProjectTaskItem (ProjectItemElement item, string evaluatedIncludePart)
+		{
+			this.item = item;
+			this.evaluated_include_part = WindowsCompatibilityExtensions.FindMatchingPath (evaluatedIncludePart);
+		}
+		#region ITaskItem implementation
+		System.Collections.IDictionary ITaskItem.CloneCustomMetadata ()
+		{
+			var ret = new System.Collections.Hashtable ();
+			foreach (var p in item.Metadata)
+				ret [p.Name] = p;
+			return ret;
+		}
+		void ITaskItem.CopyMetadataTo (ITaskItem destinationItem)
+		{
+			throw new NotImplementedException ();
+		}
+		string ITaskItem.GetMetadata (string metadataName)
+		{
+			var wk = ProjectCollection.GetWellKnownMetadata (metadataName, evaluated_include_part, Path.GetFullPath, null);
+			if (wk != null)
+				return wk;
+			var mde = item.Metadata.FirstOrDefault (m => m.Name == metadataName);
+			return mde != null ? mde.Value : string.Empty;
+		}
+		void ITaskItem.RemoveMetadata (string metadataName)
+		{
+			throw new NotImplementedException ();
+		}
+		void ITaskItem.SetMetadata (string metadataName, string metadataValue)
+		{
+			throw new NotImplementedException ();
+		}
+		string ITaskItem.ItemSpec {
+			get { return evaluated_include_part; }
+			set { throw new NotImplementedException (); }
+		}
+		int ITaskItem.MetadataCount {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
+		System.Collections.ICollection ITaskItem.MetadataNames {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
+		#endregion
+	}
 }
 

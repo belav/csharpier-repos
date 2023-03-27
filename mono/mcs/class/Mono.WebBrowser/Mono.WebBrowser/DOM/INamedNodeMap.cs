@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -28,12 +28,12 @@ using System.Collections;
 
 namespace Mono.WebBrowser.DOM
 {
-    public interface INamedNodeMap : IList
-    {
-        INode this[string name] { get; set; }
-        INode RemoveNamedItem (string name);
-        INode this[int index] { get; set; }
-        INode this[string namespaceURI, string localName] {get; set;}
-        INode  RemoveNamedItemNS(string namespaceURI, string localName);
-    }
+	public interface INamedNodeMap : IList
+	{
+		INode this[string name] { get; set; }
+		INode RemoveNamedItem (string name);
+		INode this[int index] { get; set; }
+		INode this[string namespaceURI, string localName] {get; set;}
+		INode  RemoveNamedItemNS(string namespaceURI, string localName);
+	}
 }

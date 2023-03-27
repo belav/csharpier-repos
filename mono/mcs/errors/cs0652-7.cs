@@ -6,11 +6,11 @@ using System;
 
 public class CS0652 {
 
-    public static void Main () 
-    {
-        char value = 'a';
-        if (value > ulong.MaxValue)
-            return;
-    }
+	public static void Main () 
+	{
+		char value = 'a';
+		if (value > ulong.MaxValue)
+			return;
+	}
 }
 

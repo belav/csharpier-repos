@@ -34,64 +34,64 @@ using NUnit.Framework;
 
 namespace MonoTests.WebMatrix.Data
 {
-    [TestFixtureAttribute]
-    public class DynamicRecordTests
-    {
-        DynamicRecord record;
+	[TestFixtureAttribute]
+	public class DynamicRecordTests
+	{
+		DynamicRecord record;
 
-        [SetUp]
-        public void Setup ()
-        {
-            var fields = new Dictionary<string, object> () {
-                { "foo", 1 },
-                { "bar", 4.1f },
-                { "foobar", "foobar" }
-            };
-            record = new DynamicRecord (fields);
-        }
+		[SetUp]
+		public void Setup ()
+		{
+			var fields = new Dictionary<string, object> () {
+				{ "foo", 1 },
+				{ "bar", 4.1f },
+				{ "foobar", "foobar" }
+			};
+			record = new DynamicRecord (fields);
+		}
 
-        [Test]
-        public void ColumnsTest ()
-        {
-            var columns = record.Columns;
-            Assert.AreEqual (3, columns.Count);
+		[Test]
+		public void ColumnsTest ()
+		{
+			var columns = record.Columns;
+			Assert.AreEqual (3, columns.Count);
 
-            Assert.AreEqual ("foo", columns[0]);
-            Assert.AreEqual ("bar", columns[1]);
-            Assert.AreEqual ("foobar", columns[2]);
-        }
+			Assert.AreEqual ("foo", columns[0]);
+			Assert.AreEqual ("bar", columns[1]);
+			Assert.AreEqual ("foobar", columns[2]);
+		}
 
-        [Test]
-        public void AccessByNameTest ()
-        {
-            Assert.AreEqual (1, record["foo"]);
-            Assert.AreEqual (4.1f, record["bar"]);
-            Assert.AreEqual ("foobar", record["foobar"]);
-        }
+		[Test]
+		public void AccessByNameTest ()
+		{
+			Assert.AreEqual (1, record["foo"]);
+			Assert.AreEqual (4.1f, record["bar"]);
+			Assert.AreEqual ("foobar", record["foobar"]);
+		}
 
-        [Test]
-        public void AccessByIndexTest ()
-        {
-            Assert.AreEqual (1, record[0]);
-            Assert.AreEqual (4.1f, record[1]);
-            Assert.AreEqual ("foobar", record[2]);
-        }
+		[Test]
+		public void AccessByIndexTest ()
+		{
+			Assert.AreEqual (1, record[0]);
+			Assert.AreEqual (4.1f, record[1]);
+			Assert.AreEqual ("foobar", record[2]);
+		}
 
-        [Test]
-        public void AccesByDynamicTest ()
-        {
-            dynamic r = record;
+		[Test]
+		public void AccesByDynamicTest ()
+		{
+			dynamic r = record;
 
-            Assert.AreEqual (1, r.foo);
-            Assert.AreEqual (4.1f, r.bar);
-            Assert.AreEqual ("foobar", r.foobar);
-        }
+			Assert.AreEqual (1, r.foo);
+			Assert.AreEqual (4.1f, r.bar);
+			Assert.AreEqual ("foobar", r.foobar);
+		}
 
-        [Test]
-        public void GetDynamicMemberNamesTest ()
-        {
-            var expected = new string[] { "foo", "bar", "foobar" };
-            CollectionAssert.AreEquivalent (expected, record.GetDynamicMemberNames ());
-        }
-    }
+		[Test]
+		public void GetDynamicMemberNamesTest ()
+		{
+			var expected = new string[] { "foo", "bar", "foobar" };
+			CollectionAssert.AreEquivalent (expected, record.GetDynamicMemberNames ());
+		}
+	}
 }

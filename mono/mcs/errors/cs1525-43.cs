@@ -3,7 +3,7 @@
 
 class TestClass
 {
-    TestClass ([attr])
-    {
-    }
+	TestClass ([attr])
+	{
+	}
 }

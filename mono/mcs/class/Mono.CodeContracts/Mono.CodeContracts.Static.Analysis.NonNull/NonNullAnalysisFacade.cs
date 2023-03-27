@@ -1,8 +1,8 @@
-// 
+﻿// 
 // NonNullAnalysisFacade.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,23 +30,23 @@ using System;
 using Mono.CodeContracts.Static.Analysis.Drivers;
 
 namespace Mono.CodeContracts.Static.Analysis.NonNull {
-    class NonNullAnalysisFacade : IMethodAnalysis {
-        #region IMethodAnalysis Members
-        public string Name
-        {
-            get { return "Non-null"; }
-        }
+	class NonNullAnalysisFacade : IMethodAnalysis {
+		#region IMethodAnalysis Members
+		public string Name
+		{
+			get { return "Non-null"; }
+		}
 
-        public IMethodResult<Var> Analyze<Expr, Var> (string fullMethodName, IMethodDriver<Expr, Var> methodDriver)
-            where Expr : IEquatable<Expr>
-            where Var : IEquatable<Var>
-        {
-            var analysis = new Analysis<Expr, Var> (methodDriver);
-            methodDriver.HybridLayer.CreateForward (analysis) (analysis.InitialValue (methodDriver.KeyConverter));
-            analysis.MethodAnalysis = this;
+		public IMethodResult<Var> Analyze<Expr, Var> (string fullMethodName, IMethodDriver<Expr, Var> methodDriver)
+			where Expr : IEquatable<Expr>
+			where Var : IEquatable<Var>
+		{
+			var analysis = new Analysis<Expr, Var> (methodDriver);
+			methodDriver.HybridLayer.CreateForward (analysis) (analysis.InitialValue (methodDriver.KeyConverter));
+			analysis.MethodAnalysis = this;
 
-            return analysis;
-        }
-        #endregion
-    }
+			return analysis;
+		}
+		#endregion
+	}
 }

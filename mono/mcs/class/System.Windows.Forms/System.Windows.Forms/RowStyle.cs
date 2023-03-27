@@ -29,42 +29,42 @@
 
 namespace System.Windows.Forms 
 {
-    public class RowStyle : TableLayoutStyle 
-    {
-        float height;
-        
-        public RowStyle ()
-        {
-            this.height = 0;
-        }
+	public class RowStyle : TableLayoutStyle 
+	{
+		float height;
+		
+		public RowStyle ()
+		{
+			this.height = 0;
+		}
 
-        public RowStyle (SizeType sizeType) 
-        {
-            this.height = 0;
-            base.SizeType = sizeType;
-        }
+		public RowStyle (SizeType sizeType) 
+		{
+			this.height = 0;
+			base.SizeType = sizeType;
+		}
 
-        public RowStyle (SizeType sizeType, float height)
-        {
-            if (height < 0)
-                throw new ArgumentOutOfRangeException("height");
+		public RowStyle (SizeType sizeType, float height)
+		{
+			if (height < 0)
+				throw new ArgumentOutOfRangeException("height");
 
-            base.SizeType = sizeType;
-            this.height = height;
-        }
+			base.SizeType = sizeType;
+			this.height = height;
+		}
 
-        public float Height {
-            get { return this.height; }
-            set {    
-                if (value < 0)
-                    throw new ArgumentOutOfRangeException();
-                
-                if (height != value) {
-                    height = value; 
-                    if (Owner != null)
-                        Owner.PerformLayout (Owner, "Style");                        
-                }
-            }
-        }        
-    }
+		public float Height {
+			get { return this.height; }
+			set {	
+				if (value < 0)
+					throw new ArgumentOutOfRangeException();
+				
+				if (height != value) {
+					height = value; 
+					if (Owner != null)
+						Owner.PerformLayout (Owner, "Style");						
+				}
+			}
+		}		
+	}
 }

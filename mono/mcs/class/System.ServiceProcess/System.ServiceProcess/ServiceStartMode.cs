@@ -29,10 +29,10 @@
 
 namespace System.ServiceProcess
 {
-    public enum ServiceStartMode
-    {
-        Automatic = 2,
-        Manual = 3,
-        Disabled = 4
-    }
+	public enum ServiceStartMode
+	{
+		Automatic = 2,
+		Manual = 3,
+		Disabled = 4
+	}
 }

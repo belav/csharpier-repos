@@ -34,20 +34,20 @@ using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-    [XmlFormatExtensionPoint ("Extensions")]
-    public sealed class OperationInput : OperationMessage {
-        
-        ServiceDescriptionFormatExtensionCollection extensions;
+	[XmlFormatExtensionPoint ("Extensions")]
+	public sealed class OperationInput : OperationMessage {
+		
+		ServiceDescriptionFormatExtensionCollection extensions;
 
-        public OperationInput ()
-        {
-            extensions = new ServiceDescriptionFormatExtensionCollection (this);
-        }
-        
-        [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions {
-            get { return extensions; }
-        }
+		public OperationInput ()
+		{
+			extensions = new ServiceDescriptionFormatExtensionCollection (this);
+		}
+		
+		[XmlIgnore]
+		public override ServiceDescriptionFormatExtensionCollection Extensions {
+			get { return extensions; }
+		}
 
-    }
+	}
 }

@@ -3,8 +3,8 @@
 
 public class Test
 {
-    public static int Main ()
-    {
-        var s = $"test { arg // comment }";
-    }
+	public static int Main ()
+	{
+		var s = $"test { arg // comment }";
+	}
 }

@@ -2,7 +2,7 @@
 // XQueryExpression.cs - abstract syntax tree for XQuery 1.0
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -37,541 +37,541 @@ using Mono.Xml;
 
 namespace Mono.Xml.XQuery
 {
-    internal abstract class XmlConstructorExpr : ExprSingle
-    {
-        public XmlConstructorExpr (ExprSequence content)
-        {
-            this.content = content;
-        }
+	internal abstract class XmlConstructorExpr : ExprSingle
+	{
+		public XmlConstructorExpr (ExprSequence content)
+		{
+			this.content = content;
+		}
 
-        ExprSequence content;
+		ExprSequence content;
 
-        public ExprSequence Content {
-            get { return content; }
-        }
-
-#region CompileAndEvaluate
-        internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
-        {
-            if (Content != null)
-                for (int i = 0; i < Content.Count; i++)
-                    Content [i] = Content [i].Compile (compiler);
-            return this;
-        }
-
-        public void SerializeContent (XPathSequence iter)
-        {
-            if (Content != null)
-                foreach (ExprSingle expr in Content)
-                    expr.Serialize (iter);
-        }
-
-        internal IXmlNamespaceResolver GetNSResolver (XPathSequence iter)
-        {
-            // FIXME: IXmlNamespaceResolver must be constructed
-            // considering 1)static context and 2)in-scope element
-            // construction.
-            return iter.Context;
-        }
-
-        public XPathSequence EvaluateNode (XPathSequence iter)
-        {
-            return EvaluateNode (iter, XPathNodeType.All);
-        }
-        
-        public XPathSequence EvaluateNode (XPathSequence iter, XPathNodeType moveAfterCreation)
-        {
-            XmlDocument doc = new XmlDocument ();
-            XmlWriter w = iter.Context.Writer;
-            try {
-                iter.Context.Writer = doc.CreateNavigator ().AppendChild ();
-                Serialize (iter);
-                iter.Context.Writer.Close ();
-            } finally {
-                iter.Context.Writer = w;
-            }
-            XPathNavigator nav = doc.CreateNavigator ();
-            switch (moveAfterCreation) {
-            case XPathNodeType.Attribute:
-                nav.MoveToFirstAttribute ();
-                break;
-            case XPathNodeType.Root:
-                break;
-            default:
-                nav.MoveToFirstChild ();
-                break;
-            }
-            return new SingleItemIterator (nav, iter.Context);
-        }
-#endregion
-    }
-
-    internal class XmlAttrConstructorList : CollectionBase
-    {
-        public XmlAttrConstructorList ()
-        {
-        }
-
-        public void Add (XmlAttrConstructor item)
-        {
-            List.Add (item);
-        }
-
-        public void Insert (int pos, XmlAttrConstructor item)
-        {
-            List.Insert (pos, item);
-        }
-    }
-
-    internal class XmlElemConstructor : XmlConstructorExpr
-    {
-        XmlQualifiedName name;
-        ExprSequence nameExpr;
-
-        public XmlElemConstructor (XmlQualifiedName name, ExprSequence content)
-            : base (content)
-        {
-            this.name = name;
-        }
-
-        public XmlElemConstructor (ExprSequence name, ExprSequence content)
-            : base (content)
-        {
-            this.name = XmlQualifiedName.Empty;
-            this.nameExpr = name;
-        }
-
-        public XmlQualifiedName Name {
-            get { return name; }
-        }
-        public ExprSequence NameExpr {
-            get { return nameExpr; }
-        }
-
-        internal override void CheckReference (XQueryASTCompiler compiler)
-        {
-            if (nameExpr != null)
-                nameExpr.CheckReference (compiler);
-            if (Content != null)
-                Content.CheckReference (compiler);
-        }
+		public ExprSequence Content {
+			get { return content; }
+		}
 
 #region CompileAndEvaluate
-        internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
-        {
-            if (NameExpr != null)
-                for (int i = 0; i < NameExpr.Count; i++)
-                    NameExpr [i] = NameExpr [i].Compile (compiler);
-            if (Content != null)
-                for (int i = 0; i < Content.Count; i++)
-                    Content [i] = Content [i].Compile (compiler);
-            return this;
-        }
+		internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
+		{
+			if (Content != null)
+				for (int i = 0; i < Content.Count; i++)
+					Content [i] = Content [i].Compile (compiler);
+			return this;
+		}
 
-        // FIXME: can be optimized by checking all items in Expr
-        public override SequenceType StaticType {
-            get { return SequenceType.Element; }
-        }
+		public void SerializeContent (XPathSequence iter)
+		{
+			if (Content != null)
+				foreach (ExprSingle expr in Content)
+					expr.Serialize (iter);
+		}
 
-        public override void Serialize (XPathSequence iter)
-        {
-            XmlQualifiedName name = EvaluateName (iter);
-            XmlWriter w = iter.Context.Writer;
-            w.WriteStartElement (iter.Context.LookupPrefix (name.Namespace), name.Name, name.Namespace);
-            SerializeContent (iter);
-            w.WriteEndElement ();
-        }
+		internal IXmlNamespaceResolver GetNSResolver (XPathSequence iter)
+		{
+			// FIXME: IXmlNamespaceResolver must be constructed
+			// considering 1)static context and 2)in-scope element
+			// construction.
+			return iter.Context;
+		}
 
-        public override XPathSequence Evaluate (XPathSequence iter)
-        {
-            return EvaluateNode (iter);
-        }
-
-        private XmlQualifiedName EvaluateName (XPathSequence iter)
-        {
-            XmlQualifiedName name = Name;
-            if (NameExpr != null) {
-                XPathAtomicValue value = Atomize (new ExprSequenceIterator (iter, NameExpr));
-                IXmlNamespaceResolver res = iter.Context.NSResolver;
-
-                switch (value.XmlType.TypeCode) {
-                case XmlTypeCode.QName:
-                    name = (XmlQualifiedName) value.ValueAs (typeof (XmlQualifiedName), res);
-                    break;
-                case XmlTypeCode.String:
-                    try {
-                        name = InternalPool.ParseQName (value.Value, res);
-                    } catch (ArgumentException ex) {
-                        // FIXME: add more info
-                        throw new XmlQueryException (String.Format ("The evaluation result of the name expression could not be resolved as a valid QName. Evaluation result string is '{0}'.", value.Value));
-                    }
-                    break;
-                default:
-                    // FIXME: add more info
-                    throw new XmlQueryException ("A name of an element constructor must be resolved to either a QName or string.");
-                }
-            }
-            return name;
-        }
+		public XPathSequence EvaluateNode (XPathSequence iter)
+		{
+			return EvaluateNode (iter, XPathNodeType.All);
+		}
+		
+		public XPathSequence EvaluateNode (XPathSequence iter, XPathNodeType moveAfterCreation)
+		{
+			XmlDocument doc = new XmlDocument ();
+			XmlWriter w = iter.Context.Writer;
+			try {
+				iter.Context.Writer = doc.CreateNavigator ().AppendChild ();
+				Serialize (iter);
+				iter.Context.Writer.Close ();
+			} finally {
+				iter.Context.Writer = w;
+			}
+			XPathNavigator nav = doc.CreateNavigator ();
+			switch (moveAfterCreation) {
+			case XPathNodeType.Attribute:
+				nav.MoveToFirstAttribute ();
+				break;
+			case XPathNodeType.Root:
+				break;
+			default:
+				nav.MoveToFirstChild ();
+				break;
+			}
+			return new SingleItemIterator (nav, iter.Context);
+		}
 #endregion
-    }
+	}
 
-    internal class XmlAttrConstructor : XmlConstructorExpr
-    {
-        XmlQualifiedName name;
-        ExprSequence nameExpr;
+	internal class XmlAttrConstructorList : CollectionBase
+	{
+		public XmlAttrConstructorList ()
+		{
+		}
 
-        public XmlAttrConstructor (XmlQualifiedName name, ExprSequence content)
-            : base (content)
-        {
-            this.name = name;
-        }
+		public void Add (XmlAttrConstructor item)
+		{
+			List.Add (item);
+		}
 
-        public XmlAttrConstructor (ExprSequence name, ExprSequence content)
-            : base (content)
-        {
-            this.nameExpr = name;
-        }
+		public void Insert (int pos, XmlAttrConstructor item)
+		{
+			List.Insert (pos, item);
+		}
+	}
 
-        internal override void CheckReference (XQueryASTCompiler compiler)
-        {
-            if (nameExpr != null)
-                nameExpr.CheckReference (compiler);
-            if (Content != null)
-                Content.CheckReference (compiler);
-        }
+	internal class XmlElemConstructor : XmlConstructorExpr
+	{
+		XmlQualifiedName name;
+		ExprSequence nameExpr;
+
+		public XmlElemConstructor (XmlQualifiedName name, ExprSequence content)
+			: base (content)
+		{
+			this.name = name;
+		}
+
+		public XmlElemConstructor (ExprSequence name, ExprSequence content)
+			: base (content)
+		{
+			this.name = XmlQualifiedName.Empty;
+			this.nameExpr = name;
+		}
+
+		public XmlQualifiedName Name {
+			get { return name; }
+		}
+		public ExprSequence NameExpr {
+			get { return nameExpr; }
+		}
+
+		internal override void CheckReference (XQueryASTCompiler compiler)
+		{
+			if (nameExpr != null)
+				nameExpr.CheckReference (compiler);
+			if (Content != null)
+				Content.CheckReference (compiler);
+		}
 
 #region CompileAndEvaluate
-        internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
-        {
-            if (NameExpr != null)
-                for (int i = 0; i < NameExpr.Count; i++)
-                    NameExpr [i] = NameExpr [i].Compile (compiler);
-            if (Content != null)
-                for (int i = 0; i < Content.Count; i++)
-                    Content [i] = Content [i].Compile (compiler);
-            return this;
-        }
+		internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
+		{
+			if (NameExpr != null)
+				for (int i = 0; i < NameExpr.Count; i++)
+					NameExpr [i] = NameExpr [i].Compile (compiler);
+			if (Content != null)
+				for (int i = 0; i < Content.Count; i++)
+					Content [i] = Content [i].Compile (compiler);
+			return this;
+		}
 
-        public XmlQualifiedName Name {
-            get { return name; }
-        }
-        public ExprSequence NameExpr {
-            get { return nameExpr; }
-        }
+		// FIXME: can be optimized by checking all items in Expr
+		public override SequenceType StaticType {
+			get { return SequenceType.Element; }
+		}
 
-        // FIXME: can be optimized by checking all items in Expr
-        public override SequenceType StaticType {
-            get { return SequenceType.Attribute; }
-        }
+		public override void Serialize (XPathSequence iter)
+		{
+			XmlQualifiedName name = EvaluateName (iter);
+			XmlWriter w = iter.Context.Writer;
+			w.WriteStartElement (iter.Context.LookupPrefix (name.Namespace), name.Name, name.Namespace);
+			SerializeContent (iter);
+			w.WriteEndElement ();
+		}
 
-        public override void Serialize (XPathSequence iter)
-        {
-            XmlQualifiedName name = EvaluateName (iter);
-            XmlWriter w = iter.Context.Writer;
-            w.WriteStartAttribute (GetNSResolver (iter).LookupPrefix (name.Namespace), name.Name, name.Namespace);
-            SerializeContent (iter);
-            w.WriteEndAttribute ();
-        }
+		public override XPathSequence Evaluate (XPathSequence iter)
+		{
+			return EvaluateNode (iter);
+		}
 
-        public override XPathSequence Evaluate (XPathSequence iter)
-        {
-            return EvaluateNode (iter, XPathNodeType.Attribute);
-        }
+		private XmlQualifiedName EvaluateName (XPathSequence iter)
+		{
+			XmlQualifiedName name = Name;
+			if (NameExpr != null) {
+				XPathAtomicValue value = Atomize (new ExprSequenceIterator (iter, NameExpr));
+				IXmlNamespaceResolver res = iter.Context.NSResolver;
 
-        private XmlQualifiedName EvaluateName (XPathSequence iter)
-        {
-            XmlQualifiedName name = Name;
-            if (NameExpr != null) {
-                XPathAtomicValue value = Atomize (new ExprSequenceIterator (iter, NameExpr));
-                IXmlNamespaceResolver res = GetNSResolver (iter);
-
-                switch (value.XmlType.TypeCode) {
-                case XmlTypeCode.QName:
-                    name = (XmlQualifiedName) value.ValueAs (typeof (XmlQualifiedName), res);
-                    break;
-                case XmlTypeCode.String:
-                    try {
-                        // nonprefixed attribute name == element's local namespace
-                        if (value.Value.IndexOf (':') < 0)
-                            name = new XmlQualifiedName (value.Value);
-                        else
-                            name = InternalPool.ParseQName (value.Value, res);
-                    } catch (ArgumentException ex) {
-                        // FIXME: add more info
-                        throw new XmlQueryException (String.Format ("The evaluation result of the name expression could not be resolved as a valid QName. Evaluation result string is '{0}'.", value.Value));
-                    }
-                    break;
-                default:
-                    // FIXME: add more info
-                    throw new XmlQueryException ("A name of an attribute constructor must be resolved to either a QName or string.");
-                }
-            }
-            return name;
-        }
+				switch (value.XmlType.TypeCode) {
+				case XmlTypeCode.QName:
+					name = (XmlQualifiedName) value.ValueAs (typeof (XmlQualifiedName), res);
+					break;
+				case XmlTypeCode.String:
+					try {
+						name = InternalPool.ParseQName (value.Value, res);
+					} catch (ArgumentException ex) {
+						// FIXME: add more info
+						throw new XmlQueryException (String.Format ("The evaluation result of the name expression could not be resolved as a valid QName. Evaluation result string is '{0}'.", value.Value));
+					}
+					break;
+				default:
+					// FIXME: add more info
+					throw new XmlQueryException ("A name of an element constructor must be resolved to either a QName or string.");
+				}
+			}
+			return name;
+		}
 #endregion
-    }
+	}
 
-    internal class XmlNSConstructor : XmlConstructorExpr
-    {
-        public XmlNSConstructor (string prefix, ExprSequence content)
-            : base (content)
-        {
-        }
+	internal class XmlAttrConstructor : XmlConstructorExpr
+	{
+		XmlQualifiedName name;
+		ExprSequence nameExpr;
 
-        internal override void CheckReference (XQueryASTCompiler compiler)
-        {
-            Content.CheckReference (compiler);
-        }
+		public XmlAttrConstructor (XmlQualifiedName name, ExprSequence content)
+			: base (content)
+		{
+			this.name = name;
+		}
+
+		public XmlAttrConstructor (ExprSequence name, ExprSequence content)
+			: base (content)
+		{
+			this.nameExpr = name;
+		}
+
+		internal override void CheckReference (XQueryASTCompiler compiler)
+		{
+			if (nameExpr != null)
+				nameExpr.CheckReference (compiler);
+			if (Content != null)
+				Content.CheckReference (compiler);
+		}
 
 #region CompileAndEvaluate
-        internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
-        {
-            if (Content != null)
-                for (int i = 0; i < Content.Count; i++)
-                    Content [i] = Content [i].Compile (compiler);
-            return this;
-        }
+		internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
+		{
+			if (NameExpr != null)
+				for (int i = 0; i < NameExpr.Count; i++)
+					NameExpr [i] = NameExpr [i].Compile (compiler);
+			if (Content != null)
+				for (int i = 0; i < Content.Count; i++)
+					Content [i] = Content [i].Compile (compiler);
+			return this;
+		}
 
-        // FIXME: can be optimized by checking all items in Expr
-        public override SequenceType StaticType {
-            get { return SequenceType.Namespace; }
-        }
+		public XmlQualifiedName Name {
+			get { return name; }
+		}
+		public ExprSequence NameExpr {
+			get { return nameExpr; }
+		}
 
-        public override void Serialize (XPathSequence iter)
-        {
-            // TBD
-            throw new NotImplementedException ();
-        }
+		// FIXME: can be optimized by checking all items in Expr
+		public override SequenceType StaticType {
+			get { return SequenceType.Attribute; }
+		}
 
-        public override XPathSequence Evaluate (XPathSequence iter)
-        {
-            // TBD
-            throw new NotImplementedException ();
-        }
+		public override void Serialize (XPathSequence iter)
+		{
+			XmlQualifiedName name = EvaluateName (iter);
+			XmlWriter w = iter.Context.Writer;
+			w.WriteStartAttribute (GetNSResolver (iter).LookupPrefix (name.Namespace), name.Name, name.Namespace);
+			SerializeContent (iter);
+			w.WriteEndAttribute ();
+		}
+
+		public override XPathSequence Evaluate (XPathSequence iter)
+		{
+			return EvaluateNode (iter, XPathNodeType.Attribute);
+		}
+
+		private XmlQualifiedName EvaluateName (XPathSequence iter)
+		{
+			XmlQualifiedName name = Name;
+			if (NameExpr != null) {
+				XPathAtomicValue value = Atomize (new ExprSequenceIterator (iter, NameExpr));
+				IXmlNamespaceResolver res = GetNSResolver (iter);
+
+				switch (value.XmlType.TypeCode) {
+				case XmlTypeCode.QName:
+					name = (XmlQualifiedName) value.ValueAs (typeof (XmlQualifiedName), res);
+					break;
+				case XmlTypeCode.String:
+					try {
+						// nonprefixed attribute name == element's local namespace
+						if (value.Value.IndexOf (':') < 0)
+							name = new XmlQualifiedName (value.Value);
+						else
+							name = InternalPool.ParseQName (value.Value, res);
+					} catch (ArgumentException ex) {
+						// FIXME: add more info
+						throw new XmlQueryException (String.Format ("The evaluation result of the name expression could not be resolved as a valid QName. Evaluation result string is '{0}'.", value.Value));
+					}
+					break;
+				default:
+					// FIXME: add more info
+					throw new XmlQueryException ("A name of an attribute constructor must be resolved to either a QName or string.");
+				}
+			}
+			return name;
+		}
 #endregion
-    }
+	}
 
-    internal class XmlDocConstructor : XmlConstructorExpr
-    {
-        public XmlDocConstructor (ExprSequence content)
-            : base (content)
-        {
-        }
+	internal class XmlNSConstructor : XmlConstructorExpr
+	{
+		public XmlNSConstructor (string prefix, ExprSequence content)
+			: base (content)
+		{
+		}
 
-        internal override void CheckReference (XQueryASTCompiler compiler)
-        {
-            if (Content != null)
-                Content.CheckReference (compiler);
-        }
+		internal override void CheckReference (XQueryASTCompiler compiler)
+		{
+			Content.CheckReference (compiler);
+		}
 
 #region CompileAndEvaluate
-        internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
-        {
-            if (Content != null)
-                for (int i = 0; i < Content.Count; i++)
-                    Content [i] = Content [i].Compile (compiler);
-            return this;
-        }
+		internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
+		{
+			if (Content != null)
+				for (int i = 0; i < Content.Count; i++)
+					Content [i] = Content [i].Compile (compiler);
+			return this;
+		}
 
-        // FIXME: can be optimized by checking all items in Expr
-        public override SequenceType StaticType {
-            get { return SequenceType.Document; }
-        }
+		// FIXME: can be optimized by checking all items in Expr
+		public override SequenceType StaticType {
+			get { return SequenceType.Namespace; }
+		}
 
-        public override void Serialize (XPathSequence iter)
-        {
-            XmlWriter w = iter.Context.Writer;
-            w.WriteStartDocument ();
-            SerializeContent (iter);
-            w.WriteEndDocument ();
-        }
+		public override void Serialize (XPathSequence iter)
+		{
+			// TBD
+			throw new NotImplementedException ();
+		}
 
-        public override XPathSequence Evaluate (XPathSequence iter)
-        {
-            return EvaluateNode (iter, XPathNodeType.Root);
-        }
+		public override XPathSequence Evaluate (XPathSequence iter)
+		{
+			// TBD
+			throw new NotImplementedException ();
+		}
 #endregion
-    }
+	}
 
-    internal class XmlTextConstructor : XmlConstructorExpr
-    {
-        public XmlTextConstructor (string text)
-            : base (null)
-        {
-            this.text = text;
-        }
+	internal class XmlDocConstructor : XmlConstructorExpr
+	{
+		public XmlDocConstructor (ExprSequence content)
+			: base (content)
+		{
+		}
 
-        public XmlTextConstructor (ExprSequence content)
-            : base (content)
-        {
-        }
-
-        string text;
-
-        public string LiteralText {
-            get { return text; }
-        }
-
-        internal override void CheckReference (XQueryASTCompiler compiler)
-        {
-            if (Content != null)
-                Content.CheckReference (compiler);
-        }
+		internal override void CheckReference (XQueryASTCompiler compiler)
+		{
+			if (Content != null)
+				Content.CheckReference (compiler);
+		}
 
 #region CompileAndEvaluate
-        internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
-        {
-            if (Content != null)
-                for (int i = 0; i < Content.Count; i++)
-                    Content [i] = Content [i].Compile (compiler);
-            return this;
-        }
+		internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
+		{
+			if (Content != null)
+				for (int i = 0; i < Content.Count; i++)
+					Content [i] = Content [i].Compile (compiler);
+			return this;
+		}
 
-        public override SequenceType StaticType {
-            get { return SequenceType.Text; }
-        }
+		// FIXME: can be optimized by checking all items in Expr
+		public override SequenceType StaticType {
+			get { return SequenceType.Document; }
+		}
 
-        public override void Serialize (XPathSequence iter)
-        {
-            if (Content != null)
-                iter.Context.Writer.WriteString (Atomize (new ExprSequenceIterator (iter, Content)).Value);
-            else
-                iter.Context.Writer.WriteString (LiteralText);
-        }
+		public override void Serialize (XPathSequence iter)
+		{
+			XmlWriter w = iter.Context.Writer;
+			w.WriteStartDocument ();
+			SerializeContent (iter);
+			w.WriteEndDocument ();
+		}
 
-        public override XPathSequence Evaluate (XPathSequence iter)
-        {
-            return EvaluateNode (iter);
-        }
+		public override XPathSequence Evaluate (XPathSequence iter)
+		{
+			return EvaluateNode (iter, XPathNodeType.Root);
+		}
 #endregion
-    }
+	}
 
-    internal class XmlCommentConstructor : XmlConstructorExpr
-    {
-        string contentLiteral;
+	internal class XmlTextConstructor : XmlConstructorExpr
+	{
+		public XmlTextConstructor (string text)
+			: base (null)
+		{
+			this.text = text;
+		}
 
-        public XmlCommentConstructor (string content)
-            : base (null)
-        {
-            this.contentLiteral = content;
-        }
+		public XmlTextConstructor (ExprSequence content)
+			: base (content)
+		{
+		}
 
-        public XmlCommentConstructor (ExprSequence content)
-            : base (content)
-        {
-        }
+		string text;
 
-        internal override void CheckReference (XQueryASTCompiler compiler)
-        {
-            if (Content != null)
-                Content.CheckReference (compiler);
-        }
+		public string LiteralText {
+			get { return text; }
+		}
+
+		internal override void CheckReference (XQueryASTCompiler compiler)
+		{
+			if (Content != null)
+				Content.CheckReference (compiler);
+		}
 
 #region CompileAndEvaluate
-        internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
-        {
-            if (Content != null)
-                for (int i = 0; i < Content.Count; i++)
-                    Content [i] = Content [i].Compile (compiler);
-            return this;
-        }
+		internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
+		{
+			if (Content != null)
+				for (int i = 0; i < Content.Count; i++)
+					Content [i] = Content [i].Compile (compiler);
+			return this;
+		}
 
-        // FIXME: can be optimized by checking all items in Expr
-        public override SequenceType StaticType {
-            get { return SequenceType.Comment; }
-        }
+		public override SequenceType StaticType {
+			get { return SequenceType.Text; }
+		}
 
-        public override void Serialize (XPathSequence iter)
-        {
-            iter.Context.Writer.WriteComment (Atomize (new ExprSequenceIterator (iter, Content)).Value);
-        }
+		public override void Serialize (XPathSequence iter)
+		{
+			if (Content != null)
+				iter.Context.Writer.WriteString (Atomize (new ExprSequenceIterator (iter, Content)).Value);
+			else
+				iter.Context.Writer.WriteString (LiteralText);
+		}
 
-        public override XPathSequence Evaluate (XPathSequence iter)
-        {
-            return EvaluateNode (iter);
-        }
+		public override XPathSequence Evaluate (XPathSequence iter)
+		{
+			return EvaluateNode (iter);
+		}
 #endregion
-    }
+	}
 
-    internal class XmlPIConstructor : XmlConstructorExpr
-    {
-        string name;
-        ExprSequence nameExpr;
+	internal class XmlCommentConstructor : XmlConstructorExpr
+	{
+		string contentLiteral;
 
-        string contentLiteral;
+		public XmlCommentConstructor (string content)
+			: base (null)
+		{
+			this.contentLiteral = content;
+		}
 
-        public XmlPIConstructor (string name, string content)
-            : base (null)
-        {
-            this.name = name;
-            this.contentLiteral = content;
-        }
+		public XmlCommentConstructor (ExprSequence content)
+			: base (content)
+		{
+		}
 
-        public XmlPIConstructor (string name, ExprSequence content)
-            : base (content)
-        {
-            this.name = name;
-        }
-
-        public XmlPIConstructor (ExprSequence name, ExprSequence content)
-            : base (content)
-        {
-            this.nameExpr = name;
-        }
-
-        internal override void CheckReference (XQueryASTCompiler compiler)
-        {
-            if (nameExpr != null)
-                nameExpr.CheckReference (compiler);
-            if (Content != null)
-                Content.CheckReference (compiler);
-        }
+		internal override void CheckReference (XQueryASTCompiler compiler)
+		{
+			if (Content != null)
+				Content.CheckReference (compiler);
+		}
 
 #region CompileAndEvaluate
-        internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
-        {
-            if (NameExpr != null)
-                for (int i = 0; i < NameExpr.Count; i++)
-                    NameExpr [i] = NameExpr [i].Compile (compiler);
-            if (Content != null)
-                for (int i = 0; i < Content.Count; i++)
-                    Content [i] = Content [i].Compile (compiler);
-            return this;
-        }
+		internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
+		{
+			if (Content != null)
+				for (int i = 0; i < Content.Count; i++)
+					Content [i] = Content [i].Compile (compiler);
+			return this;
+		}
 
-        public string Name {
-            get { return name; }
-        }
+		// FIXME: can be optimized by checking all items in Expr
+		public override SequenceType StaticType {
+			get { return SequenceType.Comment; }
+		}
 
-        public ExprSequence NameExpr {
-            get { return nameExpr; }
-        }
+		public override void Serialize (XPathSequence iter)
+		{
+			iter.Context.Writer.WriteComment (Atomize (new ExprSequenceIterator (iter, Content)).Value);
+		}
 
-        // FIXME: can be optimized by checking all items in Expr
-        public override SequenceType StaticType {
-            get { return SequenceType.XmlPI; }
-        }
-
-        public override void Serialize (XPathSequence iter)
-        {
-            iter.Context.Writer.WriteProcessingInstruction (
-                GetName (iter),
-                Atomize (new ExprSequenceIterator (iter, Content)).Value);
-        }
-
-        public override XPathSequence Evaluate (XPathSequence iter)
-        {
-            return EvaluateNode (iter);
-        }
-
-        private string GetName (XPathSequence iter)
-        {
-            if (Name != String.Empty)
-                return Name;
-            return Atomize (new ExprSequenceIterator (iter, NameExpr)).Value;
-        }
+		public override XPathSequence Evaluate (XPathSequence iter)
+		{
+			return EvaluateNode (iter);
+		}
 #endregion
-    }
+	}
+
+	internal class XmlPIConstructor : XmlConstructorExpr
+	{
+		string name;
+		ExprSequence nameExpr;
+
+		string contentLiteral;
+
+		public XmlPIConstructor (string name, string content)
+			: base (null)
+		{
+			this.name = name;
+			this.contentLiteral = content;
+		}
+
+		public XmlPIConstructor (string name, ExprSequence content)
+			: base (content)
+		{
+			this.name = name;
+		}
+
+		public XmlPIConstructor (ExprSequence name, ExprSequence content)
+			: base (content)
+		{
+			this.nameExpr = name;
+		}
+
+		internal override void CheckReference (XQueryASTCompiler compiler)
+		{
+			if (nameExpr != null)
+				nameExpr.CheckReference (compiler);
+			if (Content != null)
+				Content.CheckReference (compiler);
+		}
+
+#region CompileAndEvaluate
+		internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
+		{
+			if (NameExpr != null)
+				for (int i = 0; i < NameExpr.Count; i++)
+					NameExpr [i] = NameExpr [i].Compile (compiler);
+			if (Content != null)
+				for (int i = 0; i < Content.Count; i++)
+					Content [i] = Content [i].Compile (compiler);
+			return this;
+		}
+
+		public string Name {
+			get { return name; }
+		}
+
+		public ExprSequence NameExpr {
+			get { return nameExpr; }
+		}
+
+		// FIXME: can be optimized by checking all items in Expr
+		public override SequenceType StaticType {
+			get { return SequenceType.XmlPI; }
+		}
+
+		public override void Serialize (XPathSequence iter)
+		{
+			iter.Context.Writer.WriteProcessingInstruction (
+				GetName (iter),
+				Atomize (new ExprSequenceIterator (iter, Content)).Value);
+		}
+
+		public override XPathSequence Evaluate (XPathSequence iter)
+		{
+			return EvaluateNode (iter);
+		}
+
+		private string GetName (XPathSequence iter)
+		{
+			if (Name != String.Empty)
+				return Name;
+			return Atomize (new ExprSequenceIterator (iter, NameExpr)).Value;
+		}
+#endregion
+	}
 }
 

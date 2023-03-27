@@ -20,11 +20,11 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.Windows.Markup {
-    public interface IReceiveMarkupExtension {
-        void ReceiveMarkupExtension (string property, MarkupExtension markupExtension, IServiceProvider serviceProvider);
-    }
+	public interface IReceiveMarkupExtension {
+		void ReceiveMarkupExtension (string property, MarkupExtension markupExtension, IServiceProvider serviceProvider);
+	}
 }

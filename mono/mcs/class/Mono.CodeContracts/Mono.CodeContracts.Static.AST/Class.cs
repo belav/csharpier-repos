@@ -2,7 +2,7 @@
 // Class.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,36 +31,36 @@ using System.Linq;
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Static.AST {
-    class Class : TypeNode {
-        public Class (TypeDefinition firstOrDefault) : base (firstOrDefault)
-        {
-            NodeType = NodeType.Class;
-        }
+	class Class : TypeNode {
+		public Class (TypeDefinition firstOrDefault) : base (firstOrDefault)
+		{
+			NodeType = NodeType.Class;
+		}
 
-        public IEnumerable<Method> GetMethods (string name, params TypeNode[] args)
-        {
-            IEnumerable<Method> enumerable = Methods.Where (m => m.Name == name);
-            foreach (Method method in enumerable) {
-                List<Parameter> parameters = method.Parameters;
-                bool ok = true;
-                if (args.Length != parameters.Count)
-                    continue;
+		public IEnumerable<Method> GetMethods (string name, params TypeNode[] args)
+		{
+			IEnumerable<Method> enumerable = Methods.Where (m => m.Name == name);
+			foreach (Method method in enumerable) {
+				List<Parameter> parameters = method.Parameters;
+				bool ok = true;
+				if (args.Length != parameters.Count)
+					continue;
 
-                for (int i = 0; i < args.Length; i++) {
-                    if (!parameters [i].Type.Equals (args [i])) {
-                        ok = false;
-                        break;
-                    }
-                }
+				for (int i = 0; i < args.Length; i++) {
+					if (!parameters [i].Type.Equals (args [i])) {
+						ok = false;
+						break;
+					}
+				}
 
-                if (ok)
-                    yield return method;
-            }
-        }
+				if (ok)
+					yield return method;
+			}
+		}
 
-        public Method GetMethod (string name, params TypeNode[] args)
-        {
-            return GetMethods (name, args).FirstOrDefault ();
-        }
-    }
+		public Method GetMethod (string name, params TypeNode[] args)
+		{
+			return GetMethods (name, args).FirstOrDefault ();
+		}
+	}
 }

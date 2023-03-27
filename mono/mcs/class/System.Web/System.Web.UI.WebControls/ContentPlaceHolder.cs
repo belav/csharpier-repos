@@ -34,14 +34,14 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    [ToolboxItemFilterAttribute ("Microsoft.VisualStudio.Web.WebForms.MasterPageWebFormDesigner", ToolboxItemFilterType.Require)]
-    [ToolboxItemFilterAttribute ("System.Web.UI", ToolboxItemFilterType.Allow)]
-    [DesignerAttribute ("System.Web.UI.Design.WebControls.ContentPlaceHolderDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+	[ToolboxItemFilterAttribute ("Microsoft.VisualStudio.Web.WebForms.MasterPageWebFormDesigner", ToolboxItemFilterType.Require)]
+	[ToolboxItemFilterAttribute ("System.Web.UI", ToolboxItemFilterType.Allow)]
+	[DesignerAttribute ("System.Web.UI.Design.WebControls.ContentPlaceHolderDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
                                
-    [ToolboxDataAttribute ("<;{0}:ContentPlaceHolder runat=&quot;server&quot;></{0}:ContentPlaceHolder>")]
-    [ControlBuilder(typeof(ContentPlaceHolderBuilder))] 
-    public class ContentPlaceHolder: Control, INamingContainer, INonBindingContainer
-    {
-    }
+	[ToolboxDataAttribute ("<;{0}:ContentPlaceHolder runat=&quot;server&quot;></{0}:ContentPlaceHolder>")]
+	[ControlBuilder(typeof(ContentPlaceHolderBuilder))] 
+	public class ContentPlaceHolder: Control, INamingContainer, INonBindingContainer
+	{
+	}
 }
 

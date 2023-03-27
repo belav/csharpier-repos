@@ -2,7 +2,7 @@
 // SecurityContextKeyIdentifierClause.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,53 +32,53 @@ using System.Xml;
 
 namespace System.ServiceModel.Security
 {
-    public class SecurityContextKeyIdentifierClause : SecurityKeyIdentifierClause
-    {
-        public SecurityContextKeyIdentifierClause (UniqueId contextId)
-            : this (contextId, new UniqueId ())
-        {
-        }
+	public class SecurityContextKeyIdentifierClause : SecurityKeyIdentifierClause
+	{
+		public SecurityContextKeyIdentifierClause (UniqueId contextId)
+			: this (contextId, new UniqueId ())
+		{
+		}
 
-        public SecurityContextKeyIdentifierClause (UniqueId contextId, UniqueId generation)
-            : this (contextId, generation, null, 0)
-        {
-        }
+		public SecurityContextKeyIdentifierClause (UniqueId contextId, UniqueId generation)
+			: this (contextId, generation, null, 0)
+		{
+		}
 
-        public SecurityContextKeyIdentifierClause (UniqueId contextId, UniqueId generation, byte [] derivationNonce, int derivationLength)
-            : base (null, derivationNonce, derivationLength)
-        {
-            this.context = contextId;
-            this.generation = generation;
-        }
+		public SecurityContextKeyIdentifierClause (UniqueId contextId, UniqueId generation, byte [] derivationNonce, int derivationLength)
+			: base (null, derivationNonce, derivationLength)
+		{
+			this.context = contextId;
+			this.generation = generation;
+		}
 
-        UniqueId context, generation;
+		UniqueId context, generation;
 
-        public UniqueId ContextId {
-            get { return context; }
-        }
+		public UniqueId ContextId {
+			get { return context; }
+		}
 
-        public UniqueId Generation {
-            get { return generation; }
-        }
+		public UniqueId Generation {
+			get { return generation; }
+		}
 
-        public override bool Matches (
-            SecurityKeyIdentifierClause keyIdentifierClause)
-        {
-            SecurityContextKeyIdentifierClause other =
-                keyIdentifierClause as SecurityContextKeyIdentifierClause;
-            return  other != null && Matches (other.context, other.generation);
-        }
+		public override bool Matches (
+			SecurityKeyIdentifierClause keyIdentifierClause)
+		{
+			SecurityContextKeyIdentifierClause other =
+				keyIdentifierClause as SecurityContextKeyIdentifierClause;
+			return  other != null && Matches (other.context, other.generation);
+		}
 
-        public bool Matches (UniqueId contextId, UniqueId generation)
-        {
-            return context == contextId &&
-                this.generation == generation;
-        }
+		public bool Matches (UniqueId contextId, UniqueId generation)
+		{
+			return context == contextId &&
+				this.generation == generation;
+		}
 
-        [MonoTODO]
-        public override string ToString ()
-        {
-            return base.ToString ();
-        }
-    }
+		[MonoTODO]
+		public override string ToString ()
+		{
+			return base.ToString ();
+		}
+	}
 }

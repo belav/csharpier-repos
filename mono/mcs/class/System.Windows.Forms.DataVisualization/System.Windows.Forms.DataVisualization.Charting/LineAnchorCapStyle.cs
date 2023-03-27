@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,12 +27,12 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum LineAnchorCapStyle
-    {
-        None = 0,
-        Arrow = 1,
-        Diamond = 2,
-        Square = 3,
-        Round = 4
-    }
+	public enum LineAnchorCapStyle
+	{
+		None = 0,
+		Arrow = 1,
+		Diamond = 2,
+		Square = 3,
+		Round = 4
+	}
 }

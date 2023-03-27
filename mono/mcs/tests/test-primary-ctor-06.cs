@@ -3,14 +3,14 @@ using System;
 
 class ID () : IDisposable
 {
-    void IDisposable.Dispose ()
-    {
-    }
+	void IDisposable.Dispose ()
+	{
+	}
 }
 
 class X
 {
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }

@@ -1,4 +1,4 @@
-// 
+﻿// 
 // ResourceSet.cs
 //  
 // Author:
@@ -33,34 +33,34 @@ using System.Runtime.CompilerServices;
 
 namespace System.Data.Services.Providers
 {
-    [DebuggerDisplay ("{Name}: {ResourceType}")]
-    public class ResourceSet
-    {
-        public string Name {
-            get; private set;
-        }
+	[DebuggerDisplay ("{Name}: {ResourceType}")]
+	public class ResourceSet
+	{
+		public string Name {
+			get; private set;
+		}
 
-        public ResourceType ResourceType {
-            get; private set;
-        }
+		public ResourceType ResourceType {
+			get; private set;
+		}
 
-        public object CustomState {
-            get; set;
-        }
+		public object CustomState {
+			get; set;
+		}
 
-        public bool IsReadOnly {
-            get; private set;
-        }
+		public bool IsReadOnly {
+			get; private set;
+		}
 
-        public ResourceSet (string name, ResourceType elementType)
-        {
-            this.Name = name;
-            this.ResourceType = elementType;
-        }
+		public ResourceSet (string name, ResourceType elementType)
+		{
+			this.Name = name;
+			this.ResourceType = elementType;
+		}
 
-        public void SetReadOnly ()
-        {
-            IsReadOnly = true;
-        }
-    }
+		public void SetReadOnly ()
+		{
+			IsReadOnly = true;
+		}
+	}
 }

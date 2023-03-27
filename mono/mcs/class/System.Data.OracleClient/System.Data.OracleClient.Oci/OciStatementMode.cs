@@ -18,8 +18,8 @@
 using System;
 
 namespace System.Data.OracleClient.Oci {
-    internal enum OciStatementMode {
-        Default = 0x00,
-        NoSharing = 0x01
-    }
+	internal enum OciStatementMode {
+		Default = 0x00,
+		NoSharing = 0x01
+	}
 }

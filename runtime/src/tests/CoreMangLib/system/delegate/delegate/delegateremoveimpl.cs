@@ -83,9 +83,9 @@ namespace DelegateTest
             {
                 DelegateRemoveImpl delctor = new DelegateRemoveImpl();
                 TestClass tcInstance = new TestClass();
-        booldelegate bStartWork_Bool = new booldelegate(tcInstance.StartWork_Bool);
-        booldelegate bWorking_Bool   = new booldelegate(tcInstance.Working_Bool);
-        booldelegate bCompleted_Bool = new booldelegate(tcInstance.Completed_Bool);
+		booldelegate bStartWork_Bool = new booldelegate(tcInstance.StartWork_Bool);
+		booldelegate bWorking_Bool   = new booldelegate(tcInstance.Working_Bool);
+		booldelegate bCompleted_Bool = new booldelegate(tcInstance.Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bWorking_Bool;
@@ -123,32 +123,32 @@ namespace DelegateTest
             try
             {
                 DelegateRemoveImpl delctor = new DelegateRemoveImpl();
-        booldelegate bStartWork_Bool = new booldelegate(new TestClass().StartWork_Bool);
-        booldelegate bWorking_Bool   = new booldelegate(new TestClass().Working_Bool);
-        booldelegate bCompleted_Bool = new booldelegate(new TestClass().Completed_Bool);
-        booldelegate bOther_bool = new booldelegate(TestClass1.Other_Bool);
+		booldelegate bStartWork_Bool = new booldelegate(new TestClass().StartWork_Bool);
+		booldelegate bWorking_Bool   = new booldelegate(new TestClass().Working_Bool);
+		booldelegate bCompleted_Bool = new booldelegate(new TestClass().Completed_Bool);
+		booldelegate bOther_bool = new booldelegate(TestClass1.Other_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bWorking_Bool;
                 delctor.starkWork += bCompleted_Bool;
-        Delegate[] beforeList = delctor.starkWork.GetInvocationList();
+		Delegate[] beforeList = delctor.starkWork.GetInvocationList();
                 delctor.starkWork -= bOther_bool;
-        Delegate[] afterList = delctor.starkWork.GetInvocationList();
-        if (beforeList.Length != afterList.Length)
+		Delegate[] afterList = delctor.starkWork.GetInvocationList();
+		if (beforeList.Length != afterList.Length)
                  {
                     TestLibrary.TestFramework.LogError("006",
-        String.Format("Remove changed invocation list length from {0} to {1}", beforeList.Length,
-        afterList.Length));
+		String.Format("Remove changed invocation list length from {0} to {1}", beforeList.Length,
+		afterList.Length));
                     retVal = false;
                 } else {
-        for (int i=0; i<beforeList.Length; i++)
-            if (!beforeList[i].Equals(afterList[i]))
-            {
-            TestLibrary.TestFramework.LogError("006a", String.Format(
-             "Invocation lists differ at element {0}", i));
-            retVal=false;
-            }
-        }
+		for (int i=0; i<beforeList.Length; i++)
+			if (!beforeList[i].Equals(afterList[i]))
+			{
+			TestLibrary.TestFramework.LogError("006a", String.Format(
+			 "Invocation lists differ at element {0}", i));
+			retVal=false;
+			}
+		}
                 delctor.starkWork();
             }
             catch (Exception e)
@@ -171,9 +171,9 @@ namespace DelegateTest
             {
                 DelegateRemoveImpl delctor = new DelegateRemoveImpl();
                 TestClass tcInstance = new TestClass();
-        booldelegate bStartWork_Bool = new booldelegate(tcInstance.StartWork_Bool);
-        booldelegate bWorking_Bool   = new booldelegate(tcInstance.Working_Bool);
-        booldelegate bCompleted_Bool = new booldelegate(tcInstance.Completed_Bool);
+		booldelegate bStartWork_Bool = new booldelegate(tcInstance.StartWork_Bool);
+		booldelegate bWorking_Bool   = new booldelegate(tcInstance.Working_Bool);
+		booldelegate bCompleted_Bool = new booldelegate(tcInstance.Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bStartWork_Bool;
@@ -213,9 +213,9 @@ namespace DelegateTest
             try
             {
                 DelegateRemoveImpl delctor = new DelegateRemoveImpl();
-        booldelegate bStartWork_Bool = new booldelegate(TestClass1.StartWork_Bool);
-        booldelegate bWorking_Bool   = new booldelegate(TestClass1.Working_Bool);
-        booldelegate bCompleted_Bool = new booldelegate(TestClass1.Completed_Bool);
+		booldelegate bStartWork_Bool = new booldelegate(TestClass1.StartWork_Bool);
+		booldelegate bWorking_Bool   = new booldelegate(TestClass1.Working_Bool);
+		booldelegate bCompleted_Bool = new booldelegate(TestClass1.Completed_Bool);
 
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bStartWork_Bool;
@@ -282,10 +282,10 @@ namespace DelegateTest
             TestLibrary.TestFramework.LogInformation("Completed_Bool method  is running .");
             return true;
         }
-    public static bool Other_Bool()
-    {
+	public static bool Other_Bool()
+	{
             TestLibrary.TestFramework.LogInformation("Other_Bool method  is running .");
-        return true;
-    }
+	    return true;
+	}
     }
 }

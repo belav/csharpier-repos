@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
@@ -28,13 +28,13 @@
 
 namespace System.Windows.Forms {
 
-    [Flags]
-    public enum ButtonState {
-        Normal        = 0x00000000,
-        Inactive    = 0x00000100,
-        Pushed        = 0x00000200,
-        Checked        = 0x00000400,
-        Flat        = 0x00004000,
-        All        = 0x00004700
-    }
+	[Flags]
+	public enum ButtonState {
+		Normal		= 0x00000000,
+		Inactive	= 0x00000100,
+		Pushed		= 0x00000200,
+		Checked		= 0x00000400,
+		Flat		= 0x00004000,
+		All		= 0x00004700
+	}
 }

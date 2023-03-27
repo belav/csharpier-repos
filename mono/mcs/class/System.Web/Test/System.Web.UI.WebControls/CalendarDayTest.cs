@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.CalendarDay.cs
 //
 // Author:
-//    Jordi Mas i Hernandez (jordi@ximian.com)
+//	Jordi Mas i Hernandez (jordi@ximian.com)
 //
 
 //
@@ -41,32 +41,32 @@ using System.Globalization;
 namespace MonoTests.System.Web.UI.WebControls
 {
 
-    [TestFixture]
-    public class CalendarDayTest {
+	[TestFixture]
+	public class CalendarDayTest {
 
-        CalendarDay calDay = new CalendarDay (DateTime.Today, true, false, true, false, "10");
+		CalendarDay calDay = new CalendarDay (DateTime.Today, true, false, true, false, "10");
 
-        [Test]
-        public void CalendarDay_Constructor ()
-        {
-            Assert.AreEqual (DateTime.Today, calDay.Date, "A1");
-            Assert.AreEqual ("10", calDay.DayNumberText, "A2");
-            Assert.AreEqual (false, calDay.IsOtherMonth, "A3");
-            Assert.AreEqual (false, calDay.IsSelectable, "A4"); // Default value
-            Assert.AreEqual (true, calDay.IsSelected, "A5");
-            Assert.AreEqual (false, calDay.IsToday, "A6");
-            Assert.AreEqual (true, calDay.IsWeekend, "A7");            
-        }
+		[Test]
+		public void CalendarDay_Constructor ()
+		{
+			Assert.AreEqual (DateTime.Today, calDay.Date, "A1");
+			Assert.AreEqual ("10", calDay.DayNumberText, "A2");
+			Assert.AreEqual (false, calDay.IsOtherMonth, "A3");
+			Assert.AreEqual (false, calDay.IsSelectable, "A4"); // Default value
+			Assert.AreEqual (true, calDay.IsSelected, "A5");
+			Assert.AreEqual (false, calDay.IsToday, "A6");
+			Assert.AreEqual (true, calDay.IsWeekend, "A7");			
+		}
 
-        [Test]
-        public void IsSelectableProperty ()
-        {
-            calDay.IsSelectable = true;
-            Assert.AreEqual (true, calDay.IsSelectable, "A1");                        
-        }
+		[Test]
+		public void IsSelectableProperty ()
+		{
+			calDay.IsSelectable = true;
+			Assert.AreEqual (true, calDay.IsSelectable, "A1");						
+		}
 
-        
-    }
+		
+	}
 }
 
 

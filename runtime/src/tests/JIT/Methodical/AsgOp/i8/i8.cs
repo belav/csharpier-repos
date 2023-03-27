@@ -679,7 +679,7 @@ public class test
         if (x != -6)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f00    x = x + y failed.");
+            Console.WriteLine("f00	x = x + y failed.");
             Console.WriteLine("x: {0}, \texpected: -6", x);
             pass = false;
         }
@@ -688,7 +688,7 @@ public class test
         if (x != -14)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f01    x = x - y failed.");
+            Console.WriteLine("f01	x = x - y failed.");
             Console.WriteLine("x: {0}, \texpected: -14", x);
             pass = false;
         }
@@ -697,7 +697,7 @@ public class test
         if (x != -40)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f02    x = x * y failed.");
+            Console.WriteLine("f02	x = x * y failed.");
             Console.WriteLine("x: {0}, \texpected: -40", x);
             pass = false;
         }
@@ -706,7 +706,7 @@ public class test
         if (x != -2)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f03    x = x / y failed.");
+            Console.WriteLine("f03	x = x / y failed.");
             Console.WriteLine("x: {0}, \texpected: -2", x);
             pass = false;
         }
@@ -715,7 +715,7 @@ public class test
         if (x != -2)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f04    x = x % y failed.");
+            Console.WriteLine("f04	x = x % y failed.");
             Console.WriteLine("x: {0}, \texpected: -2", x);
             pass = false;
         }
@@ -724,7 +724,7 @@ public class test
         if (x != -160)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f05    x = x << y failed.");
+            Console.WriteLine("f05	x = x << y failed.");
             Console.WriteLine("x: {0}, \texpected: -160", x);
             pass = false;
         }
@@ -733,7 +733,7 @@ public class test
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f06    x = x >> y failed.");
+            Console.WriteLine("f06	x = x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
@@ -742,7 +742,7 @@ public class test
         if (x != 4)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f07    x = x & y failed.");
+            Console.WriteLine("f07	x = x & y failed.");
             Console.WriteLine("x: {0}, \texpected: 4", x);
             pass = false;
         }
@@ -751,7 +751,7 @@ public class test
         if (x != -14)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f08    x = x ^ y failed.");
+            Console.WriteLine("f08	x = x ^ y failed.");
             Console.WriteLine("x: {0}, \texpected: -14", x);
             pass = false;
         }
@@ -760,7 +760,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f09    x = x | y failed.");
+            Console.WriteLine("f09	x = x | y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -769,7 +769,7 @@ public class test
         if (x != -16)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f10    x += x + y failed.");
+            Console.WriteLine("f10	x += x + y failed.");
             Console.WriteLine("x: {0}, \texpected: -16", x);
             pass = false;
         }
@@ -778,7 +778,7 @@ public class test
         if (x != -24)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f11    x += x - y failed.");
+            Console.WriteLine("f11	x += x - y failed.");
             Console.WriteLine("x: {0}, \texpected: -24", x);
             pass = false;
         }
@@ -787,7 +787,7 @@ public class test
         if (x != -50)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f12    x += x * y failed.");
+            Console.WriteLine("f12	x += x * y failed.");
             Console.WriteLine("x: {0}, \texpected: -50", x);
             pass = false;
         }
@@ -796,7 +796,7 @@ public class test
         if (x != -12)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f13    x += x / y failed.");
+            Console.WriteLine("f13	x += x / y failed.");
             Console.WriteLine("x: {0}, \texpected: -12", x);
             pass = false;
         }
@@ -805,7 +805,7 @@ public class test
         if (x != -12)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f14    x += x % y failed.");
+            Console.WriteLine("f14	x += x % y failed.");
             Console.WriteLine("x: {0}, \texpected: -12", x);
             pass = false;
         }
@@ -814,7 +814,7 @@ public class test
         if (x != -170)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f15    x += x << y failed.");
+            Console.WriteLine("f15	x += x << y failed.");
             Console.WriteLine("x: {0}, \texpected: -170", x);
             pass = false;
         }
@@ -823,7 +823,7 @@ public class test
         if (x != -11)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f16    x += x >> y failed.");
+            Console.WriteLine("f16	x += x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: -11", x);
             pass = false;
         }
@@ -832,7 +832,7 @@ public class test
         if (x != -6)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f17    x += x & y failed.");
+            Console.WriteLine("f17	x += x & y failed.");
             Console.WriteLine("x: {0}, \texpected: -6", x);
             pass = false;
         }
@@ -841,7 +841,7 @@ public class test
         if (x != -24)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f18    x += x ^ y failed.");
+            Console.WriteLine("f18	x += x ^ y failed.");
             Console.WriteLine("x: {0}, \texpected: -24", x);
             pass = false;
         }
@@ -850,7 +850,7 @@ public class test
         if (x != -20)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f19    x += x | y failed.");
+            Console.WriteLine("f19	x += x | y failed.");
             Console.WriteLine("x: {0}, \texpected: -20", x);
             pass = false;
         }
@@ -859,7 +859,7 @@ public class test
         if (x != -4)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f20    x -= x + y failed.");
+            Console.WriteLine("f20	x -= x + y failed.");
             Console.WriteLine("x: {0}, \texpected: -4", x);
             pass = false;
         }
@@ -868,7 +868,7 @@ public class test
         if (x != 4)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f21    x -= x - y failed.");
+            Console.WriteLine("f21	x -= x - y failed.");
             Console.WriteLine("x: {0}, \texpected: 4", x);
             pass = false;
         }
@@ -877,7 +877,7 @@ public class test
         if (x != 30)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f22    x -= x * y failed.");
+            Console.WriteLine("f22	x -= x * y failed.");
             Console.WriteLine("x: {0}, \texpected: 30", x);
             pass = false;
         }
@@ -886,7 +886,7 @@ public class test
         if (x != -8)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f23    x -= x / y failed.");
+            Console.WriteLine("f23	x -= x / y failed.");
             Console.WriteLine("x: {0}, \texpected: -8", x);
             pass = false;
         }
@@ -895,7 +895,7 @@ public class test
         if (x != -8)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f24    x -= x % y failed.");
+            Console.WriteLine("f24	x -= x % y failed.");
             Console.WriteLine("x: {0}, \texpected: -8", x);
             pass = false;
         }
@@ -904,7 +904,7 @@ public class test
         if (x != 150)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f25    x -= x << y failed.");
+            Console.WriteLine("f25	x -= x << y failed.");
             Console.WriteLine("x: {0}, \texpected: 150", x);
             pass = false;
         }
@@ -913,7 +913,7 @@ public class test
         if (x != -9)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f26    x -= x >> y failed.");
+            Console.WriteLine("f26	x -= x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: -9", x);
             pass = false;
         }
@@ -922,7 +922,7 @@ public class test
         if (x != -14)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f27    x -= x & y failed.");
+            Console.WriteLine("f27	x -= x & y failed.");
             Console.WriteLine("x: {0}, \texpected: -14", x);
             pass = false;
         }
@@ -931,7 +931,7 @@ public class test
         if (x != 4)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f28    x -= x ^ y failed.");
+            Console.WriteLine("f28	x -= x ^ y failed.");
             Console.WriteLine("x: {0}, \texpected: 4", x);
             pass = false;
         }
@@ -940,7 +940,7 @@ public class test
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f29    x -= x | y failed.");
+            Console.WriteLine("f29	x -= x | y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
@@ -949,7 +949,7 @@ public class test
         if (x != 60)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f30    x *= x + y failed.");
+            Console.WriteLine("f30	x *= x + y failed.");
             Console.WriteLine("x: {0}, \texpected: 60", x);
             pass = false;
         }
@@ -958,7 +958,7 @@ public class test
         if (x != 140)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f31    x *= x - y failed.");
+            Console.WriteLine("f31	x *= x - y failed.");
             Console.WriteLine("x: {0}, \texpected: 140", x);
             pass = false;
         }
@@ -967,7 +967,7 @@ public class test
         if (x != 400)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f32    x *= x * y failed.");
+            Console.WriteLine("f32	x *= x * y failed.");
             Console.WriteLine("x: {0}, \texpected: 400", x);
             pass = false;
         }
@@ -976,7 +976,7 @@ public class test
         if (x != 20)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f33    x *= x / y failed.");
+            Console.WriteLine("f33	x *= x / y failed.");
             Console.WriteLine("x: {0}, \texpected: 20", x);
             pass = false;
         }
@@ -985,7 +985,7 @@ public class test
         if (x != 20)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f34    x *= x % y failed.");
+            Console.WriteLine("f34	x *= x % y failed.");
             Console.WriteLine("x: {0}, \texpected: 20", x);
             pass = false;
         }
@@ -994,7 +994,7 @@ public class test
         if (x != 1600)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f35    x *= x << y failed.");
+            Console.WriteLine("f35	x *= x << y failed.");
             Console.WriteLine("x: {0}, \texpected: 1600", x);
             pass = false;
         }
@@ -1003,7 +1003,7 @@ public class test
         if (x != 10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f36    x *= x >> y failed.");
+            Console.WriteLine("f36	x *= x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: 10", x);
             pass = false;
         }
@@ -1012,7 +1012,7 @@ public class test
         if (x != -40)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f37    x *= x & y failed.");
+            Console.WriteLine("f37	x *= x & y failed.");
             Console.WriteLine("x: {0}, \texpected: -40", x);
             pass = false;
         }
@@ -1021,7 +1021,7 @@ public class test
         if (x != 140)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f38    x *= x ^ y failed.");
+            Console.WriteLine("f38	x *= x ^ y failed.");
             Console.WriteLine("x: {0}, \texpected: 140", x);
             pass = false;
         }
@@ -1030,7 +1030,7 @@ public class test
         if (x != 100)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f39    x *= x | y failed.");
+            Console.WriteLine("f39	x *= x | y failed.");
             Console.WriteLine("x: {0}, \texpected: 100", x);
             pass = false;
         }
@@ -1039,7 +1039,7 @@ public class test
         if (x != 1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f40    x /= x + y failed.");
+            Console.WriteLine("f40	x /= x + y failed.");
             Console.WriteLine("x: {0}, \texpected: 1", x);
             pass = false;
         }
@@ -1048,7 +1048,7 @@ public class test
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f41    x /= x - y failed.");
+            Console.WriteLine("f41	x /= x - y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
@@ -1057,7 +1057,7 @@ public class test
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f42    x /= x * y failed.");
+            Console.WriteLine("f42	x /= x * y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
@@ -1066,7 +1066,7 @@ public class test
         if (x != 5)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f43    x /= x / y failed.");
+            Console.WriteLine("f43	x /= x / y failed.");
             Console.WriteLine("x: {0}, \texpected: 5", x);
             pass = false;
         }
@@ -1075,7 +1075,7 @@ public class test
         if (x != 5)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f44    x /= x % y failed.");
+            Console.WriteLine("f44	x /= x % y failed.");
             Console.WriteLine("x: {0}, \texpected: 5", x);
             pass = false;
         }
@@ -1084,7 +1084,7 @@ public class test
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f45    x /= x << y failed.");
+            Console.WriteLine("f45	x /= x << y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
@@ -1093,7 +1093,7 @@ public class test
         if (x != 10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f46    x /= x >> y failed.");
+            Console.WriteLine("f46	x /= x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: 10", x);
             pass = false;
         }
@@ -1102,7 +1102,7 @@ public class test
         if (x != -2)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f47    x /= x & y failed.");
+            Console.WriteLine("f47	x /= x & y failed.");
             Console.WriteLine("x: {0}, \texpected: -2", x);
             pass = false;
         }
@@ -1111,7 +1111,7 @@ public class test
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f48    x /= x ^ y failed.");
+            Console.WriteLine("f48	x /= x ^ y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
@@ -1120,7 +1120,7 @@ public class test
         if (x != 1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f49    x /= x | y failed.");
+            Console.WriteLine("f49	x /= x | y failed.");
             Console.WriteLine("x: {0}, \texpected: 1", x);
             pass = false;
         }
@@ -1129,7 +1129,7 @@ public class test
         if (x != -4)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f50    x %= x + y failed.");
+            Console.WriteLine("f50	x %= x + y failed.");
             Console.WriteLine("x: {0}, \texpected: -4", x);
             pass = false;
         }
@@ -1138,7 +1138,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f51    x %= x - y failed.");
+            Console.WriteLine("f51	x %= x - y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1147,7 +1147,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f52    x %= x * y failed.");
+            Console.WriteLine("f52	x %= x * y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1156,7 +1156,7 @@ public class test
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f53    x %= x / y failed.");
+            Console.WriteLine("f53	x %= x / y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
@@ -1165,7 +1165,7 @@ public class test
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f54    x %= x % y failed.");
+            Console.WriteLine("f54	x %= x % y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
@@ -1174,7 +1174,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f55    x %= x << y failed.");
+            Console.WriteLine("f55	x %= x << y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1183,7 +1183,7 @@ public class test
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f56    x %= x >> y failed.");
+            Console.WriteLine("f56	x %= x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
@@ -1192,7 +1192,7 @@ public class test
         if (x != -2)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f57    x %= x & y failed.");
+            Console.WriteLine("f57	x %= x & y failed.");
             Console.WriteLine("x: {0}, \texpected: -2", x);
             pass = false;
         }
@@ -1201,7 +1201,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f58    x %= x ^ y failed.");
+            Console.WriteLine("f58	x %= x ^ y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1210,72 +1210,72 @@ public class test
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f59    x %= x | y failed.");
+            Console.WriteLine("f59	x %= x | y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
 
         /*
-        x = f60(-10, 4);
-        if (x != -671088640)
-        {
-            Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f60    x <<= x + y failed.");
-            Console.WriteLine("x: {0}, \texpected: -671088640", x);
-            pass = false;
-        }
+		x = f60(-10, 4);
+		if (x != -671088640)
+		{
+			Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
+			Console.WriteLine("f60	x <<= x + y failed.");
+			Console.WriteLine("x: {0}, \texpected: -671088640", x);
+			pass = false;
+		}
 
-        x = f61(-10, 4);
-        if (x != -2621440)
-        {
-            Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f61    x <<= x - y failed.");
-            Console.WriteLine("x: {0}, \texpected: -2621440", x);
-            pass = false;
-        }
+		x = f61(-10, 4);
+		if (x != -2621440)
+		{
+			Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
+			Console.WriteLine("f61	x <<= x - y failed.");
+			Console.WriteLine("x: {0}, \texpected: -2621440", x);
+			pass = false;
+		}
 
-        x = f62(-10, 4);
-        if (x != -167772160)
-        {
-            Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f62    x <<= x * y failed.");
-            Console.WriteLine("x: {0}, \texpected: -167772160", x);
-            pass = false;
-        }
+		x = f62(-10, 4);
+		if (x != -167772160)
+		{
+			Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
+			Console.WriteLine("f62	x <<= x * y failed.");
+			Console.WriteLine("x: {0}, \texpected: -167772160", x);
+			pass = false;
+		}
 
-        x = f63(-10, 4);
-        if (x != -2147483648)
-        {
-            Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f63    x <<= x / y failed.");
-            Console.WriteLine("x: {0}, \texpected: -2147483648", x);
-            pass = false;
-        }
+		x = f63(-10, 4);
+		if (x != -2147483648)
+		{
+			Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
+			Console.WriteLine("f63	x <<= x / y failed.");
+			Console.WriteLine("x: {0}, \texpected: -2147483648", x);
+			pass = false;
+		}
 
-        x = f64(-10, 4);
-        if (x != -2147483648)
-        {
-            Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f64    x <<= x % y failed.");
-            Console.WriteLine("x: {0}, \texpected: -2147483648", x);
-            pass = false;
-        }
+		x = f64(-10, 4);
+		if (x != -2147483648)
+		{
+			Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
+			Console.WriteLine("f64	x <<= x % y failed.");
+			Console.WriteLine("x: {0}, \texpected: -2147483648", x);
+			pass = false;
+		}
 
-        x = f65(-10, 4);
-        if (x != -10)
-        {
-            Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f65    x <<= x << y failed.");
-            Console.WriteLine("x: {0}, \texpected: -10", x);
-            pass = false;
-        }
-        */
+		x = f65(-10, 4);
+		if (x != -10)
+		{
+			Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
+			Console.WriteLine("f65	x <<= x << y failed.");
+			Console.WriteLine("x: {0}, \texpected: -10", x);
+			pass = false;
+		}
+		*/
 
         x = f66(-10, 4);
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f66    x <<= x >> y failed.");
+            Console.WriteLine("f66	x <<= x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
@@ -1284,36 +1284,36 @@ public class test
         if (x != -160)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f67    x <<= x & y failed.");
+            Console.WriteLine("f67	x <<= x & y failed.");
             Console.WriteLine("x: {0}, \texpected: -160", x);
             pass = false;
         }
 
         /*
-        x = f68(-10, 4);
-        if (x != -2621440)
-        {
-            Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f68    x <<= x ^ y failed.");
-            Console.WriteLine("x: {0}, \texpected: -2621440", x);
-            pass = false;
-        }
+		x = f68(-10, 4);
+		if (x != -2621440)
+		{
+			Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
+			Console.WriteLine("f68	x <<= x ^ y failed.");
+			Console.WriteLine("x: {0}, \texpected: -2621440", x);
+			pass = false;
+		}
 
-        x = f69(-10, 4);
-        if (x != -41943040)
-        {
-            Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f69    x <<= x | y failed.");
-            Console.WriteLine("x: {0}, \texpected: -41943040", x);
-            pass = false;
-        }
-        */
+		x = f69(-10, 4);
+		if (x != -41943040)
+		{
+			Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
+			Console.WriteLine("f69	x <<= x | y failed.");
+			Console.WriteLine("x: {0}, \texpected: -41943040", x);
+			pass = false;
+		}
+		*/
 
         x = f70(-10, 4);
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f70    x >>= x + y failed.");
+            Console.WriteLine("f70	x >>= x + y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
@@ -1322,7 +1322,7 @@ public class test
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f71    x >>= x - y failed.");
+            Console.WriteLine("f71	x >>= x - y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
@@ -1331,7 +1331,7 @@ public class test
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f72    x >>= x * y failed.");
+            Console.WriteLine("f72	x >>= x * y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
@@ -1340,7 +1340,7 @@ public class test
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f73    x >>= x / y failed.");
+            Console.WriteLine("f73	x >>= x / y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
@@ -1349,27 +1349,27 @@ public class test
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f74    x >>= x % y failed.");
+            Console.WriteLine("f74	x >>= x % y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
 
         /*
-        x = f75(-10, 4);
-        if (x != -10)
-        {
-            Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f75    x >>= x << y failed.");
-            Console.WriteLine("x: {0}, \texpected: -10", x);
-            pass = false;
-        }
-        */
+		x = f75(-10, 4);
+		if (x != -10)
+		{
+			Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
+			Console.WriteLine("f75	x >>= x << y failed.");
+			Console.WriteLine("x: {0}, \texpected: -10", x);
+			pass = false;
+		}
+		*/
 
         x = f76(-10, 4);
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f76    x >>= x >> y failed.");
+            Console.WriteLine("f76	x >>= x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
@@ -1378,7 +1378,7 @@ public class test
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f77    x >>= x & y failed.");
+            Console.WriteLine("f77	x >>= x & y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
@@ -1387,7 +1387,7 @@ public class test
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f78    x >>= x ^ y failed.");
+            Console.WriteLine("f78	x >>= x ^ y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
@@ -1396,7 +1396,7 @@ public class test
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f79    x >>= x | y failed.");
+            Console.WriteLine("f79	x >>= x | y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
@@ -1405,7 +1405,7 @@ public class test
         if (x != -14)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f80    x &= x + y failed.");
+            Console.WriteLine("f80	x &= x + y failed.");
             Console.WriteLine("x: {0}, \texpected: -14", x);
             pass = false;
         }
@@ -1414,7 +1414,7 @@ public class test
         if (x != -14)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f81    x &= x - y failed.");
+            Console.WriteLine("f81	x &= x - y failed.");
             Console.WriteLine("x: {0}, \texpected: -14", x);
             pass = false;
         }
@@ -1423,7 +1423,7 @@ public class test
         if (x != -48)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f82    x &= x * y failed.");
+            Console.WriteLine("f82	x &= x * y failed.");
             Console.WriteLine("x: {0}, \texpected: -48", x);
             pass = false;
         }
@@ -1432,7 +1432,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f83    x &= x / y failed.");
+            Console.WriteLine("f83	x &= x / y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1441,7 +1441,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f84    x &= x % y failed.");
+            Console.WriteLine("f84	x &= x % y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1450,7 +1450,7 @@ public class test
         if (x != -160)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f85    x &= x << y failed.");
+            Console.WriteLine("f85	x &= x << y failed.");
             Console.WriteLine("x: {0}, \texpected: -160", x);
             pass = false;
         }
@@ -1459,7 +1459,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f86    x &= x >> y failed.");
+            Console.WriteLine("f86	x &= x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1468,7 +1468,7 @@ public class test
         if (x != 4)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f87    x &= x & y failed.");
+            Console.WriteLine("f87	x &= x & y failed.");
             Console.WriteLine("x: {0}, \texpected: 4", x);
             pass = false;
         }
@@ -1477,7 +1477,7 @@ public class test
         if (x != -14)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f88    x &= x ^ y failed.");
+            Console.WriteLine("f88	x &= x ^ y failed.");
             Console.WriteLine("x: {0}, \texpected: -14", x);
             pass = false;
         }
@@ -1486,7 +1486,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f89    x &= x | y failed.");
+            Console.WriteLine("f89	x &= x | y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1495,7 +1495,7 @@ public class test
         if (x != 12)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f90    x ^= x + y failed.");
+            Console.WriteLine("f90	x ^= x + y failed.");
             Console.WriteLine("x: {0}, \texpected: 12", x);
             pass = false;
         }
@@ -1504,7 +1504,7 @@ public class test
         if (x != 4)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f91    x ^= x - y failed.");
+            Console.WriteLine("f91	x ^= x - y failed.");
             Console.WriteLine("x: {0}, \texpected: 4", x);
             pass = false;
         }
@@ -1513,7 +1513,7 @@ public class test
         if (x != 46)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f92    x ^= x * y failed.");
+            Console.WriteLine("f92	x ^= x * y failed.");
             Console.WriteLine("x: {0}, \texpected: 46", x);
             pass = false;
         }
@@ -1522,7 +1522,7 @@ public class test
         if (x != 8)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f93    x ^= x / y failed.");
+            Console.WriteLine("f93	x ^= x / y failed.");
             Console.WriteLine("x: {0}, \texpected: 8", x);
             pass = false;
         }
@@ -1531,7 +1531,7 @@ public class test
         if (x != 8)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f94    x ^= x % y failed.");
+            Console.WriteLine("f94	x ^= x % y failed.");
             Console.WriteLine("x: {0}, \texpected: 8", x);
             pass = false;
         }
@@ -1540,7 +1540,7 @@ public class test
         if (x != 150)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f95    x ^= x << y failed.");
+            Console.WriteLine("f95	x ^= x << y failed.");
             Console.WriteLine("x: {0}, \texpected: 150", x);
             pass = false;
         }
@@ -1549,7 +1549,7 @@ public class test
         if (x != 9)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f96    x ^= x >> y failed.");
+            Console.WriteLine("f96	x ^= x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: 9", x);
             pass = false;
         }
@@ -1558,7 +1558,7 @@ public class test
         if (x != -14)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f97    x ^= x & y failed.");
+            Console.WriteLine("f97	x ^= x & y failed.");
             Console.WriteLine("x: {0}, \texpected: -14", x);
             pass = false;
         }
@@ -1567,7 +1567,7 @@ public class test
         if (x != 4)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f98    x ^= x ^ y failed.");
+            Console.WriteLine("f98	x ^= x ^ y failed.");
             Console.WriteLine("x: {0}, \texpected: 4", x);
             pass = false;
         }
@@ -1576,7 +1576,7 @@ public class test
         if (x != 0)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f99    x ^= x | y failed.");
+            Console.WriteLine("f99	x ^= x | y failed.");
             Console.WriteLine("x: {0}, \texpected: 0", x);
             pass = false;
         }
@@ -1585,7 +1585,7 @@ public class test
         if (x != -2)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f100    x |= x + y failed.");
+            Console.WriteLine("f100	x |= x + y failed.");
             Console.WriteLine("x: {0}, \texpected: -2", x);
             pass = false;
         }
@@ -1594,7 +1594,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f101    x |= x - y failed.");
+            Console.WriteLine("f101	x |= x - y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1603,7 +1603,7 @@ public class test
         if (x != -2)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f102    x |= x * y failed.");
+            Console.WriteLine("f102	x |= x * y failed.");
             Console.WriteLine("x: {0}, \texpected: -2", x);
             pass = false;
         }
@@ -1612,7 +1612,7 @@ public class test
         if (x != -2)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f103    x |= x / y failed.");
+            Console.WriteLine("f103	x |= x / y failed.");
             Console.WriteLine("x: {0}, \texpected: -2", x);
             pass = false;
         }
@@ -1621,7 +1621,7 @@ public class test
         if (x != -2)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f104    x |= x % y failed.");
+            Console.WriteLine("f104	x |= x % y failed.");
             Console.WriteLine("x: {0}, \texpected: -2", x);
             pass = false;
         }
@@ -1630,7 +1630,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f105    x |= x << y failed.");
+            Console.WriteLine("f105	x |= x << y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1639,7 +1639,7 @@ public class test
         if (x != -1)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f106    x |= x >> y failed.");
+            Console.WriteLine("f106	x |= x >> y failed.");
             Console.WriteLine("x: {0}, \texpected: -1", x);
             pass = false;
         }
@@ -1648,7 +1648,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f107    x |= x & y failed.");
+            Console.WriteLine("f107	x |= x & y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1657,7 +1657,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f108    x |= x ^ y failed.");
+            Console.WriteLine("f108	x |= x ^ y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }
@@ -1666,7 +1666,7 @@ public class test
         if (x != -10)
         {
             Console.WriteLine("\nInitial parameters: x is -10 and y is 4.");
-            Console.WriteLine("f109    x |= x | y failed.");
+            Console.WriteLine("f109	x |= x | y failed.");
             Console.WriteLine("x: {0}, \texpected: -10", x);
             pass = false;
         }

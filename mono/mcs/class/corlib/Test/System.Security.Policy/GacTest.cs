@@ -2,7 +2,7 @@
 // GacInstalledTest.cs - NUnit Test Cases for GacInstalled
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,59 +35,59 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Policy {
 
-    [TestFixture]
-    public class GacInstalledTest {
+	[TestFixture]
+	public class GacInstalledTest {
 
-        [Test]
-        public void Constructor () 
-        {
-            GacInstalled gac = new GacInstalled ();
-            Assert.IsNotNull (gac);
-        }
+		[Test]
+		public void Constructor () 
+		{
+			GacInstalled gac = new GacInstalled ();
+			Assert.IsNotNull (gac);
+		}
 
-        [Test]
-        public void Copy ()
-        {
-            GacInstalled gac = new GacInstalled ();
-            GacInstalled copy = (GacInstalled)gac.Copy ();
-            Assert.AreEqual (gac, copy, "Equals");
-            Assert.IsFalse (Object.ReferenceEquals (gac, copy), "ReferenceEquals");
-        }
+		[Test]
+		public void Copy ()
+		{
+			GacInstalled gac = new GacInstalled ();
+			GacInstalled copy = (GacInstalled)gac.Copy ();
+			Assert.AreEqual (gac, copy, "Equals");
+			Assert.IsFalse (Object.ReferenceEquals (gac, copy), "ReferenceEquals");
+		}
 
-        [Test]
-        public void CreateIdentityPermission ()
-        {
-            GacInstalled gac = new GacInstalled ();
-            IPermission p = gac.CreateIdentityPermission (null);
-            Assert.IsTrue ((p is GacIdentityPermission), "GacIdentityPermission");
-            Assert.IsNotNull (p, "CreateIdentityPermission(null)");
-            p = gac.CreateIdentityPermission (new Evidence ());
-            Assert.IsNotNull (p, "CreateIdentityPermission(Evidence)");
-        }
+		[Test]
+		public void CreateIdentityPermission ()
+		{
+			GacInstalled gac = new GacInstalled ();
+			IPermission p = gac.CreateIdentityPermission (null);
+			Assert.IsTrue ((p is GacIdentityPermission), "GacIdentityPermission");
+			Assert.IsNotNull (p, "CreateIdentityPermission(null)");
+			p = gac.CreateIdentityPermission (new Evidence ());
+			Assert.IsNotNull (p, "CreateIdentityPermission(Evidence)");
+		}
 
-        [Test]
-        public void Equals ()
-        {
-            GacInstalled gac = new GacInstalled ();
-            Assert.IsFalse (gac.Equals (null), "Equals(null)");
-            GacInstalled g2 = new GacInstalled ();
-            Assert.IsTrue (gac.Equals (g2), "Equals(g2)");
-            Assert.IsTrue (g2.Equals (gac), "Equals(gac)");
-        }
+		[Test]
+		public void Equals ()
+		{
+			GacInstalled gac = new GacInstalled ();
+			Assert.IsFalse (gac.Equals (null), "Equals(null)");
+			GacInstalled g2 = new GacInstalled ();
+			Assert.IsTrue (gac.Equals (g2), "Equals(g2)");
+			Assert.IsTrue (g2.Equals (gac), "Equals(gac)");
+		}
 
-        [Test]
-        public void GetHashCode_ ()
-        {
-            GacInstalled gac = new GacInstalled ();
-            Assert.AreEqual (0, gac.GetHashCode ());
-        }
+		[Test]
+		public void GetHashCode_ ()
+		{
+			GacInstalled gac = new GacInstalled ();
+			Assert.AreEqual (0, gac.GetHashCode ());
+		}
 
-        [Test]
-        public void ToString_ ()
-        {
-            GacInstalled gac = new GacInstalled ();
-            Assert.IsTrue (gac.ToString ().StartsWith ("<System.Security.Policy.GacInstalled version=\"1\"/>"));
-        }
-    }
+		[Test]
+		public void ToString_ ()
+		{
+			GacInstalled gac = new GacInstalled ();
+			Assert.IsTrue (gac.ToString ().StartsWith ("<System.Security.Policy.GacInstalled version=\"1\"/>"));
+		}
+	}
 }
 

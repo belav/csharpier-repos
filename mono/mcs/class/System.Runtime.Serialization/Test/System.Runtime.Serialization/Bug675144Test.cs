@@ -11,20 +11,20 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-    [TestFixture]
-    public partial class Bug675144Test
-    {
-        [Test]
-        public void ServerSerialization ()
-        {
-            var obj = new DataType2 { Items = new List<object> { new DataType1 { Id = "D" }, new DataType1 { Id = "E" } } };
-            var ds = new DataContractSerializer (typeof (DataType2));
-            var sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw))
-                ds.WriteObject (xw, obj);
-            Assert.IsTrue (sw.ToString ().IndexOf ("anyType i:type=\"DataType1\"") > 0, "#1");
-        }
-    }
+	[TestFixture]
+	public partial class Bug675144Test
+	{
+		[Test]
+		public void ServerSerialization ()
+		{
+			var obj = new DataType2 { Items = new List<object> { new DataType1 { Id = "D" }, new DataType1 { Id = "E" } } };
+			var ds = new DataContractSerializer (typeof (DataType2));
+			var sw = new StringWriter ();
+			using (var xw = XmlWriter.Create (sw))
+				ds.WriteObject (xw, obj);
+			Assert.IsTrue (sw.ToString ().IndexOf ("anyType i:type=\"DataType1\"") > 0, "#1");
+		}
+	}
 }
 
 //------------------------------------------------------------------------------

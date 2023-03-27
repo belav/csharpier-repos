@@ -2,10 +2,10 @@
 // System.MonoType
 //
 // Authors: 
-//     Sean MacIsaac (macisaac@ximian.com)
-//     Paolo Molaro (lupus@ximian.com)
-//     Patrik Torstensson (patrik.torstensson@labs2.com)
-//    Gonzalo Paniagua (gonzalo@ximian.com)
+// 	Sean MacIsaac (macisaac@ximian.com)
+// 	Paolo Molaro (lupus@ximian.com)
+// 	Patrik Torstensson (patrik.torstensson@labs2.com)
+//	Gonzalo Paniagua (gonzalo@ximian.com)
 //  Marek Safar (marek.safar@gmail.com)
 //
 // (c) 2001-2003 Ximian, Inc.
@@ -34,12 +34,12 @@
 
 namespace System
 {
-    // Dummy type kept because lots of external code uses
-    // this to check whenever it is running on mono.
-    sealed class MonoType : RuntimeType
-    {
-        private MonoType ()
-        {
-        }
-    }
+	// Dummy type kept because lots of external code uses
+	// this to check whenever it is running on mono.
+	sealed class MonoType : RuntimeType
+	{
+		private MonoType ()
+		{
+		}
+	}
 }

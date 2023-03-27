@@ -2,9 +2,9 @@
 // Line: 11
 
 class X <T> {
-    int T;
+	int T;
 }
 
 class W {
-    static void Main () {}
+	static void Main () {}
 }

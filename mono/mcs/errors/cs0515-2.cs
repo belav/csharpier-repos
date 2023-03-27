@@ -3,9 +3,9 @@
 
 namespace N
 {
-    class G<T> {
-        public static G ()
-        {
-        }
-    }
+	class G<T> {
+		public static G ()
+		{
+		}
+	}
 }

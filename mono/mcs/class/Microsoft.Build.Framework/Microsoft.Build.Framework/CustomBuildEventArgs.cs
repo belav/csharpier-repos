@@ -30,19 +30,19 @@
 using System;
 
 namespace Microsoft.Build.Framework {
-    [Serializable]
-    public abstract class CustomBuildEventArgs : BuildEventArgs {
-    
-        protected CustomBuildEventArgs ()
-        {
-        }
-        
-        protected CustomBuildEventArgs (string message,
-                        string helpKeyword,
-                        string senderName)
-            : base (message, helpKeyword, senderName)
-        {
-        }
-    }
+	[Serializable]
+	public abstract class CustomBuildEventArgs : BuildEventArgs {
+	
+		protected CustomBuildEventArgs ()
+		{
+		}
+		
+		protected CustomBuildEventArgs (string message,
+						string helpKeyword,
+						string senderName)
+			: base (message, helpKeyword, senderName)
+		{
+		}
+	}
 }
 

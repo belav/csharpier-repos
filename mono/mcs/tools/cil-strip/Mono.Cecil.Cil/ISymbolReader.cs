@@ -31,8 +31,8 @@ using System.Collections;
 
 namespace Mono.Cecil.Cil {
 
-    internal interface ISymbolReader : IDisposable {
+	internal interface ISymbolReader : IDisposable {
 
-        void Read (MethodBody body, IDictionary instructions);
-    }
+		void Read (MethodBody body, IDictionary instructions);
+	}
 }

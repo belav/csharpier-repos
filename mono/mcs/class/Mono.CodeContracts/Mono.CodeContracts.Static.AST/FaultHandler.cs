@@ -2,7 +2,7 @@
 // FaultHandler.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,16 +27,16 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    class FaultHandler : Statement {
-        public FaultHandler () : base (NodeType.FaultHandler)
-        {
-        }
+	class FaultHandler : Statement {
+		public FaultHandler () : base (NodeType.FaultHandler)
+		{
+		}
 
-        public FaultHandler (Block block) : this ()
-        {
-            Block = block;
-        }
+		public FaultHandler (Block block) : this ()
+		{
+			Block = block;
+		}
 
-        public Block Block { get; set; }
-    }
+		public Block Block { get; set; }
+	}
 }

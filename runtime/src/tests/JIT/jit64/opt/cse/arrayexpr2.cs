@@ -378,7 +378,7 @@ namespace CseTest
             int v;
 
 #if LOOP
-            do {
+			do {
 #endif
             v = ((((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))) + ((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10])))) - (((a[1] * a[1]) + a[6]) - ((a[2] + a[1]) * a[10])));
             if (v != 57525047)
@@ -396,7 +396,7 @@ namespace CseTest
 
             a[7] = return_int(false, -52);
 #if LOOP
-            for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 10; i++) {
 #endif
             v = (((a[0] + ((a[7] + (a[5] + a[6])) - (a[15] * a[20]))) * (((a[0] + a[1]) + a[6]) - ((a[2] + a[1]) * a[10]))) + ((((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3])))) - (a[6] + ((a[5] + (a[4] * a[5])) - (a[6] * a[7])))));
             if (v != 57338941)
@@ -412,7 +412,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-                try {
+				try {
 #endif
             v = (((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))) + (a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))));
             if (v != 154737)
@@ -421,7 +421,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-                } finally {
+				} finally {
 #endif
             v = ((a[4] + ((a[8] + (a[10] * a[4])) - (a[2] * a[3]))) + ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7]))));
             if (v != 154737)
@@ -430,7 +430,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-                }
+				}
 
 #endif
             v = ((a[6] * ((a[0] + (a[1] * a[2])) - (a[2] * a[3]))) - ((a[2] + (a[4] * a[5])) - (a[6] * a[7])));
@@ -512,7 +512,7 @@ namespace CseTest
 
             a[7] = return_int(false, -52);
 #if LOOP
-            }
+			}
 #endif
 
             a[3] = return_int(false, -56);
@@ -2310,7 +2310,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-            } while (v == 0);
+			} while (v == 0);
 #endif
             Console.WriteLine(ret);
             return ret;

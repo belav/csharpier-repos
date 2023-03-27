@@ -6,9 +6,9 @@ using System;
 
 class X
 {
-    public static void Main ()
-    {
-        int i = 0;
-        var x = i == default (byte?);
-    }
+	public static void Main ()
+	{
+		int i = 0;
+		var x = i == default (byte?);
+	}
 }

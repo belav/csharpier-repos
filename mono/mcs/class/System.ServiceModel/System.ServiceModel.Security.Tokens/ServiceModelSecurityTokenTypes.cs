@@ -2,7 +2,7 @@
 // ServiceModelSecurityTokenTypes.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -30,30 +30,30 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Security.Tokens
 {
-    public static class ServiceModelSecurityTokenTypes
-    {
-        public static string AnonymousSslnego {
-            get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/AnonymousSslnego"; }
-        }
+	public static class ServiceModelSecurityTokenTypes
+	{
+		public static string AnonymousSslnego {
+			get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/AnonymousSslnego"; }
+		}
 
-        public static string MutualSslnego {
-            get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/MutualSslnego"; }
-        }
+		public static string MutualSslnego {
+			get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/MutualSslnego"; }
+		}
 
-        public static string SecureConversation {
-            get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SecureConversation"; }
-        }
+		public static string SecureConversation {
+			get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SecureConversation"; }
+		}
 
-        public static string SecurityContext {
-            get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SecurityContextToken"; }
-        }
+		public static string SecurityContext {
+			get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SecurityContextToken"; }
+		}
 
-        public static string Spnego {
-            get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/Spnego"; }
-        }
+		public static string Spnego {
+			get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/Spnego"; }
+		}
 
-        public static string SspiCredential {
-            get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SspiCredential"; }
-        }
-    }
+		public static string SspiCredential {
+			get { return "http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SspiCredential"; }
+		}
+	}
 }

@@ -5,7 +5,7 @@ interface A {
 }
 
 class B {
-    void A.B () {}
+	void A.B () {}
 
-    static void Main () {}
+	static void Main () {}
 }

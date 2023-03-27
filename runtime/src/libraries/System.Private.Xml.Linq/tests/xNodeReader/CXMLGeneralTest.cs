@@ -1335,32 +1335,32 @@ namespace CoreXml.Test.XLinq
                 public void XmlTextReaderDoesNotThrowWhenHandlingAmpersands()
                 {
                     string xmlStr = @"<a>
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
 &gt;
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
-    fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
+	fffffffffffffffffffffffffffffffffffffff
 &amp;
 </a>
 ";

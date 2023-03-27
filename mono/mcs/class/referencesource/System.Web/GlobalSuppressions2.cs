@@ -1,4 +1,4 @@
-// These suppressions are baselined from upgrading from FxCop 1.36 to FxCop 10.0.
+﻿// These suppressions are baselined from upgrading from FxCop 1.36 to FxCop 10.0.
 
 using System.Diagnostics.CodeAnalysis;
 

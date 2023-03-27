@@ -29,11 +29,11 @@
 //
 
 namespace System.Web.Services.Protocols {
-    [Flags]
-    public enum SoapHeaderDirection {
-        In = 0x1,
-        InOut = 0x3,
-        Out = 0x2,
-        Fault = 0x4
-    }
+	[Flags]
+	public enum SoapHeaderDirection {
+		In = 0x1,
+		InOut = 0x3,
+		Out = 0x2,
+		Fault = 0x4
+	}
 }

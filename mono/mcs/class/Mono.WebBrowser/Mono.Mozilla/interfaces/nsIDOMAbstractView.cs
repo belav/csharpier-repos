@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,25 +32,25 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("F51EBADE-8B1A-11D3-AAE7-0010830123B4")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMAbstractView {
+	[Guid ("F51EBADE-8B1A-11D3-AAE7-0010830123B4")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMAbstractView {
 
 #region nsIDOMAbstractView
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getDocument ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentView ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getDocument ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentView ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMAbstractView {
-        public static nsIDOMAbstractView GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMAbstractView obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMAbstractView).GUID, obj);
-            return o as nsIDOMAbstractView;
-        }
-    }
+	internal class nsDOMAbstractView {
+		public static nsIDOMAbstractView GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMAbstractView obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMAbstractView).GUID, obj);
+			return o as nsIDOMAbstractView;
+		}
+	}
 }

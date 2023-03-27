@@ -1,4 +1,4 @@
-//
+﻿//
 // JavaScriptTypeResolver.cs
 //
 // Author:
@@ -33,11 +33,11 @@ using System.Text;
 
 namespace System.Web.Script.Serialization
 {
-    public abstract class JavaScriptTypeResolver
-    {
-        protected JavaScriptTypeResolver () { }
+	public abstract class JavaScriptTypeResolver
+	{
+		protected JavaScriptTypeResolver () { }
 
-        public abstract Type ResolveType (string id);
-        public abstract string ResolveTypeId (Type type);
-    }
+		public abstract Type ResolveType (string id);
+		public abstract string ResolveTypeId (Type type);
+	}
 }

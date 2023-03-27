@@ -4,8 +4,8 @@
 
 public class Test
 {
-    public static void Main ()
-    {
-        A<ushort>.N1<ushort> a = null;
-    }
+	public static void Main ()
+	{
+		A<ushort>.N1<ushort> a = null;
+	}
 }

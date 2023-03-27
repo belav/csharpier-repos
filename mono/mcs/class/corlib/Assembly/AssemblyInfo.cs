@@ -60,11 +60,11 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyDelaySign (true)]
 #if MOBILE
-    [assembly: AssemblyKeyFile ("../silverlight.pub")]
+	[assembly: AssemblyKeyFile ("../silverlight.pub")]
 #else
-    [assembly: AssemblyKeyFile ("../ecma.pub")]
-    [assembly: ComCompatibleVersion (1, 0, 3300, 0)]
-    [assembly: AllowPartiallyTrustedCallers]
+	[assembly: AssemblyKeyFile ("../ecma.pub")]
+	[assembly: ComCompatibleVersion (1, 0, 3300, 0)]
+	[assembly: AllowPartiallyTrustedCallers]
 #endif
 
 [assembly: AssemblyFileVersion (Consts.FxFileVersion)]

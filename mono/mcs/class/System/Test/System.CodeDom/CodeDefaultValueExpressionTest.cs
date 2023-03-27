@@ -1,9 +1,9 @@
 //
 // CodeDefaultValueExpressionTest.cs
-//    - Unit tests for System.CodeDom.CodeDefaultValueExpression
+//	- Unit tests for System.CodeDom.CodeDefaultValueExpression
 //
 // Author:
-//    Gert Driesen  <drieseng@users.sourceforge.net>
+//	Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,40 +35,40 @@ using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {
-    [TestFixture]
-    public class CodeDefaultValueExpressionTest
-    {
-        [Test]
-        public void Constructor0 ()
-        {
-            CodeDefaultValueExpression cdve = new CodeDefaultValueExpression ();
+	[TestFixture]
+	public class CodeDefaultValueExpressionTest
+	{
+		[Test]
+		public void Constructor0 ()
+		{
+			CodeDefaultValueExpression cdve = new CodeDefaultValueExpression ();
 
-            Assert.IsNotNull (cdve.Type, "#1");
-            Assert.AreEqual (typeof (void).FullName, cdve.Type.BaseType, "#2");
+			Assert.IsNotNull (cdve.Type, "#1");
+			Assert.AreEqual (typeof (void).FullName, cdve.Type.BaseType, "#2");
 
-            cdve.Type = null;
-            Assert.IsNotNull (cdve.Type, "#3");
-            Assert.AreEqual (typeof (void).FullName, cdve.Type.BaseType, "#4");
+			cdve.Type = null;
+			Assert.IsNotNull (cdve.Type, "#3");
+			Assert.AreEqual (typeof (void).FullName, cdve.Type.BaseType, "#4");
 
-            CodeTypeReference type = new CodeTypeReference ("mono");
-            cdve.Type = type;
-            Assert.IsNotNull (cdve.Type, "#5");
-            Assert.AreSame (type, cdve.Type, "#6");
-        }
+			CodeTypeReference type = new CodeTypeReference ("mono");
+			cdve.Type = type;
+			Assert.IsNotNull (cdve.Type, "#5");
+			Assert.AreSame (type, cdve.Type, "#6");
+		}
 
-        [Test]
-        public void Constructor1 () {
-            CodeTypeReference type = new CodeTypeReference ("mono");
+		[Test]
+		public void Constructor1 () {
+			CodeTypeReference type = new CodeTypeReference ("mono");
 
-            CodeDefaultValueExpression cdve = new CodeDefaultValueExpression (type);
+			CodeDefaultValueExpression cdve = new CodeDefaultValueExpression (type);
 
-            Assert.IsNotNull (cdve.Type, "#1");
-            Assert.AreSame (type, cdve.Type, "#2");
+			Assert.IsNotNull (cdve.Type, "#1");
+			Assert.AreSame (type, cdve.Type, "#2");
 
-            cdve = new CodeDefaultValueExpression ((CodeTypeReference) null);
-            Assert.IsNotNull (cdve.Type, "#3");
-            Assert.AreEqual (typeof (void).FullName, cdve.Type.BaseType, "#4");
-        }
-    }
+			cdve = new CodeDefaultValueExpression ((CodeTypeReference) null);
+			Assert.IsNotNull (cdve.Type, "#3");
+			Assert.AreEqual (typeof (void).FullName, cdve.Type.BaseType, "#4");
+		}
+	}
 }
 

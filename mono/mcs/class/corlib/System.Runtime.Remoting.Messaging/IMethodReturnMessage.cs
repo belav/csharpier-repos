@@ -32,15 +32,15 @@
 
 namespace System.Runtime.Remoting.Messaging {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IMethodReturnMessage : IMethodMessage, IMessage {
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IMethodReturnMessage : IMethodMessage, IMessage {
 
-        Exception Exception   { get; }
-        int       OutArgCount { get; }
-        object [] OutArgs     { get; }
-        object    ReturnValue { get; }
+		Exception Exception   { get; }
+		int       OutArgCount { get; }
+		object [] OutArgs     { get; }
+		object    ReturnValue { get; }
 
-        object GetOutArg      (int argNum);
-        string GetOutArgName  (int index);
-    }
+		object GetOutArg      (int argNum);
+		string GetOutArgName  (int index);
+	}
 }

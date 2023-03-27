@@ -1,4 +1,4 @@
-namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc {
     using System.ComponentModel.DataAnnotations;
 
     public class DataAnnotationsModelValidator<TAttribute> : DataAnnotationsModelValidator where TAttribute : ValidationAttribute {

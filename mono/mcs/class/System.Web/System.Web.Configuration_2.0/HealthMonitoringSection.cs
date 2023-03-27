@@ -2,7 +2,7 @@
 // System.Web.Configuration.HealthMonitoringSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,94 +35,94 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class HealthMonitoringSection : ConfigurationSection
-    {
-        static ConfigurationProperty bufferModesProp;
-        static ConfigurationProperty enabledProp;
-        static ConfigurationProperty eventMappingsProp;
-        static ConfigurationProperty heartbeatIntervalProp;
-        static ConfigurationProperty profilesProp;
-        static ConfigurationProperty providersProp;
-        static ConfigurationProperty rulesProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class HealthMonitoringSection : ConfigurationSection
+	{
+		static ConfigurationProperty bufferModesProp;
+		static ConfigurationProperty enabledProp;
+		static ConfigurationProperty eventMappingsProp;
+		static ConfigurationProperty heartbeatIntervalProp;
+		static ConfigurationProperty profilesProp;
+		static ConfigurationProperty providersProp;
+		static ConfigurationProperty rulesProp;
+		static ConfigurationPropertyCollection properties;
 
-        static HealthMonitoringSection ()
-        {
-            bufferModesProp = new ConfigurationProperty ("bufferModes", typeof (BufferModesCollection), null,
-                                     null, PropertyHelper.DefaultValidator,
-                                     ConfigurationPropertyOptions.None);
-            enabledProp = new ConfigurationProperty ("enabled", typeof (bool), true);
-            eventMappingsProp = new ConfigurationProperty ("eventMappings", typeof (EventMappingSettingsCollection), null,
-                                       null, PropertyHelper.DefaultValidator,
-                                       ConfigurationPropertyOptions.None);
-            heartbeatIntervalProp = new ConfigurationProperty ("heartbeatInterval", typeof (TimeSpan), TimeSpan.FromSeconds (0),
-                                       PropertyHelper.TimeSpanSecondsConverter,
-                                       new TimeSpanValidator (TimeSpan.Zero, new TimeSpan (24,30,31,23)),
-                                       ConfigurationPropertyOptions.None);
-            profilesProp = new ConfigurationProperty ("profiles", typeof (ProfileSettingsCollection), null,
-                                  null, PropertyHelper.DefaultValidator,
-                                  ConfigurationPropertyOptions.None);
-            providersProp = new ConfigurationProperty ("providers", typeof (ProviderSettingsCollection), null,
-                                   null, PropertyHelper.DefaultValidator,
-                                   ConfigurationPropertyOptions.None);
-            rulesProp = new ConfigurationProperty ("rules", typeof (RuleSettingsCollection), null,
-                                   null, PropertyHelper.DefaultValidator,
-                                   ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
+		static HealthMonitoringSection ()
+		{
+			bufferModesProp = new ConfigurationProperty ("bufferModes", typeof (BufferModesCollection), null,
+								     null, PropertyHelper.DefaultValidator,
+								     ConfigurationPropertyOptions.None);
+			enabledProp = new ConfigurationProperty ("enabled", typeof (bool), true);
+			eventMappingsProp = new ConfigurationProperty ("eventMappings", typeof (EventMappingSettingsCollection), null,
+								       null, PropertyHelper.DefaultValidator,
+								       ConfigurationPropertyOptions.None);
+			heartbeatIntervalProp = new ConfigurationProperty ("heartbeatInterval", typeof (TimeSpan), TimeSpan.FromSeconds (0),
+									   PropertyHelper.TimeSpanSecondsConverter,
+									   new TimeSpanValidator (TimeSpan.Zero, new TimeSpan (24,30,31,23)),
+									   ConfigurationPropertyOptions.None);
+			profilesProp = new ConfigurationProperty ("profiles", typeof (ProfileSettingsCollection), null,
+								  null, PropertyHelper.DefaultValidator,
+								  ConfigurationPropertyOptions.None);
+			providersProp = new ConfigurationProperty ("providers", typeof (ProviderSettingsCollection), null,
+								   null, PropertyHelper.DefaultValidator,
+								   ConfigurationPropertyOptions.None);
+			rulesProp = new ConfigurationProperty ("rules", typeof (RuleSettingsCollection), null,
+							       null, PropertyHelper.DefaultValidator,
+							       ConfigurationPropertyOptions.None);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (bufferModesProp);
-            properties.Add (enabledProp);
-            properties.Add (eventMappingsProp);
-            properties.Add (heartbeatIntervalProp);
-            properties.Add (profilesProp);
-            properties.Add (providersProp);
-            properties.Add (rulesProp);
-        }
+			properties.Add (bufferModesProp);
+			properties.Add (enabledProp);
+			properties.Add (eventMappingsProp);
+			properties.Add (heartbeatIntervalProp);
+			properties.Add (profilesProp);
+			properties.Add (providersProp);
+			properties.Add (rulesProp);
+		}
 
-        [ConfigurationProperty ("bufferModes")]
-        public BufferModesCollection BufferModes {
-            get { return (BufferModesCollection) base [bufferModesProp];}
-        }
+		[ConfigurationProperty ("bufferModes")]
+		public BufferModesCollection BufferModes {
+			get { return (BufferModesCollection) base [bufferModesProp];}
+		}
 
-        [ConfigurationProperty ("enabled", DefaultValue = "True")]
-        public bool Enabled {
-            get { return (bool) base [enabledProp];}
-            set { base[enabledProp] = value; }
-        }
+		[ConfigurationProperty ("enabled", DefaultValue = "True")]
+		public bool Enabled {
+			get { return (bool) base [enabledProp];}
+			set { base[enabledProp] = value; }
+		}
 
-        [ConfigurationProperty ("eventMappings")]
-        public EventMappingSettingsCollection EventMappings {
-            get { return (EventMappingSettingsCollection) base [eventMappingsProp];}
-        }
+		[ConfigurationProperty ("eventMappings")]
+		public EventMappingSettingsCollection EventMappings {
+			get { return (EventMappingSettingsCollection) base [eventMappingsProp];}
+		}
 
-        [TypeConverter (typeof (TimeSpanSecondsConverter))]
-        [TimeSpanValidator (MinValueString = "00:00:00", MaxValueString = "24.20:31:23")]
-        [ConfigurationProperty ("heartbeatInterval", DefaultValue = "00:00:00")]
-        public TimeSpan HeartbeatInterval {
-            get { return (TimeSpan) base [heartbeatIntervalProp];}
-            set { base[heartbeatIntervalProp] = value; }
-        }
+		[TypeConverter (typeof (TimeSpanSecondsConverter))]
+		[TimeSpanValidator (MinValueString = "00:00:00", MaxValueString = "24.20:31:23")]
+		[ConfigurationProperty ("heartbeatInterval", DefaultValue = "00:00:00")]
+		public TimeSpan HeartbeatInterval {
+			get { return (TimeSpan) base [heartbeatIntervalProp];}
+			set { base[heartbeatIntervalProp] = value; }
+		}
 
-        [ConfigurationProperty ("profiles")]
-        public ProfileSettingsCollection Profiles {
-            get { return (ProfileSettingsCollection) base [profilesProp];}
-        }
+		[ConfigurationProperty ("profiles")]
+		public ProfileSettingsCollection Profiles {
+			get { return (ProfileSettingsCollection) base [profilesProp];}
+		}
 
-        [ConfigurationProperty ("providers")]
-        public ProviderSettingsCollection Providers {
-            get { return (ProviderSettingsCollection) base [providersProp];}
-        }
+		[ConfigurationProperty ("providers")]
+		public ProviderSettingsCollection Providers {
+			get { return (ProviderSettingsCollection) base [providersProp];}
+		}
 
-        [ConfigurationProperty ("rules")]
-        public RuleSettingsCollection Rules {
-            get { return (RuleSettingsCollection) base [rulesProp];}
-        }
+		[ConfigurationProperty ("rules")]
+		public RuleSettingsCollection Rules {
+			get { return (RuleSettingsCollection) base [rulesProp];}
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-    }
+	}
 
 }
 

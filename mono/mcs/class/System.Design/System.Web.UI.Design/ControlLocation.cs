@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ControlLocation
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -31,14 +31,14 @@
 
 namespace System.Web.UI.Design
 {
-    public enum ControlLocation
-    {
-        Before,
-        After,
-        First,
-        Last,
-        FirstChild,
-        LastChild
-    }
+	public enum ControlLocation
+	{
+		Before,
+		After,
+		First,
+		Last,
+		FirstChild,
+		LastChild
+	}
 }
 

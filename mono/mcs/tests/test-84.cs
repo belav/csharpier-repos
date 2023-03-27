@@ -10,13 +10,13 @@
 
 class Ghost {
 
-    public static int Main ()
-    {
-        int Ghost = 0;
-        
-        if (true){
-            Ghost g = null;
-        }
-        return 0;
-    }
+	public static int Main ()
+	{
+		int Ghost = 0;
+		
+		if (true){
+			Ghost g = null;
+		}
+		return 0;
+	}
 }

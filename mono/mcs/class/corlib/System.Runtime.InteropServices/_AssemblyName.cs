@@ -2,8 +2,8 @@
 // System.Runtime.InteropServices._AssemblyName interface
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
-//    Andreas Nahr <ClassDevelopment@A-SoftTech.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
+//	Andreas Nahr <ClassDevelopment@A-SoftTech.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,22 +30,22 @@
 using System.Reflection;
 
 namespace System.Runtime.InteropServices {
-    [ComVisible (true)]
-    [CLSCompliant (false)]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [Guid ("B42B6AAC-317E-34D5-9FA9-093BB4160C50")]
+	[ComVisible (true)]
+	[CLSCompliant (false)]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[Guid ("B42B6AAC-317E-34D5-9FA9-093BB4160C50")]
 #if !FULL_AOT_RUNTIME
-    [TypeLibImportClass (typeof (AssemblyName))]
+	[TypeLibImportClass (typeof (AssemblyName))]
 #endif
-    public interface _AssemblyName {
+	public interface _AssemblyName {
 
-        void GetIDsOfNames ([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+		void GetIDsOfNames ([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
 
-        void GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo);
+		void GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetTypeInfoCount (out uint pcTInfo);
+		void GetTypeInfoCount (out uint pcTInfo);
 
-        void Invoke (uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams,
-            IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
-    }
+		void Invoke (uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams,
+			IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+	}
 }

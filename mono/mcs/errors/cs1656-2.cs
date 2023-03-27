@@ -4,11 +4,11 @@
 
 unsafe class X {
 
-    static int x = 0;
-    static void Main () {
-        fixed (int* p = &x) {
-            p = (int*)22;
-        }
-    }            
+	static int x = 0;
+	static void Main () {
+		fixed (int* p = &x) {
+		    p = (int*)22;
+		}
+	}		    
 }
-    
+	

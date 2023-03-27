@@ -3,7 +3,7 @@
 // assemblies for resources tests
 //
 // Author:
-//    Gary Barnett (gary.barnett.mono@gmail.com)
+//	Gary Barnett (gary.barnett.mono@gmail.com)
 // 
 // Copyright (C) Gary Barnett (2012)
 //

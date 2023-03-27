@@ -1,4 +1,4 @@
-namespace Library2
+﻿namespace Library2
 {
     class Class2
     {

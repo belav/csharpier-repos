@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         public bool TryParseLine(VirtualCharSequence line, [NotNullWhen(true)] out ParsedFrame? parsedFrame)
         {
             // Example line:
-            // ConsoleApp4.dll!ConsoleApp4.MyClass.ThrowAtOne() Line 19    C#
+            // ConsoleApp4.dll!ConsoleApp4.MyClass.ThrowAtOne() Line 19	C#
             //                |--------------------------------|
             //                     Symbol data we care about
             parsedFrame = null;

@@ -4,9 +4,9 @@
 
 public class Test
 {
-    static void Main ()
-    {
-        var e = new[] { null };
-    }
+	static void Main ()
+	{
+		var e = new[] { null };
+	}
 }
 

@@ -5,13 +5,13 @@ using System;
 
 class C
 {
-    void Foo (__arglist)
-    {
-        InstanceArgList (__arglist);
-    }
-    
-    int InstanceArgList (__arglist)
-    {
-        return 54;
-    }
+	void Foo (__arglist)
+	{
+		InstanceArgList (__arglist);
+	}
+	
+	int InstanceArgList (__arglist)
+	{
+		return 54;
+	}
 }

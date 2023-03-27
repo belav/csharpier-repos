@@ -2,7 +2,7 @@
 // SspiSecurityTokenProvider.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -35,37 +35,37 @@ using System.ServiceModel.Security.Tokens;
 // mhm, why is this class not in S.SM.S.Tokens??
 namespace System.ServiceModel.Security
 {
-    // Anyways we won't support SSPI until it becomes open.
-    public class SspiSecurityTokenProvider : SecurityTokenProvider
-    {
-        [MonoTODO]
-        public SspiSecurityTokenProvider (NetworkCredential credential,
-            bool extractGroupsForWindowsAccounts,
-            bool allowUnauthenticatedCallers)
-        {
-            throw new NotImplementedException ();
-        }
+	// Anyways we won't support SSPI until it becomes open.
+	public class SspiSecurityTokenProvider : SecurityTokenProvider
+	{
+		[MonoTODO]
+		public SspiSecurityTokenProvider (NetworkCredential credential,
+			bool extractGroupsForWindowsAccounts,
+			bool allowUnauthenticatedCallers)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public SspiSecurityTokenProvider (NetworkCredential credential, 
-            bool allowNtlm, TokenImpersonationLevel impersonationLevel)
-        {
-            if (credential == null)
-                throw new ArgumentNullException ("credential");
-            this.credential = credential;
-            allow_ntlm = allowNtlm;
-            impersonation_level = impersonationLevel;
-        }
+		public SspiSecurityTokenProvider (NetworkCredential credential, 
+			bool allowNtlm, TokenImpersonationLevel impersonationLevel)
+		{
+			if (credential == null)
+				throw new ArgumentNullException ("credential");
+			this.credential = credential;
+			allow_ntlm = allowNtlm;
+			impersonation_level = impersonationLevel;
+		}
 
-        NetworkCredential credential;
-        bool allow_ntlm;
-        TokenImpersonationLevel impersonation_level;
+		NetworkCredential credential;
+		bool allow_ntlm;
+		TokenImpersonationLevel impersonation_level;
 
-        // SecurityTokenProvider
+		// SecurityTokenProvider
 
-        [MonoTODO]
-        protected override SecurityToken GetTokenCore (TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected override SecurityToken GetTokenCore (TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

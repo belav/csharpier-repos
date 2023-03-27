@@ -5,13 +5,13 @@ using System;
 
 static class C
 {
-    static void Main ()
-    {
-        int i = 1;
-        Action a = i.Foo;
-    }
+	static void Main ()
+	{
+		int i = 1;
+		Action a = i.Foo;
+	}
 
-    static void Foo (this string s)
-    {
-    }
+	static void Foo (this string s)
+	{
+	}
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
@@ -29,18 +29,18 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
 
-    [FlagsAttribute()]
-    [ComVisibleAttribute(true)]
-    public enum DataGridViewElementStates {
-        None = 0,
-        Displayed = 1,
-        Frozen = 2,
-        ReadOnly = 4,
-        Resizable = 8,
-        ResizableSet = 16,
-        Selected = 32,
-        Visible = 64
-    }
+	[FlagsAttribute()]
+	[ComVisibleAttribute(true)]
+	public enum DataGridViewElementStates {
+		None = 0,
+		Displayed = 1,
+		Frozen = 2,
+		ReadOnly = 4,
+		Resizable = 8,
+		ResizableSet = 16,
+		Selected = 32,
+		Visible = 64
+	}
 
 }
 

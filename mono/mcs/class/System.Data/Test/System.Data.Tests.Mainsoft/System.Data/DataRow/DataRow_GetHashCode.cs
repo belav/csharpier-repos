@@ -39,57 +39,57 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRow_GetHashCode : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRow_GetHashCode tc = new DataRow_GetHashCode();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRow_GetHashCode");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRow_GetHashCode tc = new DataRow_GetHashCode();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRow_GetHashCode");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        
-        int iHashCode;
-        DataRow dr;
-        DataTable dt = new DataTable();
-        dr = dt.NewRow();
+	public void run()
+	{
+		Exception exp = null;
+		
+		int iHashCode;
+		DataRow dr;
+		DataTable dt = new DataTable();
+		dr = dt.NewRow();
 
-        iHashCode = dr.GetHashCode();
-        for (int i=0; i<10; i++)
-        {    //must return the same value each time
+		iHashCode = dr.GetHashCode();
+		for (int i=0; i<10; i++)
+		{	//must return the same value each time
             try
-            {
-                BeginCase("GetHashCode #" + i);
-                Compare( iHashCode , dr.GetHashCode() );
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        }
-    }
+			{
+				BeginCase("GetHashCode #" + i);
+				Compare( iHashCode , dr.GetHashCode() );
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		}
+	}
 }
 }

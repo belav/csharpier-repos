@@ -2,7 +2,7 @@
 // IContractProvider.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,15 +30,15 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.AST.Visitors;
 
 namespace Mono.CodeContracts.Static.Providers {
-    interface IContractProvider {
-        bool VerifyMethod (Method method, bool analyzeNonUserCode);
+	interface IContractProvider {
+		bool VerifyMethod (Method method, bool analyzeNonUserCode);
 
-        bool HasRequires (Method method);
-        Result AccessRequires<Data, Result> (Method method, ICodeConsumer<Data, Result> consumer, Data data);
+		bool HasRequires (Method method);
+		Result AccessRequires<Data, Result> (Method method, ICodeConsumer<Data, Result> consumer, Data data);
 
-        bool HasEnsures (Method method);
-        Result AccessEnsures<Data, Result> (Method method, ICodeConsumer<Data, Result> consumer, Data data);
+		bool HasEnsures (Method method);
+		Result AccessEnsures<Data, Result> (Method method, ICodeConsumer<Data, Result> consumer, Data data);
 
-        bool CanInheritContracts (Method method);
-    }
+		bool CanInheritContracts (Method method);
+	}
 }

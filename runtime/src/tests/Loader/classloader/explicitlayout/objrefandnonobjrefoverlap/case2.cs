@@ -14,7 +14,7 @@ using System;
 using System.Runtime.InteropServices;
 
 public struct Wrapper { public Object o; }
-    
+	
 [ StructLayout( LayoutKind.Explicit )] public struct MyUnion {
   [ FieldOffset( 0 )] public int i;
   [ FieldOffset( 0 )] public Wrapper o;

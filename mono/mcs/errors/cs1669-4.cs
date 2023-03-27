@@ -8,7 +8,7 @@ class C
    public void Test ()
    {
       D d = delegate (__arglist) {
-        return this;
-      };
+		return this;
+	  };
    }
 }

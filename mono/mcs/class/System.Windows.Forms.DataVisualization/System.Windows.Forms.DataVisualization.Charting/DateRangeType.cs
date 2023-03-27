@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,13 +27,13 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum DateRangeType
-    {
-        Year = 0,
-        Month = 1,
-        DayOfWeek = 2,
-        DayOfMonth = 3,
-        Hour = 4,
-        Minute = 5
-    }
+	public enum DateRangeType
+	{
+		Year = 0,
+		Month = 1,
+		DayOfWeek = 2,
+		DayOfMonth = 3,
+		Hour = 4,
+		Minute = 5
+	}
 }

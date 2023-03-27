@@ -23,32 +23,32 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public class RetrieveVirtualItemEventArgs : EventArgs
-    {
-        private ListViewItem item;
-        private int item_index;
+	public class RetrieveVirtualItemEventArgs : EventArgs
+	{
+		private ListViewItem item;
+		private int item_index;
 
-        #region Public Constructors
-        public RetrieveVirtualItemEventArgs (int itemIndex) : base ()
-        {
-            this.item_index = itemIndex;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public RetrieveVirtualItemEventArgs (int itemIndex) : base ()
+		{
+			this.item_index = itemIndex;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public ListViewItem Item {
-            get { return this.item; }
-            set { this.item = value; }
-        }
+		#region Public Instance Properties
+		public ListViewItem Item {
+			get { return this.item; }
+			set { this.item = value; }
+		}
 
-        public int ItemIndex {
-            get { return this.item_index; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public int ItemIndex {
+			get { return this.item_index; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

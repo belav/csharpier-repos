@@ -28,5 +28,5 @@ using System;
 
 namespace System.ServiceModel.Dispatcher
 {
-    public delegate void InstanceContextIdleCallback (InstanceContext instanceContext);
+	public delegate void InstanceContextIdleCallback (InstanceContext instanceContext);
 }

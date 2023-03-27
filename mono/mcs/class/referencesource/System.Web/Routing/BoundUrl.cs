@@ -1,4 +1,4 @@
-namespace System.Web.Routing {
+﻿namespace System.Web.Routing {
     // Represents a URL generated from a ParsedRoute
     internal class BoundUrl {
         public string Url {

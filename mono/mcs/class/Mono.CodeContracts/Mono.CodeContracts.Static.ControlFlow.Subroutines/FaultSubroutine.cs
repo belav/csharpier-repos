@@ -2,7 +2,7 @@
 // FaultSubroutine.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,15 +29,15 @@
 using Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines {
-    class FaultSubroutine<Label, Handler> : FaultFinallySubroutineBase<Label, Handler> {
-        public FaultSubroutine (SubroutineFacade subroutineFacade, Label startLabel,
-                                SubroutineBuilder<Label> builder) : base (subroutineFacade, startLabel, builder)
-        {
-        }
+	class FaultSubroutine<Label, Handler> : FaultFinallySubroutineBase<Label, Handler> {
+		public FaultSubroutine (SubroutineFacade subroutineFacade, Label startLabel,
+		                        SubroutineBuilder<Label> builder) : base (subroutineFacade, startLabel, builder)
+		{
+		}
 
-        public override SubroutineKind Kind
-        {
-            get { return SubroutineKind.Fault; }
-        }
-    }
+		public override SubroutineKind Kind
+		{
+			get { return SubroutineKind.Fault; }
+		}
+	}
 }

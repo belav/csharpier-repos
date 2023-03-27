@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.IMessageReceiver
 //
 // Authors:
-//      Ivan N. Zlatev (contact i-nZ.net)
+//	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006-2007 Ivan N. Zlatev
 
@@ -32,8 +32,8 @@ using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
-    internal interface IMessageReceiver
-    {
-        void WndProc (ref Message m);
-    }
+	internal interface IMessageReceiver
+	{
+		void WndProc (ref Message m);
+	}
 }

@@ -3,9 +3,9 @@
 // Compiler options: -warn:4 -warnaserror
 
 partial struct S {
-    int x;
+	int x;
 }
 partial struct S {
-    int y;
-    static void Main () {}
+	int y;
+	static void Main () {}
 }

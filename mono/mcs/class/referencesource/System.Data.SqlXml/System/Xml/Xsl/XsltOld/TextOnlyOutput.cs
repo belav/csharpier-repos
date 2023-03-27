@@ -22,9 +22,9 @@ namespace System.Xml.Xsl.XsltOld {
             get { return this.processor.Output; }
         }
 
-        public TextWriter Writer {
-            get { return this.writer; }
-        }
+		public TextWriter Writer {
+			get { return this.writer; }
+		}
 
         //
         // Constructor

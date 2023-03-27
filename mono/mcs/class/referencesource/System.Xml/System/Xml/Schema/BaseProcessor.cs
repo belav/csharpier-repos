@@ -139,12 +139,12 @@ namespace System.Xml.Schema {
             XmlSchemaAttributeGroup existingAttGroup = existingObject as XmlSchemaAttributeGroup;
             if (existingAttGroup == attGroup.Redefined) { //attribute group is the redefinition of existingObject
                 if (existingAttGroup.AttributeUses.Count == 0) { //If the existing one is not already compiled, then replace.
-                    table.Insert(attGroup.QualifiedName, attGroup); //Update with redefined entry            
+                    table.Insert(attGroup.QualifiedName, attGroup); //Update with redefined entry			
                     return true;
                 }
             }
             else if (existingAttGroup.Redefined == attGroup) { //Redefined type already exists in the set, original type is added after redefined type, ignore the original type
-        return true;
+		return true;
             }
             return false;
         }
@@ -154,12 +154,12 @@ namespace System.Xml.Schema {
             XmlSchemaGroup existingGroup = existingObject as XmlSchemaGroup;
             if (existingGroup == group.Redefined) { //group is the redefinition of existingObject
                 if (existingGroup.CanonicalParticle == null) { //If the existing one is not already compiled, then replace.
-                    table.Insert(group.QualifiedName, group); //Update with redefined entry            
+                    table.Insert(group.QualifiedName, group); //Update with redefined entry			
                     return true;
                 }
             }
             else if (existingGroup.Redefined == group) { //Redefined type already exists in the set, original type is added after redefined type, ignore the original type
-        return true;
+		return true;
             }
             return false;
         }
@@ -169,12 +169,12 @@ namespace System.Xml.Schema {
             XmlSchemaType existingType = existingObject as XmlSchemaType;
             if (existingType == schemaType.Redefined) { //schemaType is the redefinition of existingObject
                 if (existingType.ElementDecl == null) { //If the existing one is not already compiled, then replace.
-                    table.Insert(schemaType.QualifiedName, schemaType); //Update with redefined entry            
+                    table.Insert(schemaType.QualifiedName, schemaType); //Update with redefined entry			
                     return true;
                 }
             }
             else if (existingType.Redefined == schemaType) { //Redefined type already exists in the set, original type is added after redefined type, ignore the original type
-        return true;
+		return true;
             }
             return false;
         }

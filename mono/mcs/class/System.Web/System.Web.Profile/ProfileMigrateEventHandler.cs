@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.ProfileMigrateEventHandler.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,6 +31,6 @@ using System.Configuration;
 
 namespace System.Web.Profile
 {
-    public delegate void ProfileMigrateEventHandler (object sender, ProfileMigrateEventArgs e);
+	public delegate void ProfileMigrateEventHandler (object sender, ProfileMigrateEventArgs e);
 }
 

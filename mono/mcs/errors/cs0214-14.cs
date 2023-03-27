@@ -4,10 +4,10 @@
 
 public class C
 {
-    unsafe int* i;
-    
-    public static void Main ()
-    {
-        var v = new C().i;
-    }
+	unsafe int* i;
+	
+	public static void Main ()
+	{
+		var v = new C().i;
+	}
 }

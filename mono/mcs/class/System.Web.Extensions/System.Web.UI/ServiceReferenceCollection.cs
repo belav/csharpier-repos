@@ -1,4 +1,4 @@
-//
+﻿//
 // ServiceReferenceCollection.cs
 //
 // Author:
@@ -34,7 +34,7 @@ using System.Collections.ObjectModel;
 
 namespace System.Web.UI
 {
-    public class ServiceReferenceCollection : Collection<ServiceReference>
-    {
-    }
+	public class ServiceReferenceCollection : Collection<ServiceReference>
+	{
+	}
 }

@@ -3,11 +3,11 @@
 
 public class C
 {
-    public void Foo ()
-    {
-            string returnValue = null;
-        
-            returnValue += (1+3)
-            returnValue += ("");                
-    }
+	public void Foo ()
+	{
+			string returnValue = null;
+		
+			returnValue += (1+3)
+			returnValue += ("");				
+	}
 }

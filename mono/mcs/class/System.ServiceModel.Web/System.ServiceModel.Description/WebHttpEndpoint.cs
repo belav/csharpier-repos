@@ -1,6 +1,6 @@
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -35,50 +35,50 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-    [MonoTODO]
-    public class WebHttpEndpoint : WebServiceEndpoint
-    {
-        public WebHttpEndpoint (ContractDescription contract)
-            : this (contract, null)
-        {
-        }
+	[MonoTODO]
+	public class WebHttpEndpoint : WebServiceEndpoint
+	{
+		public WebHttpEndpoint (ContractDescription contract)
+			: this (contract, null)
+		{
+		}
 
-        public WebHttpEndpoint (ContractDescription contract, EndpointAddress address)
-            : base (contract, address)
-        {
-        }
+		public WebHttpEndpoint (ContractDescription contract, EndpointAddress address)
+			: base (contract, address)
+		{
+		}
 
-        WebHttpBehavior wb {
-            get {
-                var b = Behaviors.Find<WebHttpBehavior> ();
-                if (b != null)
-                    return b;
-                throw new InvalidOperationException ("The preset WebHttpBehavior was unexpectedly removed.");
-            }
-        }
+		WebHttpBehavior wb {
+			get {
+				var b = Behaviors.Find<WebHttpBehavior> ();
+				if (b != null)
+					return b;
+				throw new InvalidOperationException ("The preset WebHttpBehavior was unexpectedly removed.");
+			}
+		}
 
-        public bool AutomaticFormatSelectionEnabled {
-            get { return wb.AutomaticFormatSelectionEnabled; }
-            set { wb.AutomaticFormatSelectionEnabled = value; }
-        }
+		public bool AutomaticFormatSelectionEnabled {
+			get { return wb.AutomaticFormatSelectionEnabled; }
+			set { wb.AutomaticFormatSelectionEnabled = value; }
+		}
 
-        public WebMessageFormat DefaultOutgoingResponseFormat {
-            get { return wb.DefaultOutgoingResponseFormat; }
-            set { wb.DefaultOutgoingResponseFormat = value; }
-        }
+		public WebMessageFormat DefaultOutgoingResponseFormat {
+			get { return wb.DefaultOutgoingResponseFormat; }
+			set { wb.DefaultOutgoingResponseFormat = value; }
+		}
 
-        public bool FaultExceptionEnabled {
-            get { return wb.FaultExceptionEnabled; }
-            set { wb.FaultExceptionEnabled = value; }
-        }
+		public bool FaultExceptionEnabled {
+			get { return wb.FaultExceptionEnabled; }
+			set { wb.FaultExceptionEnabled = value; }
+		}
 
-        public bool HelpEnabled {
-            get { return wb.HelpEnabled; }
-            set { wb.HelpEnabled = value; }
-        }
+		public bool HelpEnabled {
+			get { return wb.HelpEnabled; }
+			set { wb.HelpEnabled = value; }
+		}
 
-        protected override Type WebEndpointType {
-            get { throw new NotImplementedException (); }
-        }
-    }
+		protected override Type WebEndpointType {
+			get { throw new NotImplementedException (); }
+		}
+	}
 }

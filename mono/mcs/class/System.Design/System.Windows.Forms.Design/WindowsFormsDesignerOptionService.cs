@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.ShortcutKeysEditor.cs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,21 +34,21 @@ using System.ComponentModel.Design;
 
 namespace System.Windows.Forms.Design
 {
-    public class WindowsFormsDesignerOptionService : DesignerOptionService
-    {
-        public WindowsFormsDesignerOptionService ()
-        {
-        }
+	public class WindowsFormsDesignerOptionService : DesignerOptionService
+	{
+		public WindowsFormsDesignerOptionService ()
+		{
+		}
 
-        public virtual DesignerOptions CompatibilityOptions {
-            get { throw new NotImplementedException (); }
-        }
+		public virtual DesignerOptions CompatibilityOptions {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        protected override void PopulateOptionCollection (DesignerOptionService.DesignerOptionCollection options)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected override void PopulateOptionCollection (DesignerOptionService.DesignerOptionCollection options)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

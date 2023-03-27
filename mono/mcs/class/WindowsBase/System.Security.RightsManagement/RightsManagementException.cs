@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,58 +29,58 @@ using System.Security;
 
 namespace System.Security.RightsManagement {
 
-    [Serializable]
-    public class RightsManagementException : Exception
-    {
-        public RightsManagementException ()
-        {
-            throw new NotImplementedException ();
-        }
+	[Serializable]
+	public class RightsManagementException : Exception
+	{
+		public RightsManagementException ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public RightsManagementException (RightsManagementFailureCode failureCode)
-        {
-            throw new NotImplementedException ();
-        }
+		public RightsManagementException (RightsManagementFailureCode failureCode)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public RightsManagementException (string message)
-        {
-            throw new NotImplementedException ();
-        }
+		public RightsManagementException (string message)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public RightsManagementException (RightsManagementFailureCode failureCode, Exception innerException)
-        {
-            throw new NotImplementedException ();
-        }
+		public RightsManagementException (RightsManagementFailureCode failureCode, Exception innerException)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public RightsManagementException (RightsManagementFailureCode failureCode, string message)
-        {
-            throw new NotImplementedException ();
-        }
+		public RightsManagementException (RightsManagementFailureCode failureCode, string message)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public RightsManagementException (string message, Exception innerException)
-        {
-            throw new NotImplementedException ();
-        }
+		public RightsManagementException (string message, Exception innerException)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public RightsManagementException (RightsManagementFailureCode failureCode, string message, Exception innerException)
-        {
-            throw new NotImplementedException ();
-        }
+		public RightsManagementException (RightsManagementFailureCode failureCode, string message, Exception innerException)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected RightsManagementException (SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		protected RightsManagementException (SerializationInfo info, StreamingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public RightsManagementFailureCode FailureCode {
-            get { throw new NotImplementedException (); }
-        }
+		public RightsManagementFailureCode FailureCode {
+			get { throw new NotImplementedException (); }
+		}
 
-        [SecurityCritical]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[SecurityCritical]
+		public override void GetObjectData (SerializationInfo info, StreamingContext context)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 
 }

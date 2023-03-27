@@ -2,8 +2,8 @@
 // System.Security.Policy.UnionCodeGroup.cs
 //
 // Authors
-//    Duncan Mak (duncan@ximian.com)
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Duncan Mak (duncan@ximian.com)
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -34,85 +34,85 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Policy {
 
-    [Serializable]
-    [ComVisible (true)]
-    public sealed class UnionCodeGroup : CodeGroup {
+	[Serializable]
+	[ComVisible (true)]
+	public sealed class UnionCodeGroup : CodeGroup {
 
-        public UnionCodeGroup (IMembershipCondition membershipCondition, PolicyStatement policy)
-            : base (membershipCondition, policy)
-        {
-        }
+		public UnionCodeGroup (IMembershipCondition membershipCondition, PolicyStatement policy)
+			: base (membershipCondition, policy)
+		{
+		}
 
-        // for PolicyLevel (to avoid validation duplication)
-        internal UnionCodeGroup (SecurityElement e, PolicyLevel level)
-            : base (e, level)
-        {
-        }
+		// for PolicyLevel (to avoid validation duplication)
+		internal UnionCodeGroup (SecurityElement e, PolicyLevel level)
+			: base (e, level)
+		{
+		}
 
-        public override CodeGroup Copy ()
-        {
-            return Copy (true);
-        }
+		public override CodeGroup Copy ()
+		{
+			return Copy (true);
+		}
 
-        internal CodeGroup Copy (bool childs) 
-        {
-            UnionCodeGroup copy = new UnionCodeGroup (MembershipCondition, PolicyStatement);
-            copy.Name = Name;
-            copy.Description = Description;
-            if (childs) {
-                foreach (CodeGroup child in Children) {
-                    copy.AddChild (child.Copy ());
-                }
-            }
-            return copy;
-        }
+		internal CodeGroup Copy (bool childs) 
+		{
+			UnionCodeGroup copy = new UnionCodeGroup (MembershipCondition, PolicyStatement);
+			copy.Name = Name;
+			copy.Description = Description;
+			if (childs) {
+				foreach (CodeGroup child in Children) {
+					copy.AddChild (child.Copy ());
+				}
+			}
+			return copy;
+		}
 
 
-        public override PolicyStatement Resolve (Evidence evidence)
-        {
-            if (evidence == null)
-                throw new ArgumentNullException ("evidence");
+		public override PolicyStatement Resolve (Evidence evidence)
+		{
+			if (evidence == null)
+				throw new ArgumentNullException ("evidence");
 
-             if (!MembershipCondition.Check (evidence))
-                return null;
+ 			if (!MembershipCondition.Check (evidence))
+				return null;
 
-            PermissionSet ps = this.PolicyStatement.PermissionSet.Copy ();
-            if (this.Children.Count > 0) {
-                foreach (CodeGroup child_cg in this.Children) {
-                    PolicyStatement child_pst = child_cg.Resolve (evidence);
-                    if (child_pst != null) {
-                        ps = ps.Union (child_pst.PermissionSet);
-                    }
-                }
-            }
+			PermissionSet ps = this.PolicyStatement.PermissionSet.Copy ();
+			if (this.Children.Count > 0) {
+				foreach (CodeGroup child_cg in this.Children) {
+					PolicyStatement child_pst = child_cg.Resolve (evidence);
+					if (child_pst != null) {
+						ps = ps.Union (child_pst.PermissionSet);
+					}
+				}
+			}
 
-            PolicyStatement pst = this.PolicyStatement.Copy ();
-            pst.PermissionSet = ps;
-            return pst;
-        }
+			PolicyStatement pst = this.PolicyStatement.Copy ();
+			pst.PermissionSet = ps;
+			return pst;
+		}
 
-        public override CodeGroup ResolveMatchingCodeGroups (Evidence evidence)
-        {
-            if (evidence == null)
-                throw new ArgumentNullException ("evidence");
+		public override CodeGroup ResolveMatchingCodeGroups (Evidence evidence)
+		{
+			if (evidence == null)
+				throw new ArgumentNullException ("evidence");
 
-             if (!MembershipCondition.Check (evidence))
-                return null;
+ 			if (!MembershipCondition.Check (evidence))
+				return null;
 
-            // Copy() would add the child (even if they didn't match)
-            CodeGroup match = Copy (false);
-            if (this.Children.Count > 0) {
-                foreach (CodeGroup cg in this.Children) {
-                    CodeGroup child = cg.ResolveMatchingCodeGroups (evidence);
-                    if (child != null)
-                        match.AddChild (child);
-                }
-            }
-            return match;
-        }
+			// Copy() would add the child (even if they didn't match)
+			CodeGroup match = Copy (false);
+			if (this.Children.Count > 0) {
+				foreach (CodeGroup cg in this.Children) {
+					CodeGroup child = cg.ResolveMatchingCodeGroups (evidence);
+					if (child != null)
+						match.AddChild (child);
+				}
+			}
+			return match;
+		}
 
-        public override string MergeLogic {
-            get { return "Union"; }
-        }
-    }
+		public override string MergeLogic {
+			get { return "Union"; }
+		}
+	}
 }

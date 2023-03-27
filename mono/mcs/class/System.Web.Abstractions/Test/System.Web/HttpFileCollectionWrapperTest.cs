@@ -1,6 +1,6 @@
-//
+﻿//
 // Authors:
-//    Marek Habersack <mhabersack@novell.com>
+//	Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2010 Novell Inc. http://novell.com
 //
@@ -32,53 +32,53 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web
 {
-    [TestFixture]
-    public class HttpFileCollectionWrapperTest
-    {
-        [Test]
-        public void Get_String ()
-        {
-            var req = new HttpRequest ("default.aspx", "http://localhost/default.aspx", String.Empty);
-            var files = req.Files;
-            var wrapper = new HttpFileCollectionWrapper (files);
+	[TestFixture]
+	public class HttpFileCollectionWrapperTest
+	{
+		[Test]
+		public void Get_String ()
+		{
+			var req = new HttpRequest ("default.aspx", "http://localhost/default.aspx", String.Empty);
+			var files = req.Files;
+			var wrapper = new HttpFileCollectionWrapper (files);
 
-            Assert.IsNull (wrapper.Get ("DoesNotExist"), "#A1");
-            Assert.IsNull (wrapper.Get (null), "#A2");
-        }
+			Assert.IsNull (wrapper.Get ("DoesNotExist"), "#A1");
+			Assert.IsNull (wrapper.Get (null), "#A2");
+		}
 
-        [Test]
-        public void Get_Int ()
-        {
-            var req = new HttpRequest ("default.aspx", "http://localhost/default.aspx", String.Empty);
-            var files = req.Files;
-            var wrapper = new HttpFileCollectionWrapper (files);
+		[Test]
+		public void Get_Int ()
+		{
+			var req = new HttpRequest ("default.aspx", "http://localhost/default.aspx", String.Empty);
+			var files = req.Files;
+			var wrapper = new HttpFileCollectionWrapper (files);
 
-            Assert.Throws<ArgumentOutOfRangeException> (() => {
-                wrapper.Get (0);
-            }, "#A1");
-        }
+			Assert.Throws<ArgumentOutOfRangeException> (() => {
+				wrapper.Get (0);
+			}, "#A1");
+		}
 
-        [Test]
-        public void Item_String ()
-        {
-            var req = new HttpRequest ("default.aspx", "http://localhost/default.aspx", String.Empty);
-            var files = req.Files;
-            var wrapper = new HttpFileCollectionWrapper (files);
+		[Test]
+		public void Item_String ()
+		{
+			var req = new HttpRequest ("default.aspx", "http://localhost/default.aspx", String.Empty);
+			var files = req.Files;
+			var wrapper = new HttpFileCollectionWrapper (files);
 
-            Assert.IsNull (wrapper ["DoesNotExist"], "#A1");
-            Assert.IsNull (wrapper [null], "#A2");
-        }
+			Assert.IsNull (wrapper ["DoesNotExist"], "#A1");
+			Assert.IsNull (wrapper [null], "#A2");
+		}
 
-        [Test]
-        public void Item_Int ()
-        {
-            var req = new HttpRequest ("default.aspx", "http://localhost/default.aspx", String.Empty);
-            var files = req.Files;
-            var wrapper = new HttpFileCollectionWrapper (files);
+		[Test]
+		public void Item_Int ()
+		{
+			var req = new HttpRequest ("default.aspx", "http://localhost/default.aspx", String.Empty);
+			var files = req.Files;
+			var wrapper = new HttpFileCollectionWrapper (files);
 
-            Assert.Throws<ArgumentOutOfRangeException> (() => {
-                var f = wrapper [0];
-            }, "#A1");
-        }
-    }
+			Assert.Throws<ArgumentOutOfRangeException> (() => {
+				var f = wrapper [0];
+			}, "#A1");
+		}
+	}
 }

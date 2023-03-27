@@ -2,7 +2,7 @@
 // System.Drawing.Design.ToolboxItemCreator
 // 
 // Authors:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 // 
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,22 +31,22 @@ using System.Windows.Forms;
 
 namespace System.Drawing.Design {
 
-    public sealed class ToolboxItemCreator {
+	public sealed class ToolboxItemCreator {
 
-        internal ToolboxItemCreator ()
-        {
-        }
+		internal ToolboxItemCreator ()
+		{
+		}
 
-        [MonoTODO]
-        public ToolboxItem Create (IDataObject data)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public ToolboxItem Create (IDataObject data)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public string Format {
-            get { throw new NotImplementedException (); }
-        }
-    }
+		[MonoTODO]
+		public string Format {
+			get { throw new NotImplementedException (); }
+		}
+	}
 }
 

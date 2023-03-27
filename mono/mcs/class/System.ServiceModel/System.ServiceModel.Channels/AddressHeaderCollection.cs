@@ -32,50 +32,50 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    public sealed class AddressHeaderCollection : ReadOnlyCollection<AddressHeader>
-    {
-        static readonly AddressHeader [] empty = new AddressHeader [0];
+	public sealed class AddressHeaderCollection : ReadOnlyCollection<AddressHeader>
+	{
+		static readonly AddressHeader [] empty = new AddressHeader [0];
 
-        static IList<AddressHeader> GetList (IEnumerable<AddressHeader> arg)
-        {
-            IList<AddressHeader> list = arg as IList<AddressHeader>;
-            return list != null ? list : new List<AddressHeader> (arg);
-        }
+		static IList<AddressHeader> GetList (IEnumerable<AddressHeader> arg)
+		{
+			IList<AddressHeader> list = arg as IList<AddressHeader>;
+			return list != null ? list : new List<AddressHeader> (arg);
+		}
 
-        public AddressHeaderCollection ()
-            : base (empty)
-        {
-        }
+		public AddressHeaderCollection ()
+			: base (empty)
+		{
+		}
 
-        public AddressHeaderCollection (IEnumerable<AddressHeader> addressHeaders)
-            : base (GetList (addressHeaders))
-        {
-        }
+		public AddressHeaderCollection (IEnumerable<AddressHeader> addressHeaders)
+			: base (GetList (addressHeaders))
+		{
+		}
 
-        public void AddHeadersTo (Message message)
-        {
-            if (message == null)
-                throw new ArgumentNullException ("message");
-            foreach (AddressHeader header in this)
-                message.Headers.Add (header.ToMessageHeader ());
-        }
+		public void AddHeadersTo (Message message)
+		{
+			if (message == null)
+				throw new ArgumentNullException ("message");
+			foreach (AddressHeader header in this)
+				message.Headers.Add (header.ToMessageHeader ());
+		}
 
-        public AddressHeader FindHeader (string name, string ns)
-        {
-            if (name == null)
-                throw new ArgumentNullException ("name");
-            if (ns == null)
-                throw new ArgumentNullException ("ns");
-            foreach (AddressHeader header in this)
-                if (header.Name == name && header.Namespace == ns)
-                    return header;
+		public AddressHeader FindHeader (string name, string ns)
+		{
+			if (name == null)
+				throw new ArgumentNullException ("name");
+			if (ns == null)
+				throw new ArgumentNullException ("ns");
+			foreach (AddressHeader header in this)
+				if (header.Name == name && header.Namespace == ns)
+					return header;
 
-            return null;
-        }
+			return null;
+		}
 
-        public AddressHeader[] FindAll (string name, string ns)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public AddressHeader[] FindAll (string name, string ns)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

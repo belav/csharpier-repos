@@ -141,7 +141,7 @@ namespace System.Xml.Xsl.XsltOld {
                 break;
             default:
                 Debug.Fail("Invalid ElementAction execution state");
-                break;
+    		    break;
             }
         }
     }

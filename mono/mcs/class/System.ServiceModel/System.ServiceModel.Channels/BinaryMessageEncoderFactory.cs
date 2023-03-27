@@ -31,34 +31,34 @@ using System.Text;
 
 namespace System.ServiceModel.Channels
 {
-    internal class BinaryMessageEncoderFactory : MessageEncoderFactory
-    {
-        BinaryMessageEncodingBindingElement owner;
-        BinaryMessageEncoder encoder;
+	internal class BinaryMessageEncoderFactory : MessageEncoderFactory
+	{
+		BinaryMessageEncodingBindingElement owner;
+		BinaryMessageEncoder encoder;
 
-        public BinaryMessageEncoderFactory (
-            BinaryMessageEncodingBindingElement owner)
-        {
-            this.owner = owner;
-            encoder = new BinaryMessageEncoder (this, false);
-        }
+		public BinaryMessageEncoderFactory (
+			BinaryMessageEncodingBindingElement owner)
+		{
+			this.owner = owner;
+			encoder = new BinaryMessageEncoder (this, false);
+		}
 
-        public BinaryMessageEncodingBindingElement Owner {
-            get { return owner; }
-        }
+		public BinaryMessageEncodingBindingElement Owner {
+			get { return owner; }
+		}
 
-        [MonoTODO]
-        public override MessageEncoder Encoder {
-            get { return encoder; }
-        }
+		[MonoTODO]
+		public override MessageEncoder Encoder {
+			get { return encoder; }
+		}
 
-        public override MessageVersion MessageVersion {
-            get { return MessageVersion.Default; }
-        }
+		public override MessageVersion MessageVersion {
+			get { return MessageVersion.Default; }
+		}
 
-        public override MessageEncoder CreateSessionEncoder ()
-        {
-            return new BinaryMessageEncoder (this, true);
-        }
-    }
+		public override MessageEncoder CreateSessionEncoder ()
+		{
+			return new BinaryMessageEncoder (this, true);
+		}
+	}
 }

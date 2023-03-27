@@ -480,30 +480,30 @@ namespace DbLinq.Data.Linq
             if (parent == null)
                 return;
             var children = new Queue<object>();
-            children.Enqueue(parent);
-            while (children.Count > 0)
-            {
+			children.Enqueue(parent);
+			while (children.Count > 0)
+			{
                 object value = children.Dequeue();
                 values.Add(value);
                 IEnumerable<MetaAssociation> associationList = Mapping.GetMetaType(value.GetType()).Associations.Where(a => !a.IsForeignKey);
                 if (associationList.Any())
-                {
-                    foreach (MetaAssociation association in associationList)
+			    {
+				    foreach (MetaAssociation association in associationList)
                     {
                         var memberData = association.ThisMember;
                         var entitySetValue = memberData.Member.GetMemberValue(value);
 
                         if (entitySetValue != null)
                         {
-                            var hasLoadedOrAssignedValues = entitySetValue.GetType().GetProperty("HasLoadedOrAssignedValues");
-                            if (!((bool)hasLoadedOrAssignedValues.GetValue(entitySetValue, null)))
-                                continue;   // execution deferred; ignore.
-                            foreach (var o in ((IEnumerable)entitySetValue))
-                                children.Enqueue(o);
-                        }
+						    var hasLoadedOrAssignedValues = entitySetValue.GetType().GetProperty("HasLoadedOrAssignedValues");
+						    if (!((bool)hasLoadedOrAssignedValues.GetValue(entitySetValue, null)))
+							    continue;   // execution deferred; ignore.
+						    foreach (var o in ((IEnumerable)entitySetValue))
+							    children.Enqueue(o);
+					    }
                     }
                 }
-            }
+			}
         }
 
         private void InsertEntity(object entity, QueryContext queryContext)
@@ -537,9 +537,9 @@ namespace DbLinq.Data.Linq
             foreach (var assoc in metaType.Associations)
             {
                 var memberData = assoc.ThisMember;
-                //This is not correct - AutoSyncing applies to auto-updating columns, such as a TimeStamp, not to foreign key associations, which is always automatically synched
-                //Confirmed against default .NET l2sql - association columns are always set, even if AutoSync==AutoSync.Never
-                //if (memberData.Association.ThisKey.Any(m => (m.AutoSync != AutoSync.Always) && (m.AutoSync != sync)))
+				//This is not correct - AutoSyncing applies to auto-updating columns, such as a TimeStamp, not to foreign key associations, which is always automatically synched
+				//Confirmed against default .NET l2sql - association columns are always set, even if AutoSync==AutoSync.Never
+				//if (memberData.Association.ThisKey.Any(m => (m.AutoSync != AutoSync.Always) && (m.AutoSync != sync)))
                 //    continue;
                 var oks = memberData.Association.OtherKey.Select(m => m.StorageMember).ToList();
                 if (oks.Count == 0)
@@ -666,90 +666,90 @@ namespace DbLinq.Data.Linq
         }
 
         readonly IDataMapper DataMapper = ObjectFactory.Get<IDataMapper>();
-        private void SetEntityRefQueries(object entity)
-        {
+		private void SetEntityRefQueries(object entity)
+		{
             if (!this.deferredLoadingEnabled)
                 return;
 
             // BUG: This is ignoring External Mappings from XmlMappingSource.
 
-            Type thisType = entity.GetType();
-            IEnumerable<MetaAssociation> associationList = Mapping.GetMetaType(entity.GetType()).Associations.Where(a => a.IsForeignKey);
-            foreach (MetaAssociation association in associationList)
-            {
-                //example of entityRef:Order.Employee
-                var memberData = association.ThisMember;
-                Type otherTableType = association.OtherType.Type;
-                ParameterExpression p = Expression.Parameter(otherTableType, "other");
+			Type thisType = entity.GetType();
+			IEnumerable<MetaAssociation> associationList = Mapping.GetMetaType(entity.GetType()).Associations.Where(a => a.IsForeignKey);
+			foreach (MetaAssociation association in associationList)
+			{
+				//example of entityRef:Order.Employee
+				var memberData = association.ThisMember;
+				Type otherTableType = association.OtherType.Type;
+				ParameterExpression p = Expression.Parameter(otherTableType, "other");
 
-                var otherTable = GetTable(otherTableType);
+				var otherTable = GetTable(otherTableType);
 
-                //ie:EmployeeTerritories.EmployeeID
-                var foreignKeys = memberData.Association.ThisKey;
-                BinaryExpression predicate = null;
-                var otherPKs = memberData.Association.OtherKey;
-                IEnumerator<MetaDataMember> otherPKEnumerator = otherPKs.GetEnumerator();
+				//ie:EmployeeTerritories.EmployeeID
+				var foreignKeys = memberData.Association.ThisKey;
+				BinaryExpression predicate = null;
+				var otherPKs = memberData.Association.OtherKey;
+				IEnumerator<MetaDataMember> otherPKEnumerator = otherPKs.GetEnumerator();
 
-                if (otherPKs.Count != foreignKeys.Count)
-                    throw new InvalidOperationException("Foreign keys don't match ThisKey");
-                foreach (MetaDataMember key in foreignKeys)
-                {
-                    otherPKEnumerator.MoveNext();
+				if (otherPKs.Count != foreignKeys.Count)
+					throw new InvalidOperationException("Foreign keys don't match ThisKey");
+				foreach (MetaDataMember key in foreignKeys)
+				{
+					otherPKEnumerator.MoveNext();
 
-                    var thisForeignKeyProperty = (PropertyInfo)key.Member;
-                    object thisForeignKeyValue = thisForeignKeyProperty.GetValue(entity, null);
+					var thisForeignKeyProperty = (PropertyInfo)key.Member;
+					object thisForeignKeyValue = thisForeignKeyProperty.GetValue(entity, null);
 
-                    if (thisForeignKeyValue != null)
-                    {
-                        BinaryExpression keyPredicate;
-                        if (!(thisForeignKeyProperty.PropertyType.IsNullable()))
-                        {
-                            keyPredicate = Expression.Equal(Expression.MakeMemberAccess(p, otherPKEnumerator.Current.Member),
-                                                                        Expression.Constant(thisForeignKeyValue));
-                        }
-                        else
-                        {
-                            var ValueProperty = thisForeignKeyProperty.PropertyType.GetProperty("Value");
-                            keyPredicate = Expression.Equal(Expression.MakeMemberAccess(p, otherPKEnumerator.Current.Member),
-                                                                     Expression.Constant(ValueProperty.GetValue(thisForeignKeyValue, null)));
-                        }
+					if (thisForeignKeyValue != null)
+					{
+						BinaryExpression keyPredicate;
+						if (!(thisForeignKeyProperty.PropertyType.IsNullable()))
+						{
+							keyPredicate = Expression.Equal(Expression.MakeMemberAccess(p, otherPKEnumerator.Current.Member),
+																		Expression.Constant(thisForeignKeyValue));
+						}
+						else
+						{
+							var ValueProperty = thisForeignKeyProperty.PropertyType.GetProperty("Value");
+							keyPredicate = Expression.Equal(Expression.MakeMemberAccess(p, otherPKEnumerator.Current.Member),
+																	 Expression.Constant(ValueProperty.GetValue(thisForeignKeyValue, null)));
+						}
 
-                        if (predicate == null)
-                            predicate = keyPredicate;
-                        else
-                            predicate = Expression.And(predicate, keyPredicate);
-                    }
-                }
-                IEnumerable query = null;
-                if (predicate != null)
-                {
-                    query = GetOtherTableQuery(predicate, p, otherTableType, otherTable) as IEnumerable;
-                    //it would be interesting surround the above query with a .Take(1) expression for performance.
-                }
+						if (predicate == null)
+							predicate = keyPredicate;
+						else
+							predicate = Expression.And(predicate, keyPredicate);
+					}
+				}
+				IEnumerable query = null;
+				if (predicate != null)
+				{
+					query = GetOtherTableQuery(predicate, p, otherTableType, otherTable) as IEnumerable;
+					//it would be interesting surround the above query with a .Take(1) expression for performance.
+				}
 
-                // If no separate Storage is specified, use the member directly
-                MemberInfo storage = memberData.StorageMember;
-                if (storage == null)
-                    storage = memberData.Member;
+				// If no separate Storage is specified, use the member directly
+				MemberInfo storage = memberData.StorageMember;
+				if (storage == null)
+					storage = memberData.Member;
 
-                 // Check that the storage is a field or a writable property
-                if (!(storage is FieldInfo) && !(storage is PropertyInfo && ((PropertyInfo)storage).CanWrite)) {
-                    throw new InvalidOperationException(String.Format(
-                        "Member {0}.{1} is not a field nor a writable property",
-                        storage.DeclaringType, storage.Name));
-                }
+				 // Check that the storage is a field or a writable property
+				if (!(storage is FieldInfo) && !(storage is PropertyInfo && ((PropertyInfo)storage).CanWrite)) {
+					throw new InvalidOperationException(String.Format(
+						"Member {0}.{1} is not a field nor a writable property",
+						storage.DeclaringType, storage.Name));
+				}
 
-                Type storageType = storage.GetMemberType();
+				Type storageType = storage.GetMemberType();
 
-                object entityRefValue = null;
-                if (query != null)
-                    entityRefValue = Activator.CreateInstance(storageType, query);
-                else
-                    entityRefValue = Activator.CreateInstance(storageType);
+				object entityRefValue = null;
+				if (query != null)
+					entityRefValue = Activator.CreateInstance(storageType, query);
+				else
+					entityRefValue = Activator.CreateInstance(storageType);
 
-                storage.SetMemberValue(entity, entityRefValue);
-            }
-        }
+				storage.SetMemberValue(entity, entityRefValue);
+			}
+		}
 
         /// <summary>
         /// This method is executed when the entity is being registered. Each EntitySet property has a internal query that can be set using the EntitySet.SetSource method.
@@ -763,31 +763,31 @@ namespace DbLinq.Data.Linq
 
             // BUG: This is ignoring External Mappings from XmlMappingSource.
 
-            IEnumerable<MetaAssociation> associationList = Mapping.GetMetaType(entity.GetType()).Associations.Where(a => !a.IsForeignKey);
+			IEnumerable<MetaAssociation> associationList = Mapping.GetMetaType(entity.GetType()).Associations.Where(a => !a.IsForeignKey);
 
-            if (associationList.Any())
-            {
-                foreach (MetaAssociation association in associationList)
+			if (associationList.Any())
+			{
+				foreach (MetaAssociation association in associationList)
                 {
-                    //example of entitySet: Employee.EmployeeTerritories
-                    var memberData = association.ThisMember;
-                    Type otherTableType = association.OtherType.Type;
+					//example of entitySet: Employee.EmployeeTerritories
+					var memberData = association.ThisMember;
+					Type otherTableType = association.OtherType.Type;
                     ParameterExpression p = Expression.Parameter(otherTableType, "other");
 
                     //other table:EmployeeTerritories
                     var otherTable = GetTable(otherTableType);
 
-                    var otherKeys = memberData.Association.OtherKey;
-                    var thisKeys = memberData.Association.ThisKey;
+					var otherKeys = memberData.Association.OtherKey;
+					var thisKeys = memberData.Association.ThisKey;
                     if (otherKeys.Count != thisKeys.Count)
                         throw new InvalidOperationException("This keys don't match OtherKey");
                     BinaryExpression predicate = null;
                     IEnumerator<MetaDataMember> thisKeyEnumerator = thisKeys.GetEnumerator();
-                    foreach (MetaDataMember otherKey in otherKeys)
+					foreach (MetaDataMember otherKey in otherKeys)
                     {
                         thisKeyEnumerator.MoveNext();
                         //other table member:EmployeeTerritories.EmployeeID
-                        var otherTableMember = (PropertyInfo)otherKey.Member;
+						var otherTableMember = (PropertyInfo)otherKey.Member;
 
                         BinaryExpression keyPredicate;
                         if (!(otherTableMember.PropertyType.IsNullable()))
@@ -811,12 +811,12 @@ namespace DbLinq.Data.Linq
 
                     var query = GetOtherTableQuery(predicate, p, otherTableType, otherTable);
 
-                    var entitySetValue = memberData.Member.GetMemberValue(entity);
+					var entitySetValue = memberData.Member.GetMemberValue(entity);
 
                     if (entitySetValue == null)
                     {
-                        entitySetValue = Activator.CreateInstance(memberData.Member.GetMemberType());
-                        memberData.Member.SetMemberValue(entity, entitySetValue);
+						entitySetValue = Activator.CreateInstance(memberData.Member.GetMemberType());
+						memberData.Member.SetMemberValue(entity, entitySetValue);
                     }
 
                     var hasLoadedOrAssignedValues = entitySetValue.GetType().GetProperty("HasLoadedOrAssignedValues");
@@ -830,7 +830,7 @@ namespace DbLinq.Data.Linq
             }
         }
 
-        private static MethodInfo _WhereMethod;
+		private static MethodInfo _WhereMethod;
         internal object GetOtherTableQuery(Expression predicate, ParameterExpression parameter, Type otherTableType, IQueryable otherTable)
         {
             if (_WhereMethod == null)
@@ -840,7 +840,7 @@ namespace DbLinq.Data.Linq
             Expression lambdaPredicate = Expression.Lambda(predicate, parameter);
             //lambdaPredicate: other=>other.EmployeeID== "WARTH"
 
-            Expression call = Expression.Call(_WhereMethod.MakeGenericMethod(otherTableType), otherTable.Expression, lambdaPredicate);
+			Expression call = Expression.Call(_WhereMethod.MakeGenericMethod(otherTableType), otherTable.Expression, lambdaPredicate);
             //Table[EmployeesTerritories].Where(other=>other.employeeID="WARTH")
 
             return otherTable.Provider.CreateQuery(call);
@@ -884,7 +884,7 @@ namespace DbLinq.Data.Linq
         internal void RegisterUpdate(object entity)
         {
             DoRegisterUpdate(entity);
-            MemberModificationHandler.Register(entity, Mapping);
+			MemberModificationHandler.Register(entity, Mapping);
         }
 
         /// <summary>
@@ -1025,11 +1025,11 @@ namespace DbLinq.Data.Linq
         /// Gets or sets the load options
         /// </summary>
         [DbLinqToDo]
-        public DataLoadOptions LoadOptions
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
+		public DataLoadOptions LoadOptions
+		{
+			get { throw new NotImplementedException(); }
+			set { throw new NotImplementedException(); }
+		}
 
         public DbTransaction Transaction {
             get { return (DbTransaction) DatabaseContext.CurrentTransaction; }
@@ -1075,8 +1075,8 @@ namespace DbLinq.Data.Linq
             //connection closing should not be done here.
             //read: http://msdn2.microsoft.com/en-us/library/bb292288.aspx
 
-            //We own the instance of MemberModificationHandler - we must unregister listeners of entities we attached to
-            MemberModificationHandler.UnregisterAll();
+			//We own the instance of MemberModificationHandler - we must unregister listeners of entities we attached to
+			MemberModificationHandler.UnregisterAll();
         }
 
         [DbLinqToDo]

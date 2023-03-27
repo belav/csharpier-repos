@@ -2,7 +2,7 @@
 // ISecurityContextSecurityTokenCache.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -30,22 +30,22 @@ using System.Xml;
 
 namespace System.ServiceModel.Security.Tokens
 {
-    public interface ISecurityContextSecurityTokenCache
-    {
-        void AddContext (SecurityContextSecurityToken token);
+	public interface ISecurityContextSecurityTokenCache
+	{
+		void AddContext (SecurityContextSecurityToken token);
 
-        void ClearContexts ();
+		void ClearContexts ();
 
-        Collection<SecurityContextSecurityToken> GetAllContexts (UniqueId contextId);
+		Collection<SecurityContextSecurityToken> GetAllContexts (UniqueId contextId);
 
-        SecurityContextSecurityToken GetContext (UniqueId contextId, UniqueId generation);
+		SecurityContextSecurityToken GetContext (UniqueId contextId, UniqueId generation);
 
-        void RemoveAllContexts (UniqueId contextId);
+		void RemoveAllContexts (UniqueId contextId);
 
-        void RemoveContext (UniqueId contextId, UniqueId generation);
+		void RemoveContext (UniqueId contextId, UniqueId generation);
 
-        bool TryAddContext (SecurityContextSecurityToken token);
+		bool TryAddContext (SecurityContextSecurityToken token);
 
-        void UpdateContextCachingTime (SecurityContextSecurityToken context, DateTime expirationTime);
-    }
+		void UpdateContextCachingTime (SecurityContextSecurityToken context, DateTime expirationTime);
+	}
 }

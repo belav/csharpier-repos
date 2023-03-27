@@ -1,4 +1,4 @@
-// 
+﻿// 
 // ExpandedWrapper`1.cs
 //  
 // Author:
@@ -32,33 +32,33 @@ using System.Runtime;
 
 namespace System.Data.Services.Internal
 {
-    [EditorBrowsable (EditorBrowsableState.Never)]
-    public abstract class ExpandedWrapper <TExpandedElement> : IExpandedResult
-    {
-        public string Description {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+	[EditorBrowsable (EditorBrowsableState.Never)]
+	public abstract class ExpandedWrapper <TExpandedElement> : IExpandedResult
+	{
+		public string Description {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        public TExpandedElement ExpandedElement {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		public TExpandedElement ExpandedElement {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        object IExpandedResult.ExpandedElement {
-            get { throw new NotImplementedException (); }
-        }
+		object IExpandedResult.ExpandedElement {
+			get { throw new NotImplementedException (); }
+		}
 
-        public object GetExpandedPropertyValue (string name)
-        {
-            throw new NotImplementedException ();
-        }
+		public object GetExpandedPropertyValue (string name)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected abstract object InternalGetExpandedPropertyValue (int nameIndex);
+		protected abstract object InternalGetExpandedPropertyValue (int nameIndex);
 
-        protected ExpandedWrapper ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		protected ExpandedWrapper ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

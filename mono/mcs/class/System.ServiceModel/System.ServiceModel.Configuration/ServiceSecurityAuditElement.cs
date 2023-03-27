@@ -2,7 +2,7 @@
 // ServiceSecurityAuditElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,60 +54,60 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class ServiceSecurityAuditElement
-         : BehaviorExtensionElement
-    {
-        public ServiceSecurityAuditElement () {
-        }
+	public sealed class ServiceSecurityAuditElement
+		 : BehaviorExtensionElement
+	{
+		public ServiceSecurityAuditElement () {
+		}
 
 
-        // Properties
+		// Properties
 
-        [ConfigurationProperty ("auditLogLocation",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Default")]
-        public AuditLogLocation AuditLogLocation {
-            get { return (AuditLogLocation) base ["auditLogLocation"]; }
-            set { base ["auditLogLocation"] = value; }
-        }
+		[ConfigurationProperty ("auditLogLocation",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "Default")]
+		public AuditLogLocation AuditLogLocation {
+			get { return (AuditLogLocation) base ["auditLogLocation"]; }
+			set { base ["auditLogLocation"] = value; }
+		}
 
-        public override Type BehaviorType {
-            get { return typeof (ServiceSecurityAuditBehavior); }
-        }
+		public override Type BehaviorType {
+			get { return typeof (ServiceSecurityAuditBehavior); }
+		}
 
-        [ConfigurationProperty ("messageAuthenticationAuditLevel",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "None")]
-        public AuditLevel MessageAuthenticationAuditLevel {
-            get { return (AuditLevel) base ["messageAuthenticationAuditLevel"]; }
-            set { base ["messageAuthenticationAuditLevel"] = value; }
-        }
+		[ConfigurationProperty ("messageAuthenticationAuditLevel",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "None")]
+		public AuditLevel MessageAuthenticationAuditLevel {
+			get { return (AuditLevel) base ["messageAuthenticationAuditLevel"]; }
+			set { base ["messageAuthenticationAuditLevel"] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
 
-        [ConfigurationProperty ("serviceAuthorizationAuditLevel",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "None")]
-        public AuditLevel ServiceAuthorizationAuditLevel {
-            get { return (AuditLevel) base ["serviceAuthorizationAuditLevel"]; }
-            set { base ["serviceAuthorizationAuditLevel"] = value; }
-        }
+		[ConfigurationProperty ("serviceAuthorizationAuditLevel",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "None")]
+		public AuditLevel ServiceAuthorizationAuditLevel {
+			get { return (AuditLevel) base ["serviceAuthorizationAuditLevel"]; }
+			set { base ["serviceAuthorizationAuditLevel"] = value; }
+		}
 
-        [ConfigurationProperty ("suppressAuditFailure",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = true)]
-        public bool SuppressAuditFailure {
-            get { return (bool) base ["suppressAuditFailure"]; }
-            set { base ["suppressAuditFailure"] = value; }
-        }
+		[ConfigurationProperty ("suppressAuditFailure",
+			 Options = ConfigurationPropertyOptions.None,
+			DefaultValue = true)]
+		public bool SuppressAuditFailure {
+			get { return (bool) base ["suppressAuditFailure"]; }
+			set { base ["suppressAuditFailure"] = value; }
+		}
 
-        [MonoTODO]
-        protected internal override object CreateBehavior () {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected internal override object CreateBehavior () {
+			throw new NotImplementedException ();
+		}
 
-    }
+	}
 
 }

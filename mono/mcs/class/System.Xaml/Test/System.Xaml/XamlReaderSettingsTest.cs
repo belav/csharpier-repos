@@ -30,46 +30,46 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-    [TestFixture]
-    public class XamlReaderSettingsTest
-    {
-        [Test]
-        public void DefaultValues ()
-        {
-            var s = new XamlReaderSettings ();
-            Assert.IsFalse (s.AllowProtectedMembersOnRoot, "#1");
-            Assert.IsNull (s.BaseUri, "#2");
-            Assert.IsFalse (s.IgnoreUidsOnPropertyElements, "#3");
-            Assert.IsNull (s.LocalAssembly, "#4");
-            Assert.IsFalse (s.ProvideLineInfo, "#5");
-            Assert.IsFalse (s.ValuesMustBeString, "#6");
-        }
+	[TestFixture]
+	public class XamlReaderSettingsTest
+	{
+		[Test]
+		public void DefaultValues ()
+		{
+			var s = new XamlReaderSettings ();
+			Assert.IsFalse (s.AllowProtectedMembersOnRoot, "#1");
+			Assert.IsNull (s.BaseUri, "#2");
+			Assert.IsFalse (s.IgnoreUidsOnPropertyElements, "#3");
+			Assert.IsNull (s.LocalAssembly, "#4");
+			Assert.IsFalse (s.ProvideLineInfo, "#5");
+			Assert.IsFalse (s.ValuesMustBeString, "#6");
+		}
 
-        [Test]
-        public void CopyConstructorNull ()
-        {
-            new XamlReaderSettings (null);
-        }
+		[Test]
+		public void CopyConstructorNull ()
+		{
+			new XamlReaderSettings (null);
+		}
 
-        [Test]
-        public void CopyConstructor ()
-        {
-            var s = new XamlReaderSettings ();
-            s.AllowProtectedMembersOnRoot = true;
-            s.IgnoreUidsOnPropertyElements = true;
-            s.ProvideLineInfo = true;
-            s.ValuesMustBeString = true;
-            s.BaseUri = new Uri ("urn:foo");
-            s.LocalAssembly = typeof (object).Assembly;
+		[Test]
+		public void CopyConstructor ()
+		{
+			var s = new XamlReaderSettings ();
+			s.AllowProtectedMembersOnRoot = true;
+			s.IgnoreUidsOnPropertyElements = true;
+			s.ProvideLineInfo = true;
+			s.ValuesMustBeString = true;
+			s.BaseUri = new Uri ("urn:foo");
+			s.LocalAssembly = typeof (object).Assembly;
 
-            s = new XamlReaderSettings (s);
+			s = new XamlReaderSettings (s);
 
-            Assert.IsTrue (s.AllowProtectedMembersOnRoot, "#1");
-            Assert.IsTrue (s.BaseUri.Equals (new Uri ("urn:foo")), "#2");
-            Assert.IsTrue (s.IgnoreUidsOnPropertyElements, "#3");
-            Assert.AreEqual (typeof (int).Assembly, s.LocalAssembly, "#4");
-            Assert.IsTrue (s.ProvideLineInfo, "#5");
-            Assert.IsTrue (s.ValuesMustBeString, "#6");
-        }
-    }
+			Assert.IsTrue (s.AllowProtectedMembersOnRoot, "#1");
+			Assert.IsTrue (s.BaseUri.Equals (new Uri ("urn:foo")), "#2");
+			Assert.IsTrue (s.IgnoreUidsOnPropertyElements, "#3");
+			Assert.AreEqual (typeof (int).Assembly, s.LocalAssembly, "#4");
+			Assert.IsTrue (s.ProvideLineInfo, "#5");
+			Assert.IsTrue (s.ValuesMustBeString, "#6");
+		}
+	}
 }

@@ -3,5 +3,5 @@
 
 interface I<out V>
 {
-    void Foo<T> (T t) where T : V;
+	void Foo<T> (T t) where T : V;
 }

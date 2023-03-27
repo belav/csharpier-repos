@@ -39,90 +39,90 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class UniqueConstraint_ctor_SDclmsB : GHTBase
 {
-    [Test] public void Main()
-    {
-        UniqueConstraint_ctor_SDclmsB tc = new UniqueConstraint_ctor_SDclmsB();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("NoName");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		UniqueConstraint_ctor_SDclmsB tc = new UniqueConstraint_ctor_SDclmsB();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("NoName");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
+	public void run()
+	{
+		Exception exp = null;
 
-        DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
-        
-        UniqueConstraint uc = null;
-        uc = new UniqueConstraint("myConstraint",new DataColumn[] {dtParent.Columns[0]},false);
-        dtParent.Constraints.Add(uc);
+		DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+		
+		UniqueConstraint uc = null;
+		uc = new UniqueConstraint("myConstraint",new DataColumn[] {dtParent.Columns[0]},false);
+		dtParent.Constraints.Add(uc);
 
-        try
-        {
-            BeginCase("Ctor");
-            Compare(uc == null ,false );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("Ctor");
+			Compare(uc == null ,false );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("primary key 1");
-            Compare(dtParent.PrimaryKey.Length  ,0);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("primary key 1");
+			Compare(dtParent.PrimaryKey.Length  ,0);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("Ctor name 1");
-            Compare(uc.ConstraintName ,"myConstraint");
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("Ctor name 1");
+			Compare(uc.ConstraintName ,"myConstraint");
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        dtParent.Constraints.Remove(uc);
-        uc = new UniqueConstraint("myConstraint",new DataColumn[] {dtParent.Columns[0]},true);
-        dtParent.Constraints.Add(uc);
+		dtParent.Constraints.Remove(uc);
+		uc = new UniqueConstraint("myConstraint",new DataColumn[] {dtParent.Columns[0]},true);
+		dtParent.Constraints.Add(uc);
 
-        try
-        {
-            BeginCase("primary key 2");
-            Compare(dtParent.PrimaryKey.Length  ,1);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}    
+		try
+		{
+			BeginCase("primary key 2");
+			Compare(dtParent.PrimaryKey.Length  ,1);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}	
 
-        try
-        {
-            BeginCase("Ctor name 2");
-            Compare(uc.ConstraintName ,"myConstraint");
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    }
+		try
+		{
+			BeginCase("Ctor name 2");
+			Compare(uc.ConstraintName ,"myConstraint");
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	}
 }
 }

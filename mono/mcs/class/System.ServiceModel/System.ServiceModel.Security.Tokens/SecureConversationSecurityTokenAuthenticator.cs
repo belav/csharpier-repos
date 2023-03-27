@@ -2,7 +2,7 @@
 // SecureConversationSecurityTokenAuthenticator.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -35,98 +35,98 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Security.Tokens
 {
-    class SecureConversationSecurityTokenAuthenticator : CommunicationSecurityTokenAuthenticator
-    {
-        SecurityTokenRequirement req;
-        SecurityContextSecurityTokenAuthenticator sc_auth;
-        SecurityContextSecurityTokenResolver sc_res;
-        WsscAuthenticatorCommunicationObject comm;
+	class SecureConversationSecurityTokenAuthenticator : CommunicationSecurityTokenAuthenticator
+	{
+		SecurityTokenRequirement req;
+		SecurityContextSecurityTokenAuthenticator sc_auth;
+		SecurityContextSecurityTokenResolver sc_res;
+		WsscAuthenticatorCommunicationObject comm;
 
-        public SecureConversationSecurityTokenAuthenticator (
-            SecurityTokenRequirement r,
-            SecurityContextSecurityTokenAuthenticator scAuth,
-            SecurityContextSecurityTokenResolver scResolver)
-        {
-            this.req = r;
-            this.sc_auth = scAuth;
-            this.sc_res = scResolver;
-            comm = new WsscAuthenticatorCommunicationObject ();
-        }
+		public SecureConversationSecurityTokenAuthenticator (
+			SecurityTokenRequirement r,
+			SecurityContextSecurityTokenAuthenticator scAuth,
+			SecurityContextSecurityTokenResolver scResolver)
+		{
+			this.req = r;
+			this.sc_auth = scAuth;
+			this.sc_res = scResolver;
+			comm = new WsscAuthenticatorCommunicationObject ();
+		}
 
-        public override AuthenticatorCommunicationObject Communication {
-            get { return comm; }
-        }
+		public override AuthenticatorCommunicationObject Communication {
+			get { return comm; }
+		}
 
-        [MonoTODO]
-        protected override bool CanValidateTokenCore (SecurityToken token)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected override bool CanValidateTokenCore (SecurityToken token)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore (SecurityToken token)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore (SecurityToken token)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 
-    class WsscAuthenticatorCommunicationObject : AuthenticatorCommunicationObject
-    {
-        WSTrustSecurityTokenServiceProxy proxy;
+	class WsscAuthenticatorCommunicationObject : AuthenticatorCommunicationObject
+	{
+		WSTrustSecurityTokenServiceProxy proxy;
 
-        protected internal override TimeSpan DefaultCloseTimeout {
-            get { throw new NotImplementedException (); }
-        }
+		protected internal override TimeSpan DefaultCloseTimeout {
+			get { throw new NotImplementedException (); }
+		}
 
-        protected internal override TimeSpan DefaultOpenTimeout {
-            get { throw new NotImplementedException (); }
-        }
+		protected internal override TimeSpan DefaultOpenTimeout {
+			get { throw new NotImplementedException (); }
+		}
 
-        public override Message ProcessNegotiation (Message request, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		public override Message ProcessNegotiation (Message request, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnAbort ()
-        {
-            throw new NotImplementedException ();
-        }
+		protected override void OnAbort ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnOpen (TimeSpan timeout)
-        {
-            if (State == CommunicationState.Opened)
-                throw new InvalidOperationException ("Already opened.");
+		protected override void OnOpen (TimeSpan timeout)
+		{
+			if (State == CommunicationState.Opened)
+				throw new InvalidOperationException ("Already opened.");
 
-            EnsureProperties ();
+			EnsureProperties ();
 
-            proxy = new WSTrustSecurityTokenServiceProxy (
-                IssuerBinding, IssuerAddress);
-        }
+			proxy = new WSTrustSecurityTokenServiceProxy (
+				IssuerBinding, IssuerAddress);
+		}
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            throw new NotImplementedException ();
-        }
+		protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnEndOpen (IAsyncResult result)
-        {
-            throw new NotImplementedException ();
-        }
+		protected override void OnEndOpen (IAsyncResult result)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnClose (TimeSpan timeout)
-        {
-            if (proxy != null)
-                proxy.Close ();
-        }
+		protected override void OnClose (TimeSpan timeout)
+		{
+			if (proxy != null)
+				proxy.Close ();
+		}
 
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            throw new NotImplementedException ();
-        }
+		protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnEndClose (IAsyncResult result)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		protected override void OnEndClose (IAsyncResult result)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

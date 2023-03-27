@@ -28,57 +28,57 @@
 
 namespace Mono.Cecil.Signatures {
 
-    using Mono.Cecil.Metadata;
+	using Mono.Cecil.Metadata;
 
-    internal sealed class CustomAttrib {
+	internal sealed class CustomAttrib {
 
-        public const ushort StdProlog = 0x0001;
+		public const ushort StdProlog = 0x0001;
 
-        public MethodReference Constructor;
+		public MethodReference Constructor;
 
-        public ushort Prolog;
-        public FixedArg [] FixedArgs;
-        public ushort NumNamed;
-        public NamedArg [] NamedArgs;
-        public bool Read;
+		public ushort Prolog;
+		public FixedArg [] FixedArgs;
+		public ushort NumNamed;
+		public NamedArg [] NamedArgs;
+		public bool Read;
 
-        public CustomAttrib (MethodReference ctor)
-        {
-            Constructor = ctor;
-        }
+		public CustomAttrib (MethodReference ctor)
+		{
+			Constructor = ctor;
+		}
 
-        internal struct FixedArg {
+		internal struct FixedArg {
 
-            public bool SzArray;
-            public uint NumElem;
-            public Elem [] Elems;
+			public bool SzArray;
+			public uint NumElem;
+			public Elem [] Elems;
 
-            internal static FixedArg [] Empty = new FixedArg [0];
-        }
+			internal static FixedArg [] Empty = new FixedArg [0];
+		}
 
-        internal struct Elem {
+		internal struct Elem {
 
-            public bool Simple;
-            public bool String;
-            public bool Type;
-            public bool BoxedValueType;
+			public bool Simple;
+			public bool String;
+			public bool Type;
+			public bool BoxedValueType;
 
-            public ElementType FieldOrPropType;
-            public object Value;
+			public ElementType FieldOrPropType;
+			public object Value;
 
-            public TypeReference ElemType;
-        }
+			public TypeReference ElemType;
+		}
 
-        internal struct NamedArg {
+		internal struct NamedArg {
 
-            public bool Field;
-            public bool Property;
+			public bool Field;
+			public bool Property;
 
-            public ElementType FieldOrPropType;
-            public string FieldOrPropName;
-            public FixedArg FixedArg;
+			public ElementType FieldOrPropType;
+			public string FieldOrPropName;
+			public FixedArg FixedArg;
 
-            internal static NamedArg [] Empty = new NamedArg [0];
-        }
-    }
+			internal static NamedArg [] Empty = new NamedArg [0];
+		}
+	}
 }

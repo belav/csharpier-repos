@@ -2,7 +2,7 @@
 // OneWayBindingElementImporter.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -34,13 +34,13 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {
-    public sealed class OneWayBindingElementImporter
-        : IPolicyImportExtension
-    {
-        [MonoTODO]
-        void IPolicyImportExtension.ImportPolicy (MetadataImporter importer, PolicyConversionContext context)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+	public sealed class OneWayBindingElementImporter
+		: IPolicyImportExtension
+	{
+		[MonoTODO]
+		void IPolicyImportExtension.ImportPolicy (MetadataImporter importer, PolicyConversionContext context)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

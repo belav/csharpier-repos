@@ -69,7 +69,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void SignificantWhitespace()
         {
-            var xml = @"<S xml:space=""preserve"">     </S>";
+            var xml = @"<S xml:space=""preserve""> 	</S>";
             foreach (var insertType in s_InsertTypes)
                 foreach (var nodeType in s_XmlNodeTypes)
                     OneTextNodeBase(xml, insertType, nodeType);
@@ -78,7 +78,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void CDATA()
         {
-            var xml = @"<C><![CDATA[ &lt; &amp; <tag> < ! > & </tag>      ]]></C>";
+            var xml = @"<C><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></C>";
 
             foreach (var insertType in s_InsertTypes)
                 foreach (var nodeType in s_XmlNodeTypes)

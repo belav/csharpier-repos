@@ -34,11 +34,11 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IClientChannelSinkProvider
-    {
-        IClientChannelSinkProvider Next { get;  set; }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IClientChannelSinkProvider
+	{
+		IClientChannelSinkProvider Next { get;  set; }
 
-        IClientChannelSink CreateSink (IChannelSender channel,  string url, object remoteChannelData);
-    }
+		IClientChannelSink CreateSink (IChannelSender channel,  string url, object remoteChannelData);
+	}
 }

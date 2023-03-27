@@ -20,50 +20,50 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public class DateBoldEventArgs : EventArgs {
-        #region Local Variables
-        private int        size;
-        private DateTime    start;
-        private int[]        days_to_bold;
-        #endregion    // Local Variables
+	public class DateBoldEventArgs : EventArgs {
+		#region Local Variables
+		private int		size;
+		private DateTime	start;
+		private int[]		days_to_bold;
+		#endregion	// Local Variables
 
-        #region Internal Constructor
-        DateBoldEventArgs(DateTime start, int size, int[] daysToBold) {
-            this.start = start;
-            this.size = size;
-            this.days_to_bold = daysToBold;
-        }
-        #endregion
+		#region Internal Constructor
+		DateBoldEventArgs(DateTime start, int size, int[] daysToBold) {
+			this.start = start;
+			this.size = size;
+			this.days_to_bold = daysToBold;
+		}
+		#endregion
 
-        #region Public Instance Properties
-        public int[] DaysToBold {
-            get {
-                return days_to_bold;
-            }
+		#region Public Instance Properties
+		public int[] DaysToBold {
+			get {
+				return days_to_bold;
+			}
 
-            set {
-                days_to_bold = value;
-            }
-        }
+			set {
+				days_to_bold = value;
+			}
+		}
 
-        public int Size {
-            get {
-                return size;
-            }
-        }
+		public int Size {
+			get {
+				return size;
+			}
+		}
 
-        public DateTime StartDate {
-            get {
-                return start;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public DateTime StartDate {
+			get {
+				return start;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

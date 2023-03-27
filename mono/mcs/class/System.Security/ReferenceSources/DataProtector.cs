@@ -13,7 +13,7 @@ namespace System.Security.Cryptography
     // Data protectors should be derived from this class
     public abstract class DataProtector
     {
-        private string m_applicationName;
+		private string m_applicationName;
         private string m_primaryPurpose;
         private IEnumerable<string> m_specificPurposes;
  

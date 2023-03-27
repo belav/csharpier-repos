@@ -39,70 +39,70 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_RowDeleted : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataTable_RowDeleted tc = new DataTable_RowDeleted();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataTable_RowDeleted");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataTable_RowDeleted tc = new DataTable_RowDeleted();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataTable_RowDeleted");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
+	public void run()
+	{
+		Exception exp = null;
         DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
 
-        dt.RowDeleted += new DataRowChangeEventHandler ( Row_Deleted );
-        
-        _EventTriggered=false;
-        try
-        {
-            BeginCase("RowDeleted - 1");
-            dt.Rows[0].Delete();
-            Compare(_EventTriggered ,true );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		dt.RowDeleted += new DataRowChangeEventHandler ( Row_Deleted );
+		
+		_EventTriggered=false;
+		try
+		{
+			BeginCase("RowDeleted - 1");
+			dt.Rows[0].Delete();
+			Compare(_EventTriggered ,true );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        _EventTriggered=false;
+		_EventTriggered=false;
         dt.RowDeleted -= new DataRowChangeEventHandler ( Row_Deleted );
-        try
-        {
-            BeginCase("RowDeleted - 2");
-            dt.Rows[1].Delete();
-            Compare(_EventTriggered ,false );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    }
+		try
+		{
+			BeginCase("RowDeleted - 2");
+			dt.Rows[1].Delete();
+			Compare(_EventTriggered ,false );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	}
 
-    private bool _EventTriggered = false;
-    private void Row_Deleted( object sender, DataRowChangeEventArgs e )
-    {
-        _EventTriggered = true;
-    }
+	private bool _EventTriggered = false;
+	private void Row_Deleted( object sender, DataRowChangeEventArgs e )
+	{
+		_EventTriggered = true;
+	}
 }
 }

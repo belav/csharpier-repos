@@ -2,6 +2,6 @@
 // Line: 6
 
 class Program {
-    int x;
-    const int y = x;
+	int x;
+	const int y = x;
 }

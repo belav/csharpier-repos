@@ -31,19 +31,19 @@ using System;
 
 namespace System.Configuration.Internal
 {
-    public sealed class InternalConfigEventArgs: EventArgs
-    {
-        string configPath;
-        
-        public InternalConfigEventArgs (string configPath)
-        {
-            this.configPath = configPath;
-        }
-        
-        public string ConfigPath {
-            get { return configPath; }
-            set { configPath = value; }
-        }
-    }
+	public sealed class InternalConfigEventArgs: EventArgs
+	{
+		string configPath;
+		
+		public InternalConfigEventArgs (string configPath)
+		{
+			this.configPath = configPath;
+		}
+		
+		public string ConfigPath {
+			get { return configPath; }
+			set { configPath = value; }
+		}
+	}
 }
 

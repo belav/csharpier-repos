@@ -2,7 +2,7 @@
 // SamlAudienceRestrictionConditionTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -37,44 +37,44 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Tokens
 {
-    [TestFixture]
-    public class SamlAudienceRestrictionConditionTest
-    {
-        XmlDictionaryWriter CreateWriter (StringWriter sw)
-        {
-            return XmlDictionaryWriter.CreateDictionaryWriter (XmlWriter.Create (sw));
-        }
+	[TestFixture]
+	public class SamlAudienceRestrictionConditionTest
+	{
+		XmlDictionaryWriter CreateWriter (StringWriter sw)
+		{
+			return XmlDictionaryWriter.CreateDictionaryWriter (XmlWriter.Create (sw));
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void NullAudiences ()
-        {
-            new SamlAudienceRestrictionCondition (null);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void NullAudiences ()
+		{
+			new SamlAudienceRestrictionCondition (null);
+		}
 
-        [Test]
-        [ExpectedException (typeof (SecurityTokenException))]
-        public void WriteXmlNoAudience ()
-        {
-            SamlAudienceRestrictionCondition c = new SamlAudienceRestrictionCondition ();
+		[Test]
+		[ExpectedException (typeof (SecurityTokenException))]
+		public void WriteXmlNoAudience ()
+		{
+			SamlAudienceRestrictionCondition c = new SamlAudienceRestrictionCondition ();
 
-            StringWriter sw = new StringWriter ();
-            using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-                c.WriteXml (dw, new SamlSerializer (), null);
-            }
-        }
+			StringWriter sw = new StringWriter ();
+			using (XmlDictionaryWriter dw = CreateWriter (sw)) {
+				c.WriteXml (dw, new SamlSerializer (), null);
+			}
+		}
 
-        [Test]
-        public void WriteXml1 ()
-        {
-            SamlAudienceRestrictionCondition c = new SamlAudienceRestrictionCondition (new Uri [] {new Uri ("urn:myAudience")});
+		[Test]
+		public void WriteXml1 ()
+		{
+			SamlAudienceRestrictionCondition c = new SamlAudienceRestrictionCondition (new Uri [] {new Uri ("urn:myAudience")});
 
-            StringWriter sw = new StringWriter ();
-            using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-                c.WriteXml (dw, new SamlSerializer (), null);
-            }
-            Assert.AreEqual (String.Format ("<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:AudienceRestrictionCondition xmlns:saml=\"{0}\"><saml:Audience>urn:myAudience</saml:Audience></saml:AudienceRestrictionCondition>", SamlConstants.Namespace), sw.ToString ());
-        }
-    }
+			StringWriter sw = new StringWriter ();
+			using (XmlDictionaryWriter dw = CreateWriter (sw)) {
+				c.WriteXml (dw, new SamlSerializer (), null);
+			}
+			Assert.AreEqual (String.Format ("<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:AudienceRestrictionCondition xmlns:saml=\"{0}\"><saml:Audience>urn:myAudience</saml:Audience></saml:AudienceRestrictionCondition>", SamlConstants.Namespace), sw.ToString ());
+		}
+	}
 }
 #endif

@@ -23,31 +23,31 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-    public enum TextMetricsCharacterSet
-    {
-        Ansi = 0,
-        Default = 1,
-        Symbol = 2,
-        Mac = 77,
-        ShiftJis = 128,
-        Hangul = 129,
-        Johab = 130,
-        Gb2312 = 134,
-        ChineseBig5 = 136,
-        Greek = 161,
-        Turkish = 162,
-        Vietnamese = 163,
-        Hebrew = 177,
-        Arabic = 178,
-        Baltic = 186,
-        Russian = 204,
-        Thai = 222,
-        EastEurope = 238,
-        Oem = 255
-    }
+	public enum TextMetricsCharacterSet
+	{
+		Ansi = 0,
+		Default = 1,
+		Symbol = 2,
+		Mac = 77,
+		ShiftJis = 128,
+		Hangul = 129,
+		Johab = 130,
+		Gb2312 = 134,
+		ChineseBig5 = 136,
+		Greek = 161,
+		Turkish = 162,
+		Vietnamese = 163,
+		Hebrew = 177,
+		Arabic = 178,
+		Baltic = 186,
+		Russian = 204,
+		Thai = 222,
+		EastEurope = 238,
+		Oem = 255
+	}
 }

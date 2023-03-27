@@ -1,4 +1,4 @@
-#region MIT license
+﻿#region MIT license
 // 
 // MIT license
 //
@@ -48,18 +48,18 @@ namespace DbLinq.Ingres
                                          select outputExpression.Replace("next value", "current value", true)).ToArray())
                 );
         }
-        
-        public override string GetTableAlias (string nameBase)
-        {
-            return nameBase + "$";
-        }
-        
-        public override SqlStatement GetLiteral (bool literal)
-        {
-            return literal == true ? "'Y'" : "'N'";
-        }
+		
+		public override string GetTableAlias (string nameBase)
+		{
+			return nameBase + "$";
+		}
+		
+		public override SqlStatement GetLiteral (bool literal)
+		{
+			return literal == true ? "'Y'" : "'N'";
+		}
 
-        
+		
         protected override SqlStatement GetLiteralCount(SqlStatement a)
         {
             return "COUNT(*)";

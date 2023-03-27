@@ -20,18 +20,18 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jordi Mas i Hernandez, jordi@ximian.com
+//	Jordi Mas i Hernandez, jordi@ximian.com
 //
 
 using System;
 
 namespace System.Windows.Forms {
 
-    public enum ComboBoxStyle 
-    {
-        Simple        = 0,
-        DropDown    = 1,
-        DropDownList    = 2,
-        
-    }
+	public enum ComboBoxStyle 
+	{
+		Simple		= 0,
+		DropDown	= 1,
+		DropDownList	= 2,
+		
+	}
 }

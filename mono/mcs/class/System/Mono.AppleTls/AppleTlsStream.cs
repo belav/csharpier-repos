@@ -28,17 +28,17 @@ using Mono.Security.Interface;
 
 namespace Mono.AppleTls
 {
-    class AppleTlsStream : MNS.MobileAuthenticatedStream
-    {
-        public AppleTlsStream (Stream innerStream, bool leaveInnerStreamOpen, SslStream owner,
-                               MonoTlsSettings settings, MNS.MobileTlsProvider provider)
-            : base (innerStream, leaveInnerStreamOpen, owner, settings, provider)
-        {
-        }
+	class AppleTlsStream : MNS.MobileAuthenticatedStream
+	{
+		public AppleTlsStream (Stream innerStream, bool leaveInnerStreamOpen, SslStream owner,
+		                       MonoTlsSettings settings, MNS.MobileTlsProvider provider)
+			: base (innerStream, leaveInnerStreamOpen, owner, settings, provider)
+		{
+		}
 
-        protected override MNS.MobileTlsContext CreateContext (MNS.MonoSslAuthenticationOptions options)
-        {
-            return new AppleTlsContext (this, options);
-        }
-    }
+		protected override MNS.MobileTlsContext CreateContext (MNS.MonoSslAuthenticationOptions options)
+		{
+			return new AppleTlsContext (this, options);
+		}
+	}
 }

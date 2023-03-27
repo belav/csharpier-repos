@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.TestModels.Northwind;
@@ -34,7 +34,7 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
 
         Assert.Contains(
             actual, mep =>
-                mep.TenMostExpensiveProducts == "Côte de Blaye"
+                mep.TenMostExpensiveProducts == "CÃ´te de Blaye"
                 && mep.UnitPrice == 263.50m);
     }
 
@@ -57,7 +57,7 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
 
         Assert.Contains(
             actual, mep =>
-                mep.TenMostExpensiveProducts == "Côte de Blaye"
+                mep.TenMostExpensiveProducts == "CÃ´te de Blaye"
                 && mep.UnitPrice == 263.50m);
     }
 
@@ -82,7 +82,7 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
 
         Assert.Contains(
             actual, mep =>
-                mep.TenMostExpensiveProducts == "Côte de Blaye"
+                mep.TenMostExpensiveProducts == "CÃ´te de Blaye"
                 && mep.UnitPrice == 263.50m);
     }
 

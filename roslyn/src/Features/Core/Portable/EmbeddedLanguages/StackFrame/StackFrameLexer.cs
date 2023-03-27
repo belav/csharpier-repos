@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -513,18 +513,18 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         private readonly record struct Language(string At, string In, string Line);
         private static readonly ImmutableArray<Language> s_languages = ImmutableArray.Create(
             new Language("at ", " in ", "line "), // en
-            new Language("v ", " v ", "r�dek "), // cs
+            new Language("v ", " v ", "řádek "), // cs
             new Language("bei ", " in ", "Zeile "), // de
-            new Language("en ", " en ", "l�nea "), // es
-            new Language("� ", " dans ", "ligne "), // fr
+            new Language("en ", " en ", "línea "), // es
+            new Language("à ", " dans ", "ligne "), // fr
             new Language("in ", " in ", "riga "), // it
-            new Language("?? ", " ?? ", "? "), // ja
-            new Language("??: ", " ?? ", "? "), // ko
+            new Language("場所 ", " 場所 ", "行 "), // ja
+            new Language("위치: ", " 파일 ", "줄 "), // ko
             new Language("w ", " w ", "wiersz "), // pl
             new Language("em ", " na ", "linha "), // pt-BR
-            new Language("? ", " ? ", "?????? "), // ru
-            new Language("? ", " ?? ", "?? "), // zh-Hans
-            new Language("? ", " ? ", " ? ") // zh-Hant
+            new Language("в ", " в ", "строка "), // ru
+            new Language("在 ", " 位置 ", "行号 "), // zh-Hans
+            new Language("於 ", " 於 ", " 行 ") // zh-Hant
             );
     }
 }

@@ -1,9 +1,9 @@
 //
 // FontInfoCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.FontInfo
+//	- CAS unit tests for System.Web.UI.WebControls.FontInfo
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,39 +39,39 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class FontInfoCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class FontInfoCas : AspNetHostingMinimal {
 
-        private FontInfo fi;
+		private FontInfo fi;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            fi = new Style ().Font;
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			fi = new Style ().Font;
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            FontInfoTest unit = new FontInfoTest ();
-            unit.Style_Defaults ();
-            unit.Style_Copy ();
-            unit.Style_Merge ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			FontInfoTest unit = new FontInfoTest ();
+			unit.Style_Defaults ();
+			unit.Style_Copy ();
+			unit.Style_Merge ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            MethodInfo mi = this.Type.GetProperty ("Bold").GetGetMethod ();
-            Assert.IsNotNull (mi, "Bold");
-            return mi.Invoke (fi, null);
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			MethodInfo mi = this.Type.GetProperty ("Bold").GetGetMethod ();
+			Assert.IsNotNull (mi, "Bold");
+			return mi.Invoke (fi, null);
+		}
 
-        public override Type Type {
-            get { return typeof (FontInfo); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (FontInfo); }
+		}
+	}
 }

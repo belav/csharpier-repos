@@ -28,46 +28,46 @@
 
 namespace Mono.Cecil.Binary {
 
-    using System;
+	using System;
 
-    internal sealed class DebugHeader : IHeader, IBinaryVisitable {
+	internal sealed class DebugHeader : IHeader, IBinaryVisitable {
 
-        public uint Characteristics;
-        public uint TimeDateStamp;
-        public ushort MajorVersion;
-        public ushort MinorVersion;
-        public DebugStoreType Type;
-        public uint SizeOfData;
-        public RVA AddressOfRawData;
-        public uint PointerToRawData;
+		public uint Characteristics;
+		public uint TimeDateStamp;
+		public ushort MajorVersion;
+		public ushort MinorVersion;
+		public DebugStoreType Type;
+		public uint SizeOfData;
+		public RVA AddressOfRawData;
+		public uint PointerToRawData;
 
-        public uint Magic;
-        public Guid Signature;
-        public uint Age;
-        public string FileName;
+		public uint Magic;
+		public Guid Signature;
+		public uint Age;
+		public string FileName;
 
-        internal DebugHeader ()
-        {
-        }
+		internal DebugHeader ()
+		{
+		}
 
-        public void SetDefaultValues ()
-        {
-            Characteristics = 0;
+		public void SetDefaultValues ()
+		{
+			Characteristics = 0;
 
-            this.Magic = 0x53445352;
-            this.Age = 0;
-            this.Type = DebugStoreType.CodeView;
-            this.FileName = string.Empty;
-        }
+			this.Magic = 0x53445352;
+			this.Age = 0;
+			this.Type = DebugStoreType.CodeView;
+			this.FileName = string.Empty;
+		}
 
-        public uint GetSize ()
-        {
-            return 0x34 + (uint) FileName.Length + 1;
-        }
+		public uint GetSize ()
+		{
+			return 0x34 + (uint) FileName.Length + 1;
+		}
 
-        public void Accept (IBinaryVisitor visitor)
-        {
-            visitor.VisitDebugHeader (this);
-        }
-    }
+		public void Accept (IBinaryVisitor visitor)
+		{
+			visitor.VisitDebugHeader (this);
+		}
+	}
 }

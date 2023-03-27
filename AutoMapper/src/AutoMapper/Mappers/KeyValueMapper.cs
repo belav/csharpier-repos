@@ -1,4 +1,4 @@
-namespace AutoMapper.Internal.Mappers;
+﻿namespace AutoMapper.Internal.Mappers;
 public class KeyValueMapper : IObjectMapper
 {
     public bool IsMatch(TypePair context) => IsKeyValue(context.SourceType) && IsKeyValue(context.DestinationType);

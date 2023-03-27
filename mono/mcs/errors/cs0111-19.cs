@@ -4,13 +4,13 @@
 
 public partial class C
 {
-    void Foo ()
-    {
-    }
-    
-    partial void Foo ();
-    
-    partial void Foo ()
-    {
-    }
+	void Foo ()
+	{
+	}
+	
+	partial void Foo ();
+	
+	partial void Foo ()
+	{
+	}
 }

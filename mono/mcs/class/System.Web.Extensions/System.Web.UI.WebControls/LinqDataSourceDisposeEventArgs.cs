@@ -35,15 +35,15 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class LinqDataSourceDisposeEventArgs : CancelEventArgs
-    {
-        public LinqDataSourceDisposeEventArgs (object instance)
-        {
-            ObjectInstance = instance;
-        }
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class LinqDataSourceDisposeEventArgs : CancelEventArgs
+	{
+		public LinqDataSourceDisposeEventArgs (object instance)
+		{
+			ObjectInstance = instance;
+		}
 
-        public object ObjectInstance { get; private set; }
-    }
+		public object ObjectInstance { get; private set; }
+	}
 }

@@ -3,16 +3,16 @@
 
 struct S
 {
-    public int x { get; set; }
+	public int x { get; set; }
 }
 
 class C
 {
-    static readonly S s;
+	static readonly S s;
 
-    public static void Main (string[] args)
-    {
-        s.x = 42;
-    }
+	public static void Main (string[] args)
+	{
+		s.x = 42;
+	}
 }
 

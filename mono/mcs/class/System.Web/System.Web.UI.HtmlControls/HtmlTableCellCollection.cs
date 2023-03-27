@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlTableCellCollection.cs
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,73 +31,73 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls {
 
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class HtmlTableCellCollection : ICollection, IEnumerable {
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class HtmlTableCellCollection : ICollection, IEnumerable {
 
-        ControlCollection cc;
-
-
-        internal HtmlTableCellCollection (HtmlTableRow tr)
-        {
-            cc = tr.Controls;
-        }
+		ControlCollection cc;
 
 
-        public int Count {
-            get { return cc.Count; }
-        }
-
-        public bool IsReadOnly {
-            get { return false; }    // documented as always false
-        }
-
-        public bool IsSynchronized {
-            get { return false; }    // documented as always false
-        }
-
-        public HtmlTableCell this [int index] {
-            get { return (HtmlTableCell) cc [index]; }
-        }
-
-        public object SyncRoot {
-            get { return this; }    // as documented
-        }
+		internal HtmlTableCellCollection (HtmlTableRow tr)
+		{
+			cc = tr.Controls;
+		}
 
 
-        public void Add (HtmlTableCell cell)
-        {
-            cc.Add (cell);
-        }
+		public int Count {
+			get { return cc.Count; }
+		}
 
-        public void Clear ()
-        {
-            cc.Clear ();
-        }
+		public bool IsReadOnly {
+			get { return false; }	// documented as always false
+		}
 
-        public void CopyTo (Array array, int index)
-        {
-            cc.CopyTo (array, index);
-        }
+		public bool IsSynchronized {
+			get { return false; }	// documented as always false
+		}
 
-        public IEnumerator GetEnumerator ()
-        {
-            return cc.GetEnumerator ();
-        }
+		public HtmlTableCell this [int index] {
+			get { return (HtmlTableCell) cc [index]; }
+		}
 
-        public void Insert (int index, HtmlTableCell cell)
-        {
-            cc.AddAt (index, cell);
-        }
+		public object SyncRoot {
+			get { return this; }	// as documented
+		}
 
-        public void Remove (HtmlTableCell cell)
-        {
-            cc.Remove (cell);
-        }
 
-        public void RemoveAt (int index)
-        {
-            cc.RemoveAt (index);
-        }
-    }
+		public void Add (HtmlTableCell cell)
+		{
+			cc.Add (cell);
+		}
+
+		public void Clear ()
+		{
+			cc.Clear ();
+		}
+
+		public void CopyTo (Array array, int index)
+		{
+			cc.CopyTo (array, index);
+		}
+
+		public IEnumerator GetEnumerator ()
+		{
+			return cc.GetEnumerator ();
+		}
+
+		public void Insert (int index, HtmlTableCell cell)
+		{
+			cc.AddAt (index, cell);
+		}
+
+		public void Remove (HtmlTableCell cell)
+		{
+			cc.Remove (cell);
+		}
+
+		public void RemoveAt (int index)
+		{
+			cc.RemoveAt (index);
+		}
+	}
 }

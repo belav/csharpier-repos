@@ -24,7 +24,7 @@
 // System.Web.UI.WebControls.AdCreatedEventArgsTest.cs
 //
 // Author:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 
 using System;
@@ -35,105 +35,105 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    public class AdCreatedEventArgsTest {
+	[TestFixture]
+	public class AdCreatedEventArgsTest {
 
-        [Test]
-        public void Defaults ()
-        {
-            Hashtable table = new Hashtable ();
-            AdCreatedEventArgs e = new AdCreatedEventArgs (table);
-            Assert.AreEqual (e.AdProperties, table, "Constructor");
+		[Test]
+		public void Defaults ()
+		{
+			Hashtable table = new Hashtable ();
+			AdCreatedEventArgs e = new AdCreatedEventArgs (table);
+			Assert.AreEqual (e.AdProperties, table, "Constructor");
 
-            e = new AdCreatedEventArgs (null);
-            Assert.AreEqual (e.AdProperties, null, "Null Constructor");
-        }
+			e = new AdCreatedEventArgs (null);
+			Assert.AreEqual (e.AdProperties, null, "Null Constructor");
+		}
 
-        [Test]
-        public void SetPropsInCtor ()
-        {
-            Hashtable table = new Hashtable ();
-            table ["AlternateText"] = "alt text";
-            table ["ImageUrl"] = "image url";
-            table ["NavigateUrl"] = "nav url";
-            AdCreatedEventArgs e = new AdCreatedEventArgs (table);
+		[Test]
+		public void SetPropsInCtor ()
+		{
+			Hashtable table = new Hashtable ();
+			table ["AlternateText"] = "alt text";
+			table ["ImageUrl"] = "image url";
+			table ["NavigateUrl"] = "nav url";
+			AdCreatedEventArgs e = new AdCreatedEventArgs (table);
 
-            Assert.AreEqual (e.AlternateText, "alt text", "alt text");
-            Assert.AreEqual (e.ImageUrl, "image url", "image url");
-            Assert.AreEqual (e.NavigateUrl, "nav url", "nav url");
-        }
+			Assert.AreEqual (e.AlternateText, "alt text", "alt text");
+			Assert.AreEqual (e.ImageUrl, "image url", "image url");
+			Assert.AreEqual (e.NavigateUrl, "nav url", "nav url");
+		}
 
-        [Test]
-        public void SetProps ()
-        {
-            AdCreatedEventArgs e = new AdCreatedEventArgs (null);
+		[Test]
+		public void SetProps ()
+		{
+			AdCreatedEventArgs e = new AdCreatedEventArgs (null);
 
-            e.AlternateText = "alt text";
-            Assert.AreEqual (e.AlternateText, "alt text", "alt text");
+			e.AlternateText = "alt text";
+			Assert.AreEqual (e.AlternateText, "alt text", "alt text");
 
-            e.AlternateText = null;
-            Assert.AreEqual (e.AlternateText, null, "null alt text");
+			e.AlternateText = null;
+			Assert.AreEqual (e.AlternateText, null, "null alt text");
 
-            e.ImageUrl = "image url";
-            Assert.AreEqual (e.ImageUrl, "image url", "image url");
+			e.ImageUrl = "image url";
+			Assert.AreEqual (e.ImageUrl, "image url", "image url");
 
-            e.ImageUrl = null;
-            Assert.AreEqual (e.ImageUrl, null, "null image url");
+			e.ImageUrl = null;
+			Assert.AreEqual (e.ImageUrl, null, "null image url");
 
-            e.NavigateUrl = "nav url";
-            Assert.AreEqual (e.NavigateUrl, "nav url", "nav url");
+			e.NavigateUrl = "nav url";
+			Assert.AreEqual (e.NavigateUrl, "nav url", "nav url");
 
-            e.NavigateUrl = null;
-            Assert.AreEqual (e.NavigateUrl, null, "null nav url");
-        }
+			e.NavigateUrl = null;
+			Assert.AreEqual (e.NavigateUrl, null, "null nav url");
+		}
 
-        [Test]
-        public void ModifyProps ()
-        {
-            Hashtable table = new Hashtable ();
-            table ["AlternateText"] = "alt text";
-            table ["ImageUrl"] = "image url";
-            table ["NavigateUrl"] = "nav url";
-            AdCreatedEventArgs e = new AdCreatedEventArgs (table);
+		[Test]
+		public void ModifyProps ()
+		{
+			Hashtable table = new Hashtable ();
+			table ["AlternateText"] = "alt text";
+			table ["ImageUrl"] = "image url";
+			table ["NavigateUrl"] = "nav url";
+			AdCreatedEventArgs e = new AdCreatedEventArgs (table);
 
-            e.AlternateText = "foo";
-            Assert.AreEqual (e.AdProperties ["AlternateText"],
-                    "alt text", "alt text");
+			e.AlternateText = "foo";
+			Assert.AreEqual (e.AdProperties ["AlternateText"],
+					"alt text", "alt text");
 
-            e.ImageUrl = "bar";
-            Assert.AreEqual (e.AdProperties ["ImageUrl"],
-                    "image url", "image url");
+			e.ImageUrl = "bar";
+			Assert.AreEqual (e.AdProperties ["ImageUrl"],
+					"image url", "image url");
 
-            e.NavigateUrl = "baz";
-            Assert.AreEqual (e.AdProperties ["NavigateUrl"],
-                    "nav url", "nav url");
-        }
+			e.NavigateUrl = "baz";
+			Assert.AreEqual (e.AdProperties ["NavigateUrl"],
+					"nav url", "nav url");
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void BadCastAlternateText ()
-        {
-            Hashtable table = new Hashtable ();
-            table ["AlternateText"] = 52;
-            AdCreatedEventArgs e = new AdCreatedEventArgs (table);
-        }
+		[Test]
+		[ExpectedException (typeof (InvalidCastException))]
+		public void BadCastAlternateText ()
+		{
+			Hashtable table = new Hashtable ();
+			table ["AlternateText"] = 52;
+			AdCreatedEventArgs e = new AdCreatedEventArgs (table);
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void BadCastImageUrl ()
-        {
-            Hashtable table = new Hashtable ();
-            table ["ImageUrl"] = 52;
-            AdCreatedEventArgs e = new AdCreatedEventArgs (table);
-        }
+		[Test]
+		[ExpectedException (typeof (InvalidCastException))]
+		public void BadCastImageUrl ()
+		{
+			Hashtable table = new Hashtable ();
+			table ["ImageUrl"] = 52;
+			AdCreatedEventArgs e = new AdCreatedEventArgs (table);
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void BadCastNavigateUrl ()
-        {
-            Hashtable table = new Hashtable ();
-            table ["NavigateUrl"] = 52;
-            AdCreatedEventArgs e = new AdCreatedEventArgs (table);
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (InvalidCastException))]
+		public void BadCastNavigateUrl ()
+		{
+			Hashtable table = new Hashtable ();
+			table ["NavigateUrl"] = 52;
+			AdCreatedEventArgs e = new AdCreatedEventArgs (table);
+		}
+	}
 }

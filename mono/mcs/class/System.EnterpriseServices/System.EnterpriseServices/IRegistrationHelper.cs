@@ -32,16 +32,16 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [Guid("55e3ea25-55cb-4650-8887-18e8d30bb4bc")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IRegistrationHelper {
+	[Guid("55e3ea25-55cb-4650-8887-18e8d30bb4bc")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	public interface IRegistrationHelper {
 
-        #region Methods
+		#region Methods
 
-        void InstallAssembly ([In, MarshalAs(UnmanagedType.BStr)] string assembly, [In, Out, MarshalAs(UnmanagedType.BStr)] ref string application, [In, Out, MarshalAs(UnmanagedType.BStr)] ref string tlb, [In] InstallationFlags installFlags);
-        void UninstallAssembly ([In, MarshalAs (UnmanagedType.BStr)] string assembly, [In, MarshalAs (UnmanagedType.BStr)] string application);
+		void InstallAssembly ([In, MarshalAs(UnmanagedType.BStr)] string assembly, [In, Out, MarshalAs(UnmanagedType.BStr)] ref string application, [In, Out, MarshalAs(UnmanagedType.BStr)] ref string tlb, [In] InstallationFlags installFlags);
+		void UninstallAssembly ([In, MarshalAs (UnmanagedType.BStr)] string assembly, [In, MarshalAs (UnmanagedType.BStr)] string application);
 
-        #endregion
+		#endregion
 
-    }
+	}
 }

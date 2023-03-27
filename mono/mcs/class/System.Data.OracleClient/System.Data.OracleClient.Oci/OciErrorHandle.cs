@@ -20,135 +20,135 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 namespace System.Data.OracleClient.Oci {
-    internal sealed class OciErrorHandle : OciHandle, IDisposable
-    {
-        #region Fields
+	internal sealed class OciErrorHandle : OciHandle, IDisposable
+	{
+		#region Fields
 
-        bool disposed = false;
+		bool disposed = false;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public OciErrorHandle (OciHandle parent, IntPtr newHandle)
-            : base (OciHandleType.Error, parent, newHandle)
-        {
-        }
+		public OciErrorHandle (OciHandle parent, IntPtr newHandle)
+			: base (OciHandleType.Error, parent, newHandle)
+		{
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Methods
+		#region Methods
 
-        protected override void Dispose (bool disposing)
-        {
-            if (!disposed) {
-                disposed = true;
-                base.Dispose (disposing);
-            }
-        }
+		protected override void Dispose (bool disposing)
+		{
+			if (!disposed) {
+				disposed = true;
+				base.Dispose (disposing);
+			}
+		}
 
-        public static void ThrowExceptionIfError (OciHandle hwnd, int status)
-        {
-            if (status == 0)
-                return;
-            OciErrorInfo info = HandleError (hwnd, status);
-            throw new OracleException (info.ErrorCode, info.ErrorMessage);
-        }
+		public static void ThrowExceptionIfError (OciHandle hwnd, int status)
+		{
+			if (status == 0)
+				return;
+			OciErrorInfo info = HandleError (hwnd, status);
+			throw new OracleException (info.ErrorCode, info.ErrorMessage);
+		}
 
-        public static OciErrorInfo HandleError (OciHandle hwnd, int status) 
-        {        
-            OciErrorInfo info;
-            info.ErrorCode = status;
-            info.ErrorMessage = OciGlue.ReturnCodeToString (status);
+		public static OciErrorInfo HandleError (OciHandle hwnd, int status) 
+		{		
+			OciErrorInfo info;
+			info.ErrorCode = status;
+			info.ErrorMessage = OciGlue.ReturnCodeToString (status);
 
-            if (status == OciGlue.OCI_ERROR || status == OciGlue.OCI_SUCCESS_WITH_INFO) {
-                OciHandle h = hwnd;
-                if (h == null)
-                    throw new Exception ("Internal driver error: handle is null.");
-    
-                int errbufSize = 4096;
-                IntPtr errbuf = OciCalls.AllocateClear (errbufSize);
+			if (status == OciGlue.OCI_ERROR || status == OciGlue.OCI_SUCCESS_WITH_INFO) {
+				OciHandle h = hwnd;
+				if (h == null)
+					throw new Exception ("Internal driver error: handle is null.");
+	
+				int errbufSize = 4096;
+				IntPtr errbuf = OciCalls.AllocateClear (errbufSize);
 
-                OciCalls.OCIErrorGet (hwnd,
-                    1,
-                    IntPtr.Zero,
-                    out info.ErrorCode,
-                    errbuf,
-                    (uint) errbufSize,
-                    OciHandleType.Error);
+				OciCalls.OCIErrorGet (hwnd,
+					1,
+					IntPtr.Zero,
+					out info.ErrorCode,
+					errbuf,
+					(uint) errbufSize,
+					OciHandleType.Error);
 
-                byte[] bytea = new byte[errbufSize];
-                Marshal.Copy (errbuf, bytea, 0, errbufSize);
-                errbufSize = 0;
+				byte[] bytea = new byte[errbufSize];
+				Marshal.Copy (errbuf, bytea, 0, errbufSize);
+				errbufSize = 0;
 
-                // first call to OCICharSetToUnicode gets the size
-                OciCalls.OCICharSetToUnicode (h, null, bytea, out errbufSize);
-                StringBuilder str = new StringBuilder (errbufSize);
+				// first call to OCICharSetToUnicode gets the size
+				OciCalls.OCICharSetToUnicode (h, null, bytea, out errbufSize);
+				StringBuilder str = new StringBuilder (errbufSize);
 
-                // second call to OCICharSetToUnicode gets the string
-                OciCalls.OCICharSetToUnicode (h, str, bytea, out errbufSize);
+				// second call to OCICharSetToUnicode gets the string
+				OciCalls.OCICharSetToUnicode (h, str, bytea, out errbufSize);
 
-                string errmsg = String.Empty;
-                if (errbufSize > 0) {
-                    errmsg = str.ToString ();
-                    info.ErrorMessage = String.Copy (errmsg);
-                }
-                Marshal.FreeHGlobal (errbuf);
-            }
-            return info;
-        }
+				string errmsg = String.Empty;
+				if (errbufSize > 0) {
+					errmsg = str.ToString ();
+					info.ErrorMessage = String.Copy (errmsg);
+				}
+				Marshal.FreeHGlobal (errbuf);
+			}
+			return info;
+		}
 
-        public static OciErrorInfo HandleError (OciHandle hand)
-        {
-            OciErrorInfo info;
-            info.ErrorCode = 0;
-            info.ErrorMessage = String.Empty;
+		public static OciErrorInfo HandleError (OciHandle hand)
+		{
+			OciErrorInfo info;
+			info.ErrorCode = 0;
+			info.ErrorMessage = String.Empty;
 
-            int errbufSize = 4096;
-            IntPtr errbuf = OciCalls.AllocateClear (errbufSize);
+			int errbufSize = 4096;
+			IntPtr errbuf = OciCalls.AllocateClear (errbufSize);
 
-            OciCalls.OCIErrorGet (hand,
-                1,
-                IntPtr.Zero,
-                out info.ErrorCode,
-                errbuf,
-                (uint) errbufSize,
-                OciHandleType.Error);
+			OciCalls.OCIErrorGet (hand,
+				1,
+				IntPtr.Zero,
+				out info.ErrorCode,
+				errbuf,
+				(uint) errbufSize,
+				OciHandleType.Error);
 
-            byte[] bytea = new byte[errbufSize];
-            Marshal.Copy (errbuf, bytea, 0, errbufSize);
-            errbufSize = 0;
+			byte[] bytea = new byte[errbufSize];
+			Marshal.Copy (errbuf, bytea, 0, errbufSize);
+			errbufSize = 0;
 
-            OciHandle h = hand.Parent;
-            if (h == null)
-                h = hand;
-            if (h == null)
-                throw new Exception ("Internal driver error: handle is null.");
+			OciHandle h = hand.Parent;
+			if (h == null)
+				h = hand;
+			if (h == null)
+				throw new Exception ("Internal driver error: handle is null.");
 
-            // first call to OCICharSetToUnicode gets the size
-            OciCalls.OCICharSetToUnicode (h, null, bytea, out errbufSize);
-            StringBuilder str = new StringBuilder (errbufSize);
+			// first call to OCICharSetToUnicode gets the size
+			OciCalls.OCICharSetToUnicode (h, null, bytea, out errbufSize);
+			StringBuilder str = new StringBuilder (errbufSize);
 
-            // second call to OCICharSetToUnicode gets the string
-            OciCalls.OCICharSetToUnicode (h, str, bytea, out errbufSize);
+			// second call to OCICharSetToUnicode gets the string
+			OciCalls.OCICharSetToUnicode (h, str, bytea, out errbufSize);
 
-            string errmsg = String.Empty;
-            if (errbufSize > 0)
-                errmsg = str.ToString ();
-            else
-                errmsg = "Internal driver error. Could not retrieve error message.";
+			string errmsg = String.Empty;
+			if (errbufSize > 0)
+				errmsg = str.ToString ();
+			else
+				errmsg = "Internal driver error. Could not retrieve error message.";
 
-            info.ErrorMessage = String.Copy (errmsg);
-            Marshal.FreeHGlobal (errbuf);
+			info.ErrorMessage = String.Copy (errmsg);
+			Marshal.FreeHGlobal (errbuf);
 
-            return info;
-        }
+			return info;
+		}
 
-        public OciErrorInfo HandleError ()
-        {
-            return HandleError (this);
-        }
+		public OciErrorInfo HandleError ()
+		{
+			return HandleError (this);
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

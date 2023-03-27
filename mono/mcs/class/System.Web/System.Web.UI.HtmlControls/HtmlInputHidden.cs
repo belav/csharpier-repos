@@ -22,7 +22,7 @@
 // System.Web.UI.HtmlControls.HtmlInputHidden.cs
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 // (C) 2005-2010 Novell, Inc.
 
@@ -32,88 +32,88 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls {
 
-    // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [DefaultEvent ("ServerChange")]
-    [SupportsEventValidation]
-    public class HtmlInputHidden : HtmlInputControl, IPostBackDataHandler {
+	// CAS
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[DefaultEvent ("ServerChange")]
+	[SupportsEventValidation]
+	public class HtmlInputHidden : HtmlInputControl, IPostBackDataHandler {
 
-        static readonly object ServerChangeEvent = new object ();
+		static readonly object ServerChangeEvent = new object ();
 
-        public HtmlInputHidden () : base ("hidden")
-        {
-        }
+		public HtmlInputHidden () : base ("hidden")
+		{
+		}
 
-        bool LoadPostDataInternal (string postDataKey, NameValueCollection postCollection)
-        {
-            string data = postCollection [postDataKey];
-            if (data != null && data != Value) {
-                ValidateEvent (postDataKey, String.Empty);
-                Value = data;
-                return true;
-            }
-            return false;
-        }
+		bool LoadPostDataInternal (string postDataKey, NameValueCollection postCollection)
+		{
+			string data = postCollection [postDataKey];
+			if (data != null && data != Value) {
+				ValidateEvent (postDataKey, String.Empty);
+				Value = data;
+				return true;
+			}
+			return false;
+		}
 
-        void RaisePostDataChangedEventInternal ()
-        {
-            OnServerChange (EventArgs.Empty);
-        }
+		void RaisePostDataChangedEventInternal ()
+		{
+			OnServerChange (EventArgs.Empty);
+		}
 
-        protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
-        {
-            return LoadPostDataInternal (postDataKey, postCollection);
-        }
+		protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
+		{
+			return LoadPostDataInternal (postDataKey, postCollection);
+		}
 
-        protected virtual void RaisePostDataChangedEvent ()
-        {
-            RaisePostDataChangedEventInternal ();
-        }
-        
-        bool IPostBackDataHandler.LoadPostData (string postDataKey,
-                            NameValueCollection postCollection)
-        {
-            return LoadPostData (postDataKey, postCollection);
-        }
+		protected virtual void RaisePostDataChangedEvent ()
+		{
+			RaisePostDataChangedEventInternal ();
+		}
+		
+		bool IPostBackDataHandler.LoadPostData (string postDataKey,
+							NameValueCollection postCollection)
+		{
+			return LoadPostData (postDataKey, postCollection);
+		}
 
-        void IPostBackDataHandler.RaisePostDataChangedEvent ()
-        {
-            RaisePostDataChangedEvent ();
-        }
+		void IPostBackDataHandler.RaisePostDataChangedEvent ()
+		{
+			RaisePostDataChangedEvent ();
+		}
 
-        protected override void RenderAttributes (HtmlTextWriter writer)
-        {
-            Page page = Page;
-            if (page != null)
-                page.ClientScript.RegisterForEventValidation (Name);
-            base.RenderAttributes (writer);
-        }        
+		protected override void RenderAttributes (HtmlTextWriter writer)
+		{
+			Page page = Page;
+			if (page != null)
+				page.ClientScript.RegisterForEventValidation (Name);
+			base.RenderAttributes (writer);
+		}		
 
-        protected internal override void OnPreRender (EventArgs e)
-        {
-            base.OnPreRender (e);
+		protected internal override void OnPreRender (EventArgs e)
+		{
+			base.OnPreRender (e);
 
-            Page page = Page;
-            if (page != null && !Disabled) {
-                page.RegisterRequiresPostBack (this);
-                page.RegisterEnabledControl (this);
-            }
-        }
+			Page page = Page;
+			if (page != null && !Disabled) {
+				page.RegisterRequiresPostBack (this);
+				page.RegisterEnabledControl (this);
+			}
+		}
 
-        protected virtual void OnServerChange (EventArgs e)
-        {
-            EventHandler handler = (EventHandler) Events [ServerChangeEvent];
-            if (handler != null)
-                handler (this, e);
-        }
-            
-        [WebSysDescription("")]
-        [WebCategory("Action")]
-        public event EventHandler ServerChange {
-            add { Events.AddHandler (ServerChangeEvent, value); }
-            remove { Events.RemoveHandler (ServerChangeEvent, value); }
-        }
-    }
+		protected virtual void OnServerChange (EventArgs e)
+		{
+			EventHandler handler = (EventHandler) Events [ServerChangeEvent];
+			if (handler != null)
+				handler (this, e);
+		}
+			
+		[WebSysDescription("")]
+		[WebCategory("Action")]
+		public event EventHandler ServerChange {
+			add { Events.AddHandler (ServerChangeEvent, value); }
+			remove { Events.RemoveHandler (ServerChangeEvent, value); }
+		}
+	}
 }

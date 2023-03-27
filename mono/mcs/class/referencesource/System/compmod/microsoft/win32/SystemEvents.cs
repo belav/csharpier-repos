@@ -1539,7 +1539,7 @@ namespace Microsoft.Win32 {
                         InvokeMarshaledCallbacks();
                         return IntPtr.Zero;
                     }
-            break;
+		    break;
             }
 
             return UnsafeNativeMethods.DefWindowProc(hWnd, msg, wParam, lParam);

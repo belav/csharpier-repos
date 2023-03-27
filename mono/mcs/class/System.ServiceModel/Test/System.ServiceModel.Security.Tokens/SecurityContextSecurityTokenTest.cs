@@ -2,7 +2,7 @@
 // SecurityContextSecurityTokenTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -41,18 +41,18 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class SecurityContextSecurityTokenTest
-    {
-        [Test]
-        public void ConstructorNullPolicies () // allowed
-        {
-            SecurityContextSecurityToken sct = new SecurityContextSecurityToken (
-                new UniqueId (), "urn:id-1", new byte [32],
-                DateTime.MinValue, DateTime.MaxValue,
-                null);
-            Assert.IsNotNull (sct.AuthorizationPolicies, "#1");
-        }
-    }
+	[TestFixture]
+	public class SecurityContextSecurityTokenTest
+	{
+		[Test]
+		public void ConstructorNullPolicies () // allowed
+		{
+			SecurityContextSecurityToken sct = new SecurityContextSecurityToken (
+				new UniqueId (), "urn:id-1", new byte [32],
+				DateTime.MinValue, DateTime.MaxValue,
+				null);
+			Assert.IsNotNull (sct.AuthorizationPolicies, "#1");
+		}
+	}
 }
 #endif

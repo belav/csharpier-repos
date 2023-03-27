@@ -33,14 +33,14 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-    public class FindCompletedEventArgs : AsyncCompletedEventArgs
-    {
-        internal FindCompletedEventArgs (FindResponse result, Exception error, bool cancelled, object userState)
-            : base (error, cancelled, userState)
-        {
-            this.Result = result;
-        }
+	public class FindCompletedEventArgs : AsyncCompletedEventArgs
+	{
+		internal FindCompletedEventArgs (FindResponse result, Exception error, bool cancelled, object userState)
+			: base (error, cancelled, userState)
+		{
+			this.Result = result;
+		}
 
-        public FindResponse Result { get; private set; }
-    }
+		public FindResponse Result { get; private set; }
+	}
 }

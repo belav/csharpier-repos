@@ -50,11 +50,11 @@ class MainClass {
         static int Main(string[] args) {
                 IC c = new C ();
                 IX w = ((IA)c).Prop;
-        if (w.ToString () == "Y") {
-            return 0;
-        } else {
-            return 1;
-        }
+		if (w.ToString () == "Y") {
+			return 0;
+		} else {
+			return 1;
+		}
                 Console.WriteLine (w.ToString ());
         }
 }

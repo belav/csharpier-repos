@@ -2,7 +2,7 @@
 // System.Net.Configuration.PerformanceCountersElement
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc. (http://www.novell.com)
 //

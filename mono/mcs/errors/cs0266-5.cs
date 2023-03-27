@@ -3,18 +3,18 @@
 
 struct S
 {
-    public static int Main ()
-    {
-        S? s = null;
-        A a = s;
-        return 0;
-    }
+	public static int Main ()
+	{
+		S? s = null;
+		A a = s;
+		return 0;
+	}
 }
 
 struct A
 {
-    public static implicit operator A (S x)
-    {
-        return new A ();
-    }
+	public static implicit operator A (S x)
+	{
+		return new A ();
+	}
 }

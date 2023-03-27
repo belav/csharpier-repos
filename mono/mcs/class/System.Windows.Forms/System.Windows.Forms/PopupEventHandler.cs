@@ -23,10 +23,10 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public delegate void PopupEventHandler (object sender, PopupEventArgs e);
+	public delegate void PopupEventHandler (object sender, PopupEventArgs e);
 }

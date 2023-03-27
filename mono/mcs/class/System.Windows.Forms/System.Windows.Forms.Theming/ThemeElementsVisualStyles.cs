@@ -20,39 +20,39 @@
 // Copyright (c) 2008 George Giolfan
 //
 // Authors:
-//    George Giolfan (georgegiolfan@yahoo.com)
+//	George Giolfan (georgegiolfan@yahoo.com)
 
 namespace System.Windows.Forms.Theming
 {
-    class ThemeElementsVisualStyles : ThemeElementsDefault
-    {
-        public override Default.CheckBoxPainter CheckBoxPainter {
-            get {
-                if (checkBoxPainter == null)
-                    checkBoxPainter = new VisualStyles.CheckBoxPainter ();
-                return checkBoxPainter;
-            }
-        }
-        public override Default.RadioButtonPainter RadioButtonPainter {
-            get {
-                if (radioButtonPainter == null)
-                    radioButtonPainter = new VisualStyles.RadioButtonPainter ();
-                return radioButtonPainter;
-            }
-        }
-        public override Default.ToolStripPainter ToolStripPainter {
-            get {
-                if (toolStripPainter == null)
-                    toolStripPainter = new VisualStyles.ToolStripPainter ();
-                return toolStripPainter;
-            }
-        }
-        public override Default.TabControlPainter TabControlPainter {
-            get {
-                if (tabControlPainter == null)
-                    tabControlPainter = new VisualStyles.TabControlPainter ();
-                return tabControlPainter;
-            }
-        }
-    }
+	class ThemeElementsVisualStyles : ThemeElementsDefault
+	{
+		public override Default.CheckBoxPainter CheckBoxPainter {
+			get {
+				if (checkBoxPainter == null)
+					checkBoxPainter = new VisualStyles.CheckBoxPainter ();
+				return checkBoxPainter;
+			}
+		}
+		public override Default.RadioButtonPainter RadioButtonPainter {
+			get {
+				if (radioButtonPainter == null)
+					radioButtonPainter = new VisualStyles.RadioButtonPainter ();
+				return radioButtonPainter;
+			}
+		}
+		public override Default.ToolStripPainter ToolStripPainter {
+			get {
+				if (toolStripPainter == null)
+					toolStripPainter = new VisualStyles.ToolStripPainter ();
+				return toolStripPainter;
+			}
+		}
+		public override Default.TabControlPainter TabControlPainter {
+			get {
+				if (tabControlPainter == null)
+					tabControlPainter = new VisualStyles.TabControlPainter ();
+				return tabControlPainter;
+			}
+		}
+	}
 }

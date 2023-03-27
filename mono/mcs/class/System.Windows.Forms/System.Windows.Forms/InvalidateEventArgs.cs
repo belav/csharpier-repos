@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
@@ -29,21 +29,21 @@
 using System.Drawing;
 
 namespace System.Windows.Forms {
-    public class InvalidateEventArgs : EventArgs {
-        private Rectangle    invalidated_rectangle;
+	public class InvalidateEventArgs : EventArgs {
+		private Rectangle	invalidated_rectangle;
 
-        #region Public Constructors
-        public InvalidateEventArgs(System.Drawing.Rectangle invalidRect) {
-            this.invalidated_rectangle=invalidRect;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public InvalidateEventArgs(System.Drawing.Rectangle invalidRect) {
+			this.invalidated_rectangle=invalidRect;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public Rectangle InvalidRect {
-            get {
-                return this.invalidated_rectangle;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public Rectangle InvalidRect {
+			get {
+				return this.invalidated_rectangle;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

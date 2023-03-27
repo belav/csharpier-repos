@@ -18,13 +18,13 @@ public class Program {
 [Serializable]
 public class DebugPermissionAttribute : CodeAccessSecurityAttribute {
 
-    public DebugPermissionAttribute (SecurityAction action)
-        : base (action)
-    {
-    }
+	public DebugPermissionAttribute (SecurityAction action)
+		: base (action)
+	{
+	}
         
-    public override IPermission CreatePermission ()
-    {
-        return null;
-    }
+	public override IPermission CreatePermission ()
+	{
+		return null;
+	}
 }

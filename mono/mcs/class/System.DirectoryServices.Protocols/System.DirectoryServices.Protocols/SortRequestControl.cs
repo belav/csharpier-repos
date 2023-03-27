@@ -30,34 +30,34 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class SortRequestControl : DirectoryControl
-    {
-        [MonoTODO]
-        public SortRequestControl (params SortKey [] sortKeys)
-            : base (null, null, false, false)
-        {
-            SortKeys = sortKeys;
-            throw new NotImplementedException ();
-        }
+	public class SortRequestControl : DirectoryControl
+	{
+		[MonoTODO]
+		public SortRequestControl (params SortKey [] sortKeys)
+			: base (null, null, false, false)
+		{
+			SortKeys = sortKeys;
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public SortRequestControl (string attributeName, bool reverseOrder)
-            : this (attributeName, null, reverseOrder)
-        {
-        }
+		[MonoTODO]
+		public SortRequestControl (string attributeName, bool reverseOrder)
+			: this (attributeName, null, reverseOrder)
+		{
+		}
 
-        [MonoTODO]
-        public SortRequestControl (string attributeName, string matchingRule, bool reverseOrder)
-            : this (new SortKey (attributeName, matchingRule, reverseOrder))
-        {
-        }
+		[MonoTODO]
+		public SortRequestControl (string attributeName, string matchingRule, bool reverseOrder)
+			: this (new SortKey (attributeName, matchingRule, reverseOrder))
+		{
+		}
 
-        public SortKey [] SortKeys { get; set; }
+		public SortKey [] SortKeys { get; set; }
 
-        [MonoTODO]
-        public override byte [] GetValue ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override byte [] GetValue ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

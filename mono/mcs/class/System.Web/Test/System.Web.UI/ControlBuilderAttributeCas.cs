@@ -1,9 +1,9 @@
 //
 // ControlBuilderAttributeCas.cs 
-//    - CAS unit tests for System.Web.UI.ControlBuilderAttribute
+//	- CAS unit tests for System.Web.UI.ControlBuilderAttribute
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,32 +37,32 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ControlBuilderAttributeCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ControlBuilderAttributeCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            ControlBuilderAttribute attr = new ControlBuilderAttribute (null);
-            Assert.IsNull (attr.BuilderType, "BuilderType");
-            Assert.IsTrue (attr.Equals (ControlBuilderAttribute.Default), "Equals");
-            attr.GetHashCode ();
-            Assert.IsTrue (attr.IsDefaultAttribute (), "IsDefaultAttribute");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			ControlBuilderAttribute attr = new ControlBuilderAttribute (null);
+			Assert.IsNull (attr.BuilderType, "BuilderType");
+			Assert.IsTrue (attr.Equals (ControlBuilderAttribute.Default), "Equals");
+			attr.GetHashCode ();
+			Assert.IsTrue (attr.IsDefaultAttribute (), "IsDefaultAttribute");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (Type) });
-            Assert.IsNotNull (ci, ".ctor(Type)");
-            return ci.Invoke (new object[1] { null });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (Type) });
+			Assert.IsNotNull (ci, ".ctor(Type)");
+			return ci.Invoke (new object[1] { null });
+		}
 
-        public override Type Type {
-            get { return typeof (ControlBuilderAttribute); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (ControlBuilderAttribute); }
+		}
+	}
 }

@@ -30,81 +30,81 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Drawing {
 
-    [TestFixture]
-    [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-    public class ColorTranslatorTest {
+	[TestFixture]
+	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	public class ColorTranslatorTest {
 
-        [Test]
-        public void FromHtml_Null ()
-        {
-            Assert.AreEqual (0, ColorTranslator.FromHtml (null).ToArgb ());
-        }
+		[Test]
+		public void FromHtml_Null ()
+		{
+			Assert.AreEqual (0, ColorTranslator.FromHtml (null).ToArgb ());
+		}
 
-        [Test]
-        public void FromHtml_Empty ()
-        {
-            Assert.AreEqual (0, ColorTranslator.FromHtml (String.Empty).ToArgb ());
-        }
+		[Test]
+		public void FromHtml_Empty ()
+		{
+			Assert.AreEqual (0, ColorTranslator.FromHtml (String.Empty).ToArgb ());
+		}
 
-        [Test]
-        public void FromHtml_KnownValues ()
-        {
-            Assert.AreEqual (SystemColors.Control, ColorTranslator.FromHtml ("buttonface"), "buttonface");
-            Assert.AreEqual (SystemColors.ActiveCaptionText, ColorTranslator.FromHtml ("CAPTIONTEXT"), "captiontext");
-            Assert.AreEqual (SystemColors.ControlDarkDark, ColorTranslator.FromHtml ("threedDARKshadow"), "threeddarkshadow");
-            Assert.AreEqual (SystemColors.Desktop, ColorTranslator.FromHtml ("background"), "background");
-            Assert.AreEqual (SystemColors.ControlText, ColorTranslator.FromHtml ("ButtonText"), "buttontext");
-            Assert.AreEqual (SystemColors.Info, ColorTranslator.FromHtml ("infobackground"), "infobackground");
-        }
+		[Test]
+		public void FromHtml_KnownValues ()
+		{
+			Assert.AreEqual (SystemColors.Control, ColorTranslator.FromHtml ("buttonface"), "buttonface");
+			Assert.AreEqual (SystemColors.ActiveCaptionText, ColorTranslator.FromHtml ("CAPTIONTEXT"), "captiontext");
+			Assert.AreEqual (SystemColors.ControlDarkDark, ColorTranslator.FromHtml ("threedDARKshadow"), "threeddarkshadow");
+			Assert.AreEqual (SystemColors.Desktop, ColorTranslator.FromHtml ("background"), "background");
+			Assert.AreEqual (SystemColors.ControlText, ColorTranslator.FromHtml ("ButtonText"), "buttontext");
+			Assert.AreEqual (SystemColors.Info, ColorTranslator.FromHtml ("infobackground"), "infobackground");
+		}
 
-        [Test]
-        public void FromHtml_Int ()
-        {
-            Assert.AreEqual (-1, ColorTranslator.FromHtml ("-1").ToArgb (), "-1");
-            Assert.AreEqual (0, ColorTranslator.FromHtml ("0").ToArgb (), "0");
-            Assert.AreEqual (1, ColorTranslator.FromHtml ("1").ToArgb (), "1");
-        }
+		[Test]
+		public void FromHtml_Int ()
+		{
+			Assert.AreEqual (-1, ColorTranslator.FromHtml ("-1").ToArgb (), "-1");
+			Assert.AreEqual (0, ColorTranslator.FromHtml ("0").ToArgb (), "0");
+			Assert.AreEqual (1, ColorTranslator.FromHtml ("1").ToArgb (), "1");
+		}
 
-        [Test]
-        public void FromHtml_PoundInt ()
-        {
-            Assert.AreEqual (0, ColorTranslator.FromHtml ("#0").ToArgb (), "#0");
-            Assert.AreEqual (1, ColorTranslator.FromHtml ("#1").ToArgb (), "#1");
-            Assert.AreEqual (255, ColorTranslator.FromHtml ("#FF").ToArgb (), "#FF");
-            Assert.AreEqual (-15654349, ColorTranslator.FromHtml ("#123").ToArgb (), "#123");
-            Assert.AreEqual (-1, ColorTranslator.FromHtml ("#FFF").ToArgb (), "#FFF");
-            Assert.AreEqual (65535, ColorTranslator.FromHtml ("#FFFF").ToArgb (), "#FFFF");
-            Assert.AreEqual (-15584170, ColorTranslator.FromHtml ("#123456").ToArgb (), "#123456");
-            Assert.AreEqual (-1, ColorTranslator.FromHtml ("#FFFFFF").ToArgb (), "#FFFFFF");
-            Assert.AreEqual (305419896, ColorTranslator.FromHtml ("#12345678").ToArgb (), "#12345678");
-            Assert.AreEqual (-1, ColorTranslator.FromHtml ("#FFFFFFFF").ToArgb (), "#FFFFFFFF");
-            
-            Assert.AreEqual (Color.White, ColorTranslator.FromHtml ("#FFFFFF"), "used to resolve to some KnownColor");
-            Assert.AreEqual (Color.White, ColorTranslator.FromHtml ("0xFFFFFF"), "used to resolve to some KnownColor");
-        }
+		[Test]
+		public void FromHtml_PoundInt ()
+		{
+			Assert.AreEqual (0, ColorTranslator.FromHtml ("#0").ToArgb (), "#0");
+			Assert.AreEqual (1, ColorTranslator.FromHtml ("#1").ToArgb (), "#1");
+			Assert.AreEqual (255, ColorTranslator.FromHtml ("#FF").ToArgb (), "#FF");
+			Assert.AreEqual (-15654349, ColorTranslator.FromHtml ("#123").ToArgb (), "#123");
+			Assert.AreEqual (-1, ColorTranslator.FromHtml ("#FFF").ToArgb (), "#FFF");
+			Assert.AreEqual (65535, ColorTranslator.FromHtml ("#FFFF").ToArgb (), "#FFFF");
+			Assert.AreEqual (-15584170, ColorTranslator.FromHtml ("#123456").ToArgb (), "#123456");
+			Assert.AreEqual (-1, ColorTranslator.FromHtml ("#FFFFFF").ToArgb (), "#FFFFFF");
+			Assert.AreEqual (305419896, ColorTranslator.FromHtml ("#12345678").ToArgb (), "#12345678");
+			Assert.AreEqual (-1, ColorTranslator.FromHtml ("#FFFFFFFF").ToArgb (), "#FFFFFFFF");
+			
+			Assert.AreEqual (Color.White, ColorTranslator.FromHtml ("#FFFFFF"), "used to resolve to some KnownColor");
+			Assert.AreEqual (Color.White, ColorTranslator.FromHtml ("0xFFFFFF"), "used to resolve to some KnownColor");
+		}
 
-        [Test]
-        public void FromHtml_PoundNegative ()
-        {
-            Assert.Throws<ArgumentException> (() => ColorTranslator.FromHtml ("#-1"));
-        }
+		[Test]
+		public void FromHtml_PoundNegative ()
+		{
+			Assert.Throws<ArgumentException> (() => ColorTranslator.FromHtml ("#-1"));
+		}
 
-        [Test]
-        public void FromHtml_PoundTooLarge ()
-        {
-            Assert.Throws<ArgumentException> (() => ColorTranslator.FromHtml ("#100000000"));
-        }
+		[Test]
+		public void FromHtml_PoundTooLarge ()
+		{
+			Assert.Throws<ArgumentException> (() => ColorTranslator.FromHtml ("#100000000"));
+		}
 
-        [Test]
-        public void FromHtml_Unknown ()
-        {
-            Assert.Throws<ArgumentException> (() => ColorTranslator.FromHtml ("unknown-color-test"));
-        }
+		[Test]
+		public void FromHtml_Unknown ()
+		{
+			Assert.Throws<ArgumentException> (() => ColorTranslator.FromHtml ("unknown-color-test"));
+		}
 
-        [Test]
-        public void FromHtml ()
-        {
-            Color [] colors = new Color [] {
+		[Test]
+		public void FromHtml ()
+		{
+			Color [] colors = new Color [] {
 Color.Aqua, Color.Black, Color.Blue, Color.Fuchsia, Color.Gray,
 Color.Green, Color.Lime, Color.Maroon, Color.Navy, Color.Olive,
 Color.Purple, Color.Red, Color.Silver, Color.Teal, Color.White,
@@ -127,8 +127,8 @@ SystemColors.Highlight, SystemColors.HighlightText,
 SystemColors.Info,
 SystemColors.MenuText, SystemColors.ScrollBar,
 //SystemColors.ControlLight, SystemColors.ControlLightLight
-            };
-            string [] htmlColors = new string [] {
+			};
+			string [] htmlColors = new string [] {
 "Aqua", "Black", "Blue", "Fuchsia", "Gray", "Green",
 "Lime", "Maroon", "Navy", "Olive", "Purple", "Red",
 "Silver", "Teal", "White", "Yellow",
@@ -148,36 +148,36 @@ SystemColors.MenuText, SystemColors.ScrollBar,
 "infobackground",
 "menutext", "scrollbar", 
 //"thhighlight", "thlightshadow"
-            };
-        
-            for (int i=0; i<colors.Length; i++)
-                Assert.AreEqual (colors[i], ColorTranslator.FromHtml (htmlColors [i]));
-        }
+			};
+		
+			for (int i=0; i<colors.Length; i++)
+				Assert.AreEqual (colors[i], ColorTranslator.FromHtml (htmlColors [i]));
+		}
 
-        [Test] // 340917
-        public void FromHtml_LightGrey ()
-        {
-            Assert.AreEqual (Color.LightGray, ColorTranslator.FromHtml(ColorTranslator.ToHtml(Color.LightGray)));
-        }
+		[Test] // 340917
+		public void FromHtml_LightGrey ()
+		{
+			Assert.AreEqual (Color.LightGray, ColorTranslator.FromHtml(ColorTranslator.ToHtml(Color.LightGray)));
+		}
 
-        [Test]
-        public void FromOle ()
-        {
-            Assert.AreEqual (Color.FromArgb (0x10, 0x20, 0x30), ColorTranslator.FromOle (0x302010));
-            Assert.AreEqual (Color.FromArgb (0xbb, 0x20, 0x30), ColorTranslator.FromOle (unchecked ((int)0xee3020bb)));
-        }
+		[Test]
+		public void FromOle ()
+		{
+			Assert.AreEqual (Color.FromArgb (0x10, 0x20, 0x30), ColorTranslator.FromOle (0x302010));
+			Assert.AreEqual (Color.FromArgb (0xbb, 0x20, 0x30), ColorTranslator.FromOle (unchecked ((int)0xee3020bb)));
+		}
 
-        [Test]
-        public void FromWin32 ()
-        {
-            Assert.AreEqual (Color.FromArgb (0x10, 0x20, 0x30), ColorTranslator.FromWin32 (0x302010));
-            Assert.AreEqual (Color.FromArgb (0xbb, 0x20, 0x30), ColorTranslator.FromWin32 (unchecked ((int)0xee3020bb)));
-        }
+		[Test]
+		public void FromWin32 ()
+		{
+			Assert.AreEqual (Color.FromArgb (0x10, 0x20, 0x30), ColorTranslator.FromWin32 (0x302010));
+			Assert.AreEqual (Color.FromArgb (0xbb, 0x20, 0x30), ColorTranslator.FromWin32 (unchecked ((int)0xee3020bb)));
+		}
 
-        [Test]
-        public void ToHtml ()
-        {
-            string [] htmlColors = new string [] {
+		[Test]
+		public void ToHtml ()
+		{
+			string [] htmlColors = new string [] {
 "activeborder", "activecaption", "captiontext", "appworkspace", "buttonface",
 "buttonshadow", "threeddarkshadow", "buttonface", "buttonhighlight", "buttontext",
 "background", "graytext", "highlight", "highlighttext", "highlight", "inactiveborder",
@@ -204,24 +204,24 @@ SystemColors.MenuText, SystemColors.ScrollBar,
 "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver",
 "SkyBlue", "SlateBlue", "SlateGray", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal",
 "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen",
-                                            };
+											};
 
-            for (KnownColor i=KnownColor.ActiveBorder; i<=KnownColor.YellowGreen; i++)
-                Assert.AreEqual (htmlColors[(int)i-1], ColorTranslator.ToHtml (Color.FromKnownColor (i)));
-        }
+			for (KnownColor i=KnownColor.ActiveBorder; i<=KnownColor.YellowGreen; i++)
+				Assert.AreEqual (htmlColors[(int)i-1], ColorTranslator.ToHtml (Color.FromKnownColor (i)));
+		}
 
-        [Test]
-        public void ToOle () {
-            Assert.AreEqual (0x302010, ColorTranslator.ToOle (Color.FromArgb (0x10, 0x20, 0x30)));
-            Assert.AreEqual (unchecked ((int)0x3020bb), ColorTranslator.ToOle (Color.FromArgb (0xee, 0xbb, 0x20, 0x30)));
-        }
+		[Test]
+		public void ToOle () {
+			Assert.AreEqual (0x302010, ColorTranslator.ToOle (Color.FromArgb (0x10, 0x20, 0x30)));
+			Assert.AreEqual (unchecked ((int)0x3020bb), ColorTranslator.ToOle (Color.FromArgb (0xee, 0xbb, 0x20, 0x30)));
+		}
 
-        [Test]
-        public void ToWin32 () {
-            Assert.AreEqual (0x302010, ColorTranslator.ToWin32 (Color.FromArgb (0x10, 0x20, 0x30)));
-            Assert.AreEqual (unchecked ((int)0x3020bb), ColorTranslator.ToWin32 (Color.FromArgb (0xee, 0xbb, 0x20, 0x30)));
-        }
+		[Test]
+		public void ToWin32 () {
+			Assert.AreEqual (0x302010, ColorTranslator.ToWin32 (Color.FromArgb (0x10, 0x20, 0x30)));
+			Assert.AreEqual (unchecked ((int)0x3020bb), ColorTranslator.ToWin32 (Color.FromArgb (0xee, 0xbb, 0x20, 0x30)));
+		}
 
-    }
+	}
 }
 

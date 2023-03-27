@@ -11,13 +11,13 @@ namespace MonoBug
                         Type type = assembly.GetType("MonoBug.Program", true);
                         MethodInfo info = type.GetMethod("Foo");
                         object[] attributes = info.GetCustomAttributes (false);
-            int found = 0;
+			int found = 0;
                         foreach (object obj in attributes)
                         {
                                 Console.WriteLine("Attribute of type {0} found", obj.GetType().ToString());
-                found ++;
+				found ++;
                         }
-            return found == 1? 0: 1;
+			return found == 1? 0: 1;
                 }
 
                 [My("blah", new string[] { "crash" }, "additional parameter")]

@@ -2,7 +2,7 @@
 // MetadataLocation.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -34,25 +34,25 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Description
 {
-    [MonoTODO]
-    [XmlRoot ("Location", Namespace="http://schemas.xmlsoap.org/ws/2004/09/mex")]
-    public class MetadataLocation
-    {
-        public MetadataLocation ()
-        {
-        }
+	[MonoTODO]
+	[XmlRoot ("Location", Namespace="http://schemas.xmlsoap.org/ws/2004/09/mex")]
+	public class MetadataLocation
+	{
+		public MetadataLocation ()
+		{
+		}
 
-        public MetadataLocation (string location)
-        {
-            this.location = location;
-        }
+		public MetadataLocation (string location)
+		{
+			this.location = location;
+		}
 
-        string location;
+		string location;
 
-        [XmlText]
-        public string Location {
-            get { return location; }
-            set { location = value; }
-        }
-    }
+		[XmlText]
+		public string Location {
+			get { return location; }
+			set { location = value; }
+		}
+	}
 }

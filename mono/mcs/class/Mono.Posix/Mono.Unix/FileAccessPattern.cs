@@ -31,13 +31,13 @@ using Mono.Unix;
 
 namespace Mono.Unix {
 
-    public enum FileAccessPattern {
-        Normal     = Native.PosixFadviseAdvice.POSIX_FADV_NORMAL,
-        Sequential = Native.PosixFadviseAdvice.POSIX_FADV_SEQUENTIAL,
-        Random     = Native.PosixFadviseAdvice.POSIX_FADV_RANDOM,
-        NoReuse    = Native.PosixFadviseAdvice.POSIX_FADV_NOREUSE,
-        PreLoad    = Native.PosixFadviseAdvice.POSIX_FADV_WILLNEED,
-        FlushCache = Native.PosixFadviseAdvice.POSIX_FADV_DONTNEED,
-    }
+	public enum FileAccessPattern {
+		Normal     = Native.PosixFadviseAdvice.POSIX_FADV_NORMAL,
+		Sequential = Native.PosixFadviseAdvice.POSIX_FADV_SEQUENTIAL,
+		Random     = Native.PosixFadviseAdvice.POSIX_FADV_RANDOM,
+		NoReuse    = Native.PosixFadviseAdvice.POSIX_FADV_NOREUSE,
+		PreLoad    = Native.PosixFadviseAdvice.POSIX_FADV_WILLNEED,
+		FlushCache = Native.PosixFadviseAdvice.POSIX_FADV_DONTNEED,
+	}
 }
 

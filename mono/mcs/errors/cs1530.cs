@@ -2,6 +2,6 @@
 // Line: 5
 
 namespace A {
-    new class X {
-    }
+	new class X {
+	}
 }

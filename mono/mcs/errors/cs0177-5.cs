@@ -7,19 +7,19 @@ class OutputParam
 {
     public static void Main(string[] args)
     {
-     int a;
-     Method(out a);
-     Console.WriteLine(a);
+	 int a;
+	 Method(out a);
+	 Console.WriteLine(a);
     }
 
     public static void Method(out int a)
     {
-    int b;
+	int b;
 
-    try {
-        b = 5;
-    } catch (Exception) { return; }
+	try {
+	    b = 5;
+	} catch (Exception) { return; }
 
-    a = b;
+	a = b;
     }
 }

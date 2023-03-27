@@ -3,5 +3,5 @@
 
 class X
 {
-    const int val = 1.42f;
+	const int val = 1.42f;
 }

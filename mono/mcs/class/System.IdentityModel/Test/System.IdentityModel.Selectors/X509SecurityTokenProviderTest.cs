@@ -2,7 +2,7 @@
 // X509SecurityTokenProviderTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,23 +34,23 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-    [TestFixture]
-    public class X509SecurityTokenProviderTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorCertNull ()
-        {
-            new X509SecurityTokenProvider (null);
-        }
+	[TestFixture]
+	public class X509SecurityTokenProviderTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void ConstructorCertNull ()
+		{
+			new X509SecurityTokenProvider (null);
+		}
 
-        [Test]
-        //[ExpectedException (typeof (SecurityTokenException))]
-        [Ignore ("on Mono X509Store does not work yet. on .NET there is no assurance that the user have certificates.")]
-        public void ConstructorFindValueNull ()
-        {
-            new X509SecurityTokenProvider (StoreLocation.CurrentUser, StoreName.My, X509FindType.FindByTimeExpired, DateTime.MaxValue);
-        }
-    }
+		[Test]
+		//[ExpectedException (typeof (SecurityTokenException))]
+		[Ignore ("on Mono X509Store does not work yet. on .NET there is no assurance that the user have certificates.")]
+		public void ConstructorFindValueNull ()
+		{
+			new X509SecurityTokenProvider (StoreLocation.CurrentUser, StoreName.My, X509FindType.FindByTimeExpired, DateTime.MaxValue);
+		}
+	}
 }
 #endif

@@ -24,21 +24,21 @@ using System;
 
 namespace System.Windows.Markup
 {
-    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-    public sealed class NameScopePropertyAttribute : Attribute
-    {
-        public NameScopePropertyAttribute (string name)
-        {
-        }
-        
-        public NameScopePropertyAttribute (string name, Type type)
-        {
-            Name = name;
-            Type = type;
-        }
-        
-        public string Name { get; private set; }
-        public Type Type { get; private set; }
-    }
+	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+	public sealed class NameScopePropertyAttribute : Attribute
+	{
+		public NameScopePropertyAttribute (string name)
+		{
+		}
+		
+		public NameScopePropertyAttribute (string name, Type type)
+		{
+			Name = name;
+			Type = type;
+		}
+		
+		public string Name { get; private set; }
+		public Type Type { get; private set; }
+	}
 }

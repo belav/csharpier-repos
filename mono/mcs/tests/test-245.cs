@@ -1,15 +1,15 @@
 public class Class2 
 {
-    private AliasDefOperations __delegate;
+	private AliasDefOperations __delegate;
 
-    public string def_kind {
-        get {
-            return __delegate.def_kind;
-        }
-    }
+	public string def_kind {
+		get {
+			return __delegate.def_kind;
+		}
+	}
 
-    public static void Main ()
-    { }
+	public static void Main ()
+	{ }
 }
 
 public interface AliasDefOperations : ContainedOperations, IDLTypeOperations 

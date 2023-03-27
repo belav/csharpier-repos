@@ -4,5 +4,5 @@
 
 public interface MainTest
 {
-    void Main (string[] args);
+	void Main (string[] args);
 }

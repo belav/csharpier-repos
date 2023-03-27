@@ -32,19 +32,19 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-    public class CollectionEditorBase : CollectionEditor
-    {
-        [MonoNotSupported ("")]
-        public CollectionEditorBase (Type type)
-            : base (type)
-        {
-            throw new NotImplementedException ();
-        }
+	public class CollectionEditorBase : CollectionEditor
+	{
+		[MonoNotSupported ("")]
+		public CollectionEditorBase (Type type)
+			: base (type)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        protected override CollectionEditor.CollectionForm CreateCollectionForm ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoNotSupported ("")]
+		protected override CollectionEditor.CollectionForm CreateCollectionForm ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

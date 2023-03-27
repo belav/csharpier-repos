@@ -2,10 +2,10 @@
 // Line: 9
 
 class T {
-    static void Main ()
-    {
-        int errors;
+	static void Main ()
+	{
+		int errors;
 
-        errors += 1;
-    }
+		errors += 1;
+	}
 }

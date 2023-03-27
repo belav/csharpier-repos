@@ -2,7 +2,7 @@
 // System.Configuration.ProtectedConfigurationProviderCollection.cs
 //
 // Authors:
-//     Chris Toshok (toshok@ximian.com)
+// 	Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,23 +30,23 @@ using System.Configuration.Provider;
 
 namespace System.Configuration
 {
-    public class ProtectedConfigurationProviderCollection : ProviderCollection
-    {
-        public ProtectedConfigurationProviderCollection ()
-        {
-        }
+	public class ProtectedConfigurationProviderCollection : ProviderCollection
+	{
+		public ProtectedConfigurationProviderCollection ()
+		{
+		}
 
-        [MonoTODO]
-        public new ProtectedConfigurationProvider this [string name] {
-            get { return (ProtectedConfigurationProvider) base[name]; }
-        }
+		[MonoTODO]
+		public new ProtectedConfigurationProvider this [string name] {
+			get { return (ProtectedConfigurationProvider) base[name]; }
+		}
 
-        [MonoTODO]
-        public override void Add (ProviderBase provider)
-        {
-            base.Add (provider);
-        }
-    }
+		[MonoTODO]
+		public override void Add (ProviderBase provider)
+		{
+			base.Add (provider);
+		}
+	}
 
 }
 

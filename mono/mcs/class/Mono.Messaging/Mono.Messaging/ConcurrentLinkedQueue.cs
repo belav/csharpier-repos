@@ -2,7 +2,7 @@
 // Mono.Messaging
 //
 // Authors:
-//        Michael Barker (mike@middlesoft.co.uk)
+//		Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -32,96 +32,96 @@ using System;
 using System.Threading;
 
 namespace Mono.Messaging {
-    
-    public class ConcurrentLinkedQueue<T>
-    {
-        private Node<T> head;
-        private Node<T> tail;
-        
-        public ConcurrentLinkedQueue ()
-        {
-            Node<T> node = new Node<T> (default (T));
-            head = node;
-            tail = node;
-        }
-        
-        public void Enqueue (T context)
-        {
-            Console.WriteLine ("Insert: " + context);
-            Node<T> newNode = new Node<T>(context);
-            
-            while (true) {
-                Node<T> tail = this.tail;
-                Node<T> next = tail.Next;
+	
+	public class ConcurrentLinkedQueue<T>
+	{
+		private Node<T> head;
+		private Node<T> tail;
+		
+		public ConcurrentLinkedQueue ()
+		{
+			Node<T> node = new Node<T> (default (T));
+			head = node;
+			tail = node;
+		}
+		
+		public void Enqueue (T context)
+		{
+			Console.WriteLine ("Insert: " + context);
+			Node<T> newNode = new Node<T>(context);
+			
+			while (true) {
+				Node<T> tail = this.tail;
+				Node<T> next = tail.Next;
 
-                if (tail == this.tail) {
-                    if (null == next) {
-                        if (tail.CAS (newNode, next))
-                            break;
-                        
-                    } else {
-                        Interlocked.CompareExchange<Node<T>> (ref this.tail, next, tail);
-                    }
-                }
-            }
-        }
-        
-        public T Dequeue ()
-        {
-            while (true) {
-                Node<T> head = this.head;
-                Node<T> tail = this.tail;
-                Node<T> next = head.Next;
-                
-                if (head == this.head) {
-                    if (head == tail) {
-                        if (null == next)
-                            return default(T);
-                        
-                        Interlocked.CompareExchange<Node<T>> (ref this.tail, next, tail);
-                        
-                    } else {
-                        T t = next.Value;
-                        
-                        if (Interlocked.CompareExchange(ref this.head, next, head) == head)
-                            return t;
-                    }
-                }
-            }
-        }
-        
-        public override String ToString ()
-        {
-            return "Head: " + head;
-        }
-        
-        internal class Node<N>
-        {
-            private readonly N context;
-            private Node<N> next = null;
-            
-            public Node (N context)
-            {
-                this.context = context;
-            }
-            
-            public Node<N> Next {
-                get { return next; }
-            }
-            
-            public N Value {
-                get { return context; }
-            }
-            
-            public bool CAS (Node<N> newNode, Node<N> oldNode)
-            {
-                return Interlocked.CompareExchange (ref next, newNode, oldNode) == oldNode;
-            }
-            
-            public override String ToString ()
-            {
-                return "context: " + context + ", Next: " + next;
-            }
-        }
-    }
+				if (tail == this.tail) {
+					if (null == next) {
+						if (tail.CAS (newNode, next))
+							break;
+						
+					} else {
+						Interlocked.CompareExchange<Node<T>> (ref this.tail, next, tail);
+					}
+				}
+			}
+		}
+		
+		public T Dequeue ()
+		{
+			while (true) {
+				Node<T> head = this.head;
+				Node<T> tail = this.tail;
+				Node<T> next = head.Next;
+				
+				if (head == this.head) {
+					if (head == tail) {
+						if (null == next)
+							return default(T);
+						
+						Interlocked.CompareExchange<Node<T>> (ref this.tail, next, tail);
+						
+					} else {
+						T t = next.Value;
+						
+						if (Interlocked.CompareExchange(ref this.head, next, head) == head)
+							return t;
+					}
+				}
+			}
+		}
+		
+		public override String ToString ()
+		{
+			return "Head: " + head;
+		}
+		
+		internal class Node<N>
+		{
+			private readonly N context;
+			private Node<N> next = null;
+			
+			public Node (N context)
+			{
+				this.context = context;
+			}
+			
+			public Node<N> Next {
+				get { return next; }
+			}
+			
+			public N Value {
+				get { return context; }
+			}
+			
+			public bool CAS (Node<N> newNode, Node<N> oldNode)
+			{
+				return Interlocked.CompareExchange (ref next, newNode, oldNode) == oldNode;
+			}
+			
+			public override String ToString ()
+			{
+				return "context: " + context + ", Next: " + next;
+			}
+		}
+	}
 }

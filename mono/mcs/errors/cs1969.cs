@@ -6,16 +6,16 @@ using System;
 
 namespace System.Runtime.CompilerServices
 {
-    class DynamicAttribute : Attribute
-    {
-    }
+	class DynamicAttribute : Attribute
+	{
+	}
 }
 
 class C
 {
-    public static void Main ()
-    {
-        dynamic d = null;
-        d++;
-    }
+	public static void Main ()
+	{
+		dynamic d = null;
+		d++;
+	}
 }

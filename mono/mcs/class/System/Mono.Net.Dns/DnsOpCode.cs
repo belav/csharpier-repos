@@ -2,7 +2,7 @@
 // Mono.Net.Dns.DnsOpCode
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
+//	Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
 //
 // Copyright 2011 Gonzalo Paniagua Javier
 //
@@ -20,12 +20,12 @@
 //
 using System;
 namespace Mono.Net.Dns {
-    enum DnsOpCode : byte {
-        Query = 0,
-        [Obsolete] IQuery = 1,
-        Status = 2,
-        Notify = 4,
-        Update = 5,
-    }
+	enum DnsOpCode : byte {
+		Query = 0,
+		[Obsolete] IQuery = 1,
+		Status = 2,
+		Notify = 4,
+		Update = 5,
+	}
 }
 

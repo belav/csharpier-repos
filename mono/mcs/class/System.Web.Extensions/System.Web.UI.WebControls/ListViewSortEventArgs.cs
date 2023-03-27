@@ -32,22 +32,22 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    public class ListViewSortEventArgs : CancelEventArgs
-    {
-        public ListViewSortEventArgs (string sortExpression, SortDirection sortDirection)
-        {
-            this.SortExpression = sortExpression;
-            this.SortDirection = sortDirection;
-        }
-        
-        public SortDirection SortDirection {
-            get;
-            set;
-        }
-        
-        public string SortExpression {
-            get;
-            set;
-        }
-    }
+	public class ListViewSortEventArgs : CancelEventArgs
+	{
+		public ListViewSortEventArgs (string sortExpression, SortDirection sortDirection)
+		{
+			this.SortExpression = sortExpression;
+			this.SortDirection = sortDirection;
+		}
+		
+		public SortDirection SortDirection {
+			get;
+			set;
+		}
+		
+		public string SortExpression {
+			get;
+			set;
+		}
+	}
 }

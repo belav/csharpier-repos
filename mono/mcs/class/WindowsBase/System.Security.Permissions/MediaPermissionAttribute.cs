@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,34 +28,34 @@ using System.Security;
 
 namespace System.Security.Permissions {
 
-    [AttributeUsage (AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly)]
-    public sealed class MediaPermissionAttribute : CodeAccessSecurityAttribute
-    {
-        public MediaPermissionAttribute (SecurityAction action)
-            : base (action)
-        {
-            throw new NotImplementedException ();
-        }
+	[AttributeUsage (AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly)]
+	public sealed class MediaPermissionAttribute : CodeAccessSecurityAttribute
+	{
+		public MediaPermissionAttribute (SecurityAction action)
+			: base (action)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public MediaPermissionAudio Audio {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		public MediaPermissionAudio Audio {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        public MediaPermissionVideo Video {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		public MediaPermissionVideo Video {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        public MediaPermissionImage Image {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		public MediaPermissionImage Image {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        public override IPermission CreatePermission ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public override IPermission CreatePermission ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 
 }

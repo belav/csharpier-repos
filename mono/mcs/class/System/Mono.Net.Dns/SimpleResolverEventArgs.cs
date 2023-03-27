@@ -2,7 +2,7 @@
 // Mono.Net.Dns.SimpleResolverEventArgs
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
+//	Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
 //
 // Copyright 2011 Gonzalo Paniagua Javier
 //
@@ -23,41 +23,41 @@ using System.Net;
 using System.Threading;
 
 namespace Mono.Net.Dns {
-    class SimpleResolverEventArgs : EventArgs {
-        public event EventHandler<SimpleResolverEventArgs> Completed;
+	class SimpleResolverEventArgs : EventArgs {
+		public event EventHandler<SimpleResolverEventArgs> Completed;
 
-        public SimpleResolverEventArgs ()
-        {
-        }
+		public SimpleResolverEventArgs ()
+		{
+		}
 
-        public ResolverError ResolverError { get; set; }
-        public string ErrorMessage { get; set; }
-        public ResolverAsyncOperation LastOperation;
-        public string HostName { get; set; }
-        public IPHostEntry HostEntry { get; internal set; }
-        public object UserToken { get; set; }
-        internal ushort QueryID;
-        internal ushort Retries;
-        internal Timer Timer;
-        internal IPAddress PTRAddress;
+		public ResolverError ResolverError { get; set; }
+		public string ErrorMessage { get; set; }
+		public ResolverAsyncOperation LastOperation;
+		public string HostName { get; set; }
+		public IPHostEntry HostEntry { get; internal set; }
+		public object UserToken { get; set; }
+		internal ushort QueryID;
+		internal ushort Retries;
+		internal Timer Timer;
+		internal IPAddress PTRAddress;
 
-        internal void Reset (ResolverAsyncOperation op)
-        {
-            ResolverError = 0;
-            ErrorMessage = null;
-            HostEntry = null;
-            LastOperation = op;
-            QueryID = 0;
-            Retries = 0;
-            PTRAddress = null;
-        }
+		internal void Reset (ResolverAsyncOperation op)
+		{
+			ResolverError = 0;
+			ErrorMessage = null;
+			HostEntry = null;
+			LastOperation = op;
+			QueryID = 0;
+			Retries = 0;
+			PTRAddress = null;
+		}
 
-        protected internal void OnCompleted (object sender)
-        {
-            var handler = Completed;
-            if (handler != null)
-                handler (sender, this);
-        }
-    }
+		protected internal void OnCompleted (object sender)
+		{
+			var handler = Completed;
+			if (handler != null)
+				handler (sender, this);
+		}
+	}
 }
 

@@ -6,11 +6,11 @@ using System;
 
 namespace TopNS
 {
-    class Foo
-    {
-        Foo (string foo)
-        {
-            /** incorrect doccomment*/
-        }
-    }
+	class Foo
+	{
+		Foo (string foo)
+		{
+			/** incorrect doccomment*/
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlHead
 //
 // Authors:
-//     Chris Toshok (toshok@ximian.com)
+// 	Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -33,45 +33,45 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.HtmlControls
 {
-    [ControlBuilder (typeof (HtmlEmptyTagControlBuilder))]
-    public class HtmlLink: HtmlControl
-    {
-        public HtmlLink () : base ("link")
-        {
-        }
+	[ControlBuilder (typeof (HtmlEmptyTagControlBuilder))]
+	public class HtmlLink: HtmlControl
+	{
+		public HtmlLink () : base ("link")
+		{
+		}
 
-        [DefaultValue ("")]
-        [UrlProperty]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual string Href {
-            get {
-                string s = Attributes["href"];
-                if (s == null)
-                    return "";
-                return s;
-            }
-            set {
-                if (value == null)
-                    Attributes.Remove ("href");
-                else
-                    Attributes["href"] = value;
-            }
-        }
+		[DefaultValue ("")]
+		[UrlProperty]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public virtual string Href {
+			get {
+				string s = Attributes["href"];
+				if (s == null)
+					return "";
+				return s;
+			}
+			set {
+				if (value == null)
+					Attributes.Remove ("href");
+				else
+					Attributes["href"] = value;
+			}
+		}
 
-        protected internal override void Render (HtmlTextWriter writer)
-        {
-            writer.WriteBeginTag (TagName);
-            RenderAttributes (writer);
-            writer.Write (" />");
-        }
+		protected internal override void Render (HtmlTextWriter writer)
+		{
+			writer.WriteBeginTag (TagName);
+			RenderAttributes (writer);
+			writer.Write (" />");
+		}
 
-        [MonoTODO ("why override?")]
-        protected override void RenderAttributes (HtmlTextWriter writer)
-        {
-            if (Href.Length > 0)
-                Href = ResolveClientUrl (Href);
-            base.RenderAttributes (writer);
-        }
-    }
+		[MonoTODO ("why override?")]
+		protected override void RenderAttributes (HtmlTextWriter writer)
+		{
+			if (Href.Length > 0)
+				Href = ResolveClientUrl (Href);
+			base.RenderAttributes (writer);
+		}
+	}
 }
 

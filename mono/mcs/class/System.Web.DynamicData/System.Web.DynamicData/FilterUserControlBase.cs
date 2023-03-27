@@ -2,7 +2,7 @@
 // FilterUserControlBase.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -40,51 +40,51 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class FilterUserControlBase : UserControl, IControlParameterTarget
-    {
-        [MonoTODO]
-        public MetaColumn Column { get; private set; }
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class FilterUserControlBase : UserControl, IControlParameterTarget
+	{
+		[MonoTODO]
+		public MetaColumn Column { get; private set; }
 
-        [MonoTODO]
-        public string ContextTypeName { get; set; }
+		[MonoTODO]
+		public string ContextTypeName { get; set; }
 
-        [MonoTODO]
-        public string DataField { get; set; }
+		[MonoTODO]
+		public string DataField { get; set; }
 
-        [MonoTODO]
-        MetaColumn IControlParameterTarget.FilteredColumn {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		MetaColumn IControlParameterTarget.FilteredColumn {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        MetaTable IControlParameterTarget.Table {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		MetaTable IControlParameterTarget.Table {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public string InitialValue { get; private set; }
+		[MonoTODO]
+		public string InitialValue { get; private set; }
 
-        [MonoTODO]
-        public virtual DataKey SelectedDataKey { get; private set; }
+		[MonoTODO]
+		public virtual DataKey SelectedDataKey { get; private set; }
 
-        [MonoTODO]
-        public virtual string SelectedValue { get; private set; }
+		[MonoTODO]
+		public virtual string SelectedValue { get; private set; }
 
-        [MonoTODO]
-        public string TableName { get; set; }
+		[MonoTODO]
+		public string TableName { get; set; }
 
-        [MonoTODO]
-        string IControlParameterTarget.GetPropertyNameExpression (string columnName)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		string IControlParameterTarget.GetPropertyNameExpression (string columnName)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void PopulateListControl (ListControl listControl)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public void PopulateListControl (ListControl listControl)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

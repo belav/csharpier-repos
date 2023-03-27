@@ -6,15 +6,15 @@ public delegate void Hello (Test test);
 
 public class Test
 {
-    public void Whatever ()
-    { }
+	public void Whatever ()
+	{ }
 
-    static void Main ()
-    {
-        Hello hello = delegate (Test t) {
-            t.Whatever ();
-        };
-        Test t = new Test ();
-        hello (t);
-    }
+	static void Main ()
+	{
+		Hello hello = delegate (Test t) {
+			t.Whatever ();
+		};
+		Test t = new Test ();
+		hello (t);
+	}
 }

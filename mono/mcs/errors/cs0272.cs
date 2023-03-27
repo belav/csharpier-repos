@@ -5,10 +5,10 @@ class P
 {
     public static int Prop
     {
-    get {
-        return 4;
-    }
-    private set {}
+	get {
+	    return 4;
+	}
+	private set {}
     }
 }
 
@@ -16,6 +16,6 @@ public class C
 {
     public static void Main ()
     {
-    P.Prop = 453422;
+	P.Prop = 453422;
     }
 }

@@ -2,7 +2,7 @@
 // CompleteWizardStepTest.cs - Unit tests for System.Web.UI.WebControls.CompleteWizardStep
 //
 // Author:
-//    Igor Zelmanovich  <igorz@mainsoft.com>
+//	Igor Zelmanovich  <igorz@mainsoft.com>
 //
 // (C) 2006 Mainsoft Corporation (http://www.mainsoft.com)
 //
@@ -45,25 +45,25 @@ using NUnit.Framework;
 namespace MonoTests.System.Web.UI.WebControls
 {
 
-    [Serializable]
-    [TestFixture]
-    public class CompleteWizardStepTest
-    {
-        // MSDN: The StepType property overrides the WizardStepBase.StepType property to ensure that CompleteWizardStep is always set to the Complete value of 
-        // the WizardStepType enumeration. Attempting to set the StepType property to a different value will result in an InvalidOperationException.
+	[Serializable]
+	[TestFixture]
+	public class CompleteWizardStepTest
+	{
+		// MSDN: The StepType property overrides the WizardStepBase.StepType property to ensure that CompleteWizardStep is always set to the Complete value of 
+		// the WizardStepType enumeration. Attempting to set the StepType property to a different value will result in an InvalidOperationException.
 
-        [Test]
-        public void CompleteWizardStep_StepType_Get () {
-            CompleteWizardStep step = new CompleteWizardStep ();
-            Assert.AreEqual (WizardStepType.Complete, step.StepType, "CompleteWizardStep_StepType_Get");
-        }
-        
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void CompleteWizardStep_StepType_Set () {
-            CompleteWizardStep step = new CompleteWizardStep ();
-            step.StepType = WizardStepType.Auto;
-        }
-    }
+		[Test]
+		public void CompleteWizardStep_StepType_Get () {
+			CompleteWizardStep step = new CompleteWizardStep ();
+			Assert.AreEqual (WizardStepType.Complete, step.StepType, "CompleteWizardStep_StepType_Get");
+		}
+		
+		[Test]
+		[ExpectedException(typeof(InvalidOperationException))]
+		public void CompleteWizardStep_StepType_Set () {
+			CompleteWizardStep step = new CompleteWizardStep ();
+			step.StepType = WizardStepType.Auto;
+		}
+	}
 }
 

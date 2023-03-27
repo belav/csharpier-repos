@@ -1,4 +1,4 @@
-
+﻿
 #region MIT license
 // 
 // MIT license

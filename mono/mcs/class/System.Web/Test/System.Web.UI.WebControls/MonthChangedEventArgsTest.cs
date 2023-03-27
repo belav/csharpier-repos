@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.MonthChangedEventArgs.cs 
 //
 // Author:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 
 //
@@ -36,19 +36,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    public class MonthChangedEventArgsTest {
+	[TestFixture]
+	public class MonthChangedEventArgsTest {
 
-        [Test]
-        public void Ctor ()
-        {
-            DateTime now = DateTime.MaxValue;
-            DateTime later = DateTime.MinValue;
+		[Test]
+		public void Ctor ()
+		{
+			DateTime now = DateTime.MaxValue;
+			DateTime later = DateTime.MinValue;
 
-            MonthChangedEventArgs e = new MonthChangedEventArgs (now, later);
-            Assert.AreEqual (e.NewDate, now, "A1");
-            Assert.AreEqual (e.PreviousDate, later, "A2");
-        }
-    }
+			MonthChangedEventArgs e = new MonthChangedEventArgs (now, later);
+			Assert.AreEqual (e.NewDate, now, "A1");
+			Assert.AreEqual (e.PreviousDate, later, "A2");
+		}
+	}
 }
 

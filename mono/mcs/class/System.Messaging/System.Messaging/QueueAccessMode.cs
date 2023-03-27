@@ -23,15 +23,15 @@ using System;
 
 namespace System.Messaging
 {
-    public enum QueueAccessMode
-    {
-        Receive = 1,
-        Send = 2,
-        SendAndReceive = 3,
+	public enum QueueAccessMode
+	{
+		Receive = 1,
+		Send = 2,
+		SendAndReceive = 3,
 
-        Peek = 32,
+		Peek = 32,
 
-        PeekAndAdmin = Peek + 128,
-        ReceiveAndAdmin = Receive + 128
-    }
+		PeekAndAdmin = Peek + 128,
+		ReceiveAndAdmin = Receive + 128
+	}
 }

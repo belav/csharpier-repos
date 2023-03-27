@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum ArrowDirection
-    {
-        Left = 0,
-        Up = 1,
-        Right = 16,
-        Down = 17
-    }
+	public enum ArrowDirection
+	{
+		Left = 0,
+		Up = 1,
+		Right = 16,
+		Down = 17
+	}
 }

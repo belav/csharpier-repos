@@ -47,16 +47,16 @@ namespace Mono.ILASM {
                 private ExternModule pinvoke_mod;
                 private string pinvoke_name;
                 private PEAPI.PInvokeAttr pinvoke_attr;
-        private SourceMethod source;
+		private SourceMethod source;
                 private TypeDef type_def;
                 private GenericParameters gen_params;
                 private Location start;
                 private CodeGen codegen;
 
                 public MethodDef (CodeGen codegen, PEAPI.MethAttr meth_attr,
-                  PEAPI.CallConv call_conv, PEAPI.ImplAttr impl_attr,
-                  string name, BaseTypeRef ret_type, ArrayList param_list,
-                  Location start, GenericParameters gen_params, TypeDef type_def)
+				  PEAPI.CallConv call_conv, PEAPI.ImplAttr impl_attr,
+				  string name, BaseTypeRef ret_type, ArrayList param_list,
+				  Location start, GenericParameters gen_params, TypeDef type_def)
                 {
                         this.codegen = codegen;
                         this.meth_attr = meth_attr;
@@ -89,10 +89,10 @@ namespace Mono.ILASM {
                         ResolveGenParams ();
                         CreateSignature ();
 
-            codegen.BeginMethodDef (this);
+			codegen.BeginMethodDef (this);
 
-            if (codegen.SymbolWriter != null)
-                source = codegen.SymbolWriter.BeginMethod (this, start);
+			if (codegen.SymbolWriter != null)
+				source = codegen.SymbolWriter.BeginMethod (this, start);
                 }
 
                 public string Name {
@@ -346,43 +346,43 @@ namespace Mono.ILASM {
                         this.max_stack = max_stack;
                 }
 
-        public void ResolveGenParam (PEAPI.GenParam gpar)
-        {
-            if (gpar.Index != -1)
-                return;
-    
-            if (gpar.Type == PEAPI.GenParamType.MVar)
-                gpar.Index = GetGenericParamNum (gpar.Name); 
-            else
-                gpar.Index = type_def.GetGenericParamNum (gpar.Name);
+		public void ResolveGenParam (PEAPI.GenParam gpar)
+		{
+			if (gpar.Index != -1)
+				return;
+	
+			if (gpar.Type == PEAPI.GenParamType.MVar)
+				gpar.Index = GetGenericParamNum (gpar.Name); 
+			else
+				gpar.Index = type_def.GetGenericParamNum (gpar.Name);
 
-            if (gpar.Index < 0)
-                Report.Error (String.Format ("Invalid {0}type parameter '{1}'", 
-                            (gpar.Type == PEAPI.GenParamType.MVar ? "method " : ""),
-                             gpar.Name));
-        }
+			if (gpar.Index < 0)
+				Report.Error (String.Format ("Invalid {0}type parameter '{1}'", 
+							(gpar.Type == PEAPI.GenParamType.MVar ? "method " : ""),
+							 gpar.Name));
+		}
 
                 public void ResolveGenParams ()
                 {
-            GenericParameters type_params = (type_def != null) ? type_def.TypeParameters : null;
+			GenericParameters type_params = (type_def != null) ? type_def.TypeParameters : null;
 
-            if (gen_params == null && type_params == null)
-                return;
+			if (gen_params == null && type_params == null)
+				return;
 
-            if (gen_params != null)
-                gen_params.ResolveConstraints (type_params, gen_params);
-            
-            BaseGenericTypeRef gtr = RetType as BaseGenericTypeRef;
-            if (gtr != null)
-                gtr.Resolve (type_params, gen_params);
+			if (gen_params != null)
+				gen_params.ResolveConstraints (type_params, gen_params);
+			
+			BaseGenericTypeRef gtr = RetType as BaseGenericTypeRef;
+			if (gtr != null)
+				gtr.Resolve (type_params, gen_params);
 
-            if (param_list == null)
-                return;
+			if (param_list == null)
+				return;
 
-            foreach (ParamDef param in param_list) {
-                gtr = param.Type as BaseGenericTypeRef;
-                 if (gtr != null)
-                    gtr.Resolve (type_params, gen_params);
+			foreach (ParamDef param in param_list) {
+				gtr = param.Type as BaseGenericTypeRef;
+ 				if (gtr != null)
+					gtr.Resolve (type_params, gen_params);
                         }        
                 }
 
@@ -403,7 +403,7 @@ namespace Mono.ILASM {
                         if (classdef == null)
                                 methoddef = code_gen.PEFile.AddMethod (meth_attr, impl_attr,
                                                 name, ret_param.PeapiParam, param_array);
-                        else            
+                        else			
                                 methoddef = classdef.AddMethod (meth_attr, impl_attr,
                                                 name, ret_param.PeapiParam, param_array);
 
@@ -479,7 +479,7 @@ namespace Mono.ILASM {
                         WriteCode (code_gen, methoddef);
 
                         //code_gen.Report.Message (String.Format ("Assembled method {0}::{1}", typedef.FullName, name));
-            is_defined = true;
+			is_defined = true;
                 }
 
                 public void AddInstr (IInstr instr)
@@ -495,11 +495,11 @@ namespace Mono.ILASM {
                                         customattr.AddTo (code_gen, methoddef);
                                         if (customattr.IsSuppressUnmanaged (code_gen))
                                                 methoddef.AddMethAttribute (PEAPI.MethAttr.HasSecurity);
-                }
+				}
 
                         /// Add declarative security to this method
-            if (decl_sec != null) {
-                decl_sec.AddTo (code_gen, methoddef);
+			if (decl_sec != null) {
+				decl_sec.AddTo (code_gen, methoddef);
                                 methoddef.AddMethAttribute (PEAPI.MethAttr.HasSecurity);
                         }        
 
@@ -636,13 +636,13 @@ namespace Mono.ILASM {
                                         if (label_pos >= label_info.Length)
                                                 next_label_pos = -1;
                                 }
-                if (source != null)
-                    source.MarkLocation (instr.Location.line, cil.Offset);
+				if (source != null)
+					source.MarkLocation (instr.Location.line, cil.Offset);
                                 instr.Emit (code_gen, this, cil);
                         }
 
-            if (source != null)
-                source.MarkLocation (source.EndLine, cil.Offset);
+			if (source != null)
+				source.MarkLocation (source.EndLine, cil.Offset);
                 }
 
                 public LabelInfo AddLabel (string name)
@@ -708,15 +708,15 @@ namespace Mono.ILASM {
                                 signature = CreateSignature (RetType, name, param_list, GenParamCount, Attributes);
                 }
 
-                static string CreateSignature (BaseTypeRef RetType, string name, IList param_list, int gen_param_count, PEAPI.MethAttr attrs)
+				static string CreateSignature (BaseTypeRef RetType, string name, IList param_list, int gen_param_count, PEAPI.MethAttr attrs)
                 {
                         StringBuilder builder = new StringBuilder ();
 
-                        if ((attrs & PEAPI.MethAttr.Static) == 0)
-                            builder.Append ("instance ");
+						if ((attrs & PEAPI.MethAttr.Static) == 0)
+							builder.Append ("instance ");
 
-            builder.Append (RetType.FullName);
-            builder.Append (" ");
+			builder.Append (RetType.FullName);
+			builder.Append (" ");
                         builder.Append (name);
                         if (gen_param_count > 0)
                                 builder.AppendFormat ("`{0}", gen_param_count);
@@ -741,8 +741,8 @@ namespace Mono.ILASM {
                         StringBuilder builder = new StringBuilder ();
                         ParamDef last = null;
 
-            builder.Append (RetType.FullName);
-            builder.Append (" ");
+			builder.Append (RetType.FullName);
+			builder.Append (" ");
                         builder.Append (name);
                         builder.Append ('(');
 
@@ -781,13 +781,13 @@ namespace Mono.ILASM {
                                 return CreateSignature (RetType, name, param_list, gen_param_count, include_optional, call_conv);
                 }
 
-                static string CreateVarargSignature (BaseTypeRef RetType, string name, BaseTypeRef [] param_list, bool include_optional)
+				static string CreateVarargSignature (BaseTypeRef RetType, string name, BaseTypeRef [] param_list, bool include_optional)
                 {
                         StringBuilder builder = new StringBuilder ();
                         BaseTypeRef last = null;
 
-            builder.Append (RetType.FullName);
-            builder.Append (" ");
+			builder.Append (RetType.FullName);
+			builder.Append (" ");
                         builder.Append (name);
                         builder.Append ('(');
 
@@ -816,16 +816,16 @@ namespace Mono.ILASM {
                         return builder.ToString ();
                 }
 
-                static string CreateSignature (BaseTypeRef RetType, string name, BaseTypeRef[] param_list, int gen_param_count, bool include_optional, PEAPI.CallConv call_conv)
+				static string CreateSignature (BaseTypeRef RetType, string name, BaseTypeRef[] param_list, int gen_param_count, bool include_optional, PEAPI.CallConv call_conv)
                 {
                         StringBuilder builder = new StringBuilder ();
 
-                        if ((call_conv & PEAPI.CallConv.Instance) != 0)
-                            builder.Append ("instance ");
+						if ((call_conv & PEAPI.CallConv.Instance) != 0)
+							builder.Append ("instance ");
 
 
-            builder.Append (RetType.FullName);
-            builder.Append (" ");
+			builder.Append (RetType.FullName);
+			builder.Append (" ");
                         builder.Append (name);
                         if (gen_param_count > 0)
                                 builder.AppendFormat ("`{0}", gen_param_count);

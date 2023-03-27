@@ -7,12 +7,12 @@ using System.Collections;
 
 interface IList 
 {
-    IEnumerator GetEnumerator ();
+	IEnumerator GetEnumerator ();
 }
 
 interface ICounter 
 {
-    IEnumerator GetEnumerator ();
+	IEnumerator GetEnumerator ();
 }
 
 interface IListCounter: IList, ICounter
@@ -21,10 +21,10 @@ interface IListCounter: IList, ICounter
 
 class Test
 {
-    static void Foo (IListCounter t)
-    {
-        foreach (var e in t)
-        {
-        }
-    }
+	static void Foo (IListCounter t)
+	{
+		foreach (var e in t)
+		{
+		}
+	}
 }

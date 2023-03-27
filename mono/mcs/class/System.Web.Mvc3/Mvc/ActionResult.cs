@@ -1,4 +1,4 @@
-namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc {
 
     public abstract class ActionResult {
 

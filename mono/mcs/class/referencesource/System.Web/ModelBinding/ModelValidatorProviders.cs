@@ -1,4 +1,4 @@
-namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding {
     public static class ModelValidatorProviders {
 
         private static readonly ModelValidatorProviderCollection _providers = new ModelValidatorProviderCollection() {

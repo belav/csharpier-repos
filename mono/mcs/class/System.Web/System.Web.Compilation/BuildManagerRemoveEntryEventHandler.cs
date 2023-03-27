@@ -33,25 +33,25 @@ using System.Web;
 
 namespace System.Web.Compilation
 {
-    internal delegate void BuildManagerRemoveEntryEventHandler (BuildManagerRemoveEntryEventArgs args);
+	internal delegate void BuildManagerRemoveEntryEventHandler (BuildManagerRemoveEntryEventArgs args);
 
-    class BuildManagerRemoveEntryEventArgs : EventArgs
-    {
-        public string EntryName {
-            get;
-            private set;
-        }
+	class BuildManagerRemoveEntryEventArgs : EventArgs
+	{
+		public string EntryName {
+			get;
+			private set;
+		}
 
-        public HttpContext Context {
-            get;
-            private set;
-        }
-        
-        public BuildManagerRemoveEntryEventArgs (string entryName, HttpContext context)
-        {
-            EntryName = entryName;
-            Context = context;
-        }
-    }
+		public HttpContext Context {
+			get;
+			private set;
+		}
+		
+		public BuildManagerRemoveEntryEventArgs (string entryName, HttpContext context)
+		{
+			EntryName = entryName;
+			Context = context;
+		}
+	}
 }
 

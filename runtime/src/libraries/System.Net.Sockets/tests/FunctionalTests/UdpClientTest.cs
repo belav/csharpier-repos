@@ -193,7 +193,7 @@ namespace System.Net.Sockets.Tests
             Assert.Throws<ObjectDisposedException>(() => {udpClient.SendAsync(null, 0, remoteEP);});
             Assert.Throws<ObjectDisposedException>(() => {udpClient.SendAsync(null, 0);});
             Assert.Throws<ObjectDisposedException>(() => {udpClient.SendAsync(null, 0, "localhost", 0);});
-            
+			
             Assert.Throws<ObjectDisposedException>(() => udpClient.SendAsync(new ReadOnlyMemory<byte>(), remoteEP));
             Assert.Throws<ObjectDisposedException>(() => udpClient.SendAsync(new ReadOnlyMemory<byte>()));
             Assert.Throws<ObjectDisposedException>(() => udpClient.SendAsync(new ReadOnlyMemory<byte>(), "localhost", 0));

@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.ListItem.cs
 //
 // Authors:
-//    Ben Maurer (bmaurer@novell.com)
+//	Ben Maurer (bmaurer@novell.com)
 //
 // (C) 2005-2009 Novell, Inc (http://www.novell.com)
 //
@@ -32,238 +32,238 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
 
-    // CAS - no inheritance demand required because the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [ControlBuilder(typeof(ListItemControlBuilder))]
-    [TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
-    [ParseChildren (true, "Text")]
-    public sealed class ListItem : IAttributeAccessor, IParserAccessor, IStateManager
-    {
-        public ListItem (string text, string value, bool enabled) : this (text, value)
-        {
-            this.enabled = enabled;
-        }
-        public ListItem (string text, string value)
-        {
-            this.text = text;
-            this.value = value;
-        }
-    
-        public ListItem (string text) : this (text, null)
-        {
-        }
-    
-        public ListItem () : this (null, null) 
-        {
-        }
-    
-        public static ListItem FromString (string s)
-        {
-            return new ListItem (s);
-        }
-    
-        public override bool Equals (object o)
-        {
-            ListItem li = o as ListItem;
-            if (li == null)
-                return false;
-            return li.Text == Text && li.Value == Value;
-        }
-    
-        public override int GetHashCode ()
-        {
-            return Text.GetHashCode () ^ Value.GetHashCode ();
-        
-        }
-    
-        string IAttributeAccessor.GetAttribute (string key)
-        {
-            if (attrs == null)
-                return null;
+	// CAS - no inheritance demand required because the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[ControlBuilder(typeof(ListItemControlBuilder))]
+	[TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
+	[ParseChildren (true, "Text")]
+	public sealed class ListItem : IAttributeAccessor, IParserAccessor, IStateManager
+	{
+		public ListItem (string text, string value, bool enabled) : this (text, value)
+		{
+			this.enabled = enabled;
+		}
+		public ListItem (string text, string value)
+		{
+			this.text = text;
+			this.value = value;
+		}
+	
+		public ListItem (string text) : this (text, null)
+		{
+		}
+	
+		public ListItem () : this (null, null) 
+		{
+		}
+	
+		public static ListItem FromString (string s)
+		{
+			return new ListItem (s);
+		}
+	
+		public override bool Equals (object o)
+		{
+			ListItem li = o as ListItem;
+			if (li == null)
+				return false;
+			return li.Text == Text && li.Value == Value;
+		}
+	
+		public override int GetHashCode ()
+		{
+			return Text.GetHashCode () ^ Value.GetHashCode ();
+		
+		}
+	
+		string IAttributeAccessor.GetAttribute (string key)
+		{
+			if (attrs == null)
+				return null;
 
-            return (string) Attributes [key];
-        }
-    
-        void IAttributeAccessor.SetAttribute (string key, string value)
-        {
-            Attributes [key] = value;
-        }
-    
-        void IParserAccessor.AddParsedSubObject (object obj)
-        {
-            LiteralControl lc = obj as LiteralControl;
-            if (lc == null) {
-                // obj.GetType() will throw a NullRef if obj is null. That's fine according to the test.
-                throw new HttpException ("'ListItem' cannot have children of type " + obj.GetType ());
-            }
-            Text = lc.Text;
-        }
-    
-        void IStateManager.LoadViewState (object state)
-        {
-            LoadViewState (state);
-        }
-        
-        internal void LoadViewState (object state)
-        {
-            if (state == null)
-                return;
+			return (string) Attributes [key];
+		}
+	
+		void IAttributeAccessor.SetAttribute (string key, string value)
+		{
+			Attributes [key] = value;
+		}
+	
+		void IParserAccessor.AddParsedSubObject (object obj)
+		{
+			LiteralControl lc = obj as LiteralControl;
+			if (lc == null) {
+				// obj.GetType() will throw a NullRef if obj is null. That's fine according to the test.
+				throw new HttpException ("'ListItem' cannot have children of type " + obj.GetType ());
+			}
+			Text = lc.Text;
+		}
+	
+		void IStateManager.LoadViewState (object state)
+		{
+			LoadViewState (state);
+		}
+		
+		internal void LoadViewState (object state)
+		{
+			if (state == null)
+				return;
 
-            object [] states = (object []) state;
+			object [] states = (object []) state;
 
-            if (states [0] != null) {
-                sb = new StateBag (true);
-                sb.LoadViewState (states[0]);
-                sb.SetDirty (true);
-            }
-            
-            if (states [1] != null)
-                text = (string) states [1];
-            if (states [2] != null)
-                value = (string) states [2];
-            if (states [3] != null)
-                selected = (bool) states [3];
-            if (states [4] != null)
-                enabled = (bool) states [4];
-        }
+			if (states [0] != null) {
+				sb = new StateBag (true);
+				sb.LoadViewState (states[0]);
+				sb.SetDirty (true);
+			}
+			
+			if (states [1] != null)
+				text = (string) states [1];
+			if (states [2] != null)
+				value = (string) states [2];
+			if (states [3] != null)
+				selected = (bool) states [3];
+			if (states [4] != null)
+				enabled = (bool) states [4];
+		}
 
-        object IStateManager.SaveViewState () 
-        {
-            return SaveViewState ();
-        }
+		object IStateManager.SaveViewState () 
+		{
+			return SaveViewState ();
+		}
 
-        internal object SaveViewState ()
-        {
-            if (!dirty)
-                return null;
+		internal object SaveViewState ()
+		{
+			if (!dirty)
+				return null;
 
-            object [] state = new object [5];
-            state [0] = sb != null ? sb.SaveViewState () : null;
-            state [1] = (object) text;
-            state [2] = (object) value;
-            state [3] = (object) selected;
-            state [4] = (object) enabled;
-            return state;
-        }
-        
-        void IStateManager.TrackViewState ()
-        {
-            TrackViewState ();
-        }
-        
-        internal void TrackViewState ()
-        {
-            tracking = true;
-            if (sb != null) {
-                sb.TrackViewState ();
-                sb.SetDirty (true);
-            }
-        }
+			object [] state = new object [5];
+			state [0] = sb != null ? sb.SaveViewState () : null;
+			state [1] = (object) text;
+			state [2] = (object) value;
+			state [3] = (object) selected;
+			state [4] = (object) enabled;
+			return state;
+		}
+		
+		void IStateManager.TrackViewState ()
+		{
+			TrackViewState ();
+		}
+		
+		internal void TrackViewState ()
+		{
+			tracking = true;
+			if (sb != null) {
+				sb.TrackViewState ();
+				sb.SetDirty (true);
+			}
+		}
 
-        public override string ToString ()
-        {
-            return Text;
-        }
-    
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public AttributeCollection Attributes {
-            get {
-                if (attrs != null)
-                    return attrs;
+		public override string ToString ()
+		{
+			return Text;
+		}
+	
+		[Browsable(false)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public AttributeCollection Attributes {
+			get {
+				if (attrs != null)
+					return attrs;
 
-                if (sb == null) {    
-                    sb = new StateBag (true);
-                    if (tracking)
-                        sb.TrackViewState ();
-                }
+				if (sb == null) {	
+					sb = new StateBag (true);
+					if (tracking)
+						sb.TrackViewState ();
+				}
 
-                return attrs = new AttributeCollection (sb);
-            }
-        }
+				return attrs = new AttributeCollection (sb);
+			}
+		}
 
-        bool IStateManager.IsTrackingViewState {
-            get { return tracking; }
-        }
+		bool IStateManager.IsTrackingViewState {
+			get { return tracking; }
+		}
 
-        [TypeConverter ("System.Web.UI.MinimizableAttributeTypeConverter")]
-        [DefaultValue(false)]
-        public bool Selected {
-            get { return selected; }
-            set { 
-                selected = value;
-                if (tracking)
-                    SetDirty ();
-            }
-        }
+		[TypeConverter ("System.Web.UI.MinimizableAttributeTypeConverter")]
+		[DefaultValue(false)]
+		public bool Selected {
+			get { return selected; }
+			set { 
+				selected = value;
+				if (tracking)
+					SetDirty ();
+			}
+		}
 
-        [Localizable (true)]
-        [DefaultValue("")]
-        [PersistenceMode(PersistenceMode.EncodedInnerDefaultProperty)]
-        public string Text {
-            get {
-                string r = text;
-                if (r == null)
-                    r = value;
-                if (r == null)
-                    r = String.Empty;
-                return r;
-            }
-        
-            set {
-                text = value;
-                if (tracking)
-                    SetDirty ();
-            }
-        }
+		[Localizable (true)]
+		[DefaultValue("")]
+		[PersistenceMode(PersistenceMode.EncodedInnerDefaultProperty)]
+		public string Text {
+			get {
+				string r = text;
+				if (r == null)
+					r = value;
+				if (r == null)
+					r = String.Empty;
+				return r;
+			}
+		
+			set {
+				text = value;
+				if (tracking)
+					SetDirty ();
+			}
+		}
 
-        [Localizable (true)]
-        [DefaultValue("")]
-        public string Value {
-            get {
-                string r = value;
-                if (r == null)
-                    r = text;
-                if (r == null)
-                    r = String.Empty;
-                return r;
-            }
-        
-            set {
-                this.value = value;
-                if (tracking)
-                    SetDirty ();
-            }
-        }
+		[Localizable (true)]
+		[DefaultValue("")]
+		public string Value {
+			get {
+				string r = value;
+				if (r == null)
+					r = text;
+				if (r == null)
+					r = String.Empty;
+				return r;
+			}
+		
+			set {
+				this.value = value;
+				if (tracking)
+					SetDirty ();
+			}
+		}
 
-        internal void SetDirty ()
-        {
-            dirty = true;
-        }
+		internal void SetDirty ()
+		{
+			dirty = true;
+		}
 
-        [DefaultValue (true)]
-        public bool Enabled
-        {
-            get { return enabled; }
-            set {
-                enabled = value;
-                if (tracking)
-                    SetDirty ();
-            }
-        }
+		[DefaultValue (true)]
+		public bool Enabled
+		{
+			get { return enabled; }
+			set {
+				enabled = value;
+				if (tracking)
+					SetDirty ();
+			}
+		}
 
-        internal bool HasAttributes {
-            get { return attrs != null && attrs.Count > 0; }
-        }
+		internal bool HasAttributes {
+			get { return attrs != null && attrs.Count > 0; }
+		}
 
-        string text;
-        string value;
-        bool selected;
-        bool dirty;
-        bool enabled = true;
-        bool tracking;
-        StateBag sb;
-        AttributeCollection attrs;
-    }
+		string text;
+		string value;
+		bool selected;
+		bool dirty;
+		bool enabled = true;
+		bool tracking;
+		StateBag sb;
+		AttributeCollection attrs;
+	}
 }

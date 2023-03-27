@@ -2,7 +2,7 @@
 // System.Web.TempFileStream.cs
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -29,74 +29,74 @@
 using System.IO;
 using System.Runtime.InteropServices;
 namespace System.Web {
-    internal class TempFileStream : FileStream {
-        bool read_mode;
-        bool disposed;
-        long saved_position;
+	internal class TempFileStream : FileStream {
+		bool read_mode;
+		bool disposed;
+		long saved_position;
 
-        public TempFileStream (string name)
-            : base (name, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 8192)
-        {
-        }
+		public TempFileStream (string name)
+			: base (name, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 8192)
+		{
+		}
 
-        public override bool CanRead {
-            get { return read_mode; }
-        }
+		public override bool CanRead {
+			get { return read_mode; }
+		}
 
                 public override bool CanWrite {
                         get { return !read_mode; }
                 }
 
-        public void SavePosition ()
-        {
-            saved_position = Position;
-            Position = 0;
-        }
+		public void SavePosition ()
+		{
+			saved_position = Position;
+			Position = 0;
+		}
 
-        public void RestorePosition ()
-        {
-            Position = saved_position;
-            saved_position = -1;
-        }
+		public void RestorePosition ()
+		{
+			Position = saved_position;
+			saved_position = -1;
+		}
 
-        public void SetReadOnly ()
-        {
-            read_mode = true;
-            Position = 0;
-        }
+		public void SetReadOnly ()
+		{
+			read_mode = true;
+			Position = 0;
+		}
 
-        public void SetWriteOnly ()
-        {
-            read_mode = false;
-            Position = 0;
-        }
+		public void SetWriteOnly ()
+		{
+			read_mode = false;
+			Position = 0;
+		}
 
-        public override void Write (byte [] buffer, int offset, int count)
-        {
-            if (read_mode)
-                throw new InvalidOperationException ("mode read");
+		public override void Write (byte [] buffer, int offset, int count)
+		{
+			if (read_mode)
+				throw new InvalidOperationException ("mode read");
 
-            base.Write (buffer, offset, count);
-        }
+			base.Write (buffer, offset, count);
+		}
 
-        public override int Read ([In,Out] byte [] buffer, int offset, int count)
-        {
-            if (!read_mode)
-                throw new InvalidOperationException ("mode write");
+		public override int Read ([In,Out] byte [] buffer, int offset, int count)
+		{
+			if (!read_mode)
+				throw new InvalidOperationException ("mode write");
 
-            return base.Read (buffer, offset, count);
-        }
+			return base.Read (buffer, offset, count);
+		}
 
-        protected override void Dispose (bool disposing)
-        {
-            if (!disposed) {
-                disposed = true;
-                base.Dispose (disposing);
-                try {
-                    File.Delete (Name);
-                } catch {}
-            }
-        }
-    }
+		protected override void Dispose (bool disposing)
+		{
+			if (!disposed) {
+				disposed = true;
+				base.Dispose (disposing);
+				try {
+					File.Delete (Name);
+				} catch {}
+			}
+		}
+	}
 }
 

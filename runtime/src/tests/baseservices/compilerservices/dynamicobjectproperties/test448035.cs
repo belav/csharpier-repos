@@ -37,8 +37,8 @@ class Test_test448035
 
         new Test_test448035(5).ToString();
 
-    Console.WriteLine("PASS: Test did not assert");
-    return 100;
+	Console.WriteLine("PASS: Test did not assert");
+	return 100;
     }
 }
     

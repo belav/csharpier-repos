@@ -2,7 +2,7 @@
 // System.Configuration.NameValueFileSectionHandler
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 //
@@ -41,42 +41,42 @@ using XmlNode = System.Object;
 
 namespace System.Configuration
 {
-    public class NameValueFileSectionHandler : IConfigurationSectionHandler
-    {
-        public object Create (object parent, object configContext, XmlNode section)
-        {
+	public class NameValueFileSectionHandler : IConfigurationSectionHandler
+	{
+		public object Create (object parent, object configContext, XmlNode section)
+		{
 #if (XML_DEP)
-            XmlNode file = null;
-            if (section.Attributes != null)
-                file = section.Attributes.RemoveNamedItem ("file");
+			XmlNode file = null;
+			if (section.Attributes != null)
+				file = section.Attributes.RemoveNamedItem ("file");
 
-            NameValueCollection pairs = ConfigHelper.GetNameValueCollection (
-                                    parent as NameValueCollection,
-                                    section,
-                                    "key",
-                                    "value");
+			NameValueCollection pairs = ConfigHelper.GetNameValueCollection (
+									parent as NameValueCollection,
+									section,
+									"key",
+									"value");
 
-            if (file != null && file.Value != String.Empty) {
-                string fileName = ((IConfigXmlNode) section).Filename;
-                fileName = Path.GetFullPath (fileName);
-                string fullPath = Path.Combine (Path.GetDirectoryName (fileName), file.Value);
-                if (!File.Exists (fullPath))
-                    return pairs;
+			if (file != null && file.Value != String.Empty) {
+				string fileName = ((IConfigXmlNode) section).Filename;
+				fileName = Path.GetFullPath (fileName);
+				string fullPath = Path.Combine (Path.GetDirectoryName (fileName), file.Value);
+				if (!File.Exists (fullPath))
+					return pairs;
 
-                ConfigXmlDocument doc = new ConfigXmlDocument ();
-                doc.Load (fullPath);
-                if (doc.DocumentElement.Name != section.Name)
-                    throw new ConfigurationException ("Invalid root element", doc.DocumentElement);
+				ConfigXmlDocument doc = new ConfigXmlDocument ();
+				doc.Load (fullPath);
+				if (doc.DocumentElement.Name != section.Name)
+					throw new ConfigurationException ("Invalid root element", doc.DocumentElement);
 
-                pairs = ConfigHelper.GetNameValueCollection (pairs, doc.DocumentElement,
-                                         "key", "value");
-            }
+				pairs = ConfigHelper.GetNameValueCollection (pairs, doc.DocumentElement,
+									     "key", "value");
+			}
 
-            return pairs;
+			return pairs;
 #else
-            return null;
-#endif            
-        }
-    }
+			return null;
+#endif			
+		}
+	}
 }
 

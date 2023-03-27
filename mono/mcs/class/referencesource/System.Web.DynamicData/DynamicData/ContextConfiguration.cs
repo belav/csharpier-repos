@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Permissions;
 using System.Diagnostics.CodeAnalysis;
 using System.ComponentModel.DataAnnotations;

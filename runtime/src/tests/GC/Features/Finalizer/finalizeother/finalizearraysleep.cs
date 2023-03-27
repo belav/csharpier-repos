@@ -19,7 +19,7 @@ public class Test_finalizearraysleep {
 
     public class CreateObj {
         public Dummy[] obj;
-        public int ExitCode = 0;        
+        public int ExitCode = 0;		
 
         // No inline to ensure no stray refs to the new array
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -32,7 +32,7 @@ public class Test_finalizearraysleep {
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public void RunTest() {        
+        public void RunTest() {		
             obj=null;     // making sure collect is called even with /debug
             GC.Collect();
             GC.WaitForPendingFinalizers();

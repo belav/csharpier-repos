@@ -32,7 +32,7 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public abstract class DirectoryOperation
-    {
-    }
+	public abstract class DirectoryOperation
+	{
+	}
 }

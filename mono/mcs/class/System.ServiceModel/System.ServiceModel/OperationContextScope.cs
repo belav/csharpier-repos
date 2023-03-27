@@ -30,26 +30,26 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-    public sealed class OperationContextScope : IDisposable
-    {
-        OperationContext previous;
+	public sealed class OperationContextScope : IDisposable
+	{
+		OperationContext previous;
 
-        public OperationContextScope (IContextChannel channel)
-            : this (new OperationContext (channel, false))
-        {
-        }
+		public OperationContextScope (IContextChannel channel)
+			: this (new OperationContext (channel, false))
+		{
+		}
 
-        public OperationContextScope (OperationContext context)
-        {
-            if (context == null)
-                throw new ArgumentNullException ("context");
-            previous = OperationContext.Current;
-            OperationContext.Current = context;
-        }
+		public OperationContextScope (OperationContext context)
+		{
+			if (context == null)
+				throw new ArgumentNullException ("context");
+			previous = OperationContext.Current;
+			OperationContext.Current = context;
+		}
 
-        public void Dispose ()
-        {
-            OperationContext.Current = previous;
-        }
-    }
+		public void Dispose ()
+		{
+			OperationContext.Current = previous;
+		}
+	}
 }

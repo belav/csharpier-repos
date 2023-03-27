@@ -2,7 +2,7 @@
 // RuntimeTypeHandleTest.cs - Unit tests for System.RuntimeTypeHandle
 //
 // Author:
-//    Robert Jordan  <robertj@gmx.net>
+//	Robert Jordan  <robertj@gmx.net>
 //
 // Copyright (C) 2008 Novell, Inc. (http://www.novell.com)
 //
@@ -35,24 +35,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System
 {
-    [TestFixture]
-    public class RuntimeTypeHandleTest
-    {
-        [Test]
-        [ExpectedException (typeof (SerializationException))]
-        public void Serialization_Of_Empty_Handle ()
-        {
-            RuntimeTypeHandle handle = new RuntimeTypeHandle ();
-            new BinaryFormatter ().Serialize (Stream.Null, handle);
-        }
+	[TestFixture]
+	public class RuntimeTypeHandleTest
+	{
+		[Test]
+		[ExpectedException (typeof (SerializationException))]
+		public void Serialization_Of_Empty_Handle ()
+		{
+			RuntimeTypeHandle handle = new RuntimeTypeHandle ();
+			new BinaryFormatter ().Serialize (Stream.Null, handle);
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        [Category ("NotDotNet")] // it crashes the runtime on MS.NET
-        public void GetModuleHandle_Of_Empty_Handle ()
-        {
-            RuntimeTypeHandle handle = new RuntimeTypeHandle ();
-            handle.GetModuleHandle ();
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (InvalidOperationException))]
+		[Category ("NotDotNet")] // it crashes the runtime on MS.NET
+		public void GetModuleHandle_Of_Empty_Handle ()
+		{
+			RuntimeTypeHandle handle = new RuntimeTypeHandle ();
+			handle.GetModuleHandle ();
+		}
+	}
 }

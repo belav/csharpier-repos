@@ -2,7 +2,7 @@
 // System.Net.HttpListenerBasicIdentity
 //
 // Author:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
@@ -27,17 +27,17 @@
 //
 using System.Security.Principal;
 namespace System.Net {
-    public class HttpListenerBasicIdentity : GenericIdentity {
-        string password;
+	public class HttpListenerBasicIdentity : GenericIdentity {
+		string password;
 
-        public HttpListenerBasicIdentity (string username, string password) : base (username, "Basic")
-        {
-            this.password = password;
-        }
+		public HttpListenerBasicIdentity (string username, string password) : base (username, "Basic")
+		{
+			this.password = password;
+		}
 
-        public virtual string Password {
-            get { return password; }
-        }
-    }
+		public virtual string Password {
+			get { return password; }
+		}
+	}
 }
 

@@ -2,7 +2,7 @@
 // PnrpPeerResolverBindingElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,83 +36,83 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-    [MonoTODO ("We aren't actually going to implement this windows-only protocol")]
-    public class PnrpPeerResolverBindingElement : PeerResolverBindingElement
-    {
-        public PnrpPeerResolverBindingElement ()
-        {
-        }
+	[MonoTODO ("We aren't actually going to implement this windows-only protocol")]
+	public class PnrpPeerResolverBindingElement : PeerResolverBindingElement
+	{
+		public PnrpPeerResolverBindingElement ()
+		{
+		}
 
-        private PnrpPeerResolverBindingElement (
-            PnrpPeerResolverBindingElement other)
-            : base (other)
-        {
-            ReferralPolicy = other.ReferralPolicy;
-        }
+		private PnrpPeerResolverBindingElement (
+			PnrpPeerResolverBindingElement other)
+			: base (other)
+		{
+			ReferralPolicy = other.ReferralPolicy;
+		}
 
-        public override PeerReferralPolicy ReferralPolicy { get; set; }
+		public override PeerReferralPolicy ReferralPolicy { get; set; }
 
-        [MonoTODO]
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
-            BindingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
+			BindingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
-            BindingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override IChannelListener<TChannel>
+			BuildChannelListener<TChannel> (
+			BindingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override BindingElement Clone ()
-        {
-            return new PnrpPeerResolverBindingElement (this);
-        }
+		public override BindingElement Clone ()
+		{
+			return new PnrpPeerResolverBindingElement (this);
+		}
 
-        [MonoTODO]
-        public override PeerResolver CreatePeerResolver ()
-        {
-            return new PnrpPeerResolver (this);
-        }
+		[MonoTODO]
+		public override PeerResolver CreatePeerResolver ()
+		{
+			return new PnrpPeerResolver (this);
+		}
 
-        [MonoTODO]
-        public override T GetProperty<T> (BindingContext context)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override T GetProperty<T> (BindingContext context)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 
-    class PnrpPeerResolver : PeerResolver
-    {
-        public PnrpPeerResolver (PnrpPeerResolverBindingElement binding)
-        {
-        }
+	class PnrpPeerResolver : PeerResolver
+	{
+		public PnrpPeerResolver (PnrpPeerResolverBindingElement binding)
+		{
+		}
 
-        public override bool CanShareReferrals {
-            get{ throw new NotImplementedException (); }
-        }
+		public override bool CanShareReferrals {
+			get{ throw new NotImplementedException (); }
+		}
 
-        public override object Register (string meshId, PeerNodeAddress nodeAddress, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		public override object Register (string meshId, PeerNodeAddress nodeAddress, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override ReadOnlyCollection<PeerNodeAddress> Resolve (string meshId, int maxAddresses, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		public override ReadOnlyCollection<PeerNodeAddress> Resolve (string meshId, int maxAddresses, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void Unregister (object registrationId, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		public override void Unregister (object registrationId, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void Update (object registrationId, PeerNodeAddress updatedNodeAddress, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public override void Update (object registrationId, PeerNodeAddress updatedNodeAddress, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

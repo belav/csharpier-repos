@@ -38,13 +38,13 @@ using System.Security.Permissions;
 [assembly: ComVisible (false)]
 
 [assembly: AssemblyVersion (
-    //
-    // DO NOT MODIFY STRINGS BELOW WITHOUT UPDATING mono/data/mono-options.pc.in
-    //
-    "0.2.3.0"
-    //
-    // DO NOT MODIFY STRINGS ABOVE WITHOUT UPDATING mono/data/mono-options.pc.in
-    //
+	//
+	// DO NOT MODIFY STRINGS BELOW WITHOUT UPDATING mono/data/mono-options.pc.in
+	//
+	"0.2.3.0"
+	//
+	// DO NOT MODIFY STRINGS ABOVE WITHOUT UPDATING mono/data/mono-options.pc.in
+	//
 )]
 
 [assembly: AssemblyDelaySign (true)]

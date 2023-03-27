@@ -2,7 +2,7 @@
 // System.Security.HostProtectionException class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,59 +33,59 @@ using System.Security.Permissions;
 
 namespace System.Security {
 
-    [Serializable]
-    [ComVisible (true)]
-    [MonoTODO ("Not supported in the runtime")]
-    public class HostProtectionException : SystemException {
+	[Serializable]
+	[ComVisible (true)]
+	[MonoTODO ("Not supported in the runtime")]
+	public class HostProtectionException : SystemException {
 
-        private HostProtectionResource _protected;
-        private HostProtectionResource _demanded;
+		private HostProtectionResource _protected;
+		private HostProtectionResource _demanded;
 
-        public HostProtectionException ()
-        {
-        }
+		public HostProtectionException ()
+		{
+		}
 
-        public HostProtectionException (string message)
-            : base (message)
-        {
-        }
+		public HostProtectionException (string message)
+			: base (message)
+		{
+		}
 
-        public HostProtectionException (string message, Exception e)
-            : base (message, e)
-        {
-        }
+		public HostProtectionException (string message, Exception e)
+			: base (message, e)
+		{
+		}
 
-        public HostProtectionException (string message, HostProtectionResource protectedResources, HostProtectionResource demandedResources)
-            : base (message)
-        {
-            this._protected = protectedResources;
-            this._demanded = demandedResources;
-        }
+		public HostProtectionException (string message, HostProtectionResource protectedResources, HostProtectionResource demandedResources)
+			: base (message)
+		{
+			this._protected = protectedResources;
+			this._demanded = demandedResources;
+		}
 
-        protected HostProtectionException (SerializationInfo info, StreamingContext context)
-        {
-            GetObjectData (info, context);
-        }
+		protected HostProtectionException (SerializationInfo info, StreamingContext context)
+		{
+			GetObjectData (info, context);
+		}
 
-        public HostProtectionResource DemandedResources {
-            get { return _demanded; }
-        }
+		public HostProtectionResource DemandedResources {
+			get { return _demanded; }
+		}
 
-        public HostProtectionResource ProtectedResources {
-            get { return _protected; }
-        }
+		public HostProtectionResource ProtectedResources {
+			get { return _protected; }
+		}
 
-        [MonoTODO]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            if (info == null)
-                throw new ArgumentNullException ("info");
-        }
+		[MonoTODO]
+		public override void GetObjectData (SerializationInfo info, StreamingContext context)
+		{
+			if (info == null)
+				throw new ArgumentNullException ("info");
+		}
 
-        [MonoTODO]
-        public override string ToString ()
-        {
-            return base.ToString ();
-        }
-    }
+		[MonoTODO]
+		public override string ToString ()
+		{
+			return base.ToString ();
+		}
+	}
 }

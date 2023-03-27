@@ -28,65 +28,65 @@ using System.Windows.Markup;
 
 namespace System.Xaml
 {
-    internal class XamlNodeQueueReader : XamlReader, IXamlLineInfo
-    {
-        XamlNodeQueue source;
-        XamlNodeLineInfo node;
+	internal class XamlNodeQueueReader : XamlReader, IXamlLineInfo
+	{
+		XamlNodeQueue source;
+		XamlNodeLineInfo node;
 
-        public XamlNodeQueueReader (XamlNodeQueue source)
-        {
-            this.source = source;
-            node = default (XamlNodeLineInfo);
-        }
+		public XamlNodeQueueReader (XamlNodeQueue source)
+		{
+			this.source = source;
+			node = default (XamlNodeLineInfo);
+		}
 
-        public override bool IsEof {
-            get { return node.Node.NodeType == XamlNodeType.None; }
-        }
-        
-        public override XamlMember Member {
-            get { return NodeType != XamlNodeType.StartMember ? null : node.Node.Member.Member; }
-        }
+		public override bool IsEof {
+			get { return node.Node.NodeType == XamlNodeType.None; }
+		}
+		
+		public override XamlMember Member {
+			get { return NodeType != XamlNodeType.StartMember ? null : node.Node.Member.Member; }
+		}
 
-        public override NamespaceDeclaration Namespace {
-            get { return NodeType != XamlNodeType.NamespaceDeclaration ? null : (NamespaceDeclaration) node.Node.Value; }
-        }
+		public override NamespaceDeclaration Namespace {
+			get { return NodeType != XamlNodeType.NamespaceDeclaration ? null : (NamespaceDeclaration) node.Node.Value; }
+		}
 
-        public override XamlNodeType NodeType {
-            get { return node.Node.NodeType; }
-        }
+		public override XamlNodeType NodeType {
+			get { return node.Node.NodeType; }
+		}
 
-        public override XamlSchemaContext SchemaContext {
-            get { return source.SchemaContext; }
-        }
+		public override XamlSchemaContext SchemaContext {
+			get { return source.SchemaContext; }
+		}
 
-        public override XamlType Type {
-            get { return NodeType != XamlNodeType.StartObject ? null : node.Node.Object.Type; }
-        }
+		public override XamlType Type {
+			get { return NodeType != XamlNodeType.StartObject ? null : node.Node.Object.Type; }
+		}
 
-        public override object Value {
-            get { return NodeType != XamlNodeType.Value ? null : node.Node.Value; }
-        }
+		public override object Value {
+			get { return NodeType != XamlNodeType.Value ? null : node.Node.Value; }
+		}
 
-        public override bool Read ()
-        {
-            if (source.IsEmpty) {
-                node = default (XamlNodeLineInfo);
-                return false;
-            }
-            node = source.Dequeue ();
-            return true;
-        }
+		public override bool Read ()
+		{
+			if (source.IsEmpty) {
+				node = default (XamlNodeLineInfo);
+				return false;
+			}
+			node = source.Dequeue ();
+			return true;
+		}
 
-        public bool HasLineInfo {
-            get { return node.LineNumber > 0; }
-        }
-        
-        public int LineNumber {
-            get { return node.LineNumber; }
-        }
+		public bool HasLineInfo {
+			get { return node.LineNumber > 0; }
+		}
+		
+		public int LineNumber {
+			get { return node.LineNumber; }
+		}
 
-        public int LinePosition {
-            get { return node.LinePosition; }
-        }
-    }
+		public int LinePosition {
+			get { return node.LinePosition; }
+		}
+	}
 }

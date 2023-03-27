@@ -2,7 +2,7 @@
 // System.Net.Configuration.MailSettingsSectionGroup
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc. (http://www.novell.com)
 //
@@ -36,8 +36,8 @@ namespace System.Net.Configuration
 {
         public sealed class MailSettingsSectionGroup : ConfigurationSectionGroup
         {
-        // for some reason MS doesn't provide a ConfigurationProperty for this property...
-        //[ConfigurationProperty ("smtp")]
+		// for some reason MS doesn't provide a ConfigurationProperty for this property...
+		//[ConfigurationProperty ("smtp")]
                 public SmtpSection Smtp {
                         get { return (SmtpSection) Sections ["smtp"]; }
                 }

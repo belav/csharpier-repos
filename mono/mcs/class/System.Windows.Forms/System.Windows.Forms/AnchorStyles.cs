@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
@@ -29,13 +29,13 @@
 using System.ComponentModel;
 
 namespace System.Windows.Forms {
-    [Flags]
-    [Editor("System.Windows.Forms.Design.AnchorEditor, " + Consts.AssemblySystem_Design, typeof(System.Drawing.Design.UITypeEditor))]
-    public enum AnchorStyles {
-        None    = 0x00000000,
-        Top    = 0x00000001,
-        Bottom    = 0x00000002,
-        Left    = 0x00000004,
-        Right    = 0x00000008
-    }
+	[Flags]
+	[Editor("System.Windows.Forms.Design.AnchorEditor, " + Consts.AssemblySystem_Design, typeof(System.Drawing.Design.UITypeEditor))]
+	public enum AnchorStyles {
+		None	= 0x00000000,
+		Top	= 0x00000001,
+		Bottom	= 0x00000002,
+		Left	= 0x00000004,
+		Right	= 0x00000008
+	}
 }

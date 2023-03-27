@@ -2,7 +2,7 @@
 // FaultDescriptionTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -36,39 +36,39 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Description
 {
-    [TestFixture]
-    public class FaultDescriptionTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void NullAction ()
-        {
-            new FaultDescription (null);
-        }
+	[TestFixture]
+	public class FaultDescriptionTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void NullAction ()
+		{
+			new FaultDescription (null);
+		}
 
-        [Test]
-        public void SimpleUse ()
-        {
-            var cd = ContractDescription.GetContract (typeof (ITestContract));
-            var od = cd.Operations [0];
-            Assert.AreEqual (1, od.Faults.Count, "#1");
-            var fd = od.Faults [0];
-            // automatically filled names
-            Assert.AreEqual ("http://tempuri.org/ITestContract/EchoMyDetailFault", fd.Action, "#2");
-            Assert.AreEqual ("MyDetailFault", fd.Name, "#3");
-            Assert.AreEqual ("http://tempuri.org/", fd.Namespace, "#4");
-        }
+		[Test]
+		public void SimpleUse ()
+		{
+			var cd = ContractDescription.GetContract (typeof (ITestContract));
+			var od = cd.Operations [0];
+			Assert.AreEqual (1, od.Faults.Count, "#1");
+			var fd = od.Faults [0];
+			// automatically filled names
+			Assert.AreEqual ("http://tempuri.org/ITestContract/EchoMyDetailFault", fd.Action, "#2");
+			Assert.AreEqual ("MyDetailFault", fd.Name, "#3");
+			Assert.AreEqual ("http://tempuri.org/", fd.Namespace, "#4");
+		}
 
-        class MyDetail
-        {
-        }
+		class MyDetail
+		{
+		}
 
-        [ServiceContract]
-        interface ITestContract
-        {
-            [OperationContract]
-            [FaultContract (typeof (MyDetail))]
-            string Echo (string input);
-        }
-    }
+		[ServiceContract]
+		interface ITestContract
+		{
+			[OperationContract]
+			[FaultContract (typeof (MyDetail))]
+			string Echo (string input);
+		}
+	}
 }

@@ -33,15 +33,15 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics.SymbolStore
 {
-    [ComVisible (true)]
-    public class SymLanguageVendor
-    {
-        // Constructors
-        public SymLanguageVendor ()
-        {
-        }
+	[ComVisible (true)]
+	public class SymLanguageVendor
+	{
+		// Constructors
+		public SymLanguageVendor ()
+		{
+		}
 
-        // Fields
-        public static readonly Guid Microsoft;
-    }
+		// Fields
+		public static readonly Guid Microsoft;
+	}
 }

@@ -2,7 +2,7 @@
 // System.Security.Permissions.KeyContainerPermissionAttribute class
 //
 // Author
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,90 +31,90 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-        AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method, 
-        AllowMultiple = true, Inherited = false)]
-    [ComVisible (true)]
-    [Serializable]
-    public sealed class KeyContainerPermissionAttribute : CodeAccessSecurityAttribute {
+	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
+		AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method, 
+		AllowMultiple = true, Inherited = false)]
+	[ComVisible (true)]
+	[Serializable]
+	public sealed class KeyContainerPermissionAttribute : CodeAccessSecurityAttribute {
 
-        private KeyContainerPermissionFlags _flags;
-        private string _containerName;
-        private int _spec;
-        private string _store;
-        private string _providerName;
-        private int _type;
+		private KeyContainerPermissionFlags _flags;
+		private string _containerName;
+		private int _spec;
+		private string _store;
+		private string _providerName;
+		private int _type;
 
-        // Constructors
+		// Constructors
 
-        public KeyContainerPermissionAttribute (SecurityAction action) 
-            : base (action)
-        {
-            _spec = -1;
-            _type = -1;
-        }
+		public KeyContainerPermissionAttribute (SecurityAction action) 
+			: base (action)
+		{
+			_spec = -1;
+			_type = -1;
+		}
 
-        // Properties
+		// Properties
 
-        public KeyContainerPermissionFlags Flags {
-            get { return _flags; }
-            set { _flags = value; }
-        }
+		public KeyContainerPermissionFlags Flags {
+			get { return _flags; }
+			set { _flags = value; }
+		}
 
-        public string KeyContainerName {
-            get { return _containerName; }
-            set { _containerName = value; }
-        }
+		public string KeyContainerName {
+			get { return _containerName; }
+			set { _containerName = value; }
+		}
 
-        public int KeySpec {
-            get { return _spec; }
-            set { _spec = value; }
-        }
+		public int KeySpec {
+			get { return _spec; }
+			set { _spec = value; }
+		}
 
-        public string KeyStore {
-            get { return _store; }
-            set { _store = value; }
-        }
+		public string KeyStore {
+			get { return _store; }
+			set { _store = value; }
+		}
 
-        public string ProviderName {
-            get { return _providerName; }
-            set { _providerName = value; }
-        }
+		public string ProviderName {
+			get { return _providerName; }
+			set { _providerName = value; }
+		}
 
-        public int ProviderType {
-            get { return _type; }
-            set { _type = value; }
-        }
+		public int ProviderType {
+			get { return _type; }
+			set { _type = value; }
+		}
 
-        // Methods
+		// Methods
 
-        public override IPermission CreatePermission ()
-        {
-            if (this.Unrestricted)
-                return new KeyContainerPermission (PermissionState.Unrestricted);
-            else if (EmptyEntry ())
-                return new KeyContainerPermission (_flags);
-            else {
-                KeyContainerPermissionAccessEntry[] list = new KeyContainerPermissionAccessEntry [1];
-                list [0] = new KeyContainerPermissionAccessEntry (_store, _providerName, _type, _containerName, _spec, _flags);
-                return new KeyContainerPermission (_flags, list);
-            }
-        }
+		public override IPermission CreatePermission ()
+		{
+			if (this.Unrestricted)
+				return new KeyContainerPermission (PermissionState.Unrestricted);
+			else if (EmptyEntry ())
+				return new KeyContainerPermission (_flags);
+			else {
+				KeyContainerPermissionAccessEntry[] list = new KeyContainerPermissionAccessEntry [1];
+				list [0] = new KeyContainerPermissionAccessEntry (_store, _providerName, _type, _containerName, _spec, _flags);
+				return new KeyContainerPermission (_flags, list);
+			}
+		}
 
-        private bool EmptyEntry () 
-        {
-            if (_containerName != null)
-                return false;
-            if (_spec != 0)
-                return false;
-            if (_store != null)
-                return false;
-            if (_providerName != null)
-                return false;
-            if (_type != 0)
-                return false;
-            return true;
-        }
-    }
+		private bool EmptyEntry () 
+		{
+			if (_containerName != null)
+				return false;
+			if (_spec != 0)
+				return false;
+			if (_store != null)
+				return false;
+			if (_providerName != null)
+				return false;
+			if (_type != 0)
+				return false;
+			return true;
+		}
+	}
 }
 

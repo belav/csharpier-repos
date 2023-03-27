@@ -2,13 +2,13 @@
 // Line: 12
 
 class Foo<T> {
-    public event FooEvent Event;
-    public delegate T FooEvent();
+	public event FooEvent Event;
+	public delegate T FooEvent();
 }
 
 class CompilerCrashTest {
-    static void Main() {
-        Foo<string> foo = new Foo<string>();
-        foo.Event += new Foo<int>.FooEvent (() => 0);
-    }
+	static void Main() {
+		Foo<string> foo = new Foo<string>();
+		foo.Event += new Foo<int>.FooEvent (() => 0);
+	}
 }

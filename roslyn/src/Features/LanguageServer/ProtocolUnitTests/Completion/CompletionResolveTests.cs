@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -255,8 +255,8 @@ A&nbsp;cref&nbsp;A\.AMethod\(int\)
 _italic&nbsp;text_  
 <u>underline&nbsp;text</u>  
   
-•&nbsp;Item&nbsp;1\.  
-•&nbsp;Item&nbsp;2\.  
+â€¢&nbsp;Item&nbsp;1\.  
+â€¢&nbsp;Item&nbsp;2\.  
   
 [link text](https://google.com)";
 
@@ -314,8 +314,8 @@ strong text
 italic text
 underline text
 
-• Item 1.
-• Item 2.
+â€¢ Item 1.
+â€¢ Item 2.
 
 link text";
 

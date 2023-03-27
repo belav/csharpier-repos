@@ -2,7 +2,7 @@
 // ExprBox.cs
 //
 // Authors:
-//    Chris Bacon (chrisbacon76@gmail.com)
+//	Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -32,23 +32,23 @@ using System.Linq;
 using System.Text;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-    class ExprBox : Expr {
+	class ExprBox : Expr {
 
-        public ExprBox (MethodInfo methodInfo, Expr exprToBox)
-            : base (methodInfo)
-        {
-            this.ExprToBox = exprToBox;
-        }
+		public ExprBox (MethodInfo methodInfo, Expr exprToBox)
+			: base (methodInfo)
+		{
+			this.ExprToBox = exprToBox;
+		}
 
-        public override ExprType ExprType {
-            get { return ExprType.Box; }
-        }
+		public override ExprType ExprType {
+			get { return ExprType.Box; }
+		}
 
-        public override Mono.Cecil.TypeReference ReturnType {
-            get { return this.ExprToBox.ReturnType; }
-        }
+		public override Mono.Cecil.TypeReference ReturnType {
+			get { return this.ExprToBox.ReturnType; }
+		}
 
-        public Expr ExprToBox { get; private set; }
+		public Expr ExprToBox { get; private set; }
 
-    }
+	}
 }

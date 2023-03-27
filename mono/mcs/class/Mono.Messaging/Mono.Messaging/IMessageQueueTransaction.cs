@@ -2,7 +2,7 @@
 // Mono.Messaging
 //
 // Authors:
-//        Michael Barker (mike@middlesoft.co.uk)
+//		Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -33,15 +33,15 @@ using System.ComponentModel;
 
 namespace Mono.Messaging {
 
-    public interface IMessageQueueTransaction : IDisposable {
-    
-        MessageQueueTransactionStatus Status { get; }
-        
-        void Abort ();
-        
-        void Begin ();
-        
-        void Commit ();
-    }
+	public interface IMessageQueueTransaction : IDisposable {
+	
+		MessageQueueTransactionStatus Status { get; }
+		
+		void Abort ();
+		
+		void Begin ();
+		
+		void Commit ();
+	}
 
 }

@@ -2,7 +2,7 @@
 // ApplicationIdentityTest.cs - NUnit Test Cases for ApplicationIdentity
 //
 // Author:
-//    Sebastien Pouliot (sebastien@ximian.com)
+//	Sebastien Pouliot (sebastien@ximian.com)
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -32,33 +32,33 @@ using System;
 
 namespace MonoTests.System {
 
-    [TestFixture]
-    public class ApplicationIdentityTest {
+	[TestFixture]
+	public class ApplicationIdentityTest {
 
-        [Test]
-        public void ApplicationIdentity ()
-        {
-            ApplicationIdentity appid = new ApplicationIdentity ("Mono");
-            Assert.IsNull (appid.CodeBase, "CodeBase");
-            Assert.AreEqual ("Mono, Culture=neutral", appid.FullName);
-            Assert.AreEqual ("Mono, Culture=neutral", appid.ToString ());
-        }
+		[Test]
+		public void ApplicationIdentity ()
+		{
+			ApplicationIdentity appid = new ApplicationIdentity ("Mono");
+			Assert.IsNull (appid.CodeBase, "CodeBase");
+			Assert.AreEqual ("Mono, Culture=neutral", appid.FullName);
+			Assert.AreEqual ("Mono, Culture=neutral", appid.ToString ());
+		}
 
-        [Test]
-        public void ApplicationIdentity_WithCulture ()
-        {
-            ApplicationIdentity appid = new ApplicationIdentity ("Mono, Culture=fr-ca");
-            Assert.IsNull (appid.CodeBase, "CodeBase");
-            Assert.AreEqual ("Mono, Culture=fr-ca", appid.FullName);
-            Assert.AreEqual ("Mono, Culture=fr-ca", appid.ToString ());
-        }
+		[Test]
+		public void ApplicationIdentity_WithCulture ()
+		{
+			ApplicationIdentity appid = new ApplicationIdentity ("Mono, Culture=fr-ca");
+			Assert.IsNull (appid.CodeBase, "CodeBase");
+			Assert.AreEqual ("Mono, Culture=fr-ca", appid.FullName);
+			Assert.AreEqual ("Mono, Culture=fr-ca", appid.ToString ());
+		}
 
-        [Test]
-         [ExpectedException (typeof (ArgumentNullException))]
-        public void ApplicationIdentity_Null ()
-        {
-            new ApplicationIdentity (null);
-        }
-    }
+		[Test]
+ 		[ExpectedException (typeof (ArgumentNullException))]
+		public void ApplicationIdentity_Null ()
+		{
+			new ApplicationIdentity (null);
+		}
+	}
 }
 

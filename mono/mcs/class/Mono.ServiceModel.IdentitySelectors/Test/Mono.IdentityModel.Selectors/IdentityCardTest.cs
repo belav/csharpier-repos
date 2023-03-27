@@ -2,7 +2,7 @@
 // IdentityCardTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -33,47 +33,47 @@ using NUnit.Framework;
 
 namespace MonoTests.Mono.ServiceModel.IdentitySelectors
 {
-    [TestFixture]
-    public class IdentityCardTest
-    {
-        [Test]
-        public void Load ()
-        {
-            IdentityCard ic = new IdentityCard ();
-            ic.Load (XmlReader.Create ("Test/resources/rupert.xml"));
-            Assert.AreEqual (DateTimeKind.Utc, ic.TimeIssued.Kind, "#1");
-            Assert.AreEqual (11, ic.TimeIssued.Hour, "#2");
-            Assert.AreEqual (23, ic.TimeExpires.Hour, "#3");
-            new IdentityCard ().Load (XmlReader.Create (
-                "Test/resources/managed.xml"));
-        }
+	[TestFixture]
+	public class IdentityCardTest
+	{
+		[Test]
+		public void Load ()
+		{
+			IdentityCard ic = new IdentityCard ();
+			ic.Load (XmlReader.Create ("Test/resources/rupert.xml"));
+			Assert.AreEqual (DateTimeKind.Utc, ic.TimeIssued.Kind, "#1");
+			Assert.AreEqual (11, ic.TimeIssued.Hour, "#2");
+			Assert.AreEqual (23, ic.TimeExpires.Hour, "#3");
+			new IdentityCard ().Load (XmlReader.Create (
+				"Test/resources/managed.xml"));
+		}
 
-        [Test]
-        public void SaveRoundtrip ()
-        {
-            SaveRoundtrip ("Test/resources/rupert.xml");
-            SaveRoundtrip ("Test/resources/managed.xml");
-        }
-        
-        void SaveRoundtrip (string file)
-        {
-            IdentityCard ic = new IdentityCard ();
-            ic.Load (XmlReader.Create (file));
-            MemoryStream ms = new MemoryStream ();
-            XmlWriterSettings xws = new XmlWriterSettings ();
-            xws.OmitXmlDeclaration = true;
-            using (XmlWriter xw = XmlWriter.Create (ms, xws)) {
-                ic.Save (xw);
-            }
-            XmlDocument doc = new XmlDocument ();
-            doc.Load (file);
-            if (doc.FirstChild is XmlDeclaration)
-                doc.RemoveChild (doc.FirstChild);
-            string expected = doc.OuterXml;
-            doc.Load (new MemoryStream (ms.ToArray ()));
-            string actual = doc.OuterXml;
-            Assert.AreEqual (expected, actual, file);
-        }
-    }
+		[Test]
+		public void SaveRoundtrip ()
+		{
+			SaveRoundtrip ("Test/resources/rupert.xml");
+			SaveRoundtrip ("Test/resources/managed.xml");
+		}
+		
+		void SaveRoundtrip (string file)
+		{
+			IdentityCard ic = new IdentityCard ();
+			ic.Load (XmlReader.Create (file));
+			MemoryStream ms = new MemoryStream ();
+			XmlWriterSettings xws = new XmlWriterSettings ();
+			xws.OmitXmlDeclaration = true;
+			using (XmlWriter xw = XmlWriter.Create (ms, xws)) {
+				ic.Save (xw);
+			}
+			XmlDocument doc = new XmlDocument ();
+			doc.Load (file);
+			if (doc.FirstChild is XmlDeclaration)
+				doc.RemoveChild (doc.FirstChild);
+			string expected = doc.OuterXml;
+			doc.Load (new MemoryStream (ms.ToArray ()));
+			string actual = doc.OuterXml;
+			Assert.AreEqual (expected, actual, file);
+		}
+	}
 }
 

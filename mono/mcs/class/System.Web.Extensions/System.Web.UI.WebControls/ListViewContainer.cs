@@ -33,23 +33,23 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    // This class is necessary because each instance of the group template must define unique
-    // IDs for its children. The presence of this class can be seen when looking at the trace of
-    // any ASP.NET page with ListView control using item grouping.
-    internal class ListViewContainer : Control, INamingContainer
-    {
-        // Since the group template may contain command-triggering controls and we're
-        // wrapping it, we need to pass the command event up the chain, or it will get lost
-        // otherwise.
-        protected override bool OnBubbleEvent (object source, EventArgs e)
-        {
-            CommandEventArgs args = e as CommandEventArgs;
+	// This class is necessary because each instance of the group template must define unique
+	// IDs for its children. The presence of this class can be seen when looking at the trace of
+	// any ASP.NET page with ListView control using item grouping.
+	internal class ListViewContainer : Control, INamingContainer
+	{
+		// Since the group template may contain command-triggering controls and we're
+		// wrapping it, we need to pass the command event up the chain, or it will get lost
+		// otherwise.
+		protected override bool OnBubbleEvent (object source, EventArgs e)
+		{
+			CommandEventArgs args = e as CommandEventArgs;
 
-            if (args == null)
-                return false;
+			if (args == null)
+				return false;
 
-            RaiseBubbleEvent (this, args);
-            return true;
-        }
-    }
+			RaiseBubbleEvent (this, args);
+			return true;
+		}
+	}
 }

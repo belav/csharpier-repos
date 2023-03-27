@@ -3,13 +3,13 @@
 
 class Test
 {
-    static void Main ()
-    {
-        Foo<int, object> (new int[] { 1 });
-    }
+	static void Main ()
+	{
+		Foo<int, object> (new int[] { 1 });
+	}
 
-    static U[] Foo<T, U> (T[] arg) where T : U where U : class
-    {
-        return arg;
-    }
+	static U[] Foo<T, U> (T[] arg) where T : U where U : class
+	{
+		return arg;
+	}
 }

@@ -23,48 +23,48 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-    public class SplitterCancelEventArgs : CancelEventArgs
-    {
-        private int mouse_cursor_x;
-        private int mouse_cursor_y;
-        private int split_x;
-        private int split_y;
+	public class SplitterCancelEventArgs : CancelEventArgs
+	{
+		private int mouse_cursor_x;
+		private int mouse_cursor_y;
+		private int split_x;
+		private int split_y;
 
-        #region Public Constructors
-        public SplitterCancelEventArgs (int mouseCursorX, int mouseCursorY, int splitX, int splitY) : base()
-        {
-            this.mouse_cursor_x = mouseCursorX;
-            this.mouse_cursor_y = mouseCursorY;
-            this.split_x = splitX;
-            this.split_y = splitY;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public SplitterCancelEventArgs (int mouseCursorX, int mouseCursorY, int splitX, int splitY) : base()
+		{
+			this.mouse_cursor_x = mouseCursorX;
+			this.mouse_cursor_y = mouseCursorY;
+			this.split_x = splitX;
+			this.split_y = splitY;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public int MouseCursorX {
-            get { return this.mouse_cursor_x; }
-        }
+		#region Public Instance Properties
+		public int MouseCursorX {
+			get { return this.mouse_cursor_x; }
+		}
 
-        public int MouseCursorY {
-            get { return this.mouse_cursor_y; }
-        }
+		public int MouseCursorY {
+			get { return this.mouse_cursor_y; }
+		}
 
-        public int SplitX {
-            get { return this.split_x; }
-            set { this.split_x = value; }
-        }
+		public int SplitX {
+			get { return this.split_x; }
+			set { this.split_x = value; }
+		}
 
-        public int SplitY {
-            get { return this.split_y; }
-            set { this.split_y = value; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public int SplitY {
+			get { return this.split_y; }
+			set { this.split_y = value; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

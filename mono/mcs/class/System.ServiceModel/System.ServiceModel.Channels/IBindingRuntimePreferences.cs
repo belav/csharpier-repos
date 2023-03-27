@@ -2,7 +2,7 @@
 // IBindingRuntimePreferences.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -27,8 +27,8 @@
 //
 namespace System.ServiceModel.Channels
 {
-    public interface IBindingRuntimePreferences
-    {
-        bool ReceiveSynchronously { get; }
-    }
+	public interface IBindingRuntimePreferences
+	{
+		bool ReceiveSynchronously { get; }
+	}
 }

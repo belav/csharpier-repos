@@ -36,215 +36,215 @@ using System.Xml;
 
 namespace System.Web.Services.Description 
 {
-    internal abstract class ExtensionManager 
-    {
-        static Hashtable extensionsByName;
-        static Hashtable extensionsByType;
-        static ArrayList maps = new ArrayList ();
-        static ArrayList extensions = new ArrayList ();
+	internal abstract class ExtensionManager 
+	{
+		static Hashtable extensionsByName;
+		static Hashtable extensionsByType;
+		static ArrayList maps = new ArrayList ();
+		static ArrayList extensions = new ArrayList ();
 
-        static ExtensionManager ()
-        {
-            extensionsByName = new Hashtable ();
-            extensionsByType = new Hashtable ();
+		static ExtensionManager ()
+		{
+			extensionsByName = new Hashtable ();
+			extensionsByType = new Hashtable ();
 
-            RegisterExtensionType (typeof (HttpAddressBinding));
-            RegisterExtensionType (typeof (HttpBinding));
-            RegisterExtensionType (typeof (HttpOperationBinding));
-            RegisterExtensionType (typeof (HttpUrlEncodedBinding));
-            RegisterExtensionType (typeof (HttpUrlReplacementBinding));
-            RegisterExtensionType (typeof (MimeContentBinding));
-            RegisterExtensionType (typeof (MimeMultipartRelatedBinding));
-            RegisterExtensionType (typeof (MimeTextBinding));
-            RegisterExtensionType (typeof (MimeXmlBinding));
-            RegisterExtensionType (typeof (SoapAddressBinding));
-            RegisterExtensionType (typeof (SoapBinding));
-            RegisterExtensionType (typeof (SoapBodyBinding));
-            RegisterExtensionType (typeof (SoapFaultBinding));
-            RegisterExtensionType (typeof (SoapHeaderBinding));
-//            RegisterExtensionType (typeof (SoapHeaderFaultBinding));
-            RegisterExtensionType (typeof (SoapOperationBinding));
-            RegisterExtensionType (typeof (Soap12AddressBinding));
-            RegisterExtensionType (typeof (Soap12Binding));
-            RegisterExtensionType (typeof (Soap12BodyBinding));
-            RegisterExtensionType (typeof (Soap12FaultBinding));
-            RegisterExtensionType (typeof (Soap12HeaderBinding));
-            RegisterExtensionType (typeof (Soap12OperationBinding));
+			RegisterExtensionType (typeof (HttpAddressBinding));
+			RegisterExtensionType (typeof (HttpBinding));
+			RegisterExtensionType (typeof (HttpOperationBinding));
+			RegisterExtensionType (typeof (HttpUrlEncodedBinding));
+			RegisterExtensionType (typeof (HttpUrlReplacementBinding));
+			RegisterExtensionType (typeof (MimeContentBinding));
+			RegisterExtensionType (typeof (MimeMultipartRelatedBinding));
+			RegisterExtensionType (typeof (MimeTextBinding));
+			RegisterExtensionType (typeof (MimeXmlBinding));
+			RegisterExtensionType (typeof (SoapAddressBinding));
+			RegisterExtensionType (typeof (SoapBinding));
+			RegisterExtensionType (typeof (SoapBodyBinding));
+			RegisterExtensionType (typeof (SoapFaultBinding));
+			RegisterExtensionType (typeof (SoapHeaderBinding));
+//			RegisterExtensionType (typeof (SoapHeaderFaultBinding));
+			RegisterExtensionType (typeof (SoapOperationBinding));
+			RegisterExtensionType (typeof (Soap12AddressBinding));
+			RegisterExtensionType (typeof (Soap12Binding));
+			RegisterExtensionType (typeof (Soap12BodyBinding));
+			RegisterExtensionType (typeof (Soap12FaultBinding));
+			RegisterExtensionType (typeof (Soap12HeaderBinding));
+			RegisterExtensionType (typeof (Soap12OperationBinding));
 
 #if !MOBILE && !XAMMAC_4_5
-            /*
-             * Currently, the mobile profile has not support for
-             * System.Configuration, so there are no external modules
-             * defined
-             */
-            foreach (TypeElement el in WebServicesSection.Current.ServiceDescriptionFormatExtensionTypes)
-                RegisterExtensionType (el.Type);
+			/*
+			 * Currently, the mobile profile has not support for
+			 * System.Configuration, so there are no external modules
+			 * defined
+			 */
+			foreach (TypeElement el in WebServicesSection.Current.ServiceDescriptionFormatExtensionTypes)
+				RegisterExtensionType (el.Type);
 #endif
-            CreateExtensionSerializers ();
-        }
-    
-        static void RegisterExtensionType (Type type)
-        {
-            ExtensionInfo ext = new ExtensionInfo();
-            ext.Type = type;
-            
-            object[] ats = type.GetCustomAttributes (typeof(XmlFormatExtensionPrefixAttribute), true);
-            
-            foreach (XmlFormatExtensionPrefixAttribute at in ats)
-                ext.NamespaceDeclarations.Add (new XmlQualifiedName (at.Prefix, at.Namespace));
-            
-            ats = type.GetCustomAttributes (typeof(XmlFormatExtensionAttribute), true);
-            if (ats.Length > 0)
-            {
-                XmlFormatExtensionAttribute at = (XmlFormatExtensionAttribute)ats[0];
-                ext.ElementName = at.ElementName;
-                if (at.Namespace != null) ext.Namespace = at.Namespace;
-            }
+			CreateExtensionSerializers ();
+		}
+	
+		static void RegisterExtensionType (Type type)
+		{
+			ExtensionInfo ext = new ExtensionInfo();
+			ext.Type = type;
+			
+			object[] ats = type.GetCustomAttributes (typeof(XmlFormatExtensionPrefixAttribute), true);
+			
+			foreach (XmlFormatExtensionPrefixAttribute at in ats)
+				ext.NamespaceDeclarations.Add (new XmlQualifiedName (at.Prefix, at.Namespace));
+			
+			ats = type.GetCustomAttributes (typeof(XmlFormatExtensionAttribute), true);
+			if (ats.Length > 0)
+			{
+				XmlFormatExtensionAttribute at = (XmlFormatExtensionAttribute)ats[0];
+				ext.ElementName = at.ElementName;
+				if (at.Namespace != null) ext.Namespace = at.Namespace;
+			}
 
-            XmlRootAttribute root = new XmlRootAttribute ();
-            root.ElementName = ext.ElementName;
-            if (ext.Namespace != null) root.Namespace = ext.Namespace;
+			XmlRootAttribute root = new XmlRootAttribute ();
+			root.ElementName = ext.ElementName;
+			if (ext.Namespace != null) root.Namespace = ext.Namespace;
 
-            XmlReflectionImporter ri = new XmlReflectionImporter ();
-            XmlTypeMapping map = ri.ImportTypeMapping (type, root);
-            
-            if (ext.ElementName == null) throw new InvalidOperationException ("XmlFormatExtensionAttribute must be applied to type " + type);
-            extensionsByName.Add (ext.Namespace + " " + ext.ElementName, ext);
-            extensionsByType.Add (type, ext);
-            
-            maps.Add (map);
-            extensions.Add (ext);
-        }
-        
-        static void CreateExtensionSerializers ()
-        {
-            XmlSerializer[] sers = XmlSerializer.FromMappings ((XmlMapping[]) maps.ToArray (typeof(XmlMapping)));
-            for (int n=0; n<sers.Length; n++)
-                ((ExtensionInfo)extensions[n]).Serializer = sers[n];
-            
-            maps = null;
-            extensions = null;
-        }
-        
-        public static ExtensionInfo GetFormatExtensionInfo (string elementName, string namesp)
-        {
-            return (ExtensionInfo) extensionsByName [namesp + " " + elementName];
-        }
-        
-        public static ExtensionInfo GetFormatExtensionInfo (Type extType)
-        {
-            return (ExtensionInfo) extensionsByType [extType];
-        }
-        
-        public static ICollection GetFormatExtensions ()
-        {
-            return extensionsByName.Values;
-        }
+			XmlReflectionImporter ri = new XmlReflectionImporter ();
+			XmlTypeMapping map = ri.ImportTypeMapping (type, root);
+			
+			if (ext.ElementName == null) throw new InvalidOperationException ("XmlFormatExtensionAttribute must be applied to type " + type);
+			extensionsByName.Add (ext.Namespace + " " + ext.ElementName, ext);
+			extensionsByType.Add (type, ext);
+			
+			maps.Add (map);
+			extensions.Add (ext);
+		}
+		
+		static void CreateExtensionSerializers ()
+		{
+			XmlSerializer[] sers = XmlSerializer.FromMappings ((XmlMapping[]) maps.ToArray (typeof(XmlMapping)));
+			for (int n=0; n<sers.Length; n++)
+				((ExtensionInfo)extensions[n]).Serializer = sers[n];
+			
+			maps = null;
+			extensions = null;
+		}
+		
+		public static ExtensionInfo GetFormatExtensionInfo (string elementName, string namesp)
+		{
+			return (ExtensionInfo) extensionsByName [namesp + " " + elementName];
+		}
+		
+		public static ExtensionInfo GetFormatExtensionInfo (Type extType)
+		{
+			return (ExtensionInfo) extensionsByType [extType];
+		}
+		
+		public static ICollection GetFormatExtensions ()
+		{
+			return extensionsByName.Values;
+		}
 
-        public static ServiceDescriptionFormatExtensionCollection GetExtensionPoint (object ob)
-        {
-            Type type = ob.GetType ();
-            object[] ats = type.GetCustomAttributes (typeof(XmlFormatExtensionPointAttribute), true);
-            if (ats.Length == 0) return null;
+		public static ServiceDescriptionFormatExtensionCollection GetExtensionPoint (object ob)
+		{
+			Type type = ob.GetType ();
+			object[] ats = type.GetCustomAttributes (typeof(XmlFormatExtensionPointAttribute), true);
+			if (ats.Length == 0) return null;
 
-            XmlFormatExtensionPointAttribute at = (XmlFormatExtensionPointAttribute)ats[0];
-            
-            PropertyInfo prop = type.GetProperty (at.MemberName);
-            if (prop != null)
-                return prop.GetValue (ob, null) as ServiceDescriptionFormatExtensionCollection;
-            else {
-                FieldInfo field = type.GetField (at.MemberName);
-                if (field != null)
-                    return field.GetValue (ob) as ServiceDescriptionFormatExtensionCollection;
-                else
-                    throw new InvalidOperationException ("XmlFormatExtensionPointAttribute: Member " + at.MemberName + " not found");
-            }
-        }
+			XmlFormatExtensionPointAttribute at = (XmlFormatExtensionPointAttribute)ats[0];
+			
+			PropertyInfo prop = type.GetProperty (at.MemberName);
+			if (prop != null)
+				return prop.GetValue (ob, null) as ServiceDescriptionFormatExtensionCollection;
+			else {
+				FieldInfo field = type.GetField (at.MemberName);
+				if (field != null)
+					return field.GetValue (ob) as ServiceDescriptionFormatExtensionCollection;
+				else
+					throw new InvalidOperationException ("XmlFormatExtensionPointAttribute: Member " + at.MemberName + " not found");
+			}
+		}
 
-        /*
-         * The mobile profile lacks support for configuration
-         */
+		/*
+		 * The mobile profile lacks support for configuration
+		 */
 #if MOBILE || XAMMAC_4_5
-        public static ArrayList BuildExtensionImporters ()
-        {
-            return new ArrayList (0);
-        }
-        
-        public static ArrayList BuildExtensionReflectors ()
-        {
-            return new ArrayList (0);
-        }
+		public static ArrayList BuildExtensionImporters ()
+		{
+			return new ArrayList (0);
+		}
+		
+		public static ArrayList BuildExtensionReflectors ()
+		{
+			return new ArrayList (0);
+		}
 
 #else
-        public static ArrayList BuildExtensionImporters ()
-        {
-            return BuildExtensionList (WebServicesSection.Current.SoapExtensionImporterTypes);
-        }
-        
-        public static ArrayList BuildExtensionReflectors ()
-        {
-            return BuildExtensionList (WebServicesSection.Current.SoapExtensionReflectorTypes);
-        }
+		public static ArrayList BuildExtensionImporters ()
+		{
+			return BuildExtensionList (WebServicesSection.Current.SoapExtensionImporterTypes);
+		}
+		
+		public static ArrayList BuildExtensionReflectors ()
+		{
+			return BuildExtensionList (WebServicesSection.Current.SoapExtensionReflectorTypes);
+		}
 
-        public static ArrayList BuildExtensionList (TypeElementCollection exts)
-        {
-            ArrayList extensionTypes = new ArrayList ();
-            
-            if (exts != null)
-            {
-                foreach (TypeElement econf in exts)
-                {
-                    extensionTypes.Add (econf);
-                }
-            }
+		public static ArrayList BuildExtensionList (TypeElementCollection exts)
+		{
+			ArrayList extensionTypes = new ArrayList ();
+			
+			if (exts != null)
+			{
+				foreach (TypeElement econf in exts)
+				{
+					extensionTypes.Add (econf);
+				}
+			}
 
-            ArrayList extensions = new ArrayList (extensionTypes.Count);
-            foreach (TypeElement econf in extensionTypes)
-                extensions.Add (Activator.CreateInstance (econf.Type));
-                
-            return extensions;
-        }
+			ArrayList extensions = new ArrayList (extensionTypes.Count);
+			foreach (TypeElement econf in extensionTypes)
+				extensions.Add (Activator.CreateInstance (econf.Type));
+				
+			return extensions;
+		}
 #endif
-    }
-    
-    internal class ExtensionInfo
-    {
-        ArrayList _namespaceDeclarations;
-        string _namespace;
-        string _elementName;
-        Type _type;
-        XmlSerializer _serializer;
+	}
+	
+	internal class ExtensionInfo
+	{
+		ArrayList _namespaceDeclarations;
+		string _namespace;
+		string _elementName;
+		Type _type;
+		XmlSerializer _serializer;
 
-        public ArrayList NamespaceDeclarations
-        {
-            get { 
-                if (_namespaceDeclarations == null) _namespaceDeclarations = new ArrayList ();
-                return _namespaceDeclarations; 
-            }
-        }
-        
-        public string Namespace
-        {
-            get { return _namespace; }
-            set { _namespace = value; }
-        }
-        
-        public string ElementName
-        {
-            get { return _elementName; }
-            set { _elementName = value; }
-        }
-        
-        public Type Type
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-        
-        public XmlSerializer Serializer
-        {
-            get { return _serializer; }
-            set { _serializer = value; }
-        }        
-    }
+		public ArrayList NamespaceDeclarations
+		{
+			get { 
+				if (_namespaceDeclarations == null) _namespaceDeclarations = new ArrayList ();
+				return _namespaceDeclarations; 
+			}
+		}
+		
+		public string Namespace
+		{
+			get { return _namespace; }
+			set { _namespace = value; }
+		}
+		
+		public string ElementName
+		{
+			get { return _elementName; }
+			set { _elementName = value; }
+		}
+		
+		public Type Type
+		{
+			get { return _type; }
+			set { _type = value; }
+		}
+		
+		public XmlSerializer Serializer
+		{
+			get { return _serializer; }
+			set { _serializer = value; }
+		}		
+	}
 }

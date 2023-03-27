@@ -34,71 +34,71 @@ using Mono.Unix;
 
 namespace Mono.Unix {
 
-    [Serializable]
-    public class UnixIOException : IOException
-    {
-        private int errno;
+	[Serializable]
+	public class UnixIOException : IOException
+	{
+		private int errno;
 
-        public UnixIOException ()
-            : this (Marshal.GetLastWin32Error())
-        {}
-        
-        public UnixIOException (int errno)
-            : base (GetMessage (Native.NativeConvert.ToErrno (errno)))
-        {
-            this.errno = errno;
-        }
-        
-        public UnixIOException (int errno, Exception inner)
-            : base (GetMessage (Native.NativeConvert.ToErrno (errno)), inner)
-        {
-            this.errno = errno;
-        }
+		public UnixIOException ()
+			: this (Marshal.GetLastWin32Error())
+		{}
+		
+		public UnixIOException (int errno)
+			: base (GetMessage (Native.NativeConvert.ToErrno (errno)))
+		{
+			this.errno = errno;
+		}
+		
+		public UnixIOException (int errno, Exception inner)
+			: base (GetMessage (Native.NativeConvert.ToErrno (errno)), inner)
+		{
+			this.errno = errno;
+		}
 
-        public UnixIOException (Native.Errno errno)
-            : base (GetMessage (errno))
-        {
-            this.errno = Native.NativeConvert.FromErrno (errno);
-        }
+		public UnixIOException (Native.Errno errno)
+			: base (GetMessage (errno))
+		{
+			this.errno = Native.NativeConvert.FromErrno (errno);
+		}
 
-        public UnixIOException (Native.Errno errno, Exception inner)
-            : base (GetMessage (errno), inner)
-        {
-            this.errno = Native.NativeConvert.FromErrno (errno);
-        }
+		public UnixIOException (Native.Errno errno, Exception inner)
+			: base (GetMessage (errno), inner)
+		{
+			this.errno = Native.NativeConvert.FromErrno (errno);
+		}
 
-        public UnixIOException (string message)
-            : base (message)
-        {
-            this.errno = 0;
-        }
+		public UnixIOException (string message)
+			: base (message)
+		{
+			this.errno = 0;
+		}
 
-        public UnixIOException (string message, Exception inner)
-            : base (message, inner)
-        {
-            this.errno = 0;
-        }
+		public UnixIOException (string message, Exception inner)
+			: base (message, inner)
+		{
+			this.errno = 0;
+		}
 
-        protected UnixIOException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-        }
-        
-        public int NativeErrorCode {
-            get {return errno;}
-        }
-        
-        public Native.Errno ErrorCode {
-            get {return Native.NativeConvert.ToErrno (errno);}
-        }
+		protected UnixIOException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{
+		}
+		
+		public int NativeErrorCode {
+			get {return errno;}
+		}
+		
+		public Native.Errno ErrorCode {
+			get {return Native.NativeConvert.ToErrno (errno);}
+		}
 
-        private static string GetMessage (Native.Errno errno)
-        {
-            return string.Format ("{0} [{1}].",
-                    UnixMarshal.GetErrorDescription (errno),
-                    errno);
-        }
-    }
+		private static string GetMessage (Native.Errno errno)
+		{
+			return string.Format ("{0} [{1}].",
+					UnixMarshal.GetErrorDescription (errno),
+					errno);
+		}
+	}
 }
 
 // vim: noexpandtab

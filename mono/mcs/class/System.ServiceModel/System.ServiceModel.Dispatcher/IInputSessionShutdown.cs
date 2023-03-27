@@ -29,9 +29,9 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
-    public interface IInputSessionShutdown
-    {
-        void ChannelFaulted (IDuplexContextChannel channel);
-        void DoneReceiving (IDuplexContextChannel channel);
-    }
+	public interface IInputSessionShutdown
+	{
+		void ChannelFaulted (IDuplexContextChannel channel);
+		void DoneReceiving (IDuplexContextChannel channel);
+	}
 }

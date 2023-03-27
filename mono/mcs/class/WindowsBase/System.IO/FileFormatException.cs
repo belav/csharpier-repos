@@ -20,8 +20,8 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
-//    Miguel de Icaza (miguel@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
+//	Miguel de Icaza (miguel@ximian.com)
 //
 
 using System;
@@ -30,66 +30,66 @@ using System.Security;
 
 namespace System.IO {
 
-    [Serializable]
-    public class FileFormatException : FormatException, ISerializable
-    {
-        Uri source_uri;
-        
-        public FileFormatException () : base ()
-        {
-        }
+	[Serializable]
+	public class FileFormatException : FormatException, ISerializable
+	{
+		Uri source_uri;
+		
+		public FileFormatException () : base ()
+		{
+		}
 
-        public FileFormatException (string message) : base (message)
-        {
-        }
+		public FileFormatException (string message) : base (message)
+		{
+		}
 
-        public FileFormatException (Uri sourceUri)
-        {
-            this.source_uri = sourceUri;
-        }
+		public FileFormatException (Uri sourceUri)
+		{
+			this.source_uri = sourceUri;
+		}
 
-        protected FileFormatException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-            if (info == null)
-                throw new ArgumentNullException ("info");
-            
-            source_uri = (Uri) info.GetValue ("sourceUri", typeof (Uri));
-        }
+		protected FileFormatException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{
+			if (info == null)
+				throw new ArgumentNullException ("info");
+			
+			source_uri = (Uri) info.GetValue ("sourceUri", typeof (Uri));
+		}
 
-        public FileFormatException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
+		public FileFormatException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
 
-        public FileFormatException (Uri sourceUri, Exception innerException)
-            : base ("", innerException)
-        {
-            source_uri = sourceUri;
-        }
+		public FileFormatException (Uri sourceUri, Exception innerException)
+			: base ("", innerException)
+		{
+			source_uri = sourceUri;
+		}
 
-        public FileFormatException (Uri sourceUri, string message)
-            : base (message)
-        {
-            source_uri = sourceUri;
-        }
+		public FileFormatException (Uri sourceUri, string message)
+			: base (message)
+		{
+			source_uri = sourceUri;
+		}
 
-        public FileFormatException (Uri sourceUri, string message, Exception innerException)
-            : base (message, innerException)
-        {
-            source_uri = sourceUri;
-        }
+		public FileFormatException (Uri sourceUri, string message, Exception innerException)
+			: base (message, innerException)
+		{
+			source_uri = sourceUri;
+		}
 
-        public Uri SourceUri {
-            get { return source_uri; }
-        }
+		public Uri SourceUri {
+			get { return source_uri; }
+		}
 
-        [SecurityCritical]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData (info, context);
-            info.AddValue ("sourceUri", source_uri);
-        }
-    }
+		[SecurityCritical]
+		public override void GetObjectData (SerializationInfo info, StreamingContext context)
+		{
+			base.GetObjectData (info, context);
+			info.AddValue ("sourceUri", source_uri);
+		}
+	}
 }
 

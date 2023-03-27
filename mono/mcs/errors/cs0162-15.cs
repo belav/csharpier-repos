@@ -4,12 +4,12 @@
 
 class C
 {
-    void Test (int a)
-    {
-        return;
-        if (a > 0) {
-            int x = a + 20;
-            return;
-        }
-    }
+	void Test (int a)
+	{
+		return;
+		if (a > 0) {
+			int x = a + 20;
+			return;
+		}
+	}
 }

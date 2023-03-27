@@ -2,7 +2,7 @@
 // System.Web.Util.DataSourceHelper
 //
 // Authors:
-//    Ben Maurer (bmaurer@novell.com)
+//	Ben Maurer (bmaurer@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,14 +36,14 @@ using System.Collections;
 using System.ComponentModel;
 
 namespace System.Web.Util {
-    class DataSourceHelper 
-    {
-        DataSourceHelper () {}
+	class DataSourceHelper 
+	{
+		DataSourceHelper () {}
 
-        [Obsolete ("Use DataSourceResolver")]
-        public static IEnumerable GetResolvedDataSource (object o, string data_member) 
-        {
-            return DataSourceResolver.ResolveDataSource (o, data_member);
-        }
-    }
+		[Obsolete ("Use DataSourceResolver")]
+		public static IEnumerable GetResolvedDataSource (object o, string data_member) 
+		{
+			return DataSourceResolver.ResolveDataSource (o, data_member);
+		}
+	}
 }

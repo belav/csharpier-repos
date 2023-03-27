@@ -2,7 +2,7 @@
 // PeerChannelListener.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -38,80 +38,80 @@ using System.Threading;
 
 namespace System.ServiceModel.Channels
 {
-    internal class PeerChannelListener<TChannel> : InternalChannelListenerBase<TChannel>, IPeerChannelManager
-        where TChannel : class, IChannel
-    {
-        PeerTransportBindingElement source;
-        BindingContext context;
-        TChannel channel;
-        AutoResetEvent accept_handle = new AutoResetEvent (false);
+	internal class PeerChannelListener<TChannel> : InternalChannelListenerBase<TChannel>, IPeerChannelManager
+		where TChannel : class, IChannel
+	{
+		PeerTransportBindingElement source;
+		BindingContext context;
+		TChannel channel;
+		AutoResetEvent accept_handle = new AutoResetEvent (false);
 
-        public PeerChannelListener (PeerTransportBindingElement source,
-            BindingContext context)
-            : base (context)
-        {
-            this.source = source;
-            foreach (BindingElement be in context.Binding.Elements) {
-                MessageEncodingBindingElement mbe = be as MessageEncodingBindingElement;
-                if (mbe != null) {
-                    MessageEncoder = CreateEncoder<TChannel> (mbe);
-                    break;
-                }
-            }
-            if (MessageEncoder == null)
-                MessageEncoder = new BinaryMessageEncoder ();
-        }
+		public PeerChannelListener (PeerTransportBindingElement source,
+			BindingContext context)
+			: base (context)
+		{
+			this.source = source;
+			foreach (BindingElement be in context.Binding.Elements) {
+				MessageEncodingBindingElement mbe = be as MessageEncodingBindingElement;
+				if (mbe != null) {
+					MessageEncoder = CreateEncoder<TChannel> (mbe);
+					break;
+				}
+			}
+			if (MessageEncoder == null)
+				MessageEncoder = new BinaryMessageEncoder ();
+		}
 
-        public PeerResolver Resolver { get; set; }
+		public PeerResolver Resolver { get; set; }
 
-        public PeerTransportBindingElement Source {
-            get { return source; }
-        }
+		public PeerTransportBindingElement Source {
+			get { return source; }
+		}
 
-        protected override TChannel OnAcceptChannel (TimeSpan timeout)
-        {
-            DateTime start = DateTime.UtcNow;
-            if (channel != null)
-                if (!accept_handle.WaitOne (timeout))
-                    throw new TimeoutException ();
-            channel = PopulateChannel (timeout - (DateTime.UtcNow - start));
-            ((CommunicationObject) (object) channel).Closed += delegate {
-                this.channel = null;
-                accept_handle.Set ();
-                };
-            return channel;
-        }
+		protected override TChannel OnAcceptChannel (TimeSpan timeout)
+		{
+			DateTime start = DateTime.UtcNow;
+			if (channel != null)
+				if (!accept_handle.WaitOne (timeout))
+					throw new TimeoutException ();
+			channel = PopulateChannel (timeout - (DateTime.UtcNow - start));
+			((CommunicationObject) (object) channel).Closed += delegate {
+				this.channel = null;
+				accept_handle.Set ();
+				};
+			return channel;
+		}
 
-        TChannel PopulateChannel (TimeSpan timeout)
-        {
-            if (typeof (TChannel) == typeof (IInputChannel))
-                return (TChannel) (object) new PeerDuplexChannel (this);
-            // FIXME: handle timeout somehow.
-            if (typeof (TChannel) == typeof (IDuplexChannel))
-                return (TChannel) (object) new PeerDuplexChannel (this);
+		TChannel PopulateChannel (TimeSpan timeout)
+		{
+			if (typeof (TChannel) == typeof (IInputChannel))
+				return (TChannel) (object) new PeerDuplexChannel (this);
+			// FIXME: handle timeout somehow.
+			if (typeof (TChannel) == typeof (IDuplexChannel))
+				return (TChannel) (object) new PeerDuplexChannel (this);
 
-            throw new InvalidOperationException (String.Format ("Not supported channel '{0}' (mono bug; it is incorrectly allowed at construction time)", typeof (TChannel)));
-        }
+			throw new InvalidOperationException (String.Format ("Not supported channel '{0}' (mono bug; it is incorrectly allowed at construction time)", typeof (TChannel)));
+		}
 
-        protected override bool OnWaitForChannel (TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		protected override bool OnWaitForChannel (TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnOpen (TimeSpan timeout)
-        {
-        }
+		protected override void OnOpen (TimeSpan timeout)
+		{
+		}
 
-        protected override void OnClose (TimeSpan timeout)
-        {
-            if (channel != null)
-                channel.Close (timeout);
-        }
+		protected override void OnClose (TimeSpan timeout)
+		{
+			if (channel != null)
+				channel.Close (timeout);
+		}
 
-        protected override void OnAbort ()
-        {
-            if (channel != null)
-                channel.Abort ();
-        }
-    }
+		protected override void OnAbort ()
+		{
+			if (channel != null)
+				channel.Abort ();
+		}
+	}
 }

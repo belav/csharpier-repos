@@ -2838,16 +2838,16 @@ namespace System
             for (int i = 0; i < cache.Length; i++)
             {
                 RuntimeMethodInfo methodInfo = cache[i];
-                if (genericParamCount != -1) {
-                    bool is_generic = methodInfo.IsGenericMethod;
-                    if (genericParamCount == 0 && is_generic)
-                        continue;
-                    else if (genericParamCount > 0 && !is_generic)
-                        continue;
-                    var args = methodInfo.GetGenericArguments ();
-                    if (args.Length != genericParamCount)
-                        continue;
-                }
+				if (genericParamCount != -1) {
+					bool is_generic = methodInfo.IsGenericMethod;
+					if (genericParamCount == 0 && is_generic)
+						continue;
+					else if (genericParamCount > 0 && !is_generic)
+						continue;
+					var args = methodInfo.GetGenericArguments ();
+					if (args.Length != genericParamCount)
+						continue;
+				}
                 if (FilterApplyMethodInfo(methodInfo, bindingAttr, callConv, types) &&
                     (!prefixLookup || RuntimeType.FilterApplyPrefixLookup(methodInfo, name, ignoreCase)))
                 {
@@ -3234,9 +3234,9 @@ namespace System
 
 #if NETCORE
         protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
-        {
-            return GetMethodImpl (name, -1, bindingAttr, binder, callConvention, types, modifiers);
-        }
+		{
+			return GetMethodImpl (name, -1, bindingAttr, binder, callConvention, types, modifiers);
+		}
 
         protected override MethodInfo GetMethodImpl(String name, int genericParamCount,
             BindingFlags bindingAttr, Binder? binder, CallingConventions callConv, 
@@ -5165,7 +5165,7 @@ namespace System
             Contract.EndContractBlock();
 
 #if NETCORE
-            throw new NotImplementedException ();
+			throw new NotImplementedException ();
 #else
             UnitySerializationHolder.GetUnitySerializationInfo(info, this);
 #endif
@@ -5714,8 +5714,8 @@ namespace System
             )
         {
 #if NETCORE
-            if (IsByRefLike)
-                throw new NotSupportedException (SR.NotSupported_ByRefLike);
+			if (IsByRefLike)
+				throw new NotSupportedException (SR.NotSupported_ByRefLike);
 #endif
 
             if (GetType() == typeof(ReflectionOnlyType))

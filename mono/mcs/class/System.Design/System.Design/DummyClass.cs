@@ -32,7 +32,7 @@
 //
 namespace System.Design
 {
-    internal class DummyClass
-    {
-    }
+	internal class DummyClass
+	{
+	}
 }

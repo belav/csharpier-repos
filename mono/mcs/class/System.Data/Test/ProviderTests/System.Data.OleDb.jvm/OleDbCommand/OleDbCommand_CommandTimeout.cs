@@ -35,38 +35,38 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbCommand_CommandTimeout : GHTBase
 {
-    public static void Main()
-    {
-        OleDbCommand_CommandTimeout tc = new OleDbCommand_CommandTimeout();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OleDbCommand_CommandTimeout");
-            tc.run();
-        }
-        catch(Exception ex){exp = ex;}
-        finally    {tc.EndTest(exp);}
-    }
+	public static void Main()
+	{
+		OleDbCommand_CommandTimeout tc = new OleDbCommand_CommandTimeout();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OleDbCommand_CommandTimeout");
+			tc.run();
+		}
+		catch(Exception ex){exp = ex;}
+		finally	{tc.EndTest(exp);}
+	}
 
-    [Test]
-    public void run()
-    {
-        OleDbCommand cmd = new OleDbCommand();
-        Assert.AreEqual(cmd.CommandTimeout , 30);
-        cmd.CommandTimeout = 12;
-        Assert.AreEqual(cmd.CommandTimeout , 12);
-    }
+	[Test]
+	public void run()
+	{
+		OleDbCommand cmd = new OleDbCommand();
+		Assert.AreEqual(cmd.CommandTimeout , 30);
+		cmd.CommandTimeout = 12;
+		Assert.AreEqual(cmd.CommandTimeout , 12);
+	}
 
 
-    //public TestClass():base(true){}
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

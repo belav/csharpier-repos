@@ -39,116 +39,116 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataSet_ReadXmlSchema_T : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataSet_ReadXmlSchema_T tc = new DataSet_ReadXmlSchema_T();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataSet_ReadXmlSchema_T");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataSet_ReadXmlSchema_T tc = new DataSet_ReadXmlSchema_T();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataSet_ReadXmlSchema_T");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-    
-        DataSet ds1 = new DataSet();
-        ds1.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
-        ds1.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
-        
-        System.IO.StringWriter sw = new System.IO.StringWriter();
-        //write xml file, schema only
-        ds1.WriteXmlSchema(sw);
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-        System.IO.StringReader sr = new System.IO.StringReader(sw.GetStringBuilder().ToString());
-        //copy both data and schema
-        DataSet ds2 = new DataSet();
-        ds2.ReadXmlSchema(sr);
-    
-        //check xml schema
-        try
-        {
-            BeginCase("ReadXmlSchema - Tables count");
-            Compare(ds1.Tables.Count ,ds2.Tables.Count );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-        try
-        {
-            BeginCase("ReadXmlSchema - Tables 0 Col count");
-            Compare(ds2.Tables[0].Columns.Count ,ds1.Tables[0].Columns.Count  );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-        try
-        {
-            BeginCase("ReadXmlSchema - Tables 1 Col count");
-            Compare(ds2.Tables[1].Columns.Count  ,ds1.Tables[1].Columns.Count  );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        //check some colummns types
-        try
-        {
-            BeginCase("ReadXmlSchema - Tables 0 Col type");
-            Compare(ds2.Tables[0].Columns[0].GetType() ,ds1.Tables[0].Columns[0].GetType() );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("ReadXmlSchema - Tables 1 Col type");
-            Compare(ds2.Tables[1].Columns[3].GetType() ,ds1.Tables[1].Columns[3].GetType() );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-        //check that no data exists
-        try
-        {
-            BeginCase("ReadXmlSchema - Table 1 row count");
-            Compare(ds2.Tables[0].Rows.Count ,0);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("ReadXmlSchema - Table 2 row count");
-            Compare(ds2.Tables[1].Rows.Count ,0);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	public void run()
+	{
+		Exception exp = null;
+	
+		DataSet ds1 = new DataSet();
+		ds1.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
+		ds1.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
+		
+		System.IO.StringWriter sw = new System.IO.StringWriter();
+		//write xml file, schema only
+		ds1.WriteXmlSchema(sw);
 
 
+		System.IO.StringReader sr = new System.IO.StringReader(sw.GetStringBuilder().ToString());
+		//copy both data and schema
+		DataSet ds2 = new DataSet();
+		ds2.ReadXmlSchema(sr);
+	
+		//check xml schema
+		try
+		{
+			BeginCase("ReadXmlSchema - Tables count");
+			Compare(ds1.Tables.Count ,ds2.Tables.Count );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-    }
+		try
+		{
+			BeginCase("ReadXmlSchema - Tables 0 Col count");
+			Compare(ds2.Tables[0].Columns.Count ,ds1.Tables[0].Columns.Count  );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("ReadXmlSchema - Tables 1 Col count");
+			Compare(ds2.Tables[1].Columns.Count  ,ds1.Tables[1].Columns.Count  );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		//check some colummns types
+		try
+		{
+			BeginCase("ReadXmlSchema - Tables 0 Col type");
+			Compare(ds2.Tables[0].Columns[0].GetType() ,ds1.Tables[0].Columns[0].GetType() );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("ReadXmlSchema - Tables 1 Col type");
+			Compare(ds2.Tables[1].Columns[3].GetType() ,ds1.Tables[1].Columns[3].GetType() );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		//check that no data exists
+		try
+		{
+			BeginCase("ReadXmlSchema - Table 1 row count");
+			Compare(ds2.Tables[0].Rows.Count ,0);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("ReadXmlSchema - Table 2 row count");
+			Compare(ds2.Tables[1].Rows.Count ,0);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+
+
+	}
 }
 }

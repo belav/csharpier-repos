@@ -2,7 +2,7 @@
 // System.Net.Mail.SmtpAccess.cs
 //
 // Author:
-//    Tim Coleman (tim@timcoleman.com)
+//	Tim Coleman (tim@timcoleman.com)
 //
 // Copyright (C) Tim Coleman, 2004
 //
@@ -29,11 +29,11 @@
 //
 
 namespace System.Net.Mail {
-    public enum SmtpAccess
-    {
-        None,
-        Connect,
-        ConnectToUnrestrictedPort,
-    }
+	public enum SmtpAccess
+	{
+		None,
+		Connect,
+		ConnectToUnrestrictedPort,
+	}
 }
 

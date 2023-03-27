@@ -317,7 +317,7 @@ namespace System.Web.Configuration
                 if( appName == null )
                 {
 #if !FEATURE_PAL // FEATURE_PAL does not enable cryptography
-            // FEATURE_PAL 
+			// FEATURE_PAL 
 
                     appName = System.Diagnostics.Process.GetCurrentProcess().MainModule.ModuleName;
 

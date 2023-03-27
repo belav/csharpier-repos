@@ -1,4 +1,4 @@
-namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding {
     using System;
 
     // Returns a user-specified binder for a given open generic type.

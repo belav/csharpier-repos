@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.WebParts.ConnectionConsumerCallback.cs
 //
 // Authors:
-//    Sanjay Gupta (gsanjay@novell.com)
+//	Sanjay Gupta (gsanjay@novell.com)
 //
 // (C) 2004 Novell, Inc. (http://www.novell.com)
 //
@@ -29,6 +29,6 @@
 //
 
 namespace System.Web.UI.WebControls.WebParts {
-    public delegate void ConnectionConsumerCallback (object conn);
+	public delegate void ConnectionConsumerCallback (object conn);
 }
 

@@ -6,9 +6,9 @@ using System.Reflection.Emit;
 
 [AttributeUsage (AttributeTargets.All)]
 public class MyAttribute : Attribute {
-    public MyAttribute (object o) {
+	public MyAttribute (object o) {
             this.o = o;
-    }
+	}
 
         public object my
         {
@@ -28,14 +28,14 @@ public class MyConstructorBuilder
       ConstructorInfo myConstructor = myHelloworld.GetConstructor(new Type[]{typeof(String)});
       object[] myAttributes1 = myConstructor.GetCustomAttributes(true);
       if (myAttributes1 == null)
-          return 1;
+	      return 1;
       if (myAttributes1.Length != 1)
-          return 2;
+	      return 2;
       MyAttribute myAttribute = myAttributes1[0] as MyAttribute;
       if (myAttribute == null)
-          return 3;
+	      return 3;
       if (myAttribute.my.GetType() != typeof(TypeCode))
-          return 4;
+	      return 4;
       return 0;
    }
 

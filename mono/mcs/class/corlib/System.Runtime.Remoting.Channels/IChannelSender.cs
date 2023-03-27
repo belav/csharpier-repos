@@ -33,9 +33,9 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IChannelSender : IChannel
-    {
-        IMessageSink CreateMessageSink (string url, object remoteChannelData, out string objectURI);
-    }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IChannelSender : IChannel
+	{
+		IMessageSink CreateMessageSink (string url, object remoteChannelData, out string objectURI);
+	}
 }

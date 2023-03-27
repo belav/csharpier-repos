@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.DesignSurfaceServiceContainer
 //
-// Authors:     
-//      Ivan N. Zlatev (contact i-nz.net)
+// Authors:	 
+//	  Ivan N. Zlatev (contact i-nz.net)
 //
 // (C) 2006 Ivan N. Zlatev
 
@@ -34,46 +34,46 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-    
-    // Implements a ServiceContainer, which allows specific sets of services
-    // to be non-replacable for users of the IServiceContainer .
-    // 
-    internal sealed class DesignSurfaceServiceContainer : ServiceContainer
-    {
+	
+	// Implements a ServiceContainer, which allows specific sets of services
+	// to be non-replacable for users of the IServiceContainer .
+	// 
+	internal sealed class DesignSurfaceServiceContainer : ServiceContainer
+	{
 
-        private Hashtable _nonRemoveableServices;
-        
-        public DesignSurfaceServiceContainer () : this (null)
-        {
-        }
+		private Hashtable _nonRemoveableServices;
+		
+		public DesignSurfaceServiceContainer () : this (null)
+		{
+		}
 
-        public DesignSurfaceServiceContainer (IServiceProvider parentProvider) : base (parentProvider)
-        {
-        }
-        
-        internal void AddNonReplaceableService (Type serviceType, object instance)
-        {
-            if (_nonRemoveableServices == null)
-                _nonRemoveableServices = new Hashtable ();
+		public DesignSurfaceServiceContainer (IServiceProvider parentProvider) : base (parentProvider)
+		{
+		}
+		
+		internal void AddNonReplaceableService (Type serviceType, object instance)
+		{
+			if (_nonRemoveableServices == null)
+				_nonRemoveableServices = new Hashtable ();
 
-            _nonRemoveableServices[serviceType] = serviceType;
-            base.AddService (serviceType, instance);
-        }
+			_nonRemoveableServices[serviceType] = serviceType;
+			base.AddService (serviceType, instance);
+		}
 
-            
-        internal void RemoveNonReplaceableService (Type serviceType, object instance)
-        {
-            if (_nonRemoveableServices != null) 
-                _nonRemoveableServices.Remove (serviceType);
-            base.RemoveService (serviceType);
-        }
-        
-        public override void RemoveService (Type serviceType, bool promote)
-        {
-            if (serviceType != null && _nonRemoveableServices != null && _nonRemoveableServices.ContainsKey (serviceType))
-                throw new InvalidOperationException ("Cannot remove non-replaceable service: " + serviceType.AssemblyQualifiedName);
+			
+		internal void RemoveNonReplaceableService (Type serviceType, object instance)
+		{
+			if (_nonRemoveableServices != null) 
+				_nonRemoveableServices.Remove (serviceType);
+			base.RemoveService (serviceType);
+		}
+		
+		public override void RemoveService (Type serviceType, bool promote)
+		{
+			if (serviceType != null && _nonRemoveableServices != null && _nonRemoveableServices.ContainsKey (serviceType))
+				throw new InvalidOperationException ("Cannot remove non-replaceable service: " + serviceType.AssemblyQualifiedName);
 
-            base.RemoveService (serviceType, promote);                
-        }
-    }
+			base.RemoveService (serviceType, promote);				
+		}
+	}
 }

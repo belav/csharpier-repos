@@ -35,13 +35,13 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-    public abstract class DataBindingHandler
-    {
-        protected DataBindingHandler()
-        {
-        }
+	public abstract class DataBindingHandler
+	{
+		protected DataBindingHandler()
+		{
+		}
 
-        public abstract void DataBindControl(IDesignerHost designerHost,
-                                             Control control);
-    }
+		public abstract void DataBindControl(IDesignerHost designerHost,
+		                                     Control control);
+	}
 }

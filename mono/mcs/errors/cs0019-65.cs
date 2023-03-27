@@ -3,9 +3,9 @@
 
 class C
 {
-    static void Main ()
-    {
-        dynamic x = null;
-        var y = x == (() => 1);
-    }
+	static void Main ()
+	{
+		dynamic x = null;
+		var y = x == (() => 1);
+	}
 }

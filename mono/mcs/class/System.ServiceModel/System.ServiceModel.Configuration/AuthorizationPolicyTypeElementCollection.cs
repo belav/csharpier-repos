@@ -2,7 +2,7 @@
 // AuthorizationPolicyTypeElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,18 +54,18 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (AuthorizationPolicyTypeElement),
-         AddItemName = "add",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class AuthorizationPolicyTypeElementCollection
-         : ServiceModelConfigurationElementCollection<AuthorizationPolicyTypeElement>,  ICollection,  IEnumerable
-    {
-        // Properties
-        protected override object GetElementKey (ConfigurationElement element) {
-            return ((AuthorizationPolicyTypeElement) element).PolicyType;
-        }
-    }
+	[ConfigurationCollection (typeof (AuthorizationPolicyTypeElement),
+		 AddItemName = "add",
+		 RemoveItemName = "remove",
+		 ClearItemsName = "clear",
+		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class AuthorizationPolicyTypeElementCollection
+		 : ServiceModelConfigurationElementCollection<AuthorizationPolicyTypeElement>,  ICollection,  IEnumerable
+	{
+		// Properties
+		protected override object GetElementKey (ConfigurationElement element) {
+			return ((AuthorizationPolicyTypeElement) element).PolicyType;
+		}
+	}
 
 }

@@ -2,7 +2,7 @@
 // System.Configuration.CodeDomConfigurationHandler
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // Copyright (c) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,45 +37,45 @@ using System.IO;
 
 namespace System.CodeDom.Compiler
 {
-    internal sealed class CodeDomConfigurationHandler: ConfigurationSection
-    {
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty compilersProp;
-        static CompilerCollection default_compilers;
+	internal sealed class CodeDomConfigurationHandler: ConfigurationSection
+	{
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty compilersProp;
+		static CompilerCollection default_compilers;
 
-        static CodeDomConfigurationHandler ()
-        {
-            default_compilers = new CompilerCollection ();
-            compilersProp = new ConfigurationProperty ("compilers", typeof (CompilerCollection), default_compilers);
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (compilersProp);
-        }
+		static CodeDomConfigurationHandler ()
+		{
+			default_compilers = new CompilerCollection ();
+			compilersProp = new ConfigurationProperty ("compilers", typeof (CompilerCollection), default_compilers);
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (compilersProp);
+		}
 
-        public CodeDomConfigurationHandler ()
-        {
-        }
-        
-        protected override void InitializeDefault ()
-        {
-            compilersProp = new ConfigurationProperty ("compilers", typeof (CompilerCollection), default_compilers);
-        }
-        
-        [MonoTODO]
-        protected override void PostDeserialize () => base.PostDeserialize ();
+		public CodeDomConfigurationHandler ()
+		{
+		}
+		
+		protected override void InitializeDefault ()
+		{
+			compilersProp = new ConfigurationProperty ("compilers", typeof (CompilerCollection), default_compilers);
+		}
+		
+		[MonoTODO]
+		protected override void PostDeserialize () => base.PostDeserialize ();
 
-        protected override object GetRuntimeObject () => this;
+		protected override object GetRuntimeObject () => this;
 
-        [ConfigurationProperty ("compilers")]
-        public CompilerCollection Compilers => (CompilerCollection) base [compilersProp];
+		[ConfigurationProperty ("compilers")]
+		public CompilerCollection Compilers => (CompilerCollection) base [compilersProp];
 
-        public CompilerInfo[] CompilerInfos {
-            get {
-                var cc = (CompilerCollection) base [compilersProp];
-                return cc?.CompilerInfos;
-            }
-        }
-        
-        protected override ConfigurationPropertyCollection Properties => properties;
-    }
+		public CompilerInfo[] CompilerInfos {
+			get {
+				var cc = (CompilerCollection) base [compilersProp];
+				return cc?.CompilerInfos;
+			}
+		}
+		
+		protected override ConfigurationPropertyCollection Properties => properties;
+	}
 }
 #endif

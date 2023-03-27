@@ -11,7 +11,7 @@ public class xa {
       x.doX(null);
 
     } catch(NullReferenceException) {
-    //Expected
+	//Expected
         return 100;
     }
     return 0;

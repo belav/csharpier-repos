@@ -4,8 +4,8 @@
 
 class C
 {
-    public static void Main ()
-    {
-        System.Console.WriteLine(5 == (long?)null);
-    }
+	public static void Main ()
+	{
+		System.Console.WriteLine(5 == (long?)null);
+	}
 }

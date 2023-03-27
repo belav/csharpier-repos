@@ -2,7 +2,7 @@
 // GenericXmlSecurityToken.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,86 +34,86 @@ using System.Security.Principal;
 
 namespace System.IdentityModel.Tokens
 {
-    public class GenericXmlSecurityToken : SecurityToken
-    {
-        XmlElement xml;
-        SecurityToken proof_token;
-        DateTime from, to;
-        SecurityKeyIdentifierClause int_tokenref, ext_tokenref;
-        ReadOnlyCollection<IAuthorizationPolicy> auth_policies;
+	public class GenericXmlSecurityToken : SecurityToken
+	{
+		XmlElement xml;
+		SecurityToken proof_token;
+		DateTime from, to;
+		SecurityKeyIdentifierClause int_tokenref, ext_tokenref;
+		ReadOnlyCollection<IAuthorizationPolicy> auth_policies;
 
-        public GenericXmlSecurityToken (
-            XmlElement tokenXml,
-            SecurityToken proofToken,
-            DateTime effectiveTime,
-            DateTime expirationTime,
-            SecurityKeyIdentifierClause internalTokenReference,
-            SecurityKeyIdentifierClause externalTokenReference,
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
-        {
-            xml = tokenXml;
-            proof_token = proofToken;
-            from = effectiveTime;
-            to = expirationTime;
-            int_tokenref = internalTokenReference;
-            ext_tokenref = externalTokenReference;
-            auth_policies = authorizationPolicies;
-        }
+		public GenericXmlSecurityToken (
+			XmlElement tokenXml,
+			SecurityToken proofToken,
+			DateTime effectiveTime,
+			DateTime expirationTime,
+			SecurityKeyIdentifierClause internalTokenReference,
+			SecurityKeyIdentifierClause externalTokenReference,
+			ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+		{
+			xml = tokenXml;
+			proof_token = proofToken;
+			from = effectiveTime;
+			to = expirationTime;
+			int_tokenref = internalTokenReference;
+			ext_tokenref = externalTokenReference;
+			auth_policies = authorizationPolicies;
+		}
 
-        [MonoTODO] // verify
-        public override string Id {
-            get { return proof_token.Id; }
-        }
+		[MonoTODO] // verify
+		public override string Id {
+			get { return proof_token.Id; }
+		}
 
-        public XmlElement TokenXml {
-            get { return xml; } 
-        }
+		public XmlElement TokenXml {
+			get { return xml; } 
+		}
 
-        public SecurityToken ProofToken { 
-            get { return proof_token; } 
-        }
+		public SecurityToken ProofToken { 
+			get { return proof_token; } 
+		}
 
-        public override DateTime ValidFrom { 
-            get { return from; } 
-        }
-        public override DateTime ValidTo { 
-            get { return to; } 
-        }
+		public override DateTime ValidFrom { 
+			get { return from; } 
+		}
+		public override DateTime ValidTo { 
+			get { return to; } 
+		}
 
-        public SecurityKeyIdentifierClause InternalTokenReference { 
-            get { return int_tokenref; } 
-        }
+		public SecurityKeyIdentifierClause InternalTokenReference { 
+			get { return int_tokenref; } 
+		}
 
-        public SecurityKeyIdentifierClause ExternalTokenReference { 
-            get { return ext_tokenref; } 
-        }
+		public SecurityKeyIdentifierClause ExternalTokenReference { 
+			get { return ext_tokenref; } 
+		}
 
-        public ReadOnlyCollection<IAuthorizationPolicy> AuthorizationPolicies {
-            get { return auth_policies; }
-        }
+		public ReadOnlyCollection<IAuthorizationPolicy> AuthorizationPolicies {
+			get { return auth_policies; }
+		}
 
-        [MonoTODO]
-        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public override bool CanCreateKeyIdentifierClause<T> ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override bool CanCreateKeyIdentifierClause<T> ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override T CreateKeyIdentifierClause<T> ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override T CreateKeyIdentifierClause<T> ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override bool MatchesKeyIdentifierClause (
-            SecurityKeyIdentifierClause keyIdentifierClause)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override bool MatchesKeyIdentifierClause (
+			SecurityKeyIdentifierClause keyIdentifierClause)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

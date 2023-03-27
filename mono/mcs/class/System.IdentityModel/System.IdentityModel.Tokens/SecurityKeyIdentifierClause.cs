@@ -2,7 +2,7 @@
 // SecurityKeyIdentifierClause.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,53 +32,53 @@ using System.IdentityModel.Policy;
 
 namespace System.IdentityModel.Tokens
 {
-    public abstract class SecurityKeyIdentifierClause
-    {
-        protected SecurityKeyIdentifierClause (string clauseType)
-        {
-            this.clause_type = clauseType;
-        }
+	public abstract class SecurityKeyIdentifierClause
+	{
+		protected SecurityKeyIdentifierClause (string clauseType)
+		{
+			this.clause_type = clauseType;
+		}
 
-        protected SecurityKeyIdentifierClause (string clauseType, byte [] nonce, int length)
-        {
-            this.clause_type = clauseType;
-            if (nonce != null)
-                this.nonce = (byte []) nonce.Clone ();
-            this.deriv_length = length;
-        }
+		protected SecurityKeyIdentifierClause (string clauseType, byte [] nonce, int length)
+		{
+			this.clause_type = clauseType;
+			if (nonce != null)
+				this.nonce = (byte []) nonce.Clone ();
+			this.deriv_length = length;
+		}
 
-        string clause_type;
-        byte [] nonce;
-        int deriv_length;
+		string clause_type;
+		byte [] nonce;
+		int deriv_length;
 
-        public virtual bool CanCreateKey {
-            get { return false; }
-        }
+		public virtual bool CanCreateKey {
+			get { return false; }
+		}
 
-        public string ClauseType {
-            get { return clause_type; }
-        }
+		public string ClauseType {
+			get { return clause_type; }
+		}
 
-        public int DerivationLength {
-            get { return deriv_length; }
-        }
+		public int DerivationLength {
+			get { return deriv_length; }
+		}
 
-        public byte [] GetDerivationNonce ()
-        {
-            return nonce != null ? (byte []) nonce.Clone () : null;
-        }
+		public byte [] GetDerivationNonce ()
+		{
+			return nonce != null ? (byte []) nonce.Clone () : null;
+		}
 
-        public string Id { get; set; }
+		public string Id { get; set; }
 
-        public virtual SecurityKey CreateKey ()
-        {
-            throw new NotSupportedException (String.Format ("This '{0}' identifier clause does not support key creation.", GetType ()));
-        }
+		public virtual SecurityKey CreateKey ()
+		{
+			throw new NotSupportedException (String.Format ("This '{0}' identifier clause does not support key creation.", GetType ()));
+		}
 
-        [MonoTODO]
-        public virtual bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public virtual bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

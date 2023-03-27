@@ -2,7 +2,7 @@
 // System.Web.Configuration.WebPartsPersonalization
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,54 +35,54 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class WebPartsPersonalization : ConfigurationElement
-    {
-        static ConfigurationProperty authorizationProp;
-        static ConfigurationProperty defaultProviderProp;
-        static ConfigurationProperty providersProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class WebPartsPersonalization : ConfigurationElement
+	{
+		static ConfigurationProperty authorizationProp;
+		static ConfigurationProperty defaultProviderProp;
+		static ConfigurationProperty providersProp;
+		static ConfigurationPropertyCollection properties;
 
-        static WebPartsPersonalization ()
-        {
-            authorizationProp = new ConfigurationProperty ("authorization", typeof (WebPartsPersonalizationAuthorization), null,
-                                       null, PropertyHelper.DefaultValidator,
-                                       ConfigurationPropertyOptions.None);
-            defaultProviderProp = new ConfigurationProperty ("defaultProvider", typeof (string), "AspNetSqlPersonalizationProvider",
-                                     TypeDescriptor.GetConverter (typeof (string)),
-                                     PropertyHelper.NonEmptyStringValidator,
-                                     ConfigurationPropertyOptions.None);
-            providersProp = new ConfigurationProperty ("providers", typeof (ProviderSettingsCollection), null,
-                                   null, PropertyHelper.DefaultValidator,
-                                   ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
+		static WebPartsPersonalization ()
+		{
+			authorizationProp = new ConfigurationProperty ("authorization", typeof (WebPartsPersonalizationAuthorization), null,
+								       null, PropertyHelper.DefaultValidator,
+								       ConfigurationPropertyOptions.None);
+			defaultProviderProp = new ConfigurationProperty ("defaultProvider", typeof (string), "AspNetSqlPersonalizationProvider",
+									 TypeDescriptor.GetConverter (typeof (string)),
+									 PropertyHelper.NonEmptyStringValidator,
+									 ConfigurationPropertyOptions.None);
+			providersProp = new ConfigurationProperty ("providers", typeof (ProviderSettingsCollection), null,
+								   null, PropertyHelper.DefaultValidator,
+								   ConfigurationPropertyOptions.None);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (authorizationProp);
-            properties.Add (defaultProviderProp);
-            properties.Add (providersProp);
-        }
+			properties.Add (authorizationProp);
+			properties.Add (defaultProviderProp);
+			properties.Add (providersProp);
+		}
 
-        [ConfigurationProperty ("authorization")]
-        public WebPartsPersonalizationAuthorization Authorization {
-            get { return (WebPartsPersonalizationAuthorization) base [authorizationProp];}
-        }
+		[ConfigurationProperty ("authorization")]
+		public WebPartsPersonalizationAuthorization Authorization {
+			get { return (WebPartsPersonalizationAuthorization) base [authorizationProp];}
+		}
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("defaultProvider", DefaultValue = "AspNetSqlPersonalizationProvider")]
-        public string DefaultProvider {
-            get { return (string) base [defaultProviderProp];}
-            set { base[defaultProviderProp] = value; }
-        }
+		[StringValidator (MinLength = 1)]
+		[ConfigurationProperty ("defaultProvider", DefaultValue = "AspNetSqlPersonalizationProvider")]
+		public string DefaultProvider {
+			get { return (string) base [defaultProviderProp];}
+			set { base[defaultProviderProp] = value; }
+		}
 
-        [ConfigurationProperty ("providers")]
-        public ProviderSettingsCollection Providers {
-            get { return (ProviderSettingsCollection) base [providersProp];}
-        }
+		[ConfigurationProperty ("providers")]
+		public ProviderSettingsCollection Providers {
+			get { return (ProviderSettingsCollection) base [providersProp];}
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-    }
+	}
 
 }
 

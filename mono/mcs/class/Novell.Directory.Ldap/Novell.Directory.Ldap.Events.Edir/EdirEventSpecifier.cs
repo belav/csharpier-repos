@@ -42,7 +42,7 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
       get
       {
-    return event_type;
+	return event_type;
       }
     }
 
@@ -51,7 +51,7 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
       get
       {
-    return event_result_type;
+	return event_result_type;
       }
     }
 
@@ -60,7 +60,7 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
       get
       {
-    return event_filter;
+	return event_filter;
       } 
     }
 

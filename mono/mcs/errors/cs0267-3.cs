@@ -3,7 +3,7 @@
 
 public partial class C
 {
-    partial virtual void Foo ()
-    {
-    }
+	partial virtual void Foo ()
+	{
+	}
 }

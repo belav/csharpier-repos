@@ -11,7 +11,7 @@ public class Test
 
         public IEnumerator GetEnumerator ()
         {
-        int i = 2;
-        yield return 3;
+		int i = 2;
+		yield return 3;
         }
 }

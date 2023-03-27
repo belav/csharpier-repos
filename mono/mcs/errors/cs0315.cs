@@ -3,9 +3,9 @@
 
 class X
 {
-    delegate void D<TEventArgs> () where TEventArgs : System.EventArgs;
+	delegate void D<TEventArgs> () where TEventArgs : System.EventArgs;
 
-    D<int> x;
+	D<int> x;
 }
 
 

@@ -155,8 +155,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             val.AddSchema(XmlSchema.Read(XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
                                                                      "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-                                                                     "             xmlns:n1=\"uri:tempuri\"\n" +
-                                                                     "             targetNamespace=\"uri:tempuri1\">\n" +
+                                                                     "			 xmlns:n1=\"uri:tempuri\"\n" +
+                                                                     "			 targetNamespace=\"uri:tempuri1\">\n" +
                                                                      "    <xs:complexType name=\"foo\">\n" +
                                                                      "        <xs:sequence>\n" +
                                                                      "            <xs:element name=\"bar\" />\n" +

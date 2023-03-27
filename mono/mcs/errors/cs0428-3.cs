@@ -5,9 +5,9 @@ using System.Linq;
 
 public class A
 {
-    public A ()
-    {
-        string [] test = new string [5];
-        A [] array = new A [test.Count];
-    }
+	public A ()
+	{
+		string [] test = new string [5];
+		A [] array = new A [test.Count];
+	}
 }

@@ -31,13 +31,13 @@ using System.Runtime.Serialization;
 
 namespace System.ServiceModel
 {
-    [Serializable]
-    public class MsmqPoisonMessageException : PoisonMessageException
-    {
-        public MsmqPoisonMessageException () : base () {}
-        public MsmqPoisonMessageException (string message) : base (message) {}
-        public MsmqPoisonMessageException (string message, Exception innerException) : base (message, innerException) {}
-        protected MsmqPoisonMessageException (SerializationInfo info, StreamingContext context) :
-            base (info, context) {}
-    }
+	[Serializable]
+	public class MsmqPoisonMessageException : PoisonMessageException
+	{
+		public MsmqPoisonMessageException () : base () {}
+		public MsmqPoisonMessageException (string message) : base (message) {}
+		public MsmqPoisonMessageException (string message, Exception innerException) : base (message, innerException) {}
+		protected MsmqPoisonMessageException (SerializationInfo info, StreamingContext context) :
+			base (info, context) {}
+	}
 }

@@ -2,8 +2,8 @@
 // System.Configuration.ConfigurationSectionTest.cs - Unit tests
 //
 // Author:
-//    Greg Smolyn
-//    Gonzalo Paniagua Javier <gonzalo@novell.com
+//	Greg Smolyn
+//	Gonzalo Paniagua Javier <gonzalo@novell.com
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,87 +35,87 @@ using System.Xml;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
-    [TestFixture]
-    public class ConfigurationElementCollectionTest
-    {
-        [Test]
-        public void TwoConfigElementsInARow () // Bug #521231
-        {
-            string config = @"<fooconfig><foos><foo id=""1"" /></foos><bars><bar id=""1"" /></bars></fooconfig>";
-            var fooSection = new FooConfigSection ();
-            fooSection.Load (config);
-        }
+	[TestFixture]
+	public class ConfigurationElementCollectionTest
+	{
+		[Test]
+		public void TwoConfigElementsInARow () // Bug #521231
+		{
+			string config = @"<fooconfig><foos><foo id=""1"" /></foos><bars><bar id=""1"" /></bars></fooconfig>";
+			var fooSection = new FooConfigSection ();
+			fooSection.Load (config);
+		}
 
-        class FooConfigSection : ConfigurationSection
-        {
-            public void Load (string xml) 
-            { 
-                Init (); 
-                using (StringReader sr = new StringReader(xml))  
-                    using (XmlReader reader = new XmlTextReader(sr)) { 
-                        DeserializeSection (reader); 
-                    } 
-            }
+		class FooConfigSection : ConfigurationSection
+		{
+			public void Load (string xml) 
+			{ 
+				Init (); 
+				using (StringReader sr = new StringReader(xml))  
+					using (XmlReader reader = new XmlTextReader(sr)) { 
+						DeserializeSection (reader); 
+					} 
+			}
 
-            [ConfigurationProperty("foos")]
-            [ConfigurationCollection(typeof(FooConfigElementCollection), AddItemName="foo")]
-            public FooConfigElementCollection Foos {
-                get { return (FooConfigElementCollection)base["foos"]; }
-                set { base["foos"] = value; }
-            }
+			[ConfigurationProperty("foos")]
+			[ConfigurationCollection(typeof(FooConfigElementCollection), AddItemName="foo")]
+			public FooConfigElementCollection Foos {
+				get { return (FooConfigElementCollection)base["foos"]; }
+				set { base["foos"] = value; }
+			}
 
-            [ConfigurationProperty("bars")]
-            [ConfigurationCollection(typeof(BarConfigElementCollection), AddItemName="bar")]
-            public BarConfigElementCollection Bars {
-                get { return (BarConfigElementCollection)base["bars"]; }
-                set { base["bars"] = value; }
-            }            
-        }
+			[ConfigurationProperty("bars")]
+			[ConfigurationCollection(typeof(BarConfigElementCollection), AddItemName="bar")]
+			public BarConfigElementCollection Bars {
+				get { return (BarConfigElementCollection)base["bars"]; }
+				set { base["bars"] = value; }
+			}			
+		}
 
-        class FooConfigElementCollection : ConfigurationElementCollection
-        {
-            protected override ConfigurationElement CreateNewElement ()
-            {
-                return new FooConfigElement();
-            }
+		class FooConfigElementCollection : ConfigurationElementCollection
+		{
+			protected override ConfigurationElement CreateNewElement ()
+			{
+				return new FooConfigElement();
+			}
 
-            protected override object GetElementKey (ConfigurationElement element)
-            {
-                return ((FooConfigElement)element).Id;
-            }
-        }
+			protected override object GetElementKey (ConfigurationElement element)
+			{
+				return ((FooConfigElement)element).Id;
+			}
+		}
 
-        class FooConfigElement : ConfigurationElement
-        {
-            [ConfigurationProperty("id")]
-            public int Id {
-                get { return (int)base["id"]; }
-                set { base["id"] = value; }
-            }
+		class FooConfigElement : ConfigurationElement
+		{
+			[ConfigurationProperty("id")]
+			public int Id {
+				get { return (int)base["id"]; }
+				set { base["id"] = value; }
+			}
 
-        }
+		}
 
-        class BarConfigElementCollection : ConfigurationElementCollection
-        {
-            protected override ConfigurationElement CreateNewElement ()
-            {
-                return new BarConfigElement();
-            }
+		class BarConfigElementCollection : ConfigurationElementCollection
+		{
+			protected override ConfigurationElement CreateNewElement ()
+			{
+				return new BarConfigElement();
+			}
 
-            protected override object GetElementKey (ConfigurationElement element)
-            {
-                return ((BarConfigElement)element).Id;
-            }
-        }
+			protected override object GetElementKey (ConfigurationElement element)
+			{
+				return ((BarConfigElement)element).Id;
+			}
+		}
 
-        class BarConfigElement : ConfigurationElement
-        {
-            [ConfigurationProperty("id")]
-            public int Id {
-                get { return (int)base["id"]; }
-                set { base["id"] = value; }
-            }        
-        }    
-    }
+		class BarConfigElement : ConfigurationElement
+		{
+			[ConfigurationProperty("id")]
+			public int Id {
+				get { return (int)base["id"]; }
+				set { base["id"] = value; }
+			}		
+		}	
+	}
 }
 

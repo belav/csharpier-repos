@@ -29,47 +29,47 @@
 //
 namespace System.Web.SessionState 
 {
-    public static class SessionStateUtility
-    {
-        public static void AddHttpSessionStateToContext (HttpContext context, IHttpSessionState container)
-        {
-            if (context == null || container == null)
-                return;
-            if (context.Session != null)
-                throw new HttpException ("An HttpSessionState object for the current session has already been added to the specified context.");
-            
-            HttpSessionState state = new HttpSessionState (container);
-            context.SetSession (state);
-        }
+	public static class SessionStateUtility
+	{
+		public static void AddHttpSessionStateToContext (HttpContext context, IHttpSessionState container)
+		{
+			if (context == null || container == null)
+				return;
+			if (context.Session != null)
+				throw new HttpException ("An HttpSessionState object for the current session has already been added to the specified context.");
+			
+			HttpSessionState state = new HttpSessionState (container);
+			context.SetSession (state);
+		}
 
-        public static IHttpSessionState GetHttpSessionStateFromContext (HttpContext context)
-        {
-            HttpSessionState session;
-            if (context == null || (session = context.Session) == null)
-                return null;
-            
-            return session.Container;
-        }
+		public static IHttpSessionState GetHttpSessionStateFromContext (HttpContext context)
+		{
+			HttpSessionState session;
+			if (context == null || (session = context.Session) == null)
+				return null;
+			
+			return session.Container;
+		}
 
-        public static HttpStaticObjectsCollection GetSessionStaticObjects (HttpContext context)
-        {
-            HttpSessionState session;
-            if (context == null || (session = context.Session) == null)
-                return null;
-            return session.Container.StaticObjects;
-        }
-        
-        public static void RaiseSessionEnd (IHttpSessionState session, Object eventSource, EventArgs eventArgs)
-        {
-            HttpSessionState state = new HttpSessionState (session);
-            HttpApplicationFactory.InvokeSessionEnd (state, eventSource, eventArgs);
-        }
+		public static HttpStaticObjectsCollection GetSessionStaticObjects (HttpContext context)
+		{
+			HttpSessionState session;
+			if (context == null || (session = context.Session) == null)
+				return null;
+			return session.Container.StaticObjects;
+		}
+		
+		public static void RaiseSessionEnd (IHttpSessionState session, Object eventSource, EventArgs eventArgs)
+		{
+			HttpSessionState state = new HttpSessionState (session);
+			HttpApplicationFactory.InvokeSessionEnd (state, eventSource, eventArgs);
+		}
 
-        public static void RemoveHttpSessionStateFromContext (HttpContext context)
-        {
-            if (context == null)
-                return;
-            context.SetSession (null);
-        }
-    }
+		public static void RemoveHttpSessionStateFromContext (HttpContext context)
+		{
+			if (context == null)
+				return;
+			context.SetSession (null);
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ContentDefinition
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -33,28 +33,28 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design
 {
-    public class ContentDefinition
-    {
-        string id, content, html;
+	public class ContentDefinition
+	{
+		string id, content, html;
 
-        public ContentDefinition (string id, string content, string designTimeHtml)
-        {
-            this.id = id;
-            this.content = content;
-            this.html = designTimeHtml;
-        }
+		public ContentDefinition (string id, string content, string designTimeHtml)
+		{
+			this.id = id;
+			this.content = content;
+			this.html = designTimeHtml;
+		}
 
-        public string ContentPlaceHolderID {
-            get { return id; }
-        }
+		public string ContentPlaceHolderID {
+			get { return id; }
+		}
 
-        public string DefaultContent {
-            get { return content; }
-        }
+		public string DefaultContent {
+			get { return content; }
+		}
 
-        public string DefaultDesignTimeHtml {
-            get { return html; }
-        }
-    }
+		public string DefaultDesignTimeHtml {
+			get { return html; }
+		}
+	}
 }
 

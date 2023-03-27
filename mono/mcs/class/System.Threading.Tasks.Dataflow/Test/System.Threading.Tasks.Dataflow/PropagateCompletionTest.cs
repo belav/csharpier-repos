@@ -1,4 +1,4 @@
-// PropagateCompletionTest.cs
+﻿// PropagateCompletionTest.cs
 //  
 // Copyright (c) 2012 Petr Onderka
 // 
@@ -27,104 +27,104 @@ using System.Threading.Tasks.Dataflow;
 using NUnit.Framework;
 
 namespace MonoTests.System.Threading.Tasks.Dataflow {
-    [TestFixture]
-    public class PropagateCompletionTest {
-        [Test]
-        public void PropagateCompletionSimpleTest ()
-        {
-            var source = new BufferBlock<int> ();
-            var target = new BufferBlock<int> ();
-            Assert.IsNotNull (source.LinkTo (target,
-                new DataflowLinkOptions { PropagateCompletion = true }));
+	[TestFixture]
+	public class PropagateCompletionTest {
+		[Test]
+		public void PropagateCompletionSimpleTest ()
+		{
+			var source = new BufferBlock<int> ();
+			var target = new BufferBlock<int> ();
+			Assert.IsNotNull (source.LinkTo (target,
+				new DataflowLinkOptions { PropagateCompletion = true }));
 
-            Assert.IsFalse (target.Completion.Wait (100));
-            source.Complete ();
-            Assert.IsTrue (target.Completion.Wait (1000));
-        }
+			Assert.IsFalse (target.Completion.Wait (100));
+			source.Complete ();
+			Assert.IsTrue (target.Completion.Wait (1000));
+		}
 
-        [Test]
-        public void PropagateFaultTest ()
-        {
-            ISourceBlock<int> source = new BufferBlock<int> ();
-            var target = new BufferBlock<int> ();
-            Assert.IsNotNull (source.LinkTo (target,
-                new DataflowLinkOptions { PropagateCompletion = true }));
+		[Test]
+		public void PropagateFaultTest ()
+		{
+			ISourceBlock<int> source = new BufferBlock<int> ();
+			var target = new BufferBlock<int> ();
+			Assert.IsNotNull (source.LinkTo (target,
+				new DataflowLinkOptions { PropagateCompletion = true }));
 
-            Assert.IsFalse (target.Completion.Wait (100));
-            var exception = new Exception ();
-            source.Fault (exception);
+			Assert.IsFalse (target.Completion.Wait (100));
+			var exception = new Exception ();
+			source.Fault (exception);
 
-            var ae =
-                AssertEx.Throws<AggregateException> (() => source.Completion.Wait (1000));
-            Assert.AreEqual (exception, ae.Flatten ().InnerException);
+			var ae =
+				AssertEx.Throws<AggregateException> (() => source.Completion.Wait (1000));
+			Assert.AreEqual (exception, ae.Flatten ().InnerException);
 
-            ae = AssertEx.Throws<AggregateException> (() => target.Completion.Wait (1000));
-            Assert.AreEqual (exception, ae.Flatten ().InnerException);
-        }
+			ae = AssertEx.Throws<AggregateException> (() => target.Completion.Wait (1000));
+			Assert.AreEqual (exception, ae.Flatten ().InnerException);
+		}
 
-        [Test]
-        public void PropagateCancellationTest ()
-        {
-            var tokenSource = new CancellationTokenSource ();
-            var source = new BufferBlock<int> (
-                new DataflowBlockOptions { CancellationToken = tokenSource.Token });
-            var target = new BufferBlock<int> ();
-            Assert.IsNotNull (source.LinkTo (target,
-                new DataflowLinkOptions { PropagateCompletion = true }));
+		[Test]
+		public void PropagateCancellationTest ()
+		{
+			var tokenSource = new CancellationTokenSource ();
+			var source = new BufferBlock<int> (
+				new DataflowBlockOptions { CancellationToken = tokenSource.Token });
+			var target = new BufferBlock<int> ();
+			Assert.IsNotNull (source.LinkTo (target,
+				new DataflowLinkOptions { PropagateCompletion = true }));
 
-            Assert.IsFalse (target.Completion.Wait (100));
-            tokenSource.Cancel ();
+			Assert.IsFalse (target.Completion.Wait (100));
+			tokenSource.Cancel ();
 
-            var ae =
-                AssertEx.Throws<AggregateException> (() => source.Completion.Wait (1000));
-            Assert.IsInstanceOfType (
-                typeof(TaskCanceledException), ae.Flatten ().InnerException);
+			var ae =
+				AssertEx.Throws<AggregateException> (() => source.Completion.Wait (1000));
+			Assert.IsInstanceOfType (
+				typeof(TaskCanceledException), ae.Flatten ().InnerException);
 
-            Assert.IsTrue (target.Completion.Wait (1000));
-        }
+			Assert.IsTrue (target.Completion.Wait (1000));
+		}
 
-        [Test]
-        public void PropagateCompletionAfterWaitTest ()
-        {
-            var evt = new ManualResetEventSlim ();
+		[Test]
+		public void PropagateCompletionAfterWaitTest ()
+		{
+			var evt = new ManualResetEventSlim ();
 
-            var source = new TransformBlock<int, int> (
-                i =>
-                {
-                    evt.Wait ();
-                    return i;
-                });
-            var target = new BufferBlock<int> ();
-            Assert.IsNotNull (source.LinkTo (target,
-                new DataflowLinkOptions { PropagateCompletion = true }));
+			var source = new TransformBlock<int, int> (
+				i =>
+				{
+					evt.Wait ();
+					return i;
+				});
+			var target = new BufferBlock<int> ();
+			Assert.IsNotNull (source.LinkTo (target,
+				new DataflowLinkOptions { PropagateCompletion = true }));
 
-            Assert.IsTrue (source.Post (42));
+			Assert.IsTrue (source.Post (42));
 
-            Assert.IsFalse (target.Completion.Wait (100));
+			Assert.IsFalse (target.Completion.Wait (100));
 
-            source.Complete ();
-            Assert.IsFalse (target.Completion.Wait (100));
+			source.Complete ();
+			Assert.IsFalse (target.Completion.Wait (100));
 
-            evt.Set ();
-            Assert.IsFalse (target.Completion.Wait (100));
+			evt.Set ();
+			Assert.IsFalse (target.Completion.Wait (100));
 
-            Assert.AreEqual (42, target.Receive ());
-            Assert.IsTrue (target.Completion.Wait (1000));
-        }
+			Assert.AreEqual (42, target.Receive ());
+			Assert.IsTrue (target.Completion.Wait (1000));
+		}
 
-        [Test]
-        public void PropagateCompletionLinkDisposeTest()
-        {
-            var source = new BufferBlock<int>();
-            var target = new BufferBlock<int>();
-            var link = source.LinkTo(target, new DataflowLinkOptions { PropagateCompletion = true });
+		[Test]
+		public void PropagateCompletionLinkDisposeTest()
+		{
+			var source = new BufferBlock<int>();
+			var target = new BufferBlock<int>();
+			var link = source.LinkTo(target, new DataflowLinkOptions { PropagateCompletion = true });
 
-            Assert.IsFalse(target.Completion.Wait(100));
+			Assert.IsFalse(target.Completion.Wait(100));
 
-            link.Dispose();
-            source.Complete();
-            Assert.IsFalse(target.Completion.Wait(100));
-        }
+			link.Dispose();
+			source.Complete();
+			Assert.IsFalse(target.Completion.Wait(100));
+		}
  
-    }
+	}
 }

@@ -1,9 +1,9 @@
 //
 // HtmlTableRowCas.cs 
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlTableRow
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlTableRow
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,25 +37,25 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlTableRowCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlTableRowCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HtmlTableRowTest unit = new HtmlTableRowTest ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.CleanProperties ();
-            unit.Render ();
-            unit.HtmlTableCellControlCollectionAdd ();
-            unit.HtmlTableCellControlCollectionAddAt ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HtmlTableRowTest unit = new HtmlTableRowTest ();
+			unit.DefaultProperties ();
+			unit.NullProperties ();
+			unit.CleanProperties ();
+			unit.Render ();
+			unit.HtmlTableCellControlCollectionAdd ();
+			unit.HtmlTableCellControlCollectionAddAt ();
+		}
 
-        public override Type Type {
-            get { return typeof (HtmlTableRow); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlTableRow); }
+		}
+	}
 }

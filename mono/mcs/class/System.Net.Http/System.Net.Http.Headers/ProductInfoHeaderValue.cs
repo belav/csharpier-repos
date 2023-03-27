@@ -2,7 +2,7 @@
 // ProductInfoHeaderValue.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2011 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,170 +30,170 @@ using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {
-    public class ProductInfoHeaderValue : ICloneable
-    {
-        public ProductInfoHeaderValue (ProductHeaderValue product)
-        {
-            if (product == null)
-                throw new ArgumentNullException ();
+	public class ProductInfoHeaderValue : ICloneable
+	{
+		public ProductInfoHeaderValue (ProductHeaderValue product)
+		{
+			if (product == null)
+				throw new ArgumentNullException ();
 
-            Product = product;
-        }
+			Product = product;
+		}
 
-        public ProductInfoHeaderValue (string comment)
-        {
-            Parser.Token.CheckComment (comment);
-            Comment = comment;
-        }
+		public ProductInfoHeaderValue (string comment)
+		{
+			Parser.Token.CheckComment (comment);
+			Comment = comment;
+		}
 
-        public ProductInfoHeaderValue (string productName, string productVersion)
-        {
-            Product = new ProductHeaderValue (productName, productVersion);
-        }
+		public ProductInfoHeaderValue (string productName, string productVersion)
+		{
+			Product = new ProductHeaderValue (productName, productVersion);
+		}
 
-        private ProductInfoHeaderValue ()
-        {
-        }
+		private ProductInfoHeaderValue ()
+		{
+		}
 
-        public string Comment { get; private set; }
-        public ProductHeaderValue Product { get; private set; }
+		public string Comment { get; private set; }
+		public ProductHeaderValue Product { get; private set; }
 
-        object ICloneable.Clone ()
-        {
-            return MemberwiseClone ();
-        }
+		object ICloneable.Clone ()
+		{
+			return MemberwiseClone ();
+		}
 
-        public override bool Equals (object obj)
-        {
-            var source = obj as ProductInfoHeaderValue;
-            if (source == null)
-                return false;
+		public override bool Equals (object obj)
+		{
+			var source = obj as ProductInfoHeaderValue;
+			if (source == null)
+				return false;
 
-            return Product != null ?
-                Product.Equals (source.Product) :
-                source.Comment == Comment;
-        }
+			return Product != null ?
+				Product.Equals (source.Product) :
+				source.Comment == Comment;
+		}
 
-        public override int GetHashCode ()
-        {
-            return Product != null ?
-                Product.GetHashCode () :
-                Comment.GetHashCode ();
-        }
+		public override int GetHashCode ()
+		{
+			return Product != null ?
+				Product.GetHashCode () :
+				Comment.GetHashCode ();
+		}
 
-        public static ProductInfoHeaderValue Parse (string input)
-        {
-            ProductInfoHeaderValue value;
-            if (TryParse (input, out value))
-                return value;
+		public static ProductInfoHeaderValue Parse (string input)
+		{
+			ProductInfoHeaderValue value;
+			if (TryParse (input, out value))
+				return value;
 
-            throw new FormatException (input);
-        }
-        
-        public static bool TryParse (string input, out ProductInfoHeaderValue parsedValue)
-        {
-            parsedValue = null;
+			throw new FormatException (input);
+		}
+		
+		public static bool TryParse (string input, out ProductInfoHeaderValue parsedValue)
+		{
+			parsedValue = null;
 
-            var lexer = new Lexer (input);
-            if (!TryParseElement (lexer, out parsedValue) || parsedValue == null)
-                return false;
+			var lexer = new Lexer (input);
+			if (!TryParseElement (lexer, out parsedValue) || parsedValue == null)
+				return false;
 
-            if (lexer.Scan () != Token.Type.End) {
-                parsedValue = null;
-                return false;
-            }    
+			if (lexer.Scan () != Token.Type.End) {
+				parsedValue = null;
+				return false;
+			}	
 
-            return true;
-        }
+			return true;
+		}
 
-        internal static bool TryParse (string input, int minimalCount, out List<ProductInfoHeaderValue> result)
-        {
-            var list = new List<ProductInfoHeaderValue> ();
-            var lexer = new Lexer (input);
-            result = null;
+		internal static bool TryParse (string input, int minimalCount, out List<ProductInfoHeaderValue> result)
+		{
+			var list = new List<ProductInfoHeaderValue> ();
+			var lexer = new Lexer (input);
+			result = null;
 
-            while (true) {
-                ProductInfoHeaderValue element;
-                if (!TryParseElement (lexer, out element))
-                    return false;
+			while (true) {
+				ProductInfoHeaderValue element;
+				if (!TryParseElement (lexer, out element))
+					return false;
 
-                if (element == null) {
-                    if (list != null && minimalCount <= list.Count) {
-                        result = list;
-                        return true;
-                    }
+				if (element == null) {
+					if (list != null && minimalCount <= list.Count) {
+						result = list;
+						return true;
+					}
 
-                    return false;
-                }
+					return false;
+				}
 
-                list.Add (element);
+				list.Add (element);
 
-                // Separator parsing
-                switch (lexer.PeekChar ()) {
-                case ' ':
-                case '\t':
-                    lexer.EatChar ();
-                    continue;
-                case -1:
-                    if (minimalCount <= list.Count) {
-                        result = list;
-                        return true;
-                    }
+				// Separator parsing
+				switch (lexer.PeekChar ()) {
+				case ' ':
+				case '\t':
+					lexer.EatChar ();
+					continue;
+				case -1:
+					if (minimalCount <= list.Count) {
+						result = list;
+						return true;
+					}
 
-                    break;
-                }
-                    
-                return false;
-            }
-        }
+					break;
+				}
+					
+				return false;
+			}
+		}
 
-        static bool TryParseElement (Lexer lexer, out ProductInfoHeaderValue parsedValue)
-        {
-            string comment;
-            parsedValue = null;
-            Token t;
+		static bool TryParseElement (Lexer lexer, out ProductInfoHeaderValue parsedValue)
+		{
+			string comment;
+			parsedValue = null;
+			Token t;
 
-            if (lexer.ScanCommentOptional (out comment, out t)) {
-                if (comment == null)
-                    return false;
+			if (lexer.ScanCommentOptional (out comment, out t)) {
+				if (comment == null)
+					return false;
 
-                parsedValue = new ProductInfoHeaderValue ();
-                parsedValue.Comment = comment;
-                return true;
-            }
+				parsedValue = new ProductInfoHeaderValue ();
+				parsedValue.Comment = comment;
+				return true;
+			}
 
-            if (t == Token.Type.End)
-                return true;
+			if (t == Token.Type.End)
+				return true;
 
-            if (t != Token.Type.Token)
-                return false;
+			if (t != Token.Type.Token)
+				return false;
 
-            var value = new ProductHeaderValue ();
-            value.Name = lexer.GetStringValue (t);
+			var value = new ProductHeaderValue ();
+			value.Name = lexer.GetStringValue (t);
 
-            var pos = lexer.Position;
-            t = lexer.Scan ();
-            if (t == Token.Type.SeparatorSlash) {
+			var pos = lexer.Position;
+			t = lexer.Scan ();
+			if (t == Token.Type.SeparatorSlash) {
 
-                t = lexer.Scan ();
-                if (t != Token.Type.Token)
-                    return false;
+				t = lexer.Scan ();
+				if (t != Token.Type.Token)
+					return false;
 
-                value.Version = lexer.GetStringValue (t);
-            } else {
-                lexer.Position = pos;
-            }
+				value.Version = lexer.GetStringValue (t);
+			} else {
+				lexer.Position = pos;
+			}
 
-            parsedValue = new ProductInfoHeaderValue (value);
-            return true;
-        }
+			parsedValue = new ProductInfoHeaderValue (value);
+			return true;
+		}
 
-        public override string ToString ()
-        {
-            if (Product == null)
-                return Comment;
+		public override string ToString ()
+		{
+			if (Product == null)
+				return Comment;
 
-            return Product.ToString ();
-        }
-    }
+			return Product.ToString ();
+		}
+	}
 }

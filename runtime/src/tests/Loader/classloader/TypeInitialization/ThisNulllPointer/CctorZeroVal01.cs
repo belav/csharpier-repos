@@ -15,55 +15,55 @@ public class FLAG
 
 public struct A
 {
-    public static int i;
+	public static int i;
 
-    static A()
-    {
+	static A()
+	{
 
-        Console.WriteLine("In A.cctor");
+		Console.WriteLine("In A.cctor");
         FLAG.success = true;
-    }
+	}
 
-    public void methodA()
-    {    
-    }
+	public void methodA()
+	{	
+	}
 }
 
 
 public class Test_CctorZeroVal01
 {
-    public static int Main()
-    {
+	public static int Main()
+	{
 
-        Console.WriteLine("\n============================================================");
-        Console.WriteLine("NOTE: This test will fail with NGEN");
-        Console.WriteLine("We do not guarantee to execute static .cctor for structs");
-        Console.WriteLine("unless the instance .ctor is explicitly called\n");
-        Console.WriteLine("============================================================");
+		Console.WriteLine("\n============================================================");
+		Console.WriteLine("NOTE: This test will fail with NGEN");
+		Console.WriteLine("We do not guarantee to execute static .cctor for structs");
+		Console.WriteLine("unless the instance .ctor is explicitly called\n");
+		Console.WriteLine("============================================================");
 
-        try
-        {    
-            // this will trigger A::.cctor
-            A a = new A();
+		try
+		{	
+			// this will trigger A::.cctor
+			A a = new A();
 
-            a.methodA();
+			a.methodA();
 
             if(!FLAG.success)
-            {
-                Console.WriteLine("FAIL: Cctor wasn't called");
-                return 101;
-            }
-            else
-            {
-                Console.WriteLine("PASS: Cctor was called");
-                return 100;
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("FAIL: Caught unexpected exception: " + e);
-            return 102;
-        }
-    }
+			{
+				Console.WriteLine("FAIL: Cctor wasn't called");
+				return 101;
+			}
+			else
+			{
+				Console.WriteLine("PASS: Cctor was called");
+				return 100;
+			}
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine("FAIL: Caught unexpected exception: " + e);
+			return 102;
+		}
+	}
 }
 

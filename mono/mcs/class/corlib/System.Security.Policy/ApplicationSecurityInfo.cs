@@ -2,7 +2,7 @@
 // System.Security.Policy.ApplicationSecurityInfo class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,61 +32,61 @@ using System.Security.Permissions;
 
 namespace System.Security.Policy {
 
-    [ComVisible (true)]
-    public sealed class ApplicationSecurityInfo {
+	[ComVisible (true)]
+	public sealed class ApplicationSecurityInfo {
 
-//        private ActivationContext _context;
-        private Evidence _evidence;
-        private ApplicationId _appid;
-        private PermissionSet _defaultSet;
-        private ApplicationId _deployid;
+//		private ActivationContext _context;
+		private Evidence _evidence;
+		private ApplicationId _appid;
+		private PermissionSet _defaultSet;
+		private ApplicationId _deployid;
 
-        public ApplicationSecurityInfo (ActivationContext activationContext)
-        {
-            if (activationContext == null)
-                throw new ArgumentNullException ("activationContext");
-//            _context = activationContext;
-        }
+		public ApplicationSecurityInfo (ActivationContext activationContext)
+		{
+			if (activationContext == null)
+				throw new ArgumentNullException ("activationContext");
+//			_context = activationContext;
+		}
 
-        public Evidence ApplicationEvidence {
-            get { return _evidence; }
-            set {
-                if (value == null)
-                    throw new ArgumentNullException ("ApplicationEvidence");
-                _evidence = value;
-            }
-        }
+		public Evidence ApplicationEvidence {
+			get { return _evidence; }
+			set {
+				if (value == null)
+					throw new ArgumentNullException ("ApplicationEvidence");
+				_evidence = value;
+			}
+		}
 
-        public ApplicationId ApplicationId {
-            get { return _appid; }
-            set {
-                if (value == null)
-                    throw new ArgumentNullException ("ApplicationId");
-                _appid = value;
-            }
-        }
+		public ApplicationId ApplicationId {
+			get { return _appid; }
+			set {
+				if (value == null)
+					throw new ArgumentNullException ("ApplicationId");
+				_appid = value;
+			}
+		}
 
-        public PermissionSet DefaultRequestSet {
-            get {
-                if (_defaultSet == null)
-                    return new PermissionSet (PermissionState.None);
-                return _defaultSet; // FIXME: copy or reference ?
-            }
-            set {
-                if (value == null)
-                    throw new ArgumentNullException ("DefaultRequestSet");
-                _defaultSet = value;
-            }
-        }
+		public PermissionSet DefaultRequestSet {
+			get {
+				if (_defaultSet == null)
+					return new PermissionSet (PermissionState.None);
+				return _defaultSet; // FIXME: copy or reference ?
+			}
+			set {
+				if (value == null)
+					throw new ArgumentNullException ("DefaultRequestSet");
+				_defaultSet = value;
+			}
+		}
 
-        public ApplicationId DeploymentId {
-            get { return _deployid; }
-            set {
-                if (value == null)
-                    throw new ArgumentNullException ("DeploymentId");
-                _deployid = value;
-            }
-        }
-    }
+		public ApplicationId DeploymentId {
+			get { return _deployid; }
+			set {
+				if (value == null)
+					throw new ArgumentNullException ("DeploymentId");
+				_deployid = value;
+			}
+		}
+	}
 }
 

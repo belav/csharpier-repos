@@ -2,7 +2,7 @@
 // IMethodDriver.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -34,20 +34,20 @@ using Mono.CodeContracts.Static.Providers;
 using Mono.CodeContracts.Static.Proving;
 
 namespace Mono.CodeContracts.Static.Analysis.Drivers {
-    interface IMethodDriver<Expression, Variable> : IBasicMethodDriver {
-        ICodeLayer<Variable, Variable, IValueContextProvider<Variable>, IImmutableMap<Variable, Sequence<Variable>>> ValueLayer { get; }
-        ICodeLayer<Expression, Variable, IExpressionContextProvider<Expression, Variable>, IImmutableMap<Variable, Sequence<Variable>>> ExpressionLayer { get; }
-        ICodeLayer<Variable, Variable, IValueContextProvider<Variable>, IImmutableMap<Variable, Sequence<Variable>>> HybridLayer { get; }
+	interface IMethodDriver<Expression, Variable> : IBasicMethodDriver {
+		ICodeLayer<Variable, Variable, IValueContextProvider<Variable>, IImmutableMap<Variable, Sequence<Variable>>> ValueLayer { get; }
+		ICodeLayer<Expression, Variable, IExpressionContextProvider<Expression, Variable>, IImmutableMap<Variable, Sequence<Variable>>> ExpressionLayer { get; }
+		ICodeLayer<Variable, Variable, IValueContextProvider<Variable>, IImmutableMap<Variable, Sequence<Variable>>> HybridLayer { get; }
 
-        IExpressionContextProvider<Expression, Variable> ContextProvider { get; }
-        IMetaDataProvider MetaDataProvider { get; }
+		IExpressionContextProvider<Expression, Variable> ContextProvider { get; }
+		IMetaDataProvider MetaDataProvider { get; }
 
-        ICFG CFG { get; }
-        Method CurrentMethod { get; }
-        IFactBase<Variable> BasicFacts { get; }
-        IFullExpressionDecoder<Variable, Expression> ExpressionDecoder { get; }
+		ICFG CFG { get; }
+		Method CurrentMethod { get; }
+		IFactBase<Variable> BasicFacts { get; }
+		IFullExpressionDecoder<Variable, Expression> ExpressionDecoder { get; }
 
-        void RunHeapAndExpressionAnalyses ();
-        int KeyConverter (Variable var);
-    }
+		void RunHeapAndExpressionAnalyses ();
+		int KeyConverter (Variable var);
+	}
 }

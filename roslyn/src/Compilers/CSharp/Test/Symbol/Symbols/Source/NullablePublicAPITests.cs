@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -4144,7 +4144,7 @@ using System;
 class C
 {
     public static Action<T> Create<T>(T t, Action<T> a) => throw null!;
-    public static T[] Create<T>(T t) => throw null!;
+	public static T[] Create<T>(T t) => throw null!;
 
     public static void M(object? o)
     {
@@ -4153,10 +4153,10 @@ class C
             T LocalFunction<T>(T t) 
             {
                 _ = Create(t); // Type argument for Create needs to be reparented
-                var d = new D<T>(); // Type argument in D's substituted type needs to be reparented
-                d.DoSomething(t); // Argument of the function needs to be reparented
+				var d = new D<T>(); // Type argument in D's substituted type needs to be reparented
+				d.DoSomething(t); // Argument of the function needs to be reparented
                 var f = SecondFunction(); // Return type of nested function needs to be reparented
-                return d.Prop; // Return type needs to be reparented
+				return d.Prop; // Return type needs to be reparented
                 T SecondFunction() { return t; }
             }
         });
@@ -4164,8 +4164,8 @@ class C
 }
 class D<T>
 {
-    public void DoSomething(T t) => throw null!;
-    public T Prop { get; } = default!;
+	public void DoSomething(T t) => throw null!;
+	public T Prop { get; } = default!;
 }";
 
             var comp = CreateCompilation(source, options: WithNullableEnable());

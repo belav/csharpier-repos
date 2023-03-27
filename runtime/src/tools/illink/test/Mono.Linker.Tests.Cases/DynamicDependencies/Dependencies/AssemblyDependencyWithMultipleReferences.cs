@@ -1,10 +1,10 @@
-namespace Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies
+﻿namespace Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies
 {
-    public class AssemblyDependencyWithReference : AssemblyDependency
-    {
-    }
+	public class AssemblyDependencyWithReference : AssemblyDependency
+	{
+	}
 
-    public class UsedToReferenceUnusedAssembly : UnusedAssemblyDependency
-    {
-    }
+	public class UsedToReferenceUnusedAssembly : UnusedAssemblyDependency
+	{
+	}
 }

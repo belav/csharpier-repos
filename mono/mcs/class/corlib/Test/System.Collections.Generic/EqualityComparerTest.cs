@@ -2,7 +2,7 @@
 // Unit tests for System.Collections.Generic.EqualityComparer
 //
 // Authors:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -35,42 +35,42 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Generic {
 
-    [TestFixture]
-    public class EqualityComparerTest {
-        enum E
-        {
-            A,
-            B
-        }
+	[TestFixture]
+	public class EqualityComparerTest {
+		enum E
+		{
+			A,
+			B
+		}
 
-        [Test]
-        public void Default_GetHashCode_Null ()
-        {
-            // https://bugzilla.novell.com/show_bug.cgi?id=372892
-            Assert.AreEqual (0, EqualityComparer<object>.Default.GetHashCode (null), "object");
-            Assert.AreEqual (0, EqualityComparer<string>.Default.GetHashCode (null), "string");
-        }
+		[Test]
+		public void Default_GetHashCode_Null ()
+		{
+			// https://bugzilla.novell.com/show_bug.cgi?id=372892
+			Assert.AreEqual (0, EqualityComparer<object>.Default.GetHashCode (null), "object");
+			Assert.AreEqual (0, EqualityComparer<string>.Default.GetHashCode (null), "string");
+		}
 
-        [Test]
-        public void NonGenericGetHashCodeForNullArgument ()
-        {
-            IEqualityComparer comparer = EqualityComparer<object>.Default;
-            Assert.AreEqual (0, comparer.GetHashCode (null));
-        }
+		[Test]
+		public void NonGenericGetHashCodeForNullArgument ()
+		{
+			IEqualityComparer comparer = EqualityComparer<object>.Default;
+			Assert.AreEqual (0, comparer.GetHashCode (null));
+		}
 
-        [Test] // #703027
-        public void NonGenericEqualsForNullArguments ()
-        {
-            IEqualityComparer comparer = EqualityComparer<object>.Default;
-            Assert.IsTrue (comparer.Equals (null, null));
-        }
+		[Test] // #703027
+		public void NonGenericEqualsForNullArguments ()
+		{
+			IEqualityComparer comparer = EqualityComparer<object>.Default;
+			Assert.IsTrue (comparer.Equals (null, null));
+		}
 
-        [Test]
-        public void EnumComparison ()
-        {
-            Assert.IsFalse (EqualityComparer<E>.Default.Equals (E.A, E.B));
-            Assert.IsFalse (EqualityComparer<object>.Default.Equals (E.A, E.B));
-        }
-    }
+		[Test]
+		public void EnumComparison ()
+		{
+			Assert.IsFalse (EqualityComparer<E>.Default.Equals (E.A, E.B));
+			Assert.IsFalse (EqualityComparer<object>.Default.Equals (E.A, E.B));
+		}
+	}
 }
 

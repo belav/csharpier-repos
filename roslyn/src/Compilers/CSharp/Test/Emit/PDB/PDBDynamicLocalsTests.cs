@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -19,26 +19,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             string source = WithWindowsLineBreaks(@"
 class Helper
 {
-    int x;
-    public void goo(int y){}
-    public Helper(){}
-    public Helper(int x){}
+	int x;
+	public void goo(int y){}
+	public Helper(){}
+	public Helper(int x){}
 }
 struct Point
-{    
-    int x;
-    int y;
+{	
+	int x;
+	int y;
 }
 class Test
 {
   delegate void D(int y);
   public static void Main(string[] args)
   {
-        dynamic d1 = new Helper();
-        dynamic d2 = new Point(); 
-        D d4 = new D(d1.goo); 
-        Helper d5 = new Helper(d1); 
-        
+		dynamic d1 = new Helper();
+		dynamic d2 = new Point(); 
+		D d4 = new D(d1.goo); 
+		Helper d5 = new Helper(d1); 
+		
   }
 }");
             var c = CreateCompilationWithMscorlib40AndSystemCore(source, references: new[] { CSharpRef }, options: TestOptions.DebugDll);
@@ -122,7 +122,7 @@ class Test
 {
     public static void Main(string[] args)
     {
-        dynamic[] arrDynamic = new dynamic[] {""1""};
+		dynamic[] arrDynamic = new dynamic[] {""1""};
         foreach (dynamic d in arrDynamic)  
         {
             //do nothing
@@ -183,8 +183,8 @@ class Test
             string source = @"
 class Test
 {
-    public static void Main(string[] args)
-    {
+	public static void Main(string[] args)
+	{
         {
             const dynamic d = null;
             const string c = null;
@@ -193,7 +193,7 @@ class Test
             const dynamic c = null;
             const dynamic d = null;
         }
-    }
+	}
 }";
             var c = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugDll);
             c.VerifyPdb(
@@ -242,8 +242,8 @@ class Test
             string source = WithWindowsLineBreaks(@"
 class Test
 {
-    public static void Main(string[] args)
-    {
+	public static void Main(string[] args)
+	{
         {
             dynamic a = null;
             object b = null;
@@ -252,7 +252,7 @@ class Test
             dynamic[] a = null;
             dynamic b = null;
         }
-    }
+	}
 }");
             var c = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugDll);
             c.VerifyPdb(
@@ -311,13 +311,13 @@ class Test
             string source = WithWindowsLineBreaks(@"
 class Test
 {
-    public static void Main(string[] args)
-    {
+	public static void Main(string[] args)
+	{
         const dynamic a123456789012345678901234567890123456789012345678901234567890123 = null; // 64 chars
         const dynamic b12345678901234567890123456789012345678901234567890123456789012 = null; // 63 chars
         dynamic c123456789012345678901234567890123456789012345678901234567890123 = null; // 64 chars
         dynamic d12345678901234567890123456789012345678901234567890123456789012 = null; // 63 chars
-    }
+	}
 }");
             var c = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugDll);
             c.VerifyPdb(
@@ -363,15 +363,15 @@ class Test
             string source = WithWindowsLineBreaks(@"
 class ArrayTest
 {
-    int x;
+	int x;
 }
 class Test
 {
   public static void Main(string[] args)
   {
-        dynamic[] arr = new dynamic[10];
-        dynamic[,] arrdim = new string[2,3];
-        dynamic[] arrobj = new ArrayTest[2];
+		dynamic[] arr = new dynamic[10];
+		dynamic[,] arrdim = new string[2,3];
+		dynamic[] arrobj = new ArrayTest[2];
   }
 }
 ");
@@ -426,11 +426,11 @@ class Test
 {
   public static void Main(string[] args)
   {
-        dynamic l1 = new List<int>();
-        List<dynamic> l2 = new List<dynamic>();
-        dynamic l3 = new List<dynamic>();
-        Dictionary<dynamic,dynamic> d1 = new Dictionary<dynamic,dynamic>();
-        dynamic d2 = new Dictionary<int,int>();
+		dynamic l1 = new List<int>();
+		List<dynamic> l2 = new List<dynamic>();
+		dynamic l3 = new List<dynamic>();
+		Dictionary<dynamic,dynamic> d1 = new Dictionary<dynamic,dynamic>();
+		dynamic d2 = new Dictionary<int,int>();
   }
 }");
             var c = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugDll);
@@ -489,24 +489,24 @@ class Test
             string source = WithWindowsLineBreaks(@"
 class Helper
 {
-    int x;
-    public void goo(int y){}
-    public Helper(){}
-    public Helper(int x){}
+	int x;
+	public void goo(int y){}
+	public Helper(){}
+	public Helper(int x){}
 }
 struct Point
-{    
-    int x;
-    int y;
+{	
+	int x;
+	int y;
 }
 class Test
 {
   delegate void D(int y);
   public static void Main(string[] args)
   {
-        Helper staticObj = new Helper();
-        dynamic d1 = new Helper();
-        dynamic d3 = new D(staticObj.goo);
+		Helper staticObj = new Helper();
+		dynamic d1 = new Helper();
+		dynamic d3 = new D(staticObj.goo);
   }
 }");
             var c = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugDll);
@@ -583,13 +583,13 @@ class Test
             string source = WithWindowsLineBreaks(@"
 class Test
 {
-    public Test()
-    {
-        dynamic d;
-    }
-    public static void Main(string[] args)
-    {
-    }
+	public Test()
+	{
+		dynamic d;
+	}
+	public static void Main(string[] args)
+	{
+	}
 }");
             var c = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugDll);
             c.VerifyPdb(@"
@@ -1754,11 +1754,11 @@ class C
 using System;
 class Test
 {
-    public static void Main(string[] args)
-    {
-        dynamic d = ""1"";
-        var v = d;
-    }
+	public static void Main(string[] args)
+	{
+		dynamic d = ""1"";
+		var v = d;
+	}
 }");
             var c = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugDll);
             c.VerifyPdb(@"
@@ -1804,15 +1804,15 @@ class Test
 using System;
 class dynamic<T>
 {
-    public T field;
+	public T field;
 }
 class Test
 {
-    public static void Main(string[] args)
-    {
-        dynamic<dynamic> obj = new dynamic<dynamic>();
-        obj.field = ""1"";
-    }
+	public static void Main(string[] args)
+	{
+		dynamic<dynamic> obj = new dynamic<dynamic>();
+		obj.field = ""1"";
+	}
 }");
             var c = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugDll);
             c.VerifyPdb(@"

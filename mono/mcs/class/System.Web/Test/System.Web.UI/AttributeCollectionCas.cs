@@ -1,9 +1,9 @@
 //
 // AttributeCollectionCas.cs 
-//    - CAS unit tests for System.Web.UI.AttributeCollection
+//	- CAS unit tests for System.Web.UI.AttributeCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,51 +39,51 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class AttributeCollectionCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class AttributeCollectionCas : AspNetHostingMinimal {
 
-        private StateBag bag;
-        private HtmlTextWriter writer;
+		private StateBag bag;
+		private HtmlTextWriter writer;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            bag = new StateBag ();
-            writer = new HtmlTextWriter (new StringWriter ());
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			bag = new StateBag ();
+			writer = new HtmlTextWriter (new StringWriter ());
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            // nothing else is required
-            AttributeCollection ac = new AttributeCollection (bag);
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			// nothing else is required
+			AttributeCollection ac = new AttributeCollection (bag);
 
-            Assert.AreEqual (0, ac.Count, "Count");
-            Assert.IsNotNull (ac.CssStyle, "CssStyle");
-            ac["mono"] = "monkey";
-            Assert.AreEqual ("monkey", ac["mono"], "this");
-            Assert.IsNotNull (ac.Keys, "Keys");
+			Assert.AreEqual (0, ac.Count, "Count");
+			Assert.IsNotNull (ac.CssStyle, "CssStyle");
+			ac["mono"] = "monkey";
+			Assert.AreEqual ("monkey", ac["mono"], "this");
+			Assert.IsNotNull (ac.Keys, "Keys");
 
-            ac.Add ("monkey", "mono");
-            ac.AddAttributes (writer);
-            ac.Clear ();
-            ac.Remove ("mono");
-            ac.Render (writer);
-        }
+			ac.Add ("monkey", "mono");
+			ac.AddAttributes (writer);
+			ac.Clear ();
+			ac.Remove ("mono");
+			ac.Render (writer);
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (StateBag) });
-            Assert.IsNotNull (ci, ".ctor(StateBag)");
-            return ci.Invoke (new object[1] { bag });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (StateBag) });
+			Assert.IsNotNull (ci, ".ctor(StateBag)");
+			return ci.Invoke (new object[1] { bag });
+		}
 
-        public override Type Type {
-            get { return typeof (AttributeCollection); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (AttributeCollection); }
+		}
+	}
 }

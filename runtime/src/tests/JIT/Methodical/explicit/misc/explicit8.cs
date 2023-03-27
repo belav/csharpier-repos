@@ -235,7 +235,7 @@ namespace Rotate_explicit8_cs
                 //Console.WriteLine("rotateTree(" + m_weight.ToString() + ")");
                 VerifyValid();
 
-                //    create node objects for children
+                //	create node objects for children
                 Node newLeftChild = null, newRightChild = null;
                 if (m_leftChild != null)
                 {
@@ -252,13 +252,13 @@ namespace Rotate_explicit8_cs
                     newLeftChild.m_weight = m_rightChild.m_weight;
                 }
 
-                //    replace children
+                //	replace children
                 m_leftChild = newLeftChild;
                 m_rightChild = newRightChild;
 
                 for (int I = 0; I < 32; I++) { int[] u = new int[1024]; }
 
-                //    verify all valid
+                //	verify all valid
                 if (m_rightChild != null)
                 {
                     if (m_rightChild.m_leftChild != null &&

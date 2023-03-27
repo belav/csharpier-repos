@@ -1,4 +1,4 @@
-//
+﻿//
 // IExpandProvider.cs
 //
 // Author:
@@ -31,7 +31,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace System.Data.Services {
-    public interface IExpandProvider {
-        IEnumerable ApplyExpansions (IQueryable queryable, ICollection<ExpandSegmentCollection> expandPaths);
-    }
+	public interface IExpandProvider {
+		IEnumerable ApplyExpansions (IQueryable queryable, ICollection<ExpandSegmentCollection> expandPaths);
+	}
 }

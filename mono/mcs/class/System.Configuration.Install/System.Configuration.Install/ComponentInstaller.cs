@@ -1,7 +1,7 @@
 // System.Configuration.Install.ComponentInstaller.cs
 //
 // Author:
-//     Alejandro Sánchez Acosta
+// 	Alejandro Sánchez Acosta
 //
 // (C) Alejandro Sánchez Acosta
 //
@@ -31,17 +31,17 @@ using System.ComponentModel;
 
 namespace System.Configuration.Install
 {
-    public abstract class ComponentInstaller : Installer
-    {
-        protected ComponentInstaller () {
-        }
+	public abstract class ComponentInstaller : Installer
+	{
+		protected ComponentInstaller () {
+		}
 
-        public abstract void CopyFromComponent (IComponent component);
+		public abstract void CopyFromComponent (IComponent component);
 
-        [MonoTODO ("Mono always returns false")]
-        public virtual bool IsEquivalentInstaller (ComponentInstaller otherInstaller)
-        {
-            return false;
-        }
-    }
+		[MonoTODO ("Mono always returns false")]
+		public virtual bool IsEquivalentInstaller (ComponentInstaller otherInstaller)
+		{
+			return false;
+		}
+	}
 }

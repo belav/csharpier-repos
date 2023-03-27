@@ -16,7 +16,7 @@ namespace Test
             {
 #pragma warning disable 1718
                 while (FALSE == FALSE)
-                {    //Stupid loop to optimize
+                {	//Stupid loop to optimize
 #pragma warning restore 1718
                     try { DoAnything(); }
                     catch (DivideByZeroException) { }

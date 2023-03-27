@@ -3,5 +3,5 @@
 
 interface Interface
 { 
-    bool value = false;
+	bool value = false;
 }

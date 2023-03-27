@@ -446,7 +446,7 @@ namespace GNfaToDfa
     private readonly IDictionary<int, IDictionary<String, int>> trans;
 
     public Dfa(int startState, Set<int> acceptStates,
-           IDictionary<int, IDictionary<String, int>> trans)
+	       IDictionary<int, IDictionary<String, int>> trans)
     {
       this.startState = startState;
       this.acceptStates = acceptStates;

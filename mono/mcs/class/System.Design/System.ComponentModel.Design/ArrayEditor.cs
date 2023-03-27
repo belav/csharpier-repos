@@ -36,38 +36,38 @@ using System.Reflection;
 
 namespace System.ComponentModel.Design
 {
-    public class ArrayEditor : CollectionEditor
-    {
-        public ArrayEditor (Type type) : base (type)
-        {
-        }
+	public class ArrayEditor : CollectionEditor
+	{
+		public ArrayEditor (Type type) : base (type)
+		{
+		}
 
-        protected override Type CreateCollectionItemType()
-        {
-            return CollectionType.GetElementType ();
-        }
+		protected override Type CreateCollectionItemType()
+		{
+			return CollectionType.GetElementType ();
+		}
 
-        protected override object[] GetItems (object editValue)
-        {
-            if (editValue == null)
-                return null;
-            if (!(editValue is Array))
-                return new object[0];
+		protected override object[] GetItems (object editValue)
+		{
+			if (editValue == null)
+				return null;
+			if (!(editValue is Array))
+				return new object[0];
 
-            Array editArray = (Array)editValue;
-            object[] result = new object[editArray.Length];
-            editArray.CopyTo (result, 0);
-            return result;
-        }
+			Array editArray = (Array)editValue;
+			object[] result = new object[editArray.Length];
+			editArray.CopyTo (result, 0);
+			return result;
+		}
 
-        protected override object SetItems (object editValue, object[] value)
-        {
-            if (editValue == null)
-                return null;
+		protected override object SetItems (object editValue, object[] value)
+		{
+			if (editValue == null)
+				return null;
 
-            Array result = Array.CreateInstance (CollectionItemType, value.Length);
-            value.CopyTo (result, 0);
-            return result;
-        }
-    }
+			Array result = Array.CreateInstance (CollectionItemType, value.Length);
+			value.CopyTo (result, 0);
+			return result;
+		}
+	}
 }

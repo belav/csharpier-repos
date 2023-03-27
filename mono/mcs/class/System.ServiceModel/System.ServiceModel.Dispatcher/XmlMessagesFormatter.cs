@@ -2,8 +2,8 @@
 // XmlMessagesFormatter.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
-//    Eyal Alaluf <eyala@mainsoft.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
+//	Eyal Alaluf <eyala@mainsoft.com>
 //
 // Copyright (C) 2005-2010 Novell, Inc.  http://www.novell.com
 // Copyright (C) 2008 Mainsoft Co. http://www.mainsoft.com
@@ -43,106 +43,106 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Dispatcher
 {
-    class XmlMessagesFormatter : BaseMessagesFormatter
-    {
-        XmlSerializerFormatAttribute attr;
-        Dictionary<MessageBodyDescription,XmlSerializer> bodySerializers
-            = new Dictionary<MessageBodyDescription,XmlSerializer> ();
+	class XmlMessagesFormatter : BaseMessagesFormatter
+	{
+		XmlSerializerFormatAttribute attr;
+		Dictionary<MessageBodyDescription,XmlSerializer> bodySerializers
+			= new Dictionary<MessageBodyDescription,XmlSerializer> ();
 
-        public XmlMessagesFormatter (OperationDescription desc, XmlSerializerFormatAttribute attr)
-            : base (desc)
-        {
-            this.attr = attr;
-        }
+		public XmlMessagesFormatter (OperationDescription desc, XmlSerializerFormatAttribute attr)
+			: base (desc)
+		{
+			this.attr = attr;
+		}
 
-        public XmlMessagesFormatter (MessageDescriptionCollection messages, XmlSerializerFormatAttribute attr)
-            : base (messages)
-        {
-            this.attr = attr;
-        }
+		public XmlMessagesFormatter (MessageDescriptionCollection messages, XmlSerializerFormatAttribute attr)
+			: base (messages)
+		{
+			this.attr = attr;
+		}
 
-        private XmlReflectionMember CreateReflectionMember (MessagePartDescription partDesc, bool isReturnValue)
-        {
-            XmlReflectionMember m = new XmlReflectionMember ();
-            m.IsReturnValue = isReturnValue;
-            m.MemberName = partDesc.Name;
-            m.MemberType = partDesc.Type;
-            m.XmlAttributes = partDesc.MemberInfo == null ? new XmlAttributes () : new XmlAttributes (partDesc.MemberInfo);
-            return m;
-        }
+		private XmlReflectionMember CreateReflectionMember (MessagePartDescription partDesc, bool isReturnValue)
+		{
+			XmlReflectionMember m = new XmlReflectionMember ();
+			m.IsReturnValue = isReturnValue;
+			m.MemberName = partDesc.Name;
+			m.MemberType = partDesc.Type;
+			m.XmlAttributes = partDesc.MemberInfo == null ? new XmlAttributes () : new XmlAttributes (partDesc.MemberInfo);
+			return m;
+		}
 
-        protected override Message PartsToMessage (
-            MessageDescription md, MessageVersion version, string action, object [] parts)
-        {
-            return Message.CreateMessage (version, action, new XmlBodyWriter (GetSerializer (md.Body), parts));
-        }
+		protected override Message PartsToMessage (
+			MessageDescription md, MessageVersion version, string action, object [] parts)
+		{
+			return Message.CreateMessage (version, action, new XmlBodyWriter (GetSerializer (md.Body), parts));
+		}
 
-        protected override object [] MessageToParts (MessageDescription md, Message message)
-        {
-            if (message.IsEmpty)
-                return null;
-                
-            XmlDictionaryReader r = message.GetReaderAtBodyContents ();
-            return (object []) GetSerializer (md.Body).Deserialize (r);
-        }
+		protected override object [] MessageToParts (MessageDescription md, Message message)
+		{
+			if (message.IsEmpty)
+				return null;
+				
+			XmlDictionaryReader r = message.GetReaderAtBodyContents ();
+			return (object []) GetSerializer (md.Body).Deserialize (r);
+		}
 
-        protected override Dictionary<MessageHeaderDescription,object> MessageToHeaderObjects (MessageDescription md, Message message)
-        {
-            // FIXME: do we need header serializers?
-            return null;
-        }
+		protected override Dictionary<MessageHeaderDescription,object> MessageToHeaderObjects (MessageDescription md, Message message)
+		{
+			// FIXME: do we need header serializers?
+			return null;
+		}
 
-        XmlSerializer GetSerializer (MessageBodyDescription desc)
-        {
-            if (bodySerializers.ContainsKey (desc))
-                return bodySerializers [desc];
+		XmlSerializer GetSerializer (MessageBodyDescription desc)
+		{
+			if (bodySerializers.ContainsKey (desc))
+				return bodySerializers [desc];
 
-            int count = desc.Parts.Count + (HasReturnValue (desc) ? 1 : 0);
-            XmlReflectionMember [] members = new XmlReflectionMember [count];
+			int count = desc.Parts.Count + (HasReturnValue (desc) ? 1 : 0);
+			XmlReflectionMember [] members = new XmlReflectionMember [count];
 
-            int ind = 0;
-            if (HasReturnValue (desc))
-                members [ind++] = CreateReflectionMember (desc.ReturnValue, true);
+			int ind = 0;
+			if (HasReturnValue (desc))
+				members [ind++] = CreateReflectionMember (desc.ReturnValue, true);
 
-            foreach (MessagePartDescription partDesc in desc.Parts)
-                members [ind++] = CreateReflectionMember (partDesc, false);
+			foreach (MessagePartDescription partDesc in desc.Parts)
+				members [ind++] = CreateReflectionMember (partDesc, false);
 
-            XmlReflectionImporter xmlImporter = new XmlReflectionImporter ();
-            // Register known types into xmlImporter.
-            foreach (var type in OperationKnownTypes)
-                xmlImporter.IncludeType (type);
-            XmlMembersMapping [] partsMapping = new XmlMembersMapping [1];
-            partsMapping [0] = xmlImporter.ImportMembersMapping (desc.WrapperName, desc.WrapperNamespace, members, desc.WrapperName != null);
-            bodySerializers [desc] = XmlSerializer.FromMappings (partsMapping) [0];
-            return bodySerializers [desc];
-        }
+			XmlReflectionImporter xmlImporter = new XmlReflectionImporter ();
+			// Register known types into xmlImporter.
+			foreach (var type in OperationKnownTypes)
+				xmlImporter.IncludeType (type);
+			XmlMembersMapping [] partsMapping = new XmlMembersMapping [1];
+			partsMapping [0] = xmlImporter.ImportMembersMapping (desc.WrapperName, desc.WrapperNamespace, members, desc.WrapperName != null);
+			bodySerializers [desc] = XmlSerializer.FromMappings (partsMapping) [0];
+			return bodySerializers [desc];
+		}
 
-        class XmlBodyWriter : BodyWriter
-        {
-            XmlSerializer serializer;
-            object body;
+		class XmlBodyWriter : BodyWriter
+		{
+			XmlSerializer serializer;
+			object body;
 
-            public XmlBodyWriter (XmlSerializer serializer, object parts)
-                : base (false)
-            {
-                this.serializer = serializer;
-                this.body = parts;
-            }
+			public XmlBodyWriter (XmlSerializer serializer, object parts)
+				: base (false)
+			{
+				this.serializer = serializer;
+				this.body = parts;
+			}
 
-            protected override BodyWriter OnCreateBufferedCopy (int maxBufferSize)
-            {
-                return new XmlBodyWriter (serializer, body);
-            }
+			protected override BodyWriter OnCreateBufferedCopy (int maxBufferSize)
+			{
+				return new XmlBodyWriter (serializer, body);
+			}
 
-            protected override void OnWriteBodyContents (XmlDictionaryWriter writer)
-            {
-                if (writer.WriteState == WriteState.Element) {
-                    writer.WriteXmlnsAttribute ("xsi", XmlSchema.InstanceNamespace);
-                    writer.WriteXmlnsAttribute ("xsd", XmlSchema.Namespace);
-                }
+			protected override void OnWriteBodyContents (XmlDictionaryWriter writer)
+			{
+				if (writer.WriteState == WriteState.Element) {
+					writer.WriteXmlnsAttribute ("xsi", XmlSchema.InstanceNamespace);
+					writer.WriteXmlnsAttribute ("xsd", XmlSchema.Namespace);
+				}
 
-                serializer.Serialize (writer, body);
-            }
-        }
-    }
+				serializer.Serialize (writer, body);
+			}
+		}
+	}
 }

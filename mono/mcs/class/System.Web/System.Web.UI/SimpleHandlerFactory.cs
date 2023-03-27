@@ -2,7 +2,7 @@
 // System.Web.UI.SimpleHandlerFactory
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002-2010 Ximian, Inc (http://www.ximian.com)
 //
@@ -33,19 +33,19 @@ using System.Web.Compilation;
 
 namespace System.Web.UI
 {
-    class SimpleHandlerFactory : IHttpHandlerFactory
-    {
-        public virtual IHttpHandler GetHandler (HttpContext context,
-                            string requestType,
-                            string virtualPath,
-                            string path)
-        {
-            return BuildManager.CreateInstanceFromVirtualPath (virtualPath, typeof (IHttpHandler)) as IHttpHandler;
-        }
+	class SimpleHandlerFactory : IHttpHandlerFactory
+	{
+		public virtual IHttpHandler GetHandler (HttpContext context,
+							string requestType,
+							string virtualPath,
+							string path)
+		{
+			return BuildManager.CreateInstanceFromVirtualPath (virtualPath, typeof (IHttpHandler)) as IHttpHandler;
+		}
 
-        public virtual void ReleaseHandler (IHttpHandler handler)
-        {
-        }
-    }
+		public virtual void ReleaseHandler (IHttpHandler handler)
+		{
+		}
+	}
 }
 

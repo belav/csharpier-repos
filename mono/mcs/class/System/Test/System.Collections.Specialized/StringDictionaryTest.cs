@@ -1,9 +1,9 @@
 //
 // OrderedDictionaryTest.cs -
-//    Unit tests for System.Collections.Specialized.OrderedDictionary
+//	Unit tests for System.Collections.Specialized.OrderedDictionary
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,87 +36,87 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Specialized {
 
-    [TestFixture]
+	[TestFixture]
         public class StringDictionaryTest {
 
-        [Test]
-        public void Empty ()
-        {
-            StringDictionary sd = new StringDictionary ();
-            Assert.AreEqual (0, sd.Count, "Count");
-            Assert.IsFalse (sd.IsSynchronized, "IsSynchronized");
-            Assert.AreEqual (0, sd.Keys.Count, "Keys");
-            Assert.AreEqual (0, sd.Values.Count, "Values");
-            Assert.IsNotNull (sd.SyncRoot, "SyncRoot");
-            Assert.IsFalse (sd.ContainsKey ("a"), "ContainsKey");
-            Assert.IsFalse (sd.ContainsValue ("1"), "ContainsValue");
-            sd.CopyTo (new DictionaryEntry[0], 0);
-            Assert.IsNotNull (sd.GetEnumerator (), "GetEnumerator");
-            sd.Remove ("a"); // doesn't exists
-            sd.Clear ();
-        }
+		[Test]
+		public void Empty ()
+		{
+			StringDictionary sd = new StringDictionary ();
+			Assert.AreEqual (0, sd.Count, "Count");
+			Assert.IsFalse (sd.IsSynchronized, "IsSynchronized");
+			Assert.AreEqual (0, sd.Keys.Count, "Keys");
+			Assert.AreEqual (0, sd.Values.Count, "Values");
+			Assert.IsNotNull (sd.SyncRoot, "SyncRoot");
+			Assert.IsFalse (sd.ContainsKey ("a"), "ContainsKey");
+			Assert.IsFalse (sd.ContainsValue ("1"), "ContainsValue");
+			sd.CopyTo (new DictionaryEntry[0], 0);
+			Assert.IsNotNull (sd.GetEnumerator (), "GetEnumerator");
+			sd.Remove ("a"); // doesn't exists
+			sd.Clear ();
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void This_Null ()
-        {
-            StringDictionary sd = new StringDictionary ();
-            sd[null] = "1";
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void This_Null ()
+		{
+			StringDictionary sd = new StringDictionary ();
+			sd[null] = "1";
+		}
 
-        [Test]
-        public void This_Empty ()
-        {
-            StringDictionary sd = new StringDictionary ();
-            sd[String.Empty] = null;
-            Assert.IsNull (sd[String.Empty], "this[String.Empty]");
-            Assert.AreEqual (1, sd.Count, "Count-1");
-            Assert.IsTrue (sd.ContainsKey (String.Empty), "ContainsKey");
-            Assert.IsTrue (sd.ContainsValue (null), "ContainsValue");
-        }
+		[Test]
+		public void This_Empty ()
+		{
+			StringDictionary sd = new StringDictionary ();
+			sd[String.Empty] = null;
+			Assert.IsNull (sd[String.Empty], "this[String.Empty]");
+			Assert.AreEqual (1, sd.Count, "Count-1");
+			Assert.IsTrue (sd.ContainsKey (String.Empty), "ContainsKey");
+			Assert.IsTrue (sd.ContainsValue (null), "ContainsValue");
+		}
 
-        [Test]
-        public void SomeElements ()
-        {
-            StringDictionary sd = new StringDictionary ();
-            for (int i = 0; i < 10; i++)
-                sd.Add (i.ToString (), (i * 10).ToString ());
-            Assert.AreEqual ("10", sd["1"], "this[1]");
-            Assert.AreEqual (10, sd.Count, "Count-10");
-            Assert.AreEqual (10, sd.Keys.Count, "Keys");
-            Assert.AreEqual (10, sd.Values.Count, "Values");
-            Assert.IsTrue (sd.ContainsKey ("2"), "ContainsKey");
-            Assert.IsTrue (sd.ContainsValue ("20"), "ContainsValue");
-            DictionaryEntry[] array = new DictionaryEntry[10];
-            sd.CopyTo (array, 0);
-            sd.Remove ("1");
-            Assert.AreEqual (9, sd.Count, "Count-9");
-            sd.Clear ();
-            Assert.AreEqual (0, sd.Count, "Count-0");
-        }
+		[Test]
+		public void SomeElements ()
+		{
+			StringDictionary sd = new StringDictionary ();
+			for (int i = 0; i < 10; i++)
+				sd.Add (i.ToString (), (i * 10).ToString ());
+			Assert.AreEqual ("10", sd["1"], "this[1]");
+			Assert.AreEqual (10, sd.Count, "Count-10");
+			Assert.AreEqual (10, sd.Keys.Count, "Keys");
+			Assert.AreEqual (10, sd.Values.Count, "Values");
+			Assert.IsTrue (sd.ContainsKey ("2"), "ContainsKey");
+			Assert.IsTrue (sd.ContainsValue ("20"), "ContainsValue");
+			DictionaryEntry[] array = new DictionaryEntry[10];
+			sd.CopyTo (array, 0);
+			sd.Remove ("1");
+			Assert.AreEqual (9, sd.Count, "Count-9");
+			sd.Clear ();
+			Assert.AreEqual (0, sd.Count, "Count-0");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Add_NullKey ()
-        {
-            StringDictionary sd = new StringDictionary ();
-            sd.Add (null, "a");
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void Add_NullKey ()
+		{
+			StringDictionary sd = new StringDictionary ();
+			sd.Add (null, "a");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ContainsKey_Null ()
-        {
-            StringDictionary sd = new StringDictionary ();
-            sd.ContainsKey (null);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void ContainsKey_Null ()
+		{
+			StringDictionary sd = new StringDictionary ();
+			sd.ContainsKey (null);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Remove_Null ()
-        {
-            StringDictionary sd = new StringDictionary ();
-            sd.Remove (null);
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void Remove_Null ()
+		{
+			StringDictionary sd = new StringDictionary ();
+			sd.Remove (null);
+		}
+	}
 }

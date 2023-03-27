@@ -20,26 +20,26 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    public class DataGridViewCellErrorTextNeededEventArgs : DataGridViewCellEventArgs {
+	public class DataGridViewCellErrorTextNeededEventArgs : DataGridViewCellEventArgs {
 
-        private string errorText;
+		private string errorText;
 
-        internal DataGridViewCellErrorTextNeededEventArgs (string errorText, int rowIndex, int columnIndex) : base (columnIndex, rowIndex) {
-            this.errorText = errorText;
-        }
+		internal DataGridViewCellErrorTextNeededEventArgs (string errorText, int rowIndex, int columnIndex) : base (columnIndex, rowIndex) {
+			this.errorText = errorText;
+		}
 
-        public string ErrorText {
-            get { return errorText; }
-            set { errorText = value; }
-        }
+		public string ErrorText {
+			get { return errorText; }
+			set { errorText = value; }
+		}
 
-    }
+	}
 
 }
 

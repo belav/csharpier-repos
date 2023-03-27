@@ -2,7 +2,7 @@
 // MethodRentalCas.cs - CAS unit tests for System.Reflection.Emit.MethodRental
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,23 +35,23 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.Reflection.Emit {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class MethodRentalCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class MethodRentalCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void SwapMethodBody ()
-        {
-            MethodRental.SwapMethodBody (typeof (object), 0, IntPtr.Zero, 0, 0);
-        }
-    }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void SwapMethodBody ()
+		{
+			MethodRental.SwapMethodBody (typeof (object), 0, IntPtr.Zero, 0, 0);
+		}
+	}
 }

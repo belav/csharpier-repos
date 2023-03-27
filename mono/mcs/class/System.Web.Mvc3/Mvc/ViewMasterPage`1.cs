@@ -1,4 +1,4 @@
-namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc {
 
     public class ViewMasterPage<TModel> : ViewMasterPage {
         private AjaxHelper<TModel> _ajaxHelper;

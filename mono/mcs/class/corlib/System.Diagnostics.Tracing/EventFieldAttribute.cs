@@ -2,7 +2,7 @@
 // EventFieldAttribute.cs
 //
 // Authors:
-//    Alexander Köplinger <alexander.koeplinger@xamarin.com>
+//	Alexander Köplinger <alexander.koeplinger@xamarin.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,33 +30,33 @@ using System;
 
 namespace System.Diagnostics.Tracing
 {
-    [AttributeUsage(AttributeTargets.Property)]
-    public class EventFieldAttribute : Attribute
-    {
-        [MonoTODO]
-        public EventFieldFormat Format
-        {
-            get
-            {
-                throw new NotImplementedException ();
-            }
-            set
-            {
-                throw new NotImplementedException ();
-            }
-        }
+	[AttributeUsage(AttributeTargets.Property)]
+	public class EventFieldAttribute : Attribute
+	{
+		[MonoTODO]
+		public EventFieldFormat Format
+		{
+			get
+			{
+				throw new NotImplementedException ();
+			}
+			set
+			{
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoTODO]
-        public EventFieldTags Tags
-        {
-            get
-            {
-                throw new NotImplementedException ();
-            }
-            set
-            {
-                throw new NotImplementedException ();
-            }
-        }
-    }
+		[MonoTODO]
+		public EventFieldTags Tags
+		{
+			get
+			{
+				throw new NotImplementedException ();
+			}
+			set
+			{
+				throw new NotImplementedException ();
+			}
+		}
+	}
 }

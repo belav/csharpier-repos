@@ -2,7 +2,7 @@
 // BinaryKeyIdentifierClause.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,55 +32,55 @@ using System.IdentityModel.Policy;
 
 namespace System.IdentityModel.Tokens
 {
-    public abstract class BinaryKeyIdentifierClause : SecurityKeyIdentifierClause
-    {
-        protected BinaryKeyIdentifierClause (string clauseType, byte [] identificationData, bool cloneBuffer)
-            : this (clauseType, identificationData, cloneBuffer, null, 0)
-        {
-        }
+	public abstract class BinaryKeyIdentifierClause : SecurityKeyIdentifierClause
+	{
+		protected BinaryKeyIdentifierClause (string clauseType, byte [] identificationData, bool cloneBuffer)
+			: this (clauseType, identificationData, cloneBuffer, null, 0)
+		{
+		}
 
-        protected BinaryKeyIdentifierClause (string clauseType, byte [] identificationData, bool cloneBuffer, byte [] derivationNonce, int derivationLength)
-            : base (clauseType, derivationNonce, derivationLength)
-        {
-            this.data = cloneBuffer ?
-                (byte []) identificationData.Clone () :
-                identificationData;
-        }
+		protected BinaryKeyIdentifierClause (string clauseType, byte [] identificationData, bool cloneBuffer, byte [] derivationNonce, int derivationLength)
+			: base (clauseType, derivationNonce, derivationLength)
+		{
+			this.data = cloneBuffer ?
+				(byte []) identificationData.Clone () :
+				identificationData;
+		}
 
-        byte [] data;
+		byte [] data;
 
-        public byte [] GetBuffer ()
-        {
-            return (byte []) GetRawBuffer ().Clone ();
-        }
+		public byte [] GetBuffer ()
+		{
+			return (byte []) GetRawBuffer ().Clone ();
+		}
 
-        public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
-        {
-            BinaryKeyIdentifierClause other =
-                keyIdentifierClause as BinaryKeyIdentifierClause;
-            if (other == null)
-                return false;
-            return Matches (other.GetRawBuffer ());
-        }
+		public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
+		{
+			BinaryKeyIdentifierClause other =
+				keyIdentifierClause as BinaryKeyIdentifierClause;
+			if (other == null)
+				return false;
+			return Matches (other.GetRawBuffer ());
+		}
 
-        public bool Matches (byte [] data)
-        {
-            return Matches (data, 0);
-        }
+		public bool Matches (byte [] data)
+		{
+			return Matches (data, 0);
+		}
 
-        public bool Matches (byte [] data, int offset)
-        {
-            if (data.Length + offset != this.data.Length)
-                return false;
-            for (int i = 0; i < this.data.Length; i++)
-                if (data [i + offset] != this.data [i])
-                    return false;
-            return true;
-        }
+		public bool Matches (byte [] data, int offset)
+		{
+			if (data.Length + offset != this.data.Length)
+				return false;
+			for (int i = 0; i < this.data.Length; i++)
+				if (data [i + offset] != this.data [i])
+					return false;
+			return true;
+		}
 
-        protected byte [] GetRawBuffer ()
-        {
-            return data;
-        }
-    }
+		protected byte [] GetRawBuffer ()
+		{
+			return data;
+		}
+	}
 }

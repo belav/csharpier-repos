@@ -2,7 +2,7 @@
 // ValueCodeVisitor.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,7 +30,7 @@ using Mono.CodeContracts.Static.Analysis;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.AST.Visitors {
-    class ValueCodeVisitor<Variable> : 
-        CodeVisitor<Variable, Variable, IValueContextProvider<Variable>, IImmutableMap<Variable, Sequence<Variable>>> {
-    }
+	class ValueCodeVisitor<Variable> : 
+		CodeVisitor<Variable, Variable, IValueContextProvider<Variable>, IImmutableMap<Variable, Sequence<Variable>>> {
+	}
 }

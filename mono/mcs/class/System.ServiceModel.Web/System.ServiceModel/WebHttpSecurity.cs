@@ -2,7 +2,7 @@
 // WebHttpSecurity.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -29,36 +29,36 @@ using System.ComponentModel;
 
 namespace System.ServiceModel
 {
-    public sealed class WebHttpSecurity
-    {
-        public WebHttpSecurity ()
-        {
-            // there is no public constructor for transport ...
+	public sealed class WebHttpSecurity
+	{
+		public WebHttpSecurity ()
+		{
+			// there is no public constructor for transport ...
 #if !MOBILE
-            Transport = new BasicHttpBinding ().Security.Transport;
+			Transport = new BasicHttpBinding ().Security.Transport;
 #endif
-        }
+		}
 
-        WebHttpSecurityMode mode;
+		WebHttpSecurityMode mode;
 
-        public WebHttpSecurityMode Mode {
-            get { return mode; }
-            set { mode = value; }
-        }
+		public WebHttpSecurityMode Mode {
+			get { return mode; }
+			set { mode = value; }
+		}
 
-        public HttpTransportSecurity Transport { get; set; }
+		public HttpTransportSecurity Transport { get; set; }
 
 
-        [EditorBrowsable (EditorBrowsableState.Advanced)]
-        public bool ShouldSerializeMode ()
-        {
-            return false;
-        }
+		[EditorBrowsable (EditorBrowsableState.Advanced)]
+		public bool ShouldSerializeMode ()
+		{
+			return false;
+		}
 
-        [EditorBrowsable (EditorBrowsableState.Advanced)]
-        public bool ShouldSerializeTransport ()
-        {
-            return false;
-        }
-    }
+		[EditorBrowsable (EditorBrowsableState.Advanced)]
+		public bool ShouldSerializeTransport ()
+		{
+			return false;
+		}
+	}
 }

@@ -2,9 +2,9 @@
 // Line: 5
 
 struct X {
-    protected int A;
+	protected int A;
 
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

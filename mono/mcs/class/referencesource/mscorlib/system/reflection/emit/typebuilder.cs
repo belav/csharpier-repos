@@ -179,13 +179,13 @@ namespace System.Reflection.Emit {
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         private static extern void SetParentType(RuntimeModule module, int tdTypeDef, int tkParent);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         private static extern void AddInterfaceImpl(RuntimeModule module, int tdTypeDef, int tkInterface);
         #endregion
 
@@ -193,27 +193,27 @@ namespace System.Reflection.Emit {
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern int DefineMethod(RuntimeModule module, int tkParent, String name, byte[] signature, int sigLength, 
             MethodAttributes attributes);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern int DefineMethodSpec(RuntimeModule module, int tkParent, byte[] signature, int sigLength);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern int DefineField(RuntimeModule module, int tkParent, String name, byte[] signature, int sigLength, 
             FieldAttributes attributes);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         private static extern void SetMethodIL(RuntimeModule module, int tk, bool isInitLocals,  
             byte[] body, int bodyLength,
             byte[] LocalSig, int sigLength, 
@@ -224,7 +224,7 @@ namespace System.Reflection.Emit {
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         private static extern void DefineCustomAttribute(RuntimeModule module, int tkAssociate, int tkConstructor, 
             byte[] attr, int attrLength, bool toDisk, bool updateCompilerFlags);
 
@@ -247,83 +247,83 @@ namespace System.Reflection.Emit {
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern void SetPInvokeData(RuntimeModule module, String DllName, String name, int token, int linkFlags);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern int DefineProperty(RuntimeModule module, int tkParent, String name, PropertyAttributes attributes,
             byte[] signature, int sigLength);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern int DefineEvent(RuntimeModule module, int tkParent, String name, EventAttributes attributes, int tkEventType);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern void DefineMethodSemantics(RuntimeModule module, int tkAssociation, 
             MethodSemanticsAttributes semantics, int tkMethod);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern void DefineMethodImpl(RuntimeModule module, int tkType, int tkBody, int tkDecl);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern void SetMethodImpl(RuntimeModule module, int tkMethod, MethodImplAttributes MethodImplAttributes);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern int SetParamInfo(RuntimeModule module, int tkMethod, int iSequence, 
             ParameterAttributes iParamAttributes, String strParamName);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern int GetTokenFromSig(RuntimeModule module, byte[] signature, int sigLength);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern void SetFieldLayoutOffset(RuntimeModule module, int fdToken, int iOffset);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern void SetClassLayout(RuntimeModule module, int tk, PackingSize iPackingSize, int iTypeSize);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern void SetFieldMarshal(RuntimeModule module, int tk, byte[] ubMarshal, int ubSize);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         private static extern unsafe void SetConstantValue(RuntimeModule module, int tk, int corType, void* pValue);
 
 #if FEATURE_CAS_POLICY
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         internal static extern void AddDeclarativeSecurity(RuntimeModule module, int parent, SecurityAction action, byte[] blob, int cb);
 #endif
         #endregion
@@ -941,21 +941,21 @@ namespace System.Reflection.Emit {
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         private extern static int DefineType(RuntimeModule module,
             String fullname, int tkParent, TypeAttributes attributes, int tkEnclosingType, int[] interfaceTokens);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         private extern static int DefineGenericParam(RuntimeModule module,
             String name, int tkParent, GenericParameterAttributes attributes, int position, int[] constraints);
 
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         private static extern void TermCreateClass(RuntimeModule module, int tk, ObjectHandleOnStack type);
         #endregion
 
@@ -1592,19 +1592,19 @@ namespace System.Reflection.Emit {
             return m_inst;
         }
 
-        
-        public override Type MakeGenericType(params Type[] typeArguments)
-        {
+		
+		public override Type MakeGenericType(params Type[] typeArguments)
+		{
             CheckContext(typeArguments);
         
             return TypeBuilderInstantiation.MakeGenericType(this, typeArguments); 
         }
-        
+		
         public override Type[] GetGenericArguments() { return m_inst; }
         // If a TypeBuilder is generic, it must be a generic type definition
         // All instantiated generic types are TypeBuilderInstantiation.
         public override bool IsGenericTypeDefinition { get { return IsGenericType; } }
-           public override bool IsGenericType { get { return m_inst != null; } }
+       	public override bool IsGenericType { get { return m_inst != null; } }
         public override bool IsGenericParameter { get { return m_bIsGenParam; } }
         public override bool IsConstructedGenericType { get { return false; } }
 

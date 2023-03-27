@@ -1,9 +1,9 @@
 //
 // RepeaterCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.Repeater
+//	- CAS unit tests for System.Web.UI.WebControls.Repeater
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,21 +39,21 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class RepeaterCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class RepeaterCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            RepeaterTest unit = new RepeaterTest ();
-            unit.Repeater_DefaultsSelectArguments ();
-        }
-        // LinkDemand
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			RepeaterTest unit = new RepeaterTest ();
+			unit.Repeater_DefaultsSelectArguments ();
+		}
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (Repeater); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (Repeater); }
+		}
+	}
 }

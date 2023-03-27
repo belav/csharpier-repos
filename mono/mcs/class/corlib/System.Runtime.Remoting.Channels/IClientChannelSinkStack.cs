@@ -31,11 +31,11 @@
 
 namespace System.Runtime.Remoting.Channels {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IClientChannelSinkStack : IClientResponseChannelSinkStack
-    {
-        object Pop (IClientChannelSink sink);
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IClientChannelSinkStack : IClientResponseChannelSinkStack
+	{
+		object Pop (IClientChannelSink sink);
 
-        void Push (IClientChannelSink sink, object state);
-    }
+		void Push (IClientChannelSink sink, object state);
+	}
 }

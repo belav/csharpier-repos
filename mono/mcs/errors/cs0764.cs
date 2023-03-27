@@ -4,9 +4,9 @@
 
 public partial class C
 {
-    unsafe partial void Foo ()
-    {
-    }
-    
-    partial void Foo ();
+	unsafe partial void Foo ()
+	{
+	}
+	
+	partial void Foo ();
 }

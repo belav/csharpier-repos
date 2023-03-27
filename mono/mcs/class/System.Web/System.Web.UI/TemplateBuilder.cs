@@ -2,7 +2,7 @@
 // System.Web.UI.TemplateBuilder
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc. (http://www.ximian.com)
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
@@ -35,107 +35,107 @@ using System.Security.Permissions;
 
 namespace System.Web.UI {
 
-    // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class TemplateBuilder : ControlBuilder, ITemplate {
+	// CAS
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class TemplateBuilder : ControlBuilder, ITemplate {
 
-        string text;
-        TemplateContainerAttribute containerAttribute;
-        TemplateInstanceAttribute instanceAttribute;
-        List <TemplateBinding> bindings;
+		string text;
+		TemplateContainerAttribute containerAttribute;
+		TemplateInstanceAttribute instanceAttribute;
+		List <TemplateBinding> bindings;
 
-        public TemplateBuilder ()
-        {
-        }
+		public TemplateBuilder ()
+		{
+		}
 
-        internal TemplateBuilder (ICustomAttributeProvider prov)
-        {
-            object[] ats = prov.GetCustomAttributes (typeof (TemplateContainerAttribute), true);
-            if (ats.Length > 0)
-                containerAttribute = (TemplateContainerAttribute) ats [0];
+		internal TemplateBuilder (ICustomAttributeProvider prov)
+		{
+			object[] ats = prov.GetCustomAttributes (typeof (TemplateContainerAttribute), true);
+			if (ats.Length > 0)
+				containerAttribute = (TemplateContainerAttribute) ats [0];
 
-            ats = prov.GetCustomAttributes (typeof (TemplateInstanceAttribute), true);
-            if (ats.Length > 0)
-                instanceAttribute = (TemplateInstanceAttribute) ats [0];
-        }
+			ats = prov.GetCustomAttributes (typeof (TemplateInstanceAttribute), true);
+			if (ats.Length > 0)
+				instanceAttribute = (TemplateInstanceAttribute) ats [0];
+		}
 
-        public virtual string Text {
-            get { return text; }
-            set { text = value; }
-        }
-        
-        internal Type ContainerType {
-            get { return containerAttribute != null ? containerAttribute.ContainerType : null; }
-        }
-        
-        internal TemplateInstance? TemplateInstance {
-            get { return instanceAttribute != null ? instanceAttribute.Instances : (TemplateInstance?)null; }
-        }
-                    
-        internal BindingDirection BindingDirection {
-            get { return containerAttribute != null ? containerAttribute.BindingDirection : BindingDirection.TwoWay; }
-        }
-        
-        internal void RegisterBoundProperty (Type controlType, string controlProperty, string controlId, string fieldName)
-        {
-            if (bindings == null)
-                bindings = new List <TemplateBinding> ();
-            bindings.Add (new TemplateBinding (controlType, controlProperty, controlId, fieldName));
-        }
-        
-        internal ICollection Bindings {
-            get { return bindings; }
-        }
+		public virtual string Text {
+			get { return text; }
+			set { text = value; }
+		}
+		
+		internal Type ContainerType {
+			get { return containerAttribute != null ? containerAttribute.ContainerType : null; }
+		}
+		
+		internal TemplateInstance? TemplateInstance {
+			get { return instanceAttribute != null ? instanceAttribute.Instances : (TemplateInstance?)null; }
+		}
+					
+		internal BindingDirection BindingDirection {
+			get { return containerAttribute != null ? containerAttribute.BindingDirection : BindingDirection.TwoWay; }
+		}
+		
+		internal void RegisterBoundProperty (Type controlType, string controlProperty, string controlId, string fieldName)
+		{
+			if (bindings == null)
+				bindings = new List <TemplateBinding> ();
+			bindings.Add (new TemplateBinding (controlType, controlProperty, controlId, fieldName));
+		}
+		
+		internal ICollection Bindings {
+			get { return bindings; }
+		}
 
-        public override object BuildObject ()
-        {
-            return base.BuildObject ();
-        }
+		public override object BuildObject ()
+		{
+			return base.BuildObject ();
+		}
 
-        public override void Init (TemplateParser parser,
-                      ControlBuilder parentBuilder,
-                      Type type,
-                      string tagName,
-                      string ID,
-                      IDictionary attribs)
-        {
-            // enough?
-            if (parser != null)
-                FileName = parser.InputFile;
-            base.Init (parser, parentBuilder, type, tagName, ID, attribs);
-        }
-        
-        public virtual void InstantiateIn (Control container)
-        {
-            CreateChildren (container);
-        }
+		public override void Init (TemplateParser parser,
+					  ControlBuilder parentBuilder,
+					  Type type,
+					  string tagName,
+					  string ID,
+					  IDictionary attribs)
+		{
+			// enough?
+			if (parser != null)
+				FileName = parser.InputFile;
+			base.Init (parser, parentBuilder, type, tagName, ID, attribs);
+		}
+		
+		public virtual void InstantiateIn (Control container)
+		{
+			CreateChildren (container);
+		}
 
-        public override bool NeedsTagInnerText ()
-        {
-            return false;
-        }
+		public override bool NeedsTagInnerText ()
+		{
+			return false;
+		}
 
-        public override void SetTagInnerText (string text)
-        {
-            this.text = text;
-        }
-    }
-    
-    internal class TemplateBinding
-    {
-        public Type ControlType;
-        public string ControlProperty;
-        public string ControlId;
-        public string FieldName;
-        
-        public TemplateBinding (Type controlType, string controlProperty, string controlId, string fieldName)
-        {
-            ControlType = controlType;
-            ControlProperty = controlProperty;
-            ControlId = controlId;
-            FieldName = fieldName;
-        }
-    }
+		public override void SetTagInnerText (string text)
+		{
+			this.text = text;
+		}
+	}
+	
+	internal class TemplateBinding
+	{
+		public Type ControlType;
+		public string ControlProperty;
+		public string ControlId;
+		public string FieldName;
+		
+		public TemplateBinding (Type controlType, string controlProperty, string controlId, string fieldName)
+		{
+			ControlType = controlType;
+			ControlProperty = controlProperty;
+			ControlId = controlId;
+			FieldName = fieldName;
+		}
+	}
 }
 

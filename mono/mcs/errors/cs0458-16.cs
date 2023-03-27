@@ -4,9 +4,9 @@
 
 public class C
 {
-    public static void Main ()
-    {
-        int? s = null;
-        int? v = s + null;
-    }
+	public static void Main ()
+	{
+		int? s = null;
+		int? v = s + null;
+	}
 }

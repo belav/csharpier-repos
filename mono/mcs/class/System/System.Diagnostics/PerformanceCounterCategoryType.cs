@@ -28,11 +28,11 @@
 
 namespace System.Diagnostics 
 {
-    public enum PerformanceCounterCategoryType
-    {
-        SingleInstance,
-        MultiInstance,
-        Unknown = -1,
-    }
+	public enum PerformanceCounterCategoryType
+	{
+		SingleInstance,
+		MultiInstance,
+		Unknown = -1,
+	}
 }
 

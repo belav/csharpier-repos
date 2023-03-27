@@ -2,7 +2,7 @@
 // System.Web.Compilation.WsdlBuildProvider
 //
 // Authors:
-//    Marek Habersack <mhabersack@novell.com>
+//	Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2007-2009 Novell, Inc
 //
@@ -39,30 +39,30 @@ using System.Reflection;
 using System.Web;
 
 namespace System.Web.Compilation {
-    [BuildProviderAppliesTo (BuildProviderAppliesTo.Code)]
-    sealed class XsdBuildProvider : BuildProvider {
-        public XsdBuildProvider()
-        {
-        }
+	[BuildProviderAppliesTo (BuildProviderAppliesTo.Code)]
+	sealed class XsdBuildProvider : BuildProvider {
+		public XsdBuildProvider()
+		{
+		}
 
-        public override void GenerateCode (AssemblyBuilder assemblyBuilder)
-        {
-            CodeCompileUnit unit = new CodeCompileUnit ();
-            CodeNamespace dataSetCode = new CodeNamespace(null);
-            unit.Namespaces.Add (dataSetCode);
-            
-            string path = HttpContext.Current.Request.MapPath (VirtualPath);
-            TextReader tr = new StreamReader (path);
-            
-            CodeDomProvider provider = assemblyBuilder.CodeDomProvider;
-            if (provider == null)
-                throw new HttpException ("Assembly builder has no code provider");
+		public override void GenerateCode (AssemblyBuilder assemblyBuilder)
+		{
+			CodeCompileUnit unit = new CodeCompileUnit ();
+			CodeNamespace dataSetCode = new CodeNamespace(null);
+			unit.Namespaces.Add (dataSetCode);
+			
+			string path = HttpContext.Current.Request.MapPath (VirtualPath);
+			TextReader tr = new StreamReader (path);
+			
+			CodeDomProvider provider = assemblyBuilder.CodeDomProvider;
+			if (provider == null)
+				throw new HttpException ("Assembly builder has no code provider");
 
-            System.Data.Design.TypedDataSetGenerator.Generate (tr.ReadToEnd (), unit, dataSetCode, provider);
+			System.Data.Design.TypedDataSetGenerator.Generate (tr.ReadToEnd (), unit, dataSetCode, provider);
 
-            assemblyBuilder.AddCodeCompileUnit (unit);
-        }
-    }
+			assemblyBuilder.AddCodeCompileUnit (unit);
+		}
+	}
 }
 
 

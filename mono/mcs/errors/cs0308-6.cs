@@ -3,9 +3,9 @@
 
 class BaseGeneric<T>
 {
-    public class InnerDerived
-    {
-    }
+	public class InnerDerived
+	{
+	}
 }
 
 class BaseConcrete : BaseGeneric<string>

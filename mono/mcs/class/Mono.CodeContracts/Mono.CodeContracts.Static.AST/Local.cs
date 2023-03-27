@@ -2,7 +2,7 @@
 // Local.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,37 +29,37 @@
 using Mono.Cecil.Cil;
 
 namespace Mono.CodeContracts.Static.AST {
-    class Local : Variable {
-        public Local (VariableDefinition definition)
-            : base (NodeType.Local)
-        {
-            Definition = definition;
-            this.type = TypeNode.Create (definition.VariableType);
-        }
+	class Local : Variable {
+		public Local (VariableDefinition definition)
+			: base (NodeType.Local)
+		{
+			Definition = definition;
+			this.type = TypeNode.Create (definition.VariableType);
+		}
 
-        public VariableDefinition Definition { get; private set; }
+		public VariableDefinition Definition { get; private set; }
 
-        public string Name
-        {
-            get { return ToString (); }
-        }
+		public string Name
+		{
+			get { return ToString (); }
+		}
 
-        public override string ToString ()
-        {
-            return string.Format ("Local({0})", Definition);
-        }
+		public override string ToString ()
+		{
+			return string.Format ("Local({0})", Definition);
+		}
 
-        public override bool Equals (object obj)
-        {
-            var other = obj as Local;
-            if (other != null)
-                return other.Definition == Definition;
-            return false;
-        }
+		public override bool Equals (object obj)
+		{
+			var other = obj as Local;
+			if (other != null)
+				return other.Definition == Definition;
+			return false;
+		}
 
-        public override int GetHashCode ()
-        {
-            return Definition.GetHashCode ();
-        }
-    }
+		public override int GetHashCode ()
+		{
+			return Definition.GetHashCode ();
+		}
+	}
 }

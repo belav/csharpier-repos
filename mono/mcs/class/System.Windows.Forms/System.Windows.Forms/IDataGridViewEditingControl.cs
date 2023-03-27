@@ -20,34 +20,34 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    public interface IDataGridViewEditingControl {
+	public interface IDataGridViewEditingControl {
 
-        DataGridView EditingControlDataGridView {get; set;}
+		DataGridView EditingControlDataGridView {get; set;}
 
-        object EditingControlFormattedValue {get; set;}
+		object EditingControlFormattedValue {get; set;}
 
-        int EditingControlRowIndex {get; set;}
+		int EditingControlRowIndex {get; set;}
 
-        bool EditingControlValueChanged {get; set;}
+		bool EditingControlValueChanged {get; set;}
 
-        Cursor EditingPanelCursor {get;}
+		Cursor EditingPanelCursor {get;}
 
-        bool RepositionEditingControlOnValueChange {get;}
+		bool RepositionEditingControlOnValueChange {get;}
 
-        void ApplyCellStyleToEditingControl (DataGridViewCellStyle dataGridViewCellStyle);
+		void ApplyCellStyleToEditingControl (DataGridViewCellStyle dataGridViewCellStyle);
 
-        bool EditingControlWantsInputKey (Keys keyData, bool dataGridViewWantsInputKey);
+		bool EditingControlWantsInputKey (Keys keyData, bool dataGridViewWantsInputKey);
 
-        object GetEditingControlFormattedValue (DataGridViewDataErrorContexts context);
+		object GetEditingControlFormattedValue (DataGridViewDataErrorContexts context);
 
-        void PrepareEditingControlForEdit (bool selectAll);
+		void PrepareEditingControlForEdit (bool selectAll);
 
-    }
+	}
 
 }

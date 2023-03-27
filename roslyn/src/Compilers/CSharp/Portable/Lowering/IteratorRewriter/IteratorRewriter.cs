@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -209,7 +209,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var IEnumeratorOfElementType = F.SpecialType(SpecialType.System_Collections_Generic_IEnumerator_T).Construct(ImmutableArray.Create(_elementType));
             var IEnumeratorOfElementType_get_Current = F.SpecialProperty(SpecialMember.System_Collections_Generic_IEnumerator_T__Current).GetMethod.AsMember(IEnumeratorOfElementType);
 
-            // Add bool IEnumerator.MoveNext() and void IDisposable.Dispose()
+            // Add boolÂ IEnumerator.MoveNext() and voidÂ IDisposable.Dispose()
             {
                 var disposeMethod = OpenMethodImplementation(
                     IDisposable_Dispose,
@@ -220,19 +220,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 GenerateMoveNextAndDispose(moveNextMethod, disposeMethod);
             }
 
-            // Add T IEnumerator<T>.Current
+            // Add TÂ IEnumerator<T>.Current
             {
                 OpenPropertyImplementation(IEnumeratorOfElementType_get_Current);
                 F.CloseMethod(F.Return(F.Field(F.This(), _currentField)));
             }
 
-            // Add void IEnumerator.Reset()
+            // Add voidÂ IEnumerator.Reset()
             {
                 OpenMethodImplementation(IEnumerator_Reset, hasMethodBodyDependency: false);
                 F.CloseMethod(F.Throw(F.New(F.WellKnownType(WellKnownType.System_NotSupportedException))));
             }
 
-            // Add object IEnumerator.Current
+            // Add objectÂ IEnumerator.Current
             {
                 OpenPropertyImplementation(IEnumerator_get_Current);
                 F.CloseMethod(F.Return(F.Field(F.This(), _currentField)));

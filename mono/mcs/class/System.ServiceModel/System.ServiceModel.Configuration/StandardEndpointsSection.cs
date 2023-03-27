@@ -2,7 +2,7 @@
 // BindingsSection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,71 +54,71 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class StandardEndpointsSection : ConfigurationSection
-    {
-        ConfigurationPropertyCollection _properties;
+	public sealed class StandardEndpointsSection : ConfigurationSection
+	{
+		ConfigurationPropertyCollection _properties;
 
-        // Properties
+		// Properties
 
-        List<EndpointCollectionElement> endpoint_collections;
+		List<EndpointCollectionElement> endpoint_collections;
 
-        public List<EndpointCollectionElement> EndpointCollections {
-            get {
-                if (endpoint_collections != null)
-                    return endpoint_collections;
-                var list = new List<EndpointCollectionElement> ();
-                foreach (ConfigurationProperty cp in Properties)
-                    list.Add ((EndpointCollectionElement) this [cp]);
-                endpoint_collections = list;
-                return list;
-            }
-        }
+		public List<EndpointCollectionElement> EndpointCollections {
+			get {
+				if (endpoint_collections != null)
+					return endpoint_collections;
+				var list = new List<EndpointCollectionElement> ();
+				foreach (ConfigurationProperty cp in Properties)
+					list.Add ((EndpointCollectionElement) this [cp]);
+				endpoint_collections = list;
+				return list;
+			}
+		}
 
 
-        [ConfigurationProperty ("mexEndpoint", Options = ConfigurationPropertyOptions.None)]
-        public ServiceMetadataEndpointCollectionElement MexEndpoint {
-            get { return (ServiceMetadataEndpointCollectionElement) this ["mexEndpoint"]; }
-        }
+		[ConfigurationProperty ("mexEndpoint", Options = ConfigurationPropertyOptions.None)]
+		public ServiceMetadataEndpointCollectionElement MexEndpoint {
+			get { return (ServiceMetadataEndpointCollectionElement) this ["mexEndpoint"]; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = new ConfigurationPropertyCollection ();
-                    ExtensionElementCollection extensions = ((ExtensionsSection) EvaluationContext.GetSection ("system.serviceModel/extensions")).EndpointExtensions;
-                    for (int i = 0; i < extensions.Count; i++) {
-                        ExtensionElement extension = extensions [i];
-                        _properties.Add (new ConfigurationProperty (extension.Name, Type.GetType (extension.Type), null, null, null, ConfigurationPropertyOptions.None));
-                    }
-                }
-                return _properties;
-            }
-        }
-        
-        internal ConfigurationPropertyCollection PropertiesInternal {
-            get {
-                return Properties;
-            }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get {
+				if (_properties == null) {
+					_properties = new ConfigurationPropertyCollection ();
+					ExtensionElementCollection extensions = ((ExtensionsSection) EvaluationContext.GetSection ("system.serviceModel/extensions")).EndpointExtensions;
+					for (int i = 0; i < extensions.Count; i++) {
+						ExtensionElement extension = extensions [i];
+						_properties.Add (new ConfigurationProperty (extension.Name, Type.GetType (extension.Type), null, null, null, ConfigurationPropertyOptions.None));
+					}
+				}
+				return _properties;
+			}
+		}
+		
+		internal ConfigurationPropertyCollection PropertiesInternal {
+			get {
+				return Properties;
+			}
+		}
 
-        public static StandardEndpointsSection GetSection (System.Configuration.Configuration config) {
-            ServiceModelSectionGroup sm = ServiceModelSectionGroup.GetSectionGroup (config);
-            if (sm == null)
-                throw new SystemException ("Could not retrieve configuration section group 'system.serviceModel'");
-            if (sm.StandardEndpoints == null)
-                throw new SystemException ("Could not retrieve configuration sub section group 'standardEndpoints' in 'system.serviceModel'");
-            return sm.StandardEndpoints;
-        }
+		public static StandardEndpointsSection GetSection (System.Configuration.Configuration config) {
+			ServiceModelSectionGroup sm = ServiceModelSectionGroup.GetSectionGroup (config);
+			if (sm == null)
+				throw new SystemException ("Could not retrieve configuration section group 'system.serviceModel'");
+			if (sm.StandardEndpoints == null)
+				throw new SystemException ("Could not retrieve configuration sub section group 'standardEndpoints' in 'system.serviceModel'");
+			return sm.StandardEndpoints;
+		}
 
-        public new EndpointCollectionElement this [string endpoint] {
-            get {
-                object element = base [endpoint];
-                if (element is EndpointCollectionElement)
-                    return (EndpointCollectionElement) element;
-                throw new ArgumentException (String.Format ("Could not find {0}", endpoint));
-            }
-        }
+		public new EndpointCollectionElement this [string endpoint] {
+			get {
+				object element = base [endpoint];
+				if (element is EndpointCollectionElement)
+					return (EndpointCollectionElement) element;
+				throw new ArgumentException (String.Format ("Could not find {0}", endpoint));
+			}
+		}
 
-    }
+	}
 
 }
 

@@ -1792,7 +1792,7 @@ namespace System.Xml {
                     startPos += copyCount;
                 }
 
-                incReadState = endOfValue ? IncrementalReadState.ReadValueChunk_OnCachedValue : IncrementalReadState.ReadValueChunk_OnPartialValue;
+				incReadState = endOfValue ? IncrementalReadState.ReadValueChunk_OnCachedValue : IncrementalReadState.ReadValueChunk_OnPartialValue;
 
                 if ( readCount == count ) {
                     char ch = buffer[index + count - 1];
@@ -7412,7 +7412,7 @@ namespace System.Xml {
                     case IncrementalReadState.EndElement:
                         parsingFunction = ParsingFunction.PopElementContext;
                         nextParsingFunction = ( index > 0 || fragmentType != XmlNodeType.Document ) ? ParsingFunction.ElementContent
-                                                                                                    : ParsingFunction.DocumentContent;
+																								    : ParsingFunction.DocumentContent;
                         outerReader.Read();
                         incReadState = IncrementalReadState.End;
                         goto case IncrementalReadState.End;

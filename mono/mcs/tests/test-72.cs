@@ -10,12 +10,12 @@ public class outer {
                         inner inst = (inner)o;
                 }
         }
-    
-    public static int Main ()
-    {
-        // We only test that this compiles.
-        
-        return 0;
-    }
+	
+	public static int Main ()
+	{
+		// We only test that this compiles.
+		
+		return 0;
+	}
   }
 

@@ -3,17 +3,17 @@
 
 public class C
 {
-    public static void Main ()
-    {
-        dynamic target = 3;
-        var x = new Test (target, out var y);
-    }
+	public static void Main ()
+	{
+		dynamic target = 3;
+		var x = new Test (target, out var y);
+	}
 }
 
 class Test
 {
-    public Test (int x, out int y)
-    {
-        y = 0;
-    }
+	public Test (int x, out int y)
+	{
+		y = 0;
+	}
 }

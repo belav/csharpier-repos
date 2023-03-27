@@ -32,15 +32,15 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-    public class AnnouncementEventArgs : EventArgs
-    {
-        internal AnnouncementEventArgs (EndpointDiscoveryMetadata metadata, DiscoveryMessageSequence queue)
-        {
-            EndpointDiscoveryMetadata = metadata;
-            MessageSequence = queue;
-        }
+	public class AnnouncementEventArgs : EventArgs
+	{
+		internal AnnouncementEventArgs (EndpointDiscoveryMetadata metadata, DiscoveryMessageSequence queue)
+		{
+			EndpointDiscoveryMetadata = metadata;
+			MessageSequence = queue;
+		}
 
-        public EndpointDiscoveryMetadata EndpointDiscoveryMetadata { get; private set; }
-        public DiscoveryMessageSequence MessageSequence { get; private set; }
-    }
+		public EndpointDiscoveryMetadata EndpointDiscoveryMetadata { get; private set; }
+		public DiscoveryMessageSequence MessageSequence { get; private set; }
+	}
 }

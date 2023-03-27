@@ -4,11 +4,11 @@ using System;
 Inherited=true )]
 public class TableColumn : Attribute
 {
-    public object MagicValue 
-    {
+	public object MagicValue 
+	{
                 get { return null; }
-        set { }
-    }
+		set { }
+	}
         
         public object Value2;
 }

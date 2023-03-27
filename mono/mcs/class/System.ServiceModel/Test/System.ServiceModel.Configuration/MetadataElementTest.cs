@@ -2,7 +2,7 @@
 // MetadataElementTest.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -39,99 +39,99 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-    [TestFixture]
-    public class MetadataElementTest
-    {
-        ServiceModelSectionGroup OpenConfig (string name) {
-            return (ServiceModelSectionGroup) ConfigurationManager.OpenExeConfiguration (TestResourceHelper.GetFullPathOfResource ("Test/config/" + name)).GetSectionGroup ("system.serviceModel");
-        }
+	[TestFixture]
+	public class MetadataElementTest
+	{
+		ServiceModelSectionGroup OpenConfig (string name) {
+			return (ServiceModelSectionGroup) ConfigurationManager.OpenExeConfiguration (TestResourceHelper.GetFullPathOfResource ("Test/config/" + name)).GetSectionGroup ("system.serviceModel");
+		}
 
-        [Test]
-        public void PolicyImporters () {
-            ServiceModelSectionGroup config = OpenConfig ("client.metadata");
-            PolicyImporterElementCollection col = config.Client.Metadata.PolicyImporters;
+		[Test]
+		public void PolicyImporters () {
+			ServiceModelSectionGroup config = OpenConfig ("client.metadata");
+			PolicyImporterElementCollection col = config.Client.Metadata.PolicyImporters;
 
-            Assert.AreEqual (2, col.Count, "Count");
+			Assert.AreEqual (2, col.Count, "Count");
 
-            PolicyImporterElement item = col ["PolicyImporterType1"];
-            if (item == null)
-                Assert.Fail ("PolicyImporterType1 not exists");
+			PolicyImporterElement item = col ["PolicyImporterType1"];
+			if (item == null)
+				Assert.Fail ("PolicyImporterType1 not exists");
 
-            Assert.AreEqual ("PolicyImporterType1", item.Type, "PolicyImporterType1.Type");
+			Assert.AreEqual ("PolicyImporterType1", item.Type, "PolicyImporterType1.Type");
 
-            item = col ["PolicyImporterType2"];
-            if (item == null)
-                Assert.Fail ("PolicyImporterType2 not exists");
+			item = col ["PolicyImporterType2"];
+			if (item == null)
+				Assert.Fail ("PolicyImporterType2 not exists");
 
-            Assert.AreEqual ("PolicyImporterType2", item.Type, "PolicyImporterType2.Type");
-        }
+			Assert.AreEqual ("PolicyImporterType2", item.Type, "PolicyImporterType2.Type");
+		}
 
-        [Test]
-        public void WsdlImporters () {
-            ServiceModelSectionGroup config = OpenConfig ("client.metadata");
-            WsdlImporterElementCollection col = config.Client.Metadata.WsdlImporters;
+		[Test]
+		public void WsdlImporters () {
+			ServiceModelSectionGroup config = OpenConfig ("client.metadata");
+			WsdlImporterElementCollection col = config.Client.Metadata.WsdlImporters;
 
-            Assert.AreEqual (2, col.Count, "Count");
+			Assert.AreEqual (2, col.Count, "Count");
 
-            WsdlImporterElement item = col ["WSDLImporter1"];
-            if (item == null)
-                Assert.Fail ("WSDLImporter1 not exists");
+			WsdlImporterElement item = col ["WSDLImporter1"];
+			if (item == null)
+				Assert.Fail ("WSDLImporter1 not exists");
 
-            Assert.AreEqual ("WSDLImporter1", item.Type, "WSDLImporter1.Type");
+			Assert.AreEqual ("WSDLImporter1", item.Type, "WSDLImporter1.Type");
 
-            item = col ["WSDLImporter2"];
-            if (item == null)
-                Assert.Fail ("WSDLImporter2 not exists");
+			item = col ["WSDLImporter2"];
+			if (item == null)
+				Assert.Fail ("WSDLImporter2 not exists");
 
-            Assert.AreEqual ("WSDLImporter2", item.Type, "WSDLImporter2.Type");
-        }
+			Assert.AreEqual ("WSDLImporter2", item.Type, "WSDLImporter2.Type");
+		}
 
-        [Test]
-        public void PolicyImporters_DefaultConfiguration () {
-            ServiceModelSectionGroup config = OpenConfig ("empty");
-            PolicyImporterElementCollection col = config.Client.Metadata.PolicyImporters;
+		[Test]
+		public void PolicyImporters_DefaultConfiguration () {
+			ServiceModelSectionGroup config = OpenConfig ("empty");
+			PolicyImporterElementCollection col = config.Client.Metadata.PolicyImporters;
 
-            Type [] types = new Type [] {
-                typeof(CompositeDuplexBindingElementImporter),
-                typeof(MessageEncodingBindingElementImporter),
-                typeof(OneWayBindingElementImporter),
-                typeof(PrivacyNoticeBindingElementImporter),
-                typeof(ReliableSessionBindingElementImporter),
-                typeof(SecurityBindingElementImporter),
-                typeof(TransactionFlowBindingElementImporter),
-                typeof(TransportBindingElementImporter),
-                typeof(UseManagedPresentationBindingElementImporter)
-            };
-            foreach (Type type in types) {
-                PolicyImporterElement item = col [type.AssemblyQualifiedName];
-                if (item == null)
-                    Assert.Fail (type.Name + " not exists");
+			Type [] types = new Type [] {
+				typeof(CompositeDuplexBindingElementImporter),
+				typeof(MessageEncodingBindingElementImporter),
+				typeof(OneWayBindingElementImporter),
+				typeof(PrivacyNoticeBindingElementImporter),
+				typeof(ReliableSessionBindingElementImporter),
+				typeof(SecurityBindingElementImporter),
+				typeof(TransactionFlowBindingElementImporter),
+				typeof(TransportBindingElementImporter),
+				typeof(UseManagedPresentationBindingElementImporter)
+			};
+			foreach (Type type in types) {
+				PolicyImporterElement item = col [type.AssemblyQualifiedName];
+				if (item == null)
+					Assert.Fail (type.Name + " not exists");
 
-                Assert.AreEqual (type.AssemblyQualifiedName, item.Type, type.Name);
-            }
-        }
+				Assert.AreEqual (type.AssemblyQualifiedName, item.Type, type.Name);
+			}
+		}
 
-        [Test]
-        public void WsdlImporters_DefaultConfiguration () {
-            ServiceModelSectionGroup config = OpenConfig ("empty");
-            WsdlImporterElementCollection col = config.Client.Metadata.WsdlImporters;
+		[Test]
+		public void WsdlImporters_DefaultConfiguration () {
+			ServiceModelSectionGroup config = OpenConfig ("empty");
+			WsdlImporterElementCollection col = config.Client.Metadata.WsdlImporters;
 
-            Type [] types = new Type [] { 
-                typeof(MessageEncodingBindingElementImporter),
-                typeof(StandardBindingImporter),
-                typeof(TransportBindingElementImporter),
-                typeof(DataContractSerializerMessageContractImporter),
-                typeof(XmlSerializerMessageContractImporter)
-            };
-            foreach (Type type in types) {
-                WsdlImporterElement item = col [type.AssemblyQualifiedName];
-                if (item == null)
-                    Assert.Fail (type.Name + " not exists");
+			Type [] types = new Type [] { 
+				typeof(MessageEncodingBindingElementImporter),
+				typeof(StandardBindingImporter),
+				typeof(TransportBindingElementImporter),
+				typeof(DataContractSerializerMessageContractImporter),
+				typeof(XmlSerializerMessageContractImporter)
+			};
+			foreach (Type type in types) {
+				WsdlImporterElement item = col [type.AssemblyQualifiedName];
+				if (item == null)
+					Assert.Fail (type.Name + " not exists");
 
-                Assert.AreEqual (type.AssemblyQualifiedName, item.Type, type.Name);
-            }
-        }
+				Assert.AreEqual (type.AssemblyQualifiedName, item.Type, type.Name);
+			}
+		}
 
-    }
+	}
 }
 #endif

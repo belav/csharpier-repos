@@ -2,8 +2,8 @@
 // DynamicValidator.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
-//    Marek Habersack <mhabersack@novell.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
+//	Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2008-2009 Novell Inc. http://novell.com
 //
@@ -43,87 +43,87 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {
-    [ToolboxBitmap (typeof(DynamicValidator), "DynamicValidator.ico")]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class DynamicValidator : BaseValidator
-    {
-        IDynamicDataSource dynamicDataSource;
+	[ToolboxBitmap (typeof(DynamicValidator), "DynamicValidator.ico")]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class DynamicValidator : BaseValidator
+	{
+		IDynamicDataSource dynamicDataSource;
 
-        IDynamicDataSource DynamicDataSource {
-            get {
-                if (dynamicDataSource == null)
-                    dynamicDataSource = this.FindDataSourceControl ();
+		IDynamicDataSource DynamicDataSource {
+			get {
+				if (dynamicDataSource == null)
+					dynamicDataSource = this.FindDataSourceControl ();
 
-                return dynamicDataSource;
-            }
-        }
-        
-        [Themeable (false)]
-        [Browsable (false)]
-        public MetaColumn Column { get; set; }
+				return dynamicDataSource;
+			}
+		}
+		
+		[Themeable (false)]
+		[Browsable (false)]
+		public MetaColumn Column { get; set; }
 
-        [Themeable (false)]
-        [Browsable (false)]
-        public string ColumnName {
-            get {
-                // LAMESPEC: returns Column.Name if Column is not null, String.Empty
-                // otherwise
-                MetaColumn column = Column;
-                return column != null ? column.Name : String.Empty;
-            }
-        }
+		[Themeable (false)]
+		[Browsable (false)]
+		public string ColumnName {
+			get {
+				// LAMESPEC: returns Column.Name if Column is not null, String.Empty
+				// otherwise
+				MetaColumn column = Column;
+				return column != null ? column.Name : String.Empty;
+			}
+		}
 
-        protected virtual Exception ValidationException { get; set; }        
+		protected virtual Exception ValidationException { get; set; }		
 
-        protected override bool ControlPropertiesValid ()
-        {
-            return base.ControlPropertiesValid () && DynamicDataSource != null;
-        }
+		protected override bool ControlPropertiesValid ()
+		{
+			return base.ControlPropertiesValid () && DynamicDataSource != null;
+		}
 
-        [MonoTODO]
-        protected override bool EvaluateIsValid ()
-        {
-            Exception ex = ValidationException;
-            if (ex != null) {
-                ErrorMessage = HttpUtility.HtmlEncode (ex.Message);
-                return false;
-            }
+		[MonoTODO]
+		protected override bool EvaluateIsValid ()
+		{
+			Exception ex = ValidationException;
+			if (ex != null) {
+				ErrorMessage = HttpUtility.HtmlEncode (ex.Message);
+				return false;
+			}
 
-            string controlToValidate = ControlToValidate;
-            if (String.IsNullOrEmpty (controlToValidate))
-                return true;
+			string controlToValidate = ControlToValidate;
+			if (String.IsNullOrEmpty (controlToValidate))
+				return true;
 
-            GetControlValidationValue (controlToValidate);
+			GetControlValidationValue (controlToValidate);
 
-            return true;
-        }
+			return true;
+		}
 
-        void HandleException (object sender, DynamicValidatorEventArgs args)
-        {
-            if (args == null)
-                return;
-            
-            ValidateException (args.Exception);
-        }
-        
-        protected override void OnInit (EventArgs e)
-        {
-            IDynamicDataSource dds = DynamicDataSource;
-            if (dds != null)
-                dds.Exception += HandleException;
-            
-            base.OnInit (e);
-        }
+		void HandleException (object sender, DynamicValidatorEventArgs args)
+		{
+			if (args == null)
+				return;
+			
+			ValidateException (args.Exception);
+		}
+		
+		protected override void OnInit (EventArgs e)
+		{
+			IDynamicDataSource dds = DynamicDataSource;
+			if (dds != null)
+				dds.Exception += HandleException;
+			
+			base.OnInit (e);
+		}
 
-        [MonoTODO]
-        protected virtual void ValidateException (Exception exception)
-        {
-            // http://forums.asp.net/p/1287649/2478409.aspx#2478409
-            //
-            // The above suggests that IDynamicValidatorException.InnerExceptions is
-            // indexed on column name
-            //
-        }
-    }
+		[MonoTODO]
+		protected virtual void ValidateException (Exception exception)
+		{
+			// http://forums.asp.net/p/1287649/2478409.aspx#2478409
+			//
+			// The above suggests that IDynamicValidatorException.InnerExceptions is
+			// indexed on column name
+			//
+		}
+	}
 }

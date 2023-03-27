@@ -23,16 +23,16 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum ToolStripItemOverflow
-    {
-        Never = 0,
-        Always = 1,
-        AsNeeded = 2
-    }
+	public enum ToolStripItemOverflow
+	{
+		Never = 0,
+		Always = 1,
+		AsNeeded = 2
+	}
 }

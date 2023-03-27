@@ -2,7 +2,7 @@
 // RolesTest.cs - Unit tests for System.Web.Security.Roles
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,53 +40,53 @@ using System.Configuration.Provider;
 
 namespace MonoTests.System.Web.Security {
 
-    [TestFixture]
-    public class RolesTest {
+	[TestFixture]
+	public class RolesTest {
 
-        [Test]
+		[Test]
         [Category ("NotWorking")]
-        public void Enabled ()
-        {
-            Assert.IsFalse (Roles.Enabled, "Enabled");
+		public void Enabled ()
+		{
+			Assert.IsFalse (Roles.Enabled, "Enabled");
 
-            Assert.IsFalse (Roles.CacheRolesInCookie, "CacheRolesInCookie");
-            Assert.AreEqual (".ASPXROLES", Roles.CookieName, "CookieName");
-            Assert.AreEqual ("/", Roles.CookiePath, "CookiePath");
-            Assert.AreEqual (CookieProtection.All, Roles.CookieProtectionValue, "CookieProtectionValue");
-            Assert.IsFalse (Roles.CookieRequireSSL, "CookieRequireSSL");
-            Assert.IsTrue (Roles.CookieSlidingExpiration, "CookieSlidingExpiration");
-            Assert.AreEqual (30, Roles.CookieTimeout, "CookieTimeout");
-            Assert.IsFalse (Roles.CreatePersistentCookie, "CreatePersistentCookie");
-            Assert.IsNull (Roles.Domain, "Domain");
-            Assert.AreEqual (25, Roles.MaxCachedResults, "MaxCachedResults");
+			Assert.IsFalse (Roles.CacheRolesInCookie, "CacheRolesInCookie");
+			Assert.AreEqual (".ASPXROLES", Roles.CookieName, "CookieName");
+			Assert.AreEqual ("/", Roles.CookiePath, "CookiePath");
+			Assert.AreEqual (CookieProtection.All, Roles.CookieProtectionValue, "CookieProtectionValue");
+			Assert.IsFalse (Roles.CookieRequireSSL, "CookieRequireSSL");
+			Assert.IsTrue (Roles.CookieSlidingExpiration, "CookieSlidingExpiration");
+			Assert.AreEqual (30, Roles.CookieTimeout, "CookieTimeout");
+			Assert.IsFalse (Roles.CreatePersistentCookie, "CreatePersistentCookie");
+			Assert.IsNull (Roles.Domain, "Domain");
+			Assert.AreEqual (25, Roles.MaxCachedResults, "MaxCachedResults");
 
-            // ProviderException (missing web.config) for
-            // - ApplicationName
-            // - Provider
-            // - Providers
-        }
+			// ProviderException (missing web.config) for
+			// - ApplicationName
+			// - Provider
+			// - Providers
+		}
 
-        [Test]
-        [Category ("NunitWeb")]
-        public void IsUserInRole ()
-        {
-            WebTest t = new WebTest (PageInvoker.CreateOnLoad ((Page p) => {
-                        Assert.IsTrue (Roles.Enabled, "Enabled");
-                        Assert.IsTrue (Roles.IsUserInRole ("true", "rolename"), "#1");
-                        Assert.IsFalse (Roles.IsUserInRole ("false", "rolename"), "#2");
+		[Test]
+		[Category ("NunitWeb")]
+		public void IsUserInRole ()
+		{
+			WebTest t = new WebTest (PageInvoker.CreateOnLoad ((Page p) => {
+						Assert.IsTrue (Roles.Enabled, "Enabled");
+						Assert.IsTrue (Roles.IsUserInRole ("true", "rolename"), "#1");
+						Assert.IsFalse (Roles.IsUserInRole ("false", "rolename"), "#2");
 
-                        // NOTE: The next two tests do NOT throw an exception on MS 
-                        //       .NET (even if the underlying membership-provider may, 
-                        //       despite being documented differently on MSDN), but 
-                        //       this convenient behaviour allows ASP.NET pages to run 
-                        //       when roles are queried before the user is logged on
-                        Assert.IsFalse (Roles.IsUserInRole (string.Empty, "rolename"), "#3a");
-                        Assert.IsFalse (Roles.IsUserInRole ("rolename"), "#3b");
-                    }));
-            t.Run ();
-            global::System.Diagnostics.Trace.WriteLineIf ((t.Response.StatusCode != global::System.Net.HttpStatusCode.OK), t.Response.Body);
-            Assert.AreEqual (global::System.Net.HttpStatusCode.OK, t.Response.StatusCode, "HttpStatusCode");
-        }
-    }
+						// NOTE: The next two tests do NOT throw an exception on MS 
+						//       .NET (even if the underlying membership-provider may, 
+						//       despite being documented differently on MSDN), but 
+						//       this convenient behaviour allows ASP.NET pages to run 
+						//       when roles are queried before the user is logged on
+						Assert.IsFalse (Roles.IsUserInRole (string.Empty, "rolename"), "#3a");
+						Assert.IsFalse (Roles.IsUserInRole ("rolename"), "#3b");
+					}));
+			t.Run ();
+			global::System.Diagnostics.Trace.WriteLineIf ((t.Response.StatusCode != global::System.Net.HttpStatusCode.OK), t.Response.Body);
+			Assert.AreEqual (global::System.Net.HttpStatusCode.OK, t.Response.StatusCode, "HttpStatusCode");
+		}
+	}
 }
 

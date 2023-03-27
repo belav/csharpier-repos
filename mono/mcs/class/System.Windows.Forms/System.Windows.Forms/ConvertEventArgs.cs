@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 //
 
@@ -28,33 +28,33 @@
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public class ConvertEventArgs : EventArgs {
-        private object    object_value;
-        private Type    desired_type;
+	public class ConvertEventArgs : EventArgs {
+		private object	object_value;
+		private Type	desired_type;
 
-        #region Public Constructors
-        public ConvertEventArgs(object value, Type desiredType) {
-            this.object_value=value;
-            this.desired_type=desiredType;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public ConvertEventArgs(object value, Type desiredType) {
+			this.object_value=value;
+			this.desired_type=desiredType;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public Type DesiredType {
-            get {
-                return this.desired_type;
-            }
-        }
+		#region Public Instance Properties
+		public Type DesiredType {
+			get {
+				return this.desired_type;
+			}
+		}
 
-        public object Value {
-            get {
-                return this.object_value;
-            }
+		public object Value {
+			get {
+				return this.object_value;
+			}
 
-            set {
-                this.object_value=value;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+			set {
+				this.object_value=value;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

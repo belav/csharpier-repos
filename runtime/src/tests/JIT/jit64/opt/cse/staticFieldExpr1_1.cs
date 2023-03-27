@@ -46,15 +46,15 @@ namespace CseTest
             int v = 0;
 
 #if LOOP         
-            
-            do {
+			
+			do {
 #endif
 #if TRY
-                try {
+				try {
 #endif
 #if LOOP  
-                    do {
-                        for (int i = 0; i < 10; i++) {
+					do {
+						for (int i = 0; i < 10; i++) {
 #endif
 
             v = (((class_s.a + class_s.b) + class_s.c) + class_s.d);
@@ -228,15 +228,15 @@ namespace CseTest
             class_s.d = return_int(false, 33);
 
 #if LOOP                  
-                        }
-                    } while (v == 0);
+						}
+					} while (v == 0);
 #endif
 #if TRY
-                } finally {
-                }
+				} finally {
+				}
 #endif
 #if LOOP                  
-            } while (v== 0);
+			} while (v== 0);
 #endif
 
             Console.WriteLine(ret);

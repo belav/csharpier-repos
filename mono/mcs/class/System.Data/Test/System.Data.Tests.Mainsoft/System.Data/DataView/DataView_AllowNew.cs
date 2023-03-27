@@ -39,100 +39,100 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataView_AllowNew : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataView_AllowNew tc = new DataView_AllowNew();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataView_AllowNew");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataView_AllowNew tc = new DataView_AllowNew();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataView_AllowNew");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-        DataView dv = new DataView(dt);
-        
-        try
-        {
-            BeginCase("AllowNew - default value");
-            Compare(dv.AllowNew ,true );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("AllowNew - true");
-            dv.AllowNew = true;
-            Compare(dv.AllowNew , true);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("AllowNew - false");
-            dv.AllowNew = false;
-            Compare(dv.AllowNew , false);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}    
-        
-        try
-        {
-            BeginCase("AllowNew - exception");
-            try
-            {
-                dv.AddNew();
-            }
-            catch(DataException ex)
-            {
-                exp=ex;
-            }
-            Compare(exp.GetType().FullName , typeof(DataException).FullName );
-            exp=null;
-            
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}    
-
-        dv.AllowNew=true;
-        int RowsCount = dv.Count ;
-
-        try
-        {
-            BeginCase("AllowNew - exception");
-            dv.AddNew();
-            Compare(dv.Count , RowsCount+1);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}    
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    }
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	public void run()
+	{
+		Exception exp = null;
+		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+		DataView dv = new DataView(dt);
+		
+		try
+		{
+			BeginCase("AllowNew - default value");
+			Compare(dv.AllowNew ,true );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("AllowNew - true");
+			dv.AllowNew = true;
+			Compare(dv.AllowNew , true);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("AllowNew - false");
+			dv.AllowNew = false;
+			Compare(dv.AllowNew , false);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}	
+		
+		try
+		{
+			BeginCase("AllowNew - exception");
+			try
+			{
+				dv.AddNew();
+			}
+			catch(DataException ex)
+			{
+				exp=ex;
+			}
+			Compare(exp.GetType().FullName , typeof(DataException).FullName );
+			exp=null;
+			
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}	
+
+		dv.AllowNew=true;
+		int RowsCount = dv.Count ;
+
+		try
+		{
+			BeginCase("AllowNew - exception");
+			dv.AddNew();
+			Compare(dv.Count , RowsCount+1);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}	
+
+
+	}
 }
 }

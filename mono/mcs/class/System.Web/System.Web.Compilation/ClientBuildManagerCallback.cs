@@ -2,7 +2,7 @@
 // System.Web.Compilation.ClientBuildManagerCallback
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -35,24 +35,24 @@ using System.CodeDom.Compiler;
 using System.Web;
 
 namespace System.Web.Compilation {
-    public class ClientBuildManagerCallback : MarshalByRefObject
-    {
-        public ClientBuildManagerCallback ()
-        {
-        }
+	public class ClientBuildManagerCallback : MarshalByRefObject
+	{
+		public ClientBuildManagerCallback ()
+		{
+		}
 
-        public virtual void ReportCompilerError (CompilerError error)
-        {
-        }
+		public virtual void ReportCompilerError (CompilerError error)
+		{
+		}
 
-        public virtual void ReportParseError (ParserError error)
-        {
-        }
+		public virtual void ReportParseError (ParserError error)
+		{
+		}
 
-        public virtual void ReportProgress (string message)
-        {
-        }
-    }
+		public virtual void ReportProgress (string message)
+		{
+		}
+	}
 }
 
 

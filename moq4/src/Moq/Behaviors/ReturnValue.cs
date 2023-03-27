@@ -3,20 +3,20 @@
 
 namespace Moq.Behaviors
 {
-    internal sealed class ReturnValue : Behavior
-    {
-        private readonly object value;
+	internal sealed class ReturnValue : Behavior
+	{
+		private readonly object value;
 
-        public ReturnValue(object value)
-        {
-            this.value = value;
-        }
+		public ReturnValue(object value)
+		{
+			this.value = value;
+		}
 
-        public object Value => this.value;
+		public object Value => this.value;
 
-        public override void Execute(Invocation invocation)
-        {
-            invocation.ReturnValue = this.value;
-        }
-    }
+		public override void Execute(Invocation invocation)
+		{
+			invocation.ReturnValue = this.value;
+		}
+	}
 }

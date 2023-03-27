@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -6727,8 +6727,8 @@ var val = 0.1;
 var obj = new Obj();
 ThrowWhenNull(obj).Color.Value = val switch
 {
-    0 => "green",
-    _ => "red"
+	0 => "green",
+	_ => "red"
 };
 Console.WriteLine($"{obj.Color.Value ?? "null"} should not be null");
 ThrowWhenNull(obj).Color.Value = "yikes";
@@ -6740,17 +6740,17 @@ static T ThrowWhenNull<T>(T obj) => obj ?? throw new System.InvalidOperationExce
 
 struct Wrapper<T>
 {
-    private T _value;
-    public T Value
-    {
-        get => _value;
-        set => _value = value;
-    }
+	private T _value;
+	public T Value
+	{
+		get => _value;
+		set => _value = value;
+	}
 }
 
 class Obj
 {
-    public Wrapper<string> Color;
+	public Wrapper<string> Color;
 }
 """;
             var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: """

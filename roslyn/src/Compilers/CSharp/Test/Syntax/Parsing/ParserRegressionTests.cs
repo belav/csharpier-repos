@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -92,7 +92,7 @@ class Program
         [Fact]
         public void c02()
         {
-            var test = @"internal int TYPES()        {             break  retVal =  @while ; __reftype             CLASS c = dynamic   descending  CLASS( % ; on             IF xx = module   _4?  |=              \u14DB\u0849   <![CDATA[  c =>  @default  $             retVal @assembly  += c void .Member &  -= ; @typeof 
+            var test = @"internal int TYPES()        {             break  retVal =  @while ; __reftype             CLASS c = dynamic   descending  CLASS( % ; on             IF xx = module   _4䓞  |=              \u14DB\u0849   <![CDATA[  c =>  @default  $             retVal @assembly  += c void .Member &  -= ; @typeof 
 ";
             var tree = SyntaxFactory.ParseSyntaxTree(test);
         }
@@ -141,7 +141,7 @@ class Program
         [Fact]
         public void c024928()
         {
-            var test = @"/// </summary>        /// <returns></returns>        internal int OPERATOR()        { //             int?[ *   @method   !  new int explicit  , [  5 --  {  \uDD48\uEF5C , 2,  @ascending , @foreach   \uD17B\u21A8  .  5  ;  { /*[] bug*/ // YES []            int ::  (  <=  var  />  { @readonly  1 <!--  2 __makeref  ?  3 @descending , 4 @float , 5 } disable ;/*,;*/            int -=   _\uAEC4   -  ( operator int <<= a =>  += ] @abstract ; property /*[]*/            i = i double  + i -  @async   -  i '   &  i  )  i &  @using   #   @byte   ,   \u7EE1\u8B45 ;/*+ - * / % & | ^*/            bool b %=  = true  }   fixed  | class   join  ^ ?>   true ;/*& | ^*/            b  ^=  ! @null ;/*!*/             @stackalloc  = @in   ==  @default ;/*~i*/            b  \  i base  <  / i -  await ) && @into  ( new i pragma  + 1 @for ) > i _\uE02B\u7325 ; else /*< && >*/             continue   @double  = _??   in   ^  1 internal   ::  0;/*? :*/   // YES :            i++ ~ /*++*/             _\u560C\uF27E\uB73F -- @sizeof ;/*--*/            b @public  = /=   enum  && params  false  >>  true;/*&& ||*/            i @explicit   #   @byte   >>=   await ;/*<<*/             @sbyte  = @operator  i >> 5;/*>>*/            int  @from  = i;            b  >>   @protected  == )  j && assembly  i @const  != j ""   |=  i <=  @explicit  &&  @await  >=  @typeof ;/*= == && != <= >=*/            i @long   >>=  (int ]]>  &=  ( /*+=*/            i _??  -= i explicit  -> /*-=*/            i  {  i -= /**=*/            if ]  ( <<= i @assembly   )  0 .                  @select ++; 
+            var test = @"/// </summary>        /// <returns></returns>        internal int OPERATOR()        { //             int?[ *   @method   !  new int explicit  , [  5 --  {  \uDD48\uEF5C , 2,  @ascending , @foreach   \uD17B\u21A8  .  5  ;  { /*[] bug*/ // YES []            int ::  (  <=  var  />  { @readonly  1 <!--  2 __makeref  ?  3 @descending , 4 @float , 5 } disable ;/*,;*/            int -=   _\uAEC4   -  ( operator int <<= a =>  += ] @abstract ; property /*[]*/            i = i double  + i -  @async   -  i '   &  i  )  i &  @using   #   @byte   ,   \u7EE1\u8B45 ;/*+ - * / % & | ^*/            bool b %=  = true  }   fixed  | class   join  ^ ?>   true ;/*& | ^*/            b  ^=  ! @null ;/*!*/             @stackalloc  = @in   ==  @default ;/*~i*/            b  \  i base  <  / i -  await ) && @into  ( new i pragma  + 1 @for ) > i _\uE02B\u7325 ; else /*< && >*/             continue   @double  = _Ƚ揞   in   ^  1 internal   ::  0;/*? :*/   // YES :            i++ ~ /*++*/             _\u560C\uF27E\uB73F -- @sizeof ;/*--*/            b @public  = /=   enum  && params  false  >>  true;/*&& ||*/            i @explicit   #   @byte   >>=   await ;/*<<*/             @sbyte  = @operator  i >> 5;/*>>*/            int  @from  = i;            b  >>   @protected  == )  j && assembly  i @const  != j ""   |=  i <=  @explicit  &&  @await  >=  @typeof ;/*= == && != <= >=*/            i @long   >>=  (int ]]>  &=  ( /*+=*/            i _Ƚ揞  -= i explicit  -> /*-=*/            i  {  i -= /**=*/            if ]  ( <<= i @assembly   )  0 .                  @select ++; 
  
 ";
             var tree = SyntaxFactory.ParseSyntaxTree(test);

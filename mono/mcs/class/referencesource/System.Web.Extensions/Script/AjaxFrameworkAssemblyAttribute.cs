@@ -1,4 +1,4 @@
-namespace System.Web.Script {
+﻿namespace System.Web.Script {
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
 

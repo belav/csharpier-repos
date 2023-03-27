@@ -2,7 +2,7 @@
 // ServiceEndpointTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -35,55 +35,55 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class ServiceEndpointTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void CtorNullContract ()
-        {
-            new ServiceEndpoint (null, new BasicHttpBinding (),
-                new EndpointAddress ("http://localhost"));
-        }
+	[TestFixture]
+	public class ServiceEndpointTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void CtorNullContract ()
+		{
+			new ServiceEndpoint (null, new BasicHttpBinding (),
+				new EndpointAddress ("http://localhost"));
+		}
 
-        [Test]
-        // null Binding is allowed, dunno how it should be handled tho
-        public void CtorNullBinding ()
-        {
-            ServiceEndpoint ep = new ServiceEndpoint (
-                ContractDescription.GetContract (typeof (Foo)),
-                null,
-                new EndpointAddress ("http://localhost"));
-            Assert.IsNull (ep.Binding, "#1");
-        }
+		[Test]
+		// null Binding is allowed, dunno how it should be handled tho
+		public void CtorNullBinding ()
+		{
+			ServiceEndpoint ep = new ServiceEndpoint (
+				ContractDescription.GetContract (typeof (Foo)),
+				null,
+				new EndpointAddress ("http://localhost"));
+			Assert.IsNull (ep.Binding, "#1");
+		}
 
-        [Test]
-        // null endpoint is allowed.
-        public void CtorNullEndpoint ()
-        {
-            new ServiceEndpoint (
-                ContractDescription.GetContract (typeof (Foo)),
-                new BasicHttpBinding (),
-                null);
-        }
+		[Test]
+		// null endpoint is allowed.
+		public void CtorNullEndpoint ()
+		{
+			new ServiceEndpoint (
+				ContractDescription.GetContract (typeof (Foo)),
+				new BasicHttpBinding (),
+				null);
+		}
 
-        [Test]
-        public void DefaultValues ()
-        {
-            ServiceEndpoint ep = new ServiceEndpoint (
-                ContractDescription.GetContract (typeof (Foo)),
-                new BasicHttpBinding (),
-                new EndpointAddress ("http://localhost"));
-            Assert.IsNotNull (ep.Behaviors, "#1");
-            Assert.AreEqual (0, ep.Behaviors.Count, "#2");
-        }
+		[Test]
+		public void DefaultValues ()
+		{
+			ServiceEndpoint ep = new ServiceEndpoint (
+				ContractDescription.GetContract (typeof (Foo)),
+				new BasicHttpBinding (),
+				new EndpointAddress ("http://localhost"));
+			Assert.IsNotNull (ep.Behaviors, "#1");
+			Assert.AreEqual (0, ep.Behaviors.Count, "#2");
+		}
 
 
-        [ServiceContract]
-        class Foo
-        {
-            [OperationContract]
-            public void SayWhat () { }
-        }
-    }
+		[ServiceContract]
+		class Foo
+		{
+			[OperationContract]
+			public void SayWhat () { }
+		}
+	}
 }

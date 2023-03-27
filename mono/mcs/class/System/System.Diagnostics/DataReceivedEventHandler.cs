@@ -2,7 +2,7 @@
 // DataReceivedEventHandler.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 
 //
@@ -28,7 +28,7 @@
 
 namespace System.Diagnostics
 {
-    public delegate void DataReceivedEventHandler (
-        object sender, DataReceivedEventArgs e);
+	public delegate void DataReceivedEventHandler (
+		object sender, DataReceivedEventArgs e);
 }
 

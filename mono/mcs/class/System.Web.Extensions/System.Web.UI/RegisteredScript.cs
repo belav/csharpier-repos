@@ -31,52 +31,52 @@ using System;
 
 namespace System.Web.UI
 {
-    public sealed class RegisteredScript
-    {
-        readonly Control _control;
-        readonly bool _addScriptTags;
-        readonly string _key;
-        readonly string _script;
-        readonly RegisteredScriptType _scriptType;
-        readonly Type _type;
-        readonly string _url;
+	public sealed class RegisteredScript
+	{
+		readonly Control _control;
+		readonly bool _addScriptTags;
+		readonly string _key;
+		readonly string _script;
+		readonly RegisteredScriptType _scriptType;
+		readonly Type _type;
+		readonly string _url;
 
-        internal RegisteredScript (Control control, Type type, string key, string script, string url, bool addScriptTag, RegisteredScriptType scriptType) {
-            _control = control;
-            _type = type;
-            _script = script;
-            _url = url;
-            _addScriptTags = addScriptTag;
-            _scriptType = scriptType;
-            _key = key;
-        }
+		internal RegisteredScript (Control control, Type type, string key, string script, string url, bool addScriptTag, RegisteredScriptType scriptType) {
+			_control = control;
+			_type = type;
+			_script = script;
+			_url = url;
+			_addScriptTags = addScriptTag;
+			_scriptType = scriptType;
+			_key = key;
+		}
 
-        public bool AddScriptTags {
-            get { return _addScriptTags; }
-        }
+		public bool AddScriptTags {
+			get { return _addScriptTags; }
+		}
 
-        public Control Control {
-            get { return _control; }
-        }
+		public Control Control {
+			get { return _control; }
+		}
 
-        public string Key {
-            get { return _key; }
-        }
+		public string Key {
+			get { return _key; }
+		}
 
-        public string Script {
-            get { return _script; }
-        }
+		public string Script {
+			get { return _script; }
+		}
 
-        public RegisteredScriptType ScriptType {
-            get { return _scriptType; }
-        }
+		public RegisteredScriptType ScriptType {
+			get { return _scriptType; }
+		}
 
-        public Type Type {
-            get { return _type; }
-        }
+		public Type Type {
+			get { return _type; }
+		}
 
-        public string Url {
-            get { return _url; }
-        }
-    }
+		public string Url {
+			get { return _url; }
+		}
+	}
 }

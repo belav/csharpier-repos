@@ -6,7 +6,7 @@ class Dingus where T : IEnumerable {
 }
 
 class D {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

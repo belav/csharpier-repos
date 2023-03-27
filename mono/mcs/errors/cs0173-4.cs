@@ -3,8 +3,8 @@
 
 class X
 {
-    static void Main (string[] args)
-    {
-        bool b = args.Length > 0 ? null : null;
-    }
+	static void Main (string[] args)
+	{
+		bool b = args.Length > 0 ? null : null;
+	}
 }

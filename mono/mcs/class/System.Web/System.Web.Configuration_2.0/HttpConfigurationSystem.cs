@@ -33,20 +33,20 @@ using System.Configuration.Internal;
 
 namespace System.Web.Configuration {
 
-    internal class HttpConfigurationSystem : IInternalConfigSystem
-    {
-        object IInternalConfigSystem.GetSection (string configKey)
-        {
-            return WebConfigurationManager.GetSection (configKey);
-        }
+	internal class HttpConfigurationSystem : IInternalConfigSystem
+	{
+		object IInternalConfigSystem.GetSection (string configKey)
+		{
+			return WebConfigurationManager.GetSection (configKey);
+		}
 
-        void IInternalConfigSystem.RefreshConfig (string sectionName)
-        {
-        }
+		void IInternalConfigSystem.RefreshConfig (string sectionName)
+		{
+		}
 
-        bool IInternalConfigSystem.SupportsUserConfig {
-            get { return true; }
-        }
-    }
+		bool IInternalConfigSystem.SupportsUserConfig {
+			get { return true; }
+		}
+	}
 }
 

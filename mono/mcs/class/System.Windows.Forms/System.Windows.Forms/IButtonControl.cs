@@ -21,7 +21,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 // Authors:
-//        Jordi Mas i Hernandez, jordi@ximian.com
+//		Jordi Mas i Hernandez, jordi@ximian.com
 //
 //
 
@@ -31,10 +31,10 @@
 namespace System.Windows.Forms 
 {
 
-    public interface IButtonControl 
-    {
-        DialogResult DialogResult {get; set;}
-        void NotifyDefault (bool value);        
-        void PerformClick ();        
-    }
+	public interface IButtonControl 
+	{
+		DialogResult DialogResult {get; set;}
+		void NotifyDefault (bool value);		
+		void PerformClick ();		
+	}
 }

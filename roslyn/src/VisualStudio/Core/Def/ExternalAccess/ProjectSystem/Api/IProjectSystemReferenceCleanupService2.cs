@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,7 +11,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.ProjectSystem.A
     internal interface IProjectSystemReferenceCleanupService2 : IProjectSystemReferenceCleanupService
     {
         /// <summary>
-        /// Gets an operation that can update the project�s references by removing or marking references as
+        /// Gets an operation that can update the project’s references by removing or marking references as
         /// TreatAsUsed in the project file.
         /// </summary>
         Task<IProjectSystemUpdateReferenceOperation> GetUpdateReferenceOperationAsync(

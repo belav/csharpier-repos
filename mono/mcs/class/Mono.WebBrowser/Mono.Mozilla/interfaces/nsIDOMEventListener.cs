@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,26 +32,26 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("df31c120-ded6-11d1-bd85-00805f8ae3f4")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMEventListener {
+	[Guid ("df31c120-ded6-11d1-bd85-00805f8ae3f4")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMEventListener {
 
 #region nsIDOMEventListener
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int handleEvent (
-                [MarshalAs (UnmanagedType.Interface)]   nsIDOMEvent _event);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int handleEvent (
+				[MarshalAs (UnmanagedType.Interface)]   nsIDOMEvent _event);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMEventListener {
-        public static nsIDOMEventListener GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMEventListener obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMEventListener).GUID, obj);
-            return o as nsIDOMEventListener;
-        }
-    }
+	internal class nsDOMEventListener {
+		public static nsIDOMEventListener GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMEventListener obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMEventListener).GUID, obj);
+			return o as nsIDOMEventListener;
+		}
+	}
 }

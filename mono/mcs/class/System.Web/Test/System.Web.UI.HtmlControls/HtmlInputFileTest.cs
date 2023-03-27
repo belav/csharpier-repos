@@ -1,9 +1,9 @@
 //
 // HtmlInputFileTest.cs
-//    - Unit tests for System.Web.UI.HtmlControls.HtmlInputFile
+//	- Unit tests for System.Web.UI.HtmlControls.HtmlInputFile
 //
 // Author:
-//    Chris Toshok    (toshok@ximian.com)
+//	Chris Toshok	(toshok@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,98 +36,98 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.HtmlControls {
 
-    public class HtmlInputFilePoker : HtmlInputFile {
+	public class HtmlInputFilePoker : HtmlInputFile {
 
-        public HtmlInputFilePoker ()
-        {
-            TrackViewState ();
-        }
+		public HtmlInputFilePoker ()
+		{
+			TrackViewState ();
+		}
 
-        public object SaveState ()
-        {
-            return SaveViewState ();
-        }
+		public object SaveState ()
+		{
+			return SaveViewState ();
+		}
 
-        public void LoadState (object state)
-        {
-            LoadViewState (state);
-        }
+		public void LoadState (object state)
+		{
+			LoadViewState (state);
+		}
 
-        public void DoRenderAttributes (HtmlTextWriter writer)
-        {
-            RenderAttributes (writer);
-        }
-    }
+		public void DoRenderAttributes (HtmlTextWriter writer)
+		{
+			RenderAttributes (writer);
+		}
+	}
 
-    [TestFixture]
-    public class HtmlInputFileTest {
+	[TestFixture]
+	public class HtmlInputFileTest {
 
-        [Test]
-        public void Defaults ()
-        {
-            HtmlInputFilePoker p = new HtmlInputFilePoker ();
+		[Test]
+		public void Defaults ()
+		{
+			HtmlInputFilePoker p = new HtmlInputFilePoker ();
 
-            /* MS throws a null exception on both
-             * get_PostedFile and get_Value in this test,
-             * which makes me think (in the PostedFile
-             * case at least) they're directly accessing
-             * Page.Request.Files (which our test doesn't
-             * support) */
+			/* MS throws a null exception on both
+			 * get_PostedFile and get_Value in this test,
+			 * which makes me think (in the PostedFile
+			 * case at least) they're directly accessing
+			 * Page.Request.Files (which our test doesn't
+			 * support) */
 
-            Assert.AreEqual ("", p.Accept, "A1");
-            Assert.AreEqual (-1, p.MaxLength, "A2");
-            //Assert.IsNull (p.PostedFile, "A3");
-            Assert.AreEqual (-1, p.Size, "A4");
-            //Assert.AreEqual ("", p.Value, "A5");
-        }
+			Assert.AreEqual ("", p.Accept, "A1");
+			Assert.AreEqual (-1, p.MaxLength, "A2");
+			//Assert.IsNull (p.PostedFile, "A3");
+			Assert.AreEqual (-1, p.Size, "A4");
+			//Assert.AreEqual ("", p.Value, "A5");
+		}
 
-        [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ValueSetter ()
-        {
-            HtmlInputFilePoker p = new HtmlInputFilePoker ();
-            p.Value = "/etc/passwd";
-        }
+		[Test]
+		[ExpectedException (typeof (NotSupportedException))]
+		public void ValueSetter ()
+		{
+			HtmlInputFilePoker p = new HtmlInputFilePoker ();
+			p.Value = "/etc/passwd";
+		}
 
-        [Test]
-        public void Attribute_Count ()
-        {
-            HtmlInputFilePoker p = new HtmlInputFilePoker ();
+		[Test]
+		public void Attribute_Count ()
+		{
+			HtmlInputFilePoker p = new HtmlInputFilePoker ();
 
-            p.Accept = "*.*";
-            p.MaxLength = 50;
-            p.Size = 20;
+			p.Accept = "*.*";
+			p.MaxLength = 50;
+			p.Size = 20;
 
-            Assert.AreEqual (4, p.Attributes.Count, "A1");
-        }
+			Assert.AreEqual (4, p.Attributes.Count, "A1");
+		}
 
 #if false
-        [Test]
-        public void ViewState ()
-        {
-            HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
-            p.CausesValidation = false;
-            p.ValidationGroup = "VG";
-            object s = p.SaveState();
-            HtmlInputButtonPoker copy = new HtmlInputButtonPoker ();
-            copy.LoadState (s);
+		[Test]
+		public void ViewState ()
+		{
+			HtmlInputButtonPoker p = new HtmlInputButtonPoker ();
+			p.CausesValidation = false;
+			p.ValidationGroup = "VG";
+			object s = p.SaveState();
+			HtmlInputButtonPoker copy = new HtmlInputButtonPoker ();
+			copy.LoadState (s);
 
-            Assert.IsFalse (copy.CausesValidation, "A1");
-            Assert.AreEqual ("VG", p.ValidationGroup, "A2");
-        }
+			Assert.IsFalse (copy.CausesValidation, "A1");
+			Assert.AreEqual ("VG", p.ValidationGroup, "A2");
+		}
 #endif
 
-        [Test]
-        public void RenderAttributes ()
-        {
-            StringWriter sw = new StringWriter ();
-            HtmlTextWriter tw = new HtmlTextWriter (sw);
+		[Test]
+		public void RenderAttributes ()
+		{
+			StringWriter sw = new StringWriter ();
+			HtmlTextWriter tw = new HtmlTextWriter (sw);
 
-            HtmlInputFilePoker p = new HtmlInputFilePoker ();
+			HtmlInputFilePoker p = new HtmlInputFilePoker ();
 
-            p.DoRenderAttributes (tw);
-            Assert.AreEqual (" name type=\"file\" /", sw.ToString (), "A1");
-        }
-    }    
+			p.DoRenderAttributes (tw);
+			Assert.AreEqual (" name type=\"file\" /", sw.ToString (), "A1");
+		}
+	}	
 }
 

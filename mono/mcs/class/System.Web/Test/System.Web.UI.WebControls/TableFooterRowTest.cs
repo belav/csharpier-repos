@@ -1,9 +1,9 @@
 //
 // TableFooterRowTest.cs
-//    - Unit tests for System.Web.UI.WebControls.TableFooterRow
+//	- Unit tests for System.Web.UI.WebControls.TableFooterRow
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,46 +39,46 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls {
 
-    public class TestTableFooterRow : TableFooterRow, ITableRowTest    {
+	public class TestTableFooterRow : TableFooterRow, ITableRowTest	{
 
-        public string Tag {
-            get { return base.TagName; }
-        }
+		public string Tag {
+			get { return base.TagName; }
+		}
 
-        public StateBag StateBag {
-            get { return base.ViewState; }
-        }
+		public StateBag StateBag {
+			get { return base.ViewState; }
+		}
 
-        public string Render ()
-        {
-            StringWriter sw = new StringWriter ();
-            sw.NewLine = "\n";
-            HtmlTextWriter writer = new HtmlTextWriter (sw);
-            base.Render (writer);
-            return writer.InnerWriter.ToString ();
-        }
+		public string Render ()
+		{
+			StringWriter sw = new StringWriter ();
+			sw.NewLine = "\n";
+			HtmlTextWriter writer = new HtmlTextWriter (sw);
+			base.Render (writer);
+			return writer.InnerWriter.ToString ();
+		}
 
-        public Style GetStyle ()
-        {
-            return base.CreateControlStyle ();
-        }
-    }
+		public Style GetStyle ()
+		{
+			return base.CreateControlStyle ();
+		}
+	}
 
-    [TestFixture]
-    public class TableFooterRowTest : TableRowTest {
+	[TestFixture]
+	public class TableFooterRowTest : TableRowTest {
 
-        // note: strangely TableSection defaults to TableRowSection.TableBody
-        // so all TableRowTest tests should be identical
+		// note: strangely TableSection defaults to TableRowSection.TableBody
+		// so all TableRowTest tests should be identical
 
-        public override TableRow GetNewTableRow ()
-        {
-            return new TableHeaderRow ();
-        }
+		public override TableRow GetNewTableRow ()
+		{
+			return new TableHeaderRow ();
+		}
 
-        public override ITableRowTest GetNewTestTableRow ()
-        {
-            return new TestTableHeaderRow ();
-        }
-    }
+		public override ITableRowTest GetNewTestTableRow ()
+		{
+			return new TestTableHeaderRow ();
+		}
+	}
 }
 

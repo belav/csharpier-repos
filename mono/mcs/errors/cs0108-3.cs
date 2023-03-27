@@ -17,5 +17,5 @@ class O: Base
 }
 
 class D {
-    static void Main () {}
+	static void Main () {}
 }

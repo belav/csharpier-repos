@@ -2,7 +2,7 @@
 // System.Net.Mail.SmtpFailedRecipientException.cs
 //
 // Author:
-//    John Luke (john.luke@gmail.com)
+//	John Luke (john.luke@gmail.com)
 //
 // Copyright (C) John Luke, 2005
 //
@@ -33,77 +33,77 @@ using System.Collections;
 using System.Runtime.Serialization;
 
 namespace System.Net.Mail {
-    [Serializable]
-    public class SmtpFailedRecipientException : SmtpException, ISerializable
-    {
-        #region Fields
+	[Serializable]
+	public class SmtpFailedRecipientException : SmtpException, ISerializable
+	{
+		#region Fields
 
-        string failedRecipient;
+		string failedRecipient;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public SmtpFailedRecipientException ()
-        {
-        }
+		public SmtpFailedRecipientException ()
+		{
+		}
 
-        public SmtpFailedRecipientException (string message) : base (message)
-        {
-        }
+		public SmtpFailedRecipientException (string message) : base (message)
+		{
+		}
 
-        protected SmtpFailedRecipientException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-            if (info == null)
-                throw new ArgumentNullException ("info");
-            failedRecipient = info.GetString ("failedRecipient");
-        }
+		protected SmtpFailedRecipientException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{
+			if (info == null)
+				throw new ArgumentNullException ("info");
+			failedRecipient = info.GetString ("failedRecipient");
+		}
 
-        public SmtpFailedRecipientException (SmtpStatusCode statusCode, string failedRecipient) : base (statusCode)
-        {
-            this.failedRecipient = failedRecipient;
-        }
+		public SmtpFailedRecipientException (SmtpStatusCode statusCode, string failedRecipient) : base (statusCode)
+		{
+			this.failedRecipient = failedRecipient;
+		}
 
-        public SmtpFailedRecipientException (string message, Exception innerException) : base (message, innerException)
-        {
-        }
+		public SmtpFailedRecipientException (string message, Exception innerException) : base (message, innerException)
+		{
+		}
 
-        public SmtpFailedRecipientException (string message, string failedRecipient, Exception innerException) : base (message, innerException)
-        {
-            this.failedRecipient = failedRecipient;
-        }
+		public SmtpFailedRecipientException (string message, string failedRecipient, Exception innerException) : base (message, innerException)
+		{
+			this.failedRecipient = failedRecipient;
+		}
 
-        public SmtpFailedRecipientException (SmtpStatusCode statusCode, string failedRecipient, string serverResponse) : base (statusCode, serverResponse)
-        {
-            this.failedRecipient = failedRecipient;
-        }
-        
-        #endregion // Constructors
-        
-        #region Properties
+		public SmtpFailedRecipientException (SmtpStatusCode statusCode, string failedRecipient, string serverResponse) : base (statusCode, serverResponse)
+		{
+			this.failedRecipient = failedRecipient;
+		}
+		
+		#endregion // Constructors
+		
+		#region Properties
 
-        public string FailedRecipient {
-            get { return failedRecipient; }
-        }
+		public string FailedRecipient {
+			get { return failedRecipient; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
-            if (serializationInfo == null)
-                throw new ArgumentNullException ("serializationInfo");
-            base.GetObjectData (serializationInfo, streamingContext);
-            serializationInfo.AddValue ("failedRecipient", failedRecipient);
-        }
-        void ISerializable.GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
-            GetObjectData (serializationInfo, streamingContext);
-        }
+		public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+		{
+			if (serializationInfo == null)
+				throw new ArgumentNullException ("serializationInfo");
+			base.GetObjectData (serializationInfo, streamingContext);
+			serializationInfo.AddValue ("failedRecipient", failedRecipient);
+		}
+		void ISerializable.GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+		{
+			GetObjectData (serializationInfo, streamingContext);
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }
 

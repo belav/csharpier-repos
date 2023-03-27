@@ -2,7 +2,7 @@
 // SecurityTokenVersion.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,13 +33,13 @@ using System.Net.Security;
 
 namespace System.IdentityModel.Selectors
 {
-    public abstract class SecurityTokenVersion
-    {
-        protected SecurityTokenVersion ()
-        {
-        }
+	public abstract class SecurityTokenVersion
+	{
+		protected SecurityTokenVersion ()
+		{
+		}
 
-        public abstract ReadOnlyCollection<string>
-            GetSecuritySpecifications ();
-    }
+		public abstract ReadOnlyCollection<string>
+			GetSecuritySpecifications ();
+	}
 }

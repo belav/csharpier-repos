@@ -7,8 +7,8 @@ delegate int D (int i);
 
 class X
 {
-    static void Main ()
-    {
-        D d = (int l) => Main ();
-    }
+	static void Main ()
+	{
+		D d = (int l) => Main ();
+	}
 }

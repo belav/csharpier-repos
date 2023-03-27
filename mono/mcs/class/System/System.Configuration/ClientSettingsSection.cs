@@ -2,7 +2,7 @@
 // ClientSettingsSection.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // (C) 2006 Novell, Inc. (http://www.novell.com)
 //
@@ -34,47 +34,47 @@ using System.Configuration;
 
 namespace System.Configuration 
 {
-    public sealed class ClientSettingsSection : ConfigurationSection
-    {
-        #region Fields
+	public sealed class ClientSettingsSection : ConfigurationSection
+	{
+		#region Fields
 
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty settings_prop;
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty settings_prop;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        static ClientSettingsSection ()
-        {
-            settings_prop = new ConfigurationProperty (
-                "",
-                typeof (SettingElementCollection),
-                null,
-                ConfigurationPropertyOptions.IsDefaultCollection);
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (settings_prop);
-        }
+		static ClientSettingsSection ()
+		{
+			settings_prop = new ConfigurationProperty (
+				"",
+				typeof (SettingElementCollection),
+				null,
+				ConfigurationPropertyOptions.IsDefaultCollection);
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (settings_prop);
+		}
 
-        public ClientSettingsSection ()
-        {
-        }
+		public ClientSettingsSection ()
+		{
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public SettingElementCollection Settings {
-            get { return (SettingElementCollection) base [settings_prop]; }
-        }
+		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+		public SettingElementCollection Settings {
+			get { return (SettingElementCollection) base [settings_prop]; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }
 
 #endif

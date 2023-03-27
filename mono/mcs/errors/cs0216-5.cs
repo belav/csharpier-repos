@@ -7,9 +7,9 @@ partial class Test
 
 partial class Test
 {
-    public static bool operator == (Test lhs, bool rhs)
-    {
-        return false;
-    }
+	public static bool operator == (Test lhs, bool rhs)
+	{
+		return false;
+	}
 }
 

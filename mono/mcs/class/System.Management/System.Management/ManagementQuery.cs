@@ -2,7 +2,7 @@
 // System.Management.ManagementQuery
 //
 // Authors:
-//    Gert Driesen (drieseng@users.sourceforge.net)
+//	Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) 2006 Gert Driesen
 //
@@ -32,56 +32,56 @@ using System.ComponentModel;
 
 namespace System.Management
 {
-    [MonoTODO ("System.Management is not implemented")]
-    //[TypeConverter ("")]
-    public abstract class ManagementQuery : ICloneable
-    {
-        string sQueryLanguage;
-        string sQueryString;
+	[MonoTODO ("System.Management is not implemented")]
+	//[TypeConverter ("")]
+	public abstract class ManagementQuery : ICloneable
+	{
+		string sQueryLanguage;
+		string sQueryString;
 
-        internal ManagementQuery ()
-        {
-        }
+		internal ManagementQuery ()
+		{
+		}
 
-        internal ManagementQuery (string query)
-        {
-            QueryString = query;
-        }
+		internal ManagementQuery (string query)
+		{
+			QueryString = query;
+		}
 
-        internal ManagementQuery (string language, string query)
-        {
-            QueryLanguage = language;
-            QueryString = query;
-        }
+		internal ManagementQuery (string language, string query)
+		{
+			QueryLanguage = language;
+			QueryString = query;
+		}
 
-        static ManagementQuery ()
-        {
-        }
+		static ManagementQuery ()
+		{
+		}
 
-        public virtual string QueryLanguage {
-            get {
-                return sQueryLanguage;
-            }
-            set {
-                sQueryLanguage = value;
-            }
-        }
+		public virtual string QueryLanguage {
+			get {
+				return sQueryLanguage;
+			}
+			set {
+				sQueryLanguage = value;
+			}
+		}
 
-        public virtual string QueryString {
-            get {
-                return sQueryString;
-            }
-            set {
-                sQueryString = value;
-            }
-        }
+		public virtual string QueryString {
+			get {
+				return sQueryString;
+			}
+			set {
+				sQueryString = value;
+			}
+		}
 
-        public abstract object Clone ();
+		public abstract object Clone ();
 
-        [MonoTODO]
-        protected internal virtual void ParseQuery (string query)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected internal virtual void ParseQuery (string query)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

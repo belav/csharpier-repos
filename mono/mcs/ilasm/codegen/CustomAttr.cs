@@ -35,21 +35,21 @@ namespace Mono.ILASM {
 
                 public bool IsSuppressUnmanaged (CodeGen codegen)
                 {
-            string asmname = "";
-            
-            BaseTypeRef owner = method_ref.Owner;
-            if (owner == null)
-                return false;
-                
-            ExternTypeRef etr = owner as ExternTypeRef;
-            if (etr != null) {
-                ExternAssembly ea = etr.ExternRef as ExternAssembly;
-                if (ea != null)
-                    asmname = ea.Name;
-            }    
+			string asmname = "";
+			
+			BaseTypeRef owner = method_ref.Owner;
+			if (owner == null)
+				return false;
+				
+			ExternTypeRef etr = owner as ExternTypeRef;
+			if (etr != null) {
+				ExternAssembly ea = etr.ExternRef as ExternAssembly;
+				if (ea != null)
+					asmname = ea.Name;
+			}	
 
-                           return (owner.FullName == "System.Security.SuppressUnmanagedCodeSecurityAttribute" 
-                && (asmname == "mscorlib" || codegen.IsThisAssembly ("mscorlib")) );
+                       	return (owner.FullName == "System.Security.SuppressUnmanagedCodeSecurityAttribute" 
+				&& (asmname == "mscorlib" || codegen.IsThisAssembly ("mscorlib")) );
                 }
         }
 

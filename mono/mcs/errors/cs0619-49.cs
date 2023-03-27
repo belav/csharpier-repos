@@ -3,10 +3,10 @@
 
 class A: System.Attribute
 {
-    [System.Obsolete("!!!", true)]
-    public A (string[] s)
-    {
-    }
+	[System.Obsolete("!!!", true)]
+	public A (string[] s)
+	{
+	}
 }
 
 [A(new string[0])]

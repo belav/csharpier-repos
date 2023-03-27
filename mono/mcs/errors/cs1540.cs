@@ -9,8 +9,8 @@ class A
 class B : A
 {
     public static void Main ()
-    {
-        A b = new A ();
-        b.n = 1;
-    }
+	{
+		A b = new A ();
+		b.n = 1;
+	}
 }

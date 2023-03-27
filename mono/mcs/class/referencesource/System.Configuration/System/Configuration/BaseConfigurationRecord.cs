@@ -3288,14 +3288,14 @@ namespace System.Configuration {
                 }
 
                 // If targetConfigPath is not upstream or downstream of the application's config path,
-        // skip this location section.
+		// skip this location section.
                 //
                 // Example #1: <location path="Site1"> has a targetConfigPath of "machine/webroot/1".  This applies
                 // to Site1, whose application config path is "machine/webroot/1", but it does not apply
                 // to Site2, whose application config path is "machine/webroot/2"
                 //
                 // Example #2: <location path="subdir"> has a targetConfigPath of "machine/webroot/1/root/subdir".
-        // This applies to an application with an application config path of "machine/webroot/1/root/subdir/app".
+		// This applies to an application with an application config path of "machine/webroot/1/root/subdir/app".
                 //
                 string targetConfigPath = host.GetConfigPathFromLocationSubPath(_configPath, locationSubPath);
                 if (!StringUtil.StartsWithIgnoreCase(s_appConfigPath, targetConfigPath)

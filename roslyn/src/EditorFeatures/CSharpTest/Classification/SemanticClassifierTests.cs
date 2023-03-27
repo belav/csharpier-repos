@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+๏ปฟ// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -793,7 +793,7 @@ class Derived : Base
 
         /// <summary>
         /// Instance field should be preferred to type
-        /// ง7.5.4.1
+        /// ยง7.5.4.1
         /// </summary>
         [Theory]
         [CombinatorialData]
@@ -817,7 +817,7 @@ class Derived : Base
 
         /// <summary>
         /// Type should be preferred to a static field
-        /// ง7.5.4.1
+        /// ยง7.5.4.1
         /// </summary>
         [Theory]
         [CombinatorialData]
@@ -1152,7 +1152,7 @@ class Derived : Base
         }
 
         /// <summary>
-        /// ง7.5.4.2
+        /// ยง7.5.4.2
         /// </summary>
         [Theory]
         [CombinatorialData]

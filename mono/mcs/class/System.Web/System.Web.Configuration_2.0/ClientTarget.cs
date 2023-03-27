@@ -2,7 +2,7 @@
 // System.Web.Configuration.ClientTarget
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,54 +35,54 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class ClientTarget : ConfigurationElement
-    {
-        static ConfigurationProperty aliasProp;
-        static ConfigurationProperty userAgentProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class ClientTarget : ConfigurationElement
+	{
+		static ConfigurationProperty aliasProp;
+		static ConfigurationProperty userAgentProp;
+		static ConfigurationPropertyCollection properties;
 
-        static ClientTarget ()
-        {
-            aliasProp = new ConfigurationProperty ("alias", typeof (string), null,
-                                   TypeDescriptor.GetConverter (typeof (string)),
-                                   PropertyHelper.NonEmptyStringValidator,
-                                   ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-            userAgentProp = new ConfigurationProperty ("userAgent", typeof (string), null,
-                                   TypeDescriptor.GetConverter (typeof (string)),
-                                   PropertyHelper.NonEmptyStringValidator,
-                                   ConfigurationPropertyOptions.IsRequired);
-            properties = new ConfigurationPropertyCollection ();
+		static ClientTarget ()
+		{
+			aliasProp = new ConfigurationProperty ("alias", typeof (string), null,
+							       TypeDescriptor.GetConverter (typeof (string)),
+							       PropertyHelper.NonEmptyStringValidator,
+							       ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+			userAgentProp = new ConfigurationProperty ("userAgent", typeof (string), null,
+								   TypeDescriptor.GetConverter (typeof (string)),
+								   PropertyHelper.NonEmptyStringValidator,
+								   ConfigurationPropertyOptions.IsRequired);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (aliasProp);
-            properties.Add (userAgentProp);
+			properties.Add (aliasProp);
+			properties.Add (userAgentProp);
 
-        }
+		}
 
-        public ClientTarget (string alias, string userAgent)
-        {
-            this.Alias = alias;
-            this.UserAgent = userAgent;
-        }
+		public ClientTarget (string alias, string userAgent)
+		{
+			this.Alias = alias;
+			this.UserAgent = userAgent;
+		}
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("alias", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Alias {
-            get { return (string) base [aliasProp]; }
-            internal set { base [aliasProp] = value; }
-        }
+		[StringValidator (MinLength = 1)]
+		[ConfigurationProperty ("alias", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+		public string Alias {
+			get { return (string) base [aliasProp]; }
+			internal set { base [aliasProp] = value; }
+		}
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("userAgent", Options = ConfigurationPropertyOptions.IsRequired)]
-        public string UserAgent {
-            get { return (string) base [userAgentProp]; }
-            internal set { base [userAgentProp] = value; }
-        }
+		[StringValidator (MinLength = 1)]
+		[ConfigurationProperty ("userAgent", Options = ConfigurationPropertyOptions.IsRequired)]
+		public string UserAgent {
+			get { return (string) base [userAgentProp]; }
+			internal set { base [userAgentProp] = value; }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-    }
+	}
 
 }
 

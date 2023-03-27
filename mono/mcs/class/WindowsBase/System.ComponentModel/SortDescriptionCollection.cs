@@ -20,8 +20,8 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
-//    Brian O'Keefe (zer0keefie@gmail.com)
+//	Chris Toshok (toshok@ximian.com)
+//	Brian O'Keefe (zer0keefie@gmail.com)
 //
 
 using System;
@@ -30,85 +30,85 @@ using System.Collections.Specialized;
 
 namespace System.ComponentModel {
 
-    public class SortDescriptionCollection : Collection<SortDescription>, INotifyCollectionChanged
-    {
-        public static readonly SortDescriptionCollection Empty = new SortDescriptionCollection (true);
+	public class SortDescriptionCollection : Collection<SortDescription>, INotifyCollectionChanged
+	{
+		public static readonly SortDescriptionCollection Empty = new SortDescriptionCollection (true);
 
-        readonly bool isReadOnly;
+		readonly bool isReadOnly;
 
-        public SortDescriptionCollection () : this (false)
-        {
-        }
+		public SortDescriptionCollection () : this (false)
+		{
+		}
 
-        SortDescriptionCollection (bool isReadOnly)
-        {
-            this.isReadOnly = isReadOnly;
-        }
+		SortDescriptionCollection (bool isReadOnly)
+		{
+			this.isReadOnly = isReadOnly;
+		}
 
-        event NotifyCollectionChangedEventHandler INotifyCollectionChanged.CollectionChanged {
-            add { CollectionChanged += value; }
-            remove { CollectionChanged -= value; }
-        }
-            
-        protected event NotifyCollectionChangedEventHandler CollectionChanged;
+		event NotifyCollectionChangedEventHandler INotifyCollectionChanged.CollectionChanged {
+			add { CollectionChanged += value; }
+			remove { CollectionChanged -= value; }
+		}
+			
+		protected event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        protected override void ClearItems ()
-        {
-            if (isReadOnly)
-                throw new NotSupportedException ();
+		protected override void ClearItems ()
+		{
+			if (isReadOnly)
+				throw new NotSupportedException ();
 
-            base.ClearItems ();
-            OnCollectionChanged (NotifyCollectionChangedAction.Reset);
-        }
+			base.ClearItems ();
+			OnCollectionChanged (NotifyCollectionChangedAction.Reset);
+		}
 
-        protected override void InsertItem (int index, SortDescription item)
-        {
-            if (isReadOnly)
-                throw new NotSupportedException ();
+		protected override void InsertItem (int index, SortDescription item)
+		{
+			if (isReadOnly)
+				throw new NotSupportedException ();
 
-            item.Seal ();
-            base.InsertItem (index, item);
-            OnCollectionChanged (NotifyCollectionChangedAction.Add, item, index);
-        }
+			item.Seal ();
+			base.InsertItem (index, item);
+			OnCollectionChanged (NotifyCollectionChangedAction.Add, item, index);
+		}
 
-        protected override void RemoveItem (int index)
-        {
-            if (isReadOnly)
-                throw new NotSupportedException ();
+		protected override void RemoveItem (int index)
+		{
+			if (isReadOnly)
+				throw new NotSupportedException ();
 
-            SortDescription sd = base [index];
-            base.RemoveItem (index);
-            OnCollectionChanged (NotifyCollectionChangedAction.Remove, sd, index);
-        }
+			SortDescription sd = base [index];
+			base.RemoveItem (index);
+			OnCollectionChanged (NotifyCollectionChangedAction.Remove, sd, index);
+		}
 
-        protected override void SetItem (int index, SortDescription item)
-        {
-            if (isReadOnly)
-                throw new NotSupportedException ();
+		protected override void SetItem (int index, SortDescription item)
+		{
+			if (isReadOnly)
+				throw new NotSupportedException ();
 
-            SortDescription old = base [index];
-            item.Seal ();
-            base.SetItem (index, item);
-            OnCollectionChanged (NotifyCollectionChangedAction.Remove, old, index);
-            OnCollectionChanged (NotifyCollectionChangedAction.Add, item, index);
-        }
+			SortDescription old = base [index];
+			item.Seal ();
+			base.SetItem (index, item);
+			OnCollectionChanged (NotifyCollectionChangedAction.Remove, old, index);
+			OnCollectionChanged (NotifyCollectionChangedAction.Add, item, index);
+		}
 
-        private void OnCollectionChanged (NotifyCollectionChangedAction action)
-        {
-            NotifyCollectionChangedEventHandler eh = CollectionChanged;
+		private void OnCollectionChanged (NotifyCollectionChangedAction action)
+		{
+			NotifyCollectionChangedEventHandler eh = CollectionChanged;
 
-            if (eh != null)
-                eh (this, new NotifyCollectionChangedEventArgs (action));
-        }
+			if (eh != null)
+				eh (this, new NotifyCollectionChangedEventArgs (action));
+		}
 
-        private void OnCollectionChanged (NotifyCollectionChangedAction action, SortDescription item, int index)
-        {
-            NotifyCollectionChangedEventHandler eh = CollectionChanged;
+		private void OnCollectionChanged (NotifyCollectionChangedAction action, SortDescription item, int index)
+		{
+			NotifyCollectionChangedEventHandler eh = CollectionChanged;
 
-            if (eh != null)
-                eh (this, new NotifyCollectionChangedEventArgs (action, item, index));
-        }
-    }
+			if (eh != null)
+				eh (this, new NotifyCollectionChangedEventArgs (action, item, index));
+		}
+	}
 
 }
 

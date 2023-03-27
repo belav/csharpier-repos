@@ -2,7 +2,7 @@
 // MessageBodyDescription.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,36 +36,36 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-    public class MessageBodyDescription
-    {
-        string wrapper_name, wrapper_ns;
-        MessagePartDescriptionCollection parts
+	public class MessageBodyDescription
+	{
+		string wrapper_name, wrapper_ns;
+		MessagePartDescriptionCollection parts
 
-            = new MessagePartDescriptionCollection ();
-        MessagePartDescription return_value;
+			= new MessagePartDescriptionCollection ();
+		MessagePartDescription return_value;
 
-        public MessageBodyDescription ()
-        {
-        }
+		public MessageBodyDescription ()
+		{
+		}
 
-        public MessagePartDescriptionCollection Parts {
-            get { return parts; }
-            internal set { parts = value; }
-        }
+		public MessagePartDescriptionCollection Parts {
+			get { return parts; }
+			internal set { parts = value; }
+		}
 
-        public MessagePartDescription ReturnValue {
-            get { return return_value; }
-            set { return_value = value; }
-        }
+		public MessagePartDescription ReturnValue {
+			get { return return_value; }
+			set { return_value = value; }
+		}
 
-        public string WrapperName {
-            get { return wrapper_name; }
-            set { wrapper_name = value; }
-        }
+		public string WrapperName {
+			get { return wrapper_name; }
+			set { wrapper_name = value; }
+		}
 
-        public string WrapperNamespace {
-            get { return wrapper_ns; }
-            set { wrapper_ns = value; }
-        }
-    }
+		public string WrapperNamespace {
+			get { return wrapper_ns; }
+			set { wrapper_ns = value; }
+		}
+	}
 }

@@ -28,13 +28,13 @@
 
 namespace Mono.Cecil.Signatures {
 
-    internal sealed class MethodSpec {
+	internal sealed class MethodSpec {
 
-        public GenericInstSignature Signature;
+		public GenericInstSignature Signature;
 
-        public MethodSpec (GenericInstSignature sig)
-        {
-            this.Signature = sig;
-        }
-    }
+		public MethodSpec (GenericInstSignature sig)
+		{
+			this.Signature = sig;
+		}
+	}
 }

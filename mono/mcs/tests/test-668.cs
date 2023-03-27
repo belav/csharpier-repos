@@ -5,8 +5,8 @@ class Bar { };
 #endif
 
 class Test {
-    public static void Main ()
-    {
-        new Bar ();
-    }
+	public static void Main ()
+	{
+		new Bar ();
+	}
 }

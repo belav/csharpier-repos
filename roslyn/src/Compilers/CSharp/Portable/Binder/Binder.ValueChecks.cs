@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1655,13 +1655,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC: (also applies to the CheckInvocationEscape counterpart)
             //
             //            An lvalue resulting from a ref-returning method invocation e1.M(e2, ...) is ref-safe - to - escape the smallest of the following scopes:
-            //•    The entire enclosing method
-            //•    the ref-safe-to-escape of all ref/out/in argument expressions(excluding the receiver)
-            //•    the safe-to - escape of all argument expressions(including the receiver)
+            //â€¢	The entire enclosing method
+            //â€¢	the ref-safe-to-escape of all ref/out/in argument expressions(excluding the receiver)
+            //â€¢	the safe-to - escape of all argument expressions(including the receiver)
             //
             //            An rvalue resulting from a method invocation e1.M(e2, ...) is safe - to - escape from the smallest of the following scopes:
-            //•    The entire enclosing method
-            //•    the safe-to-escape of all argument expressions(including the receiver)
+            //â€¢	The entire enclosing method
+            //â€¢	the safe-to-escape of all argument expressions(including the receiver)
             //
 
             if (!symbol.RequiresInstanceReceiver())
@@ -1824,7 +1824,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // SPEC: 
             //            In a method invocation, the following constraints apply:
-            //•    If there is a ref or out argument to a ref struct type (including the receiver), with safe-to-escape E1, then
+            //â€¢	If there is a ref or out argument to a ref struct type (including the receiver), with safe-to-escape E1, then
             //  o no ref or out argument(excluding the receiver and arguments of ref-like types) may have a narrower ref-safe-to-escape than E1; and
             //  o   no argument(including the receiver) may have a narrower safe-to-escape than E1.
 

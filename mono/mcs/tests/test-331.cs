@@ -7,6 +7,6 @@ class T
                 get { return ptr; }
                 set { ptr = value; }
         }
-    
-    public static void Main () {}
+	
+	public static void Main () {}
 }

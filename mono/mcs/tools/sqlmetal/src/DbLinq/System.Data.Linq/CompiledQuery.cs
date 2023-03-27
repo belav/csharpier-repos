@@ -32,43 +32,43 @@ using System.Linq.Expressions;
 
 namespace System.Data.Linq
 {
-    public sealed class CompiledQuery
-    {
-        [MonoTODO]
-        public static Func<TArg0, TResult> Compile<TArg0, TResult> (Expression<Func<TArg0, TResult>> query)
-            where TArg0 : DataContext
-        {
-            throw new NotImplementedException ();
-        }
+	public sealed class CompiledQuery
+	{
+		[MonoTODO]
+		public static Func<TArg0, TResult> Compile<TArg0, TResult> (Expression<Func<TArg0, TResult>> query)
+			where TArg0 : DataContext
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static Func<TArg0, TArg1, TResult> Compile<TArg0, TArg1, TResult> (Expression<Func<TArg0, TArg1, TResult>> query)
-            where TArg0 : DataContext
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static Func<TArg0, TArg1, TResult> Compile<TArg0, TArg1, TResult> (Expression<Func<TArg0, TArg1, TResult>> query)
+			where TArg0 : DataContext
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static Func<TArg0, TArg1, TArg2, TResult> Compile<TArg0, TArg1, TArg2, TResult> (Expression<Func<TArg0, TArg1, TArg2, TResult>> query)
-            where TArg0 : DataContext
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static Func<TArg0, TArg1, TArg2, TResult> Compile<TArg0, TArg1, TArg2, TResult> (Expression<Func<TArg0, TArg1, TArg2, TResult>> query)
+			where TArg0 : DataContext
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static Func<TArg0, TArg1, TArg2, TArg3, TResult> Compile<TArg0, TArg1, TArg2, TArg3, TResult> (Expression<Func<TArg0, TArg1, TArg2, TArg3, TResult>> query)
-            where TArg0 : DataContext
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static Func<TArg0, TArg1, TArg2, TArg3, TResult> Compile<TArg0, TArg1, TArg2, TArg3, TResult> (Expression<Func<TArg0, TArg1, TArg2, TArg3, TResult>> query)
+			where TArg0 : DataContext
+		{
+			throw new NotImplementedException ();
+		}
 
-        internal CompiledQuery ()
-        {
-        }
+		internal CompiledQuery ()
+		{
+		}
 
-        [MonoTODO]
-        public LambdaExpression Expression {
-            get { throw new NotImplementedException (); }
-        }
-    }
+		[MonoTODO]
+		public LambdaExpression Expression {
+			get { throw new NotImplementedException (); }
+		}
+	}
 }

@@ -5,14 +5,14 @@ using System;
 
 class TestAttribute: Attribute
 {
-    public TestAttribute (int[][] o) {}
+	public TestAttribute (int[][] o) {}
 }
 
 public class E
 {
-    [Test (null)]
-    public static void Main ()
-    {
-        System.Reflection.MethodBase.GetCurrentMethod().GetCustomAttributes (true);
-    }
+	[Test (null)]
+	public static void Main ()
+	{
+		System.Reflection.MethodBase.GetCurrentMethod().GetCustomAttributes (true);
+	}
 }

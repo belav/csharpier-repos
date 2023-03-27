@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,12 +27,12 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    [Flags]
-    public enum ScrollBarButtonStyles
-    {
-        None = 0,
-        SmallScroll = 1,
-        ResetZoom = 2,
-        All = 3
-    }
+	[Flags]
+	public enum ScrollBarButtonStyles
+	{
+		None = 0,
+		SmallScroll = 1,
+		ResetZoom = 2,
+		All = 3
+	}
 }

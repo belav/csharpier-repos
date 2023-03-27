@@ -2,7 +2,7 @@
 // System.Web.HttpRuntimeTest.cs - Unit tests for System.Web.HttpRuntime
 //
 // Author:
-//    Dean Brettle <dean@brettle.com>
+//	Dean Brettle <dean@brettle.com>
 //
 // Copyright (C) 2007 Dean Brettle
 //
@@ -34,32 +34,32 @@ using System.Threading;
 
 namespace MonoTests.System.Web
 {
-    [TestFixture]
-    public class HttpRuntimeTest
-    {
+	[TestFixture]
+	public class HttpRuntimeTest
+	{
 
-        [Test]
-        [Category ("NunitWeb")]
-        [Ignore ("Pending fix for bug 351878")]
-        public void UnloadAppDomain () 
-        {
-                WebTest t = new WebTest (PageInvoker.CreateOnLoad (UnloadAppDomain_OnLoad));
-                t.Run ();
-        }
-        
-        public static void UnloadAppDomain_OnLoad (Page p) 
-        {
-            HttpRuntime.UnloadAppDomain();
-        }
+		[Test]
+		[Category ("NunitWeb")]
+		[Ignore ("Pending fix for bug 351878")]
+		public void UnloadAppDomain () 
+		{
+				WebTest t = new WebTest (PageInvoker.CreateOnLoad (UnloadAppDomain_OnLoad));
+				t.Run ();
+		}
+		
+		public static void UnloadAppDomain_OnLoad (Page p) 
+		{
+			HttpRuntime.UnloadAppDomain();
+		}
 
-        [Test]
-        [Category ("NunitWeb")]
-        [Ignore ("Pending fix for bug 351878")]
-        public void UnloadAppDomain100Times () 
-        {
-            for (int i = 0; i < 100; i++)
-                UnloadAppDomain();
-        }
+		[Test]
+		[Category ("NunitWeb")]
+		[Ignore ("Pending fix for bug 351878")]
+		public void UnloadAppDomain100Times () 
+		{
+			for (int i = 0; i < 100; i++)
+				UnloadAppDomain();
+		}
 
-    }
+	}
 }

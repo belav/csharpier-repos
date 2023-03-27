@@ -2,7 +2,7 @@
 // System.Web.Security.AnonymousIdentificationEventArgs
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
 //
 // (C) 2003 Ben Maurer
 // Copyright (c) 2005 Novell, Inc (http://www.novell.com)
@@ -28,22 +28,22 @@
 //
 
 namespace System.Web.Security {
-    public sealed class AnonymousIdentificationEventArgs : EventArgs {
-        public AnonymousIdentificationEventArgs (HttpContext context)
-        {
-            this.context = context;
-        }
-        
-        HttpContext context;
-        public HttpContext Context {
-            get { return context; }
-        }
-        
-        string anonymousId;
-        public string AnonymousID {
-            get { return anonymousId; }
-            set { anonymousId = value; }
-        }
-    }
+	public sealed class AnonymousIdentificationEventArgs : EventArgs {
+		public AnonymousIdentificationEventArgs (HttpContext context)
+		{
+			this.context = context;
+		}
+		
+		HttpContext context;
+		public HttpContext Context {
+			get { return context; }
+		}
+		
+		string anonymousId;
+		public string AnonymousID {
+			get { return anonymousId; }
+			set { anonymousId = value; }
+		}
+	}
 }
 

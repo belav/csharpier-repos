@@ -37,79 +37,79 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRelationCollection_Count : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRelationCollection_Count tc = new DataRelationCollection_Count();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRelationCollection_Count");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
+	[Test] public void Main()
+	{
+		DataRelationCollection_Count tc = new DataRelationCollection_Count();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRelationCollection_Count");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("DataRelationCollection_Count");
-            DataRelationCollection_Count1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-    private void DataRelationCollection_Count1()
-    {
-        DataSet ds = getDataSet();
-        Compare(ds.Relations.Count,0);
-        ds.Relations.Add("rel1",ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]);
-        Compare(ds.Relations.Count,1);
-        ds.Relations.Add("rel2",ds.Tables[0].Columns["String1"],ds.Tables[1].Columns["String1"]);
-        Compare(ds.Relations.Count,2);
-        ds.Relations.Remove("rel2");
-        Compare(ds.Relations.Count,1);
-        ds.Relations.Remove("rel1");
-        Compare(ds.Relations.Count,0);
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("DataRelationCollection_Count");
+			DataRelationCollection_Count1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
+	private void DataRelationCollection_Count1()
+	{
+		DataSet ds = getDataSet();
+		Compare(ds.Relations.Count,0);
+		ds.Relations.Add("rel1",ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]);
+		Compare(ds.Relations.Count,1);
+		ds.Relations.Add("rel2",ds.Tables[0].Columns["String1"],ds.Tables[1].Columns["String1"]);
+		Compare(ds.Relations.Count,2);
+		ds.Relations.Remove("rel2");
+		Compare(ds.Relations.Count,1);
+		ds.Relations.Remove("rel1");
+		Compare(ds.Relations.Count,0);
 
-    }
-    private DataSet getDataSet()
-    {
-        DataSet ds = new DataSet();
-        DataTable dt1 = DataProvider.CreateParentDataTable();
-        DataTable dt2 = DataProvider.CreateChildDataTable();
+	}
+	private DataSet getDataSet()
+	{
+		DataSet ds = new DataSet();
+		DataTable dt1 = DataProvider.CreateParentDataTable();
+		DataTable dt2 = DataProvider.CreateChildDataTable();
 
-        ds.Tables.Add(dt1);
-        ds.Tables.Add(dt2);
-        return ds;
-    }
+		ds.Tables.Add(dt1);
+		ds.Tables.Add(dt2);
+		return ds;
+	}
 }
 }

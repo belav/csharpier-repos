@@ -2,7 +2,7 @@
 // SecurityTokenSpeficicationTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -41,14 +41,14 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class SecurityTokenSpeficicationTest
-    {
-        [Test]
-        public void ConstructorNullPolicies ()
-        {
-            new SecurityTokenSpecification (new UserNameSecurityToken ("mono", "monopass"), new ReadOnlyCollection<IAuthorizationPolicy> (new IAuthorizationPolicy [0]));
-        }
-    }
+	[TestFixture]
+	public class SecurityTokenSpeficicationTest
+	{
+		[Test]
+		public void ConstructorNullPolicies ()
+		{
+			new SecurityTokenSpecification (new UserNameSecurityToken ("mono", "monopass"), new ReadOnlyCollection<IAuthorizationPolicy> (new IAuthorizationPolicy [0]));
+		}
+	}
 }
 #endif

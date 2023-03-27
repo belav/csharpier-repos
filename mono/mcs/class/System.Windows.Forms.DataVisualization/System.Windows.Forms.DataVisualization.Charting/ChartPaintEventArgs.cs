@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -29,23 +29,23 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class ChartPaintEventArgs : EventArgs
-    {
-        #region Constructors
-        internal ChartPaintEventArgs (Chart chart, object chartElement, ChartGraphics chartGraphics, ElementPosition position)
-        {
-            Chart = chart;
-            ChartElement = chartElement;
-            ChartGraphics = chartGraphics;
-            Position = position;
-        }
-        #endregion
+	public class ChartPaintEventArgs : EventArgs
+	{
+		#region Constructors
+		internal ChartPaintEventArgs (Chart chart, object chartElement, ChartGraphics chartGraphics, ElementPosition position)
+		{
+			Chart = chart;
+			ChartElement = chartElement;
+			ChartGraphics = chartGraphics;
+			Position = position;
+		}
+		#endregion
 
-        #region Public Properties
-        public Chart Chart { get; private set; }
-        public object ChartElement { get; private set; }
-        public ChartGraphics ChartGraphics { get; private set; }
-        public ElementPosition Position { get; private set; }
-        #endregion
-    }
+		#region Public Properties
+		public Chart Chart { get; private set; }
+		public object ChartElement { get; private set; }
+		public ChartGraphics ChartGraphics { get; private set; }
+		public ElementPosition Position { get; private set; }
+		#endregion
+	}
 }

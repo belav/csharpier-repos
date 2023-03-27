@@ -32,7 +32,7 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class AddResponse : DirectoryResponse
-    {
-    }
+	public class AddResponse : DirectoryResponse
+	{
+	}
 }

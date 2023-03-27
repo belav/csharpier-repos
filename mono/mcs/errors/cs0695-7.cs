@@ -3,9 +3,9 @@
 
 class A<T>
 {
-    public interface IB
-    {
-    }
+	public interface IB
+	{
+	}
 }
 
 class C<T, U> : A<T>.IB, A<U>.IB

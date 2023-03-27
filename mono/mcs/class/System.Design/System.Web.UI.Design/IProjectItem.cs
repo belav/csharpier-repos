@@ -2,7 +2,7 @@
 // System.Web.UI.Design.IProjectItem
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -31,13 +31,13 @@
 
 namespace System.Web.UI.Design {
 
-    public interface IProjectItem
-    {
-        string AppRelativeUrl { get; }
-        string Name { get; }
-        IProjectItem Parent { get; }
-        string PhysicalPath { get; }
-    }
+	public interface IProjectItem
+	{
+		string AppRelativeUrl { get; }
+		string Name { get; }
+		IProjectItem Parent { get; }
+		string PhysicalPath { get; }
+	}
 
 }
 

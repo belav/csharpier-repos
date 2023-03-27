@@ -20,30 +20,30 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public class UpDownEventArgs : EventArgs {
-        #region Local Variables
-        private int    button_id;
-        #endregion    // Local Variables
+	public class UpDownEventArgs : EventArgs {
+		#region Local Variables
+		private int	button_id;
+		#endregion	// Local Variables
 
-        #region Public Constructors
-        public UpDownEventArgs(int buttonPushed) {
-            button_id = buttonPushed;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public UpDownEventArgs(int buttonPushed) {
+			button_id = buttonPushed;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public int ButtonID {
-            get {
-                return button_id;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public int ButtonID {
+			get {
+				return button_id;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

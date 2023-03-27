@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.UdpStatistics
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (c) 2006-2007 Novell, Inc. (http://www.novell.com)
 //
@@ -28,43 +28,43 @@
 //
 #if WIN_PLATFORM
 namespace System.Net.NetworkInformation {
-    class Win32UdpStatistics : UdpStatistics
-    {
-        Win32_MIB_UDPSTATS info;
+	class Win32UdpStatistics : UdpStatistics
+	{
+		Win32_MIB_UDPSTATS info;
 
-        public Win32UdpStatistics (Win32_MIB_UDPSTATS info)
-        {
-            this.info = info;
-        }
+		public Win32UdpStatistics (Win32_MIB_UDPSTATS info)
+		{
+			this.info = info;
+		}
 
-        public override long DatagramsReceived {
-            get { return info.InDatagrams; }
-        }
+		public override long DatagramsReceived {
+			get { return info.InDatagrams; }
+		}
 
-        public override long DatagramsSent {
-            get { return info.OutDatagrams; }
-        }
+		public override long DatagramsSent {
+			get { return info.OutDatagrams; }
+		}
 
-        public override long IncomingDatagramsDiscarded {
-            get { return info.NoPorts; }
-        }
+		public override long IncomingDatagramsDiscarded {
+			get { return info.NoPorts; }
+		}
 
-        public override long IncomingDatagramsWithErrors {
-            get { return info.InErrors; }
-        }
+		public override long IncomingDatagramsWithErrors {
+			get { return info.InErrors; }
+		}
 
-        public override int UdpListeners {
-            get { return info.NumAddrs; }
-        }
-    }
+		public override int UdpListeners {
+			get { return info.NumAddrs; }
+		}
+	}
 
-    struct Win32_MIB_UDPSTATS
-    {
-        public uint InDatagrams;
-        public uint NoPorts;
-        public uint InErrors;
-        public uint OutDatagrams;
-        public int NumAddrs;
-    }
+	struct Win32_MIB_UDPSTATS
+	{
+		public uint InDatagrams;
+		public uint NoPorts;
+		public uint InErrors;
+		public uint OutDatagrams;
+		public int NumAddrs;
+	}
 }
 #endif

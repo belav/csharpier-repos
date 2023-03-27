@@ -32,70 +32,70 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-    [TestFixture]
-    public class OleDbDataReader_GetBoolean : ADONetTesterClass
-    {
-        public static void Main()
-        {
-            OleDbDataReader_GetBoolean tc = new OleDbDataReader_GetBoolean();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OleDbDataReader_GetBoolean");
-                tc.run();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+	[TestFixture]
+	public class OleDbDataReader_GetBoolean : ADONetTesterClass
+	{
+		public static void Main()
+		{
+			OleDbDataReader_GetBoolean tc = new OleDbDataReader_GetBoolean();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OleDbDataReader_GetBoolean");
+				tc.run();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            Exception exp = null;
-        
-            OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+		[Test]
+		public void run()
+		{
+			Exception exp = null;
+		
+			OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
 #if !JAVA
-            // PostgreSQL ODBC treats Type BOOL as String, so we don't run it on .NET
-            if ((ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL))
-            {
-                return; 
-            }
+			// PostgreSQL ODBC treats Type BOOL as String, so we don't run it on .NET
+			if ((ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL))
+			{
+				return; 
+			}
 #endif
 
-            //Do not test with oracle or DB2, because boolean does not exist in their types.
-            if ( (ConnectedDataProvider.GetDbType(con) == DataBaseServer.Oracle) || (ConnectedDataProvider.GetDbType(con) == DataBaseServer.DB2) )
-            {
-                return; 
-            }
+			//Do not test with oracle or DB2, because boolean does not exist in their types.
+			if ( (ConnectedDataProvider.GetDbType(con) == DataBaseServer.Oracle) || (ConnectedDataProvider.GetDbType(con) == DataBaseServer.DB2) )
+			{
+				return; 
+			}
 
-            con.Open();
-            string fieldName = "t_bit";
-            if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL)
-            {
-                fieldName ="t_bool";
-            }
-            
-            OleDbCommand cmd = new OleDbCommand("Select " + fieldName + " From TYPES_SIMPLE Where id = '0'",con);
-            OleDbDataReader rdr = cmd.ExecuteReader();
-            rdr.Read();
+			con.Open();
+			string fieldName = "t_bit";
+			if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL)
+			{
+				fieldName ="t_bool";
+			}
+			
+			OleDbCommand cmd = new OleDbCommand("Select " + fieldName + " From TYPES_SIMPLE Where id = '0'",con);
+			OleDbDataReader rdr = cmd.ExecuteReader();
+			rdr.Read();
 
-            try
-            {
-                BeginCase("GetBoolean true");
-                Boolean blnValue;
-                Compare(rdr.IsDBNull(0), false);
-                Compare("System.Boolean", rdr.GetValue(0).GetType().FullName);
-                blnValue = rdr.GetBoolean(0);
-                Compare(blnValue, true);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("GetBoolean true");
+				Boolean blnValue;
+				Compare(rdr.IsDBNull(0), false);
+				Compare("System.Boolean", rdr.GetValue(0).GetType().FullName);
+				blnValue = rdr.GetBoolean(0);
+				Compare(blnValue, true);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            rdr.Close();
+			rdr.Close();
               
-            
-            if (con.State == ConnectionState.Open) con.Close();
+			
+			if (con.State == ConnectionState.Open) con.Close();
 
-        }
-    }
+		}
+	}
 }

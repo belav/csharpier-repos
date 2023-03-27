@@ -28,23 +28,23 @@ using System;
 
 namespace System.ServiceModel.Channels
 {
-    public enum DeliveryFailure {
-        Unknown,
+	public enum DeliveryFailure {
+		Unknown,
 
-        BadDestinationQueue = 0x8000,
-        Purged,
-        ReachQueueTimeout,
-        QueueExceedMaximumSize,
-        AccessDenied,
-        HopCountExceeded,
-        BadSignature,
-        BadEncryption,
-        CouldNotEncrypt,
-        NotTransactionalQueue,
-        NotTransactionalMessage,
+		BadDestinationQueue = 0x8000,
+		Purged,
+		ReachQueueTimeout,
+		QueueExceedMaximumSize,
+		AccessDenied,
+		HopCountExceeded,
+		BadSignature,
+		BadEncryption,
+		CouldNotEncrypt,
+		NotTransactionalQueue,
+		NotTransactionalMessage,
 
-        QueueDeleted = 0xC000,
-        QueuePurged,
-        ReceiveTimeout,
-    }
+		QueueDeleted = 0xC000,
+		QueuePurged,
+		ReceiveTimeout,
+	}
 }

@@ -2,7 +2,7 @@
 // System.Web.Hosting.VirtualFileBase
 //
 // Author:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 
 //
@@ -34,33 +34,33 @@ using System.Web;
 
 namespace System.Web.Hosting {
 
-    public abstract class VirtualFileBase : MarshalByRefObject
-    {
-        string vpath;
+	public abstract class VirtualFileBase : MarshalByRefObject
+	{
+		string vpath;
 
-        protected VirtualFileBase ()
-        {
-        }
+		protected VirtualFileBase ()
+		{
+		}
 
-        internal void SetVirtualPath (string vpath)
-        {
-            this.vpath = vpath;
-        }
+		internal void SetVirtualPath (string vpath)
+		{
+			this.vpath = vpath;
+		}
 
-        public abstract bool IsDirectory { get; }
+		public abstract bool IsDirectory { get; }
 
-        public virtual string Name {
-            get { return VirtualPathUtility.GetFileName (vpath); }
-        }
+		public virtual string Name {
+			get { return VirtualPathUtility.GetFileName (vpath); }
+		}
 
-        public string VirtualPath {
-            get { return vpath; }
-        }
+		public string VirtualPath {
+			get { return vpath; }
+		}
 
-        public override object InitializeLifetimeService ()
-        {
-            return null; // forever young
-        }
-    }
+		public override object InitializeLifetimeService ()
+		{
+			return null; // forever young
+		}
+	}
 }
 

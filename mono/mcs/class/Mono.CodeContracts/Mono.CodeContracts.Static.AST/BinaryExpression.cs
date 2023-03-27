@@ -2,7 +2,7 @@
 // BinaryExpression.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,30 +27,30 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    class BinaryExpression : Expression {
-        public BinaryExpression (NodeType nodeType) : base (nodeType)
-        {
-        }
+	class BinaryExpression : Expression {
+		public BinaryExpression (NodeType nodeType) : base (nodeType)
+		{
+		}
 
-        public BinaryExpression (NodeType nodeType, Expression left, Expression right) : base (nodeType)
-        {
-            Left = left;
-            Right = right;
-        }
+		public BinaryExpression (NodeType nodeType, Expression left, Expression right) : base (nodeType)
+		{
+			Left = left;
+			Right = right;
+		}
 
-        public BinaryExpression (NodeType nodeType, Expression left, Expression right, TypeNode type)
-            : base (nodeType, type)
-        {
-            Left = left;
-            Right = right;
-        }
+		public BinaryExpression (NodeType nodeType, Expression left, Expression right, TypeNode type)
+			: base (nodeType, type)
+		{
+			Left = left;
+			Right = right;
+		}
 
-        public Expression Left { get; set; }
-        public Expression Right { get; set; }
+		public Expression Left { get; set; }
+		public Expression Right { get; set; }
 
-        public override string ToString ()
-        {
-            return string.Format ("({1} :{0}: {2})", NodeType, Left, Right);
-        }
-    }
+		public override string ToString ()
+		{
+			return string.Format ("({1} :{0}: {2})", NodeType, Left, Right);
+		}
+	}
 }

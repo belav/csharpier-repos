@@ -2,7 +2,7 @@
 // IAuthorizationComponent.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -28,8 +28,8 @@
 
 namespace System.IdentityModel.Policy
 {
-    public interface IAuthorizationComponent
-    {
-        string Id { get; }
-    }
+	public interface IAuthorizationComponent
+	{
+		string Id { get; }
+	}
 }

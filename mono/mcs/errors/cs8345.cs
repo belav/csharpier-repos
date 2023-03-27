@@ -8,5 +8,5 @@ public ref struct S
 
 struct Test
 {
-    S field;
+	S field;
 }

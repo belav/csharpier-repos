@@ -4,7 +4,7 @@
 [A (true is bool)]
 class AAttribute : System.Attribute
 {
-    public AAttribute (bool b)
-    {
-    }
+	public AAttribute (bool b)
+	{
+	}
 }

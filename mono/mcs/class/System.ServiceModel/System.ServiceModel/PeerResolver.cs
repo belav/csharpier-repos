@@ -2,7 +2,7 @@
 // PeerResolver.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -35,28 +35,28 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.ServiceModel
 {
-    public abstract class PeerResolver
-    {
-        protected PeerResolver ()
-        {
-        }
+	public abstract class PeerResolver
+	{
+		protected PeerResolver ()
+		{
+		}
 
-        public abstract bool CanShareReferrals { get; }
+		public abstract bool CanShareReferrals { get; }
 
-        public virtual void Initialize (EndpointAddress address, Binding binding, ClientCredentials credentials, PeerReferralPolicy referralPolicy)
-        {
-        }
+		public virtual void Initialize (EndpointAddress address, Binding binding, ClientCredentials credentials, PeerReferralPolicy referralPolicy)
+		{
+		}
 
-        public abstract object Register (string meshId,
-            PeerNodeAddress nodeAddress, TimeSpan timeout);
+		public abstract object Register (string meshId,
+			PeerNodeAddress nodeAddress, TimeSpan timeout);
 
-        public abstract ReadOnlyCollection<PeerNodeAddress> Resolve (
-            string meshId, int maxAddresses, TimeSpan timeout);
+		public abstract ReadOnlyCollection<PeerNodeAddress> Resolve (
+			string meshId, int maxAddresses, TimeSpan timeout);
 
-        public abstract void Unregister (object registrationId,
-            TimeSpan timeout);
+		public abstract void Unregister (object registrationId,
+			TimeSpan timeout);
 
-        public abstract void Update (object registrationId,
-            PeerNodeAddress updatedNodeAddress, TimeSpan timeout);
-    }
+		public abstract void Update (object registrationId,
+			PeerNodeAddress updatedNodeAddress, TimeSpan timeout);
+	}
 }

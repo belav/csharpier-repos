@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.Adapters.HierarchicalDataBoundControlAdapter
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,27 +34,27 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls.Adapters
 {
-    public class HierarchicalDataBoundControlAdapter : WebControlAdapter
-    {
-        public HierarchicalDataBoundControlAdapter ()
-        {
-        }
+	public class HierarchicalDataBoundControlAdapter : WebControlAdapter
+	{
+		public HierarchicalDataBoundControlAdapter ()
+		{
+		}
 
-        internal HierarchicalDataBoundControlAdapter (HierarchicalDataBoundControl c) : base (c)
-        {
-        }
+		internal HierarchicalDataBoundControlAdapter (HierarchicalDataBoundControl c) : base (c)
+		{
+		}
 
-        protected internal virtual void PerformDataBinding ()
-        {
-            Control.PerformDataBinding ();
-        }
+		protected internal virtual void PerformDataBinding ()
+		{
+			Control.PerformDataBinding ();
+		}
 
-        protected new HierarchicalDataBoundControl Control
-        {
-            get {
-                return (HierarchicalDataBoundControl)control;
-            }
-        }
-    }
+		protected new HierarchicalDataBoundControl Control
+		{
+			get {
+				return (HierarchicalDataBoundControl)control;
+			}
+		}
+	}
 }
 

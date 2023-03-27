@@ -235,17 +235,17 @@ namespace MonoTests.System.Data.Odbc
                                 Assert.AreEqual ("System.DateTime", ob.GetType ().ToString () , "Type of datetime column is wrong!");
                                 ob = reader["col_date"];
                                 Assert.AreEqual ("System.DateTime", ob.GetType ().ToString () , "Type of date column is wrong!");
-                // FIXME : Once TIME data type is fixed, enable this check
+				// FIXME : Once TIME data type is fixed, enable this check
                                 //ob = reader["col_time"];
                                 //Assert.AreEqual ("System.DateTime", ob.GetType ().ToString () , "Type of time column is wrong!");
 
-                DateTime dt = reader.GetDateTime (4);
-                Assert.AreEqual (new DateTime (2004, 8, 22, 0, 0, 0), dt, "DateValue (SQL_TIMESTAMP) is wrong");
-                dt = reader.GetDateTime (5);
-                Assert.AreEqual (new DateTime (2004, 8, 22, 0, 0, 0), dt, "DateValue (SQL_DATE) is wrong");
-                // FIXME : Once TIME data type is fixed, enable this check
-                //dt = reader.GetDateTime (7);
-                //Assert.AreEqual ("2004-08-22", dt.ToString (), "DateValue is wrong");
+				DateTime dt = reader.GetDateTime (4);
+				Assert.AreEqual (new DateTime (2004, 8, 22, 0, 0, 0), dt, "DateValue (SQL_TIMESTAMP) is wrong");
+				dt = reader.GetDateTime (5);
+				Assert.AreEqual (new DateTime (2004, 8, 22, 0, 0, 0), dt, "DateValue (SQL_DATE) is wrong");
+				// FIXME : Once TIME data type is fixed, enable this check
+				//dt = reader.GetDateTime (7);
+				//Assert.AreEqual ("2004-08-22", dt.ToString (), "DateValue is wrong");
                         }
                 } finally {
                         // clean up
@@ -258,37 +258,37 @@ namespace MonoTests.System.Data.Odbc
       }
 
 
-        
+		
       [Test]
       public void NumericTest()
      {
-        using(IDbConnection dbConnection = new OdbcConnection
-        (connectionString))
-        {
-            dbConnection.Open();
-            IDbCommand dbCommand = dbConnection.CreateCommand();
-            //note this will fail if the table already exists, ie if the test has failed.    
-            dbCommand.CommandText = "CREATE TABLE NumericTable (NumericField NUMERIC(10) NOT NULL)";
-            dbCommand.ExecuteNonQuery();
-            dbCommand.CommandText = "INSERT INTO NumericTable (NumericField) VALUES (125)";
-            dbCommand.ExecuteNonQuery();
-            dbCommand.CommandText = "SELECT * FROM NumericTable";
-            using(IDataReader reader = dbCommand.ExecuteReader())
-            {
-                while(reader.Read()) 
-                {
-                    for(int index = 0; index < reader.FieldCount; index++)
-                    {
-                        Object dataValue = reader.GetValue(index);
-                        Assert.AreEqual("System.Decimal",dataValue.GetType().ToString());
-                        Assert.AreEqual("125", dataValue.ToString());     
-                } 
-            }
-        }
+		using(IDbConnection dbConnection = new OdbcConnection
+		(connectionString))
+		{
+			dbConnection.Open();
+			IDbCommand dbCommand = dbConnection.CreateCommand();
+			//note this will fail if the table already exists, ie if the test has failed.	
+			dbCommand.CommandText = "CREATE TABLE NumericTable (NumericField NUMERIC(10) NOT NULL)";
+			dbCommand.ExecuteNonQuery();
+			dbCommand.CommandText = "INSERT INTO NumericTable (NumericField) VALUES (125)";
+			dbCommand.ExecuteNonQuery();
+			dbCommand.CommandText = "SELECT * FROM NumericTable";
+			using(IDataReader reader = dbCommand.ExecuteReader())
+			{
+				while(reader.Read()) 
+				{
+					for(int index = 0; index < reader.FieldCount; index++)
+					{
+						Object dataValue = reader.GetValue(index);
+						Assert.AreEqual("System.Decimal",dataValue.GetType().ToString());
+						Assert.AreEqual("125", dataValue.ToString()); 	
+				} 
+			}
+		}
 
-        dbCommand.CommandText = "DROP TABLE NumericTable";
-        dbCommand.ExecuteNonQuery();
-       }    
+		dbCommand.CommandText = "DROP TABLE NumericTable";
+		dbCommand.ExecuteNonQuery();
+	   }	
      }
 
 

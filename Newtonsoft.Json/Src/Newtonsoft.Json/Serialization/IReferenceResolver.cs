@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -52,7 +52,7 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="context">The serialization context.</param>
         /// <param name="value">The object to test for a reference.</param>
         /// <returns>
-        ///     <c>true</c> if the specified object is referenced; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the specified object is referenced; otherwise, <c>false</c>.
         /// </returns>
         bool IsReferenced(object context, object value);
 

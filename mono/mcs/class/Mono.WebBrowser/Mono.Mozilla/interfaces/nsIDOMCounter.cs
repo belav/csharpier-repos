@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,35 +32,35 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("31adb439-0055-402d-9b1d-d5ca94f3f55b")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMCounter {
+	[Guid ("31adb439-0055-402d-9b1d-d5ca94f3f55b")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMCounter {
 
 #region nsIDOMCounter
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getIdentifier ( /*DOMString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getIdentifier ( /*DOMString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getListStyle ( /*DOMString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getListStyle ( /*DOMString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getSeparator ( /*DOMString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getSeparator ( /*DOMString*/ HandleRef ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMCounter {
-        public static nsIDOMCounter GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCounter obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMCounter).GUID, obj);
-            return o as nsIDOMCounter;
-        }
-    }
+	internal class nsDOMCounter {
+		public static nsIDOMCounter GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCounter obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMCounter).GUID, obj);
+			return o as nsIDOMCounter;
+		}
+	}
 }
 #if example
 
@@ -69,27 +69,27 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-    internal class DOMCounter : nsIDOMCounter {
+	internal class DOMCounter : nsIDOMCounter {
 
 #region nsIDOMCounter
-        int nsIDOMCounter.getIdentifier ( /*DOMString*/ HandleRef ret)
+		int nsIDOMCounter.getIdentifier ( /*DOMString*/ HandleRef ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIDOMCounter.getListStyle ( /*DOMString*/ HandleRef ret)
+		int nsIDOMCounter.getListStyle ( /*DOMString*/ HandleRef ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIDOMCounter.getSeparator ( /*DOMString*/ HandleRef ret)
+		int nsIDOMCounter.getSeparator ( /*DOMString*/ HandleRef ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
 #endregion
-    }
+	}
 #endif

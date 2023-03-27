@@ -20,16 +20,16 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 
 
 namespace System.Windows.Forms {
 
-    public enum TabAlignment {
-        Top,
-        Bottom,
-        Left,
-        Right
-    }
+	public enum TabAlignment {
+		Top,
+		Bottom,
+		Left,
+		Right
+	}
 }
 

@@ -4,9 +4,9 @@
 
 class C
 {
-    static void Main ()
-    {
-        ushort us = 22;
-        int? r = us << null;
-    }
+	static void Main ()
+	{
+		ushort us = 22;
+		int? r = us << null;
+	}
 }

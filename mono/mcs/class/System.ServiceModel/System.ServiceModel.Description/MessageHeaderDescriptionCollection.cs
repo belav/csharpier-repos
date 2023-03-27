@@ -2,7 +2,7 @@
 // MessageHeaderDescriptionCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,16 +33,16 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-    public class MessageHeaderDescriptionCollection : KeyedCollection<XmlQualifiedName, MessageHeaderDescription>
-    {
-        internal MessageHeaderDescriptionCollection ()
-        {
-        }
+	public class MessageHeaderDescriptionCollection : KeyedCollection<XmlQualifiedName, MessageHeaderDescription>
+	{
+		internal MessageHeaderDescriptionCollection ()
+		{
+		}
 
-        protected override XmlQualifiedName
-            GetKeyForItem (MessageHeaderDescription item)
-        {
-            return new XmlQualifiedName (item.Name, item.Namespace);
-        }
-    }
+		protected override XmlQualifiedName
+			GetKeyForItem (MessageHeaderDescription item)
+		{
+			return new XmlQualifiedName (item.Name, item.Namespace);
+		}
+	}
 }

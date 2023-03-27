@@ -59,12 +59,12 @@ namespace System.ServiceModel.Channels
                 {
                     SetBinding(endpointContext.Endpoint, binding);
                 }
-#pragma warning disable 0618                
+#pragma warning disable 0618				
                 else if (transport is PeerTransportBindingElement && NetPeerTcpBinding.TryCreate(elements, out binding))
                 {
                     SetBinding(endpointContext.Endpoint, binding);
                 }
-#pragma warning restore 0618                
+#pragma warning restore 0618				
                 else if (transport is TcpTransportBindingElement && NetTcpBinding.TryCreate(elements, out binding))
                 {
                     SetBinding(endpointContext.Endpoint, binding);

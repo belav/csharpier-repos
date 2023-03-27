@@ -32,69 +32,69 @@ using System.Web.Hosting;
 
 namespace StandAloneRunnerSupport
 {
-    public sealed class TestRunItem
-    {
-        public TestCallback Callback {
-            get; set;
-        }
+	public sealed class TestRunItem
+	{
+		public TestCallback Callback {
+			get; set;
+		}
 
-        public object TestRunData {
-            get; set;
-        }
-        
-        public string Url {
-            get; set;
-        }
+		public object TestRunData {
+			get; set;
+		}
+		
+		public string Url {
+			get; set;
+		}
 
-        public string PathInfo {
-            get; set;
-        }
-        
-        public string UrlDescription {
-            get; set;
-        }
+		public string PathInfo {
+			get; set;
+		}
+		
+		public string UrlDescription {
+			get; set;
+		}
 #if BUG_IN_THE_RUNTIME_IS_FIXED
-        public SerializedDictionary <string, string> PostValues {
-            get; set;
-        }
+		public SerializedDictionary <string, string> PostValues {
+			get; set;
+		}
 #else
-        public string[] PostValues {
-            get; set;
-        }
+		public string[] PostValues {
+			get; set;
+		}
 #endif
-        public int StatusCode {
-            get; set;
-        }
+		public int StatusCode {
+			get; set;
+		}
 
-        public string RedirectLocation {
-            get; set;
-        }
+		public string RedirectLocation {
+			get; set;
+		}
 
-        public bool Redirected {
-            get; set;
-        }
+		public bool Redirected {
+			get; set;
+		}
 #if BUG_IN_THE_RUNTIME_IS_FIXED
-        public SerializedDictionary <string, object> AppDomainData {
-            get; set;
-        }
+		public SerializedDictionary <string, object> AppDomainData {
+			get; set;
+		}
 #else
-        public object[] AppDomainData {
-            get; set;
-        }
-#endif        
-        public TestRunItem ()
-        : this (null, null, null)
-        {}
-        
-        public TestRunItem (string url, TestCallback callback)
-        : this (url, null, callback)
-        {}
+		public object[] AppDomainData {
+			get; set;
+		}
+#endif		
+		public TestRunItem ()
+		: this (null, null, null)
+		{}
+		
+		public TestRunItem (string url, TestCallback callback)
+		: this (url, null, callback)
+		{}
 
-        public TestRunItem (string url, string urlDescription, TestCallback callback)
-        {
-            Url = url;
-            Callback = callback;
-            UrlDescription = urlDescription;
-        }
-    }
+		public TestRunItem (string url, string urlDescription, TestCallback callback)
+		{
+			Url = url;
+			Callback = callback;
+			UrlDescription = urlDescription;
+		}
+	}
 }

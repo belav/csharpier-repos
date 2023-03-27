@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -86,7 +86,7 @@ public class X
 
             // Verify use of Cyrillic namespace results in same behavior
             source = @"
-namespace ???????
+namespace решения
 {
 public class X
 {
@@ -96,11 +96,11 @@ public class X
     }
 }
 }";
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("???????.X"));
+            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("решения.X"));
             compilation.VerifyDiagnostics();
 
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("\"???????.X\""));
-            compilation.VerifyDiagnostics(Diagnostic(ErrorCode.ERR_MainClassNotFound).WithArguments("\"???????.X\""));
+            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("\"решения.X\""));
+            compilation.VerifyDiagnostics(Diagnostic(ErrorCode.ERR_MainClassNotFound).WithArguments("\"решения.X\""));
         }
 
         [Fact]
@@ -4194,12 +4194,12 @@ public class Test
             var source = @"
 public sealed class ContentType
 {       
-    public void M(System.Collections.Generic.Dictionary<object, object> p)
-    {   
-        foreach (object parameterKey in p.Keys)
-        {
-        }
-    }
+	public void M(System.Collections.Generic.Dictionary<object, object> p)
+	{   
+		foreach (object parameterKey in p.Keys)
+		{
+		}
+	}
 }";
 
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseModule, assemblyName: "ContentType");
@@ -4653,7 +4653,7 @@ class Program
 ";
             var comp = CreateCompilation(text, options: TestOptions.ReleaseExe).VerifyDiagnostics(
                 // (7,18): warning CS0665: Assignment in conditional expression is always constant; did you mean to use == instead of = ?
-                //         int s = (b = false) ? 5 : 100;         // Warning
+                //         int s = (b = false) ? 5 : 100; 		// Warning
                 Diagnostic(ErrorCode.WRN_IncorrectBooleanAssg, "b = false"),
                 // (6,14): warning CS0219: The variable 'b' is assigned but its value is never used
                 //         bool b;

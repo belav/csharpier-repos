@@ -36,26 +36,26 @@
 using ICSharpCode.SharpZipLib;
 
 namespace ICSharpCode.SharpZipLib.Tar {
-    
-    /// <summary>
-    /// TarExceptions are used for exceptions specific to tar classes and code.    
-    /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-    public class TarException : SharpZipBaseException
-    {
-        /// <summary>
-        /// Initialises a new instance of the TarException class.
-        /// </summary>
-        public TarException()
-        {
-        }
-        
-        /// <summary>
-        /// Initialises a new instance of the TarException class with a specified message.
-        /// </summary>
-        /// <param name="message">The message that describes the error.</param>
-        public TarException(string message) : base(message)
-        {
-        }
-    }
+	
+	/// <summary>
+	/// TarExceptions are used for exceptions specific to tar classes and code.	
+	/// </summary>
+	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+	public class TarException : SharpZipBaseException
+	{
+		/// <summary>
+		/// Initialises a new instance of the TarException class.
+		/// </summary>
+		public TarException()
+		{
+		}
+		
+		/// <summary>
+		/// Initialises a new instance of the TarException class with a specified message.
+		/// </summary>
+		/// <param name="message">The message that describes the error.</param>
+		public TarException(string message) : base(message)
+		{
+		}
+	}
 }

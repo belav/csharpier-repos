@@ -2,7 +2,7 @@
 // IStackContextProvider.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,7 +27,7 @@
 // 
 
 namespace Mono.CodeContracts.Static.Analysis {
-    interface IStackContextProvider : IMethodContextProvider {
-        IStackContext StackContext { get; }
-    }
+	interface IStackContextProvider : IMethodContextProvider {
+		IStackContext StackContext { get; }
+	}
 }

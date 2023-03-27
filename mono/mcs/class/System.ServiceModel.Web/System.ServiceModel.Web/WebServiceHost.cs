@@ -2,7 +2,7 @@
 // WebServiceHost.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -37,52 +37,52 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Web
 {
-    public class WebServiceHost : ServiceHost
-    {
-        public WebServiceHost ()
-            : base ()
-        {
-        }
+	public class WebServiceHost : ServiceHost
+	{
+		public WebServiceHost ()
+			: base ()
+		{
+		}
 
-        public WebServiceHost (object singletonInstance, params Uri [] baseAddresses)
-            : base (singletonInstance, baseAddresses)
-        {
-        }
+		public WebServiceHost (object singletonInstance, params Uri [] baseAddresses)
+			: base (singletonInstance, baseAddresses)
+		{
+		}
 
-        public WebServiceHost (Type serviceType, params Uri [] baseAddresses)
-            : base (serviceType, baseAddresses)
-        {
-        }
+		public WebServiceHost (Type serviceType, params Uri [] baseAddresses)
+			: base (serviceType, baseAddresses)
+		{
+		}
 
-        protected override void OnOpening ()
-        {
-            base.OnOpening ();
+		protected override void OnOpening ()
+		{
+			base.OnOpening ();
 
-            foreach (Uri baseAddress in BaseAddresses) {
-                bool found = false;
-                foreach (ServiceEndpoint se in Description.Endpoints)
-                    if (se.Address.Uri == baseAddress)
-                        found = true;
-                if (!found) {
-                    if (ImplementedContracts.Count > 1)
-                        throw new InvalidOperationException ("Service '"+ Description.ServiceType.Name + "' implements multiple ServiceContract types, and no endpoints are defined in the configuration file. WebServiceHost can set up default endpoints, but only if the service implements only a single ServiceContract. Either change the service to only implement a single ServiceContract, or else define endpoints for the service explicitly in the configuration file. When more than one contract is implemented, must add base address endpoint manually");
-                    var  enumerator = ImplementedContracts.Values.GetEnumerator ();
-                    enumerator.MoveNext ();
-                    Type contractType = enumerator.Current.ContractType;
-                    AddServiceEndpoint (contractType, new WebHttpBinding (), baseAddress);
-                }
-            }
+			foreach (Uri baseAddress in BaseAddresses) {
+				bool found = false;
+				foreach (ServiceEndpoint se in Description.Endpoints)
+					if (se.Address.Uri == baseAddress)
+						found = true;
+				if (!found) {
+					if (ImplementedContracts.Count > 1)
+						throw new InvalidOperationException ("Service '"+ Description.ServiceType.Name + "' implements multiple ServiceContract types, and no endpoints are defined in the configuration file. WebServiceHost can set up default endpoints, but only if the service implements only a single ServiceContract. Either change the service to only implement a single ServiceContract, or else define endpoints for the service explicitly in the configuration file. When more than one contract is implemented, must add base address endpoint manually");
+					var  enumerator = ImplementedContracts.Values.GetEnumerator ();
+					enumerator.MoveNext ();
+					Type contractType = enumerator.Current.ContractType;
+					AddServiceEndpoint (contractType, new WebHttpBinding (), baseAddress);
+				}
+			}
 
-            foreach (ServiceEndpoint se in Description.Endpoints)
-                if (se.Behaviors.Find<WebHttpBehavior> () == null)
-                    se.Behaviors.Add (new WebHttpBehavior ());
+			foreach (ServiceEndpoint se in Description.Endpoints)
+				if (se.Behaviors.Find<WebHttpBehavior> () == null)
+					se.Behaviors.Add (new WebHttpBehavior ());
 
-            // disable help page.
-            ServiceDebugBehavior serviceDebugBehavior = Description.Behaviors.Find<ServiceDebugBehavior> ();
-            if (serviceDebugBehavior != null) {
-                serviceDebugBehavior.HttpHelpPageEnabled = false;
-                serviceDebugBehavior.HttpsHelpPageEnabled = false;
-            }
-        }
-    }
+			// disable help page.
+			ServiceDebugBehavior serviceDebugBehavior = Description.Behaviors.Find<ServiceDebugBehavior> ();
+			if (serviceDebugBehavior != null) {
+				serviceDebugBehavior.HttpHelpPageEnabled = false;
+				serviceDebugBehavior.HttpsHelpPageEnabled = false;
+			}
+		}
+	}
 }

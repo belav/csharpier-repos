@@ -2,7 +2,7 @@
 // X509ListedCertificateValidator.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -40,29 +40,29 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Security.Tokens
 {
-    public class X509ListedCertificateValidator : X509CertificateValidator
-    {
-        Collection<X509Certificate2> certs =
-            new Collection<X509Certificate2> ();
+	public class X509ListedCertificateValidator : X509CertificateValidator
+	{
+		Collection<X509Certificate2> certs =
+			new Collection<X509Certificate2> ();
 
-        public X509ListedCertificateValidator (params X509Certificate2 [] certificates)
-            : this ((IEnumerable<X509Certificate2>) certificates)
-        {
-        }
+		public X509ListedCertificateValidator (params X509Certificate2 [] certificates)
+			: this ((IEnumerable<X509Certificate2>) certificates)
+		{
+		}
 
-        public X509ListedCertificateValidator (IEnumerable<X509Certificate2> certificates)
-        {
-            foreach (X509Certificate2 cert in certificates)
-                certs.Add (cert);
-        }
+		public X509ListedCertificateValidator (IEnumerable<X509Certificate2> certificates)
+		{
+			foreach (X509Certificate2 cert in certificates)
+				certs.Add (cert);
+		}
 
-        public override void Validate (X509Certificate2 certificate)
-        {
-            foreach (X509Certificate2 c in certs)
-                if (c.Thumbprint == certificate.Thumbprint)
-                    return;
-            throw new ArgumentException ("The argument certificate is not listed as a trusted certificate in this validator.");
-        }
-    }
+		public override void Validate (X509Certificate2 certificate)
+		{
+			foreach (X509Certificate2 c in certs)
+				if (c.Thumbprint == certificate.Thumbprint)
+					return;
+			throw new ArgumentException ("The argument certificate is not listed as a trusted certificate in this validator.");
+		}
+	}
 }
 #endif

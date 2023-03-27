@@ -3,5 +3,5 @@
 
 class T
 {
-    const decimal[] i = new decimal [] { 2m };
+	const decimal[] i = new decimal [] { 2m };
 }

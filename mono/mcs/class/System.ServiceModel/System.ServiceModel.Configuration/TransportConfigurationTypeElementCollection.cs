@@ -2,7 +2,7 @@
 // TransportConfigurationTypeElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,31 +54,31 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (TransportConfigurationTypeElement),
-         AddItemName = "add",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    [MonoTODO]
-    public sealed partial class TransportConfigurationTypeElementCollection
-         : ServiceModelConfigurationElementCollection<TransportConfigurationTypeElement>,  ICollection,  IEnumerable
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
+	[ConfigurationCollection (typeof (TransportConfigurationTypeElement),
+		 AddItemName = "add",
+		 RemoveItemName = "remove",
+		 ClearItemsName = "clear",
+		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	[MonoTODO]
+	public sealed partial class TransportConfigurationTypeElementCollection
+		 : ServiceModelConfigurationElementCollection<TransportConfigurationTypeElement>,  ICollection,  IEnumerable
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
 
-        static TransportConfigurationTypeElementCollection ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static TransportConfigurationTypeElementCollection ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public TransportConfigurationTypeElementCollection ()
-        {
-        }
-
-
-        // Properties
+		public TransportConfigurationTypeElementCollection ()
+		{
+		}
 
 
-    }
+		// Properties
+
+
+	}
 
 }

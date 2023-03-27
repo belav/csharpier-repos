@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.Serialization.ObjectStatementCollection
 //
-// Authors:     
-//      Ivan N. Zlatev (contact i-nZ.net)
+// Authors:	 
+//	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
 
@@ -34,46 +34,46 @@ using System.CodeDom;
 
 namespace System.ComponentModel.Design.Serialization
 {
-    public sealed class ObjectStatementCollection : IEnumerable
-    {
+	public sealed class ObjectStatementCollection : IEnumerable
+	{
 
-        private Hashtable _statements;
+		private Hashtable _statements;
 
-        internal ObjectStatementCollection ()
-        {
-            _statements = new Hashtable ();
-        }
+		internal ObjectStatementCollection ()
+		{
+			_statements = new Hashtable ();
+		}
 
-        public bool ContainsKey (object statementOwner)
-        {
-            return _statements.ContainsKey (statementOwner);
-        }
+		public bool ContainsKey (object statementOwner)
+		{
+			return _statements.ContainsKey (statementOwner);
+		}
 
-        public IDictionaryEnumerator GetEnumerator()
-        {
-            return _statements.GetEnumerator ();
-        }
+		public IDictionaryEnumerator GetEnumerator()
+		{
+			return _statements.GetEnumerator ();
+		}
 
-        public CodeStatementCollection this[object statementOwner]
-        {
-            get { return _statements[statementOwner] as CodeStatementCollection; }
-        }
+		public CodeStatementCollection this[object statementOwner]
+		{
+			get { return _statements[statementOwner] as CodeStatementCollection; }
+		}
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator ();
-        }
-    
-        public void Populate (object owner)
-        {
-            if (_statements[owner] == null)
-                _statements[owner] = null;
-        }
-    
-        public void Populate (ICollection statementOwners)
-        {
-            foreach (object o in statementOwners)
-                this.Populate (o);
-        }
-    }
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return this.GetEnumerator ();
+		}
+	
+		public void Populate (object owner)
+		{
+			if (_statements[owner] == null)
+				_statements[owner] = null;
+		}
+	
+		public void Populate (ICollection statementOwners)
+		{
+			foreach (object o in statementOwners)
+				this.Populate (o);
+		}
+	}
 }

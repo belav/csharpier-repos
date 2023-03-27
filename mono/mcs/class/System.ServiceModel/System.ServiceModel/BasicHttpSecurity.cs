@@ -1,8 +1,8 @@
-//
+﻿//
 // BasicHttpSecurity.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -31,39 +31,39 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-    public sealed class BasicHttpSecurity
-    {
-        public BasicHttpSecurity ()
-        {
-            this.mode = BasicHttpSecurityMode.None;
-            this.message = new BasicHttpMessageSecurity ();
-            this.transport = new HttpTransportSecurity ();
-        }
+	public sealed class BasicHttpSecurity
+	{
+		public BasicHttpSecurity ()
+		{
+			this.mode = BasicHttpSecurityMode.None;
+			this.message = new BasicHttpMessageSecurity ();
+			this.transport = new HttpTransportSecurity ();
+		}
 
-        internal BasicHttpSecurity (BasicHttpSecurityMode mode)
-        {
-            this.mode = mode;
-            this.message = new BasicHttpMessageSecurity ();
-            this.transport = new HttpTransportSecurity ();
-        }
+		internal BasicHttpSecurity (BasicHttpSecurityMode mode)
+		{
+			this.mode = mode;
+			this.message = new BasicHttpMessageSecurity ();
+			this.transport = new HttpTransportSecurity ();
+		}
 
-        BasicHttpMessageSecurity message;
-        BasicHttpSecurityMode mode;
-        HttpTransportSecurity transport;
+		BasicHttpMessageSecurity message;
+		BasicHttpSecurityMode mode;
+		HttpTransportSecurity transport;
 
-        public BasicHttpMessageSecurity Message {
-            get { return message; }
-            set { message = value; }
-        }
+		public BasicHttpMessageSecurity Message {
+			get { return message; }
+			set { message = value; }
+		}
 
-        public BasicHttpSecurityMode Mode {
-            get { return mode; }
-            set { mode = value; }
-        }
+		public BasicHttpSecurityMode Mode {
+			get { return mode; }
+			set { mode = value; }
+		}
 
-        public HttpTransportSecurity Transport {
-            get { return transport; }
-            set { transport = value; }
-        }
-    }
+		public HttpTransportSecurity Transport {
+			get { return transport; }
+			set { transport = value; }
+		}
+	}
 }

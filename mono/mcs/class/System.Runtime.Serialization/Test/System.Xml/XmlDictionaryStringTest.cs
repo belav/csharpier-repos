@@ -32,31 +32,31 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {
-    [TestFixture]
-    public class XmlDictionaryStringTest
-    {
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor_DictionaryNull ()
-        {
-            new XmlDictionaryString (null, "foo", -1);
-        }
+	[TestFixture]
+	public class XmlDictionaryStringTest
+	{
+		[Test, ExpectedException (typeof (ArgumentNullException))]
+		public void Constructor_DictionaryNull ()
+		{
+			new XmlDictionaryString (null, "foo", -1);
+		}
 
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor_ValueyNull ()
-        {
-            new XmlDictionaryString (new XmlDictionary (), null, -1);
-        }
+		[Test, ExpectedException (typeof (ArgumentNullException))]
+		public void Constructor_ValueyNull ()
+		{
+			new XmlDictionaryString (new XmlDictionary (), null, -1);
+		}
 
-        [Test, ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Constructor_KeyNegative ()
-        {
-            new XmlDictionaryString (new XmlDictionary (), "key", -1);
-        }
+		[Test, ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void Constructor_KeyNegative ()
+		{
+			new XmlDictionaryString (new XmlDictionary (), "key", -1);
+		}
 
-        [Test, ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Constructor_KeyTooLarge ()
-        {
-            new XmlDictionaryString (new XmlDictionary (), "key", (int.MaxValue/4)+1);
-        }
-    }
+		[Test, ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void Constructor_KeyTooLarge ()
+		{
+			new XmlDictionaryString (new XmlDictionary (), "key", (int.MaxValue/4)+1);
+		}
+	}
 }

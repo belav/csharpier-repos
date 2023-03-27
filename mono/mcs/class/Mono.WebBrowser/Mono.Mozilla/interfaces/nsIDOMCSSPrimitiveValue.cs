@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,72 +32,72 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("e249031f-8df9-4e7a-b644-18946dce0019")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMCSSPrimitiveValue : nsIDOMCSSValue {
+	[Guid ("e249031f-8df9-4e7a-b644-18946dce0019")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMCSSPrimitiveValue : nsIDOMCSSValue {
 #region nsIDOMCSSValue
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCssText ( /*DOMString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getCssText ( /*DOMString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setCssText (/*DOMString*/ HandleRef value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setCssText (/*DOMString*/ HandleRef value);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCssValueType (out ushort ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getCssValueType (out ushort ret);
 
 #endregion
 
 #region nsIDOMCSSPrimitiveValue
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getPrimitiveType (out ushort ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getPrimitiveType (out ushort ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setFloatValue ( ushort unitType,
-                 float floatValue);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setFloatValue ( ushort unitType,
+				 float floatValue);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getFloatValue ( ushort unitType,
-                out float ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getFloatValue ( ushort unitType,
+				out float ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setStringValue ( ushort stringType,
-                 /*DOMString*/ HandleRef stringValue);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setStringValue ( ushort stringType,
+				 /*DOMString*/ HandleRef stringValue);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getStringValue ( /*DOMString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getStringValue ( /*DOMString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCounterValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCounter ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getCounterValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCounter ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getRectValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMRect ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getRectValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMRect ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getRGBColorValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMRGBColor ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getRGBColorValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMRGBColor ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMCSSPrimitiveValue {
-        public static nsIDOMCSSPrimitiveValue GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSPrimitiveValue obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSPrimitiveValue).GUID, obj);
-            return o as nsIDOMCSSPrimitiveValue;
-        }
-    }
+	internal class nsDOMCSSPrimitiveValue {
+		public static nsIDOMCSSPrimitiveValue GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSPrimitiveValue obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSPrimitiveValue).GUID, obj);
+			return o as nsIDOMCSSPrimitiveValue;
+		}
+	}
 }
 #if example
 
@@ -106,67 +106,67 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-    internal class DOMCSSPrimitiveValue : nsIDOMCSSPrimitiveValue {
+	internal class DOMCSSPrimitiveValue : nsIDOMCSSPrimitiveValue {
 
 #region nsIDOMCSSPrimitiveValue
-        int nsIDOMCSSPrimitiveValue.getPrimitiveType (out ushort ret)
+		int nsIDOMCSSPrimitiveValue.getPrimitiveType (out ushort ret)
 
-        {
-            return 0;
-        }
+		{
+			return 0;
+		}
 
-        int nsIDOMCSSPrimitiveValue.setFloatValue ( ushort unitType,
-                 float floatValue)
-        {
-            return ;
-        }
-
-
-
-        int nsIDOMCSSPrimitiveValue.getFloatValue ( ushort unitType,
-                out float ret)
-        {
-            return ;
-        }
+		int nsIDOMCSSPrimitiveValue.setFloatValue ( ushort unitType,
+				 float floatValue)
+		{
+			return ;
+		}
 
 
 
-        int nsIDOMCSSPrimitiveValue.setStringValue ( ushort stringType,
-                 /*DOMString*/ HandleRef stringValue)
-        {
-            return ;
-        }
+		int nsIDOMCSSPrimitiveValue.getFloatValue ( ushort unitType,
+				out float ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIDOMCSSPrimitiveValue.getStringValue ( /*DOMString*/ HandleRef ret)
-        {
-            return ;
-        }
+		int nsIDOMCSSPrimitiveValue.setStringValue ( ushort stringType,
+				 /*DOMString*/ HandleRef stringValue)
+		{
+			return ;
+		}
 
 
 
-        int nsIDOMCSSPrimitiveValue.getCounterValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCounter ret)
-        {
-            return ;
-        }
+		int nsIDOMCSSPrimitiveValue.getStringValue ( /*DOMString*/ HandleRef ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIDOMCSSPrimitiveValue.getRectValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMRect ret)
-        {
-            return ;
-        }
+		int nsIDOMCSSPrimitiveValue.getCounterValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCounter ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIDOMCSSPrimitiveValue.getRGBColorValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMRGBColor ret)
-        {
-            return ;
-        }
+		int nsIDOMCSSPrimitiveValue.getRectValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMRect ret)
+		{
+			return ;
+		}
+
+
+
+		int nsIDOMCSSPrimitiveValue.getRGBColorValue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMRGBColor ret)
+		{
+			return ;
+		}
 
 
 
 #endregion
-    }
+	}
 #endif

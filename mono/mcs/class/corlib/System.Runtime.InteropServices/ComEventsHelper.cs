@@ -2,7 +2,7 @@
 // ComEventsHelper.cs
 //
 // Authors:
-//    Alexander Köplinger <alexander.koeplinger@xamarin.com>
+//	Alexander Köplinger <alexander.koeplinger@xamarin.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,18 +30,18 @@ using System;
 
 namespace System.Runtime.InteropServices
 {
-    public static class ComEventsHelper
-    {
-        [MonoTODO]
-        public static void Combine(object rcw, Guid iid, int dispid, Delegate d)
-        {
-            throw new NotImplementedException ();
-        }
+	public static class ComEventsHelper
+	{
+		[MonoTODO]
+		public static void Combine(object rcw, Guid iid, int dispid, Delegate d)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static Delegate Remove(object rcw, Guid iid, int dispid, Delegate d)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public static Delegate Remove(object rcw, Guid iid, int dispid, Delegate d)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

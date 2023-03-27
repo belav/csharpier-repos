@@ -2,7 +2,7 @@
 // EncryptionPolicy.cs:
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2015 Xamarin Inc (http://www.xamarin.com)
 //
@@ -27,10 +27,10 @@
 //
 namespace System.Net.Security
 {
-    public enum EncryptionPolicy
-    {
-        RequireEncryption = 0,  
-        AllowNoEncryption,
-        NoEncryption
-    }
+	public enum EncryptionPolicy
+	{
+		RequireEncryption = 0,  
+		AllowNoEncryption,
+		NoEncryption
+	}
 }

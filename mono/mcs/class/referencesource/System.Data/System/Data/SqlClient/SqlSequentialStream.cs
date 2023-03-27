@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data.Common;
 using System.Diagnostics;
 using System.Threading;
@@ -318,11 +318,11 @@ namespace System.Data.SqlClient
             {
                 throw ADP.ArgumentNull(ADP.ParameterBuffer);
             }
-            if (offset < 0)
+			if (offset < 0)
             {
                 throw ADP.ArgumentOutOfRange(ADP.ParameterOffset);
             }
-            if (count < 0)
+			if (count < 0)
             {
                 throw ADP.ArgumentOutOfRange(ADP.ParameterCount);
             }

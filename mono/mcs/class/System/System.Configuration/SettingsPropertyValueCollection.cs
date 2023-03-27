@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsPropertyValueCollection.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,95 +32,95 @@ using System.Collections;
 namespace System.Configuration
 {
 
-    public class SettingsPropertyValueCollection : ICloneable, ICollection, IEnumerable
-    {
-        Hashtable items;
-        bool isReadOnly;
+	public class SettingsPropertyValueCollection : ICloneable, ICollection, IEnumerable
+	{
+		Hashtable items;
+		bool isReadOnly;
 
-        public SettingsPropertyValueCollection ()
-        {
-            items = new Hashtable();
-        }
+		public SettingsPropertyValueCollection ()
+		{
+			items = new Hashtable();
+		}
 
-        public void Add (SettingsPropertyValue property)
-        {
-            if (isReadOnly)
-                throw new NotSupportedException ();
+		public void Add (SettingsPropertyValue property)
+		{
+			if (isReadOnly)
+				throw new NotSupportedException ();
 
-            /* actually do the add */
-            items.Add (property.Name, property);
-        }
+			/* actually do the add */
+			items.Add (property.Name, property);
+		}
 
-        internal void Add (SettingsPropertyValueCollection vals)
-        {
-            foreach (SettingsPropertyValue val in vals) {
-                Add (val);
-            }
-        }
+		internal void Add (SettingsPropertyValueCollection vals)
+		{
+			foreach (SettingsPropertyValue val in vals) {
+				Add (val);
+			}
+		}
 
-        public void Clear ()
-        {
-            if (isReadOnly)
-                throw new NotSupportedException ();
+		public void Clear ()
+		{
+			if (isReadOnly)
+				throw new NotSupportedException ();
 
-            items.Clear ();
-        }
+			items.Clear ();
+		}
 
-        public object Clone ()
-        {
-            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
-            col.items = (Hashtable)items.Clone ();
+		public object Clone ()
+		{
+			SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
+			col.items = (Hashtable)items.Clone ();
 
-            return col;
-        }
+			return col;
+		}
 
-        public void CopyTo (Array array, int index)
-        {
-            items.Values.CopyTo (array, index);
-        }
+		public void CopyTo (Array array, int index)
+		{
+			items.Values.CopyTo (array, index);
+		}
 
-        public IEnumerator GetEnumerator ()
-        {
-            return items.Values.GetEnumerator();
-        }
+		public IEnumerator GetEnumerator ()
+		{
+			return items.Values.GetEnumerator();
+		}
 
-        public void Remove (string name)
-        {
-            if (isReadOnly)
-                throw new NotSupportedException ();
+		public void Remove (string name)
+		{
+			if (isReadOnly)
+				throw new NotSupportedException ();
 
-            items.Remove (name);
-        }
+			items.Remove (name);
+		}
 
-        public void SetReadOnly ()
-        {
-            isReadOnly = true;
-        }
+		public void SetReadOnly ()
+		{
+			isReadOnly = true;
+		}
 
-        public int Count {
-            get {
-                return items.Count;
-            }
-        }
+		public int Count {
+			get {
+				return items.Count;
+			}
+		}
 
-        public bool IsSynchronized {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		public bool IsSynchronized {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        public SettingsPropertyValue this [ string name ] {
-            get {
-                return (SettingsPropertyValue) items [ name ];
-            }
-        }
+		public SettingsPropertyValue this [ string name ] {
+			get {
+				return (SettingsPropertyValue) items [ name ];
+			}
+		}
 
-        public object SyncRoot {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-    }
+		public object SyncRoot {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
+	}
 
 }
 

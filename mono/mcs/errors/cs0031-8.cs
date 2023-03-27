@@ -3,5 +3,5 @@
 
 public class Test
 {
-    const uint b = -'a';
+	const uint b = -'a';
 }

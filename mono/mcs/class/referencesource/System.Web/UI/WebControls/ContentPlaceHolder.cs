@@ -42,7 +42,7 @@ namespace System.Web.UI.WebControls {
                 throw new HttpException(SR.GetString(SR.ContentPlaceHolder_only_in_master));
             }
 
-            base.Init(parser, parentBuilder, type, tagName, ID, attribs);
+			base.Init(parser, parentBuilder, type, tagName, ID, attribs);
 
             if (masterPageParser.PlaceHolderList.Contains(Name))
                 throw new HttpException(SR.GetString(SR.ContentPlaceHolder_duplicate_contentPlaceHolderID, Name));

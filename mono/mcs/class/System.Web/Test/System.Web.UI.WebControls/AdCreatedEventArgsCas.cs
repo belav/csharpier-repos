@@ -1,9 +1,9 @@
 //
 // AdCreatedEventArgsCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.AdCreatedEventArgs
+//	- CAS unit tests for System.Web.UI.WebControls.AdCreatedEventArgs
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,32 +40,32 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class AdCreatedEventArgsCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class AdCreatedEventArgsCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            AdCreatedEventArgsTest unit = new AdCreatedEventArgsTest ();
-            unit.Defaults ();
-            unit.SetPropsInCtor ();
-            unit.SetProps ();
-            unit.ModifyProps ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			AdCreatedEventArgsTest unit = new AdCreatedEventArgsTest ();
+			unit.Defaults ();
+			unit.SetPropsInCtor ();
+			unit.SetProps ();
+			unit.ModifyProps ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (IDictionary) });
-            Assert.IsNotNull (ci, ".ctor(IDictionary)");
-            return ci.Invoke (new object[1] { null });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (IDictionary) });
+			Assert.IsNotNull (ci, ".ctor(IDictionary)");
+			return ci.Invoke (new object[1] { null });
+		}
 
-        public override Type Type {
-            get { return typeof (AdCreatedEventArgs); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (AdCreatedEventArgs); }
+		}
+	}
 }

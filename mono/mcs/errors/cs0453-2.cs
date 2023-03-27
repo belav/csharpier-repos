@@ -5,8 +5,8 @@ public class Foo
 
 class X
 {
-    static void Main ()
-    {
-        Foo? foo = new Foo ();
-    }
+	static void Main ()
+	{
+		Foo? foo = new Foo ();
+	}
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 //
 
@@ -32,56 +32,56 @@ using System.Text;
 namespace System.Windows.Forms.RTF {
 
 #if RTF_LIB
-    public
+	public
 #else
-    internal
+	internal
 #endif
-    class RTFException : ApplicationException {
-        #region Local Variables
-        private int        pos;
-        private int        line;
-        private TokenClass    token_class;
-        private Major        major;
-        private Minor        minor;
-        private int        param;
-        private string        text;
-        private string        error_message;
-        #endregion    // Local Variables
+	class RTFException : ApplicationException {
+		#region Local Variables
+		private int		pos;
+		private int		line;
+		private TokenClass	token_class;
+		private Major		major;
+		private Minor		minor;
+		private int		param;
+		private string		text;
+		private string		error_message;
+		#endregion	// Local Variables
 
-        #region Constructors
-        public RTFException(RTF rtf, string error_message) {
-            this.pos = rtf.LinePos;
-            this.line = rtf.LineNumber;
-            this.token_class = rtf.TokenClass;
-            this.major = rtf.Major;
-            this.minor = rtf.Minor;
-            this.param = rtf.Param;
-            this.text = rtf.Text;
-            this.error_message = error_message;
-        }
-        #endregion    // Constructors
+		#region Constructors
+		public RTFException(RTF rtf, string error_message) {
+			this.pos = rtf.LinePos;
+			this.line = rtf.LineNumber;
+			this.token_class = rtf.TokenClass;
+			this.major = rtf.Major;
+			this.minor = rtf.Minor;
+			this.param = rtf.Param;
+			this.text = rtf.Text;
+			this.error_message = error_message;
+		}
+		#endregion	// Constructors
 
-        #region Properties
-        public override string Message {
-            get {
-                StringBuilder    sb;
+		#region Properties
+		public override string Message {
+			get {
+				StringBuilder	sb;
 
-                sb = new StringBuilder();
-                sb.Append(error_message);
-                sb.Append("\n");
+				sb = new StringBuilder();
+				sb.Append(error_message);
+				sb.Append("\n");
 
-                sb.Append("RTF Stream Info: Pos:" + pos + " Line:" + line);
-                sb.Append("\n");
+				sb.Append("RTF Stream Info: Pos:" + pos + " Line:" + line);
+				sb.Append("\n");
 
-                sb.Append("TokenClass:" + token_class + ", ");
-                sb.Append("Major:" + String.Format("{0}", (int)major) + ", ");
-                sb.Append("Minor:" + String.Format("{0}", (int)minor) + ", ");
-                sb.Append("Param:" + String.Format("{0}", param) + ", ");
-                sb.Append("Text:" + text);
+				sb.Append("TokenClass:" + token_class + ", ");
+				sb.Append("Major:" + String.Format("{0}", (int)major) + ", ");
+				sb.Append("Minor:" + String.Format("{0}", (int)minor) + ", ");
+				sb.Append("Param:" + String.Format("{0}", param) + ", ");
+				sb.Append("Text:" + text);
 
-                return sb.ToString();
-            }
-        }
-        #endregion    // Properties
-    }
+				return sb.ToString();
+			}
+		}
+		#endregion	// Properties
+	}
 }

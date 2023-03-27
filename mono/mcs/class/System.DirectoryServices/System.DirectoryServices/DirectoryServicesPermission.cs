@@ -27,82 +27,82 @@
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
 // Authors
-//    Raja R Harinath <rharinath@novell.com>
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Raja R Harinath <rharinath@novell.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 
 using System.Security.Permissions;
 
 namespace System.DirectoryServices {
 
-    [Serializable]
-    public sealed class DirectoryServicesPermission : ResourcePermissionBase {
+	[Serializable]
+	public sealed class DirectoryServicesPermission : ResourcePermissionBase {
 
-        DirectoryServicesPermissionEntryCollection innerCollection;
+		DirectoryServicesPermissionEntryCollection innerCollection;
 
-        public DirectoryServicesPermission ()
-        {
-            SetUp ();
-        }
+		public DirectoryServicesPermission ()
+		{
+			SetUp ();
+		}
 
-        public DirectoryServicesPermission (DirectoryServicesPermissionEntry[] permissionAccessEntries)
-        {
-            SetUp ();
-            innerCollection = new DirectoryServicesPermissionEntryCollection (this);
-            innerCollection.AddRange (permissionAccessEntries);
-        }
+		public DirectoryServicesPermission (DirectoryServicesPermissionEntry[] permissionAccessEntries)
+		{
+			SetUp ();
+			innerCollection = new DirectoryServicesPermissionEntryCollection (this);
+			innerCollection.AddRange (permissionAccessEntries);
+		}
 
-         public DirectoryServicesPermission (PermissionState state)
-            : base (state)
-         {
-            SetUp ();
-        }
+ 		public DirectoryServicesPermission (PermissionState state)
+			: base (state)
+ 		{
+			SetUp ();
+		}
 
-        public DirectoryServicesPermission (DirectoryServicesPermissionAccess permissionAccess, string path)
-        {
-            SetUp ();
-            innerCollection = new DirectoryServicesPermissionEntryCollection (this);
-            innerCollection.Add (new DirectoryServicesPermissionEntry (permissionAccess, path));
-        }
+		public DirectoryServicesPermission (DirectoryServicesPermissionAccess permissionAccess, string path)
+		{
+			SetUp ();
+			innerCollection = new DirectoryServicesPermissionEntryCollection (this);
+			innerCollection.Add (new DirectoryServicesPermissionEntry (permissionAccess, path));
+		}
 
-        public DirectoryServicesPermissionEntryCollection PermissionEntries {
-            get {
-                if (innerCollection == null) {
-                    // must be here to work with XML deserialization
-                    innerCollection = new DirectoryServicesPermissionEntryCollection (this);
-                }
-                return innerCollection;
-            }
-        }
+		public DirectoryServicesPermissionEntryCollection PermissionEntries {
+			get {
+				if (innerCollection == null) {
+					// must be here to work with XML deserialization
+					innerCollection = new DirectoryServicesPermissionEntryCollection (this);
+				}
+				return innerCollection;
+			}
+		}
 
-        // helpers
+		// helpers
 
-        private void SetUp ()
-        {
-            PermissionAccessType = typeof (DirectoryServicesPermissionAccess);
-            TagNames = new string[1] { "Path" };
-        }
+		private void SetUp ()
+		{
+			PermissionAccessType = typeof (DirectoryServicesPermissionAccess);
+			TagNames = new string[1] { "Path" };
+		}
 
-        internal ResourcePermissionBaseEntry[] GetEntries ()
-        {
-            return base.GetPermissionEntries ();
-        }
+		internal ResourcePermissionBaseEntry[] GetEntries ()
+		{
+			return base.GetPermissionEntries ();
+		}
 
-        internal void ClearEntries ()
-        {
-            base.Clear ();
-        }
+		internal void ClearEntries ()
+		{
+			base.Clear ();
+		}
 
-        internal void Add (object obj) 
-        {
-            DirectoryServicesPermissionEntry dspe = (obj as DirectoryServicesPermissionEntry);
-            base.AddPermissionAccess (dspe.GetBaseEntry ());
-        }
+		internal void Add (object obj) 
+		{
+			DirectoryServicesPermissionEntry dspe = (obj as DirectoryServicesPermissionEntry);
+			base.AddPermissionAccess (dspe.GetBaseEntry ());
+		}
 
-        internal void Remove (object obj) 
-        {
-            DirectoryServicesPermissionEntry dspe = (obj as DirectoryServicesPermissionEntry);
-            base.RemovePermissionAccess (dspe.GetBaseEntry ());
-        }
-    }
+		internal void Remove (object obj) 
+		{
+			DirectoryServicesPermissionEntry dspe = (obj as DirectoryServicesPermissionEntry);
+			base.RemovePermissionAccess (dspe.GetBaseEntry ());
+		}
+	}
 }

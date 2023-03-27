@@ -2,7 +2,7 @@
 // WindowsSecurityToken.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,50 +33,50 @@ using System.Security.Principal;
 
 namespace System.IdentityModel.Tokens
 {
-    public class WindowsSecurityToken : SecurityToken
-    {
-        [MonoTODO]
-        public WindowsSecurityToken ()
-        {
-            throw new NotImplementedException ();
-        }
+	public class WindowsSecurityToken : SecurityToken
+	{
+		[MonoTODO]
+		public WindowsSecurityToken ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public WindowsSecurityToken (WindowsIdentity windowsIdentity)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public WindowsSecurityToken (WindowsIdentity windowsIdentity)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public WindowsSecurityToken (WindowsIdentity windowsIdentity, string id)
-        {
-            this.identity = windowsIdentity;
-            this.id = id;
-        }
+		public WindowsSecurityToken (WindowsIdentity windowsIdentity, string id)
+		{
+			this.identity = windowsIdentity;
+			this.id = id;
+		}
 
-        WindowsIdentity identity;
-        string id;
+		WindowsIdentity identity;
+		string id;
 
-        public WindowsIdentity WindowsIdentity {
-            get { return identity; }
-        }
+		public WindowsIdentity WindowsIdentity {
+			get { return identity; }
+		}
 
-        [MonoTODO]
-        public override DateTime ValidFrom {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public override DateTime ValidFrom {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public override DateTime ValidTo {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public override DateTime ValidTo {
+			get { throw new NotImplementedException (); }
+		}
 
-        public override string Id {
-            get { return id; }
-        }
+		public override string Id {
+			get { return id; }
+		}
 
-        [MonoTODO]
-        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-            get { throw new NotImplementedException (); }
-        }
-    }
+		[MonoTODO]
+		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
+			get { throw new NotImplementedException (); }
+		}
+	}
 }

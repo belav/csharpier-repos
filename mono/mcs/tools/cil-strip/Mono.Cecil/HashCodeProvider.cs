@@ -28,19 +28,19 @@
 
 namespace Mono.Cecil {
 
-    using System.Collections;
+	using System.Collections;
 
-    internal sealed class HashCodeProvider : IHashCodeProvider {
+	internal sealed class HashCodeProvider : IHashCodeProvider {
 
-        public static readonly HashCodeProvider Instance = new HashCodeProvider ();
+		public static readonly HashCodeProvider Instance = new HashCodeProvider ();
 
-        HashCodeProvider ()
-        {
-        }
+		HashCodeProvider ()
+		{
+		}
 
-        public int GetHashCode (object o)
-        {
-            return o.GetHashCode ();
-        }
-    }
+		public int GetHashCode (object o)
+		{
+			return o.GetHashCode ();
+		}
+	}
 }

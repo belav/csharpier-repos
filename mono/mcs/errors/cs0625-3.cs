@@ -5,17 +5,17 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace CS0625 {
-    [StructLayout (LayoutKind.Explicit)]
-    partial struct GValue
-    {
-    }
-    
-    partial struct GValue {
-        public int value;
-    }
-    
-    class Tests {
-        public static void Main () {
-        }
-    }
+	[StructLayout (LayoutKind.Explicit)]
+	partial struct GValue
+	{
+	}
+	
+	partial struct GValue {
+		public int value;
+	}
+	
+	class Tests {
+		public static void Main () {
+		}
+	}
 }

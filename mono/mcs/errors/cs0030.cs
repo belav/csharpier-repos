@@ -3,13 +3,13 @@
 
 public class Blah {
 
-    public static int Main ()
-    {
-        Blah k;
-        
-        k = new Blah ();
-        
-        float f = (float) k;
-        
-    }
+	public static int Main ()
+	{
+		Blah k;
+		
+		k = new Blah ();
+		
+		float f = (float) k;
+		
+	}
 }

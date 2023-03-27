@@ -6,18 +6,18 @@
 //--------------------------------------------------------------------------------------------------------------------------
 // @owner=alexgor, deliant
 //==========================================================================================================================
-//  File:        ChartHttpHandler.cs
+//  File:		ChartHttpHandler.cs
 //
-//  Namespace:    Microsoft.Reporting.Chart.WebForms
+//  Namespace:	Microsoft.Reporting.Chart.WebForms
 //
-//    Classes:    ChartHttpHandler
+//	Classes:	ChartHttpHandler
 //
-//  Purpose:    ChartHttpHandler is a static class which is responsible to handle with 
+//  Purpose:	ChartHttpHandler is a static class which is responsible to handle with 
 //              chart images, interactive images, scripts and other resources.
 //              
 //              
-//    Reviewed:    DT
-//    Reviewed:    deliant on 4/14/2011             
+//	Reviewed:	DT
+//	Reviewed:	deliant on 4/14/2011 			
 //              MSRC#10470, VSTS#941768 http://vstfdevdiv:8080/web/wi.aspx?id=941768
 //              Please review information associated with MSRC#10470 before making any changes to this file.
 //              - Fixes:
@@ -77,7 +77,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// ChartHttpHandler processes HTTP Web requests using, handles chart images, scripts and other resources.
     /// </summary>
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
     [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
 #endif
     public class ChartHttpHandler : Page, IRequiresSessionState, IHttpHandler
@@ -99,8 +99,8 @@ namespace System.Web.UI.DataVisualization.Charting
         private static string _machineHash = "_" + Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture) + "_";
 
         // web gadren controller file. stays locked diring process lifetime.
-        private static FileStream _controllerFileStream = null;
-        private static string _controllerDirectory = null;
+		private static FileStream _controllerFileStream = null;
+		private static string _controllerDirectory = null;
         private static object _initHandlerLock = new object();
         // used for storing Guid key in context;
         internal static string ContextGuidKey = "{89FA5660-BD13-4f1b-8C7C-355CEC92CC7E}";
@@ -366,7 +366,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 appDir += "/";
             }
             return appDir + ChartHttpHandlerName + "?";
-        }
+		}
 
 
         /// <summary>
@@ -412,30 +412,30 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             String fmtKey = "chart" + _machineHash + "{0}." + ext;
             RingTimeTracker rt = RingTimeTrackerFactory.GetRingTracker(fmtKey);
-            if (!String.IsNullOrEmpty(_controllerDirectory) && String.IsNullOrEmpty(Settings.FolderName))
-            {
-                return _controllerDirectory + @"\" + rt.GetNextKey();
-            }
+			if (!String.IsNullOrEmpty(_controllerDirectory) && String.IsNullOrEmpty(Settings.FolderName))
+			{
+				return _controllerDirectory + @"\" + rt.GetNextKey();
+			}
             return Settings.FolderName + rt.GetNextKey();
         }
 
-        private static String KeyToUnc(String key)
-        {
-            if (!String.IsNullOrEmpty(key))
-            {
-                return key.Replace("/", @"\");
-            }
-            return key;
-        }
-        
-        private static String KeyFromUnc(String key)
-        {
-            if (!String.IsNullOrEmpty(key))
-            {
-                return key.Replace(@"\", "/");
-            }
-            return key;
-        }
+		private static String KeyToUnc(String key)
+		{
+			if (!String.IsNullOrEmpty(key))
+			{
+				return key.Replace("/", @"\");
+			}
+			return key;
+		}
+		
+		private static String KeyFromUnc(String key)
+		{
+			if (!String.IsNullOrEmpty(key))
+			{
+				return key.Replace(@"\", "/");
+			}
+			return key;
+		}
 
         /// <summary>
         /// Gets a URL by specified request query, file key.
@@ -446,7 +446,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns></returns>
         private static String GetUrl(String query, String fileKey, string currentGuid)
         {
-            return GetHandlerUrl() + query + "=" + KeyFromUnc(fileKey) + "&g=" + currentGuid;
+			return GetHandlerUrl() + query + "=" + KeyFromUnc(fileKey) + "&g=" + currentGuid;
         }
 
         /// <summary>
@@ -822,7 +822,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// Enables access to the chart image storage settings.
     /// </summary>
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
     [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
 #endif
     public class ChartHttpHandlerSettings
@@ -1162,10 +1162,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Determines whether web dev server is active.
         /// </summary>
         /// <returns>
-        ///     <c>true</c> if web dev server active; otherwise, <c>false</c>.
+        /// 	<c>true</c> if web dev server active; otherwise, <c>false</c>.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "GetCurrentProcess will fail if there is no access. This is by design. ")]
-        // VSTS: 5176    Security annotation violations in System.Web.DataVisualization.dll
+        // VSTS: 5176	Security annotation violations in System.Web.DataVisualization.dll
         [SecuritySafeCritical]
         private static bool IsWebDevActive()
         {
@@ -1805,7 +1805,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="item">The item.</param>
         /// <param name="now">The now.</param>
         /// <returns>
-        ///     <c>true</c> if the specified item is expired; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the specified item is expired; otherwise, <c>false</c>.
         /// </returns>
         internal bool IsExpired(RingItem item, DateTime now)
         {
@@ -2126,7 +2126,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets a value indicating whether this instance is trace enabled.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if this instance is trace enabled; otherwise, <c>false</c>.
+        /// 	<c>true</c> if this instance is trace enabled; otherwise, <c>false</c>.
         /// </value>
         internal static bool IsTraceEnabled
         {

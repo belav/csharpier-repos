@@ -2,7 +2,7 @@
 // XPathMessageContext.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,44 +34,44 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Dispatcher
 {
-    public class XPathMessageContext : XsltContext
-    {
-        public XPathMessageContext ()
-            : this (new NameTable ())
-        {
-        }
+	public class XPathMessageContext : XsltContext
+	{
+		public XPathMessageContext ()
+			: this (new NameTable ())
+		{
+		}
 
-        public XPathMessageContext (NameTable table)
-            : base (table)
-        {
-            AddNamespace ("s11", Constants.Soap11);
-            AddNamespace ("s12", Constants.Soap12);
-        }
+		public XPathMessageContext (NameTable table)
+			: base (table)
+		{
+			AddNamespace ("s11", Constants.Soap11);
+			AddNamespace ("s12", Constants.Soap12);
+		}
 
-        public override bool Whitespace {
-            get { return false; } // as documented.
-        }
+		public override bool Whitespace {
+			get { return false; } // as documented.
+		}
 
-        public override int CompareDocument (string baseUri, string nextBaseUri)
-        {
-            return String.CompareOrdinal (baseUri, nextBaseUri);
-        }
+		public override int CompareDocument (string baseUri, string nextBaseUri)
+		{
+			return String.CompareOrdinal (baseUri, nextBaseUri);
+		}
 
-        public override bool PreserveWhitespace (XPathNavigator node)
-        {
-            return false; // as documented.
-        }
+		public override bool PreserveWhitespace (XPathNavigator node)
+		{
+			return false; // as documented.
+		}
 
-        public override IXsltContextFunction ResolveFunction (
-            string prefix, string name, XPathResultType [] argTypes)
-        {
-            return null;
-        }
+		public override IXsltContextFunction ResolveFunction (
+			string prefix, string name, XPathResultType [] argTypes)
+		{
+			return null;
+		}
 
-        public override IXsltContextVariable ResolveVariable (
-            string prefix, string name)
-        {
-            return null;
-        }
-    }
+		public override IXsltContextVariable ResolveVariable (
+			string prefix, string name)
+		{
+			return null;
+		}
+	}
 }

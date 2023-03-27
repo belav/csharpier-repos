@@ -1,9 +1,9 @@
-//
+﻿//
 // SubjectKeyIdentifierExtensionTest.cs - NUnit Test Cases for 
-//    Mono.Security.X509.Extensions.SubjectKeyIdentifierExtension
+//	Mono.Security.X509.Extensions.SubjectKeyIdentifierExtension
 //
 // Authors:
-//    Lex Li  <support@lextm.com>
+//	Lex Li  <support@lextm.com>
 //
 // Copyright (C) 2014 Lex Li
 // 
@@ -29,94 +29,94 @@ using NUnit.Framework;
 
 namespace MonoTests.Mono.Security.X509.Extensions
 {
-    [TestFixture]
-    public class SubjectKeyIdentifierExtensionTest
-    {
-        private void Empty (SubjectKeyIdentifierExtension ski)
-        {
-            Assert.IsFalse (ski.Critical, "Critical");
-            Assert.AreEqual ("2.5.29.14", ski.Oid, "Oid");
-            Assert.IsNotNull (ski.Name, "Name");
-            Assert.IsFalse (ski.Name == ski.Oid, "Name!=Oid");
-            Assert.AreEqual (new byte[] {
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00
-            }, ski.Identifier, "Identifier");
-        }
+	[TestFixture]
+	public class SubjectKeyIdentifierExtensionTest
+	{
+		private void Empty (SubjectKeyIdentifierExtension ski)
+		{
+			Assert.IsFalse (ski.Critical, "Critical");
+			Assert.AreEqual ("2.5.29.14", ski.Oid, "Oid");
+			Assert.IsNotNull (ski.Name, "Name");
+			Assert.IsFalse (ski.Name == ski.Oid, "Name!=Oid");
+			Assert.AreEqual (new byte[] {
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00
+			}, ski.Identifier, "Identifier");
+		}
 
-        [Test]
-        public void Constructor_Empty ()
-        {
-            SubjectKeyIdentifierExtension ski = new SubjectKeyIdentifierExtension ();
-            ski.Identifier = new byte[] {
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00
-            };
-            Empty (ski);
-        }
+		[Test]
+		public void Constructor_Empty ()
+		{
+			SubjectKeyIdentifierExtension ski = new SubjectKeyIdentifierExtension ();
+			ski.Identifier = new byte[] {
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00
+			};
+			Empty (ski);
+		}
 
-        [Test]
-        public void Constructor_Extension ()
-        {
-            SubjectKeyIdentifierExtension ext = new SubjectKeyIdentifierExtension ();
-            ext.Identifier = new byte[] {
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00
-            };
-            SubjectKeyIdentifierExtension ski = new SubjectKeyIdentifierExtension (ext);
-            Empty (ski);
-        }
+		[Test]
+		public void Constructor_Extension ()
+		{
+			SubjectKeyIdentifierExtension ext = new SubjectKeyIdentifierExtension ();
+			ext.Identifier = new byte[] {
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00
+			};
+			SubjectKeyIdentifierExtension ski = new SubjectKeyIdentifierExtension (ext);
+			Empty (ski);
+		}
 
-        [Test]
-        public void Constructor_ASN1 ()
-        {
-            SubjectKeyIdentifierExtension ext = new SubjectKeyIdentifierExtension ();
-            ext.Identifier = new byte[] {
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00
-            };
-            SubjectKeyIdentifierExtension ski = new SubjectKeyIdentifierExtension (ext.ASN1);
-            Empty (ski);
-        }
+		[Test]
+		public void Constructor_ASN1 ()
+		{
+			SubjectKeyIdentifierExtension ext = new SubjectKeyIdentifierExtension ();
+			ext.Identifier = new byte[] {
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00
+			};
+			SubjectKeyIdentifierExtension ski = new SubjectKeyIdentifierExtension (ext.ASN1);
+			Empty (ski);
+		}
 
-        [Test]
-        public void AuthorityKeyIdentifier_Critical ()
-        {
-            SubjectKeyIdentifierExtension ski = new SubjectKeyIdentifierExtension ();
-            ski.Critical = true;
-            ski.Identifier = new byte[] {
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00
-            };
-            Assert.AreEqual ("30-20-06-03-55-1D-0E-01-01-FF-04-16-04-14-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00", BitConverter.ToString (ski.GetBytes ()), "GetBytes");
+		[Test]
+		public void AuthorityKeyIdentifier_Critical ()
+		{
+			SubjectKeyIdentifierExtension ski = new SubjectKeyIdentifierExtension ();
+			ski.Critical = true;
+			ski.Identifier = new byte[] {
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00
+			};
+			Assert.AreEqual ("30-20-06-03-55-1D-0E-01-01-FF-04-16-04-14-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00", BitConverter.ToString (ski.GetBytes ()), "GetBytes");
 
-            SubjectKeyIdentifierExtension ski2 = new SubjectKeyIdentifierExtension (ski.ASN1);
-            Assert.IsTrue (ski2.Critical, "Critical");
-            Assert.AreEqual (new byte[] {
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00
-            }, ski2.Identifier, "Identifier");
-        }
+			SubjectKeyIdentifierExtension ski2 = new SubjectKeyIdentifierExtension (ski.ASN1);
+			Assert.IsTrue (ski2.Critical, "Critical");
+			Assert.AreEqual (new byte[] {
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00
+			}, ski2.Identifier, "Identifier");
+		}
 
-        [Test]
-        [ExpectedException (typeof(InvalidOperationException))]
-        public void EmptyIdentifier ()
-        {
-            SubjectKeyIdentifierExtension ext = new SubjectKeyIdentifierExtension ();
-            SubjectKeyIdentifierExtension ski = new SubjectKeyIdentifierExtension (ext);
-            Empty (ski);
-        }
-    }
+		[Test]
+		[ExpectedException (typeof(InvalidOperationException))]
+		public void EmptyIdentifier ()
+		{
+			SubjectKeyIdentifierExtension ext = new SubjectKeyIdentifierExtension ();
+			SubjectKeyIdentifierExtension ski = new SubjectKeyIdentifierExtension (ext);
+			Empty (ski);
+		}
+	}
 }

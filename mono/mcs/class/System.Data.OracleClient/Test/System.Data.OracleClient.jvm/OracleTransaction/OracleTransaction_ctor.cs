@@ -33,57 +33,57 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-    [TestFixture]
-    public class OracleTransaction_ctor : ADONetTesterClass
-    {
-        public static void Main()
-        {
-            OracleTransaction_ctor tc = new OracleTransaction_ctor();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OracleTransaction_ctor");
-                tc.run();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+	[TestFixture]
+	public class OracleTransaction_ctor : ADONetTesterClass
+	{
+		public static void Main()
+		{
+			OracleTransaction_ctor tc = new OracleTransaction_ctor();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OracleTransaction_ctor");
+				tc.run();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            Exception exp = null;
+		[Test]
+		public void run()
+		{
+			Exception exp = null;
 
-            OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-            OracleTransaction txn = null;
+			OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+			OracleTransaction txn = null;
 
-            try
-            {
-                BeginCase("BeginTransaction - connection close");
-                try
-                {
-                    txn = con.BeginTransaction();
-                }
-                catch (Exception ex) {exp = ex;}
-                Compare(exp.GetType().FullName ,typeof(InvalidOperationException).FullName );
-                exp=null;
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("BeginTransaction - connection close");
+				try
+				{
+					txn = con.BeginTransaction();
+				}
+				catch (Exception ex) {exp = ex;}
+				Compare(exp.GetType().FullName ,typeof(InvalidOperationException).FullName );
+				exp=null;
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            con.Open();
+			con.Open();
 
-            try
-            {
-                BeginCase("BeginTransaction - connection close");
-                txn = con.BeginTransaction();
-                Compare(txn == null,false );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("BeginTransaction - connection close");
+				txn = con.BeginTransaction();
+				Compare(txn == null,false );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            if (con.State == ConnectionState.Open) con.Close();
+			if (con.State == ConnectionState.Open) con.Close();
 
-        }
-    }   
+		}
+	}   
 }

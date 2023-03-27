@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.RepeaterItemCollection
 //
 // Authors:
-//    Ben Maurer (bmaurer@novell.com)
+//	Ben Maurer (bmaurer@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -29,55 +29,55 @@
 using System.Collections;
 
 namespace System.Web.UI.WebControls {
-    public sealed class RepeaterItemCollection : ICollection {
+	public sealed class RepeaterItemCollection : ICollection {
 
-        ArrayList l;
-        
-        public RepeaterItemCollection (ArrayList items)
-        {
-            l = items;
-        }
-        
+		ArrayList l;
+		
+		public RepeaterItemCollection (ArrayList items)
+		{
+			l = items;
+		}
+		
 
-        public void CopyTo (Array array, int index)
-        {
-            l.CopyTo (array, index);
-        }
-        
-        public IEnumerator GetEnumerator ()
-        {
-            return l.GetEnumerator ();
-        }
-        
+		public void CopyTo (Array array, int index)
+		{
+			l.CopyTo (array, index);
+		}
+		
+		public IEnumerator GetEnumerator ()
+		{
+			return l.GetEnumerator ();
+		}
+		
 
-        public int Count {
-            get {
-                return l.Count;
-            }
-        }
-        
-        public bool IsReadOnly {
-            get {
-                return false;
-            }
-        }
-        
-        public bool IsSynchronized {
-            get {
-                return false;
-            }
-        }
-        
-        public RepeaterItem this [int index] {
-            get {
-                return (RepeaterItem) l [index];
-            }
-        }
-        
-        public object SyncRoot {
-            get {
-                return l.SyncRoot;
-            }
-        }
-    }
+		public int Count {
+			get {
+				return l.Count;
+			}
+		}
+		
+		public bool IsReadOnly {
+			get {
+				return false;
+			}
+		}
+		
+		public bool IsSynchronized {
+			get {
+				return false;
+			}
+		}
+		
+		public RepeaterItem this [int index] {
+			get {
+				return (RepeaterItem) l [index];
+			}
+		}
+		
+		public object SyncRoot {
+			get {
+				return l.SyncRoot;
+			}
+		}
+	}
 }

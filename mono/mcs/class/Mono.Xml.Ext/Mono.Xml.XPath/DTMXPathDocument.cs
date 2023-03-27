@@ -2,7 +2,7 @@
 // Mono.Xml.XPath.DTMXPathDocument
 //
 // Author:
-//    Atsushi Enomoto (ginga@kit.hi-ho.ne.jp)
+//	Atsushi Enomoto (ginga@kit.hi-ho.ne.jp)
 //
 // (C) 2003 Atsushi Enomoto
 //
@@ -35,63 +35,63 @@ using System.Xml.XPath;
 namespace Mono.Xml.XPath
 {
 #if OUTSIDE_SYSTEM_XML
-    public
+	public
 #else
-    internal
+	internal
 #endif
-        class DTMXPathDocument : IXPathNavigable
-    {
+		class DTMXPathDocument : IXPathNavigable
+	{
 
 #region ctor.
 
-        public DTMXPathDocument (XmlNameTable nameTable,
-            DTMXPathLinkedNode [] nodes,
-            DTMXPathAttributeNode [] attributes,
-            DTMXPathNamespaceNode [] namespaces,
-            Hashtable idTable)
-        {
-            this.nameTable = nameTable;
-            this.nodes = nodes;
-            this.attributes = attributes;
-            this.namespaces = namespaces;
-            this.idTable = idTable;
-        }
+		public DTMXPathDocument (XmlNameTable nameTable,
+			DTMXPathLinkedNode [] nodes,
+			DTMXPathAttributeNode [] attributes,
+			DTMXPathNamespaceNode [] namespaces,
+			Hashtable idTable)
+		{
+			this.nameTable = nameTable;
+			this.nodes = nodes;
+			this.attributes = attributes;
+			this.namespaces = namespaces;
+			this.idTable = idTable;
+		}
 
 #endregion
 
 
 #region Methods
-        public XPathNavigator CreateNavigator ()
-        {
-            if (root == null) {
-                root = new DTMXPathNavigator (this,
-                    nameTable,
-                    nodes,
-                    attributes,
-                    namespaces,
-                    idTable);
-            }
-            return root.Clone ();
-        }
+		public XPathNavigator CreateNavigator ()
+		{
+			if (root == null) {
+				root = new DTMXPathNavigator (this,
+					nameTable,
+					nodes,
+					attributes,
+					namespaces,
+					idTable);
+			}
+			return root.Clone ();
+		}
 
 #endregion
 
-        XmlNameTable nameTable;
+		XmlNameTable nameTable;
 
-        // Root XPathNavigator.
-        DTMXPathNavigator root;
+		// Root XPathNavigator.
+		DTMXPathNavigator root;
 
 #region Immutable tree fields
 
-        DTMXPathLinkedNode [] nodes = new DTMXPathLinkedNode [0];
-        DTMXPathAttributeNode [] attributes = new DTMXPathAttributeNode [0];
-        DTMXPathNamespaceNode [] namespaces = new DTMXPathNamespaceNode [0];
+		DTMXPathLinkedNode [] nodes = new DTMXPathLinkedNode [0];
+		DTMXPathAttributeNode [] attributes = new DTMXPathAttributeNode [0];
+		DTMXPathNamespaceNode [] namespaces = new DTMXPathNamespaceNode [0];
 
-        // idTable [string value] -> int nodeId
-        readonly Hashtable idTable;
+		// idTable [string value] -> int nodeId
+		readonly Hashtable idTable;
 
 #endregion
 
-    }
+	}
 }
 

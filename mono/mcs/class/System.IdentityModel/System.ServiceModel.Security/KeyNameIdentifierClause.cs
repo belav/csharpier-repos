@@ -2,7 +2,7 @@
 // KeyNameIdentifierClause.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,37 +33,37 @@ using System.IdentityModel.Tokens;
 
 namespace System.ServiceModel.Security
 {
-    public class KeyNameIdentifierClause : SecurityKeyIdentifierClause
-    {
-        public KeyNameIdentifierClause (string keyName)
-            : base (null)
-        {
-            key_name = keyName;
-        }
+	public class KeyNameIdentifierClause : SecurityKeyIdentifierClause
+	{
+		public KeyNameIdentifierClause (string keyName)
+			: base (null)
+		{
+			key_name = keyName;
+		}
 
-        string key_name;
+		string key_name;
 
-        public string KeyName {
-            get { return key_name; }
-        }
+		public string KeyName {
+			get { return key_name; }
+		}
 
-        public override bool Matches (SecurityKeyIdentifierClause clause)
-        {
-            if (clause == null)
-                throw new ArgumentNullException ("clause");
-            KeyNameIdentifierClause knic =
-                clause as KeyNameIdentifierClause;
-            return knic != null && Matches (knic.KeyName);
-        }
+		public override bool Matches (SecurityKeyIdentifierClause clause)
+		{
+			if (clause == null)
+				throw new ArgumentNullException ("clause");
+			KeyNameIdentifierClause knic =
+				clause as KeyNameIdentifierClause;
+			return knic != null && Matches (knic.KeyName);
+		}
 
-        public bool Matches (string keyName)
-        {
-            return key_name == keyName;
-        }
+		public bool Matches (string keyName)
+		{
+			return key_name == keyName;
+		}
 
-        public override string ToString ()
-        {
-            return String.Concat ("KeyNameIdentifierClause(KeyName = '", KeyName, "')");
-        }
-    }
+		public override string ToString ()
+		{
+			return String.Concat ("KeyNameIdentifierClause(KeyName = '", KeyName, "')");
+		}
+	}
 }

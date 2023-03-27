@@ -7,5 +7,5 @@ interface A<T>
 
 interface B<in T>
 {
-    void C(A<A<T>> a);
+	void C(A<A<T>> a);
 }

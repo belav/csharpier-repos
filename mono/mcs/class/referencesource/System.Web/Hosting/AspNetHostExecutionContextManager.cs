@@ -1,4 +1,4 @@
-namespace System.Web.Hosting {
+﻿namespace System.Web.Hosting {
     using System;
     using System.Security.Permissions;
     using System.Threading;

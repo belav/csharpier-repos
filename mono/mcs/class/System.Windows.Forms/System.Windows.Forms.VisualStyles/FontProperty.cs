@@ -23,13 +23,13 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-    public enum FontProperty
-    {
-        GlyphFont = 2601
-    }
+	public enum FontProperty
+	{
+		GlyphFont = 2601
+	}
 }

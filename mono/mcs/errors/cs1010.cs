@@ -3,6 +3,6 @@
 
 class X
 {
-    static string s = "Hello
+	static string s = "Hello
 world!";
 }

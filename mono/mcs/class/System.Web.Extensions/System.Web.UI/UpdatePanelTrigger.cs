@@ -1,4 +1,4 @@
-//
+﻿//
 // UpdatePanelTrigger.cs
 //
 // Author:
@@ -34,26 +34,26 @@ using System.ComponentModel;
 
 namespace System.Web.UI
 {
-    public abstract class UpdatePanelTrigger
-    {
-        UpdatePanel _owner;
+	public abstract class UpdatePanelTrigger
+	{
+		UpdatePanel _owner;
 
-        protected UpdatePanelTrigger () { }
+		protected UpdatePanelTrigger () { }
 
-        [Browsable (false)]
-        public UpdatePanel Owner {
-            get {
-                return _owner;
-            }
-            internal set {
-                _owner = value;
-            }
-        }
+		[Browsable (false)]
+		public UpdatePanel Owner {
+			get {
+				return _owner;
+			}
+			internal set {
+				_owner = value;
+			}
+		}
 
-        protected internal abstract bool HasTriggered ();
-        
-        protected internal virtual void Initialize ()
-        {
-        }
-    }
+		protected internal abstract bool HasTriggered ();
+		
+		protected internal virtual void Initialize ()
+		{
+		}
+	}
 }

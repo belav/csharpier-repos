@@ -4,15 +4,15 @@
 using System;
 
 class ErrorCS0072 {
-    public delegate void FooHandler ();
-    protected void OnFoo () {}
+	public delegate void FooHandler ();
+	protected void OnFoo () {}
 }
 
 class Child : ErrorCS0072 {
-    // We are trying to override a method with an event.
-    protected override event FooHandler OnFoo;
+	// We are trying to override a method with an event.
+	protected override event FooHandler OnFoo;
 
-    public static void Main () {
-    }
+	public static void Main () {
+	}
 }
 

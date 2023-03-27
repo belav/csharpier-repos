@@ -23,15 +23,15 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum PowerState
-    {
-        Suspend = 0,
-        Hibernate = 1
-    }
+	public enum PowerState
+	{
+		Suspend = 0,
+		Hibernate = 1
+	}
 }

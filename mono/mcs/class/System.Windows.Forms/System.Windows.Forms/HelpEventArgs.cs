@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
@@ -31,34 +31,34 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-    [ComVisible(true)]
-    public class HelpEventArgs : EventArgs {
-        private Point    mouse_position;
-        private bool    event_handled;
+	[ComVisible(true)]
+	public class HelpEventArgs : EventArgs {
+		private Point	mouse_position;
+		private bool	event_handled;
 
-        #region Public Constructors
-        public HelpEventArgs(System.Drawing.Point mousePos) {
-            this.mouse_position=mousePos;
-            this.event_handled=false;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public HelpEventArgs(System.Drawing.Point mousePos) {
+			this.mouse_position=mousePos;
+			this.event_handled=false;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public bool Handled {
-            get {
-                return this.event_handled;
-            }
+		#region Public Instance Properties
+		public bool Handled {
+			get {
+				return this.event_handled;
+			}
 
-            set {
-                this.event_handled=value;
-            }
-        }
+			set {
+				this.event_handled=value;
+			}
+		}
 
-        public Point MousePos {
-            get {
-                return this.mouse_position;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public Point MousePos {
+			get {
+				return this.mouse_position;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

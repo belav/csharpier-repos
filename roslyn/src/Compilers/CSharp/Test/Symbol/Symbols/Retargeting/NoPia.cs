@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -35,27 +35,27 @@ using System.Runtime.InteropServices;
 [ComImport]
 public interface I1
 {
-    void Sub1(int x);
+	void Sub1(int x);
 }
 
 public struct S1
 {
-    public int F1;
+	public int F1;
 }
 
 namespace NS1
 {
-    [Guid(""27e3e649-994b-4f58-b3c6-f8089a5f2c02""), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport]
-    public interface I2
-    {
-        void Sub1(int x);
-    }
+	[Guid(""27e3e649-994b-4f58-b3c6-f8089a5f2c02""), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport]
+	public interface I2
+	{
+		void Sub1(int x);
+	}
 
-    public struct S2
-    {
-        public int F1;
-    }
+	public struct S2
+	{
+		public int F1;
+	}
 }
 ";
 
@@ -77,18 +77,18 @@ public interface I1
 
 public class LocalTypes1
 {
-    public void Test1(I1 x, I2 y)
-    {
-    }
+	public void Test1(I1 x, I2 y)
+	{
+	}
 }
 
 namespace NS1
 {
-    [CompilerGenerated, Guid(""27e3e649-994b-4f58-b3c6-f8089a5f2c02""), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), TypeIdentifier]
-    [ComImport]
-    public interface I2
-    {
-    }
+	[CompilerGenerated, Guid(""27e3e649-994b-4f58-b3c6-f8089a5f2c02""), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), TypeIdentifier]
+	[ComImport]
+	public interface I2
+	{
+	}
 }
 ";
 
@@ -101,9 +101,9 @@ using NS1;
 
 public class LocalTypes1
 {
-    public void Test1(I1 x, I2 y)
-    {
-    }
+	public void Test1(I1 x, I2 y)
+	{
+	}
 }
 ";
 
@@ -119,24 +119,24 @@ using System.Runtime.InteropServices;
 
 public class LocalTypes2
 {
-    public void Test2(S1 x, S2 y)
-    {
-    }
+	public void Test2(S1 x, S2 y)
+	{
+	}
 }
 
 [CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""S1"")]
 public struct S1
 {
-    public int F1;
+	public int F1;
 }
 
 namespace NS1
 {
-    [CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""NS1.S2"")]
-    public struct S2
-    {
-        public int F1;
-    }
+	[CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""NS1.S2"")]
+	public struct S2
+	{
+		public int F1;
+	}
 }
 ";
 
@@ -149,9 +149,9 @@ using NS1;
 
 public class LocalTypes2
 {
-    public void Test2(S1 x, S2 y)
-    {
-    }
+	public void Test2(S1 x, S2 y)
+	{
+	}
 }
 ";
 
@@ -168,9 +168,9 @@ using System.Collections.Generic;
 
 public class C31<T>
 {
-    public interface I31<S>
-    {
-    }
+	public interface I31<S>
+	{
+	}
 }
 
 public class C32<T>
@@ -193,30 +193,30 @@ public interface I32<S>
 
 public class LocalTypes3
 {
-    public C31<C33>.I31<C33> Test1()
-    {
-        return null;
-    }
-    public C31<C33>.I31<I1> Test2()
-    {
-        return null;
-    }
-    public C31<I1>.I31<C33> Test3()
-    {
-        return null;
-    }
-    public C31<C33>.I31<I32<I1>> Test4()
-    {
-        return null;
-    }
-    public C31<I32<I1>>.I31<C33> Test5()
-    {
-        return null;
-    }
-    public List<I1> Test6()
-    {
-        return null;
-    }
+	public C31<C33>.I31<C33> Test1()
+	{
+		return null;
+	}
+	public C31<C33>.I31<I1> Test2()
+	{
+		return null;
+	}
+	public C31<I1>.I31<C33> Test3()
+	{
+		return null;
+	}
+	public C31<C33>.I31<I32<I1>> Test4()
+	{
+		return null;
+	}
+	public C31<I32<I1>>.I31<C33> Test5()
+	{
+		return null;
+	}
+	public List<I1> Test6()
+	{
+		return null;
+	}
 }
 ";
 
@@ -230,9 +230,9 @@ using System.Collections.Generic;
 
 public class C31<T>
 {
-    public interface I31<S>
-    {
-    }
+	public interface I31<S>
+	{
+	}
 }
 
 public class C32<T>
@@ -249,30 +249,30 @@ public interface I32<S>
 
 public class LocalTypes3
 {
-    public C31<C33>.I31<C33> Test1()
-    {
-        return null;
-    }
-    public C31<C33>.I31<I1> Test2()
-    {
-        return null;
-    }
-    public C31<I1>.I31<C33> Test3()
-    {
-        return null;
-    }
-    public C31<C33>.I31<I32<I1>> Test4()
-    {
-        return null;
-    }
-    public C31<I32<I1>>.I31<C33> Test5()
-    {
-        return null;
-    }
-    public List<I1> Test6()
-    {
-        return null;
-    }
+	public C31<C33>.I31<C33> Test1()
+	{
+		return null;
+	}
+	public C31<C33>.I31<I1> Test2()
+	{
+		return null;
+	}
+	public C31<I1>.I31<C33> Test3()
+	{
+		return null;
+	}
+	public C31<C33>.I31<I32<I1>> Test4()
+	{
+		return null;
+	}
+	public C31<I32<I1>>.I31<C33> Test5()
+	{
+		return null;
+	}
+	public List<I1> Test6()
+	{
+		return null;
+	}
 }
 ";
 
@@ -1988,21 +1988,21 @@ using System.Runtime.InteropServices;
 
 public class LocalTypes2
 {
-    public void Test2(S1 x, S1.S2 y)
-    {
-    }
+	public void Test2(S1 x, S1.S2 y)
+	{
+	}
 }
 
 [CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""S1"")]
 public struct S1
 {
-    public int F1;
+	public int F1;
 
-    [CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""S1.S2"")]
-    public struct S2
-    {
-        public int F1;
-    }
+	[CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""S1.S2"")]
+	public struct S2
+	{
+		public int F1;
+	}
 }
 
 [ComEventInterface(typeof(S1), typeof(S1.S2))]
@@ -2028,12 +2028,12 @@ using System.Runtime.InteropServices;
 
 public struct S1
 {
-    public int F1;
+	public int F1;
 
-    public struct S2
-    {
-        public int F1;
-    }
+	public struct S2
+	{
+		public int F1;
+	}
 }
 ";
 
@@ -2114,20 +2114,20 @@ using System.Runtime.InteropServices;
 
 public class LocalTypes2
 {
-    public void Test2(S1 x, S1.S2 y)
-    {
-    }
+	public void Test2(S1 x, S1.S2 y)
+	{
+	}
 }
 
 [CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""S1"")]
 public struct S1
 {
-    public int F1;
+	public int F1;
 
-    public struct S2
-    {
-        public int F1;
-    }
+	public struct S2
+	{
+		public int F1;
+	}
 }
 
 [ComEventInterface(typeof(S1), typeof(S1.S2))]
@@ -2153,12 +2153,12 @@ using System.Runtime.InteropServices;
 
 public struct S1
 {
-    public int F1;
+	public int F1;
 
-    public struct S2
-    {
-        public int F1;
-    }
+	public struct S2
+	{
+		public int F1;
+	}
 }
 ";
 
@@ -2239,20 +2239,20 @@ using System.Runtime.InteropServices;
 
 public class LocalTypes2
 {
-    public void Test2(S1 x, S1.S2 y)
-    {
-    }
+	public void Test2(S1 x, S1.S2 y)
+	{
+	}
 }
 
 public struct S1
 {
-    public int F1;
+	public int F1;
 
-    [CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""S1.S2"")]
-    public struct S2
-    {
-        public int F1;
-    }
+	[CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""S1.S2"")]
+	public struct S2
+	{
+		public int F1;
+	}
 }
 
 [ComEventInterface(typeof(S1), typeof(S1.S2))]
@@ -2278,12 +2278,12 @@ using System.Runtime.InteropServices;
 
 public struct S1
 {
-    public int F1;
+	public int F1;
 
-    public struct S2
-    {
-        public int F1;
-    }
+	public struct S2
+	{
+		public int F1;
+	}
 }
 ";
 
@@ -2368,12 +2368,12 @@ using System.Runtime.InteropServices;
 
 public struct S1
 {
-    public int F1;
+	public int F1;
 
-    public struct S2
-    {
-        public int F1;
-    }
+	public struct S2
+	{
+		public int F1;
+	}
 }
 ";
 
@@ -2388,9 +2388,9 @@ using System.Runtime.InteropServices;
 
 public class LocalTypes2
 {
-    public void Test2(S1 x, S1.S2 y)
-    {
-    }
+	public void Test2(S1 x, S1.S2 y)
+	{
+	}
 }
 
 [ComEventInterface(typeof(S1), typeof(S1.S2))]
@@ -2446,21 +2446,21 @@ using System.Runtime.InteropServices;
 
 public class LocalTypes2
 {
-    public void Test2(S1 x, S2<int> y)
-    {
-    }
+	public void Test2(S1 x, S2<int> y)
+	{
+	}
 }
 
 [CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""S1"")]
 public struct S1
 {
-    public int F1;
+	public int F1;
 }
 
 [CompilerGenerated, TypeIdentifier(""f9c2d51d-4f44-45f0-9eda-c9d599b58257"", ""S2`1"")]
 public struct S2<T>
 {
-    public int F1;
+	public int F1;
 }
 
 [ComEventInterface(typeof(S1), typeof(S2<>))]
@@ -2486,12 +2486,12 @@ using System.Runtime.InteropServices;
 
 public struct S1
 {
-    public int F1;
+	public int F1;
 }
 
 public struct S2<T>
 {
-    public int F1;
+	public int F1;
 }
 ";
 
@@ -2578,7 +2578,7 @@ using System.Runtime.InteropServices;
 [ComImport]
 public interface I1
 {
-    void Sub1(int x);
+	void Sub1(int x);
 }
 ";
 
@@ -2588,7 +2588,7 @@ public interface I1
             string moduleSource = @"
 public class Test
 {
-    public static I1 M1()
+	public static I1 M1()
     {
         return null;
     }
@@ -2606,7 +2606,7 @@ public class Test
             string consumerSource = @"
 public class Consumer
 {
-    public static void M2()
+	public static void M2()
     {
         var x = Test.M1();
     }

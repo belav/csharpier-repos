@@ -3,22 +3,22 @@
 
 static class S
 {
-    public static A GetAwaiter (this int i)
-    {
-        return new A ();
-    }
+	public static A GetAwaiter (this int i)
+	{
+		return new A ();
+	}
 }
 
 class A
 {
-    int IsCompleted {
-        get {
-            return 1;
-        }
-    }
-    
-    static async void Test ()
-    {
-        await 9;
-    }
+	int IsCompleted {
+		get {
+			return 1;
+		}
+	}
+	
+	static async void Test ()
+	{
+		await 9;
+	}
 }

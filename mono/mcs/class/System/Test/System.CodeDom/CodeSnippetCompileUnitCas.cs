@@ -1,9 +1,9 @@
 //
 // CodeSnippetCompileUnitCas.cs 
-//    - CAS unit tests for System.CodeDom.CodeSnippetCompileUnit
+//	- CAS unit tests for System.CodeDom.CodeSnippetCompileUnit
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,45 +37,45 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeSnippetCompileUnitCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeSnippetCompileUnitCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeSnippetCompileUnit cscu = new CodeSnippetCompileUnit ();
-            Assert.IsNull (cscu.LinePragma, "LinePragma");
-            cscu.LinePragma = new CodeLinePragma ();
-            Assert.AreEqual (String.Empty, cscu.Value, "Value");
-            cscu.Value = "mono";
-        }
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeSnippetCompileUnit cscu = new CodeSnippetCompileUnit ("mono");
-            Assert.IsNull (cscu.LinePragma, "LinePragma");
-            cscu.LinePragma = new CodeLinePragma (String.Empty, Int32.MaxValue);
-            Assert.AreEqual ("mono", cscu.Value, "Value");
-            cscu.Value = String.Empty;
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeSnippetCompileUnit cscu = new CodeSnippetCompileUnit ();
+			Assert.IsNull (cscu.LinePragma, "LinePragma");
+			cscu.LinePragma = new CodeLinePragma ();
+			Assert.AreEqual (String.Empty, cscu.Value, "Value");
+			cscu.Value = "mono";
+		}
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeSnippetCompileUnit cscu = new CodeSnippetCompileUnit ("mono");
+			Assert.IsNull (cscu.LinePragma, "LinePragma");
+			cscu.LinePragma = new CodeLinePragma (String.Empty, Int32.MaxValue);
+			Assert.AreEqual ("mono", cscu.Value, "Value");
+			cscu.Value = String.Empty;
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            // the default .ctor was added in 2.0
-            ConstructorInfo ci = typeof (CodeSnippetCompileUnit).GetConstructor (new Type[1] { typeof (string) });
-            Assert.IsNotNull (ci, ".ctor(string)");
-            Assert.IsNotNull (ci.Invoke (new object[1] { "mono" }), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			// the default .ctor was added in 2.0
+			ConstructorInfo ci = typeof (CodeSnippetCompileUnit).GetConstructor (new Type[1] { typeof (string) });
+			Assert.IsNotNull (ci, ".ctor(string)");
+			Assert.IsNotNull (ci.Invoke (new object[1] { "mono" }), "invoke");
+		}
+	}
 }

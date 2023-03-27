@@ -1,4 +1,4 @@
-//
+﻿//
 // BuildParametersTest.cs
 //
 // Author:
@@ -39,22 +39,22 @@ using System.Xml;
 
 namespace MonoTests.Microsoft.Build.Execution
 {
-    [TestFixture]
-    public class BuildRequestDataTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void NullTargetsToBuild ()
-        {
-            string project_xml = @"<Project DefaultTargets='Foo' xmlns='http://schemas.microsoft.com/developer/msbuild/2003' />";
-            var xml = XmlReader.Create (new StringReader (project_xml));
-            var root = ProjectRootElement.Create (xml);
-            root.FullPath = "BuildRequestDataTest.NullTargetsToBuild.proj";
-            var pc = new ProjectCollection ();
-            var sw = new StringWriter ();
-            pc.RegisterLogger (new ConsoleLogger (LoggerVerbosity.Diagnostic, sw.WriteLine, null, null));
-            var proj = new ProjectInstance (root);
-            new BuildRequestData (proj, null);
-        }
-    }
+	[TestFixture]
+	public class BuildRequestDataTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void NullTargetsToBuild ()
+		{
+			string project_xml = @"<Project DefaultTargets='Foo' xmlns='http://schemas.microsoft.com/developer/msbuild/2003' />";
+			var xml = XmlReader.Create (new StringReader (project_xml));
+			var root = ProjectRootElement.Create (xml);
+			root.FullPath = "BuildRequestDataTest.NullTargetsToBuild.proj";
+			var pc = new ProjectCollection ();
+			var sw = new StringWriter ();
+			pc.RegisterLogger (new ConsoleLogger (LoggerVerbosity.Diagnostic, sw.WriteLine, null, null));
+			var proj = new ProjectInstance (root);
+			new BuildRequestData (proj, null);
+		}
+	}
 }

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Html;
@@ -69,9 +69,9 @@ public abstract class JsonHelperTestBase
         var helper = GetJsonHelper();
         var obj = new
         {
-            HTML = $"Hello pingüino"
+            HTML = $"Hello pingÃ¼ino"
         };
-        var expectedOutput = "{\"html\":\"Hello pingüino\"}";
+        var expectedOutput = "{\"html\":\"Hello pingÃ¼ino\"}";
 
         // Act
         var result = helper.Serialize(obj);
@@ -107,9 +107,9 @@ public abstract class JsonHelperTestBase
         var helper = GetJsonHelper();
         var obj = new
         {
-            HTML = "<b>Hello \n pingüino</b>"
+            HTML = "<b>Hello \n pingÃ¼ino</b>"
         };
-        var expectedOutput = "{\"html\":\"\\u003cb\\u003eHello \\n pingüino\\u003c/b\\u003e\"}";
+        var expectedOutput = "{\"html\":\"\\u003cb\\u003eHello \\n pingÃ¼ino\\u003c/b\\u003e\"}";
 
         // Act
         var result = helper.Serialize(obj);

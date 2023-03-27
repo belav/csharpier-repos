@@ -29,92 +29,92 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    internal abstract class LayeredReplyChannel : LayeredCommunicationObject, IReplyChannel
-    {
-        IReplyChannel inner;
+	internal abstract class LayeredReplyChannel : LayeredCommunicationObject, IReplyChannel
+	{
+		IReplyChannel inner;
 
-        public LayeredReplyChannel (IReplyChannel innerChannel)
-            : base (innerChannel)
-        {
-            inner = innerChannel;
-        }
+		public LayeredReplyChannel (IReplyChannel innerChannel)
+			: base (innerChannel)
+		{
+			inner = innerChannel;
+		}
 
-        public abstract ChannelListenerBase Listener { get; }
+		public abstract ChannelListenerBase Listener { get; }
 
-        public override ChannelManagerBase ChannelManager {
-            get { return Listener; }
-        }
+		public override ChannelManagerBase ChannelManager {
+			get { return Listener; }
+		}
 
-        // IReplyChannel
+		// IReplyChannel
 
-        public virtual EndpointAddress LocalAddress {
-            get { return inner.LocalAddress; }
-        }
+		public virtual EndpointAddress LocalAddress {
+			get { return inner.LocalAddress; }
+		}
 
-        public virtual IAsyncResult BeginReceiveRequest (
-            AsyncCallback callback, object state)
-        {
-            return BeginReceiveRequest (Listener.DefaultReceiveTimeout, callback, state);
-        }
+		public virtual IAsyncResult BeginReceiveRequest (
+			AsyncCallback callback, object state)
+		{
+			return BeginReceiveRequest (Listener.DefaultReceiveTimeout, callback, state);
+		}
 
-        public virtual IAsyncResult BeginReceiveRequest (
-            TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            return inner.BeginReceiveRequest (timeout, callback, state);
-        }
+		public virtual IAsyncResult BeginReceiveRequest (
+			TimeSpan timeout, AsyncCallback callback, object state)
+		{
+			return inner.BeginReceiveRequest (timeout, callback, state);
+		}
 
-        public virtual IAsyncResult BeginTryReceiveRequest (
-            TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            return inner.BeginTryReceiveRequest (timeout, callback, state);
-        }
+		public virtual IAsyncResult BeginTryReceiveRequest (
+			TimeSpan timeout, AsyncCallback callback, object state)
+		{
+			return inner.BeginTryReceiveRequest (timeout, callback, state);
+		}
 
-        public virtual IAsyncResult BeginWaitForRequest (
-            TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            return inner.BeginWaitForRequest (timeout, callback, state);
-        }
+		public virtual IAsyncResult BeginWaitForRequest (
+			TimeSpan timeout, AsyncCallback callback, object state)
+		{
+			return inner.BeginWaitForRequest (timeout, callback, state);
+		}
 
-        public virtual RequestContext EndReceiveRequest (IAsyncResult result)
-        {
-            return inner.EndReceiveRequest (result);
-        }
+		public virtual RequestContext EndReceiveRequest (IAsyncResult result)
+		{
+			return inner.EndReceiveRequest (result);
+		}
 
-        public virtual bool EndTryReceiveRequest (IAsyncResult result, out RequestContext context)
-        {
-            return inner.EndTryReceiveRequest (result, out context);
-        }
+		public virtual bool EndTryReceiveRequest (IAsyncResult result, out RequestContext context)
+		{
+			return inner.EndTryReceiveRequest (result, out context);
+		}
 
-        public virtual bool EndWaitForRequest (IAsyncResult result)
-        {
-            return inner.EndWaitForRequest (result);
-        }
+		public virtual bool EndWaitForRequest (IAsyncResult result)
+		{
+			return inner.EndWaitForRequest (result);
+		}
 
-        public virtual RequestContext ReceiveRequest ()
-        {
-            return ReceiveRequest (Listener.DefaultReceiveTimeout);
-        }
+		public virtual RequestContext ReceiveRequest ()
+		{
+			return ReceiveRequest (Listener.DefaultReceiveTimeout);
+		}
 
-        public virtual RequestContext  ReceiveRequest (TimeSpan timeout)
-        {
-            return inner.ReceiveRequest (timeout);
-        }
+		public virtual RequestContext  ReceiveRequest (TimeSpan timeout)
+		{
+			return inner.ReceiveRequest (timeout);
+		}
 
-        public virtual bool TryReceiveRequest (TimeSpan timeout, out RequestContext context)
-        {
-            return inner.TryReceiveRequest (timeout, out context);
-        }
+		public virtual bool TryReceiveRequest (TimeSpan timeout, out RequestContext context)
+		{
+			return inner.TryReceiveRequest (timeout, out context);
+		}
 
-        public virtual bool WaitForRequest (TimeSpan timeout)
-        {
-            return inner.WaitForRequest (timeout);
-        }
+		public virtual bool WaitForRequest (TimeSpan timeout)
+		{
+			return inner.WaitForRequest (timeout);
+		}
 
-        // IChannel
+		// IChannel
 
-        public virtual T GetProperty<T> () where T : class
-        {
-            return inner.GetProperty<T> ();
-        }
-    }
+		public virtual T GetProperty<T> () where T : class
+		{
+			return inner.GetProperty<T> ();
+		}
+	}
 }

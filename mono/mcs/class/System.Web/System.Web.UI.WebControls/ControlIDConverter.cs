@@ -33,64 +33,64 @@ using System.Collections;
 
 namespace System.Web.UI.WebControls
 {
-    public class ControlIDConverter : StringConverter
-    {
-        public ControlIDConverter ()
-        { }
+	public class ControlIDConverter : StringConverter
+	{
+		public ControlIDConverter ()
+		{ }
 
-        protected virtual bool FilterControl (Control control)
-        {
-            return true;
-        }
+		protected virtual bool FilterControl (Control control)
+		{
+			return true;
+		}
 
-        /*public ICollection GetStandardValues ()
-        {
-            return null;
-        }*/
+		/*public ICollection GetStandardValues ()
+		{
+			return null;
+		}*/
 
-        public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-        {
-            if (context == null)
-                return null;
+		public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+		{
+			if (context == null)
+				return null;
 
-            IContainer container = context.Container;
+			IContainer container = context.Container;
 
-            if (container == null)
-                return null;
+			if (container == null)
+				return null;
 
-            ComponentCollection ctrlCollection = container.Components;
-            ArrayList arrayList = new ArrayList (0);
+			ComponentCollection ctrlCollection = container.Components;
+			ArrayList arrayList = new ArrayList (0);
 
-            foreach (Control control in ctrlCollection) {
-                if (FilterControl(control))
-                    arrayList.Add (control.ID);
-            }
-            return new StandardValuesCollection (arrayList);
-        }
+			foreach (Control control in ctrlCollection) {
+				if (FilterControl(control))
+					arrayList.Add (control.ID);
+			}
+			return new StandardValuesCollection (arrayList);
+		}
 
-        /*public bool GetStandardValuesExclusive ()
-        {
-            return false;
-        }*/
+		/*public bool GetStandardValuesExclusive ()
+		{
+			return false;
+		}*/
 
-        public override bool GetStandardValuesExclusive 
-                    (ITypeDescriptorContext context)
-        {
-            return false;
-        }
+		public override bool GetStandardValuesExclusive 
+					(ITypeDescriptorContext context)
+		{
+			return false;
+		}
 
-        /*public bool GetStandardValuesSupported ()
-        {
-            return false;
-        }*/
+		/*public bool GetStandardValuesSupported ()
+		{
+			return false;
+		}*/
 
-        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-        {
-            if (context == null)
-                return false;
-            
-            return true;
-        }
-    }
+		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+		{
+			if (context == null)
+				return false;
+			
+			return true;
+		}
+	}
 }
 

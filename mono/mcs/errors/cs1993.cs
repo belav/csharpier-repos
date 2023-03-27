@@ -6,38 +6,38 @@ using System.Threading.Tasks;
 
 namespace System.Threading.Tasks
 {
-    class Task<T>
-    {
-    }
+	class Task<T>
+	{
+	}
 }
 
 static class S
 {
-    public static A GetAwaiter (this int i)
-    {
-        return new A ();
-    }
+	public static A GetAwaiter (this int i)
+	{
+		return new A ();
+	}
 }
 
 class A
 {
-    bool IsCompleted {
-        get {
-            return true;
-        }
-    }
-    
-    void OnCompleted (System.Action a)
-    {
-    }
-    
-    int GetResult ()
-    {
-        return 3;
-    }
-    
-    static async Task<int> Test ()
-    {
-        return await 2;
-    }
+	bool IsCompleted {
+		get {
+			return true;
+		}
+	}
+	
+	void OnCompleted (System.Action a)
+	{
+	}
+	
+	int GetResult ()
+	{
+		return 3;
+	}
+	
+	static async Task<int> Test ()
+	{
+		return await 2;
+	}
 }

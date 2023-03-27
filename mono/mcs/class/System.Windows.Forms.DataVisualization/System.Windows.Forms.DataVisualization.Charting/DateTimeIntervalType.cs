@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,18 +27,18 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum DateTimeIntervalType
-    {
-        Auto = 0,
-        Number = 1,
-        Years = 2,
-        Months = 3,
-        Weeks = 4,
-        Days = 5,
-        Hours = 6,
-        Minutes = 7,
-        Seconds = 8,
-        Milliseconds = 9,
-        NotSet = 10
-    }
+	public enum DateTimeIntervalType
+	{
+		Auto = 0,
+		Number = 1,
+		Years = 2,
+		Months = 3,
+		Weeks = 4,
+		Days = 5,
+		Hours = 6,
+		Minutes = 7,
+		Seconds = 8,
+		Milliseconds = 9,
+		NotSet = 10
+	}
 }

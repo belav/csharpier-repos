@@ -37,210 +37,210 @@ using System.Web.Services;
 using System.Collections;
 
 namespace System.Web.Services.Protocols {
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public abstract class HttpWebClientProtocol : WebClientProtocol {
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public abstract class HttpWebClientProtocol : WebClientProtocol {
 
-        #region Fields
+		#region Fields
 
-        bool allowAutoRedirect, enableDecompression;
-        X509CertificateCollection clientCertificates;
-        CookieContainer cookieContainer;
-        IWebProxy proxy;
-        string userAgent;
-        
-        bool _unsafeAuthenticated;
-        #endregion
+		bool allowAutoRedirect, enableDecompression;
+		X509CertificateCollection clientCertificates;
+		CookieContainer cookieContainer;
+		IWebProxy proxy;
+		string userAgent;
+		
+		bool _unsafeAuthenticated;
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        protected HttpWebClientProtocol () 
-        {
-            allowAutoRedirect = false;
-            clientCertificates = null;
-            cookieContainer = null;
-            proxy = null; // FIXME
-            userAgent = String.Format ("Mono Web Services Client Protocol {0}", Environment.Version);
-        }
-        
-        #endregion // Constructors
+		protected HttpWebClientProtocol () 
+		{
+			allowAutoRedirect = false;
+			clientCertificates = null;
+			cookieContainer = null;
+			proxy = null; // FIXME
+			userAgent = String.Format ("Mono Web Services Client Protocol {0}", Environment.Version);
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [DefaultValue (false)]
-        [WebServicesDescription ("Enable automatic handling of server redirects.")]
-        public bool AllowAutoRedirect {
-            get { return allowAutoRedirect; }
-            set { allowAutoRedirect = value; }
-        }
+		[DefaultValue (false)]
+		[WebServicesDescription ("Enable automatic handling of server redirects.")]
+		public bool AllowAutoRedirect {
+			get { return allowAutoRedirect; }
+			set { allowAutoRedirect = value; }
+		}
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [WebServicesDescription ("The client certificates that will be sent to the server, if the server requests them.")]
-        public X509CertificateCollection ClientCertificates {
-            get {
-                if (clientCertificates == null)
-                    clientCertificates = new X509CertificateCollection ();
-                return clientCertificates;
-            }
-        }
+		[Browsable (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[WebServicesDescription ("The client certificates that will be sent to the server, if the server requests them.")]
+		public X509CertificateCollection ClientCertificates {
+			get {
+				if (clientCertificates == null)
+					clientCertificates = new X509CertificateCollection ();
+				return clientCertificates;
+			}
+		}
 
-        [DefaultValue (null)]
-        [WebServicesDescription ("A container for all cookies received from servers in the current session.")]
-        public CookieContainer CookieContainer {
-            get { return cookieContainer; }
-            set { cookieContainer = value; }
-        }
+		[DefaultValue (null)]
+		[WebServicesDescription ("A container for all cookies received from servers in the current session.")]
+		public CookieContainer CookieContainer {
+			get { return cookieContainer; }
+			set { cookieContainer = value; }
+		}
 
-        [DefaultValue (false)]
-        public bool EnableDecompression {
-            get { return enableDecompression; }
-            set { enableDecompression = value; }
-        }
+		[DefaultValue (false)]
+		public bool EnableDecompression {
+			get { return enableDecompression; }
+			set { enableDecompression = value; }
+		}
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public IWebProxy Proxy {
-            get { return proxy; }
-            set { proxy = value; }
-        }
+		[Browsable (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public IWebProxy Proxy {
+			get { return proxy; }
+			set { proxy = value; }
+		}
 
-        [WebServicesDescription ("Sets the user agent http header for the request.")]
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public string UserAgent {
-            get { return userAgent; }
-            set { userAgent = value; }
-        }
-        
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public bool UnsafeAuthenticatedConnectionSharing
-        {
-            get { return _unsafeAuthenticated; }
-            set { _unsafeAuthenticated = value; }
-        }
+		[WebServicesDescription ("Sets the user agent http header for the request.")]
+		[Browsable (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public string UserAgent {
+			get { return userAgent; }
+			set { userAgent = value; }
+		}
+		
+		[Browsable (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public bool UnsafeAuthenticatedConnectionSharing
+		{
+			get { return _unsafeAuthenticated; }
+			set { _unsafeAuthenticated = value; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        internal virtual void CheckForCookies (HttpWebResponse response)
-        {
-            CookieCollection cookies = response.Cookies;
-            if (cookieContainer == null || cookies.Count == 0)
-                return;
+		internal virtual void CheckForCookies (HttpWebResponse response)
+		{
+			CookieCollection cookies = response.Cookies;
+			if (cookieContainer == null || cookies.Count == 0)
+				return;
 
-            CookieCollection coll = cookieContainer.GetCookies (uri);
-            foreach (Cookie c in cookies) {
-                bool add = true;
-                foreach (Cookie prev in coll) {
-                    if (c.Equals (prev)) {
-                        add = false;
-                        break;
-                    }
-                }
-                if (add)
-                    cookieContainer.Add (c);
-            }
-        }
-        
-        protected override WebRequest GetWebRequest (Uri uri)
-        {
-            WebRequest req = base.GetWebRequest (uri);
-            HttpWebRequest request = req as HttpWebRequest;
-            if (request == null)
-                return req;
-            if (enableDecompression)
-                request.AutomaticDecompression = DecompressionMethods.GZip;
+			CookieCollection coll = cookieContainer.GetCookies (uri);
+			foreach (Cookie c in cookies) {
+				bool add = true;
+				foreach (Cookie prev in coll) {
+					if (c.Equals (prev)) {
+						add = false;
+						break;
+					}
+				}
+				if (add)
+					cookieContainer.Add (c);
+			}
+		}
+		
+		protected override WebRequest GetWebRequest (Uri uri)
+		{
+			WebRequest req = base.GetWebRequest (uri);
+			HttpWebRequest request = req as HttpWebRequest;
+			if (request == null)
+				return req;
+			if (enableDecompression)
+				request.AutomaticDecompression = DecompressionMethods.GZip;
 
-            request.AllowAutoRedirect = allowAutoRedirect;
-            if (clientCertificates != null)
-                request.ClientCertificates.AddRange (clientCertificates);
+			request.AllowAutoRedirect = allowAutoRedirect;
+			if (clientCertificates != null)
+				request.ClientCertificates.AddRange (clientCertificates);
 
-            request.CookieContainer = cookieContainer;
-            if (proxy != null)
-                request.Proxy = proxy;
+			request.CookieContainer = cookieContainer;
+			if (proxy != null)
+				request.Proxy = proxy;
 
-            request.UserAgent = userAgent;
+			request.UserAgent = userAgent;
 
-            return request;
-        }
+			return request;
+		}
 
-        protected override WebResponse GetWebResponse (WebRequest request)
-        {
-            WebResponse response = base.GetWebResponse (request);
-            HttpWebResponse wr = response as HttpWebResponse;
-            if (wr != null)
-                CheckForCookies (wr);
-                
-            return response;
-        }
+		protected override WebResponse GetWebResponse (WebRequest request)
+		{
+			WebResponse response = base.GetWebResponse (request);
+			HttpWebResponse wr = response as HttpWebResponse;
+			if (wr != null)
+				CheckForCookies (wr);
+				
+			return response;
+		}
 
-        protected override WebResponse GetWebResponse (WebRequest request, IAsyncResult result)
-        {
-            WebResponse response = base.GetWebResponse (request, result);
-            HttpWebResponse wr = response as HttpWebResponse;
-            if (wr != null)
-                CheckForCookies (wr);
-                
-            return response;
-        }
-        
-        Hashtable mappings = new Hashtable ();
-        
-        internal void RegisterMapping (object userState, WebClientAsyncResult result)
-        {
-            if (userState == null)
-                userState = typeof (string);
-            
-            mappings [userState] = result;
-        }
+		protected override WebResponse GetWebResponse (WebRequest request, IAsyncResult result)
+		{
+			WebResponse response = base.GetWebResponse (request, result);
+			HttpWebResponse wr = response as HttpWebResponse;
+			if (wr != null)
+				CheckForCookies (wr);
+				
+			return response;
+		}
+		
+		Hashtable mappings = new Hashtable ();
+		
+		internal void RegisterMapping (object userState, WebClientAsyncResult result)
+		{
+			if (userState == null)
+				userState = typeof (string);
+			
+			mappings [userState] = result;
+		}
 
-        internal void UnregisterMapping (object userState)
-        {
-            if (userState == null)
-                userState = typeof (string);
-            
-            mappings.Remove (userState);
-        }
-        
-        protected void CancelAsync (object userState)
-        {
-            WebClientAsyncResult result = (WebClientAsyncResult) mappings [userState];
+		internal void UnregisterMapping (object userState)
+		{
+			if (userState == null)
+				userState = typeof (string);
+			
+			mappings.Remove (userState);
+		}
+		
+		protected void CancelAsync (object userState)
+		{
+			WebClientAsyncResult result = (WebClientAsyncResult) mappings [userState];
 
-            if (result == null)
-                return;
-            
-            mappings.Remove (userState);
-            result.Abort ();
-        }
+			if (result == null)
+				return;
+			
+			mappings.Remove (userState);
+			result.Abort ();
+		}
 
-        [MonoTODO]
-        public static bool GenerateXmlMappings (Type type, ArrayList mapping)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static bool GenerateXmlMappings (Type type, ArrayList mapping)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static Hashtable GenerateXmlMappings (Type[] types, ArrayList mapping)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static Hashtable GenerateXmlMappings (Type[] types, ArrayList mapping)
+		{
+			throw new NotImplementedException ();
+		}
 
-        #endregion // Methods
-    }
-    
-    internal class InvokeAsyncInfo
-    {
-        public SynchronizationContext Context;
-        public object UserState;
-        public SendOrPostCallback Callback;
-        
-        public InvokeAsyncInfo (SendOrPostCallback callback, object userState)
-        {
-            Callback = callback;
-            UserState = userState;
-            Context = SynchronizationContext.Current;
-        }
-    }
+		#endregion // Methods
+	}
+	
+	internal class InvokeAsyncInfo
+	{
+		public SynchronizationContext Context;
+		public object UserState;
+		public SendOrPostCallback Callback;
+		
+		public InvokeAsyncInfo (SendOrPostCallback callback, object userState)
+		{
+			Callback = callback;
+			UserState = userState;
+			Context = SynchronizationContext.Current;
+		}
+	}
 }

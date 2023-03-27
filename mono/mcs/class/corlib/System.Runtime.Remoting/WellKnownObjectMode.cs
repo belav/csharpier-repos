@@ -36,19 +36,19 @@
 namespace System.Runtime.Remoting {
 
 
-    /// <summary>
-    /// </summary>
-    [System.Runtime.InteropServices.ComVisible (true)]
-    [System.Serializable]
-    public enum WellKnownObjectMode {
+	/// <summary>
+	/// </summary>
+	[System.Runtime.InteropServices.ComVisible (true)]
+	[System.Serializable]
+	public enum WellKnownObjectMode {
 
-        /// <summary>
-        /// </summary>
-        Singleton = 1,
+		/// <summary>
+		/// </summary>
+		Singleton = 1,
 
-        /// <summary>
-        /// </summary>
-        SingleCall = 2,
-    } // WellKnownObjectMode
+		/// <summary>
+		/// </summary>
+		SingleCall = 2,
+	} // WellKnownObjectMode
 
 } // System.Runtime.Remoting

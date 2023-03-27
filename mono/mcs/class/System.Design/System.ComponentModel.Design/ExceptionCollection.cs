@@ -33,26 +33,26 @@ using System.Runtime.Serialization;
 
 namespace System.ComponentModel.Design
 {
-    [Serializable]
-    public sealed class ExceptionCollection : Exception
-    {
-        ArrayList exceptions;
+	[Serializable]
+	public sealed class ExceptionCollection : Exception
+	{
+		ArrayList exceptions;
 
-        [MonoTODO]
-        public ExceptionCollection (ArrayList exceptions)
-        {
-            this.exceptions = exceptions;
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public ExceptionCollection (ArrayList exceptions)
+		{
+			this.exceptions = exceptions;
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override void GetObjectData (SerializationInfo info, StreamingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public ArrayList Exceptions {
-            get { return exceptions; }
-        }
-    }
+		public ArrayList Exceptions {
+			get { return exceptions; }
+		}
+	}
 }

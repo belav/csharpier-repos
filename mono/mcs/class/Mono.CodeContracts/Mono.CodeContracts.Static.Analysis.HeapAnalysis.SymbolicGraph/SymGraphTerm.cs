@@ -2,7 +2,7 @@
 // SymGraphTerm.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,33 +30,33 @@ using System;
 using System.Linq;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph {
-    struct SymGraphTerm<TFunc> : IEquatable<SymGraphTerm<TFunc>>
-        where TFunc : IEquatable<TFunc> {
-        public readonly SymValue[] Args;
-        public readonly TFunc Function;
+	struct SymGraphTerm<TFunc> : IEquatable<SymGraphTerm<TFunc>>
+		where TFunc : IEquatable<TFunc> {
+		public readonly SymValue[] Args;
+		public readonly TFunc Function;
 
-        public SymGraphTerm (TFunc function, params SymValue[] args)
-        {
-            this.Function = function;
-            this.Args = args;
-        }
+		public SymGraphTerm (TFunc function, params SymValue[] args)
+		{
+			this.Function = function;
+			this.Args = args;
+		}
 
-        public bool Equals (SymGraphTerm<TFunc> that)
-        {
-            if (!this.Function.Equals (that.Function) || this.Args.Length != that.Args.Length)
-                return false;
+		public bool Equals (SymGraphTerm<TFunc> that)
+		{
+			if (!this.Function.Equals (that.Function) || this.Args.Length != that.Args.Length)
+				return false;
 
-            for (int i = 0; i < this.Args.Length; i++) {
-                if (!this.Args [i].Equals (that.Args [i]))
-                    return false;
-            }
-            return true;
-        }
+			for (int i = 0; i < this.Args.Length; i++) {
+				if (!this.Args [i].Equals (that.Args [i]))
+					return false;
+			}
+			return true;
+		}
 
-        public override string ToString ()
-        {
-            var args = this.Args == null ? "<no args>" : string.Join (", ", this.Args.Select (a => a.ToString ()));
-            return string.Format ("Term({0}, {{{1}}})", this.Function, args);
-        }
-    }
+		public override string ToString ()
+		{
+			var args = this.Args == null ? "<no args>" : string.Join (", ", this.Args.Select (a => a.ToString ()));
+			return string.Format ("Term({0}, {{{1}}})", this.Function, args);
+		}
+	}
 }

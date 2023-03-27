@@ -29,43 +29,43 @@
 //
 
 namespace System.Web.Services.Configuration {
-    [AttributeUsage (AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
-    public sealed class XmlFormatExtensionPrefixAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
+	public sealed class XmlFormatExtensionPrefixAttribute : Attribute {
 
-        #region Fields
+		#region Fields
 
-        string prefix;
-        string ns;
+		string prefix;
+		string ns;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public XmlFormatExtensionPrefixAttribute ()
-        {
-        }
+		public XmlFormatExtensionPrefixAttribute ()
+		{
+		}
 
-        public XmlFormatExtensionPrefixAttribute (string prefix, string ns)
-            : this ()
-        {
-            this.prefix = prefix;
-            this.ns = ns;
-        }
+		public XmlFormatExtensionPrefixAttribute (string prefix, string ns)
+			: this ()
+		{
+			this.prefix = prefix;
+			this.ns = ns;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public string Prefix {
-            get { return prefix; }
-            set { prefix = value; }
-        }
+		public string Prefix {
+			get { return prefix; }
+			set { prefix = value; }
+		}
 
-        public string Namespace {
-            get { return ns; }
-            set { ns = value; }
-        }
+		public string Namespace {
+			get { return ns; }
+			set { ns = value; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

@@ -5,14 +5,14 @@ using System.Collections;
 
 class X
 {
-    public static ArrayList Test (int a)
-    {
-        yield return 0;
+	public static ArrayList Test (int a)
+	{
+		yield return 0;
         }
 
-    static void Main ()
-    {
-        IEnumerable a = Test (3);
-        Console.WriteLine (a);
-    }
+	static void Main ()
+	{
+		IEnumerable a = Test (3);
+		Console.WriteLine (a);
+	}
 }

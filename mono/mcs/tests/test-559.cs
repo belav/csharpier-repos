@@ -2,9 +2,9 @@
 
 class C : B
 {
-    public override event TestDelegate TestEvent;
-    
-    public static void Main ()
-    {
-    }
+	public override event TestDelegate TestEvent;
+	
+	public static void Main ()
+	{
+	}
 }

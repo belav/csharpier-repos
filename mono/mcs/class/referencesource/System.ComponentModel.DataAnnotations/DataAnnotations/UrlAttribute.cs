@@ -1,4 +1,4 @@
-namespace System.ComponentModel.DataAnnotations {
+﻿namespace System.ComponentModel.DataAnnotations {
     using System;
     using System.ComponentModel.DataAnnotations.Resources;
     using System.Text.RegularExpressions;

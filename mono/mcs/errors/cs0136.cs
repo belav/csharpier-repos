@@ -2,13 +2,13 @@
 // Line: 9
 
 class X {
-    void b ()
-    {
-        int i;
-        {
-            string i;
-        }
-    }
+	void b ()
+	{
+		int i;
+		{
+			string i;
+		}
+	}
 }
 
 

@@ -33,58 +33,58 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-    [TestFixture]
-    public class OleDbDataAdapter_Fill_Ds : ADONetTesterClass
-    {
-        [SetUp]
-        public void SetUp()
-        {
-            Exception exp = null;
-            BeginCase("Setup");
-            try
-            {
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        }
+	[TestFixture]
+	public class OleDbDataAdapter_Fill_Ds : ADONetTesterClass
+	{
+		[SetUp]
+		public void SetUp()
+		{
+			Exception exp = null;
+			BeginCase("Setup");
+			try
+			{
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		}
 
-        [TearDown]
-        public void TearDown()
-        {
-        }
+		[TearDown]
+		public void TearDown()
+		{
+		}
 
-        public static void Main()
-        {
-            OleDbDataAdapter_Fill_Ds tc = new OleDbDataAdapter_Fill_Ds();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OleDbDataAdapter_Fill_Ds");
-                tc.SetUp();
-                tc.run();
-                tc.TearDown();
-            }
-            catch(Exception ex)
-            {
-                exp = ex;
-            }
-            finally
-            {
-                tc.EndTest(exp);
-            }
-        }
+		public static void Main()
+		{
+			OleDbDataAdapter_Fill_Ds tc = new OleDbDataAdapter_Fill_Ds();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OleDbDataAdapter_Fill_Ds");
+				tc.SetUp();
+				tc.run();
+				tc.TearDown();
+			}
+			catch(Exception ex)
+			{
+				exp = ex;
+			}
+			finally
+			{
+				tc.EndTest(exp);
+			}
+		}
 
-        [Test]
+		[Test]
 #if JAVA
-        [Category("NotWorking")]
+		[Category("NotWorking")]
 #endif
-        public void run()
-        {
-            OleDbDataAdapter oleDBda = new OleDbDataAdapter();
-            oleDBda.SelectCommand = new OleDbCommand("",new OleDbConnection());
-    
-            base.DbDataAdapter_Fill_Ds((DbDataAdapter)oleDBda);
+		public void run()
+		{
+			OleDbDataAdapter oleDBda = new OleDbDataAdapter();
+			oleDBda.SelectCommand = new OleDbCommand("",new OleDbConnection());
+	
+			base.DbDataAdapter_Fill_Ds((DbDataAdapter)oleDBda);
 
-        }
-    }
+		}
+	}
 }

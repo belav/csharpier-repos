@@ -4,9 +4,9 @@
 
 unsafe class Foo<T> where T : struct
 {
-    public T* Elements {
-        get {
-            return null;
-        }
-    }
+	public T* Elements {
+		get {
+			return null;
+		}
+	}
 }

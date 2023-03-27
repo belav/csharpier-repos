@@ -4,34 +4,34 @@ using System;
 
 public abstract class A
 {
-    protected virtual void Test (int a)
-    { }
+	protected virtual void Test (int a)
+	{ }
 
-    public void Test ()
-    { }
+	public void Test ()
+	{ }
 }
 
 public class B : A
 {
-    protected override void Test (int a)
-    {
-        base.Test (a);
-    }
+	protected override void Test (int a)
+	{
+		base.Test (a);
+	}
 }
 
 public class C : A
 {
-    private B B;
+	private B B;
 
-    protected override void Test (int a)
-    {
-        B.Test (a);
-        base.Test (a);
-    }
+	protected override void Test (int a)
+	{
+		B.Test (a);
+		base.Test (a);
+	}
 }
 
 class X
 {
-    static void Main ()
-    { }
+	static void Main ()
+	{ }
 }

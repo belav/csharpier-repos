@@ -2,7 +2,7 @@
 // System.Web.Configuration.SessionPageStateSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,34 +35,34 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class SessionPageStateSection : ConfigurationSection
-    {
-        static ConfigurationProperty historySizeProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class SessionPageStateSection : ConfigurationSection
+	{
+		static ConfigurationProperty historySizeProp;
+		static ConfigurationPropertyCollection properties;
 
-        public const int DefaultHistorySize = 9;
+		public const int DefaultHistorySize = 9;
 
-        static SessionPageStateSection ()
-        {
-            historySizeProp = new ConfigurationProperty ("historySize", typeof (int), DefaultHistorySize,
-                                     TypeDescriptor.GetConverter (typeof (int)),
-                                     new IntegerValidator (1, Int32.MaxValue),
-                                     ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
+		static SessionPageStateSection ()
+		{
+			historySizeProp = new ConfigurationProperty ("historySize", typeof (int), DefaultHistorySize,
+								     TypeDescriptor.GetConverter (typeof (int)),
+								     new IntegerValidator (1, Int32.MaxValue),
+								     ConfigurationPropertyOptions.None);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (historySizeProp);
-        }
+			properties.Add (historySizeProp);
+		}
 
-        [IntegerValidator (MinValue = 1, MaxValue = Int32.MaxValue)]
-        [ConfigurationProperty ("historySize", DefaultValue = "9")]
-        public int HistorySize {
-            get { return (int) base [historySizeProp];}
-            set { base[historySizeProp] = value; }
-        }
+		[IntegerValidator (MinValue = 1, MaxValue = Int32.MaxValue)]
+		[ConfigurationProperty ("historySize", DefaultValue = "9")]
+		public int HistorySize {
+			get { return (int) base [historySizeProp];}
+			set { base[historySizeProp] = value; }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+	}
 }
 

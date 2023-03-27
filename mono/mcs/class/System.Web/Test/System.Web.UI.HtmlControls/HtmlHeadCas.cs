@@ -2,7 +2,7 @@
 // HtmlHeadCas.cs - CAS unit tests for System.Web.UI.HtmlControls.HtmlHead
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,13 +34,13 @@ using System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlHeadCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlHeadCas : AspNetHostingMinimal {
 
-        public override Type Type {
-            get { return typeof (HtmlHead); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlHead); }
+		}
+	}
 }
 

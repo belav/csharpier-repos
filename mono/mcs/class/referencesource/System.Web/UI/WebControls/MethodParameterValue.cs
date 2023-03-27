@@ -1,4 +1,4 @@
-namespace System.Web.UI.WebControls {
+﻿namespace System.Web.UI.WebControls {
     /// <summary>
     /// This class tracks the values of SelectMethod parameters of ModelDataSourceView that use a custom value provider across multiple page requests.
     /// </summary>

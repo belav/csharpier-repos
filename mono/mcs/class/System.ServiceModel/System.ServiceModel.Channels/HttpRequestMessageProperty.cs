@@ -30,50 +30,50 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    public sealed class HttpRequestMessageProperty
-        : IMessageProperty
-    {
-        public static string Name {
-            get { return "httpRequest"; }
-        }
+	public sealed class HttpRequestMessageProperty
+		: IMessageProperty
+	{
+		public static string Name {
+			get { return "httpRequest"; }
+		}
 
-        WebHeaderCollection headers = new WebHeaderCollection ();
-        string method = "POST", query_string = String.Empty;
-        bool suppress_entity;
+		WebHeaderCollection headers = new WebHeaderCollection ();
+		string method = "POST", query_string = String.Empty;
+		bool suppress_entity;
 
-        public HttpRequestMessageProperty ()
-        {
-        }
+		public HttpRequestMessageProperty ()
+		{
+		}
 
-        public WebHeaderCollection Headers {
-            get { return headers; }
-        }
+		public WebHeaderCollection Headers {
+			get { return headers; }
+		}
 
-        public string Method {
-            get { return method; }
-            set { method = value; }
-        }
+		public string Method {
+			get { return method; }
+			set { method = value; }
+		}
 
-        public string QueryString {
-            get { return query_string; }
-            set { query_string = value; }
-        }
+		public string QueryString {
+			get { return query_string; }
+			set { query_string = value; }
+		}
 
-        public bool SuppressEntityBody {
-            get { return suppress_entity; }
-            set { suppress_entity = value; }
-        }
-        
-        
-        IMessageProperty IMessageProperty.CreateCopy ()
-        {
-            var copy = new HttpRequestMessageProperty ();
-            // FIXME: Clone headers?
-            copy.headers = headers;
-            copy.method = method;
-            copy.query_string = query_string;
-            copy.suppress_entity = suppress_entity;
-            return copy;
-        }
-    }
+		public bool SuppressEntityBody {
+			get { return suppress_entity; }
+			set { suppress_entity = value; }
+		}
+		
+		
+		IMessageProperty IMessageProperty.CreateCopy ()
+		{
+			var copy = new HttpRequestMessageProperty ();
+			// FIXME: Clone headers?
+			copy.headers = headers;
+			copy.method = method;
+			copy.query_string = query_string;
+			copy.suppress_entity = suppress_entity;
+			return copy;
+		}
+	}
 }

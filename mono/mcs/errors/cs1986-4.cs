@@ -3,16 +3,16 @@
 
 static class S
 {
-    public static int GetAwaiter<T> (this int i)
-    {
-        return 1;
-    }
+	public static int GetAwaiter<T> (this int i)
+	{
+		return 1;
+	}
 }
 
 class A
 {
-    static async void Test ()
-    {
-        await 9;
-    }
+	static async void Test ()
+	{
+		await 9;
+	}
 }

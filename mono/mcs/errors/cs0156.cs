@@ -5,13 +5,13 @@ using System;
 
 class Foo
 {
-    static void Main ()
-    {
-        try {
-            Console.WriteLine ("Test CS0156");
-            throw;
-        }
-        catch {
-        }            
-    }
+	static void Main ()
+	{
+		try {
+			Console.WriteLine ("Test CS0156");
+			throw;
+		}
+		catch {
+		}			
+	}
 }

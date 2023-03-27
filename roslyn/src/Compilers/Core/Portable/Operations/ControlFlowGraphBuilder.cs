@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1851,7 +1851,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     // to some captures from the stack. That means that, after the spilling, we should be able to leave the spill
                     // regions that no longer own captures referenced on the stack. The new capture that we create, should belong to
                     // the region that will become current after that. Here we are trying to compute what will be that region.
-                    // Obviously, we shouldn�t be leaving the region associated with the frame.
+                    // Obviously, we shouldn’t be leaving the region associated with the frame.
                     EvalStackFrame? currentFrame = _evalStack[currentFrameIndex].frameOpt;
                     Debug.Assert(currentFrame != null);
                     RegionBuilder? currentSpillRegion = currentFrame.RegionBuilderOpt;

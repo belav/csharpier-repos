@@ -2,7 +2,7 @@
 // SpnEndpointIdentity.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -37,29 +37,29 @@ using System.Xml;
 
 namespace System.ServiceModel
 {
-    public class SpnEndpointIdentity : EndpointIdentity
-    {
+	public class SpnEndpointIdentity : EndpointIdentity
+	{
 #if !MOBILE && !XAMMAC_4_5
-        public SpnEndpointIdentity (Claim identity)
-        {
-            Initialize (identity);
-        }
+		public SpnEndpointIdentity (Claim identity)
+		{
+			Initialize (identity);
+		}
 
-        public SpnEndpointIdentity (string spnName)
-            : this (Claim.CreateSpnClaim (spnName))
-        {
-        }
+		public SpnEndpointIdentity (string spnName)
+			: this (Claim.CreateSpnClaim (spnName))
+		{
+		}
 #else
-        public SpnEndpointIdentity (string spnName)
-        {
-            throw new NotImplementedException ();
-        }
+		public SpnEndpointIdentity (string spnName)
+		{
+			throw new NotImplementedException ();
+		}
 #endif
 
-        [MonoTODO]
-        public static TimeSpan SpnLookupTime {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
-    }
+		[MonoTODO]
+		public static TimeSpan SpnLookupTime {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
+	}
 }

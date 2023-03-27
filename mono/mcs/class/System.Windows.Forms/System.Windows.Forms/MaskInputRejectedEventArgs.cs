@@ -23,7 +23,7 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
@@ -31,27 +31,27 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-    public class MaskInputRejectedEventArgs : EventArgs
-    {
-        private int position;
-        private MaskedTextResultHint rejection_hint;
+	public class MaskInputRejectedEventArgs : EventArgs
+	{
+		private int position;
+		private MaskedTextResultHint rejection_hint;
 
-        #region Public Constructors
-        public MaskInputRejectedEventArgs (int position, MaskedTextResultHint rejectionHint) : base ()
-        {
-            this.position = position;
-            this.rejection_hint = rejectionHint;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public MaskInputRejectedEventArgs (int position, MaskedTextResultHint rejectionHint) : base ()
+		{
+			this.position = position;
+			this.rejection_hint = rejectionHint;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public int Position {
-            get { return this.position; }
-        }
+		#region Public Instance Properties
+		public int Position {
+			get { return this.position; }
+		}
 
-        public MaskedTextResultHint RejectionHint {
-            get { return this.rejection_hint; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public MaskedTextResultHint RejectionHint {
+			get { return this.rejection_hint; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

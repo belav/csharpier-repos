@@ -37,86 +37,86 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRelationCollection_GetEnumerator : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRelationCollection_GetEnumerator tc = new DataRelationCollection_GetEnumerator();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRelationCollection_GetEnumerator");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
+	[Test] public void Main()
+	{
+		DataRelationCollection_GetEnumerator tc = new DataRelationCollection_GetEnumerator();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRelationCollection_GetEnumerator");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("DataRelationCollection_GetEnumerator");
-            DataRelationCollection_GetEnumerator1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("DataRelationCollection_GetEnumerator");
+			DataRelationCollection_GetEnumerator1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
 
-    private void DataRelationCollection_GetEnumerator1()
-    {
-        DataSet ds = getDataSet();
-        int counter=0;
-        ds.Relations.Add("rel1",ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]);
-        ds.Relations.Add("rel2",ds.Tables[0].Columns["String1"],ds.Tables[1].Columns["String1"]);
+	private void DataRelationCollection_GetEnumerator1()
+	{
+		DataSet ds = getDataSet();
+		int counter=0;
+		ds.Relations.Add("rel1",ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]);
+		ds.Relations.Add("rel2",ds.Tables[0].Columns["String1"],ds.Tables[1].Columns["String1"]);
 
-        System.Collections.IEnumerator myEnumerator =  ds.Relations.GetEnumerator();
+		System.Collections.IEnumerator myEnumerator =  ds.Relations.GetEnumerator();
  
-        while (myEnumerator.MoveNext())
-        {
-            counter++;
-            Compare( ((DataRelation)myEnumerator.Current).RelationName.Substring(0,3),"rel"); 
+		while (myEnumerator.MoveNext())
+		{
+			counter++;
+			Compare( ((DataRelation)myEnumerator.Current).RelationName.Substring(0,3),"rel"); 
 
-        }
-        Compare(counter,2);
+		}
+		Compare(counter,2);
 
-        
-    }
+		
+	}
 
-    private DataSet getDataSet()
-    {
-        DataSet ds = new DataSet();
-        DataTable dt1 = DataProvider.CreateParentDataTable();
-        DataTable dt2 = DataProvider.CreateChildDataTable();
+	private DataSet getDataSet()
+	{
+		DataSet ds = new DataSet();
+		DataTable dt1 = DataProvider.CreateParentDataTable();
+		DataTable dt2 = DataProvider.CreateChildDataTable();
 
-        ds.Tables.Add(dt1);
-        ds.Tables.Add(dt2);
-        return ds;
-    }
+		ds.Tables.Add(dt1);
+		ds.Tables.Add(dt2);
+		return ds;
+	}
 }
 }

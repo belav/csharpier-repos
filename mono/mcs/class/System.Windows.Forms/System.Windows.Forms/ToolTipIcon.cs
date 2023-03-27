@@ -23,17 +23,17 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum ToolTipIcon
-    {
-        None = 0,
-        Info = 1,
-        Warning = 2,
-        Error = 3
-    }
+	public enum ToolTipIcon
+	{
+		None = 0,
+		Info = 1,
+		Warning = 2,
+		Error = 3
+	}
 }

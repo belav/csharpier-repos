@@ -1,4 +1,4 @@
 public class Test
 {
-    protected const int SomeValue = -1;
+	protected const int SomeValue = -1;
 }

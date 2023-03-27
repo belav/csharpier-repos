@@ -1,4 +1,4 @@
-// 
+﻿// 
 // PeerReferralPolicy.cs
 // 
 // Author: 
@@ -9,10 +9,10 @@
 
 namespace System.ServiceModel.PeerResolvers
 {
-    public enum PeerReferralPolicy
-    {
-        Service, 
-        Share, 
-        DoNotShare
-    }
+	public enum PeerReferralPolicy
+	{
+		Service, 
+		Share, 
+		DoNotShare
+	}
 }

@@ -32,42 +32,42 @@ using System;
 using System.Collections;
 
 namespace System.EnterpriseServices {
-    public sealed class SecurityCallers : IEnumerable {
+	public sealed class SecurityCallers : IEnumerable {
 
-        #region Constructors
+		#region Constructors
 
-        internal SecurityCallers ()
-        {
-        }
+		internal SecurityCallers ()
+		{
+		}
 
-        internal SecurityCallers (ISecurityCallersColl collection)
-        {
-        }
+		internal SecurityCallers (ISecurityCallersColl collection)
+		{
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public int Count {
-            [MonoTODO]
-            get { throw new NotImplementedException (); }
-        }
+		public int Count {
+			[MonoTODO]
+			get { throw new NotImplementedException (); }
+		}
 
-        public SecurityIdentity this [int idx] {
-            [MonoTODO]
-            get { throw new NotImplementedException (); }
-        }
+		public SecurityIdentity this [int idx] {
+			[MonoTODO]
+			get { throw new NotImplementedException (); }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        [MonoTODO]
-        public IEnumerator GetEnumerator ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public IEnumerator GetEnumerator ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

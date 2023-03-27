@@ -2,7 +2,7 @@
 // Pair.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,45 +29,45 @@
 using System;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    class Pair<K, V> : IEquatable<Pair<K, V>> {
-        private static readonly bool KeyIsReferenceType = default(K) == null;
-        private static readonly bool ValueIsReferenceType = default(V) == null;
+	class Pair<K, V> : IEquatable<Pair<K, V>> {
+		private static readonly bool KeyIsReferenceType = default(K) == null;
+		private static readonly bool ValueIsReferenceType = default(V) == null;
 
-        public readonly K Key;
-        public readonly V Value;
+		public readonly K Key;
+		public readonly V Value;
 
-        public Pair (K key, V value)
-        {
-            this.Key = key;
-            this.Value = value;
-        }
+		public Pair (K key, V value)
+		{
+			this.Key = key;
+			this.Value = value;
+		}
 
-        #region IEquatable<Pair<K,V>> Members
-        public bool Equals (Pair<K, V> other)
-        {
-            var keyEquatable = ((object) this.Key) as IEquatable<K>;
-            bool keysAreEqual = keyEquatable != null ? keyEquatable.Equals (other.Key) : Equals (this.Key, other.Key);
-            if (!keysAreEqual)
-                return false;
+		#region IEquatable<Pair<K,V>> Members
+		public bool Equals (Pair<K, V> other)
+		{
+			var keyEquatable = ((object) this.Key) as IEquatable<K>;
+			bool keysAreEqual = keyEquatable != null ? keyEquatable.Equals (other.Key) : Equals (this.Key, other.Key);
+			if (!keysAreEqual)
+				return false;
 
-            var valueEquatable = ((object) this.Value) as IEquatable<V>;
-            return valueEquatable != null ? valueEquatable.Equals (other.Value) : Equals (this.Value, other.Value);
-        }
-        #endregion
+			var valueEquatable = ((object) this.Value) as IEquatable<V>;
+			return valueEquatable != null ? valueEquatable.Equals (other.Value) : Equals (this.Value, other.Value);
+		}
+		#endregion
 
-        public override int GetHashCode ()
-        {
-            return (!KeyIsReferenceType || ((object) this.Key) != null ? this.Key.GetHashCode () : 0)
-                   + 13*(!ValueIsReferenceType || ((object) this.Value) != null ? this.Value.GetHashCode () : 0);
-        }
+		public override int GetHashCode ()
+		{
+			return (!KeyIsReferenceType || ((object) this.Key) != null ? this.Key.GetHashCode () : 0)
+			       + 13*(!ValueIsReferenceType || ((object) this.Value) != null ? this.Value.GetHashCode () : 0);
+		}
 
-        public override string ToString ()
-        {
-            return string.Format ("({0}, {1})",
-                                  (!KeyIsReferenceType || ((object) this.Key) != null) ? this.Key.ToString () : "<null>",
-                                  (!ValueIsReferenceType || ((object) this.Value) != null) ? this.Value.ToString () : "<null>");
-        }
-    }
+		public override string ToString ()
+		{
+			return string.Format ("({0}, {1})",
+			                      (!KeyIsReferenceType || ((object) this.Key) != null) ? this.Key.ToString () : "<null>",
+			                      (!ValueIsReferenceType || ((object) this.Value) != null) ? this.Value.ToString () : "<null>");
+		}
+	}
 
     static class Pair {
         public static Pair<K,V> From<K,V>(K key, V value)

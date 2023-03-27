@@ -1,11 +1,11 @@
 class X {
-    System.Collections.IEnumerable a ()
-    {
-        lock (this){
-            yield return "a";
-            yield return "b";
-        }
-    }
+	System.Collections.IEnumerable a ()
+	{
+		lock (this){
+			yield return "a";
+			yield return "b";
+		}
+	}
 
-    public static void Main () {}
+	public static void Main () {}
 }

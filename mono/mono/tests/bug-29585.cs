@@ -43,12 +43,12 @@ namespace TestCase
             Console.WriteLine("method.DeclaringType = {0}", method.DeclaringType);
             Console.WriteLine("method.IsGenericMethod = {0}", method.IsGenericMethod);
             Console.WriteLine("method.IsGenericMethodDefinition = {0}", method.IsGenericMethodDefinition);
-            
-            if (!method.IsGenericMethod)
-                return 1;
-            if (!method.IsGenericMethodDefinition)
-                return 2;
-            return 0;
+			
+			if (!method.IsGenericMethod)
+				return 1;
+			if (!method.IsGenericMethodDefinition)
+				return 2;
+			return 0;
         }
     }
 }

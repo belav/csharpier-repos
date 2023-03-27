@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1096,9 +1096,9 @@ public interface Bad { }
 public class C<T>
 {
     protected class N { }
-    protected void M1(C<int>.N n) { }    // Not CLS-compliant - C<int>.N not 
+    protected void M1(C<int>.N n) { }	// Not CLS-compliant - C<int>.N not 
     // accessible from within C<T> in all languages
-    protected void M2(C<T>.N n) { }        // CLS-compliant - C<T>.N accessible inside C<T>
+    protected void M2(C<T>.N n) { }	    // CLS-compliant - C<T>.N accessible inside C<T>
 
     protected class N2
     {
@@ -1108,22 +1108,22 @@ public class C<T>
 
 public class D : C<long>
 {
-    protected void M3(C<int>.N n) { }    // Not CLS-compliant - C<int>.N is not
+    protected void M3(C<int>.N n) { }	// Not CLS-compliant - C<int>.N is not
     // accessible in D (extends C<long>)
-    protected void M4(C<long>.N n) { }    // CLS-compliant, C<long>.N is
+    protected void M4(C<long>.N n) { }	// CLS-compliant, C<long>.N is
     // accessible in D (extends C<long>)
 }
 ";
 
             CreateCompilation(source, options: TestOptions.ReleaseDll.WithNullableContextOptions(nullableContextOptions)).VerifyDiagnostics(
                 // (7,32): warning CS3001: Argument type 'C<int>.N' is not CLS-compliant
-                //     protected void M1(C<int>.N n) { }    // Not CLS-compliant - C<int>.N not 
+                //     protected void M1(C<int>.N n) { }	// Not CLS-compliant - C<int>.N not 
                 Diagnostic(ErrorCode.WRN_CLS_BadArgType, "n").WithArguments("C<int>.N"),
                 // (13,38): warning CS3001: Argument type 'C<ulong>.N' is not CLS-compliant
                 //         protected void M1(C<ulong>.N n) { }
                 Diagnostic(ErrorCode.WRN_CLS_BadArgType, "n").WithArguments("C<ulong>.N"),
                 // (19,32): warning CS3001: Argument type 'C<int>.N' is not CLS-compliant
-                //     protected void M3(C<int>.N n) { }    // Not CLS-compliant - C<int>.N is not
+                //     protected void M3(C<int>.N n) { }	// Not CLS-compliant - C<int>.N is not
                 Diagnostic(ErrorCode.WRN_CLS_BadArgType, "n").WithArguments("C<int>.N"));
         }
 
@@ -3089,7 +3089,7 @@ public class C
 {
     public event Action E
     {
-        [CLSCompliant(false)]//CS1667
+		[CLSCompliant(false)]//CS1667
         add { }
 
         [CLSCompliant(false)]//CS1667
@@ -3098,33 +3098,33 @@ public class C
 
     public int P
     {
-        [CLSCompliant(false)]//CS1667
-        get
-        {
-            return 1;
-        }
+		[CLSCompliant(false)]//CS1667
+		get
+		{
+			return 1;
+		}
     }
 
     public int this[int x]
     {
-        [CLSCompliant(false)]//CS1667
-        get
-        {
-            return 1;
-        }
+		[CLSCompliant(false)]//CS1667
+		get
+		{
+			return 1;
+		}
     }
 }
 ";
 
             CreateCompilation(source).VerifyDiagnostics(
                 // (10,4): error CS1667: Attribute 'CLSCompliantAttribute' is not valid on property or event accessors. It is only valid on 'assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
-                //         [CLSCompliant(false)]//CS1667
+                // 		[CLSCompliant(false)]//CS1667
                 Diagnostic(ErrorCode.ERR_AttributeNotOnAccessor, "CLSCompliant(false)").WithArguments("CLSCompliantAttribute", "assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter"),
                 // (28,4): error CS1667: Attribute 'CLSCompliantAttribute' is not valid on property or event accessors. It is only valid on 'assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
-                //         [CLSCompliant(false)]//CS1667
+                // 		[CLSCompliant(false)]//CS1667
                 Diagnostic(ErrorCode.ERR_AttributeNotOnAccessor, "CLSCompliant(false)").WithArguments("CLSCompliantAttribute", "assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter"),
                 // (19,4): error CS1667: Attribute 'CLSCompliantAttribute' is not valid on property or event accessors. It is only valid on 'assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
-                //         [CLSCompliant(false)]//CS1667
+                // 		[CLSCompliant(false)]//CS1667
                 Diagnostic(ErrorCode.ERR_AttributeNotOnAccessor, "CLSCompliant(false)").WithArguments("CLSCompliantAttribute", "assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter"),
                 // (13,10): error CS1667: Attribute 'CLSCompliantAttribute' is not valid on property or event accessors. It is only valid on 'assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
                 //         [CLSCompliant(false)]//CS1667
@@ -3143,7 +3143,7 @@ internal class C
 {
     internal event Action E
     {
-        [CLSCompliant(false)]//CS1667
+		[CLSCompliant(false)]//CS1667
         add { }
 
         [CLSCompliant(false)]//CS1667
@@ -3152,33 +3152,33 @@ internal class C
 
     internal int P
     {
-        [CLSCompliant(false)]//CS1667
-        get
-        {
-            return 1;
-        }
+		[CLSCompliant(false)]//CS1667
+		get
+		{
+			return 1;
+		}
     }
 
     internal int this[int x]
     {
-        [CLSCompliant(false)]//CS1667
-        get
-        {
-            return 1;
-        }
+		[CLSCompliant(false)]//CS1667
+		get
+		{
+			return 1;
+		}
     }
 }
 ";
 
             CreateCompilation(source).VerifyDiagnostics(
                 // (10,4): error CS1667: Attribute 'CLSCompliantAttribute' is not valid on property or event accessors. It is only valid on 'assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
-                //         [CLSCompliant(false)]//CS1667
+                // 		[CLSCompliant(false)]//CS1667
                 Diagnostic(ErrorCode.ERR_AttributeNotOnAccessor, "CLSCompliant(false)").WithArguments("CLSCompliantAttribute", "assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter"),
                 // (28,4): error CS1667: Attribute 'CLSCompliantAttribute' is not valid on property or event accessors. It is only valid on 'assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
-                //         [CLSCompliant(false)]//CS1667
+                // 		[CLSCompliant(false)]//CS1667
                 Diagnostic(ErrorCode.ERR_AttributeNotOnAccessor, "CLSCompliant(false)").WithArguments("CLSCompliantAttribute", "assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter"),
                 // (19,4): error CS1667: Attribute 'CLSCompliantAttribute' is not valid on property or event accessors. It is only valid on 'assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
-                //         [CLSCompliant(false)]//CS1667
+                // 		[CLSCompliant(false)]//CS1667
                 Diagnostic(ErrorCode.ERR_AttributeNotOnAccessor, "CLSCompliant(false)").WithArguments("CLSCompliantAttribute", "assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter"),
                 // (13,10): error CS1667: Attribute 'CLSCompliantAttribute' is not valid on property or event accessors. It is only valid on 'assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
                 //         [CLSCompliant(false)]//CS1667
@@ -3391,15 +3391,15 @@ using System;
 
 public class C
 {
-    public Base b;
-    public Derived d;
+	public Base b;
+	public Derived d;
 }
 ";
             // NOTE: As in dev11, we ignore the fact that Derived inherits CLSCompliantAttribute from Base.
             var libRef = CreateCompilation(libSource).EmitToImageReference();
             CreateCompilation(source, new[] { libRef }).VerifyDiagnostics(
                 // (9,17): warning CS3003: Type of 'C.d' is not CLS-compliant
-                //     public Derived d;
+                // 	public Derived d;
                 Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "d").WithArguments("C.d"));
         }
 
@@ -3453,15 +3453,15 @@ using System;
 
 public class C
 {
-    public Base b;
-    public Derived d;
+	public Base b;
+	public Derived d;
 }
 ";
             // NOTE: As in dev11, we ignore the fact that Derived inherits CLSCompliantAttribute from Base.
             var libRef = CompileIL(libIL, prependDefaultHeader: false);
             CreateCompilation(source, new[] { libRef }).VerifyDiagnostics(
                 // (8,14): warning CS3003: Type of 'C.b' is not CLS-compliant
-                //     public Base b;
+                // 	public Base b;
                 Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "b").WithArguments("C.b"));
         }
 

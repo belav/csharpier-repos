@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 
 
@@ -28,6 +28,6 @@ using System;
 
 namespace System.Windows.Forms {
 
-    public delegate void DrawTreeNodeEventHandler (object sender, DrawTreeNodeEventArgs e);
+	public delegate void DrawTreeNodeEventHandler (object sender, DrawTreeNodeEventArgs e);
 
 }

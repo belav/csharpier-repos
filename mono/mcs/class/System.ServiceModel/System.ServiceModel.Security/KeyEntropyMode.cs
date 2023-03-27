@@ -2,7 +2,7 @@
 // SecurityKeyEntropyMode.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -28,10 +28,10 @@
 
 namespace System.ServiceModel.Security
 {
-    public enum SecurityKeyEntropyMode
-    {
-        ClientEntropy,
-        ServerEntropy,
-        CombinedEntropy,
-    }
+	public enum SecurityKeyEntropyMode
+	{
+		ClientEntropy,
+		ServerEntropy,
+		CombinedEntropy,
+	}
 }

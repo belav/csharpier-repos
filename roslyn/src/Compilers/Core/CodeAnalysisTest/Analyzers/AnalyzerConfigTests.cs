@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -2239,7 +2239,7 @@ is_global = true
         [InlineData("/path/to/globalconfig", false)]
         [InlineData("/path/to/my.globalconfig", false)]
         [InlineData("/.editorconfig", false)]
-        [InlineData("/.globalconfIg", false)]
+        [InlineData("/.globalconfİg", false)]
         public void FileNameCausesConfigToBeReportedAsGlobal(string fileName, bool shouldBeTreatedAsGlobal)
         {
             var config = Parse("", fileName);

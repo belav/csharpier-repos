@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: SatelliteContractVersion (Consts.FxVersion)]
 
 [assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
-    [assembly: AssemblyFileVersion(Consts.FxFileVersion)]
+	[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 
 [assembly: AssemblyTitle("ResGen.exe")]
 [assembly: AssemblyDescription("ResGen.exe")]

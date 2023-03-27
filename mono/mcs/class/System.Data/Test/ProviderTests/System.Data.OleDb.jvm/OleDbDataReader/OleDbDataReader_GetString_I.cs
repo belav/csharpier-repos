@@ -32,47 +32,47 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-    [TestFixture]
-    public class OleDbDataReader_GetString_I : ADONetTesterClass 
-    {
-        public static void Main()
-        {
-            OleDbDataReader_GetString_I tc = new OleDbDataReader_GetString_I();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OleDbDataReader_GetString_I");
-                tc.run();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+	[TestFixture]
+	public class OleDbDataReader_GetString_I : ADONetTesterClass 
+	{
+		public static void Main()
+		{
+			OleDbDataReader_GetString_I tc = new OleDbDataReader_GetString_I();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OleDbDataReader_GetString_I");
+				tc.run();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            Exception exp = null;
+		[Test]
+		public void run()
+		{
+			Exception exp = null;
 
-        
-            base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+		
+			base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
 
-            OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-            con.Open();
-            OleDbCommand cmd = new OleDbCommand("Select FirstName From Employees Where EmployeeID = 100", con);
-            OleDbDataReader rdr = cmd.ExecuteReader();
-            rdr.Read();
+			OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+			con.Open();
+			OleDbCommand cmd = new OleDbCommand("Select FirstName From Employees Where EmployeeID = 100", con);
+			OleDbDataReader rdr = cmd.ExecuteReader();
+			rdr.Read();
 
-            try
-            {
-                BeginCase("check value");
-                string str = rdr.GetString(0);
-                Compare(str,"First100" );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("check value");
+				string str = rdr.GetString(0);
+				Compare(str,"First100" );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            if (con.State == ConnectionState.Open) con.Close();
-        }
-    }
+			if (con.State == ConnectionState.Open) con.Close();
+		}
+	}
 
 }

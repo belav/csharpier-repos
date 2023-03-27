@@ -36,70 +36,70 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRowCollection_CopyTo_AI : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRowCollection_CopyTo_AI tc = new DataRowCollection_CopyTo_AI();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRowCollection_CopyTo_AI");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
+	[Test] public void Main()
+	{
+		DataRowCollection_CopyTo_AI tc = new DataRowCollection_CopyTo_AI();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRowCollection_CopyTo_AI");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("DataRowCollection_CopyTo_AI");
-            DataRowCollection_CopyTo_AI1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-    public void DataRowCollection_CopyTo_AI1()
-    {
-        DataTable dt = DataProvider.CreateParentDataTable();
-        DataRow[] arr = new DataRow[dt.Rows.Count];
-        dt.Rows.CopyTo(arr,0);
-        Compare(arr.Length,dt.Rows.Count);
-        
-        int index=0;
-        foreach (DataRow dr in dt.Rows)
-        {
-            Compare(arr[index],dr);
-            index++;
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("DataRowCollection_CopyTo_AI");
+			DataRowCollection_CopyTo_AI1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
+	public void DataRowCollection_CopyTo_AI1()
+	{
+		DataTable dt = DataProvider.CreateParentDataTable();
+		DataRow[] arr = new DataRow[dt.Rows.Count];
+		dt.Rows.CopyTo(arr,0);
+		Compare(arr.Length,dt.Rows.Count);
+		
+		int index=0;
+		foreach (DataRow dr in dt.Rows)
+		{
+			Compare(arr[index],dr);
+			index++;
 
-        }
-    }
+		}
+	}
 }
 }

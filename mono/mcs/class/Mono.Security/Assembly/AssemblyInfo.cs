@@ -2,8 +2,8 @@
 // AssemblyInfo.cs
 //
 // Authors:
-//    Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-//    Sebastien Pouliot  (sebastien@ximian.com)
+//	Andreas Nahr (ClassDevelopment@A-SoftTech.com)
+//	Sebastien Pouliot  (sebastien@ximian.com)
 //
 // (C) 2003 Ximian, Inc.  http://www.ximian.com
 // (C) 2004 Novell (http://www.novell.com)

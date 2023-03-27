@@ -8,7 +8,7 @@ namespace Test
 
   }
 
-    public class ReturnsTestBase {
-        public TestBase.TestBase M () { return null; }
-    }
+	public class ReturnsTestBase {
+		public TestBase.TestBase M () { return null; }
+	}
 }

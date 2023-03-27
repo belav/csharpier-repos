@@ -359,7 +359,7 @@ namespace System.Xml.Xsl.XsltOld {
                     }
                     if (! Read())
                         throw new InvalidOperationException(Res.GetString(Res.Xml_InvalidOperation));
-                    break;
+    		        break;
                 default:
                     return (sb == null) ? result : sb.ToString();
                 }

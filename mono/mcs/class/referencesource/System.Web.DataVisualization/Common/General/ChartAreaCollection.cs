@@ -5,17 +5,17 @@
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
 //=================================================================
-//  File:        ChartAreaCollection.cs
+//  File:		ChartAreaCollection.cs
 //
-//  Namespace:    System.Web.UI.WebControls[Windows.Forms].Charting
+//  Namespace:	System.Web.UI.WebControls[Windows.Forms].Charting
 //
-//    Classes:    ChartAreaCollection
+//	Classes:	ChartAreaCollection
 //
-//  Purpose:    ChartAreaCollection class represents a strongly 
+//  Purpose:	ChartAreaCollection class represents a strongly 
 //              typed collection of ChartArea objects.
 //
-//    Reviewed:    GS - Aug 8, 2002
-//                AG - Aug 8, 2002
+//	Reviewed:	GS - Aug 8, 2002
+//				AG - Aug 8, 2002
 //              AG - Microsoft 16, 2007
 //
 //===================================================================
@@ -32,33 +32,33 @@ using System.ComponentModel;
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+	namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
 
 #endif
 {
-    /// <summary>
+	/// <summary>
     /// The ChartAreaCollection class represents a strongly typed collection of 
     /// ChartArea objects. Each chart area has a unique name in the collection
     /// and can be retrieved by name or by index.
-    /// </summary>
+	/// </summary>
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
     [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
 #endif
     public class ChartAreaCollection : ChartNamedElementCollection<ChartArea>
-    {
+	{
 
-        #region Constructors
+		#region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAreaCollection"/> class.
         /// </summary>
         /// <param name="chartPicture">Parent chart picture.</param>
-        internal ChartAreaCollection(ChartPicture chartPicture) : base(chartPicture)
-        {
-        }
+		internal ChartAreaCollection(ChartPicture chartPicture) : base(chartPicture)
+		{
+		}
 
         #endregion
 

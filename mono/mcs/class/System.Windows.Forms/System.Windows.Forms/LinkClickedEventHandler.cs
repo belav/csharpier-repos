@@ -20,13 +20,13 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jordi Mas i Hernandez, jordi@ximian.com
+//	Jordi Mas i Hernandez, jordi@ximian.com
 //
 // COMPLETE
 
 namespace System.Windows.Forms  
 {
-    public delegate void LinkClickedEventHandler (object sender, LinkClickedEventArgs e);
+	public delegate void LinkClickedEventHandler (object sender, LinkClickedEventArgs e);
 }
 
 

@@ -1,4 +1,4 @@
-// AntiXSS global suppressions
+﻿// AntiXSS global suppressions
 using System.Diagnostics.CodeAnalysis;
 
 [module: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Alphanumerics", Scope = "member", Target = "System.Web.Security.AntiXss.MidCodeCharts.#EnclosedAlphanumerics", Justification = "AntiXSS baseline.")]

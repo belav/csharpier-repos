@@ -2,7 +2,7 @@
 // System.Web.Configuration.XhtmlConformanceSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,33 +34,33 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class XhtmlConformanceSection : ConfigurationSection
-    {
-        static ConfigurationProperty modeProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class XhtmlConformanceSection : ConfigurationSection
+	{
+		static ConfigurationProperty modeProp;
+		static ConfigurationPropertyCollection properties;
 
-        static XhtmlConformanceSection ()
-        {
-            modeProp = new ConfigurationProperty ("mode", typeof (XhtmlConformanceMode), XhtmlConformanceMode.Transitional,
-                                  new GenericEnumConverter (typeof (XhtmlConformanceMode)),
-                                  PropertyHelper.DefaultValidator,
-                                  ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
+		static XhtmlConformanceSection ()
+		{
+			modeProp = new ConfigurationProperty ("mode", typeof (XhtmlConformanceMode), XhtmlConformanceMode.Transitional,
+							      new GenericEnumConverter (typeof (XhtmlConformanceMode)),
+							      PropertyHelper.DefaultValidator,
+							      ConfigurationPropertyOptions.None);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (modeProp);
-        }
+			properties.Add (modeProp);
+		}
 
-        [ConfigurationProperty ("mode", DefaultValue = "Transitional")]
-        public XhtmlConformanceMode Mode {
-            get { return (XhtmlConformanceMode) base [modeProp];}
-            set { base[modeProp] = value; }
-        }
+		[ConfigurationProperty ("mode", DefaultValue = "Transitional")]
+		public XhtmlConformanceMode Mode {
+			get { return (XhtmlConformanceMode) base [modeProp];}
+			set { base[modeProp] = value; }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-    }
+	}
 }
 
 

@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -28,9 +28,9 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 
 namespace Mono.Mozilla
-{    
-    internal delegate void nsITimerCallbackDelegate (
-            [MarshalAs (UnmanagedType.Interface)] nsITimer timer, 
-            IntPtr closure
-    );
+{	
+	internal delegate void nsITimerCallbackDelegate (
+			[MarshalAs (UnmanagedType.Interface)] nsITimer timer, 
+	        IntPtr closure
+	);
 }

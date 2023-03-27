@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
@@ -29,118 +29,118 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-    [ToolboxBitmap ("")]
-    public class DataGridViewCheckBoxColumn : DataGridViewColumn {
+	[ToolboxBitmap ("")]
+	public class DataGridViewCheckBoxColumn : DataGridViewColumn {
 
-        public DataGridViewCheckBoxColumn (bool threeState) {
-            CellTemplate = new DataGridViewCheckBoxCell (threeState);
-        }
+		public DataGridViewCheckBoxColumn (bool threeState) {
+			CellTemplate = new DataGridViewCheckBoxCell (threeState);
+		}
 
-        public DataGridViewCheckBoxColumn () : this (false) {
-        }
+		public DataGridViewCheckBoxColumn () : this (false) {
+		}
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public override DataGridViewCell CellTemplate {
-            get { return base.CellTemplate; }
-            set { base.CellTemplate = value as DataGridViewCheckBoxCell; }
-        }
+		[Browsable (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public override DataGridViewCell CellTemplate {
+			get { return base.CellTemplate; }
+			set { base.CellTemplate = value as DataGridViewCheckBoxCell; }
+		}
 
-        [Browsable (true)]
-        public override DataGridViewCellStyle DefaultCellStyle {
-            get { return base.DefaultCellStyle; }
-            set { base.DefaultCellStyle = value; }
-        }
+		[Browsable (true)]
+		public override DataGridViewCellStyle DefaultCellStyle {
+			get { return base.DefaultCellStyle; }
+			set { base.DefaultCellStyle = value; }
+		}
 
-        [DefaultValue (null)]
-        [TypeConverter (typeof (StringConverter))]
-        public object FalseValue {
-            get {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null.");
-                }
-                return (base.CellTemplate as DataGridViewCheckBoxCell).FalseValue;
-            }
-            set {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null.");
-                }
-                (base.CellTemplate as DataGridViewCheckBoxCell).FalseValue = value;
-            }
-        }
+		[DefaultValue (null)]
+		[TypeConverter (typeof (StringConverter))]
+		public object FalseValue {
+			get {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null.");
+				}
+				return (base.CellTemplate as DataGridViewCheckBoxCell).FalseValue;
+			}
+			set {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null.");
+				}
+				(base.CellTemplate as DataGridViewCheckBoxCell).FalseValue = value;
+			}
+		}
 
-        [DefaultValue (FlatStyle.Standard)]
-        public FlatStyle FlatStyle {
-            get {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null.");
-                }
-                return (base.CellTemplate as DataGridViewCheckBoxCell).FlatStyle;
-            }
-            set {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null.");
-                }
-                (base.CellTemplate as DataGridViewCheckBoxCell).FlatStyle = value;
-            }
-        }
+		[DefaultValue (FlatStyle.Standard)]
+		public FlatStyle FlatStyle {
+			get {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null.");
+				}
+				return (base.CellTemplate as DataGridViewCheckBoxCell).FlatStyle;
+			}
+			set {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null.");
+				}
+				(base.CellTemplate as DataGridViewCheckBoxCell).FlatStyle = value;
+			}
+		}
 
-        [DefaultValue (null)]
-        [TypeConverter (typeof (StringConverter))]
-        public object IndeterminateValue {
-            get {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null.");
-                }
-                return (base.CellTemplate as DataGridViewCheckBoxCell).IndeterminateValue;
-            }
-            set {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null.");
-                }
-                (base.CellTemplate as DataGridViewCheckBoxCell).IndeterminateValue = value;
-            }
-        }
+		[DefaultValue (null)]
+		[TypeConverter (typeof (StringConverter))]
+		public object IndeterminateValue {
+			get {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null.");
+				}
+				return (base.CellTemplate as DataGridViewCheckBoxCell).IndeterminateValue;
+			}
+			set {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null.");
+				}
+				(base.CellTemplate as DataGridViewCheckBoxCell).IndeterminateValue = value;
+			}
+		}
 
-        [DefaultValue (false)]
-        public bool ThreeState {
-            get {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null.");
-                }
-                return (base.CellTemplate as DataGridViewCheckBoxCell).ThreeState;
-            }
-            set {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null.");
-                }
-                (base.CellTemplate as DataGridViewCheckBoxCell).ThreeState = value;
-            }
-        }
+		[DefaultValue (false)]
+		public bool ThreeState {
+			get {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null.");
+				}
+				return (base.CellTemplate as DataGridViewCheckBoxCell).ThreeState;
+			}
+			set {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null.");
+				}
+				(base.CellTemplate as DataGridViewCheckBoxCell).ThreeState = value;
+			}
+		}
 
-        [DefaultValue (null)]
-        [TypeConverter (typeof (StringConverter))]
-        public object TrueValue {
-            get {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null.");
-                }
-                return (base.CellTemplate as DataGridViewCheckBoxCell).TrueValue;
-            }
-            set {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null.");
-                }
-                (base.CellTemplate as DataGridViewCheckBoxCell).TrueValue = value;
-            }
-        }
+		[DefaultValue (null)]
+		[TypeConverter (typeof (StringConverter))]
+		public object TrueValue {
+			get {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null.");
+				}
+				return (base.CellTemplate as DataGridViewCheckBoxCell).TrueValue;
+			}
+			set {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null.");
+				}
+				(base.CellTemplate as DataGridViewCheckBoxCell).TrueValue = value;
+			}
+		}
 
-        public override string ToString ()
-        {
-            return string.Format ("DataGridViewCheckBoxColumn {{ Name={0}, Index={1} }}", Name, Index);
-        }
+		public override string ToString ()
+		{
+			return string.Format ("DataGridViewCheckBoxColumn {{ Name={0}, Index={1} }}", Name, Index);
+		}
 
-    }
+	}
 
 }
 

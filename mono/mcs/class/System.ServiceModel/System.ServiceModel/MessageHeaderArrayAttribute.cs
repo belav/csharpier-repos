@@ -2,7 +2,7 @@
 // MessageHeaderArrayAttribute.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,9 +29,9 @@ using System;
 
 namespace System.ServiceModel
 {
-    [AttributeUsage (AttributeTargets.Property | AttributeTargets.Field,
-        Inherited = false)]
-    public sealed class MessageHeaderArrayAttribute : MessageHeaderAttribute
-    {
-    }
+	[AttributeUsage (AttributeTargets.Property | AttributeTargets.Field,
+		Inherited = false)]
+	public sealed class MessageHeaderArrayAttribute : MessageHeaderAttribute
+	{
+	}
 }

@@ -2,7 +2,7 @@
 // System.Security.AccessControl.RegistryRights enum
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -28,21 +28,21 @@
 
 namespace System.Security.AccessControl {
 
-    [Flags]
-    public enum RegistryRights {
-        QueryValues        = 0x00001,
-        SetValue        = 0x00002,
-        CreateSubKey        = 0x00004,
-        EnumerateSubKeys    = 0x00008,
-        Notify            = 0x00010,
-        CreateLink        = 0x00020,
-        Delete            = 0x10000,
-        ReadPermissions        = 0x20000,
-        WriteKey        = 0x20006,
-        ReadKey            = 0x20019,
-        ExecuteKey        = 0x20019,
-        ChangePermissions    = 0x40000,
-        TakeOwnership        = 0x80000,
-        FullControl        = 0xF003F,
-    }
+	[Flags]
+	public enum RegistryRights {
+		QueryValues		= 0x00001,
+		SetValue		= 0x00002,
+		CreateSubKey		= 0x00004,
+		EnumerateSubKeys	= 0x00008,
+		Notify			= 0x00010,
+		CreateLink		= 0x00020,
+		Delete			= 0x10000,
+		ReadPermissions		= 0x20000,
+		WriteKey		= 0x20006,
+		ReadKey			= 0x20019,
+		ExecuteKey		= 0x20019,
+		ChangePermissions	= 0x40000,
+		TakeOwnership		= 0x80000,
+		FullControl		= 0xF003F,
+	}
 }

@@ -24,21 +24,21 @@ class Y {
         Console.WriteLine("Object: " + x);
     }
 
-    static void Inner () {
+	static void Inner () {
         X t1 = test();
+    	System.GC.Collect();
         System.GC.Collect();
-        System.GC.Collect();
-        System.GC.WaitForPendingFinalizers();
+    	System.GC.WaitForPendingFinalizers();
         test2(t1);
-    }
+	}
 
     static int Main() {
-        try {
-            Inner ();
-    } catch (TypeLoadException e) {
-        Console.WriteLine ("got correct exception: {0}", e);
-        return 0;
-    }
-    return 1;
+    	try {
+			Inner ();
+	} catch (TypeLoadException e) {
+		Console.WriteLine ("got correct exception: {0}", e);
+		return 0;
+	}
+	return 1;
     }
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,24 +28,24 @@ using System.Security;
 
 namespace System.Security.Permissions {
 
-    [AttributeUsage (AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly)]
-    public sealed class WebBrowserPermissionAttribute : CodeAccessSecurityAttribute
-    {
-        public WebBrowserPermissionAttribute (SecurityAction action)
-            : base (action)
-        {
-            throw new NotImplementedException ();
-        }
+	[AttributeUsage (AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly)]
+	public sealed class WebBrowserPermissionAttribute : CodeAccessSecurityAttribute
+	{
+		public WebBrowserPermissionAttribute (SecurityAction action)
+			: base (action)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public WebBrowserPermissionLevel Level {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		public WebBrowserPermissionLevel Level {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        public override IPermission CreatePermission ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public override IPermission CreatePermission ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 
 }

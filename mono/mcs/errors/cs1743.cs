@@ -3,7 +3,7 @@
 
 static class C
 {
-    public static void Test (this C a = null)
-    {
-    }
+	public static void Test (this C a = null)
+	{
+	}
 }

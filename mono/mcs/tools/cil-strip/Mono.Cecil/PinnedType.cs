@@ -28,10 +28,10 @@
 
 namespace Mono.Cecil {
 
-    internal sealed class PinnedType : TypeSpecification {
+	internal sealed class PinnedType : TypeSpecification {
 
-        public PinnedType (TypeReference pType) : base (pType)
-        {
-        }
-    }
+		public PinnedType (TypeReference pType) : base (pType)
+		{
+		}
+	}
 }

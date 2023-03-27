@@ -2,7 +2,7 @@
 // PublisherIdentityPermission.cs: Publisher Identity Permission
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002, 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -34,127 +34,127 @@ using Mono.Security.Cryptography;
 
 namespace System.Security.Permissions {
 
-    [ComVisible (true)]
-    [Serializable]
-    public sealed class PublisherIdentityPermission : CodeAccessPermission, IBuiltInPermission {
+	[ComVisible (true)]
+	[Serializable]
+	public sealed class PublisherIdentityPermission : CodeAccessPermission, IBuiltInPermission {
 
-        private const int version = 1;
+		private const int version = 1;
 
-        private X509Certificate x509;
-    
-        public PublisherIdentityPermission (PermissionState state) 
-        {
-            // false == do not allow Unrestricted for Identity Permissions
-            CheckPermissionState (state, false);
-        }
-    
-        public PublisherIdentityPermission (X509Certificate certificate) 
-        {
-            // reuse validation by the Certificate property
-            Certificate = certificate;
-        }
-    
-        public X509Certificate Certificate { 
-            get { return x509; }
-            set { 
-                if (value == null)
-                    throw new ArgumentNullException ("X509Certificate");
-                x509 = value; 
-            }
-        }
-    
-        public override IPermission Copy () 
-        {
-            PublisherIdentityPermission p = new PublisherIdentityPermission (PermissionState.None);
-            if (x509 != null)
-                p.Certificate = x509;
-            return p;
-        }
+		private X509Certificate x509;
+	
+		public PublisherIdentityPermission (PermissionState state) 
+		{
+			// false == do not allow Unrestricted for Identity Permissions
+			CheckPermissionState (state, false);
+		}
+	
+		public PublisherIdentityPermission (X509Certificate certificate) 
+		{
+			// reuse validation by the Certificate property
+			Certificate = certificate;
+		}
+	
+		public X509Certificate Certificate { 
+			get { return x509; }
+			set { 
+				if (value == null)
+					throw new ArgumentNullException ("X509Certificate");
+				x509 = value; 
+			}
+		}
+	
+		public override IPermission Copy () 
+		{
+			PublisherIdentityPermission p = new PublisherIdentityPermission (PermissionState.None);
+			if (x509 != null)
+				p.Certificate = x509;
+			return p;
+		}
 
-        public override void FromXml (SecurityElement esd) 
-        {
-            // General validation in CodeAccessPermission
-            CheckSecurityElement (esd, "esd", version, version);
-            // Note: we do not (yet) care about the return value 
-            // as we only accept version 1 (min/max values)
+		public override void FromXml (SecurityElement esd) 
+		{
+			// General validation in CodeAccessPermission
+			CheckSecurityElement (esd, "esd", version, version);
+			// Note: we do not (yet) care about the return value 
+			// as we only accept version 1 (min/max values)
 
-            string cert = (esd.Attributes ["X509v3Certificate"] as string);
-            if (cert != null) {
-                byte[] rawcert = CryptoConvert.FromHex (cert);
-                x509 = new X509Certificate (rawcert);
-            }
-        }
-    
-        public override IPermission Intersect (IPermission target) 
-        {
-            PublisherIdentityPermission pip = Cast (target);
-            if (pip == null)
-                return null;
+			string cert = (esd.Attributes ["X509v3Certificate"] as string);
+			if (cert != null) {
+				byte[] rawcert = CryptoConvert.FromHex (cert);
+				x509 = new X509Certificate (rawcert);
+			}
+		}
+	
+		public override IPermission Intersect (IPermission target) 
+		{
+			PublisherIdentityPermission pip = Cast (target);
+			if (pip == null)
+				return null;
 
-            if ((x509 != null) && (pip.x509 != null)) {
-                if (x509.GetRawCertDataString () == pip.x509.GetRawCertDataString ())
-                    return new PublisherIdentityPermission (pip.x509);
-            }
-            return null;
-        }
-    
-        public override bool IsSubsetOf (IPermission target) 
-        {
-            PublisherIdentityPermission pip = Cast (target);
-            if (pip == null)
-                return false;
+			if ((x509 != null) && (pip.x509 != null)) {
+				if (x509.GetRawCertDataString () == pip.x509.GetRawCertDataString ())
+					return new PublisherIdentityPermission (pip.x509);
+			}
+			return null;
+		}
+	
+		public override bool IsSubsetOf (IPermission target) 
+		{
+			PublisherIdentityPermission pip = Cast (target);
+			if (pip == null)
+				return false;
 
-            if (x509 == null)
-                return true;
-            if (pip.x509 == null)
-                return false;
-            return (x509.GetRawCertDataString () == pip.x509.GetRawCertDataString ());
-        }
-    
-        public override SecurityElement ToXml () 
-        {
-            SecurityElement se = Element (version);
-            if (x509 != null)
-                se.AddAttribute ("X509v3Certificate", x509.GetRawCertDataString ());
-            return se;
-        }
-    
-        public override IPermission Union (IPermission target) 
-        {
-            PublisherIdentityPermission pip = Cast (target);
-            if (pip == null)
-                return Copy ();
+			if (x509 == null)
+				return true;
+			if (pip.x509 == null)
+				return false;
+			return (x509.GetRawCertDataString () == pip.x509.GetRawCertDataString ());
+		}
+	
+		public override SecurityElement ToXml () 
+		{
+			SecurityElement se = Element (version);
+			if (x509 != null)
+				se.AddAttribute ("X509v3Certificate", x509.GetRawCertDataString ());
+			return se;
+		}
+	
+		public override IPermission Union (IPermission target) 
+		{
+			PublisherIdentityPermission pip = Cast (target);
+			if (pip == null)
+				return Copy ();
 
-            if ((x509 != null) && (pip.x509 != null)) {
-                if (x509.GetRawCertDataString () == pip.x509.GetRawCertDataString ())
-                    return new PublisherIdentityPermission (x509); // any cert would do
-            }
-            else if ((x509 == null) && (pip.x509 != null))
-                return new PublisherIdentityPermission (pip.x509);
-            else if ((x509 != null) && (pip.x509 == null))
-                return new PublisherIdentityPermission (x509);
-            return null;
-        }
+			if ((x509 != null) && (pip.x509 != null)) {
+				if (x509.GetRawCertDataString () == pip.x509.GetRawCertDataString ())
+					return new PublisherIdentityPermission (x509); // any cert would do
+			}
+			else if ((x509 == null) && (pip.x509 != null))
+				return new PublisherIdentityPermission (pip.x509);
+			else if ((x509 != null) && (pip.x509 == null))
+				return new PublisherIdentityPermission (x509);
+			return null;
+		}
 
-        // IBuiltInPermission
-        int IBuiltInPermission.GetTokenIndex ()
-        {
-            return (int) BuiltInToken.PublisherIdentity;
-        }
+		// IBuiltInPermission
+		int IBuiltInPermission.GetTokenIndex ()
+		{
+			return (int) BuiltInToken.PublisherIdentity;
+		}
 
-        // helpers
+		// helpers
 
-        private PublisherIdentityPermission Cast (IPermission target)
-        {
-            if (target == null)
-                return null;
+		private PublisherIdentityPermission Cast (IPermission target)
+		{
+			if (target == null)
+				return null;
 
-            PublisherIdentityPermission pip = (target as PublisherIdentityPermission);
-            if (pip == null) {
-                ThrowInvalidPermission (target, typeof (PublisherIdentityPermission));
-            }
+			PublisherIdentityPermission pip = (target as PublisherIdentityPermission);
+			if (pip == null) {
+				ThrowInvalidPermission (target, typeof (PublisherIdentityPermission));
+			}
 
-            return pip;
-        }
-    }
+			return pip;
+		}
+	}
 }

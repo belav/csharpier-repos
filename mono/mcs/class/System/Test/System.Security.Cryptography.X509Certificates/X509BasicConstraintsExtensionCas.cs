@@ -1,9 +1,9 @@
 //
 // X509BasicConstraintsExtensionCas.cs - CAS unit tests for 
-//    System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension
+//	System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,45 +41,45 @@ using MonoTests.System.Security.Cryptography.X509Certificates;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class X509BasicConstraintsExtensionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class X509BasicConstraintsExtensionCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests_Deny_Unrestricted ()
-        {
-            X509BasicConstraintsExtensionTest unit = new X509BasicConstraintsExtensionTest ();
-            unit.ConstructorEmpty ();
-            unit.ConstructorEmpty_CertificateAuthority ();
-            unit.ConstructorEmpty_HasPathLengthConstraint ();
-            unit.ConstructorEmpty_PathLengthConstraint ();
-            unit.ConstructorAsnEncodedData ();
-            unit.ConstructorAsnEncodedData_SmallestValid ();
-            unit.Constructor_TrueTrueZero ();
-            unit.Constructor_TrueTrueMaxInt ();
-            unit.Constructor_TrueFalseNegative ();
-            unit.Constructor_FalseTruePositive ();
-            unit.Constructor_FalseFalseNegative ();
-            unit.WrongExtension_X509Extension ();
-            unit.CopyFrom_Self ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTests_Deny_Unrestricted ()
+		{
+			X509BasicConstraintsExtensionTest unit = new X509BasicConstraintsExtensionTest ();
+			unit.ConstructorEmpty ();
+			unit.ConstructorEmpty_CertificateAuthority ();
+			unit.ConstructorEmpty_HasPathLengthConstraint ();
+			unit.ConstructorEmpty_PathLengthConstraint ();
+			unit.ConstructorAsnEncodedData ();
+			unit.ConstructorAsnEncodedData_SmallestValid ();
+			unit.Constructor_TrueTrueZero ();
+			unit.Constructor_TrueTrueMaxInt ();
+			unit.Constructor_TrueFalseNegative ();
+			unit.Constructor_FalseTruePositive ();
+			unit.Constructor_FalseFalseNegative ();
+			unit.WrongExtension_X509Extension ();
+			unit.CopyFrom_Self ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (X509BasicConstraintsExtension).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (X509BasicConstraintsExtension).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }
 

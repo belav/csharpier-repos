@@ -24,7 +24,7 @@
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class PolygonAnnotation : PolylineAnnotation
-    {
-    }
+	public class PolygonAnnotation : PolylineAnnotation
+	{
+	}
 }

@@ -85,7 +85,7 @@ namespace Microsoft.Win32 {
             FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
 
         public const int ERROR_INSUFFICIENT_BUFFER = 0x7A;
-            
+			
 #if FEATURE_NETCORE
         [SecurityCritical]
         [System.Security.SuppressUnmanagedCodeSecurity]

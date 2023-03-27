@@ -3,13 +3,13 @@
 
 class A<T>
 {
-    public class B<U>
-    {
-    }
+	public class B<U>
+	{
+	}
 }
 
 class Test
 {
-    static A<int>.B<long> a;
-    static A<long>.B<long> b = a;
+	static A<int>.B<long> a;
+	static A<long>.B<long> b = a;
 }

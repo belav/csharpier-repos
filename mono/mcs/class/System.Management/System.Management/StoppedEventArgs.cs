@@ -2,7 +2,7 @@
 // System.Management.StoppedEventArgs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,18 +30,18 @@
 
 namespace System.Management
 {
-    public class StoppedEventArgs : ManagementEventArgs
-    {
-        ManagementStatus status;
+	public class StoppedEventArgs : ManagementEventArgs
+	{
+		ManagementStatus status;
 
-        internal StoppedEventArgs (ManagementStatus status)
-        {
-            this.status = status;
-        }
+		internal StoppedEventArgs (ManagementStatus status)
+		{
+			this.status = status;
+		}
 
-        public ManagementStatus Status {
-            get { return status; }
-        }
-    }
+		public ManagementStatus Status {
+			get { return status; }
+		}
+	}
 }
 

@@ -1,4 +1,4 @@
-//
+﻿//
 // ScriptingJsonSerializationSection.cs
 //
 // Author:
@@ -34,33 +34,33 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    public sealed class ScriptingJsonSerializationSection : ConfigurationSection
-    {
-        [ConfigurationPropertyAttribute ("converters", IsKey = true)]
-        public ConvertersCollection Converters {
-            get {
-                return (ConvertersCollection) base ["converters"];
-            }
-        }
+	public sealed class ScriptingJsonSerializationSection : ConfigurationSection
+	{
+		[ConfigurationPropertyAttribute ("converters", IsKey = true)]
+		public ConvertersCollection Converters {
+			get {
+				return (ConvertersCollection) base ["converters"];
+			}
+		}
 
-        [ConfigurationPropertyAttribute ("maxJsonLength", DefaultValue = 2097152)]
-        public int MaxJsonLength {
-            get {
-                return (int) this ["maxJsonLength"];
-            }
-            set {
-                this ["maxJsonLength"] = value;
-            }
-        }
+		[ConfigurationPropertyAttribute ("maxJsonLength", DefaultValue = 2097152)]
+		public int MaxJsonLength {
+			get {
+				return (int) this ["maxJsonLength"];
+			}
+			set {
+				this ["maxJsonLength"] = value;
+			}
+		}
 
-        [ConfigurationPropertyAttribute ("recursionLimit", DefaultValue = 100)]
-        public int RecursionLimit {
-            get {
-                return (int) this ["recursionLimit"];
-            }
-            set {
-                this ["recursionLimit"] = value;
-            }
-        }
-    }
+		[ConfigurationPropertyAttribute ("recursionLimit", DefaultValue = 100)]
+		public int RecursionLimit {
+			get {
+				return (int) this ["recursionLimit"];
+			}
+			set {
+				this ["recursionLimit"] = value;
+			}
+		}
+	}
 }

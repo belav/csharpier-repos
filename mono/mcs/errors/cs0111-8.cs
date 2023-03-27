@@ -7,11 +7,11 @@ class G<T>
 
 public class C
 {
-    void Foo<T> (G<T> g)
-    {
-    }
-    
-    void Foo<U> (G<U> u)
-    {
-    }
+	void Foo<T> (G<T> g)
+	{
+	}
+	
+	void Foo<U> (G<U> u)
+	{
+	}
 }

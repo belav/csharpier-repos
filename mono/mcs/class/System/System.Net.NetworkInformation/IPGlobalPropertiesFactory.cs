@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.IPGlobalProperties
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //      Miguel de Icaza (miguel@novell.com)
 //      Eric Butler (eric@extremeboredom.net)
 //      Marek Habersack (mhabersack@novell.com)
@@ -31,20 +31,20 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 namespace System.Net.NetworkInformation {
-    internal static class IPGlobalPropertiesFactoryPal {
-        public static IPGlobalProperties Create ()
-        {
-            var instance = UnixIPGlobalPropertiesFactoryPal.Create ();
+	internal static class IPGlobalPropertiesFactoryPal {
+		public static IPGlobalProperties Create ()
+		{
+			var instance = UnixIPGlobalPropertiesFactoryPal.Create ();
 
 #if WIN_PLATFORM
-            if (instance == null)
-                instance = Win32IPGlobalPropertiesFactoryPal.Create ();
+			if (instance == null)
+				instance = Win32IPGlobalPropertiesFactoryPal.Create ();
 #endif
 
-            if (instance == null)
-                throw new NotImplementedException ();
+			if (instance == null)
+				throw new NotImplementedException ();
 
-            return instance;
-        }
-    }
+			return instance;
+		}
+	}
 }

@@ -3,8 +3,8 @@
 
 class Bar
 {
-    Bar(int a)
-        :super()
-    {
-    }
+	Bar(int a)
+		:super()
+	{
+	}
 }

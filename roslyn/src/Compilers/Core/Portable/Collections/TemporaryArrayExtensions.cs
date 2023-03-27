@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         /// Method(ref array.AsRef());
         /// </code>
         ///
-        /// <para>? Do not move or rename this method without updating the corresponding
+        /// <para>⚠ Do not move or rename this method without updating the corresponding
         /// <see href="https://github.com/dotnet/roslyn-analyzers/blob/30180a51af8c4711e51d98df7345f14d083efb63/src/Roslyn.Diagnostics.Analyzers/Core/TemporaryArrayAsRefAnalyzer.cs">RS0049</see>
         /// analyzer.</para>
         /// </remarks>

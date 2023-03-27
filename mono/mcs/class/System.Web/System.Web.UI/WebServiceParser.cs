@@ -2,7 +2,7 @@
 // System.Web.UI.WebServiceParser
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
@@ -33,36 +33,36 @@ using System.Web.Compilation;
 
 namespace System.Web.UI
 {
-    // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class WebServiceParser : SimpleWebHandlerParser
-    {
-        WebServiceParser (HttpContext context, string virtualPath, string physicalPath)
-            : base (context, virtualPath, physicalPath)
-        {
-        }
+	// CAS
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class WebServiceParser : SimpleWebHandlerParser
+	{
+		WebServiceParser (HttpContext context, string virtualPath, string physicalPath)
+			: base (context, virtualPath, physicalPath)
+		{
+		}
 
-        internal WebServiceParser (HttpContext context, VirtualPath virtualPath, TextReader reader)
-            : this (context, virtualPath, null, reader)
-        {
-        }
-        
-        internal WebServiceParser (HttpContext context, VirtualPath virtualPath, string physicalPath, TextReader reader)
-            : base (context, virtualPath.Original, physicalPath, reader)
-        {
-        }
+		internal WebServiceParser (HttpContext context, VirtualPath virtualPath, TextReader reader)
+			: this (context, virtualPath, null, reader)
+		{
+		}
+		
+		internal WebServiceParser (HttpContext context, VirtualPath virtualPath, string physicalPath, TextReader reader)
+			: base (context, virtualPath.Original, physicalPath, reader)
+		{
+		}
 
-        public static Type GetCompiledType (string inputFile, HttpContext context)
-        {
-            return BuildManager.GetCompiledType (inputFile);
-        }
+		public static Type GetCompiledType (string inputFile, HttpContext context)
+		{
+			return BuildManager.GetCompiledType (inputFile);
+		}
 
-        protected override string DefaultDirectiveName {
-            get {
-                return "webservice";
-            }
-        }
-    }
+		protected override string DefaultDirectiveName {
+			get {
+				return "webservice";
+			}
+		}
+	}
 }
 

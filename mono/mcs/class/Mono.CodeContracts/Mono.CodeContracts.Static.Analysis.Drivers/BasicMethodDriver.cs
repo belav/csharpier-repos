@@ -1,8 +1,8 @@
-// 
+﻿// 
 // BasicMethodDriver.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -33,105 +33,105 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.Drivers {
-    class BasicMethodDriver {
-        private readonly Method method;
-        private readonly IBasicAnalysisDriver parent;
-        private ICFG contract_free_cfg;
+	class BasicMethodDriver {
+		private readonly Method method;
+		private readonly IBasicAnalysisDriver parent;
+		private ICFG contract_free_cfg;
 
-        private ICodeLayer<Dummy, Dummy, IMethodContextProvider, Dummy> contract_free_raw_layer;
-        private ICodeLayer<int, int, IStackContextProvider, Dummy> contract_free_stack_layer;
+		private ICodeLayer<Dummy, Dummy, IMethodContextProvider, Dummy> contract_free_raw_layer;
+		private ICodeLayer<int, int, IStackContextProvider, Dummy> contract_free_stack_layer;
 
-        public BasicMethodDriver (Method method, IBasicAnalysisDriver parent)
-        {
-            this.method = method;
-            this.parent = parent;
+		public BasicMethodDriver (Method method, IBasicAnalysisDriver parent)
+		{
+			this.method = method;
+			this.parent = parent;
 
-            RawLayer = CodeLayerFactory.Create (
-                                                this.parent.SubroutineFacade.GetControlFlowGraph (method).GetDecoder (parent.MetaDataProvider),
-                                                parent.MetaDataProvider,
-                                                parent.ContractProvider, dummy => "", dummy => "");
+			RawLayer = CodeLayerFactory.Create (
+			                                    this.parent.SubroutineFacade.GetControlFlowGraph (method).GetDecoder (parent.MetaDataProvider),
+			                                    parent.MetaDataProvider,
+			                                    parent.ContractProvider, dummy => "", dummy => "");
 
-            if (DebugOptions.Debug) {
-                Console.WriteLine ("-----APC based CFG-----");
-                RawLayer.ILDecoder.ContextProvider.MethodContext.CFG.Print (Console.Out, RawLayer.Printer, null, null);
-            }
+			if (DebugOptions.Debug) {
+				Console.WriteLine ("-----APC based CFG-----");
+				RawLayer.ILDecoder.ContextProvider.MethodContext.CFG.Print (Console.Out, RawLayer.Printer, null, null);
+			}
 
-            StackLayer = CodeLayerFactory.Create (
-                                                  StackDepthFactory.Create (RawLayer.ILDecoder, RawLayer.MetaDataProvider),
-                                                  RawLayer.MetaDataProvider,
-                                                  RawLayer.ContractProvider, (i => "s" + i.ToString ()), i => "s" + i.ToString ()
-                );
+			StackLayer = CodeLayerFactory.Create (
+			                                      StackDepthFactory.Create (RawLayer.ILDecoder, RawLayer.MetaDataProvider),
+			                                      RawLayer.MetaDataProvider,
+			                                      RawLayer.ContractProvider, (i => "s" + i.ToString ()), i => "s" + i.ToString ()
+				);
 
-            if (DebugOptions.Debug)
-            {
-                Console.WriteLine ("-----Stack based CFG-----");
-                StackLayer.ILDecoder.ContextProvider.MethodContext.CFG.Print (Console.Out, StackLayer.Printer, null, null);
-            }
-        }
+			if (DebugOptions.Debug)
+			{
+				Console.WriteLine ("-----Stack based CFG-----");
+				StackLayer.ILDecoder.ContextProvider.MethodContext.CFG.Print (Console.Out, StackLayer.Printer, null, null);
+			}
+		}
 
-        public Method CurrentMethod
-        {
-            get { return this.method; }
-        }
+		public Method CurrentMethod
+		{
+			get { return this.method; }
+		}
 
-        public IBasicAnalysisDriver AnalysisDriver
-        {
-            get { return this.parent; }
-        }
+		public IBasicAnalysisDriver AnalysisDriver
+		{
+			get { return this.parent; }
+		}
 
-        public ICodeLayer<Dummy, Dummy, IMethodContextProvider, Dummy> RawLayer { get; private set; }
-        public ICodeLayer<int, int, IStackContextProvider, Dummy> StackLayer { get; private set; }
+		public ICodeLayer<Dummy, Dummy, IMethodContextProvider, Dummy> RawLayer { get; private set; }
+		public ICodeLayer<int, int, IStackContextProvider, Dummy> StackLayer { get; private set; }
 
-        public ICodeLayer<Dummy, Dummy, IMethodContextProvider, Dummy> ContractFreeRawLayer
-        {
-            get
-            {
-                if (this.contract_free_raw_layer == null) {
-                    this.contract_free_raw_layer =
-                        CodeLayerFactory.Create (ContractFreeCFG.GetDecoder (this.parent.MetaDataProvider),
-                                                 RawLayer.MetaDataProvider,
-                                                 RawLayer.ContractProvider,
-                                                 RawLayer.ExpressionToString, RawLayer.VariableToString, RawLayer.Printer);
-                }
-                return this.contract_free_raw_layer;
-            }
-        }
+		public ICodeLayer<Dummy, Dummy, IMethodContextProvider, Dummy> ContractFreeRawLayer
+		{
+			get
+			{
+				if (this.contract_free_raw_layer == null) {
+					this.contract_free_raw_layer =
+						CodeLayerFactory.Create (ContractFreeCFG.GetDecoder (this.parent.MetaDataProvider),
+						                         RawLayer.MetaDataProvider,
+						                         RawLayer.ContractProvider,
+						                         RawLayer.ExpressionToString, RawLayer.VariableToString, RawLayer.Printer);
+				}
+				return this.contract_free_raw_layer;
+			}
+		}
 
-        public ICodeLayer<int, int, IStackContextProvider, Dummy> ContractFreeStackLayer
-        {
-            get
-            {
-                if (this.contract_free_stack_layer == null) {
-                    this.contract_free_stack_layer =
-                        CodeLayerFactory.Create (StackDepthFactory.Create (ContractFreeRawLayer.ILDecoder, this.contract_free_raw_layer.MetaDataProvider),
-                                                 ContractFreeRawLayer.MetaDataProvider,
-                                                 ContractFreeRawLayer.ContractProvider,
-                                                 StackLayer.ExpressionToString, StackLayer.VariableToString, StackLayer.Printer);
-                }
-                return this.contract_free_stack_layer;
-            }
-        }
+		public ICodeLayer<int, int, IStackContextProvider, Dummy> ContractFreeStackLayer
+		{
+			get
+			{
+				if (this.contract_free_stack_layer == null) {
+					this.contract_free_stack_layer =
+						CodeLayerFactory.Create (StackDepthFactory.Create (ContractFreeRawLayer.ILDecoder, this.contract_free_raw_layer.MetaDataProvider),
+						                         ContractFreeRawLayer.MetaDataProvider,
+						                         ContractFreeRawLayer.ContractProvider,
+						                         StackLayer.ExpressionToString, StackLayer.VariableToString, StackLayer.Printer);
+				}
+				return this.contract_free_stack_layer;
+			}
+		}
 
-        public ICFG ContractFreeCFG
-        {
-            get
-            {
-                if (this.contract_free_cfg == null) {
-                    this.contract_free_cfg = new ContractFilteredCFG (RawLayer.ILDecoder.ContextProvider.MethodContext.CFG);
+		public ICFG ContractFreeCFG
+		{
+			get
+			{
+				if (this.contract_free_cfg == null) {
+					this.contract_free_cfg = new ContractFilteredCFG (RawLayer.ILDecoder.ContextProvider.MethodContext.CFG);
 
-                    if (DebugOptions.Debug)
-                    {
-                        Console.WriteLine ("------raw contract-free cfg -----------------");
-                        this.contract_free_cfg.Print (Console.Out, RawLayer.Printer, null, null);
-                    }
-                }
-                return this.contract_free_cfg;
-            }
-        }
+					if (DebugOptions.Debug)
+					{
+						Console.WriteLine ("------raw contract-free cfg -----------------");
+						this.contract_free_cfg.Print (Console.Out, RawLayer.Printer, null, null);
+					}
+				}
+				return this.contract_free_cfg;
+			}
+		}
 
-        public ICFG CFG
-        {
-            get { return StackLayer.ILDecoder.ContextProvider.MethodContext.CFG; }
-        }
-    }
+		public ICFG CFG
+		{
+			get { return StackLayer.ILDecoder.ContextProvider.MethodContext.CFG; }
+		}
+	}
 }

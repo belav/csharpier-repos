@@ -26,7 +26,7 @@ namespace Test
                     if (local3 < 0.0)
                         GC.Collect();
 
-                    m_dStatic2 = local4[2];        //fire IndexOutOfRangeException    
+                    m_dStatic2 = local4[2];		//fire IndexOutOfRangeException	
 
                 } while (new AA().m_bField1);
 
@@ -36,7 +36,7 @@ namespace Test
 
             do
             {
-            } while (0.0 <= local4[100]);        //fire IndexOutOfRangeException    
+            } while (0.0 <= local4[100]);		//fire IndexOutOfRangeException	
 
             return 1;
         }

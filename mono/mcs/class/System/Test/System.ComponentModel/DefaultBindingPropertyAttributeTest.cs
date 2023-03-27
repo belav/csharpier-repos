@@ -31,48 +31,48 @@ using System.Xml.Serialization;
 
 namespace MonoTests.System.ComponentModel {
 
-    [TestFixture]
-    public class DefaultBindingPropertyAttributeTest {
+	[TestFixture]
+	public class DefaultBindingPropertyAttributeTest {
 
-        [Test]
-        public void CtorTest ()
-        {
-            DefaultBindingPropertyAttribute a;
+		[Test]
+		public void CtorTest ()
+		{
+			DefaultBindingPropertyAttribute a;
 
-            a = new DefaultBindingPropertyAttribute ("test");
-            Assert.AreEqual ("test", a.Name, "1");
+			a = new DefaultBindingPropertyAttribute ("test");
+			Assert.AreEqual ("test", a.Name, "1");
 
-            a = new DefaultBindingPropertyAttribute ();
-            Assert.AreEqual (null, a.Name, "2");
-        }
+			a = new DefaultBindingPropertyAttribute ();
+			Assert.AreEqual (null, a.Name, "2");
+		}
 
-        [Test]
-        public void EqualsTest ()
-        {
-            DefaultBindingPropertyAttribute a;
+		[Test]
+		public void EqualsTest ()
+		{
+			DefaultBindingPropertyAttribute a;
 
-            a = new DefaultBindingPropertyAttribute ("test");
-            Assert.IsFalse (a.Equals (null), "1");
-            Assert.IsFalse (a.Equals (new DefaultBindingPropertyAttribute ("other")), "2");
-            Assert.IsFalse (a.Equals (new DefaultBindingPropertyAttribute ("Test")), "3");
-            Assert.IsTrue (a.Equals (new DefaultBindingPropertyAttribute ("test")), "4");
-        }
+			a = new DefaultBindingPropertyAttribute ("test");
+			Assert.IsFalse (a.Equals (null), "1");
+			Assert.IsFalse (a.Equals (new DefaultBindingPropertyAttribute ("other")), "2");
+			Assert.IsFalse (a.Equals (new DefaultBindingPropertyAttribute ("Test")), "3");
+			Assert.IsTrue (a.Equals (new DefaultBindingPropertyAttribute ("test")), "4");
+		}
 
-        [Test]
-        public void GetHashCodeTest ()
-        {
-            DefaultBindingPropertyAttribute a;
+		[Test]
+		public void GetHashCodeTest ()
+		{
+			DefaultBindingPropertyAttribute a;
 
-            a = new DefaultBindingPropertyAttribute ("test");
-            Assert.IsFalse (0 == a.GetHashCode (), "1");
-        }
+			a = new DefaultBindingPropertyAttribute ("test");
+			Assert.IsFalse (0 == a.GetHashCode (), "1");
+		}
 
-        [Test]
-        public void DefaultTest ()
-        {
-            Assert.AreEqual (DefaultBindingPropertyAttribute.Default, new DefaultBindingPropertyAttribute (), "1");
-        }
-    }
+		[Test]
+		public void DefaultTest ()
+		{
+			Assert.AreEqual (DefaultBindingPropertyAttribute.Default, new DefaultBindingPropertyAttribute (), "1");
+		}
+	}
 
 }
 

@@ -1,4 +1,4 @@
-namespace System.Web.Mvc.Ajax {
+﻿namespace System.Web.Mvc.Ajax {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;

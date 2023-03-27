@@ -1,9 +1,9 @@
 //
 // BaseValidatorCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.BaseValidator
+//	- CAS unit tests for System.Web.UI.WebControls.BaseValidator
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,69 +40,69 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class BaseValidatorCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class BaseValidatorCas {
 
-        // note: we do not inherit from AspNetHostingMinimal because
-        // BaseValidator is an abstract class
+		// note: we do not inherit from AspNetHostingMinimal because
+		// BaseValidator is an abstract class
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            BaseValidatorTest unit = new BaseValidatorTest ();
-            unit.ViewState ();
-            unit.ControlPropertiesValid1 ();
-            unit.CustomDescriptor ();
-            unit.NoCustomDescriptor ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			BaseValidatorTest unit = new BaseValidatorTest ();
+			unit.ViewState ();
+			unit.ControlPropertiesValid1 ();
+			unit.CustomDescriptor ();
+			unit.NoCustomDescriptor ();
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-        [ExpectedException (typeof (TargetInvocationException))]
-        public void ValidationProperty_Deny_Minimal ()
-        {
-            BaseValidatorTest unit = new BaseValidatorTest ();
-            unit.ValidationProperty ();
-            // note: this is a failing security check on reflection,
-            // the SecurityException is the InnerException of the 
-            // TargetInvocationException
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+		[ExpectedException (typeof (TargetInvocationException))]
+		public void ValidationProperty_Deny_Minimal ()
+		{
+			BaseValidatorTest unit = new BaseValidatorTest ();
+			unit.ValidationProperty ();
+			// note: this is a failing security check on reflection,
+			// the SecurityException is the InnerException of the 
+			// TargetInvocationException
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-        public void ValidationProperty_PermitOnly_Minimal ()
-        {
-            BaseValidatorTest unit = new BaseValidatorTest ();
-            unit.ValidationProperty ();
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
+		public void ValidationProperty_PermitOnly_Minimal ()
+		{
+			BaseValidatorTest unit = new BaseValidatorTest ();
+			unit.ValidationProperty ();
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-        [ExpectedException (typeof (TargetInvocationException))]
-        public void GetControlValidationValue_Deny_Minimal ()
-        {
-            BaseValidatorTest unit = new BaseValidatorTest ();
-            unit.GetControlValidationValue ();
-            // note: this is a failing security check on reflection,
-            // the SecurityException is the InnerException of the 
-            // TargetInvocationException
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+		[ExpectedException (typeof (TargetInvocationException))]
+		public void GetControlValidationValue_Deny_Minimal ()
+		{
+			BaseValidatorTest unit = new BaseValidatorTest ();
+			unit.GetControlValidationValue ();
+			// note: this is a failing security check on reflection,
+			// the SecurityException is the InnerException of the 
+			// TargetInvocationException
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-        public void GetControlValidationValue_PermitOnly_Minimal ()
-        {
-            BaseValidatorTest unit = new BaseValidatorTest ();
-            unit.GetControlValidationValue ();
-        }
-    }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
+		public void GetControlValidationValue_PermitOnly_Minimal ()
+		{
+			BaseValidatorTest unit = new BaseValidatorTest ();
+			unit.GetControlValidationValue ();
+		}
+	}
 }

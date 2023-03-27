@@ -33,54 +33,54 @@ using System.Xml.XPath;
 
 namespace Mono.MonoConfig
 {
-    public class Section
-    {
-        List <Section> children;
-        string name;
-        string defaultBlockName;
-        bool attachPoint;
-        
-        public string Name {
-            get { return name; }
-        }
+	public class Section
+	{
+		List <Section> children;
+		string name;
+		string defaultBlockName;
+		bool attachPoint;
+		
+		public string Name {
+			get { return name; }
+		}
 
-        public string DefaultBlockName {
-            get {
-                if (String.IsNullOrEmpty (defaultBlockName))
-                    return Name;
-                return defaultBlockName;
-            }
-        }
-        
-        public List <Section> Children {
-            get {
-                if (children == null)
-                    children = new List <Section> ();
-                return children;
-            }
-        }
+		public string DefaultBlockName {
+			get {
+				if (String.IsNullOrEmpty (defaultBlockName))
+					return Name;
+				return defaultBlockName;
+			}
+		}
+		
+		public List <Section> Children {
+			get {
+				if (children == null)
+					children = new List <Section> ();
+				return children;
+			}
+		}
 
-        public bool AttachPoint {
-            get { return attachPoint; }
-        }
-        
-        public Section () : this (null)
-        {
-        }
-        
-        public Section (XPathNavigator nav)
-        {
-            if (nav != null) {
-                name = Helpers.GetRequiredNonEmptyAttribute (nav, "name");
+		public bool AttachPoint {
+			get { return attachPoint; }
+		}
+		
+		public Section () : this (null)
+		{
+		}
+		
+		public Section (XPathNavigator nav)
+		{
+			if (nav != null) {
+				name = Helpers.GetRequiredNonEmptyAttribute (nav, "name");
 
-                string val = Helpers.GetOptionalAttribute (nav, "attachPoint");
-                if (!String.IsNullOrEmpty (val))
-                    attachPoint = true;
+				string val = Helpers.GetOptionalAttribute (nav, "attachPoint");
+				if (!String.IsNullOrEmpty (val))
+					attachPoint = true;
 
-                val = Helpers.GetOptionalAttribute (nav, "defaultBlockName");
-                if (!String.IsNullOrEmpty (val))
-                    defaultBlockName = val;
-            }
-        }
-    }
+				val = Helpers.GetOptionalAttribute (nav, "defaultBlockName");
+				if (!String.IsNullOrEmpty (val))
+					defaultBlockName = val;
+			}
+		}
+	}
 }

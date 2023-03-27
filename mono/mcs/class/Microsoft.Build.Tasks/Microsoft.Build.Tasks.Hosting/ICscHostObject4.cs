@@ -2,7 +2,7 @@
 // ICscHostObject4.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2014 Xamarin Inc (http://www.xamarin.com)
 //
@@ -33,13 +33,13 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Hosting
 {
-    [InterfaceTypeAttribute (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComVisibleAttribute (true)]
-    [GuidAttribute ("0DDB496F-C93C-492C-87F1-90B6FDBAA833")]
-    public interface ICscHostObject4 : /*ICscHostObject3, ICscHostObject2,*/ ICscHostObject, ITaskHost
-    {
+	[InterfaceTypeAttribute (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComVisibleAttribute (true)]
+	[GuidAttribute ("0DDB496F-C93C-492C-87F1-90B6FDBAA833")]
+	public interface ICscHostObject4 : /*ICscHostObject3, ICscHostObject2,*/ ICscHostObject, ITaskHost
+	{
 
-    }
+	}
 }
 
 #endif

@@ -1,4 +1,4 @@
-namespace System.Workflow.ComponentModel.Design
+﻿namespace System.Workflow.ComponentModel.Design
 {
     #region Using directives
 

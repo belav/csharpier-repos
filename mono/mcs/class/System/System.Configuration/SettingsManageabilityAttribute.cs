@@ -2,7 +2,7 @@
 // SettingsManageabilityAttribute.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,20 +30,20 @@ using System.Collections;
 
 namespace System.Configuration
 {
-    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Property)]
-    public sealed class SettingsManageabilityAttribute : Attribute
-    {
-        SettingsManageability manageability;
+	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Property)]
+	public sealed class SettingsManageabilityAttribute : Attribute
+	{
+		SettingsManageability manageability;
 
-        public SettingsManageabilityAttribute (
-            SettingsManageability manageability)
-        {
-            this.manageability = manageability;
-        }
+		public SettingsManageabilityAttribute (
+			SettingsManageability manageability)
+		{
+			this.manageability = manageability;
+		}
 
-        public SettingsManageability Manageability {
-            get { return manageability; }
-        }
-    }
+		public SettingsManageability Manageability {
+			get { return manageability; }
+		}
+	}
 }
 

@@ -10,5 +10,5 @@ enum ObsoleteEnum
 
 interface Ex
 {
-    ObsoleteEnum Foo ();
+	ObsoleteEnum Foo ();
 }

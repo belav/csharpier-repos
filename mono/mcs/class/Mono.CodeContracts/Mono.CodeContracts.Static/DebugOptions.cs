@@ -1,8 +1,8 @@
-// 
+﻿// 
 // DebugOptions.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,7 +27,7 @@
 // 
 
 namespace Mono.CodeContracts.Static {
-    static class DebugOptions {
-        public static bool Debug { get; set; }
-    }
+	static class DebugOptions {
+		public static bool Debug { get; set; }
+	}
 }

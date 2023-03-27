@@ -28,9 +28,9 @@
 using System;
 
 namespace Microsoft.Build.BuildEngine {
-    [Flags]
-    public enum BuildSettings {
-        None,
-        DoNotResetPreviouslyBuiltTargets
-    }
+	[Flags]
+	public enum BuildSettings {
+		None,
+		DoNotResetPreviouslyBuiltTargets
+	}
 }

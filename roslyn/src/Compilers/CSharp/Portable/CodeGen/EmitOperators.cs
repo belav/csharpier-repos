@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -513,11 +513,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
             // Spec 7.6.2
             // Implementation of unary minus has two overloads:
-            //   int operator �(int x)
-            //   long operator �(long x)
+            //   int operator –(int x)
+            //   long operator –(long x)
             // 
             // The result is computed by subtracting x from zero. 
-            // If the value of x is the smallest representable value of the operand type (-2^31 for int or -2^63 for long),
+            // If the value of x is the smallest representable value of the operand type (−2^31 for int or −2^63 for long),
             // then the mathematical negation of x is not representable within the operand type. If this occurs within a checked context, 
             // a System.OverflowException is thrown; if it occurs within an unchecked context, 
             // the result is the value of the operand and the overflow is not reported.

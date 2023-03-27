@@ -29,38 +29,38 @@ using System.Xaml;
 
 namespace System.Windows.Markup
 {
-    public class NameReferenceConverter : TypeConverter
-    {
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-        {
-            return sourceType == typeof (string);
-        }
+	public class NameReferenceConverter : TypeConverter
+	{
+		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+		{
+			return sourceType == typeof (string);
+		}
 
-        public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
-        {
-            if (context == null)
-                return false;
-            var p = context.GetService (typeof (IXamlNameProvider)) as IXamlNameProvider;
-            return p != null && destinationType == typeof (string);
-        }
+		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
+		{
+			if (context == null)
+				return false;
+			var p = context.GetService (typeof (IXamlNameProvider)) as IXamlNameProvider;
+			return p != null && destinationType == typeof (string);
+		}
 
-        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
-            if (context == null)
-                throw new ArgumentNullException ("context");
-            var s = value as string;
-            if (String.IsNullOrEmpty (s))
-                throw new InvalidOperationException ("Value must be non-null string.");
-            
-            return s;
-        }
+		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+		{
+			if (context == null)
+				throw new ArgumentNullException ("context");
+			var s = value as string;
+			if (String.IsNullOrEmpty (s))
+				throw new InvalidOperationException ("Value must be non-null string.");
+			
+			return s;
+		}
 
-        public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            if (context == null)
-                return null;
-            var p = context.GetService (typeof (IXamlNameProvider)) as IXamlNameProvider;
-            return p != null ? p.GetName (value) : null;
-        }
-    }
+		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+		{
+			if (context == null)
+				return null;
+			var p = context.GetService (typeof (IXamlNameProvider)) as IXamlNameProvider;
+			return p != null ? p.GetName (value) : null;
+		}
+	}
 }

@@ -6,7 +6,7 @@ using System;
 [A((dynamic) null)]
 public class A : Attribute
 {
-    public A (Type arg)
-    {
-    }
+	public A (Type arg)
+	{
+	}
 }

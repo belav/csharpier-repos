@@ -2,7 +2,7 @@
 // RsaSecurityTokenAuthenticator.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -37,55 +37,55 @@ using System.Xml;
 
 namespace System.IdentityModel.Selectors
 {
-    public class RsaSecurityTokenAuthenticator
-        : SecurityTokenAuthenticator
-    {
-        public RsaSecurityTokenAuthenticator ()
-        {
-        }
+	public class RsaSecurityTokenAuthenticator
+		: SecurityTokenAuthenticator
+	{
+		public RsaSecurityTokenAuthenticator ()
+		{
+		}
 
-        protected override bool CanValidateTokenCore (SecurityToken token)
-        {
-            return token is RsaSecurityToken;
-        }
+		protected override bool CanValidateTokenCore (SecurityToken token)
+		{
+			return token is RsaSecurityToken;
+		}
 
-        [MonoTODO ("hmm, what to validate?")]
-        protected override ReadOnlyCollection<IAuthorizationPolicy>
-            ValidateTokenCore (SecurityToken token)
-        {
-            RsaSecurityToken rt = token as RsaSecurityToken;
-            if (rt == null)
-                throw new InvalidOperationException ("Security token '{0}' cannot be validated by this security token authenticator.");
+		[MonoTODO ("hmm, what to validate?")]
+		protected override ReadOnlyCollection<IAuthorizationPolicy>
+			ValidateTokenCore (SecurityToken token)
+		{
+			RsaSecurityToken rt = token as RsaSecurityToken;
+			if (rt == null)
+				throw new InvalidOperationException ("Security token '{0}' cannot be validated by this security token authenticator.");
 
-            IAuthorizationPolicy policy =
-                new RsaAuthorizationPolicy (rt.Rsa);
-            return new ReadOnlyCollection<IAuthorizationPolicy> (new IAuthorizationPolicy [] {policy});
-        }
+			IAuthorizationPolicy policy =
+				new RsaAuthorizationPolicy (rt.Rsa);
+			return new ReadOnlyCollection<IAuthorizationPolicy> (new IAuthorizationPolicy [] {policy});
+		}
 
-        class RsaAuthorizationPolicy : IAuthorizationPolicy
-        {
-            string id;
-            RSA rsa;
+		class RsaAuthorizationPolicy : IAuthorizationPolicy
+		{
+			string id;
+			RSA rsa;
 
-            public RsaAuthorizationPolicy (RSA rsa)
-            {
-                id = new UniqueId ().ToString ();
-            }
+			public RsaAuthorizationPolicy (RSA rsa)
+			{
+				id = new UniqueId ().ToString ();
+			}
 
-            public ClaimSet Issuer {
-                get { return ClaimSet.System; }
-            }
+			public ClaimSet Issuer {
+				get { return ClaimSet.System; }
+			}
 
-            public string Id {
-                get { return id; }
-            }
+			public string Id {
+				get { return id; }
+			}
 
-            public bool Evaluate (EvaluationContext ec, ref Object state)
-            {
-                ec.AddClaimSet (this, new DefaultClaimSet (Claim.CreateRsaClaim (rsa)));
-                ec.RecordExpirationTime (DateTime.MaxValue.AddDays (-1));
-                return true;
-            }
-        }
-    }
+			public bool Evaluate (EvaluationContext ec, ref Object state)
+			{
+				ec.AddClaimSet (this, new DefaultClaimSet (Claim.CreateRsaClaim (rsa)));
+				ec.RecordExpirationTime (DateTime.MaxValue.AddDays (-1));
+				return true;
+			}
+		}
+	}
 }

@@ -3,9 +3,9 @@
 
 public class MainClass
 {
-    public void Foo ()
-    {
-        int i;
-        i++;
-    }
+	public void Foo ()
+	{
+		int i;
+		i++;
+	}
 }

@@ -4,9 +4,9 @@
 
 class C
 {
-    int*[] data = new int*[16];
-    
-    unsafe C ()
-    {
-    }
+	int*[] data = new int*[16];
+	
+	unsafe C ()
+	{
+	}
 }

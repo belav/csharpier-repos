@@ -2,7 +2,7 @@
 // EventDataAttribute.cs
 //
 // Authors:
-//    Alexander Köplinger <alexander.koeplinger@xamarin.com>
+//	Alexander Köplinger <alexander.koeplinger@xamarin.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,20 +30,20 @@ using System;
 
 namespace System.Diagnostics.Tracing
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false)]
-    public class EventDataAttribute : Attribute
-    {
-        [MonoTODO]
-        public string Name
-        {
-            get
-            {
-                throw new NotImplementedException ();
-            }
-            set
-            {
-                throw new NotImplementedException ();
-            }
-        }
-    }
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false)]
+	public class EventDataAttribute : Attribute
+	{
+		[MonoTODO]
+		public string Name
+		{
+			get
+			{
+				throw new NotImplementedException ();
+			}
+			set
+			{
+				throw new NotImplementedException ();
+			}
+		}
+	}
 }

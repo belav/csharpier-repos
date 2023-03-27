@@ -3,7 +3,7 @@
 //
 // Authors:
 //      Gonzalo Paniagua Javier (gonzalo@ximian.com)
-//    Sebastien Pouliot  (sebastien@ximian.com)
+//	Sebastien Pouliot  (sebastien@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -34,64 +34,64 @@ using System.Security;
 
 namespace System.Security.Principal {
 
-    [ComVisible (true)]
-    public class WindowsImpersonationContext : IDisposable {
+	[ComVisible (true)]
+	public class WindowsImpersonationContext : IDisposable {
 
-        private IntPtr _token;
-        private bool undo;
+		private IntPtr _token;
+		private bool undo;
 
-        internal WindowsImpersonationContext (IntPtr token)
-        {
-            // we get a copy to control it's lifetime
-            _token = DuplicateToken (token);
-            if (!SetCurrentToken (token)) {
-                throw new SecurityException ("Couldn't impersonate token.");
-            }
-            undo = false;
-        }
-        [ComVisible (false)]
-        public void Dispose ()
-        {
-            if (!undo) {
-                Undo ();
-            }
-        }
-        
-        [ComVisible (false)]
-        protected virtual void Dispose (bool disposing)
-        {
-            if (!undo) {
-                Undo ();
-            }
-            if (disposing){
-                // If we are explicitly disposed, we can avoid finalization.
-                GC.SuppressFinalize (this);
-            }
-        }
+		internal WindowsImpersonationContext (IntPtr token)
+		{
+			// we get a copy to control it's lifetime
+			_token = DuplicateToken (token);
+			if (!SetCurrentToken (token)) {
+				throw new SecurityException ("Couldn't impersonate token.");
+			}
+			undo = false;
+		}
+		[ComVisible (false)]
+		public void Dispose ()
+		{
+			if (!undo) {
+				Undo ();
+			}
+		}
+		
+		[ComVisible (false)]
+		protected virtual void Dispose (bool disposing)
+		{
+			if (!undo) {
+				Undo ();
+			}
+			if (disposing){
+				// If we are explicitly disposed, we can avoid finalization.
+				GC.SuppressFinalize (this);
+			}
+		}
 
-        public void Undo ()
-        {
-            if (!RevertToSelf ()) {
-                CloseToken (_token);
-                throw new SecurityException ("Couldn't switch back to original token.");
-            }
-            CloseToken (_token);
-            undo = true;
-            GC.SuppressFinalize (this);
-        }
+		public void Undo ()
+		{
+			if (!RevertToSelf ()) {
+				CloseToken (_token);
+				throw new SecurityException ("Couldn't switch back to original token.");
+			}
+			CloseToken (_token);
+			undo = true;
+			GC.SuppressFinalize (this);
+		}
 
-        // see mono/mono/metadata/security.c for implementation
+		// see mono/mono/metadata/security.c for implementation
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private extern static bool CloseToken (IntPtr token);
+		[MethodImplAttribute (MethodImplOptions.InternalCall)]
+		private extern static bool CloseToken (IntPtr token);
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private extern static IntPtr DuplicateToken (IntPtr token);
+		[MethodImplAttribute (MethodImplOptions.InternalCall)]
+		private extern static IntPtr DuplicateToken (IntPtr token);
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private extern static bool SetCurrentToken (IntPtr token);
+		[MethodImplAttribute (MethodImplOptions.InternalCall)]
+		private extern static bool SetCurrentToken (IntPtr token);
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private extern static bool RevertToSelf ();
-    }
+		[MethodImplAttribute (MethodImplOptions.InternalCall)]
+		private extern static bool RevertToSelf ();
+	}
 }

@@ -238,7 +238,7 @@ namespace System.Xml {
                 get { return reader.DtdParserProxy_LineStartPosition; } 
             }
 
-             int  IDtdParserAdapter.ReadData() { 
+			 int  IDtdParserAdapter.ReadData() { 
                 return reader.DtdParserProxy_ReadData(); 
             }
 
@@ -264,7 +264,7 @@ namespace System.Xml {
 
             }
 
-            bool IDtdParserAdapter.PopEntity( out IDtdEntityInfo oldEntity, out int newEntityId ) { 
+			bool IDtdParserAdapter.PopEntity( out IDtdEntityInfo oldEntity, out int newEntityId ) { 
                 return reader.DtdParserProxy_PopEntity( out oldEntity, out newEntityId ); 
             }
 
@@ -272,7 +272,7 @@ namespace System.Xml {
                 return reader.DtdParserProxy_PushExternalSubset( systemId, publicId ); 
             }
 
-            void IDtdParserAdapter.PushInternalDtd( string baseUri, string internalDtd ) {
+			void IDtdParserAdapter.PushInternalDtd( string baseUri, string internalDtd ) {
                 Debug.Assert(internalDtd != null);
                 reader.DtdParserProxy_PushInternalDtd( baseUri, internalDtd ); 
             }

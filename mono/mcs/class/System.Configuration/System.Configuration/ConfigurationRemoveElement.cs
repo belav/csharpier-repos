@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationPropertyOptions.cs
 //
 // Authors:
-//    Vladimir Krasnov (vladimirk@mainsoft.com)
+//	Vladimir Krasnov (vladimirk@mainsoft.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -32,40 +32,40 @@ using System.Configuration;
 
 namespace System.Configuration
 {
-    partial class ConfigurationElementCollection
-    {
-        sealed class ConfigurationRemoveElement : ConfigurationElement
-        {
-            readonly ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection ();
-            readonly ConfigurationElement _origElement;
-            readonly ConfigurationElementCollection _origCollection;
+	partial class ConfigurationElementCollection
+	{
+		sealed class ConfigurationRemoveElement : ConfigurationElement
+		{
+			readonly ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection ();
+			readonly ConfigurationElement _origElement;
+			readonly ConfigurationElementCollection _origCollection;
 
-            internal ConfigurationRemoveElement (ConfigurationElement origElement, ConfigurationElementCollection origCollection)
-            {
-                _origElement = origElement;
-                _origCollection = origCollection;
+			internal ConfigurationRemoveElement (ConfigurationElement origElement, ConfigurationElementCollection origCollection)
+			{
+				_origElement = origElement;
+				_origCollection = origCollection;
 
-                foreach (ConfigurationProperty p in origElement.Properties)
-                    if (p.IsKey) {
-                        properties.Add (p);
-                    }
-            }
+				foreach (ConfigurationProperty p in origElement.Properties)
+					if (p.IsKey) {
+						properties.Add (p);
+					}
+			}
 
-            internal object KeyValue
-            {
-                get
-                {
-                    foreach (ConfigurationProperty p in Properties)
-                        _origElement [p] = this [p];
+			internal object KeyValue
+			{
+				get
+				{
+					foreach (ConfigurationProperty p in Properties)
+						_origElement [p] = this [p];
 
-                    return _origCollection.GetElementKey (_origElement);
-                }
-            }
+					return _origCollection.GetElementKey (_origElement);
+				}
+			}
 
-            protected internal override ConfigurationPropertyCollection Properties
-            {
-                get { return properties; }
-            }
-        }
-    }
+			protected internal override ConfigurationPropertyCollection Properties
+			{
+				get { return properties; }
+			}
+		}
+	}
 }

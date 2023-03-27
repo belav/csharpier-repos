@@ -2,7 +2,7 @@
 // System.Security.Policy.Gac
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,61 +32,61 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Policy {
 
-    [Serializable]
-    [ComVisible (true)]
-    public sealed class GacInstalled :
-        EvidenceBase,
-        IIdentityPermissionFactory, IBuiltInEvidence {
+	[Serializable]
+	[ComVisible (true)]
+	public sealed class GacInstalled :
+		EvidenceBase,
+		IIdentityPermissionFactory, IBuiltInEvidence {
 
-        public GacInstalled ()
-        {
-        }
+		public GacInstalled ()
+		{
+		}
 
-        public object Copy ()
-        {
-            return (object) new GacInstalled ();
-        }
+		public object Copy ()
+		{
+			return (object) new GacInstalled ();
+		}
 
-        public IPermission CreateIdentityPermission (Evidence evidence)
-        {
-            return new GacIdentityPermission ();
-        }
+		public IPermission CreateIdentityPermission (Evidence evidence)
+		{
+			return new GacIdentityPermission ();
+		}
 
-        public override bool Equals (object o)
-        {
-            if (o == null)
-                return false;
-            return (o is GacInstalled);
-        }
+		public override bool Equals (object o)
+		{
+			if (o == null)
+				return false;
+			return (o is GacInstalled);
+		}
 
-        public override int GetHashCode ()
-        {
-            return 0; // as documented
-        }
+		public override int GetHashCode ()
+		{
+			return 0; // as documented
+		}
 
-        public override string ToString ()
-        {
-            SecurityElement se = new SecurityElement (GetType ().FullName);
-            se.AddAttribute ("version", "1");
-            return se.ToString ();
-        }
+		public override string ToString ()
+		{
+			SecurityElement se = new SecurityElement (GetType ().FullName);
+			se.AddAttribute ("version", "1");
+			return se.ToString ();
+		}
 
-        // IBuiltInEvidence
+		// IBuiltInEvidence
 
-        int IBuiltInEvidence.GetRequiredSize (bool verbose)
-        {
-            return 1;    // LAMESPEC
-        }
+		int IBuiltInEvidence.GetRequiredSize (bool verbose)
+		{
+			return 1;	// LAMESPEC
+		}
 
-        int IBuiltInEvidence.InitFromBuffer (char[] buffer, int position)
-        {
-            return position;
-        }
+		int IBuiltInEvidence.InitFromBuffer (char[] buffer, int position)
+		{
+			return position;
+		}
 
-        int IBuiltInEvidence.OutputToBuffer (char[] buffer, int position, bool verbose)
-        {
-            buffer [position] = '\t';
-            return position + 1;
-        }
-    }
+		int IBuiltInEvidence.OutputToBuffer (char[] buffer, int position, bool verbose)
+		{
+			buffer [position] = '\t';
+			return position + 1;
+		}
+	}
 }

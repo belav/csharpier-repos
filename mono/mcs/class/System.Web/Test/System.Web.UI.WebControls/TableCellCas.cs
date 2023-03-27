@@ -2,7 +2,7 @@
 // TableCellCas.cs - CAS unit tests for System.Web.UI.WebControls.TableCell
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,35 +37,35 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TableCellCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TableCellCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            TableCellTest unit = new TableCellTest ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.Render ();
-            unit.CreateControlStyle ();
-            unit.Add_LiteralControl_NoText ();
-            unit.Text_Add_LiteralControl ();
-            unit.Add_LiteralControl_Text ();
-            unit.Add_LiteralControl_Literal_And_Literal ();
-            unit.Add_LiteralControl_Control_And_Literal ();
-            unit.Add_LiteralControl_Literal_And_Control ();
-            unit.HasControls_Text ();
-            unit.Text_Add_Controls ();
-            unit.NoDefaultID ();
-            unit.AssociatedHeaderCellID ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			TableCellTest unit = new TableCellTest ();
+			unit.DefaultProperties ();
+			unit.NullProperties ();
+			unit.Render ();
+			unit.CreateControlStyle ();
+			unit.Add_LiteralControl_NoText ();
+			unit.Text_Add_LiteralControl ();
+			unit.Add_LiteralControl_Text ();
+			unit.Add_LiteralControl_Literal_And_Literal ();
+			unit.Add_LiteralControl_Control_And_Literal ();
+			unit.Add_LiteralControl_Literal_And_Control ();
+			unit.HasControls_Text ();
+			unit.Text_Add_Controls ();
+			unit.NoDefaultID ();
+			unit.AssociatedHeaderCellID ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (TableCell); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (TableCell); }
+		}
+	}
 }

@@ -30,9 +30,9 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public enum SearchOption
-    {
-        DomainScope,
-        PhantomRoot
-    }
+	public enum SearchOption
+	{
+		DomainScope,
+		PhantomRoot
+	}
 }

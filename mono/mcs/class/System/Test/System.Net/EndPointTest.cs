@@ -2,7 +2,7 @@
 // EndPointTest.cs - Unit tests for System.Net.EndPoint
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -33,35 +33,35 @@ using System.Net;
 
 namespace MonoTests.System.Net {
 
-    [TestFixture]
-    public class EndPointTest {
+	[TestFixture]
+	public class EndPointTest {
 
-        class ConcreteEndPoint : EndPoint {
-        }
+		class ConcreteEndPoint : EndPoint {
+		}
 
-        [Test]
-        [ExpectedException (typeof (NotImplementedException))]
-        public void AddressFamily ()
-        {
-            ConcreteEndPoint ep = new ConcreteEndPoint ();
-            Assert.IsNotNull (ep.AddressFamily);
-        }
+		[Test]
+		[ExpectedException (typeof (NotImplementedException))]
+		public void AddressFamily ()
+		{
+			ConcreteEndPoint ep = new ConcreteEndPoint ();
+			Assert.IsNotNull (ep.AddressFamily);
+		}
 
-        [Test]
-        [ExpectedException (typeof (NotImplementedException))]
-        public void Create ()
-        {
-            ConcreteEndPoint ep = new ConcreteEndPoint ();
-            Assert.IsNotNull (ep.Create (null));
-        }
+		[Test]
+		[ExpectedException (typeof (NotImplementedException))]
+		public void Create ()
+		{
+			ConcreteEndPoint ep = new ConcreteEndPoint ();
+			Assert.IsNotNull (ep.Create (null));
+		}
 
-        [Test]
-        [ExpectedException (typeof (NotImplementedException))]
-        public void Serialize ()
-        {
-            ConcreteEndPoint ep = new ConcreteEndPoint ();
-            Assert.IsNotNull (ep.Serialize ());
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (NotImplementedException))]
+		public void Serialize ()
+		{
+			ConcreteEndPoint ep = new ConcreteEndPoint ();
+			Assert.IsNotNull (ep.Serialize ());
+		}
+	}
 }
 

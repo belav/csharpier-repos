@@ -2,8 +2,8 @@
 // BasicHttpsBindingElement.cs
 //
 // Authors:
-//    Atsushi Enomoto <atsushi@ximian.com>
-//    Martin Baulig <martin.baulig@xamarin.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
+//	Martin Baulig <martin.baulig@xamarin.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 // Copyright (c) 2012 Xamarin Inc. (http://www.xamarin.com)
@@ -56,68 +56,68 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public class BasicHttpsBindingElement
-         : HttpBindingBaseElement,  IBindingConfigurationElement
-    {
-        ConfigurationPropertyCollection _properties;
+	public class BasicHttpsBindingElement
+		 : HttpBindingBaseElement,  IBindingConfigurationElement
+	{
+		ConfigurationPropertyCollection _properties;
 
-        public BasicHttpsBindingElement ()
-        {
-        }
+		public BasicHttpsBindingElement ()
+		{
+		}
 
-        public BasicHttpsBindingElement (string name) : base (name) { }
+		public BasicHttpsBindingElement (string name) : base (name) { }
 
-        protected override Type BindingElementType {
-            get { return typeof (BasicHttpsBinding); }
-        }
-        
-        // Properties
+		protected override Type BindingElementType {
+			get { return typeof (BasicHttpsBinding); }
+		}
+		
+		// Properties
 
-        [ConfigurationProperty ("messageEncoding",
-             DefaultValue = "Text",
-             Options = ConfigurationPropertyOptions.None)]
-        public WSMessageEncoding MessageEncoding {
-            get { return (WSMessageEncoding) this ["messageEncoding"]; }
-            set { this ["messageEncoding"] = value; }
-        }
+		[ConfigurationProperty ("messageEncoding",
+			 DefaultValue = "Text",
+			 Options = ConfigurationPropertyOptions.None)]
+		public WSMessageEncoding MessageEncoding {
+			get { return (WSMessageEncoding) this ["messageEncoding"]; }
+			set { this ["messageEncoding"] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = base.Properties;
-                    _properties.Add (new ConfigurationProperty ("messageEncoding", typeof (WSMessageEncoding), "Text", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("security", typeof (BasicHttpsSecurityElement), null, null, null, ConfigurationPropertyOptions.None));
-                }
-                return _properties;
-            }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get {
+				if (_properties == null) {
+					_properties = base.Properties;
+					_properties.Add (new ConfigurationProperty ("messageEncoding", typeof (WSMessageEncoding), "Text", null, null, ConfigurationPropertyOptions.None));
+					_properties.Add (new ConfigurationProperty ("security", typeof (BasicHttpsSecurityElement), null, null, null, ConfigurationPropertyOptions.None));
+				}
+				return _properties;
+			}
+		}
 
-        [ConfigurationProperty ("security",
-             Options = ConfigurationPropertyOptions.None)]
-        public BasicHttpsSecurityElement Security {
-            get { return (BasicHttpsSecurityElement) this ["security"]; }
-        }
+		[ConfigurationProperty ("security",
+			 Options = ConfigurationPropertyOptions.None)]
+		public BasicHttpsSecurityElement Security {
+			get { return (BasicHttpsSecurityElement) this ["security"]; }
+		}
 
-        protected override void OnApplyConfiguration (Binding binding)
-        {
-            base.OnApplyConfiguration (binding);
-            BasicHttpsBinding basicHttpsBinding = (BasicHttpsBinding) binding;
-            
-            basicHttpsBinding.MessageEncoding = MessageEncoding;
+		protected override void OnApplyConfiguration (Binding binding)
+		{
+			base.OnApplyConfiguration (binding);
+			BasicHttpsBinding basicHttpsBinding = (BasicHttpsBinding) binding;
+			
+			basicHttpsBinding.MessageEncoding = MessageEncoding;
 
-            basicHttpsBinding.Security.Mode = Security.Mode;
-            Security.Transport.ApplyConfiguration (basicHttpsBinding.Security.Transport);
-        }
+			basicHttpsBinding.Security.Mode = Security.Mode;
+			Security.Transport.ApplyConfiguration (basicHttpsBinding.Security.Transport);
+		}
 
-        protected internal override void InitializeFrom (Binding binding)
-        {
-            BasicHttpsBinding b = (BasicHttpsBinding) binding;
-            base.InitializeFrom (binding);
+		protected internal override void InitializeFrom (Binding binding)
+		{
+			BasicHttpsBinding b = (BasicHttpsBinding) binding;
+			base.InitializeFrom (binding);
 
-            MessageEncoding = b.MessageEncoding;
+			MessageEncoding = b.MessageEncoding;
 
-            Security.Mode = b.Security.Mode;
-            Security.Transport.ApplyConfiguration (b.Security.Transport);
-        }
-    }
+			Security.Mode = b.Security.Mode;
+			Security.Transport.ApplyConfiguration (b.Security.Transport);
+		}
+	}
 }

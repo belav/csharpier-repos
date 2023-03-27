@@ -2,7 +2,7 @@
 // SamlAuthorizationDecisionClaimResource.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -35,35 +35,35 @@ using System.IdentityModel.Selectors;
 
 namespace System.IdentityModel.Tokens
 {
-    [DataContract]
-    public class SamlAuthorizationDecisionClaimResource
-    {
-        public SamlAuthorizationDecisionClaimResource (
-            string resource, SamlAccessDecision accessDecision, string actionNamespace, string actionName)
-        {
-            this.resource = resource;
-            this.decision = accessDecision;
-            this.name = actionName;
-            this.ns = actionNamespace;
-        }
+	[DataContract]
+	public class SamlAuthorizationDecisionClaimResource
+	{
+		public SamlAuthorizationDecisionClaimResource (
+			string resource, SamlAccessDecision accessDecision, string actionNamespace, string actionName)
+		{
+			this.resource = resource;
+			this.decision = accessDecision;
+			this.name = actionName;
+			this.ns = actionNamespace;
+		}
 
-        SamlAccessDecision decision;
-        string name, ns, resource;
+		SamlAccessDecision decision;
+		string name, ns, resource;
 
-        public SamlAccessDecision AccessDecision {
-            get { return decision; }
-        }
+		public SamlAccessDecision AccessDecision {
+			get { return decision; }
+		}
 
-        public string ActionName {
-            get { return name; }
-        }
+		public string ActionName {
+			get { return name; }
+		}
 
-        public string ActionNamespace {
-            get { return ns; }
-        }
+		public string ActionNamespace {
+			get { return ns; }
+		}
 
-        public string Resource {
-            get { return resource; }
-        }
-    }
+		public string Resource {
+			get { return resource; }
+		}
+	}
 }

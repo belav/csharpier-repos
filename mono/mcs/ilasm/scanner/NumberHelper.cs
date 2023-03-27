@@ -128,14 +128,14 @@ namespace Mono.ILASM {
                                 } catch {
                                 }
 
-                try {
-                    long i = (long) UInt64.Parse (num, nstyles);
+				try {
+					long i = (long) UInt64.Parse (num, nstyles);
                                         result.token = Token.INT64;
                                         result.val = i;
 
-                    return num;
-                } catch {
-                }
+					return num;
+				} catch {
+				}
                         }
 
                         try {

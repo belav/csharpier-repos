@@ -28,85 +28,85 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeIf: CodeStatement
-    {
-        CodeExpression condition;
-        CodeBlock trueBlock;
-        CodeBlock falseBlock;
-        
-        public CodeIf (CodeExpression condition)
-        {
-            this.condition = condition;
-            if (condition.GetResultType () != typeof(bool))
-                throw new InvalidOperationException ("Condition expression is not boolean"); 
-        }
-        
-        public override void Generate (ILGenerator gen)
-        {
-            if (trueBlock == null)
-                throw new InvalidOperationException ("Incomplete If statement");
-            
-            Label falseLabel = gen.DefineLabel ();
-            Label endLabel = gen.DefineLabel ();
-            
-            if (falseBlock == null)
-            {
-                GenerateCondition (gen, endLabel);
-                trueBlock.Generate (gen);
-            }
-            else
-            {
-                GenerateCondition (gen, falseLabel);
-                trueBlock.Generate (gen);
-                gen.Emit (OpCodes.Br, endLabel);
-                gen.MarkLabel(falseLabel);
-                falseBlock.Generate (gen);
-            }
-            gen.MarkLabel(endLabel);
-        }
-        
-        void GenerateCondition (ILGenerator gen, Label falseLabel)
-        {
-            if (condition is CodeConditionExpression)
-                ((CodeConditionExpression)condition).GenerateForBranch (gen, falseLabel, false);
-            else {
-                condition.Generate (gen);
-                gen.Emit (OpCodes.Brfalse, falseLabel);
-            }
-        }
-        
-        public override void PrintCode (CodeWriter cp)
-        {
-            if (trueBlock == null) return;
-            
-            cp.Write ("if (");
-            condition.PrintCode (cp);
-            cp.Write (") {");
-            cp.EndLine ();
-            cp.Indent ();
-            trueBlock.PrintCode (cp);
-            cp.Unindent ();
-            cp.BeginLine ().Write ("}");
-            if (falseBlock != null) {
-                cp.EndLine ();
-                cp.WriteLineInd ("else {");
-                falseBlock.PrintCode (cp);
-                cp.Unindent ();
-                cp.BeginLine ().Write ("}");
-            }
-        }
-        
-        public CodeBlock TrueBlock
-        {
-            get { return trueBlock; }
-            set { trueBlock = value; }
-        }
-        
-        public CodeBlock FalseBlock
-        {
-            get { return falseBlock; }
-            set { falseBlock = value; }
-        }
-    }
+	public class CodeIf: CodeStatement
+	{
+		CodeExpression condition;
+		CodeBlock trueBlock;
+		CodeBlock falseBlock;
+		
+		public CodeIf (CodeExpression condition)
+		{
+			this.condition = condition;
+			if (condition.GetResultType () != typeof(bool))
+				throw new InvalidOperationException ("Condition expression is not boolean"); 
+		}
+		
+		public override void Generate (ILGenerator gen)
+		{
+			if (trueBlock == null)
+				throw new InvalidOperationException ("Incomplete If statement");
+			
+			Label falseLabel = gen.DefineLabel ();
+			Label endLabel = gen.DefineLabel ();
+			
+			if (falseBlock == null)
+			{
+				GenerateCondition (gen, endLabel);
+				trueBlock.Generate (gen);
+			}
+			else
+			{
+				GenerateCondition (gen, falseLabel);
+				trueBlock.Generate (gen);
+				gen.Emit (OpCodes.Br, endLabel);
+				gen.MarkLabel(falseLabel);
+				falseBlock.Generate (gen);
+			}
+			gen.MarkLabel(endLabel);
+		}
+		
+		void GenerateCondition (ILGenerator gen, Label falseLabel)
+		{
+			if (condition is CodeConditionExpression)
+				((CodeConditionExpression)condition).GenerateForBranch (gen, falseLabel, false);
+			else {
+				condition.Generate (gen);
+				gen.Emit (OpCodes.Brfalse, falseLabel);
+			}
+		}
+		
+		public override void PrintCode (CodeWriter cp)
+		{
+			if (trueBlock == null) return;
+			
+			cp.Write ("if (");
+			condition.PrintCode (cp);
+			cp.Write (") {");
+			cp.EndLine ();
+			cp.Indent ();
+			trueBlock.PrintCode (cp);
+			cp.Unindent ();
+			cp.BeginLine ().Write ("}");
+			if (falseBlock != null) {
+				cp.EndLine ();
+				cp.WriteLineInd ("else {");
+				falseBlock.PrintCode (cp);
+				cp.Unindent ();
+				cp.BeginLine ().Write ("}");
+			}
+		}
+		
+		public CodeBlock TrueBlock
+		{
+			get { return trueBlock; }
+			set { trueBlock = value; }
+		}
+		
+		public CodeBlock FalseBlock
+		{
+			get { return falseBlock; }
+			set { falseBlock = value; }
+		}
+	}
 }
 #endif

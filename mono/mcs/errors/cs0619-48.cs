@@ -3,11 +3,11 @@
 
 class A: System.Attribute
 {
-    [System.Obsolete("!!!", true)]
-    public string Prop {
-        set { }
-        get { return ""; }
-    }
+	[System.Obsolete("!!!", true)]
+	public string Prop {
+		set { }
+		get { return ""; }
+	}
 }
 
 [A(Prop="System.String.Empty")]

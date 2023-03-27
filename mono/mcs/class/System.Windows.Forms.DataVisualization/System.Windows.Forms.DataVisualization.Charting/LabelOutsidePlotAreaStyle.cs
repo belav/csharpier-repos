@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum LabelOutsidePlotAreaStyle
-    {
-        Yes = 0,
-        No = 1,
-        Partial = 2
-    }
+	public enum LabelOutsidePlotAreaStyle
+	{
+		Yes = 0,
+		No = 1,
+		Partial = 2
+	}
 }

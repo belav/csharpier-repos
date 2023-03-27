@@ -13,12 +13,12 @@ using System.ComponentModel;
 namespace System.DirectoryServices.Design
 {
 
-    internal class DirectoryEntryConverter : TypeConverter
-    {
+	internal class DirectoryEntryConverter : TypeConverter
+	{
 
-        //TODO IMPLEMENT
-        public DirectoryEntryConverter ()
-        {
-        }
-    }
+		//TODO IMPLEMENT
+		public DirectoryEntryConverter ()
+		{
+		}
+	}
 }

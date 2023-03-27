@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -9812,19 +9812,19 @@ unsafe class C
         Console.WriteLine(IntToString(-456));
     }
 
-    static string IntToString(int value) {
-        int n = value >= 0? value: -value;
-        unsafe {
-            char* buffer = stackalloc char[16];
-            char* p = buffer + 16;
-            do {
-                *--p = (char)(n % 10 + '0');
-                n /= 10;
-            } while (n != 0);
-            if (value < 0) *--p = '-';
-            return new string(p, 0, (int)(buffer + 16 - p));
-        }
-    }
+	static string IntToString(int value) {
+		int n = value >= 0? value: -value;
+		unsafe {
+			char* buffer = stackalloc char[16];
+			char* p = buffer + 16;
+			do {
+				*--p = (char)(n % 10 + '0');
+				n /= 10;
+			} while (n != 0);
+			if (value < 0) *--p = '-';
+			return new string(p, 0, (int)(buffer + 16 - p));
+		}
+	}
 }
 ";
             CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"123
@@ -11068,16 +11068,16 @@ unsafe class C
             var text = @"
 unsafe class C
 {    
-    public int? x = (int?)(void*)0;
+	public int? x = (int?)(void*)0;
 }
 
 class c1
 {
-    public static void Main()
-    {
-        var x = new C();
-        System.Console.WriteLine(x.x);
-    }
+	public static void Main()
+	{
+		var x = new C();
+		System.Console.WriteLine(x.x);
+	}
 }
 ";
             var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "0", verify: Verification.Passes);
@@ -11310,8 +11310,8 @@ public unsafe class C
 .class public AddressHelper{
     .method public hidebysig static native int AddressOf<T>(!!0& t){
         ldc.i4.5
-        conv.u
-        ret
+	    conv.u
+	    ret
     }    
 }
 ";

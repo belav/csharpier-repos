@@ -31,12 +31,12 @@ using System;
 
 namespace Microsoft.Build.Framework
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple=false, Inherited=false)]
-    public sealed class OutputAttribute : Attribute
-    {
-        public OutputAttribute ()
-        {
-        }
-    }
+	[AttributeUsage(AttributeTargets.Property, AllowMultiple=false, Inherited=false)]
+	public sealed class OutputAttribute : Attribute
+	{
+		public OutputAttribute ()
+		{
+		}
+	}
 }
 

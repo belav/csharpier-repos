@@ -23,17 +23,17 @@ namespace Mono.ILASM {
                 static Report ()
                 {
                         error_count = 0;
-            quiet = false;
+			quiet = false;
                 }
 
                 public static int ErrorCount {
                         get { return error_count; }
                 }
 
-        public static bool Quiet {
-            get { return quiet; }
-            set { quiet = value; }
-        }
+		public static bool Quiet {
+			get { return quiet; }
+			set { quiet = value; }
+		}
 
                 public static string FilePath {
                         get { return file_path; }

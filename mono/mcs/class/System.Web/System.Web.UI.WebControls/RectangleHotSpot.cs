@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.RectangleHotSpot.cs
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,60 +33,60 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    public sealed class RectangleHotSpot: HotSpot
-    {
-        public override string GetCoordinates ()
-        {
-            return Left + "," + Top + "," + Right + "," + Bottom;
-        }
-        
-        protected internal override string MarkupName {
-            get { return "rect"; }
-        }
-        
-        [DefaultValueAttribute (0)]
-        public int Left {
-            get {
-                object o = ViewState ["Left"];
-                return o != null ? (int) o : 0;
-            }
-            set {
-                ViewState ["Left"] = value;
-            }
-        }
+	public sealed class RectangleHotSpot: HotSpot
+	{
+		public override string GetCoordinates ()
+		{
+			return Left + "," + Top + "," + Right + "," + Bottom;
+		}
+		
+		protected internal override string MarkupName {
+			get { return "rect"; }
+		}
+		
+	    [DefaultValueAttribute (0)]
+		public int Left {
+			get {
+				object o = ViewState ["Left"];
+				return o != null ? (int) o : 0;
+			}
+			set {
+				ViewState ["Left"] = value;
+			}
+		}
 
-        [DefaultValueAttribute (0)]
-        public int Top {
-            get {
-                object o = ViewState ["Top"];
-                return o != null ? (int) o : 0;
-            }
-            set {
-                ViewState ["Top"] = value;
-            }
-        }
+	    [DefaultValueAttribute (0)]
+		public int Top {
+			get {
+				object o = ViewState ["Top"];
+				return o != null ? (int) o : 0;
+			}
+			set {
+				ViewState ["Top"] = value;
+			}
+		}
 
-        [DefaultValueAttribute (0)]
-        public int Right {
-            get {
-                object o = ViewState ["Right"];
-                return o != null ? (int) o : 0;
-            }
-            set {
-                ViewState ["Right"] = value;
-            }
-        }
+	    [DefaultValueAttribute (0)]
+		public int Right {
+			get {
+				object o = ViewState ["Right"];
+				return o != null ? (int) o : 0;
+			}
+			set {
+				ViewState ["Right"] = value;
+			}
+		}
 
-        [DefaultValueAttribute (0)]
-        public int Bottom {
-            get {
-                object o = ViewState ["Bottom"];
-                return o != null ? (int) o : 0;
-            }
-            set {
-                ViewState ["Bottom"] = value;
-            }
-        }
-    }
+	    [DefaultValueAttribute (0)]
+		public int Bottom {
+			get {
+				object o = ViewState ["Bottom"];
+				return o != null ? (int) o : 0;
+			}
+			set {
+				ViewState ["Bottom"] = value;
+			}
+		}
+	}
 }
 

@@ -33,21 +33,21 @@ using System.ComponentModel;
 
 namespace System.Messaging 
 {
-    [AttributeUsage(AttributeTargets.All)]
-    public class MessagingDescriptionAttribute:  DescriptionAttribute 
-    {
-        [MonoTODO ("localization")]
-        public MessagingDescriptionAttribute(string description) : base(description) 
-        {
-        }
+	[AttributeUsage(AttributeTargets.All)]
+	public class MessagingDescriptionAttribute:  DescriptionAttribute 
+	{
+		[MonoTODO ("localization")]
+		public MessagingDescriptionAttribute(string description) : base(description) 
+		{
+		}
 
-        [MonoTODO ("localization")]
-        public override string Description
-        {
-            get
-            {
-                return base.Description;
-            }
-        }
-    }
+		[MonoTODO ("localization")]
+		public override string Description
+		{
+			get
+			{
+				return base.Description;
+			}
+		}
+	}
 }

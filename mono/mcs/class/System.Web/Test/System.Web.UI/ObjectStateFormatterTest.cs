@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.ObjectStateFormatter
 //
 // Authors:
-//    Marek Habersack <mhabersack@novell.com>
+//	Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2009 Novell, Inc (http://novell.com)
 
@@ -40,94 +40,94 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI
 {
-    [TestFixture]
-    public class ObjectStateFormatterTest
-    {
-        [TestFixtureSetUp]
-        public void SetUp ()
-        {
-            Type t = GetType ();
+	[TestFixture]
+	public class ObjectStateFormatterTest
+	{
+		[TestFixtureSetUp]
+		public void SetUp ()
+		{
+			Type t = GetType ();
 
-            WebTest.CopyResource (t, "StateFormatter_CorrectConverter.aspx", "StateFormatter_CorrectConverter.aspx");
-            WebTest.CopyResource (t, "StateFormatter_CollectionConverter.aspx", "StateFormatter_CollectionConverter.aspx");
-            WebTest.CopyResource (t, "StateFormatter_CollectionConverter.aspx.cs", "StateFormatter_CollectionConverter.aspx.cs");
-        }
+			WebTest.CopyResource (t, "StateFormatter_CorrectConverter.aspx", "StateFormatter_CorrectConverter.aspx");
+			WebTest.CopyResource (t, "StateFormatter_CollectionConverter.aspx", "StateFormatter_CollectionConverter.aspx");
+			WebTest.CopyResource (t, "StateFormatter_CollectionConverter.aspx.cs", "StateFormatter_CollectionConverter.aspx.cs");
+		}
 
-        public static Assembly ResolveAssemblyHandler (object sender, ResolveEventArgs e)
-        {
-            if (e.Name != "System.Web_test")
-                return null;
+		public static Assembly ResolveAssemblyHandler (object sender, ResolveEventArgs e)
+		{
+			if (e.Name != "System.Web_test")
+				return null;
 
-            return Assembly.GetExecutingAssembly ();
-        }
-        
-        [Test (Description="Bug #545979")]
-        public void StateFormatter_CorrectConverter ()
-        {
-            // We test only if it doesn't throw exception on postback
-            try {
-                WebTest.Host.AppDomain.AssemblyResolve += new ResolveEventHandler (ResolveAssemblyHandler);
-                WebTest t = new WebTest ("StateFormatter_CorrectConverter.aspx");
-                t.Run ();
+			return Assembly.GetExecutingAssembly ();
+		}
+		
+		[Test (Description="Bug #545979")]
+		public void StateFormatter_CorrectConverter ()
+		{
+			// We test only if it doesn't throw exception on postback
+			try {
+				WebTest.Host.AppDomain.AssemblyResolve += new ResolveEventHandler (ResolveAssemblyHandler);
+				WebTest t = new WebTest ("StateFormatter_CorrectConverter.aspx");
+				t.Run ();
 
-                var fr = new FormRequest (t.Response, "Form1");
-                fr.Controls.Add ("Button1");
-                fr.Controls ["Button1"].Value = "Change";
-                t.Request = fr;
-                t.Run ();
+				var fr = new FormRequest (t.Response, "Form1");
+				fr.Controls.Add ("Button1");
+				fr.Controls ["Button1"].Value = "Change";
+				t.Request = fr;
+				t.Run ();
 
-                fr = new FormRequest (t.Response, "Form1");
-                fr.Controls.Add ("Button2");
-                fr.Controls ["Button2"].Value = "Refresh";
-            } finally {
-                WebTest.Host.AppDomain.AssemblyResolve -= new ResolveEventHandler (ResolveAssemblyHandler);
-            }
-        }
+				fr = new FormRequest (t.Response, "Form1");
+				fr.Controls.Add ("Button2");
+				fr.Controls ["Button2"].Value = "Refresh";
+			} finally {
+				WebTest.Host.AppDomain.AssemblyResolve -= new ResolveEventHandler (ResolveAssemblyHandler);
+			}
+		}
 
-        [Test (Description="Bug #565547")]
-        public void StateFormatter_CollectionFormatter ()
-        {
-            WebTest t = new WebTest ("StateFormatter_CollectionConverter.aspx");
-            t.Run ();
+		[Test (Description="Bug #565547")]
+		public void StateFormatter_CollectionFormatter ()
+		{
+			WebTest t = new WebTest ("StateFormatter_CollectionConverter.aspx");
+			t.Run ();
 
-            var fr = new FormRequest (t.Response, "form1");
-            fr.Controls.Add ("btnSearch");
-            fr.Controls.Add ("ddlDate");
-            fr.Controls.Add ("txtSearchValue");
+			var fr = new FormRequest (t.Response, "form1");
+			fr.Controls.Add ("btnSearch");
+			fr.Controls.Add ("ddlDate");
+			fr.Controls.Add ("txtSearchValue");
 
-            fr.Controls ["btnSearch"].Value = "Search";
-            fr.Controls ["ddlDate"].Value = "2009";
+			fr.Controls ["btnSearch"].Value = "Search";
+			fr.Controls ["ddlDate"].Value = "2009";
 
-            t.Request = fr;
-            string pageHtml = t.Run ();
-            string renderedHtml = HtmlDiff.GetControlFromPageHtml (pageHtml);
-            string originalHtml = @"<div>
+			t.Request = fr;
+			string pageHtml = t.Run ();
+			string renderedHtml = HtmlDiff.GetControlFromPageHtml (pageHtml);
+			string originalHtml = @"<div>
 
-        <table id=""gvECCN"" cellspacing=""0"" rules=""all"" border=""1"" style=""border-collapse:collapse;"">
-                <tr>
-                    <th align=""left"" scope=""col"">&nbsp;</th><th align=""left"" scope=""col"">Schedule B</th><th align=""left"" scope=""col"">Count</th><th align=""left"" scope=""col"">Total</th><th align=""left"" scope=""col"">Percent</th>
-                </tr><tr>
-                    <td style=""height:18px;width:30px;"">1</td><td style=""width:140px;"">test</td><td style=""width:90px;"">1</td><td style=""width:100px;"">100</td><td style=""width:90px;"">250.00 %</td>
+		<table id=""gvECCN"" cellspacing=""0"" rules=""all"" border=""1"" style=""border-collapse:collapse;"">
+				<tr>
+					<th align=""left"" scope=""col"">&nbsp;</th><th align=""left"" scope=""col"">Schedule B</th><th align=""left"" scope=""col"">Count</th><th align=""left"" scope=""col"">Total</th><th align=""left"" scope=""col"">Percent</th>
+				</tr><tr>
+					<td style=""height:18px;width:30px;"">1</td><td style=""width:140px;"">test</td><td style=""width:90px;"">1</td><td style=""width:100px;"">100</td><td style=""width:90px;"">250.00 %</td>
 
-                </tr>
-            </table>
-        </div>";
+				</tr>
+			</table>
+		</div>";
 
-            HtmlDiff.AssertAreEqual (originalHtml, renderedHtml, "#A1");
-        }
+			HtmlDiff.AssertAreEqual (originalHtml, renderedHtml, "#A1");
+		}
 #if false
-        [Test]
-        public void SerializeOverloads ()
-        {
-            ObjectStateFormatter osf = new ObjectStateFormatter ();
-            string s1 = osf.Serialize (String.Empty);
-            string s2;
-            using (MemoryStream ms = new MemoryStream ()) {
-                osf.Serialize (ms, String.Empty);
-                s2 = Convert.ToBase64String (ms.ToArray ());
-            }
-            Assert.AreEqual (s1, s2, "identical");
-        }
+		[Test]
+		public void SerializeOverloads ()
+		{
+			ObjectStateFormatter osf = new ObjectStateFormatter ();
+			string s1 = osf.Serialize (String.Empty);
+			string s2;
+			using (MemoryStream ms = new MemoryStream ()) {
+				osf.Serialize (ms, String.Empty);
+				s2 = Convert.ToBase64String (ms.ToArray ());
+			}
+			Assert.AreEqual (s1, s2, "identical");
+		}
 #endif
-    }
+	}
 }

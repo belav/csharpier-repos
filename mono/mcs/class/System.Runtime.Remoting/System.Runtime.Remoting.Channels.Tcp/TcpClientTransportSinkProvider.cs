@@ -33,30 +33,30 @@ using System.Runtime.Remoting.Channels;
 
 namespace System.Runtime.Remoting.Channels.Tcp
 {
-    internal class TcpClientTransportSinkProvider : IClientChannelSinkProvider
-    {
-        public TcpClientTransportSinkProvider ()
-        {
-            // what should we do here ?
-        }
+	internal class TcpClientTransportSinkProvider : IClientChannelSinkProvider
+	{
+		public TcpClientTransportSinkProvider ()
+		{
+			// what should we do here ?
+		}
 
-        public IClientChannelSinkProvider Next
-        {
-            get 
-            {
-                return null;
-            }
+		public IClientChannelSinkProvider Next
+		{
+			get 
+			{
+				return null;
+			}
 
-            set 
-            {
-                // ignore, we are always the last in the chain 
-            }
-        }
+			set 
+			{
+				// ignore, we are always the last in the chain 
+			}
+		}
 
-        public IClientChannelSink CreateSink (IChannelSender channel, string url,
-            object remoteChannelData)
-        {
-            return new TcpClientTransportSink (url);
-        }
-    }
+		public IClientChannelSink CreateSink (IChannelSender channel, string url,
+			object remoteChannelData)
+		{
+			return new TcpClientTransportSink (url);
+		}
+	}
 }

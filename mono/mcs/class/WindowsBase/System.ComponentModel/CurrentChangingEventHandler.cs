@@ -20,13 +20,13 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.ComponentModel {
 
-    public delegate void CurrentChangingEventHandler (object sender, CurrentChangingEventArgs e);
+	public delegate void CurrentChangingEventHandler (object sender, CurrentChangingEventArgs e);
 
 }

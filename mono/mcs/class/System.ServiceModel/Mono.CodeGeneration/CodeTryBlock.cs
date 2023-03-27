@@ -29,93 +29,93 @@ using System.Reflection;
 using System.Reflection.Emit;
 
 using DictionaryEntry = System.Collections.Generic.KeyValuePair<
-        Mono.CodeGeneration.CodeVariableDeclaration,
-        Mono.CodeGeneration.CodeBlock>;
+		Mono.CodeGeneration.CodeVariableDeclaration,
+		Mono.CodeGeneration.CodeBlock>;
 using ArrayList = System.Collections.Generic.List<
-    System.Collections.Generic.KeyValuePair<
-        Mono.CodeGeneration.CodeVariableDeclaration,
-        Mono.CodeGeneration.CodeBlock>>;
+	System.Collections.Generic.KeyValuePair<
+		Mono.CodeGeneration.CodeVariableDeclaration,
+		Mono.CodeGeneration.CodeBlock>>;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeTry: CodeStatement
-    {
-        CodeExpression condition;
-        CodeBlock tryBlock, finallyBlock;
-        ArrayList catchBlocks = new ArrayList ();
-        
-        public CodeTry ()
-        {
-            tryBlock = new CodeBlock ();
-            catchBlocks = new ArrayList ();
-            finallyBlock = new CodeBlock ();
-        }
-        
-        public override void Generate (ILGenerator gen)
-        {
-            gen.BeginExceptionBlock ();
-            tryBlock.Generate (gen);
-            foreach (DictionaryEntry de in catchBlocks) {
-                CodeVariableDeclaration vd = (CodeVariableDeclaration) de.Key;
-                gen.BeginCatchBlock (vd.Variable.Type);
-                if (vd.Variable.Name.Length > 0) {
-                    vd.Generate (gen);
-                    // FIXME: assign exception to this local declaration
-                }
-                ((CodeBlock) de.Value).Generate (gen);
-            }
-            if (!finallyBlock.IsEmpty) {
-                gen.BeginFinallyBlock ();
-                finallyBlock.Generate (gen);
-            }
-            gen.EndExceptionBlock ();
-        }
-                
-        public override void PrintCode (CodeWriter cp)
-        {
-            if (tryBlock == null) return;
-            
-            cp.Write ("try {");
-            cp.Indent ();
-            condition.PrintCode (cp);
-            cp.Unindent ();
-            foreach (DictionaryEntry de in catchBlocks) {
-                CodeVariableDeclaration vd = (CodeVariableDeclaration) de.Key;
-                cp.Write ("} catch (");
-                if (vd.Variable.Name.Length > 0)
-                    vd.PrintCode (cp);
-                else
-                    cp.Write (vd.Variable.Type.FullName);
-                cp.Write (") {");
-                cp.Indent ();
-                ((CodeBlock) de.Value).PrintCode (cp);
-                cp.Unindent ();
-            }
-            if (!finallyBlock.IsEmpty) {
-                cp.Write ("} finally {");
-                cp.Indent ();
-                finallyBlock.PrintCode (cp);
-                cp.Unindent ();
-            }
-            cp.Write ("}");
-        }
-        
-        public CodeBlock TryBlock
-        {
-            get { return tryBlock; }
-            set { tryBlock = value; }
-        }
+	public class CodeTry: CodeStatement
+	{
+		CodeExpression condition;
+		CodeBlock tryBlock, finallyBlock;
+		ArrayList catchBlocks = new ArrayList ();
+		
+		public CodeTry ()
+		{
+			tryBlock = new CodeBlock ();
+			catchBlocks = new ArrayList ();
+			finallyBlock = new CodeBlock ();
+		}
+		
+		public override void Generate (ILGenerator gen)
+		{
+			gen.BeginExceptionBlock ();
+			tryBlock.Generate (gen);
+			foreach (DictionaryEntry de in catchBlocks) {
+				CodeVariableDeclaration vd = (CodeVariableDeclaration) de.Key;
+				gen.BeginCatchBlock (vd.Variable.Type);
+				if (vd.Variable.Name.Length > 0) {
+					vd.Generate (gen);
+					// FIXME: assign exception to this local declaration
+				}
+				((CodeBlock) de.Value).Generate (gen);
+			}
+			if (!finallyBlock.IsEmpty) {
+				gen.BeginFinallyBlock ();
+				finallyBlock.Generate (gen);
+			}
+			gen.EndExceptionBlock ();
+		}
+				
+		public override void PrintCode (CodeWriter cp)
+		{
+			if (tryBlock == null) return;
+			
+			cp.Write ("try {");
+			cp.Indent ();
+			condition.PrintCode (cp);
+			cp.Unindent ();
+			foreach (DictionaryEntry de in catchBlocks) {
+				CodeVariableDeclaration vd = (CodeVariableDeclaration) de.Key;
+				cp.Write ("} catch (");
+				if (vd.Variable.Name.Length > 0)
+					vd.PrintCode (cp);
+				else
+					cp.Write (vd.Variable.Type.FullName);
+				cp.Write (") {");
+				cp.Indent ();
+				((CodeBlock) de.Value).PrintCode (cp);
+				cp.Unindent ();
+			}
+			if (!finallyBlock.IsEmpty) {
+				cp.Write ("} finally {");
+				cp.Indent ();
+				finallyBlock.PrintCode (cp);
+				cp.Unindent ();
+			}
+			cp.Write ("}");
+		}
+		
+		public CodeBlock TryBlock
+		{
+			get { return tryBlock; }
+			set { tryBlock = value; }
+		}
 
-        public ArrayList CatchBlocks
-        {
-            get { return catchBlocks; }
-        }
-        
-        public CodeBlock FinallyBlock
-        {
-            get { return finallyBlock; }
-            set { finallyBlock = value; }
-        }
-    }
+		public ArrayList CatchBlocks
+		{
+			get { return catchBlocks; }
+		}
+		
+		public CodeBlock FinallyBlock
+		{
+			get { return finallyBlock; }
+			set { finallyBlock = value; }
+		}
+	}
 }
 #endif

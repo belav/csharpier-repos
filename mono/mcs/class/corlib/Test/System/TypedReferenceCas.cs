@@ -2,7 +2,7 @@
 // TypedReferenceCas.cs - CAS unit tests for System.TypedReference
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,28 +35,28 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TypedReferenceCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TypedReferenceCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        // we use reflection to call TypeReference as the method is protected by
-        // LinkDemand (which will be converted into full demand, i.e. a stack walk)
-        // when reflection is used (i.e. it gets testable).
+		// we use reflection to call TypeReference as the method is protected by
+		// LinkDemand (which will be converted into full demand, i.e. a stack walk)
+		// when reflection is used (i.e. it gets testable).
 
-        [Test]
-        [ReflectionPermission (SecurityAction.Deny, MemberAccess = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void MakeTypedReference ()
-        {
-            MethodInfo mi = typeof (TypedReference).GetMethod ("MakeTypedReference", BindingFlags.Static | BindingFlags.Public);
-            Assert.IsNotNull (mi.Invoke (null, new object [2] { null, new FieldInfo [0] }), "MakeTypedReference");
-        }
-    }
+		[Test]
+		[ReflectionPermission (SecurityAction.Deny, MemberAccess = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void MakeTypedReference ()
+		{
+			MethodInfo mi = typeof (TypedReference).GetMethod ("MakeTypedReference", BindingFlags.Static | BindingFlags.Public);
+			Assert.IsNotNull (mi.Invoke (null, new object [2] { null, new FieldInfo [0] }), "MakeTypedReference");
+		}
+	}
 }

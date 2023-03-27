@@ -4,13 +4,13 @@
 
 class Class {
 
-    public int Count {
+	public int Count {
 
-        get {
-            return 0;
-        }
+		get {
+			return 0;
+		}
 
-        protected set {
-        }
-    }
+		protected set {
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // StreamCas.cs - CAS unit tests for System.IO.Stream
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,154 +36,154 @@ using System.Threading;
 
 namespace MonoCasTests.System.IO {
 
-    // System.IO.Stream is an abstract class, so we use our own inherited
-    // class for the tests
+	// System.IO.Stream is an abstract class, so we use our own inherited
+	// class for the tests
 
-    public class NonAbstractStream : Stream {
+	public class NonAbstractStream : Stream {
 
-        private long _pos;
-        private long _length;
+		private long _pos;
+		private long _length;
 
-        public override bool CanRead {
-            get { return true; }
-        }
+		public override bool CanRead {
+			get { return true; }
+		}
 
-        public override bool CanSeek {
-            get { return true; }
-        }
+		public override bool CanSeek {
+			get { return true; }
+		}
 
-        public override bool CanWrite {
-            get { return true; }
-        }
+		public override bool CanWrite {
+			get { return true; }
+		}
 
-        public override void Flush ()
-        {
-        }
+		public override void Flush ()
+		{
+		}
 
-        public override long Length {
-            get { return _length; }
-        }
+		public override long Length {
+			get { return _length; }
+		}
 
-        public override long Position {
-            get { return _pos; }
-            set { _pos = value; }
-        }
+		public override long Position {
+			get { return _pos; }
+			set { _pos = value; }
+		}
 
-        public override int Read (byte[] buffer, int offset, int count)
-        {
-            _pos += count;
-            return count;
-        }
+		public override int Read (byte[] buffer, int offset, int count)
+		{
+			_pos += count;
+			return count;
+		}
 
-        public override long Seek (long offset, SeekOrigin origin)
-        {
-            _pos = offset;
-            return _pos;
-        }
+		public override long Seek (long offset, SeekOrigin origin)
+		{
+			_pos = offset;
+			return _pos;
+		}
 
-        public override void SetLength (long value)
-        {
-            _length = value;
-        }
+		public override void SetLength (long value)
+		{
+			_length = value;
+		}
 
-        public override void Write (byte[] buffer, int offset, int count)
-        {
-            _pos += count;
-        }
-    }
+		public override void Write (byte[] buffer, int offset, int count)
+		{
+			_pos += count;
+		}
+	}
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class StreamCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class StreamCas {
 
-        private const int timeout = 30000;
-        private string message;
+		private const int timeout = 30000;
+		private string message;
 
-        static ManualResetEvent reset;
+		static ManualResetEvent reset;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            reset = new ManualResetEvent (false);
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			reset = new ManualResetEvent (false);
+		}
 
-        [TestFixtureTearDown]
-        public void FixtureTearDown ()
-        {
-            reset.Close ();
-        }
+		[TestFixtureTearDown]
+		public void FixtureTearDown ()
+		{
+			reset.Close ();
+		}
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        // async tests (for stack propagation)
+		// async tests (for stack propagation)
 
-        private void ReadCallback (IAsyncResult ar)
-        {
-            NonAbstractStream s = (NonAbstractStream) ar.AsyncState;
-            s.EndRead (ar);
-            try {
-                // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
-                message = "Expected a SecurityException";
-            }
-            catch (SecurityException) {
-                message = null;
-                reset.Set ();
-            }
-            catch (Exception e) {
-                message = e.ToString ();
-            }
-        }
+		private void ReadCallback (IAsyncResult ar)
+		{
+			NonAbstractStream s = (NonAbstractStream) ar.AsyncState;
+			s.EndRead (ar);
+			try {
+				// can we do something bad here ?
+				Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+				message = "Expected a SecurityException";
+			}
+			catch (SecurityException) {
+				message = null;
+				reset.Set ();
+			}
+			catch (Exception e) {
+				message = e.ToString ();
+			}
+		}
 
-        [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncRead ()
-        {
-            NonAbstractStream s = new NonAbstractStream ();
-            message = "AsyncRead";
-            reset.Reset ();
-            IAsyncResult r = s.BeginRead (null, 0, 0, new AsyncCallback (ReadCallback), s);
-            Assert.IsNotNull (r, "IAsyncResult");
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
-        }
+		[Test]
+		[EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
+		public void AsyncRead ()
+		{
+			NonAbstractStream s = new NonAbstractStream ();
+			message = "AsyncRead";
+			reset.Reset ();
+			IAsyncResult r = s.BeginRead (null, 0, 0, new AsyncCallback (ReadCallback), s);
+			Assert.IsNotNull (r, "IAsyncResult");
+			if (!reset.WaitOne (timeout, true))
+				Assert.Ignore ("Timeout");
+			Assert.IsNull (message, message);
+		}
 
-        private void WriteCallback (IAsyncResult ar)
-        {
-            NonAbstractStream s = (NonAbstractStream)ar.AsyncState;
-            s.EndWrite (ar);
-            try {
-                // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
-                message = "Expected a SecurityException";
-            }
-            catch (SecurityException) {
-                message = null;
-                reset.Set ();
-            }
-            catch (Exception e) {
-                message = e.ToString ();
-            }
-        }
+		private void WriteCallback (IAsyncResult ar)
+		{
+			NonAbstractStream s = (NonAbstractStream)ar.AsyncState;
+			s.EndWrite (ar);
+			try {
+				// can we do something bad here ?
+				Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+				message = "Expected a SecurityException";
+			}
+			catch (SecurityException) {
+				message = null;
+				reset.Set ();
+			}
+			catch (Exception e) {
+				message = e.ToString ();
+			}
+		}
 
-        [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncWrite ()
-        {
-            NonAbstractStream s = new NonAbstractStream ();
-            message = "AsyncWrite";
-            reset.Reset ();
-            IAsyncResult r = s.BeginWrite (null, 0, 0, new AsyncCallback (WriteCallback), s);
-            Assert.IsNotNull (r, "IAsyncResult");
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
-        }
-    }
+		[Test]
+		[EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
+		public void AsyncWrite ()
+		{
+			NonAbstractStream s = new NonAbstractStream ();
+			message = "AsyncWrite";
+			reset.Reset ();
+			IAsyncResult r = s.BeginWrite (null, 0, 0, new AsyncCallback (WriteCallback), s);
+			Assert.IsNotNull (r, "IAsyncResult");
+			if (!reset.WaitOne (timeout, true))
+				Assert.Ignore ("Timeout");
+			Assert.IsNull (message, message);
+		}
+	}
 }

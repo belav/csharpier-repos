@@ -1,6 +1,6 @@
 //
 // Authors:
-//    Marek Habersack <mhabersack@novell.com>
+//	Marek Habersack <mhabersack@novell.com>
 //
 // (C) 2010 Novell, Inc (http://novell.com)
 //
@@ -29,18 +29,18 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    public class MultiViewControlBuilder : ControlBuilder
-    {
-        public MultiViewControlBuilder ()
-        {
-        }
+	public class MultiViewControlBuilder : ControlBuilder
+	{
+		public MultiViewControlBuilder ()
+		{
+		}
 
-        public override void AppendSubBuilder (ControlBuilder subBuilder)
-        {
-            // LAMESPEC: docs suggest that only View controls are accepted, but tests
-            // show that anything goes here (including subBuilder.ControlType == null),
-            // so we're just passing the call up the chain
-            base.AppendSubBuilder (subBuilder);
-        }
-    }
+		public override void AppendSubBuilder (ControlBuilder subBuilder)
+		{
+			// LAMESPEC: docs suggest that only View controls are accepted, but tests
+			// show that anything goes here (including subBuilder.ControlType == null),
+			// so we're just passing the call up the chain
+			base.AppendSubBuilder (subBuilder);
+		}
+	}
 }

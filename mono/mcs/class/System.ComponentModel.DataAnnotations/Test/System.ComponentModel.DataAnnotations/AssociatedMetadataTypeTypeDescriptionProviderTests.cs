@@ -2,7 +2,7 @@
 // AssociatedMetadataTypeTypeDescriptionProvider.cs
 //
 // Author:
-//    Marek Habersack <mhabersack@novell.com>
+//	Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2009 Novell Inc. http://novell.com
 //
@@ -37,46 +37,46 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.DataAnnotations
 {
-    [TestFixture]
-    public class AssociatedMetadataTypeTypeDescriptionProviderTests
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Constructors_Null_Type ()
-        {
-            var v = new AssociatedMetadataTypeTypeDescriptionProvider (null);
-        }
+	[TestFixture]
+	public class AssociatedMetadataTypeTypeDescriptionProviderTests
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void Constructors_Null_Type ()
+		{
+			var v = new AssociatedMetadataTypeTypeDescriptionProvider (null);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Constructors_Null_Type_2 ()
-        {
-            var v = new AssociatedMetadataTypeTypeDescriptionProvider (null, null);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void Constructors_Null_Type_2 ()
+		{
+			var v = new AssociatedMetadataTypeTypeDescriptionProvider (null, null);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Constructors_Null_AssociatedMetadataType_2 ()
-        {
-            var v = new AssociatedMetadataTypeTypeDescriptionProvider (typeof (string), null);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void Constructors_Null_AssociatedMetadataType_2 ()
+		{
+			var v = new AssociatedMetadataTypeTypeDescriptionProvider (typeof (string), null);
+		}
 
-        [Test]
-        public void GetTypeDescriptor ()
-        {
-            var v = new AssociatedMetadataTypeTypeDescriptionProvider (typeof (string));
+		[Test]
+		public void GetTypeDescriptor ()
+		{
+			var v = new AssociatedMetadataTypeTypeDescriptionProvider (typeof (string));
 
-            Assert.IsTrue (v != null, "#A1");
+			Assert.IsTrue (v != null, "#A1");
 
-            string s = "test";
-            var o = v.GetTypeDescriptor (s.GetType (), s);
-            Assert.IsTrue (o != null, "#B1");
+			string s = "test";
+			var o = v.GetTypeDescriptor (s.GetType (), s);
+			Assert.IsTrue (o != null, "#B1");
 
-            Type oType = o.GetType ();
-            Assert.AreEqual ("System.ComponentModel.DataAnnotations.AssociatedMetadataTypeTypeDescriptor", oType.ToString (), "#C1");
-            Assert.IsTrue (typeof (ICustomTypeDescriptor).IsAssignableFrom (oType), "#C2");
-            Assert.IsTrue (typeof (CustomTypeDescriptor).IsAssignableFrom (oType), "#C3");
-        }
-    }
+			Type oType = o.GetType ();
+			Assert.AreEqual ("System.ComponentModel.DataAnnotations.AssociatedMetadataTypeTypeDescriptor", oType.ToString (), "#C1");
+			Assert.IsTrue (typeof (ICustomTypeDescriptor).IsAssignableFrom (oType), "#C2");
+			Assert.IsTrue (typeof (CustomTypeDescriptor).IsAssignableFrom (oType), "#C3");
+		}
+	}
 }
 #endif

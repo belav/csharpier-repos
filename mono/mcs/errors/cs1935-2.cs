@@ -4,11 +4,11 @@
 
 public class Test
 {
-    class Enumerable {}
-        
-    static void Main ()
-    {
-        var v = new int[0];
-        var foo = from int a in v where a > 0 select a;
-    }
+	class Enumerable {}
+		
+	static void Main ()
+	{
+		var v = new int[0];
+		var foo = from int a in v where a > 0 select a;
+	}
 }

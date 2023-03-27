@@ -2,7 +2,7 @@
 // ServiceThrottlingBehaviorTest.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://novell.com
 //
@@ -37,24 +37,24 @@ using System.ServiceModel.Channels;
 
 namespace MonoTests.System.ServiceModel.Description
 {
-    [TestFixture]
-    public class ServiceThrottlingBehaviorTest
-    {
-        [Test]
-        public void DefaultValues ()
-        {
-            var t = new ServiceThrottlingBehavior ();
-            Assert.AreEqual (10, t.MaxConcurrentSessions, "#1");
-            Assert.AreEqual (16, t.MaxConcurrentCalls, "#2");
-            Assert.AreEqual (26, t.MaxConcurrentInstances, "#3");
-        }
+	[TestFixture]
+	public class ServiceThrottlingBehaviorTest
+	{
+		[Test]
+		public void DefaultValues ()
+		{
+			var t = new ServiceThrottlingBehavior ();
+			Assert.AreEqual (10, t.MaxConcurrentSessions, "#1");
+			Assert.AreEqual (16, t.MaxConcurrentCalls, "#2");
+			Assert.AreEqual (26, t.MaxConcurrentInstances, "#3");
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidOperationException))] // hmm...
-        public void SetZero ()
-        {
-            new ServiceThrottlingBehavior () { MaxConcurrentCalls = 0 };
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (InvalidOperationException))] // hmm...
+		public void SetZero ()
+		{
+			new ServiceThrottlingBehavior () { MaxConcurrentCalls = 0 };
+		}
+	}
 }
 #endif

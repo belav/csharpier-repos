@@ -1,4 +1,4 @@
-#if !SILVERLIGHT
+﻿#if !SILVERLIGHT
 namespace System.ComponentModel.DataAnnotations {
     using System;
     using System.ComponentModel.DataAnnotations.Resources;

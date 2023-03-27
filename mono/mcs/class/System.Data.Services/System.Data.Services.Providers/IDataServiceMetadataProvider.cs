@@ -1,4 +1,4 @@
-// 
+﻿// 
 // IDataServiceMetadataProvider.cs
 //  
 // Author:
@@ -30,18 +30,18 @@ using System.Data.Services.Providers;
 
 namespace System.Data.Services.Providers
 {
-    public interface IDataServiceMetadataProvider
-    {
-        string ContainerNamespace { get; }
-        string ContainerName { get; }
-        IEnumerable <ResourceSet> ResourceSets { get; }
-        IEnumerable <ResourceType> Types { get; }
-        IEnumerable <ServiceOperation> ServiceOperations { get; }
-        bool TryResolveResourceSet (string name, out ResourceSet resourceSet);
-        ResourceAssociationSet GetResourceAssociationSet (ResourceSet resourceSet, ResourceType resourceType, ResourceProperty resourceProperty);
-        bool TryResolveResourceType (string name, out ResourceType resourceType);
-        IEnumerable <ResourceType> GetDerivedTypes (ResourceType resourceType);
-        bool HasDerivedTypes (ResourceType resourceType);
-        bool TryResolveServiceOperation (string name, out ServiceOperation serviceOperation);
-    }
+	public interface IDataServiceMetadataProvider
+	{
+		string ContainerNamespace { get; }
+		string ContainerName { get; }
+		IEnumerable <ResourceSet> ResourceSets { get; }
+		IEnumerable <ResourceType> Types { get; }
+		IEnumerable <ServiceOperation> ServiceOperations { get; }
+		bool TryResolveResourceSet (string name, out ResourceSet resourceSet);
+		ResourceAssociationSet GetResourceAssociationSet (ResourceSet resourceSet, ResourceType resourceType, ResourceProperty resourceProperty);
+		bool TryResolveResourceType (string name, out ResourceType resourceType);
+		IEnumerable <ResourceType> GetDerivedTypes (ResourceType resourceType);
+		bool HasDerivedTypes (ResourceType resourceType);
+		bool TryResolveServiceOperation (string name, out ServiceOperation serviceOperation);
+	}
 }

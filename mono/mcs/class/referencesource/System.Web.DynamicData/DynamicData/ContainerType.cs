@@ -1,4 +1,4 @@
-namespace System.Web.DynamicData {
+﻿namespace System.Web.DynamicData {
 
     /// <summary>
     /// A data control container type

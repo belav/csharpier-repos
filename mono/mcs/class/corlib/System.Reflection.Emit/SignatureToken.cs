@@ -31,70 +31,70 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit {
 
 
-    /// <summary>
-    ///  Represents the Token returned by the metadata to represent a Signature.
-    /// </summary>
-    [ComVisible (true)]
-    public readonly struct SignatureToken : IEquatable<SignatureToken> {
+	/// <summary>
+	///  Represents the Token returned by the metadata to represent a Signature.
+	/// </summary>
+	[ComVisible (true)]
+	public readonly struct SignatureToken : IEquatable<SignatureToken> {
 
-        internal readonly int tokValue;
+		internal readonly int tokValue;
 
-        public static readonly SignatureToken Empty = new SignatureToken ();
+		public static readonly SignatureToken Empty = new SignatureToken ();
 
-        internal SignatureToken (int val)
-        {
-            tokValue = val;
-        }
+		internal SignatureToken (int val)
+		{
+			tokValue = val;
+		}
 
-        /// <summary>
-        /// </summary>
-        public override bool Equals (object obj)
-        {
-            bool res = obj is SignatureToken;
+		/// <summary>
+		/// </summary>
+		public override bool Equals (object obj)
+		{
+			bool res = obj is SignatureToken;
 
-            if (res) {
-                SignatureToken that = (SignatureToken) obj;
-                res = (this.tokValue == that.tokValue);
-            }
+			if (res) {
+				SignatureToken that = (SignatureToken) obj;
+				res = (this.tokValue == that.tokValue);
+			}
 
-            return res;
-        }
+			return res;
+		}
 
-        public bool Equals (SignatureToken obj)
-        {
-            return (this.tokValue == obj.tokValue);
-        }
+		public bool Equals (SignatureToken obj)
+		{
+			return (this.tokValue == obj.tokValue);
+		}
 
-        public static bool operator == (SignatureToken a, SignatureToken b)
-        {
-            return Equals (a, b);
-        }
+		public static bool operator == (SignatureToken a, SignatureToken b)
+		{
+			return Equals (a, b);
+		}
 
-        public static bool operator != (SignatureToken a, SignatureToken b)
-        {
-            return !Equals (a, b);
-        }
+		public static bool operator != (SignatureToken a, SignatureToken b)
+		{
+			return !Equals (a, b);
+		}
 
-        /// <summary>
-        ///  Tests whether the given object is an instance of
-        ///  SignatureToken and has the same token value.
-        /// </summary>
-        public override int GetHashCode ()
-        {
-            return tokValue;
-        }
+		/// <summary>
+		///  Tests whether the given object is an instance of
+		///  SignatureToken and has the same token value.
+		/// </summary>
+		public override int GetHashCode ()
+		{
+			return tokValue;
+		}
 
 
-        /// <summary>
-        ///  Returns the metadata token for this Signature.
-        /// </summary>
-        public int Token {
-            get {
-                return tokValue;
-            }
-        }
+		/// <summary>
+		///  Returns the metadata token for this Signature.
+		/// </summary>
+		public int Token {
+			get {
+				return tokValue;
+			}
+		}
 
-    }
+	}
 
 }
 

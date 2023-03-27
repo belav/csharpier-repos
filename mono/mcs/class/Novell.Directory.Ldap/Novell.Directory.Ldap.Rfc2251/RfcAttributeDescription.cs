@@ -34,22 +34,22 @@ using Novell.Directory.Ldap.Asn1;
 
 namespace Novell.Directory.Ldap.Rfc2251
 {
-    
-    /* 
-    * Represents the Ldap Attribute Description.
-    */
-    public class RfcAttributeDescription:RfcLdapString
-    {
-        
-        /// <summary> </summary>
-        public RfcAttributeDescription(System.String s):base(s)
-        {
-        }
-        
-        /// <summary> </summary>
-        [CLSCompliantAttribute(false)]
-        public RfcAttributeDescription(Asn1Decoder dec, System.IO.Stream in_Renamed, int len):base(dec, in_Renamed, len)
-        {
-        }
-    }
+	
+	/* 
+	* Represents the Ldap Attribute Description.
+	*/
+	public class RfcAttributeDescription:RfcLdapString
+	{
+		
+		/// <summary> </summary>
+		public RfcAttributeDescription(System.String s):base(s)
+		{
+		}
+		
+		/// <summary> </summary>
+		[CLSCompliantAttribute(false)]
+		public RfcAttributeDescription(Asn1Decoder dec, System.IO.Stream in_Renamed, int len):base(dec, in_Renamed, len)
+		{
+		}
+	}
 }

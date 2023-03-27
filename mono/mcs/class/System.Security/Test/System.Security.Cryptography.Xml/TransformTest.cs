@@ -2,7 +2,7 @@
 // Unit tests for Transform
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -36,51 +36,51 @@ using System.Xml;
 
 namespace MonoTests.System.Security.Cryptography.Xml {
 
-    public class ConcreteTransform : Transform {
+	public class ConcreteTransform : Transform {
 
-        protected override XmlNodeList GetInnerXml ()
-        {
-            throw new NotImplementedException ();
-        }
+		protected override XmlNodeList GetInnerXml ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override object GetOutput (Type type)
-        {
-            return new MemoryStream ();
-        }
+		public override object GetOutput (Type type)
+		{
+			return new MemoryStream ();
+		}
 
-        public override object GetOutput ()
-        {
-            throw new NotImplementedException ();
-        }
+		public override object GetOutput ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override Type [] InputTypes {
-            get { throw new NotImplementedException (); }
-        }
+		public override Type [] InputTypes {
+			get { throw new NotImplementedException (); }
+		}
 
-        public override void LoadInnerXml (global::System.Xml.XmlNodeList nodeList)
-        {
-            throw new NotImplementedException ();
-        }
+		public override void LoadInnerXml (global::System.Xml.XmlNodeList nodeList)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void LoadInput (object obj)
-        {
-            throw new NotImplementedException ();
-        }
+		public override void LoadInput (object obj)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override Type [] OutputTypes {
-            get { throw new NotImplementedException (); }
-        }
-    }
+		public override Type [] OutputTypes {
+			get { throw new NotImplementedException (); }
+		}
+	}
 
-    [TestFixture]
-    public class TransformTest {
+	[TestFixture]
+	public class TransformTest {
 
-        [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void GetDigestedOutput_Null ()
-        {
-            new ConcreteTransform ().GetDigestedOutput (null);
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (NullReferenceException))]
+		public void GetDigestedOutput_Null ()
+		{
+			new ConcreteTransform ().GetDigestedOutput (null);
+		}
+	}
 }
 #endif

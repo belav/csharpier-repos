@@ -39,162 +39,162 @@ using NUnit.Framework.Constraints;
 
 namespace MonoTests.System.Collections.Concurrent
 {
-    [TestFixture]
-    public class ConcurrentBagTests
-    {
-        ConcurrentBag<int> bag;
-        
-        [SetUp]
-        public void Setup ()
-        {
-            bag = new ConcurrentBag<int> ();
-        }
+	[TestFixture]
+	public class ConcurrentBagTests
+	{
+		ConcurrentBag<int> bag;
+		
+		[SetUp]
+		public void Setup ()
+		{
+			bag = new ConcurrentBag<int> ();
+		}
 
-        [Test]
-        public void BasicAddTakeTest ()
-        {
-            bag.Add (1);
-            Assert.IsFalse (bag.IsEmpty);
-            Assert.AreEqual (1, bag.Count);
+		[Test]
+		public void BasicAddTakeTest ()
+		{
+			bag.Add (1);
+			Assert.IsFalse (bag.IsEmpty);
+			Assert.AreEqual (1, bag.Count);
 
-            var array = bag.ToArray ();
-            Assert.AreEqual (1, array.Length);
-            Assert.AreEqual (1, array[0]);
+			var array = bag.ToArray ();
+			Assert.AreEqual (1, array.Length);
+			Assert.AreEqual (1, array[0]);
 
-            int result;
-            Assert.IsTrue (bag.TryTake (out result));
-            Assert.AreEqual (1, result);
-            Assert.IsTrue (bag.IsEmpty);
-        }
+			int result;
+			Assert.IsTrue (bag.TryTake (out result));
+			Assert.AreEqual (1, result);
+			Assert.IsTrue (bag.IsEmpty);
+		}
 
-        [Test]
-        [Category("MultiThreaded")]
-        public void BasicAddTakeFromOtherThread ()
-        {
-            var t = new Thread (() => bag.Add (1));
-            t.Start ();
-            Assert.IsTrue (t.Join (300));
+		[Test]
+		[Category("MultiThreaded")]
+		public void BasicAddTakeFromOtherThread ()
+		{
+			var t = new Thread (() => bag.Add (1));
+			t.Start ();
+			Assert.IsTrue (t.Join (300));
 
-            Assert.IsFalse (bag.IsEmpty);
-            Assert.AreEqual (1, bag.Count);
+			Assert.IsFalse (bag.IsEmpty);
+			Assert.AreEqual (1, bag.Count);
 
-            var array = bag.ToArray ();
-            Assert.AreEqual (1, array.Length);
-            Assert.AreEqual (1, array[0]);
+			var array = bag.ToArray ();
+			Assert.AreEqual (1, array.Length);
+			Assert.AreEqual (1, array[0]);
 
-            int result;
-            Assert.IsTrue (bag.TryTake (out result));
-            Assert.AreEqual (1, result);
-            Assert.IsTrue (bag.IsEmpty);
-        }
+			int result;
+			Assert.IsTrue (bag.TryTake (out result));
+			Assert.AreEqual (1, result);
+			Assert.IsTrue (bag.IsEmpty);
+		}
 
-        [Test]
-        [Category("MultiThreaded")]
-        public void AddFromMultipleThreadTakeFromOneThread ()
-        {
-            var threads = new Thread[10];
-            for (int i = 0; i < threads.Length; i++) {
-                threads[i] = new Thread (() => bag.Add (1));
-                threads[i].Start ();
-            }
-            foreach (var t in threads)
-                Assert.IsTrue (t.Join (2000));
+		[Test]
+		[Category("MultiThreaded")]
+		public void AddFromMultipleThreadTakeFromOneThread ()
+		{
+			var threads = new Thread[10];
+			for (int i = 0; i < threads.Length; i++) {
+				threads[i] = new Thread (() => bag.Add (1));
+				threads[i].Start ();
+			}
+			foreach (var t in threads)
+				Assert.IsTrue (t.Join (2000));
 
-            Assert.IsFalse (bag.IsEmpty);
-            Assert.AreEqual (threads.Length, bag.Count);
+			Assert.IsFalse (bag.IsEmpty);
+			Assert.AreEqual (threads.Length, bag.Count);
 
-            var array = bag.ToArray ();
-            Assert.AreEqual (threads.Length, array.Length);
+			var array = bag.ToArray ();
+			Assert.AreEqual (threads.Length, array.Length);
 
-            Assert.That (array, new CollectionEquivalentConstraint (Enumerable.Repeat (1, 10).ToArray ()), "#1, same");
+			Assert.That (array, new CollectionEquivalentConstraint (Enumerable.Repeat (1, 10).ToArray ()), "#1, same");
 
-            int result;
-            for (int i = 0; i < threads.Length; i++) {
-                Assert.IsTrue (bag.TryTake (out result));
-                Assert.AreEqual (1, result);
-            }
-            Assert.IsTrue (bag.IsEmpty);
-        }
+			int result;
+			for (int i = 0; i < threads.Length; i++) {
+				Assert.IsTrue (bag.TryTake (out result));
+				Assert.AreEqual (1, result);
+			}
+			Assert.IsTrue (bag.IsEmpty);
+		}
 
-        [Test]
-        [Category("MultiThreaded")]
-        public void AddFromOneThreadTakeFromMultiple ()
-        {
-            var threads = new Thread[10];
-            for (int i = 0; i < threads.Length; i++)
-                bag.Add (1);
+		[Test]
+		[Category("MultiThreaded")]
+		public void AddFromOneThreadTakeFromMultiple ()
+		{
+			var threads = new Thread[10];
+			for (int i = 0; i < threads.Length; i++)
+				bag.Add (1);
 
-            Assert.IsFalse (bag.IsEmpty);
-            Assert.AreEqual (threads.Length, bag.Count);
+			Assert.IsFalse (bag.IsEmpty);
+			Assert.AreEqual (threads.Length, bag.Count);
 
-            bool valid = true;
+			bool valid = true;
 
-            for (int i = 0; i < threads.Length; i++) {
-                int result;
-                threads[i] = new Thread (() => valid &= bag.TryTake (out result) && result == 1);
-                threads[i].Start ();
-            }
+			for (int i = 0; i < threads.Length; i++) {
+				int result;
+				threads[i] = new Thread (() => valid &= bag.TryTake (out result) && result == 1);
+				threads[i].Start ();
+			}
 
-            foreach (var t in threads)
-                Assert.IsTrue (t.Join (200));
+			foreach (var t in threads)
+				Assert.IsTrue (t.Join (200));
 
-            Assert.IsTrue (valid, "Aggregate test");
-        }
+			Assert.IsTrue (valid, "Aggregate test");
+		}
 
-        [Test]
-        public void BasicAddPeekTest ()
-        {
-            bag.Add (1);
-            Assert.IsFalse (bag.IsEmpty);
-            Assert.AreEqual (1, bag.Count);
+		[Test]
+		public void BasicAddPeekTest ()
+		{
+			bag.Add (1);
+			Assert.IsFalse (bag.IsEmpty);
+			Assert.AreEqual (1, bag.Count);
 
-            int result;
-            Assert.IsTrue (bag.TryPeek (out result));
-            Assert.AreEqual (1, result);
-            Assert.IsFalse (bag.IsEmpty);
-        }
+			int result;
+			Assert.IsTrue (bag.TryPeek (out result));
+			Assert.AreEqual (1, result);
+			Assert.IsFalse (bag.IsEmpty);
+		}
 
-        [Test]
-        [Category("MultiThreaded")]
-        public void BasicAddPeekFromOtherThread ()
-        {
-            var t = new Thread (() => bag.Add (1));
-            t.Start ();
-            Assert.IsTrue (t.Join (300));
+		[Test]
+		[Category("MultiThreaded")]
+		public void BasicAddPeekFromOtherThread ()
+		{
+			var t = new Thread (() => bag.Add (1));
+			t.Start ();
+			Assert.IsTrue (t.Join (300));
 
-            Assert.IsFalse (bag.IsEmpty);
-            Assert.AreEqual (1, bag.Count);
+			Assert.IsFalse (bag.IsEmpty);
+			Assert.AreEqual (1, bag.Count);
 
-            int result;
-            Assert.IsTrue (bag.TryPeek (out result));
-            Assert.AreEqual (1, result);
-            Assert.IsFalse (bag.IsEmpty);
-        }
+			int result;
+			Assert.IsTrue (bag.TryPeek (out result));
+			Assert.AreEqual (1, result);
+			Assert.IsFalse (bag.IsEmpty);
+		}
 
-        [Test]
-        [Category("MultiThreaded")]
-        public void AddFromOneThreadPeekFromMultiple ()
-        {
-            var threads = new Thread[10];
-            for (int i = 0; i < threads.Length; i++)
-                bag.Add (1);
+		[Test]
+		[Category("MultiThreaded")]
+		public void AddFromOneThreadPeekFromMultiple ()
+		{
+			var threads = new Thread[10];
+			for (int i = 0; i < threads.Length; i++)
+				bag.Add (1);
 
-            Assert.IsFalse (bag.IsEmpty);
-            Assert.AreEqual (threads.Length, bag.Count);
+			Assert.IsFalse (bag.IsEmpty);
+			Assert.AreEqual (threads.Length, bag.Count);
 
-            bool valid = true;
+			bool valid = true;
 
-            for (int i = 0; i < threads.Length; i++) {
-                int result;
-                threads[i] = new Thread (() => valid &= bag.TryPeek (out result) && result == 1);
-                threads[i].Start ();
-            }
+			for (int i = 0; i < threads.Length; i++) {
+				int result;
+				threads[i] = new Thread (() => valid &= bag.TryPeek (out result) && result == 1);
+				threads[i].Start ();
+			}
 
-            foreach (var t in threads)
-                Assert.IsTrue (t.Join (200));
+			foreach (var t in threads)
+				Assert.IsTrue (t.Join (200));
 
-            Assert.IsTrue (valid, "Aggregate test");
-        }
+			Assert.IsTrue (valid, "Aggregate test");
+		}
 
         [Test]
 #if WASM
@@ -245,35 +245,35 @@ namespace MonoTests.System.Collections.Concurrent
             Assert.AreEqual (1, result);
             Assert.IsTrue (bag.IsEmpty);
         }
-        
-        [Test]
-        [Category("MultiThreaded")]
-        public void AddStressTest ()
-        {
-            CollectionStressTestHelper.AddStressTest (bag);
-        }
-        
-        [Test]
-        [Category("MultiThreaded")]
-        public void RemoveStressTest ()
-        {
-            CollectionStressTestHelper.RemoveStressTest (bag, CheckOrderingType.DontCare);
-        }
+		
+		[Test]
+		[Category("MultiThreaded")]
+		public void AddStressTest ()
+		{
+			CollectionStressTestHelper.AddStressTest (bag);
+		}
+		
+		[Test]
+		[Category("MultiThreaded")]
+		public void RemoveStressTest ()
+		{
+			CollectionStressTestHelper.RemoveStressTest (bag, CheckOrderingType.DontCare);
+		}
 
-        [Test]
-        public void Bug24213 ()
-        {
-            var size = 2049;
-            var bag = new ConcurrentBag<int> ();
-            for (int i = 0; i < size; i++)
-                bag.Add (i);
+		[Test]
+		public void Bug24213 ()
+		{
+			var size = 2049;
+			var bag = new ConcurrentBag<int> ();
+			for (int i = 0; i < size; i++)
+				bag.Add (i);
 
-            var array = bag.ToArray ();
+			var array = bag.ToArray ();
 
-            Assert.AreEqual (size, array.Length, "#1");
+			Assert.AreEqual (size, array.Length, "#1");
 
-            for (int i = 0; i < size; i++)
-                Assert.AreEqual (size - 1 - i, array [i], "#C" + i);
-        }
-    }
+			for (int i = 0; i < size; i++)
+				Assert.AreEqual (size - 1 - i, array [i], "#C" + i);
+		}
+	}
 }

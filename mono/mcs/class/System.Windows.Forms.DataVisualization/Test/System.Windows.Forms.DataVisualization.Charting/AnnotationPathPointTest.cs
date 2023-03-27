@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -29,65 +29,65 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.DataVisualization.Charting
 {
-    [TestFixture]
-    public class AnnotationPathPointTest
-    {
-        [Test]
-        public void Constructor1 ()
-        {
-            AnnotationPathPoint app = new AnnotationPathPoint ();
+	[TestFixture]
+	public class AnnotationPathPointTest
+	{
+		[Test]
+		public void Constructor1 ()
+		{
+			AnnotationPathPoint app = new AnnotationPathPoint ();
 
-            Assert.AreEqual (0, app.X, "A1");
-            Assert.AreEqual (0, app.Y, "A2");
-            Assert.AreEqual (null, app.Tag, "A3");
-        }
+			Assert.AreEqual (0, app.X, "A1");
+			Assert.AreEqual (0, app.Y, "A2");
+			Assert.AreEqual (null, app.Tag, "A3");
+		}
 
-        [Test]
-        public void Constructor2 ()
-        {
-            AnnotationPathPoint app = new AnnotationPathPoint (3, 3);
+		[Test]
+		public void Constructor2 ()
+		{
+			AnnotationPathPoint app = new AnnotationPathPoint (3, 3);
 
-            Assert.AreEqual (3, app.X, "A1");
-            Assert.AreEqual (3, app.Y, "A2");
-            Assert.AreEqual (null, app.Tag, "A3");
-        }
+			Assert.AreEqual (3, app.X, "A1");
+			Assert.AreEqual (3, app.Y, "A2");
+			Assert.AreEqual (null, app.Tag, "A3");
+		}
 
-        [Test]
-        public void Constructor3 ()
-        {
-            AnnotationPathPoint app = new AnnotationPathPoint (5, 5, 2);
+		[Test]
+		public void Constructor3 ()
+		{
+			AnnotationPathPoint app = new AnnotationPathPoint (5, 5, 2);
 
-            Assert.AreEqual (5, app.X, "A1");
-            Assert.AreEqual (5, app.Y, "A2");
-            Assert.AreEqual (null, app.Tag, "A3");
-        }
+			Assert.AreEqual (5, app.X, "A1");
+			Assert.AreEqual (5, app.Y, "A2");
+			Assert.AreEqual (null, app.Tag, "A3");
+		}
 
-        [Test]
-        public void XProperty ()
-        {
-            AnnotationPathPoint app = new AnnotationPathPoint ();
+		[Test]
+		public void XProperty ()
+		{
+			AnnotationPathPoint app = new AnnotationPathPoint ();
 
-            Assert.AreEqual (0, app.X, "A1");
+			Assert.AreEqual (0, app.X, "A1");
 
-            app.X = 5;
-            Assert.AreEqual (5, app.X, "A2");
+			app.X = 5;
+			Assert.AreEqual (5, app.X, "A2");
 
-            app.X = -5;
-            Assert.AreEqual (-5, app.X, "A3");
-        }
+			app.X = -5;
+			Assert.AreEqual (-5, app.X, "A3");
+		}
 
-        [Test]
-        public void YProperty ()
-        {
-            AnnotationPathPoint app = new AnnotationPathPoint ();
+		[Test]
+		public void YProperty ()
+		{
+			AnnotationPathPoint app = new AnnotationPathPoint ();
 
-            Assert.AreEqual (0, app.Y, "A1");
+			Assert.AreEqual (0, app.Y, "A1");
 
-            app.Y = 5;
-            Assert.AreEqual (5, app.Y, "A2");
+			app.Y = 5;
+			Assert.AreEqual (5, app.Y, "A2");
 
-            app.Y = -5;
-            Assert.AreEqual (-5, app.Y, "A3");
-        }
-    }
+			app.Y = -5;
+			Assert.AreEqual (-5, app.Y, "A3");
+		}
+	}
 }

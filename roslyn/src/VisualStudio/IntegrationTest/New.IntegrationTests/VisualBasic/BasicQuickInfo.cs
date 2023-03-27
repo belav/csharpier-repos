@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -43,14 +43,14 @@ End Class", HangMitigatingCancellationToken);
 ''' <summary>
 ''' This is an XML doc comment defined in code.
 ''' </summary>
-Class ???????123
+Class العربية123
     Shared Sub Goo()
-         Dim goo as ???????123$$
+         Dim goo as العربية123$$
     End Sub
 End Class", HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
             var quickInfo = await TestServices.Editor.GetQuickInfoAsync(HangMitigatingCancellationToken);
-            Assert.Equal(@"Class TestProj.???????123
+            Assert.Equal(@"Class TestProj.العربية123
 This is an XML doc comment defined in code.", quickInfo);
         }
     }

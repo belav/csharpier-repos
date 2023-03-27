@@ -3,7 +3,7 @@
 
 public class A<T>
 {
-    public class B {}
+	public class B {}
 }
 
 internal class C : A<C>

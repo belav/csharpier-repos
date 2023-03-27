@@ -33,17 +33,17 @@ using System.ServiceModel.Discovery;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-    [ServiceContract (Name = "Client", Namespace = MessageContracts11.NS)]
-    internal interface IAnnouncementContract11
-    {
-        [OperationContract (Name = "Hello", Action = MessageContracts11.HelloAction, IsOneWay = true, AsyncPattern = true)]
-        IAsyncResult BeginOnlineAnnouncement (MessageContracts11.OnlineAnnouncement message, AsyncCallback callback, object state);
+	[ServiceContract (Name = "Client", Namespace = MessageContracts11.NS)]
+	internal interface IAnnouncementContract11
+	{
+		[OperationContract (Name = "Hello", Action = MessageContracts11.HelloAction, IsOneWay = true, AsyncPattern = true)]
+		IAsyncResult BeginOnlineAnnouncement (MessageContracts11.OnlineAnnouncement message, AsyncCallback callback, object state);
 
-        void EndOnlineAnnouncement (IAsyncResult result);
+		void EndOnlineAnnouncement (IAsyncResult result);
 
-        [OperationContract (Name = "Bye", Action = MessageContracts11.ByeAction, IsOneWay = true, AsyncPattern = true)]
-        IAsyncResult BeginOfflineAnnouncement (MessageContracts11.OfflineAnnouncement message, AsyncCallback callback, object state);
+		[OperationContract (Name = "Bye", Action = MessageContracts11.ByeAction, IsOneWay = true, AsyncPattern = true)]
+		IAsyncResult BeginOfflineAnnouncement (MessageContracts11.OfflineAnnouncement message, AsyncCallback callback, object state);
 
-        void EndOfflineAnnouncement (IAsyncResult result);
-    }
+		void EndOfflineAnnouncement (IAsyncResult result);
+	}
 }

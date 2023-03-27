@@ -2,13 +2,13 @@
 // Line: 12
 
 public class X {
-    public const double CONST = 1;
+	public const double CONST = 1;
 }
 
 public class Y: X {
 
-    void D (X x)
-    {
-        double d = x.CONST;
-    }
+	void D (X x)
+	{
+		double d = x.CONST;
+	}
 }

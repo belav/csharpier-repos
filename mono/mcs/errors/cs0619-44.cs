@@ -6,8 +6,8 @@ class Obsolete {
 }
 
 class Class {
-        void VV ()
-        {
-            object[] o = new object [] { new Obsolete () };
-        }
+		void VV ()
+		{
+			object[] o = new object [] { new Obsolete () };
+		}
 }

@@ -34,17 +34,17 @@ using System.Drawing.Imaging;
 
 namespace MonoSamples.System.Drawing
 {
-    public class BmpSave
-    {
-        public static void Main (string[] argv) {
-            if (argv.Length == 1) {
-                Bitmap bmp = new Bitmap (argv[0]);
-                Console.WriteLine ("Output file bmpsave.bmp");
-                bmp.Save ("bmpsave.bmp", ImageFormat.Bmp);
-            }
-            else {
-                Console.WriteLine ("usage: bmpsave.exe <filename>");
-            }
-        }
-    }
+	public class BmpSave
+	{
+		public static void Main (string[] argv) {
+			if (argv.Length == 1) {
+				Bitmap bmp = new Bitmap (argv[0]);
+				Console.WriteLine ("Output file bmpsave.bmp");
+				bmp.Save ("bmpsave.bmp", ImageFormat.Bmp);
+			}
+			else {
+				Console.WriteLine ("usage: bmpsave.exe <filename>");
+			}
+		}
+	}
 }

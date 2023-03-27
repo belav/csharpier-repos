@@ -3,15 +3,15 @@
 
 class A
 {
-    public readonly int a;
-    
-    public void Inc (out int a)
-    {
+	public readonly int a;
+	
+	public void Inc (out int a)
+	{
             a = 3;
-    }
-    
-    public void IncCall ()
-    {
-        Inc (out a);
-    }
+	}
+	
+	public void IncCall ()
+	{
+		Inc (out a);
+	}
 }

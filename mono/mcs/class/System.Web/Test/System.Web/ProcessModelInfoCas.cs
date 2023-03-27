@@ -2,7 +2,7 @@
 // ProcessModelInfoCas.cs - CAS unit tests for System.Web.ProcessModelInfo
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,71 +35,71 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ProcessModelInfoCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ProcessModelInfoCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0 ()
-        {
-            new ProcessModelInfo ();
-            // everything else is static so...
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0 ()
+		{
+			new ProcessModelInfo ();
+			// everything else is static so...
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetCurrentProcessInfo_Deny_High ()
-        {
-            ProcessModelInfo.GetCurrentProcessInfo ();
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
+		[ExpectedException (typeof (SecurityException))]
+		public void GetCurrentProcessInfo_Deny_High ()
+		{
+			ProcessModelInfo.GetCurrentProcessInfo ();
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
-        public void GetCurrentProcessInfo_PermitOnly_High ()
-        {
-            try {
-                ProcessModelInfo.GetCurrentProcessInfo ();
-            }
-            catch (HttpException) {
-                // ms 2.x - kind of expected (as we're not running ASP.NET)
-            }
-            catch (TypeInitializationException) {
-                // ms 1.x - fails initializing HttpRuntime
-            }
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
+		public void GetCurrentProcessInfo_PermitOnly_High ()
+		{
+			try {
+				ProcessModelInfo.GetCurrentProcessInfo ();
+			}
+			catch (HttpException) {
+				// ms 2.x - kind of expected (as we're not running ASP.NET)
+			}
+			catch (TypeInitializationException) {
+				// ms 1.x - fails initializing HttpRuntime
+			}
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetHistory_Deny_High ()
-        {
-            ProcessModelInfo.GetHistory (0);
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
+		[ExpectedException (typeof (SecurityException))]
+		public void GetHistory_Deny_High ()
+		{
+			ProcessModelInfo.GetHistory (0);
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
-        public void GetHistory_PermitOnly_High ()
-        {
-            try {
-                ProcessModelInfo.GetHistory (0);
-            }
-            catch (HttpException) {
-                // ms 2.x - kind of expected (as we're not running ASP.NET)
-            }
-            catch (NotImplementedException) {
-                // mono
-            }
-            catch (TypeInitializationException) {
-                // ms 1.x - fails initializing HttpRuntime
-            }
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
+		public void GetHistory_PermitOnly_High ()
+		{
+			try {
+				ProcessModelInfo.GetHistory (0);
+			}
+			catch (HttpException) {
+				// ms 2.x - kind of expected (as we're not running ASP.NET)
+			}
+			catch (NotImplementedException) {
+				// mono
+			}
+			catch (TypeInitializationException) {
+				// ms 1.x - fails initializing HttpRuntime
+			}
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (ProcessModelInfo); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (ProcessModelInfo); }
+		}
+	}
 }

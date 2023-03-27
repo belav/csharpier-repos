@@ -30,17 +30,17 @@
 
 namespace System.Management.Instrumentation
 {
-    [InstrumentationClass (InstrumentationType.Event)]
-    public abstract class BaseEvent : IEvent {
-        [MonoTODO]
-        protected BaseEvent()
-        {
-        }
+	[InstrumentationClass (InstrumentationType.Event)]
+	public abstract class BaseEvent : IEvent {
+		[MonoTODO]
+		protected BaseEvent()
+		{
+		}
 
-        [MonoTODO]
-        public void Fire()
-        {
-            throw new NotImplementedException();
-        }
-    }
+		[MonoTODO]
+		public void Fire()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

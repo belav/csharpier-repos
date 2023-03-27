@@ -1,9 +1,9 @@
 //
 // CollectionsUtilCas.cs 
-//    - CAS unit tests for System.Collections.Specialized.CollectionsUtil
+//	- CAS unit tests for System.Collections.Specialized.CollectionsUtil
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -42,36 +42,36 @@ using MonoTests.System.Collections.Specialized;
 
 namespace MonoCasTests.System.Collections.Specialized {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CollectionsUtilCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CollectionsUtilCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests_Deny_Unrestricted ()
-        {
-            Assert.IsNotNull (CollectionsUtil.CreateCaseInsensitiveHashtable (), "CreateCaseInsensitiveHashtable()");
-            Assert.IsNotNull (CollectionsUtil.CreateCaseInsensitiveHashtable (1), "CreateCaseInsensitiveHashtable(int)");
-            Assert.IsNotNull (CollectionsUtil.CreateCaseInsensitiveHashtable (new Hashtable ()), "CreateCaseInsensitiveHashtable(IDictionary)");
-            Assert.IsNotNull (CollectionsUtil.CreateCaseInsensitiveSortedList (), "CreateCaseInsensitiveSortedList");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTests_Deny_Unrestricted ()
+		{
+			Assert.IsNotNull (CollectionsUtil.CreateCaseInsensitiveHashtable (), "CreateCaseInsensitiveHashtable()");
+			Assert.IsNotNull (CollectionsUtil.CreateCaseInsensitiveHashtable (1), "CreateCaseInsensitiveHashtable(int)");
+			Assert.IsNotNull (CollectionsUtil.CreateCaseInsensitiveHashtable (new Hashtable ()), "CreateCaseInsensitiveHashtable(IDictionary)");
+			Assert.IsNotNull (CollectionsUtil.CreateCaseInsensitiveSortedList (), "CreateCaseInsensitiveSortedList");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CollectionsUtil).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor()");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CollectionsUtil).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor()");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }
 
 #endif

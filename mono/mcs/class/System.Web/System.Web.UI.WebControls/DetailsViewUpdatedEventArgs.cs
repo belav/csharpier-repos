@@ -32,60 +32,60 @@ using System.Collections.Specialized;
 
 namespace System.Web.UI.WebControls
 {
-    public class DetailsViewUpdatedEventArgs : EventArgs
-    {
-        int rowsAffected;
-        Exception e;
-        bool exceptionHandled;
-        bool keepEditMode;
-        IOrderedDictionary keys;
-        IOrderedDictionary newValues;
-        IOrderedDictionary oldValues;
-        
-        public DetailsViewUpdatedEventArgs (int affectedRows, Exception e)
-        {
-            this.rowsAffected = affectedRows;
-            this.e = e;
-            this.exceptionHandled = false;
-            this.keepEditMode = false;
-        }
-        
-        internal DetailsViewUpdatedEventArgs (int affectedRows, Exception e, IOrderedDictionary keys, IOrderedDictionary oldValues, IOrderedDictionary newValues)
-            : this (affectedRows, e)
-        {
-            this.keys = keys;
-            this.newValues = newValues;
-            this.oldValues = oldValues;
-        }
-        
-        public int AffectedRows {
-            get { return rowsAffected; }
-        }
+	public class DetailsViewUpdatedEventArgs : EventArgs
+	{
+		int rowsAffected;
+		Exception e;
+		bool exceptionHandled;
+		bool keepEditMode;
+		IOrderedDictionary keys;
+		IOrderedDictionary newValues;
+		IOrderedDictionary oldValues;
+		
+		public DetailsViewUpdatedEventArgs (int affectedRows, Exception e)
+		{
+			this.rowsAffected = affectedRows;
+			this.e = e;
+			this.exceptionHandled = false;
+			this.keepEditMode = false;
+		}
+		
+		internal DetailsViewUpdatedEventArgs (int affectedRows, Exception e, IOrderedDictionary keys, IOrderedDictionary oldValues, IOrderedDictionary newValues)
+			: this (affectedRows, e)
+		{
+			this.keys = keys;
+			this.newValues = newValues;
+			this.oldValues = oldValues;
+		}
+		
+		public int AffectedRows {
+			get { return rowsAffected; }
+		}
 
-        public Exception Exception {
-            get { return e; }
-        }
+		public Exception Exception {
+			get { return e; }
+		}
 
-        public bool ExceptionHandled {
-            get { return exceptionHandled; }
-            set { exceptionHandled = value; }
-        }
-    
-        public bool KeepInEditMode {
-            get { return keepEditMode; }
-            set { keepEditMode = value; }
-        }
+		public bool ExceptionHandled {
+			get { return exceptionHandled; }
+			set { exceptionHandled = value; }
+		}
+	
+		public bool KeepInEditMode {
+			get { return keepEditMode; }
+			set { keepEditMode = value; }
+		}
 
-        public IOrderedDictionary Keys {
-            get { return keys; }
-        }
+		public IOrderedDictionary Keys {
+			get { return keys; }
+		}
 
-        public IOrderedDictionary NewValues {
-            get { return newValues; }
-        }
+		public IOrderedDictionary NewValues {
+			get { return newValues; }
+		}
 
-        public IOrderedDictionary OldValues {
-            get { return oldValues; }
-        }
-    }
+		public IOrderedDictionary OldValues {
+			get { return oldValues; }
+		}
+	}
 }

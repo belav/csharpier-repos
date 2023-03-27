@@ -1,4 +1,4 @@
-//
+﻿//
 // ScriptingSectionGroup.cs
 //
 // Author:
@@ -34,16 +34,16 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    public sealed class ScriptingSectionGroup : ConfigurationSectionGroup
-    {
-        [ConfigurationProperty ("scriptResourceHandler")]
-        public ScriptingScriptResourceHandlerSection ScriptResourceHandler {
-            get { return (ScriptingScriptResourceHandlerSection) Sections ["scriptResourceHandler"]; }
-        }
+	public sealed class ScriptingSectionGroup : ConfigurationSectionGroup
+	{
+		[ConfigurationProperty ("scriptResourceHandler")]
+		public ScriptingScriptResourceHandlerSection ScriptResourceHandler {
+			get { return (ScriptingScriptResourceHandlerSection) Sections ["scriptResourceHandler"]; }
+		}
 
-        [ConfigurationProperty ("webServices")]
-        public ScriptingWebServicesSectionGroup WebServices {
-            get { return (ScriptingWebServicesSectionGroup) SectionGroups ["webServices"]; }
-        }
-    }
+		[ConfigurationProperty ("webServices")]
+		public ScriptingWebServicesSectionGroup WebServices {
+			get { return (ScriptingWebServicesSectionGroup) SectionGroups ["webServices"]; }
+		}
+	}
 }

@@ -36,34 +36,34 @@ using System.Reflection;
 
 namespace System.Runtime.InteropServices
 {
-    [ComVisible (true)]
-    public sealed class ExtensibleClassFactory
-    {
-        static readonly Hashtable hashtable = new Hashtable ();
+	[ComVisible (true)]
+	public sealed class ExtensibleClassFactory
+	{
+		static readonly Hashtable hashtable = new Hashtable ();
 
-        private ExtensibleClassFactory ()
-        {
-        }
+		private ExtensibleClassFactory ()
+		{
+		}
 
-        internal static ObjectCreationDelegate GetObjectCreationCallback (Type t)
-        {
-            return hashtable[t] as ObjectCreationDelegate;
-        }
+		internal static ObjectCreationDelegate GetObjectCreationCallback (Type t)
+		{
+			return hashtable[t] as ObjectCreationDelegate;
+		}
 
-        public static void RegisterObjectCreationCallback (ObjectCreationDelegate callback) {
-            int i = 1;
-            StackTrace trace = new StackTrace (false);
-            while (i < trace.FrameCount) {
-                StackFrame frame = trace.GetFrame (i);
-                MethodBase m = frame.GetMethod ();
-                if (m.MemberType == MemberTypes.Constructor && m.IsStatic) {
-                    hashtable.Add (m.DeclaringType, callback);
-                    return;
-                }
-                i++;
-            }
-            throw new System.InvalidOperationException (
-                "RegisterObjectCreationCallback must be called from .cctor of class derived from ComImport type.");
-        }
-    }
+		public static void RegisterObjectCreationCallback (ObjectCreationDelegate callback) {
+			int i = 1;
+			StackTrace trace = new StackTrace (false);
+			while (i < trace.FrameCount) {
+				StackFrame frame = trace.GetFrame (i);
+				MethodBase m = frame.GetMethod ();
+				if (m.MemberType == MemberTypes.Constructor && m.IsStatic) {
+					hashtable.Add (m.DeclaringType, callback);
+					return;
+				}
+				i++;
+			}
+			throw new System.InvalidOperationException (
+				"RegisterObjectCreationCallback must be called from .cctor of class derived from ComImport type.");
+		}
+	}
 }

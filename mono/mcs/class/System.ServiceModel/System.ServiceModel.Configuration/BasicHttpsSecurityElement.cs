@@ -2,8 +2,8 @@
 // BasicHttpsSecurityElement.cs
 //
 // Authors:
-//    Atsushi Enomoto <atsushi@ximian.com>
-//    Martin Baulig <martin.baulig@xamarin.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
+//	Martin Baulig <martin.baulig@xamarin.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 // Copyright (c) 2012 Xamarin Inc. (http://www.xamarin.com)
@@ -56,36 +56,36 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class BasicHttpsSecurityElement
-         : ConfigurationElement
-    {
-        // Properties
+	public sealed class BasicHttpsSecurityElement
+		 : ConfigurationElement
+	{
+		// Properties
 
-        [ConfigurationProperty ("message",
-             Options = ConfigurationPropertyOptions.None)]
-        public BasicHttpMessageSecurityElement Message {
-            get { return (BasicHttpMessageSecurityElement) base ["message"]; }
-        }
+		[ConfigurationProperty ("message",
+			 Options = ConfigurationPropertyOptions.None)]
+		public BasicHttpMessageSecurityElement Message {
+			get { return (BasicHttpMessageSecurityElement) base ["message"]; }
+		}
 
-        [ConfigurationProperty ("mode",
-             DefaultValue = "None",
-             Options = ConfigurationPropertyOptions.None)]
-        public BasicHttpsSecurityMode Mode {
-            get { return (BasicHttpsSecurityMode) base ["mode"]; }
-            set { base ["mode"] = value; }
-        }
+		[ConfigurationProperty ("mode",
+			 DefaultValue = "None",
+			 Options = ConfigurationPropertyOptions.None)]
+		public BasicHttpsSecurityMode Mode {
+			get { return (BasicHttpsSecurityMode) base ["mode"]; }
+			set { base ["mode"] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
 
-        [ConfigurationProperty ("transport",
-             Options = ConfigurationPropertyOptions.None)]
-        public HttpTransportSecurityElement Transport {
-            get { return (HttpTransportSecurityElement) base ["transport"]; }
-        }
+		[ConfigurationProperty ("transport",
+			 Options = ConfigurationPropertyOptions.None)]
+		public HttpTransportSecurityElement Transport {
+			get { return (HttpTransportSecurityElement) base ["transport"]; }
+		}
 
 
-    }
+	}
 
 }

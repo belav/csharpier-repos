@@ -2,7 +2,7 @@
 // System.Management.ManagementDateTimeConverter
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,35 +30,35 @@
 
 namespace System.Management
 {
-    public sealed class ManagementDateTimeConverter
-    {
-        internal ManagementDateTimeConverter ()
-        {
-        }
+	public sealed class ManagementDateTimeConverter
+	{
+		internal ManagementDateTimeConverter ()
+		{
+		}
 
-        [MonoTODO]
-        public static DateTime ToDateTime (string dmtfDate)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static DateTime ToDateTime (string dmtfDate)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static string ToDmtfDateTime (DateTime date)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static string ToDmtfDateTime (DateTime date)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static string ToDmtfTimeInterval (TimeSpan timespan)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static string ToDmtfTimeInterval (TimeSpan timespan)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static TimeSpan ToTimeSpan (string dmtfTimespan)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public static TimeSpan ToTimeSpan (string dmtfTimespan)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

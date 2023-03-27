@@ -1,4 +1,4 @@
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using System.CommandLine.Parsing;
 using System.Threading.Tasks;
 

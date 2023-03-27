@@ -2,7 +2,7 @@
 // AssemblyNameCas.cs - CAS unit tests for System.Reflection.AssemblyName
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,100 +37,100 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.Reflection {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class AssemblyNameCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class AssemblyNameCas {
 
-        private MonoTests.System.Reflection.AssemblyNameTest ant;
+		private MonoTests.System.Reflection.AssemblyNameTest ant;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            ant = new MonoTests.System.Reflection.AssemblyNameTest ();
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			ant = new MonoTests.System.Reflection.AssemblyNameTest ();
+		}
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-            ant.SetUp ();
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+			ant.SetUp ();
+		}
 
-        [TearDown]
-        public void TearDown ()
-        {
-            ant.TearDown ();
-        }
+		[TearDown]
+		public void TearDown ()
+		{
+			ant.TearDown ();
+		}
 
-        // Partial Trust Tests
+		// Partial Trust Tests
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void PartialTrust_Deny_Unrestricted ()
-        {
-            // call "normal" unit with reduced privileges
-            ant.Constructor0 ();
-            ant.SetPublicKey ();
-            ant.SetPublicKeyToken ();
-            ant.Clone_Empty ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void PartialTrust_Deny_Unrestricted ()
+		{
+			// call "normal" unit with reduced privileges
+			ant.Constructor0 ();
+			ant.SetPublicKey ();
+			ant.SetPublicKeyToken ();
+			ant.Clone_Empty ();
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-        public void PartialTrust_PermitOnly_SerializationFormatter ()
-        {
-            ant.Serialization_WithoutStrongName ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
+		public void PartialTrust_PermitOnly_SerializationFormatter ()
+		{
+			ant.Serialization_WithoutStrongName ();
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        public void PartialTrust_PermitOnly_UnmanagedCode ()
-        {
-            ant.KeyPair ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+		public void PartialTrust_PermitOnly_UnmanagedCode ()
+		{
+			ant.KeyPair ();
+		}
 
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true, SerializationFormatter = true)]
-        public void PartialTrust_PermitOnly_UnmanagedCodeSerializationFormatter ()
-        {
-            // UnmanagedCode is required to create a StrongNameKeyPair instance
-            ant.Serialization ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true, SerializationFormatter = true)]
+		public void PartialTrust_PermitOnly_UnmanagedCodeSerializationFormatter ()
+		{
+			// UnmanagedCode is required to create a StrongNameKeyPair instance
+			ant.Serialization ();
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void PartialTrust_Deny_SerializationFormatter ()
-        {
-            ant.Serialization ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void PartialTrust_Deny_SerializationFormatter ()
+		{
+			ant.Serialization ();
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void PartialTrust_Deny_UnmanagedCode ()
-        {
-            ant.KeyPair ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void PartialTrust_Deny_UnmanagedCode ()
+		{
+			ant.KeyPair ();
+		}
 
-        [Test]
-        [FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        public void PartialTrust_PermitOnly_FileIOPermission ()
-        {
-            // call "normal" unit with reduced privileges
-            ant.FullName_Name ();
-            ant.FullName_Version ();
-            ant.FullName_Culture ();
-            ant.FullName_PublicKey ();
-            ant.FullName_PublicKeyToken ();
-            ant.FullName_VersionCulture ();
-            ant.FullName_VersionPublicKey ();
-            ant.FullName_CulturePublicKey ();
-            ant.HashAlgorithm ();
-            ant.Clone_Empty ();
-            // mostly because they call Assembly.GetName
-        }
-    }
+		[Test]
+		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+		public void PartialTrust_PermitOnly_FileIOPermission ()
+		{
+			// call "normal" unit with reduced privileges
+			ant.FullName_Name ();
+			ant.FullName_Version ();
+			ant.FullName_Culture ();
+			ant.FullName_PublicKey ();
+			ant.FullName_PublicKeyToken ();
+			ant.FullName_VersionCulture ();
+			ant.FullName_VersionPublicKey ();
+			ant.FullName_CulturePublicKey ();
+			ant.HashAlgorithm ();
+			ant.Clone_Empty ();
+			// mostly because they call Assembly.GetName
+		}
+	}
 }

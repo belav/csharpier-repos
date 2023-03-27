@@ -37,85 +37,85 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRelationCollection_Clear : GHTBase
 {
-    private bool changedOccur=false;
+	private bool changedOccur=false;
 
-    [Test] public void Main()
-    {
-        DataRelationCollection_Clear tc = new DataRelationCollection_Clear();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRelationCollection_Clear");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
+	[Test] public void Main()
+	{
+		DataRelationCollection_Clear tc = new DataRelationCollection_Clear();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRelationCollection_Clear");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("DataRelationCollection_Clear");
-            DataRelationCollection_Clear1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-    private void DataRelationCollection_Clear1()
-    {
-        DataSet ds = getDataSet();
-        
-        ds.Relations.Add(ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]);
-        ds.Relations.CollectionChanged+=new System.ComponentModel.CollectionChangeEventHandler(Relations_CollectionChanged);
-        ds.Relations.Clear();
-        Compare(ds.Relations.Count,0);
-        Compare(changedOccur,true);
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    }
-    private DataSet getDataSet()
-    {
-        DataSet ds = new DataSet();
-        DataTable dt1 = DataProvider.CreateParentDataTable();
-        DataTable dt2 = DataProvider.CreateChildDataTable();
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-        ds.Tables.Add(dt1);
-        ds.Tables.Add(dt2);
-        return ds;
-    }
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    private void Relations_CollectionChanged(object sender, System.ComponentModel.CollectionChangeEventArgs e)
-    {
-        changedOccur = true;
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("DataRelationCollection_Clear");
+			DataRelationCollection_Clear1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
+	private void DataRelationCollection_Clear1()
+	{
+		DataSet ds = getDataSet();
+		
+		ds.Relations.Add(ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]);
+		ds.Relations.CollectionChanged+=new System.ComponentModel.CollectionChangeEventHandler(Relations_CollectionChanged);
+		ds.Relations.Clear();
+		Compare(ds.Relations.Count,0);
+		Compare(changedOccur,true);
 
-    }
+
+	}
+	private DataSet getDataSet()
+	{
+		DataSet ds = new DataSet();
+		DataTable dt1 = DataProvider.CreateParentDataTable();
+		DataTable dt2 = DataProvider.CreateChildDataTable();
+
+		ds.Tables.Add(dt1);
+		ds.Tables.Add(dt2);
+		return ds;
+	}
+
+	private void Relations_CollectionChanged(object sender, System.ComponentModel.CollectionChangeEventArgs e)
+	{
+		changedOccur = true;
+
+	}
 }
 }

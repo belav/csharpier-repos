@@ -3,7 +3,7 @@
 //
 // Authors:
 //      Peter Van Isacker (sclytrack@planetinternet.be)
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Peter Van Isacker
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -32,73 +32,73 @@ using System.Security;
 using System.Security.Permissions;
 
 namespace System.Messaging {
-    
-    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct |
-        AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Event,
-        AllowMultiple=true, Inherited=false)]
-    [Serializable]
-    public class MessageQueuePermissionAttribute: CodeAccessSecurityAttribute {
+	
+	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct |
+		AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Event,
+		AllowMultiple=true, Inherited=false)]
+	[Serializable]
+	public class MessageQueuePermissionAttribute: CodeAccessSecurityAttribute {
 
-        private MessageQueuePermissionAccess _permissionAccess;
-        private string _machineName;
-        private string _label;
-        private string _category;
-        private string _path;
+		private MessageQueuePermissionAccess _permissionAccess;
+		private string _machineName;
+		private string _label;
+		private string _category;
+		private string _path;
 
-        public MessageQueuePermissionAttribute (SecurityAction action)
-            :base (action)
-        {
-        }
-        
-        public string Category {
-            get { return _category; }
-            set {
-                if (value == null)
-                    throw new InvalidOperationException ("null");
-                _category = value;
-            }
-        }
-        
-        public string Label {
-            get { return _label; }
-            set {
-                if (value == null)
-                    throw new InvalidOperationException ("null");
-                _label = value;
-            }
-        }
-        
-        public string MachineName {
-            get { return _machineName; }
-            set {
-                if (value == null)
-                    throw new InvalidOperationException ("null");
-                MessageQueuePermission.ValidateMachineName (value);
-                _machineName = value;
-            }
-        }
-        
-        public string Path {
-            get { return _path; }
-            set {
-                if (value == null)
-                    throw new InvalidOperationException ("null");
-                MessageQueuePermission.ValidatePath (value);
-                _path = value;
-            }
-        }
-        
-        public MessageQueuePermissionAccess PermissionAccess {
-            get { return _permissionAccess; }
-            set { _permissionAccess = value; }
-        }
-        
-        public override IPermission CreatePermission ()
-        {
-            if (base.Unrestricted)
-                return new MessageQueuePermission (PermissionState.Unrestricted);
-            else
-                return new MessageQueuePermission (_permissionAccess, _machineName, _label, _category);
-        }
-    }
+		public MessageQueuePermissionAttribute (SecurityAction action)
+			:base (action)
+		{
+		}
+		
+		public string Category {
+			get { return _category; }
+			set {
+				if (value == null)
+					throw new InvalidOperationException ("null");
+				_category = value;
+			}
+		}
+		
+		public string Label {
+			get { return _label; }
+			set {
+				if (value == null)
+					throw new InvalidOperationException ("null");
+				_label = value;
+			}
+		}
+		
+		public string MachineName {
+			get { return _machineName; }
+			set {
+				if (value == null)
+					throw new InvalidOperationException ("null");
+				MessageQueuePermission.ValidateMachineName (value);
+				_machineName = value;
+			}
+		}
+		
+		public string Path {
+			get { return _path; }
+			set {
+				if (value == null)
+					throw new InvalidOperationException ("null");
+				MessageQueuePermission.ValidatePath (value);
+				_path = value;
+			}
+		}
+		
+		public MessageQueuePermissionAccess PermissionAccess {
+			get { return _permissionAccess; }
+			set { _permissionAccess = value; }
+		}
+		
+		public override IPermission CreatePermission ()
+		{
+			if (base.Unrestricted)
+				return new MessageQueuePermission (PermissionState.Unrestricted);
+			else
+				return new MessageQueuePermission (_permissionAccess, _machineName, _label, _category);
+		}
+	}
 }

@@ -30,26 +30,26 @@ using System.ComponentModel;
 
 namespace System.Web.UI {
 
-    [EditorBrowsable (EditorBrowsableState.Advanced)]
-    public class ControlSkin
-    {
-        Type controlType;
-        ControlSkinDelegate themeDelegate;
+	[EditorBrowsable (EditorBrowsableState.Advanced)]
+	public class ControlSkin
+	{
+		Type controlType;
+		ControlSkinDelegate themeDelegate;
 
-        public ControlSkin (Type controlType, ControlSkinDelegate themeDelegate)
-        {
-            this.controlType = controlType;
-            this.themeDelegate = themeDelegate;
-        }
+		public ControlSkin (Type controlType, ControlSkinDelegate themeDelegate)
+		{
+			this.controlType = controlType;
+			this.themeDelegate = themeDelegate;
+		}
 
-        public void ApplySkin (Control control)
-        {
-            themeDelegate (control);
-        }
+		public void ApplySkin (Control control)
+		{
+			themeDelegate (control);
+		}
 
-        public Type ControlType {
-            get { return controlType; }
-        }
-    }
+		public Type ControlType {
+			get { return controlType; }
+		}
+	}
 
 }

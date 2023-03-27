@@ -2,7 +2,7 @@
 // WebChannelFactory.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -37,62 +37,62 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Web
 {
-    public class WebChannelFactory<TChannel> : ChannelFactory<TChannel>
-    {
+	public class WebChannelFactory<TChannel> : ChannelFactory<TChannel>
+	{
 #if !MOBILE
-        public WebChannelFactory ()
-            : base ()
-        {
-        }
+		public WebChannelFactory ()
+			: base ()
+		{
+		}
 
-        public WebChannelFactory(Binding binding)
-            : base(binding)
-        {
-        }
+		public WebChannelFactory(Binding binding)
+			: base(binding)
+		{
+		}
 
-        public WebChannelFactory(ServiceEndpoint endpoint)
-            : base(endpoint)
-        {
-        }
+		public WebChannelFactory(ServiceEndpoint endpoint)
+			: base(endpoint)
+		{
+		}
 #endif
 
-        public WebChannelFactory(Type channelType)
-            : base (channelType)
-        {
-        }
+		public WebChannelFactory(Type channelType)
+			: base (channelType)
+		{
+		}
 
-        public WebChannelFactory (string endpointConfigurationName)
-            : base (endpointConfigurationName)
-        {
-        }
+		public WebChannelFactory (string endpointConfigurationName)
+			: base (endpointConfigurationName)
+		{
+		}
 
-        public WebChannelFactory (Uri remoteAddress)
-            : this (String.Empty, remoteAddress)
-        {
-        }
+		public WebChannelFactory (Uri remoteAddress)
+			: this (String.Empty, remoteAddress)
+		{
+		}
 
-        public WebChannelFactory (string endpointConfigurationName, Uri remoteAddress)
-            : base (endpointConfigurationName)
-        {
-            Endpoint.Address = new EndpointAddress (remoteAddress);
-        }
+		public WebChannelFactory (string endpointConfigurationName, Uri remoteAddress)
+			: base (endpointConfigurationName)
+		{
+			Endpoint.Address = new EndpointAddress (remoteAddress);
+		}
 
-        public WebChannelFactory (Binding binding, Uri remoteAddress)
-            : base (binding, new EndpointAddress (remoteAddress))
-        {
-        }
+		public WebChannelFactory (Binding binding, Uri remoteAddress)
+			: base (binding, new EndpointAddress (remoteAddress))
+		{
+		}
 
-        protected override void OnOpening ()
-        {
+		protected override void OnOpening ()
+		{
 #if !MOBILE
-            if (Endpoint.Behaviors.Find<WebHttpBehavior> () == null)
-                Endpoint.Behaviors.Add (new WebHttpBehavior ());
+			if (Endpoint.Behaviors.Find<WebHttpBehavior> () == null)
+				Endpoint.Behaviors.Add (new WebHttpBehavior ());
 #endif
 
-            if (Endpoint.Binding == null)
-                Endpoint.Binding = new WebHttpBinding ();
+			if (Endpoint.Binding == null)
+				Endpoint.Binding = new WebHttpBinding ();
 
-            base.OnOpening ();
-        }
-    }
+			base.OnOpening ();
+		}
+	}
 }

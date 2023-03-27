@@ -1,9 +1,9 @@
 //
 // CacheSectionTest.cs 
-//    - unit tests for System.Web.Configuration.CacheSection
+//	- unit tests for System.Web.Configuration.CacheSection
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,35 +38,35 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-    [TestFixture]
-    public class CacheSectionTest  {
+	[TestFixture]
+	public class CacheSectionTest  {
 
-        [Test]
-        public void Defaults ()
-        {
-            CacheSection c = new CacheSection ();
-            Assert.AreEqual (false, c.DisableExpiration, "A1");
-            Assert.AreEqual (false, c.DisableMemoryCollection, "A2");
-            Assert.AreEqual (0, c.PercentagePhysicalMemoryUsedLimit, "A3");
-            Assert.AreEqual (0, c.PrivateBytesLimit, "A4");
-            Assert.AreEqual (TimeSpan.FromMinutes (2), c.PrivateBytesPollTime, "A4");
-        }
+		[Test]
+		public void Defaults ()
+		{
+			CacheSection c = new CacheSection ();
+			Assert.AreEqual (false, c.DisableExpiration, "A1");
+			Assert.AreEqual (false, c.DisableMemoryCollection, "A2");
+			Assert.AreEqual (0, c.PercentagePhysicalMemoryUsedLimit, "A3");
+			Assert.AreEqual (0, c.PrivateBytesLimit, "A4");
+			Assert.AreEqual (TimeSpan.FromMinutes (2), c.PrivateBytesPollTime, "A4");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void PercentagePhysicalMemoryUsedLimit_validationFailure()
-        {
-            CacheSection c = new CacheSection ();
-            c.PercentagePhysicalMemoryUsedLimit = -1;
-        }
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void PercentagePhysicalMemoryUsedLimit_validationFailure()
+		{
+			CacheSection c = new CacheSection ();
+			c.PercentagePhysicalMemoryUsedLimit = -1;
+		}
 
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void PrivateBytesLimit_validationFailure ()
-        {
-            CacheSection c = new CacheSection ();
-            c.PrivateBytesLimit = -1L;
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void PrivateBytesLimit_validationFailure ()
+		{
+			CacheSection c = new CacheSection ();
+			c.PrivateBytesLimit = -1L;
+		}
+	}
 }
 

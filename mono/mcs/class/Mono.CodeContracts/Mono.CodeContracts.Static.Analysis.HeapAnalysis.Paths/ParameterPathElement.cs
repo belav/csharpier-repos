@@ -2,7 +2,7 @@
 // ParameterPathElement.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,37 +31,37 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths {
-    class ParameterPathElement : PathElement<Parameter> {
-        public ParameterPathElement (Parameter p, string description,
-                                     SymFunction c, IMetaDataProvider metaDataProvider)
-            : base (p, description, c)
-        {
-            TypeNode type = metaDataProvider.ParameterType (p);
-            ResultType = metaDataProvider.ManagedPointer (type);
+	class ParameterPathElement : PathElement<Parameter> {
+		public ParameterPathElement (Parameter p, string description,
+		                             SymFunction c, IMetaDataProvider metaDataProvider)
+			: base (p, description, c)
+		{
+			TypeNode type = metaDataProvider.ParameterType (p);
+			ResultType = metaDataProvider.ManagedPointer (type);
 
-            if (metaDataProvider.IsManagedPointer (type))
-                this.isManagedPointer = true;
-        }
+			if (metaDataProvider.IsManagedPointer (type))
+				this.isManagedPointer = true;
+		}
 
-        public override bool IsParameter
-        {
-            get { return true; }
-        }
+		public override bool IsParameter
+		{
+			get { return true; }
+		}
 
-        public override bool IsAddressOf
-        {
-            get { return false; }
-        }
+		public override bool IsAddressOf
+		{
+			get { return false; }
+		}
 
-        public override Result Decode<Data, Result, Visitor, Label> (Label label, Visitor visitor, Data data)
-        {
-            Parameter p = this.Element;
-            return visitor.LoadArg (label, p, false, Dummy.Value, data);
-        }
+		public override Result Decode<Data, Result, Visitor, Label> (Label label, Visitor visitor, Data data)
+		{
+			Parameter p = this.Element;
+			return visitor.LoadArg (label, p, false, Dummy.Value, data);
+		}
 
-        public override bool IsCallerVisible ()
-        {
-            return true;
-        }
-    }
+		public override bool IsCallerVisible ()
+		{
+			return true;
+		}
+	}
 }

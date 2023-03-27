@@ -2,7 +2,7 @@
 // ExprAdd.cs
 //
 // Authors:
-//    Chris Bacon (chrisbacon76@gmail.com)
+//	Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -32,16 +32,16 @@ using System.Linq;
 using System.Text;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-    class ExprAdd : ExprBinaryOpArithmetic {
+	class ExprAdd : ExprBinaryOpArithmetic {
 
-        public ExprAdd (MethodInfo methodInfo, Expr left, Expr right, Sn signage, bool overflow)
-            : base (methodInfo, left, right, signage, overflow)
-        {
-        }
+		public ExprAdd (MethodInfo methodInfo, Expr left, Expr right, Sn signage, bool overflow)
+			: base (methodInfo, left, right, signage, overflow)
+		{
+		}
 
-        public override ExprType ExprType {
-            get { return ExprType.Add; }
-        }
+		public override ExprType ExprType {
+			get { return ExprType.Add; }
+		}
 
-    }
+	}
 }

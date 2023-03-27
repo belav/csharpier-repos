@@ -5,6 +5,6 @@ using System;
 
 class X
 {
-    void Test (void a)
-    { }
+	void Test (void a)
+	{ }
 }

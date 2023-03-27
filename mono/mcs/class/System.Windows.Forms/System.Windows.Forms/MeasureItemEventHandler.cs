@@ -20,11 +20,11 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jordi Mas i Hernandez, jordi@ximian.com
+//	Jordi Mas i Hernandez, jordi@ximian.com
 //
 //
 
 namespace System.Windows.Forms
 {
-    public delegate void MeasureItemEventHandler (object sender, MeasureItemEventArgs e);
+	public delegate void MeasureItemEventHandler (object sender, MeasureItemEventArgs e);
 }

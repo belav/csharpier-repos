@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Jordi Mas i Hernandez <jordi@ximian.com>
+//	Jordi Mas i Hernandez <jordi@ximian.com>
 //
 //
 // NOT COMPLETE
@@ -32,20 +32,20 @@ using System.Diagnostics;
 
 namespace System.Windows.Forms
 {
-    public sealed class GridTablesFactory
-    {
-        #region Constructors
-        internal GridTablesFactory ()
-        {
-        }
-        #endregion
+	public sealed class GridTablesFactory
+	{
+		#region Constructors
+		internal GridTablesFactory ()
+		{
+		}
+		#endregion
 
 
-        #region Public Instance Properties
-        public static DataGridTableStyle[] CreateGridTables (DataGridTableStyle gridTable, object dataSource, string dataMember, BindingContext bindingManager)
-        {
-            throw new NotImplementedException ();
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public static DataGridTableStyle[] CreateGridTables (DataGridTableStyle gridTable, object dataSource, string dataMember, BindingContext bindingManager)
+		{
+			throw new NotImplementedException ();
+		}
+		#endregion	// Public Instance Properties
+	}
 }

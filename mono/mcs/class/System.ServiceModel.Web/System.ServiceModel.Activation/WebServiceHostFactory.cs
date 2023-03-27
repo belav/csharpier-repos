@@ -2,7 +2,7 @@
 // WebServiceHostFactory.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -33,15 +33,15 @@ using System.Text;
 
 namespace System.ServiceModel.Activation
 {
-    public class WebServiceHostFactory : ServiceHostFactory
-    {
-        public WebServiceHostFactory ()
-        {
-        }
+	public class WebServiceHostFactory : ServiceHostFactory
+	{
+		public WebServiceHostFactory ()
+		{
+		}
 
-        protected override ServiceHost CreateServiceHost (Type serviceType, Uri [] baseAddresses)
-        {
-            return new WebServiceHost (serviceType, baseAddresses);
-        }
-    }
+		protected override ServiceHost CreateServiceHost (Type serviceType, Uri [] baseAddresses)
+		{
+			return new WebServiceHost (serviceType, baseAddresses);
+		}
+	}
 }

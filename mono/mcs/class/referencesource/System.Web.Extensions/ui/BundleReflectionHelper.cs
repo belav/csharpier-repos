@@ -1,4 +1,4 @@
-/* 
+﻿/* 
  * Security review: We're calling into potentially untrusted code, as we don't check the identity of the target. But since we're neither passing sensitive information nor treating the return values as trusted, this is fine.    
  */
 

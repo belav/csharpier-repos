@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.IDataEnvironment
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -38,22 +38,22 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Data
 {
-    public interface IDataEnvironment
-    {
-        ICollection Connections { get; }
+	public interface IDataEnvironment
+	{
+		ICollection Connections { get; }
 
-        DesignerDataConnection BuildConnection (IWin32Window owner, DesignerDataConnection initialConnection);
+		DesignerDataConnection BuildConnection (IWin32Window owner, DesignerDataConnection initialConnection);
 
-        string BuildQuery (IWin32Window owner, DesignerDataConnection connection, QueryBuilderMode mode, string initialQueryText);
+		string BuildQuery (IWin32Window owner, DesignerDataConnection connection, QueryBuilderMode mode, string initialQueryText);
 
-        DesignerDataConnection ConfigureConnection (IWin32Window owner, DesignerDataConnection connection, string name);
+		DesignerDataConnection ConfigureConnection (IWin32Window owner, DesignerDataConnection connection, string name);
 
-        CodeExpression GetCodeExpression (DesignerDataConnection connection);
+		CodeExpression GetCodeExpression (DesignerDataConnection connection);
 
-        IDesignerDataSchema GetConnectionSchema (DesignerDataConnection connection);
+		IDesignerDataSchema GetConnectionSchema (DesignerDataConnection connection);
 
-        DbConnection GetDesignTimeConnection (DesignerDataConnection connection);
+		DbConnection GetDesignTimeConnection (DesignerDataConnection connection);
 
-    }
+	}
 }
 

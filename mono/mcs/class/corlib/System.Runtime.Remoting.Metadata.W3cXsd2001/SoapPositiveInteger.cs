@@ -35,45 +35,45 @@ using System;
 
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
-    [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public sealed class SoapPositiveInteger : ISoapXsd
-    {
-        decimal _value;
-        
-        public SoapPositiveInteger()
-        {
-        }
-        
-        public SoapPositiveInteger (decimal value)
-        {
-            if (value <= 0) 
-                throw SoapHelper.GetException (this, "invalid " + value);
-            _value = value;
-        }
-        
-        public decimal Value {
-            get { return _value; } 
-            set { _value = value; }
-        }
+	[Serializable]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public sealed class SoapPositiveInteger : ISoapXsd
+	{
+		decimal _value;
+		
+		public SoapPositiveInteger()
+		{
+		}
+		
+		public SoapPositiveInteger (decimal value)
+		{
+			if (value <= 0) 
+				throw SoapHelper.GetException (this, "invalid " + value);
+			_value = value;
+		}
+		
+		public decimal Value {
+			get { return _value; } 
+			set { _value = value; }
+		}
 
-        public static string XsdType {
-            get { return "positiveInteger"; }
-        }
+		public static string XsdType {
+			get { return "positiveInteger"; }
+		}
 
-        public string GetXsdType()
-        {
-            return XsdType;
-        }
-        
-        public static SoapPositiveInteger Parse (string value)
-        {
-            return new SoapPositiveInteger (decimal.Parse (value));
-        }
+		public string GetXsdType()
+		{
+			return XsdType;
+		}
+		
+		public static SoapPositiveInteger Parse (string value)
+		{
+			return new SoapPositiveInteger (decimal.Parse (value));
+		}
 
-        public override string ToString()
-        {
-            return _value.ToString ();
-        }
-    }
+		public override string ToString()
+		{
+			return _value.ToString ();
+		}
+	}
 }

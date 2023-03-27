@@ -33,6 +33,6 @@ public class Test
     }
 
     public static int Main (string[] args) {
-        return TestDriver.RunTests (typeof (Test), args);
-    }
+		return TestDriver.RunTests (typeof (Test), args);
+	}
 }

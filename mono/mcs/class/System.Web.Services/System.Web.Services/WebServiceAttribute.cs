@@ -29,47 +29,47 @@
 //
 
 namespace System.Web.Services {
-    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, Inherited = true)]
-    public sealed class WebServiceAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, Inherited = true)]
+	public sealed class WebServiceAttribute : Attribute {
 
-        #region Fields
+		#region Fields
 
-        public const string DefaultNamespace = "http://tempuri.org/";
-        string description;
-        string name;
-        string ns;
+		public const string DefaultNamespace = "http://tempuri.org/";
+		string description;
+		string name;
+		string ns;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        
-        public WebServiceAttribute ()
-        {
-            description = String.Empty;
-            name = String.Empty;
-            ns = DefaultNamespace;
-        }
-        
-        #endregion // Constructors
+		
+		public WebServiceAttribute ()
+		{
+			description = String.Empty;
+			name = String.Empty;
+			ns = DefaultNamespace;
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public string Description {     
-            get { return description; }
-            set { description = value; }
-        }
-    
-        public string Name {
-            get { return name; }
-            set { name = value; }
-        }
-    
-        public string Namespace {
-            get { return ns; }
-            set { ns = value; }
-        }
+		public string Description { 	
+			get { return description; }
+			set { description = value; }
+		}
+	
+		public string Name {
+			get { return name; }
+			set { name = value; }
+		}
+	
+		public string Namespace {
+			get { return ns; }
+			set { ns = value; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

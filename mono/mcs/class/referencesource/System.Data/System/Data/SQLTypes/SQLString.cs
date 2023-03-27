@@ -38,7 +38,7 @@ namespace System.Data.SqlTypes {
     using System.Configuration.Assemblies;
 
     // Options that are used in comparison
-    [Flags,Serializable]
+	[Flags,Serializable]
     public enum SqlCompareOptions {
         None            = 0x00000000,
         IgnoreCase      = 0x00000001,
@@ -47,7 +47,7 @@ namespace System.Data.SqlTypes {
         IgnoreWidth     = 0x00000010, // ignore width
         BinarySort      = 0x00008000, // binary sorting
         BinarySort2     = 0x00004000, // binary sorting 2
-    }
+	}
 
     /// <devdoc>
     ///    <para>
@@ -137,8 +137,8 @@ namespace System.Data.SqlTypes {
             else {
                 m_fNotNull  = true;
 
-                // m_cmpInfo is set lazily, so that we don't need to pay the cost
-                // unless the string is used in comparison.
+				// m_cmpInfo is set lazily, so that we don't need to pay the cost
+				// unless the string is used in comparison.
                 m_cmpInfo   = null;
 
                 if (fUnicode) {
@@ -168,7 +168,7 @@ namespace System.Data.SqlTypes {
         ///    </para>
         /// </devdoc>
         public SqlString(int lcid, SqlCompareOptions compareOptions, byte[] data, int index, int count)
-            : this(lcid, compareOptions, data, index, count, true) {
+			: this(lcid, compareOptions, data, index, count, true) {
         }
 
         /// <devdoc>
@@ -177,7 +177,7 @@ namespace System.Data.SqlTypes {
         ///    </para>
         /// </devdoc>
         public SqlString(int lcid, SqlCompareOptions compareOptions, byte[] data)
-            : this(lcid, compareOptions, data, 0, data.Length, true) {
+			: this(lcid, compareOptions, data, 0, data.Length, true) {
         }
 
 /*
@@ -304,10 +304,10 @@ namespace System.Data.SqlTypes {
         }
 
         private void SetCompareInfo() {
-            SQLDebug.Check(!IsNull);
-            if (m_cmpInfo == null)
-                m_cmpInfo = (CultureInfo.GetCultureInfo(m_lcid)).CompareInfo;
-        }
+			SQLDebug.Check(!IsNull);
+			if (m_cmpInfo == null)
+				m_cmpInfo = (CultureInfo.GetCultureInfo(m_lcid)).CompareInfo;
+		}
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -315,9 +315,9 @@ namespace System.Data.SqlTypes {
         public CompareInfo CompareInfo {
             get {
                 if (!IsNull) {
-                    SetCompareInfo();
+					SetCompareInfo();
                     return m_cmpInfo;
-                }
+				}
                 else
                     throw new SqlNullValueException();
             }
@@ -407,7 +407,7 @@ namespace System.Data.SqlTypes {
                 throw new SqlTypeException(SQLResource.ConcatDiffCollationMessage);
 
             return new SqlString(x.m_lcid, x.m_flag, x.m_value + y.m_value,
-                    (x.m_cmpInfo == null) ? y.m_cmpInfo : x.m_cmpInfo);
+					(x.m_cmpInfo == null) ? y.m_cmpInfo : x.m_cmpInfo);
         }
 
         // StringCompare: Common compare function which is used by Compare and CompareTo

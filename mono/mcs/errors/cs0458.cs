@@ -4,8 +4,8 @@
 
 class C
 {
-    static void Foo()
-    {
-        bool? b = null as bool?;
-    }
+	static void Foo()
+	{
+		bool? b = null as bool?;
+	}
 }

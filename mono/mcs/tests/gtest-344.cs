@@ -2,13 +2,13 @@ using System;
 
 public abstract class ConfigurationElement
 {
-    protected ConfigurationElement ()
-    {
-    }
-    
-    public static void Main ()
-    {
-    }
+	protected ConfigurationElement ()
+	{
+	}
+	
+	public static void Main ()
+	{
+	}
 }
 
 public class CustomConfigurationElement : ConfigurationElement

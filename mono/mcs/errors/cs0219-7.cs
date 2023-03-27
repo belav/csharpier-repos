@@ -4,8 +4,8 @@
 
 class C
 {
-    public static void Main ()
-    {
-        const int C = 1;
-    }
+	public static void Main ()
+	{
+		const int C = 1;
+	}
 }

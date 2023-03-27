@@ -6,5 +6,5 @@ using N;
 
 public class Test: Lib
 {
-    public static void Main () {}
+	public static void Main () {}
 }

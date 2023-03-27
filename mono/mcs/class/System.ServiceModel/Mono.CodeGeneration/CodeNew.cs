@@ -28,46 +28,46 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeNew: CodeExpression
-    {
-        object value;
-        Type type;
-        ConstructorInfo ctor;
-        CodeExpression[] parameters;
-        
-        public CodeNew (Type type, params CodeExpression[] parameters)
-        {
-            this.type = type;
-            Type[] ptypes = new Type [parameters.Length];
-            for (int n=0; n<parameters.Length; n++)
-                ptypes [n] = parameters[n].GetResultType ();
-            ctor = type.GetConstructor (ptypes);
-            if (ctor == null)
-                throw new InvalidOperationException ("Constructor not found");
-            this.parameters = parameters;
-        }
+	public class CodeNew: CodeExpression
+	{
+		object value;
+		Type type;
+		ConstructorInfo ctor;
+		CodeExpression[] parameters;
+		
+		public CodeNew (Type type, params CodeExpression[] parameters)
+		{
+			this.type = type;
+			Type[] ptypes = new Type [parameters.Length];
+			for (int n=0; n<parameters.Length; n++)
+				ptypes [n] = parameters[n].GetResultType ();
+			ctor = type.GetConstructor (ptypes);
+			if (ctor == null)
+				throw new InvalidOperationException ("Constructor not found");
+			this.parameters = parameters;
+		}
 
-        public override void Generate (ILGenerator gen)
-        {
-            foreach (CodeExpression exp in parameters)
-                exp.Generate (gen);
-            gen.Emit (OpCodes.Newobj, ctor);
-        }
-        
-        public override void PrintCode (CodeWriter cp)
-        {
-            cp.Write ("new " + type.Name + " (");
-            for (int n=0; n<parameters.Length; n++) {
-                if (n > 0) cp.Write (", ");
-                parameters[n].PrintCode (cp);
-            }
-            cp.Write (")");
-        }
-        
-        public override Type GetResultType ()
-        {
-            return type;
-        }
-    }
+		public override void Generate (ILGenerator gen)
+		{
+			foreach (CodeExpression exp in parameters)
+				exp.Generate (gen);
+			gen.Emit (OpCodes.Newobj, ctor);
+		}
+		
+		public override void PrintCode (CodeWriter cp)
+		{
+			cp.Write ("new " + type.Name + " (");
+			for (int n=0; n<parameters.Length; n++) {
+				if (n > 0) cp.Write (", ");
+				parameters[n].PrintCode (cp);
+			}
+			cp.Write (")");
+		}
+		
+		public override Type GetResultType ()
+		{
+			return type;
+		}
+	}
 }
 #endif

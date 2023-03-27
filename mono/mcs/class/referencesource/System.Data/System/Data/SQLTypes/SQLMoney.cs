@@ -331,7 +331,7 @@ namespace System.Data.SqlTypes {
         /// </devdoc>
         public static SqlMoney operator *(SqlMoney x, SqlMoney y) {
             return (x.IsNull || y.IsNull) ? Null :
-        new SqlMoney(Decimal.Multiply(x.ToDecimal(), y.ToDecimal()));
+		new SqlMoney(Decimal.Multiply(x.ToDecimal(), y.ToDecimal()));
         }
 
         /// <devdoc>
@@ -339,7 +339,7 @@ namespace System.Data.SqlTypes {
         /// </devdoc>
         public static SqlMoney operator /(SqlMoney x, SqlMoney y) {
             return (x.IsNull || y.IsNull) ? Null :
-        new SqlMoney(Decimal.Divide(x.ToDecimal(), y.ToDecimal()));
+		new SqlMoney(Decimal.Divide(x.ToDecimal(), y.ToDecimal()));
         }
 
 

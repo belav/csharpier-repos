@@ -2,7 +2,7 @@
 // TraceHandlerCas.cs - CAS unit tests for System.Web.Handlers.TraceHandler
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,36 +37,36 @@ using System.Web.Handlers;
 
 namespace MonoCasTests.System.Web.Handlers {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TraceHandlerCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TraceHandlerCas : AspNetHostingMinimal {
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Constructor_Deny_UnmanagedCode ()
-        {
-            new TraceHandler ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void Constructor_Deny_UnmanagedCode ()
+		{
+			new TraceHandler ();
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        public void Constructor_PermitOnly_UnmanagedCode ()
-        {
-            new TraceHandler ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+		public void Constructor_PermitOnly_UnmanagedCode ()
+		{
+			new TraceHandler ();
+		}
 
-        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            // don't let UnmanagedCode mess up the results
-            return base.CreateControl (action, level);
-        }
+		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			// don't let UnmanagedCode mess up the results
+			return base.CreateControl (action, level);
+		}
 
-        // base class AspNetHostingMinimal and Type property will test LinkDemands
+		// base class AspNetHostingMinimal and Type property will test LinkDemands
 
-        public override Type Type {
-            get { return typeof (TraceHandler); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (TraceHandler); }
+		}
+	}
 }

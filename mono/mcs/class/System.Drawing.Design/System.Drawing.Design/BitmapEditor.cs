@@ -36,26 +36,26 @@ using System.Drawing;
 
 namespace System.Drawing.Design
 {
-    public class BitmapEditor : ImageEditor
-    {
+	public class BitmapEditor : ImageEditor
+	{
 
-        public BitmapEditor()
-        {
-        }
+		public BitmapEditor()
+		{
+		}
 
-        protected override string[] GetExtensions()
-        {
-            return new string[] {"*.bmp", "*.gif", "*.jpg", "*.jpeg", "*.png", "*.ico"};
-        }
+		protected override string[] GetExtensions()
+		{
+			return new string[] {"*.bmp", "*.gif", "*.jpg", "*.jpeg", "*.png", "*.ico"};
+		}
 
-        protected override string GetFileDialogDescription()
-        {
-            return Locale.GetText ("All bitmap files");
-        }
+		protected override string GetFileDialogDescription()
+		{
+			return Locale.GetText ("All bitmap files");
+		}
 
-        protected override Image LoadFromStream (Stream stream)
-        {
-            return new Bitmap (stream);
-        }
-    }
+		protected override Image LoadFromStream (Stream stream)
+		{
+			return new Bitmap (stream);
+		}
+	}
 }

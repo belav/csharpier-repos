@@ -1,4 +1,4 @@
-//
+﻿//
 // OciSessionHandle.cs
 //
 // Part of managed C#/.NET library System.Data.OracleClient.dll
@@ -23,124 +23,124 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.Data.OracleClient.Oci {
-    internal sealed class OciSessionHandle : OciHandle, IDisposable
-    {
-        #region Fields
+	internal sealed class OciSessionHandle : OciHandle, IDisposable
+	{
+		#region Fields
 
-        OciErrorHandle errorHandle;
-        OciServiceHandle serviceHandle;
-        bool begun = false;
-        bool disposed = false;
-        string username;
-        string password;
-        //OciCredentialType credentialType;
+		OciErrorHandle errorHandle;
+		OciServiceHandle serviceHandle;
+		bool begun = false;
+		bool disposed = false;
+		string username;
+		string password;
+		//OciCredentialType credentialType;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public OciSessionHandle (OciHandle parent, IntPtr handle)
-            : base (OciHandleType.Session, parent, handle)
-        {
-        }
+		public OciSessionHandle (OciHandle parent, IntPtr handle)
+			: base (OciHandleType.Session, parent, handle)
+		{
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public OciServiceHandle Service {
-            get { return serviceHandle; }
-            set { serviceHandle = value; }
-        }
+		public OciServiceHandle Service {
+			get { return serviceHandle; }
+			set { serviceHandle = value; }
+		}
 
-        internal string Username {
-            get { return username; }
-            set { username = value; }
-        }
+		internal string Username {
+			get { return username; }
+			set { username = value; }
+		}
 
-        internal string Password {
-            get { return String.Empty; }
-            set { password = value; }
-        }
+		internal string Password {
+			get { return String.Empty; }
+			set { password = value; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        internal bool SetCredentialAttributes (OciErrorHandle error)
-        {
-            errorHandle = error;
+		internal bool SetCredentialAttributes (OciErrorHandle error)
+		{
+			errorHandle = error;
 
-            int status;
+			int status;
 
-            status = OciCalls.OCIAttrSetString (this,
-                OciHandleType.Session,
-                username,
-                (uint) username.Length,
-                OciAttributeType.Username,
-                errorHandle);
+			status = OciCalls.OCIAttrSetString (this,
+				OciHandleType.Session,
+				username,
+				(uint) username.Length,
+				OciAttributeType.Username,
+				errorHandle);
 
-            if (status != 0)
-                return false;
+			if (status != 0)
+				return false;
 
-            status = OciCalls.OCIAttrSetString (this,
-                OciHandleType.Session,
-                password,
-                (uint) password.Length,
-                OciAttributeType.Password,
-                errorHandle);
+			status = OciCalls.OCIAttrSetString (this,
+				OciHandleType.Session,
+				password,
+				(uint) password.Length,
+				OciAttributeType.Password,
+				errorHandle);
 
-            if (status != 0)
-                return false;
-            
-            return true;
-        }
+			if (status != 0)
+				return false;
+			
+			return true;
+		}
 
-        public bool BeginSession (OciCredentialType credentialType, OciSessionMode mode, OciErrorHandle error)
-        {
-            errorHandle = error;
+		public bool BeginSession (OciCredentialType credentialType, OciSessionMode mode, OciErrorHandle error)
+		{
+			errorHandle = error;
 
-            int status;
+			int status;
 
-            if (credentialType == OciCredentialType.RDBMS) {
-                if (!SetCredentialAttributes (errorHandle))
-                    return false;
-            }
+			if (credentialType == OciCredentialType.RDBMS) {
+				if (!SetCredentialAttributes (errorHandle))
+					return false;
+			}
 
-            status = OciCalls.OCISessionBegin (Service,
-                        errorHandle,
-                        Handle,
-                        credentialType,
-                        mode);
+			status = OciCalls.OCISessionBegin (Service,
+						errorHandle,
+						Handle,
+						credentialType,
+						mode);
 
-            if (status != 0)
-                return false;
+			if (status != 0)
+				return false;
 
-            begun = true;
+			begun = true;
 
-            return true;
-        }
+			return true;
+		}
 
-        public void EndSession (OciErrorHandle error)
-        {
-            if (!begun)
-                return;
-            OciCalls.OCISessionEnd (Service, error, this, 0);
-            begun = false;
-        }
+		public void EndSession (OciErrorHandle error)
+		{
+			if (!begun)
+				return;
+			OciCalls.OCISessionEnd (Service, error, this, 0);
+			begun = false;
+		}
 
-        protected override void Dispose (bool disposing)
-        {
-            if (!disposed) {
-                try {
-                    //EndSession (errorHandle);
-                    disposed = false;
-                } finally {
-                    base.Dispose (disposing);
-                }
-            }
-        }
+		protected override void Dispose (bool disposing)
+		{
+			if (!disposed) {
+				try {
+					//EndSession (errorHandle);
+					disposed = false;
+				} finally {
+					base.Dispose (disposing);
+				}
+			}
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

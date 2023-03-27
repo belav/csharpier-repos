@@ -32,13 +32,13 @@ using System;
 
 namespace Microsoft.Build.Framework
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple=false,
-        Inherited = true)]
-    public sealed class LoadInSeparateAppDomainAttribute : Attribute
-    {
-        public LoadInSeparateAppDomainAttribute ()
-        {
-        }
-    }
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple=false,
+		Inherited = true)]
+	public sealed class LoadInSeparateAppDomainAttribute : Attribute
+	{
+		public LoadInSeparateAppDomainAttribute ()
+		{
+		}
+	}
 }
 

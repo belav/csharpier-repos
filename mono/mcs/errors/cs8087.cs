@@ -3,8 +3,8 @@
 
 public class Test
 {
-    public static int Main ()
-    {
-        var x = $" \u007B ";
-    }
+	public static int Main ()
+	{
+		var x = $" \u007B ";
+	}
 }

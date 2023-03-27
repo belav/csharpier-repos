@@ -4,12 +4,12 @@
 
 public class C
 {
-    static void Foo (int i)
-    {
-    }
-    
-    public static void Main ()
-    {
-        Foo (i : 3);
-    }
+	static void Foo (int i)
+	{
+	}
+	
+	public static void Main ()
+	{
+		Foo (i : 3);
+	}
 }

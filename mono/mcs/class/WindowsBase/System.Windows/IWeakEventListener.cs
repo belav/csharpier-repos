@@ -20,13 +20,13 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok <toshok@novell.com>
+//	Chris Toshok <toshok@novell.com>
 //
 
 using System;
 
 namespace System.Windows {
-    public interface IWeakEventListener {
-        bool ReceiveWeakEvent (Type managerType, object sender, EventArgs e);
-    }
+	public interface IWeakEventListener {
+		bool ReceiveWeakEvent (Type managerType, object sender, EventArgs e);
+	}
 }

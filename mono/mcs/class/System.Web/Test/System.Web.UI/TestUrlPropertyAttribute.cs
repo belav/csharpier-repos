@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.UrlPropertyAttribute.cs 
 //
 // Author:
-//    Sanjay Gupta (gsanjay@novell.com)
+//	Sanjay Gupta (gsanjay@novell.com)
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,44 +37,44 @@ using System.IO;
 
 namespace MonoTests.System.Web.UI
 {
-    [TestFixture]    
-    public class UrlPropertyAttributeTest 
-    {
-        UrlPropertyAttribute upa;
-        UrlPropertyAttribute upa1;
-        string filter;
+	[TestFixture]	
+	public class UrlPropertyAttributeTest 
+	{
+		UrlPropertyAttribute upa;
+		UrlPropertyAttribute upa1;
+		string filter;
 
-        [SetUp]
-        public void SetUp ()        
-        {
-            filter = "filter";
-            upa = new UrlPropertyAttribute ();
-            upa1 = new UrlPropertyAttribute (filter);
-        }
+		[SetUp]
+		public void SetUp ()		
+		{
+			filter = "filter";
+			upa = new UrlPropertyAttribute ();
+			upa1 = new UrlPropertyAttribute (filter);
+		}
 
-        [Test]
-        public void TestFilter ()
-        {
-            Assert.AreEqual (upa.Filter, "*.*", "Filter#1");
-            Assert.AreEqual (upa1.Filter, filter, "Filter#2");
-        }
+		[Test]
+		public void TestFilter ()
+		{
+			Assert.AreEqual (upa.Filter, "*.*", "Filter#1");
+			Assert.AreEqual (upa1.Filter, filter, "Filter#2");
+		}
 
-        [Test]
-        public void TestGetHashCode ()
-        {
-            string filter1 = "*.*";
-            Assert.AreEqual (upa.GetHashCode (), filter1.GetHashCode (), "GHC#1");
-            Assert.AreEqual (upa1.GetHashCode (), filter.GetHashCode (), "GHC#2");
-        }
+		[Test]
+		public void TestGetHashCode ()
+		{
+			string filter1 = "*.*";
+			Assert.AreEqual (upa.GetHashCode (), filter1.GetHashCode (), "GHC#1");
+			Assert.AreEqual (upa1.GetHashCode (), filter.GetHashCode (), "GHC#2");
+		}
 
-        [Test]
-        public void TestEquals ()
-        {
-            upa = new UrlPropertyAttribute ("sanjay");
-            Assert.IsFalse (upa.Equals (upa1), "Equals#1");
-        }
-            
-    }
+		[Test]
+		public void TestEquals ()
+		{
+			upa = new UrlPropertyAttribute ("sanjay");
+			Assert.IsFalse (upa.Equals (upa1), "Equals#1");
+		}
+			
+	}
 }
 
 

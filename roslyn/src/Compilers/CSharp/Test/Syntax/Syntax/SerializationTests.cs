@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -261,13 +261,13 @@ class C { }");
         [Fact]
         public void RoundTripStringLiteralWithUnicodeCharacters()
         {
-            RoundTrip(@"public class C { string s = ""??????""; }");
+            RoundTrip(@"public class C { string s = ""Юникод""; }");
         }
 
         [Fact]
         public void RoundTripStringLiteralWithUnicodeCharacters2()
         {
-            RoundTrip(@"public class C { string c = ""\U0002A6A5??""; }");
+            RoundTrip(@"public class C { string c = ""\U0002A6A5𪚥""; }");
         }
 
         [Fact, WorkItem(1038237, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1038237")]

@@ -36,26 +36,26 @@ using NUnit.Framework;
 // a new ISerializable declaration.
 namespace MonoTests.System.Runtime.Serialization2
 {
-    public interface ISerializable
-    {
-    }
+	public interface ISerializable
+	{
+	}
 
-    [Serializable]
-    public class Class : ISerializable
-    {
-    }
+	[Serializable]
+	public class Class : ISerializable
+	{
+	}
 
-    [TestFixture]
-    public class SerializationTest2
-    {
-        [Test]
-        public void TestSerialization ()
-        {
-            MemoryStream ms = new MemoryStream ();
+	[TestFixture]
+	public class SerializationTest2
+	{
+		[Test]
+		public void TestSerialization ()
+		{
+			MemoryStream ms = new MemoryStream ();
 
-            new BinaryFormatter ().Serialize (ms, new Class ());
-            ms.Position = 0;
-            new BinaryFormatter ().Deserialize (ms);
-        }
-    }
+			new BinaryFormatter ().Serialize (ms, new Class ());
+			ms.Position = 0;
+			new BinaryFormatter ().Deserialize (ms);
+		}
+	}
 }

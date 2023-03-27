@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -185,9 +185,9 @@ class C
   <KeyValuePair Key=""FileDescription"" Value=""Team Foundation Server Object Model"" />
   <KeyValuePair Key=""FileVersion"" Value=""11.0.60108.0 built by: TOOLSET_ROSLYN(GNAMBOO-DEV-GNAMBOO)"" />
   <KeyValuePair Key=""InternalName"" Value=""Microsoft.TeamFoundation.Framework.Server.dll"" />
-  <KeyValuePair Key=""LegalCopyright"" Value=""© Microsoft Corporation. All rights reserved."" />
+  <KeyValuePair Key=""LegalCopyright"" Value=""Â© Microsoft Corporation. All rights reserved."" />
   <KeyValuePair Key=""OriginalFilename"" Value=""Microsoft.TeamFoundation.Framework.Server.dll"" />
-  <KeyValuePair Key=""ProductName"" Value=""Microsoft® Visual Studio® 2012"" />
+  <KeyValuePair Key=""ProductName"" Value=""MicrosoftÂ® Visual StudioÂ® 2012"" />
   <KeyValuePair Key=""ProductVersion"" Value=""11.0.60108.0"" />
 </VersionResource>";
 

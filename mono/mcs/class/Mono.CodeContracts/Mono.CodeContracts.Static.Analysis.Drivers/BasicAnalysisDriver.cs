@@ -2,7 +2,7 @@
 // BasicAnalysisDriver.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,36 +31,36 @@ using Mono.CodeContracts.Static.ControlFlow.Subroutines;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis.Drivers {
-    class BasicAnalysisDriver : IBasicAnalysisDriver {
-        private readonly IContractProvider contract_provider;
-        private readonly IMetaDataProvider meta_data_provider;
+	class BasicAnalysisDriver : IBasicAnalysisDriver {
+		private readonly IContractProvider contract_provider;
+		private readonly IMetaDataProvider meta_data_provider;
 
-        #region Implementation of IBasicAnalysisDriver<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly>
-        public IMetaDataProvider MetaDataProvider
-        {
-            get { return this.meta_data_provider; }
-        }
+		#region Implementation of IBasicAnalysisDriver<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly>
+		public IMetaDataProvider MetaDataProvider
+		{
+			get { return this.meta_data_provider; }
+		}
 
 
-        public IContractProvider ContractProvider
-        {
-            get { return this.contract_provider; }
-        }
+		public IContractProvider ContractProvider
+		{
+			get { return this.contract_provider; }
+		}
 
-        public SubroutineFacade SubroutineFacade { get; private set; }
-        #endregion
+		public SubroutineFacade SubroutineFacade { get; private set; }
+		#endregion
 
-        public BasicAnalysisDriver (IMetaDataProvider metaDataProvider,
-                                    IContractProvider contractProvider)
-        {
-            SubroutineFacade = new SubroutineFacade (metaDataProvider, contractProvider);
-            this.meta_data_provider = metaDataProvider;
-            this.contract_provider = contractProvider;
-        }
+		public BasicAnalysisDriver (IMetaDataProvider metaDataProvider,
+		                            IContractProvider contractProvider)
+		{
+			SubroutineFacade = new SubroutineFacade (metaDataProvider, contractProvider);
+			this.meta_data_provider = metaDataProvider;
+			this.contract_provider = contractProvider;
+		}
 
-        public BasicMethodDriver CreateMethodDriver (Method method)
-        {
-            return new BasicMethodDriver (method, this);
-        }
-    }
+		public BasicMethodDriver CreateMethodDriver (Method method)
+		{
+			return new BasicMethodDriver (method, this);
+		}
+	}
 }

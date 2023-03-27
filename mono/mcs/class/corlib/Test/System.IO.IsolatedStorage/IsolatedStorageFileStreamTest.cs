@@ -1,9 +1,9 @@
 //
 // IsolatedStorageFileStreamTest.cs 
-//    - Unit Tests for abstract IsolatedStorageFileStream class
+//	- Unit Tests for abstract IsolatedStorageFileStream class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell Inc. (http://www.novell.com)
 //
@@ -36,115 +36,115 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IO.IsolatedStorageTest {
 
-    [TestFixture]
-    public class IsolatedStorageFileStreamTest {
+	[TestFixture]
+	public class IsolatedStorageFileStreamTest {
 
-        private void CheckCommonDetails (string prefix, IsolatedStorageFileStream isfs, bool read, bool write)
-        {
-            Assert.AreEqual (read, isfs.CanRead, prefix + ".CanRead");
-            Assert.IsTrue (isfs.CanSeek, prefix + ".CanSeek");
-            Assert.AreEqual (write, isfs.CanWrite, prefix + ".CanWrite");
-            Assert.IsFalse (isfs.IsAsync, prefix + ".IsAsync");
-            Assert.AreEqual (0, isfs.Length, prefix + ".Length");
-            Assert.AreEqual ("[Unknown]", isfs.Name, prefix + ".Name");
-            Assert.AreEqual (0, isfs.Position, prefix + ".Position");
-        }
+		private void CheckCommonDetails (string prefix, IsolatedStorageFileStream isfs, bool read, bool write)
+		{
+			Assert.AreEqual (read, isfs.CanRead, prefix + ".CanRead");
+			Assert.IsTrue (isfs.CanSeek, prefix + ".CanSeek");
+			Assert.AreEqual (write, isfs.CanWrite, prefix + ".CanWrite");
+			Assert.IsFalse (isfs.IsAsync, prefix + ".IsAsync");
+			Assert.AreEqual (0, isfs.Length, prefix + ".Length");
+			Assert.AreEqual ("[Unknown]", isfs.Name, prefix + ".Name");
+			Assert.AreEqual (0, isfs.Position, prefix + ".Position");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor_StringNullMode ()
-        {
-            IsolatedStorageFileStream isfs = new IsolatedStorageFileStream (null, FileMode.CreateNew);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void Constructor_StringNullMode ()
+		{
+			IsolatedStorageFileStream isfs = new IsolatedStorageFileStream (null, FileMode.CreateNew);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentException))] // Mono's FileStream throw an ArgumentOutOfRangeException
-        public void Constructor_StringModeBad ()
-        {
-            IsolatedStorageFileStream isfs = new IsolatedStorageFileStream ("badmode", (FileMode)Int32.MinValue);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentException))] // Mono's FileStream throw an ArgumentOutOfRangeException
+		public void Constructor_StringModeBad ()
+		{
+			IsolatedStorageFileStream isfs = new IsolatedStorageFileStream ("badmode", (FileMode)Int32.MinValue);
+		}
 
-        [Test]
-        public void Constructor_StringMode ()
-        {
-            string test = "string-filemode";
-            using (var isfs = new IsolatedStorageFileStream (test, FileMode.Create)) {
-                CheckCommonDetails (test, isfs, true, true);
-            }
-        }
+		[Test]
+		public void Constructor_StringMode ()
+		{
+			string test = "string-filemode";
+			using (var isfs = new IsolatedStorageFileStream (test, FileMode.Create)) {
+				CheckCommonDetails (test, isfs, true, true);
+			}
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Constructor_StringModeAccessBad ()
-        {
-            IsolatedStorageFileStream isfs = new IsolatedStorageFileStream ("badaccess", FileMode.Create, (FileAccess)Int32.MinValue);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void Constructor_StringModeAccessBad ()
+		{
+			IsolatedStorageFileStream isfs = new IsolatedStorageFileStream ("badaccess", FileMode.Create, (FileAccess)Int32.MinValue);
+		}
 
-        [Test]
-        public void Constructor_StringModeAccess ()
-        {
-            string test = "string-filemode-fileaccess";
-            using (var isfs = new IsolatedStorageFileStream (test, FileMode.Create, FileAccess.ReadWrite)) {
-                CheckCommonDetails (test, isfs, true, true);
-            }
-        }
+		[Test]
+		public void Constructor_StringModeAccess ()
+		{
+			string test = "string-filemode-fileaccess";
+			using (var isfs = new IsolatedStorageFileStream (test, FileMode.Create, FileAccess.ReadWrite)) {
+				CheckCommonDetails (test, isfs, true, true);
+			}
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Constructor_StringModeAccessShareBad ()
-        {
-            IsolatedStorageFileStream isfs = new IsolatedStorageFileStream ("badshare", FileMode.Create, FileAccess.Read, (FileShare)Int32.MinValue);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void Constructor_StringModeAccessShareBad ()
+		{
+			IsolatedStorageFileStream isfs = new IsolatedStorageFileStream ("badshare", FileMode.Create, FileAccess.Read, (FileShare)Int32.MinValue);
+		}
 
-        [Test]
-        public void Constructor_StringModeAccessShare ()
-        {
-            string test = "string-filemode-fileaccess-fileshare";
-            using (var isfs = new IsolatedStorageFileStream (test, FileMode.Create, FileAccess.Write, FileShare.Read)) {
-                CheckCommonDetails (test, isfs, false, true);
-            }
-        }
+		[Test]
+		public void Constructor_StringModeAccessShare ()
+		{
+			string test = "string-filemode-fileaccess-fileshare";
+			using (var isfs = new IsolatedStorageFileStream (test, FileMode.Create, FileAccess.Write, FileShare.Read)) {
+				CheckCommonDetails (test, isfs, false, true);
+			}
+		}
 
-        [Test]
-        [ExpectedException (typeof (IsolatedStorageException))]
-        public void Handle ()
-        {
-            using (var isfs = new IsolatedStorageFileStream ("handle", FileMode.Create)) {
-                IntPtr p = isfs.Handle;
-            }
-        }
+		[Test]
+		[ExpectedException (typeof (IsolatedStorageException))]
+		public void Handle ()
+		{
+			using (var isfs = new IsolatedStorageFileStream ("handle", FileMode.Create)) {
+				IntPtr p = isfs.Handle;
+			}
+		}
 
-        [Test]
-        public void RootPath ()
-        {
-            new IsolatedStorageFileStream ("/rootpath", FileMode.Create).Close ();
-        }
+		[Test]
+		public void RootPath ()
+		{
+			new IsolatedStorageFileStream ("/rootpath", FileMode.Create).Close ();
+		}
 
-        [Test]
-        public void Constructor_StorageInvalid ()
-        {
-            IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly ();
+		[Test]
+		public void Constructor_StorageInvalid ()
+		{
+			IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly ();
 
-            isf.Close ();
-            try {
-                new IsolatedStorageFileStream ("file", FileMode.Create, isf);
-            } catch (InvalidOperationException) {
-            }
+			isf.Close ();
+			try {
+				new IsolatedStorageFileStream ("file", FileMode.Create, isf);
+			} catch (InvalidOperationException) {
+			}
 
-            isf.Dispose ();
-            try {
-                new IsolatedStorageFileStream ("file", FileMode.Create, isf);
-            } catch (InvalidOperationException) {
-            }
+			isf.Dispose ();
+			try {
+				new IsolatedStorageFileStream ("file", FileMode.Create, isf);
+			} catch (InvalidOperationException) {
+			}
 
-            // Re-open and then remove the storage
-            isf = IsolatedStorageFile.GetUserStoreForAssembly ();
-            isf.Remove ();
+			// Re-open and then remove the storage
+			isf = IsolatedStorageFile.GetUserStoreForAssembly ();
+			isf.Remove ();
 
-            try {
-                new IsolatedStorageFileStream ("file", FileMode.Create, isf);
-            } catch (InvalidOperationException) {
-            }
-        }
-    }
+			try {
+				new IsolatedStorageFileStream ("file", FileMode.Create, isf);
+			} catch (InvalidOperationException) {
+			}
+		}
+	}
 }

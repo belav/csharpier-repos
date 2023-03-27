@@ -31,50 +31,50 @@
 
 namespace Mono.Cecil.Metadata {
 
-    internal sealed class AssemblyOSTable : IMetadataTable {
+	internal sealed class AssemblyOSTable : IMetadataTable {
 
-        public const int RId = 0x22;
+		public const int RId = 0x22;
 
-        RowCollection m_rows;
+		RowCollection m_rows;
 
-        public AssemblyOSRow this [int index] {
-            get { return m_rows [index] as AssemblyOSRow; }
-            set { m_rows [index] = value; }
-        }
+		public AssemblyOSRow this [int index] {
+			get { return m_rows [index] as AssemblyOSRow; }
+			set { m_rows [index] = value; }
+		}
 
-        public RowCollection Rows {
-            get { return m_rows; }
-            set { m_rows = value; }
-        }
+		public RowCollection Rows {
+			get { return m_rows; }
+			set { m_rows = value; }
+		}
 
-        public int Id {
-            get { return RId; }
-        }
+		public int Id {
+			get { return RId; }
+		}
 
-        internal AssemblyOSTable ()
-        {
-        }
+		internal AssemblyOSTable ()
+		{
+		}
 
-        public void Accept (IMetadataTableVisitor visitor)
-        {
-            visitor.VisitAssemblyOSTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
-        }
-    }
+		public void Accept (IMetadataTableVisitor visitor)
+		{
+			visitor.VisitAssemblyOSTable (this);
+			this.Rows.Accept (visitor.GetRowVisitor ());
+		}
+	}
 
-    internal sealed class AssemblyOSRow : IMetadataRow {
+	internal sealed class AssemblyOSRow : IMetadataRow {
 
-        public uint OSPlatformID;
-        public uint OSMajorVersion;
-        public uint OSMinorVersion;
+		public uint OSPlatformID;
+		public uint OSMajorVersion;
+		public uint OSMinorVersion;
 
-        internal AssemblyOSRow ()
-        {
-        }
+		internal AssemblyOSRow ()
+		{
+		}
 
-        public void Accept (IMetadataRowVisitor visitor)
-        {
-            visitor.VisitAssemblyOSRow (this);
-        }
-    }
+		public void Accept (IMetadataRowVisitor visitor)
+		{
+			visitor.VisitAssemblyOSRow (this);
+		}
+	}
 }

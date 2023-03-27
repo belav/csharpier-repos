@@ -1,8 +1,8 @@
-//
+﻿//
 // AllowedAudienceUriElement.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -33,29 +33,29 @@ using System.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class AllowedAudienceUriElement : ConfigurationElement
-    {
-        ConfigurationPropertyCollection _properties;
+	public sealed class AllowedAudienceUriElement : ConfigurationElement
+	{
+		ConfigurationPropertyCollection _properties;
 
-        public AllowedAudienceUriElement () {
-        }
+		public AllowedAudienceUriElement () {
+		}
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("allowedAudienceUri",
-            Options = ConfigurationPropertyOptions.IsKey)]
-        public string AllowedAudienceUri {
-            get { return (string) this ["allowedAudienceUri"]; }
-            set { this ["allowedAudienceUri"] = value; }
-        }
+		[StringValidator (MinLength = 1)]
+		[ConfigurationProperty ("allowedAudienceUri",
+			Options = ConfigurationPropertyOptions.IsKey)]
+		public string AllowedAudienceUri {
+			get { return (string) this ["allowedAudienceUri"]; }
+			set { this ["allowedAudienceUri"] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = new ConfigurationPropertyCollection ();
-                    _properties.Add (new ConfigurationProperty ("allowedAudienceUri", typeof (string), null, null, new StringValidator (1), ConfigurationPropertyOptions.IsKey));
-                }
-                return _properties;
-            }
-        }
-    }
+		protected override ConfigurationPropertyCollection Properties {
+			get {
+				if (_properties == null) {
+					_properties = new ConfigurationPropertyCollection ();
+					_properties.Add (new ConfigurationProperty ("allowedAudienceUri", typeof (string), null, null, new StringValidator (1), ConfigurationPropertyOptions.IsKey));
+				}
+				return _properties;
+			}
+		}
+	}
 }

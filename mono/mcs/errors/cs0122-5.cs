@@ -3,15 +3,15 @@
 
 public class Test
 {
-    public class Foo
-    {
-        private class Bar {}
-    }
-    
-    private class Bar : Foo.Bar
-    {
-    }
+	public class Foo
+	{
+		private class Bar {}
+	}
+	
+	private class Bar : Foo.Bar
+	{
+	}
 
-    public static void Main () {}
+	public static void Main () {}
 }
 

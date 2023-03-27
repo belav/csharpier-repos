@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -369,7 +369,7 @@ abstract class AbstractGoo : IGoo
         public void TestInvokeExplicitMemberDirectly()
         {
             // Tests:
-            // Sanity check – it should be an error to invoke a member by its fully qualified explicit implementation name
+            // Sanity check â€“ it should be an error to invoke a member by its fully qualified explicit implementation name
 
             var text = @"
 interface Interface
@@ -1064,7 +1064,7 @@ class Derived : Base
 
 class Outer<T>
 {
-    public class Inner<U> { }
+	public class Inner<U> { }
 }
 ";
             CreateCompilation(text).VerifyDiagnostics(
@@ -7152,7 +7152,7 @@ abstract partial class Class : I3
         public void TestMissingImpl()
         {
             // Tests:
-            // For partial interfaces – test that compiler generates error if any interface methods have not been implemented
+            // For partial interfaces â€“ test that compiler generates error if any interface methods have not been implemented
             // Test that compiler generates error if any interface methods have not been implemented in an abstract class
 
             var text = @"
@@ -7754,7 +7754,7 @@ class Test
         public void TestImplicitImplementationSubstitutionError()
         {
             // Tests:
-            // Implicitly implement interface member in base generic type – the method that implements interface member 
+            // Implicitly implement interface member in base generic type â€“ the method that implements interface member 
             // should depend on type parameter of base type to satisfy signature (return type / parameter type) equality
             // Test case where substitution is incorrect
 

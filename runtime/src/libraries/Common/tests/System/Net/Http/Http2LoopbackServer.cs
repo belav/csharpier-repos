@@ -151,7 +151,7 @@ namespace System.Net.Test.Common
             await using (Http2LoopbackConnection connection = await EstablishConnectionAsync().ConfigureAwait(false))
             {
                 return await connection.HandleRequestAsync(statusCode, headers, content).ConfigureAwait(false);
-            }
+			}
         }
 
         public override async Task AcceptConnectionAsync(Func<GenericLoopbackConnection, Task> funcAsync)

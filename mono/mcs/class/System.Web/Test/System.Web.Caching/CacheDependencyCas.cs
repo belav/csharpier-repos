@@ -1,9 +1,9 @@
 //
 // CacheDependencyCas.cs 
-//    - CAS unit tests for System.Web.Caching.CacheDependency
+//	- CAS unit tests for System.Web.Caching.CacheDependency
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,51 +38,51 @@ using System.Web.Caching;
 
 namespace MonoCasTests.System.Web.Caching {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CacheDependencyCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CacheDependencyCas : AspNetHostingMinimal {
 
-        private string tempFile;
+		private string tempFile;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            // that requires both FileIOPermission and EnvironmentPermission
-            // so we do it before setting the stack with PermitOnly and Deny
-            tempFile = Path.GetTempFileName ();
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			// that requires both FileIOPermission and EnvironmentPermission
+			// so we do it before setting the stack with PermitOnly and Deny
+			tempFile = Path.GetTempFileName ();
+		}
 
-        // note: CacheDependency still requires some file access
-        [FileIOPermission (SecurityAction.Assert, Unrestricted = true)]
-        private object FileIOPermissionCreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            return CreateControlStringCtor (action, level);
-        }
+		// note: CacheDependency still requires some file access
+		[FileIOPermission (SecurityAction.Assert, Unrestricted = true)]
+		private object FileIOPermissionCreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			return CreateControlStringCtor (action, level);
+		}
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            if ((level != AspNetHostingPermissionLevel.None) && (action == SecurityAction.PermitOnly)) {
-                try {
-                    return FileIOPermissionCreateControl (action, level);
-                }
-                catch (TargetInvocationException tie) {
-                    throw tie;
-                }
-            } 
-            else
-                return CreateControlStringCtor (action, level);
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			if ((level != AspNetHostingPermissionLevel.None) && (action == SecurityAction.PermitOnly)) {
+				try {
+					return FileIOPermissionCreateControl (action, level);
+				}
+				catch (TargetInvocationException tie) {
+					throw tie;
+				}
+			} 
+			else
+				return CreateControlStringCtor (action, level);
+		}
 
-        private object CreateControlStringCtor (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            // not public empty (default) ctor - at least not before 2.0
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (string) });
-            Assert.IsNotNull (ci, ".ctor(string)");
-            return ci.Invoke (new object[1] { tempFile });
-        }
+		private object CreateControlStringCtor (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			// not public empty (default) ctor - at least not before 2.0
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (string) });
+			Assert.IsNotNull (ci, ".ctor(string)");
+			return ci.Invoke (new object[1] { tempFile });
+		}
 
-        public override Type Type {
-            get { return typeof (CacheDependency); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (CacheDependency); }
+		}
+	}
 }

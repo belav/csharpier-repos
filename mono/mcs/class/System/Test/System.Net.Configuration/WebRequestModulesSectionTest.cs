@@ -2,7 +2,7 @@
 // WebRequestModulesSectionTest.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.
 
@@ -38,24 +38,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Net.Configuration
 {
-    [TestFixture]
-    public class WebRequestModulesSectionTest
-    {
-        [Test]
-        public void GetConfigSection ()
-        {
-            object cfg = ConfigurationManager.GetSection ("system.net/webRequestModules");
-            Assert.IsTrue (cfg is WebRequestModulesSection, "section type was " + cfg);
-        }
+	[TestFixture]
+	public class WebRequestModulesSectionTest
+	{
+		[Test]
+		public void GetConfigSection ()
+		{
+			object cfg = ConfigurationManager.GetSection ("system.net/webRequestModules");
+			Assert.IsTrue (cfg is WebRequestModulesSection, "section type was " + cfg);
+		}
 
-        /*
-        [Test]
-        public void CollectionCreateNewElement ()
-        {
-            Assert.IsTrue (new WebRequestModuleElementCollection ().CreateNewElement () is WebRequestModuleElement);
-        }
-        */
-    }
+		/*
+		[Test]
+		public void CollectionCreateNewElement ()
+		{
+			Assert.IsTrue (new WebRequestModuleElementCollection ().CreateNewElement () is WebRequestModuleElement);
+		}
+		*/
+	}
 }
 
 #endif

@@ -33,20 +33,20 @@ using System.Web;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class DynamicValidatorEventArgs : EventArgs
-    {
-        public DynamicValidatorEventArgs (Exception exception, DynamicDataSourceOperation operation)
-        {
-            if (exception == null)
-                throw new ArgumentNullException ("exception");
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class DynamicValidatorEventArgs : EventArgs
+	{
+		public DynamicValidatorEventArgs (Exception exception, DynamicDataSourceOperation operation)
+		{
+			if (exception == null)
+				throw new ArgumentNullException ("exception");
 
-            Exception = exception;
-            Operation = operation;
-        }
+			Exception = exception;
+			Operation = operation;
+		}
 
-        public Exception Exception { get; private set; }
-        public DynamicDataSourceOperation Operation { get; private set; }
-    }
+		public Exception Exception { get; private set; }
+		public DynamicDataSourceOperation Operation { get; private set; }
+	}
 }

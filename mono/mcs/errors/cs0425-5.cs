@@ -3,12 +3,12 @@
 
 interface IFoo<T>
 {
-    void Test<U> () where U : T;
+	void Test<U> () where U : T;
 }
 
 class Foo<T, X> : IFoo<T>
 {
-    public void Test<V> () where V : X
-    {
-    }
+	public void Test<V> () where V : X
+	{
+	}
 }

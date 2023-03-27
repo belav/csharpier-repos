@@ -3,11 +3,11 @@
 
 interface I<T>
 {
-    T Prop { get; set; }
+	T Prop { get; set; }
 }
 
 class C : I<int>
 {
-    int I<int>.Prop { get; set; }
-    int I<int>.Prop { get; set; }
+	int I<int>.Prop { get; set; }
+	int I<int>.Prop { get; set; }
 }

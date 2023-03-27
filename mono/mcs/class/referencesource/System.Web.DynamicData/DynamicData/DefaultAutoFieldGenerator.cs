@@ -1,4 +1,4 @@
-namespace System.Web.DynamicData {
+﻿namespace System.Web.DynamicData {
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;

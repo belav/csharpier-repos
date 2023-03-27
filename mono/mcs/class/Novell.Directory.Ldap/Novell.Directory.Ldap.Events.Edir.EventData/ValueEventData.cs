@@ -46,7 +46,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strAttribute;
+	return strAttribute;
       }
     }
 
@@ -55,7 +55,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strClassId;
+	return strClassId;
       }
     }
 
@@ -64,7 +64,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strData;
+	return strData;
       }
     }
 
@@ -73,7 +73,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return binData;
+	return binData;
       }
     }
     protected string strEntry;
@@ -81,7 +81,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strEntry;
+	return strEntry;
       }
     }
 
@@ -90,7 +90,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get 
       {
-    return strPerpetratorDN;
+	return strPerpetratorDN;
       }
     }
 
@@ -100,7 +100,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strSyntax;
+	return strSyntax;
       }
     }
 
@@ -109,7 +109,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return timeStampObj;
+	return timeStampObj;
       }
     }
 
@@ -118,7 +118,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return nVerb;
+	return nVerb;
       }
     }
 
@@ -126,7 +126,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
       : base(eventDataType, message)
     {
         int[] length = new int[1];
-    Asn1OctetString octData;
+	Asn1OctetString octData;
 
         strPerpetratorDN =
             ((Asn1OctetString) decoder.decode(decodedData, length)).stringValue();
@@ -144,12 +144,12 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
             new DSETimeStamp((Asn1Sequence) decoder.decode(decodedData, length));
 
         octData = ((Asn1OctetString) decoder.decode(decodedData, length));
-    strData = octData.stringValue();
-    binData = SupportClass.ToByteArray(octData.byteValue());
+	strData = octData.stringValue();
+	binData = SupportClass.ToByteArray(octData.byteValue());
 
         nVerb = ((Asn1Integer) decoder.decode(decodedData, length)).intValue();
 
-    DataInitDone();
+	DataInitDone();
     }    
 
     /// <summary> 

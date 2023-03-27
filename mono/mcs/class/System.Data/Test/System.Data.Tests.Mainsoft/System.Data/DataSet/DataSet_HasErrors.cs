@@ -39,61 +39,61 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataSet_HasErrors : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataSet_HasErrors tc = new DataSet_HasErrors();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataSet_HasErrors");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataSet_HasErrors tc = new DataSet_HasErrors();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataSet_HasErrors");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        DataSet ds = new DataSet();
-        ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-        try
-        {
-            BeginCase("HasErrors - default");
-            Compare(ds.HasErrors  ,false );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	public void run()
+	{
+		Exception exp = null;
+		DataSet ds = new DataSet();
+		ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
+
+
+		try
+		{
+			BeginCase("HasErrors - default");
+			Compare(ds.HasErrors  ,false );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		ds.Tables[0].Rows[0].RowError = "ErrDesc";
         
-        ds.Tables[0].Rows[0].RowError = "ErrDesc";
-        
-        try
-        {
-            BeginCase("HasErrors");
-            Compare(ds.HasErrors ,true );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        }
+		try
+		{
+			BeginCase("HasErrors");
+			Compare(ds.HasErrors ,true );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		}
 }
 }

@@ -3,9 +3,9 @@
 
 public class Foo<T>
 {
-    public static bool Test ()
-    {
-        T t;
-        return t is int;
-    }
+	public static bool Test ()
+	{
+		T t;
+		return t is int;
+	}
 }

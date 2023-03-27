@@ -2,7 +2,7 @@
 // UserNameSecurityTokenAuthenticator.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,32 +32,32 @@ using System.IdentityModel.Tokens;
 
 namespace System.IdentityModel.Selectors
 {
-    public abstract class UserNameSecurityTokenAuthenticator
-        : SecurityTokenAuthenticator
-    {
-        protected UserNameSecurityTokenAuthenticator ()
-        {
-        }
+	public abstract class UserNameSecurityTokenAuthenticator
+		: SecurityTokenAuthenticator
+	{
+		protected UserNameSecurityTokenAuthenticator ()
+		{
+		}
 
-        protected override bool CanValidateTokenCore (SecurityToken token)
-        {
-            if (token == null)
-                throw new ArgumentNullException ("token");
-            return token is UserNameSecurityToken;
-        }
+		protected override bool CanValidateTokenCore (SecurityToken token)
+		{
+			if (token == null)
+				throw new ArgumentNullException ("token");
+			return token is UserNameSecurityToken;
+		}
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy>
-            ValidateTokenCore (SecurityToken token)
-        {
-            if (token == null)
-                throw new ArgumentNullException ("token");
-            UserNameSecurityToken ut = token as UserNameSecurityToken;
-            if (ut == null)
-                throw new InvalidOperationException (String.Format ("Security token '{0}' is not supported", token));
-            return ValidateUserNamePasswordCore (ut.UserName, ut.Password);
-        }
+		protected override ReadOnlyCollection<IAuthorizationPolicy>
+			ValidateTokenCore (SecurityToken token)
+		{
+			if (token == null)
+				throw new ArgumentNullException ("token");
+			UserNameSecurityToken ut = token as UserNameSecurityToken;
+			if (ut == null)
+				throw new InvalidOperationException (String.Format ("Security token '{0}' is not supported", token));
+			return ValidateUserNamePasswordCore (ut.UserName, ut.Password);
+		}
 
-        protected abstract ReadOnlyCollection<IAuthorizationPolicy>
-            ValidateUserNamePasswordCore (string userName, string password);
-    }
+		protected abstract ReadOnlyCollection<IAuthorizationPolicy>
+			ValidateUserNamePasswordCore (string userName, string password);
+	}
 }

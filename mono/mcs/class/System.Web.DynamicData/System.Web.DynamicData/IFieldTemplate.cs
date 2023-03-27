@@ -2,7 +2,7 @@
 // IFieldTemplate.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -38,10 +38,10 @@ using System.Web.Caching;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public interface IFieldTemplate
-    {
-        void SetHost (IFieldTemplateHost host);
-    }
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public interface IFieldTemplate
+	{
+		void SetHost (IFieldTemplateHost host);
+	}
 }

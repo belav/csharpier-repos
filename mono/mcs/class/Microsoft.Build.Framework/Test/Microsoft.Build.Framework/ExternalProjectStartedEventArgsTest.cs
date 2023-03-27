@@ -29,25 +29,25 @@ using Microsoft.Build.Framework;
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Framework {
-    [TestFixture]
-    public class ExternalProjectStartedEventArgsTest {
-        [Test]
-        public void AssignmentTest ()
-        {
-            ExternalProjectStartedEventArgs epsea;
-            string message = "message";
-            string helpKeyword = "helpKeyword";
-            string senderName = "senderName";
-            string projectFile = "projectFile";
-            string targetNames = "a;b;c";
-            
-            epsea = new ExternalProjectStartedEventArgs (message, helpKeyword, senderName, projectFile, targetNames);
-            
-            Assert.AreEqual (message, epsea.Message, "Message");
-            Assert.AreEqual (helpKeyword, epsea.HelpKeyword, "HelpKeyword");
-            Assert.AreEqual (senderName, epsea.SenderName, "SenderName");
-            Assert.AreEqual (projectFile, epsea.ProjectFile, "ProjectFile");
-            Assert.AreEqual (targetNames, epsea.TargetNames, "TargetNames");
-        }
-    }
+	[TestFixture]
+	public class ExternalProjectStartedEventArgsTest {
+		[Test]
+		public void AssignmentTest ()
+		{
+			ExternalProjectStartedEventArgs epsea;
+			string message = "message";
+			string helpKeyword = "helpKeyword";
+			string senderName = "senderName";
+			string projectFile = "projectFile";
+			string targetNames = "a;b;c";
+			
+			epsea = new ExternalProjectStartedEventArgs (message, helpKeyword, senderName, projectFile, targetNames);
+			
+			Assert.AreEqual (message, epsea.Message, "Message");
+			Assert.AreEqual (helpKeyword, epsea.HelpKeyword, "HelpKeyword");
+			Assert.AreEqual (senderName, epsea.SenderName, "SenderName");
+			Assert.AreEqual (projectFile, epsea.ProjectFile, "ProjectFile");
+			Assert.AreEqual (targetNames, epsea.TargetNames, "TargetNames");
+		}
+	}
 }

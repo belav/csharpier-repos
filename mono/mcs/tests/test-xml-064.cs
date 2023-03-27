@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /// <returns>A <see cref="IList{Foo}" />.</returns>
 public class Test
 {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

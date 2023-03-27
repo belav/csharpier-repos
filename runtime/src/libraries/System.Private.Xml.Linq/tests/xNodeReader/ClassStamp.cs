@@ -15,11 +15,11 @@ namespace CoreXml.Test.XLinq
         public void IncorrentBehaviorOfReadAttributeValue()
         {
             string xml = @"<?xml version='1.0' encoding='utf-8' ?>
-                                    <!DOCTYPE text [
-                                        <!ATTLIST book id CDATA #REQUIRED>
-                                        <!ENTITY a '123'>
-                                    ]>
-                                    <text id1='a 123 b' id2='2'/>";
+									<!DOCTYPE text [
+										<!ATTLIST book id CDATA #REQUIRED>
+										<!ENTITY a '123'>
+									]>
+									<text id1='a 123 b' id2='2'/>";
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.DtdProcessing = DtdProcessing.Ignore;
             using (XmlReader tr = XmlReader.Create(new StringReader(xml), rs))
@@ -61,11 +61,11 @@ namespace CoreXml.Test.XLinq
          public void EnsureReadToFollowingMovesToAttributeAndNotToDtd()
          {
             string xml = @"<?xml version='1.0' encoding='utf-8' ?>
-                                    <!DOCTYPE text [
-                                        <!ATTLIST book id CDATA #REQUIRED>
-                                        <!ENTITY a '123'>
-                                    ]>
-                                    <text id1='a 123 b' id2='2'/>";
+									<!DOCTYPE text [
+										<!ATTLIST book id CDATA #REQUIRED>
+										<!ENTITY a '123'>
+									]>
+									<text id1='a 123 b' id2='2'/>";
              XmlReaderSettings rs = new XmlReaderSettings();
              rs.DtdProcessing = DtdProcessing.Ignore;
              using (XmlReader tr = XmlReader.Create(new StringReader(xml), rs))

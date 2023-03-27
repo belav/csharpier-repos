@@ -4,17 +4,17 @@
 using System.Collections;
 
 struct P {
-    public int x;
+	public int x;
 }
 
 class Test {
-    static IEnumerable foo () { return null; }
+	static IEnumerable foo () { return null; }
 
-    static void Main ()
-    {
-        IEnumerable f = foo ();
-        if (f != null)
-            foreach (P p in f)
-                p.x = 0;
-    }
+	static void Main ()
+	{
+		IEnumerable f = foo ();
+		if (f != null)
+			foreach (P p in f)
+				p.x = 0;
+	}
 }

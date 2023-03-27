@@ -1,11 +1,11 @@
-//
+ï»¿//
 // PhoneAttributeTest.cs
 //
 // Authors:
-//      Pablo Ruiz García <pablo.ruiz@gmail.com>
+//      Pablo Ruiz GarcÃ­a <pablo.ruiz@gmail.com>
 //
 // Copyright (C) 2010 Novell, Inc. (http://novell.com/)
-// Copyright (C) 2013 Pablo Ruiz García
+// Copyright (C) 2013 Pablo Ruiz GarcÃ­a
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -35,21 +35,21 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.DataAnnotations
 {
-    [TestFixture]
-    public class PhoneAttributeTest
-    {
-        [Test]
-        public void IsValid ()
-        {
-            var sla = new PhoneAttribute ();
+	[TestFixture]
+	public class PhoneAttributeTest
+	{
+		[Test]
+		public void IsValid ()
+		{
+			var sla = new PhoneAttribute ();
 
-            Assert.IsTrue (sla.IsValid (null), "#A1-1");
-            Assert.IsFalse (sla.IsValid (String.Empty), "#A1-2");
-            Assert.IsFalse (sla.IsValid ("string"), "#A1-3");
-            Assert.IsTrue (sla.IsValid ("1-800-642-7676"), "#A1-4");
-            Assert.IsTrue (sla.IsValid ("+86-21-96081318"), "#A1-5");
-            Assert.IsFalse (sla.IsValid (true), "#A1-6");
-            Assert.IsFalse (sla.IsValid (DateTime.Now), "#A1-7");
-        }
-    }
+			Assert.IsTrue (sla.IsValid (null), "#A1-1");
+			Assert.IsFalse (sla.IsValid (String.Empty), "#A1-2");
+			Assert.IsFalse (sla.IsValid ("string"), "#A1-3");
+			Assert.IsTrue (sla.IsValid ("1-800-642-7676"), "#A1-4");
+			Assert.IsTrue (sla.IsValid ("+86-21-96081318"), "#A1-5");
+			Assert.IsFalse (sla.IsValid (true), "#A1-6");
+			Assert.IsFalse (sla.IsValid (DateTime.Now), "#A1-7");
+		}
+	}
 }

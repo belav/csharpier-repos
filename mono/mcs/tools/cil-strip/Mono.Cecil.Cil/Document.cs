@@ -28,53 +28,53 @@
 
 namespace Mono.Cecil.Cil {
 
-    using System;
+	using System;
 
-    internal class Document {
+	internal class Document {
 
-        string m_url;
+		string m_url;
 
-        Guid m_type;
-        DocumentHashAlgorithm m_hashAlgorithm;
-        Guid m_language;
-        Guid m_languageVendor;
+		Guid m_type;
+		DocumentHashAlgorithm m_hashAlgorithm;
+		Guid m_language;
+		Guid m_languageVendor;
 
-        byte [] m_hash;
+		byte [] m_hash;
 
-        public string Url {
-            get { return m_url; }
-            set { m_url = value; }
-        }
+		public string Url {
+			get { return m_url; }
+			set { m_url = value; }
+		}
 
-        public Guid Type {
-            get { return m_type; }
-            set { m_type = value; }
-        }
+		public Guid Type {
+			get { return m_type; }
+			set { m_type = value; }
+		}
 
-        public DocumentHashAlgorithm HashAlgorithm {
-            get { return m_hashAlgorithm; }
-            set { m_hashAlgorithm = value; }
-        }
+		public DocumentHashAlgorithm HashAlgorithm {
+			get { return m_hashAlgorithm; }
+			set { m_hashAlgorithm = value; }
+		}
 
-        public Guid Language {
-            get { return m_language; }
-            set { m_language = value; }
-        }
+		public Guid Language {
+			get { return m_language; }
+			set { m_language = value; }
+		}
 
-        public Guid LanguageVendor {
-            get { return m_languageVendor; }
-            set { m_languageVendor = value; }
-        }
+		public Guid LanguageVendor {
+			get { return m_languageVendor; }
+			set { m_languageVendor = value; }
+		}
 
-        public byte [] Hash {
-            get { return m_hash; }
-            set { m_hash = value; }
-        }
+		public byte [] Hash {
+			get { return m_hash; }
+			set { m_hash = value; }
+		}
 
-        public Document (string url)
-        {
-            m_url = url;
-            m_hash = new byte [0];
-        }
-    }
+		public Document (string url)
+		{
+			m_url = url;
+			m_hash = new byte [0];
+		}
+	}
 }

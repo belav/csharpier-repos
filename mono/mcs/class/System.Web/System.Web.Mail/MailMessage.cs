@@ -4,7 +4,7 @@
 // Author:
 //    Lawrence Pit (loz@cable.a2000.nl)
 //    Per Arneng (pt99par@student.bth.se)
-//    Sanjay Gupta (gsanjay@novell.com)
+//	Sanjay Gupta (gsanjay@novell.com)
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,102 +35,102 @@ using System.Text;
 
 namespace System.Web.Mail
 {
-    [Obsolete ("The recommended alternative is System.Net.Mail.MailMessage. http://go.microsoft.com/fwlink/?linkid=14202")]
-    public class MailMessage
-    {
-        ArrayList attachments;
-        string bcc;
-        string body = String.Empty;
-        Encoding bodyEncoding;
-        MailFormat bodyFormat;
-        string cc;        
-        string from;
-        ListDictionary headers;
-        MailPriority priority;
-        string subject = String.Empty;
-        string to;
-        string urlContentBase;
-        string urlContentLocation;
-        
-        // Constructor        
-        public MailMessage ()
-        {
-            attachments = new ArrayList (8);
-            headers = new ListDictionary ();
-            bodyEncoding = Encoding.Default;
-            fields = new Hashtable ();
-        }        
-    
-        // Properties
-        public IList Attachments {
-            get { return (IList) attachments; }
-        }        
-        
-        public string Bcc {
-            get { return bcc; } 
-            set { bcc = value; }
-        }
-    
-        public string Body {
-            get { return body; } 
-            set { body = value; }
-        }
+	[Obsolete ("The recommended alternative is System.Net.Mail.MailMessage. http://go.microsoft.com/fwlink/?linkid=14202")]
+	public class MailMessage
+	{
+		ArrayList attachments;
+		string bcc;
+		string body = String.Empty;
+		Encoding bodyEncoding;
+		MailFormat bodyFormat;
+		string cc;		
+		string from;
+		ListDictionary headers;
+		MailPriority priority;
+		string subject = String.Empty;
+		string to;
+		string urlContentBase;
+		string urlContentLocation;
+		
+		// Constructor		
+		public MailMessage ()
+		{
+			attachments = new ArrayList (8);
+			headers = new ListDictionary ();
+			bodyEncoding = Encoding.Default;
+			fields = new Hashtable ();
+		}		
+	
+		// Properties
+		public IList Attachments {
+			get { return (IList) attachments; }
+		}		
+		
+		public string Bcc {
+			get { return bcc; } 
+			set { bcc = value; }
+		}
+	
+		public string Body {
+			get { return body; } 
+			set { body = value; }
+		}
 
-        public Encoding BodyEncoding {
-            get { return bodyEncoding; } 
-            set { bodyEncoding = value; }
-        }
+		public Encoding BodyEncoding {
+			get { return bodyEncoding; } 
+			set { bodyEncoding = value; }
+		}
 
-        public MailFormat BodyFormat {
-            get { return bodyFormat; } 
-            set { bodyFormat = value; }
-        }        
+		public MailFormat BodyFormat {
+			get { return bodyFormat; } 
+			set { bodyFormat = value; }
+		}		
 
-        public string Cc {
-            get { return cc; } 
-            set { cc = value; }
-        }
+		public string Cc {
+			get { return cc; } 
+			set { cc = value; }
+		}
 
-        public string From {
-            get { return from; } 
-            set { from = value; }
-        }
+		public string From {
+			get { return from; } 
+			set { from = value; }
+		}
 
-        public IDictionary Headers {
-            get { return (IDictionary) headers; }
-        }
-        
-        public MailPriority Priority {
-            get { return priority; } 
-            set { priority = value; }
-        }
-        
-        public string Subject {
-            get { return subject; } 
-            set { subject = value; }
-        }
+		public IDictionary Headers {
+			get { return (IDictionary) headers; }
+		}
+		
+		public MailPriority Priority {
+			get { return priority; } 
+			set { priority = value; }
+		}
+		
+		public string Subject {
+			get { return subject; } 
+			set { subject = value; }
+		}
 
-        public string To {
-            get { return to; }   
-            set { to = value; }
-        }
+		public string To {
+			get { return to; }   
+			set { to = value; }
+		}
 
-        public string UrlContentBase {
-            get { return urlContentBase; } 
-            set { urlContentBase = value; }
-        }
+		public string UrlContentBase {
+			get { return urlContentBase; } 
+			set { urlContentBase = value; }
+		}
 
-        public string UrlContentLocation {
-            get { return urlContentLocation; } 
-            set { urlContentLocation = value; }
-        }
+		public string UrlContentLocation {
+			get { return urlContentLocation; } 
+			set { urlContentLocation = value; }
+		}
 
-        Hashtable fields;
-        
-        public IDictionary Fields {
-            get {
-                return (IDictionary) fields;
-            }
-        }
-    }
+		Hashtable fields;
+		
+		public IDictionary Fields {
+			get {
+				return (IDictionary) fields;
+			}
+		}
+	}
 }

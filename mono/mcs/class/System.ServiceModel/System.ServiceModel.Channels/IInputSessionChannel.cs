@@ -29,8 +29,8 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    public interface IInputSessionChannel
-        : IInputChannel, IChannel, ISessionChannel<IInputSession>
-    {
-    }
+	public interface IInputSessionChannel
+		: IInputChannel, IChannel, ISessionChannel<IInputSession>
+	{
+	}
 }

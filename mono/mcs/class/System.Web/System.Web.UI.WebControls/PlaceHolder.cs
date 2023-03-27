@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.PlaceHolder.cs
 //
 // Authors:
-//    Ben Maurer (bmaurer@novell.com)
+//	Ben Maurer (bmaurer@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,14 +31,14 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    [ControlBuilder (typeof (PlaceHolderControlBuilder))]
-    public class PlaceHolder : Control
-    {
-        [BrowsableAttribute(true)]
-        public override bool EnableTheming {
-            get;
-            set;
-        }
-    }
-    
+	[ControlBuilder (typeof (PlaceHolderControlBuilder))]
+	public class PlaceHolder : Control
+	{
+		[BrowsableAttribute(true)]
+		public override bool EnableTheming {
+			get;
+			set;
+		}
+	}
+	
 }

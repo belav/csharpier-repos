@@ -12,8 +12,8 @@ public class Map<K, T> : IA<CA<K, IA<T>>>, IA<T>
 
 class S
 {
-    public static void Main ()
-    {
-        new Map<double, short> ();
-    }
+	public static void Main ()
+	{
+		new Map<double, short> ();
+	}
 }

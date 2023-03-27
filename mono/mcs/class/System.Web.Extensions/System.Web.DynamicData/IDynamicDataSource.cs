@@ -35,19 +35,19 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public interface IDynamicDataSource : IDataSource
-    {
-        bool AutoGenerateWhereClause { get; set; }
-        Type ContextType { get; set; }
-        bool EnableDelete { get; set; }
-        bool EnableInsert { get; set; }
-        bool EnableUpdate { get; set; }
-        string EntitySetName { get; set; }
-        string Where { get; set; }
-        ParameterCollection WhereParameters { get; }
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public interface IDynamicDataSource : IDataSource
+	{
+		bool AutoGenerateWhereClause { get; set; }
+		Type ContextType { get; set; }
+		bool EnableDelete { get; set; }
+		bool EnableInsert { get; set; }
+		bool EnableUpdate { get; set; }
+		string EntitySetName { get; set; }
+		string Where { get; set; }
+		ParameterCollection WhereParameters { get; }
 
-        event EventHandler<DynamicValidatorEventArgs> Exception;
-    }
+		event EventHandler<DynamicValidatorEventArgs> Exception;
+	}
 }

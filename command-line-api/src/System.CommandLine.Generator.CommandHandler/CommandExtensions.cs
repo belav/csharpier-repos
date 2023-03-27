@@ -1,4 +1,4 @@
-namespace System.CommandLine;
+﻿namespace System.CommandLine;
 
 /// <summary>
 /// Provides extension methods for <see cref="Command" />.

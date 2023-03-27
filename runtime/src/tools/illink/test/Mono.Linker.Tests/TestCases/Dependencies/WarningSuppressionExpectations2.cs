@@ -1,4 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 [assembly: UnconditionalSuppressMessage ("ILLink", "IL2072", Scope = "member", Target = "M:Mono.Linker.Tests.Cases.Warnings.Dependencies.TriggerWarnings_Lib.get_Warning2")]
 [assembly: UnconditionalSuppressMessage ("ILLink", "IL2072", Scope = "member", Target = "M:Mono.Linker.Tests.Cases.Warnings.Dependencies.TriggerWarnings_Lib.Main")]

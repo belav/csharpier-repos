@@ -4,9 +4,9 @@
 
 class TestClass
 {
-    public unsafe static void Main ()
-    {
-        int* arr = null;
-        var i = arr["c"];
-    }
+	public unsafe static void Main ()
+	{
+		int* arr = null;
+		var i = arr["c"];
+	}
 }

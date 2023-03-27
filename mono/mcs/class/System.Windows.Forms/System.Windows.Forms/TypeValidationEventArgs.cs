@@ -23,52 +23,52 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public class TypeValidationEventArgs : EventArgs
-    {
-        private bool cancel;
-        private bool is_valid_input;
-        private string message;
-        private object return_value;
-        private Type validating_type;
+	public class TypeValidationEventArgs : EventArgs
+	{
+		private bool cancel;
+		private bool is_valid_input;
+		private string message;
+		private object return_value;
+		private Type validating_type;
 
-        #region Public Constructors
-        public TypeValidationEventArgs (Type validatingType, bool isValidInput, object returnValue, string message) : base ()
-        {
-            this.is_valid_input = isValidInput;
-            this.message = message;
-            this.return_value = returnValue;
-            this.validating_type = validatingType;
-            this.cancel = false;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public TypeValidationEventArgs (Type validatingType, bool isValidInput, object returnValue, string message) : base ()
+		{
+			this.is_valid_input = isValidInput;
+			this.message = message;
+			this.return_value = returnValue;
+			this.validating_type = validatingType;
+			this.cancel = false;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public bool Cancel {
-            get { return this.cancel; }
-            set { this.cancel = value; }
-        }
-        
-        public bool IsValidInput {
-            get { return this.is_valid_input; }
-        }
-        
-        public string Message {
-            get { return this.message; }
-        }
-        
-        public object ReturnValue {
-            get { return this.return_value; }
-        }
-        
-        public Type ValidatingType {
-            get { return this.validating_type; }
-        }
-        
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public bool Cancel {
+			get { return this.cancel; }
+			set { this.cancel = value; }
+		}
+		
+		public bool IsValidInput {
+			get { return this.is_valid_input; }
+		}
+		
+		public string Message {
+			get { return this.message; }
+		}
+		
+		public object ReturnValue {
+			get { return this.return_value; }
+		}
+		
+		public Type ValidatingType {
+			get { return this.validating_type; }
+		}
+		
+		#endregion	// Public Instance Properties
+	}
 }

@@ -20,26 +20,26 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.IO.Packaging {
 
-    public class SignatureVerificationEventArgs : EventArgs
-    {
-        internal SignatureVerificationEventArgs ()
-        {
-        }
+	public class SignatureVerificationEventArgs : EventArgs
+	{
+		internal SignatureVerificationEventArgs ()
+		{
+		}
 
-        public PackageDigitalSignature Signature {
-            get { throw new NotImplementedException (); }
-        }
+		public PackageDigitalSignature Signature {
+			get { throw new NotImplementedException (); }
+		}
 
-        public VerifyResult VerifyResult {
-            get { throw new NotImplementedException (); }
-        }
-    }
+		public VerifyResult VerifyResult {
+			get { throw new NotImplementedException (); }
+		}
+	}
 
 }

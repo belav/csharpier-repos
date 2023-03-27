@@ -30,19 +30,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.MetadataTests {
 
-    /*
-     * Export the metadata into a string, then import it back.
-     * 
-     * This tests both the WsdlExporter and the WsdlImporter.
-     * 
-     */
-    [TestFixture]
-    public class ImportTests_RoundTrip : ImportTests {
-        
-        public override TestContext Context {
-            get { return TestContext.RoundTripContext; }
-        }
+	/*
+	 * Export the metadata into a string, then import it back.
+	 * 
+	 * This tests both the WsdlExporter and the WsdlImporter.
+	 * 
+	 */
+	[TestFixture]
+	public class ImportTests_RoundTrip : ImportTests {
+		
+		public override TestContext Context {
+			get { return TestContext.RoundTripContext; }
+		}
 
-    }
+	}
 }
 #endif

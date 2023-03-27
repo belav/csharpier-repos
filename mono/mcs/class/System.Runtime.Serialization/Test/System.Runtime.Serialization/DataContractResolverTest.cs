@@ -2,8 +2,8 @@
 // XmlObjectSerializerTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
-//    Ankit Jain <JAnkit@novell.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
+//	Ankit Jain <JAnkit@novell.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 
@@ -47,72 +47,72 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-    [TestFixture]
-    public class DataContractResolverTest
-    {
-        [Test]
-        public void UseCase1 ()
-        {
-            var ds = new DataContractSerializer (typeof (Colors), null, 10000, false, false, null, new MyResolver ());
-            var sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw))
-                ds.WriteObject (xw, new ResolvedClass ());
+	[TestFixture]
+	public class DataContractResolverTest
+	{
+		[Test]
+		public void UseCase1 ()
+		{
+			var ds = new DataContractSerializer (typeof (Colors), null, 10000, false, false, null, new MyResolver ());
+			var sw = new StringWriter ();
+			using (var xw = XmlWriter.Create (sw))
+				ds.WriteObject (xw, new ResolvedClass ());
 
-            // xml and xml2 are equivalent in infoset, except for prefixes and position of namespace nodes. So the difference should not matter.
-            string xml = @"<?xml version='1.0' encoding='utf-16'?><Colors xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns:d1p1='urn:dummy' i:type='d1p1:ResolvedClass' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Baz xmlns='http://schemas.datacontract.org/2004/07/'>c74376f0-5517-4cb7-8a07-35026423f565</Baz></Colors>".Replace ('\'', '"');
-            string xml2 = @"<?xml version='1.0' encoding='utf-16'?><Colors xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns:d1p1='urn:dummy' xmlns:d1p2='http://schemas.datacontract.org/2004/07/' i:type='d1p2:ResolvedClass' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><d1p2:Baz>c74376f0-5517-4cb7-8a07-35026423f565</d1p2:Baz></Colors>".Replace ('\'', '"');
-            try {
-                Assert.AreEqual (xml, sw.ToString (), "#1");
-            } catch (AssertionException) {
-                Assert.AreEqual (xml2, sw.ToString (), "#2");
-            }
-            using (var xr = XmlReader.Create (new StringReader (xml)))
-                Assert.AreEqual (typeof (ResolvedClass), ds.ReadObject (xr).GetType (), "#3");
-            using (var xr = XmlReader.Create (new StringReader (xml)))
-                Assert.AreEqual (typeof (ResolvedClass), ds.ReadObject (xr).GetType (), "#4");
-        }
-    }
+			// xml and xml2 are equivalent in infoset, except for prefixes and position of namespace nodes. So the difference should not matter.
+			string xml = @"<?xml version='1.0' encoding='utf-16'?><Colors xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns:d1p1='urn:dummy' i:type='d1p1:ResolvedClass' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Baz xmlns='http://schemas.datacontract.org/2004/07/'>c74376f0-5517-4cb7-8a07-35026423f565</Baz></Colors>".Replace ('\'', '"');
+			string xml2 = @"<?xml version='1.0' encoding='utf-16'?><Colors xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns:d1p1='urn:dummy' xmlns:d1p2='http://schemas.datacontract.org/2004/07/' i:type='d1p2:ResolvedClass' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><d1p2:Baz>c74376f0-5517-4cb7-8a07-35026423f565</d1p2:Baz></Colors>".Replace ('\'', '"');
+			try {
+				Assert.AreEqual (xml, sw.ToString (), "#1");
+			} catch (AssertionException) {
+				Assert.AreEqual (xml2, sw.ToString (), "#2");
+			}
+			using (var xr = XmlReader.Create (new StringReader (xml)))
+				Assert.AreEqual (typeof (ResolvedClass), ds.ReadObject (xr).GetType (), "#3");
+			using (var xr = XmlReader.Create (new StringReader (xml)))
+				Assert.AreEqual (typeof (ResolvedClass), ds.ReadObject (xr).GetType (), "#4");
+		}
+	}
 
-    public class MyResolver : DataContractResolver
-    {
-        public override bool TryResolveType (Type type, Type declaredType, DataContractResolver knownTypeResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
-        {
-            //Console.WriteLine ("TryResolveType: {0} {1}", type, declaredType);
-            if (knownTypeResolver.TryResolveType (type, declaredType, null, out typeName, out typeNamespace))
-                return true;
-            return SafeResolveType (type, out typeName, out typeNamespace);
-        }
+	public class MyResolver : DataContractResolver
+	{
+		public override bool TryResolveType (Type type, Type declaredType, DataContractResolver knownTypeResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+		{
+			//Console.WriteLine ("TryResolveType: {0} {1}", type, declaredType);
+			if (knownTypeResolver.TryResolveType (type, declaredType, null, out typeName, out typeNamespace))
+				return true;
+			return SafeResolveType (type, out typeName, out typeNamespace);
+		}
 
-        XmlDictionary dic = new XmlDictionary ();
+		XmlDictionary dic = new XmlDictionary ();
 
-        bool SafeResolveType (Type type, out XmlDictionaryString name, out XmlDictionaryString ns)
-        {
-            // Console.WriteLine ("SafeResolveType: {0}", type);
-            name = dic.Add (type.Name);
-            ns = dic.Add (type.Namespace ?? "urn:dummy");
-            return true;
-        }
+		bool SafeResolveType (Type type, out XmlDictionaryString name, out XmlDictionaryString ns)
+		{
+			// Console.WriteLine ("SafeResolveType: {0}", type);
+			name = dic.Add (type.Name);
+			ns = dic.Add (type.Namespace ?? "urn:dummy");
+			return true;
+		}
 
-        public override Type ResolveName (string typeName, string typeNamespace, Type declaredType, DataContractResolver knownTypeResolver)
-        {
-            //Console.WriteLine ("ResolveName: {0} {1} {2}", typeName, typeNamespace, declaredType);
-            return knownTypeResolver.ResolveName (typeName, typeNamespace, declaredType, null) ?? RecoveringResolveName (typeName, typeNamespace);
-        }
-        
-        Type RecoveringResolveName (string typeName, string typeNamespace)
-        {
-            if (typeNamespace == "urn:dummy")
-                return Type.GetType (typeName);
-            else
-                return Type.GetType (typeNamespace + '.' + typeName);
-        }
-    }
+		public override Type ResolveName (string typeName, string typeNamespace, Type declaredType, DataContractResolver knownTypeResolver)
+		{
+			//Console.WriteLine ("ResolveName: {0} {1} {2}", typeName, typeNamespace, declaredType);
+			return knownTypeResolver.ResolveName (typeName, typeNamespace, declaredType, null) ?? RecoveringResolveName (typeName, typeNamespace);
+		}
+		
+		Type RecoveringResolveName (string typeName, string typeNamespace)
+		{
+			if (typeNamespace == "urn:dummy")
+				return Type.GetType (typeName);
+			else
+				return Type.GetType (typeNamespace + '.' + typeName);
+		}
+	}
 }
 
 [DataContract]
 public class ResolvedClass
 {
-    [DataMember]
-    public Guid Baz = Guid.Parse ("c74376f0-5517-4cb7-8a07-35026423f565");
+	[DataMember]
+	public Guid Baz = Guid.Parse ("c74376f0-5517-4cb7-8a07-35026423f565");
 }
 

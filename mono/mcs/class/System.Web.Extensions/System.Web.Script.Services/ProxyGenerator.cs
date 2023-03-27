@@ -33,10 +33,10 @@ using System.Text;
 
 namespace System.Web.Script.Services
 {
-    public static class ProxyGenerator
-    {
-        public static string GetClientProxyScript (Type type, string path, bool debug) {
-            return LogicalTypeInfo.GetLogicalTypeInfo (type, path).Proxy;
-        }
-    }
+	public static class ProxyGenerator
+	{
+		public static string GetClientProxyScript (Type type, string path, bool debug) {
+			return LogicalTypeInfo.GetLogicalTypeInfo (type, path).Proxy;
+		}
+	}
 }

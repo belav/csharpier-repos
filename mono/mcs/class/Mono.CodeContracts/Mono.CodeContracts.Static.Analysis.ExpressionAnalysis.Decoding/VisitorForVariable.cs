@@ -2,7 +2,7 @@
 // VisitorForVariable.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,23 +30,23 @@ using System;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding {
-    class VisitorForVariable<V,E> : QueryVisitor<V, E> 
-        where V : IEquatable<V> 
-        where E : IEquatable<E> {
-        private V variable;
+	class VisitorForVariable<V,E> : QueryVisitor<V, E> 
+		where V : IEquatable<V> 
+		where E : IEquatable<E> {
+		private V variable;
 
-        public static bool IsVariable (E expr, out V var, FullExpressionDecoder<V, E> decoder)
-        {
-            VisitorForVariable<V, E> visitor = decoder.VariableVisitor;
-            bool res = Decode (expr, visitor, decoder);
-            var = visitor.variable;
-            return res;
-        }
+		public static bool IsVariable (E expr, out V var, FullExpressionDecoder<V, E> decoder)
+		{
+			VisitorForVariable<V, E> visitor = decoder.VariableVisitor;
+			bool res = Decode (expr, visitor, decoder);
+			var = visitor.variable;
+			return res;
+		}
 
-        public override bool SymbolicConstant (E pc, V variable, Dummy data)
-        {
-            this.variable = variable;
-            return true;
-        }
-    }
+		public override bool SymbolicConstant (E pc, V variable, Dummy data)
+		{
+			this.variable = variable;
+			return true;
+		}
+	}
 }

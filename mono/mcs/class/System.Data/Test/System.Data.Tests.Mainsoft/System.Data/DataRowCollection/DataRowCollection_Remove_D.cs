@@ -37,68 +37,68 @@ namespace tests.system_data_dll.System_Data
 [TestFixture]
 public class DataRowCollection_Remove_D : GHTBase
 {
-    public static void Main()
-    {
-        DataRowCollection_Remove_D tc = new DataRowCollection_Remove_D();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRowCollection_Remove_D");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
+	public static void Main()
+	{
+		DataRowCollection_Remove_D tc = new DataRowCollection_Remove_D();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRowCollection_Remove_D");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("DataRowCollection_Remove_D");
-            DataRowCollection_Remove_D1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-    [Test]
-    public void DataRowCollection_Remove_D1()
-    {
-        DataTable dt = DataProvider.CreateParentDataTable();
-        int counter = dt.Rows.Count;
-        dt.PrimaryKey=  new DataColumn[] {dt.Columns[0]};
-        Compare(dt.Rows.Find(1),dt.Rows[0]);
-        dt.Rows.Remove(dt.Rows[0]);
-        Compare(dt.Rows.Count,counter-1);
-        Compare(dt.Rows.Find(1),null);
-        
-    }
-    
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("DataRowCollection_Remove_D");
+			DataRowCollection_Remove_D1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
+	[Test]
+	public void DataRowCollection_Remove_D1()
+	{
+		DataTable dt = DataProvider.CreateParentDataTable();
+		int counter = dt.Rows.Count;
+		dt.PrimaryKey=  new DataColumn[] {dt.Columns[0]};
+		Compare(dt.Rows.Find(1),dt.Rows[0]);
+		dt.Rows.Remove(dt.Rows[0]);
+		Compare(dt.Rows.Count,counter-1);
+		Compare(dt.Rows.Find(1),null);
+		
+	}
+	
 }
 }

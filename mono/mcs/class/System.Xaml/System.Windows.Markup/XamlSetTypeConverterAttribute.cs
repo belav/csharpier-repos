@@ -30,15 +30,15 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    [AttributeUsage (AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-    public sealed class XamlSetTypeConverterAttribute : Attribute
-    {
-        public XamlSetTypeConverterAttribute (string xamlSetTypeConverterHandler)
-        {
-            XamlSetTypeConverterHandler = xamlSetTypeConverterHandler;
-        }
-        
-        public string XamlSetTypeConverterHandler { get; private set; }
-    }
+	[AttributeUsage (AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
+	public sealed class XamlSetTypeConverterAttribute : Attribute
+	{
+		public XamlSetTypeConverterAttribute (string xamlSetTypeConverterHandler)
+		{
+			XamlSetTypeConverterHandler = xamlSetTypeConverterHandler;
+		}
+		
+		public string XamlSetTypeConverterHandler { get; private set; }
+	}
 }
 

@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 // Francis Fisher (frankie@terrorise.me.uk)
@@ -29,30 +29,30 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class ArrowAnnotation : Annotation
-    {
-        private int arrow_size = 5;
+	public class ArrowAnnotation : Annotation
+	{
+		private int arrow_size = 5;
 
-        #region Constructors
-        public ArrowAnnotation ()
-        {
-        }
-        #endregion
+		#region Constructors
+		public ArrowAnnotation ()
+		{
+		}
+		#endregion
 
-        #region Public Properties
-        public override ContentAlignment AnchorAlignment { get; set; }
-        public override string AnnotationType { get { throw new NotImplementedException (); } } //FIXME - find out what MS implementation returns here
-        public virtual int ArrowSize {
-            get { return arrow_size; }
-            set {
-                if (value <= 0)
-                    throw new ArgumentOutOfRangeException ("ArrowSize", "ArrowSize must be >= 0.");
+		#region Public Properties
+		public override ContentAlignment AnchorAlignment { get; set; }
+		public override string AnnotationType { get { throw new NotImplementedException (); } } //FIXME - find out what MS implementation returns here
+		public virtual int ArrowSize {
+			get { return arrow_size; }
+			set {
+				if (value <= 0)
+					throw new ArgumentOutOfRangeException ("ArrowSize", "ArrowSize must be >= 0.");
 
-                arrow_size = value;
-            }
-        }
+				arrow_size = value;
+			}
+		}
 
-        public virtual ArrowStyle ArrowStyle { get; set; }
-        #endregion
-    }
+		public virtual ArrowStyle ArrowStyle { get; set; }
+		#endregion
+	}
 }

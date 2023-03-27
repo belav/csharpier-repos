@@ -29,110 +29,110 @@ using System.Collections.Generic;
 
 namespace MonoTests.System.Configuration.Util {
 
-    public class TestLabel {
+	public class TestLabel {
 
-        List<Scope> scopes;
-        string delimiter;
-        Style defaultStyle;
+		List<Scope> scopes;
+		string delimiter;
+		Style defaultStyle;
 
-        public enum Style {
-            Letter,
-            Number,
-            HexNumer
-        }
+		public enum Style {
+			Letter,
+			Number,
+			HexNumer
+		}
 
-        public TestLabel (string prefix)
-            : this (prefix, ".", Style.Letter)
-        {
-        }
+		public TestLabel (string prefix)
+			: this (prefix, ".", Style.Letter)
+		{
+		}
 
-        public TestLabel (string prefix, string delimiter, Style style)
-        {
-            if ((prefix == null) || (prefix.Equals (string.Empty)))
-                throw new ArgumentException ("Cannot be null or empty.", "prefix");
-            if (delimiter == null)
-                throw new ArgumentNullException ("delimiter");
+		public TestLabel (string prefix, string delimiter, Style style)
+		{
+			if ((prefix == null) || (prefix.Equals (string.Empty)))
+				throw new ArgumentException ("Cannot be null or empty.", "prefix");
+			if (delimiter == null)
+				throw new ArgumentNullException ("delimiter");
 
-            scopes = new List<Scope> ();
-            scopes.Add (new Scope (prefix, style));
+			scopes = new List<Scope> ();
+			scopes.Add (new Scope (prefix, style));
 
-            this.delimiter = delimiter;
-            this.defaultStyle = style;
-        }
+			this.delimiter = delimiter;
+			this.defaultStyle = style;
+		}
 
-        class Scope {
-            public readonly string Text;
-            public readonly Style Style;
-            int id;
+		class Scope {
+			public readonly string Text;
+			public readonly Style Style;
+			int id;
 
-            public Scope (string text, Style style)
-            {
-                this.Text = text;
-                this.Style = style;
-                this.id = 0;
-            }
+			public Scope (string text, Style style)
+			{
+				this.Text = text;
+				this.Style = style;
+				this.id = 0;
+			}
 
-            public int GetID ()
-            {
-                return ++id;
-            }
-        }
+			public int GetID ()
+			{
+				return ++id;
+			}
+		}
 
-        public void EnterScope (string scope)
-        {
-            scopes.Add (new Scope (scope, defaultStyle));
-        }
+		public void EnterScope (string scope)
+		{
+			scopes.Add (new Scope (scope, defaultStyle));
+		}
 
-        public void LeaveScope ()
-        {
-            if (scopes.Count <= 1)
-                throw new InvalidOperationException ();
-            scopes.RemoveAt (scopes.Count - 1);
-        }
+		public void LeaveScope ()
+		{
+			if (scopes.Count <= 1)
+				throw new InvalidOperationException ();
+			scopes.RemoveAt (scopes.Count - 1);
+		}
 
-        public string Get ()
-        {
-            var sb = new StringBuilder ();
-            for (int i = 0; i < scopes.Count; i++) {
-                sb.Append (scopes [i].Text);
-                sb.Append (delimiter);
-            }
+		public string Get ()
+		{
+			var sb = new StringBuilder ();
+			for (int i = 0; i < scopes.Count; i++) {
+				sb.Append (scopes [i].Text);
+				sb.Append (delimiter);
+			}
 
-            var scope = scopes [scopes.Count - 1];
-            var id = scope.GetID ();
+			var scope = scopes [scopes.Count - 1];
+			var id = scope.GetID ();
 
-            switch (scope.Style) {
-            case Style.Letter:
-                if (id <= 26)
-                    sb.Append ((char)('a' + id - 1));
-                else
-                    goto case Style.Number;
-                break;
+			switch (scope.Style) {
+			case Style.Letter:
+				if (id <= 26)
+					sb.Append ((char)('a' + id - 1));
+				else
+					goto case Style.Number;
+				break;
 
-            case Style.Number:
-                sb.Append (id);
-                break;
+			case Style.Number:
+				sb.Append (id);
+				break;
 
-            case Style.HexNumer:
-                sb.AppendFormat ("{0:x2}", id);
-                break;
-            }
+			case Style.HexNumer:
+				sb.AppendFormat ("{0:x2}", id);
+				break;
+			}
 
-            return sb.ToString ();
-        }
+			return sb.ToString ();
+		}
 
-        public override string ToString ()
-        {
-            var sb = new StringBuilder ();
-            sb.Append ("[");
-            for (int i = 0; i < scopes.Count; i++) {
-                if (i > 0)
-                    sb.Append (delimiter);
-                sb.Append (scopes [i].Text);
-            }
-            sb.Append ("]");
-            return sb.ToString ();
-        }
-    }
+		public override string ToString ()
+		{
+			var sb = new StringBuilder ();
+			sb.Append ("[");
+			for (int i = 0; i < scopes.Count; i++) {
+				if (i > 0)
+					sb.Append (delimiter);
+				sb.Append (scopes [i].Text);
+			}
+			sb.Append ("]");
+			return sb.ToString ();
+		}
+	}
 }
 

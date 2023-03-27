@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -3150,10 +3150,10 @@ using System.Linq;
 
 class Test
 {
-    public static void Main ()
-    {
+	public static void Main ()
+	{
         var query8 = from int i in expr1 join int delegate in expr2 on i equals delegate select new { i, delegate };
-    }
+	}
 }
 ";
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);

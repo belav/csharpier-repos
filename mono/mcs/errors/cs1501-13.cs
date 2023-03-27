@@ -3,13 +3,13 @@
 
 static class C
 {
-    public static void Foo (this string s, int d, bool b)
-    {
-    }
+	public static void Foo (this string s, int d, bool b)
+	{
+	}
 
-    static void Main()
-    {
-        dynamic d = null;
-        "x".Foo (d);
-    }
+	static void Main()
+	{
+		dynamic d = null;
+		"x".Foo (d);
+	}
 }

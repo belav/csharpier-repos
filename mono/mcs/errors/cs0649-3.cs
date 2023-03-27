@@ -4,16 +4,16 @@
 
 using System;
 class X {
-    E e;
+	E e;
 
-    E Value {
-        get {
-            return e;
-        }
-    }
+	E Value {
+		get {
+			return e;
+		}
+	}
 }
 
 enum E
 {
-    Foo
+	Foo
 }

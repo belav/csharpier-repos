@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+ï»¿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Web.Razor.Tokenizer.Symbols;
@@ -137,23 +137,23 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void LeftDoubleQuote_Is_Valid_DoubleQuote()
         {
-            // Repeat all the above tests with Unicode Left Double Quote Character U+201C: “
-            TestSingleToken("“Foo Bar Baz“", VBSymbolType.StringLiteral);
-            TestSingleToken("“Foo ““Bar““ Baz“", VBSymbolType.StringLiteral);
-            TestSingleToken("“Foo", VBSymbolType.StringLiteral);
-            TestSingleToken("“abc“c", VBSymbolType.CharacterLiteral);
-            TestTokenizer("“Foo\nBar", new VBSymbol(0, 0, 0, "“Foo", VBSymbolType.StringLiteral), IgnoreRemaining);
+            // Repeat all the above tests with Unicode Left Double Quote Character U+201C: â€œ
+            TestSingleToken("â€œFoo Bar Bazâ€œ", VBSymbolType.StringLiteral);
+            TestSingleToken("â€œFoo â€œâ€œBarâ€œâ€œ Bazâ€œ", VBSymbolType.StringLiteral);
+            TestSingleToken("â€œFoo", VBSymbolType.StringLiteral);
+            TestSingleToken("â€œabcâ€œc", VBSymbolType.CharacterLiteral);
+            TestTokenizer("â€œFoo\nBar", new VBSymbol(0, 0, 0, "â€œFoo", VBSymbolType.StringLiteral), IgnoreRemaining);
         }
 
         [Fact]
         public void RightDoubleQuote_Is_Valid_DoubleQuote()
         {
-            // Repeat all the above tests with Unicode Right Double Quote Character U+201D: ”
-            TestSingleToken("”Foo Bar Baz”", VBSymbolType.StringLiteral);
-            TestSingleToken("”Foo ””Bar”” Baz”", VBSymbolType.StringLiteral);
-            TestSingleToken("”Foo", VBSymbolType.StringLiteral);
-            TestSingleToken("”abc”c", VBSymbolType.CharacterLiteral);
-            TestTokenizer("”Foo\nBar", new VBSymbol(0, 0, 0, "”Foo", VBSymbolType.StringLiteral), IgnoreRemaining);
+            // Repeat all the above tests with Unicode Right Double Quote Character U+201D: â€
+            TestSingleToken("â€Foo Bar Bazâ€", VBSymbolType.StringLiteral);
+            TestSingleToken("â€Foo â€â€Barâ€â€ Bazâ€", VBSymbolType.StringLiteral);
+            TestSingleToken("â€Foo", VBSymbolType.StringLiteral);
+            TestSingleToken("â€abcâ€c", VBSymbolType.CharacterLiteral);
+            TestTokenizer("â€Foo\nBar", new VBSymbol(0, 0, 0, "â€Foo", VBSymbolType.StringLiteral), IgnoreRemaining);
         }
 
         [Fact]

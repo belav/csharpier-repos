@@ -34,49 +34,49 @@ using System.Xml.Serialization;
 
 namespace System.Web.Services.Description
 {
-    public abstract class OperationMessage :
-        NamedItem
-    {
-        #region Fields
+	public abstract class OperationMessage :
+		NamedItem
+	{
+		#region Fields
 
-        XmlQualifiedName message;
-        Operation operation;
+		XmlQualifiedName message;
+		Operation operation;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
-        
-        protected OperationMessage ()
-        {
-            message = XmlQualifiedName.Empty;
-            operation = null;
-        }
-        
-        #endregion // Constructors
+		#region Constructors
+		
+		protected OperationMessage ()
+		{
+			message = XmlQualifiedName.Empty;
+			operation = null;
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [XmlAttribute ("message")]
-        public XmlQualifiedName Message {
-            get { return message; }
-            set { message = value; }
-        }
+		[XmlAttribute ("message")]
+		public XmlQualifiedName Message {
+			get { return message; }
+			set { message = value; }
+		}
 
 
-//        [XmlIgnore]
-        public Operation Operation {
-            get { return operation; }
-        }
+//		[XmlIgnore]
+		public Operation Operation {
+			get { return operation; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        internal void SetParent (Operation operation)
-        {
-            this.operation = operation;
-        }
+		internal void SetParent (Operation operation)
+		{
+			this.operation = operation;
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

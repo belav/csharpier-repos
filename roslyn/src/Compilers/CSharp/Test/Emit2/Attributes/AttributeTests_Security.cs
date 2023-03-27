@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -177,7 +177,7 @@ namespace N
     [PrincipalPermission((SecurityAction)(-1))]     // Invalid attribute argument
     [PrincipalPermission()]                         // Invalid attribute constructor
     public class C
-    {
+	{
         [PrincipalPermission(SecurityAction.Demand)]   // Invalid attribute target
         public int x;
     }
@@ -221,7 +221,7 @@ namespace N
     [MySecurityAttribute((SecurityAction)(-1))]     // Invalid attribute argument
     [MySecurityAttribute()]                         // Invalid attribute constructor
     public class C
-    {
+	{
         [MySecurityAttribute(SecurityAction.Demand)]   // Invalid attribute target
         public int x;
     }
@@ -662,8 +662,8 @@ namespace N
 {
     [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
     [MySecurityAttribute(SecurityAction.Assert)]
-    public class C
-    {
+	public class C
+	{
     }
 }
 ";
@@ -713,10 +713,10 @@ using System.Security.Permissions;
 
 namespace N
 {
-    public class C
-    {
+	public class C
+	{
         [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-        public static void Goo() {}
+		public static void Goo() {}
     }
 }
 ";
@@ -835,9 +835,9 @@ using System.Security.Permissions;
 namespace N
 {
     [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-    [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-    public class C
-    {
+	[PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
+	public class C
+	{
     }
 }
 ";
@@ -887,9 +887,9 @@ using System.Security.Permissions;
 namespace N
 {
     public class C
-    {
+	{
         [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-        [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
+	    [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
         public static void Goo() {}
     }
 }
@@ -940,9 +940,9 @@ using System.Security.Permissions;
 namespace N
 {
     [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-    [PrincipalPermission(SecurityAction.Assert, Role=@""User2"")]
-    public class C
-    {
+	[PrincipalPermission(SecurityAction.Assert, Role=@""User2"")]
+	public class C
+	{
     }
 }
 ";
@@ -999,9 +999,9 @@ using System.Security.Permissions;
 namespace N
 {
     public class C
-    {
+	{
         [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-        [PrincipalPermission(SecurityAction.Assert, Role=@""User2"")]
+	    [PrincipalPermission(SecurityAction.Assert, Role=@""User2"")]
         public static void Goo() {}
     }
 }
@@ -1059,16 +1059,16 @@ using System.Security.Permissions;
 namespace N
 {
     [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-    public class C
-    {
+	public class C
+	{
     }
 }
 
 namespace N2
 {
     [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-    public class C2
-    {
+	public class C2
+	{
     }
 }
 ";
@@ -1125,12 +1125,12 @@ using System.Security.Permissions;
 namespace N
 {
     public class C
-    {
+	{
         [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-        public static void Goo1() {}
+	    public static void Goo1() {}
 
         [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-        public static void Goo2() {}
+	    public static void Goo2() {}
     }
 }
 ";
@@ -1191,9 +1191,9 @@ namespace N
 {
     [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
     public class C
-    {
+	{
         [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-        public static void Goo() {}
+	    public static void Goo() {}
     }
 }
 ";
@@ -1294,9 +1294,9 @@ namespace N
 {
     [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
     public class C
-    {
+	{
         [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
-        public static void Goo() {}
+	    public static void Goo() {}
     }
 }
 ";
@@ -1372,10 +1372,10 @@ namespace N
     [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
     [PrincipalPermission(SecurityAction.Assert, Role=@""User2"")]
     public class C
-    {
+	{
         [PrincipalPermission(SecurityAction.Demand, Role=@""User1"")]
         [PrincipalPermission(SecurityAction.Demand, Role=@""User2"")]
-        public static void Goo() {}
+	    public static void Goo() {}
     }
 }
 ";

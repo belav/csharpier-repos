@@ -2,7 +2,7 @@
 // ProjectXmlChangedEventArgs.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@xamarin.com>
+//	Atsushi Enomoto <atsushi@xamarin.com>
 //
 // Copyright (C) 2013 Xamarin Inc.
 //
@@ -32,14 +32,14 @@ using System.Linq;
 
 namespace Microsoft.Build.Evaluation
 {
-    public class ProjectXmlChangedEventArgs : EventArgs
-    {
-        internal ProjectXmlChangedEventArgs (ProjectRootElement projectXml, string reason)
-        {
-            ProjectXml = projectXml;
-            Reason = reason;
-        }
-        public ProjectRootElement ProjectXml { get; private set; }
-        public string Reason { get; private set; }
-    }
+	public class ProjectXmlChangedEventArgs : EventArgs
+	{
+		internal ProjectXmlChangedEventArgs (ProjectRootElement projectXml, string reason)
+		{
+			ProjectXml = projectXml;
+			Reason = reason;
+		}
+		public ProjectRootElement ProjectXml { get; private set; }
+		public string Reason { get; private set; }
+	}
 }

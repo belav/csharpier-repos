@@ -33,31 +33,31 @@ using System.ServiceModel.Discovery;
 
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
-    [ServiceContract (Name = "TargetService", Namespace = MessageContractsApril2005.NS, CallbackContract = typeof (IDiscoveryTargetCallbackContractApril2005))]
-    internal interface IDiscoveryTargetContractApril2005
-    {
-        [OperationContract (Name = "ProbeApril2005", Action = MessageContractsApril2005.ProbeAction, AsyncPattern = true, IsOneWay = true)]
-        IAsyncResult BeginFind (MessageContractsApril2005.FindRequest message, AsyncCallback callback, object state);
+	[ServiceContract (Name = "TargetService", Namespace = MessageContractsApril2005.NS, CallbackContract = typeof (IDiscoveryTargetCallbackContractApril2005))]
+	internal interface IDiscoveryTargetContractApril2005
+	{
+		[OperationContract (Name = "ProbeApril2005", Action = MessageContractsApril2005.ProbeAction, AsyncPattern = true, IsOneWay = true)]
+		IAsyncResult BeginFind (MessageContractsApril2005.FindRequest message, AsyncCallback callback, object state);
 
-        void EndFind (IAsyncResult result);
+		void EndFind (IAsyncResult result);
 
-        [OperationContract (Name = "ResolveApril2005", Action = MessageContractsApril2005.ResolveAction, AsyncPattern = true, IsOneWay = true)]
-        IAsyncResult BeginResolve (MessageContractsApril2005.ResolveRequest message, AsyncCallback callback, object state);
+		[OperationContract (Name = "ResolveApril2005", Action = MessageContractsApril2005.ResolveAction, AsyncPattern = true, IsOneWay = true)]
+		IAsyncResult BeginResolve (MessageContractsApril2005.ResolveRequest message, AsyncCallback callback, object state);
 
-        void EndResolve (IAsyncResult result);
+		void EndResolve (IAsyncResult result);
 
-        [OperationContract (Name = "HelloApril2005", Action = MessageContractsApril2005.HelloAction, IsOneWay = true, AsyncPattern = true)]
-        IAsyncResult BeginOnlineAnnouncement (MessageContractsApril2005.OnlineAnnouncement message, AsyncCallback callback, object state);
+		[OperationContract (Name = "HelloApril2005", Action = MessageContractsApril2005.HelloAction, IsOneWay = true, AsyncPattern = true)]
+		IAsyncResult BeginOnlineAnnouncement (MessageContractsApril2005.OnlineAnnouncement message, AsyncCallback callback, object state);
 
-        void EndOnlineAnnouncement (IAsyncResult result);
-    }
+		void EndOnlineAnnouncement (IAsyncResult result);
+	}
 
-    internal interface IDiscoveryTargetCallbackContractApril2005
-    {
-        [OperationContract (Name = "ProbeMatchesApril2005", Action = MessageContractsApril2005.ProbeMatchAction, IsOneWay = true)]
-        void ReplyFind (MessageContractsApril2005.FindResponse message);
+	internal interface IDiscoveryTargetCallbackContractApril2005
+	{
+		[OperationContract (Name = "ProbeMatchesApril2005", Action = MessageContractsApril2005.ProbeMatchAction, IsOneWay = true)]
+		void ReplyFind (MessageContractsApril2005.FindResponse message);
 
-        [OperationContract (Name = "ResolveMatchesApril2005", Action = MessageContractsApril2005.ResolveMatchAction, IsOneWay = true)]
-        void ReplyResolve (MessageContractsApril2005.ResolveResponse message);
-    }
+		[OperationContract (Name = "ResolveMatchesApril2005", Action = MessageContractsApril2005.ResolveMatchAction, IsOneWay = true)]
+		void ReplyResolve (MessageContractsApril2005.ResolveResponse message);
+	}
 }

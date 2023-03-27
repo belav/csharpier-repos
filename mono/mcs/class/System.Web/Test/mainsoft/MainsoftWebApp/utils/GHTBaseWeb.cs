@@ -96,80 +96,80 @@ namespace GHTTests
         /// <param name="SubTestControl">The SubTestControl to add the result to.</param>
         /// <param name="TraceText">The text to add.</param>
         /// <param name="asText">Whether to include as plain text, or to interpret special HTML charachters as HTML.</param>
-        public void GHTSubTestAddResult(Control SubTestControl, string TraceText, bool asText)
+		public void GHTSubTestAddResult(Control SubTestControl, string TraceText, bool asText)
         {
-            if (asText)
-            {
-                TraceText = GHTHtmlToText(TraceText);
-            }
-            
-            Label lbl = new Label();
-            lbl.Text = "<br>" + TraceText;
-            SubTestControl.Controls.Add(lbl);
+			if (asText)
+			{
+				TraceText = GHTHtmlToText(TraceText);
+			}
+			
+			Label lbl = new Label();
+			lbl.Text = "<br>" + TraceText;
+			SubTestControl.Controls.Add(lbl);
 
-//                TableCell tempCell = new TableCell();
-//                TableRow tempRow = new TableRow();
-//                tempCell.Controls.Add( new LiteralControl(TraceText));
-//                tempRow.Controls.Add(tempCell); 
-//                SubTestControl.Controls.Add(tempRow);
+//				TableCell tempCell = new TableCell();
+//				TableRow tempRow = new TableRow();
+//				tempCell.Controls.Add( new LiteralControl(TraceText));
+//				tempRow.Controls.Add(tempCell); 
+//				SubTestControl.Controls.Add(tempRow);
 
         }
-        public void GHTSubTestAddResult(string TraceText)
-        {
-            GHTSubTestAddResult(TraceText, false);
-        }
-        public void GHTSubTestAddResult(string TraceText, bool asText)
-        {
-            GHTSubTestAddResult(GHTActiveSubTest, TraceText, asText);
-        }
-        public void GHTSubTestAddResult(Control SubTestControl, string TraceText)
-        {
-            GHTSubTestAddResult(SubTestControl, TraceText,false);
-        }
-        // Replaces Html special charachters to escape charachters in the returned string:
-        // Orig --> Result
-        //-----           ------
-        //  <                &lt;
-        //     >                &gt;
-        //     "                &quot;
-        // &                &amp;
-        public string GHTHtmlToText(string a_text)
-        {
-            string res = string.Empty;
-            res = a_text.Replace("<", "&lt;");
-            res = res.Replace(">", "&gt;");
-            res = res.Replace("\"", "&quot;");
-            return res;
-        }
+		public void GHTSubTestAddResult(string TraceText)
+		{
+			GHTSubTestAddResult(TraceText, false);
+		}
+		public void GHTSubTestAddResult(string TraceText, bool asText)
+		{
+			GHTSubTestAddResult(GHTActiveSubTest, TraceText, asText);
+		}
+		public void GHTSubTestAddResult(Control SubTestControl, string TraceText)
+		{
+			GHTSubTestAddResult(SubTestControl, TraceText,false);
+		}
+		// Replaces Html special charachters to escape charachters in the returned string:
+		// Orig --> Result
+		//-----		   ------
+		//  <				&lt;
+		//	 >				&gt;
+		//	 "				&quot;
+		// &				&amp;
+		public string GHTHtmlToText(string a_text)
+		{
+			string res = string.Empty;
+			res = a_text.Replace("<", "&lt;");
+			res = res.Replace(">", "&gt;");
+			res = res.Replace("\"", "&quot;");
+			return res;
+		}
 
-        protected void GHTSubTestExpectedExceptionCaught(System.Exception ex)
-        {
-            GHTSubTestAddResult("Test passed. Expected exception was caught.");
-        }
-        protected void GHTSubTestExpectedExceptionNotCaught(string ExceptionName)
-        {
-            GHTSubTestAddResult("Test failed. Expected " + ExceptionName + " exception was not caught.");
-        }
-        protected void GHTSubTestUnexpectedExceptionCaught(System.Exception ex)
-        {
-            string traceText = string.Empty;
-            traceText += "Test Failed. Unxpected ";
-            traceText += ex.GetType().Name;
-            traceText += " exception was caught";
-            traceText += "<br>Stack Trace: ";
-            traceText += ex.ToString();
+		protected void GHTSubTestExpectedExceptionCaught(System.Exception ex)
+		{
+			GHTSubTestAddResult("Test passed. Expected exception was caught.");
+		}
+		protected void GHTSubTestExpectedExceptionNotCaught(string ExceptionName)
+		{
+			GHTSubTestAddResult("Test failed. Expected " + ExceptionName + " exception was not caught.");
+		}
+		protected void GHTSubTestUnexpectedExceptionCaught(System.Exception ex)
+		{
+			string traceText = string.Empty;
+			traceText += "Test Failed. Unxpected ";
+			traceText += ex.GetType().Name;
+			traceText += " exception was caught";
+			traceText += "<br>Stack Trace: ";
+			traceText += ex.ToString();
 
-            GHTSubTestAddResult(traceText);
-        }
+			GHTSubTestAddResult(traceText);
+		}
 
-        protected void Compare(Object Result, Object ExpectedResult)
-        {
-            if (Result.Equals(ExpectedResult))
-                GHTSubTestAddResult("Test Passed.");
-            else
-                GHTSubTestAddResult("Test Failed. Result:" + GHTNormalizeToString(Result.ToString()) + ". Expected Result:" + GHTNormalizeToString(ExpectedResult.ToString()));
-                                             
-        }
+		protected void Compare(Object Result, Object ExpectedResult)
+		{
+			if (Result.Equals(ExpectedResult))
+				GHTSubTestAddResult("Test Passed.");
+			else
+				GHTSubTestAddResult("Test Failed. Result:" + GHTNormalizeToString(Result.ToString()) + ". Expected Result:" + GHTNormalizeToString(ExpectedResult.ToString()));
+											 
+		}
         /// <summary>
         /// Create a new SubTest conteiner.
         /// </summary>
@@ -183,21 +183,21 @@ namespace GHTTests
         }
         protected GHTWebControls.GHTSubTest GHTSubTestCreateNew(Control theForm, string Description)
         {
-            if (GHTActiveSubTestId == 0)
-            {
-                GHTActiveSubTestId++;
-            }
+			if (GHTActiveSubTestId == 0)
+			{
+				GHTActiveSubTestId++;
+			}
 
-            while (theForm.FindControl("GHTSubTest" + GHTActiveSubTestId) != null)
-            {
-                GHTActiveSubTestId++;
-            }
+			while (theForm.FindControl("GHTSubTest" + GHTActiveSubTestId) != null)
+			{
+				GHTActiveSubTestId++;
+			}
 
             GHTActiveForm = theForm;
             GHTWebControls.GHTSubTest subtest = new GHTWebControls.GHTSubTest();
             subtest.ID = "GHTSubTest" + GHTActiveSubTestId;
-            subtest.Description = Description;
-            subtest.Attributes.Add("TestName",Description);
+			subtest.Description = Description;
+			subtest.Attributes.Add("TestName",Description);
             theForm.Controls.Add(subtest);
             GHTActiveSubTest = subtest;
             return subtest;
@@ -363,44 +363,44 @@ namespace GHTTests
 
         }
 
-        protected void GHTHeader(string text)
-            {
-                Label  header = new Label();
-                header.Text = "<br>" + text + "<br>";
-                header.Font.Bold = true;
-                header.Font.Underline = true;
-                header.Font.Size = new FontUnit(FontSize.Larger);
-                GHTActiveForm.Controls.Add(header);
-            }
+		protected void GHTHeader(string text)
+			{
+				Label  header = new Label();
+				header.Text = "<br>" + text + "<br>";
+				header.Font.Bold = true;
+				header.Font.Underline = true;
+				header.Font.Size = new FontUnit(FontSize.Larger);
+				GHTActiveForm.Controls.Add(header);
+			}
 
-        /// <summary>
-        /// Removes tarailing @... and preceding '_' from strings if they are found
-        /// </summary>
-        /// <param name="orig">The original ToString result.</param>
-        /// <returns>Normalized string.</returns>
-        public string GHTNormalizeToString(string a_toNormalize)
-        {
-            //Remove the @ at the end of the tostring.
-            int atIndex = a_toNormalize.LastIndexOf('@');
-            if (atIndex > -1)
-            {
-                a_toNormalize = a_toNormalize.Remove(atIndex, a_toNormalize.Length - atIndex);
-            }
-            //remove the preceding '_'
-            if (a_toNormalize.StartsWith("_") )
-            {
-                a_toNormalize = a_toNormalize.Substring(1);
-            }
-            return a_toNormalize;
-        }
-        /// <summary>
-        /// Returns the normalized to string of this page.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return GHTNormalizeToString(base.ToString());
-        }
+		/// <summary>
+		/// Removes tarailing @... and preceding '_' from strings if they are found
+		/// </summary>
+		/// <param name="orig">The original ToString result.</param>
+		/// <returns>Normalized string.</returns>
+		public string GHTNormalizeToString(string a_toNormalize)
+		{
+			//Remove the @ at the end of the tostring.
+			int atIndex = a_toNormalize.LastIndexOf('@');
+			if (atIndex > -1)
+			{
+				a_toNormalize = a_toNormalize.Remove(atIndex, a_toNormalize.Length - atIndex);
+			}
+			//remove the preceding '_'
+			if (a_toNormalize.StartsWith("_") )
+			{
+				a_toNormalize = a_toNormalize.Substring(1);
+			}
+			return a_toNormalize;
+		}
+		/// <summary>
+		/// Returns the normalized to string of this page.
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return GHTNormalizeToString(base.ToString());
+		}
     }
 }
 

@@ -6,18 +6,18 @@ using System;
 
 class X {
 
-    bool v ()
-    {
-        try {
-            throw new Exception ();
-        } catch {
-            return false;
-        }
-        return true;
-    }
+	bool v ()
+	{
+		try {
+			throw new Exception ();
+		} catch {
+			return false;
+		}
+		return true;
+	}
 
-    public static int Main ()
-    {
-        return 0;
-    }        
+	public static int Main ()
+	{
+		return 0;
+	}		
 }

@@ -34,104 +34,104 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Win32
 {
-    [ComVisible (true)]
-    public static class Registry
-    {
-        public static readonly RegistryKey ClassesRoot = new RegistryKey (
-                RegistryHive.ClassesRoot);
-        public static readonly RegistryKey CurrentConfig = new RegistryKey (
-                RegistryHive.CurrentConfig);
-        public static readonly RegistryKey CurrentUser = new RegistryKey (
-                RegistryHive.CurrentUser);
+	[ComVisible (true)]
+	public static class Registry
+	{
+		public static readonly RegistryKey ClassesRoot = new RegistryKey (
+				RegistryHive.ClassesRoot);
+		public static readonly RegistryKey CurrentConfig = new RegistryKey (
+				RegistryHive.CurrentConfig);
+		public static readonly RegistryKey CurrentUser = new RegistryKey (
+				RegistryHive.CurrentUser);
 
-        [Obsolete ("Use PerformanceData instead")]
-        public static readonly RegistryKey DynData = new RegistryKey (
-                RegistryHive.DynData);
-        public static readonly RegistryKey LocalMachine = new RegistryKey (
-                RegistryHive.LocalMachine);
-        public static readonly RegistryKey PerformanceData = new RegistryKey (
-                RegistryHive.PerformanceData);
-        public static readonly RegistryKey Users = new RegistryKey (
-                RegistryHive.Users);
+		[Obsolete ("Use PerformanceData instead")]
+		public static readonly RegistryKey DynData = new RegistryKey (
+				RegistryHive.DynData);
+		public static readonly RegistryKey LocalMachine = new RegistryKey (
+				RegistryHive.LocalMachine);
+		public static readonly RegistryKey PerformanceData = new RegistryKey (
+				RegistryHive.PerformanceData);
+		public static readonly RegistryKey Users = new RegistryKey (
+				RegistryHive.Users);
 
-        static RegistryKey ToKey (string keyName, bool setting)
-        {
-            if (keyName == null)
-                throw new ArgumentException ("Not a valid registry key name", "keyName");
+		static RegistryKey ToKey (string keyName, bool setting)
+		{
+			if (keyName == null)
+				throw new ArgumentException ("Not a valid registry key name", "keyName");
 
-            RegistryKey key = null;
-            string [] keys = keyName.Split ('\\');
+			RegistryKey key = null;
+			string [] keys = keyName.Split ('\\');
 
-            switch (keys [0]){
-            case "HKEY_CLASSES_ROOT":
-                key = ClassesRoot;
-                break;
-            case "HKEY_CURRENT_CONFIG":
-                key = CurrentConfig;
-                break;
-            case "HKEY_CURRENT_USER":
-                key = CurrentUser;
-                break;
-            case "HKEY_DYN_DATA":
-                key = DynData;
-                break;
-            case "HKEY_LOCAL_MACHINE":
-                key = LocalMachine;
-                break;
-            case "HKEY_PERFORMANCE_DATA":
-                key = PerformanceData;
-                break;
-            case "HKEY_USERS":
-                key = Users;
-                break;
-            default:
-                throw new ArgumentException ("Keyname does not start with a valid registry root", "keyName");
-            }
+			switch (keys [0]){
+			case "HKEY_CLASSES_ROOT":
+				key = ClassesRoot;
+				break;
+			case "HKEY_CURRENT_CONFIG":
+				key = CurrentConfig;
+				break;
+			case "HKEY_CURRENT_USER":
+				key = CurrentUser;
+				break;
+			case "HKEY_DYN_DATA":
+				key = DynData;
+				break;
+			case "HKEY_LOCAL_MACHINE":
+				key = LocalMachine;
+				break;
+			case "HKEY_PERFORMANCE_DATA":
+				key = PerformanceData;
+				break;
+			case "HKEY_USERS":
+				key = Users;
+				break;
+			default:
+				throw new ArgumentException ("Keyname does not start with a valid registry root", "keyName");
+			}
 
-            for (int i = 1; i < keys.Length; i++){
-                RegistryKey nkey = key.OpenSubKey (keys [i], setting);
-                if (nkey == null){
-                    if (!setting)
-                        return null;
-                    nkey = key.CreateSubKey (keys [i]);
-                }
-                key = nkey;
-            }
-            return key;
-        }
-        
-        public static void SetValue (string keyName, string valueName, object value)
-        {
-            RegistryKey key = ToKey (keyName, true);
-            if (valueName.Length > 255)
-                throw new ArgumentException ("valueName is larger than 255 characters", "valueName");
+			for (int i = 1; i < keys.Length; i++){
+				RegistryKey nkey = key.OpenSubKey (keys [i], setting);
+				if (nkey == null){
+					if (!setting)
+						return null;
+					nkey = key.CreateSubKey (keys [i]);
+				}
+				key = nkey;
+			}
+			return key;
+		}
+		
+		public static void SetValue (string keyName, string valueName, object value)
+		{
+			RegistryKey key = ToKey (keyName, true);
+			if (valueName.Length > 255)
+				throw new ArgumentException ("valueName is larger than 255 characters", "valueName");
 
-            if (key == null)
-                throw new ArgumentException ("cant locate that keyName", "keyName");
+			if (key == null)
+				throw new ArgumentException ("cant locate that keyName", "keyName");
 
-            key.SetValue (valueName, value);
-        }
+			key.SetValue (valueName, value);
+		}
 
-        public static void SetValue (string keyName, string valueName, object value, RegistryValueKind valueKind)
-        {
-            RegistryKey key = ToKey (keyName, true);
-            if (valueName.Length > 255)
-                throw new ArgumentException ("valueName is larger than 255 characters", "valueName");
+		public static void SetValue (string keyName, string valueName, object value, RegistryValueKind valueKind)
+		{
+			RegistryKey key = ToKey (keyName, true);
+			if (valueName.Length > 255)
+				throw new ArgumentException ("valueName is larger than 255 characters", "valueName");
 
-            if (key == null)
-                throw new ArgumentException ("cant locate that keyName", "keyName");
+			if (key == null)
+				throw new ArgumentException ("cant locate that keyName", "keyName");
 
-            key.SetValue (valueName, value, valueKind);
-        }
-        
-        public static object GetValue (string keyName, string valueName, object defaultValue)
-        {
-            RegistryKey key = ToKey (keyName, false);
-            if (key == null)
-                return defaultValue;
-            
-            return key.GetValue (valueName, defaultValue);
-        }
-    }
+			key.SetValue (valueName, value, valueKind);
+		}
+		
+		public static object GetValue (string keyName, string valueName, object defaultValue)
+		{
+			RegistryKey key = ToKey (keyName, false);
+			if (key == null)
+				return defaultValue;
+			
+			return key.GetValue (valueName, defaultValue);
+		}
+	}
 }
 

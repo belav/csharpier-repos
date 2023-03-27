@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.HotSpotCollection.cs
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -35,72 +35,72 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-    [EditorAttribute ("System.Web.UI.Design.WebControls.HotSpotCollectionEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class HotSpotCollection: StateManagedCollection
-    {
-        static Type[] _knownTypes = new Type[] { 
-            typeof (CircleHotSpot),
-            typeof (PolygonHotSpot),
-            typeof (RectangleHotSpot)
-        };
-                            
-        public HotSpot this [int index] {
-            get { return (HotSpot) ((IList)this)[index]; }
-        }
+	[EditorAttribute ("System.Web.UI.Design.WebControls.HotSpotCollectionEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
+	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class HotSpotCollection: StateManagedCollection
+	{
+		static Type[] _knownTypes = new Type[] { 
+			typeof (CircleHotSpot),
+			typeof (PolygonHotSpot),
+			typeof (RectangleHotSpot)
+		};
+						    
+		public HotSpot this [int index] {
+			get { return (HotSpot) ((IList)this)[index]; }
+		}
 
-        public int Add (HotSpot spot)
-        {
-            return ((IList)this).Add (spot);
-        }
-        
-        protected override object CreateKnownType (int index)
-        {
-            switch (index) {
-                case 0:
-                    return new CircleHotSpot ();
-                case 1:
-                    return new PolygonHotSpot ();
-                case 2:
-                    return new RectangleHotSpot ();
-            }
+		public int Add (HotSpot spot)
+		{
+			return ((IList)this).Add (spot);
+		}
+		
+		protected override object CreateKnownType (int index)
+		{
+			switch (index) {
+				case 0:
+					return new CircleHotSpot ();
+				case 1:
+					return new PolygonHotSpot ();
+				case 2:
+					return new RectangleHotSpot ();
+			}
 
-            throw new ArgumentOutOfRangeException ("index");
-        }
-        
-        protected override Type[] GetKnownTypes ()
-        {
-            return _knownTypes;
-        }
-        
-        public void Insert (int index, HotSpot spot)
-        {
-            ((IList)this).Insert (index, spot);
-        }
-        
-        protected override void OnValidate (object o)
-        {
-            base.OnValidate (o);
-            
-            if ((o is HotSpot) == false)
-                throw new ArgumentException ("o is not a HotSpot");
-        }
+			throw new ArgumentOutOfRangeException ("index");
+		}
+		
+		protected override Type[] GetKnownTypes ()
+		{
+			return _knownTypes;
+		}
+		
+		public void Insert (int index, HotSpot spot)
+		{
+			((IList)this).Insert (index, spot);
+		}
+		
+		protected override void OnValidate (object o)
+		{
+			base.OnValidate (o);
+			
+			if ((o is HotSpot) == false)
+				throw new ArgumentException ("o is not a HotSpot");
+		}
 
-        public void Remove (HotSpot spot)
-        {
-            ((IList)this).Remove (spot);
-        }
+		public void Remove (HotSpot spot)
+		{
+			((IList)this).Remove (spot);
+		}
 
-        public void RemoveAt (int index)
-        {
-            ((IList)this).RemoveAt (index);
-        }
+		public void RemoveAt (int index)
+		{
+			((IList)this).RemoveAt (index);
+		}
 
-        protected override void SetDirtyObject (object o)
-        {
-            HotSpot spot = (HotSpot)o;
-            spot.SetDirty ();
-        }
-    }
+		protected override void SetDirtyObject (object o)
+		{
+			HotSpot spot = (HotSpot)o;
+			spot.SetDirty ();
+		}
+	}
 }
 

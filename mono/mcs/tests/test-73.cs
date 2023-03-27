@@ -4,25 +4,25 @@
 //
 
 public abstract class Abstract {
-    public abstract int A ();
+	public abstract int A ();
 }
 
 public class Concrete : Abstract {
-    public override int A () {
-        return 1;
-    }
+	public override int A () {
+		return 1;
+	}
 }
 
 class Test {
 
-    public static int Main ()
-    {
-        Concrete c = new Concrete ();
+	public static int Main ()
+	{
+		Concrete c = new Concrete ();
 
-        if (c.A () != 1)
-            return 1;
+		if (c.A () != 1)
+			return 1;
 
-        return 0;
-    }
+		return 0;
+	}
 }
-    
+	

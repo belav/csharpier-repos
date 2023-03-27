@@ -6,7 +6,7 @@ using System;
 
 public ref struct S : IDisposable
 {
-    public void Dispose ()
-    {            
-    }
+	public void Dispose ()
+	{			
+	}
 }

@@ -1,9 +1,9 @@
 //
 // ExecutorTest.cs 
-//    - Unit tests for System.CodeDom.Compiler.Executor
+//	- Unit tests for System.CodeDom.Compiler.Executor
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,150 +37,150 @@ using System.Security.Principal;
 
 namespace MonoTests.System.CodeDom.Compiler
 {
-    [TestFixture]
-    public class ExecutorTest
-    {
-        private bool posix;
-        private bool cmdNotFound;
-        private int errcode;
-        private string cmd;
-        private string cd;
-        private string temp;
-        private TempFileCollection tfc;
-        private WindowsIdentity winid;
-        private IntPtr token;
+	[TestFixture]
+	public class ExecutorTest
+	{
+		private bool posix;
+		private bool cmdNotFound;
+		private int errcode;
+		private string cmd;
+		private string cd;
+		private string temp;
+		private TempFileCollection tfc;
+		private WindowsIdentity winid;
+		private IntPtr token;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            cmd = "ping"; // available everywhere
-            cd = Environment.CurrentDirectory;
-            temp = Path.GetTempPath ();
-            tfc = new TempFileCollection ();
-            winid = WindowsIdentity.GetCurrent ();
-            token = winid.Token;
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			cmd = "ping"; // available everywhere
+			cd = Environment.CurrentDirectory;
+			temp = Path.GetTempPath ();
+			tfc = new TempFileCollection ();
+			winid = WindowsIdentity.GetCurrent ();
+			token = winid.Token;
 
-            try {
-                string output = null;
-                string error = null;
-                errcode = Executor.ExecWaitWithCapture (cmd, tfc, ref output, ref error);
-            }
-            catch (Exception) {
-                // cmd might not be in the PATH
-                cmdNotFound = true;
-            }
-        }
+			try {
+				string output = null;
+				string error = null;
+				errcode = Executor.ExecWaitWithCapture (cmd, tfc, ref output, ref error);
+			}
+			catch (Exception) {
+				// cmd might not be in the PATH
+				cmdNotFound = true;
+			}
+		}
 
-        [TestFixtureTearDown]
-        public void FixtureTearDown ()
-        {
-            winid.Dispose ();
-        }
+		[TestFixtureTearDown]
+		public void FixtureTearDown ()
+		{
+			winid.Dispose ();
+		}
 
-        [Test]
-        [ExpectedException (typeof (ExternalException))]
-        public void ExecWait_NullCmd ()
-        {
-            Executor.ExecWait (null, new TempFileCollection ());
-        }
+		[Test]
+		[ExpectedException (typeof (ExternalException))]
+		public void ExecWait_NullCmd ()
+		{
+			Executor.ExecWait (null, new TempFileCollection ());
+		}
 
-        [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void ExecWait_NullTempFileCollection ()
-        {
-            if (cmdNotFound)
-                Assert.Ignore ("ping command not found.");
+		[Test]
+		[ExpectedException (typeof (NullReferenceException))]
+		public void ExecWait_NullTempFileCollection ()
+		{
+			if (cmdNotFound)
+				Assert.Ignore ("ping command not found.");
 
-            Executor.ExecWait (cmd, null);
-        }
+			Executor.ExecWait (cmd, null);
+		}
 
-        [Test]
-        [Category ("NotWorking")] // https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=341293
-        public void ExecWait ()
-        {
-            if (cmdNotFound)
-                Assert.Ignore ("ping command not found.");
+		[Test]
+		[Category ("NotWorking")] // https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=341293
+		public void ExecWait ()
+		{
+			if (cmdNotFound)
+				Assert.Ignore ("ping command not found.");
 
-            try {
-                Executor.ExecWait (cmd, new TempFileCollection ());
-                Assert.Fail ("#1");
-            } catch (ExternalException ex) {
-                // Cannot execute a program. The command being executed was .
-                Assert.AreEqual (typeof (ExternalException), ex.GetType (), "#2");
-                Assert.AreEqual (2, ex.ErrorCode, "#3");
-                Assert.IsNull (ex.InnerException, "#4");
-                Assert.IsNotNull (ex.Message, "#5");
-            }
-        }
+			try {
+				Executor.ExecWait (cmd, new TempFileCollection ());
+				Assert.Fail ("#1");
+			} catch (ExternalException ex) {
+				// Cannot execute a program. The command being executed was .
+				Assert.AreEqual (typeof (ExternalException), ex.GetType (), "#2");
+				Assert.AreEqual (2, ex.ErrorCode, "#3");
+				Assert.IsNull (ex.InnerException, "#4");
+				Assert.IsNotNull (ex.Message, "#5");
+			}
+		}
 
-        [Test]
-        public void ExecWaitWithCapture ()
-        {
-            if (cmdNotFound)
-                Assert.Ignore ("ping command not found.");
+		[Test]
+		public void ExecWaitWithCapture ()
+		{
+			if (cmdNotFound)
+				Assert.Ignore ("ping command not found.");
 
-            string output = null;
-            string error = null;
-            TempFileCollection tfc = new TempFileCollection ();
-            Assert.AreEqual (errcode, Executor.ExecWaitWithCapture (cmd, tfc, ref output, ref error), "ErrorCode");
-            Assert.IsTrue (File.Exists (output), "output");
-            Assert.IsTrue (output.StartsWith (temp), "output-path");
-            Assert.IsTrue (File.Exists (error), "error");
-            Assert.IsTrue (error.StartsWith (temp), "error-path");
-            Assert.IsTrue (tfc.Count >= 2, "TempFileCollection");
-        }
+			string output = null;
+			string error = null;
+			TempFileCollection tfc = new TempFileCollection ();
+			Assert.AreEqual (errcode, Executor.ExecWaitWithCapture (cmd, tfc, ref output, ref error), "ErrorCode");
+			Assert.IsTrue (File.Exists (output), "output");
+			Assert.IsTrue (output.StartsWith (temp), "output-path");
+			Assert.IsTrue (File.Exists (error), "error");
+			Assert.IsTrue (error.StartsWith (temp), "error-path");
+			Assert.IsTrue (tfc.Count >= 2, "TempFileCollection");
+		}
 
-        [Test]
-        public void ExecWaitWithCapture_CurrentDir ()
-        {
-            if (cmdNotFound)
-                Assert.Ignore ("ping command not found.");
+		[Test]
+		public void ExecWaitWithCapture_CurrentDir ()
+		{
+			if (cmdNotFound)
+				Assert.Ignore ("ping command not found.");
 
-            string output = null;
-            string error = null;
-            TempFileCollection tfc = new TempFileCollection ();
-            Assert.AreEqual (errcode, Executor.ExecWaitWithCapture (cmd, cd, tfc, ref output, ref error), "ErrorCode");
-            Assert.IsTrue (File.Exists (output), "output");
-            Assert.IsTrue (output.StartsWith (temp), "output-path");
-            Assert.IsTrue (File.Exists (error), "error");
-            Assert.IsTrue (error.StartsWith (temp), "error-path");
-            // output/error file are relative to temp path
-            Assert.IsTrue (tfc.Count >= 2, "TempFileCollection");
-        }
+			string output = null;
+			string error = null;
+			TempFileCollection tfc = new TempFileCollection ();
+			Assert.AreEqual (errcode, Executor.ExecWaitWithCapture (cmd, cd, tfc, ref output, ref error), "ErrorCode");
+			Assert.IsTrue (File.Exists (output), "output");
+			Assert.IsTrue (output.StartsWith (temp), "output-path");
+			Assert.IsTrue (File.Exists (error), "error");
+			Assert.IsTrue (error.StartsWith (temp), "error-path");
+			// output/error file are relative to temp path
+			Assert.IsTrue (tfc.Count >= 2, "TempFileCollection");
+		}
 
-        [Test]
-        public void ExecWaitWithCapture_Token ()
-        {
-            if (cmdNotFound)
-                Assert.Ignore ("ping command not found.");
+		[Test]
+		public void ExecWaitWithCapture_Token ()
+		{
+			if (cmdNotFound)
+				Assert.Ignore ("ping command not found.");
 
-            string output = null;
-            string error = null;
-            TempFileCollection tfc = new TempFileCollection ();
-            Assert.AreEqual (errcode, Executor.ExecWaitWithCapture (token, cmd, tfc, ref output, ref error), "ErrorCode");
-            Assert.IsTrue (File.Exists (output), "output");
-            Assert.IsTrue (output.StartsWith (temp), "output-path");
-            Assert.IsTrue (File.Exists (error), "error");
-            Assert.IsTrue (error.StartsWith (temp), "error-path");
-            Assert.IsTrue (tfc.Count >= 2, "TempFileCollection");
-        }
+			string output = null;
+			string error = null;
+			TempFileCollection tfc = new TempFileCollection ();
+			Assert.AreEqual (errcode, Executor.ExecWaitWithCapture (token, cmd, tfc, ref output, ref error), "ErrorCode");
+			Assert.IsTrue (File.Exists (output), "output");
+			Assert.IsTrue (output.StartsWith (temp), "output-path");
+			Assert.IsTrue (File.Exists (error), "error");
+			Assert.IsTrue (error.StartsWith (temp), "error-path");
+			Assert.IsTrue (tfc.Count >= 2, "TempFileCollection");
+		}
 
-        [Test]
-        public void ExecWaitWithCapture_Token_CurrentDir ()
-        {
-            if (cmdNotFound)
-                Assert.Ignore ("ping command not found.");
+		[Test]
+		public void ExecWaitWithCapture_Token_CurrentDir ()
+		{
+			if (cmdNotFound)
+				Assert.Ignore ("ping command not found.");
 
-            string output = null;
-            string error = null;
-            TempFileCollection tfc = new TempFileCollection ();
-            Assert.AreEqual (errcode, Executor.ExecWaitWithCapture (token, cmd, cd, tfc, ref output, ref error), "ErrorCode");
-            Assert.IsTrue (File.Exists (output), "output");
-            Assert.IsTrue (output.StartsWith (temp), "output-path");
-            Assert.IsTrue (File.Exists (error), "error");
-            Assert.IsTrue (error.StartsWith (temp), "error-path");
-            // output/error file are relative to temp path
-            Assert.IsTrue (tfc.Count >= 2, "TempFileCollection");
-        }
-    }
+			string output = null;
+			string error = null;
+			TempFileCollection tfc = new TempFileCollection ();
+			Assert.AreEqual (errcode, Executor.ExecWaitWithCapture (token, cmd, cd, tfc, ref output, ref error), "ErrorCode");
+			Assert.IsTrue (File.Exists (output), "output");
+			Assert.IsTrue (output.StartsWith (temp), "output-path");
+			Assert.IsTrue (File.Exists (error), "error");
+			Assert.IsTrue (error.StartsWith (temp), "error-path");
+			// output/error file are relative to temp path
+			Assert.IsTrue (tfc.Count >= 2, "TempFileCollection");
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // FaultFinallySubroutineBase.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,24 +29,24 @@
 using Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines {
-    abstract class FaultFinallySubroutineBase<Label, Handler> : SubroutineWithHandlers<Label, Handler> {
-        protected FaultFinallySubroutineBase (SubroutineFacade subroutineFacade, Label startLabel, SubroutineBuilder<Label> builder)
-            : base (subroutineFacade, startLabel, builder)
-        {
-        }
+	abstract class FaultFinallySubroutineBase<Label, Handler> : SubroutineWithHandlers<Label, Handler> {
+		protected FaultFinallySubroutineBase (SubroutineFacade subroutineFacade, Label startLabel, SubroutineBuilder<Label> builder)
+			: base (subroutineFacade, startLabel, builder)
+		{
+		}
 
-        public override bool HasContextDependentStackDepth
-        {
-            get { return false; }
-        }
+		public override bool HasContextDependentStackDepth
+		{
+			get { return false; }
+		}
 
-        public override bool IsFaultFinally
-        {
-            get { return true; }
-        }
+		public override bool IsFaultFinally
+		{
+			get { return true; }
+		}
 
-        public override void Initialize ()
-        {
-        }
-    }
+		public override void Initialize ()
+		{
+		}
+	}
 }

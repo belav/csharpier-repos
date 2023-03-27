@@ -20,37 +20,37 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    public class DataGridViewCellValueEventArgs : EventArgs {
+	public class DataGridViewCellValueEventArgs : EventArgs {
 
-        private int columnIndex;
-        private int rowIndex;
-        private object cellValue;
+		private int columnIndex;
+		private int rowIndex;
+		private object cellValue;
 
-        public DataGridViewCellValueEventArgs (int columnIndex, int rowIndex) {
-            this.columnIndex = columnIndex;
-            this.rowIndex = rowIndex;
-        }
+		public DataGridViewCellValueEventArgs (int columnIndex, int rowIndex) {
+			this.columnIndex = columnIndex;
+			this.rowIndex = rowIndex;
+		}
 
-        public int ColumnIndex {
-            get { return columnIndex; }
-        }
+		public int ColumnIndex {
+			get { return columnIndex; }
+		}
 
-        public int RowIndex {
-            get { return rowIndex; }
-        }
+		public int RowIndex {
+			get { return rowIndex; }
+		}
 
-        public object Value {
-            get { return cellValue; }
-            set { cellValue = value; }
-        }
+		public object Value {
+			get { return cellValue; }
+			set { cellValue = value; }
+		}
 
-    }
+	}
 
 }
 

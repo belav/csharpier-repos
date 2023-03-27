@@ -20,29 +20,29 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    public class QuestionEventArgs : EventArgs {
+	public class QuestionEventArgs : EventArgs {
 
-        private bool response;
+		private bool response;
 
-        public QuestionEventArgs () {
-            response = false;
-        }
+		public QuestionEventArgs () {
+			response = false;
+		}
 
-        public QuestionEventArgs (bool response) {
-            this.response = response;
-        }
+		public QuestionEventArgs (bool response) {
+			this.response = response;
+		}
 
-        public bool Response {
-            get { return response; }
-            set { response = value; }
-        }
+		public bool Response {
+			get { return response; }
+			set { response = value; }
+		}
 
-    }
+	}
 
 }

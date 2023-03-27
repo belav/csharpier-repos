@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 # nullable enable
@@ -443,8 +443,8 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             context =>
             {
                 var person = context.Set<Person>().Single();
-                person.Address = new Address { Country = Country.Türkiye, City = "Konya", ZipCode = 42100 };
-                person.Country = "Türkiye";
+                person.Address = new Address { Country = Country.TÃ¼rkiye, City = "Konya", ZipCode = 42100 };
+                person.Country = "TÃ¼rkiye";
                 person.ZipCode = "42100";
 
                 context.SaveChanges();
@@ -453,10 +453,10 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var person = context.Set<Person>().Single();
 
-                Assert.Equal(Country.Türkiye, person.Address!.Country);
+                Assert.Equal(Country.TÃ¼rkiye, person.Address!.Country);
                 Assert.Equal("Konya", person.Address.City);
                 Assert.Equal(42100, person.Address.ZipCode);
-                Assert.Equal("Türkiye", person.Country);
+                Assert.Equal("TÃ¼rkiye", person.Country);
                 Assert.Equal("42100", person.ZipCode);
             });
 

@@ -2,12 +2,12 @@
 // Line: 5
 
 class X {
-    public static bool operator true (X i)
-    {
-        return true;
-    }
+	public static bool operator true (X i)
+	{
+		return true;
+	}
 
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

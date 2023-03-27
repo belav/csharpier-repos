@@ -2,19 +2,19 @@
 // Line: 12
 namespace N1
 {
-    class A<T>
-    {
-    }
+	class A<T>
+	{
+	}
 }
 
 namespace N3
 {
-    using W = N1.A;
+	using W = N1.A;
 
-    class X
-    {
-        static void Main ()
-        {
-        }
-    }
+	class X
+	{
+		static void Main ()
+		{
+		}
+	}
 }

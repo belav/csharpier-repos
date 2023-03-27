@@ -20,15 +20,15 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.ComponentModel {
 
-    public enum NewItemPlaceholderPosition {
-        None,
-        AtBeginning,
-        AtEnd
-    }
+	public enum NewItemPlaceholderPosition {
+		None,
+		AtBeginning,
+		AtEnd
+	}
 
 }

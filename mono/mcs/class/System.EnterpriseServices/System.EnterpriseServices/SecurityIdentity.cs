@@ -32,44 +32,44 @@ using System;
 using System.Collections;
 
 namespace System.EnterpriseServices {
-    public sealed class SecurityIdentity {
+	public sealed class SecurityIdentity {
 
-        #region Constructors
+		#region Constructors
 
-        [MonoTODO]
-        internal SecurityIdentity ()
-        {
-        }
+		[MonoTODO]
+		internal SecurityIdentity ()
+		{
+		}
 
-        [MonoTODO]
-        internal SecurityIdentity (ISecurityIdentityColl collection)
-        {
-        }
+		[MonoTODO]
+		internal SecurityIdentity (ISecurityIdentityColl collection)
+		{
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public string AccountName {
-            [MonoTODO]
-            get { throw new NotImplementedException (); }
-        }
+		public string AccountName {
+			[MonoTODO]
+			get { throw new NotImplementedException (); }
+		}
 
-        public AuthenticationOption AuthenticationLevel {
-            [MonoTODO]
-            get { throw new NotImplementedException (); }
-        }
+		public AuthenticationOption AuthenticationLevel {
+			[MonoTODO]
+			get { throw new NotImplementedException (); }
+		}
 
-        public int AuthenticationService {
-            [MonoTODO]
-            get { throw new NotImplementedException (); }
-        }
+		public int AuthenticationService {
+			[MonoTODO]
+			get { throw new NotImplementedException (); }
+		}
 
-        public ImpersonationLevelOption ImpersonationLevel {
-            [MonoTODO]
-            get { throw new NotImplementedException (); }
-        }
+		public ImpersonationLevelOption ImpersonationLevel {
+			[MonoTODO]
+			get { throw new NotImplementedException (); }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

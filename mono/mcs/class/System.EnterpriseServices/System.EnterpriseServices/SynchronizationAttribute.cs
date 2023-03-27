@@ -32,36 +32,36 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Class)]
-    [ComVisible(false)]
-    public sealed class SynchronizationAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class)]
+	[ComVisible(false)]
+	public sealed class SynchronizationAttribute : Attribute {
 
-        #region Fields
+		#region Fields
 
-        SynchronizationOption val;
+		SynchronizationOption val;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public SynchronizationAttribute ()
-            : this (SynchronizationOption.Required)
-        {
-        }
+		public SynchronizationAttribute ()
+			: this (SynchronizationOption.Required)
+		{
+		}
 
-        public SynchronizationAttribute (SynchronizationOption val)
-        {
-            this.val = val;
-        }
+		public SynchronizationAttribute (SynchronizationOption val)
+		{
+			this.val = val;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public SynchronizationOption Value {
-            get { return val; }
-        }
+		public SynchronizationOption Value {
+			get { return val; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

@@ -2,9 +2,9 @@
 // Line: 6
 
 class X {
-    void fn ()
-    {
-        return 1;
-    }
+	void fn ()
+	{
+		return 1;
+	}
 }
 

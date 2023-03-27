@@ -2,7 +2,7 @@
 // TypeSorter.cs: Sorts types alphabetically by System.Type.FullName
 //
 // Author:
-//    John Luke  <john.luke@gmail.com>
+//	John Luke  <john.luke@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -32,14 +32,14 @@ using Type=IKVM.Reflection.Type;
 
 class TypeSorter : IComparer
 {
-    public int Compare (object first, object second)
-    {
-        Type type1 = first as Type;
-        Type type2 = second as Type;
-        if (type1 == null || type2 == null)
-            throw new ArgumentException ("invalid comparison");
+	public int Compare (object first, object second)
+	{
+		Type type1 = first as Type;
+		Type type2 = second as Type;
+		if (type1 == null || type2 == null)
+			throw new ArgumentException ("invalid comparison");
 
-        return String.Compare (type1.FullName, type2.FullName);
-    }
+		return String.Compare (type1.FullName, type2.FullName);
+	}
 }
 

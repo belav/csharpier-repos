@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -28,93 +28,93 @@ using System.Linq;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class DataPoint : DataPointCustomProperties
-    {
-        #region Constructors
-        public DataPoint ()
-        {
-        }
+	public class DataPoint : DataPointCustomProperties
+	{
+		#region Constructors
+		public DataPoint ()
+		{
+		}
 
-        public DataPoint (double xValue, double yValue)
-        {
-            XValue = xValue;
-            YValues = new double[] { yValue };
-        }
+		public DataPoint (double xValue, double yValue)
+		{
+			XValue = xValue;
+			YValues = new double[] { yValue };
+		}
 
-        public DataPoint (double xValue, double[] yValues)
-        {
-            XValue = xValue;
-            YValues = yValues;
-        }
+		public DataPoint (double xValue, double[] yValues)
+		{
+			XValue = xValue;
+			YValues = yValues;
+		}
 
-        [MonoTODO ()]
-        public DataPoint (Series series)
-        {
-        }
+		[MonoTODO ()]
+		public DataPoint (Series series)
+		{
+		}
 
-        [MonoTODO ()]
-        public DataPoint(double xValue,    string yValues)
-        {
-        }
+		[MonoTODO ()]
+		public DataPoint(double xValue,	string yValues)
+		{
+		}
 
-        #endregion
+		#endregion
 
-        #region Public Properties
-        public bool IsEmpty { get; set; }
-        public override string Name { get; set; }
-        public double XValue { get; set; }
-        public double[] YValues { get; set; }
-        #endregion
+		#region Public Properties
+		public bool IsEmpty { get; set; }
+		public override string Name { get; set; }
+		public double XValue { get; set; }
+		public double[] YValues { get; set; }
+		#endregion
 
-        #region Public Methods
-        public DataPoint Clone ()
-        {
-            DataPoint clone = new DataPoint (XValue, YValues);
-            clone.IsEmpty = IsEmpty;
-            clone.Name = Name;
+		#region Public Methods
+		public DataPoint Clone ()
+		{
+			DataPoint clone = new DataPoint (XValue, YValues);
+			clone.IsEmpty = IsEmpty;
+			clone.Name = Name;
 
-            return clone;
-        }
+			return clone;
+		}
 
-        public double GetValueByName (string valueName)
-        {
-            if (valueName == null)
-                throw new ArgumentNullException ("valueName");
-            
-            valueName = valueName.ToLowerInvariant ();
+		public double GetValueByName (string valueName)
+		{
+			if (valueName == null)
+				throw new ArgumentNullException ("valueName");
+			
+			valueName = valueName.ToLowerInvariant ();
 
-            if (valueName == "x")
-                return XValue;
+			if (valueName == "x")
+				return XValue;
 
-            if (valueName.StartsWith ("y")) {
-                if (valueName.Length == 1)
-                    return YValues[0];
+			if (valueName.StartsWith ("y")) {
+				if (valueName.Length == 1)
+					return YValues[0];
 
-                int index = 0;
+				int index = 0;
 
-                if (int.TryParse (valueName.Substring (1), out index)) {
-                    if (index > YValues.Length)
-                        throw new ArgumentException ("Y index greater than number of YValues");
-                    if (index == 0)
-                        throw new ArgumentException ("Y index must be greater than zero");
+				if (int.TryParse (valueName.Substring (1), out index)) {
+					if (index > YValues.Length)
+						throw new ArgumentException ("Y index greater than number of YValues");
+					if (index == 0)
+						throw new ArgumentException ("Y index must be greater than zero");
 
-                    return YValues[index - 1];
-                }
-            }
+					return YValues[index - 1];
+				}
+			}
 
-            throw new ArgumentException ("valueName");
-        }
+			throw new ArgumentException ("valueName");
+		}
 
-        public void SetValueXY (object xValue, params object[] yValue)
-        {
-            XValue = (double)xValue;
-            YValues = yValue.Cast<double> ().ToArray ();
-        }
+		public void SetValueXY (object xValue, params object[] yValue)
+		{
+			XValue = (double)xValue;
+			YValues = yValue.Cast<double> ().ToArray ();
+		}
 
-        public void SetValueY (params object[] yValue)
-        {
-            YValues = yValue.Cast<double> ().ToArray ();
-        }
-        #endregion
-    }
+		public void SetValueY (params object[] yValue)
+		{
+			YValues = yValue.Cast<double> ().ToArray ();
+		}
+		#endregion
+	}
 }

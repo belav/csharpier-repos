@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 // COMPLETE
@@ -28,10 +28,10 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-    [ComVisible(true)]
-    public enum BorderStyle {
-        None        = 0,
-        FixedSingle    = 1,
-        Fixed3D        = 2
-    }
+	[ComVisible(true)]
+	public enum BorderStyle {
+		None		= 0,
+		FixedSingle	= 1,
+		Fixed3D		= 2
+	}
 }

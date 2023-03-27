@@ -21,19 +21,19 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    John BouAntoun    jba-mono@optusnet.com.au
+//	John BouAntoun	jba-mono@optusnet.com.au
 //
 
 namespace System.Windows.Forms {
-    // used mainly by monthcalendar
-    public enum Day {
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        Saturday,
-        Sunday,
-        Default        
-    }
+	// used mainly by monthcalendar
+	public enum Day {
+		Monday,
+		Tuesday,
+		Wednesday,
+		Thursday,
+		Friday,
+		Saturday,
+		Sunday,
+		Default		
+	}
 }

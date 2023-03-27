@@ -2,7 +2,7 @@
 // System.Security.Cryptography.X509Certificates.X509Chain
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2004-2006 Novell Inc. (http://www.novell.com)
@@ -43,131 +43,131 @@ using System.Text;
 
 namespace System.Security.Cryptography.X509Certificates {
 
-    public class X509Chain : IDisposable {
+	public class X509Chain : IDisposable {
 
-        X509ChainImpl impl;
+		X509ChainImpl impl;
 
-        internal X509ChainImpl Impl {
-            get {
-                X509Helper2.ThrowIfContextInvalid (impl);
-                return impl;
-            }
-        }
+		internal X509ChainImpl Impl {
+			get {
+				X509Helper2.ThrowIfContextInvalid (impl);
+				return impl;
+			}
+		}
 
-        internal bool IsValid {
-            get { return X509Helper2.IsValid (impl); }
-        }
+		internal bool IsValid {
+			get { return X509Helper2.IsValid (impl); }
+		}
 
-        internal void ThrowIfContextInvalid ()
-        {
-            X509Helper2.ThrowIfContextInvalid (impl);
-        }
+		internal void ThrowIfContextInvalid ()
+		{
+			X509Helper2.ThrowIfContextInvalid (impl);
+		}
 
-        // constructors
+		// constructors
 
-        public X509Chain ()
-            : this (false)
-        {
-        }
+		public X509Chain ()
+			: this (false)
+		{
+		}
 
-        public X509Chain (bool useMachineContext) 
-        {
-            impl = X509Helper2.CreateChainImpl (useMachineContext);
-        }
+		public X509Chain (bool useMachineContext) 
+		{
+			impl = X509Helper2.CreateChainImpl (useMachineContext);
+		}
 
-        internal X509Chain (X509ChainImpl impl)
-        {
-            X509Helper2.ThrowIfContextInvalid (impl);
-            this.impl = impl;
-        }
+		internal X509Chain (X509ChainImpl impl)
+		{
+			X509Helper2.ThrowIfContextInvalid (impl);
+			this.impl = impl;
+		}
 
-        [MonoTODO ("Mono's X509Chain is fully managed. All handles are invalid.")]
-        public X509Chain (IntPtr chainContext)
-        {
-            // CryptoAPI compatibility (unmanaged handle)
-            throw new NotSupportedException ();
-        }
+		[MonoTODO ("Mono's X509Chain is fully managed. All handles are invalid.")]
+		public X509Chain (IntPtr chainContext)
+		{
+			// CryptoAPI compatibility (unmanaged handle)
+			throw new NotSupportedException ();
+		}
 
-        // properties
+		// properties
 
-        [MonoTODO ("Mono's X509Chain is fully managed. Always returns IntPtr.Zero.")]
-        public IntPtr ChainContext {
-            get {
-                if (impl != null && impl.IsValid)
-                    return impl.Handle;
-                return IntPtr.Zero;
-            }
-        }
+		[MonoTODO ("Mono's X509Chain is fully managed. Always returns IntPtr.Zero.")]
+		public IntPtr ChainContext {
+			get {
+				if (impl != null && impl.IsValid)
+					return impl.Handle;
+				return IntPtr.Zero;
+			}
+		}
 
-        public X509ChainElementCollection ChainElements {
-            get { return Impl.ChainElements; }
-        }
+		public X509ChainElementCollection ChainElements {
+			get { return Impl.ChainElements; }
+		}
 
-        public X509ChainPolicy ChainPolicy {
-            get { return Impl.ChainPolicy; }
-            set { Impl.ChainPolicy = value; }
-        }
+		public X509ChainPolicy ChainPolicy {
+			get { return Impl.ChainPolicy; }
+			set { Impl.ChainPolicy = value; }
+		}
 
-        public X509ChainStatus[] ChainStatus {
-            get { return Impl.ChainStatus; }
-        }
+		public X509ChainStatus[] ChainStatus {
+			get { return Impl.ChainStatus; }
+		}
 
-        public SafeX509ChainHandle SafeHandle {
-            get { throw new NotImplementedException (); }
-        }
+		public SafeX509ChainHandle SafeHandle {
+			get { throw new NotImplementedException (); }
+		}
 
-        // methods
+		// methods
 
-        [MonoTODO ("Not totally RFC3280 compliant, but neither is MS implementation...")]
-        public bool Build (X509Certificate2 certificate)
-        {
-            return Impl.Build (certificate);
-        }
+		[MonoTODO ("Not totally RFC3280 compliant, but neither is MS implementation...")]
+		public bool Build (X509Certificate2 certificate)
+		{
+			return Impl.Build (certificate);
+		}
 
-        public void Reset () 
-        {
-            Impl.Reset ();
-        }
+		public void Reset () 
+		{
+			Impl.Reset ();
+		}
 
-        // static methods
+		// static methods
 
-        public static X509Chain Create ()
-        {
+		public static X509Chain Create ()
+		{
 #if FULL_AOT_RUNTIME
-            return new X509Chain ();
+			return new X509Chain ();
 #else
-            return (X509Chain) CryptoConfig.CreateFromName ("X509Chain");
+			return (X509Chain) CryptoConfig.CreateFromName ("X509Chain");
 #endif
-        }
+		}
 
-        public void Dispose ()
-        {
-            Dispose (true);
-            GC.SuppressFinalize (this);
-        }
+		public void Dispose ()
+		{
+			Dispose (true);
+			GC.SuppressFinalize (this);
+		}
 
-        protected virtual void Dispose (bool disposing)
-        {
-            if (impl != null) {
-                impl.Dispose ();
-                impl = null;
-            }
-        }
+		protected virtual void Dispose (bool disposing)
+		{
+			if (impl != null) {
+				impl.Dispose ();
+				impl = null;
+			}
+		}
 
-        ~X509Chain ()
-        {
-            Dispose (false);
-        }
-    }
+		~X509Chain ()
+		{
+			Dispose (false);
+		}
+	}
 }
 #else
 namespace System.Security.Cryptography.X509Certificates {
-    public class X509Chain {
-        public bool Build (X509Certificate2 cert)
-        {
-            return false;
-        }
-    }
+	public class X509Chain {
+		public bool Build (X509Certificate2 cert)
+		{
+			return false;
+		}
+	}
 }
 #endif
 

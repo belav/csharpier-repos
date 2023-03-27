@@ -3,34 +3,34 @@
 
 public class Runner
 {
-    string msg;
+	string msg;
 
-    public Runner (string s)
-    {
-        msg = s;
-    }
+	public Runner (string s)
+	{
+		msg = s;
+	}
 
-    public string Report ()
-    {
-        return msg;
-    }
+	public string Report ()
+	{
+		return msg;
+	}
 }
 
 public class Outer
 {
-    private Runner r = new Runner ("Outer");
+	private Runner r = new Runner ("Outer");
 
-    public Runner Runner
-    {
-        get { return r; }
-        set { r = value; }
-    }
+	public Runner Runner
+	{
+		get { return r; }
+		set { r = value; }
+	}
 
-    class Inner
-    {
-        public string Check ()
-        {
-            return Runner.Report ();
-        }
-    }
+	class Inner
+	{
+		public string Check ()
+		{
+			return Runner.Report ();
+		}
+	}
 }

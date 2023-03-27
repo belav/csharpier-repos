@@ -2,12 +2,12 @@
 // Line: 9
 
 class Foo {
-    static void Main ()
-    {
-        try {}
-        finally {
-            continue;
-        }
-    }
+	static void Main ()
+	{
+		try {}
+		finally {
+			continue;
+		}
+	}
 }
 

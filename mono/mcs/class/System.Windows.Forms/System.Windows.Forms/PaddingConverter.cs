@@ -28,97 +28,97 @@ using System.ComponentModel.Design.Serialization; // e.g. InstanceDescriptor
 
 namespace System.Windows.Forms
 {
-    public class PaddingConverter : TypeConverter
-    {
-        public PaddingConverter ()
-        {
-        }
+	public class PaddingConverter : TypeConverter
+	{
+		public PaddingConverter ()
+		{
+		}
 
-        #region Public Instance Methods
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-        {
-            if (sourceType == typeof (string))
-                return true;
-                
-            return false;
-        }
+		#region Public Instance Methods
+		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+		{
+			if (sourceType == typeof (string))
+				return true;
+				
+			return false;
+		}
 
-        public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
-        {
-            if (destinationType == typeof (string))
-                return true;
-            else if (destinationType == typeof(InstanceDescriptor))
-                return true;
+		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
+		{
+			if (destinationType == typeof (string))
+				return true;
+			else if (destinationType == typeof(InstanceDescriptor))
+				return true;
 
-            return false;
-        }
+			return false;
+		}
 
-        public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
-        {
-            if ((value == null) || !(value is String))
-                return base.ConvertFrom (context, culture, value);
+		public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+		{
+			if ((value == null) || !(value is String))
+				return base.ConvertFrom (context, culture, value);
 
-            if (culture == null)
-                culture = CultureInfo.CurrentCulture;
+			if (culture == null)
+				culture = CultureInfo.CurrentCulture;
 
-            string[] parts = ((string)value).Split (culture.TextInfo.ListSeparator.ToCharArray ());
+			string[] parts = ((string)value).Split (culture.TextInfo.ListSeparator.ToCharArray ());
 
-            return new Padding (int.Parse (parts[0].Trim ()), int.Parse (parts[1].Trim ()), int.Parse (parts[2].Trim ()), int.Parse (parts[3].Trim ()));
-        }
+			return new Padding (int.Parse (parts[0].Trim ()), int.Parse (parts[1].Trim ()), int.Parse (parts[2].Trim ()), int.Parse (parts[3].Trim ()));
+		}
 
-        public override object ConvertTo (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
-        {
-            if (value is Padding) {
-                Padding p = (Padding)value;
-                if (destinationType == typeof (string)) {
-                    if (culture == null)
-                        culture = CultureInfo.CurrentCulture;
-                    return string.Format ("{0}{4} {1}{4} {2}{4} {3}", p.Left, p.Top, p.Right, p.Bottom, culture.TextInfo.ListSeparator);
-                } else if (destinationType == typeof (InstanceDescriptor)) {
-                    Type[] types;
-                    Object[] values;
-                    if (p.All != -1) {
-                        types = new Type[] { typeof(int) };
-                        values = new Object[] { p.All };
-                    } else {
-                        types = new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) };
-                        values = new Object[] { p.Left, p.Top, p.Right, p.Bottom };
-                    }
-                    ConstructorInfo ci = typeof(Padding).GetConstructor (types);
-                    return new InstanceDescriptor (ci, values);
-                }
-            }
-            return base.ConvertTo (context, culture, value, destinationType);
-        }
+		public override object ConvertTo (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+		{
+			if (value is Padding) {
+				Padding p = (Padding)value;
+				if (destinationType == typeof (string)) {
+					if (culture == null)
+						culture = CultureInfo.CurrentCulture;
+					return string.Format ("{0}{4} {1}{4} {2}{4} {3}", p.Left, p.Top, p.Right, p.Bottom, culture.TextInfo.ListSeparator);
+				} else if (destinationType == typeof (InstanceDescriptor)) {
+					Type[] types;
+					Object[] values;
+					if (p.All != -1) {
+						types = new Type[] { typeof(int) };
+						values = new Object[] { p.All };
+					} else {
+						types = new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) };
+						values = new Object[] { p.Left, p.Top, p.Right, p.Bottom };
+					}
+					ConstructorInfo ci = typeof(Padding).GetConstructor (types);
+					return new InstanceDescriptor (ci, values);
+				}
+			}
+			return base.ConvertTo (context, culture, value, destinationType);
+		}
 
-        public override object CreateInstance (ITypeDescriptorContext context, IDictionary propertyValues)
-        {
-            if (propertyValues == null)
-                throw new ArgumentNullException ("propertyValues");
-            if (context == null)
-                throw new ArgumentNullException ("context");
+		public override object CreateInstance (ITypeDescriptorContext context, IDictionary propertyValues)
+		{
+			if (propertyValues == null)
+				throw new ArgumentNullException ("propertyValues");
+			if (context == null)
+				throw new ArgumentNullException ("context");
 
-            Padding old = (Padding)context.PropertyDescriptor.GetValue (context.Instance);
-            if (old.All == (int)propertyValues["All"])
-                return new Padding ((int)propertyValues["Left"], (int)propertyValues["Top"], (int)propertyValues["Right"], (int)propertyValues["Bottom"]);
-            else
-                return new Padding ((int)propertyValues["All"]);
-        }
-        
-        public override bool GetCreateInstanceSupported (ITypeDescriptorContext context)
-        {
-            return true;
-        }
+			Padding old = (Padding)context.PropertyDescriptor.GetValue (context.Instance);
+			if (old.All == (int)propertyValues["All"])
+				return new Padding ((int)propertyValues["Left"], (int)propertyValues["Top"], (int)propertyValues["Right"], (int)propertyValues["Bottom"]);
+			else
+				return new Padding ((int)propertyValues["All"]);
+		}
+		
+		public override bool GetCreateInstanceSupported (ITypeDescriptorContext context)
+		{
+			return true;
+		}
 
-        public override PropertyDescriptorCollection GetProperties (ITypeDescriptorContext context, object value, Attribute[] attributes)
-        {
-            return TypeDescriptor.GetProperties (typeof (Padding), attributes);
-        }
-        
-        public override bool GetPropertiesSupported (ITypeDescriptorContext context)
-        {
-            return true;
-        }
-        #endregion
-    }
+		public override PropertyDescriptorCollection GetProperties (ITypeDescriptorContext context, object value, Attribute[] attributes)
+		{
+			return TypeDescriptor.GetProperties (typeof (Padding), attributes);
+		}
+		
+		public override bool GetPropertiesSupported (ITypeDescriptorContext context)
+		{
+			return true;
+		}
+		#endregion
+	}
 }

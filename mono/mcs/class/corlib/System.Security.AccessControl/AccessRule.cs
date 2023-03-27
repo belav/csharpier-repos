@@ -2,7 +2,7 @@
 // System.Security.AccessControl.AccessRule implementation
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -29,33 +29,33 @@
 using System.Security.Principal;
 
 namespace System.Security.AccessControl {
-    public abstract class AccessRule : AuthorizationRule
-    {
-        AccessControlType type;
-        
-        protected AccessRule (IdentityReference identity,
-                      int accessMask,
-                      bool isInherited,
-                      InheritanceFlags inheritanceFlags,
-                      PropagationFlags propagationFlags,
-                      AccessControlType type)
-            : base (identity, accessMask, isInherited,
-                inheritanceFlags, propagationFlags)
-        {
-            if (type < AccessControlType.Allow ||
-                type > AccessControlType.Deny) {
-                throw new ArgumentException ("Invalid access control type.", "type");
-            }
-        
-            this.type = type;
-        }
+	public abstract class AccessRule : AuthorizationRule
+	{
+		AccessControlType type;
+		
+		protected AccessRule (IdentityReference identity,
+				      int accessMask,
+				      bool isInherited,
+				      InheritanceFlags inheritanceFlags,
+				      PropagationFlags propagationFlags,
+				      AccessControlType type)
+			: base (identity, accessMask, isInherited,
+				inheritanceFlags, propagationFlags)
+		{
+			if (type < AccessControlType.Allow ||
+			    type > AccessControlType.Deny) {
+				throw new ArgumentException ("Invalid access control type.", "type");
+			}
+		
+			this.type = type;
+		}
 
-        public AccessControlType AccessControlType
-        {
-            get {
-                return(type);
-            }
-        }
-    }
+		public AccessControlType AccessControlType
+		{
+			get {
+				return(type);
+			}
+		}
+	}
 }
 

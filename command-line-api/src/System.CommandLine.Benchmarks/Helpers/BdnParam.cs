@@ -1,4 +1,4 @@
-namespace System.CommandLine.Benchmarks.Helpers
+﻿namespace System.CommandLine.Benchmarks.Helpers
 {
     /// <summary>
     /// Wraps instance of type <typeparamref name="T"/> and

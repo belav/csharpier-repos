@@ -7,14 +7,14 @@ struct T {
         int val;
         void one () {
 
-        //
-        // First test: Pass this as an argument.
-        //
+		//
+		// First test: Pass this as an argument.
+		//
                 two (this);
         }
 
         void two (T t)  {
-        this = t;
+		this = t;
         }
 
         void three (ref T t) {
@@ -23,21 +23,21 @@ struct T {
 
 
         public override int GetHashCode () {
-        //
-        // Second test: do we correctly load this?
-        //
+		//
+		// Second test: do we correctly load this?
+		//
                 return val.GetHashCode();
         }
 
-        public static int Main()     
-    {
-        T t = new T ();
+        public static int Main() 	
+	{
+		T t = new T ();
 
-        t.one ();
+		t.one ();
 
-        t.GetHashCode ();
-        
-        return 0;
+		t.GetHashCode ();
+		
+		return 0;
         }
 }
 

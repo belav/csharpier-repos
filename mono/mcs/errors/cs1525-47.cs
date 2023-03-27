@@ -3,8 +3,8 @@
 
 class Test
 {
-    void Foo ()
-    {
-        a = cond ? expr
-    }
+	void Foo ()
+	{
+		a = cond ? expr
+	}
 }

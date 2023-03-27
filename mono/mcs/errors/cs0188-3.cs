@@ -3,16 +3,16 @@
 
 struct Foo
 {
-    public int bar;
-    public int baz;
+	public int bar;
+	public int baz;
 
-    public int Bar {
-        get { return bar; }
-    }
+	public int Bar {
+		get { return bar; }
+	}
 
-    public Foo (int baz)
-    {
-        this.baz = baz;
-        bar = Bar - 1;
-    }
+	public Foo (int baz)
+	{
+		this.baz = baz;
+		bar = Bar - 1;
+	}
 }

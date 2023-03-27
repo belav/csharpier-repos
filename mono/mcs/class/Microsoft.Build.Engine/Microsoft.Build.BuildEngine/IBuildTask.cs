@@ -28,18 +28,18 @@ using System;
 using System.Collections.Generic;
 
 namespace Microsoft.Build.BuildEngine {
-    internal interface IBuildTask {
-        bool ContinueOnError {
-            get; set;
-        }
-        
-        string Condition {
-            get; set;
-        }
-        
-        bool Execute ();
-        bool ResolveOutputItems ();
+	internal interface IBuildTask {
+		bool ContinueOnError {
+			get; set;
+		}
+		
+		string Condition {
+			get; set;
+		}
+		
+		bool Execute ();
+		bool ResolveOutputItems ();
 
-        IEnumerable<string> GetAttributes ();
-    }
+		IEnumerable<string> GetAttributes ();
+	}
 }

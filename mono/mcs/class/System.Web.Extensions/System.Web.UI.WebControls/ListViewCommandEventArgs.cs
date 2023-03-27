@@ -31,23 +31,23 @@ using System;
 
 namespace System.Web.UI.WebControls
 {
-    public class ListViewCommandEventArgs : CommandEventArgs
-    {
-        public ListViewCommandEventArgs (ListViewItem item, object commandSource, CommandEventArgs originalArgs)
-            : base (originalArgs)
-        {
-            this.CommandSource = commandSource;
-            this.Item = item;
-        }
-        
-        public object CommandSource {
-            get;
-            private set;
-        }
-        
-        public ListViewItem Item {
-            get;
-            private set;
-        }
-    }
+	public class ListViewCommandEventArgs : CommandEventArgs
+	{
+		public ListViewCommandEventArgs (ListViewItem item, object commandSource, CommandEventArgs originalArgs)
+			: base (originalArgs)
+		{
+			this.CommandSource = commandSource;
+			this.Item = item;
+		}
+		
+		public object CommandSource {
+			get;
+			private set;
+		}
+		
+		public ListViewItem Item {
+			get;
+			private set;
+		}
+	}
 }

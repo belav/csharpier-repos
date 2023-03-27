@@ -3,8 +3,8 @@
 
 class C
 {
-    public static explicit operator X (__arglist)
-    {
-        return null;
-    }
+	public static explicit operator X (__arglist)
+	{
+		return null;
+	}
 }

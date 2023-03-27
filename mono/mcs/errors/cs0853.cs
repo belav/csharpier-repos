@@ -6,12 +6,12 @@ using System.Linq.Expressions;
 
 class M
 {
-    static void Named (int i)
-    {
-    }
-    
-    public static void Main ()
-    {
-        Expression<Action> e = () => Named (i : 1);
-    }
+	static void Named (int i)
+	{
+	}
+	
+	public static void Main ()
+	{
+		Expression<Action> e = () => Named (i : 1);
+	}
 }

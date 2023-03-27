@@ -2,12 +2,12 @@
 // Line: 5
 
 class X {
-    public static X operator < (X a, int b)
-    {
-        return null;
-    }
+	public static X operator < (X a, int b)
+	{
+		return null;
+	}
 
-    static void Main () {
-    }
+	static void Main () {
+	}
 }
-    
+	

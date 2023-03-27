@@ -33,41 +33,41 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-    public sealed class DesignerActionUIService : IDisposable
-    {
-        internal DesignerActionUIService ()
-        {
-        }
+	public sealed class DesignerActionUIService : IDisposable
+	{
+		internal DesignerActionUIService ()
+		{
+		}
 
-        public event DesignerActionUIStateChangeEventHandler DesignerActionUIStateChange;
+		public event DesignerActionUIStateChangeEventHandler DesignerActionUIStateChange;
 
-        [MonoTODO]
-        public void Dispose ()
-        {
-        }
+		[MonoTODO]
+		public void Dispose ()
+		{
+		}
 
-        [MonoTODO]
-        public void ShowUI (IComponent component)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void ShowUI (IComponent component)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void HideUI (IComponent component)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void HideUI (IComponent component)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void Refresh (IComponent component)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void Refresh (IComponent component)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public bool ShouldAutoShow (IComponent component)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public bool ShouldAutoShow (IComponent component)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

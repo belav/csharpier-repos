@@ -24,43 +24,43 @@ class Test
             Timer t = new Timer(new TimerCallback(callback), null, 1000000, Timeout.Infinite);
             _are.Set();
 
-            bool bDisposeSucceeded = false; //Used to improve speed of the test when Dispose has failed
-            try
-            {
-                t.Dispose();
-                bDisposeSucceeded = true;
-            }
-            catch (ObjectDisposedException)
-            {
-            }
+			bool bDisposeSucceeded = false; //Used to improve speed of the test when Dispose has failed
+			try
+			{
+				t.Dispose();
+				bDisposeSucceeded = true;
+			}
+			catch (ObjectDisposedException)
+			{
+			}
 
-            if (bDisposeSucceeded)
-            {
-                try
-                {
-                    if (_mre.WaitOne(0))
-                    {
-                        Console.Write("@");
-                    }
-                }
-                catch (ObjectDisposedException)
-                {
-                }
-            }
+			if (bDisposeSucceeded)
+			{
+				try
+				{
+					if (_mre.WaitOne(0))
+					{
+						Console.Write("@");
+					}
+				}
+				catch (ObjectDisposedException)
+				{
+				}
+			}
         }
         _fTestDone = true;
-        _are.Set();
+		_are.Set();
         th.Join();
         th2.Join();
 
-        if (!_fTestFailed)
-        {
-            Console.WriteLine("Test Passed");
-            return 100;
-        }
+		if (!_fTestFailed)
+		{
+			Console.WriteLine("Test Passed");
+			return 100;
+		}
 
-        Console.WriteLine("Test Failed");
-        return 101;
+		Console.WriteLine("Test Failed");
+		return 101;
 
     }
 

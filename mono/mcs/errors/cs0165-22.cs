@@ -5,30 +5,30 @@ using System;
 
 class Program
 {
-    static int Main ()
-    {
-        int foo = 9;
-        int x;
+	static int Main ()
+	{
+		int foo = 9;
+		int x;
 
-        switch (foo) {
-        case 1:
-            x = 1;
-            gotoTarget: 
-            {
-                Console.WriteLine (x);
-            }
-            break;
-        default:
-            {
-                if (foo != 0) {
-                    goto gotoTarget;
-                }
+		switch (foo) {
+		case 1:
+			x = 1;
+			gotoTarget: 
+			{
+				Console.WriteLine (x);
+			}
+			break;
+		default:
+			{
+				if (foo != 0) {
+					goto gotoTarget;
+				}
 
-                break;
-            }
-        }
+				break;
+			}
+		}
 
-        return 1;
-    }
+		return 1;
+	}
 }
 

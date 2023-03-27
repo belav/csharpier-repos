@@ -7,9 +7,9 @@ enum E
 
 class C
 {
-    public static void Main ()
-    {
-        E e = 0;
-        E r = e - null;
-    }
+	public static void Main ()
+	{
+		E e = 0;
+		E r = e - null;
+	}
 }

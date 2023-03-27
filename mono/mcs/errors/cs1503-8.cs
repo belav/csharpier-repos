@@ -5,13 +5,13 @@ public delegate void Del ();
 
 public interface IInterface
 {
-    void Do ();
+	void Do ();
 }
 
 public static class Test
 {
-    public static void Do (IInterface val)
-    {
-        Do (val.Do);
-    }
+	public static void Do (IInterface val)
+	{
+		Do (val.Do);
+	}
 }

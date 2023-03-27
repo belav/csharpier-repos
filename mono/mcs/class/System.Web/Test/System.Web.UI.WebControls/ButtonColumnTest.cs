@@ -2,7 +2,7 @@
 // ButtonColumnTest.cs
 //
 // Author:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,67 +34,67 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls {
 
-    public class ButtonColumnPoker : ButtonColumn {
+	public class ButtonColumnPoker : ButtonColumn {
 
-        public string FormatData (object data)
-        {
-            return FormatDataTextValue (data);
-        }
-    }
+		public string FormatData (object data)
+		{
+			return FormatDataTextValue (data);
+		}
+	}
 
-    [TestFixture]
-    public class ButtonColumnTest {
+	[TestFixture]
+	public class ButtonColumnTest {
 
-        [Test]
-        public void Defaults ()
-        {
-            ButtonColumn bc = new ButtonColumn ();
-            Assert.AreEqual ("", bc.ValidationGroup, "ValidationGroup");
-            Assert.AreEqual (false, bc.CausesValidation, "CausesValidation"); 
-        }
+		[Test]
+		public void Defaults ()
+		{
+			ButtonColumn bc = new ButtonColumn ();
+			Assert.AreEqual ("", bc.ValidationGroup, "ValidationGroup");
+			Assert.AreEqual (false, bc.CausesValidation, "CausesValidation"); 
+		}
 
-        [Test]
-        public void AssignedProperties ()
-        {
-            ButtonColumn bc = new ButtonColumn ();
-            Assert.AreEqual ("", bc.ValidationGroup, "ValidationGroup#1");
-            bc.ValidationGroup = "test";
-            Assert.AreEqual ("test", bc.ValidationGroup, "ValidationGroup#2");
-            Assert.AreEqual (false, bc.CausesValidation, "CausesValidation#1");
-            bc.CausesValidation = true;
-            Assert.AreEqual (true, bc.CausesValidation, "CausesValidation#2");
-        }
+		[Test]
+		public void AssignedProperties ()
+		{
+			ButtonColumn bc = new ButtonColumn ();
+			Assert.AreEqual ("", bc.ValidationGroup, "ValidationGroup#1");
+			bc.ValidationGroup = "test";
+			Assert.AreEqual ("test", bc.ValidationGroup, "ValidationGroup#2");
+			Assert.AreEqual (false, bc.CausesValidation, "CausesValidation#1");
+			bc.CausesValidation = true;
+			Assert.AreEqual (true, bc.CausesValidation, "CausesValidation#2");
+		}
 
-        [Test]
-        public void FormatDataValue ()
-        {
-            ButtonColumnPoker p = new ButtonColumnPoker ();
+		[Test]
+		public void FormatDataValue ()
+		{
+			ButtonColumnPoker p = new ButtonColumnPoker ();
 
-            p.DataTextFormatString = String.Empty;
-            p.Initialize ();
-            Assert.AreEqual ("test", p.FormatData ("test"), "A1");
-            
-            p.DataTextFormatString = "{0} hello";
-            p.Initialize ();
-            Assert.AreEqual ("test hello", p.FormatData ("test"), "A2");
-            
-            p.DataTextFormatString = "{0}";
-            p.Initialize ();
-            Assert.AreEqual ("test", p.FormatData ("test"), "A3");
-            
-            p.DataTextFormatString = "{0}";
-            p.Initialize ();
-            Assert.AreEqual (String.Empty, p.FormatData (String.Empty), "A4");
+			p.DataTextFormatString = String.Empty;
+			p.Initialize ();
+			Assert.AreEqual ("test", p.FormatData ("test"), "A1");
+			
+			p.DataTextFormatString = "{0} hello";
+			p.Initialize ();
+			Assert.AreEqual ("test hello", p.FormatData ("test"), "A2");
+			
+			p.DataTextFormatString = "{0}";
+			p.Initialize ();
+			Assert.AreEqual ("test", p.FormatData ("test"), "A3");
+			
+			p.DataTextFormatString = "{0}";
+			p.Initialize ();
+			Assert.AreEqual (String.Empty, p.FormatData (String.Empty), "A4");
 
-            p.DataTextFormatString = "{0}";
-            p.Initialize ();
-            p.DataTextFormatString = "i am bad";
-            Assert.AreEqual ("i am bad", p.FormatData ("foo"), "A5");
+			p.DataTextFormatString = "{0}";
+			p.Initialize ();
+			p.DataTextFormatString = "i am bad";
+			Assert.AreEqual ("i am bad", p.FormatData ("foo"), "A5");
 
-            p.DataTextFormatString = "{0}";
-            p.Initialize ();
-            Assert.AreEqual (String.Empty, p.FormatData (null), "A6");
-        }
-    }
+			p.DataTextFormatString = "{0}";
+			p.Initialize ();
+			Assert.AreEqual (String.Empty, p.FormatData (null), "A6");
+		}
+	}
 }
 

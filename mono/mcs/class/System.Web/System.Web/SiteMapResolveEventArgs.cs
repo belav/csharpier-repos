@@ -2,7 +2,7 @@
 // System.Web.SiteMapProvider
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
 //
 // (C) 2003 Ben Maurer
 //
@@ -32,27 +32,27 @@ using System;
 
 namespace System.Web
 {
-    public delegate SiteMapNode SiteMapResolveEventHandler (object sender, SiteMapResolveEventArgs e);
-    
-    public class SiteMapResolveEventArgs : EventArgs
-    {
-        HttpContext _context;
-        SiteMapProvider _provider;
-        
-        public SiteMapResolveEventArgs (HttpContext context, SiteMapProvider provider)
-        {
-            _context = context;
-            _provider = provider;
-        }
-        
-        public HttpContext Context {
-            get { return _context; }
-        }
-        
-        public SiteMapProvider Provider {
-            get { return _provider; }
-        }
-    }
+	public delegate SiteMapNode SiteMapResolveEventHandler (object sender, SiteMapResolveEventArgs e);
+	
+	public class SiteMapResolveEventArgs : EventArgs
+	{
+		HttpContext _context;
+		SiteMapProvider _provider;
+		
+		public SiteMapResolveEventArgs (HttpContext context, SiteMapProvider provider)
+		{
+			_context = context;
+			_provider = provider;
+		}
+		
+		public HttpContext Context {
+			get { return _context; }
+		}
+		
+		public SiteMapProvider Provider {
+			get { return _provider; }
+		}
+	}
 }
 
 

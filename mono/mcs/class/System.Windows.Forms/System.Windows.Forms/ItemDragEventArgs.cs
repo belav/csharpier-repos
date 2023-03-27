@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Ravindra (rkumar@novell.com)
+//	Ravindra (rkumar@novell.com)
 //
 
 // COMPLETE
@@ -31,33 +31,33 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-    [ComVisible (true)]
-    public class ItemDragEventArgs : EventArgs
-    {
-        private MouseButtons button;
-        private object item;
+	[ComVisible (true)]
+	public class ItemDragEventArgs : EventArgs
+	{
+		private MouseButtons button;
+		private object item;
 
-        #region Public Constructors
-        public ItemDragEventArgs (MouseButtons button)
-        {
-            this.button = button;
-        }
+		#region Public Constructors
+		public ItemDragEventArgs (MouseButtons button)
+		{
+			this.button = button;
+		}
 
-        public ItemDragEventArgs (MouseButtons button, object item)
-        {
-            this.button = button;
-            this.item = item;
-        }
-        #endregion    // Public Constructors
+		public ItemDragEventArgs (MouseButtons button, object item)
+		{
+			this.button = button;
+			this.item = item;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public MouseButtons Button {
-            get { return button; }
-        }
+		#region Public Instance Properties
+		public MouseButtons Button {
+			get { return button; }
+		}
 
-        public object Item {
-            get { return item; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public object Item {
+			get { return item; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

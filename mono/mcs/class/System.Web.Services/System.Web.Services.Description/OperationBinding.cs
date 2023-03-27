@@ -32,81 +32,81 @@ using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-    [XmlFormatExtensionPoint ("Extensions")]
-    public sealed class OperationBinding :
-        NamedItem
-    {
-        #region Fields
+	[XmlFormatExtensionPoint ("Extensions")]
+	public sealed class OperationBinding :
+		NamedItem
+	{
+		#region Fields
 
-        Binding binding;
-        ServiceDescriptionFormatExtensionCollection extensions;
-        FaultBindingCollection faults;
-        InputBinding input;
-        OutputBinding output;
+		Binding binding;
+		ServiceDescriptionFormatExtensionCollection extensions;
+		FaultBindingCollection faults;
+		InputBinding input;
+		OutputBinding output;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
-        
-        public OperationBinding ()
-        {
-            extensions = new ServiceDescriptionFormatExtensionCollection (this);
-            faults = new FaultBindingCollection (this);
-            input = null;
-            output = null;
-        }
-        
-        #endregion // Constructors
+		#region Constructors
+		
+		public OperationBinding ()
+		{
+			extensions = new ServiceDescriptionFormatExtensionCollection (this);
+			faults = new FaultBindingCollection (this);
+			input = null;
+			output = null;
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
-    
-//        [XmlIgnore]
-        public Binding Binding {
-            get { return binding; }
-        }
+		#region Properties
+	
+//		[XmlIgnore]
+		public Binding Binding {
+			get { return binding; }
+		}
 
-        [XmlIgnore]
-        public 
-        override
-        ServiceDescriptionFormatExtensionCollection Extensions {
-            get { return extensions; }
-        }
+		[XmlIgnore]
+		public 
+		override
+		ServiceDescriptionFormatExtensionCollection Extensions {
+			get { return extensions; }
+		}
 
-        [XmlElement ("fault")]
-        public FaultBindingCollection Faults {
-            get { return faults; }
-        }
+		[XmlElement ("fault")]
+		public FaultBindingCollection Faults {
+			get { return faults; }
+		}
 
-        [XmlElement ("input")]
-        public InputBinding Input {
-            get { return input; }
-            set {
-                input = value; 
-                if (input != null)
-                    input.SetParent (this);
-            }
-        }
+		[XmlElement ("input")]
+		public InputBinding Input {
+			get { return input; }
+			set {
+				input = value; 
+				if (input != null)
+					input.SetParent (this);
+			}
+		}
 
 
-        [XmlElement ("output")]
-        public OutputBinding Output {
-            get { return output; }
-            set {
-                output = value; 
-                if (output != null)
-                    output.SetParent (this);
-            }
-        }
+		[XmlElement ("output")]
+		public OutputBinding Output {
+			get { return output; }
+			set {
+				output = value; 
+				if (output != null)
+					output.SetParent (this);
+			}
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        internal void SetParent (Binding binding) 
-        {
-            this.binding = binding; 
-        } 
+		internal void SetParent (Binding binding) 
+		{
+			this.binding = binding; 
+		} 
 
-        #endregion
-    }
+		#endregion
+	}
 }

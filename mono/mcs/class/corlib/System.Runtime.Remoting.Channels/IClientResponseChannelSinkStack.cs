@@ -35,13 +35,13 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IClientResponseChannelSinkStack
-    {
-        void AsyncProcessResponse (ITransportHeaders headers, Stream stream);
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IClientResponseChannelSinkStack
+	{
+		void AsyncProcessResponse (ITransportHeaders headers, Stream stream);
 
-        void DispatchException (Exception e);
+		void DispatchException (Exception e);
 
-        void DispatchReplyMessage (IMessage msg);
-    }
+		void DispatchReplyMessage (IMessage msg);
+	}
 }

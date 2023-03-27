@@ -31,44 +31,44 @@ using System.Windows.Forms;
 
 namespace System.Windows.Forms
 {
-    [AttributeUsageAttribute(AttributeTargets.Class)] 
-    public sealed class DockingAttribute : Attribute
-    {
-        private DockingBehavior dockingBehavior;
+	[AttributeUsageAttribute(AttributeTargets.Class)] 
+	public sealed class DockingAttribute : Attribute
+	{
+		private DockingBehavior dockingBehavior;
 
-        public DockingAttribute()
-        {
-            dockingBehavior = DockingBehavior.Never;
-        }
+		public DockingAttribute()
+		{
+			dockingBehavior = DockingBehavior.Never;
+		}
 
-        public DockingAttribute(DockingBehavior dockingBehavior)
-        {
-            this.dockingBehavior = dockingBehavior;
-        }
+		public DockingAttribute(DockingBehavior dockingBehavior)
+		{
+			this.dockingBehavior = dockingBehavior;
+		}
 
-        public static readonly DockingAttribute Default = new DockingAttribute();
+		public static readonly DockingAttribute Default = new DockingAttribute();
 
-        public DockingBehavior DockingBehavior
-        {
-            get { return dockingBehavior; }
-        }
+		public DockingBehavior DockingBehavior
+		{
+			get { return dockingBehavior; }
+		}
 
-        public override bool Equals(object obj)
-        {
-            if (obj is DockingAttribute)
-                return (dockingBehavior == ((DockingAttribute)obj).DockingBehavior);
-            else
-                return false;
-        }
+		public override bool Equals(object obj)
+		{
+			if (obj is DockingAttribute)
+				return (dockingBehavior == ((DockingAttribute)obj).DockingBehavior);
+			else
+				return false;
+		}
 
-        public override int GetHashCode()
-        {
-            return dockingBehavior.GetHashCode();
-        }
+		public override int GetHashCode()
+		{
+			return dockingBehavior.GetHashCode();
+		}
 
-        public override bool IsDefaultAttribute()
-        {
-            return Default.Equals(this);
-        }
-    }
+		public override bool IsDefaultAttribute()
+		{
+			return Default.Equals(this);
+		}
+	}
 }

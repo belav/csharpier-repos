@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.Web.Mvc.Resources;
 using System.Web.Razor.Generator;
 using System.Web.Razor.Parser;

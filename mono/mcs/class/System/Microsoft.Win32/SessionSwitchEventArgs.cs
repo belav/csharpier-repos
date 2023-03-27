@@ -2,7 +2,7 @@
 // Microsoft.Win32.SessionSwitchEventArgs class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,20 +30,20 @@ using System.Security.Permissions;
 
 namespace Microsoft.Win32 {
 
-    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-    [PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
-    public class SessionSwitchEventArgs : System.EventArgs {
+	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
+	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
+	public class SessionSwitchEventArgs : System.EventArgs {
 
-        SessionSwitchReason reason;
+		SessionSwitchReason reason;
 
-        public SessionSwitchEventArgs (SessionSwitchReason reason)
-        {
-            this.reason = reason;
-        }
+		public SessionSwitchEventArgs (SessionSwitchReason reason)
+		{
+			this.reason = reason;
+		}
 
-        public SessionSwitchReason Reason {
-            get { return reason; }
-        }
-    }
+		public SessionSwitchReason Reason {
+			get { return reason; }
+		}
+	}
 }
 

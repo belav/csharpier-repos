@@ -1,4 +1,4 @@
-//
+﻿//
 // ProfileServiceManager.cs
 //
 // Author:
@@ -37,36 +37,36 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI
 {
-    [DefaultProperty ("Path")]
-    public class ProfileServiceManager
-    {
-        string _path;
+	[DefaultProperty ("Path")]
+	public class ProfileServiceManager
+	{
+		string _path;
 
-        [DefaultValue ("")]
-        [NotifyParentProperty (true)]
-        [Category ("Behavior")]
-        [TypeConverter (typeof (StringArrayConverter))]
-        public string [] LoadProperties {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
+		[DefaultValue ("")]
+		[NotifyParentProperty (true)]
+		[Category ("Behavior")]
+		[TypeConverter (typeof (StringArrayConverter))]
+		public string [] LoadProperties {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [NotifyParentProperty (true)]
-        [Category ("Behavior")]
-        [DefaultValue ("")]
-        public string Path {
-            get {
-                if (_path == null)
-                    return String.Empty;
-                return _path;
-            }
-            set {
-                _path = value;
-            }
-        }
-    }
+		[NotifyParentProperty (true)]
+		[Category ("Behavior")]
+		[DefaultValue ("")]
+		public string Path {
+			get {
+				if (_path == null)
+					return String.Empty;
+				return _path;
+			}
+			set {
+				_path = value;
+			}
+		}
+	}
 }

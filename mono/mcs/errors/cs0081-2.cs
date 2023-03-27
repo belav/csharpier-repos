@@ -3,7 +3,7 @@
 
 class D
 {
-    public void Foo<int>()
-    {
-    }
+	public void Foo<int>()
+	{
+	}
 }

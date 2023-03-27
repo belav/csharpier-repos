@@ -31,6 +31,6 @@
 
 namespace System.Runtime.Remoting.Messaging {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public delegate object HeaderHandler (Header[] headers);
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public delegate object HeaderHandler (Header[] headers);
 }

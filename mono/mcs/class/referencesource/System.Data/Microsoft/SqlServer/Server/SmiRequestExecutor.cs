@@ -78,7 +78,7 @@ namespace Microsoft.SqlServer.Server {
         #endregion
         #endregion
 
-    #region Obsolete as of V210
+	#region Obsolete as of V210
         internal virtual SmiEventStream Execute (
             SmiConnection       connection,                     // Assigned connection
             long                transactionId,                  // Assigned transaction
@@ -92,7 +92,7 @@ namespace Microsoft.SqlServer.Server {
             //  2) Server doesn't implement this method, but negotiated V200-.
             throw System.Data.Common.ADP.InternalError( System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod );
         }
-    #endregion
+	#endregion
 
         #region OBSOLETE STUFF that never shipped without obsolete attribute
 

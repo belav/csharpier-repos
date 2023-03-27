@@ -1,9 +1,9 @@
 //
 // RepeatInfoCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.RepeatInfo
+//	- CAS unit tests for System.Web.UI.WebControls.RepeatInfo
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,24 +39,24 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class RepeatInfoCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class RepeatInfoCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            RepeatInfoTest unit = new RepeatInfoTest ();
-            unit.DefaultValues ();
-            unit.RepeatColumns_Negative ();
-            unit.RenderRepeater_BaseControl ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			RepeatInfoTest unit = new RepeatInfoTest ();
+			unit.DefaultValues ();
+			unit.RepeatColumns_Negative ();
+			unit.RenderRepeater_BaseControl ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (RepeatInfo); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (RepeatInfo); }
+		}
+	}
 }

@@ -27,27 +27,27 @@ using System.Runtime.Serialization;
 
 namespace System.Xaml
 {
-    [Serializable]
-    public class XamlInternalException : XamlException
-    {
-        public XamlInternalException ()
-            : this ("XAML internal error")
-        {
-        }
+	[Serializable]
+	public class XamlInternalException : XamlException
+	{
+		public XamlInternalException ()
+			: this ("XAML internal error")
+		{
+		}
 
-        public XamlInternalException (string message)
-            : this (message, null)
-        {
-        }
+		public XamlInternalException (string message)
+			: this (message, null)
+		{
+		}
 
-        public XamlInternalException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
+		public XamlInternalException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
 
-        protected XamlInternalException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-        }
-    }
+		protected XamlInternalException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{
+		}
+	}
 }

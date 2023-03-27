@@ -4,14 +4,14 @@
 
 enum E
 {
-    V
+	V
 }
 
 public class C
 {
-    public static void Main ()
-    {
-        E e = E.V;
-        object o = null - e;
-    }
+	public static void Main ()
+	{
+		E e = E.V;
+		object o = null - e;
+	}
 }

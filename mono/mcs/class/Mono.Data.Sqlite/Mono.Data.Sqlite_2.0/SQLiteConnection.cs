@@ -1,4 +1,4 @@
-/********************************************************
+﻿/********************************************************
  * ADO.NET 2.0 Data Provider for SQLite Version 3.X
  * Written by Robert Simpson (robert@blackcastlesoft.com)
  * 
@@ -734,14 +734,14 @@ namespace Mono.Data.Sqlite
 
     internal static string MapUriPath(string path)
     {
-        if (path.StartsWith ("file://"))
-            return path.Substring (7);
+	    if (path.StartsWith ("file://"))
+		    return path.Substring (7);
       else if (path.StartsWith ("file:"))
-            return path.Substring (5);
+		    return path.Substring (5);
       else if (path.StartsWith ("/"))
-            return path;
+		    return path;
       else
-            throw new InvalidOperationException ("Invalid connection string: invalid URI");
+		    throw new InvalidOperationException ("Invalid connection string: invalid URI");
     }
     
     /// <summary>
@@ -767,7 +767,7 @@ namespace Mono.Data.Sqlite
         arPiece = SqliteConvert.Split(arParts[n], '=');
         if (arPiece.Length == 2)
         {
-      MapMonoKeyword (arPiece, ls);
+	  MapMonoKeyword (arPiece, ls);
         }
         else throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, "Invalid ConnectionString format for parameter \"{0}\"", (arPiece.Length > 0) ? arPiece[0] : "null"));
       }
@@ -875,16 +875,16 @@ namespace Mono.Data.Sqlite
           if (SqliteConvert.ToBoolean(FindKey(opts, "FailIfMissing", Boolean.FalseString)) == false)
             flags |= SQLiteOpenFlagsEnum.Create;
         }
-    if (SqliteConvert.ToBoolean (FindKey (opts, "FileProtectionComplete", Boolean.FalseString)))
-        flags |= SQLiteOpenFlagsEnum.FileProtectionComplete;
-    if (SqliteConvert.ToBoolean (FindKey (opts, "FileProtectionCompleteUnlessOpen", Boolean.FalseString)))
-        flags |= SQLiteOpenFlagsEnum.FileProtectionCompleteUnlessOpen;
-    if (SqliteConvert.ToBoolean (FindKey (opts, "FileProtectionCompleteUntilFirstUserAuthentication", Boolean.FalseString)))
-        flags |= SQLiteOpenFlagsEnum.FileProtectionCompleteUntilFirstUserAuthentication;
-    if (SqliteConvert.ToBoolean (FindKey (opts, "FileProtectionNone", Boolean.FalseString)))
-        flags |= SQLiteOpenFlagsEnum.FileProtectionNone;
-    
-                
+	if (SqliteConvert.ToBoolean (FindKey (opts, "FileProtectionComplete", Boolean.FalseString)))
+		flags |= SQLiteOpenFlagsEnum.FileProtectionComplete;
+	if (SqliteConvert.ToBoolean (FindKey (opts, "FileProtectionCompleteUnlessOpen", Boolean.FalseString)))
+		flags |= SQLiteOpenFlagsEnum.FileProtectionCompleteUnlessOpen;
+	if (SqliteConvert.ToBoolean (FindKey (opts, "FileProtectionCompleteUntilFirstUserAuthentication", Boolean.FalseString)))
+		flags |= SQLiteOpenFlagsEnum.FileProtectionCompleteUntilFirstUserAuthentication;
+	if (SqliteConvert.ToBoolean (FindKey (opts, "FileProtectionNone", Boolean.FalseString)))
+		flags |= SQLiteOpenFlagsEnum.FileProtectionNone;
+	
+				
         _sql.Open(fileName, flags, maxPoolSize, usePooling);
 
         _binaryGuid = (SqliteConvert.ToBoolean(FindKey(opts, "BinaryGUID", Boolean.TrueString)) == true);
@@ -960,7 +960,7 @@ namespace Mono.Data.Sqlite
 
 #if !PLATFORM_COMPACTFRAMEWORK
         if (global::System.Transactions.Transaction.Current != null && SqliteConvert.ToBoolean(FindKey(opts, "Enlist", Boolean.TrueString)) == true)
-        EnlistTransaction(global::System.Transactions.Transaction.Current);
+		EnlistTransaction(global::System.Transactions.Transaction.Current);
 #endif
       }
       catch (SqliteException)

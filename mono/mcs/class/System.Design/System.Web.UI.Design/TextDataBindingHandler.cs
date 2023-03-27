@@ -33,16 +33,16 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-    public class TextDataBindingHandler : DataBindingHandler
-    {
-        public TextDataBindingHandler ()
-        {
-        }
+	public class TextDataBindingHandler : DataBindingHandler
+	{
+		public TextDataBindingHandler ()
+		{
+		}
 
-        [MonoTODO]
-        public override void DataBindControl (IDesignerHost designerHost, Control control)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override void DataBindControl (IDesignerHost designerHost, Control control)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

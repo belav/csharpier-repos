@@ -1,9 +1,9 @@
 //
 // CheckBoxListCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.CheckBoxList
+//	- CAS unit tests for System.Web.UI.WebControls.CheckBoxList
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,31 +40,31 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CheckBoxListCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CheckBoxListCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            CheckBoxListTest unit = new CheckBoxListTest ();
-            unit.Defaults ();
-            unit.CleanProperties ();
-            unit.ChildCheckBoxControl ();
-            unit.CreateStyle ();
-            unit.RepeatInfoProperties ();
-            unit.RepeatInfoCount ();
-            unit.RepeatInfoStyle ();
-            unit.RepeatInfoRenderItem ();
-            unit.FindControl ();
-            unit.RenderEmpty ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			CheckBoxListTest unit = new CheckBoxListTest ();
+			unit.Defaults ();
+			unit.CleanProperties ();
+			unit.ChildCheckBoxControl ();
+			unit.CreateStyle ();
+			unit.RepeatInfoProperties ();
+			unit.RepeatInfoCount ();
+			unit.RepeatInfoStyle ();
+			unit.RepeatInfoRenderItem ();
+			unit.FindControl ();
+			unit.RenderEmpty ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (CheckBoxList); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (CheckBoxList); }
+		}
+	}
 }

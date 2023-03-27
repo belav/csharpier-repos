@@ -33,24 +33,24 @@ using System.ComponentModel;
 
 namespace System
 {
-    [AttributeUsage(AttributeTargets.All)]
-    internal class SRDescriptionAttribute : DescriptionAttribute
-    {
-        private bool isReplaced = false;
+	[AttributeUsage(AttributeTargets.All)]
+	internal class SRDescriptionAttribute : DescriptionAttribute
+	{
+		private bool isReplaced = false;
 
-        public SRDescriptionAttribute (string description)
-            : base (description)
-        {
-        }
+		public SRDescriptionAttribute (string description)
+			: base (description)
+		{
+		}
 
-        public override string Description {
-            get {
-                if (!isReplaced) {
-                    isReplaced = true;
-                    DescriptionValue = Locale.GetText (DescriptionValue);
-                }
-                return DescriptionValue;
-            }
-        }
-    }
+		public override string Description {
+			get {
+				if (!isReplaced) {
+					isReplaced = true;
+					DescriptionValue = Locale.GetText (DescriptionValue);
+				}
+				return DescriptionValue;
+			}
+		}
+	}
 }

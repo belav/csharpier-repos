@@ -32,74 +32,74 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-    [TestFixture]
-    public class OleDbParameterCollection_Contains : ADONetTesterClass
-    {
-        public static void Main()
-        {
-            OleDbParameterCollection_Contains tc = new OleDbParameterCollection_Contains();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OleDbParameterCollection_Contains");
-                tc.run();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+	[TestFixture]
+	public class OleDbParameterCollection_Contains : ADONetTesterClass
+	{
+		public static void Main()
+		{
+			OleDbParameterCollection_Contains tc = new OleDbParameterCollection_Contains();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OleDbParameterCollection_Contains");
+				tc.run();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            Exception exp = null;
+		[Test]
+		public void run()
+		{
+			Exception exp = null;
 
-            OleDbCommand cmd = new OleDbCommand();
-            OleDbParameter param = new OleDbParameter();
-            cmd.Parameters.Add(param);
-            cmd.Parameters.Add(new OleDbParameter("MyParam", 12));
+			OleDbCommand cmd = new OleDbCommand();
+			OleDbParameter param = new OleDbParameter();
+			cmd.Parameters.Add(param);
+			cmd.Parameters.Add(new OleDbParameter("MyParam", 12));
 
-            try
-            {
-                BeginCase("Check contains - 1");
-                Compare(cmd.Parameters.Contains(param),true );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check contains - 1");
+				Compare(cmd.Parameters.Contains(param),true );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Check contains - 2");
-                Compare(cmd.Parameters.Contains("MyParam"),true );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check contains - 2");
+				Compare(cmd.Parameters.Contains("MyParam"),true );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Check contains - 3");
-                Compare(cmd.Parameters.Contains("abcd"),false );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check contains - 3");
+				Compare(cmd.Parameters.Contains("abcd"),false );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Check contains - 4");
-                Compare(cmd.Parameters.Contains(" MyParam"),false );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check contains - 4");
+				Compare(cmd.Parameters.Contains(" MyParam"),false );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
         
-            try
-            {
-                BeginCase("Check contains - 5");
-                cmd.Parameters.Add(new OleDbParameter("MyParam", 12));
-                Compare(cmd.Parameters.Contains("MyParam"),true );
-                Compare(cmd.Parameters.Contains("myparam"),true );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check contains - 5");
+				cmd.Parameters.Add(new OleDbParameter("MyParam", 12));
+				Compare(cmd.Parameters.Contains("MyParam"),true );
+				Compare(cmd.Parameters.Contains("myparam"),true );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
         
-        }
-    }
+		}
+	}
 }

@@ -7,19 +7,19 @@ delegate int funci (int i);
 
 class X
 {
-    static void Foo (funci fi)
-    {
-    }
-    
-    static void Foo (funcs fs)
-    {
-    }
+	static void Foo (funci fi)
+	{
+	}
+	
+	static void Foo (funcs fs)
+	{
+	}
 
-    static void Main ()
-    {
-        Foo (x => {
-            int a = "a";
-            return 2;
-        });
-    }
+	static void Main ()
+	{
+		Foo (x => {
+			int a = "a";
+			return 2;
+		});
+	}
 }

@@ -2,7 +2,7 @@
 // EdgeVisitor.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,5 +27,5 @@
 // 
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    delegate void EdgeVisitor<Node, Info> (Node source, Info info, Node target);
+	delegate void EdgeVisitor<Node, Info> (Node source, Info info, Node target);
 }

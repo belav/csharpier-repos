@@ -22,7 +22,7 @@
 // System.Web.UI.ToolboxDataAttribute.cs
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 
@@ -30,45 +30,45 @@ using System.Security.Permissions;
 
 namespace System.Web.UI
 {
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [AttributeUsage(AttributeTargets.Class)]
-    public sealed class ToolboxDataAttribute : Attribute
-    {
-        public static readonly ToolboxDataAttribute Default = new ToolboxDataAttribute (String.Empty);
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[AttributeUsage(AttributeTargets.Class)]
+	public sealed class ToolboxDataAttribute : Attribute
+	{
+		public static readonly ToolboxDataAttribute Default = new ToolboxDataAttribute (String.Empty);
 
-        string data;
+		string data;
 
-        public ToolboxDataAttribute (string data)
-        {
-            this.data = data;
-        }
+		public ToolboxDataAttribute (string data)
+		{
+			this.data = data;
+		}
 
-        public string Data {
-            get { return data; }
-        }
+		public string Data {
+			get { return data; }
+		}
 
-        public override bool Equals (object obj)
-        {
-            ToolboxDataAttribute other = obj as ToolboxDataAttribute;
-            if (other == null)
-                return false;
-            return other.Data == data;
-        }
+		public override bool Equals (object obj)
+		{
+			ToolboxDataAttribute other = obj as ToolboxDataAttribute;
+			if (other == null)
+				return false;
+			return other.Data == data;
+		}
 
-        public override int GetHashCode ()
-        {
-            if (data == null)
-                return -1;
-            return data.GetHashCode ();
-        }
+		public override int GetHashCode ()
+		{
+			if (data == null)
+				return -1;
+			return data.GetHashCode ();
+		}
 
-        public override bool IsDefaultAttribute ()
-        {
-            return ((data == null) || (data.Length == 0));
-        }
-    }
+		public override bool IsDefaultAttribute ()
+		{
+			return ((data == null) || (data.Length == 0));
+		}
+	}
 }
 
 

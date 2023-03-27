@@ -34,41 +34,41 @@ using System.Security.Permissions;
 
 namespace System.Web.Mail
 {
-    [Obsolete ("The recommended alternative is System.Net.Mail.Attachment. http://go.microsoft.com/fwlink/?linkid=14202")]
-    public class MailAttachment
-    {
-        string filename;
-        MailEncoding encoding;
-        
-        public MailAttachment (string filename) : 
-            this (filename, MailEncoding.Base64) 
-        {
-        }
-        
-        public MailAttachment (string filename, MailEncoding encoding) 
-        {
-            if (SecurityManager.SecurityEnabled) {
-                new FileIOPermission (FileIOPermissionAccess.Read, filename).Demand ();
-            }
+	[Obsolete ("The recommended alternative is System.Net.Mail.Attachment. http://go.microsoft.com/fwlink/?linkid=14202")]
+	public class MailAttachment
+	{
+		string filename;
+		MailEncoding encoding;
+		
+		public MailAttachment (string filename) : 
+			this (filename, MailEncoding.Base64) 
+		{
+		}
+		
+		public MailAttachment (string filename, MailEncoding encoding) 
+		{
+			if (SecurityManager.SecurityEnabled) {
+				new FileIOPermission (FileIOPermissionAccess.Read, filename).Demand ();
+			}
 
-            if (!File.Exists (filename)) {
-                string msg = Locale.GetText ("Cannot find file: '{0}'.");
-                throw new HttpException (String.Format (msg, filename));
-            }
+			if (!File.Exists (filename)) {
+				string msg = Locale.GetText ("Cannot find file: '{0}'.");
+				throw new HttpException (String.Format (msg, filename));
+			}
 
-            this.filename = filename;
-            this.encoding = encoding;
-        }
+			this.filename = filename;
+			this.encoding = encoding;
+		}
 
-        // Properties
-        public string Filename 
-        {
-            get { return filename; } 
-        }
-        
-        public MailEncoding Encoding 
-        {
-            get { return encoding; } 
-        }
-    }
+		// Properties
+		public string Filename 
+		{
+			get { return filename; } 
+		}
+		
+		public MailEncoding Encoding 
+		{
+			get { return encoding; } 
+		}
+	}
 }

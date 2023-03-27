@@ -32,6 +32,6 @@
 
 namespace System
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public delegate void CrossAppDomainDelegate ();
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public delegate void CrossAppDomainDelegate ();
 }

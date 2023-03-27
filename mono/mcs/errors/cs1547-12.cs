@@ -4,8 +4,8 @@
 
 class X
 {
-    static void Main ()
-    {
-        var e = from void v in new int [] { 0 } select i;
-    }
+	static void Main ()
+	{
+		var e = from void v in new int [] { 0 } select i;
+	}
 }

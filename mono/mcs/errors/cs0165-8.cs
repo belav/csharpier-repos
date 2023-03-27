@@ -4,16 +4,16 @@ using System;
 
 public class Foo
 {
-    static void Main ()
-    {
-        int service;
+	static void Main ()
+	{
+		int service;
 
-        foreach (char b in "hola") {
-            Console.WriteLine (b);
-            service = 1;
-            break;
-        }
+		foreach (char b in "hola") {
+			Console.WriteLine (b);
+			service = 1;
+			break;
+		}
 
-        Console.WriteLine (service);
-    }
+		Console.WriteLine (service);
+	}
 }

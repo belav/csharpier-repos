@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
@@ -29,72 +29,72 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-    [ToolboxBitmap ("")]
-    public class DataGridViewButtonColumn : DataGridViewColumn {
+	[ToolboxBitmap ("")]
+	public class DataGridViewButtonColumn : DataGridViewColumn {
 
-        private FlatStyle flatStyle;
-        private string text;
+		private FlatStyle flatStyle;
+		private string text;
 
-        public DataGridViewButtonColumn () {
-            base.CellTemplate = new DataGridViewButtonCell();
-            flatStyle = FlatStyle.Standard;
-            text = String.Empty;
-        }
+		public DataGridViewButtonColumn () {
+			base.CellTemplate = new DataGridViewButtonCell();
+			flatStyle = FlatStyle.Standard;
+			text = String.Empty;
+		}
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        public override DataGridViewCell CellTemplate {
-            get { return base.CellTemplate; }
-            set { base.CellTemplate = value as DataGridViewButtonCell; }
-        }
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[Browsable (false)]
+		public override DataGridViewCell CellTemplate {
+			get { return base.CellTemplate; }
+			set { base.CellTemplate = value as DataGridViewButtonCell; }
+		}
 
-        [Browsable (true)]
-        public override DataGridViewCellStyle DefaultCellStyle {
-            get { return base.DefaultCellStyle; }
-            set { base.DefaultCellStyle = value; }
-        }
+		[Browsable (true)]
+		public override DataGridViewCellStyle DefaultCellStyle {
+			get { return base.DefaultCellStyle; }
+			set { base.DefaultCellStyle = value; }
+		}
 
-        [DefaultValue (FlatStyle.Standard)]
-        public FlatStyle FlatStyle {
-            get { return flatStyle; }
-            set { flatStyle = value; }
-        }
+		[DefaultValue (FlatStyle.Standard)]
+		public FlatStyle FlatStyle {
+			get { return flatStyle; }
+			set { flatStyle = value; }
+		}
 
-        [DefaultValue (null)]
-        public string Text {
-            get { return text; }
-            set { text = value; }
-        }
+		[DefaultValue (null)]
+		public string Text {
+			get { return text; }
+			set { text = value; }
+		}
 
-        [DefaultValue (false)]
-        public bool UseColumnTextForButtonValue {
-            get {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null when getting this property.");
-                }
-                return (base.CellTemplate as DataGridViewButtonCell).UseColumnTextForButtonValue;
-            }
-            set {
-                if (base.CellTemplate == null) {
-                    throw new InvalidOperationException("CellTemplate is null when setting this property.");
-                }
-                (base.CellTemplate as DataGridViewButtonCell).UseColumnTextForButtonValue = value;
-            }
-        }
+		[DefaultValue (false)]
+		public bool UseColumnTextForButtonValue {
+			get {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null when getting this property.");
+				}
+				return (base.CellTemplate as DataGridViewButtonCell).UseColumnTextForButtonValue;
+			}
+			set {
+				if (base.CellTemplate == null) {
+					throw new InvalidOperationException("CellTemplate is null when setting this property.");
+				}
+				(base.CellTemplate as DataGridViewButtonCell).UseColumnTextForButtonValue = value;
+			}
+		}
 
-        public override object Clone () {
-            DataGridViewButtonColumn col = (DataGridViewButtonColumn) base.Clone();
-            col.flatStyle = this.flatStyle;
-            col.text = this.text;
-            return col;
-        }
+		public override object Clone () {
+			DataGridViewButtonColumn col = (DataGridViewButtonColumn) base.Clone();
+			col.flatStyle = this.flatStyle;
+			col.text = this.text;
+			return col;
+		}
 
-        public override string ToString ()
-        {
-            return string.Format ("DataGridViewButtonColumn {{ Name={0}, Index={1} }}", Name, Index);
-        }
+		public override string ToString ()
+		{
+			return string.Format ("DataGridViewButtonColumn {{ Name={0}, Index={1} }}", Name, Index);
+		}
 
-    }
+	}
 
 }
 

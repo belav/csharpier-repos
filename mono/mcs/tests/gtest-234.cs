@@ -7,9 +7,9 @@ public class Test
 
         public IFoo<T> GetFooGeneric<T> () { return default (IFoo<T>); }
 
-    public static void Main ()
-    {
-        Test test = new Test ();
-        test.GetFoo ();
-    }
+	public static void Main ()
+	{
+		Test test = new Test ();
+		test.GetFoo ();
+	}
 }

@@ -33,100 +33,100 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    [Serializable]
-    [ComVisible (true)]
-    public class WeakReference : ISerializable
-    {
-        //Fields
-        private bool isLongReference;
-        private GCHandle gcHandle;
+	[Serializable]
+	[ComVisible (true)]
+	public class WeakReference : ISerializable
+	{
+		//Fields
+		private bool isLongReference;
+		private GCHandle gcHandle;
 
-        // Helper method for constructors
-        //Should not be called from any other method.
-        private void AllocateHandle (Object target)
-        {
-            if (isLongReference) {
-                gcHandle = GCHandle.Alloc (target, GCHandleType.WeakTrackResurrection);
-            }
-            else {
-                gcHandle = GCHandle.Alloc (target, GCHandleType.Weak);
-            }
-        }
+		// Helper method for constructors
+		//Should not be called from any other method.
+		private void AllocateHandle (Object target)
+		{
+			if (isLongReference) {
+				gcHandle = GCHandle.Alloc (target, GCHandleType.WeakTrackResurrection);
+			}
+			else {
+				gcHandle = GCHandle.Alloc (target, GCHandleType.Weak);
+			}
+		}
 
-        //Constructors
+		//Constructors
 #if MOBILE
-        protected WeakReference ()
-        {
-        }
+		protected WeakReference ()
+		{
+		}
 #endif
-        public WeakReference (object target)
-            : this (target, false)
-        {
-        }
+		public WeakReference (object target)
+			: this (target, false)
+		{
+		}
 
-        public WeakReference (object target, bool trackResurrection)
-        {
-            isLongReference = trackResurrection;
-            AllocateHandle (target);
-        }
+		public WeakReference (object target, bool trackResurrection)
+		{
+			isLongReference = trackResurrection;
+			AllocateHandle (target);
+		}
 
-        protected WeakReference (SerializationInfo info, StreamingContext context)
-        {
-            if (info == null)
-                throw new ArgumentNullException ("info");
+		protected WeakReference (SerializationInfo info, StreamingContext context)
+		{
+			if (info == null)
+				throw new ArgumentNullException ("info");
 
-            isLongReference = info.GetBoolean ("TrackResurrection");
-            Object target = info.GetValue ("TrackedObject", typeof (System.Object));
+			isLongReference = info.GetBoolean ("TrackResurrection");
+			Object target = info.GetValue ("TrackedObject", typeof (System.Object));
 
-            AllocateHandle (target);
-        }
+			AllocateHandle (target);
+		}
 
-        // Properties
-        public virtual bool IsAlive {
-            get {
-                //Target property takes care of the exception
-                return (Target != null);
-            }
-        }
+		// Properties
+		public virtual bool IsAlive {
+			get {
+				//Target property takes care of the exception
+				return (Target != null);
+			}
+		}
 
-        public virtual object Target {
-            get {
-                // This shouldn't throw an exception after finalization
-                // http://blogs.msdn.com/b/yunjin/archive/2005/08/31/458231.aspx
-                if (!gcHandle.IsAllocated)
-                    return null;
-                return gcHandle.Target;
-            }
-            set
-            {
-                gcHandle.Target = value;
-            }
-        }
+		public virtual object Target {
+			get {
+				// This shouldn't throw an exception after finalization
+				// http://blogs.msdn.com/b/yunjin/archive/2005/08/31/458231.aspx
+				if (!gcHandle.IsAllocated)
+					return null;
+				return gcHandle.Target;
+			}
+			set
+			{
+				gcHandle.Target = value;
+			}
+		}
 
-        public virtual bool TrackResurrection {
-            get {
-                return isLongReference;
-            }
-        }
+		public virtual bool TrackResurrection {
+			get {
+				return isLongReference;
+			}
+		}
 
-        //Methods
-        ~WeakReference ()
-        {
-            gcHandle.Free ();
-        }
+		//Methods
+		~WeakReference ()
+		{
+			gcHandle.Free ();
+		}
 
-        public virtual void GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            if (info == null)
-                throw new ArgumentNullException ("info");
+		public virtual void GetObjectData (SerializationInfo info, StreamingContext context)
+		{
+			if (info == null)
+				throw new ArgumentNullException ("info");
 
-            info.AddValue ("TrackResurrection", TrackResurrection);
+			info.AddValue ("TrackResurrection", TrackResurrection);
 
-            try {
-                info.AddValue ("TrackedObject", Target);
-            } catch (Exception) {
-                info.AddValue ("TrackedObject", null);
-            }
-        }
-    }
+			try {
+				info.AddValue ("TrackedObject", Target);
+			} catch (Exception) {
+				info.AddValue ("TrackedObject", null);
+			}
+		}
+	}
 }

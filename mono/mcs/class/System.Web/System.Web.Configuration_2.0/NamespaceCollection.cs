@@ -2,7 +2,7 @@
 // System.Web.Configuration.NamespaceCollection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,69 +37,69 @@ using System.Xml;
 
 namespace System.Web.Configuration
 {
-    [ConfigurationCollection (typeof (NamespaceInfo), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class NamespaceCollection : ConfigurationElementCollection
-    {
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty autoImportVBNamespaceProp;
+	[ConfigurationCollection (typeof (NamespaceInfo), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class NamespaceCollection : ConfigurationElementCollection
+	{
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty autoImportVBNamespaceProp;
 
-        static NamespaceCollection ()
-        {
-            autoImportVBNamespaceProp = new ConfigurationProperty ("autoImportVBNamespace", typeof (bool), true);
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (autoImportVBNamespaceProp);
-        }
+		static NamespaceCollection ()
+		{
+			autoImportVBNamespaceProp = new ConfigurationProperty ("autoImportVBNamespace", typeof (bool), true);
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (autoImportVBNamespaceProp);
+		}
 
-        public NamespaceCollection ()
-        {
-        }
+		public NamespaceCollection ()
+		{
+		}
 
-        public void Add (NamespaceInfo namespaceInformation)
-        {
-            BaseAdd (namespaceInformation);
-        }
+		public void Add (NamespaceInfo namespaceInformation)
+		{
+			BaseAdd (namespaceInformation);
+		}
 
-        public void Clear ()
-        {
-            BaseClear ();
-        }
+		public void Clear ()
+		{
+			BaseClear ();
+		}
 
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new NamespaceInfo (null);
-        }
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new NamespaceInfo (null);
+		}
 
-        protected override object GetElementKey (ConfigurationElement element)
-        {
-            return ((NamespaceInfo)element).Namespace;
-        }
+		protected override object GetElementKey (ConfigurationElement element)
+		{
+			return ((NamespaceInfo)element).Namespace;
+		}
 
-        public void Remove (string s)
-        {
-            BaseRemove (s);
-        }
+		public void Remove (string s)
+		{
+			BaseRemove (s);
+		}
 
-        public void RemoveAt (int index)
-        {
-            BaseRemoveAt (index);
-        }
+		public void RemoveAt (int index)
+		{
+			BaseRemoveAt (index);
+		}
 
-        [ConfigurationProperty ("autoImportVBNamespace", DefaultValue = true)]
-        public bool AutoImportVBNamespace {
-            get { return (bool) base[autoImportVBNamespaceProp]; }
-            set { base[autoImportVBNamespaceProp] = value; }
-        }
+		[ConfigurationProperty ("autoImportVBNamespace", DefaultValue = true)]
+		public bool AutoImportVBNamespace {
+			get { return (bool) base[autoImportVBNamespaceProp]; }
+			set { base[autoImportVBNamespaceProp] = value; }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        public NamespaceInfo this[int index] {
-            get { return (NamespaceInfo) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-        }
+		public NamespaceInfo this[int index] {
+			get { return (NamespaceInfo) BaseGet (index); }
+			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+		}
 
-    }
+	}
 
 }
 

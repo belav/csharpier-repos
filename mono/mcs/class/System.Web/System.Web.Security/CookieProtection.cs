@@ -2,7 +2,7 @@
 // System.Web.Security.CookieProtection
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
 //
 // (C) 2003 Ben Maurer
 //
@@ -29,11 +29,11 @@
 //
 
 namespace System.Web.Security {
-    public enum CookieProtection {
-        None = 0,
-        Validation = 1,
-        Encryption = 2,
-        All = 3
-    }
+	public enum CookieProtection {
+		None = 0,
+		Validation = 1,
+		Encryption = 2,
+		All = 3
+	}
 }
 

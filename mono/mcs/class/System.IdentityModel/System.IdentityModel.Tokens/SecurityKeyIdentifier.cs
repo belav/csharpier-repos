@@ -2,7 +2,7 @@
 // SecurityKeyIdentifier.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2007 Novell, Inc.  http://www.novell.com
 //
@@ -34,103 +34,103 @@ using System.IdentityModel.Policy;
 
 namespace System.IdentityModel.Tokens
 {
-    public class SecurityKeyIdentifier
-        : IEnumerable<SecurityKeyIdentifierClause>, IEnumerable
-    {
-        public SecurityKeyIdentifier ()
-        {
-            this.list = new List<SecurityKeyIdentifierClause> ();
-        }
+	public class SecurityKeyIdentifier
+		: IEnumerable<SecurityKeyIdentifierClause>, IEnumerable
+	{
+		public SecurityKeyIdentifier ()
+		{
+			this.list = new List<SecurityKeyIdentifierClause> ();
+		}
 
-        public SecurityKeyIdentifier (params SecurityKeyIdentifierClause [] clauses)
-        {
-            this.list = new List<SecurityKeyIdentifierClause> (clauses);
-        }
+		public SecurityKeyIdentifier (params SecurityKeyIdentifierClause [] clauses)
+		{
+			this.list = new List<SecurityKeyIdentifierClause> (clauses);
+		}
 
-        List<SecurityKeyIdentifierClause> list;
-        bool is_readonly;
+		List<SecurityKeyIdentifierClause> list;
+		bool is_readonly;
 
-        public bool CanCreateKey {
-            get {
-                foreach (SecurityKeyIdentifierClause kic in this)
-                    if (kic.CanCreateKey)
-                        return true;
-                return false;
-            }
-        }
+		public bool CanCreateKey {
+			get {
+				foreach (SecurityKeyIdentifierClause kic in this)
+					if (kic.CanCreateKey)
+						return true;
+				return false;
+			}
+		}
 
-        public int Count {
-            get { return list.Count; }
-        }
+		public int Count {
+			get { return list.Count; }
+		}
 
-        public bool IsReadOnly {
-            get { return is_readonly; }
-        }
+		public bool IsReadOnly {
+			get { return is_readonly; }
+		}
 
-        public SecurityKeyIdentifierClause this [int index] {
-            get { return list [index]; }
-        }
+		public SecurityKeyIdentifierClause this [int index] {
+			get { return list [index]; }
+		}
 
-        public void Add (SecurityKeyIdentifierClause clause)
-        {
-            if (is_readonly)
-                throw new InvalidOperationException ("This SecurityKeyIdentifier is read-only.");
-            list.Add (clause);
-        }
+		public void Add (SecurityKeyIdentifierClause clause)
+		{
+			if (is_readonly)
+				throw new InvalidOperationException ("This SecurityKeyIdentifier is read-only.");
+			list.Add (clause);
+		}
 
-        public SecurityKey CreateKey ()
-        {
-            foreach (SecurityKeyIdentifierClause kic in this)
-                if (kic.CanCreateKey)
-                    return kic.CreateKey ();
-            throw new ArgumentException ("This key identifier cannot create a key");
-        }
+		public SecurityKey CreateKey ()
+		{
+			foreach (SecurityKeyIdentifierClause kic in this)
+				if (kic.CanCreateKey)
+					return kic.CreateKey ();
+			throw new ArgumentException ("This key identifier cannot create a key");
+		}
 
-        public TClause Find<TClause> ()
-            where TClause : SecurityKeyIdentifierClause
-        {
-            TClause kic;
-            if (!TryFind<TClause> (out kic))
-                throw new ArgumentException (String.Format ("{0} was not found in this SecurityKeyIdentifier", typeof (TClause)));
-            return kic;
-        }
+		public TClause Find<TClause> ()
+			where TClause : SecurityKeyIdentifierClause
+		{
+			TClause kic;
+			if (!TryFind<TClause> (out kic))
+				throw new ArgumentException (String.Format ("{0} was not found in this SecurityKeyIdentifier", typeof (TClause)));
+			return kic;
+		}
 
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return GetEnumerator ();
-        }
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			return GetEnumerator ();
+		}
 
-        public IEnumerator<SecurityKeyIdentifierClause> GetEnumerator ()
-        {
-            return list.GetEnumerator ();
-        }
+		public IEnumerator<SecurityKeyIdentifierClause> GetEnumerator ()
+		{
+			return list.GetEnumerator ();
+		}
 
-        public void MakeReadOnly ()
-        {
-            is_readonly = true;
-        }
+		public void MakeReadOnly ()
+		{
+			is_readonly = true;
+		}
 
-        public override string ToString ()
-        {
-            if (Count == 0)
-                return "(no key identifier clause)";
-            StringBuilder sb = new StringBuilder ();
-            sb.AppendFormat ("Total keys: {0}, ", Count);
-            foreach (SecurityKeyIdentifierClause kic in this)
-                sb.Append ('{').Append (kic.ToString ()).Append ('}');
-            return sb.ToString ();
-        }
+		public override string ToString ()
+		{
+			if (Count == 0)
+				return "(no key identifier clause)";
+			StringBuilder sb = new StringBuilder ();
+			sb.AppendFormat ("Total keys: {0}, ", Count);
+			foreach (SecurityKeyIdentifierClause kic in this)
+				sb.Append ('{').Append (kic.ToString ()).Append ('}');
+			return sb.ToString ();
+		}
 
-        public bool TryFind<TClause> (out TClause clause)
-            where TClause : SecurityKeyIdentifierClause
-        {
-            clause = default (TClause);
-            foreach (SecurityKeyIdentifierClause kic in this)
-                if (typeof (TClause).IsAssignableFrom (kic.GetType ())) {
-                    clause = (TClause) kic;
-                    return true;
-                }
-            return false;
-        }
-    }
+		public bool TryFind<TClause> (out TClause clause)
+			where TClause : SecurityKeyIdentifierClause
+		{
+			clause = default (TClause);
+			foreach (SecurityKeyIdentifierClause kic in this)
+				if (typeof (TClause).IsAssignableFrom (kic.GetType ())) {
+					clause = (TClause) kic;
+					return true;
+				}
+			return false;
+		}
+	}
 }

@@ -3,7 +3,7 @@
 // for System.Web.Services.Configuration.SoapEnvelopeProcessingElement
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,36 +33,36 @@ using System.Web.Services.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services {
-    [TestFixture]
-    public class SoapEnvelopeProcessingElementTest
-    {
-        [Test]
-        public void Ctors ()
-        {
-            SoapEnvelopeProcessingElement el = new SoapEnvelopeProcessingElement ();
-            Assert.IsFalse (el.IsStrict, "A1");
-            Assert.AreEqual (Int32.MaxValue, el.ReadTimeout, "A2");
+	[TestFixture]
+	public class SoapEnvelopeProcessingElementTest
+	{
+		[Test]
+		public void Ctors ()
+		{
+			SoapEnvelopeProcessingElement el = new SoapEnvelopeProcessingElement ();
+			Assert.IsFalse (el.IsStrict, "A1");
+			Assert.AreEqual (Int32.MaxValue, el.ReadTimeout, "A2");
 
-            el = new SoapEnvelopeProcessingElement (500);
-            Assert.IsFalse (el.IsStrict, "A3");
-            Assert.AreEqual (500, el.ReadTimeout, "A4");
+			el = new SoapEnvelopeProcessingElement (500);
+			Assert.IsFalse (el.IsStrict, "A3");
+			Assert.AreEqual (500, el.ReadTimeout, "A4");
 
-            el = new SoapEnvelopeProcessingElement (500, true);
-            Assert.IsTrue (el.IsStrict, "A5");
-            Assert.AreEqual (500, el.ReadTimeout, "A6");
-        }
+			el = new SoapEnvelopeProcessingElement (500, true);
+			Assert.IsTrue (el.IsStrict, "A5");
+			Assert.AreEqual (500, el.ReadTimeout, "A6");
+		}
 
-        [Test]
-        public void GetSet ()
-        {
-            SoapEnvelopeProcessingElement el = new SoapEnvelopeProcessingElement ();
+		[Test]
+		public void GetSet ()
+		{
+			SoapEnvelopeProcessingElement el = new SoapEnvelopeProcessingElement ();
 
-            el.IsStrict = true;
-            Assert.IsTrue (el.IsStrict, "A1");
+			el.IsStrict = true;
+			Assert.IsTrue (el.IsStrict, "A1");
 
-            el.ReadTimeout = 500;
-            Assert.AreEqual (500, el.ReadTimeout, "A2");
-        }
-    }
+			el.ReadTimeout = 500;
+			Assert.AreEqual (500, el.ReadTimeout, "A2");
+		}
+	}
 }
 

@@ -1,4 +1,4 @@
-namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc {
     public class ModelMetadataProviders {
         private ModelMetadataProvider _currentProvider;
         private static ModelMetadataProviders _instance = new ModelMetadataProviders();

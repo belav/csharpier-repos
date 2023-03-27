@@ -10,8 +10,8 @@ public class A
 
 public class Test : A
 {
-    int prop = 1;
+	int prop = 1;
 
-    public extern Test ()
-        : base (1);
+	public extern Test ()
+		: base (1);
 }

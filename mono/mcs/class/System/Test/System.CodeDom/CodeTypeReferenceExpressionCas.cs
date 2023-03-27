@@ -1,9 +1,9 @@
 //
 // CodeTypeReferenceExpressionCas.cs 
-//    - CAS unit tests for System.CodeDom.CodeTypeReferenceExpression
+//	- CAS unit tests for System.CodeDom.CodeTypeReferenceExpression
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,61 +37,61 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeTypeReferenceExpressionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeTypeReferenceExpressionCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression ();
-            Assert.AreEqual ("System.Void", ctre.Type.BaseType, "Type");
-            ctre.Type = new CodeTypeReference ("System.Int32");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression ();
+			Assert.AreEqual ("System.Void", ctre.Type.BaseType, "Type");
+			ctre.Type = new CodeTypeReference ("System.Int32");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeTypeReference type = new CodeTypeReference ("System.Int32");
-            CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression (type);
-            Assert.AreSame (type, ctre.Type, "Type");
-            ctre.Type = new CodeTypeReference ("System.Void");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeTypeReference type = new CodeTypeReference ("System.Int32");
+			CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression (type);
+			Assert.AreSame (type, ctre.Type, "Type");
+			ctre.Type = new CodeTypeReference ("System.Void");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2_Deny_Unrestricted ()
-        {
-            CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression ("System.Int32");
-            Assert.AreEqual ("System.Int32", ctre.Type.BaseType, "Type");
-            ctre.Type = new CodeTypeReference ("System.Void");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2_Deny_Unrestricted ()
+		{
+			CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression ("System.Int32");
+			Assert.AreEqual ("System.Int32", ctre.Type.BaseType, "Type");
+			ctre.Type = new CodeTypeReference ("System.Void");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor3_Deny_Unrestricted ()
-        {
-            CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression (typeof (int));
-            Assert.AreEqual ("System.Int32", ctre.Type.BaseType, "Type");
-            ctre.Type = new CodeTypeReference ("System.Void");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor3_Deny_Unrestricted ()
+		{
+			CodeTypeReferenceExpression ctre = new CodeTypeReferenceExpression (typeof (int));
+			Assert.AreEqual ("System.Int32", ctre.Type.BaseType, "Type");
+			ctre.Type = new CodeTypeReference ("System.Void");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeTypeReferenceExpression).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeTypeReferenceExpression).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

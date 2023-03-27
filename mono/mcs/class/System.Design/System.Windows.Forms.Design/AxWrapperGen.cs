@@ -32,15 +32,15 @@ using System.Collections;
 
 namespace System.Windows.Forms.Design
 {
-    public class AxWrapperGen
-    {
-        [MonoTODO]
-        public AxWrapperGen (Type axType)
-        {
-            throw new NotImplementedException ();
-        }
+	public class AxWrapperGen
+	{
+		[MonoTODO]
+		public AxWrapperGen (Type axType)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static ArrayList GeneratedSources = new ArrayList ();
-    }
+		[MonoTODO]
+		public static ArrayList GeneratedSources = new ArrayList ();
+	}
 }

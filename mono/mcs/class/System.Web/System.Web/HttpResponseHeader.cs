@@ -2,7 +2,7 @@
 // System.Web.HttpResponseHeader.cs 
 //
 // Author:
-//    Chris Toshok (toshok@novell.com)
+//	Chris Toshok (toshok@novell.com)
 //
 
 //
@@ -35,75 +35,75 @@ using System.Web.Util;
 
 namespace System.Web
 {
-    abstract class BaseResponseHeader
-    {
-        string headerValue;
-        
-        public string Value {
-            get { return headerValue; }
-            set {
-                string hname, hvalue;
-                HttpEncoder.Current.HeaderNameValueEncode (null, value, out hname, out hvalue);
-                headerValue = hvalue;
-            }
-        }
-/*      
-        static bool headerCheckingEnabled;
-        
-        static BaseResponseHeader ()
-        {
-            HttpRuntimeSection section = HttpRuntime.Section;
-            headerCheckingEnabled = section == null || section.EnableHeaderChecking;
-        }
+	abstract class BaseResponseHeader
+	{
+		string headerValue;
+		
+		public string Value {
+			get { return headerValue; }
+			set {
+				string hname, hvalue;
+				HttpEncoder.Current.HeaderNameValueEncode (null, value, out hname, out hvalue);
+				headerValue = hvalue;
+			}
+		}
+/*	  
+		static bool headerCheckingEnabled;
+		
+		static BaseResponseHeader ()
+		{
+			HttpRuntimeSection section = HttpRuntime.Section;
+			headerCheckingEnabled = section == null || section.EnableHeaderChecking;
+		}
 */
 
-        internal BaseResponseHeader (string val)
-        {
-            Value = val;
-        }
-        
-        internal abstract void SendContent (HttpWorkerRequest wr);
-    }
+		internal BaseResponseHeader (string val)
+		{
+			Value = val;
+		}
+		
+		internal abstract void SendContent (HttpWorkerRequest wr);
+	}
 
-    internal sealed class KnownResponseHeader : BaseResponseHeader
-    {
-        public int ID;
+	internal sealed class KnownResponseHeader : BaseResponseHeader
+	{
+		public int ID;
 
-        internal KnownResponseHeader (int ID, string val) : base (val)
-        {
-            this.ID = ID;
-        }
+		internal KnownResponseHeader (int ID, string val) : base (val)
+		{
+			this.ID = ID;
+		}
 
-        internal override void SendContent (HttpWorkerRequest wr)
-        {
-            wr.SendKnownResponseHeader (ID, Value);
-        }
-    }
+		internal override void SendContent (HttpWorkerRequest wr)
+		{
+			wr.SendKnownResponseHeader (ID, Value);
+		}
+	}
 
-    internal sealed class UnknownResponseHeader : BaseResponseHeader
-    {
-        string headerName;
-        
-        public string Name {
-            get { return headerName; }
-            set {
-                string hname, hvalue;
-                HttpEncoder.Current.HeaderNameValueEncode (value, null, out hname, out hvalue);
-                headerName = hname;
-            }
-        }
-        
+	internal sealed class UnknownResponseHeader : BaseResponseHeader
+	{
+		string headerName;
+		
+		public string Name {
+			get { return headerName; }
+			set {
+				string hname, hvalue;
+				HttpEncoder.Current.HeaderNameValueEncode (value, null, out hname, out hvalue);
+				headerName = hname;
+			}
+		}
+		
 
-        public UnknownResponseHeader (string name, string val) : base (val)
-        {
-            Name = name;
-        }
-    
-        internal override void SendContent (HttpWorkerRequest wr)
-        {
-            wr.SendUnknownResponseHeader (Name, Value);
-        }
-        
-    }
+		public UnknownResponseHeader (string name, string val) : base (val)
+		{
+			Name = name;
+		}
+	
+		internal override void SendContent (HttpWorkerRequest wr)
+		{
+			wr.SendUnknownResponseHeader (Name, Value);
+		}
+		
+	}
 }
 

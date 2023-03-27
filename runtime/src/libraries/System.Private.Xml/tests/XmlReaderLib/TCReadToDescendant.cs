@@ -127,7 +127,7 @@ namespace System.Xml.Tests
 
             // for function v19
             {
-                this.AddChild(new CVariation(v19) { Attribute = new Variation("427176    Assertion failed when call XmlReader.ReadToDescendant() for non-existing node") { Pri = 1 } });
+                this.AddChild(new CVariation(v19) { Attribute = new Variation("427176	Assertion failed when call XmlReader.ReadToDescendant() for non-existing node") { Pri = 1 } });
             }
         }
     }

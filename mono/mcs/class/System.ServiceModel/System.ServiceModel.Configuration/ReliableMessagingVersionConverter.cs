@@ -1,8 +1,8 @@
-//
+﻿//
 // ReliableMessagingVersionConverter.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -33,26 +33,26 @@ using System.ComponentModel;
 
 namespace System.ServiceModel.Configuration
 {
-    class ReliableMessagingVersionConverter : TypeConverter
-    {
-        static readonly Dictionary<string, ReliableMessagingVersion> _lookup;
+	class ReliableMessagingVersionConverter : TypeConverter
+	{
+		static readonly Dictionary<string, ReliableMessagingVersion> _lookup;
 
-        static ReliableMessagingVersionConverter () {
-            _lookup = new Dictionary<string, ReliableMessagingVersion> (StringComparer.OrdinalIgnoreCase);
-            _lookup.Add ("Default", ReliableMessagingVersion.Default);
-            _lookup.Add ("WSReliableMessaging11", ReliableMessagingVersion.WSReliableMessaging11);
-            _lookup.Add ("WSReliableMessagingFebruary2005", ReliableMessagingVersion.WSReliableMessagingFebruary2005);
-        }
+		static ReliableMessagingVersionConverter () {
+			_lookup = new Dictionary<string, ReliableMessagingVersion> (StringComparer.OrdinalIgnoreCase);
+			_lookup.Add ("Default", ReliableMessagingVersion.Default);
+			_lookup.Add ("WSReliableMessaging11", ReliableMessagingVersion.WSReliableMessaging11);
+			_lookup.Add ("WSReliableMessagingFebruary2005", ReliableMessagingVersion.WSReliableMessagingFebruary2005);
+		}
 
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
-            return sourceType == typeof (string);
-        }
+		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
+			return sourceType == typeof (string);
+		}
 
-        public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-            string stringValue = (string) value;
-            if (_lookup.ContainsKey (stringValue))
-                return _lookup [stringValue];
-            throw new ArgumentOutOfRangeException ();
-        }
-    }
+		public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+			string stringValue = (string) value;
+			if (_lookup.ContainsKey (stringValue))
+				return _lookup [stringValue];
+			throw new ArgumentOutOfRangeException ();
+		}
+	}
 }

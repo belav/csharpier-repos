@@ -32,50 +32,50 @@ using System.Collections.Specialized;
 
 namespace System.Web.UI.WebControls
 {
-    public class ListViewInsertedEventArgs : EventArgs
-    {
-        IOrderedDictionary _values;
-        
-        internal ListViewInsertedEventArgs (int affectedRows, Exception exception, IOrderedDictionary values)
-            : this (affectedRows, exception)
-        {
-            _values = values;
-        }
-        
-        public ListViewInsertedEventArgs (int affectedRows, Exception exception)
-        {
-            AffectedRows = affectedRows;
-            Exception = exception;
-            ExceptionHandled = false;
-            KeepInInsertMode = false;
-        }
-        
-        public int AffectedRows {
-            get;
-            private set;
-        }
-        
-        public Exception Exception {
-            get;
-            private set;
-        }
-        
-        public bool ExceptionHandled {
-            get;
-            set;
-        }
-        
-        public bool KeepInInsertMode {
-            get;
-            set;
-        }
-        
-        public IOrderedDictionary Values {
-            get {
-                if (_values == null)
-                    _values = new OrderedDictionary ();
-                return _values;
-            }
-        }
-    }
+	public class ListViewInsertedEventArgs : EventArgs
+	{
+		IOrderedDictionary _values;
+		
+		internal ListViewInsertedEventArgs (int affectedRows, Exception exception, IOrderedDictionary values)
+			: this (affectedRows, exception)
+		{
+			_values = values;
+		}
+		
+		public ListViewInsertedEventArgs (int affectedRows, Exception exception)
+		{
+			AffectedRows = affectedRows;
+			Exception = exception;
+			ExceptionHandled = false;
+			KeepInInsertMode = false;
+		}
+		
+		public int AffectedRows {
+			get;
+			private set;
+		}
+		
+		public Exception Exception {
+			get;
+			private set;
+		}
+		
+		public bool ExceptionHandled {
+			get;
+			set;
+		}
+		
+		public bool KeepInInsertMode {
+			get;
+			set;
+		}
+		
+		public IOrderedDictionary Values {
+			get {
+				if (_values == null)
+					_values = new OrderedDictionary ();
+				return _values;
+			}
+		}
+	}
 }

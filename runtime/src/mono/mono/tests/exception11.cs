@@ -2,25 +2,25 @@ using System;
 
 public class Test {
 
-    public static int Main (string[] args) {
+	public static int Main (string[] args) {
 
-        int c = 0;
-        try
+		int c = 0;
+		try
                         {
-                c = 0;
+				c = 0;
                         }
-        catch (Exception e)
+		catch (Exception e)
                         {
-                Console.WriteLine("Exception: {0}", e.Message);
+				Console.WriteLine("Exception: {0}", e.Message);
                         }
-        finally
+		finally
                         { 
-                Console.WriteLine("Finally... {0}", c++);
+				Console.WriteLine("Finally... {0}", c++);
                         }
 
-        if (c != 1)
-            return 1;
-        
-        return 0;
-    }
+		if (c != 1)
+			return 1;
+		
+		return 0;
+	}
 }

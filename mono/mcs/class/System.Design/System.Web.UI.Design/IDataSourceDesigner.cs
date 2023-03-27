@@ -32,17 +32,17 @@ using System.Collections;
 
 namespace System.Web.UI.Design
 {
-    public interface IDataSourceDesigner
-    {
-        event EventHandler DataSourceChanged;
-        event EventHandler SchemaRefreshed;
-        bool CanConfigure { get; }
-        bool CanRefreshSchema { get; }
-        void Configure ();
-        DesignerDataSourceView GetView (string viewName);
-        string[] GetViewNames ();
-        void RefreshSchema (bool preferSilent);
-        void ResumeDataSourceEvents ();
-        void SuppressDataSourceEvents ();
-    }
+	public interface IDataSourceDesigner
+	{
+		event EventHandler DataSourceChanged;
+		event EventHandler SchemaRefreshed;
+		bool CanConfigure { get; }
+		bool CanRefreshSchema { get; }
+		void Configure ();
+		DesignerDataSourceView GetView (string viewName);
+		string[] GetViewNames ();
+		void RefreshSchema (bool preferSilent);
+		void ResumeDataSourceEvents ();
+		void SuppressDataSourceEvents ();
+	}
 }

@@ -1,4 +1,4 @@
-//
+﻿//
 // Author:
 //   Aaron Bockover <abock@xamarin.com>
 //

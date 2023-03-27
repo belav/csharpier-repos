@@ -4,15 +4,15 @@ delegate string Fun ();
 
 class X
 {
-    static void Main ()
-    {
-        for (int j = 0; j < 5; j++) {
-            Fun m = delegate {
-                int i = j;
-                return "<<" + i + ">>";
-            };
+	static void Main ()
+	{
+		for (int j = 0; j < 5; j++) {
+			Fun m = delegate {
+				int i = j;
+				return "<<" + i + ">>";
+			};
 
-            int i = j;
-        }
-    }
+			int i = j;
+		}
+	}
 }

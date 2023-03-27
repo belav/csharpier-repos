@@ -30,11 +30,11 @@ using System;
 
 namespace Mono.Cecil.Binary {
 
-    [Flags]
-    internal enum RuntimeImage : uint {
-        ILOnly = 0x0000001,
-        F32BitsRequired = 0x0000002,
-        StrongNameSigned = 0x0000008,
-        TrackDebugData = 0x00010000
-    }
+	[Flags]
+	internal enum RuntimeImage : uint {
+		ILOnly = 0x0000001,
+		F32BitsRequired = 0x0000002,
+		StrongNameSigned = 0x0000008,
+		TrackDebugData = 0x00010000
+	}
 }

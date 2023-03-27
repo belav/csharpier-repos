@@ -2,7 +2,7 @@
 // HttpRequestWrapper.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -47,249 +47,249 @@ using System.Web.Routing;
 namespace System.Web
 {
         [TypeForwardedFrom ("System.Web.Abstractions, Version=3.5.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35")]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class HttpRequestWrapper : HttpRequestBase
-    {
-        HttpRequest w;
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class HttpRequestWrapper : HttpRequestBase
+	{
+		HttpRequest w;
 
-        public HttpRequestWrapper (HttpRequest httpRequest)
-        {
-            if (httpRequest == null)
-                throw new ArgumentNullException ("httpRequest");
-            w = httpRequest;
-        }
+		public HttpRequestWrapper (HttpRequest httpRequest)
+		{
+			if (httpRequest == null)
+				throw new ArgumentNullException ("httpRequest");
+			w = httpRequest;
+		}
 
-        public override string [] AcceptTypes {
-            get { return w.AcceptTypes; }
-        }
+		public override string [] AcceptTypes {
+			get { return w.AcceptTypes; }
+		}
 
-        public override string AnonymousID {
-            get { return w.AnonymousID; }
-        }
+		public override string AnonymousID {
+			get { return w.AnonymousID; }
+		}
 
-        public override string ApplicationPath {
-            get { return w.ApplicationPath; }
-        }
+		public override string ApplicationPath {
+			get { return w.ApplicationPath; }
+		}
 
-        public override string AppRelativeCurrentExecutionFilePath {
-            get { return w.AppRelativeCurrentExecutionFilePath; }
-        }
+		public override string AppRelativeCurrentExecutionFilePath {
+			get { return w.AppRelativeCurrentExecutionFilePath; }
+		}
 
-        public override HttpBrowserCapabilitiesBase Browser {
-            get { return new HttpBrowserCapabilitiesWrapper (w.Browser); }
-        }
+		public override HttpBrowserCapabilitiesBase Browser {
+			get { return new HttpBrowserCapabilitiesWrapper (w.Browser); }
+		}
 
-        public override HttpClientCertificate ClientCertificate {
-            get { return w.ClientCertificate; }
-        }
+		public override HttpClientCertificate ClientCertificate {
+			get { return w.ClientCertificate; }
+		}
 
-        public override Encoding ContentEncoding {
-            get { return w.ContentEncoding; }
-            set { w.ContentEncoding = value; }
-        }
+		public override Encoding ContentEncoding {
+			get { return w.ContentEncoding; }
+			set { w.ContentEncoding = value; }
+		}
 
-        public override int ContentLength {
-            get { return w.ContentLength; }
-        }
+		public override int ContentLength {
+			get { return w.ContentLength; }
+		}
 
-        public override string ContentType {
-            get { return w.ContentType; }
-            set { w.ContentType = value; }
-        }
+		public override string ContentType {
+			get { return w.ContentType; }
+			set { w.ContentType = value; }
+		}
 
-        public override HttpCookieCollection Cookies {
-            get { return w.Cookies; }
-        }
+		public override HttpCookieCollection Cookies {
+			get { return w.Cookies; }
+		}
 
-        public override string CurrentExecutionFilePath {
-            get { return w.CurrentExecutionFilePath; }
-        }
+		public override string CurrentExecutionFilePath {
+			get { return w.CurrentExecutionFilePath; }
+		}
 
-        public override string FilePath {
-            get { return w.FilePath; }
-        }
+		public override string FilePath {
+			get { return w.FilePath; }
+		}
 
-        public override HttpFileCollectionBase Files {
-            get { return new HttpFileCollectionWrapper (w.Files); }
-        }
+		public override HttpFileCollectionBase Files {
+			get { return new HttpFileCollectionWrapper (w.Files); }
+		}
 
-        public override Stream Filter {
-            get { return w.Filter; }
-            set { w.Filter = value; }
-        }
+		public override Stream Filter {
+			get { return w.Filter; }
+			set { w.Filter = value; }
+		}
 
-        public override NameValueCollection Form {
-            get { return w.Form; }
-        }
+		public override NameValueCollection Form {
+			get { return w.Form; }
+		}
 
-        public override NameValueCollection Headers {
-            get { return w.Headers; }
-        }
+		public override NameValueCollection Headers {
+			get { return w.Headers; }
+		}
 
-        public override Stream GetBufferedInputStream ()
-        {
-            return w.GetBufferedInputStream ();
-        }
+		public override Stream GetBufferedInputStream ()
+		{
+			return w.GetBufferedInputStream ();
+		}
 
-        public override Stream GetBufferlessInputStream ()
-        {
-            return w.GetBufferlessInputStream ();
-        }
+		public override Stream GetBufferlessInputStream ()
+		{
+			return w.GetBufferlessInputStream ();
+		}
 
-        public override Stream GetBufferlessInputStream (System.Boolean disableMaxRequestLength)
-        {
-            return w.GetBufferlessInputStream (disableMaxRequestLength);
-        }
+		public override Stream GetBufferlessInputStream (System.Boolean disableMaxRequestLength)
+		{
+			return w.GetBufferlessInputStream (disableMaxRequestLength);
+		}
 
-        public override string HttpMethod {
-            get { return w.HttpMethod; }
-        }
-        public override ChannelBinding HttpChannelBinding {
-            get { return w.HttpChannelBinding; }
-        }
-        public override Stream InputStream {
-            get { return w.InputStream; }
-        }
+		public override string HttpMethod {
+			get { return w.HttpMethod; }
+		}
+		public override ChannelBinding HttpChannelBinding {
+			get { return w.HttpChannelBinding; }
+		}
+		public override Stream InputStream {
+			get { return w.InputStream; }
+		}
 
-        public override bool IsAuthenticated {
-            get { return w.IsAuthenticated; }
-        }
+		public override bool IsAuthenticated {
+			get { return w.IsAuthenticated; }
+		}
 
-        public override bool IsLocal {
-            get { return w.IsLocal; }
-        }
+		public override bool IsLocal {
+			get { return w.IsLocal; }
+		}
 
-        public override bool IsSecureConnection {
-            get { return w.IsSecureConnection; }
-        }
+		public override bool IsSecureConnection {
+			get { return w.IsSecureConnection; }
+		}
 
-        public override string this [string key] {
-            get { return w [key]; }
-        }
+		public override string this [string key] {
+			get { return w [key]; }
+		}
 
-        public override WindowsIdentity LogonUserIdentity {
-            get { return w.LogonUserIdentity; }
-        }
+		public override WindowsIdentity LogonUserIdentity {
+			get { return w.LogonUserIdentity; }
+		}
 
-        public override NameValueCollection Params {
-            get { return w.Params; }
-        }
+		public override NameValueCollection Params {
+			get { return w.Params; }
+		}
 
-        public override string Path {
-            get { return w.Path; }
-        }
+		public override string Path {
+			get { return w.Path; }
+		}
 
-        public override string PathInfo {
-            get { return w.PathInfo; }
-        }
+		public override string PathInfo {
+			get { return w.PathInfo; }
+		}
 
-        public override string PhysicalApplicationPath {
-            get { return w.PhysicalApplicationPath; }
-        }
+		public override string PhysicalApplicationPath {
+			get { return w.PhysicalApplicationPath; }
+		}
 
-        public override string PhysicalPath {
-            get { return w.PhysicalPath; }
-        }
+		public override string PhysicalPath {
+			get { return w.PhysicalPath; }
+		}
 
-        public override NameValueCollection QueryString {
-            get { return w.QueryString; }
-        }
+		public override NameValueCollection QueryString {
+			get { return w.QueryString; }
+		}
 
-        public override string RawUrl {
-            get { return w.RawUrl; }
-        }
+		public override string RawUrl {
+			get { return w.RawUrl; }
+		}
 
-        public override string RequestType {
-            get { return w.RequestType; }
-            set { w.RequestType = value; }
-        }
-        public override RequestContext RequestContext {
-            get { return w.RequestContext; }
-            set { w.RequestContext = value; }    
-        }
-        public override NameValueCollection ServerVariables {
-            get { return w.ServerVariables; }
-        }
+		public override string RequestType {
+			get { return w.RequestType; }
+			set { w.RequestType = value; }
+		}
+		public override RequestContext RequestContext {
+			get { return w.RequestContext; }
+			set { w.RequestContext = value; }	
+		}
+		public override NameValueCollection ServerVariables {
+			get { return w.ServerVariables; }
+		}
 
-        public override CancellationToken TimedOutToken {
-            get { return w.TimedOutToken; }
-        }
+		public override CancellationToken TimedOutToken {
+			get { return w.TimedOutToken; }
+		}
 
-        public override int TotalBytes {
-            get { return w.TotalBytes; }
-        }
+		public override int TotalBytes {
+			get { return w.TotalBytes; }
+		}
 
-        public override UnvalidatedRequestValuesBase Unvalidated { 
-            get { return new UnvalidatedRequestValuesWrapper (w.Unvalidated); } 
-        }
+		public override UnvalidatedRequestValuesBase Unvalidated { 
+			get { return new UnvalidatedRequestValuesWrapper (w.Unvalidated); } 
+		}
 
-        public override ReadEntityBodyMode ReadEntityBodyMode {
-            get { return ReadEntityBodyMode.Classic; }
-        }
+		public override ReadEntityBodyMode ReadEntityBodyMode {
+			get { return ReadEntityBodyMode.Classic; }
+		}
 
-        public override Uri Url {
-            get { return w.Url; }
-        }
+		public override Uri Url {
+			get { return w.Url; }
+		}
 
-        public override Uri UrlReferrer {
-            get { return w.UrlReferrer; }
-        }
+		public override Uri UrlReferrer {
+			get { return w.UrlReferrer; }
+		}
 
-        public override string UserAgent {
-            get { return w.UserAgent; }
-        }
+		public override string UserAgent {
+			get { return w.UserAgent; }
+		}
 
-        public override string UserHostAddress {
-            get { return w.UserHostAddress; }
-        }
+		public override string UserHostAddress {
+			get { return w.UserHostAddress; }
+		}
 
-        public override string UserHostName {
-            get { return w.UserHostName; }
-        }
+		public override string UserHostName {
+			get { return w.UserHostName; }
+		}
 
-        public override string [] UserLanguages {
-            get { return w.UserLanguages; }
-        }
+		public override string [] UserLanguages {
+			get { return w.UserLanguages; }
+		}
 
-        public override void Abort ()
-        {
-            w.WorkerRequest.CloseConnection();
-        }
+		public override void Abort ()
+		{
+			w.WorkerRequest.CloseConnection();
+		}
 
-        public override byte [] BinaryRead (int count)
-        {
-            return w.BinaryRead (count);
-        }
+		public override byte [] BinaryRead (int count)
+		{
+			return w.BinaryRead (count);
+		}
 
-        public override int [] MapImageCoordinates (string imageFieldName)
-        {
-            return w.MapImageCoordinates (imageFieldName);
-        }
+		public override int [] MapImageCoordinates (string imageFieldName)
+		{
+			return w.MapImageCoordinates (imageFieldName);
+		}
 
-        public override string MapPath (string virtualPath)
-        {
-            return w.MapPath (virtualPath);
-        }
+		public override string MapPath (string virtualPath)
+		{
+			return w.MapPath (virtualPath);
+		}
 
-        public override string MapPath (string virtualPath, string baseVirtualDir, bool allowCrossAppMapping)
-        {
-            return w.MapPath (virtualPath, baseVirtualDir, allowCrossAppMapping);
-        }
+		public override string MapPath (string virtualPath, string baseVirtualDir, bool allowCrossAppMapping)
+		{
+			return w.MapPath (virtualPath, baseVirtualDir, allowCrossAppMapping);
+		}
 
-        public override double [] MapRawImageCoordinates (System.String imageFieldName)
-        {
-            return w.MapRawImageCoordinates (imageFieldName);
-        }
+		public override double [] MapRawImageCoordinates (System.String imageFieldName)
+		{
+			return w.MapRawImageCoordinates (imageFieldName);
+		}
 
-        public override void SaveAs (string filename, bool includeHeaders)
-        {
-            w.SaveAs (filename, includeHeaders);
-        }
+		public override void SaveAs (string filename, bool includeHeaders)
+		{
+			w.SaveAs (filename, includeHeaders);
+		}
 
-        public override void ValidateInput ()
-        {
-            w.ValidateInput ();
-        }
-    }
+		public override void ValidateInput ()
+		{
+			w.ValidateInput ();
+		}
+	}
 }

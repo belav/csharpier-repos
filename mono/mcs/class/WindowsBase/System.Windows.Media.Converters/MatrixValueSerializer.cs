@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,32 +29,32 @@ using System.Windows.Markup;
 
 namespace System.Windows.Media.Converters {
 
-    public class MatrixValueSerializer : ValueSerializer
-    {
-        public override bool CanConvertFromString (string value, IValueSerializerContext context)
-        {
-            return true;
-        }
+	public class MatrixValueSerializer : ValueSerializer
+	{
+		public override bool CanConvertFromString (string value, IValueSerializerContext context)
+		{
+			return true;
+		}
 
-        public override bool CanConvertToString (object value, IValueSerializerContext context)
-        {
-            return value is Matrix;
-        }
+		public override bool CanConvertToString (object value, IValueSerializerContext context)
+		{
+			return value is Matrix;
+		}
 
-        public override object ConvertFromString (string value, IValueSerializerContext context)
-        {
-            if (value == null)
-                throw new NotSupportedException ("value != null");
-            return Matrix.Parse (value);
-        }
+		public override object ConvertFromString (string value, IValueSerializerContext context)
+		{
+			if (value == null)
+				throw new NotSupportedException ("value != null");
+			return Matrix.Parse (value);
+		}
 
-        public override string ConvertToString (object value, IValueSerializerContext context)
-        {
-            if (value is Matrix matrix)
-                return matrix.ToString (CultureInfo.InvariantCulture);
-            return base.ConvertToString (value, context);
-        }
-    }
+		public override string ConvertToString (object value, IValueSerializerContext context)
+		{
+			if (value is Matrix matrix)
+				return matrix.ToString (CultureInfo.InvariantCulture);
+			return base.ConvertToString (value, context);
+		}
+	}
 
 }
 

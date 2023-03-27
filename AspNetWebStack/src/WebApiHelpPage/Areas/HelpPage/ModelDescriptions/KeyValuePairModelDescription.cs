@@ -1,4 +1,4 @@
-namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
+﻿namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
 {
     public class KeyValuePairModelDescription : ModelDescription
     {

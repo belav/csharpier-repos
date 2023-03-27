@@ -20,7 +20,7 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Chris Toshok    <toshok@ximian.com>
+//	Chris Toshok	<toshok@ximian.com>
 
 using System;
 using System.Collections;
@@ -28,40 +28,40 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-    internal class RelatedPropertyManager : PropertyManager {
+	internal class RelatedPropertyManager : PropertyManager {
 
-        BindingManagerBase parent;
+		BindingManagerBase parent;
 
-        public RelatedPropertyManager (BindingManagerBase parent, string property_name)
-        {
-            this.parent = parent;
-            this.property_name = property_name;
+		public RelatedPropertyManager (BindingManagerBase parent, string property_name)
+		{
+			this.parent = parent;
+			this.property_name = property_name;
 
-            if (parent.Position != -1)
-                SetDataSource (parent.Current);
-            parent.PositionChanged += new EventHandler (parent_PositionChanged);
-        }
+			if (parent.Position != -1)
+				SetDataSource (parent.Current);
+			parent.PositionChanged += new EventHandler (parent_PositionChanged);
+		}
 
-        void parent_PositionChanged (object sender, EventArgs args)
-        {
-            if (parent.Position == -1) {
-                SetDataSource (null);
-            }
-            else {
-                SetDataSource (parent.Current);
-            }
+		void parent_PositionChanged (object sender, EventArgs args)
+		{
+			if (parent.Position == -1) {
+				SetDataSource (null);
+			}
+			else {
+				SetDataSource (parent.Current);
+			}
 
-            OnCurrentChanged (EventArgs.Empty);
-        }
+			OnCurrentChanged (EventArgs.Empty);
+		}
 
-        public override PropertyDescriptorCollection GetItemProperties ()
-        {
-            PropertyDescriptor property = parent.GetItemProperties ().Find (property_name, true);
+		public override PropertyDescriptorCollection GetItemProperties ()
+		{
+			PropertyDescriptor property = parent.GetItemProperties ().Find (property_name, true);
 
-            // We can't just pass property.PropertyType, since the actual object could implement
-            // more elements and not only those described in the property type
-            return TypeDescriptor.GetProperties (property.GetValue (parent.Current));
-        }
-    }
+			// We can't just pass property.PropertyType, since the actual object could implement
+			// more elements and not only those described in the property type
+			return TypeDescriptor.GetProperties (property.GetValue (parent.Current));
+		}
+	}
 }
 

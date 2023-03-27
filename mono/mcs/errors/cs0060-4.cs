@@ -3,17 +3,17 @@
 
 public class B
 {
-    protected class C : A
-    {
-        public class E
-        {
-        }
-    }
+	protected class C : A
+	{
+		public class E
+		{
+		}
+	}
 
-    protected internal class A
-    {
-        protected class D : C.E
-        {
-        }
-    }
+	protected internal class A
+	{
+		protected class D : C.E
+		{
+		}
+	}
 }

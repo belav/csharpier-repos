@@ -1,4 +1,4 @@
-//
+﻿//
 // ChangeInterceptorAttributeTests.cs
 //
 // Author:
@@ -31,20 +31,20 @@ using System.Data.Services;
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Services {
-    [TestFixture]
-    public class ChangeInterceptorAttributeTests {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void CtorNull()
-        {
-            new ChangeInterceptorAttribute (null);
-        }
+	[TestFixture]
+	public class ChangeInterceptorAttributeTests {
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void CtorNull()
+		{
+			new ChangeInterceptorAttribute (null);
+		}
 
-        [Test]
-        public void Ctor()
-        {
-            var ci = new ChangeInterceptorAttribute ("setName");
-            Assert.AreEqual ("setName", ci.EntitySetName);
-        }
-    }
+		[Test]
+		public void Ctor()
+		{
+			var ci = new ChangeInterceptorAttribute ("setName");
+			Assert.AreEqual ("setName", ci.EntitySetName);
+		}
+	}
 }

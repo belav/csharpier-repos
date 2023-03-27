@@ -1,8 +1,8 @@
-//    
+//	
 // System.Security.Policy.PolicyException.cs
 //
 // Author:
-//    Duncan Mak (duncan@ximian.com)
+//	Duncan Mak (duncan@ximian.com)
 //
 // 2002 (C) Ximian, Inc. http://www.ximian.com
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -33,28 +33,28 @@ using System.Runtime.Serialization;
 
 namespace System.Security.Policy {
 
-    [Serializable]
-    [ComVisible (true)]
-    public class PolicyException : SystemException {
-        // Constructors
-        public PolicyException ()
-            : base (Locale.GetText ("Cannot run because of policy."))
-        {
-        }
+	[Serializable]
+	[ComVisible (true)]
+	public class PolicyException : SystemException {
+		// Constructors
+		public PolicyException ()
+			: base (Locale.GetText ("Cannot run because of policy."))
+		{
+		}
 
-        public PolicyException (string message)
-            : base (message)
-        {
-        }
-             
-        protected PolicyException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-        }
+		public PolicyException (string message)
+			: base (message)
+		{
+		}
+			 
+		protected PolicyException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{
+		}
 
-        public PolicyException (string message, Exception exception)
-            :base (message, exception)
-        {
-        }
-    }
+		public PolicyException (string message, Exception exception)
+			:base (message, exception)
+		{
+		}
+	}
 }

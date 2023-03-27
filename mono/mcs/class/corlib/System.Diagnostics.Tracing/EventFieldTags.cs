@@ -2,7 +2,7 @@
 // EventFieldTags.cs
 //
 // Authors:
-//    Alexander Köplinger <alexander.koeplinger@xamarin.com>
+//	Alexander Köplinger <alexander.koeplinger@xamarin.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,9 +30,9 @@ using System;
 
 namespace System.Diagnostics.Tracing
 {
-    [Flags]
-    public enum EventFieldTags
-    {
-        None = 0
-    }
+	[Flags]
+	public enum EventFieldTags
+	{
+		None = 0
+	}
 }

@@ -1,9 +1,9 @@
 //
 // FormsAuthenticationCas.cs 
-//    - CAS unit tests for System.Web.Security.FormsAuthentication
+//	- CAS unit tests for System.Web.Security.FormsAuthentication
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,25 +38,25 @@ using System.Web.Security;
 
 namespace MonoCasTests.System.Web.Security {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class FormsAuthenticationCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class FormsAuthenticationCas : AspNetHostingMinimal {
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Identity ()
-        {
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Identity ()
+		{
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (FormsAuthentication); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (FormsAuthentication); }
+		}
+	}
 }

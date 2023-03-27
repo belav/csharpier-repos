@@ -39,73 +39,73 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_Constraints : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataTable_Constraints tc = new DataTable_Constraints();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataTable_Constraints");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataTable_Constraints tc = new DataTable_Constraints();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataTable_Constraints");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        DataTable dtParent;
-        ConstraintCollection consColl;
-        dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
+	public void run()
+	{
+		Exception exp = null;
+		DataTable dtParent;
+		ConstraintCollection consColl;
+		dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
 
-        consColl = dtParent.Constraints;
-        try
-        {
-            base.BeginCase("Checking Constraints  != null ");
-            base.Compare(consColl == null  ,false);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		consColl = dtParent.Constraints;
+		try
+		{
+			base.BeginCase("Checking Constraints  != null ");
+			base.Compare(consColl == null  ,false);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        
-        try
-        {
-            base.BeginCase("Checking Constraints Count");
-            base.Compare(consColl.Count  ,0);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-        
-        try
-        {
-            base.BeginCase("Checking Constraints Count");
-            //Add primary key
-            dtParent.PrimaryKey = new DataColumn[] {dtParent.Columns[0]};
-            base.Compare(consColl.Count   ,1);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-            
-    }
+		
+		try
+		{
+			base.BeginCase("Checking Constraints Count");
+			base.Compare(consColl.Count  ,0);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		
+		try
+		{
+			base.BeginCase("Checking Constraints Count");
+			//Add primary key
+			dtParent.PrimaryKey = new DataColumn[] {dtParent.Columns[0]};
+			base.Compare(consColl.Count   ,1);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+			
+	}
 }
 }

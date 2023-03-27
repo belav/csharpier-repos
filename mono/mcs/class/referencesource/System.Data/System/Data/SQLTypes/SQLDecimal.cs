@@ -1326,7 +1326,7 @@ namespace System.Data.SqlTypes {
 
             SqlDecimal ret = new SqlDecimal(rglData1, bLen, (byte)ResPrec, (byte)ResScale, fResSignPos);
 
-            if (ret.FGt10_38() || ret.CalculatePrecision () > NUMERIC_MAX_PRECISION)
+			if (ret.FGt10_38() || ret.CalculatePrecision () > NUMERIC_MAX_PRECISION)
                 throw new OverflowException(SQLResource.ArithOverflowMessage);
 
             if (ret.FZero())

@@ -2,7 +2,7 @@
 // System.Web.UI.Adapters.ControlAdapter
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -32,148 +32,148 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Adapters
 {
-    public abstract class ControlAdapter
-    {
-        internal ControlAdapter (Control c)
-        {
-            control = c;
-        }
-        
-        protected ControlAdapter ()
-        {
-        }
+	public abstract class ControlAdapter
+	{
+		internal ControlAdapter (Control c)
+		{
+			control = c;
+		}
+		
+		protected ControlAdapter ()
+		{
+		}
 
-        protected HttpBrowserCapabilities Browser 
-        {
-            get {
-                Page page = Page;
+		protected HttpBrowserCapabilities Browser 
+		{
+			get {
+				Page page = Page;
 
-                if (page != null)
-                    return page.Request.Browser;
+				if (page != null)
+					return page.Request.Browser;
 
-                return null;
-            }
-        }
+				return null;
+			}
+		}
 
-        internal Control control;
-        
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        protected Control Control 
-        {
-            get { return control; }
-        }
+		internal Control control;
+		
+		[Browsable (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		protected Control Control 
+		{
+			get { return control; }
+		}
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        protected Page Page 
-        {
-            get {
-                Control control = Control;
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[Browsable (false)]
+		protected Page Page 
+		{
+			get {
+				Control control = Control;
 
-                if (control != null)
-                    return control.Page;
+				if (control != null)
+					return control.Page;
 
-                return null;
-            }
-        }
-        
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        protected PageAdapter PageAdapter 
-        {
-            get {
-                Page page = Page;
+				return null;
+			}
+		}
+		
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[Browsable (false)]
+		protected PageAdapter PageAdapter 
+		{
+			get {
+				Page page = Page;
 
-                if (page != null)
-                    return page.PageAdapter;
+				if (page != null)
+					return page.PageAdapter;
 
-                return null;
-            }
-        }
+				return null;
+			}
+		}
 
-        protected internal virtual void BeginRender (HtmlTextWriter writer)
-        {
-            writer.BeginRender();
-        }
+		protected internal virtual void BeginRender (HtmlTextWriter writer)
+		{
+			writer.BeginRender();
+		}
 
-        protected internal virtual void CreateChildControls ()
-        {
-            Control control = Control;
-            if (control != null)
-                control.CreateChildControls ();
-        }
+		protected internal virtual void CreateChildControls ()
+		{
+			Control control = Control;
+			if (control != null)
+				control.CreateChildControls ();
+		}
 
-        protected internal virtual void EndRender (HtmlTextWriter writer)
-        {
-            writer.EndRender ();
-        }
+		protected internal virtual void EndRender (HtmlTextWriter writer)
+		{
+			writer.EndRender ();
+		}
 
-        protected internal virtual void LoadAdapterControlState (object state)
-        {
-        }
+		protected internal virtual void LoadAdapterControlState (object state)
+		{
+		}
 
-        protected internal virtual void LoadAdapterViewState (object state)
-        {
-        }
+		protected internal virtual void LoadAdapterViewState (object state)
+		{
+		}
 
-        protected internal virtual void OnInit (EventArgs e)
-        {
-            Control control = Control;
+		protected internal virtual void OnInit (EventArgs e)
+		{
+			Control control = Control;
 
-            if (control != null)
-                control.OnInit(e);
-        }
+			if (control != null)
+				control.OnInit(e);
+		}
 
-        protected internal virtual void OnLoad (EventArgs e)
-        {
-            Control control = Control;
+		protected internal virtual void OnLoad (EventArgs e)
+		{
+			Control control = Control;
 
-            if (control != null)
-                control.OnLoad(e);
-        }
+			if (control != null)
+				control.OnLoad(e);
+		}
 
-        protected internal virtual void OnPreRender (EventArgs e)
-        {
-            Control control = Control;
+		protected internal virtual void OnPreRender (EventArgs e)
+		{
+			Control control = Control;
 
-            if (control != null)
-                control.OnPreRender(e);
-        }
+			if (control != null)
+				control.OnPreRender(e);
+		}
 
-        protected internal virtual void OnUnload (EventArgs e)
-        {
-            Control control = Control;
+		protected internal virtual void OnUnload (EventArgs e)
+		{
+			Control control = Control;
 
-            if (control != null)
-                control.OnUnload(e);
-        }
+			if (control != null)
+				control.OnUnload(e);
+		}
 
-        protected internal virtual void Render (HtmlTextWriter writer)
-        {
-            Control control = Control;
+		protected internal virtual void Render (HtmlTextWriter writer)
+		{
+			Control control = Control;
 
-            if (control != null)
-                control.Render (writer);
-        }
+			if (control != null)
+				control.Render (writer);
+		}
 
-        protected internal virtual void RenderChildren (HtmlTextWriter writer)
-        {
-            Control control = Control;
+		protected internal virtual void RenderChildren (HtmlTextWriter writer)
+		{
+			Control control = Control;
 
-            if (control != null)
-                control.RenderChildren (writer);
-        }
+			if (control != null)
+				control.RenderChildren (writer);
+		}
 
-        protected internal virtual object SaveAdapterControlState ()
-        {
-            return null;
-        }
+		protected internal virtual object SaveAdapterControlState ()
+		{
+			return null;
+		}
 
-        protected internal virtual object SaveAdapterViewState ()
-        {
-            return null;
-        }
-    }
+		protected internal virtual object SaveAdapterViewState ()
+		{
+			return null;
+		}
+	}
 }
 

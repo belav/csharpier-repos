@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.StateBag
 //
 // Author:
-//    Ben Maurer (bmaurer@novell.com)
+//	Ben Maurer (bmaurer@novell.com)
 //
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -38,29 +38,29 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI {
-    [TestFixture]    
-    public class StateBagTest {
-        [Test]
-        public void SetValueToNull ()
-        {
-            StateBag sb = new StateBag ();
-            sb ["a"] = "a";
-            Assert.AreEqual ("a", sb ["a"], "#1");
-            sb ["a"] = null;
-            Assert.IsNull (sb ["a"], "#2");
-            Assert.AreEqual (0, sb.Count, "#3");
-        }
+	[TestFixture]	
+	public class StateBagTest {
+		[Test]
+		public void SetValueToNull ()
+		{
+			StateBag sb = new StateBag ();
+			sb ["a"] = "a";
+			Assert.AreEqual ("a", sb ["a"], "#1");
+			sb ["a"] = null;
+			Assert.IsNull (sb ["a"], "#2");
+			Assert.AreEqual (0, sb.Count, "#3");
+		}
 
-        [Test]
-        public void SetValueToNull2 ()
-        {
-            StateBag sb = new StateBag ();
-            sb ["a"] = "a";
-            Assert.AreEqual ("a", sb ["a"], "#1");
-            ((IStateManager) sb).TrackViewState ();
-            sb ["a"] = null;
-            Assert.IsNull (sb ["a"], "#2");
-            Assert.AreEqual (1, sb.Count, "#3");
-        }
-    }
+		[Test]
+		public void SetValueToNull2 ()
+		{
+			StateBag sb = new StateBag ();
+			sb ["a"] = "a";
+			Assert.AreEqual ("a", sb ["a"], "#1");
+			((IStateManager) sb).TrackViewState ();
+			sb ["a"] = null;
+			Assert.IsNull (sb ["a"], "#2");
+			Assert.AreEqual (1, sb.Count, "#3");
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // IContractBehavior.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,25 +32,25 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-    public interface IContractBehavior
-    {
-        void AddBindingParameters (
-            ContractDescription contractDescription,
-            ServiceEndpoint endpoint,
-            BindingParameterCollection bindingParameters);
+	public interface IContractBehavior
+	{
+		void AddBindingParameters (
+			ContractDescription contractDescription,
+			ServiceEndpoint endpoint,
+			BindingParameterCollection bindingParameters);
 
-        void ApplyClientBehavior (
-            ContractDescription contractDescription,
-            ServiceEndpoint endpoint,
-            ClientRuntime clientRuntime);
+		void ApplyClientBehavior (
+			ContractDescription contractDescription,
+			ServiceEndpoint endpoint,
+			ClientRuntime clientRuntime);
 
-        void ApplyDispatchBehavior (
-            ContractDescription contractDescription,
-            ServiceEndpoint endpoint,
-            DispatchRuntime dispatchRuntime);
+		void ApplyDispatchBehavior (
+			ContractDescription contractDescription,
+			ServiceEndpoint endpoint,
+			DispatchRuntime dispatchRuntime);
 
-        void Validate (
-            ContractDescription contractDescription,
-            ServiceEndpoint endpoint);
-    }
+		void Validate (
+			ContractDescription contractDescription,
+			ServiceEndpoint endpoint);
+	}
 }

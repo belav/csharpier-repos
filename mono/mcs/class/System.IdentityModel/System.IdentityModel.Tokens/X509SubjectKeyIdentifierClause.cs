@@ -2,7 +2,7 @@
 // X509SubjectKeyIdentifierClause.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,43 +32,43 @@ using System.IdentityModel.Policy;
 
 namespace System.IdentityModel.Tokens
 {
-    public class X509SubjectKeyIdentifierClause : BinaryKeyIdentifierClause
-    {
-        [MonoTODO]
-        public X509SubjectKeyIdentifierClause (byte [] ski)
-            : base (null, ski, true)
-        {
-            throw new NotImplementedException ();
-        }
+	public class X509SubjectKeyIdentifierClause : BinaryKeyIdentifierClause
+	{
+		[MonoTODO]
+		public X509SubjectKeyIdentifierClause (byte [] ski)
+			: base (null, ski, true)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static bool CanCreateFrom (X509Certificate2 certificate)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static bool CanCreateFrom (X509Certificate2 certificate)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public byte [] GetX509SubjectKeyIdentifier ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public byte [] GetX509SubjectKeyIdentifier ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public bool Matches (X509Certificate2 certificate)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public bool Matches (X509Certificate2 certificate)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override string ToString ()
-        {
-            return base.ToString ();
-        }
+		[MonoTODO]
+		public override string ToString ()
+		{
+			return base.ToString ();
+		}
 
-        [MonoTODO]
-        public static bool TryCreateFrom (X509Certificate2 certificate, out X509SubjectKeyIdentifierClause keyIdentifierClause)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public static bool TryCreateFrom (X509Certificate2 certificate, out X509SubjectKeyIdentifierClause keyIdentifierClause)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

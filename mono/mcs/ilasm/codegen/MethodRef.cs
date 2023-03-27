@@ -26,11 +26,11 @@ namespace Mono.ILASM {
                         if (is_resolved)
                                 return;
 
-            owner.Resolve (code_gen);
+			owner.Resolve (code_gen);
 
                         TypeDef owner_def = code_gen.TypeManager[owner.FullName];
-            if (owner_def == null)
-                Report.Error ("Reference to undefined class '" + owner.FullName + "'");
+			if (owner_def == null)
+				Report.Error ("Reference to undefined class '" + owner.FullName + "'");
 
                         if ((call_conv & PEAPI.CallConv.Vararg) == 0) {
                                 peapi_method = owner_def.ResolveMethod (ret_type, call_conv, name, 

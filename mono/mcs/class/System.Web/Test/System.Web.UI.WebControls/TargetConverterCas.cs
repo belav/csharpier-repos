@@ -1,9 +1,9 @@
 //
 // TargetConverterCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.TargetConverter
+//	- CAS unit tests for System.Web.UI.WebControls.TargetConverter
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,22 +38,22 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TargetConverterCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TargetConverterCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            TargetConverterTest unit = new TargetConverterTest ();
-            unit.Basic ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			TargetConverterTest unit = new TargetConverterTest ();
+			unit.Basic ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (TargetConverter); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (TargetConverter); }
+		}
+	}
 }

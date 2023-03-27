@@ -2,7 +2,7 @@
 // Mono.Messaging
 //
 // Authors:
-//        Michael Barker (mike@middlesoft.co.uk)
+//		Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -30,27 +30,27 @@
 
 namespace Mono.Messaging {
 
-    /// <summary>
-    /// Provides access to the core implementation classes.  A single instance of
-    /// this class will be maintained by the MessagingProviderLocator, therefore
-    /// any implementations of this class must be thread safe.
-    /// </summary>
-    public interface IMessagingProvider {
-        
-        bool Exists (QueueReference qRef);
-        
-        IMessageQueue CreateMessageQueue (QueueReference qRef,
-                                          bool transactional);
-        
-        IMessageQueue GetMessageQueue (QueueReference qRef);
+	/// <summary>
+	/// Provides access to the core implementation classes.  A single instance of
+	/// this class will be maintained by the MessagingProviderLocator, therefore
+	/// any implementations of this class must be thread safe.
+	/// </summary>
+	public interface IMessagingProvider {
+		
+		bool Exists (QueueReference qRef);
+		
+		IMessageQueue CreateMessageQueue (QueueReference qRef,
+		                                  bool transactional);
+		
+		IMessageQueue GetMessageQueue (QueueReference qRef);
 
-        IMessage CreateMessage ();
-        
-        IMessageQueueTransaction CreateMessageQueueTransaction ();
+		IMessage CreateMessage ();
+		
+		IMessageQueueTransaction CreateMessageQueueTransaction ();
 
-        void DeleteQueue (QueueReference qRef);
-        
-        IMessageQueue[] GetPublicQueues ();
-    }
+		void DeleteQueue (QueueReference qRef);
+		
+		IMessageQueue[] GetPublicQueues ();
+	}
 
 }

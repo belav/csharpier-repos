@@ -2,7 +2,7 @@
 // TypeForwarders.netcore.cs: .NET Core specific extensions
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright  (C) 2018  Microsoft Corporation
 //

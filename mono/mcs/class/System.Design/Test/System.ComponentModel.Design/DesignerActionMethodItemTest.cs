@@ -2,7 +2,7 @@
 // DesignerActionMethodItemTest.cs
 //
 // Author:
-//      Atsushi Enomoto (atsushi@ximian.com)
+//	  Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 
@@ -36,19 +36,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.Design
 {
-    [TestFixture]
-    public class DesignerActionMethodItemTest
-    {
-        [Test]
-        public void Constructor ()
-        {
-            DesignerActionMethodItem item = new DesignerActionMethodItem (new DesignerActionList (new Component ()),
-                "myMember", "myDisplay");
-            Assert.AreEqual ("myMember", item.MemberName, "#1");
-            Assert.AreEqual ("myDisplay", item.DisplayName, "#2");
-            Assert.IsNull (item.Category, "#3");
-            Assert.IsNull (item.Description, "#4");
-            Assert.IsFalse (item.IncludeAsDesignerVerb, "#5");
-        }
-    }
+	[TestFixture]
+	public class DesignerActionMethodItemTest
+	{
+		[Test]
+		public void Constructor ()
+		{
+			DesignerActionMethodItem item = new DesignerActionMethodItem (new DesignerActionList (new Component ()),
+				"myMember", "myDisplay");
+			Assert.AreEqual ("myMember", item.MemberName, "#1");
+			Assert.AreEqual ("myDisplay", item.DisplayName, "#2");
+			Assert.IsNull (item.Category, "#3");
+			Assert.IsNull (item.Description, "#4");
+			Assert.IsFalse (item.IncludeAsDesignerVerb, "#5");
+		}
+	}
 }

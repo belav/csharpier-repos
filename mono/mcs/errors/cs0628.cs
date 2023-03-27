@@ -3,5 +3,5 @@
 // Compiler options: -warnaserror -warn:4
 
 sealed class D {
-    protected int a;
+	protected int a;
 }

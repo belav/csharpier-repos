@@ -10,5 +10,5 @@ using System.Runtime.CompilerServices;
 
 public class Blah {
 
-    public static void Main () { }
+	public static void Main () { }
 }

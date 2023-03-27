@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -28,48 +28,48 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public abstract class ChartElement : IDisposable
-    {
-        #region Constructors
-        protected ChartElement ()
-        {
-        }
-        #endregion
+	public abstract class ChartElement : IDisposable
+	{
+		#region Constructors
+		protected ChartElement ()
+		{
+		}
+		#endregion
 
-        #region Public Properties
-        [DefaultValue (null)]
-        public object Tag { get; set; }
-        #endregion
+		#region Public Properties
+		[DefaultValue (null)]
+		public object Tag { get; set; }
+		#endregion
 
-        #region Public Methods
-        public void Dispose ()
-        {
-        }
+		#region Public Methods
+		public void Dispose ()
+		{
+		}
 
-        public override bool Equals (object obj)
-        {
-            return base.Equals (obj);
-        }
+		public override bool Equals (object obj)
+		{
+			return base.Equals (obj);
+		}
 
-        public override int GetHashCode ()
-        {
-            return base.GetHashCode ();
-        }
+		public override int GetHashCode ()
+		{
+			return base.GetHashCode ();
+		}
 
-        public override string ToString ()
-        {
-            if (this is ChartNamedElement)
-                return string.Format ("{0}-{1}", GetType ().Name, (this as ChartNamedElement).Name);
+		public override string ToString ()
+		{
+			if (this is ChartNamedElement)
+				return string.Format ("{0}-{1}", GetType ().Name, (this as ChartNamedElement).Name);
 
-            return GetType ().Name;
-        }
-        #endregion
+			return GetType ().Name;
+		}
+		#endregion
 
 
-        #region Protected Methods
-        protected virtual void Dispose (bool disposing)
-        {
-        }
-        #endregion
-    }
+		#region Protected Methods
+		protected virtual void Dispose (bool disposing)
+		{
+		}
+		#endregion
+	}
 }

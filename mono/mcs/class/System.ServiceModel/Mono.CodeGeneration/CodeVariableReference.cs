@@ -28,55 +28,55 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeVariableReference: CodeValueReference
-    {
-        LocalBuilder localBuilder;
-        Type type;
-        string name;
-        
-        public CodeVariableReference (Type type, string name)
-        {
-            this.type = type;
-            this.name = name;        
-        }
-        
-        public Type Type
-        {
-            get { return type; }
-        }
-        
-        public string Name
-        {
-            get { return name; }
-        }
-        
-        internal LocalBuilder LocalBuilder
-        {
-            get { return localBuilder; }
-            set { localBuilder = value; }
-        }
-        
-        public override void Generate (ILGenerator gen)
-        {
-            gen.Emit (OpCodes.Ldloc, localBuilder);
-        }
-        
-        public override void GenerateSet (ILGenerator gen, CodeExpression value)
-        {
-            value.Generate (gen);
-            CodeGenerationHelper.GenerateSafeConversion (gen, type, value.GetResultType ());
-            gen.Emit (OpCodes.Stloc, localBuilder);
-        }
-        
-        public override void PrintCode (CodeWriter cp)
-        {
-            cp.Write (name);
-        }
-        
-        public override Type GetResultType ()
-        {
-            return type;
-        }
-    }
+	public class CodeVariableReference: CodeValueReference
+	{
+		LocalBuilder localBuilder;
+		Type type;
+		string name;
+		
+		public CodeVariableReference (Type type, string name)
+		{
+			this.type = type;
+			this.name = name;		
+		}
+		
+		public Type Type
+		{
+			get { return type; }
+		}
+		
+		public string Name
+		{
+			get { return name; }
+		}
+		
+		internal LocalBuilder LocalBuilder
+		{
+			get { return localBuilder; }
+			set { localBuilder = value; }
+		}
+		
+		public override void Generate (ILGenerator gen)
+		{
+			gen.Emit (OpCodes.Ldloc, localBuilder);
+		}
+		
+		public override void GenerateSet (ILGenerator gen, CodeExpression value)
+		{
+			value.Generate (gen);
+			CodeGenerationHelper.GenerateSafeConversion (gen, type, value.GetResultType ());
+			gen.Emit (OpCodes.Stloc, localBuilder);
+		}
+		
+		public override void PrintCode (CodeWriter cp)
+		{
+			cp.Write (name);
+		}
+		
+		public override Type GetResultType ()
+		{
+			return type;
+		}
+	}
 }
 #endif

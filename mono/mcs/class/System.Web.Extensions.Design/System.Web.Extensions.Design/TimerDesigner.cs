@@ -32,18 +32,18 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-    public class TimerDesigner : ControlDesigner
-    {
-        [MonoNotSupported ("")]
-        public TimerDesigner ()
-        {
-            throw new NotImplementedException ();
-        }
+	public class TimerDesigner : ControlDesigner
+	{
+		[MonoNotSupported ("")]
+		public TimerDesigner ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public override string GetDesignTimeHtml ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoNotSupported ("")]
+		public override string GetDesignTimeHtml ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

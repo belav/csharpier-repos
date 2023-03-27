@@ -20,33 +20,33 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.Windows.Threading {
 
-    public sealed class DispatcherUnhandledExceptionFilterEventArgs : DispatcherEventArgs
-    {
-        Exception exception;
-        bool requestCatch;
+	public sealed class DispatcherUnhandledExceptionFilterEventArgs : DispatcherEventArgs
+	{
+		Exception exception;
+		bool requestCatch;
 
-        internal DispatcherUnhandledExceptionFilterEventArgs (Dispatcher dispatcher,
-                                      Exception exception)
-            : base (dispatcher)
-        {
-            this.exception = exception;
-        }
+		internal DispatcherUnhandledExceptionFilterEventArgs (Dispatcher dispatcher,
+								      Exception exception)
+			: base (dispatcher)
+		{
+			this.exception = exception;
+		}
 
-        public Exception Exception {
-            get { return exception; }
-        }
+		public Exception Exception {
+			get { return exception; }
+		}
 
-        public bool RequestCatch {
-            get { return requestCatch; }
-            set { requestCatch = value; }
-        }
-    }
+		public bool RequestCatch {
+			get { return requestCatch; }
+			set { requestCatch = value; }
+		}
+	}
 
 }

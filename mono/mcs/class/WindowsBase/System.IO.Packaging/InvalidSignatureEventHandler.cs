@@ -20,13 +20,13 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.IO.Packaging {
 
-    public delegate void InvalidSignatureEventHandler (object sender, SignatureVerificationEventArgs e);
+	public delegate void InvalidSignatureEventHandler (object sender, SignatureVerificationEventArgs e);
 
 }

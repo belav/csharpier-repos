@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.Adapters.WebControlAdapter
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,51 +34,51 @@ using System.Web.UI.Adapters;
 
 namespace System.Web.UI.WebControls.Adapters
 {
-    public class WebControlAdapter : ControlAdapter
-    {
-        public WebControlAdapter ()
-        {
-        }
-        
-        internal WebControlAdapter (WebControl wc) : base (wc)
-        {
-        }
+	public class WebControlAdapter : ControlAdapter
+	{
+		public WebControlAdapter ()
+		{
+		}
+		
+		internal WebControlAdapter (WebControl wc) : base (wc)
+		{
+		}
 
-        protected internal override void Render (HtmlTextWriter writer)
-        {
-            RenderBeginTag (writer);
-            RenderContents (writer);
-            RenderEndTag (writer);
-        }
+		protected internal override void Render (HtmlTextWriter writer)
+		{
+			RenderBeginTag (writer);
+			RenderContents (writer);
+			RenderEndTag (writer);
+		}
 
-        protected virtual void RenderBeginTag (HtmlTextWriter writer)
-        {
-            Control.RenderBeginTag (writer);
-        }
+		protected virtual void RenderBeginTag (HtmlTextWriter writer)
+		{
+			Control.RenderBeginTag (writer);
+		}
 
-        protected virtual void RenderContents(HtmlTextWriter writer)
-        {
-            Control.RenderContents (writer);
-        }
+		protected virtual void RenderContents(HtmlTextWriter writer)
+		{
+			Control.RenderContents (writer);
+		}
 
-        protected virtual void RenderEndTag(HtmlTextWriter writer)
-        {
-            Control.RenderEndTag (writer);
-        }
+		protected virtual void RenderEndTag(HtmlTextWriter writer)
+		{
+			Control.RenderEndTag (writer);
+		}
 
-        protected new WebControl Control
-        {
-            get {
-                return (WebControl)control;
-            }
-        }
+		protected new WebControl Control
+		{
+			get {
+				return (WebControl)control;
+			}
+		}
 
-        protected bool IsEnabled
-        {
-            get {
-                return Control.IsEnabled;
-            }
-        }
-    }
+		protected bool IsEnabled
+		{
+			get {
+				return Control.IsEnabled;
+			}
+		}
+	}
 }
 

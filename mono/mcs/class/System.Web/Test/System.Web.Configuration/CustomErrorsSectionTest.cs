@@ -1,9 +1,9 @@
 //
 // CustomErrorsSectionTest.cs 
-//    - unit tests for System.Web.Configuration.CustomErrorsSection
+//	- unit tests for System.Web.Configuration.CustomErrorsSection
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,18 +38,18 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-    [TestFixture]
-    public class CustomErrorsSectionTest  {
+	[TestFixture]
+	public class CustomErrorsSectionTest  {
 
-        [Test]
-        public void Defaults ()
-        {
-            CustomErrorsSection c = new CustomErrorsSection ();
+		[Test]
+		public void Defaults ()
+		{
+			CustomErrorsSection c = new CustomErrorsSection ();
 
-            Assert.IsNull (c.DefaultRedirect, "A1");
-            Assert.IsNotNull (c.Errors, "A2");
-            Assert.AreEqual (CustomErrorsMode.RemoteOnly, c.Mode, "A3");
-        }
-    }
+			Assert.IsNull (c.DefaultRedirect, "A1");
+			Assert.IsNotNull (c.Errors, "A2");
+			Assert.AreEqual (CustomErrorsMode.RemoteOnly, c.Mode, "A3");
+		}
+	}
 }
 

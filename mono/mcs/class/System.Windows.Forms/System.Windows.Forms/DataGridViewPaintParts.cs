@@ -20,23 +20,23 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    [FlagsAttribute()]
-    public enum DataGridViewPaintParts {
-        None = 0,
-        Background = 1,
-        Border = 2,
-        ContentBackground = 4,
-        ContentForeground = 8,
-        ErrorIcon = 16,
-        Focus = 32,
-        SelectionBackground = 64,
-        All = 127
-    }
+	[FlagsAttribute()]
+	public enum DataGridViewPaintParts {
+		None = 0,
+		Background = 1,
+		Border = 2,
+		ContentBackground = 4,
+		ContentForeground = 8,
+		ErrorIcon = 16,
+		Focus = 32,
+		SelectionBackground = 64,
+		All = 127
+	}
 
 }

@@ -414,7 +414,7 @@ namespace System.Data.Metadata.Edm
                     // other interesting code paths are ObjectQuery<Nullable<Int32>>, ObjectQuery<IEnumerable<object>>
                     // when assemblies is mscorlib, System.Data or System.Data.Entity
                     
-                    // If the schema attribute is presented on the assembly or any referenced assemblies, then it is a V1 scenario that we should
+		            // If the schema attribute is presented on the assembly or any referenced assemblies, then it is a V1 scenario that we should
                     // strictly follow the Get all referenced assemblies rules.
                     // If the attribute is not presented on the assembly, then we won't load the referenced ----sembly 
                     // for this callingAssembly

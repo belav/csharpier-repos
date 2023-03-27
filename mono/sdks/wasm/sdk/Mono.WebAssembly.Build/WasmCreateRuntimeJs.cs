@@ -1,4 +1,4 @@
-//
+﻿//
 // Copyright (c) 2018 Microsoft Corp
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,34 +25,34 @@ using Microsoft.Build.Utilities;
 using System.Linq;
 namespace Mono.WebAssembly.Build
 {
-    public class WasmCreateRuntimeJs : Task
-    {
-        public string VfsPrefix { get; set; }
-        public string DeployPrefix { get; set; }
-        public bool EnableDebugging { get; set; }
-        public bool InitBindings { get; set; }
+	public class WasmCreateRuntimeJs : Task
+	{
+		public string VfsPrefix { get; set; }
+		public string DeployPrefix { get; set; }
+		public bool EnableDebugging { get; set; }
+		public bool InitBindings { get; set; }
 
-        [Required]
-        public ITaskItem[] FileList { get; set; }
+		[Required]
+		public ITaskItem[] FileList { get; set; }
 
-        [Required]
-        public string OutputFile { get; set; }
+		[Required]
+		public string OutputFile { get; set; }
 
-        public override bool Execute ()
-        {
-            var template = new RuntimeJs {
-                EnableDebugging = EnableDebugging,
-                VfsPrefix = VfsPrefix,
-                DeployPrefix = DeployPrefix,
-                FileList = FileList.Select (f => f.GetMetadata ("Filename") + f.GetMetadata ("Extension"))
-            };
+		public override bool Execute ()
+		{
+			var template = new RuntimeJs {
+				EnableDebugging = EnableDebugging,
+				VfsPrefix = VfsPrefix,
+				DeployPrefix = DeployPrefix,
+				FileList = FileList.Select (f => f.GetMetadata ("Filename") + f.GetMetadata ("Extension"))
+			};
 
-            var text = template.TransformText ();
+			var text = template.TransformText ();
 
-            Directory.CreateDirectory (Path.GetDirectoryName (OutputFile));
-            File.WriteAllText (OutputFile, text);
+			Directory.CreateDirectory (Path.GetDirectoryName (OutputFile));
+			File.WriteAllText (OutputFile, text);
 
-            return true;
-        }
-    }
+			return true;
+		}
+	}
 }

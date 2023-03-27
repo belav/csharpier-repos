@@ -23,7 +23,7 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
@@ -32,17 +32,17 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-    [Flags]
-    [ComVisible(true)]
-    [Editor ("System.Windows.Forms.Design.BorderSidesEditor, " + Consts.AssemblySystem_Design,
-         "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-    public enum ToolStripStatusLabelBorderSides
-    {
-        None = 0,
-        Left = 1,
-        Top = 2,
-        Right = 4,
-        Bottom = 8,
-        All = 15
-    }
+	[Flags]
+	[ComVisible(true)]
+	[Editor ("System.Windows.Forms.Design.BorderSidesEditor, " + Consts.AssemblySystem_Design,
+		 "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
+	public enum ToolStripStatusLabelBorderSides
+	{
+		None = 0,
+		Left = 1,
+		Top = 2,
+		Right = 4,
+		Bottom = 8,
+		All = 15
+	}
 }

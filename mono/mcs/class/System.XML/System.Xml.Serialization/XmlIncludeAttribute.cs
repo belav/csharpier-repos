@@ -32,25 +32,25 @@ using System;
 
 namespace System.Xml.Serialization
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct |
-         AttributeTargets.Interface | AttributeTargets.Method,
-         AllowMultiple=true)]
-    public class XmlIncludeAttribute : Attribute
-    {
-        private Type type;
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct |
+		 AttributeTargets.Interface | AttributeTargets.Method,
+		 AllowMultiple=true)]
+	public class XmlIncludeAttribute : Attribute
+	{
+		private Type type;
 
-        public XmlIncludeAttribute (Type type)
-        {
-            this.type = type;
-        }
+		public XmlIncludeAttribute (Type type)
+		{
+			this.type = type;
+		}
 
-        public Type Type {
-            get { 
-                return type; 
-            }
-            set { 
-                type = value; 
-            }
-        }
-    }
+		public Type Type {
+			get { 
+				return type; 
+			}
+			set { 
+				type = value; 
+			}
+		}
+	}
 }

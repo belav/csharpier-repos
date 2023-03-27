@@ -31,89 +31,89 @@ using System.IO;
 
 namespace System.Web {
 
-    class InputFilterStream : Stream {
-        Stream stream;
+	class InputFilterStream : Stream {
+		Stream stream;
 
-        public InputFilterStream ()
-        {
-        }
+		public InputFilterStream ()
+		{
+		}
 
-        internal Stream BaseStream {
-            set { stream = value; }
-        }
+		internal Stream BaseStream {
+			set { stream = value; }
+		}
 
-        public override bool CanRead {
-            get {
-                return true;
-            }
-        }
+		public override bool CanRead {
+			get {
+				return true;
+			}
+		}
 
-        public override bool CanSeek {
-            get {
-                return true;
-            }
-        }
+		public override bool CanSeek {
+			get {
+				return true;
+			}
+		}
 
-        public override bool CanWrite {
-            get {
-                return false;
-            }
-        }
+		public override bool CanWrite {
+			get {
+				return false;
+			}
+		}
 
-        public override long Position {
-            get {
-                return stream.Position;
-            }
+		public override long Position {
+			get {
+				return stream.Position;
+			}
 
-            set {
-                stream.Position = value;
-            }
-        }
+			set {
+				stream.Position = value;
+			}
+		}
 
-        public override long Length {
-            get {
-                return stream.Length;
-            }
-        }
+		public override long Length {
+			get {
+				return stream.Length;
+			}
+		}
 
-        public override int Read (byte [] buffer, int offset, int count)
-        {
-            return stream.Read (buffer, offset, count);
-        }
+		public override int Read (byte [] buffer, int offset, int count)
+		{
+			return stream.Read (buffer, offset, count);
+		}
 
-        public override int ReadByte ()
-        {
-            return stream.ReadByte ();
-        }
+		public override int ReadByte ()
+		{
+			return stream.ReadByte ();
+		}
 
-        public override long Seek (long offset, SeekOrigin loc)
-        {
-            return stream.Seek (offset, loc);
-        }
-        
-        public override void SetLength (long value)
-        {
-            throw new NotSupportedException ("This stream can not change its size");
-        }
+		public override long Seek (long offset, SeekOrigin loc)
+		{
+			return stream.Seek (offset, loc);
+		}
+		
+		public override void SetLength (long value)
+		{
+			throw new NotSupportedException ("This stream can not change its size");
+		}
 
-        public override void Write (byte [] buffer, int offset, int count)
-        {
-            throw new NotSupportedException ("This stream can not change its size");
-        }
+		public override void Write (byte [] buffer, int offset, int count)
+		{
+			throw new NotSupportedException ("This stream can not change its size");
+		}
 
-        public override void WriteByte (byte value)
-        {
-            throw new NotSupportedException ("This stream can not change its size");
-        }
-        
-        public override void Flush ()
-        {
-        }
+		public override void WriteByte (byte value)
+		{
+			throw new NotSupportedException ("This stream can not change its size");
+		}
+		
+		public override void Flush ()
+		{
+		}
 
-        public override void Close ()
-        {
-            stream.Close ();
-        }
-    }
+		public override void Close ()
+		{
+			stream.Close ();
+		}
+	}
 }
 

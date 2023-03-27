@@ -31,28 +31,28 @@ using System.Xml;
 
 namespace System.Configuration
 {
-    internal class KeyValueInternalCollection: NameValueCollection
-    {
-        public void SetReadOnly ()
-        {
-            base.IsReadOnly  = true;
-        }
+	internal class KeyValueInternalCollection: NameValueCollection
+	{
+		public void SetReadOnly ()
+		{
+			base.IsReadOnly  = true;
+		}
 
-        public override void Add (string name, string val)
-        {
-            Remove (name);
-            base.Add (name, val);
-        }
+		public override void Add (string name, string val)
+		{
+			Remove (name);
+			base.Add (name, val);
+		}
 
-            /*
+			/*
 
-        public virtual string Get( int index )
-        public virtual string GetKey( int index )
-        public virtual string[] GetValues( int index )
-        public virtual string[] GetValues( string name )
-        public virtual void Set (string name, string value)
+		public virtual string Get( int index )
+		public virtual string GetKey( int index )
+		public virtual string[] GetValues( int index )
+		public virtual string[] GetValues( string name )
+		public virtual void Set (string name, string value)
 
-            */
+			*/
 
-    }
+	}
 }

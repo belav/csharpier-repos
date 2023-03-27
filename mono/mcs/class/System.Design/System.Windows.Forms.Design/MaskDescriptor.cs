@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.MaskDescriptor.cs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,54 +34,54 @@ using System.Globalization;
 
 namespace System.Windows.Forms.Design
 {
-    public abstract class MaskDescriptor
-    {
-        protected MaskDescriptor ()
-        {
-        }
+	public abstract class MaskDescriptor
+	{
+		protected MaskDescriptor ()
+		{
+		}
 
-        [MonoTODO]
-        public virtual CultureInfo Culture {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public virtual CultureInfo Culture {
+			get { throw new NotImplementedException (); }
+		}
 
-        public abstract string Mask { get; }
+		public abstract string Mask { get; }
 
-        public abstract string Name { get; }
+		public abstract string Name { get; }
 
-        public abstract string Sample { get; }
+		public abstract string Sample { get; }
 
-        public abstract Type ValidatingType { get; }
+		public abstract Type ValidatingType { get; }
 
-        [MonoTODO]
-        public override bool Equals (object maskDescriptor)
-        {
-            return base.Equals (maskDescriptor);
-        }
-        
-        [MonoTODO]
-        public override int GetHashCode ()
-        {
-            return base.GetHashCode ();
-        }
-        
-        [MonoTODO]
-        public static bool IsValidMaskDescriptor (MaskDescriptor maskDescriptor)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoTODO]
-        public static bool IsValidMaskDescriptor (MaskDescriptor maskDescriptor, out string validationErrorDescription)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoTODO]
-        public override string ToString ()
-        {
-            return base.ToString ();
-        }
-    }
+		[MonoTODO]
+		public override bool Equals (object maskDescriptor)
+		{
+			return base.Equals (maskDescriptor);
+		}
+		
+		[MonoTODO]
+		public override int GetHashCode ()
+		{
+			return base.GetHashCode ();
+		}
+		
+		[MonoTODO]
+		public static bool IsValidMaskDescriptor (MaskDescriptor maskDescriptor)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		[MonoTODO]
+		public static bool IsValidMaskDescriptor (MaskDescriptor maskDescriptor, out string validationErrorDescription)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		[MonoTODO]
+		public override string ToString ()
+		{
+			return base.ToString ();
+		}
+	}
 }
 

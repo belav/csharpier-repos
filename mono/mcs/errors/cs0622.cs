@@ -2,7 +2,7 @@
 // Line: 7
 
 class X {
-    public static void Main ()
+	public static void Main ()
         {
             int i = { 3, 4, 5};
         }

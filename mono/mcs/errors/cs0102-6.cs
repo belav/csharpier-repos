@@ -2,6 +2,6 @@
 // Line: 6
 
 class X {
-    const int A = 10;
-    int A () {}
+	const int A = 10;
+	int A () {}
 }

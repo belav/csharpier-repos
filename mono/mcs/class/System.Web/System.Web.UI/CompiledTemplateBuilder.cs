@@ -2,7 +2,7 @@
 // System.Web.UI.CompiledTemplateBuilder
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
@@ -39,17 +39,17 @@ namespace System.Web.UI {
 [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
 public sealed class CompiledTemplateBuilder : ITemplate
 {
-    BuildTemplateMethod templateMethod;
+	BuildTemplateMethod templateMethod;
 
-    public CompiledTemplateBuilder (BuildTemplateMethod buildTemplateMethod)
-    {
-        this.templateMethod = buildTemplateMethod;
-    }
+	public CompiledTemplateBuilder (BuildTemplateMethod buildTemplateMethod)
+	{
+		this.templateMethod = buildTemplateMethod;
+	}
 
-    public void InstantiateIn (Control container)
-    {
-        templateMethod (container);
-    }
+	public void InstantiateIn (Control container)
+	{
+		templateMethod (container);
+	}
 }
 }
 

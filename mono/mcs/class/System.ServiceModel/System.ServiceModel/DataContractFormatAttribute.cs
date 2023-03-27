@@ -2,7 +2,7 @@
 // DataContractFormatAttribute.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,15 +29,15 @@ using System;
 
 namespace System.ServiceModel
 {
-    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface |
-        AttributeTargets.Method, Inherited = false)]
-    public sealed class DataContractFormatAttribute : Attribute
-    {
-        OperationFormatStyle style;
+	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface |
+		AttributeTargets.Method, Inherited = false)]
+	public sealed class DataContractFormatAttribute : Attribute
+	{
+		OperationFormatStyle style;
 
-        public OperationFormatStyle Style {
-            get { return style; }
-            set { style = value; }
-        }
-    }
+		public OperationFormatStyle Style {
+			get { return style; }
+			set { style = value; }
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // Line: 5
 
 class X {
-    public override long this [int i] {
+	public override long this [int i] {
             set { }
-    }
+	}
 }

@@ -30,9 +30,9 @@ namespace System.Web.Mobile
         private static readonly object _staticLock = new object();
 
         [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-        [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-        [ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
-        private DeviceFilterDictionary GetCurrentFilters()
+		[AspNetHostingPermission(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+		[ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
+		private DeviceFilterDictionary GetCurrentFilters()
         {
             object config = ConfigurationManager.GetSection(_kDeviceFiltersConfig);
             DeviceFiltersSection controlSection = config as DeviceFiltersSection;

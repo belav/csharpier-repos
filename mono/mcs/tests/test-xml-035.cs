@@ -8,10 +8,10 @@ using System.Xml;
 /// <see cref="Environment.GetFolderPath(Environment.SpecialFolder)" />
 /// </summary>
 public class Test {
-    /// <summary>
-    /// <see cref="Environment.SpecialFolder" />
-    /// </summary>
-    public static void Main() {
-    }
+	/// <summary>
+	/// <see cref="Environment.SpecialFolder" />
+	/// </summary>
+	public static void Main() {
+	}
 }
 

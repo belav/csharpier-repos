@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -11367,7 +11367,7 @@ using System.Diagnostics;
 
 interface I<T>
 {
-    void M(T x);
+	void M(T x);
 }
 class Base
 {
@@ -20290,11 +20290,11 @@ internal abstract event System.EventHandler E;";
 
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination1
+	.assembly extern Destination1
 }
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination2
+	.assembly extern Destination2
 }
 
 .class public auto ansi beforefieldinit TestSpace.ExistingReference
@@ -20363,11 +20363,11 @@ namespace ForwardingNamespace
 .module ForwarderModule.dll
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination1
+	.assembly extern Destination1
 }
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination2
+	.assembly extern Destination2
 }";
             var compilation = CreateCompilationWithILAndMscorlib40(userCode, forwardingIL, appendDefaultHeader: false);
 
@@ -20405,31 +20405,31 @@ namespace ForwardingNamespace
 .assembly extern Destination5 { }
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination1
+	.assembly extern Destination1
 }
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination2
+	.assembly extern Destination2
 }
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination3
+	.assembly extern Destination3
 }
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination4
+	.assembly extern Destination4
 }
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination5
+	.assembly extern Destination5
 }
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination1
+	.assembly extern Destination1
 }
 .class extern forwarder Destination.TestClass
 {
-    .assembly extern Destination2
+	.assembly extern Destination2
 }";
 
             var compilation = CreateCompilationWithILAndMscorlib40(userCode, forwardingIL, appendDefaultHeader: false);
@@ -20495,11 +20495,11 @@ namespace A
 .assembly extern D2 { }
 .class extern forwarder C.ClassC
 {
-    .assembly extern D1
+	.assembly extern D1
 }
 .class extern forwarder C.ClassC
 {
-    .assembly extern D2
+	.assembly extern D2
 }";
 
             var referenceC2 = CompileIL(codeC2, prependDefaultHeader: false);
@@ -20558,16 +20558,16 @@ namespace A
             var codeC2 = @"
 .assembly C
 {
-    .ver 0:0:0:0
+	.ver 0:0:0:0
 }
 .assembly extern D { }
 .class extern forwarder C.ClassC
 {
-    .assembly extern D
+	.assembly extern D
 }
 .class extern forwarder C.ClassC
 {
-    .assembly extern D
+	.assembly extern D
 }";
 
             var referenceC2 = CompileIL(codeC2, prependDefaultHeader: false);
@@ -20599,11 +20599,11 @@ namespace C
 .assembly extern D2 { }
 .class extern forwarder Testspace.TestType
 {
-    .assembly extern D1
+	.assembly extern D1
 }
 .class extern forwarder Testspace.TestType
 {
-    .assembly extern D2
+	.assembly extern D2
 }";
 
             var ilModule = GetILModuleReference(ilSource, prependDefaultHeader: false);
@@ -20619,11 +20619,11 @@ namespace C
 .assembly extern D { }
 .class extern forwarder Testspace.TestType
 {
-    .assembly extern D
+	.assembly extern D
 }
 .class extern forwarder Testspace.TestType
 {
-    .assembly extern D
+	.assembly extern D
 }";
 
             var ilModule = GetILModuleReference(ilSource, prependDefaultHeader: false);
@@ -20653,11 +20653,11 @@ namespace Testspace
 .assembly extern D2 { }
 .class extern forwarder Testspace.TestType
 {
-    .assembly extern D1
+	.assembly extern D1
 }
 .class extern forwarder Testspace.TestType
 {
-    .assembly extern D2
+	.assembly extern D2
 }";
 
             var ilModuleReference = GetILModuleReference(ilSource, prependDefaultHeader: false);
@@ -20702,11 +20702,11 @@ namespace UserSpace
 .assembly extern D2 { }
 .class extern forwarder Testspace.TestType
 {
-    .assembly extern D1
+	.assembly extern D1
 }
 .class extern forwarder Testspace.TestType
 {
-    .assembly extern D2
+	.assembly extern D2
 }";
 
             var module1Reference = GetILModuleReference(module1IL, prependDefaultHeader: false);
@@ -20717,11 +20717,11 @@ namespace UserSpace
 .assembly extern D4 { }
 .class extern forwarder Testspace.TestType
 {
-    .assembly extern D3
+	.assembly extern D3
 }
 .class extern forwarder Testspace.TestType
 {
-    .assembly extern D4
+	.assembly extern D4
 }";
 
             var module2Reference = GetILModuleReference(module2IL, prependDefaultHeader: false);
@@ -20794,11 +20794,11 @@ namespace B
 .assembly extern E { }
 .class extern forwarder C.ClassC
 {
-    .assembly extern D
+	.assembly extern D
 }
 .class extern forwarder C.ClassC
 {
-    .assembly extern E
+	.assembly extern E
 }";
 
             var referenceC2 = CompileIL(codeC2, prependDefaultHeader: false);
@@ -20808,7 +20808,7 @@ namespace B
 .assembly extern E { }
 .class extern forwarder C.ClassC
 {
-    .assembly extern E
+	.assembly extern E
 }";
 
             var referenceD = CompileIL(codeD, prependDefaultHeader: false);
@@ -21062,7 +21062,7 @@ class Ten { }
 class eleveN { }
 class twel_ve { }
 
-class cédille { }
+class cÃ©dille { }
 ";
             var expected = new[]
             {
@@ -21109,19 +21109,19 @@ class cédille { }
 class C1<one> { }
 class C2<@two> { }
 class C3<Ten> { }
-class C4<cédille> { }
+class C4<cÃ©dille> { }
 
 delegate void D1<one>();
 delegate void D2<@two>();
 delegate void D3<Ten>();
-delegate void D4<cédille>();
+delegate void D4<cÃ©dille>();
 
 class CM
 {
     void M1<one>() { }
     void M2<@two>() { }
     void M3<Ten>() { }
-    void M4<cédille>() { }
+    void M4<cÃ©dille>() { }
 
     void MLocal()
     {
@@ -21133,7 +21133,7 @@ class CM
         void local1<one>() { }
         void local2<@two>() { }
         void local3<Ten>() { }
-        void local4<cédille>() { }
+        void local4<cÃ©dille>() { }
     }
 }
 ";
@@ -21171,7 +21171,7 @@ using one = System.Console;
 using @two = System.Console;
 using three = System;
 using Ten = System.Console;
-using cédille = System.Console;
+using cÃ©dille = System.Console;
 ";
             var expected = new[]
             {
@@ -21194,8 +21194,8 @@ using cédille = System.Console;
                 // using Ten = System.Console;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Ten = System.Console;").WithLocation(5, 1),
                 // (6,1): hidden CS8019: Unnecessary using directive.
-                // using cédille = System.Console;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using cédille = System.Console;").WithLocation(6, 1)
+                // using cÃ©dille = System.Console;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using cÃ©dille = System.Console;").WithLocation(6, 1)
             };
 
             var comp = CreateCompilation(text, parseOptions: TestOptions.Regular10);
@@ -21216,8 +21216,8 @@ using cédille = System.Console;
                 // using Ten = System.Console;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Ten = System.Console;").WithLocation(5, 1),
                 // (6,1): hidden CS8019: Unnecessary using directive.
-                // using cédille = System.Console;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using cédille = System.Console;").WithLocation(6, 1)
+                // using cÃ©dille = System.Console;
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using cÃ©dille = System.Console;").WithLocation(6, 1)
                 );
 
             comp = CreateCompilation(text, parseOptions: TestOptions.Regular11, options: TestOptions.DebugDll.WithWarningLevel(7));

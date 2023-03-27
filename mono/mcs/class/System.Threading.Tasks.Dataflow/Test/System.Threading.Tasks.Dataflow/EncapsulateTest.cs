@@ -1,4 +1,4 @@
-// EncapsulateTest.cs
+﻿// EncapsulateTest.cs
 //  
 // Author:
 //       Petr Onderka <gsvick@gmail.com>
@@ -29,102 +29,102 @@ using System.Threading.Tasks.Dataflow;
 using NUnit.Framework;
 
 namespace MonoTests.System.Threading.Tasks.Dataflow {
-    [TestFixture]
-    public class EncapsulateTest {
-        [Test]
-        public void CompletionTest ()
-        {
-            var target = new CompletionCheckerBlock<int, int> ();
-            var source = new CompletionCheckerBlock<int, int> ();
+	[TestFixture]
+	public class EncapsulateTest {
+		[Test]
+		public void CompletionTest ()
+		{
+			var target = new CompletionCheckerBlock<int, int> ();
+			var source = new CompletionCheckerBlock<int, int> ();
 
-            var encapsulated = DataflowBlock.Encapsulate (target, source);
+			var encapsulated = DataflowBlock.Encapsulate (target, source);
 
-            Assert.AreSame (source.Completion, encapsulated.Completion);
-        }
+			Assert.AreSame (source.Completion, encapsulated.Completion);
+		}
 
-        [Test]
-        public void CompleteTest ()
-        {
-            var target = new CompletionCheckerBlock<int, int> ();
-            var source = new CompletionCheckerBlock<int, int> ();
+		[Test]
+		public void CompleteTest ()
+		{
+			var target = new CompletionCheckerBlock<int, int> ();
+			var source = new CompletionCheckerBlock<int, int> ();
 
-            var encapsulated = DataflowBlock.Encapsulate (target, source);
+			var encapsulated = DataflowBlock.Encapsulate (target, source);
 
-            encapsulated.Complete ();
+			encapsulated.Complete ();
 
-            Assert.IsFalse (source.WasCompleted);
-            Assert.IsTrue (target.WasCompleted);
-            Assert.AreSame (source.Completion, encapsulated.Completion);
-        }
+			Assert.IsFalse (source.WasCompleted);
+			Assert.IsTrue (target.WasCompleted);
+			Assert.AreSame (source.Completion, encapsulated.Completion);
+		}
 
-        [Test]
-        public void FaultTest ()
-        {
-            var target = new CompletionCheckerBlock<int, int> ();
-            var source = new CompletionCheckerBlock<int, int> ();
+		[Test]
+		public void FaultTest ()
+		{
+			var target = new CompletionCheckerBlock<int, int> ();
+			var source = new CompletionCheckerBlock<int, int> ();
 
-            var encapsulated = DataflowBlock.Encapsulate (target, source);
+			var encapsulated = DataflowBlock.Encapsulate (target, source);
 
-            encapsulated.Fault (new Exception ());
-            Assert.IsFalse (source.WasFaulted);
-            Assert.IsTrue (target.WasFaulted);
-            Assert.AreSame (source.Completion, encapsulated.Completion);
-        }
-    }
+			encapsulated.Fault (new Exception ());
+			Assert.IsFalse (source.WasFaulted);
+			Assert.IsTrue (target.WasFaulted);
+			Assert.AreSame (source.Completion, encapsulated.Completion);
+		}
+	}
 
-    class CompletionCheckerBlock<TInput, TOutput> :
-        IPropagatorBlock<TInput, TOutput> {
-        readonly Task completion = Task.FromResult (true);
+	class CompletionCheckerBlock<TInput, TOutput> :
+		IPropagatorBlock<TInput, TOutput> {
+		readonly Task completion = Task.FromResult (true);
 
-        public DataflowMessageStatus OfferMessage (
-            DataflowMessageHeader messageHeader, TInput messageValue,
-            ISourceBlock<TInput> source, bool consumeToAccept)
-        {
-            throw new NotImplementedException ();
-        }
+		public DataflowMessageStatus OfferMessage (
+			DataflowMessageHeader messageHeader, TInput messageValue,
+			ISourceBlock<TInput> source, bool consumeToAccept)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public void Complete ()
-        {
-            WasCompleted = true;
-        }
+		public void Complete ()
+		{
+			WasCompleted = true;
+		}
 
-        public bool WasCompleted { get; private set; }
+		public bool WasCompleted { get; private set; }
 
-        public void Fault (Exception exception)
-        {
-            WasFaulted = true;
-        }
+		public void Fault (Exception exception)
+		{
+			WasFaulted = true;
+		}
 
-        public bool WasFaulted { get; private set; }
+		public bool WasFaulted { get; private set; }
 
-        public Task Completion
-        {
-            get { return completion; }
-        }
+		public Task Completion
+		{
+			get { return completion; }
+		}
 
-        public IDisposable LinkTo (ITargetBlock<TOutput> target,
-                                   DataflowLinkOptions linkOptions)
-        {
-            throw new NotImplementedException ();
-        }
+		public IDisposable LinkTo (ITargetBlock<TOutput> target,
+		                           DataflowLinkOptions linkOptions)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public TOutput ConsumeMessage (DataflowMessageHeader messageHeader,
-                                       ITargetBlock<TOutput> target,
-                                       out bool messageConsumed)
-        {
-            throw new NotImplementedException ();
-        }
+		public TOutput ConsumeMessage (DataflowMessageHeader messageHeader,
+		                               ITargetBlock<TOutput> target,
+		                               out bool messageConsumed)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public bool ReserveMessage (DataflowMessageHeader messageHeader,
-                                    ITargetBlock<TOutput> target)
-        {
-            throw new NotImplementedException ();
-        }
+		public bool ReserveMessage (DataflowMessageHeader messageHeader,
+		                            ITargetBlock<TOutput> target)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public void ReleaseReservation (DataflowMessageHeader messageHeader,
-                                        ITargetBlock<TOutput> target)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public void ReleaseReservation (DataflowMessageHeader messageHeader,
+		                                ITargetBlock<TOutput> target)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

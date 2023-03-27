@@ -4,21 +4,21 @@
 using System;
 
 interface Iface {
-    void Method ();
+	void Method ();
 }
 
 class X : Iface {
 
-    void Iface.Method () {} 
-    
-    public static int Main ()
-    {
-        X x = new X ();
-        Iface f = x;
+	void Iface.Method () {} 
+	
+	public static int Main ()
+	{
+		X x = new X ();
+		Iface f = x;
 
-        if (f.ToString () != "X")
-            return 1;
+		if (f.ToString () != "X")
+			return 1;
 
-        return 0;
-    }
+		return 0;
+	}
 }

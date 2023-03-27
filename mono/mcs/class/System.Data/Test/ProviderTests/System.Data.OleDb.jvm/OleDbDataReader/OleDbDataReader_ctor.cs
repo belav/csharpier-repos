@@ -35,46 +35,46 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbDataReader_ctor : GHTBase
 {
-    public static void Main()
-    {
-        OleDbDataReader_ctor tc = new OleDbDataReader_ctor();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OleDbDataReader_ctor");
-            tc.run();
-        }
-        catch(Exception ex){exp = ex;}
-        finally    {tc.EndTest(exp);}
-    }
+	public static void Main()
+	{
+		OleDbDataReader_ctor tc = new OleDbDataReader_ctor();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OleDbDataReader_ctor");
+			tc.run();
+		}
+		catch(Exception ex){exp = ex;}
+		finally	{tc.EndTest(exp);}
+	}
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
-        OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-        con.Open();
-        OleDbCommand cmd = new OleDbCommand("Select * From Orders", con);
-        OleDbDataReader rdr = cmd.ExecuteReader();
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
+		OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+		con.Open();
+		OleDbCommand cmd = new OleDbCommand("Select * From Orders", con);
+		OleDbDataReader rdr = cmd.ExecuteReader();
 
-        //change a connection's state without closing the datareader (should fail
-        try
-        {
-            BeginCase("InvalidOperationException");
-            try
-            {
-                con.ChangeDatabase("msdb");
-                ExpectedExceptionNotCaught(typeof(InvalidOperationException).FullName);
-            }
-            catch (InvalidOperationException ex) 
-            {
-                ExpectedExceptionCaught(ex);
-            }
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
+		//change a connection's state without closing the datareader (should fail
+		try
+		{
+			BeginCase("InvalidOperationException");
+			try
+			{
+				con.ChangeDatabase("msdb");
+				ExpectedExceptionNotCaught(typeof(InvalidOperationException).FullName);
+			}
+			catch (InvalidOperationException ex) 
+			{
+				ExpectedExceptionCaught(ex);
+			}
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
 
-        if (con.State == ConnectionState.Open) con.Close();
-    }
+		if (con.State == ConnectionState.Open) con.Close();
+	}
 }
 }

@@ -18,13 +18,13 @@ namespace Mono.ILASM {
                 private int value;
 
                 public EmitByteInstr (int value, Location loc)
-            : base (loc)
+			: base (loc)
                 {
                         this.value = value;
                 }
 
                 public override void Emit (CodeGen code_gen, MethodDef meth,
-                       PEAPI.CILInstructions cil)
+					   PEAPI.CILInstructions cil)
                 {
                         cil.emitbyte ((byte)value);
                 }

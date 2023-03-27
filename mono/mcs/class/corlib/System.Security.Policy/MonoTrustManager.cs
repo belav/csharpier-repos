@@ -2,7 +2,7 @@
 // System.Security.Policy.MonoTrustManager internal class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,36 +32,36 @@ using System.Security.Permissions;
 
 namespace System.Security.Policy {
 
-    // this is temporary until we include one in SWF for 2.0
+	// this is temporary until we include one in SWF for 2.0
 
-    internal class MonoTrustManager : IApplicationTrustManager {
+	internal class MonoTrustManager : IApplicationTrustManager {
 
-        private const string tag = "IApplicationTrustManager";
+		private const string tag = "IApplicationTrustManager";
 
-        [SecurityPermission (SecurityAction.Demand, ControlPolicy = true)]
-        public ApplicationTrust DetermineApplicationTrust (ActivationContext activationContext, TrustManagerContext context)
-        {
-            if (activationContext == null)
-                throw new ArgumentNullException ("activationContext");
-            return null;
-        }
+		[SecurityPermission (SecurityAction.Demand, ControlPolicy = true)]
+		public ApplicationTrust DetermineApplicationTrust (ActivationContext activationContext, TrustManagerContext context)
+		{
+			if (activationContext == null)
+				throw new ArgumentNullException ("activationContext");
+			return null;
+		}
 
-        public void FromXml (SecurityElement e)
-        {
-            if (e == null)
-                throw new ArgumentNullException ("e");
-            if (e.Tag != tag)
-                throw new ArgumentException ("e", Locale.GetText ("Invalid XML tag."));
-            // nothing more to do in this case
-        }
+		public void FromXml (SecurityElement e)
+		{
+			if (e == null)
+				throw new ArgumentNullException ("e");
+			if (e.Tag != tag)
+				throw new ArgumentException ("e", Locale.GetText ("Invalid XML tag."));
+			// nothing more to do in this case
+		}
 
-        public SecurityElement ToXml ()
-        {
-            SecurityElement se = new SecurityElement (tag);
-            se.AddAttribute ("class", typeof (MonoTrustManager).AssemblyQualifiedName);
-            se.AddAttribute ("version", "1");
-            return se;
-        }
-    }
+		public SecurityElement ToXml ()
+		{
+			SecurityElement se = new SecurityElement (tag);
+			se.AddAttribute ("class", typeof (MonoTrustManager).AssemblyQualifiedName);
+			se.AddAttribute ("version", "1");
+			return se;
+		}
+	}
 }
 

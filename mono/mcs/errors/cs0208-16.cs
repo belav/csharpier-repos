@@ -8,8 +8,8 @@ public unsafe partial struct Foo
 
 public unsafe partial struct Foo
 {
-    public Foo *foo;
-    string x;
+	public Foo *foo;
+	string x;
 }
 
 

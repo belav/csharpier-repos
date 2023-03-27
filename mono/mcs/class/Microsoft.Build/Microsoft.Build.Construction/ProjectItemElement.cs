@@ -63,14 +63,14 @@ namespace Microsoft.Build.Construction
                 string @remove;
                 public string Remove { get { return @remove ?? String.Empty; } set { @remove = value; } }
                 string keepDuplicates;
-        string keepMetadata;
-        string removeMetadata;
+		string keepMetadata;
+		string removeMetadata;
                 public
                 string KeepDuplicates { get { return keepDuplicates ?? String.Empty; } set { keepDuplicates = value; } }
                 public
-        string KeepMetadata { get { return keepMetadata ?? String.Empty; } set { keepMetadata = value; } }
+		string KeepMetadata { get { return keepMetadata ?? String.Empty; } set { keepMetadata = value; } }
                 public
-        string RemoveMetadata { get { return removeMetadata ?? String.Empty; } set { removeMetadata = value; } }
+		string RemoveMetadata { get { return removeMetadata ?? String.Empty; } set { removeMetadata = value; } }
                 
                 public ProjectMetadataElement AddMetadata (string name, string unevaluatedValue)
                 {

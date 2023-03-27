@@ -2,7 +2,7 @@
 // System.Security.AccessControl.CompoundAceType enum
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -27,8 +27,8 @@
 //
 
 namespace System.Security.AccessControl {
-    public enum CompoundAceType {
-        Impersonation = 1
-    }
+	public enum CompoundAceType {
+		Impersonation = 1
+	}
 }
 

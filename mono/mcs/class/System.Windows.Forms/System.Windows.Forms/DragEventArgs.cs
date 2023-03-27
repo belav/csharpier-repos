@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 //
 
@@ -30,66 +30,66 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-    [ComVisible(true)]
-    public class DragEventArgs : EventArgs {
-        internal int            x;
-        internal int            y;
-        internal int            keystate;
-        internal DragDropEffects    allowed_effect;
-        internal DragDropEffects    current_effect;
-        internal IDataObject        data_object;
+	[ComVisible(true)]
+	public class DragEventArgs : EventArgs {
+		internal int			x;
+		internal int			y;
+		internal int			keystate;
+		internal DragDropEffects	allowed_effect;
+		internal DragDropEffects	current_effect;
+		internal IDataObject		data_object;
 
-        #region Public Constructors
-        public DragEventArgs(IDataObject data, int keyState, int x, int y, DragDropEffects allowedEffect, DragDropEffects effect) {
-            this.x=x;
-            this.y=y;
-            this.keystate=keyState;
-            this.allowed_effect=allowedEffect;    
-            this.current_effect=effect;
-            this.data_object=data;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public DragEventArgs(IDataObject data, int keyState, int x, int y, DragDropEffects allowedEffect, DragDropEffects effect) {
+			this.x=x;
+			this.y=y;
+			this.keystate=keyState;
+			this.allowed_effect=allowedEffect;	
+			this.current_effect=effect;
+			this.data_object=data;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public DragDropEffects AllowedEffect {
-            get {
-                return this.allowed_effect;
-            }
-        }
+		#region Public Instance Properties
+		public DragDropEffects AllowedEffect {
+			get {
+				return this.allowed_effect;
+			}
+		}
 
-        public IDataObject Data {
-            get {
-                return this.data_object;
-            }
-        }
+		public IDataObject Data {
+			get {
+				return this.data_object;
+			}
+		}
 
-        public DragDropEffects Effect {
-            get {
-                return this.current_effect;
-            }
+		public DragDropEffects Effect {
+			get {
+				return this.current_effect;
+			}
 
-            set {
-                current_effect = value;
-            }
-        }
+			set {
+				current_effect = value;
+			}
+		}
 
-        public int KeyState {
-            get {
-                return this.keystate;
-            }
-        }
+		public int KeyState {
+			get {
+				return this.keystate;
+			}
+		}
 
-        public int X {
-            get {
-                return this.x;
-            }
-        }
+		public int X {
+			get {
+				return this.x;
+			}
+		}
 
-        public int Y {
-            get {
-                return this.y;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public int Y {
+			get {
+				return this.y;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

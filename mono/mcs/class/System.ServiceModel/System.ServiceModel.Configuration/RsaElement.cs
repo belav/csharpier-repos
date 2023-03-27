@@ -2,7 +2,7 @@
 // RsaElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,47 +54,47 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public sealed partial class RsaElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty value;
+	[MonoTODO]
+	public sealed partial class RsaElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty value;
 
-        static RsaElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            value = new ConfigurationProperty ("value",
-                typeof (string), "", new StringConverter (), null,
-                ConfigurationPropertyOptions.None);
+		static RsaElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			value = new ConfigurationProperty ("value",
+				typeof (string), "", new StringConverter (), null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (value);
-        }
+			properties.Add (value);
+		}
 
-        public RsaElement ()
-        {
-        }
-
-
-        // Properties
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        [ConfigurationProperty ("value",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "")]
-        public string Value {
-            get { return (string) base [value]; }
-            set { base [value] = value; }
-        }
+		public RsaElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+		[StringValidator ( MinLength = 0,
+			MaxLength = int.MaxValue,
+			 InvalidCharacters = null)]
+		[ConfigurationProperty ("value",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "")]
+		public string Value {
+			get { return (string) base [value]; }
+			set { base [value] = value; }
+		}
+
+
+	}
 
 }

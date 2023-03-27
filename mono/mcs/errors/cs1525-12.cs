@@ -3,8 +3,8 @@
 
 class A
 {
-    public static implicit operator == (A a, bool b)
-    {
-        return false;
-    }
+	public static implicit operator == (A a, bool b)
+	{
+		return false;
+	}
 }

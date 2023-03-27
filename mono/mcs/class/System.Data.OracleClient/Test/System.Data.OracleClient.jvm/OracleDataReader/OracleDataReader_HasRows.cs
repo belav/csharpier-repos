@@ -37,84 +37,84 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleDataReader_HasRows : GHTBase
 {
-    Exception exp;
+	Exception exp;
 
-    public static void Main()
-    {
-        OracleDataReader_HasRows tc = new OracleDataReader_HasRows();
-        tc.exp = null;
-        try
-        {
-            tc.BeginTest("OracleDataReader_HasRows");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            tc.exp = ex;
-        }
-        finally    
-        {
-            tc.EndTest(tc.exp);
-        }
-    }
+	public static void Main()
+	{
+		OracleDataReader_HasRows tc = new OracleDataReader_HasRows();
+		tc.exp = null;
+		try
+		{
+			tc.BeginTest("OracleDataReader_HasRows");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			tc.exp = ex;
+		}
+		finally	
+		{
+			tc.EndTest(tc.exp);
+		}
+	}
 
-    public void run()
-    {
-        TestHasRowsTrue();
-        TestHasRowsFalse();
-    }
+	public void run()
+	{
+		TestHasRowsTrue();
+		TestHasRowsFalse();
+	}
 
-    [Test]
-    public void TestHasRowsTrue()
-    {
-        BeginCase("Test HasRows = True");
-        exp = null;
-        string rowId = string.Format("43977_{0}", TestCaseNumber);
-        OracleConnection con = null;
-        OracleDataReader rdr = null;
-        try
-        {
-            DbTypeParametersCollection row = ConnectedDataProvider.GetSimpleDbTypesParameters();
-            row.ExecuteInsert(rowId);
-            row.ExecuteSelectReader(rowId, out rdr, out con);
-            Compare(rdr.HasRows, true);
-        }
-        catch (Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
+	[Test]
+	public void TestHasRowsTrue()
+	{
+		BeginCase("Test HasRows = True");
+		exp = null;
+		string rowId = string.Format("43977_{0}", TestCaseNumber);
+		OracleConnection con = null;
+		OracleDataReader rdr = null;
+		try
+		{
+			DbTypeParametersCollection row = ConnectedDataProvider.GetSimpleDbTypesParameters();
+			row.ExecuteInsert(rowId);
+			row.ExecuteSelectReader(rowId, out rdr, out con);
+			Compare(rdr.HasRows, true);
+		}
+		catch (Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
 
-    [Test]
-    public void TestHasRowsFalse()
-    {
-        BeginCase("Test HasRows = False");
-        exp = null;
-        string rowId = string.Format("43977_{0}", TestCaseNumber);
-        OracleConnection con = null;
-        OracleDataReader rdr = null;
-        try
-        {
-            DbTypeParametersCollection row = ConnectedDataProvider.GetSimpleDbTypesParameters();
-            row.ExecuteDelete(rowId);    //Make sure that a row with such ID does not exist.
-            row.ExecuteSelectReader(rowId, out rdr, out con);
-            Compare(rdr.HasRows, false);
-        }
-        catch (Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
+	[Test]
+	public void TestHasRowsFalse()
+	{
+		BeginCase("Test HasRows = False");
+		exp = null;
+		string rowId = string.Format("43977_{0}", TestCaseNumber);
+		OracleConnection con = null;
+		OracleDataReader rdr = null;
+		try
+		{
+			DbTypeParametersCollection row = ConnectedDataProvider.GetSimpleDbTypesParameters();
+			row.ExecuteDelete(rowId);	//Make sure that a row with such ID does not exist.
+			row.ExecuteSelectReader(rowId, out rdr, out con);
+			Compare(rdr.HasRows, false);
+		}
+		catch (Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
 }
 
 

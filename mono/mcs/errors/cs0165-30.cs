@@ -4,8 +4,8 @@
 using System;
 
 class Test {
-    
-    static void Main () {
-        Action a = () => a();
-    }
+	
+	static void Main () {
+		Action a = () => a();
+	}
 }

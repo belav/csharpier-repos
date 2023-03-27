@@ -31,21 +31,21 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
-    [DataContract]
-    [KnownType (typeof (MatchNoneMessageFilter))]
-    [KnownType (typeof (ActionMessageFilter))]
-    [KnownType (typeof (MatchAllMessageFilter))]
-    [KnownType (typeof (XPathMessageFilter))]
-    public abstract class MessageFilter
-    {
-        protected MessageFilter () {}
+	[DataContract]
+	[KnownType (typeof (MatchNoneMessageFilter))]
+	[KnownType (typeof (ActionMessageFilter))]
+	[KnownType (typeof (MatchAllMessageFilter))]
+	[KnownType (typeof (XPathMessageFilter))]
+	public abstract class MessageFilter
+	{
+		protected MessageFilter () {}
 
-        protected internal virtual IMessageFilterTable<FilterData> CreateFilterTable<FilterData> ()
-        {
-            return new MessageFilterTable<FilterData> ();
-        }
+		protected internal virtual IMessageFilterTable<FilterData> CreateFilterTable<FilterData> ()
+		{
+			return new MessageFilterTable<FilterData> ();
+		}
 
-        public abstract bool Match (Message message);
-        public abstract bool Match (MessageBuffer buffer);
-    }
+		public abstract bool Match (Message message);
+		public abstract bool Match (MessageBuffer buffer);
+	}
 }

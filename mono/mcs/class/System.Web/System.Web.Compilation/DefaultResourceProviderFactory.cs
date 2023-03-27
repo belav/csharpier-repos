@@ -2,7 +2,7 @@
 // DefaultResourceProviderFactory.cs
 //
 // Authors:
-//    Marek Habersack (mhabersack@novell.com)
+//	Marek Habersack (mhabersack@novell.com)
 //
 // (C) 2009 Novell, Inc (http://novell.com)
 
@@ -33,16 +33,16 @@ using System.Web;
 
 namespace System.Web.Compilation
 {
-    sealed class DefaultResourceProviderFactory : ResourceProviderFactory
-    {
-        public override IResourceProvider CreateGlobalResourceProvider (string classKey)
-        {
-            return new DefaultResourceProvider (classKey, true);
-        }
+	sealed class DefaultResourceProviderFactory : ResourceProviderFactory
+	{
+		public override IResourceProvider CreateGlobalResourceProvider (string classKey)
+		{
+			return new DefaultResourceProvider (classKey, true);
+		}
 
-        public override IResourceProvider CreateLocalResourceProvider (string virtualPath)
-        {
-            return new DefaultResourceProvider (virtualPath, false);
-        }
-    }
+		public override IResourceProvider CreateLocalResourceProvider (string virtualPath)
+		{
+			return new DefaultResourceProvider (virtualPath, false);
+		}
+	}
 }

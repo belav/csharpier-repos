@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -228,7 +228,7 @@ class Class1
             VisualStudio.Editor.SendKeys("<s");
             VisualStudio.Editor.Verify.CompletionItemsExist("see", "seealso", "summary");
 
-            // ?? Workaround for https://github.com/dotnet/roslyn/issues/33824
+            // 🐛 Workaround for https://github.com/dotnet/roslyn/issues/33824
             var completionItems = VisualStudio.Editor.GetCompletionItems();
             var targetIndex = Array.IndexOf(completionItems, "see");
             var currentIndex = Array.IndexOf(completionItems, VisualStudio.Editor.GetCurrentCompletionItem());

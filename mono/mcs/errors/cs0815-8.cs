@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 class X
 {
-    public static void Main ()
-    {
-        Task.Run(async () => { var a = async () => { }; Console.WriteLine(a); });
-    }
+	public static void Main ()
+	{
+		Task.Run(async () => { var a = async () => { }; Console.WriteLine(a); });
+	}
 }

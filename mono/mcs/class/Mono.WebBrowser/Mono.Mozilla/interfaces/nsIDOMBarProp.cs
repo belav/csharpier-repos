@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,29 +32,29 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("9eb2c150-1d56-11d3-8221-0060083a0bcf")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMBarProp {
+	[Guid ("9eb2c150-1d56-11d3-8221-0060083a0bcf")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMBarProp {
 
 #region nsIDOMBarProp
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getVisible ( out bool ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getVisible ( out bool ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setVisible ( bool value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setVisible ( bool value);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMBarProp {
-        public static nsIDOMBarProp GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMBarProp obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMBarProp).GUID, obj);
-            return o as nsIDOMBarProp;
-        }
-    }
+	internal class nsDOMBarProp {
+		public static nsIDOMBarProp GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMBarProp obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMBarProp).GUID, obj);
+			return o as nsIDOMBarProp;
+		}
+	}
 }

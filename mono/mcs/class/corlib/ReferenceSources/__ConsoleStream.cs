@@ -1,6 +1,6 @@
 namespace System.IO
 {
-    sealed class __ConsoleStream
-    {
-    }
+	sealed class __ConsoleStream
+	{
+	}
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
@@ -29,34 +29,34 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-    [ComVisible(true)]
-    public class GiveFeedbackEventArgs : EventArgs {
-        internal DragDropEffects    effect;
-        internal bool            use_default_cursors;
+	[ComVisible(true)]
+	public class GiveFeedbackEventArgs : EventArgs {
+		internal DragDropEffects	effect;
+		internal bool			use_default_cursors;
 
-        #region Public Constructors
-        public GiveFeedbackEventArgs(DragDropEffects effect, bool useDefaultCursors) {
-            this.effect=effect;
-            this.use_default_cursors=useDefaultCursors;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public GiveFeedbackEventArgs(DragDropEffects effect, bool useDefaultCursors) {
+			this.effect=effect;
+			this.use_default_cursors=useDefaultCursors;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public DragDropEffects Effect {
-            get {
-                return this.effect;
-            }
-        }
+		#region Public Instance Properties
+		public DragDropEffects Effect {
+			get {
+				return this.effect;
+			}
+		}
 
-        public bool UseDefaultCursors {
-            get {
-                return this.use_default_cursors;
-            }
+		public bool UseDefaultCursors {
+			get {
+				return this.use_default_cursors;
+			}
 
-            set {
-                this.use_default_cursors=value;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+			set {
+				this.use_default_cursors=value;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

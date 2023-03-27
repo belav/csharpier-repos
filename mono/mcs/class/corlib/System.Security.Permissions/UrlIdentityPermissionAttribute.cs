@@ -2,8 +2,8 @@
 // System.Security.Permissions.UrlIdentityPermissionAttribute.cs
 //
 // Authors:
-//    Duncan Mak <duncan@ximian.com>
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Duncan Mak <duncan@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002 Ximian, Inc. http://www.ximian.com
 // Portions (C) 2003 Motus Technologies Inc. (http://www.motus.com)
@@ -33,39 +33,39 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-    [ComVisible (true)]
-    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-             AttributeTargets.Struct | AttributeTargets.Constructor |
-             AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
-    [Serializable]
-    public sealed class UrlIdentityPermissionAttribute : CodeAccessSecurityAttribute {
+	[ComVisible (true)]
+	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
+			 AttributeTargets.Struct | AttributeTargets.Constructor |
+			 AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
+	[Serializable]
+	public sealed class UrlIdentityPermissionAttribute : CodeAccessSecurityAttribute {
 
-        // Fields
-        private string url;
-        
-        // Constructor
-        public UrlIdentityPermissionAttribute (SecurityAction action)
-            : base (action)
-        {
-        }
-        
-        // Properties
-        public string Url {
-            get { return url; }
-            set { url = value; }
-        }
-        
-        // Methods
-        public override IPermission CreatePermission ()
-        {
-            if (this.Unrestricted)
-                return new UrlIdentityPermission (PermissionState.Unrestricted);
-            // Note: It is possible to create a permission with a 
-            // null URL but not to create a UrlIdentityPermission (null)
-            else if (url == null)
-                return new UrlIdentityPermission (PermissionState.None);
-            else
-                return new UrlIdentityPermission (url);
-        }
-    }
+		// Fields
+		private string url;
+		
+		// Constructor
+		public UrlIdentityPermissionAttribute (SecurityAction action)
+			: base (action)
+		{
+		}
+		
+		// Properties
+		public string Url {
+			get { return url; }
+			set { url = value; }
+		}
+		
+		// Methods
+		public override IPermission CreatePermission ()
+		{
+			if (this.Unrestricted)
+				return new UrlIdentityPermission (PermissionState.Unrestricted);
+			// Note: It is possible to create a permission with a 
+			// null URL but not to create a UrlIdentityPermission (null)
+			else if (url == null)
+				return new UrlIdentityPermission (PermissionState.None);
+			else
+				return new UrlIdentityPermission (url);
+		}
+	}
 }

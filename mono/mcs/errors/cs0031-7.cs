@@ -3,9 +3,9 @@
 
 class C
 {
-    public static void Main ()
-    {
-        const byte c = unchecked ((byte) 1000M);
-    }
+	public static void Main ()
+	{
+		const byte c = unchecked ((byte) 1000M);
+	}
 }
 

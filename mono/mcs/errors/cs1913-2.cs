@@ -7,16 +7,16 @@ using System.Collections.Generic;
 
 class Data
 {
-    public int Count ()
-    {
-        return 1;
-    }
+	public int Count ()
+	{
+		return 1;
+	}
 }
 
 public class Test
 {
-    static void Main ()
-    {
-        var c = new Data { Count = 10 };
-    }
+	static void Main ()
+	{
+		var c = new Data { Count = 10 };
+	}
 }

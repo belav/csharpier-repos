@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+Ôªø// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1914,8 +1914,8 @@ namespace Microsoft.CodeAnalysis
             {
                 // See CIL spec section II.23.3 Custom attributes
                 //
-                // Next is a description of the optional ìnamedî fields and properties.
-                // This starts with NumNamedñ an unsigned int16 giving the number of ìnamedî properties or fields that follow.
+                // Next is a description of the optional ‚Äúnamed‚Äù fields and properties.
+                // This starts with NumNamed‚Äì an unsigned int16 giving the number of ‚Äúnamed‚Äù properties or fields that follow.
                 var numNamed = sig.ReadUInt16();
                 for (int i = 0; i < numNamed && (diagnosticId is null || urlFormat is null); i++)
                 {

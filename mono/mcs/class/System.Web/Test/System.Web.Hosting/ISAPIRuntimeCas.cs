@@ -2,7 +2,7 @@
 // ISAPIRuntimeCas.cs - CAS unit tests for System.Web.Hosting.ISAPIRuntime
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,121 +37,121 @@ using System.Web.Hosting;
 
 namespace MonoCasTests.System.Web.Hosting {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ISAPIRuntimeCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ISAPIRuntimeCas : AspNetHostingMinimal {
 
-        private ISAPIRuntime isapi;
+		private ISAPIRuntime isapi;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            // we're at full trust here
-            isapi = new ISAPIRuntime ();
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			// we're at full trust here
+			isapi = new ISAPIRuntime ();
+		}
 
-        // test ctor (those tests aren't affected by a LinkDemand)
+		// test ctor (those tests aren't affected by a LinkDemand)
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Constructor_Deny_UnmanagedCode ()
-        {
-            new ISAPIRuntime ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void Constructor_Deny_UnmanagedCode ()
+		{
+			new ISAPIRuntime ();
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Constructor_Deny_AspNetHostingPermission ()
-        {
-            new ISAPIRuntime ();
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+		[ExpectedException (typeof (SecurityException))]
+		public void Constructor_Deny_AspNetHostingPermission ()
+		{
+			new ISAPIRuntime ();
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-        public void Constructor_PermitOnly_UnmanagedCode ()
-        {
-            new ISAPIRuntime ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
+		public void Constructor_PermitOnly_UnmanagedCode ()
+		{
+			new ISAPIRuntime ();
+		}
 
-        // only StopProcessing requires some permissions (UnmanagedCode)
+		// only StopProcessing requires some permissions (UnmanagedCode)
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Members_Deny_Unrestricted ()
-        {
-            try {
-                isapi.DoGCCollect ();
-            }
-            catch (NotImplementedException) {
-                // mono
-            }
-            try {
-                isapi.ProcessRequest (IntPtr.Zero, 0);
-            }
-            catch (AccessViolationException) {
-                // fx2.0
-            }
-            catch (NotImplementedException) {
-                // mono
-            }
-            try {
-                isapi.StartProcessing ();
-            }
-            catch (NotImplementedException) {
-                // mono
-            }
-            try {
-                isapi.InitializeLifetimeService ();
-            }
-            catch (NotImplementedException) {
-                // mono
-            }
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Members_Deny_Unrestricted ()
+		{
+			try {
+				isapi.DoGCCollect ();
+			}
+			catch (NotImplementedException) {
+				// mono
+			}
+			try {
+				isapi.ProcessRequest (IntPtr.Zero, 0);
+			}
+			catch (AccessViolationException) {
+				// fx2.0
+			}
+			catch (NotImplementedException) {
+				// mono
+			}
+			try {
+				isapi.StartProcessing ();
+			}
+			catch (NotImplementedException) {
+				// mono
+			}
+			try {
+				isapi.InitializeLifetimeService ();
+			}
+			catch (NotImplementedException) {
+				// mono
+			}
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void StopProcessing_Deny_UnmanagedCode ()
-        {
-            try {
-                isapi.StopProcessing ();
-            }
-            finally {
-            }
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void StopProcessing_Deny_UnmanagedCode ()
+		{
+			try {
+				isapi.StopProcessing ();
+			}
+			finally {
+			}
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        public void StopProcessing_PermitOnly_UnmanagedCode ()
-        {
-            try {
-                isapi.StopProcessing ();
-            }
-            catch (NotImplementedException) {
-                // mono
-            }
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+		public void StopProcessing_PermitOnly_UnmanagedCode ()
+		{
+			try {
+				isapi.StopProcessing ();
+			}
+			catch (NotImplementedException) {
+				// mono
+			}
+		}
 
-        // test for LinkDemand on class
+		// test for LinkDemand on class
 
-        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            // in this case testing the ctor isn't very conveniant
-            // because it has a Demand similar to the LinkDemand.
-            try {
-                return base.CreateControl (action, level);
-            }
-            catch (TargetInvocationException tie) {
-                throw tie.InnerException;
-            }
-        }
+		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			// in this case testing the ctor isn't very conveniant
+			// because it has a Demand similar to the LinkDemand.
+			try {
+				return base.CreateControl (action, level);
+			}
+			catch (TargetInvocationException tie) {
+				throw tie.InnerException;
+			}
+		}
 
-        public override Type Type {
-            get { return typeof (ISAPIRuntime); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (ISAPIRuntime); }
+		}
+	}
 }

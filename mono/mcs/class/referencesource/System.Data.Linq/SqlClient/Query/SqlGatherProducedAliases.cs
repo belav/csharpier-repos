@@ -13,13 +13,13 @@ namespace System.Data.Linq.SqlClient {
             return g.Produced;
         }
 
-        private class Gatherer : SqlVisitor {
-            internal HashSet<SqlAlias> Produced = new HashSet<SqlAlias>();
-            internal override SqlAlias VisitAlias(SqlAlias a) {
-                Produced.Add(a);
-                return base.VisitAlias(a);
-            }
-        }
+		private class Gatherer : SqlVisitor {
+			internal HashSet<SqlAlias> Produced = new HashSet<SqlAlias>();
+			internal override SqlAlias VisitAlias(SqlAlias a) {
+				Produced.Add(a);
+				return base.VisitAlias(a);
+			}
+		}
 
     }
 }

@@ -35,97 +35,97 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbConnection_GetOleDbSchemaTable : ADONetTesterClass
 {
-    public static void Main()
-    {
-        OleDbConnection_GetOleDbSchemaTable tc = new OleDbConnection_GetOleDbSchemaTable();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OleDbConnection_GetOleDbSchemaTable");
-            tc.run();
-        }
-        catch(Exception ex){exp = ex;}
-        finally    {tc.EndTest(exp);}
-    }
+	public static void Main()
+	{
+		OleDbConnection_GetOleDbSchemaTable tc = new OleDbConnection_GetOleDbSchemaTable();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OleDbConnection_GetOleDbSchemaTable");
+			tc.run();
+		}
+		catch(Exception ex){exp = ex;}
+		finally	{tc.EndTest(exp);}
+	}
 
-    [Test]
-    public void run()
-    {
-    
-        Exception exp = null;
-        //bool NextResultExists = false;
+	[Test]
+	public void run()
+	{
+	
+		Exception exp = null;
+		//bool NextResultExists = false;
 
-        OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-        con.Open();
+		OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+		con.Open();
 
-        DataTable dt = null;
-        try
-        {
-            BeginCase("Check table is not null");
-            string catalog = null;
-            string schema = null;
-            if (ConnectedDataProvider.GetDbType(con) != DataBaseServer.Oracle)
-                catalog = "GHTDB";
-            else
-                schema = "GHTDB";
-            dt = con.GetOleDbSchemaTable(OleDbSchemaGuid.Tables,new object[] {catalog,schema,null,"TABLE"});
-            Compare(dt == null,false);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-
-
-        //check that some of the tables exists
-        try
-        {
-            BeginCase("Table Orders");
-            Compare(dt.Select("TABLE_NAME='Orders'").Length ,1 );  
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("Table Order Details");
-            Compare(dt.Select("TABLE_NAME='Order Details'").Length ,1 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("Table Customers");
-            Compare(dt.Select("TABLE_NAME='Customers'").Length ,1 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("Table Employees");
-            Compare(dt.Select("TABLE_NAME='Employees'").Length ,1 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        if (con.State == ConnectionState.Open) con.Close();
-    }
+		DataTable dt = null;
+		try
+		{
+			BeginCase("Check table is not null");
+			string catalog = null;
+			string schema = null;
+			if (ConnectedDataProvider.GetDbType(con) != DataBaseServer.Oracle)
+				catalog = "GHTDB";
+			else
+				schema = "GHTDB";
+			dt = con.GetOleDbSchemaTable(OleDbSchemaGuid.Tables,new object[] {catalog,schema,null,"TABLE"});
+			Compare(dt == null,false);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
 
-        
-    }
+
+		//check that some of the tables exists
+		try
+		{
+			BeginCase("Table Orders");
+			Compare(dt.Select("TABLE_NAME='Orders'").Length ,1 );  
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("Table Order Details");
+			Compare(dt.Select("TABLE_NAME='Order Details'").Length ,1 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("Table Customers");
+			Compare(dt.Select("TABLE_NAME='Customers'").Length ,1 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("Table Employees");
+			Compare(dt.Select("TABLE_NAME='Employees'").Length ,1 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		if (con.State == ConnectionState.Open) con.Close();
+	}
 
 
-    //public TestClass():base(true){}
+		
+	}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//public TestClass():base(true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
+
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 
 }

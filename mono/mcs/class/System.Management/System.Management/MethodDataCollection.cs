@@ -2,7 +2,7 @@
 // System.Management.MethodDataCollection
 //
 // Authors:
-//    Gert Driesen (drieseng@users.sourceforge.net)
+//	Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) 2006 Gert Driesen
 //
@@ -32,99 +32,99 @@ using System.Collections;
 
 namespace System.Management
 {
-    [MonoTODO ("System.Management is not implemented")]
-    public class MethodDataCollection : ICollection, IEnumerable
-    {
-        internal MethodDataCollection ()
-        {
-        }
+	[MonoTODO ("System.Management is not implemented")]
+	public class MethodDataCollection : ICollection, IEnumerable
+	{
+		internal MethodDataCollection ()
+		{
+		}
 
-        public int Count {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		public int Count {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        public bool IsSynchronized {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		public bool IsSynchronized {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        public virtual MethodData this [string methodName] {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		public virtual MethodData this [string methodName] {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        public object SyncRoot {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		public object SyncRoot {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        public virtual void Add (string methodName)
-        {
-            throw new NotImplementedException ();
-        }
+		public virtual void Add (string methodName)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public virtual void Add (string methodName, ManagementBaseObject inParameters, ManagementBaseObject outParameters)
-        {
-            throw new NotImplementedException ();
-        }
+		public virtual void Add (string methodName, ManagementBaseObject inParameters, ManagementBaseObject outParameters)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public void CopyTo (MethodData [] methodArray, int index)
-        {
-            throw new NotImplementedException ();
-        }
+		public void CopyTo (MethodData [] methodArray, int index)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public void CopyTo (Array array, int index)
-        {
-            throw new NotImplementedException ();
-        }
+		public void CopyTo (Array array, int index)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public MethodDataEnumerator GetEnumerator ()
-        {
-            throw new NotImplementedException ();
-        }
+		public MethodDataEnumerator GetEnumerator ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public virtual void Remove (string methodName)
-        {
-            throw new NotImplementedException ();
-        }
+		public virtual void Remove (string methodName)
+		{
+			throw new NotImplementedException ();
+		}
 
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return GetEnumerator ();
-        }
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			return GetEnumerator ();
+		}
 
-        public class MethodDataEnumerator : IEnumerator
-        {
-            internal MethodDataEnumerator ()
-            {
-            }
+		public class MethodDataEnumerator : IEnumerator
+		{
+			internal MethodDataEnumerator ()
+			{
+			}
 
-            public bool MoveNext ()
-            {
-                throw new NotImplementedException ();
-            }
+			public bool MoveNext ()
+			{
+				throw new NotImplementedException ();
+			}
 
-            public void Reset ()
-            {
-                throw new NotImplementedException ();
-            }
+			public void Reset ()
+			{
+				throw new NotImplementedException ();
+			}
 
-            public MethodData Current {
-                get {
-                    throw new NotImplementedException ();
-                }
-            }
+			public MethodData Current {
+				get {
+					throw new NotImplementedException ();
+				}
+			}
 
-            object IEnumerator.Current {
-                get {
-                    return Current;
-                }
-            }
-        }
-    }
+			object IEnumerator.Current {
+				get {
+					return Current;
+				}
+			}
+		}
+	}
 }

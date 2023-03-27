@@ -2,7 +2,7 @@
 // HttpWriter.cs - HttpWriter tests.
 //
 // Author:
-//    Miguel de Icaza (miguel@novell.com)
+//	Miguel de Icaza (miguel@novell.com)
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -38,73 +38,73 @@ using System.Web.Caching;
 
 namespace MonoCasTests.System.Web {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HttpWriterTest {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HttpWriterTest {
 
-        private HttpWriter writer;
+		private HttpWriter writer;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            HttpContext context = new HttpContext (null);
-            writer = (HttpWriter) context.Response.Output;
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			HttpContext context = new HttpContext (null);
+			writer = (HttpWriter) context.Response.Output;
+		}
 
-        [Test]
-        public void NullWrites ()
-        {
-            object null_object = null;
-            string null_string = null;
-            
-            writer.Write (null_string);
-            writer.Write (null_object);
+		[Test]
+		public void NullWrites ()
+		{
+			object null_object = null;
+			string null_string = null;
+			
+			writer.Write (null_string);
+			writer.Write (null_object);
 
-            writer.WriteString (null, 0, 0);
-        }
+			writer.WriteString (null, 0, 0);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void NullBufferException ()
-        {
-            writer.Write (null, 0, 0);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void NullBufferException ()
+		{
+			writer.Write (null, 0, 0);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void WriteInvalidArg1 ()
-        {
-            char [] x = new char [] { 'a' };
-            writer.Write (x, -1, 0);
-        }
-        
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void WriteInvalidArg2 ()
-        {
-            char [] x = new char [] { 'a' };
-            writer.Write (x, 0, -1);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void WriteInvalidArg1 ()
+		{
+			char [] x = new char [] { 'a' };
+			writer.Write (x, -1, 0);
+		}
+		
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void WriteInvalidArg2 ()
+		{
+			char [] x = new char [] { 'a' };
+			writer.Write (x, 0, -1);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void WriteStringInvalidArg1 ()
-        {
-            writer.WriteString ("hello", 0, -1);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void WriteStringInvalidArg1 ()
+		{
+			writer.WriteString ("hello", 0, -1);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void WriteStringInvalidArg2 ()
-        {
-            writer.WriteString ("hello", -1, 0);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void WriteStringInvalidArg2 ()
+		{
+			writer.WriteString ("hello", -1, 0);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void WriteStringInvalidArg3 ()
-        {
-            writer.WriteString ("hello", 0, 10);
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void WriteStringInvalidArg3 ()
+		{
+			writer.WriteString ("hello", 0, 10);
+		}
+	}
 }

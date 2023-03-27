@@ -3,8 +3,8 @@
 
 class X
 {
-    public static T CreateMethod<T> ()
-    {
-        return (T)null;
-    }
+	public static T CreateMethod<T> ()
+	{
+		return (T)null;
+	}
 }

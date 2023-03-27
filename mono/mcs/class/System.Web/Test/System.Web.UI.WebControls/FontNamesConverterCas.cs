@@ -1,9 +1,9 @@
 //
 // FontNamesConverterCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.FontNamesConverter
+//	- CAS unit tests for System.Web.UI.WebControls.FontNamesConverter
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,22 +38,22 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class FontNamesConverterCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class FontNamesConverterCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            FontNamesConverterTest unit = new FontNamesConverterTest ();
-            unit.Basic ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			FontNamesConverterTest unit = new FontNamesConverterTest ();
+			unit.Basic ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (FontNamesConverter); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (FontNamesConverter); }
+		}
+	}
 }

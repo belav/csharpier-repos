@@ -35,68 +35,68 @@ using Microsoft.VisualBasic;
 
 namespace GenStrings
 {
-    public class IntlStrings
-    {
-        //Random generator used to generate the random numbers.
-        private Random rand;
-        //*-------------------------------------------------------------------------------------------------
-        //    Name           : IntlStrings ( constructor )
-        //    Purpose        : Creates a random genrator and loads the default resources.
-        //*-------------------------------------------------------------------------------------------------
-        public IntlStrings()
-        {
-            //Create a random object.
-            rand = new Random(10);//'cint(DateTime.Now.Ticks));
-        }
+	public class IntlStrings
+	{
+		//Random generator used to generate the random numbers.
+		private Random rand;
+		//*-------------------------------------------------------------------------------------------------
+		//    Name           : IntlStrings ( constructor )
+		//    Purpose        : Creates a random genrator and loads the default resources.
+		//*-------------------------------------------------------------------------------------------------
+		public IntlStrings()
+		{
+			//Create a random object.
+			rand = new Random(10);//'cint(DateTime.Now.Ticks));
+		}
 
-        public IntlStrings(long lSeed):this(){}
+		public IntlStrings(long lSeed):this(){}
 
-        //*--------------------------------------------------------------------------------------------------
-        //    Name           : GetRandString
-        //    Purpose        : Generates a string composed of valid characters for the current locale ID. 
-        //                     String is retrieved from TEXT block in the resouce file.
-        //    Inputs         : iMaxChar -- int maximum number of unicode character to be generated.
-        //                   : bAbsolute -- if set true, exact number (iMaxChar) will be generated,
-        //                        if set false, number of generated chars will be random.
-        //                   : bValidate -- boolean, if true, verify generated characters are valid
-        //                        if false, does not verify generated characters
-        //    Outputs        : Random generated string
-        //*--------------------------------------------------------------------------------------------------        
-        public string GetString(int iMaxChar, bool bAbsolute, bool bValidate, bool bNoLeadNum)
-        {
-            string strTemp ;
-            if ( iMaxChar <= 0 )  // If the string length is zero, return an empty string
-            {
-                return String.Empty;
-            }
+		//*--------------------------------------------------------------------------------------------------
+		//    Name           : GetRandString
+		//    Purpose        : Generates a string composed of valid characters for the current locale ID. 
+		//                     String is retrieved from TEXT block in the resouce file.
+		//    Inputs         : iMaxChar -- int maximum number of unicode character to be generated.
+		//                   : bAbsolute -- if set true, exact number (iMaxChar) will be generated,
+		//                        if set false, number of generated chars will be random.
+		//                   : bValidate -- boolean, if true, verify generated characters are valid
+		//                        if false, does not verify generated characters
+		//    Outputs        : Random generated string
+		//*--------------------------------------------------------------------------------------------------        
+		public string GetString(int iMaxChar, bool bAbsolute, bool bValidate, bool bNoLeadNum)
+		{
+			string strTemp ;
+			if ( iMaxChar <= 0 )  // If the string length is zero, return an empty string
+			{
+				return String.Empty;
+			}
             
-            //'If (Not bAbsolute ) Then
-            //'    iMaxChar = rand.Next( 1  , iMaxChar )
-            //'End If
+			//'If (Not bAbsolute ) Then
+			//'    iMaxChar = rand.Next( 1  , iMaxChar )
+			//'End If
 
-            strTemp = GetString(iMaxChar, true, true);
+			strTemp = GetString(iMaxChar, true, true);
             
-            //Include all the intestring characters.
-            //rafi strTemp = InsertInterestingChars( strTemp );
-            return strTemp;
+			//Include all the intestring characters.
+			//rafi strTemp = InsertInterestingChars( strTemp );
+			return strTemp;
 
-        }
+		}
 
-        public string GetString(int iMaxChar, bool bAbsolute, bool bValidate)
-        {
-            int idx;
-            char[] chr_arr = new char[iMaxChar] ;
+		public string GetString(int iMaxChar, bool bAbsolute, bool bValidate)
+		{
+			int idx;
+			char[] chr_arr = new char[iMaxChar] ;
 
-            for (idx = 0 ;idx < iMaxChar ;idx++) //'GetString must return exact size of iMaxChar
-            {  //genstring must be random, otherwise ,if generated strings will be repeated, tests will fail.
-                chr_arr[idx] = System.Convert.ToChar(64 + (System.DateTime.Now.Ticks + idx) % 60) ;
-            }
-            //'return strBuffer
-            return new string(chr_arr);
+			for (idx = 0 ;idx < iMaxChar ;idx++) //'GetString must return exact size of iMaxChar
+			{  //genstring must be random, otherwise ,if generated strings will be repeated, tests will fail.
+				chr_arr[idx] = System.Convert.ToChar(64 + (System.DateTime.Now.Ticks + idx) % 60) ;
+			}
+			//'return strBuffer
+			return new string(chr_arr);
 
-        }
+		}
         
 
-    }
+	}
                       
 }

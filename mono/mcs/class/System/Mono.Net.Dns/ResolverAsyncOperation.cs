@@ -2,7 +2,7 @@
 // Mono.Net.Dns.ResolverAsyncOperation
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
+//	Gonzalo Paniagua Javier (gonzalo.mono@gmail.com)
 //
 // Copyright 2011 Gonzalo Paniagua Javier
 //
@@ -19,10 +19,10 @@
 // limitations under the License.
 //
 namespace Mono.Net.Dns {
-    enum ResolverAsyncOperation {
-        None,
-        GetHostEntry,
-        GetHostAddresses,
-    }
+	enum ResolverAsyncOperation {
+		None,
+		GetHostEntry,
+		GetHostAddresses,
+	}
 }
 

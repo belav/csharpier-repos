@@ -3,7 +3,7 @@
 
 class C
 {
-    public ~C ()
-    {
-    }
+	public ~C ()
+	{
+	}
 }

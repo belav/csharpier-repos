@@ -28,9 +28,9 @@
 
 namespace Mono.Cecil.Signatures {
 
-    internal sealed class TypeSpec {
+	internal sealed class TypeSpec {
 
-        public CustomMod [] CustomMods;
-        public SigType Type;
-    }
+		public CustomMod [] CustomMods;
+		public SigType Type;
+	}
 }

@@ -39,102 +39,102 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRow_RowState : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRow_RowState tc = new DataRow_RowState();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRow_RowState");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRow_RowState tc = new DataRow_RowState();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRow_RowState");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        DataTable myTable = new DataTable("myTable"); 
-        DataColumn dc = new DataColumn("Name",typeof(string));
-        myTable.Columns.Add(dc);
-        DataRow myRow;
+	public void run()
+	{
+		Exception exp = null;
+		DataTable myTable = new DataTable("myTable"); 
+		DataColumn dc = new DataColumn("Name",typeof(string));
+		myTable.Columns.Add(dc);
+		DataRow myRow;
 
-        // Create a new DataRow.
-        myRow = myTable.NewRow();
+		// Create a new DataRow.
+		myRow = myTable.NewRow();
 
-        // Detached row.
+		// Detached row.
         
-        try
-        {
-            BeginCase("Detached");
-            Compare( myRow.RowState , DataRowState.Detached );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("Detached");
+			Compare( myRow.RowState , DataRowState.Detached );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		myTable.Rows.Add(myRow);
+		// New row.
         
-        myTable.Rows.Add(myRow);
-        // New row.
+		try
+		{
+			BeginCase("Added");
+			Compare( myRow.RowState , DataRowState.Added );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		myTable.AcceptChanges();
+		// Unchanged row.
         
-        try
-        {
-            BeginCase("Added");
-            Compare( myRow.RowState , DataRowState.Added );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("Unchanged");
+			Compare( myRow.RowState , DataRowState.Unchanged );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		 
+		myRow["Name"] = "Scott";
+		// Modified row.
         
-        myTable.AcceptChanges();
-        // Unchanged row.
+		try
+		{
+			BeginCase("Modified");
+			Compare( myRow.RowState , DataRowState.Modified );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+			
+		myRow.Delete();
+		// Deleted row.
         
-        try
-        {
-            BeginCase("Unchanged");
-            Compare( myRow.RowState , DataRowState.Unchanged );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-         
-        myRow["Name"] = "Scott";
-        // Modified row.
-        
-        try
-        {
-            BeginCase("Modified");
-            Compare( myRow.RowState , DataRowState.Modified );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-            
-        myRow.Delete();
-        // Deleted row.
-        
-        try
-        {
-            BeginCase("Deleted");
-            Compare( myRow.RowState , DataRowState.Deleted );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-    }
+		try
+		{
+			BeginCase("Deleted");
+			Compare( myRow.RowState , DataRowState.Deleted );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+	}
 }
 }

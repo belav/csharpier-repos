@@ -2,7 +2,7 @@
 // System.Runtime.InteropServices.ComTypes.STGMEDIUM.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 
 //
@@ -32,12 +32,12 @@ using System;
 
 namespace System.Runtime.InteropServices.ComTypes
 {
-    public struct STGMEDIUM
-    {
-        [MarshalAs (UnmanagedType.IUnknown)]
-        public Object pUnkForRelease;
-        public TYMED tymed;
-        public IntPtr unionmember;
-    }
+	public struct STGMEDIUM
+	{
+		[MarshalAs (UnmanagedType.IUnknown)]
+		public Object pUnkForRelease;
+		public TYMED tymed;
+		public IntPtr unionmember;
+	}
 }
 

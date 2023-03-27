@@ -1,8 +1,8 @@
 class A<T>
 {
-    void Foo (B<T>.E arg)
-    {
-    }
+	void Foo (B<T>.E arg)
+	{
+	}
 }
 
 class B<U> : B
@@ -11,15 +11,15 @@ class B<U> : B
 
 class B
 {
-    public class E
-    {
-    }
+	public class E
+	{
+	}
 }
 
 class C
 {
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }
 

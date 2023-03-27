@@ -31,20 +31,20 @@ using System;
 
 namespace System.Data.Linq.Mapping
 {
-    [AttributeUsage (AttributeTargets.Method, AllowMultiple = true)]
-    public sealed class ResultTypeAttribute : Attribute
-    {
-        public ResultTypeAttribute (Type type)
-        {
-            if (type == null)
-                throw new ArgumentNullException ("type");
-            this.type = type;
-        }
+	[AttributeUsage (AttributeTargets.Method, AllowMultiple = true)]
+	public sealed class ResultTypeAttribute : Attribute
+	{
+		public ResultTypeAttribute (Type type)
+		{
+			if (type == null)
+				throw new ArgumentNullException ("type");
+			this.type = type;
+		}
 
-        Type type;
+		Type type;
 
-        public Type Type {
-            get { return type; }
-        }
-    }
+		public Type Type {
+			get { return type; }
+		}
+	}
 }

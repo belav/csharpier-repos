@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+ï»¿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -156,7 +156,7 @@ namespace System.Web.Mvc.Test
                 ValueProvider = new DictionaryValueProvider<object>(new Dictionary<string, object>()
                 {
                     { "countries.CA.Name", "Canada" },
-                    { "countries.CA.States[0]", "Québec" },
+                    { "countries.CA.States[0]", "QuÃ©bec" },
                     { "countries.CA.States[1]", "British Columbia" },
                     { "countries.US.Name", "United States" },
                     { "countries.US.States[0]", "Washington" },
@@ -175,7 +175,7 @@ namespace System.Web.Mvc.Test
             Assert.Equal("Canada", modelAsDictionary["CA"].Name);
             Assert.Equal("United States", modelAsDictionary["US"].Name);
             Assert.Equal(2, modelAsDictionary["CA"].States.Count());
-            Assert.Contains("Québec", modelAsDictionary["CA"].States);
+            Assert.Contains("QuÃ©bec", modelAsDictionary["CA"].States);
             Assert.Contains("British Columbia", modelAsDictionary["CA"].States);
             Assert.Equal(2, modelAsDictionary["US"].States.Count());
             Assert.Contains("Washington", modelAsDictionary["US"].States);
@@ -196,7 +196,7 @@ namespace System.Web.Mvc.Test
                 ValueProvider = new DictionaryValueProvider<object>(new Dictionary<string, object>()
                 {
                     { "countries[CA].Name", "Canada" },
-                    { "countries[CA].States[0]", "Québec" },
+                    { "countries[CA].States[0]", "QuÃ©bec" },
                     { "countries[CA].States[1]", "British Columbia" },
                     { "countries[US].Name", "United States" },
                     { "countries[US].States[0]", "Washington" },
@@ -215,7 +215,7 @@ namespace System.Web.Mvc.Test
             Assert.Equal("Canada", modelAsDictionary["CA"].Name);
             Assert.Equal("United States", modelAsDictionary["US"].Name);
             Assert.Equal(2, modelAsDictionary["CA"].States.Count());
-            Assert.Contains("Québec", modelAsDictionary["CA"].States);
+            Assert.Contains("QuÃ©bec", modelAsDictionary["CA"].States);
             Assert.Contains("British Columbia", modelAsDictionary["CA"].States);
             Assert.Equal(2, modelAsDictionary["US"].States.Count());
             Assert.Contains("Washington", modelAsDictionary["US"].States);
@@ -236,7 +236,7 @@ namespace System.Web.Mvc.Test
                 ValueProvider = new DictionaryValueProvider<object>(new Dictionary<string, object>()
                 {
                     { "countries[CA].Name", "Canada" },
-                    { "countries[CA].States[0]", "Québec" },
+                    { "countries[CA].States[0]", "QuÃ©bec" },
                     { "countries.CA.States[1]", "British Columbia" },
                     { "countries.US.Name", "United States" },
                     { "countries.US.States[0]", "Washington" },
@@ -255,7 +255,7 @@ namespace System.Web.Mvc.Test
             Assert.Equal("Canada", modelAsDictionary["CA"].Name);
             Assert.Equal("United States", modelAsDictionary["US"].Name);
             string state = Assert.Single(modelAsDictionary["CA"].States);
-            Assert.Contains("Québec", state);
+            Assert.Contains("QuÃ©bec", state);
 
             // We do not accept double notation for a same entry, so we can't find that state.
             Assert.DoesNotContain("British Columbia", state);

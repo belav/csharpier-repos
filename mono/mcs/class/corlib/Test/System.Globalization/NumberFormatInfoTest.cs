@@ -33,31 +33,31 @@ using System.Globalization;
 
 namespace MonoTests.System.Globalization
 {
-    [TestFixture]
-    public class NumberFormatInfoTest
-    {
-        [Test]
-        public void CurrencyDecimalDigits ()
-        {
-            CultureInfo c;
-            
-            c = CultureInfo.GetCultureInfo ("id-ID");
-            Assert.AreEqual (0, c.NumberFormat.CurrencyDecimalDigits, "#1");
+	[TestFixture]
+	public class NumberFormatInfoTest
+	{
+		[Test]
+		public void CurrencyDecimalDigits ()
+		{
+			CultureInfo c;
+			
+			c = CultureInfo.GetCultureInfo ("id-ID");
+			Assert.AreEqual (0, c.NumberFormat.CurrencyDecimalDigits, "#1");
 
-            c = CultureInfo.GetCultureInfo ("is-IS");
-            Assert.AreEqual (0, c.NumberFormat.CurrencyDecimalDigits, "#2");
+			c = CultureInfo.GetCultureInfo ("is-IS");
+			Assert.AreEqual (0, c.NumberFormat.CurrencyDecimalDigits, "#2");
 
-            c = CultureInfo.InvariantCulture;
-            Assert.AreEqual (2, c.NumberFormat.CurrencyDecimalDigits, "#3");
-        }
+			c = CultureInfo.InvariantCulture;
+			Assert.AreEqual (2, c.NumberFormat.CurrencyDecimalDigits, "#3");
+		}
 
-        [Test]
-        public void AllCulturesCanParseNegativeNumber ()
-        {
-            foreach (var c in CultureInfo.GetCultures (CultureTypes.AllCultures))
-            {
-                int.Parse ("-1", c);
-            }
-        }
-    }
+		[Test]
+		public void AllCulturesCanParseNegativeNumber ()
+		{
+			foreach (var c in CultureInfo.GetCultures (CultureTypes.AllCultures))
+			{
+				int.Parse ("-1", c);
+			}
+		}
+	}
 }

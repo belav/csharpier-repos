@@ -1,4 +1,4 @@
-using Xunit;
+﻿using Xunit;
 using Test.Cryptography;
 using System.Formats.Cbor;
 using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;

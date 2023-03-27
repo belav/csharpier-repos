@@ -2,7 +2,7 @@
 // System.Net.Security.SslPolicyErrors.cs
 //
 // Authors:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 
 //
@@ -27,12 +27,12 @@
 //
 namespace System.Net.Security 
 {
-    [Flags]
-    public enum SslPolicyErrors
-    {
-        None = 0,
-        RemoteCertificateNotAvailable = 1,
-        RemoteCertificateNameMismatch = 2,
-        RemoteCertificateChainErrors = 4,
-    }
+	[Flags]
+	public enum SslPolicyErrors
+	{
+		None = 0,
+		RemoteCertificateNotAvailable = 1,
+		RemoteCertificateNameMismatch = 2,
+		RemoteCertificateChainErrors = 4,
+	}
 }

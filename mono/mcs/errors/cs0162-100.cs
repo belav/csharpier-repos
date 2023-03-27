@@ -6,12 +6,12 @@ using System;
 
 class X
 {
-    public static int Main ()
-    {
-        try {
-            throw new ApplicationException ();
-        } catch when (false) {
-            return 0;
-        }
-    }
+	public static int Main ()
+	{
+		try {
+			throw new ApplicationException ();
+		} catch when (false) {
+			return 0;
+		}
+	}
 }

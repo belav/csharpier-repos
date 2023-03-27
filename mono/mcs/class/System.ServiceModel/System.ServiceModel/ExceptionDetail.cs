@@ -35,54 +35,54 @@ using System.Threading;
 
 namespace System.ServiceModel
 {
-    [DataContract]
-    public class ExceptionDetail
-    {
-        
-        public ExceptionDetail (Exception exception)
-        {
-            if (exception == null)
-                throw new ArgumentNullException ("exception");
-            Message = exception.Message;
-            StackTrace = exception.StackTrace;
-            Type = exception.GetType ().FullName;
-            if (exception.InnerException != null)
-                InnerException = new ExceptionDetail (exception.InnerException);
-        }
+	[DataContract]
+	public class ExceptionDetail
+	{
+		
+		public ExceptionDetail (Exception exception)
+		{
+			if (exception == null)
+				throw new ArgumentNullException ("exception");
+			Message = exception.Message;
+			StackTrace = exception.StackTrace;
+			Type = exception.GetType ().FullName;
+			if (exception.InnerException != null)
+				InnerException = new ExceptionDetail (exception.InnerException);
+		}
 
-        [DataMember]
-        public string HelpLink {
-            get;
-            set;
-        }
+		[DataMember]
+		public string HelpLink {
+			get;
+			set;
+		}
 
-        [DataMember]
-        public ExceptionDetail InnerException {
-            get;
-            set;
-        }
+		[DataMember]
+		public ExceptionDetail InnerException {
+			get;
+			set;
+		}
 
-        [DataMember]
-        public string Message {
-            get;
-            set;
-        }
+		[DataMember]
+		public string Message {
+			get;
+			set;
+		}
 
-        [DataMember]
-        public string StackTrace {
-            get;
-            set;
-        }
+		[DataMember]
+		public string StackTrace {
+			get;
+			set;
+		}
 
-        [DataMember]
-        public string Type {
-            get;
-            set;
-        }
+		[DataMember]
+		public string Type {
+			get;
+			set;
+		}
 
-        public override string ToString ()
-        {
-            return Message;
-        }
-    }
+		public override string ToString ()
+		{
+			return Message;
+		}
+	}
 }

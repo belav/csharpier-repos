@@ -31,10 +31,10 @@ using System;
 
 namespace System.Configuration.Internal
 {
-    [System.Runtime.InteropServices.ComVisible (false)]
-    public interface IConfigurationManagerHelper
-    {
-        void EnsureNetConfigLoaded ();
-    }
+	[System.Runtime.InteropServices.ComVisible (false)]
+	public interface IConfigurationManagerHelper
+	{
+		void EnsureNetConfigLoaded ();
+	}
 }
 

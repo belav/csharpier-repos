@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Sequential)]
 internal unsafe struct _Port {
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst=128)] char[] port;
+	[MarshalAs(UnmanagedType.ByValTStr, SizeConst=128)] char[] port;
 }
 
 unsafe class d {
-    static void Main ()
-    {
-        _Port * port = null;
-    }
+	static void Main ()
+	{
+		_Port * port = null;
+	}
 }

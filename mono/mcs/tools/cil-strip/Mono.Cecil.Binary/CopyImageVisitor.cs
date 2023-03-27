@@ -28,94 +28,94 @@
 
 namespace Mono.Cecil.Binary {
 
-    sealed class CopyImageVisitor : BaseImageVisitor {
+	sealed class CopyImageVisitor : BaseImageVisitor {
 
-        Image m_newImage;
-        Image m_originalImage;
+		Image m_newImage;
+		Image m_originalImage;
 
-        public CopyImageVisitor (Image originalImage)
-        {
-            m_originalImage = originalImage;
-        }
+		public CopyImageVisitor (Image originalImage)
+		{
+			m_originalImage = originalImage;
+		}
 
-        public override void VisitImage (Image img)
-        {
-            m_newImage = img;
-            if (m_originalImage.DebugHeader != null)
-                m_newImage.AddDebugHeader ();
+		public override void VisitImage (Image img)
+		{
+			m_newImage = img;
+			if (m_originalImage.DebugHeader != null)
+				m_newImage.AddDebugHeader ();
 
-            m_newImage.CLIHeader.Flags = m_originalImage.CLIHeader.Flags;
-        }
+			m_newImage.CLIHeader.Flags = m_originalImage.CLIHeader.Flags;
+		}
 
-        public override void VisitDebugHeader (DebugHeader dbgHeader)
-        {
-            DebugHeader old = m_originalImage.DebugHeader;
-            dbgHeader.Age = old.Age;
-            dbgHeader.Characteristics = old.Characteristics;
-            dbgHeader.FileName = old.FileName;
-            dbgHeader.Signature = old.Signature;
-            dbgHeader.TimeDateStamp = ImageInitializer.TimeDateStampFromEpoch();
-            dbgHeader.Type = old.Type;
-        }
+		public override void VisitDebugHeader (DebugHeader dbgHeader)
+		{
+			DebugHeader old = m_originalImage.DebugHeader;
+			dbgHeader.Age = old.Age;
+			dbgHeader.Characteristics = old.Characteristics;
+			dbgHeader.FileName = old.FileName;
+			dbgHeader.Signature = old.Signature;
+			dbgHeader.TimeDateStamp = ImageInitializer.TimeDateStampFromEpoch();
+			dbgHeader.Type = old.Type;
+		}
 
-        public override void VisitSectionCollection (SectionCollection sections)
-        {
-            Section old = null;
-            foreach (Section s in m_originalImage.Sections)
-                if (s.Name == Section.Resources)
-                    old = s;
+		public override void VisitSectionCollection (SectionCollection sections)
+		{
+			Section old = null;
+			foreach (Section s in m_originalImage.Sections)
+				if (s.Name == Section.Resources)
+					old = s;
 
-            if (old == null)
-                return;
+			if (old == null)
+				return;
 
-            Section rsrc = new Section ();
-            rsrc.Characteristics = old.Characteristics;
-            rsrc.Name = old.Name;
+			Section rsrc = new Section ();
+			rsrc.Characteristics = old.Characteristics;
+			rsrc.Name = old.Name;
 
-            sections.Add (rsrc);
-        }
+			sections.Add (rsrc);
+		}
 
-        public override void TerminateImage (Image img)
-        {
-            if (m_originalImage.ResourceDirectoryRoot == null)
-                return;
+		public override void TerminateImage (Image img)
+		{
+			if (m_originalImage.ResourceDirectoryRoot == null)
+				return;
 
-            m_newImage.ResourceDirectoryRoot = CloneResourceDirectoryTable (m_originalImage.ResourceDirectoryRoot);
-        }
+			m_newImage.ResourceDirectoryRoot = CloneResourceDirectoryTable (m_originalImage.ResourceDirectoryRoot);
+		}
 
-        ResourceDirectoryTable CloneResourceDirectoryTable (ResourceDirectoryTable old)
-        {
-            ResourceDirectoryTable rdt = new ResourceDirectoryTable ();
-            foreach (ResourceDirectoryEntry oldEntry in old.Entries)
-                rdt.Entries.Add (CloneResourceDirectoryEntry (oldEntry));
+		ResourceDirectoryTable CloneResourceDirectoryTable (ResourceDirectoryTable old)
+		{
+			ResourceDirectoryTable rdt = new ResourceDirectoryTable ();
+			foreach (ResourceDirectoryEntry oldEntry in old.Entries)
+				rdt.Entries.Add (CloneResourceDirectoryEntry (oldEntry));
 
-            return rdt;
-        }
+			return rdt;
+		}
 
-        ResourceDirectoryEntry CloneResourceDirectoryEntry (ResourceDirectoryEntry old)
-        {
-            ResourceDirectoryEntry rde;
-            if (old.IdentifiedByName)
-                rde = new ResourceDirectoryEntry(old.Name);
-            else
-                rde = new ResourceDirectoryEntry (old.ID);
+		ResourceDirectoryEntry CloneResourceDirectoryEntry (ResourceDirectoryEntry old)
+		{
+			ResourceDirectoryEntry rde;
+			if (old.IdentifiedByName)
+				rde = new ResourceDirectoryEntry(old.Name);
+			else
+				rde = new ResourceDirectoryEntry (old.ID);
 
-            if (old.Child is ResourceDirectoryTable)
-                rde.Child = CloneResourceDirectoryTable (old.Child as ResourceDirectoryTable);
-            else
-                rde.Child = CloneResourceDataEntry (old.Child as ResourceDataEntry);
+			if (old.Child is ResourceDirectoryTable)
+				rde.Child = CloneResourceDirectoryTable (old.Child as ResourceDirectoryTable);
+			else
+				rde.Child = CloneResourceDataEntry (old.Child as ResourceDataEntry);
 
-            return rde;
-        }
+			return rde;
+		}
 
-        ResourceDataEntry CloneResourceDataEntry (ResourceDataEntry old)
-        {
-            ResourceDataEntry rde = new ResourceDataEntry ();
-            rde.Size = old.Size;
-            rde.Codepage = old.Codepage;
-            rde.ResourceData = old.ResourceData;
+		ResourceDataEntry CloneResourceDataEntry (ResourceDataEntry old)
+		{
+			ResourceDataEntry rde = new ResourceDataEntry ();
+			rde.Size = old.Size;
+			rde.Codepage = old.Codepage;
+			rde.ResourceData = old.ResourceData;
 
-            return rde;
-        }
-    }
+			return rde;
+		}
+	}
 }

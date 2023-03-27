@@ -3,8 +3,8 @@
 
 class X
 {
-    static void Main ()
-    {
-        object o = default(void);
-    }
+	static void Main ()
+	{
+		object o = default(void);
+	}
 }

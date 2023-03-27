@@ -2,7 +2,7 @@
 // GatherLocals.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,61 +31,61 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.AST.Visitors;
 
 namespace Mono.CodeContracts.Static.ContractExtraction {
-    class GatherLocals : NodeInspector {
-        public HashSet<Local> Locals = new HashSet<Local> ();
-        private Local exempt_result_local;
+	class GatherLocals : NodeInspector {
+		public HashSet<Local> Locals = new HashSet<Local> ();
+		private Local exempt_result_local;
 
-        public override void VisitLocal (Local node)
-        {
-            if (!IsLocalExempt (node) && !this.Locals.Contains (node))
-                this.Locals.Add (node);
-            base.VisitLocal (node);
-        }
+		public override void VisitLocal (Local node)
+		{
+			if (!IsLocalExempt (node) && !this.Locals.Contains (node))
+				this.Locals.Add (node);
+			base.VisitLocal (node);
+		}
 
-        public override void VisitAssignmentStatement (AssignmentStatement node)
-        {
-            if (node.Target is Local && IsResultExpression (node.Source))
-                this.exempt_result_local = (Local) node.Target;
-            base.VisitAssignmentStatement (node);
-        }
+		public override void VisitAssignmentStatement (AssignmentStatement node)
+		{
+			if (node.Target is Local && IsResultExpression (node.Source))
+				this.exempt_result_local = (Local) node.Target;
+			base.VisitAssignmentStatement (node);
+		}
 
-        private bool IsResultExpression (Expression expression)
-        {
-            var methodCall = expression as MethodCall;
-            if (methodCall == null)
-                return false;
+		private bool IsResultExpression (Expression expression)
+		{
+			var methodCall = expression as MethodCall;
+			if (methodCall == null)
+				return false;
 
-            var memberBinding = methodCall.Callee as MemberBinding;
-            if (memberBinding == null)
-                return false;
+			var memberBinding = methodCall.Callee as MemberBinding;
+			if (memberBinding == null)
+				return false;
 
-            var method = memberBinding.BoundMember as Method;
-            if (method == null)
-                return false;
+			var method = memberBinding.BoundMember as Method;
+			if (method == null)
+				return false;
 
-            return method.HasGenericParameters && method.Name == "Result" && method.DeclaringType != null && method.DeclaringType.Name == "Contract";
-        }
+			return method.HasGenericParameters && method.Name == "Result" && method.DeclaringType != null && method.DeclaringType.Name == "Contract";
+		}
 
-        private bool IsLocalExempt (Local local)
-        {
-            if (local == this.exempt_result_local)
-                return true;
-            bool result = false;
-            if (local.Name != null && !local.Name.StartsWith ("local"))
-                result = true;
-            TypeNode type = local.Type;
-            if (type == null || HelperMethods.IsCompilerGenerated (type) || local.Name == "_preconditionHolds")
-                return true;
+		private bool IsLocalExempt (Local local)
+		{
+			if (local == this.exempt_result_local)
+				return true;
+			bool result = false;
+			if (local.Name != null && !local.Name.StartsWith ("local"))
+				result = true;
+			TypeNode type = local.Type;
+			if (type == null || HelperMethods.IsCompilerGenerated (type) || local.Name == "_preconditionHolds")
+				return true;
 
-            if (result)
-                return LocalNameIsExempt (local.Name);
+			if (result)
+				return LocalNameIsExempt (local.Name);
 
-            return true;
-        }
+			return true;
+		}
 
-        private bool LocalNameIsExempt (string name)
-        {
-            return name.StartsWith ("CS$") || name.StartsWith ("VB$");
-        }
-    }
+		private bool LocalNameIsExempt (string name)
+		{
+			return name.StartsWith ("CS$") || name.StartsWith ("VB$");
+		}
+	}
 }

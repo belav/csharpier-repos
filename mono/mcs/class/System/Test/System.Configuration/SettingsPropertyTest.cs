@@ -3,7 +3,7 @@
 // System.Configuration.SettingsProperty.
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,109 +36,109 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
 
-    [TestFixture]
-    public class SettingsPropertyTest {
+	[TestFixture]
+	public class SettingsPropertyTest {
 
-        [Test]
-        public void Ctor_1 ()
-        {
-            SettingsProperty p = new SettingsProperty ("property",
-                                   typeof (int),
-                                   null,
-                                   true,
-                                   10,
-                                   SettingsSerializeAs.Binary,
-                                   null,
-                                   true,
-                                   false);
+		[Test]
+		public void Ctor_1 ()
+		{
+			SettingsProperty p = new SettingsProperty ("property",
+								   typeof (int),
+								   null,
+								   true,
+								   10,
+								   SettingsSerializeAs.Binary,
+								   null,
+								   true,
+								   false);
 
-            Assert.AreEqual ("property", p.Name, "A1");
-            Assert.AreEqual (typeof (int), p.PropertyType, "A2");
-            Assert.AreEqual (null, p.Provider, "A3");
-            Assert.AreEqual (10, (int)p.DefaultValue, "A4");
-            Assert.AreEqual (SettingsSerializeAs.Binary, p.SerializeAs, "A5");
-            Assert.IsNull (p.Attributes, "A6");
-            Assert.IsTrue (p.ThrowOnErrorDeserializing, "A7");
-            Assert.IsFalse (p.ThrowOnErrorSerializing, "A8");
-            Assert.IsTrue (p.IsReadOnly, "A9");
-        }
+			Assert.AreEqual ("property", p.Name, "A1");
+			Assert.AreEqual (typeof (int), p.PropertyType, "A2");
+			Assert.AreEqual (null, p.Provider, "A3");
+			Assert.AreEqual (10, (int)p.DefaultValue, "A4");
+			Assert.AreEqual (SettingsSerializeAs.Binary, p.SerializeAs, "A5");
+			Assert.IsNull (p.Attributes, "A6");
+			Assert.IsTrue (p.ThrowOnErrorDeserializing, "A7");
+			Assert.IsFalse (p.ThrowOnErrorSerializing, "A8");
+			Assert.IsTrue (p.IsReadOnly, "A9");
+		}
 
-        [Test]
-        public void Ctor_2 ()
-        {
-            SettingsProperty q = new SettingsProperty ("property",
-                                   typeof (int),
-                                   null,
-                                   true,
-                                   10,
-                                   SettingsSerializeAs.Binary,
-                                   new SettingsAttributeDictionary(),
-                                   true,
-                                   false);
+		[Test]
+		public void Ctor_2 ()
+		{
+			SettingsProperty q = new SettingsProperty ("property",
+								   typeof (int),
+								   null,
+								   true,
+								   10,
+								   SettingsSerializeAs.Binary,
+								   new SettingsAttributeDictionary(),
+								   true,
+								   false);
 
-            SettingsProperty p = new SettingsProperty (q);
+			SettingsProperty p = new SettingsProperty (q);
 
-            Assert.AreEqual ("property", p.Name, "A1");
-            Assert.AreEqual (typeof (int), p.PropertyType, "A2");
-            Assert.AreEqual (null, p.Provider, "A3");
-            Assert.AreEqual (10, (int)p.DefaultValue, "A4");
-            Assert.AreEqual (SettingsSerializeAs.Binary, p.SerializeAs, "A5");
-            Assert.IsNotNull (p.Attributes, "A6");
-            Assert.IsTrue (p.ThrowOnErrorDeserializing, "A7");
-            Assert.IsFalse (p.ThrowOnErrorSerializing, "A8");
-            Assert.IsTrue (p.IsReadOnly, "A9");
-        }
+			Assert.AreEqual ("property", p.Name, "A1");
+			Assert.AreEqual (typeof (int), p.PropertyType, "A2");
+			Assert.AreEqual (null, p.Provider, "A3");
+			Assert.AreEqual (10, (int)p.DefaultValue, "A4");
+			Assert.AreEqual (SettingsSerializeAs.Binary, p.SerializeAs, "A5");
+			Assert.IsNotNull (p.Attributes, "A6");
+			Assert.IsTrue (p.ThrowOnErrorDeserializing, "A7");
+			Assert.IsFalse (p.ThrowOnErrorSerializing, "A8");
+			Assert.IsTrue (p.IsReadOnly, "A9");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Ctor_2_AttributesNull ()
-        {
-            /* same as above, but a null
-             * SettingsAttributeDictionary, which causes a
-             * ANE in the ctor. */
-            SettingsProperty q = new SettingsProperty ("property",
-                                   typeof (int),
-                                   null,
-                                   true,
-                                   10,
-                                   SettingsSerializeAs.Binary,
-                                   null,
-                                   true,
-                                   false);
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void Ctor_2_AttributesNull ()
+		{
+			/* same as above, but a null
+			 * SettingsAttributeDictionary, which causes a
+			 * ANE in the ctor. */
+			SettingsProperty q = new SettingsProperty ("property",
+								   typeof (int),
+								   null,
+								   true,
+								   10,
+								   SettingsSerializeAs.Binary,
+								   null,
+								   true,
+								   false);
 
-            SettingsProperty p = new SettingsProperty (q);
-        }
+			SettingsProperty p = new SettingsProperty (q);
+		}
 
-        [Test]
-        public void Ctor_2_NameNull ()
-        {
-            SettingsProperty q = new SettingsProperty (null,
-                                   typeof (int),
-                                   null,
-                                   true,
-                                   10,
-                                   SettingsSerializeAs.Binary,
-                                   new SettingsAttributeDictionary(),
-                                   true,
-                                   false);
-        }
+		[Test]
+		public void Ctor_2_NameNull ()
+		{
+			SettingsProperty q = new SettingsProperty (null,
+								   typeof (int),
+								   null,
+								   true,
+								   10,
+								   SettingsSerializeAs.Binary,
+								   new SettingsAttributeDictionary(),
+								   true,
+								   false);
+		}
 
-        [Test]
-        public void Ctor_3 ()
-        {
-            SettingsProperty p = new SettingsProperty ("property");
+		[Test]
+		public void Ctor_3 ()
+		{
+			SettingsProperty p = new SettingsProperty ("property");
 
-            Assert.AreEqual ("property", p.Name, "A1");
-            Assert.AreEqual (null, p.PropertyType, "A2");
-            Assert.AreEqual (null, p.Provider, "A3");
-            Assert.AreEqual (null, p.DefaultValue, "A4");
-            Assert.AreEqual (SettingsSerializeAs.String, p.SerializeAs, "A5");
-            Assert.IsNotNull (p.Attributes, "A6");
-            Assert.IsFalse (p.ThrowOnErrorDeserializing, "A7");
-            Assert.IsFalse (p.ThrowOnErrorSerializing, "A8");
-            Assert.IsFalse (p.IsReadOnly, "A9");
-        }
-    }
+			Assert.AreEqual ("property", p.Name, "A1");
+			Assert.AreEqual (null, p.PropertyType, "A2");
+			Assert.AreEqual (null, p.Provider, "A3");
+			Assert.AreEqual (null, p.DefaultValue, "A4");
+			Assert.AreEqual (SettingsSerializeAs.String, p.SerializeAs, "A5");
+			Assert.IsNotNull (p.Attributes, "A6");
+			Assert.IsFalse (p.ThrowOnErrorDeserializing, "A7");
+			Assert.IsFalse (p.ThrowOnErrorSerializing, "A8");
+			Assert.IsFalse (p.IsReadOnly, "A9");
+		}
+	}
 
 }
 

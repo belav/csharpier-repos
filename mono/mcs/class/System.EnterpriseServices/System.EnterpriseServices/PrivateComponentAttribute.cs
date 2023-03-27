@@ -32,16 +32,16 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Class)]
-    [ComVisible(false)]
-    public sealed class PrivateComponentAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class)]
+	[ComVisible(false)]
+	public sealed class PrivateComponentAttribute : Attribute {
 
-        #region Constructors
+		#region Constructors
 
-        public PrivateComponentAttribute () 
-        {
-        }
+		public PrivateComponentAttribute () 
+		{
+		}
 
-        #endregion // Constructors
-    }
+		#endregion // Constructors
+	}
 }

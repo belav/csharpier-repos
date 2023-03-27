@@ -28,66 +28,66 @@
 
 namespace Mono.Cecil.Signatures {
 
-    using System;
+	using System;
 
-    using Mono.Cecil;
+	using Mono.Cecil;
 
-    internal sealed class MarshalSig {
+	internal sealed class MarshalSig {
 
-        public NativeType NativeInstrinsic;
-        public IMarshalSigSpec Spec;
+		public NativeType NativeInstrinsic;
+		public IMarshalSigSpec Spec;
 
-        public MarshalSig (NativeType nt)
-        {
-            this.NativeInstrinsic = nt;
-        }
+		public MarshalSig (NativeType nt)
+		{
+			this.NativeInstrinsic = nt;
+		}
 
-        internal interface IMarshalSigSpec {
-        }
+		internal interface IMarshalSigSpec {
+		}
 
-        internal sealed class Array : IMarshalSigSpec {
+		internal sealed class Array : IMarshalSigSpec {
 
-            public NativeType ArrayElemType;
-            public int ParamNum;
-            public int ElemMult;
-            public int NumElem;
+			public NativeType ArrayElemType;
+			public int ParamNum;
+			public int ElemMult;
+			public int NumElem;
 
-            public Array ()
-            {
-                this.ParamNum = 0;
-                this.ElemMult = 0;
-                this.NumElem = 0;
-            }
-        }
+			public Array ()
+			{
+				this.ParamNum = 0;
+				this.ElemMult = 0;
+				this.NumElem = 0;
+			}
+		}
 
-        internal sealed class CustomMarshaler : IMarshalSigSpec {
+		internal sealed class CustomMarshaler : IMarshalSigSpec {
 
-            public string Guid;
-            public string UnmanagedType;
-            public string ManagedType;
-            public string Cookie;
-        }
+			public string Guid;
+			public string UnmanagedType;
+			public string ManagedType;
+			public string Cookie;
+		}
 
-        internal sealed class FixedArray : IMarshalSigSpec {
+		internal sealed class FixedArray : IMarshalSigSpec {
 
-            public int NumElem;
-            public NativeType ArrayElemType;
+			public int NumElem;
+			public NativeType ArrayElemType;
 
-            public FixedArray ()
-            {
-                this.NumElem = 0;
-                this.ArrayElemType = NativeType.NONE;
-            }
-        }
+			public FixedArray ()
+			{
+				this.NumElem = 0;
+				this.ArrayElemType = NativeType.NONE;
+			}
+		}
 
-        internal sealed class SafeArray : IMarshalSigSpec {
+		internal sealed class SafeArray : IMarshalSigSpec {
 
-            public VariantType ArrayElemType;
-        }
+			public VariantType ArrayElemType;
+		}
 
-        internal sealed class FixedSysString : IMarshalSigSpec {
+		internal sealed class FixedSysString : IMarshalSigSpec {
 
-            public int Size;
-        }
-    }
+			public int Size;
+		}
+	}
 }

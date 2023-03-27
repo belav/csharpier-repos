@@ -33,21 +33,21 @@ using System;
 
 namespace System.Web.UI.Design
 {
-    /// <summary>
-    /// Provides the features required to support both complex and simple scenarios when binding to a data source.
-    /// </summary>
-    public interface IDataSourceFieldSchema
-    {
-        Type DataType { get; }
-        bool Identity { get; }
-        bool IsReadOnly { get; }
-        bool IsUnique { get; }
-        int Length { get; }
-        string Name { get; }
-        bool Nullable { get; }
-        int Precision { get; }
-        bool PrimaryKey { get; }
-        int Scale { get; }
-    }
+	/// <summary>
+	/// Provides the features required to support both complex and simple scenarios when binding to a data source.
+	/// </summary>
+	public interface IDataSourceFieldSchema
+	{
+		Type DataType { get; }
+		bool Identity { get; }
+		bool IsReadOnly { get; }
+		bool IsUnique { get; }
+		int Length { get; }
+		string Name { get; }
+		bool Nullable { get; }
+		int Precision { get; }
+		bool PrimaryKey { get; }
+		int Scale { get; }
+	}
 }
 

@@ -4,22 +4,22 @@ using System;
 
 public class Foo<T,U>
 {
-    public void Test (T index)
-    {
-        Console.WriteLine ("Test 1: {0}", index);
-    }
+	public void Test (T index)
+	{
+		Console.WriteLine ("Test 1: {0}", index);
+	}
 
-    public void Test (U index)
-    {
-        Console.WriteLine ("Test 2: {0}", index);
-    }
+	public void Test (U index)
+	{
+		Console.WriteLine ("Test 2: {0}", index);
+	}
 }
 
 class X
 {
-    static void Main ()
-    {
-        Foo<int,int> foo = new Foo<int,int> ();
-        foo.Test (3);
-    }
+	static void Main ()
+	{
+		Foo<int,int> foo = new Foo<int,int> ();
+		foo.Test (3);
+	}
 }

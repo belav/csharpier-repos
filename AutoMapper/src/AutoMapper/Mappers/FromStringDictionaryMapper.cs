@@ -1,4 +1,4 @@
-using StringDictionary = System.Collections.Generic.IDictionary<string, object>;
+﻿using StringDictionary = System.Collections.Generic.IDictionary<string, object>;
 namespace AutoMapper.Internal.Mappers;
 public class FromStringDictionaryMapper : IObjectMapper
 {

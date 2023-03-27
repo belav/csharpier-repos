@@ -37,201 +37,201 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing.Printing
 {
-    [Serializable]
-    public class PageSettings : ICloneable
-    {
-        internal bool color;
-        internal bool landscape;
-        internal PaperSize paperSize;
-        internal PaperSource paperSource;
-        internal PrinterResolution printerResolution;
+	[Serializable]
+	public class PageSettings : ICloneable
+	{
+		internal bool color;
+		internal bool landscape;
+		internal PaperSize paperSize;
+		internal PaperSource paperSource;
+		internal PrinterResolution printerResolution;
 
-        // create a new default Margins object (is 1 inch for all margins)
-        Margins margins = new Margins();
+		// create a new default Margins object (is 1 inch for all margins)
+		Margins margins = new Margins();
 #pragma warning disable 649
-        float hardMarginX;
-        float hardMarginY;
-        RectangleF printableArea;        
-        PrinterSettings printerSettings;
+		float hardMarginX;
+		float hardMarginY;
+		RectangleF printableArea;		
+		PrinterSettings printerSettings;
 #pragma warning restore 649
-        
-        public PageSettings() : this(new PrinterSettings())
-        {
-        }
-        
-        public PageSettings(PrinterSettings printerSettings)
-        {
-            PrinterSettings = printerSettings;
-            
-            this.color = printerSettings.DefaultPageSettings.color;
-            this.landscape = printerSettings.DefaultPageSettings.landscape;
-            this.paperSize = printerSettings.DefaultPageSettings.paperSize;
-            this.paperSource = printerSettings.DefaultPageSettings.paperSource;
-            this.printerResolution = printerSettings.DefaultPageSettings.printerResolution;
-        }
-        
-        // used by PrinterSettings.DefaultPageSettings
-        internal PageSettings(PrinterSettings printerSettings, bool color, bool landscape, PaperSize paperSize, PaperSource paperSource, PrinterResolution printerResolution)
-        {
-            PrinterSettings = printerSettings;
-            this.color = color;
-            this.landscape = landscape;
-            this.paperSize = paperSize;
-            this.paperSource = paperSource;
-            this.printerResolution = printerResolution;
-        }
+		
+		public PageSettings() : this(new PrinterSettings())
+		{
+		}
+		
+		public PageSettings(PrinterSettings printerSettings)
+		{
+			PrinterSettings = printerSettings;
+			
+			this.color = printerSettings.DefaultPageSettings.color;
+			this.landscape = printerSettings.DefaultPageSettings.landscape;
+			this.paperSize = printerSettings.DefaultPageSettings.paperSize;
+			this.paperSource = printerSettings.DefaultPageSettings.paperSource;
+			this.printerResolution = printerSettings.DefaultPageSettings.printerResolution;
+		}
+		
+		// used by PrinterSettings.DefaultPageSettings
+		internal PageSettings(PrinterSettings printerSettings, bool color, bool landscape, PaperSize paperSize, PaperSource paperSource, PrinterResolution printerResolution)
+		{
+			PrinterSettings = printerSettings;
+			this.color = color;
+			this.landscape = landscape;
+			this.paperSize = paperSize;
+			this.paperSource = paperSource;
+			this.printerResolution = printerResolution;
+		}
 
-        //props
-        public Rectangle Bounds{
-            get{
-                int width = this.paperSize.Width;
-                int height = this.paperSize.Height;
-                
-                width -= this.margins.Left + this.margins.Right;
-                height -= this.margins.Top + this.margins.Bottom;
-                
-                if (this.landscape) {
-                    // swap width and height
-                    int tmp = width;
-                    width = height;
-                    height = tmp;
-                }
-                return new Rectangle (this.margins.Left, this.margins.Top, width, height);
-            }
-        }
-        
-        public bool Color{
-            get{
-                if (!this.printerSettings.IsValid)
-                    throw new InvalidPrinterException(this.printerSettings);
-                return color;
-            }
-            set{
-                color = value;
-            }
-        }
-        
-        public bool Landscape {
-            get{
-                if (!this.printerSettings.IsValid)
-                    throw new InvalidPrinterException(this.printerSettings);
-                return landscape;
-            }
-            set{
-                landscape = value;
-            }
-        }
-        
-        public Margins Margins{
-            get{
-                if (!this.printerSettings.IsValid)
-                    throw new InvalidPrinterException(this.printerSettings);
-                return margins;
-            }
-            set{
-                margins = value;
-            }
-        }
-        
-        public PaperSize PaperSize{
-            get{
-                if (!this.printerSettings.IsValid)
-                    throw new InvalidPrinterException(this.printerSettings);
-                return paperSize;
-            }
-            set{
-                if (value != null)
-                    paperSize = value;
-            }
-        }
-        
-        public PaperSource PaperSource{
-            get{
-                if (!this.printerSettings.IsValid)
-                    throw new InvalidPrinterException(this.printerSettings);
-                return paperSource;
-            }
-            set{
-                if (value != null)
-                    paperSource = value;
-            }
-        }
-        
-        public PrinterResolution PrinterResolution{
-            get{
-                if (!this.printerSettings.IsValid)
-                    throw new InvalidPrinterException(this.printerSettings);
-                return printerResolution;
-            }
-            set{
-                if (value != null)
-                    printerResolution = value;
-            }
-        }
-        
-        public PrinterSettings PrinterSettings{
-            get{
-                return printerSettings;
-            }
-            set{
-                printerSettings = value;
-            }
-        }        
-        public float HardMarginX {
-            get {
-                return hardMarginX;
-            }
-        }
-        
-        public float HardMarginY {
-            get {
-                return hardMarginY;
-            }
-        }
-        
-        public RectangleF PrintableArea {
-            get {
-                return printableArea;
-            }
-        }
-
-
-        public object Clone ()
-        {
-            // We do a deep copy
-            PrinterResolution pres = new PrinterResolution (this.printerResolution.Kind, this.printerResolution.X, this.printerResolution.Y);
-            PaperSource psource = new PaperSource (this.paperSource.Kind, this.paperSource.SourceName);
-            PaperSize psize = new PaperSize (this.paperSize.PaperName, this.paperSize.Width, this.paperSize.Height);
-            psize.RawKind = (int)this.paperSize.Kind;
-
-            PageSettings ps = new PageSettings (this.printerSettings, this.color, this.landscape,
-                    psize, psource, pres);
-            ps.Margins = (Margins) this.margins.Clone ();
-            return ps;
-        }
+		//props
+		public Rectangle Bounds{
+			get{
+				int width = this.paperSize.Width;
+				int height = this.paperSize.Height;
+				
+				width -= this.margins.Left + this.margins.Right;
+				height -= this.margins.Top + this.margins.Bottom;
+				
+				if (this.landscape) {
+					// swap width and height
+					int tmp = width;
+					width = height;
+					height = tmp;
+				}
+				return new Rectangle (this.margins.Left, this.margins.Top, width, height);
+			}
+		}
+		
+		public bool Color{
+			get{
+				if (!this.printerSettings.IsValid)
+					throw new InvalidPrinterException(this.printerSettings);
+				return color;
+			}
+			set{
+				color = value;
+			}
+		}
+		
+		public bool Landscape {
+			get{
+				if (!this.printerSettings.IsValid)
+					throw new InvalidPrinterException(this.printerSettings);
+				return landscape;
+			}
+			set{
+				landscape = value;
+			}
+		}
+		
+		public Margins Margins{
+			get{
+				if (!this.printerSettings.IsValid)
+					throw new InvalidPrinterException(this.printerSettings);
+				return margins;
+			}
+			set{
+				margins = value;
+			}
+		}
+		
+		public PaperSize PaperSize{
+			get{
+				if (!this.printerSettings.IsValid)
+					throw new InvalidPrinterException(this.printerSettings);
+				return paperSize;
+			}
+			set{
+				if (value != null)
+					paperSize = value;
+			}
+		}
+		
+		public PaperSource PaperSource{
+			get{
+				if (!this.printerSettings.IsValid)
+					throw new InvalidPrinterException(this.printerSettings);
+				return paperSource;
+			}
+			set{
+				if (value != null)
+					paperSource = value;
+			}
+		}
+		
+		public PrinterResolution PrinterResolution{
+			get{
+				if (!this.printerSettings.IsValid)
+					throw new InvalidPrinterException(this.printerSettings);
+				return printerResolution;
+			}
+			set{
+				if (value != null)
+					printerResolution = value;
+			}
+		}
+		
+		public PrinterSettings PrinterSettings{
+			get{
+				return printerSettings;
+			}
+			set{
+				printerSettings = value;
+			}
+		}		
+		public float HardMarginX {
+			get {
+				return hardMarginX;
+			}
+		}
+		
+		public float HardMarginY {
+			get {
+				return hardMarginY;
+			}
+		}
+		
+		public RectangleF PrintableArea {
+			get {
+				return printableArea;
+			}
+		}
 
 
-        [MonoTODO("PageSettings.CopyToHdevmode")]
-        public void CopyToHdevmode (IntPtr hdevmode){
-            throw new NotImplementedException ();
-        }
+		public object Clone ()
+		{
+			// We do a deep copy
+			PrinterResolution pres = new PrinterResolution (this.printerResolution.Kind, this.printerResolution.X, this.printerResolution.Y);
+			PaperSource psource = new PaperSource (this.paperSource.Kind, this.paperSource.SourceName);
+			PaperSize psize = new PaperSize (this.paperSize.PaperName, this.paperSize.Width, this.paperSize.Height);
+			psize.RawKind = (int)this.paperSize.Kind;
+
+			PageSettings ps = new PageSettings (this.printerSettings, this.color, this.landscape,
+					psize, psource, pres);
+			ps.Margins = (Margins) this.margins.Clone ();
+			return ps;
+		}
 
 
-        [MonoTODO("PageSettings.SetHdevmode")]
-        public void SetHdevmode (IntPtr hdevmode){
-            throw new NotImplementedException ();
-        }    
+		[MonoTODO("PageSettings.CopyToHdevmode")]
+		public void CopyToHdevmode (IntPtr hdevmode){
+			throw new NotImplementedException ();
+		}
 
-        public override string ToString(){
-            string ret = "[PageSettings: Color={0}";
-            ret += ", Landscape={1}";
-            ret += ", Margins={2}";
-            ret += ", PaperSize={3}";
-            ret += ", PaperSource={4}";
-            ret += ", PrinterResolution={5}";
-            ret += "]";
-            
-            return String.Format(ret, this.color, this.landscape, this.margins, this.paperSize, this.paperSource, this.printerResolution);
-        }
-    }
+
+		[MonoTODO("PageSettings.SetHdevmode")]
+		public void SetHdevmode (IntPtr hdevmode){
+			throw new NotImplementedException ();
+		}	
+
+		public override string ToString(){
+			string ret = "[PageSettings: Color={0}";
+			ret += ", Landscape={1}";
+			ret += ", Margins={2}";
+			ret += ", PaperSize={3}";
+			ret += ", PaperSource={4}";
+			ret += ", PrinterResolution={5}";
+			ret += "]";
+			
+			return String.Format(ret, this.color, this.landscape, this.margins, this.paperSize, this.paperSource, this.printerResolution);
+		}
+	}
 }

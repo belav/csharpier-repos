@@ -50,18 +50,18 @@ namespace Novell.Directory.Ldap.Events
     {
       get
       {
-    return eType;
+	return eType;
       }
       set
       {
-    eType = value;
+	eType = value;
       }
     }
 
     public LdapEventArgs(
-             LdapMessage sourceMessage,
-             EventClassifiers aClassification,
-             LdapEventType aType)
+		     LdapMessage sourceMessage,
+		     EventClassifiers aClassification,
+		     LdapEventType aType)
       : base(sourceMessage, aClassification)
     {
       eType = aType;

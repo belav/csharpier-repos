@@ -35,56 +35,56 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-    [XmlSchemaProvider ("GetSchema")]
-    public class EndpointDiscoveryMetadata11 : IXmlSerializable
-    {
-        public static EndpointDiscoveryMetadata11 FromEndpointDiscoveryMetadata (EndpointDiscoveryMetadata endpointDiscoveryMetadata)
-        {
-            return new EndpointDiscoveryMetadata11 (endpointDiscoveryMetadata);
-        }
+	[XmlSchemaProvider ("GetSchema")]
+	public class EndpointDiscoveryMetadata11 : IXmlSerializable
+	{
+		public static EndpointDiscoveryMetadata11 FromEndpointDiscoveryMetadata (EndpointDiscoveryMetadata endpointDiscoveryMetadata)
+		{
+			return new EndpointDiscoveryMetadata11 (endpointDiscoveryMetadata);
+		}
 
-        public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
-        {
-            EndpointAddress10.GetSchema (schemaSet);
-            schemaSet.Add (schema);
-            return new XmlQualifiedName ("ProbeMatchType", version.Namespace);
-        }
+		public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
+		{
+			EndpointAddress10.GetSchema (schemaSet);
+			schemaSet.Add (schema);
+			return new XmlQualifiedName ("ProbeMatchType", version.Namespace);
+		}
 
-        static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
-        static readonly XmlSchema schema = EndpointDiscoveryMetadata.BuildSchema (version);
+		static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
+		static readonly XmlSchema schema = EndpointDiscoveryMetadata.BuildSchema (version);
 
-        // for deserialization use
-        EndpointDiscoveryMetadata11 ()
-        {
-        }
+		// for deserialization use
+		EndpointDiscoveryMetadata11 ()
+		{
+		}
 
-        internal EndpointDiscoveryMetadata11 (EndpointDiscoveryMetadata source)
-        {
-            this.source = source;
-        }
-        
-        EndpointDiscoveryMetadata source;
+		internal EndpointDiscoveryMetadata11 (EndpointDiscoveryMetadata source)
+		{
+			this.source = source;
+		}
+		
+		EndpointDiscoveryMetadata source;
 
-        public XmlSchema GetSchema ()
-        {
-            return null;
-        }
+		public XmlSchema GetSchema ()
+		{
+			return null;
+		}
 
-        public void ReadXml (XmlReader reader)
-        {
-            source = EndpointDiscoveryMetadata.ReadXml (reader, version);
-        }
+		public void ReadXml (XmlReader reader)
+		{
+			source = EndpointDiscoveryMetadata.ReadXml (reader, version);
+		}
 
-        public EndpointDiscoveryMetadata ToEndpointDiscoveryMetadata ()
-        {
-            if (source == null)
-                throw new InvalidOperationException ("Call ReadXml method first before calling this method");
-            return source;
-        }
+		public EndpointDiscoveryMetadata ToEndpointDiscoveryMetadata ()
+		{
+			if (source == null)
+				throw new InvalidOperationException ("Call ReadXml method first before calling this method");
+			return source;
+		}
 
-        public void WriteXml (XmlWriter writer)
-        {
-            source.WriteXml (writer, version);
-        }
-    }
+		public void WriteXml (XmlWriter writer)
+		{
+			source.WriteXml (writer, version);
+		}
+	}
 }

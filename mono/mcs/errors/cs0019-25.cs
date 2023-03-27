@@ -7,11 +7,11 @@ struct Foo
 
 public class Test
 {
-    static Foo ctx;
+	static Foo ctx;
 
-    public static void Main ()
-    {
-        if (ctx == null)
-            return;
-    }
+	public static void Main ()
+	{
+		if (ctx == null)
+			return;
+	}
 }

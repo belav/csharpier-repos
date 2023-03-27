@@ -31,22 +31,22 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Tokens
 {
-    public class SecurityTokenExpiredException : SecurityTokenValidationException
-    {
-        public SecurityTokenExpiredException()
-            : base("ID4181: The security token has expired.")
-        { }
+	public class SecurityTokenExpiredException : SecurityTokenValidationException
+	{
+		public SecurityTokenExpiredException()
+			: base("ID4181: The security token has expired.")
+		{ }
 
-        public SecurityTokenExpiredException(string message)
-            : base(message)
-        { }
+		public SecurityTokenExpiredException(string message)
+			: base(message)
+		{ }
 
-        public SecurityTokenExpiredException(string message, Exception inner)
-            : base(message, inner)
-        { }
+		public SecurityTokenExpiredException(string message, Exception inner)
+			: base(message, inner)
+		{ }
 
-        public SecurityTokenExpiredException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        { }
-    }
+		public SecurityTokenExpiredException(SerializationInfo info, StreamingContext context)
+			: base(info, context)
+		{ }
+	}
 }

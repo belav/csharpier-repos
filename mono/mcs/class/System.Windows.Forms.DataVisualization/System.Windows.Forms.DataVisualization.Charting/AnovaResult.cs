@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,25 +27,25 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class AnovaResult
-    {
-        #region Constructors
-        public AnovaResult ()
-        {
-        }
-        #endregion
+	public class AnovaResult
+	{
+		#region Constructors
+		public AnovaResult ()
+		{
+		}
+		#endregion
 
-        #region Public Properties
-        public double DegreeOfFreedomBetweenGroups { get; private set; }
-        public double DegreeOfFreedomTotal { get; private set; }
-        public double DegreeOfFreedomWithinGroups { get; private set; }
-        public double FCriticalValue { get; private set; }
-        public double FRatio { get; private set; }
-        public double MeanSquareVarianceBetweenGroups { get; private set; }
-        public double MeanSquareVarianceWithinGroups { get; private set; }
-        public double SumOfSquaresBetweenGroups { get; private set; }
-        public double SumOfSquaresTotal { get; private set; }
-        public double SumOfSquaresWithinGroups { get; private set; }
-        #endregion
-    }
+		#region Public Properties
+		public double DegreeOfFreedomBetweenGroups { get; private set; }
+		public double DegreeOfFreedomTotal { get; private set; }
+		public double DegreeOfFreedomWithinGroups { get; private set; }
+		public double FCriticalValue { get; private set; }
+		public double FRatio { get; private set; }
+		public double MeanSquareVarianceBetweenGroups { get; private set; }
+		public double MeanSquareVarianceWithinGroups { get; private set; }
+		public double SumOfSquaresBetweenGroups { get; private set; }
+		public double SumOfSquaresTotal { get; private set; }
+		public double SumOfSquaresWithinGroups { get; private set; }
+		#endregion
+	}
 }

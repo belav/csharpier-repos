@@ -1,4 +1,4 @@
-namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding {
     /// <summary>
     /// The interface providers a way for specifying an alternate name to use 
     /// for model binding instead of the parameter name.

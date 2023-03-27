@@ -2,7 +2,7 @@
 // XQueryFunctionContextAttribute.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -36,8 +36,8 @@ using System.Xml.XPath;
 
 namespace Mono.Xml.XPath2
 {
-    public class XQueryFunctionContextAttribute : Attribute
-    {
-    }
+	public class XQueryFunctionContextAttribute : Attribute
+	{
+	}
 }
 

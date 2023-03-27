@@ -2,7 +2,7 @@
 // System.Web.UI.Design.TemplateModeChangedEventArgs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -34,18 +34,18 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design
 {
-    public class TemplateModeChangedEventArgs : EventArgs
-    {
-        TemplateGroup group;
+	public class TemplateModeChangedEventArgs : EventArgs
+	{
+		TemplateGroup group;
 
-        public TemplateModeChangedEventArgs (TemplateGroup newTemplateGroup)
-        {
-            this.group = newTemplateGroup;
-        }
+		public TemplateModeChangedEventArgs (TemplateGroup newTemplateGroup)
+		{
+			this.group = newTemplateGroup;
+		}
 
-        public TemplateGroup NewTemplateGroup {
-            get { return group; }
-        }
-    }
+		public TemplateGroup NewTemplateGroup {
+			get { return group; }
+		}
+	}
 }
 

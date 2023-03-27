@@ -1,9 +1,9 @@
 //
 // TagPrefixAttributeCas.cs 
-//    - CAS unit tests for System.Web.UI.TagPrefixAttribute
+//	- CAS unit tests for System.Web.UI.TagPrefixAttribute
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,30 +37,30 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TagPrefixAttributeCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TagPrefixAttributeCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            TagPrefixAttribute tpa = new TagPrefixAttribute ("namespace", "prefix");
-            Assert.AreEqual ("namespace", tpa.NamespaceName, "NamespaceName");
-            Assert.AreEqual ("prefix", tpa.TagPrefix, "TagPrefix");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			TagPrefixAttribute tpa = new TagPrefixAttribute ("namespace", "prefix");
+			Assert.AreEqual ("namespace", tpa.NamespaceName, "NamespaceName");
+			Assert.AreEqual ("prefix", tpa.TagPrefix, "TagPrefix");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (string), typeof (string) });
-            Assert.IsNotNull (ci, ".ctor(string,string)");
-            return ci.Invoke (new object[2] { "namespace", "prefix" });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (string), typeof (string) });
+			Assert.IsNotNull (ci, ".ctor(string,string)");
+			return ci.Invoke (new object[2] { "namespace", "prefix" });
+		}
 
-        public override Type Type {
-            get { return typeof (TagPrefixAttribute); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (TagPrefixAttribute); }
+		}
+	}
 }

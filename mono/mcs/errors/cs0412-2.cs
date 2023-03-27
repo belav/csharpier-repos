@@ -5,5 +5,5 @@ using System;
 
 interface I
 {
-    T Foo<T>(IComparable T);
+	T Foo<T>(IComparable T);
 }

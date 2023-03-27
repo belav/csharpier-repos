@@ -6,14 +6,14 @@ public unsafe delegate void Bar (int* x);
 
 class X
 {
-    public X (Bar bar)
-    { }
+	public X (Bar bar)
+	{ }
 
-    unsafe static void Test (int* b)
-    { }
+	unsafe static void Test (int* b)
+	{ }
 
-    static void Main ()
-    {
-        X x = new X (Test);
-    }
+	static void Main ()
+	{
+		X x = new X (Test);
+	}
 }

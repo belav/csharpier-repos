@@ -21,16 +21,16 @@
 //
 // Authors:
 //
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public interface IDataGridEditingService {
-        #region Public Instance Methods
-        bool BeginEdit(DataGridColumnStyle gridColumn, int rowNumber);
-        bool EndEdit(DataGridColumnStyle gridColumn, int rowNumber, bool shouldAbort);
-        #endregion    // Public Instance Methods
-    }
+	public interface IDataGridEditingService {
+		#region Public Instance Methods
+		bool BeginEdit(DataGridColumnStyle gridColumn, int rowNumber);
+		bool EndEdit(DataGridColumnStyle gridColumn, int rowNumber, bool shouldAbort);
+		#endregion	// Public Instance Methods
+	}
 }

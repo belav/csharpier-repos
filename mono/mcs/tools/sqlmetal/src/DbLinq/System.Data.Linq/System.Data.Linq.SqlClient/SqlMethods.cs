@@ -31,243 +31,243 @@ using System;
 
 namespace System.Data.Linq.SqlClient
 {
-    public static class SqlMethods
-    {
+	public static class SqlMethods
+	{
         static Exception NotSupported()
         {
             return new NotSupportedException("The method in SqlMethods type cannot be used directly. It is only for Linq to SQL trsnslation");
         }
 
         [MonoTODO]
-        public static int DateDiffDay (DateTime startDate, DateTime endDate)
-        {
+		public static int DateDiffDay (DateTime startDate, DateTime endDate)
+		{
+            throw NotSupported();
+		}
+
+		[MonoTODO]
+		public static int? DateDiffDay (DateTime? startDate, DateTime? endDate)
+		{
             throw NotSupported();
         }
 
-        [MonoTODO]
-        public static int? DateDiffDay (DateTime? startDate, DateTime? endDate)
-        {
+		[MonoTODO]
+		public static int DateDiffHour (DateTime startDate, DateTime endDate)
+		{
             throw NotSupported();
         }
 
-        [MonoTODO]
-        public static int DateDiffHour (DateTime startDate, DateTime endDate)
-        {
+		[MonoTODO]
+		public static int? DateDiffHour (DateTime? startDate, DateTime? endDate)
+		{
             throw NotSupported();
         }
 
-        [MonoTODO]
-        public static int? DateDiffHour (DateTime? startDate, DateTime? endDate)
-        {
+		[MonoTODO]
+		public static int DateDiffMillisecond (DateTime startDate, DateTime endDate)
+		{
             throw NotSupported();
         }
 
-        [MonoTODO]
-        public static int DateDiffMillisecond (DateTime startDate, DateTime endDate)
-        {
+		[MonoTODO]
+		public static int? DateDiffMillisecond (DateTime? startDate, DateTime? endDate)
+		{
             throw NotSupported();
         }
 
-        [MonoTODO]
-        public static int? DateDiffMillisecond (DateTime? startDate, DateTime? endDate)
-        {
+		[MonoTODO]
+		public static int DateDiffMinute (DateTime startDate, DateTime endDate)
+		{
             throw NotSupported();
         }
 
-        [MonoTODO]
-        public static int DateDiffMinute (DateTime startDate, DateTime endDate)
-        {
+		[MonoTODO]
+		public static int? DateDiffMinute (DateTime? startDate, DateTime? endDate)
+		{
             throw NotSupported();
         }
 
-        [MonoTODO]
-        public static int? DateDiffMinute (DateTime? startDate, DateTime? endDate)
-        {
+		[MonoTODO]
+		public static int DateDiffMonth (DateTime startDate, DateTime endDate)
+		{
             throw NotSupported();
         }
 
-        [MonoTODO]
-        public static int DateDiffMonth (DateTime startDate, DateTime endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffMonth (DateTime? startDate, DateTime? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffMonth (DateTime? startDate, DateTime? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffSecond (DateTime startDate, DateTime endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffSecond (DateTime startDate, DateTime endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffSecond (DateTime? startDate, DateTime? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffSecond (DateTime? startDate, DateTime? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffYear (DateTime startDate, DateTime endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffYear (DateTime startDate, DateTime endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffYear (DateTime? startDate, DateTime? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffYear (DateTime? startDate, DateTime? endDate)
-        {
-            throw NotSupported();
-        }
+		#region .NET 3.5 SP1 (DateTimeOffset)
 
-        #region .NET 3.5 SP1 (DateTimeOffset)
+		[MonoTODO]
+		public static int DateDiffMicrosecond (DateTime startDate, DateTime endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffMicrosecond (DateTime startDate, DateTime endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffMicrosecond (DateTime? startDate, DateTime? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffMicrosecond (DateTime? startDate, DateTime? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffNanosecond (DateTime startDate, DateTime endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffNanosecond (DateTime startDate, DateTime endDate)
-        {
-            throw NotSupported();
-        }
-
-        [MonoTODO]
-        public static int? DateDiffNanosecond (DateTime? startDate, DateTime? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffNanosecond (DateTime? startDate, DateTime? endDate)
+		{
+			throw NotSupported();
+		}
 
 
-        [MonoTODO]
-        public static int DateDiffDay (DateTimeOffset startDate, DateTimeOffset endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffDay (DateTimeOffset startDate, DateTimeOffset endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffDay (DateTimeOffset? startDate, DateTimeOffset? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffDay (DateTimeOffset? startDate, DateTimeOffset? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffHour (DateTimeOffset startDate, DateTimeOffset endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffHour (DateTimeOffset startDate, DateTimeOffset endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffHour (DateTimeOffset? startDate, DateTimeOffset? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffHour (DateTimeOffset? startDate, DateTimeOffset? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffMicrosecond (DateTimeOffset startDate, DateTimeOffset endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffMicrosecond (DateTimeOffset startDate, DateTimeOffset endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffMicrosecond (DateTimeOffset? startDate, DateTimeOffset? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffMicrosecond (DateTimeOffset? startDate, DateTimeOffset? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffMillisecond (DateTimeOffset startDate, DateTimeOffset endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffMillisecond (DateTimeOffset startDate, DateTimeOffset endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffMillisecond (DateTimeOffset? startDate, DateTimeOffset? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffMillisecond (DateTimeOffset? startDate, DateTimeOffset? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffMinute (DateTimeOffset startDate, DateTimeOffset endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffMinute (DateTimeOffset startDate, DateTimeOffset endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffMinute (DateTimeOffset? startDate, DateTimeOffset? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffMinute (DateTimeOffset? startDate, DateTimeOffset? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffMonth (DateTimeOffset startDate, DateTimeOffset endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffMonth (DateTimeOffset startDate, DateTimeOffset endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffMonth (DateTimeOffset? startDate, DateTimeOffset? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffMonth (DateTimeOffset? startDate, DateTimeOffset? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffNanosecond (DateTimeOffset startDate, DateTimeOffset endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffNanosecond (DateTimeOffset startDate, DateTimeOffset endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffNanosecond (DateTimeOffset? startDate, DateTimeOffset? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffNanosecond (DateTimeOffset? startDate, DateTimeOffset? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffSecond (DateTimeOffset startDate, DateTimeOffset endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffSecond (DateTimeOffset startDate, DateTimeOffset endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffSecond (DateTimeOffset? startDate, DateTimeOffset? endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int? DateDiffSecond (DateTimeOffset? startDate, DateTimeOffset? endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int DateDiffYear (DateTimeOffset startDate, DateTimeOffset endDate)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static int DateDiffYear (DateTimeOffset startDate, DateTimeOffset endDate)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static int? DateDiffYear (DateTimeOffset? startDate, DateTimeOffset? endDate)
-        {
-            throw NotSupported();
-        }
-        #endregion
+		[MonoTODO]
+		public static int? DateDiffYear (DateTimeOffset? startDate, DateTimeOffset? endDate)
+		{
+			throw NotSupported();
+		}
+		#endregion
 
-        [MonoTODO]
-        public static bool Like (string matchExpression, string pattern)
-        {
-            throw NotSupported();
-        }
+		[MonoTODO]
+		public static bool Like (string matchExpression, string pattern)
+		{
+			throw NotSupported();
+		}
 
-        [MonoTODO]
-        public static bool Like (string matchExpression, string pattern, char escapeCharacter)
-        {
-            throw NotSupported();
-        }
-    }
+		[MonoTODO]
+		public static bool Like (string matchExpression, string pattern, char escapeCharacter)
+		{
+			throw NotSupported();
+		}
+	}
 }

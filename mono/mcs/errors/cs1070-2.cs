@@ -6,7 +6,7 @@ using N;
 
 public class D
 {
-    public void Foo (E e)
-    {
-    }
+	public void Foo (E e)
+	{
+	}
 }

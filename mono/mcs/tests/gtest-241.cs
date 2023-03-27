@@ -9,5 +9,5 @@ abstract public class a
      }
   }
 class main {
-    public static void Main () {}
+	public static void Main () {}
 }

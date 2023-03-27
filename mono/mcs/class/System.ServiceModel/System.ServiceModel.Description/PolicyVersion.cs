@@ -1,8 +1,8 @@
-//
+﻿//
 // PolicyVersion.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -32,35 +32,35 @@ using System.Text;
 
 namespace System.ServiceModel.Description
 {
-    public sealed class PolicyVersion
-    {
-        static PolicyVersion _policy12 = new PolicyVersion ("http://schemas.xmlsoap.org/ws/2004/09/policy");
-        static PolicyVersion _policy15 = new PolicyVersion ("http://www.w3.org/ns/ws-policy");
+	public sealed class PolicyVersion
+	{
+		static PolicyVersion _policy12 = new PolicyVersion ("http://schemas.xmlsoap.org/ws/2004/09/policy");
+		static PolicyVersion _policy15 = new PolicyVersion ("http://www.w3.org/ns/ws-policy");
 
-        readonly string _namespace;
+		readonly string _namespace;
 
-        private PolicyVersion (string @namespace) {
-            _namespace = @namespace;
-        }
+		private PolicyVersion (string @namespace) {
+			_namespace = @namespace;
+		}
 
-        public static PolicyVersion Default {
-            get { return _policy12; }
-        }
+		public static PolicyVersion Default {
+			get { return _policy12; }
+		}
 
-        public static PolicyVersion Policy12 {
-            get { return _policy12; }
-        }
+		public static PolicyVersion Policy12 {
+			get { return _policy12; }
+		}
 
-        public static PolicyVersion Policy15 {
-            get { return _policy15; }
-        }
+		public static PolicyVersion Policy15 {
+			get { return _policy15; }
+		}
 
-        public string Namespace {
-            get { return _namespace; }
-        }
+		public string Namespace {
+			get { return _namespace; }
+		}
 
-        public override string ToString () {
-            return Namespace;
-        }
-    }
+		public override string ToString () {
+			return Namespace;
+		}
+	}
 }

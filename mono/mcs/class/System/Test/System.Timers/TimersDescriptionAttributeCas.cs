@@ -1,9 +1,9 @@
 //
 // TimersDescriptionAttributeCas.cs 
-//    - CAS unit tests for System.Timers.TimersDescriptionAttributeCas
+//	- CAS unit tests for System.Timers.TimersDescriptionAttributeCas
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,36 +37,36 @@ using System.Timers;
 
 namespace MonoCasTests.System.Timers {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TimersDescriptionAttributeCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TimersDescriptionAttributeCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor_Deny_Unrestricted ()
-        {
-            TimersDescriptionAttribute tda = new TimersDescriptionAttribute ("Mono");
-            // Note: see unit tests for why we're not expecting "Mono" as the value
-            Assert.AreEqual (tda.Description, tda.Description, "Description");
-            // this assert doesn't do anything (except removing warning) but we know,
-            // for CAS, that nothing protects the property getter
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor_Deny_Unrestricted ()
+		{
+			TimersDescriptionAttribute tda = new TimersDescriptionAttribute ("Mono");
+			// Note: see unit tests for why we're not expecting "Mono" as the value
+			Assert.AreEqual (tda.Description, tda.Description, "Description");
+			// this assert doesn't do anything (except removing warning) but we know,
+			// for CAS, that nothing protects the property getter
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            Type[] types = new Type[1] { typeof (string) };
-            ConstructorInfo ci = typeof (TimersDescriptionAttribute).GetConstructor (types);
-            Assert.IsNotNull (ci, ".ctor(string)");
-            Assert.IsNotNull (ci.Invoke (new object[1] { "Mono" }), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			Type[] types = new Type[1] { typeof (string) };
+			ConstructorInfo ci = typeof (TimersDescriptionAttribute).GetConstructor (types);
+			Assert.IsNotNull (ci, ".ctor(string)");
+			Assert.IsNotNull (ci.Invoke (new object[1] { "Mono" }), "invoke");
+		}
+	}
 }

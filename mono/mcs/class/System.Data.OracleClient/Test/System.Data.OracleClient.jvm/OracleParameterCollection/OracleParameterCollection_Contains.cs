@@ -32,73 +32,73 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-    [TestFixture]
-    public class OracleParameterCollection_Contains : ADONetTesterClass
-    {
-        public static void Main()
-        {
-            OracleParameterCollection_Contains tc = new OracleParameterCollection_Contains();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OracleParameterCollection_Contains");
-                tc.run();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+	[TestFixture]
+	public class OracleParameterCollection_Contains : ADONetTesterClass
+	{
+		public static void Main()
+		{
+			OracleParameterCollection_Contains tc = new OracleParameterCollection_Contains();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OracleParameterCollection_Contains");
+				tc.run();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            Exception exp = null;
+		[Test]
+		public void run()
+		{
+			Exception exp = null;
 
-            OracleCommand cmd = new OracleCommand();
-            OracleParameter param = new OracleParameter();
-            cmd.Parameters.Add(param);
-            cmd.Parameters.Add(new OracleParameter("MyParam", 12));
+			OracleCommand cmd = new OracleCommand();
+			OracleParameter param = new OracleParameter();
+			cmd.Parameters.Add(param);
+			cmd.Parameters.Add(new OracleParameter("MyParam", 12));
 
-            try
-            {
-                BeginCase("Check contains - 1");
-                Compare(cmd.Parameters.Contains(param),true );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check contains - 1");
+				Compare(cmd.Parameters.Contains(param),true );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Check contains - 2");
-                Compare(cmd.Parameters.Contains("MyParam"),true );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check contains - 2");
+				Compare(cmd.Parameters.Contains("MyParam"),true );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Check contains - 3");
-                Compare(cmd.Parameters.Contains("abcd"),false );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check contains - 3");
+				Compare(cmd.Parameters.Contains("abcd"),false );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Check contains - 4");
-                Compare(cmd.Parameters.Contains(" MyParam"),false );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check contains - 4");
+				Compare(cmd.Parameters.Contains(" MyParam"),false );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
         
-            try
-            {
-                BeginCase("Check contains - 5");
-                cmd.Parameters.Add(new OracleParameter("MyParam", 12));
-                Compare(cmd.Parameters.Contains("MyParam"),true );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Check contains - 5");
+				cmd.Parameters.Add(new OracleParameter("MyParam", 12));
+				Compare(cmd.Parameters.Contains("MyParam"),true );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
         
-        }
-    }
+		}
+	}
 }

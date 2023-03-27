@@ -20,25 +20,25 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    public class DataGridViewColumnDividerDoubleClickEventArgs : HandledMouseEventArgs {
+	public class DataGridViewColumnDividerDoubleClickEventArgs : HandledMouseEventArgs {
 
-        private int columnIndex;
+		private int columnIndex;
 
-        public DataGridViewColumnDividerDoubleClickEventArgs (int columnIndex, HandledMouseEventArgs e) : base (e.Button, e.Clicks, e.X, e.Y, e.Delta) {
-            this.columnIndex = columnIndex;
-        }
+		public DataGridViewColumnDividerDoubleClickEventArgs (int columnIndex, HandledMouseEventArgs e) : base (e.Button, e.Clicks, e.X, e.Y, e.Delta) {
+			this.columnIndex = columnIndex;
+		}
 
-        public int ColumnIndex {
-            get { return columnIndex; }
-        }
+		public int ColumnIndex {
+			get { return columnIndex; }
+		}
 
-    }
+	}
 
 }
 

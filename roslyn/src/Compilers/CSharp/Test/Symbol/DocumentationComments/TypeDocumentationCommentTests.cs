@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -25,22 +25,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             _compilation = CreateCompilationWithMscorlib40AndDocumentationComments(@"enum Color { Red, Blue, Green }
 namespace Acme
 {
-    interface IProcess {...}
-    struct ValueType {...}
-    class Widget: IProcess
-    {
+	interface IProcess {...}
+	struct ValueType {...}
+	class Widget: IProcess
+	{
         /// <summary>
         /// Hello! Nested Class.
         /// </summary>
-        public class NestedClass {...}
-        public interface IMenuItem {...}
-        public delegate void Del(int i);
-        public enum Direction { North, South, East, West }
-    }
-    class MyList<T>
-    {
-        class Helper<U,V> {...}
-    }
+		public class NestedClass {...}
+		public interface IMenuItem {...}
+		public delegate void Del(int i);
+		public enum Direction { North, South, East, West }
+	}
+	class MyList<T>
+	{
+		class Helper<U,V> {...}
+	}
 }");
 
             _acmeNamespace = (NamespaceSymbol)_compilation.GlobalNamespace.GetMembers("Acme").Single();

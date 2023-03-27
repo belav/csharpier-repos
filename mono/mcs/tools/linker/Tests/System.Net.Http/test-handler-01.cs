@@ -3,11 +3,11 @@ using System.Net.Http;
 
 public class C
 {
-    public static int Main ()
-    {
-        using (var handler = new HttpClientHandler ()) {
-        }        
+	public static int Main ()
+	{
+		using (var handler = new HttpClientHandler ()) {
+		}		
 
-        return 0;
-    }
+		return 0;
+	}
 }

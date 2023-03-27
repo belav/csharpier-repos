@@ -12,7 +12,7 @@ namespace System.Net
 {
 #if AUTOPROXY_MANAGED_JSCRIPT
     using System.Security.Permissions;
-    using System.Collections.Generic;
+	using System.Collections.Generic;
 #endif
     using System.Net.NetworkInformation;
     using System.Text;
@@ -76,40 +76,40 @@ namespace System.Net
                     else if (string.Compare(name, "shExpMatch", StringComparison.Ordinal)==0) {
                         type = typeof(bool);
                     }
-                    else if (string.Compare(name, "weekdayRange", StringComparison.Ordinal)==0) {
+					else if (string.Compare(name, "weekdayRange", StringComparison.Ordinal)==0) {
                         type = typeof(bool);
                     }
 
-                    //-------------------------------------
-                    //Don't even inject these methods 
-                    //if the OS does not support IPv6
-                    //-------------------------------------
-                    else if(Socket.OSSupportsIPv6)
-                    {
-                        //---------------------------------------------------------------------
-                        //The following changes are made to support IPv6
-                        //IE7 ships with this support and WinInet ships with this support
-                        //we are adding support for Ipv6
-                        //---------------------------------------------------------------------
-                        if (string.Compare(name, "dnsResolveEx", StringComparison.Ordinal)==0) {
-                            type = typeof(string);
-                        }
-                        else if (string.Compare(name, "isResolvableEx", StringComparison.Ordinal)==0) {
-                            type = typeof(bool);
-                        }
-                        else if (string.Compare(name, "myIpAddressEx", StringComparison.Ordinal)==0) {
-                            type = typeof(string);
-                        }
-                        else if (string.Compare(name, "isInNetEx", StringComparison.Ordinal)==0) {
-                            type = typeof(bool);
-                        }                    
-                        else if (string.Compare(name, "sortIpAddressList", StringComparison.Ordinal)==0) {
-                            type = typeof(string);
-                        }                    
-                        else if (string.Compare(name, "getClientVersion", StringComparison.Ordinal)==0) {
-                            type = typeof(string);
-                        }                    
-                    }                                        
+					//-------------------------------------
+					//Don't even inject these methods 
+					//if the OS does not support IPv6
+					//-------------------------------------
+					else if(Socket.OSSupportsIPv6)
+					{
+	                    //---------------------------------------------------------------------
+	                    //The following changes are made to support IPv6
+	                    //IE7 ships with this support and WinInet ships with this support
+	                    //we are adding support for Ipv6
+	                    //---------------------------------------------------------------------
+	                    if (string.Compare(name, "dnsResolveEx", StringComparison.Ordinal)==0) {
+	                        type = typeof(string);
+	                    }
+	                    else if (string.Compare(name, "isResolvableEx", StringComparison.Ordinal)==0) {
+	                        type = typeof(bool);
+	                    }
+	                    else if (string.Compare(name, "myIpAddressEx", StringComparison.Ordinal)==0) {
+	                        type = typeof(string);
+	                    }
+	                    else if (string.Compare(name, "isInNetEx", StringComparison.Ordinal)==0) {
+	                        type = typeof(bool);
+	                    }                    
+	                    else if (string.Compare(name, "sortIpAddressList", StringComparison.Ordinal)==0) {
+	                        type = typeof(string);
+	                    }                    
+	                    else if (string.Compare(name, "getClientVersion", StringComparison.Ordinal)==0) {
+	                        type = typeof(string);
+	                    }                    
+					}                                        
                     GlobalLog.Print("MyMethodInfo::ReturnType() name:" + name + " type:" + type.FullName);
                     return type;
                 }
@@ -539,7 +539,7 @@ namespace System.Net
         {
             return "1.0";
         }
-        private static int MAX_IPADDRESS_LIST_LENGTH = 1024;
+		private static int MAX_IPADDRESS_LIST_LENGTH = 1024;
         public string sortIpAddressList(string IPAddressList)
         {
 
@@ -556,13 +556,13 @@ namespace System.Net
             //separated by a semicolon
             //---------------------------------------------------------------
             string[] IPAddressStrings = IPAddressList.Split(new char[] {';'});
-            if(IPAddressStrings.Length > MAX_IPADDRESS_LIST_LENGTH)
-            {
-                throw new ArgumentException(string.Format(
-                                    SR.GetString(SR.net_max_ip_address_list_length_exceeded),
-                                    MAX_IPADDRESS_LIST_LENGTH), "IPAddressList");
-            }
-            
+			if(IPAddressStrings.Length > MAX_IPADDRESS_LIST_LENGTH)
+			{
+				throw new ArgumentException(string.Format(
+									SR.GetString(SR.net_max_ip_address_list_length_exceeded),
+									MAX_IPADDRESS_LIST_LENGTH), "IPAddressList");
+			}
+			
 
             //----------------------------------------------------------------
             //If there are no separators, just return the original string
@@ -578,13 +578,13 @@ namespace System.Net
             SocketAddress[] SockAddrIn6List = new SocketAddress[IPAddressStrings.Length];
             for(int i = 0; i < IPAddressStrings.Length; i++)
             {
-                //Trim leading and trailing spaces
+            	//Trim leading and trailing spaces
                 IPAddressStrings[i] = IPAddressStrings[i].Trim();
-                if(IPAddressStrings[i].Length == 0)
-                    throw new ArgumentException(SR.GetString(SR.dns_bad_ip_address), "IPAddressList");
+				if(IPAddressStrings[i].Length == 0)
+	                throw new ArgumentException(SR.GetString(SR.dns_bad_ip_address), "IPAddressList");
                 SocketAddress saddrv6 = new SocketAddress(AddressFamily.InterNetworkV6, 
-                                                            SocketAddress.IPv6AddressSize);
-                //Parse the string to a v6 address structure
+															SocketAddress.IPv6AddressSize);
+            	//Parse the string to a v6 address structure
                 SocketError errorCode =
                     UnsafeNclNativeMethods.OSSOCK.WSAStringToAddress(
                         IPAddressStrings[i],
@@ -607,106 +607,106 @@ namespace System.Net
                     if(errorCode != SocketError.Success)
                     {
                         //This address is neither IPv4 nor IPv6 string throw
-                        throw new ArgumentException(SR.GetString(SR.dns_bad_ip_address), "IPAddressList");
+		                throw new ArgumentException(SR.GetString(SR.dns_bad_ip_address), "IPAddressList");
                     }
-                    else
-                    {
-                        //This is a valid IPv4 address. We need to map this to a mapped v6 address
-                        IPEndPoint dummy = new IPEndPoint(IPAddress.Any, 0);
-                        IPEndPoint IPv4EndPoint = (IPEndPoint)dummy.Create(saddrv4);
-                        byte[] IPv4AddressBytes = IPv4EndPoint.Address.GetAddressBytes();
-                        byte[] IPv6MappedAddressBytes = new byte[16]; //IPv6 is 16 bytes address
-                        for(int j = 0; j < 10; j++) IPv6MappedAddressBytes[j] = 0x00;
-                        IPv6MappedAddressBytes[10] = 0xFF;
-                        IPv6MappedAddressBytes[11] = 0xFF;                        
-                        IPv6MappedAddressBytes[12] = IPv4AddressBytes[0];
-                        IPv6MappedAddressBytes[13] = IPv4AddressBytes[1];                        
-                        IPv6MappedAddressBytes[14] = IPv4AddressBytes[2];
-                        IPv6MappedAddressBytes[15] = IPv4AddressBytes[3];
-                        IPAddress v6Address = new IPAddress(IPv6MappedAddressBytes);
-                        IPEndPoint IPv6EndPoint = new IPEndPoint(v6Address, IPv4EndPoint.Port);
-                        saddrv6 = IPv6EndPoint.Serialize();
-                    }
+					else
+					{
+						//This is a valid IPv4 address. We need to map this to a mapped v6 address
+						IPEndPoint dummy = new IPEndPoint(IPAddress.Any, 0);
+						IPEndPoint IPv4EndPoint = (IPEndPoint)dummy.Create(saddrv4);
+						byte[] IPv4AddressBytes = IPv4EndPoint.Address.GetAddressBytes();
+						byte[] IPv6MappedAddressBytes = new byte[16]; //IPv6 is 16 bytes address
+						for(int j = 0; j < 10; j++) IPv6MappedAddressBytes[j] = 0x00;
+						IPv6MappedAddressBytes[10] = 0xFF;
+						IPv6MappedAddressBytes[11] = 0xFF;						
+						IPv6MappedAddressBytes[12] = IPv4AddressBytes[0];
+						IPv6MappedAddressBytes[13] = IPv4AddressBytes[1];						
+						IPv6MappedAddressBytes[14] = IPv4AddressBytes[2];
+						IPv6MappedAddressBytes[15] = IPv4AddressBytes[3];
+						IPAddress v6Address = new IPAddress(IPv6MappedAddressBytes);
+						IPEndPoint IPv6EndPoint = new IPEndPoint(v6Address, IPv4EndPoint.Port);
+						saddrv6 = IPv6EndPoint.Serialize();
+					}
                 }
 
-                //At this point,we have SOCKADDR_IN6 buffer
-                //add them to the list 
-                SockAddrIn6List[i] = saddrv6;
+				//At this point,we have SOCKADDR_IN6 buffer
+				//add them to the list 
+				SockAddrIn6List[i] = saddrv6;
             }
 
-               //----------------------------------------------------------------
+           	//----------------------------------------------------------------
             //All the IPAddress strings are parsed into 
             //either a native v6 address or mapped v6 address
             //The Next step is to prepare for calling the WSAIOctl
             //By creating a SOCKET_ADDRESS_LIST
             //----------------------------------------------------------------
             int cbRequiredBytes = Marshal.SizeOf(typeof(UnsafeNclNativeMethods.OSSOCK.SOCKET_ADDRESS_LIST)) + 
-                                    (SockAddrIn6List.Length -1)*Marshal.SizeOf(typeof(UnsafeNclNativeMethods.OSSOCK.SOCKET_ADDRESS));
-            Dictionary<IntPtr, KeyValuePair<SocketAddress, string> > UnmanagedToManagedMapping = new Dictionary<IntPtr, KeyValuePair<SocketAddress, string>>();
-            GCHandle[] GCHandles = new GCHandle[SockAddrIn6List.Length];
-            for(int i = 0; i < SockAddrIn6List.Length; i++)
-            {
-                GCHandles[i] = GCHandle.Alloc(SockAddrIn6List[i].m_Buffer, GCHandleType.Pinned);
-            }
-            IntPtr pSocketAddressList = Marshal.AllocHGlobal(cbRequiredBytes);
-            try
-            {
-                //---------------------------------------------------
-                //Create a socket address list structure
-                //and set the pointers to the pinned sock addr buffers
-                //---------------------------------------------------
-                unsafe 
-                {
-                    UnsafeNclNativeMethods.OSSOCK.SOCKET_ADDRESS_LIST* pList 
-                                = (UnsafeNclNativeMethods.OSSOCK.SOCKET_ADDRESS_LIST*)pSocketAddressList;
-                    pList->iAddressCount = SockAddrIn6List.Length; //Set the number of addresses
-                    UnsafeNclNativeMethods.OSSOCK.SOCKET_ADDRESS* pSocketAddresses =
-                            &pList->Addresses;
-                    for(int i = 0; i < pList->iAddressCount; i++)
-                    {
-                        pSocketAddresses[i].iSockaddrLength = SocketAddress.IPv6AddressSize;
-                        pSocketAddresses[i].lpSockAddr = GCHandles[i].AddrOfPinnedObject();
-                        UnmanagedToManagedMapping[pSocketAddresses[i].lpSockAddr]
-                            = new KeyValuePair<SocketAddress, string>(SockAddrIn6List[i], IPAddressStrings[i]);
-                    }
-                    //---------------------------------------------------
-                    //Create a socket and ask it to sort the list 
-                    //---------------------------------------------------                                
-                    Socket s = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp);
-                     int cbProcessed = s.IOControl(
-                            IOControlCode.AddressListSort,
-                            pSocketAddressList, //Input buffer
-                            cbRequiredBytes, //Buffer size
-                            pSocketAddressList, //Outbuffer - same as in buffer
-                            cbRequiredBytes //out buffer size - same as in buffer size
-                            );
+            						(SockAddrIn6List.Length -1)*Marshal.SizeOf(typeof(UnsafeNclNativeMethods.OSSOCK.SOCKET_ADDRESS));
+			Dictionary<IntPtr, KeyValuePair<SocketAddress, string> > UnmanagedToManagedMapping = new Dictionary<IntPtr, KeyValuePair<SocketAddress, string>>();
+			GCHandle[] GCHandles = new GCHandle[SockAddrIn6List.Length];
+			for(int i = 0; i < SockAddrIn6List.Length; i++)
+			{
+				GCHandles[i] = GCHandle.Alloc(SockAddrIn6List[i].m_Buffer, GCHandleType.Pinned);
+			}
+			IntPtr pSocketAddressList = Marshal.AllocHGlobal(cbRequiredBytes);
+			try
+			{
+				//---------------------------------------------------
+				//Create a socket address list structure
+				//and set the pointers to the pinned sock addr buffers
+				//---------------------------------------------------
+				unsafe 
+				{
+					UnsafeNclNativeMethods.OSSOCK.SOCKET_ADDRESS_LIST* pList 
+								= (UnsafeNclNativeMethods.OSSOCK.SOCKET_ADDRESS_LIST*)pSocketAddressList;
+					pList->iAddressCount = SockAddrIn6List.Length; //Set the number of addresses
+					UnsafeNclNativeMethods.OSSOCK.SOCKET_ADDRESS* pSocketAddresses =
+							&pList->Addresses;
+					for(int i = 0; i < pList->iAddressCount; i++)
+					{
+						pSocketAddresses[i].iSockaddrLength = SocketAddress.IPv6AddressSize;
+						pSocketAddresses[i].lpSockAddr = GCHandles[i].AddrOfPinnedObject();
+						UnmanagedToManagedMapping[pSocketAddresses[i].lpSockAddr]
+							= new KeyValuePair<SocketAddress, string>(SockAddrIn6List[i], IPAddressStrings[i]);
+					}
+					//---------------------------------------------------
+					//Create a socket and ask it to sort the list 
+					//---------------------------------------------------								
+					Socket s = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp);
+ 					int cbProcessed = s.IOControl(
+							IOControlCode.AddressListSort,
+							pSocketAddressList, //Input buffer
+							cbRequiredBytes, //Buffer size
+							pSocketAddressList, //Outbuffer - same as in buffer
+							cbRequiredBytes //out buffer size - same as in buffer size
+							);
 
-                    //---------------------------------------------------
-                    //At this point The sorting is complete
-                    //---------------------------------------------------
-                    StringBuilder sb = new StringBuilder();
-                    for(int i = 0; i < pList->iAddressCount; i++)
-                    {
-                        IntPtr lpSockAddr = pSocketAddresses[i].lpSockAddr;
-                        KeyValuePair<SocketAddress, string> kv = UnmanagedToManagedMapping[lpSockAddr];
-                        sb.Append(kv.Value);
-                        if(i != pList->iAddressCount - 1) sb.Append(";");
-                    }                    
-                    return sb.ToString();
-                }
-            }
-            finally
-            {
-                if(pSocketAddressList != IntPtr.Zero)
-                {
-                    Marshal.FreeHGlobal(pSocketAddressList);
-                }
-                for(int i = 0; i < GCHandles.Length; i++)
-                {
-                    if(GCHandles[i].IsAllocated)
-                        GCHandles[i].Free();
-                }                
-            }
+					//---------------------------------------------------
+					//At this point The sorting is complete
+					//---------------------------------------------------
+					StringBuilder sb = new StringBuilder();
+					for(int i = 0; i < pList->iAddressCount; i++)
+					{
+						IntPtr lpSockAddr = pSocketAddresses[i].lpSockAddr;
+						KeyValuePair<SocketAddress, string> kv = UnmanagedToManagedMapping[lpSockAddr];
+						sb.Append(kv.Value);
+						if(i != pList->iAddressCount - 1) sb.Append(";");
+					}					
+					return sb.ToString();
+				}
+			}
+			finally
+			{
+				if(pSocketAddressList != IntPtr.Zero)
+				{
+					Marshal.FreeHGlobal(pSocketAddressList);
+				}
+				for(int i = 0; i < GCHandles.Length; i++)
+				{
+					if(GCHandles[i].IsAllocated)
+						GCHandles[i].Free();
+				}				
+			}
 
         }
         public bool isInNetEx(string ipAddress, string ipPrefix)

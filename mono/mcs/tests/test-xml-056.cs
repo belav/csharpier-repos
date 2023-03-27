@@ -8,7 +8,7 @@ public class AAttribute : Attribute {
 }
 
 class Demo {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

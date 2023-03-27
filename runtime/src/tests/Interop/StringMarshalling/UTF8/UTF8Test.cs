@@ -177,7 +177,7 @@ class UTF8StructMarshalling
 
         IntPtr ptr = (IntPtr)(&ums);
         ManagedStruct ms = Marshal.PtrToStructure<ManagedStruct>(ptr);
-    string actual = ms.str;
+	string actual = ms.str;
 
         UTF8Encoding uTF8Encoding = new UTF8Encoding();
         byte [] b = new byte[5];
@@ -188,7 +188,7 @@ class UTF8StructMarshalling
         b[4] = (byte)'d';
         string expected = uTF8Encoding.GetString(b);
         if (actual != expected)
-    {
+	{
            Console.WriteLine("Actual:" + actual + " Length:" + actual.Length);
            Console.WriteLine("Expected:" + expected + " Length:" + expected.Length);
            throw new Exception("UTF8Encoding.GetString doesn't match with Utf8 String Marshaller result");

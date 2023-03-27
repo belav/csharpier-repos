@@ -7,8 +7,8 @@ using System;
 
 public class CLSClass
 {
-    protected ulong? Foo()
-    {
-        return 5;
-    }
+	protected ulong? Foo()
+	{
+		return 5;
+	}
 }

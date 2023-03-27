@@ -2,5 +2,5 @@
 // Line: 5
 
 class x {
-    char x = 'xx';
+	char x = 'xx';
 }

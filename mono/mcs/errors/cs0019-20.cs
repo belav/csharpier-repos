@@ -3,5 +3,5 @@
 
 class S
 {
-    const ulong u = (ulong)0 - (sbyte)1;
+	const ulong u = (ulong)0 - (sbyte)1;
 }

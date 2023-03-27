@@ -31,19 +31,19 @@ using System.Security.Permissions;
 
 namespace Microsoft.Win32 {
 
-    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-    [PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
-    public class UserPreferenceChangingEventArgs : System.EventArgs{
+	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
+	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
+	public class UserPreferenceChangingEventArgs : System.EventArgs{
 
-        UserPreferenceCategory mycategory;
-    
-        public UserPreferenceChangingEventArgs (UserPreferenceCategory category)
-        {
-            this.mycategory = category;
-        }
-    
-        public UserPreferenceCategory Category {
-            get { return mycategory; }
-        }
-    }
+		UserPreferenceCategory mycategory;
+	
+		public UserPreferenceChangingEventArgs (UserPreferenceCategory category)
+		{
+			this.mycategory = category;
+		}
+	
+		public UserPreferenceCategory Category {
+			get { return mycategory; }
+		}
+	}
 }

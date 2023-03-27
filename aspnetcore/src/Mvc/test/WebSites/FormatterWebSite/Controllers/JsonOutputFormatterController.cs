@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +17,10 @@ public class JsonOutputFormatterController : ControllerBase
     public ActionResult<string> StringResult() => "Hello world";
 
     [HttpGet]
-    public ActionResult<string> StringWithUnicodeResult() => "Hello Mr. ??";
+    public ActionResult<string> StringWithUnicodeResult() => "Hello Mr. 🦊";
 
     [HttpGet]
-    public ActionResult<string> StringWithNonAsciiContent() => "Une b�te de cirque";
+    public ActionResult<string> StringWithNonAsciiContent() => "Une bête de cirque";
 
     [HttpGet]
     public ActionResult<SimpleModel> SimpleModelResult() =>

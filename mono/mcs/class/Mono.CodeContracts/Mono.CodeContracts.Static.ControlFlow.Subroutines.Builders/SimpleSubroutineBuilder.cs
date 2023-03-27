@@ -2,7 +2,7 @@
 // SimpleSubroutineBuilder.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,70 +31,70 @@ using Mono.CodeContracts.Static.ControlFlow.Blocks;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders {
-    class SimpleSubroutineBuilder<TLabel> : SubroutineBuilder<TLabel> {
-        private readonly HashSet<TLabel> begin_old_start = new HashSet<TLabel> ();
-        private readonly HashSet<TLabel> end_old_start = new HashSet<TLabel> ();
+	class SimpleSubroutineBuilder<TLabel> : SubroutineBuilder<TLabel> {
+		private readonly HashSet<TLabel> begin_old_start = new HashSet<TLabel> ();
+		private readonly HashSet<TLabel> end_old_start = new HashSet<TLabel> ();
 
-        private BlockWithLabels<TLabel> block_prior_to_old;
-        private OldValueSubroutine<TLabel> current_old_subroutine;
-        private SubroutineBase<TLabel> current_subroutine;
+		private BlockWithLabels<TLabel> block_prior_to_old;
+		private OldValueSubroutine<TLabel> current_old_subroutine;
+		private SubroutineBase<TLabel> current_subroutine;
 
-        public SimpleSubroutineBuilder (ICodeProvider<TLabel> codeProvider,
-                                        SubroutineFacade subroutineFacade,
-                                        TLabel entry)
-            : base (codeProvider, subroutineFacade, entry)
-        {
-            Initialize (entry);
-        }
+		public SimpleSubroutineBuilder (ICodeProvider<TLabel> codeProvider,
+		                                SubroutineFacade subroutineFacade,
+		                                TLabel entry)
+			: base (codeProvider, subroutineFacade, entry)
+		{
+			Initialize (entry);
+		}
 
-        public override SubroutineBase<TLabel> CurrentSubroutine
-        {
-            get
-            {
-                if (this.current_old_subroutine != null)
-                    return this.current_old_subroutine;
-                return this.current_subroutine;
-            }
-        }
+		public override SubroutineBase<TLabel> CurrentSubroutine
+		{
+			get
+			{
+				if (this.current_old_subroutine != null)
+					return this.current_old_subroutine;
+				return this.current_subroutine;
+			}
+		}
 
-        public BlockWithLabels<TLabel> BuildBlocks (TLabel entry, SubroutineBase<TLabel> subroutine)
-        {
-            this.current_subroutine = subroutine;
+		public BlockWithLabels<TLabel> BuildBlocks (TLabel entry, SubroutineBase<TLabel> subroutine)
+		{
+			this.current_subroutine = subroutine;
 
-            return base.BuildBlocks (entry);
-        }
+			return base.BuildBlocks (entry);
+		}
 
-        public override BlockWithLabels<TLabel> RecordInformationForNewBlock (TLabel currentLabel, BlockWithLabels<TLabel> previousBlock)
-        {
-            TLabel label;
-            if (previousBlock != null && previousBlock.TryGetLastLabel (out label) && this.end_old_start.Contains (label)) {
-                OldValueSubroutine<TLabel> oldValueSubroutine = this.current_old_subroutine;
-                oldValueSubroutine.Commit (previousBlock);
-                this.current_old_subroutine = null;
-                BlockWithLabels<TLabel> result = base.RecordInformationForNewBlock (currentLabel, this.block_prior_to_old);
-                CurrentSubroutine.AddEdgeSubroutine (this.block_prior_to_old, result, oldValueSubroutine, EdgeTag.Old);
-                return result;
-            }
+		public override BlockWithLabels<TLabel> RecordInformationForNewBlock (TLabel currentLabel, BlockWithLabels<TLabel> previousBlock)
+		{
+			TLabel label;
+			if (previousBlock != null && previousBlock.TryGetLastLabel (out label) && this.end_old_start.Contains (label)) {
+				OldValueSubroutine<TLabel> oldValueSubroutine = this.current_old_subroutine;
+				oldValueSubroutine.Commit (previousBlock);
+				this.current_old_subroutine = null;
+				BlockWithLabels<TLabel> result = base.RecordInformationForNewBlock (currentLabel, this.block_prior_to_old);
+				CurrentSubroutine.AddEdgeSubroutine (this.block_prior_to_old, result, oldValueSubroutine, EdgeTag.Old);
+				return result;
+			}
 
-            if (!this.begin_old_start.Contains (currentLabel))
-                return base.RecordInformationForNewBlock (currentLabel, previousBlock);
-            this.current_old_subroutine = new OldValueSubroutine<TLabel> (this.SubroutineFacade,
-                                                                         ((MethodContractSubroutine<TLabel>) this.current_subroutine).Method,
-                                                                         this, currentLabel);
-            this.block_prior_to_old = previousBlock;
-            BlockWithLabels<TLabel> newBlock = base.RecordInformationForNewBlock (currentLabel, null);
-            this.current_old_subroutine.RegisterBeginBlock (newBlock);
-            return newBlock;
-        }
+			if (!this.begin_old_start.Contains (currentLabel))
+				return base.RecordInformationForNewBlock (currentLabel, previousBlock);
+			this.current_old_subroutine = new OldValueSubroutine<TLabel> (this.SubroutineFacade,
+			                                                             ((MethodContractSubroutine<TLabel>) this.current_subroutine).Method,
+			                                                             this, currentLabel);
+			this.block_prior_to_old = previousBlock;
+			BlockWithLabels<TLabel> newBlock = base.RecordInformationForNewBlock (currentLabel, null);
+			this.current_old_subroutine.RegisterBeginBlock (newBlock);
+			return newBlock;
+		}
 
-        public override void BeginOldHook (TLabel label)
-        {
-            this.begin_old_start.Add (label);
-        }
+		public override void BeginOldHook (TLabel label)
+		{
+			this.begin_old_start.Add (label);
+		}
 
-        public override void EndOldHook (TLabel label)
-        {
-            this.end_old_start.Add (label);
-        }
-    }
+		public override void EndOldHook (TLabel label)
+		{
+			this.end_old_start.Add (label);
+		}
+	}
 }

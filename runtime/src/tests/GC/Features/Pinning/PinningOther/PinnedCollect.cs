@@ -24,7 +24,7 @@ public class Test_PinnedCollect
         GC.Collect();
         GC.WaitForPendingFinalizers();
 
-        //            handle1.Free();        // arr should only have normal handle now
+        //			handle1.Free();		// arr should only have normal handle now
         GCUtil.Free(ref handle1);
         GC.Collect();
         GC.WaitForPendingFinalizers();

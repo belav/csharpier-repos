@@ -2,7 +2,7 @@
 // PathElement.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 

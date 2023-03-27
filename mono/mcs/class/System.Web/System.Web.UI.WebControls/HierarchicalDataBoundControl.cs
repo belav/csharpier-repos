@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.HierarchicalDataBoundControl.cs
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -35,133 +35,133 @@ using System.Web.UI.WebControls.Adapters;
 
 namespace System.Web.UI.WebControls
 {
-    [DesignerAttribute ("System.Web.UI.Design.WebControls.HierarchicalDataBoundControlDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    public abstract class HierarchicalDataBoundControl : BaseDataBoundControl
-    {
-        [IDReferencePropertyAttribute (typeof(HierarchicalDataSourceControl))]
-        public override string DataSourceID {
-            get {
-                object o = ViewState ["DataSourceID"];
-                if (o != null)
-                    return (string)o;
-                
-                return String.Empty;
-            }
-            set {
-                if (Initialized)
-                    RequiresDataBinding = true;
-                
-                ViewState ["DataSourceID"] = value;
-            }
-        }
-        
-        protected virtual HierarchicalDataSourceView GetData (string viewPath)
-        {
-            if (DataSource != null && !String.IsNullOrEmpty (DataSourceID))
-                throw new HttpException ();    
-            IHierarchicalDataSource ds = GetDataSource ();
-            if (ds != null)
-                return ds.GetHierarchicalView (viewPath);
-            
-            if (DataSource is IHierarchicalEnumerable)
-                return new ReadOnlyDataSourceView ((IHierarchicalEnumerable) DataSource);
-            
-            return null;
-        }
-        
-        protected virtual IHierarchicalDataSource GetDataSource ()
-        {
-            if (IsBoundUsingDataSourceID) {
-                Control ctrl = FindDataSource ();
+	[DesignerAttribute ("System.Web.UI.Design.WebControls.HierarchicalDataBoundControlDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+	public abstract class HierarchicalDataBoundControl : BaseDataBoundControl
+	{
+		[IDReferencePropertyAttribute (typeof(HierarchicalDataSourceControl))]
+		public override string DataSourceID {
+			get {
+				object o = ViewState ["DataSourceID"];
+				if (o != null)
+					return (string)o;
+				
+				return String.Empty;
+			}
+			set {
+				if (Initialized)
+					RequiresDataBinding = true;
+				
+				ViewState ["DataSourceID"] = value;
+			}
+		}
+		
+		protected virtual HierarchicalDataSourceView GetData (string viewPath)
+		{
+			if (DataSource != null && !String.IsNullOrEmpty (DataSourceID))
+				throw new HttpException ();	
+			IHierarchicalDataSource ds = GetDataSource ();
+			if (ds != null)
+				return ds.GetHierarchicalView (viewPath);
+			
+			if (DataSource is IHierarchicalEnumerable)
+				return new ReadOnlyDataSourceView ((IHierarchicalEnumerable) DataSource);
+			
+			return null;
+		}
+		
+		protected virtual IHierarchicalDataSource GetDataSource ()
+		{
+			if (IsBoundUsingDataSourceID) {
+				Control ctrl = FindDataSource ();
 
-                if (ctrl == null)
-                    throw new HttpException (string.Format ("A control with ID '{0}' could not be found.", DataSourceID));
-                if (!(ctrl is IHierarchicalDataSource))
-                    throw new HttpException (string.Format ("The control with ID '{0}' is not a control of type IHierarchicalDataSource.", DataSourceID));
-                return (IHierarchicalDataSource) ctrl;
-            }
-            
-            return DataSource as IHierarchicalDataSource;
-        }
+				if (ctrl == null)
+					throw new HttpException (string.Format ("A control with ID '{0}' could not be found.", DataSourceID));
+				if (!(ctrl is IHierarchicalDataSource))
+					throw new HttpException (string.Format ("The control with ID '{0}' is not a control of type IHierarchicalDataSource.", DataSourceID));
+				return (IHierarchicalDataSource) ctrl;
+			}
+			
+			return DataSource as IHierarchicalDataSource;
+		}
 
-        bool IsDataBound {
-            get { return ViewState.GetBool ("DataBound", false); }
-            set { ViewState ["DataBound"] = value; }
-        }
+		bool IsDataBound {
+			get { return ViewState.GetBool ("DataBound", false); }
+			set { ViewState ["DataBound"] = value; }
+		}
 
-        protected void MarkAsDataBound ()
-        {
-            IsDataBound = true;
-        }
-        
-        protected override void OnDataPropertyChanged ()
-        {
-            RequiresDataBinding = true;
-        }
-        
-        protected virtual void OnDataSourceChanged (object sender, EventArgs e)
-        {
-            RequiresDataBinding = true;
-        }
+		protected void MarkAsDataBound ()
+		{
+			IsDataBound = true;
+		}
+		
+		protected override void OnDataPropertyChanged ()
+		{
+			RequiresDataBinding = true;
+		}
+		
+		protected virtual void OnDataSourceChanged (object sender, EventArgs e)
+		{
+			RequiresDataBinding = true;
+		}
 
-        protected internal override void OnLoad (EventArgs e)
-        {
-            if (!Initialized) {
-                Initialize ();
-                ConfirmInitState ();
-            }
-            
-            base.OnLoad(e);
-        }
+		protected internal override void OnLoad (EventArgs e)
+		{
+			if (!Initialized) {
+				Initialize ();
+				ConfirmInitState ();
+			}
+			
+			base.OnLoad(e);
+		}
 
-        void Initialize ()
-        {
-            if (!Page.IsPostBack || (IsViewStateEnabled && !IsDataBound))
-                RequiresDataBinding = true;
+		void Initialize ()
+		{
+			if (!Page.IsPostBack || (IsViewStateEnabled && !IsDataBound))
+				RequiresDataBinding = true;
 
-            IHierarchicalDataSource ds = GetDataSource ();
-            if (ds != null && DataSourceID != "")
-                ds.DataSourceChanged += new EventHandler (OnDataSourceChanged);
-        }
+			IHierarchicalDataSource ds = GetDataSource ();
+			if (ds != null && DataSourceID != "")
+				ds.DataSourceChanged += new EventHandler (OnDataSourceChanged);
+		}
 
-        protected override void OnPagePreLoad (object sender, EventArgs e)
-        {
-            base.OnPagePreLoad (sender, e);
-            
-            Initialize ();
-        }
-        
-        protected void InternalPerformDataBinding ()
-        {
-            HierarchicalDataBoundControlAdapter adapter 
-                = Adapter as HierarchicalDataBoundControlAdapter;
-            if (adapter != null)
-                adapter.PerformDataBinding ();
-            else
-                PerformDataBinding ();
-        }
-        
-        protected internal virtual void PerformDataBinding ()
-        {
-        }
-        
-        protected override void PerformSelect ()
-        {
-            OnDataBinding (EventArgs.Empty);
-            InternalPerformDataBinding ();
-            // The PerformDataBinding method has completed.
-            RequiresDataBinding = false;
-            MarkAsDataBound ();
-            OnDataBound (EventArgs.Empty);
-        }
-        
-        protected override void ValidateDataSource (object dataSource)
-        {
-            if (dataSource == null || dataSource is IHierarchicalDataSource || dataSource is IHierarchicalEnumerable)
-                return;
-            throw new InvalidOperationException ("Invalid data source");
-        }
-    }
+		protected override void OnPagePreLoad (object sender, EventArgs e)
+		{
+			base.OnPagePreLoad (sender, e);
+			
+			Initialize ();
+		}
+		
+		protected void InternalPerformDataBinding ()
+		{
+			HierarchicalDataBoundControlAdapter adapter 
+				= Adapter as HierarchicalDataBoundControlAdapter;
+			if (adapter != null)
+				adapter.PerformDataBinding ();
+			else
+				PerformDataBinding ();
+		}
+		
+		protected internal virtual void PerformDataBinding ()
+		{
+		}
+		
+		protected override void PerformSelect ()
+		{
+			OnDataBinding (EventArgs.Empty);
+			InternalPerformDataBinding ();
+			// The PerformDataBinding method has completed.
+			RequiresDataBinding = false;
+			MarkAsDataBound ();
+			OnDataBound (EventArgs.Empty);
+		}
+		
+		protected override void ValidateDataSource (object dataSource)
+		{
+			if (dataSource == null || dataSource is IHierarchicalDataSource || dataSource is IHierarchicalEnumerable)
+				return;
+			throw new InvalidOperationException ("Invalid data source");
+		}
+	}
 }
 
 

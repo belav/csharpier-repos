@@ -8,8 +8,8 @@ public ref struct S
 
 class Test
 {
-    public static void Main ()
-    {
-        var x = new S[0];
-    }
+	public static void Main ()
+	{
+		var x = new S[0];
+	}
 }

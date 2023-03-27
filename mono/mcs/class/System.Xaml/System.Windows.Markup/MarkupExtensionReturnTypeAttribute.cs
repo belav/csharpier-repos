@@ -24,28 +24,28 @@ using System;
 
 namespace System.Windows.Markup
 {
-    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public sealed class MarkupExtensionReturnTypeAttribute : Attribute
-    {
-        public MarkupExtensionReturnTypeAttribute ()
-        {
-        }
+	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+	public sealed class MarkupExtensionReturnTypeAttribute : Attribute
+	{
+		public MarkupExtensionReturnTypeAttribute ()
+		{
+		}
 
-        public MarkupExtensionReturnTypeAttribute (Type returnType)
-        {
-            ReturnType = returnType;
-        }
+		public MarkupExtensionReturnTypeAttribute (Type returnType)
+		{
+			ReturnType = returnType;
+		}
 
-        [Obsolete ("Unused. Use MarkupExtensionReturnTypeAttribute(Type) or XamlSetMarkupExtensionAttribute.")]
-        public MarkupExtensionReturnTypeAttribute (Type returnType, Type expressionType)
-            : this (returnType)
-        {
-            ExpressionType = expressionType;
-        }
+		[Obsolete ("Unused. Use MarkupExtensionReturnTypeAttribute(Type) or XamlSetMarkupExtensionAttribute.")]
+		public MarkupExtensionReturnTypeAttribute (Type returnType, Type expressionType)
+			: this (returnType)
+		{
+			ExpressionType = expressionType;
+		}
 
-        public Type ReturnType { get; private set; }
+		public Type ReturnType { get; private set; }
 
-        [ObsoleteAttribute ("Unused. Use XamlSetMarkupExtensionAttribute functionality instead.")]
-        public Type ExpressionType { get; private set; }
-    }
+		[ObsoleteAttribute ("Unused. Use XamlSetMarkupExtensionAttribute functionality instead.")]
+		public Type ExpressionType { get; private set; }
+	}
 }

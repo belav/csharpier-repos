@@ -3,11 +3,11 @@
 // Compiler options: -warnaserror -warn:2
 
 class Base {
-    public void Prop (int a) {}
+	public void Prop (int a) {}
 }
 
 class Derived : Base {
-    public int Prop {
+	public int Prop {
             get {
                 return 0;
             }

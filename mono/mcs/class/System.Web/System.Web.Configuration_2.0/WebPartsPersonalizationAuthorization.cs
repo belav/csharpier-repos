@@ -2,7 +2,7 @@
 // System.Web.Configuration.WebPartsPersonalizationAuthorization
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,31 +34,31 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class WebPartsPersonalizationAuthorization : ConfigurationElement
-    {
-        static ConfigurationProperty Prop;
-        static ConfigurationPropertyCollection properties;
+	public sealed class WebPartsPersonalizationAuthorization : ConfigurationElement
+	{
+		static ConfigurationProperty Prop;
+		static ConfigurationPropertyCollection properties;
 
-        static WebPartsPersonalizationAuthorization ()
-        {
-            Prop = new ConfigurationProperty ("", typeof (AuthorizationRuleCollection), null,
-                              null, PropertyHelper.DefaultValidator,
-                              ConfigurationPropertyOptions.IsDefaultCollection);
-            properties = new ConfigurationPropertyCollection ();
+		static WebPartsPersonalizationAuthorization ()
+		{
+			Prop = new ConfigurationProperty ("", typeof (AuthorizationRuleCollection), null,
+							  null, PropertyHelper.DefaultValidator,
+							  ConfigurationPropertyOptions.IsDefaultCollection);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (Prop);
-        }
+			properties.Add (Prop);
+		}
 
-        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public AuthorizationRuleCollection Rules {
-            get { return (AuthorizationRuleCollection) base [Prop];}
-        }
+		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+		public AuthorizationRuleCollection Rules {
+			get { return (AuthorizationRuleCollection) base [Prop];}
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-    }
+	}
 
 }
 

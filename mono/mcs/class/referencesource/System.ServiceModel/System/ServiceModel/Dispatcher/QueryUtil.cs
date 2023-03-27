@@ -127,36 +127,36 @@ namespace System.ServiceModel.Dispatcher
             this.count = 0;
         }
 #if NO
-        internal QueryBuffer(QueryBuffer<T> buffer)
-        {
-            this.buffer = (T[]) buffer.buffer.Clone();
-            this.count = buffer.count;
-        }
-        
-        internal QueryBuffer(T[] buffer)
-        {
+		internal QueryBuffer(QueryBuffer<T> buffer)
+		{
+		    this.buffer = (T[]) buffer.buffer.Clone();
+		    this.count = buffer.count;
+		}
+		
+		internal QueryBuffer(T[] buffer)
+		{
       Fx.Assert(null != buffer, "");
             this.buffer = buffer;
             this.count = 0;
         }
-    
-        /// <summary>
-        /// Get and set the internal buffer
-        /// If you set the buffer, the count will automatically be set to 0
-        /// </summary>
-        internal T[] Buffer
-        {
-            get
-            {
-                return this.buffer;
-            }
-            set
-            {
+	
+		/// <summary>
+		/// Get and set the internal buffer
+		/// If you set the buffer, the count will automatically be set to 0
+		/// </summary>
+		internal T[] Buffer
+		{
+		    get
+		    {
+		        return this.buffer;
+		    }
+		    set
+		    {
           Fx.Assert(null != value, "");
-                this.buffer = value;
-                this.count = 0;
-            }
-        }
+		        this.buffer = value;
+		        this.count = 0;
+		    }
+		}
 #endif
         /// <summary>
         /// # of items
@@ -168,33 +168,33 @@ namespace System.ServiceModel.Dispatcher
                 return this.count;
             }
 #if NO
-            set
-            {
+		    set
+		    {
           Fx.Assert(value >= 0 && value <= this.buffer.Length, "");
-                this.count = value;
-            }
+		        this.count = value;
+		    }
 #endif
         }
 
 #if NO
-        /// <summary>
-        /// How much can it hold
-        /// </summary>
-        internal int Capacity
-        {
-            get
-            {
-                return this.buffer.Length;
-            }
-            set
-            {
+		/// <summary>
+		/// How much can it hold
+		/// </summary>
+		internal int Capacity
+		{
+		    get
+		    {
+		        return this.buffer.Length;
+		    }
+		    set
+		    {
           Fx.Assert(value >= this.count, "");
-                if (value > this.buffer.Length)
-                {
-                    Array.Resize<T>(ref this.buffer, value);
-                }
-            }
-        }
+		        if (value > this.buffer.Length)
+		        {
+		            Array.Resize<T>(ref this.buffer, value);
+		        }
+		    }
+		}
 #endif
 
         internal T this[int index]
@@ -210,8 +210,8 @@ namespace System.ServiceModel.Dispatcher
         }
 
 #if NO
-        internal void Add()
-        {
+		internal void Add()
+		{
             if (this.count == this.buffer.Length)
             {
                 Array.Resize<T>(ref this.buffer, this.count > 0 ? this.count * 2 : 16);
@@ -238,8 +238,8 @@ namespace System.ServiceModel.Dispatcher
         /// </summary>
         internal void AddReference(ref T t)
         {
-            if (this.count == this.buffer.Length)
-            {
+		    if (this.count == this.buffer.Length)
+		    {
                 Array.Resize<T>(ref this.buffer, this.count > 0 ? this.count * 2 : 16);
             }
             this.buffer[this.count++] = t;
@@ -282,13 +282,13 @@ namespace System.ServiceModel.Dispatcher
         }
         
         /// <summary>
-        /// Add without attempting to grow the buffer. Faster, but must be used with care.
-        /// Caller must ensure that the buffer is large enough.
-        /// </summary>
+		/// Add without attempting to grow the buffer. Faster, but must be used with care.
+		/// Caller must ensure that the buffer is large enough.
+		/// </summary>
         internal void AddOnly(T t)
-        {
-            this.buffer[this.count++] = t;
-        }
+		{
+		    this.buffer[this.count++] = t;
+		}
 #endif
 
         /// <summary>
@@ -351,15 +351,15 @@ namespace System.ServiceModel.Dispatcher
 
 #if NO
         /// <summary>
-        /// Ensure that the internal buffer has adequate capacity
-        /// </summary>
-        internal void EnsureCapacity(int capacity)
-        {
-            if (capacity > this.buffer.Length)
-            {
-                this.Grow(capacity);
+		/// Ensure that the internal buffer has adequate capacity
+		/// </summary>
+		internal void EnsureCapacity(int capacity)
+		{
+		    if (capacity > this.buffer.Length)
+		    {
+		        this.Grow(capacity);
             }
-        }        
+		}		
 
   
         internal void Erase()

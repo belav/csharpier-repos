@@ -31,30 +31,30 @@
 
 namespace System.Web.UI.WebControls
 {
-    public class WizardNavigationEventArgs : EventArgs
-    {
-        int curStepIndex;
-        int nxtStepIndex;
-        bool cancel;
-        
-        public WizardNavigationEventArgs (int currentStepIndex, int nextStepIndex)
-        {
-            this.curStepIndex = currentStepIndex;
-            this.nxtStepIndex = nextStepIndex;
-            cancel = false;
-        }
-        
-        public bool Cancel {
-            get { return cancel; }
-            set { cancel = value; }
-        }
+	public class WizardNavigationEventArgs : EventArgs
+	{
+		int curStepIndex;
+		int nxtStepIndex;
+		bool cancel;
+		
+		public WizardNavigationEventArgs (int currentStepIndex, int nextStepIndex)
+		{
+			this.curStepIndex = currentStepIndex;
+			this.nxtStepIndex = nextStepIndex;
+			cancel = false;
+		}
+		
+		public bool Cancel {
+			get { return cancel; }
+			set { cancel = value; }
+		}
 
-        public int CurrentStepIndex {
-            get { return curStepIndex; }
-        }
+		public int CurrentStepIndex {
+			get { return curStepIndex; }
+		}
 
-        public int NextStepIndex {
-            get { return nxtStepIndex; }
-        }
-    }
+		public int NextStepIndex {
+			get { return nxtStepIndex; }
+		}
+	}
 }

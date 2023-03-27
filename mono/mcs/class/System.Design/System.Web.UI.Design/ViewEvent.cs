@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ViewEvent
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -38,15 +38,15 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-    public sealed class ViewEvent
-    {
-        public static readonly ViewEvent Click = new ViewEvent ();
-        public static readonly ViewEvent Paint = new ViewEvent ();
-        public static readonly ViewEvent TemplateModeChanged = new ViewEvent ();
+	public sealed class ViewEvent
+	{
+		public static readonly ViewEvent Click = new ViewEvent ();
+		public static readonly ViewEvent Paint = new ViewEvent ();
+		public static readonly ViewEvent TemplateModeChanged = new ViewEvent ();
 
-        ViewEvent ()
-        {
-        }
-    }
+		ViewEvent ()
+		{
+		}
+	}
 }
 

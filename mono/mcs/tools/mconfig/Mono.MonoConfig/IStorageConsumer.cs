@@ -29,8 +29,8 @@ using System;
 
 namespace Mono.MonoConfig
 {
-    public interface IStorageConsumer
-    {
-        void SetStorage (object storage);
-    }
+	public interface IStorageConsumer
+	{
+		void SetStorage (object storage);
+	}
 }

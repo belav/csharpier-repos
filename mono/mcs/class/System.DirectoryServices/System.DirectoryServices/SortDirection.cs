@@ -32,16 +32,16 @@
 
 namespace System.DirectoryServices
 {
-    
-    /// <summary>
-    /// Specifies how to sort the results of an Active Directory query.
-    /// </summary>
-    [Serializable]
-    public enum SortDirection 
-    {
-        Ascending,
-        Descending
-    }
+	
+	/// <summary>
+	/// Specifies how to sort the results of an Active Directory query.
+	/// </summary>
+	[Serializable]
+	public enum SortDirection 
+	{
+		Ascending,
+		Descending
+	}
 
 }
 

@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.DesignerActionListsChangedEventArgs.cs
 //
 // Author:
-//      Atsushi Enomoto (atsushi@ximian.com)
+//	  Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 
@@ -34,30 +34,30 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-    public class DesignerActionListsChangedEventArgs : EventArgs
-    {
-        object related_object;
-        DesignerActionListsChangedType change_type;
-        DesignerActionListCollection action_lists;
+	public class DesignerActionListsChangedEventArgs : EventArgs
+	{
+		object related_object;
+		DesignerActionListsChangedType change_type;
+		DesignerActionListCollection action_lists;
 
-        public DesignerActionListsChangedEventArgs (object relatedObject, DesignerActionListsChangedType changeType,
-                                DesignerActionListCollection actionLists)
-        {
-            this.related_object = relatedObject;
-            this.change_type = changeType;
-            this.action_lists = actionLists;
-        }
+		public DesignerActionListsChangedEventArgs (object relatedObject, DesignerActionListsChangedType changeType,
+							    DesignerActionListCollection actionLists)
+		{
+			this.related_object = relatedObject;
+			this.change_type = changeType;
+			this.action_lists = actionLists;
+		}
 
-        public DesignerActionListCollection ActionLists {
-            get { return action_lists; }
-        }
+		public DesignerActionListCollection ActionLists {
+			get { return action_lists; }
+		}
 
-        public DesignerActionListsChangedType ChangeType {
-            get { return change_type; }
-        }
+		public DesignerActionListsChangedType ChangeType {
+			get { return change_type; }
+		}
 
-        public object RelatedObject {
-            get { return related_object; }
-        }
-    }
+		public object RelatedObject {
+			get { return related_object; }
+		}
+	}
 }

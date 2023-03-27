@@ -5015,7 +5015,7 @@ namespace System.Linq
                     try
                     {
                         key = keySelector(val);
-                        result.Add(key, val);
+                    	result.Add(key, val);
                     }
                     catch (ThreadAbortException)
                     {
@@ -5190,7 +5190,7 @@ namespace System.Linq
             if (keySelector == null) throw new ArgumentNullException("keySelector");
 
             // comparer may be null, in which case we use the default comparer.
-        comparer = comparer ?? EqualityComparer<TKey>.Default;
+	    comparer = comparer ?? EqualityComparer<TKey>.Default;
 
             ParallelQuery<IGrouping<TKey, TSource>> groupings = source.GroupBy(keySelector, comparer);
 
@@ -5277,7 +5277,7 @@ namespace System.Linq
             if (elementSelector == null) throw new ArgumentNullException("elementSelector");
 
             // comparer may be null, in which case we use the default comparer.
-        comparer = comparer ?? EqualityComparer<TKey>.Default;
+	    comparer = comparer ?? EqualityComparer<TKey>.Default;
 
             ParallelQuery<IGrouping<TKey, TElement>> groupings = source.GroupBy(keySelector, elementSelector, comparer);
 

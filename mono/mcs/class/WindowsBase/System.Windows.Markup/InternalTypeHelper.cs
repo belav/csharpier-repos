@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -30,17 +30,17 @@ using System.Reflection;
 
 namespace System.Windows.Markup {
 
-    [EditorBrowsable (EditorBrowsableState.Never)]
-    public abstract class InternalTypeHelper
-    {
-        protected InternalTypeHelper()
-        {
-        }
+	[EditorBrowsable (EditorBrowsableState.Never)]
+	public abstract class InternalTypeHelper
+	{
+		protected InternalTypeHelper()
+		{
+		}
 
-        protected internal abstract void AddEventHandler (EventInfo eventInfo, object target, Delegate handler);
-        protected internal abstract Delegate CreateDelegate (Type delegateType, object target, string handler);
-        protected internal abstract object CreateInstance (Type type, CultureInfo culture);
-        protected internal abstract object GetPropertyValue (PropertyInfo propertyInfo, object target, CultureInfo culture);
-        protected internal abstract void SetPropertyValue (PropertyInfo propertyInfo, object target, object value, CultureInfo culture);
-    }
+		protected internal abstract void AddEventHandler (EventInfo eventInfo, object target, Delegate handler);
+		protected internal abstract Delegate CreateDelegate (Type delegateType, object target, string handler);
+		protected internal abstract object CreateInstance (Type type, CultureInfo culture);
+		protected internal abstract object GetPropertyValue (PropertyInfo propertyInfo, object target, CultureInfo culture);
+		protected internal abstract void SetPropertyValue (PropertyInfo propertyInfo, object target, object value, CultureInfo culture);
+	}
 }

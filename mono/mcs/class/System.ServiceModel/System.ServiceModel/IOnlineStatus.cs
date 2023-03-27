@@ -29,10 +29,10 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-    public interface IOnlineStatus
-    {
-        bool IsOnline { get; }
-        event EventHandler Offline;
-        event EventHandler Online;
-    }
+	public interface IOnlineStatus
+	{
+		bool IsOnline { get; }
+		event EventHandler Offline;
+		event EventHandler Online;
+	}
 }

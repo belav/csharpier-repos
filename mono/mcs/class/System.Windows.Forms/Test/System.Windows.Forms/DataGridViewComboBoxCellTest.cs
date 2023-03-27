@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Rolf Bjarne Kvinge  (RKvinge@novell.com)
+//	Rolf Bjarne Kvinge  (RKvinge@novell.com)
 //
 
 
@@ -34,30 +34,30 @@ using System.Collections;
 
 namespace MonoTests.System.Windows.Forms {
 
-    [TestFixture]
-    public class DataGridViewComboBoxCellTest : TestHelper 
-    {
-        private DataGridView CreateAndFill ()
-        {
-            DataGridView dgv = DataGridViewCommon.CreateAndFill ();
-            DataGridViewRow row = new DataGridViewRow ();
-            row.Cells.Add (new DataGridViewComboBoxCell ());
-            row.Cells.Add (new DataGridViewComboBoxCell ());
-            dgv.Rows.Add (row);
-            return dgv;
-        }
-        
-        [Test]
-        public void ToStringTest ()
-        {
-            Assert.AreEqual ("DataGridViewComboBoxCell { ColumnIndex=-1, RowIndex=-1 }", new DataGridViewComboBoxCell ().ToString (), "B");
-            
-            using (DataGridView dgv = CreateAndFill ())
-            {
-                Assert.AreEqual ("DataGridViewComboBoxCell { ColumnIndex=1, RowIndex=2 }", dgv [1, 2].ToString (), "A");
-            }
-            
-            
-        }
-    }
+	[TestFixture]
+	public class DataGridViewComboBoxCellTest : TestHelper 
+	{
+		private DataGridView CreateAndFill ()
+		{
+			DataGridView dgv = DataGridViewCommon.CreateAndFill ();
+			DataGridViewRow row = new DataGridViewRow ();
+			row.Cells.Add (new DataGridViewComboBoxCell ());
+			row.Cells.Add (new DataGridViewComboBoxCell ());
+			dgv.Rows.Add (row);
+			return dgv;
+		}
+		
+		[Test]
+		public void ToStringTest ()
+		{
+			Assert.AreEqual ("DataGridViewComboBoxCell { ColumnIndex=-1, RowIndex=-1 }", new DataGridViewComboBoxCell ().ToString (), "B");
+			
+			using (DataGridView dgv = CreateAndFill ())
+			{
+				Assert.AreEqual ("DataGridViewComboBoxCell { ColumnIndex=1, RowIndex=2 }", dgv [1, 2].ToString (), "A");
+			}
+			
+			
+		}
+	}
 }

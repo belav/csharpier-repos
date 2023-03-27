@@ -2,7 +2,7 @@
 // Test.Mono.Messaging.RabbitMQ
 //
 // Authors:
-//      Michael Barker (mike@middlesoft.co.uk)
+//	  Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -35,105 +35,105 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Messaging
 {
-    [TestFixture]
-    // [Ignore]
-    public class SelectorTest
-    {
-        
-        [Test]
-        public void SelectById ()
-        {
-            String body = "Foo-" + DateTime.Now.ToString ();
-            Message s1 = new Message (body, new BinaryMessageFormatter());
-            MessageQueue q = MQUtil.GetQueue ();
-            q.Send (s1);
-            
-            String id = s1.Id;
-            
-            Message r1 = q.ReceiveById (id);
-            
-            Assert.AreEqual (body, r1.Body, "Unable to ReceiveById correctly");
-        }
-        
-        [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void SelectByIdNotFound ()
-        {
-            String body = "Foo-" + DateTime.Now.ToString();
-            Message s1 = new Message(body, new BinaryMessageFormatter());
-            MessageQueue q = MQUtil.GetQueue();
-            q.Send (s1);
-            
-            String id = "fail!";
-            
-            try {
-                Message r1 = q.ReceiveById (id);
-            } finally {
-                q.Purge ();
-            }
-        }
-        
-        [Test]
-        public void SelectByCorrelationId ()
-        {
-            string correlationId = Guid.NewGuid () + "\\0";
-            String body = "Foo-" + DateTime.Now.ToString();
-            Message s1 = new Message(body, new BinaryMessageFormatter());
-            s1.CorrelationId = correlationId;
-            MessageQueue q = MQUtil.GetQueue();
-            q.Send (s1);
-            
-            Message r1 = q.ReceiveByCorrelationId (correlationId);
-            
-            Assert.AreEqual (body, r1.Body, "Unable to ReceiveByCorrelationId correctly");
-        }
-        
-        [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void SelectByCorrelationIdNotFound ()
-        {
-            string correlationId = Guid.NewGuid() + "\\0";
-            String body = "Foo-" + DateTime.Now.ToString();
-            Message s1 = new Message(body, new BinaryMessageFormatter());
-            s1.CorrelationId = correlationId;
-            MessageQueue q = MQUtil.GetQueue();
-            q.Send (s1);
-            
-            try {
-                Message r1 = q.ReceiveByCorrelationId ("fail!");
-            } finally {
-                q.Purge ();
-            }
-        }
-        
-        [Test]
-        public void SelectByIdWithTimeout ()
-        {
-            String body = "Foo-" + DateTime.Now.ToString();
-            Message s1 = new Message(body, new BinaryMessageFormatter());
-            MessageQueue q = MQUtil.GetQueue();
-            q.Send (s1);
-            
-            String id = s1.Id;
-            
-            Message r1 = q.ReceiveById (id, new TimeSpan (0, 0, 2));
-            
-            Assert.AreEqual (body, r1.Body, "Unable to ReceiveById correctly");
-        }
-                
-        [Test]
-        public void SelectByCorrelationIdWithTimeout ()
-        {
-            string correlationId = Guid.NewGuid() + "\\0";
-            String body = "Foo-" + DateTime.Now.ToString();
-            Message s1 = new Message(body, new BinaryMessageFormatter());
-            s1.CorrelationId = correlationId;
-            MessageQueue q = MQUtil.GetQueue();
-            q.Send (s1);
-            
-            Message r1 = q.ReceiveByCorrelationId (correlationId, new TimeSpan (0, 0, 2));
-            
-            Assert.AreEqual (body, r1.Body, "Unable to ReceiveByCorrelationId correctly");
-        }
-    }
+	[TestFixture]
+	// [Ignore]
+	public class SelectorTest
+	{
+		
+		[Test]
+		public void SelectById ()
+		{
+			String body = "Foo-" + DateTime.Now.ToString ();
+			Message s1 = new Message (body, new BinaryMessageFormatter());
+			MessageQueue q = MQUtil.GetQueue ();
+			q.Send (s1);
+			
+			String id = s1.Id;
+			
+			Message r1 = q.ReceiveById (id);
+			
+			Assert.AreEqual (body, r1.Body, "Unable to ReceiveById correctly");
+		}
+		
+		[Test]
+		[ExpectedException (typeof (InvalidOperationException))]
+		public void SelectByIdNotFound ()
+		{
+			String body = "Foo-" + DateTime.Now.ToString();
+			Message s1 = new Message(body, new BinaryMessageFormatter());
+			MessageQueue q = MQUtil.GetQueue();
+			q.Send (s1);
+			
+			String id = "fail!";
+			
+			try {
+				Message r1 = q.ReceiveById (id);
+			} finally {
+				q.Purge ();
+			}
+		}
+		
+		[Test]
+		public void SelectByCorrelationId ()
+		{
+			string correlationId = Guid.NewGuid () + "\\0";
+			String body = "Foo-" + DateTime.Now.ToString();
+			Message s1 = new Message(body, new BinaryMessageFormatter());
+			s1.CorrelationId = correlationId;
+			MessageQueue q = MQUtil.GetQueue();
+			q.Send (s1);
+			
+			Message r1 = q.ReceiveByCorrelationId (correlationId);
+			
+			Assert.AreEqual (body, r1.Body, "Unable to ReceiveByCorrelationId correctly");
+		}
+		
+		[Test]
+		[ExpectedException (typeof (InvalidOperationException))]
+		public void SelectByCorrelationIdNotFound ()
+		{
+			string correlationId = Guid.NewGuid() + "\\0";
+			String body = "Foo-" + DateTime.Now.ToString();
+			Message s1 = new Message(body, new BinaryMessageFormatter());
+			s1.CorrelationId = correlationId;
+			MessageQueue q = MQUtil.GetQueue();
+			q.Send (s1);
+			
+			try {
+				Message r1 = q.ReceiveByCorrelationId ("fail!");
+			} finally {
+				q.Purge ();
+			}
+		}
+		
+		[Test]
+		public void SelectByIdWithTimeout ()
+		{
+			String body = "Foo-" + DateTime.Now.ToString();
+			Message s1 = new Message(body, new BinaryMessageFormatter());
+			MessageQueue q = MQUtil.GetQueue();
+			q.Send (s1);
+			
+			String id = s1.Id;
+			
+			Message r1 = q.ReceiveById (id, new TimeSpan (0, 0, 2));
+			
+			Assert.AreEqual (body, r1.Body, "Unable to ReceiveById correctly");
+		}
+				
+		[Test]
+		public void SelectByCorrelationIdWithTimeout ()
+		{
+			string correlationId = Guid.NewGuid() + "\\0";
+			String body = "Foo-" + DateTime.Now.ToString();
+			Message s1 = new Message(body, new BinaryMessageFormatter());
+			s1.CorrelationId = correlationId;
+			MessageQueue q = MQUtil.GetQueue();
+			q.Send (s1);
+			
+			Message r1 = q.ReceiveByCorrelationId (correlationId, new TimeSpan (0, 0, 2));
+			
+			Assert.AreEqual (body, r1.Body, "Unable to ReceiveByCorrelationId correctly");
+		}
+	}
 }

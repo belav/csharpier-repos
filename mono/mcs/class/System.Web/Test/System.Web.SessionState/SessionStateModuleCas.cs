@@ -1,9 +1,9 @@
 //
 // WindowsAuthenticationModuleCas.cs 
-//    - CAS unit tests for System.Web.SessionState.WindowsAuthenticationModule
+//	- CAS unit tests for System.Web.SessionState.WindowsAuthenticationModule
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,67 +38,67 @@ using System.Web.SessionState;
 
 namespace MonoCasTests.System.Web.SessionState {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class SessionStateModuleCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class SessionStateModuleCas : AspNetHostingMinimal {
 
-        private HttpApplication app;
-        private SessionStateModule module;
+		private HttpApplication app;
+		private SessionStateModule module;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            app = new HttpApplication ();
-            module = new SessionStateModule ();
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			app = new HttpApplication ();
+			module = new SessionStateModule ();
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Constructor_Deny_UnmanagedCode ()
-        {
-            new SessionStateModule ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void Constructor_Deny_UnmanagedCode ()
+		{
+			new SessionStateModule ();
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-        public void Constructor_PermitOnly_UnmanagedCode ()
-        {
-            new SessionStateModule ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
+		public void Constructor_PermitOnly_UnmanagedCode ()
+		{
+			new SessionStateModule ();
+		}
 
-        private void StartStop (object sender, EventArgs e)
-        {
-        }
+		private void StartStop (object sender, EventArgs e)
+		{
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Module ()
-        {
-            // only the ctor requires UnmanagedCode
-            try {
-                module.Init (app);
-            }
-            catch (NullReferenceException) {
-                // fx2
-            }
-            module.Start += new EventHandler (StartStop);
-            module.End += new EventHandler (StartStop);
-            module.End -= new EventHandler (StartStop);
-            module.Start -= new EventHandler (StartStop);
-            module.Dispose (); // but doesn't implement IDisposable
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Module ()
+		{
+			// only the ctor requires UnmanagedCode
+			try {
+				module.Init (app);
+			}
+			catch (NullReferenceException) {
+				// fx2
+			}
+			module.Start += new EventHandler (StartStop);
+			module.End += new EventHandler (StartStop);
+			module.End -= new EventHandler (StartStop);
+			module.Start -= new EventHandler (StartStop);
+			module.Dispose (); // but doesn't implement IDisposable
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            return base.CreateControl (action, level);
-        }
+		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			return base.CreateControl (action, level);
+		}
 
-        public override Type Type {
-            get { return typeof (SessionStateModule); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (SessionStateModule); }
+		}
+	}
 }

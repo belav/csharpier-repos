@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,53 +32,53 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("69E5DF00-7B8B-11d3-AF61-00A024FFC08C")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIWebBrowser {
+	[Guid ("69E5DF00-7B8B-11d3-AF61-00A024FFC08C")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIWebBrowser {
 
 #region nsIWebBrowser
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int addWebBrowserListener (
-                [MarshalAs (UnmanagedType.Interface)]   nsIWeakReference aListener,
-                [MarshalAs (UnmanagedType.LPStruct)]   Guid aIID);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int addWebBrowserListener (
+				[MarshalAs (UnmanagedType.Interface)]   nsIWeakReference aListener,
+				[MarshalAs (UnmanagedType.LPStruct)]   Guid aIID);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int removeWebBrowserListener (
-                [MarshalAs (UnmanagedType.Interface)]   nsIWeakReference aListener,
-                [MarshalAs (UnmanagedType.LPStruct)]   Guid aIID);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int removeWebBrowserListener (
+				[MarshalAs (UnmanagedType.Interface)]   nsIWeakReference aListener,
+				[MarshalAs (UnmanagedType.LPStruct)]   Guid aIID);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getContainerWindow ([MarshalAs (UnmanagedType.Interface)]  out nsIWebBrowserChrome ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getContainerWindow ([MarshalAs (UnmanagedType.Interface)]  out nsIWebBrowserChrome ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setContainerWindow ([MarshalAs (UnmanagedType.Interface)]  nsIWebBrowserChrome value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setContainerWindow ([MarshalAs (UnmanagedType.Interface)]  nsIWebBrowserChrome value);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getParentURIContentListener ([MarshalAs (UnmanagedType.Interface)]  out nsIURIContentListener ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getParentURIContentListener ([MarshalAs (UnmanagedType.Interface)]  out nsIURIContentListener ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setParentURIContentListener ([MarshalAs (UnmanagedType.Interface)]  nsIURIContentListener value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setParentURIContentListener ([MarshalAs (UnmanagedType.Interface)]  nsIURIContentListener value);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getContentDOMWindow ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMWindow ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getContentDOMWindow ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMWindow ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsWebBrowser {
-        public static nsIWebBrowser GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebBrowser obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIWebBrowser).GUID, obj);
-            return o as nsIWebBrowser;
-        }
-    }
+	internal class nsWebBrowser {
+		public static nsIWebBrowser GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebBrowser obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIWebBrowser).GUID, obj);
+			return o as nsIWebBrowser;
+		}
+	}
 }

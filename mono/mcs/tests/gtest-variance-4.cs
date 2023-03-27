@@ -2,18 +2,18 @@ delegate int Foo<in T> (T t);
 
 public class Test
 {
-    public static int Main ()
-    {
-        string message = "Hello World!";
-        Foo<object> foo = (o) => o.GetHashCode ();
-        if (Bar (foo, message) != message.GetHashCode ())
-            return 1;
+	public static int Main ()
+	{
+		string message = "Hello World!";
+		Foo<object> foo = (o) => o.GetHashCode ();
+		if (Bar (foo, message) != message.GetHashCode ())
+			return 1;
 
-        return 0;
-    }
+		return 0;
+	}
 
-    static int Bar (Foo<string> foo, string s)
-    {
-        return foo(s);
-    }
+	static int Bar (Foo<string> foo, string s)
+	{
+		return foo(s);
+	}
 }

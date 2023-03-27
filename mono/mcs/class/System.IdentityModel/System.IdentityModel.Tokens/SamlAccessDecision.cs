@@ -2,7 +2,7 @@
 // SamlAccessDecision.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,14 +29,14 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Tokens
 {
-    [DataContract]
-    public enum SamlAccessDecision
-    {
-        [EnumMember]
-        Permit,
-        [EnumMember]
-        Deny,
-        [EnumMember]
-        Indeterminate,
-    }
+	[DataContract]
+	public enum SamlAccessDecision
+	{
+		[EnumMember]
+		Permit,
+		[EnumMember]
+		Deny,
+		[EnumMember]
+		Indeterminate,
+	}
 }

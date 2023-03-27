@@ -1,9 +1,9 @@
 //
 // PagedDataSourceCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.PagedDataSource
+//	- CAS unit tests for System.Web.UI.WebControls.PagedDataSource
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,47 +39,47 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class PagedDataSourceCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class PagedDataSourceCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            PagedDataSourceTest unit = new PagedDataSourceTest ();
-            unit.SetUp ();
-            unit.GetItemProperties ();
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			PagedDataSourceTest unit = new PagedDataSourceTest ();
+			unit.SetUp ();
+			unit.GetItemProperties ();
 
-            unit.SetUp ();
-            unit.GetEnumeratorTest ();
+			unit.SetUp ();
+			unit.GetEnumeratorTest ();
 
-            unit.SetUp ();
-            unit.FirstIndexInPageTest ();
+			unit.SetUp ();
+			unit.FirstIndexInPageTest ();
 
-            unit.SetUp ();
-            unit.PageCountTest ();
+			unit.SetUp ();
+			unit.PageCountTest ();
 
-            unit.SetUp ();
-            unit.CountTest ();
+			unit.SetUp ();
+			unit.CountTest ();
 
-            unit.SetUp ();
-            unit.IsFirstPageTest ();
+			unit.SetUp ();
+			unit.IsFirstPageTest ();
 
-            unit.SetUp ();
-            unit.IsLastPageTest ();
+			unit.SetUp ();
+			unit.IsLastPageTest ();
 
-            unit.SetUp ();
-            unit.TestEnumerators ();
+			unit.SetUp ();
+			unit.TestEnumerators ();
 
-            unit.SetUp ();
-            unit.TestEnumerators_NoPaging ();
-        }
+			unit.SetUp ();
+			unit.TestEnumerators_NoPaging ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (PagedDataSource); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (PagedDataSource); }
+		}
+	}
 }

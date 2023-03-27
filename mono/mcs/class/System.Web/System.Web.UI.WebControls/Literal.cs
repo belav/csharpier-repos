@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.Literal.cs
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,83 +31,83 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
 
-    // CAS
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [ControlBuilder(typeof(LiteralControlBuilder))]
-    [DataBindingHandler("System.Web.UI.Design.TextDataBindingHandler, " + Consts.AssemblySystem_Design)]
-    [DefaultProperty("Text")]
-    [Designer ("System.Web.UI.Design.WebControls.LiteralDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    public class Literal : Control
-    , ITextControl
-    {
+	// CAS
+	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[ControlBuilder(typeof(LiteralControlBuilder))]
+	[DataBindingHandler("System.Web.UI.Design.TextDataBindingHandler, " + Consts.AssemblySystem_Design)]
+	[DefaultProperty("Text")]
+	[Designer ("System.Web.UI.Design.WebControls.LiteralDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+	public class Literal : Control
+	, ITextControl
+	{
 
-        public Literal ()
-        {
-        }
+		public Literal ()
+		{
+		}
 
-        [DefaultValue (LiteralMode.Transform)]
-        [WebSysDescription ("")]
-        [WebCategory ("Behavior")]
-        public LiteralMode Mode 
-        {
-            get {
-                return ViewState ["Mode"] == null ? LiteralMode.Transform : (LiteralMode) ViewState ["Mode"];
-            }
-            set {
-                if (((int) value) < 0 || ((int) value) > 2)
-                    throw new ArgumentOutOfRangeException ();
-                ViewState ["Mode"] = value;
-            }
-        }
+		[DefaultValue (LiteralMode.Transform)]
+		[WebSysDescription ("")]
+		[WebCategory ("Behavior")]
+		public LiteralMode Mode 
+		{
+			get {
+				return ViewState ["Mode"] == null ? LiteralMode.Transform : (LiteralMode) ViewState ["Mode"];
+			}
+			set {
+				if (((int) value) < 0 || ((int) value) > 2)
+					throw new ArgumentOutOfRangeException ();
+				ViewState ["Mode"] = value;
+			}
+		}
 
-        [Bindable(true)]
-        [DefaultValue("")]
-        [WebSysDescription ("")]
-        [WebCategory ("Appearance")]
-        [Localizable (true)]
-        public string Text {
-            get {
-                return ViewState.GetString ("Text", String.Empty);
-            }
-            set {
-                ViewState ["Text"] = value;
-            }
-        }
+		[Bindable(true)]
+		[DefaultValue("")]
+		[WebSysDescription ("")]
+		[WebCategory ("Appearance")]
+		[Localizable (true)]
+		public string Text {
+			get {
+				return ViewState.GetString ("Text", String.Empty);
+			}
+			set {
+				ViewState ["Text"] = value;
+			}
+		}
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override void Focus ()
-        {
-            throw new NotSupportedException ();
-        }
+		[EditorBrowsable (EditorBrowsableState.Never)]
+		public override void Focus ()
+		{
+			throw new NotSupportedException ();
+		}
 
-        protected override ControlCollection CreateControlCollection ()
-        {
-            return new EmptyControlCollection (this);
-        }
+		protected override ControlCollection CreateControlCollection ()
+		{
+			return new EmptyControlCollection (this);
+		}
 
-        protected override void AddParsedSubObject (object obj)
-        {
-            LiteralControl literal = obj as LiteralControl;
-            if (literal != null) {
-                Text = literal.Text;
-                return;
-            }
+		protected override void AddParsedSubObject (object obj)
+		{
+			LiteralControl literal = obj as LiteralControl;
+			if (literal != null) {
+				Text = literal.Text;
+				return;
+			}
 
-            throw new HttpException (Locale.GetText (
-                  "'Literal' cannot have children of type '{0}'",
-                  obj.GetType ()));
-        }
+			throw new HttpException (Locale.GetText (
+			      "'Literal' cannot have children of type '{0}'",
+			      obj.GetType ()));
+		}
 
-        protected internal
-        override void Render (HtmlTextWriter writer)
-        {
-            if (Mode == LiteralMode.Encode)
-                writer.Write (HttpUtility.HtmlEncode (Text));
-            else
-            writer.Write (Text);
-        }
-    }
+		protected internal
+		override void Render (HtmlTextWriter writer)
+		{
+			if (Mode == LiteralMode.Encode)
+				writer.Write (HttpUtility.HtmlEncode (Text));
+			else
+			writer.Write (Text);
+		}
+	}
 }
 

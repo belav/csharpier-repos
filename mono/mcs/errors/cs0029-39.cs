@@ -8,8 +8,8 @@ public ref struct S
 
 class Test
 {
-    public static void Main ()
-    {
-        object o = new S ();
-    }
+	public static void Main ()
+	{
+		object o = new S ();
+	}
 }

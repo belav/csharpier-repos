@@ -2,7 +2,7 @@
 // System.Net.Security.LocalCertificateSelectionCallback.cs
 //
 // Authors:
-//    Tim Coleman (tim@timcoleman.com)
+//	Tim Coleman (tim@timcoleman.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (c) 2004 Novell, Inc. (http://www.novell.com)
@@ -33,10 +33,10 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net.Security 
 {
-    public delegate X509Certificate LocalCertificateSelectionCallback (
-        object sender,
-        string targetHost,
-        X509CertificateCollection localCertificates,
-        X509Certificate remoteCertificate,
-        string [] acceptableIssuers);
+	public delegate X509Certificate LocalCertificateSelectionCallback (
+		object sender,
+		string targetHost,
+		X509CertificateCollection localCertificates,
+		X509Certificate remoteCertificate,
+		string [] acceptableIssuers);
 }

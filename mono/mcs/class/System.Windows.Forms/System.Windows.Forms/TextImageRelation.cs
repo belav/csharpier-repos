@@ -23,18 +23,18 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum TextImageRelation
-    {
-        Overlay = 0,
-        ImageAboveText = 1,
-        TextAboveImage = 2,
-        ImageBeforeText = 4,
-        TextBeforeImage = 8
-    }
+	public enum TextImageRelation
+	{
+		Overlay = 0,
+		ImageAboveText = 1,
+		TextAboveImage = 2,
+		ImageBeforeText = 4,
+		TextBeforeImage = 8
+	}
 }

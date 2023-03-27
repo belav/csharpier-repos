@@ -2,7 +2,7 @@
 // AssociationProvider.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -35,32 +35,32 @@ using System.Security.Permissions;
 
 namespace System.Web.DynamicData.ModelProviders
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public abstract class AssociationProvider
-    {
-        [MonoTODO]
-        public virtual AssociationDirection Direction { get; protected set; }
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public abstract class AssociationProvider
+	{
+		[MonoTODO]
+		public virtual AssociationDirection Direction { get; protected set; }
 
-        [MonoTODO]
-        public virtual ReadOnlyCollection<string> ForeignKeyNames { get; protected set; }
+		[MonoTODO]
+		public virtual ReadOnlyCollection<string> ForeignKeyNames { get; protected set; }
 
-        [MonoTODO]
-        public virtual ColumnProvider FromColumn { get; protected set; }
+		[MonoTODO]
+		public virtual ColumnProvider FromColumn { get; protected set; }
 
-        [MonoTODO]
-        public virtual bool IsPrimaryKeyInThisTable { get; protected set; }
+		[MonoTODO]
+		public virtual bool IsPrimaryKeyInThisTable { get; protected set; }
 
-        [MonoTODO]
-        public virtual ColumnProvider ToColumn { get; protected set; }
+		[MonoTODO]
+		public virtual ColumnProvider ToColumn { get; protected set; }
 
-        [MonoTODO]
-        public virtual TableProvider ToTable { get; protected set; }
+		[MonoTODO]
+		public virtual TableProvider ToTable { get; protected set; }
 
-        [MonoTODO]
-        public virtual string GetSortExpression (ColumnProvider sortColumn)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public virtual string GetSortExpression (ColumnProvider sortColumn)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

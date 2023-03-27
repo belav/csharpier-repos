@@ -225,14 +225,14 @@ namespace System.Xml.XPath
         }
 
         public override object UnderlyingObject {
-            get { 
+	        get { 
                 if (source is string) { 
                     // convert lazy text to eager text
                     source = parent.LastNode;
                     parent = null;
                 }
                 return source;
-            }
+	        }
         }
 
         public override string Value {

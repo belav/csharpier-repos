@@ -6,8 +6,8 @@ using System;
 
 public class Test
 {
-    void TestMethod (IFoo i)
-    {
-        i.get_Jaj (1);
-    }
+	void TestMethod (IFoo i)
+	{
+		i.get_Jaj (1);
+	}
 }

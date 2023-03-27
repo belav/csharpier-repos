@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
@@ -29,25 +29,25 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-    public class DataGridViewCellCancelEventArgs : CancelEventArgs {
+	public class DataGridViewCellCancelEventArgs : CancelEventArgs {
 
-        private int columnIndex;
-        private int rowIndex;
+		private int columnIndex;
+		private int rowIndex;
 
-        public DataGridViewCellCancelEventArgs (int columnIndex, int rowIndex) {
-            this.columnIndex = columnIndex;
-            this.rowIndex = rowIndex;
-        }
+		public DataGridViewCellCancelEventArgs (int columnIndex, int rowIndex) {
+			this.columnIndex = columnIndex;
+			this.rowIndex = rowIndex;
+		}
 
-        public int ColumnIndex {
-            get { return columnIndex; }
-        }
+		public int ColumnIndex {
+			get { return columnIndex; }
+		}
 
-        public int RowIndex {
-            get { return rowIndex; }
-        }
+		public int RowIndex {
+			get { return rowIndex; }
+		}
 
-    }
+	}
 
 }
 

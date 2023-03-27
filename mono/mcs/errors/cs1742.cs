@@ -3,9 +3,9 @@
 
 class C
 {
-    public static void Main ()
-    {
-        int[] o = new int[5];
-        o [u:3] = 9;
-    }
+	public static void Main ()
+	{
+		int[] o = new int[5];
+		o [u:3] = 9;
+	}
 }

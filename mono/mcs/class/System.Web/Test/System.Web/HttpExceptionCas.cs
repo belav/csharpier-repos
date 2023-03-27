@@ -2,7 +2,7 @@
 // HttpExceptionCas.cs - CAS unit tests for System.Web.HttpException
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,79 +36,79 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HttpExceptionCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HttpExceptionCas : AspNetHostingMinimal {
 
-        private HttpException he;
+		private HttpException he;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            he = new HttpException ();
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			he = new HttpException ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void CreateFromLastError ()
-        {
-            Assert.IsNotNull (HttpException.CreateFromLastError ("mono"));
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void CreateFromLastError ()
+		{
+			Assert.IsNotNull (HttpException.CreateFromLastError ("mono"));
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            HttpException e = new HttpException ();
-            e.GetHtmlErrorMessage (); // null for ms, non-null for mono
-            Assert.AreEqual (500, e.GetHttpCode (), "HttpCode");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			HttpException e = new HttpException ();
+			e.GetHtmlErrorMessage (); // null for ms, non-null for mono
+			Assert.AreEqual (500, e.GetHttpCode (), "HttpCode");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            HttpException e = new HttpException ("message");
-            e.GetHtmlErrorMessage (); // null for ms, non-null for mono
-            Assert.AreEqual (500, e.GetHttpCode (), "HttpCode");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			HttpException e = new HttpException ("message");
+			e.GetHtmlErrorMessage (); // null for ms, non-null for mono
+			Assert.AreEqual (500, e.GetHttpCode (), "HttpCode");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2a_Deny_Unrestricted ()
-        {
-            HttpException e = new HttpException (501, "message");
-            e.GetHtmlErrorMessage (); // null for ms, non-null for mono
-            Assert.AreEqual (501, e.GetHttpCode (), "HttpCode");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2a_Deny_Unrestricted ()
+		{
+			HttpException e = new HttpException (501, "message");
+			e.GetHtmlErrorMessage (); // null for ms, non-null for mono
+			Assert.AreEqual (501, e.GetHttpCode (), "HttpCode");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2b_Deny_Unrestricted ()
-        {
-            HttpException e = new HttpException ("message", new Exception ());
-            e.GetHtmlErrorMessage (); // null for ms, non-null for mono
-            Assert.AreEqual (500, e.GetHttpCode (), "HttpCode");
-        }
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetObjectData_Deny_SerializationFormatter ()
-        {
-            he.GetObjectData (null, new StreamingContext ());
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2b_Deny_Unrestricted ()
+		{
+			HttpException e = new HttpException ("message", new Exception ());
+			e.GetHtmlErrorMessage (); // null for ms, non-null for mono
+			Assert.AreEqual (500, e.GetHttpCode (), "HttpCode");
+		}
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void GetObjectData_Deny_SerializationFormatter ()
+		{
+			he.GetObjectData (null, new StreamingContext ());
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void GetObjectData_PermitOnly_SerializationFormatter ()
-        {
-            he.GetObjectData (null, new StreamingContext ());
-        }
-        // LinkDemand
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void GetObjectData_PermitOnly_SerializationFormatter ()
+		{
+			he.GetObjectData (null, new StreamingContext ());
+		}
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (HttpException); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HttpException); }
+		}
+	}
 }

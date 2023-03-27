@@ -3,8 +3,8 @@
 
 class Program
 {
-    public static void M<T> (T item1, T item2 = null) where T : class
-    {
-        M (1);
-    }
+	public static void M<T> (T item1, T item2 = null) where T : class
+	{
+		M (1);
+	}
 }

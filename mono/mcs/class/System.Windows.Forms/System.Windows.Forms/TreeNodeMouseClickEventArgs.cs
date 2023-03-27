@@ -23,27 +23,27 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public class TreeNodeMouseClickEventArgs : MouseEventArgs
-    {
-        private TreeNode node;
+	public class TreeNodeMouseClickEventArgs : MouseEventArgs
+	{
+		private TreeNode node;
 
-        #region Public Constructors
-        public TreeNodeMouseClickEventArgs (TreeNode node, MouseButtons button, int clicks, int x, int y)
-            : base (button, clicks, x, y, 0)
-        {
-            this.node = node;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public TreeNodeMouseClickEventArgs (TreeNode node, MouseButtons button, int clicks, int x, int y)
+			: base (button, clicks, x, y, 0)
+		{
+			this.node = node;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public TreeNode Node {
-            get { return this.node; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public TreeNode Node {
+			get { return this.node; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

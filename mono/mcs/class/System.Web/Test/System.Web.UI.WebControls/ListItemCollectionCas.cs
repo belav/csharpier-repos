@@ -1,9 +1,9 @@
 //
 // ListItemCollectionCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.ListItemCollection
+//	- CAS unit tests for System.Web.UI.WebControls.ListItemCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,29 +38,29 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ListItemCollectionCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ListItemCollectionCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            ListItemCollectionTest unit = new ListItemCollectionTest ();
-            unit.Methods ();
-            unit.IListTest ();
-            unit.AddTest ();
-            unit.AssignmentTest ();
-            unit.ContainsTest ();
-            unit.IndexOfTest ();
-            unit.RemoveTest ();
-            unit.ViewState ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			ListItemCollectionTest unit = new ListItemCollectionTest ();
+			unit.Methods ();
+			unit.IListTest ();
+			unit.AddTest ();
+			unit.AssignmentTest ();
+			unit.ContainsTest ();
+			unit.IndexOfTest ();
+			unit.RemoveTest ();
+			unit.ViewState ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (ListItemCollection); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (ListItemCollection); }
+		}
+	}
 }

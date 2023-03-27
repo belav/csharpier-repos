@@ -26,7 +26,7 @@ namespace System.Web.Hosting {
         void ReportMessageReceived();
 
         int  GetId();
-        
+		
         int  GetBlobLength();
 
         void GetBlob([In, Out, MarshalAs(UnmanagedType.LPArray)] byte[] buffer, ref int bufferSize);

@@ -10,8 +10,8 @@ class Bar<T> : Foo<T>
 
 class X
 {
-    static void Main ()
-    {
-        Foo<int> foo = new Bar<long> ();
-    }
+	static void Main ()
+	{
+		Foo<int> foo = new Bar<long> ();
+	}
 }

@@ -2,7 +2,7 @@
 // TransportSecurityBindingElementTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -39,15 +39,15 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Security
 {
-    [TestFixture]
-    public class TransportSecurityBindingElementTest
-    {
-        [Test]
-        public void DefaultValues ()
-        {
-            var be = new TransportSecurityBindingElement ();
-        }
+	[TestFixture]
+	public class TransportSecurityBindingElementTest
+	{
+		[Test]
+		public void DefaultValues ()
+		{
+			var be = new TransportSecurityBindingElement ();
+		}
 
-    }
+	}
 }
 #endif

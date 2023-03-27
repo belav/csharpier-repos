@@ -40,46 +40,46 @@ using NUnit.Framework;
 
 namespace StandAloneTests.RegisterBuildProvider
 {
-    [TestCase ("RegisterBuildProvider 01", "Tests for BuildProvider.RegisterBuildProvider")]
-    public sealed class RegisterBuildProvider_01 : ITestCase
-    {
-        static string[] expectedMessages = {
-            "RegisterFooBuildProvider called",
-            "Registering typeof (string) failed (ArgumentException)",
-            "Registering typeof (BuildProvider) succeeded.",
-            "Registering typeof (FooBuildProvider) succeeded.",
-            "RegisterBuildProvider.Test.FooBuildProvider.GenerateCode called"
-        };
-        
-        public string PhysicalPath {
-            get {
-                return Path.Combine (Consts.BasePhysicalDir, "RegisterBuildProvider");
-            }
-        }
-        
-        public string VirtualPath  {
-            get { return "/"; }
-        }
+	[TestCase ("RegisterBuildProvider 01", "Tests for BuildProvider.RegisterBuildProvider")]
+	public sealed class RegisterBuildProvider_01 : ITestCase
+	{
+		static string[] expectedMessages = {
+			"RegisterFooBuildProvider called",
+			"Registering typeof (string) failed (ArgumentException)",
+			"Registering typeof (BuildProvider) succeeded.",
+			"Registering typeof (FooBuildProvider) succeeded.",
+			"RegisterBuildProvider.Test.FooBuildProvider.GenerateCode called"
+		};
+		
+		public string PhysicalPath {
+			get {
+				return Path.Combine (Consts.BasePhysicalDir, "RegisterBuildProvider");
+			}
+		}
+		
+		public string VirtualPath  {
+			get { return "/"; }
+		}
 
-        public bool SetUp (List <TestRunItem> runItems)
-        {
-            runItems.Add (new TestRunItem ("/default.aspx", Default_Aspx));
-            
-            return true;
-        }
+		public bool SetUp (List <TestRunItem> runItems)
+		{
+			runItems.Add (new TestRunItem ("/default.aspx", Default_Aspx));
+			
+			return true;
+		}
 
-        void Default_Aspx (string result, TestRunItem runItem)
-        {
-            var messages = runItem.TestRunData as List <string>;
+		void Default_Aspx (string result, TestRunItem runItem)
+		{
+			var messages = runItem.TestRunData as List <string>;
 
-            Assert.IsNotNull (messages, "#A1");
+			Assert.IsNotNull (messages, "#A1");
 
-            int len = messages.Count;
-            if (expectedMessages.Length != len)
-                Assert.Fail ("Expected {0} messages, found {1}", expectedMessages.Length, len);
-            
-            for (int i = 0; i < len; i++)
-                Assert.AreEqual (expectedMessages [i], messages [i], "#A2-" + i.ToString ());
-        }
-    }
+			int len = messages.Count;
+			if (expectedMessages.Length != len)
+				Assert.Fail ("Expected {0} messages, found {1}", expectedMessages.Length, len);
+			
+			for (int i = 0; i < len; i++)
+				Assert.AreEqual (expectedMessages [i], messages [i], "#A2-" + i.ToString ());
+		}
+	}
 }

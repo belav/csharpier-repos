@@ -53,7 +53,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return event_data_type;
+	return event_data_type;
       }
     }
 

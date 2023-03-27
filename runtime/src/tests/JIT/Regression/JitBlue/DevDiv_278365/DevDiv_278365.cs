@@ -30,7 +30,7 @@ public class Program
             return 100;
         }        
     }
-    
+	
     public static int Main()
     {
         try

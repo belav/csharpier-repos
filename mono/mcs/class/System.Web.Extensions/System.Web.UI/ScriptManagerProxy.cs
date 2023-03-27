@@ -1,4 +1,4 @@
-//
+﻿//
 // ScriptManagerProxy.cs
 //
 // Author:
@@ -34,104 +34,104 @@ using System.ComponentModel;
 
 namespace System.Web.UI
 {
-    [PersistChildren (false)]
-    [ParseChildren (true)]
-    [DefaultProperty ("Scripts")]
-    [NonVisualControl]
-    public class ScriptManagerProxy : Control
-    {
-        ScriptManager _scriptManager;
-        ScriptReferenceCollection _scripts;
-        CompositeScriptReference _compositeScript;
-        ServiceReferenceCollection _services;
-        AuthenticationServiceManager _authenticationService;
-        ProfileServiceManager _profileService;
+	[PersistChildren (false)]
+	[ParseChildren (true)]
+	[DefaultProperty ("Scripts")]
+	[NonVisualControl]
+	public class ScriptManagerProxy : Control
+	{
+		ScriptManager _scriptManager;
+		ScriptReferenceCollection _scripts;
+		CompositeScriptReference _compositeScript;
+		ServiceReferenceCollection _services;
+		AuthenticationServiceManager _authenticationService;
+		ProfileServiceManager _profileService;
 
-        [Category ("Behavior")]
-        [MergableProperty (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        public AuthenticationServiceManager AuthenticationService {
-            get {
-                if (_authenticationService == null)
-                    _authenticationService = new AuthenticationServiceManager ();
-                return _authenticationService;
-            }
-        }
+		[Category ("Behavior")]
+		[MergableProperty (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
+		[PersistenceMode (PersistenceMode.InnerProperty)]
+		public AuthenticationServiceManager AuthenticationService {
+			get {
+				if (_authenticationService == null)
+					_authenticationService = new AuthenticationServiceManager ();
+				return _authenticationService;
+			}
+		}
 
-        [MergableProperty (false)]
-        [Category ("Behavior")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        public ProfileServiceManager ProfileService {
-            get {
-                if (_profileService == null)
-                    _profileService = new ProfileServiceManager ();
-                return _profileService;
-            }
-        }
+		[MergableProperty (false)]
+		[Category ("Behavior")]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
+		[PersistenceMode (PersistenceMode.InnerProperty)]
+		public ProfileServiceManager ProfileService {
+			get {
+				if (_profileService == null)
+					_profileService = new ProfileServiceManager ();
+				return _profileService;
+			}
+		}
 
-        [Category ("Behavior")]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [MergableProperty (false)]
-        public ScriptReferenceCollection Scripts {
-            get {
-                if (_scripts == null)
-                    _scripts = new ScriptReferenceCollection ();
+		[Category ("Behavior")]
+		[PersistenceMode (PersistenceMode.InnerProperty)]
+		[MergableProperty (false)]
+		public ScriptReferenceCollection Scripts {
+			get {
+				if (_scripts == null)
+					_scripts = new ScriptReferenceCollection ();
 
-                return _scripts;
-            }
-        }
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [Category ("Behavior")]
-        [DefaultValue (null)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
-        [MergableProperty (false)]
-        public CompositeScriptReference CompositeScript {
-            get {
-                if (_compositeScript == null)
-                    _compositeScript = new CompositeScriptReference ();
-                return _compositeScript;
-            }
-        }
-        [MergableProperty (false)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [Category ("Behavior")]
-        public ServiceReferenceCollection Services {
-            get {
-                if (_services == null)
-                    _services = new ServiceReferenceCollection ();
+				return _scripts;
+			}
+		}
+		[PersistenceMode (PersistenceMode.InnerProperty)]
+		[Category ("Behavior")]
+		[DefaultValue (null)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
+		[MergableProperty (false)]
+		public CompositeScriptReference CompositeScript {
+			get {
+				if (_compositeScript == null)
+					_compositeScript = new CompositeScriptReference ();
+				return _compositeScript;
+			}
+		}
+		[MergableProperty (false)]
+		[PersistenceMode (PersistenceMode.InnerProperty)]
+		[Category ("Behavior")]
+		public ServiceReferenceCollection Services {
+			get {
+				if (_services == null)
+					_services = new ServiceReferenceCollection ();
 
-                return _services;
-            }
-        }
+				return _services;
+			}
+		}
 
-        ScriptManager ScriptManager {
-            get {
-                if (_scriptManager == null) {
-                    _scriptManager = ScriptManager.GetCurrent (Page);
-                    if (_scriptManager == null)
-                        throw new InvalidOperationException (String.Format ("The control with ID '{0}' requires a ScriptManager on the page. The ScriptManager must appear before any controls that need it.", ID));
-                }
-                return _scriptManager;
-            }
-        }
+		ScriptManager ScriptManager {
+			get {
+				if (_scriptManager == null) {
+					_scriptManager = ScriptManager.GetCurrent (Page);
+					if (_scriptManager == null)
+						throw new InvalidOperationException (String.Format ("The control with ID '{0}' requires a ScriptManager on the page. The ScriptManager must appear before any controls that need it.", ID));
+				}
+				return _scriptManager;
+			}
+		}
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        public override bool Visible {
-            get {
-                return base.Visible;
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
+		[EditorBrowsable (EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[Browsable (false)]
+		public override bool Visible {
+			get {
+				return base.Visible;
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
 
-        protected internal override void OnInit (EventArgs e) {
-            base.OnInit (e);
-            ScriptManager.RegisterProxy (this);
-        }
-    }
+		protected internal override void OnInit (EventArgs e) {
+			base.OnInit (e);
+			ScriptManager.RegisterProxy (this);
+		}
+	}
 }

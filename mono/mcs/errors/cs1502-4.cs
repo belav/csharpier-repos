@@ -3,15 +3,15 @@
 
 public class X {
 
-    public X (int a)
-    {
-    }
+	public X (int a)
+	{
+	}
 }
 
 class D {
-    static void Main ()
-    {
-        X x = new X ("hola");
-    }
+	static void Main ()
+	{
+		X x = new X ("hola");
+	}
 }
 

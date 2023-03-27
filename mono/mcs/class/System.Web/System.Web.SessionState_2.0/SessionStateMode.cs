@@ -2,7 +2,7 @@
 // System.Web.SessionState.SessionStateMode
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -30,11 +30,11 @@
 namespace System.Web.SessionState {
 public enum SessionStateMode
 {
-    Off = 0,
-    InProc = 1,
-    StateServer = 2,
-    SQLServer = 3,
-    Custom = 4,
+	Off = 0,
+	InProc = 1,
+	StateServer = 2,
+	SQLServer = 3,
+	Custom = 4,
 }
 
 }

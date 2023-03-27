@@ -4,9 +4,9 @@
 
 class C
 {
-    unsafe static void Main ()
-    {
-        int* arr = null;
-        var v2 = arr?.ToString ();
-    }
+	unsafe static void Main ()
+	{
+		int* arr = null;
+		var v2 = arr?.ToString ();
+	}
 }

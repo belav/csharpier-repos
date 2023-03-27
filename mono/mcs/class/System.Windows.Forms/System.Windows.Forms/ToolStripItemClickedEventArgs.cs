@@ -23,24 +23,24 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public class ToolStripItemClickedEventArgs : EventArgs
-    {
-        private ToolStripItem clicked_item;
+	public class ToolStripItemClickedEventArgs : EventArgs
+	{
+		private ToolStripItem clicked_item;
 
-        public ToolStripItemClickedEventArgs (ToolStripItem clickedItem) : base ()
-        {
-            this.clicked_item = clickedItem;
-        }
-        
-        #region Public Properties
-        public ToolStripItem ClickedItem {
-            get { return this.clicked_item; }
-        }
-        #endregion
-    }
+		public ToolStripItemClickedEventArgs (ToolStripItem clickedItem) : base ()
+		{
+			this.clicked_item = clickedItem;
+		}
+		
+		#region Public Properties
+		public ToolStripItem ClickedItem {
+			get { return this.clicked_item; }
+		}
+		#endregion
+	}
 }

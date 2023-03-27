@@ -36,34 +36,34 @@ using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Tasks {
 
-    [TestFixture]
-    public class GetFrameworkSdkPathTest {
-        [Test]
-        public void TestExecution1 ()
-        {
-            Engine engine;
-            Project project;
+	[TestFixture]
+	public class GetFrameworkSdkPathTest {
+		[Test]
+		public void TestExecution1 ()
+		{
+			Engine engine;
+			Project project;
 
-            string documentString = @"
+			string documentString = @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <Target Name='1'>
-                        <GetFrameworkSdkPath>
-                            <Output
-                                TaskParameter='Path'
-                                PropertyName='Path'
-                            />
-                        </GetFrameworkSdkPath>
-                    </Target>
-                </Project>
-            ";
+					<Target Name='1'>
+						<GetFrameworkSdkPath>
+							<Output
+								TaskParameter='Path'
+								PropertyName='Path'
+							/>
+						</GetFrameworkSdkPath>
+					</Target>
+				</Project>
+			";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            Assert.IsTrue (project.Build ("1"), "A1");
+			engine = new Engine (Consts.BinPath);
+			project = engine.CreateNewProject ();
+			project.LoadXml (documentString);
+			Assert.IsTrue (project.Build ("1"), "A1");
 
-            Assert.IsNotNull (project.EvaluatedProperties ["Path"], "A2");
-            Assert.IsTrue (String.Empty != project.EvaluatedProperties ["Path"].FinalValue, "A3");
-        }
-    }
+			Assert.IsNotNull (project.EvaluatedProperties ["Path"], "A2");
+			Assert.IsTrue (String.Empty != project.EvaluatedProperties ["Path"].FinalValue, "A3");
+		}
+	}
 }

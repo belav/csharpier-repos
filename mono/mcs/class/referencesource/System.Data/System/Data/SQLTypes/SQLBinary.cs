@@ -103,15 +103,15 @@ namespace System.Data.SqlTypes {
             }
         }
 
-        // class indexer
-        public byte this[int index] {
-            get {
-                if (IsNull)
+		// class indexer
+		public byte this[int index] {
+			get {
+				if (IsNull)
                     throw new SqlNullValueException();
-                else
-                    return m_value[index];
-            }
-        }
+				else
+					return m_value[index];
+			}
+		}
 
         // property: Length
         /// <devdoc>
@@ -129,7 +129,7 @@ namespace System.Data.SqlTypes {
         }
 
         // Implicit conversion from byte[] to SqlBinary
-        // Alternative: constructor SqlBinary(bytep[])
+		// Alternative: constructor SqlBinary(bytep[])
         /// <devdoc>
         ///    <para>
         ///       Converts a binary object to a <see cref='System.Data.SqlTypes.SqlBinary'/>.
@@ -140,7 +140,7 @@ namespace System.Data.SqlTypes {
         }
 
         // Explicit conversion from SqlBinary to byte[]. Throw exception if x is Null.
-        // Alternative: Value property
+		// Alternative: Value property
         /// <devdoc>
         ///    <para>
         ///       Converts a <see cref='System.Data.SqlTypes.SqlBinary'/> to a binary object.

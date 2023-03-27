@@ -3,11 +3,11 @@
 
 class Blah {
 
-    public static void Main ()
-    {
+	public static void Main ()
+	{
 
-    }
+	}
 
-    public static int operator true (Blah i) {}
+	public static int operator true (Blah i) {}
 
 }

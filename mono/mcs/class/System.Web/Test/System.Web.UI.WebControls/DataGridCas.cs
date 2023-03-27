@@ -1,9 +1,9 @@
 //
 // DataGridCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.DataGrid
+//	- CAS unit tests for System.Web.UI.WebControls.DataGrid
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,39 +40,39 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class DataGridCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class DataGridCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            DataGridTest unit = new DataGridTest ();
-            unit.Defaults ();
-            unit.TagName ();
-            unit.CleanProperties ();
-            unit.ViewState ();
-            unit.SelectIndexOutOfRange ();
-            unit.ControlStyle ();
-            unit.Styles ();
-            unit.Events ();
-            unit.BubbleEvent ();
-            unit.BubblePageCommand ();
-            unit.SaveViewState ();
-            unit.CreateColumnSet ();
-            unit.CreateColumnsBinding ();
-            unit.CreateSimpleColumns ();
-            unit.CreateControls ();
-            unit.CreationEvents ();
-            unit.InitializePager ();
-            unit.Render ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			DataGridTest unit = new DataGridTest ();
+			unit.Defaults ();
+			unit.TagName ();
+			unit.CleanProperties ();
+			unit.ViewState ();
+			unit.SelectIndexOutOfRange ();
+			unit.ControlStyle ();
+			unit.Styles ();
+			unit.Events ();
+			unit.BubbleEvent ();
+			unit.BubblePageCommand ();
+			unit.SaveViewState ();
+			unit.CreateColumnSet ();
+			unit.CreateColumnsBinding ();
+			unit.CreateSimpleColumns ();
+			unit.CreateControls ();
+			unit.CreationEvents ();
+			unit.InitializePager ();
+			unit.Render ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (DataGrid); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (DataGrid); }
+		}
+	}
 }

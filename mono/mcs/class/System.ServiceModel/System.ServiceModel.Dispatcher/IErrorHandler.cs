@@ -29,10 +29,10 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
-    public interface IErrorHandler
-    {
-        bool HandleError (Exception error);
-        void ProvideFault (Exception error, MessageVersion version,
-            ref Message fault);
-    }
+	public interface IErrorHandler
+	{
+		bool HandleError (Exception error);
+		void ProvideFault (Exception error, MessageVersion version,
+			ref Message fault);
+	}
 }

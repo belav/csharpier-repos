@@ -2,7 +2,7 @@
 // IPolicyExportExtension.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,9 +32,9 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-    public interface IPolicyExportExtension
-    {
-        void ExportPolicy (MetadataExporter exporter,
-            PolicyConversionContext context);
-    }
+	public interface IPolicyExportExtension
+	{
+		void ExportPolicy (MetadataExporter exporter,
+			PolicyConversionContext context);
+	}
 }

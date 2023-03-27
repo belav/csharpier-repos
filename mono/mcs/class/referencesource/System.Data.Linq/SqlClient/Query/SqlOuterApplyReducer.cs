@@ -7,17 +7,17 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data.Linq.SqlClient {
 
-    /// <summary>
-    /// </summary>
-    internal class SqlOuterApplyReducer { 
-        internal static SqlNode Reduce(SqlNode node, SqlFactory factory, SqlNodeAnnotations annotations) {
-            Visitor r = new Visitor(factory, annotations);
-            return r.Visit(node);            
-        }
+	/// <summary>
+	/// </summary>
+	internal class SqlOuterApplyReducer { 
+		internal static SqlNode Reduce(SqlNode node, SqlFactory factory, SqlNodeAnnotations annotations) {
+			Visitor r = new Visitor(factory, annotations);
+			return r.Visit(node);			
+		}
 
-        class Visitor : SqlVisitor {
+		class Visitor : SqlVisitor {
             SqlFactory factory;
-            SqlNodeAnnotations annotations;
+			SqlNodeAnnotations annotations;
 
             internal Visitor(SqlFactory factory, SqlNodeAnnotations annotations) {
                 this.factory = factory;
@@ -170,7 +170,7 @@ namespace System.Data.Linq.SqlClient {
                 if (!this.IsSingletonSelect(join.Left))
                     return null;
                 HashSet<SqlAlias> p = SqlGatherProducedAliases.Gather(join.Left);
-                HashSet<SqlAlias> c = SqlGatherConsumedAliases.Gather(join.Right);
+				HashSet<SqlAlias> c = SqlGatherConsumedAliases.Gather(join.Right);
                 if (p.Overlaps(c)) {
                     return null;
                 }
@@ -203,7 +203,7 @@ namespace System.Data.Linq.SqlClient {
                     return false;
                 return true;
             }
-        }
+		}
 
         class SqlGatherReferencedColumns {
             private SqlGatherReferencedColumns() { }
@@ -502,5 +502,5 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
         }
-    }
+	}
 }

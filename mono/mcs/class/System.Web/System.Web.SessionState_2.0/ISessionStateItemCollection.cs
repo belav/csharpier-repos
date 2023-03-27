@@ -2,7 +2,7 @@
 // System.Web.SessionState.ISessionStateItemCollection
 //
 // Authors:
-//    Sanjay Gupta (gsanjay@novell.com)
+//	Sanjay Gupta (gsanjay@novell.com)
 //
 // Copyright (c) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,18 +32,18 @@ using System.Collections.Specialized;
 
 namespace System.Web.SessionState {
 
-    public interface ISessionStateItemCollection : ICollection, IEnumerable
-    {
-        ///methods
-        void Clear ();
-        void Remove (string name);
-        void RemoveAt (int index);
-    
-        ///properties
-        bool Dirty { get; set; }
-        object this [int index] { get; set; }
-        object this [string name] { get; set;}
-        NameObjectCollectionBase.KeysCollection Keys { get; }
-    }
+	public interface ISessionStateItemCollection : ICollection, IEnumerable
+	{
+		///methods
+		void Clear ();
+		void Remove (string name);
+		void RemoveAt (int index);
+	
+		///properties
+		bool Dirty { get; set; }
+		object this [int index] { get; set; }
+		object this [string name] { get; set;}
+		NameObjectCollectionBase.KeysCollection Keys { get; }
+	}
 }
 

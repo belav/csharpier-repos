@@ -20,52 +20,52 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 
 
 using System;
 
 namespace System.Windows.Forms {
 
-    public class NodeLabelEditEventArgs : EventArgs {
+	public class NodeLabelEditEventArgs : EventArgs {
 
-        private TreeNode node;
-        private string label;
-        private bool cancel;
+		private TreeNode node;
+		private string label;
+		private bool cancel;
 
-        public NodeLabelEditEventArgs (TreeNode node)
-        {
-            this.node = node;
-        }
+		public NodeLabelEditEventArgs (TreeNode node)
+		{
+			this.node = node;
+		}
 
-        public NodeLabelEditEventArgs (TreeNode node, string label) : this (node)
-        {
-            this.label = label;
-        }
+		public NodeLabelEditEventArgs (TreeNode node, string label) : this (node)
+		{
+			this.label = label;
+		}
 
-        public bool CancelEdit {
-            get { return cancel; }
-            set {
-                cancel = value;
-                
-                if (cancel)
-                    node.EndEdit (true);
-            }
-        }
+		public bool CancelEdit {
+			get { return cancel; }
+			set {
+				cancel = value;
+				
+				if (cancel)
+					node.EndEdit (true);
+			}
+		}
 
-        public TreeNode Node {
-            get { return node; }
-        }
+		public TreeNode Node {
+			get { return node; }
+		}
 
-        public string Label {
-            get { return label; }
-        }
+		public string Label {
+			get { return label; }
+		}
 
-        internal void SetLabel (string label)
-        {
-            this.label = label;
-        }
-    }
+		internal void SetLabel (string label)
+		{
+			this.label = label;
+		}
+	}
 
 }
 

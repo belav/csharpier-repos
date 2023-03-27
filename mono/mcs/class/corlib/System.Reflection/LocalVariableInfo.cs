@@ -32,44 +32,44 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection {
 
-    [ComVisible (true)]
-    [StructLayout (LayoutKind.Sequential)]
-    public class LocalVariableInfo {
-        #region Sync with reflection.h
-        internal Type type;
-        internal bool is_pinned;
-        internal ushort position;
-        #endregion
+	[ComVisible (true)]
+	[StructLayout (LayoutKind.Sequential)]
+	public class LocalVariableInfo {
+		#region Sync with reflection.h
+		internal Type type;
+		internal bool is_pinned;
+		internal ushort position;
+		#endregion
 
-        protected
-        LocalVariableInfo () {
-        }
+		protected
+		LocalVariableInfo () {
+		}
 
-        public virtual bool IsPinned {
-            get {
-                return is_pinned;
-            }
-        }
+		public virtual bool IsPinned {
+			get {
+				return is_pinned;
+			}
+		}
 
-        public virtual int LocalIndex {
-            get {
-                return position;
-            }
-        }
+		public virtual int LocalIndex {
+			get {
+				return position;
+			}
+		}
 
-        public virtual Type LocalType {
-            get {
-                return type;
-            }
-        }
+		public virtual Type LocalType {
+			get {
+				return type;
+			}
+		}
 
-        public override string ToString () {
-            if (is_pinned)
-                return String.Format ("{0} ({1}) (pinned)", type, position);
-            else
-                return String.Format ("{0} ({1})", type, position);
-        }
-    }
+		public override string ToString () {
+			if (is_pinned)
+				return String.Format ("{0} ({1}) (pinned)", type, position);
+			else
+				return String.Format ("{0} ({1})", type, position);
+		}
+	}
 
 }
 

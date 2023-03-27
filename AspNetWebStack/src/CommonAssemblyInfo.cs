@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 #if !BUILD_GENERATED_VERSION
 [assembly: AssemblyCompany(".NET Foundation")]
-[assembly: AssemblyCopyright("Copyright � .NET Foundation. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © .NET Foundation. All rights reserved.")]
 #endif
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]

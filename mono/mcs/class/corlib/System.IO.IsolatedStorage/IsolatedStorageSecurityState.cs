@@ -2,7 +2,7 @@
 // System.IO.IsolatedStorage.IsolatedStorageSecurityState
 //
 // Author: 
-//     Carlos Alberto Cortez <calberto.cortez@gmail.com>
+// 	Carlos Alberto Cortez <calberto.cortez@gmail.com>
 //
 // Copyright (C) 2010 Novell, Inc (http://www.novell.com)
 //
@@ -31,37 +31,37 @@ using System.Security;
 
 namespace System.IO.IsolatedStorage
 {
-    public class IsolatedStorageSecurityState : SecurityState {
+	public class IsolatedStorageSecurityState : SecurityState {
 
-        internal IsolatedStorageSecurityState ()
-        {
-        }
+		internal IsolatedStorageSecurityState ()
+		{
+		}
 
-        public IsolatedStorageSecurityOptions Options {
-            get {
-                return IsolatedStorageSecurityOptions.IncreaseQuotaForApplication;
-            }
-        }
+		public IsolatedStorageSecurityOptions Options {
+			get {
+				return IsolatedStorageSecurityOptions.IncreaseQuotaForApplication;
+			}
+		}
 
-        public long Quota {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-            }
-        }
+		public long Quota {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+			}
+		}
 
-        public long UsedSize {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		public long UsedSize {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        public override void EnsureState ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public override void EnsureState ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 
 

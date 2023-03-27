@@ -1,4 +1,4 @@
-//
+﻿//
 // AssemblyInfo.cs
 //
 // Author:
@@ -47,16 +47,16 @@ using System.Security.Permissions;
 [assembly: AssemblyCompany (Consts.MonoCompany)]
 [assembly: AssemblyProduct (Consts.MonoProduct)]
 [assembly: AssemblyCopyright (Consts.MonoCopyright)]
-    [assembly: AssemblyVersion (Consts.FxVersion)]
-    [assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
+	[assembly: AssemblyVersion (Consts.FxVersion)]
+	[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
 [assembly: SatelliteContractVersion (Consts.FxVersion)]
 [assembly: AssemblyFileVersion (Consts.FxFileVersion)]
 
 [assembly: NeutralResourcesLanguage ("en-US")]
 
 #if !(TARGET_DOTNET)
-    [assembly: CLSCompliant (true)]
-    [assembly: AssemblyDelaySign (true)]
+	[assembly: CLSCompliant (true)]
+	[assembly: AssemblyDelaySign (true)]
 
 #endif
 

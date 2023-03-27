@@ -1,9 +1,9 @@
 //
 // System.Globalization.RegionInfo helper for MonoTouch
-//     because the devices cannot access the file system to read the data
+// 	because the devices cannot access the file system to read the data
 //
 // Authors:
-//    Sebastien Pouliot  <sebastien@xamarin.com>
+//	Sebastien Pouliot  <sebastien@xamarin.com>
 //
 // Copyright 2012-2013 Xamarin Inc.
 //
@@ -39,16 +39,16 @@ using System.Runtime.InteropServices;
 
 namespace System.Globalization {
 
-    public partial class RegionInfo {
+	public partial class RegionInfo {
 
-        [DllImport ("__Internal")]
-        extern static string xamarin_get_locale_country_code ();
+		[DllImport ("__Internal")]
+		extern static string xamarin_get_locale_country_code ();
 
-        static RegionInfo CreateFromNSLocale ()
-        {
-            return new RegionInfo (xamarin_get_locale_country_code ());
-        }
-    }
+		static RegionInfo CreateFromNSLocale ()
+		{
+			return new RegionInfo (xamarin_get_locale_country_code ());
+		}
+	}
 }
 
 #endif

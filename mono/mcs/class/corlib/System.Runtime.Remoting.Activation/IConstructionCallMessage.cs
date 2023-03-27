@@ -35,27 +35,27 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Activation {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IConstructionCallMessage : IMessage, IMethodCallMessage, IMethodMessage {
-        Type ActivationType {
-            get;
-        }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IConstructionCallMessage : IMessage, IMethodCallMessage, IMethodMessage {
+		Type ActivationType {
+			get;
+		}
 
-        string ActivationTypeName {
-            get;
-        }
+		string ActivationTypeName {
+			get;
+		}
 
-        IActivator Activator {
-            get;
-            set;
-        }
+		IActivator Activator {
+			get;
+			set;
+		}
 
-        object [] CallSiteActivationAttributes {
-            get;
-        }
+		object [] CallSiteActivationAttributes {
+			get;
+		}
 
-        IList ContextProperties {
-            get;
-        }
-    }
+		IList ContextProperties {
+			get;
+		}
+	}
 }

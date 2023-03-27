@@ -18,14 +18,14 @@ using System.Runtime.CompilerServices;
 namespace SciMark2
 {
     /* Random.java based on Java Numerical Toolkit (JNT) Random.UniformSequence
-    class.  We do not use Java's own java.util.Random so that we can compare
-    results with equivalent C and Fortran coces.*/
+	class.  We do not use Java's own java.util.Random so that we can compare
+	results with equivalent C and Fortran coces.*/
 
     public class Random
     {
         /*------------------------------------------------------------------------------
-        CLASS VARIABLES
-        ------------------------------------------------------------------------------ */
+		CLASS VARIABLES
+		------------------------------------------------------------------------------ */
 
         internal int seed = 0;
 
@@ -47,8 +47,8 @@ namespace SciMark2
 
 
         /* ------------------------------------------------------------------------------
-        CONSTRUCTORS
-        ------------------------------------------------------------------------------ */
+		CONSTRUCTORS
+		------------------------------------------------------------------------------ */
 
         /// <summary>
         /// Initializes a sequence of uniformly distributed quasi random numbers with a
@@ -115,8 +115,8 @@ namespace SciMark2
         }
 
         /* ------------------------------------------------------------------------------
-        PUBLIC METHODS
-        ------------------------------------------------------------------------------ */
+		PUBLIC METHODS
+		------------------------------------------------------------------------------ */
 
         /// <summary>
         /// Returns the next random number in the sequence.
@@ -267,8 +267,8 @@ namespace SciMark2
         }
 
         /*----------------------------------------------------------------------------
-        PRIVATE METHODS
-        ------------------------------------------------------------------------ */
+		PRIVATE METHODS
+		------------------------------------------------------------------------ */
 
         private void initialize(int seed)
         {

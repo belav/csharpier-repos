@@ -1,8 +1,8 @@
-//
+﻿//
 // BehaviorExtensionElement.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -33,20 +33,20 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    // BehaviorExtensionElement
-    public abstract class BehaviorExtensionElement
-         : ServiceModelExtensionElement
-    {
-        protected BehaviorExtensionElement () {
-        }
+	// BehaviorExtensionElement
+	public abstract class BehaviorExtensionElement
+		 : ServiceModelExtensionElement
+	{
+		protected BehaviorExtensionElement () {
+		}
 
-        // Properties
-        public abstract Type BehaviorType { get; }
+		// Properties
+		public abstract Type BehaviorType { get; }
 
-        protected internal abstract object CreateBehavior ();
+		protected internal abstract object CreateBehavior ();
 
-        internal override string GetConfigurationElementName () {
-            return ConfigUtil.ExtensionsSection.BehaviorExtensions.GetConfigurationElementName (GetType ());
-        }
-    }
+		internal override string GetConfigurationElementName () {
+			return ConfigUtil.ExtensionsSection.BehaviorExtensions.GetConfigurationElementName (GetType ());
+		}
+	}
 }

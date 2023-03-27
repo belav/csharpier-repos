@@ -121,8 +121,8 @@ namespace Mono.Linker.Steps
             //
             // public sealed class RemoveAttributeInstancesAttribute : Attribute
             // {
-            //        public RemoveAttributeInstancesAttribute () {}
-            //        public RemoveAttributeInstancesAttribute (object value1) {}
+            //		public RemoveAttributeInstancesAttribute () {}
+            //		public RemoveAttributeInstancesAttribute (object value1) {}
             // }
             //
             var td = new TypeDefinition("", "RemoveAttributeInstancesAttribute", TypeAttributes.Public);

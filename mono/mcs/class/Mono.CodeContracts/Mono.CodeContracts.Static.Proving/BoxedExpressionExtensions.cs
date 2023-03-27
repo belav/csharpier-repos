@@ -2,7 +2,7 @@
 // BoxedExpressionExtensions.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -33,28 +33,28 @@ using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Proving
 {
-    static class BoxedExpressionExtensions
-    {
-        public static bool IsConstantIntOrNull(this BoxedExpression e, out int res)
-        {
-            res = 0;
-            if (e.IsConstant) {
-                IConvertible convertible = e.Constant as IConvertible;
-                if (convertible != null) {
-                    if (e.Constant is string || e.Constant is float || e.Constant is double)
-                        return false;
+	static class BoxedExpressionExtensions
+	{
+		public static bool IsConstantIntOrNull(this BoxedExpression e, out int res)
+		{
+			res = 0;
+			if (e.IsConstant) {
+				IConvertible convertible = e.Constant as IConvertible;
+				if (convertible != null) {
+					if (e.Constant is string || e.Constant is float || e.Constant is double)
+						return false;
 
-                    try {
-                        res = convertible.ToInt32 (null);
-                        return true;
-                    } catch {
-                    }
-                }
-                if (e.Constant == null)
-                    return true;
-            }
-            return false;
-        }
+					try {
+						res = convertible.ToInt32 (null);
+						return true;
+					} catch {
+					}
+				}
+				if (e.Constant == null)
+					return true;
+			}
+			return false;
+		}
 
                 public static bool IsConstantBool(this BoxedExpression e, out bool result)
                 {
@@ -163,5 +163,5 @@ namespace Mono.CodeContracts.Static.Proving
 
                         return false.Without (out result);
                 }
-    }
+	}
 }

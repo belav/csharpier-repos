@@ -3,12 +3,12 @@
 
 interface I
 {
-    void Test<T>() where T : new ();
+	void Test<T>() where T : new ();
 }
 
 class C : I
 {
-    void I.Test<C>() where C : class
-    {
-    }
+	void I.Test<C>() where C : class
+	{
+	}
 }

@@ -3,14 +3,14 @@
 // Compiler options: -langversion:ISO-1
 
 class Class {
-    public void Foo (bool b)
-    {
-        switch (b)
-        {
-            case true:
-                break;
-            case false:
-                break;
-        }
-    }
+	public void Foo (bool b)
+	{
+		switch (b)
+		{
+			case true:
+				break;
+			case false:
+				break;
+		}
+	}
 }

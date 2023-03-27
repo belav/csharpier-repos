@@ -34,41 +34,41 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit {
 
-    [ComVisible (true)]
-    [Serializable]
-    public readonly struct Label : IEquatable<Label> {
-        internal readonly int label;
+	[ComVisible (true)]
+	[Serializable]
+	public readonly struct Label : IEquatable<Label> {
+		internal readonly int label;
 
-        internal Label (int val) {
-            label = val;
-        }
+		internal Label (int val) {
+			label = val;
+		}
 
-        public override bool Equals (object obj) {
-            bool res = obj is Label;
+		public override bool Equals (object obj) {
+			bool res = obj is Label;
 
-            if (res) {
-                Label l = (Label)obj;
-                res = (label == l.label);
-            }
+			if (res) {
+				Label l = (Label)obj;
+				res = (label == l.label);
+			}
 
-            return res;
-        }
+			return res;
+		}
 
-        public bool Equals (Label obj)
-        {
-            return (label == obj.label);
-        }
+		public bool Equals (Label obj)
+		{
+			return (label == obj.label);
+		}
 
-        public static bool operator == (Label a, Label b) {
-            return a.Equals (b);
-        }
+		public static bool operator == (Label a, Label b) {
+			return a.Equals (b);
+		}
 
-        public static bool operator != (Label a, Label b) {
-            return !(a == b);
-        }
+		public static bool operator != (Label a, Label b) {
+			return !(a == b);
+		}
 
-        public override int GetHashCode () {
-            return label.GetHashCode ();
-        }
-    }
+		public override int GetHashCode () {
+			return label.GetHashCode ();
+		}
+	}
 }

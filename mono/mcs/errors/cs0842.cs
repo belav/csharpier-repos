@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [StructLayout(LayoutKind.Explicit)]
 class S
 {
-    public int Value {
-        get; set;
-    }
+	public int Value {
+		get; set;
+	}
 }

@@ -2,7 +2,7 @@
 // PairCas.cs - CAS unit tests for System.Web.UI.Pair
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,32 +36,32 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class PairCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class PairCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor0_Deny_Unrestricted ()
-        {
-            Pair p = new Pair ();
-            Assert.IsNull (p.First, "First");
-            Assert.IsNull (p.Second, "Second");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor0_Deny_Unrestricted ()
+		{
+			Pair p = new Pair ();
+			Assert.IsNull (p.First, "First");
+			Assert.IsNull (p.Second, "Second");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor2_Deny_Unrestricted ()
-        {
-            Pair p = new Pair (String.Empty, String.Empty);
-            Assert.IsNotNull (p.First, "First");
-            Assert.IsNotNull (p.Second, "Second");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor2_Deny_Unrestricted ()
+		{
+			Pair p = new Pair (String.Empty, String.Empty);
+			Assert.IsNotNull (p.First, "First");
+			Assert.IsNotNull (p.Second, "Second");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (Pair); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (Pair); }
+		}
+	}
 }

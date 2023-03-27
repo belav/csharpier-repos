@@ -2,9 +2,9 @@
 // Mono.Messaging
 //
 // Authors:
-//        Peter Van Isacker (sclytrack@planetinternet.be)
+//		Peter Van Isacker (sclytrack@planetinternet.be)
 //
-//    (C) Ximian, Inc.  http://www.ximian.com
+//	(C) Ximian, Inc.  http://www.ximian.com
 //
 
 //
@@ -31,16 +31,16 @@ using System;
 
 namespace Mono.Messaging 
 {
-    [Serializable]
-    public enum MessagePriority 
-    {
-        AboveNormal = 4,
-        High = 5,
-        Highest = 7,
-        Low = 2,
-        Lowest = 0,
-        Normal = 3,
-        VeryHigh = 6,
-        VeryLow = 1
-    }
+	[Serializable]
+	public enum MessagePriority 
+	{
+		AboveNormal = 4,
+		High = 5,
+		Highest = 7,
+		Low = 2,
+		Lowest = 0,
+		Normal = 3,
+		VeryHigh = 6,
+		VeryLow = 1
+	}
 }

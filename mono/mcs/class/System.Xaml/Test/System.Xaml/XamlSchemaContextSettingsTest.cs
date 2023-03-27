@@ -30,33 +30,33 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-    [TestFixture]
-    public class XamlSchemaContextSettingsTest
-    {
-        [Test]
-        public void ConstructorTypeNullSettings ()
-        {
-            // ... allwed(!)
-            new XamlSchemaContextSettings (null);
-        }
+	[TestFixture]
+	public class XamlSchemaContextSettingsTest
+	{
+		[Test]
+		public void ConstructorTypeNullSettings ()
+		{
+			// ... allwed(!)
+			new XamlSchemaContextSettings (null);
+		}
 
-        [Test]
-        public void DefaultValues ()
-        {
-            var s = new XamlSchemaContextSettings ();
-            Assert.IsFalse (s.FullyQualifyAssemblyNamesInClrNamespaces, "#1");
-            Assert.IsFalse (s.SupportMarkupExtensionsWithDuplicateArity, "#2");
-        }
+		[Test]
+		public void DefaultValues ()
+		{
+			var s = new XamlSchemaContextSettings ();
+			Assert.IsFalse (s.FullyQualifyAssemblyNamesInClrNamespaces, "#1");
+			Assert.IsFalse (s.SupportMarkupExtensionsWithDuplicateArity, "#2");
+		}
 
-        [Test]
-        public void CopyConstructor ()
-        {
-            var s = new XamlSchemaContextSettings ();
-            s.FullyQualifyAssemblyNamesInClrNamespaces = true;
-            s.SupportMarkupExtensionsWithDuplicateArity = true;
-            s = new XamlSchemaContextSettings (s);
-            Assert.IsTrue (s.FullyQualifyAssemblyNamesInClrNamespaces, "#1");
-            Assert.IsTrue (s.SupportMarkupExtensionsWithDuplicateArity, "#2");
-        }
-    }
+		[Test]
+		public void CopyConstructor ()
+		{
+			var s = new XamlSchemaContextSettings ();
+			s.FullyQualifyAssemblyNamesInClrNamespaces = true;
+			s.SupportMarkupExtensionsWithDuplicateArity = true;
+			s = new XamlSchemaContextSettings (s);
+			Assert.IsTrue (s.FullyQualifyAssemblyNamesInClrNamespaces, "#1");
+			Assert.IsTrue (s.SupportMarkupExtensionsWithDuplicateArity, "#2");
+		}
+	}
 }

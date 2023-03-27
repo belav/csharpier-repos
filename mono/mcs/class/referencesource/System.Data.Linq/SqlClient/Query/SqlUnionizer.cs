@@ -11,7 +11,7 @@ namespace System.Data.Linq.SqlClient {
 
         class Visitor : SqlVisitor {
             internal override SqlSelect  VisitSelect(SqlSelect select) {
-                 base.VisitSelect(select);
+ 	            base.VisitSelect(select);
 
                 // enforce exact ordering of columns in union selects
                 SqlUnion union = this.GetUnion(select.From);

@@ -73,7 +73,7 @@ namespace System.Data {
         public override bool CanResetValue(object component) {
             DataRowView dataRowView = (DataRowView) component;
             if (!column.IsSqlType)
-                return (dataRowView.GetColumnValue(column) != DBNull.Value);
+            	return (dataRowView.GetColumnValue(column) != DBNull.Value);
             return (!DataStorage.IsObjectNull(dataRowView.GetColumnValue(column)));
         }
 
@@ -97,10 +97,10 @@ namespace System.Data {
             return false;
         }
 
-        public override bool IsBrowsable {
-            get {
-                return (column.ColumnMapping == System.Data.MappingType.Hidden ? false : base.IsBrowsable);
-            }
-        }
+		public override bool IsBrowsable {
+			get {
+				return (column.ColumnMapping == System.Data.MappingType.Hidden ? false : base.IsBrowsable);
+			}
+		}
     }   
 }

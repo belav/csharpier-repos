@@ -2,7 +2,7 @@
 // System.Web.UI.Design.IControlDesignerTag
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -31,17 +31,17 @@
 
 namespace System.Web.UI.Design
 {
-    public interface IControlDesignerTag
-    {
-        bool IsDirty { get; }
+	public interface IControlDesignerTag
+	{
+		bool IsDirty { get; }
 
-        string GetAttribute (string name);
-        string GetContent ();
-        string GetOuterContent ();
-        void RemoveAttribute (string name);
-        void SetAttribute (string name, string value);
-        void SetContent (string content);
-        void SetDirty (bool dirty);
-    }
+		string GetAttribute (string name);
+		string GetContent ();
+		string GetOuterContent ();
+		void RemoveAttribute (string name);
+		void SetAttribute (string name, string value);
+		void SetContent (string content);
+		void SetDirty (bool dirty);
+	}
 }
 

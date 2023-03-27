@@ -16,37 +16,37 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms {
 
-    [TestFixture]
-    public class TreeViewHitTestInfoTest : TestHelper {
+	[TestFixture]
+	public class TreeViewHitTestInfoTest : TestHelper {
 
-        [Test]
-        public void TestCtor ()
-        {
-            TreeViewHitTestInfo t = new TreeViewHitTestInfo (null, TreeViewHitTestLocations.None);
+		[Test]
+		public void TestCtor ()
+		{
+			TreeViewHitTestInfo t = new TreeViewHitTestInfo (null, TreeViewHitTestLocations.None);
 
-            Assert.AreEqual (t.Node, null, "null-1");
-            Assert.AreEqual (t.Location, TreeViewHitTestLocations.None, "null-2");
+			Assert.AreEqual (t.Node, null, "null-1");
+			Assert.AreEqual (t.Location, TreeViewHitTestLocations.None, "null-2");
 
-            t = new TreeViewHitTestInfo (null, TreeViewHitTestLocations.Image);
+			t = new TreeViewHitTestInfo (null, TreeViewHitTestLocations.Image);
 
-            Assert.AreEqual (t.Node, null, "loc-1");
-            Assert.AreEqual (t.Location, TreeViewHitTestLocations.Image, "loc-2");
+			Assert.AreEqual (t.Node, null, "loc-1");
+			Assert.AreEqual (t.Location, TreeViewHitTestLocations.Image, "loc-2");
 
-            TreeNode tn = new TreeNode ("test");
-            t = new TreeViewHitTestInfo (tn, TreeViewHitTestLocations.PlusMinus);
+			TreeNode tn = new TreeNode ("test");
+			t = new TreeViewHitTestInfo (tn, TreeViewHitTestLocations.PlusMinus);
 
-            Assert.AreEqual (t.Node, tn, "node-1");
-            Assert.AreEqual (t.Location, TreeViewHitTestLocations.PlusMinus);
-        }
+			Assert.AreEqual (t.Node, tn, "node-1");
+			Assert.AreEqual (t.Location, TreeViewHitTestLocations.PlusMinus);
+		}
 
-        [Test]
-        public void TestBadLocation ()
-        {
-            TreeViewHitTestInfo t = new TreeViewHitTestInfo (null, (TreeViewHitTestLocations) (-1));
+		[Test]
+		public void TestBadLocation ()
+		{
+			TreeViewHitTestInfo t = new TreeViewHitTestInfo (null, (TreeViewHitTestLocations) (-1));
 
-            Assert.AreEqual (t.Node, null, "bad-loc-1");
-            Assert.AreEqual ((int) t.Location, -1, "bad-loc-2");
-        }
-    }
+			Assert.AreEqual (t.Node, null, "bad-loc-1");
+			Assert.AreEqual ((int) t.Location, -1, "bad-loc-2");
+		}
+	}
 
 }

@@ -3,11 +3,11 @@
 
 internal class Test 
 {
-    protected const int foo = 0;
+	protected const int foo = 0;
 }
 internal class Rest
 {
-    protected const int foo = Test.foo;
+	protected const int foo = Test.foo;
 
-    static void Main () {}
+	static void Main () {}
 }

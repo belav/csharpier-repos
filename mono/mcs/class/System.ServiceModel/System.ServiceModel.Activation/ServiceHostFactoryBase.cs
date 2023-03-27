@@ -2,7 +2,7 @@
 // ServiceHostFactoryBase.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc.  http://www.novell.com
 //
@@ -30,9 +30,9 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Activation
 {
-    public abstract class ServiceHostFactoryBase
-    {
-        public abstract ServiceHostBase CreateServiceHost (
-            string constructorString, Uri [] baseAddresses);
-    }
+	public abstract class ServiceHostFactoryBase
+	{
+		public abstract ServiceHostBase CreateServiceHost (
+			string constructorString, Uri [] baseAddresses);
+	}
 }

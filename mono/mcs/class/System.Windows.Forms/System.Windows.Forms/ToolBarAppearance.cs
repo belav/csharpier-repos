@@ -23,7 +23,7 @@
 // Copyright (C) 2004 Novell, Inc.
 //
 // Authors:
-//    Ravindra (rkumar@novell.com)
+//	Ravindra (rkumar@novell.com)
 //
 //
 
@@ -32,9 +32,9 @@
 
 namespace System.Windows.Forms
 {
-    public enum ToolBarAppearance
-    {
-        Normal = 0,
-        Flat = 1
-    }
+	public enum ToolBarAppearance
+	{
+		Normal = 0,
+		Flat = 1
+	}
 }

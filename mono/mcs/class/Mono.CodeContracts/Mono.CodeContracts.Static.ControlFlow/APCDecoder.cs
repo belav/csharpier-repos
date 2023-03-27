@@ -2,7 +2,7 @@
 // APCDecoder.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -35,67 +35,67 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.ControlFlow {
-    class APCDecoder : IILDecoder<APC, Dummy, Dummy, IMethodContextProvider, Dummy>, IMethodContextProvider, IMethodContext {
-        private readonly SubroutineFacade subroutine_facade;
-        private readonly ControlFlowGraph cfg;
-        private readonly IMetaDataProvider meta_data_provider;
+	class APCDecoder : IILDecoder<APC, Dummy, Dummy, IMethodContextProvider, Dummy>, IMethodContextProvider, IMethodContext {
+		private readonly SubroutineFacade subroutine_facade;
+		private readonly ControlFlowGraph cfg;
+		private readonly IMetaDataProvider meta_data_provider;
 
-        public APCDecoder (ControlFlowGraph underlyingCFG,
-                           IMetaDataProvider metaDataProvider,
-                           SubroutineFacade subroutineFacade)
-        {
-            this.cfg = underlyingCFG;
-            this.meta_data_provider = metaDataProvider;
-            this.subroutine_facade = subroutineFacade;
-        }
+		public APCDecoder (ControlFlowGraph underlyingCFG,
+		                   IMetaDataProvider metaDataProvider,
+		                   SubroutineFacade subroutineFacade)
+		{
+			this.cfg = underlyingCFG;
+			this.meta_data_provider = metaDataProvider;
+			this.subroutine_facade = subroutineFacade;
+		}
 
-        #region IILDecoder<APC,Dummy,Dummy,IMethodContextProvider,Dummy> Members
-        public IMethodContextProvider ContextProvider
-        {
-            get { return this; }
-        }
+		#region IILDecoder<APC,Dummy,Dummy,IMethodContextProvider,Dummy> Members
+		public IMethodContextProvider ContextProvider
+		{
+			get { return this; }
+		}
 
-        public TResult ForwardDecode<TData, TResult, TVisitor> (APC pc, TVisitor visitor, TData data)
-            where TVisitor : IILVisitor<APC, Dummy, Dummy, TData, TResult>
-        {
-                return this.subroutine_facade.ForwardDecode<TData, TResult, RemoveBranchDelegator<TData, TResult, TVisitor>> 
+		public TResult ForwardDecode<TData, TResult, TVisitor> (APC pc, TVisitor visitor, TData data)
+			where TVisitor : IILVisitor<APC, Dummy, Dummy, TData, TResult>
+		{
+		        return this.subroutine_facade.ForwardDecode<TData, TResult, RemoveBranchDelegator<TData, TResult, TVisitor>> 
                                          (pc, new RemoveBranchDelegator<TData, TResult, TVisitor> (visitor, this.meta_data_provider), data);
-        }
+		}
 
-            public bool IsUnreachable (APC pc)
-        {
-            return false;
-        }
+	        public bool IsUnreachable (APC pc)
+		{
+			return false;
+		}
 
-        public Dummy EdgeData (APC from, APC to)
-        {
-            return Dummy.Value;
-        }
-        #endregion
+		public Dummy EdgeData (APC from, APC to)
+		{
+			return Dummy.Value;
+		}
+		#endregion
 
-        public IMethodContext MethodContext
-        {
-            get { return this; }
-        }
+		public IMethodContext MethodContext
+		{
+			get { return this; }
+		}
 
-        public Method CurrentMethod
-        {
-            get { return this.cfg.CFGMethod; }
-        }
+		public Method CurrentMethod
+		{
+			get { return this.cfg.CFGMethod; }
+		}
 
-        public ICFG CFG
-        {
-            get { return this.cfg; }
-        }
+		public ICFG CFG
+		{
+			get { return this.cfg; }
+		}
 
-        public IEnumerable<Field> Modifies (Method method)
-        {
-            return this.subroutine_facade.GetModifies (method);
-        }
+		public IEnumerable<Field> Modifies (Method method)
+		{
+			return this.subroutine_facade.GetModifies (method);
+		}
 
-        public IEnumerable<Method> AffectedGetters (Field field)
-        {
-            return this.subroutine_facade.GetAffectedGetters (field);
-        }
-    }
+		public IEnumerable<Method> AffectedGetters (Field field)
+		{
+			return this.subroutine_facade.GetAffectedGetters (field);
+		}
+	}
 }

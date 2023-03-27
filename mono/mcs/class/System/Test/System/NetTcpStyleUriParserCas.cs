@@ -2,7 +2,7 @@
 // NetTcpStyleUriParserCas.cs - CAS unit tests for System.NetTcpStyleUriParser
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,50 +39,50 @@ using MonoTests.System;
 
 namespace MonoCasTests.System {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class NetTcpStyleUriParserCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class NetTcpStyleUriParserCas {
 
-        private NetTcpStyleUriParserTest unit;
+		private NetTcpStyleUriParserTest unit;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            unit = new NetTcpStyleUriParserTest ();
-            unit.FixtureSetUp (); // fulltrust
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			unit = new NetTcpStyleUriParserTest ();
+			unit.FixtureSetUp (); // fulltrust
+		}
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            NetTcpStyleUriParser parser = new NetTcpStyleUriParser ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			NetTcpStyleUriParser parser = new NetTcpStyleUriParser ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests ()
-        {
-            unit.NetTcpX ();
-            unit.NetTcpX_Methods ();
-            unit.SecureNetTcpX ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTests ()
+		{
+			unit.NetTcpX ();
+			unit.NetTcpX_Methods ();
+			unit.SecureNetTcpX ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (NetTcpStyleUriParser).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor()");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (NetTcpStyleUriParser).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor()");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }
 

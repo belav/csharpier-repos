@@ -2,7 +2,7 @@
 // Variable.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,10 +27,10 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    abstract class Variable : Expression {
-        protected Variable (NodeType type)
-            : base (type)
-        {
-        }
-    }
+	abstract class Variable : Expression {
+		protected Variable (NodeType type)
+			: base (type)
+		{
+		}
+	}
 }

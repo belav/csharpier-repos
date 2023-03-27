@@ -398,17 +398,17 @@ namespace System.Data.SqlClient {
                 case SeekOrigin.Begin:
                     SetInternalPosition(offset, ADP.ParameterOffset);
                     break;
-                    
+					
                 case SeekOrigin.Current:
                     pos  =  offset + Position;
                     SetInternalPosition(pos, ADP.ParameterOffset);                    
                     break;
-                    
+					
                 case SeekOrigin.End:
                     pos  = TotalLength + offset;
                     SetInternalPosition(pos, ADP.ParameterOffset);                    
                     break;
-                    
+					
                 default:
                     throw ADP.InvalidSeekOrigin(ADP.ParameterOffset);
             }
@@ -492,9 +492,9 @@ namespace System.Data.SqlClient {
                 _xmlReader = sqlStream.ToXmlReader();
                 _strWriter = new StringWriter((System.IFormatProvider)null);
                 XmlWriterSettings writerSettings = new XmlWriterSettings();
-                writerSettings.CloseOutput = true;        // close the memory stream when done
-                writerSettings.ConformanceLevel = ConformanceLevel.Fragment;
-                _xmlWriter = XmlWriter.Create(_strWriter, writerSettings);                
+    		    writerSettings.CloseOutput = true;		// close the memory stream when done
+		        writerSettings.ConformanceLevel = ConformanceLevel.Fragment;
+		        _xmlWriter = XmlWriter.Create(_strWriter, writerSettings);				
             }
 
             int charsToSkip = 0;

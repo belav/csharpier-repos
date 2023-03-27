@@ -20,18 +20,18 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 
 
 using System;
 
 namespace Mono.Mozilla
 {
-    
+	
     internal enum StopOption : uint 
     { 
         Network = 1, 
         Content = 2, 
         All = 3 
     }  
-}     
+} 	

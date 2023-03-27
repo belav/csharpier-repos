@@ -3,19 +3,19 @@
 // Compiler options: -unsafe
 
 struct Foo {
-    public float f;
-    public void foo ()
-    {
-        unsafe {
-            float *pf1 = &f;
-        }
-    }
+	public float f;
+	public void foo ()
+	{
+		unsafe {
+			float *pf1 = &f;
+		}
+	}
 }
 
 class Test {
-    static void Main ()
-    {
-        Foo x = new Foo ();
-        x.foo ();
-    }
+	static void Main ()
+	{
+		Foo x = new Foo ();
+		x.foo ();
+	}
 }

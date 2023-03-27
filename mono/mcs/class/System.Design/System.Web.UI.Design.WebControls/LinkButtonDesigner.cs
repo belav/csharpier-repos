@@ -30,11 +30,11 @@ using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-    public class LinkButtonDesigner : TextControlDesigner
-    {
-        public LinkButtonDesigner ()
-            : base ()
-        {
-        }
-    }
+	public class LinkButtonDesigner : TextControlDesigner
+	{
+		public LinkButtonDesigner ()
+			: base ()
+		{
+		}
+	}
 }

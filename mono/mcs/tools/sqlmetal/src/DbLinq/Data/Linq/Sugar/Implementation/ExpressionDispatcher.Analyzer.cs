@@ -1,4 +1,4 @@
-#region MIT license
+﻿#region MIT license
 // 
 // MIT license
 //
@@ -651,7 +651,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
         /// <summary>
         /// Entry point for a Select()
-        /// static Select(this Expression table, ?(table))
+        /// static Select(this Expression table, λ(table))
         /// </summary>
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
@@ -675,14 +675,14 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
         /// <summary>
         /// Entry point for a Where()
-        /// static Where(this Expression table, ?(table))
+        /// static Where(this Expression table, λ(table))
         /// </summary>
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
         protected virtual Expression AnalyzeWhere(IList<Expression> parameters, BuilderContext builderContext)
         {
-            var tablePiece = parameters[0];
+			var tablePiece = parameters[0];
             RegisterWhere(Analyze(parameters[1], tablePiece, builderContext), builderContext);
             return tablePiece;
         }

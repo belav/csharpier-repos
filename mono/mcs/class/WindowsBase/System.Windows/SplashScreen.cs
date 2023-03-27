@@ -20,36 +20,36 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System.Reflection;
 using System.Security;
 
 namespace System.Windows {
-    public class SplashScreen {
+	public class SplashScreen {
 
-        [SecurityCritical]
-        public SplashScreen (Assembly resourceAssembly, string resourceName)
-        {
-            throw new NotImplementedException ();
-        }
+		[SecurityCritical]
+		public SplashScreen (Assembly resourceAssembly, string resourceName)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public SplashScreen (string resourceName)
-        {
-            throw new NotImplementedException ();
-        }
+		public SplashScreen (string resourceName)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [SecurityCritical]
-        public void Show (bool autoClose)
-        {
-            throw new NotImplementedException ();
-        }
+		[SecurityCritical]
+		public void Show (bool autoClose)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [SecurityCritical]
-        public void Close (TimeSpan fadeoutDuration)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[SecurityCritical]
+		public void Close (TimeSpan fadeoutDuration)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

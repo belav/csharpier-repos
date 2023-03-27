@@ -2,13 +2,13 @@
 // Line:
 
 class Y {
-    public int a;
+	public int a;
 }
 
 class X : Y {
 
-    static void Main ()
-    {
-        base.a = 1;
-    }
+	static void Main ()
+	{
+		base.a = 1;
+	}
 }

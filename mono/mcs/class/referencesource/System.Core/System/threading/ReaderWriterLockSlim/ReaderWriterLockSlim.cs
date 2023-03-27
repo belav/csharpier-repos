@@ -97,7 +97,7 @@ namespace System.Threading
         long lockID;
 
         // See comments on ReaderWriterCount.
-        [ThreadStatic]
+		[ThreadStatic]
         static ReaderWriterCount t_rwc;
 
         bool fUpgradeThreadHoldingRead;
@@ -179,24 +179,24 @@ namespace System.Threading
         /// entry for this thread, but doesn't want to add one if an existing one
         /// could not be found.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
         private ReaderWriterCount GetThreadRWCount(bool dontAllocate)
         {
-            ReaderWriterCount rwc = t_rwc;
-            ReaderWriterCount empty = null;
-            while (rwc != null)
-            {
-                if (rwc.lockID == this.lockID)
-                    return rwc;
-                    
-                if (!dontAllocate && empty == null && IsRWEntryEmpty(rwc))
-                    empty = rwc;
+			ReaderWriterCount rwc = t_rwc;
+			ReaderWriterCount empty = null;
+			while (rwc != null)
+			{
+				if (rwc.lockID == this.lockID)
+					return rwc;
+					
+				if (!dontAllocate && empty == null && IsRWEntryEmpty(rwc))
+					empty = rwc;
 
                 rwc = rwc.next;
-            }
-            
-            if (dontAllocate)
-                return null;
+			}
+			
+			if (dontAllocate)
+				return null;
 
             if (empty == null)
             {
@@ -1129,7 +1129,7 @@ namespace System.Threading
             return owners & READER_MASK;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void EnterMyLock()
         {
             if (Interlocked.CompareExchange(ref myLock, 1, 0) != 0)

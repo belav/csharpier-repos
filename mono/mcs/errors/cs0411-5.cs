@@ -8,18 +8,18 @@ public class Foo : IFoo<int>, IFoo<string>
 
 public class Hello
 {
-    public void World<U> (IFoo<U> foo)
-    { }
+	public void World<U> (IFoo<U> foo)
+	{ }
 
-    public void Test (Foo foo)
-    {
-        World (foo);
-    }
+	public void Test (Foo foo)
+	{
+		World (foo);
+	}
 }
 
 class X
 {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

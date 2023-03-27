@@ -6,5 +6,5 @@ using BigInteger = C.BigInteger;
 
 namespace Cks.Runtime.Data
 {
-    public class BigInteger {}
+	public class BigInteger {}
 }

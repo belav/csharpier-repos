@@ -1,9 +1,9 @@
 //
 // TableFooterRowCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.TableFooterRow
+//	- CAS unit tests for System.Web.UI.WebControls.TableFooterRow
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,20 +39,20 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TableFooterRowCas: TableRowCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TableFooterRowCas: TableRowCas {
 
-        public override TableRowTest GetUnitTests ()
-        {
-            return new TableFooterRowTest ();
-        }
+		public override TableRowTest GetUnitTests ()
+		{
+			return new TableFooterRowTest ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (TableFooterRow); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (TableFooterRow); }
+		}
+	}
 }
 

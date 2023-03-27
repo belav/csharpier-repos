@@ -39,61 +39,61 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class UniqueConstraint_ctor_SDclm : GHTBase
 {
-    [Test] public void Main()
-    {
-        UniqueConstraint_ctor_SDclm tc = new UniqueConstraint_ctor_SDclm();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("UniqueConstraint_ctor_SD");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        }
+	[Test] public void Main()
+	{
+		UniqueConstraint_ctor_SDclm tc = new UniqueConstraint_ctor_SDclm();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("UniqueConstraint_ctor_SD");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
+	public void run()
+	{
+		Exception exp = null;
 
-        DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
-        
-        UniqueConstraint uc = null;
-        uc = new UniqueConstraint("myConstraint",dtParent.Columns[0]);
+		DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+		
+		UniqueConstraint uc = null;
+		uc = new UniqueConstraint("myConstraint",dtParent.Columns[0]);
 
-        try
-        {
-            BeginCase("Ctor");
-            Compare(uc == null ,false );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("Ctor");
+			Compare(uc == null ,false );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("Ctor name");
-            Compare(uc.ConstraintName ,"myConstraint");
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    }
+		try
+		{
+			BeginCase("Ctor name");
+			Compare(uc.ConstraintName ,"myConstraint");
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	}
 }
 }

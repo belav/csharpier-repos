@@ -3,10 +3,10 @@
 
 public class Test
 {
-    private string name;
+	private string name;
 
-    public string Name
-    {
-        get { return name ?? name = string.Empty; }
-    }
+	public string Name
+	{
+		get { return name ?? name = string.Empty; }
+	}
 }

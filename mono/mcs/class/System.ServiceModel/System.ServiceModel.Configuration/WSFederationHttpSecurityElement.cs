@@ -2,7 +2,7 @@
 // WSFederationHttpSecurityElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,59 +54,59 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WSFederationHttpSecurityElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty message;
-        static ConfigurationProperty mode;
+	public sealed partial class WSFederationHttpSecurityElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty message;
+		static ConfigurationProperty mode;
 
-        static WSFederationHttpSecurityElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            message = new ConfigurationProperty ("message",
-                typeof (FederatedMessageSecurityOverHttpElement), null, null/* FIXME: get converter for FederatedMessageSecurityOverHttpElement*/, null,
-                ConfigurationPropertyOptions.None);
+		static WSFederationHttpSecurityElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			message = new ConfigurationProperty ("message",
+				typeof (FederatedMessageSecurityOverHttpElement), null, null/* FIXME: get converter for FederatedMessageSecurityOverHttpElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            mode = new ConfigurationProperty ("mode",
-                typeof (WSFederationHttpSecurityMode), "Message", null/* FIXME: get converter for WSFederationHttpSecurityMode*/, null,
-                ConfigurationPropertyOptions.None);
+			mode = new ConfigurationProperty ("mode",
+				typeof (WSFederationHttpSecurityMode), "Message", null/* FIXME: get converter for WSFederationHttpSecurityMode*/, null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (message);
-            properties.Add (mode);
-        }
+			properties.Add (message);
+			properties.Add (mode);
+		}
 
-        public WSFederationHttpSecurityElement ()
-        {
-        }
+		public WSFederationHttpSecurityElement ()
+		{
+		}
 
 
-        // Properties
+		// Properties
 
-        [ConfigurationProperty ("message",
-             Options = ConfigurationPropertyOptions.None)]
-        public FederatedMessageSecurityOverHttpElement Message {
-            get { return (FederatedMessageSecurityOverHttpElement) base [message]; }
-        }
+		[ConfigurationProperty ("message",
+			 Options = ConfigurationPropertyOptions.None)]
+		public FederatedMessageSecurityOverHttpElement Message {
+			get { return (FederatedMessageSecurityOverHttpElement) base [message]; }
+		}
 
-        [ConfigurationProperty ("mode",
-             DefaultValue = "Message",
-             Options = ConfigurationPropertyOptions.None)]
-        public WSFederationHttpSecurityMode Mode {
-            get { return (WSFederationHttpSecurityMode) base [mode]; }
-            set { base [mode] = value; }
-        }
+		[ConfigurationProperty ("mode",
+			 DefaultValue = "Message",
+			 Options = ConfigurationPropertyOptions.None)]
+		public WSFederationHttpSecurityMode Mode {
+			get { return (WSFederationHttpSecurityMode) base [mode]; }
+			set { base [mode] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        internal void ApplyConfiguration (WSFederationHttpSecurity security)
-        {
-            security.Mode = Mode;
-            Message.ApplyConfiguration (security.Message);
-        }
-    }
+		internal void ApplyConfiguration (WSFederationHttpSecurity security)
+		{
+			security.Mode = Mode;
+			Message.ApplyConfiguration (security.Message);
+		}
+	}
 
 }

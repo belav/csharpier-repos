@@ -818,7 +818,7 @@ namespace System.Numerics
             return BigNumber.ParseBigInteger(value, NumberStyles.Integer, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static BigInteger Parse(String value, NumberStyles style, IFormatProvider provider) {
+    	public static BigInteger Parse(String value, NumberStyles style, IFormatProvider provider) {
             return BigNumber.ParseBigInteger(value, style, NumberFormatInfo.GetInstance(provider));
         }
 

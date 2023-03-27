@@ -6,11 +6,11 @@ using System;
 
 namespace Testing
 {
-    /// <summary>
-    /// description for class Test
-    /// </summary>
-    public class Test
-    {
-        public const string Constant = "CONSTANT STRING";
-    }
+	/// <summary>
+	/// description for class Test
+	/// </summary>
+	public class Test
+	{
+		public const string Constant = "CONSTANT STRING";
+	}
 }

@@ -2,7 +2,7 @@
 // SecurityContextSecurityTokenAuthenticator.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,22 +33,22 @@ using System.IdentityModel.Tokens;
 
 namespace System.ServiceModel.Security.Tokens
 {
-    public class SecurityContextSecurityTokenAuthenticator : SecurityTokenAuthenticator
-    {
-        public SecurityContextSecurityTokenAuthenticator ()
-        {
-        }
+	public class SecurityContextSecurityTokenAuthenticator : SecurityTokenAuthenticator
+	{
+		public SecurityContextSecurityTokenAuthenticator ()
+		{
+		}
 
-        [MonoTODO]
-        protected override bool CanValidateTokenCore (SecurityToken token)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected override bool CanValidateTokenCore (SecurityToken token)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore (SecurityToken token)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore (SecurityToken token)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

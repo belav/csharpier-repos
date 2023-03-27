@@ -5,15 +5,15 @@ using System;
 
 class MyAttribute : Attribute {
 
-    public MyAttribute (string s)
-    {
-    }
+	public MyAttribute (string s)
+	{
+	}
 }
 
 [My (null as string)]
 class X {
 
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

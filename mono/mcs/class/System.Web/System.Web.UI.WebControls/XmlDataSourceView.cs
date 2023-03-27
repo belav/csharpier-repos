@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.XmlDataSourceView
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
 //
 // (C) 2003 Ben Maurer
 //
@@ -35,51 +35,51 @@ using System.Xml;
 
 namespace System.Web.UI.WebControls
 {
-    public sealed class XmlDataSourceView : DataSourceView
-    {
-        ArrayList nodes;
-        XmlDataSource owner;
+	public sealed class XmlDataSourceView : DataSourceView
+	{
+		ArrayList nodes;
+		XmlDataSource owner;
 
-        public XmlDataSourceView (XmlDataSource owner, string name)
-            : base (owner, name)
-        {
-            this.owner = owner;
-        }
-        
-        public IEnumerable Select (DataSourceSelectArguments arguments)
-        {
-            return ExecuteSelect (arguments);
-        }
-        
-        void DoXPathSelect ()
-        {
-            XmlNodeList selected_nodes = owner.GetXmlDocument ().SelectNodes (owner.XPath != "" ? owner.XPath : "/*/*");
+		public XmlDataSourceView (XmlDataSource owner, string name)
+			: base (owner, name)
+		{
+			this.owner = owner;
+		}
+		
+		public IEnumerable Select (DataSourceSelectArguments arguments)
+		{
+			return ExecuteSelect (arguments);
+		}
+		
+		void DoXPathSelect ()
+		{
+			XmlNodeList selected_nodes = owner.GetXmlDocument ().SelectNodes (owner.XPath != "" ? owner.XPath : "/*/*");
 
-            nodes = new ArrayList (selected_nodes.Count);
-            
-            foreach (XmlNode node in selected_nodes) {
-                if (node.NodeType == XmlNodeType.Element)
-                    nodes.Add (node);
-            }
-        }
+			nodes = new ArrayList (selected_nodes.Count);
+			
+			foreach (XmlNode node in selected_nodes) {
+				if (node.NodeType == XmlNodeType.Element)
+					nodes.Add (node);
+			}
+		}
 
-        protected internal override IEnumerable ExecuteSelect (DataSourceSelectArguments arguments)
-        {
-            if (nodes == null)
-                DoXPathSelect();
+		protected internal override IEnumerable ExecuteSelect (DataSourceSelectArguments arguments)
+		{
+			if (nodes == null)
+				DoXPathSelect();
 
-            ArrayList list = new ArrayList ();
-            int max = arguments.StartRowIndex + (arguments.MaximumRows > 0 ? arguments.MaximumRows : nodes.Count);
-            if (max > nodes.Count) max = nodes.Count;
+			ArrayList list = new ArrayList ();
+			int max = arguments.StartRowIndex + (arguments.MaximumRows > 0 ? arguments.MaximumRows : nodes.Count);
+			if (max > nodes.Count) max = nodes.Count;
 
-            for (int n = arguments.StartRowIndex; n < max; n++)
-                list.Add (new XmlDataSourceNodeDescriptor ((XmlElement) nodes [n]));
-                
-            if (arguments.RetrieveTotalRowCount)
-                arguments.TotalRowCount = nodes.Count;
+			for (int n = arguments.StartRowIndex; n < max; n++)
+				list.Add (new XmlDataSourceNodeDescriptor ((XmlElement) nodes [n]));
+				
+			if (arguments.RetrieveTotalRowCount)
+				arguments.TotalRowCount = nodes.Count;
 
-            return list;
-        }        
-    }
+			return list;
+		}		
+	}
 }
 

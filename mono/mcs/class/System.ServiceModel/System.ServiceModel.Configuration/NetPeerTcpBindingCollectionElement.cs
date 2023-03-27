@@ -2,7 +2,7 @@
 // NetPeerTcpBindingCollectionElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public partial class NetPeerTcpBindingCollectionElement
-         : StandardBindingCollectionElement<NetPeerTcpBinding, NetPeerTcpBindingElement>
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
+	[MonoTODO]
+	public partial class NetPeerTcpBindingCollectionElement
+		 : StandardBindingCollectionElement<NetPeerTcpBinding, NetPeerTcpBindingElement>
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
 
-        static NetPeerTcpBindingCollectionElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static NetPeerTcpBindingCollectionElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public NetPeerTcpBindingCollectionElement ()
-        {
-        }
-
-
-        // Properties
+		public NetPeerTcpBindingCollectionElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+
+	}
 
 }

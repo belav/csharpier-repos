@@ -2,7 +2,7 @@
 // Commons.Xml.Relaxng.General.cs
 //
 // Author:
-//    Atsushi Enomoto <ginga@kit.hi-ho.ne.jp>
+//	Atsushi Enomoto <ginga@kit.hi-ho.ne.jp>
 //
 // 2003 Atsushi Enomoto "No rights reserved."
 //
@@ -38,30 +38,30 @@ using Commons.Xml.Relaxng.Derivative;
 
 namespace Commons.Xml.Relaxng
 {
-    public class RelaxngException : Exception
-    {
-//        string debugXml;
+	public class RelaxngException : Exception
+	{
+//		string debugXml;
 
-        public RelaxngException () : base () {}
-        public RelaxngException (string message) : base (message) {}
-        public RelaxngException (string message, Exception innerException)
-            : base (message, innerException) {}
-        internal RelaxngException (string message, RdpPattern invalidatedPattern)
-            : base (message)
-        {
-//            debugXml = RdpUtil.DebugRdpPattern (invalidatedPattern, new Hashtable ());
-        }
+		public RelaxngException () : base () {}
+		public RelaxngException (string message) : base (message) {}
+		public RelaxngException (string message, Exception innerException)
+			: base (message, innerException) {}
+		internal RelaxngException (string message, RdpPattern invalidatedPattern)
+			: base (message)
+		{
+//			debugXml = RdpUtil.DebugRdpPattern (invalidatedPattern, new Hashtable ());
+		}
 
-        public RelaxngException (RelaxngElementBase source, string message)
-            : this (source, message, null)
-        {
-        }
+		public RelaxngException (RelaxngElementBase source, string message)
+			: this (source, message, null)
+		{
+		}
 
-        public RelaxngException (RelaxngElementBase source, string message, Exception innerException)
-            : base (message + String.Format (" {0} ({1}, {2})", source.BaseUri, source.LineNumber, source.LinePosition), innerException)
-        {
-        }
-    }
+		public RelaxngException (RelaxngElementBase source, string message, Exception innerException)
+			: base (message + String.Format (" {0} ({1}, {2})", source.BaseUri, source.LineNumber, source.LinePosition), innerException)
+		{
+		}
+	}
 
 }
 

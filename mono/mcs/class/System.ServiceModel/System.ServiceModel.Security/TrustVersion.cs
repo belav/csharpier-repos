@@ -2,7 +2,7 @@
 // TrustVersion.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -29,25 +29,25 @@ using System.Xml;
 
 namespace System.ServiceModel.Security
 {
-    public abstract class TrustVersion
-    {
-        static TrustVersion ()
-        {
-            var dic = new XmlDictionary ();
-            WSTrust13 = new TrustVersionImpl () { Prefix = dic.Add ("wst"), Namespace = dic.Add ("http://docs.oasis-open.org/ws-sx/ws-trust/200512") };
-            WSTrustFeb2005 = new TrustVersionImpl () { Prefix = dic.Add ("wsse"), Namespace = dic.Add ("http://schemas.xmlsoap.org/ws/2002/12/secext") };
-            Default = WSTrust13;
-        }
+	public abstract class TrustVersion
+	{
+		static TrustVersion ()
+		{
+			var dic = new XmlDictionary ();
+			WSTrust13 = new TrustVersionImpl () { Prefix = dic.Add ("wst"), Namespace = dic.Add ("http://docs.oasis-open.org/ws-sx/ws-trust/200512") };
+			WSTrustFeb2005 = new TrustVersionImpl () { Prefix = dic.Add ("wsse"), Namespace = dic.Add ("http://schemas.xmlsoap.org/ws/2002/12/secext") };
+			Default = WSTrust13;
+		}
 
-        public static TrustVersion Default { get; private set; }
-        public static TrustVersion WSTrust13 { get; private set; }
-        public static TrustVersion WSTrustFeb2005 { get; private set; }
+		public static TrustVersion Default { get; private set; }
+		public static TrustVersion WSTrust13 { get; private set; }
+		public static TrustVersion WSTrustFeb2005 { get; private set; }
 
-        public XmlDictionaryString Namespace { get; internal set; }
-        public XmlDictionaryString Prefix { get; internal set; }
-    }
+		public XmlDictionaryString Namespace { get; internal set; }
+		public XmlDictionaryString Prefix { get; internal set; }
+	}
 
-    class TrustVersionImpl : TrustVersion
-    {
-    }
+	class TrustVersionImpl : TrustVersion
+	{
+	}
 }

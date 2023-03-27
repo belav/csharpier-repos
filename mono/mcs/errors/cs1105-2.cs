@@ -3,5 +3,5 @@
 
 interface ITest
 {
-    void Method (this int a);
+	void Method (this int a);
 }

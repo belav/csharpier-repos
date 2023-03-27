@@ -33,138 +33,138 @@ using System.Threading;
 
 namespace System.Runtime.Remoting.Channels
 {
-    internal class RemotingThreadPool
-    {
-        const int ThreadLimit = 1000;
-        const int ThreadWaitTime = 20000; //ms
-        const int PoolGrowDelay = 500; // ms
-        const int MinThreads = 3;
+	internal class RemotingThreadPool
+	{
+		const int ThreadLimit = 1000;
+		const int ThreadWaitTime = 20000; //ms
+		const int PoolGrowDelay = 500; // ms
+		const int MinThreads = 3;
 
-        int freeThreads;
-        int poolUsers;
-        Queue workItems = new Queue ();
-        AutoResetEvent threadDone = new AutoResetEvent (false);
-        ArrayList runningThreads = new ArrayList ();
-         
-        bool stopped = false;
-        
-        static object globalLock = new object ();
-        static RemotingThreadPool sharedPool;
-        
-        public static RemotingThreadPool GetSharedPool ()
-        {
-            lock (globalLock) {
-                if (sharedPool == null)
-                    sharedPool = new RemotingThreadPool ();
-                sharedPool.poolUsers++;
-            }
-            return sharedPool;
-        }
-        
-        public void Free ()
-        {
-            lock (globalLock) {
-                if (--poolUsers > 0)
-                    return;
-                
-                lock (workItems) {
-                    stopped = true;
-                    threadDone.Set ();
-                    workItems.Clear ();
-                    foreach (Thread t in runningThreads)
-                        t.Abort ();
-                    runningThreads.Clear ();
-                }
-                if (this == sharedPool)
-                    sharedPool = null;
-            }
-        }
-        
-        public bool RunThread (ThreadStart threadStart)
-        {
-            lock (workItems) {
-                if (stopped)
-                    throw new RemotingException ("Server channel stopped.");
-                    
-                if (freeThreads > 0) {
-                    freeThreads--;
-                    workItems.Enqueue (threadStart);
-                    Monitor.Pulse (workItems);
-                    return true;
-                } else if (runningThreads.Count < MinThreads) {
-                    workItems.Enqueue (threadStart);
-                    StartPoolThread ();
-                    return true;
-                }
-            }
-            
-            // Try again some ms later, and if there are still no free threads,
-            // then create a new one
+		int freeThreads;
+		int poolUsers;
+		Queue workItems = new Queue ();
+		AutoResetEvent threadDone = new AutoResetEvent (false);
+		ArrayList runningThreads = new ArrayList ();
+		 
+		bool stopped = false;
+		
+		static object globalLock = new object ();
+		static RemotingThreadPool sharedPool;
+		
+		public static RemotingThreadPool GetSharedPool ()
+		{
+			lock (globalLock) {
+				if (sharedPool == null)
+					sharedPool = new RemotingThreadPool ();
+				sharedPool.poolUsers++;
+			}
+			return sharedPool;
+		}
+		
+		public void Free ()
+		{
+			lock (globalLock) {
+				if (--poolUsers > 0)
+					return;
+				
+				lock (workItems) {
+					stopped = true;
+					threadDone.Set ();
+					workItems.Clear ();
+					foreach (Thread t in runningThreads)
+						t.Abort ();
+					runningThreads.Clear ();
+				}
+				if (this == sharedPool)
+					sharedPool = null;
+			}
+		}
+		
+		public bool RunThread (ThreadStart threadStart)
+		{
+			lock (workItems) {
+				if (stopped)
+					throw new RemotingException ("Server channel stopped.");
+					
+				if (freeThreads > 0) {
+					freeThreads--;
+					workItems.Enqueue (threadStart);
+					Monitor.Pulse (workItems);
+					return true;
+				} else if (runningThreads.Count < MinThreads) {
+					workItems.Enqueue (threadStart);
+					StartPoolThread ();
+					return true;
+				}
+			}
+			
+			// Try again some ms later, and if there are still no free threads,
+			// then create a new one
 
-            threadDone.WaitOne (PoolGrowDelay, false);
-            
-            lock (workItems) {
-                if (stopped)
-                    throw new RemotingException ("Server channel stopped.");
-                
-                if (freeThreads > 0) {
-                    freeThreads--;
-                    workItems.Enqueue (threadStart);
-                    Monitor.Pulse (workItems);
-                } else {
-                    if (runningThreads.Count >= ThreadLimit)
-                        return false;
-                    workItems.Enqueue (threadStart);
-                    StartPoolThread ();
-                }
-            }
-            return true;
-        }
-        
-        void StartPoolThread ()
-        {
-            Thread thread = new Thread (new ThreadStart (PoolThread));
-            runningThreads.Add (thread);
-            thread.IsBackground = true;
-            thread.Start ();
-        }
-        
-        void PoolThread ()
-        {
-            while (true) {
-                ThreadStart work = null;
-                do {
-                    lock (workItems) {
-                        if (workItems.Count > 0)
-                            work = (ThreadStart) workItems.Dequeue ();
-                        else {
-                            freeThreads ++;
-                            threadDone.Set ();
-                            if (!Monitor.Wait (workItems, ThreadWaitTime)) {
-                                // Maybe it timed out when the work was being queued.
-                                if (workItems.Count > 0) {
-                                    work = (ThreadStart) workItems.Dequeue ();
-                                } else {
-                                    freeThreads --;
-                                    if (freeThreads == 0) threadDone.Reset ();
-                                    runningThreads.Remove (Thread.CurrentThread);
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                } while (work == null);
-                try {
-                    work ();
-                }
-                catch (Exception ex)
-                {
+			threadDone.WaitOne (PoolGrowDelay, false);
+			
+			lock (workItems) {
+				if (stopped)
+					throw new RemotingException ("Server channel stopped.");
+				
+				if (freeThreads > 0) {
+					freeThreads--;
+					workItems.Enqueue (threadStart);
+					Monitor.Pulse (workItems);
+				} else {
+					if (runningThreads.Count >= ThreadLimit)
+						return false;
+					workItems.Enqueue (threadStart);
+					StartPoolThread ();
+				}
+			}
+			return true;
+		}
+		
+		void StartPoolThread ()
+		{
+			Thread thread = new Thread (new ThreadStart (PoolThread));
+			runningThreads.Add (thread);
+			thread.IsBackground = true;
+			thread.Start ();
+		}
+		
+		void PoolThread ()
+		{
+			while (true) {
+				ThreadStart work = null;
+				do {
+					lock (workItems) {
+						if (workItems.Count > 0)
+							work = (ThreadStart) workItems.Dequeue ();
+						else {
+							freeThreads ++;
+							threadDone.Set ();
+							if (!Monitor.Wait (workItems, ThreadWaitTime)) {
+								// Maybe it timed out when the work was being queued.
+								if (workItems.Count > 0) {
+									work = (ThreadStart) workItems.Dequeue ();
+								} else {
+									freeThreads --;
+									if (freeThreads == 0) threadDone.Reset ();
+									runningThreads.Remove (Thread.CurrentThread);
+									return;
+								}
+							}
+						}
+					}
+				} while (work == null);
+				try {
+					work ();
+				}
+				catch (Exception ex)
+				{
 #if DEBUG
-                    Console.WriteLine("The exception was caught during RemotingThreadPool.PoolThread - work: {0}, {1}", ex.GetType(), ex.Message);
+					Console.WriteLine("The exception was caught during RemotingThreadPool.PoolThread - work: {0}, {1}", ex.GetType(), ex.Message);
 #endif
-                }
-            }
-        }
-    }
+				}
+			}
+		}
+	}
 }
 

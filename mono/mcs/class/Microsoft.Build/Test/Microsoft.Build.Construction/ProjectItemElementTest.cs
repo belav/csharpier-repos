@@ -9,13 +9,13 @@ using Microsoft.Build.Exceptions;
 
 namespace MonoTests.Microsoft.Build.Construction
 {
-    [TestFixture]
-    public class ProjectItemElementTest
-    {
-        [Test]
-        [ExpectedException (typeof (InvalidProjectFileException))]
-        public void EmptyInclude ()
-        {
+	[TestFixture]
+	public class ProjectItemElementTest
+	{
+		[Test]
+		[ExpectedException (typeof (InvalidProjectFileException))]
+		public void EmptyInclude ()
+		{
             string project_xml = @"<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
   <ItemGroup>
     <Foo Include='' />
@@ -23,12 +23,12 @@ namespace MonoTests.Microsoft.Build.Construction
 </Project>";
             var xml = XmlReader.Create (new StringReader (project_xml));
             ProjectRootElement.Create (xml);
-        }
-        
-        [Test]
-        [ExpectedException (typeof (InvalidProjectFileException))]
-        public void MissingInclude ()
-        {
+		}
+		
+		[Test]
+		[ExpectedException (typeof (InvalidProjectFileException))]
+		public void MissingInclude ()
+		{
             string project_xml = @"<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
   <ItemGroup>
     <Foo />
@@ -36,7 +36,7 @@ namespace MonoTests.Microsoft.Build.Construction
 </Project>";
             var xml = XmlReader.Create (new StringReader (project_xml));
             ProjectRootElement.Create (xml);
-        }
-    }
+		}
+	}
 }
 

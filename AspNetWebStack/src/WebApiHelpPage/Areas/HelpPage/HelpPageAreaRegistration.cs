@@ -1,4 +1,4 @@
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Mvc;
 
 namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage

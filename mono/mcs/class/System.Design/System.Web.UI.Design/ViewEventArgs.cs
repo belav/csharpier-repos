@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ViewEventArgs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -38,30 +38,30 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-    public class ViewEventArgs : EventArgs
-    {
-        ViewEvent event_type;
-        DesignerRegion region;
-        EventArgs event_args;
+	public class ViewEventArgs : EventArgs
+	{
+		ViewEvent event_type;
+		DesignerRegion region;
+		EventArgs event_args;
 
-        public ViewEventArgs (ViewEvent eventType, DesignerRegion region, EventArgs eventArgs)
-        {
-            this.event_type = eventType;
-            this.region = region;
-            this.event_args = eventArgs;
-        }
+		public ViewEventArgs (ViewEvent eventType, DesignerRegion region, EventArgs eventArgs)
+		{
+			this.event_type = eventType;
+			this.region = region;
+			this.event_args = eventArgs;
+		}
 
-        public ViewEvent EventType {
-            get { return event_type; }
-        }
+		public ViewEvent EventType {
+			get { return event_type; }
+		}
 
-        public DesignerRegion Region {
-            get { return region; }
-        }
+		public DesignerRegion Region {
+			get { return region; }
+		}
 
-        public EventArgs EventArgs {
-            get { return event_args; }
-        }
-    }
+		public EventArgs EventArgs {
+			get { return event_args; }
+		}
+	}
 }
 

@@ -29,8 +29,8 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-    public interface IServiceChannel : IContextChannel, ICommunicationObject
-    {
-        Uri ListenUri { get; }
-    }
+	public interface IServiceChannel : IContextChannel, ICommunicationObject
+	{
+		Uri ListenUri { get; }
+	}
 }

@@ -29,10 +29,10 @@
 //
 
 namespace System.Web {
-    public enum ProcessStatus {
-        Alive = 0x1,
-        ShuttingDown,
-        ShutDown,
-        Terminated
-    }
+	public enum ProcessStatus {
+		Alive = 0x1,
+		ShuttingDown,
+		ShutDown,
+		Terminated
+	}
 }

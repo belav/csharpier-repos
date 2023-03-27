@@ -22,10 +22,10 @@ public class FunctionsBlock_Tabs {
 
 #line 5 "FunctionsBlock_Tabs.cshtml"
             
-    Random _rand = new Random();
-    private int RandomInt() {
-        return _rand.Next();
-    }
+	Random _rand = new Random();
+	private int RandomInt() {
+		return _rand.Next();
+	}
 
 #line default
 #line hidden

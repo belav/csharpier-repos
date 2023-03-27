@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -277,32 +277,32 @@ namespace POS_Server.Models
 
         //invoice
 
-        public Nullable<decimal> tax { get; set; }//???? ???????
-        public Nullable<decimal> totalwithTax { get; set; }//???? ???????? ???????? Totalnet
-        public Nullable<decimal> totalNoTax { get; set; }//???? ???????? ??? ??????? total
-        public Nullable<decimal> invTaxVal { get; set; }//???? ????? ???????? TAX
-        public Nullable<int> itemsRowsCount { get; set; }//??????? ????????
+        public Nullable<decimal> tax { get; set; }//نسبة الضريبة
+        public Nullable<decimal> totalwithTax { get; set; }//قيمة الفاتورة النهائية Totalnet
+        public Nullable<decimal> totalNoTax { get; set; }//قيمة الفاتورة قبل الضريبة total
+        public Nullable<decimal> invTaxVal { get; set; }//قيمة ضريبة الفاتورة TAX
+        public Nullable<int> itemsRowsCount { get; set; }//عدداسطر الفاتورة
 
         //item
-        public string ITitemName { get; set; }//??? ??????
-        public string ITunitName { get; set; }//???? ??????
+        public string ITitemName { get; set; }//اسم العنصر
+        public string ITunitName { get; set; }//وحدة العنصر
 
-        public Nullable<long> ITquantity { get; set; }//??????
-        public Nullable<decimal> subTotalNotax { get; set; }//??? ??????? ??? ??????? Price
-        public Nullable<decimal> itemUnitTaxwithQTY { get; set; }//??? ??????? ???????
-        public string invNumber { get; set; }//??? ????????//item
-        public string invBarcode { get; set; }//barcode ????????//item
-        public Nullable<System.DateTime> IupdateDate { get; set; }//????? ????????//item
+        public Nullable<long> ITquantity { get; set; }//الكمية
+        public Nullable<decimal> subTotalNotax { get; set; }//سعر العناصر قبل الضريبة Price
+        public Nullable<decimal> itemUnitTaxwithQTY { get; set; }//قيم الضريبة للعناصر
+        public string invNumber { get; set; }//رقم الفاتورة//item
+        public string invBarcode { get; set; }//barcode الفاتورة//item
+        public Nullable<System.DateTime> IupdateDate { get; set; }//تاريخ الفاتورة//item
 
-        public Nullable<decimal> ItemTaxes { get; set; }//???? ????? ??????
+        public Nullable<decimal> ItemTaxes { get; set; }//نسبة ضريبة العنصر
 
-        //public string invNumber { get; set; }//??? ????????
-        //public Nullable<System.DateTime> IupdateDate { get; set; }//????? ????????
-        //public Nullable<decimal> tax { get; set; }//???? ???????
-        //public Nullable<decimal> totalwithTax { get; set; }//???? ???????? ???????? Totalnet
-        //public Nullable<decimal> totalNoTax { get; set; }//???? ???????? ??? ??????? total
-        //public Nullable<decimal> invTaxVal { get; set; }//???? ????? ???????? TAX
-        //public Nullable<int> itemsRowsCount { get; set; }//??????? ????????
+        //public string invNumber { get; set; }//رقم الفاتورة
+        //public Nullable<System.DateTime> IupdateDate { get; set; }//تاريخ الفاتورة
+        //public Nullable<decimal> tax { get; set; }//نسبة الضريبة
+        //public Nullable<decimal> totalwithTax { get; set; }//قيمة الفاتورة النهائية Totalnet
+        //public Nullable<decimal> totalNoTax { get; set; }//قيمة الفاتورة قبل الضريبة total
+        //public Nullable<decimal> invTaxVal { get; set; }//قيمة ضريبة الفاتورة TAX
+        //public Nullable<int> itemsRowsCount { get; set; }//عدداسطر الفاتورة
         // public Nullable<decimal> totalNet { get; set; }
 
     }
@@ -500,23 +500,23 @@ namespace POS_Server.Models
 
         //invoice
 
-        public Nullable<decimal> tax { get; set; }//???? ???????
-        public Nullable<decimal> totalwithTax { get; set; }//???? ???????? ???????? Totalnet
-        public Nullable<decimal> totalNoTax { get; set; }//???? ???????? ??? ??????? total
-        public Nullable<decimal> invTaxVal { get; set; }//???? ????? ???????? TAX
-        public Nullable<int> itemsRowsCount { get; set; }//??????? ????????
+        public Nullable<decimal> tax { get; set; }//نسبة الضريبة
+        public Nullable<decimal> totalwithTax { get; set; }//قيمة الفاتورة النهائية Totalnet
+        public Nullable<decimal> totalNoTax { get; set; }//قيمة الفاتورة قبل الضريبة total
+        public Nullable<decimal> invTaxVal { get; set; }//قيمة ضريبة الفاتورة TAX
+        public Nullable<int> itemsRowsCount { get; set; }//عدداسطر الفاتورة
 
         //item
-        public string ITitemName { get; set; }//??? ??????
-        public string ITunitName { get; set; }//???? ??????
+        public string ITitemName { get; set; }//اسم العنصر
+        public string ITunitName { get; set; }//وحدة العنصر
 
-        public Nullable<long> ITquantity { get; set; }//??????
-        public Nullable<decimal> subTotalNotax { get; set; }//??? ??????? ??? ??????? Price
-        public Nullable<decimal> itemUnitTaxwithQTY { get; set; }//??? ??????? ???????
-        public string invNumber { get; set; }//??? ????????//item
-        public Nullable<System.DateTime> IupdateDate { get; set; }//????? ????????//item
+        public Nullable<long> ITquantity { get; set; }//الكمية
+        public Nullable<decimal> subTotalNotax { get; set; }//سعر العناصر قبل الضريبة Price
+        public Nullable<decimal> itemUnitTaxwithQTY { get; set; }//قيم الضريبة للعناصر
+        public string invNumber { get; set; }//رقم الفاتورة//item
+        public Nullable<System.DateTime> IupdateDate { get; set; }//تاريخ الفاتورة//item
 
-        public Nullable<decimal> ItemTaxes { get; set; }//???? ????? ??????
+        public Nullable<decimal> ItemTaxes { get; set; }//نسبة ضريبة العنصر
 
         public List<invoiceClassDiscount> invoiceClassDiscountList { get; set; }
 

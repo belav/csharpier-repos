@@ -1,4 +1,4 @@
-// 
+﻿// 
 // ResourceProperty.cs
 //  
 // Author:
@@ -32,50 +32,50 @@ using System.Runtime.CompilerServices;
 
 namespace System.Data.Services.Providers
 {
-    [DebuggerDisplay ("{kind}: {name}")]
-    public class ResourceProperty
-    {
-        public bool CanReflectOnInstanceTypeProperty {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+	[DebuggerDisplay ("{kind}: {name}")]
+	public class ResourceProperty
+	{
+		public bool CanReflectOnInstanceTypeProperty {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        public ResourceType ResourceType {
-            get; private set;
-        }
+		public ResourceType ResourceType {
+			get; private set;
+		}
 
-        public string Name {
-            get; private set;
-        }
+		public string Name {
+			get; private set;
+		}
 
-        public string MimeType {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		public string MimeType {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        public ResourcePropertyKind Kind {
-            get; private set;
-        }
+		public ResourcePropertyKind Kind {
+			get; private set;
+		}
 
-        public object CustomState {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		public object CustomState {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        public bool IsReadOnly {
-            get; private set;
-        }
+		public bool IsReadOnly {
+			get; private set;
+		}
 
-        public ResourceProperty (string name, ResourcePropertyKind kind, ResourceType propertyResourceType)
-        {
-            this.Name = name;
-            this.Kind = kind;
-            this.ResourceType = propertyResourceType;
-        }
+		public ResourceProperty (string name, ResourcePropertyKind kind, ResourceType propertyResourceType)
+		{
+			this.Name = name;
+			this.Kind = kind;
+			this.ResourceType = propertyResourceType;
+		}
 
-        public void SetReadOnly ()
-        {
-            IsReadOnly = true;
-        }
-    }
+		public void SetReadOnly ()
+		{
+			IsReadOnly = true;
+		}
+	}
 }

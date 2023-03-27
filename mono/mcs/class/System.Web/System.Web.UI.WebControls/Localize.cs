@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.Localize.cs
 //
 // Authors:
-//     Sanjay Gupta gsanjay@novell.com)
+// 	Sanjay Gupta gsanjay@novell.com)
 //
 // (C) 2004 Novell, Inc. (http://www.novell.com)
 //
@@ -34,14 +34,14 @@ using System.Drawing;
 
 namespace System.Web.UI.WebControls
 {
-    [Designer ("System.Web.UI.Design.WebControls.LocalizeDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    [ToolboxBitmap ("")]
-    public class Localize : Literal, ITextControl
-    {
-        //No methods/properties/defined for this class. It inherits
-        // everything from literal class
-        public Localize ()
-        {}
-    }
+	[Designer ("System.Web.UI.Design.WebControls.LocalizeDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+	[ToolboxBitmap ("")]
+	public class Localize : Literal, ITextControl
+	{
+		//No methods/properties/defined for this class. It inherits
+		// everything from literal class
+		public Localize ()
+		{}
+	}
 }
 

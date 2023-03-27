@@ -31,16 +31,16 @@ using System;
 
 namespace System.Web.UI.WebControls
 {
-    public class ListViewItemEventArgs : EventArgs
-    {
-        public ListViewItemEventArgs (ListViewItem item)
-        {
-            Item = item;
-        }
-        
-        public ListViewItem Item {
-            get;
-            private set;
-        }
-    }
+	public class ListViewItemEventArgs : EventArgs
+	{
+		public ListViewItemEventArgs (ListViewItem item)
+		{
+			Item = item;
+		}
+		
+		public ListViewItem Item {
+			get;
+			private set;
+		}
+	}
 }

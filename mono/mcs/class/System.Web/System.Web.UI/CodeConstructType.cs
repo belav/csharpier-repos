@@ -2,7 +2,7 @@
 // System.Web.UI.CompilationMode.cs
 //
 // Authors:
-//    Marek Safar (marek.safar@gmail.com)
+//	Marek Safar (marek.safar@gmail.com)
 //
 // Copyright (C) 2009-2010 Novell, Inc (http://www.novell.com)
 //
@@ -28,11 +28,11 @@
 
 namespace System.Web.UI
 {
-    public enum CodeConstructType
-    {
-        CodeSnippet = 0,
-        ExpressionSnippet = 1,
-        DataBindingSnippet = 2,
-        ScriptTag = 3
-    }
+	public enum CodeConstructType
+	{
+		CodeSnippet = 0,
+		ExpressionSnippet = 1,
+		DataBindingSnippet = 2,
+		ScriptTag = 3
+	}
 }

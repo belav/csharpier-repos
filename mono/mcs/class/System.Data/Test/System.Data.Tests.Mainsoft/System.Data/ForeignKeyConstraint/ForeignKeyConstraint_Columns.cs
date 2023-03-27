@@ -39,65 +39,65 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class ForeignKeyConstraint_Columns : GHTBase
 {
-    [Test] public void Main()
-    {
-        ForeignKeyConstraint_Columns tc = new ForeignKeyConstraint_Columns();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("ForeignKeyConstraint_Columns");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		ForeignKeyConstraint_Columns tc = new ForeignKeyConstraint_Columns();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("ForeignKeyConstraint_Columns");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        //int RowCount;
-        DataSet ds = new DataSet();
-        DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
-        DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable();
-        ds.Tables.Add(dtParent);
-        ds.Tables.Add(dtChild);
-        
-        ForeignKeyConstraint fc = null;
-        fc = new ForeignKeyConstraint(dtParent.Columns[0],dtChild.Columns[0]);
+	public void run()
+	{
+		Exception exp = null;
+		//int RowCount;
+		DataSet ds = new DataSet();
+		DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+		DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable();
+		ds.Tables.Add(dtParent);
+		ds.Tables.Add(dtChild);
+		
+		ForeignKeyConstraint fc = null;
+		fc = new ForeignKeyConstraint(dtParent.Columns[0],dtChild.Columns[0]);
 
-        try
-        {
-            BeginCase("Columns");
-            Compare(fc.Columns[0]  ,dtChild.Columns[0] );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("Columns");
+			Compare(fc.Columns[0]  ,dtChild.Columns[0] );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("Columns count");
-            Compare(fc.Columns.Length ,1 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    }
+		try
+		{
+			BeginCase("Columns count");
+			Compare(fc.Columns.Length ,1 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	}
 }
 }

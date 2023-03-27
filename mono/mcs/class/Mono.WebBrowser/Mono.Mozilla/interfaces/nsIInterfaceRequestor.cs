@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,27 +32,27 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("033A1470-8B2A-11d3-AF88-00A024FFC08C")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIInterfaceRequestor {
+	[Guid ("033A1470-8B2A-11d3-AF88-00A024FFC08C")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIInterfaceRequestor {
 
 #region nsIInterfaceRequestor
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getInterface (
-                [MarshalAs (UnmanagedType.LPStruct)]   Guid uuid,
-                  out IntPtr result);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getInterface (
+				[MarshalAs (UnmanagedType.LPStruct)]   Guid uuid,
+				  out IntPtr result);
 
 #endregion
-    }
+	}
 
 
-    internal class nsInterfaceRequestor {
-        public static nsIInterfaceRequestor GetProxy (Mono.WebBrowser.IWebBrowser control, nsIInterfaceRequestor obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIInterfaceRequestor).GUID, obj);
-            return o as nsIInterfaceRequestor;
-        }
-    }
+	internal class nsInterfaceRequestor {
+		public static nsIInterfaceRequestor GetProxy (Mono.WebBrowser.IWebBrowser control, nsIInterfaceRequestor obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIInterfaceRequestor).GUID, obj);
+			return o as nsIInterfaceRequestor;
+		}
+	}
 }

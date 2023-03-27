@@ -3,15 +3,15 @@
 using System.Collections;
 
 class X {
-    IEnumerator MyEnumerator (int a)
-    {
-        if (a == 0)
-            yield return 1;
-        else
-            return null;
-    }
+	IEnumerator MyEnumerator (int a)
+	{
+		if (a == 0)
+			yield return 1;
+		else
+			return null;
+	}
 
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

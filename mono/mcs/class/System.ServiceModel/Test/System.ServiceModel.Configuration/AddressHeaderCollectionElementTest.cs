@@ -1,8 +1,8 @@
-//
+﻿//
 // AddressHeaderCollectionElementTest.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -38,24 +38,24 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-    [TestFixture]
-    public class AddressHeaderCollectionElementTest
-    {
-        [Test]
-        public void ReadConfiguration () {
-            ServiceModelSectionGroup config = (ServiceModelSectionGroup) ConfigurationManager.OpenExeConfiguration (TestResourceHelper.GetFullPathOfResource ("Test/config/client.endpoint")).GetSectionGroup ("system.serviceModel");
-            AddressHeaderCollection col = config.Client.Endpoints [0].Headers.Headers;
+	[TestFixture]
+	public class AddressHeaderCollectionElementTest
+	{
+		[Test]
+		public void ReadConfiguration () {
+			ServiceModelSectionGroup config = (ServiceModelSectionGroup) ConfigurationManager.OpenExeConfiguration (TestResourceHelper.GetFullPathOfResource ("Test/config/client.endpoint")).GetSectionGroup ("system.serviceModel");
+			AddressHeaderCollection col = config.Client.Endpoints [0].Headers.Headers;
 
-            Assert.AreEqual (2, col.Count, "count");
+			Assert.AreEqual (2, col.Count, "count");
 
-            AddressHeader header = col [0];
-            Assert.AreEqual ("Header1", header.Name, "name");
-            Assert.AreEqual ("", header.Namespace, "name");
+			AddressHeader header = col [0];
+			Assert.AreEqual ("Header1", header.Name, "name");
+			Assert.AreEqual ("", header.Namespace, "name");
 
-            header = col [1];
-            Assert.AreEqual ("Header2", header.Name, "name");
-            Assert.AreEqual ("uri:my.custom.manespace", header.Namespace, "name");
-        }
-    }
+			header = col [1];
+			Assert.AreEqual ("Header2", header.Name, "name");
+			Assert.AreEqual ("uri:my.custom.manespace", header.Namespace, "name");
+		}
+	}
 }
 #endif

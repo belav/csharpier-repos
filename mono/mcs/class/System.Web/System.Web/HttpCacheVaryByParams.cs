@@ -2,7 +2,7 @@
 // System.Web.HttpVaryByParams.cs 
 //
 // Author:
-//    Chris Toshok (toshok@novell.com)
+//	Chris Toshok (toshok@novell.com)
 //
 
 //
@@ -35,74 +35,74 @@ using System.Text;
 namespace System.Web
 {
 
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class HttpCacheVaryByParams
-    {
-        bool ignore_parms;
-        Hashtable parms;
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class HttpCacheVaryByParams
+	{
+		bool ignore_parms;
+		Hashtable parms;
 
-        public
-        HttpCacheVaryByParams ()
-        {
-            /* the parameter names are meant to be case insensitive */
-            parms = new Hashtable (StringComparer.InvariantCultureIgnoreCase);
-        }
+		public
+		HttpCacheVaryByParams ()
+		{
+			/* the parameter names are meant to be case insensitive */
+			parms = new Hashtable (StringComparer.InvariantCultureIgnoreCase);
+		}
 
-        internal string[] GetParamNames ()
-        {
-            string[] names;
+		internal string[] GetParamNames ()
+		{
+			string[] names;
 
-            names = new string [parms.Count];
+			names = new string [parms.Count];
 
-            parms.Keys.CopyTo (names, 0);
+			parms.Keys.CopyTo (names, 0);
 
-            return names;
-        }
+			return names;
+		}
 
-        internal string GetResponseHeaderValue ()
-        {
-            StringBuilder builder = new StringBuilder ();
+		internal string GetResponseHeaderValue ()
+		{
+			StringBuilder builder = new StringBuilder ();
 
-            foreach (string parm in parms.Keys) {
-                builder.Append (parm);
-                builder.Append ("; ");
-            }
+			foreach (string parm in parms.Keys) {
+				builder.Append (parm);
+				builder.Append ("; ");
+			}
 
-            if (builder.Length == 0)
-                return null;
+			if (builder.Length == 0)
+				return null;
 
-            return builder.ToString();
-        }
+			return builder.ToString();
+		}
 
-        public bool IgnoreParams {
-            get {
-                return ignore_parms;
-            }
-            set {
-                ignore_parms = value;
-            }
-        }
+		public bool IgnoreParams {
+			get {
+				return ignore_parms;
+			}
+			set {
+				ignore_parms = value;
+			}
+		}
 
-        public bool this [ string header ] {
-            get {
-                if (header == null)
-                    throw new ArgumentNullException ();
+		public bool this [ string header ] {
+			get {
+				if (header == null)
+					throw new ArgumentNullException ();
 
-                return parms.Contains (header);
-            }
-            set {
-                if (header == null)
-                    throw new ArgumentNullException ();
+				return parms.Contains (header);
+			}
+			set {
+				if (header == null)
+					throw new ArgumentNullException ();
 
-                ignore_parms = false;
-                if (value)
-                    if (!parms.Contains (header))
-                        parms.Add (header, true);
-                else
-                    parms.Remove (header);
-            }
-        }
-    }
+				ignore_parms = false;
+				if (value)
+					if (!parms.Contains (header))
+						parms.Add (header, true);
+				else
+					parms.Remove (header);
+			}
+		}
+	}
 
 }

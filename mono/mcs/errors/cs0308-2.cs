@@ -3,10 +3,10 @@
 
 class Program
 {
-    static NamingContext<int> Lookup ()
-    {
-        return null;
-    }
+	static NamingContext<int> Lookup ()
+	{
+		return null;
+	}
 }
 
 class NamingContext

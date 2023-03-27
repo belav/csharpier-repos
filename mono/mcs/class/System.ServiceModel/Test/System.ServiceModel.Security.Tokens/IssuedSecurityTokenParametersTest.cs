@@ -2,7 +2,7 @@
 // IssuedSecurityTokenParametersTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -44,77 +44,77 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class IssuedSecurityTokenParametersTest
-    {
-        class MyParameters : IssuedSecurityTokenParameters
-        {
-            public bool HasAsymmetricKeyEx {
-                get { return HasAsymmetricKey; }
-            }
+	[TestFixture]
+	public class IssuedSecurityTokenParametersTest
+	{
+		class MyParameters : IssuedSecurityTokenParameters
+		{
+			public bool HasAsymmetricKeyEx {
+				get { return HasAsymmetricKey; }
+			}
 
-            public bool SupportsClientAuthenticationEx {
-                get { return SupportsClientAuthentication; }
-            }
+			public bool SupportsClientAuthenticationEx {
+				get { return SupportsClientAuthentication; }
+			}
 
-            public bool SupportsClientWindowsIdentityEx {
-                get { return SupportsClientWindowsIdentity; }
-            }
+			public bool SupportsClientWindowsIdentityEx {
+				get { return SupportsClientWindowsIdentity; }
+			}
 
-            public bool SupportsServerAuthenticationEx {
-                get { return SupportsServerAuthentication; }
-            }
+			public bool SupportsServerAuthenticationEx {
+				get { return SupportsServerAuthentication; }
+			}
 
-            public SecurityKeyIdentifierClause CallCreateKeyIdentifierClause (
-                SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
-            {
-                return CreateKeyIdentifierClause (token, referenceStyle);
-            }
+			public SecurityKeyIdentifierClause CallCreateKeyIdentifierClause (
+				SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+			{
+				return CreateKeyIdentifierClause (token, referenceStyle);
+			}
 
-            public void InitRequirement (SecurityTokenRequirement requirement)
-            {
-                InitializeSecurityTokenRequirement (requirement);
-            }
-        }
+			public void InitRequirement (SecurityTokenRequirement requirement)
+			{
+				InitializeSecurityTokenRequirement (requirement);
+			}
+		}
 
-        [Test]
-        public void DefaultValues ()
-        {
-            MyParameters tp = new MyParameters ();
-            Assert.AreEqual (SecurityTokenInclusionMode.AlwaysToRecipient, tp.InclusionMode, "#1");
-            Assert.AreEqual (SecurityTokenReferenceStyle.Internal, tp.ReferenceStyle, "#2");
-            Assert.AreEqual (true, tp.RequireDerivedKeys, "#3");
+		[Test]
+		public void DefaultValues ()
+		{
+			MyParameters tp = new MyParameters ();
+			Assert.AreEqual (SecurityTokenInclusionMode.AlwaysToRecipient, tp.InclusionMode, "#1");
+			Assert.AreEqual (SecurityTokenReferenceStyle.Internal, tp.ReferenceStyle, "#2");
+			Assert.AreEqual (true, tp.RequireDerivedKeys, "#3");
 
-            Assert.AreEqual (false, tp.HasAsymmetricKeyEx, "#4");
-            Assert.AreEqual (true, tp.SupportsClientAuthenticationEx, "#5");
-            Assert.AreEqual (false, tp.SupportsClientWindowsIdentityEx, "#6");
-            Assert.AreEqual (true, tp.SupportsServerAuthenticationEx, "#7");
+			Assert.AreEqual (false, tp.HasAsymmetricKeyEx, "#4");
+			Assert.AreEqual (true, tp.SupportsClientAuthenticationEx, "#5");
+			Assert.AreEqual (false, tp.SupportsClientWindowsIdentityEx, "#6");
+			Assert.AreEqual (true, tp.SupportsServerAuthenticationEx, "#7");
 
-        }
+		}
 
-        [Test]
-        public void CreateRequestParameters ()
-        {
-            IssuedSecurityTokenParameters p =
-                new IssuedSecurityTokenParameters ();
-            p.ClaimTypeRequirements.Add (new ClaimTypeRequirement (ClaimTypes.Name, true));
-            p.AdditionalRequestParameters.Add (new XmlDocument ()
-                .CreateElement ("AdditionalFoo"));
-            Collection<XmlElement> c = p.CreateRequestParameters (
-                MessageSecurityVersion.Default,
-                WSSecurityTokenSerializer.DefaultInstance);
-            StringWriter sw = new StringWriter ();
-            XmlWriterSettings settings = new XmlWriterSettings ();
-            settings.OmitXmlDeclaration = true;
-            foreach (XmlElement el in c) {
-                XmlWriter w = XmlWriter.Create (sw, settings);
-                el.WriteTo (w);
-                w.Close ();
-            }
+		[Test]
+		public void CreateRequestParameters ()
+		{
+			IssuedSecurityTokenParameters p =
+				new IssuedSecurityTokenParameters ();
+			p.ClaimTypeRequirements.Add (new ClaimTypeRequirement (ClaimTypes.Name, true));
+			p.AdditionalRequestParameters.Add (new XmlDocument ()
+				.CreateElement ("AdditionalFoo"));
+			Collection<XmlElement> c = p.CreateRequestParameters (
+				MessageSecurityVersion.Default,
+				WSSecurityTokenSerializer.DefaultInstance);
+			StringWriter sw = new StringWriter ();
+			XmlWriterSettings settings = new XmlWriterSettings ();
+			settings.OmitXmlDeclaration = true;
+			foreach (XmlElement el in c) {
+				XmlWriter w = XmlWriter.Create (sw, settings);
+				el.WriteTo (w);
+				w.Close ();
+			}
 
-            string expected = @"<t:KeyType xmlns:t='http://schemas.xmlsoap.org/ws/2005/02/trust'>http://schemas.xmlsoap.org/ws/2005/02/trust/SymmetricKey</t:KeyType><t:Claims xmlns:t='http://schemas.xmlsoap.org/ws/2005/02/trust'><wsid:ClaimType Uri='http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name' Optional='true' xmlns:wsid='http://schemas.xmlsoap.org/ws/2005/05/identity' /></t:Claims><AdditionalFoo />";
-            Assert.AreEqual (expected.Replace ('\'', '"'), sw.ToString ());
-        }
-    }
+			string expected = @"<t:KeyType xmlns:t='http://schemas.xmlsoap.org/ws/2005/02/trust'>http://schemas.xmlsoap.org/ws/2005/02/trust/SymmetricKey</t:KeyType><t:Claims xmlns:t='http://schemas.xmlsoap.org/ws/2005/02/trust'><wsid:ClaimType Uri='http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name' Optional='true' xmlns:wsid='http://schemas.xmlsoap.org/ws/2005/05/identity' /></t:Claims><AdditionalFoo />";
+			Assert.AreEqual (expected.Replace ('\'', '"'), sw.ToString ());
+		}
+	}
 }
 #endif

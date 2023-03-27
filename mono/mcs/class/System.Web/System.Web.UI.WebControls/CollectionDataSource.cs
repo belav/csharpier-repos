@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.CollectionDataSource
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005-2010 Novell, Inc.
 //
@@ -38,47 +38,47 @@ using System.IO;
 
 namespace System.Web.UI.WebControls
 {
-    internal class CollectionDataSource : IDataSource
-    {
-        static readonly string[] names = new string [0];
-        IEnumerable collection;
-        
-        public CollectionDataSource (IEnumerable collection)
-        {
-            this.collection = collection;
-        }
-        
-        public event EventHandler DataSourceChanged {
-            add {}
-            remove {}
-        }
-        
-        public DataSourceView GetView (string viewName)
-        {
-            return new CollectionDataSourceView (this, viewName, collection);
-        }
-        
-        public ICollection GetViewNames ()
-        {
-            return names;
-        }
-    }
-    
-    internal class CollectionDataSourceView: DataSourceView
-    {
-        IEnumerable collection;
+	internal class CollectionDataSource : IDataSource
+	{
+		static readonly string[] names = new string [0];
+		IEnumerable collection;
+		
+		public CollectionDataSource (IEnumerable collection)
+		{
+			this.collection = collection;
+		}
+		
+		public event EventHandler DataSourceChanged {
+			add {}
+			remove {}
+		}
+		
+		public DataSourceView GetView (string viewName)
+		{
+			return new CollectionDataSourceView (this, viewName, collection);
+		}
+		
+		public ICollection GetViewNames ()
+		{
+			return names;
+		}
+	}
+	
+	internal class CollectionDataSourceView: DataSourceView
+	{
+		IEnumerable collection;
 
-        public CollectionDataSourceView (IDataSource owner, string viewName, IEnumerable collection)
-        : base (owner, viewName)
-        {
-            this.collection = collection;
-        }
-        
-        protected internal override IEnumerable ExecuteSelect (DataSourceSelectArguments arguments)
-        {
-            return collection;
-        }
-    }
+		public CollectionDataSourceView (IDataSource owner, string viewName, IEnumerable collection)
+		: base (owner, viewName)
+		{
+			this.collection = collection;
+		}
+		
+		protected internal override IEnumerable ExecuteSelect (DataSourceSelectArguments arguments)
+		{
+			return collection;
+		}
+	}
 }
 
 

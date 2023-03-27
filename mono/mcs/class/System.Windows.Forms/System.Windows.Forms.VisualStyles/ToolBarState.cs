@@ -23,18 +23,18 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-    public enum ToolBarState
-    {
-        Normal = 1,
-        Hot = 2,
-        Pressed = 3,
-        Disabled = 4,
-        Checked = 5,
-        HotChecked = 6
-    }
+	public enum ToolBarState
+	{
+		Normal = 1,
+		Hot = 2,
+		Pressed = 3,
+		Disabled = 4,
+		Checked = 5,
+		HotChecked = 6
+	}
 }

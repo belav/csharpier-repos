@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -594,14 +594,14 @@ using System;
 class @error
 {
     static void Main() {
-        Action a = delegate (__arglist) { };
-    }
+		Action a = delegate (__arglist) { };
+	}
 }
 ";
 
             CreateCompilation(text).VerifyDiagnostics(
                 // (7,24): error CS1669: __arglist is not valid in this context
-                //         Action a = delegate (__arglist) { };
+                // 		Action a = delegate (__arglist) { };
                 Diagnostic(ErrorCode.ERR_IllegalVarArgs, "__arglist"));
         }
 
@@ -1586,12 +1586,12 @@ class Program
     static void Test(__arglist)
     {
         var a = 1;
-        Test(__arglist(out a));
+    	Test(__arglist(out a));
     }
 }
 ").VerifyDiagnostics(
                 // (7,25): error CS8378: __arglist cannot have an argument passed by 'in' or 'out'
-                //         Test(__arglist(out a));
+                //     	Test(__arglist(out a));
                 Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "a").WithLocation(7, 25));
         }
 
@@ -1604,12 +1604,12 @@ class Program
     static void Test(__arglist)
     {
         var a = 1;
-        Test(__arglist(in a));
+    	Test(__arglist(in a));
     }
 }
 ").VerifyDiagnostics(
                 // (7,24): error CS8378: __arglist cannot have an argument passed by 'in' or 'out'
-                //         Test(__arglist(in a));
+                //     	Test(__arglist(in a));
                 Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "a").WithLocation(7, 24));
         }
 

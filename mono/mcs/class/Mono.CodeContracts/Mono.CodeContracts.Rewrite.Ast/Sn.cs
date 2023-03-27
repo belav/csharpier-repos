@@ -2,7 +2,7 @@
 // Sn.cs
 //
 // Authors:
-//    Chris Bacon (chrisbacon76@gmail.com)
+//	Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -32,9 +32,9 @@ using System.Linq;
 using System.Text;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-    enum Sn {
-        None,
-        Signed,
-        Unsigned
-    }
+	enum Sn {
+		None,
+		Signed,
+		Unsigned
+	}
 }

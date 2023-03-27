@@ -1,9 +1,9 @@
 //
 // DropDownListCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.DropDownList
+//	- CAS unit tests for System.Web.UI.WebControls.DropDownList
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,30 +38,30 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class DropDownListCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class DropDownListCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            DropDownListTest unit = new DropDownListTest ();
-            unit.DropDownList_Defaults ();
-            unit.DropDownListBasic ();
-            unit.DropDownListProperties ();
-            unit.DropDownListSelectedCheck ();
-            unit.DropDownListNull ();
-            unit.DropDownNamingTest ();
-            unit.InitialSelectionMade ();
-            unit.TestValueFieldAndTextFormat ();
-            unit.DropDownNullWriterTest ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			DropDownListTest unit = new DropDownListTest ();
+			unit.DropDownList_Defaults ();
+			unit.DropDownListBasic ();
+			unit.DropDownListProperties ();
+			unit.DropDownListSelectedCheck ();
+			unit.DropDownListNull ();
+			unit.DropDownNamingTest ();
+			unit.InitialSelectionMade ();
+			unit.TestValueFieldAndTextFormat ();
+			unit.DropDownNullWriterTest ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (DropDownList); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (DropDownList); }
+		}
+	}
 }

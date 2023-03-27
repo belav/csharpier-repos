@@ -2,7 +2,7 @@
 // System.Web.Configuration.ExpressionBuilderCollection
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (c) Copyright 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,63 +33,63 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    [ConfigurationCollection (typeof (ExpressionBuilder), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class ExpressionBuilderCollection : ConfigurationElementCollection
-    {
-        static ConfigurationPropertyCollection props;
+	[ConfigurationCollection (typeof (ExpressionBuilder), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class ExpressionBuilderCollection : ConfigurationElementCollection
+	{
+		static ConfigurationPropertyCollection props;
 
-        static ExpressionBuilderCollection ()
-        {
-            props = new ConfigurationPropertyCollection ();
-        }
-        
-        public ExpressionBuilderCollection (): base (CaseInsensitiveComparer.DefaultInvariant)
-        {
-        }
+		static ExpressionBuilderCollection ()
+		{
+			props = new ConfigurationPropertyCollection ();
+		}
+		
+		public ExpressionBuilderCollection (): base (CaseInsensitiveComparer.DefaultInvariant)
+		{
+		}
 
-        public ExpressionBuilder this [int index] {
-            get { return (ExpressionBuilder) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-        }
+		public ExpressionBuilder this [int index] {
+			get { return (ExpressionBuilder) BaseGet (index); }
+			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+		}
 
-        public new ExpressionBuilder this [string name] {
-            get { return (ExpressionBuilder) BaseGet (name); }
-        }
+		public new ExpressionBuilder this [string name] {
+			get { return (ExpressionBuilder) BaseGet (name); }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return props; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return props; }
+		}
 
-        public void Add (ExpressionBuilder buildProvider)
-        {
-            BaseAdd (buildProvider);
-        }
+		public void Add (ExpressionBuilder buildProvider)
+		{
+			BaseAdd (buildProvider);
+		}
 
-        public void Clear ()
-        {
-            BaseClear ();
-        }
+		public void Clear ()
+		{
+			BaseClear ();
+		}
 
-        public void Remove (string name)
-        {
-            BaseRemove (name);
-        }
+		public void Remove (string name)
+		{
+			BaseRemove (name);
+		}
 
-        public void RemoveAt (int index)
-        {
-            BaseRemoveAt (index);
-        }
+		public void RemoveAt (int index)
+		{
+			BaseRemoveAt (index);
+		}
 
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new ExpressionBuilder ();
-        }
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new ExpressionBuilder ();
+		}
 
-        protected override object GetElementKey (ConfigurationElement element)
-        {
-            ExpressionBuilder eb = (ExpressionBuilder) element;
-            return eb.ExpressionPrefix;
-        }
-    }
+		protected override object GetElementKey (ConfigurationElement element)
+		{
+			ExpressionBuilder eb = (ExpressionBuilder) element;
+			return eb.ExpressionPrefix;
+		}
+	}
 }
 

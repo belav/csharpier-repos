@@ -32,39 +32,39 @@ using System.Runtime.InteropServices;
 namespace System.Security.Permissions {
 
 #if MOBILE && !MONOTOUCH
-    [Obsolete ("CAS support is not available with Silverlight applications.")]
+	[Obsolete ("CAS support is not available with Silverlight applications.")]
 #endif
-    [ComVisible (true)]
-    [AttributeUsage(
-        AttributeTargets.Assembly 
-        | AttributeTargets.Class 
-        | AttributeTargets.Struct 
-        | AttributeTargets.Constructor 
-        | AttributeTargets.Method, 
-        AllowMultiple=true, 
-        Inherited=false)
-    ]
-    [Serializable]
-    public abstract class SecurityAttribute : Attribute {
+	[ComVisible (true)]
+	[AttributeUsage(
+		AttributeTargets.Assembly 
+		| AttributeTargets.Class 
+		| AttributeTargets.Struct 
+		| AttributeTargets.Constructor 
+		| AttributeTargets.Method, 
+		AllowMultiple=true, 
+		Inherited=false)
+	]
+	[Serializable]
+	public abstract class SecurityAttribute : Attribute {
 
-        private SecurityAction m_Action;
-        private bool m_Unrestricted;
+		private SecurityAction m_Action;
+		private bool m_Unrestricted;
 
-        protected SecurityAttribute (SecurityAction action) 
-        {
-            Action = action;
-        }
+		protected SecurityAttribute (SecurityAction action) 
+		{
+			Action = action;
+		}
 
-        public abstract IPermission CreatePermission ();
+		public abstract IPermission CreatePermission ();
 
-        public bool Unrestricted {
-            get { return m_Unrestricted; }
-            set { m_Unrestricted = value; }
-        }
+		public bool Unrestricted {
+			get { return m_Unrestricted; }
+			set { m_Unrestricted = value; }
+		}
 
-        public SecurityAction Action {
-            get { return m_Action; }
-            set { m_Action = value; }
-        }
-    }
+		public SecurityAction Action {
+			get { return m_Action; }
+			set { m_Action = value; }
+		}
+	}
 }

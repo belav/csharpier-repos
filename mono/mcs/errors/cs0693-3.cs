@@ -4,7 +4,7 @@
 
 class C<T>
 {
-    void Foo<T> (T t)
-    {
-    }
+	void Foo<T> (T t)
+	{
+	}
 }

@@ -21,7 +21,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 // Authors:
-//        Jordi Mas i Hernandez, jordi@ximian.com
+//		Jordi Mas i Hernandez, jordi@ximian.com
 //
 
 // COMPLETE
@@ -30,17 +30,17 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
 
-    [ComVisible(true)]
-    public enum DialogResult 
-    {    
-        None    = 0,
-        OK    = 1,
-        Cancel    = 2,
-        Abort    = 3,
-        Retry    = 4,
-        Ignore    = 5,
-        Yes    = 6,
-        No    = 7
-    }
+	[ComVisible(true)]
+	public enum DialogResult 
+	{	
+		None	= 0,
+		OK	= 1,
+		Cancel	= 2,
+		Abort	= 3,
+		Retry	= 4,
+		Ignore	= 5,
+		Yes	= 6,
+		No	= 7
+	}
 }
 

@@ -105,13 +105,13 @@ namespace RabbitMQ.Util {
             }
         }
 
-    ///<summary>Prints an indented key/value pair; used by DumpProperties()</summary>
+	///<summary>Prints an indented key/value pair; used by DumpProperties()</summary>
         ///<remarks>Recurses into the value using DumpProperties().</remarks>
-    public static void DumpKeyValue(string key, object value, TextWriter writer, int indent) {
-        string prefix = new String(' ', indent + 2) + key + ": ";
-        writer.Write(prefix);
-        DumpProperties(value, writer, indent + 2);
-    }
+	public static void DumpKeyValue(string key, object value, TextWriter writer, int indent) {
+	    string prefix = new String(' ', indent + 2) + key + ": ";
+	    writer.Write(prefix);
+	    DumpProperties(value, writer, indent + 2);
+	}
 
         ///<summary>Dump properties of objects to the supplied writer.</summary>
         public static void DumpProperties(object value, TextWriter writer, int indent) {
@@ -124,12 +124,12 @@ namespace RabbitMQ.Util {
                 Dump((byte[]) value);
             } else if (value is ValueType) {
                 writer.WriteLine(value);
-        } else if (value is IDictionary) {
+	    } else if (value is IDictionary) {
                 Type t = value.GetType();
                 writer.WriteLine(t.FullName);
-        foreach (DictionaryEntry entry in ((IDictionary) value)) {
-            DumpKeyValue((string) entry.Key, entry.Value, writer, indent);
-        }
+		foreach (DictionaryEntry entry in ((IDictionary) value)) {
+		    DumpKeyValue((string) entry.Key, entry.Value, writer, indent);
+		}
             } else if (value is IEnumerable) {
                 writer.WriteLine("IEnumerable");
                 int index = 0;
@@ -145,7 +145,7 @@ namespace RabbitMQ.Util {
                                                             | BindingFlags.DeclaredOnly))
                 {
                     if (pi.GetIndexParameters().Length == 0) {
-            DumpKeyValue(pi.Name, pi.GetValue(value, new object[0]), writer, indent);
+			DumpKeyValue(pi.Name, pi.GetValue(value, new object[0]), writer, indent);
                     }
                 }
             }

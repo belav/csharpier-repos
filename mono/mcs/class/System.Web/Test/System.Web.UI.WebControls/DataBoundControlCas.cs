@@ -1,9 +1,9 @@
 //
 // DataBoundControlCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.DataBoundControl
+//	- CAS unit tests for System.Web.UI.WebControls.DataBoundControl
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -42,27 +42,27 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class DataBoundControlCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class DataBoundControlCas {
 
-        // note: we do not inherit from AspNetHostingMinimal because
-        // DataBoundControl is an abstract class
+		// note: we do not inherit from AspNetHostingMinimal because
+		// DataBoundControl is an abstract class
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            DataBoundControlTest unit = new DataBoundControlTest ();
-            unit.Defaults ();
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			DataBoundControlTest unit = new DataBoundControlTest ();
+			unit.Defaults ();
+		}
+	}
 }
 

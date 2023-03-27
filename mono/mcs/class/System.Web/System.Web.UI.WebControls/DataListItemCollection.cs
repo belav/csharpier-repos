@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.DataListItemCollection.cs
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,48 +31,48 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
 
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class DataListItemCollection : ICollection, IEnumerable 
-    {
-        ArrayList list;
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class DataListItemCollection : ICollection, IEnumerable 
+	{
+		ArrayList list;
 
-        public DataListItemCollection (ArrayList items)
-        {
-            list = items;
-        }
-
-
-        public int Count {
-            get { return list.Count; }
-        }
-
-        // note: LAME as there is no way to add/remove or change any value using this class
-        public bool IsReadOnly {
-            get { return false; }    // always (as documented)
-        }
-
-        public bool IsSynchronized {
-            get { return false; }    // always (as documented)
-        }
-
-        public DataListItem this [int index] {
-            get { return (DataListItem) list [index]; }
-        }
-
-        public object SyncRoot {
-            get { return this; }    // always (as documented)
-        }
+		public DataListItemCollection (ArrayList items)
+		{
+			list = items;
+		}
 
 
-        public void CopyTo (Array array, int index)
-        {
-            list.CopyTo (array, index);
-        }
+		public int Count {
+			get { return list.Count; }
+		}
 
-        public IEnumerator GetEnumerator ()
-        {
-            return list.GetEnumerator ();
-        }
-    }
+		// note: LAME as there is no way to add/remove or change any value using this class
+		public bool IsReadOnly {
+			get { return false; }	// always (as documented)
+		}
+
+		public bool IsSynchronized {
+			get { return false; }	// always (as documented)
+		}
+
+		public DataListItem this [int index] {
+			get { return (DataListItem) list [index]; }
+		}
+
+		public object SyncRoot {
+			get { return this; }	// always (as documented)
+		}
+
+
+		public void CopyTo (Array array, int index)
+		{
+			list.CopyTo (array, index);
+		}
+
+		public IEnumerator GetEnumerator ()
+		{
+			return list.GetEnumerator ();
+		}
+	}
 }

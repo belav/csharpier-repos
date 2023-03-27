@@ -33,16 +33,16 @@ using System.Web.UI.HtmlControls;
 
 namespace System.Web.UI.WebControls
 {
-    internal class ListViewTableRow : HtmlTableRow
-    {
-        protected override ControlCollection CreateControlCollection ()
-        {
-            return new ControlCollection (this);
-        }
-        
-        protected internal override void Render (HtmlTextWriter writer)
-        {
-            RenderChildren (writer);
-        }
-    }
+	internal class ListViewTableRow : HtmlTableRow
+	{
+		protected override ControlCollection CreateControlCollection ()
+		{
+			return new ControlCollection (this);
+		}
+		
+		protected internal override void Render (HtmlTextWriter writer)
+		{
+			RenderChildren (writer);
+		}
+	}
 }

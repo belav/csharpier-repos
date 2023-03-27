@@ -37,123 +37,123 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class ConstraintCollection_Remove_S : GHTBase
 {
-    private bool collectionChanged=false;
+	private bool collectionChanged=false;
 
-    [Test] public void Main()
-    {
-        ConstraintCollection_Remove_S tc = new ConstraintCollection_Remove_S();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("ConstraintCollection_Remove_S");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
+	[Test] public void Main()
+	{
+		ConstraintCollection_Remove_S tc = new ConstraintCollection_Remove_S();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("ConstraintCollection_Remove_S");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("ConstraintCollection_Remove_S");
-            ConstraintCollection_Remove_S1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-        
-        try
-        {
-            BeginCase("ConstraintCollection_Remove_S");
-            ConstraintCollection_Remove_S2();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-        
-        try
-        {
-            BeginCase("ConstraintCollection_Remove_S");
-            ConstraintCollection_Remove_S3();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-    private void ConstraintCollection_Remove_S1()
-    {
-        DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
-        dt.Constraints[0].ConstraintName = "constraint1";
-        dt.Constraints.Remove("constraint1");
-        Compare(dt.Constraints.Count,0);
-    }
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("ConstraintCollection_Remove_S");
+			ConstraintCollection_Remove_S1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+		
+		try
+		{
+			BeginCase("ConstraintCollection_Remove_S");
+			ConstraintCollection_Remove_S2();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+		
+		try
+		{
+			BeginCase("ConstraintCollection_Remove_S");
+			ConstraintCollection_Remove_S3();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
+	private void ConstraintCollection_Remove_S1()
+	{
+		DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
+		dt.Constraints[0].ConstraintName = "constraint1";
+		dt.Constraints.Remove("constraint1");
+		Compare(dt.Constraints.Count,0);
+	}
 
-    private void ConstraintCollection_Remove_S2()
-    {
-        DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
-        dt.Constraints[0].ConstraintName = "constraint1";
-        Constraint con = new UniqueConstraint(dt.Columns["String1"],false);
-        con.ConstraintName="constraint2";
-        dt.Constraints.Add(con);
-        dt.Constraints.Remove("constraint2");
+	private void ConstraintCollection_Remove_S2()
+	{
+		DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
+		dt.Constraints[0].ConstraintName = "constraint1";
+		Constraint con = new UniqueConstraint(dt.Columns["String1"],false);
+		con.ConstraintName="constraint2";
+		dt.Constraints.Add(con);
+		dt.Constraints.Remove("constraint2");
 
-        Compare(dt.Constraints.Count,1);
-        Compare(dt.Constraints[0].ConstraintName,"constraint1");
+		Compare(dt.Constraints.Count,1);
+		Compare(dt.Constraints[0].ConstraintName,"constraint1");
 
-    }
-    private void ConstraintCollection_Remove_S3()
-    {
-        DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
-        dt.Constraints.CollectionChanged+=new System.ComponentModel.CollectionChangeEventHandler(Constraints_CollectionChanged);
-        dt.Constraints.Remove("constraint1");
-        System.Threading.Thread.Sleep(2000);
-        Compare(collectionChanged,true); //Checking that event has raised
+	}
+	private void ConstraintCollection_Remove_S3()
+	{
+		DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
+		dt.Constraints.CollectionChanged+=new System.ComponentModel.CollectionChangeEventHandler(Constraints_CollectionChanged);
+		dt.Constraints.Remove("constraint1");
+		System.Threading.Thread.Sleep(2000);
+		Compare(collectionChanged,true); //Checking that event has raised
 
-    }
+	}
 
-    private void Constraints_CollectionChanged(object sender, System.ComponentModel.CollectionChangeEventArgs e)
-    {
-        collectionChanged = true;
+	private void Constraints_CollectionChanged(object sender, System.ComponentModel.CollectionChangeEventArgs e)
+	{
+		collectionChanged = true;
 
-    }
+	}
 }
 }

@@ -1,4 +1,4 @@
-#if HAVE_TRACE_WRITER
+﻿#if HAVE_TRACE_WRITER
 using System;
 using System.Diagnostics;
 using DiagnosticsTrace = System.Diagnostics.Trace;

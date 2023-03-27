@@ -2,28 +2,28 @@
 
 namespace QtSamples
 {
-    using Qt;
+	using Qt;
 
-    public class QtClass: QtSupport
-    {
-        public QtClass()
-        {
-            mousePressEvent += new MousePressEvent( pressEvent );
-        }
-        
-        public void pressEvent() { }
-    }
+	public class QtClass: QtSupport
+	{
+		public QtClass()
+		{
+			mousePressEvent += new MousePressEvent( pressEvent );
+		}
+		
+		public void pressEvent() { }
+	}
 
 
-    public class Testing
-    {
-        public static int Main()
-        {
-            QtClass q = new QtClass();
+	public class Testing
+	{
+		public static int Main()
+		{
+			QtClass q = new QtClass();
 
-            return 0;
-        }
-    }
+			return 0;
+		}
+	}
 }
 
 

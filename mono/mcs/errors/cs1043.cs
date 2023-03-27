@@ -3,5 +3,5 @@
 
 class C
 {
-    int Foo { set 1; }
+	int Foo { set 1; }
 }

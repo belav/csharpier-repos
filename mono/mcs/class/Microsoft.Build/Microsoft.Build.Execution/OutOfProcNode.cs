@@ -37,12 +37,12 @@ using System.IO;
 
 namespace Microsoft.Build.Internal
 {
-    // from MSDN: this class has deprecated and there is no alternative.
-    public class OutOfProcNode
-    {
-        public NodeEngineShutdownReason Run (out Exception shutdownException)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+	// from MSDN: this class has deprecated and there is no alternative.
+	public class OutOfProcNode
+	{
+		public NodeEngineShutdownReason Run (out Exception shutdownException)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

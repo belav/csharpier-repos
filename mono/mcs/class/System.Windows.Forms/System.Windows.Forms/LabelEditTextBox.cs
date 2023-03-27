@@ -20,7 +20,7 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 //
 
@@ -30,78 +30,78 @@
 
 namespace System.Windows.Forms {
 
-    internal class LabelEditTextBox : FixedSizeTextBox {
+	internal class LabelEditTextBox : FixedSizeTextBox {
 
-        public LabelEditTextBox () : base (true, true)
-        {
-        }
+		public LabelEditTextBox () : base (true, true)
+		{
+		}
 
-        protected override bool IsInputKey (Keys key_data)
-        {
-            if ((key_data & Keys.Alt) == 0) {
-                switch (key_data & Keys.KeyCode) {
-                case Keys.Enter:
-                    return true;
-                case Keys.Escape:
-                    return true;
-                }
-            }
-            return base.IsInputKey (key_data);
-        }
+		protected override bool IsInputKey (Keys key_data)
+		{
+			if ((key_data & Keys.Alt) == 0) {
+				switch (key_data & Keys.KeyCode) {
+				case Keys.Enter:
+					return true;
+				case Keys.Escape:
+					return true;
+				}
+			}
+			return base.IsInputKey (key_data);
+		}
 
-        protected override void OnKeyDown (KeyEventArgs e)
-        {
-            if (!Visible)
-                return;
+		protected override void OnKeyDown (KeyEventArgs e)
+		{
+			if (!Visible)
+				return;
 
-            switch (e.KeyCode) {
-                case Keys.Return:
-                    Visible = false;
-                    Parent.Focus ();
-                    e.Handled = true;
-                    OnEditingFinished (e);
-                    break;
-                case Keys.Escape:
-                    Visible = false;
-                    Parent.Focus ();
-                    e.Handled = true;
-                    OnEditingCancelled (e);
-                    break;
-            }
-        }
+			switch (e.KeyCode) {
+				case Keys.Return:
+					Visible = false;
+					Parent.Focus ();
+					e.Handled = true;
+					OnEditingFinished (e);
+					break;
+				case Keys.Escape:
+					Visible = false;
+					Parent.Focus ();
+					e.Handled = true;
+					OnEditingCancelled (e);
+					break;
+			}
+		}
 
-        protected override void OnLostFocus (EventArgs e)
-        {
-            if (Visible) {
-                OnEditingFinished (e);
-            }
-        }
+		protected override void OnLostFocus (EventArgs e)
+		{
+			if (Visible) {
+				OnEditingFinished (e);
+			}
+		}
 
-        protected void OnEditingCancelled (EventArgs e)
-        {
-            EventHandler eh = (EventHandler)(Events[EditingCancelledEvent]);
-            if (eh != null)
-                eh (this, e);
-        }
+		protected void OnEditingCancelled (EventArgs e)
+		{
+			EventHandler eh = (EventHandler)(Events[EditingCancelledEvent]);
+			if (eh != null)
+				eh (this, e);
+		}
 
-        protected void OnEditingFinished (EventArgs e)
-        {
-            EventHandler eh = (EventHandler)(Events [EditingFinishedEvent]);
-            if (eh != null)
-                eh (this, e);
-        }
+		protected void OnEditingFinished (EventArgs e)
+		{
+			EventHandler eh = (EventHandler)(Events [EditingFinishedEvent]);
+			if (eh != null)
+				eh (this, e);
+		}
 
-        static object EditingCancelledEvent = new object ();
-        public event EventHandler EditingCancelled {
-            add { Events.AddHandler (EditingCancelledEvent, value); }
-            remove { Events.RemoveHandler (EditingCancelledEvent, value); }
-        }
+		static object EditingCancelledEvent = new object ();
+		public event EventHandler EditingCancelled {
+			add { Events.AddHandler (EditingCancelledEvent, value); }
+			remove { Events.RemoveHandler (EditingCancelledEvent, value); }
+		}
 
-        static object EditingFinishedEvent = new object ();
-        public event EventHandler EditingFinished {
-            add { Events.AddHandler (EditingFinishedEvent, value); }
-            remove { Events.AddHandler (EditingFinishedEvent, value); }
-        }
-    }
+		static object EditingFinishedEvent = new object ();
+		public event EventHandler EditingFinished {
+			add { Events.AddHandler (EditingFinishedEvent, value); }
+			remove { Events.AddHandler (EditingFinishedEvent, value); }
+		}
+	}
 }
 

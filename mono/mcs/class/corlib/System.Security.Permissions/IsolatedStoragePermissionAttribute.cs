@@ -31,31 +31,31 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-    [ComVisible (true)]
-    [AttributeUsage ( AttributeTargets.Assembly | AttributeTargets.Class |
-        AttributeTargets.Struct | AttributeTargets.Constructor |
-        AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
-    [Serializable]
-    public abstract class IsolatedStoragePermissionAttribute : CodeAccessSecurityAttribute {
+	[ComVisible (true)]
+	[AttributeUsage ( AttributeTargets.Assembly | AttributeTargets.Class |
+		AttributeTargets.Struct | AttributeTargets.Constructor |
+		AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
+	[Serializable]
+	public abstract class IsolatedStoragePermissionAttribute : CodeAccessSecurityAttribute {
 
-        protected IsolatedStoragePermissionAttribute (SecurityAction action)
-            : base (action)
-        {
-        }
+		protected IsolatedStoragePermissionAttribute (SecurityAction action)
+			: base (action)
+		{
+		}
 
-        public IsolatedStorageContainment UsageAllowed {
-            get { return usage_allowed; }
-            set { usage_allowed = value; }
-        }
+		public IsolatedStorageContainment UsageAllowed {
+			get { return usage_allowed; }
+			set { usage_allowed = value; }
+		}
 
-        public long UserQuota {
-            get { return user_quota; }
-            set { user_quota = value; }
-        }
+		public long UserQuota {
+			get { return user_quota; }
+			set { user_quota = value; }
+		}
 
-        // private
+		// private
 
-        private IsolatedStorageContainment usage_allowed;
-        private long user_quota;
-    }
+		private IsolatedStorageContainment usage_allowed;
+		private long user_quota;
+	}
 }

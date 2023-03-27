@@ -2,7 +2,7 @@
 // Line: 6
 
 class X {
-    public static void Main() {
-        double dbl = 1.0e99999;
-    }
+	public static void Main() {
+		double dbl = 1.0e99999;
+	}
 }

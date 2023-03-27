@@ -8,6 +8,6 @@ class Test
         public static void Main ()
         {
                 Foo Foo;
-        Foo = Foo.x;
+		Foo = Foo.x;
         }
 }

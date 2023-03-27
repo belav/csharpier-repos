@@ -32,14 +32,14 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [Guid("8165B19E-8D3A-4d0b-80C8-97DE310DB583")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IServicedComponentInfo {
+	[Guid("8165B19E-8D3A-4d0b-80C8-97DE310DB583")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	public interface IServicedComponentInfo {
 
-        #region Methods
+		#region Methods
 
-        void GetComponentInfo (ref int infoMask, out string[] infoArray);
+		void GetComponentInfo (ref int infoMask, out string[] infoArray);
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

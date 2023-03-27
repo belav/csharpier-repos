@@ -32,9 +32,9 @@ namespace System.Web.Security
     
     public enum ActiveDirectoryConnectionProtection
     {
-        None        = 0,
-        Ssl            = 1,
-        SignAndSeal    = 2
+        None		= 0,
+        Ssl			= 1,
+        SignAndSeal	= 2
     }
 
     internal enum DirectoryType
@@ -4445,32 +4445,32 @@ namespace System.Web.Security
     }
 
     /*typedef struct _DOMAIN_CONTROLLER_INFO {
-        LPTSTR DomainControllerName;
-        LPTSTR DomainControllerAddress;
-        ULONG DomainControllerAddressType;
-        GUID DomainGuid;
-        LPTSTR DomainName;
-        LPTSTR DnsForestName;
-        ULONG Flags;
-        LPTSTR DcSiteName;
-        LPTSTR ClientSiteName;
-    } DOMAIN_CONTROLLER_INFO, *PDOMAIN_CONTROLLER_INFO; */
-    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
-    internal sealed class DomainControllerInfo {
-    #pragma warning disable 0649
-        public string DomainControllerName;
-        public string DomainControllerAddress;
-        public int DomainControllerAddressType;
-        public Guid DomainGuid;
-        public string DomainName;
-        public string DnsForestName;
-        public int Flags;
-        public string DcSiteName;
-        public string ClientSiteName;
+		LPTSTR DomainControllerName;
+		LPTSTR DomainControllerAddress;
+		ULONG DomainControllerAddressType;
+		GUID DomainGuid;
+		LPTSTR DomainName;
+		LPTSTR DnsForestName;
+		ULONG Flags;
+		LPTSTR DcSiteName;
+		LPTSTR ClientSiteName;
+	} DOMAIN_CONTROLLER_INFO, *PDOMAIN_CONTROLLER_INFO; */
+	[StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
+	internal sealed class DomainControllerInfo {
+	#pragma warning disable 0649
+		public string DomainControllerName;
+		public string DomainControllerAddress;
+		public int DomainControllerAddressType;
+		public Guid DomainGuid;
+		public string DomainName;
+		public string DnsForestName;
+		public int Flags;
+		public string DcSiteName;
+		public string ClientSiteName;
        #pragma warning restore 0649
 
               public DomainControllerInfo() {}
-    }
+	}
 
     [SuppressUnmanagedCodeSecurityAttribute()]
     internal static class NativeMethods

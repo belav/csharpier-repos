@@ -3,18 +3,18 @@
 
 namespace Test
 {
-    public class TestClass
-    {
-        private TestClass() : base()
-        {
-        }
-    }
+	public class TestClass
+	{
+		private TestClass() : base()
+		{
+		}
+	}
 
-    class Class1
-    {
-        static void Main(string[] args)
-        {
-            TestClass test = new TestClass();
-        }
-    }
+	class Class1
+	{
+		static void Main(string[] args)
+		{
+			TestClass test = new TestClass();
+		}
+	}
 } 

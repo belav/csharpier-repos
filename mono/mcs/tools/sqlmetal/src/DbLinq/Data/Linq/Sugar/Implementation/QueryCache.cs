@@ -1,4 +1,4 @@
-#region MIT license
+﻿#region MIT license
 // 
 // MIT license
 //
@@ -37,7 +37,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         {
             private readonly Type tableType;
             private readonly IList<string> columns;
-            private readonly int hash; 
+			private readonly int hash; 
 
             public override bool Equals(object obj)
             {
@@ -56,7 +56,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             {
                 this.tableType = tableType;
                 this.columns = columns;
-                hash = tableType.GetHashCode();
+				hash = tableType.GetHashCode();
                 foreach (var column in columns)
                     hash ^= column.GetHashCode();
             }

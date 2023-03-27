@@ -1,7 +1,7 @@
 //
 //
-//    Mono.Cairo drawing samples using X11 as drawing surface
-//    Autor: Hisham Mardam Bey <hisham@hisham.cc>
+//	Mono.Cairo drawing samples using X11 as drawing surface
+//	Autor: Hisham Mardam Bey <hisham@hisham.cc>
 //
 
 //
@@ -35,52 +35,52 @@ using Cairo;
 public class X11Test
 {
         static void draw (Cairo.Context gr, int width, int height)
-    {
-        gr.Scale (width, height);
-        gr.LineWidth = 0.04;
-        
-        gr.MoveTo ( new PointD (0.5, 0.1) );
-        gr.LineTo ( new PointD (0.9, 0.9) );
-        gr.RelLineTo ( new Distance (-0.4, 0.0) );
-        gr.CurveTo ( new PointD (0.2, 0.9),
-                         new PointD ( 0.2, 0.5),
-                         new PointD (0.5, 0.5)
-                         );
-        gr.ClosePath ();
-        
-        gr.MoveTo ( new PointD (0.25, 0.1) );
-        gr.RelLineTo ( new Distance (0.2, 0.2) );
-        gr.RelLineTo ( new Distance ( -0.2, 0.2) );
-        gr.RelLineTo ( new Distance (-0.2, -0.2) );
-        gr.ClosePath ();
-        
-        gr.Color = new Color (0, 0, 1, 1);
-        gr.FillPreserve ();
-        gr.Color = new Color ( 0, 0, 0, 1);
-        gr.Stroke ();
-    }
-    
-    
-    static void Main (string [] args)
-    {
-        Window win = new Window (500, 500);
-        
-        win.Show ();
-        
-        Cairo.XlibSurface s = new Cairo.XlibSurface (win.Display,
-                   win.XWindow,
-                   X11.XDefaultVisual (win.Display, win.Screen),
-                   (int)win.Width, (int)win.Height);
+	{
+		gr.Scale (width, height);
+		gr.LineWidth = 0.04;
+		
+		gr.MoveTo ( new PointD (0.5, 0.1) );
+		gr.LineTo ( new PointD (0.9, 0.9) );
+		gr.RelLineTo ( new Distance (-0.4, 0.0) );
+		gr.CurveTo ( new PointD (0.2, 0.9),
+					     new PointD ( 0.2, 0.5),
+					     new PointD (0.5, 0.5)
+					     );
+		gr.ClosePath ();
+		
+		gr.MoveTo ( new PointD (0.25, 0.1) );
+		gr.RelLineTo ( new Distance (0.2, 0.2) );
+		gr.RelLineTo ( new Distance ( -0.2, 0.2) );
+		gr.RelLineTo ( new Distance (-0.2, -0.2) );
+		gr.ClosePath ();
+		
+		gr.Color = new Color (0, 0, 1, 1);
+		gr.FillPreserve ();
+		gr.Color = new Color ( 0, 0, 0, 1);
+		gr.Stroke ();
+	}
+	
+	
+	static void Main (string [] args)
+	{
+		Window win = new Window (500, 500);
+		
+		win.Show ();
+		
+		Cairo.XlibSurface s = new Cairo.XlibSurface (win.Display,
+			       win.XWindow,
+			       X11.XDefaultVisual (win.Display, win.Screen),
+			       (int)win.Width, (int)win.Height);
 
-        
-        Cairo.Context g = new Cairo.Context (s);
-        
-        draw (g, 500, 500);
-        
-        IntPtr xev = new IntPtr ();
-        
-        while (true) {            
-            X11.XNextEvent (win.Display, xev);
-        }        
-    }
+		
+		Cairo.Context g = new Cairo.Context (s);
+		
+		draw (g, 500, 500);
+		
+		IntPtr xev = new IntPtr ();
+		
+		while (true) {			
+			X11.XNextEvent (win.Display, xev);
+		}		
+	}
 }

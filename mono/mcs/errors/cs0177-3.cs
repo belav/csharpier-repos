@@ -2,13 +2,13 @@
 // Line: 5
 
 class C {
-    public static void test3 (out float f)
-    {
-        try {
-            f = 8.53F;
-        } catch {
-            return;
-        }
-    }
+	public static void test3 (out float f)
+	{
+		try {
+			f = 8.53F;
+		} catch {
+			return;
+		}
+	}
 }
 

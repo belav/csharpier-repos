@@ -2,7 +2,7 @@
 // Property.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,115 +29,115 @@
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Static.AST {
-    class Property : Member {
-        private readonly PropertyDefinition definition;
+	class Property : Member {
+		private readonly PropertyDefinition definition;
 
-        public Property (PropertyDefinition definition) : base (NodeType.Property)
-        {
-            this.definition = definition;
-        }
+		public Property (PropertyDefinition definition) : base (NodeType.Property)
+		{
+			this.definition = definition;
+		}
 
-        #region Overrides of Member
-        public override TypeNode DeclaringType
-        {
-            get { return TypeNode.Create (this.definition.DeclaringType); }
-        }
+		#region Overrides of Member
+		public override TypeNode DeclaringType
+		{
+			get { return TypeNode.Create (this.definition.DeclaringType); }
+		}
 
-        public override Module Module
-        {
-            get { return new Module (this.definition.Module); }
-        }
+		public override Module Module
+		{
+			get { return new Module (this.definition.Module); }
+		}
 
-        public override bool IsStatic
-        {
-            get { return (Getter == null || Getter.IsStatic) && (Setter == null || Setter.IsStatic); }
-        }
+		public override bool IsStatic
+		{
+			get { return (Getter == null || Getter.IsStatic) && (Setter == null || Setter.IsStatic); }
+		}
 
-        public override bool IsPublic
-        {
-            get
-            {
-                //todo: implement this 
-                return true;
-            }
-        }
+		public override bool IsPublic
+		{
+			get
+			{
+				//todo: implement this 
+				return true;
+			}
+		}
 
-        public override bool IsPrivate
-        {
-            get
-            {
-                //todo: implement this 
-                return false;
-            }
-        }
+		public override bool IsPrivate
+		{
+			get
+			{
+				//todo: implement this 
+				return false;
+			}
+		}
 
-        public override bool IsAssembly
-        {
-            get
-            {
-                //todo: implement this 
-                return false;
-            }
-        }
+		public override bool IsAssembly
+		{
+			get
+			{
+				//todo: implement this 
+				return false;
+			}
+		}
 
-        public override bool IsFamily
-        {
-            get
-            {
-                //todo: implement this 
-                return false;
-            }
-        }
+		public override bool IsFamily
+		{
+			get
+			{
+				//todo: implement this 
+				return false;
+			}
+		}
 
-        public override bool IsFamilyOrAssembly
-        {
-            get
-            {
-                //todo: implement this 
-                return false;
-            }
-        }
+		public override bool IsFamilyOrAssembly
+		{
+			get
+			{
+				//todo: implement this 
+				return false;
+			}
+		}
 
-        public override bool IsFamilyAndAssembly
-        {
-            get
-            {
-                //todo: implement this 
-                return false;
-            }
-        }
+		public override bool IsFamilyAndAssembly
+		{
+			get
+			{
+				//todo: implement this 
+				return false;
+			}
+		}
 
-        public Method Getter
-        {
-            get
-            {
-                MethodDefinition methodDefinition = this.definition.GetMethod;
-                if (methodDefinition == null)
-                    return null;
-                return new Method (methodDefinition);
-            }
-        }
+		public Method Getter
+		{
+			get
+			{
+				MethodDefinition methodDefinition = this.definition.GetMethod;
+				if (methodDefinition == null)
+					return null;
+				return new Method (methodDefinition);
+			}
+		}
 
-        public Method Setter
-        {
-            get
-            {
-                MethodDefinition methodDefinition = this.definition.SetMethod;
-                if (methodDefinition == null)
-                    return null;
-                return new Method (methodDefinition);
-            }
-        }
+		public Method Setter
+		{
+			get
+			{
+				MethodDefinition methodDefinition = this.definition.SetMethod;
+				if (methodDefinition == null)
+					return null;
+				return new Method (methodDefinition);
+			}
+		}
 
-        public bool HasGetter
-        {
-            get { return (Getter != null); }
-        }
+		public bool HasGetter
+		{
+			get { return (Getter != null); }
+		}
 
-        public bool HasSetter
-        {
-            get { return (Setter != null); }
-        }
-        #endregion
-    }
+		public bool HasSetter
+		{
+			get { return (Setter != null); }
+		}
+		#endregion
+	}
 }

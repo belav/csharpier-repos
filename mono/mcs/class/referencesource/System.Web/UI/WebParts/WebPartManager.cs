@@ -4529,9 +4529,9 @@ if (zoneElement != null) {{
 
                  ConnectionPointKey other = obj as ConnectionPointKey;
                  return (other != null) &&
-                    (other._type.Equals(_type)) &&
-                    (other._culture.Equals(_culture)) &&
-                    (other._uiCulture.Equals(_uiCulture));
+				    (other._type.Equals(_type)) &&
+				    (other._culture.Equals(_culture)) &&
+				    (other._uiCulture.Equals(_uiCulture));
             }
 
             [SuppressMessage("Microsoft.Usage", "CA2303:FlagTypeGetHashCode", Justification = "The types are Sytem.Web.UI.Control derived classes and not com interop types.")]

@@ -9,14 +9,14 @@ public class Test
 
         public static int Main ()
         {
-        MethodInfo mi = typeof (Test).GetMethod ("Foo");
-        Type t = mi.GetGenericArguments () [0];
-        Type[] ifaces = t.GetGenericParameterConstraints ();
-        if (ifaces.Length != 1)
-            return 1;
-        if (ifaces [0] != typeof (IFoo))
-            return 2;
-        return 0;
+		MethodInfo mi = typeof (Test).GetMethod ("Foo");
+		Type t = mi.GetGenericArguments () [0];
+		Type[] ifaces = t.GetGenericParameterConstraints ();
+		if (ifaces.Length != 1)
+			return 1;
+		if (ifaces [0] != typeof (IFoo))
+			return 2;
+		return 0;
         }
 }
 

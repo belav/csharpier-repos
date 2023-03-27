@@ -79,8 +79,8 @@ namespace System.Runtime.Remoting.Channels.Ipc.Unix
                 //
                 internal static string IpcToUnix (string url)
                 {
-            if (url == null)
-                return null;
+			if (url == null)
+				return null;
 
                         string portName;
                         string objectUri;
@@ -126,7 +126,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Unix
                 {
                         string uri = msg.Properties ["__Uri"] as string;
                         if (uri != null) {
-                 msg.Properties ["__Uri"] = IpcClientChannel.IpcToUnix (uri);
+				 msg.Properties ["__Uri"] = IpcClientChannel.IpcToUnix (uri);
                         }
                 }
 

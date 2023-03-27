@@ -33,83 +33,83 @@ using System;
 
 namespace System.Xml.Serialization
 {
-    /// <summary>
-    /// Summary description for XmlArrayAttribute.
-    /// </summary>
-    [AttributeUsageAttribute(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple=false)]
-    public class XmlArrayAttribute : Attribute
-    {
-        private string elementName;
-        private XmlSchemaForm form;
-        private bool isNullable;
-        private string ns;
-        private int order = -1;
+	/// <summary>
+	/// Summary description for XmlArrayAttribute.
+	/// </summary>
+	[AttributeUsageAttribute(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple=false)]
+	public class XmlArrayAttribute : Attribute
+	{
+		private string elementName;
+		private XmlSchemaForm form;
+		private bool isNullable;
+		private string ns;
+		private int order = -1;
 
-        public XmlArrayAttribute()
-        {
-        }
+		public XmlArrayAttribute()
+		{
+		}
 
-        public XmlArrayAttribute(string elementName)
-        {
-            this.elementName = elementName;
-        }
+		public XmlArrayAttribute(string elementName)
+		{
+			this.elementName = elementName;
+		}
 
-        public string ElementName {
-            get {
-                if (elementName == null) {
-                    return string.Empty;
-                }
-                return elementName;
-            }
-            set { elementName = value; }
-        }
-        public XmlSchemaForm Form 
-        {
-            get
-            {
-                return form;
-            } 
-            set
-            {
-                form = value;
-            }
-        }
-        public bool IsNullable 
-        {
-            get
-            {
-                return isNullable;
-            } 
-            set
-            {
-                isNullable = value;
-            }
-        }
-        public string Namespace 
-        {
-            get
-            {
-                return ns;
-            } 
-            set
-            {
-                ns = value;
-            }
-        }
+		public string ElementName {
+			get {
+				if (elementName == null) {
+					return string.Empty;
+				}
+				return elementName;
+			}
+			set { elementName = value; }
+		}
+		public XmlSchemaForm Form 
+		{
+			get
+			{
+				return form;
+			} 
+			set
+			{
+				form = value;
+			}
+		}
+		public bool IsNullable 
+		{
+			get
+			{
+				return isNullable;
+			} 
+			set
+			{
+				isNullable = value;
+			}
+		}
+		public string Namespace 
+		{
+			get
+			{
+				return ns;
+			} 
+			set
+			{
+				ns = value;
+			}
+		}
 
-        public int Order {
-            get { return order; }
-            set { order = value; }
-        }
-        
-        internal void AddKeyHash (System.Text.StringBuilder sb)
-        {
-            sb.Append ("XAAT ");
-            KeyHelper.AddField (sb, 1, ns);
-            KeyHelper.AddField (sb, 2, elementName);
-            KeyHelper.AddField (sb, 3, form.ToString(), XmlSchemaForm.None.ToString());
-            KeyHelper.AddField (sb, 4, isNullable);
-            sb.Append ('|');
-        }
-    }
+		public int Order {
+			get { return order; }
+			set { order = value; }
+		}
+		
+		internal void AddKeyHash (System.Text.StringBuilder sb)
+		{
+			sb.Append ("XAAT ");
+			KeyHelper.AddField (sb, 1, ns);
+			KeyHelper.AddField (sb, 2, elementName);
+			KeyHelper.AddField (sb, 3, form.ToString(), XmlSchemaForm.None.ToString());
+			KeyHelper.AddField (sb, 4, isNullable);
+			sb.Append ('|');
+		}
+	}
 }

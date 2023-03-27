@@ -10,9 +10,9 @@ public ref struct S
 
 class Test
 {
-    public static void Main ()
-    {
-        var s = new S ();
-        Func<string> f = s.ToString;
-    }
+	public static void Main ()
+	{
+		var s = new S ();
+		Func<string> f = s.ToString;
+	}
 }

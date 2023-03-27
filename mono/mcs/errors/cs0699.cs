@@ -3,5 +3,5 @@
 
 interface I
 {
-    void Test<T>() where U : class;
+	void Test<T>() where U : class;
 }

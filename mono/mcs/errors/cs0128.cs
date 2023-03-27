@@ -2,11 +2,11 @@
 // Line: 8
 
 class x {
-    static int y ()
-    {
-        int x = 1;
-        int x = 2;
+	static int y ()
+	{
+		int x = 1;
+		int x = 2;
 
-        return x + x;
-    }
+		return x + x;
+	}
 }

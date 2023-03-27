@@ -1,4 +1,4 @@
-namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc {
 
     public interface IViewEngine {
         ViewEngineResult FindPartialView(ControllerContext controllerContext, string partialViewName, bool useCache);

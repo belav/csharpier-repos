@@ -3,14 +3,14 @@
 
 class C
 {
-    static void Main ()
-    {
-        int a;
-        Foo (out a, a);
-    }
+	static void Main ()
+	{
+		int a;
+		Foo (out a, a);
+	}
 
-    static void Foo (out int a, int b)
-    {
-        a = b;
-    }
+	static void Foo (out int a, int b)
+	{
+		a = b;
+	}
 }

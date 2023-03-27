@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.ProfileMigrateEventArgs.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,28 +31,28 @@ using System.Web;
 
 namespace System.Web.Profile
 {
-    public sealed class ProfileMigrateEventArgs : System.EventArgs
-    {
-        public ProfileMigrateEventArgs (HttpContext context, string anonymousId)
-        {
-            this.context = context;
-            this.anonymousId = anonymousId;
-        }
+	public sealed class ProfileMigrateEventArgs : System.EventArgs
+	{
+		public ProfileMigrateEventArgs (HttpContext context, string anonymousId)
+		{
+			this.context = context;
+			this.anonymousId = anonymousId;
+		}
 
-        public string AnonymousID {
-            get {
-                return anonymousId;
-            }
-        }
+		public string AnonymousID {
+			get {
+				return anonymousId;
+			}
+		}
 
-        public HttpContext Context {
-            get {
-                return context;
-            }
-        }
+		public HttpContext Context {
+			get {
+				return context;
+			}
+		}
 
-        HttpContext context;
-        string anonymousId;
-    }
+		HttpContext context;
+		string anonymousId;
+	}
 }
 

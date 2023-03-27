@@ -1,4 +1,4 @@
-using AutoMapper.Configuration.Annotations;
+﻿using AutoMapper.Configuration.Annotations;
 
 namespace AutoMapper.UnitTests
 {

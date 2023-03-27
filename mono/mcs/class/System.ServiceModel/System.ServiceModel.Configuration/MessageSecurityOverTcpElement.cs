@@ -2,7 +2,7 @@
 // MessageSecurityOverTcpElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,59 +54,59 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public sealed partial class MessageSecurityOverTcpElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty algorithm_suite;
-        static ConfigurationProperty client_credential_type;
+	[MonoTODO]
+	public sealed partial class MessageSecurityOverTcpElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty algorithm_suite;
+		static ConfigurationProperty client_credential_type;
 
-        static MessageSecurityOverTcpElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            algorithm_suite = new ConfigurationProperty ("algorithmSuite",
-                typeof (SecurityAlgorithmSuite), "Default", new SecurityAlgorithmSuiteConverter (), null,
-                ConfigurationPropertyOptions.None);
+		static MessageSecurityOverTcpElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			algorithm_suite = new ConfigurationProperty ("algorithmSuite",
+				typeof (SecurityAlgorithmSuite), "Default", new SecurityAlgorithmSuiteConverter (), null,
+				ConfigurationPropertyOptions.None);
 
-            client_credential_type = new ConfigurationProperty ("clientCredentialType",
-                typeof (MessageCredentialType), "Windows", null, null,
-                ConfigurationPropertyOptions.None);
+			client_credential_type = new ConfigurationProperty ("clientCredentialType",
+				typeof (MessageCredentialType), "Windows", null, null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (algorithm_suite);
-            properties.Add (client_credential_type);
-        }
+			properties.Add (algorithm_suite);
+			properties.Add (client_credential_type);
+		}
 
-        public MessageSecurityOverTcpElement ()
-        {
-        }
-
-
-        // Properties
-
-        [ConfigurationProperty ("algorithmSuite",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Default")]
-        [TypeConverter (typeof (SecurityAlgorithmSuiteConverter))]
-        public SecurityAlgorithmSuite AlgorithmSuite {
-            get { return (SecurityAlgorithmSuite) base [algorithm_suite]; }
-            set { base [algorithm_suite] = value; }
-        }
-
-        [ConfigurationProperty ("clientCredentialType",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Windows")]
-        public MessageCredentialType ClientCredentialType {
-            get { return (MessageCredentialType) base [client_credential_type]; }
-            set { base [client_credential_type] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		public MessageSecurityOverTcpElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+		[ConfigurationProperty ("algorithmSuite",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "Default")]
+		[TypeConverter (typeof (SecurityAlgorithmSuiteConverter))]
+		public SecurityAlgorithmSuite AlgorithmSuite {
+			get { return (SecurityAlgorithmSuite) base [algorithm_suite]; }
+			set { base [algorithm_suite] = value; }
+		}
+
+		[ConfigurationProperty ("clientCredentialType",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "Windows")]
+		public MessageCredentialType ClientCredentialType {
+			get { return (MessageCredentialType) base [client_credential_type]; }
+			set { base [client_credential_type] = value; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+
+	}
 
 }

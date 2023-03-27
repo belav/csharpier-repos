@@ -1177,9 +1177,9 @@ SELECT
     SCHEMA_NAME([t].[schema_id]) AS [table_schema],
     [t].[name] AS [table_name],
     [f].[name],
-    SCHEMA_NAME(tab2.[schema_id]) AS [principal_table_schema],
-    [tab2].name AS [principal_table_name],    
-    [f].[delete_referential_action_desc],
+	SCHEMA_NAME(tab2.[schema_id]) AS [principal_table_schema],
+	[tab2].name AS [principal_table_name],	
+	[f].[delete_referential_action_desc],
     [col1].[name] AS [column_name],
     [col2].[name] AS [referenced_column_name]
 FROM [sys].[foreign_keys] AS [f] 

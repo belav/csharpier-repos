@@ -2,7 +2,7 @@
 // System.ServiceProcess.ServiceControllerImpl
 //
 // Author:
-//    Gert Driesen (drieseng@users.sourceforge.net)
+//	Gert Driesen (drieseng@users.sourceforge.net)
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -29,76 +29,76 @@
 
 namespace System.ServiceProcess
 {
-    internal abstract class ServiceControllerImpl
-    {
-        protected ServiceControllerImpl (ServiceController serviceController)
-        {
-            _serviceController = serviceController;
-        }
+	internal abstract class ServiceControllerImpl
+	{
+		protected ServiceControllerImpl (ServiceController serviceController)
+		{
+			_serviceController = serviceController;
+		}
 
-        protected ServiceController ServiceController {
-            get {
-                return _serviceController;
-            }
-        }
+		protected ServiceController ServiceController {
+			get {
+				return _serviceController;
+			}
+		}
 
-        public abstract bool CanPauseAndContinue {
-            get;
-        }
+		public abstract bool CanPauseAndContinue {
+			get;
+		}
 
-        public abstract bool CanShutdown {
-            get;
-        }
+		public abstract bool CanShutdown {
+			get;
+		}
 
-        public abstract bool CanStop {
-            get;
-        }
+		public abstract bool CanStop {
+			get;
+		}
 
-        public abstract ServiceController [] DependentServices {
-            get;
-        }
+		public abstract ServiceController [] DependentServices {
+			get;
+		}
 
-        public abstract string DisplayName {
-            get;
-        }
+		public abstract string DisplayName {
+			get;
+		}
 
-        public abstract string ServiceName {
-            get;
-        }
+		public abstract string ServiceName {
+			get;
+		}
 
-        public abstract ServiceController [] ServicesDependedOn {
-            get;
-        }
+		public abstract ServiceController [] ServicesDependedOn {
+			get;
+		}
 
-        public abstract ServiceType ServiceType {
-            get;
-        }
+		public abstract ServiceType ServiceType {
+			get;
+		}
 
-        public abstract ServiceControllerStatus Status
-        {
-            get;
-        }
+		public abstract ServiceControllerStatus Status
+		{
+			get;
+		}
 
-        public abstract void Close ();
+		public abstract void Close ();
 
-        public abstract void Continue ();
+		public abstract void Continue ();
 
-        public abstract void Dispose (bool disposing);
+		public abstract void Dispose (bool disposing);
 
-        public abstract void ExecuteCommand (int command);
+		public abstract void ExecuteCommand (int command);
 
-        public abstract ServiceController [] GetDevices ();
+		public abstract ServiceController [] GetDevices ();
 
-        public abstract ServiceController [] GetServices ();
+		public abstract ServiceController [] GetServices ();
 
-        public abstract void Pause ();
+		public abstract void Pause ();
 
-        public abstract void Refresh ();
+		public abstract void Refresh ();
 
-        public abstract void Start (string [] args);
+		public abstract void Start (string [] args);
 
-        public abstract void Stop ();
+		public abstract void Stop ();
 
-        private readonly ServiceController _serviceController;
-    }
+		private readonly ServiceController _serviceController;
+	}
 }

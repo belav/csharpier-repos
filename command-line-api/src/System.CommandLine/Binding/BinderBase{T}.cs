@@ -1,4 +1,4 @@
-namespace System.CommandLine.Binding;
+﻿namespace System.CommandLine.Binding;
 
 /// <summary>
 /// Supports binding of custom types.

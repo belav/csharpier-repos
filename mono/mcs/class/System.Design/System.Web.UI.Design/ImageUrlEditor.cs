@@ -33,28 +33,28 @@ using System;
 
 namespace System.Web.UI.Design
 {
-    public class ImageUrlEditor : UrlEditor
-    {
-        public ImageUrlEditor ()
-        {
-        }
+	public class ImageUrlEditor : UrlEditor
+	{
+		public ImageUrlEditor ()
+		{
+		}
 
-        protected override string Caption 
-        {
-            get 
-            { 
-                return "Select Image"; 
-            }
-        }
+		protected override string Caption 
+		{
+			get 
+			{ 
+				return "Select Image"; 
+			}
+		}
 
-        protected override string Filter 
-        {
-            get 
-            {
-                return "Image Files(*.gif;*.jpg;*.jpeg;*.bmp;*.wmf;*.png)|" +
-                "*.gif;*.jpg;*.jpeg;*.bmp;*.wmf;*.png|All Files(*.*)|*.*|";
-            }
-        }
-    }
+		protected override string Filter 
+		{
+			get 
+			{
+				return "Image Files(*.gif;*.jpg;*.jpeg;*.bmp;*.wmf;*.png)|" +
+				"*.gif;*.jpg;*.jpeg;*.bmp;*.wmf;*.png|All Files(*.*)|*.*|";
+			}
+		}
+	}
 }
 

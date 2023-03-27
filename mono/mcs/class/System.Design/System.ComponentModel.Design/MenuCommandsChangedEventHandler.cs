@@ -30,6 +30,6 @@
 
 namespace System.ComponentModel.Design
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public delegate void MenuCommandsChangedEventHandler (object sender, MenuCommandsChangedEventArgs e);
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public delegate void MenuCommandsChangedEventHandler (object sender, MenuCommandsChangedEventArgs e);
 }

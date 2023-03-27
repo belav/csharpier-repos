@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.ControlPropertyNameConverter.cs
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -31,26 +31,26 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    public class ControlPropertyNameConverter: StringConverter
-    {
-        [MonoLimitation("This implementation always returns null")]
-        public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context) 
-        {
-            return null;
-        }
+	public class ControlPropertyNameConverter: StringConverter
+	{
+		[MonoLimitation("This implementation always returns null")]
+		public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context) 
+		{
+			return null;
+		}
 
-        public override bool GetStandardValuesSupported (ITypeDescriptorContext context) 
-        {
-            if (context != null) {
-                return true;
-            }
+		public override bool GetStandardValuesSupported (ITypeDescriptorContext context) 
+		{
+			if (context != null) {
+				return true;
+			}
 
-            return false;
-        }
+			return false;
+		}
 
-        public override bool GetStandardValuesExclusive (ITypeDescriptorContext context) 
-        {
-            return false;
-        }
-    }
+		public override bool GetStandardValuesExclusive (ITypeDescriptorContext context) 
+		{
+			return false;
+		}
+	}
 }

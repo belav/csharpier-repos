@@ -29,23 +29,23 @@ using Microsoft.Build.Framework;
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Framework {
-    [TestFixture]
-    public class ProjectFinishedEventArgsTest {
-        [Test]
-        public void AssignmentTest ()
-        {
-            ProjectFinishedEventArgs pfea;
-            string message = "message";
-            string helpKeyword = "helpKeyword";
-            string projectFile = "projectFile";
-            bool succeeded = true;
-            
-            pfea = new ProjectFinishedEventArgs (message, helpKeyword, projectFile, succeeded);
-            
-            Assert.AreEqual (message, pfea.Message, "Message");
-            Assert.AreEqual (helpKeyword, pfea.HelpKeyword, "HelpKeyword");
-            Assert.AreEqual (projectFile, pfea.ProjectFile, "ProjectFile");
-            Assert.AreEqual (succeeded, pfea.Succeeded, "Succeeded");
-        }
-    }
+	[TestFixture]
+	public class ProjectFinishedEventArgsTest {
+		[Test]
+		public void AssignmentTest ()
+		{
+			ProjectFinishedEventArgs pfea;
+			string message = "message";
+			string helpKeyword = "helpKeyword";
+			string projectFile = "projectFile";
+			bool succeeded = true;
+			
+			pfea = new ProjectFinishedEventArgs (message, helpKeyword, projectFile, succeeded);
+			
+			Assert.AreEqual (message, pfea.Message, "Message");
+			Assert.AreEqual (helpKeyword, pfea.HelpKeyword, "HelpKeyword");
+			Assert.AreEqual (projectFile, pfea.ProjectFile, "ProjectFile");
+			Assert.AreEqual (succeeded, pfea.Succeeded, "Succeeded");
+		}
+	}
 }

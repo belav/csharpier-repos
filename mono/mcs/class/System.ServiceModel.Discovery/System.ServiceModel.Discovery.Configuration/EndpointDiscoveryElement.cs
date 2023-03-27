@@ -31,68 +31,68 @@ using System.Xml.Linq;
 
 namespace System.ServiceModel.Discovery.Configuration
 {
-    public sealed class EndpointDiscoveryElement : BehaviorExtensionElement
-    {
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty types, enabled, extensions, scopes;
-        
-        static EndpointDiscoveryElement ()
-        {
-            types = new ConfigurationProperty ("types", typeof (ContractTypeNameElementCollection), null, null, null, ConfigurationPropertyOptions.None);
-            enabled = new ConfigurationProperty ("enabled", typeof (bool), null, null, null, ConfigurationPropertyOptions.None);
-            extensions = new ConfigurationProperty ("extensions", typeof (XmlElementElementCollection), null, null, null, ConfigurationPropertyOptions.None);
-            scopes = new ConfigurationProperty ("scopes", typeof (ScopeElementCollection), null, null, null, ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (types);
-            properties.Add (enabled);
-            properties.Add (extensions);
-            properties.Add (scopes);
-        }
+	public sealed class EndpointDiscoveryElement : BehaviorExtensionElement
+	{
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty types, enabled, extensions, scopes;
+		
+		static EndpointDiscoveryElement ()
+		{
+			types = new ConfigurationProperty ("types", typeof (ContractTypeNameElementCollection), null, null, null, ConfigurationPropertyOptions.None);
+			enabled = new ConfigurationProperty ("enabled", typeof (bool), null, null, null, ConfigurationPropertyOptions.None);
+			extensions = new ConfigurationProperty ("extensions", typeof (XmlElementElementCollection), null, null, null, ConfigurationPropertyOptions.None);
+			scopes = new ConfigurationProperty ("scopes", typeof (ScopeElementCollection), null, null, null, ConfigurationPropertyOptions.None);
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (types);
+			properties.Add (enabled);
+			properties.Add (extensions);
+			properties.Add (scopes);
+		}
 
-        public EndpointDiscoveryElement ()
-        {
-        }
-        
-        public override Type BehaviorType {
-            get { return typeof (EndpointDiscoveryBehavior); }
-        }
+		public EndpointDiscoveryElement ()
+		{
+		}
+		
+		public override Type BehaviorType {
+			get { return typeof (EndpointDiscoveryBehavior); }
+		}
 
-        [ConfigurationProperty ("types")]
-        public ContractTypeNameElementCollection ContractTypeNames {
-            get { return (ContractTypeNameElementCollection) base [types]; }
-        }
-        
-        [ConfigurationPropertyAttribute("enabled", DefaultValue = true)]
-        public bool Enabled {
-            get { return (bool) base [enabled]; }
-            set { base [enabled] = value; }
-        }
-        
-        [ConfigurationPropertyAttribute("extensions")]
-        public XmlElementElementCollection Extensions {
-            get { return (XmlElementElementCollection) base [extensions]; }
-        }
-        
-        [ConfigurationPropertyAttribute("scopes")]
-        public ScopeElementCollection Scopes {
-            get { return (ScopeElementCollection) base [scopes]; }
-        }
-        
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-        
-        protected internal override object CreateBehavior ()
-        {
-            var ret = new EndpointDiscoveryBehavior () { Enabled = this.Enabled };
-            foreach (ContractTypeNameElement ctn in ContractTypeNames)
-                ret.ContractTypeNames.Add (new XmlQualifiedName (ctn.Name, ctn.Namespace));
-            foreach (XmlElementElement xee in Extensions)
-                ret.Extensions.Add (XElement.Load (new XmlNodeReader (xee.XmlElement)));
-            foreach (ScopeElement se in Scopes)
-                ret.Scopes.Add (se.Scope);
-            return ret;
-        }
-    }
+		[ConfigurationProperty ("types")]
+		public ContractTypeNameElementCollection ContractTypeNames {
+			get { return (ContractTypeNameElementCollection) base [types]; }
+		}
+		
+		[ConfigurationPropertyAttribute("enabled", DefaultValue = true)]
+		public bool Enabled {
+			get { return (bool) base [enabled]; }
+			set { base [enabled] = value; }
+		}
+		
+		[ConfigurationPropertyAttribute("extensions")]
+		public XmlElementElementCollection Extensions {
+			get { return (XmlElementElementCollection) base [extensions]; }
+		}
+		
+		[ConfigurationPropertyAttribute("scopes")]
+		public ScopeElementCollection Scopes {
+			get { return (ScopeElementCollection) base [scopes]; }
+		}
+		
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+		
+		protected internal override object CreateBehavior ()
+		{
+			var ret = new EndpointDiscoveryBehavior () { Enabled = this.Enabled };
+			foreach (ContractTypeNameElement ctn in ContractTypeNames)
+				ret.ContractTypeNames.Add (new XmlQualifiedName (ctn.Name, ctn.Namespace));
+			foreach (XmlElementElement xee in Extensions)
+				ret.Extensions.Add (XElement.Load (new XmlNodeReader (xee.XmlElement)));
+			foreach (ScopeElement se in Scopes)
+				ret.Scopes.Add (se.Scope);
+			return ret;
+		}
+	}
 }
 

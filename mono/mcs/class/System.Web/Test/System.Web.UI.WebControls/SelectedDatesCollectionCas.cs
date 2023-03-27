@@ -1,9 +1,9 @@
 //
 // SelectedDatesCollectionCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.SelectedDatesCollection
+//	- CAS unit tests for System.Web.UI.WebControls.SelectedDatesCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,33 +40,33 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class SelectedDatesCollectionCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class SelectedDatesCollectionCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            SelectedDatesCollectionTest unit = new SelectedDatesCollectionTest ();
-            unit.SelectedDatesCollectionTest_DefaultValues ();
-            unit.AddMethod ();
-            unit.ClearMethod ();
-            unit.SelectRangeMethod ();
-            unit.RemoveMethod ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			SelectedDatesCollectionTest unit = new SelectedDatesCollectionTest ();
+			unit.SelectedDatesCollectionTest_DefaultValues ();
+			unit.AddMethod ();
+			unit.ClearMethod ();
+			unit.SelectRangeMethod ();
+			unit.RemoveMethod ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (ArrayList) });
-            Assert.IsNotNull (ci, ".ctor(ArrayList)");
-            return ci.Invoke (new object[1] { new ArrayList () });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (ArrayList) });
+			Assert.IsNotNull (ci, ".ctor(ArrayList)");
+			return ci.Invoke (new object[1] { new ArrayList () });
+		}
 
-        public override Type Type {
-            get { return typeof (SelectedDatesCollection); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (SelectedDatesCollection); }
+		}
+	}
 }

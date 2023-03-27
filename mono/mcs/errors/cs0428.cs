@@ -2,13 +2,13 @@
 // Line: 12
 
 class X {
-    int a (int a)
-    {
-        return 0;
-    }
+	int a (int a)
+	{
+		return 0;
+	}
 
-    void b ()
-    {
-        int x = a;
-    }
+	void b ()
+	{
+		int x = a;
+	}
 }

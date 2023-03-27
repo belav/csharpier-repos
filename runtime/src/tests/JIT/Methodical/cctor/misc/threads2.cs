@@ -44,7 +44,7 @@ namespace Precise
                 foreach (Thread _thread in tasks)
                     _thread.Start();
 
-                // Wait for tasks to finish    
+                // Wait for tasks to finish	
                 foreach (Thread _thread in tasks)
                     _thread.Join();
 

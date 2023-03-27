@@ -1072,16 +1072,16 @@ namespace System.Data.SqlClient {
             IntPtr hscp;
             Bid.NotificationsScopeEnter(out hscp, "<sc.SqlDependency.StartTimer|DEP> %d#", ObjectID);
             try {
-                if(_expirationTime == DateTime.MaxValue) {            
+                if(_expirationTime == DateTime.MaxValue) {			
                     Bid.NotificationsTrace("<sc.SqlDependency.StartTimer|DEP> We've timed out, executing logic.\n");
 
-                    int seconds = SQL.SqlDependencyServerTimeout;
+    				int seconds = SQL.SqlDependencyServerTimeout;
                     if (0 != _timeout) {
-                        seconds = _timeout;                    
+    					seconds = _timeout;					
                     }                                
-                    if (notificationRequest != null && notificationRequest.Timeout < seconds && notificationRequest.Timeout != 0) {                        
-                        seconds = notificationRequest.Timeout;
-                    }
+                    if (notificationRequest != null && notificationRequest.Timeout < seconds && notificationRequest.Timeout != 0) {						
+    					seconds = notificationRequest.Timeout;
+    				}
 
                     // VSDD 563926: we use UTC to check if SqlDependency is expired, need to use it here as well.
                     _expirationTime = DateTime.UtcNow.AddSeconds(seconds);

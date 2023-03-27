@@ -14,16 +14,16 @@ public class OtherTextElem : Elem {
 
 public class main {
     public static int Main () {
-    TextElem elem = new TextElem ();
+	TextElem elem = new TextElem ();
 
-    if (elem.getType<string> () != typeof (string))
-        return 1;
+	if (elem.getType<string> () != typeof (string))
+	    return 1;
 
-    OtherTextElem oelem = new OtherTextElem ();
+	OtherTextElem oelem = new OtherTextElem ();
 
-    if (oelem.getType<string> () != typeof (string))
-        return 1;
+	if (oelem.getType<string> () != typeof (string))
+	    return 1;
 
-    return 0;
+	return 0;
     }
 }

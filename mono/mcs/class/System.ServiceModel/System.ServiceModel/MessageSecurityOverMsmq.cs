@@ -31,23 +31,23 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-    public sealed class MessageSecurityOverMsmq
-    {
-        SecurityAlgorithmSuite suite;
-        MessageCredentialType cred;
+	public sealed class MessageSecurityOverMsmq
+	{
+		SecurityAlgorithmSuite suite;
+		MessageCredentialType cred;
 
-        internal MessageSecurityOverMsmq ()
-        {
-        }
+		internal MessageSecurityOverMsmq ()
+		{
+		}
 
-        public SecurityAlgorithmSuite AlgorithmSuite {
-            get { return suite; }
-            set { suite = value; }
-        }
+		public SecurityAlgorithmSuite AlgorithmSuite {
+			get { return suite; }
+			set { suite = value; }
+		}
 
-        public MessageCredentialType ClientCredentialType {
-            get { return cred; }
-            set { cred = value; }
-        }
-    }
+		public MessageCredentialType ClientCredentialType {
+			get { return cred; }
+			set { cred = value; }
+		}
+	}
 }

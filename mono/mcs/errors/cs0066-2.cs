@@ -2,5 +2,5 @@
 // Line: 5
 
 public class Sample {        
-    event object reference;
+	event object reference;
 }

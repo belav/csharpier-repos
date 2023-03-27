@@ -11,7 +11,7 @@ public class RubyMethod : IDynamicObject {
 }
 
 public class T {
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }

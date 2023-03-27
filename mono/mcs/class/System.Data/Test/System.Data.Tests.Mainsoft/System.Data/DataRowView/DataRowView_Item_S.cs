@@ -37,83 +37,83 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRowView_Item_S : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRowView_Item_S tc = new DataRowView_Item_S();
-        Exception exp = null;
-        try
-        {
-            // Every Test must begin with BeginTest
-            tc.BeginTest("NoName");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            // Every Test must End with EndTest
-            tc.EndTest(exp);
-        }
-        // After test is ready, remove this line
-    }
+	[Test] public void Main()
+	{
+		DataRowView_Item_S tc = new DataRowView_Item_S();
+		Exception exp = null;
+		try
+		{
+			// Every Test must begin with BeginTest
+			tc.BeginTest("NoName");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			// Every Test must End with EndTest
+			tc.EndTest(exp);
+		}
+		// After test is ready, remove this line
+	}
 
-    public void run()
-    {
+	public void run()
+	{
 
-        Exception exp = null;
-        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-        DataView dv = new DataView(dt);
+		Exception exp = null;
+		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+		DataView dv = new DataView(dt);
 
-        DataRowView drv = dv[0];
-        
-        try
-        {
-            BeginCase("Item 'ParentId'");
-            Compare(drv["ParentId"],dt.Rows[0]["ParentId"]); 
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		DataRowView drv = dv[0];
+		
+		try
+		{
+			BeginCase("Item 'ParentId'");
+			Compare(drv["ParentId"],dt.Rows[0]["ParentId"]); 
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("Item 'ParentDateTime'");
-            Compare(drv["ParentDateTime"],dt.Rows[0]["ParentDateTime"]); 
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("Item 'ParentDateTime'");
+			Compare(drv["ParentDateTime"],dt.Rows[0]["ParentDateTime"]); 
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("Item invalid - excpetion");
-            try
-            {
-                object o = drv["something"];
-            }
-            catch (ArgumentException ex)
-            {
-                exp = ex;
-            }
-            Compare(exp.GetType().FullName, typeof(ArgumentException).FullName); 
-            exp = null;
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("Item invalid - excpetion");
+			try
+			{
+				object o = drv["something"];
+			}
+			catch (ArgumentException ex)
+			{
+				exp = ex;
+			}
+			Compare(exp.GetType().FullName, typeof(ArgumentException).FullName); 
+			exp = null;
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
 
-    }
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

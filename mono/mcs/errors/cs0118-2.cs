@@ -5,10 +5,10 @@
 using A.B.C;
 
 namespace A.D {
-    class Test {
-        static public void Main () 
-        {
-            B c = new B ();
-        }
-    }
+	class Test {
+		static public void Main () 
+		{
+			B c = new B ();
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // SecurityElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,34 +54,34 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class SecurityElement
-         : SecurityElementBase
-    {
-        ConfigurationPropertyCollection _properties;
+	public sealed class SecurityElement
+		 : SecurityElementBase
+	{
+		ConfigurationPropertyCollection _properties;
 
-        public SecurityElement () {
-        }
-
-
-        // Properties
-
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = base.Properties;
-                    _properties.Add (new ConfigurationProperty ("secureConversationBootstrap", typeof (SecurityElementBase), null, null, null, ConfigurationPropertyOptions.None));
-                }
-                return _properties;
-            }
-        }
-
-        [ConfigurationProperty ("secureConversationBootstrap",
-             Options = ConfigurationPropertyOptions.None)]
-        public SecurityElementBase SecureConversationBootstrap {
-            get { return (SecurityElementBase) base ["secureConversationBootstrap"]; }
-        }
+		public SecurityElement () {
+		}
 
 
-    }
+		// Properties
+
+		protected override ConfigurationPropertyCollection Properties {
+			get {
+				if (_properties == null) {
+					_properties = base.Properties;
+					_properties.Add (new ConfigurationProperty ("secureConversationBootstrap", typeof (SecurityElementBase), null, null, null, ConfigurationPropertyOptions.None));
+				}
+				return _properties;
+			}
+		}
+
+		[ConfigurationProperty ("secureConversationBootstrap",
+			 Options = ConfigurationPropertyOptions.None)]
+		public SecurityElementBase SecureConversationBootstrap {
+			get { return (SecurityElementBase) base ["secureConversationBootstrap"]; }
+		}
+
+
+	}
 
 }

@@ -7,7 +7,7 @@
  
 class TestClass
 {
-    static void Main()
-    {
-    }
+	static void Main()
+	{
+	}
 }

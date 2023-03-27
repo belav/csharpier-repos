@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum ArrowStyle
-    {
-        Simple = 0,
-        DoubleArrow = 1,
-        Tailed = 2
-    }
+	public enum ArrowStyle
+	{
+		Simple = 0,
+		DoubleArrow = 1,
+		Tailed = 2
+	}
 }

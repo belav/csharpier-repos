@@ -40,25 +40,25 @@ using System;
 
 namespace ICSharpCode.SharpZipLib.Zip 
 {
-    
-    /// <summary>
-    /// Represents errors specific to Zip file handling
-    /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-    public class ZipException : SharpZipBaseException
-    {
-        /// <summary>
-        /// Initializes a new instance of the ZipException class.
-        /// </summary>
-        public ZipException()
-        {
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the ZipException class with a specified error message.
-        /// </summary>
-        public ZipException(string msg) : base(msg)
-        {
-        }
-    }
+	
+	/// <summary>
+	/// Represents errors specific to Zip file handling
+	/// </summary>
+	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+	public class ZipException : SharpZipBaseException
+	{
+		/// <summary>
+		/// Initializes a new instance of the ZipException class.
+		/// </summary>
+		public ZipException()
+		{
+		}
+		
+		/// <summary>
+		/// Initializes a new instance of the ZipException class with a specified error message.
+		/// </summary>
+		public ZipException(string msg) : base(msg)
+		{
+		}
+	}
 }

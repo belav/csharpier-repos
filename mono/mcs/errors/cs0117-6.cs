@@ -5,8 +5,8 @@ using System;
 
 class string_parse
 {
-    public static void Main ()
-    {
-        string drawBackLabel = string.Parse("absDrawBack");
-    }
+	public static void Main ()
+	{
+		string drawBackLabel = string.Parse("absDrawBack");
+	}
 }

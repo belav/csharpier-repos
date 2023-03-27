@@ -2,7 +2,7 @@
 // StopRoutingHandlerTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -34,14 +34,14 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Routing
 {
-    [TestFixture]
-    public class StopRoutingHandlerTest
-    {
-        [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void GetHandler ()
-        {
-            new MyStopRoutingHandler ().CallGetHttpHandler (new RequestContext (new HttpContextStub (), new RouteData ()));
-        }
-    }
+	[TestFixture]
+	public class StopRoutingHandlerTest
+	{
+		[Test]
+		[ExpectedException (typeof (NotSupportedException))]
+		public void GetHandler ()
+		{
+			new MyStopRoutingHandler ().CallGetHttpHandler (new RequestContext (new HttpContextStub (), new RouteData ()));
+		}
+	}
 }

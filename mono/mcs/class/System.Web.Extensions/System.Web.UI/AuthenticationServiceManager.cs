@@ -1,4 +1,4 @@
-//
+﻿//
 // AuthenticationServiceManager.cs
 //
 // Author:
@@ -34,23 +34,23 @@ using System.ComponentModel;
 
 namespace System.Web.UI
 {
-    [DefaultProperty ("Path")]
-    public class AuthenticationServiceManager
-    {
-        string _path;
+	[DefaultProperty ("Path")]
+	public class AuthenticationServiceManager
+	{
+		string _path;
 
-        [Category ("Behavior")]
-        [NotifyParentProperty (true)]
-        [DefaultValue ("")]
-        public string Path {
-            get {
-                if (_path == null)
-                    return String.Empty;
-                return _path;
-            }
-            set {
-                _path = value;
-            }
-        }
-    }
+		[Category ("Behavior")]
+		[NotifyParentProperty (true)]
+		[DefaultValue ("")]
+		public string Path {
+			get {
+				if (_path == null)
+					return String.Empty;
+				return _path;
+			}
+			set {
+				_path = value;
+			}
+		}
+	}
 }

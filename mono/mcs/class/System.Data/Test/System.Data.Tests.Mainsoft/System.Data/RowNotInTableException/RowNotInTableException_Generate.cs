@@ -39,175 +39,175 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class RowNotInTableException_Generate : GHTBase
 {
-    [Test] public void Main()
-    {
-        RowNotInTableException_Generate tc = new RowNotInTableException_Generate();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("RowNotInTableException");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		RowNotInTableException_Generate tc = new RowNotInTableException_Generate();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("RowNotInTableException");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        Exception tmpEx = new Exception() ;
+	public void run()
+	{
+		Exception exp = null;
+		Exception tmpEx = new Exception() ;
 
-        DataSet ds = new DataSet();
-        ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
-        ds.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
-        ds.Relations.Add(new DataRelation("myRelation",ds.Tables[0].Columns[0],ds.Tables[1].Columns[0]));
+		DataSet ds = new DataSet();
+		ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
+		ds.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
+		ds.Relations.Add(new DataRelation("myRelation",ds.Tables[0].Columns[0],ds.Tables[1].Columns[0]));
 
-        DataRow drParent = ds.Tables[0].Rows[0];
-        DataRow drChild = ds.Tables[1].Rows[0];
-        drParent.Delete();
-        drChild.Delete();
-        ds.AcceptChanges();
+		DataRow drParent = ds.Tables[0].Rows[0];
+		DataRow drChild = ds.Tables[1].Rows[0];
+		drParent.Delete();
+		drChild.Delete();
+		ds.AcceptChanges();
         
-        try
-        {
-            BeginCase("RowNotInTableException - AcceptChanges");
-            try
-            {
-                drParent.AcceptChanges();
-            }
-            catch (RowNotInTableException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("RowNotInTableException - AcceptChanges");
+			try
+			{
+				drParent.AcceptChanges();
+			}
+			catch (RowNotInTableException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("RowNotInTableException - GetChildRows");
-            try
-            {
-                drParent.GetChildRows("myRelation");
-            }
-            catch (RowNotInTableException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("RowNotInTableException - GetChildRows");
+			try
+			{
+				drParent.GetChildRows("myRelation");
+			}
+			catch (RowNotInTableException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("RowNotInTableException - ItemArray");
-            object[] o = null;
-            try
-            {
-                o = drParent.ItemArray ;
-            }
-            catch (RowNotInTableException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("RowNotInTableException - ItemArray");
+			object[] o = null;
+			try
+			{
+				o = drParent.ItemArray ;
+			}
+			catch (RowNotInTableException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        // **********    don't throw exception (should be according to MSDN)    ***********************
-        //        try
-        //        {
-        //            BeginCase("RowNotInTableException - GetParentRow");
-        //            DataRow dr = null;
-        //            try
-        //            {
-        //                dr = drChild.GetParentRow("myRelation"); 
-        //            }
-        //            catch (RowNotInTableException  ex)
-        //            {
-        //                tmpEx = ex;
-        //            }
-        //            base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
-        //            tmpEx = new  Exception();
-        //        }
-        //        catch(Exception ex)    {exp = ex;}
-        //        finally    {EndCase(exp); exp = null;}
-        
-        try
-        {
-            BeginCase("RowNotInTableException - GetParentRows");
-            DataRow[] dr = null;
-            try
-            {
-                dr = drChild.GetParentRows("myRelation"); 
-            }
-            catch (RowNotInTableException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		// **********	don't throw exception (should be according to MSDN)	***********************
+		//		try
+		//		{
+		//			BeginCase("RowNotInTableException - GetParentRow");
+		//			DataRow dr = null;
+		//			try
+		//			{
+		//				dr = drChild.GetParentRow("myRelation"); 
+		//			}
+		//			catch (RowNotInTableException  ex)
+		//			{
+		//				tmpEx = ex;
+		//			}
+		//			base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
+		//			tmpEx = new  Exception();
+		//		}
+		//		catch(Exception ex)	{exp = ex;}
+		//		finally	{EndCase(exp); exp = null;}
+		
+		try
+		{
+			BeginCase("RowNotInTableException - GetParentRows");
+			DataRow[] dr = null;
+			try
+			{
+				dr = drChild.GetParentRows("myRelation"); 
+			}
+			catch (RowNotInTableException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("RowNotInTableException - RejectChanges");
-            try
-            {
-                drParent.RejectChanges();
-            }
-            catch (RowNotInTableException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("RowNotInTableException - RejectChanges");
+			try
+			{
+				drParent.RejectChanges();
+			}
+			catch (RowNotInTableException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("RowNotInTableException - SetParentRow");
-            try
-            {
-                drChild.SetParentRow(ds.Tables[0].Rows[1]);
-            }
-            catch (RowNotInTableException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    }
+		try
+		{
+			BeginCase("RowNotInTableException - SetParentRow");
+			try
+			{
+				drChild.SetParentRow(ds.Tables[0].Rows[1]);
+			}
+			catch (RowNotInTableException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(RowNotInTableException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	}
 }
 }

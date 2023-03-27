@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <para>The segment size is calculated according to <see cref="Unsafe.SizeOf{T}"/>, performs the IL operation
         /// defined by <see cref="OpCodes.Sizeof"/>. ECMA-335 defines this operation with the following note:</para>
         ///
-        /// <para><c>sizeof</c> returns the total size that would be occupied by each element in an array of this type �
+        /// <para><c>sizeof</c> returns the total size that would be occupied by each element in an array of this type –
         /// including any padding the implementation chooses to add. Specifically, array elements lie <c>sizeof</c>
         /// bytes apart.</para>
         /// </remarks>

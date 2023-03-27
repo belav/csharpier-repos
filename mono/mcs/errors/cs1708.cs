@@ -13,7 +13,7 @@ class C
 {
     unsafe public S Get ()
     {
-    return new S ();
+	return new S ();
     }
 }
 
@@ -23,8 +23,8 @@ public class Tester
     
     unsafe void setName()
     {
-    C c = new C();
-    c.Get ().array [1] = 44;
+	C c = new C();
+	c.Get ().array [1] = 44;
     }
 }
 

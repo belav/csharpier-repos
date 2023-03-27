@@ -29,15 +29,15 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-    [TestFixture]
-    public class XamlObjectEventArgsTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNullArg ()
-        {
-            // allowed.
-            new XamlObjectEventArgs (null);
-        }
-    }
+	[TestFixture]
+	public class XamlObjectEventArgsTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void ConstructorNullArg ()
+		{
+			// allowed.
+			new XamlObjectEventArgs (null);
+		}
+	}
 }

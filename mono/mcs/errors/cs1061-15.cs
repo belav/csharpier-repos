@@ -3,9 +3,9 @@
 
 class C
 {
-    static void Main ()
-    {
-        int? i = 4;
-        var m = i?.GetValueOrDefault ();
-    }
+	static void Main ()
+	{
+		int? i = 4;
+		var m = i?.GetValueOrDefault ();
+	}
 }

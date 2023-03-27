@@ -2,7 +2,7 @@
 // FaultDescriptionCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,29 +33,29 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Description
 {
-    public class FaultDescriptionCollection
-        : Collection<FaultDescription>
-    {
-        internal FaultDescriptionCollection ()
-        {
-        }
+	public class FaultDescriptionCollection
+		: Collection<FaultDescription>
+	{
+		internal FaultDescriptionCollection ()
+		{
+		}
 
-        public FaultDescription Find (string action)
-        {
-            foreach (FaultDescription d in this)
-                if (d.Name == action)
-                    return d;
-            return null;
-        }
+		public FaultDescription Find (string action)
+		{
+			foreach (FaultDescription d in this)
+				if (d.Name == action)
+					return d;
+			return null;
+		}
 
-        public Collection<FaultDescription> FindAll (string action)
-        {
-            Collection<FaultDescription> ret =
-                new Collection<FaultDescription> ();
-            foreach (FaultDescription d in this)
-                if (d.Name == action)
-                    ret.Add (d);
-            return ret;
-        }
-    }
+		public Collection<FaultDescription> FindAll (string action)
+		{
+			Collection<FaultDescription> ret =
+				new Collection<FaultDescription> ();
+			foreach (FaultDescription d in this)
+				if (d.Name == action)
+					ret.Add (d);
+			return ret;
+		}
+	}
 }

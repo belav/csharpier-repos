@@ -5,12 +5,12 @@ using System;
 
 namespace N
 {
-    extern alias dontdefined;
+	extern alias dontdefined;
 }
 
 public class Tester
 {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

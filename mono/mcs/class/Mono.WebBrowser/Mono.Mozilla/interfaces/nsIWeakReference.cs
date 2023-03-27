@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,27 +32,27 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("9188bc85-f92e-11d2-81ef-0060083a0bcf")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIWeakReference {
+	[Guid ("9188bc85-f92e-11d2-81ef-0060083a0bcf")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIWeakReference {
 
 #region nsIWeakReference
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int QueryReferent (
-                [MarshalAs (UnmanagedType.LPStruct)]   Guid uuid,
-                  out IntPtr result);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int QueryReferent (
+				[MarshalAs (UnmanagedType.LPStruct)]   Guid uuid,
+				  out IntPtr result);
 
 #endregion
-    }
+	}
 
 
-    internal class nsWeakReference {
-        public static nsIWeakReference GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWeakReference obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIWeakReference).GUID, obj);
-            return o as nsIWeakReference;
-        }
-    }
+	internal class nsWeakReference {
+		public static nsIWeakReference GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWeakReference obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIWeakReference).GUID, obj);
+			return o as nsIWeakReference;
+		}
+	}
 }

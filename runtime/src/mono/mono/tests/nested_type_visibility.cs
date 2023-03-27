@@ -29,7 +29,7 @@ namespace ConsoleApplication1
         {
             new ChildClass();
 
-            return 0;
+			return 0;
         }
     }
 }

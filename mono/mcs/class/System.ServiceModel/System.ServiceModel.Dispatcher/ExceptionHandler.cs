@@ -30,41 +30,41 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System.ServiceModel.Dispatcher {
 
-    public abstract class ExceptionHandler
-    {
-        static ExceptionHandler async_handler;
-        static ExceptionHandler always_handler = new AlwaysHandler ();
-        static ExceptionHandler transport_handler = new AlwaysHandler ();
+	public abstract class ExceptionHandler
+	{
+		static ExceptionHandler async_handler;
+		static ExceptionHandler always_handler = new AlwaysHandler ();
+		static ExceptionHandler transport_handler = new AlwaysHandler ();
 
-        protected ExceptionHandler () {}
+		protected ExceptionHandler () {}
 
-        public static ExceptionHandler AlwaysHandle {
-            get { return always_handler; }
-        }
+		public static ExceptionHandler AlwaysHandle {
+			get { return always_handler; }
+		}
 
-        class AlwaysHandler : ExceptionHandler
-        {
-            public AlwaysHandler () {}
+		class AlwaysHandler : ExceptionHandler
+		{
+			public AlwaysHandler () {}
 
-            public override bool HandleException (Exception e)
-            {
-                return true;
-            }
-        }
+			public override bool HandleException (Exception e)
+			{
+				return true;
+			}
+		}
 
-        public static ExceptionHandler AsynchronousThreadExceptionHandler {
+		public static ExceptionHandler AsynchronousThreadExceptionHandler {
 
-            [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-            get { return async_handler; }
+			[ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
+			get { return async_handler; }
 
-            set { async_handler = value; }
-        }
+			set { async_handler = value; }
+		}
 
-        public static ExceptionHandler TransportExceptionHandler {
-            get { return transport_handler; }
-            set { transport_handler = value; }
-        }
+		public static ExceptionHandler TransportExceptionHandler {
+			get { return transport_handler; }
+			set { transport_handler = value; }
+		}
 
-        public abstract bool HandleException (Exception exception);
-    }
+		public abstract bool HandleException (Exception exception);
+	}
 }

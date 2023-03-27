@@ -20,11 +20,11 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 namespace System.Windows.Forms {
 
-    public delegate void DataGridViewRowCancelEventHandler (object sender, DataGridViewRowCancelEventArgs e);
+	public delegate void DataGridViewRowCancelEventHandler (object sender, DataGridViewRowCancelEventArgs e);
 
 }

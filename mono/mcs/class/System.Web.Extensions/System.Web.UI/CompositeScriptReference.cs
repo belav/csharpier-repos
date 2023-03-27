@@ -39,136 +39,136 @@ using System.Web.Hosting;
 
 namespace System.Web.UI
 {
-    [DefaultProperty ("Path")]
-    public class CompositeScriptReference : ScriptReferenceBase
-    {
-        public const string COMPOSITE_SCRIPT_REFERENCE_PREFIX = "CSR:";
+	[DefaultProperty ("Path")]
+	public class CompositeScriptReference : ScriptReferenceBase
+	{
+		public const string COMPOSITE_SCRIPT_REFERENCE_PREFIX = "CSR:";
 
-        static SplitOrderedList <string, List <CompositeEntry>> entriesCache;
-        
-        ScriptReferenceCollection scripts;
-        
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [Editor ("System.Web.UI.Design.CollectionEditorBase, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, "+ Consts.AssemblySystem_Design)]
-        [MergableProperty (false)]
-        [Category ("Behavior")]
-        [DefaultValue (null)]
-        [NotifyParentProperty (true)]    
-        public ScriptReferenceCollection Scripts {
-            get {
-                if (scripts == null)
-                    scripts = new ScriptReferenceCollection ();
-                return scripts;
-            }
-        }
+		static SplitOrderedList <string, List <CompositeEntry>> entriesCache;
+		
+		ScriptReferenceCollection scripts;
+		
+		[PersistenceMode (PersistenceMode.InnerProperty)]
+		[Editor ("System.Web.UI.Design.CollectionEditorBase, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, "+ Consts.AssemblySystem_Design)]
+		[MergableProperty (false)]
+		[Category ("Behavior")]
+		[DefaultValue (null)]
+		[NotifyParentProperty (true)]	
+		public ScriptReferenceCollection Scripts {
+			get {
+				if (scripts == null)
+					scripts = new ScriptReferenceCollection ();
+				return scripts;
+			}
+		}
 
-        static CompositeScriptReference ()
-        {
-            entriesCache = new SplitOrderedList <string, List <CompositeEntry>> (StringComparer.Ordinal);
-        }
+		static CompositeScriptReference ()
+		{
+			entriesCache = new SplitOrderedList <string, List <CompositeEntry>> (StringComparer.Ordinal);
+		}
 
-        internal static List <CompositeEntry> GetCompositeScriptEntries (string url)
-        {
-            if (String.IsNullOrEmpty (url) || entriesCache.Count == 0)
-                return null;
-            
-            List <CompositeEntry> ret;
-            if (!entriesCache.Find ((uint)url.GetHashCode (), url, out ret))
-                return null;
+		internal static List <CompositeEntry> GetCompositeScriptEntries (string url)
+		{
+			if (String.IsNullOrEmpty (url) || entriesCache.Count == 0)
+				return null;
+			
+			List <CompositeEntry> ret;
+			if (!entriesCache.Find ((uint)url.GetHashCode (), url, out ret))
+				return null;
 
-            return ret;
-        }
-        
-        protected internal override string GetUrl (ScriptManager scriptManager, bool zip)
-        {
-            if (scriptManager == null)
-                // .NET emulation...
-                throw new NullReferenceException (".NET emulation");
-            
-            var url = new StringBuilder (COMPOSITE_SCRIPT_REFERENCE_PREFIX);
-            string path;
-            string name;
-            CompositeEntry entry;
-            List <CompositeEntry> entries = null;
-            WebResourceAttribute wra;
-            
-            foreach (ScriptReference sr in Scripts) {
-                if (sr == null)
-                    continue;
+			return ret;
+		}
+		
+		protected internal override string GetUrl (ScriptManager scriptManager, bool zip)
+		{
+			if (scriptManager == null)
+				// .NET emulation...
+				throw new NullReferenceException (".NET emulation");
+			
+			var url = new StringBuilder (COMPOSITE_SCRIPT_REFERENCE_PREFIX);
+			string path;
+			string name;
+			CompositeEntry entry;
+			List <CompositeEntry> entries = null;
+			WebResourceAttribute wra;
+			
+			foreach (ScriptReference sr in Scripts) {
+				if (sr == null)
+					continue;
 
-                name = sr.Name;
-                if (!String.IsNullOrEmpty (name)) {
-                    Assembly assembly = sr.ResolvedAssembly;
-                    name = GetScriptName (name, sr.IsDebugMode (scriptManager), null, assembly, out wra);
-                    path = scriptManager.ScriptPath;
-                    if (sr.IgnoreScriptPath || String.IsNullOrEmpty (path)) {
-                        entry = new CompositeEntry {
-                            Assembly = assembly,
-                            NameOrPath = name,
-                            Attribute = wra
-                        };
-                    } else {
-                        AssemblyName an = assembly.GetName ();
-                        entry = new CompositeEntry {
-                            NameOrPath = String.Concat (VirtualPathUtility.AppendTrailingSlash (path), an.Name, '/', an.Version, '/', name),
-                            Attribute = wra
-                        };
-                    }
-                } else if (!String.IsNullOrEmpty ((path = sr.Path))) {
-                    bool notFound = false;
-                    name = GetScriptName (path, sr.IsDebugMode (scriptManager), scriptManager.EnableScriptLocalization ? ResourceUICultures : null, null, out wra);
-                    if (!HostingEnvironment.HaveCustomVPP)
-                        notFound = !File.Exists (HostingEnvironment.MapPath (name));
-                    else 
-                        notFound = !HostingEnvironment.VirtualPathProvider.FileExists (name);
+				name = sr.Name;
+				if (!String.IsNullOrEmpty (name)) {
+					Assembly assembly = sr.ResolvedAssembly;
+					name = GetScriptName (name, sr.IsDebugMode (scriptManager), null, assembly, out wra);
+					path = scriptManager.ScriptPath;
+					if (sr.IgnoreScriptPath || String.IsNullOrEmpty (path)) {
+						entry = new CompositeEntry {
+							Assembly = assembly,
+							NameOrPath = name,
+							Attribute = wra
+						};
+					} else {
+						AssemblyName an = assembly.GetName ();
+						entry = new CompositeEntry {
+							NameOrPath = String.Concat (VirtualPathUtility.AppendTrailingSlash (path), an.Name, '/', an.Version, '/', name),
+							Attribute = wra
+						};
+					}
+				} else if (!String.IsNullOrEmpty ((path = sr.Path))) {
+					bool notFound = false;
+					name = GetScriptName (path, sr.IsDebugMode (scriptManager), scriptManager.EnableScriptLocalization ? ResourceUICultures : null, null, out wra);
+					if (!HostingEnvironment.HaveCustomVPP)
+						notFound = !File.Exists (HostingEnvironment.MapPath (name));
+					else 
+						notFound = !HostingEnvironment.VirtualPathProvider.FileExists (name);
 
-                    if (notFound)
-                        throw new HttpException ("Web resource '" + name + "' was not found.");
-                    
-                    entry = new CompositeEntry {
-                        NameOrPath = name
-                    };
-                } else
-                    entry = null;
+					if (notFound)
+						throw new HttpException ("Web resource '" + name + "' was not found.");
+					
+					entry = new CompositeEntry {
+						NameOrPath = name
+					};
+				} else
+					entry = null;
 
-                if (entry != null) {
-                    if (entries == null)
-                        entries = new List <CompositeEntry> ();
-                    entries.Add (entry);
-                    url.Append (entry.GetHashCode ().ToString ("x"));
-                    entry = null;
-                }
-            }
-            
-            if (entries == null || entries.Count == 0)
-                return String.Empty;
+				if (entry != null) {
+					if (entries == null)
+						entries = new List <CompositeEntry> ();
+					entries.Add (entry);
+					url.Append (entry.GetHashCode ().ToString ("x"));
+					entry = null;
+				}
+			}
+			
+			if (entries == null || entries.Count == 0)
+				return String.Empty;
 
-            string ret = ScriptResourceHandler.GetResourceUrl (ThisAssembly, url.ToString (), NotifyScriptLoaded);
-            entriesCache.InsertOrUpdate ((uint)ret.GetHashCode (), ret, entries, entries);
-            return ret;
-        }
-        protected internal override bool IsAjaxFrameworkScript (ScriptManager scriptManager)
-        {
-            return false;
-        }
-        
-        [Obsolete ("Use IsAjaxFrameworkScript(ScriptManager)")]
-        protected internal override bool IsFromSystemWebExtensions ()
-        {
-            if (scripts == null || scripts.Count == 0)
-                return false;
+			string ret = ScriptResourceHandler.GetResourceUrl (ThisAssembly, url.ToString (), NotifyScriptLoaded);
+			entriesCache.InsertOrUpdate ((uint)ret.GetHashCode (), ret, entries, entries);
+			return ret;
+		}
+		protected internal override bool IsAjaxFrameworkScript (ScriptManager scriptManager)
+		{
+			return false;
+		}
+		
+		[Obsolete ("Use IsAjaxFrameworkScript(ScriptManager)")]
+		protected internal override bool IsFromSystemWebExtensions ()
+		{
+			if (scripts == null || scripts.Count == 0)
+				return false;
 
-            Assembly myAssembly = ThisAssembly;
-            foreach (ScriptReference sr in scripts)
-                if (sr.ResolvedAssembly == myAssembly)
-                    return true;
+			Assembly myAssembly = ThisAssembly;
+			foreach (ScriptReference sr in scripts)
+				if (sr.ResolvedAssembly == myAssembly)
+					return true;
 
-            return false;
-        }
+			return false;
+		}
 
-        internal bool HaveScripts ()
-        {
-            return (scripts != null && scripts.Count > 0);
-        }
-    }
+		internal bool HaveScripts ()
+		{
+			return (scripts != null && scripts.Count > 0);
+		}
+	}
 }

@@ -319,7 +319,7 @@ namespace System.Diagnostics {
         [
         ComVisible(false)
         ]
-        public virtual void TraceData(TraceEventCache eventCache, String source, TraceEventType eventType, int id, object data) {
+    	public virtual void TraceData(TraceEventCache eventCache, String source, TraceEventType eventType, int id, object data) {
             if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data)) 
                 return;
 
@@ -330,12 +330,12 @@ namespace System.Diagnostics {
 
             WriteLine(datastring);
             WriteFooter(eventCache);
-        }
+    	}
 
         [
         ComVisible(false)
         ]
-        public virtual void TraceData(TraceEventCache eventCache, String source, TraceEventType eventType, int id, params object[] data) {
+    	public virtual void TraceData(TraceEventCache eventCache, String source, TraceEventType eventType, int id, params object[] data) {
             if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, null, data)) 
                 return;
 
@@ -354,14 +354,14 @@ namespace System.Diagnostics {
             WriteLine(sb.ToString());
             
             WriteFooter(eventCache);
-        }
+    	}
 
         [
         ComVisible(false)
         ]
-        public virtual void TraceEvent(TraceEventCache eventCache, String source, TraceEventType eventType, int id) {
-            TraceEvent(eventCache, source, eventType, id, String.Empty);
-        }
+    	public virtual void TraceEvent(TraceEventCache eventCache, String source, TraceEventType eventType, int id) {
+    	    TraceEvent(eventCache, source, eventType, id, String.Empty);
+    	}
 
         // All other TraceEvent methods come through this one.
         [

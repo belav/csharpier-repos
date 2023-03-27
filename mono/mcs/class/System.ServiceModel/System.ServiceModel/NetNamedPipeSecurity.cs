@@ -2,7 +2,7 @@
 // NetNamedPipeBinding.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -37,14 +37,14 @@ using System.Xml;
 
 namespace System.ServiceModel
 {
-    public sealed class NetNamedPipeSecurity
-    {
-        internal NetNamedPipeSecurity ()
-        {
-            Transport = new NamedPipeTransportSecurity ();
-        }
+	public sealed class NetNamedPipeSecurity
+	{
+		internal NetNamedPipeSecurity ()
+		{
+			Transport = new NamedPipeTransportSecurity ();
+		}
 
-        public NetNamedPipeSecurityMode Mode { get; set; }
-        public NamedPipeTransportSecurity Transport { get; private set; }
-    }
+		public NetNamedPipeSecurityMode Mode { get; set; }
+		public NamedPipeTransportSecurity Transport { get; private set; }
+	}
 }

@@ -28,10 +28,10 @@
 
 namespace Mono.Cecil.Cil {
 
-    internal enum ExceptionHandlerType {
-        Catch = 0x0000,
-        Filter = 0x0001,
-        Finally = 0x0002,
-        Fault = 0x0004
-    }
+	internal enum ExceptionHandlerType {
+		Catch = 0x0000,
+		Filter = 0x0001,
+		Finally = 0x0002,
+		Fault = 0x0004
+	}
 }

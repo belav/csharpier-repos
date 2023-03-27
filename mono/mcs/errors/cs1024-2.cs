@@ -3,6 +3,6 @@
 
 class C
 {
-    #region
-    #end\x0072egion
+	#region
+	#end\x0072egion
 }

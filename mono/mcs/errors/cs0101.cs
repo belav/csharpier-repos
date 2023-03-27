@@ -3,22 +3,22 @@
 using System;
 
 public enum SomeEnum {
-    Something1,
-    Something2
+	Something1,
+	Something2
 }
 
 public enum SomeEnum {
-    Dog,
-    Fish,
-    Cat
+	Dog,
+	Fish,
+	Cat
 }
 
 public class DupeEnumTest {
-    public static void Main(string[] args) {
-        SomeEnum someEnum = SomeEnum.Dog;
-        Console.WriteLine("SomeEnum Result: " + someEnum.ToString
+	public static void Main(string[] args) {
+		SomeEnum someEnum = SomeEnum.Dog;
+		Console.WriteLine("SomeEnum Result: " + someEnum.ToString
 ());
-    }
+	}
 }
 
 

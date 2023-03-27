@@ -1,9 +1,9 @@
 //
 // DataGridColumnCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.DataGridColumn
+//	- CAS unit tests for System.Web.UI.WebControls.DataGridColumn
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,31 +41,31 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class DataGridColumnCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class DataGridColumnCas {
 
-        // note: we do not inherit from AspNetHostingMinimal because
-        // DataGridColumn is an abstract class
+		// note: we do not inherit from AspNetHostingMinimal because
+		// DataGridColumn is an abstract class
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            DataGridColumnTest unit = new DataGridColumnTest ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.CleanProperties ();
-            unit.TestToString ();
-            unit.TestInitialize ();
-            unit.TestInitializeCell ();
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			DataGridColumnTest unit = new DataGridColumnTest ();
+			unit.DefaultProperties ();
+			unit.NullProperties ();
+			unit.CleanProperties ();
+			unit.TestToString ();
+			unit.TestInitialize ();
+			unit.TestInitializeCell ();
+		}
+	}
 }

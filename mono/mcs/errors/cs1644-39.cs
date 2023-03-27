@@ -4,5 +4,5 @@
 
 class C
 {
-    int M () => 0;
+	int M () => 0;
 }

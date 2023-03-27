@@ -2,7 +2,7 @@
 // System.Web.Compilation.ClientBuildManagerParameter
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -34,32 +34,32 @@ using System.Web;
 
 namespace System.Web.Compilation {
 
-    [Serializable]
-    public class ClientBuildManagerParameter
-    {
-        public ClientBuildManagerParameter ()
-        {
-        }
+	[Serializable]
+	public class ClientBuildManagerParameter
+	{
+		public ClientBuildManagerParameter ()
+		{
+		}
 
-        public PrecompilationFlags PrecompilationFlags {
-            get { return precompilationFlags; }
-            set { precompilationFlags = value; }
-        }
+		public PrecompilationFlags PrecompilationFlags {
+			get { return precompilationFlags; }
+			set { precompilationFlags = value; }
+		}
 
-        public string StrongNameKeyContainer {
-            get { return strongNameKeyContainer; }
-            set { strongNameKeyContainer = value; }
-        }
+		public string StrongNameKeyContainer {
+			get { return strongNameKeyContainer; }
+			set { strongNameKeyContainer = value; }
+		}
 
-        public string StrongNameKeyFile {
-            get { return strongNameKeyFile; }
-            set { strongNameKeyFile = value; }
-        }
+		public string StrongNameKeyFile {
+			get { return strongNameKeyFile; }
+			set { strongNameKeyFile = value; }
+		}
 
-        PrecompilationFlags precompilationFlags;
-        string strongNameKeyContainer;
-        string strongNameKeyFile;
-    }
+		PrecompilationFlags precompilationFlags;
+		string strongNameKeyContainer;
+		string strongNameKeyFile;
+	}
 }
 
 

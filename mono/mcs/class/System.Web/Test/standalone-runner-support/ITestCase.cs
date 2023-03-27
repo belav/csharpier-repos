@@ -30,11 +30,11 @@ using System.Collections.Generic;
 
 namespace StandAloneRunnerSupport
 {
-    public interface ITestCase
-    {
-        string PhysicalPath { get; }
-        string VirtualPath  { get; }
+	public interface ITestCase
+	{
+		string PhysicalPath { get; }
+		string VirtualPath  { get; }
 
-        bool SetUp (List <TestRunItem> runItems);
-    }
+		bool SetUp (List <TestRunItem> runItems);
+	}
 }

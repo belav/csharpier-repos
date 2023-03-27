@@ -20,13 +20,13 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 
 
 namespace System.Windows.Forms {
 
-    public delegate void StatusBarPanelClickEventHandler (object sender,
-            StatusBarPanelClickEventArgs e);
+	public delegate void StatusBarPanelClickEventHandler (object sender,
+			StatusBarPanelClickEventArgs e);
 
 }
 

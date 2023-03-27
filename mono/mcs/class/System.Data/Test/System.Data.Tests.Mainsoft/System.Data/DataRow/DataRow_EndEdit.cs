@@ -39,67 +39,67 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRow_EndEdit : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRow_EndEdit tc = new DataRow_EndEdit();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRow_EndEdit");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    
-    }
+	[Test] public void Main()
+	{
+		DataRow_EndEdit tc = new DataRow_EndEdit();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRow_EndEdit");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
+	public void run()
+	{
+		Exception exp = null;
+		
+		DataTable myTable = new DataTable("myTable"); 
+		DataColumn dc = new DataColumn("Id",typeof(int));
+		dc.Unique=true;
+		myTable.Columns.Add(dc);
+		myTable.Rows.Add(new object[] {1});
+		myTable.Rows.Add(new object[] {2});
+		myTable.Rows.Add(new object[] {3});
+					
+		DataRow myRow = myTable.Rows[0];
+		
+		int iProposed;
+		//After calling the DataRow object's BeginEdit method, if you change the value, the Current and Proposed values become available
+		myRow.BeginEdit();
+		myRow[0] = 7;
+		iProposed = (int)myRow[0,DataRowVersion.Proposed];
+		myRow.EndEdit();
+		
         
-        DataTable myTable = new DataTable("myTable"); 
-        DataColumn dc = new DataColumn("Id",typeof(int));
-        dc.Unique=true;
-        myTable.Columns.Add(dc);
-        myTable.Rows.Add(new object[] {1});
-        myTable.Rows.Add(new object[] {2});
-        myTable.Rows.Add(new object[] {3});
-                    
-        DataRow myRow = myTable.Rows[0];
-        
-        int iProposed;
-        //After calling the DataRow object's BeginEdit method, if you change the value, the Current and Proposed values become available
-        myRow.BeginEdit();
-        myRow[0] = 7;
-        iProposed = (int)myRow[0,DataRowVersion.Proposed];
-        myRow.EndEdit();
-        
-        
-        try
-        {
-            BeginCase("EndEdit");
-            Compare( (int)myRow[0,DataRowVersion.Current] , iProposed );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    }
+		try
+		{
+			BeginCase("EndEdit");
+			Compare( (int)myRow[0,DataRowVersion.Current] , iProposed );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	}
 }
 }

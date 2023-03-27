@@ -28,6 +28,6 @@
 
 namespace Mono.Cecil.Metadata {
 
-    internal interface IMetadataRow : IMetadataRowVisitable {
-    }
+	internal interface IMetadataRow : IMetadataRowVisitable {
+	}
 }

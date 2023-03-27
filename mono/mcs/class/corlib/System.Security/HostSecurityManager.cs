@@ -2,7 +2,7 @@
 // System.Security.HostSecurityManager class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,71 +33,71 @@ using System.Security.Policy;
 
 namespace System.Security {
 
-    [Serializable]
-    [ComVisible (true)]
-    public class HostSecurityManager {
+	[Serializable]
+	[ComVisible (true)]
+	public class HostSecurityManager {
 
-        public HostSecurityManager ()
-        {
-        }
+		public HostSecurityManager ()
+		{
+		}
 
-        public virtual PolicyLevel DomainPolicy {
-            // always return null - may be overriden
-            get { return null; }
-        }
+		public virtual PolicyLevel DomainPolicy {
+			// always return null - may be overriden
+			get { return null; }
+		}
 
-        public virtual HostSecurityManagerOptions Flags {
-            get { return HostSecurityManagerOptions.AllFlags; }
-        }
+		public virtual HostSecurityManagerOptions Flags {
+			get { return HostSecurityManagerOptions.AllFlags; }
+		}
 
-        public virtual ApplicationTrust DetermineApplicationTrust (Evidence applicationEvidence, Evidence activatorEvidence, TrustManagerContext context)
-        {
-            if (applicationEvidence == null)
-                throw new ArgumentNullException ("applicationEvidence");
+		public virtual ApplicationTrust DetermineApplicationTrust (Evidence applicationEvidence, Evidence activatorEvidence, TrustManagerContext context)
+		{
+			if (applicationEvidence == null)
+				throw new ArgumentNullException ("applicationEvidence");
 
-            ActivationArguments aa = null;
-            foreach (object o in applicationEvidence) {
-                aa = (o as ActivationArguments);
-                if (aa != null)
-                    break;
-            }
+			ActivationArguments aa = null;
+			foreach (object o in applicationEvidence) {
+				aa = (o as ActivationArguments);
+				if (aa != null)
+					break;
+			}
 
-            if (aa == null) {
-                string msg = Locale.GetText ("No {0} found in {1}.");
-                throw new ArgumentException (string.Format (msg, "ActivationArguments", "Evidence"), "applicationEvidence");
-            }
-            if (aa.ActivationContext == null) {
-                string msg = Locale.GetText ("No {0} found in {1}.");
-                throw new ArgumentException (string.Format (msg, "ActivationContext", "ActivationArguments"), "applicationEvidence");
-            }
+			if (aa == null) {
+				string msg = Locale.GetText ("No {0} found in {1}.");
+				throw new ArgumentException (string.Format (msg, "ActivationArguments", "Evidence"), "applicationEvidence");
+			}
+			if (aa.ActivationContext == null) {
+				string msg = Locale.GetText ("No {0} found in {1}.");
+				throw new ArgumentException (string.Format (msg, "ActivationContext", "ActivationArguments"), "applicationEvidence");
+			}
 
-            // FIXME: this part is still untested (requires manifest support)
-            if (ApplicationSecurityManager.DetermineApplicationTrust (aa.ActivationContext, context)) {
-                if (aa.ApplicationIdentity == null)
-                    return new ApplicationTrust ();
-                else
-                    return new ApplicationTrust (aa.ApplicationIdentity);
-            }
-            return null;
-        }
+			// FIXME: this part is still untested (requires manifest support)
+			if (ApplicationSecurityManager.DetermineApplicationTrust (aa.ActivationContext, context)) {
+				if (aa.ApplicationIdentity == null)
+					return new ApplicationTrust ();
+				else
+					return new ApplicationTrust (aa.ApplicationIdentity);
+			}
+			return null;
+		}
 
-        public virtual Evidence ProvideAppDomainEvidence (Evidence inputEvidence)
-        {
-            // no changes - may be overriden
-            return inputEvidence;
-        }
+		public virtual Evidence ProvideAppDomainEvidence (Evidence inputEvidence)
+		{
+			// no changes - may be overriden
+			return inputEvidence;
+		}
 
-        public virtual Evidence ProvideAssemblyEvidence (Assembly loadedAssembly, Evidence inputEvidence)
-        {
-            // no changes - may be overriden
-            return inputEvidence;
-        }
+		public virtual Evidence ProvideAssemblyEvidence (Assembly loadedAssembly, Evidence inputEvidence)
+		{
+			// no changes - may be overriden
+			return inputEvidence;
+		}
 
-        public virtual PermissionSet ResolvePolicy (Evidence evidence)
-        {
-            if (evidence == null)
-                throw new NullReferenceException ("evidence");
-            return SecurityManager.ResolvePolicy (evidence);
-        }
-    }
+		public virtual PermissionSet ResolvePolicy (Evidence evidence)
+		{
+			if (evidence == null)
+				throw new NullReferenceException ("evidence");
+			return SecurityManager.ResolvePolicy (evidence);
+		}
+	}
 }

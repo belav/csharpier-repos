@@ -32,7 +32,7 @@
 
 namespace System
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
-    [Serializable]
-    public delegate Reflection.Assembly ResolveEventHandler (object sender, ResolveEventArgs args);
+	[System.Runtime.InteropServices.ComVisible (true)]
+	[Serializable]
+	public delegate Reflection.Assembly ResolveEventHandler (object sender, ResolveEventArgs args);
 }

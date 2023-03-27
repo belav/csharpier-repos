@@ -32,57 +32,57 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-    [TestFixture]
-    public class OleDbDataReader_GetOrdinal : ADONetTesterClass
-    {
-        public static void Main()
-        {
-            OleDbDataReader_GetOrdinal tc = new OleDbDataReader_GetOrdinal();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OleDbDataReader_GetOrdinal");
-                tc.run();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+	[TestFixture]
+	public class OleDbDataReader_GetOrdinal : ADONetTesterClass
+	{
+		public static void Main()
+		{
+			OleDbDataReader_GetOrdinal tc = new OleDbDataReader_GetOrdinal();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OleDbDataReader_GetOrdinal");
+				tc.run();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            Exception exp = null;
+		[Test]
+		public void run()
+		{
+			Exception exp = null;
 
-            OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-            con.Open();
-            OleDbCommand cmd = new OleDbCommand("Select * From Customers", con);
-            OleDbDataReader rdr = cmd.ExecuteReader();
-        
+			OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+			con.Open();
+			OleDbCommand cmd = new OleDbCommand("Select * From Customers", con);
+			OleDbDataReader rdr = cmd.ExecuteReader();
+		
 
-            try
-            {
-                BeginCase("column REGION ordinal");
-                Compare(rdr.GetOrdinal("REGION"),6 );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("column REGION ordinal");
+				Compare(rdr.GetOrdinal("REGION"),6 );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("column not exists");
-                try
-                {
-                    int i = rdr.GetOrdinal("blabla");
-                }
-                catch (Exception ex) {exp=ex;}
-                Compare(exp.GetType().FullName,typeof(IndexOutOfRangeException).FullName);
-                exp=null;
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("column not exists");
+				try
+				{
+					int i = rdr.GetOrdinal("blabla");
+				}
+				catch (Exception ex) {exp=ex;}
+				Compare(exp.GetType().FullName,typeof(IndexOutOfRangeException).FullName);
+				exp=null;
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            if (con.State == ConnectionState.Open) con.Close();
+			if (con.State == ConnectionState.Open) con.Close();
 
-        }
-    }
+		}
+	}
 }

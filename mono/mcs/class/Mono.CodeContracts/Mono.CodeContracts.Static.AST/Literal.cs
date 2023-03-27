@@ -2,7 +2,7 @@
 // Literal.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,29 +27,29 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    sealed class Literal : Expression {
-        public static readonly Literal Null = new Literal (null);
-        public readonly object Value;
+	sealed class Literal : Expression {
+		public static readonly Literal Null = new Literal (null);
+		public readonly object Value;
 
-        public Literal () : base (NodeType.Literal)
-        {
-        }
+		public Literal () : base (NodeType.Literal)
+		{
+		}
 
-        public Literal (object value)
-            : base (NodeType.Literal)
-        {
-            this.Value = value;
-        }
+		public Literal (object value)
+			: base (NodeType.Literal)
+		{
+			this.Value = value;
+		}
 
-        public Literal (object value, TypeNode type) : base (NodeType.Literal)
-        {
-            this.Value = value;
-            this.type = type;
-        }
+		public Literal (object value, TypeNode type) : base (NodeType.Literal)
+		{
+			this.Value = value;
+			this.type = type;
+		}
 
-        public override string ToString ()
-        {
-            return string.Format ("Literal({0})", this.Value ?? "<null>");
-        }
-    }
+		public override string ToString ()
+		{
+			return string.Format ("Literal({0})", this.Value ?? "<null>");
+		}
+	}
 }

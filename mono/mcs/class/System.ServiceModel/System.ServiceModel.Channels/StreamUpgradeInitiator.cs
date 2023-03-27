@@ -31,19 +31,19 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    public abstract class StreamUpgradeInitiator
-    {
-        protected StreamUpgradeInitiator ()
-        {
-        }
+	public abstract class StreamUpgradeInitiator
+	{
+		protected StreamUpgradeInitiator ()
+		{
+		}
 
-        public abstract Stream InitiateUpgrade (Stream stream);
+		public abstract Stream InitiateUpgrade (Stream stream);
 
-        public abstract IAsyncResult BeginInitiateUpgrade (Stream stream,
-            AsyncCallback callback, object state);
+		public abstract IAsyncResult BeginInitiateUpgrade (Stream stream,
+			AsyncCallback callback, object state);
 
-        public abstract string GetNextUpgrade ();
+		public abstract string GetNextUpgrade ();
 
-        public abstract Stream EndInitiateUpgrade (IAsyncResult result);
-    }
+		public abstract Stream EndInitiateUpgrade (IAsyncResult result);
+	}
 }

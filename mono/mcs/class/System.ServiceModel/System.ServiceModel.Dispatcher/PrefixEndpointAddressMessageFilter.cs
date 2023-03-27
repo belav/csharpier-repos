@@ -2,7 +2,7 @@
 // PrefixEndpointAddressMessageFilter.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 // Copyright 2011 Xamarin Inc (http://www.xamarin.com).
@@ -33,60 +33,60 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Dispatcher
 {
-    public class PrefixEndpointAddressMessageFilter : MessageFilter
-    {
-        EndpointAddress address;
-        bool cmp_host;
+	public class PrefixEndpointAddressMessageFilter : MessageFilter
+	{
+		EndpointAddress address;
+		bool cmp_host;
 
-        public PrefixEndpointAddressMessageFilter (EndpointAddress address)
-            : this (address, false)
-        {
-        }
+		public PrefixEndpointAddressMessageFilter (EndpointAddress address)
+			: this (address, false)
+		{
+		}
 
-        public PrefixEndpointAddressMessageFilter (EndpointAddress address,
-            bool includeHostNameInComparison)
-        {
-            this.address = address;
-            cmp_host = includeHostNameInComparison;
-        }
+		public PrefixEndpointAddressMessageFilter (EndpointAddress address,
+			bool includeHostNameInComparison)
+		{
+			this.address = address;
+			cmp_host = includeHostNameInComparison;
+		}
 
-        public EndpointAddress Address {
-            get { return address; }
-        }
+		public EndpointAddress Address {
+			get { return address; }
+		}
 
-        public bool IncludeHostNameInComparison {
-            get { return cmp_host; }
-        }
+		public bool IncludeHostNameInComparison {
+			get { return cmp_host; }
+		}
 
-        [MonoTODO]
-        protected internal override IMessageFilterTable<FilterData>
-            CreateFilterTable<FilterData> ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected internal override IMessageFilterTable<FilterData>
+			CreateFilterTable<FilterData> ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override bool Match (Message message)
-        {
-            Uri to = message.Headers.To;
-            if (to == null)
-                return false;
-            if (to.ToString () == Constants.WsaAnonymousUri || to.Equals (EndpointAddress.AnonymousUri) || to.Equals (EndpointAddress.NoneUri))
-                return true;
+		[MonoTODO]
+		public override bool Match (Message message)
+		{
+			Uri to = message.Headers.To;
+			if (to == null)
+				return false;
+			if (to.ToString () == Constants.WsaAnonymousUri || to.Equals (EndpointAddress.AnonymousUri) || to.Equals (EndpointAddress.NoneUri))
+				return true;
 
-            bool path = CultureInfo.InvariantCulture.CompareInfo.IsPrefix (to.AbsolutePath, address.Uri.AbsolutePath, CompareOptions.Ordinal);
-            bool host = IncludeHostNameInComparison
-                    ? (String.CompareOrdinal (to.Host, address.Uri.Host) == 0)
-                    : true;
+			bool path = CultureInfo.InvariantCulture.CompareInfo.IsPrefix (to.AbsolutePath, address.Uri.AbsolutePath, CompareOptions.Ordinal);
+			bool host = IncludeHostNameInComparison
+					? (String.CompareOrdinal (to.Host, address.Uri.Host) == 0)
+					: true;
 
-            return path && host;
-        }
+			return path && host;
+		}
 
-        public override bool Match (MessageBuffer messageBuffer)
-        {
-            if (messageBuffer == null)
-                throw new ArgumentNullException ("messageBuffer");
-            return Match (messageBuffer.CreateMessage ());
-        }
-    }
+		public override bool Match (MessageBuffer messageBuffer)
+		{
+			if (messageBuffer == null)
+				throw new ArgumentNullException ("messageBuffer");
+			return Match (messageBuffer.CreateMessage ());
+		}
+	}
 }

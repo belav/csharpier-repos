@@ -10,7 +10,7 @@ public interface IBar : IFoo {
 }
 
 class ErrorCS0061 {
-    public static void Main () {
-    }
+	public static void Main () {
+	}
 }
 

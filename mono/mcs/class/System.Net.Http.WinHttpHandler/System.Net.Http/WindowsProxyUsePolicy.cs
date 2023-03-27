@@ -30,11 +30,11 @@
 
 namespace System.Net.Http
 {
-    public enum WindowsProxyUsePolicy
-    {
-        DoNotUseProxy = 0,
-        UseCustomProxy = 3,
-        UseWinHttpProxy = 1,
-        UseWinInetProxy = 2,
-    }
+	public enum WindowsProxyUsePolicy
+	{
+		DoNotUseProxy = 0,
+		UseCustomProxy = 3,
+		UseWinHttpProxy = 1,
+		UseWinInetProxy = 2,
+	}
 }

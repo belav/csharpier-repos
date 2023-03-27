@@ -28,10 +28,10 @@ using System;
 
 namespace System.ServiceModel.Dispatcher
 {
-    public interface IParameterInspector
-    {
-        void AfterCall (string operationName, object [] outputs,
-            object returnValue, object correlationState);
-        object BeforeCall (string operationName, object [] inputs);
-    }
+	public interface IParameterInspector
+	{
+		void AfterCall (string operationName, object [] outputs,
+			object returnValue, object correlationState);
+		object BeforeCall (string operationName, object [] inputs);
+	}
 }

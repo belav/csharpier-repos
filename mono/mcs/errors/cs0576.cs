@@ -9,8 +9,8 @@ public class S
 
 public class Test
 {
-    public static void Main()
-    {
-        S s;
-    }
+	public static void Main()
+	{
+		S s;
+	}
 }

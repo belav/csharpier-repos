@@ -389,31 +389,31 @@ namespace System.Xml.Schema {
                 // extract its primitive value to calculate hashcode
                 // decimal is handled differently to enable among different CLR types
                 this.ks[i].SetDecimal();
-                    if (this.ks[i].IsDecimal) {
-                        for (int j = 0 ; j < this.ks[i].Dim ; j ++) {
-                            hashcode += this.ks[i].Dvalue[j].GetHashCode();
-                        }
-                    }
-                    // 
-                    else {
-                        Array arr = this.ks[i].Value as System.Array;
-                        if (arr != null) {
-                            XmlAtomicValue[] atomicValues = arr as XmlAtomicValue[];
-                            if (atomicValues != null) {
-                                for (int j = 0 ; j < atomicValues.Length ; j ++) {
-                                    hashcode += ((XmlAtomicValue)atomicValues.GetValue(j)).TypedValue.GetHashCode();
-                                }
-                            }
-                            else {
-                                for (int j = 0 ; j < ((Array) this.ks[i].Value).Length ; j ++) {
-                                    hashcode += ((Array) this.ks[i].Value).GetValue(j).GetHashCode();
-                                }
-                            }
-                        }
-                        else { //not a list
-                            hashcode += this.ks[i].Value.GetHashCode();
-                        }
-                    }
+					if (this.ks[i].IsDecimal) {
+						for (int j = 0 ; j < this.ks[i].Dim ; j ++) {
+							hashcode += this.ks[i].Dvalue[j].GetHashCode();
+						}
+					}
+					// 
+					else {
+						Array arr = this.ks[i].Value as System.Array;
+						if (arr != null) {
+							XmlAtomicValue[] atomicValues = arr as XmlAtomicValue[];
+							if (atomicValues != null) {
+								for (int j = 0 ; j < atomicValues.Length ; j ++) {
+									hashcode += ((XmlAtomicValue)atomicValues.GetValue(j)).TypedValue.GetHashCode();
+								}
+							}
+							else {
+								for (int j = 0 ; j < ((Array) this.ks[i].Value).Length ; j ++) {
+									hashcode += ((Array) this.ks[i].Value).GetValue(j).GetHashCode();
+								}
+							}
+						}
+						else { //not a list
+							hashcode += this.ks[i].Value.GetHashCode();
+						}
+					}
             }
             return hashcode;
         }
@@ -428,7 +428,7 @@ namespace System.Xml.Schema {
                 }
             }
             return true;
-        }
+		}
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
@@ -438,7 +438,7 @@ namespace System.Xml.Schema {
                 sb.Append(this.ks[i].ToString());
             }
             return sb.ToString();
-        }
+		}
     }
 
 }

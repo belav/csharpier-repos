@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -639,8 +639,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BinaryOperatorKind.Subtraction:
                     // Subtraction either returns underlying type or only accept a single enum type, so operations on non-equal identity-convertible types are not ambiguous. 
-                    //   U operator –(E x, E y)
-                    //   E operator –(E x, U y)
+                    //   U operator â€“(E x, E y)
+                    //   E operator â€“(E x, U y)
                     useIdentityConversion = true;
                     break;
 
@@ -690,7 +690,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // The only arithmetic operator that is applicable on two distinct pointer types is
-            //   long operator –(T* x, T* y)
+            //   long operator â€“(T* x, T* y)
             // This operator returns long and so it's not ambiguous to apply it on T1 and T2 that are identity convertible to each other.
             if ((object)rightType != null && ((object)leftType == null || !Conversions.HasIdentityConversion(rightType, leftType)))
             {

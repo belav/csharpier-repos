@@ -3,7 +3,7 @@
 // for System.Configuration.ConfigurationElement.
 //
 // Author:
-//    Konstantin Triger <kostat@mainsoft.com>
+//	Konstantin Triger <kostat@mainsoft.com>
 //
 // Copyright (C) 2006 Mainsoft, Inc (http://www.mainsoft.com)
 //
@@ -33,33 +33,33 @@ using System.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
-    [TestFixture]
-    public class ConfigurationPropertyTest
-    {
-        [Test]
-        [ExpectedException(typeof(ConfigurationErrorsException))]
-        public void CostructorTest () {
-            ConfigurationProperty poker = new ConfigurationProperty("Name", typeof(char), 5);
-        }
-        
-        [Test]
-        public void CostructorTest1 () {
-            ConfigurationProperty poker = new ConfigurationProperty("Name", typeof(String));
-            Assert.IsNotNull (poker.Validator, "A1");
-            Assert.IsNotNull (poker.Converter, "A2");
-        }
+	[TestFixture]
+	public class ConfigurationPropertyTest
+	{
+		[Test]
+		[ExpectedException(typeof(ConfigurationErrorsException))]
+		public void CostructorTest () {
+			ConfigurationProperty poker = new ConfigurationProperty("Name", typeof(char), 5);
+		}
+		
+		[Test]
+		public void CostructorTest1 () {
+			ConfigurationProperty poker = new ConfigurationProperty("Name", typeof(String));
+			Assert.IsNotNull (poker.Validator, "A1");
+			Assert.IsNotNull (poker.Converter, "A2");
+		}
 
-        [Test]
-        public void DefaultValueTest () {
-            ConfigurationProperty poker = new ConfigurationProperty("Name", typeof(char));
-            Assert.AreEqual (typeof (char), poker.DefaultValue.GetType(), "A1");
-            
-            ConfigurationProperty poker1 = new ConfigurationProperty("Name", typeof(ConfigurationProperty));
-            Assert.AreEqual (null, poker1.DefaultValue, "A2");
-            
-            ConfigurationProperty poker2 = new ConfigurationProperty("Name", typeof(String));
-            Assert.AreEqual (String.Empty, poker2.DefaultValue, "A1");
-        }
-    }
+		[Test]
+		public void DefaultValueTest () {
+			ConfigurationProperty poker = new ConfigurationProperty("Name", typeof(char));
+			Assert.AreEqual (typeof (char), poker.DefaultValue.GetType(), "A1");
+			
+			ConfigurationProperty poker1 = new ConfigurationProperty("Name", typeof(ConfigurationProperty));
+			Assert.AreEqual (null, poker1.DefaultValue, "A2");
+			
+			ConfigurationProperty poker2 = new ConfigurationProperty("Name", typeof(String));
+			Assert.AreEqual (String.Empty, poker2.DefaultValue, "A1");
+		}
+	}
 }
 

@@ -300,7 +300,7 @@ namespace System.Numerics {
         }
         public static Complex Asin(Complex value) /* Arcsin */
         {
-        if ((value.m_imaginary == 0 && value.m_real < 0) || value.m_imaginary > 0)
+	    if ((value.m_imaginary == 0 && value.m_real < 0) || value.m_imaginary > 0)
             {
                 return -Asin(-value);
             }

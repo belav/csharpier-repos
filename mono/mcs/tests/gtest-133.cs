@@ -9,7 +9,7 @@ struct S {
   private int x;
   public int X {
     get { return x; }
-    set { this.x = value; }    // Cannot be used on non-variable ns.Value
+    set { this.x = value; }	// Cannot be used on non-variable ns.Value
   }
   public void Set(int x) {
     this.x = x;

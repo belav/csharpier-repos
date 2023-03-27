@@ -2,7 +2,7 @@
 // MsmqIntegrationElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006,2010 Novell, Inc.  http://www.novell.com
 //
@@ -54,63 +54,63 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class MsmqIntegrationElement
-         : MsmqElementBase
-    {
-        ConfigurationPropertyCollection _properties;
+	public sealed class MsmqIntegrationElement
+		 : MsmqElementBase
+	{
+		ConfigurationPropertyCollection _properties;
 
-        public MsmqIntegrationElement () {
-        }
+		public MsmqIntegrationElement () {
+		}
 
-        // Properties
+		// Properties
 
-        public override Type BindingElementType {
-            get { return typeof (System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement); }
-        }
+		public override Type BindingElementType {
+			get { return typeof (System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement); }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = base.Properties;
-                    _properties.Add (new ConfigurationProperty ("serializationFormat", typeof (MsmqMessageSerializationFormat), "Xml", null, null, ConfigurationPropertyOptions.None));
-                }
-                return _properties;
-            }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get {
+				if (_properties == null) {
+					_properties = base.Properties;
+					_properties.Add (new ConfigurationProperty ("serializationFormat", typeof (MsmqMessageSerializationFormat), "Xml", null, null, ConfigurationPropertyOptions.None));
+				}
+				return _properties;
+			}
+		}
 
-        [ConfigurationProperty ("serializationFormat",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Xml")]
-        public MsmqMessageSerializationFormat SerializationFormat {
-            get { return (MsmqMessageSerializationFormat) base ["serializationFormat"]; }
-            set { base ["serializationFormat"] = value; }
-        }
+		[ConfigurationProperty ("serializationFormat",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "Xml")]
+		public MsmqMessageSerializationFormat SerializationFormat {
+			get { return (MsmqMessageSerializationFormat) base ["serializationFormat"]; }
+			set { base ["serializationFormat"] = value; }
+		}
 
-        public override void ApplyConfiguration (BindingElement bindingElement)
-        {
-            var b = (System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement) bindingElement;
-            base.ApplyConfiguration (b);
-            b.SerializationFormat = SerializationFormat;
-        }
+		public override void ApplyConfiguration (BindingElement bindingElement)
+		{
+			var b = (System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement) bindingElement;
+			base.ApplyConfiguration (b);
+			b.SerializationFormat = SerializationFormat;
+		}
 
-        public override void CopyFrom (ServiceModelExtensionElement from)
-        {
-            var e = (MsmqIntegrationElement) from;
-            base.CopyFrom (from);
-            SerializationFormat = e.SerializationFormat;
-        }
+		public override void CopyFrom (ServiceModelExtensionElement from)
+		{
+			var e = (MsmqIntegrationElement) from;
+			base.CopyFrom (from);
+			SerializationFormat = e.SerializationFormat;
+		}
 
-        protected override TransportBindingElement CreateDefaultBindingElement ()
-        {
-            return new System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement ();
-        }
+		protected override TransportBindingElement CreateDefaultBindingElement ()
+		{
+			return new System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement ();
+		}
 
-        protected internal override void InitializeFrom (BindingElement bindingElement)
-        {
-            var b = (System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement) bindingElement;
-            base.InitializeFrom (b);
-            SerializationFormat = b.SerializationFormat;
-        }
-    }
+		protected internal override void InitializeFrom (BindingElement bindingElement)
+		{
+			var b = (System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement) bindingElement;
+			base.InitializeFrom (b);
+			SerializationFormat = b.SerializationFormat;
+		}
+	}
 
 }

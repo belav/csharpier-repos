@@ -28,53 +28,53 @@ using System.Windows.Markup;
 
 namespace System.Xaml
 {
-    public class XamlNodeQueue
-    {
-        Queue<XamlNodeLineInfo> queue = new Queue<XamlNodeLineInfo> ();
-        XamlSchemaContext ctx;
-        XamlReader reader;
-        XamlWriter writer;
+	public class XamlNodeQueue
+	{
+		Queue<XamlNodeLineInfo> queue = new Queue<XamlNodeLineInfo> ();
+		XamlSchemaContext ctx;
+		XamlReader reader;
+		XamlWriter writer;
 
-        public XamlNodeQueue (XamlSchemaContext schemaContext)
-        {
-            if (schemaContext == null)
-                throw new ArgumentNullException ("schemaContext");
-            this.ctx = schemaContext;
-            reader = new XamlNodeQueueReader (this);
-            writer = new XamlNodeQueueWriter (this);
-        }
-        
-        internal IXamlLineInfo LineInfoProvider { get; set; }
+		public XamlNodeQueue (XamlSchemaContext schemaContext)
+		{
+			if (schemaContext == null)
+				throw new ArgumentNullException ("schemaContext");
+			this.ctx = schemaContext;
+			reader = new XamlNodeQueueReader (this);
+			writer = new XamlNodeQueueWriter (this);
+		}
+		
+		internal IXamlLineInfo LineInfoProvider { get; set; }
 
-        internal XamlSchemaContext SchemaContext {
-            get { return ctx; }
-        }
+		internal XamlSchemaContext SchemaContext {
+			get { return ctx; }
+		}
 
-        public int Count {
-            get { return queue.Count; }
-        }
+		public int Count {
+			get { return queue.Count; }
+		}
 
-        public bool IsEmpty {
-            get { return queue.Count == 0; }
-        }
+		public bool IsEmpty {
+			get { return queue.Count == 0; }
+		}
 
-        public XamlReader Reader {
-            get { return reader; }
-        }
+		public XamlReader Reader {
+			get { return reader; }
+		}
 
-        public XamlWriter Writer {
-            get { return writer; }
-        }
+		public XamlWriter Writer {
+			get { return writer; }
+		}
 
-        internal XamlNodeLineInfo Dequeue ()
-        {
-            return queue.Dequeue ();
-        }
+		internal XamlNodeLineInfo Dequeue ()
+		{
+			return queue.Dequeue ();
+		}
 
-        internal void Enqueue (XamlNodeInfo info)
-        {
-            var nli = (LineInfoProvider != null && LineInfoProvider.HasLineInfo) ? new XamlNodeLineInfo (info, LineInfoProvider.LineNumber, LineInfoProvider.LinePosition) : new XamlNodeLineInfo (info, 0, 0);
-            queue.Enqueue (nli);
-        }
-    }
+		internal void Enqueue (XamlNodeInfo info)
+		{
+			var nli = (LineInfoProvider != null && LineInfoProvider.HasLineInfo) ? new XamlNodeLineInfo (info, LineInfoProvider.LineNumber, LineInfoProvider.LinePosition) : new XamlNodeLineInfo (info, 0, 0);
+			queue.Enqueue (nli);
+		}
+	}
 }

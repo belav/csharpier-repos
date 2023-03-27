@@ -3,16 +3,16 @@
 
 class C
 {
-    static void M (int x, string y, string z = null)
-    {
-    }
+	static void M (int x, string y, string z = null)
+	{
+	}
 
-    static void M<T>(T t, int? u, string z = null)
-    {
-    }
+	static void M<T>(T t, int? u, string z = null)
+	{
+	}
 
-    static void Main ()
-    {
-        M (123, null);
-    }
+	static void Main ()
+	{
+		M (123, null);
+	}
 }

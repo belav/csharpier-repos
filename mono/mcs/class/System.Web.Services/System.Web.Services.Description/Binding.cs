@@ -34,66 +34,66 @@ using System.Xml.Serialization;
 
 namespace System.Web.Services.Description 
 {
-    [XmlFormatExtensionPoint ("Extensions")]
-    public sealed class Binding :
-        NamedItem
-    {
+	[XmlFormatExtensionPoint ("Extensions")]
+	public sealed class Binding :
+		NamedItem
+	{
 
-        #region Fields
+		#region Fields
 
-        ServiceDescriptionFormatExtensionCollection extensions;
-        OperationBindingCollection operations;
-        ServiceDescription serviceDescription;
-        XmlQualifiedName type;
+		ServiceDescriptionFormatExtensionCollection extensions;
+		OperationBindingCollection operations;
+		ServiceDescription serviceDescription;
+		XmlQualifiedName type;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public Binding ()
-        {
-            extensions = new ServiceDescriptionFormatExtensionCollection (this);
-            operations = new OperationBindingCollection (this);
-            serviceDescription = null;
-            type = XmlQualifiedName.Empty;
-        }
-        
-        #endregion // Constructors
+		public Binding ()
+		{
+			extensions = new ServiceDescriptionFormatExtensionCollection (this);
+			operations = new OperationBindingCollection (this);
+			serviceDescription = null;
+			type = XmlQualifiedName.Empty;
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [XmlIgnore]
-        public 
-        override
-        ServiceDescriptionFormatExtensionCollection Extensions {     
-            get { return extensions; }
-        }
+		[XmlIgnore]
+		public 
+		override
+		ServiceDescriptionFormatExtensionCollection Extensions { 	
+			get { return extensions; }
+		}
 
 
-        [XmlElement ("operation")]
-        public OperationBindingCollection Operations {
-            get { return operations; }
-        }
+		[XmlElement ("operation")]
+		public OperationBindingCollection Operations {
+			get { return operations; }
+		}
 
-        public ServiceDescription ServiceDescription {
-            get { return serviceDescription; }
-        }
+		public ServiceDescription ServiceDescription {
+			get { return serviceDescription; }
+		}
 
-        [XmlAttribute ("type")]    
-        public XmlQualifiedName Type {
-            get { return type; }
-            set { type = value; }
-        }
+		[XmlAttribute ("type")]	
+		public XmlQualifiedName Type {
+			get { return type; }
+			set { type = value; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        internal void SetParent (ServiceDescription serviceDescription)
-        {
-            this.serviceDescription = serviceDescription;
-        }
+		internal void SetParent (ServiceDescription serviceDescription)
+		{
+			this.serviceDescription = serviceDescription;
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

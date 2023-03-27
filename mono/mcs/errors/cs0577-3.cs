@@ -10,6 +10,6 @@ class MainClass {
             return null;
         }
 
-        public static void Main () {}
+		public static void Main () {}
 }
 

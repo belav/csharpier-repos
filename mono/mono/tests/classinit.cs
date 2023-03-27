@@ -18,9 +18,9 @@ class Bug {
 
         static public int Main () {
                 Foo.i = 5;
-        if (Bar.j != 5)
-            return 1;
+		if (Bar.j != 5)
+			return 1;
 
-        return 0;
+		return 0;
         }
 }

@@ -3,10 +3,10 @@
 
 class A
 {
-    public void f ()
+	public void f ()
         {
                 this.test bad = null;
         }
-    static void Main () {}
+	static void Main () {}
 }
 

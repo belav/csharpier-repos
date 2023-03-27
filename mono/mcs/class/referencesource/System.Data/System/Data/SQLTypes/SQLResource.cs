@@ -10,17 +10,17 @@
 //**************************************************************************
 // @File: SQLResource.cs
 //
-// Create by:    JunFang
+// Create by:	JunFang
 //
 // Purpose: Implementation of utilities in COM+ SQL Types Library.
-//            Includes interface INullable, exceptions SqlNullValueException
-//            and SqlTruncateException, and SQLDebug class.
+//			Includes interface INullable, exceptions SqlNullValueException
+//			and SqlTruncateException, and SQLDebug class.
 //
 // Notes: 
-//    
+//	
 // History:
 //
-//   10/22/99  JunFang    Created.
+//   10/22/99  JunFang	Created.
 //
 // @EndHeader@
 //**************************************************************************

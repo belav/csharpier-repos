@@ -35,46 +35,46 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleConnection_CreateCommand : GHTBase
 {
-    public static void Main()
-    {
-        OracleConnection_CreateCommand tc = new OracleConnection_CreateCommand();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OracleConnection_CreateCommand");
-            tc.run();
-        }
-        catch(Exception ex){exp = ex;}
-        finally    {tc.EndTest(exp);}
-    }
+	public static void Main()
+	{
+		OracleConnection_CreateCommand tc = new OracleConnection_CreateCommand();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OracleConnection_CreateCommand");
+			tc.run();
+		}
+		catch(Exception ex){exp = ex;}
+		finally	{tc.EndTest(exp);}
+	}
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
-        OracleConnection con = new OracleConnection();
-        OracleCommand cmd = null;
-        
-        try
-        {
-            BeginCase("CreateCommand");
-            cmd = con.CreateCommand();
-            Compare(cmd!=null, true);
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
-    }
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
+		OracleConnection con = new OracleConnection();
+		OracleCommand cmd = null;
+		
+		try
+		{
+			BeginCase("CreateCommand");
+			cmd = con.CreateCommand();
+			Compare(cmd!=null, true);
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
+	}
 
 
-    //public TestClass():base(true){}
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

@@ -12,5 +12,5 @@ class Class1
             get {
                     return 1;
             }
-    }
+	}
 }

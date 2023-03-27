@@ -2,7 +2,7 @@
 // IssuedSecurityTokenHandler .cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -30,6 +30,6 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Security.Tokens
 {
-    public delegate void IssuedSecurityTokenHandler (
-        SecurityToken issuedToken, EndpointAddress tokenRequestor);
+	public delegate void IssuedSecurityTokenHandler (
+		SecurityToken issuedToken, EndpointAddress tokenRequestor);
 }

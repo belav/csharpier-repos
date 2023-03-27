@@ -1,4 +1,4 @@
-namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding {
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -38,25 +38,25 @@ using ICSharpCode.SharpZipLib;
 
 namespace ICSharpCode.SharpZipLib.GZip
 {
-    /// <summary>
-    /// GZipException represents a Gzip specific exception    
-    /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-    public class GZipException : SharpZipBaseException
-    {
-        /// <summary>
-        /// Initialise a new instance of GZipException
-        /// </summary>
-        public GZipException()
-        {
-        }
-        
-        /// <summary>
-        /// Initialise a new instance of GZipException with its message string.
-        /// </summary>
-        /// <param name="message">A <see cref="string"></see>string that describes the error.</param>
-        public GZipException(string message) : base(message)
-        {
-        }
-    }
+	/// <summary>
+	/// GZipException represents a Gzip specific exception	
+	/// </summary>
+	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+	public class GZipException : SharpZipBaseException
+	{
+		/// <summary>
+		/// Initialise a new instance of GZipException
+		/// </summary>
+		public GZipException()
+		{
+		}
+		
+		/// <summary>
+		/// Initialise a new instance of GZipException with its message string.
+		/// </summary>
+		/// <param name="message">A <see cref="string"></see>string that describes the error.</param>
+		public GZipException(string message) : base(message)
+		{
+		}
+	}
 }

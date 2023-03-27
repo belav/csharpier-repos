@@ -5,5 +5,5 @@ delegate void D ();
 
 class F
 {
-    D d = null ?? delegate { };
+	D d = null ?? delegate { };
 }

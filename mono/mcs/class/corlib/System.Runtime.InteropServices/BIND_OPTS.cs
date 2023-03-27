@@ -30,13 +30,13 @@
 
 namespace System.Runtime.InteropServices
 {
-    [Obsolete]
-    [StructLayout (LayoutKind.Sequential)]
-    public struct BIND_OPTS
-    {
-        public int cbStruct;
-        public int grfFlags;
-        public int grfMode;
-        public int dwTickCountDeadline;
-    }
+	[Obsolete]
+	[StructLayout (LayoutKind.Sequential)]
+	public struct BIND_OPTS
+	{
+		public int cbStruct;
+		public int grfFlags;
+		public int grfMode;
+		public int dwTickCountDeadline;
+	}
 }

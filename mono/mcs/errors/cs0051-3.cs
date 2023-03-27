@@ -11,7 +11,7 @@ public partial class C1
 
 partial class C1
 {
-    public void Foo (NV arg)
-    {
-    }
+	public void Foo (NV arg)
+	{
+	}
 }

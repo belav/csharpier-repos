@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -56,12 +56,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/40160")]
         public void International()
         {
-            VisualStudio.InteractiveWindow.InsertCode(@"delegate void ???????();
-??????? func = () => System.Console.WriteLine(2);");
+            VisualStudio.InteractiveWindow.InsertCode(@"delegate void العربية();
+العربية func = () => System.Console.WriteLine(2);");
             VisualStudio.InteractiveWindow.PlaceCaret("func", charsOffset: -1);
             VisualStudio.InteractiveWindow.InvokeQuickInfo();
             var s = VisualStudio.InteractiveWindow.GetQuickInfo();
-            Assert.Equal("(field) ??????? func", s);
+            Assert.Equal("(field) العربية func", s);
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/40160")]

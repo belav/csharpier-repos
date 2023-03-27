@@ -2,7 +2,7 @@
 // IInstanceContextProvider.cs
 //
 // Author:
-//    Ankit Jain <jankit@novell.com>
+//	Ankit Jain <jankit@novell.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -30,11 +30,11 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
-    public interface IInstanceContextProvider
-    {
-        InstanceContext GetExistingInstanceContext (Message message, IContextChannel channel);
-        void InitializeInstanceContext (InstanceContext instanceContext, Message message, IContextChannel channel);
-        bool IsIdle (InstanceContext instanceContext);
-        void NotifyIdle (InstanceContextIdleCallback callback, InstanceContext instanceContext);
-    }
+	public interface IInstanceContextProvider
+	{
+		InstanceContext GetExistingInstanceContext (Message message, IContextChannel channel);
+		void InitializeInstanceContext (InstanceContext instanceContext, Message message, IContextChannel channel);
+		bool IsIdle (InstanceContext instanceContext);
+		void NotifyIdle (InstanceContextIdleCallback callback, InstanceContext instanceContext);
+	}
 }

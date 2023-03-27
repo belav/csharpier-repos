@@ -2,7 +2,7 @@
 // NamedPipeTransportBindingElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -33,56 +33,56 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {
-    public class NamedPipeTransportBindingElement
-        : ConnectionOrientedTransportBindingElement
-    {
-        public NamedPipeTransportBindingElement ()
-        {
-        }
+	public class NamedPipeTransportBindingElement
+		: ConnectionOrientedTransportBindingElement
+	{
+		public NamedPipeTransportBindingElement ()
+		{
+		}
 
-        protected NamedPipeTransportBindingElement (
-            NamedPipeTransportBindingElement elementToBeCloned)
-            : base (elementToBeCloned)
-        {
-            pool.CopyPropertiesFrom (elementToBeCloned.pool);
-        }
+		protected NamedPipeTransportBindingElement (
+			NamedPipeTransportBindingElement elementToBeCloned)
+			: base (elementToBeCloned)
+		{
+			pool.CopyPropertiesFrom (elementToBeCloned.pool);
+		}
 
-        NamedPipeConnectionPoolSettings pool = new NamedPipeConnectionPoolSettings ();
+		NamedPipeConnectionPoolSettings pool = new NamedPipeConnectionPoolSettings ();
 
-        public NamedPipeConnectionPoolSettings ConnectionPoolSettings {
-            get { return pool; }
-        }
+		public NamedPipeConnectionPoolSettings ConnectionPoolSettings {
+			get { return pool; }
+		}
 
-        public override string Scheme {
-            get { return "net.pipe"; }
-        }
+		public override string Scheme {
+			get { return "net.pipe"; }
+		}
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
-            BindingContext context)
-        {
-            if (!CanBuildChannelFactory<TChannel> (context))
-                throw new InvalidOperationException (String.Format ("Not supported channel factory type '{0}'", typeof (TChannel)));
-            return new NamedPipeChannelFactory<TChannel> (this, context);
-        }
+		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
+			BindingContext context)
+		{
+			if (!CanBuildChannelFactory<TChannel> (context))
+				throw new InvalidOperationException (String.Format ("Not supported channel factory type '{0}'", typeof (TChannel)));
+			return new NamedPipeChannelFactory<TChannel> (this, context);
+		}
 
-        public override IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
-            BindingContext context)
-        {
-            if (!CanBuildChannelListener<TChannel> (context))
-                throw new InvalidOperationException (String.Format ("Not supported channel listener type '{0}'", typeof (TChannel)));
-            return new NamedPipeChannelListener<TChannel> (this, context);
-        }
+		public override IChannelListener<TChannel>
+			BuildChannelListener<TChannel> (
+			BindingContext context)
+		{
+			if (!CanBuildChannelListener<TChannel> (context))
+				throw new InvalidOperationException (String.Format ("Not supported channel listener type '{0}'", typeof (TChannel)));
+			return new NamedPipeChannelListener<TChannel> (this, context);
+		}
 
-        public override BindingElement Clone ()
-        {
-            return new NamedPipeTransportBindingElement (this);
-        }
+		public override BindingElement Clone ()
+		{
+			return new NamedPipeTransportBindingElement (this);
+		}
 
-        public override T GetProperty<T> (BindingContext context)
-        {
-            return base.GetProperty<T> (context);
-        }
+		public override T GetProperty<T> (BindingContext context)
+		{
+			return base.GetProperty<T> (context);
+		}
 
-    }
+	}
 }

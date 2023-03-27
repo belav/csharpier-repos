@@ -2,7 +2,7 @@
 // SecurityRequestChannel.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -49,87 +49,87 @@ using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenReq
 
 namespace System.ServiceModel.Channels.Security
 {
-    class SecurityOutputChannel : SecurityOutputChannelBase
-    {
-        SecurityChannelFactory<IOutputChannel> source;
+	class SecurityOutputChannel : SecurityOutputChannelBase
+	{
+		SecurityChannelFactory<IOutputChannel> source;
 
-        public SecurityOutputChannel (IOutputChannel innerChannel, SecurityChannelFactory<IOutputChannel> source)
-            : base (innerChannel)
-        {
-            this.source = source;
-            InitializeSecurityFunctionality (source.SecuritySupport);
-        }
+		public SecurityOutputChannel (IOutputChannel innerChannel, SecurityChannelFactory<IOutputChannel> source)
+			: base (innerChannel)
+		{
+			this.source = source;
+			InitializeSecurityFunctionality (source.SecuritySupport);
+		}
 
-        public override ChannelFactoryBase Factory {
-            get { return source; }
-        }
-    }
+		public override ChannelFactoryBase Factory {
+			get { return source; }
+		}
+	}
 
-    class SecurityOutputSessionChannel : SecurityOutputChannelBase
-    {
-        SecurityChannelFactory<IOutputSessionChannel> source;
+	class SecurityOutputSessionChannel : SecurityOutputChannelBase
+	{
+		SecurityChannelFactory<IOutputSessionChannel> source;
 
-        public SecurityOutputSessionChannel (IOutputSessionChannel innerChannel, SecurityChannelFactory<IOutputSessionChannel> source)
-            : base (innerChannel)
-        {
-            this.source = source;
-            InitializeSecurityFunctionality (source.SecuritySupport);
-        }
+		public SecurityOutputSessionChannel (IOutputSessionChannel innerChannel, SecurityChannelFactory<IOutputSessionChannel> source)
+			: base (innerChannel)
+		{
+			this.source = source;
+			InitializeSecurityFunctionality (source.SecuritySupport);
+		}
 
-        public override ChannelFactoryBase Factory {
-            get { return source; }
-        }
-    }
+		public override ChannelFactoryBase Factory {
+			get { return source; }
+		}
+	}
 
-    abstract class SecurityOutputChannelBase : LayeredOutputChannel
-    {
-        InitiatorMessageSecurityBindingSupport security;
+	abstract class SecurityOutputChannelBase : LayeredOutputChannel
+	{
+		InitiatorMessageSecurityBindingSupport security;
 
-        protected SecurityOutputChannelBase (IOutputChannel innerChannel)
-            : base (innerChannel)
-        {
-            Opened += new EventHandler (AcquireSecurityKey);
-            Closing += new EventHandler (ReleaseSecurityKey);
-        }
+		protected SecurityOutputChannelBase (IOutputChannel innerChannel)
+			: base (innerChannel)
+		{
+			Opened += new EventHandler (AcquireSecurityKey);
+			Closing += new EventHandler (ReleaseSecurityKey);
+		}
 
-        protected void InitializeSecurityFunctionality (InitiatorMessageSecurityBindingSupport security)
-        {
-            this.security = security;
-        }
+		protected void InitializeSecurityFunctionality (InitiatorMessageSecurityBindingSupport security)
+		{
+			this.security = security;
+		}
 
-        protected override IAsyncResult OnBeginSend (Message message, TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            Message secure = SecureMessage (message);
-            return base.BeginSend (secure, timeout, callback, state);
-        }
+		protected override IAsyncResult OnBeginSend (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+		{
+			Message secure = SecureMessage (message);
+			return base.BeginSend (secure, timeout, callback, state);
+		}
 
-        protected override void OnEndSend (IAsyncResult result)
-        {
-            // FIXME: it must be also asynchronized.
-            base.EndSend (result);
-        }
+		protected override void OnEndSend (IAsyncResult result)
+		{
+			// FIXME: it must be also asynchronized.
+			base.EndSend (result);
+		}
 
-        protected override void OnSend (Message message, TimeSpan timeout)
-        {
-            Message secure = SecureMessage (message);
-            base.OnSend (secure, timeout);
-        }
+		protected override void OnSend (Message message, TimeSpan timeout)
+		{
+			Message secure = SecureMessage (message);
+			base.OnSend (secure, timeout);
+		}
 
-        Message SecureMessage (Message msg)
-        {
-            return new InitiatorMessageSecurityGenerator (msg, security, RemoteAddress).SecureMessage ();
-        }
+		Message SecureMessage (Message msg)
+		{
+			return new InitiatorMessageSecurityGenerator (msg, security, RemoteAddress).SecureMessage ();
+		}
 
-        void AcquireSecurityKey (object o, EventArgs e)
-        {
-            security.Prepare (Factory, RemoteAddress);
-        }
+		void AcquireSecurityKey (object o, EventArgs e)
+		{
+			security.Prepare (Factory, RemoteAddress);
+		}
 
-        void ReleaseSecurityKey (object o, EventArgs e)
-        {
-            security.Release ();
-        }
-    }
+		void ReleaseSecurityKey (object o, EventArgs e)
+		{
+			security.Release ();
+		}
+	}
 }
 
 */

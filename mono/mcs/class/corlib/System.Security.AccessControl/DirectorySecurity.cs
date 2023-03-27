@@ -2,8 +2,8 @@
 // System.Security.AccessControl.DirectorySecurity implementation
 //
 // Authors:
-//    Sebastien Pouliot  <sebastien@ximian.com>
-//    Dick Porter <dick@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
+//	Dick Porter <dick@ximian.com>
 //
 // Copyright (C) 2005, 2006 Novell, Inc (http://www.novell.com)
 //
@@ -29,17 +29,17 @@
 
 namespace System.Security.AccessControl
 {
-    public sealed class DirectorySecurity : FileSystemSecurity
-    {
-        public DirectorySecurity ()
-            : base (true)
-        {
-        }
+	public sealed class DirectorySecurity : FileSystemSecurity
+	{
+		public DirectorySecurity ()
+			: base (true)
+		{
+		}
 
-        public DirectorySecurity (string name, AccessControlSections includeSections)
-            : base (true, name, includeSections)
-        {
-        }
-    }
+		public DirectorySecurity (string name, AccessControlSections includeSections)
+			: base (true, name, includeSections)
+		{
+		}
+	}
 }
 

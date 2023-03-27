@@ -321,7 +321,7 @@ internal static class StringUtil {
     {
         bytes = null;
         if (s == null)
-            return 0;
+	        return 0;
 
         // Encoding.GetMaxByteCount is faster than GetByteCount, but will probably allocate more
         // memory than needed.  Working with small short-lived strings here, so that's probably ok.

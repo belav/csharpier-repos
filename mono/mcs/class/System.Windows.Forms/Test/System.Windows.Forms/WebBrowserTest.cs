@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 
@@ -32,104 +32,104 @@ using io=System.IO;
 
 namespace MonoTests.System.Windows.Forms
 {
-    [TestFixture]
-    public class WebBrowserTest
-    {
-        WebBrowser wb = null;
-        
-        [SetUp]
-        public void SetUp()
-        {
-            wb = new WebBrowser ();
-            bool start = false;
-            wb.DocumentCompleted += delegate (object sender, WebBrowserDocumentCompletedEventArgs e) {
-                if (e.Url.Equals ("about:blank")) {
-                    start = true;
-                }
-            };
-            
-            while (!start){}
-        }
-        
-        public string CreateTestPage (string html)
-        {
-            io.FileStream f = null;
-            string path;
-            Random rnd;
-            int num = 0;
+	[TestFixture]
+	public class WebBrowserTest
+	{
+		WebBrowser wb = null;
+		
+		[SetUp]
+		public void SetUp()
+		{
+			wb = new WebBrowser ();
+			bool start = false;
+			wb.DocumentCompleted += delegate (object sender, WebBrowserDocumentCompletedEventArgs e) {
+				if (e.Url.Equals ("about:blank")) {
+					start = true;
+				}
+			};
+			
+			while (!start){}
+		}
+		
+		public string CreateTestPage (string html)
+		{
+			io.FileStream f = null;
+			string path;
+			Random rnd;
+			int num = 0;
 
-            rnd = new Random ();
-            do {
-                num = rnd.Next ();
-                num++;
-                path = io.Path.Combine (io.Path.GetTempPath(), "html" + num.ToString("x") + ".html");
+			rnd = new Random ();
+			do {
+				num = rnd.Next ();
+				num++;
+				path = io.Path.Combine (io.Path.GetTempPath(), "html" + num.ToString("x") + ".html");
 
-                try {
-                    f = new io.FileStream (path, io.FileMode.CreateNew, io.FileAccess.ReadWrite, io.FileShare.Read,
-                                8192, (io.FileOptions) 1);
-                }
-                catch (global::System.Security.SecurityException) {
-                    // avoid an endless loop
-                    throw;
-                }
-                catch {
-                }
-            } while (f == null);
-            io.StreamWriter s = new io.StreamWriter (f);
-            s.Write (html);            
-            f.Close();
-            return path;
-        }
-        
-        
-        [Test]
-        public void LoadingEventsTest()
-        {
-            string html = "<html><head></head><body></body></html>";
-            string url = "file://" + CreateTestPage (html);
-            string events = String.Empty;
-            bool stop = false;
-            wb.DocumentCompleted += delegate (object sender, WebBrowserDocumentCompletedEventArgs e) {
-                if (e.Url.Equals (url)) {
-                    stop = true;
-                    Assert.AreEqual("navigatingnavigated", events, "#A1");                    
-                }
-            };
-            wb.Navigating += delegate (object sender1, WebBrowserNavigatingEventArgs e1) {
-                if (e1.Url.Equals (url))
-                    events += "navigating";
-            };
-            wb.Navigated += delegate (object sender1, WebBrowserNavigatedEventArgs e1) {
-                if (e1.Url.Equals (url))
-                    events += "navigated";
-            };
-            
-            wb.Navigate (url);
-            while (!stop){}
-        }        
+				try {
+					f = new io.FileStream (path, io.FileMode.CreateNew, io.FileAccess.ReadWrite, io.FileShare.Read,
+							    8192, (io.FileOptions) 1);
+				}
+				catch (global::System.Security.SecurityException) {
+					// avoid an endless loop
+					throw;
+				}
+				catch {
+				}
+			} while (f == null);
+			io.StreamWriter s = new io.StreamWriter (f);
+			s.Write (html);			
+			f.Close();
+			return path;
+		}
+		
+		
+		[Test]
+		public void LoadingEventsTest()
+		{
+			string html = "<html><head></head><body></body></html>";
+			string url = "file://" + CreateTestPage (html);
+			string events = String.Empty;
+			bool stop = false;
+			wb.DocumentCompleted += delegate (object sender, WebBrowserDocumentCompletedEventArgs e) {
+				if (e.Url.Equals (url)) {
+					stop = true;
+					Assert.AreEqual("navigatingnavigated", events, "#A1");					
+				}
+			};
+			wb.Navigating += delegate (object sender1, WebBrowserNavigatingEventArgs e1) {
+				if (e1.Url.Equals (url))
+					events += "navigating";
+			};
+			wb.Navigated += delegate (object sender1, WebBrowserNavigatedEventArgs e1) {
+				if (e1.Url.Equals (url))
+					events += "navigated";
+			};
+			
+			wb.Navigate (url);
+			while (!stop){}
+		}		
 
-        [Test]
-        public void InnerHtmlTest()
-        {
-            string html = "<html><head></head><body><div id=\"testid\"></div></body></html>";
-            string url = "file://" + CreateTestPage (html);
-            string test = "testing inner html";
-            bool stop = false;
-            wb.DocumentCompleted += delegate (object sender, WebBrowserDocumentCompletedEventArgs e) {
-                Console.Error.WriteLine (wb.Document.Body.InnerHtml);
-                if (e.Url.Equals (url)) {
-                    stop = true;
-                    Assert.IsNotNull (wb.Document, "#A1");
-                    HtmlElement elem = wb.Document.GetElementById ("testid");
-                    Assert.IsNotNull (elem, "#A2");
-                    elem.InnerHtml = test;
-                    string ret = elem.InnerHtml;
-                    Assert.AreEqual (ret, test, "#A3");
-                }
-            };            
-            wb.Navigate (url);
-            while (!stop){}
-        }        
-    
-    }
+		[Test]
+		public void InnerHtmlTest()
+		{
+			string html = "<html><head></head><body><div id=\"testid\"></div></body></html>";
+			string url = "file://" + CreateTestPage (html);
+			string test = "testing inner html";
+			bool stop = false;
+			wb.DocumentCompleted += delegate (object sender, WebBrowserDocumentCompletedEventArgs e) {
+				Console.Error.WriteLine (wb.Document.Body.InnerHtml);
+				if (e.Url.Equals (url)) {
+					stop = true;
+					Assert.IsNotNull (wb.Document, "#A1");
+					HtmlElement elem = wb.Document.GetElementById ("testid");
+					Assert.IsNotNull (elem, "#A2");
+					elem.InnerHtml = test;
+					string ret = elem.InnerHtml;
+					Assert.AreEqual (ret, test, "#A3");
+				}
+			};			
+			wb.Navigate (url);
+			while (!stop){}
+		}		
+	
+	}
 }

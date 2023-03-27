@@ -2,7 +2,7 @@
 // MessagePartSpecificationTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -38,51 +38,51 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class MessagePartSpecificationTest
-    {
-        [Test]
-        public void DefaultValues ()
-        {
-            MessagePartSpecification s =
-                new MessagePartSpecification ();
-            Assert.IsFalse (s.IsBodyIncluded, "#1");
-            Assert.AreEqual (0, s.HeaderTypes.Count, "#2");
+	[TestFixture]
+	public class MessagePartSpecificationTest
+	{
+		[Test]
+		public void DefaultValues ()
+		{
+			MessagePartSpecification s =
+				new MessagePartSpecification ();
+			Assert.IsFalse (s.IsBodyIncluded, "#1");
+			Assert.AreEqual (0, s.HeaderTypes.Count, "#2");
 
-            s = new MessagePartSpecification (new XmlQualifiedName [] {new XmlQualifiedName ("foo", "urn:foo")});
-            Assert.IsFalse (s.IsBodyIncluded, "#3");
-            Assert.AreEqual (1, s.HeaderTypes.Count, "#4");
-        }
+			s = new MessagePartSpecification (new XmlQualifiedName [] {new XmlQualifiedName ("foo", "urn:foo")});
+			Assert.IsFalse (s.IsBodyIncluded, "#3");
+			Assert.AreEqual (1, s.HeaderTypes.Count, "#4");
+		}
 
-        [Test]
-        public void Union ()
-        {
-            XmlQualifiedName q1, q2, q3;
-            q1 = new XmlQualifiedName ("foo");
-            q2 = new XmlQualifiedName ("bar");
-            q3 = new XmlQualifiedName ("baz");
-            MessagePartSpecification p1 =
-                new MessagePartSpecification (false, new XmlQualifiedName [] {q1, q2});
-            MessagePartSpecification p2 =
-                new MessagePartSpecification (true, new XmlQualifiedName [] {q3, q2});
-            p1.Union (p2);
-            Assert.IsTrue (p1.IsBodyIncluded, "#1");
-            // Sigh. It does not exclude duplicates.
-            Assert.AreEqual (4, p1.HeaderTypes.Count, "#1-2");
-            Assert.IsTrue (p1.HeaderTypes.Contains (q1), "#2");
-            Assert.IsTrue (p1.HeaderTypes.Contains (q2), "#3");
-            Assert.IsTrue (p1.HeaderTypes.Contains (q3), "#4");
-        }
+		[Test]
+		public void Union ()
+		{
+			XmlQualifiedName q1, q2, q3;
+			q1 = new XmlQualifiedName ("foo");
+			q2 = new XmlQualifiedName ("bar");
+			q3 = new XmlQualifiedName ("baz");
+			MessagePartSpecification p1 =
+				new MessagePartSpecification (false, new XmlQualifiedName [] {q1, q2});
+			MessagePartSpecification p2 =
+				new MessagePartSpecification (true, new XmlQualifiedName [] {q3, q2});
+			p1.Union (p2);
+			Assert.IsTrue (p1.IsBodyIncluded, "#1");
+			// Sigh. It does not exclude duplicates.
+			Assert.AreEqual (4, p1.HeaderTypes.Count, "#1-2");
+			Assert.IsTrue (p1.HeaderTypes.Contains (q1), "#2");
+			Assert.IsTrue (p1.HeaderTypes.Contains (q2), "#3");
+			Assert.IsTrue (p1.HeaderTypes.Contains (q3), "#4");
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void UnionReadOnlyPart ()
-        {
-            MessagePartSpecification s =
-                new MessagePartSpecification ();
-            s.MakeReadOnly ();
-            Assert.AreEqual (true, s.IsReadOnly, "#1");
-            s.Union (new MessagePartSpecification ());
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (InvalidOperationException))]
+		public void UnionReadOnlyPart ()
+		{
+			MessagePartSpecification s =
+				new MessagePartSpecification ();
+			s.MakeReadOnly ();
+			Assert.AreEqual (true, s.IsReadOnly, "#1");
+			s.Union (new MessagePartSpecification ());
+		}
+	}
 }

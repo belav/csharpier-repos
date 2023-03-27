@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -191,7 +191,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 static class Module1
 {
-    [DllImport(""kernel32"", EntryPoint = ""CreateDirectoryA"", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
+	[DllImport(""kernel32"", EntryPoint = ""CreateDirectoryA"", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
     public static extern int CreateDirectory(string lpPathName);
 
         private static int prop;
@@ -558,10 +558,10 @@ namespace Test
 
 namespace Test
 {
-    public class Dummy
-    {
-        public class NestedDummy { }
-    }
+	public class Dummy
+	{
+		public class NestedDummy { }
+	}
 }
 ";
             using var workspace = CreateWorkspace();

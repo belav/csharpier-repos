@@ -2,7 +2,7 @@
 // System.Web.Security.RoleProviderCollection
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
 //
 // (C) 2003 Ben Maurer
 //
@@ -32,24 +32,24 @@ using System.Configuration.Provider;
 
 namespace System.Web.Security
 {
-    public sealed class RoleProviderCollection : ProviderCollection
-    {
-        public override void Add (ProviderBase provider)
-        {
-            if (provider is RoleProvider)
-                base.Add (provider);
-            else
-                throw new HttpException ();
-        }
-        
-        public new RoleProvider this [string name] {
-            get { return (RoleProvider) base [name]; }
-        }
-        
-        public void CopyTo (RoleProvider[] array, int index)
-        {
-            base.CopyTo (array, index);
-        }
-    }
+	public sealed class RoleProviderCollection : ProviderCollection
+	{
+		public override void Add (ProviderBase provider)
+		{
+			if (provider is RoleProvider)
+				base.Add (provider);
+			else
+				throw new HttpException ();
+		}
+		
+		public new RoleProvider this [string name] {
+			get { return (RoleProvider) base [name]; }
+		}
+		
+		public void CopyTo (RoleProvider[] array, int index)
+		{
+			base.CopyTo (array, index);
+		}
+	}
 }
 

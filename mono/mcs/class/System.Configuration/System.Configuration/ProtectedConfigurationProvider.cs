@@ -2,7 +2,7 @@
 // System.Configuration.ProtectedConfigurationProvider.cs
 //
 // Authors:
-//    Duncan Mak (duncan@ximian.com)
+//	Duncan Mak (duncan@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,14 +31,14 @@ using System.Configuration.Provider;
 
 namespace System.Configuration
 {
-    public abstract class ProtectedConfigurationProvider: ProviderBase
-    {
-        protected ProtectedConfigurationProvider ()
-        {
-        }
+	public abstract class ProtectedConfigurationProvider: ProviderBase
+	{
+		protected ProtectedConfigurationProvider ()
+		{
+		}
 
-        public abstract XmlNode Decrypt (XmlNode encryptedNode);
+		public abstract XmlNode Decrypt (XmlNode encryptedNode);
 
-        public abstract XmlNode Encrypt (XmlNode node);
-    }
+		public abstract XmlNode Encrypt (XmlNode node);
+	}
 }

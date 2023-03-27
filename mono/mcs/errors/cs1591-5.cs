@@ -6,5 +6,5 @@ using System;
 
 namespace Testing
 {
-    public delegate void MyDelegate (object o, EventArgs e);
+	public delegate void MyDelegate (object o, EventArgs e);
 }

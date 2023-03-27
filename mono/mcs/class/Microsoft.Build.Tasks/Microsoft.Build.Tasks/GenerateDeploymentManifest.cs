@@ -35,163 +35,163 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.Build.Tasks
 {
-    public sealed class GenerateDeploymentManifest : GenerateManifestBase
-    {
-        [MonoTODO]
-        public GenerateDeploymentManifest ()
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoTODO]
-        public string DeploymentUrl {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public bool DisallowUrlActivation {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public bool Install {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public bool MapFileExtensions {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public string MinimumRequiredVersion {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public string Product {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public string Publisher {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public string SupportUrl {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public bool TrustUrlParameters {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public bool UpdateEnabled {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public int UpdateInterval {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public string UpdateMode {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        [MonoTODO]
-        public string UpdateUnit {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-        
-        protected internal override bool ValidateInputs ()
-        {
-            throw new NotImplementedException ();
-        }
-        
-        protected override Type GetObjectType ()
-        {
-            throw new NotImplementedException ();
-        }
-        
-        protected override bool OnManifestLoaded (Manifest manifest)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        protected override bool OnManifestResolved (Manifest manifest)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+	public sealed class GenerateDeploymentManifest : GenerateManifestBase
+	{
+		[MonoTODO]
+		public GenerateDeploymentManifest ()
+		{
+			throw new NotImplementedException ();
+		}
+		
+		[MonoTODO]
+		public string DeploymentUrl {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public bool DisallowUrlActivation {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public bool Install {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public bool MapFileExtensions {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public string MinimumRequiredVersion {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public string Product {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public string Publisher {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public string SupportUrl {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public bool TrustUrlParameters {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public bool UpdateEnabled {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public int UpdateInterval {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public string UpdateMode {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		[MonoTODO]
+		public string UpdateUnit {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+		
+		protected internal override bool ValidateInputs ()
+		{
+			throw new NotImplementedException ();
+		}
+		
+		protected override Type GetObjectType ()
+		{
+			throw new NotImplementedException ();
+		}
+		
+		protected override bool OnManifestLoaded (Manifest manifest)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		protected override bool OnManifestResolved (Manifest manifest)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

@@ -2,7 +2,7 @@
 // UserNameSecurityToken.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,47 +32,47 @@ using System.IdentityModel.Policy;
 
 namespace System.IdentityModel.Tokens
 {
-    public class UserNameSecurityToken : SecurityToken
-    {
-        DateTime from = DateTime.Now.ToUniversalTime ();
+	public class UserNameSecurityToken : SecurityToken
+	{
+		DateTime from = DateTime.Now.ToUniversalTime ();
 
-        public UserNameSecurityToken (string userName, string password)
-            : this (userName, password, new UniqueId ().ToString ())
-        {
-        }
+		public UserNameSecurityToken (string userName, string password)
+			: this (userName, password, new UniqueId ().ToString ())
+		{
+		}
 
-        public UserNameSecurityToken (string userName, string password, string id)
-        {
-            this.username = userName;
-            this.password = password;
-            this.id = id;
-        }
+		public UserNameSecurityToken (string userName, string password, string id)
+		{
+			this.username = userName;
+			this.password = password;
+			this.id = id;
+		}
 
-        string username, password, id;
+		string username, password, id;
 
-        public string UserName {
-            get { return username; }
-        }
+		public string UserName {
+			get { return username; }
+		}
 
-        public string Password {
-            get { return password; }
-        }
+		public string Password {
+			get { return password; }
+		}
 
-        public override DateTime ValidFrom {
-            get { return from; }
-        }
+		public override DateTime ValidFrom {
+			get { return from; }
+		}
 
-        public override DateTime ValidTo {
-            // use -1 day to avoid possible overflow
-            get { return DateTime.MaxValue.AddDays (-1); }
-        }
+		public override DateTime ValidTo {
+			// use -1 day to avoid possible overflow
+			get { return DateTime.MaxValue.AddDays (-1); }
+		}
 
-        public override string Id {
-            get { return id; }
-        }
+		public override string Id {
+			get { return id; }
+		}
 
-        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-            get { return new ReadOnlyCollection<SecurityKey> (new SecurityKey [0]); }
-        }
-    }
+		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
+			get { return new ReadOnlyCollection<SecurityKey> (new SecurityKey [0]); }
+		}
+	}
 }

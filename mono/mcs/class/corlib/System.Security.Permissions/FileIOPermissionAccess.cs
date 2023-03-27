@@ -34,16 +34,16 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-    [ComVisible (true)]
-    [Serializable]
-    [Flags]
-    public enum FileIOPermissionAccess {
+	[ComVisible (true)]
+	[Serializable]
+	[Flags]
+	public enum FileIOPermissionAccess {
 
-        NoAccess = 0x00000000,
-        Read = 0x00000001,
-        Write = 0x00000002,
-        Append = 0x00000004,
-        PathDiscovery = 0x00000008,
-        AllAccess = Read | Write | Append | PathDiscovery,
-    }
+		NoAccess = 0x00000000,
+		Read = 0x00000001,
+		Write = 0x00000002,
+		Append = 0x00000004,
+		PathDiscovery = 0x00000008,
+		AllAccess = Read | Write | Append | PathDiscovery,
+	}
 }

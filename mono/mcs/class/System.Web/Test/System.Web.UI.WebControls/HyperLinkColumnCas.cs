@@ -1,9 +1,9 @@
 //
 // HyperLinkColumnCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.HyperLinkColumn
+//	- CAS unit tests for System.Web.UI.WebControls.HyperLinkColumn
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,25 +38,25 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HyperLinkColumnCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HyperLinkColumnCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HyperLinkColumnTest unit = new HyperLinkColumnTest ();
-            unit.SetUpTest ();
-            unit.DataNavigateUrlFieldTest ();
-            unit.FormatTest ();
-            unit.InitCellTest ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HyperLinkColumnTest unit = new HyperLinkColumnTest ();
+			unit.SetUpTest ();
+			unit.DataNavigateUrlFieldTest ();
+			unit.FormatTest ();
+			unit.InitCellTest ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (HyperLinkColumn); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HyperLinkColumn); }
+		}
+	}
 }

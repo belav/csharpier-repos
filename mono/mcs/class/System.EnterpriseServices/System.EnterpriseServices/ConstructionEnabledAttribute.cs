@@ -32,45 +32,45 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Class)]
-    [ComVisible(false)]
-    public sealed class ConstructionEnabledAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class)]
+	[ComVisible(false)]
+	public sealed class ConstructionEnabledAttribute : Attribute {
 
-        #region Fields
+		#region Fields
 
-        string def;
-        bool enabled;
+		string def;
+		bool enabled;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public ConstructionEnabledAttribute ()
-        {
-            def = String.Empty;
-            enabled = true;
-        }
+		public ConstructionEnabledAttribute ()
+		{
+			def = String.Empty;
+			enabled = true;
+		}
 
-        public ConstructionEnabledAttribute (bool val)
-        {
-            def = String.Empty;
-            enabled = val;
-        }
+		public ConstructionEnabledAttribute (bool val)
+		{
+			def = String.Empty;
+			enabled = val;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public string Default {
-            get { return def; }
-            set { def = value; }
-        }
+		public string Default {
+			get { return def; }
+			set { def = value; }
+		}
 
-        public bool Enabled {
-            get { return enabled; }
-            set { enabled = value; }
-        }
+		public bool Enabled {
+			get { return enabled; }
+			set { enabled = value; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

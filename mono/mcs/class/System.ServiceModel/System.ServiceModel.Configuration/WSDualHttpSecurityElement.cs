@@ -2,7 +2,7 @@
 // WSDualHttpSecurityElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,56 +54,56 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public sealed partial class WSDualHttpSecurityElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty message;
-        static ConfigurationProperty mode;
+	[MonoTODO]
+	public sealed partial class WSDualHttpSecurityElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty message;
+		static ConfigurationProperty mode;
 
-        static WSDualHttpSecurityElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            message = new ConfigurationProperty ("message",
-                typeof (MessageSecurityOverHttpElement), null, null/* FIXME: get converter for MessageSecurityOverHttpElement*/, null,
-                ConfigurationPropertyOptions.None);
+		static WSDualHttpSecurityElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			message = new ConfigurationProperty ("message",
+				typeof (MessageSecurityOverHttpElement), null, null/* FIXME: get converter for MessageSecurityOverHttpElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            mode = new ConfigurationProperty ("mode",
-                typeof (WSDualHttpSecurityMode), "Message", null/* FIXME: get converter for WSDualHttpSecurityMode*/, null,
-                ConfigurationPropertyOptions.None);
+			mode = new ConfigurationProperty ("mode",
+				typeof (WSDualHttpSecurityMode), "Message", null/* FIXME: get converter for WSDualHttpSecurityMode*/, null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (message);
-            properties.Add (mode);
-        }
+			properties.Add (message);
+			properties.Add (mode);
+		}
 
-        public WSDualHttpSecurityElement ()
-        {
-        }
-
-
-        // Properties
-
-        [ConfigurationProperty ("message",
-             Options = ConfigurationPropertyOptions.None)]
-        public MessageSecurityOverHttpElement Message {
-            get { return (MessageSecurityOverHttpElement) base [message]; }
-        }
-
-        [ConfigurationProperty ("mode",
-             DefaultValue = "Message",
-             Options = ConfigurationPropertyOptions.None)]
-        public WSDualHttpSecurityMode Mode {
-            get { return (WSDualHttpSecurityMode) base [mode]; }
-            set { base [mode] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		public WSDualHttpSecurityElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+		[ConfigurationProperty ("message",
+			 Options = ConfigurationPropertyOptions.None)]
+		public MessageSecurityOverHttpElement Message {
+			get { return (MessageSecurityOverHttpElement) base [message]; }
+		}
+
+		[ConfigurationProperty ("mode",
+			 DefaultValue = "Message",
+			 Options = ConfigurationPropertyOptions.None)]
+		public WSDualHttpSecurityMode Mode {
+			get { return (WSDualHttpSecurityMode) base [mode]; }
+			set { base [mode] = value; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+
+	}
 
 }

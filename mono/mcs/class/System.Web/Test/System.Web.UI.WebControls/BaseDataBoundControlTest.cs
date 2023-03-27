@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.BaseDataBoundControl.cs 
 //
 // Author:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 //
@@ -38,160 +38,160 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    [TestFixture]    
-    public class BaseDataBoundControlTest {    
-        class Poker : BaseDataBoundControl {
-            
-            public bool OnDataPropertyChangedCalled;
-            public bool ValidateDataSourceCalled;
+	[TestFixture]	
+	public class BaseDataBoundControlTest {	
+		class Poker : BaseDataBoundControl {
+			
+			public bool OnDataPropertyChangedCalled;
+			public bool ValidateDataSourceCalled;
 
-            public Poker () {
-                TrackViewState ();
-            }
+			public Poker () {
+				TrackViewState ();
+			}
 
-            public object SaveState () {
-                return SaveViewState ();
-            }
+			public object SaveState () {
+				return SaveViewState ();
+			}
 
-            public void LoadState (object state) {
-                LoadViewState (state);
-            }
+			public void LoadState (object state) {
+				LoadViewState (state);
+			}
 
-            protected override void PerformSelect () 
-            {
-                Assert.IsTrue (RequiresDataBinding);
-                //Console.WriteLine ("PerformSelect\n{0}", Environment.StackTrace);
-            }
+			protected override void PerformSelect () 
+			{
+				Assert.IsTrue (RequiresDataBinding);
+				//Console.WriteLine ("PerformSelect\n{0}", Environment.StackTrace);
+			}
 
-            protected override void ValidateDataSource (object dataSource)
-            {
-                ValidateDataSourceCalled = true;
-                //Console.WriteLine ("PerformSelect\n{0}", Environment.StackTrace);
-            }
+			protected override void ValidateDataSource (object dataSource)
+			{
+				ValidateDataSourceCalled = true;
+				//Console.WriteLine ("PerformSelect\n{0}", Environment.StackTrace);
+			}
 
-            public bool GetIsBoundUsingDataSourceID ()
-            {
-                return IsBoundUsingDataSourceID;
-            }
+			public bool GetIsBoundUsingDataSourceID ()
+			{
+				return IsBoundUsingDataSourceID;
+			}
 
-            public bool GetInitialized ()
-            {
-                return Initialized;
-            }
+			public bool GetInitialized ()
+			{
+				return Initialized;
+			}
 
-            protected override void OnDataPropertyChanged () {
-                base.OnDataPropertyChanged ();
-                OnDataPropertyChangedCalled = true;
-            }
+			protected override void OnDataPropertyChanged () {
+				base.OnDataPropertyChanged ();
+				OnDataPropertyChangedCalled = true;
+			}
 
-            public void SetRequiresDataBinding (bool val)
-            {
-                RequiresDataBinding = val;
-            }
+			public void SetRequiresDataBinding (bool val)
+			{
+				RequiresDataBinding = val;
+			}
 
-            public bool GetRequiresDataBinding ()
-            {
-                return RequiresDataBinding;
-            }
-            
-            public override void DataBind ()
-            {
-                Assert.IsTrue (RequiresDataBinding);
-                base.DataBind ();
-                Assert.IsTrue (RequiresDataBinding);
-            }
+			public bool GetRequiresDataBinding ()
+			{
+				return RequiresDataBinding;
+			}
+			
+			public override void DataBind ()
+			{
+				Assert.IsTrue (RequiresDataBinding);
+				base.DataBind ();
+				Assert.IsTrue (RequiresDataBinding);
+			}
 
-            public void DoEnsureDataBound ()
-            {
-                Assert.IsTrue (RequiresDataBinding);
-                EnsureDataBound ();
-                Assert.IsTrue (RequiresDataBinding);
-            }
-        }
-        
-        [Test]
-        public void Defaults ()
-        {
-            Poker p = new Poker ();
+			public void DoEnsureDataBound ()
+			{
+				Assert.IsTrue (RequiresDataBinding);
+				EnsureDataBound ();
+				Assert.IsTrue (RequiresDataBinding);
+			}
+		}
+		
+		[Test]
+		public void Defaults ()
+		{
+			Poker p = new Poker ();
 
-            Assert.IsNull (p.DataSource, "A1");
-            Assert.AreEqual ("", p.DataSourceID, "A2");
-            Assert.IsFalse (p.GetIsBoundUsingDataSourceID(), "A3");
-            Assert.IsFalse (p.GetInitialized(), "A4");
-        }
+			Assert.IsNull (p.DataSource, "A1");
+			Assert.AreEqual ("", p.DataSourceID, "A2");
+			Assert.IsFalse (p.GetIsBoundUsingDataSourceID(), "A3");
+			Assert.IsFalse (p.GetInitialized(), "A4");
+		}
 
-        [Test]
-        public void ViewState ()
-        {
-            Poker p = new Poker ();
-            Poker copy = new Poker ();
+		[Test]
+		public void ViewState ()
+		{
+			Poker p = new Poker ();
+			Poker copy = new Poker ();
 
-            p.DataSourceID = "hi";
-            object state = p.SaveState ();
-            copy.LoadState (state);
+			p.DataSourceID = "hi";
+			object state = p.SaveState ();
+			copy.LoadState (state);
 
-            Assert.AreEqual ("hi", copy.DataSourceID, "A1");
-        }
+			Assert.AreEqual ("hi", copy.DataSourceID, "A1");
+		}
 
-        [Test]
-        public void OnDataPropertyChanged ()
-        {
-            Poker p = new Poker ();
-            Assert.IsFalse (p.OnDataPropertyChangedCalled);
+		[Test]
+		public void OnDataPropertyChanged ()
+		{
+			Poker p = new Poker ();
+			Assert.IsFalse (p.OnDataPropertyChangedCalled);
 
-            p.DataSourceID = "hi";
-            Assert.IsTrue (p.OnDataPropertyChangedCalled, "OnDataPropertyChanged: DataSourceID");
-        }
+			p.DataSourceID = "hi";
+			Assert.IsTrue (p.OnDataPropertyChangedCalled, "OnDataPropertyChanged: DataSourceID");
+		}
 
-        [Test]
-        public void OnDataPropertyChanged2 ()
-        {
-            Poker p = new Poker ();
-            Assert.IsFalse (p.OnDataPropertyChangedCalled);
+		[Test]
+		public void OnDataPropertyChanged2 ()
+		{
+			Poker p = new Poker ();
+			Assert.IsFalse (p.OnDataPropertyChangedCalled);
 
-            p.DataSource = null;
-            Assert.IsTrue (p.OnDataPropertyChangedCalled, "OnDataPropertyChanged: DataSource");
-        }
+			p.DataSource = null;
+			Assert.IsTrue (p.OnDataPropertyChangedCalled, "OnDataPropertyChanged: DataSource");
+		}
 
-        [Test]
-        public void DataBind ()
-        {
-            Poker p = new Poker ();
-            p.DataSourceID = "DataSourceID";
-            p.SetRequiresDataBinding (true);
-            p.DataBind ();
-        }
+		[Test]
+		public void DataBind ()
+		{
+			Poker p = new Poker ();
+			p.DataSourceID = "DataSourceID";
+			p.SetRequiresDataBinding (true);
+			p.DataBind ();
+		}
 
-        [Test]
-        public void EnsureDataBound ()
-        {
-            Poker p = new Poker ();
-            p.DataSourceID = "DataSourceID";
-            p.SetRequiresDataBinding (true);
-            p.DoEnsureDataBound ();
-        }
+		[Test]
+		public void EnsureDataBound ()
+		{
+			Poker p = new Poker ();
+			p.DataSourceID = "DataSourceID";
+			p.SetRequiresDataBinding (true);
+			p.DoEnsureDataBound ();
+		}
 
-        [Test]
-        public void DataSource_ValidateDataSource ()
-        {
-            Poker p = new Poker ();
-            p.DataSource = null;
-            Assert.AreEqual (false, p.ValidateDataSourceCalled);
-            p.DataSource = new Object();
-            Assert.AreEqual (true, p.ValidateDataSourceCalled);
-        }
-        [Test]
-        public void SupportsDisabledAttribute ()
-        {
-            var ver40 = new Version (4, 0);
-            var ver35 = new Version (3, 5);
-            var p = new Poker ();
-            Assert.AreEqual (ver40, p.RenderingCompatibility, "#A1-1");
-            Assert.IsFalse (p.SupportsDisabledAttribute, "#A1-2");
+		[Test]
+		public void DataSource_ValidateDataSource ()
+		{
+			Poker p = new Poker ();
+			p.DataSource = null;
+			Assert.AreEqual (false, p.ValidateDataSourceCalled);
+			p.DataSource = new Object();
+			Assert.AreEqual (true, p.ValidateDataSourceCalled);
+		}
+		[Test]
+		public void SupportsDisabledAttribute ()
+		{
+			var ver40 = new Version (4, 0);
+			var ver35 = new Version (3, 5);
+			var p = new Poker ();
+			Assert.AreEqual (ver40, p.RenderingCompatibility, "#A1-1");
+			Assert.IsFalse (p.SupportsDisabledAttribute, "#A1-2");
 
-            p.RenderingCompatibility = new Version (3, 5);
-            Assert.AreEqual (ver35, p.RenderingCompatibility, "#A2-1");
-            Assert.IsTrue (p.SupportsDisabledAttribute, "#A2-2");
-        }
-    }
+			p.RenderingCompatibility = new Version (3, 5);
+			Assert.AreEqual (ver35, p.RenderingCompatibility, "#A2-1");
+			Assert.IsTrue (p.SupportsDisabledAttribute, "#A2-2");
+		}
+	}
 }

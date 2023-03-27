@@ -34,219 +34,219 @@ using System.Linq;
 
 namespace DbLinq.Null {
 
-    [System.ComponentModel.DesignerCategory("Code")]
-    class NullConnection : DbConnection
-    {
-        public NullConnection ()
-        {
+	[System.ComponentModel.DesignerCategory("Code")]
+	class NullConnection : DbConnection
+	{
+		public NullConnection ()
+		{
             ConnectionString = "";
-        }
+		}
 
-        public override string ConnectionString {get; set;}
-        public override string Database {get {return "NullDatabase";}}
-        public override string DataSource {get {return "NullDataSource";}}
-        public override string ServerVersion {get {return "0.0";}}
-        public override ConnectionState State {get {return ConnectionState.Closed;}}
+		public override string ConnectionString {get; set;}
+		public override string Database {get {return "NullDatabase";}}
+		public override string DataSource {get {return "NullDataSource";}}
+		public override string ServerVersion {get {return "0.0";}}
+		public override ConnectionState State {get {return ConnectionState.Closed;}}
 
-        public override void ChangeDatabase (string databaseName)
-        {
-            throw new NotSupportedException ();
-        }
+		public override void ChangeDatabase (string databaseName)
+		{
+			throw new NotSupportedException ();
+		}
 
-        public override void Close ()
-        {
-        }
+		public override void Close ()
+		{
+		}
 
-        public override void Open ()
-        {
-        }
+		public override void Open ()
+		{
+		}
 
-        protected override DbTransaction BeginDbTransaction (IsolationLevel level)
-        {
-            throw new NotSupportedException ();
-        }
+		protected override DbTransaction BeginDbTransaction (IsolationLevel level)
+		{
+			throw new NotSupportedException ();
+		}
 
-        protected override DbCommand CreateDbCommand ()
-        {
-            return new NullCommand ();
-        }
-    }
+		protected override DbCommand CreateDbCommand ()
+		{
+			return new NullCommand ();
+		}
+	}
 
-    class NullParameter : DbParameter
-    {
-        public override DbType DbType {get; set;}
-        public override ParameterDirection Direction {get; set;}
-        public override bool IsNullable {get; set;}
-        public override string ParameterName {get; set;}
-        public override int Size {get; set;}
-        public override string SourceColumn {get; set;}
-        public override bool SourceColumnNullMapping {get; set;}
-        public override DataRowVersion SourceVersion {get; set;}
-        public override object Value {get; set;}
+	class NullParameter : DbParameter
+	{
+		public override DbType DbType {get; set;}
+		public override ParameterDirection Direction {get; set;}
+		public override bool IsNullable {get; set;}
+		public override string ParameterName {get; set;}
+		public override int Size {get; set;}
+		public override string SourceColumn {get; set;}
+		public override bool SourceColumnNullMapping {get; set;}
+		public override DataRowVersion SourceVersion {get; set;}
+		public override object Value {get; set;}
 
-        public override void ResetDbType ()
-        {
-            throw new NotSupportedException ();
-        }
-    }
+		public override void ResetDbType ()
+		{
+			throw new NotSupportedException ();
+		}
+	}
 
-    class DbParameterCollection<TParameter> : DbParameterCollection
-        where TParameter : DbParameter
-    {
-        List<TParameter> parameters = new List<TParameter> ();
+	class DbParameterCollection<TParameter> : DbParameterCollection
+		where TParameter : DbParameter
+	{
+		List<TParameter> parameters = new List<TParameter> ();
 
-        public DbParameterCollection ()
-        {
-        }
+		public DbParameterCollection ()
+		{
+		}
 
-        public override int Count {get {return parameters.Count;}}
-        public override bool IsFixedSize {get {return false;}}
-        public override bool IsReadOnly {get {return false;}}
-        public override bool IsSynchronized {get {return false;}}
-        public override object SyncRoot {get {return parameters;}}
+		public override int Count {get {return parameters.Count;}}
+		public override bool IsFixedSize {get {return false;}}
+		public override bool IsReadOnly {get {return false;}}
+		public override bool IsSynchronized {get {return false;}}
+		public override object SyncRoot {get {return parameters;}}
 
-        public override int Add (object value)
-        {
-            if (!(value is TParameter))
-                throw new ArgumentException ("wrong type", "value");
-            parameters.Add ((TParameter) value);
-            return parameters.Count-1;
-        }
+		public override int Add (object value)
+		{
+			if (!(value is TParameter))
+				throw new ArgumentException ("wrong type", "value");
+			parameters.Add ((TParameter) value);
+			return parameters.Count-1;
+		}
 
-        public override void AddRange (Array values)
-        {
-            foreach (TParameter p in values)
-                Add (p);
-        }
+		public override void AddRange (Array values)
+		{
+			foreach (TParameter p in values)
+				Add (p);
+		}
 
-        public override void Clear ()
-        {
-            parameters.Clear ();
-        }
+		public override void Clear ()
+		{
+			parameters.Clear ();
+		}
 
-        public override bool Contains (object value)
-        {
-            return parameters.Contains ((TParameter) value);
-        }
+		public override bool Contains (object value)
+		{
+			return parameters.Contains ((TParameter) value);
+		}
 
-        public override bool Contains (string value)
-        {
-            return parameters.Any (p => p.ParameterName == value);
-        }
+		public override bool Contains (string value)
+		{
+			return parameters.Any (p => p.ParameterName == value);
+		}
 
-        public override void CopyTo (Array array, int index)
-        {
-            ((ICollection) parameters).CopyTo (array, index);
-        }
+		public override void CopyTo (Array array, int index)
+		{
+			((ICollection) parameters).CopyTo (array, index);
+		}
 
-        public override IEnumerator GetEnumerator ()
-        {
-            return parameters.GetEnumerator ();
-        }
+		public override IEnumerator GetEnumerator ()
+		{
+			return parameters.GetEnumerator ();
+		}
 
-        public override int IndexOf (object value)
-        {
-            return parameters.IndexOf ((TParameter) value);
-        }
+		public override int IndexOf (object value)
+		{
+			return parameters.IndexOf ((TParameter) value);
+		}
 
-        public override int IndexOf (string value)
-        {
-            for (int i = 0; i < parameters.Count; ++i)
-                if (parameters [i].ParameterName == value)
-                    return i;
-            return -1;
-        }
+		public override int IndexOf (string value)
+		{
+			for (int i = 0; i < parameters.Count; ++i)
+				if (parameters [i].ParameterName == value)
+					return i;
+			return -1;
+		}
 
-        public override void Insert (int index, object value)
-        {
-            parameters.Insert (index, (TParameter) value);
-        }
+		public override void Insert (int index, object value)
+		{
+			parameters.Insert (index, (TParameter) value);
+		}
 
-        public override void Remove (object value)
-        {
-            parameters.Remove ((TParameter) value);
-        }
+		public override void Remove (object value)
+		{
+			parameters.Remove ((TParameter) value);
+		}
 
-        public override void RemoveAt (int index)
-        {
-            parameters.RemoveAt (index);
-        }
+		public override void RemoveAt (int index)
+		{
+			parameters.RemoveAt (index);
+		}
 
-        public override void RemoveAt (string value)
-        {
-            int idx = IndexOf (value);
-            if (idx >= 0)
-                parameters.RemoveAt (idx);
-        }
+		public override void RemoveAt (string value)
+		{
+			int idx = IndexOf (value);
+			if (idx >= 0)
+				parameters.RemoveAt (idx);
+		}
 
-        protected override DbParameter GetParameter (int index)
-        {
-            return parameters [index];
-        }
+		protected override DbParameter GetParameter (int index)
+		{
+			return parameters [index];
+		}
 
-        protected override DbParameter GetParameter (string value)
-        {
-            return parameters.Where (p => p.ParameterName == value)
-                .FirstOrDefault ();
-        }
+		protected override DbParameter GetParameter (string value)
+		{
+			return parameters.Where (p => p.ParameterName == value)
+				.FirstOrDefault ();
+		}
 
-        protected override void SetParameter (int index, DbParameter value)
-        {
-            parameters [index] = (TParameter) value;
-        }
+		protected override void SetParameter (int index, DbParameter value)
+		{
+			parameters [index] = (TParameter) value;
+		}
 
-        protected override void SetParameter (string index, DbParameter value)
-        {
-            parameters [IndexOf (value)] = (TParameter) value;
-        }
-    }
+		protected override void SetParameter (string index, DbParameter value)
+		{
+			parameters [IndexOf (value)] = (TParameter) value;
+		}
+	}
 
-    class NullCommand : DbCommand
-    {
-        DbParameterCollection<NullParameter> parameters = new DbParameterCollection<NullParameter> ();
+	class NullCommand : DbCommand
+	{
+		DbParameterCollection<NullParameter> parameters = new DbParameterCollection<NullParameter> ();
 
-        public NullCommand ()
-        {
-        }
+		public NullCommand ()
+		{
+		}
 
-        public override string CommandText { get; set; }
-        public override int CommandTimeout { get; set; }
-        public override CommandType CommandType { get; set; }
-        public override bool DesignTimeVisible { get; set; }
-        public override UpdateRowSource UpdatedRowSource { get; set; }
+		public override string CommandText { get; set; }
+		public override int CommandTimeout { get; set; }
+		public override CommandType CommandType { get; set; }
+		public override bool DesignTimeVisible { get; set; }
+		public override UpdateRowSource UpdatedRowSource { get; set; }
 
-        protected override DbConnection DbConnection { get; set; }
-        protected override DbParameterCollection DbParameterCollection {get {return parameters;}}
-        protected override DbTransaction DbTransaction { get; set; }
+		protected override DbConnection DbConnection { get; set; }
+		protected override DbParameterCollection DbParameterCollection {get {return parameters;}}
+		protected override DbTransaction DbTransaction { get; set; }
 
-        public override void Cancel ()
-        {
-        }
+		public override void Cancel ()
+		{
+		}
 
-        public override int ExecuteNonQuery ()
-        {
-            throw new NotSupportedException ();
-        }
+		public override int ExecuteNonQuery ()
+		{
+			throw new NotSupportedException ();
+		}
 
-        public override object ExecuteScalar ()
-        {
-            throw new NotSupportedException ();
-        }
+		public override object ExecuteScalar ()
+		{
+			throw new NotSupportedException ();
+		}
 
-        public override void Prepare ()
-        {
-        }
+		public override void Prepare ()
+		{
+		}
 
-        protected override DbParameter CreateDbParameter ()
-        {
-            return new NullParameter ();
-        }
+		protected override DbParameter CreateDbParameter ()
+		{
+			return new NullParameter ();
+		}
 
-        protected override DbDataReader ExecuteDbDataReader (CommandBehavior behavior)
-        {
-            throw new NotSupportedException ();
-        }
-    }
+		protected override DbDataReader ExecuteDbDataReader (CommandBehavior behavior)
+		{
+			throw new NotSupportedException ();
+		}
+	}
 
     class NullDataReader : DbDataReader
     {

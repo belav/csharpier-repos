@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 //
 
@@ -29,45 +29,45 @@
 namespace System.Windows.Forms.RTF {
 
 #if RTF_LIB
-    public
+	public
 #else
-    internal
+	internal
 #endif
-    enum Major {
-        // Group class
-        BeginGroup,
-        EndGroup,
+	enum Major {
+		// Group class
+		BeginGroup,
+		EndGroup,
 
-        // Control
-        Version,
-        DefFont,
-        CharSet,
+		// Control
+		Version,
+		DefFont,
+		CharSet,
 
-        Destination,
-        FontFamily,
-        ColorName,
-        SpecialChar,
-        StyleAttr,
-        DocAttr,
-        SectAttr,
-        TblAttr,
-        ParAttr,
-        CharAttr,
-        PictAttr,
-        BookmarkAttr,
-        NeXTGrAttr,
-        FieldAttr,
-        TOCAttr,
-        PosAttr,
-        ObjAttr,
-        FNoteAttr,
-        KeyCodeAttr,
-        ACharAttr,
-        FontAttr,
-        FileAttr,
-        FileSource,
-        DrawAttr,
-        IndexAttr,
-        Unicode        
-    }
+		Destination,
+		FontFamily,
+		ColorName,
+		SpecialChar,
+		StyleAttr,
+		DocAttr,
+		SectAttr,
+		TblAttr,
+		ParAttr,
+		CharAttr,
+		PictAttr,
+		BookmarkAttr,
+		NeXTGrAttr,
+		FieldAttr,
+		TOCAttr,
+		PosAttr,
+		ObjAttr,
+		FNoteAttr,
+		KeyCodeAttr,
+		ACharAttr,
+		FontAttr,
+		FileAttr,
+		FileSource,
+		DrawAttr,
+		IndexAttr,
+		Unicode		
+	}
 }

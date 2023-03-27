@@ -2,7 +2,7 @@
 // System.Drawing.Design.ToolboxItemContainer
 // 
 // Authors:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 // 
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -33,86 +33,86 @@ using System.Windows.Forms;
 
 namespace System.Drawing.Design {
 
-    [Serializable]
-    public class ToolboxItemContainer : ISerializable {
+	[Serializable]
+	public class ToolboxItemContainer : ISerializable {
 
-        [MonoTODO]
-        public ToolboxItemContainer (IDataObject data)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public ToolboxItemContainer (IDataObject data)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public ToolboxItemContainer (ToolboxItem item)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public ToolboxItemContainer (ToolboxItem item)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected ToolboxItemContainer (SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException ();
-        }
-
-
-        [MonoTODO]
-        public bool IsCreated {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        public bool IsTransient {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        public virtual IDataObject ToolboxData {
-            get { throw new NotImplementedException (); }
-        }
-        
-
-        [MonoTODO]
-        public override bool Equals (object obj)
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public override int GetHashCode ()
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        protected virtual void GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected ToolboxItemContainer (SerializationInfo info, StreamingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
 
-        [MonoTODO]
-        public virtual ICollection GetFilter (ICollection creators)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public bool IsCreated {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public virtual ToolboxItem GetToolboxItem (ICollection creators)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public bool IsTransient {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public void UpdateFilter (ToolboxItem item)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public virtual IDataObject ToolboxData {
+			get { throw new NotImplementedException (); }
+		}
+		
+
+		[MonoTODO]
+		public override bool Equals (object obj)
+		{
+			throw new NotImplementedException ();
+		}
+
+		[MonoTODO]
+		public override int GetHashCode ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		[MonoTODO]
+		protected virtual void GetObjectData (SerializationInfo info, StreamingContext context)
+		{
+			throw new NotImplementedException ();
+		}
+
+		[MonoTODO]
+		void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
+		{
+			throw new NotImplementedException ();
+		}
+
+
+		[MonoTODO]
+		public virtual ICollection GetFilter (ICollection creators)
+		{
+			throw new NotImplementedException ();
+		}
+
+		[MonoTODO]
+		public virtual ToolboxItem GetToolboxItem (ICollection creators)
+		{
+			throw new NotImplementedException ();
+		}
+
+		[MonoTODO]
+		public void UpdateFilter (ToolboxItem item)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

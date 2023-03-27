@@ -4,7 +4,7 @@
 // resources type.
 //
 // Author:
-//    Gary Barnett (gary.barnett.mono@gmail.com)
+//	Gary Barnett (gary.barnett.mono@gmail.com)
 // 
 // Copyright (C) Gary Barnett (2012)
 //
@@ -33,98 +33,98 @@ using System.ComponentModel.Design;
 using System.ComponentModel;
 
 namespace System.Resources {
-    internal class TypeConverterFromResXHandler : ResXDataNodeHandler, IWritableHandler {
+	internal class TypeConverterFromResXHandler : ResXDataNodeHandler, IWritableHandler {
 
-        string dataString;
-        string mime_type;
-        string typeString;
+		string dataString;
+		string mime_type;
+		string typeString;
 
-        public TypeConverterFromResXHandler (string data, string _mime_type, string _typeString)
-        {
-            dataString = data;
-            mime_type = _mime_type;
-            typeString = _typeString;
-        }
+		public TypeConverterFromResXHandler (string data, string _mime_type, string _typeString)
+		{
+			dataString = data;
+			mime_type = _mime_type;
+			typeString = _typeString;
+		}
 
-        #region implemented abstract members of System.Resources.ResXDataNodeHandler
-        public override object GetValue (ITypeResolutionService typeResolver)
-        {
-            if (!String.IsNullOrEmpty(mime_type)
-                && mime_type != ResXResourceWriter.ByteArraySerializedObjectMimeType)
-                return null;
+		#region implemented abstract members of System.Resources.ResXDataNodeHandler
+		public override object GetValue (ITypeResolutionService typeResolver)
+		{
+			if (!String.IsNullOrEmpty(mime_type)
+			    && mime_type != ResXResourceWriter.ByteArraySerializedObjectMimeType)
+				return null;
 
-            Type type = ResolveType (typeString, typeResolver);
-            if (type == null)
-                throw new TypeLoadException();
+			Type type = ResolveType (typeString, typeResolver);
+			if (type == null)
+				throw new TypeLoadException();
 
-            TypeConverter c = TypeDescriptor.GetConverter (type);
-            if (c == null)
-                throw new TypeLoadException();
+			TypeConverter c = TypeDescriptor.GetConverter (type);
+			if (c == null)
+				throw new TypeLoadException();
 
-            return ConvertData (c);
-        }
+			return ConvertData (c);
+		}
 
-        public override object GetValue (AssemblyName[] assemblyNames)
-        {
-            if (!String.IsNullOrEmpty(mime_type)
-                && mime_type != ResXResourceWriter.ByteArraySerializedObjectMimeType)
-                return null;
+		public override object GetValue (AssemblyName[] assemblyNames)
+		{
+			if (!String.IsNullOrEmpty(mime_type)
+			    && mime_type != ResXResourceWriter.ByteArraySerializedObjectMimeType)
+				return null;
 
-            Type type = ResolveType (typeString, assemblyNames);
-            if (type == null)
-                throw new TypeLoadException();
+			Type type = ResolveType (typeString, assemblyNames);
+			if (type == null)
+				throw new TypeLoadException();
 
-            TypeConverter c = TypeDescriptor.GetConverter (type);
-            if (c == null)
-                throw new TypeLoadException();
+			TypeConverter c = TypeDescriptor.GetConverter (type);
+			if (c == null)
+				throw new TypeLoadException();
 
-            return ConvertData (c);
-        }
+			return ConvertData (c);
+		}
 
-        public override string GetValueTypeName (ITypeResolutionService typeResolver)
-        {
-            Type type = ResolveType (typeString, typeResolver);
+		public override string GetValueTypeName (ITypeResolutionService typeResolver)
+		{
+			Type type = ResolveType (typeString, typeResolver);
 
-            if (type == null)
-                return typeString;
-            else
-                return type.AssemblyQualifiedName;
-        }
+			if (type == null)
+				return typeString;
+			else
+				return type.AssemblyQualifiedName;
+		}
 
-        public override string GetValueTypeName (AssemblyName [] assemblyNames)
-        {
-            Type type = ResolveType (typeString, assemblyNames);
+		public override string GetValueTypeName (AssemblyName [] assemblyNames)
+		{
+			Type type = ResolveType (typeString, assemblyNames);
 
-            if (type == null)
-                return typeString;
-            else
-                return type.AssemblyQualifiedName;
-        }
-        #endregion
+			if (type == null)
+				return typeString;
+			else
+				return type.AssemblyQualifiedName;
+		}
+		#endregion
 
-        #region IWritableHandler implementation
-        public string DataString {
-            get {
-                return dataString;
-            }
-        }
-        #endregion
+		#region IWritableHandler implementation
+		public string DataString {
+			get {
+				return dataString;
+			}
+		}
+		#endregion
 
-        object ConvertData (TypeConverter c)
-        {
-            if (mime_type == ResXResourceWriter.ByteArraySerializedObjectMimeType) {
-                if (c.CanConvertFrom (typeof (byte [])))
-                    return c.ConvertFrom (Convert.FromBase64String (dataString));
-            } else if (String.IsNullOrEmpty (mime_type)) {
-                if (c.CanConvertFrom (typeof (string)))
-                    return c.ConvertFromInvariantString (dataString);
-            }
-            else
-                throw new Exception ("shouldnt get here, invalid mime type");
+		object ConvertData (TypeConverter c)
+		{
+			if (mime_type == ResXResourceWriter.ByteArraySerializedObjectMimeType) {
+				if (c.CanConvertFrom (typeof (byte [])))
+					return c.ConvertFrom (Convert.FromBase64String (dataString));
+			} else if (String.IsNullOrEmpty (mime_type)) {
+				if (c.CanConvertFrom (typeof (string)))
+					return c.ConvertFromInvariantString (dataString);
+			}
+			else
+				throw new Exception ("shouldnt get here, invalid mime type");
 
-            throw new TypeLoadException ("No converter for this type found");
-        }
+			throw new TypeLoadException ("No converter for this type found");
+		}
 
-    }
+	}
 }
 

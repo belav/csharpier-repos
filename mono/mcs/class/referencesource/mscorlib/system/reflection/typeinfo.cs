@@ -167,8 +167,8 @@ namespace System.Reflection
             get
             {
                 foreach (var t in GetNestedTypes(Type.DeclaredOnlyLookup)){
-                    yield return t.GetTypeInfo();
-                }
+	        		yield return t.GetTypeInfo();
+    		    }
             }
         }
 

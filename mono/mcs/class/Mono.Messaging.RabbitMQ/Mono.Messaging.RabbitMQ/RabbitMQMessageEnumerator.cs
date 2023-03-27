@@ -2,7 +2,7 @@
 // Mono.Messaging.RabbitMQ
 //
 // Authors:
-//      Michael Barker (mike@middlesoft.co.uk)
+//	  Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -41,155 +41,155 @@ using RabbitMQ.Util;
 
 namespace Mono.Messaging.RabbitMQ {
 
-    public class RabbitMQMessageEnumerator : IMessageEnumerator {
-        
-        private readonly MessageFactory helper;
-        private readonly QueueReference qRef;
-        private IConnection cn = null;
-        private BasicDeliverEventArgs current = null;
-        private IModel model = null;
-        private Subscription subscription = null;
-        
-        public RabbitMQMessageEnumerator (MessageFactory helper,
-                                          QueueReference qRef) {
-            this.helper = helper;
-            this.qRef = qRef;
-        }
-        
-        public IMessage Current { 
-            get {
-                if (current == null)
-                    throw new InvalidOperationException ();
-                
-                return CreateMessage (current);
-            }
-        }
-        
-        public IntPtr CursorHandle {
-            get { throw new NotImplementedException (); }
-        }
-        
-        public void Close ()
-        {
-            if (subscription != null) {
-                subscription.Close ();
-                subscription = null;
-            }
-            
-            if (model != null) {
-                model.Dispose ();
-                model = null;
-            }
-            
-            if (cn != null) {
-                cn.Dispose ();
-                cn = null;
-            }
-        }
+	public class RabbitMQMessageEnumerator : IMessageEnumerator {
+		
+		private readonly MessageFactory helper;
+		private readonly QueueReference qRef;
+		private IConnection cn = null;
+		private BasicDeliverEventArgs current = null;
+		private IModel model = null;
+		private Subscription subscription = null;
+		
+		public RabbitMQMessageEnumerator (MessageFactory helper,
+		                                  QueueReference qRef) {
+			this.helper = helper;
+			this.qRef = qRef;
+		}
+		
+		public IMessage Current { 
+			get {
+				if (current == null)
+					throw new InvalidOperationException ();
+				
+				return CreateMessage (current);
+			}
+		}
+		
+		public IntPtr CursorHandle {
+			get { throw new NotImplementedException (); }
+		}
+		
+		public void Close ()
+		{
+			if (subscription != null) {
+				subscription.Close ();
+				subscription = null;
+			}
+			
+			if (model != null) {
+				model.Dispose ();
+				model = null;
+			}
+			
+			if (cn != null) {
+				cn.Dispose ();
+				cn = null;
+			}
+		}
 
-        public void Dispose (bool disposing)
-        {
-        }
-        
-        public void Dispose ()
-        {
-            Close ();
-        }
-        
-        public void Reset ()
-        {
-            Close ();
-        }
-        
-        private IModel Model {
-            get {
-                if (cn == null) {
-                    ConnectionFactory cf = new ConnectionFactory ();
-                    cf.Address = qRef.Host;
-                    cn = cf.CreateConnection ();
-                }
-                
-                if (model == null) {
-                    model = cn.CreateModel ();
-                }
-                
-                return model;
-            }
-        }
-        
-        private Subscription Subscription {
-            get {
-                if (subscription == null) {
-                    IModel ch = Model;
-                    
-                    string finalName = ch.QueueDeclare (qRef.Queue, false);
-                    
-                    subscription = new Subscription (ch, finalName);
-                }
-                
-                return subscription;
-            }
-        }
+		public void Dispose (bool disposing)
+		{
+		}
+		
+		public void Dispose ()
+		{
+			Close ();
+		}
+		
+		public void Reset ()
+		{
+			Close ();
+		}
+		
+		private IModel Model {
+			get {
+				if (cn == null) {
+					ConnectionFactory cf = new ConnectionFactory ();
+					cf.Address = qRef.Host;
+					cn = cf.CreateConnection ();
+				}
+				
+				if (model == null) {
+					model = cn.CreateModel ();
+				}
+				
+				return model;
+			}
+		}
+		
+		private Subscription Subscription {
+			get {
+				if (subscription == null) {
+					IModel ch = Model;
+					
+					string finalName = ch.QueueDeclare (qRef.Queue, false);
+					
+					subscription = new Subscription (ch, finalName);
+				}
+				
+				return subscription;
+			}
+		}
 
-        public bool MoveNext ()
-        {
-            Subscription sub = Subscription;
-            return sub.Next (500, out current);
-        }
-        
-        public bool MoveNext (TimeSpan timeout)
-        {
-            int timeoutMillis = MessageFactory.TimeSpanToMillis (timeout);
-            return Subscription.Next (timeoutMillis, out current);
-        }
+		public bool MoveNext ()
+		{
+			Subscription sub = Subscription;
+			return sub.Next (500, out current);
+		}
+		
+		public bool MoveNext (TimeSpan timeout)
+		{
+			int timeoutMillis = MessageFactory.TimeSpanToMillis (timeout);
+			return Subscription.Next (timeoutMillis, out current);
+		}
 
-        public IMessage RemoveCurrent ()
-        {
-            if (current == null)
-                throw new InvalidOperationException ();
-            
-            IMessage msg = CreateMessage (current);
-            Subscription.Ack (current);
-            return msg;
-        }
-        
-        public IMessage RemoveCurrent (IMessageQueueTransaction transaction)
-        {
-            throw new NotSupportedException ("Unable to remove messages within a transaction");
-        }
-        
-        public IMessage RemoveCurrent (MessageQueueTransactionType transactionType)
-        {
-            throw new NotSupportedException ("Unable to remove messages within a transaction");
-        }
-        
-        public IMessage RemoveCurrent (TimeSpan timeout)
-        {
-            // Timeout makes no sense for this implementation, so we just work 
-            // the same as the non-timeout based one. 
-            
-            if (current == null)
-                throw new InvalidOperationException ();
-            
-            IMessage msg = CreateMessage (current);
-            Subscription.Ack (current);
-            return msg;
-        }
-        
-        public IMessage RemoveCurrent (TimeSpan timeout, IMessageQueueTransaction transaction)
-        {
-            throw new NotSupportedException ("Unable to remove messages within a transaction");
-        }
-        
-        public IMessage RemoveCurrent (TimeSpan timeout, MessageQueueTransactionType transactionType)
-        {
-            throw new NotSupportedException ("Unable to remove messages within a transaction");
-        }
-        
-        private IMessage CreateMessage (BasicDeliverEventArgs result)
-        {
-            return helper.ReadMessage (qRef, result);
-        }
+		public IMessage RemoveCurrent ()
+		{
+			if (current == null)
+				throw new InvalidOperationException ();
+			
+			IMessage msg = CreateMessage (current);
+			Subscription.Ack (current);
+			return msg;
+		}
+		
+		public IMessage RemoveCurrent (IMessageQueueTransaction transaction)
+		{
+			throw new NotSupportedException ("Unable to remove messages within a transaction");
+		}
+		
+		public IMessage RemoveCurrent (MessageQueueTransactionType transactionType)
+		{
+			throw new NotSupportedException ("Unable to remove messages within a transaction");
+		}
+		
+		public IMessage RemoveCurrent (TimeSpan timeout)
+		{
+			// Timeout makes no sense for this implementation, so we just work 
+			// the same as the non-timeout based one. 
+			
+			if (current == null)
+				throw new InvalidOperationException ();
+			
+			IMessage msg = CreateMessage (current);
+			Subscription.Ack (current);
+			return msg;
+		}
+		
+		public IMessage RemoveCurrent (TimeSpan timeout, IMessageQueueTransaction transaction)
+		{
+			throw new NotSupportedException ("Unable to remove messages within a transaction");
+		}
+		
+		public IMessage RemoveCurrent (TimeSpan timeout, MessageQueueTransactionType transactionType)
+		{
+			throw new NotSupportedException ("Unable to remove messages within a transaction");
+		}
+		
+		private IMessage CreateMessage (BasicDeliverEventArgs result)
+		{
+			return helper.ReadMessage (qRef, result);
+		}
 
-    }
+	}
 }

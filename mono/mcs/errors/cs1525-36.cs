@@ -5,8 +5,8 @@ using System;
 
 class a
 {
-    [MergablePropertyAttribute (f alse)]
-    public static int Prop {
-        get; set;
-    }
+	[MergablePropertyAttribute (f alse)]
+	public static int Prop {
+		get; set;
+	}
 }

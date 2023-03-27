@@ -2,7 +2,7 @@
 // RsaKeyIdentifierClause.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,70 +33,70 @@ using System.Security.Cryptography;
 
 namespace System.IdentityModel.Tokens
 {
-    public class RsaKeyIdentifierClause : SecurityKeyIdentifierClause
-    {
-        public RsaKeyIdentifierClause (RSA rsa)
-            : base (null)
-        {
-            this.rsa = rsa;
-        }
+	public class RsaKeyIdentifierClause : SecurityKeyIdentifierClause
+	{
+		public RsaKeyIdentifierClause (RSA rsa)
+			: base (null)
+		{
+			this.rsa = rsa;
+		}
 
-        RSA rsa;
+		RSA rsa;
 
-        public RSA Rsa {
-            get { return rsa; }
-        }
+		public RSA Rsa {
+			get { return rsa; }
+		}
 
-        public override bool CanCreateKey {
-            get { return true; }
-        }
+		public override bool CanCreateKey {
+			get { return true; }
+		}
 
-        public override SecurityKey CreateKey ()
-        {
-            return new RsaSecurityKey (rsa);
-        }
+		public override SecurityKey CreateKey ()
+		{
+			return new RsaSecurityKey (rsa);
+		}
 
-        public byte [] GetExponent ()
-        {
-            return rsa.ExportParameters (false).Exponent;
-        }
+		public byte [] GetExponent ()
+		{
+			return rsa.ExportParameters (false).Exponent;
+		}
 
-        [MonoTODO]
-        public void WriteExponentAsBase64 (XmlWriter writer)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void WriteExponentAsBase64 (XmlWriter writer)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public byte [] GetModulus ()
-        {
-            return rsa.ExportParameters (false).Modulus;
-        }
+		public byte [] GetModulus ()
+		{
+			return rsa.ExportParameters (false).Modulus;
+		}
 
-        [MonoTODO]
-        public void WriteModulusAsBase64 (XmlWriter writer)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void WriteModulusAsBase64 (XmlWriter writer)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
-        {
-            if (keyIdentifierClause == null)
-                throw new ArgumentNullException ("keyIdentifierClause");
-            RsaKeyIdentifierClause rkic =
-                keyIdentifierClause as RsaKeyIdentifierClause;
-            return rkic != null && Matches (rkic.Rsa);
-        }
+		public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
+		{
+			if (keyIdentifierClause == null)
+				throw new ArgumentNullException ("keyIdentifierClause");
+			RsaKeyIdentifierClause rkic =
+				keyIdentifierClause as RsaKeyIdentifierClause;
+			return rkic != null && Matches (rkic.Rsa);
+		}
 
-        public bool Matches (RSA rsa)
-        {
-            // hmm, there should be more decent way to compare ...
-            return rsa.ToXmlString (false) == this.rsa.ToXmlString (false);
-        }
+		public bool Matches (RSA rsa)
+		{
+			// hmm, there should be more decent way to compare ...
+			return rsa.ToXmlString (false) == this.rsa.ToXmlString (false);
+		}
 
-        [MonoTODO]
-        public override string ToString ()
-        {
-            return base.ToString ();
-        }
-    }
+		[MonoTODO]
+		public override string ToString ()
+		{
+			return base.ToString ();
+		}
+	}
 }

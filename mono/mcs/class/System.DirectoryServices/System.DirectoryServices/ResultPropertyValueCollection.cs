@@ -35,56 +35,56 @@ using System.Collections;
 
 namespace System.DirectoryServices
 {
-    /// <summary>
-    /// Contains the values of a SearchResult property.
-    /// </summary>
-    /// <remarks>
-    /// SearchResult instances are similar to DirectoryEntry instances. The 
-    /// notable difference is that the DirectoryEntry retrieves its 
-    /// information from the Active Directory hierarchy each time a new object 
-    /// is accessed, whereas the data for the SearchResult is already 
-    /// available in the SearchResultCollection that a DirectorySearcher 
-    /// query returns. If you try to get a SearchResult property that your 
-    /// query did not specify for retrieval, the property will not be 
-    /// available.
-    /// </remarks>
-    public class ResultPropertyValueCollection  : ReadOnlyCollectionBase
-    {
-        internal ResultPropertyValueCollection()
-        {
-        }
+	/// <summary>
+	/// Contains the values of a SearchResult property.
+	/// </summary>
+	/// <remarks>
+	/// SearchResult instances are similar to DirectoryEntry instances. The 
+	/// notable difference is that the DirectoryEntry retrieves its 
+	/// information from the Active Directory hierarchy each time a new object 
+	/// is accessed, whereas the data for the SearchResult is already 
+	/// available in the SearchResultCollection that a DirectorySearcher 
+	/// query returns. If you try to get a SearchResult property that your 
+	/// query did not specify for retrieval, the property will not be 
+	/// available.
+	/// </remarks>
+	public class ResultPropertyValueCollection  : ReadOnlyCollectionBase
+	{
+		internal ResultPropertyValueCollection()
+		{
+		}
 
-        internal void Add (object component)
-        {
-            InnerList.Add (component);
-        }
+		internal void Add (object component)
+		{
+			InnerList.Add (component);
+		}
 
-        internal void AddRange (object[] components)
-        {
-            InnerList.AddRange (components);
-        }
+		internal void AddRange (object[] components)
+		{
+			InnerList.AddRange (components);
+		}
 
-        public virtual object this [int index] 
-        {
-            get { return (object) InnerList[index]; }
-        }
+		public virtual object this [int index] 
+		{
+			get { return (object) InnerList[index]; }
+		}
 
-        public bool Contains (object value)
-        {
-            return InnerList.Contains (value);
-        }
+		public bool Contains (object value)
+		{
+			return InnerList.Contains (value);
+		}
 
-        public void CopyTo (object[] values, int index)
-        {
-            InnerList.CopyTo (values, index);
-        }
+		public void CopyTo (object[] values, int index)
+		{
+			InnerList.CopyTo (values, index);
+		}
 
-        public int IndexOf (object value)
-        {
-            return InnerList.IndexOf (value);
-        }
+		public int IndexOf (object value)
+		{
+			return InnerList.IndexOf (value);
+		}
 
 
-    }
+	}
 }
 

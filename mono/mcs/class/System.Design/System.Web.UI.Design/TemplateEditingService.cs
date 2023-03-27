@@ -33,58 +33,58 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-    [Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-    public sealed class TemplateEditingService : ITemplateEditingService, IDisposable
-    {
-        public TemplateEditingService (IDesignerHost designerHost)
-        {
-            if (designerHost == null)
-                throw new ArgumentNullException ("designerHost");
+	[Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
+	public sealed class TemplateEditingService : ITemplateEditingService, IDisposable
+	{
+		public TemplateEditingService (IDesignerHost designerHost)
+		{
+			if (designerHost == null)
+				throw new ArgumentNullException ("designerHost");
 
-            _designerHost = designerHost;
-        }
+			_designerHost = designerHost;
+		}
 
-        ~TemplateEditingService ()
-        {
-            Dispose (false);
-        }
+		~TemplateEditingService ()
+		{
+			Dispose (false);
+		}
 
-        [MonoTODO]
-        public ITemplateEditingFrame CreateFrame (TemplatedControlDesigner designer, string frameName, string[] templateNames)
-        {
-            return CreateFrame (designer, frameName, templateNames, null, null);
-        }
+		[MonoTODO]
+		public ITemplateEditingFrame CreateFrame (TemplatedControlDesigner designer, string frameName, string[] templateNames)
+		{
+			return CreateFrame (designer, frameName, templateNames, null, null);
+		}
 
-        [MonoTODO]
-        public ITemplateEditingFrame CreateFrame (TemplatedControlDesigner designer, string frameName, string[] templateNames, Style controlStyle, Style[] templateStyles)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public ITemplateEditingFrame CreateFrame (TemplatedControlDesigner designer, string frameName, string[] templateNames, Style controlStyle, Style[] templateStyles)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public void Dispose ()
-        {
-            Dispose (true);
-            GC.SuppressFinalize (this);
-        }
+		public void Dispose ()
+		{
+			Dispose (true);
+			GC.SuppressFinalize (this);
+		}
 
-        private void Dispose (bool disposing)
-        {
-            if (disposing)
-                _designerHost = null;
-        }
+		private void Dispose (bool disposing)
+		{
+			if (disposing)
+				_designerHost = null;
+		}
 
-        [MonoTODO]
-        public string GetContainingTemplateName (Control control)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public string GetContainingTemplateName (Control control)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public bool SupportsNestedTemplateEditing {
-            get {
-                return false;
-            }
-        }
+		public bool SupportsNestedTemplateEditing {
+			get {
+				return false;
+			}
+		}
 
-        private IDesignerHost _designerHost;
-    }
+		private IDesignerHost _designerHost;
+	}
 }

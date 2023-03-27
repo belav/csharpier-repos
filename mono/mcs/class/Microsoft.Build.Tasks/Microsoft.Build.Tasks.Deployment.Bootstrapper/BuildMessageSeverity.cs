@@ -32,12 +32,12 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
 
-    [Guid ("936D32F9-1A68-4d5e-98EA-044AC9A1AADA")]
-    [ComVisible (true)]
-    public enum BuildMessageSeverity {
-        Info,
-        Warning,
-        Error
-    }
+	[Guid ("936D32F9-1A68-4d5e-98EA-044AC9A1AADA")]
+	[ComVisible (true)]
+	public enum BuildMessageSeverity {
+		Info,
+		Warning,
+		Error
+	}
 }
 

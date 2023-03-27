@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 public class C
 {
-    public static void Test<T>(T t) 
-        where T: IEnumerable<string>, IEnumerable<int>
-    {
-        foreach (int i in t)
-        {
-        }
-    }
+	public static void Test<T>(T t) 
+		where T: IEnumerable<string>, IEnumerable<int>
+	{
+		foreach (int i in t)
+		{
+		}
+	}
 }

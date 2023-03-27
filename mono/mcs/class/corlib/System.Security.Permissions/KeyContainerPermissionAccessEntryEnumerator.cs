@@ -2,7 +2,7 @@
 // System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator class
 //
 // Author
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,36 +31,36 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-    [Serializable]
-    [ComVisible (true)]
-    public sealed class KeyContainerPermissionAccessEntryEnumerator : IEnumerator {
+	[Serializable]
+	[ComVisible (true)]
+	public sealed class KeyContainerPermissionAccessEntryEnumerator : IEnumerator {
 
-        private IEnumerator e;
+		private IEnumerator e;
 
-        internal KeyContainerPermissionAccessEntryEnumerator (ArrayList list)
-        {
-            e = list.GetEnumerator ();
-        }
-
-
-        public KeyContainerPermissionAccessEntry Current {
-            get { return (KeyContainerPermissionAccessEntry) e.Current; }
-        }
-
-        object IEnumerator.Current {
-            get { return e.Current; }
-        }
+		internal KeyContainerPermissionAccessEntryEnumerator (ArrayList list)
+		{
+			e = list.GetEnumerator ();
+		}
 
 
-        public bool MoveNext ()
-        {
-            return e.MoveNext ();
-        }
+		public KeyContainerPermissionAccessEntry Current {
+			get { return (KeyContainerPermissionAccessEntry) e.Current; }
+		}
 
-        public void Reset ()
-        {
-            e.Reset ();
-        }
-    }
+		object IEnumerator.Current {
+			get { return e.Current; }
+		}
+
+
+		public bool MoveNext ()
+		{
+			return e.MoveNext ();
+		}
+
+		public void Reset ()
+		{
+			e.Reset ();
+		}
+	}
 }
 

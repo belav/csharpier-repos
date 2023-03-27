@@ -1,4 +1,4 @@
-//
+﻿//
 // ScriptReferenceCollection.cs
 //
 // Author:
@@ -34,7 +34,7 @@ using System.Collections.ObjectModel;
 
 namespace System.Web.UI
 {
-    public class ScriptReferenceCollection : Collection<ScriptReference>
-    {
-    }
+	public class ScriptReferenceCollection : Collection<ScriptReference>
+	{
+	}
 }

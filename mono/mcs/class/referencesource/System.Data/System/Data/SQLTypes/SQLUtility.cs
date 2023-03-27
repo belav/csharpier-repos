@@ -10,17 +10,17 @@
 //**************************************************************************
 // @File: SQLUtility.cs
 //
-// Create by:    JunFang
+// Create by:	JunFang
 //
 // Purpose: Implementation of utilities in COM+ SQL Types Library.
-//            Includes interface INullable, exceptions SqlNullValueException
-//            and SqlTruncateException, and SQLDebug class.
+//			Includes interface INullable, exceptions SqlNullValueException
+//			and SqlTruncateException, and SQLDebug class.
 //
 // Notes:
 //
 // History:
 //
-//   09/17/99  JunFang    Created and implemented as first drop.
+//   09/17/99  JunFang	Created and implemented as first drop.
 //
 // @EndHeader@
 //**************************************************************************
@@ -43,12 +43,12 @@ namespace System.Data.SqlTypes {
         NE
     }
 
-    // This enumeration is used to inquire about internal storage of a SqlBytes or SqlChars instance:
+	// This enumeration is used to inquire about internal storage of a SqlBytes or SqlChars instance:
     public enum StorageState {
-        Buffer = 0,
-        Stream = 1,
-        UnmanagedBuffer = 2
-    }
+		Buffer = 0,
+		Stream = 1,
+		UnmanagedBuffer = 2
+	}
 
     [Serializable]
     public class SqlTypeException : SystemException {
@@ -139,53 +139,53 @@ namespace System.Data.SqlTypes {
         }
     } // SqlTruncateException
 
-    [Serializable]
+	[Serializable]
     public sealed class SqlNotFilledException : SqlTypeException {
-        // 
+		// 
 
 
-        // Creates a new SqlNotFilledException with its message string set to the common string.
-        public SqlNotFilledException() : this(SQLResource.NotFilledMessage, null) {
+		// Creates a new SqlNotFilledException with its message string set to the common string.
+		public SqlNotFilledException() : this(SQLResource.NotFilledMessage, null) {
+		}
+
+		// Creates a new NullValueException with its message string set to message.
+		public SqlNotFilledException(String message) : this(message, null) {
         }
 
-        // Creates a new NullValueException with its message string set to message.
-        public SqlNotFilledException(String message) : this(message, null) {
-        }
+		public SqlNotFilledException(String message, Exception e) : base(message, e) { // MDAC 82931
+			HResult = HResults.SqlNullValue; // MDAC 84941
+		}
 
-        public SqlNotFilledException(String message, Exception e) : base(message, e) { // MDAC 82931
-            HResult = HResults.SqlNullValue; // MDAC 84941
-        }
+		// runtime will call even if private...
+		// <fxcop ignore=SerializableTypesMustHaveMagicConstructorWithAdequateSecurity />
+		private SqlNotFilledException(SerializationInfo si, StreamingContext sc) : base(si, sc) {
+		}
+	} // SqlNotFilledException
 
-        // runtime will call even if private...
-        // <fxcop ignore=SerializableTypesMustHaveMagicConstructorWithAdequateSecurity />
-        private SqlNotFilledException(SerializationInfo si, StreamingContext sc) : base(si, sc) {
-        }
-    } // SqlNotFilledException
-
-    [Serializable]
+	[Serializable]
     public sealed class SqlAlreadyFilledException : SqlTypeException {
-        // 
+		// 
 
 
-        // Creates a new SqlNotFilledException with its message string set to the common string.
-        public SqlAlreadyFilledException() : this(SQLResource.AlreadyFilledMessage, null) {
+		// Creates a new SqlNotFilledException with its message string set to the common string.
+		public SqlAlreadyFilledException() : this(SQLResource.AlreadyFilledMessage, null) {
+		}
+
+		// Creates a new NullValueException with its message string set to message.
+		public SqlAlreadyFilledException(String message) : this(message, null) {
         }
 
-        // Creates a new NullValueException with its message string set to message.
-        public SqlAlreadyFilledException(String message) : this(message, null) {
-        }
+		public SqlAlreadyFilledException(String message, Exception e) : base(message, e) { // MDAC 82931
+			HResult = HResults.SqlNullValue; // MDAC 84941
+		}
 
-        public SqlAlreadyFilledException(String message, Exception e) : base(message, e) { // MDAC 82931
-            HResult = HResults.SqlNullValue; // MDAC 84941
-        }
+		// runtime will call even if private...
+		// <fxcop ignore=SerializableTypesMustHaveMagicConstructorWithAdequateSecurity />
+		private SqlAlreadyFilledException(SerializationInfo si, StreamingContext sc) : base(si, sc) {
+		}
+	} // SqlNotFilledException
 
-        // runtime will call even if private...
-        // <fxcop ignore=SerializableTypesMustHaveMagicConstructorWithAdequateSecurity />
-        private SqlAlreadyFilledException(SerializationInfo si, StreamingContext sc) : base(si, sc) {
-        }
-    } // SqlNotFilledException
-
-    
+	
     internal sealed class SQLDebug {
         private SQLDebug() { /* prevent utility class from being insantiated*/ }
 

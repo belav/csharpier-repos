@@ -32,56 +32,56 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-    public class XamlObjectWriterSettings : XamlWriterSettings
-    {
-        public XamlObjectWriterSettings ()
-        {
-        }
+	public class XamlObjectWriterSettings : XamlWriterSettings
+	{
+		public XamlObjectWriterSettings ()
+		{
+		}
 
-        public XamlObjectWriterSettings (XamlObjectWriterSettings settings)
-            : base (settings)
-        {
-            var s = settings;
+		public XamlObjectWriterSettings (XamlObjectWriterSettings settings)
+			: base (settings)
+		{
+			var s = settings;
 #if !__MOBILE__
-            AccessLevel = s.AccessLevel;
+			AccessLevel = s.AccessLevel;
 #endif
-            AfterBeginInitHandler = s.AfterBeginInitHandler;
-            AfterEndInitHandler = s.AfterEndInitHandler;
-            AfterPropertiesHandler = s.AfterPropertiesHandler;
-            BeforePropertiesHandler = s.BeforePropertiesHandler;
-            ExternalNameScope = s.ExternalNameScope;
-            IgnoreCanConvert = s.IgnoreCanConvert;
-            PreferUnconvertedDictionaryKeys = s.PreferUnconvertedDictionaryKeys;
-            RegisterNamesOnExternalNamescope = s.RegisterNamesOnExternalNamescope;
-            RootObjectInstance = s.RootObjectInstance;
-            SkipDuplicatePropertyCheck = s.SkipDuplicatePropertyCheck;
-            SkipProvideValueOnRoot = s.SkipProvideValueOnRoot;
-            XamlSetValueHandler = s.XamlSetValueHandler;
-        }
+			AfterBeginInitHandler = s.AfterBeginInitHandler;
+			AfterEndInitHandler = s.AfterEndInitHandler;
+			AfterPropertiesHandler = s.AfterPropertiesHandler;
+			BeforePropertiesHandler = s.BeforePropertiesHandler;
+			ExternalNameScope = s.ExternalNameScope;
+			IgnoreCanConvert = s.IgnoreCanConvert;
+			PreferUnconvertedDictionaryKeys = s.PreferUnconvertedDictionaryKeys;
+			RegisterNamesOnExternalNamescope = s.RegisterNamesOnExternalNamescope;
+			RootObjectInstance = s.RootObjectInstance;
+			SkipDuplicatePropertyCheck = s.SkipDuplicatePropertyCheck;
+			SkipProvideValueOnRoot = s.SkipProvideValueOnRoot;
+			XamlSetValueHandler = s.XamlSetValueHandler;
+		}
 
-        public EventHandler<XamlObjectEventArgs> AfterBeginInitHandler { get; set; }
-        public EventHandler<XamlObjectEventArgs> AfterEndInitHandler { get; set; }
-        public EventHandler<XamlObjectEventArgs> AfterPropertiesHandler { get; set; }
-        public EventHandler<XamlObjectEventArgs> BeforePropertiesHandler { get; set; }
-        public EventHandler<XamlSetValueEventArgs> XamlSetValueHandler { get; set; }
+		public EventHandler<XamlObjectEventArgs> AfterBeginInitHandler { get; set; }
+		public EventHandler<XamlObjectEventArgs> AfterEndInitHandler { get; set; }
+		public EventHandler<XamlObjectEventArgs> AfterPropertiesHandler { get; set; }
+		public EventHandler<XamlObjectEventArgs> BeforePropertiesHandler { get; set; }
+		public EventHandler<XamlSetValueEventArgs> XamlSetValueHandler { get; set; }
 
 #if !__MOBILE__
-        [MonoTODO ("Ignored")]
-        public XamlAccessLevel AccessLevel { get; set; }
+		[MonoTODO ("Ignored")]
+		public XamlAccessLevel AccessLevel { get; set; }
 #endif
 
-        public INameScope ExternalNameScope { get; set; }
-        [MonoTODO ("Ignored")]
-        public bool IgnoreCanConvert { get; set; }
-        [MonoTODO ("Ignored")]
-        public bool PreferUnconvertedDictionaryKeys { get; set; }
+		public INameScope ExternalNameScope { get; set; }
+		[MonoTODO ("Ignored")]
+		public bool IgnoreCanConvert { get; set; }
+		[MonoTODO ("Ignored")]
+		public bool PreferUnconvertedDictionaryKeys { get; set; }
 
-        public bool RegisterNamesOnExternalNamescope { get; set; }
+		public bool RegisterNamesOnExternalNamescope { get; set; }
 
-        public object RootObjectInstance { get; set; }
-        [MonoTODO ("Ignored")]
-        public bool SkipDuplicatePropertyCheck { get; set; }
-        [MonoTODO ("Ignored")]
-        public bool SkipProvideValueOnRoot { get; set; }
-    }
+		public object RootObjectInstance { get; set; }
+		[MonoTODO ("Ignored")]
+		public bool SkipDuplicatePropertyCheck { get; set; }
+		[MonoTODO ("Ignored")]
+		public bool SkipProvideValueOnRoot { get; set; }
+	}
 }

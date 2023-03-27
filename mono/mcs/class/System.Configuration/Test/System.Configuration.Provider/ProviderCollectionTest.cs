@@ -3,7 +3,7 @@
 // System.Configuration.ProviderCollection.
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,143 +37,143 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
 
-    class TestProvider : SettingsProvider {
-        public override SettingsPropertyValueCollection GetPropertyValues (SettingsContext context,
-                                           SettingsPropertyCollection collection)
-        {
-            throw new NotImplementedException ();
-        }
+	class TestProvider : SettingsProvider {
+		public override SettingsPropertyValueCollection GetPropertyValues (SettingsContext context,
+										   SettingsPropertyCollection collection)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void SetPropertyValues (SettingsContext context,
-                            SettingsPropertyValueCollection collection)
-        {
-            throw new NotImplementedException ();
-        }
+		public override void SetPropertyValues (SettingsContext context,
+							SettingsPropertyValueCollection collection)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override string ApplicationName {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-    }
+		public override string ApplicationName {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+	}
 
-    class TestProviderBase : ProviderBase {
-    }
+	class TestProviderBase : ProviderBase {
+	}
 
-    [TestFixture]
-    public class ProviderCollectionTest {
+	[TestFixture]
+	public class ProviderCollectionTest {
 
-        [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Add_duplicate ()
-        {
-            ProviderCollection col = new ProviderCollection();
-            TestProvider provider;
+		[Test]
+		[ExpectedException (typeof (ArgumentException))]
+		public void Add_duplicate ()
+		{
+			ProviderCollection col = new ProviderCollection();
+			TestProvider provider;
 
-            provider = new TestProvider();
-            provider.Initialize ("test", null);
-
-
-            col.Add (provider);
-            col.Add (provider);
-        }
-
-        [Test]
-        public void Add_providerbase ()
-        {
-            ProviderCollection col = new ProviderCollection();
-            TestProviderBase provider;
-
-            provider = new TestProviderBase();
-            provider.Initialize ("test", null);
-
-            col.Add (provider);
-
-            Assert.AreEqual (provider, col["test"], "A1");
-        }
-
-        [Test]
-        public void Get_nonexistant ()
-        {
-            ProviderCollection col = new ProviderCollection();
-            TestProvider provider;
-
-            provider = new TestProvider();
-            provider.Initialize ("test", null);
+			provider = new TestProvider();
+			provider.Initialize ("test", null);
 
 
-            col.Add (provider);
+			col.Add (provider);
+			col.Add (provider);
+		}
 
-            Assert.AreEqual (provider, col["test"], "A1");
-            Assert.IsNull (col["test2"], "A2");
-        }
+		[Test]
+		public void Add_providerbase ()
+		{
+			ProviderCollection col = new ProviderCollection();
+			TestProviderBase provider;
 
-        [Test]
-        public void Ctor_2 ()
-        {
-            SettingsProperty q = new SettingsProperty ("property",
-                                   typeof (int),
-                                   null,
-                                   true,
-                                   10,
-                                   SettingsSerializeAs.Binary,
-                                   new SettingsAttributeDictionary(),
-                                   true,
-                                   false);
+			provider = new TestProviderBase();
+			provider.Initialize ("test", null);
 
-            SettingsProperty p = new SettingsProperty (q);
+			col.Add (provider);
 
-            Assert.AreEqual ("property", p.Name, "A1");
-            Assert.AreEqual (typeof (int), p.PropertyType, "A2");
-            Assert.AreEqual (null, p.Provider, "A3");
-            Assert.AreEqual (10, (int)p.DefaultValue, "A4");
-            Assert.AreEqual (SettingsSerializeAs.Binary, p.SerializeAs, "A5");
-            Assert.IsNotNull (p.Attributes, "A6");
-            Assert.IsTrue (p.ThrowOnErrorDeserializing, "A7");
-            Assert.IsFalse (p.ThrowOnErrorSerializing, "A8");
-            Assert.IsTrue (p.IsReadOnly, "A9");
-        }
+			Assert.AreEqual (provider, col["test"], "A1");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Ctor_2_ArgNull ()
-        {
-            /* same as above, but a null
-             * SettingsAttributeDictionary, which causes a
-             * ANE in the ctor. */
-            SettingsProperty q = new SettingsProperty ("property",
-                                   typeof (int),
-                                   null,
-                                   true,
-                                   10,
-                                   SettingsSerializeAs.Binary,
-                                   null,
-                                   true,
-                                   false);
+		[Test]
+		public void Get_nonexistant ()
+		{
+			ProviderCollection col = new ProviderCollection();
+			TestProvider provider;
 
-            SettingsProperty p = new SettingsProperty (q);
-        }
+			provider = new TestProvider();
+			provider.Initialize ("test", null);
 
-        [Test]
-        public void Ctor_3 ()
-        {
-            SettingsProperty p = new SettingsProperty ("property");
 
-            Assert.AreEqual ("property", p.Name, "A1");
-            Assert.AreEqual (null, p.PropertyType, "A2");
-            Assert.AreEqual (null, p.Provider, "A3");
-            Assert.AreEqual (null, p.DefaultValue, "A4");
-            Assert.AreEqual (SettingsSerializeAs.String, p.SerializeAs, "A5");
-            Assert.IsNotNull (p.Attributes, "A6");
-            Assert.IsFalse (p.ThrowOnErrorDeserializing, "A7");
-            Assert.IsFalse (p.ThrowOnErrorSerializing, "A8");
-            Assert.IsFalse (p.IsReadOnly, "A9");
-        }
+			col.Add (provider);
 
-    }
+			Assert.AreEqual (provider, col["test"], "A1");
+			Assert.IsNull (col["test2"], "A2");
+		}
+
+		[Test]
+		public void Ctor_2 ()
+		{
+			SettingsProperty q = new SettingsProperty ("property",
+								   typeof (int),
+								   null,
+								   true,
+								   10,
+								   SettingsSerializeAs.Binary,
+								   new SettingsAttributeDictionary(),
+								   true,
+								   false);
+
+			SettingsProperty p = new SettingsProperty (q);
+
+			Assert.AreEqual ("property", p.Name, "A1");
+			Assert.AreEqual (typeof (int), p.PropertyType, "A2");
+			Assert.AreEqual (null, p.Provider, "A3");
+			Assert.AreEqual (10, (int)p.DefaultValue, "A4");
+			Assert.AreEqual (SettingsSerializeAs.Binary, p.SerializeAs, "A5");
+			Assert.IsNotNull (p.Attributes, "A6");
+			Assert.IsTrue (p.ThrowOnErrorDeserializing, "A7");
+			Assert.IsFalse (p.ThrowOnErrorSerializing, "A8");
+			Assert.IsTrue (p.IsReadOnly, "A9");
+		}
+
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void Ctor_2_ArgNull ()
+		{
+			/* same as above, but a null
+			 * SettingsAttributeDictionary, which causes a
+			 * ANE in the ctor. */
+			SettingsProperty q = new SettingsProperty ("property",
+								   typeof (int),
+								   null,
+								   true,
+								   10,
+								   SettingsSerializeAs.Binary,
+								   null,
+								   true,
+								   false);
+
+			SettingsProperty p = new SettingsProperty (q);
+		}
+
+		[Test]
+		public void Ctor_3 ()
+		{
+			SettingsProperty p = new SettingsProperty ("property");
+
+			Assert.AreEqual ("property", p.Name, "A1");
+			Assert.AreEqual (null, p.PropertyType, "A2");
+			Assert.AreEqual (null, p.Provider, "A3");
+			Assert.AreEqual (null, p.DefaultValue, "A4");
+			Assert.AreEqual (SettingsSerializeAs.String, p.SerializeAs, "A5");
+			Assert.IsNotNull (p.Attributes, "A6");
+			Assert.IsFalse (p.ThrowOnErrorDeserializing, "A7");
+			Assert.IsFalse (p.ThrowOnErrorSerializing, "A8");
+			Assert.IsFalse (p.IsReadOnly, "A9");
+		}
+
+	}
 
 }
 

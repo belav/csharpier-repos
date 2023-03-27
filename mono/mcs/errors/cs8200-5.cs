@@ -3,10 +3,10 @@
 
 public class C
 {
-    bool res = Foo () is string s;
+	bool res = Foo () is string s;
 
-    static object Foo ()
-    {
-        return null;
-    }
+	static object Foo ()
+	{
+		return null;
+	}
 }

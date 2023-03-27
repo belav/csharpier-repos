@@ -2,8 +2,8 @@
 // System.Security.AccessControl.RegistryAccessRule implementation
 //
 // Authors:
-//    Dick Porter  <dick@ximian.com>
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Dick Porter  <dick@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006-2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,53 +31,53 @@ using System.Security.Principal;
 
 namespace System.Security.AccessControl 
 {
-    public sealed class RegistryAccessRule : AccessRule
-    {
-        public RegistryAccessRule (IdentityReference identity,
-                       RegistryRights registryRights,
-                       AccessControlType type)
-            : this (identity, registryRights, InheritanceFlags.None, PropagationFlags.None, type)
-        {
-        }
+	public sealed class RegistryAccessRule : AccessRule
+	{
+		public RegistryAccessRule (IdentityReference identity,
+					   RegistryRights registryRights,
+					   AccessControlType type)
+			: this (identity, registryRights, InheritanceFlags.None, PropagationFlags.None, type)
+		{
+		}
 
-        public RegistryAccessRule (string identity,
-                       RegistryRights registryRights,
-                       AccessControlType type)
-            : this (new NTAccount (identity), registryRights, type)
-        {
-        }
+		public RegistryAccessRule (string identity,
+					   RegistryRights registryRights,
+					   AccessControlType type)
+			: this (new NTAccount (identity), registryRights, type)
+		{
+		}
 
-        public RegistryAccessRule (IdentityReference identity,
-                       RegistryRights registryRights,
-                       InheritanceFlags inheritanceFlags,
-                       PropagationFlags propagationFlags,
-                       AccessControlType type)
-            : this (identity, registryRights, false, inheritanceFlags, propagationFlags, type)
-        {
-        }
-        
-        internal RegistryAccessRule (IdentityReference identity,
-                         RegistryRights registryRights,
-                         bool isInherited,
-                         InheritanceFlags inheritanceFlags,
-                         PropagationFlags propagationFlags,
-                         AccessControlType type)
-            : base (identity, (int)registryRights, isInherited, inheritanceFlags, propagationFlags, type)
-        {
-        }
+		public RegistryAccessRule (IdentityReference identity,
+					   RegistryRights registryRights,
+					   InheritanceFlags inheritanceFlags,
+					   PropagationFlags propagationFlags,
+					   AccessControlType type)
+			: this (identity, registryRights, false, inheritanceFlags, propagationFlags, type)
+		{
+		}
+		
+		internal RegistryAccessRule (IdentityReference identity,
+					     RegistryRights registryRights,
+					     bool isInherited,
+					     InheritanceFlags inheritanceFlags,
+					     PropagationFlags propagationFlags,
+					     AccessControlType type)
+			: base (identity, (int)registryRights, isInherited, inheritanceFlags, propagationFlags, type)
+		{
+		}
 
-        public RegistryAccessRule (string identity,
-                       RegistryRights registryRights,
-                       InheritanceFlags inheritanceFlags,
-                       PropagationFlags propagationFlags,
-                       AccessControlType type)
-            : this (new NTAccount (identity), registryRights, inheritanceFlags, propagationFlags, type)
-        {
-        }
-                
-        public RegistryRights RegistryRights {
-            get { return (RegistryRights)AccessMask; }
-        }
-    }
+		public RegistryAccessRule (string identity,
+					   RegistryRights registryRights,
+					   InheritanceFlags inheritanceFlags,
+					   PropagationFlags propagationFlags,
+					   AccessControlType type)
+			: this (new NTAccount (identity), registryRights, inheritanceFlags, propagationFlags, type)
+		{
+		}
+				
+		public RegistryRights RegistryRights {
+			get { return (RegistryRights)AccessMask; }
+		}
+	}
 }
 

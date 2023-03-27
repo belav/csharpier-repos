@@ -2,7 +2,7 @@
 // TraceContextCas.cs - CAS unit tests for System.Web.TraceContext
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,89 +36,89 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TraceContextCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TraceContextCas : AspNetHostingMinimal {
 
-        private HttpContext context;
+		private HttpContext context;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            context = new HttpContext (null);
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			context = new HttpContext (null);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor_Properties_Events ()
-        {
-            TraceContext tc = new TraceContext (context);
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor_Properties_Events ()
+		{
+			TraceContext tc = new TraceContext (context);
 
-            tc.IsEnabled = false;
-            Assert.IsFalse (tc.IsEnabled, "IsEnabled");
+			tc.IsEnabled = false;
+			Assert.IsFalse (tc.IsEnabled, "IsEnabled");
 
-            Assert.AreEqual (TraceMode.SortByTime, tc.TraceMode, "TraceMode");
-            tc.TraceMode = TraceMode.Default;
-            tc.TraceFinished += new TraceContextEventHandler (Handler);
-            tc.TraceFinished -= new TraceContextEventHandler (Handler);
-        }
-        private void Handler (object sender, TraceContextEventArgs e)
-        {
-        }
-        [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetCurrentProcessInfo_Deny_High ()
-        {
-            ProcessModelInfo.GetCurrentProcessInfo ();
-        }
+			Assert.AreEqual (TraceMode.SortByTime, tc.TraceMode, "TraceMode");
+			tc.TraceMode = TraceMode.Default;
+			tc.TraceFinished += new TraceContextEventHandler (Handler);
+			tc.TraceFinished -= new TraceContextEventHandler (Handler);
+		}
+		private void Handler (object sender, TraceContextEventArgs e)
+		{
+		}
+		[Test]
+		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
+		[ExpectedException (typeof (SecurityException))]
+		public void GetCurrentProcessInfo_Deny_High ()
+		{
+			ProcessModelInfo.GetCurrentProcessInfo ();
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
-        public void GetCurrentProcessInfo_PermitOnly_High ()
-        {
-            try {
-                ProcessModelInfo.GetCurrentProcessInfo ();
-            }
-            catch (HttpException) {
-                // expected (as we're not running ASP.NET)
-            }
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
+		public void GetCurrentProcessInfo_PermitOnly_High ()
+		{
+			try {
+				ProcessModelInfo.GetCurrentProcessInfo ();
+			}
+			catch (HttpException) {
+				// expected (as we're not running ASP.NET)
+			}
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetHistory_Deny_High ()
-        {
-            ProcessModelInfo.GetHistory (0);
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
+		[ExpectedException (typeof (SecurityException))]
+		public void GetHistory_Deny_High ()
+		{
+			ProcessModelInfo.GetHistory (0);
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
-        public void GetHistory_PermitOnly_High ()
-        {
-            try {
-                ProcessModelInfo.GetHistory (0);
-            }
-            catch (HttpException) {
-                // expected (as we're not running ASP.NET)
-            }
-            catch (NotImplementedException) {
-                // mono
-            }
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
+		public void GetHistory_PermitOnly_High ()
+		{
+			try {
+				ProcessModelInfo.GetHistory (0);
+			}
+			catch (HttpException) {
+				// expected (as we're not running ASP.NET)
+			}
+			catch (NotImplementedException) {
+				// mono
+			}
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (HttpContext) });
-            Assert.IsNotNull (ci, ".ctor(HttpContext)");
-            return ci.Invoke (new object[1] { context });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (HttpContext) });
+			Assert.IsNotNull (ci, ".ctor(HttpContext)");
+			return ci.Invoke (new object[1] { context });
+		}
 
-        public override Type Type {
-            get { return typeof (TraceContext); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (TraceContext); }
+		}
+	}
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -31,63 +31,63 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows {
 
-    [TestFixture]
-    public class PointConverterTest
-    {
-        [Test]
-        public void CanConvertFrom ()
-        {
-            PointConverter r = new PointConverter ();
+	[TestFixture]
+	public class PointConverterTest
+	{
+		[Test]
+		public void CanConvertFrom ()
+		{
+			PointConverter r = new PointConverter ();
 
-            Assert.IsTrue (r.CanConvertFrom (typeof (string)));
-            Assert.IsFalse (r.CanConvertFrom (typeof (Point)));
-        }
+			Assert.IsTrue (r.CanConvertFrom (typeof (string)));
+			Assert.IsFalse (r.CanConvertFrom (typeof (Point)));
+		}
 
-        [Test]
-        public void CanConvertTo ()
-        {
-            PointConverter r = new PointConverter ();
+		[Test]
+		public void CanConvertTo ()
+		{
+			PointConverter r = new PointConverter ();
 
-            Assert.IsTrue (r.CanConvertTo (typeof (string)));
-            Assert.IsFalse (r.CanConvertTo (typeof (Point)));
-        }
+			Assert.IsTrue (r.CanConvertTo (typeof (string)));
+			Assert.IsFalse (r.CanConvertTo (typeof (Point)));
+		}
 
-        [Test]
-        public void ConvertFrom ()
-        {
-            PointConverter r = new PointConverter ();
+		[Test]
+		public void ConvertFrom ()
+		{
+			PointConverter r = new PointConverter ();
 
-            object or = r.ConvertFrom ("3, 4");
-            
-            Assert.AreEqual (typeof (Point), or.GetType());
-            Assert.AreEqual (new Point (3, 4), or);
+			object or = r.ConvertFrom ("3, 4");
+			
+			Assert.AreEqual (typeof (Point), or.GetType());
+			Assert.AreEqual (new Point (3, 4), or);
 
-            or = r.ConvertFrom ("-1, -4");
-            Assert.AreEqual (typeof (Point), or.GetType());
-            Assert.AreEqual (new Point (-1, -4), or);
-        }
+			or = r.ConvertFrom ("-1, -4");
+			Assert.AreEqual (typeof (Point), or.GetType());
+			Assert.AreEqual (new Point (-1, -4), or);
+		}
 
-        [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ConvertFrom_size ()
-        {
-            PointConverter r = new PointConverter ();
+		[Test]
+		[ExpectedException (typeof (NotSupportedException))]
+		public void ConvertFrom_size ()
+		{
+			PointConverter r = new PointConverter ();
 
-            r.ConvertFrom (new Point (10, 20));
-        }
+			r.ConvertFrom (new Point (10, 20));
+		}
 
-        [Test]
-        public void ConvertTo ()
-        {
-            PointConverter r = new PointConverter ();
+		[Test]
+		public void ConvertTo ()
+		{
+			PointConverter r = new PointConverter ();
 
-            Point rect = new Point (1, 2);
+			Point rect = new Point (1, 2);
 
-            object o = r.ConvertTo (null, CultureInfo.InvariantCulture, rect, typeof (string));
-            
-            Assert.AreEqual (typeof (string), o.GetType());
-            Assert.AreEqual ("1,2", (string)o);
-        }
-    }
+			object o = r.ConvertTo (null, CultureInfo.InvariantCulture, rect, typeof (string));
+			
+			Assert.AreEqual (typeof (string), o.GetType());
+			Assert.AreEqual ("1,2", (string)o);
+		}
+	}
 
 }

@@ -71,7 +71,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0001NO()
+	public void core0001NO()
         {
             int computedValue = 0;
             int expectedValue = util.ELEMENT_NODE;
@@ -108,7 +108,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0002NO()
+	public void core0002NO()
         {
             string computedValue = "";
             System.Xml.XmlElement testNode = null;
@@ -156,7 +156,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0003NO()
+	public void core0003NO()
         {
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
@@ -209,7 +209,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0004NO()
+	public void core0004NO()
         {
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
@@ -260,7 +260,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0005NO()
+	public void core0005NO()
         {
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
@@ -312,7 +312,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0006NO()
+	public void core0006NO()
         {
             int computedValue = 0;
             System.Xml.XmlNode testNode = null;
@@ -354,7 +354,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0007NO()
+	public void core0007NO()
         {
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
@@ -395,7 +395,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0008NO()
+	public void core0008NO()
         {
             int computedValue = 0;
             System.Xml.XmlNode testNode = null;
@@ -436,7 +436,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0009NO()
+	public void core0009NO()
         {
             int computedValue = 0;
             System.Xml.XmlNode testNode = null;
@@ -478,7 +478,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0010NO()
+	public void core0010NO()
         {
             int computedValue = 0;
             System.Xml.XmlNode testNode = null;
@@ -521,7 +521,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0011NO()
+	public void core0011NO()
         {
             int computedValue = 0;
             System.Xml.XmlNode testNode = null;
@@ -563,7 +563,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0012NO()
+	public void core0012NO()
         {
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
@@ -612,7 +612,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0013NO()
+	public void core0013NO()
         {
             string computedValue = "0";
             string expectedValue = "staff"; 
@@ -649,7 +649,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0014NO()
+	public void core0014NO()
         {
             string computedValue = "0";
             string expectedValue = "domestic";
@@ -700,7 +700,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0015NO()
+	public void core0015NO()
         {
             string computedValue = "0";
             string expectedValue = "#text";
@@ -751,7 +751,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0016NO()
+	public void core0016NO()
         {
             string computedValue = "0";
             string expectedValue = "#cdata-section";
@@ -802,7 +802,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0017NO()
+	public void core0017NO()
         {
             string computedValue = "";
             string expectedValue = "ent2";
@@ -853,7 +853,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0018NO()
+	public void core0018NO()
         {
             string computedValue = "";
             string expectedValue = "ent1";
@@ -895,7 +895,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0019NO()
+	public void core0019NO()
         {
             string computedValue = "0";
             string expectedValue = "xml";
@@ -937,7 +937,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0020NO()
+	public void core0020NO()
         {
             string computedValue = "0";
             string expectedValue = "#comment";
@@ -978,7 +978,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0021NO()
+	public void core0021NO()
         {
             string computedValue = "";
             string expectedValue = "#document";
@@ -1020,7 +1020,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0022NO()
+	public void core0022NO()
         {
             string computedValue = "";
             string expectedValue = "staff";
@@ -1063,7 +1063,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0023NO()
+	public void core0023NO()
         {
             string computedValue = "";
             string expectedValue = "#document-fragment";
@@ -1105,7 +1105,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0024NO()
+	public void core0024NO()
         {
             string computedValue = "";
             string expectedValue = "notation1";
@@ -1154,7 +1154,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0025NO()
+	public void core0025NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1191,7 +1191,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0026NO()
+	public void core0026NO()
         {
             string computedValue = "";
             string expectedValue = "Yes";
@@ -1243,7 +1243,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0027NO()
+	public void core0027NO()
         {
             string computedValue = "";
             string expectedValue = "1230 North Ave. Dallas, Texas 98551";
@@ -1295,7 +1295,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0028NO()
+	public void core0028NO()
         {
             string computedValue = "0";
             string expectedValue = "This is a CDATASection with EntityReference number 2 &ent2;";
@@ -1346,7 +1346,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0029NO()
+	public void core0029NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1398,7 +1398,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0030NO()
+	public void core0030NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1440,7 +1440,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0031NO()
+	public void core0031NO()
         {
             string computedValue = "";
             string expectedValue = "version=\"1.0\"";
@@ -1482,7 +1482,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0032NO()
+	public void core0032NO()
         {
             string computedValue = "";
             string expectedValue = " This is comment number 1.";
@@ -1523,7 +1523,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0033NO()
+	public void core0033NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1565,7 +1565,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0034NO()
+	public void core0034NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1608,7 +1608,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0035NO()
+	public void core0035NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1650,7 +1650,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0036NO()
+	public void core0036NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1699,7 +1699,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0037NO()
+	public void core0037NO()
         {
             string computedValue = "";
             string expectedValue = "";
@@ -1755,7 +1755,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0038NO()
+	public void core0038NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1806,7 +1806,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0039NO()
+	public void core0039NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1858,7 +1858,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0040NO()
+	public void core0040NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1909,7 +1909,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0041NO()
+	public void core0041NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -1960,7 +1960,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0042NO()
+	public void core0042NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2003,7 +2003,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0043NO()
+	public void core0043NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2046,7 +2046,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0044NO()
+	public void core0044NO()
         {
             object computedValue = null;
             object expectedValue = null; 
@@ -2088,7 +2088,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0045NO()
+	public void core0045NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2131,7 +2131,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0046NO()
+	public void core0046NO()
         {
             object computedValue = null;
             object expectedValue = null; 
@@ -2175,7 +2175,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0047NO()
+	public void core0047NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2217,7 +2217,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0048NO()
+	public void core0048NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2266,7 +2266,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0049NO()
+	public void core0049NO()
         {
             string computedValue = "";
             string expectedValue = "staff";
@@ -2319,7 +2319,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0050NO()
+	public void core0050NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2361,7 +2361,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0051NO()
+	public void core0051NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2405,7 +2405,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0052NO()
+	public void core0052NO()
         {
             int computedValue = 0;
             int expectedValue = 6;
@@ -2448,7 +2448,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0053NO()
+	public void core0053NO()
         {
             string computedValue = "";
             string expectedValue = "0";
@@ -2503,7 +2503,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0054NO()
+	public void core0054NO()
         {
             int computedValue = 0;
             int expectedValue = 7;
@@ -2548,7 +2548,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0055NO()
+	public void core0055NO()
         {
             string computedValue = "";
             string expectedValue = "employeeId";
@@ -2593,7 +2593,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0056NO()
+	public void core0056NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2645,7 +2645,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0057NO()
+	public void core0057NO()
         {
             string computedValue = "";
             string expectedValue = "address";
@@ -2690,7 +2690,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0058NO()
+	public void core0058NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2741,7 +2741,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0059NO()
+	public void core0059NO()
         {
             string computedValue = "";
             string expectedValue = "employeeId";
@@ -2793,7 +2793,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0060NO()
+	public void core0060NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2844,7 +2844,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0061NO()
+	public void core0061NO()
         {
             string computedValue = "";
             string expectedValue = "name";
@@ -2896,7 +2896,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0062NO()
+	public void core0062NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -2947,7 +2947,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0063NO()
+	public void core0063NO()
         {
             string computedValue = "";
             string expectedValue = "staff";
@@ -2993,7 +2993,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0064NO()
+	public void core0064NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -3037,7 +3037,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0065NO()
+	public void core0065NO()
         {
             string computedValue = "";
             string expectedValue = "newChild salary";
@@ -3099,7 +3099,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0066NO()
+	public void core0066NO()
         {
             string computedValue = "";
             string expectedValue = "newChild";
@@ -3153,7 +3153,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0067NO()
+	public void core0067NO()
         {
             string computedValue = "";
             string expectedValue = "newChild1 newChild2";
@@ -3215,7 +3215,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0068NO()
+	public void core0068NO()
         {
             string computedValue = "";
             string expectedValue = "newChild";
@@ -3275,7 +3275,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0069NO()
+	public void core0069NO()
         {
             string computedValue = "";
             string expectedValue = "name employeeId";
@@ -3335,7 +3335,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0070NO()
+	public void core0070NO()
         {
             string computedValue = "";
             string expectedValue = "newChild";
@@ -3394,7 +3394,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0071NO()
+	public void core0071NO()
         {
             string computedValue = "";
             string expectedValue = "name employeeId";
@@ -3456,7 +3456,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0072NO()
+	public void core0072NO()
         {
             string computedValue = "";
             string expectedValue = "employeeId";
@@ -3515,7 +3515,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0073NO()
+	public void core0073NO()
         {
             string computedValue = "";
             string expectedValue = "name 5";
@@ -3572,7 +3572,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0074NO()
+	public void core0074NO()
         {
             string computedValue = "";
             string expectedValue = "employeeId";
@@ -3627,7 +3627,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0075NO()
+	public void core0075NO()
         {
             string computedValue = "";
             string expectedValue = "newChild";
@@ -3685,7 +3685,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0076NO()
+	public void core0076NO()
         {
             string computedValue = "";
             string expectedValue = "name employeeId";
@@ -3741,7 +3741,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0077NO()
+	public void core0077NO()
         {
             string computedValue = "";
             string expectedValue = "newChild1 newChild2";
@@ -3800,7 +3800,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0078NO()
+	public void core0078NO()
         {
             string computedValue = "";
             string expectedValue = "newChild";
@@ -3848,7 +3848,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0079NO()
+	public void core0079NO()
         {
             string computedValue = "";
             string expectedValue = "True";
@@ -3889,7 +3889,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0080NO()
+	public void core0080NO()
         {
             string computedValue = "";
             string expectedValue = "False";
@@ -3938,7 +3938,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0081NO()
+	public void core0081NO()
         {
             string computedValue = "";
             string expectedValue = "employee 0";
@@ -3993,7 +3993,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0082NO()
+	public void core0082NO()
         {
             string computedValue = "";
             string expectedValue = "employeeId name position salary gender address ";
@@ -4048,7 +4048,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0083NO()
+	public void core0083NO()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -4101,7 +4101,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0084NO()
+	public void core0084NO()
         {
             string testName = "core-0084NO";
             object computedValue = null;
@@ -4154,7 +4154,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0085NO()
+	public void core0085NO()
         {
             string computedValue = "";
             string expectedValue = "35,000";
@@ -4207,7 +4207,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0086NO()
+	public void core0086NO()
         {
             string testName = "core-0086NO";
             string computedValue = "";
@@ -4271,8 +4271,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-        [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-    public void core0087NO()
+		[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+	public void core0087NO()
         {
             string computedValue = "";
             System.Xml.XmlEntity testNode = null;
@@ -4335,8 +4335,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-        [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-    public void core0088NO()
+		[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+	public void core0088NO()
         {
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
@@ -4402,8 +4402,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-        [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-    public void core0089NO()
+		[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+	public void core0089NO()
         {
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
@@ -4467,8 +4467,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-        [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-    public void core0090NO()
+		[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+	public void core0090NO()
         {
             string computedValue = "";
             System.Xml.XmlEntityReference entityRefNode = null;
@@ -4534,8 +4534,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-        [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-    public void core0091NO()
+		[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+	public void core0091NO()
         {
             string computedValue = "";
             System.Xml.XmlEntityReference entityRefNode = null;
@@ -4562,7 +4562,7 @@ namespace nist_dom.fundamental
                 {
                     entityRefNode.AppendChild(newChild);
                 }
-                catch(ArgumentException ex) 
+				catch(ArgumentException ex) 
                 {
                     computedValue = ex.GetType ().FullName; 
                 }
@@ -4597,7 +4597,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0092NO()
+	public void core0092NO()
         {
             string computedValue = "";
             System.Xml.XmlElement rootNode = null;
@@ -4659,7 +4659,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0093NO()
+	public void core0093NO()
         {
             string computedValue = "";
             System.Xml.XmlNode newChild = null;
@@ -4723,7 +4723,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0094NO()
+	public void core0094NO()
         {
             string computedValue = "";
             System.Xml.XmlElement rootNode = null;
@@ -4785,13 +4785,13 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0095NO()
+	public void core0095NO()
         {
             string computedValue = "";
             System.Xml.XmlNode newChild = null;
             System.Xml.XmlNode oldChild = null;
             System.Xml.XmlElement testNode = null;
-            string expectedValue = "System.ArgumentException";
+			string expectedValue = "System.ArgumentException";
 
             testResults results = new testResults("Core0095NO");
             try
@@ -4812,7 +4812,7 @@ namespace nist_dom.fundamental
                 {
                     testNode.ReplaceChild(newChild,oldChild);//.node.
                 }
-                catch(ArgumentException ex) 
+				catch(ArgumentException ex) 
                 {
                     computedValue = ex.GetType().ToString(); 
                 }
@@ -4820,7 +4820,7 @@ namespace nist_dom.fundamental
             }
             catch(System.Exception ex)
             {
-                computedValue = "Exception " + ex.GetType () + " : " + ex.Message;
+				computedValue = "Exception " + ex.GetType () + " : " + ex.Message;
             }
 
             results.expected = expectedValue;
@@ -4850,7 +4850,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0096NO()
+	public void core0096NO()
         {
             string computedValue = "";
             System.Xml.XmlElement rootNode = null;
@@ -4887,7 +4887,7 @@ namespace nist_dom.fundamental
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            util.resetData();
+			util.resetData();
 
             Assert.AreEqual (results.expected, results.actual);
         }
@@ -4909,7 +4909,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0097NO()
+	public void core0097NO()
         {
             string computedValue = "";
             System.Xml.XmlNode newChild = null;
@@ -4970,7 +4970,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0098NO()
+	public void core0098NO()
         {
             string computedValue = "";
             System.Xml.XmlElement newChild = (System.Xml.XmlElement)util.createNode(util.ELEMENT_NODE,"newChild");
@@ -5031,7 +5031,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0099NO()
+	public void core0099NO()
         {
             string computedValue = "";
             System.Xml.XmlElement newChild = (System.Xml.XmlElement)util.createNode(util.ELEMENT_NODE,"newChild");
@@ -5091,7 +5091,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0100NO()
+	public void core0100NO()
         {
             string computedValue = "";
             System.Xml.XmlElement oldChild = (System.Xml.XmlElement)util.createNode(util.ELEMENT_NODE,"oldChild");
@@ -5127,7 +5127,7 @@ namespace nist_dom.fundamental
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            util.resetData();
+			util.resetData();
 
             Assert.AreEqual (results.expected, results.actual);
         }
@@ -5152,7 +5152,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0101NO()
+	public void core0101NO()
         {
             string computedValue = "";
             System.Xml.XmlElement newChild = util.getOtherDOMDocument().CreateElement("newChild");
@@ -5193,7 +5193,7 @@ namespace nist_dom.fundamental
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            util.resetData();
+			util.resetData();
             Assert.AreEqual (results.expected, results.actual);
         }
 
@@ -5216,7 +5216,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0102NO()
+	public void core0102NO()
         {
             string computedValue = "";
             System.Xml.XmlElement newChild = util.getOtherDOMDocument().CreateElement("newChild");
@@ -5258,7 +5258,7 @@ namespace nist_dom.fundamental
             results.actual = computedValue;
 
                 util.resetData();
-            Assert.AreEqual (results.expected, results.actual);
+			Assert.AreEqual (results.expected, results.actual);
         }
 
         //------------------------ End test case core-0102NO -----------------------
@@ -5280,7 +5280,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0103NO()
+	public void core0103NO()
         {
             string computedValue = "";
             System.Xml.XmlElement newChild = util.getOtherDOMDocument().CreateElement("newChild");
@@ -5318,7 +5318,7 @@ namespace nist_dom.fundamental
             results.expected = expectedValue;
             results.actual = computedValue;
                 
-            util.resetData();
+			util.resetData();
             Assert.AreEqual (results.expected, results.actual);
         }
 

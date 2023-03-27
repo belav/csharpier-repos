@@ -7,12 +7,12 @@ enum E
 
 class C<U>
 {
-    static void Foo<T> (T value) where T : U
-    {
-    }
+	static void Foo<T> (T value) where T : U
+	{
+	}
 
-    static void Test (E? s)
-    {
-        C<System.Enum>.Foo (s);
-    }
+	static void Test (E? s)
+	{
+		C<System.Enum>.Foo (s);
+	}
 }

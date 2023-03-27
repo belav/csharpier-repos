@@ -2,20 +2,20 @@
 using System;
 
 public class X {
-    public const string Address = null;
-    
-    public static bool Resolve (string addr)
-    {
-        return true;
-    }
+	public const string Address = null;
+	
+	public static bool Resolve (string addr)
+	{
+		return true;
+	}
 
-    static string Test ()
-    {
-        return Address;
-    }
+	static string Test ()
+	{
+		return Address;
+	}
 
-    public static void Main ()
-    {
-        Resolve (Address);
-    }
+	public static void Main ()
+	{
+		Resolve (Address);
+	}
 }

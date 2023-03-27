@@ -2,7 +2,7 @@
 // System.Threading.HostExecutionContextManager class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,31 +31,31 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System.Threading {
 
-    public class HostExecutionContextManager {
+	public class HostExecutionContextManager {
 
-        public HostExecutionContextManager ()
-        {
-        }
+		public HostExecutionContextManager ()
+		{
+		}
 
-        [MonoTODO]
-        public virtual HostExecutionContext Capture ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual HostExecutionContext Capture ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.MayFail)]
-        public virtual void Revert (object previousState)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		[ReliabilityContract (Consistency.WillNotCorruptState, Cer.MayFail)]
+		public virtual void Revert (object previousState)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        [SecurityPermission (SecurityAction.LinkDemand, Infrastructure = true)]
-        public virtual object SetHostExecutionContext (HostExecutionContext hostExecutionContext)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		[SecurityPermission (SecurityAction.LinkDemand, Infrastructure = true)]
+		public virtual object SetHostExecutionContext (HostExecutionContext hostExecutionContext)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

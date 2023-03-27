@@ -7,8 +7,8 @@ public class Foo<T>
  
 class X
 {
-    static void Main ()
-    {
-        Foo<X> = new Foo<X> ();
-    }
+	static void Main ()
+	{
+		Foo<X> = new Foo<X> ();
+	}
 }

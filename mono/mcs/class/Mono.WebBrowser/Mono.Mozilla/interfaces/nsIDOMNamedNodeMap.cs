@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,62 +32,62 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("a6cf907b-15b3-11d2-932e-00805f8add32")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMNamedNodeMap {
+	[Guid ("a6cf907b-15b3-11d2-932e-00805f8add32")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMNamedNodeMap {
 
 #region nsIDOMNamedNodeMap
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getNamedItem (
-                   /*DOMString*/ HandleRef name,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getNamedItem (
+				   /*DOMString*/ HandleRef name,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setNamedItem (
-                [MarshalAs (UnmanagedType.Interface)]   nsIDOMNode arg,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setNamedItem (
+				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode arg,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int removeNamedItem (
-                   /*DOMString*/ HandleRef name,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int removeNamedItem (
+				   /*DOMString*/ HandleRef name,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int item (
-                   uint index,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int item (
+				   uint index,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getLength ( out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getLength ( out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getNamedItemNS (
-                   /*DOMString*/ HandleRef namespaceURI,
-                   /*DOMString*/ HandleRef localName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getNamedItemNS (
+				   /*DOMString*/ HandleRef namespaceURI,
+				   /*DOMString*/ HandleRef localName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setNamedItemNS (
-                [MarshalAs (UnmanagedType.Interface)]   nsIDOMNode arg,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setNamedItemNS (
+				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode arg,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int removeNamedItemNS (
-                   /*DOMString*/ HandleRef namespaceURI,
-                   /*DOMString*/ HandleRef localName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int removeNamedItemNS (
+				   /*DOMString*/ HandleRef namespaceURI,
+				   /*DOMString*/ HandleRef localName,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMNamedNodeMap {
-        public static nsIDOMNamedNodeMap GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMNamedNodeMap obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMNamedNodeMap).GUID, obj);
-            return o as nsIDOMNamedNodeMap;
-        }
-    }
+	internal class nsDOMNamedNodeMap {
+		public static nsIDOMNamedNodeMap GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMNamedNodeMap obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMNamedNodeMap).GUID, obj);
+			return o as nsIDOMNamedNodeMap;
+		}
+	}
 }

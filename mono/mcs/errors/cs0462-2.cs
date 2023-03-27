@@ -3,11 +3,11 @@
 
 abstract class A<T>
 {
-    public abstract int this[T t] { set; }
-    public virtual bool this [int a] { set { } }
+	public abstract int this[T t] { set; }
+	public virtual bool this [int a] { set { } }
 }
 
 class B : A<int>
 {
-    public override int this [int a] { set {} }
+	public override int this [int a] { set {} }
 }

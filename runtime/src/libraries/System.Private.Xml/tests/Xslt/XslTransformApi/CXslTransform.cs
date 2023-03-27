@@ -596,12 +596,12 @@ namespace System.Xml.XslTransformApiTests
         public void LoadGeneric3(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             try
             {
@@ -636,12 +636,12 @@ namespace System.Xml.XslTransformApiTests
         public void LoadGeneric4(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             if (inputType != InputType.Reader)
                 LoadXSL("showParamLongName.xsl", InputType.Reader, readerType);
@@ -688,12 +688,12 @@ namespace System.Xml.XslTransformApiTests
         public void LoadGeneric5(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             for (int i = 0; i < 100; i++)
             {
@@ -825,8 +825,8 @@ namespace System.Xml.XslTransformApiTests
         public void LoadGeneric11(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><Book>
-            Name
-        </Book>";
+			Name
+		</Book>";
 
             if (docType.ToString() == "DataDocument")
                 // Skip the test for DataDocument
@@ -989,12 +989,12 @@ namespace System.Xml.XslTransformApiTests
         public void LoadGeneric3(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             if (LoadXSL_Resolver("showParam.xsl", null, inputType, readerType) == 1)
             {
@@ -1051,12 +1051,12 @@ namespace System.Xml.XslTransformApiTests
         public void TC_Resolver_Null_Should_Not_Break_Transform(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             LoadXSL_Resolver("showParam.xsl", null, inputType, readerType);
             Transform("fruits.xml", transformType, docType);
@@ -1171,12 +1171,12 @@ namespace System.Xml.XslTransformApiTests
         public void LoadGeneric10(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             for (int i = 0; i < 100; i++)
             {
@@ -1455,12 +1455,12 @@ namespace System.Xml.XslTransformApiTests
         public void LoadNavigator1(TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
 #pragma warning disable 0618
             xslt = new XslTransform();
@@ -1491,12 +1491,12 @@ namespace System.Xml.XslTransformApiTests
         public void LoadNavigator2(TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
 #pragma warning disable 0618
             xslt = new XslTransform();
@@ -1563,12 +1563,12 @@ namespace System.Xml.XslTransformApiTests
         public void LoadXmlReader1(TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             bool fTEST_FAIL = false;
 #pragma warning disable 0618
@@ -1816,12 +1816,12 @@ namespace System.Xml.XslTransformApiTests
         public void TransformGeneric1(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             if ((LoadXSL("showParam.xsl", inputType, readerType) == 1) && (Transform("fruits.xml", transformType, docType) == 1))
             {
@@ -1849,12 +1849,12 @@ namespace System.Xml.XslTransformApiTests
         public void TransformGeneric2(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             for (int i = 0; i < 5; i++)
             {
@@ -1882,12 +1882,12 @@ namespace System.Xml.XslTransformApiTests
         public void TransformGeneric3(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             if (LoadXSL("showParam.xsl", inputType, readerType) == 1)
             {
@@ -2177,12 +2177,12 @@ namespace System.Xml.XslTransformApiTests
         public void TransformStrStr1(InputType inputType, ReaderType readerType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             string szFullFilename = FullFilePath("fruits.xml");
 
@@ -2340,12 +2340,12 @@ namespace System.Xml.XslTransformApiTests
         public void TransformStrStr8(InputType inputType, ReaderType readerType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
-        1.No Value Specified
-        2.No Value Specified
-        3.No Value Specified
-        4.No Value Specified
-        5.No Value Specified
-        6.No Value Specified</result>";
+		1.No Value Specified
+		2.No Value Specified
+		3.No Value Specified
+		4.No Value Specified
+		5.No Value Specified
+		6.No Value Specified</result>";
 
             string szFullFilename = FullFilePath("fruits.xml");
 
@@ -2720,11 +2720,11 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
         public void var4(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
-        Node Count: {3}
+		Node Count: {3}
 
-        
-        Correct Output: (1)(2)(3)
-        Incorrect Output: [1][2][3]";
+		
+		Correct Output: (1)(2)(3)
+		Incorrect Output: [1][2][3]";
 
             if ((LoadXSL("Bug109644.xsl", inputType, readerType) == 1) && (Transform("foo.xml", transformType, docType) == 1))
             {

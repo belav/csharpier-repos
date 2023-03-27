@@ -2,7 +2,7 @@
 // System.Web.UI.WebHandlerParser
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 // (C) 2008-2010 Novell, Inc (http://novell.com/)
@@ -34,38 +34,38 @@ using System.IO;
 
 namespace System.Web.UI
 {
-    class WebHandlerParser : SimpleWebHandlerParser
-    {
-        WebHandlerParser (HttpContext context, string virtualPath, string physicalPath)
-            : base (context, virtualPath, physicalPath)
-        {
-        }
+	class WebHandlerParser : SimpleWebHandlerParser
+	{
+		WebHandlerParser (HttpContext context, string virtualPath, string physicalPath)
+			: base (context, virtualPath, physicalPath)
+		{
+		}
 
-        internal WebHandlerParser (HttpContext context, VirtualPath virtualPath, TextReader reader)
-            : this (context, virtualPath, null, reader)
-        {
-        }
-        
-        internal WebHandlerParser (HttpContext context, VirtualPath virtualPath, string physicalPath, TextReader reader)
-            : base (context, virtualPath.Original, physicalPath, reader)
-        {
-        }
+		internal WebHandlerParser (HttpContext context, VirtualPath virtualPath, TextReader reader)
+			: this (context, virtualPath, null, reader)
+		{
+		}
+		
+		internal WebHandlerParser (HttpContext context, VirtualPath virtualPath, string physicalPath, TextReader reader)
+			: base (context, virtualPath.Original, physicalPath, reader)
+		{
+		}
 
-        public static Type GetCompiledType (HttpContext context, string virtualPath, string physicalPath)
-        {
-            WebHandlerParser parser = new WebHandlerParser (context, virtualPath, physicalPath);
-            Type type = parser.GetCompiledTypeFromCache ();
-            if (type != null)
-                return type;
+		public static Type GetCompiledType (HttpContext context, string virtualPath, string physicalPath)
+		{
+			WebHandlerParser parser = new WebHandlerParser (context, virtualPath, physicalPath);
+			Type type = parser.GetCompiledTypeFromCache ();
+			if (type != null)
+				return type;
 
-            return WebServiceCompiler.CompileIntoType (parser);
-        }
+			return WebServiceCompiler.CompileIntoType (parser);
+		}
 
-        protected override string DefaultDirectiveName {
-            get {
-                return "webhandler";
-            }
-        }
-    }
+		protected override string DefaultDirectiveName {
+			get {
+				return "webhandler";
+			}
+		}
+	}
 }
 

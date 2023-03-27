@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,41 +32,41 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("a6cf9074-15b3-11d2-932e-00805f8add32")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMDOMImplementation {
+	[Guid ("a6cf9074-15b3-11d2-932e-00805f8add32")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMDOMImplementation {
 
 #region nsIDOMDOMImplementation
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int hasFeature (
-                   /*DOMString*/ HandleRef feature,
-                   /*DOMString*/ HandleRef version, out bool ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int hasFeature (
+				   /*DOMString*/ HandleRef feature,
+				   /*DOMString*/ HandleRef version, out bool ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int createDocumentType (
-                   /*DOMString*/ HandleRef qualifiedName,
-                   /*DOMString*/ HandleRef publicId,
-                   /*DOMString*/ HandleRef systemId,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentType ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int createDocumentType (
+				   /*DOMString*/ HandleRef qualifiedName,
+				   /*DOMString*/ HandleRef publicId,
+				   /*DOMString*/ HandleRef systemId,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentType ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int createDocument (
-                   /*DOMString*/ HandleRef namespaceURI,
-                   /*DOMString*/ HandleRef qualifiedName,
-                [MarshalAs (UnmanagedType.Interface)]   nsIDOMDocumentType doctype,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocument ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int createDocument (
+				   /*DOMString*/ HandleRef namespaceURI,
+				   /*DOMString*/ HandleRef qualifiedName,
+				[MarshalAs (UnmanagedType.Interface)]   nsIDOMDocumentType doctype,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocument ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMDOMImplementation {
-        public static nsIDOMDOMImplementation GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDOMImplementation obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMDOMImplementation).GUID, obj);
-            return o as nsIDOMDOMImplementation;
-        }
-    }
+	internal class nsDOMDOMImplementation {
+		public static nsIDOMDOMImplementation GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDOMImplementation obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMDOMImplementation).GUID, obj);
+			return o as nsIDOMDOMImplementation;
+		}
+	}
 }

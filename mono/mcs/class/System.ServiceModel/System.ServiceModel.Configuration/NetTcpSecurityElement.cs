@@ -2,7 +2,7 @@
 // NetTcpSecurityElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,68 +54,68 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public sealed partial class NetTcpSecurityElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty message;
-        static ConfigurationProperty mode;
-        static ConfigurationProperty transport;
+	[MonoTODO]
+	public sealed partial class NetTcpSecurityElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty message;
+		static ConfigurationProperty mode;
+		static ConfigurationProperty transport;
 
-        static NetTcpSecurityElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            message = new ConfigurationProperty ("message",
-                typeof (MessageSecurityOverTcpElement), null, null/* FIXME: get converter for MessageSecurityOverTcpElement*/, null,
-                ConfigurationPropertyOptions.None);
+		static NetTcpSecurityElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			message = new ConfigurationProperty ("message",
+				typeof (MessageSecurityOverTcpElement), null, null/* FIXME: get converter for MessageSecurityOverTcpElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            mode = new ConfigurationProperty ("mode",
-                typeof (SecurityMode), "Transport", null/* FIXME: get converter for SecurityMode*/, null,
-                ConfigurationPropertyOptions.None);
+			mode = new ConfigurationProperty ("mode",
+				typeof (SecurityMode), "Transport", null/* FIXME: get converter for SecurityMode*/, null,
+				ConfigurationPropertyOptions.None);
 
-            transport = new ConfigurationProperty ("transport",
-                typeof (TcpTransportSecurityElement), null, null/* FIXME: get converter for TcpTransportSecurityElement*/, null,
-                ConfigurationPropertyOptions.None);
+			transport = new ConfigurationProperty ("transport",
+				typeof (TcpTransportSecurityElement), null, null/* FIXME: get converter for TcpTransportSecurityElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (message);
-            properties.Add (mode);
-            properties.Add (transport);
-        }
+			properties.Add (message);
+			properties.Add (mode);
+			properties.Add (transport);
+		}
 
-        public NetTcpSecurityElement ()
-        {
-        }
-
-
-        // Properties
-
-        [ConfigurationProperty ("message",
-             Options = ConfigurationPropertyOptions.None)]
-        public MessageSecurityOverTcpElement Message {
-            get { return (MessageSecurityOverTcpElement) base [message]; }
-        }
-
-        [ConfigurationProperty ("mode",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Transport")]
-        public SecurityMode Mode {
-            get { return (SecurityMode) base [mode]; }
-            set { base [mode] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-
-        [ConfigurationProperty ("transport",
-             Options = ConfigurationPropertyOptions.None)]
-        public TcpTransportSecurityElement Transport {
-            get { return (TcpTransportSecurityElement) base [transport]; }
-        }
+		public NetTcpSecurityElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+		[ConfigurationProperty ("message",
+			 Options = ConfigurationPropertyOptions.None)]
+		public MessageSecurityOverTcpElement Message {
+			get { return (MessageSecurityOverTcpElement) base [message]; }
+		}
+
+		[ConfigurationProperty ("mode",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "Transport")]
+		public SecurityMode Mode {
+			get { return (SecurityMode) base [mode]; }
+			set { base [mode] = value; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+		[ConfigurationProperty ("transport",
+			 Options = ConfigurationPropertyOptions.None)]
+		public TcpTransportSecurityElement Transport {
+			get { return (TcpTransportSecurityElement) base [transport]; }
+		}
+
+
+	}
 
 }

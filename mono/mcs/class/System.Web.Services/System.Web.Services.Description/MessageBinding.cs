@@ -33,37 +33,37 @@ using System.Xml.Serialization;
 
 namespace System.Web.Services.Description
 {
-    public abstract class MessageBinding :
-        NamedItem
-    {
+	public abstract class MessageBinding :
+		NamedItem
+	{
 
-        #region Fields
+		#region Fields
 
-        OperationBinding operationBinding;
+		OperationBinding operationBinding;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
-        
-        protected MessageBinding ()
-        {
-        }
-        
-        #endregion // Constructors
+		#region Constructors
+		
+		protected MessageBinding ()
+		{
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
 
-//        [XmlIgnore]
-        public OperationBinding OperationBinding {
-            get { return operationBinding; }
-        }
-        
-        internal void SetParent (OperationBinding ob)
-        {
-            operationBinding = ob;
-        }
+//		[XmlIgnore]
+		public OperationBinding OperationBinding {
+			get { return operationBinding; }
+		}
+		
+		internal void SetParent (OperationBinding ob)
+		{
+			operationBinding = ob;
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

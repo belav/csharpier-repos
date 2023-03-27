@@ -1,4 +1,4 @@
-namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding {
     using System.ComponentModel.DataAnnotations;
 
     public sealed class RequiredAttributeAdapter : DataAnnotationsModelValidator<RequiredAttribute> {

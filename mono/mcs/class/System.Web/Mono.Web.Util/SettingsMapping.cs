@@ -35,76 +35,76 @@ using System.Xml.XPath;
 
 namespace Mono.Web.Util
 {
-    public enum SettingsMappingPlatform
-    {
-        Windows,
-        Unix
-    };
+	public enum SettingsMappingPlatform
+	{
+		Windows,
+		Unix
+	};
   
-    internal class SettingsMapping
-    {
-        string _sectionTypeName;
-        Type _sectionType;
-        string _mapperTypeName;
-        Type _mapperType;
-        SettingsMappingPlatform _platform;
-        List <SettingsMappingWhat> _whats;
+	internal class SettingsMapping
+	{
+		string _sectionTypeName;
+		Type _sectionType;
+		string _mapperTypeName;
+		Type _mapperType;
+		SettingsMappingPlatform _platform;
+		List <SettingsMappingWhat> _whats;
     
-        public Type SectionType {
-            get {
-                if (_sectionType == null)
-                    _sectionType = Type.GetType (_sectionTypeName, false);
-                return _sectionType;
-            }
-        }
+		public Type SectionType {
+			get {
+				if (_sectionType == null)
+					_sectionType = Type.GetType (_sectionTypeName, false);
+				return _sectionType;
+			}
+		}
 
-        public Type MapperType {
-            get {
-                if (_mapperType == null) {
-                    _mapperType = Type.GetType (_mapperTypeName, true);
-                    if (!typeof (ISectionSettingsMapper).IsAssignableFrom (_mapperType)) {
-                        _mapperType = null;
-                        throw new InvalidOperationException ("Mapper type does not implement the ISectionSettingsMapper interface");
-                    }
-                }
+		public Type MapperType {
+			get {
+				if (_mapperType == null) {
+					_mapperType = Type.GetType (_mapperTypeName, true);
+					if (!typeof (ISectionSettingsMapper).IsAssignableFrom (_mapperType)) {
+						_mapperType = null;
+						throw new InvalidOperationException ("Mapper type does not implement the ISectionSettingsMapper interface");
+					}
+				}
 
-                return _mapperType;
-            }
-        }
+				return _mapperType;
+			}
+		}
 
-        public SettingsMappingPlatform Platform {
-            get { return _platform; }
-        }
+		public SettingsMappingPlatform Platform {
+			get { return _platform; }
+		}
     
-        public SettingsMapping (XPathNavigator nav)
-        {
-            _sectionTypeName = nav.GetAttribute ("sectionType", String.Empty);
-            _mapperTypeName = nav.GetAttribute ("mapperType", String.Empty);
+		public SettingsMapping (XPathNavigator nav)
+		{
+			_sectionTypeName = nav.GetAttribute ("sectionType", String.Empty);
+			_mapperTypeName = nav.GetAttribute ("mapperType", String.Empty);
 
-            EnumConverter cvt = new EnumConverter (typeof (SettingsMappingPlatform));
-            _platform = (SettingsMappingPlatform) cvt.ConvertFromInvariantString (nav.GetAttribute ("platform", String.Empty));
+			EnumConverter cvt = new EnumConverter (typeof (SettingsMappingPlatform));
+			_platform = (SettingsMappingPlatform) cvt.ConvertFromInvariantString (nav.GetAttribute ("platform", String.Empty));
 
-            LoadContents (nav);
-        }
+			LoadContents (nav);
+		}
 
-        public object MapSection (object input, Type type)
-        {
-            if (type != SectionType)
-                throw new ArgumentException ("type", "Invalid section type for this mapper");
+		public object MapSection (object input, Type type)
+		{
+			if (type != SectionType)
+				throw new ArgumentException ("type", "Invalid section type for this mapper");
 
-            ISectionSettingsMapper mapper = Activator.CreateInstance (MapperType) as ISectionSettingsMapper;
-            if (mapper == null)
-                return input;
+			ISectionSettingsMapper mapper = Activator.CreateInstance (MapperType) as ISectionSettingsMapper;
+			if (mapper == null)
+				return input;
       
-            return mapper.MapSection (input, _whats);
-        }
+			return mapper.MapSection (input, _whats);
+		}
     
-        void LoadContents (XPathNavigator nav)
-        {
-            XPathNodeIterator iter = nav.Select ("./what[string-length (@value) > 0]");
-            _whats = new List <SettingsMappingWhat> ();
-            while (iter.MoveNext ())
-                _whats.Add (new SettingsMappingWhat (iter.Current));
-        }
-    }
+		void LoadContents (XPathNavigator nav)
+		{
+			XPathNodeIterator iter = nav.Select ("./what[string-length (@value) > 0]");
+			_whats = new List <SettingsMappingWhat> ();
+			while (iter.MoveNext ())
+				_whats.Add (new SettingsMappingWhat (iter.Current));
+		}
+	}
 }

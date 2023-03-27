@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 //
 
@@ -30,93 +30,93 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-    [ComVisible(true)]
-    public class KeyEventArgs : EventArgs {
-        private Keys    key_data;
-        private bool    event_handled;
-        private bool    supress_key_press;
+	[ComVisible(true)]
+	public class KeyEventArgs : EventArgs {
+		private Keys	key_data;
+		private bool	event_handled;
+		private bool	supress_key_press;
 
-        #region Public Constructors
-        public KeyEventArgs(Keys keyData) {
-            this.key_data=keyData;
-            this.event_handled=false;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public KeyEventArgs(Keys keyData) {
+			this.key_data=keyData;
+			this.event_handled=false;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public virtual bool Alt {
-            get {
-                if ((this.key_data & Keys.Alt)==0) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        }
+		#region Public Instance Properties
+		public virtual bool Alt {
+			get {
+				if ((this.key_data & Keys.Alt)==0) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
 
-        public bool Control {
-            get {
-                if ((this.key_data & Keys.Control)==0) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        }
+		public bool Control {
+			get {
+				if ((this.key_data & Keys.Control)==0) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
 
-        public bool Handled {
-            get {
-                return this.event_handled;
-            }
+		public bool Handled {
+			get {
+				return this.event_handled;
+			}
 
-            set {
-                this.event_handled=value;
-            }
-        }
+			set {
+				this.event_handled=value;
+			}
+		}
 
-        public Keys KeyCode {
-            get {
-                return (this.key_data & Keys.KeyCode);
-            }
-        }
+		public Keys KeyCode {
+			get {
+				return (this.key_data & Keys.KeyCode);
+			}
+		}
 
-        public Keys KeyData {
-            get {
-                return this.key_data;
-            }
-        }
+		public Keys KeyData {
+			get {
+				return this.key_data;
+			}
+		}
 
-        public int KeyValue {
-            get {
-                return Convert.ToInt32(this.key_data);
-            }
-        }
+		public int KeyValue {
+			get {
+				return Convert.ToInt32(this.key_data);
+			}
+		}
 
-        public Keys Modifiers {
-            get {
-                return (this.key_data & Keys.Modifiers);
-            }
-        }
+		public Keys Modifiers {
+			get {
+				return (this.key_data & Keys.Modifiers);
+			}
+		}
 
-        public virtual bool Shift {
-            get {
-                if ((this.key_data & Keys.Shift)==0) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        }
-        
-        public bool SuppressKeyPress {
-            get {
-                return supress_key_press;
-            }
-            set {
-                supress_key_press = value;
-                event_handled = value;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public virtual bool Shift {
+			get {
+				if ((this.key_data & Keys.Shift)==0) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+		
+		public bool SuppressKeyPress {
+			get {
+				return supress_key_press;
+			}
+			set {
+				supress_key_press = value;
+				event_handled = value;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

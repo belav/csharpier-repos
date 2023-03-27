@@ -23,10 +23,10 @@
 // Copyright (c) Jonathan Pobst
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public delegate void ToolStripArrowRenderEventHandler (object sender, ToolStripArrowRenderEventArgs e);
+	public delegate void ToolStripArrowRenderEventHandler (object sender, ToolStripArrowRenderEventArgs e);
 }

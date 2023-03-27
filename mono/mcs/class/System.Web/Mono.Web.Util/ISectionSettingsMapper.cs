@@ -34,6 +34,6 @@ namespace Mono.Web.Util
 {
   public interface ISectionSettingsMapper
   {
-      object MapSection (object section, List <SettingsMappingWhat> whats);
+	  object MapSection (object section, List <SettingsMappingWhat> whats);
   }
 }

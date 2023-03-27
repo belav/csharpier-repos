@@ -2,7 +2,7 @@
 // System.Web.SiteMap
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
 //
 // (C) 2003 Ben Maurer
 //
@@ -37,66 +37,66 @@ using System.Web.Configuration;
 
 namespace System.Web
 {
-    public static class SiteMap
-    {
-        static void Init ()
-        {
-            lock (locker) {
-                if (provider == null) {
-                    SiteMapSection section = (SiteMapSection) WebConfigurationManager.GetSection ("system.web/siteMap");
+	public static class SiteMap
+	{
+		static void Init ()
+		{
+			lock (locker) {
+				if (provider == null) {
+					SiteMapSection section = (SiteMapSection) WebConfigurationManager.GetSection ("system.web/siteMap");
 
-                    if (!section.Enabled)
-                        throw new InvalidOperationException ("This feature is currently disabled.  Please enable it in the system.web/siteMap section in the web.config file.");
+					if (!section.Enabled)
+						throw new InvalidOperationException ("This feature is currently disabled.  Please enable it in the system.web/siteMap section in the web.config file.");
 
-                    providers = section.ProvidersInternal;
-                    providers.SetReadOnly ();
-                    provider = providers[section.DefaultProvider];
+					providers = section.ProvidersInternal;
+					providers.SetReadOnly ();
+					provider = providers[section.DefaultProvider];
 
-                    if (provider == null)
-                        throw new ConfigurationErrorsException (
-                            String.Format ("The default sitemap provider '{0}' does not exist in the provider collection.", section.DefaultProvider));
-                }
-            }
-        }
-        
-        public static SiteMapNode CurrentNode { 
-            get { return Provider.CurrentNode; }
-        }
+					if (provider == null)
+						throw new ConfigurationErrorsException (
+							String.Format ("The default sitemap provider '{0}' does not exist in the provider collection.", section.DefaultProvider));
+				}
+			}
+		}
+		
+		public static SiteMapNode CurrentNode { 
+			get { return Provider.CurrentNode; }
+		}
 
-        public static SiteMapNode RootNode { 
-            get { return Provider.RootNode; }
-        }
+		public static SiteMapNode RootNode { 
+			get { return Provider.RootNode; }
+		}
 
-        
-        public static SiteMapProvider Provider {
-            get {
-                Init ();
-                return provider;
-            }
-        }
-        public static SiteMapProviderCollection Providers {
-            get {
-                Init ();
-                return providers;
-            }
-        }
-        
-        public static event SiteMapResolveEventHandler SiteMapResolve {
-            add { Provider.SiteMapResolve += value; }
-            remove { Provider.SiteMapResolve -= value; }
-        }
+		
+		public static SiteMapProvider Provider {
+			get {
+				Init ();
+				return provider;
+			}
+		}
+		public static SiteMapProviderCollection Providers {
+			get {
+				Init ();
+				return providers;
+			}
+		}
+		
+		public static event SiteMapResolveEventHandler SiteMapResolve {
+			add { Provider.SiteMapResolve += value; }
+			remove { Provider.SiteMapResolve -= value; }
+		}
 
-        public static bool Enabled {
-            get {
-                SiteMapSection section = (SiteMapSection) WebConfigurationManager.GetSection ("system.web/siteMap");
-                return section.Enabled;
-            }
-        }        
+		public static bool Enabled {
+			get {
+				SiteMapSection section = (SiteMapSection) WebConfigurationManager.GetSection ("system.web/siteMap");
+				return section.Enabled;
+			}
+		}		
 
-        static SiteMapProvider provider;
-        static SiteMapProviderCollection providers;
-        static object locker = new object ();
-    }
+		static SiteMapProvider provider;
+		static SiteMapProviderCollection providers;
+		static object locker = new object ();
+	}
 }
 
 

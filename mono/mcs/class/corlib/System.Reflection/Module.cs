@@ -37,29 +37,29 @@ using System.Collections.Generic;
 
 namespace System.Reflection {
 
-    [Serializable]
-    [StructLayout (LayoutKind.Sequential)]
-    partial class Module {
-        internal Guid MvId {
-            get {
-                return GetModuleVersionId ();
-            }
-        }
+	[Serializable]
+	[StructLayout (LayoutKind.Sequential)]
+	partial class Module {
+		internal Guid MvId {
+			get {
+				return GetModuleVersionId ();
+			}
+		}
 
-        // Used by mcs, the symbol writer, and mdb through reflection
-        internal static Guid Mono_GetGuid (Module module)
-        {
-            return module.GetModuleVersionId ();
-        }
+		// Used by mcs, the symbol writer, and mdb through reflection
+		internal static Guid Mono_GetGuid (Module module)
+		{
+			return module.GetModuleVersionId ();
+		}
 
-        internal virtual Guid GetModuleVersionId ()
-        {
-            throw new NotImplementedException ();
-        }
+		internal virtual Guid GetModuleVersionId ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public virtual X509Certificate GetSignerCertificate ()
-        {
-            throw NotImplemented.ByDesign;
-        }
-    }
+		public virtual X509Certificate GetSignerCertificate ()
+		{
+			throw NotImplemented.ByDesign;
+		}
+	}
 }

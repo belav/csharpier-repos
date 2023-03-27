@@ -39,9 +39,9 @@ namespace Mono.ILASM {
                                 (ArrayList) ConversionList.Clone (), sig_mod);
                 }
 
-        public string Name {
-            get { return full_name; }
-        }
+		public string Name {
+			get { return full_name; }
+		}
 
                 public override void Resolve (CodeGen code_gen)
                 {
@@ -89,7 +89,7 @@ namespace Mono.ILASM {
                         if (mr != null)
                                 return mr;
 
-            //FIXME: generic methodref for primitive type?
+			//FIXME: generic methodref for primitive type?
                         mr = new TypeSpecMethodRef (this, call_conv, ret_type, name, param, gen_param_count);
                         s_method_table [key] = mr;
                         return mr;

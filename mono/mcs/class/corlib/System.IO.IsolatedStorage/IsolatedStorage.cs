@@ -2,8 +2,8 @@
 // System.IO.IsolatedStorage.cs
 //
 // Authors:
-//    Duncan Mak (duncan@ximian.com)
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Duncan Mak (duncan@ximian.com)
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) Ximian, Inc. http://www.ximian.com
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -37,149 +37,149 @@ using System.Security.Policy;
 
 namespace System.IO.IsolatedStorage {
 
-    [ComVisible (true)]
-    public abstract class IsolatedStorage : MarshalByRefObject {
+	[ComVisible (true)]
+	public abstract class IsolatedStorage : MarshalByRefObject {
 
-        // Constructor
-        protected IsolatedStorage ()
-            : base ()
-        {
-        }
+		// Constructor
+		protected IsolatedStorage ()
+			: base ()
+		{
+		}
 
                 internal IsolatedStorageScope storage_scope;
-        internal object _assemblyIdentity;
-        internal object _domainIdentity;
-        internal object _applicationIdentity;
+		internal object _assemblyIdentity;
+		internal object _domainIdentity;
+		internal object _applicationIdentity;
 
-        // Properties
+		// Properties
 
-        [MonoTODO ("Does not currently use the manifest support")]
-        [ComVisible (false)]
-        public object ApplicationIdentity {
-            [SecurityPermission (SecurityAction.Demand, ControlPolicy=true)]
-            get {
-                if ((storage_scope & IsolatedStorageScope.Application) == 0) {
-                    throw new InvalidOperationException (Locale.GetText ("Invalid Isolation Scope.")); 
-                }
-                if (_applicationIdentity == null)
-                    throw new InvalidOperationException (Locale.GetText ("Identity unavailable.")); 
+		[MonoTODO ("Does not currently use the manifest support")]
+		[ComVisible (false)]
+		public object ApplicationIdentity {
+			[SecurityPermission (SecurityAction.Demand, ControlPolicy=true)]
+			get {
+				if ((storage_scope & IsolatedStorageScope.Application) == 0) {
+					throw new InvalidOperationException (Locale.GetText ("Invalid Isolation Scope.")); 
+				}
+				if (_applicationIdentity == null)
+					throw new InvalidOperationException (Locale.GetText ("Identity unavailable.")); 
 
-                throw new NotImplementedException (Locale.GetText ("CAS related")); 
-            }
-        }
+				throw new NotImplementedException (Locale.GetText ("CAS related")); 
+			}
+		}
 
-        public object AssemblyIdentity {
-            [SecurityPermission (SecurityAction.Demand, ControlPolicy=true)]
-            get {
-                if ((storage_scope & IsolatedStorageScope.Assembly) == 0) {
-                    throw new InvalidOperationException (Locale.GetText ("Invalid Isolation Scope.")); 
-                }
-                if (_assemblyIdentity == null)
-                    throw new InvalidOperationException (Locale.GetText ("Identity unavailable.")); 
-                return _assemblyIdentity;
-            }
-        }
+		public object AssemblyIdentity {
+			[SecurityPermission (SecurityAction.Demand, ControlPolicy=true)]
+			get {
+				if ((storage_scope & IsolatedStorageScope.Assembly) == 0) {
+					throw new InvalidOperationException (Locale.GetText ("Invalid Isolation Scope.")); 
+				}
+				if (_assemblyIdentity == null)
+					throw new InvalidOperationException (Locale.GetText ("Identity unavailable.")); 
+				return _assemblyIdentity;
+			}
+		}
 
-        [CLSCompliant (false)]
-        [Obsolete]
-        public virtual ulong CurrentSize {
-            get {
-                throw new InvalidOperationException (
-                    Locale.GetText ("IsolatedStorage does not have a preset CurrentSize."));
-            }
-        }
+		[CLSCompliant (false)]
+		[Obsolete]
+		public virtual ulong CurrentSize {
+			get {
+				throw new InvalidOperationException (
+					Locale.GetText ("IsolatedStorage does not have a preset CurrentSize."));
+			}
+		}
 
-        public object DomainIdentity {
-            [SecurityPermission (SecurityAction.Demand, ControlPolicy=true)]
-            get {
-                if ((storage_scope & IsolatedStorageScope.Domain) == 0) {
-                    throw new InvalidOperationException (Locale.GetText ("Invalid Isolation Scope.")); 
-                }
-                if (_domainIdentity == null)
-                    throw new InvalidOperationException (Locale.GetText ("Identity unavailable.")); 
-                return _domainIdentity;
-            }
-        }
+		public object DomainIdentity {
+			[SecurityPermission (SecurityAction.Demand, ControlPolicy=true)]
+			get {
+				if ((storage_scope & IsolatedStorageScope.Domain) == 0) {
+					throw new InvalidOperationException (Locale.GetText ("Invalid Isolation Scope.")); 
+				}
+				if (_domainIdentity == null)
+					throw new InvalidOperationException (Locale.GetText ("Identity unavailable.")); 
+				return _domainIdentity;
+			}
+		}
 
-        [CLSCompliant (false)]
-        [Obsolete]
-        public virtual ulong MaximumSize {
-            get {
-                throw new InvalidOperationException (
-                    Locale.GetText ("IsolatedStorage does not have a preset MaximumSize."));
-            }
-        }
+		[CLSCompliant (false)]
+		[Obsolete]
+		public virtual ulong MaximumSize {
+			get {
+				throw new InvalidOperationException (
+					Locale.GetText ("IsolatedStorage does not have a preset MaximumSize."));
+			}
+		}
 
-        public IsolatedStorageScope Scope {
-            get { return storage_scope; }
-        }
+		public IsolatedStorageScope Scope {
+			get { return storage_scope; }
+		}
 
-        [ComVisible (false)]
-        public virtual long AvailableFreeSpace {
-            get {
-                throw new InvalidOperationException ("This property is not defined for this store.");
-            }
-        }
+		[ComVisible (false)]
+		public virtual long AvailableFreeSpace {
+			get {
+				throw new InvalidOperationException ("This property is not defined for this store.");
+			}
+		}
 
-        [ComVisible (false)]
-        public virtual long Quota {
-            get {
-                throw new InvalidOperationException ("This property is not defined for this store.");
-            }
-        }
+		[ComVisible (false)]
+		public virtual long Quota {
+			get {
+				throw new InvalidOperationException ("This property is not defined for this store.");
+			}
+		}
 
-        [ComVisible (false)]
-        public virtual long UsedSize {
-            get {
-                throw new InvalidOperationException ("This property is not defined for this store.");
-            }
-        }
+		[ComVisible (false)]
+		public virtual long UsedSize {
+			get {
+				throw new InvalidOperationException ("This property is not defined for this store.");
+			}
+		}
 
-        protected virtual char SeparatorExternal {
-            get { return System.IO.Path.DirectorySeparatorChar; }
-        }
+		protected virtual char SeparatorExternal {
+			get { return System.IO.Path.DirectorySeparatorChar; }
+		}
 
-        protected virtual char SeparatorInternal {
-            get { return '.'; }
-        }
+		protected virtual char SeparatorInternal {
+			get { return '.'; }
+		}
 
-        // Methods
-        protected virtual IsolatedStoragePermission GetPermission (PermissionSet ps) => null;
+		// Methods
+		protected virtual IsolatedStoragePermission GetPermission (PermissionSet ps) => null;
 
-        protected void InitStore (IsolatedStorageScope scope, Type domainEvidenceType, Type assemblyEvidenceType)
-        {
-            // I know it's useless - but it's tested as such...
-            switch (scope) {
-            case (IsolatedStorageScope.Assembly | IsolatedStorageScope.User):
-            case (IsolatedStorageScope.Assembly | IsolatedStorageScope.User | IsolatedStorageScope.Domain):
-                throw new NotImplementedException (scope.ToString ());
-            default:
-                // invalid (incomplete) scope
-                throw new ArgumentException (scope.ToString ());
-            }
-        }
+		protected void InitStore (IsolatedStorageScope scope, Type domainEvidenceType, Type assemblyEvidenceType)
+		{
+			// I know it's useless - but it's tested as such...
+			switch (scope) {
+			case (IsolatedStorageScope.Assembly | IsolatedStorageScope.User):
+			case (IsolatedStorageScope.Assembly | IsolatedStorageScope.User | IsolatedStorageScope.Domain):
+				throw new NotImplementedException (scope.ToString ());
+			default:
+				// invalid (incomplete) scope
+				throw new ArgumentException (scope.ToString ());
+			}
+		}
 
-        [MonoTODO ("requires manifest support")]
-        protected void InitStore (IsolatedStorageScope scope, Type appEvidenceType)
-        {
+		[MonoTODO ("requires manifest support")]
+		protected void InitStore (IsolatedStorageScope scope, Type appEvidenceType)
+		{
 #if !MOBILE
-            if (AppDomain.CurrentDomain.ApplicationIdentity == null)
-                throw new IsolatedStorageException (Locale.GetText ("No ApplicationIdentity available for AppDomain."));
+			if (AppDomain.CurrentDomain.ApplicationIdentity == null)
+				throw new IsolatedStorageException (Locale.GetText ("No ApplicationIdentity available for AppDomain."));
 
-            if (appEvidenceType == null) {
-                // TODO - Choose evidence
-            }
+			if (appEvidenceType == null) {
+				// TODO - Choose evidence
+			}
 #endif
 
-            // no exception here because this can work without CAS
-            storage_scope = scope;
-        }
-        public abstract void Remove ();
+			// no exception here because this can work without CAS
+			storage_scope = scope;
+		}
+		public abstract void Remove ();
 
-        [ComVisible (false)]
-        public virtual bool IncreaseQuotaTo (long newQuotaSize)
-        {
-            return false;
-        }
-    }
+		[ComVisible (false)]
+		public virtual bool IncreaseQuotaTo (long newQuotaSize)
+		{
+			return false;
+		}
+	}
 }

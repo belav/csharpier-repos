@@ -31,76 +31,76 @@
 using System;
 
 namespace Mono.Data.Tds.Protocol {
-    public class TdsInternalInfoMessageEventArgs : EventArgs
-    {
-        #region Fields
+	public class TdsInternalInfoMessageEventArgs : EventArgs
+	{
+		#region Fields
 
-        TdsInternalErrorCollection errors;
+		TdsInternalErrorCollection errors;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
-        
-        public TdsInternalInfoMessageEventArgs (TdsInternalErrorCollection errors)
-        {
-            this.errors = errors;
-        }
+		#region Constructors
+		
+		public TdsInternalInfoMessageEventArgs (TdsInternalErrorCollection errors)
+		{
+			this.errors = errors;
+		}
 
-        public TdsInternalInfoMessageEventArgs (TdsInternalError error)
-        {
-            this.errors = new TdsInternalErrorCollection ();
-            errors.Add (error);
-        }
+		public TdsInternalInfoMessageEventArgs (TdsInternalError error)
+		{
+			this.errors = new TdsInternalErrorCollection ();
+			errors.Add (error);
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public TdsInternalErrorCollection Errors {
-            get { return errors; }
-        }
+		public TdsInternalErrorCollection Errors {
+			get { return errors; }
+		}
 
-        public byte Class {
-            get { return errors[0].Class; }
-        }
+		public byte Class {
+			get { return errors[0].Class; }
+		}
 
-        public int LineNumber {
-            get { return errors[0].LineNumber; }
-        }
+		public int LineNumber {
+			get { return errors[0].LineNumber; }
+		}
 
-        public string Message {
-            get { return errors[0].Message; }
-        }
+		public string Message {
+			get { return errors[0].Message; }
+		}
 
-        public int Number {
-            get { return errors[0].Number; }
-        }
+		public int Number {
+			get { return errors[0].Number; }
+		}
 
-        public string Procedure {
-            get { return errors[0].Procedure; }
-        }
+		public string Procedure {
+			get { return errors[0].Procedure; }
+		}
 
-        public string Server {
-            get { return errors[0].Server; }
-        }
-        
-        public string Source {
-            get { return errors[0].Source; }
-        }
+		public string Server {
+			get { return errors[0].Server; }
+		}
+		
+		public string Source {
+			get { return errors[0].Source; }
+		}
 
-        public byte State {
-            get { return errors[0].State; }
-        }
+		public byte State {
+			get { return errors[0].State; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        public int Add (byte theClass, int lineNumber, string message, int number, string procedure, string server, string source, byte state)
-        {
-            return errors.Add (new TdsInternalError (theClass, lineNumber, message, number, procedure, server, source, state));
-        }
+		public int Add (byte theClass, int lineNumber, string message, int number, string procedure, string server, string source, byte state)
+		{
+			return errors.Add (new TdsInternalError (theClass, lineNumber, message, number, procedure, server, source, state));
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

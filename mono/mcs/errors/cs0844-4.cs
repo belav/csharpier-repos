@@ -3,11 +3,11 @@
 
 class C
 {
-    const string s = "s";
+	const string s = "s";
 
-    public void Test ()
-    {
-        s = "x";
-        string s = "a";
-    }
+	public void Test ()
+	{
+		s = "x";
+		string s = "a";
+	}
 }

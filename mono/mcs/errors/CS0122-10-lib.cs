@@ -1,8 +1,8 @@
 using System;
 
 namespace X {
-    public class Y {
-        internal Y(String test) {
-        }
-    }
+	public class Y {
+		internal Y(String test) {
+		}
+	}
 }

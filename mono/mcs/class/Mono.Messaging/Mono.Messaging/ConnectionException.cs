@@ -2,7 +2,7 @@
 // Mono.Messaging
 //
 // Authors:
-//      Michael Barker (mike@middlesoft.co.uk)
+//	  Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -32,24 +32,24 @@ using System;
 
 namespace Mono.Messaging {
 
-    [Serializable]
-    public class ConnectionException : MonoMessagingException {
-        private readonly QueueReference qRef;
-    
-        public ConnectionException (QueueReference qRef, Exception e) 
-            : base ("Unable to connect to Queue: " + qRef + ", Error: " + e.Message, e)
-        {
-            this.qRef = qRef;
-        }
-        
-        public ConnectionException (QueueReference qRef) 
-            : base ("Unable to connect to Queue: " + qRef)
-        {
-            this.qRef = qRef;
-        }
-        
-        public QueueReference QRef {
-            get { return qRef; }
-        }
-    }
+	[Serializable]
+	public class ConnectionException : MonoMessagingException {
+		private readonly QueueReference qRef;
+	
+		public ConnectionException (QueueReference qRef, Exception e) 
+			: base ("Unable to connect to Queue: " + qRef + ", Error: " + e.Message, e)
+		{
+			this.qRef = qRef;
+		}
+		
+		public ConnectionException (QueueReference qRef) 
+			: base ("Unable to connect to Queue: " + qRef)
+		{
+			this.qRef = qRef;
+		}
+		
+		public QueueReference QRef {
+			get { return qRef; }
+		}
+	}
 }

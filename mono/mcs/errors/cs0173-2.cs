@@ -5,5 +5,5 @@ public class MainClass {
         public static void Main() {
                 bool result = false;
                 System.Console.WriteLine (result ? 1 : null);
-    }
+	}
 }

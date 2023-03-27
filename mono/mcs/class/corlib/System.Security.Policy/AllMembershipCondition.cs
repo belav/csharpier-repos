@@ -2,8 +2,8 @@
 // System.Security.Policy.AllMembershipCondition.cs
 //
 // Authors:
-//    Ajay kumar Dwivedi (adwiv@yahoo.com)
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Ajay kumar Dwivedi (adwiv@yahoo.com)
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,62 +31,62 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Policy {
 
-    [Serializable]
-    [ComVisible (true)]
-    public sealed class AllMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
+	[Serializable]
+	[ComVisible (true)]
+	public sealed class AllMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
 
-        private readonly int version = 1;
+		private readonly int version = 1;
 
-        public AllMembershipCondition ()
-        {
-        }
+		public AllMembershipCondition ()
+		{
+		}
 
-        // Always returns true
-        public bool Check (Evidence evidence)
-        {
-            return true;
-        }
+		// Always returns true
+		public bool Check (Evidence evidence)
+		{
+			return true;
+		}
 
-        public IMembershipCondition Copy ()
-        {
-            return new AllMembershipCondition ();
-        }
+		public IMembershipCondition Copy ()
+		{
+			return new AllMembershipCondition ();
+		}
 
-        public override bool Equals (object o)
-        {
-            return (o is AllMembershipCondition);
-        }
+		public override bool Equals (object o)
+		{
+			return (o is AllMembershipCondition);
+		}
  
-        public void FromXml (SecurityElement e)
-        {
-            FromXml (e, null);
-        }
+		public void FromXml (SecurityElement e)
+		{
+			FromXml (e, null);
+		}
 
-        public void FromXml (SecurityElement e, PolicyLevel level)
-        {
-            MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
-        }
+		public void FromXml (SecurityElement e, PolicyLevel level)
+		{
+			MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
+		}
 
-        public override int GetHashCode ()
-        {
-            return typeof (AllMembershipCondition).GetHashCode ();
-        }
+		public override int GetHashCode ()
+		{
+			return typeof (AllMembershipCondition).GetHashCode ();
+		}
 
-        public override string ToString ()
-        {
-            return "All code";
-        }
+		public override string ToString ()
+		{
+			return "All code";
+		}
 
-        public SecurityElement ToXml ()
-        {
-            return ToXml (null);
-        }
+		public SecurityElement ToXml ()
+		{
+			return ToXml (null);
+		}
 
-        public SecurityElement ToXml (PolicyLevel level)
-        {
-            SecurityElement se = MembershipConditionHelper.Element (typeof (AllMembershipCondition), version);
-            // nothing to add
-            return se;
-        }
-    }
+		public SecurityElement ToXml (PolicyLevel level)
+		{
+			SecurityElement se = MembershipConditionHelper.Element (typeof (AllMembershipCondition), version);
+			// nothing to add
+			return se;
+		}
+	}
 }

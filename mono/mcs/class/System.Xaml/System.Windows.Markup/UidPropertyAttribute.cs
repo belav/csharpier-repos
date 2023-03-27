@@ -30,15 +30,15 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false)]
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-    public sealed class UidPropertyAttribute : Attribute
-    {
-        public UidPropertyAttribute (string name)
-        {
-            Name = name;
-        }
-        
-        public string Name { get; private set; }
-    }
+	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false)]
+	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+	public sealed class UidPropertyAttribute : Attribute
+	{
+		public UidPropertyAttribute (string name)
+		{
+			Name = name;
+		}
+		
+		public string Name { get; private set; }
+	}
 }

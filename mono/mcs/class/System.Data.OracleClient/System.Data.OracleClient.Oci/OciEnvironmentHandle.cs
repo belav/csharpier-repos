@@ -19,41 +19,41 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.Data.OracleClient.Oci {
-    internal class OciEnvironmentHandle : OciHandle, IDisposable
-    {
-        #region Constructors
+	internal class OciEnvironmentHandle : OciHandle, IDisposable
+	{
+		#region Constructors
 
-        public OciEnvironmentHandle ()
-            : this (OciEnvironmentMode.Default)
-        { 
-        }
+		public OciEnvironmentHandle ()
+			: this (OciEnvironmentMode.Default)
+		{ 
+		}
 
-        public OciEnvironmentHandle (OciEnvironmentMode mode)
-            : base (OciHandleType.Environment, null, IntPtr.Zero)
-        {
-            IntPtr newHandle = IntPtr.Zero;
-            OciCalls.OCIEnvCreate (out newHandle, 
-                        mode, 
-                        IntPtr.Zero, 
-                        IntPtr.Zero, 
-                        IntPtr.Zero, 
-                         IntPtr.Zero, 
-                        0, 
-                        IntPtr.Zero);
+		public OciEnvironmentHandle (OciEnvironmentMode mode)
+			: base (OciHandleType.Environment, null, IntPtr.Zero)
+		{
+			IntPtr newHandle = IntPtr.Zero;
+			OciCalls.OCIEnvCreate (out newHandle, 
+						mode, 
+						IntPtr.Zero, 
+						IntPtr.Zero, 
+						IntPtr.Zero, 
+			 			IntPtr.Zero, 
+						0, 
+						IntPtr.Zero);
 
-            SetHandle (newHandle);
-        }
+			SetHandle (newHandle);
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Methods
+		#region Methods
 
-        public OciErrorInfo HandleError ()
-        {
-            OciErrorInfo info = OciErrorHandle.HandleError (this);
-            return info;
-        }
+		public OciErrorInfo HandleError ()
+		{
+			OciErrorInfo info = OciErrorHandle.HandleError (this);
+			return info;
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

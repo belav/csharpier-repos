@@ -1,4 +1,4 @@
-namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc {
 
     public interface IActionFilter {
         void OnActionExecuting(ActionExecutingContext filterContext);

@@ -1,9 +1,9 @@
 //
 // CryptographicAttributeObjectCas.cs - CAS unit tests for 
-//    System.Security.Cryptography.CryptographicAttributeObject
+//	System.Security.Cryptography.CryptographicAttributeObject
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,36 +40,36 @@ using MonoTests.System.Security.Cryptography;
 
 namespace MonoCasTests.System.Security.Cryptography {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CryptographicAttributeObjectCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CryptographicAttributeObjectCas {
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void UnitTestReuse ()
-        {
-            CryptographicAttributeTest unit = new CryptographicAttributeTest ();
-            unit.ConstructorOid ();
-            unit.ConstructorOidCollection ();
-            unit.ConstructorOidAsnEncodedDataCollectionNull ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void UnitTestReuse ()
+		{
+			CryptographicAttributeTest unit = new CryptographicAttributeTest ();
+			unit.ConstructorOid ();
+			unit.ConstructorOidCollection ();
+			unit.ConstructorOidAsnEncodedDataCollectionNull ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            Type[] types = new Type[1] { typeof (Oid) };
-            ConstructorInfo ci = typeof (CryptographicAttributeObject).GetConstructor (types);
-            Assert.IsNotNull (ci, ".ctor(Oid)");
-            Assert.IsNotNull (ci.Invoke (new object[1] { new Oid () }), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			Type[] types = new Type[1] { typeof (Oid) };
+			ConstructorInfo ci = typeof (CryptographicAttributeObject).GetConstructor (types);
+			Assert.IsNotNull (ci, ".ctor(Oid)");
+			Assert.IsNotNull (ci.Invoke (new object[1] { new Oid () }), "invoke");
+		}
+	}
 }
 

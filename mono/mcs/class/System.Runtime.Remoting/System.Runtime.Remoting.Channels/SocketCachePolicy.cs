@@ -2,7 +2,7 @@
 // System.Runtime.Remoting.Channels.SocketCachePolicy.cs
 //
 // Author:
-//    Gert Driesen (drieseng@users.sourceforge.net)
+//	Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) Copyright 2008 Gert Driesen
 //
@@ -30,10 +30,10 @@
 
 namespace System.Runtime.Remoting.Channels
 {
-    public enum SocketCachePolicy
-    {
-        Default,
-        AbsoluteTimeout
-    }
+	public enum SocketCachePolicy
+	{
+		Default,
+		AbsoluteTimeout
+	}
 }
 

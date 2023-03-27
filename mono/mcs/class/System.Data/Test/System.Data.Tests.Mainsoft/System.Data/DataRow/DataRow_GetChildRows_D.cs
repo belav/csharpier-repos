@@ -39,70 +39,70 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRow_GetChildRows_D : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRow_GetChildRows_D tc = new DataRow_GetChildRows_D();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRow_GetChildRows_D");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRow_GetChildRows_D tc = new DataRow_GetChildRows_D();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRow_GetChildRows_D");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        
-        DataRow dr;
-        DataRow[] drArrExcepted,drArrResult;
-        DataTable dtChild,dtParent;
-        DataSet ds = new DataSet();
+	public void run()
+	{
+		Exception exp = null;
+		
+		DataRow dr;
+		DataRow[] drArrExcepted,drArrResult;
+		DataTable dtChild,dtParent;
+		DataSet ds = new DataSet();
 
-        //Create tables
-        dtChild = GHTUtils.DataProvider.CreateChildDataTable();
-        dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
+		//Create tables
+		dtChild = GHTUtils.DataProvider.CreateChildDataTable();
+		dtParent= GHTUtils.DataProvider.CreateParentDataTable(); 
 
-        //Add tables to dataset
-        ds.Tables.Add(dtChild);
-        ds.Tables.Add(dtParent);
-        dr = dtParent.Rows[0];
+		//Add tables to dataset
+		ds.Tables.Add(dtChild);
+		ds.Tables.Add(dtParent);
+		dr = dtParent.Rows[0];
 
-        //Add Relation
-        DataRelation dRel = new DataRelation("Parent-Child",dtParent.Columns["ParentId"],dtChild.Columns["ParentId"]);
-        ds.Relations.Add(dRel);
-        //Get Excepted result
-        drArrExcepted = dtChild.Select("ParentId=" + dr["ParentId"]);
-        //Get Result
-        drArrResult = dr.GetChildRows(dRel);
-        
-        try
-        {
-            BeginCase("GetChildRows_D");
-            base.Compare( drArrResult, drArrExcepted);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    }
+		//Add Relation
+		DataRelation dRel = new DataRelation("Parent-Child",dtParent.Columns["ParentId"],dtChild.Columns["ParentId"]);
+		ds.Relations.Add(dRel);
+		//Get Excepted result
+		drArrExcepted = dtChild.Select("ParentId=" + dr["ParentId"]);
+		//Get Result
+		drArrResult = dr.GetChildRows(dRel);
+		
+		try
+		{
+			BeginCase("GetChildRows_D");
+			base.Compare( drArrResult, drArrExcepted);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	}
 }
 }

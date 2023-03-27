@@ -7,20 +7,20 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 
 class X {
-    public static int Main ()
-    {
-        object [] attrs = typeof (X).Assembly.GetCustomAttributes (true);
+	public static int Main ()
+	{
+		object [] attrs = typeof (X).Assembly.GetCustomAttributes (true);
 
-        foreach (object o in attrs){
-            if (o is RuntimeCompatibilityAttribute){
-                RuntimeCompatibilityAttribute a = (RuntimeCompatibilityAttribute) o;
+		foreach (object o in attrs){
+			if (o is RuntimeCompatibilityAttribute){
+				RuntimeCompatibilityAttribute a = (RuntimeCompatibilityAttribute) o;
 
-                if (a.WrapNonExceptionThrows)
-                    return 0;
-            }
-        }
+				if (a.WrapNonExceptionThrows)
+					return 0;
+			}
+		}
 
-        // failed, did not find the attribute
-        return 1;
-    }
+		// failed, did not find the attribute
+		return 1;
+	}
 }

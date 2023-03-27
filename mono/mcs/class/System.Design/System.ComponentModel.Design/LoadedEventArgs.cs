@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.LoadedEventArgs
 //
-// Authors:     
-//      Ivan N. Zlatev (contact i-nZ.net)
+// Authors:	 
+//	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
 
@@ -35,30 +35,30 @@ using System.ComponentModel;
 namespace System.ComponentModel.Design
 {
 
-    public sealed class LoadedEventArgs : EventArgs
-    {
-        
-        public LoadedEventArgs (bool succeeded, ICollection errors)
-        {
-            _succeeded = succeeded;
-            _errors = errors;
-        }
-        
-        private ICollection _errors;
-        private bool _succeeded; 
-        
-        public ICollection Errors {
-            get { return _errors; }
-        }
-        
-        public bool HasSucceeded {
-            get { return _succeeded;}
-        }
+	public sealed class LoadedEventArgs : EventArgs
+	{
+		
+		public LoadedEventArgs (bool succeeded, ICollection errors)
+		{
+			_succeeded = succeeded;
+			_errors = errors;
+		}
+		
+		private ICollection _errors;
+		private bool _succeeded; 
+		
+		public ICollection Errors {
+			get { return _errors; }
+		}
+		
+		public bool HasSucceeded {
+			get { return _succeeded;}
+		}
 
-        
+		
 
-        
-    }
+		
+	}
 
 }
 

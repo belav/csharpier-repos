@@ -2,7 +2,7 @@
 // WebContentTypeMapper.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -29,12 +29,12 @@ using System;
 
 namespace System.ServiceModel.Channels
 {
-    public abstract class WebContentTypeMapper
-    {
-        protected WebContentTypeMapper ()
-        {
-        }
+	public abstract class WebContentTypeMapper
+	{
+		protected WebContentTypeMapper ()
+		{
+		}
 
-        public abstract WebContentFormat GetMessageFormatForContentType (string contentType);
-    }
+		public abstract WebContentFormat GetMessageFormatForContentType (string contentType);
+	}
 }

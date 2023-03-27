@@ -1249,7 +1249,7 @@ namespace nwind
             entity.Employee = null;
         }
     }
-    
+	
     [Table(Name = "dbo.[Order Details]")]
     public partial class OrderDetail : INotifyPropertyChanging, INotifyPropertyChanged
     {

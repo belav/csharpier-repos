@@ -4,10 +4,10 @@
 
 namespace N
 {
-    using M;
-    using N.M;
-    
-    namespace M
-    {
-    }
+	using M;
+	using N.M;
+	
+	namespace M
+	{
+	}
 }

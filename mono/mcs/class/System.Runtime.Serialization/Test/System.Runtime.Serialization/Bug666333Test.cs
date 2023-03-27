@@ -16,37 +16,37 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-    [TestFixture]
-    public class Bug666333Test
-    {
-        [Test]
-        public void Bug666333 ()
-        {
-            // xml : original xml in the test
-            // xml2 : when it is *appropriately* serialized
-            // xml3 : mixed, d4p1:activeuser comes first
-            // xml4 : mixed, d4p1:activeuser comes second
-            // (Note that d4p1:activeuser is the actual element to be deserialized which takes precedence over urn:foo activeuser.)
-        
-            string xml = @"
-                <CheckLoginResponse xmlns='http://tempuri.org/'>
-                    <playeractiveuser>
-                        <activeuser>
-                            <id>id</id>
-                            <hkey>hkey</hkey>
-                            <email>FOO@BAR.com</email>
-                            <lastcheck>2011-01-21T22:50:52.02</lastcheck>
-                        </activeuser>
-                        <response>
-                            <responsemessage>Acceso correcto, creado nuevo hkey!</responsemessage>
-                            <responsecode>1</responsecode>
-                            <langId>6</langId>
-                        </response>
-                    </playeractiveuser>
-                </CheckLoginResponse>
-                ";
+	[TestFixture]
+	public class Bug666333Test
+	{
+		[Test]
+		public void Bug666333 ()
+		{
+			// xml : original xml in the test
+			// xml2 : when it is *appropriately* serialized
+			// xml3 : mixed, d4p1:activeuser comes first
+			// xml4 : mixed, d4p1:activeuser comes second
+			// (Note that d4p1:activeuser is the actual element to be deserialized which takes precedence over urn:foo activeuser.)
+		
+			string xml = @"
+				<CheckLoginResponse xmlns='http://tempuri.org/'>
+					<playeractiveuser>
+						<activeuser>
+							<id>id</id>
+							<hkey>hkey</hkey>
+							<email>FOO@BAR.com</email>
+							<lastcheck>2011-01-21T22:50:52.02</lastcheck>
+						</activeuser>
+						<response>
+							<responsemessage>Acceso correcto, creado nuevo hkey!</responsemessage>
+							<responsecode>1</responsecode>
+							<langId>6</langId>
+						</response>
+					</playeractiveuser>
+				</CheckLoginResponse>
+				";
 
-            string xml2 = @"
+			string xml2 = @"
 <CheckLoginResponse xmlns='http://tempuri.org/'>
   <playeractiveuser xmlns:d4p1='http://schemas.datacontract.org/2004/07/' xmlns:i='http://www.w3.org/2001/XMLSchema-instance'>
     <d4p1:activeuser>
@@ -63,7 +63,7 @@ namespace MonoTests.System.Runtime.Serialization
   </playeractiveuser>
 </CheckLoginResponse>";
 
-            string xml3 = @"
+			string xml3 = @"
 <CheckLoginResponse xmlns='http://tempuri.org/'>
   <playeractiveuser xmlns:d4p1='http://schemas.datacontract.org/2004/07/' xmlns:i='http://www.w3.org/2001/XMLSchema-instance'>
     <d4p1:activeuser>
@@ -86,7 +86,7 @@ namespace MonoTests.System.Runtime.Serialization
   </playeractiveuser>
 </CheckLoginResponse>";
 
-            string xml4 = @"
+			string xml4 = @"
 <CheckLoginResponse xmlns='http://tempuri.org/'>
   <playeractiveuser xmlns:d4p1='http://schemas.datacontract.org/2004/07/' xmlns:i='http://www.w3.org/2001/XMLSchema-instance'>
     <activeuser xmlns='urn:foo'>
@@ -108,21 +108,21 @@ namespace MonoTests.System.Runtime.Serialization
     </response>
   </playeractiveuser>
 </CheckLoginResponse>";
-            
-            var tm = TypedMessageConverter.Create (typeof (CheckLoginResponse), "urn:foo");
-            var m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml)));
-            m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml2)));
-            m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml3)));
-            var clr = (CheckLoginResponse) tm.FromMessage (m);
-            Assert.IsNotNull (clr.playeractiveuser, "#1");
-            Assert.IsNotNull (clr.playeractiveuser.activeuser, "#2");
-            Assert.AreEqual ("iddd", clr.playeractiveuser.activeuser.id, "#3");
+			
+			var tm = TypedMessageConverter.Create (typeof (CheckLoginResponse), "urn:foo");
+			var m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml)));
+			m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml2)));
+			m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml3)));
+			var clr = (CheckLoginResponse) tm.FromMessage (m);
+			Assert.IsNotNull (clr.playeractiveuser, "#1");
+			Assert.IsNotNull (clr.playeractiveuser.activeuser, "#2");
+			Assert.AreEqual ("iddd", clr.playeractiveuser.activeuser.id, "#3");
 
-            m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml4)));
-            Assert.AreEqual ("iddd", clr.playeractiveuser.activeuser.id, "#4");
-    }
+			m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml4)));
+			Assert.AreEqual ("iddd", clr.playeractiveuser.activeuser.id, "#4");
+	}
 
-    }
+	}
 }
 
 // Generated code

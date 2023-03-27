@@ -2,7 +2,7 @@
 // Mono.Messaging.RabbitMQ
 //
 // Authors:
-//      Michael Barker (mike@middlesoft.co.uk)
+//	  Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -43,21 +43,21 @@ using RabbitMQ.Util;
 
 namespace Mono.Messaging.RabbitMQ {
 
-    /// <summary>
-    /// </summary>
-    public interface IMessagingContext : IDisposable {
-        
-        IMessage Receive (QueueReference qRef, TimeSpan timeout, IsMatch matcher, bool ack);
-        void Send (QueueReference qRef, IMessage msg);
-        
-        // IConnection Connection { get; }
-        // IModel Model { get; }
-        void Delete (QueueReference qRef);
-        void Purge (QueueReference qRef);
-    }
-    
-    public delegate bool IsMatch (BasicDeliverEventArgs result);
-    
-    public delegate IConnection CreateConnectionDelegate (string host);
-    
+	/// <summary>
+	/// </summary>
+	public interface IMessagingContext : IDisposable {
+		
+		IMessage Receive (QueueReference qRef, TimeSpan timeout, IsMatch matcher, bool ack);
+		void Send (QueueReference qRef, IMessage msg);
+		
+		// IConnection Connection { get; }
+		// IModel Model { get; }
+		void Delete (QueueReference qRef);
+		void Purge (QueueReference qRef);
+	}
+	
+	public delegate bool IsMatch (BasicDeliverEventArgs result);
+	
+	public delegate IConnection CreateConnectionDelegate (string host);
+	
 }

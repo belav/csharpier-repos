@@ -23,18 +23,18 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum ToolStripDropDownCloseReason
-    {
-        AppFocusChange = 0,
-        AppClicked = 1,
-        ItemClicked = 2,
-        Keyboard = 3,
-        CloseCalled = 4
-    }
+	public enum ToolStripDropDownCloseReason
+	{
+		AppFocusChange = 0,
+		AppClicked = 1,
+		ItemClicked = 2,
+		Keyboard = 3,
+		CloseCalled = 4
+	}
 }

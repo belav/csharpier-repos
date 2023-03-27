@@ -2,7 +2,7 @@
 // System.Configuration.SubclassTypeValidator.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -29,26 +29,26 @@
 using System;
 
 namespace System.Configuration {
-    public sealed class SubclassTypeValidator : ConfigurationValidatorBase
-    {
-        Type baseClass;
+	public sealed class SubclassTypeValidator : ConfigurationValidatorBase
+	{
+		Type baseClass;
 
-        public SubclassTypeValidator (Type baseClass)
-        {
-            this.baseClass = baseClass;
-        }
+		public SubclassTypeValidator (Type baseClass)
+		{
+			this.baseClass = baseClass;
+		}
 
-        public override bool CanValidate (Type type)
-        {
-            return type == typeof (Type);
-        }
+		public override bool CanValidate (Type type)
+		{
+			return type == typeof (Type);
+		}
 
-        public override void Validate (object value)
-        {
-            Type type = (Type)value;
+		public override void Validate (object value)
+		{
+			Type type = (Type)value;
 
-            if (!baseClass.IsAssignableFrom (type))
-                throw new ArgumentException ("The value must be a subclass");
-        }
-    }
+			if (!baseClass.IsAssignableFrom (type))
+				throw new ArgumentException ("The value must be a subclass");
+		}
+	}
 }

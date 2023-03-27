@@ -1,9 +1,9 @@
 //
 // ButtonColumnCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.ButtonColumn
+//	- CAS unit tests for System.Web.UI.WebControls.ButtonColumn
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,23 +38,23 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ButtonColumnCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ButtonColumnCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            ButtonColumnTest unit = new ButtonColumnTest ();
-            unit.FormatDataValue ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			ButtonColumnTest unit = new ButtonColumnTest ();
+			unit.FormatDataValue ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (ButtonColumn); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (ButtonColumn); }
+		}
+	}
 }
 

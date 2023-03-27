@@ -41,16 +41,16 @@ using System.Web.UI;
 
 namespace System.Web.ClientServices.Providers
 {
-    public class SettingsSavedEventArgs : EventArgs
-    {
-        public ReadOnlyCollection <string> FailedSettingsList {
-            get;
-            private set;
-        }
-        
-        public SettingsSavedEventArgs (IEnumerable <string> failedSettingsList)
-        {
-            FailedSettingsList = new ReadOnlyCollection <string> (new List <string> (failedSettingsList));
-        }        
-    }
+	public class SettingsSavedEventArgs : EventArgs
+	{
+		public ReadOnlyCollection <string> FailedSettingsList {
+			get;
+			private set;
+		}
+		
+		public SettingsSavedEventArgs (IEnumerable <string> failedSettingsList)
+		{
+			FailedSettingsList = new ReadOnlyCollection <string> (new List <string> (failedSettingsList));
+		}		
+	}
 }

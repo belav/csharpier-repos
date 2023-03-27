@@ -20,47 +20,47 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 namespace System.Data.OracleClient.Oci {
-    internal sealed class OciBindHandle : OciHandle, IDisposable
-    {
-        #region Fields
+	internal sealed class OciBindHandle : OciHandle, IDisposable
+	{
+		#region Fields
 
-        bool disposed = false;
-        IntPtr value;
-    
-        #endregion // Fields
+		bool disposed = false;
+		IntPtr value;
+	
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public OciBindHandle (OciHandle parent)
-            : base (OciHandleType.Bind, parent, IntPtr.Zero)
-        {
-        }
+		public OciBindHandle (OciHandle parent)
+			: base (OciHandleType.Bind, parent, IntPtr.Zero)
+		{
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public IntPtr Value {
-            get { return value; }
-            set { this.value = value; }
-        }
+		public IntPtr Value {
+			get { return value; }
+			set { this.value = value; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        protected override void Dispose (bool disposing)
-        {
-            if (!disposed) {
-                try {
-                    Marshal.FreeHGlobal (value);
-                    disposed = true;
-                } finally {
-                    base.Dispose (disposing);
-                }
-            }
-        }
+		protected override void Dispose (bool disposing)
+		{
+			if (!disposed) {
+				try {
+					Marshal.FreeHGlobal (value);
+					disposed = true;
+				} finally {
+					base.Dispose (disposing);
+				}
+			}
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

@@ -3,7 +3,7 @@
 // Compiler options: -unsafe
 
 unsafe class MainClass {
-    static void *pv = null;
-    static int *pi = pv;
+	static void *pv = null;
+	static int *pi = pv;
         public static void Main () { }
 }

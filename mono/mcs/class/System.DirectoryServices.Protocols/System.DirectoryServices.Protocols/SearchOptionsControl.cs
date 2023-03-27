@@ -30,25 +30,25 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class SearchOptionsControl : DirectoryControl
-    {
-        public SearchOptionsControl ()
-            : base (null, null, false, false)
-        {
-        }
+	public class SearchOptionsControl : DirectoryControl
+	{
+		public SearchOptionsControl ()
+			: base (null, null, false, false)
+		{
+		}
 
-        public SearchOptionsControl (SearchOption flags)
-            : this ()
-        {
-            SearchOption = flags;
-        }
+		public SearchOptionsControl (SearchOption flags)
+			: this ()
+		{
+			SearchOption = flags;
+		}
 
-        public SearchOption SearchOption { get; set; }
+		public SearchOption SearchOption { get; set; }
 
-        [MonoTODO]
-        public override byte [] GetValue ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override byte [] GetValue ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

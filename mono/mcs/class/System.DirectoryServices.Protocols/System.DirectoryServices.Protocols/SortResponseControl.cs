@@ -30,18 +30,18 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class SortResponseControl : DirectoryControl
-    {
-        internal SortResponseControl (string attributeName, ResultCode result)
-            : base (null, null, false, false)
-        {
-            AttributeName = attributeName;
-            Result = result;
-        }
+	public class SortResponseControl : DirectoryControl
+	{
+		internal SortResponseControl (string attributeName, ResultCode result)
+			: base (null, null, false, false)
+		{
+			AttributeName = attributeName;
+			Result = result;
+		}
 
-        [MonoTODO]
-        public string AttributeName { get; private set; }
-        [MonoTODO]
-        public ResultCode Result { get; private set; }
-    }
+		[MonoTODO]
+		public string AttributeName { get; private set; }
+		[MonoTODO]
+		public ResultCode Result { get; private set; }
+	}
 }

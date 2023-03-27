@@ -24,15 +24,15 @@ using System;
 
 namespace System.Windows.Markup
 {
-    [AttributeUsage (AttributeTargets.Assembly)]
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-    public sealed class RootNamespaceAttribute : Attribute
-    {
-        public RootNamespaceAttribute (string nameSpace)
-        {
-            Namespace = nameSpace;
-        }
-        
-        public string Namespace { get; private set; }
-    }
+	[AttributeUsage (AttributeTargets.Assembly)]
+	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+	public sealed class RootNamespaceAttribute : Attribute
+	{
+		public RootNamespaceAttribute (string nameSpace)
+		{
+			Namespace = nameSpace;
+		}
+		
+		public string Namespace { get; private set; }
+	}
 }

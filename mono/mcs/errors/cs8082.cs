@@ -3,9 +3,9 @@
 
 class C
 {
-    void Foo ()
-    {
-        object o = null;
-        var s = nameof (o.ToString ().Equals);
-    }
+	void Foo ()
+	{
+		object o = null;
+		var s = nameof (o.ToString ().Equals);
+	}
 }

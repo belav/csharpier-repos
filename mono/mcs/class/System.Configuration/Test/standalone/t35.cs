@@ -8,7 +8,7 @@ namespace TestLib1
     {
         public void testIT()
         {
-        object o = System.Configuration.ConfigurationManager.GetSection("testlib1");
+	    object o = System.Configuration.ConfigurationManager.GetSection("testlib1");
             List<System.Xml.XmlNode> sectionList = (List<System.Xml.XmlNode>) o;
             Console.WriteLine("count: " + sectionList.Count);
         }

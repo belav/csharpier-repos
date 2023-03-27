@@ -2,7 +2,7 @@
 // System.Web.Configuration.ClientTargetCollection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,78 +34,78 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    [ConfigurationCollection (typeof (ClientTarget), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class ClientTargetCollection : ConfigurationElementCollection
-    {
-        static ConfigurationPropertyCollection properties;
-        
-        static ClientTargetCollection ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
-        
-        public void Add (ClientTarget clientTarget)
-        {
-            BaseAdd (clientTarget);
-        }
+	[ConfigurationCollection (typeof (ClientTarget), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class ClientTargetCollection : ConfigurationElementCollection
+	{
+		static ConfigurationPropertyCollection properties;
+		
+		static ClientTargetCollection ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
+		
+		public void Add (ClientTarget clientTarget)
+		{
+			BaseAdd (clientTarget);
+		}
 
-        public void Clear ()
-        {
-            BaseClear ();
-        }
+		public void Clear ()
+		{
+			BaseClear ();
+		}
 
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new ClientTarget (null, null);
-        }
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new ClientTarget (null, null);
+		}
 
-        protected override object GetElementKey (ConfigurationElement element)
-        {
-            return ((ClientTarget)element).Alias;
-        }
+		protected override object GetElementKey (ConfigurationElement element)
+		{
+			return ((ClientTarget)element).Alias;
+		}
 
-        public string GetKey (int index)
-        {
-            return (string)BaseGetKey (index);
-        }
+		public string GetKey (int index)
+		{
+			return (string)BaseGetKey (index);
+		}
 
-        public void Remove (string name)
-        {
-            BaseRemove (name);
-        }
+		public void Remove (string name)
+		{
+			BaseRemove (name);
+		}
 
-        public void Remove (ClientTarget clientTarget)
-        {
-            BaseRemove (clientTarget.Alias);
-        }
+		public void Remove (ClientTarget clientTarget)
+		{
+			BaseRemove (clientTarget.Alias);
+		}
 
-        public void RemoveAt (int index)
-        {
-            BaseRemoveAt (index);
-        }
+		public void RemoveAt (int index)
+		{
+			BaseRemoveAt (index);
+		}
 
-        public string[] AllKeys {
-            get {
-                string[] keys = new string[Count];
-                for (int i = 0; i < Count; i ++)
-                    keys[i] = this[i].Alias;
-                return keys;
-            }
-        }
+		public string[] AllKeys {
+			get {
+				string[] keys = new string[Count];
+				for (int i = 0; i < Count; i ++)
+					keys[i] = this[i].Alias;
+				return keys;
+			}
+		}
 
-        public ClientTarget this [int index] {
-            get { return (ClientTarget) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-        }
+		public ClientTarget this [int index] {
+			get { return (ClientTarget) BaseGet (index); }
+			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+		}
 
-        public new ClientTarget this [string name] {
-            get { return (ClientTarget) BaseGet (name); }
-        }
+		public new ClientTarget this [string name] {
+			get { return (ClientTarget) BaseGet (name); }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+	}
 }
 
 

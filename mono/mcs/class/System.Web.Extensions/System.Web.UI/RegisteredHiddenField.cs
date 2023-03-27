@@ -31,28 +31,28 @@ using System;
 
 namespace System.Web.UI
 {
-    public sealed class RegisteredHiddenField
-    {
-        readonly Control _control;
-        readonly string _name;
-        readonly string _initialValue;
+	public sealed class RegisteredHiddenField
+	{
+		readonly Control _control;
+		readonly string _name;
+		readonly string _initialValue;
 
-        internal RegisteredHiddenField (Control control, string name, string initialValue) {
-            _control = control;
-            _name = name;
-            _initialValue = initialValue;
-        }
+		internal RegisteredHiddenField (Control control, string name, string initialValue) {
+			_control = control;
+			_name = name;
+			_initialValue = initialValue;
+		}
 
-        public Control Control {
-            get { return _control; }
-        }
+		public Control Control {
+			get { return _control; }
+		}
 
-        public string Name {
-            get { return _name; }
-        }
+		public string Name {
+			get { return _name; }
+		}
 
-        public string InitialValue {
-            get { return _initialValue; }
-        }
-    }
+		public string InitialValue {
+			get { return _initialValue; }
+		}
+	}
 }

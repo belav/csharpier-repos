@@ -2,8 +2,8 @@
 // Line: 6
 
 class X {
-    void Y () {
-        for (; true; ++i) { break; }
-    }
+	void Y () {
+		for (; true; ++i) { break; }
+	}
 }
 

@@ -23,18 +23,18 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum WebBrowserReadyState
-    {
-        Uninitialized = 0,
-        Loading = 1,
-        Loaded = 2,
-        Interactive = 3,
-        Complete = 4
-    }
+	public enum WebBrowserReadyState
+	{
+		Uninitialized = 0,
+		Loading = 1,
+		Loaded = 2,
+		Interactive = 3,
+		Complete = 4
+	}
 }

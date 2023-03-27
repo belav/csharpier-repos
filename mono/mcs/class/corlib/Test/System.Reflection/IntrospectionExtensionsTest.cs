@@ -2,7 +2,7 @@
 // IntrospectionExtensionsTest.cs:
 //
 // Authors:
-//    Marek Safar (marek.safar@gmail.com)
+//	Marek Safar (marek.safar@gmail.com)
 //
 // (C) 2013
 //
@@ -34,22 +34,22 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Reflection
 {
-    [TestFixture]
-    public class IntrospectionExtensionsTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void GetTypeInfo_NullArgument ()
-        {
-            IntrospectionExtensions.GetTypeInfo (null);
-        }
-        
-        [Test]
-        public void GetTypeInfo_SystemType ()
-        {
-            var t = typeof (double);
-            Assert.AreSame (t, IntrospectionExtensions.GetTypeInfo (t));
-        }
-    }
+	[TestFixture]
+	public class IntrospectionExtensionsTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void GetTypeInfo_NullArgument ()
+		{
+			IntrospectionExtensions.GetTypeInfo (null);
+		}
+		
+		[Test]
+		public void GetTypeInfo_SystemType ()
+		{
+			var t = typeof (double);
+			Assert.AreSame (t, IntrospectionExtensions.GetTypeInfo (t));
+		}
+	}
 }
 

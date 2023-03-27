@@ -1,4 +1,4 @@
-namespace AutoMapper.Configuration;
+﻿namespace AutoMapper.Configuration;
 
 public interface IMemberConfigurationProvider
 {

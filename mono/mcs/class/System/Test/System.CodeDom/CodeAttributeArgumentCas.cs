@@ -1,9 +1,9 @@
 //
 // CodeAttributeArgumentCas.cs
-//    - CAS unit tests for System.CodeDom.CodeAttributeArgument
+//	- CAS unit tests for System.CodeDom.CodeAttributeArgument
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,59 +37,59 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeAttributeArgumentCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeAttributeArgumentCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeAttributeArgument caa = new CodeAttributeArgument ();
-            Assert.AreEqual (String.Empty, caa.Name, "Name");
-            caa.Name = null;
-            Assert.IsNull (caa.Value, "Value");
-            caa.Value = new CodeExpression ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeAttributeArgument caa = new CodeAttributeArgument ();
+			Assert.AreEqual (String.Empty, caa.Name, "Name");
+			caa.Name = null;
+			Assert.IsNull (caa.Value, "Value");
+			caa.Value = new CodeExpression ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeExpression value = new CodeExpression ();
-            CodeAttributeArgument caa = new CodeAttributeArgument (value);
-            Assert.AreEqual (String.Empty, caa.Name, "Name");
-            caa.Name = null;
-            Assert.AreSame (value, caa.Value, "Value");
-            caa.Value = new CodeExpression ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeExpression value = new CodeExpression ();
+			CodeAttributeArgument caa = new CodeAttributeArgument (value);
+			Assert.AreEqual (String.Empty, caa.Name, "Name");
+			caa.Name = null;
+			Assert.AreSame (value, caa.Value, "Value");
+			caa.Value = new CodeExpression ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2_Deny_Unrestricted ()
-        {
-            CodeExpression value = new CodeExpression ();
-            CodeAttributeArgument caa = new CodeAttributeArgument ("mono", value);
-            Assert.AreEqual ("mono", caa.Name, "Name");
-            caa.Name = String.Empty;
-            Assert.AreSame (value, caa.Value, "Value");
-            caa.Value = new CodeExpression ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2_Deny_Unrestricted ()
+		{
+			CodeExpression value = new CodeExpression ();
+			CodeAttributeArgument caa = new CodeAttributeArgument ("mono", value);
+			Assert.AreEqual ("mono", caa.Name, "Name");
+			caa.Name = String.Empty;
+			Assert.AreSame (value, caa.Value, "Value");
+			caa.Value = new CodeExpression ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeAttributeArgument).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeAttributeArgument).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

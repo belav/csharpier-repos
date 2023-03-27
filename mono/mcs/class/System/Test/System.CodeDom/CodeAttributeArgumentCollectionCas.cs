@@ -1,9 +1,9 @@
 //
 // CodeAttributeArgumentCollectionCas.cs
-//    - CAS unit tests for System.CodeDom.CodeAttributeArgumentCollection
+//	- CAS unit tests for System.CodeDom.CodeAttributeArgumentCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,83 +37,83 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeAttributeArgumentCollectionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeAttributeArgumentCollectionCas {
 
-        private CodeAttributeArgument caa;
-        private CodeAttributeArgument[] array;
+		private CodeAttributeArgument caa;
+		private CodeAttributeArgument[] array;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            caa = new CodeAttributeArgument ();
-            array = new CodeAttributeArgument[1] { caa };
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			caa = new CodeAttributeArgument ();
+			array = new CodeAttributeArgument[1] { caa };
+		}
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeAttributeArgumentCollection coll = new CodeAttributeArgumentCollection ();
-            Assert.AreEqual (0, coll.Add (caa), "Add");
-            Assert.AreSame (caa, coll[0], "this[int]");
-            coll.CopyTo (array, 0);
-            coll.AddRange (array);
-            coll.AddRange (coll);
-            Assert.IsTrue (coll.Contains (caa), "Contains");
-            Assert.AreEqual (0, coll.IndexOf (caa), "IndexOf");
-            coll.Insert (0, caa);
-            coll.Remove (caa);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeAttributeArgumentCollection coll = new CodeAttributeArgumentCollection ();
+			Assert.AreEqual (0, coll.Add (caa), "Add");
+			Assert.AreSame (caa, coll[0], "this[int]");
+			coll.CopyTo (array, 0);
+			coll.AddRange (array);
+			coll.AddRange (coll);
+			Assert.IsTrue (coll.Contains (caa), "Contains");
+			Assert.AreEqual (0, coll.IndexOf (caa), "IndexOf");
+			coll.Insert (0, caa);
+			coll.Remove (caa);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeAttributeArgumentCollection coll = new CodeAttributeArgumentCollection (array);
-            coll.CopyTo (array, 0);
-            Assert.AreEqual (1, coll.Add (caa), "Add");
-            Assert.AreSame (caa, coll[0], "this[int]");
-            coll.AddRange (array);
-            coll.AddRange (coll);
-            Assert.IsTrue (coll.Contains (caa), "Contains");
-            Assert.AreEqual (0, coll.IndexOf (caa), "IndexOf");
-            coll.Insert (0, caa);
-            coll.Remove (caa);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeAttributeArgumentCollection coll = new CodeAttributeArgumentCollection (array);
+			coll.CopyTo (array, 0);
+			Assert.AreEqual (1, coll.Add (caa), "Add");
+			Assert.AreSame (caa, coll[0], "this[int]");
+			coll.AddRange (array);
+			coll.AddRange (coll);
+			Assert.IsTrue (coll.Contains (caa), "Contains");
+			Assert.AreEqual (0, coll.IndexOf (caa), "IndexOf");
+			coll.Insert (0, caa);
+			coll.Remove (caa);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2_Deny_Unrestricted ()
-        {
-            CodeAttributeArgumentCollection c = new CodeAttributeArgumentCollection ();
-            CodeAttributeArgumentCollection coll = new CodeAttributeArgumentCollection (c);
-            Assert.AreEqual (0, coll.Add (caa), "Add");
-            Assert.AreSame (caa, coll[0], "this[int]");
-            coll.CopyTo (array, 0);
-            coll.AddRange (array);
-            coll.AddRange (coll);
-            Assert.IsTrue (coll.Contains (caa), "Contains");
-            Assert.AreEqual (0, coll.IndexOf (caa), "IndexOf");
-            coll.Insert (0, caa);
-            coll.Remove (caa);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2_Deny_Unrestricted ()
+		{
+			CodeAttributeArgumentCollection c = new CodeAttributeArgumentCollection ();
+			CodeAttributeArgumentCollection coll = new CodeAttributeArgumentCollection (c);
+			Assert.AreEqual (0, coll.Add (caa), "Add");
+			Assert.AreSame (caa, coll[0], "this[int]");
+			coll.CopyTo (array, 0);
+			coll.AddRange (array);
+			coll.AddRange (coll);
+			Assert.IsTrue (coll.Contains (caa), "Contains");
+			Assert.AreEqual (0, coll.IndexOf (caa), "IndexOf");
+			coll.Insert (0, caa);
+			coll.Remove (caa);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeAttributeArgumentCollection).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeAttributeArgumentCollection).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

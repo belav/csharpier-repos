@@ -28,35 +28,35 @@
 
 namespace Mono.Cecil {
 
-    internal sealed class ReflectionController {
+	internal sealed class ReflectionController {
 
-        ReflectionReader m_reader;
-        ReflectionWriter m_writer;
-        ReflectionHelper m_helper;
-        DefaultImporter m_importer;
+		ReflectionReader m_reader;
+		ReflectionWriter m_writer;
+		ReflectionHelper m_helper;
+		DefaultImporter m_importer;
 
-        public ReflectionReader Reader {
-            get { return m_reader; }
-        }
+		public ReflectionReader Reader {
+			get { return m_reader; }
+		}
 
-        public ReflectionWriter Writer {
-            get { return m_writer; }
-        }
+		public ReflectionWriter Writer {
+			get { return m_writer; }
+		}
 
-        public ReflectionHelper Helper {
-            get { return m_helper; }
-        }
+		public ReflectionHelper Helper {
+			get { return m_helper; }
+		}
 
-        public IImporter Importer {
-            get { return m_importer; }
-        }
+		public IImporter Importer {
+			get { return m_importer; }
+		}
 
-        public ReflectionController (ModuleDefinition module)
-        {
-            m_reader = new AggressiveReflectionReader (module);
-            m_writer = new ReflectionWriter (module);
-            m_helper = new ReflectionHelper (module);
-            m_importer = new DefaultImporter (module);
-        }
-    }
+		public ReflectionController (ModuleDefinition module)
+		{
+			m_reader = new AggressiveReflectionReader (module);
+			m_writer = new ReflectionWriter (module);
+			m_helper = new ReflectionHelper (module);
+			m_importer = new DefaultImporter (module);
+		}
+	}
 }

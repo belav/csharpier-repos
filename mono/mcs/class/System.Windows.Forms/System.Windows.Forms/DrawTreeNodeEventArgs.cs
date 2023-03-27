@@ -20,7 +20,7 @@
 // Copyright (c) 2006 Jonathan Chambers
 //
 // Authors:
-//    Jonathan Chambers (joncham@gmail.com)
+//	Jonathan Chambers (joncham@gmail.com)
 //
 
 
@@ -28,52 +28,52 @@ using System.Drawing;
 
 namespace System.Windows.Forms
 {
-    public class DrawTreeNodeEventArgs : EventArgs
-    {
-        private Rectangle bounds;
-        private bool draw_default;
-        private Graphics graphics;
-        private TreeNode node;
-        private TreeNodeStates state;
+	public class DrawTreeNodeEventArgs : EventArgs
+	{
+		private Rectangle bounds;
+		private bool draw_default;
+		private Graphics graphics;
+		private TreeNode node;
+		private TreeNodeStates state;
 
-        #region Public Constructors
-        public DrawTreeNodeEventArgs (Graphics graphics, TreeNode node,
-            Rectangle bounds, TreeNodeStates state)
-        {
-            this.bounds = bounds;
-            this.draw_default = false;
-            this.graphics = graphics;
-            this.node = node;
-            this.state = state;
-        }
-        #endregion // Public Constructors
+		#region Public Constructors
+		public DrawTreeNodeEventArgs (Graphics graphics, TreeNode node,
+			Rectangle bounds, TreeNodeStates state)
+		{
+			this.bounds = bounds;
+			this.draw_default = false;
+			this.graphics = graphics;
+			this.node = node;
+			this.state = state;
+		}
+		#endregion // Public Constructors
 
-        #region Public Instance Properties
-        public Rectangle Bounds
-        {
-            get { return bounds; }
-        }
+		#region Public Instance Properties
+		public Rectangle Bounds
+		{
+			get { return bounds; }
+		}
 
-        public bool DrawDefault
-        {
-            get { return draw_default; }
-            set { draw_default = value; }
-        }
+		public bool DrawDefault
+		{
+			get { return draw_default; }
+			set { draw_default = value; }
+		}
 
-        public Graphics Graphics
-        {
-            get { return graphics; }
-        }
+		public Graphics Graphics
+		{
+			get { return graphics; }
+		}
 
-        public TreeNode Node
-        {
-            get { return node; }
-        }
+		public TreeNode Node
+		{
+			get { return node; }
+		}
 
-        public TreeNodeStates State
-        {
-            get { return state; }
-        }
-        #endregion // Public Instance Properties
-    }
+		public TreeNodeStates State
+		{
+			get { return state; }
+		}
+		#endregion // Public Instance Properties
+	}
 }

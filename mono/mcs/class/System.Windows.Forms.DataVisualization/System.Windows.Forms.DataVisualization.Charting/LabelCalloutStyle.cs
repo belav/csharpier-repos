@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum LabelCalloutStyle
-    {
-        None = 0,
-        Underlined = 1,
-        Box = 2
-    }
+	public enum LabelCalloutStyle
+	{
+		None = 0,
+		Underlined = 1,
+		Box = 2
+	}
 }

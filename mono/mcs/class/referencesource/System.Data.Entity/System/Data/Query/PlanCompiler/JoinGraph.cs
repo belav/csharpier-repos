@@ -2127,8 +2127,8 @@ namespace System.Data.Query.PlanCompiler
         /// on SqlServer. 
         /// 
         /// Thus we should do the elimination only if
-        /// 1.    The key is not composite
-        /// 2.    All columns on the child side are non nullable
+        /// 1.	The key is not composite
+        /// 2.	All columns on the child side are non nullable
         /// </summary>
         /// <param name="joinEdge">the current join edge</param>
         /// <param name="fkConstraint">the referential integrity constraint</param>

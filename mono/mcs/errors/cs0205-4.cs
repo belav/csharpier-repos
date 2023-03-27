@@ -8,10 +8,10 @@ public abstract class A
 
 public class B: A
 {
-        public override int Foobar  {
-            set {
-                base.Foobar = value;
-            }
-        }
+		public override int Foobar  {
+			set {
+				base.Foobar = value;
+			}
+		}
 }
 

@@ -2,7 +2,7 @@
 // MethodCallPathElement.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,41 +29,41 @@
 using Mono.CodeContracts.Static.AST;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths {
-    class MethodCallPathElement : PathElement<Method> {
-        private readonly bool is_boolean_typed;
-        private readonly bool is_compressed;
-        private readonly bool is_getter;
+	class MethodCallPathElement : PathElement<Method> {
+		private readonly bool is_boolean_typed;
+		private readonly bool is_compressed;
+		private readonly bool is_getter;
 
-        public MethodCallPathElement (Method method,
-                                      bool isGetter, bool isBooleanTyped,
-                                      bool isStatic, string description,
-                                      SymFunction func, bool isCompressed)
-            : base (method, description, func)
-        {
-            this.is_boolean_typed = isBooleanTyped;
-            this.is_getter = isGetter;
-            this.is_compressed = isCompressed;
-            this.isStatic = isStatic;
-        }
+		public MethodCallPathElement (Method method,
+		                              bool isGetter, bool isBooleanTyped,
+		                              bool isStatic, string description,
+		                              SymFunction func, bool isCompressed)
+			: base (method, description, func)
+		{
+			this.is_boolean_typed = isBooleanTyped;
+			this.is_getter = isGetter;
+			this.is_compressed = isCompressed;
+			this.isStatic = isStatic;
+		}
 
-        public override bool IsAddressOf
-        {
-            get { return !this.is_compressed; }
-        }
+		public override bool IsAddressOf
+		{
+			get { return !this.is_compressed; }
+		}
 
-        public override bool IsMethodCall
-        {
-            get { return true; }
-        }
+		public override bool IsMethodCall
+		{
+			get { return true; }
+		}
 
-        public override bool IsGetter
-        {
-            get { return this.is_getter; }
-        }
+		public override bool IsGetter
+		{
+			get { return this.is_getter; }
+		}
 
-        public override bool IsBooleanTyped
-        {
-            get { return this.is_boolean_typed; }
-        }
-    }
+		public override bool IsBooleanTyped
+		{
+			get { return this.is_boolean_typed; }
+		}
+	}
 }

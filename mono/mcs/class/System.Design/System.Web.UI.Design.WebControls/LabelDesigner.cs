@@ -30,11 +30,11 @@ using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-    public class LabelDesigner : TextControlDesigner
-    {
-        public LabelDesigner ()
-            : base ()
-        {
-        }
-    }
+	public class LabelDesigner : TextControlDesigner
+	{
+		public LabelDesigner ()
+			: base ()
+		{
+		}
+	}
 }

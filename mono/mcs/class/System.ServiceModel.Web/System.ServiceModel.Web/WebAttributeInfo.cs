@@ -2,7 +2,7 @@
 // WebAttributeInfo.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -34,82 +34,82 @@ using System.Text;
 
 namespace System.ServiceModel.Web
 {
-    internal class WebAttributeInfo
-    {
-        string uri_template;
-        WebMessageFormat request_format, response_format;
-        WebMessageBodyStyle body_style;
-        bool has_body_style, has_request_format, has_response_format;
-        string method = "POST";
+	internal class WebAttributeInfo
+	{
+		string uri_template;
+		WebMessageFormat request_format, response_format;
+		WebMessageBodyStyle body_style;
+		bool has_body_style, has_request_format, has_response_format;
+		string method = "POST";
 
-        public WebMessageBodyStyle BodyStyle {
-            get { return body_style; }
-            set {
-                body_style = value;
-                has_body_style = true;
-            }
-        }
+		public WebMessageBodyStyle BodyStyle {
+			get { return body_style; }
+			set {
+				body_style = value;
+				has_body_style = true;
+			}
+		}
 
-        public bool IsBodyStyleSetExplicitly {
-            get { return has_body_style; }
-        }
+		public bool IsBodyStyleSetExplicitly {
+			get { return has_body_style; }
+		}
 
-        public bool IsRequestFormatSetExplicitly {
-            get { return has_request_format; }
-        }
+		public bool IsRequestFormatSetExplicitly {
+			get { return has_request_format; }
+		}
 
-        public bool IsResponseFormatSetExplicitly {
-            get { return has_response_format; }
-        }
+		public bool IsResponseFormatSetExplicitly {
+			get { return has_response_format; }
+		}
 
-        public WebMessageFormat RequestFormat {
-            get { return request_format; }
-            set {
-                request_format = value;
-                has_request_format = true;
-            }
-        }
+		public WebMessageFormat RequestFormat {
+			get { return request_format; }
+			set {
+				request_format = value;
+				has_request_format = true;
+			}
+		}
 
-        public WebMessageFormat ResponseFormat {
-            get { return response_format; }
-            set {
-                response_format = value;
-                has_response_format = true;
-            }
-        }
+		public WebMessageFormat ResponseFormat {
+			get { return response_format; }
+			set {
+				response_format = value;
+				has_response_format = true;
+			}
+		}
 
-        // only meaningful for WebInvokeAttribute.
-        public string Method {
-            get { return method; }
-            set { method = value; }
-        }
+		// only meaningful for WebInvokeAttribute.
+		public string Method {
+			get { return method; }
+			set { method = value; }
+		}
 
-        public string UriTemplate {
-            get { return uri_template; }
-            set { uri_template = value; }
-        }
+		public string UriTemplate {
+			get { return uri_template; }
+			set { uri_template = value; }
+		}
 
-        public UriTemplate BuildUriTemplate (OperationDescription od, MessageDescription md)
-        {
-            if (uri_template != null)
-                return new UriTemplate (uri_template);
-            if (md == null)
-                foreach (MessageDescription mm in od.Messages)
-                    if (mm.Direction == MessageDirection.Input)
-                        md = mm;
+		public UriTemplate BuildUriTemplate (OperationDescription od, MessageDescription md)
+		{
+			if (uri_template != null)
+				return new UriTemplate (uri_template);
+			if (md == null)
+				foreach (MessageDescription mm in od.Messages)
+					if (mm.Direction == MessageDirection.Input)
+						md = mm;
 
-            StringBuilder sb = new StringBuilder ();
-            sb.Append (od.Name);
-            for (int i = 0; i < md.Body.Parts.Count; i++) {
-                MessagePartDescription mp = md.Body.Parts [i];
-                sb.Append (i == 0 ? '?' : '&');
-                sb.Append (mp.Name);
-                sb.Append ("={");
-                sb.Append (mp.Name);
-                sb.Append ('}');
-            }
-            return new UriTemplate (sb.ToString ());
-        }
+			StringBuilder sb = new StringBuilder ();
+			sb.Append (od.Name);
+			for (int i = 0; i < md.Body.Parts.Count; i++) {
+				MessagePartDescription mp = md.Body.Parts [i];
+				sb.Append (i == 0 ? '?' : '&');
+				sb.Append (mp.Name);
+				sb.Append ("={");
+				sb.Append (mp.Name);
+				sb.Append ('}');
+			}
+			return new UriTemplate (sb.ToString ());
+		}
 
-    }
+	}
 }

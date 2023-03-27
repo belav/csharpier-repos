@@ -1,9 +1,9 @@
 //
 // HealthMonitoringSectionTest.cs 
-//    - unit tests for System.Web.Configuration.HealthMonitoringSection
+//	- unit tests for System.Web.Configuration.HealthMonitoringSection
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,22 +38,22 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-    [TestFixture]
-    public class HealthMonitoringSectionTest  {
+	[TestFixture]
+	public class HealthMonitoringSectionTest  {
 
-        [Test]
-        public void Defaults ()
-        {
-            HealthMonitoringSection s = new HealthMonitoringSection ();
+		[Test]
+		public void Defaults ()
+		{
+			HealthMonitoringSection s = new HealthMonitoringSection ();
 
-            Assert.IsNotNull (s.BufferModes, "A1");
-            Assert.IsTrue (s.Enabled, "A2");
-            Assert.IsNotNull (s.EventMappings, "A3");
-            Assert.AreEqual (TimeSpan.Zero, s.HeartbeatInterval, "A4");
-            Assert.IsNotNull (s.Profiles, "A5");
-            Assert.IsNotNull (s.Providers, "A6");
-            Assert.IsNotNull (s.Rules, "A7");
-        }
-    }
+			Assert.IsNotNull (s.BufferModes, "A1");
+			Assert.IsTrue (s.Enabled, "A2");
+			Assert.IsNotNull (s.EventMappings, "A3");
+			Assert.AreEqual (TimeSpan.Zero, s.HeartbeatInterval, "A4");
+			Assert.IsNotNull (s.Profiles, "A5");
+			Assert.IsNotNull (s.Providers, "A6");
+			Assert.IsNotNull (s.Rules, "A7");
+		}
+	}
 }
 

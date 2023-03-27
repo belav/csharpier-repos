@@ -11,6 +11,6 @@ using System.Xml;
 /// </summary>
 public class EntryPoint
 {
-    static void Main () {
-    }
+	static void Main () {
+	}
 }

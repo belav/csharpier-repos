@@ -32,8 +32,8 @@
 
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
+	[System.Runtime.InteropServices.ComVisible (true)]
         public interface ISoapXsd {
-        string GetXsdType();
-    }
+		string GetXsdType();
+	}
 }

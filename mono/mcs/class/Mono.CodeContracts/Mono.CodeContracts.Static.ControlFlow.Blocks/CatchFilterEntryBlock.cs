@@ -2,7 +2,7 @@
 // CatchFilterEntryBlock.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,10 +29,10 @@
 using Mono.CodeContracts.Static.ControlFlow.Subroutines;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Blocks {
-    class CatchFilterEntryBlock<Label> : BlockWithLabels<Label> {
-        public CatchFilterEntryBlock (SubroutineBase<Label> subroutine, ref int idGen)
-            : base (subroutine, ref idGen)
-        {
-        }
-    }
+	class CatchFilterEntryBlock<Label> : BlockWithLabels<Label> {
+		public CatchFilterEntryBlock (SubroutineBase<Label> subroutine, ref int idGen)
+			: base (subroutine, ref idGen)
+		{
+		}
+	}
 }

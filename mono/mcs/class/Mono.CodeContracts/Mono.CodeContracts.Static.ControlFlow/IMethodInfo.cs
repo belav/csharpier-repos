@@ -2,7 +2,7 @@
 // IMethodInfo.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,7 +29,7 @@
 using Mono.CodeContracts.Static.AST;
 
 namespace Mono.CodeContracts.Static.ControlFlow {
-    interface IMethodInfo {
-        Method Method { get; }
-    }
+	interface IMethodInfo {
+		Method Method { get; }
+	}
 }

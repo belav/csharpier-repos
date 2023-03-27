@@ -2,9 +2,9 @@
 // System.Diagnostics.PerformanceCounterPermissionAttribute.cs
 //
 // Authors:
-//    Jonathan Pryor (jonpryor@vt.edu)
-//    Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Jonathan Pryor (jonpryor@vt.edu)
+//	Andreas Nahr (ClassDevelopment@A-SoftTech.com)
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002
 // (C) 2003 Andreas Nahr
@@ -35,57 +35,57 @@ using System.Security.Permissions;
 
 namespace System.Diagnostics {
 
-    [AttributeUsage (AttributeTargets.Assembly |
-        AttributeTargets.Class |
-        AttributeTargets.Struct |
-        AttributeTargets.Constructor |
-        AttributeTargets.Method |
-        AttributeTargets.Event, AllowMultiple=true,
-        Inherited=false)]
-    [Serializable]
-    public class PerformanceCounterPermissionAttribute : CodeAccessSecurityAttribute {
+	[AttributeUsage (AttributeTargets.Assembly |
+		AttributeTargets.Class |
+		AttributeTargets.Struct |
+		AttributeTargets.Constructor |
+		AttributeTargets.Method |
+		AttributeTargets.Event, AllowMultiple=true,
+		Inherited=false)]
+	[Serializable]
+	public class PerformanceCounterPermissionAttribute : CodeAccessSecurityAttribute {
 
-        private string categoryName;
-        private string machineName;
-        private PerformanceCounterPermissionAccess permissionAccess;
+		private string categoryName;
+		private string machineName;
+		private PerformanceCounterPermissionAccess permissionAccess;
 
-        public PerformanceCounterPermissionAttribute (SecurityAction action) 
-            : base (action)
-        {
-            categoryName = ResourcePermissionBase.Any;
-            machineName = ResourcePermissionBase.Local;
-            permissionAccess = PerformanceCounterPermissionAccess.Write;
-        }
+		public PerformanceCounterPermissionAttribute (SecurityAction action) 
+			: base (action)
+		{
+			categoryName = ResourcePermissionBase.Any;
+			machineName = ResourcePermissionBase.Local;
+			permissionAccess = PerformanceCounterPermissionAccess.Write;
+		}
 
-        public string CategoryName {
-            get { return categoryName; }
-            set {
-                if (value == null)
-                    throw new ArgumentNullException ("CategoryName");
-                categoryName = value;
-            }
-        }
+		public string CategoryName {
+			get { return categoryName; }
+			set {
+				if (value == null)
+					throw new ArgumentNullException ("CategoryName");
+				categoryName = value;
+			}
+		}
 
-        public string MachineName {
-            get { return machineName; }
-            set {
-                ResourcePermissionBase.ValidateMachineName (value);
-                machineName = value;
-            }
-        }
+		public string MachineName {
+			get { return machineName; }
+			set {
+				ResourcePermissionBase.ValidateMachineName (value);
+				machineName = value;
+			}
+		}
 
-        public PerformanceCounterPermissionAccess PermissionAccess {
-            get { return permissionAccess; }
-            set { permissionAccess = value; }
-        }
+		public PerformanceCounterPermissionAccess PermissionAccess {
+			get { return permissionAccess; }
+			set { permissionAccess = value; }
+		}
 
-        public override IPermission CreatePermission ()
-        {
-            if (base.Unrestricted) {
-                return new PerformanceCounterPermission (PermissionState.Unrestricted); 
-            }
-            return new PerformanceCounterPermission (permissionAccess, machineName, categoryName); 
-        }
-    }
+		public override IPermission CreatePermission ()
+		{
+			if (base.Unrestricted) {
+				return new PerformanceCounterPermission (PermissionState.Unrestricted); 
+			}
+			return new PerformanceCounterPermission (permissionAccess, machineName, categoryName); 
+		}
+	}
 }
 

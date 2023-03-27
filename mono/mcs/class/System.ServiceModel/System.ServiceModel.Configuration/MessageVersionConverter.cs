@@ -1,8 +1,8 @@
-//
+﻿//
 // MessageVersionConverter.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -34,32 +34,32 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Configuration
 {
-    class MessageVersionConverter
-     : TypeConverter
-    {
-        static readonly Dictionary<string, MessageVersion> _lookup;
+	class MessageVersionConverter
+	 : TypeConverter
+	{
+		static readonly Dictionary<string, MessageVersion> _lookup;
 
-        static MessageVersionConverter () {
-            _lookup = new Dictionary<string, MessageVersion> (StringComparer.OrdinalIgnoreCase);
-            _lookup.Add ("Default", MessageVersion.Default);
-            _lookup.Add ("None", MessageVersion.None);
-            _lookup.Add ("Soap11", MessageVersion.Soap11);
-            _lookup.Add ("Soap11WSAddressing10", MessageVersion.Soap11WSAddressing10);
-            _lookup.Add ("Soap11WSAddressingAugust2004", MessageVersion.Soap11WSAddressingAugust2004);
-            _lookup.Add ("Soap12", MessageVersion.Soap12);
-            _lookup.Add ("Soap12WSAddressing10", MessageVersion.Soap12WSAddressing10);
-            _lookup.Add ("Soap12WSAddressingAugust2004", MessageVersion.Soap12WSAddressingAugust2004);
-        }
+		static MessageVersionConverter () {
+			_lookup = new Dictionary<string, MessageVersion> (StringComparer.OrdinalIgnoreCase);
+			_lookup.Add ("Default", MessageVersion.Default);
+			_lookup.Add ("None", MessageVersion.None);
+			_lookup.Add ("Soap11", MessageVersion.Soap11);
+			_lookup.Add ("Soap11WSAddressing10", MessageVersion.Soap11WSAddressing10);
+			_lookup.Add ("Soap11WSAddressingAugust2004", MessageVersion.Soap11WSAddressingAugust2004);
+			_lookup.Add ("Soap12", MessageVersion.Soap12);
+			_lookup.Add ("Soap12WSAddressing10", MessageVersion.Soap12WSAddressing10);
+			_lookup.Add ("Soap12WSAddressingAugust2004", MessageVersion.Soap12WSAddressingAugust2004);
+		}
 
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
-            return sourceType == typeof (string);
-        }
+		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
+			return sourceType == typeof (string);
+		}
 
-        public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-            string stringValue = (string) value;
-            if (_lookup.ContainsKey (stringValue))
-                return _lookup [stringValue];
-            throw new ArgumentOutOfRangeException ();
-        }
-    }
+		public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+			string stringValue = (string) value;
+			if (_lookup.ContainsKey (stringValue))
+				return _lookup [stringValue];
+			throw new ArgumentOutOfRangeException ();
+		}
+	}
 }

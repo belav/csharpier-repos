@@ -2,8 +2,8 @@
 // System.Security.AccessControl.EventWaitHandleAccessRule implementation
 //
 // Authors:
-//    Dick Porter  <dick@ximian.com>
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Dick Porter  <dick@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2006-2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,26 +31,26 @@ using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-    public sealed class EventWaitHandleAccessRule : AccessRule
-    {
-        public EventWaitHandleAccessRule (IdentityReference identity,
-                          EventWaitHandleRights eventRights,
-                          AccessControlType type)
-            : base (identity, (int)eventRights, false,
-                InheritanceFlags.None, PropagationFlags.None, AccessControlType.Allow)
-        {
-        }
+	public sealed class EventWaitHandleAccessRule : AccessRule
+	{
+		public EventWaitHandleAccessRule (IdentityReference identity,
+						  EventWaitHandleRights eventRights,
+						  AccessControlType type)
+			: base (identity, (int)eventRights, false,
+				InheritanceFlags.None, PropagationFlags.None, AccessControlType.Allow)
+		{
+		}
 
-        public EventWaitHandleAccessRule (string identity,
-                          EventWaitHandleRights eventRights,
-                          AccessControlType type)
-            : this (new NTAccount (identity), eventRights, type)
-        {
-        }
-        
-        public EventWaitHandleRights EventWaitHandleRights {
-            get { return (EventWaitHandleRights)AccessMask; }
-        }
-    }
+		public EventWaitHandleAccessRule (string identity,
+						  EventWaitHandleRights eventRights,
+						  AccessControlType type)
+			: this (new NTAccount (identity), eventRights, type)
+		{
+		}
+		
+		public EventWaitHandleRights EventWaitHandleRights {
+			get { return (EventWaitHandleRights)AccessMask; }
+		}
+	}
 }
 

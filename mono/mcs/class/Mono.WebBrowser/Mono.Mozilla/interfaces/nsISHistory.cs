@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,62 +32,62 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("7294FE9B-14D8-11D5-9882-00C04FA02F40")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsISHistory {
+	[Guid ("7294FE9B-14D8-11D5-9882-00C04FA02F40")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsISHistory {
 
 #region nsISHistory
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCount ( out int ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getCount ( out int ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getIndex ( out int ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getIndex ( out int ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getMaxLength ( out int ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getMaxLength ( out int ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setMaxLength ( int value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setMaxLength ( int value);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getEntryAtIndex (
-                   int index,
-                   bool modifyIndex,[MarshalAs (UnmanagedType.Interface)]  out nsIHistoryEntry ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getEntryAtIndex (
+				   int index,
+				   bool modifyIndex,[MarshalAs (UnmanagedType.Interface)]  out nsIHistoryEntry ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int PurgeHistory (
-                   int numEntries);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int PurgeHistory (
+				   int numEntries);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int addSHistoryListener (
-                [MarshalAs (UnmanagedType.Interface)]   nsISHistoryListener aListener);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int addSHistoryListener (
+				[MarshalAs (UnmanagedType.Interface)]   nsISHistoryListener aListener);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int removeSHistoryListener (
-                [MarshalAs (UnmanagedType.Interface)]   nsISHistoryListener aListener);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int removeSHistoryListener (
+				[MarshalAs (UnmanagedType.Interface)]   nsISHistoryListener aListener);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getSHistoryEnumerator ([MarshalAs (UnmanagedType.Interface)]  out nsISimpleEnumerator ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getSHistoryEnumerator ([MarshalAs (UnmanagedType.Interface)]  out nsISimpleEnumerator ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsSHistory {
-        public static nsISHistory GetProxy (Mono.WebBrowser.IWebBrowser control, nsISHistory obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsISHistory).GUID, obj);
-            return o as nsISHistory;
-        }
-    }
+	internal class nsSHistory {
+		public static nsISHistory GetProxy (Mono.WebBrowser.IWebBrowser control, nsISHistory obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsISHistory).GUID, obj);
+			return o as nsISHistory;
+		}
+	}
 }

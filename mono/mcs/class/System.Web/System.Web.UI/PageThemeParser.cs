@@ -37,27 +37,27 @@ using System.Web.Util;
 
 namespace System.Web.UI
 {
-    internal sealed class PageThemeParser: UserControlParser
-    {
-        string[] linkedStyleSheets;
+	internal sealed class PageThemeParser: UserControlParser
+	{
+		string[] linkedStyleSheets;
 
-        public string [] LinkedStyleSheets {
-            get { return linkedStyleSheets; }
-            set { linkedStyleSheets = value; }
-        }
+		public string [] LinkedStyleSheets {
+			get { return linkedStyleSheets; }
+			set { linkedStyleSheets = value; }
+		}
 
-        internal PageThemeParser (VirtualPath virtualPath, HttpContext context)
-        : base (virtualPath, virtualPath.PhysicalPath, context, "System.Web.UI.PageTheme")
-        {
-            AddDependency (virtualPath.Original);
-        }
-        
-        internal override void HandleOptions (object obj)
-        {
-        }
+		internal PageThemeParser (VirtualPath virtualPath, HttpContext context)
+		: base (virtualPath, virtualPath.PhysicalPath, context, "System.Web.UI.PageTheme")
+		{
+			AddDependency (virtualPath.Original);
+		}
+		
+		internal override void HandleOptions (object obj)
+		{
+		}
 
-        internal override string DefaultBaseTypeName {
-            get { return "System.Web.UI.PageTheme"; }
-        }
-    }
+		internal override string DefaultBaseTypeName {
+			get { return "System.Web.UI.PageTheme"; }
+		}
+	}
 }

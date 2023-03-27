@@ -7,7 +7,7 @@ struct S
 
 class C
 {
-    public static void Test (C c = new S ())
-    {
-    }
+	public static void Test (C c = new S ())
+	{
+	}
 }

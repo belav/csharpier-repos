@@ -32,12 +32,12 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
 
-    [InterfaceType (ComInterfaceType.InterfaceIsDual)]
-    [Guid ("0D593FC0-E3F1-4dad-A674-7EA4D327F79B")]
-    [ComVisible (true)]
-    public interface IProductBuilderCollection {
-        
-        void Add (ProductBuilder builder);
-    }
+	[InterfaceType (ComInterfaceType.InterfaceIsDual)]
+	[Guid ("0D593FC0-E3F1-4dad-A674-7EA4D327F79B")]
+	[ComVisible (true)]
+	public interface IProductBuilderCollection {
+		
+		void Add (ProductBuilder builder);
+	}
 }
 

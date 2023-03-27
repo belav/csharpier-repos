@@ -37,91 +37,91 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class ConstraintCollection_Clear : GHTBase
 {
-    [Test] public void Main()
-    {
-        ConstraintCollection_Clear tc = new ConstraintCollection_Clear();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("ConstraintCollection_Clear");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
+	[Test] public void Main()
+	{
+		ConstraintCollection_Clear tc = new ConstraintCollection_Clear();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("ConstraintCollection_Clear");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("ConstraintCollection_Clear");
-            ConstraintCollection_Clear1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("ConstraintCollection_Clear");
+			ConstraintCollection_Clear1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
 
-        try
-        {
-            BeginCase("ConstraintCollection_Clear");
-            ConstraintCollection_Clear2();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-    private void ConstraintCollection_Clear1()
-    {
-        DataSet ds = GHTUtils.DataProvider.CreateForigenConstraint();
-        foreach(DataTable dt in ds.Tables)
-        {
-            dt.Constraints.Clear();
-        }
-        Compare(ds.Tables[0].Constraints.Count,0);
-        Compare(ds.Tables[0].Constraints.Count,0);
+		try
+		{
+			BeginCase("ConstraintCollection_Clear");
+			ConstraintCollection_Clear2();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
+	private void ConstraintCollection_Clear1()
+	{
+		DataSet ds = GHTUtils.DataProvider.CreateForigenConstraint();
+		foreach(DataTable dt in ds.Tables)
+		{
+			dt.Constraints.Clear();
+		}
+		Compare(ds.Tables[0].Constraints.Count,0);
+		Compare(ds.Tables[0].Constraints.Count,0);
 
-    }
-    private void ConstraintCollection_Clear2()
-    {
-        DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
-        int rowsCount = dt.Rows.Count;
-        dt.Constraints.Clear();
-        DataRow dr = dt.NewRow();
-        dr[0] = 1;
-        dt.Rows.Add(dr);
-        Compare(dt.Rows.Count,rowsCount+1); //Just checking that no expection ocuured
-    }
+	}
+	private void ConstraintCollection_Clear2()
+	{
+		DataTable dt = GHTUtils.DataProvider.CreateUniqueConstraint();
+		int rowsCount = dt.Rows.Count;
+		dt.Constraints.Clear();
+		DataRow dr = dt.NewRow();
+		dr[0] = 1;
+		dt.Rows.Add(dr);
+		Compare(dt.Rows.Count,rowsCount+1); //Just checking that no expection ocuured
+	}
 }
 }

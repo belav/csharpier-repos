@@ -3,12 +3,12 @@
 
 partial class X
 {
-    partial void Foo ((int a, int b) arg);
+	partial void Foo ((int a, int b) arg);
 }
 
 partial class X
 {
-    partial void Foo ((int c, int d) arg)
-    {
-    }
+	partial void Foo ((int c, int d) arg)
+	{
+	}
 }

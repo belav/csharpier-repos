@@ -6,26 +6,26 @@ delegate void D2 ();
 
 class C
 {
-    public C (D1 d)
-    {
-    }
-    
-    public C (D2 d)
-    {
-    }
+	public C (D1 d)
+	{
+	}
+	
+	public C (D2 d)
+	{
+	}
 }
 
 class X
 {
-    void Foo ()
-    {
-        new C (delegate (object state) {
-            M (1);
-        });
-    }
+	void Foo ()
+	{
+		new C (delegate (object state) {
+			M (1);
+		});
+	}
 
-    void M (string s)
-    {
-    }
+	void M (string s)
+	{
+	}
 }
 

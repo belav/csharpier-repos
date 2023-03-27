@@ -31,26 +31,26 @@ using System.IO;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks {
-    public abstract class ResolveProjectBase : TaskExtension {
-    
-        ITaskItem[] projectReferences;
-    
-        [MonoTODO]
-        protected ResolveProjectBase ()
-        {
-        }
-        
-        [MonoTODO]
-        protected string GetProjectItem (ITaskItem projectRef)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [Required]
-        public ITaskItem[] ProjectReferences {
-            get { return projectReferences; }
-            set { projectReferences = value; }
-        }
-    }
+	public abstract class ResolveProjectBase : TaskExtension {
+	
+		ITaskItem[] projectReferences;
+	
+		[MonoTODO]
+		protected ResolveProjectBase ()
+		{
+		}
+		
+		[MonoTODO]
+		protected string GetProjectItem (ITaskItem projectRef)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		[Required]
+		public ITaskItem[] ProjectReferences {
+			get { return projectReferences; }
+			set { projectReferences = value; }
+		}
+	}
 }
 

@@ -5,15 +5,15 @@ using System;
 
 class C
 {
-    int a = "a";
-    
-    public C (string s)
-        : base (1)
-    {
-    }
-    
-    public C (int i)
-        : base (i)
-    {
-    }
+	int a = "a";
+	
+	public C (string s)
+		: base (1)
+	{
+	}
+	
+	public C (int i)
+		: base (i)
+	{
+	}
 }

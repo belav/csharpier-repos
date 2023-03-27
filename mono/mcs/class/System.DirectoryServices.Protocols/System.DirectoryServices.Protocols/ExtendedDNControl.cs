@@ -32,25 +32,25 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class ExtendedDNControl : DirectoryControl
-    {
-        public ExtendedDNControl ()
-            : base (null, null, false, false)
-        {
-        }
+	public class ExtendedDNControl : DirectoryControl
+	{
+		public ExtendedDNControl ()
+			: base (null, null, false, false)
+		{
+		}
 
-        public ExtendedDNControl (ExtendedDNFlag flag)
-            : this ()
-        {
-            Flag = flag;
-        }
+		public ExtendedDNControl (ExtendedDNFlag flag)
+			: this ()
+		{
+			Flag = flag;
+		}
 
-        public ExtendedDNFlag Flag { get; set; }
+		public ExtendedDNFlag Flag { get; set; }
 
-        [MonoTODO]
-        public override byte [] GetValue ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override byte [] GetValue ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

@@ -20,21 +20,21 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//    Geoff Norton  <gnorton@novell.com>
+//	Geoff Norton  <gnorton@novell.com>
 //
 //
 
 using System;
 
 namespace System.Windows.Forms.CarbonInternal {
-    internal abstract class EventHandlerBase {
-        internal XplatUICarbon Driver;
-        
-        public EventHandlerBase () {
-        }
+	internal abstract class EventHandlerBase {
+		internal XplatUICarbon Driver;
+		
+		public EventHandlerBase () {
+		}
 
-        public EventHandlerBase (XplatUICarbon driver) {
-            Driver = driver;
-        }
-    }
+		public EventHandlerBase (XplatUICarbon driver) {
+			Driver = driver;
+		}
+	}
 }

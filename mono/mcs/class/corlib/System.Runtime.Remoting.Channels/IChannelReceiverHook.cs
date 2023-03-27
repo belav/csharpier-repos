@@ -32,15 +32,15 @@
 
 namespace System.Runtime.Remoting.Channels {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IChannelReceiverHook
-    {
-        string ChannelScheme { get; }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IChannelReceiverHook
+	{
+		string ChannelScheme { get; }
 
-        IServerChannelSink ChannelSinkChain { get; }
+		IServerChannelSink ChannelSinkChain { get; }
 
-        bool WantsToListen { get; }
+		bool WantsToListen { get; }
 
-        void AddHookChannelUri (string channelUri);
-    }
+		void AddHookChannelUri (string channelUri);
+	}
 }

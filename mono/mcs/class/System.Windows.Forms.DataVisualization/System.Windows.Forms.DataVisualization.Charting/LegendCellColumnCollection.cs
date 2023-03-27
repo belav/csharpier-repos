@@ -26,14 +26,14 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class LegendCellColumnCollection : ChartNamedElementCollection<LegendCellColumn>
-    {
+	public class LegendCellColumnCollection : ChartNamedElementCollection<LegendCellColumn>
+	{
 
-        [MonoTODO]
-        protected override void Dispose (bool disposing)
-        {
-            throw new NotImplementedException();
-        }
+		[MonoTODO]
+		protected override void Dispose (bool disposing)
+		{
+			throw new NotImplementedException();
+		}
 
-    }
+	}
 }

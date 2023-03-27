@@ -1,9 +1,9 @@
 //
 // System.TimeZoneInfo helper for MonoTouch
-//     because the devices cannot access the file system to read the data
+// 	because the devices cannot access the file system to read the data
 //
 // Authors:
-//    Sebastien Pouliot  <sebastien@xamarin.com>
+//	Sebastien Pouliot  <sebastien@xamarin.com>
 //
 // Copyright 2011-2013 Xamarin Inc.
 //
@@ -42,71 +42,71 @@ using System.Runtime.InteropServices;
 
 namespace System {
 
-    public partial class TimeZoneInfo {
+	public partial class TimeZoneInfo {
 
-        [DllImport ("__Internal")]
-        extern static string xamarin_timezone_get_local_name ();
+		[DllImport ("__Internal")]
+		extern static string xamarin_timezone_get_local_name ();
 
-        static TimeZoneInfo CreateLocal ()
-        {
-            using (Stream stream = GetMonoTouchData (null)) {
-                return BuildFromStream (xamarin_timezone_get_local_name (), stream);
-            }
-        }
+		static TimeZoneInfo CreateLocal ()
+		{
+			using (Stream stream = GetMonoTouchData (null)) {
+				return BuildFromStream (xamarin_timezone_get_local_name (), stream);
+			}
+		}
 
-        static TimeZoneInfo FindSystemTimeZoneByIdCore (string id)
-        {
-            using (Stream stream = GetMonoTouchData (id)) {
-                return BuildFromStream (id, stream);
-            }
-        }
+		static TimeZoneInfo FindSystemTimeZoneByIdCore (string id)
+		{
+			using (Stream stream = GetMonoTouchData (id)) {
+				return BuildFromStream (id, stream);
+			}
+		}
 
-        static void GetSystemTimeZonesCore (List<TimeZoneInfo> systemTimeZones)
-        {
-            foreach (string name in GetMonoTouchNames ()) {
-                using (Stream stream = GetMonoTouchData (name, false)) {
-                    if (stream == null)
-                        continue;
-                    systemTimeZones.Add (BuildFromStream (name, stream));
-                }
-            }
-        }
+		static void GetSystemTimeZonesCore (List<TimeZoneInfo> systemTimeZones)
+		{
+			foreach (string name in GetMonoTouchNames ()) {
+				using (Stream stream = GetMonoTouchData (name, false)) {
+					if (stream == null)
+						continue;
+					systemTimeZones.Add (BuildFromStream (name, stream));
+				}
+			}
+		}
 
-        [DllImport ("__Internal")]
-        extern static IntPtr xamarin_timezone_get_names (ref uint count);
+		[DllImport ("__Internal")]
+		extern static IntPtr xamarin_timezone_get_names (ref uint count);
 
-        static ReadOnlyCollection<string> GetMonoTouchNames ()
-        {
-            uint count = 0;
-            IntPtr array = xamarin_timezone_get_names (ref count);
-            string [] names = new string [count];
-            for (int i = 0, offset = 0; i < count; i++, offset += IntPtr.Size) {
-                IntPtr p = Marshal.ReadIntPtr (array, offset);
-                names [i] = Marshal.PtrToStringAnsi (p);
-                Marshal.FreeHGlobal (p);
-            }
-            Marshal.FreeHGlobal (array);
-            return new ReadOnlyCollection<string> (names);
-        }
+		static ReadOnlyCollection<string> GetMonoTouchNames ()
+		{
+			uint count = 0;
+			IntPtr array = xamarin_timezone_get_names (ref count);
+			string [] names = new string [count];
+			for (int i = 0, offset = 0; i < count; i++, offset += IntPtr.Size) {
+				IntPtr p = Marshal.ReadIntPtr (array, offset);
+				names [i] = Marshal.PtrToStringAnsi (p);
+				Marshal.FreeHGlobal (p);
+			}
+			Marshal.FreeHGlobal (array);
+			return new ReadOnlyCollection<string> (names);
+		}
 
-        [DllImport ("__Internal")]
-        extern static IntPtr xamarin_timezone_get_data (string name, ref uint size);
+		[DllImport ("__Internal")]
+		extern static IntPtr xamarin_timezone_get_data (string name, ref uint size);
 
-        static Stream GetMonoTouchData (string name, bool throw_on_error = true)
-        {
-            uint size = 0;
-            IntPtr data = xamarin_timezone_get_data (name, ref size);
-            if (size <= 0) {
-                if (throw_on_error)
-                    throw new TimeZoneNotFoundException (name);
-                return null;
-            }
+		static Stream GetMonoTouchData (string name, bool throw_on_error = true)
+		{
+			uint size = 0;
+			IntPtr data = xamarin_timezone_get_data (name, ref size);
+			if (size <= 0) {
+				if (throw_on_error)
+					throw new TimeZoneNotFoundException (name);
+				return null;
+			}
 
-            unsafe {
-                return new HGlobalUnmanagedMemoryStream ((byte*) data, size, data);
-            }
-        }
-    }
+			unsafe {
+				return new HGlobalUnmanagedMemoryStream ((byte*) data, size, data);
+			}
+		}
+	}
 }
 
 #endif

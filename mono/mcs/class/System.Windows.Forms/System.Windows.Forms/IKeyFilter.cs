@@ -20,13 +20,13 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Mike Gorse  mgorse@novell.com
+//	Mike Gorse  mgorse@novell.com
 //
 //
 
 
 namespace System.Windows.Forms {
-    internal interface IKeyFilter {
-        bool PreFilterKey(KeyFilterData data);
-    }
+	internal interface IKeyFilter {
+		bool PreFilterKey(KeyFilterData data);
+	}
 }

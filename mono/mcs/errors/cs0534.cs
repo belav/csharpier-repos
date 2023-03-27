@@ -2,10 +2,10 @@
 // Line: 5
 
 abstract class X {
-    public abstract void myAbstract ();
+	public abstract void myAbstract ();
 }
 
 class Y : X {
 static void Main (){}
 }
-    
+	

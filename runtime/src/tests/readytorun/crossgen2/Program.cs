@@ -1787,7 +1787,7 @@ internal class Program
     }
     struct BlittableStruct<T>
     {
-    public ExplicitLayoutStruct16 _explicit;
+	public ExplicitLayoutStruct16 _explicit;
         public override string ToString() { return $"{_explicit}"; }
     }
 

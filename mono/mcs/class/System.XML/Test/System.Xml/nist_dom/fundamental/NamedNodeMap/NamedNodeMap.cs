@@ -54,7 +54,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0001M()
+	public void core0001M()
         {
             string computedValue = "";
             string expectedValue = "domestic";
@@ -106,7 +106,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0002M()
+	public void core0002M()
         {
             string computedValue = "";
             string expectedValue = "street";
@@ -158,7 +158,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0003M()
+	public void core0003M()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -215,7 +215,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0004M()
+	public void core0004M()
         {
             string computedValue = "";
             string expectedValue = "district";
@@ -276,7 +276,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0005M()
+	public void core0005M()
         {
             string computedValue = "";
             string expectedValue = "";
@@ -340,7 +340,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0006M()
+	public void core0006M()
         {
             string computedValue = "";
             string expectedValue = "No";
@@ -401,7 +401,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0007M()
+	public void core0007M()
         {
             string computedValue = "";
             string expectedValue = "district";
@@ -512,7 +512,7 @@ namespace nist_dom.fundamental
 
         [Test]
         [Ignore(".NET DOM implementation does not match W3C DOM specification.")]
-    public void core0009M()
+	public void core0009M()
         {
             string computedValue = "";
             string expectedValue = "Yes";
@@ -566,7 +566,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0010M()
+	public void core0010M()
         {
             string computedValue = "";
             string expectedValue = "No";
@@ -620,7 +620,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0011M()
+	public void core0011M()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -674,7 +674,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0012M()
+	public void core0012M()
         {
             //string testName = "core-0012M";
             string computedValue = "";
@@ -729,7 +729,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0013M()
+	public void core0013M()
         {
             string computedValue = "";
 //            string expectedValue = "domestic or street";
@@ -781,7 +781,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0014M()
+	public void core0014M()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -833,7 +833,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0015M()
+	public void core0015M()
         {
             object computedValue = null;
             object expectedValue = null;
@@ -880,7 +880,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0016M()
+	public void core0016M()
         {
             string computedValue = "";
             string expectedValue = "2";
@@ -926,7 +926,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0017M()
+	public void core0017M()
         {
             string computedValue = "";
             string expectedValue = "0 1 ";
@@ -984,8 +984,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-    public void core0018M()
+	[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+	public void core0018M()
         {
             string computedValue = "";
             
@@ -1041,8 +1041,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    [Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
-    public void core0019M()
+	[Ignore(".NET DOM implementation does not match W3C DOM specification.")] // MS DOM is buggy
+	public void core0019M()
         {
             string computedValue = "";
             System.Xml.XmlNode testNode = null;
@@ -1099,8 +1099,8 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    [Ignore(".NET DOM implementation does not match W3C DOM specification.")]
-    public void core0020M()
+	[Ignore(".NET DOM implementation does not match W3C DOM specification.")]
+	public void core0020M()
         {
             string computedValue= "";
             System.Xml.XmlAttribute inUseAttribute = null;
@@ -1168,7 +1168,7 @@ namespace nist_dom.fundamental
         //----------------------------------------------------------------------------
 
         [Test]
-    public void core0021M()
+	public void core0021M()
         {
             object computedValue = null;
             System.Xml.XmlNode testNode = null;

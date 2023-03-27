@@ -4,14 +4,14 @@
 using System;
 
 class ErrorCS0073 {
-    delegate void Handler ();
-    event Handler OnFoo {
-        add;
-        remove {
-            OnFoo -= value;
-        }
-    }
-    public static void Main () {
-    }
+	delegate void Handler ();
+	event Handler OnFoo {
+		add;
+		remove {
+			OnFoo -= value;
+		}
+	}
+	public static void Main () {
+	}
 }
 

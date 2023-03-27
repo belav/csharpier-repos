@@ -24,7 +24,7 @@
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class HorizontalLineAnnotation : LineAnnotation
-    {
-    }
+	public class HorizontalLineAnnotation : LineAnnotation
+	{
+	}
 }

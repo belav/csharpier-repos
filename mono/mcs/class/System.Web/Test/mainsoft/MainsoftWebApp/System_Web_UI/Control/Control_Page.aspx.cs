@@ -35,53 +35,53 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI
 {
-    public class Control_Page
-        : GHTControlBase
-    {
-        #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
-        {
-            //
-            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-            //
-            InitializeComponent();
-            base.OnInit(e);
-        }
-        
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent() 
-        {    
-            this.Load += new System.EventHandler(this.Page_Load);
-        }
-        #endregion
+	public class Control_Page
+		: GHTControlBase
+	{
+		#region Web Form Designer generated code
+		override protected void OnInit(EventArgs e) 
+		{
+			//
+			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
+			//
+			InitializeComponent();
+			base.OnInit(e);
+		}
+		
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent() 
+		{    
+			this.Load += new System.EventHandler(this.Page_Load);
+		}
+		#endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
-        {
-            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
-            GHTTestBegin(frm);
-            foreach (Type currentType in TypesToTest)
-            {
-                GHTHeader(currentType.ToString());
-                Test(currentType);
-            }
-            GHTTestEnd();
-        }
+		private void Page_Load(object sender, System.EventArgs e) 
+		{
+			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
+			GHTTestBegin(frm);
+			foreach (Type currentType in TypesToTest)
+			{
+				GHTHeader(currentType.ToString());
+				Test(currentType);
+			}
+			GHTTestEnd();
+		}
 
-        private void Test(Type ctrlType)
-        {
-            try 
-            {
-                GHTSubTestBegin(ctrlType, "");
-                Compare(TestedControl.Page, this);
-            }
-            catch (Exception ex) 
-            {
-                GHTSubTestUnexpectedExceptionCaught(ex);
-            }
-            GHTSubTestEnd();
-        }
-    }
+		private void Test(Type ctrlType)
+		{
+			try 
+			{
+				GHTSubTestBegin(ctrlType, "");
+				Compare(TestedControl.Page, this);
+			}
+			catch (Exception ex) 
+			{
+				GHTSubTestUnexpectedExceptionCaught(ex);
+			}
+			GHTSubTestEnd();
+		}
+	}
 }

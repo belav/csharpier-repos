@@ -2,22 +2,22 @@
 // Line: 20
 class X
 {
-    public readonly int i;
+	public readonly int i;
 
-    public X (int i)
-    {
-        this.i = i;
-    }
+	public X (int i)
+	{
+		this.i = i;
+	}
 
-    public static implicit operator X (int value)
-    {
-        return new X (value);
-    }
+	public static implicit operator X (int value)
+	{
+		return new X (value);
+	}
 
-    public static void Main ()
-    {
-        int a = 4, b = 5;
+	public static void Main ()
+	{
+		int a = 4, b = 5;
 X x = (X) -a;
-        System.Console.WriteLine (x.i);
-    }
+		System.Console.WriteLine (x.i);
+	}
 }

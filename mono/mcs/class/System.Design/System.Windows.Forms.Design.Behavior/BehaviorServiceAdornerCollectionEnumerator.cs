@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -33,57 +33,57 @@ using System.Collections;
 
 namespace System.Windows.Forms.Design.Behavior
 {
-    public class BehaviorServiceAdornerCollectionEnumerator : IEnumerator
-    {
-        BehaviorServiceAdornerCollection mappings;
-        int index, state;
+	public class BehaviorServiceAdornerCollectionEnumerator : IEnumerator
+	{
+		BehaviorServiceAdornerCollection mappings;
+		int index, state;
 
-        public BehaviorServiceAdornerCollectionEnumerator (BehaviorServiceAdornerCollection mappings)
-        {
-            if (mappings == null)
-                throw new ArgumentNullException ("mappings");
-            this.mappings = mappings;
+		public BehaviorServiceAdornerCollectionEnumerator (BehaviorServiceAdornerCollection mappings)
+		{
+			if (mappings == null)
+				throw new ArgumentNullException ("mappings");
+			this.mappings = mappings;
 
-            Reset ();
-        }
+			Reset ();
+		}
 
-        public Adorner Current {
-            get { return index < 0 ? null : mappings [index]; }
-        }
+		public Adorner Current {
+			get { return index < 0 ? null : mappings [index]; }
+		}
 
-        void CheckState ()
-        {
-            if (mappings.State != state)
-                throw new InvalidOperationException ("Collection has changed");
-        }
+		void CheckState ()
+		{
+			if (mappings.State != state)
+				throw new InvalidOperationException ("Collection has changed");
+		}
 
-        public bool MoveNext ()
-        {
-            CheckState ();
-            if (index++ < mappings.Count)
-                return true;
-            index--;
-            return false;
-        }
+		public bool MoveNext ()
+		{
+			CheckState ();
+			if (index++ < mappings.Count)
+				return true;
+			index--;
+			return false;
+		}
 
-        public void Reset ()
-        {
-            index = -1;
-        }
+		public void Reset ()
+		{
+			index = -1;
+		}
 
-        object IEnumerator.Current {
-            get { return Current; }
-        }
+		object IEnumerator.Current {
+			get { return Current; }
+		}
 
-        bool IEnumerator.MoveNext ()
-        {
-            return MoveNext ();
-        }
+		bool IEnumerator.MoveNext ()
+		{
+			return MoveNext ();
+		}
 
-        void IEnumerator.Reset ()
-        {
-            Reset ();
-        }
-    }
+		void IEnumerator.Reset ()
+		{
+			Reset ();
+		}
+	}
 }
 

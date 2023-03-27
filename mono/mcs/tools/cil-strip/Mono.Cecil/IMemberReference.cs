@@ -28,9 +28,9 @@
 
 namespace Mono.Cecil {
 
-    internal interface IMemberReference : IMetadataTokenProvider, IAnnotationProvider, IReflectionVisitable {
+	internal interface IMemberReference : IMetadataTokenProvider, IAnnotationProvider, IReflectionVisitable {
 
-        string Name { get; set; }
-        TypeReference DeclaringType { get; }
-    }
+		string Name { get; set; }
+		TypeReference DeclaringType { get; }
+	}
 }

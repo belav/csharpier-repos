@@ -32,228 +32,228 @@ using System.Collections;
 
 namespace System.Web.UI.Design
 {
-    public class DesignerRegionCollection : IList, ICollection, IEnumerable
-    {
-        [MonoNotSupported ("")]
-        public DesignerRegionCollection ()
-        {
-            throw new NotImplementedException ();
-        }
+	public class DesignerRegionCollection : IList, ICollection, IEnumerable
+	{
+		[MonoNotSupported ("")]
+		public DesignerRegionCollection ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public DesignerRegionCollection (ControlDesigner owner)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public DesignerRegionCollection (ControlDesigner owner)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public int Add (DesignerRegion region)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public int Add (DesignerRegion region)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public void Clear ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public void Clear ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public bool Contains (DesignerRegion region)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public bool Contains (DesignerRegion region)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public void CopyTo (Array array, int index)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public void CopyTo (Array array, int index)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public IEnumerator GetEnumerator ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public IEnumerator GetEnumerator ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public int IndexOf (DesignerRegion region)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public int IndexOf (DesignerRegion region)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public void Insert (int index, DesignerRegion region)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public void Insert (int index, DesignerRegion region)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public void Remove (DesignerRegion region)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public void Remove (DesignerRegion region)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public void RemoveAt (int index)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public void RemoveAt (int index)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public int Count {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		public int Count {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        public bool IsFixedSize {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		public bool IsFixedSize {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        public bool IsReadOnly {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		public bool IsReadOnly {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        public bool IsSynchronized {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		public bool IsSynchronized {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        public DesignerRegion this[int index] {
-            get {
-                throw new NotImplementedException ();
-            }
-            
-            set {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		public DesignerRegion this[int index] {
+			get {
+				throw new NotImplementedException ();
+			}
+			
+			set {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        public ControlDesigner Owner {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		public ControlDesigner Owner {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        public object SyncRoot {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		public object SyncRoot {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        // Interface implementations
-        // Interface methods
+		// Interface implementations
+		// Interface methods
 
-        [MonoNotSupported ("")]
-        void ICollection.CopyTo (Array array, int index)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		void ICollection.CopyTo (Array array, int index)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        int IList.Add (object o)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		int IList.Add (object o)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        void IList.Clear ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		void IList.Clear ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        bool IList.Contains (object o)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		bool IList.Contains (object o)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        int IList.IndexOf (object o)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		int IList.IndexOf (object o)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        void IList.Insert (int index, object o)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoNotSupported ("")]
-        void IList.Remove (object o)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		void IList.Insert (int index, object o)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		[MonoNotSupported ("")]
+		void IList.Remove (object o)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        void IList.RemoveAt(int index)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		void IList.RemoveAt(int index)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        int ICollection.Count {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		int ICollection.Count {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        bool ICollection.IsSynchronized {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		bool ICollection.IsSynchronized {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        object ICollection.SyncRoot {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		object ICollection.SyncRoot {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        bool IList.IsFixedSize {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		bool IList.IsFixedSize {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        bool IList.IsReadOnly {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoNotSupported ("")]
+		bool IList.IsReadOnly {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoNotSupported ("")]
-        object IList.this[int index] {
-            get {
-                throw new NotImplementedException ();
-            }
-            
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-    }
+		[MonoNotSupported ("")]
+		object IList.this[int index] {
+			get {
+				throw new NotImplementedException ();
+			}
+			
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+	}
 }

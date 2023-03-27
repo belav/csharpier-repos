@@ -2,7 +2,7 @@
 // SupportingTokenInfo.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2007 Novell, Inc.  http://www.novell.com
 //
@@ -40,31 +40,31 @@ using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenReq
 
 namespace System.ServiceModel.Channels.Security
 {
-    internal class SupportingTokenInfo
-    {
-        public SupportingTokenInfo (SecurityToken token,
-            SecurityTokenAttachmentMode mode,
-            bool isOptional)
-        {
-            Token = token;
-            Mode = mode;
-            IsOptional = isOptional;
-        }
+	internal class SupportingTokenInfo
+	{
+		public SupportingTokenInfo (SecurityToken token,
+			SecurityTokenAttachmentMode mode,
+			bool isOptional)
+		{
+			Token = token;
+			Mode = mode;
+			IsOptional = isOptional;
+		}
 
-        public SecurityToken Token;
-        public SecurityTokenAttachmentMode Mode;
-        public bool IsOptional;
-        public EncryptedData Encrypted;
-    }
+		public SecurityToken Token;
+		public SecurityTokenAttachmentMode Mode;
+		public bool IsOptional;
+		public EncryptedData Encrypted;
+	}
 
-    internal class SupportingTokenInfoCollection : Collection<SupportingTokenInfo>
-    {
-        protected override void InsertItem (int index, SupportingTokenInfo item)
-        {
-            foreach (SupportingTokenInfo i in this)
-                if (i.Token.GetType () == item.Token.GetType ())
-                    throw new ArgumentException (String.Format ("Supporting tokens do not allow multiple SecurityTokens of the same type: {0}", i.Token.GetType ()));
-            base.InsertItem (index, item);
-        }
-    }
+	internal class SupportingTokenInfoCollection : Collection<SupportingTokenInfo>
+	{
+		protected override void InsertItem (int index, SupportingTokenInfo item)
+		{
+			foreach (SupportingTokenInfo i in this)
+				if (i.Token.GetType () == item.Token.GetType ())
+					throw new ArgumentException (String.Format ("Supporting tokens do not allow multiple SecurityTokens of the same type: {0}", i.Token.GetType ()));
+			base.InsertItem (index, item);
+		}
+	}
 }

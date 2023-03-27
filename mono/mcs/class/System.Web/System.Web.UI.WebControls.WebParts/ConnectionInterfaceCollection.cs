@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection.cs
 //
 // Author:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,47 +33,47 @@ using System.Reflection;
 
 namespace System.Web.UI.WebControls.WebParts
 {
-    public sealed class ConnectionInterfaceCollection : ReadOnlyCollectionBase
-    {
-        public static readonly ConnectionInterfaceCollection Empty = new ConnectionInterfaceCollection();
+	public sealed class ConnectionInterfaceCollection : ReadOnlyCollectionBase
+	{
+		public static readonly ConnectionInterfaceCollection Empty = new ConnectionInterfaceCollection();
 
-        public ConnectionInterfaceCollection ()
-        {
-        }
+		public ConnectionInterfaceCollection ()
+		{
+		}
 
-        public ConnectionInterfaceCollection (ICollection connectionInterfaces)
-        {
-            InnerList.AddRange (connectionInterfaces);
-        }
+		public ConnectionInterfaceCollection (ICollection connectionInterfaces)
+		{
+			InnerList.AddRange (connectionInterfaces);
+		}
 
-        public ConnectionInterfaceCollection (ConnectionInterfaceCollection existingConnectionInterfaces,
-                              ICollection connectionInterfaces)
-            : this()
-        {
-            InnerList.AddRange (existingConnectionInterfaces);
-            InnerList.AddRange (connectionInterfaces);
-        }
+		public ConnectionInterfaceCollection (ConnectionInterfaceCollection existingConnectionInterfaces,
+						      ICollection connectionInterfaces)
+			: this()
+		{
+			InnerList.AddRange (existingConnectionInterfaces);
+			InnerList.AddRange (connectionInterfaces);
+		}
 
-        public bool Contains (Type value)
-        {
-            return InnerList.Contains (value);
-        }
+		public bool Contains (Type value)
+		{
+			return InnerList.Contains (value);
+		}
 
-        public void CopyTo (Type[] array, 
-                    int index)
-        {
-            InnerList.CopyTo (array, index);
-        }
+		public void CopyTo (Type[] array, 
+				    int index)
+		{
+			InnerList.CopyTo (array, index);
+		}
 
-        public int IndexOf (Type value)
-        {
-            return InnerList.IndexOf (value);
-        }
+		public int IndexOf (Type value)
+		{
+			return InnerList.IndexOf (value);
+		}
 
-        public Type this [ int index ] {
-            get {
-                return (Type)InnerList [index];
-            }
-        }
-    }
+		public Type this [ int index ] {
+			get {
+				return (Type)InnerList [index];
+			}
+		}
+	}
 }

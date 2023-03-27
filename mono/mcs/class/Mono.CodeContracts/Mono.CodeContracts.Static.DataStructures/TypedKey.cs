@@ -2,7 +2,7 @@
 // TypedKey.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,31 +27,31 @@
 // 
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    struct TypedKey {
-        private readonly string key;
+	struct TypedKey {
+		private readonly string key;
 
-        public TypedKey (string key)
-        {
-            this.key = key;
-        }
+		public TypedKey (string key)
+		{
+			this.key = key;
+		}
 
-        public bool Equals (TypedKey other)
-        {
-            return Equals (other.key, this.key);
-        }
+		public bool Equals (TypedKey other)
+		{
+			return Equals (other.key, this.key);
+		}
 
-        public override bool Equals (object obj)
-        {
-            if (ReferenceEquals (null, obj))
-                return false;
-            if (obj.GetType () != typeof (TypedKey))
-                return false;
-            return Equals ((TypedKey) obj);
-        }
+		public override bool Equals (object obj)
+		{
+			if (ReferenceEquals (null, obj))
+				return false;
+			if (obj.GetType () != typeof (TypedKey))
+				return false;
+			return Equals ((TypedKey) obj);
+		}
 
-        public override int GetHashCode ()
-        {
-            return (this.key != null ? this.key.GetHashCode () : 0);
-        }
-    }
+		public override int GetHashCode ()
+		{
+			return (this.key != null ? this.key.GetHashCode () : 0);
+		}
+	}
 }

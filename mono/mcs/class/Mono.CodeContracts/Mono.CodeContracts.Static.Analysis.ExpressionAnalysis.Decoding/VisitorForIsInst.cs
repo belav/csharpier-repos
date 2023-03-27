@@ -2,7 +2,7 @@
 // VisitorForIsInst.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,28 +31,28 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding {
-    class VisitorForIsInst<V, E> : QueryVisitor<V, E> 
-        where V : IEquatable<V> 
-        where E : IEquatable<E> {
-        
-        private E argument;
-        private TypeNode type;
+	class VisitorForIsInst<V, E> : QueryVisitor<V, E> 
+		where V : IEquatable<V> 
+		where E : IEquatable<E> {
+		
+		private E argument;
+		private TypeNode type;
 
-        public static bool IsIsInst (E expr, out TypeNode type, out E arg, FullExpressionDecoder<V,E> decoder)
-        {
-            VisitorForIsInst<V, E> v = decoder.IsInstVisitor;
-            bool res = Decode (expr, v, decoder);
+		public static bool IsIsInst (E expr, out TypeNode type, out E arg, FullExpressionDecoder<V,E> decoder)
+		{
+			VisitorForIsInst<V, E> v = decoder.IsInstVisitor;
+			bool res = Decode (expr, v, decoder);
 
-            arg = v.argument;
-            type = v.type;
-            return res;
-        }
+			arg = v.argument;
+			type = v.type;
+			return res;
+		}
 
-        public override bool Isinst (E pc, TypeNode type, V dest, E obj, Dummy data)
-        {
-            this.type = type;
-            this.argument = obj;
-            return true;
-        }
-    }
+		public override bool Isinst (E pc, TypeNode type, V dest, E obj, Dummy data)
+		{
+			this.type = type;
+			this.argument = obj;
+			return true;
+		}
+	}
 }

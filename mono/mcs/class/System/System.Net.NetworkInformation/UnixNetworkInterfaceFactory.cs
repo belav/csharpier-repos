@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.NetworkInterface
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //      Miguel de Icaza (miguel@novell.com)
 //      Eric Butler (eric@extremeboredom.net)
 //      Marek Habersack (mhabersack@novell.com)
@@ -31,32 +31,32 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 namespace System.Net.NetworkInformation {
-    internal static class UnixNetworkInterfaceFactoryPal
-    {
-        public static NetworkInterfaceFactory Create ()
-        {
+	internal static class UnixNetworkInterfaceFactoryPal
+	{
+		public static NetworkInterfaceFactory Create ()
+		{
 #if MONOTOUCH || XAMMAC
-            return new MacOsNetworkInterfaceAPI ();
+			return new MacOsNetworkInterfaceAPI ();
 #else
-            bool runningOnUnix = (Environment.OSVersion.Platform == PlatformID.Unix);
+			bool runningOnUnix = (Environment.OSVersion.Platform == PlatformID.Unix);
 
-            if (runningOnUnix) {
-                // XXX: OpenBSD and NetBSD too? It seems other platforms map closer to the Mac OS version than Linux,
-                // even if not exactly; it seems Linux and/or glibc are the different ones.
-                if (Platform.IsMacOS || Platform.IsOpenBSD)
-                    return new MacOsNetworkInterfaceAPI ();
-                if (Platform.IsFreeBSD)
-                    return new FreeBSDNetworkInterfaceAPI ();
+			if (runningOnUnix) {
+				// XXX: OpenBSD and NetBSD too? It seems other platforms map closer to the Mac OS version than Linux,
+				// even if not exactly; it seems Linux and/or glibc are the different ones.
+				if (Platform.IsMacOS || Platform.IsOpenBSD)
+					return new MacOsNetworkInterfaceAPI ();
+				if (Platform.IsFreeBSD)
+					return new FreeBSDNetworkInterfaceAPI ();
 
-                // XXX: IBM i would be better with its own API targetting Qp2getifaddrs
-                if (Platform.IsAix || Platform.IsIBMi)
-                    return new AixNetworkInterfaceAPI ();
+				// XXX: IBM i would be better with its own API targetting Qp2getifaddrs
+				if (Platform.IsAix || Platform.IsIBMi)
+					return new AixNetworkInterfaceAPI ();
 
-                return new LinuxNetworkInterfaceAPI ();
-            }
+				return new LinuxNetworkInterfaceAPI ();
+			}
 
-            return null;
+			return null;
 #endif
-        }
-    }
+		}
+	}
 }

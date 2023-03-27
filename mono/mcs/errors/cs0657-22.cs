@@ -6,6 +6,6 @@ using System;
 
 abstract class X
 {
-    [field:NonSerialized]
-    public abstract event EventHandler XEvent;
+	[field:NonSerialized]
+	public abstract event EventHandler XEvent;
 }

@@ -5,8 +5,8 @@ using System;
 
 public interface ITest
 {
-    [MyAttribute]
-    void Method();
+	[MyAttribute]
+	void Method();
 }
 
 [AttributeUsage (AttributeTargets.Interface)]

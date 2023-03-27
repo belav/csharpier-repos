@@ -3,12 +3,12 @@
 
 public interface IA
 {
-    void Foo<U> ();
+	void Foo<U> ();
 }
 
 public class CA
 {
-    public void Foo<T> () where T : class
-    {
-    }
+	public void Foo<T> () where T : class
+	{
+	}
 }

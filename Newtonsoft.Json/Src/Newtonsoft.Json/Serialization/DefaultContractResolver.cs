@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -107,7 +107,7 @@ namespace Newtonsoft.Json.Serialization
         /// This value is determined by the runtime permissions available.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if using dynamic code generation; otherwise, <c>false</c>.
+        /// 	<c>true</c> if using dynamic code generation; otherwise, <c>false</c>.
         /// </value>
         public bool DynamicCodeGeneration => JsonTypeReflector.DynamicCodeGeneration;
 
@@ -126,7 +126,7 @@ namespace Newtonsoft.Json.Serialization
         /// Gets or sets a value indicating whether compiler generated members should be serialized.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if serialized compiler generated members; otherwise, <c>false</c>.
+        /// 	<c>true</c> if serialized compiler generated members; otherwise, <c>false</c>.
         /// </value>
         public bool SerializeCompilerGeneratedMembers { get; set; }
 
@@ -135,7 +135,7 @@ namespace Newtonsoft.Json.Serialization
         /// Gets or sets a value indicating whether to ignore the <see cref="ISerializable"/> interface when serializing and deserializing types.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if the <see cref="ISerializable"/> interface will be ignored when serializing and deserializing types; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the <see cref="ISerializable"/> interface will be ignored when serializing and deserializing types; otherwise, <c>false</c>.
         /// </value>
         public bool IgnoreSerializableInterface { get; set; }
 
@@ -143,7 +143,7 @@ namespace Newtonsoft.Json.Serialization
         /// Gets or sets a value indicating whether to ignore the <see cref="SerializableAttribute"/> attribute when serializing and deserializing types.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if the <see cref="SerializableAttribute"/> attribute will be ignored when serializing and deserializing types; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the <see cref="SerializableAttribute"/> attribute will be ignored when serializing and deserializing types; otherwise, <c>false</c>.
         /// </value>
         public bool IgnoreSerializableAttribute { get; set; }
 #endif

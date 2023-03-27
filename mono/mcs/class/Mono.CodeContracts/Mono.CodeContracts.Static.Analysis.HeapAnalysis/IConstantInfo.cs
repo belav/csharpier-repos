@@ -2,7 +2,7 @@
 // IConstantInfo.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -26,8 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis {
-    interface IConstantInfo {
-        bool KeepAsBottomField { get; }
-        bool ManifestField { get; }
-    }
+	interface IConstantInfo {
+		bool KeepAsBottomField { get; }
+		bool ManifestField { get; }
+	}
 }

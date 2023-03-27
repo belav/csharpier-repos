@@ -6,28 +6,28 @@ using static A.C.X;
 
 namespace A.B
 {
-    static class X
-    {
-        public static void Test (int o)
-        {
-        }
-    }
+	static class X
+	{
+		public static void Test (int o)
+		{
+		}
+	}
 }
 
 namespace A.C
 {
-    static class X
-    {
-        public static int Test (int o)
-        {
-        }
-    }
+	static class X
+	{
+		public static int Test (int o)
+		{
+		}
+	}
 }
 
 class M
 {
-    public static void Main ()
-    {
-        Test (0);
-    }
+	public static void Main ()
+	{
+		Test (0);
+	}
 }

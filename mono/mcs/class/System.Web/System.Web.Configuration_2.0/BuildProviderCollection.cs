@@ -2,7 +2,7 @@
 // System.Web.Configuration.BuildProviderCollection
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (c) Copyright 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,84 +33,84 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    [ConfigurationCollection (typeof (BuildProvider), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class BuildProviderCollection : ConfigurationElementCollection
-    {
-        static ConfigurationPropertyCollection props;
+	[ConfigurationCollection (typeof (BuildProvider), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class BuildProviderCollection : ConfigurationElementCollection
+	{
+		static ConfigurationPropertyCollection props;
 
-        static BuildProviderCollection ()
-        {
-            //FIXME: add properties
-            props = new ConfigurationPropertyCollection ();
-        }
-        
-        public BuildProviderCollection (): base (CaseInsensitiveComparer.DefaultInvariant)
-        {
-        }
+		static BuildProviderCollection ()
+		{
+			//FIXME: add properties
+			props = new ConfigurationPropertyCollection ();
+		}
+		
+		public BuildProviderCollection (): base (CaseInsensitiveComparer.DefaultInvariant)
+		{
+		}
 
-        public BuildProvider this [int index] {
-            get { return (BuildProvider) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-        }
+		public BuildProvider this [int index] {
+			get { return (BuildProvider) BaseGet (index); }
+			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+		}
 
-        public new BuildProvider this [string name] {
-            get {
-                string ext;
+		public new BuildProvider this [string name] {
+			get {
+				string ext;
 
-                if (!String.IsNullOrEmpty (name))
-                    ext = name.ToLowerInvariant ();
-                else
-                    ext = name;
-                
-                return (BuildProvider) BaseGet (ext);
-            }
-        }
+				if (!String.IsNullOrEmpty (name))
+					ext = name.ToLowerInvariant ();
+				else
+					ext = name;
+				
+				return (BuildProvider) BaseGet (ext);
+			}
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return props; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return props; }
+		}
 
-        public void Add (BuildProvider buildProvider)
-        {
-            BaseAdd (buildProvider);
-        }
+		public void Add (BuildProvider buildProvider)
+		{
+			BaseAdd (buildProvider);
+		}
 
-        public void Clear ()
-        {
-            BaseClear ();
-        }
+		public void Clear ()
+		{
+			BaseClear ();
+		}
 
-        public void Remove (string name)
-        {
-            BaseRemove (name);
-        }
+		public void Remove (string name)
+		{
+			BaseRemove (name);
+		}
 
-        public void RemoveAt (int index)
-        {
-            BaseRemoveAt (index);
-        }
+		public void RemoveAt (int index)
+		{
+			BaseRemoveAt (index);
+		}
 
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new BuildProvider ();
-        }
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new BuildProvider ();
+		}
 
-        protected override object GetElementKey (ConfigurationElement element)
-        {
-            BuildProvider prov = (BuildProvider) element;
-            return prov.Extension;
-        }
+		protected override object GetElementKey (ConfigurationElement element)
+		{
+			BuildProvider prov = (BuildProvider) element;
+			return prov.Extension;
+		}
 
-        internal Type GetProviderTypeForExtension (string extension)
-        {
-            return global::System.Web.Compilation.BuildProvider.GetProviderTypeForExtension (extension);
-        }
-        
-        internal global::System.Web.Compilation.BuildProvider GetProviderInstanceForExtension (string extension)
-        {
-            return global::System.Web.Compilation.BuildProvider.GetProviderInstanceForExtension (extension);
-        }
-    }
+		internal Type GetProviderTypeForExtension (string extension)
+		{
+			return global::System.Web.Compilation.BuildProvider.GetProviderTypeForExtension (extension);
+		}
+		
+		internal global::System.Web.Compilation.BuildProvider GetProviderInstanceForExtension (string extension)
+		{
+			return global::System.Web.Compilation.BuildProvider.GetProviderInstanceForExtension (extension);
+		}
+	}
 }
 
 

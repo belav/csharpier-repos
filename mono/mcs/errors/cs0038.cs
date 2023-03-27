@@ -4,19 +4,19 @@ using System;
 
 class X
 {
-    int a = 5;
+	int a = 5;
 
-    class Y
-    {
-        public long b;
+	class Y
+	{
+		public long b;
 
-        public Y ()
-        {
-            Console.WriteLine (a);
-        }
-    }
+		public Y ()
+		{
+			Console.WriteLine (a);
+		}
+	}
 
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

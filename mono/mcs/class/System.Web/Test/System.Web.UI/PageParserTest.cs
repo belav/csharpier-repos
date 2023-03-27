@@ -33,20 +33,20 @@ using MonoTests.SystemWeb.Framework;
 
 namespace MonoTests.System.Web.UI
 {
-    [TestFixture]
-    public class PageParserTest
-    {
-        [TestFixtureSetUp]
-        public void SetupTest ()
-        {
-            WebTest.CopyResource (GetType (), "MissingMasterFile.aspx", "MissingMasterFile.aspx");
-        }
-        
-        [Test]
-        public void MissingMasterFile ()
-        {
-            string pageHtml = new WebTest ("MissingMasterFile.aspx").Run ();
-            Assert.IsTrue (pageHtml.IndexOf ("[System.Web.Compilation.ParseException]:") != -1, "#A1");
-        }
-    }
+	[TestFixture]
+	public class PageParserTest
+	{
+		[TestFixtureSetUp]
+		public void SetupTest ()
+		{
+			WebTest.CopyResource (GetType (), "MissingMasterFile.aspx", "MissingMasterFile.aspx");
+		}
+		
+		[Test]
+		public void MissingMasterFile ()
+		{
+			string pageHtml = new WebTest ("MissingMasterFile.aspx").Run ();
+			Assert.IsTrue (pageHtml.IndexOf ("[System.Web.Compilation.ParseException]:") != -1, "#A1");
+		}
+	}
 }

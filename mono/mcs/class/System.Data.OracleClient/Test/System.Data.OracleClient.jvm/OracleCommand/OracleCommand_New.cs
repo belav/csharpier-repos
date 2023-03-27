@@ -35,79 +35,79 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleCommand_New : GHTBase
 {
-    public static void Main()
-    {
-        OracleCommand_New tc = new OracleCommand_New();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OracleCommand_New");
-            tc.run();
-        }
-        catch(Exception ex){exp = ex;}
-        finally    {tc.EndTest(exp);}
-    }
+	public static void Main()
+	{
+		OracleCommand_New tc = new OracleCommand_New();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OracleCommand_New");
+			tc.run();
+		}
+		catch(Exception ex){exp = ex;}
+		finally	{tc.EndTest(exp);}
+	}
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
 
-        OracleCommand cmd = null;
-        OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString );
-        OracleTransaction tran;
+		OracleCommand cmd = null;
+		OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString );
+		OracleTransaction tran;
 
 
-        try
-        {
-            BeginCase("OracleCommand New");
-            cmd = new OracleCommand();
-            Compare(cmd==null, false);
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("OracleCommand New");
+			cmd = new OracleCommand();
+			Compare(cmd==null, false);
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("OracleCommand - new CommandText");
-            cmd = new OracleCommand("Select * from Table");
-            Compare(cmd==null, false);
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("OracleCommand - new CommandText");
+			cmd = new OracleCommand("Select * from Table");
+			Compare(cmd==null, false);
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("OracleCommand CommandText");
-            Compare(cmd.CommandText , "Select * from Table");
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("OracleCommand CommandText");
+			Compare(cmd.CommandText , "Select * from Table");
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("OracleCommand - Connection");
-            cmd = new OracleCommand("Select * from Table",con);
-            Compare(cmd.Connection ,con);
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("OracleCommand - Connection");
+			cmd = new OracleCommand("Select * from Table",con);
+			Compare(cmd.Connection ,con);
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
 
-        con.Open();
-        tran = con.BeginTransaction();
+		con.Open();
+		tran = con.BeginTransaction();
 
-        try
-        {
-            BeginCase("OracleCommand - Transaction");
-            cmd = new OracleCommand("Select * from Table",con,tran);
-            Compare(cmd.Transaction ,tran);
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
-        
-        if (con.State == ConnectionState.Open) con.Close();
+		try
+		{
+			BeginCase("OracleCommand - Transaction");
+			cmd = new OracleCommand("Select * from Table",con,tran);
+			Compare(cmd.Transaction ,tran);
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
+		
+		if (con.State == ConnectionState.Open) con.Close();
 
-    }
+	}
 }
 
 }

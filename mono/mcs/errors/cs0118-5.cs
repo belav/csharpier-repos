@@ -3,14 +3,14 @@
 
 class A
 {
-    public string s;
+	public string s;
 }
 
 class X : A
 {
-    s MyProperty {
-        get {
-            return s;
-        }
-    }
+	s MyProperty {
+		get {
+			return s;
+		}
+	}
 }

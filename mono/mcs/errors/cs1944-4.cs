@@ -7,12 +7,12 @@ using System.Linq.Expressions;
 
 class C
 {
-    unsafe delegate int* D (int* i);
-    
-    public static void Main ()
-    {
-        unsafe {
-            Expression<D> e = p => p + 1;
-        }
-    }
+	unsafe delegate int* D (int* i);
+	
+	public static void Main ()
+	{
+		unsafe {
+			Expression<D> e = p => p + 1;
+		}
+	}
 }

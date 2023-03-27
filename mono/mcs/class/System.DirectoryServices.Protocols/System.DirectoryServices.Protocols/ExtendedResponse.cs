@@ -32,17 +32,17 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class ExtendedResponse : DirectoryResponse
-    {
-        internal ExtendedResponse (string responseName, byte [] responseValue)
-        {
-            ResponseName = responseName;
-            ResponseValue = responseValue;
-        }
+	public class ExtendedResponse : DirectoryResponse
+	{
+		internal ExtendedResponse (string responseName, byte [] responseValue)
+		{
+			ResponseName = responseName;
+			ResponseValue = responseValue;
+		}
 
-        [MonoTODO]
-        public string ResponseName { get; private set; }
-        [MonoTODO]
-        public byte [] ResponseValue { get; private set; }
-    }
+		[MonoTODO]
+		public string ResponseName { get; private set; }
+		[MonoTODO]
+		public byte [] ResponseValue { get; private set; }
+	}
 }

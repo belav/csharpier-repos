@@ -30,40 +30,40 @@
 //
 
 namespace System.Web.Services.Discovery {
-    public class DiscoveryDocumentLinksPattern : DiscoverySearchPattern {
-        
-        #region Fields
-        
-        private string pattern = "*.disco";
+	public class DiscoveryDocumentLinksPattern : DiscoverySearchPattern {
+		
+		#region Fields
+		
+		private string pattern = "*.disco";
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public DiscoveryDocumentLinksPattern () 
-        {
-        }
-        
-        #endregion // Constructors
+		public DiscoveryDocumentLinksPattern () 
+		{
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public override string Pattern {
-            get { return pattern; }
-        }
+		public override string Pattern {
+			get { return pattern; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        public override DiscoveryReference GetDiscoveryReference (string filename)
-        {
-            DiscoveryDocumentReference refe = new DiscoveryDocumentReference ();
-            refe.Url = filename;
-            refe.Ref = filename;
-            return refe;
-        }
+		public override DiscoveryReference GetDiscoveryReference (string filename)
+		{
+			DiscoveryDocumentReference refe = new DiscoveryDocumentReference ();
+			refe.Url = filename;
+			refe.Ref = filename;
+			return refe;
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

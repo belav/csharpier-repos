@@ -2,7 +2,7 @@
 // UriParserCas.cs - CAS unit tests for System.UriParser
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,61 +39,61 @@ using MonoTests.System;
 
 namespace MonoCasTests.System {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class UriParserCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class UriParserCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTest_Deny_Unrestricted ()
-        {
-            UriParserTest unit = new UriParserTest ();
-            unit.Prefix = "cas.deny.unrestricted.test.";
-            // static stuff
-            unit.IsKnownScheme_WellKnown ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTest_Deny_Unrestricted ()
+		{
+			UriParserTest unit = new UriParserTest ();
+			unit.Prefix = "cas.deny.unrestricted.test.";
+			// static stuff
+			unit.IsKnownScheme_WellKnown ();
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, Infrastructure = true)]
-        public void ReuseUnitTest_PermitOnly_Infrastructure ()
-        {
-            UriParserTest unit = new UriParserTest ();
-            unit.Prefix = "cas.permitonly.infrastructure..test.";
-            // static stuff
-            unit.Register ();
-            unit.Register_Minus1Port ();
-            unit.Register_UInt16PortMinus1 ();
-            unit.OnRegister ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, Infrastructure = true)]
+		public void ReuseUnitTest_PermitOnly_Infrastructure ()
+		{
+			UriParserTest unit = new UriParserTest ();
+			unit.Prefix = "cas.permitonly.infrastructure..test.";
+			// static stuff
+			unit.Register ();
+			unit.Register_Minus1Port ();
+			unit.Register_UInt16PortMinus1 ();
+			unit.OnRegister ();
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void ReuseUnitTest_Deny_Infrastructure ()
-        {
-            UriParserTest unit = new UriParserTest ();
-            unit.Prefix = "cas.deny.infrastructure.test.";
-            // static stuff
-            unit.Register ();
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void ReuseUnitTest_Deny_Infrastructure ()
+		{
+			UriParserTest unit = new UriParserTest ();
+			unit.Prefix = "cas.deny.infrastructure.test.";
+			// static stuff
+			unit.Register ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            // UriParser is an asbtract class - so we use the unit test derived class
-            // because we're 100% sure this doesn't introduce new security checks
-            ConstructorInfo ci = typeof (UnitTestUriParser).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor()");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			// UriParser is an asbtract class - so we use the unit test derived class
+			// because we're 100% sure this doesn't introduce new security checks
+			ConstructorInfo ci = typeof (UnitTestUriParser).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor()");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }
 

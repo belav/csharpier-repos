@@ -3,18 +3,18 @@
 
 class C
 {
-    public virtual (int a, int b) Prop {
-        get {
-            throw null;
-        }
-    }
+	public virtual (int a, int b) Prop {
+		get {
+			throw null;
+		}
+	}
 }
 
 class D : C
 {
-    public override (int c, int d) Prop {
-        get {
-            throw null;
-        }
-    }    
+	public override (int c, int d) Prop {
+		get {
+			throw null;
+		}
+	}	
 }

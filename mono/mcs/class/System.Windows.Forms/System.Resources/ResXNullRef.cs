@@ -20,15 +20,15 @@
 // Copyright (c) 2005 Novell, Inc.
 //
 // Authors:
-//     Geoff Norton    gnorton@customerdna.com
+// 	Geoff Norton	gnorton@customerdna.com
 //
 
 using System;
 
 namespace System.Resources
 {
-    [Serializable]
-    internal class ResXNullRef
-    {
-    }
+	[Serializable]
+	internal class ResXNullRef
+	{
+	}
 }

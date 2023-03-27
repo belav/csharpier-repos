@@ -49,159 +49,159 @@ using System.Security.Cryptography;
 namespace Mono.Security.Cryptography
 {
    /*
-    * References:
-    *        RFC 2104 (http://www.ietf.org/rfc/rfc2104.txt)
-    *        RFC 2202 (http://www.ietf.org/rfc/rfc2202.txt)
-    * MSDN:
-    * 
-    *        Extending the KeyedHashAlgorithm Class (http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpguide/html/cpconextendingkeyedhashalgorithmclass.asp)
-    */
-    internal class HMAC : System.Security.Cryptography.KeyedHashAlgorithm
-    {
-        #region Fields
+	* References:
+	*		RFC 2104 (http://www.ietf.org/rfc/rfc2104.txt)
+	*		RFC 2202 (http://www.ietf.org/rfc/rfc2202.txt)
+	* MSDN:
+	* 
+	*		Extending the KeyedHashAlgorithm Class (http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpguide/html/cpconextendingkeyedhashalgorithmclass.asp)
+	*/
+	internal class HMAC : System.Security.Cryptography.KeyedHashAlgorithm
+	{
+		#region Fields
 
-        private HashAlgorithm    hash;
-        private bool            hashing;
+		private HashAlgorithm	hash;
+		private bool			hashing;
 
-        private byte[]            innerPad;
-        private byte[]            outerPad;
+		private byte[]			innerPad;
+		private byte[]			outerPad;
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
         
-        public override byte[] Key
-        {
-            get { return (byte[])KeyValue.Clone(); }
-            set
-            {
-                if (hashing)
-                {
-                    throw new Exception("Cannot change key during hash operation.");
-                }
+		public override byte[] Key
+		{
+			get { return (byte[])KeyValue.Clone(); }
+			set
+			{
+				if (hashing)
+				{
+					throw new Exception("Cannot change key during hash operation.");
+				}
 
-                /* if key is longer than 64 bytes reset it to rgbKey = Hash(rgbKey) */
-                if (value.Length > 64)
-                {
-                    KeyValue = hash.ComputeHash(value);
-                }
-                else
-                {
-                    KeyValue = (byte[])value.Clone();
-                }
+				/* if key is longer than 64 bytes reset it to rgbKey = Hash(rgbKey) */
+				if (value.Length > 64)
+				{
+					KeyValue = hash.ComputeHash(value);
+				}
+				else
+				{
+					KeyValue = (byte[])value.Clone();
+				}
 
-                initializePad();
-            }
-        }
+				initializePad();
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        public HMAC()
-        {
-            // Create the hash
-            hash = MD5.Create();
-            // Set HashSizeValue
-            HashSizeValue = hash.HashSize;
+		public HMAC()
+		{
+			// Create the hash
+			hash = MD5.Create();
+			// Set HashSizeValue
+			HashSizeValue = hash.HashSize;
 
-            // Generate a radom key
-            byte[] rgbKey = new byte[64];
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            rng.GetNonZeroBytes(rgbKey);
+			// Generate a radom key
+			byte[] rgbKey = new byte[64];
+			RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+			rng.GetNonZeroBytes(rgbKey);
 
-            KeyValue = (byte[])rgbKey.Clone();
+			KeyValue = (byte[])rgbKey.Clone();
 
-            this.Initialize();
-        }
+			this.Initialize();
+		}
 
-        public HMAC (HashAlgorithm ha, byte[] rgbKey)
-        {
-            hash = ha;
-            // Set HashSizeValue
-            HashSizeValue = hash.HashSize;
+		public HMAC (HashAlgorithm ha, byte[] rgbKey)
+		{
+			hash = ha;
+			// Set HashSizeValue
+			HashSizeValue = hash.HashSize;
 
-            /* if key is longer than 64 bytes reset it to rgbKey = Hash(rgbKey) */
-            if (rgbKey.Length > 64)
-            {
-                KeyValue = hash.ComputeHash(rgbKey);
-            }
-            else
-            {
-                KeyValue = (byte[])rgbKey.Clone();
-            }
+			/* if key is longer than 64 bytes reset it to rgbKey = Hash(rgbKey) */
+			if (rgbKey.Length > 64)
+			{
+				KeyValue = hash.ComputeHash(rgbKey);
+			}
+			else
+			{
+				KeyValue = (byte[])rgbKey.Clone();
+			}
 
-            this.Initialize();
-        }
+			this.Initialize();
+		}
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        public override void Initialize()
-        {
-            hash.Initialize();
-            initializePad();
-            hashing = false;
-        }
+		public override void Initialize()
+		{
+			hash.Initialize();
+			initializePad();
+			hashing = false;
+		}
 
-        protected override byte[] HashFinal()
-        {
-            if (!hashing)
-            {
-                hash.TransformBlock(innerPad, 0, innerPad.Length, innerPad, 0);
-                hashing = true;
-            }
-            // Finalize the original hash
-            hash.TransformFinalBlock(new byte[0], 0, 0);
+		protected override byte[] HashFinal()
+		{
+			if (!hashing)
+			{
+				hash.TransformBlock(innerPad, 0, innerPad.Length, innerPad, 0);
+				hashing = true;
+			}
+			// Finalize the original hash
+			hash.TransformFinalBlock(new byte[0], 0, 0);
 
-            byte[] firstResult = hash.Hash;
+			byte[] firstResult = hash.Hash;
 
-            hash.Initialize();
-            hash.TransformBlock(outerPad, 0, outerPad.Length, outerPad, 0);
-            hash.TransformFinalBlock(firstResult, 0, firstResult.Length);
-            
-            Initialize();
+			hash.Initialize();
+			hash.TransformBlock(outerPad, 0, outerPad.Length, outerPad, 0);
+			hash.TransformFinalBlock(firstResult, 0, firstResult.Length);
+			
+			Initialize();
 
-            return hash.Hash;
-        }
+			return hash.Hash;
+		}
 
-        protected override void HashCore(
-            byte[] array,
-            int ibStart,
-            int cbSize)
-        {
-            if (!hashing)
-            {
-                hash.TransformBlock(innerPad, 0, innerPad.Length, innerPad, 0);
-                hashing = true;
-            }
-            hash.TransformBlock(array, ibStart, cbSize, array, ibStart);
-        }
+		protected override void HashCore(
+			byte[] array,
+			int ibStart,
+			int cbSize)
+		{
+			if (!hashing)
+			{
+				hash.TransformBlock(innerPad, 0, innerPad.Length, innerPad, 0);
+				hashing = true;
+			}
+			hash.TransformBlock(array, ibStart, cbSize, array, ibStart);
+		}
 
-        #endregion
+		#endregion
 
-        #region Private Methods
+		#region Private Methods
 
-        private void initializePad()
-        {
-            // Fill pad arrays
-            innerPad = new byte[64];
-            outerPad = new byte[64];
+		private void initializePad()
+		{
+			// Fill pad arrays
+			innerPad = new byte[64];
+			outerPad = new byte[64];
 
-            /* Pad the key for inner and outer digest */
-            for (int i = 0 ; i < KeyValue.Length; ++i)
-            {
-                innerPad[i] = (byte)(KeyValue[i] ^ 0x36);
-                outerPad[i] = (byte)(KeyValue[i] ^ 0x5C);
-            }
-            for (int i = KeyValue.Length; i < 64; ++i) 
-            {
-                innerPad[i] = 0x36;
-                outerPad[i] = 0x5C;
-            }
-        }
+			/* Pad the key for inner and outer digest */
+			for (int i = 0 ; i < KeyValue.Length; ++i)
+			{
+				innerPad[i] = (byte)(KeyValue[i] ^ 0x36);
+				outerPad[i] = (byte)(KeyValue[i] ^ 0x5C);
+			}
+			for (int i = KeyValue.Length; i < 64; ++i) 
+			{
+				innerPad[i] = 0x36;
+				outerPad[i] = 0x5C;
+			}
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

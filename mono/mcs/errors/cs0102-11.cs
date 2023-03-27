@@ -2,7 +2,7 @@
 // Line: 7
 
 public class SampleClass {
-    public delegate void MyEvent ();
+	public delegate void MyEvent ();
         
         public void MyEvent () {}
 }

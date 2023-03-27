@@ -30,8 +30,8 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
-    public interface IDispatchOperationSelector
-    {
-        string SelectOperation (ref Message message);
-    }
+	public interface IDispatchOperationSelector
+	{
+		string SelectOperation (ref Message message);
+	}
 }

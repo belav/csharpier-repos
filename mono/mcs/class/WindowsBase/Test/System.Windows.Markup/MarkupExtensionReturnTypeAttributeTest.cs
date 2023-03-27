@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -32,19 +32,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Markup {
 
-    [TestFixture]
-    public class MarkupExtensionReturnTypeAttributeTest
-    {
-        [Test]
-        public void CtorTest ()
-        {
-            MarkupExtensionReturnTypeAttribute attr = new MarkupExtensionReturnTypeAttribute (typeof (void));
-            Assert.AreEqual (typeof (void), attr.ReturnType);
+	[TestFixture]
+	public class MarkupExtensionReturnTypeAttributeTest
+	{
+		[Test]
+		public void CtorTest ()
+		{
+			MarkupExtensionReturnTypeAttribute attr = new MarkupExtensionReturnTypeAttribute (typeof (void));
+			Assert.AreEqual (typeof (void), attr.ReturnType);
 
-            attr = new MarkupExtensionReturnTypeAttribute ();
-            Assert.IsNull (attr.ReturnType);
-        }
+			attr = new MarkupExtensionReturnTypeAttribute ();
+			Assert.IsNull (attr.ReturnType);
+		}
 
-    }
+	}
 
 }

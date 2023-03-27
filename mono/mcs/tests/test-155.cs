@@ -7,7 +7,7 @@ class Test {
                 tst.test("test");
                 TestInterface ti = (TestInterface)tst;
                 ti.test("test");
-        return 0;
+		return 0;
         }
 
         public interface TestInterface {

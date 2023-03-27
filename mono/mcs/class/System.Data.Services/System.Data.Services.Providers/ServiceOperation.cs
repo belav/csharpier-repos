@@ -1,4 +1,4 @@
-// 
+﻿// 
 // ServiceOperation.cs
 //  
 // Author:
@@ -34,54 +34,54 @@ using System.Runtime.CompilerServices;
 
 namespace System.Data.Services.Providers
 {
-    [DebuggerVisualizer ("ServiceOperation={Name}")]
-    public class ServiceOperation
-    {
-        public string Method {
-            get { throw new NotImplementedException (); }
-        }
+	[DebuggerVisualizer ("ServiceOperation={Name}")]
+	public class ServiceOperation
+	{
+		public string Method {
+			get { throw new NotImplementedException (); }
+		}
 
-        public string MimeType {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		public string MimeType {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        public string Name {
-            get { throw new NotImplementedException (); }
-        }
+		public string Name {
+			get { throw new NotImplementedException (); }
+		}
 
-        public ReadOnlyCollection <ServiceOperationParameter> Parameters {
-            get { throw new NotImplementedException (); }
-        }
+		public ReadOnlyCollection <ServiceOperationParameter> Parameters {
+			get { throw new NotImplementedException (); }
+		}
 
-        public ServiceOperationResultKind ResultKind {
-            get { throw new NotImplementedException (); }
-        }
+		public ServiceOperationResultKind ResultKind {
+			get { throw new NotImplementedException (); }
+		}
 
-        public ResourceType ResultType {
-            get { throw new NotImplementedException (); }
-        }
+		public ResourceType ResultType {
+			get { throw new NotImplementedException (); }
+		}
 
-        public object CustomState {
-            get; set;
-        }
+		public object CustomState {
+			get; set;
+		}
 
-        public bool IsReadOnly {
-            get { throw new NotImplementedException (); }
-        }
+		public bool IsReadOnly {
+			get { throw new NotImplementedException (); }
+		}
 
-        public ResourceSet ResourceSet {
-            get { throw new NotImplementedException (); }
-        }
+		public ResourceSet ResourceSet {
+			get { throw new NotImplementedException (); }
+		}
 
-        public ServiceOperation (string name, ServiceOperationResultKind resultKind, ResourceType resultType, ResourceSet resultSet, string method, IEnumerable <ServiceOperationParameter> parameters)
-        {
-            throw new NotImplementedException ();
-        }
+		public ServiceOperation (string name, ServiceOperationResultKind resultKind, ResourceType resultType, ResourceSet resultSet, string method, IEnumerable <ServiceOperationParameter> parameters)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public void SetReadOnly ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public void SetReadOnly ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

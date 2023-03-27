@@ -5,12 +5,12 @@
 using System;
 
 class Test {
-    static void test(ref IConvertible i) {
-    }
-    
-    static void Main() {
-        int i = 1;
+	static void test(ref IConvertible i) {
+	}
+	
+	static void Main() {
+		int i = 1;
 
-        test (ref (IConvertible) i);
-    }
+		test (ref (IConvertible) i);
+	}
 }

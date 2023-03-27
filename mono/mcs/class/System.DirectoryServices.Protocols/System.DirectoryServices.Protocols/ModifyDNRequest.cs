@@ -33,28 +33,28 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class ModifyDNRequest : DirectoryRequest
-    {
-        public ModifyDNRequest ()
-        {
-        }
+	public class ModifyDNRequest : DirectoryRequest
+	{
+		public ModifyDNRequest ()
+		{
+		}
 
-        public ModifyDNRequest (string distinguishedName, string newParentDistinguishedName, string newName)
-        {
-            DistinguishedName = distinguishedName;
-            NewParentDistinguishedName = newParentDistinguishedName;
-            NewName = newName;
-        }
+		public ModifyDNRequest (string distinguishedName, string newParentDistinguishedName, string newName)
+		{
+			DistinguishedName = distinguishedName;
+			NewParentDistinguishedName = newParentDistinguishedName;
+			NewName = newName;
+		}
 
-        public bool DeleteOldRdn { get; set; }
-        public string DistinguishedName { get; set; }
-        public string NewName { get; set; }
-        public string NewParentDistinguishedName { get; set; }
+		public bool DeleteOldRdn { get; set; }
+		public string DistinguishedName { get; set; }
+		public string NewName { get; set; }
+		public string NewParentDistinguishedName { get; set; }
 
-        [MonoTODO]
-        protected override XmlElement ToXmlNode (XmlDocument doc)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected override XmlElement ToXmlNode (XmlDocument doc)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

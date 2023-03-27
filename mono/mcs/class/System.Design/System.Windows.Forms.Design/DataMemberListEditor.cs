@@ -37,11 +37,11 @@ using System.Windows.Forms.Design;
 namespace System.Windows.Forms.Design
 {
 
-    [MonoTODO]
-    internal sealed class DataMemberListEditor : UITypeEditor
-    {
-        public DataMemberListEditor ()
-        {
-        }
-    }
+	[MonoTODO]
+	internal sealed class DataMemberListEditor : UITypeEditor
+	{
+		public DataMemberListEditor ()
+		{
+		}
+	}
 }

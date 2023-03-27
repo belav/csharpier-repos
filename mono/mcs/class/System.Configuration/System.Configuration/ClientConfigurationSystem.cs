@@ -32,42 +32,42 @@ using System.Configuration.Internal;
 
 namespace System.Configuration
 {
-    internal class ClientConfigurationSystem : IInternalConfigSystem
-    {
-        Configuration cfg;
+	internal class ClientConfigurationSystem : IInternalConfigSystem
+	{
+		Configuration cfg;
 
-        public ClientConfigurationSystem ()
-        {
-        }
+		public ClientConfigurationSystem ()
+		{
+		}
 
-        private Configuration Configuration {
-            get {
-                if (cfg == null) {
-                    Assembly a = Assembly.GetEntryAssembly();
+		private Configuration Configuration {
+			get {
+				if (cfg == null) {
+					Assembly a = Assembly.GetEntryAssembly();
 
-                    try {
-                        cfg = ConfigurationManager.OpenExeConfigurationInternal (
-                            ConfigurationUserLevel.None, a, null);
-                    } catch (Exception ex) {
-                        throw new ConfigurationErrorsException ("Error Initializing the configuration system.", ex);
-                    }
-                }
-                return cfg;
-            }
-        }
+					try {
+						cfg = ConfigurationManager.OpenExeConfigurationInternal (
+							ConfigurationUserLevel.None, a, null);
+					} catch (Exception ex) {
+						throw new ConfigurationErrorsException ("Error Initializing the configuration system.", ex);
+					}
+				}
+				return cfg;
+			}
+		}
 
-        object IInternalConfigSystem.GetSection (string configKey)
-        {
-            ConfigurationSection s = Configuration.GetSection (configKey);
-            return s != null ? s.GetRuntimeObject () : null;
-        }
+		object IInternalConfigSystem.GetSection (string configKey)
+		{
+			ConfigurationSection s = Configuration.GetSection (configKey);
+			return s != null ? s.GetRuntimeObject () : null;
+		}
 
-        void IInternalConfigSystem.RefreshConfig (string sectionName)
-        {
-        }
+		void IInternalConfigSystem.RefreshConfig (string sectionName)
+		{
+		}
 
-        bool IInternalConfigSystem.SupportsUserConfig {
-            get { return false; }
-        }
-    }
+		bool IInternalConfigSystem.SupportsUserConfig {
+			get { return false; }
+		}
+	}
 }

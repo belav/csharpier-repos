@@ -3,5 +3,5 @@
 
 class C
 {
-    public static extern bool operator +(C obj, C obj);
+	public static extern bool operator +(C obj, C obj);
 }

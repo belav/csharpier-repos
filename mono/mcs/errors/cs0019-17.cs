@@ -3,10 +3,10 @@
 
 class S
 {
-    static int i;
-    
-    static bool Foo ()
-    {
-        return i == "";
-    }
+	static int i;
+	
+	static bool Foo ()
+	{
+		return i == "";
+	}
 }

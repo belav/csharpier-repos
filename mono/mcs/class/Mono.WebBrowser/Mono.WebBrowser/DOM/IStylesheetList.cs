@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -29,9 +29,9 @@ using System.Collections.Generic;
 
 namespace Mono.WebBrowser.DOM
 {
-    public interface IStylesheetList : IEnumerable
-    {
-        int Count { get; }
-        IStylesheet this [int index]{ get; set; }
-    }
+	public interface IStylesheetList : IEnumerable
+	{
+		int Count { get; }
+		IStylesheet this [int index]{ get; set; }
+	}
 }

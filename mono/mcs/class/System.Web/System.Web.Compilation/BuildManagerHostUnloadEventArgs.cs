@@ -2,7 +2,7 @@
 // System.Web.Compilation.BuildManagerHostUnloadEventArgs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,20 +33,20 @@ using System.Web;
 
 namespace System.Web.Compilation {
 
-    public class BuildManagerHostUnloadEventArgs : EventArgs
-    {
-        ApplicationShutdownReason reason;
+	public class BuildManagerHostUnloadEventArgs : EventArgs
+	{
+		ApplicationShutdownReason reason;
 
-        public BuildManagerHostUnloadEventArgs (ApplicationShutdownReason reason)
-        {
-            this.reason = reason;
-        }
+		public BuildManagerHostUnloadEventArgs (ApplicationShutdownReason reason)
+		{
+			this.reason = reason;
+		}
 
-        public ApplicationShutdownReason Reason {
-            get { return reason; }
-        }
+		public ApplicationShutdownReason Reason {
+			get { return reason; }
+		}
 
-    }
+	}
 
 }
 

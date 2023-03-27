@@ -33,31 +33,31 @@ using System.ServiceModel.Discovery;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-    [ServiceContract (Name = "TargetService", Namespace = MessageContracts11.NS, CallbackContract = typeof (IDiscoveryTargetCallbackContract11))]
-    internal interface IDiscoveryTargetContract11
-    {
-        [OperationContract (Name = "Probe11", Action = MessageContracts11.ProbeAction, AsyncPattern = true, IsOneWay = true)]
-        IAsyncResult BeginFind (MessageContracts11.FindRequest message, AsyncCallback callback, object state);
+	[ServiceContract (Name = "TargetService", Namespace = MessageContracts11.NS, CallbackContract = typeof (IDiscoveryTargetCallbackContract11))]
+	internal interface IDiscoveryTargetContract11
+	{
+		[OperationContract (Name = "Probe11", Action = MessageContracts11.ProbeAction, AsyncPattern = true, IsOneWay = true)]
+		IAsyncResult BeginFind (MessageContracts11.FindRequest message, AsyncCallback callback, object state);
 
-        void EndFind (IAsyncResult result);
+		void EndFind (IAsyncResult result);
 
-        [OperationContract (Name = "Resolve11", Action = MessageContracts11.ResolveAction, AsyncPattern = true, IsOneWay = true)]
-        IAsyncResult BeginResolve (MessageContracts11.ResolveRequest message, AsyncCallback callback, object state);
+		[OperationContract (Name = "Resolve11", Action = MessageContracts11.ResolveAction, AsyncPattern = true, IsOneWay = true)]
+		IAsyncResult BeginResolve (MessageContracts11.ResolveRequest message, AsyncCallback callback, object state);
 
-        void EndResolve (IAsyncResult result);
+		void EndResolve (IAsyncResult result);
 
-        [OperationContract (Name = "Hello11", Action = MessageContracts11.HelloAction, IsOneWay = true, AsyncPattern = true)]
-        IAsyncResult BeginOnlineAnnouncement (MessageContracts11.OnlineAnnouncement message, AsyncCallback callback, object state);
+		[OperationContract (Name = "Hello11", Action = MessageContracts11.HelloAction, IsOneWay = true, AsyncPattern = true)]
+		IAsyncResult BeginOnlineAnnouncement (MessageContracts11.OnlineAnnouncement message, AsyncCallback callback, object state);
 
-        void EndOnlineAnnouncement (IAsyncResult result);
-    }
+		void EndOnlineAnnouncement (IAsyncResult result);
+	}
 
-    internal interface IDiscoveryTargetCallbackContract11
-    {
-        [OperationContract (Name = "ProbeMatches11", Action = MessageContracts11.ProbeMatchAction, IsOneWay = true)]
-        void ReplyFind (MessageContracts11.FindResponse message);
+	internal interface IDiscoveryTargetCallbackContract11
+	{
+		[OperationContract (Name = "ProbeMatches11", Action = MessageContracts11.ProbeMatchAction, IsOneWay = true)]
+		void ReplyFind (MessageContracts11.FindResponse message);
 
-        [OperationContract (Name = "ResolveMatches11", Action = MessageContracts11.ResolveMatchAction, IsOneWay = true)]
-        void ReplyResolve (MessageContracts11.ResolveResponse message);
-    }
+		[OperationContract (Name = "ResolveMatches11", Action = MessageContracts11.ResolveMatchAction, IsOneWay = true)]
+		void ReplyResolve (MessageContracts11.ResolveResponse message);
+	}
 }

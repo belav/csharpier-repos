@@ -216,7 +216,7 @@ namespace System.Data.SqlTypes {
 
 
         private static TimeSpan ToTimeSpan(SqlDateTime value) {
-            long millisecond = (long)(value.m_time / SQLTicksPerMillisecond + 0.5);
+			long millisecond = (long)(value.m_time / SQLTicksPerMillisecond + 0.5);
             return new TimeSpan(value.m_day * TimeSpan.TicksPerDay +
                                 millisecond * TimeSpan.TicksPerMillisecond);
         }
@@ -239,7 +239,7 @@ namespace System.Data.SqlTypes {
 
         // Convert from TimeSpan, rounded to one three-hundredth second, due to loss of precision
         private static SqlDateTime FromTimeSpan(TimeSpan value) {
-            if (value < MinTimeSpan || value > MaxTimeSpan)
+			if (value < MinTimeSpan || value > MaxTimeSpan)
                 throw new SqlTypeException(SQLResource.DateTimeOverflowMessage);
 
             int day = value.Days;
@@ -259,7 +259,7 @@ namespace System.Data.SqlTypes {
                 // Make time to be zero, and increment day.
                 time = 0;
                 day ++;
-            }
+			}
 
             return new SqlDateTime(day, time);
         }

@@ -9,20 +9,20 @@ using Namespace1;
 
 public class Test
 {
-    public static int Main ()
-    {
-        // This shouldn't produce a clash
-        if (MyClass1.StaticMethod () != 2)
-            return 1;
-        if (GlobalClass.StaticMethod () != 2)
-            return 1;
+	public static int Main ()
+	{
+		// This shouldn't produce a clash
+		if (MyClass1.StaticMethod () != 2)
+			return 1;
+		if (GlobalClass.StaticMethod () != 2)
+			return 1;
 
-        if (MyAssembly01::GlobalClass.StaticMethod () != 1)
-            return 1;
-        if (MyAssembly02::GlobalClass.StaticMethod () != 2)
-            return 1;
+		if (MyAssembly01::GlobalClass.StaticMethod () != 1)
+			return 1;
+		if (MyAssembly02::GlobalClass.StaticMethod () != 2)
+			return 1;
 
-        return 0;
-    }
+		return 0;
+	}
 }
 

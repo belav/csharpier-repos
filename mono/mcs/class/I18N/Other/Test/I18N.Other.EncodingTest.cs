@@ -2,7 +2,7 @@
 // I18N.Other.EncodingTest.cs
 //
 // Author:
-//    Alexander Köplinger (alexander.koeplinger@xamarin.com)
+//	Alexander Köplinger (alexander.koeplinger@xamarin.com)
 //
 // Copyright (C) 2017 Xamarin, Inc.
 //
@@ -36,21 +36,21 @@ using MonoTests.I18N;
 
 namespace MonoTests.I18N.Other
 {
-    [TestFixture]
-    public class EncodingTest : EncodingTestBase
-    {
-        static CodePageTestInfo[] codepageTestInfos = new CodePageTestInfo[]
-        {
-            new CodePageTestInfo { CodePage = 874,   IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u0e48', A8Char = '\u0e08' },
-            new CodePageTestInfo { CodePage = 1251,  IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u0401' },
-            new CodePageTestInfo { CodePage = 1257,  IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 194, A0Char = '\u00a0', A8Char = '\u00d8' },
-            new CodePageTestInfo { CodePage = 1258,  IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
-            new CodePageTestInfo { CodePage = 20866, IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u2550', A8Char = '\u2557' },
-            new CodePageTestInfo { CodePage = 21866, IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u2550', A8Char = '\u2557' },
-            new CodePageTestInfo { CodePage = 28594, IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 192, A0Char = '\u00a0', A8Char = '\u00a8' },
-            new CodePageTestInfo { CodePage = 28595, IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u0408' },
-            new CodePageTestInfo { CodePage = 57002, IsBrowserDisplay = false, IsBrowserSave = false, IsMailNewsDisplay = false, IsMailNewsSave = false, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u0920', A8Char = '\u0928', SkipEncoderFallback2Test = true }, // FIXME: SkipEncoderFallback2Test
-        };
-    }
+	[TestFixture]
+	public class EncodingTest : EncodingTestBase
+	{
+		static CodePageTestInfo[] codepageTestInfos = new CodePageTestInfo[]
+		{
+			new CodePageTestInfo { CodePage = 874,   IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u0e48', A8Char = '\u0e08' },
+			new CodePageTestInfo { CodePage = 1251,  IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u0401' },
+			new CodePageTestInfo { CodePage = 1257,  IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 194, A0Char = '\u00a0', A8Char = '\u00d8' },
+			new CodePageTestInfo { CodePage = 1258,  IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u00a8' },
+			new CodePageTestInfo { CodePage = 20866, IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u2550', A8Char = '\u2557' },
+			new CodePageTestInfo { CodePage = 21866, IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u2550', A8Char = '\u2557' },
+			new CodePageTestInfo { CodePage = 28594, IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 192, A0Char = '\u00a0', A8Char = '\u00a8' },
+			new CodePageTestInfo { CodePage = 28595, IsBrowserDisplay = true,  IsBrowserSave = true,  IsMailNewsDisplay = true,  IsMailNewsSave = true,  SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u00a0', A8Char = '\u0408' },
+			new CodePageTestInfo { CodePage = 57002, IsBrowserDisplay = false, IsBrowserSave = false, IsMailNewsDisplay = false, IsMailNewsSave = false, SuperscriptFiveReplacementChar = 63, InfinityReplacementChar = 63, FFReplacementChar = 63, A0Char = '\u0920', A8Char = '\u0928', SkipEncoderFallback2Test = true }, // FIXME: SkipEncoderFallback2Test
+		};
+	}
 }
 

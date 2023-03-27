@@ -22,14 +22,14 @@ class Test
 
     static int Main ()
     {
-        var m = typeof (Test).GetMethod ("Foo2");
-        var gp = m.GetGenericArguments ();
-        var t = gp[0];
-        var u = gp[1];
-        Console.WriteLine (t);
-        Console.WriteLine (u);
-        Console.WriteLine (t.IsAssignableFrom (u));
-        Console.WriteLine (u.IsAssignableFrom (t));
+		var m = typeof (Test).GetMethod ("Foo2");
+		var gp = m.GetGenericArguments ();
+		var t = gp[0];
+		var u = gp[1];
+		Console.WriteLine (t);
+		Console.WriteLine (u);
+		Console.WriteLine (t.IsAssignableFrom (u));
+		Console.WriteLine (u.IsAssignableFrom (t));
         return 0;
     }
 }

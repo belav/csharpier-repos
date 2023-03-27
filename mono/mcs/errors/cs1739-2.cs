@@ -3,17 +3,17 @@
 
 class A
 {
-    public int this [int id] {
-        set {
-        }
-    }
+	public int this [int id] {
+		set {
+		}
+	}
 }
 
 class B
 {
-    public static void Main ()
-    {
-        A a = new A ();
-        a [value:1] = 9;
-    }
+	public static void Main ()
+	{
+		A a = new A ();
+		a [value:1] = 9;
+	}
 }

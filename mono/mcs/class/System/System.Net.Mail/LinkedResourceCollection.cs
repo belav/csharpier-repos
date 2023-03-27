@@ -2,7 +2,7 @@
 // System.Net.Mail.LinkedResourceCollection.cs
 //
 // Author:
-//    John Luke (john.luke@gmail.com)
+//	John Luke (john.luke@gmail.com)
 //
 // Copyright (C) John Luke, 2005
 //
@@ -32,57 +32,57 @@ using System.Collections.ObjectModel;
 using System.Net.Mime;
 
 namespace System.Net.Mail {
-    public sealed class LinkedResourceCollection : Collection<LinkedResource>, IDisposable
-    {
-        #region Fields
-        
-        #endregion // Fields
+	public sealed class LinkedResourceCollection : Collection<LinkedResource>, IDisposable
+	{
+		#region Fields
+		
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        internal LinkedResourceCollection ()
-        {
-        }
+		internal LinkedResourceCollection ()
+		{
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        public void Dispose ()
-        {
-            Dispose (true);
-            GC.SuppressFinalize (this);
-        }
+		public void Dispose ()
+		{
+			Dispose (true);
+			GC.SuppressFinalize (this);
+		}
 
-        private void Dispose (bool disposing)
-        {
-        }
+		private void Dispose (bool disposing)
+		{
+		}
 
-        protected override void ClearItems ()
-        {
-            base.ClearItems ();
-        }
+		protected override void ClearItems ()
+		{
+			base.ClearItems ();
+		}
 
-        protected override void InsertItem (int index, LinkedResource item)
-        {
-            base.InsertItem (index, item);
-        }
+		protected override void InsertItem (int index, LinkedResource item)
+		{
+			base.InsertItem (index, item);
+		}
 
-        protected override void RemoveItem (int index)
-        {
-            base.RemoveItem (index);
-        }
+		protected override void RemoveItem (int index)
+		{
+			base.RemoveItem (index);
+		}
 
-        protected override void SetItem (int index, LinkedResource item)
-        {
-            base.SetItem (index, item);
-        }
+		protected override void SetItem (int index, LinkedResource item)
+		{
+			base.SetItem (index, item);
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }
 

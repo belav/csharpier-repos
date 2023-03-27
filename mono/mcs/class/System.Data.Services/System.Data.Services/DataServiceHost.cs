@@ -1,4 +1,4 @@
-//
+﻿//
 // DataServiceHost.cs
 //
 // Author:
@@ -29,11 +29,11 @@
 using System.ServiceModel.Web;
 
 namespace System.Data.Services {
-    [CLSCompliant (false)]
-    public class DataServiceHost : WebServiceHost {
-        public DataServiceHost (Type serviceType, Uri[] baseAddresses)
-            : base (serviceType, baseAddresses)
-        {
-        }
-    }
+	[CLSCompliant (false)]
+	public class DataServiceHost : WebServiceHost {
+		public DataServiceHost (Type serviceType, Uri[] baseAddresses)
+			: base (serviceType, baseAddresses)
+		{
+		}
+	}
 }

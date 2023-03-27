@@ -4,13 +4,13 @@
 
  class Error0274 
  {
-     protected internal string Message {
-         protected get {
-             return "Hi";
-         }
-         internal set {
-         }
-     }
+	 protected internal string Message {
+		 protected get {
+			 return "Hi";
+		 }
+		 internal set {
+		 }
+	 }
 
  }
 

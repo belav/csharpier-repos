@@ -28,25 +28,25 @@
 
 namespace Mono.Cecil {
 
-    using System;
+	using System;
 
-    internal sealed class AssemblyNameDefinition : AssemblyNameReference {
+	internal sealed class AssemblyNameDefinition : AssemblyNameReference {
 
-        public override byte [] Hash {
-            get { return new byte [0]; }
-        }
+		public override byte [] Hash {
+			get { return new byte [0]; }
+		}
 
-        public AssemblyNameDefinition () : base()
-        {
-        }
+		public AssemblyNameDefinition () : base()
+		{
+		}
 
-        public AssemblyNameDefinition (string name, string culture, Version version) : base (name, culture, version)
-        {
-        }
+		public AssemblyNameDefinition (string name, string culture, Version version) : base (name, culture, version)
+		{
+		}
 
-        public override void Accept (IReflectionStructureVisitor visitor)
-        {
-            visitor.VisitAssemblyNameDefinition (this);
-        }
-    }
+		public override void Accept (IReflectionStructureVisitor visitor)
+		{
+			visitor.VisitAssemblyNameDefinition (this);
+		}
+	}
 }

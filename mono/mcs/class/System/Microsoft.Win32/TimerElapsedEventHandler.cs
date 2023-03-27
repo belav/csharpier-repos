@@ -29,7 +29,7 @@
 //
 namespace Microsoft.Win32 {
 
-    /// <summary>
-    /// </summary>
+	/// <summary>
+	/// </summary>
 public delegate void TimerElapsedEventHandler(object sender,   TimerElapsedEventArgs e);
 }

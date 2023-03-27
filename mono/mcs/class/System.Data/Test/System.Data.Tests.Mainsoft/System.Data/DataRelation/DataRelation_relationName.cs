@@ -39,77 +39,77 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRelation_relationName : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRelation_relationName tc = new DataRelation_relationName();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRelation_relationName");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRelation_relationName tc = new DataRelation_relationName();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRelation_relationName");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        DataSet ds = new DataSet();
-        DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable();
-        DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
-        ds.Tables.Add(dtParent);
-        ds.Tables.Add(dtChild);
+	public void run()
+	{
+		Exception exp = null;
+		DataSet ds = new DataSet();
+		DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable();
+		DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+		ds.Tables.Add(dtParent);
+		ds.Tables.Add(dtChild);
 
-        DataRelation dRel;
-        dRel = new DataRelation(null,dtParent.Columns[0],dtChild.Columns[0]);
-                
-        try
-        {
-            BeginCase("RelationName default 1");
-            Compare(dRel.RelationName , string.Empty );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		DataRelation dRel;
+		dRel = new DataRelation(null,dtParent.Columns[0],dtChild.Columns[0]);
+				
+		try
+		{
+			BeginCase("RelationName default 1");
+			Compare(dRel.RelationName , string.Empty );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        ds.Relations.Add(dRel);
+		ds.Relations.Add(dRel);
 
-        try
-        {
-            BeginCase("RelationName default 2");
-            Compare(dRel.RelationName , "Relation1");
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("RelationName default 2");
+			Compare(dRel.RelationName , "Relation1");
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        dRel.RelationName = "myRelation";
+		dRel.RelationName = "myRelation";
 
-        try
-        {
-            BeginCase("RelationName get/set");
-            Compare(dRel.RelationName ,"myRelation");
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    
-    }
+		try
+		{
+			BeginCase("RelationName get/set");
+			Compare(dRel.RelationName ,"myRelation");
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	
+	}
 }
 }

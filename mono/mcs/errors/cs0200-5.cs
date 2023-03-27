@@ -3,10 +3,10 @@
 
 class C
 {
-    public static int S { get; }
+	public static int S { get; }
 
-    public C ()
-    {
-        S = 3;
-    }
+	public C ()
+	{
+		S = 3;
+	}
 }

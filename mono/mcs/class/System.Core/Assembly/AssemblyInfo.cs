@@ -2,7 +2,7 @@
 // AssemblyInfo.cs
 //
 // Authors:
-//    Marek Safar (marek.safar@gmail.com)
+//	Marek Safar (marek.safar@gmail.com)
 //
 // Copyright (C) 2007-2008 Novell, Inc (http://www.novell.com)
 //
@@ -53,16 +53,16 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant (true)]
 [assembly: AssemblyDelaySign (true)]
 #if MOBILE
-    // attributes specific to FX 3.5
-    [assembly: AssemblyKeyFile ("../silverlight.pub")]
+	// attributes specific to FX 3.5
+	[assembly: AssemblyKeyFile ("../silverlight.pub")]
 #else
-    // attributes specific to Silverlight 2.0
-    [assembly: AssemblyKeyFile ("../ecma.pub")]
+	// attributes specific to Silverlight 2.0
+	[assembly: AssemblyKeyFile ("../ecma.pub")]
 
-    [assembly: AllowPartiallyTrustedCallers]
-    [assembly: DefaultDependency (LoadHint.Always)]
-    [assembly: SecurityCritical]
-    [assembly: StringFreezing]
+	[assembly: AllowPartiallyTrustedCallers]
+	[assembly: DefaultDependency (LoadHint.Always)]
+	[assembly: SecurityCritical]
+	[assembly: StringFreezing]
 #endif
 
 [assembly: ComVisible (false)]

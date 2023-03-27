@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 public class C
 {
-    public static void Test ([Optional] int u = 2)
-    {
-    }
+	public static void Test ([Optional] int u = 2)
+	{
+	}
 }

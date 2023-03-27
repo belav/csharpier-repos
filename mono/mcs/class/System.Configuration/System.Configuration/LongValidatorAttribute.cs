@@ -2,7 +2,7 @@
 // System.Configuration.LongValidatorAttribute.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,41 +30,41 @@ using System;
 
 namespace System.Configuration {
 
-    [AttributeUsage (AttributeTargets.Property)]
-    public sealed class LongValidatorAttribute : ConfigurationValidatorAttribute
-    {
-        bool excludeRange = false;
-        long maxValue = 0;
-        long minValue = 0;
-        ConfigurationValidatorBase instance;
+	[AttributeUsage (AttributeTargets.Property)]
+	public sealed class LongValidatorAttribute : ConfigurationValidatorAttribute
+	{
+		bool excludeRange = false;
+		long maxValue = 0;
+		long minValue = 0;
+		ConfigurationValidatorBase instance;
 
-        public LongValidatorAttribute ()
-        {
-        }
+		public LongValidatorAttribute ()
+		{
+		}
 
-        public bool ExcludeRange {
-            get { return excludeRange; }
-            set { excludeRange = value; instance = null; }
-        }
+		public bool ExcludeRange {
+			get { return excludeRange; }
+			set { excludeRange = value; instance = null; }
+		}
 
-        public long MaxValue {
-            get { return maxValue; }
-            set { maxValue = value; instance = null; }
-        }
+		public long MaxValue {
+			get { return maxValue; }
+			set { maxValue = value; instance = null; }
+		}
 
-        public long MinValue {
-            get { return minValue; }
-            set { minValue = value; instance = null; }
-        }
+		public long MinValue {
+			get { return minValue; }
+			set { minValue = value; instance = null; }
+		}
 
-        public override ConfigurationValidatorBase ValidatorInstance {
-            get {
-                if (instance == null)
-                    instance = new LongValidator (minValue, maxValue, excludeRange);
+		public override ConfigurationValidatorBase ValidatorInstance {
+			get {
+				if (instance == null)
+					instance = new LongValidator (minValue, maxValue, excludeRange);
 
-                return instance;
-            }
-        }
-    }
+				return instance;
+			}
+		}
+	}
 }
 

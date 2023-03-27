@@ -2,7 +2,7 @@
 // VisitorForIsUnaryExpression.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,26 +31,26 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding {
-    class VisitorForIsUnaryExpression<V, E> : QueryVisitor<V, E>
-        where V : IEquatable<V>
-        where E : IEquatable<E> {
-        private E Argument;
-        private UnaryOperator Operator;
+	class VisitorForIsUnaryExpression<V, E> : QueryVisitor<V, E>
+		where V : IEquatable<V>
+		where E : IEquatable<E> {
+		private E Argument;
+		private UnaryOperator Operator;
 
-        public static bool IsUnary (E expr, out UnaryOperator op, out E arg, FullExpressionDecoder<V, E> decoder)
-        {
-            VisitorForIsUnaryExpression<V, E> v = decoder.UnaryExpressionVisitor;
-            bool res = Decode (expr, v, decoder);
-            op = v.Operator;
-            arg = v.Argument;
-            return res;
-        }
+		public static bool IsUnary (E expr, out UnaryOperator op, out E arg, FullExpressionDecoder<V, E> decoder)
+		{
+			VisitorForIsUnaryExpression<V, E> v = decoder.UnaryExpressionVisitor;
+			bool res = Decode (expr, v, decoder);
+			op = v.Operator;
+			arg = v.Argument;
+			return res;
+		}
 
-        public override bool Unary (E pc, UnaryOperator op, bool unsigned, V dest, E source, Dummy data)
-        {
-            this.Argument = source;
-            this.Operator = op;
-            return true;
-        }
-    }
+		public override bool Unary (E pc, UnaryOperator op, bool unsigned, V dest, E source, Dummy data)
+		{
+			this.Argument = source;
+			this.Operator = op;
+			return true;
+		}
+	}
 }

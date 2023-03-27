@@ -2,9 +2,9 @@
 // System.Diagnostics.EventLogPermissionAttribute.cs
 //
 // Authors:
-//    Jonathan Pryor (jonpryor@vt.edu)
-//    Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Jonathan Pryor (jonpryor@vt.edu)
+//	Andreas Nahr (ClassDevelopment@A-SoftTech.com)
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002
 // (C) 2003 Andreas Nahr
@@ -35,44 +35,44 @@ using System.Security.Permissions;
 
 namespace System.Diagnostics {
 
-    [AttributeUsage (
-        AttributeTargets.Assembly | AttributeTargets.Class |
-        AttributeTargets.Struct | AttributeTargets.Constructor |
-        AttributeTargets.Method | AttributeTargets.Event,
-        AllowMultiple=true, Inherited=false)]
-    [Serializable]
-    public class EventLogPermissionAttribute : CodeAccessSecurityAttribute {
+	[AttributeUsage (
+		AttributeTargets.Assembly | AttributeTargets.Class |
+		AttributeTargets.Struct | AttributeTargets.Constructor |
+		AttributeTargets.Method | AttributeTargets.Event,
+		AllowMultiple=true, Inherited=false)]
+	[Serializable]
+	public class EventLogPermissionAttribute : CodeAccessSecurityAttribute {
 
-        private string machineName;
-        private EventLogPermissionAccess permissionAccess;
+		private string machineName;
+		private EventLogPermissionAccess permissionAccess;
 
-        public EventLogPermissionAttribute (SecurityAction action)
-            : base (action)
-        {
-            machineName = ResourcePermissionBase.Local;
-            permissionAccess = EventLogPermissionAccess.Write;
-        }
+		public EventLogPermissionAttribute (SecurityAction action)
+			: base (action)
+		{
+			machineName = ResourcePermissionBase.Local;
+			permissionAccess = EventLogPermissionAccess.Write;
+		}
 
-        public string MachineName {
-            get { return machineName; }
-            set {
-                ResourcePermissionBase.ValidateMachineName (value);
-                machineName = value;
-            }
-        }
+		public string MachineName {
+			get { return machineName; }
+			set {
+				ResourcePermissionBase.ValidateMachineName (value);
+				machineName = value;
+			}
+		}
 
-        public EventLogPermissionAccess PermissionAccess {
-            get { return permissionAccess; }
-            set { permissionAccess = value; }
-        }
+		public EventLogPermissionAccess PermissionAccess {
+			get { return permissionAccess; }
+			set { permissionAccess = value; }
+		}
 
-        public override IPermission CreatePermission ()
-        {
-            if (base.Unrestricted) {
-                return new EventLogPermission (PermissionState.Unrestricted); 
-            }
-            return new EventLogPermission (permissionAccess, machineName); 
-        }
-    }
+		public override IPermission CreatePermission ()
+		{
+			if (base.Unrestricted) {
+				return new EventLogPermission (PermissionState.Unrestricted); 
+			}
+			return new EventLogPermission (permissionAccess, machineName); 
+		}
+	}
 }
 

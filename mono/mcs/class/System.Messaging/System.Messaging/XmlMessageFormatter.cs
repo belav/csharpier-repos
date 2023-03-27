@@ -5,7 +5,7 @@
 //      Peter Van Isacker (sclytrack@planetinternet.be)
 //      Rafael Teixeira   (rafaelteixeirabr@hotmail.com)
 //
-//    (C) 2003 Peter Van Isacker
+//	(C) 2003 Peter Van Isacker
 //
 
 //
@@ -38,106 +38,106 @@ using System.Xml.Serialization;
 
 namespace System.Messaging 
 {
-    public class XmlMessageFormatter: IMessageFormatter, ICloneable 
-    {
-        private ArrayList targetTypes = new ArrayList ();        
-    
-        public XmlMessageFormatter()
-        {
-        }
-        
-        public XmlMessageFormatter(string[] targetTypeNames) : this (GetTypesFromNames (targetTypeNames))
-        {
-        }
-        
-        public XmlMessageFormatter(Type[] targetTypes)
-        {
-            this.targetTypes = new ArrayList (targetTypes);
-        }
+	public class XmlMessageFormatter: IMessageFormatter, ICloneable 
+	{
+		private ArrayList targetTypes = new ArrayList ();		
+	
+		public XmlMessageFormatter()
+		{
+		}
+		
+		public XmlMessageFormatter(string[] targetTypeNames) : this (GetTypesFromNames (targetTypeNames))
+		{
+		}
+		
+		public XmlMessageFormatter(Type[] targetTypes)
+		{
+			this.targetTypes = new ArrayList (targetTypes);
+		}
 
-        private static Type[] GetTypesFromNames(string[] targetTypeNames)
-        {
-            Type[] ts = new Type[targetTypeNames.Length];
-            for (int i = 0; i < targetTypeNames.Length; i++)
-                ts[i] = Type.GetType (targetTypeNames[i]);
-            
-            return ts;
-        }
+		private static Type[] GetTypesFromNames(string[] targetTypeNames)
+		{
+			Type[] ts = new Type[targetTypeNames.Length];
+			for (int i = 0; i < targetTypeNames.Length; i++)
+				ts[i] = Type.GetType (targetTypeNames[i]);
+			
+			return ts;
+		}
 
-        [MessagingDescription ("XmlMsgTargetTypeNames")]
-        public string[] TargetTypeNames 
-        {
-            get 
-            {
-                if (targetTypes == null)
-                    return null;
-                    
-                ArrayList listOfNames = new ArrayList (targetTypes.Count);
-                foreach (Type type in targetTypes)
-                    listOfNames.Add (type.FullName);
-                return (string[]) listOfNames.ToArray (typeof (string));
-            }
-            set { TargetTypes = GetTypesFromNames (value); }
-        }
+		[MessagingDescription ("XmlMsgTargetTypeNames")]
+		public string[] TargetTypeNames 
+		{
+			get 
+			{
+				if (targetTypes == null)
+					return null;
+					
+				ArrayList listOfNames = new ArrayList (targetTypes.Count);
+				foreach (Type type in targetTypes)
+					listOfNames.Add (type.FullName);
+				return (string[]) listOfNames.ToArray (typeof (string));
+			}
+			set { TargetTypes = GetTypesFromNames (value); }
+		}
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MessagingDescription ("XmlMsgTargetTypes")]
-        public Type[] TargetTypes
-        {
-            get { return (Type[]) targetTypes.ToArray (typeof (Type)); }
-            set { targetTypes = new ArrayList (value); }
-        }
-        
-        [MonoTODO]
-        public bool CanRead(Message message)
-        {
-            // Need an implementation of XmlNodeReader.
-            throw new NotImplementedException();
-        }
-        
-        public object Clone()
-        {
-            return new XmlMessageFormatter((Type[])TargetTypes.Clone());
-        }
-        
-        private void AddType (Type t)
-        {
-            targetTypes.Add (t);
-        }
-                
-        public object Read(Message message)
-        {
-            message.BodyStream.Seek (0, SeekOrigin.Begin);
-            foreach (Type t in targetTypes) {
-                XmlSerializer serializer = new XmlSerializer (t);
-                try {
-                    return serializer.Deserialize (message.BodyStream);
-                } catch (InvalidOperationException e) {
-                    Console.WriteLine (e);
-                }
-            }
-            string error = "Unable to deserialize message body.  Type is not one of: " 
-                + String.Join (",", TargetTypeNames);
-            throw new InvalidOperationException (error);
-        }
-        
-        public void Write(Message message, object obj)
-        {
-            if (message == null)
-                throw new ArgumentNullException ();
-                
-            Stream stream = message.BodyStream;
-            if (stream == null) {
-                stream = new MemoryStream ();
-                message.BodyStream = stream;
-            }
+		[Browsable (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[MessagingDescription ("XmlMsgTargetTypes")]
+		public Type[] TargetTypes
+		{
+			get { return (Type[]) targetTypes.ToArray (typeof (Type)); }
+			set { targetTypes = new ArrayList (value); }
+		}
+		
+		[MonoTODO]
+		public bool CanRead(Message message)
+		{
+			// Need an implementation of XmlNodeReader.
+			throw new NotImplementedException();
+		}
+		
+		public object Clone()
+		{
+			return new XmlMessageFormatter((Type[])TargetTypes.Clone());
+		}
+		
+		private void AddType (Type t)
+		{
+			targetTypes.Add (t);
+		}
+				
+		public object Read(Message message)
+		{
+			message.BodyStream.Seek (0, SeekOrigin.Begin);
+			foreach (Type t in targetTypes) {
+				XmlSerializer serializer = new XmlSerializer (t);
+				try {
+					return serializer.Deserialize (message.BodyStream);
+				} catch (InvalidOperationException e) {
+					Console.WriteLine (e);
+				}
+			}
+			string error = "Unable to deserialize message body.  Type is not one of: " 
+				+ String.Join (",", TargetTypeNames);
+			throw new InvalidOperationException (error);
+		}
+		
+		public void Write(Message message, object obj)
+		{
+			if (message == null)
+				throw new ArgumentNullException ();
+				
+			Stream stream = message.BodyStream;
+			if (stream == null) {
+				stream = new MemoryStream ();
+				message.BodyStream = stream;
+			}
 
-            XmlSerializer serializer = new XmlSerializer (obj.GetType ());
-            serializer.Serialize (stream, obj);
+			XmlSerializer serializer = new XmlSerializer (obj.GetType ());
+			serializer.Serialize (stream, obj);
 
-            message.BodyType = (int) FormatterTypes.Xml;
-            AddType (obj.GetType ());
-        }
-    }
+			message.BodyType = (int) FormatterTypes.Xml;
+			AddType (obj.GetType ());
+		}
+	}
 }

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1018,18 +1018,18 @@ using System.Linq;
 
 class C
 {
-    int Z(Func<int> f)
-    {
-        return 1;
-    }
+	int Z(Func<int> f)
+	{
+		return 1;
+	}
 
     void F()
     {
-        var <N:10>result = <N:0>from a in new[] { 1 }</N:0>
-                           <N:1>from b in <N:9>new[] { 1 }</N:9></N:1>
-                           <N:2>where <N:7>Z(<N:5>() => a</N:5>) > 0</N:7></N:2>
-                           <N:3>where <N:8>Z(<N:6>() => b</N:6>) > 0</N:8></N:3>
-                           <N:4>select a</N:4></N:10>;
+		var <N:10>result = <N:0>from a in new[] { 1 }</N:0>
+		                   <N:1>from b in <N:9>new[] { 1 }</N:9></N:1>
+		                   <N:2>where <N:7>Z(<N:5>() => a</N:5>) > 0</N:7></N:2>
+		                   <N:3>where <N:8>Z(<N:6>() => b</N:6>) > 0</N:8></N:3>
+		                   <N:4>select a</N:4></N:10>;
     }
 }");
 
@@ -1039,18 +1039,18 @@ using System.Linq;
 
 class C
 {
-    int Z(Func<int> f)
-    {
-        return 1;
-    }
+	int Z(Func<int> f)
+	{
+		return 1;
+	}
 
     void F()
     {
-        var <N:10>result = <N:0>from a in new[] { 1 }</N:0>
-                           <N:1>from b in <N:9>new[] { 2 }</N:9></N:1>
-                           <N:2>where <N:7>Z(<N:5>() => a</N:5>) > 1</N:7></N:2>
-                           <N:3>where <N:8>Z(<N:6>() => b</N:6>) > 2</N:8></N:3>
-                           <N:4>select a</N:4></N:10>;
+		var <N:10>result = <N:0>from a in new[] { 1 }</N:0>
+		                   <N:1>from b in <N:9>new[] { 2 }</N:9></N:1>
+		                   <N:2>where <N:7>Z(<N:5>() => a</N:5>) > 1</N:7></N:2>
+		                   <N:3>where <N:8>Z(<N:6>() => b</N:6>) > 2</N:8></N:3>
+		                   <N:4>select a</N:4></N:10>;
     }
 }");
             var compilation0 = CreateCompilation(source0.Tree, options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
@@ -1111,16 +1111,16 @@ using System.Linq;
 
 class C
 {
-    int Z(Func<int> f)
-    {
-        return 1;
-    }
+	int Z(Func<int> f)
+	{
+		return 1;
+	}
 
     void F()
     {
-        var result = <N:0>from a in new[] { 1 }</N:0>
-                     <N:1>let b = <N:2>Z(<N:3>() => a</N:3>)</N:2></N:1>
-                     <N:4>select <N:5>a + b</N:5></N:4>;
+		var result = <N:0>from a in new[] { 1 }</N:0>
+		             <N:1>let b = <N:2>Z(<N:3>() => a</N:3>)</N:2></N:1>
+		             <N:4>select <N:5>a + b</N:5></N:4>;
     }
 }");
 
@@ -1130,16 +1130,16 @@ using System.Linq;
 
 class C
 {
-    int Z(Func<int> f)
-    {
-        return 1;
-    }
+	int Z(Func<int> f)
+	{
+		return 1;
+	}
 
     void F()
     {
-        var result = <N:0>from a in new[] { 1 }</N:0>
-                     <N:1>let b = <N:2>Z(<N:3>() => a</N:3>) + 1</N:2></N:1>
-                     <N:4>select <N:5>a + b</N:5></N:4>;
+		var result = <N:0>from a in new[] { 1 }</N:0>
+		             <N:1>let b = <N:2>Z(<N:3>() => a</N:3>) + 1</N:2></N:1>
+		             <N:4>select <N:5>a + b</N:5></N:4>;
     }
 }");
             var compilation0 = CreateCompilation(source0.Tree, options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All));

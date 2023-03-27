@@ -30,29 +30,29 @@ using System;
 
 namespace System.Web.Caching
 {
-    [Serializable]
-    public sealed class HeaderElement
-    {
-        public string Name {
-            get;
-            private set;
-        }
+	[Serializable]
+	public sealed class HeaderElement
+	{
+		public string Name {
+			get;
+			private set;
+		}
 
-        public string Value {
-            get;
-            private set;
-        }
-        
-        public HeaderElement (string name, string value)
-        {
-            // LAMESPEC: empty string in name is accepted
-            if (name == null)
-                throw new ArgumentNullException ("name");
-            if (value == null)
-                throw new ArgumentNullException ("value");
+		public string Value {
+			get;
+			private set;
+		}
+		
+		public HeaderElement (string name, string value)
+		{
+			// LAMESPEC: empty string in name is accepted
+			if (name == null)
+				throw new ArgumentNullException ("name");
+			if (value == null)
+				throw new ArgumentNullException ("value");
 
-            this.Name = name;
-            this.Value = value;
-        }
-    }
+			this.Name = name;
+			this.Value = value;
+		}
+	}
 }

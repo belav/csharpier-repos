@@ -6,11 +6,11 @@ using System;
 
 namespace Testing
 {
-    /// <summary>
-    /// description for interface IFoo
-    /// </summary>
-    public interface IFoo
-    {
-        void Foo ();
-    }
+	/// <summary>
+	/// description for interface IFoo
+	/// </summary>
+	public interface IFoo
+	{
+		void Foo ();
+	}
 }

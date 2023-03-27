@@ -23,5 +23,5 @@
 using System;
 
 namespace System.Data.OracleClient {
-    public delegate void OracleRowUpdatedEventHandler (object sender, OracleRowUpdatedEventArgs e);
+	public delegate void OracleRowUpdatedEventHandler (object sender, OracleRowUpdatedEventArgs e);
 }

@@ -2,19 +2,19 @@
 // Line: 13
 interface IFoo<T>
 {
-    void Test<U> ()
-        where U : T;
+	void Test<U> ()
+		where U : T;
 }
 
 class Foo<T> : IFoo<T>
 {
-    public void Test<V> ()
-        where V :X
-    { }
+	public void Test<V> ()
+		where V :X
+	{ }
 }
 
 class X
 {
-    static void Main ()
-    { }
+	static void Main ()
+	{ }
 }

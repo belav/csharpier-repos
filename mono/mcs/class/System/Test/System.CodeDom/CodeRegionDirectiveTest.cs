@@ -1,9 +1,9 @@
 //
 // CodeRegionDirectiveTest.cs
-//    - Unit tests for System.CodeDom.CodeRegionDirective
+//	- Unit tests for System.CodeDom.CodeRegionDirective
 //
 // Author:
-//    Gert Driesen  <drieseng@users.sourceforge.net>
+//	Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,53 +35,53 @@ using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {
-    [TestFixture]
-    public class CodeRegionDirectiveTest
-    {
-        [Test]
-        public void Constructor0 ()
-        {
-            CodeRegionDirective crd = new CodeRegionDirective ();
+	[TestFixture]
+	public class CodeRegionDirectiveTest
+	{
+		[Test]
+		public void Constructor0 ()
+		{
+			CodeRegionDirective crd = new CodeRegionDirective ();
 
-            Assert.AreEqual (CodeRegionMode.None, crd.RegionMode, "#1");
-            Assert.IsNotNull (crd.RegionText, "#2");
-            Assert.AreEqual (string.Empty, crd.RegionText, "#3");
+			Assert.AreEqual (CodeRegionMode.None, crd.RegionMode, "#1");
+			Assert.IsNotNull (crd.RegionText, "#2");
+			Assert.AreEqual (string.Empty, crd.RegionText, "#3");
 
-            crd.RegionText = null;
-            Assert.IsNotNull (crd.RegionText, "#4");
-            Assert.AreEqual (string.Empty, crd.RegionText, "#5");
+			crd.RegionText = null;
+			Assert.IsNotNull (crd.RegionText, "#4");
+			Assert.AreEqual (string.Empty, crd.RegionText, "#5");
 
-            string regionText = "mono";
-            crd.RegionText = regionText;
-            Assert.AreSame (regionText, crd.RegionText, "#6");
-        }
+			string regionText = "mono";
+			crd.RegionText = regionText;
+			Assert.AreSame (regionText, crd.RegionText, "#6");
+		}
 
-        [Test]
-        public void Constructor1 () {
-            string regionText = "mono";
-            CodeRegionMode regionMode = CodeRegionMode.Start;
+		[Test]
+		public void Constructor1 () {
+			string regionText = "mono";
+			CodeRegionMode regionMode = CodeRegionMode.Start;
 
-            CodeRegionDirective crd = new CodeRegionDirective (regionMode, 
-                regionText);
-            Assert.AreEqual (regionMode, crd.RegionMode, "#1");
-            Assert.IsNotNull (crd.RegionText, "#2");
-            Assert.AreSame (regionText, crd.RegionText, "#3");
+			CodeRegionDirective crd = new CodeRegionDirective (regionMode, 
+				regionText);
+			Assert.AreEqual (regionMode, crd.RegionMode, "#1");
+			Assert.IsNotNull (crd.RegionText, "#2");
+			Assert.AreSame (regionText, crd.RegionText, "#3");
 
-            crd = new CodeRegionDirective (regionMode, (string) null);
-            Assert.AreEqual (regionMode, crd.RegionMode, "#4");
-            Assert.IsNotNull (crd.RegionText, "#5");
-            Assert.AreEqual (string.Empty, crd.RegionText, "#6");
-        }
+			crd = new CodeRegionDirective (regionMode, (string) null);
+			Assert.AreEqual (regionMode, crd.RegionMode, "#4");
+			Assert.IsNotNull (crd.RegionText, "#5");
+			Assert.AreEqual (string.Empty, crd.RegionText, "#6");
+		}
 
-        [Test]
-        public void InvalidRegionMode ()
-        {
-            CodeRegionDirective crd = new CodeRegionDirective (
-                (CodeRegionMode) int.MaxValue, "mono");
-            Assert.AreEqual (int.MaxValue, (int) crd.RegionMode, "#1");
-            crd.RegionMode = (CodeRegionMode) int.MinValue;
-            Assert.AreEqual (int.MinValue, (int) crd.RegionMode, "#2");
-        }
-    }
+		[Test]
+		public void InvalidRegionMode ()
+		{
+			CodeRegionDirective crd = new CodeRegionDirective (
+				(CodeRegionMode) int.MaxValue, "mono");
+			Assert.AreEqual (int.MaxValue, (int) crd.RegionMode, "#1");
+			crd.RegionMode = (CodeRegionMode) int.MinValue;
+			Assert.AreEqual (int.MinValue, (int) crd.RegionMode, "#2");
+		}
+	}
 }
 

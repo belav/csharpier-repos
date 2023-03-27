@@ -2,7 +2,7 @@
 // SymmetricSecurityBindingElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2007 Novell, Inc.  http://www.novell.com
 //
@@ -40,140 +40,140 @@ using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenReq
 
 namespace System.ServiceModel.Channels
 {
-    public sealed class SymmetricSecurityBindingElement
-        : SecurityBindingElement, IPolicyExportExtension
-    {
-        public SymmetricSecurityBindingElement ()
-            : this ((SecurityTokenParameters) null)
-        {
-        }
+	public sealed class SymmetricSecurityBindingElement
+		: SecurityBindingElement, IPolicyExportExtension
+	{
+		public SymmetricSecurityBindingElement ()
+			: this ((SecurityTokenParameters) null)
+		{
+		}
 
-        public SymmetricSecurityBindingElement (
-            SecurityTokenParameters protectionTokenParameters)
-        {
-            ProtectionTokenParameters = protectionTokenParameters;
-        }
+		public SymmetricSecurityBindingElement (
+			SecurityTokenParameters protectionTokenParameters)
+		{
+			ProtectionTokenParameters = protectionTokenParameters;
+		}
 
-        private SymmetricSecurityBindingElement (
-            SymmetricSecurityBindingElement other)
-            : base (other)
-        {
-            msg_protection_order = other.msg_protection_order;
-            require_sig_confirm = other.require_sig_confirm;
-            if (other.protection_token_params != null)
-                protection_token_params = other.protection_token_params.Clone ();
-        }
+		private SymmetricSecurityBindingElement (
+			SymmetricSecurityBindingElement other)
+			: base (other)
+		{
+			msg_protection_order = other.msg_protection_order;
+			require_sig_confirm = other.require_sig_confirm;
+			if (other.protection_token_params != null)
+				protection_token_params = other.protection_token_params.Clone ();
+		}
 
-        MessageProtectionOrder msg_protection_order =
-            MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature;
-        SecurityTokenParameters protection_token_params;
-        bool require_sig_confirm;
-        // make sure that they are also cloned.
+		MessageProtectionOrder msg_protection_order =
+			MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature;
+		SecurityTokenParameters protection_token_params;
+		bool require_sig_confirm;
+		// make sure that they are also cloned.
 
-        [MonoTODO]
-        public MessageProtectionOrder MessageProtectionOrder {
-            get { return msg_protection_order; }
-            set { msg_protection_order = value; }
-        }
+		[MonoTODO]
+		public MessageProtectionOrder MessageProtectionOrder {
+			get { return msg_protection_order; }
+			set { msg_protection_order = value; }
+		}
 
-        public SecurityTokenParameters ProtectionTokenParameters {
-            get { return protection_token_params; }
-            set { protection_token_params = value; }
-        }
+		public SecurityTokenParameters ProtectionTokenParameters {
+			get { return protection_token_params; }
+			set { protection_token_params = value; }
+		}
 
-        [MonoTODO]
-        public bool RequireSignatureConfirmation {
-            get { return require_sig_confirm; }
-            set { require_sig_confirm = value; }
-        }
+		[MonoTODO]
+		public bool RequireSignatureConfirmation {
+			get { return require_sig_confirm; }
+			set { require_sig_confirm = value; }
+		}
 
-        public override void SetKeyDerivation (bool requireDerivedKeys)
-        {
-            base.SetKeyDerivation (requireDerivedKeys);
-            if (ProtectionTokenParameters != null)
-                ProtectionTokenParameters.RequireDerivedKeys = requireDerivedKeys;
-        }
+		public override void SetKeyDerivation (bool requireDerivedKeys)
+		{
+			base.SetKeyDerivation (requireDerivedKeys);
+			if (ProtectionTokenParameters != null)
+				ProtectionTokenParameters.RequireDerivedKeys = requireDerivedKeys;
+		}
 
-        [MonoTODO]
-        public override string ToString ()
-        {
-            return base.ToString ();
-        }
+		[MonoTODO]
+		public override string ToString ()
+		{
+			return base.ToString ();
+		}
 
-        [MonoTODO]
-        protected override IChannelFactory<TChannel>
-            BuildChannelFactoryCore<TChannel> (
-            BindingContext context)
-        {
-            if (ProtectionTokenParameters == null)
-                throw new InvalidOperationException ("Protection token parameters must be set before building channel factory.");
+		[MonoTODO]
+		protected override IChannelFactory<TChannel>
+			BuildChannelFactoryCore<TChannel> (
+			BindingContext context)
+		{
+			if (ProtectionTokenParameters == null)
+				throw new InvalidOperationException ("Protection token parameters must be set before building channel factory.");
 
-            SetIssuerBindingContextIfRequired (ProtectionTokenParameters, context);
+			SetIssuerBindingContextIfRequired (ProtectionTokenParameters, context);
 
-            ClientCredentials cred = context.BindingParameters.Find<ClientCredentials> ();
-            if (cred == null)
-                // it happens when there is no ChannelFactory<T>.
-                cred = new ClientCredentials ();
-            SecurityTokenManager manager = cred.CreateSecurityTokenManager ();
-            ChannelProtectionRequirements requirements =
-                context.BindingParameters.Find<ChannelProtectionRequirements> ();
+			ClientCredentials cred = context.BindingParameters.Find<ClientCredentials> ();
+			if (cred == null)
+				// it happens when there is no ChannelFactory<T>.
+				cred = new ClientCredentials ();
+			SecurityTokenManager manager = cred.CreateSecurityTokenManager ();
+			ChannelProtectionRequirements requirements =
+				context.BindingParameters.Find<ChannelProtectionRequirements> ();
 
-            return new SecurityChannelFactory<TChannel> (
-                context.BuildInnerChannelFactory<TChannel> (), new InitiatorMessageSecurityBindingSupport (GetCapabilities (), manager, requirements));
-        }
+			return new SecurityChannelFactory<TChannel> (
+				context.BuildInnerChannelFactory<TChannel> (), new InitiatorMessageSecurityBindingSupport (GetCapabilities (), manager, requirements));
+		}
 
-        [MonoTODO]
-        protected override IChannelListener<TChannel>
-            BuildChannelListenerCore<TChannel> (
-            BindingContext context)
-        {
-            if (ProtectionTokenParameters == null)
-                throw new InvalidOperationException ("Protection token parameters must be set before building channel factory.");
+		[MonoTODO]
+		protected override IChannelListener<TChannel>
+			BuildChannelListenerCore<TChannel> (
+			BindingContext context)
+		{
+			if (ProtectionTokenParameters == null)
+				throw new InvalidOperationException ("Protection token parameters must be set before building channel factory.");
 
-            SetIssuerBindingContextIfRequired (ProtectionTokenParameters, context);
+			SetIssuerBindingContextIfRequired (ProtectionTokenParameters, context);
 
-            ServiceCredentials cred = context.BindingParameters.Find<ServiceCredentials> ();
-            if (cred == null)
-                // it happens when there is no ChannelFactory<T>.
-                cred = new ServiceCredentials ();
-            ServiceCredentialsSecurityTokenManager manager = (ServiceCredentialsSecurityTokenManager) cred.CreateSecurityTokenManager ();
-            ChannelProtectionRequirements requirements =
-                context.BindingParameters.Find<ChannelProtectionRequirements> ();
+			ServiceCredentials cred = context.BindingParameters.Find<ServiceCredentials> ();
+			if (cred == null)
+				// it happens when there is no ChannelFactory<T>.
+				cred = new ServiceCredentials ();
+			ServiceCredentialsSecurityTokenManager manager = (ServiceCredentialsSecurityTokenManager) cred.CreateSecurityTokenManager ();
+			ChannelProtectionRequirements requirements =
+				context.BindingParameters.Find<ChannelProtectionRequirements> ();
 
-            return new SecurityChannelListener<TChannel> (
-                context.BuildInnerChannelListener<TChannel> (), new RecipientMessageSecurityBindingSupport (GetCapabilities (), manager, requirements));
-        }
+			return new SecurityChannelListener<TChannel> (
+				context.BuildInnerChannelListener<TChannel> (), new RecipientMessageSecurityBindingSupport (GetCapabilities (), manager, requirements));
+		}
 
-        public override BindingElement Clone ()
-        {
-            return new SymmetricSecurityBindingElement (this);
-        }
+		public override BindingElement Clone ()
+		{
+			return new SymmetricSecurityBindingElement (this);
+		}
 
-        [MonoTODO]
-        public override T GetProperty<T> (BindingContext context)
-        {
-            if (context == null)
-                throw new ArgumentNullException ("context");
-            if (typeof (T) == typeof (ISecurityCapabilities))
-                return (T) (object) GetCapabilities ();
-            if (typeof (T) == typeof (IdentityVerifier))
-                throw new NotImplementedException ();
-            return base.GetProperty<T> (context);
-        }
+		[MonoTODO]
+		public override T GetProperty<T> (BindingContext context)
+		{
+			if (context == null)
+				throw new ArgumentNullException ("context");
+			if (typeof (T) == typeof (ISecurityCapabilities))
+				return (T) (object) GetCapabilities ();
+			if (typeof (T) == typeof (IdentityVerifier))
+				throw new NotImplementedException ();
+			return base.GetProperty<T> (context);
+		}
 
-        SymmetricSecurityCapabilities GetCapabilities ()
-        {
-            return new SymmetricSecurityCapabilities (this);
-        }
+		SymmetricSecurityCapabilities GetCapabilities ()
+		{
+			return new SymmetricSecurityCapabilities (this);
+		}
 
-        #region explicit interface implementations
-        [MonoTODO]
-        void IPolicyExportExtension.ExportPolicy (
-            MetadataExporter exporter,
-            PolicyConversionContext policyContext)
-        {
-            throw new NotImplementedException ();
-        }
-        #endregion
-    }
+		#region explicit interface implementations
+		[MonoTODO]
+		void IPolicyExportExtension.ExportPolicy (
+			MetadataExporter exporter,
+			PolicyConversionContext policyContext)
+		{
+			throw new NotImplementedException ();
+		}
+		#endregion
+	}
 }

@@ -2,6 +2,6 @@
 // Line: 5
 
 abstract class X {
-    public abstract void B () {
-    }
+	public abstract void B () {
+	}
 }

@@ -2,7 +2,7 @@
 // CreateUserWizardStepTest.cs - Unit tests for System.Web.UI.WebControls.CreateUserWizardStep
 //
 // Author:
-//    Igor Zelmanovich  <igorz@mainsoft.com>
+//	Igor Zelmanovich  <igorz@mainsoft.com>
 //
 // (C) 2006 Mainsoft Corporation (http://www.mainsoft.com)
 //
@@ -45,25 +45,25 @@ using NUnit.Framework;
 namespace MonoTests.System.Web.UI.WebControls
 {
 
-    [Serializable]
-    [TestFixture]
-    public class CreateUserWizardStepTest
-    {
-        // MSDN: If you attempt to change the StepType property to any value other than the Auto value of the WizardStepType enumeration, an 
-        // InvalidOperationException will be thrown.
+	[Serializable]
+	[TestFixture]
+	public class CreateUserWizardStepTest
+	{
+		// MSDN: If you attempt to change the StepType property to any value other than the Auto value of the WizardStepType enumeration, an 
+		// InvalidOperationException will be thrown.
 
-        [Test]
-        public void CreateUserWizardStep_StepType_Get () {
-            CreateUserWizardStep step = new CreateUserWizardStep ();
-            Assert.AreEqual (WizardStepType.Auto, step.StepType, "CreateUserWizardStep_StepType_Get");
-        }
-        
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void CreateUserWizardStep_StepType_Set () {
-            CreateUserWizardStep step = new CreateUserWizardStep ();
-            step.StepType = WizardStepType.Start;
-        }
-    }
+		[Test]
+		public void CreateUserWizardStep_StepType_Get () {
+			CreateUserWizardStep step = new CreateUserWizardStep ();
+			Assert.AreEqual (WizardStepType.Auto, step.StepType, "CreateUserWizardStep_StepType_Get");
+		}
+		
+		[Test]
+		[ExpectedException(typeof(InvalidOperationException))]
+		public void CreateUserWizardStep_StepType_Set () {
+			CreateUserWizardStep step = new CreateUserWizardStep ();
+			step.StepType = WizardStepType.Start;
+		}
+	}
 }
 

@@ -3,7 +3,7 @@
 
 class C
 {
-    public static void Test (object o = 9)
-    {
-    }
+	public static void Test (object o = 9)
+	{
+	}
 }

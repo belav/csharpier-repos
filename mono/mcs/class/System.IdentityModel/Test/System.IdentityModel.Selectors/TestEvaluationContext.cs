@@ -2,7 +2,7 @@
 // TestEvaluationContext.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -41,46 +41,46 @@ using PolicyCollection = System.Collections.ObjectModel.ReadOnlyCollection<Syste
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-    class TestEvaluationContext : EvaluationContext
-    {
-        Collection<ClaimSet> claim_sets =
-            new Collection<ClaimSet> ();
-        ReadOnlyCollection<ClaimSet> readonly_claim_sets;
-        Dictionary<string,object> properties =
-            new Dictionary<string,object> ();
-        int generation;
-        DateTime expiration;
+	class TestEvaluationContext : EvaluationContext
+	{
+		Collection<ClaimSet> claim_sets =
+			new Collection<ClaimSet> ();
+		ReadOnlyCollection<ClaimSet> readonly_claim_sets;
+		Dictionary<string,object> properties =
+			new Dictionary<string,object> ();
+		int generation;
+		DateTime expiration;
 
-        public override ReadOnlyCollection<ClaimSet> ClaimSets {
-            get {
-                if (readonly_claim_sets == null)
-                    readonly_claim_sets = new ReadOnlyCollection<ClaimSet> (claim_sets);
-                return readonly_claim_sets;
-            }
-        }
+		public override ReadOnlyCollection<ClaimSet> ClaimSets {
+			get {
+				if (readonly_claim_sets == null)
+					readonly_claim_sets = new ReadOnlyCollection<ClaimSet> (claim_sets);
+				return readonly_claim_sets;
+			}
+		}
 
-        public DateTime ExpirationTime {
-            get { return expiration; }
-        }
+		public DateTime ExpirationTime {
+			get { return expiration; }
+		}
 
-        public override int Generation {
-            get { return generation; }
-        }
+		public override int Generation {
+			get { return generation; }
+		}
 
-        public override IDictionary<string,object> Properties {
-            get { return properties; }
-        }
+		public override IDictionary<string,object> Properties {
+			get { return properties; }
+		}
 
-        public override void AddClaimSet (IAuthorizationPolicy policy, ClaimSet claimSet)
-        {
-            claim_sets.Add (claimSet);
-        }
+		public override void AddClaimSet (IAuthorizationPolicy policy, ClaimSet claimSet)
+		{
+			claim_sets.Add (claimSet);
+		}
 
-        public override void RecordExpirationTime (DateTime expirationTime)
-        {
-            expiration = expirationTime;
-        }
+		public override void RecordExpirationTime (DateTime expirationTime)
+		{
+			expiration = expirationTime;
+		}
 
-    }
+	}
 }
 #endif 

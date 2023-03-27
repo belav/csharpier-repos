@@ -2,7 +2,7 @@
 // IMethodCodeProvider.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,20 +30,20 @@ using System.Collections.Generic;
 using Mono.CodeContracts.Static.AST;
 
 namespace Mono.CodeContracts.Static.Providers {
-    interface IMethodCodeProvider<Label, Handler> : ICodeProvider<Label> {
-        bool IsFaultHandler (Handler handler);
-        bool IsFilterHandler (Handler handler);
-        bool IsCatchHandler (Handler handler);
-        bool IsCatchAllHandler (Handler handler);
-        bool IsFinallyHandler (Handler handler);
+	interface IMethodCodeProvider<Label, Handler> : ICodeProvider<Label> {
+		bool IsFaultHandler (Handler handler);
+		bool IsFilterHandler (Handler handler);
+		bool IsCatchHandler (Handler handler);
+		bool IsCatchAllHandler (Handler handler);
+		bool IsFinallyHandler (Handler handler);
 
-        TypeNode CatchType (Handler handler);
-        IEnumerable<Handler> GetTryBlocks (Method method);
+		TypeNode CatchType (Handler handler);
+		IEnumerable<Handler> GetTryBlocks (Method method);
 
-        Label FilterExpressionStart (Handler handler);
-        Label HandlerEnd (Handler handler);
-        Label HandlerStart (Handler handler);
-        Label TryStart (Handler handler);
-        Label TryEnd (Handler handler);
-    }
+		Label FilterExpressionStart (Handler handler);
+		Label HandlerEnd (Handler handler);
+		Label HandlerStart (Handler handler);
+		Label TryStart (Handler handler);
+		Label TryEnd (Handler handler);
+	}
 }

@@ -30,29 +30,29 @@ using System.Collections;
 
 namespace System.Configuration
 {
-    public class ConfigurationFileMap: ICloneable
-    {
-        string machineConfigFilename;
-        
-        public ConfigurationFileMap ()
-        {
-            machineConfigFilename = System.Runtime.InteropServices.RuntimeEnvironment.SystemConfigurationFile;
-        }
-        
-        public ConfigurationFileMap (string machineConfigFilename)
-        {
-            this.machineConfigFilename = machineConfigFilename;
-        }
-        
-        public string MachineConfigFilename {
-            get { return machineConfigFilename; }
-            set { machineConfigFilename = value; }
-        }
-        
-        public virtual object Clone ()
-        {
-            return new ConfigurationFileMap (machineConfigFilename);
-        }
-    }
+	public class ConfigurationFileMap: ICloneable
+	{
+		string machineConfigFilename;
+		
+		public ConfigurationFileMap ()
+		{
+			machineConfigFilename = System.Runtime.InteropServices.RuntimeEnvironment.SystemConfigurationFile;
+		}
+		
+		public ConfigurationFileMap (string machineConfigFilename)
+		{
+			this.machineConfigFilename = machineConfigFilename;
+		}
+		
+		public string MachineConfigFilename {
+			get { return machineConfigFilename; }
+			set { machineConfigFilename = value; }
+		}
+		
+		public virtual object Clone ()
+		{
+			return new ConfigurationFileMap (machineConfigFilename);
+		}
+	}
 }
 

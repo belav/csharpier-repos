@@ -2,7 +2,7 @@
 // IBasicMethodDriver.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -25,18 +25,18 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
-    
+	
 using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.Drivers {
-    interface IBasicMethodDriver {
-        ICodeLayer<Dummy, Dummy, IMethodContextProvider, Dummy> RawLayer { get; }
-        ICodeLayer<int, int, IStackContextProvider, Dummy> StackLayer { get; }
-        ICodeLayer<Dummy, Dummy, IMethodContextProvider, Dummy> ContractFreeRawLayer { get; }
-        ICodeLayer<int, int, IStackContextProvider, Dummy> ContractFreeStackLayer { get; }
+	interface IBasicMethodDriver {
+		ICodeLayer<Dummy, Dummy, IMethodContextProvider, Dummy> RawLayer { get; }
+		ICodeLayer<int, int, IStackContextProvider, Dummy> StackLayer { get; }
+		ICodeLayer<Dummy, Dummy, IMethodContextProvider, Dummy> ContractFreeRawLayer { get; }
+		ICodeLayer<int, int, IStackContextProvider, Dummy> ContractFreeStackLayer { get; }
 
-        ICFG ContractFreeCFG { get; }
-        IBasicAnalysisDriver AnalysisDriver { get; }
-    }
+		ICFG ContractFreeCFG { get; }
+		IBasicAnalysisDriver AnalysisDriver { get; }
+	}
 }

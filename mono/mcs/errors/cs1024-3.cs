@@ -5,12 +5,12 @@ using System;
 
 class C
 {
-    static void Main ()
-    {
+	static void Main ()
+	{
 #if AA
-        Console.WriteLine ("DEBUG mode");
+		Console.WriteLine ("DEBUG mode");
 # something not valid here
-        Console.WriteLine ("NON-DEBUG mode");
+		Console.WriteLine ("NON-DEBUG mode");
 #endif
-    }
+	}
 }

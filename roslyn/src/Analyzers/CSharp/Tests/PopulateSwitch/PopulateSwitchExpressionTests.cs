@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1277,7 +1277,7 @@ class C
         string message = greeting [||]switch
         {
             Greeting.Hello => ""Hey!"",
-            Greeting.Goodbye or _ => ""Not sure what to say ??""
+            Greeting.Goodbye or _ => ""Not sure what to say 🤔""
         };
     }
 }
@@ -1303,7 +1303,7 @@ class C
         string message = greeting [||]switch
         {
             Greeting.Hello => ""Hey!"",
-            _ or Greeting.Goodbye => ""Not sure what to say ??""
+            _ or Greeting.Goodbye => ""Not sure what to say 🤔""
         };
     }
 }
@@ -1330,7 +1330,7 @@ class C
         {
             Greeting.Hello => ""Hey!"",
             Greeting.Goodbye => ""Bye!"",
-            _ and var v => ""Not sure what to say ??""
+            _ and var v => ""Not sure what to say 🤔""
         };
     }
 }
@@ -1357,7 +1357,7 @@ class C
         {
             Greeting.Hello => ""Hey!"",
             Greeting.Goodbye => ""Bye!"",
-            var x and var y => ""Not sure what to say ??""
+            var x and var y => ""Not sure what to say 🤔""
         };
     }
 }

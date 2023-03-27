@@ -2,7 +2,7 @@
 // System.Web.Configuration.SqlCacheDependencyDatabaseCollection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,90 +34,90 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    [ConfigurationCollection (typeof (SqlCacheDependencyDatabase), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class SqlCacheDependencyDatabaseCollection : ConfigurationElementCollection
-    {
-        public void Add (SqlCacheDependencyDatabase name)
-        {
-            BaseAdd (name);
-        }
+	[ConfigurationCollection (typeof (SqlCacheDependencyDatabase), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class SqlCacheDependencyDatabaseCollection : ConfigurationElementCollection
+	{
+		public void Add (SqlCacheDependencyDatabase name)
+		{
+			BaseAdd (name);
+		}
 
-        public void Clear ()
-        {
-            BaseClear ();
-        }
+		public void Clear ()
+		{
+			BaseClear ();
+		}
 
-        public SqlCacheDependencyDatabase Get (string name)
-        {
-            return (SqlCacheDependencyDatabase) BaseGet (name);
-        }
+		public SqlCacheDependencyDatabase Get (string name)
+		{
+			return (SqlCacheDependencyDatabase) BaseGet (name);
+		}
 
-        public SqlCacheDependencyDatabase Get (int index)
-        {
-            return (SqlCacheDependencyDatabase) BaseGet (index);
-        }
+		public SqlCacheDependencyDatabase Get (int index)
+		{
+			return (SqlCacheDependencyDatabase) BaseGet (index);
+		}
 
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new SqlCacheDependencyDatabase ();
-        }
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new SqlCacheDependencyDatabase ();
+		}
 
-        protected override object GetElementKey (ConfigurationElement element)
-        {
-            return ((SqlCacheDependencyDatabase)element).Name;
-        }
+		protected override object GetElementKey (ConfigurationElement element)
+		{
+			return ((SqlCacheDependencyDatabase)element).Name;
+		}
 
-        public string GetKey (int index)
-        {
-            SqlCacheDependencyDatabase db = Get (index);
-            if (db == null)
-                return null;
-            return db.Name;
-        }
+		public string GetKey (int index)
+		{
+			SqlCacheDependencyDatabase db = Get (index);
+			if (db == null)
+				return null;
+			return db.Name;
+		}
 
-        public void Remove (string name)
-        {
-            BaseRemove (name);
-        }
+		public void Remove (string name)
+		{
+			BaseRemove (name);
+		}
 
-        public void RemoveAt (int index)
-        {
-            BaseRemoveAt (index);
-        }
+		public void RemoveAt (int index)
+		{
+			BaseRemoveAt (index);
+		}
 
-        public void Set (SqlCacheDependencyDatabase user)
-        {
-            SqlCacheDependencyDatabase existing = Get (user.Name);
+		public void Set (SqlCacheDependencyDatabase user)
+		{
+			SqlCacheDependencyDatabase existing = Get (user.Name);
 
-            if (existing == null) {
-                Add (user);
-            }
-            else {
-                int index = BaseIndexOf (existing);
-                RemoveAt (index);
-                BaseAdd (index, user);
-            }
-        }
+			if (existing == null) {
+				Add (user);
+			}
+			else {
+				int index = BaseIndexOf (existing);
+				RemoveAt (index);
+				BaseAdd (index, user);
+			}
+		}
 
-        public string[] AllKeys {
-            get {
-                string[] keys = new string[Count];
-                for (int i = 0; i < Count; i ++)
-                    keys[i] = this[i].Name;
-                return keys;
-            }
-        }
+		public string[] AllKeys {
+			get {
+				string[] keys = new string[Count];
+				for (int i = 0; i < Count; i ++)
+					keys[i] = this[i].Name;
+				return keys;
+			}
+		}
 
-        public SqlCacheDependencyDatabase this [int index] {
-            get { return (SqlCacheDependencyDatabase) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-        }
+		public SqlCacheDependencyDatabase this [int index] {
+			get { return (SqlCacheDependencyDatabase) BaseGet (index); }
+			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+		}
 
-        public new SqlCacheDependencyDatabase this [string name] {
-            get { return (SqlCacheDependencyDatabase) BaseGet (name); }
-        }
+		public new SqlCacheDependencyDatabase this [string name] {
+			get { return (SqlCacheDependencyDatabase) BaseGet (name); }
+		}
 
-    }
+	}
 
 }
 

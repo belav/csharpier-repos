@@ -28,21 +28,21 @@
 namespace System.ServiceModel.Channels
 {
 
-    public abstract class MessageHeaderInfo
-    {
-        public abstract string Actor { get; }
-        public abstract bool IsReferenceParameter { get; }
-        public abstract bool MustUnderstand { get; }
-        public abstract string Name { get; }
-        public abstract string Namespace { get; }
-        public abstract bool Relay { get; }
+	public abstract class MessageHeaderInfo
+	{
+		public abstract string Actor { get; }
+		public abstract bool IsReferenceParameter { get; }
+		public abstract bool MustUnderstand { get; }
+		public abstract string Name { get; }
+		public abstract string Namespace { get; }
+		public abstract bool Relay { get; }
 
-        string id;
-        internal string Id {
-            get { return id; }
-            set { id = value; }
-        }
+		string id;
+		internal string Id {
+			get { return id; }
+			set { id = value; }
+		}
 
-        internal string Prefix { get; set; }
-    }
+		internal string Prefix { get; set; }
+	}
 }

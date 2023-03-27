@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -372,7 +372,7 @@ namespace A.B {
             var ops1 = TestOptions.DebugExe;
 
             // Create Compilation with Assembly name contains invalid char
-            var asmname = "ÃƒÆ’Ã†â€™Ãƒâ€�";
+            var asmname = "ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â";
             comp = CSharpCompilation.Create(asmname, listSyntaxTree, listRef, ops);
             var comp1 = CSharpCompilation.Create(asmname, listSyntaxTree, listRef, null);
         }
@@ -3157,7 +3157,7 @@ class C
         [ConditionalFact(typeof(DesktopOnly))]
         public void ReturnStringAsObject()
         {
-            var script = CreateSubmission("return \"�Hola!\";", returnType: typeof(object));
+            var script = CreateSubmission("return \"¡Hola!\";", returnType: typeof(object));
             script.VerifyDiagnostics();
             Assert.True(script.HasSubmissionResult());
         }

@@ -2,7 +2,7 @@
 // System.Web.Configuration.TransformerInfoCollection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,56 +34,56 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    [ConfigurationCollectionAttribute (typeof (TransformerInfo), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class TransformerInfoCollection : ConfigurationElementCollection
-    {
-        static ConfigurationPropertyCollection properties;
+	[ConfigurationCollectionAttribute (typeof (TransformerInfo), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class TransformerInfoCollection : ConfigurationElementCollection
+	{
+		static ConfigurationPropertyCollection properties;
 
-        static TransformerInfoCollection ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static TransformerInfoCollection ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public void Add (TransformerInfo transformerInfo)
-        {
-            BaseAdd (transformerInfo);
-        }
+		public void Add (TransformerInfo transformerInfo)
+		{
+			BaseAdd (transformerInfo);
+		}
 
-        public void Clear ()
-        {
-            BaseClear ();
-        }
+		public void Clear ()
+		{
+			BaseClear ();
+		}
 
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new TransformerInfo ("", "");
-        }
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new TransformerInfo ("", "");
+		}
 
-        protected override object GetElementKey (ConfigurationElement element)
-        {
-            return ((TransformerInfo)element).Name;
-        }
+		protected override object GetElementKey (ConfigurationElement element)
+		{
+			return ((TransformerInfo)element).Name;
+		}
 
-        public void Remove (string s)
-        {
-            BaseRemove (s);
-        }
+		public void Remove (string s)
+		{
+			BaseRemove (s);
+		}
 
-        public void RemoveAt (int index)
-        {
-            BaseRemoveAt (index);
-        }
+		public void RemoveAt (int index)
+		{
+			BaseRemoveAt (index);
+		}
 
-        public TransformerInfo this [int index] {
-            get { return (TransformerInfo) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-        }
+		public TransformerInfo this [int index] {
+			get { return (TransformerInfo) BaseGet (index); }
+			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-    }
+	}
 
 }
 

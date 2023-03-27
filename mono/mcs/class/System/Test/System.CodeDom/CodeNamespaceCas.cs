@@ -1,9 +1,9 @@
 //
 // CodeNamespaceCas.cs
-//    - CAS unit tests for System.CodeDom.CodeNamespace
+//	- CAS unit tests for System.CodeDom.CodeNamespace
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,64 +37,64 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeNamespaceCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeNamespaceCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        private void Handler (object sender, EventArgs e)
-        {
-        }
+		private void Handler (object sender, EventArgs e)
+		{
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeNamespace cn = new CodeNamespace ();
-            Assert.AreEqual (0, cn.Comments.Count, "Comments");
-            Assert.AreEqual (0, cn.Imports.Count, "Imports");
-            Assert.AreEqual (String.Empty, cn.Name, "Name");
-            cn.Name = "mono";
-            Assert.AreEqual (0, cn.Types.Count, "Types");
-            cn.PopulateComments += new EventHandler (Handler);
-            cn.PopulateComments -= new EventHandler (Handler);
-            cn.PopulateImports += new EventHandler (Handler);
-            cn.PopulateImports -= new EventHandler (Handler);
-            cn.PopulateTypes += new EventHandler (Handler);
-            cn.PopulateTypes -= new EventHandler (Handler);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeNamespace cn = new CodeNamespace ();
+			Assert.AreEqual (0, cn.Comments.Count, "Comments");
+			Assert.AreEqual (0, cn.Imports.Count, "Imports");
+			Assert.AreEqual (String.Empty, cn.Name, "Name");
+			cn.Name = "mono";
+			Assert.AreEqual (0, cn.Types.Count, "Types");
+			cn.PopulateComments += new EventHandler (Handler);
+			cn.PopulateComments -= new EventHandler (Handler);
+			cn.PopulateImports += new EventHandler (Handler);
+			cn.PopulateImports -= new EventHandler (Handler);
+			cn.PopulateTypes += new EventHandler (Handler);
+			cn.PopulateTypes -= new EventHandler (Handler);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeNamespace cn = new CodeNamespace ("mono");
-            Assert.AreEqual (0, cn.Comments.Count, "Comments");
-            Assert.AreEqual (0, cn.Imports.Count, "Imports");
-            Assert.AreEqual ("mono", cn.Name, "Name");
-            cn.Name = String.Empty;
-            Assert.AreEqual (0, cn.Types.Count, "Types");
-            cn.PopulateComments += new EventHandler (Handler);
-            cn.PopulateComments -= new EventHandler (Handler);
-            cn.PopulateImports += new EventHandler (Handler);
-            cn.PopulateImports -= new EventHandler (Handler);
-            cn.PopulateTypes += new EventHandler (Handler);
-            cn.PopulateTypes -= new EventHandler (Handler);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeNamespace cn = new CodeNamespace ("mono");
+			Assert.AreEqual (0, cn.Comments.Count, "Comments");
+			Assert.AreEqual (0, cn.Imports.Count, "Imports");
+			Assert.AreEqual ("mono", cn.Name, "Name");
+			cn.Name = String.Empty;
+			Assert.AreEqual (0, cn.Types.Count, "Types");
+			cn.PopulateComments += new EventHandler (Handler);
+			cn.PopulateComments -= new EventHandler (Handler);
+			cn.PopulateImports += new EventHandler (Handler);
+			cn.PopulateImports -= new EventHandler (Handler);
+			cn.PopulateTypes += new EventHandler (Handler);
+			cn.PopulateTypes -= new EventHandler (Handler);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeNamespace).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeNamespace).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

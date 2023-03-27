@@ -40,111 +40,111 @@ using System.Web.Util;
 
 namespace System.Web.UI
 {
-    internal sealed class MasterPageParser: UserControlParser
-    {
-        Type masterType;
-        string masterTypeVirtualPath;
-        List <string> contentPlaceHolderIds;
-        string cacheEntryName;
-        
-        internal MasterPageParser (VirtualPath virtualPath, string inputFile, HttpContext context)
-            : base (virtualPath, inputFile, context, "System.Web.UI.MasterPage")
-        {
-            this.cacheEntryName = String.Concat ("@@MasterPagePHIDS:", virtualPath, ":", inputFile);
-            
-            contentPlaceHolderIds = HttpRuntime.InternalCache.Get (this.cacheEntryName) as List <string>;
-            LoadConfigDefaults ();
-        }
+	internal sealed class MasterPageParser: UserControlParser
+	{
+		Type masterType;
+		string masterTypeVirtualPath;
+		List <string> contentPlaceHolderIds;
+		string cacheEntryName;
+		
+		internal MasterPageParser (VirtualPath virtualPath, string inputFile, HttpContext context)
+			: base (virtualPath, inputFile, context, "System.Web.UI.MasterPage")
+		{
+			this.cacheEntryName = String.Concat ("@@MasterPagePHIDS:", virtualPath, ":", inputFile);
+			
+			contentPlaceHolderIds = HttpRuntime.InternalCache.Get (this.cacheEntryName) as List <string>;
+			LoadConfigDefaults ();
+		}
 
-        internal MasterPageParser (VirtualPath virtualPath, TextReader reader, HttpContext context)
-            : this (virtualPath, null, reader, context)
-        {
-        }
-        
-        internal MasterPageParser (VirtualPath virtualPath, string inputFile, TextReader reader, HttpContext context)
-            : base (virtualPath, inputFile, reader, context)
-        {
-            this.cacheEntryName = String.Concat ("@@MasterPagePHIDS:", virtualPath, ":", InputFile);
-            
-            contentPlaceHolderIds = HttpRuntime.InternalCache.Get (this.cacheEntryName) as List <string>;
-            LoadConfigDefaults ();
-        }
-        
-        public static MasterPage GetCompiledMasterInstance (string virtualPath, string inputFile, HttpContext context)
-        {
-            return BuildManager.CreateInstanceFromVirtualPath (virtualPath, typeof (MasterPage)) as MasterPage;
-        }
+		internal MasterPageParser (VirtualPath virtualPath, TextReader reader, HttpContext context)
+			: this (virtualPath, null, reader, context)
+		{
+		}
+		
+		internal MasterPageParser (VirtualPath virtualPath, string inputFile, TextReader reader, HttpContext context)
+			: base (virtualPath, inputFile, reader, context)
+		{
+			this.cacheEntryName = String.Concat ("@@MasterPagePHIDS:", virtualPath, ":", InputFile);
+			
+			contentPlaceHolderIds = HttpRuntime.InternalCache.Get (this.cacheEntryName) as List <string>;
+			LoadConfigDefaults ();
+		}
+		
+		public static MasterPage GetCompiledMasterInstance (string virtualPath, string inputFile, HttpContext context)
+		{
+			return BuildManager.CreateInstanceFromVirtualPath (virtualPath, typeof (MasterPage)) as MasterPage;
+		}
 
-        public static Type GetCompiledMasterType (string virtualPath, string inputFile, HttpContext context)
-        {
-            return BuildManager.GetCompiledType (virtualPath);
-        }
-        
-        internal override void HandleOptions (object obj)
-        {
-            base.HandleOptions (obj);
+		public static Type GetCompiledMasterType (string virtualPath, string inputFile, HttpContext context)
+		{
+			return BuildManager.GetCompiledType (virtualPath);
+		}
+		
+		internal override void HandleOptions (object obj)
+		{
+			base.HandleOptions (obj);
 
-            MasterPage mp = (MasterPage)obj;
-            mp.MasterPageFile = MasterPageFile;
-        }
+			MasterPage mp = (MasterPage)obj;
+			mp.MasterPageFile = MasterPageFile;
+		}
 
-        internal override void AddDirective (string directive, IDictionary atts)
-        {
-            if (String.Compare ("MasterType", directive, StringComparison.OrdinalIgnoreCase) == 0) {
-                PageParserFilter pfilter = PageParserFilter;
-                if (pfilter != null)
-                    pfilter.PreprocessDirective (directive.ToLowerInvariant (), atts);
-                
-                string type = GetString (atts, "TypeName", null);
-                if (type != null) {
-                    masterType = LoadType (type);
-                    if (masterType == null)
-                        ThrowParseException ("Could not load type '" + type + "'.");
-                } else {
-                    string path = GetString (atts, "VirtualPath", null);
-                    if (!String.IsNullOrEmpty (path)) {
-                        var vpp = HostingEnvironment.VirtualPathProvider;
-                        if (!vpp.FileExists (path))
-                            ThrowParseFileNotFound (path);
+		internal override void AddDirective (string directive, IDictionary atts)
+		{
+			if (String.Compare ("MasterType", directive, StringComparison.OrdinalIgnoreCase) == 0) {
+				PageParserFilter pfilter = PageParserFilter;
+				if (pfilter != null)
+					pfilter.PreprocessDirective (directive.ToLowerInvariant (), atts);
+				
+				string type = GetString (atts, "TypeName", null);
+				if (type != null) {
+					masterType = LoadType (type);
+					if (masterType == null)
+						ThrowParseException ("Could not load type '" + type + "'.");
+				} else {
+					string path = GetString (atts, "VirtualPath", null);
+					if (!String.IsNullOrEmpty (path)) {
+						var vpp = HostingEnvironment.VirtualPathProvider;
+						if (!vpp.FileExists (path))
+							ThrowParseFileNotFound (path);
 
-                        path = vpp.CombineVirtualPaths (VirtualPath.Absolute, VirtualPathUtility.ToAbsolute (path));
-                        masterTypeVirtualPath = path;
-                        AddDependency (path);
-                    } else
-                        ThrowParseException ("The MasterType directive must have either a TypeName or a VirtualPath attribute.");
-                }
-                if (masterType != null)
-                    AddAssembly (masterType.Assembly, true);
-            }
-            else
-                base.AddDirective (directive, atts);
-        }
+						path = vpp.CombineVirtualPaths (VirtualPath.Absolute, VirtualPathUtility.ToAbsolute (path));
+						masterTypeVirtualPath = path;
+						AddDependency (path);
+					} else
+						ThrowParseException ("The MasterType directive must have either a TypeName or a VirtualPath attribute.");
+				}
+				if (masterType != null)
+					AddAssembly (masterType.Assembly, true);
+			}
+			else
+				base.AddDirective (directive, atts);
+		}
 
-        internal void AddContentPlaceHolderId (string id)
-        {
-            if (contentPlaceHolderIds == null) {
-                contentPlaceHolderIds = new List <string> (1);
-                HttpRuntime.InternalCache.Insert (cacheEntryName, contentPlaceHolderIds);
-            }
-            
-            contentPlaceHolderIds.Add (id);
-        }
-        
-        internal Type MasterType {
-            get {
-                if (masterType == null && !String.IsNullOrEmpty (masterTypeVirtualPath))
-                    masterType = BuildManager.GetCompiledType (masterTypeVirtualPath);
-                
-                return masterType;
-            }
-        }
+		internal void AddContentPlaceHolderId (string id)
+		{
+			if (contentPlaceHolderIds == null) {
+				contentPlaceHolderIds = new List <string> (1);
+				HttpRuntime.InternalCache.Insert (cacheEntryName, contentPlaceHolderIds);
+			}
+			
+			contentPlaceHolderIds.Add (id);
+		}
+		
+		internal Type MasterType {
+			get {
+				if (masterType == null && !String.IsNullOrEmpty (masterTypeVirtualPath))
+					masterType = BuildManager.GetCompiledType (masterTypeVirtualPath);
+				
+				return masterType;
+			}
+		}
 
-        internal override string DefaultBaseTypeName {
-            get { return "System.Web.UI.MasterPage"; }
-        }
+		internal override string DefaultBaseTypeName {
+			get { return "System.Web.UI.MasterPage"; }
+		}
 
-        internal override string DefaultDirectiveName {
-            get { return "master"; }
-        }
-    }
+		internal override string DefaultDirectiveName {
+			get { return "master"; }
+		}
+	}
 }

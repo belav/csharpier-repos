@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -111,13 +111,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //  Default value expressions
                 case SyntaxKind.DefaultExpression:
 
-                //  The predefined +, –, !, and ~ unary operators.
+                //  The predefined +, â€“, !, and ~ unary operators.
                 case SyntaxKind.UnaryPlusExpression:
                 case SyntaxKind.UnaryMinusExpression:
                 case SyntaxKind.LogicalNotExpression:
                 case SyntaxKind.BitwiseNotExpression:
 
-                //  The predefined +, –, *, /, %, <<, >>, &, |, ^, &&, ||, ==, !=, <, >, <=, and >= binary operators, provided each operand is of a type listed above.
+                //  The predefined +, â€“, *, /, %, <<, >>, &, |, ^, &&, ||, ==, !=, <, >, <=, and >= binary operators, provided each operand is of a type listed above.
                 case SyntaxKind.AddExpression:
                 case SyntaxKind.MultiplyExpression:
                 case SyntaxKind.SubtractExpression:

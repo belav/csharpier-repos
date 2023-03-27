@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.IPv4InterfaceProperties
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //      Marek Habersack (mhabersack@novell.com)
 //
 // Copyright (c) 2006-2007 Novell, Inc. (http://www.novell.com)
@@ -30,44 +30,44 @@
 using System.IO;
 
 namespace System.Net.NetworkInformation {
-    sealed class LinuxIPv4InterfaceProperties : UnixIPv4InterfaceProperties
-    {
-        public LinuxIPv4InterfaceProperties (LinuxNetworkInterface iface)
-            : base (iface)
-        {
-        }
+	sealed class LinuxIPv4InterfaceProperties : UnixIPv4InterfaceProperties
+	{
+		public LinuxIPv4InterfaceProperties (LinuxNetworkInterface iface)
+			: base (iface)
+		{
+		}
 
-        public override bool IsForwardingEnabled {
-            get {
-                string iface_path = "/proc/sys/net/ipv4/conf/" + iface.Name + "/forwarding";
+		public override bool IsForwardingEnabled {
+			get {
+				string iface_path = "/proc/sys/net/ipv4/conf/" + iface.Name + "/forwarding";
 
-                if (File.Exists (iface_path)) {
-                    string val = LinuxNetworkInterface.ReadLine (iface_path);
+				if (File.Exists (iface_path)) {
+					string val = LinuxNetworkInterface.ReadLine (iface_path);
 
-                    return val != "0";
-                }
+					return val != "0";
+				}
 
-                return false;
-            }
-        }
+				return false;
+			}
+		}
 
-        public override int Mtu {
-            get {
-                string iface_path = (iface as LinuxNetworkInterface).IfacePath + "mtu";
-                int ret = 0;
+		public override int Mtu {
+			get {
+				string iface_path = (iface as LinuxNetworkInterface).IfacePath + "mtu";
+				int ret = 0;
 
-                if (File.Exists (iface_path)) {
-                    string val = LinuxNetworkInterface.ReadLine (iface_path);
+				if (File.Exists (iface_path)) {
+					string val = LinuxNetworkInterface.ReadLine (iface_path);
 
-                    try {
-                        ret = Int32.Parse (val);
-                    } catch {
-                    }
-                }
+					try {
+						ret = Int32.Parse (val);
+					} catch {
+					}
+				}
 
-                return ret;
+				return ret;
 
-            }
-        }
-    }
+			}
+		}
+	}
 }

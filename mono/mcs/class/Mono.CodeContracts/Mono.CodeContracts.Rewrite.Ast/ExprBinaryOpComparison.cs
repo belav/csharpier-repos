@@ -2,7 +2,7 @@
 // ExprBinaryOpComparison.cs
 //
 // Authors:
-//    Chris Bacon (chrisbacon76@gmail.com)
+//	Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -33,16 +33,16 @@ using System.Text;
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-    abstract class ExprBinaryOpComparison : ExprBinaryOp {
+	abstract class ExprBinaryOpComparison : ExprBinaryOp {
 
-        public ExprBinaryOpComparison (MethodInfo methodInfo, Expr left, Expr right, Sn signage)
-            : base (methodInfo, left, right, signage)
-        {
-        }
+		public ExprBinaryOpComparison (MethodInfo methodInfo, Expr left, Expr right, Sn signage)
+			: base (methodInfo, left, right, signage)
+		{
+		}
 
-        public override TypeReference ReturnType {
-            get { return base.MethodInfo.TypeBoolean; }
-        }
+		public override TypeReference ReturnType {
+			get { return base.MethodInfo.TypeBoolean; }
+		}
 
-    }
+	}
 }

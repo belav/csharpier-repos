@@ -2,7 +2,7 @@
 // CalendarType.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2012 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,11 +30,11 @@ using System;
 
 namespace Mono.Tools.LocaleBuilder
 {
-    public enum CalendarType
-    {
-        Gregorian = 1,
-        ThaiBuddhist = 2,
-        UmAlQuraCalendar = 3,
-        HijriCalendar = 4
-    }
+	public enum CalendarType
+	{
+		Gregorian = 1,
+		ThaiBuddhist = 2,
+		UmAlQuraCalendar = 3,
+		HijriCalendar = 4
+	}
 }

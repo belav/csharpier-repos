@@ -2,7 +2,7 @@
 // Line: 6
 
 class X {
-    public static void Main() {
-        float b = 11111111111111111111111111111111111122222222222222222f;
-    }
+	public static void Main() {
+		float b = 11111111111111111111111111111111111122222222222222222f;
+	}
 }

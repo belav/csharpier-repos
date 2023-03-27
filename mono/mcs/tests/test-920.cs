@@ -2,17 +2,17 @@
 
 class A
 {
-    public abstract class Adapter
-    {
-    }
+	public abstract class Adapter
+	{
+	}
 }
 
 
 class B : A
 {
-    public new int Adapter { get; set; }
+	public new int Adapter { get; set; }
 
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }

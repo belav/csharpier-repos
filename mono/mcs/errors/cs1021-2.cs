@@ -2,7 +2,7 @@
 // Line: 6
 
 class X {
-    public static void Main() {
-        int h = 0xffffffffffffffffffffffffff;
-    }
+	public static void Main() {
+		int h = 0xffffffffffffffffffffffffff;
+	}
 }

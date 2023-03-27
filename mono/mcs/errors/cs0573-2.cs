@@ -3,5 +3,5 @@
 
 struct S
 {
-    public int Prop { get; set; } = 3;
+	public int Prop { get; set; } = 3;
 }

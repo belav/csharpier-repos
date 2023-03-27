@@ -2,7 +2,7 @@
 // IBindingDeliveryCapabilities.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -27,10 +27,10 @@
 //
 namespace System.ServiceModel.Channels
 {
-    public interface IBindingDeliveryCapabilities
-    {
-        bool AssuresOrderedDelivery { get; }
+	public interface IBindingDeliveryCapabilities
+	{
+		bool AssuresOrderedDelivery { get; }
 
-        bool QueuedDelivery { get; }
-    }
+		bool QueuedDelivery { get; }
+	}
 }

@@ -62,15 +62,15 @@ namespace CseTest
             int v17 = 0;
             int v18 = 0;
 #if LOOP         
-            do {
+			do {
             do {
 #endif
 #if TRY
-            try{
+			try{
 #endif
 #if LOOP  
-                    do {
-            for (int i=0;i<10;i++){
+					do {
+			for (int i=0;i<10;i++){
 #endif
 
             v1 = (((class_s.a + class_s.b) + class_s.c) + class_s.d);
@@ -93,12 +93,12 @@ namespace CseTest
             v18 = ((class_s.a + class_s.b) + class_s.d);
 
 #if LOOP                  
-            }
-                    } while (v17 == 0);
+			}
+					} while (v17 == 0);
 #endif
 #if TRY
-            } finally {
-            }
+			} finally {
+			}
 #endif
             int v19 = (class_s.a + (class_s.b + class_s.d));
             int v20 = (class_s.b + (class_s.a + class_s.d));
@@ -251,8 +251,8 @@ namespace CseTest
             }
 
 #if LOOP               
-                } while (v18 == 0);
-            } while (v17 == 0);
+				} while (v18 == 0);
+			} while (v17 == 0);
 #endif
 
             Console.WriteLine(ret);

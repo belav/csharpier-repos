@@ -20,19 +20,19 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    [Flags]
-    public enum ArrangeStartingPosition {
-        BottomLeft    = 0,
-        BottomRight    = 1,
-        TopLeft        = 2,
-        TopRight    = 3,
-        Hide        = 8
-    }
+	[Flags]
+	public enum ArrangeStartingPosition {
+		BottomLeft	= 0,
+		BottomRight	= 1,
+		TopLeft		= 2,
+		TopRight	= 3,
+		Hide		= 8
+	}
 }

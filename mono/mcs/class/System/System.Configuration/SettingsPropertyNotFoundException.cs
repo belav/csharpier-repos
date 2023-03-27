@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsPropertyNotFoundException.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,25 +31,25 @@ using System.Runtime.Serialization;
 
 namespace System.Configuration
 {
-    [Serializable]
-    public class SettingsPropertyNotFoundException : Exception
-    {
-        public SettingsPropertyNotFoundException ()
-            : base ()
-        { }
+	[Serializable]
+	public class SettingsPropertyNotFoundException : Exception
+	{
+		public SettingsPropertyNotFoundException ()
+			: base ()
+		{ }
 
-        public SettingsPropertyNotFoundException (String message)
-            : base (message)
-        { }
+		public SettingsPropertyNotFoundException (String message)
+			: base (message)
+		{ }
 
-        protected SettingsPropertyNotFoundException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        { }
+		protected SettingsPropertyNotFoundException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{ }
 
-        public SettingsPropertyNotFoundException (String message, Exception innerException)
-            : base (message, innerException)
-        { }
-    }
+		public SettingsPropertyNotFoundException (String message, Exception innerException)
+			: base (message, innerException)
+		{ }
+	}
 
 }
 

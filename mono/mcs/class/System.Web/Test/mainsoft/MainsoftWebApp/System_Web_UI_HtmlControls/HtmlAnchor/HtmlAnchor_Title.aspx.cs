@@ -35,73 +35,73 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
 {
-    public class HtmlAnchor_Title
-        : GHTBaseWeb 
-    {
-        protected GHTWebControls.GHTSubTest GHTSubTest1;
-        protected GHTWebControls.GHTSubTest GHTSubTest2;
-        protected GHTWebControls.GHTSubTest GHTSubTest3;
-        protected System.Web.UI.HtmlControls.HtmlAnchor anchor1;
-        protected System.Web.UI.HtmlControls.HtmlAnchor anchor2;
-        protected System.Web.UI.HtmlControls.HtmlAnchor anchor3;
-        #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
-        {
-            //
-            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-            //
-            InitializeComponent();
-            base.OnInit(e);
-        }
-        
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent() 
-        {    
-            this.Load += new System.EventHandler(this.Page_Load);
+	public class HtmlAnchor_Title
+		: GHTBaseWeb 
+	{
+		protected GHTWebControls.GHTSubTest GHTSubTest1;
+		protected GHTWebControls.GHTSubTest GHTSubTest2;
+		protected GHTWebControls.GHTSubTest GHTSubTest3;
+		protected System.Web.UI.HtmlControls.HtmlAnchor anchor1;
+		protected System.Web.UI.HtmlControls.HtmlAnchor anchor2;
+		protected System.Web.UI.HtmlControls.HtmlAnchor anchor3;
+		#region Web Form Designer generated code
+		override protected void OnInit(EventArgs e) 
+		{
+			//
+			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
+			//
+			InitializeComponent();
+			base.OnInit(e);
+		}
+		
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent() 
+		{    
+			this.Load += new System.EventHandler(this.Page_Load);
 
-        }
-        #endregion
+		}
+		#endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
-        {
-            //Put user code to initialize the page here
+		private void Page_Load(object sender, System.EventArgs e) 
+		{
+			//Put user code to initialize the page here
 
-            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-            GHTTestBegin(frm);
+			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+			GHTTestBegin(frm);
 
-            GHTActiveSubTest = GHTSubTest1;; 
-            try 
-            { 
-                GHTSubTestAddResult(anchor1.Title); 
-            } 
-            catch (Exception ex) 
-            { 
-                GHTSubTestUnexpectedExceptionCaught(ex); 
-            } 
-            GHTActiveSubTest = GHTSubTest2;; 
-            try 
-            { 
-                anchor2.Title = "New title"; 
-                GHTSubTestAddResult(anchor2.Title); 
-            } 
-            catch (Exception ex) 
-            { 
-                GHTSubTestUnexpectedExceptionCaught(ex); 
-            } 
-            GHTActiveSubTest = GHTSubTest3;; 
-            try 
-            { 
-                anchor3.Title = "123"; 
-                GHTSubTestAddResult(anchor3.Title); 
-            } 
-            catch (Exception ex) 
-            { 
-                GHTSubTestUnexpectedExceptionCaught(ex); 
-            }
-            GHTTestEnd();
-        }
-    }
+			GHTActiveSubTest = GHTSubTest1;; 
+			try 
+			{ 
+				GHTSubTestAddResult(anchor1.Title); 
+			} 
+			catch (Exception ex) 
+			{ 
+				GHTSubTestUnexpectedExceptionCaught(ex); 
+			} 
+			GHTActiveSubTest = GHTSubTest2;; 
+			try 
+			{ 
+				anchor2.Title = "New title"; 
+				GHTSubTestAddResult(anchor2.Title); 
+			} 
+			catch (Exception ex) 
+			{ 
+				GHTSubTestUnexpectedExceptionCaught(ex); 
+			} 
+			GHTActiveSubTest = GHTSubTest3;; 
+			try 
+			{ 
+				anchor3.Title = "123"; 
+				GHTSubTestAddResult(anchor3.Title); 
+			} 
+			catch (Exception ex) 
+			{ 
+				GHTSubTestUnexpectedExceptionCaught(ex); 
+			}
+			GHTTestEnd();
+		}
+	}
 }

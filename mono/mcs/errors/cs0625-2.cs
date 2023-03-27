@@ -5,13 +5,13 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace CS0625 {
-    [StructLayout(LayoutKind.Explicit)]
-    partial class GValue {
-        public int foo;
-    }
-    
-    class Tests {
-        public static void Main () {
-        }
-    }
+	[StructLayout(LayoutKind.Explicit)]
+	partial class GValue {
+		public int foo;
+	}
+	
+	class Tests {
+		public static void Main () {
+		}
+	}
 }

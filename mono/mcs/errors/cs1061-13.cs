@@ -3,8 +3,8 @@
 
 public class M
 {
-    public static void Main ()
-    {
-        var a = "ababab".Where (l => l == 'b');
-    }
+	public static void Main ()
+	{
+		var a = "ababab".Where (l => l == 'b');
+	}
 }

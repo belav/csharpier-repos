@@ -39,75 +39,75 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRowView_Delete : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRowView_Delete tc = new DataRowView_Delete();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRowView_Delete");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRowView_Delete tc = new DataRowView_Delete();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRowView_Delete");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
+	public void run()
+	{
+		Exception exp = null;
 
-        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-        DataView dv = new DataView(dt);
+		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+		DataView dv = new DataView(dt);
 
-        DataRowView drv = dv[0];
-        int TableRowsCount = dt.Rows.Count;
-        int ViewRowCount = dv.Count;
-        
+		DataRowView drv = dv[0];
+		int TableRowsCount = dt.Rows.Count;
+		int ViewRowCount = dv.Count;
+		
       
-        try
-        {
-            BeginCase("DataView Count");
-            drv.Delete();
-            Compare(ViewRowCount-1,dv.Count);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("DataView Count");
+			drv.Delete();
+			Compare(ViewRowCount-1,dv.Count);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            //the table count should stay the same until EndEdit is invoked
-            BeginCase("Table Count");
-            Compare(dt.Rows.Count,TableRowsCount);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			//the table count should stay the same until EndEdit is invoked
+			BeginCase("Table Count");
+			Compare(dt.Rows.Count,TableRowsCount);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("DataRowState deleted");
-            Compare(drv.Row.RowState ,DataRowState.Deleted );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("DataRowState deleted");
+			Compare(drv.Row.RowState ,DataRowState.Deleted );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-    }
+	}
 }
 }

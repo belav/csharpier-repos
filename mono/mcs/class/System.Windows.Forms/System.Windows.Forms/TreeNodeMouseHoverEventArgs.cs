@@ -23,29 +23,29 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-    [ComVisible (true)]
-    public class TreeNodeMouseHoverEventArgs : EventArgs
-    {
-        private TreeNode node;
+	[ComVisible (true)]
+	public class TreeNodeMouseHoverEventArgs : EventArgs
+	{
+		private TreeNode node;
 
-        #region Public Constructors
-        public TreeNodeMouseHoverEventArgs (TreeNode node) : base ()
-        {
-            this.node = node;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public TreeNodeMouseHoverEventArgs (TreeNode node) : base ()
+		{
+			this.node = node;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public TreeNode Node {
-            get { return this.node; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public TreeNode Node {
+			get { return this.node; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

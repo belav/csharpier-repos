@@ -2,7 +2,7 @@
 // MarshalByRefObjectCas.cs - CAS unit tests for System.MarshalByRefObject
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,64 +36,64 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class MarshalByRefObjectCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class MarshalByRefObjectCas {
 
-        private MarshalByRefObject mbro;
+		private MarshalByRefObject mbro;
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
 
-            // we do this in SetUp because we want the security 
-            // stack to be "normal/empty" so each unit test can 
-            // mess with it as it wishes
-            mbro = (MarshalByRefObject) AppDomain.CurrentDomain;
-        }
+			// we do this in SetUp because we want the security 
+			// stack to be "normal/empty" so each unit test can 
+			// mess with it as it wishes
+			mbro = (MarshalByRefObject) AppDomain.CurrentDomain;
+		}
 
-        // we use reflection to call the AppDomain (who inherits from MarshalByRefObject)
-        // as it's methods are protected by LinkDemand (which will be converted into full
-        // demand, i.e. a stack walk) when reflection is used (i.e. it gets testable).
+		// we use reflection to call the AppDomain (who inherits from MarshalByRefObject)
+		// as it's methods are protected by LinkDemand (which will be converted into full
+		// demand, i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void CreateObjRef ()
-        {
-            MethodInfo mi = typeof (AppDomain).GetMethod ("CreateObjRef");
-            Assert.IsNotNull (mi.Invoke (mbro, new object [1] { typeof (int) }), "CreateObjRef");
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void CreateObjRef ()
+		{
+			MethodInfo mi = typeof (AppDomain).GetMethod ("CreateObjRef");
+			Assert.IsNotNull (mi.Invoke (mbro, new object [1] { typeof (int) }), "CreateObjRef");
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetLifetimeService ()
-        {
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void GetLifetimeService ()
+		{
 
-            MethodInfo mi = typeof (AppDomain).GetMethod ("GetLifetimeService");
-            Assert.IsNotNull (mi.Invoke (mbro, null), "GetLifetimeService");
-        }
+			MethodInfo mi = typeof (AppDomain).GetMethod ("GetLifetimeService");
+			Assert.IsNotNull (mi.Invoke (mbro, null), "GetLifetimeService");
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
-        public void AppDomain_InitializeLifetimeService ()
-        {
-            // special case - AppDomain doesn't call base.InitializeLifetimeService
-            // so there is no link, nor the stack required, to initiate the Demand
-            MethodInfo mi = typeof (AppDomain).GetMethod ("InitializeLifetimeService");
-            Assert.IsNull (mi.Invoke (mbro, null), "InitializeLifetimeService");
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
+		public void AppDomain_InitializeLifetimeService ()
+		{
+			// special case - AppDomain doesn't call base.InitializeLifetimeService
+			// so there is no link, nor the stack required, to initiate the Demand
+			MethodInfo mi = typeof (AppDomain).GetMethod ("InitializeLifetimeService");
+			Assert.IsNull (mi.Invoke (mbro, null), "InitializeLifetimeService");
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Stream_InitializeLifetimeService ()
-        {
-            MethodInfo mi = typeof (Stream).GetMethod ("InitializeLifetimeService");
-            Assert.IsNull (mi.Invoke (Stream.Null, null), "InitializeLifetimeService");
-        }
-    }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void Stream_InitializeLifetimeService ()
+		{
+			MethodInfo mi = typeof (Stream).GetMethod ("InitializeLifetimeService");
+			Assert.IsNull (mi.Invoke (Stream.Null, null), "InitializeLifetimeService");
+		}
+	}
 }

@@ -1,4 +1,4 @@
-namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc {
 
     // represents a result that doesn't do anything, like a controller action returning null
     public class EmptyResult : ActionResult {

@@ -2,7 +2,7 @@
 // FaultDescription.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,50 +36,50 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Description
 {
-    [DebuggerDisplay ("Name={name}, Action={action}, DetailType={detailType}")]
-    public class FaultDescription
-    {
-        string action, name, ns;
-        Type detail_type;
-        bool has_protection_level;
-        ProtectionLevel protection_level;
+	[DebuggerDisplay ("Name={name}, Action={action}, DetailType={detailType}")]
+	public class FaultDescription
+	{
+		string action, name, ns;
+		Type detail_type;
+		bool has_protection_level;
+		ProtectionLevel protection_level;
 
-        public FaultDescription (string action)
-        {
-            if (action == null)
-                throw new ArgumentNullException ("action");
-            this.action = action;
-        }
+		public FaultDescription (string action)
+		{
+			if (action == null)
+				throw new ArgumentNullException ("action");
+			this.action = action;
+		}
 
-        public string Action {
-            get { return action; }
-        }
+		public string Action {
+			get { return action; }
+		}
 
-        public Type DetailType {
-            get { return detail_type; }
-            set { detail_type = value; }
-        }
+		public Type DetailType {
+			get { return detail_type; }
+			set { detail_type = value; }
+		}
 
-        public string Name {
-            get { return name; }
-            set { name = value; }
-        }
+		public string Name {
+			get { return name; }
+			set { name = value; }
+		}
 
-        public string Namespace {
-            get { return ns; }
-            set { ns= value; }
-        }
+		public string Namespace {
+			get { return ns; }
+			set { ns= value; }
+		}
 
-        public bool HasProtectionLevel {
-            get { return has_protection_level; }
-        }
+		public bool HasProtectionLevel {
+			get { return has_protection_level; }
+		}
 
-        public ProtectionLevel ProtectionLevel {
-            get { return protection_level; }
-            set {
-                protection_level = value;
-                has_protection_level = true;
-            }
-        }
-    }
+		public ProtectionLevel ProtectionLevel {
+			get { return protection_level; }
+			set {
+				protection_level = value;
+				has_protection_level = true;
+			}
+		}
+	}
 }

@@ -33,17 +33,17 @@ using System.Runtime.Remoting;
 
 namespace System.Runtime.Remoting.Channels {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IServerChannelSinkStack : IServerResponseChannelSinkStack
-    {
-        object Pop (IServerChannelSink sink);
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IServerChannelSinkStack : IServerResponseChannelSinkStack
+	{
+		object Pop (IServerChannelSink sink);
 
-        void Push (IServerChannelSink sink, object state);
+		void Push (IServerChannelSink sink, object state);
 
-        void ServerCallback (IAsyncResult ar);
+		void ServerCallback (IAsyncResult ar);
 
-        void Store (IServerChannelSink sink, object state);
+		void Store (IServerChannelSink sink, object state);
 
-        void StoreAndDispatch (IServerChannelSink sink, object state);
-    }
+		void StoreAndDispatch (IServerChannelSink sink, object state);
+	}
 }

@@ -33,133 +33,133 @@ using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.BuildEngine {
-    [TestFixture]
-    public class BuildItemGroupCollectionTest {
-        
-        Engine            engine;
-        Project            project;
-        
-        [Test]
-        [Category ("NotDotNet")]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TestCopyTo1 ()
-        {
-            string documentString = @"
-                <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <ItemGroup>
-                        <Name Include='Value' />
-                    </ItemGroup>
-                </Project>
-            ";
+	[TestFixture]
+	public class BuildItemGroupCollectionTest {
+		
+		Engine			engine;
+		Project			project;
+		
+		[Test]
+		[Category ("NotDotNet")]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void TestCopyTo1 ()
+		{
+			string documentString = @"
+				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+					<ItemGroup>
+						<Name Include='Value' />
+					</ItemGroup>
+				</Project>
+			";
 
-            engine = new Engine (Consts.BinPath);
+			engine = new Engine (Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            
-            project.ItemGroups.CopyTo (null, 0);
-        }
+			project = engine.CreateNewProject ();
+			project.LoadXml (documentString);
+			
+			project.ItemGroups.CopyTo (null, 0);
+		}
 
-        [Test]
-        [ExpectedException (typeof (IndexOutOfRangeException))]
-        public void TestCopyTo2 ()
-        {
-            string documentString = @"
-                <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <ItemGroup>
-                        <Name Include='Value' />
-                    </ItemGroup>
-                </Project>
-            ";
+		[Test]
+		[ExpectedException (typeof (IndexOutOfRangeException))]
+		public void TestCopyTo2 ()
+		{
+			string documentString = @"
+				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+					<ItemGroup>
+						<Name Include='Value' />
+					</ItemGroup>
+				</Project>
+			";
 
-            engine = new Engine (Consts.BinPath);
+			engine = new Engine (Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            
-            project.ItemGroups.CopyTo (new BuildItemGroup [1], -1);
-        }
+			project = engine.CreateNewProject ();
+			project.LoadXml (documentString);
+			
+			project.ItemGroups.CopyTo (new BuildItemGroup [1], -1);
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void TestCopyTo3 ()
-        {
-            string documentString = @"
-                <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <ItemGroup>
-                        <Name Include='Value' />
-                    </ItemGroup>
-                </Project>
-            ";
+		[Test]
+		[ExpectedException (typeof (InvalidCastException))]
+		public void TestCopyTo3 ()
+		{
+			string documentString = @"
+				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+					<ItemGroup>
+						<Name Include='Value' />
+					</ItemGroup>
+				</Project>
+			";
 
-            engine = new Engine (Consts.BinPath);
+			engine = new Engine (Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            
-            project.ItemGroups.CopyTo (new BuildItemGroup [][] { new BuildItemGroup [] {
-                new BuildItemGroup ()}}, 0);
-        }
+			project = engine.CreateNewProject ();
+			project.LoadXml (documentString);
+			
+			project.ItemGroups.CopyTo (new BuildItemGroup [][] { new BuildItemGroup [] {
+				new BuildItemGroup ()}}, 0);
+		}
 
-        [Test]
-        [ExpectedException (typeof (IndexOutOfRangeException))]
-        public void TestCopyTo4 ()
-        {
-            string documentString = @"
-                <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <ItemGroup>
-                        <Name Include='Value' />
-                    </ItemGroup>
-                </Project>
-            ";
+		[Test]
+		[ExpectedException (typeof (IndexOutOfRangeException))]
+		public void TestCopyTo4 ()
+		{
+			string documentString = @"
+				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+					<ItemGroup>
+						<Name Include='Value' />
+					</ItemGroup>
+				</Project>
+			";
 
-            engine = new Engine (Consts.BinPath);
+			engine = new Engine (Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            
-            project.ItemGroups.CopyTo (new BuildItemGroup [1], 2);
-        }
+			project = engine.CreateNewProject ();
+			project.LoadXml (documentString);
+			
+			project.ItemGroups.CopyTo (new BuildItemGroup [1], 2);
+		}
 
-        [Test]
-        [ExpectedException (typeof (IndexOutOfRangeException))]
-        public void TestCopyTo5 ()
-        {
-            string documentString = @"
-                <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <ItemGroup>
-                        <Name Include='Value' />
-                    </ItemGroup>
-                </Project>
-            ";
+		[Test]
+		[ExpectedException (typeof (IndexOutOfRangeException))]
+		public void TestCopyTo5 ()
+		{
+			string documentString = @"
+				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+					<ItemGroup>
+						<Name Include='Value' />
+					</ItemGroup>
+				</Project>
+			";
 
-            engine = new Engine (Consts.BinPath);
+			engine = new Engine (Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            
-            project.ItemGroups.CopyTo (new BuildItemGroup [1], 1);
-        }
+			project = engine.CreateNewProject ();
+			project.LoadXml (documentString);
+			
+			project.ItemGroups.CopyTo (new BuildItemGroup [1], 1);
+		}
 
-        [Test]
-        [ExpectedException (typeof (IndexOutOfRangeException))]
-        public void TestCopyTo6 ()
-        {
-            string documentString = @"
-                <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <ItemGroup>
-                    </ItemGroup>
-                    <ItemGroup>
-                    </ItemGroup>
-                </Project>
-            ";
+		[Test]
+		[ExpectedException (typeof (IndexOutOfRangeException))]
+		public void TestCopyTo6 ()
+		{
+			string documentString = @"
+				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+					<ItemGroup>
+					</ItemGroup>
+					<ItemGroup>
+					</ItemGroup>
+				</Project>
+			";
 
-            engine = new Engine (Consts.BinPath);
+			engine = new Engine (Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+			project = engine.CreateNewProject ();
+			project.LoadXml (documentString);
 
-            project.ItemGroups.CopyTo (new BuildItemGroup [1], 0);
-        }
-    }
+			project.ItemGroups.CopyTo (new BuildItemGroup [1], 0);
+		}
+	}
 }

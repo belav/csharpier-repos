@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -57,16 +57,16 @@ void M()
 {
 void M()
 {
-            int i = 1;{|caret:|}
+			int i = 1;{|caret:|}
     }
 }";
             var expected =
 @"class A
 {
-    void M()
-    {
-        int i = 1;
-    }
+	void M()
+	{
+		int i = 1;
+	}
 }";
             await using var testLspServer = await CreateTestLspServerAsync(markup);
             var documentURI = testLspServer.GetLocations("caret").Single().Uri;
@@ -85,7 +85,7 @@ void M()
 {
 void M()
 {
-            int i = 1;{|caret:|}
+			int i = 1;{|caret:|}
     }
 }";
             var expected =

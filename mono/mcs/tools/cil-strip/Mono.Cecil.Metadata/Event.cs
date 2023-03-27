@@ -31,52 +31,52 @@
 
 namespace Mono.Cecil.Metadata {
 
-    using Mono.Cecil;
+	using Mono.Cecil;
 
-    internal sealed class EventTable : IMetadataTable {
+	internal sealed class EventTable : IMetadataTable {
 
-        public const int RId = 0x14;
+		public const int RId = 0x14;
 
-        RowCollection m_rows;
+		RowCollection m_rows;
 
-        public EventRow this [int index] {
-            get { return m_rows [index] as EventRow; }
-            set { m_rows [index] = value; }
-        }
+		public EventRow this [int index] {
+			get { return m_rows [index] as EventRow; }
+			set { m_rows [index] = value; }
+		}
 
-        public RowCollection Rows {
-            get { return m_rows; }
-            set { m_rows = value; }
-        }
+		public RowCollection Rows {
+			get { return m_rows; }
+			set { m_rows = value; }
+		}
 
-        public int Id {
-            get { return RId; }
-        }
+		public int Id {
+			get { return RId; }
+		}
 
-        internal EventTable ()
-        {
-        }
+		internal EventTable ()
+		{
+		}
 
-        public void Accept (IMetadataTableVisitor visitor)
-        {
-            visitor.VisitEventTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
-        }
-    }
+		public void Accept (IMetadataTableVisitor visitor)
+		{
+			visitor.VisitEventTable (this);
+			this.Rows.Accept (visitor.GetRowVisitor ());
+		}
+	}
 
-    internal sealed class EventRow : IMetadataRow {
+	internal sealed class EventRow : IMetadataRow {
 
-        public EventAttributes EventFlags;
-        public uint Name;
-        public MetadataToken EventType;
+		public EventAttributes EventFlags;
+		public uint Name;
+		public MetadataToken EventType;
 
-        internal EventRow ()
-        {
-        }
+		internal EventRow ()
+		{
+		}
 
-        public void Accept (IMetadataRowVisitor visitor)
-        {
-            visitor.VisitEventRow (this);
-        }
-    }
+		public void Accept (IMetadataRowVisitor visitor)
+		{
+			visitor.VisitEventRow (this);
+		}
+	}
 }

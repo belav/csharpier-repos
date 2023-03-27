@@ -1,4 +1,4 @@
 public class Parent
 {
-    protected internal void Foo () {}
+	protected internal void Foo () {}
 }

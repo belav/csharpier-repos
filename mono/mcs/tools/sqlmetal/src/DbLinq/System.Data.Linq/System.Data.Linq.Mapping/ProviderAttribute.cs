@@ -31,24 +31,24 @@ using System;
 
 namespace System.Data.Linq.Mapping
 {
-    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false)]
-    public sealed class ProviderAttribute : Attribute
-    {
-        public ProviderAttribute ()
-        {
-        }
+	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false)]
+	public sealed class ProviderAttribute : Attribute
+	{
+		public ProviderAttribute ()
+		{
+		}
 
-        public ProviderAttribute (Type type)
-        {
-            if (type == null)
-                throw new ArgumentNullException ("type");
-            this.type = type;
-        }
+		public ProviderAttribute (Type type)
+		{
+			if (type == null)
+				throw new ArgumentNullException ("type");
+			this.type = type;
+		}
 
-        Type type;
+		Type type;
 
-        public Type Type {
-            get { return type; }
-        }
-    }
+		public Type Type {
+			get { return type; }
+		}
+	}
 }

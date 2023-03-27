@@ -2,7 +2,7 @@
 // StackInfo.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,101 +27,101 @@
 //
 
 namespace Mono.CodeContracts.Static.Analysis.StackAnalysis {
-    struct StackInfo {
-        private StackInfo<object> stack;
+	struct StackInfo {
+		private StackInfo<object> stack;
 
-        public int Depth {
-            get { return this.stack.Depth; }
-        }
+		public int Depth {
+			get { return this.stack.Depth; }
+		}
 
-        public object this [int offset] {
-            get { return this.stack [offset]; }
-        }
+		public object this [int offset] {
+			get { return this.stack [offset]; }
+		}
 
-        public StackInfo (int depth, int capacity)
-        {
-            this.stack = new StackInfo<object> (depth, capacity);
-        }
+		public StackInfo (int depth, int capacity)
+		{
+			this.stack = new StackInfo<object> (depth, capacity);
+		}
 
-        private StackInfo (StackInfo<object> copy)
-        {
-            this.stack = copy;
-        }
+		private StackInfo (StackInfo<object> copy)
+		{
+			this.stack = copy;
+		}
 
-        public StackInfo Pop (int slots)
-        {
-            return new StackInfo (this.stack.Pop (slots));
-        }
+		public StackInfo Pop (int slots)
+		{
+			return new StackInfo (this.stack.Pop (slots));
+		}
 
-        public StackInfo Push ()
-        {
-            this.stack.Push (null);
-            return this;
-        }
+		public StackInfo Push ()
+		{
+			this.stack.Push (null);
+			return this;
+		}
 
-        public StackInfo PushThis ()
-        {
-            this.stack.Push (true);
-            return this;
-        }
+		public StackInfo PushThis ()
+		{
+			this.stack.Push (true);
+			return this;
+		}
 
-        public StackInfo Push<T> (T target)
-        {
-            this.stack.Push (target);
-            return this;
-        }
+		public StackInfo Push<T> (T target)
+		{
+			this.stack.Push (target);
+			return this;
+		}
 
-        public void Adjust (int delta)
-        {
-            if (delta == 0)
-                return;
-            if (delta < 0)
-                this.stack.Pop (-delta);
-            for (int i = 0; i < delta; ++i)
-                Push ();
-        }
+		public void Adjust (int delta)
+		{
+			if (delta == 0)
+				return;
+			if (delta < 0)
+				this.stack.Pop (-delta);
+			for (int i = 0; i < delta; ++i)
+				Push ();
+		}
 
-        public bool IsThis (int offset)
-        {
-            return As<bool> (offset);
-        }
+		public bool IsThis (int offset)
+		{
+			return As<bool> (offset);
+		}
 
-        public bool TryGet<T> (int offset, out T target)
-        {
-            object o = this [offset];
-            if (o is T) {
-                target = (T) o;
-                return true;
-            }
-            target = default(T);
-            return false;
-        }
+		public bool TryGet<T> (int offset, out T target)
+		{
+			object o = this [offset];
+			if (o is T) {
+				target = (T) o;
+				return true;
+			}
+			target = default(T);
+			return false;
+		}
 
-        private T As<T> (int offset)
-        {
-            T res;
-            TryGetTarget (offset, out res);
-            return res;
-        }
+		private T As<T> (int offset)
+		{
+			T res;
+			TryGetTarget (offset, out res);
+			return res;
+		}
 
-        public StackInfo Clone ()
-        {
-            return new StackInfo (new StackInfo<object> (this.stack));
-        }
+		public StackInfo Clone ()
+		{
+			return new StackInfo (new StackInfo<object> (this.stack));
+		}
 
-        public override string ToString ()
-        {
-            return this.stack.ToString ();
-        }
+		public override string ToString ()
+		{
+			return this.stack.ToString ();
+		}
 
-        public bool TryGetTarget<T> (int offset, out T target)
-        {
-            if (this [offset] is T) {
-                target = (T) this [offset];
-                return true;
-            }
-            target = default(T);
-            return false;
-        }
-    }
+		public bool TryGetTarget<T> (int offset, out T target)
+		{
+			if (this [offset] is T) {
+				target = (T) this [offset];
+				return true;
+			}
+			target = default(T);
+			return false;
+		}
+	}
 }

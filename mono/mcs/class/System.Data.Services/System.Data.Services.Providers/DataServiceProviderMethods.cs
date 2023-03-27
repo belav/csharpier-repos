@@ -1,4 +1,4 @@
-// 
+﻿// 
 // DataServiceProviderMethods.cs
 //  
 // Author:
@@ -31,55 +31,55 @@ using System.Reflection;
 
 namespace System.Data.Services.Providers
 {
-    public static class DataServiceProviderMethods
-    {
-        public static object GetValue (object value, ResourceProperty property)
-        {
-            // LAMESPEC: this method is not implemented in the .NET assembly
-            throw new NotImplementedException ();
-        }
+	public static class DataServiceProviderMethods
+	{
+		public static object GetValue (object value, ResourceProperty property)
+		{
+			// LAMESPEC: this method is not implemented in the .NET assembly
+			throw new NotImplementedException ();
+		}
 
-        public static IEnumerable <T> GetSequenceValue<T>  (object value, ResourceProperty property)
-        {
-            // LAMESPEC: this method is not implemented in the .NET assembly
-            throw new NotImplementedException ();
-        }
+		public static IEnumerable <T> GetSequenceValue<T>  (object value, ResourceProperty property)
+		{
+			// LAMESPEC: this method is not implemented in the .NET assembly
+			throw new NotImplementedException ();
+		}
 
-        public static object Convert (object value, ResourceType type)
-        {
-            // LAMESPEC: this method is not implemented in the .NET assembly
-            throw new NotImplementedException ();
-        }
+		public static object Convert (object value, ResourceType type)
+		{
+			// LAMESPEC: this method is not implemented in the .NET assembly
+			throw new NotImplementedException ();
+		}
 
-        public static bool TypeIs (object value, ResourceType type)
-        {
-            // LAMESPEC: this method is not implemented in the .NET assembly
-            throw new NotImplementedException ();
-        }
+		public static bool TypeIs (object value, ResourceType type)
+		{
+			// LAMESPEC: this method is not implemented in the .NET assembly
+			throw new NotImplementedException ();
+		}
 
-        public static int Compare (string left, string right)
-        {
-            return Comparer <string>.Default.Compare (left, right);
-        }
+		public static int Compare (string left, string right)
+		{
+			return Comparer <string>.Default.Compare (left, right);
+		}
 
-        public static int Compare (bool left, bool right)
-        {
-            return Comparer <bool>.Default.Compare (left, right);
-        }
+		public static int Compare (bool left, bool right)
+		{
+			return Comparer <bool>.Default.Compare (left, right);
+		}
 
-        public static int Compare (bool? left, bool? right)
-        {
-            return Comparer <bool?>.Default.Compare (left, right);
-        }    
+		public static int Compare (bool? left, bool? right)
+		{
+			return Comparer <bool?>.Default.Compare (left, right);
+		}	
 
-        public static int Compare (Guid left, Guid right)
-        {
-            return Comparer <Guid>.Default.Compare (left, right);
-        }
+		public static int Compare (Guid left, Guid right)
+		{
+			return Comparer <Guid>.Default.Compare (left, right);
+		}
 
-        public static int Compare (Guid? left, Guid? right)
-        {
-            return Comparer <Guid?>.Default.Compare (left, right);
-        }
-    }
+		public static int Compare (Guid? left, Guid? right)
+		{
+			return Comparer <Guid?>.Default.Compare (left, right);
+		}
+	}
 }

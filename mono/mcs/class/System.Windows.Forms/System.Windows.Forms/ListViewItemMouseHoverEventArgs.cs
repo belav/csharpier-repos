@@ -23,7 +23,7 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
@@ -31,22 +31,22 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-    [ComVisible (true)]
-    public class ListViewItemMouseHoverEventArgs : EventArgs
-    {
-        private ListViewItem item;
+	[ComVisible (true)]
+	public class ListViewItemMouseHoverEventArgs : EventArgs
+	{
+		private ListViewItem item;
 
-        #region Public Constructors
-        public ListViewItemMouseHoverEventArgs (ListViewItem item) : base ()
-        {
-            this.item = item;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public ListViewItemMouseHoverEventArgs (ListViewItem item) : base ()
+		{
+			this.item = item;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public ListViewItem Item {
-            get { return this.item; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public ListViewItem Item {
+			get { return this.item; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

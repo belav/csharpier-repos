@@ -2,7 +2,7 @@
 // IPropertyCollection.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,9 +27,9 @@
 // 
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    internal interface IPropertyCollection {
-        bool Contains (TypedKey key);
-        void Add<T> (TypedKey key, T value);
-        bool TryGetValue<T> (TypedKey key, out T value);
-    }
+	internal interface IPropertyCollection {
+		bool Contains (TypedKey key);
+		void Add<T> (TypedKey key, T value);
+		bool TryGetValue<T> (TypedKey key, out T value);
+	}
 }

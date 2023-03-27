@@ -2,7 +2,7 @@
 // ProviderCommunicationObject.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -40,63 +40,63 @@ using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenReq
 
 namespace System.ServiceModel.Security.Tokens
 {
-    abstract class ProviderCommunicationObject : CommunicationObject
-    {
-        Binding issuer_binding;
-        EndpointAddress issuer_address, target_address;
-        KeyedByTypeCollection<IEndpointBehavior> behaviors =
-            new KeyedByTypeCollection<IEndpointBehavior> ();
-        SecurityTokenSerializer serializer;
-        SecurityAlgorithmSuite algorithm;
+	abstract class ProviderCommunicationObject : CommunicationObject
+	{
+		Binding issuer_binding;
+		EndpointAddress issuer_address, target_address;
+		KeyedByTypeCollection<IEndpointBehavior> behaviors =
+			new KeyedByTypeCollection<IEndpointBehavior> ();
+		SecurityTokenSerializer serializer;
+		SecurityAlgorithmSuite algorithm;
 
-        public EndpointAddress IssuerAddress {
-            get { return issuer_address; }
-            set { issuer_address = value; }
-        }
+		public EndpointAddress IssuerAddress {
+			get { return issuer_address; }
+			set { issuer_address = value; }
+		}
 
-        public EndpointAddress TargetAddress {
-            get { return target_address; }
-            set { target_address = value; }
-        }
+		public EndpointAddress TargetAddress {
+			get { return target_address; }
+			set { target_address = value; }
+		}
 
-        public Binding IssuerBinding {
-            get { return issuer_binding; }
-            set { issuer_binding = value; }
-        }
+		public Binding IssuerBinding {
+			get { return issuer_binding; }
+			set { issuer_binding = value; }
+		}
 
-        public KeyedByTypeCollection<IEndpointBehavior> IssuerChannelBehaviors {
-            get { return behaviors; }
-        }
+		public KeyedByTypeCollection<IEndpointBehavior> IssuerChannelBehaviors {
+			get { return behaviors; }
+		}
 
-        public SecurityAlgorithmSuite SecurityAlgorithmSuite {
-            get { return algorithm; }
-            set { algorithm= value; }
-        }
+		public SecurityAlgorithmSuite SecurityAlgorithmSuite {
+			get { return algorithm; }
+			set { algorithm= value; }
+		}
 
-        public SecurityTokenSerializer SecurityTokenSerializer {
-            get { return serializer; }
-            set { serializer = value; }
-        }
+		public SecurityTokenSerializer SecurityTokenSerializer {
+			get { return serializer; }
+			set { serializer = value; }
+		}
 
-        protected void EnsureProperties ()
-        {
-            if (State == CommunicationState.Opened)
-                throw new InvalidOperationException ("Already opened.");
+		protected void EnsureProperties ()
+		{
+			if (State == CommunicationState.Opened)
+				throw new InvalidOperationException ("Already opened.");
 
-            if (SecurityTokenSerializer == null)
-                throw new InvalidOperationException ("Security token serializer must be set before opening the token provider.");
+			if (SecurityTokenSerializer == null)
+				throw new InvalidOperationException ("Security token serializer must be set before opening the token provider.");
 
-            if (IssuerAddress == null)
-                throw new InvalidOperationException ("Issuer address must be set before opening the token provider.");
+			if (IssuerAddress == null)
+				throw new InvalidOperationException ("Issuer address must be set before opening the token provider.");
 
-            if (IssuerBinding == null)
-                throw new InvalidOperationException ("IssuerBinding must be set before opening the token provider.");
+			if (IssuerBinding == null)
+				throw new InvalidOperationException ("IssuerBinding must be set before opening the token provider.");
 
-            if (SecurityAlgorithmSuite == null)
-                throw new InvalidOperationException ("Security algorithm suite must be set before opening the token provider.");
+			if (SecurityAlgorithmSuite == null)
+				throw new InvalidOperationException ("Security algorithm suite must be set before opening the token provider.");
 
-            if (TargetAddress == null)
-                throw new InvalidOperationException ("Target address must be set before opening the token provider.");
-        }
-    }
+			if (TargetAddress == null)
+				throw new InvalidOperationException ("Target address must be set before opening the token provider.");
+		}
+	}
 }

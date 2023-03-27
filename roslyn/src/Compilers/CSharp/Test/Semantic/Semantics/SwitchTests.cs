@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -587,7 +587,7 @@ class Conv
                 System.Console.WriteLine(""Fail"");
                 return 1;
         }
-    }        
+    }		
 }";
 
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
@@ -669,7 +669,7 @@ struct Conv
                 System.Console.WriteLine(""Fail"");
                 return 0;
         }
-    }        
+    }		
 }";
 
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
@@ -719,7 +719,7 @@ struct Conv
                 System.Console.WriteLine(""Fail"");
                 return 0;
         }
-    }        
+    }		
 }";
 
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
@@ -760,7 +760,7 @@ struct Conv
     public static implicit operator int?(Conv? C)
     {
         return 0;
-    }    
+    }	
     
     public static int Main()
     {
@@ -773,7 +773,7 @@ struct Conv
         }
 
         return 0;
-    }        
+    }		
 }";
 
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
@@ -813,7 +813,7 @@ struct Conv
     public static implicit operator int?(Conv? C)
     {
         return 0;
-    }    
+    }	
     
     public static int Main()
     {
@@ -826,12 +826,12 @@ struct Conv
         }
 
         return 0;
-    }        
+    }		
 }";
 
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
                 // (27,10): error CS0151: A switch expression or case label must be a bool, char, string, integral, enum, or corresponding nullable type
-                //         switch(C)
+                // 		switch(C)
                 Diagnostic(ErrorCode.ERR_V6SwitchGoverningTypeValueExpected, "C").WithLocation(27, 16)
                 );
             CreateCompilation(text).VerifyDiagnostics(
@@ -881,7 +881,7 @@ struct Conv
                 System.Console.WriteLine(""Fail"");
                 return 1;
         }
-    }        
+    }		
 }
 ";
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics();
@@ -914,7 +914,7 @@ class Conv
                 System.Console.WriteLine(""Fail"");
                 return 1;
         }
-    }        
+    }		
 }";
 
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
@@ -953,7 +953,7 @@ class Conv
                 System.Console.WriteLine(""Fail"");
                 return 1;
         }
-    }        
+    }		
 }";
 
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
@@ -1237,7 +1237,7 @@ class Conv
                 System.Console.WriteLine(""Fail"");
                 return 1;
         }
-    }        
+    }		
 }
 ";
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics();
@@ -1287,7 +1287,7 @@ class Conv
                 System.Console.WriteLine(""Fail"");
                 return 1;
         }
-    }        
+    }		
 }
 ";
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics();
@@ -1330,7 +1330,7 @@ struct Conv
                 System.Console.WriteLine(""Fail"");
                 return 1;
         }
-    }        
+    }		
 }
 ";
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics();
@@ -1411,7 +1411,7 @@ struct Conv
                 System.Console.WriteLine(""Fail"");
                 return 0;
         }
-    }        
+    }		
 }
 ";
             CreateCompilation(text, parseOptions: TestOptions.Regular6).VerifyDiagnostics();
@@ -3472,7 +3472,7 @@ public class C
         }
         catch (SwitchExpressionException ex)
         {
-            Console.Write(""??"");
+            Console.Write(""💥"");
         }
     }
 
@@ -3492,7 +3492,7 @@ namespace System.Runtime.CompilerServices
     }
 }
 ";
-            CompileAndVerify(text, expectedOutput: "12345678??").VerifyIL("C.Main", @"
+            CompileAndVerify(text, expectedOutput: "12345678💥").VerifyIL("C.Main", @"
 {
   // Code size      173 (0xad)
   .maxstack  8
@@ -3565,7 +3565,7 @@ namespace System.Runtime.CompilerServices
   catch System.Runtime.CompilerServices.SwitchExpressionException
   {
     IL_009f:  pop
-    IL_00a0:  ldstr      ""??""
+    IL_00a0:  ldstr      ""💥""
     IL_00a5:  call       ""void System.Console.Write(string)""
     IL_00aa:  leave.s    IL_00ac
   }
@@ -3595,7 +3595,7 @@ public class C
         }
         catch (SwitchExpressionException ex)
         {
-            Console.Write(""??"");
+            Console.Write(""💥"");
         }
     }
 
@@ -3615,7 +3615,7 @@ namespace System.Runtime.CompilerServices
     }
 }
 ";
-            CompileAndVerify(text, expectedOutput: "123456789??").VerifyIL("C.Main", @"
+            CompileAndVerify(text, expectedOutput: "123456789💥").VerifyIL("C.Main", @"
 {
   // Code size      194 (0xc2)
   .maxstack  9
@@ -3695,7 +3695,7 @@ namespace System.Runtime.CompilerServices
   catch System.Runtime.CompilerServices.SwitchExpressionException
   {
     IL_00b4:  pop
-    IL_00b5:  ldstr      ""??""
+    IL_00b5:  ldstr      ""💥""
     IL_00ba:  call       ""void System.Console.Write(string)""
     IL_00bf:  leave.s    IL_00c1
   }

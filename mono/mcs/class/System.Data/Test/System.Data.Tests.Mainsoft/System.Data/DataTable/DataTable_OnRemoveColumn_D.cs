@@ -39,77 +39,77 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_OnRemoveColumn_D : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataTable_OnRemoveColumn_D tc = new DataTable_OnRemoveColumn_D();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataTable_OnRemoveColumn_D");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataTable_OnRemoveColumn_D tc = new DataTable_OnRemoveColumn_D();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataTable_OnRemoveColumn_D");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    //private DataRowAction drExpectedAction;
-    public void run()
-    {
-        Exception exp = null;
-        ProtectedTestClass dt = new ProtectedTestClass(); 
-
-        try
-        {
-            Exception tmpEx = null;
-            base.BeginCase("OnRemoveColumn ");
-            try
-            {
-                dt.OnRemoveColumn_Test();
-            }
-            catch(Exception ex)    {tmpEx = ex;}
-            finally    
-            {
-                base.Compare(tmpEx ,null);
-            } 
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {base.EndCase(exp); exp = null;}
-    }
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    class ProtectedTestClass : DataTable
-    {
-        public ProtectedTestClass() : base()
-        {
-            this.Columns.Add("Id",typeof(int));
-            this.Columns.Add("Value",typeof(string));
-            this.Rows.Add(new object[] {1,"one"});
-            this.Rows.Add(new object[] {2,"two"});
-            this.AcceptChanges();
-        }
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-        public void OnRemoveColumn_Test()
-        {
-            base.OnRemoveColumn(this.Columns[0]); 
-        }
-    }
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	//private DataRowAction drExpectedAction;
+	public void run()
+	{
+		Exception exp = null;
+		ProtectedTestClass dt = new ProtectedTestClass(); 
+
+		try
+		{
+			Exception tmpEx = null;
+			base.BeginCase("OnRemoveColumn ");
+			try
+			{
+				dt.OnRemoveColumn_Test();
+			}
+			catch(Exception ex)	{tmpEx = ex;}
+			finally	
+			{
+				base.Compare(tmpEx ,null);
+			} 
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{base.EndCase(exp); exp = null;}
+	}
+
+
+	class ProtectedTestClass : DataTable
+	{
+		public ProtectedTestClass() : base()
+		{
+			this.Columns.Add("Id",typeof(int));
+			this.Columns.Add("Value",typeof(string));
+			this.Rows.Add(new object[] {1,"one"});
+			this.Rows.Add(new object[] {2,"two"});
+			this.AcceptChanges();
+		}
+
+		public void OnRemoveColumn_Test()
+		{
+			base.OnRemoveColumn(this.Columns[0]); 
+		}
+	}
 }
 }

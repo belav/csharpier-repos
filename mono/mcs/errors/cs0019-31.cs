@@ -7,10 +7,10 @@ struct S
 
 class C
 {
-    public static void Main ()
-    {
-        S s;
-        S x;
-        bool b = s == x;
-    }
+	public static void Main ()
+	{
+		S s;
+		S x;
+		bool b = s == x;
+	}
 }

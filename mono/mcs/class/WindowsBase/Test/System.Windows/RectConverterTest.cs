@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -31,73 +31,73 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows {
 
-    [TestFixture]
-    public class RectConverterTest
-    {
-        [Test]
-        public void CanConvertFrom ()
-        {
-            RectConverter r = new RectConverter ();
+	[TestFixture]
+	public class RectConverterTest
+	{
+		[Test]
+		public void CanConvertFrom ()
+		{
+			RectConverter r = new RectConverter ();
 
-            Assert.IsTrue (r.CanConvertFrom (typeof (string)));
-            Assert.IsFalse (r.CanConvertFrom (typeof (Rect)));
-            Assert.IsFalse (r.CanConvertFrom (typeof (Size)));
-        }
+			Assert.IsTrue (r.CanConvertFrom (typeof (string)));
+			Assert.IsFalse (r.CanConvertFrom (typeof (Rect)));
+			Assert.IsFalse (r.CanConvertFrom (typeof (Size)));
+		}
 
-        [Test]
-        public void CanConvertTo ()
-        {
-            RectConverter r = new RectConverter ();
+		[Test]
+		public void CanConvertTo ()
+		{
+			RectConverter r = new RectConverter ();
 
-            Assert.IsTrue (r.CanConvertTo (typeof (string)));
-            Assert.IsFalse (r.CanConvertTo (typeof (Rect)));
-            Assert.IsFalse (r.CanConvertTo (typeof (Size)));
-        }
+			Assert.IsTrue (r.CanConvertTo (typeof (string)));
+			Assert.IsFalse (r.CanConvertTo (typeof (Rect)));
+			Assert.IsFalse (r.CanConvertTo (typeof (Size)));
+		}
 
-        [Test]
-        public void ConvertFrom ()
-        {
-            RectConverter r = new RectConverter ();
+		[Test]
+		public void ConvertFrom ()
+		{
+			RectConverter r = new RectConverter ();
 
-            object or = r.ConvertFrom ("1, 2, 3, 4");
-            
-            Assert.AreEqual (typeof (Rect), or.GetType());
-            Assert.AreEqual (new Rect (1, 2, 3, 4), or);
+			object or = r.ConvertFrom ("1, 2, 3, 4");
+			
+			Assert.AreEqual (typeof (Rect), or.GetType());
+			Assert.AreEqual (new Rect (1, 2, 3, 4), or);
 
-            or = r.ConvertFrom ("Empty");
-            Assert.AreEqual (typeof (Rect), or.GetType());
-            Assert.IsTrue (((Rect)or).IsEmpty);
-        }
+			or = r.ConvertFrom ("Empty");
+			Assert.AreEqual (typeof (Rect), or.GetType());
+			Assert.IsTrue (((Rect)or).IsEmpty);
+		}
 
-        [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ConvertFrom_size ()
-        {
-            RectConverter r = new RectConverter ();
+		[Test]
+		[ExpectedException (typeof (NotSupportedException))]
+		public void ConvertFrom_size ()
+		{
+			RectConverter r = new RectConverter ();
 
-            r.ConvertFrom (new Size (10, 20));
-        }
+			r.ConvertFrom (new Size (10, 20));
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ConvertFrom_negative ()
-        {
-            RectConverter r = new RectConverter ();
-            r.ConvertFrom ("1, 2, -4, -5");
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentException))]
+		public void ConvertFrom_negative ()
+		{
+			RectConverter r = new RectConverter ();
+			r.ConvertFrom ("1, 2, -4, -5");
+		}
 
-        [Test]
-        public void ConvertTo ()
-        {
-            RectConverter r = new RectConverter ();
+		[Test]
+		public void ConvertTo ()
+		{
+			RectConverter r = new RectConverter ();
 
-            Rect rect = new Rect (0, 0, 1, 2);
+			Rect rect = new Rect (0, 0, 1, 2);
 
-            object o = r.ConvertTo (null, CultureInfo.InvariantCulture, rect, typeof (string));
-            
-            Assert.AreEqual (typeof (string), o.GetType());
-            Assert.AreEqual ("0,0,1,2", (string)o);
-        }
-    }
+			object o = r.ConvertTo (null, CultureInfo.InvariantCulture, rect, typeof (string));
+			
+			Assert.AreEqual (typeof (string), o.GetType());
+			Assert.AreEqual ("0,0,1,2", (string)o);
+		}
+	}
 
 }

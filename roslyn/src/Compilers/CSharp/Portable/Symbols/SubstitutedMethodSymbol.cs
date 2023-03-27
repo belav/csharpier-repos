@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -374,17 +374,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             code = Hash.Combine(containingHashCode, code);
 
-            // Unconstructed methods may contain alpha-renamed type parameters while    
-            // still be considered equal; we do not want to give a different hashcode to such types.    
-            //    
-            // Example:    
-            //   Having original method A<U>.Goo<V>() we create two _unconstructed_ methods    
-            //    A<int>.Goo<V'>    
-            //    A<int>.Goo<V">         
-            //  Note that V' and V" are type parameters substituted via alpha-renaming of original V    
-            //  These are different objects, but represent the same "type parameter at index 1"    
-            //    
-            //  In short - we are not interested in the type arguments of unconstructed methods.    
+            // Unconstructed methods may contain alpha-renamed type parameters while	
+            // still be considered equal; we do not want to give a different hashcode to such types.	
+            //	
+            // Example:	
+            //   Having original method A<U>.Goo<V>() we create two _unconstructed_ methods	
+            //    A<int>.Goo<V'>	
+            //    A<int>.Goo<V">     	
+            //  Note that V' and V" are type parameters substituted via alpha-renaming of original V	
+            //  These are different objects, but represent the same "type parameter at index 1"	
+            //	
+            //  In short - we are not interested in the type arguments of unconstructed methods.	
             if ((object)ConstructedFrom != (object)this)
             {
                 foreach (var arg in this.TypeArgumentsWithAnnotations)

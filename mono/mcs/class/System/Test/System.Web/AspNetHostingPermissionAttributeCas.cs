@@ -1,9 +1,9 @@
 //
 // AspNetHostingPermissionAttributeCas.cs 
-//    - CAS unit tests for System.Web.AspNetHostingPermissionAttribute
+//	- CAS unit tests for System.Web.AspNetHostingPermissionAttribute
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,35 +37,35 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class AspNetHostingPermissionAttributeCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class AspNetHostingPermissionAttributeCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor_Deny_Unrestricted ()
-        {
-            AspNetHostingPermissionAttribute a = new AspNetHostingPermissionAttribute (SecurityAction.Assert);
-            Assert.AreEqual (AspNetHostingPermissionLevel.None, a.Level, "Level");
-            a.Level = AspNetHostingPermissionLevel.Minimal;
-            Assert.IsNotNull (a.CreatePermission (), "CreatePermission");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor_Deny_Unrestricted ()
+		{
+			AspNetHostingPermissionAttribute a = new AspNetHostingPermissionAttribute (SecurityAction.Assert);
+			Assert.AreEqual (AspNetHostingPermissionLevel.None, a.Level, "Level");
+			a.Level = AspNetHostingPermissionLevel.Minimal;
+			Assert.IsNotNull (a.CreatePermission (), "CreatePermission");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            Type[] types = new Type[1] { typeof (SecurityAction) };
-            ConstructorInfo ci = typeof (AspNetHostingPermissionAttribute).GetConstructor (types);
-            Assert.IsNotNull (ci, ".ctor(SecurityAction)");
-            Assert.IsNotNull (ci.Invoke (new object[1] { SecurityAction.Demand }), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			Type[] types = new Type[1] { typeof (SecurityAction) };
+			ConstructorInfo ci = typeof (AspNetHostingPermissionAttribute).GetConstructor (types);
+			Assert.IsNotNull (ci, ".ctor(SecurityAction)");
+			Assert.IsNotNull (ci.Invoke (new object[1] { SecurityAction.Demand }), "invoke");
+		}
+	}
 }

@@ -39,65 +39,65 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataColumn_Prefix : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataColumn_Prefix tc = new DataColumn_Prefix();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataColumn_Prefix");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataColumn_Prefix tc = new DataColumn_Prefix();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataColumn_Prefix");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        DataColumn dc;
-        string sPrefix = "Prefix";
-        dc = new DataColumn("ColName",typeof(string));
+	public void run()
+	{
+		Exception exp = null;
+		DataColumn dc;
+		string sPrefix = "Prefix";
+		dc = new DataColumn("ColName",typeof(string));
 
-        //Checking default value (string.Empty)
-        
-        try
-        {
-            BeginCase("Prefix Checking default value (string.Empty)");
-            Compare(dc.Prefix ,string.Empty );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-        //Cheking Set
-        dc.Prefix = sPrefix;
-        //Checking Get
-        try
-        {
-            BeginCase("Prefix Checking Get");
-            Compare(dc.Prefix ,sPrefix );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-                
-    }
+		//Checking default value (string.Empty)
+		
+		try
+		{
+			BeginCase("Prefix Checking default value (string.Empty)");
+			Compare(dc.Prefix ,string.Empty );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		//Cheking Set
+		dc.Prefix = sPrefix;
+		//Checking Get
+		try
+		{
+			BeginCase("Prefix Checking Get");
+			Compare(dc.Prefix ,sPrefix );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+				
+	}
 }
 }

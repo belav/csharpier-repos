@@ -32,54 +32,54 @@ using System;
 using System.Collections;
 
 namespace Mono.Data.Tds.Protocol {
-    public sealed class TdsInternalErrorCollection : IEnumerable 
-    {
-        #region Fields
+	public sealed class TdsInternalErrorCollection : IEnumerable 
+	{
+		#region Fields
 
-        ArrayList list;
+		ArrayList list;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public TdsInternalErrorCollection ()
-        {
-            list = new ArrayList ();
-        }
+		public TdsInternalErrorCollection ()
+		{
+			list = new ArrayList ();
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public int Count {
-            get { return list.Count; }
-        }
+		public int Count {
+			get { return list.Count; }
+		}
 
-        public TdsInternalError this [int index] {
-            get { return (TdsInternalError) list[index]; }
-            set { list[index] = value; }
-        }
+		public TdsInternalError this [int index] {
+			get { return (TdsInternalError) list[index]; }
+			set { list[index] = value; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        public int Add (TdsInternalError error)
-        {
-            return list.Add (error);
-        }
+		public int Add (TdsInternalError error)
+		{
+			return list.Add (error);
+		}
 
-        public void Clear ()
-        {
-            list.Clear ();
-        }
+		public void Clear ()
+		{
+			list.Clear ();
+		}
 
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return list.GetEnumerator ();
-        }
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			return list.GetEnumerator ();
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }
 

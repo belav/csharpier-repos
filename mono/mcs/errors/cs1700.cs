@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 
 public class InternalsVisibleToTest 
 {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 
 }
 

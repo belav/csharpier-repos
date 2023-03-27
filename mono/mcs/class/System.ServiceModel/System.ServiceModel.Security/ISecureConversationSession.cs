@@ -2,7 +2,7 @@
 // ISecureConversationSession.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -30,10 +30,10 @@ using System.Xml;
 
 namespace System.ServiceModel.Security
 {
-    public interface ISecureConversationSession : ISecuritySession
-    {
-        bool TryReadSessionTokenIdentifier (XmlReader reader);
+	public interface ISecureConversationSession : ISecuritySession
+	{
+		bool TryReadSessionTokenIdentifier (XmlReader reader);
 
-        void WriteSessionTokenIdentifier (XmlDictionaryWriter writer);
-    }
+		void WriteSessionTokenIdentifier (XmlDictionaryWriter writer);
+	}
 }

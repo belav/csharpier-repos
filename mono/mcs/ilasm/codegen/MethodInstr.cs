@@ -19,7 +19,7 @@ namespace Mono.ILASM {
                 private BaseMethodRef operand;
 
                 public MethodInstr (PEAPI.MethodOp op, BaseMethodRef operand, Location loc)
-            : base (loc)
+			: base (loc)
                 {
                         this.op = op;
                         this.operand = operand;
@@ -29,7 +29,7 @@ namespace Mono.ILASM {
                 }
 
                 public override void Emit (CodeGen code_gen, MethodDef meth,
-                       PEAPI.CILInstructions cil)
+					   PEAPI.CILInstructions cil)
                 {
                         operand.Resolve (code_gen);
                         cil.MethInst (op, operand.PeapiMethod);

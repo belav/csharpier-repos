@@ -28,10 +28,10 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-    public interface IComponentConnector
-    {
-        void Connect (int connectionId, object target);
-        void InitializeComponent ();
-    }
+	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+	public interface IComponentConnector
+	{
+		void Connect (int connectionId, object target);
+		void InitializeComponent ();
+	}
 }

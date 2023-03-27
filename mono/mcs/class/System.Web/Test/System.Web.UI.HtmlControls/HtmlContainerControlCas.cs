@@ -1,9 +1,9 @@
 //
 // HtmlContainerControlCas.cs 
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlContainerControl
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlContainerControl
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,29 +38,29 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlContainerControlCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlContainerControlCas {
 
-        // note: we do not inherit from AspNetHostingMinimal because
-        // HtmlContainerControl is an abstract class
+		// note: we do not inherit from AspNetHostingMinimal because
+		// HtmlContainerControl is an abstract class
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HtmlContainerControlTest unit = new HtmlContainerControlTest ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.CleanProperties ();
-            unit.Render ();
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HtmlContainerControlTest unit = new HtmlContainerControlTest ();
+			unit.DefaultProperties ();
+			unit.NullProperties ();
+			unit.CleanProperties ();
+			unit.Render ();
+		}
+	}
 }

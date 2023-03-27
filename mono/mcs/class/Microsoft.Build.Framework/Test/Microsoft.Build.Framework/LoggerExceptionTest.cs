@@ -31,79 +31,79 @@ using Microsoft.Build.Framework;
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Framework {
-    [TestFixture]
-    public class LoggerExceptionTest {
-        [Test]
-        public void CtorMessageTest ()
-        {
-            LoggerException le;
-            string message = "message";    
-        
-            le = new LoggerException (message);
-            
-            Assert.AreEqual (message, le.Message, "Message");
-            Assert.AreEqual (null, le.ErrorCode, "ErrorCode");
-            Assert.AreEqual (null, le.HelpKeyword, "HelpKeyword");
-        }
-        
-        [Test]
-        public void CtorMessageExceptionTest ()
-        {
-            LoggerException le;
-            string message = "message";
-            Exception e = new Exception ("Inner exception message");    
-        
-            le = new LoggerException (message, e);
-            
-            Assert.AreEqual (message, le.Message, "Message");
-            Assert.AreEqual (e, le.InnerException, "InnerException");
-            Assert.AreEqual (null, le.ErrorCode, "ErrorCode");
-            Assert.AreEqual (null, le.HelpKeyword, "HelpKeyword");
-        }
-        
-        [Test]
-        public void CtorMessageExceptionCodeTest ()
-        {
-            LoggerException le;
-            string message = "message";
-            string errorCode = "CS0000";
-            string helpKeyword = "helpKeyword";
-            Exception e = new Exception ("Inner exception message");    
-        
-            le = new LoggerException (message, e, errorCode, helpKeyword);
-            
-            Assert.AreEqual (message, le.Message, "Message");
-            Assert.AreEqual (e, le.InnerException, "InnerException");
-            Assert.AreEqual (errorCode, le.ErrorCode, "ErrorCode");
-            Assert.AreEqual (helpKeyword, le.HelpKeyword, "HelpKeyword");
-        }
+	[TestFixture]
+	public class LoggerExceptionTest {
+		[Test]
+		public void CtorMessageTest ()
+		{
+			LoggerException le;
+			string message = "message";	
+		
+			le = new LoggerException (message);
+			
+			Assert.AreEqual (message, le.Message, "Message");
+			Assert.AreEqual (null, le.ErrorCode, "ErrorCode");
+			Assert.AreEqual (null, le.HelpKeyword, "HelpKeyword");
+		}
+		
+		[Test]
+		public void CtorMessageExceptionTest ()
+		{
+			LoggerException le;
+			string message = "message";
+			Exception e = new Exception ("Inner exception message");	
+		
+			le = new LoggerException (message, e);
+			
+			Assert.AreEqual (message, le.Message, "Message");
+			Assert.AreEqual (e, le.InnerException, "InnerException");
+			Assert.AreEqual (null, le.ErrorCode, "ErrorCode");
+			Assert.AreEqual (null, le.HelpKeyword, "HelpKeyword");
+		}
+		
+		[Test]
+		public void CtorMessageExceptionCodeTest ()
+		{
+			LoggerException le;
+			string message = "message";
+			string errorCode = "CS0000";
+			string helpKeyword = "helpKeyword";
+			Exception e = new Exception ("Inner exception message");	
+		
+			le = new LoggerException (message, e, errorCode, helpKeyword);
+			
+			Assert.AreEqual (message, le.Message, "Message");
+			Assert.AreEqual (e, le.InnerException, "InnerException");
+			Assert.AreEqual (errorCode, le.ErrorCode, "ErrorCode");
+			Assert.AreEqual (helpKeyword, le.HelpKeyword, "HelpKeyword");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TestGetObjectData1 ()
-        {
-            LoggerException le = new LoggerException ();
-            le.GetObjectData (null, new StreamingContext ());
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void TestGetObjectData1 ()
+		{
+			LoggerException le = new LoggerException ();
+			le.GetObjectData (null, new StreamingContext ());
+		}
 
-        [Test]
-        public void TestGetObjectData2 ()
-        {
-            StreamingContext sc = new StreamingContext ();
-            SerializationInfo si = new SerializationInfo (typeof (LoggerException), new FormatterConverter ());
+		[Test]
+		public void TestGetObjectData2 ()
+		{
+			StreamingContext sc = new StreamingContext ();
+			SerializationInfo si = new SerializationInfo (typeof (LoggerException), new FormatterConverter ());
 
-            LoggerException le;
-            string message = "message";
-            string errorCode = "CS0000";
-            string helpKeyword = "helpKeyword";
-            Exception e = new Exception ("Inner exception message");
+			LoggerException le;
+			string message = "message";
+			string errorCode = "CS0000";
+			string helpKeyword = "helpKeyword";
+			Exception e = new Exception ("Inner exception message");
 
-            le = new LoggerException (message, e, errorCode, helpKeyword);
-            le.GetObjectData (si, sc);
+			le = new LoggerException (message, e, errorCode, helpKeyword);
+			le.GetObjectData (si, sc);
 
-            Assert.AreEqual (errorCode, si.GetString ("errorCode"), "A1");
-            Assert.AreEqual (helpKeyword, si.GetString ("helpKeyword"), "A2");
-            
-        }
-    }
+			Assert.AreEqual (errorCode, si.GetString ("errorCode"), "A1");
+			Assert.AreEqual (helpKeyword, si.GetString ("helpKeyword"), "A2");
+			
+		}
+	}
 }

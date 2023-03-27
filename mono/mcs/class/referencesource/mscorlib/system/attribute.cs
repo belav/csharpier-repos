@@ -49,11 +49,11 @@ namespace System {
             var method = (MethodInfo) parameter.Member;
             var definition = method.GetBaseDefinition ();
 
-            if (attributeType == null)
-                attributeType = typeof (Attribute);
+			if (attributeType == null)
+				attributeType = typeof (Attribute);
 
             if (method == definition)
-        return (Attribute []) parameter.GetCustomAttributes (attributeType, inherit);
+		return (Attribute []) parameter.GetCustomAttributes (attributeType, inherit);
 
             var types = new List<Type> ();
             var custom_attributes = new List<Attribute> ();
@@ -209,7 +209,7 @@ namespace System {
                 rtPropAccessor = rtPropAccessor.GetParentDefinition();
 
                 if (rtPropAccessor != null)
-                {
+				{
 #if FEATURE_LEGACYNETCF
                     // Mimicing NetCF which only looks for public properties.
                     if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
@@ -225,7 +225,7 @@ namespace System {
                         property.PropertyType,
                         propertyParameters, //used for index properties
                         null);
-                }
+				}
             }
 
             return null;

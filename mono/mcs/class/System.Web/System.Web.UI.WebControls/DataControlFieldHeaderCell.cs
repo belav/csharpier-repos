@@ -31,55 +31,55 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    public class DataControlFieldHeaderCell : DataControlFieldCell
-    {
-        TableHeaderScope scope;
-        
-        public DataControlFieldHeaderCell (DataControlField containingField): base (HtmlTextWriterTag.Th, containingField)
-        {
-        }
-        
-        internal DataControlFieldHeaderCell (DataControlField containerField, TableHeaderScope scope): this (containerField)
-        {
-            this.scope = scope;
-        }
-        
-        public virtual TableHeaderScope Scope {
-            get {
-                object ob = ViewState ["Scope"];
-                if (ob != null)
-                    return (TableHeaderScope) ob;
-                else
-                    return TableHeaderScope.NotSet;
-            }
-            set { ViewState ["Scope"] = value; }
-        }
-        
-        public virtual string AbbreviatedText {
-            get {
-                object ob = ViewState ["AbbreviatedText"];
-                if (ob != null)
-                    return (string) ob;
-                else
-                    return String.Empty;
-            }
-            set { ViewState ["AbbreviatedText"] = value;}
-        }
-        
-        protected override void AddAttributesToRender (HtmlTextWriter writer)
-        {
-            base.AddAttributesToRender (writer);
-            switch (scope) {
-                case TableHeaderScope.Column:
-                    writer.AddAttribute (HtmlTextWriterAttribute.Scope, "col", false);
-                    break;
-                case TableHeaderScope.Row:
-                    writer.AddAttribute (HtmlTextWriterAttribute.Scope, "row", false);
-                    break;
-            }
-            if (AbbreviatedText.Length > 0)
-                writer.AddAttribute (HtmlTextWriterAttribute.Abbr, AbbreviatedText);
-        }
-    }
+	public class DataControlFieldHeaderCell : DataControlFieldCell
+	{
+		TableHeaderScope scope;
+		
+		public DataControlFieldHeaderCell (DataControlField containingField): base (HtmlTextWriterTag.Th, containingField)
+		{
+		}
+		
+		internal DataControlFieldHeaderCell (DataControlField containerField, TableHeaderScope scope): this (containerField)
+		{
+			this.scope = scope;
+		}
+		
+		public virtual TableHeaderScope Scope {
+			get {
+				object ob = ViewState ["Scope"];
+				if (ob != null)
+					return (TableHeaderScope) ob;
+				else
+					return TableHeaderScope.NotSet;
+			}
+			set { ViewState ["Scope"] = value; }
+		}
+		
+		public virtual string AbbreviatedText {
+			get {
+				object ob = ViewState ["AbbreviatedText"];
+				if (ob != null)
+					return (string) ob;
+				else
+					return String.Empty;
+			}
+			set { ViewState ["AbbreviatedText"] = value;}
+		}
+		
+		protected override void AddAttributesToRender (HtmlTextWriter writer)
+		{
+			base.AddAttributesToRender (writer);
+			switch (scope) {
+				case TableHeaderScope.Column:
+					writer.AddAttribute (HtmlTextWriterAttribute.Scope, "col", false);
+					break;
+				case TableHeaderScope.Row:
+					writer.AddAttribute (HtmlTextWriterAttribute.Scope, "row", false);
+					break;
+			}
+			if (AbbreviatedText.Length > 0)
+				writer.AddAttribute (HtmlTextWriterAttribute.Abbr, AbbreviatedText);
+		}
+	}
 }
 

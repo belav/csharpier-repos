@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -71,44 +71,44 @@ using System.Runtime.InteropServices;
 
 class Classes
 {
-    [StructLayout(LayoutKind.Explicit)] class E {}
-    [StructLayout(LayoutKind.Explicit, Size = 0)] class E_S0 {}
-    [StructLayout(LayoutKind.Explicit, Size = 1)] class E_S1 {}
-    [StructLayout(LayoutKind.Explicit, Pack = 0)] class E_P0 {}
-    [StructLayout(LayoutKind.Explicit, Pack = 1)] class E_P1 {}
-    [StructLayout(LayoutKind.Explicit, Pack = 0, Size = 0)] class E_P0_S0 {}
-    [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 10)] class E_P1_S10 {}
-    
-    [StructLayout(LayoutKind.Sequential)] class Q {}
-    [StructLayout(LayoutKind.Sequential, Size = 0)] class Q_S0 {}
-    [StructLayout(LayoutKind.Sequential, Size = 1)] class Q_S1 {}
-    [StructLayout(LayoutKind.Sequential, Pack = 0)] class Q_P0 {}
-    [StructLayout(LayoutKind.Sequential, Pack = 1)] class Q_P1 {}
-    [StructLayout(LayoutKind.Sequential, Pack = 0, Size = 0)] class Q_P0_S0 {}
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 10)] class Q_P1_S10 {}
-    
-    [StructLayout(LayoutKind.Auto)] class A {}
+	[StructLayout(LayoutKind.Explicit)] class E {}
+	[StructLayout(LayoutKind.Explicit, Size = 0)] class E_S0 {}
+	[StructLayout(LayoutKind.Explicit, Size = 1)] class E_S1 {}
+	[StructLayout(LayoutKind.Explicit, Pack = 0)] class E_P0 {}
+	[StructLayout(LayoutKind.Explicit, Pack = 1)] class E_P1 {}
+	[StructLayout(LayoutKind.Explicit, Pack = 0, Size = 0)] class E_P0_S0 {}
+	[StructLayout(LayoutKind.Explicit, Pack = 1, Size = 10)] class E_P1_S10 {}
+	
+	[StructLayout(LayoutKind.Sequential)] class Q {}
+	[StructLayout(LayoutKind.Sequential, Size = 0)] class Q_S0 {}
+	[StructLayout(LayoutKind.Sequential, Size = 1)] class Q_S1 {}
+	[StructLayout(LayoutKind.Sequential, Pack = 0)] class Q_P0 {}
+	[StructLayout(LayoutKind.Sequential, Pack = 1)] class Q_P1 {}
+	[StructLayout(LayoutKind.Sequential, Pack = 0, Size = 0)] class Q_P0_S0 {}
+	[StructLayout(LayoutKind.Sequential, Pack = 1, Size = 10)] class Q_P1_S10 {}
+	
+	[StructLayout(LayoutKind.Auto)] class A {}
 }
 
 class Structs
 {
-    [StructLayout(LayoutKind.Explicit)] struct E { [FieldOffset(0)]int a; }
-    [StructLayout(LayoutKind.Explicit, Size = 0)] struct E_S0 { [FieldOffset(0)]int a; }
-    [StructLayout(LayoutKind.Explicit, Size = 1)] struct E_S1 { [FieldOffset(0)]int a; }
-    [StructLayout(LayoutKind.Explicit, Pack = 0)] struct E_P0 { [FieldOffset(0)]int a; }
-    [StructLayout(LayoutKind.Explicit, Pack = 1)] struct E_P1 { [FieldOffset(0)]int a; }
-    [StructLayout(LayoutKind.Explicit, Pack = 0, Size = 0)] struct E_P0_S0 { [FieldOffset(0)]int a; }
-    [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 10)] struct E_P1_S10 { [FieldOffset(0)]int a; }
-    
-    [StructLayout(LayoutKind.Sequential)] struct Q { int a; }
-    [StructLayout(LayoutKind.Sequential, Size = 0)] struct Q_S0 { int a; }
-    [StructLayout(LayoutKind.Sequential, Size = 1)] struct Q_S1 { int a; }
-    [StructLayout(LayoutKind.Sequential, Pack = 0)] struct Q_P0 { int a; }
-    [StructLayout(LayoutKind.Sequential, Pack = 1)] struct Q_P1 { int a; }
-    [StructLayout(LayoutKind.Sequential, Pack = 0, Size = 0)] struct Q_P0_S0 { int a; }
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 10)] struct Q_P1_S10 { int a; }
-    
-    [StructLayout(LayoutKind.Auto)] struct A { int a; }
+	[StructLayout(LayoutKind.Explicit)] struct E { [FieldOffset(0)]int a; }
+	[StructLayout(LayoutKind.Explicit, Size = 0)] struct E_S0 { [FieldOffset(0)]int a; }
+	[StructLayout(LayoutKind.Explicit, Size = 1)] struct E_S1 { [FieldOffset(0)]int a; }
+	[StructLayout(LayoutKind.Explicit, Pack = 0)] struct E_P0 { [FieldOffset(0)]int a; }
+	[StructLayout(LayoutKind.Explicit, Pack = 1)] struct E_P1 { [FieldOffset(0)]int a; }
+	[StructLayout(LayoutKind.Explicit, Pack = 0, Size = 0)] struct E_P0_S0 { [FieldOffset(0)]int a; }
+	[StructLayout(LayoutKind.Explicit, Pack = 1, Size = 10)] struct E_P1_S10 { [FieldOffset(0)]int a; }
+	
+	[StructLayout(LayoutKind.Sequential)] struct Q { int a; }
+	[StructLayout(LayoutKind.Sequential, Size = 0)] struct Q_S0 { int a; }
+	[StructLayout(LayoutKind.Sequential, Size = 1)] struct Q_S1 { int a; }
+	[StructLayout(LayoutKind.Sequential, Pack = 0)] struct Q_P0 { int a; }
+	[StructLayout(LayoutKind.Sequential, Pack = 1)] struct Q_P1 { int a; }
+	[StructLayout(LayoutKind.Sequential, Pack = 0, Size = 0)] struct Q_P0_S0 { int a; }
+	[StructLayout(LayoutKind.Sequential, Pack = 1, Size = 10)] struct Q_P1_S10 { int a; }
+	
+	[StructLayout(LayoutKind.Auto)] struct A { int a; }
 }";
 
             // peverify reports errors, but the types can be loaded and used:
@@ -144,15 +144,15 @@ using System.Runtime.InteropServices;
 class Classes
 {
     [StructLayout(LayoutKind.Auto, Pack = 1, Size = Int32.MaxValue)] class A_P1_S2147483647 {}
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = Int32.MaxValue)] class Q_P1_S2147483647 {}
-    [StructLayout(LayoutKind.Explicit, Pack = 1, Size = Int32.MaxValue)] class E_P1_S2147483647 {}
+	[StructLayout(LayoutKind.Sequential, Pack = 1, Size = Int32.MaxValue)] class Q_P1_S2147483647 {}
+	[StructLayout(LayoutKind.Explicit, Pack = 1, Size = Int32.MaxValue)] class E_P1_S2147483647 {}
 }
 
 class Structs
 {
     [StructLayout(LayoutKind.Auto, Pack = 1, Size = Int32.MaxValue)] struct A_P1_S2147483647 {}
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = Int32.MaxValue)] struct Q_P1_S2147483647 {}
-    [StructLayout(LayoutKind.Explicit, Pack = 1, Size = Int32.MaxValue)] struct E_P1_S2147483647 {}
+	[StructLayout(LayoutKind.Sequential, Pack = 1, Size = Int32.MaxValue)] struct Q_P1_S2147483647 {}
+	[StructLayout(LayoutKind.Explicit, Pack = 1, Size = Int32.MaxValue)] struct E_P1_S2147483647 {}
 }
 ";
             Action<PEAssembly> validator = (assembly) =>

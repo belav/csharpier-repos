@@ -33,17 +33,17 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-    [MonoTODO]
-    public abstract class DirectoryRequest : DirectoryOperation
-    {
-        internal DirectoryRequest ()
-        {
-            Controls = new DirectoryControlCollection ();
-        }
+	[MonoTODO]
+	public abstract class DirectoryRequest : DirectoryOperation
+	{
+		internal DirectoryRequest ()
+		{
+			Controls = new DirectoryControlCollection ();
+		}
 
-        public DirectoryControlCollection Controls { get; private set; }
-        public string RequestId { get; set; }
+		public DirectoryControlCollection Controls { get; private set; }
+		public string RequestId { get; set; }
 
-        protected abstract XmlElement ToXmlNode (XmlDocument doc);
-    }
+		protected abstract XmlElement ToXmlNode (XmlDocument doc);
+	}
 }

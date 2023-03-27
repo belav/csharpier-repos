@@ -511,26 +511,26 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             Initialize();
             string xml = @"<?xml version='1.0'?>
 <root xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='idF016.xsd'>
-    <uid val='test'/>    <uid/></root>";
+	<uid val='test'/>	<uid/></root>";
 
             string xsd = @"<?xml version='1.0'?>
 <xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' elementFormDefault='qualified'>
-    <xsd:element name='root'>
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref='uid' maxOccurs='unbounded'/>
-            </xsd:sequence>
-        </xsd:complexType>
-        <xsd:unique id='foo123' name='uuid'>
-            <xsd:selector xpath='.//uid'/>
-            <xsd:field xpath='@val'/>
-        </xsd:unique>
-    </xsd:element>
-    <xsd:element name='uid' nillable='true'>
-        <xsd:complexType>
-            <xsd:attribute name='val' type='xsd:string' default='test'/>
-        </xsd:complexType>
-    </xsd:element>
+	<xsd:element name='root'>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref='uid' maxOccurs='unbounded'/>
+			</xsd:sequence>
+		</xsd:complexType>
+		<xsd:unique id='foo123' name='uuid'>
+			<xsd:selector xpath='.//uid'/>
+			<xsd:field xpath='@val'/>
+		</xsd:unique>
+	</xsd:element>
+	<xsd:element name='uid' nillable='true'>
+		<xsd:complexType>
+			<xsd:attribute name='val' type='xsd:string' default='test'/>
+		</xsd:complexType>
+	</xsd:element>
 </xsd:schema>";
 
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(new NameTable());

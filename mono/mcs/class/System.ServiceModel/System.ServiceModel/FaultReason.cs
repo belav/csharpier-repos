@@ -2,7 +2,7 @@
 // FaultReason.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,58 +34,58 @@ using TextList = System.Collections.Generic.SynchronizedReadOnlyCollection<Syste
 
 namespace System.ServiceModel
 {
-    public class FaultReason
-    {
-        List<FaultReasonText> trans = new List<FaultReasonText> ();
-        TextList public_trans;
+	public class FaultReason
+	{
+		List<FaultReasonText> trans = new List<FaultReasonText> ();
+		TextList public_trans;
 
-        public FaultReason (FaultReasonText translation)
-        {
-            if (translation == null)
-                throw new ArgumentNullException ("translation");
-            trans.Add (translation);
-        }
+		public FaultReason (FaultReasonText translation)
+		{
+			if (translation == null)
+				throw new ArgumentNullException ("translation");
+			trans.Add (translation);
+		}
 
-        public FaultReason (IEnumerable<FaultReasonText> translations)
-        {
-            if (translations == null)
-                throw new ArgumentNullException ("translations");
-            foreach (FaultReasonText t in translations)
-                trans.Add (t);
-            if (trans.Count == 0)
-                throw new ArgumentException ("The argument list should contain at least one fault reason text.");
-        }
+		public FaultReason (IEnumerable<FaultReasonText> translations)
+		{
+			if (translations == null)
+				throw new ArgumentNullException ("translations");
+			foreach (FaultReasonText t in translations)
+				trans.Add (t);
+			if (trans.Count == 0)
+				throw new ArgumentException ("The argument list should contain at least one fault reason text.");
+		}
 
-        public FaultReason (string text)
-            : this (new FaultReasonText (text))
-        {
-        }
+		public FaultReason (string text)
+			: this (new FaultReasonText (text))
+		{
+		}
 
-        public TextList Translations {
-            get {
-                if (public_trans == null)
-                    public_trans = new TextList (new object (), trans);
-                return public_trans;
-            }
-        }
+		public TextList Translations {
+			get {
+				if (public_trans == null)
+					public_trans = new TextList (new object (), trans);
+				return public_trans;
+			}
+		}
 
-        public FaultReasonText GetMatchingTranslation ()
-        {
-            return GetMatchingTranslation (CultureInfo.CurrentCulture);
-        }
+		public FaultReasonText GetMatchingTranslation ()
+		{
+			return GetMatchingTranslation (CultureInfo.CurrentCulture);
+		}
 
-        public FaultReasonText GetMatchingTranslation (
-            CultureInfo cultureInfo)
-        {
-            foreach (FaultReasonText t in trans)
-                if (t.Matches (cultureInfo))
-                    return t;
-            return trans [0];
-        }
+		public FaultReasonText GetMatchingTranslation (
+			CultureInfo cultureInfo)
+		{
+			foreach (FaultReasonText t in trans)
+				if (t.Matches (cultureInfo))
+					return t;
+			return trans [0];
+		}
 
-        public override string ToString ()
-        {
-            return GetMatchingTranslation ().Text;
-        }
-    }
+		public override string ToString ()
+		{
+			return GetMatchingTranslation ().Text;
+		}
+	}
 }

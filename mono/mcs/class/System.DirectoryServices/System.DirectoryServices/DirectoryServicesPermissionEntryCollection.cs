@@ -34,96 +34,96 @@ using System.Security.Permissions;
 
 namespace System.DirectoryServices {
 
-    // when deserializing an instance serialized by MS.NET, you get the following 
-    // error : Field "owner" not found in class ....
-    [Serializable]
-    [MonoTODO ("Fix serialization compatibility with MS.NET")]
-    public class DirectoryServicesPermissionEntryCollection : CollectionBase {
+	// when deserializing an instance serialized by MS.NET, you get the following 
+	// error : Field "owner" not found in class ....
+	[Serializable]
+	[MonoTODO ("Fix serialization compatibility with MS.NET")]
+	public class DirectoryServicesPermissionEntryCollection : CollectionBase {
 
-        private DirectoryServicesPermission owner;
+		private DirectoryServicesPermission owner;
 
-        internal DirectoryServicesPermissionEntryCollection (DirectoryServicesPermission owner)
-        {
-            this.owner = owner;
-            ResourcePermissionBaseEntry[] entries = owner.GetEntries ();
-            if (entries.Length > 0) {
-                foreach (ResourcePermissionBaseEntry entry in entries) {
-                    DirectoryServicesPermissionAccess dspa = (DirectoryServicesPermissionAccess) entry.PermissionAccess;
-                    DirectoryServicesPermissionEntry dspe = new DirectoryServicesPermissionEntry (dspa, entry.PermissionAccessPath [0]);
-                    // we don't want to add them (again) to the base class
-                    InnerList.Add (dspe);
-                }
-            }
-        }
+		internal DirectoryServicesPermissionEntryCollection (DirectoryServicesPermission owner)
+		{
+			this.owner = owner;
+			ResourcePermissionBaseEntry[] entries = owner.GetEntries ();
+			if (entries.Length > 0) {
+				foreach (ResourcePermissionBaseEntry entry in entries) {
+					DirectoryServicesPermissionAccess dspa = (DirectoryServicesPermissionAccess) entry.PermissionAccess;
+					DirectoryServicesPermissionEntry dspe = new DirectoryServicesPermissionEntry (dspa, entry.PermissionAccessPath [0]);
+					// we don't want to add them (again) to the base class
+					InnerList.Add (dspe);
+				}
+			}
+		}
 
-        public DirectoryServicesPermissionEntry this [int index] {
-            get { return List[index] as DirectoryServicesPermissionEntry; }
-            set { List[index] = value; }
-        }
+		public DirectoryServicesPermissionEntry this [int index] {
+			get { return List[index] as DirectoryServicesPermissionEntry; }
+			set { List[index] = value; }
+		}
 
-        public int Add (DirectoryServicesPermissionEntry value)
-        {
-            return List.Add (value);
-        }
+		public int Add (DirectoryServicesPermissionEntry value)
+		{
+			return List.Add (value);
+		}
 
-        public void AddRange (DirectoryServicesPermissionEntry[] value)
-        {
-            foreach (DirectoryServicesPermissionEntry entry in value)
-                Add (entry);
-        }
+		public void AddRange (DirectoryServicesPermissionEntry[] value)
+		{
+			foreach (DirectoryServicesPermissionEntry entry in value)
+				Add (entry);
+		}
 
-        public void AddRange (DirectoryServicesPermissionEntryCollection value)
-        {
-            foreach (DirectoryServicesPermissionEntry entry in value)
-                Add (entry);
-        }
+		public void AddRange (DirectoryServicesPermissionEntryCollection value)
+		{
+			foreach (DirectoryServicesPermissionEntry entry in value)
+				Add (entry);
+		}
 
-        public void CopyTo (DirectoryServicesPermissionEntry[] array, int index)
-        {
-            foreach (DirectoryServicesPermissionEntry entry in List)
-                array[index++] = entry;
-        }
+		public void CopyTo (DirectoryServicesPermissionEntry[] array, int index)
+		{
+			foreach (DirectoryServicesPermissionEntry entry in List)
+				array[index++] = entry;
+		}
 
-        public bool Contains (DirectoryServicesPermissionEntry value)
-        {
-            return List.Contains (value);
-        }
+		public bool Contains (DirectoryServicesPermissionEntry value)
+		{
+			return List.Contains (value);
+		}
 
-        public int IndexOf (DirectoryServicesPermissionEntry value)
-        {
-            return List.IndexOf (value);
-        }
+		public int IndexOf (DirectoryServicesPermissionEntry value)
+		{
+			return List.IndexOf (value);
+		}
 
-        public void Insert (int index, DirectoryServicesPermissionEntry value)
-        {
-            List.Insert (index, value);
-        }
+		public void Insert (int index, DirectoryServicesPermissionEntry value)
+		{
+			List.Insert (index, value);
+		}
 
-        public void Remove (DirectoryServicesPermissionEntry value)
-        {
-            List.Remove (value);
-        }
+		public void Remove (DirectoryServicesPermissionEntry value)
+		{
+			List.Remove (value);
+		}
 
-        protected override void OnClear ()
-        {
-            owner.ClearEntries ();
-        }
+		protected override void OnClear ()
+		{
+			owner.ClearEntries ();
+		}
 
-        protected override void OnInsert (int index, object value)
-        {
-            owner.Add (value);
-        }
+		protected override void OnInsert (int index, object value)
+		{
+			owner.Add (value);
+		}
 
-        protected override void OnRemove (int index, object value)
-        {
-            owner.Remove (value);
-        }
+		protected override void OnRemove (int index, object value)
+		{
+			owner.Remove (value);
+		}
 
-        protected override void OnSet (int index, object oldValue, object newValue)
-        {
-            owner.Remove (oldValue);
-            owner.Add (newValue);
-        }
-    }
+		protected override void OnSet (int index, object oldValue, object newValue)
+		{
+			owner.Remove (oldValue);
+			owner.Add (newValue);
+		}
+	}
 }
 

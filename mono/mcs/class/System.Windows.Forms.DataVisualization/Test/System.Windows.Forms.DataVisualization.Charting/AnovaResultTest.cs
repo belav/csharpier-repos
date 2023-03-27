@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -29,24 +29,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.DataVisualization.Charting
 {
-    [TestFixture]
-    public class AnovaResultTest
-    {
-        [Test]
-        public void Constructor ()
-        {
-            AnovaResult ar = new AnovaResult ();
-            
-            Assert.AreEqual (0, ar.DegreeOfFreedomBetweenGroups, "A1");
-            Assert.AreEqual (0, ar.DegreeOfFreedomTotal, "A2");
-            Assert.AreEqual (0, ar.DegreeOfFreedomWithinGroups, "A3");
-            Assert.AreEqual (0, ar.FCriticalValue, "A4");
-            Assert.AreEqual (0, ar.FRatio, "A5");
-            Assert.AreEqual (0, ar.MeanSquareVarianceBetweenGroups, "A6");
-            Assert.AreEqual (0, ar.MeanSquareVarianceWithinGroups, "A7");
-            Assert.AreEqual (0, ar.SumOfSquaresBetweenGroups, "A8");
-            Assert.AreEqual (0, ar.SumOfSquaresTotal, "A9");
-            Assert.AreEqual (0, ar.SumOfSquaresWithinGroups, "A10");
-        }
-    }
+	[TestFixture]
+	public class AnovaResultTest
+	{
+		[Test]
+		public void Constructor ()
+		{
+			AnovaResult ar = new AnovaResult ();
+			
+			Assert.AreEqual (0, ar.DegreeOfFreedomBetweenGroups, "A1");
+			Assert.AreEqual (0, ar.DegreeOfFreedomTotal, "A2");
+			Assert.AreEqual (0, ar.DegreeOfFreedomWithinGroups, "A3");
+			Assert.AreEqual (0, ar.FCriticalValue, "A4");
+			Assert.AreEqual (0, ar.FRatio, "A5");
+			Assert.AreEqual (0, ar.MeanSquareVarianceBetweenGroups, "A6");
+			Assert.AreEqual (0, ar.MeanSquareVarianceWithinGroups, "A7");
+			Assert.AreEqual (0, ar.SumOfSquaresBetweenGroups, "A8");
+			Assert.AreEqual (0, ar.SumOfSquaresTotal, "A9");
+			Assert.AreEqual (0, ar.SumOfSquaresWithinGroups, "A10");
+		}
+	}
 }

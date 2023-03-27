@@ -2,7 +2,7 @@
 // PeerResolversSerializationTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -44,58 +44,58 @@ namespace MonoTests.System.ServiceModel.PeerResolvers
 [TestFixture]
 public class PeerResolverSerializationTest
 {
-    [Test]
-    public void HasBody ()
-    {
-        Assert.IsTrue (new RegisterInfo ().HasBody (), "#1");
-        Assert.IsTrue (new RegisterResponseInfo ().HasBody (), "#2");
-        Assert.IsTrue (new ResolveInfo ().HasBody (), "#3");
-        Assert.IsTrue (new ResolveResponseInfo ().HasBody (), "#4");
-        Assert.IsTrue (new RefreshInfo ().HasBody (), "#5");
-        Assert.IsTrue (new RefreshResponseInfo ().HasBody (), "#6");
-    }
+	[Test]
+	public void HasBody ()
+	{
+		Assert.IsTrue (new RegisterInfo ().HasBody (), "#1");
+		Assert.IsTrue (new RegisterResponseInfo ().HasBody (), "#2");
+		Assert.IsTrue (new ResolveInfo ().HasBody (), "#3");
+		Assert.IsTrue (new ResolveResponseInfo ().HasBody (), "#4");
+		Assert.IsTrue (new RefreshInfo ().HasBody (), "#5");
+		Assert.IsTrue (new RefreshResponseInfo ().HasBody (), "#6");
+	}
 
-    [Test]
-    public void ResolveResponseInfo ()
-    {
-        var ser = new DataContractSerializer (typeof (ResolveResponseInfo));
-        var rri = new ResolveResponseInfo ();
-        var pna = new PeerNodeAddress (
-            new EndpointAddress ("http://localhost:8080"),
-            new ReadOnlyCollection<IPAddress> (new IPAddress [0]));
-        rri.Addresses = new List<PeerNodeAddress> ();
-        rri.Addresses.Add (pna);
-        var sw = new StringWriter ();
-        using (var xw = XmlWriter.Create (sw))
-            ser.WriteObject (xw, rri);
-        rri = (ResolveResponseInfo) ser.ReadObject (XmlReader.Create (new StringReader (sw.ToString ())));
-        Assert.AreEqual (1, rri.Addresses.Count, "#1");
-    }
+	[Test]
+	public void ResolveResponseInfo ()
+	{
+		var ser = new DataContractSerializer (typeof (ResolveResponseInfo));
+		var rri = new ResolveResponseInfo ();
+		var pna = new PeerNodeAddress (
+			new EndpointAddress ("http://localhost:8080"),
+			new ReadOnlyCollection<IPAddress> (new IPAddress [0]));
+		rri.Addresses = new List<PeerNodeAddress> ();
+		rri.Addresses.Add (pna);
+		var sw = new StringWriter ();
+		using (var xw = XmlWriter.Create (sw))
+			ser.WriteObject (xw, rri);
+		rri = (ResolveResponseInfo) ser.ReadObject (XmlReader.Create (new StringReader (sw.ToString ())));
+		Assert.AreEqual (1, rri.Addresses.Count, "#1");
+	}
 }
 
 /*
 [DataContract]
 public class ResolveResponseInfo
 {
-    public ResolveResponseInfo ()
-    {
-        Addresses = new List<PeerNodeAddress> ();
-    }
+	public ResolveResponseInfo ()
+	{
+		Addresses = new List<PeerNodeAddress> ();
+	}
 
-    [DataMember]
-    public IList<PeerNodeAddress> Addresses { get; set; }
+	[DataMember]
+	public IList<PeerNodeAddress> Addresses { get; set; }
 }
 
 public class PeerNodeAddress
 {
-    public PeerNodeAddress (EndpointAddress ea, IList<IPAddress> al)
-    {
-        Endpoint = ea;
-        Addresses = al;
-    }
+	public PeerNodeAddress (EndpointAddress ea, IList<IPAddress> al)
+	{
+		Endpoint = ea;
+		Addresses = al;
+	}
 
-    public EndpointAddress Endpoint { get; set; }
-    public IList<IPAddress> Addresses { get; set; }
+	public EndpointAddress Endpoint { get; set; }
+	public IList<IPAddress> Addresses { get; set; }
 }
 */
 

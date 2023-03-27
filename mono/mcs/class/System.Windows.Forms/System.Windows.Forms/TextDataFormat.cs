@@ -23,18 +23,18 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum TextDataFormat
-    {
-        Text = 0,
-        UnicodeText = 1,
-        Rtf = 2,
-        Html = 3,
-        CommaSeparatedValue = 4
-    }
+	public enum TextDataFormat
+	{
+		Text = 0,
+		UnicodeText = 1,
+		Rtf = 2,
+		Html = 3,
+		CommaSeparatedValue = 4
+	}
 }

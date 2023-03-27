@@ -5,9 +5,9 @@ using System;
 
 [AttributeUsage (AttributeTargets.All)]
 public class MineAttribute : Attribute {
-    public MineAttribute (Type [] t)
-    {
-    }
+	public MineAttribute (Type [] t)
+	{
+	}
 }
 
 [Mine(new Type [(ulong) 3])]

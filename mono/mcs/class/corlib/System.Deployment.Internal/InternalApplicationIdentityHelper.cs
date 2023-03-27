@@ -2,7 +2,7 @@
 // InternalApplicationIdentityHelper.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -31,13 +31,13 @@ using System.Runtime.InteropServices;
 
 namespace System.Deployment.Internal
 {
-    [ComVisible (false)]
-    public static class InternalApplicationIdentityHelper
-    {
-        [MonoTODO]
-        public static object GetInternalAppId (ApplicationIdentity id)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+	[ComVisible (false)]
+	public static class InternalApplicationIdentityHelper
+	{
+		[MonoTODO]
+		public static object GetInternalAppId (ApplicationIdentity id)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

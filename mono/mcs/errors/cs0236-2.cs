@@ -8,5 +8,5 @@ class C1
 
 class C2
 {
-    public static readonly double X_Small2 = C1.CC;
+	public static readonly double X_Small2 = C1.CC;
 }

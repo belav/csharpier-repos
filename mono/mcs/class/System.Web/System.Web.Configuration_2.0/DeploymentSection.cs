@@ -2,7 +2,7 @@
 // System.Web.Configuration.DeploymentSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,31 +34,31 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class DeploymentSection : ConfigurationSection
-    {
-        static ConfigurationProperty retailProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class DeploymentSection : ConfigurationSection
+	{
+		static ConfigurationProperty retailProp;
+		static ConfigurationPropertyCollection properties;
 
-        static DeploymentSection ()
-        {
-            retailProp = new ConfigurationProperty ("retail", typeof (bool), false);
-            properties = new ConfigurationPropertyCollection ();
+		static DeploymentSection ()
+		{
+			retailProp = new ConfigurationProperty ("retail", typeof (bool), false);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (retailProp);
+			properties.Add (retailProp);
 
-        }
+		}
 
-        [ConfigurationProperty ("retail", DefaultValue = "False")]
-        public bool Retail {
-            get { return (bool) base [retailProp];}
-            set { base[retailProp] = value; }
-        }
+		[ConfigurationProperty ("retail", DefaultValue = "False")]
+		public bool Retail {
+			get { return (bool) base [retailProp];}
+			set { base[retailProp] = value; }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-    }
+	}
 
 }
 

@@ -1,9 +1,9 @@
 //
 // EmptyControlCollectionCas.cs 
-//    - CAS unit tests for System.Web.UI.EmptyControlCollection
+//	- CAS unit tests for System.Web.UI.EmptyControlCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,54 +38,54 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class EmptyControlCollectionCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class EmptyControlCollectionCas : AspNetHostingMinimal {
 
-        private Control control;
+		private Control control;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            control = new Control ();
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			control = new Control ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor_Deny_Unrestricted ()
-        {
-            EmptyControlCollection ec = new EmptyControlCollection (control);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor_Deny_Unrestricted ()
+		{
+			EmptyControlCollection ec = new EmptyControlCollection (control);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (HttpException))]
-        public void Add_Deny_Unrestricted ()
-        {
-            EmptyControlCollection ec = new EmptyControlCollection (control);
-            ec.Add (new Control ());
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		[ExpectedException (typeof (HttpException))]
+		public void Add_Deny_Unrestricted ()
+		{
+			EmptyControlCollection ec = new EmptyControlCollection (control);
+			ec.Add (new Control ());
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (HttpException))]
-        public void AddAt_Deny_Unrestricted ()
-        {
-            EmptyControlCollection ec = new EmptyControlCollection (control);
-            ec.AddAt (0, new Control ());
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		[ExpectedException (typeof (HttpException))]
+		public void AddAt_Deny_Unrestricted ()
+		{
+			EmptyControlCollection ec = new EmptyControlCollection (control);
+			ec.AddAt (0, new Control ());
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (Control) });
-            Assert.IsNotNull (ci, ".ctor(Control)");
-            return ci.Invoke (new object[1] { control });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (Control) });
+			Assert.IsNotNull (ci, ".ctor(Control)");
+			return ci.Invoke (new object[1] { control });
+		}
 
-        public override Type Type {
-            get { return typeof (EmptyControlCollection); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (EmptyControlCollection); }
+		}
+	}
 }

@@ -1,9 +1,9 @@
 //
 // HtmlGenericControlCas.cs
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlGenericControl
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlGenericControl
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,12 +34,12 @@ using System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlGenericControlCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlGenericControlCas : AspNetHostingMinimal {
 
-        public override Type Type {
-            get { return typeof (HtmlGenericControl); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlGenericControl); }
+		}
+	}
 }

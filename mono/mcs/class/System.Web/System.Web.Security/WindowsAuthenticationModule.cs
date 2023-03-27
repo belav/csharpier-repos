@@ -2,7 +2,7 @@
 // System.Web.Security.WindowsAuthenticationModule
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -32,34 +32,34 @@ using System.Security.Permissions;
 
 namespace System.Web.Security
 {
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class WindowsAuthenticationModule : IHttpModule
-    {
-        static readonly object authenticateEvent = new object ();
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class WindowsAuthenticationModule : IHttpModule
+	{
+		static readonly object authenticateEvent = new object ();
 
-        EventHandlerList events = new EventHandlerList ();
-        
-        public event WindowsAuthenticationEventHandler Authenticate {
-            add { events.AddHandler (authenticateEvent, value); }
-            remove { events.RemoveHandler (authenticateEvent, value); }
-        }
-        
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        public WindowsAuthenticationModule ()
-        {
-        }
+		EventHandlerList events = new EventHandlerList ();
+		
+		public event WindowsAuthenticationEventHandler Authenticate {
+			add { events.AddHandler (authenticateEvent, value); }
+			remove { events.RemoveHandler (authenticateEvent, value); }
+		}
+		
+		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+		public WindowsAuthenticationModule ()
+		{
+		}
 
-        public void Dispose ()
-        {
-            events.Dispose ();
-        }
+		public void Dispose ()
+		{
+			events.Dispose ();
+		}
 
-        [MonoTODO ("Not implemented")]
-        public void Init (HttpApplication app)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO ("Not implemented")]
+		public void Init (HttpApplication app)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

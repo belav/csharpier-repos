@@ -39,74 +39,74 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRowView_RowVersion : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRowView_RowVersion tc = new DataRowView_RowVersion();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRowView_RowVersion");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRowView_RowVersion tc = new DataRowView_RowVersion();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRowView_RowVersion");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-    
-        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-        DataView dv = new DataView(dt);
-        dt.Columns[1].DefaultValue = "default";
-        DataRowView drv = dv[0];
-
-        dt.Rows.Add(new object[] {99});
-        dt.Rows[1].Delete();
-        dt.Rows[2].BeginEdit();
-        dt.Rows[2][1] = "aaa";
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	public void run()
+	{
+		Exception exp = null;
+	
+		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+		DataView dv = new DataView(dt);
+		dt.Columns[1].DefaultValue = "default";
+		DataRowView drv = dv[0];
+
+		dt.Rows.Add(new object[] {99});
+		dt.Rows[1].Delete();
+		dt.Rows[2].BeginEdit();
+		dt.Rows[2][1] = "aaa";
 
 
-        dv.RowStateFilter=DataViewRowState.CurrentRows ;
-        try
-        {
-            BeginCase("check Current");
-            Compare(drv.RowVersion,DataRowVersion.Current);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
 
-        dv.RowStateFilter=DataViewRowState.Deleted ;
-        try
-        {
-            BeginCase("check Original");
-            Compare(drv.RowVersion,DataRowVersion.Original );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
 
-    
+		dv.RowStateFilter=DataViewRowState.CurrentRows ;
+		try
+		{
+			BeginCase("check Current");
+			Compare(drv.RowVersion,DataRowVersion.Current);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-    }
+		dv.RowStateFilter=DataViewRowState.Deleted ;
+		try
+		{
+			BeginCase("check Original");
+			Compare(drv.RowVersion,DataRowVersion.Original );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+	
+
+	}
 }
 }

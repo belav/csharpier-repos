@@ -4,8 +4,8 @@
 
 class Test(string s)
 {
-    public Test ()
-        : this (s)
-    {
-    }
+	public Test ()
+		: this (s)
+	{
+	}
 }

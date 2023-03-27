@@ -1,4 +1,4 @@
-using AutoMapper.Internal.Mappers;
+﻿using AutoMapper.Internal.Mappers;
 using System.Globalization;
 namespace AutoMapper.UnitTests.Mappers;
 using static TypeDescriptor;

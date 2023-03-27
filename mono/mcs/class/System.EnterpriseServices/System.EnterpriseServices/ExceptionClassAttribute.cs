@@ -32,31 +32,31 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Class)]
-    [ComVisible(false)]
-    public sealed class ExceptionClassAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class)]
+	[ComVisible(false)]
+	public sealed class ExceptionClassAttribute : Attribute {
 
-        #region Fields
+		#region Fields
 
-        string name;
+		string name;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public ExceptionClassAttribute (string name)
-        {
-            this.name = name;
-        }
+		public ExceptionClassAttribute (string name)
+		{
+			this.name = name;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public string Value {
-            get { return name; }
-        }
+		public string Value {
+			get { return name; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

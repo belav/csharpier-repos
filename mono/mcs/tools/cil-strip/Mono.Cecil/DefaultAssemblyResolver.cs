@@ -28,35 +28,35 @@
 
 namespace Mono.Cecil {
 
-    using System.Collections;
+	using System.Collections;
 
-    internal class DefaultAssemblyResolver : BaseAssemblyResolver {
+	internal class DefaultAssemblyResolver : BaseAssemblyResolver {
 
-        IDictionary m_cache;
+		IDictionary m_cache;
 
-        public DefaultAssemblyResolver ()
-        {
-            m_cache = new Hashtable ();
-        }
+		public DefaultAssemblyResolver ()
+		{
+			m_cache = new Hashtable ();
+		}
 
-        public override AssemblyDefinition Resolve (AssemblyNameReference name)
-        {
-            AssemblyDefinition asm = (AssemblyDefinition) m_cache [name.FullName];
-            if (asm == null) {
-                asm = base.Resolve (name);
-                m_cache [name.FullName] = asm;
-            }
+		public override AssemblyDefinition Resolve (AssemblyNameReference name)
+		{
+			AssemblyDefinition asm = (AssemblyDefinition) m_cache [name.FullName];
+			if (asm == null) {
+				asm = base.Resolve (name);
+				m_cache [name.FullName] = asm;
+			}
 
-            return asm;
-        }
+			return asm;
+		}
 
-        protected void RegisterAssembly (AssemblyDefinition assembly)
-        {
-            string key = assembly.Name.FullName;
-            if (m_cache.Contains (key))
-                return;
+		protected void RegisterAssembly (AssemblyDefinition assembly)
+		{
+			string key = assembly.Name.FullName;
+			if (m_cache.Contains (key))
+				return;
 
-            m_cache [key] = assembly;
-        }
-    }
+			m_cache [key] = assembly;
+		}
+	}
 }

@@ -3,8 +3,8 @@
 
 class Test
 {
-    static void Main ()
-    {
-        char p = null;
-    }
+	static void Main ()
+	{
+		char p = null;
+	}
 }

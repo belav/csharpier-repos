@@ -47,10 +47,10 @@ class TestLog {
       DateTime[] dts = log2.All;
       // Printing both logs:
       foreach (String s in log1.All) 
-    Console.Write("{0}   ", s);
+	Console.Write("{0}   ", s);
       Console.WriteLine();
       foreach (DateTime dt in dts) 
-    Console.Write("{0}   ", dt);
+	Console.Write("{0}   ", dt);
       Console.WriteLine();
   }
 }

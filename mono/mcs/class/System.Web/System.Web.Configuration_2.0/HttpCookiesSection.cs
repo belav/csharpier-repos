@@ -2,7 +2,7 @@
 // System.Web.Configuration.HttpCookiesSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,46 +34,46 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class HttpCookiesSection : ConfigurationSection
-    {
-        static ConfigurationProperty domainProp;
-        static ConfigurationProperty httpOnlyCookiesProp;
-        static ConfigurationProperty requireSSLProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class HttpCookiesSection : ConfigurationSection
+	{
+		static ConfigurationProperty domainProp;
+		static ConfigurationProperty httpOnlyCookiesProp;
+		static ConfigurationProperty requireSSLProp;
+		static ConfigurationPropertyCollection properties;
 
-        static HttpCookiesSection ()
-        {
-            domainProp = new ConfigurationProperty ("domain", typeof (string), "");
-            httpOnlyCookiesProp = new ConfigurationProperty ("httpOnlyCookies", typeof (bool), false);
-            requireSSLProp = new ConfigurationProperty ("requireSSL", typeof (bool), false);
-            properties = new ConfigurationPropertyCollection ();
+		static HttpCookiesSection ()
+		{
+			domainProp = new ConfigurationProperty ("domain", typeof (string), "");
+			httpOnlyCookiesProp = new ConfigurationProperty ("httpOnlyCookies", typeof (bool), false);
+			requireSSLProp = new ConfigurationProperty ("requireSSL", typeof (bool), false);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (domainProp);
-            properties.Add (httpOnlyCookiesProp);
-            properties.Add (requireSSLProp);
-        }
+			properties.Add (domainProp);
+			properties.Add (httpOnlyCookiesProp);
+			properties.Add (requireSSLProp);
+		}
 
-        [ConfigurationProperty ("domain", DefaultValue = "")]
-        public string Domain {
-            get { return (string) base [domainProp];}
-            set { base[domainProp] = value; }
-        }
+		[ConfigurationProperty ("domain", DefaultValue = "")]
+		public string Domain {
+			get { return (string) base [domainProp];}
+			set { base[domainProp] = value; }
+		}
 
-        [ConfigurationProperty ("httpOnlyCookies", DefaultValue = "False")]
-        public bool HttpOnlyCookies {
-            get { return (bool) base [httpOnlyCookiesProp];}
-            set { base[httpOnlyCookiesProp] = value; }
-        }
+		[ConfigurationProperty ("httpOnlyCookies", DefaultValue = "False")]
+		public bool HttpOnlyCookies {
+			get { return (bool) base [httpOnlyCookiesProp];}
+			set { base[httpOnlyCookiesProp] = value; }
+		}
 
-        [ConfigurationProperty ("requireSSL", DefaultValue = "False")]
-        public bool RequireSSL {
-            get { return (bool) base [requireSSLProp];}
-            set { base[requireSSLProp] = value; }
-        }
+		[ConfigurationProperty ("requireSSL", DefaultValue = "False")]
+		public bool RequireSSL {
+			get { return (bool) base [requireSSLProp];}
+			set { base[requireSSLProp] = value; }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+	}
 }
 

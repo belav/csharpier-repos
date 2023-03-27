@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,25 +32,25 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("3d9f4973-dd2e-48f5-b5f7-2634e09eadd9")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMDocumentStyle {
+	[Guid ("3d9f4973-dd2e-48f5-b5f7-2634e09eadd9")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMDocumentStyle {
 
 #region nsIDOMDocumentStyle
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getStyleSheets ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMStyleSheetList ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getStyleSheets ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMStyleSheetList ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMDocumentStyle {
-        public static nsIDOMDocumentStyle GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocumentStyle obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMDocumentStyle).GUID, obj);
-            return o as nsIDOMDocumentStyle;
-        }
-    }
+	internal class nsDOMDocumentStyle {
+		public static nsIDOMDocumentStyle GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocumentStyle obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMDocumentStyle).GUID, obj);
+			return o as nsIDOMDocumentStyle;
+		}
+	}
 }

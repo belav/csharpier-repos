@@ -128,9 +128,9 @@ CREATE TRIGGER TRG_InsertUpdateProduct
 ON UpdatedProducts
 AFTER INSERT, UPDATE AS
 BEGIN
-    IF @@ROWCOUNT = 0
-        return
-    SET nocount on;
+	IF @@ROWCOUNT = 0
+		return
+	SET nocount on;
 
     UPDATE UpdatedProducts set StoreUpdated = StoreUpdated + 1
     WHERE Id IN(SELECT INSERTED.Id FROM INSERTED);

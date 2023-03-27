@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace System
 {
-    partial class Array
-    {
+	partial class Array
+	{
         // Private value type used by the Sort methods.
         private struct SorterObjectArray
         {

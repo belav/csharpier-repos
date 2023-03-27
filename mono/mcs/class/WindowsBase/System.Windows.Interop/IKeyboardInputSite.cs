@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,14 +29,14 @@ using System.Windows.Input;
 
 namespace System.Windows.Interop {
 
-    public interface IKeyboardInputSite
-    {
-        IKeyboardInputSink Sink { get; }
+	public interface IKeyboardInputSite
+	{
+		IKeyboardInputSink Sink { get; }
 
-        bool OnNoMoreTabStops (TraversalRequest request);
+		bool OnNoMoreTabStops (TraversalRequest request);
 
-        [SecurityCritical]
-        void Unregister ();
-    }
+		[SecurityCritical]
+		void Unregister ();
+	}
 
 }

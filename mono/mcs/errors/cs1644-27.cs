@@ -4,5 +4,5 @@
 
 partial class P
 {
-    partial void Foo ();
+	partial void Foo ();
 }

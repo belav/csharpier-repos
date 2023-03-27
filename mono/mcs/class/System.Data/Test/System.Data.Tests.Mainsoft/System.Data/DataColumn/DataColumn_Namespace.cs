@@ -39,63 +39,63 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataColumn_Namespace : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataColumn_Namespace tc = new DataColumn_Namespace();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataColumn_Namespace");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataColumn_Namespace tc = new DataColumn_Namespace();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataColumn_Namespace");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        DataColumn dc;
-        string sName = "NewName";
+	public void run()
+	{
+		Exception exp = null;
+		DataColumn dc;
+		string sName = "NewName";
 
-        dc = new DataColumn();
-        //Checking default value ("")
-        try
-        {
-            BeginCase("Namespace default");
-            Compare(dc.Namespace ,string.Empty );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        //Cheking Set
-        dc.Namespace  = sName;
-        //Checking Get
-        try
-        {
-            BeginCase("Namespace Get/Set");
-            Compare(dc.Namespace , sName);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-                
-    }
+		dc = new DataColumn();
+		//Checking default value ("")
+		try
+		{
+			BeginCase("Namespace default");
+			Compare(dc.Namespace ,string.Empty );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		//Cheking Set
+		dc.Namespace  = sName;
+		//Checking Get
+		try
+		{
+			BeginCase("Namespace Get/Set");
+			Compare(dc.Namespace , sName);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+				
+	}
 }
 }

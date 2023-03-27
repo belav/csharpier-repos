@@ -88,7 +88,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         public const uint OPEN_EXISTING     = 3;
         public const uint OPEN_ALWAYS       = 4;
         public const uint TRUNCATE_EXISTING = 5;
-        public const uint FILE_FLAG_OVERLAPPED = 0x40000000;
+	    public const uint FILE_FLAG_OVERLAPPED = 0x40000000;
         
         // Access flags
         public const uint GENERIC_READ = 0x80000000;
@@ -103,7 +103,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         public const int ERROR_PIPE_NOT_CONNECTED = 233;
         public const int ERROR_PIPE_CONNECTED = 535;
         public const int ERROR_PIPE_LISTENING = 536;
-        public const int ERROR_IO_PENDING = 997;
+	    public const int ERROR_IO_PENDING = 997;
 
         public const int INVALID_HANDLE_VALUE = -1;
 

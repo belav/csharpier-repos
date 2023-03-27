@@ -32,8 +32,8 @@ using System;
 
 namespace System.Configuration
 {
-    [ConfigurationCollection (typeof (ConnectionStringSettings),
-                  CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	[ConfigurationCollection (typeof (ConnectionStringSettings),
+				  CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
         public sealed class ConnectionStringSettingsCollection : ConfigurationElementCollection
         {
 
@@ -66,10 +66,10 @@ namespace System.Configuration
                         }
                 }
 
-        [MonoTODO]
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
+		[MonoTODO]
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
 
 
                 protected override ConfigurationElement CreateNewElement ()

@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.FormView.cs 
 //
 // Author:
-//    Merav Sudri (meravs@mainsoft.com)
+//	Merav Sudri (meravs@mainsoft.com)
 //
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -44,72 +44,72 @@ using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    
+	
 
-    [TestFixture]    
-    public class DetailsViewRowCollectionTest
-    {
-        
-        ArrayList myArr = new ArrayList ();
-        [TestFixtureSetUp]
-        public void setup ()
-        {
-            myArr.Add ("Item1");
-            myArr.Add ("Item2");
-            myArr.Add ("Item3");
-            myArr.Add ("Item4");
-            myArr.Add ("Item5");
-            myArr.Add ("Item6");            
-        }
+	[TestFixture]	
+	public class DetailsViewRowCollectionTest
+	{
+		
+		ArrayList myArr = new ArrayList ();
+		[TestFixtureSetUp]
+		public void setup ()
+		{
+			myArr.Add ("Item1");
+			myArr.Add ("Item2");
+			myArr.Add ("Item3");
+			myArr.Add ("Item4");
+			myArr.Add ("Item5");
+			myArr.Add ("Item6");			
+		}
 
-        //properties
+		//properties
 
-        [Test]
-        public void DetailsViewRowCollection_Properties ()
-        {
-            DetailsViewRowCollection coll = new DetailsViewRowCollection (myArr);
-            Assert.AreEqual (6, coll.Count, "CountProeprty");
-            Assert.AreEqual (false, coll.IsReadOnly, "IsReadOnlyProperty");            
-            Assert.AreEqual (false, coll.IsSynchronized, "IsSynchronizedProperty");
-            Assert.AreEqual (typeof (DetailsViewRowCollection), coll.SyncRoot.GetType() , "SyncRootProperty");
-            Assert.AreEqual (coll, coll.SyncRoot, "SyncRoot2");               
-        }
-        
+		[Test]
+		public void DetailsViewRowCollection_Properties ()
+		{
+			DetailsViewRowCollection coll = new DetailsViewRowCollection (myArr);
+			Assert.AreEqual (6, coll.Count, "CountProeprty");
+			Assert.AreEqual (false, coll.IsReadOnly, "IsReadOnlyProperty");			
+			Assert.AreEqual (false, coll.IsSynchronized, "IsSynchronizedProperty");
+			Assert.AreEqual (typeof (DetailsViewRowCollection), coll.SyncRoot.GetType() , "SyncRootProperty");
+			Assert.AreEqual (coll, coll.SyncRoot, "SyncRoot2");			   
+		}
+		
 
-        //Public Methods
+		//Public Methods
 
-        [Test]
-        public void DetailsViewRowCollection_CopyTo ()
-        {
-            DetailsViewRow[] rows = new DetailsViewRow[6];
-            ArrayList myRows = new ArrayList ();
-            myRows.Add (new DetailsViewRow (0, DataControlRowType.DataRow, DataControlRowState.Insert));
-            myRows.Add (new DetailsViewRow (1, DataControlRowType.Footer, DataControlRowState.Edit));
-            myRows.Add (new DetailsViewRow (2, DataControlRowType.Header, DataControlRowState.Normal));             
-            DetailsViewRowCollection coll = new DetailsViewRowCollection (myRows);                        
-            coll.CopyTo(rows,0);            
-            Assert.AreEqual (6, rows.Length, "CopyTo1");
-            Assert.AreEqual (0, rows[0].RowIndex, "CopyTo2");
-            Assert.AreEqual (DataControlRowType.Footer , rows[1].RowType , "CopyTo3");
-            Assert.AreEqual (DataControlRowState.Normal, rows[2].RowState, "CopyTo4");
-            Assert.AreEqual (2, rows[2].RowIndex, "CopyTo5");
-            Assert.AreEqual (null, rows[3], "CopyTo6");
-            
-        }
+		[Test]
+		public void DetailsViewRowCollection_CopyTo ()
+		{
+			DetailsViewRow[] rows = new DetailsViewRow[6];
+			ArrayList myRows = new ArrayList ();
+			myRows.Add (new DetailsViewRow (0, DataControlRowType.DataRow, DataControlRowState.Insert));
+			myRows.Add (new DetailsViewRow (1, DataControlRowType.Footer, DataControlRowState.Edit));
+			myRows.Add (new DetailsViewRow (2, DataControlRowType.Header, DataControlRowState.Normal)); 			
+			DetailsViewRowCollection coll = new DetailsViewRowCollection (myRows);						
+			coll.CopyTo(rows,0);			
+			Assert.AreEqual (6, rows.Length, "CopyTo1");
+			Assert.AreEqual (0, rows[0].RowIndex, "CopyTo2");
+			Assert.AreEqual (DataControlRowType.Footer , rows[1].RowType , "CopyTo3");
+			Assert.AreEqual (DataControlRowState.Normal, rows[2].RowState, "CopyTo4");
+			Assert.AreEqual (2, rows[2].RowIndex, "CopyTo5");
+			Assert.AreEqual (null, rows[3], "CopyTo6");
+			
+		}
 
-        [Test]
-        public void DetailsViewRowCollection_GetEnumerator ()
-        {
-            DetailsViewRowCollection coll = new DetailsViewRowCollection (myArr);
-            IEnumerator e=coll.GetEnumerator ();
-            e.MoveNext ();
-            Assert.AreEqual ("Item1", e.Current, "GetEnumerator1");
-            Assert.AreEqual ("True", e.MoveNext ().ToString (), "GetEnumerator2");
-            Assert.AreEqual ("Item2", e.Current, "GetEnumerator3");             
+		[Test]
+		public void DetailsViewRowCollection_GetEnumerator ()
+		{
+			DetailsViewRowCollection coll = new DetailsViewRowCollection (myArr);
+			IEnumerator e=coll.GetEnumerator ();
+			e.MoveNext ();
+			Assert.AreEqual ("Item1", e.Current, "GetEnumerator1");
+			Assert.AreEqual ("True", e.MoveNext ().ToString (), "GetEnumerator2");
+			Assert.AreEqual ("Item2", e.Current, "GetEnumerator3");			 
  
-        }
-        
-    }
+		}
+		
+	}
 }
 
 

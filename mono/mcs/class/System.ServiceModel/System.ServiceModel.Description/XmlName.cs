@@ -2,7 +2,7 @@
 // XmlName.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -29,72 +29,72 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-    // Introduced for silverlight/moonlight compatibility
-    internal class XmlName
-    {
-        public XmlName (string name)
-            : this (name, false)
-        {
-        }
+	// Introduced for silverlight/moonlight compatibility
+	internal class XmlName
+	{
+		public XmlName (string name)
+			: this (name, false)
+		{
+		}
 
-        public XmlName (string name, bool allowNull)
-        {
-            ValidateEncodedName (name, allowNull);
-            encoded_name = name;
-        }
+		public XmlName (string name, bool allowNull)
+		{
+			ValidateEncodedName (name, allowNull);
+			encoded_name = name;
+		}
 
-        string encoded_name, decoded_name;
+		string encoded_name, decoded_name;
 
-        public bool IsEmpty {
-            get { return String.IsNullOrEmpty (encoded_name); }
-        }
+		public bool IsEmpty {
+			get { return String.IsNullOrEmpty (encoded_name); }
+		}
 
-        public string DecodedName {
-            get {
-                if (decoded_name == null && encoded_name != null)
-                    decoded_name = XmlConvert.DecodeName (encoded_name);
-                return decoded_name;
-            }
-        }
+		public string DecodedName {
+			get {
+				if (decoded_name == null && encoded_name != null)
+					decoded_name = XmlConvert.DecodeName (encoded_name);
+				return decoded_name;
+			}
+		}
 
-        public string EncodedName {
-            get { return encoded_name; }
-        }
+		public string EncodedName {
+			get { return encoded_name; }
+		}
 
-        public void ValidateEncodedName (string name, bool allowNull)
-        {
-            try {
-                if (!allowNull || name != null)
-                    XmlConvert.VerifyNCName (name);
-            } catch (XmlException ex) {
-                throw new ArgumentException ("Invalid XML name", ex);
-            }
-        }
+		public void ValidateEncodedName (string name, bool allowNull)
+		{
+			try {
+				if (!allowNull || name != null)
+					XmlConvert.VerifyNCName (name);
+			} catch (XmlException ex) {
+				throw new ArgumentException ("Invalid XML name", ex);
+			}
+		}
 
-        public override string ToString ()
-        {
-            return encoded_name;
-        }
+		public override string ToString ()
+		{
+			return encoded_name;
+		}
 
-        public static bool operator == (XmlName a, XmlName b)
-        {
-            throw new NotImplementedException ();
-        }
+		public static bool operator == (XmlName a, XmlName b)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public static bool operator != (XmlName a, XmlName b)
-        {
-            throw new NotImplementedException ();
-        }
+		public static bool operator != (XmlName a, XmlName b)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override bool Equals (object obj)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        public override int GetHashCode ()
-        {
-            throw new NotImplementedException ();
-        }
+		public override bool Equals (object obj)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		public override int GetHashCode ()
+		{
+			throw new NotImplementedException ();
+		}
 
-    }
+	}
 }

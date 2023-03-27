@@ -1,9 +1,9 @@
 //
 // HtmlTableCas.cs 
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlTable
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlTable
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,34 +37,34 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlTableCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlTableCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HtmlTableTest unit = new HtmlTableTest ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.EmptyProperties ();
-            unit.CleanProperties ();
-            unit.MaxInt32 ();
-            unit.MinInt32 ();
-            unit.WrongTypeInt ();
-            unit.Render_Table_Simple ();
-            unit.Render_Table ();
-            unit.Render_TableRow_Simple ();
-            unit.Render_TableRow ();
-            unit.Render_TableRowCell_Simple ();
-            unit.Render_TableRowCell ();
-            unit.HtmlTableRowControlCollectionAdd ();
-            unit.HtmlTableRowControlCollectionAddAt ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HtmlTableTest unit = new HtmlTableTest ();
+			unit.DefaultProperties ();
+			unit.NullProperties ();
+			unit.EmptyProperties ();
+			unit.CleanProperties ();
+			unit.MaxInt32 ();
+			unit.MinInt32 ();
+			unit.WrongTypeInt ();
+			unit.Render_Table_Simple ();
+			unit.Render_Table ();
+			unit.Render_TableRow_Simple ();
+			unit.Render_TableRow ();
+			unit.Render_TableRowCell_Simple ();
+			unit.Render_TableRowCell ();
+			unit.HtmlTableRowControlCollectionAdd ();
+			unit.HtmlTableRowControlCollectionAddAt ();
+		}
 
-        public override Type Type {
-            get { return typeof (HtmlTable); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlTable); }
+		}
+	}
 }

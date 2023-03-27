@@ -1,7 +1,7 @@
 // System.Configuration.Install.InstallException.cs
 //
 // Author:
-//     Alejandro Sánchez Acosta  <raciel@es.gnu.org>
+// 	Alejandro Sánchez Acosta  <raciel@es.gnu.org>
 //
 // (C) Alejandro Sánchez Acosta
 //
@@ -33,26 +33,26 @@ using System.Runtime.Serialization;
 
 namespace System.Configuration.Install
 {
-    [Serializable]
-    public class InstallException : SystemException
-    {
-        private Exception innerException;
-        
-        public InstallException ()
-        {
-        }
+	[Serializable]
+	public class InstallException : SystemException
+	{
+		private Exception innerException;
+		
+		public InstallException ()
+		{
+		}
 
-        public InstallException (string message) : base (message) 
-        {
-        } 
+		public InstallException (string message) : base (message) 
+		{
+		} 
 
-        protected InstallException (SerializationInfo info, StreamingContext context) : base (info, context)
-        {
-        }
+		protected InstallException (SerializationInfo info, StreamingContext context) : base (info, context)
+		{
+		}
 
-        public InstallException (string message, Exception innerException) : base (message)
-        {
-            this.innerException = innerException;
-        }        
-    }
+		public InstallException (string message, Exception innerException) : base (message)
+		{
+			this.innerException = innerException;
+		}		
+	}
 }

@@ -2,8 +2,8 @@
 // System.Net.Configuration.ConnectionManagementElement.cs
 //
 // Authors:
-//    Tim Coleman (tim@timcoleman.com)
-//    Chris Toshok (toshok@ximian.com)
+//	Tim Coleman (tim@timcoleman.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (C) 2004,2005 Novell, Inc. (http://www.novell.com)
@@ -36,62 +36,62 @@ using System.Configuration;
 
 namespace System.Net.Configuration 
 {
-    public sealed class ConnectionManagementElement : ConfigurationElement
-    {
-        #region Fields
+	public sealed class ConnectionManagementElement : ConfigurationElement
+	{
+		#region Fields
 
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty addressProp;
-        static ConfigurationProperty maxConnectionProp;
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty addressProp;
+		static ConfigurationProperty maxConnectionProp;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        static ConnectionManagementElement ()
-        {
-            addressProp = new ConfigurationProperty ("address", typeof (string),
-                                 null, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-            maxConnectionProp = new ConfigurationProperty ("maxconnection", typeof (int),
-                                       1, ConfigurationPropertyOptions.IsRequired);
-            properties = new ConfigurationPropertyCollection ();
+		static ConnectionManagementElement ()
+		{
+			addressProp = new ConfigurationProperty ("address", typeof (string),
+								 null, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+			maxConnectionProp = new ConfigurationProperty ("maxconnection", typeof (int),
+								       1, ConfigurationPropertyOptions.IsRequired);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (addressProp);
-            properties.Add (maxConnectionProp);
-        }
+			properties.Add (addressProp);
+			properties.Add (maxConnectionProp);
+		}
 
-        public ConnectionManagementElement ()
-        {
-        }
+		public ConnectionManagementElement ()
+		{
+		}
 
-        public ConnectionManagementElement (string address, int maxConnection)
-        {
-            Address = address;
-            MaxConnection = maxConnection;
-        }
+		public ConnectionManagementElement (string address, int maxConnection)
+		{
+			Address = address;
+			MaxConnection = maxConnection;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [ConfigurationProperty ("address", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Address {
-            get { return (string) base [addressProp]; }
-            set { base [addressProp] = value; }
-        }
+		[ConfigurationProperty ("address", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+		public string Address {
+			get { return (string) base [addressProp]; }
+			set { base [addressProp] = value; }
+		}
 
-        [ConfigurationProperty ("maxconnection", DefaultValue = "6", Options = ConfigurationPropertyOptions.IsRequired)]
-        public int MaxConnection {
-            get { return (int) base [maxConnectionProp]; }
-            set { base [maxConnectionProp] = value; } 
-        }
+		[ConfigurationProperty ("maxconnection", DefaultValue = "6", Options = ConfigurationPropertyOptions.IsRequired)]
+		public int MaxConnection {
+			get { return (int) base [maxConnectionProp]; }
+			set { base [maxConnectionProp] = value; } 
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }
 
 #endif

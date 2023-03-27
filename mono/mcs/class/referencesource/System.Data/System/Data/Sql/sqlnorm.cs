@@ -63,7 +63,7 @@ namespace Microsoft.SqlServer.Server {
         //i.e. one that does not require a null byte header.
         private bool m_isTopLevelUdt;
 
-        [System.Security.Permissions.ReflectionPermission(System.Security.Permissions.SecurityAction.Assert, MemberAccess=true)]
+    	[System.Security.Permissions.ReflectionPermission(System.Security.Permissions.SecurityAction.Assert, MemberAccess=true)]
         private FieldInfo[] GetFields (Type t) {
             return t.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         }
@@ -271,12 +271,12 @@ namespace Microsoft.SqlServer.Server {
                 b[i] = (byte) ~b[i];
         }
 
-        [System.Security.Permissions.ReflectionPermission(System.Security.Permissions.SecurityAction.Assert, MemberAccess=true)]
+    	[System.Security.Permissions.ReflectionPermission(System.Security.Permissions.SecurityAction.Assert, MemberAccess=true)]
         protected object GetValue(FieldInfo fi, object obj) {
             return fi.GetValue(obj);
         }
 
-        [System.Security.Permissions.ReflectionPermission(System.Security.Permissions.SecurityAction.Assert, MemberAccess=true)]
+    	[System.Security.Permissions.ReflectionPermission(System.Security.Permissions.SecurityAction.Assert, MemberAccess=true)]
         protected void SetValue(FieldInfo fi, object recvr, object value) {
             fi.SetValue(recvr, value);
         }

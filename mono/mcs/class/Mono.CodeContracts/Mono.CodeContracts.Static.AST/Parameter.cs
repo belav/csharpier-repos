@@ -2,7 +2,7 @@
 // Parameter.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,56 +30,56 @@ using System;
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Static.AST {
-    class Parameter : Variable {
-        private readonly ParameterDefinition definition;
-        private Method declaringMethod;
-        private bool declaringMethodSpecified;
+	class Parameter : Variable {
+		private readonly ParameterDefinition definition;
+		private Method declaringMethod;
+		private bool declaringMethodSpecified;
 
-        public Parameter () : base (NodeType.Parameter)
-        {
-        }
+		public Parameter () : base (NodeType.Parameter)
+		{
+		}
 
-        public Parameter (ParameterDefinition definition) : base (NodeType.Parameter)
-        {
-            this.definition = definition;
-            this.type = TypeNode.Create (definition.ParameterType);
-        }
+		public Parameter (ParameterDefinition definition) : base (NodeType.Parameter)
+		{
+			this.definition = definition;
+			this.type = TypeNode.Create (definition.ParameterType);
+		}
 
-        public string Name { get; protected set; }
+		public string Name { get; protected set; }
 
-        public Method DeclaringMethod
-        {
-            get
-            {
-                if (!this.declaringMethodSpecified && this.declaringMethod == null) {
-                    var methodReference = this.definition.Method as MethodReference;
-                    if (methodReference == null)
-                        throw new NotImplementedException ("Function pointers are not implemented");
+		public Method DeclaringMethod
+		{
+			get
+			{
+				if (!this.declaringMethodSpecified && this.declaringMethod == null) {
+					var methodReference = this.definition.Method as MethodReference;
+					if (methodReference == null)
+						throw new NotImplementedException ("Function pointers are not implemented");
 
-                    this.declaringMethod = new Method (methodReference.Resolve ());
-                }
-                return this.declaringMethod;
-            }
-            set
-            {
-                this.declaringMethod = value;
-                this.declaringMethodSpecified = true;
-            }
-        }
+					this.declaringMethod = new Method (methodReference.Resolve ());
+				}
+				return this.declaringMethod;
+			}
+			set
+			{
+				this.declaringMethod = value;
+				this.declaringMethodSpecified = true;
+			}
+		}
 
-        public virtual int Index
-        {
-            get { return this.definition.Index; }
-        }
+		public virtual int Index
+		{
+			get { return this.definition.Index; }
+		}
 
-        public virtual bool IsOut
-        {
-            get { return this.definition.IsOut; }
-        }
+		public virtual bool IsOut
+		{
+			get { return this.definition.IsOut; }
+		}
 
-        public override string ToString ()
-        {
-            return string.Format ("Parameter({0})", this.definition);
-        }
-    }
+		public override string ToString ()
+		{
+			return string.Format ("Parameter({0})", this.definition);
+		}
+	}
 }

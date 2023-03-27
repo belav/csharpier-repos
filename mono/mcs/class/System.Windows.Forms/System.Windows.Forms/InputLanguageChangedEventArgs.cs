@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 //
 
@@ -30,43 +30,43 @@
 using System.Globalization;
 
 namespace System.Windows.Forms {
-    public class InputLanguageChangedEventArgs : EventArgs {
-        private CultureInfo    culture;
-        private byte        charset;
-        private InputLanguage    input_language;
+	public class InputLanguageChangedEventArgs : EventArgs {
+		private CultureInfo	culture;
+		private byte		charset;
+		private InputLanguage	input_language;
 
-        #region Public Constructors
-        public InputLanguageChangedEventArgs(System.Globalization.CultureInfo culture, byte charSet) {
-            this.culture = culture;
-            this.charset = charSet;
-            this.input_language = InputLanguage.FromCulture(culture);
-        }
+		#region Public Constructors
+		public InputLanguageChangedEventArgs(System.Globalization.CultureInfo culture, byte charSet) {
+			this.culture = culture;
+			this.charset = charSet;
+			this.input_language = InputLanguage.FromCulture(culture);
+		}
 
-        public InputLanguageChangedEventArgs(InputLanguage inputLanguage, byte charSet) {
-            this.culture = inputLanguage.Culture;
-            this.charset = charSet;
-            this.input_language = inputLanguage;
-        }
-        #endregion    // Public Constructors
+		public InputLanguageChangedEventArgs(InputLanguage inputLanguage, byte charSet) {
+			this.culture = inputLanguage.Culture;
+			this.charset = charSet;
+			this.input_language = inputLanguage;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public byte CharSet {
-            get {
-                return this.charset;
-            }
-        }
+		#region Public Instance Properties
+		public byte CharSet {
+			get {
+				return this.charset;
+			}
+		}
 
-        public CultureInfo Culture {
-            get {
-                return this.culture;
-            }
-        }
+		public CultureInfo Culture {
+			get {
+				return this.culture;
+			}
+		}
 
-        public InputLanguage InputLanguage {
-            get {
-                return this.input_language;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+		public InputLanguage InputLanguage {
+			get {
+				return this.input_language;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

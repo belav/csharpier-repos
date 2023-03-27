@@ -1,6 +1,6 @@
 //
 // ResourceConsumptionAttributeCas.cs - CAS unit tests for 
-//    System.Runtime.Versioning.ResourceConsumptionAttribute
+//	System.Runtime.Versioning.ResourceConsumptionAttribute
 //
 // Author:
 //      Sebastien Pouliot  <sebastien@ximian.com>
@@ -39,37 +39,37 @@ using MonoTests.System.Runtime.Versioning;
 
 namespace MonoCasTests.System.Runtime.Versioning {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ResourceConsumptionAttributeCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ResourceConsumptionAttributeCas {
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTest ()
-        {
-            ResourceConsumptionAttributeTest unit = new ResourceConsumptionAttributeTest ();
-            unit.Constructor1 ();
-            unit.Constructor2 ();
-            unit.InvalidResourceScope1 ();
-            unit.InvalidResourceScope2 ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTest ()
+		{
+			ResourceConsumptionAttributeTest unit = new ResourceConsumptionAttributeTest ();
+			unit.Constructor1 ();
+			unit.Constructor2 ();
+			unit.InvalidResourceScope1 ();
+			unit.InvalidResourceScope2 ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            Type[] types = new Type[1] { typeof (ResourceScope) };
-            ConstructorInfo ci = typeof (ResourceConsumptionAttribute).GetConstructor (types);
-            Assert.IsNotNull (ci, ".ctor(ResourceScope)");
-            Assert.IsNotNull (ci.Invoke (new object[1] { ResourceScope.None }), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			Type[] types = new Type[1] { typeof (ResourceScope) };
+			ConstructorInfo ci = typeof (ResourceConsumptionAttribute).GetConstructor (types);
+			Assert.IsNotNull (ci, ".ctor(ResourceScope)");
+			Assert.IsNotNull (ci.Invoke (new object[1] { ResourceScope.None }), "invoke");
+		}
+	}
 }
 

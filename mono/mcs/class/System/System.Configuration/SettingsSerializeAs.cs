@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsSerializeAs.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,11 +30,11 @@ using System;
 
 namespace System.Configuration
 {
-    public enum SettingsSerializeAs
-    {
-        String = 0,
-        Xml = 1,
-        Binary = 2,
-        ProviderSpecific = 3
-    }
+	public enum SettingsSerializeAs
+	{
+		String = 0,
+		Xml = 1,
+		Binary = 2,
+		ProviderSpecific = 3
+	}
 }

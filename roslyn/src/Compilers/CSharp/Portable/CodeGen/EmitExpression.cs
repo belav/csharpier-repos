@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -3448,7 +3448,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // Let T be the type from the slot on the newly computed state and S
             // be the type from the corresponding slot on the previously stored state. The merged type, U, shall
             // be computed as follows (recall that S := T is the compatibility function defined
-            // in �III.1.8.1.2.2):
+            // in §III.1.8.1.2.2):
             // 1. if S := T then U=S
             // 2. Otherwise, if T := S then U=T
             // 3. Otherwise, if S and T are both object types, then let V be the closest common supertype of S and T then U=V.

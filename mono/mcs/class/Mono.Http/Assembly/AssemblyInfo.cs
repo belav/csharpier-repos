@@ -2,7 +2,7 @@
 // AssemblyInfo.cs
 //
 // Author:
-//     Gonzalo Paniagua (gonzalo@ximian.com)
+// 	Gonzalo Paniagua (gonzalo@ximian.com)
 //
 // (C) 2003 Novell, Inc.  http://www.novell.com
 //

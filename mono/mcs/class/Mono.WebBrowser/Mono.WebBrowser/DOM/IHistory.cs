@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -28,12 +28,12 @@ using Mono.WebBrowser;
 
 namespace Mono.WebBrowser.DOM
 {
-    public interface IHistory
-    {
-        int Count { get; }
-        void Back (int count);
-        void Forward (int count);
-        void GoToIndex (int index);
-        void GoToUrl (string url);
-    }
+	public interface IHistory
+	{
+		int Count { get; }
+		void Back (int count);
+		void Forward (int count);
+		void GoToIndex (int index);
+		void GoToUrl (string url);
+	}
 }

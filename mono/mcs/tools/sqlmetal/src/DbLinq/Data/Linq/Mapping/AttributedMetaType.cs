@@ -1,4 +1,4 @@
-#region MIT license
+﻿#region MIT license
 // 
 // MIT license
 //
@@ -42,20 +42,20 @@ namespace DbLinq.Data.Linq.Mapping
         {
             type = classType;
 
-            AssociationsLookup = new Dictionary<MemberInfo, MetaDataMember>();
-            _AssociationFixupList = new List<AssociationData>();
+			AssociationsLookup = new Dictionary<MemberInfo, MetaDataMember>();
+			_AssociationFixupList = new List<AssociationData>();
 
-            //First add the member to the AssociationsLookup table, because creation of the Association will cause both meta classes to look each other up, or possibly a self lookup
-            //We'll also cache the association data in _AssociationFixupList to be used by GetAssociations
-            foreach (var memberInfo in type.GetMembers())
-            {
-                var association = memberInfo.GetAttribute<AssociationAttribute>();
-                if (association == null)
-                    continue;
-                var dataMember = new AttributedAssociationMetaDataMember(memberInfo, association, this);
-                AssociationsLookup[memberInfo] = dataMember;
-                _AssociationFixupList.Add(new AssociationData() { Association = association, Member = memberInfo, DataMember = dataMember });
-            }
+			//First add the member to the AssociationsLookup table, because creation of the Association will cause both meta classes to look each other up, or possibly a self lookup
+			//We'll also cache the association data in _AssociationFixupList to be used by GetAssociations
+			foreach (var memberInfo in type.GetMembers())
+			{
+				var association = memberInfo.GetAttribute<AssociationAttribute>();
+				if (association == null)
+					continue;
+				var dataMember = new AttributedAssociationMetaDataMember(memberInfo, association, this);
+				AssociationsLookup[memberInfo] = dataMember;
+				_AssociationFixupList.Add(new AssociationData() { Association = association, Member = memberInfo, DataMember = dataMember });
+			}
         }
 
         internal void SetMetaTable(MetaTable metaTable)
@@ -75,25 +75,25 @@ namespace DbLinq.Data.Linq.Mapping
             }
         }
 
-        private class AssociationData
-        {
-            public AssociationAttribute Association;
-            public MemberInfo Member;
-            public AttributedAssociationMetaDataMember DataMember;
-        }
+		private class AssociationData
+		{
+			public AssociationAttribute Association;
+			public MemberInfo Member;
+			public AttributedAssociationMetaDataMember DataMember;
+		}
 
         private IEnumerable<MetaAssociation> GetAssociations()
         {
-            //We can clear our fixup list as we're now going to convert it to the association list
-            var associationFixupList = _AssociationFixupList;
-            _AssociationFixupList = null;
+			//We can clear our fixup list as we're now going to convert it to the association list
+			var associationFixupList = _AssociationFixupList;
+			_AssociationFixupList = null;
 
-            foreach (AssociationData data in associationFixupList)
-            {
-                var metaAssociation = new AttributedMetaAssociation(data.Member, data.Association, data.DataMember);
-                data.DataMember.SetAssociation(metaAssociation);
+			foreach (AssociationData data in associationFixupList)
+			{
+				var metaAssociation = new AttributedMetaAssociation(data.Member, data.Association, data.DataMember);
+				data.DataMember.SetAssociation(metaAssociation);
                 yield return metaAssociation;
-            }
+			}
         }
 
         public override bool CanInstantiate
@@ -242,7 +242,7 @@ namespace DbLinq.Data.Linq.Mapping
             get { throw new NotImplementedException(); }
         }
 
-        private ReadOnlyCollection<MetaDataMember> _persistentDataMembers;
+    	private ReadOnlyCollection<MetaDataMember> _persistentDataMembers;
         public override ReadOnlyCollection<MetaDataMember> PersistentDataMembers
         {
             get {
@@ -270,7 +270,7 @@ namespace DbLinq.Data.Linq.Mapping
             get { throw new NotImplementedException(); }
         }
 
-        internal Dictionary<MemberInfo, MetaDataMember> AssociationsLookup;
-        private List<AssociationData> _AssociationFixupList;
+		internal Dictionary<MemberInfo, MetaDataMember> AssociationsLookup;
+		private List<AssociationData> _AssociationFixupList;
     }
 }

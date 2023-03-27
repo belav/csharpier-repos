@@ -36,125 +36,125 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-    [TestFixture] public class DataRow_IsNull_S : GHTBase
-    {
-        public void SetUp()
-        {
-            Exception exp = null;
-            BeginCase("Setup");
-            try
-            {
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        }
+	[TestFixture] public class DataRow_IsNull_S : GHTBase
+	{
+		public void SetUp()
+		{
+			Exception exp = null;
+			BeginCase("Setup");
+			try
+			{
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		}
 
-        public void TearDown()
-        {
-        }
+		public void TearDown()
+		{
+		}
 
-        [Test] public void Main()
-        {
-            DataRow_IsNull_S tc = new DataRow_IsNull_S();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("DataRow_IsNull_S");
-                tc.SetUp();
-                tc.run();
-                tc.TearDown();
-            }
-            catch(Exception ex)
-            {
-                exp = ex;
-            }
-            finally
-            {
-                tc.EndTest(exp);
-            }
-        }
+		[Test] public void Main()
+		{
+			DataRow_IsNull_S tc = new DataRow_IsNull_S();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("DataRow_IsNull_S");
+				tc.SetUp();
+				tc.run();
+				tc.TearDown();
+			}
+			catch(Exception ex)
+			{
+				exp = ex;
+			}
+			finally
+			{
+				tc.EndTest(exp);
+			}
+		}
 
-        public void run()
-        {
-            Exception exp = null;
-            DataTable dt = new DataTable(); 
-            DataColumn dc0 = new DataColumn("Col0",typeof(int));
-            DataColumn dc1 = new DataColumn("Col1",typeof(int));
-            dt.Columns.Add(dc0);
-            dt.Columns.Add(dc1);
-            dt.Rows.Add(new object[] {1234});
-            DataRow dr = dt.Rows[0];
+		public void run()
+		{
+			Exception exp = null;
+			DataTable dt = new DataTable(); 
+			DataColumn dc0 = new DataColumn("Col0",typeof(int));
+			DataColumn dc1 = new DataColumn("Col1",typeof(int));
+			dt.Columns.Add(dc0);
+			dt.Columns.Add(dc1);
+			dt.Rows.Add(new object[] {1234});
+			DataRow dr = dt.Rows[0];
 
 #region --- assignment  ----
-            try
-            {
-                BeginCase("IsNull_S 1");
-                Compare(dr.IsNull("Col0"), false);
-            } 
-            catch(Exception ex)
-            {
-                exp = ex;
-            }
-            finally
-            {
-                EndCase(exp);
-                exp = null;
-            }
+			try
+			{
+				BeginCase("IsNull_S 1");
+				Compare(dr.IsNull("Col0"), false);
+			} 
+			catch(Exception ex)
+			{
+				exp = ex;
+			}
+			finally
+			{
+				EndCase(exp);
+				exp = null;
+			}
 
-            try
-            {
-                BeginCase("IsNull_S 2");
-                Compare(dr.IsNull("Col1"), true);
-            } 
-            catch(Exception ex)
-            {
-                exp = ex;
-            }
-            finally
-            {
-                EndCase(exp);
-                exp = null;
-            }
+			try
+			{
+				BeginCase("IsNull_S 2");
+				Compare(dr.IsNull("Col1"), true);
+			} 
+			catch(Exception ex)
+			{
+				exp = ex;
+			}
+			finally
+			{
+				EndCase(exp);
+				exp = null;
+			}
 #endregion
 
 #region --- bug 3124 ---
 
-            try
-            {
-                BeginCase("IsNull_S 1");
-                System.IO.MemoryStream st = new System.IO.MemoryStream();
-                System.IO.StreamWriter sw = new System.IO.StreamWriter(st);
-                sw.Write("<?xml version=\"1.0\" standalone=\"yes\"?><NewDataSet>");
-                sw.Write("<Table><EmployeeNo>9</EmployeeNo></Table>");
-                sw.Write("</NewDataSet>");
-                sw.Flush();
-                st.Position=0;
-                DataSet ds = new DataSet();
-                ds.ReadXml(st);
-                //  Here we add the expression column
-                ds.Tables[0].Columns.Add("ValueListValueMember", typeof(object), "EmployeeNo");
-        
-                foreach( DataRow row in ds.Tables[0].Rows )
-                {
-                    // Console.WriteLine(row["ValueListValueMember"].ToString() + " " );
-                    if( row.IsNull("ValueListValueMember") == true )
-                        Compare("SubTest","Failed");
-                    else
-                        Compare("Passed","Passed");
-                }
+			try
+			{
+				BeginCase("IsNull_S 1");
+				System.IO.MemoryStream st = new System.IO.MemoryStream();
+				System.IO.StreamWriter sw = new System.IO.StreamWriter(st);
+				sw.Write("<?xml version=\"1.0\" standalone=\"yes\"?><NewDataSet>");
+				sw.Write("<Table><EmployeeNo>9</EmployeeNo></Table>");
+				sw.Write("</NewDataSet>");
+				sw.Flush();
+				st.Position=0;
+				DataSet ds = new DataSet();
+				ds.ReadXml(st);
+				//  Here we add the expression column
+				ds.Tables[0].Columns.Add("ValueListValueMember", typeof(object), "EmployeeNo");
+		
+				foreach( DataRow row in ds.Tables[0].Rows )
+				{
+					// Console.WriteLine(row["ValueListValueMember"].ToString() + " " );
+					if( row.IsNull("ValueListValueMember") == true )
+						Compare("SubTest","Failed");
+					else
+						Compare("Passed","Passed");
+				}
 
-            } 
-            catch(Exception ex)
-            {
-                exp = ex;
-            }
-            finally
-            {
-                EndCase(exp);
-                exp = null;
-            }
+			} 
+			catch(Exception ex)
+			{
+				exp = ex;
+			}
+			finally
+			{
+				EndCase(exp);
+				exp = null;
+			}
 #endregion
 
-        }
-    }
+		}
+	}
 }

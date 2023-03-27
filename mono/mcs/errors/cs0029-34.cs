@@ -7,9 +7,9 @@ struct MyTypeImplicitOnly
 
 class C
 {
-    static void Main ()
-    {
-        MyTypeImplicitOnly? mt = null;
-        mt = null + mt;
-    }
+	static void Main ()
+	{
+		MyTypeImplicitOnly? mt = null;
+		mt = null + mt;
+	}
 }

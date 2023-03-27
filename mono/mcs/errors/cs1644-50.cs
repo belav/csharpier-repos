@@ -4,8 +4,8 @@
 
 public class Program
 {
-    public static void Main()
-    {
-        var x = $"I should not compile";
-    }
+	public static void Main()
+	{
+		var x = $"I should not compile";
+	}
 }

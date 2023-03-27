@@ -3,15 +3,15 @@
 
 public class A
 {
-    public A (dynamic arg)
-    {
-    }
+	public A (dynamic arg)
+	{
+	}
 }
 
 public class B : A
 {
-    public B (dynamic arg)
-        : base (arg)
-    {
-    }
+	public B (dynamic arg)
+		: base (arg)
+	{
+	}
 }

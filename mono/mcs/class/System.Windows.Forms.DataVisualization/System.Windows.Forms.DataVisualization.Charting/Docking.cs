@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,11 +27,11 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum Docking
-    {
-        Top = 0,
-        Right = 1,
-        Bottom = 2,
-        Left = 3
-    }
+	public enum Docking
+	{
+		Top = 0,
+		Right = 1,
+		Bottom = 2,
+		Left = 3
+	}
 }

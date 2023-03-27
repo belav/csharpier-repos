@@ -32,34 +32,34 @@ using System.Security.Permissions;
 
 namespace System.Web.UI 
 {
-    // CAS
+	// CAS
         [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
         [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class HiddenFieldPageStatePersister : PageStatePersister
-    {
-        public HiddenFieldPageStatePersister (Page page)
-            : base(page)
-        {
-        }
-        
-        public override void Load ()
-        {
-            string rawViewState = Page.RawViewState;
-            IStateFormatter formatter = StateFormatter;
-            if (!String.IsNullOrEmpty (rawViewState)) {
-                Pair pair = formatter.Deserialize (rawViewState) as Pair;
-                if (pair != null) {
-                    ViewState = pair.First;
-                    ControlState = pair.Second;
-                }
-            }
-        }
+	public class HiddenFieldPageStatePersister : PageStatePersister
+	{
+		public HiddenFieldPageStatePersister (Page page)
+			: base(page)
+		{
+		}
+		
+		public override void Load ()
+		{
+			string rawViewState = Page.RawViewState;
+			IStateFormatter formatter = StateFormatter;
+			if (!String.IsNullOrEmpty (rawViewState)) {
+				Pair pair = formatter.Deserialize (rawViewState) as Pair;
+				if (pair != null) {
+					ViewState = pair.First;
+					ControlState = pair.Second;
+				}
+			}
+		}
 
-        public override void Save ()
-        {
-            IStateFormatter formatter = StateFormatter;
-            Page.RawViewState = formatter.Serialize (new Pair (ViewState, ControlState));
-        }
-    }
+		public override void Save ()
+		{
+			IStateFormatter formatter = StateFormatter;
+			Page.RawViewState = formatter.Serialize (new Pair (ViewState, ControlState));
+		}
+	}
 }
 

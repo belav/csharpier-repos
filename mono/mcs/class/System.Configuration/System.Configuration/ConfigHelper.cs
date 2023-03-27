@@ -2,7 +2,7 @@
 // System.Configuration.ConfigHelper
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 //
@@ -34,32 +34,32 @@ using System.Xml;
 
 namespace System.Configuration
 {
-    internal class ConfigNameValueCollection: NameValueCollection
-    {
-        bool modified;
-        
-        public ConfigNameValueCollection ()
-        {
-        }
-        
-        public ConfigNameValueCollection (ConfigNameValueCollection col)
-        : base (col.Count, col)
-        {
-        }
-        
-        public void ResetModified ()
-        {
-            modified = false;
-        }
-        
-        public bool IsModified {
-            get { return modified; }
-        }
-        
-        public override void Set (string name, string value)
-        {
-            base.Set (name, value);
-            modified = true;
-        }
-    }
+	internal class ConfigNameValueCollection: NameValueCollection
+	{
+		bool modified;
+		
+		public ConfigNameValueCollection ()
+		{
+		}
+		
+		public ConfigNameValueCollection (ConfigNameValueCollection col)
+		: base (col.Count, col)
+		{
+		}
+		
+		public void ResetModified ()
+		{
+			modified = false;
+		}
+		
+		public bool IsModified {
+			get { return modified; }
+		}
+		
+		public override void Set (string name, string value)
+		{
+			base.Set (name, value);
+			modified = true;
+		}
+	}
 }

@@ -1,9 +1,9 @@
 //
 // CodeMemberFieldCas.cs
-//    - CAS unit tests for System.CodeDom.CodeMemberField
+//	- CAS unit tests for System.CodeDom.CodeMemberField
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,69 +37,69 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeMemberFieldCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeMemberFieldCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeMemberField cmf = new CodeMemberField ();
-            Assert.IsNull (cmf.InitExpression, "InitExpression");
-            cmf.InitExpression = new CodeExpression ();
-            Assert.AreEqual ("System.Void", cmf.Type.BaseType, "Type");
-            cmf.Type = new CodeTypeReference ("System.Int32");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeMemberField cmf = new CodeMemberField ();
+			Assert.IsNull (cmf.InitExpression, "InitExpression");
+			cmf.InitExpression = new CodeExpression ();
+			Assert.AreEqual ("System.Void", cmf.Type.BaseType, "Type");
+			cmf.Type = new CodeTypeReference ("System.Int32");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeTypeReference type = new CodeTypeReference ("System.Int32");
-            CodeMemberField cmf = new CodeMemberField (type, "mono");
-            Assert.IsNull (cmf.InitExpression, "InitExpression");
-            cmf.InitExpression = new CodeExpression ();
-            Assert.AreSame (type, cmf.Type, "Type");
-            cmf.Type = new CodeTypeReference ("System.Void");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeTypeReference type = new CodeTypeReference ("System.Int32");
+			CodeMemberField cmf = new CodeMemberField (type, "mono");
+			Assert.IsNull (cmf.InitExpression, "InitExpression");
+			cmf.InitExpression = new CodeExpression ();
+			Assert.AreSame (type, cmf.Type, "Type");
+			cmf.Type = new CodeTypeReference ("System.Void");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2_Deny_Unrestricted ()
-        {
-            CodeMemberField cmf = new CodeMemberField ("System.Int32", "mono");
-            Assert.IsNull (cmf.InitExpression, "InitExpression");
-            cmf.InitExpression = new CodeExpression ();
-            Assert.AreEqual ("System.Int32", cmf.Type.BaseType, "Type");
-            cmf.Type = new CodeTypeReference ("System.Void");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor2_Deny_Unrestricted ()
+		{
+			CodeMemberField cmf = new CodeMemberField ("System.Int32", "mono");
+			Assert.IsNull (cmf.InitExpression, "InitExpression");
+			cmf.InitExpression = new CodeExpression ();
+			Assert.AreEqual ("System.Int32", cmf.Type.BaseType, "Type");
+			cmf.Type = new CodeTypeReference ("System.Void");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor3_Deny_Unrestricted ()
-        {
-            CodeMemberField cmf = new CodeMemberField (typeof (int), "mono");
-            Assert.IsNull (cmf.InitExpression, "InitExpression");
-            cmf.InitExpression = new CodeExpression ();
-            Assert.AreEqual ("System.Int32", cmf.Type.BaseType, "Type");
-            cmf.Type = new CodeTypeReference ("System.Void");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor3_Deny_Unrestricted ()
+		{
+			CodeMemberField cmf = new CodeMemberField (typeof (int), "mono");
+			Assert.IsNull (cmf.InitExpression, "InitExpression");
+			cmf.InitExpression = new CodeExpression ();
+			Assert.AreEqual ("System.Int32", cmf.Type.BaseType, "Type");
+			cmf.Type = new CodeTypeReference ("System.Void");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeMemberField).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeMemberField).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

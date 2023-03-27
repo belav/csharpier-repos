@@ -2,7 +2,7 @@
 // Line: 5
 
 public class TestApp {
-    static void Main ([MarshalAs (UnmanagedType.LPStr) string[] args)
-    {
-    }
+	static void Main ([MarshalAs (UnmanagedType.LPStr) string[] args)
+	{
+	}
 }

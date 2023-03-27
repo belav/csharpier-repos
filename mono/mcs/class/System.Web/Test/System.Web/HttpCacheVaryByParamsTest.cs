@@ -2,7 +2,7 @@
 // System.Web.HttpCacheVaryByParamsTest.cs - Unit tests for System.Web.HttpCacheByParams
 //
 // Author:
-//    Chris Toshok  <toshok@novell.com>
+//	Chris Toshok  <toshok@novell.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,27 +33,27 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web {
 
-    [TestFixture]
-    public class HttpCacheVaryByParamsTest {
+	[TestFixture]
+	public class HttpCacheVaryByParamsTest {
 
-        [Test]
-        public void Properties ()
-        {
-            HttpResponse response = new HttpResponse (Console.Out);
-            HttpCacheVaryByParams vary = response.Cache.VaryByParams;
+		[Test]
+		public void Properties ()
+		{
+			HttpResponse response = new HttpResponse (Console.Out);
+			HttpCacheVaryByParams vary = response.Cache.VaryByParams;
 
-            vary["hi"] = true;
-            Assert.IsTrue (vary["hi"], "vary[hi] == true");
+			vary["hi"] = true;
+			Assert.IsTrue (vary["hi"], "vary[hi] == true");
 
-            /* make sure setting IgnoreParams to either case doesn't clear the value */
-            vary.IgnoreParams = true;
-            Assert.IsTrue (vary["hi"], "vary[hi] == true when IgnoreParams == true");
+			/* make sure setting IgnoreParams to either case doesn't clear the value */
+			vary.IgnoreParams = true;
+			Assert.IsTrue (vary["hi"], "vary[hi] == true when IgnoreParams == true");
 
-            vary.IgnoreParams = false;
-            Assert.IsTrue (vary["hi"], "vary[hi] == true when IgnoreParams == false");
+			vary.IgnoreParams = false;
+			Assert.IsTrue (vary["hi"], "vary[hi] == true when IgnoreParams == false");
 
-            /* test case sensitivity */
-            Assert.IsTrue (vary["Hi"], "vary[Hi] == true");
-        }
-    }
+			/* test case sensitivity */
+			Assert.IsTrue (vary["Hi"], "vary[Hi] == true");
+		}
+	}
 }

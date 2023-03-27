@@ -2,7 +2,7 @@
 // System.Web.Profile.CustomProviderDataAttribute.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005-2009 Novell, Inc (http://www.novell.com)
 //
@@ -30,26 +30,26 @@ using System;
 
 namespace System.Web.Profile
 {
-    [AttributeUsage (AttributeTargets.Property)]
-    public sealed class CustomProviderDataAttribute : Attribute
-    {
-        public CustomProviderDataAttribute (string customProviderData)
-        {
-            this.customProviderData = customProviderData;
-        }
+	[AttributeUsage (AttributeTargets.Property)]
+	public sealed class CustomProviderDataAttribute : Attribute
+	{
+		public CustomProviderDataAttribute (string customProviderData)
+		{
+			this.customProviderData = customProviderData;
+		}
 
-        public override bool IsDefaultAttribute ()
-        {
-            return String.IsNullOrEmpty (CustomProviderData);
-        }
+		public override bool IsDefaultAttribute ()
+		{
+			return String.IsNullOrEmpty (CustomProviderData);
+		}
 
-        public string CustomProviderData {
-            get {
-                return customProviderData;
-            }
-        }
+		public string CustomProviderData {
+			get {
+				return customProviderData;
+			}
+		}
 
-        string customProviderData;
-    }
+		string customProviderData;
+	}
 }
 

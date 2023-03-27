@@ -20,14 +20,14 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public enum DataGridLineStyle {
-        None    = 0,
-        Solid    = 1
-    }
+	public enum DataGridLineStyle {
+		None	= 0,
+		Solid	= 1
+	}
 }

@@ -28,8 +28,8 @@
 
 namespace Mono.Cecil.Metadata {
 
-    internal interface IMetadataTable : IMetadataTableVisitable {
-        int Id { get; }
-        RowCollection Rows { get; set; }
-    }
+	internal interface IMetadataTable : IMetadataTableVisitable {
+		int Id { get; }
+		RowCollection Rows { get; set; }
+	}
 }

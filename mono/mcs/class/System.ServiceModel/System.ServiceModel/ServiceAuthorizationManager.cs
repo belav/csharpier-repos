@@ -31,28 +31,28 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-    public class ServiceAuthorizationManager
-    {
-        public virtual bool CheckAccess (OperationContext operationContext)
-        {
-            return CheckAccessCore (operationContext);
-        }
+	public class ServiceAuthorizationManager
+	{
+		public virtual bool CheckAccess (OperationContext operationContext)
+		{
+			return CheckAccessCore (operationContext);
+		}
 
-        public virtual bool CheckAccess (OperationContext operationContext, ref Message message)
-        {
-            return CheckAccessCore (operationContext);
-        }
+		public virtual bool CheckAccess (OperationContext operationContext, ref Message message)
+		{
+			return CheckAccessCore (operationContext);
+		}
 
-        [MonoTODO]
-        protected virtual bool CheckAccessCore (OperationContext operationContext)
-        {
-            return false;
-        }
+		[MonoTODO]
+		protected virtual bool CheckAccessCore (OperationContext operationContext)
+		{
+			return false;
+		}
 
-        [MonoTODO]
-        protected virtual ReadOnlyCollection<IAuthorizationPolicy> GetAuthorizationPolicies (OperationContext operationContext)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected virtual ReadOnlyCollection<IAuthorizationPolicy> GetAuthorizationPolicies (OperationContext operationContext)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

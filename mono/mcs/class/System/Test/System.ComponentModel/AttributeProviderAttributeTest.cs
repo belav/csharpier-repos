@@ -31,27 +31,27 @@ using System.Xml.Serialization;
 
 namespace MonoTests.System.ComponentModel {
 
-    [TestFixture]
-    public class AttributeProviderAttributeTest {
+	[TestFixture]
+	public class AttributeProviderAttributeTest {
 
-        [Test]
-        public void CtorTest ()
-        {
-            AttributeProviderAttribute a;
+		[Test]
+		public void CtorTest ()
+		{
+			AttributeProviderAttribute a;
 
-            a = new AttributeProviderAttribute (typeof (string));
-            Assert.AreEqual (typeof (string).AssemblyQualifiedName, a.TypeName, "1");
-            Assert.IsNull (a.PropertyName, "2");
+			a = new AttributeProviderAttribute (typeof (string));
+			Assert.AreEqual (typeof (string).AssemblyQualifiedName, a.TypeName, "1");
+			Assert.IsNull (a.PropertyName, "2");
 
-            a = new AttributeProviderAttribute ("typename");
-            Assert.AreEqual ("typename", a.TypeName, "3");
-            Assert.AreEqual (null, a.PropertyName, "4");
+			a = new AttributeProviderAttribute ("typename");
+			Assert.AreEqual ("typename", a.TypeName, "3");
+			Assert.AreEqual (null, a.PropertyName, "4");
 
-            a = new AttributeProviderAttribute ("typename", "propertyname");
-            Assert.AreEqual ("typename", a.TypeName, "5");
-            Assert.AreEqual ("propertyname", a.PropertyName, "6");
-        }
-    }
+			a = new AttributeProviderAttribute ("typename", "propertyname");
+			Assert.AreEqual ("typename", a.TypeName, "5");
+			Assert.AreEqual ("propertyname", a.PropertyName, "6");
+		}
+	}
 
 }
 

@@ -10,5 +10,5 @@ class ObsoleteClass
 
 interface Ex
 {
-    void Foo (ObsoleteClass o1, ObsoleteClass o2);
+	void Foo (ObsoleteClass o1, ObsoleteClass o2);
 }

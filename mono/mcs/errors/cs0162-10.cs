@@ -4,13 +4,13 @@
 
 class Error
 {
-    void Test ()
-    {
-        switch (10)
-        {
-            case 9:
-                break;
-        }
-    }
+	void Test ()
+	{
+		switch (10)
+		{
+			case 9:
+				break;
+		}
+	}
 
 }

@@ -2,7 +2,7 @@
 // QueryVisitor.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -32,51 +32,51 @@ using Mono.CodeContracts.Static.AST.Visitors;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding {
-    abstract class QueryVisitor<V, E> : ISymbolicExpressionVisitor<E, E, V, Dummy, bool> 
+	abstract class QueryVisitor<V, E> : ISymbolicExpressionVisitor<E, E, V, Dummy, bool> 
         where V : IEquatable<V> 
         where E : IEquatable<E> 
     {
-        #region ISymbolicExpressionVisitor<E,E,V,Dummy,bool> Members
-        public virtual bool Binary (E pc, BinaryOperator op, V dest, E operand1, E operand2, Dummy data)
-        {
-            return false;
-        }
+		#region ISymbolicExpressionVisitor<E,E,V,Dummy,bool> Members
+		public virtual bool Binary (E pc, BinaryOperator op, V dest, E operand1, E operand2, Dummy data)
+		{
+			return false;
+		}
 
-        public virtual bool Isinst (E pc, TypeNode type, V dest, E obj, Dummy data)
-        {
-            return false;
-        }
+		public virtual bool Isinst (E pc, TypeNode type, V dest, E obj, Dummy data)
+		{
+			return false;
+		}
 
-        public virtual bool LoadNull (E pc, V dest, Dummy polarity)
-        {
-            return false;
-        }
+		public virtual bool LoadNull (E pc, V dest, Dummy polarity)
+		{
+			return false;
+		}
 
-        public virtual bool LoadConst (E pc, TypeNode type, object constant, V dest, Dummy data)
-        {
-            return false;
-        }
+		public virtual bool LoadConst (E pc, TypeNode type, object constant, V dest, Dummy data)
+		{
+			return false;
+		}
 
-        public virtual bool Sizeof (E pc, TypeNode type, V dest, Dummy data)
-        {
-            return false;
-        }
+		public virtual bool Sizeof (E pc, TypeNode type, V dest, Dummy data)
+		{
+			return false;
+		}
 
-        public virtual bool Unary (E pc, UnaryOperator op, bool unsigned, V dest, E source, Dummy data)
-        {
-            return false;
-        }
+		public virtual bool Unary (E pc, UnaryOperator op, bool unsigned, V dest, E source, Dummy data)
+		{
+			return false;
+		}
 
-        public virtual bool SymbolicConstant (E pc, V variable, Dummy data)
-        {
-            return false;
-        }
-        #endregion
+		public virtual bool SymbolicConstant (E pc, V variable, Dummy data)
+		{
+			return false;
+		}
+		#endregion
 
-        protected static bool Decode<Visitor> (E expr, Visitor visitor, FullExpressionDecoder<V,E> decoder)
-            where Visitor : QueryVisitor<V, E>
-        {
-            return decoder.ContextProvider.ExpressionContext.Decode<Dummy, bool, Visitor> (expr, visitor, Dummy.Value);
-        }
-    }
+		protected static bool Decode<Visitor> (E expr, Visitor visitor, FullExpressionDecoder<V,E> decoder)
+			where Visitor : QueryVisitor<V, E>
+		{
+			return decoder.ContextProvider.ExpressionContext.Decode<Dummy, bool, Visitor> (expr, visitor, Dummy.Value);
+		}
+	}
 }

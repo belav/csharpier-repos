@@ -3,5 +3,5 @@
 
 class G<T>
 {
-    T.A x;
+	T.A x;
 }

@@ -2,7 +2,7 @@
 // DataModelProvider.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -35,15 +35,15 @@ using System.Security.Permissions;
 
 namespace System.Web.DynamicData.ModelProviders
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public abstract class DataModelProvider
-    {
-        [MonoTODO]
-        public virtual Type ContextType { get; protected set; }
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public abstract class DataModelProvider
+	{
+		[MonoTODO]
+		public virtual Type ContextType { get; protected set; }
 
-        public abstract ReadOnlyCollection<TableProvider> Tables { get; }
+		public abstract ReadOnlyCollection<TableProvider> Tables { get; }
 
-        public abstract object CreateContext ();
-    }
+		public abstract object CreateContext ();
+	}
 }

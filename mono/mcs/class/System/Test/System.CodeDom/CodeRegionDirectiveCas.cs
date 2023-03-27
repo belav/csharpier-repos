@@ -1,9 +1,9 @@
 //
 // CodeRegionDirectiveCas.cs 
-//    - CAS unit tests for System.CodeDom.CodeRegionDirectiveCas
+//	- CAS unit tests for System.CodeDom.CodeRegionDirectiveCas
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,47 +38,47 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeRegionDirectiveCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeRegionDirectiveCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeRegionDirective crd = new CodeRegionDirective ();
-            Assert.AreEqual (CodeRegionMode.None, crd.RegionMode, "RegionMode");
-            crd.RegionMode = CodeRegionMode.Start;
-            Assert.AreEqual (String.Empty, crd.RegionText, "RegionText");
-            crd.RegionText = "mono";
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeRegionDirective crd = new CodeRegionDirective ();
+			Assert.AreEqual (CodeRegionMode.None, crd.RegionMode, "RegionMode");
+			crd.RegionMode = CodeRegionMode.Start;
+			Assert.AreEqual (String.Empty, crd.RegionText, "RegionText");
+			crd.RegionText = "mono";
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeRegionDirective crd = new CodeRegionDirective (CodeRegionMode.Start, "mono");
-            Assert.AreEqual (CodeRegionMode.Start, crd.RegionMode, "RegionMode");
-            crd.RegionMode = CodeRegionMode.End;
-            Assert.AreEqual ("mono", crd.RegionText, "RegionText");
-            crd.RegionText = String.Empty;
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeRegionDirective crd = new CodeRegionDirective (CodeRegionMode.Start, "mono");
+			Assert.AreEqual (CodeRegionMode.Start, crd.RegionMode, "RegionMode");
+			crd.RegionMode = CodeRegionMode.End;
+			Assert.AreEqual ("mono", crd.RegionText, "RegionText");
+			crd.RegionText = String.Empty;
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeRegionDirective).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeRegionDirective).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }
 

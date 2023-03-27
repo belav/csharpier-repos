@@ -55,7 +55,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Unix
 
                         foreach (DictionaryEntry e in props) {
                                 h [e.Key] = e.Value;
-                
+				
                                 switch (e.Key as string) {
                                 case "portName":
                                         h ["path"] = BuildPathFromPortName ((string)e.Value);

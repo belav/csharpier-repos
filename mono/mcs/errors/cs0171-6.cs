@@ -5,14 +5,14 @@ using System;
 
 struct S
 {
-    internal string value;
+	internal string value;
 
-    public S (int arg)
-    {
-        if (arg > 0) {
-            return;
-        }
+	public S (int arg)
+	{
+		if (arg > 0) {
+			return;
+		}
 
-        throw new ApplicationException ();
-    }
+		throw new ApplicationException ();
+	}
 }

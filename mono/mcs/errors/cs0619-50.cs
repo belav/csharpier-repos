@@ -5,13 +5,13 @@ using Z = A.B;
 
 class A
 {
-    [System.Obsolete("yes", true)]
-    public class B
-    {
-    }
+	[System.Obsolete("yes", true)]
+	public class B
+	{
+	}
 
-    static void Main ()
-    {
-        Z z;
-    }
+	static void Main ()
+	{
+		Z z;
+	}
 }

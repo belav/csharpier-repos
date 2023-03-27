@@ -32,9 +32,9 @@
 
 namespace System
 {
-    [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public struct Void
-    {
-    }
+	[Serializable]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public struct Void
+	{
+	}
 }

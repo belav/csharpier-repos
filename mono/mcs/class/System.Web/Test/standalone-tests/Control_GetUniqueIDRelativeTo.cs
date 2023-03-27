@@ -38,77 +38,77 @@ using NUnit.Framework;
 
 namespace StandAloneTests.Control_GetUniqueIDRelativeTo
 {
-    [TestCase ("Control_GetUniqueIDRelativeTo", "Control.GetUniqueIDRelativeTo tests")]
-    public sealed class Control_GetUniqueIDRelativeTo : ITestCase
-    {
-        public string PhysicalPath {
-            get { return Path.Combine (Consts.BasePhysicalDir, "Control_GetUniqueIDRelativeTo"); }
-        }
-        
-        public string VirtualPath  {
-            get { return "/"; }
-        }
+	[TestCase ("Control_GetUniqueIDRelativeTo", "Control.GetUniqueIDRelativeTo tests")]
+	public sealed class Control_GetUniqueIDRelativeTo : ITestCase
+	{
+		public string PhysicalPath {
+			get { return Path.Combine (Consts.BasePhysicalDir, "Control_GetUniqueIDRelativeTo"); }
+		}
+		
+		public string VirtualPath  {
+			get { return "/"; }
+		}
 
-        public bool SetUp (List <TestRunItem> runItems)
-        {
-            runItems.Add (new TestRunItem ("default.aspx", Default_Aspx));
-            
-            return true;
-        }
-        
-        void Default_Aspx (string result, TestRunItem runItem)
-        {
-            string originalHtml = @"<pre id=""log"">Page; Relative to: null; Result: exception System.ArgumentNullException (expected)
+		public bool SetUp (List <TestRunItem> runItems)
+		{
+			runItems.Add (new TestRunItem ("default.aspx", Default_Aspx));
+			
+			return true;
+		}
+		
+		void Default_Aspx (string result, TestRunItem runItem)
+		{
+			string originalHtml = @"<pre id=""log"">Page; Relative to: null; Result: exception System.ArgumentNullException (expected)
 A control; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
 TextBox; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
 Item: 0; Relative to: repeater1$ctl00; Result: &#39;ctl00$label1&#39;
 Item: 0; Relative to: repeater1; Result: &#39;repeater1$ctl00$label1&#39;
 Item: 0; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
-    Item: 0; Relative to: repeater1$ctl00$innerRepeater1$ctl00; Result: &#39;ctl00$innerLabel1&#39;
-    Item: 0; Relative to: repeater1; Result: &#39;repeater1$ctl00$innerRepeater1$ctl00$innerLabel1&#39;
-    Item: 0; Relative to: repeater1$ctl00$innerRepeater1; Result: &#39;innerRepeater1$ctl00$innerLabel1&#39;
-    Item: 0; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
-    Item: 1; Relative to: repeater1$ctl00$innerRepeater1$ctl01; Result: &#39;ctl01$innerLabel1&#39;
-    Item: 1; Relative to: repeater1; Result: &#39;repeater1$ctl00$innerRepeater1$ctl01$innerLabel1&#39;
-    Item: 1; Relative to: repeater1$ctl00$innerRepeater1; Result: &#39;innerRepeater1$ctl01$innerLabel1&#39;
-    Item: 1; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
-    Item: 2; Relative to: repeater1$ctl00$innerRepeater1$ctl02; Result: &#39;ctl02$innerLabel1&#39;
-    Item: 2; Relative to: repeater1; Result: &#39;repeater1$ctl00$innerRepeater1$ctl02$innerLabel1&#39;
-    Item: 2; Relative to: repeater1$ctl00$innerRepeater1; Result: &#39;innerRepeater1$ctl02$innerLabel1&#39;
-    Item: 2; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
+	Item: 0; Relative to: repeater1$ctl00$innerRepeater1$ctl00; Result: &#39;ctl00$innerLabel1&#39;
+	Item: 0; Relative to: repeater1; Result: &#39;repeater1$ctl00$innerRepeater1$ctl00$innerLabel1&#39;
+	Item: 0; Relative to: repeater1$ctl00$innerRepeater1; Result: &#39;innerRepeater1$ctl00$innerLabel1&#39;
+	Item: 0; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
+	Item: 1; Relative to: repeater1$ctl00$innerRepeater1$ctl01; Result: &#39;ctl01$innerLabel1&#39;
+	Item: 1; Relative to: repeater1; Result: &#39;repeater1$ctl00$innerRepeater1$ctl01$innerLabel1&#39;
+	Item: 1; Relative to: repeater1$ctl00$innerRepeater1; Result: &#39;innerRepeater1$ctl01$innerLabel1&#39;
+	Item: 1; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
+	Item: 2; Relative to: repeater1$ctl00$innerRepeater1$ctl02; Result: &#39;ctl02$innerLabel1&#39;
+	Item: 2; Relative to: repeater1; Result: &#39;repeater1$ctl00$innerRepeater1$ctl02$innerLabel1&#39;
+	Item: 2; Relative to: repeater1$ctl00$innerRepeater1; Result: &#39;innerRepeater1$ctl02$innerLabel1&#39;
+	Item: 2; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
 Item: 1; Relative to: repeater1$ctl02; Result: &#39;ctl02$label1&#39;
 Item: 1; Relative to: repeater1; Result: &#39;repeater1$ctl02$label1&#39;
 Item: 1; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
-    Item: 0; Relative to: repeater1$ctl02$innerRepeater1$ctl00; Result: &#39;ctl00$innerLabel1&#39;
-    Item: 0; Relative to: repeater1; Result: &#39;repeater1$ctl02$innerRepeater1$ctl00$innerLabel1&#39;
-    Item: 0; Relative to: repeater1$ctl02$innerRepeater1; Result: &#39;innerRepeater1$ctl00$innerLabel1&#39;
-    Item: 0; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
-    Item: 1; Relative to: repeater1$ctl02$innerRepeater1$ctl01; Result: &#39;ctl01$innerLabel1&#39;
-    Item: 1; Relative to: repeater1; Result: &#39;repeater1$ctl02$innerRepeater1$ctl01$innerLabel1&#39;
-    Item: 1; Relative to: repeater1$ctl02$innerRepeater1; Result: &#39;innerRepeater1$ctl01$innerLabel1&#39;
-    Item: 1; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
-    Item: 2; Relative to: repeater1$ctl02$innerRepeater1$ctl02; Result: &#39;ctl02$innerLabel1&#39;
-    Item: 2; Relative to: repeater1; Result: &#39;repeater1$ctl02$innerRepeater1$ctl02$innerLabel1&#39;
-    Item: 2; Relative to: repeater1$ctl02$innerRepeater1; Result: &#39;innerRepeater1$ctl02$innerLabel1&#39;
-    Item: 2; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
+	Item: 0; Relative to: repeater1$ctl02$innerRepeater1$ctl00; Result: &#39;ctl00$innerLabel1&#39;
+	Item: 0; Relative to: repeater1; Result: &#39;repeater1$ctl02$innerRepeater1$ctl00$innerLabel1&#39;
+	Item: 0; Relative to: repeater1$ctl02$innerRepeater1; Result: &#39;innerRepeater1$ctl00$innerLabel1&#39;
+	Item: 0; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
+	Item: 1; Relative to: repeater1$ctl02$innerRepeater1$ctl01; Result: &#39;ctl01$innerLabel1&#39;
+	Item: 1; Relative to: repeater1; Result: &#39;repeater1$ctl02$innerRepeater1$ctl01$innerLabel1&#39;
+	Item: 1; Relative to: repeater1$ctl02$innerRepeater1; Result: &#39;innerRepeater1$ctl01$innerLabel1&#39;
+	Item: 1; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
+	Item: 2; Relative to: repeater1$ctl02$innerRepeater1$ctl02; Result: &#39;ctl02$innerLabel1&#39;
+	Item: 2; Relative to: repeater1; Result: &#39;repeater1$ctl02$innerRepeater1$ctl02$innerLabel1&#39;
+	Item: 2; Relative to: repeater1$ctl02$innerRepeater1; Result: &#39;innerRepeater1$ctl02$innerLabel1&#39;
+	Item: 2; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
 Item: 2; Relative to: repeater1$ctl04; Result: &#39;ctl04$label1&#39;
 Item: 2; Relative to: repeater1; Result: &#39;repeater1$ctl04$label1&#39;
 Item: 2; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
-    Item: 0; Relative to: repeater1$ctl04$innerRepeater1$ctl00; Result: &#39;ctl00$innerLabel1&#39;
-    Item: 0; Relative to: repeater1; Result: &#39;repeater1$ctl04$innerRepeater1$ctl00$innerLabel1&#39;
-    Item: 0; Relative to: repeater1$ctl04$innerRepeater1; Result: &#39;innerRepeater1$ctl00$innerLabel1&#39;
-    Item: 0; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
-    Item: 1; Relative to: repeater1$ctl04$innerRepeater1$ctl01; Result: &#39;ctl01$innerLabel1&#39;
-    Item: 1; Relative to: repeater1; Result: &#39;repeater1$ctl04$innerRepeater1$ctl01$innerLabel1&#39;
-    Item: 1; Relative to: repeater1$ctl04$innerRepeater1; Result: &#39;innerRepeater1$ctl01$innerLabel1&#39;
-    Item: 1; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
-    Item: 2; Relative to: repeater1$ctl04$innerRepeater1$ctl02; Result: &#39;ctl02$innerLabel1&#39;
-    Item: 2; Relative to: repeater1; Result: &#39;repeater1$ctl04$innerRepeater1$ctl02$innerLabel1&#39;
-    Item: 2; Relative to: repeater1$ctl04$innerRepeater1; Result: &#39;innerRepeater1$ctl02$innerLabel1&#39;
-    Item: 2; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
+	Item: 0; Relative to: repeater1$ctl04$innerRepeater1$ctl00; Result: &#39;ctl00$innerLabel1&#39;
+	Item: 0; Relative to: repeater1; Result: &#39;repeater1$ctl04$innerRepeater1$ctl00$innerLabel1&#39;
+	Item: 0; Relative to: repeater1$ctl04$innerRepeater1; Result: &#39;innerRepeater1$ctl00$innerLabel1&#39;
+	Item: 0; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
+	Item: 1; Relative to: repeater1$ctl04$innerRepeater1$ctl01; Result: &#39;ctl01$innerLabel1&#39;
+	Item: 1; Relative to: repeater1; Result: &#39;repeater1$ctl04$innerRepeater1$ctl01$innerLabel1&#39;
+	Item: 1; Relative to: repeater1$ctl04$innerRepeater1; Result: &#39;innerRepeater1$ctl01$innerLabel1&#39;
+	Item: 1; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
+	Item: 2; Relative to: repeater1$ctl04$innerRepeater1$ctl02; Result: &#39;ctl02$innerLabel1&#39;
+	Item: 2; Relative to: repeater1; Result: &#39;repeater1$ctl04$innerRepeater1$ctl02$innerLabel1&#39;
+	Item: 2; Relative to: repeater1$ctl04$innerRepeater1; Result: &#39;innerRepeater1$ctl02$innerLabel1&#39;
+	Item: 2; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
 </pre>";
-            Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-        }
-    }
+			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
+		}
+	}
 }
 

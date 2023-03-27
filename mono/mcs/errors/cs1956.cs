@@ -4,27 +4,27 @@
 
 interface I<T>
 {
-    void M (out T x);
+	void M (out T x);
 }
 
 class A<T, U>
 {
-    public virtual void M (out T t)
-    {
-        t = default (T);
-    }
+	public virtual void M (out T t)
+	{
+		t = default (T);
+	}
 
-    public virtual void M (ref U u)
-    {
-    }
+	public virtual void M (ref U u)
+	{
+	}
 }
 
 class Test : A<string, string>, I<string>
 {
-    static void Main ()
-    {
-        I<string> x = new Test ();
-        string s;
-        x.M (out y);
-    }
+	static void Main ()
+	{
+		I<string> x = new Test ();
+		string s;
+		x.M (out y);
+	}
 }

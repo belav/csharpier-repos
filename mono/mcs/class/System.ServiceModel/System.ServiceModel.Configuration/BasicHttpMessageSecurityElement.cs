@@ -2,7 +2,7 @@
 // BasicHttpMessageSecurityElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,33 +54,33 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class BasicHttpMessageSecurityElement
-         : ConfigurationElement
-    {
-        // Properties
+	public sealed class BasicHttpMessageSecurityElement
+		 : ConfigurationElement
+	{
+		// Properties
 
-        [ConfigurationProperty ("algorithmSuite",
-             DefaultValue = "Default",
-             Options = ConfigurationPropertyOptions.None)]
-        [TypeConverter (typeof (SecurityAlgorithmSuiteConverter))]
-        public SecurityAlgorithmSuite AlgorithmSuite {
-            get { return (SecurityAlgorithmSuite) base ["algorithmSuite"]; }
-            set { base ["algorithmSuite"] = value; }
-        }
+		[ConfigurationProperty ("algorithmSuite",
+			 DefaultValue = "Default",
+			 Options = ConfigurationPropertyOptions.None)]
+		[TypeConverter (typeof (SecurityAlgorithmSuiteConverter))]
+		public SecurityAlgorithmSuite AlgorithmSuite {
+			get { return (SecurityAlgorithmSuite) base ["algorithmSuite"]; }
+			set { base ["algorithmSuite"] = value; }
+		}
 
-        [ConfigurationProperty ("clientCredentialType",
-             DefaultValue = "UserName",
-             Options = ConfigurationPropertyOptions.None)]
-        public BasicHttpMessageCredentialType ClientCredentialType {
-            get { return (BasicHttpMessageCredentialType) base ["clientCredentialType"]; }
-            set { base ["clientCredentialType"] = value; }
-        }
+		[ConfigurationProperty ("clientCredentialType",
+			 DefaultValue = "UserName",
+			 Options = ConfigurationPropertyOptions.None)]
+		public BasicHttpMessageCredentialType ClientCredentialType {
+			get { return (BasicHttpMessageCredentialType) base ["clientCredentialType"]; }
+			set { base ["clientCredentialType"] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
 
 
-    }
+	}
 
 }

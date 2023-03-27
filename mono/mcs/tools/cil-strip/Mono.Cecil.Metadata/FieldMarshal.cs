@@ -31,49 +31,49 @@
 
 namespace Mono.Cecil.Metadata {
 
-    internal sealed class FieldMarshalTable : IMetadataTable {
+	internal sealed class FieldMarshalTable : IMetadataTable {
 
-        public const int RId = 0x0d;
+		public const int RId = 0x0d;
 
-        RowCollection m_rows;
+		RowCollection m_rows;
 
-        public FieldMarshalRow this [int index] {
-            get { return m_rows [index] as FieldMarshalRow; }
-            set { m_rows [index] = value; }
-        }
+		public FieldMarshalRow this [int index] {
+			get { return m_rows [index] as FieldMarshalRow; }
+			set { m_rows [index] = value; }
+		}
 
-        public RowCollection Rows {
-            get { return m_rows; }
-            set { m_rows = value; }
-        }
+		public RowCollection Rows {
+			get { return m_rows; }
+			set { m_rows = value; }
+		}
 
-        public int Id {
-            get { return RId; }
-        }
+		public int Id {
+			get { return RId; }
+		}
 
-        internal FieldMarshalTable ()
-        {
-        }
+		internal FieldMarshalTable ()
+		{
+		}
 
-        public void Accept (IMetadataTableVisitor visitor)
-        {
-            visitor.VisitFieldMarshalTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
-        }
-    }
+		public void Accept (IMetadataTableVisitor visitor)
+		{
+			visitor.VisitFieldMarshalTable (this);
+			this.Rows.Accept (visitor.GetRowVisitor ());
+		}
+	}
 
-    internal sealed class FieldMarshalRow : IMetadataRow {
+	internal sealed class FieldMarshalRow : IMetadataRow {
 
-        public MetadataToken Parent;
-        public uint NativeType;
+		public MetadataToken Parent;
+		public uint NativeType;
 
-        internal FieldMarshalRow ()
-        {
-        }
+		internal FieldMarshalRow ()
+		{
+		}
 
-        public void Accept (IMetadataRowVisitor visitor)
-        {
-            visitor.VisitFieldMarshalRow (this);
-        }
-    }
+		public void Accept (IMetadataRowVisitor visitor)
+		{
+			visitor.VisitFieldMarshalRow (this);
+		}
+	}
 }

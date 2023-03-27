@@ -2,7 +2,7 @@
 // AssertReportPrinter.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2012 Xamarin Inc (http://www.xamarin.com)
 //
@@ -31,11 +31,11 @@ using NUnit.Framework;
 
 namespace MonoTests
 {
-    class AssertReportPrinter : ReportPrinter
-    {
-        public override void Print (AbstractMessage msg, bool showFullPath)
-        {
-            Assert.Fail (msg.Text);
-        }
-    }
+	class AssertReportPrinter : ReportPrinter
+	{
+		public override void Print (AbstractMessage msg, bool showFullPath)
+		{
+			Assert.Fail (msg.Text);
+		}
+	}
 }

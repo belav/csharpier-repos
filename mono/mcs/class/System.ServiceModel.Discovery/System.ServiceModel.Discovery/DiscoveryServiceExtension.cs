@@ -32,42 +32,42 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-    // This class is for custom implementation.
-    // It is used by ServiceDiscoveryBehavior to find an extension of this
-    // type, to call GetDiscoveryService().
-    // See http://msdn.microsoft.com/en-us/library/system.servicemodel.discovery.discoveryserviceextension.aspx
-    public abstract class DiscoveryServiceExtension : IExtension<ServiceHostBase>
-    {
-        protected DiscoveryServiceExtension ()
-        {
-            PublishedInternalEndpoints = new Collection<EndpointDiscoveryMetadata> ();
-            PublishedEndpoints = new ReadOnlyCollection<EndpointDiscoveryMetadata> (PublishedInternalEndpoints);
-        }
+	// This class is for custom implementation.
+	// It is used by ServiceDiscoveryBehavior to find an extension of this
+	// type, to call GetDiscoveryService().
+	// See http://msdn.microsoft.com/en-us/library/system.servicemodel.discovery.discoveryserviceextension.aspx
+	public abstract class DiscoveryServiceExtension : IExtension<ServiceHostBase>
+	{
+		protected DiscoveryServiceExtension ()
+		{
+			PublishedInternalEndpoints = new Collection<EndpointDiscoveryMetadata> ();
+			PublishedEndpoints = new ReadOnlyCollection<EndpointDiscoveryMetadata> (PublishedInternalEndpoints);
+		}
 
-        internal Collection<EndpointDiscoveryMetadata> PublishedInternalEndpoints { get; private set; }
-        
-        internal DiscoveryService Service { get; private set; }
+		internal Collection<EndpointDiscoveryMetadata> PublishedInternalEndpoints { get; private set; }
+		
+		internal DiscoveryService Service { get; private set; }
 
-        public ReadOnlyCollection<EndpointDiscoveryMetadata> PublishedEndpoints { get; private set; }
+		public ReadOnlyCollection<EndpointDiscoveryMetadata> PublishedEndpoints { get; private set; }
 
-        protected abstract DiscoveryService GetDiscoveryService ();
+		protected abstract DiscoveryService GetDiscoveryService ();
 
-        void IExtension<ServiceHostBase>.Attach (ServiceHostBase owner)
-        {
-            // FIXME: use it somewhere
-            Service = GetDiscoveryService ();
-        }
+		void IExtension<ServiceHostBase>.Attach (ServiceHostBase owner)
+		{
+			// FIXME: use it somewhere
+			Service = GetDiscoveryService ();
+		}
 
-        void IExtension<ServiceHostBase>.Detach (ServiceHostBase owner)
-        {
-        }
+		void IExtension<ServiceHostBase>.Detach (ServiceHostBase owner)
+		{
+		}
 
-        internal class DefaultDiscoveryServiceExtension : DiscoveryServiceExtension
-        {
-            protected override DiscoveryService GetDiscoveryService ()
-            {
-                return new DefaultDiscoveryService ();
-            }
-        }
-    }
+		internal class DefaultDiscoveryServiceExtension : DiscoveryServiceExtension
+		{
+			protected override DiscoveryService GetDiscoveryService ()
+			{
+				return new DefaultDiscoveryService ();
+			}
+		}
+	}
 }

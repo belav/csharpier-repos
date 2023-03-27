@@ -5,7 +5,7 @@ using System;
 
 public sealed class FooAttribute : Attribute
 {
-    public static int Foo;
+	public static int Foo;
 }
 
 [Foo (Foo = 1)]

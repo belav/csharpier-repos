@@ -33,26 +33,26 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    public class ListViewInsertEventArgs : CancelEventArgs
-    {
-        IOrderedDictionary _values;
+	public class ListViewInsertEventArgs : CancelEventArgs
+	{
+		IOrderedDictionary _values;
 
-        public ListViewInsertEventArgs (ListViewItem item)
-        {
-            Item = item;
-        }
-        
-        public ListViewItem Item {
-            get;
-            private set;
-        }
-        
-        public IOrderedDictionary Values {
-            get {
-                if (_values == null)
-                    _values = new OrderedDictionary ();
-                return _values;
-            }
-        }
-    }
+		public ListViewInsertEventArgs (ListViewItem item)
+		{
+			Item = item;
+		}
+		
+		public ListViewItem Item {
+			get;
+			private set;
+		}
+		
+		public IOrderedDictionary Values {
+			get {
+				if (_values == null)
+					_values = new OrderedDictionary ();
+				return _values;
+			}
+		}
+	}
 }

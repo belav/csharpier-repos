@@ -2,7 +2,7 @@
 // IdentityCardEncryptionTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -34,34 +34,34 @@ using NUnit.Framework;
 
 namespace MonoTests.Mono.ServiceModel.IdentitySelectors
 {
-    [TestFixture]
-    public class IdentityCardEncryptionTest
-    {
-        [Test]
-        public void Import ()
-        {
-            string encxml = new StreamReader ("Test/resources/rupert.crds").ReadToEnd ();
-            string xml = new IdentityCardEncryption ().Decrypt (
-                encxml, "monkeydance");
-            XmlDocument doc = new XmlDocument ();
-            doc.LoadXml (xml);
-        }
+	[TestFixture]
+	public class IdentityCardEncryptionTest
+	{
+		[Test]
+		public void Import ()
+		{
+			string encxml = new StreamReader ("Test/resources/rupert.crds").ReadToEnd ();
+			string xml = new IdentityCardEncryption ().Decrypt (
+				encxml, "monkeydance");
+			XmlDocument doc = new XmlDocument ();
+			doc.LoadXml (xml);
+		}
 
-        [Test]
-        public void Export ()
-        {
-            byte [] salt = Convert.FromBase64String ("ofkHGOy0pioOd7++N2a52w==");
-            byte [] iv = Convert.FromBase64String ("OzFSoAlrfj11g246TM4How==");
-            XmlDocument doc = new XmlDocument ();
-            doc.Load ("Test/resources/rupert.xml");
-            doc.RemoveChild (doc.FirstChild);
-            byte [] result = new IdentityCardEncryption ().Encrypt (doc.OuterXml, "monkeydance", salt, iv);
-            string resultText = Encoding.UTF8.GetString (result);
+		[Test]
+		public void Export ()
+		{
+			byte [] salt = Convert.FromBase64String ("ofkHGOy0pioOd7++N2a52w==");
+			byte [] iv = Convert.FromBase64String ("OzFSoAlrfj11g246TM4How==");
+			XmlDocument doc = new XmlDocument ();
+			doc.Load ("Test/resources/rupert.xml");
+			doc.RemoveChild (doc.FirstChild);
+			byte [] result = new IdentityCardEncryption ().Encrypt (doc.OuterXml, "monkeydance", salt, iv);
+			string resultText = Encoding.UTF8.GetString (result);
 
-            string roundtrip = new IdentityCardEncryption ().Decrypt (resultText, "monkeydance");
-            doc = new XmlDocument ();
-            doc.LoadXml (roundtrip);
-        }
-    }
+			string roundtrip = new IdentityCardEncryption ().Decrypt (resultText, "monkeydance");
+			doc = new XmlDocument ();
+			doc.LoadXml (roundtrip);
+		}
+	}
 }
 

@@ -33,55 +33,55 @@
 using System.Collections;
 
 namespace System.Web.Services.Discovery {
-    public sealed class DiscoveryClientDocumentCollection : DictionaryBase {
+	public sealed class DiscoveryClientDocumentCollection : DictionaryBase {
 
-        #region Constructors 
+		#region Constructors 
 
-        public DiscoveryClientDocumentCollection () 
-            : base ()
-        {
-        }
-        
-        #endregion // Constructors
+		public DiscoveryClientDocumentCollection () 
+			: base ()
+		{
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public object this [string url] {
-            get { return InnerHashtable [url]; }
-            set { 
-                if (url == null)
-                    throw new ArgumentNullException ();
-                InnerHashtable [url] = value; 
-            }
-        }
-        
-        public ICollection Keys {
-            get { return InnerHashtable.Keys; }
-        }
-        
-        public ICollection Values {
-            get { return InnerHashtable.Values; }
-        }
-        
-        #endregion // Properties
+		public object this [string url] {
+			get { return InnerHashtable [url]; }
+			set { 
+				if (url == null)
+					throw new ArgumentNullException ();
+				InnerHashtable [url] = value; 
+			}
+		}
+		
+		public ICollection Keys {
+			get { return InnerHashtable.Keys; }
+		}
+		
+		public ICollection Values {
+			get { return InnerHashtable.Values; }
+		}
+		
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        public void Add (string url, object value)
-        {
-            InnerHashtable [url] = value;
-        }
+		public void Add (string url, object value)
+		{
+			InnerHashtable [url] = value;
+		}
 
-        public bool Contains (string url)
-        {
-            return InnerHashtable.Contains (url);
-        }
-        
-        public void Remove (string url)
-        {
-            InnerHashtable.Remove (url);
-        }
+		public bool Contains (string url)
+		{
+			return InnerHashtable.Contains (url);
+		}
+		
+		public void Remove (string url)
+		{
+			InnerHashtable.Remove (url);
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

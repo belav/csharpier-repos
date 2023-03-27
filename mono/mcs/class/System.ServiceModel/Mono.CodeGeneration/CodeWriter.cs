@@ -30,63 +30,63 @@ namespace Mono.CodeGeneration
 
 public class CodeWriter
 {
-    TextWriter writer;
-    int indent;
-    
-    public CodeWriter (TextWriter tw)
-    {
-        writer = tw;
-    }
-    
-    public CodeWriter BeginLine ()
-    {
-        writer.Write (new String (' ', indent*4));
-        return this;
-    }
-    
-    public CodeWriter Write (string s)
-    {
-        writer.Write (s);
-        return this;
-    }
-    
-    public CodeWriter EndLine ()
-    {
-        writer.WriteLine ();
-        return this;
-    }
-    
-    public CodeWriter WriteLine (string s)
-    {
-        BeginLine ();
-        Write (s);
-        EndLine ();
-        return this;
-    }
-    
-    public CodeWriter WriteLineInd (string s)
-    {
-        WriteLine (s);
-        indent++;
-        return this;
-    }
-    
-    public CodeWriter WriteLineUnind (string s)
-    {
-        indent--;
-        WriteLine (s);
-        return this;
-    }
-    
-    public void Indent ()
-    {
-        indent++;
-    }
-    
-    public void Unindent ()
-    {
-        indent--;
-    }
+	TextWriter writer;
+	int indent;
+	
+	public CodeWriter (TextWriter tw)
+	{
+		writer = tw;
+	}
+	
+	public CodeWriter BeginLine ()
+	{
+		writer.Write (new String (' ', indent*4));
+		return this;
+	}
+	
+	public CodeWriter Write (string s)
+	{
+		writer.Write (s);
+		return this;
+	}
+	
+	public CodeWriter EndLine ()
+	{
+		writer.WriteLine ();
+		return this;
+	}
+	
+	public CodeWriter WriteLine (string s)
+	{
+		BeginLine ();
+		Write (s);
+		EndLine ();
+		return this;
+	}
+	
+	public CodeWriter WriteLineInd (string s)
+	{
+		WriteLine (s);
+		indent++;
+		return this;
+	}
+	
+	public CodeWriter WriteLineUnind (string s)
+	{
+		indent--;
+		WriteLine (s);
+		return this;
+	}
+	
+	public void Indent ()
+	{
+		indent++;
+	}
+	
+	public void Unindent ()
+	{
+		indent--;
+	}
 }
 
 }

@@ -4,8 +4,8 @@
 
 public class X
 {
-    public static bool Compute ()
-    {
-        return null >= null;
-    }
+	public static bool Compute ()
+	{
+		return null >= null;
+	}
 }

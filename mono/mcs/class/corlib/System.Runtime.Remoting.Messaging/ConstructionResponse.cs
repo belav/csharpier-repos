@@ -36,31 +36,31 @@ using System.Runtime.Serialization;
 
 namespace System.Runtime.Remoting.Messaging
 {
-    [Serializable] [CLSCompliant (false)]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public class ConstructionResponse: MethodResponse, IConstructionReturnMessage
-    {
-        public ConstructionResponse (Header[] h, IMethodCallMessage mcm)
-            : base (h, mcm)
-        {
-        }
-        
-        internal ConstructionResponse(object resultObject, LogicalCallContext callCtx, IMethodCallMessage msg)
-            : base (resultObject, null, callCtx, msg)
-        {
-        }
+	[Serializable] [CLSCompliant (false)]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public class ConstructionResponse: MethodResponse, IConstructionReturnMessage
+	{
+		public ConstructionResponse (Header[] h, IMethodCallMessage mcm)
+			: base (h, mcm)
+		{
+		}
+		
+		internal ConstructionResponse(object resultObject, LogicalCallContext callCtx, IMethodCallMessage msg)
+			: base (resultObject, null, callCtx, msg)
+		{
+		}
 
-        internal ConstructionResponse (Exception e, IMethodCallMessage msg): base (e, msg)
-        {
-        }
-        
-        internal ConstructionResponse (SerializationInfo info, StreamingContext context): base (info, context)
-        {
-        }
-        
-        public override IDictionary Properties 
-        {
-            get { return base.Properties; }
-        }
-    }
+		internal ConstructionResponse (Exception e, IMethodCallMessage msg): base (e, msg)
+		{
+		}
+		
+		internal ConstructionResponse (SerializationInfo info, StreamingContext context): base (info, context)
+		{
+		}
+		
+		public override IDictionary Properties 
+		{
+			get { return base.Properties; }
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // MsmqTransportSecurityTest.cs
 //
 // Author:
-//    Carlos Alberto Cortez <calberto.cortez@gmail.com>
+//	Carlos Alberto Cortez <calberto.cortez@gmail.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -35,19 +35,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class MsmqTransportSecurityTest
-    {
-        [Test]
-        public void DefaultValues ()
-        {
-            MsmqTransportSecurity security = new MsmqTransportSecurity ();
+	[TestFixture]
+	public class MsmqTransportSecurityTest
+	{
+		[Test]
+		public void DefaultValues ()
+		{
+			MsmqTransportSecurity security = new MsmqTransportSecurity ();
 
-            Assert.AreEqual (MsmqAuthenticationMode.WindowsDomain, security.MsmqAuthenticationMode, "#A1");
-            Assert.AreEqual (MsmqEncryptionAlgorithm.RC4Stream, security.MsmqEncryptionAlgorithm, "#A2");
-            Assert.AreEqual (ProtectionLevel.Sign, security.MsmqProtectionLevel, "#A3");
-            Assert.AreEqual (MsmqSecureHashAlgorithm.Sha1, security.MsmqSecureHashAlgorithm, "#A4");
-        }
-    }
+			Assert.AreEqual (MsmqAuthenticationMode.WindowsDomain, security.MsmqAuthenticationMode, "#A1");
+			Assert.AreEqual (MsmqEncryptionAlgorithm.RC4Stream, security.MsmqEncryptionAlgorithm, "#A2");
+			Assert.AreEqual (ProtectionLevel.Sign, security.MsmqProtectionLevel, "#A3");
+			Assert.AreEqual (MsmqSecureHashAlgorithm.Sha1, security.MsmqSecureHashAlgorithm, "#A4");
+		}
+	}
 }
 #endif

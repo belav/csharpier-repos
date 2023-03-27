@@ -32,21 +32,21 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
 
-    [InterfaceType (ComInterfaceType.InterfaceIsDual)]
-    [Guid ("1D202366-5EEA-4379-9255-6F8CDB8587C9")]
-    [ComVisible (true)]
-    public interface IBootstrapperBuilder {
-        
-        string Path {
-            get;
-            set;
-        }
-        
-        ProductCollection Products {
-            get;
-        }
-        
-        BuildResults Build (BuildSettings settings);
-    }
+	[InterfaceType (ComInterfaceType.InterfaceIsDual)]
+	[Guid ("1D202366-5EEA-4379-9255-6F8CDB8587C9")]
+	[ComVisible (true)]
+	public interface IBootstrapperBuilder {
+		
+		string Path {
+			get;
+			set;
+		}
+		
+		ProductCollection Products {
+			get;
+		}
+		
+		BuildResults Build (BuildSettings settings);
+	}
 }
 

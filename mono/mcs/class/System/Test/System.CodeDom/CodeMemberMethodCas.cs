@@ -1,9 +1,9 @@
 //
 // CodeMemberMethodCas.cs
-//    - CAS unit tests for System.CodeDom.CodeMemberMethod
+//	- CAS unit tests for System.CodeDom.CodeMemberMethod
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,40 +37,40 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeMemberMethodCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeMemberMethodCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeMemberMethod cmm = new CodeMemberMethod ();
-            Assert.AreEqual (0, cmm.ImplementationTypes.Count, "ImplementationTypes");
-            Assert.AreEqual (0, cmm.Parameters.Count, "Parameters");
-            Assert.IsNull (cmm.PrivateImplementationType, "PrivateImplementationType");
-            cmm.PrivateImplementationType = new CodeTypeReference ("System.Int32");
-            Assert.AreEqual ("System.Void", cmm.ReturnType.BaseType, "ReturnType");
-            cmm.ReturnType = new CodeTypeReference ("System.Int32");
-            Assert.AreEqual (0, cmm.Statements.Count, "Statements");
-            Assert.AreEqual (0, cmm.ReturnTypeCustomAttributes.Count, "ReturnTypeCustomAttributes");
-            Assert.AreEqual (0, cmm.TypeParameters.Count, "TypeParameters");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeMemberMethod cmm = new CodeMemberMethod ();
+			Assert.AreEqual (0, cmm.ImplementationTypes.Count, "ImplementationTypes");
+			Assert.AreEqual (0, cmm.Parameters.Count, "Parameters");
+			Assert.IsNull (cmm.PrivateImplementationType, "PrivateImplementationType");
+			cmm.PrivateImplementationType = new CodeTypeReference ("System.Int32");
+			Assert.AreEqual ("System.Void", cmm.ReturnType.BaseType, "ReturnType");
+			cmm.ReturnType = new CodeTypeReference ("System.Int32");
+			Assert.AreEqual (0, cmm.Statements.Count, "Statements");
+			Assert.AreEqual (0, cmm.ReturnTypeCustomAttributes.Count, "ReturnTypeCustomAttributes");
+			Assert.AreEqual (0, cmm.TypeParameters.Count, "TypeParameters");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeMemberMethod).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeMemberMethod).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

@@ -34,32 +34,32 @@ using System.Security.Permissions;
 
 namespace System.Diagnostics {
 
-    [Serializable]
-    public class EventLogPermissionEntry {
+	[Serializable]
+	public class EventLogPermissionEntry {
 
-        private EventLogPermissionAccess permissionAccess;
-        private string machineName;
+		private EventLogPermissionAccess permissionAccess;
+		private string machineName;
 
-        public EventLogPermissionEntry (EventLogPermissionAccess permissionAccess, string machineName)
-        {
-            ResourcePermissionBase.ValidateMachineName (machineName);
+		public EventLogPermissionEntry (EventLogPermissionAccess permissionAccess, string machineName)
+		{
+			ResourcePermissionBase.ValidateMachineName (machineName);
 
-            this.permissionAccess = permissionAccess;
-            this.machineName = machineName;
-        }
+			this.permissionAccess = permissionAccess;
+			this.machineName = machineName;
+		}
 
-        public string MachineName {
-            get { return machineName; }
-        }
+		public string MachineName {
+			get { return machineName; }
+		}
 
-        public EventLogPermissionAccess PermissionAccess {
-            get { return permissionAccess; }
-        }
+		public EventLogPermissionAccess PermissionAccess {
+			get { return permissionAccess; }
+		}
 
-        internal ResourcePermissionBaseEntry CreateResourcePermissionBaseEntry ()
-        {
-            return new ResourcePermissionBaseEntry ((int) permissionAccess, new string[] { machineName });
-        } 
-    }
+		internal ResourcePermissionBaseEntry CreateResourcePermissionBaseEntry ()
+		{
+			return new ResourcePermissionBaseEntry ((int) permissionAccess, new string[] { machineName });
+		} 
+	}
 }
 

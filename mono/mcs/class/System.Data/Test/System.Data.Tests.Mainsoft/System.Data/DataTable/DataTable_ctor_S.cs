@@ -36,67 +36,67 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-    [TestFixture] public class DataTable_ctor_S : GHTBase
-    {
-        public void SetUp()
-        {
-            Exception exp = null;
-            BeginCase("Setup");
-            try
-            {
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        }
+	[TestFixture] public class DataTable_ctor_S : GHTBase
+	{
+		public void SetUp()
+		{
+			Exception exp = null;
+			BeginCase("Setup");
+			try
+			{
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		}
 
-        public void TearDown()
-        {
-        }
+		public void TearDown()
+		{
+		}
 
-        [Test] public void Main()
-        {
-            DataTable_ctor_S tc = new DataTable_ctor_S();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("DataTable_ctor_S");
-                tc.SetUp();
-                tc.run();
-                tc.TearDown();
-            }
-            catch(Exception ex)
-            {
-                exp = ex;
-            }
-            finally
-            {
-                tc.EndTest(exp);
-            }
-        }
+		[Test] public void Main()
+		{
+			DataTable_ctor_S tc = new DataTable_ctor_S();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("DataTable_ctor_S");
+				tc.SetUp();
+				tc.run();
+				tc.TearDown();
+			}
+			catch(Exception ex)
+			{
+				exp = ex;
+			}
+			finally
+			{
+				tc.EndTest(exp);
+			}
+		}
 
-        public void run()
-        {
-            Exception exp = null;
-            DataTable dt;
-            string sName = "MyName";
+		public void run()
+		{
+			Exception exp = null;
+			DataTable dt;
+			string sName = "MyName";
 
-            dt = new DataTable(sName);
+			dt = new DataTable(sName);
         
-            try
-            {
-                BeginCase("Ctor");
-                Compare(dt == null ,false );
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        
-            try
-            {
-                BeginCase("Ctor TableName");
-                Compare(dt.TableName ,sName );
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        }
-    }
+			try
+			{
+				BeginCase("Ctor");
+				Compare(dt == null ,false );
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		
+			try
+			{
+				BeginCase("Ctor TableName");
+				Compare(dt.TableName ,sName );
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		}
+	}
 }

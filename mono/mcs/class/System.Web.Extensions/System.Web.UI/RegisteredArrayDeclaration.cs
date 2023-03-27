@@ -31,28 +31,28 @@ using System;
 
 namespace System.Web.UI
 {
-    public sealed class RegisteredArrayDeclaration
-    {
-        readonly Control _control;
-        readonly string _name;
-        readonly string _value;
+	public sealed class RegisteredArrayDeclaration
+	{
+		readonly Control _control;
+		readonly string _name;
+		readonly string _value;
 
-        internal RegisteredArrayDeclaration (Control control, string name, string value) {
-            _control = control;
-            _name = name;
-            _value = value;
-        }
+		internal RegisteredArrayDeclaration (Control control, string name, string value) {
+			_control = control;
+			_name = name;
+			_value = value;
+		}
 
-        public Control Control {
-            get { return _control; }
-        }
+		public Control Control {
+			get { return _control; }
+		}
 
-        public string Name {
-            get { return _name; }
-        }
+		public string Name {
+			get { return _name; }
+		}
 
-        public string Value {
-            get { return _value; }
-        }
-    }
+		public string Value {
+			get { return _value; }
+		}
+	}
 }

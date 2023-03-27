@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -2320,39 +2320,39 @@ using System.Collections.Generic;
 
 class A:IEnumerable
 {
-    public static List<int> list = new List<int>();
-    public void Add(int i)
-    {
-        list.Add(i);    
-    }
+	public static List<int> list = new List<int>();
+	public void Add(int i)
+	{
+		list.Add(i);	
+	}
 
     public IEnumerator GetEnumerator()
-    {
+	{
         for (int i = 0; i < list.Count; i++)
-            yield return list[i];
+		    yield return list[i];
     }
 }
 
 class C<T> where T: A, new()
 {
-    public void M()
-    {
-        T t = new T {1, 2, 3, 4, 5};
+	public void M()
+	{
+		T t = new T {1, 2, 3, 4, 5};
 
         foreach (var x in t)
         {
             Console.WriteLine(x);
         }
-    }
+	}
 }
 
 class Test
 {
-    static void Main()
-    {
-        C<A> testC = new C<A>();
-        testC.M();
-    }
+	static void Main()
+	{
+		C<A> testC = new C<A>();
+		testC.M();
+	}
 }
 ";
             string expectedOutput = @"1
@@ -3155,23 +3155,23 @@ public class B : IEnumerable
             //
             // SPEC:    public class Contact
             // SPEC:    {
-            // SPEC:        string name;
-            // SPEC:        List<string> phoneNumbers = new List<string>();
-            // SPEC:        public string Name { get { return name; } set { name = value; } }
-            // SPEC:        public List<string> PhoneNumbers { get { return phoneNumbers; } }
+            // SPEC:    	string name;
+            // SPEC:    	List<string> phoneNumbers = new List<string>();
+            // SPEC:    	public string Name { get { return name; } set { name = value; } }
+            // SPEC:    	public List<string> PhoneNumbers { get { return phoneNumbers; } }
             // SPEC:    }
             //
             // SPEC:    A List<Contact> can be created and initialized as follows:
             //
             // SPEC:    var contacts = new List<Contact> {
-            // SPEC:        new Contact {
-            // SPEC:            Name = "Chris Smith",
-            // SPEC:            PhoneNumbers = { "206-555-0101", "425-882-8080" }
-            // SPEC:        },
-            // SPEC:        new Contact {
-            // SPEC:            Name = "Bob Harris",
-            // SPEC:            PhoneNumbers = { "650-555-0199" }
-            // SPEC:        }
+            // SPEC:    	new Contact {
+            // SPEC:    		Name = "Chris Smith",
+            // SPEC:    		PhoneNumbers = { "206-555-0101", "425-882-8080" }
+            // SPEC:    	},
+            // SPEC:    	new Contact {
+            // SPEC:    		Name = "Bob Harris",
+            // SPEC:    		PhoneNumbers = { "650-555-0199" }
+            // SPEC:    	}
             // SPEC:    };
             //
             // SPEC:    which has the same effect as
@@ -3218,14 +3218,14 @@ class Test
     public static void Main()
     {
         var contacts = new List<Contact> {
-            new Contact {
-                Name = ""Chris Smith"",
-                PhoneNumbers = { ""206-555-0101"", ""425-882-8080"" }
-            },
-            new Contact {
-                Name = ""Bob Harris"",
-                PhoneNumbers = { ""650-555-0199"" }
-            }
+	        new Contact {
+		        Name = ""Chris Smith"",
+		        PhoneNumbers = { ""206-555-0101"", ""425-882-8080"" }
+    	    },
+	        new Contact {
+		        Name = ""Bob Harris"",
+		        PhoneNumbers = { ""650-555-0199"" }
+	        }
         };
 
         DisplayContacts(contacts);

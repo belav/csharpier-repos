@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 using System.Drawing;
@@ -28,50 +28,50 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-    [ToolboxBitmap ("")]
-    public class DataGridViewTextBoxColumn : DataGridViewColumn {
+	[ToolboxBitmap ("")]
+	public class DataGridViewTextBoxColumn : DataGridViewColumn {
 
-        private int maxInputLength;
+		private int maxInputLength;
 
-        public DataGridViewTextBoxColumn ()
-        {
-            base.CellTemplate = new DataGridViewTextBoxCell();
-            maxInputLength = 32767;
-            base.SortMode = DataGridViewColumnSortMode.Automatic;
-        }
+		public DataGridViewTextBoxColumn ()
+		{
+			base.CellTemplate = new DataGridViewTextBoxCell();
+			maxInputLength = 32767;
+			base.SortMode = DataGridViewColumnSortMode.Automatic;
+		}
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public override DataGridViewCell CellTemplate {
-            get { return base.CellTemplate; }
-            set { base.CellTemplate = value as DataGridViewTextBoxCell; }
-        }
+		[Browsable (false)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public override DataGridViewCell CellTemplate {
+			get { return base.CellTemplate; }
+			set { base.CellTemplate = value as DataGridViewTextBoxCell; }
+		}
 
-        [DefaultValue (32767)]
-        public int MaxInputLength {
-            get { return maxInputLength; }
-            set {
-                if (value < 0) {
-                    throw new ArgumentOutOfRangeException("Value is less than 0.");
-                }
-                maxInputLength = value;
-            }
-        }
+		[DefaultValue (32767)]
+		public int MaxInputLength {
+			get { return maxInputLength; }
+			set {
+				if (value < 0) {
+					throw new ArgumentOutOfRangeException("Value is less than 0.");
+				}
+				maxInputLength = value;
+			}
+		}
 
-        [DefaultValue (DataGridViewColumnSortMode.Automatic)]
-        public new DataGridViewColumnSortMode SortMode {
-            get { return base.SortMode; }
-            set { base.SortMode = value; }
-        }
+		[DefaultValue (DataGridViewColumnSortMode.Automatic)]
+		public new DataGridViewColumnSortMode SortMode {
+			get { return base.SortMode; }
+			set { base.SortMode = value; }
+		}
 
-        public override string ToString ()
-        {
-            return string.Format ("DataGridViewTextBoxColumn {{ Name={0}, Index={1} }}", Name, Index);
-        }
+		public override string ToString ()
+		{
+			return string.Format ("DataGridViewTextBoxColumn {{ Name={0}, Index={1} }}", Name, Index);
+		}
 
 
 
-    }
+	}
 
 }
 

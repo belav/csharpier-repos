@@ -53,8 +53,8 @@ using System.Runtime.InteropServices;
 
 [assembly: ComCompatibleVersion (1, 0, 3300, 0)]
 
-    [assembly: CLSCompliant (true)]
-    [assembly: AssemblyDelaySign (true)]
+	[assembly: CLSCompliant (true)]
+	[assembly: AssemblyDelaySign (true)]
 
 [assembly: AssemblyFileVersion (Consts.FxFileVersion)]
 [assembly: ComVisible (true)]

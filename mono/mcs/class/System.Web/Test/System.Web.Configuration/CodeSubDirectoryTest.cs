@@ -1,9 +1,9 @@
 //
 // CodeSubDirectoryTest.cs 
-//    - unit tests for System.Web.Configuration.CodeSubDirectory
+//	- unit tests for System.Web.Configuration.CodeSubDirectory
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,37 +41,37 @@ using System.Reflection;
 
 namespace MonoTests.System.Web.Configuration {
 
-    [TestFixture]
-    public class CodeSubDirectoryTest  {
+	[TestFixture]
+	public class CodeSubDirectoryTest  {
 
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void ctor_validationFailure ()
-        {
-            CodeSubDirectory c = new CodeSubDirectory ("");
-        }
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void ctor_validationFailure ()
+		{
+			CodeSubDirectory c = new CodeSubDirectory ("");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void setter_validationFailure ()
-        {
-            CodeSubDirectory c = new CodeSubDirectory ("hi");
-            c.DirectoryName = "";
-        }
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void setter_validationFailure ()
+		{
+			CodeSubDirectory c = new CodeSubDirectory ("hi");
+			c.DirectoryName = "";
+		}
 
-        [Test]
-        public void WhiteSpaceTrimTest ()
-        {
-            CodeSubDirectory c = new CodeSubDirectory (" /this/is/a/path/with-spaces ");
-            Assert.AreEqual (" /this/is/a/path/with-spaces ", c.DirectoryName, "A1");
+		[Test]
+		public void WhiteSpaceTrimTest ()
+		{
+			CodeSubDirectory c = new CodeSubDirectory (" /this/is/a/path/with-spaces ");
+			Assert.AreEqual (" /this/is/a/path/with-spaces ", c.DirectoryName, "A1");
 
-            c.DirectoryName = " /another/one";
-            Assert.AreEqual (" /another/one", c.DirectoryName, "A2");
+			c.DirectoryName = " /another/one";
+			Assert.AreEqual (" /another/one", c.DirectoryName, "A2");
 
-            c.DirectoryName = "/one/more ";
-            Assert.AreEqual ("/one/more ", c.DirectoryName, "A3");
-        }
-    }
+			c.DirectoryName = "/one/more ";
+			Assert.AreEqual ("/one/more ", c.DirectoryName, "A3");
+		}
+	}
 
 }
 

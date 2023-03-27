@@ -2,7 +2,7 @@
 // CustomUserNameSecurityTokenAuthenticatorTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -41,44 +41,44 @@ using PolicyCollection = System.Collections.ObjectModel.ReadOnlyCollection<Syste
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-    [TestFixture]
-    public class CustomUserNameSecurityTokenAuthenticatorTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorCertNull ()
-        {
-            new Authenticator (null);
-        }
+	[TestFixture]
+	public class CustomUserNameSecurityTokenAuthenticatorTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void ConstructorCertNull ()
+		{
+			new Authenticator (null);
+		}
 
-        [Test]
-        public void Validation ()
-        {
-            Authenticator a = new Authenticator (
-                UserNamePasswordValidator.None);
-            PolicyCollection pl = a.ValidateToken (new UserNameSecurityToken ("mono", "mono"));
-            Assert.AreEqual (1, pl.Count, "#1");
-            IAuthorizationPolicy p = pl [0];
-            Assert.AreEqual (ClaimSet.System, p.Issuer, "#2");
-            TestEvaluationContext ec = new TestEvaluationContext ();
-            object o = null;
-            Assert.IsTrue (p.Evaluate (ec, ref o), "#3");
-            Assert.AreEqual (DateTime.MaxValue.AddDays (-1), ec.ExpirationTime, "#4");
-            IList<IIdentity> identities = ec.Properties ["Identities"] as IList<IIdentity>;
-            Assert.IsNotNull (identities, "#5");
-            Assert.AreEqual (1, identities.Count, "#6");
-            IIdentity ident = identities [0];
-            Assert.AreEqual (true, ident.IsAuthenticated, "#6-2");
-            // it's implementation details.
-            //Assert.AreEqual ("NoneUserNamePasswordValidator", ident.AuthenticationType, "#6-3");
-            Assert.AreEqual ("mono", ident.Name, "#6-4");
-            Assert.AreEqual (1, ec.ClaimSets.Count, "#7");
+		[Test]
+		public void Validation ()
+		{
+			Authenticator a = new Authenticator (
+				UserNamePasswordValidator.None);
+			PolicyCollection pl = a.ValidateToken (new UserNameSecurityToken ("mono", "mono"));
+			Assert.AreEqual (1, pl.Count, "#1");
+			IAuthorizationPolicy p = pl [0];
+			Assert.AreEqual (ClaimSet.System, p.Issuer, "#2");
+			TestEvaluationContext ec = new TestEvaluationContext ();
+			object o = null;
+			Assert.IsTrue (p.Evaluate (ec, ref o), "#3");
+			Assert.AreEqual (DateTime.MaxValue.AddDays (-1), ec.ExpirationTime, "#4");
+			IList<IIdentity> identities = ec.Properties ["Identities"] as IList<IIdentity>;
+			Assert.IsNotNull (identities, "#5");
+			Assert.AreEqual (1, identities.Count, "#6");
+			IIdentity ident = identities [0];
+			Assert.AreEqual (true, ident.IsAuthenticated, "#6-2");
+			// it's implementation details.
+			//Assert.AreEqual ("NoneUserNamePasswordValidator", ident.AuthenticationType, "#6-3");
+			Assert.AreEqual ("mono", ident.Name, "#6-4");
+			Assert.AreEqual (1, ec.ClaimSets.Count, "#7");
 
-            Assert.IsTrue (p.Evaluate (ec, ref o), "#8");
-            identities = ec.Properties ["Identities"] as IList<IIdentity>;
-            Assert.AreEqual (2, identities.Count, "#9");
-            Assert.AreEqual (2, ec.ClaimSets.Count, "#10");
-        }
-    }
+			Assert.IsTrue (p.Evaluate (ec, ref o), "#8");
+			identities = ec.Properties ["Identities"] as IList<IIdentity>;
+			Assert.AreEqual (2, identities.Count, "#9");
+			Assert.AreEqual (2, ec.ClaimSets.Count, "#10");
+		}
+	}
 }
 #endif

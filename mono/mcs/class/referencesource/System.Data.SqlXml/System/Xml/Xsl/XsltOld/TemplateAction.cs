@@ -219,7 +219,7 @@ namespace System.Xml.Xsl.XsltOld {
                 break;
             default:
                 Debug.Fail("Invalid Container action execution state");
-                break;
+    		    break;
             }
         }
     }

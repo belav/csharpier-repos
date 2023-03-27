@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -219,8 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 "\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\\u007f\\u0080\\u0081\\u0082\\u0083\\u0084\\u0085" +
                 "\\u0086\\u0087\\u0088\\u0089\\u008a\\u008b\\u008c\\u008d\\u008e\\u008f\\u0090\\u0091\\u0092" +
                 "\\u0093\\u0094\\u0095\\u0096\\u0097\\u0098\\u0099\\u009a\\u009b\\u009c\\u009d\\u009e\\u009f" +
-                " ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèé" +
-                "êëìíîïğñòóôõö÷øùúûüış\"";
+                "Â Â¡Â¢Â£Â¤Â¥Â¦Â§Â¨Â©ÂªÂ«Â¬Â­Â®Â¯Â°Â±Â²Â³Â´ÂµÂ¶Â·Â¸Â¹ÂºÂ»Â¼Â½Â¾Â¿Ã€ÃÃ‚ÃƒÃ„Ã…Ã†Ã‡ÃˆÃ‰ÃŠÃ‹ÃŒÃÃÃÃÃ‘Ã’Ã“Ã”Ã•Ã–Ã—Ã˜Ã™ÃšÃ›ÃœÃÃÃŸÃ Ã¡Ã¢Ã£Ã¤Ã¥Ã¦Ã§Ã¨Ã©" +
+                "ÃªÃ«Ã¬Ã­Ã®Ã¯Ã°Ã±Ã²Ã³Ã´ÃµÃ¶Ã·Ã¸Ã¹ÃºÃ»Ã¼Ã½Ã¾\"";
             Assert.Equal(
                 expected,
                 ObjectDisplay.FormatLiteral(s, ObjectDisplayOptions.UseQuotes | ObjectDisplayOptions.EscapeNonPrintableCharacters));
@@ -232,17 +232,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 "\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007f\u0080\u0081\u0082\u0083\u0084\u0085" +
                 "\u0086\u0087\u0088\u0089\u008a\u008b\u008c\u008d\u008e\u008f\u0090\u0091\u0092" +
                 "\u0093\u0094\u0095\u0096\u0097\u0098\u0099\u009a\u009b\u009c\u009d\u009e\u009f" +
-                " ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèé" +
-                "êëìíîïğñòóôõö÷øùúûüış";
+                "Â Â¡Â¢Â£Â¤Â¥Â¦Â§Â¨Â©ÂªÂ«Â¬Â­Â®Â¯Â°Â±Â²Â³Â´ÂµÂ¶Â·Â¸Â¹ÂºÂ»Â¼Â½Â¾Â¿Ã€ÃÃ‚ÃƒÃ„Ã…Ã†Ã‡ÃˆÃ‰ÃŠÃ‹ÃŒÃÃÃÃÃ‘Ã’Ã“Ã”Ã•Ã–Ã—Ã˜Ã™ÃšÃ›ÃœÃÃÃŸÃ Ã¡Ã¢Ã£Ã¤Ã¥Ã¦Ã§Ã¨Ã©" +
+                "ÃªÃ«Ã¬Ã­Ã®Ã¯Ã°Ã±Ã²Ã³Ã´ÃµÃ¶Ã·Ã¸Ã¹ÃºÃ»Ã¼Ã½Ã¾";
             Assert.Equal(
                 expected,
                 ObjectDisplay.FormatLiteral(s, ObjectDisplayOptions.None));
 
-            var arabic = "???????? ?????? ??? ??? ???? ???????? ????????? ???";
+            var arabic = "Ø§Ù†ØªØ®Ø§Ø¨Ø§Øª Ù…Ø¨ÙƒØ±Ø©ØŒ Ø¨Ø¹Ø¯ ÙŠÙˆÙ… Ø­Ø§ÙÙ„ Ø¨Ø§Ù„Ø§Ø­Ø¯Ø§Ø« Ø§Ù„Ø³ÙŠØ§Ø³ÙŠØ©ØŒ Ø¨Ø¹Ø¯";
             s = ObjectDisplay.FormatLiteral(arabic, ObjectDisplayOptions.None);
             Assert.Equal(arabic, s);
 
-            var hebrew = "???????? ??????? ?? ????? ????? ??????. ????? ?????? ?????";
+            var hebrew = "×•×”×× ×”×œ×™× ×¨×¤×•××™×™× ×©×œ ××¨×‘×¢×ª ×§×•×¤×•×ª ×”×—×•×œ×™×. ×‘×¡×™×•× ×”×¤×’×™×©×” ×”×‘×”×™×¨";
             s = ObjectDisplay.FormatLiteral(hebrew, ObjectDisplayOptions.None);
             Assert.Equal(hebrew, s);
         }

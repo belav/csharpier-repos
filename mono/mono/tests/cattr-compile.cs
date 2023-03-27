@@ -1,11 +1,11 @@
 using System;
 
 namespace Test {
-    [CLSCompliant(false)]
-    public class Test {
-        [CLSCompliant(false)]
-        public static int Main() {
-            return 0;
-        }
-    }
+	[CLSCompliant(false)]
+	public class Test {
+		[CLSCompliant(false)]
+		public static int Main() {
+			return 0;
+		}
+	}
 }

@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,26 +32,26 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("e770c650-b3d3-11da-a94d-0800200c9a66")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDocumentEncoderNodeFixup {
+	[Guid ("e770c650-b3d3-11da-a94d-0800200c9a66")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDocumentEncoderNodeFixup {
 
 #region nsIDocumentEncoderNodeFixup
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        [return: MarshalAs (UnmanagedType.Interface)] nsIDOMNode fixupNode ([MarshalAs (UnmanagedType.Interface)]  nsIDOMNode aNode);
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		[return: MarshalAs (UnmanagedType.Interface)] nsIDOMNode fixupNode ([MarshalAs (UnmanagedType.Interface)]  nsIDOMNode aNode);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDocumentEncoderNodeFixup {
-        public static nsIDocumentEncoderNodeFixup GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDocumentEncoderNodeFixup obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDocumentEncoderNodeFixup).GUID, obj);
-            return o as nsIDocumentEncoderNodeFixup;
-        }
-    }
+	internal class nsDocumentEncoderNodeFixup {
+		public static nsIDocumentEncoderNodeFixup GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDocumentEncoderNodeFixup obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDocumentEncoderNodeFixup).GUID, obj);
+			return o as nsIDocumentEncoderNodeFixup;
+		}
+	}
 }
 #if example
 
@@ -60,16 +60,16 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-    internal class DocumentEncoderNodeFixup : nsIDocumentEncoderNodeFixup {
+	internal class DocumentEncoderNodeFixup : nsIDocumentEncoderNodeFixup {
 
 #region nsIDocumentEncoderNodeFixup
-        [return: MarshalAs (UnmanagedType.Interface)] nsIDOMNode nsIDocumentEncoderNodeFixup.fixupNode ([MarshalAs (UnmanagedType.Interface)]  nsIDOMNode aNode)
-        {
-            return ;
-        }
+		[return: MarshalAs (UnmanagedType.Interface)] nsIDOMNode nsIDocumentEncoderNodeFixup.fixupNode ([MarshalAs (UnmanagedType.Interface)]  nsIDOMNode aNode)
+		{
+			return ;
+		}
 
 
 
 #endregion
-    }
+	}
 #endif

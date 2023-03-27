@@ -5,8 +5,8 @@ using System;
 
 public class X
 {
-    public static void Main ()
-    {
-        2 * 3;
-    }
+	public static void Main ()
+	{
+		2 * 3;
+	}
 }

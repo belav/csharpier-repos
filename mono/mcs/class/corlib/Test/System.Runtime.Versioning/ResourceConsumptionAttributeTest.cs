@@ -1,6 +1,6 @@
 //
 // ResourceConsumptionAttributeTest.cs - Unit tests for 
-//    System.Runtime.Versioning.ResourceConsumptionAttribute
+//	System.Runtime.Versioning.ResourceConsumptionAttribute
 //
 // Author:
 //      Sebastien Pouliot  <sebastien@ximian.com>
@@ -35,54 +35,54 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Versioning {
 
-    [TestFixture]
-    public class ResourceConsumptionAttributeTest {
+	[TestFixture]
+	public class ResourceConsumptionAttributeTest {
 
-        [Test]
-        public void Constructor1 ()
-        {
-            ResourceConsumptionAttribute rca = null;
-            Array values = Enum.GetValues (typeof (ResourceScope));
-            foreach (ResourceScope resource in values) {
-                rca = new ResourceConsumptionAttribute (resource);
-                string id = String.Format ("[{0}]", resource);
-                Assert.AreEqual (resource, rca.ResourceScope, "ResourceScope-" + id);
-                Assert.AreEqual (resource, rca.ConsumptionScope, "ConsumptionScope-" + id);
-            }
-        }
+		[Test]
+		public void Constructor1 ()
+		{
+			ResourceConsumptionAttribute rca = null;
+			Array values = Enum.GetValues (typeof (ResourceScope));
+			foreach (ResourceScope resource in values) {
+				rca = new ResourceConsumptionAttribute (resource);
+				string id = String.Format ("[{0}]", resource);
+				Assert.AreEqual (resource, rca.ResourceScope, "ResourceScope-" + id);
+				Assert.AreEqual (resource, rca.ConsumptionScope, "ConsumptionScope-" + id);
+			}
+		}
 
-        [Test]
-        public void Constructor2 ()
-        {
-            ResourceConsumptionAttribute rca = null;
-            Array values = Enum.GetValues (typeof (ResourceScope));
-            foreach (ResourceScope resource in values) {
-                foreach (ResourceScope consumption in values) {
-                    rca = new ResourceConsumptionAttribute (resource, consumption);
-                    string id = String.Format ("[{0}-{1}]", resource, consumption);
-                    Assert.AreEqual (resource, rca.ResourceScope, "ResourceScope-" + id);
-                    Assert.AreEqual (consumption, rca.ConsumptionScope, "ConsumptionScope-" + id);
-                }
-            }
-        }
+		[Test]
+		public void Constructor2 ()
+		{
+			ResourceConsumptionAttribute rca = null;
+			Array values = Enum.GetValues (typeof (ResourceScope));
+			foreach (ResourceScope resource in values) {
+				foreach (ResourceScope consumption in values) {
+					rca = new ResourceConsumptionAttribute (resource, consumption);
+					string id = String.Format ("[{0}-{1}]", resource, consumption);
+					Assert.AreEqual (resource, rca.ResourceScope, "ResourceScope-" + id);
+					Assert.AreEqual (consumption, rca.ConsumptionScope, "ConsumptionScope-" + id);
+				}
+			}
+		}
 
-        [Test]
-        public void InvalidResourceScope1 ()
-        {
-            ResourceScope bad = (ResourceScope) Int32.MinValue;
-            ResourceConsumptionAttribute rca = new ResourceConsumptionAttribute (bad);
-            Assert.AreEqual (bad, rca.ResourceScope, "ResourceScope");
-            Assert.AreEqual (bad, rca.ConsumptionScope, "ConsumptionScope");
-        }
+		[Test]
+		public void InvalidResourceScope1 ()
+		{
+			ResourceScope bad = (ResourceScope) Int32.MinValue;
+			ResourceConsumptionAttribute rca = new ResourceConsumptionAttribute (bad);
+			Assert.AreEqual (bad, rca.ResourceScope, "ResourceScope");
+			Assert.AreEqual (bad, rca.ConsumptionScope, "ConsumptionScope");
+		}
 
-        [Test]
-        public void InvalidResourceScope2 ()
-        {
-            ResourceScope bad = (ResourceScope) Int32.MinValue;
-            ResourceConsumptionAttribute rca = new ResourceConsumptionAttribute (ResourceScope.None, bad);
-            Assert.AreEqual (ResourceScope.None, rca.ResourceScope, "ResourceScope");
-            Assert.AreEqual (bad, rca.ConsumptionScope, "ConsumptionScope");
-        }
-    }
+		[Test]
+		public void InvalidResourceScope2 ()
+		{
+			ResourceScope bad = (ResourceScope) Int32.MinValue;
+			ResourceConsumptionAttribute rca = new ResourceConsumptionAttribute (ResourceScope.None, bad);
+			Assert.AreEqual (ResourceScope.None, rca.ResourceScope, "ResourceScope");
+			Assert.AreEqual (bad, rca.ConsumptionScope, "ConsumptionScope");
+		}
+	}
 }
 

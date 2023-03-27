@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -2115,7 +2115,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // For the predefined operators, the number of bits to shift in `x << count`, `x >> count` or `x >>> count` is computed as follows:
             // [...]
-            // - When the type of�`x` is `nint` or `nuint`, the shift count is given by
+            // - When the type of `x` is `nint` or `nuint`, the shift count is given by
             //   the low-order five bits of `count` on a 32 bit platform, or
             //   the lower-order six bits of `count` on a 64 bit platform.
             //   The shift count is computed as `count & (sizeof(nint) * 8 - 1)` or `count & (sizeof(nuint) * 8 - 1)`,

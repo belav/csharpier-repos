@@ -1,9 +1,9 @@
 //
 // EditCommandColumnCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.EditCommandColumn
+//	- CAS unit tests for System.Web.UI.WebControls.EditCommandColumn
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,25 +38,25 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class EditCommandColumnCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class EditCommandColumnCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            EditCommandColumnTest unit = new EditCommandColumnTest ();
-            unit.Defaults ();
-            unit.Properties ();
-            unit.InitializeCell ();
-            unit.InitializeEditCell ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			EditCommandColumnTest unit = new EditCommandColumnTest ();
+			unit.Defaults ();
+			unit.Properties ();
+			unit.InitializeCell ();
+			unit.InitializeEditCell ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (EditCommandColumn); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (EditCommandColumn); }
+		}
+	}
 }

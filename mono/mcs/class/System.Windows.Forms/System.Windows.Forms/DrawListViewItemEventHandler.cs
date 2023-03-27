@@ -20,12 +20,12 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//    Rolf Bjarne Kvinge  <RKvinge@novell.com>
+//	Rolf Bjarne Kvinge  <RKvinge@novell.com>
 //
 //
 // COMPLETE
 
 namespace System.Windows.Forms
 {
-    public delegate void DrawListViewItemEventHandler (object sender, DrawListViewItemEventArgs e);
+	public delegate void DrawListViewItemEventHandler (object sender, DrawListViewItemEventArgs e);
 }

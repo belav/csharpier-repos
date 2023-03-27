@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationSaveEventHandler.cs
 //
 // Authors:
-//    Marek Habersack (mhabersack@novell.com)
+//	Marek Habersack (mhabersack@novell.com)
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -31,5 +31,5 @@ using System;
 
 namespace System.Configuration 
 {
-    internal delegate void ConfigurationSaveEventHandler (Configuration sender, ConfigurationSaveEventArgs args);
+	internal delegate void ConfigurationSaveEventHandler (Configuration sender, ConfigurationSaveEventArgs args);
 }

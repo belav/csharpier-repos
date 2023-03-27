@@ -23,7 +23,7 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 using System;
 using System.Collections.Generic;
@@ -34,15 +34,15 @@ using System.Windows.Forms;
 
 namespace MonoTests.System.Windows.Forms
 {
-    [TestFixture]
-    public class ToolStripOverflowTests : TestHelper
-    {
-        [Test]
-        public void Constructor ()
-        {
-            ToolStripOverflow tso = (ToolStripOverflow)new ToolStrip ().OverflowButton.DropDown;
-            
-            Assert.AreEqual ("System.Windows.Forms.Layout.FlowLayout", tso.LayoutEngine.ToString (), "A1");
-        }
-    }
+	[TestFixture]
+	public class ToolStripOverflowTests : TestHelper
+	{
+		[Test]
+		public void Constructor ()
+		{
+			ToolStripOverflow tso = (ToolStripOverflow)new ToolStrip ().OverflowButton.DropDown;
+			
+			Assert.AreEqual ("System.Windows.Forms.Layout.FlowLayout", tso.LayoutEngine.ToString (), "A1");
+		}
+	}
 }

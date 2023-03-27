@@ -2,7 +2,7 @@
 // System.Configuration.Provider.ProviderBase
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -33,44 +33,44 @@ using System.Collections.Specialized;
 
 namespace System.Configuration.Provider
 {
-    public abstract class ProviderBase
-    {
-        bool alreadyInitialized;
-        
-        protected ProviderBase ()
-        {
-        }
-        
-        public virtual void Initialize (string name, NameValueCollection config)
-        {
-            if (name == null)
-                throw new ArgumentNullException ("name");
-            if (name.Length == 0)
-                throw new ArgumentException ("Provider name cannot be null or empty.", "name");
-            if (alreadyInitialized)
-                throw new InvalidOperationException ("This provider instance has already been initialized.");
-            alreadyInitialized = true;
-            
-            _name = name;
+	public abstract class ProviderBase
+	{
+		bool alreadyInitialized;
+		
+		protected ProviderBase ()
+		{
+		}
+		
+		public virtual void Initialize (string name, NameValueCollection config)
+		{
+			if (name == null)
+				throw new ArgumentNullException ("name");
+			if (name.Length == 0)
+				throw new ArgumentException ("Provider name cannot be null or empty.", "name");
+			if (alreadyInitialized)
+				throw new InvalidOperationException ("This provider instance has already been initialized.");
+			alreadyInitialized = true;
+			
+			_name = name;
 
-            if (config != null) {
-                _description = config ["description"];
-                config.Remove ("description");
-            }
-            if (String.IsNullOrEmpty (_description))
-                _description = _name;
-        }
-        
-        public virtual string Name { 
-            get { return _name; }
-        }
+			if (config != null) {
+				_description = config ["description"];
+				config.Remove ("description");
+			}
+			if (String.IsNullOrEmpty (_description))
+				_description = _name;
+		}
+		
+		public virtual string Name { 
+			get { return _name; }
+		}
 
-        public virtual string Description {
-            get { return _description; }
-        }
+		public virtual string Description {
+			get { return _description; }
+		}
 
-        string _description;
-        string _name;
-    }
+		string _description;
+		string _name;
+	}
 }
 

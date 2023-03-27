@@ -16,12 +16,12 @@ public class Bar : Parent {
 class Driver {
 
 
-    public static int Main (string[] args) {
-        Parent p;
-        Foo f = new Foo();
-        Bar b = new Bar();
-        p = args == null? (Parent) f : (Parent) b;
+	public static int Main (string[] args) {
+		Parent p;
+		Foo f = new Foo();
+		Bar b = new Bar();
+		p = args == null? (Parent) f : (Parent) b;
 
-        return 1;
-    }
-}    
+		return 1;
+	}
+}	

@@ -14,7 +14,7 @@ namespace DefaultNamespace
             UInt32 x = (0xFFFFFFFF);
             Int64 y = x;
 
-            //    just added few cases of WriteLine
+            //	just added few cases of WriteLine
             Console.WriteLine("Running test");
             Console.WriteLine("x = " + x);
             Console.WriteLine("x = " + x + ".");

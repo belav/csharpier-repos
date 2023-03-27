@@ -3,14 +3,14 @@
 
 class C
 {
-    static event System.EventHandler ev
-    {
-        add { }
-        remove { }
-    }
+	static event System.EventHandler ev
+	{
+		add { }
+		remove { }
+	}
 
-    static void Main ()
-    {
-        ev *= null;
-    }
+	static void Main ()
+	{
+		ev *= null;
+	}
 }

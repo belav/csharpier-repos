@@ -2267,12 +2267,12 @@ namespace System.Net.Sockets {
         }
 
 #if !MONO
-        internal int IOControl(    IOControlCode ioControlCode, 
-                                    IntPtr optionInValue, 
-                                    int inValueSize,
-                                    IntPtr optionOutValue,
-                                    int outValueSize) 
-        {
+        internal int IOControl(	IOControlCode ioControlCode, 
+									IntPtr optionInValue, 
+									int inValueSize,
+									IntPtr optionOutValue,
+									int outValueSize) 
+		{
             if (CleanedUp) {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
@@ -2287,9 +2287,9 @@ namespace System.Net.Sockets {
                 m_Handle.DangerousGetHandle(),
                 (uint)ioControlCode,
                 optionInValue,
-                inValueSize,
+				inValueSize,
                 optionOutValue,
-                outValueSize,
+				outValueSize,
                 out realOptionLength,
                 SafeNativeOverlapped.Zero,
                 IntPtr.Zero);

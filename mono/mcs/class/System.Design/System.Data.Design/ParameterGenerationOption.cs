@@ -2,7 +2,7 @@
 // ParameterGenerationOption.cs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -31,11 +31,11 @@
 
 namespace System.Data.Design
 {
-    public enum ParameterGenerationOption
-    {
-        ClrTypes,
-        SqlTypes,
-        Objects
-    }
+	public enum ParameterGenerationOption
+	{
+		ClrTypes,
+		SqlTypes,
+		Objects
+	}
 }
 

@@ -2,7 +2,7 @@
 // XmlElementElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,32 +54,32 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (XmlElementElement),
-         AddItemName = "xmlElement",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.BasicMap)]
-    public sealed class XmlElementElementCollection
-         : ServiceModelConfigurationElementCollection<XmlElementElement>, ICollection, IEnumerable
-    {
-        public XmlElementElementCollection () {
-            AddElementName = "xmlElement";
-        }
+	[ConfigurationCollection (typeof (XmlElementElement),
+		 AddItemName = "xmlElement",
+		 RemoveItemName = "remove",
+		 ClearItemsName = "clear",
+		 CollectionType = ConfigurationElementCollectionType.BasicMap)]
+	public sealed class XmlElementElementCollection
+		 : ServiceModelConfigurationElementCollection<XmlElementElement>, ICollection, IEnumerable
+	{
+		public XmlElementElementCollection () {
+			AddElementName = "xmlElement";
+		}
 
-        protected override object GetElementKey (ConfigurationElement element) {
-            return ((XmlElementElement) element).XmlElement;
-        }
+		protected override object GetElementKey (ConfigurationElement element) {
+			return ((XmlElementElement) element).XmlElement;
+		}
 
-        [MonoTODO]
-        protected override bool OnDeserializeUnrecognizedElement (string elementName, XmlReader reader) {
-            //return base.OnDeserializeUnrecognizedElement (elementName, reader);
-            reader.ReadOuterXml ();
-            return true;
-        }
+		[MonoTODO]
+		protected override bool OnDeserializeUnrecognizedElement (string elementName, XmlReader reader) {
+			//return base.OnDeserializeUnrecognizedElement (elementName, reader);
+			reader.ReadOuterXml ();
+			return true;
+		}
 
-        protected override void Unmerge (ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode) {
-            base.Unmerge (sourceElement, parentElement, saveMode);
-        }
-    }
+		protected override void Unmerge (ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode) {
+			base.Unmerge (sourceElement, parentElement, saveMode);
+		}
+	}
 
 }

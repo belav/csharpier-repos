@@ -5,10 +5,10 @@ using System;
 
 class C
 {
-    void Method (IDisposable i)
-    {
-        using (object o = i)
-        {
-        }
+	void Method (IDisposable i)
+	{
+		using (object o = i)
+		{
+		}
     }
 }

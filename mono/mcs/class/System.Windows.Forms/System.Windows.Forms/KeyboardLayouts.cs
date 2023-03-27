@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 //
 
@@ -29,94 +29,94 @@ using System.Resources;
 
 namespace System.Windows.Forms {
 
-    internal class KeyboardLayouts {
+	internal class KeyboardLayouts {
 
-        private KeyboardLayout [] keyboard_layouts;
-        public int [][] vkey_table;
-        public short [][] scan_table;
+		private KeyboardLayout [] keyboard_layouts;
+		public int [][] vkey_table;
+		public short [][] scan_table;
 
-        public void LoadLayouts ()
-        {
-            ResourceManager    rm;
-            rm = new ResourceManager ("keyboards", System.Reflection.Assembly.GetExecutingAssembly());
-            keyboard_layouts = (KeyboardLayout []) rm.GetObject ("keyboard_table");
+		public void LoadLayouts ()
+		{
+			ResourceManager	rm;
+			rm = new ResourceManager ("keyboards", System.Reflection.Assembly.GetExecutingAssembly());
+			keyboard_layouts = (KeyboardLayout []) rm.GetObject ("keyboard_table");
 
-            vkey_table = (int [][]) rm.GetObject ("vkey_table");
-            scan_table = (short [][]) rm.GetObject ("scan_table");
-        }
+			vkey_table = (int [][]) rm.GetObject ("vkey_table");
+			scan_table = (short [][]) rm.GetObject ("scan_table");
+		}
 
-        public KeyboardLayout [] Layouts {
-            get {
-                if (keyboard_layouts == null)
-                    LoadLayouts ();
-                return keyboard_layouts;
-            }
-        }
-    }
+		public KeyboardLayout [] Layouts {
+			get {
+				if (keyboard_layouts == null)
+					LoadLayouts ();
+				return keyboard_layouts;
+			}
+		}
+	}
 
 
 
-    [Serializable]
+	[Serializable]
 #if GENERATING_RESOURCES
-    [CLSCompliant(false)]
-    public
+	[CLSCompliant(false)]
+	public
 #else 
-    internal
+	internal
 #endif
-        class KeyboardLayout {
+		class KeyboardLayout {
 
-        public int Lcid;
-        public string Name;
-        public ScanTableIndex ScanIndex;
-        public VKeyTableIndex VKeyIndex;
-        public uint [][] Keys;
+		public int Lcid;
+		public string Name;
+		public ScanTableIndex ScanIndex;
+		public VKeyTableIndex VKeyIndex;
+		public uint [][] Keys;
 
-        public KeyboardLayout (int lcid, string name, ScanTableIndex scan_index,
-                VKeyTableIndex vkey_index, uint [][] keys)
-        {
-            Lcid = lcid;
-            Name = name;
-            ScanIndex = scan_index;
-            VKeyIndex = vkey_index;
-            Keys = keys;
-        }
+		public KeyboardLayout (int lcid, string name, ScanTableIndex scan_index,
+				VKeyTableIndex vkey_index, uint [][] keys)
+		{
+			Lcid = lcid;
+			Name = name;
+			ScanIndex = scan_index;
+			VKeyIndex = vkey_index;
+			Keys = keys;
+		}
 
-        public KeyboardLayout (int lcid, string name, int scan_index,
-                int vkey_index, uint [][] keys) : this (lcid, name, (ScanTableIndex) scan_index,
-                        (VKeyTableIndex) vkey_index, keys)
-        {
-        }
-    }
-
-#if GENERATING_RESOURCES
-    public
-#else 
-    internal
-#endif
-     enum VKeyTableIndex {
-        Qwerty,
-        Qwertz,
-        Dvorak,
-        Qwertz105,
-        Azerty,
-        QwertyV2,
-        AbntQwerty,
-        QwertyJp106,
-        Vnc
-    }
+		public KeyboardLayout (int lcid, string name, int scan_index,
+				int vkey_index, uint [][] keys) : this (lcid, name, (ScanTableIndex) scan_index,
+						(VKeyTableIndex) vkey_index, keys)
+		{
+		}
+	}
 
 #if GENERATING_RESOURCES
-    public
+	public
 #else 
-    internal
+	internal
 #endif
-     enum ScanTableIndex {
-        Qwerty,
-        Dvorak,
-        AbntQwerty,
-        QwertyJp106,
-        Vnc
-    }
+	 enum VKeyTableIndex {
+		Qwerty,
+		Qwertz,
+		Dvorak,
+		Qwertz105,
+		Azerty,
+		QwertyV2,
+		AbntQwerty,
+		QwertyJp106,
+		Vnc
+	}
+
+#if GENERATING_RESOURCES
+	public
+#else 
+	internal
+#endif
+	 enum ScanTableIndex {
+		Qwerty,
+		Dvorak,
+		AbntQwerty,
+		QwertyJp106,
+		Vnc
+	}
 
 }
 

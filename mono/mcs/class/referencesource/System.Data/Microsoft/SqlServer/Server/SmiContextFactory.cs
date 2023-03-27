@@ -112,9 +112,9 @@ namespace Microsoft.SqlServer.Server {
             object result = _smiLink.GetCurrentContext(_eventSinkForGetCurrentContext);
             _eventSinkForGetCurrentContext.ProcessMessagesAndThrow();
 
-            if (null == result) {
-                throw SQL.ContextUnavailableWhileInProc();
-            }
+			if (null == result) {
+				throw SQL.ContextUnavailableWhileInProc();
+			}
 
             Debug.Assert(typeof(SmiContext).IsInstanceOfType(result), "didn't get SmiContext from GetCurrentContext?");
             return (SmiContext)result;

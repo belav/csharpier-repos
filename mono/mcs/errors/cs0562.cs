@@ -2,8 +2,8 @@
 // Line: 7
 
 class SampleClass {
-    public static SampleClass operator - (int value)
-    {
-        return new SampleClass();
-    }
+	public static SampleClass operator - (int value)
+	{
+		return new SampleClass();
+	}
 }

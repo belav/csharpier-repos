@@ -2,7 +2,7 @@
 // X509WindowsSecurityToken.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,25 +34,25 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.IdentityModel.Tokens
 {
-    public class X509WindowsSecurityToken : X509SecurityToken
-    {
-        [MonoTODO]
-        public X509WindowsSecurityToken (X509Certificate2 certificate, WindowsIdentity windowsIdentity)
-            : base (certificate)
-        {
-            throw new NotImplementedException ();
-        }
+	public class X509WindowsSecurityToken : X509SecurityToken
+	{
+		[MonoTODO]
+		public X509WindowsSecurityToken (X509Certificate2 certificate, WindowsIdentity windowsIdentity)
+			: base (certificate)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public X509WindowsSecurityToken (X509Certificate2 certificate, WindowsIdentity windowsIdentity, string id)
-            : base (certificate, id)
-        {
-            this.identity = windowsIdentity;
-        }
+		public X509WindowsSecurityToken (X509Certificate2 certificate, WindowsIdentity windowsIdentity, string id)
+			: base (certificate, id)
+		{
+			this.identity = windowsIdentity;
+		}
 
-        WindowsIdentity identity;
+		WindowsIdentity identity;
 
-        public WindowsIdentity WindowsIdentity {
-            get { return identity; }
-        }
-    }
+		public WindowsIdentity WindowsIdentity {
+			get { return identity; }
+		}
+	}
 }

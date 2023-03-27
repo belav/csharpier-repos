@@ -2,7 +2,7 @@
 // System.Web.Configuration.HttpCapabilitiesProvider
 //
 // Authors:
-//    Mike Morano (mmorano@mikeandwan.us)
+//	Mike Morano (mmorano@mikeandwan.us)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -28,16 +28,16 @@ using System.Web;
 
 namespace System.Web.Configuration
 {
-    public abstract class HttpCapabilitiesProvider
-    {
-        protected HttpCapabilitiesProvider()
-        {
+	public abstract class HttpCapabilitiesProvider
+	{
+		protected HttpCapabilitiesProvider()
+		{
 
-        }
+		}
 
 
-        public abstract HttpBrowserCapabilities GetBrowserCapabilities (HttpRequest request);
-    }
+		public abstract HttpBrowserCapabilities GetBrowserCapabilities (HttpRequest request);
+	}
 }
 
 

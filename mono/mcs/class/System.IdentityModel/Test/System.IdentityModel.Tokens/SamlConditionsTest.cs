@@ -2,7 +2,7 @@
 // SamlConditionsTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -37,68 +37,68 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Tokens
 {
-    [TestFixture]
-    public class SamlConditionsTest
-    {
-        XmlDictionaryWriter CreateWriter (StringWriter sw)
-        {
-            return XmlDictionaryWriter.CreateDictionaryWriter (XmlWriter.Create (sw));
-        }
+	[TestFixture]
+	public class SamlConditionsTest
+	{
+		XmlDictionaryWriter CreateWriter (StringWriter sw)
+		{
+			return XmlDictionaryWriter.CreateDictionaryWriter (XmlWriter.Create (sw));
+		}
 
-        [Test]
-        public void DefaultValues ()
-        {
-            SamlConditions c = new SamlConditions ();
-            Assert.AreEqual (DateTime.MinValue.AddDays (1), c.NotBefore, "#1");
-            Assert.AreEqual (DateTime.MaxValue.AddDays (-1), c.NotOnOrAfter, "#2");
-        }
+		[Test]
+		public void DefaultValues ()
+		{
+			SamlConditions c = new SamlConditions ();
+			Assert.AreEqual (DateTime.MinValue.AddDays (1), c.NotBefore, "#1");
+			Assert.AreEqual (DateTime.MaxValue.AddDays (-1), c.NotOnOrAfter, "#2");
+		}
 
-        [Test]
-        public void ConstructorNullConditions ()
-        {
-            new SamlConditions (DateTime.Now, DateTime.Now.AddMinutes (1), null);
-        }
+		[Test]
+		public void ConstructorNullConditions ()
+		{
+			new SamlConditions (DateTime.Now, DateTime.Now.AddMinutes (1), null);
+		}
 
-        [Test]
-        public void NotBefore ()
-        {
-            SamlConditions c = new SamlConditions ();
-            DateTime min = DateTime.SpecifyKind (DateTime.MinValue, DateTimeKind.Utc);
-            c.NotBefore = min;
-            Assert.AreEqual (min, c.NotBefore, "#1");
-        }
+		[Test]
+		public void NotBefore ()
+		{
+			SamlConditions c = new SamlConditions ();
+			DateTime min = DateTime.SpecifyKind (DateTime.MinValue, DateTimeKind.Utc);
+			c.NotBefore = min;
+			Assert.AreEqual (min, c.NotBefore, "#1");
+		}
 
-        [Test]
-        public void NotOnOrAfter ()
-        {
-            SamlConditions c = new SamlConditions ();
-            DateTime max = DateTime.SpecifyKind (DateTime.MaxValue, DateTimeKind.Utc);
-            c.NotOnOrAfter = max;
-            Assert.AreEqual (max, c.NotOnOrAfter, "#1");
-        }
+		[Test]
+		public void NotOnOrAfter ()
+		{
+			SamlConditions c = new SamlConditions ();
+			DateTime max = DateTime.SpecifyKind (DateTime.MaxValue, DateTimeKind.Utc);
+			c.NotOnOrAfter = max;
+			Assert.AreEqual (max, c.NotOnOrAfter, "#1");
+		}
 
-        [Test]
-        public void WriteXml1 ()
-        {
-            SamlConditions c = new SamlConditions ();
-            StringWriter sw = new StringWriter ();
-            using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-                c.WriteXml (dw, new SamlSerializer (), null);
-            }
-            Assert.AreEqual (String.Format ("<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:Conditions xmlns:saml=\"{0}\" />", SamlConstants.Namespace), sw.ToString ());
-        }
+		[Test]
+		public void WriteXml1 ()
+		{
+			SamlConditions c = new SamlConditions ();
+			StringWriter sw = new StringWriter ();
+			using (XmlDictionaryWriter dw = CreateWriter (sw)) {
+				c.WriteXml (dw, new SamlSerializer (), null);
+			}
+			Assert.AreEqual (String.Format ("<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:Conditions xmlns:saml=\"{0}\" />", SamlConstants.Namespace), sw.ToString ());
+		}
 
-        [Test]
-        public void WriteXml2 ()
-        {
-            SamlConditions c = new SamlConditions ();
-            c.Conditions.Add (new SamlDoNotCacheCondition ());
-            StringWriter sw = new StringWriter ();
-            using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-                c.WriteXml (dw, new SamlSerializer (), null);
-            }
-            Assert.AreEqual (String.Format ("<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:Conditions xmlns:saml=\"{0}\"><saml:DoNotCacheCondition /></saml:Conditions>", SamlConstants.Namespace), sw.ToString ());
-        }
-    }
+		[Test]
+		public void WriteXml2 ()
+		{
+			SamlConditions c = new SamlConditions ();
+			c.Conditions.Add (new SamlDoNotCacheCondition ());
+			StringWriter sw = new StringWriter ();
+			using (XmlDictionaryWriter dw = CreateWriter (sw)) {
+				c.WriteXml (dw, new SamlSerializer (), null);
+			}
+			Assert.AreEqual (String.Format ("<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:Conditions xmlns:saml=\"{0}\"><saml:DoNotCacheCondition /></saml:Conditions>", SamlConstants.Namespace), sw.ToString ());
+		}
+	}
 }
 #endif

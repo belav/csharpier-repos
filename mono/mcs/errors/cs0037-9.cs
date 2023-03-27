@@ -3,6 +3,6 @@
 
 class C
 {
-    int [,] i = new int [2,null] { { 1 }, { 2 } };
+	int [,] i = new int [2,null] { { 1 }, { 2 } };
 }
  

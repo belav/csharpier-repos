@@ -34,22 +34,22 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics {
 
-    public class EntryWrittenEventArgs : EventArgs {
+	public class EntryWrittenEventArgs : EventArgs {
 
-        private EventLogEntry entry;
+		private EventLogEntry entry;
 
-        public EntryWrittenEventArgs () : this (null)
-        {
-        }
+		public EntryWrittenEventArgs () : this (null)
+		{
+		}
 
-        public EntryWrittenEventArgs (EventLogEntry entry)
-        {
-            this.entry = entry;
-        }
+		public EntryWrittenEventArgs (EventLogEntry entry)
+		{
+			this.entry = entry;
+		}
 
-        public EventLogEntry Entry {
-            get {return entry;}
-        }
-    }
+		public EventLogEntry Entry {
+			get {return entry;}
+		}
+	}
 }
 

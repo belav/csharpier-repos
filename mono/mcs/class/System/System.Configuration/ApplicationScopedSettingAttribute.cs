@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.ApplicationScopedSettingAttribute.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,10 +30,10 @@ using System;
 
 namespace System.Configuration
 {
-    [AttributeUsageAttribute(AttributeTargets.Property)]
-    public sealed class ApplicationScopedSettingAttribute : SettingAttribute
-    {
-    }
+	[AttributeUsageAttribute(AttributeTargets.Property)]
+	public sealed class ApplicationScopedSettingAttribute : SettingAttribute
+	{
+	}
 
 }
 

@@ -27,8 +27,8 @@
 
 namespace Microsoft.Build.BuildEngine {
 
-    public enum ProjectLoadSettings {
-        None,
-        IgnoreMissingImports
-    }
+	public enum ProjectLoadSettings {
+		None,
+		IgnoreMissingImports
+	}
 }

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,7 +50,7 @@ using nwind;
 
         public int GetHashCode(Customer obj)
         {
-             throw new NotImplementedException();
+ 	        throw new NotImplementedException();
         }
     }
 
@@ -83,8 +83,8 @@ using nwind;
                     Region        = null
                 },
                 new Customer {
-                    Address       = "Avda. de la Constitución 2222",
-                    City          = "México D.F.",
+                    Address       = "Avda. de la ConstituciÃ³n 2222",
+                    City          = "MÃ©xico D.F.",
                     CompanyName   = "Ana Trujillo Emparedados y helados",
                     ContactName   = "Ana Trujillo",
                     ContactTitle  = "Owner",

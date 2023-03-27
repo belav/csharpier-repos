@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,44 +28,44 @@ using System.Security;
 
 namespace System.Security.RightsManagement {
 
-    [SecurityCritical (SecurityCriticalScope.Everything)]
-    public class ContentUser
-    {
-        public ContentUser (string name, AuthenticationType authenticationType)
-        {
-            throw new NotImplementedException ();
-        }
+	[SecurityCritical (SecurityCriticalScope.Everything)]
+	public class ContentUser
+	{
+		public ContentUser (string name, AuthenticationType authenticationType)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public static ContentUser AnyoneUser {
-            get { throw new NotImplementedException (); }
-        }
+		public static ContentUser AnyoneUser {
+			get { throw new NotImplementedException (); }
+		}
 
-        public AuthenticationType AuthenticationType {
-            get { throw new NotImplementedException (); }
-        }
+		public AuthenticationType AuthenticationType {
+			get { throw new NotImplementedException (); }
+		}
 
-        public string Name {
-            get { throw new NotImplementedException (); }
-        }
+		public string Name {
+			get { throw new NotImplementedException (); }
+		}
 
-        public static ContentUser OwnerUser {
-            get { throw new NotImplementedException (); }
-        }
+		public static ContentUser OwnerUser {
+			get { throw new NotImplementedException (); }
+		}
 
-        public override bool Equals (object obj)
-        {
-            throw new NotImplementedException ();
-        }
+		public override bool Equals (object obj)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override int GetHashCode ()
-        {
-            throw new NotImplementedException ();
-        }
+		public override int GetHashCode ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public bool IsAuthenticated ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public bool IsAuthenticated ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 
 }

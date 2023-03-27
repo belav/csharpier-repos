@@ -2,7 +2,7 @@
 // Dummy.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,14 +29,14 @@
 using System;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    struct Dummy : IEquatable<Dummy> {
-        public static readonly Dummy Value = new Dummy ();
+	struct Dummy : IEquatable<Dummy> {
+		public static readonly Dummy Value = new Dummy ();
 
-        #region IEquatable<Dummy> Members
-        public bool Equals (Dummy other)
-        {
-            return true;
-        }
-        #endregion
-    }
+		#region IEquatable<Dummy> Members
+		public bool Equals (Dummy other)
+		{
+			return true;
+		}
+		#endregion
+	}
 }

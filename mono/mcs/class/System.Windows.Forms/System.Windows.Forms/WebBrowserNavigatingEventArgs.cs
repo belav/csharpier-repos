@@ -23,34 +23,34 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-    public class WebBrowserNavigatingEventArgs : CancelEventArgs
-    {
-        private Uri url;
-        private string target_frame_name;
+	public class WebBrowserNavigatingEventArgs : CancelEventArgs
+	{
+		private Uri url;
+		private string target_frame_name;
 
-        #region Public Constructors
-        public WebBrowserNavigatingEventArgs (Uri url, string targetFrameName)
-        {
-            this.url = url;
-            this.target_frame_name = targetFrameName;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public WebBrowserNavigatingEventArgs (Uri url, string targetFrameName)
+		{
+			this.url = url;
+			this.target_frame_name = targetFrameName;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public Uri Url {
-            get { return this.url; }
-        }
-        
-        public string TargetFrameName {
-            get { return this.target_frame_name; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public Uri Url {
+			get { return this.url; }
+		}
+		
+		public string TargetFrameName {
+			get { return this.target_frame_name; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

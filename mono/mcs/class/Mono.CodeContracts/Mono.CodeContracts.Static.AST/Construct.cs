@@ -2,7 +2,7 @@
 // Construct.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,18 +29,18 @@
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.AST {
-    class Construct : NaryExpression {
-        public Construct ()
-            : base (null, NodeType.Construct)
-        {
-        }
+	class Construct : NaryExpression {
+		public Construct ()
+			: base (null, NodeType.Construct)
+		{
+		}
 
-        public Construct (Expression constructor, List<Expression> arguments)
-            : base (arguments, NodeType.Construct)
-        {
-            Constructor = constructor;
-        }
+		public Construct (Expression constructor, List<Expression> arguments)
+			: base (arguments, NodeType.Construct)
+		{
+			Constructor = constructor;
+		}
 
-        public Expression Constructor { get; set; }
-    }
+		public Expression Constructor { get; set; }
+	}
 }

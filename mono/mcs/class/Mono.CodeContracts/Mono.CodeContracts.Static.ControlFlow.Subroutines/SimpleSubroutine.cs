@@ -2,7 +2,7 @@
 // SimpleSubroutine.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,30 +29,30 @@
 using Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Subroutines {
-    class SimpleSubroutine<Label> : SubroutineBase<Label> {
-        private readonly int stack_delta;
+	class SimpleSubroutine<Label> : SubroutineBase<Label> {
+		private readonly int stack_delta;
 
-        public SimpleSubroutine (int stackDelta, SubroutineFacade subroutineFacade, 
-            Label startLabel, SimpleSubroutineBuilder<Label> builder) 
-            : base (subroutineFacade, startLabel, builder)
-        {
-            this.stack_delta = stackDelta;
-            builder.BuildBlocks (startLabel, this);
-            Commit ();
-        }
+		public SimpleSubroutine (int stackDelta, SubroutineFacade subroutineFacade, 
+			Label startLabel, SimpleSubroutineBuilder<Label> builder) 
+			: base (subroutineFacade, startLabel, builder)
+		{
+			this.stack_delta = stackDelta;
+			builder.BuildBlocks (startLabel, this);
+			Commit ();
+		}
 
-        public override int StackDelta
-        {
-            get { return this.stack_delta; }
-        }
+		public override int StackDelta
+		{
+			get { return this.stack_delta; }
+		}
 
-        public override SubroutineKind Kind
-        {
-            get { return SubroutineKind.Simple; }
-        }
+		public override SubroutineKind Kind
+		{
+			get { return SubroutineKind.Simple; }
+		}
 
-        public override void Initialize ()
-        {
-        }
-    }
+		public override void Initialize ()
+		{
+		}
+	}
 }

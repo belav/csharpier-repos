@@ -2,7 +2,7 @@
 // SslStreamSecurityElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,38 +54,38 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class SslStreamSecurityElement
-         : BindingElementExtensionElement
-    {
+	public sealed class SslStreamSecurityElement
+		 : BindingElementExtensionElement
+	{
 
-        public SslStreamSecurityElement () {
-        }
-
-
-        // Properties
-
-        public override Type BindingElementType {
-            get { return typeof (SslStreamSecurityBindingElement); }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
-
-        [ConfigurationProperty ("requireClientCertificate",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = false)]
-        public bool RequireClientCertificate {
-            get { return (bool) base ["requireClientCertificate"]; }
-            set { base ["requireClientCertificate"] = value; }
-        }
+		public SslStreamSecurityElement () {
+		}
 
 
-        [MonoTODO]
-        protected internal override BindingElement CreateBindingElement () {
-            throw new NotImplementedException ();
-        }
+		// Properties
 
-    }
+		public override Type BindingElementType {
+			get { return typeof (SslStreamSecurityBindingElement); }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
+
+		[ConfigurationProperty ("requireClientCertificate",
+			 Options = ConfigurationPropertyOptions.None,
+			DefaultValue = false)]
+		public bool RequireClientCertificate {
+			get { return (bool) base ["requireClientCertificate"]; }
+			set { base ["requireClientCertificate"] = value; }
+		}
+
+
+		[MonoTODO]
+		protected internal override BindingElement CreateBindingElement () {
+			throw new NotImplementedException ();
+		}
+
+	}
 
 }

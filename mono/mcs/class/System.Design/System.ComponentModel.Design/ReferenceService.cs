@@ -36,78 +36,78 @@ using System.ComponentModel;
 namespace System.ComponentModel.Design
 {
 
-    internal class ReferenceService : IReferenceService, IDisposable
-    {
+	internal class ReferenceService : IReferenceService, IDisposable
+	{
 
-        private List<IComponent> _references;
+		private List<IComponent> _references;
 
-        internal ReferenceService (IServiceProvider provider)
-        {
-            if (provider == null)
-                throw new ArgumentNullException ("provider");
+		internal ReferenceService (IServiceProvider provider)
+		{
+			if (provider == null)
+				throw new ArgumentNullException ("provider");
 
-            _references = new List<IComponent>();
-            IComponentChangeService serv = provider.GetService (typeof (IComponentChangeService)) as IComponentChangeService;
-            if (serv != null) {
-                serv.ComponentAdded += OnComponentAdded;
-                serv.ComponentRemoved += OnComponentRemoved;
-            }
-        }
+			_references = new List<IComponent>();
+			IComponentChangeService serv = provider.GetService (typeof (IComponentChangeService)) as IComponentChangeService;
+			if (serv != null) {
+				serv.ComponentAdded += OnComponentAdded;
+				serv.ComponentRemoved += OnComponentRemoved;
+			}
+		}
 
-        private void OnComponentAdded (object sender, ComponentEventArgs args)
-        {
-            _references.Add (args.Component);
-        }
+		private void OnComponentAdded (object sender, ComponentEventArgs args)
+		{
+			_references.Add (args.Component);
+		}
 
-        private void OnComponentRemoved (object sender, ComponentEventArgs args)
-        {
-            _references.Remove (args.Component);
-        }
+		private void OnComponentRemoved (object sender, ComponentEventArgs args)
+		{
+			_references.Remove (args.Component);
+		}
 
-        public IComponent GetComponent (object reference)
-        {
-            return reference as IComponent;
-        }
+		public IComponent GetComponent (object reference)
+		{
+			return reference as IComponent;
+		}
 
-        public string GetName (object reference)
-        {
-            IComponent comp = reference as IComponent;
-            if (comp != null && comp.Site != null)
-                return comp.Site.Name;
-            return null;
-        }
+		public string GetName (object reference)
+		{
+			IComponent comp = reference as IComponent;
+			if (comp != null && comp.Site != null)
+				return comp.Site.Name;
+			return null;
+		}
 
-        public object GetReference (string name)
-        {
-            foreach (IComponent component in _references)
-                if (component.Site != null && component.Site.Name == name)
-                    return component;
-            return null;
-        }
+		public object GetReference (string name)
+		{
+			foreach (IComponent component in _references)
+				if (component.Site != null && component.Site.Name == name)
+					return component;
+			return null;
+		}
 
-        public object[] GetReferences ()
-        {
-            IComponent[] references = new IComponent[_references.Count];
-            _references.CopyTo (references);
-            return references;
-        }
+		public object[] GetReferences ()
+		{
+			IComponent[] references = new IComponent[_references.Count];
+			_references.CopyTo (references);
+			return references;
+		}
 
-        public object[] GetReferences (Type baseType)
-        {
-            List<IComponent> references = new List<IComponent>();
+		public object[] GetReferences (Type baseType)
+		{
+			List<IComponent> references = new List<IComponent>();
 
-            foreach (IComponent component in _references)
-                if (baseType.IsAssignableFrom ((component.GetType ())))
-                    references.Add (component);
+			foreach (IComponent component in _references)
+				if (baseType.IsAssignableFrom ((component.GetType ())))
+					references.Add (component);
 
-            IComponent[] refArray = new IComponent[references.Count];
-            references.CopyTo (refArray);
-            return refArray;
-        }
+			IComponent[] refArray = new IComponent[references.Count];
+			references.CopyTo (refArray);
+			return refArray;
+		}
 
-        public void Dispose ()
-        {
-            _references.Clear ();
-        }
-    }
+		public void Dispose ()
+		{
+			_references.Clear ();
+		}
+	}
 }

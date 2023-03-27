@@ -6,13 +6,13 @@ using System.Linq.Expressions;
 
 class C
 {
-    void Foo ()
-    {
-        Expression<Func<int>> e = () => InstanceArgList (__arglist (0));
-    }
-    
-    int InstanceArgList (__arglist)
-    {
-        return 54;
-    }
+	void Foo ()
+	{
+		Expression<Func<int>> e = () => InstanceArgList (__arglist (0));
+	}
+	
+	int InstanceArgList (__arglist)
+	{
+		return 54;
+	}
 }

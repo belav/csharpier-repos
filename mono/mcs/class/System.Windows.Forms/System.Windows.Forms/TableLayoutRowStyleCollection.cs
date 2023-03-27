@@ -31,45 +31,45 @@ using System.Windows.Forms.Layout;
 
 namespace System.Windows.Forms {
 
-    public class TableLayoutRowStyleCollection : TableLayoutStyleCollection {
-        
-        internal TableLayoutRowStyleCollection (IArrangedContainer panel) : base (panel, "RowStyles")
-        {
-        }
-        
-        public int Add (RowStyle rowStyle)
-        {
-            return base.Add (rowStyle);
-        }
+	public class TableLayoutRowStyleCollection : TableLayoutStyleCollection {
+		
+		internal TableLayoutRowStyleCollection (IArrangedContainer panel) : base (panel, "RowStyles")
+		{
+		}
+		
+		public int Add (RowStyle rowStyle)
+		{
+			return base.Add (rowStyle);
+		}
 
-        public bool Contains (RowStyle rowStyle)
-        {
-            return ((IList)this).Contains (rowStyle);
-        }
+		public bool Contains (RowStyle rowStyle)
+		{
+			return ((IList)this).Contains (rowStyle);
+		}
 
-        public int IndexOf (RowStyle rowStyle)
-        {
-            return ((IList)this).IndexOf (rowStyle);
-        }
+		public int IndexOf (RowStyle rowStyle)
+		{
+			return ((IList)this).IndexOf (rowStyle);
+		}
 
-        public void Insert (int index, RowStyle rowStyle)
-        {
-            ((IList)this).Insert (index, rowStyle);
-        }
+		public void Insert (int index, RowStyle rowStyle)
+		{
+			((IList)this).Insert (index, rowStyle);
+		}
 
-        public void Remove (RowStyle rowStyle)
-        {
-            ((IList)this).Remove (rowStyle);
-        }
-        
-        public new RowStyle this [int index] {
-            get {
-                return (RowStyle) base [index];
-            }
-            
-            set {
-                base [index] = value;
-            }
-        }
-    }
+		public void Remove (RowStyle rowStyle)
+		{
+			((IList)this).Remove (rowStyle);
+		}
+		
+		public new RowStyle this [int index] {
+			get {
+				return (RowStyle) base [index];
+			}
+			
+			set {
+				base [index] = value;
+			}
+		}
+	}
 }

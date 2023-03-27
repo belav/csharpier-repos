@@ -4,7 +4,7 @@
 [A (false ? new object () : null)]
 class AAttribute : System.Attribute
 {
-    public AAttribute (object value)
-    {
-    }
+	public AAttribute (object value)
+	{
+	}
 }

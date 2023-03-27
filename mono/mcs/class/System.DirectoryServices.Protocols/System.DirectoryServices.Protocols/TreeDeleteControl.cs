@@ -30,13 +30,13 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class TreeDeleteControl : DirectoryControl
-    {
-        [MonoTODO]
-        public TreeDeleteControl ()
-            : base (null, null, false, false)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+	public class TreeDeleteControl : DirectoryControl
+	{
+		[MonoTODO]
+		public TreeDeleteControl ()
+			: base (null, null, false, false)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

@@ -4,13 +4,13 @@
 
 struct S3 (string s)
 {
-    public S3 (string s)
-        : this (1)
-    {
-    }
+	public S3 (string s)
+		: this (1)
+	{
+	}
 
-    public S3 (int i)
-        : this ("")
-    {
-    }
+	public S3 (int i)
+		: this ("")
+	{
+	}
 }

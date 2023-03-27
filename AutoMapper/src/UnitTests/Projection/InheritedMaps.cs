@@ -1,4 +1,4 @@
-namespace AutoMapper.UnitTests.Projection
+﻿namespace AutoMapper.UnitTests.Projection
 {
     namespace InheritedMaps
     {

@@ -2,7 +2,7 @@
 // CustomPolicyConversionContext.cs
 //
 // Author:
-//    Carlos Alberto Cortez <calberto.cortez@gmail.com>
+//	Carlos Alberto Cortez <calberto.cortez@gmail.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -35,42 +35,42 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-    class CustomPolicyConversionContext : PolicyConversionContext
-    {
-        PolicyAssertionCollection binding_assertions = new PolicyAssertionCollection ();
-        BindingElementCollection binding_elements = new BindingElementCollection ();
+	class CustomPolicyConversionContext : PolicyConversionContext
+	{
+		PolicyAssertionCollection binding_assertions = new PolicyAssertionCollection ();
+		BindingElementCollection binding_elements = new BindingElementCollection ();
 
-        public CustomPolicyConversionContext ()
-            : base (new ServiceEndpoint (new ContractDescription ("FakeContract")))
-        {
-        }
+		public CustomPolicyConversionContext ()
+			: base (new ServiceEndpoint (new ContractDescription ("FakeContract")))
+		{
+		}
 
-        public override PolicyAssertionCollection GetBindingAssertions ()
-        {
-            return binding_assertions;
-        }
+		public override PolicyAssertionCollection GetBindingAssertions ()
+		{
+			return binding_assertions;
+		}
 
-        public override PolicyAssertionCollection GetFaultBindingAssertions (FaultDescription fault)
-        {
-            return binding_assertions;
-        }
+		public override PolicyAssertionCollection GetFaultBindingAssertions (FaultDescription fault)
+		{
+			return binding_assertions;
+		}
 
-        public override PolicyAssertionCollection GetMessageBindingAssertions (MessageDescription message)
-        {
-            return binding_assertions;
-        }
+		public override PolicyAssertionCollection GetMessageBindingAssertions (MessageDescription message)
+		{
+			return binding_assertions;
+		}
 
-        public override PolicyAssertionCollection GetOperationBindingAssertions (OperationDescription operation)
-        {
-            return binding_assertions;
-        }
+		public override PolicyAssertionCollection GetOperationBindingAssertions (OperationDescription operation)
+		{
+			return binding_assertions;
+		}
 
-        public override BindingElementCollection BindingElements {
-            get {
-                return binding_elements;
-            }
-        }
+		public override BindingElementCollection BindingElements {
+			get {
+				return binding_elements;
+			}
+		}
 
-    }
+	}
 }
 #endif

@@ -2,7 +2,7 @@
 // System.Security.AccessControl.SecurityInfos enum
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -27,12 +27,12 @@
 //
 
 namespace System.Security.AccessControl {
-    [Flags]
-    public enum SecurityInfos {
-        Owner            = 0x1,
-        Group            = 0x2,
-        DiscretionaryAcl    = 0x4,
-        SystemAcl        = 0x8,
-    }
+	[Flags]
+	public enum SecurityInfos {
+		Owner			= 0x1,
+		Group			= 0x2,
+		DiscretionaryAcl	= 0x4,
+		SystemAcl		= 0x8,
+	}
 }
 

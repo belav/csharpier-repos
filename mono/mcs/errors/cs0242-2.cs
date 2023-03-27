@@ -4,9 +4,9 @@
 
 unsafe class C
 {
-    public static void Main ()
+	public static void Main ()
     {
-        void* v = null;
-        int b = *v is string;
+		void* v = null;
+		int b = *v is string;
     }
 }

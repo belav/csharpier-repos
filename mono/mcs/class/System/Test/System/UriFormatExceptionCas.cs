@@ -2,7 +2,7 @@
 // UriFormatExceptionCas.cs - CAS unit tests for System.UriFormatException
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,81 +36,81 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class UriFormatExceptionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class UriFormatExceptionCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-        public void DenySerializationFormatter_GetObjectData ()
-        {
-            StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-            UriFormatException ufe = new UriFormatException ();
-            ufe.GetObjectData (null, sc);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+		public void DenySerializationFormatter_GetObjectData ()
+		{
+			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
+			UriFormatException ufe = new UriFormatException ();
+			ufe.GetObjectData (null, sc);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void DenyUnrestricted ()
-        {
-            // can we call everything without a SecurityException ?
-            UriFormatException ufe = new UriFormatException ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void DenyUnrestricted ()
+		{
+			// can we call everything without a SecurityException ?
+			UriFormatException ufe = new UriFormatException ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (UriFormatException).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (UriFormatException).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void LinkDemand_GetObjectData_Deny_DenySerializationFormatter ()
-        {
-            StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-            UriFormatException ufe = new UriFormatException ();
-            MethodInfo mi = ufe.GetType ().GetMethod ("GetObjectData");
-            Assert.IsNotNull (mi, "GetObjectData");
-            Assert.IsNotNull (mi.Invoke (ufe, new object[2] { null, sc }), "invoke");
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void LinkDemand_GetObjectData_Deny_DenySerializationFormatter ()
+		{
+			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
+			UriFormatException ufe = new UriFormatException ();
+			MethodInfo mi = ufe.GetType ().GetMethod ("GetObjectData");
+			Assert.IsNotNull (mi, "GetObjectData");
+			Assert.IsNotNull (mi.Invoke (ufe, new object[2] { null, sc }), "invoke");
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-        [ExpectedException (typeof (TargetInvocationException))]
-        // note: the inner exception is the ArgumentNullException
-        public void LinkDemand_GetObjectData_PermitOnly_DenySerializationFormatter ()
-        {
-            StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-            UriFormatException ufe = new UriFormatException ();
-            MethodInfo mi = ufe.GetType ().GetMethod ("GetObjectData");
-            Assert.IsNotNull (mi, "GetObjectData");
-            Assert.IsNotNull (mi.Invoke (ufe, new object[2] { null, sc }), "invoke");
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
+		[ExpectedException (typeof (TargetInvocationException))]
+		// note: the inner exception is the ArgumentNullException
+		public void LinkDemand_GetObjectData_PermitOnly_DenySerializationFormatter ()
+		{
+			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
+			UriFormatException ufe = new UriFormatException ();
+			MethodInfo mi = ufe.GetType ().GetMethod ("GetObjectData");
+			Assert.IsNotNull (mi, "GetObjectData");
+			Assert.IsNotNull (mi.Invoke (ufe, new object[2] { null, sc }), "invoke");
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-        [ExpectedException (typeof (TargetInvocationException))]
-        // note: the inner exception is the ArgumentNullException
-        public void LinkDemand_ISerializableGetObjectData_Deny_DenySerializationFormatter ()
-        {
-            StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-            UriFormatException ufe = new UriFormatException ();
-            MethodInfo mi = ufe.GetType ().GetMethod ("System.Runtime.Serialization.ISerializable.GetObjectData",
-                BindingFlags.NonPublic | BindingFlags.Instance);
-            Assert.IsNotNull (mi, "ISerializable.GetObjectData");
-            Assert.IsNotNull (mi.Invoke (ufe, new object[2] { null, sc }), "invoke");
-        }
-    }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+		[ExpectedException (typeof (TargetInvocationException))]
+		// note: the inner exception is the ArgumentNullException
+		public void LinkDemand_ISerializableGetObjectData_Deny_DenySerializationFormatter ()
+		{
+			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
+			UriFormatException ufe = new UriFormatException ();
+			MethodInfo mi = ufe.GetType ().GetMethod ("System.Runtime.Serialization.ISerializable.GetObjectData",
+				BindingFlags.NonPublic | BindingFlags.Instance);
+			Assert.IsNotNull (mi, "ISerializable.GetObjectData");
+			Assert.IsNotNull (mi.Invoke (ufe, new object[2] { null, sc }), "invoke");
+		}
+	}
 }

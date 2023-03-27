@@ -3,11 +3,11 @@
 // Compiler options: -warnaserror -warn:4
 
 class X {
-    string s;
+	string s;
 
-    string Value {
-        get {
-            return s;
-        }
-    }
+	string Value {
+		get {
+			return s;
+		}
+	}
 }

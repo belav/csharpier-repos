@@ -2,7 +2,7 @@
 // System.Management.ManagementEventWatcher
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -32,94 +32,94 @@ using System.ComponentModel;
 
 namespace System.Management
 {
-    [ToolboxItem (true)]
-    public class ManagementEventWatcher : Component
-    {
-        [MonoTODO]
-        public ManagementEventWatcher ()
-        {
-        }
+	[ToolboxItem (true)]
+	public class ManagementEventWatcher : Component
+	{
+		[MonoTODO]
+		public ManagementEventWatcher ()
+		{
+		}
 
-        [MonoTODO]
-        public ManagementEventWatcher (EventQuery query)
-            : this (null, query)
-        {
-        }
+		[MonoTODO]
+		public ManagementEventWatcher (EventQuery query)
+			: this (null, query)
+		{
+		}
 
-        [MonoTODO]
-        public ManagementEventWatcher (string query)
-            : this (new EventQuery (query))
-        {
-        }
+		[MonoTODO]
+		public ManagementEventWatcher (string query)
+			: this (new EventQuery (query))
+		{
+		}
 
-        [MonoTODO]
-        public ManagementEventWatcher (string scope, string query)
-            : this (scope, query, new EventWatcherOptions ())
-        {
-        }
+		[MonoTODO]
+		public ManagementEventWatcher (string scope, string query)
+			: this (scope, query, new EventWatcherOptions ())
+		{
+		}
 
-        [MonoTODO]
-        public ManagementEventWatcher (ManagementScope scope, EventQuery query)
-            : this (scope, query, new EventWatcherOptions ())
-        {
-        }
+		[MonoTODO]
+		public ManagementEventWatcher (ManagementScope scope, EventQuery query)
+			: this (scope, query, new EventWatcherOptions ())
+		{
+		}
 
-        [MonoTODO]
-        public ManagementEventWatcher (string scope, string query, EventWatcherOptions options)
-            : this (new ManagementScope (scope), new EventQuery (query), options)
-        {
-        }
+		[MonoTODO]
+		public ManagementEventWatcher (string scope, string query, EventWatcherOptions options)
+			: this (new ManagementScope (scope), new EventQuery (query), options)
+		{
+		}
 
-        [MonoTODO]
-        public ManagementEventWatcher (ManagementScope scope, EventQuery query, EventWatcherOptions options)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public ManagementEventWatcher (ManagementScope scope, EventQuery query, EventWatcherOptions options)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        ~ManagementEventWatcher ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		~ManagementEventWatcher ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public event EventArrivedEventHandler EventArrived;
-        public event StoppedEventHandler Stopped;
+		public event EventArrivedEventHandler EventArrived;
+		public event StoppedEventHandler Stopped;
 
-        [MonoTODO]
-        public EventWatcherOptions Options {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public EventWatcherOptions Options {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public EventQuery Query {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public EventQuery Query {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public ManagementScope Scope {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public ManagementScope Scope {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public void Start ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void Start ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void Stop ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void Stop ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public ManagementBaseObject WaitForNextEvent ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public ManagementBaseObject WaitForNextEvent ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

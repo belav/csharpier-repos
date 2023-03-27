@@ -5,21 +5,21 @@ delegate int Foo ();
 
 class X
 {
-    public static void Main ()
-    {
-        Test ("Hello World", 8);
-    }
+	public static void Main ()
+	{
+		Test ("Hello World", 8);
+	}
 
-    public static void Test<R> (R r, int a)
-    {
-        for (int b = a; b > 0; b--) {
-            R s = r;
-            Foo foo = delegate {
-                Console.WriteLine (b);
-                Console.WriteLine (s);
-                return 3;
-            };
-            a -= foo ();
-        }
-    }
+	public static void Test<R> (R r, int a)
+	{
+		for (int b = a; b > 0; b--) {
+			R s = r;
+			Foo foo = delegate {
+				Console.WriteLine (b);
+				Console.WriteLine (s);
+				return 3;
+			};
+			a -= foo ();
+		}
+	}
 }

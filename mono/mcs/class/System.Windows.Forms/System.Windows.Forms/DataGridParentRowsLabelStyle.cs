@@ -20,16 +20,16 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public enum DataGridParentRowsLabelStyle {
-        None        = 0,
-        TableName    = 1,
-        ColumnName    = 2,
-        Both        = 3
-    }
+	public enum DataGridParentRowsLabelStyle {
+		None		= 0,
+		TableName	= 1,
+		ColumnName	= 2,
+		Both		= 3
+	}
 }

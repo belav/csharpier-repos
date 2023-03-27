@@ -3,10 +3,10 @@
 
 class C
 {
-    static void Main ()
-    {
-        var x = new (long, int) () {
-            Item1 = 1
-        };
-    }
+	static void Main ()
+	{
+		var x = new (long, int) () {
+			Item1 = 1
+		};
+	}
 }

@@ -11,8 +11,8 @@ namespace System.Runtime.InteropServices.ComTypes {
     /// <devdoc>
     /// </devdoc>
     public enum DATADIR {
-        DATADIR_GET    = 1,
-        DATADIR_SET    = 2
+        DATADIR_GET	= 1,
+        DATADIR_SET	= 2
     }
 }
 

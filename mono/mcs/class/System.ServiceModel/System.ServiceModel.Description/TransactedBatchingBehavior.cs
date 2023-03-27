@@ -2,7 +2,7 @@
 // TransactedBatchingBehavior.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,42 +33,42 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-    [MonoTODO]
-    public class TransactedBatchingBehavior : IEndpointBehavior
-    {
-        int max_batch_size;
+	[MonoTODO]
+	public class TransactedBatchingBehavior : IEndpointBehavior
+	{
+		int max_batch_size;
 
-        public TransactedBatchingBehavior (int maxBatchSize)
-        {
-            max_batch_size = maxBatchSize;
-        }
+		public TransactedBatchingBehavior (int maxBatchSize)
+		{
+			max_batch_size = maxBatchSize;
+		}
 
-        public int MaxBatchSize {
-            get { return max_batch_size; }
-            set { max_batch_size = value; }
-        }
+		public int MaxBatchSize {
+			get { return max_batch_size; }
+			set { max_batch_size = value; }
+		}
 
-        void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
-            BindingParameterCollection parameters)
-        {
-            throw new NotImplementedException ();
-        }
+		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
+			BindingParameterCollection parameters)
+		{
+			throw new NotImplementedException ();
+		}
 
-        void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint serviceEndpoint,
-            EndpointDispatcher dispatcher)
-        {
-            throw new NotImplementedException ();
-        }
+		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint serviceEndpoint,
+			EndpointDispatcher dispatcher)
+		{
+			throw new NotImplementedException ();
+		}
 
-        void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint serviceEndpoint,
-            ClientRuntime behavior)
-        {
-            throw new NotImplementedException ();
-        }
+		void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint serviceEndpoint,
+			ClientRuntime behavior)
+		{
+			throw new NotImplementedException ();
+		}
 
-        void IEndpointBehavior.Validate (ServiceEndpoint serviceEndpoint)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		void IEndpointBehavior.Validate (ServiceEndpoint serviceEndpoint)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

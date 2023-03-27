@@ -2,7 +2,7 @@
 // ClientViaElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,30 +54,30 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class ClientViaElement
-         : BehaviorExtensionElement
-    {
-        // Properties
+	public sealed class ClientViaElement
+		 : BehaviorExtensionElement
+	{
+		// Properties
 
-        public override Type BehaviorType {
-            get { return typeof (ClientViaBehavior); }
-        }
+		public override Type BehaviorType {
+			get { return typeof (ClientViaBehavior); }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
 
-        [ConfigurationProperty ("viaUri",
-             Options = ConfigurationPropertyOptions.None)]
-        public Uri ViaUri {
-            get { return (Uri) base ["viaUri"]; }
-            set { base ["viaUri"] = value; }
-        }
+		[ConfigurationProperty ("viaUri",
+			 Options = ConfigurationPropertyOptions.None)]
+		public Uri ViaUri {
+			get { return (Uri) base ["viaUri"]; }
+			set { base ["viaUri"] = value; }
+		}
 
-        protected internal override object CreateBehavior () {
-            return new ClientViaBehavior (ViaUri);
-        }
+		protected internal override object CreateBehavior () {
+			return new ClientViaBehavior (ViaUri);
+		}
 
-    }
+	}
 
 }

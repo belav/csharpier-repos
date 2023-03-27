@@ -4,7 +4,7 @@
 
 class S (int arg)
 {
-    public S (long l)
-    {
-    }
+	public S (long l)
+	{
+	}
 }

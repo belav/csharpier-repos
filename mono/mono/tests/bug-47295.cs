@@ -64,8 +64,8 @@ HideBySig,
  
         mb.SetImplementationFlags( MethodImplAttributes.Runtime | 
 MethodImplAttributes.Managed ); 
-        ParameterBuilder pb = mb.DefineParameter (1, ParameterAttributes.HasFieldMarshal, "foo");
-        pb.SetMarshal (UnmanagedMarshal.DefineUnmanagedMarshal (UnmanagedType.I2));
+		ParameterBuilder pb = mb.DefineParameter (1, ParameterAttributes.HasFieldMarshal, "foo");
+		pb.SetMarshal (UnmanagedMarshal.DefineUnmanagedMarshal (UnmanagedType.I2));
  
         // Create an instance of the delegate type and invoke it -- just to test 
  

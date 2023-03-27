@@ -28,16 +28,16 @@
 
 namespace Mono.Cecil {
 
-    internal interface IMethodSignature {
+	internal interface IMethodSignature {
 
-        bool HasParameters { get; }
-        bool HasThis { get; set; }
-        bool ExplicitThis { get; set; }
-        MethodCallingConvention CallingConvention { get; set; }
+		bool HasParameters { get; }
+		bool HasThis { get; set; }
+		bool ExplicitThis { get; set; }
+		MethodCallingConvention CallingConvention { get; set; }
 
-        ParameterDefinitionCollection Parameters { get; }
-        MethodReturnType ReturnType { get; }
+		ParameterDefinitionCollection Parameters { get; }
+		MethodReturnType ReturnType { get; }
 
-        int GetSentinel ();
-    }
+		int GetSentinel ();
+	}
 }

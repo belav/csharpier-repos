@@ -6,10 +6,10 @@ using System;
 
 namespace TopNS
 {
-    /// more invalid comment on namespace; inside namespace
-    namespace ChildNS {
-        class Test {
-        }
-    }
+	/// more invalid comment on namespace; inside namespace
+	namespace ChildNS {
+		class Test {
+		}
+	}
 
 }

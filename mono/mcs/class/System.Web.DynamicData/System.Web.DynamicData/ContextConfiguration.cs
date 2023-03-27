@@ -2,7 +2,7 @@
 // ContextConfiguration.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //      Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2008-2009 Novell Inc. http://novell.com
@@ -42,16 +42,16 @@ using System.Web.DynamicData.ModelProviders;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class ContextConfiguration
-    {
-        public ContextConfiguration ()
-        {
-            MetadataProviderFactory = (Type t) => new AssociatedMetadataTypeTypeDescriptionProvider (t);
-        }
-        
-        public Func<Type, TypeDescriptionProvider> MetadataProviderFactory { get; set; }
-        public bool ScaffoldAllTables { get; set; }
-    }
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class ContextConfiguration
+	{
+		public ContextConfiguration ()
+		{
+			MetadataProviderFactory = (Type t) => new AssociatedMetadataTypeTypeDescriptionProvider (t);
+		}
+		
+		public Func<Type, TypeDescriptionProvider> MetadataProviderFactory { get; set; }
+		public bool ScaffoldAllTables { get; set; }
+	}
 }

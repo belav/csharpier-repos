@@ -1,9 +1,9 @@
 //
 // HtmlTextAreaCas.cs 
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlTextArea
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlTextArea
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,32 +37,32 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlTextAreaCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlTextAreaCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HtmlTextAreaTest unit = new HtmlTextAreaTest ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.CleanProperties ();
-            unit.Name ();
-            unit.Value ();
-            unit.RenderAttributes ();
-            unit.Render ();
-            unit.AddParsedSubObject_LiteralControl ();
-            unit.AddParsedSubObject_DataBoundLiteralControl ();
-            unit.IPostBackDataHandler_RaisePostBackEvent ();
-            unit.IPostBackDataHandler_LoadPostData ();
-            unit.RaisePostBackEvent ();
-            unit.LoadPostData ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HtmlTextAreaTest unit = new HtmlTextAreaTest ();
+			unit.DefaultProperties ();
+			unit.NullProperties ();
+			unit.CleanProperties ();
+			unit.Name ();
+			unit.Value ();
+			unit.RenderAttributes ();
+			unit.Render ();
+			unit.AddParsedSubObject_LiteralControl ();
+			unit.AddParsedSubObject_DataBoundLiteralControl ();
+			unit.IPostBackDataHandler_RaisePostBackEvent ();
+			unit.IPostBackDataHandler_LoadPostData ();
+			unit.RaisePostBackEvent ();
+			unit.LoadPostData ();
+		}
 
-        public override Type Type {
-            get { return typeof (HtmlTextArea); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlTextArea); }
+		}
+	}
 }

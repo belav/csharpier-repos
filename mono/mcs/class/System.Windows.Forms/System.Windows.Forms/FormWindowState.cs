@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Ravindra (rkumar@novell.com)
+//	Ravindra (rkumar@novell.com)
 //
 
 
@@ -28,11 +28,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-    [ComVisible (true)]
-    public enum FormWindowState
-    {
-        Normal = 0,
-        Minimized = 1,
-        Maximized = 2
-    }
+	[ComVisible (true)]
+	public enum FormWindowState
+	{
+		Normal = 0,
+		Minimized = 1,
+		Maximized = 2
+	}
 }

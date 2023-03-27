@@ -2,7 +2,7 @@
 // System.Net.Configuration.SmtpSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc. (http://www.novell.com)
 //
@@ -30,12 +30,12 @@
 
 namespace System.Net.Mail {
 
-    public enum SmtpDeliveryMethod
-    {
-        Network = 0,
-        SpecifiedPickupDirectory = 1,
-        PickupDirectoryFromIis = 2
-    }
+	public enum SmtpDeliveryMethod
+	{
+		Network = 0,
+		SpecifiedPickupDirectory = 1,
+		PickupDirectoryFromIis = 2
+	}
 
 }
 

@@ -2,7 +2,7 @@
 // X509InitiatorCertificateServiceElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,54 +54,54 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public sealed partial class X509InitiatorCertificateServiceElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty authentication;
-        static ConfigurationProperty certificate;
+	[MonoTODO]
+	public sealed partial class X509InitiatorCertificateServiceElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty authentication;
+		static ConfigurationProperty certificate;
 
-        static X509InitiatorCertificateServiceElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            authentication = new ConfigurationProperty ("authentication",
-                typeof (X509ClientCertificateAuthenticationElement), null, null/* FIXME: get converter for X509ClientCertificateAuthenticationElement*/, null,
-                ConfigurationPropertyOptions.None);
+		static X509InitiatorCertificateServiceElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			authentication = new ConfigurationProperty ("authentication",
+				typeof (X509ClientCertificateAuthenticationElement), null, null/* FIXME: get converter for X509ClientCertificateAuthenticationElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            certificate = new ConfigurationProperty ("certificate",
-                typeof (X509ClientCertificateCredentialsElement), null, null/* FIXME: get converter for X509ClientCertificateCredentialsElement*/, null,
-                ConfigurationPropertyOptions.None);
+			certificate = new ConfigurationProperty ("certificate",
+				typeof (X509ClientCertificateCredentialsElement), null, null/* FIXME: get converter for X509ClientCertificateCredentialsElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (authentication);
-            properties.Add (certificate);
-        }
+			properties.Add (authentication);
+			properties.Add (certificate);
+		}
 
-        public X509InitiatorCertificateServiceElement ()
-        {
-        }
-
-
-        // Properties
-
-        [ConfigurationProperty ("authentication",
-             Options = ConfigurationPropertyOptions.None)]
-        public X509ClientCertificateAuthenticationElement Authentication {
-            get { return (X509ClientCertificateAuthenticationElement) base [authentication]; }
-        }
-
-        [ConfigurationProperty ("certificate",
-             Options = ConfigurationPropertyOptions.None)]
-        public X509ClientCertificateCredentialsElement Certificate {
-            get { return (X509ClientCertificateCredentialsElement) base [certificate]; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		public X509InitiatorCertificateServiceElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+		[ConfigurationProperty ("authentication",
+			 Options = ConfigurationPropertyOptions.None)]
+		public X509ClientCertificateAuthenticationElement Authentication {
+			get { return (X509ClientCertificateAuthenticationElement) base [authentication]; }
+		}
+
+		[ConfigurationProperty ("certificate",
+			 Options = ConfigurationPropertyOptions.None)]
+		public X509ClientCertificateCredentialsElement Certificate {
+			get { return (X509ClientCertificateCredentialsElement) base [certificate]; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+
+	}
 
 }

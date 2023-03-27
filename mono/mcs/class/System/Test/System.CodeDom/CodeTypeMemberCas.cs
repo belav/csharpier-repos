@@ -1,9 +1,9 @@
 //
 // CodeTypeMemberCas.cs 
-//    - CAS unit tests for System.CodeDom.CodeTypeMember
+//	- CAS unit tests for System.CodeDom.CodeTypeMember
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,42 +37,42 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeTypeMemberCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeTypeMemberCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeTypeMember ctm = new CodeTypeMember ();
-            Assert.AreEqual (MemberAttributes.Private | MemberAttributes.Final, ctm.Attributes, "Attributes");
-            ctm.Attributes = MemberAttributes.Public;
-            Assert.AreEqual (0, ctm.Comments.Count, "Comments");
-            Assert.AreEqual (0, ctm.CustomAttributes.Count, "CustomAttributes");
-            ctm.CustomAttributes = new CodeAttributeDeclarationCollection ();
-            Assert.IsNull (ctm.LinePragma, "LinePragma");
-            ctm.LinePragma = new CodeLinePragma (String.Empty, Int32.MaxValue);
-            Assert.AreEqual (String.Empty, ctm.Name, "Name");
-            ctm.Name = "mono";
-            Assert.AreEqual (0, ctm.StartDirectives.Count, "StartDirectives");
-            Assert.AreEqual (0, ctm.EndDirectives.Count, "EndDirectives");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeTypeMember ctm = new CodeTypeMember ();
+			Assert.AreEqual (MemberAttributes.Private | MemberAttributes.Final, ctm.Attributes, "Attributes");
+			ctm.Attributes = MemberAttributes.Public;
+			Assert.AreEqual (0, ctm.Comments.Count, "Comments");
+			Assert.AreEqual (0, ctm.CustomAttributes.Count, "CustomAttributes");
+			ctm.CustomAttributes = new CodeAttributeDeclarationCollection ();
+			Assert.IsNull (ctm.LinePragma, "LinePragma");
+			ctm.LinePragma = new CodeLinePragma (String.Empty, Int32.MaxValue);
+			Assert.AreEqual (String.Empty, ctm.Name, "Name");
+			ctm.Name = "mono";
+			Assert.AreEqual (0, ctm.StartDirectives.Count, "StartDirectives");
+			Assert.AreEqual (0, ctm.EndDirectives.Count, "EndDirectives");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeTypeMember).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeTypeMember).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlInputControl.cs
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -31,65 +31,65 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls
 {
-    // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [ControlBuilder (typeof (HtmlEmptyTagControlBuilder))]
-    public abstract class HtmlInputControl : HtmlControl
-    {
-        protected HtmlInputControl (string type)
-            : base ("input")
-        {
-            if (type == null)
-                type = String.Empty;
-            Attributes ["type"] = type;
-        }
+	// CAS
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[ControlBuilder (typeof (HtmlEmptyTagControlBuilder))]
+	public abstract class HtmlInputControl : HtmlControl
+	{
+		protected HtmlInputControl (string type)
+			: base ("input")
+		{
+			if (type == null)
+				type = String.Empty;
+			Attributes ["type"] = type;
+		}
 
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [WebSysDescription("")]
-        [WebCategory("Behavior")]
-        public virtual string Name {
-            get { return UniqueID; }
-            set { ; }
-        }
+		[DefaultValue ("")]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[WebSysDescription("")]
+		[WebCategory("Behavior")]
+		public virtual string Name {
+			get { return UniqueID; }
+			set { ; }
+		}
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [WebSysDescription("")]
-        [WebCategory("Behavior")]
-        public string Type {
-            get { return Attributes ["type"]; }
-        }
+		[DefaultValue ("")]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[WebSysDescription("")]
+		[WebCategory("Behavior")]
+		public string Type {
+			get { return Attributes ["type"]; }
+		}
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [WebSysDescription("")]
-        [WebCategory("Appearance")]
-        public virtual string Value {
-            get {
-                string s = Attributes ["value"];
-                return (s == null) ? String.Empty : s;
-            }
-            set {
-                if (value == null)
-                    Attributes.Remove ("value");
-                else
-                    Attributes ["value"] = value;
-            }
-        }
+		[DefaultValue ("")]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		[WebSysDescription("")]
+		[WebCategory("Appearance")]
+		public virtual string Value {
+			get {
+				string s = Attributes ["value"];
+				return (s == null) ? String.Empty : s;
+			}
+			set {
+				if (value == null)
+					Attributes.Remove ("value");
+				else
+					Attributes ["value"] = value;
+			}
+		}
 
-        protected override void RenderAttributes (HtmlTextWriter writer)
-        {
-            if (Attributes ["name"] == null) {
-                writer.WriteAttribute ("name", Name);
-            }
-            base.RenderAttributes (writer);
-            writer.Write (" /");
-        }
-    }
+		protected override void RenderAttributes (HtmlTextWriter writer)
+		{
+			if (Attributes ["name"] == null) {
+				writer.WriteAttribute ("name", Name);
+			}
+			base.RenderAttributes (writer);
+			writer.Write (" /");
+		}
+	}
 }
 
 

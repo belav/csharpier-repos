@@ -67,14 +67,14 @@ namespace CseTest
             //int v;
 
 #if LOOP         
-            do {
+			do {
             do {
 #endif
 #if TRY
-            try{
+			try{
 #endif
 #if LOOP  
-                    do {
+					do {
 #endif
             v1 = ((s.a + s.b) + s.c);
             v2 = (s.c + (s.a + s.b));
@@ -94,10 +94,10 @@ namespace CseTest
             v16 = (s.b + s.c);
             v17 = (s.c + (s.a + s.b));
 #if LOOP                  
-                    } while (v17 == 0);
+					} while (v17 == 0);
 #endif
 #if TRY
-            } finally {
+			} finally {
 #endif
 
             v18 = ((s.a + s.b) + s.c);
@@ -121,7 +121,7 @@ namespace CseTest
             }
 
 #if TRY
-                    try {
+					try {
 #endif
             if (v4 != 231)
             {
@@ -141,8 +141,8 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY                  
-                    } finally {
-                    }
+					} finally {
+					}
 #endif
             if (v7 != 348)
             {
@@ -216,12 +216,12 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-            } 
+			} 
 #endif
 
 #if LOOP               
-                } while (v18 == 0);
-            } while (v17 == 0);
+				} while (v18 == 0);
+			} while (v17 == 0);
 #endif
 
             Console.WriteLine(ret);

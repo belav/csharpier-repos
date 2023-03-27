@@ -6,12 +6,12 @@ using System.ComponentModel;
 
 class Program
 {
-    public static void Main (string[] args)
-    {
-        MyClass<int> list = new MyClass<int>();
+	public static void Main (string[] args)
+	{
+		MyClass<int> list = new MyClass<int>();
 
-        list.ListChanged += new ListChangedEventHandler (list_ListChanged);
-    }
+		list.ListChanged += new ListChangedEventHandler (list_ListChanged);
+	}
 
-    static void list_ListChanged (object sender, ListChangedEventArgs e) { }
+	static void list_ListChanged (object sender, ListChangedEventArgs e) { }
 }

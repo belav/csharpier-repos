@@ -28,16 +28,16 @@
 
 namespace Mono.Cecil.Signatures {
 
-    using Mono.Cecil.Metadata;
+	using Mono.Cecil.Metadata;
 
-    internal sealed class ARRAY : SigType {
+	internal sealed class ARRAY : SigType {
 
-        public CustomMod [] CustomMods;
-        public SigType Type;
-        public ArrayShape Shape;
+		public CustomMod [] CustomMods;
+		public SigType Type;
+		public ArrayShape Shape;
 
-        public ARRAY () : base (ElementType.Array)
-        {
-        }
-    }
+		public ARRAY () : base (ElementType.Array)
+		{
+		}
+	}
 }

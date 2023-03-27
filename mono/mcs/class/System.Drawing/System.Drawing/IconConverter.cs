@@ -38,56 +38,56 @@ using System.Globalization;
 using System.IO;
 
 namespace System.Drawing {
-    /// <summary>
-    /// Summary description for IconConverter.
-    /// </summary>
-    public class IconConverter : ExpandableObjectConverter
-    {
-        public IconConverter()
-        {
-        }
+	/// <summary>
+	/// Summary description for IconConverter.
+	/// </summary>
+	public class IconConverter : ExpandableObjectConverter
+	{
+		public IconConverter()
+		{
+		}
 
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-        {
-            if (sourceType == typeof (System.Byte []))
-                return true;
-            else
-                return false;
-        }
+		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+		{
+			if (sourceType == typeof (System.Byte []))
+				return true;
+			else
+				return false;
+		}
 
-        public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
-        {
-            if ((destinationType == typeof (System.Byte [])) || (destinationType == typeof (System.String)))
-                return true;
-            else
-                return false;
-        }
-        
-        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
-            byte [] bytes = value as byte [];
-            if (bytes == null)
-                return base.ConvertFrom (context, culture, value);
-            
-            MemoryStream ms = new MemoryStream (bytes);
-            
-            return new Icon (ms);                
-        }
+		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
+		{
+			if ((destinationType == typeof (System.Byte [])) || (destinationType == typeof (System.String)))
+				return true;
+			else
+				return false;
+		}
+		
+		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+		{
+			byte [] bytes = value as byte [];
+			if (bytes == null)
+				return base.ConvertFrom (context, culture, value);
+			
+			MemoryStream ms = new MemoryStream (bytes);
+			
+			return new Icon (ms);				
+		}
 
-        public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            if ((value is Icon) && (destinationType == typeof (string)))
-                return value.ToString ();
-            else if (value == null && destinationType == typeof (string))
-                return "(none)";
-            else if (CanConvertTo (null, destinationType)) {
-                //came here means destType is byte array ;
-                using (MemoryStream ms = new MemoryStream ()) {
-                    ((Icon) value).Save (ms);
-                    return ms.ToArray ();
-                }
-            }else
-                return new NotSupportedException ("IconConverter can not convert from " + value.GetType ());                
-        }
-    }
+		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+		{
+			if ((value is Icon) && (destinationType == typeof (string)))
+				return value.ToString ();
+			else if (value == null && destinationType == typeof (string))
+				return "(none)";
+			else if (CanConvertTo (null, destinationType)) {
+				//came here means destType is byte array ;
+				using (MemoryStream ms = new MemoryStream ()) {
+					((Icon) value).Save (ms);
+					return ms.ToArray ();
+				}
+			}else
+				return new NotSupportedException ("IconConverter can not convert from " + value.GetType ());				
+		}
+	}
 }

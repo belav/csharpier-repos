@@ -24,60 +24,60 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace System.Web.Configuration.nBrowser
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
+	using System;
+	using System.Collections.Generic;
+	using System.Text;
 
-    internal class Result : System.Web.Configuration.CapabilitiesResult
-    {
-        private System.Collections.Generic.Dictionary<Type, Type> AdapterTypeMap;
-        private System.Collections.Specialized.StringCollection Track;
-        internal Type MarkupTextWriter;
+	internal class Result : System.Web.Configuration.CapabilitiesResult
+	{
+		private System.Collections.Generic.Dictionary<Type, Type> AdapterTypeMap;
+		private System.Collections.Specialized.StringCollection Track;
+		internal Type MarkupTextWriter;
 
-        internal Result(System.Collections.IDictionary items)
-            : base(items)
-        {
-            AdapterTypeMap = new System.Collections.Generic.Dictionary<Type, Type>();
-            Track = new System.Collections.Specialized.StringCollection();
-            MarkupTextWriter = typeof (System.Web.UI.HtmlTextWriter);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="track"></param>
-        internal void AddTrack(string track)
-        {
-            Track.Add(track);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="controlTypeName"></param>
-        /// <param name="adapterTypeName"></param>
-        internal void AddAdapter(Type controlType, Type adapterType)
-        {
-            AdapterTypeMap[controlType] = adapterType;
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public System.Collections.Specialized.StringCollection Tracks
-        {
-            get
-            {
-                return Track;
-            }
-        }
-        
-        internal override Type GetTagWriter ()
-        {
-                return MarkupTextWriter;            
-        }
+		internal Result(System.Collections.IDictionary items)
+			: base(items)
+		{
+			AdapterTypeMap = new System.Collections.Generic.Dictionary<Type, Type>();
+			Track = new System.Collections.Specialized.StringCollection();
+			MarkupTextWriter = typeof (System.Web.UI.HtmlTextWriter);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="track"></param>
+		internal void AddTrack(string track)
+		{
+			Track.Add(track);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="controlTypeName"></param>
+		/// <param name="adapterTypeName"></param>
+		internal void AddAdapter(Type controlType, Type adapterType)
+		{
+			AdapterTypeMap[controlType] = adapterType;
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		public System.Collections.Specialized.StringCollection Tracks
+		{
+			get
+			{
+				return Track;
+			}
+		}
+		
+		internal override Type GetTagWriter ()
+		{
+				return MarkupTextWriter;			
+		}
 
-        internal override System.Collections.IDictionary GetAdapters ()
-        {
-                return AdapterTypeMap;            
-        }
-    }
+		internal override System.Collections.IDictionary GetAdapters ()
+		{
+				return AdapterTypeMap;			
+		}
+	}
 }

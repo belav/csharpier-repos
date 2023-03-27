@@ -2,10 +2,10 @@
 // System.Security.Permissions.StrongNameIdentityPermissionAttribute.cs
 //
 // Authors:
-//    Duncan Mak <duncan@ximian.com>
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Duncan Mak <duncan@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
-// (C) 2002 Ximian, Inc.            http://www.ximian.com
+// (C) 2002 Ximian, Inc.			http://www.ximian.com
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -33,64 +33,64 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-    [ComVisible (true)]
-    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-             AttributeTargets.Struct | AttributeTargets.Constructor |
-             AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
-    [Serializable]
-    public sealed class StrongNameIdentityPermissionAttribute : CodeAccessSecurityAttribute    {
+	[ComVisible (true)]
+	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
+			 AttributeTargets.Struct | AttributeTargets.Constructor |
+			 AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
+	[Serializable]
+	public sealed class StrongNameIdentityPermissionAttribute : CodeAccessSecurityAttribute	{
 
-        // Fields
-        private string name;
-        private string key;
-        private string version;
-        
-        // Constructor
-        public StrongNameIdentityPermissionAttribute (SecurityAction action) 
-            : base (action)
-        {
-        }
-        
-        // Properties
-        public string Name {
-            get { return name; }
-            set { name = value; }
-        }
+		// Fields
+		private string name;
+		private string key;
+		private string version;
+		
+		// Constructor
+		public StrongNameIdentityPermissionAttribute (SecurityAction action) 
+			: base (action)
+		{
+		}
+		
+		// Properties
+		public string Name {
+			get { return name; }
+			set { name = value; }
+		}
 
-        public string PublicKey {
-            get { return key; }
-            set { key = value; }
-        }
+		public string PublicKey {
+			get { return key; }
+			set { key = value; }
+		}
 
-        public string Version {
-            get { return version; }
-            set { version = value; }
-        }
-             
-        // Methods
-        public override IPermission CreatePermission ()
-        {
+		public string Version {
+			get { return version; }
+			set { version = value; }
+		}
+			 
+		// Methods
+		public override IPermission CreatePermission ()
+		{
 #if MOBILE
-            return null;
+			return null;
 #else
-            if (this.Unrestricted)
-                return new StrongNameIdentityPermission (PermissionState.Unrestricted);
+			if (this.Unrestricted)
+				return new StrongNameIdentityPermission (PermissionState.Unrestricted);
 
-            if ((name == null) && (key == null) && (version == null))
-                return new StrongNameIdentityPermission (PermissionState.None);
+			if ((name == null) && (key == null) && (version == null))
+				return new StrongNameIdentityPermission (PermissionState.None);
 
-            if (key == null) {
-                throw new ArgumentException (Locale.GetText (
-                    "PublicKey is required"));
-            }
-            StrongNamePublicKeyBlob blob = StrongNamePublicKeyBlob.FromString (key);
-                
-            Version v = null;
-            if (version != null)
-                v = new Version (version);
+			if (key == null) {
+				throw new ArgumentException (Locale.GetText (
+					"PublicKey is required"));
+			}
+			StrongNamePublicKeyBlob blob = StrongNamePublicKeyBlob.FromString (key);
+				
+			Version v = null;
+			if (version != null)
+				v = new Version (version);
 
-            return new StrongNameIdentityPermission (blob, name, v);
+			return new StrongNameIdentityPermission (blob, name, v);
 #endif
-        }
-    }
+		}
+	}
 }

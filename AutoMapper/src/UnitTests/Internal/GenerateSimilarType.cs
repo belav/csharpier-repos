@@ -1,4 +1,4 @@
-using AutoMapper.Execution;
+﻿using AutoMapper.Execution;
 
 namespace AutoMapper.UnitTests;
 

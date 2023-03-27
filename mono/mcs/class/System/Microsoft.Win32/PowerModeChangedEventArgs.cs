@@ -31,21 +31,21 @@ using System.Security.Permissions;
 
 namespace Microsoft.Win32 {
 
-    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-    [PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
-    public class PowerModeChangedEventArgs : System.EventArgs {
-    
-        PowerModes mymode;
-        
-        public PowerModeChangedEventArgs(PowerModes mode)
-        {
-            this.mymode = mode;
-        }
-        
-        public PowerModes Mode {
-            get{
-                return mymode;
-            }
-        }
-    }
+	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
+	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
+	public class PowerModeChangedEventArgs : System.EventArgs {
+	
+		PowerModes mymode;
+		
+		public PowerModeChangedEventArgs(PowerModes mode)
+		{
+			this.mymode = mode;
+		}
+		
+		public PowerModes Mode {
+			get{
+				return mymode;
+			}
+		}
+	}
 }

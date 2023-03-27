@@ -20,21 +20,21 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    public enum DataGridViewAutoSizeColumnMode {
-        NotSet = 0,
-        None = 1,
-        ColumnHeader = 2,
-        AllCellsExceptHeader = 4,
-        AllCells = 6,
-        DisplayedCellsExceptHeader = 8,
-        DisplayedCells = 10,
-        Fill = 16
-    }
+	public enum DataGridViewAutoSizeColumnMode {
+		NotSet = 0,
+		None = 1,
+		ColumnHeader = 2,
+		AllCellsExceptHeader = 4,
+		AllCells = 6,
+		DisplayedCellsExceptHeader = 8,
+		DisplayedCells = 10,
+		Fill = 16
+	}
 
 }

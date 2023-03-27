@@ -90,10 +90,10 @@ namespace Mono.ILASM {
                         }
 
                         if (other_list != null) {
-                foreach (MethodRef otherm in other_list) {
-                                    otherm.Resolve (code_gen);
-                                    event_def.AddOther (AsMethodDef (otherm.PeapiMethod, "other"));
-                }
+				foreach (MethodRef otherm in other_list) {
+	                                otherm.Resolve (code_gen);
+        	                        event_def.AddOther (AsMethodDef (otherm.PeapiMethod, "other"));
+				}
                         }
 
                         if (removeon != null) {
@@ -114,8 +114,8 @@ namespace Mono.ILASM {
 
                 public void AddOther (MethodRef method_ref)
                 {
-            if (other_list == null)
-                other_list = new ArrayList ();
+			if (other_list == null)
+				other_list = new ArrayList ();
                         other_list.Add (method_ref);
                 }
 

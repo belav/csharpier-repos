@@ -3,8 +3,8 @@
 
 class C
 {
-    public static void Main ()
-    {
-        foreach (var a
-    }
+	public static void Main ()
+	{
+		foreach (var a
+	}
 }

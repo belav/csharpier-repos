@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+ï»¿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 namespace System.Web.Razor.Tokenizer
@@ -37,7 +37,7 @@ namespace System.Web.Razor.Tokenizer
                    IsXmlNameStartChar(chr) ||
                    chr == '-' ||
                    chr == '.' ||
-                   chr == '·' || // (U+00B7 is middle dot: ·)
+                   chr == 'Â·' || // (U+00B7 is middle dot: Â·)
                    IsInRange(chr, 0x0300, 0x036F) ||
                    IsInRange(chr, 0x203F, 0x2040);
         }

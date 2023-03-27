@@ -29,11 +29,11 @@
 //
 
 namespace System.Web.Services.Description {
-    public enum OperationFlow {
-        None = 0x0,
-        Notification = 0x2,
-        OneWay = 0x1,
-        RequestResponse = 0x3,
-        SolicitResponse = 0x4
-    }
+	public enum OperationFlow {
+		None = 0x0,
+		Notification = 0x2,
+		OneWay = 0x1,
+		RequestResponse = 0x3,
+		SolicitResponse = 0x4
+	}
 }

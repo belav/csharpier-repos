@@ -2,7 +2,7 @@
 // HttpUtilityCas.cs - CAS unit tests for System.Web.HttpUtility
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,84 +37,84 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HttpUtilityCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HttpUtilityCas : AspNetHostingMinimal {
 
-        private StringWriter sw;
+		private StringWriter sw;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            sw = new StringWriter ();
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			sw = new StringWriter ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void StaticMethods_Deny_Unrestricted ()
-        {
-            try {
-                Assert.IsNull (HttpUtility.HtmlAttributeEncode (null), "HtmlAttributeEncode(string)");
-            }
-            catch (NullReferenceException) {
-                // ms 1.x
-            }
-            try {
-                HttpUtility.HtmlAttributeEncode (null, sw);
-            }
-            catch (NullReferenceException) {
-                // ms 1.x
-            }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void StaticMethods_Deny_Unrestricted ()
+		{
+			try {
+				Assert.IsNull (HttpUtility.HtmlAttributeEncode (null), "HtmlAttributeEncode(string)");
+			}
+			catch (NullReferenceException) {
+				// ms 1.x
+			}
+			try {
+				HttpUtility.HtmlAttributeEncode (null, sw);
+			}
+			catch (NullReferenceException) {
+				// ms 1.x
+			}
 
-            Assert.AreEqual (String.Empty, HttpUtility.HtmlDecode (String.Empty), "HtmlDecode(string)");
-            HttpUtility.HtmlDecode (String.Empty, sw);
+			Assert.AreEqual (String.Empty, HttpUtility.HtmlDecode (String.Empty), "HtmlDecode(string)");
+			HttpUtility.HtmlDecode (String.Empty, sw);
 
-            Assert.AreEqual (String.Empty, HttpUtility.HtmlEncode (String.Empty), "HtmlEncode(string)");
-            HttpUtility.HtmlEncode (String.Empty, sw);
+			Assert.AreEqual (String.Empty, HttpUtility.HtmlEncode (String.Empty), "HtmlEncode(string)");
+			HttpUtility.HtmlEncode (String.Empty, sw);
 
-            Assert.AreEqual (String.Empty, HttpUtility.UrlDecode (String.Empty), "UrlDecode(string)");
-            Assert.AreEqual (String.Empty, HttpUtility.UrlDecode (String.Empty, Encoding.ASCII), "UrlDecode(string,Encoding)");
-            Assert.AreEqual (String.Empty, HttpUtility.UrlDecode (new byte[0], Encoding.ASCII), "UrlDecode(byte[],Encoding)");
-            Assert.AreEqual (String.Empty, HttpUtility.UrlDecode (new byte[0], 0, 0, Encoding.ASCII), "UrlDecode(byte[],int,int,Encoding)");
+			Assert.AreEqual (String.Empty, HttpUtility.UrlDecode (String.Empty), "UrlDecode(string)");
+			Assert.AreEqual (String.Empty, HttpUtility.UrlDecode (String.Empty, Encoding.ASCII), "UrlDecode(string,Encoding)");
+			Assert.AreEqual (String.Empty, HttpUtility.UrlDecode (new byte[0], Encoding.ASCII), "UrlDecode(byte[],Encoding)");
+			Assert.AreEqual (String.Empty, HttpUtility.UrlDecode (new byte[0], 0, 0, Encoding.ASCII), "UrlDecode(byte[],int,int,Encoding)");
 
-            Assert.AreEqual (0, HttpUtility.UrlDecodeToBytes (String.Empty).Length, "UrlDecodeToBytes(string)");
-            Assert.AreEqual (0, HttpUtility.UrlDecodeToBytes (String.Empty, Encoding.ASCII).Length, "UrlDecodeToBytes(string,Encoding)");
-            Assert.AreEqual (0, HttpUtility.UrlDecodeToBytes (new byte[0]).Length, "UrlDecodeToBytes(byte[])");
-            Assert.AreEqual (0, HttpUtility.UrlDecodeToBytes (new byte[0], 0, 0).Length, "UrlDecodeToBytes(byte[],int,int)");
+			Assert.AreEqual (0, HttpUtility.UrlDecodeToBytes (String.Empty).Length, "UrlDecodeToBytes(string)");
+			Assert.AreEqual (0, HttpUtility.UrlDecodeToBytes (String.Empty, Encoding.ASCII).Length, "UrlDecodeToBytes(string,Encoding)");
+			Assert.AreEqual (0, HttpUtility.UrlDecodeToBytes (new byte[0]).Length, "UrlDecodeToBytes(byte[])");
+			Assert.AreEqual (0, HttpUtility.UrlDecodeToBytes (new byte[0], 0, 0).Length, "UrlDecodeToBytes(byte[],int,int)");
 
-            Assert.AreEqual (String.Empty, HttpUtility.UrlEncode (String.Empty), "UrlEncode(string)");
-            Assert.AreEqual (String.Empty, HttpUtility.UrlEncode (String.Empty, Encoding.ASCII), "UrlEncode(string,Encoding)");
-            Assert.AreEqual (String.Empty, HttpUtility.UrlEncode (new byte[0]), "UrlEncode(byte[],Encoding)");
-            Assert.AreEqual (String.Empty, HttpUtility.UrlEncode (new byte[0], 0, 0), "UrlEncode(byte[],int,int,Encoding)");
+			Assert.AreEqual (String.Empty, HttpUtility.UrlEncode (String.Empty), "UrlEncode(string)");
+			Assert.AreEqual (String.Empty, HttpUtility.UrlEncode (String.Empty, Encoding.ASCII), "UrlEncode(string,Encoding)");
+			Assert.AreEqual (String.Empty, HttpUtility.UrlEncode (new byte[0]), "UrlEncode(byte[],Encoding)");
+			Assert.AreEqual (String.Empty, HttpUtility.UrlEncode (new byte[0], 0, 0), "UrlEncode(byte[],int,int,Encoding)");
 
-            Assert.AreEqual (0, HttpUtility.UrlEncodeToBytes (String.Empty).Length, "UrlEncodeToBytes(string)");
-            Assert.AreEqual (0, HttpUtility.UrlEncodeToBytes (String.Empty, Encoding.ASCII).Length, "UrlEncodeToBytes(string,Encoding)");
-            Assert.AreEqual (0, HttpUtility.UrlEncodeToBytes (new byte[0]).Length, "UrlEncodeToBytes(byte[])");
-            Assert.AreEqual (0, HttpUtility.UrlEncodeToBytes (new byte[0], 0, 0).Length, "UrlEncodeToBytes(byte[],int,int)");
+			Assert.AreEqual (0, HttpUtility.UrlEncodeToBytes (String.Empty).Length, "UrlEncodeToBytes(string)");
+			Assert.AreEqual (0, HttpUtility.UrlEncodeToBytes (String.Empty, Encoding.ASCII).Length, "UrlEncodeToBytes(string,Encoding)");
+			Assert.AreEqual (0, HttpUtility.UrlEncodeToBytes (new byte[0]).Length, "UrlEncodeToBytes(byte[])");
+			Assert.AreEqual (0, HttpUtility.UrlEncodeToBytes (new byte[0], 0, 0).Length, "UrlEncodeToBytes(byte[],int,int)");
 
-            Assert.AreEqual (String.Empty, HttpUtility.UrlEncodeUnicode (String.Empty), "UrlEncodeUnicode(string)");
+			Assert.AreEqual (String.Empty, HttpUtility.UrlEncodeUnicode (String.Empty), "UrlEncodeUnicode(string)");
 
-            Assert.AreEqual (0, HttpUtility.UrlEncodeUnicodeToBytes (String.Empty).Length, "UrlEncodeUnicodeToBytes(string)");
+			Assert.AreEqual (0, HttpUtility.UrlEncodeUnicodeToBytes (String.Empty).Length, "UrlEncodeUnicodeToBytes(string)");
 
-            Assert.AreEqual (String.Empty, HttpUtility.UrlPathEncode (String.Empty), "UrlPathEncode(string)");
-            try {
-                Assert.IsNotNull (HttpUtility.ParseQueryString (String.Empty), "ParseQueryString(string)");
-            }
-            catch (NotImplementedException)    {
-                // mono
-            }
-            try {
-                Assert.IsNotNull (HttpUtility.ParseQueryString (String.Empty, Encoding.ASCII), "ParseQueryString(string)");
-            }
-            catch (NotImplementedException)    {
-                // mono
-            }
-        }
+			Assert.AreEqual (String.Empty, HttpUtility.UrlPathEncode (String.Empty), "UrlPathEncode(string)");
+			try {
+				Assert.IsNotNull (HttpUtility.ParseQueryString (String.Empty), "ParseQueryString(string)");
+			}
+			catch (NotImplementedException)	{
+				// mono
+			}
+			try {
+				Assert.IsNotNull (HttpUtility.ParseQueryString (String.Empty, Encoding.ASCII), "ParseQueryString(string)");
+			}
+			catch (NotImplementedException)	{
+				// mono
+			}
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (HttpUtility); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HttpUtility); }
+		}
+	}
 }

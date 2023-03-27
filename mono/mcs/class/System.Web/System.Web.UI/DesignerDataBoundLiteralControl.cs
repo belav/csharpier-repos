@@ -32,49 +32,49 @@ using System.Security.Permissions;
 
 namespace System.Web.UI
 {
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [ToolboxItem(false)]
-    [DataBindingHandler ("System.Web.UI.Design.TextDataBindingHandler, " + Consts.AssemblySystem_Design)]
-    public sealed class DesignerDataBoundLiteralControl : Control
-    {
-        string text = String.Empty;
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[ToolboxItem(false)]
+	[DataBindingHandler ("System.Web.UI.Design.TextDataBindingHandler, " + Consts.AssemblySystem_Design)]
+	public sealed class DesignerDataBoundLiteralControl : Control
+	{
+		string text = String.Empty;
 
-        public DesignerDataBoundLiteralControl ()
-        {
-            AutoID = false;
-        }
+		public DesignerDataBoundLiteralControl ()
+		{
+			AutoID = false;
+		}
 
-        public string Text {
-            get { return text;}
-            set {
-                if (value == null)
-                    text = string.Empty;
-                else
-                    text = value;
-            }
-        }
+		public string Text {
+			get { return text;}
+			set {
+				if (value == null)
+					text = string.Empty;
+				else
+					text = value;
+			}
+		}
 
-        protected override ControlCollection CreateControlCollection ()
-        {
-            return new EmptyControlCollection (this);
-        }
+		protected override ControlCollection CreateControlCollection ()
+		{
+			return new EmptyControlCollection (this);
+		}
 
-        protected override void LoadViewState (object savedState)
-        {
-            if (savedState != null)
-                text = (string) savedState;
-        }
+		protected override void LoadViewState (object savedState)
+		{
+			if (savedState != null)
+				text = (string) savedState;
+		}
 
-        protected internal override void Render (HtmlTextWriter output)
-        {
-            output.Write (text);
-        }
+		protected internal override void Render (HtmlTextWriter output)
+		{
+			output.Write (text);
+		}
 
-        protected override object SaveViewState ()
-        {
-            return text;
-        }
-    }
+		protected override object SaveViewState ()
+		{
+			return text;
+		}
+	}
 }

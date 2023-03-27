@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,29 +32,29 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("d2206418-1dd1-11b2-8e55-acddcd2bcfb8")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIWebBrowserChromeFocus {
+	[Guid ("d2206418-1dd1-11b2-8e55-acddcd2bcfb8")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIWebBrowserChromeFocus {
 
 #region nsIWebBrowserChromeFocus
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int focusNextElement ();
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int focusNextElement ();
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int focusPrevElement ();
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int focusPrevElement ();
 
 #endregion
-    }
+	}
 
 
-    internal class nsWebBrowserChromeFocus {
-        public static nsIWebBrowserChromeFocus GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebBrowserChromeFocus obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIWebBrowserChromeFocus).GUID, obj);
-            return o as nsIWebBrowserChromeFocus;
-        }
-    }
+	internal class nsWebBrowserChromeFocus {
+		public static nsIWebBrowserChromeFocus GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebBrowserChromeFocus obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIWebBrowserChromeFocus).GUID, obj);
+			return o as nsIWebBrowserChromeFocus;
+		}
+	}
 }

@@ -269,7 +269,7 @@ namespace System.ServiceModel
         static class NativeMethods
         {
             [DllImport("kernel32.dll")]
-        [ResourceExposure(ResourceScope.None)]
+	    [ResourceExposure(ResourceScope.None)]
             public static extern int QueryPerformanceCounter(out long time);
 
             [DllImport("kernel32.dll")]

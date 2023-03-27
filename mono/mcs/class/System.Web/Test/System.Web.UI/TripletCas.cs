@@ -2,7 +2,7 @@
 // TripletCas.cs - CAS unit tests for System.Web.UI.Triplet
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,44 +36,44 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TripletCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TripletCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor0_Deny_Unrestricted ()
-        {
-            Triplet t = new Triplet ();
-            Assert.IsNull (t.First, "First");
-            Assert.IsNull (t.Second, "Second");
-            Assert.IsNull (t.Third, "Third");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor0_Deny_Unrestricted ()
+		{
+			Triplet t = new Triplet ();
+			Assert.IsNull (t.First, "First");
+			Assert.IsNull (t.Second, "Second");
+			Assert.IsNull (t.Third, "Third");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor2_Deny_Unrestricted ()
-        {
-            Triplet t = new Triplet (String.Empty, String.Empty);
-            Assert.IsNotNull (t.First, "First");
-            Assert.IsNotNull (t.Second, "Second");
-            Assert.IsNull (t.Third, "Third");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor2_Deny_Unrestricted ()
+		{
+			Triplet t = new Triplet (String.Empty, String.Empty);
+			Assert.IsNotNull (t.First, "First");
+			Assert.IsNotNull (t.Second, "Second");
+			Assert.IsNull (t.Third, "Third");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor3_Deny_Unrestricted ()
-        {
-            Triplet t = new Triplet (String.Empty, String.Empty, String.Empty);
-            Assert.IsNotNull (t.First, "First");
-            Assert.IsNotNull (t.Second, "Second");
-            Assert.IsNotNull (t.Third, "Third");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor3_Deny_Unrestricted ()
+		{
+			Triplet t = new Triplet (String.Empty, String.Empty, String.Empty);
+			Assert.IsNotNull (t.First, "First");
+			Assert.IsNotNull (t.Second, "Second");
+			Assert.IsNotNull (t.Third, "Third");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (Triplet); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (Triplet); }
+		}
+	}
 }

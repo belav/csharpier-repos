@@ -1,4 +1,4 @@
-#region MIT license
+﻿#region MIT license
 // 
 // MIT license
 //
@@ -73,7 +73,7 @@ namespace DbMetal.Generator
         /// <param name="filename"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        Database ReadSchema(Parameters parameters, string filename);
+		Database ReadSchema(Parameters parameters, string filename);
         /// <summary>
         /// Lists all code generators available in DbMetal
         /// </summary>

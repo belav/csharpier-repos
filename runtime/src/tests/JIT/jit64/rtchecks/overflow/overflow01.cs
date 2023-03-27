@@ -18,13 +18,13 @@ internal class OVFTest
         checked
         {
 #if OP_DIV
-            return (sbyte)(a / 0.5);
+			return (sbyte)(a / 0.5);
 #elif OP_ADD
             return (sbyte)(a + a);
 #elif OP_SUB
-            return (sbyte)(-1 - a - a);
+			return (sbyte)(-1 - a - a);
 #else
-            return (sbyte)(a * 2);
+			return (sbyte)(a * 2);
 #endif
         }
     }
@@ -35,13 +35,13 @@ internal class OVFTest
         checked
         {
 #if OP_DIV
-            return (byte)(a / 0.5);
+			return (byte)(a / 0.5);
 #elif OP_ADD
             return (byte)(a + a);
 #elif OP_SUB
-            return (byte)(0 - a - a);
+			return (byte)(0 - a - a);
 #else
-            return (byte)(a * 2);
+			return (byte)(a * 2);
 #endif
         }
     }
@@ -52,13 +52,13 @@ internal class OVFTest
         checked
         {
 #if OP_DIV
-            return (short)(a / 0.5);
+			return (short)(a / 0.5);
 #elif OP_ADD
             return (short)(a + a);
 #elif OP_SUB
-            return (short)(-1 - a - a);
+			return (short)(-1 - a - a);
 #else
-            return (short)(a * 2);
+			return (short)(a * 2);
 #endif
         }
     }
@@ -69,13 +69,13 @@ internal class OVFTest
         checked
         {
 #if OP_DIV
-            return (ushort)(a / 0.5);
+			return (ushort)(a / 0.5);
 #elif OP_ADD
             return (ushort)(a + a);
 #elif OP_SUB
-            return (ushort)(0 - a - a);
+			return (ushort)(0 - a - a);
 #else
-            return (ushort)(a * 2);
+			return (ushort)(a * 2);
 #endif
         }
     }
@@ -86,13 +86,13 @@ internal class OVFTest
         checked
         {
 #if OP_DIV
-            return (int)(a / 0.5);
+			return (int)(a / 0.5);
 #elif OP_ADD
             return a + a;
 #elif OP_SUB
-            return -1 - a - a;
+			return -1 - a - a;
 #else
-            return a * 2;
+			return a * 2;
 #endif
         }
     }
@@ -103,13 +103,13 @@ internal class OVFTest
         checked
         {
 #if OP_DIV
-            return (uint)(a / 0.5);
+			return (uint)(a / 0.5);
 #elif OP_ADD
             return a + a;
 #elif OP_SUB
-            return 0U - a - a;
+			return 0U - a - a;
 #else
-            return a * 2;
+			return a * 2;
 #endif
         }
     }
@@ -120,13 +120,13 @@ internal class OVFTest
         checked
         {
 #if OP_DIV
-            return (long)(a / 0.5);
+			return (long)(a / 0.5);
 #elif OP_ADD
             return a + a;
 #elif OP_SUB
-            return  -1L - a - a;
+			return  -1L - a - a;
 #else
-            return a * 2;
+			return a * 2;
 #endif
         }
     }
@@ -137,13 +137,13 @@ internal class OVFTest
         checked
         {
 #if OP_DIV
-            return (ulong)(a / 0.5);
+			return (ulong)(a / 0.5);
 #elif OP_ADD
             return a + a;
 #elif OP_SUB
-            return 0UL - a - a;
+			return 0UL - a - a;
 #else
-            return a * 2;
+			return a * 2;
 #endif
         }
     }
@@ -151,13 +151,13 @@ internal class OVFTest
     private static int Main()
     {
 #if OP_DIV
-        const string op = "div.ovf";
+		const string op = "div.ovf";
 #elif OP_ADD
         const string op = "add.ovf";
 #elif OP_SUB
-        const string op = "sub.ovf";
+		const string op = "sub.ovf";
 #else
-        const string op = "mul.ovf";
+		const string op = "mul.ovf";
 #endif
 
         Console.WriteLine("Runtime Checks [OP: {0}]", op);

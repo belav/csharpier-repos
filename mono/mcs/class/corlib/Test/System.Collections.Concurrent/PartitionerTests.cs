@@ -33,59 +33,59 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Concurrent
 {
-    [TestFixture]
-    public class PartitionerTests
-    {
-        [Test]
-        public void PartitionerCreateIntegerWithExplicitRange ()
-        {
-            OrderablePartitioner<Tuple<int, int>> partitioner = Partitioner.Create (1, 20, 5);
-            var partitions = partitioner.GetOrderablePartitions (3);
-            Assert.AreEqual (3, partitions.Count);
-            Assert.That (partitions, Is.All.Not.Null);
-            var iterator = partitions[0];            
-            Assert.IsTrue (iterator.MoveNext ());
-            Assert.IsTrue (iterator.Current.Equals (Create (0, 1, 6)));
-            Assert.IsTrue (iterator.MoveNext ());
-            Assert.IsTrue (iterator.Current.Equals (Create (1, 6, 11)));
-            Assert.IsTrue (iterator.MoveNext ());
-            Assert.IsTrue (iterator.Current.Equals (Create (2, 11, 16)));
-            Assert.IsTrue (iterator.MoveNext ());
-            Assert.IsTrue (iterator.Current.Equals (Create (3, 16, 20)));
-            
-            Assert.IsFalse (partitions[1].MoveNext ());
-            Assert.IsFalse (partitions[2].MoveNext ());
-        }
+	[TestFixture]
+	public class PartitionerTests
+	{
+		[Test]
+		public void PartitionerCreateIntegerWithExplicitRange ()
+		{
+			OrderablePartitioner<Tuple<int, int>> partitioner = Partitioner.Create (1, 20, 5);
+			var partitions = partitioner.GetOrderablePartitions (3);
+			Assert.AreEqual (3, partitions.Count);
+			Assert.That (partitions, Is.All.Not.Null);
+			var iterator = partitions[0];			
+			Assert.IsTrue (iterator.MoveNext ());
+			Assert.IsTrue (iterator.Current.Equals (Create (0, 1, 6)));
+			Assert.IsTrue (iterator.MoveNext ());
+			Assert.IsTrue (iterator.Current.Equals (Create (1, 6, 11)));
+			Assert.IsTrue (iterator.MoveNext ());
+			Assert.IsTrue (iterator.Current.Equals (Create (2, 11, 16)));
+			Assert.IsTrue (iterator.MoveNext ());
+			Assert.IsTrue (iterator.Current.Equals (Create (3, 16, 20)));
+			
+			Assert.IsFalse (partitions[1].MoveNext ());
+			Assert.IsFalse (partitions[2].MoveNext ());
+		}
 
-        [Test]
-        public void PartitionerCreateLongWithExplicitRange ()
-        {
-            OrderablePartitioner<Tuple<long, long>> partitioner = Partitioner.Create ((long)1, (long)20, (long)5);
-            var partitions = partitioner.GetOrderablePartitions (3);
-            Assert.AreEqual (3, partitions.Count);
-            Assert.That (partitions, Is.All.Not.Null);
-            var iterator = partitions[0];            
-            Assert.IsTrue (iterator.MoveNext ());
-            Assert.IsTrue (iterator.Current.Equals (CreateL (0, 1, 6)));
-            Assert.IsTrue (iterator.MoveNext ());
-            Assert.IsTrue (iterator.Current.Equals (CreateL (1, 6, 11)));
-            Assert.IsTrue (iterator.MoveNext ());
-            Assert.IsTrue (iterator.Current.Equals (CreateL (2, 11, 16)));
-            Assert.IsTrue (iterator.MoveNext ());
-            Assert.IsTrue (iterator.Current.Equals (CreateL (3, 16, 20)));
-            
-            Assert.IsFalse (partitions[1].MoveNext ());
-            Assert.IsFalse (partitions[2].MoveNext ());
-        }
+		[Test]
+		public void PartitionerCreateLongWithExplicitRange ()
+		{
+			OrderablePartitioner<Tuple<long, long>> partitioner = Partitioner.Create ((long)1, (long)20, (long)5);
+			var partitions = partitioner.GetOrderablePartitions (3);
+			Assert.AreEqual (3, partitions.Count);
+			Assert.That (partitions, Is.All.Not.Null);
+			var iterator = partitions[0];			
+			Assert.IsTrue (iterator.MoveNext ());
+			Assert.IsTrue (iterator.Current.Equals (CreateL (0, 1, 6)));
+			Assert.IsTrue (iterator.MoveNext ());
+			Assert.IsTrue (iterator.Current.Equals (CreateL (1, 6, 11)));
+			Assert.IsTrue (iterator.MoveNext ());
+			Assert.IsTrue (iterator.Current.Equals (CreateL (2, 11, 16)));
+			Assert.IsTrue (iterator.MoveNext ());
+			Assert.IsTrue (iterator.Current.Equals (CreateL (3, 16, 20)));
+			
+			Assert.IsFalse (partitions[1].MoveNext ());
+			Assert.IsFalse (partitions[2].MoveNext ());
+		}
 
-        static KeyValuePair<long, Tuple<int, int>> Create (long ind, int i1, int i2)
-        {
-            return new KeyValuePair<long, Tuple<int, int>> (ind, Tuple.Create (i1, i2));
-        }
+		static KeyValuePair<long, Tuple<int, int>> Create (long ind, int i1, int i2)
+		{
+			return new KeyValuePair<long, Tuple<int, int>> (ind, Tuple.Create (i1, i2));
+		}
 
-        static KeyValuePair<long, Tuple<long, long>> CreateL (long ind, long i1, long i2)
-        {
-            return new KeyValuePair<long, Tuple<long, long>> (ind, Tuple.Create (i1, i2));
-        }
-    }
+		static KeyValuePair<long, Tuple<long, long>> CreateL (long ind, long i1, long i2)
+		{
+			return new KeyValuePair<long, Tuple<long, long>> (ind, Tuple.Create (i1, i2));
+		}
+	}
 }

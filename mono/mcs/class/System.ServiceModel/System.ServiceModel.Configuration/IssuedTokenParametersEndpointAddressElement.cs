@@ -2,7 +2,7 @@
 // IssuedTokenParametersEndpointAddressElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,51 +54,51 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class IssuedTokenParametersEndpointAddressElement
-         : EndpointAddressElementBase
-    {
-        ConfigurationPropertyCollection _properties;
+	public sealed class IssuedTokenParametersEndpointAddressElement
+		 : EndpointAddressElementBase
+	{
+		ConfigurationPropertyCollection _properties;
 
-        public IssuedTokenParametersEndpointAddressElement () {
-        }
-
-
-        // Properties
-
-        [ConfigurationProperty ("binding",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "")]
-        [StringValidator (MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string Binding {
-            get { return (string) base ["binding"]; }
-            set { base ["binding"] = value; }
-        }
-
-        [ConfigurationProperty ("bindingConfiguration",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "")]
-        [StringValidator (MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string BindingConfiguration {
-            get { return (string) base ["bindingConfiguration"]; }
-            set { base ["bindingConfiguration"] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = base.Properties;
-                    _properties.Add (new ConfigurationProperty ("binding", typeof (string), "", new StringConverter (), new StringValidator (0, int.MaxValue, null), ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("bindingConfiguration", typeof (string), "", new StringConverter (), new StringValidator (0, int.MaxValue, null), ConfigurationPropertyOptions.None));
-                }
-                return _properties;
-            }
-        }
+		public IssuedTokenParametersEndpointAddressElement () {
+		}
 
 
-    }
+		// Properties
+
+		[ConfigurationProperty ("binding",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "")]
+		[StringValidator (MinLength = 0,
+			MaxLength = int.MaxValue,
+			 InvalidCharacters = null)]
+		public string Binding {
+			get { return (string) base ["binding"]; }
+			set { base ["binding"] = value; }
+		}
+
+		[ConfigurationProperty ("bindingConfiguration",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "")]
+		[StringValidator (MinLength = 0,
+			MaxLength = int.MaxValue,
+			 InvalidCharacters = null)]
+		public string BindingConfiguration {
+			get { return (string) base ["bindingConfiguration"]; }
+			set { base ["bindingConfiguration"] = value; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get {
+				if (_properties == null) {
+					_properties = base.Properties;
+					_properties.Add (new ConfigurationProperty ("binding", typeof (string), "", new StringConverter (), new StringValidator (0, int.MaxValue, null), ConfigurationPropertyOptions.None));
+					_properties.Add (new ConfigurationProperty ("bindingConfiguration", typeof (string), "", new StringConverter (), new StringValidator (0, int.MaxValue, null), ConfigurationPropertyOptions.None));
+				}
+				return _properties;
+			}
+		}
+
+
+	}
 
 }

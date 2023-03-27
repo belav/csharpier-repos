@@ -32,39 +32,39 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-    [MonoTODO]
-    public class SearchRequest : DirectoryRequest
-    {
-        public SearchRequest ()
-        {
-            Attributes = new StringCollection ();
-        }
+	[MonoTODO]
+	public class SearchRequest : DirectoryRequest
+	{
+		public SearchRequest ()
+		{
+			Attributes = new StringCollection ();
+		}
 
-        [MonoTODO]
-        public SearchRequest (string distinguishedName, string ldapFilter, SearchScope searchScope, params string [] attributeList)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public SearchRequest (string distinguishedName, string ldapFilter, SearchScope searchScope, params string [] attributeList)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public SearchRequest (string distinguishedName, XmlDocument filter, SearchScope searchScope, params string [] attributeList)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public SearchRequest (string distinguishedName, XmlDocument filter, SearchScope searchScope, params string [] attributeList)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public DereferenceAlias Aliases { get; set; }
-        public StringCollection Attributes { get; private set; }
-        public string DistinguishedName { get; set; }
-        public object Filter { get; set; }
-        public SearchScope Scope { get; set; }
-        public int SizeLimit { get; set; }
-        public TimeSpan TimeLimit { get; set; }
-        public bool TypesOnly { get; set; }
+		public DereferenceAlias Aliases { get; set; }
+		public StringCollection Attributes { get; private set; }
+		public string DistinguishedName { get; set; }
+		public object Filter { get; set; }
+		public SearchScope Scope { get; set; }
+		public int SizeLimit { get; set; }
+		public TimeSpan TimeLimit { get; set; }
+		public bool TypesOnly { get; set; }
 
-        [MonoTODO]
-        protected override XmlElement ToXmlNode (XmlDocument doc)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected override XmlElement ToXmlNode (XmlDocument doc)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

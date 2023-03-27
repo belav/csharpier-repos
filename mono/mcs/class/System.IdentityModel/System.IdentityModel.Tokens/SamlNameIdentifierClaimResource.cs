@@ -2,7 +2,7 @@
 // SamlNameIdentifierClaimResource.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -36,28 +36,28 @@ using System.IdentityModel.Selectors;
 
 namespace System.IdentityModel.Tokens
 {
-    [DataContract]
-    public class SamlNameIdentifierClaimResource
-    {
-        public SamlNameIdentifierClaimResource (string name, string nameQualifier, string format)
-        {
-            this.name = name;
-            this.name_qualifier = nameQualifier;
-            this.format = format;
-        }
+	[DataContract]
+	public class SamlNameIdentifierClaimResource
+	{
+		public SamlNameIdentifierClaimResource (string name, string nameQualifier, string format)
+		{
+			this.name = name;
+			this.name_qualifier = nameQualifier;
+			this.format = format;
+		}
 
-        string name, name_qualifier, format;
+		string name, name_qualifier, format;
 
-        public string Format {
-            get { return format; }
-        }
+		public string Format {
+			get { return format; }
+		}
 
-        public string Name {
-            get { return name; }
-        }
+		public string Name {
+			get { return name; }
+		}
 
-        public string NameQualifier {
-            get { return name_qualifier; }
-        }
-    }
+		public string NameQualifier {
+			get { return name_qualifier; }
+		}
+	}
 }

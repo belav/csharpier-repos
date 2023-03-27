@@ -2,7 +2,7 @@
 // ServiceAuthorizationBehavior.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -35,79 +35,79 @@ using System.Web.Security;
 
 namespace System.ServiceModel.Description
 {
-    public sealed class ServiceAuthorizationBehavior : IServiceBehavior
-    {
-        bool impersonate;
-        PrincipalPermissionMode perm_mode =
-            PrincipalPermissionMode.UseWindowsGroups; // funky default value
-        RoleProvider role_provider;
-        ServiceAuthorizationManager svc_auth_manager;
-        ReadOnlyCollection<IAuthorizationPolicy> ext_auth_policies;
+	public sealed class ServiceAuthorizationBehavior : IServiceBehavior
+	{
+		bool impersonate;
+		PrincipalPermissionMode perm_mode =
+			PrincipalPermissionMode.UseWindowsGroups; // funky default value
+		RoleProvider role_provider;
+		ServiceAuthorizationManager svc_auth_manager;
+		ReadOnlyCollection<IAuthorizationPolicy> ext_auth_policies;
 
-        public ServiceAuthorizationBehavior ()
-        {
-        }
+		public ServiceAuthorizationBehavior ()
+		{
+		}
 
-        public ReadOnlyCollection<IAuthorizationPolicy> ExternalAuthorizationPolicies {
-            get { return ext_auth_policies; }
-            set { ext_auth_policies = value; }
-        }
+		public ReadOnlyCollection<IAuthorizationPolicy> ExternalAuthorizationPolicies {
+			get { return ext_auth_policies; }
+			set { ext_auth_policies = value; }
+		}
 
-        public bool ImpersonateCallerForAllOperations {
-            get { return impersonate; }
-            set { impersonate = value; }
-        }
+		public bool ImpersonateCallerForAllOperations {
+			get { return impersonate; }
+			set { impersonate = value; }
+		}
 
-        public PrincipalPermissionMode PrincipalPermissionMode {
-            get { return perm_mode; }
-            set { perm_mode = value; }
-        }
+		public PrincipalPermissionMode PrincipalPermissionMode {
+			get { return perm_mode; }
+			set { perm_mode = value; }
+		}
 
-        public RoleProvider RoleProvider {
-            get { return role_provider; }
-            set { role_provider = value; }
-        }
+		public RoleProvider RoleProvider {
+			get { return role_provider; }
+			set { role_provider = value; }
+		}
 
-        public ServiceAuthorizationManager ServiceAuthorizationManager {
-            get { return svc_auth_manager; }
-            set { svc_auth_manager = value; }
-        }
+		public ServiceAuthorizationManager ServiceAuthorizationManager {
+			get { return svc_auth_manager; }
+			set { svc_auth_manager = value; }
+		}
 
-        void IServiceBehavior.AddBindingParameters (
-            ServiceDescription description,
-            ServiceHostBase serviceHostBase,
-            Collection<ServiceEndpoint> endpoints,
-            BindingParameterCollection parameters)
-        {
-        }
+		void IServiceBehavior.AddBindingParameters (
+			ServiceDescription description,
+			ServiceHostBase serviceHostBase,
+			Collection<ServiceEndpoint> endpoints,
+			BindingParameterCollection parameters)
+		{
+		}
 
-        void IServiceBehavior.ApplyDispatchBehavior (
-            ServiceDescription description,
-            ServiceHostBase serviceHostBase)
-        {
-            foreach (var cdb in serviceHostBase.ChannelDispatchers) {
-                var cd = cdb as ChannelDispatcher;
-                if (cd == null) // non-ChannelDispatcher ChannelDispatcherBase instance.
-                    continue;
-                foreach (var ed in cd.Endpoints) {
-                    var dr = ed.DispatchRuntime;
-                    if (ExternalAuthorizationPolicies !=null)
-                        dr.ExternalAuthorizationPolicies = ExternalAuthorizationPolicies;
-                    dr.ImpersonateCallerForAllOperations = ImpersonateCallerForAllOperations;
-                    dr.PrincipalPermissionMode = PrincipalPermissionMode;
-                    if (RoleProvider != null)
-                        dr.RoleProvider = RoleProvider;
-                    if (ServiceAuthorizationManager != null)
-                        dr.ServiceAuthorizationManager = ServiceAuthorizationManager;
-                }
-            }
-        }
+		void IServiceBehavior.ApplyDispatchBehavior (
+			ServiceDescription description,
+			ServiceHostBase serviceHostBase)
+		{
+			foreach (var cdb in serviceHostBase.ChannelDispatchers) {
+				var cd = cdb as ChannelDispatcher;
+				if (cd == null) // non-ChannelDispatcher ChannelDispatcherBase instance.
+					continue;
+				foreach (var ed in cd.Endpoints) {
+					var dr = ed.DispatchRuntime;
+					if (ExternalAuthorizationPolicies !=null)
+						dr.ExternalAuthorizationPolicies = ExternalAuthorizationPolicies;
+					dr.ImpersonateCallerForAllOperations = ImpersonateCallerForAllOperations;
+					dr.PrincipalPermissionMode = PrincipalPermissionMode;
+					if (RoleProvider != null)
+						dr.RoleProvider = RoleProvider;
+					if (ServiceAuthorizationManager != null)
+						dr.ServiceAuthorizationManager = ServiceAuthorizationManager;
+				}
+			}
+		}
 
-        [MonoTODO]
-        void IServiceBehavior.Validate (
-            ServiceDescription description,
-            ServiceHostBase serviceHostBase)
-        {
-        }
-    }
+		[MonoTODO]
+		void IServiceBehavior.Validate (
+			ServiceDescription description,
+			ServiceHostBase serviceHostBase)
+		{
+		}
+	}
 }

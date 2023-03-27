@@ -33,34 +33,34 @@ using System.Security.Permissions;
 
 namespace System.Web 
 {
-    [AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class HttpCacheVaryByContentEncodings
-    {
-        Dictionary <string, bool> encodings;
+	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class HttpCacheVaryByContentEncodings
+	{
+		Dictionary <string, bool> encodings;
 
-        public
-        HttpCacheVaryByContentEncodings ()
-        {
-            encodings = new Dictionary <string, bool> ();
-        }
-        
-        public bool this [string contentEncoding] {
-            get {
-                if (contentEncoding == null)
-                    throw new ArgumentNullException ("contentEncoding");
+		public
+		HttpCacheVaryByContentEncodings ()
+		{
+			encodings = new Dictionary <string, bool> ();
+		}
+		
+		public bool this [string contentEncoding] {
+			get {
+				if (contentEncoding == null)
+					throw new ArgumentNullException ("contentEncoding");
 
-                if (encodings.ContainsKey (contentEncoding))
-                    return encodings [contentEncoding];
+				if (encodings.ContainsKey (contentEncoding))
+					return encodings [contentEncoding];
 
-                return false;
-            }
-            
-            set {
-                if (contentEncoding == null)
-                    throw new ArgumentNullException ("contentEncoding");
+				return false;
+			}
+			
+			set {
+				if (contentEncoding == null)
+					throw new ArgumentNullException ("contentEncoding");
 
-                encodings [contentEncoding] = value;
-            }
-        }
-    }
+				encodings [contentEncoding] = value;
+			}
+		}
+	}
 }

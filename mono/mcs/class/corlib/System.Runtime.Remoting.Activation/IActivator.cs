@@ -32,17 +32,17 @@
 
 namespace System.Runtime.Remoting.Activation {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IActivator {
-        ActivatorLevel Level {
-            get;
-        }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IActivator {
+		ActivatorLevel Level {
+			get;
+		}
 
-        IActivator NextActivator {
-            get; set;
-        }
+		IActivator NextActivator {
+			get; set;
+		}
 
-        IConstructionReturnMessage Activate (IConstructionCallMessage msg);
-    }
+		IConstructionReturnMessage Activate (IConstructionCallMessage msg);
+	}
 }
 

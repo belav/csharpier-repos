@@ -6,9 +6,9 @@ using System;
 
 namespace TopNS
 {
-    namespace ChildNS {
-        enum Enum3 {
-        }
-        /// invalid here
-    }
+	namespace ChildNS {
+		enum Enum3 {
+		}
+		/// invalid here
+	}
 }

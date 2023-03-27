@@ -23,27 +23,27 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public class ListControlConvertEventArgs : ConvertEventArgs
-    {
-        private object list_item;
+	public class ListControlConvertEventArgs : ConvertEventArgs
+	{
+		private object list_item;
 
-        #region Public Constructors
-        public ListControlConvertEventArgs (object value, Type desiredType, object listItem)
-            : base (value, desiredType)
-        {
-            this.list_item = listItem;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public ListControlConvertEventArgs (object value, Type desiredType, object listItem)
+			: base (value, desiredType)
+		{
+			this.list_item = listItem;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public object ListItem {
-            get { return this.list_item; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public object ListItem {
+			get { return this.list_item; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

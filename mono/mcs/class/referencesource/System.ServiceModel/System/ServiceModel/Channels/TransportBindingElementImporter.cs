@@ -161,7 +161,7 @@ namespace System.ServiceModel.Channels
                 case TransportPolicyConstants.PeerTransportUri:
 #pragma warning disable 0618
                     transportBindingElement = new PeerTransportBindingElement();
-#pragma warning restore 0618                    
+#pragma warning restore 0618					
                     break;
                 case TransportPolicyConstants.WebSocketTransportUri:
                     HttpTransportBindingElement httpTransport = GetHttpTransportBindingElement(policyContext);

@@ -29,23 +29,23 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-    public interface IContextChannel : IChannel, ICommunicationObject,
-        IExtensibleObject<IContextChannel>
-    {
-        // Properties
+	public interface IContextChannel : IChannel, ICommunicationObject,
+		IExtensibleObject<IContextChannel>
+	{
+		// Properties
 
-        bool AllowOutputBatching { get; set; }
+		bool AllowOutputBatching { get; set; }
 
-        IInputSession InputSession { get; }
+		IInputSession InputSession { get; }
 
-        EndpointAddress LocalAddress { get; }
+		EndpointAddress LocalAddress { get; }
 
-        TimeSpan OperationTimeout { get; set; }
+		TimeSpan OperationTimeout { get; set; }
 
-        IOutputSession OutputSession { get; }
+		IOutputSession OutputSession { get; }
 
-        EndpointAddress RemoteAddress { get; }
+		EndpointAddress RemoteAddress { get; }
 
-        string SessionId { get; }
-    }
+		string SessionId { get; }
+	}
 }

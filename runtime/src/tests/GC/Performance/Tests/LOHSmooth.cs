@@ -28,20 +28,20 @@ public class VSTSTest
             Thread.Sleep(rnd.Next(50, 100));
             s[i] = new string('x', rnd.Next(_minSize, _maxSize));
      
-        long _private = Process.GetCurrentProcess().PrivateMemorySize64;
-        
-        lock (lockObject)
-        {
-        if (_private > _maxPrivate)
-            _maxPrivate = _private;
+	    long _private = Process.GetCurrentProcess().PrivateMemorySize64;
+		
+	    lock (lockObject)
+	    {
+		if (_private > _maxPrivate)
+		    _maxPrivate = _private;
+	    }
         }
-        }
         
-    if (_count++ >= _maxCount)
-        _done = true;
-    
-    if (!_done)
-        ThreadPool.QueueUserWorkItem(Worker);
+	if (_count++ >= _maxCount)
+		_done = true;
+	
+	if (!_done)
+		ThreadPool.QueueUserWorkItem(Worker);
     }
 
     static public void Allocate()
@@ -53,7 +53,7 @@ public class VSTSTest
     }
 
     public static void Main()
-    {            
+    {		    
         Allocate();    
         while (!_done)
         {

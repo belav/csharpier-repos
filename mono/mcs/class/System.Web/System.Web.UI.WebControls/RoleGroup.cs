@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.RoleGroup class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,62 +33,62 @@ using System.Security.Principal;
 
 namespace System.Web.UI.WebControls {
 
-    // CAS (no InheritanceDemand for sealed class)
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class RoleGroup 
-    {
-        ITemplate contentTemplate;
-        string[] roles;
+	// CAS (no InheritanceDemand for sealed class)
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class RoleGroup 
+	{
+		ITemplate contentTemplate;
+		string[] roles;
 
-        public RoleGroup ()
-        {
-        }
+		public RoleGroup ()
+		{
+		}
 
-        [Browsable (false)]
-        [DefaultValue (null)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [TemplateContainer (typeof (LoginView))]
-        public ITemplate ContentTemplate {
-            get { return contentTemplate; }
-            set { contentTemplate = value; }
-        }
+		[Browsable (false)]
+		[DefaultValue (null)]
+		[PersistenceMode (PersistenceMode.InnerProperty)]
+		[TemplateContainer (typeof (LoginView))]
+		public ITemplate ContentTemplate {
+			get { return contentTemplate; }
+			set { contentTemplate = value; }
+		}
 
-        // LAMESPEC (beta2) : default value isn't null
-        [TypeConverter (typeof (StringArrayConverter))]
-        public string[] Roles {
-            get {
-                if (roles == null)
-                    roles = new string [0];
-                return roles;
-            }
-            set { roles = value; }
-        }
+		// LAMESPEC (beta2) : default value isn't null
+		[TypeConverter (typeof (StringArrayConverter))]
+		public string[] Roles {
+			get {
+				if (roles == null)
+					roles = new string [0];
+				return roles;
+			}
+			set { roles = value; }
+		}
 
 
-        public bool ContainsUser (IPrincipal user)
-        {
-            if (user == null)
-                throw new ArgumentNullException ("user");
+		public bool ContainsUser (IPrincipal user)
+		{
+			if (user == null)
+				throw new ArgumentNullException ("user");
 
-            if (roles != null) {
-                foreach (string role in roles) {
-                    if (user.IsInRole (role))
-                        return true;
-                }
-            }
-            return false;
-        }
+			if (roles != null) {
+				foreach (string role in roles) {
+					if (user.IsInRole (role))
+						return true;
+				}
+			}
+			return false;
+		}
 
-        public override string ToString ()
-        {
-            if ((roles == null) || (roles.Length == 0)) {
-                return String.Empty;
-            } else if (roles.Length == 1) {
-                return roles [0];
-            } else {
-                return String.Join (",", roles);
-            }
-        }
-    }
+		public override string ToString ()
+		{
+			if ((roles == null) || (roles.Length == 0)) {
+				return String.Empty;
+			} else if (roles.Length == 1) {
+				return roles [0];
+			} else {
+				return String.Join (",", roles);
+			}
+		}
+	}
 }
 

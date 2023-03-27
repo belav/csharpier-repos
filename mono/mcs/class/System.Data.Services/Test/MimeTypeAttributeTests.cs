@@ -1,4 +1,4 @@
-//
+﻿//
 // MimeTypeAttributeTests.cs
 //
 // Author:
@@ -30,14 +30,14 @@ using System.Data.Services;
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Services {
-    [TestFixture]
-    public class MimeTypeAttributeTests {
-        [Test]
-        public void Ctor()
-        {
-            var mt = new MimeTypeAttribute ("member", "type");
-            Assert.AreEqual ("member", mt.MemberName);
-            Assert.AreEqual ("type", mt.MimeType);
-        }
-    }
+	[TestFixture]
+	public class MimeTypeAttributeTests {
+		[Test]
+		public void Ctor()
+		{
+			var mt = new MimeTypeAttribute ("member", "type");
+			Assert.AreEqual ("member", mt.MemberName);
+			Assert.AreEqual ("type", mt.MimeType);
+		}
+	}
 }

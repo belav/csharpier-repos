@@ -2,7 +2,7 @@
 // HttpsTransportElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006,2010 Novell, Inc.  http://www.novell.com
 //
@@ -54,64 +54,64 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public class HttpsTransportElement
-         : HttpTransportElement
-    {
-        ConfigurationPropertyCollection _properties;
+	public class HttpsTransportElement
+		 : HttpTransportElement
+	{
+		ConfigurationPropertyCollection _properties;
 
-        public HttpsTransportElement () {
-        }
+		public HttpsTransportElement () {
+		}
 
 
-        // Properties
+		// Properties
 
-        public override Type BindingElementType {
-            get { return typeof (HttpsTransportBindingElement); }
-        }
+		public override Type BindingElementType {
+			get { return typeof (HttpsTransportBindingElement); }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = base.Properties;
-                    _properties.Add (new ConfigurationProperty ("requireClientCertificate", typeof (bool), "false", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-                }
-                return _properties;
-            }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get {
+				if (_properties == null) {
+					_properties = base.Properties;
+					_properties.Add (new ConfigurationProperty ("requireClientCertificate", typeof (bool), "false", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
+				}
+				return _properties;
+			}
+		}
 
-        [ConfigurationProperty ("requireClientCertificate",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = false)]
-        public bool RequireClientCertificate {
-            get { return (bool) base ["requireClientCertificate"]; }
-            set { base ["requireClientCertificate"] = value; }
-        }
+		[ConfigurationProperty ("requireClientCertificate",
+			 Options = ConfigurationPropertyOptions.None,
+			DefaultValue = false)]
+		public bool RequireClientCertificate {
+			get { return (bool) base ["requireClientCertificate"]; }
+			set { base ["requireClientCertificate"] = value; }
+		}
 
-        public override void ApplyConfiguration (BindingElement bindingElement)
-        {
-            var b = (HttpsTransportBindingElement) bindingElement;
-            base.ApplyConfiguration (b);
-            b.RequireClientCertificate = RequireClientCertificate;
-        }
+		public override void ApplyConfiguration (BindingElement bindingElement)
+		{
+			var b = (HttpsTransportBindingElement) bindingElement;
+			base.ApplyConfiguration (b);
+			b.RequireClientCertificate = RequireClientCertificate;
+		}
 
-        public override void CopyFrom (ServiceModelExtensionElement from)
-        {
-            var e = (HttpsTransportElement) from;
-            base.CopyFrom (from);
-            RequireClientCertificate = e.RequireClientCertificate;
-        }
+		public override void CopyFrom (ServiceModelExtensionElement from)
+		{
+			var e = (HttpsTransportElement) from;
+			base.CopyFrom (from);
+			RequireClientCertificate = e.RequireClientCertificate;
+		}
 
-        protected override TransportBindingElement CreateDefaultBindingElement ()
-        {
-            return new HttpsTransportBindingElement ();
-        }
+		protected override TransportBindingElement CreateDefaultBindingElement ()
+		{
+			return new HttpsTransportBindingElement ();
+		}
 
-        protected internal override void InitializeFrom (BindingElement bindingElement)
-        {
-            var b = (HttpsTransportBindingElement) bindingElement;
-            base.InitializeFrom (b);
-            RequireClientCertificate = b.RequireClientCertificate;
-        }
-    }
+		protected internal override void InitializeFrom (BindingElement bindingElement)
+		{
+			var b = (HttpsTransportBindingElement) bindingElement;
+			base.InitializeFrom (b);
+			RequireClientCertificate = b.RequireClientCertificate;
+		}
+	}
 
 }

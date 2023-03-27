@@ -43,7 +43,7 @@ namespace System.Data.SqlClient {
                          Result will be in the form of: "DBNETLIB, via:\\blained1\pipe\sql\query".
 
                         supported formats:
-                            tcp    - DBMSSOCN,[server|server\instance][,port]
+                            tcp	- DBMSSOCN,[server|server\instance][,port]
                             np - DBNMPNTW,[\\server\pipe\sql\query | \\server\pipe\MSSQL$instance\sql\query]
                                   where \sql\query is the pipename and can be replaced with any other pipe name
                             via - [DBMSGNET,server,port | DBNETLIB, via:server, port]

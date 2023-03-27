@@ -13,7 +13,7 @@ using System;
 namespace Mono.ILASM {
 
         public class HandlerBlock {
-        
+		
                 private LabelInfo from_label;
                 private LabelInfo to_label;
 
@@ -25,12 +25,12 @@ namespace Mono.ILASM {
 
                 public PEAPI.CILLabel GetFromLabel (CodeGen code_gen, MethodDef method)
                 {
-            return from_label.Label;
+			return from_label.Label;
                 }
 
                 public PEAPI.CILLabel GetToLabel (CodeGen code_gen, MethodDef method)
                 {
-            return to_label.Label;
+			return to_label.Label;
                 }
         }
 

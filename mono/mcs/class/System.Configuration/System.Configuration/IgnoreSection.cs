@@ -2,8 +2,8 @@
 // System.Configuration.IgnoreSection.cs
 //
 // Authors:
-//    Lluis Sanchez (lluis@novell.com)
-//    Chris Toshok (toshok@ximian.com)
+//	Lluis Sanchez (lluis@novell.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -34,50 +34,50 @@ using System.IO;
 
 namespace System.Configuration {
 
-    public sealed class IgnoreSection : ConfigurationSection
-    {
-        string xml;
+	public sealed class IgnoreSection : ConfigurationSection
+	{
+		string xml;
 
-        static ConfigurationPropertyCollection properties;
+		static ConfigurationPropertyCollection properties;
 
-        static IgnoreSection ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static IgnoreSection ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public IgnoreSection ()
-        {
-        }
+		public IgnoreSection ()
+		{
+		}
 
-        protected internal override  bool IsModified ()
-        {
-            return false;
-        }
+		protected internal override  bool IsModified ()
+		{
+			return false;
+		}
 
-        protected internal override void DeserializeSection (XmlReader xmlReader)
-        {
-            xml = xmlReader.ReadOuterXml ();
-        }
+		protected internal override void DeserializeSection (XmlReader xmlReader)
+		{
+			xml = xmlReader.ReadOuterXml ();
+		}
 
-        [MonoTODO]
-        protected internal override void Reset (ConfigurationElement parentSection)
-        {
-            base.Reset (parentSection);
-        }
+		[MonoTODO]
+		protected internal override void Reset (ConfigurationElement parentSection)
+		{
+			base.Reset (parentSection);
+		}
 
-        [MonoTODO]
-        protected internal override void ResetModified ()
-        {
-            base.ResetModified ();
-        }
+		[MonoTODO]
+		protected internal override void ResetModified ()
+		{
+			base.ResetModified ();
+		}
 
-        protected internal override string SerializeSection (ConfigurationElement parentSection, string name, ConfigurationSaveMode saveMode)
-        {
-            return xml;
-        }
+		protected internal override string SerializeSection (ConfigurationElement parentSection, string name, ConfigurationSaveMode saveMode)
+		{
+			return xml;
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+	}
 }

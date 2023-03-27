@@ -2,7 +2,7 @@
 // FaultReasonText.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -30,42 +30,42 @@ using System.Globalization;
 
 namespace System.ServiceModel
 {
-    public class FaultReasonText
-    {
-        readonly string text, xmllang;
+	public class FaultReasonText
+	{
+		readonly string text, xmllang;
 
-        public FaultReasonText (string text)
-            : this (text, CultureInfo.CurrentCulture)
-        {
-        }
+		public FaultReasonText (string text)
+			: this (text, CultureInfo.CurrentCulture)
+		{
+		}
 
-        public FaultReasonText (string text, CultureInfo cultureInfo)
-            : this (text, cultureInfo.Name)
-        {
-        }
+		public FaultReasonText (string text, CultureInfo cultureInfo)
+			: this (text, cultureInfo.Name)
+		{
+		}
 
-        public FaultReasonText (string text, string xmlLang)
-        {
-            this.text = text;
-            this.xmllang = xmlLang;
-        }
+		public FaultReasonText (string text, string xmlLang)
+		{
+			this.text = text;
+			this.xmllang = xmlLang;
+		}
 
-        public string Text {
-            get { return text; }
-        }
+		public string Text {
+			get { return text; }
+		}
 
-        public string XmlLang {
-            get { return xmllang; }
-        }
+		public string XmlLang {
+			get { return xmllang; }
+		}
 
-        public bool Matches (CultureInfo cultureInfo)
-        {
-            if (cultureInfo.Name == xmllang)
-                return true;
-            if (cultureInfo.Parent != null)
-                return cultureInfo.Parent.Name == xmllang;
-            else
-                return false;
-        }
-    }
+		public bool Matches (CultureInfo cultureInfo)
+		{
+			if (cultureInfo.Name == xmllang)
+				return true;
+			if (cultureInfo.Parent != null)
+				return cultureInfo.Parent.Name == xmllang;
+			else
+				return false;
+		}
+	}
 }

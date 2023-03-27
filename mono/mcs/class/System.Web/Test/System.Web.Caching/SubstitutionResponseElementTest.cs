@@ -1,4 +1,4 @@
-//
+﻿//
 // SubstitutionResponseElementTest.cs
 //
 // Authors:
@@ -36,26 +36,26 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Caching
 {
-    [TestFixture]
-    public class SubstitutionResponseElementTest
-    {
-        string TestCallback (HttpContext ctx)
-        {
-            return String.Empty;
-        }
+	[TestFixture]
+	public class SubstitutionResponseElementTest
+	{
+		string TestCallback (HttpContext ctx)
+		{
+			return String.Empty;
+		}
 
-        [Test]
-        public void Constructor ()
-        {
-            SubstitutionResponseElement sre;
+		[Test]
+		public void Constructor ()
+		{
+			SubstitutionResponseElement sre;
 
-            Assert.Throws<ArgumentNullException> (() => {
-                sre = new SubstitutionResponseElement (null);
-            }, "#A1");
+			Assert.Throws<ArgumentNullException> (() => {
+				sre = new SubstitutionResponseElement (null);
+			}, "#A1");
 
-            var cb = new HttpResponseSubstitutionCallback (TestCallback);
-            sre = new SubstitutionResponseElement (cb);
-            Assert.AreEqual (cb, sre.Callback, "#B1");
-        }
-    }
+			var cb = new HttpResponseSubstitutionCallback (TestCallback);
+			sre = new SubstitutionResponseElement (cb);
+			Assert.AreEqual (cb, sre.Callback, "#B1");
+		}
+	}
 }

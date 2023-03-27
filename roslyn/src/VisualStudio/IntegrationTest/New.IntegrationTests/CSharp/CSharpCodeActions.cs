@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -386,7 +386,7 @@ class D
             AssertEx.EqualOrDiff(generatedSource, await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken));
 
             // Verify that a Fix All in Document in the generated file still does nothing.
-            // ? This is a statement of the current behavior, and not a claim regarding correctness of the design.
+            // ⚠ This is a statement of the current behavior, and not a claim regarding correctness of the design.
             // The current behavior is observable; any change to this behavior should be part of an intentional design
             // change.
             await TestServices.Editor.MoveCaretAsync(generatedSourcePosition, HangMitigatingCancellationToken);
@@ -449,7 +449,7 @@ class D
             await TestServices.SolutionExplorer.OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
 
             // Verify that applying a Fix All operation does not change generated file, but does change other files.
-            // ? This is a statement of the current behavior, and not a claim regarding correctness of the design.
+            // ⚠ This is a statement of the current behavior, and not a claim regarding correctness of the design.
             // The current behavior is observable; any change to this behavior should be part of an intentional design
             // change.
             MarkupTestFile.GetPosition(markup, out var expectedText, out int _);

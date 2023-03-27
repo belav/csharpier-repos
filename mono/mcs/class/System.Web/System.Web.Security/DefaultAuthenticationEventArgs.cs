@@ -2,7 +2,7 @@
 // System.Web.Security.DefaultAuthenticationEventArgs
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
@@ -31,22 +31,22 @@ using System.Security.Permissions;
 
 namespace System.Web.Security {
 
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class DefaultAuthenticationEventArgs : EventArgs {
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public sealed class DefaultAuthenticationEventArgs : EventArgs {
 
-        HttpContext _context;
+		HttpContext _context;
 
-        public DefaultAuthenticationEventArgs (HttpContext context)
-        {
-            if (context == null)
-                throw new ArgumentNullException ("context");
+		public DefaultAuthenticationEventArgs (HttpContext context)
+		{
+			if (context == null)
+				throw new ArgumentNullException ("context");
 
-            _context = context;
-        }
+			_context = context;
+		}
 
-        public HttpContext Context {
-            get { return _context; }
-        }
-    }
+		public HttpContext Context {
+			get { return _context; }
+		}
+	}
 }

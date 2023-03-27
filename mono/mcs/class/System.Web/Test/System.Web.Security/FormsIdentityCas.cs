@@ -2,7 +2,7 @@
 // FormsIdentityCas.cs - CAS unit tests for System.Web.Security.FormsIdentity
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,41 +37,41 @@ using System.Web.Security;
 
 namespace MonoCasTests.System.Web.Security {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class FormsIdentityCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class FormsIdentityCas : AspNetHostingMinimal {
 
-        private FormsAuthenticationTicket ticket;
+		private FormsAuthenticationTicket ticket;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            // other (simpler) ctors fails with NRE under 1.x
-            ticket = new FormsAuthenticationTicket (3, "mine", DateTime.MinValue, DateTime.Now.AddSeconds (-1), false, "data", "path");
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			// other (simpler) ctors fails with NRE under 1.x
+			ticket = new FormsAuthenticationTicket (3, "mine", DateTime.MinValue, DateTime.Now.AddSeconds (-1), false, "data", "path");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Identity ()
-        {
-            FormsIdentity identity = new FormsIdentity (ticket);
-            Assert.AreEqual ("Forms", identity.AuthenticationType, "AuthenticationType");
-            Assert.IsTrue (identity.IsAuthenticated, "IsAuthenticated");
-            Assert.AreEqual ("mine", identity.Name, "Name");
-            Assert.IsTrue (Object.ReferenceEquals (ticket, identity.Ticket), "Ticket");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Identity ()
+		{
+			FormsIdentity identity = new FormsIdentity (ticket);
+			Assert.AreEqual ("Forms", identity.AuthenticationType, "AuthenticationType");
+			Assert.IsTrue (identity.IsAuthenticated, "IsAuthenticated");
+			Assert.AreEqual ("mine", identity.Name, "Name");
+			Assert.IsTrue (Object.ReferenceEquals (ticket, identity.Ticket), "Ticket");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (FormsAuthenticationTicket) });
-            Assert.IsNotNull (ci, ".ctor(FormsAuthenticationTicket)");
-            return ci.Invoke (new object[1] { ticket });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (FormsAuthenticationTicket) });
+			Assert.IsNotNull (ci, ".ctor(FormsAuthenticationTicket)");
+			return ci.Invoke (new object[1] { ticket });
+		}
 
-        public override Type Type {
-            get { return typeof (FormsIdentity); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (FormsIdentity); }
+		}
+	}
 }

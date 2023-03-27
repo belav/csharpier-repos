@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -854,10 +854,10 @@ class Program
             const string ilSource = @"
 .class public A
 {
-    .method public static void get_P() { ret }
-    .property void P() { .get void A::get_P() }
-    .method public instance void get_Q() { ret }
-    .property void Q() { .get instance void A::get_Q() }
+	.method public static void get_P() { ret }
+	.property void P() { .get void A::get_P() }
+	.method public instance void get_Q() { ret }
+	.property void Q() { .get instance void A::get_Q() }
 }
 ";
             const string cSharpSource = @"
@@ -889,64 +889,64 @@ class C
 .class public B { }
 .class public C
 {
-    .method public instance int32 get_noopt()
-    {
-        ldc.i4.0
-        ret
-    }
-    .method public instance int32 modopt(A) get_returnopt()
-    {
-        ldc.i4.0
-        ret
-    }
+	.method public instance int32 get_noopt()
+	{
+	    ldc.i4.0
+		ret
+	}
+	.method public instance int32 modopt(A) get_returnopt()
+	{
+	    ldc.i4.0
+		ret
+	}
     .method public instance void set_noopt(int32 val)
-    {
-        ret
-    }
+	{
+		ret
+	}
     .method public instance void set_argopt(int32 modopt(A) val)
-    {
-        ret
-    }
+	{
+		ret
+	}
     .method public instance void modopt(A) set_returnopt(int32 val)
-    {
-        ret
-    }
-    // Modifier on property but not accessors.
-    .property int32 modopt(A) P1()
-    {
-        .get instance int32 C::get_noopt()
-        .set instance void C::set_noopt(int32)
-    }
-    // Modifier on accessors but not property.
-    .property int32 P2()
-    {
-        .get instance int32 modopt(A) C::get_returnopt()
-        .set instance void C::set_argopt(int32 modopt(A))
-    }
-    // Modifier on getter only.
-    .property int32 P3()
-    {
-        .get instance int32 modopt(A) C::get_returnopt()
-        .set instance void C::set_noopt(int32)
-    }
-    // Modifier on setter only.
-    .property int32 P4()
-    {
-        .get instance int32 C::get_noopt()
-        .set instance void C::set_argopt(int32 modopt(A))
-    }
-    // Modifier on setter return type.
-    .property int32 P5()
-    {
-        .get instance int32 C::get_noopt()
-        .set instance void modopt(A) C::set_returnopt(int32)
-    }
-    // Modifier on property and different modifier on accessors.
-    .property int32 modopt(B) P6()
-    {
-        .get instance int32 modopt(A) C::get_returnopt()
-        .set instance void C::set_argopt(int32 modopt(A))
-    }
+	{
+		ret
+	}
+	// Modifier on property but not accessors.
+	.property int32 modopt(A) P1()
+	{
+	    .get instance int32 C::get_noopt()
+		.set instance void C::set_noopt(int32)
+	}
+	// Modifier on accessors but not property.
+	.property int32 P2()
+	{
+	    .get instance int32 modopt(A) C::get_returnopt()
+		.set instance void C::set_argopt(int32 modopt(A))
+	}
+	// Modifier on getter only.
+	.property int32 P3()
+	{
+	    .get instance int32 modopt(A) C::get_returnopt()
+		.set instance void C::set_noopt(int32)
+	}
+	// Modifier on setter only.
+	.property int32 P4()
+	{
+	    .get instance int32 C::get_noopt()
+		.set instance void C::set_argopt(int32 modopt(A))
+	}
+	// Modifier on setter return type.
+	.property int32 P5()
+	{
+	    .get instance int32 C::get_noopt()
+		.set instance void modopt(A) C::set_returnopt(int32)
+	}
+	// Modifier on property and different modifier on accessors.
+	.property int32 modopt(B) P6()
+	{
+	    .get instance int32 modopt(A) C::get_returnopt()
+		.set instance void C::set_argopt(int32 modopt(A))
+	}
 }";
             const string cSharpSource =
 @"class D

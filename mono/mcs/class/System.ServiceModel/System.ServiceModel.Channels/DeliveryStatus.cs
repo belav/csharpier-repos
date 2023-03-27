@@ -28,8 +28,8 @@ using System;
 
 namespace System.ServiceModel.Channels
 {
-    public enum DeliveryStatus {
-        InDoubt,
-        NotDelivered,
-    }
+	public enum DeliveryStatus {
+		InDoubt,
+		NotDelivered,
+	}
 }

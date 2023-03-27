@@ -31,38 +31,38 @@ using System.Collections;
 
 namespace System.DirectoryServices.Protocols
 {
-    [MonoTODO]
-    public class SearchResponse : DirectoryResponse
-    {
-        internal SearchResponse ()
-        {
-            ArrayList references = new ArrayList ();
-            References = new SearchResultReferenceCollection (references);
-        }
+	[MonoTODO]
+	public class SearchResponse : DirectoryResponse
+	{
+		internal SearchResponse ()
+		{
+			ArrayList references = new ArrayList ();
+			References = new SearchResultReferenceCollection (references);
+		}
 
-        [MonoTODO]
-        public override DirectoryControl [] Controls {
-            get { throw new NotImplementedException (); }
-        }
-        [MonoTODO]
-        public SearchResultEntryCollection Entries { get; private set; }
-        [MonoTODO]
-        public override string ErrorMessage {
-            get { throw new NotImplementedException (); }
-        }
-        [MonoTODO]
-        public override string MatchedDN {
-            get { throw new NotImplementedException (); }
-        }
-        [MonoTODO]
-        public SearchResultReferenceCollection References { get; private set; }
-        [MonoTODO]
-        public override Uri [] Referral {
-            get { throw new NotImplementedException (); }
-        }
-        [MonoTODO]
-        public override ResultCode ResultCode {
-            get { throw new NotImplementedException (); }
-        }
-    }
+		[MonoTODO]
+		public override DirectoryControl [] Controls {
+			get { throw new NotImplementedException (); }
+		}
+		[MonoTODO]
+		public SearchResultEntryCollection Entries { get; private set; }
+		[MonoTODO]
+		public override string ErrorMessage {
+			get { throw new NotImplementedException (); }
+		}
+		[MonoTODO]
+		public override string MatchedDN {
+			get { throw new NotImplementedException (); }
+		}
+		[MonoTODO]
+		public SearchResultReferenceCollection References { get; private set; }
+		[MonoTODO]
+		public override Uri [] Referral {
+			get { throw new NotImplementedException (); }
+		}
+		[MonoTODO]
+		public override ResultCode ResultCode {
+			get { throw new NotImplementedException (); }
+		}
+	}
 }

@@ -1,9 +1,9 @@
 //
 // X509EnhancedKeyUsageExtensionCas.cs - CAS unit tests for 
-//    System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension
+//	System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,38 +41,38 @@ using MonoTests.System.Security.Cryptography.X509Certificates;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class X509EnhancedKeyUsageExtensionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class X509EnhancedKeyUsageExtensionCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests_Deny_Unrestricted ()
-        {
-            X509EnhancedKeyUsageExtensionTest unit = new X509EnhancedKeyUsageExtensionTest ();
-            unit.ConstructorEmpty ();
-            unit.ConstructorEmpty_EnhancedKeyUsages ();
-            unit.ConstructorAsnEncodedData ();
-            unit.ConstructorOidCollection ();
-            unit.WrongExtension_X509Extension ();
-            unit.CopyFrom_Self ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTests_Deny_Unrestricted ()
+		{
+			X509EnhancedKeyUsageExtensionTest unit = new X509EnhancedKeyUsageExtensionTest ();
+			unit.ConstructorEmpty ();
+			unit.ConstructorEmpty_EnhancedKeyUsages ();
+			unit.ConstructorAsnEncodedData ();
+			unit.ConstructorOidCollection ();
+			unit.WrongExtension_X509Extension ();
+			unit.CopyFrom_Self ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (X509EnhancedKeyUsageExtension).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (X509EnhancedKeyUsageExtension).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }
 

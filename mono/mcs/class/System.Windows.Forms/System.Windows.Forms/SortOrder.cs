@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Ravindra (rkumar@novell.com)
+//	Ravindra (rkumar@novell.com)
 //
 
 // COMPLETE
@@ -28,10 +28,10 @@
 
 namespace System.Windows.Forms
 {
-    public enum SortOrder
-    {
-        None = 0,
-        Ascending = 1,
-        Descending = 2
-    }
+	public enum SortOrder
+	{
+		None = 0,
+		Ascending = 1,
+		Descending = 2
+	}
 }

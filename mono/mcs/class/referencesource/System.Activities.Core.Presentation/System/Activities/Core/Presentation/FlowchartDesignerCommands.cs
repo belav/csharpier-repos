@@ -1,4 +1,4 @@
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 //This class can  be removed if we make FlowchartDesigner public.
 //The purpose of this is so that VS can raise the command defined for the flowchart designer.

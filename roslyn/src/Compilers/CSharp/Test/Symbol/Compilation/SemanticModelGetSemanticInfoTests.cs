@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -9524,7 +9524,7 @@ public class XAttribute : Attribute
 }
 
 [/*<bind>*/X/*</bind>*/]
-class Class1    
+class Class1	
 {
 }
 ";
@@ -9560,7 +9560,7 @@ public class XAttribute : Attribute
 }
 
 [/*<bind>*/X/*</bind>*/]
-class Class1    
+class Class1	
 {
 }
 ";
@@ -10419,7 +10419,7 @@ public struct X
 {
 }
 
-class Class1    
+class Class1	
 {
     public static void Main()
     {
@@ -14560,8 +14560,8 @@ public class Program
             string sourceCode = @"
 struct Class1
 {
-    public event EventHandler e2;
-    extern public event EventHandler e1 = /*<bind>*/ e2 = new EventHandler(this, new EventArgs()) = null /*</bind>*/;
+	public event EventHandler e2;
+	extern public event EventHandler e1 = /*<bind>*/ e2 = new EventHandler(this, new EventArgs()) = null /*</bind>*/;
 }
 ";
             var semanticInfo = GetSemanticInfoForTest<AssignmentExpressionSyntax>(sourceCode);

@@ -380,7 +380,7 @@ namespace System.Data.Metadata.Edm
         /// <param name="edmVersion">The version of edm to use</param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "edm")]
-           public System.Collections.ObjectModel.ReadOnlyCollection<PrimitiveType> GetPrimitiveTypes(double edmVersion)
+   	    public System.Collections.ObjectModel.ReadOnlyCollection<PrimitiveType> GetPrimitiveTypes(double edmVersion)
         {
             if (edmVersion == XmlConstants.EdmVersionForV1 || edmVersion == XmlConstants.EdmVersionForV1_1 || edmVersion == XmlConstants.EdmVersionForV2)
             {

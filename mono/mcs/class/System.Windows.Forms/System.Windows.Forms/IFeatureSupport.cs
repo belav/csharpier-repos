@@ -20,18 +20,18 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public interface IFeatureSupport {
-        #region Public Instance Methods
-        Version GetVersionPresent(object feature);
-        bool IsPresent(object feature);
-        bool IsPresent(object feature, Version minimumVersion);
-        #endregion    // Public Instance Methods
-    }
+	public interface IFeatureSupport {
+		#region Public Instance Methods
+		Version GetVersionPresent(object feature);
+		bool IsPresent(object feature);
+		bool IsPresent(object feature, Version minimumVersion);
+		#endregion	// Public Instance Methods
+	}
 }

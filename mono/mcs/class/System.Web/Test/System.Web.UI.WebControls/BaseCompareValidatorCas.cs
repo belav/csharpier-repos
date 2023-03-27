@@ -1,9 +1,9 @@
 //
 // BaseCompareValidatorCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.BaseCompareValidator
+//	- CAS unit tests for System.Web.UI.WebControls.BaseCompareValidator
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,43 +38,43 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class BaseCompareValidatorCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class BaseCompareValidatorCas {
 
-        // note: we do not inherit from AspNetHostingMinimal because
-        // BaseCompareValidator is an abstract class
+		// note: we do not inherit from AspNetHostingMinimal because
+		// BaseCompareValidator is an abstract class
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            BaseCompareValidatorTest unit = new BaseCompareValidatorTest ();
-            unit.ViewState ();
-            unit.CanConvert ();
-            unit.Convert ();
-            unit.Compare ();
-            // can't call MiscPropertiesAndMethods because it change the
-            // thread's culture (which requires ControlThread)
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			BaseCompareValidatorTest unit = new BaseCompareValidatorTest ();
+			unit.ViewState ();
+			unit.CanConvert ();
+			unit.Convert ();
+			unit.Compare ();
+			// can't call MiscPropertiesAndMethods because it change the
+			// thread's culture (which requires ControlThread)
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void MiscPropertiesAndMethods ()
-        {
-            BaseCompareValidatorPoker p = new BaseCompareValidatorPoker ();
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void MiscPropertiesAndMethods ()
+		{
+			BaseCompareValidatorPoker p = new BaseCompareValidatorPoker ();
 
-            Assert.AreEqual (p.GetCutoffYear (), 2029, "E1");
-            Assert.AreEqual (p.GetFullYear (29), 2029, "E2");
-            Assert.AreEqual (p.GetFullYear (30), 1930, "E3");
-            Assert.IsNotNull (p.GetDateElementOrder (), "E4");
-        }
-    }
+			Assert.AreEqual (p.GetCutoffYear (), 2029, "E1");
+			Assert.AreEqual (p.GetFullYear (29), 2029, "E2");
+			Assert.AreEqual (p.GetFullYear (30), 1930, "E3");
+			Assert.IsNotNull (p.GetDateElementOrder (), "E4");
+		}
+	}
 }

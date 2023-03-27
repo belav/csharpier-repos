@@ -1,7 +1,7 @@
 //
 // MSSqlTestBed.cs : This is base class which manages the connections to 
 //                    MSSql database. This serves as a base class for all
-//              MSSql database dependant tests.
+//		      MSSql database dependant tests.
 //
 // To run :
 //  
@@ -55,7 +55,7 @@ namespace MonoTests.System.Data
 
                 public MSSqlTestClient ()
                 {
-                connectionString =
+				connectionString =
                                         "Server=164.99.168.131;" +
                                         "Database=Northwind;" +
                                         "User ID=sa;" +
@@ -65,7 +65,7 @@ namespace MonoTests.System.Data
 
                 protected void OpenConnection () 
                 {
-                conn.ConnectionString = connectionString;
+		        conn.ConnectionString = connectionString;
                         conn.Open ();
                         // run tests only if the connection is open,
                         // otherwise make it fail, to setup with correct
@@ -82,7 +82,7 @@ namespace MonoTests.System.Data
                         }
                 }
 
-        internal void ExecuteQuery (string query)
+		internal void ExecuteQuery (string query)
                 {
                         SqlCommand cmd = new SqlCommand ();
                         cmd.Connection = conn;
@@ -90,11 +90,11 @@ namespace MonoTests.System.Data
                         try {
                                 int recordsAff = cmd.ExecuteNonQuery ();
                         } catch (Exception e) {
-                Console.WriteLine("exception");
-                Console.WriteLine(e.StackTrace);
+				Console.WriteLine("exception");
+				Console.WriteLine(e.StackTrace);
                         }
                 }
-    
+	
 
         }
 }

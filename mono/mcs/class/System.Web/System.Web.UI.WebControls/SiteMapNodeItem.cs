@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SiteMapNodeItem.cs
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,48 +34,48 @@ using System.Drawing;
 
 namespace System.Web.UI.WebControls
 {
-    [ToolboxItem (false)]
-    public class SiteMapNodeItem: WebControl, IDataItemContainer, INamingContainer
-    {
-        int itemIndex;
-        SiteMapNodeItemType itemType;
-        SiteMapNode node;
-        
-        public SiteMapNodeItem (int itemIndex, SiteMapNodeItemType itemType)
-        {
-            this.itemIndex = itemIndex;
-            SetItemType (itemType);
-        }
-        
-        protected internal virtual void SetItemType (SiteMapNodeItemType itemType)
-        {
-            this.itemType = itemType;
-        }
-        
-        public virtual int ItemIndex {
-            get { return itemIndex; }
-        }
-        
-        public virtual SiteMapNodeItemType ItemType {
-            get { return itemType; }
-        }
-        
-        public virtual SiteMapNode SiteMapNode {
-            get { return node; }
-            set { node = value; }
-        }
-        
-        object IDataItemContainer.DataItem {
-            get { return node; }
-        }
-        
-        int IDataItemContainer.DataItemIndex {
-            get { return itemIndex; }
-        }
-        
-        int IDataItemContainer.DisplayIndex {
-            get { return itemIndex; }
-        }
-    }
+	[ToolboxItem (false)]
+	public class SiteMapNodeItem: WebControl, IDataItemContainer, INamingContainer
+	{
+		int itemIndex;
+		SiteMapNodeItemType itemType;
+		SiteMapNode node;
+		
+		public SiteMapNodeItem (int itemIndex, SiteMapNodeItemType itemType)
+		{
+			this.itemIndex = itemIndex;
+			SetItemType (itemType);
+		}
+		
+		protected internal virtual void SetItemType (SiteMapNodeItemType itemType)
+		{
+			this.itemType = itemType;
+		}
+		
+		public virtual int ItemIndex {
+			get { return itemIndex; }
+		}
+		
+		public virtual SiteMapNodeItemType ItemType {
+			get { return itemType; }
+		}
+		
+		public virtual SiteMapNode SiteMapNode {
+			get { return node; }
+			set { node = value; }
+		}
+		
+		object IDataItemContainer.DataItem {
+			get { return node; }
+		}
+		
+		int IDataItemContainer.DataItemIndex {
+			get { return itemIndex; }
+		}
+		
+		int IDataItemContainer.DisplayIndex {
+			get { return itemIndex; }
+		}
+	}
 }
 

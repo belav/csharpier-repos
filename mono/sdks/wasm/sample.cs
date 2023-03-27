@@ -5,28 +5,28 @@ using System.Reflection;
 using WebAssembly;
 
 public class SampleMath {
-    public static int IntAdd (int a, int b) {
-        var cp = new Simple.Complex (10, "hello");
-        int c = a + b;
-        int d = c + b;
-        int e = d + a;
+	public static int IntAdd (int a, int b) {
+		var cp = new Simple.Complex (10, "hello");
+		int c = a + b;
+		int d = c + b;
+		int e = d + a;
 
-        e += cp.DoStuff ();
+		e += cp.DoStuff ();
 
-        return e;
-    }
+		return e;
+	}
 
 
-    public int First (int[] x) {
-        return x.FirstOrDefault ();
-    }
+	public int First (int[] x) {
+		return x.FirstOrDefault ();
+	}
 
-    public static void Run ()
-    {
+	public static void Run ()
+	{
 #if SAMPLE == false
-        DebuggerTests.EntryClass.run ();
+		DebuggerTests.EntryClass.run ();
 #endif
-    }
+	}
 
 }
 

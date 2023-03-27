@@ -2,7 +2,7 @@
 // ServiceModelSecurityTokenTypesTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -39,19 +39,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class ServiceModelSecurityTokenTypesTest
-    {
-        [Test]
-        public void Strings ()
-        {
-            Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/AnonymousSslnego", ServiceModelSecurityTokenTypes.AnonymousSslnego, "#1");
-            Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/MutualSslnego", ServiceModelSecurityTokenTypes.MutualSslnego, "#2");
-            Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SecureConversation", ServiceModelSecurityTokenTypes.SecureConversation, "#3");
-            Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SecurityContextToken", ServiceModelSecurityTokenTypes.SecurityContext, "#4");
-            Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/Spnego", ServiceModelSecurityTokenTypes.Spnego, "#5");
-            Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SspiCredential", ServiceModelSecurityTokenTypes.SspiCredential, "#6");
-        }
-    }
+	[TestFixture]
+	public class ServiceModelSecurityTokenTypesTest
+	{
+		[Test]
+		public void Strings ()
+		{
+			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/AnonymousSslnego", ServiceModelSecurityTokenTypes.AnonymousSslnego, "#1");
+			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/MutualSslnego", ServiceModelSecurityTokenTypes.MutualSslnego, "#2");
+			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SecureConversation", ServiceModelSecurityTokenTypes.SecureConversation, "#3");
+			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SecurityContextToken", ServiceModelSecurityTokenTypes.SecurityContext, "#4");
+			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/Spnego", ServiceModelSecurityTokenTypes.Spnego, "#5");
+			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/servicemodel/tokens/SspiCredential", ServiceModelSecurityTokenTypes.SspiCredential, "#6");
+		}
+	}
 }
 #endif

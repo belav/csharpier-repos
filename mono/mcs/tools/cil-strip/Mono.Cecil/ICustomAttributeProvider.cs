@@ -28,12 +28,12 @@
 
 namespace Mono.Cecil {
 
-    using System.Reflection;
+	using System.Reflection;
 
-    internal interface ICustomAttributeProvider {
+	internal interface ICustomAttributeProvider {
 
-        CustomAttributeCollection CustomAttributes { get; }
+		CustomAttributeCollection CustomAttributes { get; }
 
-        bool HasCustomAttributes { get; }
-    }
+		bool HasCustomAttributes { get; }
+	}
 }

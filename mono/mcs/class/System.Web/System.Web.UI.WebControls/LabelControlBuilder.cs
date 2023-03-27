@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.LabelControlBuilder
 //
 // Authors:
-//    Ben Maurer <bmaurer@novell.com>
+//	Ben Maurer <bmaurer@novell.com>
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -27,10 +27,10 @@
 //
 
 namespace System.Web.UI.WebControls {
-    public class LabelControlBuilder : ControlBuilder {
-        public override bool AllowWhitespaceLiterals ()
-        {
-            return false;
-        }
-    }
+	public class LabelControlBuilder : ControlBuilder {
+		public override bool AllowWhitespaceLiterals ()
+		{
+			return false;
+		}
+	}
 }

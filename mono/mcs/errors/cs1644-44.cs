@@ -6,10 +6,10 @@ using System.Collections.Generic;
 
 class C
 {
-    public static void Main ()
-    {
-        var d = new Dictionary<string, int> {
-            ["a"] = 1
-        };
-    }
+	public static void Main ()
+	{
+		var d = new Dictionary<string, int> {
+			["a"] = 1
+		};
+	}
 }

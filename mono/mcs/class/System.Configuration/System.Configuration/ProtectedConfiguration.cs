@@ -2,7 +2,7 @@
 // System.Configuration.ProtectedConfiguration.cs
 //
 // Authors:
-//     Chris Toshok (toshok@ximian.com)
+// 	Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,33 +32,33 @@ using System.Security.Cryptography;
 
 namespace System.Configuration
 {
-    public static class ProtectedConfiguration
-    {
-        public const string DataProtectionProviderName = "DataProtectionConfigurationProvider";
-        public const string ProtectedDataSectionName = "configProtectedData";
-        public const string RsaProviderName = "RsaProtectedConfigurationProvider";
+	public static class ProtectedConfiguration
+	{
+		public const string DataProtectionProviderName = "DataProtectionConfigurationProvider";
+		public const string ProtectedDataSectionName = "configProtectedData";
+		public const string RsaProviderName = "RsaProtectedConfigurationProvider";
 
-        public static string DefaultProvider {
-            get { return Section.DefaultProvider; }
-        }
+		public static string DefaultProvider {
+			get { return Section.DefaultProvider; }
+		}
 
-        public static ProtectedConfigurationProviderCollection Providers {
-            get { return Section.GetAllProviders(); }
-        }
+		public static ProtectedConfigurationProviderCollection Providers {
+			get { return Section.GetAllProviders(); }
+		}
 
-        internal static ProtectedConfigurationSection Section {
-            get { return (ProtectedConfigurationSection)ConfigurationManager.GetSection ("configProtectedData"); }
-        }
+		internal static ProtectedConfigurationSection Section {
+			get { return (ProtectedConfigurationSection)ConfigurationManager.GetSection ("configProtectedData"); }
+		}
 
-        internal static ProtectedConfigurationProvider GetProvider (string name, bool throwOnError)
-        {
-            ProtectedConfigurationProvider p = Providers[name];
+		internal static ProtectedConfigurationProvider GetProvider (string name, bool throwOnError)
+		{
+			ProtectedConfigurationProvider p = Providers[name];
 
-            if (p == null && throwOnError)
-                throw new Exception (String.Format ("The protection provider '{0}' was not found.", name));
+			if (p == null && throwOnError)
+				throw new Exception (String.Format ("The protection provider '{0}' was not found.", name));
 
-            return p;
-        }
-    }
+			return p;
+		}
+	}
 
 }

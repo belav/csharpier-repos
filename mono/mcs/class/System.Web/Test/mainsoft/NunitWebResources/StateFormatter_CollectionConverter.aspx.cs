@@ -17,18 +17,18 @@ using MonoTests.SystemWeb.Framework;
 
 public partial class Sections_ECCN_test : System.Web.UI.Page
 {
-    //protected override void OnPreInit (EventArgs e)
-    public Sections_ECCN_test ()
-    {
-        WebTest t = WebTest.CurrentTest;
-        if (t != null)
-            t.Invoke (this);
-    }
-        
-    public override void VerifyRenderingInServerForm (Control c)
-    {
+	//protected override void OnPreInit (EventArgs e)
+	public Sections_ECCN_test ()
+	{
+		WebTest t = WebTest.CurrentTest;
+		if (t != null)
+			t.Invoke (this);
+	}
+		
+	public override void VerifyRenderingInServerForm (Control c)
+	{
 
-    }
+	}
 
     protected void Page_Load(object sender, EventArgs e)
     {

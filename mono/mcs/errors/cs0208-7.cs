@@ -3,12 +3,12 @@
 // Compiler options: -unsafe
 
 struct foo {
-    public delegate void bar (int x);
-    public bar barf;
+	public delegate void bar (int x);
+	public bar barf;
 }
 
 unsafe class t {
-    static void Main () {
-        foo *f = null;
-    }
+	static void Main () {
+		foo *f = null;
+	}
 }

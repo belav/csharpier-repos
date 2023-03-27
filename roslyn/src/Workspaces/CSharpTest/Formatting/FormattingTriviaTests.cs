@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1532,7 +1532,7 @@ double y;
 {
     void Goo()
     {
-        int            /**/ i = 10;
+        int			/**/ i = 10;
     }
 }";
 
@@ -1652,7 +1652,7 @@ class Program
         public async Task FormatInvalidCode_1()
         {
             var expected = @"> Roslyn.Utilities.dll!   Basic";
-            var content = @">    Roslyn.Utilities.dll!     Basic";
+            var content = @">	Roslyn.Utilities.dll! 	Basic";
             await AssertFormatAsync(expected, content);
         }
 
@@ -1660,8 +1660,8 @@ class Program
         [WorkItem(542546, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542546")]
         public async Task FormatInvalidCode_2()
         {
-            var content = @">    Roslyn.Utilities.dll! Line 43 + 0x5 bytes    Basic";
-            var expectedContent = @"> Roslyn.Utilities.dll! Line 43 + 0x5 bytes    Basic";
+            var content = @">	Roslyn.Utilities.dll! Line 43 + 0x5 bytes	Basic";
+            var expectedContent = @"> Roslyn.Utilities.dll! Line 43 + 0x5 bytes	Basic";
             await AssertFormatAsync(expectedContent, content);
         }
 
@@ -1778,7 +1778,7 @@ using System.Collections;
 
 class F
 {
-    string s;
+	string s;
 }";
             var tree = SyntaxFactory.ParseCompilationUnit(code);
             var newLine = Environment.NewLine;

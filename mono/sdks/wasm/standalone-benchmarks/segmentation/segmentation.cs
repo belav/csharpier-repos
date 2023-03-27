@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -219,7 +219,7 @@ public static class Statistics {
         var sumOfSampleVarianceOverSampleSize = stat1.variance / stat1.size + stat2.variance / stat2.size;
         var t = Math.Abs((stat1.mean - stat2.mean) / Math.Sqrt(sumOfSampleVarianceOverSampleSize));
 
-        // http://en.wikipedia.org/wiki/Welch–Satterthwaite_equation
+        // http://en.wikipedia.org/wiki/Welchâ€“Satterthwaite_equation
         var degreesOfFreedom = sumOfSampleVarianceOverSampleSize * sumOfSampleVarianceOverSampleSize
             / (stat1.variance * stat1.variance / stat1.size / stat1.size / stat1.degreesOfFreedom
                 + stat2.variance * stat2.variance / stat2.size / stat2.size / stat2.degreesOfFreedom);

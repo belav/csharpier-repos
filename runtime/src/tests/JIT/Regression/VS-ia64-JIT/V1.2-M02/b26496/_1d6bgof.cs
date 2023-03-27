@@ -144,7 +144,7 @@ public class AA
     }
     public static double[, ,] Static4(Array[][, ,] param1, long param2, ushort param3
         , ref Array param4, float[][] param5, ref byte[] param6, float[,] param7, ref 
-        TestEnum param8)
+		TestEnum param8)
     {
         double[][,] local17 = (new double[101u][,]);
         int[,] local18 = (new int[85u, 101u]);
@@ -152,7 +152,7 @@ public class AA
         return (new double[48u, 34u, 29u]);
     }
     public static sbyte[][,] Static5(double[] param1, ref char param2, ref 
-        object[,] param3, ushort param4, bool[][] param5, ref float param6, uint[, ,][]
+		object[,] param3, ushort param4, bool[][] param5, ref float param6, uint[, ,][]
          param7, long param8)
     {
         AA.m_fStatic1 /= AA.m_fStatic1;
@@ -165,9 +165,9 @@ public class AA
                 Static2((new String[36u, 114u]), 48.0, ref param8))
             {
                 byte[][][, , ,][, ,] local23 = new byte[][][,,,][,,]{(new byte[36u][,,,][,,]), 
-                    (new byte[85u][,,,][,,]), (new byte[77u][,,,][,,]), new byte[][,,,][,,]{
-                    (new byte[122u, 118u, 41u, 13u][,,]), (new byte[20u, 126u, 99u, 44u][,,]), 
-                    (new byte[18u, 96u, 14u, 125u][,,]) }, (new byte[37u][,,,][,,]) };
+					(new byte[85u][,,,][,,]), (new byte[77u][,,,][,,]), new byte[][,,,][,,]{
+					(new byte[122u, 118u, 41u, 13u][,,]), (new byte[20u, 126u, 99u, 44u][,,]), 
+					(new byte[18u, 96u, 14u, 125u][,,]) }, (new byte[37u][,,,][,,]) };
                 sbyte[,][, ,][,][, ,][][, , ,] local24 = (new sbyte[66u, 74u][, ,][,][,,][][,,,])
                     ;
                 TestEnum[,] local25 = (new TestEnum[112u, 103u]);
@@ -300,7 +300,7 @@ public class App
                 ref App.m_aobjFwd16,
                 ((ushort)(119u)),
                 new bool[][]{new bool[]{true, false, false }, new bool[]{true, true, true }
-                    , new bool[]{false, true }, (new bool[126u]), (new bool[4u]) },
+					, new bool[]{false, true }, (new bool[126u]), (new bool[4u]) },
                 ref AA.m_fStatic1,
                 (new uint[52u, 87u, 34u][]),
                 App.m_lFwd3);

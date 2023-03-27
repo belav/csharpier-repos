@@ -3,7 +3,7 @@
 // for System.Web.Services.Configuration.DiagnosticsElement
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,27 +33,27 @@ using System.Web.Services.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services {
-    [TestFixture]
-    public class DiagnosticsElementTest
-    {
-        [Test]
-        public void Defaults ()
-        {
-            DiagnosticsElement el = new DiagnosticsElement ();
+	[TestFixture]
+	public class DiagnosticsElementTest
+	{
+		[Test]
+		public void Defaults ()
+		{
+			DiagnosticsElement el = new DiagnosticsElement ();
 
-            Assert.IsFalse (el.SuppressReturningExceptions, "A1");
-        }
+			Assert.IsFalse (el.SuppressReturningExceptions, "A1");
+		}
 
-        [Test]
-        public void GetSet ()
-        {
-            DiagnosticsElement el = new DiagnosticsElement ();
+		[Test]
+		public void GetSet ()
+		{
+			DiagnosticsElement el = new DiagnosticsElement ();
 
-            el.SuppressReturningExceptions = true;
-            Assert.IsTrue (el.SuppressReturningExceptions, "A1");
-            el.SuppressReturningExceptions = false;
-            Assert.IsFalse (el.SuppressReturningExceptions, "A2");
-        }
-    }
+			el.SuppressReturningExceptions = true;
+			Assert.IsTrue (el.SuppressReturningExceptions, "A1");
+			el.SuppressReturningExceptions = false;
+			Assert.IsFalse (el.SuppressReturningExceptions, "A2");
+		}
+	}
 }
 

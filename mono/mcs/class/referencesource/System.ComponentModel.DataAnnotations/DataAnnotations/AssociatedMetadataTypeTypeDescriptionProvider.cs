@@ -1,4 +1,4 @@
-
+﻿
 #if !SILVERLIGHT
 namespace System.ComponentModel.DataAnnotations {
 

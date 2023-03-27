@@ -30,33 +30,33 @@ using System;
 
 namespace GHTUtils
 {
-    // This class implements tests for method derived from object
-    public sealed class ObjectTester : GHTUtils.Base.GHTBase
-    {
-        public void Object_Equals(object tested, object Expected)
-        {
-            BeginCase("Instatnce Equal");
-            Compare(tested.Equals(Expected), true);
-            EndCase(null);
-            
-            BeginCase("Static Equal");
-            Compare(object.Equals(tested, Expected), true);
-            EndCase(null);        
-        }
-                
-        public void Object_GetType(object tested, Type Expected)
-        {
-            BeginCase("GetType");
-            Compare(tested.GetType(), Expected);
-            EndCase(null);
-        }
+	// This class implements tests for method derived from object
+	public sealed class ObjectTester : GHTUtils.Base.GHTBase
+	{
+		public void Object_Equals(object tested, object Expected)
+		{
+			BeginCase("Instatnce Equal");
+			Compare(tested.Equals(Expected), true);
+			EndCase(null);
+			
+			BeginCase("Static Equal");
+			Compare(object.Equals(tested, Expected), true);
+			EndCase(null);		
+		}
+				
+		public void Object_GetType(object tested, Type Expected)
+		{
+			BeginCase("GetType");
+			Compare(tested.GetType(), Expected);
+			EndCase(null);
+		}
 
-        public void Object_ToString(object tested, string Expected)
-        {
-            BeginCase("ToString()");
-            Compare(tested.ToString(), Expected);
-            EndCase(null);
-        }
+		public void Object_ToString(object tested, string Expected)
+		{
+			BeginCase("ToString()");
+			Compare(tested.ToString(), Expected);
+			EndCase(null);
+		}
 
-    }
+	}
 }

@@ -1,4 +1,4 @@
-//
+﻿//
 // ResponseFormat.cs
 //
 // Author:
@@ -33,9 +33,9 @@ using System.Text;
 
 namespace System.Web.Script.Services
 {
-    public enum ResponseFormat
-    {
-        Json = 0,
-        Xml = 1,
-    }
+	public enum ResponseFormat
+	{
+		Json = 0,
+		Xml = 1,
+	}
 }

@@ -48,30 +48,30 @@ namespace Novell.Directory.Ldap
   {
     private static RespExtensionSet registeredResponses = new RespExtensionSet();
 
-    /**
-     * Registers a class to be instantiated on receipt of a extendedresponse
-     * with the given OID.
-     *
-     * <p>Any previous registration for the OID is overridden. The 
-     *  extendedResponseClass object MUST be an extension of 
-     *  LdapIntermediateResponse. </p>
-     *
-     * @param oid            The object identifier of the control.
-     * <br><br>
-     * @param extendedResponseClass  A class which can instantiate an 
-     *                                LdapIntermediateResponse.
-     */
-    public static void register(String oid, Type extendedResponseClass) 
-    {
-        registeredResponses.registerResponseExtension(oid, extendedResponseClass);
-        return;
-    }
+	/**
+	 * Registers a class to be instantiated on receipt of a extendedresponse
+	 * with the given OID.
+	 *
+	 * <p>Any previous registration for the OID is overridden. The 
+	 *  extendedResponseClass object MUST be an extension of 
+	 *  LdapIntermediateResponse. </p>
+	 *
+	 * @param oid            The object identifier of the control.
+	 * <br><br>
+	 * @param extendedResponseClass  A class which can instantiate an 
+	 *                                LdapIntermediateResponse.
+	 */
+	public static void register(String oid, Type extendedResponseClass) 
+	{
+		registeredResponses.registerResponseExtension(oid, extendedResponseClass);
+		return;
+	}
 
-    /* package */
-    public static RespExtensionSet getRegisteredResponses()
-    {
-        return registeredResponses;
-    }
+	/* package */
+	public static RespExtensionSet getRegisteredResponses()
+	{
+		return registeredResponses;
+	}
 
 
     /**
@@ -107,12 +107,12 @@ namespace Novell.Directory.Ldap
     [CLSCompliantAttribute(false)]
     public sbyte[] getValue()
     {
-        Asn1OctetString tempString =
+		Asn1OctetString tempString =
                 ((RfcIntermediateResponse)message.Response).getResponse();
-        if (tempString == null)
-            return null;
-        else
-            return(tempString.byteValue());
+		if (tempString == null)
+			return null;
+		else
+			return(tempString.byteValue());
     }
   }
 }

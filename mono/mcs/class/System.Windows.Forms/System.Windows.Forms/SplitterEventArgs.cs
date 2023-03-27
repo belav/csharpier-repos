@@ -20,60 +20,60 @@
 // Copyright (c) 2004-2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Aleksandar Dezelin    adezelin@beotel.net
-//    Peter Dennis Bartok    pbartok@novell.com
+//	Aleksandar Dezelin	adezelin@beotel.net
+//	Peter Dennis Bartok	pbartok@novell.com
 //
 
 using System;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-    [ComVisible(true)]
-    public class SplitterEventArgs : EventArgs
-    {
-        #region Private fields
-        
-        internal int split_x;
-        internal int split_y;
-        internal int x;
-        internal int y;
+	[ComVisible(true)]
+	public class SplitterEventArgs : EventArgs
+	{
+		#region Private fields
+	    
+		internal int split_x;
+		internal int split_y;
+		internal int x;
+		internal int y;
 
-        #endregion
-        
-        #region Constructors
-        
-        public SplitterEventArgs(int x, int y, int splitX, int splitY)
-        {
-            this.x = x;
-            this.y = y;
-            SplitX = splitX;
-            SplitY = splitY;
-        }
-        
-        #endregion
+		#endregion
+		
+		#region Constructors
+		
+		public SplitterEventArgs(int x, int y, int splitX, int splitY)
+		{
+			this.x = x;
+			this.y = y;
+			SplitX = splitX;
+			SplitY = splitY;
+		}
+		
+		#endregion
 
-        #region Properties
-        
-        public int SplitX { 
-            get { return split_x; }
-            set { split_x = value; }
-        }
-        
-        public int SplitY {
-            get { return split_y; }
-            set { split_y = value; }
-        }
-        
-        public int X {
-            get { return x; }
-        }
-    
-        public int Y {
-            get { return y; }
-        }
-    
-        #endregion
-    }
+		#region Properties
+		
+		public int SplitX { 
+			get { return split_x; }
+			set { split_x = value; }
+		}
+	    
+		public int SplitY {
+			get { return split_y; }
+			set { split_y = value; }
+		}
+		
+		public int X {
+			get { return x; }
+		}
+	
+		public int Y {
+			get { return y; }
+		}
+	
+		#endregion
+	}
 }
 
 

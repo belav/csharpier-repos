@@ -37,86 +37,86 @@ using System.Text;
 
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
-    [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public sealed class SoapHexBinary : ISoapXsd
-    {
-        byte[] _value;
-        StringBuilder sb = new StringBuilder ();
+	[Serializable]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public sealed class SoapHexBinary : ISoapXsd
+	{
+		byte[] _value;
+		StringBuilder sb = new StringBuilder ();
 
-        public SoapHexBinary ()
-        {
-        }
-        
-        public SoapHexBinary (byte[] value)
-        {
-            _value = value;
-        }
-        
-        public byte [] Value {
-            get { return _value; } 
-            set { _value = value; }
-        }
+		public SoapHexBinary ()
+		{
+		}
+		
+		public SoapHexBinary (byte[] value)
+		{
+			_value = value;
+		}
+		
+		public byte [] Value {
+			get { return _value; } 
+			set { _value = value; }
+		}
 
-        public static string XsdType {
-            get { return "hexBinary"; }
-        }
+		public static string XsdType {
+			get { return "hexBinary"; }
+		}
 
-        public string GetXsdType()
-        {
-            return XsdType;
-        }
-        
-        public static SoapHexBinary Parse (string value)
-        {
-            byte [] bytes = FromBinHexString (value);
-            return new SoapHexBinary (bytes);
-        }
+		public string GetXsdType()
+		{
+			return XsdType;
+		}
+		
+		public static SoapHexBinary Parse (string value)
+		{
+			byte [] bytes = FromBinHexString (value);
+			return new SoapHexBinary (bytes);
+		}
 
-        internal static byte [] FromBinHexString (string value)
-        {
-            char [] chars = value.ToCharArray ();
-            byte [] buffer = new byte [chars.Length / 2 + chars.Length % 2];
-            int charLength = chars.Length;
+		internal static byte [] FromBinHexString (string value)
+		{
+			char [] chars = value.ToCharArray ();
+			byte [] buffer = new byte [chars.Length / 2 + chars.Length % 2];
+			int charLength = chars.Length;
 
-            if (charLength % 2 != 0)
-                throw CreateInvalidValueException (value);
+			if (charLength % 2 != 0)
+				throw CreateInvalidValueException (value);
 
-            int bufIndex = 0;
-            for (int i = 0; i < charLength - 1; i += 2) {
-                buffer [bufIndex] = FromHex (chars [i], value);
-                buffer [bufIndex] <<= 4;
-                buffer [bufIndex] += FromHex (chars [i + 1], value);
-                bufIndex++;
-            }
-            return buffer;
-        }
+			int bufIndex = 0;
+			for (int i = 0; i < charLength - 1; i += 2) {
+				buffer [bufIndex] = FromHex (chars [i], value);
+				buffer [bufIndex] <<= 4;
+				buffer [bufIndex] += FromHex (chars [i + 1], value);
+				bufIndex++;
+			}
+			return buffer;
+		}
 
-        static byte FromHex (char hexDigit, string value)
-        {
-            try {
-                return byte.Parse (hexDigit.ToString (),
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture);
-            } catch (FormatException) {
-                throw CreateInvalidValueException (value);
-            }
-        }
+		static byte FromHex (char hexDigit, string value)
+		{
+			try {
+				return byte.Parse (hexDigit.ToString (),
+					NumberStyles.HexNumber,
+					CultureInfo.InvariantCulture);
+			} catch (FormatException) {
+				throw CreateInvalidValueException (value);
+			}
+		}
 
-        static Exception CreateInvalidValueException (string value)
-        {
-            return new RemotingException (string.Format (
-                CultureInfo.InvariantCulture,
-                "Invalid value '{0}' for xsd:{1}.",
-                value, XsdType));
-        }
+		static Exception CreateInvalidValueException (string value)
+		{
+			return new RemotingException (string.Format (
+				CultureInfo.InvariantCulture,
+				"Invalid value '{0}' for xsd:{1}.",
+				value, XsdType));
+		}
 
-        public override string ToString()
-        {
-            sb.Length = 0;
-            foreach (byte b in _value)
-                sb.Append (b.ToString ("X2"));
-            return sb.ToString ();
-        }
-    }
+		public override string ToString()
+		{
+			sb.Length = 0;
+			foreach (byte b in _value)
+				sb.Append (b.ToString ("X2"));
+			return sb.ToString ();
+		}
+	}
 }

@@ -1,9 +1,9 @@
 //
 // UserControlCas.cs 
-//    - CAS unit tests for System.Web.UI.UserControlCas
+//	- CAS unit tests for System.Web.UI.UserControlCas
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,118 +38,118 @@ using System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class UserControlCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class UserControlCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Properties_Deny_Unrestricted ()
-        {
-            UserControl uc = new UserControl ();
-            try {
-                Assert.IsNull (uc.Application, "Application");
-            }
-            catch (NullReferenceException) {
-                // ms 2.0 rc
-            }
-            Assert.IsNotNull (uc.Attributes, "Attributes");
-            try {
-                Assert.IsNull (uc.Cache, "Cache");
-            }
-            catch (NullReferenceException) {
-                // ms 2.0 rc
-            }
-            try {
-                Assert.IsFalse (uc.IsPostBack, "IsPostBack");
-            }
-            catch (NullReferenceException) {
-                // ms 2.0 rc
-            }
-            try {
-                Assert.IsNull (uc.Request, "Request");
-            }
-            catch (NullReferenceException) {
-                // ms 2.0 rc
-            }
-            try {
-                Assert.IsNull (uc.Response, "Response");
-            }
-            catch (NullReferenceException) {
-                // ms 2.0 rc
-            }
-            try {
-                Assert.IsNull (uc.Server, "Server");
-            }
-            catch (NullReferenceException) {
-                // ms 2.0 rc
-            }
-            try {
-                Assert.IsNull (uc.Session, "Session");
-            }
-            catch (NullReferenceException) {
-                // ms 2.0 rc
-            }
-            try {
-                Assert.IsNull (uc.Trace, "Trace");
-            }
-            catch (NullReferenceException) {
-                // ms 2.0 rc
-            }
-            try {
-                Assert.IsNotNull (uc.CachePolicy, "CachePolicy");
-            }
-            catch (NotImplementedException) {
-                // mono
-            }
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Properties_Deny_Unrestricted ()
+		{
+			UserControl uc = new UserControl ();
+			try {
+				Assert.IsNull (uc.Application, "Application");
+			}
+			catch (NullReferenceException) {
+				// ms 2.0 rc
+			}
+			Assert.IsNotNull (uc.Attributes, "Attributes");
+			try {
+				Assert.IsNull (uc.Cache, "Cache");
+			}
+			catch (NullReferenceException) {
+				// ms 2.0 rc
+			}
+			try {
+				Assert.IsFalse (uc.IsPostBack, "IsPostBack");
+			}
+			catch (NullReferenceException) {
+				// ms 2.0 rc
+			}
+			try {
+				Assert.IsNull (uc.Request, "Request");
+			}
+			catch (NullReferenceException) {
+				// ms 2.0 rc
+			}
+			try {
+				Assert.IsNull (uc.Response, "Response");
+			}
+			catch (NullReferenceException) {
+				// ms 2.0 rc
+			}
+			try {
+				Assert.IsNull (uc.Server, "Server");
+			}
+			catch (NullReferenceException) {
+				// ms 2.0 rc
+			}
+			try {
+				Assert.IsNull (uc.Session, "Session");
+			}
+			catch (NullReferenceException) {
+				// ms 2.0 rc
+			}
+			try {
+				Assert.IsNull (uc.Trace, "Trace");
+			}
+			catch (NullReferenceException) {
+				// ms 2.0 rc
+			}
+			try {
+				Assert.IsNotNull (uc.CachePolicy, "CachePolicy");
+			}
+			catch (NotImplementedException) {
+				// mono
+			}
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void IUserControlDesignerAccessor_Deny_Unrestricted ()
-        {
-            IUserControlDesignerAccessor ucda = new UserControl ();
-            ucda.InnerText = "mono";
-            Assert.AreEqual ("mono", ucda.InnerText, "InnerText");
-            ucda.TagName = "monkey";
-            Assert.AreEqual ("monkey", ucda.TagName, "TagName");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void IUserControlDesignerAccessor_Deny_Unrestricted ()
+		{
+			IUserControlDesignerAccessor ucda = new UserControl ();
+			ucda.InnerText = "mono";
+			Assert.AreEqual ("mono", ucda.InnerText, "InnerText");
+			ucda.TagName = "monkey";
+			Assert.AreEqual ("monkey", ucda.TagName, "TagName");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void InitializeAsUserControl_Deny_Unrestricted ()
-        {
-            UserControl uc = new UserControl ();
-            try {
-                uc.InitializeAsUserControl (new Page ());
-            }
-            catch (TypeInitializationException tie) {
-                // 2.0 - error initializing HttpRuntime
-                Console.WriteLine (tie.InnerException);
-            }
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void InitializeAsUserControl_Deny_Unrestricted ()
+		{
+			UserControl uc = new UserControl ();
+			try {
+				uc.InitializeAsUserControl (new Page ());
+			}
+			catch (TypeInitializationException tie) {
+				// 2.0 - error initializing HttpRuntime
+				Console.WriteLine (tie.InnerException);
+			}
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void MapPath_Deny_Unrestricted ()
-        {
-            new UserControl ().MapPath ("/");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		[ExpectedException (typeof (NullReferenceException))]
+		public void MapPath_Deny_Unrestricted ()
+		{
+			new UserControl ().MapPath ("/");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void IAttributeAccessor_Deny_Unrestricted ()
-        {
-            IAttributeAccessor aa = new UserControl ();
-            Assert.IsNull (aa.GetAttribute (null));
-            aa.SetAttribute ("name", "value");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void IAttributeAccessor_Deny_Unrestricted ()
+		{
+			IAttributeAccessor aa = new UserControl ();
+			Assert.IsNull (aa.GetAttribute (null));
+			aa.SetAttribute ("name", "value");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (UserControl); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (UserControl); }
+		}
+	}
 }

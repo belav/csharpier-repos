@@ -5,16 +5,16 @@ using System;
 
 class A
 {
-    class X
-    {
-        public static string V = "a";
-    }
+	class X
+	{
+		public static string V = "a";
+	}
 }
 
 class C : A
 {
-    public static void Main ()
-    {
-        Console.WriteLine (X.V);
-    }
+	public static void Main ()
+	{
+		Console.WriteLine (X.V);
+	}
 }

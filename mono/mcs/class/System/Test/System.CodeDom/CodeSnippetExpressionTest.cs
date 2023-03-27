@@ -1,9 +1,9 @@
 //
 // CodeSnippetExpressionTest.cs
-//    - Unit tests for System.CodeDom.CodeSnippetExpression
+//	- Unit tests for System.CodeDom.CodeSnippetExpression
 //
 // Author:
-//    Gert Driesen  <drieseng@users.sourceforge.net>
+//	Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,34 +34,34 @@ using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {
-    [TestFixture]
-    public class CodeSnippetExpressionTest
-    {
-        [Test]
-        public void Constructor0 ()
-        {
-            CodeSnippetExpression cse = new CodeSnippetExpression ();
-            Assert.IsNotNull (cse.Value, "#1");
-            Assert.AreEqual (string.Empty, cse.Value, "#2");
+	[TestFixture]
+	public class CodeSnippetExpressionTest
+	{
+		[Test]
+		public void Constructor0 ()
+		{
+			CodeSnippetExpression cse = new CodeSnippetExpression ();
+			Assert.IsNotNull (cse.Value, "#1");
+			Assert.AreEqual (string.Empty, cse.Value, "#2");
 
-            string value = "mono";
-            cse.Value = value;
-            Assert.IsNotNull (cse.Value, "#3");
-            Assert.AreSame (value, cse.Value, "#4");
+			string value = "mono";
+			cse.Value = value;
+			Assert.IsNotNull (cse.Value, "#3");
+			Assert.AreSame (value, cse.Value, "#4");
 
-            cse.Value = null;
-            Assert.IsNotNull (cse.Value, "#5");
-            Assert.AreEqual (string.Empty, cse.Value, "#6");
-        }
+			cse.Value = null;
+			Assert.IsNotNull (cse.Value, "#5");
+			Assert.AreEqual (string.Empty, cse.Value, "#6");
+		}
 
-        [Test]
-        public void Constructor1 ()
-        {
-            string value = "mono";
+		[Test]
+		public void Constructor1 ()
+		{
+			string value = "mono";
 
-            CodeSnippetExpression cse = new CodeSnippetExpression (value);
-            Assert.IsNotNull (cse.Value, "#1");
-            Assert.AreSame (value, cse.Value, "#2");
-        }
-    }
+			CodeSnippetExpression cse = new CodeSnippetExpression (value);
+			Assert.IsNotNull (cse.Value, "#1");
+			Assert.AreSame (value, cse.Value, "#2");
+		}
+	}
 }

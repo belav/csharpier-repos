@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -28,22 +28,22 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public abstract class ChartNamedElement : ChartElement
-    {
-        #region Constructors
-        public ChartNamedElement ()
-        {
-        }
+	public abstract class ChartNamedElement : ChartElement
+	{
+		#region Constructors
+		public ChartNamedElement ()
+		{
+		}
 
-        public ChartNamedElement (string name)
-        {
-            Name = name;
-        }
-        #endregion
+		public ChartNamedElement (string name)
+		{
+			Name = name;
+		}
+		#endregion
 
-        #region Public Properties
-        [DefaultValue ("")]
-        public virtual string Name { get; set; }
-        #endregion
-    }
+		#region Public Properties
+		[DefaultValue ("")]
+		public virtual string Name { get; set; }
+		#endregion
+	}
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
@@ -29,16 +29,16 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-    [ComVisible(true)]
-    public enum ScrollEventType {
-        SmallDecrement    = 0,
-        SmallIncrement    = 1,
-        LargeDecrement    = 2,
-        LargeIncrement    = 3,
-        ThumbPosition    = 4,
-        ThumbTrack    = 5,
-        First        = 6,
-        Last        = 7,
-        EndScroll    = 8
-    }
+	[ComVisible(true)]
+	public enum ScrollEventType {
+		SmallDecrement	= 0,
+		SmallIncrement	= 1,
+		LargeDecrement	= 2,
+		LargeIncrement	= 3,
+		ThumbPosition	= 4,
+		ThumbTrack	= 5,
+		First		= 6,
+		Last		= 7,
+		EndScroll	= 8
+	}
 }

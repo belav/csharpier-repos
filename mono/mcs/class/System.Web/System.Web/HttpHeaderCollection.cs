@@ -30,50 +30,50 @@ using System.Web.Util;
 
 namespace System.Web
 {
-    sealed class HttpHeaderCollection : NameValueCollection
-    {
-        bool? headerCheckingEnabled;
+	sealed class HttpHeaderCollection : NameValueCollection
+	{
+		bool? headerCheckingEnabled;
 
-        public HttpHeaderCollection () : base (StringComparer.OrdinalIgnoreCase)
-        {
-        }
+		public HttpHeaderCollection () : base (StringComparer.OrdinalIgnoreCase)
+		{
+		}
 
-        bool HeaderCheckingEnabled {
-            get {
-                if (headerCheckingEnabled == null)
-                    headerCheckingEnabled = HttpRuntime.Section.EnableHeaderChecking;
+		bool HeaderCheckingEnabled {
+			get {
+				if (headerCheckingEnabled == null)
+					headerCheckingEnabled = HttpRuntime.Section.EnableHeaderChecking;
 
-                return (bool)headerCheckingEnabled;
-            }
-        }
-                
-        public override void Add (string name, string value)
-        {
-            EncodeAndSetHeader (name, value, false);
-        }
+				return (bool)headerCheckingEnabled;
+			}
+		}
+				
+		public override void Add (string name, string value)
+		{
+			EncodeAndSetHeader (name, value, false);
+		}
 
-        public override void Set (string name, string value)
-        {
-            EncodeAndSetHeader (name, value, true);
-        }
+		public override void Set (string name, string value)
+		{
+			EncodeAndSetHeader (name, value, true);
+		}
 
-        void EncodeAndSetHeader (string name, string value, bool replaceExisting)
-        {
-            if (String.IsNullOrEmpty (name) || String.IsNullOrEmpty (value))
-                return;
+		void EncodeAndSetHeader (string name, string value, bool replaceExisting)
+		{
+			if (String.IsNullOrEmpty (name) || String.IsNullOrEmpty (value))
+				return;
 
-            string encName, encValue;
-            if (HeaderCheckingEnabled) {
-                HttpEncoder.Current.HeaderNameValueEncode (name, value, out encName, out encValue);
-            } else {
-                encName = name;
-                encValue = value;
-            }
+			string encName, encValue;
+			if (HeaderCheckingEnabled) {
+				HttpEncoder.Current.HeaderNameValueEncode (name, value, out encName, out encValue);
+			} else {
+				encName = name;
+				encValue = value;
+			}
 
-            if (replaceExisting)
-                base.Set (encName, encValue);
-            else
-                base.Add (encName, encValue);
-        }
-    }
+			if (replaceExisting)
+				base.Set (encName, encValue);
+			else
+				base.Add (encName, encValue);
+		}
+	}
 }

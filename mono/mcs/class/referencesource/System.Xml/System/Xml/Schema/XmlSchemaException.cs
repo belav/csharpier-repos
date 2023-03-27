@@ -60,7 +60,7 @@ namespace System.Xml.Schema {
 
         /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.GetObjectData"]/*' />
         [SecurityPermissionAttribute(SecurityAction.LinkDemand,SerializationFormatter=true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context) {
+		public override void GetObjectData(SerializationInfo info, StreamingContext context) {
             base.GetObjectData(info, context);
             info.AddValue("res",                res);
             info.AddValue("args",               args);
@@ -89,7 +89,7 @@ namespace System.Xml.Schema {
         /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException3"]/*' />
         public XmlSchemaException(String message, Exception innerException, int lineNumber, int linePosition) : 
             this((message == null ? Res.Sch_DefaultException : Res.Xml_UserException), new string[] { message }, innerException, null, lineNumber, linePosition, null ) {
-        }
+	    }
 
         internal XmlSchemaException(string res, string[] args) :
             this(res, args, null, null, 0, 0, null) {}
@@ -138,13 +138,13 @@ namespace System.Xml.Schema {
         
         internal string GetRes {
             get {
-                return res;
+	            return res;
             }
         }
 
         internal string[] Args {
             get {
-                return args; 
+	            return args; 
             }
         }
         /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.SourceUri"]/*' />

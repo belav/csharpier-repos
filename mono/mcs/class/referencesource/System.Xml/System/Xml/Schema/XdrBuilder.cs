@@ -71,7 +71,7 @@ namespace System.Xml.Schema {
             internal void Reset() {
                 _Name = XmlQualifiedName.Empty;
                 _Prefix = null;
-                _TypeName = XmlQualifiedName.Empty;
+		        _TypeName = XmlQualifiedName.Empty;
                 _TypePrefix = null;
                 _Default = null;
                 _Revises = null;
@@ -815,7 +815,7 @@ namespace System.Xml.Schema {
 
         private static void XDR_EndElementType(XdrBuilder builder) {
             SchemaElementDecl ed = builder._ElementDef._ElementDecl;
-            
+			
             // check undefined attribute types first
             if (builder._UndefinedAttributeTypes != null && builder._ElementDef._AttDefList != null) {
                 DeclBaseInfo patt = builder._UndefinedAttributeTypes;

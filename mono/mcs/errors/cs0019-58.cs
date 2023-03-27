@@ -3,10 +3,10 @@
 
 public class Test
 {
-    public static void Main()
-    {
-        bool b = false;
-        byte? b2 = 0;
-        b &= b2;
-    }
+	public static void Main()
+	{
+		bool b = false;
+		byte? b2 = 0;
+		b &= b2;
+	}
 }

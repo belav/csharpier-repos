@@ -4,7 +4,7 @@ using System;
 /// valid comment.
 public class Test
 {
-    static void Main () 
-    {
-    }
+	static void Main () 
+	{
+	}
 }

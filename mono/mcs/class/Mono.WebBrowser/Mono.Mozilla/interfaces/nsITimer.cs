@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,70 +32,70 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("436a83fa-b396-11d9-bcfa-00112478d626")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsITimer {
+	[Guid ("436a83fa-b396-11d9-bcfa-00112478d626")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsITimer {
 
 #region nsITimer
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int init ([MarshalAs (UnmanagedType.Interface) ]  nsIObserver aObserver,
-                 uint aDelay,
-                 uint aType);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int init ([MarshalAs (UnmanagedType.Interface) ]  nsIObserver aObserver,
+				 uint aDelay,
+				 uint aType);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int initWithFuncCallback ( nsITimerCallbackDelegate aCallback,
-                 IntPtr aClosure,
-                 uint aDelay,
-                 uint aType);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int initWithFuncCallback ( nsITimerCallbackDelegate aCallback,
+				 IntPtr aClosure,
+				 uint aDelay,
+				 uint aType);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int initWithCallback ([MarshalAs (UnmanagedType.Interface) ]  nsITimerCallback aCallback,
-                 uint aDelay,
-                 uint aType);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int initWithCallback ([MarshalAs (UnmanagedType.Interface) ]  nsITimerCallback aCallback,
+				 uint aDelay,
+				 uint aType);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int cancel ();
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int cancel ();
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getDelay (out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getDelay (out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setDelay (uint value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setDelay (uint value);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getType (out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getType (out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setType (uint value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setType (uint value);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getClosure ( IntPtr ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getClosure ( IntPtr ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCallback ([MarshalAs (UnmanagedType.Interface) ] out nsITimerCallback ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getCallback ([MarshalAs (UnmanagedType.Interface) ] out nsITimerCallback ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsTimer {
-        public static nsITimer GetProxy (Mono.WebBrowser.IWebBrowser control, nsITimer obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsITimer).GUID, obj);
-            return o as nsITimer;
-        }
-    }
+	internal class nsTimer {
+		public static nsITimer GetProxy (Mono.WebBrowser.IWebBrowser control, nsITimer obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsITimer).GUID, obj);
+			return o as nsITimer;
+		}
+	}
 }
 #if example
 
@@ -104,82 +104,82 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-    internal class Timer : nsITimer {
+	internal class Timer : nsITimer {
 
 #region nsITimer
-        int nsITimer.init ([MarshalAs (UnmanagedType.Interface) ]  nsIObserver aObserver,
-                 uint aDelay,
-                 uint aType)
-        {
-            return ;
-        }
+		int nsITimer.init ([MarshalAs (UnmanagedType.Interface) ]  nsIObserver aObserver,
+				 uint aDelay,
+				 uint aType)
+		{
+			return ;
+		}
 
 
 
-        int nsITimer.initWithFuncCallback ( nsITimerCallbackDelegate aCallback,
-                 IntPtr aClosure,
-                 uint aDelay,
-                 uint aType)
-        {
-            return ;
-        }
+		int nsITimer.initWithFuncCallback ( nsITimerCallbackDelegate aCallback,
+				 IntPtr aClosure,
+				 uint aDelay,
+				 uint aType)
+		{
+			return ;
+		}
 
 
 
-        int nsITimer.initWithCallback ([MarshalAs (UnmanagedType.Interface) ]  nsITimerCallback aCallback,
-                 uint aDelay,
-                 uint aType)
-        {
-            return ;
-        }
+		int nsITimer.initWithCallback ([MarshalAs (UnmanagedType.Interface) ]  nsITimerCallback aCallback,
+				 uint aDelay,
+				 uint aType)
+		{
+			return ;
+		}
 
 
 
-        int nsITimer.cancel ()
-        {
-            return ;
-        }
+		int nsITimer.cancel ()
+		{
+			return ;
+		}
 
 
 
-        int nsITimer.getDelay (out uint ret)
+		int nsITimer.getDelay (out uint ret)
 
-        {
-            return 0;
-        }
+		{
+			return 0;
+		}
 
-        int nsITimer.setDelay (uint value)
-
-
-        {
-            return 0;
-        }
-
-        int nsITimer.getType (out uint ret)
-
-        {
-            return 0;
-        }
-
-        int nsITimer.setType (uint value)
+		int nsITimer.setDelay (uint value)
 
 
-        {
-            return 0;
-        }
+		{
+			return 0;
+		}
 
-        int nsITimer.getClosure ( IntPtr ret)
+		int nsITimer.getType (out uint ret)
 
-        {
-            return IntPtr.Zero;
-        }
+		{
+			return 0;
+		}
 
-        int nsITimer.getCallback ([MarshalAs (UnmanagedType.Interface) ] out nsITimerCallback ret)
+		int nsITimer.setType (uint value)
 
-        {
-            return null;
-        }
+
+		{
+			return 0;
+		}
+
+		int nsITimer.getClosure ( IntPtr ret)
+
+		{
+			return IntPtr.Zero;
+		}
+
+		int nsITimer.getCallback ([MarshalAs (UnmanagedType.Interface) ] out nsITimerCallback ret)
+
+		{
+			return null;
+		}
 
 #endregion
-    }
+	}
 #endif

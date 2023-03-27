@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationElementCollectionType
 //
 // Authors:
-//    Tim Coleman (tim@timcoleman.com)
+//	Tim Coleman (tim@timcoleman.com)
 //
 // Copyright (C) Tim Coleman, 2004
 //
@@ -30,12 +30,12 @@
 
 namespace System.Configuration
 {
-    public enum ConfigurationElementCollectionType
-    {
-        BasicMap = 0,
-        AddRemoveClearMap = 1,
-        BasicMapAlternate = 2,
-        AddRemoveClearMapAlternate = 3
-    }
+	public enum ConfigurationElementCollectionType
+	{
+		BasicMap = 0,
+		AddRemoveClearMap = 1,
+		BasicMapAlternate = 2,
+		AddRemoveClearMapAlternate = 3
+	}
 
 }

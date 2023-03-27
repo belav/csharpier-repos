@@ -2,7 +2,7 @@
 // SecurityCredentialsManager.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,12 +32,12 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-    public abstract class SecurityCredentialsManager
-    {
-        protected SecurityCredentialsManager ()
-        {
-        }
+	public abstract class SecurityCredentialsManager
+	{
+		protected SecurityCredentialsManager ()
+		{
+		}
 
-        public abstract SecurityTokenManager CreateSecurityTokenManager ();
-    }
+		public abstract SecurityTokenManager CreateSecurityTokenManager ();
+	}
 }

@@ -2,7 +2,7 @@
 // MethodCallBlock.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,38 +30,38 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.ControlFlow.Subroutines;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Blocks {
-    class MethodCallBlock<Label> : BlockWithLabels<Label> {
-        public MethodCallBlock (Method calledMethod, SubroutineBase<Label> subroutine, ref int idGen, int parametersCount, bool isVirtual)
-            : base (subroutine, ref idGen)
-        {
-            CalledMethod = calledMethod;
-            ParameterCount = parametersCount;
-            IsVirtual = isVirtual;
-        }
+	class MethodCallBlock<Label> : BlockWithLabels<Label> {
+		public MethodCallBlock (Method calledMethod, SubroutineBase<Label> subroutine, ref int idGen, int parametersCount, bool isVirtual)
+			: base (subroutine, ref idGen)
+		{
+			CalledMethod = calledMethod;
+			ParameterCount = parametersCount;
+			IsVirtual = isVirtual;
+		}
 
-        public Method CalledMethod { get; private set; }
-        public bool IsVirtual { get; private set; }
-        public int ParameterCount { get; private set; }
+		public Method CalledMethod { get; private set; }
+		public bool IsVirtual { get; private set; }
+		public int ParameterCount { get; private set; }
 
-        public virtual bool IsNewObj
-        {
-            get { return false; }
-        }
+		public virtual bool IsNewObj
+		{
+			get { return false; }
+		}
 
-        public override bool IsMethodCallBlock<TMethod> (out TMethod calledMethod, out bool isNewObj, out bool isVirtual)
-        {
-            calledMethod = default (TMethod);
-            isNewObj = false;
-            isVirtual = false;
+		public override bool IsMethodCallBlock<TMethod> (out TMethod calledMethod, out bool isNewObj, out bool isVirtual)
+		{
+			calledMethod = default (TMethod);
+			isNewObj = false;
+			isVirtual = false;
 
-            if (!(CalledMethod is TMethod))
-                return false;
+			if (!(CalledMethod is TMethod))
+				return false;
 
-            calledMethod = (TMethod) (object) CalledMethod;
-            isNewObj = IsNewObj;
-            isVirtual = IsVirtual;
+			calledMethod = (TMethod) (object) CalledMethod;
+			isNewObj = IsNewObj;
+			isVirtual = IsVirtual;
 
-            return true;
-        }
-    }
+			return true;
+		}
+	}
 }

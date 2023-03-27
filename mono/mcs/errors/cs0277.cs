@@ -2,14 +2,14 @@
 // Line: 10
 
 interface I {
-    decimal Prop { set; }
+	decimal Prop { set; }
 }
 
 class C: I {
-    public decimal Prop {
-        internal set {}
-        get {
-            return 0;
-        }
-    }
+	public decimal Prop {
+		internal set {}
+		get {
+			return 0;
+		}
+	}
 }

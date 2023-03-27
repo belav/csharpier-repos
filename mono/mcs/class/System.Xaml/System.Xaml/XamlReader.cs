@@ -25,71 +25,71 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-    public abstract class XamlReader : IDisposable
-    {
-        protected bool IsDisposed { get; private set; }
+	public abstract class XamlReader : IDisposable
+	{
+		protected bool IsDisposed { get; private set; }
 
-        public abstract bool IsEof { get; }
-        public abstract XamlMember Member { get; }
-        public abstract NamespaceDeclaration Namespace { get; }
-        public abstract XamlNodeType NodeType { get; }
-        public abstract XamlSchemaContext SchemaContext { get; }
-        public abstract XamlType Type { get; }
-        public abstract object Value { get; }
-        
-        public void Close ()
-        {
-            Dispose (true);
-        }
-        
-        protected virtual void Dispose (bool disposing)
-        {
-            IsDisposed = true;
-        }
-        
-        void IDisposable.Dispose ()
-        {
-            Dispose (true);
-        }
-        
-        public abstract bool Read ();
-        
-        public virtual XamlReader ReadSubtree ()
-        {
-            return new XamlSubtreeReader (this);
-        }
-        
-        public virtual void Skip ()
-        {
-            int count = 0;
-            switch (NodeType) {
-            case XamlNodeType.StartMember:
-            case XamlNodeType.StartObject:
-            case XamlNodeType.GetObject:
-                count++;
-                while (Read ()) {
-                    switch (NodeType) {
-                    case XamlNodeType.StartMember:
-                    case XamlNodeType.GetObject:
-                    case XamlNodeType.StartObject:
-                        count++;
-                        continue;
-                    case XamlNodeType.EndMember:
-                    case XamlNodeType.EndObject:
-                        count--;
-                        if (count == 0) {
-                            Read ();
-                            return;
-                        }
-                        continue;
-                    }
-                }
-                return;
+		public abstract bool IsEof { get; }
+		public abstract XamlMember Member { get; }
+		public abstract NamespaceDeclaration Namespace { get; }
+		public abstract XamlNodeType NodeType { get; }
+		public abstract XamlSchemaContext SchemaContext { get; }
+		public abstract XamlType Type { get; }
+		public abstract object Value { get; }
+		
+		public void Close ()
+		{
+			Dispose (true);
+		}
+		
+		protected virtual void Dispose (bool disposing)
+		{
+			IsDisposed = true;
+		}
+		
+		void IDisposable.Dispose ()
+		{
+			Dispose (true);
+		}
+		
+		public abstract bool Read ();
+		
+		public virtual XamlReader ReadSubtree ()
+		{
+			return new XamlSubtreeReader (this);
+		}
+		
+		public virtual void Skip ()
+		{
+			int count = 0;
+			switch (NodeType) {
+			case XamlNodeType.StartMember:
+			case XamlNodeType.StartObject:
+			case XamlNodeType.GetObject:
+				count++;
+				while (Read ()) {
+					switch (NodeType) {
+					case XamlNodeType.StartMember:
+					case XamlNodeType.GetObject:
+					case XamlNodeType.StartObject:
+						count++;
+						continue;
+					case XamlNodeType.EndMember:
+					case XamlNodeType.EndObject:
+						count--;
+						if (count == 0) {
+							Read ();
+							return;
+						}
+						continue;
+					}
+				}
+				return;
 
-            default:
-                Read ();
-                return;
-            }
-        }
-    }
+			default:
+				Read ();
+				return;
+			}
+		}
+	}
 }

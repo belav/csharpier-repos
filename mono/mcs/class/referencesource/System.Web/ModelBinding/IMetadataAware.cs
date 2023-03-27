@@ -1,4 +1,4 @@
-namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding {
     // This interface is implemented by attributes which wish to contribute to the
     // ModelMetadata creation process without needing to write a custom metadata
     // provider. It is consumed by AssociatedMetadataProvider, so this behavior is

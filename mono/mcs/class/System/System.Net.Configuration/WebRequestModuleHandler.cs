@@ -2,7 +2,7 @@
 // System.Net.Configuration.WebRequestModuleHandler
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -38,58 +38,58 @@ using XmlNode = System.Object;
 
 namespace System.Net.Configuration
 {
-    class WebRequestModuleHandler : IConfigurationSectionHandler
-    {
-        public virtual object Create (object parent, object configContext, XmlNode section)
-        {
+	class WebRequestModuleHandler : IConfigurationSectionHandler
+	{
+		public virtual object Create (object parent, object configContext, XmlNode section)
+		{
 #if XML_DEP
-            if (section.Attributes != null && section.Attributes.Count != 0)
-                HandlersUtil.ThrowException ("Unrecognized attribute", section);
+			if (section.Attributes != null && section.Attributes.Count != 0)
+				HandlersUtil.ThrowException ("Unrecognized attribute", section);
 
-            XmlNodeList reqHandlers = section.ChildNodes;
-            foreach (XmlNode child in reqHandlers) {
-                XmlNodeType ntype = child.NodeType;
-                if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
-                    continue;
+			XmlNodeList reqHandlers = section.ChildNodes;
+			foreach (XmlNode child in reqHandlers) {
+				XmlNodeType ntype = child.NodeType;
+				if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
+					continue;
 
-                if (ntype != XmlNodeType.Element)
-                    HandlersUtil.ThrowException ("Only elements allowed", child);
-                
-                string name = child.Name;
-                if (name == "clear") {
-                    if (child.Attributes != null && child.Attributes.Count != 0)
-                        HandlersUtil.ThrowException ("Unrecognized attribute", child);
+				if (ntype != XmlNodeType.Element)
+					HandlersUtil.ThrowException ("Only elements allowed", child);
+				
+				string name = child.Name;
+				if (name == "clear") {
+					if (child.Attributes != null && child.Attributes.Count != 0)
+						HandlersUtil.ThrowException ("Unrecognized attribute", child);
 
-                    WebRequest.PrefixList = new ArrayList ();
-                    continue;
-                }
+					WebRequest.PrefixList = new ArrayList ();
+					continue;
+				}
 
-                //string prefix = HandlersUtil.ExtractAttributeValue ("prefix", child);
-                if (name == "add") {
-                    //string type = HandlersUtil.ExtractAttributeValue ("type", child, false);
-                    if (child.Attributes != null && child.Attributes.Count != 0)
-                        HandlersUtil.ThrowException ("Unrecognized attribute", child);
+				//string prefix = HandlersUtil.ExtractAttributeValue ("prefix", child);
+				if (name == "add") {
+					//string type = HandlersUtil.ExtractAttributeValue ("type", child, false);
+					if (child.Attributes != null && child.Attributes.Count != 0)
+						HandlersUtil.ThrowException ("Unrecognized attribute", child);
 
-                    throw new NotImplementedException ();
-                    //WebRequest.PrefixList.Add (new WebRequestPrefixElement(prefix, type));
-                    //continue;
-                }
+					throw new NotImplementedException ();
+					//WebRequest.PrefixList.Add (new WebRequestPrefixElement(prefix, type));
+					//continue;
+				}
 
-                if (name == "remove") {
-                    if (child.Attributes != null && child.Attributes.Count != 0)
-                        HandlersUtil.ThrowException ("Unrecognized attribute", child);
+				if (name == "remove") {
+					if (child.Attributes != null && child.Attributes.Count != 0)
+						HandlersUtil.ThrowException ("Unrecognized attribute", child);
 
-                    throw new NotImplementedException ();
-                    // WebRequest.RemovePrefix (prefix);
-                    // continue;
-                }
+					throw new NotImplementedException ();
+					// WebRequest.RemovePrefix (prefix);
+					// continue;
+				}
 
-                HandlersUtil.ThrowException ("Unexpected element", child);
-            }
-#endif            
+				HandlersUtil.ThrowException ("Unexpected element", child);
+			}
+#endif			
 
-            return null;
-        }
-    }
+			return null;
+		}
+	}
 }
 

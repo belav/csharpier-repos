@@ -3,21 +3,21 @@
 using System;
 
 struct S {
-    delegate void T ();
+	delegate void T ();
 
-    int f;
+	int f;
 
-    public int Test ()
-    {
-        T t = delegate {
-            f = 1;
-        };
-        return 0;
-    }
-    
-    static void Main ()
-    {
-    }
+	public int Test ()
+	{
+		T t = delegate {
+			f = 1;
+		};
+		return 0;
+	}
+	
+	static void Main ()
+	{
+	}
 }
-    
-        
+	
+		

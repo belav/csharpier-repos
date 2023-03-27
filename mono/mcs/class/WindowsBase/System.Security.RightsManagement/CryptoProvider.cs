@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,56 +29,56 @@ using System.Collections.ObjectModel;
 
 namespace System.Security.RightsManagement {
 
-    [SecurityCritical (SecurityCriticalScope.Everything)]
-    public class CryptoProvider : IDisposable
-    {
-        internal CryptoProvider ()
-        {
-        }
+	[SecurityCritical (SecurityCriticalScope.Everything)]
+	public class CryptoProvider : IDisposable
+	{
+		internal CryptoProvider ()
+		{
+		}
 
-        ~CryptoProvider ()
-        {
-        }
+		~CryptoProvider ()
+		{
+		}
 
-        public int BlockSize {
-            get { throw new NotImplementedException (); }
-        }
+		public int BlockSize {
+			get { throw new NotImplementedException (); }
+		}
 
-        public ReadOnlyCollection<ContentGrant> BoundGrants {
-            get { throw new NotImplementedException (); }
-        }
+		public ReadOnlyCollection<ContentGrant> BoundGrants {
+			get { throw new NotImplementedException (); }
+		}
 
-        public bool CanDecrypt {
-            get { throw new NotImplementedException (); }
-        }
+		public bool CanDecrypt {
+			get { throw new NotImplementedException (); }
+		}
 
-        public bool CanEncrypt {
-            get { throw new NotImplementedException (); }
-        }
+		public bool CanEncrypt {
+			get { throw new NotImplementedException (); }
+		}
 
-        public bool CanMergeBlocks {
-            get { throw new NotImplementedException (); }
-        }
+		public bool CanMergeBlocks {
+			get { throw new NotImplementedException (); }
+		}
 
-        public byte[] Decrypt (byte[] cryptoText)
-        {
-            throw new NotImplementedException ();            
-        }
+		public byte[] Decrypt (byte[] cryptoText)
+		{
+			throw new NotImplementedException ();			
+		}
 
-        public byte[] Encrypt (byte[] clearText)
-        {
-            throw new NotImplementedException ();            
-        }
+		public byte[] Encrypt (byte[] clearText)
+		{
+			throw new NotImplementedException ();			
+		}
 
-        protected virtual void Dispose (bool disposing)
-        {
-            throw new NotImplementedException ();            
-        }
+		protected virtual void Dispose (bool disposing)
+		{
+			throw new NotImplementedException ();			
+		}
 
-        public void Dispose ()
-        {
-            throw new NotImplementedException ();            
-        }
-    }
+		public void Dispose ()
+		{
+			throw new NotImplementedException ();			
+		}
+	}
 
 }

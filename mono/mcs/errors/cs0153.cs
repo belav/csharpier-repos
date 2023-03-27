@@ -2,8 +2,8 @@
 // Line: 7
 
 class X {
-    void Main ()
-    {
-        goto default;
-    }
+	void Main ()
+	{
+		goto default;
+	}
 }

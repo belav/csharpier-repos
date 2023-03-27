@@ -34,45 +34,45 @@ using System.Windows.Forms;
 
 namespace System.Messaging.Design
 {
-    [MonoTODO]
-    public class QueuePathDialog : Form
-    {
-        [MonoTODO]
-        public QueuePathDialog (IServiceProvider provider)
-        {
-            throw new NotImplementedException ();
-        }
+	[MonoTODO]
+	public class QueuePathDialog : Form
+	{
+		[MonoTODO]
+		public QueuePathDialog (IServiceProvider provider)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public QueuePathDialog (System.Windows.Forms.Design.IUIService uiService)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public QueuePathDialog (System.Windows.Forms.Design.IUIService uiService)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void ChoosePath ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void ChoosePath ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void DoubleClicked (object source, EventArgs e)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void DoubleClicked (object source, EventArgs e)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void SelectQueue (MessageQueue queue)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void SelectQueue (MessageQueue queue)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public string Path {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-    }
+		[MonoTODO]
+		public string Path {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
+	}
 }
 #endif

@@ -1,4 +1,4 @@
-// <copyright file="MemoryMonitor.cs" company="Microsoft">
+﻿// <copyright file="MemoryMonitor.cs" company="Microsoft">
 //   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 // </copyright>
 

@@ -33,16 +33,16 @@ using System.Runtime.Serialization;
 
 namespace System.Runtime.Remoting.MetadataServices
 {
-    [Serializable]
-    public class SUDSParserException : Exception
-    {
-        internal SUDSParserException ()
-        {
-        }
+	[Serializable]
+	public class SUDSParserException : Exception
+	{
+		internal SUDSParserException ()
+		{
+		}
 
-        protected SUDSParserException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-        }
-    }
+		protected SUDSParserException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{
+		}
+	}
 }

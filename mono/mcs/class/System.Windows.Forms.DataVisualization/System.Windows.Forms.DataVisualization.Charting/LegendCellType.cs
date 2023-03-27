@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum LegendCellType
-    {
-        Text = 0,
-        SeriesSymbol = 1,
-        Image = 2
-    }
+	public enum LegendCellType
+	{
+		Text = 0,
+		SeriesSymbol = 1,
+		Image = 2
+	}
 }

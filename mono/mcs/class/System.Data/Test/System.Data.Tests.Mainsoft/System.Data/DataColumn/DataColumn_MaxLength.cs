@@ -35,104 +35,104 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 { 
-    [TestFixture] public class DataColumn_MaxLength : GHTBase
-    {
-        public void SetUp()
-        {
-            Exception exp = null;
-            BeginCase("Setup");
-            try
-            {
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        }
+	[TestFixture] public class DataColumn_MaxLength : GHTBase
+	{
+		public void SetUp()
+		{
+			Exception exp = null;
+			BeginCase("Setup");
+			try
+			{
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		}
 
-        public void TearDown()
-        {
-        }
+		public void TearDown()
+		{
+		}
 
-        [Test] public void Main()
-        {
-            DataColumn_MaxLength tc = new DataColumn_MaxLength();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("DataColumn_MaxLength");
-                tc.SetUp();
-                tc.run();
-                tc.TearDown();
-            }
-            catch(Exception ex)
-            {
-                exp = ex;
-            }
-            finally
-            {
-                tc.EndTest(exp);
-            }
-        }
+		[Test] public void Main()
+		{
+			DataColumn_MaxLength tc = new DataColumn_MaxLength();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("DataColumn_MaxLength");
+				tc.SetUp();
+				tc.run();
+				tc.TearDown();
+			}
+			catch(Exception ex)
+			{
+				exp = ex;
+			}
+			finally
+			{
+				tc.EndTest(exp);
+			}
+		}
 
-        public void run()
-        {
-            Exception exp = null;
-            DataColumn dc;
-            dc = new DataColumn("ColName",typeof(string));
-            //Checking default value (-1)
-            try
-            {
-                BeginCase("MaxLength default");
-                Compare(dc.MaxLength , (int)-1);
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+		public void run()
+		{
+			Exception exp = null;
+			DataColumn dc;
+			dc = new DataColumn("ColName",typeof(string));
+			//Checking default value (-1)
+			try
+			{
+				BeginCase("MaxLength default");
+				Compare(dc.MaxLength , (int)-1);
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		
+			//Cheking Set MaxValue
+			dc.MaxLength = int.MaxValue ;
+			//Checking Get MaxValue
+			try
+			{
+				BeginCase("MaxLength MaxValue");
+				Compare(dc.MaxLength ,int.MaxValue );
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		
+			//Cheking Set MinValue
+			dc.MaxLength = int.MinValue  ;
+			//Checking Get MinValue
+			try
+			{
+				BeginCase("MaxLength MinValue");
+				Compare(dc.MaxLength , int.MinValue);
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+
+
+			DataTable dt = new DataTable();
+			dt.Columns.Add(new DataColumn("col",typeof(string)));
+			dt.Columns[0].MaxLength = 5;
+			dt.Rows.Add(new object[] {"a"});
         
-            //Cheking Set MaxValue
-            dc.MaxLength = int.MaxValue ;
-            //Checking Get MaxValue
-            try
-            {
-                BeginCase("MaxLength MaxValue");
-                Compare(dc.MaxLength ,int.MaxValue );
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        
-            //Cheking Set MinValue
-            dc.MaxLength = int.MinValue  ;
-            //Checking Get MinValue
-            try
-            {
-                BeginCase("MaxLength MinValue");
-                Compare(dc.MaxLength , int.MinValue);
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add(new DataColumn("col",typeof(string)));
-            dt.Columns[0].MaxLength = 5;
-            dt.Rows.Add(new object[] {"a"});
-        
-            //MaxLength = 5
-            try
-            {
-                BeginCase("MaxLength = 5");
-                try
-                {
-                    dt.Rows[0][0] = "123456";
-                }
-                catch (Exception ex)
-                {
-                    exp = ex;
-                }
-                Compare(exp.GetType().FullName, typeof(System.ArgumentException).FullName);
-                exp = null;
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        
-        }
-    }
+			//MaxLength = 5
+			try
+			{
+				BeginCase("MaxLength = 5");
+				try
+				{
+					dt.Rows[0][0] = "123456";
+				}
+				catch (Exception ex)
+				{
+					exp = ex;
+				}
+				Compare(exp.GetType().FullName, typeof(System.ArgumentException).FullName);
+				exp = null;
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		
+		}
+	}
 }

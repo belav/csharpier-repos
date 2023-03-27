@@ -29,8 +29,8 @@ using System;
 
 namespace Mono.MonoConfig
 {
-    public interface IConfigBlockContainer
-    {
-        ConfigBlockBlock FindConfigBlock (string name);
-    }
+	public interface IConfigBlockContainer
+	{
+		ConfigBlockBlock FindConfigBlock (string name);
+	}
 }

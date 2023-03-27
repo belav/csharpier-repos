@@ -2,16 +2,16 @@
 // Line: 15
 
 class X {
-    static void a (int i, double d)
-    {
-    }
+	static void a (int i, double d)
+	{
+	}
 
-    static void a (double d, int i)
-    {
-    }
+	static void a (double d, int i)
+	{
+	}
 
-    public static void Main ()
-    {
-        a (0, 0);
-    }
-}    
+	public static void Main ()
+	{
+		a (0, 0);
+	}
+}	

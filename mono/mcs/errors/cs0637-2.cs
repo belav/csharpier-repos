@@ -6,6 +6,6 @@ using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit)]
 struct GValue {
-    [FieldOffset (4)]
+	[FieldOffset (4)]
         public const int value = 3;
 }

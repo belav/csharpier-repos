@@ -2,7 +2,7 @@
 // AddressingVersionTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -37,28 +37,28 @@ using Element = System.ServiceModel.Channels.TextMessageEncodingBindingElement;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-    [TestFixture]
-    public class AddressingVersionTest
-    {
-        [Test]
-        public void Equality ()
-        {
-            Assert.AreEqual (AddressingVersion.WSAddressing10, 
-                MessageVersion.Default.Addressing, "#1");
-            Assert.IsTrue (AddressingVersion.WSAddressing10 == 
-                MessageVersion.Default.Addressing, "#2");
-            Assert.IsTrue (Object.ReferenceEquals (
-                AddressingVersion.WSAddressing10,
-                MessageVersion.Default.Addressing), "#3");
-        }
+	[TestFixture]
+	public class AddressingVersionTest
+	{
+		[Test]
+		public void Equality ()
+		{
+			Assert.AreEqual (AddressingVersion.WSAddressing10, 
+				MessageVersion.Default.Addressing, "#1");
+			Assert.IsTrue (AddressingVersion.WSAddressing10 == 
+				MessageVersion.Default.Addressing, "#2");
+			Assert.IsTrue (Object.ReferenceEquals (
+				AddressingVersion.WSAddressing10,
+				MessageVersion.Default.Addressing), "#3");
+		}
 
-        [Test]
-        public void Constants ()
-        {
-            Assert.AreEqual ("Addressing10 (http://www.w3.org/2005/08/addressing)",
-                AddressingVersion.WSAddressing10.ToString (), "#1");
-            Assert.AreEqual ("Addressing200408 (http://schemas.xmlsoap.org/ws/2004/08/addressing)",
-                AddressingVersion.WSAddressingAugust2004.ToString (), "#2");
-        }
-    }
+		[Test]
+		public void Constants ()
+		{
+			Assert.AreEqual ("Addressing10 (http://www.w3.org/2005/08/addressing)",
+				AddressingVersion.WSAddressing10.ToString (), "#1");
+			Assert.AreEqual ("Addressing200408 (http://schemas.xmlsoap.org/ws/2004/08/addressing)",
+				AddressingVersion.WSAddressingAugust2004.ToString (), "#2");
+		}
+	}
 }

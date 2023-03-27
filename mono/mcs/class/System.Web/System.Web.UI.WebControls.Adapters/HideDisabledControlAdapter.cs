@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.Adapters.HideDisabledControlAdapter
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,23 +33,23 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls.Adapters
 {
-    public class HideDisabledControlAdapter : WebControlAdapter
-    {
-        public HideDisabledControlAdapter ()
-        {
-        }
+	public class HideDisabledControlAdapter : WebControlAdapter
+	{
+		public HideDisabledControlAdapter ()
+		{
+		}
 
-        internal HideDisabledControlAdapter (WebControl c) : base (c)
-        {
-        }
+		internal HideDisabledControlAdapter (WebControl c) : base (c)
+		{
+		}
 
-        protected internal override void Render(HtmlTextWriter writer)
-        {
-            if (!Control.IsEnabled)
-                return;
+		protected internal override void Render(HtmlTextWriter writer)
+		{
+			if (!Control.IsEnabled)
+				return;
 
-            base.Render (writer);
-        }
-    }
+			base.Render (writer);
+		}
+	}
 }
 

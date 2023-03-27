@@ -282,7 +282,7 @@ namespace System.Net.Sockets {
         ///    <para>Set/Get WriteTimeout, note of a strange behavior, 0 timeout == infinite for sockets,
         ///         so we map this to -1, and if you set 0, we cannot support it</para>
         /// </devdoc>
-        public override int WriteTimeout { 
+	    public override int WriteTimeout { 
             get {
 #if DEBUG
                 using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
@@ -516,7 +516,7 @@ namespace System.Net.Sockets {
             catch (Exception exception) {
                 if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                     throw;
-                }
+	            }
 
                 //
                 // some sort of error occured on the socket call,
@@ -593,7 +593,7 @@ namespace System.Net.Sockets {
             catch (Exception exception) {
                 if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                     throw;
-                }
+	            }
 
                 //
                 // some sort of error occured on the socket call,
@@ -757,7 +757,7 @@ namespace System.Net.Sockets {
             catch (Exception exception) {
                 if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                     throw;
-                }
+	            }
 
                 //
                 // some sort of error occured on the socket call,
@@ -861,7 +861,7 @@ namespace System.Net.Sockets {
             catch (Exception exception) {
                 if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                     throw;
-                }
+	            }
 
                 //
                 // some sort of error occured on the socket call,
@@ -945,7 +945,7 @@ namespace System.Net.Sockets {
             catch (Exception exception) {
                 if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                     throw;
-                }
+	            }
 
                 //
                 // some sort of error occured on the socket call,
@@ -996,7 +996,7 @@ namespace System.Net.Sockets {
                 catch (Exception exception) {
                     if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                         throw;
-                    }
+    	            }
     
                     //
                     // some sort of error occured on the socket call,
@@ -1045,7 +1045,7 @@ namespace System.Net.Sockets {
             catch (Exception exception) {
                 if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                     throw;
-                }
+	            }
 
                 //
                 // some sort of error occured on the socket call,
@@ -1090,7 +1090,7 @@ namespace System.Net.Sockets {
             catch (Exception exception) {
                 if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                     throw;
-                }
+	            }
 
                 //
                 // some sort of error occured on the socket call,
@@ -1146,7 +1146,7 @@ namespace System.Net.Sockets {
 
                 if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                     throw;
-                }
+	            }
 
                 //
                 // some sort of error occured on the socket call,
@@ -1200,7 +1200,7 @@ namespace System.Net.Sockets {
 
                 if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                     throw;
-                }
+	            }
 
                 //
                 // some sort of error occured on the socket call,
@@ -1235,7 +1235,7 @@ namespace System.Net.Sockets {
             catch (Exception exception) {
                 if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
                     throw;
-                }
+	            }
 
                 //
                 // some sort of error occured on the socket call,

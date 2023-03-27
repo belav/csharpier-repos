@@ -32,11 +32,11 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class LazyCommitControl : DirectoryControl
-    {
-        internal LazyCommitControl ()
-            : base (null, null, false, false)
-        {
-        }
-    }
+	public class LazyCommitControl : DirectoryControl
+	{
+		internal LazyCommitControl ()
+			: base (null, null, false, false)
+		{
+		}
+	}
 }

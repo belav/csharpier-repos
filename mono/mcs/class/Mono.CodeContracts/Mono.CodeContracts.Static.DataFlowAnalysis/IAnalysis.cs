@@ -2,7 +2,7 @@
 // IAnalysis.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -35,16 +35,16 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Proving;
 
 namespace Mono.CodeContracts.Static.DataFlowAnalysis {
-    interface IAnalysis<Label, AbstractState, Visitor, EdgeData> {
-        Visitor GetVisitor ();
-        AbstractState Join (Pair<Label, Label> edge, AbstractState newstate, AbstractState prevstate, out bool weaker, bool widen);
-        AbstractState ImmutableVersion (AbstractState arg);
-        AbstractState MutableVersion (AbstractState arg);
-        AbstractState EdgeConversion (APC from, APC to, bool isJoinPoint, EdgeData data, AbstractState state);
-        bool IsBottom (Label pc, AbstractState state);
-        Predicate<Label> SaveFixPointInfo (IFixPointInfo<Label, AbstractState> fixPointInfo);
-        void Dump (Pair<AbstractState, TextWriter> pair);
-    }
+	interface IAnalysis<Label, AbstractState, Visitor, EdgeData> {
+		Visitor GetVisitor ();
+		AbstractState Join (Pair<Label, Label> edge, AbstractState newstate, AbstractState prevstate, out bool weaker, bool widen);
+		AbstractState ImmutableVersion (AbstractState arg);
+		AbstractState MutableVersion (AbstractState arg);
+		AbstractState EdgeConversion (APC from, APC to, bool isJoinPoint, EdgeData data, AbstractState state);
+		bool IsBottom (Label pc, AbstractState state);
+		Predicate<Label> SaveFixPointInfo (IFixPointInfo<Label, AbstractState> fixPointInfo);
+		void Dump (Pair<AbstractState, TextWriter> pair);
+	}
 
         interface IAbstractAnalysis<TDomain, TVar> : IAnalysis<APC, TDomain, IILVisitor<APC, TVar, TVar, TDomain, TDomain>, IImmutableMap<TVar, Sequence<TVar>>> {
                 TDomain TopValue ();

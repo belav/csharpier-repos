@@ -1,4 +1,4 @@
-namespace System.Web.UI.WebControls {
+﻿namespace System.Web.UI.WebControls {
     /// <summary>
     /// This is used to encapsulate the options required for processing a select method result from a <see cref="System.Web.UI.WebControls.ModelDataSourceView"/> select operation.
     /// </summary>

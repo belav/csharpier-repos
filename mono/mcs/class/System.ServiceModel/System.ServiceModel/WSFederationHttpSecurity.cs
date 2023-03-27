@@ -2,7 +2,7 @@
 // WSFederationHttpSecurity.cs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -30,26 +30,26 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-    public sealed class WSFederationHttpSecurity
-    {
-        WSFederationHttpSecurityMode mode;
-        FederatedMessageSecurityOverHttp message;
+	public sealed class WSFederationHttpSecurity
+	{
+		WSFederationHttpSecurityMode mode;
+		FederatedMessageSecurityOverHttp message;
 
-        internal WSFederationHttpSecurity (WSFederationHttpSecurityMode mode)
-        {
-            this.Mode = mode;
-            message = new FederatedMessageSecurityOverHttp ();
-        }
+		internal WSFederationHttpSecurity (WSFederationHttpSecurityMode mode)
+		{
+			this.Mode = mode;
+			message = new FederatedMessageSecurityOverHttp ();
+		}
 
-        public FederatedMessageSecurityOverHttp Message {
-            get { return message; }
-        }
+		public FederatedMessageSecurityOverHttp Message {
+			get { return message; }
+		}
 
-        public WSFederationHttpSecurityMode Mode {
-            get { return mode; }
-            set {
-                mode = value;
-            }
-        }
-    }
+		public WSFederationHttpSecurityMode Mode {
+			get { return mode; }
+			set {
+				mode = value;
+			}
+		}
+	}
 }

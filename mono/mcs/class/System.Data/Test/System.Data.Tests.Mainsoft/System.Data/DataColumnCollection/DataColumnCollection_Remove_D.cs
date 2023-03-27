@@ -37,186 +37,186 @@ using GHTUtils.Base;
 
 namespace tests.system_data_dll.System_Data
 {
-    [TestFixture] public class DataColumnCollection_Remove_D : GHTBase
-    {
-        [Test] public void Main()
-        {
-            DataColumnCollection_Remove_D tc = new DataColumnCollection_Remove_D();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("DataColumnCollection_Remove_D");
-                tc.run();
-            }
-            catch(Exception ex)
-            {
-                exp = ex;
-            }
-            finally
-            {
-                tc.EndTest(exp);
-            }
-        }
+	[TestFixture] public class DataColumnCollection_Remove_D : GHTBase
+	{
+		[Test] public void Main()
+		{
+			DataColumnCollection_Remove_D tc = new DataColumnCollection_Remove_D();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("DataColumnCollection_Remove_D");
+				tc.run();
+			}
+			catch(Exception ex)
+			{
+				exp = ex;
+			}
+			finally
+			{
+				tc.EndTest(exp);
+			}
+		}
 
-        //Activate This Construntor to log All To Standard output
-        //public TestClass():base(true){}
+		//Activate This Construntor to log All To Standard output
+		//public TestClass():base(true){}
 
-        //Activate this constructor to log Failures to a log file
-        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-        //Activate this constructor to log All to a log file
-        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-        public void run()
-        {
-            Exception exp = null;
+		//Activate this constructor to log Failures to a log file
+		//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-            //prepare a DataSet with DataTable to be checked
-            DataTable dtSource = new DataTable();
-            dtSource.Columns.Add("Col_0", typeof(int)); 
-            dtSource.Columns.Add("Col_1", typeof(int)); 
-            dtSource.Columns.Add("Col_2", typeof(int)); 
-            dtSource.Rows.Add(new object[] {0,1,2}); 
+		//Activate this constructor to log All to a log file
+		//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-            DataTable dt = null;
+		//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-            //------Check Remove first column---------
-            dt = dtSource.Clone();
-            dt.ImportRow(dtSource.Rows[0]);
-
-            dt.Columns.Remove(dt.Columns[0]); 
-            try
-            {
-                BeginCase("Remove first column - check column count");
-                Compare(dt.Columns.Count , 2);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
-
-            try
-            {
-                BeginCase("Remove first column - check column removed");
-                Compare(dt.Columns.Contains("Col_0"),false);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
-
-            try
-            {
-                BeginCase("Remove first column - check column 0 data");
-                Compare(dt.Rows[0][0],1);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
-
-            try
-            {
-                BeginCase("Remove first column - check column 1 data");
-                Compare(dt.Rows[0][1],2);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
+		public void run()
+		{
+			Exception exp = null;
 
 
-            //------Check Remove middle column---------
-            dt = dtSource.Clone();
-            dt.ImportRow(dtSource.Rows[0]);
+			//prepare a DataSet with DataTable to be checked
+			DataTable dtSource = new DataTable();
+			dtSource.Columns.Add("Col_0", typeof(int)); 
+			dtSource.Columns.Add("Col_1", typeof(int)); 
+			dtSource.Columns.Add("Col_2", typeof(int)); 
+			dtSource.Rows.Add(new object[] {0,1,2}); 
 
-            dt.Columns.Remove(dt.Columns[1]); 
-            try
-            {
-                BeginCase("Remove middle column - check column count");
-                Compare(dt.Columns.Count , 2);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
+			DataTable dt = null;
 
-            try
-            {
-                BeginCase("Remove middle column - check column removed");
-                Compare(dt.Columns.Contains("Col_1"),false);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
+			//------Check Remove first column---------
+			dt = dtSource.Clone();
+			dt.ImportRow(dtSource.Rows[0]);
 
-            try
-            {
-                BeginCase("Remove middle column - check column 0 data");
-                Compare(dt.Rows[0][0],0);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
+			dt.Columns.Remove(dt.Columns[0]); 
+			try
+			{
+				BeginCase("Remove first column - check column count");
+				Compare(dt.Columns.Count , 2);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
 
-            try
-            {
-                BeginCase("Remove middle column - check column 1 data");
-                Compare(dt.Rows[0][1],2);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
+			try
+			{
+				BeginCase("Remove first column - check column removed");
+				Compare(dt.Columns.Contains("Col_0"),false);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
+
+			try
+			{
+				BeginCase("Remove first column - check column 0 data");
+				Compare(dt.Rows[0][0],1);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
+
+			try
+			{
+				BeginCase("Remove first column - check column 1 data");
+				Compare(dt.Rows[0][1],2);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
 
 
-            //------Check Remove last column---------
-            dt = dtSource.Clone();
-            dt.ImportRow(dtSource.Rows[0]);
+			//------Check Remove middle column---------
+			dt = dtSource.Clone();
+			dt.ImportRow(dtSource.Rows[0]);
 
-            dt.Columns.Remove(dt.Columns[2]); 
-            try
-            {
-                BeginCase("Remove last column - check column count");
-                Compare(dt.Columns.Count , 2);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
+			dt.Columns.Remove(dt.Columns[1]); 
+			try
+			{
+				BeginCase("Remove middle column - check column count");
+				Compare(dt.Columns.Count , 2);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
 
-            try
-            {
-                BeginCase("Remove last column - check column removed");
-                Compare(dt.Columns.Contains("Col_2"),false);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
+			try
+			{
+				BeginCase("Remove middle column - check column removed");
+				Compare(dt.Columns.Contains("Col_1"),false);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
 
-            try
-            {
-                BeginCase("Remove last column - check column 0 data");
-                Compare(dt.Rows[0][0],0);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
+			try
+			{
+				BeginCase("Remove middle column - check column 0 data");
+				Compare(dt.Rows[0][0],0);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
 
-            try
-            {
-                BeginCase("Remove last column - check column 1 data");
-                Compare(dt.Rows[0][1],1);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
+			try
+			{
+				BeginCase("Remove middle column - check column 1 data");
+				Compare(dt.Rows[0][1],2);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
 
-            //------Check Remove column exception---------
-            dt = dtSource.Clone();
-            dt.ImportRow(dtSource.Rows[0]);
-            try
-            {
-                BeginCase("Check Remove column exception - Column name not exists");
-                try
-                {
-                    DataColumn dc = new DataColumn();
-                    dt.Columns.Remove(dc); 
-                }
-                catch (Exception ex)
-                {
-                    exp = ex;
-                }
-                Compare(exp.GetType().FullName ,typeof(System.ArgumentException).FullName);
-                exp=null;
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp);exp = null;}
-        }
-    }
+
+			//------Check Remove last column---------
+			dt = dtSource.Clone();
+			dt.ImportRow(dtSource.Rows[0]);
+
+			dt.Columns.Remove(dt.Columns[2]); 
+			try
+			{
+				BeginCase("Remove last column - check column count");
+				Compare(dt.Columns.Count , 2);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
+
+			try
+			{
+				BeginCase("Remove last column - check column removed");
+				Compare(dt.Columns.Contains("Col_2"),false);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
+
+			try
+			{
+				BeginCase("Remove last column - check column 0 data");
+				Compare(dt.Rows[0][0],0);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
+
+			try
+			{
+				BeginCase("Remove last column - check column 1 data");
+				Compare(dt.Rows[0][1],1);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
+
+			//------Check Remove column exception---------
+			dt = dtSource.Clone();
+			dt.ImportRow(dtSource.Rows[0]);
+			try
+			{
+				BeginCase("Check Remove column exception - Column name not exists");
+				try
+				{
+					DataColumn dc = new DataColumn();
+					dt.Columns.Remove(dc); 
+				}
+				catch (Exception ex)
+				{
+					exp = ex;
+				}
+				Compare(exp.GetType().FullName ,typeof(System.ArgumentException).FullName);
+				exp=null;
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp);exp = null;}
+		}
+	}
 }

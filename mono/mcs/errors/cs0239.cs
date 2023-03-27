@@ -5,30 +5,30 @@ using System;
 
 public class Foo {
 
-    public virtual void MyMethod ()
-    {
-        Console.WriteLine ("This is me !");
-    }
+	public virtual void MyMethod ()
+	{
+		Console.WriteLine ("This is me !");
+	}
 }
-          
+	      
 public class Bar : Foo {
 
-    public sealed override void MyMethod ()
-    {
+	public sealed override void MyMethod ()
+	{
 
-    }
+	}
 
 } 
 
 public class X : Bar {
 
-    public override void MyMethod ()
-    {
+	public override void MyMethod ()
+	{
 
-    }
-    
-    public static void Main ()
-    {
+	}
+	
+	public static void Main ()
+	{
 
-    }
+	}
 }

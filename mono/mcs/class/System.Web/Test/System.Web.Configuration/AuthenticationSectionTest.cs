@@ -1,9 +1,9 @@
 //
 // AuthenticationSectionTest.cs 
-//    - unit tests for System.Web.Configuration.AuthenticationSection
+//	- unit tests for System.Web.Configuration.AuthenticationSection
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,21 +38,21 @@ using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration {
 
-    [TestFixture]
-    public class AuthenticationSectionTest  {
+	[TestFixture]
+	public class AuthenticationSectionTest  {
 
-        [Test]
-        public void Defaults()
-        {
-            AuthenticationSection a = new AuthenticationSection();
+		[Test]
+		public void Defaults()
+		{
+			AuthenticationSection a = new AuthenticationSection();
 
-            Assert.IsNotNull (a.Forms, "A1");
-            Assert.AreEqual (typeof (FormsAuthenticationConfiguration), a.Forms.GetType(), "A2");
-            Assert.IsNotNull (a.Passport, "A3");
-            Assert.AreEqual (typeof (PassportAuthentication), a.Passport.GetType(), "A4");
-            Assert.AreEqual (AuthenticationMode.Windows, a.Mode, "A5");
-        }
-    }
+			Assert.IsNotNull (a.Forms, "A1");
+			Assert.AreEqual (typeof (FormsAuthenticationConfiguration), a.Forms.GetType(), "A2");
+			Assert.IsNotNull (a.Passport, "A3");
+			Assert.AreEqual (typeof (PassportAuthentication), a.Passport.GetType(), "A4");
+			Assert.AreEqual (AuthenticationMode.Windows, a.Mode, "A5");
+		}
+	}
 
 }
 

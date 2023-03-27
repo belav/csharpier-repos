@@ -1,23 +1,23 @@
 using System.Reflection;
 
 namespace System {
-    partial class DefaultBinder {
-        internal static bool CompareMethodSig (MethodBase m1, MethodBase m2)
-        {
-            ParameterInfo[] params1 = m1.GetParametersNoCopy ();
-            ParameterInfo[] params2 = m2.GetParametersNoCopy ();
+	partial class DefaultBinder {
+		internal static bool CompareMethodSig (MethodBase m1, MethodBase m2)
+		{
+			ParameterInfo[] params1 = m1.GetParametersNoCopy ();
+			ParameterInfo[] params2 = m2.GetParametersNoCopy ();
 
-            if (params1.Length != params2.Length)
-                return false;
+			if (params1.Length != params2.Length)
+				return false;
 
-            int numParams = params1.Length;
-            for (int i = 0; i < numParams; i++) {
-                if (params1 [i].ParameterType != params2 [i].ParameterType)
-                    return false;
-            }
+			int numParams = params1.Length;
+			for (int i = 0; i < numParams; i++) {
+				if (params1 [i].ParameterType != params2 [i].ParameterType)
+					return false;
+			}
 
-            return true;
-        }
+			return true;
+		}
 
         // Given a set of methods that match the base criteria, select a method based
         // upon an array of types.  This method should return null if no method matchs
@@ -176,6 +176,6 @@ namespace System {
                 /* DateTime */  Primitives.DateTime,
                 /* [Unused] */  0,
                 /* String   */  Primitives.String,
-        };                
-    }
+        };        		
+	}
 }

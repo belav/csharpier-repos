@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jordi Mas i Hernandez, jordi@ximian.com
+//	Jordi Mas i Hernandez, jordi@ximian.com
 //
 
 
@@ -30,19 +30,19 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms 
 {
-    [ComVisible(true)]
-    public class LinkClickedEventArgs : EventArgs 
-    {        
-        private string link_text;                
-        
-        public LinkClickedEventArgs (string linkText) 
-        {
-            this.link_text = linkText;
-        }        
-        
-        public string LinkText 
-        {
-            get { return link_text; }
-        }
-    }
+	[ComVisible(true)]
+	public class LinkClickedEventArgs : EventArgs 
+	{		
+		private string link_text;				
+		
+		public LinkClickedEventArgs (string linkText) 
+		{
+			this.link_text = linkText;
+		}		
+		
+		public string LinkText 
+		{
+			get { return link_text; }
+		}
+	}
 }

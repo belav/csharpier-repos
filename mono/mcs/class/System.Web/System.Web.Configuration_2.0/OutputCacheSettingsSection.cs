@@ -2,7 +2,7 @@
 // System.Web.Configuration.OutputCacheSettingsSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,31 +34,31 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class OutputCacheSettingsSection : ConfigurationSection
-    {
-        static ConfigurationProperty outputCacheProfilesProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class OutputCacheSettingsSection : ConfigurationSection
+	{
+		static ConfigurationProperty outputCacheProfilesProp;
+		static ConfigurationPropertyCollection properties;
 
-        static OutputCacheSettingsSection ()
-        {
-            outputCacheProfilesProp = new ConfigurationProperty ("outputCacheProfiles", typeof (OutputCacheProfileCollection), null,
-                                         null, PropertyHelper.DefaultValidator,
-                                         ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
+		static OutputCacheSettingsSection ()
+		{
+			outputCacheProfilesProp = new ConfigurationProperty ("outputCacheProfiles", typeof (OutputCacheProfileCollection), null,
+									     null, PropertyHelper.DefaultValidator,
+									     ConfigurationPropertyOptions.None);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (outputCacheProfilesProp);
-        }
+			properties.Add (outputCacheProfilesProp);
+		}
 
-        [ConfigurationProperty ("outputCacheProfiles")]
-        public OutputCacheProfileCollection OutputCacheProfiles {
-            get { return (OutputCacheProfileCollection) base [outputCacheProfilesProp];}
-        }
+		[ConfigurationProperty ("outputCacheProfiles")]
+		public OutputCacheProfileCollection OutputCacheProfiles {
+			get { return (OutputCacheProfileCollection) base [outputCacheProfilesProp];}
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-    }
+	}
 
 }
 

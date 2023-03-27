@@ -2,7 +2,7 @@
 // SecurityTokenResolverTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,50 +34,50 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-    [TestFixture]
-    public class SecurityTokenResolverTest
-    {
-        SecurityTokenResolver GetResolver (bool canMatchLocalId, params SecurityToken [] tokens)
-        {
-            return SecurityTokenResolver.CreateDefaultSecurityTokenResolver (new ReadOnlyCollection<SecurityToken> (tokens), canMatchLocalId);
-        }
+	[TestFixture]
+	public class SecurityTokenResolverTest
+	{
+		SecurityTokenResolver GetResolver (bool canMatchLocalId, params SecurityToken [] tokens)
+		{
+			return SecurityTokenResolver.CreateDefaultSecurityTokenResolver (new ReadOnlyCollection<SecurityToken> (tokens), canMatchLocalId);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TryResolveTokenNullClause ()
-        {
-            SecurityTokenResolver r = GetResolver (true, new SecurityToken [0]);
-            SecurityToken token;
-            r.TryResolveToken ((SecurityKeyIdentifierClause) null, out token);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void TryResolveTokenNullClause ()
+		{
+			SecurityTokenResolver r = GetResolver (true, new SecurityToken [0]);
+			SecurityToken token;
+			r.TryResolveToken ((SecurityKeyIdentifierClause) null, out token);
+		}
 
-        [Test]
-        public void TryResolveToken ()
-        {
-            SecurityTokenResolver r = GetResolver (true, new SecurityToken [0]);
-            SecurityToken token;
-            Assert.IsFalse (r.TryResolveToken (new LocalIdKeyIdentifierClause ("foo"), out token));
+		[Test]
+		public void TryResolveToken ()
+		{
+			SecurityTokenResolver r = GetResolver (true, new SecurityToken [0]);
+			SecurityToken token;
+			Assert.IsFalse (r.TryResolveToken (new LocalIdKeyIdentifierClause ("foo"), out token));
 
-            UserNameSecurityToken userName =
-                new UserNameSecurityToken ("mono", "", "urn:foo");
-            LocalIdKeyIdentifierClause kic =
-                new LocalIdKeyIdentifierClause ("urn:foo");
+			UserNameSecurityToken userName =
+				new UserNameSecurityToken ("mono", "", "urn:foo");
+			LocalIdKeyIdentifierClause kic =
+				new LocalIdKeyIdentifierClause ("urn:foo");
 
-            r = GetResolver (true, new SecurityToken [] {userName});
-            Assert.IsTrue (r.TryResolveToken (kic, out token));
+			r = GetResolver (true, new SecurityToken [] {userName});
+			Assert.IsTrue (r.TryResolveToken (kic, out token));
 
-            r = GetResolver (false, new SecurityToken [] {userName});
-            Assert.IsFalse (r.TryResolveToken (kic, out token));
-        }
+			r = GetResolver (false, new SecurityToken [] {userName});
+			Assert.IsFalse (r.TryResolveToken (kic, out token));
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ResolveTokenNonExistent ()
-        {
-            SecurityTokenResolver r = GetResolver (true, new SecurityToken [0]);
-            SecurityToken token;
-            Assert.IsNull (r.ResolveToken (new LocalIdKeyIdentifierClause ("urn:foo")));
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (InvalidOperationException))]
+		public void ResolveTokenNonExistent ()
+		{
+			SecurityTokenResolver r = GetResolver (true, new SecurityToken [0]);
+			SecurityToken token;
+			Assert.IsNull (r.ResolveToken (new LocalIdKeyIdentifierClause ("urn:foo")));
+		}
+	}
 }
 #endif

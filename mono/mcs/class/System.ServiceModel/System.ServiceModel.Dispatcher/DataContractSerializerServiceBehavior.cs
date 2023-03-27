@@ -1,8 +1,8 @@
-//
+﻿//
 // DataContractSerializerServiceBehavior.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -33,41 +33,41 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Dispatcher
 {
-    class DataContractSerializerServiceBehavior : IEndpointBehavior
-    {
-        public bool IgnoreExtensionDataObject {
-            get;
-            set;
-        }
+	class DataContractSerializerServiceBehavior : IEndpointBehavior
+	{
+		public bool IgnoreExtensionDataObject {
+			get;
+			set;
+		}
 
-        public int MaxItemsInObjectGraph {
-            get;
-            set;
-        }
+		public int MaxItemsInObjectGraph {
+			get;
+			set;
+		}
 
-        public DataContractSerializerServiceBehavior (bool ignoreExtensionDataObject, int maxItemsInObjectGraph) {
-            IgnoreExtensionDataObject = ignoreExtensionDataObject;
-            MaxItemsInObjectGraph = maxItemsInObjectGraph;
-        }
+		public DataContractSerializerServiceBehavior (bool ignoreExtensionDataObject, int maxItemsInObjectGraph) {
+			IgnoreExtensionDataObject = ignoreExtensionDataObject;
+			MaxItemsInObjectGraph = maxItemsInObjectGraph;
+		}
 
-        #region IEndpointBehavior Members
+		#region IEndpointBehavior Members
 
-        void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint, System.ServiceModel.Channels.BindingParameterCollection parameters) {
-            throw new NotImplementedException ();
-        }
+		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint, System.ServiceModel.Channels.BindingParameterCollection parameters) {
+			throw new NotImplementedException ();
+		}
 
-        void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint serviceEndpoint, EndpointDispatcher dispatcher) {
-            throw new NotImplementedException ();
-        }
+		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint serviceEndpoint, EndpointDispatcher dispatcher) {
+			throw new NotImplementedException ();
+		}
 
-        void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint serviceEndpoint, ClientRuntime behavior) {
-            throw new NotImplementedException ();
-        }
+		void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint serviceEndpoint, ClientRuntime behavior) {
+			throw new NotImplementedException ();
+		}
 
-        void IEndpointBehavior.Validate (ServiceEndpoint serviceEndpoint) {
-            throw new NotImplementedException ();
-        }
+		void IEndpointBehavior.Validate (ServiceEndpoint serviceEndpoint) {
+			throw new NotImplementedException ();
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -4,11 +4,11 @@
 
 interface IA
 {
-    bool Foo { get; }
+	bool Foo { get; }
 }
 
 interface IB : IA
 {
-    new void Foo ();
-    void Foo (int a);
+	new void Foo ();
+	void Foo (int a);
 }

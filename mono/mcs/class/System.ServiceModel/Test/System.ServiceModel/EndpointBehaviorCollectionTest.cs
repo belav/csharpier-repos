@@ -2,7 +2,7 @@
 // EndpointBehaviorCollectionTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,16 +36,16 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class EndpointBehaviorCollectionTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        [Ignore ("It throws NullReferenceException instead")]
-        public void CtorNullArg ()
-        {
-            new EndpointBehaviorCollection (null);
-        }
-    }
+	[TestFixture]
+	public class EndpointBehaviorCollectionTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		[Ignore ("It throws NullReferenceException instead")]
+		public void CtorNullArg ()
+		{
+			new EndpointBehaviorCollection (null);
+		}
+	}
 }
 #endif

@@ -32,19 +32,19 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    [MonoTODO]
-    public sealed class BerConverter
-    {
-        [MonoTODO]
-        public static object [] Decode (string format, byte [] value)
-        {
-            throw new NotImplementedException ();
-        }
+	[MonoTODO]
+	public sealed class BerConverter
+	{
+		[MonoTODO]
+		public static object [] Decode (string format, byte [] value)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static byte [] Encode (string format, params object [] value)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public static byte [] Encode (string format, params object [] value)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

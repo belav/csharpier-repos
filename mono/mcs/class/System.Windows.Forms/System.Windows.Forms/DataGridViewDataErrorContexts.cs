@@ -20,25 +20,25 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 namespace System.Windows.Forms {
 
-    [FlagsAttribute()]
-    public enum DataGridViewDataErrorContexts {
-        Formatting = 1,
-        Display = 2,
-        PreferredSize = 4,
-        RowDeletion = 8,
-        Parsing = 256,
-        Commit = 512,
-        InitialValueRestoration = 1024,
-        LeaveControl = 2048,
-        CurrentCellChange = 4096,
-        Scroll = 8192,
-        ClipboardContent = 16384
-    }
+	[FlagsAttribute()]
+	public enum DataGridViewDataErrorContexts {
+		Formatting = 1,
+		Display = 2,
+		PreferredSize = 4,
+		RowDeletion = 8,
+		Parsing = 256,
+		Commit = 512,
+		InitialValueRestoration = 1024,
+		LeaveControl = 2048,
+		CurrentCellChange = 4096,
+		Scroll = 8192,
+		ClipboardContent = 16384
+	}
 
 }
 

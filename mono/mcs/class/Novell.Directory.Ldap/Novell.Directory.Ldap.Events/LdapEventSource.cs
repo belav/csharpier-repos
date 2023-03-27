@@ -62,14 +62,14 @@ namespace Novell.Directory.Ldap.Events
     {
       get
       {
-    return sleep_interval;
+	return sleep_interval;
       }
       set
       {
-          if(value <= 0)
-              throw new ArgumentOutOfRangeException("SleepInterval","cannot take the negative or zero values ");
-          else
-              sleep_interval = value;
+		  if(value <= 0)
+			  throw new ArgumentOutOfRangeException("SleepInterval","cannot take the negative or zero values ");
+		  else
+			  sleep_interval = value;
       }
     }
 
@@ -84,17 +84,17 @@ namespace Novell.Directory.Ldap.Events
 
       // Get Listeners registered for generic events
       if (null != directory_event)
-    nListeners += directory_event.GetInvocationList().Length;
+	nListeners += directory_event.GetInvocationList().Length;
 
       // Get Listeners registered for exception events
       if (null != directory_exception_event)
-    nListeners += directory_exception_event.GetInvocationList().Length;
+	nListeners += directory_exception_event.GetInvocationList().Length;
 
       if (0 == nListeners)
-    return LISTENERS_COUNT.ZERO;
+	return LISTENERS_COUNT.ZERO;
       
       if (1 == nListeners)
-    return LISTENERS_COUNT.ONE;
+	return LISTENERS_COUNT.ONE;
 
       return LISTENERS_COUNT.MORE_THAN_ONE;
     }
@@ -107,14 +107,14 @@ namespace Novell.Directory.Ldap.Events
       switch (lc)
       {
       case LISTENERS_COUNT.ONE:
-    // start search and polling if not already started
-    StartSearchAndPolling();
-    break;
+	// start search and polling if not already started
+	StartSearchAndPolling();
+	break;
 
       case LISTENERS_COUNT.ZERO:
       case LISTENERS_COUNT.MORE_THAN_ONE:
       default:
-    break;
+	break;
       }
     }
 
@@ -126,14 +126,14 @@ namespace Novell.Directory.Ldap.Events
       switch (lc)
       {
       case LISTENERS_COUNT.ZERO:
-    // stop search and polling if not already stopped
-    StopSearchAndPolling();
-    break;
+	// stop search and polling if not already stopped
+	StopSearchAndPolling();
+	break;
 
       case LISTENERS_COUNT.ONE:
       case LISTENERS_COUNT.MORE_THAN_ONE:
       default:
-    break;
+	break;
       }
     }
 
@@ -152,13 +152,13 @@ namespace Novell.Directory.Ldap.Events
     {
       add
       {
-    directory_event += value;
-    ListenerAdded();
+	directory_event += value;
+	ListenerAdded();
       }
       remove
       {
-    directory_event -= value;
-    ListenerRemoved();
+	directory_event -= value;
+	ListenerRemoved();
       }
     }
 
@@ -177,13 +177,13 @@ namespace Novell.Directory.Ldap.Events
     {
       add
       {
-    directory_exception_event += value;
-    ListenerAdded();
+	directory_exception_event += value;
+	ListenerAdded();
       }
       remove
       {
-    directory_exception_event -= value;
-    ListenerRemoved();
+	directory_exception_event -= value;
+	ListenerRemoved();
       }
     }
 
@@ -191,28 +191,28 @@ namespace Novell.Directory.Ldap.Events
     /// DirectoryEventHandler is the delegate definition for DirectoryExceptionEvent.
     /// </summary>
     public delegate void DirectoryExceptionEventHandler(object source, 
-                           DirectoryExceptionEventArgs objDirectoryExceptionEventArgs);
+						   DirectoryExceptionEventArgs objDirectoryExceptionEventArgs);
 
     protected EventsGenerator m_objEventsGenerator = null;
 
     protected void StartEventPolling(
-                 LdapMessageQueue queue,
-                 LdapConnection conn,
-                 int msgid)
+				 LdapMessageQueue queue,
+				 LdapConnection conn,
+				 int msgid)
     {
       // validate the argument values
       if ( (queue == null)
-       || (conn == null))
+	   || (conn == null))
       {
-    throw new ArgumentException("No parameter can be Null.");
+	throw new ArgumentException("No parameter can be Null.");
       }
 
       if (null == m_objEventsGenerator)
       {
-    m_objEventsGenerator =  new EventsGenerator(this, queue, conn, msgid);
-    m_objEventsGenerator.SleepTime = sleep_interval;
+	m_objEventsGenerator =  new EventsGenerator(this, queue, conn, msgid);
+	m_objEventsGenerator.SleepTime = sleep_interval;
 
-    m_objEventsGenerator.StartEventPolling();
+	m_objEventsGenerator.StartEventPolling();
       }
     } // end of method StartEventPolling
 
@@ -220,47 +220,47 @@ namespace Novell.Directory.Ldap.Events
     {
       if (null != m_objEventsGenerator)
       {
-    m_objEventsGenerator.StopEventPolling();
-    m_objEventsGenerator = null;
+	m_objEventsGenerator.StopEventPolling();
+	m_objEventsGenerator = null;
       }
     } // end of method StopEventPolling
 
     protected abstract bool 
     NotifyEventListeners(LdapMessage sourceMessage,
-             EventClassifiers aClassification,
-             int nType);
+			 EventClassifiers aClassification,
+			 int nType);
 
     protected void NotifyListeners(LdapMessage sourceMessage,
-                   EventClassifiers aClassification,
-                   int nType)
+				   EventClassifiers aClassification,
+				   int nType)
     {
       // first let the actual source Notify the listeners with
       // appropriate EventArgs
       
       bool bListenersNotified = NotifyEventListeners(sourceMessage,
-                             aClassification, 
-                             nType);
+						     aClassification, 
+						     nType);
 
       if (!bListenersNotified)
       {
-    // Actual EventSource could not recognize the event
-    // Just notify the listeners for generic directory events
-    NotifyDirectoryListeners(sourceMessage, aClassification);
+	// Actual EventSource could not recognize the event
+	// Just notify the listeners for generic directory events
+	NotifyDirectoryListeners(sourceMessage, aClassification);
       }
     }
 
     protected void NotifyDirectoryListeners(LdapMessage sourceMessage,
-                      EventClassifiers aClassification)
+					  EventClassifiers aClassification)
     {
       NotifyDirectoryListeners(new DirectoryEventArgs(sourceMessage, 
-                              aClassification));
+						      aClassification));
     }
 
     protected void NotifyDirectoryListeners(DirectoryEventArgs objDirectoryEventArgs)
     {
       if (null != directory_event)
       {
-    directory_event(this, objDirectoryEventArgs);
+	directory_event(this, objDirectoryEventArgs);
       }
     }
 
@@ -268,7 +268,7 @@ namespace Novell.Directory.Ldap.Events
     {
       if (null != directory_exception_event)
       {
-    directory_exception_event(this, new DirectoryExceptionEventArgs(sourceMessage, ldapException));
+	directory_exception_event(this, new DirectoryExceptionEventArgs(sourceMessage, ldapException));
       }
     }
 
@@ -291,100 +291,100 @@ namespace Novell.Directory.Ldap.Events
       /// </summary>
       public int SleepTime
       {
-    get
-    {
-      return sleep_time;
-    }
-    set
-    {
-      sleep_time = value;
-    }
+	get
+	{
+	  return sleep_time;
+	}
+	set
+	{
+	  sleep_time = value;
+	}
       }
       
       
       public EventsGenerator(LdapEventSource objEventSource,
-                 LdapMessageQueue queue,
-                 LdapConnection conn,
-                 int msgid)
+			     LdapMessageQueue queue,
+			     LdapConnection conn,
+			     int msgid)
       {
-    m_objLdapEventSource = objEventSource;
-    searchqueue = queue;
-    ldapconnection = conn;
-    messageid = msgid;
-    sleep_time = DEFAULT_SLEEP_TIME;
+	m_objLdapEventSource = objEventSource;
+	searchqueue = queue;
+	ldapconnection = conn;
+	messageid = msgid;
+	sleep_time = DEFAULT_SLEEP_TIME;
       } // end of Constructor
       
       protected void Run() 
       {
-    while (isrunning) 
-    {
-      LdapMessage response = null;
-      try 
-      {
-        while ((isrunning)
-           && (!searchqueue.isResponseReceived(messageid))) 
-        {
-          try 
-          {
-        Thread.Sleep(sleep_time);
-          } 
-          catch (ThreadInterruptedException e) 
-          {
-        Console.WriteLine("EventsGenerator::Run Got ThreadInterruptedException e = {0}", e);
-          }
-        }
-        
-        if (isrunning) 
-        {
-          response = searchqueue.getResponse(messageid);
-        }
-        
-        if (response != null) 
-        {
-          processmessage(response);
-        }
-      } 
-      catch (LdapException e) 
-      {
-        m_objLdapEventSource.NotifyExceptionListeners(response, e);
-      }
-    }
+	while (isrunning) 
+	{
+	  LdapMessage response = null;
+	  try 
+	  {
+	    while ((isrunning)
+		   && (!searchqueue.isResponseReceived(messageid))) 
+	    {
+	      try 
+	      {
+		Thread.Sleep(sleep_time);
+	      } 
+	      catch (ThreadInterruptedException e) 
+	      {
+		Console.WriteLine("EventsGenerator::Run Got ThreadInterruptedException e = {0}", e);
+	      }
+	    }
+	    
+	    if (isrunning) 
+	    {
+	      response = searchqueue.getResponse(messageid);
+	    }
+	    
+	    if (response != null) 
+	    {
+	      processmessage(response);
+	    }
+	  } 
+	  catch (LdapException e) 
+	  {
+	    m_objLdapEventSource.NotifyExceptionListeners(response, e);
+	  }
+	}
       } // end of method run
       
       protected void processmessage(LdapMessage response) 
       {
-    if (response is LdapResponse) 
-    {
-      try 
-      {
-        ((LdapResponse) response).chkResultCode();
-        
-        m_objLdapEventSource.NotifyEventListeners(response, 
-                              EventClassifiers.CLASSIFICATION_UNKNOWN, 
-                              EVENT_TYPE_UNKNOWN);
-      } 
-      catch (LdapException e) 
-      {
-        m_objLdapEventSource.NotifyExceptionListeners(response, e);
-      }
-    } 
-    else 
-    {
-      m_objLdapEventSource.NotifyEventListeners(response, 
-                            EventClassifiers.CLASSIFICATION_UNKNOWN, 
-                            EVENT_TYPE_UNKNOWN);
-    }
+	if (response is LdapResponse) 
+	{
+	  try 
+	  {
+	    ((LdapResponse) response).chkResultCode();
+	    
+	    m_objLdapEventSource.NotifyEventListeners(response, 
+						      EventClassifiers.CLASSIFICATION_UNKNOWN, 
+						      EVENT_TYPE_UNKNOWN);
+	  } 
+	  catch (LdapException e) 
+	  {
+	    m_objLdapEventSource.NotifyExceptionListeners(response, e);
+	  }
+	} 
+	else 
+	{
+	  m_objLdapEventSource.NotifyEventListeners(response, 
+						    EventClassifiers.CLASSIFICATION_UNKNOWN, 
+						    EVENT_TYPE_UNKNOWN);
+	}
       } // end of method processmessage
       
       public void StartEventPolling()
       {
-    isrunning = true;
-    new Thread( new ThreadStart( Run ) ).Start();
+	isrunning = true;
+	new Thread( new ThreadStart( Run ) ).Start();
       }
       
       public void StopEventPolling() 
       {
-    isrunning = false;
+	isrunning = false;
       } // end of method stopEventGeneration
     } // end of class EventsGenerator
     

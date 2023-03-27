@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 
 using System;
 using System.Collections;
@@ -30,83 +30,83 @@ using Mono.WebBrowser.DOM;
 
 namespace Mono.Mozilla.DOM
 {
-    internal class AttributeCollection : NodeList, IAttributeCollection
-    {
-        protected new nsIDOMNamedNodeMap unmanagedNodes;
+	internal class AttributeCollection : NodeList, IAttributeCollection
+	{
+		protected new nsIDOMNamedNodeMap unmanagedNodes;
 
-        public AttributeCollection (WebBrowser control, nsIDOMNamedNodeMap nodeMap)
-            : base (control, true)
-        {
-            if (control.platform != control.enginePlatform)
-                unmanagedNodes = nsDOMNamedNodeMap.GetProxy (control, nodeMap);
-            else
-                unmanagedNodes = nodeMap;
-        }
-        
-        public AttributeCollection (WebBrowser control) : base (control) 
-        {
-        }
-        
-        internal override void Load ()
-        {
-            if (unmanagedNodes == null) return;
-            Clear ();
-            uint count;
-            unmanagedNodes.getLength (out count);
-            nodeCount = (int) count;
-            nodes = new Node[count];
-            for (int i = 0; i < count; i++) {
-                nsIDOMNode node;
-                unmanagedNodes.item ((uint) i, out node);
-                nodes[i] = new Attribute (control, node as nsIDOMAttr);
-            }
-        }
+		public AttributeCollection (WebBrowser control, nsIDOMNamedNodeMap nodeMap)
+			: base (control, true)
+		{
+			if (control.platform != control.enginePlatform)
+				unmanagedNodes = nsDOMNamedNodeMap.GetProxy (control, nodeMap);
+			else
+				unmanagedNodes = nodeMap;
+		}
+		
+		public AttributeCollection (WebBrowser control) : base (control) 
+		{
+		}
+		
+		internal override void Load ()
+		{
+			if (unmanagedNodes == null) return;
+			Clear ();
+			uint count;
+			unmanagedNodes.getLength (out count);
+			nodeCount = (int) count;
+			nodes = new Node[count];
+			for (int i = 0; i < count; i++) {
+				nsIDOMNode node;
+				unmanagedNodes.item ((uint) i, out node);
+				nodes[i] = new Attribute (control, node as nsIDOMAttr);
+			}
+		}
 
-        public override int Count {
-            get {
-                if (unmanagedNodes != null && nodes == null)
-                    Load ();
-                return nodeCount; 
-            }
-        }
+		public override int Count {
+			get {
+				if (unmanagedNodes != null && nodes == null)
+					Load ();
+				return nodeCount; 
+			}
+		}
 
-        #region IList members
-        public new IAttribute this[int index]
-        {
-            get
-            {
-                if (index < 0 || index >= Count)
-                    throw new ArgumentOutOfRangeException ("index");
-                return nodes[index] as IAttribute;
-            }
-            set { }
-        }
+		#region IList members
+		public new IAttribute this[int index]
+		{
+			get
+			{
+				if (index < 0 || index >= Count)
+					throw new ArgumentOutOfRangeException ("index");
+				return nodes[index] as IAttribute;
+			}
+			set { }
+		}
 
-        public IAttribute this[string name]
-        {
-            get
-            {
-                for (int i = 0; i < nodes.Length; i++) {
-                    if (((IAttribute) nodes[i]).Name.Equals (name))
-                        return nodes[i] as IAttribute;
-                }
-                return null;
-            }
-        }
+		public IAttribute this[string name]
+		{
+			get
+			{
+				for (int i = 0; i < nodes.Length; i++) {
+					if (((IAttribute) nodes[i]).Name.Equals (name))
+						return nodes[i] as IAttribute;
+				}
+				return null;
+			}
+		}
 
-        public bool Exists (string name)
-        {
-            if (unmanagedNodes == null) return false;
-            Base.StringSet (storage, name);
-            nsIDOMNode ret;
-            unmanagedNodes.getNamedItem (storage, out ret);
-            return ret != null;
-        }
-        #endregion
-        
-        public override int GetHashCode () {
-            if (unmanagedNodes == null) return base.GetHashCode ();
-            return this.unmanagedNodes.GetHashCode ();
-        }
-    }
+		public bool Exists (string name)
+		{
+			if (unmanagedNodes == null) return false;
+			Base.StringSet (storage, name);
+			nsIDOMNode ret;
+			unmanagedNodes.getNamedItem (storage, out ret);
+			return ret != null;
+		}
+		#endregion
+		
+		public override int GetHashCode () {
+			if (unmanagedNodes == null) return base.GetHashCode ();
+			return this.unmanagedNodes.GetHashCode ();
+		}
+	}
 }

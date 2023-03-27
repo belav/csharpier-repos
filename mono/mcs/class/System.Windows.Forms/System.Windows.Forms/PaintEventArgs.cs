@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
@@ -29,69 +29,69 @@
 using System.Drawing;
 
 namespace System.Windows.Forms {
-    public class PaintEventArgs : EventArgs, IDisposable {
-        private Graphics    graphics;
-        private Rectangle    clip_rectangle;
-        internal bool        Handled;
-        private bool        disposed;
-        
-        #region Public Constructors
-        public PaintEventArgs (Graphics graphics, Rectangle clipRect)
-        {
-            if (graphics == null)
-                throw new ArgumentNullException ("graphics");
+	public class PaintEventArgs : EventArgs, IDisposable {
+		private Graphics	graphics;
+		private Rectangle	clip_rectangle;
+		internal bool		Handled;
+		private bool		disposed;
+		
+		#region Public Constructors
+		public PaintEventArgs (Graphics graphics, Rectangle clipRect)
+		{
+			if (graphics == null)
+				throw new ArgumentNullException ("graphics");
 
-            this.graphics=graphics;
-            this.clip_rectangle=clipRect;
-        }
-        #endregion    // Public Constructors
+			this.graphics=graphics;
+			this.clip_rectangle=clipRect;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public Rectangle ClipRectangle {
-            get {
-                return this.clip_rectangle;
-            }
-        }
+		#region Public Instance Properties
+		public Rectangle ClipRectangle {
+			get {
+				return this.clip_rectangle;
+			}
+		}
 
-        public Graphics Graphics {
-            get {
-                return this.graphics;
-            }
-        }
-        #endregion    // Public Instance Properties
+		public Graphics Graphics {
+			get {
+				return this.graphics;
+			}
+		}
+		#endregion	// Public Instance Properties
 
-        #region Public Instance Methods
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion    // Public Instance Methods
+		#region Public Instance Methods
+		public void Dispose() {
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+		#endregion	// Public Instance Methods
 
                 // Returns the previous graphics
-        internal Graphics SetGraphics (Graphics g)
-        {
-            Graphics res = graphics;
-            graphics = g;
+		internal Graphics SetGraphics (Graphics g)
+		{
+			Graphics res = graphics;
+			graphics = g;
 
-            return res;
-        }
+			return res;
+		}
 
-        internal void SetClip (Rectangle clip)
-        {
-            clip_rectangle = clip;
-        }
-        
-        #region Protected Instance Methods
-        ~PaintEventArgs() {
-            Dispose(false);
-        }
+		internal void SetClip (Rectangle clip)
+		{
+			clip_rectangle = clip;
+		}
+		
+		#region Protected Instance Methods
+		~PaintEventArgs() {
+			Dispose(false);
+		}
 
-        protected virtual void Dispose (bool disposing)
-        {
-            if (!disposed) {
-                disposed = true;
-            }
-        }
-        #endregion    // Protected Instance Methods
-    }
+		protected virtual void Dispose (bool disposing)
+		{
+			if (!disposed) {
+				disposed = true;
+			}
+		}
+		#endregion	// Protected Instance Methods
+	}
 }

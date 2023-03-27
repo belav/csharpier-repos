@@ -31,127 +31,127 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls {
 
-    // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class BoundColumn : DataGridColumn 
-    {
-        string data_format_string;
+	// CAS
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class BoundColumn : DataGridColumn 
+	{
+		string data_format_string;
 
-        public BoundColumn ()
-        {
-        }
+		public BoundColumn ()
+		{
+		}
 
-        public static readonly string thisExpr = "!";
+		public static readonly string thisExpr = "!";
 
-        [DefaultValue("")]
-        [WebSysDescription ("")]
-        [WebCategory ("Misc")]
-        public virtual string DataField 
-        {
-            get {
-                return ViewState.GetString ("DataField", String.Empty);
-            }
-            set {
-                ViewState ["DataField"] = value;
-            }
-        }
-        
-        [DefaultValue("")]
-        [WebSysDescription ("")]
-        [WebCategory ("Misc")]
-        public virtual string DataFormatString 
-        {
-            get {
-                return ViewState.GetString ("DataFormatString", String.Empty);
-            }
-            set {
-                ViewState ["DataFormatString"] = value;
-            }
-        }
+		[DefaultValue("")]
+		[WebSysDescription ("")]
+		[WebCategory ("Misc")]
+		public virtual string DataField 
+		{
+			get {
+				return ViewState.GetString ("DataField", String.Empty);
+			}
+			set {
+				ViewState ["DataField"] = value;
+			}
+		}
+		
+		[DefaultValue("")]
+		[WebSysDescription ("")]
+		[WebCategory ("Misc")]
+		public virtual string DataFormatString 
+		{
+			get {
+				return ViewState.GetString ("DataFormatString", String.Empty);
+			}
+			set {
+				ViewState ["DataFormatString"] = value;
+			}
+		}
 
-        [DefaultValue(false)]
-        [WebSysDescription ("")]
-        [WebCategory ("Misc")]
-        public virtual bool ReadOnly 
-        {
-            get {
-                return ViewState.GetBool ("ReadOnly", false);
-            }
-            set {
-                ViewState ["ReadOnly"] = value;
-            }
-        }
-        
-        public override void Initialize ()
-        {
-            data_format_string = DataFormatString;
-        }
+		[DefaultValue(false)]
+		[WebSysDescription ("")]
+		[WebCategory ("Misc")]
+		public virtual bool ReadOnly 
+		{
+			get {
+				return ViewState.GetBool ("ReadOnly", false);
+			}
+			set {
+				ViewState ["ReadOnly"] = value;
+			}
+		}
+		
+		public override void Initialize ()
+		{
+			data_format_string = DataFormatString;
+		}
 
-        public override void InitializeCell (TableCell cell, int columnIndex,
-                ListItemType itemType)
-        {
-            base.InitializeCell (cell, columnIndex, itemType);
+		public override void InitializeCell (TableCell cell, int columnIndex,
+				ListItemType itemType)
+		{
+			base.InitializeCell (cell, columnIndex, itemType);
 
-            string df = DataField;
+			string df = DataField;
 
-            switch (itemType) {
-            case ListItemType.Item:
-            case ListItemType.SelectedItem:
-            case ListItemType.AlternatingItem:
-                if (df != null && df.Length != 0)
-                    cell.DataBinding += new EventHandler (ItemDataBinding);
-                break;
-            case ListItemType.EditItem:
-                if (ReadOnly && df != null && df.Length != 0) {
-                    cell.DataBinding += new EventHandler (ItemDataBinding);
-                    break;
-                }
-                TextBox tb = new TextBox ();
-                if (df != null && df.Length != 0)
-                    tb.DataBinding += new EventHandler (ItemDataBinding);
-                cell.Controls.Add (tb);
-                break;
-            }
-        }
+			switch (itemType) {
+			case ListItemType.Item:
+			case ListItemType.SelectedItem:
+			case ListItemType.AlternatingItem:
+				if (df != null && df.Length != 0)
+					cell.DataBinding += new EventHandler (ItemDataBinding);
+				break;
+			case ListItemType.EditItem:
+				if (ReadOnly && df != null && df.Length != 0) {
+					cell.DataBinding += new EventHandler (ItemDataBinding);
+					break;
+				}
+				TextBox tb = new TextBox ();
+				if (df != null && df.Length != 0)
+					tb.DataBinding += new EventHandler (ItemDataBinding);
+				cell.Controls.Add (tb);
+				break;
+			}
+		}
 
-        protected virtual string FormatDataValue (object dataValue)
-        {
-            if (dataValue == null)
-                return "";
+		protected virtual string FormatDataValue (object dataValue)
+		{
+			if (dataValue == null)
+				return "";
 
-            if (data_format_string == String.Empty)
-                return dataValue.ToString ();
+			if (data_format_string == String.Empty)
+				return dataValue.ToString ();
 
-            return String.Format (data_format_string, dataValue);
-        }
+			return String.Format (data_format_string, dataValue);
+		}
 
-        string GetValueFromItem (DataGridItem item)
-        {
-            object val;
-            if (DataField != thisExpr) {
-                val = DataBinder.Eval (item.DataItem, DataField);
-            } else {
-                val = item.DataItem;
-            }
+		string GetValueFromItem (DataGridItem item)
+		{
+			object val;
+			if (DataField != thisExpr) {
+				val = DataBinder.Eval (item.DataItem, DataField);
+			} else {
+				val = item.DataItem;
+			}
 
-            string text = FormatDataValue (val);
-            return (text != "" ?  text : "&nbsp;");
-        }
+			string text = FormatDataValue (val);
+			return (text != "" ?  text : "&nbsp;");
+		}
 
-        void ItemDataBinding (object sender, EventArgs e)
-        {
-            Control ctrl = (Control) sender;
-            string text = GetValueFromItem ((DataGridItem) ctrl.NamingContainer);
+		void ItemDataBinding (object sender, EventArgs e)
+		{
+			Control ctrl = (Control) sender;
+			string text = GetValueFromItem ((DataGridItem) ctrl.NamingContainer);
 
-            TableCell cell = sender as TableCell;
-            if (cell == null) {
-                TextBox tb = (TextBox) sender;
-                tb.Text = text;
-            } else {
-                cell.Text = text;
-            }
-        }
-    }
+			TableCell cell = sender as TableCell;
+			if (cell == null) {
+				TextBox tb = (TextBox) sender;
+				tb.Text = text;
+			} else {
+				cell.Text = text;
+			}
+		}
+	}
 }
 

@@ -2,20 +2,20 @@
 // Line: 14
 public class B
 {
-    public virtual int Get {
-        get { return 3; }
-    }
+	public virtual int Get {
+		get { return 3; }
+	}
 }
 
 public class A : B
 {
-    public override int Get {
-        get {
-            return base.Get<int>;
-        }
-    }
+	public override int Get {
+		get {
+			return base.Get<int>;
+		}
+	}
 
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }

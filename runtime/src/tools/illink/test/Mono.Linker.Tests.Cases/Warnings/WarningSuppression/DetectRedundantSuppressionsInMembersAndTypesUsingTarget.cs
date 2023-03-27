@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation and contributors. All rights reserved.
+﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,76 +17,76 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
 {
-    [ExpectedNoWarnings]
-    [SkipKeptItemsValidation]
-    public class DetectRedundantSuppressionsInMembersAndTypesUsingTarget
-    {
-        public static void Main ()
-        {
-            RedundantSuppressionOnType.Test ();
-            RedundantSuppressionOnMethod.Test ();
-            RedundantSuppressionOnNestedType.Test ();
-            RedundantSuppressionOnProperty.Test ();
-        }
+	[ExpectedNoWarnings]
+	[SkipKeptItemsValidation]
+	public class DetectRedundantSuppressionsInMembersAndTypesUsingTarget
+	{
+		public static void Main ()
+		{
+			RedundantSuppressionOnType.Test ();
+			RedundantSuppressionOnMethod.Test ();
+			RedundantSuppressionOnNestedType.Test ();
+			RedundantSuppressionOnProperty.Test ();
+		}
 
-        public static Type TriggerUnrecognizedPattern ()
-        {
-            return typeof (DetectRedundantSuppressionsInMembersAndTypesUsingTarget);
-        }
+		public static Type TriggerUnrecognizedPattern ()
+		{
+			return typeof (DetectRedundantSuppressionsInMembersAndTypesUsingTarget);
+		}
 
-        public static string TrimmerCompatibleMethod ()
-        {
-            return "test";
-        }
+		public static string TrimmerCompatibleMethod ()
+		{
+			return "test";
+		}
 
-        [ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
-        public class RedundantSuppressionOnType
-        {
-            public static void Test ()
-            {
-                TrimmerCompatibleMethod ();
-            }
-        }
+		[ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
+		public class RedundantSuppressionOnType
+		{
+			public static void Test ()
+			{
+				TrimmerCompatibleMethod ();
+			}
+		}
 
-        public class RedundantSuppressionOnMethod
-        {
-            [ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
-            public static void Test ()
-            {
-                TrimmerCompatibleMethod ();
-            }
-        }
+		public class RedundantSuppressionOnMethod
+		{
+			[ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
+			public static void Test ()
+			{
+				TrimmerCompatibleMethod ();
+			}
+		}
 
-        public class RedundantSuppressionOnNestedType
-        {
-            public static void Test ()
-            {
-                NestedType.TrimmerCompatibleMethod ();
-            }
+		public class RedundantSuppressionOnNestedType
+		{
+			public static void Test ()
+			{
+				NestedType.TrimmerCompatibleMethod ();
+			}
 
-            [ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
-            public class NestedType
-            {
-                public static void TrimmerCompatibleMethod ()
-                {
-                    TrimmerCompatibleMethod ();
-                }
-            }
-        }
+			[ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
+			public class NestedType
+			{
+				public static void TrimmerCompatibleMethod ()
+				{
+					TrimmerCompatibleMethod ();
+				}
+			}
+		}
 
-        public class RedundantSuppressionOnProperty
-        {
-            public static void Test ()
-            {
-                var property = TrimmerCompatibleProperty;
-            }
+		public class RedundantSuppressionOnProperty
+		{
+			public static void Test ()
+			{
+				var property = TrimmerCompatibleProperty;
+			}
 
-            public static string TrimmerCompatibleProperty {
-                [ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
-                get {
-                    return TrimmerCompatibleMethod ();
-                }
-            }
-        }
-    }
+			public static string TrimmerCompatibleProperty {
+				[ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
+				get {
+					return TrimmerCompatibleMethod ();
+				}
+			}
+		}
+	}
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 //
 
@@ -28,9 +28,9 @@
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public enum RightToLeft {
-        No    = 0,
-        Yes    = 1,
-        Inherit    = 2
-    }
+	public enum RightToLeft {
+		No	= 0,
+		Yes	= 1,
+		Inherit	= 2
+	}
 }

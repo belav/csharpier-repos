@@ -143,8 +143,8 @@ namespace System.Net {
             }
             catch (Exception e) {
                 if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {                                       
-                    throw;
-                }
+		            throw;
+	            }
                 throw new ArgumentException(SR.GetString(SR.net_perm_invalid_val, strTransport, m_transport), e);
             }
 
@@ -157,8 +157,8 @@ namespace System.Net {
             }
             catch (Exception e) {
                 if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {                                       
-                    throw;
-                }
+		            throw;
+	            }
                 throw new ArgumentException(SR.GetString(SR.net_perm_invalid_val, strPort, m_port), e);
             }
 
@@ -538,8 +538,8 @@ namespace System.Net {
                     }
                     catch (Exception exception) {
                         if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
-                            throw;
-                        }
+		                    throw;
+	                    }
                         throw new ArgumentException(accessStr + "transport", exception);
                     }
 
@@ -561,8 +561,8 @@ namespace System.Net {
                     }
                     catch (Exception exception) {
                         if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
-                            throw;
-                        }
+		                    throw;
+	                    }
                         throw new ArgumentException(SR.GetString(SR.net_perm_invalid_val, accessStr + "port", tmpStr), exception);
                     }
 

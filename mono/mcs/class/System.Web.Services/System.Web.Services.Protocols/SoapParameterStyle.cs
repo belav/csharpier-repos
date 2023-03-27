@@ -29,9 +29,9 @@
 //
 
 namespace System.Web.Services.Protocols {
-    public enum SoapParameterStyle {
-        Default = 0x0,
-        Bare = 0x1,
-        Wrapped = 0x2
-    }
+	public enum SoapParameterStyle {
+		Default = 0x0,
+		Bare = 0x1,
+		Wrapped = 0x2
+	}
 }

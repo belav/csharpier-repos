@@ -30,43 +30,43 @@ using System;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks {
-    public sealed class FormatVersion : TaskExtension {
-    
-        string    formatType;
-        string    outputVersion;
-        int    revision;
-        string    version;
-    
-        public FormatVersion ()
-        {
-        }
+	public sealed class FormatVersion : TaskExtension {
+	
+		string	formatType;
+		string	outputVersion;
+		int	revision;
+		string	version;
+	
+		public FormatVersion ()
+		{
+		}
 
-        public override bool Execute ()
-        {
-            return false;
-        }
-        
-        public string FormatType {
-            get { return formatType; }
-            set { formatType = value; }
-        }
-        
-        [Output]
-        public string OutputVersion {
-            get { return outputVersion; }
-            set { outputVersion = value; }
-        }
-        
-        public int Revision {
-            get { return revision; }
-            set { revision = value; }
-        }
-        
-        public string Version {
-            get { return version; }
-            set { version = value; }
-        }
+		public override bool Execute ()
+		{
+			return false;
+		}
+		
+		public string FormatType {
+			get { return formatType; }
+			set { formatType = value; }
+		}
+		
+		[Output]
+		public string OutputVersion {
+			get { return outputVersion; }
+			set { outputVersion = value; }
+		}
+		
+		public int Revision {
+			get { return revision; }
+			set { revision = value; }
+		}
+		
+		public string Version {
+			get { return version; }
+			set { version = value; }
+		}
 
-    }
+	}
 }
 

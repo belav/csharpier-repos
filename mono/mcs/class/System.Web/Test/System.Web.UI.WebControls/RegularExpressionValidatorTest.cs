@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.RegularExpressionValidator 
 //
 // Author:
-//    Chris Toshok (toshok@novell.com)
+//	Chris Toshok (toshok@novell.com)
 //
 
 //
@@ -38,81 +38,81 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    class REValidatorPoker : RegularExpressionValidator {
-        public REValidatorPoker ()
-        {
-            TrackViewState (); 
-        }
-        
-        public object SaveState ()
-        {
-            return SaveViewState ();
-        }
+	class REValidatorPoker : RegularExpressionValidator {
+		public REValidatorPoker ()
+		{
+			TrackViewState (); 
+		}
+		
+		public object SaveState ()
+		{
+			return SaveViewState ();
+		}
 
-        public void LoadState (object o)
-        {
-            LoadViewState (o);
-        }
+		public void LoadState (object o)
+		{
+			LoadViewState (o);
+		}
 
-        public bool DoEvaluateIsValid ()
-        {
-            return EvaluateIsValid ();
-        }
+		public bool DoEvaluateIsValid ()
+		{
+			return EvaluateIsValid ();
+		}
 
-    }
-    
-    
-    [TestFixture]    
-    public class RegularExpressionValidatorTest : ValidatorTest {
+	}
+	
+	
+	[TestFixture]	
+	public class RegularExpressionValidatorTest : ValidatorTest {
 
-        [Test]
-        public void REValidator_ViewState ()
-        {
-            REValidatorPoker p = new REValidatorPoker ();
+		[Test]
+		public void REValidator_ViewState ()
+		{
+			REValidatorPoker p = new REValidatorPoker ();
 
-            Assert.AreEqual (p.ValidationExpression, String.Empty, "A1");
+			Assert.AreEqual (p.ValidationExpression, String.Empty, "A1");
 
-            p.ValidationExpression = "\\d{5}";
-            Assert.AreEqual ("\\d{5}", p.ValidationExpression, "A2");
+			p.ValidationExpression = "\\d{5}";
+			Assert.AreEqual ("\\d{5}", p.ValidationExpression, "A2");
 
-            object state = p.SaveState ();
+			object state = p.SaveState ();
 
-            REValidatorPoker copy = new REValidatorPoker ();
-            copy.LoadState (state);
-            Assert.AreEqual ("\\d{5}", copy.ValidationExpression, "A3");
-        }
+			REValidatorPoker copy = new REValidatorPoker ();
+			copy.LoadState (state);
+			Assert.AreEqual ("\\d{5}", copy.ValidationExpression, "A3");
+		}
 
-        [Test]
-        public void REValidator_ValidationTests ()
-        {
-            REValidatorPoker p = new REValidatorPoker ();
-            TextBox box;
+		[Test]
+		public void REValidator_ValidationTests ()
+		{
+			REValidatorPoker p = new REValidatorPoker ();
+			TextBox box;
 
-            StartValidationTest (p);
+			StartValidationTest (p);
 
-            p.ValidationExpression = "\\d{5}";
-            box = SetValidationTextBox ("textbox", "94117");
-            Assert.IsTrue (p.DoEvaluateIsValid (), "B1");
+			p.ValidationExpression = "\\d{5}";
+			box = SetValidationTextBox ("textbox", "94117");
+			Assert.IsTrue (p.DoEvaluateIsValid (), "B1");
 
-            box.Text = "9410";
-            Assert.IsFalse (p.DoEvaluateIsValid (), "B2");
-            
-            box.Text = "12345 ";
-            Assert.IsFalse (p.DoEvaluateIsValid (), "B3");
+			box.Text = "9410";
+			Assert.IsFalse (p.DoEvaluateIsValid (), "B2");
+			
+			box.Text = "12345 ";
+			Assert.IsFalse (p.DoEvaluateIsValid (), "B3");
 
-            box.Text = " 12345";
-            Assert.IsFalse (p.DoEvaluateIsValid (), "B4");
-            
-            box.Text = " 12345 ";
-            Assert.IsFalse (p.DoEvaluateIsValid (), "B5");
-            
-            p.ValidationExpression = "^\\d{5}$";
-            box.Text = "12345";
-            Assert.IsTrue (p.DoEvaluateIsValid (), "B6");
+			box.Text = " 12345";
+			Assert.IsFalse (p.DoEvaluateIsValid (), "B4");
+			
+			box.Text = " 12345 ";
+			Assert.IsFalse (p.DoEvaluateIsValid (), "B5");
+			
+			p.ValidationExpression = "^\\d{5}$";
+			box.Text = "12345";
+			Assert.IsTrue (p.DoEvaluateIsValid (), "B6");
 
-            StopValidationTest();
-        }
-    }
+			StopValidationTest();
+		}
+	}
 }
 
-        
+		

@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.ValidatedControlConverterTest.cs 
 //
 // Author:
-//    Peter Dennis Bartok (pbartok@novell.com)
+//	Peter Dennis Bartok (pbartok@novell.com)
 //
 
 //
@@ -41,95 +41,95 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    [TestFixture]    
-    public class ValidatedControlConverterTest {
-        public class ControlContainer : IContainer {
-            ComponentCollection    col;
+	[TestFixture]	
+	public class ValidatedControlConverterTest {
+		public class ControlContainer : IContainer {
+			ComponentCollection	col;
 
-            public ControlContainer(ICollection collection) {
-                Control[] controls = new Control[collection.Count];
-                int i;
+			public ControlContainer(ICollection collection) {
+				Control[] controls = new Control[collection.Count];
+				int i;
 
-                i = 0;
-                foreach(Control c in collection) {
-                    controls[i++] = c;
-                }
+				i = 0;
+				foreach(Control c in collection) {
+					controls[i++] = c;
+				}
 
-                col = new ComponentCollection(controls);
-            }
+				col = new ComponentCollection(controls);
+			}
 
-            public ComponentCollection Components {
-                get { return col; }
-            }
+			public ComponentCollection Components {
+				get { return col; }
+			}
 
-            public void Remove(IComponent component) { }
-            public void Add(IComponent component, string name) { }
-            void ComponentSpace.IContainer.Add(IComponent component) { }
-            public void Dispose() { }
-        }
+			public void Remove(IComponent component) { }
+			public void Add(IComponent component, string name) { }
+			void ComponentSpace.IContainer.Add(IComponent component) { }
+			public void Dispose() { }
+		}
 
-        public class ControlTypeDescriptorContext : ITypeDescriptorContext {
-            ControlContainer    cc;
+		public class ControlTypeDescriptorContext : ITypeDescriptorContext {
+			ControlContainer	cc;
 
-            public ControlTypeDescriptorContext (ICollection collection) {
-                cc = new ControlContainer(collection);
-            }
+			public ControlTypeDescriptorContext (ICollection collection) {
+				cc = new ControlContainer(collection);
+			}
 
 
-            public IContainer Container {
-                get {
-                    return cc;
-                }
-            }
+			public IContainer Container {
+				get {
+					return cc;
+				}
+			}
 
-            public void OnComponentChanged() { }
-            public bool OnComponentChanging() { return false; }
-            public object Instance { get { return null; } }
-            public PropertyDescriptor PropertyDescriptor { get { return null; } }
-            public object GetService(Type serviceType) {  return null; }
-        }
+			public void OnComponentChanged() { }
+			public bool OnComponentChanging() { return false; }
+			public object Instance { get { return null; } }
+			public PropertyDescriptor PropertyDescriptor { get { return null; } }
+			public object GetService(Type serviceType) {  return null; }
+		}
 
-        public class NamingContainer : WebControl, INamingContainer {
+		public class NamingContainer : WebControl, INamingContainer {
 
-        }
+		}
 
-        [Test]
+		[Test]
         [NUnit.Framework.Category("NotWorking")]
-        public void Basic () {
-            string[]                result;
-            int                    i;
-            ValidatedControlConverter        conv;
-            TypeConverter.StandardValuesCollection    values;
-            NamingContainer                container;
-            TextBox            ctl1, ctl2;
-            DropDownList                ddl;
-            Button                    btn;
-            ControlTypeDescriptorContext        context;
+		public void Basic () {
+			string[]				result;
+			int					i;
+			ValidatedControlConverter		conv;
+			TypeConverter.StandardValuesCollection	values;
+			NamingContainer				container;
+			TextBox			ctl1, ctl2;
+			DropDownList				ddl;
+			Button					btn;
+			ControlTypeDescriptorContext		context;
 
-            container = new NamingContainer ();
-            ctl1 = new TextBox ();
-            ctl2 = new TextBox ();
-            ddl = new DropDownList();
+			container = new NamingContainer ();
+			ctl1 = new TextBox ();
+			ctl2 = new TextBox ();
+			ddl = new DropDownList();
 
-            // Button has no ValidationProperty and will not show in the list
-            btn = new Button();
+			// Button has no ValidationProperty and will not show in the list
+			btn = new Button();
 
-            container.Controls.Add (ctl1);
-            container.Controls.Add (ctl2);
-            container.Controls.Add (btn);
-            container.Controls.Add (ddl);
-            
-            container.ID = "naming";
-            ctl1.ID = "fooid";
-            ctl2.ID = "blahid";
-            ddl.ID = "ddlid";
-            btn.ID = "buttonid";
+			container.Controls.Add (ctl1);
+			container.Controls.Add (ctl2);
+			container.Controls.Add (btn);
+			container.Controls.Add (ddl);
+			
+			container.ID = "naming";
+			ctl1.ID = "fooid";
+			ctl2.ID = "blahid";
+			ddl.ID = "ddlid";
+			btn.ID = "buttonid";
 
-            context = new ControlTypeDescriptorContext(container.Controls);
-            conv = new ValidatedControlConverter();
+			context = new ControlTypeDescriptorContext(container.Controls);
+			conv = new ValidatedControlConverter();
 
-            values = conv.GetStandardValues(context);
-            Assert.IsNull (values, "B1");
-        }
-    }
+			values = conv.GetStandardValues(context);
+			Assert.IsNull (values, "B1");
+		}
+	}
 }

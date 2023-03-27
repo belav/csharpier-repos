@@ -5,14 +5,14 @@ using System.Collections;
 
 public class C
 {
-    internal static IEnumerable PrivateBinPath
-    {
-        get
-        {
-            string a = "a";
-            if (a == null)
-                return false;
-            yield return a;
-        }
-    }
+	internal static IEnumerable PrivateBinPath
+	{
+		get
+		{
+			string a = "a";
+			if (a == null)
+				return false;
+			yield return a;
+		}
+	}
 }

@@ -1,4 +1,4 @@
-// 
+﻿// 
 // IDataServiceHost2.cs
 //  
 // Author:
@@ -30,15 +30,15 @@ using System.Net;
 
 namespace System.Data.Services
 {
-    public interface IDataServiceHost2 : IDataServiceHost
-    {
-        WebHeaderCollection RequestHeaders {
-            get;
-        }
+	public interface IDataServiceHost2 : IDataServiceHost
+	{
+		WebHeaderCollection RequestHeaders {
+			get;
+		}
 
-        WebHeaderCollection ResponseHeaders {
-            get;
-        }
+		WebHeaderCollection ResponseHeaders {
+			get;
+		}
 
-    }
+	}
 }

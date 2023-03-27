@@ -15,18 +15,18 @@ using System.Web.Services;
 
 namespace MonoTests.System.Web.Services {
 
-    [TestFixture]
-    public class WebServiceAttributeTest {
+	[TestFixture]
+	public class WebServiceAttributeTest {
 
-        [Test]
-        public void TestConstructors ()
-        {
-            WebServiceAttribute attribute;
+		[Test]
+		public void TestConstructors ()
+		{
+			WebServiceAttribute attribute;
 
-            attribute = new WebServiceAttribute ();
-            Assert.AreEqual (String.Empty, attribute.Description);
-            Assert.AreEqual (String.Empty, attribute.Name);
-            Assert.AreEqual ("http://tempuri.org/", attribute.Namespace);
-        }
-    }
+			attribute = new WebServiceAttribute ();
+			Assert.AreEqual (String.Empty, attribute.Description);
+			Assert.AreEqual (String.Empty, attribute.Name);
+			Assert.AreEqual ("http://tempuri.org/", attribute.Namespace);
+		}
+	}
 }

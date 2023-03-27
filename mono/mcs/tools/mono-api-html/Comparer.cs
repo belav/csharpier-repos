@@ -32,80 +32,80 @@ using System.Xml.Linq;
 
 namespace Mono.ApiTools {
 
-    abstract class Comparer {
+	abstract class Comparer {
 
-        protected List<XElement> removed;
-        protected ApiChanges modified;
+		protected List<XElement> removed;
+		protected ApiChanges modified;
 
-        public Comparer (State state)
-        {
-            State = state;
-            removed = new List<XElement> ();
-            modified = new ApiChanges (state);
-        }
+		public Comparer (State state)
+		{
+			State = state;
+			removed = new List<XElement> ();
+			modified = new ApiChanges (state);
+		}
 
-        public State State { get; }
+		public State State { get; }
 
-        public TextWriter Output {
-            get { return State.Output; }
-        }
+		public TextWriter Output {
+			get { return State.Output; }
+		}
 
-        public Formatter Formatter {
-            get { return State.Formatter; }
-        }
+		public Formatter Formatter {
+			get { return State.Formatter; }
+		}
 
-        protected TextWriter Indent ()
-        {
-            for (int i = 0; i < State.Indent; i++)
-                State.Output.Write ("\t");
-            return State.Output;
-        }
+		protected TextWriter Indent ()
+		{
+			for (int i = 0; i < State.Indent; i++)
+				State.Output.Write ("\t");
+			return State.Output;
+		}
 
-        public abstract void Added (XElement target, bool wasParentAdded);
-        public abstract void Modified (XElement source, XElement target, ApiChanges changes);
-        public abstract void Removed (XElement source);
+		public abstract void Added (XElement target, bool wasParentAdded);
+		public abstract void Modified (XElement source, XElement target, ApiChanges changes);
+		public abstract void Removed (XElement source);
 
-        public virtual bool Equals (XElement source, XElement target, ApiChanges changes)
-        {
-            return XNode.DeepEquals (source, target);
-        }
+		public virtual bool Equals (XElement source, XElement target, ApiChanges changes)
+		{
+			return XNode.DeepEquals (source, target);
+		}
 
-        public abstract void SetContext (XElement current);
+		public abstract void SetContext (XElement current);
 
-        public virtual void Compare (IEnumerable<XElement> source, IEnumerable<XElement> target)
-        {
-            removed.Clear ();
-            modified.Clear ();
+		public virtual void Compare (IEnumerable<XElement> source, IEnumerable<XElement> target)
+		{
+			removed.Clear ();
+			modified.Clear ();
 
-            foreach (var s in source) {
-                SetContext (s);
-                string sn = s.GetAttribute ("name");
-                var t = target == null ? null : target.SingleOrDefault (x => x.GetAttribute ("name") == sn);
-                if (t == null) {
-                    // not in target, it was removed
-                    removed.Add (s);
-                } else {
-                    t.Remove ();
-                    // possibly modified
-                    if (Equals (s, t, modified))
-                        continue;
+			foreach (var s in source) {
+				SetContext (s);
+				string sn = s.GetAttribute ("name");
+				var t = target == null ? null : target.SingleOrDefault (x => x.GetAttribute ("name") == sn);
+				if (t == null) {
+					// not in target, it was removed
+					removed.Add (s);
+				} else {
+					t.Remove ();
+					// possibly modified
+					if (Equals (s, t, modified))
+						continue;
 
-                    // still in target so will be part of Added
-                    Modified (s, t, modified);
-                }
-            }
-            // delayed, that way we show "Modified", "Added" and then "Removed"
-            foreach (var item in removed) {
-                SetContext (item);
-                Removed (item);
-            }
-            // remaining == newly added in target
-            if (target != null) {
-                foreach (var item in target) {
-                    SetContext (item);
-                    Added (item, false);
-                }
-            }
-        }
-    }
+					// still in target so will be part of Added
+					Modified (s, t, modified);
+				}
+			}
+			// delayed, that way we show "Modified", "Added" and then "Removed"
+			foreach (var item in removed) {
+				SetContext (item);
+				Removed (item);
+			}
+			// remaining == newly added in target
+			if (target != null) {
+				foreach (var item in target) {
+					SetContext (item);
+					Added (item, false);
+				}
+			}
+		}
+	}
 }

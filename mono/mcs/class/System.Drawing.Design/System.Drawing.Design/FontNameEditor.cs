@@ -36,36 +36,36 @@ using System.ComponentModel;
 
 namespace System.Drawing.Design
 {
-    public class FontNameEditor : UITypeEditor
-    {
-        private const String PreviewString = "Ab";
+	public class FontNameEditor : UITypeEditor
+	{
+		private const String PreviewString = "Ab";
 
-        public  FontNameEditor()
-        {
-        }
+		public  FontNameEditor()
+		{
+		}
 
-        public override bool GetPaintValueSupported (ITypeDescriptorContext context)
-        {
-            return true;
-        }
+		public override bool GetPaintValueSupported (ITypeDescriptorContext context)
+		{
+			return true;
+		}
 
-        public override void PaintValue (PaintValueEventArgs e)
-        {
-            Graphics G = e.Graphics;
+		public override void PaintValue (PaintValueEventArgs e)
+		{
+			Graphics G = e.Graphics;
 
-            // Draw the background 
-            G.FillRectangle (SystemBrushes.ActiveCaption, e.Bounds);
+			// Draw the background 
+			G.FillRectangle (SystemBrushes.ActiveCaption, e.Bounds);
 
-            // Draw the sample string
-            string fontName = e.Value as string;
-            if (fontName != null && fontName.Length > 0) {
-                using (Font font = new Font (fontName, e.Bounds.Height, FontStyle.Regular, GraphicsUnit.Pixel)) {
-                    G.DrawString (PreviewString, font, SystemBrushes.ActiveCaptionText, e.Bounds);
-                }
-            }
+			// Draw the sample string
+			string fontName = e.Value as string;
+			if (fontName != null && fontName.Length > 0) {
+				using (Font font = new Font (fontName, e.Bounds.Height, FontStyle.Regular, GraphicsUnit.Pixel)) {
+					G.DrawString (PreviewString, font, SystemBrushes.ActiveCaptionText, e.Bounds);
+				}
+			}
 
-            // Draw the border again to ensure it is not overlapped by the text
-            G.DrawRectangle (Pens.Black, e.Bounds);
-        }
-    }
+			// Draw the border again to ensure it is not overlapped by the text
+			G.DrawRectangle (Pens.Black, e.Bounds);
+		}
+	}
 }

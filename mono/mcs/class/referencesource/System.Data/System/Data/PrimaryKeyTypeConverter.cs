@@ -36,7 +36,7 @@ namespace System.Data {
             }
 
             if (destinationType == typeof(string)) {
-                  return (new DataColumn[] {}).GetType().Name;
+            	  return (new DataColumn[] {}).GetType().Name;
             }
             
             return base.ConvertTo(context, culture, value, destinationType);

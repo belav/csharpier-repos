@@ -2,7 +2,7 @@
 // System.Security.SecurityFrame.cs
 //
 // Authors:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -35,10 +35,10 @@ using System.Text;
 
 namespace System.Security {
 
-    // Must match MonoDeclSecurityEntry in /mono/metadata/reflection.h
-    internal struct RuntimeDeclSecurityEntry {
-        public IntPtr blob;
-        public int size;
-        public int index;
-    }
+	// Must match MonoDeclSecurityEntry in /mono/metadata/reflection.h
+	internal struct RuntimeDeclSecurityEntry {
+		public IntPtr blob;
+		public int size;
+		public int index;
+	}
 }

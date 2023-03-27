@@ -1,4 +1,4 @@
-#region MIT license
+﻿#region MIT license
 // 
 // MIT license
 //
@@ -220,20 +220,20 @@ using Id = System.Int32;
         public void F8_IncludingClause()
         {
             var q = (
-                from c in db.Customers
-                where c.City == "London"
-                select c)
-                .Including(c => c.Orders);
+	            from c in db.Customers
+	            where c.City == "London"
+	            select c)
+	            .Including(c => c.Orders);
         }
 
         [Test]
         public void F8_Including_Nested()
         {
             var q = (
-                from c in db.Customers
-                where c.City == "London"
-                select c)
-                .Including(c => c.Orders.Including(o => o.OrderDetails));
+	            from c in db.Customers
+	            where c.City == "London"
+	            select c)
+	            .Including(c => c.Orders.Including(o => o.OrderDetails));
         }
 #endif
 

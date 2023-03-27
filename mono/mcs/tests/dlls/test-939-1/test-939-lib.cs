@@ -2,8 +2,8 @@
 
 public class Common
 {
-    public static void Foo ()
-    {
+	public static void Foo ()
+	{
 
-    }
+	}
 }

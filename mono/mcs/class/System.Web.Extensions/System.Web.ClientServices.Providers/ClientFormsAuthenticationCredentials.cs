@@ -39,28 +39,28 @@ using System.Web.UI;
 
 namespace System.Web.ClientServices.Providers
 {
-    public class ClientFormsAuthenticationCredentials
-    {
-        public string Password {
-            get;
-            set;
-        }
-        
-        public bool RememberMe {
-            get;
-            set;
-        }
-        
-        public string UserName {
-            get;
-            set;
-        }
-        
-        public ClientFormsAuthenticationCredentials (string username, string password, bool rememberMe)
-        {
-            Password = password;
-            RememberMe = rememberMe;
-            UserName = username;
-        }
-    }
+	public class ClientFormsAuthenticationCredentials
+	{
+		public string Password {
+			get;
+			set;
+		}
+		
+		public bool RememberMe {
+			get;
+			set;
+		}
+		
+		public string UserName {
+			get;
+			set;
+		}
+		
+		public ClientFormsAuthenticationCredentials (string username, string password, bool rememberMe)
+		{
+			Password = password;
+			RememberMe = rememberMe;
+			UserName = username;
+		}
+	}
 }

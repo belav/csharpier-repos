@@ -4,5 +4,5 @@
 
 class C
 {
-    int Prop => 3;
+	int Prop => 3;
 }

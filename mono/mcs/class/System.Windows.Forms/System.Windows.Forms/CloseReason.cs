@@ -23,20 +23,20 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    public enum CloseReason
-    {
-        None = 0,
-        WindowsShutDown = 1,
-        MdiFormClosing = 2,
-        UserClosing = 3,
-        TaskManagerClosing = 4,
-        FormOwnerClosing = 5,
-        ApplicationExitCall = 6
-    }
+	public enum CloseReason
+	{
+		None = 0,
+		WindowsShutDown = 1,
+		MdiFormClosing = 2,
+		UserClosing = 3,
+		TaskManagerClosing = 4,
+		FormOwnerClosing = 5,
+		ApplicationExitCall = 6
+	}
 }

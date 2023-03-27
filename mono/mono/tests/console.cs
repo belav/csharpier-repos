@@ -2,12 +2,12 @@ using System;
 
 public class Test {
 
-    public static int Main () {
-        
-        Console.WriteLine ("We can now write to the console");
+	public static int Main () {
+		
+		Console.WriteLine ("We can now write to the console");
 
-        return 0;
-    }
+		return 0;
+	}
 }
 
 

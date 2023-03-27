@@ -23,7 +23,7 @@
 // Copyright (C) 2004 Novell, Inc.
 //
 // Authors:
-//    Ravindra (rkumar@novell.com)
+//	Ravindra (rkumar@novell.com)
 //
 //
 
@@ -31,5 +31,5 @@
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public delegate void ToolBarButtonClickEventHandler (object sender, ToolBarButtonClickEventArgs e);
+	public delegate void ToolBarButtonClickEventHandler (object sender, ToolBarButtonClickEventArgs e);
 }

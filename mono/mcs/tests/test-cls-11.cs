@@ -20,11 +20,11 @@ public abstract class CLSClass_3 {
 [CLSCompliant(true)]
 public interface ICallable
 {
-    object Call(params object[] args);
-    object Target
-    {
-        get;
-    }
+	object Call(params object[] args);
+	object Target
+	{
+		get;
+	}
 }
 
 public class MainClass {

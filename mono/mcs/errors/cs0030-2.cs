@@ -3,10 +3,10 @@
 
 public class Blah {
 
-    public static int Main ()
-    {
-        const bool k = false;        
-        float f = (float) k;
-        
-    }
+	public static int Main ()
+	{
+		const bool k = false;		
+		float f = (float) k;
+		
+	}
 }

@@ -39,60 +39,60 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_Prefix : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataTable_Prefix tc = new DataTable_Prefix();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataTable_Prefix");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataTable_Prefix tc = new DataTable_Prefix();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataTable_Prefix");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        DataTable dtParent = new DataTable();
+	public void run()
+	{
+		Exception exp = null;
+		DataTable dtParent = new DataTable();
         
-        try
-        {
-            base.BeginCase("Checking Prefix default");
-            base.Compare(dtParent.Prefix ,String.Empty);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
+		try
+		{
+			base.BeginCase("Checking Prefix default");
+			base.Compare(dtParent.Prefix ,String.Empty);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
 
-        try
-        {
-            base.BeginCase("Checking Prefix set/get");
-            String s = "MyPrefix";
-            dtParent.Prefix=s;
-            base.Compare(dtParent.Prefix,s);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    }
+		try
+		{
+			base.BeginCase("Checking Prefix set/get");
+			String s = "MyPrefix";
+			dtParent.Prefix=s;
+			base.Compare(dtParent.Prefix,s);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	}
 }
 }

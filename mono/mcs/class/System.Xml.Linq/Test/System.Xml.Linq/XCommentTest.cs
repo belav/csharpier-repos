@@ -34,33 +34,33 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml.Linq
 {
-    [TestFixture]
-    public class XCommentTest
-    {
-        [Test]
-        public void EscapeSequentialDashes ()
-        {
-            XComment c;
+	[TestFixture]
+	public class XCommentTest
+	{
+		[Test]
+		public void EscapeSequentialDashes ()
+		{
+			XComment c;
 
-            c = new XComment ("<--foo-->");
-            Assert.AreEqual ("<--foo-->", c.Value, "#1");
-            // bug #23318
-            // Unlike XmlWriter.WriteComment(), XComment.ToString() seems to accept "--" in the value.
-            Assert.AreEqual ("<!--<- -foo- ->-->", c.ToString (), "#2");
-            // make sure if it can be read...
-            XmlReader.Create (new StringReader (c.ToString ())).Read ();
+			c = new XComment ("<--foo-->");
+			Assert.AreEqual ("<--foo-->", c.Value, "#1");
+			// bug #23318
+			// Unlike XmlWriter.WriteComment(), XComment.ToString() seems to accept "--" in the value.
+			Assert.AreEqual ("<!--<- -foo- ->-->", c.ToString (), "#2");
+			// make sure if it can be read...
+			XmlReader.Create (new StringReader (c.ToString ())).Read ();
 
-            // The last '-' causes some glitch...
-            c = new XComment ("--foo--");
-            Assert.AreEqual ("--foo--", c.Value, "#3");
-            Assert.AreEqual ("<!--- -foo- - -->", c.ToString (), "#4");
-            XmlReader.Create (new StringReader (c.ToString ())).Read ();
+			// The last '-' causes some glitch...
+			c = new XComment ("--foo--");
+			Assert.AreEqual ("--foo--", c.Value, "#3");
+			Assert.AreEqual ("<!--- -foo- - -->", c.ToString (), "#4");
+			XmlReader.Create (new StringReader (c.ToString ())).Read ();
 
-            // What if <!-- appears in the value?
-            c = new XComment ("<!--foo-->");
-            Assert.AreEqual ("<!--foo-->", c.Value, "#5");
-            Assert.AreEqual ("<!--<!- -foo- ->-->", c.ToString (), "#6");
-            XmlReader.Create (new StringReader (c.ToString ())).Read ();
-        }
-    }
+			// What if <!-- appears in the value?
+			c = new XComment ("<!--foo-->");
+			Assert.AreEqual ("<!--foo-->", c.Value, "#5");
+			Assert.AreEqual ("<!--<!- -foo- ->-->", c.ToString (), "#6");
+			XmlReader.Create (new StringReader (c.ToString ())).Read ();
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2005 Novell Inc. (http://www.novell.com)
@@ -33,49 +33,49 @@ using System.Collections;
 
 namespace System.Security.Cryptography.X509Certificates {
 
-    public sealed class X509Certificate2Enumerator : IEnumerator {
+	public sealed class X509Certificate2Enumerator : IEnumerator {
 
-        private IEnumerator enumerator;
+		private IEnumerator enumerator;
 
-        internal X509Certificate2Enumerator (X509Certificate2Collection collection) 
-        {
-            enumerator = ((IEnumerable) collection).GetEnumerator ();
-        }
+		internal X509Certificate2Enumerator (X509Certificate2Collection collection) 
+		{
+			enumerator = ((IEnumerable) collection).GetEnumerator ();
+		}
 
-        // properties
+		// properties
 
-        public X509Certificate2 Current {
-            get { return (X509Certificate2) enumerator.Current; }
-        }
+		public X509Certificate2 Current {
+			get { return (X509Certificate2) enumerator.Current; }
+		}
 
-        // methods
+		// methods
 
-        public bool MoveNext () 
-        {
-            return enumerator.MoveNext ();
-        }
+		public bool MoveNext () 
+		{
+			return enumerator.MoveNext ();
+		}
 
-        public void Reset ()
-        {
-            enumerator.Reset ();
-        }
+		public void Reset ()
+		{
+			enumerator.Reset ();
+		}
 
-        // IEnumerator
+		// IEnumerator
 
-        object IEnumerator.Current {
-            get { return enumerator.Current; }
-        }
+		object IEnumerator.Current {
+			get { return enumerator.Current; }
+		}
 
-        bool IEnumerator.MoveNext ()
-        {
-            return enumerator.MoveNext ();
-        }
+		bool IEnumerator.MoveNext ()
+		{
+			return enumerator.MoveNext ();
+		}
 
-        void IEnumerator.Reset ()
-        {
-            enumerator.Reset ();
-        }
-    }
+		void IEnumerator.Reset ()
+		{
+			enumerator.Reset ();
+		}
+	}
 }
 
 #endif

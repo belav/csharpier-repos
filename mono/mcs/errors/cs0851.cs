@@ -3,11 +3,11 @@
 
 public class Test
 {
-    public Test (ref int i)
-    {
-    }
-    
-    public Test (out int i)
-    {
-    }
+	public Test (ref int i)
+	{
+	}
+	
+	public Test (out int i)
+	{
+	}
 }

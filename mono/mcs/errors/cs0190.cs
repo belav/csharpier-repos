@@ -3,8 +3,8 @@
 
 public class Test
 {
-    public static void Foo ()
-    {
-        object o = __arglist; 
-    }
+	public static void Foo ()
+	{
+		object o = __arglist; 
+	}
 }

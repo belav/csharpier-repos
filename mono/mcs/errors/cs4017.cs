@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 class C
 {
-    public void Trace([CallerLineNumber] byte member = 1)
-    {
-    }
+	public void Trace([CallerLineNumber] byte member = 1)
+	{
+	}
 }

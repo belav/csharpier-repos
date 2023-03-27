@@ -3,5 +3,5 @@
 
 interface A<out T>
 {
-    void B(ref T t);
+	void B(ref T t);
 }

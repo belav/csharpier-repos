@@ -155,7 +155,7 @@ namespace System.Data.Common {
         }
 
          override public object ConvertXmlToObject(string s) {
-            return XmlConvert.ToChar(s);
+	        return XmlConvert.ToChar(s);
         }
 
          override public string ConvertObjectToXml(object value) {

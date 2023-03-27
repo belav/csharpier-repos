@@ -2,7 +2,7 @@
 // System.Web.UI.ApplicationFileParser.cs
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002,2003 Ximian, Inc (http://www.ximian.com)
 // (c) 2004-2010 Novell, Inc. (http://www.novell.com)
@@ -39,92 +39,92 @@ using System.Web.Util;
 
 namespace System.Web.UI
 {
-    sealed class ApplicationFileParser : TemplateParser
-    {
-        static List <string> dependencies;
-        TextReader reader;
-        
-        public ApplicationFileParser (string fname, HttpContext context)
-        {
-            InputFile = fname;
-            Context = context;
-            VirtualPath = new VirtualPath ("/" + Path.GetFileName (fname));
-            LoadConfigDefaults ();
-        }
+	sealed class ApplicationFileParser : TemplateParser
+	{
+		static List <string> dependencies;
+		TextReader reader;
+		
+		public ApplicationFileParser (string fname, HttpContext context)
+		{
+			InputFile = fname;
+			Context = context;
+			VirtualPath = new VirtualPath ("/" + Path.GetFileName (fname));
+			LoadConfigDefaults ();
+		}
 
-        internal ApplicationFileParser (VirtualPath virtualPath, TextReader reader, HttpContext context)
-            : this (virtualPath, null, reader, context)
-        {
-        }
-        
-        internal ApplicationFileParser (VirtualPath virtualPath, string inputFile, TextReader reader, HttpContext context)
-        {
-            VirtualPath = virtualPath;
-            Context = context;
-            Reader = reader;
+		internal ApplicationFileParser (VirtualPath virtualPath, TextReader reader, HttpContext context)
+			: this (virtualPath, null, reader, context)
+		{
+		}
+		
+		internal ApplicationFileParser (VirtualPath virtualPath, string inputFile, TextReader reader, HttpContext context)
+		{
+			VirtualPath = virtualPath;
+			Context = context;
+			Reader = reader;
 
-            if (String.IsNullOrEmpty (inputFile))
-                InputFile = virtualPath.PhysicalPath;
-            else
-                InputFile = inputFile;
-            
-            SetBaseType (null);
-            LoadConfigDefaults ();
-        }
-        
-        internal override Type CompileIntoType ()
-        {
-            return GlobalAsaxCompiler.CompileApplicationType (this);
-        }
+			if (String.IsNullOrEmpty (inputFile))
+				InputFile = virtualPath.PhysicalPath;
+			else
+				InputFile = inputFile;
+			
+			SetBaseType (null);
+			LoadConfigDefaults ();
+		}
+		
+		internal override Type CompileIntoType ()
+		{
+			return GlobalAsaxCompiler.CompileApplicationType (this);
+		}
 
-        internal static Type GetCompiledApplicationType (string inputFile, HttpContext context)
-        {
-            ApplicationFileParser parser = new ApplicationFileParser (inputFile, context);
-            AspGenerator generator = new AspGenerator (parser);
-            Type type = generator.GetCompiledType ();
-            dependencies = parser.Dependencies;
-            return type;
-        }
+		internal static Type GetCompiledApplicationType (string inputFile, HttpContext context)
+		{
+			ApplicationFileParser parser = new ApplicationFileParser (inputFile, context);
+			AspGenerator generator = new AspGenerator (parser);
+			Type type = generator.GetCompiledType ();
+			dependencies = parser.Dependencies;
+			return type;
+		}
 
-        internal override void AddDirective (string directive, IDictionary atts)
-        {
-            if (String.Compare (directive, "application", true, Helpers.InvariantCulture) != 0 &&
-                String.Compare (directive, "Import", true, Helpers.InvariantCulture) != 0 &&
-                String.Compare (directive, "Assembly", true, Helpers.InvariantCulture) != 0)
-                ThrowParseException ("Invalid directive: " + directive);
+		internal override void AddDirective (string directive, IDictionary atts)
+		{
+			if (String.Compare (directive, "application", true, Helpers.InvariantCulture) != 0 &&
+			    String.Compare (directive, "Import", true, Helpers.InvariantCulture) != 0 &&
+			    String.Compare (directive, "Assembly", true, Helpers.InvariantCulture) != 0)
+				ThrowParseException ("Invalid directive: " + directive);
 
-            base.AddDirective (directive, atts);
-        }
+			base.AddDirective (directive, atts);
+		}
 
-        internal static List <string> FileDependencies {
-            get { return dependencies; }
-        }        
-        internal override Type DefaultBaseType {
-            get {
-                Type ret = PageParser.DefaultApplicationBaseType;
-                if (ret == null)
-                    return base.DefaultBaseType;
+		internal static List <string> FileDependencies {
+			get { return dependencies; }
+		}		
+		internal override Type DefaultBaseType {
+			get {
+				Type ret = PageParser.DefaultApplicationBaseType;
+				if (ret == null)
+					return base.DefaultBaseType;
 
-                return ret;
-            }
-        }
-        internal override string DefaultBaseTypeName {
-            get { return "System.Web.HttpApplication"; }
-        }
+				return ret;
+			}
+		}
+		internal override string DefaultBaseTypeName {
+			get { return "System.Web.HttpApplication"; }
+		}
 
-        internal override string DefaultDirectiveName {
-            get { return "application"; }
-        }
+		internal override string DefaultDirectiveName {
+			get { return "application"; }
+		}
 
-        internal override string BaseVirtualDir {
-            get { return Context.Request.ApplicationPath; }
-        }
-        
-        internal override TextReader Reader {
+		internal override string BaseVirtualDir {
+			get { return Context.Request.ApplicationPath; }
+		}
+		
+		internal override TextReader Reader {
                         get { return reader; }
                         set { reader = value; }
                 }
-    }
+	}
 
 }
 

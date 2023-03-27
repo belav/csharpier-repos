@@ -3,19 +3,19 @@
 //
 public class T {
 
-    static void Foo (T t, T tt)
-    {
-    }
+	static void Foo (T t, T tt)
+	{
+	}
 
-    static void Foo (params object[] theParams)
-    {
-    }
+	static void Foo (params object[] theParams)
+	{
+	}
 
-    public static int Main()
-    {
-        Foo (new T (), null);
+	public static int Main()
+	{
+		Foo (new T (), null);
                 return 0;
-    }
+	}
 }
 
 

@@ -2,7 +2,7 @@
 // BasicSecurityProfileVersion.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -28,20 +28,20 @@
 
 namespace System.ServiceModel.Security
 {
-    public abstract class BasicSecurityProfileVersion
-    {
-        static BasicSecurityProfileVersion impl = new BasicSecurityProfileVersionImpl ();
+	public abstract class BasicSecurityProfileVersion
+	{
+		static BasicSecurityProfileVersion impl = new BasicSecurityProfileVersionImpl ();
 
-        public static BasicSecurityProfileVersion BasicSecurityProfile10 {
-            get { return impl; }
-        }
+		public static BasicSecurityProfileVersion BasicSecurityProfile10 {
+			get { return impl; }
+		}
 
-        private BasicSecurityProfileVersion ()
-        {
-        }
+		private BasicSecurityProfileVersion ()
+		{
+		}
 
-        class BasicSecurityProfileVersionImpl : BasicSecurityProfileVersion
-        {
-        }
-    }
+		class BasicSecurityProfileVersionImpl : BasicSecurityProfileVersion
+		{
+		}
+	}
 }

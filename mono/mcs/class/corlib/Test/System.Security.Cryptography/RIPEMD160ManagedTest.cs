@@ -1,9 +1,9 @@
 //
 // RIPEMD160ManagedTest.cs - NUnit Test Cases for RIPEMD160
-//    http://www.esat.kuleuven.ac.be/~bosselae/ripemd160.html
+//	http://www.esat.kuleuven.ac.be/~bosselae/ripemd160.html
 //
 // Author:
-//    Sebastien Pouliot (sebastien@ximian.com)
+//	Sebastien Pouliot (sebastien@ximian.com)
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -35,16 +35,16 @@ using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography {
 
-    [TestFixture]
-    public class RIPEMD160ManagedTest : RIPEMD160Test {
+	[TestFixture]
+	public class RIPEMD160ManagedTest : RIPEMD160Test {
 
-        [SetUp]
-        public void SetUp () 
-        {
-            hash = new RIPEMD160Managed ();
-        }
+		[SetUp]
+		public void SetUp () 
+		{
+			hash = new RIPEMD160Managed ();
+		}
 
-        // this will run ALL tests defined in RIPEMD160Test.cs with the RIPEMD160Managed implementation
-    }
+		// this will run ALL tests defined in RIPEMD160Test.cs with the RIPEMD160Managed implementation
+	}
 }
 

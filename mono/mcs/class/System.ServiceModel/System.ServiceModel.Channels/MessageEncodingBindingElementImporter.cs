@@ -37,45 +37,45 @@ using System.Xml.Schema;
 
 namespace System.ServiceModel.Channels
 {
-    public class MessageEncodingBindingElementImporter
-        : IWsdlImportExtension, IPolicyImportExtension
-    {
-        void IWsdlImportExtension.BeforeImport (
-            ServiceDescriptionCollection wsdlDocuments,
-            XmlSchemaSet xmlSchemas,
-            ICollection<XmlElement> policy)
-        {
-        }
+	public class MessageEncodingBindingElementImporter
+		: IWsdlImportExtension, IPolicyImportExtension
+	{
+		void IWsdlImportExtension.BeforeImport (
+			ServiceDescriptionCollection wsdlDocuments,
+			XmlSchemaSet xmlSchemas,
+			ICollection<XmlElement> policy)
+		{
+		}
 
-        void IWsdlImportExtension.ImportContract (WsdlImporter importer,
-            WsdlContractConversionContext context)
-        {
-        }
+		void IWsdlImportExtension.ImportContract (WsdlImporter importer,
+			WsdlContractConversionContext context)
+		{
+		}
 
-        void IWsdlImportExtension.ImportEndpoint (WsdlImporter importer,
-            WsdlEndpointConversionContext context)
-        {
-        }
+		void IWsdlImportExtension.ImportEndpoint (WsdlImporter importer,
+			WsdlEndpointConversionContext context)
+		{
+		}
 
-        void IPolicyImportExtension.ImportPolicy (MetadataImporter importer,
-            PolicyConversionContext context)
-        {
-            var assertions = context.GetBindingAssertions ();
+		void IPolicyImportExtension.ImportPolicy (MetadataImporter importer,
+			PolicyConversionContext context)
+		{
+			var assertions = context.GetBindingAssertions ();
 
-            var mtom = PolicyImportHelper.GetMtomMessageEncodingPolicy (assertions);
-            if (mtom != null) {
-                // http://www.w3.org/Submission/WS-MTOMPolicy/
-                context.BindingElements.Add (new MtomMessageEncodingBindingElement ());
-                return;
-            }
+			var mtom = PolicyImportHelper.GetMtomMessageEncodingPolicy (assertions);
+			if (mtom != null) {
+				// http://www.w3.org/Submission/WS-MTOMPolicy/
+				context.BindingElements.Add (new MtomMessageEncodingBindingElement ());
+				return;
+			}
 
-            var binary = PolicyImportHelper.GetBinaryMessageEncodingPolicy (assertions);
-            if (binary != null) {
-                context.BindingElements.Add (new BinaryMessageEncodingBindingElement ());
-                return;
-            }
+			var binary = PolicyImportHelper.GetBinaryMessageEncodingPolicy (assertions);
+			if (binary != null) {
+				context.BindingElements.Add (new BinaryMessageEncodingBindingElement ());
+				return;
+			}
 
-            context.BindingElements.Add (new TextMessageEncodingBindingElement ());
-        }
-    }
+			context.BindingElements.Add (new TextMessageEncodingBindingElement ());
+		}
+	}
 }

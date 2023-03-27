@@ -3,16 +3,16 @@
 
 class X
 {
-    static int xx;
-    static long yy, zz;
+	static int xx;
+	static long yy, zz;
 
-    public static void Main ()
-    {
-        (xx, yy, zz) = Foo ();
-    }
+	public static void Main ()
+	{
+		(xx, yy, zz) = Foo ();
+	}
 
-    static (int, long) Foo ()
-    {
-        return (1, 3);
-    }
+	static (int, long) Foo ()
+	{
+		return (1, 3);
+	}
 }

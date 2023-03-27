@@ -9,9 +9,9 @@ class Foo {
     calls = 0;
     while (!(False & false)) {
       if (calls != ++i)
-    throw new Exception ();
+	throw new Exception ();
       if (calls == n)
-    return 0;
+	return 0;
     }
   }
   static int test_do_while (int n)
@@ -20,9 +20,9 @@ class Foo {
     calls = 0;
     do {
       if (calls != i++)
-    throw new Exception ();
+	throw new Exception ();
       if (calls == n)
-    return 0;
+	return 0;
     } while (!(False & false));
   }
   static int test_for (int n)
@@ -31,9 +31,9 @@ class Foo {
     calls = 0;
     for (bool dummy = False; !(False & false); ++i) {
       if (calls != i)
-    throw new Exception ();
+	throw new Exception ();
       if (calls == n)
-    return 0;
+	return 0;
     }
   }
   static void test_for_empty ()

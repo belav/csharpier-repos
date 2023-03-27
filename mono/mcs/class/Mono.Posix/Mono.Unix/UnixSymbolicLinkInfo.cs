@@ -33,76 +33,76 @@ using Mono.Unix;
 
 namespace Mono.Unix {
 
-    public sealed class UnixSymbolicLinkInfo : UnixFileSystemInfo
-    {
-        public UnixSymbolicLinkInfo (string path)
-            : base (path)
-        {
-        }
+	public sealed class UnixSymbolicLinkInfo : UnixFileSystemInfo
+	{
+		public UnixSymbolicLinkInfo (string path)
+			: base (path)
+		{
+		}
 
-        internal UnixSymbolicLinkInfo (string path, Native.Stat stat)
-            : base (path, stat)
-        {
-        }
+		internal UnixSymbolicLinkInfo (string path, Native.Stat stat)
+			: base (path, stat)
+		{
+		}
 
-        public override string Name {
-            get {return UnixPath.GetFileName (FullPath);}
-        }
+		public override string Name {
+			get {return UnixPath.GetFileName (FullPath);}
+		}
 
-        [Obsolete ("Use GetContents()")]
-        public UnixFileSystemInfo Contents {
-            get {return GetContents ();}
-        }
+		[Obsolete ("Use GetContents()")]
+		public UnixFileSystemInfo Contents {
+			get {return GetContents ();}
+		}
 
-        public string ContentsPath {
-            get {
-                return UnixPath.ReadLink (FullPath);
-            }
-        }
+		public string ContentsPath {
+			get {
+				return UnixPath.ReadLink (FullPath);
+			}
+		}
 
-        public bool HasContents {
-            get {
-                return UnixPath.TryReadLink (FullPath) != null;
-            }
-        }
+		public bool HasContents {
+			get {
+				return UnixPath.TryReadLink (FullPath) != null;
+			}
+		}
 
-        public UnixFileSystemInfo GetContents ()
-        {
-            return UnixFileSystemInfo.GetFileSystemEntry (
-                        UnixPath.Combine (UnixPath.GetDirectoryName (FullPath), 
-                            ContentsPath));
-        }
+		public UnixFileSystemInfo GetContents ()
+		{
+			return UnixFileSystemInfo.GetFileSystemEntry (
+						UnixPath.Combine (UnixPath.GetDirectoryName (FullPath), 
+							ContentsPath));
+		}
 
-        public void CreateSymbolicLinkTo (string path)
-        {
-            int r = Native.Syscall.symlink (path, FullName);
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
-        }
+		public void CreateSymbolicLinkTo (string path)
+		{
+			int r = Native.Syscall.symlink (path, FullName);
+			UnixMarshal.ThrowExceptionForLastErrorIf (r);
+		}
 
-        public void CreateSymbolicLinkTo (UnixFileSystemInfo path)
-        {
-            int r = Native.Syscall.symlink (path.FullName, FullName);
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
-        }
+		public void CreateSymbolicLinkTo (UnixFileSystemInfo path)
+		{
+			int r = Native.Syscall.symlink (path.FullName, FullName);
+			UnixMarshal.ThrowExceptionForLastErrorIf (r);
+		}
 
-        public override void Delete ()
-        {
-            int r = Native.Syscall.unlink (FullPath);
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
-            base.Refresh ();
-        }
+		public override void Delete ()
+		{
+			int r = Native.Syscall.unlink (FullPath);
+			UnixMarshal.ThrowExceptionForLastErrorIf (r);
+			base.Refresh ();
+		}
 
-        public override void SetOwner (long owner, long group)
-        {
-            int r = Native.Syscall.lchown (FullPath, Convert.ToInt32 (owner), Convert.ToInt32 (group));
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
-        }
+		public override void SetOwner (long owner, long group)
+		{
+			int r = Native.Syscall.lchown (FullPath, Convert.ToInt32 (owner), Convert.ToInt32 (group));
+			UnixMarshal.ThrowExceptionForLastErrorIf (r);
+		}
 
-        protected override bool GetFileStatus (string path, out Native.Stat stat)
-        {
-            return Native.Syscall.lstat (path, out stat) == 0;
-        }
-    }
+		protected override bool GetFileStatus (string path, out Native.Stat stat)
+		{
+			return Native.Syscall.lstat (path, out stat) == 0;
+		}
+	}
 }
 
 // vim: noexpandtab

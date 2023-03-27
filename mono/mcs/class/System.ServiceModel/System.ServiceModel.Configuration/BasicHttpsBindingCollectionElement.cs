@@ -2,7 +2,7 @@
 // BasicHttpsBindingCollectionElement.cs
 //
 // Author:
-//    Martin Baulig <martin.baulig@xamarin.com>
+//	Martin Baulig <martin.baulig@xamarin.com>
 //
 // Copyright (c) 2012 Xamarin Inc. (http://www.xamarin.com)
 //
@@ -54,9 +54,9 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class BasicHttpsBindingCollectionElement
-         : StandardBindingCollectionElement<BasicHttpsBinding, BasicHttpsBindingElement>
-    {
-    }
+	public partial class BasicHttpsBindingCollectionElement
+		 : StandardBindingCollectionElement<BasicHttpsBinding, BasicHttpsBindingElement>
+	{
+	}
 
 }

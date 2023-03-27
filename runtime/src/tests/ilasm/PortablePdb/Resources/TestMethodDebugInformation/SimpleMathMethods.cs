@@ -1,4 +1,4 @@
-namespace TestMethodDebugInformation
+﻿namespace TestMethodDebugInformation
 {
     public partial class SimpleMath
     {

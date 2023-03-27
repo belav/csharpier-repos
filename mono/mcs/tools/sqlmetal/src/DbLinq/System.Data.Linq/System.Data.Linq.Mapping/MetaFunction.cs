@@ -33,16 +33,16 @@ using System.Reflection;
 
 namespace System.Data.Linq.Mapping
 {
-    public abstract class MetaFunction
-    {
-        public abstract bool HasMultipleResults { get; }
-        public abstract bool IsComposable { get; }
-        public abstract string MappedName { get; }
-        public abstract MethodInfo Method { get; }
-        public abstract MetaModel Model { get; }
-        public abstract string Name { get; }
-        public abstract ReadOnlyCollection<MetaParameter> Parameters { get; }
-        public abstract ReadOnlyCollection<MetaType> ResultRowTypes { get; }
-        public abstract MetaParameter ReturnParameter { get; }
-    }
+	public abstract class MetaFunction
+	{
+		public abstract bool HasMultipleResults { get; }
+		public abstract bool IsComposable { get; }
+		public abstract string MappedName { get; }
+		public abstract MethodInfo Method { get; }
+		public abstract MetaModel Model { get; }
+		public abstract string Name { get; }
+		public abstract ReadOnlyCollection<MetaParameter> Parameters { get; }
+		public abstract ReadOnlyCollection<MetaType> ResultRowTypes { get; }
+		public abstract MetaParameter ReturnParameter { get; }
+	}
 }

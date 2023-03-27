@@ -17,13 +17,13 @@ using Microsoft.Win32;
 
 namespace System.IO.Ports
 {
-    public enum Parity  
-    {
-        None = NativeMethods.NOPARITY,
-        Odd = NativeMethods.ODDPARITY,
+	public enum Parity  
+	{
+		None = NativeMethods.NOPARITY,
+		Odd = NativeMethods.ODDPARITY,
         Even = NativeMethods.EVENPARITY,
-        Mark = NativeMethods.MARKPARITY,
-        Space = NativeMethods.SPACEPARITY
-    };    
+		Mark = NativeMethods.MARKPARITY,
+		Space = NativeMethods.SPACEPARITY
+	};	
 }
-    
+	

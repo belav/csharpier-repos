@@ -129,7 +129,7 @@ namespace System.Diagnostics.Eventing{
             Guid controlGuid = new Guid(providerId);
             //
             // Create The ETW TraceProvider
-            //            
+            //			
 
             m_provider = new EventProvider(controlGuid);
         }

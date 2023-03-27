@@ -47,14 +47,14 @@ namespace System.Runtime.ExceptionServices {
             // Copy over the details we need to save.
             m_Exception = exception;
 #if MONO
-            var traces = exception.captured_traces;
-            var count = traces == null ? 0 : traces.Length;
-            var stack_traces = new System.Diagnostics.StackTrace [count + 1];
-            if (count != 0)
-                Array.Copy (traces, 0, stack_traces, 0, count);
+			var traces = exception.captured_traces;
+			var count = traces == null ? 0 : traces.Length;
+			var stack_traces = new System.Diagnostics.StackTrace [count + 1];
+			if (count != 0)
+				Array.Copy (traces, 0, stack_traces, 0, count);
 
-            stack_traces [count] = new System.Diagnostics.StackTrace (exception, 0, true);
-            m_stackTrace = stack_traces;
+			stack_traces [count] = new System.Diagnostics.StackTrace (exception, 0, true);
+			m_stackTrace = stack_traces;
 #else
             m_remoteStackTrace = exception.RemoteStackTrace;
             

@@ -2,7 +2,7 @@
 // UriBuilderCas.cs - CAS unit tests for System
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,46 +38,46 @@ using MonoTests.System;
 
 namespace MonoCasTests.System {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class UriBuilderCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class UriBuilderCas {
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void UnitTestReuse ()
-        {
-            UriBuilderTest unit = new UriBuilderTest ();
-            unit.Constructor_Empty ();
-            unit.Constructor_5 ();
-            unit.Equals ();
-            unit.EmptyQuery ();
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void UnitTestReuse ()
+		{
+			UriBuilderTest unit = new UriBuilderTest ();
+			unit.Constructor_Empty ();
+			unit.Constructor_5 ();
+			unit.Equals ();
+			unit.EmptyQuery ();
 
-            unit.GetReady ();
-            unit.Path ();
-            unit.Query ();
-            unit.Fragment ();
-            unit.Scheme ();
+			unit.GetReady ();
+			unit.Path ();
+			unit.Query ();
+			unit.Fragment ();
+			unit.Scheme ();
 
-            unit.GetReady ();
-            unit.ToStringTest ();
-            unit.GetReady ();
-            unit.DefaultPort ();
-        }
+			unit.GetReady ();
+			unit.ToStringTest ();
+			unit.GetReady ();
+			unit.DefaultPort ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (UriBuilder).GetConstructor (new Type [0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (UriBuilder).GetConstructor (new Type [0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // System.Security.Policy.ApplicationTrustCollection class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,195 +33,195 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Policy {
 
-    [ComVisible (true)]
-    public sealed class ApplicationTrustCollection : ICollection, IEnumerable {
+	[ComVisible (true)]
+	public sealed class ApplicationTrustCollection : ICollection, IEnumerable {
 
-        private ArrayList _list;
+		private ArrayList _list;
 
-        internal ApplicationTrustCollection ()
-        {
-            _list = new ArrayList ();
-        }
+		internal ApplicationTrustCollection ()
+		{
+			_list = new ArrayList ();
+		}
 
-        // constants (from beta1 - still useful ?)
+		// constants (from beta1 - still useful ?)
 
-//        public const string ApplicationTrustProperty = "ApplicationTrust";
-//        public const string InstallReferenceIdentifier = "{3f471841-eef2-47d6-89c0-d028f03a4ad5}";
+//		public const string ApplicationTrustProperty = "ApplicationTrust";
+//		public const string InstallReferenceIdentifier = "{3f471841-eef2-47d6-89c0-d028f03a4ad5}";
 
-        // properties
+		// properties
 
-        public int Count {
-            get { return _list.Count; }
-        }
+		public int Count {
+			get { return _list.Count; }
+		}
 
-        public bool IsSynchronized {
-            get { return false; }    // always false
-        }
+		public bool IsSynchronized {
+			get { return false; }	// always false
+		}
 
-        public object SyncRoot {
-            get { return this; }    // self
-        }
+		public object SyncRoot {
+			get { return this; }	// self
+		}
 
-        public ApplicationTrust this [int index] {
-            get { return (ApplicationTrust) _list [index]; }
-        }
+		public ApplicationTrust this [int index] {
+			get { return (ApplicationTrust) _list [index]; }
+		}
 
-        public ApplicationTrust this [string appFullName] {
-            get {
-                for (int i=0; i < _list.Count; i++) {
-                    ApplicationTrust at = (_list [i] as ApplicationTrust);
-                    if (at.ApplicationIdentity.FullName == appFullName)
-                        return at;
-                }
-                return null;
-            }
-        }
+		public ApplicationTrust this [string appFullName] {
+			get {
+				for (int i=0; i < _list.Count; i++) {
+					ApplicationTrust at = (_list [i] as ApplicationTrust);
+					if (at.ApplicationIdentity.FullName == appFullName)
+						return at;
+				}
+				return null;
+			}
+		}
 
-        // methods
+		// methods
 
-        public int Add (ApplicationTrust trust)
-        {
-            if (trust == null)
-                throw new ArgumentNullException ("trust");
-            if (trust.ApplicationIdentity == null) {
-                throw new ArgumentException (Locale.GetText (
-                    "ApplicationTrust.ApplicationIdentity can't be null."), "trust");
-            }
+		public int Add (ApplicationTrust trust)
+		{
+			if (trust == null)
+				throw new ArgumentNullException ("trust");
+			if (trust.ApplicationIdentity == null) {
+				throw new ArgumentException (Locale.GetText (
+					"ApplicationTrust.ApplicationIdentity can't be null."), "trust");
+			}
 
-            return _list.Add (trust);
-        }
+			return _list.Add (trust);
+		}
 
-        public void AddRange (ApplicationTrust[] trusts)
-        {
-            if (trusts == null)
-                throw new ArgumentNullException ("trusts");
+		public void AddRange (ApplicationTrust[] trusts)
+		{
+			if (trusts == null)
+				throw new ArgumentNullException ("trusts");
 
-            foreach (ApplicationTrust t in trusts) {
-                if (t.ApplicationIdentity == null) {
-                    throw new ArgumentException (Locale.GetText (
-                        "ApplicationTrust.ApplicationIdentity can't be null."), "trust");
-                }
-                _list.Add (t);
-            }
-        }
+			foreach (ApplicationTrust t in trusts) {
+				if (t.ApplicationIdentity == null) {
+					throw new ArgumentException (Locale.GetText (
+						"ApplicationTrust.ApplicationIdentity can't be null."), "trust");
+				}
+				_list.Add (t);
+			}
+		}
 
-        public void AddRange (ApplicationTrustCollection trusts)
-        {
-            if (trusts == null)
-                throw new ArgumentNullException ("trusts");
+		public void AddRange (ApplicationTrustCollection trusts)
+		{
+			if (trusts == null)
+				throw new ArgumentNullException ("trusts");
 
-            foreach (ApplicationTrust t in trusts) {
-                if (t.ApplicationIdentity == null) {
-                    throw new ArgumentException (Locale.GetText (
-                        "ApplicationTrust.ApplicationIdentity can't be null."), "trust");
-                }
-                _list.Add (t);
-            }
-        }
+			foreach (ApplicationTrust t in trusts) {
+				if (t.ApplicationIdentity == null) {
+					throw new ArgumentException (Locale.GetText (
+						"ApplicationTrust.ApplicationIdentity can't be null."), "trust");
+				}
+				_list.Add (t);
+			}
+		}
 
-        public void Clear ()
-        {
-            _list.Clear ();
-        }
+		public void Clear ()
+		{
+			_list.Clear ();
+		}
 
-        public void CopyTo (ApplicationTrust[] array, int index)
-        {
-            _list.CopyTo (array, index);
-        }
+		public void CopyTo (ApplicationTrust[] array, int index)
+		{
+			_list.CopyTo (array, index);
+		}
 
-        void ICollection.CopyTo (Array array, int index)
-        {
-            _list.CopyTo (array, index);
-        }
+		void ICollection.CopyTo (Array array, int index)
+		{
+			_list.CopyTo (array, index);
+		}
 
-        public ApplicationTrustCollection Find (ApplicationIdentity applicationIdentity, ApplicationVersionMatch versionMatch)
-        {
-            if (applicationIdentity == null)
-                throw new ArgumentNullException ("applicationIdentity");
+		public ApplicationTrustCollection Find (ApplicationIdentity applicationIdentity, ApplicationVersionMatch versionMatch)
+		{
+			if (applicationIdentity == null)
+				throw new ArgumentNullException ("applicationIdentity");
 
-            string fullname = applicationIdentity.FullName;
+			string fullname = applicationIdentity.FullName;
 
-            switch (versionMatch) {
-            case ApplicationVersionMatch.MatchAllVersions:
-                int pos = fullname.IndexOf (", Version=");
-                if (pos >= 0)
-                    fullname = fullname.Substring (0, pos);
-                break;
-            case ApplicationVersionMatch.MatchExactVersion:
-                break;
-            default:
-                throw new ArgumentException ("versionMatch");
-            }
+			switch (versionMatch) {
+			case ApplicationVersionMatch.MatchAllVersions:
+				int pos = fullname.IndexOf (", Version=");
+				if (pos >= 0)
+					fullname = fullname.Substring (0, pos);
+				break;
+			case ApplicationVersionMatch.MatchExactVersion:
+				break;
+			default:
+				throw new ArgumentException ("versionMatch");
+			}
 
-            ApplicationTrustCollection coll = new ApplicationTrustCollection ();
-            foreach (ApplicationTrust t in _list) {
-                if (t.ApplicationIdentity.FullName.StartsWith (fullname)) {
-                    coll.Add (t);
-                }
-            }
+			ApplicationTrustCollection coll = new ApplicationTrustCollection ();
+			foreach (ApplicationTrust t in _list) {
+				if (t.ApplicationIdentity.FullName.StartsWith (fullname)) {
+					coll.Add (t);
+				}
+			}
 
-            return coll;
-        }
+			return coll;
+		}
 
-        public ApplicationTrustEnumerator GetEnumerator ()
-        {
-            return new ApplicationTrustEnumerator (this);
-        }
+		public ApplicationTrustEnumerator GetEnumerator ()
+		{
+			return new ApplicationTrustEnumerator (this);
+		}
 
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return (IEnumerator) new ApplicationTrustEnumerator (this);
-        }
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			return (IEnumerator) new ApplicationTrustEnumerator (this);
+		}
 
-        public void Remove (ApplicationTrust trust)
-        {
-            if (trust == null)
-                throw new ArgumentNullException ("trust");
-            if (trust.ApplicationIdentity == null) {
-                throw new ArgumentException (Locale.GetText (
-                    "ApplicationTrust.ApplicationIdentity can't be null."), "trust");
-            }
+		public void Remove (ApplicationTrust trust)
+		{
+			if (trust == null)
+				throw new ArgumentNullException ("trust");
+			if (trust.ApplicationIdentity == null) {
+				throw new ArgumentException (Locale.GetText (
+					"ApplicationTrust.ApplicationIdentity can't be null."), "trust");
+			}
 
-            RemoveAllInstances (trust);
-        }
+			RemoveAllInstances (trust);
+		}
 
-        public void Remove (ApplicationIdentity applicationIdentity, ApplicationVersionMatch versionMatch)
-        {
-            ApplicationTrustCollection coll = Find (applicationIdentity, versionMatch);
-            foreach (ApplicationTrust t in coll) {
-                RemoveAllInstances (t);
-            }
-        }
+		public void Remove (ApplicationIdentity applicationIdentity, ApplicationVersionMatch versionMatch)
+		{
+			ApplicationTrustCollection coll = Find (applicationIdentity, versionMatch);
+			foreach (ApplicationTrust t in coll) {
+				RemoveAllInstances (t);
+			}
+		}
 
-        public void RemoveRange (ApplicationTrust[] trusts)
-        {
-            if (trusts == null)
-                throw new ArgumentNullException ("trusts");
+		public void RemoveRange (ApplicationTrust[] trusts)
+		{
+			if (trusts == null)
+				throw new ArgumentNullException ("trusts");
 
-            foreach (ApplicationTrust t in trusts) {
-                RemoveAllInstances (t);
-            }
-        }
+			foreach (ApplicationTrust t in trusts) {
+				RemoveAllInstances (t);
+			}
+		}
 
-        public void RemoveRange (ApplicationTrustCollection trusts)
-        {
-            if (trusts == null)
-                throw new ArgumentNullException ("trusts");
+		public void RemoveRange (ApplicationTrustCollection trusts)
+		{
+			if (trusts == null)
+				throw new ArgumentNullException ("trusts");
 
-            foreach (ApplicationTrust t in trusts) {
-                RemoveAllInstances (t);
-            }
-        }
+			foreach (ApplicationTrust t in trusts) {
+				RemoveAllInstances (t);
+			}
+		}
 
-        // helpers
+		// helpers
 
-        internal void RemoveAllInstances (ApplicationTrust trust)
-        {
-            for (int i=_list.Count - 1; i >= 0; i--) {
-                if (trust.Equals (_list [i]))
-                    _list.RemoveAt (i);
-            }
-        }
-    }
+		internal void RemoveAllInstances (ApplicationTrust trust)
+		{
+			for (int i=_list.Count - 1; i >= 0; i--) {
+				if (trust.Equals (_list [i]))
+					_list.RemoveAt (i);
+			}
+		}
+	}
 }
 

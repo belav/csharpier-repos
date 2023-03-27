@@ -4,9 +4,9 @@
 using System;
 
 abstract class A {
-    public abstract event EventHandler MyEvent;
+	public abstract event EventHandler MyEvent;
 }
 
 class B : A {
-    public event EventHandler MyEvent;
+	public event EventHandler MyEvent;
 }

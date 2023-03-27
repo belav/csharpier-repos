@@ -2,7 +2,7 @@
 // System.Web.Configuration.WebPartsSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,56 +34,56 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class WebPartsSection : ConfigurationSection
-    {
-        static ConfigurationProperty enableExportProp;
-        static ConfigurationProperty personalizationProp;
-        static ConfigurationProperty transformersProp;
-        static ConfigurationPropertyCollection properties;
+	public sealed class WebPartsSection : ConfigurationSection
+	{
+		static ConfigurationProperty enableExportProp;
+		static ConfigurationProperty personalizationProp;
+		static ConfigurationProperty transformersProp;
+		static ConfigurationPropertyCollection properties;
 
-        static WebPartsSection ()
-        {
-            enableExportProp = new ConfigurationProperty ("enableExport", typeof (bool), false);
-            personalizationProp = new ConfigurationProperty ("personalization", typeof (WebPartsPersonalization), null,
-                                     null, PropertyHelper.DefaultValidator,
-                                     ConfigurationPropertyOptions.None);
-            transformersProp = new ConfigurationProperty ("transformers", typeof (TransformerInfoCollection), null,
-                                      null, PropertyHelper.DefaultValidator,
-                                      ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
+		static WebPartsSection ()
+		{
+			enableExportProp = new ConfigurationProperty ("enableExport", typeof (bool), false);
+			personalizationProp = new ConfigurationProperty ("personalization", typeof (WebPartsPersonalization), null,
+									 null, PropertyHelper.DefaultValidator,
+									 ConfigurationPropertyOptions.None);
+			transformersProp = new ConfigurationProperty ("transformers", typeof (TransformerInfoCollection), null,
+								      null, PropertyHelper.DefaultValidator,
+								      ConfigurationPropertyOptions.None);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (enableExportProp);
-            properties.Add (personalizationProp);
-            properties.Add (transformersProp);
-        }
+			properties.Add (enableExportProp);
+			properties.Add (personalizationProp);
+			properties.Add (transformersProp);
+		}
 
-        [MonoTODO ("why override this?")]
-        protected internal override object GetRuntimeObject ()
-        {
-            return this;
-        }
+		[MonoTODO ("why override this?")]
+		protected internal override object GetRuntimeObject ()
+		{
+			return this;
+		}
 
-        [ConfigurationProperty ("enableExport", DefaultValue = "False")]
-        public bool EnableExport {
-            get { return (bool) base [enableExportProp];}
-            set { base[enableExportProp] = value; }
-        }
+		[ConfigurationProperty ("enableExport", DefaultValue = "False")]
+		public bool EnableExport {
+			get { return (bool) base [enableExportProp];}
+			set { base[enableExportProp] = value; }
+		}
 
-        [ConfigurationProperty ("personalization")]
-        public WebPartsPersonalization Personalization {
-            get { return (WebPartsPersonalization) base [personalizationProp];}
-        }
+		[ConfigurationProperty ("personalization")]
+		public WebPartsPersonalization Personalization {
+			get { return (WebPartsPersonalization) base [personalizationProp];}
+		}
 
-        [ConfigurationProperty ("transformers")]
-        public TransformerInfoCollection Transformers {
-            get { return (TransformerInfoCollection) base [transformersProp];}
-        }
+		[ConfigurationProperty ("transformers")]
+		public TransformerInfoCollection Transformers {
+			get { return (TransformerInfoCollection) base [transformersProp];}
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-    }
+	}
 
 }
 

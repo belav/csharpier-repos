@@ -6,17 +6,17 @@ using System.Linq.Expressions;
 
 class B
 {
-    protected B this [int i] {
-        get {
-            return null;
-        }
-    }
+	protected B this [int i] {
+		get {
+			return null;
+		}
+	}
 }
 
 class C : B
 {
-    public void Test ()
-    {
-        Expression<Func<B>> e = () => base [8];
-    }
+	public void Test ()
+	{
+		Expression<Func<B>> e = () => base [8];
+	}
 }

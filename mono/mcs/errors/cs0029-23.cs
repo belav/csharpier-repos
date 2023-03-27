@@ -2,8 +2,8 @@
 // Line : 7
 
 class T {
-    static int Main ()
-    {
-        int a = default(bool);
-    }
+	static int Main ()
+	{
+		int a = default(bool);
+	}
 }

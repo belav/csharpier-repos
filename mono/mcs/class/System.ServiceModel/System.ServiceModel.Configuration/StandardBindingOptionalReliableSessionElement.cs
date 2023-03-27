@@ -2,7 +2,7 @@
 // StandardBindingOptionalReliableSessionElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,49 +54,49 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class StandardBindingOptionalReliableSessionElement
-         : StandardBindingReliableSessionElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty enabled;
+	public sealed partial class StandardBindingOptionalReliableSessionElement
+		 : StandardBindingReliableSessionElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty enabled;
 
-        static StandardBindingOptionalReliableSessionElement ()
-        {
-            properties = StandardBindingReliableSessionElement.CreateBaseProperties ();
-            enabled = new ConfigurationProperty ("enabled",
-                typeof (bool), "false", new BooleanConverter (), null,
-                ConfigurationPropertyOptions.None);
+		static StandardBindingOptionalReliableSessionElement ()
+		{
+			properties = StandardBindingReliableSessionElement.CreateBaseProperties ();
+			enabled = new ConfigurationProperty ("enabled",
+				typeof (bool), "false", new BooleanConverter (), null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (enabled);
-        }
+			properties.Add (enabled);
+		}
 
-        public StandardBindingOptionalReliableSessionElement ()
-        {
-        }
+		public StandardBindingOptionalReliableSessionElement ()
+		{
+		}
 
 
-        // Properties
+		// Properties
 
-        [ConfigurationProperty ("enabled",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = false)]
-        public bool Enabled {
-            get { return (bool) base [enabled]; }
-            set { base [enabled] = value; }
-        }
+		[ConfigurationProperty ("enabled",
+			 Options = ConfigurationPropertyOptions.None,
+			DefaultValue = false)]
+		public bool Enabled {
+			get { return (bool) base [enabled]; }
+			set { base [enabled] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        // Methods
+		// Methods
 
-        public void ApplyConfiguration (OptionalReliableSession optionalReliableSession)
-        {
-            base.ApplyConfiguration (optionalReliableSession);
-            optionalReliableSession.Enabled = this.Enabled;
-        }
-    }
+		public void ApplyConfiguration (OptionalReliableSession optionalReliableSession)
+		{
+			base.ApplyConfiguration (optionalReliableSession);
+			optionalReliableSession.Enabled = this.Enabled;
+		}
+	}
 
 }

@@ -4,5 +4,5 @@
 
 static class Class
 {
-    int Prop => throw null;
+	int Prop => throw null;
 }

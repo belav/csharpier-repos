@@ -2,7 +2,7 @@
 // GraphWrapper.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,26 +30,26 @@ using System;
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    class GraphWrapper<Node, Info> : IGraph<Node, Info> {
-        private readonly IEnumerable<Node> nodes;
-        private readonly Func<Node, IEnumerable<Pair<Info, Node>>> successors;
+	class GraphWrapper<Node, Info> : IGraph<Node, Info> {
+		private readonly IEnumerable<Node> nodes;
+		private readonly Func<Node, IEnumerable<Pair<Info, Node>>> successors;
 
-        public GraphWrapper (IEnumerable<Node> nodes, Func<Node, IEnumerable<Pair<Info, Node>>> successors)
-        {
-            this.nodes = nodes;
-            this.successors = successors;
-        }
+		public GraphWrapper (IEnumerable<Node> nodes, Func<Node, IEnumerable<Pair<Info, Node>>> successors)
+		{
+			this.nodes = nodes;
+			this.successors = successors;
+		}
 
-        #region Implementation of IGraph<Node,Info>
-        public IEnumerable<Node> Nodes
-        {
-            get { return this.nodes; }
-        }
+		#region Implementation of IGraph<Node,Info>
+		public IEnumerable<Node> Nodes
+		{
+			get { return this.nodes; }
+		}
 
-        public IEnumerable<Pair<Info, Node>> Successors (Node node)
-        {
-            return this.successors (node);
-        }
-        #endregion
-    }
+		public IEnumerable<Pair<Info, Node>> Successors (Node node)
+		{
+			return this.successors (node);
+		}
+		#endregion
+	}
 }

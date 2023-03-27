@@ -5,14 +5,14 @@ using System;
 
 public class C : IDisposable
 {
-    public void Dispose ()
-    {
-    }
+	public void Dispose ()
+	{
+	}
 
-    static void Main ()
-    {
-        using (C a = new C (), b) {
-        }
-    }
+	static void Main ()
+	{
+		using (C a = new C (), b) {
+		}
+	}
 }
 

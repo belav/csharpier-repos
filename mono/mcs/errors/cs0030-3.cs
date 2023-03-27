@@ -3,8 +3,8 @@
 
 public class Blah {
 
-    public static int Main ()
-    {
-        char ch = (char)"a";
-    }
+	public static int Main ()
+	{
+		char ch = (char)"a";
+	}
 }

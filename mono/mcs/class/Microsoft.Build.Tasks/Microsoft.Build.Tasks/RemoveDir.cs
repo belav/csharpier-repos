@@ -33,59 +33,59 @@ using System.Security;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks {
-    public class RemoveDir : TaskExtension {
-    
-        ITaskItem[]    directories;
-        ITaskItem[]    removedDirectories;
-    
-        public RemoveDir ()
-        {
-        }
+	public class RemoveDir : TaskExtension {
+	
+		ITaskItem[]	directories;
+		ITaskItem[]	removedDirectories;
+	
+		public RemoveDir ()
+		{
+		}
 
-        public override bool Execute ()
-        {
-            if (directories.Length == 0)
-                return true;
+		public override bool Execute ()
+		{
+			if (directories.Length == 0)
+				return true;
 
-            List <ITaskItem> temporaryRemovedDirectories = new List <ITaskItem> ();
-            
-            foreach (ITaskItem directory in directories) {
-                try {
-                    string fullpath = directory.GetMetadata ("FullPath");
-                    if (Directory.Exists (fullpath)) {
-                        Directory.Delete (fullpath, true);
-                        temporaryRemovedDirectories.Add (directory);
-                    }
-                }
-                catch (Exception ex) {
-                    Log.LogErrorFromException (ex);
-                }
-            }
-            
-            removedDirectories = temporaryRemovedDirectories.ToArray ();
-            
-            return true;
-        }
-        
-        [Required]
-        public ITaskItem[] Directories {
-            get {
-                return directories;
-            }
-            set {
-                directories = value;
-            }
-        }
+			List <ITaskItem> temporaryRemovedDirectories = new List <ITaskItem> ();
+			
+			foreach (ITaskItem directory in directories) {
+				try {
+					string fullpath = directory.GetMetadata ("FullPath");
+					if (Directory.Exists (fullpath)) {
+						Directory.Delete (fullpath, true);
+						temporaryRemovedDirectories.Add (directory);
+					}
+				}
+				catch (Exception ex) {
+					Log.LogErrorFromException (ex);
+				}
+			}
+			
+			removedDirectories = temporaryRemovedDirectories.ToArray ();
+			
+			return true;
+		}
+		
+		[Required]
+		public ITaskItem[] Directories {
+			get {
+				return directories;
+			}
+			set {
+				directories = value;
+			}
+		}
 
-        [Output]
-        public ITaskItem[] RemovedDirectories {
-            get {
-                return removedDirectories;
-            }
-            set {
-                removedDirectories = value;
-            }
-        }
-    }
+		[Output]
+		public ITaskItem[] RemovedDirectories {
+			get {
+				return removedDirectories;
+			}
+			set {
+				removedDirectories = value;
+			}
+		}
+	}
 }
 

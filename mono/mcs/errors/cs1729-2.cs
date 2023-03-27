@@ -2,13 +2,13 @@
 // Line: 11
 class X {
 
-    X (int a)
-    {
-    }
-    
-    static void Main ()
-    {
-        new X ();
-    }
+	X (int a)
+	{
+	}
+	
+	static void Main ()
+	{
+		new X ();
+	}
 }
-    
+	

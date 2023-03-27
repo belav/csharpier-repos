@@ -2,8 +2,8 @@
 // System.Security.Principal.GenericPrincipal.cs
 //
 // Authors:
-//    Miguel de Icaza (miguel@ximian.com)
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Miguel de Icaza (miguel@ximian.com)
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) Ximian, Inc.  http://www.ximian.com
 // Copyright (C) 2004-2006 Novell, Inc (http://www.novell.com)
@@ -33,53 +33,53 @@ using System.Security.Claims;
 
 namespace System.Security.Principal {
 
-    [Serializable]
-    [ComVisible (true)]
-    public class GenericPrincipal :
-        ClaimsPrincipal
-    {
+	[Serializable]
+	[ComVisible (true)]
+	public class GenericPrincipal :
+		ClaimsPrincipal
+	{
 
-        // field names are serialization compatible with .net
-        private IIdentity m_identity;
-        private string[] m_roles;
-        
-        public GenericPrincipal (IIdentity identity, string [] roles)
-        {
-            if (identity == null)
-                throw new ArgumentNullException ("identity");
+		// field names are serialization compatible with .net
+		private IIdentity m_identity;
+		private string[] m_roles;
+		
+		public GenericPrincipal (IIdentity identity, string [] roles)
+		{
+			if (identity == null)
+				throw new ArgumentNullException ("identity");
 
-            m_identity = identity;
-            if (roles != null) {
-                // make our own (unchangeable) copy of the roles
-                m_roles = new string [roles.Length];
-                for (int i=0; i < roles.Length; i++)
-                    m_roles [i] = roles [i];
-            }
-        }
+			m_identity = identity;
+			if (roles != null) {
+				// make our own (unchangeable) copy of the roles
+				m_roles = new string [roles.Length];
+				for (int i=0; i < roles.Length; i++)
+					m_roles [i] = roles [i];
+			}
+		}
 
-        internal string [] Roles {
-            get { return m_roles; }
-        }
+		internal string [] Roles {
+			get { return m_roles; }
+		}
 
-        override
-        public IIdentity Identity {
-            get { return m_identity; }
-        }
+		override
+		public IIdentity Identity {
+			get { return m_identity; }
+		}
 
-        override
-        public bool IsInRole (string role)
-        {
-            if (m_roles == null)
-                return false;
+		override
+		public bool IsInRole (string role)
+		{
+			if (m_roles == null)
+				return false;
 
-            int l = role.Length;
-            foreach (string r in m_roles) {
-                if ((r != null) && (l == r.Length)) {
-                    if (String.Compare (role, 0, r, 0, l, true) == 0)
-                        return true;
-                }
-            }
-            return false;
-        }
-    }
+			int l = role.Length;
+			foreach (string r in m_roles) {
+				if ((r != null) && (l == r.Length)) {
+					if (String.Compare (role, 0, r, 0, l, true) == 0)
+						return true;
+				}
+			}
+			return false;
+		}
+	}
 }

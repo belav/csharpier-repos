@@ -20,17 +20,17 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public enum FlatStyle {
-        Flat        = 0,
-        Popup        = 1,
-        Standard    = 2,
-        System        = 3
-    }
+	public enum FlatStyle {
+		Flat		= 0,
+		Popup		= 1,
+		Standard	= 2,
+		System		= 3
+	}
 }

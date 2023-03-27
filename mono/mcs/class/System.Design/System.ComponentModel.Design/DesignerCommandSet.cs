@@ -34,29 +34,29 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-    public class DesignerCommandSet
-    {
-        DesignerActionListCollection action_lists =
-            new DesignerActionListCollection ();
-        DesignerVerbCollection verbs =
-            new DesignerVerbCollection ();
+	public class DesignerCommandSet
+	{
+		DesignerActionListCollection action_lists =
+			new DesignerActionListCollection ();
+		DesignerVerbCollection verbs =
+			new DesignerVerbCollection ();
 
-        public DesignerCommandSet ()
-        {
-        }
-        
-        public DesignerActionListCollection ActionLists {
-            get { return action_lists; }
-        }
+		public DesignerCommandSet ()
+		{
+		}
+		
+		public DesignerActionListCollection ActionLists {
+			get { return action_lists; }
+		}
 
-        [MonoTODO]
-        public virtual ICollection GetCommands (string name)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual ICollection GetCommands (string name)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public DesignerVerbCollection Verbs {
-            get { return verbs; }
-        }
-    }
+		public DesignerVerbCollection Verbs {
+			get { return verbs; }
+		}
+	}
 }

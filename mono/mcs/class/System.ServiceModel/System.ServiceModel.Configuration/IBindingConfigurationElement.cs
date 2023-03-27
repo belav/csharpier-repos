@@ -2,7 +2,7 @@
 // IBindingConfigurationElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,18 +30,18 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Configuration
 {
-    public interface IBindingConfigurationElement
-    {
-        TimeSpan CloseTimeout { get; }
+	public interface IBindingConfigurationElement
+	{
+		TimeSpan CloseTimeout { get; }
 
-        string Name { get; }
+		string Name { get; }
 
-        TimeSpan OpenTimeout { get; }
+		TimeSpan OpenTimeout { get; }
 
-        TimeSpan ReceiveTimeout { get; }
+		TimeSpan ReceiveTimeout { get; }
 
-        TimeSpan SendTimeout { get; }
+		TimeSpan SendTimeout { get; }
 
-        void ApplyConfiguration (Binding binding);
-    }
+		void ApplyConfiguration (Binding binding);
+	}
 }

@@ -2,7 +2,7 @@
 // System.Diagnostics.OverFlowAction
 //
 // Authors:
-//    Gert Driesen (drieseng@users.sourceforge.net)
+//	Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) 2006 Novell
 //
@@ -29,10 +29,10 @@
 
 namespace System.Diagnostics
 {
-    public enum OverflowAction
-    {
-        DoNotOverwrite = -1,
-        OverwriteAsNeeded = 0,
-        OverwriteOlder = 1
-    }
+	public enum OverflowAction
+	{
+		DoNotOverwrite = -1,
+		OverwriteAsNeeded = 0,
+		OverwriteOlder = 1
+	}
 }

@@ -5,5 +5,5 @@ using System;
 
 struct S
 {
-    event Action E = null;
+	event Action E = null;
 }

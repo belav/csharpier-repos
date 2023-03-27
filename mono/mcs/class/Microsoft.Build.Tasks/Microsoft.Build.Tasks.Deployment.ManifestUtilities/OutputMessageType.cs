@@ -31,12 +31,12 @@ using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-    
-    [ComVisible (false)]
-    public enum OutputMessageType {
-        Info,
-        Warning,
-        Error
-    }
+	
+	[ComVisible (false)]
+	public enum OutputMessageType {
+		Info,
+		Warning,
+		Error
+	}
 }
 

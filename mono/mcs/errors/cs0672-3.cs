@@ -5,14 +5,14 @@
 using System;
 
 public class A {
-    [Obsolete()]
-    public virtual string Warning {
-        get { return ""; }
-    }
+	[Obsolete()]
+	public virtual string Warning {
+		get { return ""; }
+	}
 }
 
 public class B : A {
-    public override string Warning {
-        get { return ""; }
-    }
+	public override string Warning {
+		get { return ""; }
+	}
 }

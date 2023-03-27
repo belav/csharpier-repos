@@ -2,7 +2,7 @@
 // System.Security.Policy.IdentityReference.cs
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,49 +32,49 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Principal {
 
-    [ComVisible (false)]
-    public abstract class IdentityReference {
+	[ComVisible (false)]
+	public abstract class IdentityReference {
 
-        // yep, this means it cannot be inherited outside corlib
-        // not sure if this is "by design" reported as FDBK30180
-        internal IdentityReference ()
-        {
-        }
-
-
-        public abstract string Value { 
-            get;
-        }
+		// yep, this means it cannot be inherited outside corlib
+		// not sure if this is "by design" reported as FDBK30180
+		internal IdentityReference ()
+		{
+		}
 
 
-        public abstract override bool Equals (object o);
-
-        public abstract override int GetHashCode ();
-
-        public abstract bool IsValidTargetType (Type targetType);
-
-        public abstract override string ToString ();
-
-        public abstract IdentityReference Translate (Type targetType);
+		public abstract string Value { 
+			get;
+		}
 
 
-        public static bool operator== (IdentityReference left, IdentityReference right)
-        {
-            if (((object)left) == null)
-                return (((object)right) == null);
-            if (((object)right) == null)
-                return false;
-            return (left.Value == right.Value);
-        }
+		public abstract override bool Equals (object o);
 
-        public static bool operator!= (IdentityReference left, IdentityReference right)
-        {
-            if (((object)left) == null)
-                return (((object)right) != null);
-            if (((object)right) == null)
-                return true;
-            return (left.Value != right.Value);
-        }
-    }
+		public abstract override int GetHashCode ();
+
+		public abstract bool IsValidTargetType (Type targetType);
+
+		public abstract override string ToString ();
+
+		public abstract IdentityReference Translate (Type targetType);
+
+
+		public static bool operator== (IdentityReference left, IdentityReference right)
+		{
+			if (((object)left) == null)
+				return (((object)right) == null);
+			if (((object)right) == null)
+				return false;
+			return (left.Value == right.Value);
+		}
+
+		public static bool operator!= (IdentityReference left, IdentityReference right)
+		{
+			if (((object)left) == null)
+				return (((object)right) != null);
+			if (((object)right) == null)
+				return true;
+			return (left.Value != right.Value);
+		}
+	}
 }
 

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -125,7 +125,7 @@ internal sealed class Sink : IMessageSink
     private void OnTestDiscovered(ITestCaseDiscoveryMessage testCaseDiscovered)
     {
         var fullName = $"{testCaseDiscovered.TestCase.TestMethod.TestClass.Class.Name}.{testCaseDiscovered.TestCase.TestMethod.Method.Name}";
-        // this shouldn't happen as our channel is unbounded but we are Paranoid Coding�?
+        // this shouldn't happen as our channel is unbounded but we are Paranoid Coding™️
         if (!_channel.Writer.TryWrite(fullName))
         {
             AnyWriteFailures = true;

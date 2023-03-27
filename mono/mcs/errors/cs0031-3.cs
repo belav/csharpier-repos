@@ -3,8 +3,8 @@
 
 public class Test
 {
-    public static void Main()
-    {
-        uint b = -9;
-    }
+	public static void Main()
+	{
+		uint b = -9;
+	}
 }

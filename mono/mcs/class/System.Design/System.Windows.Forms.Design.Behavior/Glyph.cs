@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.Glyph
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -35,35 +35,35 @@ using System.Drawing.Drawing2D;
 
 namespace System.Windows.Forms.Design.Behavior
 {
-    public abstract class Glyph
-    {
-        Behavior behavior;
+	public abstract class Glyph
+	{
+		Behavior behavior;
 
-        [MonoTODO]
-        protected Glyph (Behavior behavior)
-        {
-            SetBehavior (behavior);
-        }
+		[MonoTODO]
+		protected Glyph (Behavior behavior)
+		{
+			SetBehavior (behavior);
+		}
 
-        [MonoTODO]
-        public virtual Behavior Behavior {
-            get { return behavior; }
-        }
+		[MonoTODO]
+		public virtual Behavior Behavior {
+			get { return behavior; }
+		}
 
-        [MonoTODO]
-        public virtual Rectangle Bounds {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public virtual Rectangle Bounds {
+			get { throw new NotImplementedException (); }
+		}
 
-        public abstract Cursor GetHitTest (Point p);
+		public abstract Cursor GetHitTest (Point p);
 
-        public abstract void Paint (PaintEventArgs pe);
+		public abstract void Paint (PaintEventArgs pe);
 
-        [MonoTODO]
-        protected void SetBehavior (Behavior behavior)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected void SetBehavior (Behavior behavior)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

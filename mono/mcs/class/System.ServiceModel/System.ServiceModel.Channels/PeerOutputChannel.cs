@@ -3,7 +3,7 @@
 // PeerOutputChannel.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -38,78 +38,78 @@ using System.Threading;
 
 namespace System.ServiceModel.Channels
 {
-    internal class PeerOutputChannel : OutputChannelBase
-    {
-        PeerChannelFactory<IOutputChannel> factory;
-        PeerResolver resolver;
-        PeerNode node;
+	internal class PeerOutputChannel : OutputChannelBase
+	{
+		PeerChannelFactory<IOutputChannel> factory;
+		PeerResolver resolver;
+		PeerNode node;
 
-        public PeerOutputChannel (PeerChannelFactory<IOutputChannel> factory, EndpointAddress address, Uri via, PeerResolver resolver)
-            : base (factory, address, via)
-        {
-            this.factory = factory;
-            this.resolver = resolver;
+		public PeerOutputChannel (PeerChannelFactory<IOutputChannel> factory, EndpointAddress address, Uri via, PeerResolver resolver)
+			: base (factory, address, via)
+		{
+			this.factory = factory;
+			this.resolver = resolver;
 
-            // It could be opened even with empty list of PeerNodeAddresses.
-            // So, do not create PeerNode per PeerNodeAddress, but do it with PeerNodeAddress[].
-            node = new PeerNodeImpl (resolver, RemoteAddress, factory.Source.Port);
-        }
+			// It could be opened even with empty list of PeerNodeAddresses.
+			// So, do not create PeerNode per PeerNodeAddress, but do it with PeerNodeAddress[].
+			node = new PeerNodeImpl (resolver, RemoteAddress, factory.Source.Port);
+		}
 
-        // OutputChannelBase
+		// OutputChannelBase
 
-        public override IAsyncResult BeginSend (Message message, TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            throw new NotImplementedException ();
-        }
+		public override IAsyncResult BeginSend (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void EndSend (IAsyncResult result)
-        {
-            throw new NotImplementedException ();
-        }
+		public override void EndSend (IAsyncResult result)
+		{
+			throw new NotImplementedException ();
+		}
 
-        // CommunicationObject
-        
-        [MonoTODO]
-        protected override void OnAbort ()
-        {
-            throw new NotImplementedException ();
-        }
+		// CommunicationObject
+		
+		[MonoTODO]
+		protected override void OnAbort ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout,
-            AsyncCallback callback, object state)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected override IAsyncResult OnBeginClose (TimeSpan timeout,
+			AsyncCallback callback, object state)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout,
-            AsyncCallback callback, object state)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected override IAsyncResult OnBeginOpen (TimeSpan timeout,
+			AsyncCallback callback, object state)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnClose (TimeSpan timeout)
-        {
-            node.Close (timeout);
-        }
-        
-        [MonoTODO]
-        protected override void OnEndClose (IAsyncResult result)
-        {
-            throw new NotImplementedException ();
-        }
+		protected override void OnClose (TimeSpan timeout)
+		{
+			node.Close (timeout);
+		}
+		
+		[MonoTODO]
+		protected override void OnEndClose (IAsyncResult result)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected override void OnEndOpen (IAsyncResult result)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        protected override void OnOpen (TimeSpan timeout)
-        {
-            node.Open (timeout);
-        }
-    }
+		[MonoTODO]
+		protected override void OnEndOpen (IAsyncResult result)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		protected override void OnOpen (TimeSpan timeout)
+		{
+			node.Open (timeout);
+		}
+	}
 }
 #endif

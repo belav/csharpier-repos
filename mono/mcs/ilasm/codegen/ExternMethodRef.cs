@@ -23,8 +23,8 @@ namespace Mono.ILASM {
 
                 public override void Resolve (CodeGen code_gen)
                 {
-            if (is_resolved)
-                return;
+			if (is_resolved)
+				return;
 
                         if ((call_conv & PEAPI.CallConv.Vararg) != 0) {
                                 ResolveVararg (code_gen);
@@ -62,13 +62,13 @@ namespace Mono.ILASM {
 
                         peapi_method.AddCallConv (call_conv);
 
-            is_resolved = true;
+			is_resolved = true;
                 }
 
                 protected void ResolveVararg (CodeGen code_gen)
                 {
-            if (is_resolved)
-                return;
+			if (is_resolved)
+				return;
 
                         ArrayList param_list = new ArrayList ();
                         ArrayList opt_list = new ArrayList ();
@@ -116,8 +116,8 @@ namespace Mono.ILASM {
 
 
                         peapi_method.AddCallConv (call_conv);
-            
-            is_resolved = true;
+			
+			is_resolved = true;
                 }
         }
 

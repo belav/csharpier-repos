@@ -2,7 +2,7 @@
 // System.Configuration.IriParsingElement.cs
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 // (c) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -31,47 +31,47 @@ using System;
 
 namespace System.Configuration
 {
-    public sealed class IriParsingElement : ConfigurationElement
-    {
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty enabled_prop;
+	public sealed class IriParsingElement : ConfigurationElement
+	{
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty enabled_prop;
 
-        static IriParsingElement ()
-        {
-            enabled_prop = new ConfigurationProperty ("enabled", typeof (bool), false, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (enabled_prop);
-        }
+		static IriParsingElement ()
+		{
+			enabled_prop = new ConfigurationProperty ("enabled", typeof (bool), false, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (enabled_prop);
+		}
 
-        public IriParsingElement ()
-        {
-        }
+		public IriParsingElement ()
+		{
+		}
 
-        [ConfigurationProperty ("enabled", DefaultValue = false,
-                    Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public bool Enabled {
-            get { return (bool) base [enabled_prop]; }
-            set { base [enabled_prop] = value; }
-        }
+		[ConfigurationProperty ("enabled", DefaultValue = false,
+					Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+		public bool Enabled {
+			get { return (bool) base [enabled_prop]; }
+			set { base [enabled_prop] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        public override bool Equals (object o)
-        {
-            IriParsingElement e = o as IriParsingElement;
-            if (e == null)
-                return false;
+		public override bool Equals (object o)
+		{
+			IriParsingElement e = o as IriParsingElement;
+			if (e == null)
+				return false;
 
-            return e.Enabled == Enabled;
-        }
+			return e.Enabled == Enabled;
+		}
 
-        public override int GetHashCode ()
-        {
-            return Convert.ToInt32 (Enabled) ^ 0x7F;
-        }
-    }
+		public override int GetHashCode ()
+		{
+			return Convert.ToInt32 (Enabled) ^ 0x7F;
+		}
+	}
 
 }
 

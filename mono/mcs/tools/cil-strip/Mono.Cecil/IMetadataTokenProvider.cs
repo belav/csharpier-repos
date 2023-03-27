@@ -28,10 +28,10 @@
 
 namespace Mono.Cecil {
 
-    using Mono.Cecil.Metadata;
+	using Mono.Cecil.Metadata;
 
-    internal interface IMetadataTokenProvider {
+	internal interface IMetadataTokenProvider {
 
-        MetadataToken MetadataToken { get; set; }
-    }
+		MetadataToken MetadataToken { get; set; }
+	}
 }

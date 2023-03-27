@@ -39,54 +39,54 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRow_IsNull_D : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRow_IsNull_D tc = new DataRow_IsNull_D();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRow_IsNull_D");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRow_IsNull_D tc = new DataRow_IsNull_D();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRow_IsNull_D");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    public void run()
-    {
-        Exception exp = null;
+	public void run()
+	{
+		Exception exp = null;
 
-        DataTable dt = new DataTable(); 
-        DataColumn dc0 = new DataColumn("Col0",typeof(int));
-        DataColumn dc1 = new DataColumn("Col1",typeof(int));
-        dt.Columns.Add(dc0);
-        dt.Columns.Add(dc1);
-        dt.Rows.Add(new object[] {1234});
-        DataRow dr = dt.Rows[0];
-                    
-        try
-        {
-            BeginCase("IsNull_I 2");
-            Compare(dr.IsNull(dc0) ,false );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    
+		DataTable dt = new DataTable(); 
+		DataColumn dc0 = new DataColumn("Col0",typeof(int));
+		DataColumn dc1 = new DataColumn("Col1",typeof(int));
+		dt.Columns.Add(dc0);
+		dt.Columns.Add(dc1);
+		dt.Rows.Add(new object[] {1234});
+		DataRow dr = dt.Rows[0];
+            		
+		try
+		{
+			BeginCase("IsNull_I 2");
+			Compare(dr.IsNull(dc0) ,false );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	
 
-        try
-        {
-            BeginCase("IsNull_I 2");
-            Compare(dr.IsNull(dc1) ,true );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    
-    }
+		try
+		{
+			BeginCase("IsNull_I 2");
+			Compare(dr.IsNull(dc1) ,true );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	
+	}
 }
 }

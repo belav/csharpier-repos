@@ -1,9 +1,9 @@
 //
 // TableItemStyleCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.TableItemStyle
+//	- CAS unit tests for System.Web.UI.WebControls.TableItemStyle
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,35 +38,35 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TableItemStyleCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TableItemStyleCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            TableItemStyleTest unit = new TableItemStyleTest ();
-            unit.Constructor_Default ();
-            unit.Constructor_StateBag_Null ();
-            unit.Constructor_StateBag ();
-            unit.AddAttributesToRender_Null_WebControl ();
-            unit.AddAttributesToRender_HtmlTextWriter_Null ();
-            unit.AddAttributesToRender ();
-            unit.CopyFrom_Null ();
-            unit.CopyFrom_Self ();
-            unit.CopyFrom_Empty ();
-            unit.CopyFrom ();
-            unit.MergeWith_Null ();
-            unit.MergeWith_Self ();
-            unit.MergeWith_Empty ();
-            unit.MergeWith ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			TableItemStyleTest unit = new TableItemStyleTest ();
+			unit.Constructor_Default ();
+			unit.Constructor_StateBag_Null ();
+			unit.Constructor_StateBag ();
+			unit.AddAttributesToRender_Null_WebControl ();
+			unit.AddAttributesToRender_HtmlTextWriter_Null ();
+			unit.AddAttributesToRender ();
+			unit.CopyFrom_Null ();
+			unit.CopyFrom_Self ();
+			unit.CopyFrom_Empty ();
+			unit.CopyFrom ();
+			unit.MergeWith_Null ();
+			unit.MergeWith_Self ();
+			unit.MergeWith_Empty ();
+			unit.MergeWith ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (TableItemStyle); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (TableItemStyle); }
+		}
+	}
 }

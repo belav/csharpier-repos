@@ -3,13 +3,13 @@
 
 public class Test
 {
-    static void Foo (int a, int b = 1, int c = 2)
-    {
-    }
-    
-    public static void Main ()
-    {
-        Foo (c : -1);
-    }
+	static void Foo (int a, int b = 1, int c = 2)
+	{
+	}
+	
+	public static void Main ()
+	{
+		Foo (c : -1);
+	}
 }
 

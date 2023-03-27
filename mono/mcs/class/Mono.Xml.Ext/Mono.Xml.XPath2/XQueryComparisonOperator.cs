@@ -2,7 +2,7 @@
 // XQueryComparisonOperator.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -38,196 +38,196 @@ using System.Xml.Xsl;
 
 namespace Mono.Xml.XPath2
 {
-    // FIXME: Handle complete type promotion and subtype substitution.
-    // See XQuery 1.0 Appendix B.*.
-    public class XQueryComparisonOperator
-    {
-        private static bool OpBooleanLessThan (bool b1, bool b2)
-        {
-            return !b1 && b2;
-        }
+	// FIXME: Handle complete type promotion and subtype substitution.
+	// See XQuery 1.0 Appendix B.*.
+	public class XQueryComparisonOperator
+	{
+		private static bool OpBooleanLessThan (bool b1, bool b2)
+		{
+			return !b1 && b2;
+		}
 
-        private static bool OpBooleanGreaterThan (bool b1, bool b2)
-        {
-            return b1 && !b2;
-        }
+		private static bool OpBooleanGreaterThan (bool b1, bool b2)
+		{
+			return b1 && !b2;
+		}
 
-        private static bool CompareEquality (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            switch (lvalue.XmlType.TypeCode) {
-            case XmlTypeCode.Boolean:
-                return lvalue.ValueAsBoolean == rvalue.ValueAsBoolean;
-            case XmlTypeCode.UntypedAtomic:
-            case XmlTypeCode.String:
-                return lvalue.Value == rvalue.Value;
-            case XmlTypeCode.Date:
-            case XmlTypeCode.Time:
-            case XmlTypeCode.DateTime:
-            case XmlTypeCode.YearMonthDuration:
-            case XmlTypeCode.DayTimeDuration:
-                return lvalue.ValueAsDateTime == rvalue.ValueAsDateTime;
-            case XmlTypeCode.HexBinary:
-            case XmlTypeCode.Base64Binary:
-            case XmlTypeCode.AnyUri:
-            case XmlTypeCode.QName:
-            case XmlTypeCode.Notation:
-                throw new NotImplementedException ();
-            }
-            XmlQualifiedName nameL = lvalue.XmlType.QualifiedName != XmlQualifiedName.Empty ? lvalue.XmlType.QualifiedName : new XmlQualifiedName ("anyType", XmlSchema.Namespace);
-            XmlQualifiedName nameR = rvalue.XmlType.QualifiedName != XmlQualifiedName.Empty ? rvalue.XmlType.QualifiedName : new XmlQualifiedName ("anyType", XmlSchema.Namespace);
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", nameL, nameR));
-        }
+		private static bool CompareEquality (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			switch (lvalue.XmlType.TypeCode) {
+			case XmlTypeCode.Boolean:
+				return lvalue.ValueAsBoolean == rvalue.ValueAsBoolean;
+			case XmlTypeCode.UntypedAtomic:
+			case XmlTypeCode.String:
+				return lvalue.Value == rvalue.Value;
+			case XmlTypeCode.Date:
+			case XmlTypeCode.Time:
+			case XmlTypeCode.DateTime:
+			case XmlTypeCode.YearMonthDuration:
+			case XmlTypeCode.DayTimeDuration:
+				return lvalue.ValueAsDateTime == rvalue.ValueAsDateTime;
+			case XmlTypeCode.HexBinary:
+			case XmlTypeCode.Base64Binary:
+			case XmlTypeCode.AnyUri:
+			case XmlTypeCode.QName:
+			case XmlTypeCode.Notation:
+				throw new NotImplementedException ();
+			}
+			XmlQualifiedName nameL = lvalue.XmlType.QualifiedName != XmlQualifiedName.Empty ? lvalue.XmlType.QualifiedName : new XmlQualifiedName ("anyType", XmlSchema.Namespace);
+			XmlQualifiedName nameR = rvalue.XmlType.QualifiedName != XmlQualifiedName.Empty ? rvalue.XmlType.QualifiedName : new XmlQualifiedName ("anyType", XmlSchema.Namespace);
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", nameL, nameR));
+		}
 
-        public static bool ValueEQ (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
-                rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
-                return lvalue.ValueAsDecimal == rvalue.ValueAsDecimal;
-            if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
-                SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
-                return lvalue.ValueAsDouble == rvalue.ValueAsDouble;
-            if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
-                return CompareEquality (lvalue, rvalue);
+		public static bool ValueEQ (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
+				rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
+				return lvalue.ValueAsDecimal == rvalue.ValueAsDecimal;
+			if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
+				SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
+				return lvalue.ValueAsDouble == rvalue.ValueAsDouble;
+			if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
+				return CompareEquality (lvalue, rvalue);
 
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
-        }
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
+		}
 
-        public static bool ValueNE (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
-                rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
-                return lvalue.ValueAsDecimal != rvalue.ValueAsDecimal;
-            if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
-                SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
-                return lvalue.ValueAsDouble != rvalue.ValueAsDouble;
-            if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
-                return !CompareEquality (lvalue, rvalue);
+		public static bool ValueNE (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
+				rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
+				return lvalue.ValueAsDecimal != rvalue.ValueAsDecimal;
+			if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
+				SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
+				return lvalue.ValueAsDouble != rvalue.ValueAsDouble;
+			if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
+				return !CompareEquality (lvalue, rvalue);
 
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
-        }
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
+		}
 
-        private static bool CompareLT (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            switch (lvalue.XmlType.TypeCode) {
-            case XmlTypeCode.Boolean:
-                return OpBooleanLessThan (lvalue.ValueAsBoolean, rvalue.ValueAsBoolean);
-            case XmlTypeCode.String:
-                return lvalue.Value == rvalue.Value;
-            case XmlTypeCode.Date:
-            case XmlTypeCode.Time:
-            case XmlTypeCode.DateTime:
-            case XmlTypeCode.YearMonthDuration:
-            case XmlTypeCode.DayTimeDuration:
-                return lvalue.ValueAsDateTime < rvalue.ValueAsDateTime;
-            }
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
-        }
+		private static bool CompareLT (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			switch (lvalue.XmlType.TypeCode) {
+			case XmlTypeCode.Boolean:
+				return OpBooleanLessThan (lvalue.ValueAsBoolean, rvalue.ValueAsBoolean);
+			case XmlTypeCode.String:
+				return lvalue.Value == rvalue.Value;
+			case XmlTypeCode.Date:
+			case XmlTypeCode.Time:
+			case XmlTypeCode.DateTime:
+			case XmlTypeCode.YearMonthDuration:
+			case XmlTypeCode.DayTimeDuration:
+				return lvalue.ValueAsDateTime < rvalue.ValueAsDateTime;
+			}
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
+		}
 
-        public static bool ValueLT (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
-                rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
-                return lvalue.ValueAsDecimal < rvalue.ValueAsDecimal;
-            if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
-                SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
-                return lvalue.ValueAsDouble < rvalue.ValueAsDouble;
-            if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
-                return CompareLT (lvalue, rvalue);
+		public static bool ValueLT (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
+				rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
+				return lvalue.ValueAsDecimal < rvalue.ValueAsDecimal;
+			if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
+				SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
+				return lvalue.ValueAsDouble < rvalue.ValueAsDouble;
+			if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
+				return CompareLT (lvalue, rvalue);
 
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
-        }
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
+		}
 
-        private static bool CompareLE (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            switch (lvalue.XmlType.TypeCode) {
-            case XmlTypeCode.Boolean:
-                return !OpBooleanGreaterThan (lvalue.ValueAsBoolean, rvalue.ValueAsBoolean);
-            case XmlTypeCode.String:
-                return lvalue.Value == rvalue.Value;
-            case XmlTypeCode.Date:
-            case XmlTypeCode.Time:
-            case XmlTypeCode.DateTime:
-            case XmlTypeCode.YearMonthDuration:
-            case XmlTypeCode.DayTimeDuration:
-                return lvalue.ValueAsDateTime <= rvalue.ValueAsDateTime;
-            }
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
-        }
+		private static bool CompareLE (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			switch (lvalue.XmlType.TypeCode) {
+			case XmlTypeCode.Boolean:
+				return !OpBooleanGreaterThan (lvalue.ValueAsBoolean, rvalue.ValueAsBoolean);
+			case XmlTypeCode.String:
+				return lvalue.Value == rvalue.Value;
+			case XmlTypeCode.Date:
+			case XmlTypeCode.Time:
+			case XmlTypeCode.DateTime:
+			case XmlTypeCode.YearMonthDuration:
+			case XmlTypeCode.DayTimeDuration:
+				return lvalue.ValueAsDateTime <= rvalue.ValueAsDateTime;
+			}
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
+		}
 
-        public static bool ValueLE (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
-                rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
-                return lvalue.ValueAsDecimal <= rvalue.ValueAsDecimal;
-            if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
-                SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
-                return lvalue.ValueAsDouble <= rvalue.ValueAsDouble;
-            if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
-                return CompareLE (lvalue, rvalue);
+		public static bool ValueLE (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
+				rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
+				return lvalue.ValueAsDecimal <= rvalue.ValueAsDecimal;
+			if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
+				SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
+				return lvalue.ValueAsDouble <= rvalue.ValueAsDouble;
+			if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
+				return CompareLE (lvalue, rvalue);
 
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
-        }
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
+		}
 
-        private static bool CompareGT (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            switch (lvalue.XmlType.TypeCode) {
-            case XmlTypeCode.Boolean:
-                return OpBooleanGreaterThan (lvalue.ValueAsBoolean, rvalue.ValueAsBoolean);
-            case XmlTypeCode.String:
-                return lvalue.Value == rvalue.Value;
-            case XmlTypeCode.Date:
-            case XmlTypeCode.Time:
-            case XmlTypeCode.DateTime:
-            case XmlTypeCode.YearMonthDuration:
-            case XmlTypeCode.DayTimeDuration:
-                return lvalue.ValueAsDateTime > rvalue.ValueAsDateTime;
-            }
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
-        }
+		private static bool CompareGT (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			switch (lvalue.XmlType.TypeCode) {
+			case XmlTypeCode.Boolean:
+				return OpBooleanGreaterThan (lvalue.ValueAsBoolean, rvalue.ValueAsBoolean);
+			case XmlTypeCode.String:
+				return lvalue.Value == rvalue.Value;
+			case XmlTypeCode.Date:
+			case XmlTypeCode.Time:
+			case XmlTypeCode.DateTime:
+			case XmlTypeCode.YearMonthDuration:
+			case XmlTypeCode.DayTimeDuration:
+				return lvalue.ValueAsDateTime > rvalue.ValueAsDateTime;
+			}
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
+		}
 
-        public static bool ValueGT (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
-                rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
-                return lvalue.ValueAsDecimal > rvalue.ValueAsDecimal;
-            if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
-                SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
-                return lvalue.ValueAsDouble > rvalue.ValueAsDouble;
-            if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
-                return CompareGT (lvalue, rvalue);
+		public static bool ValueGT (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
+				rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
+				return lvalue.ValueAsDecimal > rvalue.ValueAsDecimal;
+			if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
+				SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
+				return lvalue.ValueAsDouble > rvalue.ValueAsDouble;
+			if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
+				return CompareGT (lvalue, rvalue);
 
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
-        }
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
+		}
 
-        private static bool CompareGE (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            switch (lvalue.XmlType.TypeCode) {
-            case XmlTypeCode.Boolean:
-                return !OpBooleanLessThan (lvalue.ValueAsBoolean, rvalue.ValueAsBoolean);
-            case XmlTypeCode.String:
-                return lvalue.Value == rvalue.Value;
-            case XmlTypeCode.Date:
-            case XmlTypeCode.Time:
-            case XmlTypeCode.DateTime:
-            case XmlTypeCode.YearMonthDuration:
-            case XmlTypeCode.DayTimeDuration:
-                return lvalue.ValueAsDateTime >= rvalue.ValueAsDateTime;
-            }
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
-        }
+		private static bool CompareGE (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			switch (lvalue.XmlType.TypeCode) {
+			case XmlTypeCode.Boolean:
+				return !OpBooleanLessThan (lvalue.ValueAsBoolean, rvalue.ValueAsBoolean);
+			case XmlTypeCode.String:
+				return lvalue.Value == rvalue.Value;
+			case XmlTypeCode.Date:
+			case XmlTypeCode.Time:
+			case XmlTypeCode.DateTime:
+			case XmlTypeCode.YearMonthDuration:
+			case XmlTypeCode.DayTimeDuration:
+				return lvalue.ValueAsDateTime >= rvalue.ValueAsDateTime;
+			}
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
+		}
 
-        public static bool ValueGE (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
-        {
-            if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
-                rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
-                return lvalue.ValueAsDecimal >= rvalue.ValueAsDecimal;
-            if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
-                SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
-                return lvalue.ValueAsDouble >= rvalue.ValueAsDouble;
-            if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
-                return CompareGE (lvalue, rvalue);
+		public static bool ValueGE (XPathAtomicValue lvalue, XPathAtomicValue rvalue)
+		{
+			if (lvalue.XmlType.TypeCode == XmlTypeCode.Decimal &&
+				rvalue.XmlType.TypeCode == XmlTypeCode.Decimal)
+				return lvalue.ValueAsDecimal >= rvalue.ValueAsDecimal;
+			if (SequenceType.IsNumeric (lvalue.XmlType.TypeCode) &&
+				SequenceType.IsNumeric (lvalue.XmlType.TypeCode))
+				return lvalue.ValueAsDouble >= rvalue.ValueAsDouble;
+			if (lvalue.XmlType.TypeCode == rvalue.XmlType.TypeCode)
+				return CompareGE (lvalue, rvalue);
 
-            throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
-        }
-    }
+			throw new XmlQueryException (String.Format ("Not allowed value comparison between {0} and {1}.", lvalue.XmlType.QualifiedName, rvalue.XmlType.QualifiedName));
+		}
+	}
 }

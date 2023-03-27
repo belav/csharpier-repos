@@ -28,29 +28,29 @@
 
 namespace Mono.Cecil {
 
-    internal sealed class EmbeddedResource : Resource {
+	internal sealed class EmbeddedResource : Resource {
 
-        byte [] m_data;
+		byte [] m_data;
 
-        public byte [] Data {
-            get { return m_data; }
-            set { m_data = value; }
-        }
+		public byte [] Data {
+			get { return m_data; }
+			set { m_data = value; }
+		}
 
-        public EmbeddedResource (string name, ManifestResourceAttributes flags) :
-            base (name, flags)
-        {
-        }
+		public EmbeddedResource (string name, ManifestResourceAttributes flags) :
+			base (name, flags)
+		{
+		}
 
-        public EmbeddedResource (string name, ManifestResourceAttributes flags, byte [] data) :
-            base (name, flags)
-        {
-            m_data = data;
-        }
+		public EmbeddedResource (string name, ManifestResourceAttributes flags, byte [] data) :
+			base (name, flags)
+		{
+			m_data = data;
+		}
 
-        public override void Accept (IReflectionStructureVisitor visitor)
-        {
-            visitor.VisitEmbeddedResource (this);
-        }
-    }
+		public override void Accept (IReflectionStructureVisitor visitor)
+		{
+			visitor.VisitEmbeddedResource (this);
+		}
+	}
 }

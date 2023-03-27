@@ -2,8 +2,8 @@
 // System.Security.Cryptography CryptoAPITransform.cs
 //
 // Authors:
-//    Thomas Neidhart (tome@sbox.tugraz.at)
-//    Sebastien Pouliot (sebastien@ximian.com)
+//	Thomas Neidhart (tome@sbox.tugraz.at)
+//	Sebastien Pouliot (sebastien@ximian.com)
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -32,77 +32,77 @@ using System.Security.Permissions;
 
 namespace System.Security.Cryptography {
 
-    // Note: This class isn't used by Mono as all algorithms are provided with
-    // 100% managed implementations.
+	// Note: This class isn't used by Mono as all algorithms are provided with
+	// 100% managed implementations.
 
-    [ComVisible (true)]
-    public sealed class CryptoAPITransform : ICryptoTransform {
+	[ComVisible (true)]
+	public sealed class CryptoAPITransform : ICryptoTransform {
 
-        private bool m_disposed;
+		private bool m_disposed;
 
-        internal CryptoAPITransform () 
-        {
-            m_disposed = false;
-        }
+		internal CryptoAPITransform () 
+		{
+			m_disposed = false;
+		}
 
 
-        public bool CanReuseTransform {
-            get { return true; }
-        }
+		public bool CanReuseTransform {
+			get { return true; }
+		}
 
-        public bool CanTransformMultipleBlocks {
-            get { return true; }
-        }
+		public bool CanTransformMultipleBlocks {
+			get { return true; }
+		}
 
-        public int InputBlockSize {
-            get { return 0;    }
-        }
+		public int InputBlockSize {
+			get { return 0;	}
+		}
 
-        public IntPtr KeyHandle {
-            [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-            get { return IntPtr.Zero; }
-        }
+		public IntPtr KeyHandle {
+			[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+			get { return IntPtr.Zero; }
+		}
 
-        public int OutputBlockSize {
-            get { return 0; }
-        }
+		public int OutputBlockSize {
+			get { return 0; }
+		}
 
-        public void Dispose ()
-        {
-            Dispose (true);
-            GC.SuppressFinalize (this);  // Finalization is now unnecessary
-        }
+		public void Dispose ()
+		{
+			Dispose (true);
+			GC.SuppressFinalize (this);  // Finalization is now unnecessary
+		}
 
-        public void Clear () 
-        {
-            Dispose (false);
-        }
+		public void Clear () 
+		{
+			Dispose (false);
+		}
 
-        private void Dispose (bool disposing) 
-        {
-            if (!m_disposed) {
-                // dispose unmanaged objects
-                if (disposing) {
-                    // dispose managed objects
-                }
-                m_disposed = true;
-            }
-        }
+		private void Dispose (bool disposing) 
+		{
+			if (!m_disposed) {
+				// dispose unmanaged objects
+				if (disposing) {
+					// dispose managed objects
+				}
+				m_disposed = true;
+			}
+		}
 
-        public int TransformBlock (byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
-        {
-            return 0;
-        }
+		public int TransformBlock (byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
+		{
+			return 0;
+		}
 
-        public byte[] TransformFinalBlock (byte[] inputBuffer, int inputOffset, int inputCount)
-        {
-            // Reset (); should be called here before returning final data
-            return null;
-        }
+		public byte[] TransformFinalBlock (byte[] inputBuffer, int inputOffset, int inputCount)
+		{
+			// Reset (); should be called here before returning final data
+			return null;
+		}
 
-        [ComVisible (false)]
-        public void Reset ()
-        {
-        }
-    }
+		[ComVisible (false)]
+		public void Reset ()
+		{
+		}
+	}
 }

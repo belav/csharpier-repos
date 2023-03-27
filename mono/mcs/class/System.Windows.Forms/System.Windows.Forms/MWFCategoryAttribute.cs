@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 //
 
@@ -30,21 +30,21 @@ using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace System {
-    [AttributeUsage (AttributeTargets.All, AllowMultiple=false)]
-    internal sealed class MWFCategoryAttribute : System.ComponentModel.CategoryAttribute {
-        #region Constructors
-        public MWFCategoryAttribute() : base() {
-        }
+	[AttributeUsage (AttributeTargets.All, AllowMultiple=false)]
+	internal sealed class MWFCategoryAttribute : System.ComponentModel.CategoryAttribute {
+		#region Constructors
+		public MWFCategoryAttribute() : base() {
+		}
 
-        public MWFCategoryAttribute(string category) : base(category) {
-        }
-        #endregion    // Constructors
+		public MWFCategoryAttribute(string category) : base(category) {
+		}
+		#endregion	// Constructors
 
-        #region Methods
-        protected override string GetLocalizedString(string value) {
-            return Locale.GetText(value);
-        }
+		#region Methods
+		protected override string GetLocalizedString(string value) {
+			return Locale.GetText(value);
+		}
 
-        #endregion    // Methods
-    }
+		#endregion	// Methods
+	}
 }

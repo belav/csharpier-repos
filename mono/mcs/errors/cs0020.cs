@@ -4,9 +4,9 @@
 using System;
 
 public class X {
-    static void Main ()
-    {
-        int i = 1 / 0;
-        Console.WriteLine (i);
-    }
+	static void Main ()
+	{
+		int i = 1 / 0;
+		Console.WriteLine (i);
+	}
 }

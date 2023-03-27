@@ -33,55 +33,55 @@ using System.Collections;
 
 namespace System.ComponentModel.Design
 {
-    public abstract class DesignerActionItem {
-        bool allow_associate;
-        string category;
-        string description;
-        string display_name;
-        IDictionary properties;
+	public abstract class DesignerActionItem {
+		bool allow_associate;
+		string category;
+		string description;
+		string display_name;
+		IDictionary properties;
 
-        public DesignerActionItem (string displayName, string category, string description)
-        {
-            this.display_name = displayName;
-            this.description = description;
-            this.category = category;
-        }
+		public DesignerActionItem (string displayName, string category, string description)
+		{
+			this.display_name = displayName;
+			this.description = description;
+			this.category = category;
+		}
 
-        public bool AllowAssociate {
-            get {
-                return allow_associate;
-            }
+		public bool AllowAssociate {
+			get {
+				return allow_associate;
+			}
 
-            set {
-                allow_associate = value;
-            }
-        }
+			set {
+				allow_associate = value;
+			}
+		}
 
-        public virtual string Category {
-            get {
-                return category;
-            }
-        }
+		public virtual string Category {
+			get {
+				return category;
+			}
+		}
 
-        public virtual string Description {
-            get {
-                return description;
-            }
-        }
+		public virtual string Description {
+			get {
+				return description;
+			}
+		}
 
-        public virtual string DisplayName {
-            get {
-                return display_name;
-            }
-        }
+		public virtual string DisplayName {
+			get {
+				return display_name;
+			}
+		}
 
-        public IDictionary Properties {
-            get {
-                if (properties == null)
-                    properties = new Hashtable ();
-                return properties;
-            }
-        }
-        
-    }
+		public IDictionary Properties {
+			get {
+				if (properties == null)
+					properties = new Hashtable ();
+				return properties;
+			}
+		}
+		
+	}
 }

@@ -11,7 +11,7 @@
 
 public partial class UrlPropertyControl
 {
-    protected System.Web.UI.WebControls.Literal Property1Literal;
-    protected System.Web.UI.WebControls.Literal UrlProperty2Literal;
+	protected System.Web.UI.WebControls.Literal Property1Literal;
+	protected System.Web.UI.WebControls.Literal UrlProperty2Literal;
 }
 

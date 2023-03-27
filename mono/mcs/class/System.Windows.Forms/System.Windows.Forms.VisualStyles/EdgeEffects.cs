@@ -23,18 +23,18 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-    [Flags]
-    public enum EdgeEffects
-    {
-        None = 0,
-        FillInterior = 2048,
-        Flat = 4096,
-        Soft = 16384,
-        Mono = 32768
-    }
+	[Flags]
+	public enum EdgeEffects
+	{
+		None = 0,
+		FillInterior = 2048,
+		Flat = 4096,
+		Soft = 16384,
+		Mono = 32768
+	}
 }

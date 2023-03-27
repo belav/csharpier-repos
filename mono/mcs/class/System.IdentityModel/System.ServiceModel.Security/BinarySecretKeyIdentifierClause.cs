@@ -2,7 +2,7 @@
 // BinarySecretKeyIdentifierClause.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,55 +33,55 @@ using System.IdentityModel.Tokens;
 
 namespace System.ServiceModel.Security
 {
-    public class BinarySecretKeyIdentifierClause : BinaryKeyIdentifierClause
-    {
-        public BinarySecretKeyIdentifierClause (byte [] key)
-            : this (key, true)
-        {
-        }
+	public class BinarySecretKeyIdentifierClause : BinaryKeyIdentifierClause
+	{
+		public BinarySecretKeyIdentifierClause (byte [] key)
+			: this (key, true)
+		{
+		}
 
-        [MonoTODO ("ClauseType")]
-        public BinarySecretKeyIdentifierClause (byte [] key, bool cloneBuffer)
-            : base ("", key, cloneBuffer)
-        {
-        }
+		[MonoTODO ("ClauseType")]
+		public BinarySecretKeyIdentifierClause (byte [] key, bool cloneBuffer)
+			: base ("", key, cloneBuffer)
+		{
+		}
 
-        [MonoTODO ("ClauseType")]
-        public BinarySecretKeyIdentifierClause (byte [] key, bool cloneBuffer, byte [] derivationNonce, int derivationLength)
-            : base ("", key, cloneBuffer, derivationNonce, derivationLength)
-        {
-        }
+		[MonoTODO ("ClauseType")]
+		public BinarySecretKeyIdentifierClause (byte [] key, bool cloneBuffer, byte [] derivationNonce, int derivationLength)
+			: base ("", key, cloneBuffer, derivationNonce, derivationLength)
+		{
+		}
 
-        public override bool CanCreateKey {
-            get { return true; }
-        }
+		public override bool CanCreateKey {
+			get { return true; }
+		}
 
-        public byte [] GetKeyBytes ()
-        {
-            return GetBuffer ();
-        }
+		public byte [] GetKeyBytes ()
+		{
+			return GetBuffer ();
+		}
 
-        public override SecurityKey CreateKey ()
-        {
-            return new InMemorySymmetricSecurityKey (GetRawBuffer (), true);
-        }
+		public override SecurityKey CreateKey ()
+		{
+			return new InMemorySymmetricSecurityKey (GetRawBuffer (), true);
+		}
 
-        public override bool Matches (SecurityKeyIdentifierClause clause)
-        {
-            if (clause == null)
-                throw new ArgumentNullException ("clause");
-            BinarySecretKeyIdentifierClause other =
-                clause as BinarySecretKeyIdentifierClause;
-            if (other == null)
-                return false;
-            byte [] b1 = GetRawBuffer ();
-            byte [] b2 = other.GetRawBuffer ();
-            if (b1.Length != b2.Length)
-                return false;
-            for (int i = 0; i < b1.Length; i++)
-                if (b1 [i] != b2 [i])
-                    return false;
-            return true;
-        }
-    }
+		public override bool Matches (SecurityKeyIdentifierClause clause)
+		{
+			if (clause == null)
+				throw new ArgumentNullException ("clause");
+			BinarySecretKeyIdentifierClause other =
+				clause as BinarySecretKeyIdentifierClause;
+			if (other == null)
+				return false;
+			byte [] b1 = GetRawBuffer ();
+			byte [] b2 = other.GetRawBuffer ();
+			if (b1.Length != b2.Length)
+				return false;
+			for (int i = 0; i < b1.Length; i++)
+				if (b1 [i] != b2 [i])
+					return false;
+			return true;
+		}
+	}
 }

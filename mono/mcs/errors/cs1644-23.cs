@@ -4,11 +4,11 @@
 
 class C
 {
-    delegate void D ();
-    
-    public void Foo ()
-    {
-        D e = () => { };
-    }
+	delegate void D ();
+	
+	public void Foo ()
+	{
+		D e = () => { };
+	}
 }
 

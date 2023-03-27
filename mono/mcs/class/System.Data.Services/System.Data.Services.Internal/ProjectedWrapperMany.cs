@@ -1,4 +1,4 @@
-// 
+﻿// 
 // ProjectedWrapperMany.cs
 //  
 // Author:
@@ -32,53 +32,53 @@ using System.Runtime.CompilerServices;
 
 namespace System.Data.Services.Internal
 {
-    [EditorBrowsable (EditorBrowsableState.Never)]
-    public class ProjectedWrapperMany : ProjectedWrapper
-    {
-        public object ProjectedProperty0 {
-            get; set;
-        }
+	[EditorBrowsable (EditorBrowsableState.Never)]
+	public class ProjectedWrapperMany : ProjectedWrapper
+	{
+		public object ProjectedProperty0 {
+			get; set;
+		}
 
-        public object ProjectedProperty1 {
-            get; set;
-        }
+		public object ProjectedProperty1 {
+			get; set;
+		}
 
-        public object ProjectedProperty2 {
-            get; set;
-        }
+		public object ProjectedProperty2 {
+			get; set;
+		}
 
-        public object ProjectedProperty3 {
-            get; set;
-        }
+		public object ProjectedProperty3 {
+			get; set;
+		}
 
-        public object ProjectedProperty4 {
-            get; set;
-        }
+		public object ProjectedProperty4 {
+			get; set;
+		}
 
-        public object ProjectedProperty5 {
-            get; set;
-        }
+		public object ProjectedProperty5 {
+			get; set;
+		}
 
-        public object ProjectedProperty6 {
-            get; set;
-        }
+		public object ProjectedProperty6 {
+			get; set;
+		}
 
-        public object ProjectedProperty7 {
-            get; set;
-        }
+		public object ProjectedProperty7 {
+			get; set;
+		}
 
-        public ProjectedWrapperMany Next {
-            get; set;
-        }
+		public ProjectedWrapperMany Next {
+			get; set;
+		}
 
-        protected override object InternalGetProjectedPropertyValue (int propertyIndex)
-        {
-            throw new NotImplementedException ();
-        }
+		protected override object InternalGetProjectedPropertyValue (int propertyIndex)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public ProjectedWrapperMany ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public ProjectedWrapperMany ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

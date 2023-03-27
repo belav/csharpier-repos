@@ -2,7 +2,7 @@
 // NetMsmqSecurityElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,68 +54,68 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public sealed partial class NetMsmqSecurityElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty message;
-        static ConfigurationProperty mode;
-        static ConfigurationProperty transport;
+	[MonoTODO]
+	public sealed partial class NetMsmqSecurityElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty message;
+		static ConfigurationProperty mode;
+		static ConfigurationProperty transport;
 
-        static NetMsmqSecurityElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            message = new ConfigurationProperty ("message",
-                typeof (MessageSecurityOverMsmqElement), null, null/* FIXME: get converter for MessageSecurityOverMsmqElement*/, null,
-                ConfigurationPropertyOptions.None);
+		static NetMsmqSecurityElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			message = new ConfigurationProperty ("message",
+				typeof (MessageSecurityOverMsmqElement), null, null/* FIXME: get converter for MessageSecurityOverMsmqElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            mode = new ConfigurationProperty ("mode",
-                typeof (NetMsmqSecurityMode), "Transport", null/* FIXME: get converter for NetMsmqSecurityMode*/, null,
-                ConfigurationPropertyOptions.None);
+			mode = new ConfigurationProperty ("mode",
+				typeof (NetMsmqSecurityMode), "Transport", null/* FIXME: get converter for NetMsmqSecurityMode*/, null,
+				ConfigurationPropertyOptions.None);
 
-            transport = new ConfigurationProperty ("transport",
-                typeof (MsmqTransportSecurityElement), null, null/* FIXME: get converter for MsmqTransportSecurityElement*/, null,
-                ConfigurationPropertyOptions.None);
+			transport = new ConfigurationProperty ("transport",
+				typeof (MsmqTransportSecurityElement), null, null/* FIXME: get converter for MsmqTransportSecurityElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (message);
-            properties.Add (mode);
-            properties.Add (transport);
-        }
+			properties.Add (message);
+			properties.Add (mode);
+			properties.Add (transport);
+		}
 
-        public NetMsmqSecurityElement ()
-        {
-        }
-
-
-        // Properties
-
-        [ConfigurationProperty ("message",
-             Options = ConfigurationPropertyOptions.None)]
-        public MessageSecurityOverMsmqElement Message {
-            get { return (MessageSecurityOverMsmqElement) base [message]; }
-        }
-
-        [ConfigurationProperty ("mode",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Transport")]
-        public NetMsmqSecurityMode Mode {
-            get { return (NetMsmqSecurityMode) base [mode]; }
-            set { base [mode] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-
-        [ConfigurationProperty ("transport",
-             Options = ConfigurationPropertyOptions.None)]
-        public MsmqTransportSecurityElement Transport {
-            get { return (MsmqTransportSecurityElement) base [transport]; }
-        }
+		public NetMsmqSecurityElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+		[ConfigurationProperty ("message",
+			 Options = ConfigurationPropertyOptions.None)]
+		public MessageSecurityOverMsmqElement Message {
+			get { return (MessageSecurityOverMsmqElement) base [message]; }
+		}
+
+		[ConfigurationProperty ("mode",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "Transport")]
+		public NetMsmqSecurityMode Mode {
+			get { return (NetMsmqSecurityMode) base [mode]; }
+			set { base [mode] = value; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+		[ConfigurationProperty ("transport",
+			 Options = ConfigurationPropertyOptions.None)]
+		public MsmqTransportSecurityElement Transport {
+			get { return (MsmqTransportSecurityElement) base [transport]; }
+		}
+
+
+	}
 
 }

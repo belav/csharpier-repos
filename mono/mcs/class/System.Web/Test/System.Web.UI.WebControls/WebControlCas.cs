@@ -1,9 +1,9 @@
 //
 // WebControlCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.WebControl
+//	- CAS unit tests for System.Web.UI.WebControls.WebControl
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,43 +40,43 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class WebControlCas: AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class WebControlCas: AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            WebControlTest unit = new WebControlTest ();
-            unit.Constructors ();
-            unit.StyleCreation ();
-            unit.Defaults ();
-            unit.Assignment ();
-            unit.Methods ();
-            unit.CopyEnabled ();
-            unit.RenderClientId ();
-            unit.ViewState ();
-            unit.RenderBeginTag_TagOnly ();
-            unit.RenderBeginTag_Attributes ();
-            unit.RenderBeginTag_Style ();
-            unit.EmptyStringTag ();
-            unit.NullStringTag ();
-            unit.UnknownTag ();
-            unit.EnabledViewState ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			WebControlTest unit = new WebControlTest ();
+			unit.Constructors ();
+			unit.StyleCreation ();
+			unit.Defaults ();
+			unit.Assignment ();
+			unit.Methods ();
+			unit.CopyEnabled ();
+			unit.RenderClientId ();
+			unit.ViewState ();
+			unit.RenderBeginTag_TagOnly ();
+			unit.RenderBeginTag_Attributes ();
+			unit.RenderBeginTag_Style ();
+			unit.EmptyStringTag ();
+			unit.NullStringTag ();
+			unit.UnknownTag ();
+			unit.EnabledViewState ();
+		}
 
-        // LinkDemand 
+		// LinkDemand 
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (HtmlTextWriterTag) });
-            Assert.IsNotNull (ci, ".ctor(HtmlTextWriterTag)");
-            return ci.Invoke (new object[1] { HtmlTextWriterTag.A });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (HtmlTextWriterTag) });
+			Assert.IsNotNull (ci, ".ctor(HtmlTextWriterTag)");
+			return ci.Invoke (new object[1] { HtmlTextWriterTag.A });
+		}
 
-        public override Type Type {
-            get { return typeof (WebControl); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (WebControl); }
+		}
+	}
 }

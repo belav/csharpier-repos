@@ -3,21 +3,21 @@
 
 class C
 {
-    static void Test()
-    {
-        try
-        {
-            throw new System.Exception();
-        }
-        catch
-        {
-            try
-            {
-            }
-            finally
-            {
-                throw;
-            }
-        }
-    }
+	static void Test()
+	{
+		try
+		{
+			throw new System.Exception();
+		}
+		catch
+		{
+			try
+			{
+			}
+			finally
+			{
+				throw;
+			}
+		}
+	}
 }

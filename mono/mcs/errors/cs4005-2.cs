@@ -4,10 +4,10 @@
 
 class C
 {
-    unsafe delegate void D (int* i);
-    
-    public static void Main ()
-    {
-        D d = async delegate { };
-    }
+	unsafe delegate void D (int* i);
+	
+	public static void Main ()
+	{
+		D d = async delegate { };
+	}
 }

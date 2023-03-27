@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1352,12 +1352,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     // in the unary minus analysis.
 
                     // * When a decimal-integer-literal with the value 2147483648 (231) and no integer-type-suffix appears
-                    //   as the token immediately following a unary minus operator token (�7.7.2), the result is a constant
-                    //   of type int with the value -2147483648 (-231). In all other situations, such a decimal-integer-
+                    //   as the token immediately following a unary minus operator token (§7.7.2), the result is a constant
+                    //   of type int with the value −2147483648 (−231). In all other situations, such a decimal-integer-
                     //   literal is of type uint.
                     // * When a decimal-integer-literal with the value 9223372036854775808 (263) and no integer-type-suffix
                     //   or the integer-type-suffix L or l appears as the token immediately following a unary minus operator
-                    //   token (�7.7.2), the result is a constant of type long with the value -9223372036854775808 (-263).
+                    //   token (§7.7.2), the result is a constant of type long with the value −9223372036854775808 (−263).
                     //   In all other situations, such a decimal-integer-literal is of type ulong.
             }
 

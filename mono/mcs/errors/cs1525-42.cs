@@ -3,5 +3,5 @@
 
 class MyClass
 {
-    void a<T>
+	void a<T>
 }

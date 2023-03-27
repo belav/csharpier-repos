@@ -2,7 +2,7 @@
 // SecurityTokenAuthenticator.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,26 +32,26 @@ using System.IdentityModel.Tokens;
 
 namespace System.IdentityModel.Selectors
 {
-    public abstract class SecurityTokenAuthenticator
-    {
-        protected SecurityTokenAuthenticator ()
-        {
-        }
+	public abstract class SecurityTokenAuthenticator
+	{
+		protected SecurityTokenAuthenticator ()
+		{
+		}
 
-        public bool CanValidateToken (SecurityToken token)
-        {
-            return CanValidateTokenCore (token);
-        }
+		public bool CanValidateToken (SecurityToken token)
+		{
+			return CanValidateTokenCore (token);
+		}
 
-        protected abstract bool CanValidateTokenCore (SecurityToken token);
+		protected abstract bool CanValidateTokenCore (SecurityToken token);
 
-        public ReadOnlyCollection<IAuthorizationPolicy>
-            ValidateToken (SecurityToken token)
-        {
-            return ValidateTokenCore (token);
-        }
+		public ReadOnlyCollection<IAuthorizationPolicy>
+			ValidateToken (SecurityToken token)
+		{
+			return ValidateTokenCore (token);
+		}
 
-        protected abstract ReadOnlyCollection<IAuthorizationPolicy>
-            ValidateTokenCore (SecurityToken token);
-    }
+		protected abstract ReadOnlyCollection<IAuthorizationPolicy>
+			ValidateTokenCore (SecurityToken token);
+	}
 }

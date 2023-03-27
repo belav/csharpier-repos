@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.ComponentModel.DataAnnotations.Schema;
@@ -111,9 +111,9 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
     [ConditionalFact]
     public virtual void Can_perform_query_with_ansi_strings_test()
     {
-        var shortString = Fixture.SupportsUnicodeToAnsiConversion ? "?ky" : "sky";
+        var shortString = Fixture.SupportsUnicodeToAnsiConversion ? "Ϩky" : "sky";
         var longString = Fixture.SupportsUnicodeToAnsiConversion
-            ? new string('?', Fixture.LongStringLength)
+            ? new string('Ϩ', Fixture.LongStringLength)
             : new string('s', Fixture.LongStringLength);
 
         using (var context = CreateContext())

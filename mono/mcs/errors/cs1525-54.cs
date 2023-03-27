@@ -3,8 +3,8 @@
 
 class MainClass
 {
-    public string Test ()
-    {
-        return true ? "Hello" :
-    }
+	public string Test ()
+	{
+		return true ? "Hello" :
+	}
 }

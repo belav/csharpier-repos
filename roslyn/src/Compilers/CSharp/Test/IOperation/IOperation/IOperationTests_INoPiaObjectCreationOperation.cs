@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -49,7 +49,7 @@ class UsePia
 {
     public void M1(ITest33 x, int y)
     {
-        x = /*<bind>*/new ITest33  { y }/*</bind>*/;
+	    x = /*<bind>*/new ITest33  { y }/*</bind>*/;
     }
 } 
 ";
@@ -108,7 +108,7 @@ class UsePia
 {
     public void M1(ITest33 x, int y)
     {
-        x = /*<bind>*/new ITest33  { P = y }/*</bind>*/;
+	    x = /*<bind>*/new ITest33  { P = y }/*</bind>*/;
     }
 } 
 ";
@@ -165,7 +165,7 @@ class UsePia
 {
     public void M1(ITest33 x, int y)
     {
-        x = /*<bind>*/new ITest33()/*</bind>*/;
+	    x = /*<bind>*/new ITest33()/*</bind>*/;
     }
 } 
 ";
@@ -215,7 +215,7 @@ class UsePia
 {
     /*<bind>*/public void M1(ITest33 x, int y)
     {
-        x = new ITest33  { y };
+	    x = new ITest33  { y };
     }/*</bind>*/
 } 
 ";
@@ -307,7 +307,7 @@ class UsePia
 {
     /*<bind>*/public void M1(ITest33 x, int y)
     {
-        x = new ITest33  { P = y };
+	    x = new ITest33  { P = y };
     }/*</bind>*/
 } 
 ";
@@ -397,7 +397,7 @@ class UsePia
 {
     /*<bind>*/public void M1(ITest33 x, int y)
     {
-        x = new ITest33();
+	    x = new ITest33();
     }/*</bind>*/
 } 
 ";
@@ -464,7 +464,7 @@ class UsePia
 {
     /*<bind>*/public void M1(ITest33 x, object y1, object y2)
     {
-        x = new ITest33  { y1 ?? y2 };
+	    x = new ITest33  { y1 ?? y2 };
     }/*</bind>*/
 } 
 ";

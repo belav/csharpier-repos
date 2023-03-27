@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SiteMapHierarchicalDataSourceView
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -32,23 +32,23 @@ using System.Collections;
 
 namespace System.Web.UI.WebControls
 {
-    public class SiteMapHierarchicalDataSourceView : HierarchicalDataSourceView
-    {
-        SiteMapNodeCollection collection;
-        
-        public SiteMapHierarchicalDataSourceView (SiteMapNode node) : this (new SiteMapNodeCollection (node))
-        {
-        }
-        
-        public SiteMapHierarchicalDataSourceView (SiteMapNodeCollection collection)
-        {
-            this.collection = collection;
-        }
+	public class SiteMapHierarchicalDataSourceView : HierarchicalDataSourceView
+	{
+		SiteMapNodeCollection collection;
+		
+		public SiteMapHierarchicalDataSourceView (SiteMapNode node) : this (new SiteMapNodeCollection (node))
+		{
+		}
+		
+		public SiteMapHierarchicalDataSourceView (SiteMapNodeCollection collection)
+		{
+			this.collection = collection;
+		}
 
-        public override IHierarchicalEnumerable Select ()
-        {
-            return collection;
-        }
-    }
+		public override IHierarchicalEnumerable Select ()
+		{
+			return collection;
+		}
+	}
 }
 

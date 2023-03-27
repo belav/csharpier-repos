@@ -1161,7 +1161,7 @@ namespace System.Data {
         }
         internal static InvalidOperationException InvalidEntityStateLoad(string relatedEndType) {
             return InvalidOperation(System.Data.Entity.Strings.Collections_InvalidEntityStateLoad(relatedEndType));
-        }
+	    }
         internal static InvalidOperationException InvalidOwnerStateForAttach() {
             return InvalidOperation(System.Data.Entity.Strings.RelatedEnd_InvalidOwnerStateForAttach);
         }

@@ -3,7 +3,7 @@
 
 class B<T>
 {
-    T Foo (T)
-    {
-    }
+	T Foo (T)
+	{
+	}
 }

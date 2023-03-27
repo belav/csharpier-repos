@@ -26,9 +26,9 @@
 //
 
 namespace System.Web.UI.WebControls.WebParts {
-    [Serializable]
+	[Serializable]
         public enum WebPartPageMenuMode {
                 Menu = 0,
-        DropDown = 1                
+		DropDown = 1				
         }
 }

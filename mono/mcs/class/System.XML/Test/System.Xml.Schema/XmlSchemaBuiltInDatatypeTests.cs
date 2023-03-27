@@ -14,9 +14,9 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {
-    [TestFixture]
-    public class XmlSchemaBuiltInDatatypeTests
-    {
+	[TestFixture]
+	public class XmlSchemaBuiltInDatatypeTests
+	{
 
     [Test]
     public void TestWhiteSpaceCollapse () {

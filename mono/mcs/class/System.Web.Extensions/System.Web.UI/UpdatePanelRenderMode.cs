@@ -1,4 +1,4 @@
-//
+﻿//
 // UpdatePanelRenderMode.cs
 //
 // Author:
@@ -33,9 +33,9 @@ using System.Text;
 
 namespace System.Web.UI
 {
-    public enum UpdatePanelRenderMode
-    {
-        Block = 0,
-        Inline = 1,
-    }
+	public enum UpdatePanelRenderMode
+	{
+		Block = 0,
+		Inline = 1,
+	}
 }

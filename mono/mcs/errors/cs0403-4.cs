@@ -3,8 +3,8 @@
 
 class Test<T>
 {
-    public T Null ()
-    {
-        return (null);
-    }
+	public T Null ()
+	{
+		return (null);
+	}
 }

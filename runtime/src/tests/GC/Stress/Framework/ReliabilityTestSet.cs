@@ -12,13 +12,13 @@ using System.Text;
 
 public class ReliabilityTestSet
 {
-    private int _maximumTestLoops = 0;                                    // default run based on time.
-    private int _maximumExecutionTime = 60;                            // 60 minute run by default.
-    private int _maximumWaitTime = 10;                                // 10 minute wait by default.
+    private int _maximumTestLoops = 0;									// default run based on time.
+    private int _maximumExecutionTime = 60;	                        // 60 minute run by default.
+    private int _maximumWaitTime = 10;	                            // 10 minute wait by default.
     private int _percentPassIsPass = System.Environment.GetEnvironmentVariable("PERCENTPASSISPASS") == null ? -1 : Convert.ToInt32(System.Environment.GetEnvironmentVariable("PERCENTPASSISPASS"));
     private int[] _minPercentCPUStaggered_times = null;
     private int[] _minPercentCPUStaggered_usage = null;
-    private int _minimumCPUpercent = 0, _minimumMemoryPercent = 0, _minimumTestsRunning = 0, _maximumTestsRunning = -1;            // minimum CPU & memory requirements.
+    private int _minimumCPUpercent = 0, _minimumMemoryPercent = 0, _minimumTestsRunning = 0, _maximumTestsRunning = -1;			// minimum CPU & memory requirements.
     private ReliabilityTest[] _tests;
     private string[] _discoveryPaths = null;
     private string _friendlyName;
@@ -41,7 +41,7 @@ public class ReliabilityTestSet
     private int _numAppDomains = 10; //used for roundRobin scheduling, our app domain index
     private int _numAssemblyLoadContexts = 10; //used for roundRobin scheduling, our AssemblyLoadContext index
     private Random _rand = new Random();
-    private LoggingLevels _loggingLevel = LoggingLevels.All;    // by default log everything
+    private LoggingLevels _loggingLevel = LoggingLevels.All;	// by default log everything
 
 
     public ReliabilityTest[] Tests

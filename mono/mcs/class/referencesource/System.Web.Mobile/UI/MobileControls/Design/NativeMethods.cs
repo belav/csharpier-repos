@@ -355,1064 +355,1064 @@ namespace System.Web.UI.Design.MobileControls
             IStream Clone();
         }
 
-        [System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F1FF-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-        internal interface IHTMLElement 
-        {
-            void SetAttribute(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string strAttributeName,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object AttributeValue,
-                [In, MarshalAs(UnmanagedType.I4)]
-                int lFlags);
+		[System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F1FF-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+		internal interface IHTMLElement 
+		{
+			void SetAttribute(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string strAttributeName,
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object AttributeValue,
+				[In, MarshalAs(UnmanagedType.I4)]
+				int lFlags);
 
             
-            void GetAttribute(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string strAttributeName,
-                [In, MarshalAs(UnmanagedType.I4)]
-                int lFlags,
-                [Out, MarshalAs(UnmanagedType.LPArray)]
-                Object[] pvars);
+			void GetAttribute(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string strAttributeName,
+				[In, MarshalAs(UnmanagedType.I4)]
+				int lFlags,
+				[Out, MarshalAs(UnmanagedType.LPArray)]
+				Object[] pvars);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool RemoveAttribute(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string strAttributeName,
-                [In, MarshalAs(UnmanagedType.I4)]
-                int lFlags);
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool RemoveAttribute(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string strAttributeName,
+				[In, MarshalAs(UnmanagedType.I4)]
+				int lFlags);
 
             
-            void SetClassName(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetClassName(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetClassName();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetClassName();
 
             
-            void SetId(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetId(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetId();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetId();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetTagName();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetTagName();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElement GetParentElement();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElement GetParentElement();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLStyle GetStyle();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLStyle GetStyle();
 
             
-            void SetOnhelp(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnhelp(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnhelp();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnhelp();
 
             
-            void SetOnclick(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnclick(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnclick();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnclick();
 
             
-            void SetOndblclick(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOndblclick(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOndblclick();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOndblclick();
 
             
-            void SetOnkeydown(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnkeydown(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnkeydown();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnkeydown();
 
             
-            void SetOnkeyup(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnkeyup(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnkeyup();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnkeyup();
 
             
-            void SetOnkeypress(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnkeypress(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnkeypress();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnkeypress();
 
             
-            void SetOnmouseout(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnmouseout(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnmouseout();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnmouseout();
 
             
-            void SetOnmouseover(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnmouseover(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnmouseover();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnmouseover();
 
             
-            void SetOnmousemove(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnmousemove(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnmousemove();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnmousemove();
 
             
-            void SetOnmousedown(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnmousedown(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnmousedown();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnmousedown();
 
             
-            void SetOnmouseup(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnmouseup(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnmouseup();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnmouseup();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetDocument();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetDocument();
 
             
-            void SetTitle(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetTitle(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetTitle();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetTitle();
 
             
-            void SetLanguage(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetLanguage(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetLanguage();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetLanguage();
 
             
-            void SetOnselectstart(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnselectstart(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnselectstart();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnselectstart();
 
             
-            void ScrollIntoView(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object varargStart);
+			void ScrollIntoView(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object varargStart);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool Contains(
-                [In, MarshalAs(UnmanagedType.Interface)]
-                IHTMLElement pChild);
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool Contains(
+				[In, MarshalAs(UnmanagedType.Interface)]
+				IHTMLElement pChild);
 
-            [return: MarshalAs(UnmanagedType.I4)]
-            int GetSourceIndex();
+			[return: MarshalAs(UnmanagedType.I4)]
+			int GetSourceIndex();
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetRecordNumber();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetRecordNumber();
 
             
-            void SetLang(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetLang(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetLang();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetLang();
 
-            [return: MarshalAs(UnmanagedType.I4)]
-            int GetOffsetLeft();
+			[return: MarshalAs(UnmanagedType.I4)]
+			int GetOffsetLeft();
 
-            [return: MarshalAs(UnmanagedType.I4)]
-            int GetOffsetTop();
+			[return: MarshalAs(UnmanagedType.I4)]
+			int GetOffsetTop();
 
-            [return: MarshalAs(UnmanagedType.I4)]
-            int GetOffsetWidth();
+			[return: MarshalAs(UnmanagedType.I4)]
+			int GetOffsetWidth();
 
-            [return: MarshalAs(UnmanagedType.I4)]
-            int GetOffsetHeight();
+			[return: MarshalAs(UnmanagedType.I4)]
+			int GetOffsetHeight();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElement GetOffsetParent();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElement GetOffsetParent();
 
             
-            void SetInnerHTML(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetInnerHTML(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetInnerHTML();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetInnerHTML();
 
             
-            void SetInnerText(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetInnerText(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetInnerText();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetInnerText();
 
             
-            void SetOuterHTML(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetOuterHTML(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetOuterHTML();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetOuterHTML();
 
             
-            void SetOuterText(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetOuterText(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetOuterText();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetOuterText();
 
             
-            void InsertAdjacentHTML(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string @where,
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string html);
+			void InsertAdjacentHTML(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string @where,
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string html);
 
             
-            void InsertAdjacentText(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string @where,
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string text);
+			void InsertAdjacentText(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string @where,
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string text);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElement GetParentTextEdit();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElement GetParentTextEdit();
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool GetIsTextEdit();
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool GetIsTextEdit();
 
             
-            void Click();
+			void Click();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetFilters();
-            // 
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetFilters();
+			// 
 
             
-            void SetOndragstart(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOndragstart(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOndragstart();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOndragstart();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string toString();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string toString();
 
             
-            void SetOnbeforeupdate(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnbeforeupdate(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnbeforeupdate();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnbeforeupdate();
 
             
-            void SetOnafterupdate(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnafterupdate(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnafterupdate();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnafterupdate();
 
             
-            void SetOnerrorupdate(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnerrorupdate(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnerrorupdate();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnerrorupdate();
 
             
-            void SetOnrowexit(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnrowexit(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnrowexit();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnrowexit();
 
             
-            void SetOnrowenter(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnrowenter(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnrowenter();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnrowenter();
 
             
-            void SetOndatasetchanged(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOndatasetchanged(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOndatasetchanged();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOndatasetchanged();
 
             
-            void SetOndataavailable(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOndataavailable(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOndataavailable();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOndataavailable();
 
             
-            void SetOndatasetcomplete(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOndatasetcomplete(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOndatasetcomplete();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOndatasetcomplete();
 
             
-            void SetOnfilterchange(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnfilterchange(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnfilterchange();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnfilterchange();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetChildren();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetChildren();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetAll();
-        }
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetAll();
+		}
 
-        [System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("332C4425-26CB-11D0-B483-00C04FD90119"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-        internal interface IHTMLDocument2 
-        {
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetScript();
+		[System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("332C4425-26CB-11D0-B483-00C04FD90119"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+		internal interface IHTMLDocument2 
+		{
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetScript();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetAll();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetAll();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElement GetBody();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElement GetBody();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElement GetActiveElement();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElement GetActiveElement();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetImages();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetImages();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetApplets();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetApplets();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetLinks();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetLinks();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetForms();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetForms();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetAnchors();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetAnchors();
 
             
-            void SetTitle(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetTitle(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetTitle();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetTitle();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetScripts();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetScripts();
 
             
-            void SetDesignMode(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetDesignMode(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetDesignMode();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetDesignMode();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetSelection();
-            // 
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetSelection();
+			// 
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetReadyState();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetReadyState();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetFrames();
-            // 
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetFrames();
+			// 
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetEmbeds();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetEmbeds();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetPlugins();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetPlugins();
 
             
-            void SetAlinkColor(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetAlinkColor(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            object GetAlinkColor();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			object GetAlinkColor();
 
             
-            void SetBgColor(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetBgColor(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            object GetBgColor();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			object GetBgColor();
 
             
-            void SetFgColor(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetFgColor(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            object GetFgColor();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			object GetFgColor();
 
             
-            void SetLinkColor(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetLinkColor(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            object GetLinkColor();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			object GetLinkColor();
 
             
-            void SetVlinkColor(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetVlinkColor(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetVlinkColor();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetVlinkColor();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetReferrer();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetReferrer();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetLocation();
-            // 
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetLocation();
+			// 
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetLastModified();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetLastModified();
 
             
-            void SetURL(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetURL(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetURL();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetURL();
 
             
-            void SetDomain(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetDomain(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetDomain();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetDomain();
 
             
-            void SetCookie(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetCookie(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetCookie();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetCookie();
 
             
-            void SetExpando(
-                [In, MarshalAs(UnmanagedType.Bool)]
-                bool p);
+			void SetExpando(
+				[In, MarshalAs(UnmanagedType.Bool)]
+				bool p);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool GetExpando();
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool GetExpando();
 
             
-            void SetCharset(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetCharset(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetCharset();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetCharset();
 
             
-            void SetDefaultCharset(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetDefaultCharset(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetDefaultCharset();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetDefaultCharset();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetMimeType();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetMimeType();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetFileSize();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetFileSize();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetFileCreatedDate();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetFileCreatedDate();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetFileModifiedDate();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetFileModifiedDate();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetFileUpdatedDate();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetFileUpdatedDate();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetSecurity();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetSecurity();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetProtocol();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetProtocol();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetNameProp();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetNameProp();
 
             
-            void DummyWrite(
-                [In, MarshalAs(UnmanagedType.I4)]
-                int psarray);
+			void DummyWrite(
+				[In, MarshalAs(UnmanagedType.I4)]
+				int psarray);
 
             
-            void DummyWriteln(
-                [In, MarshalAs(UnmanagedType.I4)]
-                int psarray);
+			void DummyWriteln(
+				[In, MarshalAs(UnmanagedType.I4)]
+				int psarray);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object Open(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string URL,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object name,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object features,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object replace);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object Open(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string URL,
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object name,
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object features,
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object replace);
 
             
-            void Close();
+			void Close();
 
             
-            void Clear();
+			void Clear();
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool QueryCommandSupported(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string cmdID);
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool QueryCommandSupported(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string cmdID);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool QueryCommandEnabled(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string cmdID);
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool QueryCommandEnabled(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string cmdID);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool QueryCommandState(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string cmdID);
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool QueryCommandState(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string cmdID);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool QueryCommandIndeterm(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string cmdID);
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool QueryCommandIndeterm(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string cmdID);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string QueryCommandText(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string cmdID);
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string QueryCommandText(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string cmdID);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object QueryCommandValue(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string cmdID);
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object QueryCommandValue(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string cmdID);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool ExecCommand(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string cmdID,
-                [In, MarshalAs(UnmanagedType.Bool)]
-                bool showUI,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object value);
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool ExecCommand(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string cmdID,
+				[In, MarshalAs(UnmanagedType.Bool)]
+				bool showUI,
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object value);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool ExecCommandShowHelp(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string cmdID);
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool ExecCommandShowHelp(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string cmdID);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElement CreateElement(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string eTag);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElement CreateElement(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string eTag);
 
             
-            void SetOnhelp(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnhelp(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnhelp();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnhelp();
 
             
-            void SetOnclick(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnclick(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnclick();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnclick();
 
             
-            void SetOndblclick(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOndblclick(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOndblclick();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOndblclick();
 
             
-            void SetOnkeyup(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnkeyup(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnkeyup();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnkeyup();
 
             
-            void SetOnkeydown(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnkeydown(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnkeydown();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnkeydown();
 
             
-            void SetOnkeypress(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnkeypress(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnkeypress();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnkeypress();
 
             
-            void SetOnmouseup(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnmouseup(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnmouseup();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnmouseup();
 
             
-            void SetOnmousedown(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnmousedown(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnmousedown();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnmousedown();
 
             
-            void SetOnmousemove(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnmousemove(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnmousemove();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnmousemove();
 
             
-            void SetOnmouseout(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnmouseout(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnmouseout();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnmouseout();
 
             
-            void SetOnmouseover(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnmouseover(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnmouseover();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnmouseover();
 
             
-            void SetOnreadystatechange(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnreadystatechange(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnreadystatechange();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnreadystatechange();
 
             
-            void SetOnafterupdate(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnafterupdate(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnafterupdate();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnafterupdate();
 
             
-            void SetOnrowexit(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnrowexit(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnrowexit();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnrowexit();
 
             
-            void SetOnrowenter(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnrowenter(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnrowenter();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnrowenter();
 
             
-            void SetOndragstart(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOndragstart(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOndragstart();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOndragstart();
 
             
-            void SetOnselectstart(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnselectstart(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnselectstart();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnselectstart();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElement ElementFromPoint(
-                [In, MarshalAs(UnmanagedType.I4)]
-                int x,
-                [In, MarshalAs(UnmanagedType.I4)]
-                int y);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElement ElementFromPoint(
+				[In, MarshalAs(UnmanagedType.I4)]
+				int x,
+				[In, MarshalAs(UnmanagedType.I4)]
+				int y);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-                /*IHTMLWindow2*/ object GetParentWindow();
+			[return: MarshalAs(UnmanagedType.Interface)]
+				/*IHTMLWindow2*/ object GetParentWindow();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetStyleSheets();
-            // 
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetStyleSheets();
+			// 
 
             
-            void SetOnbeforeupdate(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnbeforeupdate(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnbeforeupdate();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnbeforeupdate();
 
             
-            void SetOnerrorupdate(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnerrorupdate(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnerrorupdate();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnerrorupdate();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string toString();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string toString();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLStyleSheet CreateStyleSheet(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string bstrHref,
-                [In, MarshalAs(UnmanagedType.I4)]
-                int lIndex);
-        }
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLStyleSheet CreateStyleSheet(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string bstrHref,
+				[In, MarshalAs(UnmanagedType.I4)]
+				int lIndex);
+		}
 
-        [System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F485-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-        internal interface IHTMLDocument3 
-        {
-            void ReleaseCapture();
+		[System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F485-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+		internal interface IHTMLDocument3 
+		{
+			void ReleaseCapture();
 
             
-            void Recalc(
-                [In, MarshalAs(UnmanagedType.Bool)]
-                bool fForce);
+			void Recalc(
+				[In, MarshalAs(UnmanagedType.Bool)]
+				bool fForce);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode CreateTextNode(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string text);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode CreateTextNode(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string text);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElement GetDocumentElement();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElement GetDocumentElement();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetUniqueID();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetUniqueID();
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool AttachEvent(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string ev,
-                [In, MarshalAs(UnmanagedType.Interface)]
-                object pdisp);
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool AttachEvent(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string ev,
+				[In, MarshalAs(UnmanagedType.Interface)]
+				object pdisp);
 
             
-            void DetachEvent(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string ev,
-                [In, MarshalAs(UnmanagedType.Interface)]
-                object pdisp);
+			void DetachEvent(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string ev,
+				[In, MarshalAs(UnmanagedType.Interface)]
+				object pdisp);
 
             
-            void SetOnrowsdelete(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnrowsdelete(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnrowsdelete();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnrowsdelete();
 
             
-            void SetOnrowsinserted(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnrowsinserted(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnrowsinserted();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnrowsinserted();
 
             
-            void SetOncellchange(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOncellchange(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOncellchange();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOncellchange();
 
             
-            void SetOndatasetchanged(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOndatasetchanged(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOndatasetchanged();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOndatasetchanged();
 
             
-            void SetOndataavailable(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOndataavailable(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOndataavailable();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOndataavailable();
 
             
-            void SetOndatasetcomplete(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOndatasetcomplete(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOndatasetcomplete();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOndatasetcomplete();
 
             
-            void SetOnpropertychange(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnpropertychange(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnpropertychange();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnpropertychange();
 
             
-            void SetDir(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetDir(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetDir();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetDir();
 
             
-            void SetOncontextmenu(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOncontextmenu(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOncontextmenu();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOncontextmenu();
 
             
-            void SetOnstop(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnstop(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnstop();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnstop();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDocument2 CreateDocumentFragment();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDocument2 CreateDocumentFragment();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDocument2 GetParentDocument();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDocument2 GetParentDocument();
 
             
-            void SetEnableDownload(
-                [In, MarshalAs(UnmanagedType.Bool)]
-                bool p);
+			void SetEnableDownload(
+				[In, MarshalAs(UnmanagedType.Bool)]
+				bool p);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool GetEnableDownload();
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool GetEnableDownload();
 
             
-            void SetBaseUrl(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string p);
+			void SetBaseUrl(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetBaseUrl();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetBaseUrl();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetChildNodes();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetChildNodes();
 
             
-            void SetInheritStyleSheets(
-                [In, MarshalAs(UnmanagedType.Bool)]
-                bool p);
+			void SetInheritStyleSheets(
+				[In, MarshalAs(UnmanagedType.Bool)]
+				bool p);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool GetInheritStyleSheets();
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool GetInheritStyleSheets();
 
             
-            void SetOnbeforeeditfocus(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetOnbeforeeditfocus(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetOnbeforeeditfocus();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetOnbeforeeditfocus();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetElementsByName(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string v);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetElementsByName(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string v);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElement GetElementById(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string v);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElement GetElementById(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string v);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElementCollection GetElementsByTagName(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string v);
-        }
-        [System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F2E3-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-        internal interface IHTMLStyleSheet 
-        {
-            void SetTitle(
-                [In, MarshalAs(UnmanagedType.BStr)] 
-                string p);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElementCollection GetElementsByTagName(
+				[In, MarshalAs(UnmanagedType.BStr)]
+				string v);
+		}
+		[System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F2E3-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+		internal interface IHTMLStyleSheet 
+		{
+			void SetTitle(
+				[In, MarshalAs(UnmanagedType.BStr)] 
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetTitle();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetTitle();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLStyleSheet GetParentStyleSheet();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLStyleSheet GetParentStyleSheet();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLElement GetOwningElement();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLElement GetOwningElement();
 
             
-            void SetDisabled(
-                [In, MarshalAs(UnmanagedType.Bool)] 
-                bool p);
+			void SetDisabled(
+				[In, MarshalAs(UnmanagedType.Bool)] 
+				bool p);
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool GetDisabled();
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool GetDisabled();
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool GetReadOnly();
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool GetReadOnly();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetImports();
-            // 
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetImports();
+			// 
 
             
-            void SetHref(
-                [In, MarshalAs(UnmanagedType.BStr)] 
-                string p);
+			void SetHref(
+				[In, MarshalAs(UnmanagedType.BStr)] 
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetHref();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetHref();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetStyleSheetType();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetStyleSheetType();
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetId();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetId();
 
-            [return: MarshalAs(UnmanagedType.I4)]
-            int AddImport(
-                [In, MarshalAs(UnmanagedType.BStr)] 
-                string bstrURL,
-                [In, MarshalAs(UnmanagedType.I4)] 
-                int lIndex);
+			[return: MarshalAs(UnmanagedType.I4)]
+			int AddImport(
+				[In, MarshalAs(UnmanagedType.BStr)] 
+				string bstrURL,
+				[In, MarshalAs(UnmanagedType.I4)] 
+				int lIndex);
 
-            [return: MarshalAs(UnmanagedType.I4)]
-            int AddRule(
-                [In, MarshalAs(UnmanagedType.BStr)] 
-                string bstrSelector,
-                [In, MarshalAs(UnmanagedType.BStr)] 
-                string bstrStyle,
-                [In, MarshalAs(UnmanagedType.I4)] 
-                int lIndex);
+			[return: MarshalAs(UnmanagedType.I4)]
+			int AddRule(
+				[In, MarshalAs(UnmanagedType.BStr)] 
+				string bstrSelector,
+				[In, MarshalAs(UnmanagedType.BStr)] 
+				string bstrStyle,
+				[In, MarshalAs(UnmanagedType.I4)] 
+				int lIndex);
 
             
-            void RemoveImport(
-                [In, MarshalAs(UnmanagedType.I4)] 
-                int lIndex);
+			void RemoveImport(
+				[In, MarshalAs(UnmanagedType.I4)] 
+				int lIndex);
 
             
-            void RemoveRule(
-                [In, MarshalAs(UnmanagedType.I4)] 
-                int lIndex);
+			void RemoveRule(
+				[In, MarshalAs(UnmanagedType.I4)] 
+				int lIndex);
 
             
-            void SetMedia(
-                [In, MarshalAs(UnmanagedType.BStr)] 
-                string p);
+			void SetMedia(
+				[In, MarshalAs(UnmanagedType.BStr)] 
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetMedia();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetMedia();
 
             
-            void SetCssText(
-                [In, MarshalAs(UnmanagedType.BStr)] 
-                string p);
+			void SetCssText(
+				[In, MarshalAs(UnmanagedType.BStr)] 
+				string p);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetCssText();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetCssText();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetRules();
-            // 
-        }
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetRules();
+			// 
+		}
 
         [System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F25E-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
         internal interface IHTMLStyle {
@@ -2139,121 +2139,121 @@ namespace System.Web.UI.Design.MobileControls
 
         }
 
-        [System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F21F-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-        internal interface IHTMLElementCollection 
-        {
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string toString();
+		[System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F21F-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+		internal interface IHTMLElementCollection 
+		{
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string toString();
 
             
-            void SetLength(
-                [In, MarshalAs(UnmanagedType.I4)] 
-                int p);
+			void SetLength(
+				[In, MarshalAs(UnmanagedType.I4)] 
+				int p);
 
-            [return: MarshalAs(UnmanagedType.I4)]
-            int GetLength();
+			[return: MarshalAs(UnmanagedType.I4)]
+			int GetLength();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object Get_newEnum();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object Get_newEnum();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object Item(
-                [In, MarshalAs(UnmanagedType.Struct)] 
-                Object name,
-                [In, MarshalAs(UnmanagedType.Struct)] 
-                Object index);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object Item(
+				[In, MarshalAs(UnmanagedType.Struct)] 
+				Object name,
+				[In, MarshalAs(UnmanagedType.Struct)] 
+				Object index);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object Tags(
-                [In, MarshalAs(UnmanagedType.Struct)] 
-                Object tagName);
-        }
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object Tags(
+				[In, MarshalAs(UnmanagedType.Struct)] 
+				Object tagName);
+		}
 
-        [System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F5DA-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-        internal interface IHTMLDOMNode 
-        {
-            [return: MarshalAs(UnmanagedType.I4)]
-            int GetNodeType();
+		[System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("3050F5DA-98B5-11CF-BB82-00AA00BDCE0B"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+		internal interface IHTMLDOMNode 
+		{
+			[return: MarshalAs(UnmanagedType.I4)]
+			int GetNodeType();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode GetParentNode();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode GetParentNode();
 
-            [return: MarshalAs(UnmanagedType.Bool)]
-            bool HasChildNodes();
+			[return: MarshalAs(UnmanagedType.Bool)]
+			bool HasChildNodes();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetChildNodes();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetChildNodes();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            object GetAttributes();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			object GetAttributes();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode InsertBefore(
-                [In, MarshalAs(UnmanagedType.Interface)]
-                IHTMLDOMNode newChild,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object refChild);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode InsertBefore(
+				[In, MarshalAs(UnmanagedType.Interface)]
+				IHTMLDOMNode newChild,
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object refChild);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode RemoveChild(
-                [In, MarshalAs(UnmanagedType.Interface)]
-                IHTMLDOMNode oldChild);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode RemoveChild(
+				[In, MarshalAs(UnmanagedType.Interface)]
+				IHTMLDOMNode oldChild);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode ReplaceChild(
-                [In, MarshalAs(UnmanagedType.Interface)]
-                IHTMLDOMNode newChild,
-                [In, MarshalAs(UnmanagedType.Interface)]
-                IHTMLDOMNode oldChild);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode ReplaceChild(
+				[In, MarshalAs(UnmanagedType.Interface)]
+				IHTMLDOMNode newChild,
+				[In, MarshalAs(UnmanagedType.Interface)]
+				IHTMLDOMNode oldChild);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode CloneNode(
-                [In, MarshalAs(UnmanagedType.Bool)]
-                bool fDeep);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode CloneNode(
+				[In, MarshalAs(UnmanagedType.Bool)]
+				bool fDeep);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode RemoveNode(
-                [In, MarshalAs(UnmanagedType.Bool)]
-                bool fDeep);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode RemoveNode(
+				[In, MarshalAs(UnmanagedType.Bool)]
+				bool fDeep);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode SwapNode(
-                [In, MarshalAs(UnmanagedType.Interface)]
-                IHTMLDOMNode otherNode);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode SwapNode(
+				[In, MarshalAs(UnmanagedType.Interface)]
+				IHTMLDOMNode otherNode);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode ReplaceNode(
-                [In, MarshalAs(UnmanagedType.Interface)]
-                IHTMLDOMNode replacement);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode ReplaceNode(
+				[In, MarshalAs(UnmanagedType.Interface)]
+				IHTMLDOMNode replacement);
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode AppendChild(
-                [In, MarshalAs(UnmanagedType.Interface)]
-                IHTMLDOMNode newChild);
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode AppendChild(
+				[In, MarshalAs(UnmanagedType.Interface)]
+				IHTMLDOMNode newChild);
 
-            [return: MarshalAs(UnmanagedType.BStr)]
-            string GetNodeName();
+			[return: MarshalAs(UnmanagedType.BStr)]
+			string GetNodeName();
 
             
-            void SetNodeValue(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                Object p);
+			void SetNodeValue(
+				[In, MarshalAs(UnmanagedType.Struct)]
+				Object p);
 
-            [return: MarshalAs(UnmanagedType.Struct)]
-            Object GetNodeValue();
+			[return: MarshalAs(UnmanagedType.Struct)]
+			Object GetNodeValue();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode GetFirstChild();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode GetFirstChild();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode GetLastChild();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode GetLastChild();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode GetPreviousSibling();
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode GetPreviousSibling();
 
-            [return: MarshalAs(UnmanagedType.Interface)]
-            IHTMLDOMNode GetNextSibling();
-        }
+			[return: MarshalAs(UnmanagedType.Interface)]
+			IHTMLDOMNode GetNextSibling();
+		}
 
         [System.Runtime.InteropServices.ComVisible(true), System.Runtime.InteropServices.ComImport(), Guid("0000011B-0000-0000-C000-000000000046"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown)]
         internal interface IOleContainer 

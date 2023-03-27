@@ -1,9 +1,9 @@
 //
 // X509CertificateCollectionCas.cs - CAS unit tests for 
-//    System.Security.Cryptography.X509Certificates.X509CertificateCollection
+//	System.Security.Cryptography.X509Certificates.X509CertificateCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,44 +40,44 @@ using MonoTests.System.Security.Cryptography.X509Certificates;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class X509CertificateCollectionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class X509CertificateCollectionCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests_Deny_Unrestricted ()
-        {
-            X509CertificateCollectionTest unit = new X509CertificateCollectionTest ();
-            unit.CreateCertificates ();
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTests_Deny_Unrestricted ()
+		{
+			X509CertificateCollectionTest unit = new X509CertificateCollectionTest ();
+			unit.CreateCertificates ();
 
-            unit.Constructor ();
-            unit.Constructor_CertificateArray ();
-            unit.Constructor_CertificateCollection ();
-            unit.Add ();
-            unit.AddRange_Array ();
-            unit.AddRange_Collection ();
-            unit.Contains ();
-            unit.CopyTo ();
-            unit.IndexOf ();
-            unit.Insert ();
-            unit.Remove ();
-        }
+			unit.Constructor ();
+			unit.Constructor_CertificateArray ();
+			unit.Constructor_CertificateCollection ();
+			unit.Add ();
+			unit.AddRange_Array ();
+			unit.AddRange_Collection ();
+			unit.Contains ();
+			unit.CopyTo ();
+			unit.IndexOf ();
+			unit.Insert ();
+			unit.Remove ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (X509CertificateCollection).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (X509CertificateCollection).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

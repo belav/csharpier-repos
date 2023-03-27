@@ -3,8 +3,8 @@
 
 public class X
 {
-    public static void Main ()
-    {
-        v * 3;
-    }
+	public static void Main ()
+	{
+		v * 3;
+	}
 }

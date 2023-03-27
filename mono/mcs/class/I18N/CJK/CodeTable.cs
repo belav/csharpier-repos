@@ -42,100 +42,100 @@ using I18N.Common;
 
 internal unsafe sealed class CodeTable : IDisposable
 {
-    // Internal state.
-    private Stream stream;
+	// Internal state.
+	private Stream stream;
 
-    // Load a code table from the resource section of this assembly.
-    public CodeTable(String name)
-            {
-                stream = (Assembly.GetExecutingAssembly()
-                             .GetManifestResourceStream(name));
-                if(stream == null)
-                {
-                    throw new NotSupportedException
-                        (String.Format
-                            (Strings.GetString("NotSupp_MissingCodeTable"),
-                             name));
-                }
-            }
+	// Load a code table from the resource section of this assembly.
+	public CodeTable(String name)
+			{
+				stream = (Assembly.GetExecutingAssembly()
+							 .GetManifestResourceStream(name));
+				if(stream == null)
+				{
+					throw new NotSupportedException
+						(String.Format
+							(Strings.GetString("NotSupp_MissingCodeTable"),
+							 name));
+				}
+			}
 
-    // Implement the IDisposable interface.
-    public void Dispose()
-            {
-                if(stream != null)
-                {
-                    stream.Close();
-                    stream = null;
-                }
-            }
+	// Implement the IDisposable interface.
+	public void Dispose()
+			{
+				if(stream != null)
+				{
+					stream.Close();
+					stream = null;
+				}
+			}
 
-    // Get the starting address for a particular section within
-    // the code table.  This address is guaranteed to persist
-    // after "Dispose" is called.
+	// Get the starting address for a particular section within
+	// the code table.  This address is guaranteed to persist
+	// after "Dispose" is called.
 #if __PNET__
-    public byte *GetSection(int num)
+	public byte *GetSection(int num)
 #else
-    public byte[] GetSection(int num)
+	public byte[] GetSection(int num)
 #endif
-            {
-                // If the table has been disposed, then bail out.
-                if(stream == null)
-                {
-                    return null;
-                }
+			{
+				// If the table has been disposed, then bail out.
+				if(stream == null)
+				{
+					return null;
+				}
 
-                // Scan through the stream looking for the section.
-                long posn = 0;
-                long length = stream.Length;
-                byte[] header = new byte [8];
-                int sectNum, sectLen;
-                while((posn + 8) <= length)
-                {
-                    // Read the next header block.
-                    stream.Position = posn;
-                    if(stream.Read(header, 0, 8) != 8)
-                    {
-                        break;
-                    }
+				// Scan through the stream looking for the section.
+				long posn = 0;
+				long length = stream.Length;
+				byte[] header = new byte [8];
+				int sectNum, sectLen;
+				while((posn + 8) <= length)
+				{
+					// Read the next header block.
+					stream.Position = posn;
+					if(stream.Read(header, 0, 8) != 8)
+					{
+						break;
+					}
 
-                    // Decode the fields in the header block.
-                    sectNum = ((int)(header[0])) |
-                              (((int)(header[1])) << 8) |
-                              (((int)(header[2])) << 16) |
-                              (((int)(header[3])) << 24);
-                    sectLen = ((int)(header[4])) |
-                              (((int)(header[5])) << 8) |
-                              (((int)(header[6])) << 16) |
-                              (((int)(header[7])) << 24);
+					// Decode the fields in the header block.
+					sectNum = ((int)(header[0])) |
+							  (((int)(header[1])) << 8) |
+							  (((int)(header[2])) << 16) |
+							  (((int)(header[3])) << 24);
+					sectLen = ((int)(header[4])) |
+							  (((int)(header[5])) << 8) |
+							  (((int)(header[6])) << 16) |
+							  (((int)(header[7])) << 24);
 
-                    // Is this the section we are looking for?
-                    if(sectNum == num)
-                    {
+					// Is this the section we are looking for?
+					if(sectNum == num)
+					{
 #if __PNET__
-                        return GetAddress(stream, posn + 8);
+						return GetAddress(stream, posn + 8);
 #else
-                        byte[] buf = new byte [sectLen];
-                        if(stream.Read(buf, 0, sectLen) != sectLen)
-                        {
-                            break;
-                        }
-                        return buf;
+						byte[] buf = new byte [sectLen];
+						if(stream.Read(buf, 0, sectLen) != sectLen)
+						{
+							break;
+						}
+						return buf;
 #endif
-                    }
+					}
 
-                    // Advance to the next section.
-                    posn += 8 + sectLen;
-                }
+					// Advance to the next section.
+					posn += 8 + sectLen;
+				}
 
-                // We were unable to find the requested section.
-                return null;
-            }
+				// We were unable to find the requested section.
+				return null;
+			}
 
 #if __PNET__
-    // Back door access into the engine to get the address of
-    // an offset within a manifest resource stream.
-    [MethodImpl(MethodImplOptions.InternalCall)]
-    extern private static byte *GetAddress(Stream stream, long position);
+	// Back door access into the engine to get the address of
+	// an offset within a manifest resource stream.
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	extern private static byte *GetAddress(Stream stream, long position);
 #endif
 
 }; // class CodeTable

@@ -10,7 +10,7 @@ internal partial class VectorTest
     private const int Fail = -1;
 
     class Program
-    {        
+    {		
         const float EPS = Single.Epsilon * 5;
 
         static bool CheckEQ(float a, float b)

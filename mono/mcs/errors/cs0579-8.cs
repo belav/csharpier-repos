@@ -8,7 +8,7 @@ public class ReturnAttribute : Attribute
 {
         public ReturnAttribute ()
         {
-    }
+	}
 }
 
 class MainClass {

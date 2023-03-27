@@ -32,20 +32,20 @@ using System.IO;
 using System.Net;
 
 namespace System.Web.Services.Protocols {
-    public abstract class MimeReturnReader : MimeFormatter {
+	public abstract class MimeReturnReader : MimeFormatter {
 
-        #region Constructors
+		#region Constructors
 
-        protected MimeReturnReader () 
-        {
-        }
-        
-        #endregion // Constructors
+		protected MimeReturnReader () 
+		{
+		}
+		
+		#endregion // Constructors
 
-        #region Methods
+		#region Methods
 
-        public abstract object Read (WebResponse response, Stream responseStream);
+		public abstract object Read (WebResponse response, Stream responseStream);
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

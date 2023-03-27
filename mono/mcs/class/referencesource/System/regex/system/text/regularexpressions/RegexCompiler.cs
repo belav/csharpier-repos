@@ -14,7 +14,7 @@
 namespace System.Text.RegularExpressions {
 
     using System.Collections;
-    using System.Collections.Generic;
+	using System.Collections.Generic;
     using System.Threading;
     using System.Reflection;
     using System.Reflection.Emit;
@@ -1907,7 +1907,7 @@ namespace System.Text.RegularExpressions {
                         // else
                             MarkLabel(l1);
                             ReadyPushStack();                   // push the current textPos on the stack. 
-                                    // May be ignored by 'back2' or used by a true empty match.
+							        // May be ignored by 'back2' or used by a true empty match.
                             Ldloc(mark);                        
 
                             DoPush();
@@ -3069,7 +3069,7 @@ namespace System.Text.RegularExpressions {
                     new CustomAttributeBuilder(securityRulesCtor, new object[] { SecurityRuleSet.Level2 });
                 assemblyAttributes.Add(securityRulesAttribute);
 #endif
-    
+	
                 _assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(an, AssemblyBuilderAccess.RunAndSave, assemblyAttributes);
                 _module = _assembly.DefineDynamicModule(an.Name + ".dll");
 

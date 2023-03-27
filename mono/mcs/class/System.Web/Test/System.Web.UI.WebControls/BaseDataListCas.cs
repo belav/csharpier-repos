@@ -1,9 +1,9 @@
 //
 // BaseDataListCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.BaseDataList
+//	- CAS unit tests for System.Web.UI.WebControls.BaseDataList
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,52 +38,52 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class BaseDataListCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class BaseDataListCas {
 
-        // note: we do not inherit from AspNetHostingMinimal because
-        // BaseDataList is an abstract class
+		// note: we do not inherit from AspNetHostingMinimal because
+		// BaseDataList is an abstract class
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            BaseDataListTest unit = new BaseDataListTest ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.CleanProperties ();
-            unit.TableCaption ();
-            unit.DataSource_IEnumerable ();
-            unit.DataSource_IListSource ();
-            unit.AddParsedSubObject ();
-            unit.Render_Empty ();
-            unit.Render ();
-            unit.Events ();
-            unit.OnDataBinding ();
-            unit.DataSourceID ();
-            unit.EnsureDataBound_WithoutDataSourceID ();
-            unit.EnsureDataBound_WithDataSourceID ();
-            unit.GetData ();
-            unit.GetData_WithoutDataSourceID ();
-            unit.OnDataBinding_True ();
-            unit.OnDataBinding_False ();
-            unit.OnDataPropertyChanged ();
-            unit.OnInit ();
-            unit.OnDataSourceViewChanged ();
-            unit.OnLoad_WithoutPage ();
-            unit.OnLoad_WithoutPageWithoutViewState ();
-            unit.OnLoad_WithPage ();
-            unit.OnLoad_WithPageWithoutViewState ();
-            unit.OnLoad_WithDataSource ();
-            unit.IsBindableType ();
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			BaseDataListTest unit = new BaseDataListTest ();
+			unit.DefaultProperties ();
+			unit.NullProperties ();
+			unit.CleanProperties ();
+			unit.TableCaption ();
+			unit.DataSource_IEnumerable ();
+			unit.DataSource_IListSource ();
+			unit.AddParsedSubObject ();
+			unit.Render_Empty ();
+			unit.Render ();
+			unit.Events ();
+			unit.OnDataBinding ();
+			unit.DataSourceID ();
+			unit.EnsureDataBound_WithoutDataSourceID ();
+			unit.EnsureDataBound_WithDataSourceID ();
+			unit.GetData ();
+			unit.GetData_WithoutDataSourceID ();
+			unit.OnDataBinding_True ();
+			unit.OnDataBinding_False ();
+			unit.OnDataPropertyChanged ();
+			unit.OnInit ();
+			unit.OnDataSourceViewChanged ();
+			unit.OnLoad_WithoutPage ();
+			unit.OnLoad_WithoutPageWithoutViewState ();
+			unit.OnLoad_WithPage ();
+			unit.OnLoad_WithPageWithoutViewState ();
+			unit.OnLoad_WithDataSource ();
+			unit.IsBindableType ();
+		}
+	}
 }

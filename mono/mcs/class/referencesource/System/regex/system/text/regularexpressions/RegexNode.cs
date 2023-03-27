@@ -646,7 +646,7 @@ namespace System.Text.RegularExpressions {
                 case Loop:
                 case Lazyloop:
                     ArgSb.Append("(Min = " + _m.ToString(CultureInfo.InvariantCulture) + ", Max = " + (_n == Int32.MaxValue ? "inf" : Convert.ToString(_n, CultureInfo.InvariantCulture)) + ")");
-            break;
+		    break;
             }
 
             return ArgSb.ToString();

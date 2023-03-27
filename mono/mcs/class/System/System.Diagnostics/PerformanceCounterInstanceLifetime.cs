@@ -27,10 +27,10 @@
 //
 namespace System.Diagnostics 
 {
-    public enum PerformanceCounterInstanceLifetime
-    {
-        Global,
-        Process,
-    }
+	public enum PerformanceCounterInstanceLifetime
+	{
+		Global,
+		Process,
+	}
 }
 

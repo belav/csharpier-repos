@@ -3,8 +3,8 @@
 
 class Program
 {
-    static void Main()
-    {
-        var s = $"{1, 0.0}";
-    }
+	static void Main()
+	{
+		var s = $"{1, 0.0}";
+	}
 }

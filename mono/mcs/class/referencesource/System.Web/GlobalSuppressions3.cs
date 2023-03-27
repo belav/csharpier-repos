@@ -1,4 +1,4 @@
-// These suppressions were added when FxCop was re-enabled during Dev11
+﻿// These suppressions were added when FxCop was re-enabled during Dev11
 
 using System.Diagnostics.CodeAnalysis;
 

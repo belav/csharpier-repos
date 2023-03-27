@@ -1,9 +1,9 @@
 //
 // CodeGeneratorOptionsTest.cs 
-//    - Unit tests for System.CodeDom.Compiler.CodeGeneratorOptions
+//	- Unit tests for System.CodeDom.Compiler.CodeGeneratorOptions
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,69 +34,69 @@ using System.CodeDom.Compiler;
 
 namespace MonoTests.System.CodeDom.Compiler {
 
-    [TestFixture]
-    public class CodeGeneratorOptionsTest {
+	[TestFixture]
+	public class CodeGeneratorOptionsTest {
 
-        [Test]
-        public void Defaults ()
-        {
-            CodeGeneratorOptions cgo = new CodeGeneratorOptions ();
-            Assert.IsTrue (cgo.BlankLinesBetweenMembers, "BlankLinesBetweenMembers");
-            Assert.AreEqual ("Block", cgo.BracingStyle, "BracingStyle");
-            Assert.IsFalse (cgo.ElseOnClosing, "ElseOnClosing");
-            Assert.AreEqual ("    ", cgo.IndentString, "IndentString");
-            Assert.IsFalse (cgo.VerbatimOrder, "VerbatimOrder");
-            Assert.IsNull (cgo["BlankLinesBetweenMembers"], "this[BlankLinesBetweenMembers]");
-            Assert.IsNull (cgo["BracingStyle"], "this[BracingStyle]");
-            Assert.IsNull (cgo["ElseOnClosing"], "this[ElseOnClosing]");
-            Assert.IsNull (cgo["IndentString"], "this[IndentString]");
-            Assert.IsNull (cgo["VerbatimOrder"], "this[VerbatimOrder]");
-        }
+		[Test]
+		public void Defaults ()
+		{
+			CodeGeneratorOptions cgo = new CodeGeneratorOptions ();
+			Assert.IsTrue (cgo.BlankLinesBetweenMembers, "BlankLinesBetweenMembers");
+			Assert.AreEqual ("Block", cgo.BracingStyle, "BracingStyle");
+			Assert.IsFalse (cgo.ElseOnClosing, "ElseOnClosing");
+			Assert.AreEqual ("    ", cgo.IndentString, "IndentString");
+			Assert.IsFalse (cgo.VerbatimOrder, "VerbatimOrder");
+			Assert.IsNull (cgo["BlankLinesBetweenMembers"], "this[BlankLinesBetweenMembers]");
+			Assert.IsNull (cgo["BracingStyle"], "this[BracingStyle]");
+			Assert.IsNull (cgo["ElseOnClosing"], "this[ElseOnClosing]");
+			Assert.IsNull (cgo["IndentString"], "this[IndentString]");
+			Assert.IsNull (cgo["VerbatimOrder"], "this[VerbatimOrder]");
+		}
 
-        [Test]
-        public void ReSetDefault ()
-        {
-            CodeGeneratorOptions cgo = new CodeGeneratorOptions ();
+		[Test]
+		public void ReSetDefault ()
+		{
+			CodeGeneratorOptions cgo = new CodeGeneratorOptions ();
 
-            cgo.BlankLinesBetweenMembers = cgo.BlankLinesBetweenMembers;
-            Assert.IsNotNull (cgo["BlankLinesBetweenMembers"], "this[BlankLinesBetweenMembers]");
-            cgo.BracingStyle = cgo.BracingStyle;
-            Assert.IsNotNull (cgo["BracingStyle"], "this[BracingStyle]");
-            cgo.ElseOnClosing = cgo.ElseOnClosing;
-            Assert.IsNotNull (cgo["ElseOnClosing"], "this[ElseOnClosing]");
-            cgo.IndentString = cgo.IndentString;
-            Assert.IsNotNull (cgo["IndentString"], "this[IndentString]");
-            cgo.VerbatimOrder = cgo.VerbatimOrder;
-            Assert.IsNotNull (cgo["VerbatimOrder"], "this[VerbatimOrder]");
-        }
+			cgo.BlankLinesBetweenMembers = cgo.BlankLinesBetweenMembers;
+			Assert.IsNotNull (cgo["BlankLinesBetweenMembers"], "this[BlankLinesBetweenMembers]");
+			cgo.BracingStyle = cgo.BracingStyle;
+			Assert.IsNotNull (cgo["BracingStyle"], "this[BracingStyle]");
+			cgo.ElseOnClosing = cgo.ElseOnClosing;
+			Assert.IsNotNull (cgo["ElseOnClosing"], "this[ElseOnClosing]");
+			cgo.IndentString = cgo.IndentString;
+			Assert.IsNotNull (cgo["IndentString"], "this[IndentString]");
+			cgo.VerbatimOrder = cgo.VerbatimOrder;
+			Assert.IsNotNull (cgo["VerbatimOrder"], "this[VerbatimOrder]");
+		}
 
-        [Test]
-        public void Nullify ()
-        {
-            CodeGeneratorOptions cgo = new CodeGeneratorOptions ();
-            cgo.BlankLinesBetweenMembers = false;
-            Assert.IsFalse (cgo.BlankLinesBetweenMembers, "BlankLinesBetweenMembers-1");
-            cgo["BlankLinesBetweenMembers"] = null;
-            Assert.IsTrue (cgo.BlankLinesBetweenMembers, "BlankLinesBetweenMembers-2");
+		[Test]
+		public void Nullify ()
+		{
+			CodeGeneratorOptions cgo = new CodeGeneratorOptions ();
+			cgo.BlankLinesBetweenMembers = false;
+			Assert.IsFalse (cgo.BlankLinesBetweenMembers, "BlankLinesBetweenMembers-1");
+			cgo["BlankLinesBetweenMembers"] = null;
+			Assert.IsTrue (cgo.BlankLinesBetweenMembers, "BlankLinesBetweenMembers-2");
 
-            cgo.BracingStyle = "C";
-            Assert.AreEqual ("C", cgo.BracingStyle, "BracingStyle-1");
-            cgo["BracingStyle"] = null;
-            Assert.AreEqual ("Block", cgo.BracingStyle, "BracingStyle-2");
+			cgo.BracingStyle = "C";
+			Assert.AreEqual ("C", cgo.BracingStyle, "BracingStyle-1");
+			cgo["BracingStyle"] = null;
+			Assert.AreEqual ("Block", cgo.BracingStyle, "BracingStyle-2");
 
-            cgo.ElseOnClosing = true;
-            Assert.IsTrue (cgo.ElseOnClosing, "ElseOnClosing-1");
-            cgo["ElseOnClosing"] = null;
-            Assert.IsFalse (cgo.ElseOnClosing, "ElseOnClosing-2");
+			cgo.ElseOnClosing = true;
+			Assert.IsTrue (cgo.ElseOnClosing, "ElseOnClosing-1");
+			cgo["ElseOnClosing"] = null;
+			Assert.IsFalse (cgo.ElseOnClosing, "ElseOnClosing-2");
 
-            cgo.IndentString = "\t";
-            Assert.AreEqual ("\t", cgo.IndentString, "IndentString-1");
-            cgo["IndentString"] = null;
-            Assert.AreEqual ("    ", cgo.IndentString, "IndentString-2");
-            cgo.VerbatimOrder = true;
-            Assert.IsTrue (cgo.VerbatimOrder, "VerbatimOrder-1");
-            cgo["VerbatimOrder"] = null;
-            Assert.IsFalse (cgo.VerbatimOrder, "VerbatimOrder-2");
-        }
-    }
+			cgo.IndentString = "\t";
+			Assert.AreEqual ("\t", cgo.IndentString, "IndentString-1");
+			cgo["IndentString"] = null;
+			Assert.AreEqual ("    ", cgo.IndentString, "IndentString-2");
+			cgo.VerbatimOrder = true;
+			Assert.IsTrue (cgo.VerbatimOrder, "VerbatimOrder-1");
+			cgo["VerbatimOrder"] = null;
+			Assert.IsFalse (cgo.VerbatimOrder, "VerbatimOrder-2");
+		}
+	}
 }

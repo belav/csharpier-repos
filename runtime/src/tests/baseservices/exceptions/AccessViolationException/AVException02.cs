@@ -8,11 +8,11 @@ public class test
 #pragma warning restore 414
     private static test _obj = null;
 
-    public static int Main()
-    {
+	public static int Main()
+	{
         int ret = 0;
         try
-        {
+		{
             try
             {
 
@@ -24,9 +24,9 @@ public class test
                 ret = 100;
             }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Invalid write (assigning null) = {0} (should be NullRef)",ex.GetType());
+		catch (Exception ex)
+		{
+			Console.WriteLine("Invalid write (assigning null) = {0} (should be NullRef)",ex.GetType());
             ret = 10;
         }
         Console.WriteLine(100 == ret ? "Test Passed" : "Test Failed");

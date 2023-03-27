@@ -554,12 +554,12 @@ namespace System.Reflection.Emit
 #else
 namespace System.Reflection.Emit
 {
-    abstract class TypeBuilderInstantiation : TypeInfo
-    {
-        internal static Type MakeGenericType (Type type, Type[] typeArguments)
-        {
-            throw new NotSupportedException("User types are not supported under full aot");
-        }
-    }
+	abstract class TypeBuilderInstantiation : TypeInfo
+	{
+		internal static Type MakeGenericType (Type type, Type[] typeArguments)
+		{
+			throw new NotSupportedException("User types are not supported under full aot");
+		}
+	}
 }
 #endif

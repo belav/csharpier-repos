@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------
 // <copyright file="SqlException.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -11,8 +11,8 @@ namespace System.Data.SqlClient
 
     /// <summary>
     /// Abstract base class for all column encryption Key Store providers. It exposes two functions
-    ///        1. DecryptColumnEncryptionKey - This is the function used by SqlClient under the covers to decrypt encrypted column encryption key blob.
-    ///        2. EncryptColumnEncryptionKey - This will be used by client tools that generate DDL for customers
+    ///		1. DecryptColumnEncryptionKey - This is the function used by SqlClient under the covers to decrypt encrypted column encryption key blob.
+    ///		2. EncryptColumnEncryptionKey - This will be used by client tools that generate DDL for customers
     /// </summary>
     public abstract class SqlColumnEncryptionKeyStoreProvider
     {

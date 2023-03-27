@@ -24,22 +24,22 @@ using System;
 
 namespace System.Windows.Markup
 {
-    [AttributeUsage (AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = true)]
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-    public sealed class DependsOnAttribute : Attribute
-    {
-        public DependsOnAttribute (string name)
-        {
-            Name = name;
-        }
-        
-        public string Name { get; private set; }
+	[AttributeUsage (AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = true)]
+	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+	public sealed class DependsOnAttribute : Attribute
+	{
+		public DependsOnAttribute (string name)
+		{
+			Name = name;
+		}
+		
+		public string Name { get; private set; }
 
 #if !__MOBILE__
-        // really? I doubt it should be overriden.
-        public override Object TypeId {
-            get { return this; }
-        }
+		// really? I doubt it should be overriden.
+		public override Object TypeId {
+			get { return this; }
+		}
 #endif
-    }
+	}
 }

@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DesignerDataTable
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,24 +34,24 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Data
 {
-    public abstract class DesignerDataTable : DesignerDataTableBase
-    {
-        protected DesignerDataTable (string name)
-            : base (name)
-        {
-        }
+	public abstract class DesignerDataTable : DesignerDataTableBase
+	{
+		protected DesignerDataTable (string name)
+			: base (name)
+		{
+		}
 
-        protected DesignerDataTable (string name, string owner)
-            : base (name, owner)
-        {
-        }
+		protected DesignerDataTable (string name, string owner)
+			: base (name, owner)
+		{
+		}
 
-        protected abstract ICollection CreateRelationships ();
+		protected abstract ICollection CreateRelationships ();
 
-        [MonoTODO]
-        public ICollection Relationships {
-            get { throw new NotImplementedException (); }
-        }
-    }
+		[MonoTODO]
+		public ICollection Relationships {
+			get { throw new NotImplementedException (); }
+		}
+	}
 }
 

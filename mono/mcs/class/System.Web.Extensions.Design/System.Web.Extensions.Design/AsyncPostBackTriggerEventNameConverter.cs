@@ -32,30 +32,30 @@ using System.ComponentModel;
 
 namespace System.Web.UI.Design
 {
-    public class AsyncPostBackTriggerEventNameConverter : StringConverter
-    {
-        [MonoNotSupported ("")]
-        public AsyncPostBackTriggerEventNameConverter ()
-        {
-            throw new NotImplementedException ();
-        }
+	public class AsyncPostBackTriggerEventNameConverter : StringConverter
+	{
+		[MonoNotSupported ("")]
+		public AsyncPostBackTriggerEventNameConverter ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoNotSupported ("")]
+		public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoNotSupported ("")]
+		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

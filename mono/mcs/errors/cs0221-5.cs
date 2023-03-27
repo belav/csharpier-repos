@@ -5,7 +5,7 @@ using System;
 
 public class My3Attribute : Attribute
 {
-    public My3Attribute (byte b) {}
+	public My3Attribute (byte b) {}
 }
 
 [My3((byte)-1)]

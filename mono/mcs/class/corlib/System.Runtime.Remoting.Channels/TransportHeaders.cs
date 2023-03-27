@@ -35,31 +35,31 @@ using System.Collections;
 namespace System.Runtime.Remoting.Channels
 {
         [Serializable]
-    [MonoTODO ("Serialization format not compatible with .NET")]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public class TransportHeaders : ITransportHeaders
-    {
-        Hashtable hash_table;
-        
-        public TransportHeaders ()
-        {
-            hash_table = new Hashtable (CaseInsensitiveHashCodeProvider.DefaultInvariant, CaseInsensitiveComparer.DefaultInvariant);
-        }
+	[MonoTODO ("Serialization format not compatible with .NET")]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public class TransportHeaders : ITransportHeaders
+	{
+		Hashtable hash_table;
+		
+		public TransportHeaders ()
+		{
+			hash_table = new Hashtable (CaseInsensitiveHashCodeProvider.DefaultInvariant, CaseInsensitiveComparer.DefaultInvariant);
+		}
 
-        public object this [object key]
-            {
-            get {
-                return  hash_table [key];
-            }
-            
-            set {
-                hash_table [key] = value;
-            }
-        }
+		public object this [object key]
+	        {
+			get {
+				return  hash_table [key];
+			}
+			
+			set {
+				hash_table [key] = value;
+			}
+		}
 
-        public IEnumerator GetEnumerator ()
-        {
-            return  hash_table.GetEnumerator ();
-        }
-    }
+		public IEnumerator GetEnumerator ()
+		{
+			return  hash_table.GetEnumerator ();
+		}
+	}
 }

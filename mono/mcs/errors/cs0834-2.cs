@@ -5,10 +5,10 @@ using System.Linq.Expressions;
 
 class C
 {
-    delegate void D ();
-    
-    public void Foo ()
-    {
-        Expression<D> e = () => { };
-    }
+	delegate void D ();
+	
+	public void Foo ()
+	{
+		Expression<D> e = () => { };
+	}
 }

@@ -17,18 +17,18 @@ namespace Mono.ILASM {
 
                 private PEAPI.BranchOp op;
                 private LabelInfo label;
-    
+	
                 public BranchInstr (PEAPI.BranchOp op, LabelInfo label, Location loc)
-            : base (loc)
+			: base (loc)
                 {
                         this.op = op;
                         this.label = label;
                 }
 
                 public override void Emit (CodeGen code_gen, MethodDef meth,
-                       PEAPI.CILInstructions cil)
+					   PEAPI.CILInstructions cil)
                 {
-            cil.Branch (op, label.Label);
+			cil.Branch (op, label.Label);
                 }
         }
 

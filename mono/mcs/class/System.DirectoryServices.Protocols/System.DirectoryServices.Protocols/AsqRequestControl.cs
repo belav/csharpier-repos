@@ -32,25 +32,25 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class AsqRequestControl : DirectoryControl
-    {
-        public AsqRequestControl ()
-            : base (null, null, false, false)
-        {
-        }
+	public class AsqRequestControl : DirectoryControl
+	{
+		public AsqRequestControl ()
+			: base (null, null, false, false)
+		{
+		}
 
-        public AsqRequestControl (string attributeName)
-            : this ()
-        {
-            AttributeName = attributeName;
-        }
+		public AsqRequestControl (string attributeName)
+			: this ()
+		{
+			AttributeName = attributeName;
+		}
 
-        public string AttributeName { get; set; }
+		public string AttributeName { get; set; }
 
-        [MonoTODO]
-        public override byte [] GetValue ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override byte [] GetValue ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

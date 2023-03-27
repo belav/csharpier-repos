@@ -2,7 +2,7 @@
 // (C) 2005 Mainsoft Corporation (http://www.mainsoft.com)
 //
 // Authors:
-//    Vladimir Krasnov <vladimirk@mainsoft.com>
+//	Vladimir Krasnov <vladimirk@mainsoft.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -33,63 +33,63 @@ using System.Text;
 
 namespace System.Web.UI.WebControls
 {
-    [DefaultProperty ("PropertyName")]
-    public class ProfileParameter : Parameter
-    {
-        public ProfileParameter ()
-            : base ()
-        {
-        }
+	[DefaultProperty ("PropertyName")]
+	public class ProfileParameter : Parameter
+	{
+		public ProfileParameter ()
+			: base ()
+		{
+		}
 
-        protected ProfileParameter (ProfileParameter original)
-            : base (original)
-        {
-            this.PropertyName = original.PropertyName;
-        }
+		protected ProfileParameter (ProfileParameter original)
+			: base (original)
+		{
+			this.PropertyName = original.PropertyName;
+		}
 
-        public ProfileParameter (string name, string propertyName)
-            : base (name)
-        {
-            this.PropertyName = propertyName;
-        }
+		public ProfileParameter (string name, string propertyName)
+			: base (name)
+		{
+			this.PropertyName = propertyName;
+		}
 
-        public ProfileParameter (string name, TypeCode type, string propertyName)
-            : base (name, type)
-        {
-            this.PropertyName = propertyName;
-        }
+		public ProfileParameter (string name, TypeCode type, string propertyName)
+			: base (name, type)
+		{
+			this.PropertyName = propertyName;
+		}
 
-        public ProfileParameter (string name, DbType dbType, string propertyName)
-            : base (name, dbType)
-        {
-            this.PropertyName = propertyName;
-        }
-        
-        protected override Parameter Clone ()
-        {
-            return new ProfileParameter (this);
-        }
-        protected internal
-        override object Evaluate (HttpContext context, Control control)
-        {
-            if (context == null || context.Profile == null)
-                return null;
+		public ProfileParameter (string name, DbType dbType, string propertyName)
+			: base (name, dbType)
+		{
+			this.PropertyName = propertyName;
+		}
+		
+		protected override Parameter Clone ()
+		{
+			return new ProfileParameter (this);
+		}
+		protected internal
+		override object Evaluate (HttpContext context, Control control)
+		{
+			if (context == null || context.Profile == null)
+				return null;
 
-            if (string.IsNullOrEmpty (PropertyName))
-                return null;
+			if (string.IsNullOrEmpty (PropertyName))
+				return null;
 
-            return context.Profile [PropertyName];
-        }
+			return context.Profile [PropertyName];
+		}
 
-        [DefaultValue ("")]
-        public string PropertyName {
-            get {
-                object o = ViewState ["PropertyName"];
-                return (o != null) ? (string) o : string.Empty;
-            }
-            set { ViewState ["PropertyName"] = value; }
-        }
+		[DefaultValue ("")]
+		public string PropertyName {
+			get {
+				object o = ViewState ["PropertyName"];
+				return (o != null) ? (string) o : string.Empty;
+			}
+			set { ViewState ["PropertyName"] = value; }
+		}
 
-    }
+	}
 }
 

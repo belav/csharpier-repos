@@ -23,26 +23,26 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public class ToolStripDropDownClosedEventArgs : EventArgs
-    {
-        private ToolStripDropDownCloseReason close_reason;
+	public class ToolStripDropDownClosedEventArgs : EventArgs
+	{
+		private ToolStripDropDownCloseReason close_reason;
 
-        #region Public Constructors
-        public ToolStripDropDownClosedEventArgs (ToolStripDropDownCloseReason reason) : base ()
-        {
-            this.close_reason = reason;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public ToolStripDropDownClosedEventArgs (ToolStripDropDownCloseReason reason) : base ()
+		{
+			this.close_reason = reason;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public ToolStripDropDownCloseReason CloseReason {
-            get { return this.close_reason; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public ToolStripDropDownCloseReason CloseReason {
+			get { return this.close_reason; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

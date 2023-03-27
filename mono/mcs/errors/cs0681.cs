@@ -2,7 +2,7 @@
 // Line: 5
 
 class X {
-    abstract const int name = 3;
+	abstract const int name = 3;
 
-    static void Main () {}
+	static void Main () {}
 }

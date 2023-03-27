@@ -29,38 +29,38 @@
 //
 
 namespace System.Web.Services.Configuration {
-    [AttributeUsage (AttributeTargets.Class, Inherited = true)]
-    public sealed class XmlFormatExtensionPointAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class, Inherited = true)]
+	public sealed class XmlFormatExtensionPointAttribute : Attribute {
 
-        #region Fields
+		#region Fields
 
-        bool allowElements;
-        string memberName;
+		bool allowElements;
+		string memberName;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public XmlFormatExtensionPointAttribute (string memberName)
-        {
-            this.memberName = memberName;
-            allowElements = true;
-        }
+		public XmlFormatExtensionPointAttribute (string memberName)
+		{
+			this.memberName = memberName;
+			allowElements = true;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public bool AllowElements {
-            get { return allowElements; }
-            set { allowElements = value; }
-        }
+		public bool AllowElements {
+			get { return allowElements; }
+			set { allowElements = value; }
+		}
 
-        public string MemberName {    
-            get { return memberName; }
-            set { memberName = value; }
-        }
+		public string MemberName {	
+			get { return memberName; }
+			set { memberName = value; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

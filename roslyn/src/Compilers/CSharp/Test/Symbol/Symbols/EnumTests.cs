@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 @".class public E extends [mscorlib]System.Enum
 {
     .field private specialname rtspecialname int16 _val
-    .field public static literal valuetype E A = int16(31)
-    .field public static literal valuetype E B = int16(32)
+	.field public static literal valuetype E A = int16(31)
+	.field public static literal valuetype E B = int16(32)
 }");
         }
 
@@ -53,8 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             EnumWithBogusUnderlyingType(
 @".class public E extends [mscorlib]System.Enum
 {
-    .field public static literal valuetype E A = int32(0)
-    .field public static literal valuetype E B = int32(1)
+	.field public static literal valuetype E A = int32(0)
+	.field public static literal valuetype E B = int32(1)
 }");
         }
 
@@ -68,8 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 {
     .field public specialname rtspecialname int32 _val1
     .field public specialname rtspecialname int32 _val2
-    .field public static literal valuetype E A = int32(0)
-    .field public static literal valuetype E B = int32(1)
+	.field public static literal valuetype E A = int32(0)
+	.field public static literal valuetype E B = int32(1)
 }");
         }
 
@@ -90,9 +90,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 @".class public E extends [mscorlib]System.Enum
 {
     .field public specialname rtspecialname int16 _val
-    .field public static literal valuetype E A = int16(0)
-    .field private static literal valuetype E B = int16(1)
-    .field assembly static literal valuetype E C = int16(2)
+	.field public static literal valuetype E A = int16(0)
+	.field private static literal valuetype E B = int16(1)
+	.field assembly static literal valuetype E C = int16(2)
 }").VerifyDiagnostics(
             // (7,13): error CS0117: 'E' does not contain a definition for 'B'
             //         F(E.B);
@@ -110,24 +110,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 @".class public E extends [mscorlib]System.Enum
 {
     .field public specialname rtspecialname bool value__
-    .field public static literal valuetype E A = bool(false)
-    .field public static literal valuetype E B = bool(true)
+	.field public static literal valuetype E A = bool(false)
+	.field public static literal valuetype E B = bool(true)
 }");
             // char
             EnumWithBogusUnderlyingType(
 @".class public E extends [mscorlib]System.Enum
 {
     .field public specialname rtspecialname char value__
-    .field public static literal valuetype E A = char(0)
-    .field public static literal valuetype E B = char(1)
+	.field public static literal valuetype E A = char(0)
+	.field public static literal valuetype E B = char(1)
 }");
             // string
             EnumWithBogusUnderlyingType(
 @".class public E extends [mscorlib]System.Enum
 {
     .field public specialname rtspecialname string _val
-    .field public static literal valuetype E A = int16(0)
-    .field public static literal valuetype E B = int16(1)
+	.field public static literal valuetype E A = int16(0)
+	.field public static literal valuetype E B = int16(1)
 }");
         }
 

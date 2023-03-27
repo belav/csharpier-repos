@@ -3,8 +3,8 @@
 
 class C
 {
-    public static void Test (bool b)
-    {
-        var s = b ? throw null : throw null;
-    }
+	public static void Test (bool b)
+	{
+		var s = b ? throw null : throw null;
+	}
 }

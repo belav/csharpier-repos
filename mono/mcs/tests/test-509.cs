@@ -2,17 +2,17 @@ public delegate void DelegateHandler();
 
 public interface EventInterface 
 {
-    event DelegateHandler OnEvent;
+	event DelegateHandler OnEvent;
 }
 
 public class BaseClass 
 {
-    public event DelegateHandler OnEvent;
+	public event DelegateHandler OnEvent;
 }
 
 public class ExtendingClass : BaseClass, EventInterface 
 {
-    public static void Main()
-    {
-    }
+	public static void Main()
+	{
+	}
 }

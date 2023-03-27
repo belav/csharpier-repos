@@ -3,9 +3,9 @@
 
 class C
 {
-    static void Main ()
-    {
-        var a = 1'
-        int i = 2;
-    }
+	static void Main ()
+	{
+		var a = 1'
+		int i = 2;
+	}
 }

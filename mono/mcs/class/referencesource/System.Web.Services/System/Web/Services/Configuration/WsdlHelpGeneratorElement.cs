@@ -72,12 +72,12 @@ namespace System.Web.Services.Configuration
             // Update paths
             // If we're not running in the context of a web application then skip this setting.
 #if MONO_BROKEN_CONFIGURATION_DLL
-            try {
-                var hack = this.EvaluationContext;
-            } catch (ConfigurationErrorsException) {
-                this.actualPath = GetConfigurationDirectory();
-                return;
-            }
+			try {
+				var hack = this.EvaluationContext;
+			} catch (ConfigurationErrorsException) {
+				this.actualPath = GetConfigurationDirectory();
+				return;
+			}
 #endif
             ContextInformation context = this.EvaluationContext;
             WebContext webContext = context.HostingContext as WebContext;
@@ -124,13 +124,13 @@ namespace System.Web.Services.Configuration
 
             WsdlHelpGeneratorElement parent = (WsdlHelpGeneratorElement)parentElement;
 #if MONO_BROKEN_CONFIGURATION_DLL
-            try {
-                var hack = this.EvaluationContext;
-            } catch (ConfigurationErrorsException) {
-                base.Reset(parentElement);
-                this.actualPath = GetConfigurationDirectory();
-                return;
-            }
+			try {
+				var hack = this.EvaluationContext;
+			} catch (ConfigurationErrorsException) {
+				base.Reset(parentElement);
+				this.actualPath = GetConfigurationDirectory();
+				return;
+			}
 #endif
             ContextInformation context = this.EvaluationContext;
             WebContext webContext = context.HostingContext as WebContext;

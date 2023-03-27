@@ -23,7 +23,7 @@ using System;
 
 namespace Microsoft.VisualC
 {
-    public sealed class IsVolatileModifier:System.Attribute
-    {
-    }
+	public sealed class IsVolatileModifier:System.Attribute
+	{
+	}
 }

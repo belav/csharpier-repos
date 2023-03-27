@@ -32,18 +32,18 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-    public class ExtenderControlDesigner : ControlDesigner
-    {
-        [MonoNotSupported ("")]
-        public ExtenderControlDesigner ()
-        {
-            throw new NotImplementedException ();
-        }
+	public class ExtenderControlDesigner : ControlDesigner
+	{
+		[MonoNotSupported ("")]
+		public ExtenderControlDesigner ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoNotSupported ("")]
-        public override string GetDesignTimeHtml ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoNotSupported ("")]
+		public override string GetDesignTimeHtml ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

@@ -32,39 +32,39 @@ using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Execution
 {
-    public sealed class ProjectPropertyGroupTaskInstance : ProjectTargetInstanceChild
-    {
-        internal ProjectPropertyGroupTaskInstance (ProjectPropertyGroupElement xml)
-        {
-            condition = xml.Condition;
-            condition_location = xml.ConditionLocation;
-            //this.FullPath = fullPath;
-            location = xml.Location;
-            
-            Properties = xml.Properties.Select (prop => new ProjectPropertyGroupTaskPropertyInstance (prop)).ToArray ();
-        }
-        
-        readonly string condition;
-        readonly ElementLocation condition_location, location;
-        
-        public override string Condition {
-            get { return condition; }
-        }
+	public sealed class ProjectPropertyGroupTaskInstance : ProjectTargetInstanceChild
+	{
+		internal ProjectPropertyGroupTaskInstance (ProjectPropertyGroupElement xml)
+		{
+			condition = xml.Condition;
+			condition_location = xml.ConditionLocation;
+			//this.FullPath = fullPath;
+			location = xml.Location;
+			
+			Properties = xml.Properties.Select (prop => new ProjectPropertyGroupTaskPropertyInstance (prop)).ToArray ();
+		}
+		
+		readonly string condition;
+		readonly ElementLocation condition_location, location;
+		
+		public override string Condition {
+			get { return condition; }
+		}
 
-        public
-        override ElementLocation ConditionLocation {
-            get { return condition_location; }
-        }
+		public
+		override ElementLocation ConditionLocation {
+			get { return condition_location; }
+		}
 
-        public
-        override ElementLocation Location {
-            get { return location; }
-        }
+		public
+		override ElementLocation Location {
+			get { return location; }
+		}
 
-        public
-        ElementLocation ExecuteTargetsLocation { get; private set; }
-        
-        public ICollection<ProjectPropertyGroupTaskPropertyInstance> Properties { get; private set; }
-    }
+		public
+		ElementLocation ExecuteTargetsLocation { get; private set; }
+		
+		public ICollection<ProjectPropertyGroupTaskPropertyInstance> Properties { get; private set; }
+	}
 }
 

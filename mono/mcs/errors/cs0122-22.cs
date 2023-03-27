@@ -3,21 +3,21 @@
 
 namespace Test
 {
-    public sealed class A
-    {
-        private class B
-        {
-            public static void Method ()
-            {
-            }
-        }
-    }
-    
-    class MainClass
-    {
-        public static void Main(string[] args)
-        {
-            A.B.Method ();
-        }
-    }
+	public sealed class A
+	{
+		private class B
+		{
+			public static void Method ()
+			{
+			}
+		}
+	}
+	
+	class MainClass
+	{
+		public static void Main(string[] args)
+		{
+			A.B.Method ();
+		}
+	}
 }

@@ -23,8 +23,8 @@ using System.ComponentModel;
 [AttributeUsage(AttributeTargets.All)]
 public sealed class GenericAttribute : Attribute
 {
-    public GenericAttribute () {}
-    public GenericAttribute (int x) {}
+	public GenericAttribute () {}
+	public GenericAttribute (int x) {}
 }
 
 public interface IFace {}
@@ -35,8 +35,8 @@ public class Foo : IFace
 
 public class Foo<T> 
 {
-    [Generic (70)]
-    public void Bla<D> () {}
+	[Generic (70)]
+	public void Bla<D> () {}
 
 }
 
@@ -46,20 +46,20 @@ public delegate int Del();
 [Generic (30)]
 public class Class
 {
-    [Generic (20)]
-    int field;
+	[Generic (20)]
+	int field;
 
-    int Foo ([Generic (50)] int d) { return d; }
+	int Foo ([Generic (50)] int d) { return d; }
 
-    [Generic (100)]
-    public int Bla { get; set; }
+	[Generic (100)]
+	public int Bla { get; set; }
 
-    [Generic (110)]
-    public event Del Zzz;
+	[Generic (110)]
+	public event Del Zzz;
 
-    [Generic (10)]
-    public static void Main ()
-    {
-    
-    }
+	[Generic (10)]
+	public static void Main ()
+	{
+	
+	}
 }

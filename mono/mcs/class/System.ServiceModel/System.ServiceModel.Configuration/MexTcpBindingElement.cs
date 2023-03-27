@@ -2,7 +2,7 @@
 // MexTcpBindingElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,21 +54,21 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MexTcpBindingElement
-         : MexBindingElement<CustomBinding>,  IBindingConfigurationElement
-    {
-        public MexTcpBindingElement ()
-            : this (String.Empty) {
-        }
+	public partial class MexTcpBindingElement
+		 : MexBindingElement<CustomBinding>,  IBindingConfigurationElement
+	{
+		public MexTcpBindingElement ()
+			: this (String.Empty) {
+		}
 
-        public MexTcpBindingElement (string name)
-            : base (name) {
-        }
-
-
-        // Properties
+		public MexTcpBindingElement (string name)
+			: base (name) {
+		}
 
 
-    }
+		// Properties
+
+
+	}
 
 }

@@ -20,22 +20,22 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 namespace System.Windows.Forms {
 
-    public enum DataGridViewContentAlignment {
-        NotSet = 0,
-        TopLeft = 1,
-        TopCenter = 2,
-        TopRight = 4,
-        MiddleLeft = 16,
-        MiddleCenter = 32,
-        MiddleRight = 64,
-        BottomLeft = 256,
-        BottomCenter = 512,
-        BottomRight = 1024
-    }
+	public enum DataGridViewContentAlignment {
+		NotSet = 0,
+		TopLeft = 1,
+		TopCenter = 2,
+		TopRight = 4,
+		MiddleLeft = 16,
+		MiddleCenter = 32,
+		MiddleRight = 64,
+		BottomLeft = 256,
+		BottomCenter = 512,
+		BottomRight = 1024
+	}
 }
 

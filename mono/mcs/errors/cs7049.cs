@@ -7,8 +7,8 @@ using System.Security.Permissions;
 
 public class Program {
 
-    [PrincipalPermission ((SecurityAction)100, Name="Poupou")]
-    public virtual void Show (string message)
-    {
-    }
+	[PrincipalPermission ((SecurityAction)100, Name="Poupou")]
+	public virtual void Show (string message)
+	{
+	}
 }

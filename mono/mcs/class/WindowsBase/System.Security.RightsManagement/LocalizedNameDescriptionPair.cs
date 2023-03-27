@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,30 +28,30 @@ using System.Security;
 
 namespace System.Security.RightsManagement {
 
-    [SecurityCritical (SecurityCriticalScope.Everything)]
-    public class LocalizedNameDescriptionPair
-    {
-        public LocalizedNameDescriptionPair (string name, string description)
-        {
-            throw new NotImplementedException ();
-        }
+	[SecurityCritical (SecurityCriticalScope.Everything)]
+	public class LocalizedNameDescriptionPair
+	{
+		public LocalizedNameDescriptionPair (string name, string description)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public string Name {
-            get { throw new NotImplementedException (); }
-        }
+		public string Name {
+			get { throw new NotImplementedException (); }
+		}
 
-        public string Description {
-            get { throw new NotImplementedException (); }
-        }
+		public string Description {
+			get { throw new NotImplementedException (); }
+		}
 
-        public override bool Equals (object obj)
-        {
-            throw new NotImplementedException ();
-        }
+		public override bool Equals (object obj)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override int GetHashCode ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public override int GetHashCode ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

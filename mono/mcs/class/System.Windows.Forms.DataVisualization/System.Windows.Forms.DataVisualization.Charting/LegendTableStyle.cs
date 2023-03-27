@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,10 +27,10 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum LegendTableStyle
-    {
-        Auto = 0,
-        Wide = 1,
-        Tall = 2
-    }
+	public enum LegendTableStyle
+	{
+		Auto = 0,
+		Wide = 1,
+		Tall = 2
+	}
 }

@@ -99,7 +99,7 @@ namespace System.Activities.DurableInstancing
             }
 
             commandTextBuilder.AppendLine(@"set nocount on
-                                            set transaction isolation level read committed        
+                                            set transaction isolation level read committed		
                                             set xact_abort on
                                             begin transaction");
 

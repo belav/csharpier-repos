@@ -2,7 +2,7 @@
 // ServiceTimeoutsElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,35 +54,35 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class ServiceTimeoutsElement
-         : BehaviorExtensionElement
-    {
-        public ServiceTimeoutsElement () {
-        }
+	public sealed class ServiceTimeoutsElement
+		 : BehaviorExtensionElement
+	{
+		public ServiceTimeoutsElement () {
+		}
 
 
-        // Properties
+		// Properties
 
-        public override Type BehaviorType {
-            get { return typeof (ServiceTimeoutsBehavior); }
-        }
+		public override Type BehaviorType {
+			get { return typeof (ServiceTimeoutsBehavior); }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
 
-        [ConfigurationProperty ("transactionTimeout",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:00:00")]
-        public TimeSpan TransactionTimeout {
-            get { return (TimeSpan) base ["transactionTimeout"]; }
-            set { base ["transactionTimeout"] = value; }
-        }
+		[ConfigurationProperty ("transactionTimeout",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "00:00:00")]
+		public TimeSpan TransactionTimeout {
+			get { return (TimeSpan) base ["transactionTimeout"]; }
+			set { base ["transactionTimeout"] = value; }
+		}
 
-        protected internal override object CreateBehavior () {
-            return new ServiceTimeoutsBehavior (TransactionTimeout);
-        }
+		protected internal override object CreateBehavior () {
+			return new ServiceTimeoutsBehavior (TransactionTimeout);
+		}
 
-    }
+	}
 
 }

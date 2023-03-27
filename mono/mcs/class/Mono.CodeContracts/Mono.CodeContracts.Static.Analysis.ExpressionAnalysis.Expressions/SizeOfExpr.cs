@@ -2,7 +2,7 @@
 // SizeoOfExpr.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -34,52 +34,52 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions {
-    sealed class SizeOfExpr<TSymbolicValue> : Expr<TSymbolicValue> where TSymbolicValue : IEquatable<TSymbolicValue> {
+	sealed class SizeOfExpr<TSymbolicValue> : Expr<TSymbolicValue> where TSymbolicValue : IEquatable<TSymbolicValue> {
 
-        public readonly TypeNode Type;
+		public readonly TypeNode Type;
 
-        public SizeOfExpr (TypeNode type)
-        {
-            this.Type = type;
-        }
+		public SizeOfExpr (TypeNode type)
+		{
+			this.Type = type;
+		}
 
-        #region Overrides of Expression
-        public override IEnumerable<TSymbolicValue> Variables
-        {
-            get { return Enumerable.Empty<TSymbolicValue> (); }
-        }
+		#region Overrides of Expression
+		public override IEnumerable<TSymbolicValue> Variables
+		{
+			get { return Enumerable.Empty<TSymbolicValue> (); }
+		}
 
-        public override Result Decode<Data, Result, Visitor> (APC pc, TSymbolicValue dest, Visitor visitor, Data data)
-        {
-            return visitor.Sizeof (pc, this.Type, dest, data);
-        }
+		public override Result Decode<Data, Result, Visitor> (APC pc, TSymbolicValue dest, Visitor visitor, Data data)
+		{
+			return visitor.Sizeof (pc, this.Type, dest, data);
+		}
 
-        public override Expr<TSymbolicValue> Substitute (IImmutableMap<TSymbolicValue, Sequence<TSymbolicValue>> substitutions)
-        {
-            return this;
-        }
+		public override Expr<TSymbolicValue> Substitute (IImmutableMap<TSymbolicValue, Sequence<TSymbolicValue>> substitutions)
+		{
+			return this;
+		}
 
-        public override bool IsContained (IImmutableSet<TSymbolicValue> candidates)
-        {
-            return false;
-        }
+		public override bool IsContained (IImmutableSet<TSymbolicValue> candidates)
+		{
+			return false;
+		}
 
-        public override bool Contains (TSymbolicValue symbol)
-        {
-            return false;
-        }
+		public override bool Contains (TSymbolicValue symbol)
+		{
+			return false;
+		}
 
-        public override string ToString ()
-        {
-            return String.Format ("Sizeof({0})", this.Type);
-        }
+		public override string ToString ()
+		{
+			return String.Format ("Sizeof({0})", this.Type);
+		}
 
-        public override bool Equals (Expr<TSymbolicValue> other)
-        {
-            var @sizeof = other as SizeOfExpr<TSymbolicValue>;
+		public override bool Equals (Expr<TSymbolicValue> other)
+		{
+			var @sizeof = other as SizeOfExpr<TSymbolicValue>;
 
-            return (@sizeof != null && @sizeof.Type.Equals (this.Type));
-        }
-        #endregion
-    }
+			return (@sizeof != null && @sizeof.Type.Equals (this.Type));
+		}
+		#endregion
+	}
 }

@@ -2,8 +2,8 @@
 // System.Security.Permissions.ZoneIdentityPermission
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -33,122 +33,122 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-    [ComVisible (true)]
-    [Serializable]
-    public sealed class ZoneIdentityPermission : CodeAccessPermission, IBuiltInPermission {
+	[ComVisible (true)]
+	[Serializable]
+	public sealed class ZoneIdentityPermission : CodeAccessPermission, IBuiltInPermission {
 
-        private const int version = 1;
+		private const int version = 1;
 
-        private SecurityZone zone;
+		private SecurityZone zone;
 
-        public ZoneIdentityPermission (PermissionState state)
-        {
-            // false == do not allow Unrestricted for Identity Permissions
-            CheckPermissionState (state, false);
-            // default values
-            zone = SecurityZone.NoZone;
-        }
+		public ZoneIdentityPermission (PermissionState state)
+		{
+			// false == do not allow Unrestricted for Identity Permissions
+			CheckPermissionState (state, false);
+			// default values
+			zone = SecurityZone.NoZone;
+		}
 
-        public ZoneIdentityPermission (SecurityZone zone)
-        {
-            // also needs the validations
-            SecurityZone = zone;
-        }
+		public ZoneIdentityPermission (SecurityZone zone)
+		{
+			// also needs the validations
+			SecurityZone = zone;
+		}
 
-        public override IPermission Copy ()
-        {
-            return new ZoneIdentityPermission (zone);
-        }
+		public override IPermission Copy ()
+		{
+			return new ZoneIdentityPermission (zone);
+		}
 
-        public override bool IsSubsetOf (IPermission target)
-        {
-            ZoneIdentityPermission zip = Cast (target);
-            if (zip == null)
-                return (zone == SecurityZone.NoZone);
+		public override bool IsSubsetOf (IPermission target)
+		{
+			ZoneIdentityPermission zip = Cast (target);
+			if (zip == null)
+				return (zone == SecurityZone.NoZone);
 
-            return ((zone == SecurityZone.NoZone) || (zone == zip.zone));
-        }
+			return ((zone == SecurityZone.NoZone) || (zone == zip.zone));
+		}
 
-        public override IPermission Union (IPermission target)
-        {
-            ZoneIdentityPermission zip = Cast (target);
-            if (zip == null)
-                return (zone == SecurityZone.NoZone) ? null : Copy ();
+		public override IPermission Union (IPermission target)
+		{
+			ZoneIdentityPermission zip = Cast (target);
+			if (zip == null)
+				return (zone == SecurityZone.NoZone) ? null : Copy ();
 
-            if (zone == zip.zone || zip.zone == SecurityZone.NoZone)
-                return Copy ();
+			if (zone == zip.zone || zip.zone == SecurityZone.NoZone)
+				return Copy ();
 
-            if (zone == SecurityZone.NoZone)
-                return zip.Copy ();
-            throw new ArgumentException (Locale.GetText (
-                "Union impossible"));
-        }
+			if (zone == SecurityZone.NoZone)
+				return zip.Copy ();
+			throw new ArgumentException (Locale.GetText (
+				"Union impossible"));
+		}
 
-        public override IPermission Intersect (IPermission target)
-        {
-            ZoneIdentityPermission zip = Cast (target);
-            if (zip == null || zone == SecurityZone.NoZone)
-                return null;
+		public override IPermission Intersect (IPermission target)
+		{
+			ZoneIdentityPermission zip = Cast (target);
+			if (zip == null || zone == SecurityZone.NoZone)
+				return null;
 
-            if (zone == zip.zone)
-                return Copy ();
+			if (zone == zip.zone)
+				return Copy ();
 
-            return null;
-        }
+			return null;
+		}
 
-        public override void FromXml (SecurityElement esd)
-        {
-            // General validation in CodeAccessPermission
-            CheckSecurityElement (esd, "esd", version, version);
-            // Note: we do not (yet) care about the return value 
-            // as we only accept version 1 (min/max values)
+		public override void FromXml (SecurityElement esd)
+		{
+			// General validation in CodeAccessPermission
+			CheckSecurityElement (esd, "esd", version, version);
+			// Note: we do not (yet) care about the return value 
+			// as we only accept version 1 (min/max values)
 
-            string zoneName = esd.Attribute ("Zone");
-            if (zoneName == null)
-                zone = SecurityZone.NoZone;
-            else
-                zone = (SecurityZone) Enum.Parse (typeof (SecurityZone), zoneName);
-        }
+			string zoneName = esd.Attribute ("Zone");
+			if (zoneName == null)
+				zone = SecurityZone.NoZone;
+			else
+				zone = (SecurityZone) Enum.Parse (typeof (SecurityZone), zoneName);
+		}
 
-        public override SecurityElement ToXml ()
-        {
-            SecurityElement se = Element (version);
-            if (zone != SecurityZone.NoZone)
-                se.AddAttribute ("Zone", zone.ToString ());
-            return se;
-        }
+		public override SecurityElement ToXml ()
+		{
+			SecurityElement se = Element (version);
+			if (zone != SecurityZone.NoZone)
+				se.AddAttribute ("Zone", zone.ToString ());
+			return se;
+		}
 
-        public SecurityZone SecurityZone {
-            get { return zone; }
-            set {
-                if (!Enum.IsDefined (typeof (SecurityZone), value)) {
-                    string msg = String.Format (Locale.GetText ("Invalid enum {0}"), value);
-                    throw new ArgumentException (msg, "SecurityZone");
-                }
-                zone = value;
-            }
-        }
+		public SecurityZone SecurityZone {
+			get { return zone; }
+			set {
+				if (!Enum.IsDefined (typeof (SecurityZone), value)) {
+					string msg = String.Format (Locale.GetText ("Invalid enum {0}"), value);
+					throw new ArgumentException (msg, "SecurityZone");
+				}
+				zone = value;
+			}
+		}
 
-        // IBuiltInPermission
-        int IBuiltInPermission.GetTokenIndex ()
-        {
-            return (int) BuiltInToken.ZoneIdentity;
-        }
+		// IBuiltInPermission
+		int IBuiltInPermission.GetTokenIndex ()
+		{
+			return (int) BuiltInToken.ZoneIdentity;
+		}
 
-        // helpers
+		// helpers
 
-        private ZoneIdentityPermission Cast (IPermission target)
-        {
-            if (target == null)
-                return null;
+		private ZoneIdentityPermission Cast (IPermission target)
+		{
+			if (target == null)
+				return null;
 
-            ZoneIdentityPermission zip = (target as ZoneIdentityPermission);
-            if (zip == null) {
-                ThrowInvalidPermission (target, typeof (ZoneIdentityPermission));
-            }
+			ZoneIdentityPermission zip = (target as ZoneIdentityPermission);
+			if (zip == null) {
+				ThrowInvalidPermission (target, typeof (ZoneIdentityPermission));
+			}
 
-            return zip;
-        }
-    }
+			return zip;
+		}
+	}
 }
 

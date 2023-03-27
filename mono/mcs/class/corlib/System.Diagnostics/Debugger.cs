@@ -2,7 +2,7 @@
 // System.Diagnostics.Debugger.cs
 //
 // Author:
-//    John R. Hicks (angryjohn69@nc.rr.com)
+//	John R. Hicks (angryjohn69@nc.rr.com)
 //
 // (C) 2001
 //
@@ -36,94 +36,94 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics
 {
-    /// <summary>
-    /// Enables communication with a debugger.
-    /// </summary>
-    [ComVisible (true)]
-    public sealed class Debugger
-    {
+	/// <summary>
+	/// Enables communication with a debugger.
+	/// </summary>
+	[ComVisible (true)]
+	public sealed class Debugger
+	{
 
-        /// <summary>
-        /// Represents the default category of a message with a constant.
-        /// </summary>
-        public static readonly string DefaultCategory = "";
+		/// <summary>
+		/// Represents the default category of a message with a constant.
+		/// </summary>
+		public static readonly string DefaultCategory = "";
 
-        /// <summary>
-        /// Returns a Boolean indicating whether a debugger is attached to a process.
-        /// </summary>
-        /// <value>
-        /// true if debugger is attached; otherwise, false.
-        /// </value>
-        public static bool IsAttached
-        {
-            get
-            {
-                return IsAttached_internal ();
-            }
-        }
+		/// <summary>
+		/// Returns a Boolean indicating whether a debugger is attached to a process.
+		/// </summary>
+		/// <value>
+		/// true if debugger is attached; otherwise, false.
+		/// </value>
+		public static bool IsAttached
+		{
+			get
+			{
+				return IsAttached_internal ();
+			}
+		}
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private extern static bool IsAttached_internal ();
+		[MethodImplAttribute (MethodImplOptions.InternalCall)]
+		private extern static bool IsAttached_internal ();
 
-        /// <summary>
-        /// Causes a breakpoint to be signaled to an attached debugger.
-        /// </summary>
-        public static void Break()
-        {
-            // The JIT inserts a breakpoint on the caller.
-        }
+		/// <summary>
+		/// Causes a breakpoint to be signaled to an attached debugger.
+		/// </summary>
+		public static void Break()
+		{
+			// The JIT inserts a breakpoint on the caller.
+		}
 
-        /// <summary>
-        /// Checks to see if logging is enabled by an attached debugger.
-        /// </summary>
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern bool IsLogging();
+		/// <summary>
+		/// Checks to see if logging is enabled by an attached debugger.
+		/// </summary>
+		[MethodImplAttribute(MethodImplOptions.InternalCall)]
+		public static extern bool IsLogging();
 
-        /// <summary>
-        /// Launches and attaches a debugger to the process.
-        /// </summary>
-        public static bool Launch()
-        {
-            throw new NotImplementedException();
-        }
+		/// <summary>
+		/// Launches and attaches a debugger to the process.
+		/// </summary>
+		public static bool Launch()
+		{
+			throw new NotImplementedException();
+		}
 
-        /// <summary>
-        /// Posts a message for the attached debugger.
-        /// </summary>
-        /// <param name="level">
-        /// A description of the importance of this message
-        /// </param>
-        /// <param name="category">
-        /// A string describing the category of this message.
-        /// </param>
-        /// <param name="message">
-        /// A string representing the message to show.
-        /// </param>
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static extern void Log_icall (int level, ref string category, ref string message);
+		/// <summary>
+		/// Posts a message for the attached debugger.
+		/// </summary>
+		/// <param name="level">
+		/// A description of the importance of this message
+		/// </param>
+		/// <param name="category">
+		/// A string describing the category of this message.
+		/// </param>
+		/// <param name="message">
+		/// A string representing the message to show.
+		/// </param>
+		[MethodImplAttribute(MethodImplOptions.InternalCall)]
+		static extern void Log_icall (int level, ref string category, ref string message);
 
-        public static void Log (int level, string category, string message)
-        {
-            Log_icall (level, ref category, ref message);
-        }
+		public static void Log (int level, string category, string message)
+		{
+			Log_icall (level, ref category, ref message);
+		}
 
-        public static void NotifyOfCrossThreadDependency ()
-        {
-        }
+		public static void NotifyOfCrossThreadDependency ()
+		{
+		}
 
-        [ObsoleteAttribute("Call the static methods directly on this type", true)]
-        public Debugger()
-        {
-        }
+		[ObsoleteAttribute("Call the static methods directly on this type", true)]
+		public Debugger()
+		{
+		}
 
 #if MONODROID
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private extern static void Mono_UnhandledException_internal (Exception ex);
+		[MethodImplAttribute (MethodImplOptions.InternalCall)]
+		private extern static void Mono_UnhandledException_internal (Exception ex);
 
-        internal static void Mono_UnhandledException (Exception ex)
-        {
-            Mono_UnhandledException_internal (ex);
-        }
+		internal static void Mono_UnhandledException (Exception ex)
+		{
+			Mono_UnhandledException_internal (ex);
+		}
 #endif
-    }
+	}
 }

@@ -20,12 +20,12 @@ namespace SciMark2
     {
         // multiple iterations used to make kernel 
         // have roughly same granulairty as other 
-        // Scimark kernels    
+        // Scimark kernels	
         public static double num_flops(int N, int nz, int num_iterations)
         {
             /* Note that if nz does not divide N evenly, then the
-            actual number of nonzeros used is adjusted slightly.
-            */
+			actual number of nonzeros used is adjusted slightly.
+			*/
             int actual_nz = (nz / N) * N;
             return ((double)actual_nz) * 2.0 * ((double)num_iterations);
         }

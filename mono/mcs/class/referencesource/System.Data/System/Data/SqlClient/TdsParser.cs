@@ -10277,7 +10277,7 @@ namespace System.Data.SqlClient {
             ConstrainedTextWriter writer = new ConstrainedTextWriter(new StreamWriter(new TdsOutputStream(this, stateObj, preambleToSkip), encoding), size);
 
             XmlWriterSettings writerSettings = new XmlWriterSettings();
-            writerSettings.CloseOutput = false;        // don't close the memory stream
+            writerSettings.CloseOutput = false;		// don't close the memory stream
             writerSettings.ConformanceLevel = ConformanceLevel.Fragment;
             if (_asyncWrite) {
                 writerSettings.Async = true;

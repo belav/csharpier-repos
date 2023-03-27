@@ -16,7 +16,7 @@ namespace Mono.ILASM {
         public class FilterBlock : ISehClause {
 
                 private HandlerBlock this_block;
-        private HandlerBlock handler_block;
+		private HandlerBlock handler_block;
 
                 public FilterBlock (HandlerBlock this_block)
                 {

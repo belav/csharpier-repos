@@ -5,7 +5,7 @@
 // version of this class.
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 // Copyright 2011 Xamarin Inc (http://www.xamarin.com).

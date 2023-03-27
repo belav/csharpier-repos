@@ -2,7 +2,7 @@
 // IFieldTemplateFactory.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -39,11 +39,11 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public interface IFieldTemplateFactory
-    {
-        IFieldTemplate CreateFieldTemplate (MetaColumn column, DataBoundControlMode mode, string uiHint);
-        void Initialize (MetaModel model);
-    }
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public interface IFieldTemplateFactory
+	{
+		IFieldTemplate CreateFieldTemplate (MetaColumn column, DataBoundControlMode mode, string uiHint);
+		void Initialize (MetaModel model);
+	}
 }

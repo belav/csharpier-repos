@@ -2,7 +2,7 @@
 // UserNamePasswordServiceCredential.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -37,62 +37,62 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-    public sealed class UserNamePasswordServiceCredential
-    {
-        internal UserNamePasswordServiceCredential ()
-        {
-        }
+	public sealed class UserNamePasswordServiceCredential
+	{
+		internal UserNamePasswordServiceCredential ()
+		{
+		}
 
-        MembershipProvider provider;
-        TimeSpan lifetime = TimeSpan.FromMinutes (15);
-        bool cache_tokens, include_win_groups = true;
-        int max_cache_tokens = 0x80;
-        UserNamePasswordValidator validator;
-        UserNamePasswordValidationMode mode;
+		MembershipProvider provider;
+		TimeSpan lifetime = TimeSpan.FromMinutes (15);
+		bool cache_tokens, include_win_groups = true;
+		int max_cache_tokens = 0x80;
+		UserNamePasswordValidator validator;
+		UserNamePasswordValidationMode mode;
 
-        internal UserNamePasswordServiceCredential Clone ()
-        {
-            return (UserNamePasswordServiceCredential) MemberwiseClone ();
-        }
+		internal UserNamePasswordServiceCredential Clone ()
+		{
+			return (UserNamePasswordServiceCredential) MemberwiseClone ();
+		}
 
-        [MonoTODO]
-        public UserNamePasswordValidationMode UserNamePasswordValidationMode {
-            get { return mode; }
-            set { mode = value; }
-        }
+		[MonoTODO]
+		public UserNamePasswordValidationMode UserNamePasswordValidationMode {
+			get { return mode; }
+			set { mode = value; }
+		}
 
-        [MonoTODO]
-        public bool CacheLogonTokens {
-            get { return cache_tokens; }
-            set { cache_tokens = value; }
-        }
+		[MonoTODO]
+		public bool CacheLogonTokens {
+			get { return cache_tokens; }
+			set { cache_tokens = value; }
+		}
 
-        [MonoTODO]
-        public TimeSpan CachedLogonTokenLifetime {
-            get { return lifetime; }
-            set { lifetime = value; }
-        }
+		[MonoTODO]
+		public TimeSpan CachedLogonTokenLifetime {
+			get { return lifetime; }
+			set { lifetime = value; }
+		}
 
-        [MonoTODO]
-        public bool IncludeWindowsGroups {
-            get { return include_win_groups; }
-            set { include_win_groups = value; }
-        }
+		[MonoTODO]
+		public bool IncludeWindowsGroups {
+			get { return include_win_groups; }
+			set { include_win_groups = value; }
+		}
 
-        [MonoTODO]
-        public int MaxCachedLogonTokens {
-            get { return max_cache_tokens; }
-            set { max_cache_tokens = value; }
-        }
+		[MonoTODO]
+		public int MaxCachedLogonTokens {
+			get { return max_cache_tokens; }
+			set { max_cache_tokens = value; }
+		}
 
-        public UserNamePasswordValidator CustomUserNamePasswordValidator {
-            get { return validator; }
-            set { validator = value; }
-        }
+		public UserNamePasswordValidator CustomUserNamePasswordValidator {
+			get { return validator; }
+			set { validator = value; }
+		}
 
-        public MembershipProvider MembershipProvider {
-            get { return provider; }
-            set { provider = value; }
-        }
-    }
+		public MembershipProvider MembershipProvider {
+			get { return provider; }
+			set { provider = value; }
+		}
+	}
 }

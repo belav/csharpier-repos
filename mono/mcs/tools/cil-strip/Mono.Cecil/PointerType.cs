@@ -28,18 +28,18 @@
 
 namespace Mono.Cecil {
 
-    internal sealed class PointerType : TypeSpecification {
+	internal sealed class PointerType : TypeSpecification {
 
-        public override string Name {
-            get { return string.Concat (base.Name, "*"); }
-        }
+		public override string Name {
+			get { return string.Concat (base.Name, "*"); }
+		}
 
-        public override string FullName {
-            get { return string.Concat (base.FullName, "*"); }
-        }
+		public override string FullName {
+			get { return string.Concat (base.FullName, "*"); }
+		}
 
-        public PointerType (TypeReference pType) : base (pType)
-        {
-        }
-    }
+		public PointerType (TypeReference pType) : base (pType)
+		{
+		}
+	}
 }

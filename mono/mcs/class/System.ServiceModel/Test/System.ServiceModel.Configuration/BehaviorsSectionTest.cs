@@ -1,8 +1,8 @@
-//
+﻿//
 // BehaviorsSectionTest.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -35,31 +35,31 @@ using System.Configuration;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-    [TestFixture]
-    public class BehaviorsSectionTest
-    {
-        class Poker : BehaviorsSection
-        {
-            public ConfigurationPropertyCollection GetProperties () {
-                return Properties;
-            }
+	[TestFixture]
+	public class BehaviorsSectionTest
+	{
+		class Poker : BehaviorsSection
+		{
+			public ConfigurationPropertyCollection GetProperties () {
+				return Properties;
+			}
 
-            [ConfigurationProperty ("myProperty")]
-            string MyProperty {
-                get { return "myProperty"; }
-                set { }
-            }
-        }
+			[ConfigurationProperty ("myProperty")]
+			string MyProperty {
+				get { return "myProperty"; }
+				set { }
+			}
+		}
 
-        [Test]
-        public void Properties () {
+		[Test]
+		public void Properties () {
 
-            Poker p1 = new Poker ();
-            Poker p2 = new Poker ();
+			Poker p1 = new Poker ();
+			Poker p2 = new Poker ();
 
-            Assert.AreEqual (false, p1.GetProperties ().Contains ("myProperty"), "Contains myProperty");
-            Assert.AreEqual (false, p1.GetProperties () == p2.GetProperties (), "#");
-        }
-    }
+			Assert.AreEqual (false, p1.GetProperties ().Contains ("myProperty"), "Contains myProperty");
+			Assert.AreEqual (false, p1.GetProperties () == p2.GetProperties (), "#");
+		}
+	}
 }
 #endif

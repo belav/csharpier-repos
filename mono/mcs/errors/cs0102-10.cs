@@ -2,11 +2,11 @@
 // Line: 13
 
 public class SampleClass {
-    public delegate void MyEvent ();
-    public event MyEvent XX {
-        add { }
-        remove { }
-    }
+	public delegate void MyEvent ();
+	public event MyEvent XX {
+		add { }
+		remove { }
+	}
         
         bool add_XX;
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 
@@ -31,57 +31,57 @@ using Mono.WebBrowser.DOM;
 
 namespace System.Windows.Forms
 {
-    public class HtmlWindowCollection: ICollection, IEnumerable
-    {
-        private List<HtmlWindow> windows;
-        
+	public class HtmlWindowCollection: ICollection, IEnumerable
+	{
+		private List<HtmlWindow> windows;
+		
 
-        internal HtmlWindowCollection (WebBrowser owner, Mono.WebBrowser.IWebBrowser webHost, IWindowCollection col)
-        {
-            windows = new List<HtmlWindow>();
-            foreach (IWindow window in col)
-                windows.Add (new HtmlWindow (owner, webHost, window));
-        }
-        
-        public int Count {
-            get {
-                return windows.Count;
-            }
-        }
+		internal HtmlWindowCollection (WebBrowser owner, Mono.WebBrowser.IWebBrowser webHost, IWindowCollection col)
+		{
+			windows = new List<HtmlWindow>();
+			foreach (IWindow window in col)
+				windows.Add (new HtmlWindow (owner, webHost, window));
+		}
+		
+		public int Count {
+			get {
+				return windows.Count;
+			}
+		}
 
-        public HtmlWindow this [string windowId] {
-            get {
-                foreach (HtmlWindow window in windows)
-                    if (window.Name.Equals (windowId))
-                        return window;
-                return null;
-            }
-        }
-        
-        public HtmlWindow this [int index] {
-            get {
-                if (index > windows.Count || index < 0)
-                    return null;
-                return windows [index];
-            }
-        }
+		public HtmlWindow this [string windowId] {
+			get {
+				foreach (HtmlWindow window in windows)
+					if (window.Name.Equals (windowId))
+						return window;
+				return null;
+			}
+		}
+		
+		public HtmlWindow this [int index] {
+			get {
+				if (index > windows.Count || index < 0)
+					return null;
+				return windows [index];
+			}
+		}
 
-        public IEnumerator GetEnumerator ()
-        {
-            return windows.GetEnumerator ();
-        }
+		public IEnumerator GetEnumerator ()
+		{
+			return windows.GetEnumerator ();
+		}
 
-        void ICollection.CopyTo (Array dest, int index)
-        {
-            windows.CopyTo (dest as HtmlWindow[], index);
-        }
+		void ICollection.CopyTo (Array dest, int index)
+		{
+			windows.CopyTo (dest as HtmlWindow[], index);
+		}
 
-        object ICollection.SyncRoot {
-            get { return this; }
-        }
+		object ICollection.SyncRoot {
+			get { return this; }
+		}
 
-        bool ICollection.IsSynchronized {
-            get { return false; }
-        }
-    }
+		bool ICollection.IsSynchronized {
+			get { return false; }
+		}
+	}
 }

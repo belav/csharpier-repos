@@ -2,7 +2,7 @@
 // Microsoft.Win32.IntranetZoneCredentialPolicy class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,18 +34,18 @@ using System.Security.Policy;
 
 namespace Microsoft.Win32 {
 
-    public class IntranetZoneCredentialPolicy : ICredentialPolicy {
+	public class IntranetZoneCredentialPolicy : ICredentialPolicy {
 
-        [SecurityPermission (SecurityAction.Demand, ControlPolicy = true)]
-        public IntranetZoneCredentialPolicy ()
-        {
-        }
+		[SecurityPermission (SecurityAction.Demand, ControlPolicy = true)]
+		public IntranetZoneCredentialPolicy ()
+		{
+		}
 
-        public virtual bool ShouldSendCredential (Uri challengeUri, WebRequest request,
-            NetworkCredential credential, IAuthenticationModule authModule)
-        {
-            Zone z = Zone.CreateFromUrl (challengeUri.AbsoluteUri);
-            return (z.SecurityZone == SecurityZone.Intranet);
-        }
-    }
+		public virtual bool ShouldSendCredential (Uri challengeUri, WebRequest request,
+			NetworkCredential credential, IAuthenticationModule authModule)
+		{
+			Zone z = Zone.CreateFromUrl (challengeUri.AbsoluteUri);
+			return (z.SecurityZone == SecurityZone.Intranet);
+		}
+	}
 }

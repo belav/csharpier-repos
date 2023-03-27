@@ -25,19 +25,19 @@ using Xunit;
 
 namespace Mono.WebAssembly.SdkTests
 {
-    public class BuildTests : MSBuildSdkTestBase
-    {
-        [Fact]
-        public void IsWasmProject ()
-        {
-            var path = GetTempFile ("HelloWasm");
-            ProjectCreator
-                .Templates
-                .WasmProject (new string[0], path)
-                .Save ()
-                .TryGetPropertyValue ("_IsMonoWasmProject", out string isWasmProject);
+	public class BuildTests : MSBuildSdkTestBase
+	{
+		[Fact]
+		public void IsWasmProject ()
+		{
+			var path = GetTempFile ("HelloWasm");
+			ProjectCreator
+				.Templates
+				.WasmProject (new string[0], path)
+				.Save ()
+				.TryGetPropertyValue ("_IsMonoWasmProject", out string isWasmProject);
 
-            isWasmProject.ShouldBe ("true", StringCompareShould.IgnoreCase);
-        }
-    }
+			isWasmProject.ShouldBe ("true", StringCompareShould.IgnoreCase);
+		}
+	}
 }

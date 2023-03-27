@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.Adapters.DataBoundControlAdapter
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,27 +34,27 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls.Adapters
 {
-    public class DataBoundControlAdapter : WebControlAdapter
-    {
-        public DataBoundControlAdapter ()
-        {
-        }
-        
-        internal DataBoundControlAdapter (DataBoundControl c) : base (c)
-        {
-        }
+	public class DataBoundControlAdapter : WebControlAdapter
+	{
+		public DataBoundControlAdapter ()
+		{
+		}
+		
+		internal DataBoundControlAdapter (DataBoundControl c) : base (c)
+		{
+		}
 
-        protected internal virtual void PerformDataBinding (IEnumerable data)
-        {
-            Control.PerformDataBinding (data);
-        }
+		protected internal virtual void PerformDataBinding (IEnumerable data)
+		{
+			Control.PerformDataBinding (data);
+		}
 
-        protected new DataBoundControl Control
-        {
-            get {
-                return (DataBoundControl)control;
-            }
-        }
-    }
+		protected new DataBoundControl Control
+		{
+			get {
+				return (DataBoundControl)control;
+			}
+		}
+	}
 }
 

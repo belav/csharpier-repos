@@ -20,7 +20,7 @@
 // Copyright (c) 2005,2006 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
@@ -34,110 +34,110 @@ using System.Collections;
 
 namespace MonoTests.System.Windows.Forms {
 
-    [TestFixture]
-    public class DataGridViewAdvancedBorderStyleTest : TestHelper {
+	[TestFixture]
+	public class DataGridViewAdvancedBorderStyleTest : TestHelper {
 
-        private DataGridViewAdvancedBorderStyle style;
+		private DataGridViewAdvancedBorderStyle style;
 
-        
-        [SetUp]
-        protected override void SetUp ()    {
-            style = new DataGridViewAdvancedBorderStyle();
-            base.SetUp ();
-        }
+		
+		[SetUp]
+		protected override void SetUp ()	{
+			style = new DataGridViewAdvancedBorderStyle();
+			base.SetUp ();
+		}
 
-        [Test]
-        public void TestDefaultValues () {
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.None, style.All, "#A1");
-            style.Left = DataGridViewAdvancedCellBorderStyle.Single;
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.NotSet, style.All, "#A2");
-            style.All = DataGridViewAdvancedCellBorderStyle.Single;
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.All, "#A3");
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Left, "#A4");
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Right, "#A5");
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Top, "#A6");
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Bottom, "#A7");
-        }
+		[Test]
+		public void TestDefaultValues () {
+			Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.None, style.All, "#A1");
+			style.Left = DataGridViewAdvancedCellBorderStyle.Single;
+			Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.NotSet, style.All, "#A2");
+			style.All = DataGridViewAdvancedCellBorderStyle.Single;
+			Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.All, "#A3");
+			Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Left, "#A4");
+			Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Right, "#A5");
+			Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Top, "#A6");
+			Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Bottom, "#A7");
+		}
 
-        [Test]
-        [ExpectedException(typeof(InvalidEnumArgumentException))]
-        public void TestLeftInvalidEnumArgumentException () {
-            style.Left = (DataGridViewAdvancedCellBorderStyle) 8;
-        }
+		[Test]
+		[ExpectedException(typeof(InvalidEnumArgumentException))]
+		public void TestLeftInvalidEnumArgumentException () {
+			style.Left = (DataGridViewAdvancedCellBorderStyle) 8;
+		}
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestLeftArgumentException1 () {
-            style.Left = DataGridViewAdvancedCellBorderStyle.NotSet;
-        }
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void TestLeftArgumentException1 () {
+			style.Left = DataGridViewAdvancedCellBorderStyle.NotSet;
+		}
 
-        /*
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestLeftArgumentException2 () {
-            Control.RightToLeft = true;
-            style.Left = DataGridViewAdvancedCellBorderStyle.InsetDouble;
-        }
+		/*
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void TestLeftArgumentException2 () {
+			Control.RightToLeft = true;
+			style.Left = DataGridViewAdvancedCellBorderStyle.InsetDouble;
+		}
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestLeftArgumentException3 () {
-            Control.RightToLeft = true;
-            style.Left = DataGridViewAdvancedCellBorderStyle.OutsetDouble;
-        }
-        */
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void TestLeftArgumentException3 () {
+			Control.RightToLeft = true;
+			style.Left = DataGridViewAdvancedCellBorderStyle.OutsetDouble;
+		}
+		*/
 
-        [Test]
-        [ExpectedException(typeof(InvalidEnumArgumentException))]
-        public void TestRightInvalidEnumArgumentException () {
-            style.Right = (DataGridViewAdvancedCellBorderStyle) 8;
-        }
+		[Test]
+		[ExpectedException(typeof(InvalidEnumArgumentException))]
+		public void TestRightInvalidEnumArgumentException () {
+			style.Right = (DataGridViewAdvancedCellBorderStyle) 8;
+		}
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestRightArgumentException1 () {
-            style.Right = DataGridViewAdvancedCellBorderStyle.NotSet;
-        }
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void TestRightArgumentException1 () {
+			style.Right = DataGridViewAdvancedCellBorderStyle.NotSet;
+		}
 
-        /*
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestRightArgumentException2 () {
-            Control.RightToLeft = false;
-            style.Right = DataGridViewAdvancedCellBorderStyle.InsetDouble;
-        }
+		/*
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void TestRightArgumentException2 () {
+			Control.RightToLeft = false;
+			style.Right = DataGridViewAdvancedCellBorderStyle.InsetDouble;
+		}
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestRightArgumentException3 () {
-            Control.RightToLeft = false;
-            style.Right = DataGridViewAdvancedCellBorderStyle.OutsetDouble;
-        }
-        */
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void TestRightArgumentException3 () {
+			Control.RightToLeft = false;
+			style.Right = DataGridViewAdvancedCellBorderStyle.OutsetDouble;
+		}
+		*/
 
-        [Test]
-        [ExpectedException(typeof(InvalidEnumArgumentException))]
-        public void TestTopInvalidEnumArgumentException () {
-            style.Top = (DataGridViewAdvancedCellBorderStyle) 8;
-        }
+		[Test]
+		[ExpectedException(typeof(InvalidEnumArgumentException))]
+		public void TestTopInvalidEnumArgumentException () {
+			style.Top = (DataGridViewAdvancedCellBorderStyle) 8;
+		}
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestTopArgumentException () {
-            style.Top = DataGridViewAdvancedCellBorderStyle.NotSet;
-        }
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void TestTopArgumentException () {
+			style.Top = DataGridViewAdvancedCellBorderStyle.NotSet;
+		}
 
-        [Test]
-        [ExpectedException(typeof(InvalidEnumArgumentException))]
-        public void TestBottomInvalidEnumArgumentException () {
-            style.Bottom = (DataGridViewAdvancedCellBorderStyle) 8;
-        }
+		[Test]
+		[ExpectedException(typeof(InvalidEnumArgumentException))]
+		public void TestBottomInvalidEnumArgumentException () {
+			style.Bottom = (DataGridViewAdvancedCellBorderStyle) 8;
+		}
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestBottomArgumentException () {
-            style.Bottom = DataGridViewAdvancedCellBorderStyle.NotSet;
-        }
-    }
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void TestBottomArgumentException () {
+			style.Bottom = DataGridViewAdvancedCellBorderStyle.NotSet;
+		}
+	}
 }
 

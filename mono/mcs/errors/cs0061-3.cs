@@ -3,14 +3,14 @@
 
 public class A
 {
-    protected internal interface IDerived : B.IBase
-    {
-    }
+	protected internal interface IDerived : B.IBase
+	{
+	}
 }
 
 public class B
 {
-    protected internal interface IBase 
-    {
-    }
+	protected internal interface IBase 
+	{
+	}
 }

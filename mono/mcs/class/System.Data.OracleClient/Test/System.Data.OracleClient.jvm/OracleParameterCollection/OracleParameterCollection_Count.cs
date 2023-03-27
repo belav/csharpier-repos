@@ -32,56 +32,56 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-    [TestFixture]
-    public class OracleParameterCollection_Count : ADONetTesterClass
-    {
-        public static void Main()
-        {
-            OracleParameterCollection_Count tc = new OracleParameterCollection_Count();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OracleParameterCollection_Count");
-                tc.run();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+	[TestFixture]
+	public class OracleParameterCollection_Count : ADONetTesterClass
+	{
+		public static void Main()
+		{
+			OracleParameterCollection_Count tc = new OracleParameterCollection_Count();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OracleParameterCollection_Count");
+				tc.run();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            Exception exp = null;
-    
-            OracleCommand cmd = new OracleCommand();
+		[Test]
+		public void run()
+		{
+			Exception exp = null;
+	
+			OracleCommand cmd = new OracleCommand();
 
-            try
-            {
-                BeginCase("Count - empty");
-                Compare(cmd.Parameters.Count ,0 );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Count - empty");
+				Compare(cmd.Parameters.Count ,0 );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            cmd.Parameters.Add(new OracleParameter("MyParam", "abcd"));
-            try
-            {
-                BeginCase("Count - add");
-                Compare(cmd.Parameters.Count ,1 );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			cmd.Parameters.Add(new OracleParameter("MyParam", "abcd"));
+			try
+			{
+				BeginCase("Count - add");
+				Compare(cmd.Parameters.Count ,1 );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            cmd.Parameters.Clear();
+			cmd.Parameters.Clear();
 
-            try
-            {
-                BeginCase("Count - clear");
-                Compare(cmd.Parameters.Count ,0 );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Count - clear");
+				Compare(cmd.Parameters.Count ,0 );
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
         
-        }
-    }
+		}
+	}
 }

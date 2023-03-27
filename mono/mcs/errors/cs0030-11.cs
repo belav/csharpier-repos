@@ -7,9 +7,9 @@ interface IA
 
 class MainClass
 {
-    public static void Main ()
-    {
-        string s = "s";
-        IA i = (IA) s;
-    }
+	public static void Main ()
+	{
+		string s = "s";
+		IA i = (IA) s;
+	}
 }

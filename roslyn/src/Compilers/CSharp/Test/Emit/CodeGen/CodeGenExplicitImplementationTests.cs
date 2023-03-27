@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -473,7 +473,7 @@ Class2.Method(4, 5, c)",
         public void TestImplementingGenericNestedInterfaces_Explicit()
         {
             // Tests:
-            // Sanity check – use open (T) and closed (C<String>) generic types in the signature of implemented methods
+            // Sanity check â€“ use open (T) and closed (C<String>) generic types in the signature of implemented methods
             // Implement members of generic interface nested inside other generic classes
 
             var source = @"
@@ -629,7 +629,7 @@ Derived6.Method",
         public void TestImplementingGenericNestedInterfaces_Explicit_HideTypeParameter()
         {
             // Tests:
-            // Explicitly implement generic methods on generic interfaces – test case where type parameter 
+            // Explicitly implement generic methods on generic interfaces â€“ test case where type parameter 
             // on method hides the type parameter on class (both in interface and in implementing type)
 
             var source = @"
@@ -694,7 +694,7 @@ Derived1.Method`2",
         public void TestExplicitImplementationInBaseGenericType()
         {
             // Tests:
-            // Implement I<string> explicitly in base class and I<int> explicitly in derived class –
+            // Implement I<string> explicitly in base class and I<int> explicitly in derived class â€“
             // assuming I<string> and I<int> have members with same signature (i.e. members 
             // that don't depend on generic-ness of the interface) test which (base / derived class) 
             // members are invoked when calling through each interface

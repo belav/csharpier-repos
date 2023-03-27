@@ -37,91 +37,91 @@ using MonoTests.SystemWeb.Framework;
 
 namespace StandAloneRunnerSupport
 {
-    public sealed class TestRunner : MarshalByRefObject, IRegisteredObject, ITestRunner
-    {
-        public AppDomain Domain {
-            get { return AppDomain.CurrentDomain; }
-        }
-        
-        public object TestRunData {
-            get { return Domain.GetData ("TestRunData"); }
-        }
+	public sealed class TestRunner : MarshalByRefObject, IRegisteredObject, ITestRunner
+	{
+		public AppDomain Domain {
+			get { return AppDomain.CurrentDomain; }
+		}
+		
+		public object TestRunData {
+			get { return Domain.GetData ("TestRunData"); }
+		}
 
-        public int StatusCode { get; private set; }
-        public string RedirectLocation { get; private set; }
-        public bool Redirected { get; private set; }
-        
-        public TestRunner ()
-        {
-        }
+		public int StatusCode { get; private set; }
+		public string RedirectLocation { get; private set; }
+		public bool Redirected { get; private set; }
+		
+		public TestRunner ()
+		{
+		}
 #if BUG_IN_THE_RUNTIME_IS_FIXED
-        public Response Run (string url, string pathInfo, SerializableDictionary <string, string> postValues)
+		public Response Run (string url, string pathInfo, SerializableDictionary <string, string> postValues)
 #else
-        public Response Run (string url, string pathInfo, string[] postValues, string[] formValues)
+		public Response Run (string url, string pathInfo, string[] postValues, string[] formValues)
 #endif
-        {
-            if (String.IsNullOrEmpty (url))
-                throw new ArgumentNullException ("url");
-            
-            bool isPost = postValues != null;
-            
-            ResetState ();
-            
-            if (String.IsNullOrEmpty (url))
-                throw new ArgumentNullException ("url");
-            
-            var output = new StringWriter ();
-            try {
-                string fullUrl = "http://localhost";
-                if (url [0] == '/')
-                    fullUrl += url;
-                else
-                    fullUrl += "/" + url;
-                
-                Uri uri = new Uri (fullUrl, UriKind.RelativeOrAbsolute);
-                string query = uri.Query;
-                if (!String.IsNullOrEmpty (query) && query [0] == '?')
-                    query = query.Substring (1);
-                
-                TestWorkerRequest wr;
-                
-                if (pathInfo != null)
-                    wr = new TestWorkerRequest (uri.AbsolutePath, query, pathInfo, output);
-                else
-                    wr = new TestWorkerRequest (uri.AbsolutePath, query, output);
-                wr.IsPost = isPost;
-                if (isPost) {
-                    wr.AppendPostData (formValues, true);
-                    wr.AppendPostData (postValues, false);
-                }
-                
-                HttpRuntime.ProcessRequest (wr);
-                StatusCode = (int) wr.StatusCode;
-                Redirected = wr.Redirected;
-                RedirectLocation = wr.RedirectLocation;
-                
-                return new Response {
-                    Body = output.ToString (),
-                    StatusCode = wr.StatusCode,
-                    StatusDescription = wr.StatusDescription
-                };
-            } finally {
-                output.Close ();
-            }
-        }
-        
-        public void Stop (bool immediate)
-        {
-            HostingEnvironment.UnregisterObject (this);
-        }
+		{
+			if (String.IsNullOrEmpty (url))
+				throw new ArgumentNullException ("url");
+			
+			bool isPost = postValues != null;
+			
+			ResetState ();
+			
+			if (String.IsNullOrEmpty (url))
+				throw new ArgumentNullException ("url");
+			
+			var output = new StringWriter ();
+			try {
+				string fullUrl = "http://localhost";
+				if (url [0] == '/')
+					fullUrl += url;
+				else
+					fullUrl += "/" + url;
+				
+				Uri uri = new Uri (fullUrl, UriKind.RelativeOrAbsolute);
+				string query = uri.Query;
+				if (!String.IsNullOrEmpty (query) && query [0] == '?')
+					query = query.Substring (1);
+				
+				TestWorkerRequest wr;
+				
+				if (pathInfo != null)
+					wr = new TestWorkerRequest (uri.AbsolutePath, query, pathInfo, output);
+				else
+					wr = new TestWorkerRequest (uri.AbsolutePath, query, output);
+				wr.IsPost = isPost;
+				if (isPost) {
+					wr.AppendPostData (formValues, true);
+					wr.AppendPostData (postValues, false);
+				}
+				
+				HttpRuntime.ProcessRequest (wr);
+				StatusCode = (int) wr.StatusCode;
+				Redirected = wr.Redirected;
+				RedirectLocation = wr.RedirectLocation;
+				
+				return new Response {
+					Body = output.ToString (),
+					StatusCode = wr.StatusCode,
+					StatusDescription = wr.StatusDescription
+				};
+			} finally {
+				output.Close ();
+			}
+		}
+		
+		public void Stop (bool immediate)
+		{
+			HostingEnvironment.UnregisterObject (this);
+		}
 
-        void ResetState ()
-        {
-            AppDomain ad = Domain;
+		void ResetState ()
+		{
+			AppDomain ad = Domain;
 
-            ad.SetData ("BEGIN_CODE_MARKER", Helpers.BEGIN_CODE_MARKER);
-            ad.SetData ("END_CODE_MARKER", Helpers.END_CODE_MARKER);
-            ad.SetData ("TestRunData", null);
-        }
-    }
+			ad.SetData ("BEGIN_CODE_MARKER", Helpers.BEGIN_CODE_MARKER);
+			ad.SetData ("END_CODE_MARKER", Helpers.END_CODE_MARKER);
+			ad.SetData ("TestRunData", null);
+		}
+	}
 }

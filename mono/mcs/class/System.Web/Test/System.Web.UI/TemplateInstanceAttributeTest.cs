@@ -1,9 +1,9 @@
 //
 // TemplateInstanceAttributeTest.cs
-//    - Unit tests for System.Web.UI.TemplateInstanceAttribute
+//	- Unit tests for System.Web.UI.TemplateInstanceAttribute
 //
 // Author:
-//    Konstantin Triger <kostat@mainsoft.com>
+//	Konstantin Triger <kostat@mainsoft.com>
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -35,22 +35,22 @@ using System.Collections;
 
 namespace MonoTests.System.Web.UI
 {
-    [TestFixture]
-    public class TemplateInstanceAttributeTest
-    {
-        [Test]
-        public void IsDefaultAttributeTest () {
-            Assert.IsTrue (TemplateInstanceAttribute.Multiple.IsDefaultAttribute (), "#01");
-            Assert.IsTrue (new TemplateInstanceAttribute (TemplateInstance.Multiple).IsDefaultAttribute (), "#02");
-        }
+	[TestFixture]
+	public class TemplateInstanceAttributeTest
+	{
+		[Test]
+		public void IsDefaultAttributeTest () {
+			Assert.IsTrue (TemplateInstanceAttribute.Multiple.IsDefaultAttribute (), "#01");
+			Assert.IsTrue (new TemplateInstanceAttribute (TemplateInstance.Multiple).IsDefaultAttribute (), "#02");
+		}
 
-        [Test]
-        public void EqualsTest () {
-            Assert.IsTrue (new TemplateInstanceAttribute (TemplateInstance.Multiple)
-                .Equals (new TemplateInstanceAttribute (TemplateInstance.Multiple)), "#01");
-            Assert.IsFalse (new TemplateInstanceAttribute (TemplateInstance.Multiple)
-                .Equals (new TemplateInstanceAttribute (TemplateInstance.Single)), "#02");
-        }
-    }
+		[Test]
+		public void EqualsTest () {
+			Assert.IsTrue (new TemplateInstanceAttribute (TemplateInstance.Multiple)
+				.Equals (new TemplateInstanceAttribute (TemplateInstance.Multiple)), "#01");
+			Assert.IsFalse (new TemplateInstanceAttribute (TemplateInstance.Multiple)
+				.Equals (new TemplateInstanceAttribute (TemplateInstance.Single)), "#02");
+		}
+	}
 }
 

@@ -1,8 +1,8 @@
-//
+﻿//
 // NetTcpBindingElementTest.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -35,21 +35,21 @@ using System.ServiceModel;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-    [TestFixture]
-    public class NetTcpBindingElementTest
-    {
-        class Poker : NetTcpBindingElement
-        {
-            public Type GetBindingElementType () {
-                return BindingElementType;
-            }
-        }
+	[TestFixture]
+	public class NetTcpBindingElementTest
+	{
+		class Poker : NetTcpBindingElement
+		{
+			public Type GetBindingElementType () {
+				return BindingElementType;
+			}
+		}
 
-        [Test]
-        public void BindingElementType () {
-            Poker poker = new Poker ();
-            Assert.AreEqual (typeof (NetTcpBinding), poker.GetBindingElementType (), "BindingElementType");
-        }
-    }
+		[Test]
+		public void BindingElementType () {
+			Poker poker = new Poker ();
+			Assert.AreEqual (typeof (NetTcpBinding), poker.GetBindingElementType (), "BindingElementType");
+		}
+	}
 }
 #endif

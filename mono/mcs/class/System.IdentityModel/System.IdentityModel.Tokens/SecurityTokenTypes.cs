@@ -2,7 +2,7 @@
 // SecurityTokenTypes.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -28,26 +28,26 @@
 
 namespace System.IdentityModel.Tokens
 {
-    public static class SecurityTokenTypes
-    {
-        public static string Kerberos {
-            get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Kerberos"; }
-        }
+	public static class SecurityTokenTypes
+	{
+		public static string Kerberos {
+			get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Kerberos"; }
+		}
 
-        public static string Rsa {
-            get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Rsa"; }
-        }
+		public static string Rsa {
+			get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Rsa"; }
+		}
 
-        public static string Saml {
-            get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Saml"; }
-        }
+		public static string Saml {
+			get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Saml"; }
+		}
 
-        public static string UserName {
-            get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/UserName"; }
-        }
+		public static string UserName {
+			get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/UserName"; }
+		}
 
-        public static string X509Certificate {
-            get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/X509Certificate"; }
-        }
-    }
+		public static string X509Certificate {
+			get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/X509Certificate"; }
+		}
+	}
 }

@@ -32,92 +32,92 @@ using System.Xml;
 
 namespace MonoTests.stand_alone.WebHarness
 {
-    public class TestInfo
-    {
-        private string _url;
-        private string _name;
+	public class TestInfo
+	{
+		private string _url;
+		private string _name;
 
-        public string Url
-        {
-            get {return _url;}
-            set {_url = value;}
-        }
-        public string Name
-        {
-            get {return _name;}
-            set {_name = value;}
-        }
-    }
+		public string Url
+		{
+			get {return _url;}
+			set {_url = value;}
+		}
+		public string Name
+		{
+			get {return _name;}
+			set {_name = value;}
+		}
+	}
 
-    public class TestsCatalog : IEnumerator, IEnumerable
-    {
-        private XmlDocument _testsListXml = null;
-        private IEnumerator _tests = null;
+	public class TestsCatalog : IEnumerator, IEnumerable
+	{
+		private XmlDocument _testsListXml = null;
+		private IEnumerator _tests = null;
 
-        public TestsCatalog() : this("")
-        {
-        }
-        public TestsCatalog(string catalogName) : this(catalogName, false)
-        {
-        }
+		public TestsCatalog() : this("")
+		{
+		}
+		public TestsCatalog(string catalogName) : this(catalogName, false)
+		{
+		}
 
-        public TestsCatalog(string catalogName, bool collectExluded)
-        {
-            if (catalogName == "")
-            {
-                catalogName = "test_catalog.xml";
-            }
+		public TestsCatalog(string catalogName, bool collectExluded)
+		{
+			if (catalogName == "")
+			{
+				catalogName = "test_catalog.xml";
+			}
 
-            try
-            {
-                _testsListXml = new XmlDocument();
-                _testsListXml.Load(catalogName);
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
+			try
+			{
+				_testsListXml = new XmlDocument();
+				_testsListXml.Load(catalogName);
+			}
+			catch(Exception e)
+			{
+				throw e;
+			}
 
-            try
-            {
-                if (collectExluded)
-                    _tests = _testsListXml.SelectNodes("/TestCases/TestCase").GetEnumerator();
-                else
-                    _tests = _testsListXml.SelectNodes("/TestCases/TestCase[@Exclude='N']").GetEnumerator();
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-        }
+			try
+			{
+				if (collectExluded)
+					_tests = _testsListXml.SelectNodes("/TestCases/TestCase").GetEnumerator();
+				else
+					_tests = _testsListXml.SelectNodes("/TestCases/TestCase[@Exclude='N']").GetEnumerator();
+			}
+			catch(Exception e)
+			{
+				throw e;
+			}
+		}
 
-        public IEnumerator GetEnumerator()
-        {
-            return this;
-        }
+		public IEnumerator GetEnumerator()
+		{
+			return this;
+		}
 
-        public object Current
-        {
-            get {return GetCurrentTestInfo();}
-        }
+		public object Current
+		{
+			get {return GetCurrentTestInfo();}
+		}
 
-        public bool MoveNext()
-        {
-            return _tests.MoveNext();
-        }
+		public bool MoveNext()
+		{
+			return _tests.MoveNext();
+		}
 
-        public void Reset()
-        {
-            _tests.Reset();
-        }
+		public void Reset()
+		{
+			_tests.Reset();
+		}
 
-        private TestInfo GetCurrentTestInfo()
-        {
-            XmlNode n = (XmlNode)_tests.Current;
-            TestInfo ti = new TestInfo();
-            ti.Name = n.Attributes["name"].Value;
-            ti.Url = n.Attributes["url"].Value;
-            return ti;
-        }
-    }
+		private TestInfo GetCurrentTestInfo()
+		{
+			XmlNode n = (XmlNode)_tests.Current;
+			TestInfo ti = new TestInfo();
+			ti.Name = n.Attributes["name"].Value;
+			ti.Url = n.Attributes["url"].Value;
+			return ti;
+		}
+	}
 }

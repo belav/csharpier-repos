@@ -31,16 +31,16 @@ using System;
 
 namespace Microsoft.Build.Framework
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple=false, Inherited=false)]
-    public sealed class RequiredAttribute : Attribute
-    {
-        // It should stop build process if property is of non-array type
-        // and is null
-        // It should pass empty table if property is of array type
-        // and is null
-        public RequiredAttribute ()
-        {
-        }
-    }
+	[AttributeUsage(AttributeTargets.Property, AllowMultiple=false, Inherited=false)]
+	public sealed class RequiredAttribute : Attribute
+	{
+		// It should stop build process if property is of non-array type
+		// and is null
+		// It should pass empty table if property is of array type
+		// and is null
+		public RequiredAttribute ()
+		{
+		}
+	}
 }
 

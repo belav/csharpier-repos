@@ -2,7 +2,7 @@
 // Microsoft.Win32.SessionSwitchEventHandler delegate
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -28,5 +28,5 @@
 
 namespace Microsoft.Win32 {
 
-    public delegate void SessionSwitchEventHandler (object sender, SessionSwitchEventArgs e);
+	public delegate void SessionSwitchEventHandler (object sender, SessionSwitchEventArgs e);
 }

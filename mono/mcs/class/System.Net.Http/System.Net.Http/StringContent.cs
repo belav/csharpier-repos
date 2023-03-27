@@ -2,7 +2,7 @@
 // StringContent.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2012 Xamarin Inc (http://www.xamarin.com)
 //
@@ -31,29 +31,29 @@ using System.Net.Http.Headers;
 
 namespace System.Net.Http
 {
-    public class StringContent : ByteArrayContent
-    {
-        public StringContent (string content)
-            : this (content, null, null)
-        {
-        }
+	public class StringContent : ByteArrayContent
+	{
+		public StringContent (string content)
+			: this (content, null, null)
+		{
+		}
 
-        public StringContent (string content, Encoding encoding)
-            : this (content, encoding, null)
-        {
-        }
+		public StringContent (string content, Encoding encoding)
+			: this (content, encoding, null)
+		{
+		}
 
-        public StringContent (string content, Encoding encoding, string mediaType)
-            : base (GetByteArray (content, encoding))
-        {
-            Headers.ContentType = new MediaTypeHeaderValue (mediaType ?? "text/plain") {
-                CharSet = (encoding ?? Encoding.UTF8).WebName
-            };
-        }
+		public StringContent (string content, Encoding encoding, string mediaType)
+			: base (GetByteArray (content, encoding))
+		{
+			Headers.ContentType = new MediaTypeHeaderValue (mediaType ?? "text/plain") {
+				CharSet = (encoding ?? Encoding.UTF8).WebName
+			};
+		}
 
-        static byte[] GetByteArray (string content, Encoding encoding)
-        {
-            return (encoding ?? Encoding.UTF8).GetBytes (content);
-        }
-    }
+		static byte[] GetByteArray (string content, Encoding encoding)
+		{
+			return (encoding ?? Encoding.UTF8).GetBytes (content);
+		}
+	}
 }

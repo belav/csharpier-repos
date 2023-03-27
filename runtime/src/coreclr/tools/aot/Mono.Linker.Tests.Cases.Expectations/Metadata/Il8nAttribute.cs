@@ -1,18 +1,18 @@
-// Copyright (c) .NET Foundation and contributors. All rights reserved.
+﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
 
 namespace Mono.Linker.Tests.Cases.Expectations.Metadata
 {
-    [AttributeUsage (AttributeTargets.Class)]
-    public sealed class Il8nAttribute : BaseMetadataAttribute
-    {
-        public readonly string Value;
+	[AttributeUsage (AttributeTargets.Class)]
+	public sealed class Il8nAttribute : BaseMetadataAttribute
+	{
+		public readonly string Value;
 
-        public Il8nAttribute (string value)
-        {
-            Value = value;
-        }
-    }
+		public Il8nAttribute (string value)
+		{
+			Value = value;
+		}
+	}
 }

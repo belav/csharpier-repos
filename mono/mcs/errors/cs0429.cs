@@ -7,6 +7,6 @@ class Main
    public void Method (int i)
    {
        if (false && i > 10)
-       return;
+	   return;
    }
 }

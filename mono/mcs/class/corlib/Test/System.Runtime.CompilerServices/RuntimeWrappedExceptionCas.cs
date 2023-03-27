@@ -1,9 +1,9 @@
 //
 // RuntimeWrappedExceptionCas.cs - CAS Test Cases for 
-//    System.Runtime.CompilerServices.RuntimeWrappedException
+//	System.Runtime.CompilerServices.RuntimeWrappedException
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -40,53 +40,53 @@ using MonoTests.System.Runtime.CompilerServices;
 
 namespace MonoCasTests.System.Runtime.CompilerServices {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class RuntimeWrappedExceptionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class RuntimeWrappedExceptionCas {
 
-        private RuntimeWrappedExceptionTest unit;
+		private RuntimeWrappedExceptionTest unit;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            unit = new RuntimeWrappedExceptionTest ();
-            unit.FixtureSetUp ();
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			unit = new RuntimeWrappedExceptionTest ();
+			unit.FixtureSetUp ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void UnitTests_Deny_Unrestricted ()
-        {
-            unit.WrappedException ();
-            unit.GetObjectData ();
-            // this means GetObjectData isn't protected by a Demand
-            // (but it may be, like documented, a LinkDemand)
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void UnitTests_Deny_Unrestricted ()
+		{
+			unit.WrappedException ();
+			unit.GetObjectData ();
+			// this means GetObjectData isn't protected by a Demand
+			// (but it may be, like documented, a LinkDemand)
+		}
 
-        // we use reflection to call RuntimeWrappedException as the GetObjectData method
-        // is protected by LinkDemand (which will be converted into full demand, i.e. a 
-        // stack walk) when reflection is used (i.e. it gets testable).
+		// we use reflection to call RuntimeWrappedException as the GetObjectData method
+		// is protected by LinkDemand (which will be converted into full demand, i.e. a 
+		// stack walk) when reflection is used (i.e. it gets testable).
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetObjectData_Deny_SerializationFormatter ()
-        {
-            SerializationInfo info = null;
-            StreamingContext context = new StreamingContext (StreamingContextStates.All);
-            MethodInfo mi = typeof (RuntimeWrappedException).GetMethod ("GetObjectData");
-            mi.Invoke (unit.rwe, new object[2] { info, context });
-        }
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void GetObjectData_Deny_SerializationFormatter ()
+		{
+			SerializationInfo info = null;
+			StreamingContext context = new StreamingContext (StreamingContextStates.All);
+			MethodInfo mi = typeof (RuntimeWrappedException).GetMethod ("GetObjectData");
+			mi.Invoke (unit.rwe, new object[2] { info, context });
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-        public void GetObjectData_PermitOnly_SerializationFormatter ()
-        {
-            SerializationInfo info = new SerializationInfo (typeof (RuntimeWrappedException), new FormatterConverter ());
-            StreamingContext context = new StreamingContext (StreamingContextStates.All);
-            MethodInfo mi = typeof (RuntimeWrappedException).GetMethod ("GetObjectData");
-            mi.Invoke (unit.rwe, new object[2] { info, context });
-        }
-    }
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
+		public void GetObjectData_PermitOnly_SerializationFormatter ()
+		{
+			SerializationInfo info = new SerializationInfo (typeof (RuntimeWrappedException), new FormatterConverter ());
+			StreamingContext context = new StreamingContext (StreamingContextStates.All);
+			MethodInfo mi = typeof (RuntimeWrappedException).GetMethod ("GetObjectData");
+			mi.Invoke (unit.rwe, new object[2] { info, context });
+		}
+	}
 }
 

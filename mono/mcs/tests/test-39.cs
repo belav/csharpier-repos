@@ -21,22 +21,22 @@ public class SimpleAttribute : Attribute {
                         secret = value;
                 }
         }
-        
-    public long LongValue {
-        get {
-            return 0;
-        }
-        set { }
-    }
-    
-    public long[] ArrayValue {
-        get {
-            return new long[0];
-        }
-        set { }
-    }
-    
-    public object D;
+		
+	public long LongValue {
+		get {
+			return 0;
+		}
+		set { }
+	}
+	
+	public long[] ArrayValue {
+		get {
+			return new long[0];
+		}
+		set { }
+	}
+	
+	public object D;
 }
 
 [Simple ("Interface test")]
@@ -63,18 +63,18 @@ public class Blah {
 
         public static int Main ()
         {
-                object o = (((SimpleAttribute)typeof(Blah2).GetCustomAttributes (typeof (SimpleAttribute), false)[0]).D);
-                if (o.ToString () != "System.Double[]")
-                    return 1;
+				object o = (((SimpleAttribute)typeof(Blah2).GetCustomAttributes (typeof (SimpleAttribute), false)[0]).D);
+				if (o.ToString () != "System.Double[]")
+					return 1;
 
-                if (((double[])o)[0].GetType () != typeof (double))
-                    return 2;
+				if (((double[])o)[0].GetType () != typeof (double))
+					return 2;
 
-                o = (((SimpleAttribute)typeof(Blah3).GetCustomAttributes (typeof (SimpleAttribute), false)[0]).D);
-                if (o.ToString () != "System.Double[]")
-                    return 3;
-                
-                Console.WriteLine ("OK");
+				o = (((SimpleAttribute)typeof(Blah3).GetCustomAttributes (typeof (SimpleAttribute), false)[0]).D);
+				if (o.ToString () != "System.Double[]")
+					return 3;
+				
+				Console.WriteLine ("OK");
                 return 0;
         }
 }

@@ -1,4 +1,4 @@
-//
+﻿//
 // SimpleTypeResolver.cs
 //
 // Author:
@@ -33,16 +33,16 @@ using System.Text;
 
 namespace System.Web.Script.Serialization
 {
-    public class SimpleTypeResolver : JavaScriptTypeResolver
-    {
-        public override Type ResolveType (string id) 
-        {
-            return Type.GetType (id);
-        }
+	public class SimpleTypeResolver : JavaScriptTypeResolver
+	{
+		public override Type ResolveType (string id) 
+		{
+			return Type.GetType (id);
+		}
 
-        public override string ResolveTypeId (Type type) 
-        {
-            return type.AssemblyQualifiedName;
-        }
-    }
+		public override string ResolveTypeId (Type type) 
+		{
+			return type.AssemblyQualifiedName;
+		}
+	}
 }

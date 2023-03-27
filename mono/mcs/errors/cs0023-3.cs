@@ -5,10 +5,10 @@ using System;
  
 public class Testing 
 { 
-    public static void DoNothing() {} 
-     
-    public static void Main() 
-    { 
-         Console.WriteLine(DoNothing().ToString()); 
-    } 
+	public static void DoNothing() {} 
+	 
+	public static void Main() 
+	{ 
+	 	Console.WriteLine(DoNothing().ToString()); 
+	} 
 } 

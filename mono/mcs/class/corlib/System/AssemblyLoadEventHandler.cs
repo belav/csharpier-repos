@@ -31,7 +31,7 @@
 
 namespace System
 {
-    [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public delegate void AssemblyLoadEventHandler (object sender, AssemblyLoadEventArgs args);
+	[Serializable]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public delegate void AssemblyLoadEventHandler (object sender, AssemblyLoadEventArgs args);
 }

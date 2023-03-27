@@ -20,14 +20,14 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 
 
 using System;
 
 namespace System.Windows.Forms {
 
-    public delegate void NodeLabelEditEventHandler (object sender, NodeLabelEditEventArgs e);
+	public delegate void NodeLabelEditEventHandler (object sender, NodeLabelEditEventArgs e);
 
 }
 

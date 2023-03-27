@@ -30,21 +30,21 @@ using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls {
 
-    public class TableDesigner : ControlDesigner
-    {
-        public TableDesigner ()
-            : base ()
-        {
-        }
+	public class TableDesigner : ControlDesigner
+	{
+		public TableDesigner ()
+			: base ()
+		{
+		}
 
-        public override string GetDesignTimeHtml ()
-        {
-            throw new NotImplementedException ();
-        }
+		public override string GetDesignTimeHtml ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override string GetPersistInnerHtml ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public override string GetPersistInnerHtml ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

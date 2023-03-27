@@ -2,7 +2,7 @@
 // PolicyConversionContext.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -34,35 +34,35 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-    public abstract class PolicyConversionContext
-    {
-        ServiceEndpoint endpoint;
+	public abstract class PolicyConversionContext
+	{
+		ServiceEndpoint endpoint;
 
-        protected PolicyConversionContext (ServiceEndpoint endpoint)
-        {
-            this.endpoint = endpoint;
-        }
+		protected PolicyConversionContext (ServiceEndpoint endpoint)
+		{
+			this.endpoint = endpoint;
+		}
 
-        internal ServiceEndpoint Endpoint {
-            get { return endpoint; }
-        }
+		internal ServiceEndpoint Endpoint {
+			get { return endpoint; }
+		}
 
-        public abstract BindingElementCollection BindingElements { get; }
+		public abstract BindingElementCollection BindingElements { get; }
 
-        public ContractDescription Contract {
-            get { return endpoint.Contract; }
-        }
+		public ContractDescription Contract {
+			get { return endpoint.Contract; }
+		}
 
-        public abstract PolicyAssertionCollection GetBindingAssertions ();
+		public abstract PolicyAssertionCollection GetBindingAssertions ();
 
-        public abstract PolicyAssertionCollection
-            GetFaultBindingAssertions (FaultDescription fault);
+		public abstract PolicyAssertionCollection
+			GetFaultBindingAssertions (FaultDescription fault);
 
-        public abstract PolicyAssertionCollection
-            GetMessageBindingAssertions (MessageDescription message);
+		public abstract PolicyAssertionCollection
+			GetMessageBindingAssertions (MessageDescription message);
 
-        public abstract PolicyAssertionCollection
-            GetOperationBindingAssertions (OperationDescription operation);
+		public abstract PolicyAssertionCollection
+			GetOperationBindingAssertions (OperationDescription operation);
 
-    }
+	}
 }

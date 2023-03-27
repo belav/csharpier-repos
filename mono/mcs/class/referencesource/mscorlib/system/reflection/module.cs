@@ -593,7 +593,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical]  // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        [SuppressUnmanagedCodeSecurity]
+		[SuppressUnmanagedCodeSecurity]
         private extern static void GetType(RuntimeModule module, String className, bool ignoreCase, bool throwOnError, ObjectHandleOnStack type);
 
         [System.Security.SecurityCritical]

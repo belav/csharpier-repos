@@ -3,10 +3,10 @@
 
 interface I
 {
-    void Test (int a);
+	void Test (int a);
 }
 
 class B: I
 {
-    public static void Test (int a) {}
+	public static void Test (int a) {}
 }

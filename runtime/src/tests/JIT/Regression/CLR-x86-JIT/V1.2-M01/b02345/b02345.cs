@@ -50,7 +50,7 @@ public class AA
                 AA.Static1();
             for ((new sbyte[101u, 64u][])[122, 88][75] += Math.Min((new sbyte[91u, 27u, 86u
                 ])[48, 111, 62], (new sbyte[57u, 83u])[122, 57]); (new float[]{93.0f, 67.0f
-                , 46.0f, 61.0f, 70.0f }[34] == ((float)(68.0))); (new ulong[93u, 100u, 123u
+				, 46.0f, 61.0f, 70.0f }[34] == ((float)(68.0))); (new ulong[93u, 100u, 123u
                 , 105u][])[110, 106, 35, 16][((int)(47.0f))] *= Math.Max((new ulong[115u, 35u
                 , 113u, 82u])[1, 91, 62, 42], (new ulong[32u])[108]))
             {

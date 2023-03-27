@@ -5,18 +5,18 @@ using System;
 
 public class TestAttribute : Attribute
 {
-    public TestAttribute(Type type)
-    {
-    }
+	public TestAttribute(Type type)
+	{
+	}
 }
 
 class C<T>
 {
-    class N
-    {
-        [Test(typeof(N))]
-        public static void Foo()
-        {
-        }
-    }
+	class N
+	{
+		[Test(typeof(N))]
+		public static void Foo()
+		{
+		}
+	}
 }

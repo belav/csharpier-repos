@@ -3,9 +3,9 @@
 // Compiler options: -warnaserror -warn:2 -t:library
 
 interface BaseInterface {
-    void Test (bool arg);
+	void Test (bool arg);
 }
 
 interface Derived : BaseInterface {
-    void Test (bool arg);
+	void Test (bool arg);
 }

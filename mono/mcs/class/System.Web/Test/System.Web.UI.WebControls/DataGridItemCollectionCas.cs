@@ -1,9 +1,9 @@
 //
 // DataGridItemCollectionCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.DataGridItemCollection
+//	- CAS unit tests for System.Web.UI.WebControls.DataGridItemCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,30 +40,30 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class DataGridItemCollectionCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class DataGridItemCollectionCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            DataGridItemCollectionTest unit = new DataGridItemCollectionTest ();
-            unit.Defaults ();
-            unit.Copy ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			DataGridItemCollectionTest unit = new DataGridItemCollectionTest ();
+			unit.Defaults ();
+			unit.Copy ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (ArrayList) });
-            Assert.IsNotNull (ci, ".ctor(ArrayList)");
-            return ci.Invoke (new object[1] { new ArrayList () });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (ArrayList) });
+			Assert.IsNotNull (ci, ".ctor(ArrayList)");
+			return ci.Invoke (new object[1] { new ArrayList () });
+		}
 
-        public override Type Type {
-            get { return typeof (DataGridItemCollection); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (DataGridItemCollection); }
+		}
+	}
 }

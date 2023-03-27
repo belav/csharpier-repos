@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.RepeaterItemCollection.cs 
 //
 // Author:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 // Copyright (C) 200y Novell, Inc (http://www.novell.com)
 //
@@ -33,15 +33,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls {
-    [TestFixture]    
-    public class RepeaterItemCollectionTest {    
-        [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void Repeater_DefaultsSelectArguments ()
-        {
-            RepeaterItemCollection coll = new RepeaterItemCollection (null);
-            Console.WriteLine (coll.Count);
-        }
-    }
+	[TestFixture]	
+	public class RepeaterItemCollectionTest {	
+		[Test]
+		[ExpectedException (typeof (NullReferenceException))]
+		public void Repeater_DefaultsSelectArguments ()
+		{
+			RepeaterItemCollection coll = new RepeaterItemCollection (null);
+			Console.WriteLine (coll.Count);
+		}
+	}
 }
 

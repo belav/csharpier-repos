@@ -20,16 +20,16 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    <pbartok@novell.com>
+//	Peter Bartok	<pbartok@novell.com>
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public enum RichTextBoxSelectionAttribute {
-        None    = 0,
-        All    = 1,
-        Mixed    = -1,
-    }
+	public enum RichTextBoxSelectionAttribute {
+		None	= 0,
+		All	= 1,
+		Mixed	= -1,
+	}
 }

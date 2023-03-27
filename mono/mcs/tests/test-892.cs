@@ -7,16 +7,16 @@ using System;
 
 class X
 {
-    public static int Main ()
-    {
-        Assembly executingAssembly = Assembly.GetAssembly (typeof(X));
-        FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (executingAssembly.Location);
-        if (fvi.FileVersion != "2011.02.0.0")
-            return 1;
+	public static int Main ()
+	{
+		Assembly executingAssembly = Assembly.GetAssembly (typeof(X));
+		FileVersionInfo fvi = FileVersionInfo.GetVersionInfo (executingAssembly.Location);
+		if (fvi.FileVersion != "2011.02.0.0")
+			return 1;
 
-        if (fvi.ProductVersion != "2011.02.0.0")
-            return 2;
+		if (fvi.ProductVersion != "2011.02.0.0")
+			return 2;
 
-        return 0;
-    }
+		return 0;
+	}
 }

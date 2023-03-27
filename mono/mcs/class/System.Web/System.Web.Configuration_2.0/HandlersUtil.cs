@@ -2,7 +2,7 @@
 // System.Web.Configuration.HandlersUtil
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 // (C) 2005-2009 Novell, inc (http://novell.com)
@@ -36,54 +36,54 @@ using System.Globalization;
 
 namespace System.Web.Configuration
 {
-    sealed class HandlersUtil
-    {
-        HandlersUtil ()
-        {
-        }
+	sealed class HandlersUtil
+	{
+		HandlersUtil ()
+		{
+		}
 
-        static public string ExtractAttributeValue (string attKey, XmlNode node)
-        {
-            return ExtractAttributeValue (attKey, node, false);
-        }
-            
-        static public string ExtractAttributeValue (string attKey, XmlNode node, bool optional)
-        {
-            return ExtractAttributeValue (attKey, node, optional, false);
-        }
-        
-        static public string ExtractAttributeValue (string attKey, XmlNode node, bool optional,
-                                  bool allowEmpty)
-        {
-            if (node.Attributes == null) {
-                if (optional)
-                    return null;
+		static public string ExtractAttributeValue (string attKey, XmlNode node)
+		{
+			return ExtractAttributeValue (attKey, node, false);
+		}
+			
+		static public string ExtractAttributeValue (string attKey, XmlNode node, bool optional)
+		{
+			return ExtractAttributeValue (attKey, node, optional, false);
+		}
+		
+		static public string ExtractAttributeValue (string attKey, XmlNode node, bool optional,
+							      bool allowEmpty)
+		{
+			if (node.Attributes == null) {
+				if (optional)
+					return null;
 
-                ThrowException ("Required attribute not found: " + attKey, node);
-            }
+				ThrowException ("Required attribute not found: " + attKey, node);
+			}
 
-            XmlNode att = node.Attributes.RemoveNamedItem (attKey);
-            if (att == null) {
-                if (optional)
-                    return null;
-                ThrowException ("Required attribute not found: " + attKey, node);
-            }
+			XmlNode att = node.Attributes.RemoveNamedItem (attKey);
+			if (att == null) {
+				if (optional)
+					return null;
+				ThrowException ("Required attribute not found: " + attKey, node);
+			}
 
-            string value = att.Value;
-            if (!allowEmpty && value == String.Empty) {
-                string opt = optional ? "Optional" : "Required";
-                ThrowException (opt + " attribute is empty: " + attKey, node);
-            }
+			string value = att.Value;
+			if (!allowEmpty && value == String.Empty) {
+				string opt = optional ? "Optional" : "Required";
+				ThrowException (opt + " attribute is empty: " + attKey, node);
+			}
 
-            return value;
-        }
+			return value;
+		}
 
-        static public void ThrowException (string msg, XmlNode node)
-        {
-            if (node != null && node.Name != String.Empty)
-                msg = msg + " (node name: " + node.Name + ") ";
-            throw new ConfigurationException (msg, node);
-        }
-    }
+		static public void ThrowException (string msg, XmlNode node)
+		{
+			if (node != null && node.Name != String.Empty)
+				msg = msg + " (node name: " + node.Name + ") ";
+			throw new ConfigurationException (msg, node);
+		}
+	}
 }
 

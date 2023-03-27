@@ -3,7 +3,7 @@
 // ServiceProxyGenerator.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -38,46 +38,46 @@ using System.ServiceModel.MonoInternal;
 
 namespace System.ServiceModel
 {
-    internal class ServiceProxyGenerator : ProxyGeneratorBase
-    {
-        public static Type CreateCallbackProxyType (DispatchRuntime dispatchRuntime, Type callbackType)
-        {
-            var ed = dispatchRuntime.EndpointDispatcher;
-            var channelDispatcher = ed.ChannelDispatcher;
-            Type contractType = channelDispatcher != null ? channelDispatcher.Host.ImplementedContracts.Values.First (hcd => hcd.Name == ed.ContractName && hcd.Namespace == ed.ContractNamespace).ContractType : dispatchRuntime.Type;
+	internal class ServiceProxyGenerator : ProxyGeneratorBase
+	{
+		public static Type CreateCallbackProxyType (DispatchRuntime dispatchRuntime, Type callbackType)
+		{
+			var ed = dispatchRuntime.EndpointDispatcher;
+			var channelDispatcher = ed.ChannelDispatcher;
+			Type contractType = channelDispatcher != null ? channelDispatcher.Host.ImplementedContracts.Values.First (hcd => hcd.Name == ed.ContractName && hcd.Namespace == ed.ContractNamespace).ContractType : dispatchRuntime.Type;
 
-            var cd = ContractDescriptionGenerator.GetCallbackContract (contractType, callbackType);
-            string modname = "dummy";
-            Type crtype = typeof (DuplexServiceRuntimeChannel);
+			var cd = ContractDescriptionGenerator.GetCallbackContract (contractType, callbackType);
+			string modname = "dummy";
+			Type crtype = typeof (DuplexServiceRuntimeChannel);
 
-            // public class __clientproxy_MyContract : ClientRuntimeChannel, [ContractType]
-            CodeClass c = new CodeModule (modname).CreateClass (
-                "__callbackproxy_" + cd.Name,
-                crtype,
-                new Type [] {callbackType});
+			// public class __clientproxy_MyContract : ClientRuntimeChannel, [ContractType]
+			CodeClass c = new CodeModule (modname).CreateClass (
+				"__callbackproxy_" + cd.Name,
+				crtype,
+				new Type [] {callbackType});
 
-            //
-            // public __callbackproxy_MyContract (
-            //    IChannel channel, DispatchRuntime runtime)
-            //    : base (channel, runtime)
-            // {
-            // }
-            //
-            Type [] ctorargs = new Type [] {typeof (IChannel), typeof (DispatchRuntime)};
-            CodeMethod ctor = c.CreateConstructor (
-                MethodAttributes.Public, ctorargs);
-            CodeBuilder b = ctor.CodeBuilder;
-            MethodBase baseCtor = crtype.GetConstructors (
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) [0];
-            if (baseCtor == null) throw new Exception ("INTERNAL ERROR: DuplexServiceRuntimeChannel.ctor() was not found.");
-            b.Call (
-                ctor.GetThis (),
-                baseCtor,
-                new CodeArgumentReference (typeof (IChannel), 1, "arg0"),
-                new CodeArgumentReference (typeof (DispatchRuntime), 2, "arg1"));
+			//
+			// public __callbackproxy_MyContract (
+			//	IChannel channel, DispatchRuntime runtime)
+			//	: base (channel, runtime)
+			// {
+			// }
+			//
+			Type [] ctorargs = new Type [] {typeof (IChannel), typeof (DispatchRuntime)};
+			CodeMethod ctor = c.CreateConstructor (
+				MethodAttributes.Public, ctorargs);
+			CodeBuilder b = ctor.CodeBuilder;
+			MethodBase baseCtor = crtype.GetConstructors (
+				BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) [0];
+			if (baseCtor == null) throw new Exception ("INTERNAL ERROR: DuplexServiceRuntimeChannel.ctor() was not found.");
+			b.Call (
+				ctor.GetThis (),
+				baseCtor,
+				new CodeArgumentReference (typeof (IChannel), 1, "arg0"),
+				new CodeArgumentReference (typeof (DispatchRuntime), 2, "arg1"));
 
-            return CreateProxyTypeOperations (crtype, c, cd);
-        }
-    }
+			return CreateProxyTypeOperations (crtype, c, cd);
+		}
+	}
 }
 #endif

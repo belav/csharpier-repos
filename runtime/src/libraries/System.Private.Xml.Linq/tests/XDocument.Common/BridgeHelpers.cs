@@ -825,7 +825,7 @@ namespace CoreXml.Test.XLinq
             var ms = new MemoryStream();
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
-            tw.WriteLine("<?xml version=\"1.0\"?><!DOCTYPE Root [<!ELEMENT Root ANY><!ELEMENT E ANY><!ATTLIST E    A1 NOTATION (N) #IMPLIED>]>");
+            tw.WriteLine("<?xml version=\"1.0\"?><!DOCTYPE Root [<!ELEMENT Root ANY><!ELEMENT E ANY><!ATTLIST E	A1 NOTATION (N) #IMPLIED>]>");
             tw.WriteLine("<Root><E A1=\"N\" /></Root>");
 
             FilePathUtil.addStream(strFileName, ms);
@@ -836,7 +836,7 @@ namespace CoreXml.Test.XLinq
             var ms = new MemoryStream();
             using var tw = new StreamWriter(ms, leaveOpen: true);
 
-            tw.WriteLine("<?xml version=\"1.0\"?><!DOCTYPE Root [<!ELEMENT Root ANY><!ELEMENT E ANY><!ATTLIST E    IMAGE_FORMAT (bmp|jpg|gif) #IMPLIED>]>");
+            tw.WriteLine("<?xml version=\"1.0\"?><!DOCTYPE Root [<!ELEMENT Root ANY><!ELEMENT E ANY><!ATTLIST E	IMAGE_FORMAT (bmp|jpg|gif) #IMPLIED>]>");
             tw.Write("<Root><E A1=\"gif\" /></Root>");
 
             FilePathUtil.addStream(strFileName, ms);

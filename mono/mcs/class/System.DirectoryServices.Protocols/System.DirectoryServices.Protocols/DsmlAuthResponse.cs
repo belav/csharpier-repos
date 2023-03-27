@@ -32,10 +32,10 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class DsmlAuthResponse : DirectoryResponse
-    {
-        internal DsmlAuthResponse ()
-        {
-        }
-    }
+	public class DsmlAuthResponse : DirectoryResponse
+	{
+		internal DsmlAuthResponse ()
+		{
+		}
+	}
 }

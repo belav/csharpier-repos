@@ -7,10 +7,10 @@ using System.Linq.Expressions;
 
 class C
 {
-    public static void Main ()
-    {
-        Expression<Func<Dictionary<string, int>>> l = () => new Dictionary<string, int> {
-            ["a"] = 1
-        };
-    }
+	public static void Main ()
+	{
+		Expression<Func<Dictionary<string, int>>> l = () => new Dictionary<string, int> {
+			["a"] = 1
+		};
+	}
 }

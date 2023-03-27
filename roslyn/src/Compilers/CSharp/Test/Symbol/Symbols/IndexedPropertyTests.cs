@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -2455,27 +2455,27 @@ P1(4).set
 .class public auto ansi sealed Microsoft.Vbe.Interop.vbext_ProcKind
        extends [mscorlib]System.Enum
 {
-    .field public specialname rtspecialname int32 value__
-    .field public static literal valuetype Microsoft.Vbe.Interop.vbext_ProcKind vbext_pk_Get = int32(0x00000003)
+	.field public specialname rtspecialname int32 value__
+	.field public static literal valuetype Microsoft.Vbe.Interop.vbext_ProcKind vbext_pk_Get = int32(0x00000003)
 } // end of class Microsoft.Vbe.Interop.vbext_ProcKind
 
 
 .class interface public abstract auto ansi import Microsoft.Vbe.Interop._CodeModule
 {
-    .method public hidebysig newslot specialname abstract virtual 
-            instance string  marshal( bstr)  get_ProcOfLine([in] int32 Line,
-                                                            [out] valuetype Microsoft.Vbe.Interop.vbext_ProcKind& ProcKind) runtime managed internalcall
-    {
-      .custom instance void [mscorlib]System.Runtime.InteropServices.DispIdAttribute::.ctor(int32) = ( 01 00 0E 00 02 60 00 00 )                         // .....`..
-    }
+	.method public hidebysig newslot specialname abstract virtual 
+			instance string  marshal( bstr)  get_ProcOfLine([in] int32 Line,
+															[out] valuetype Microsoft.Vbe.Interop.vbext_ProcKind& ProcKind) runtime managed internalcall
+	{
+	  .custom instance void [mscorlib]System.Runtime.InteropServices.DispIdAttribute::.ctor(int32) = ( 01 00 0E 00 02 60 00 00 )                         // .....`..
+	}
 
-    .property string ProcOfLine(int32,
-                                valuetype Microsoft.Vbe.Interop.vbext_ProcKind&)
-    {
-      .custom instance void [mscorlib]System.Runtime.InteropServices.DispIdAttribute::.ctor(int32) = ( 01 00 0E 00 02 60 00 00 )                         // .....`..
-      .get instance string Microsoft.Vbe.Interop._CodeModule::get_ProcOfLine(int32,
-                                                                             valuetype Microsoft.Vbe.Interop.vbext_ProcKind&)
-    }
+	.property string ProcOfLine(int32,
+								valuetype Microsoft.Vbe.Interop.vbext_ProcKind&)
+	{
+	  .custom instance void [mscorlib]System.Runtime.InteropServices.DispIdAttribute::.ctor(int32) = ( 01 00 0E 00 02 60 00 00 )                         // .....`..
+	  .get instance string Microsoft.Vbe.Interop._CodeModule::get_ProcOfLine(int32,
+																			 valuetype Microsoft.Vbe.Interop.vbext_ProcKind&)
+	}
 } // end of class Microsoft.Vbe.Interop._CodeModule
 
 .class interface public abstract auto ansi import Microsoft.Vbe.Interop.CodeModule

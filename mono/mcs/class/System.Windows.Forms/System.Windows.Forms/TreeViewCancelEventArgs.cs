@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 
 
 using System;
@@ -29,24 +29,24 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-    public class TreeViewCancelEventArgs : CancelEventArgs {
+	public class TreeViewCancelEventArgs : CancelEventArgs {
 
-        private TreeNode node;
-        private TreeViewAction action;
+		private TreeNode node;
+		private TreeViewAction action;
 
-        public TreeViewCancelEventArgs (TreeNode node, bool cancel, TreeViewAction action) : base (cancel)
-        {
-            this.node = node;
-            this.action = action;
-        }
+		public TreeViewCancelEventArgs (TreeNode node, bool cancel, TreeViewAction action) : base (cancel)
+		{
+			this.node = node;
+			this.action = action;
+		}
 
-        public TreeNode Node {
-            get { return node; }
-        }
+		public TreeNode Node {
+			get { return node; }
+		}
 
-        public TreeViewAction Action {
-            get { return action; }
-        }
-    }
+		public TreeViewAction Action {
+			get { return action; }
+		}
+	}
 }
 

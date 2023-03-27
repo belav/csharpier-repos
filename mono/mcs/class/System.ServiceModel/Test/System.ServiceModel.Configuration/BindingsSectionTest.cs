@@ -1,8 +1,8 @@
-//
+﻿//
 // BindingsSectionTest.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -38,28 +38,28 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-    [TestFixture]
-    public class BindingsSectionTest
-    {
+	[TestFixture]
+	public class BindingsSectionTest
+	{
 
-        [Test]
-        [Category("NotWorking")]
-        [Ignore ("fails under .NET; I never bothered to fix the test")]
-        public void UserConfiguration () {
-            ServiceModelSectionGroup config = (ServiceModelSectionGroup) ConfigurationManager.OpenExeConfiguration (TestResourceHelper.GetFullPathOfResource ("Test/config/userBinding")).GetSectionGroup ("system.serviceModel");
+		[Test]
+		[Category("NotWorking")]
+		[Ignore ("fails under .NET; I never bothered to fix the test")]
+		public void UserConfiguration () {
+			ServiceModelSectionGroup config = (ServiceModelSectionGroup) ConfigurationManager.OpenExeConfiguration (TestResourceHelper.GetFullPathOfResource ("Test/config/userBinding")).GetSectionGroup ("system.serviceModel");
 
-            BindingsSection section = config.Bindings;
+			BindingsSection section = config.Bindings;
 
-            BindingCollectionElement collectionElement = section ["userBinding"];
-            Assert.AreEqual (typeof (UserBindingCollectionElement), collectionElement.GetType (), "type");
+			BindingCollectionElement collectionElement = section ["userBinding"];
+			Assert.AreEqual (typeof (UserBindingCollectionElement), collectionElement.GetType (), "type");
 
-            StandardBindingElementCollection<UserBindingElement> userBindings = ((UserBindingCollectionElement) collectionElement).Bindings;
+			StandardBindingElementCollection<UserBindingElement> userBindings = ((UserBindingCollectionElement) collectionElement).Bindings;
 
-            Assert.AreEqual (2, userBindings.Count, "Count");
+			Assert.AreEqual (2, userBindings.Count, "Count");
 
-            Assert.AreEqual ("UserBinding_1", userBindings [0].Name, "Name_1");
-            Assert.AreEqual ("UserBinding_2", userBindings [1].Name, "Name_2");
-        }
-    }
+			Assert.AreEqual ("UserBinding_1", userBindings [0].Name, "Name_1");
+			Assert.AreEqual ("UserBinding_2", userBindings [1].Name, "Name_2");
+		}
+	}
 }
 #endif

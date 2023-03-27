@@ -18,11 +18,11 @@ Revision History:
 
 --*/
 namespace System.Net.Cache {
-    using System;
-    using System.Net;
-    using System.IO;
-    using System.Threading;
-    using System.Collections.Specialized;
+	using System;
+	using System.Net;
+	using System.IO;
+	using System.Threading;
+	using System.Collections.Specialized;
     using System.Diagnostics;
 
 

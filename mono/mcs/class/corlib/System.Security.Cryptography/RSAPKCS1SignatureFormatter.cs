@@ -2,7 +2,7 @@
 // RSAPKCS1SignatureFormatter.cs - Handles PKCS#1 v.1.5 signature encryption.
 //
 // Author:
-//    Sebastien Pouliot <sebastien@ximian.com>
+//	Sebastien Pouliot <sebastien@ximian.com>
 //
 // (C) 2002, 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
@@ -31,50 +31,50 @@ using System.Runtime.InteropServices;
 using Mono.Security.Cryptography;
 
 namespace System.Security.Cryptography { 
-    
-    [ComVisible (true)]
-    public class RSAPKCS1SignatureFormatter : AsymmetricSignatureFormatter {
-    
-        private RSA rsa;
-        private string hash;
-    
-        public RSAPKCS1SignatureFormatter ()
-        {
-        }
-    
-        public RSAPKCS1SignatureFormatter (AsymmetricAlgorithm key) 
-        {
-            SetKey (key);
-        }
-    
-        public override byte[] CreateSignature (byte[] rgbHash) 
-        {
-            if (rsa == null) {
-                throw new CryptographicUnexpectedOperationException (
-                    Locale.GetText ("No key pair available."));
-            }
-            if (hash == null) {
-                throw new CryptographicUnexpectedOperationException (
-                    Locale.GetText ("Missing hash algorithm."));
-            }
-            if (rgbHash == null)
-                throw new ArgumentNullException ("rgbHash");
+	
+	[ComVisible (true)]
+	public class RSAPKCS1SignatureFormatter : AsymmetricSignatureFormatter {
+	
+		private RSA rsa;
+		private string hash;
+	
+		public RSAPKCS1SignatureFormatter ()
+		{
+		}
+	
+		public RSAPKCS1SignatureFormatter (AsymmetricAlgorithm key) 
+		{
+			SetKey (key);
+		}
+	
+		public override byte[] CreateSignature (byte[] rgbHash) 
+		{
+			if (rsa == null) {
+				throw new CryptographicUnexpectedOperationException (
+					Locale.GetText ("No key pair available."));
+			}
+			if (hash == null) {
+				throw new CryptographicUnexpectedOperationException (
+					Locale.GetText ("Missing hash algorithm."));
+			}
+			if (rgbHash == null)
+				throw new ArgumentNullException ("rgbHash");
 
-            return PKCS1.Sign_v15 (rsa, hash, rgbHash);
-        }
-    
-        public override void SetHashAlgorithm (string strName) 
-        {
-            if (strName == null)
-                throw new ArgumentNullException ("strName");
-            hash = strName;
-        }
-    
-        public override void SetKey (AsymmetricAlgorithm key) 
-        {
-            if (key == null)
-                throw new ArgumentNullException ("key");
-            rsa = (RSA) key;
-        }
-    }
+			return PKCS1.Sign_v15 (rsa, hash, rgbHash);
+		}
+	
+		public override void SetHashAlgorithm (string strName) 
+		{
+			if (strName == null)
+				throw new ArgumentNullException ("strName");
+			hash = strName;
+		}
+	
+		public override void SetKey (AsymmetricAlgorithm key) 
+		{
+			if (key == null)
+				throw new ArgumentNullException ("key");
+			rsa = (RSA) key;
+		}
+	}
 }

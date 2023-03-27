@@ -10,6 +10,6 @@ using Hoge = System.Xml.XmlDocument;
 namespace TopNS
 {
 
-    enum Foo {
-    }
+	enum Foo {
+	}
 }

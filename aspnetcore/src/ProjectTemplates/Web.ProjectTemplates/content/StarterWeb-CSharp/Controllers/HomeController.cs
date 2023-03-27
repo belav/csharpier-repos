@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 #if (GenerateApiOrGraph)
 using System.Net;
 #endif

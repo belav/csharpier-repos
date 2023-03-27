@@ -32,38 +32,38 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class DirSyncRequestControl : DirectoryControl
-    {
-        public DirSyncRequestControl ()
-            : base (null, null, false, false)
-        {
-        }
+	public class DirSyncRequestControl : DirectoryControl
+	{
+		public DirSyncRequestControl ()
+			: base (null, null, false, false)
+		{
+		}
 
-        public DirSyncRequestControl (byte [] cookie)
-            : this ()
-        {
-            Cookie = cookie;
-        }
+		public DirSyncRequestControl (byte [] cookie)
+			: this ()
+		{
+			Cookie = cookie;
+		}
 
-        public DirSyncRequestControl (byte [] cookie, DirectorySynchronizationOptions option)
-            : this (cookie)
-        {
-            Option = option;
-        }
+		public DirSyncRequestControl (byte [] cookie, DirectorySynchronizationOptions option)
+			: this (cookie)
+		{
+			Option = option;
+		}
 
-        public DirSyncRequestControl (byte [] cookie, DirectorySynchronizationOptions option, int attributeCount)
-            : this (cookie, option)
-        {
-            AttributeCount = attributeCount;
-        }
+		public DirSyncRequestControl (byte [] cookie, DirectorySynchronizationOptions option, int attributeCount)
+			: this (cookie, option)
+		{
+			AttributeCount = attributeCount;
+		}
 
-        public int AttributeCount { get; set; }
-        public byte [] Cookie { get; set; }
-        public DirectorySynchronizationOptions Option { get; set; }
+		public int AttributeCount { get; set; }
+		public byte [] Cookie { get; set; }
+		public DirectorySynchronizationOptions Option { get; set; }
 
-        public override byte [] GetValue ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public override byte [] GetValue ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

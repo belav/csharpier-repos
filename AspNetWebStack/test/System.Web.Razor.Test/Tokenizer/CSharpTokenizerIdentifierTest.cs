@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Web.Razor.Tokenizer.Symbols;
@@ -29,25 +29,25 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void Identifier_Can_Start_With_Titlecase_Letter()
         {
-            TestTokenizer("?foo", new CSharpSymbol(0, 0, 0, "?foo", CSharpSymbolType.Identifier));
+            TestTokenizer("ῼfoo", new CSharpSymbol(0, 0, 0, "ῼfoo", CSharpSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Start_With_Letter_Modifier()
         {
-            TestTokenizer("?foo", new CSharpSymbol(0, 0, 0, "?foo", CSharpSymbolType.Identifier));
+            TestTokenizer("ᵊfoo", new CSharpSymbol(0, 0, 0, "ᵊfoo", CSharpSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Start_With_Other_Letter()
         {
-            TestTokenizer("?foo", new CSharpSymbol(0, 0, 0, "?foo", CSharpSymbolType.Identifier));
+            TestTokenizer("ƻfoo", new CSharpSymbol(0, 0, 0, "ƻfoo", CSharpSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Start_With_Number_Letter()
         {
-            TestTokenizer("?ool", new CSharpSymbol(0, 0, 0, "?ool", CSharpSymbolType.Identifier));
+            TestTokenizer("Ⅽool", new CSharpSymbol(0, 0, 0, "Ⅽool", CSharpSymbolType.Identifier));
         }
 
         [Fact]
@@ -59,25 +59,25 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void Identifier_Can_Contain_Spacing_Combining_Mark()
         {
-            TestTokenizer("foo?", new CSharpSymbol(0, 0, 0, "foo?", CSharpSymbolType.Identifier));
+            TestTokenizer("fooः", new CSharpSymbol(0, 0, 0, "fooः", CSharpSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Contain_Non_English_Digit()
         {
-            TestTokenizer("foo?", new CSharpSymbol(0, 0, 0, "foo?", CSharpSymbolType.Identifier));
+            TestTokenizer("foo١", new CSharpSymbol(0, 0, 0, "foo١", CSharpSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Contain_Connector_Punctuation()
         {
-            TestTokenizer("foo?bar", new CSharpSymbol(0, 0, 0, "foo?bar", CSharpSymbolType.Identifier));
+            TestTokenizer("foo‿bar", new CSharpSymbol(0, 0, 0, "foo‿bar", CSharpSymbolType.Identifier));
         }
 
         [Fact]
         public void Identifier_Can_Contain_Format_Character()
         {
-            TestTokenizer("foo?bar", new CSharpSymbol(0, 0, 0, "foo?bar", CSharpSymbolType.Identifier));
+            TestTokenizer("foo؃bar", new CSharpSymbol(0, 0, 0, "foo؃bar", CSharpSymbolType.Identifier));
         }
 
         [Fact]

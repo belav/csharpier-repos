@@ -28,72 +28,72 @@
 
 namespace Mono.Cecil.Metadata {
 
-    using Mono.Cecil.Binary;
+	using Mono.Cecil.Binary;
 
-    internal sealed class MetadataRoot : IMetadataVisitable {
+	internal sealed class MetadataRoot : IMetadataVisitable {
 
-        MetadataRootHeader m_header;
-        Image m_image;
+		MetadataRootHeader m_header;
+		Image m_image;
 
-        MetadataStreamCollection m_streams;
+		MetadataStreamCollection m_streams;
 
-        public MetadataRootHeader Header {
-            get { return m_header; }
-            set { m_header = value; }
-        }
+		public MetadataRootHeader Header {
+			get { return m_header; }
+			set { m_header = value; }
+		}
 
-        public MetadataStreamCollection Streams {
-            get { return m_streams; }
-            set { m_streams = value; }
-        }
+		public MetadataStreamCollection Streams {
+			get { return m_streams; }
+			set { m_streams = value; }
+		}
 
-        internal MetadataRoot (Image img)
-        {
-            m_image = img;
-        }
+		internal MetadataRoot (Image img)
+		{
+			m_image = img;
+		}
 
-        public Image GetImage ()
-        {
-            return m_image;
-        }
+		public Image GetImage ()
+		{
+			return m_image;
+		}
 
-        public void Accept (IMetadataVisitor visitor)
-        {
-            visitor.VisitMetadataRoot (this);
+		public void Accept (IMetadataVisitor visitor)
+		{
+			visitor.VisitMetadataRoot (this);
 
-            m_header.Accept (visitor);
-            m_streams.Accept (visitor);
+			m_header.Accept (visitor);
+			m_streams.Accept (visitor);
 
-            visitor.TerminateMetadataRoot (this);
-        }
+			visitor.TerminateMetadataRoot (this);
+		}
 
-        internal sealed class MetadataRootHeader : IHeader, IMetadataVisitable {
+		internal sealed class MetadataRootHeader : IHeader, IMetadataVisitable {
 
-            public const uint StandardSignature = 0x424a5342;
+			public const uint StandardSignature = 0x424a5342;
 
-            public uint Signature;
-            public ushort MinorVersion;
-            public ushort MajorVersion;
-            public uint Reserved;
-            public string Version;
-            public ushort Flags;
-            public ushort Streams;
+			public uint Signature;
+			public ushort MinorVersion;
+			public ushort MajorVersion;
+			public uint Reserved;
+			public string Version;
+			public ushort Flags;
+			public ushort Streams;
 
-            internal MetadataRootHeader ()
-            {
-            }
+			internal MetadataRootHeader ()
+			{
+			}
 
-            public void SetDefaultValues ()
-            {
-                Signature = StandardSignature;
-                Reserved = 0;
-                Flags = 0;
-            }
+			public void SetDefaultValues ()
+			{
+				Signature = StandardSignature;
+				Reserved = 0;
+				Flags = 0;
+			}
 
-            public void Accept (IMetadataVisitor visitor)
-            {
-                visitor.VisitMetadataRootHeader (this);
-            }
-        }
-    }
+			public void Accept (IMetadataVisitor visitor)
+			{
+				visitor.VisitMetadataRootHeader (this);
+			}
+		}
+	}
 }

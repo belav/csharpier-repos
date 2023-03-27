@@ -17,9 +17,9 @@
 using System;
 
 namespace System.Data.OracleClient {
-    public enum OracleLobOpenMode
-    {
-        ReadOnly = 0x01,
-        ReadWrite = 0x02
-    }
+	public enum OracleLobOpenMode
+	{
+		ReadOnly = 0x01,
+		ReadWrite = 0x02
+	}
 }

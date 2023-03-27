@@ -2,7 +2,7 @@
 // System.Net.ICredentialPolicy interface
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -28,12 +28,12 @@
 
 namespace System.Net {
 
-    public interface ICredentialPolicy {
-        bool ShouldSendCredential (Uri challengeUri,
-            WebRequest request,
-            NetworkCredential credential,
-            IAuthenticationModule authenticationModule
-        );
-    }
+	public interface ICredentialPolicy {
+		bool ShouldSendCredential (Uri challengeUri,
+			WebRequest request,
+			NetworkCredential credential,
+			IAuthenticationModule authenticationModule
+		);
+	}
 }
 

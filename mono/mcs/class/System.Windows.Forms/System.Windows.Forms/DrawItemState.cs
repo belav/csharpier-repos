@@ -20,25 +20,25 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 
 
 namespace System.Windows.Forms {
 
-    [Flags]
-    public enum DrawItemState {
-        None = 0,
-        Selected = 1,
-        Grayed = 2,
-        Disabled = 4,
-        Checked = 8,
-        Focus = 16,
-        Default = 32,
-        HotLight = 64,
-        Inactive = 128,
-        NoAccelerator = 256,
-        NoFocusRect = 512,
-        ComboBoxEdit = 4096
-    }
+	[Flags]
+	public enum DrawItemState {
+		None = 0,
+		Selected = 1,
+		Grayed = 2,
+		Disabled = 4,
+		Checked = 8,
+		Focus = 16,
+		Default = 32,
+		HotLight = 64,
+		Inactive = 128,
+		NoAccelerator = 256,
+		NoFocusRect = 512,
+		ComboBoxEdit = 4096
+	}
 }
 

@@ -2,7 +2,7 @@
 // CodeLayerFactory.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,27 +31,27 @@ using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis {
-    static class CodeLayerFactory {
-        public static ICodeLayer<Expression, Variable, ContextData, EdgeConversionData>
-            Create<Expression, Variable, ContextData, EdgeConversionData> (
-            IILDecoder<APC, Expression, Variable, ContextData, EdgeConversionData> ilDecoder,
-            IMetaDataProvider metadataDecoder,
-            IContractProvider contractDecoder, Func<Expression, string> expressionToString, Func<Variable, string> variableToString)
-            where ContextData : IMethodContextProvider
-        {
-            return new CodeLayer<Expression, Variable, ContextData, EdgeConversionData>
-                (ilDecoder, metadataDecoder, contractDecoder, expressionToString, variableToString);
-        }
+	static class CodeLayerFactory {
+		public static ICodeLayer<Expression, Variable, ContextData, EdgeConversionData>
+			Create<Expression, Variable, ContextData, EdgeConversionData> (
+			IILDecoder<APC, Expression, Variable, ContextData, EdgeConversionData> ilDecoder,
+			IMetaDataProvider metadataDecoder,
+			IContractProvider contractDecoder, Func<Expression, string> expressionToString, Func<Variable, string> variableToString)
+			where ContextData : IMethodContextProvider
+		{
+			return new CodeLayer<Expression, Variable, ContextData, EdgeConversionData>
+				(ilDecoder, metadataDecoder, contractDecoder, expressionToString, variableToString);
+		}
 
-        public static ICodeLayer<Expression, Variable, ContextData, EdgeConversionData>
-            Create<Expression, Variable, ContextData, EdgeConversionData> (
-            IILDecoder<APC, Expression, Variable, ContextData, EdgeConversionData> ilDecoder,
-            IMetaDataProvider metadataDecoder,
-            IContractProvider contractDecoder, Func<Expression, string> expressionToString, Func<Variable, string> variableToString, ILPrinter<APC> printer)
-            where ContextData : IMethodContextProvider
-        {
-            return new CodeLayer<Expression, Variable, ContextData, EdgeConversionData>
-                (ilDecoder, metadataDecoder, contractDecoder, expressionToString, variableToString, printer);
-        }
-    }
+		public static ICodeLayer<Expression, Variable, ContextData, EdgeConversionData>
+			Create<Expression, Variable, ContextData, EdgeConversionData> (
+			IILDecoder<APC, Expression, Variable, ContextData, EdgeConversionData> ilDecoder,
+			IMetaDataProvider metadataDecoder,
+			IContractProvider contractDecoder, Func<Expression, string> expressionToString, Func<Variable, string> variableToString, ILPrinter<APC> printer)
+			where ContextData : IMethodContextProvider
+		{
+			return new CodeLayer<Expression, Variable, ContextData, EdgeConversionData>
+				(ilDecoder, metadataDecoder, contractDecoder, expressionToString, variableToString, printer);
+		}
+	}
 }

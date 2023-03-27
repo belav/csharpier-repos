@@ -3,11 +3,11 @@
 
 class C2<T>
 {
-    C2<T> i;
-    T field;
+	C2<T> i;
+	T field;
 
-    public void Foo ()
-    {
-        var x = i?.field;
-    }
+	public void Foo ()
+	{
+		var x = i?.field;
+	}
 }

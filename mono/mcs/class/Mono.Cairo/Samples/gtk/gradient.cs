@@ -1,8 +1,8 @@
 //
 //
-//    Mono.Cairo drawing samples using GTK# as drawing surface
-//    Autor: Jordi Mas <jordi@ximian.com>. Based on work from Owen Taylor
-//           Hisham Mardam Bey <hisham@hisham.cc>
+//	Mono.Cairo drawing samples using GTK# as drawing surface
+//	Autor: Jordi Mas <jordi@ximian.com>. Based on work from Owen Taylor
+//	       Hisham Mardam Bey <hisham@hisham.cc>
 //
 
 //
@@ -33,26 +33,26 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Cairo;
 using Gtk;
-    
+	
 public class GtkCairo
 {
-    static DrawingArea a;
-    
-    static void Main ()
-    {        
-        Application.Init ();
-        Gtk.Window w = new Gtk.Window ("Mono.Cairo Circles demo");
+	static DrawingArea a;
+	
+	static void Main ()
+	{		
+		Application.Init ();
+		Gtk.Window w = new Gtk.Window ("Mono.Cairo Circles demo");
 
-        a = new CairoGraphic ();    
-        
-        Box box = new HBox (true, 0);
-        box.Add (a);
-        w.Add (box);
-        w.Resize (500,500);        
-        w.ShowAll ();        
-        
-        Application.Run ();
-    }
+		a = new CairoGraphic ();	
+		
+		Box box = new HBox (true, 0);
+		box.Add (a);
+		w.Add (box);
+		w.Resize (500,500);		
+		w.ShowAll ();		
+		
+		Application.Run ();
+	}
 
 
 }
@@ -60,49 +60,49 @@ public class GtkCairo
 public class CairoGraphic : DrawingArea 
 {
         static readonly double  M_PI = 3.14159265358979323846;
-    
-    static void draw (Cairo.Context gr, int width, int height)
-    {
-        gr.Scale (width, height);
-        gr.LineWidth = 0.04;
-        LinearGradient pat;        
-        
-        pat = new LinearGradient (0.0, 0.0,  0.0, 1.0);
-        pat.AddColorStop (1, new Color (0, 0, 0, 1) );
-        pat.AddColorStop (0, new Color (1, 1, 1, 1) );
-        gr.Rectangle ( new PointD (0, 0),
-                   1, 1
-                   );
-        
-        gr.Pattern =  pat;
-        gr.Fill ();
-        pat.Destroy ();
+	
+	static void draw (Cairo.Context gr, int width, int height)
+	{
+		gr.Scale (width, height);
+		gr.LineWidth = 0.04;
+		LinearGradient pat;		
+		
+		pat = new LinearGradient (0.0, 0.0,  0.0, 1.0);
+		pat.AddColorStop (1, new Color (0, 0, 0, 1) );
+		pat.AddColorStop (0, new Color (1, 1, 1, 1) );
+		gr.Rectangle ( new PointD (0, 0),
+			       1, 1
+			       );
+		
+		gr.Pattern =  pat;
+		gr.Fill ();
+		pat.Destroy ();
 
-        RadialGradient pat2 = new RadialGradient (0.45, 0.4, 0.1,
-                     0.4,  0.4, 0.5);
-        
-        pat2.AddColorStop (0, new Color (1, 1, 1, 1) );
-        pat2.AddColorStop (1, new Color (0, 0, 0, 1) );
-        gr.Pattern =  pat2;
-        gr.Arc (0.5, 0.5, 0.3, 0, 2 * M_PI);
-        gr.Fill ();
-        pat2.Destroy ();
-    }
-    
-    
-    protected override bool OnExposeEvent (Gdk.EventExpose args)
-    {
-        Gdk.Window win = args.Window;
-        //Gdk.Rectangle area = args.Area;
-        
-        Cairo.Context g = Gdk.Context.CreateDrawable (win);
-        
-        int x, y, w, h, d;
-        win.GetGeometry(out x, out y, out w, out h, out d);
-        
-        draw (g, w, h);
-        return true;
-    }
+		RadialGradient pat2 = new RadialGradient (0.45, 0.4, 0.1,
+				     0.4,  0.4, 0.5);
+		
+		pat2.AddColorStop (0, new Color (1, 1, 1, 1) );
+		pat2.AddColorStop (1, new Color (0, 0, 0, 1) );
+		gr.Pattern =  pat2;
+		gr.Arc (0.5, 0.5, 0.3, 0, 2 * M_PI);
+		gr.Fill ();
+		pat2.Destroy ();
+	}
+	
+	
+	protected override bool OnExposeEvent (Gdk.EventExpose args)
+	{
+		Gdk.Window win = args.Window;
+		//Gdk.Rectangle area = args.Area;
+		
+		Cairo.Context g = Gdk.Context.CreateDrawable (win);
+		
+		int x, y, w, h, d;
+		win.GetGeometry(out x, out y, out w, out h, out d);
+		
+		draw (g, w, h);
+		return true;
+	}
 
 }
 

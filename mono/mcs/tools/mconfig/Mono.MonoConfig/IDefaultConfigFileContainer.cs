@@ -30,14 +30,14 @@ using System.Collections.Generic;
 
 namespace Mono.MonoConfig
 {
-    public interface IDefaultConfigFileContainer
-    {
-        event OverwriteFileEventHandler OverwriteFile;
-        
-        bool HasDefaultConfigFile (string name, FeatureTarget target);
-        void WriteDefaultConfigFile (string name, FeatureTarget target, string path, IDefaultContainer[] defaults);
-        ICollection <string> DefaultConfigFiles {
-            get;
-        }
-    }
+	public interface IDefaultConfigFileContainer
+	{
+		event OverwriteFileEventHandler OverwriteFile;
+		
+		bool HasDefaultConfigFile (string name, FeatureTarget target);
+		void WriteDefaultConfigFile (string name, FeatureTarget target, string path, IDefaultContainer[] defaults);
+		ICollection <string> DefaultConfigFiles {
+			get;
+		}
+	}
 }

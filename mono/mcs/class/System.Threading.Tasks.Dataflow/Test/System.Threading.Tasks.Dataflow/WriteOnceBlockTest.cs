@@ -32,211 +32,211 @@ using System.Threading.Tasks.Dataflow;
 using NUnit.Framework;
 
 namespace MonoTests.System.Threading.Tasks.Dataflow {
-    [TestFixture]
-    public class WriteOnceBlockTest {
-        [Test]
-        public void BasicUsageTest ()
-        {
-            bool act1 = false, act2 = false;
-            var evt = new CountdownEvent (2);
+	[TestFixture]
+	public class WriteOnceBlockTest {
+		[Test]
+		public void BasicUsageTest ()
+		{
+			bool act1 = false, act2 = false;
+			var evt = new CountdownEvent (2);
 
-            var block = new WriteOnceBlock<int> (null);
-            var action1 = new ActionBlock<int> (i =>
-            {
-                act1 = i == 42;
-                evt.Signal ();
-            });
-            var action2 = new ActionBlock<int> (i =>
-            {
-                act2 = i == 42;
-                evt.Signal ();
-            });
+			var block = new WriteOnceBlock<int> (null);
+			var action1 = new ActionBlock<int> (i =>
+			{
+				act1 = i == 42;
+				evt.Signal ();
+			});
+			var action2 = new ActionBlock<int> (i =>
+			{
+				act2 = i == 42;
+				evt.Signal ();
+			});
 
-            block.LinkTo (action1);
-            block.LinkTo (action2);
+			block.LinkTo (action1);
+			block.LinkTo (action2);
 
-            Assert.IsTrue (block.Post (42), "#1");
-            Assert.IsFalse (block.Post (43), "#2");
+			Assert.IsTrue (block.Post (42), "#1");
+			Assert.IsFalse (block.Post (43), "#2");
 
-            Assert.IsTrue (evt.Wait (1000), "#3");
+			Assert.IsTrue (evt.Wait (1000), "#3");
 
-            Assert.IsTrue (act1, "#4");
-            Assert.IsTrue (act2, "#5");
-        }
+			Assert.IsTrue (act1, "#4");
+			Assert.IsTrue (act2, "#5");
+		}
 
-        [Test]
-        public void LinkAfterPostTest ()
-        {
-            bool act = false;
-            var evt = new ManualResetEventSlim ();
+		[Test]
+		public void LinkAfterPostTest ()
+		{
+			bool act = false;
+			var evt = new ManualResetEventSlim ();
 
-            var block = new WriteOnceBlock<int> (null);
-            var action = new ActionBlock<int> (i =>
-            {
-                act = i == 42;
-                evt.Set ();
-            });
+			var block = new WriteOnceBlock<int> (null);
+			var action = new ActionBlock<int> (i =>
+			{
+				act = i == 42;
+				evt.Set ();
+			});
 
-            Assert.IsTrue (block.Post (42));
+			Assert.IsTrue (block.Post (42));
 
-            block.LinkTo (action);
+			block.LinkTo (action);
 
-            Assert.IsTrue (evt.Wait (1000));
+			Assert.IsTrue (evt.Wait (1000));
 
-            Assert.IsTrue (act);
-        }
+			Assert.IsTrue (act);
+		}
 
-        [Test]
-        public void PostponedTest ()
-        {
-            var block = new WriteOnceBlock<int> (null);
-            var target = new BufferBlock<int> (
-                new DataflowBlockOptions { BoundedCapacity = 1 });
-            block.LinkTo (target);
+		[Test]
+		public void PostponedTest ()
+		{
+			var block = new WriteOnceBlock<int> (null);
+			var target = new BufferBlock<int> (
+				new DataflowBlockOptions { BoundedCapacity = 1 });
+			block.LinkTo (target);
 
-            Assert.IsTrue (target.Post (1));
+			Assert.IsTrue (target.Post (1));
 
-            Assert.IsTrue (block.Post (2));
+			Assert.IsTrue (block.Post (2));
 
-            Assert.AreEqual (1, target.Receive (TimeSpan.FromMilliseconds (1000)));
-            Assert.AreEqual (2, target.Receive (TimeSpan.FromMilliseconds (1000)));
-        }
+			Assert.AreEqual (1, target.Receive (TimeSpan.FromMilliseconds (1000)));
+			Assert.AreEqual (2, target.Receive (TimeSpan.FromMilliseconds (1000)));
+		}
 
-        [Test]
-        public void QueuedMessageTest ()
-        {
-            var scheduler = new TestScheduler ();
-            var block = new WriteOnceBlock<int> (null,
-                new DataflowBlockOptions { TaskScheduler = scheduler });
-            var target = new BufferBlock<int> ();
-            block.LinkTo (target);
+		[Test]
+		public void QueuedMessageTest ()
+		{
+			var scheduler = new TestScheduler ();
+			var block = new WriteOnceBlock<int> (null,
+				new DataflowBlockOptions { TaskScheduler = scheduler });
+			var target = new BufferBlock<int> ();
+			block.LinkTo (target);
 
-            Assert.IsTrue (block.Post (1));
+			Assert.IsTrue (block.Post (1));
 
-            AssertEx.Throws<TimeoutException> (
-                () => target.Receive (TimeSpan.FromMilliseconds (1000)));
+			AssertEx.Throws<TimeoutException> (
+				() => target.Receive (TimeSpan.FromMilliseconds (1000)));
 
-            scheduler.ExecuteAll ();
+			scheduler.ExecuteAll ();
 
-            int item;
-            Assert.IsTrue (target.TryReceive (out item));
-            Assert.AreEqual (1, item);
-        }
+			int item;
+			Assert.IsTrue (target.TryReceive (out item));
+			Assert.AreEqual (1, item);
+		}
 
-        [Test]
-        public void CloningTest ()
-        {
-            object act1 = null, act2 = null;
-            var evt = new CountdownEvent (2);
+		[Test]
+		public void CloningTest ()
+		{
+			object act1 = null, act2 = null;
+			var evt = new CountdownEvent (2);
 
-            object source = new object ();
-            var block = new WriteOnceBlock<object> (o => new object ());
-            var action1 = new ActionBlock<object> (i =>
-            {
-                act1 = i;
-                evt.Signal ();
-            });
-            var action2 = new ActionBlock<object> (i =>
-            {
-                act2 = i;
-                evt.Signal ();
-            });
+			object source = new object ();
+			var block = new WriteOnceBlock<object> (o => new object ());
+			var action1 = new ActionBlock<object> (i =>
+			{
+				act1 = i;
+				evt.Signal ();
+			});
+			var action2 = new ActionBlock<object> (i =>
+			{
+				act2 = i;
+				evt.Signal ();
+			});
 
-            block.LinkTo (action1);
-            block.LinkTo (action2);
+			block.LinkTo (action1);
+			block.LinkTo (action2);
 
-            Assert.IsTrue (block.Post (source));
+			Assert.IsTrue (block.Post (source));
 
-            Assert.IsTrue (evt.Wait (1000));
+			Assert.IsTrue (evt.Wait (1000));
 
-            Assert.IsNotNull (act1);
-            Assert.IsNotNull (act2);
+			Assert.IsNotNull (act1);
+			Assert.IsNotNull (act2);
 
-            Assert.IsFalse (source.Equals (act1));
-            Assert.IsFalse (source.Equals (act2));
-            Assert.IsFalse (act2.Equals (act1));
-        }
+			Assert.IsFalse (source.Equals (act1));
+			Assert.IsFalse (source.Equals (act2));
+			Assert.IsFalse (act2.Equals (act1));
+		}
 
-        [Test]
-        public void WriteOnceBehaviorTest ()
-        {
-            bool act1 = false, act2 = false;
-            var evt = new CountdownEvent (2);
+		[Test]
+		public void WriteOnceBehaviorTest ()
+		{
+			bool act1 = false, act2 = false;
+			var evt = new CountdownEvent (2);
 
-            var broadcast = new WriteOnceBlock<int> (null);
-            var action1 = new ActionBlock<int> (i =>
-            {
-                act1 = i == 42;
-                evt.Signal ();
-            });
-            var action2 = new ActionBlock<int> (i =>
-            {
-                act2 = i == 42;
-                evt.Signal ();
-            });
+			var broadcast = new WriteOnceBlock<int> (null);
+			var action1 = new ActionBlock<int> (i =>
+			{
+				act1 = i == 42;
+				evt.Signal ();
+			});
+			var action2 = new ActionBlock<int> (i =>
+			{
+				act2 = i == 42;
+				evt.Signal ();
+			});
 
-            broadcast.LinkTo (action1);
-            broadcast.LinkTo (action2);
+			broadcast.LinkTo (action1);
+			broadcast.LinkTo (action2);
 
-            Assert.IsTrue (broadcast.Post (42));
+			Assert.IsTrue (broadcast.Post (42));
 
-            Assert.IsTrue (evt.Wait (1000));
+			Assert.IsTrue (evt.Wait (1000));
 
-            Assert.IsTrue (act1);
-            Assert.IsTrue (act2);
+			Assert.IsTrue (act1);
+			Assert.IsTrue (act2);
 
-            Assert.IsFalse (broadcast.Post (24));
-            Thread.Sleep (300);
+			Assert.IsFalse (broadcast.Post (24));
+			Thread.Sleep (300);
 
-            Assert.IsTrue (act1);
-            Assert.IsTrue (act2);
-        }
+			Assert.IsTrue (act1);
+			Assert.IsTrue (act2);
+		}
 
-        [Test]
-        public void TryReceiveBehaviorTest ()
-        {
-            var block = new WriteOnceBlock<int> (null);
-            int foo;
-            Assert.IsFalse (block.TryReceive (null, out foo));
-            block.Post (42);
-            Assert.IsTrue (block.TryReceive (null, out foo));
-            Assert.AreEqual (42, foo);
-            Assert.IsTrue (block.TryReceive (null, out foo));
-            Assert.IsFalse (block.TryReceive (i => i == 0, out foo));
-            IList<int> bar;
-            Assert.IsTrue (((IReceivableSourceBlock<int>)block).TryReceiveAll (out bar));
-            CollectionAssert.AreEqual (new[] { 42 }, bar);
-        }
+		[Test]
+		public void TryReceiveBehaviorTest ()
+		{
+			var block = new WriteOnceBlock<int> (null);
+			int foo;
+			Assert.IsFalse (block.TryReceive (null, out foo));
+			block.Post (42);
+			Assert.IsTrue (block.TryReceive (null, out foo));
+			Assert.AreEqual (42, foo);
+			Assert.IsTrue (block.TryReceive (null, out foo));
+			Assert.IsFalse (block.TryReceive (i => i == 0, out foo));
+			IList<int> bar;
+			Assert.IsTrue (((IReceivableSourceBlock<int>)block).TryReceiveAll (out bar));
+			CollectionAssert.AreEqual (new[] { 42 }, bar);
+		}
 
-        [Test]
-        public void DontOfferTwiceTest ()
-        {
-            var scheduler = new TestScheduler ();
-            var block = new WriteOnceBlock<int> (null,
-                new DataflowBlockOptions { TaskScheduler = scheduler });
-            var target =
-                new TestTargetBlock<int> { Postpone = true };
-            block.LinkTo (target);
+		[Test]
+		public void DontOfferTwiceTest ()
+		{
+			var scheduler = new TestScheduler ();
+			var block = new WriteOnceBlock<int> (null,
+				new DataflowBlockOptions { TaskScheduler = scheduler });
+			var target =
+				new TestTargetBlock<int> { Postpone = true };
+			block.LinkTo (target);
 
-            Assert.IsFalse (target.HasPostponed);
+			Assert.IsFalse (target.HasPostponed);
 
-            Assert.IsTrue (block.Post (1));
+			Assert.IsTrue (block.Post (1));
 
-            scheduler.ExecuteAll ();
+			scheduler.ExecuteAll ();
 
-            Assert.IsTrue (target.HasPostponed);
+			Assert.IsTrue (target.HasPostponed);
 
-            target.Postpone = false;
+			target.Postpone = false;
 
-            int value;
-            Assert.IsTrue (target.RetryPostponed (out value));
-            Assert.AreEqual (1, value);
+			int value;
+			Assert.IsTrue (target.RetryPostponed (out value));
+			Assert.AreEqual (1, value);
 
-            block.LinkTo (new BufferBlock<int> ());
+			block.LinkTo (new BufferBlock<int> ());
 
-            scheduler.ExecuteAll ();
+			scheduler.ExecuteAll ();
 
-            Assert.AreEqual (default(int), target.DirectlyAccepted);
-        }
-    }
+			Assert.AreEqual (default(int), target.DirectlyAccepted);
+		}
+	}
 }

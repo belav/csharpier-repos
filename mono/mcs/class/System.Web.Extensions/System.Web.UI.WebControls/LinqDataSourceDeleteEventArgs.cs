@@ -35,24 +35,24 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class LinqDataSourceDeleteEventArgs : CancelEventArgs
-    {
-        public LinqDataSourceDeleteEventArgs (object originalObject)
-        {
-            OriginalObject = originalObject;
-        }
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class LinqDataSourceDeleteEventArgs : CancelEventArgs
+	{
+		public LinqDataSourceDeleteEventArgs (object originalObject)
+		{
+			OriginalObject = originalObject;
+		}
 
-        public LinqDataSourceDeleteEventArgs (LinqDataSourceValidationException exception)
-        {
-            Exception = exception;
-        }
+		public LinqDataSourceDeleteEventArgs (LinqDataSourceValidationException exception)
+		{
+			Exception = exception;
+		}
 
-        public LinqDataSourceValidationException Exception { get; private set; }
+		public LinqDataSourceValidationException Exception { get; private set; }
 
-        public bool ExceptionHandled { get; set; }
+		public bool ExceptionHandled { get; set; }
 
-        public object OriginalObject { get; private set; }
-    }
+		public object OriginalObject { get; private set; }
+	}
 }

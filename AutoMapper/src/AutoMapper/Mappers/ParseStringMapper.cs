@@ -1,4 +1,4 @@
-namespace AutoMapper.Internal.Mappers;
+﻿namespace AutoMapper.Internal.Mappers;
 
 public class ParseStringMapper : IObjectMapper
 {

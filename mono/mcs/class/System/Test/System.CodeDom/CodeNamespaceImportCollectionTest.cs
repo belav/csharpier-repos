@@ -1,9 +1,9 @@
 //
 // CodeNamespaceImportCollectionTest.cs 
-//    - Unit tests for System.CodeDom.CodeNamespaceImportCollection
+//	- Unit tests for System.CodeDom.CodeNamespaceImportCollection
 //
 // Author:
-//    Gert Driesen  <drieseng@users.sourceforge.net>
+//	Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,90 +34,90 @@ using System.Collections;
 using System.CodeDom;
 
 namespace MonoTests.System.CodeDom {
-    [TestFixture]
-    public class CodeNamespaceImportCollectionTest {
-        [Test]
-        public void Constructor0 ()
-        {
-            CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection ();
-            Assert.IsFalse (((IList) coll).IsFixedSize, "#1");
-            Assert.IsFalse (((IList) coll).IsReadOnly, "#2");
-            Assert.AreEqual (0, coll.Count, "#3");
-            Assert.IsFalse (((ICollection) coll).IsSynchronized, "#4");
-            Assert.IsNull (((ICollection) coll).SyncRoot, "#5");
-        }
+	[TestFixture]
+	public class CodeNamespaceImportCollectionTest {
+		[Test]
+		public void Constructor0 ()
+		{
+			CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection ();
+			Assert.IsFalse (((IList) coll).IsFixedSize, "#1");
+			Assert.IsFalse (((IList) coll).IsReadOnly, "#2");
+			Assert.AreEqual (0, coll.Count, "#3");
+			Assert.IsFalse (((ICollection) coll).IsSynchronized, "#4");
+			Assert.IsNull (((ICollection) coll).SyncRoot, "#5");
+		}
 
-        [Test]
-        public void Add ()
-        {
-            CodeNamespaceImport ni1 = new CodeNamespaceImport ("A");
-            CodeNamespaceImport ni2 = new CodeNamespaceImport ("B");
-            CodeNamespaceImport ni3 = new CodeNamespaceImport ("b");
-            CodeNamespaceImport ni4 = new CodeNamespaceImport ("B");
+		[Test]
+		public void Add ()
+		{
+			CodeNamespaceImport ni1 = new CodeNamespaceImport ("A");
+			CodeNamespaceImport ni2 = new CodeNamespaceImport ("B");
+			CodeNamespaceImport ni3 = new CodeNamespaceImport ("b");
+			CodeNamespaceImport ni4 = new CodeNamespaceImport ("B");
 
-            CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection ();
-            coll.Add (ni1);
-            Assert.AreEqual (1, coll.Count, "#1");
-            Assert.AreEqual (0, ((IList) coll).IndexOf (ni1), "#2");
+			CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection ();
+			coll.Add (ni1);
+			Assert.AreEqual (1, coll.Count, "#1");
+			Assert.AreEqual (0, ((IList) coll).IndexOf (ni1), "#2");
 
-            coll.Add (ni2);
-            Assert.AreEqual (2, coll.Count, "#3");
-            Assert.AreEqual (1, ((IList) coll).IndexOf (ni2), "#4");
+			coll.Add (ni2);
+			Assert.AreEqual (2, coll.Count, "#3");
+			Assert.AreEqual (1, ((IList) coll).IndexOf (ni2), "#4");
 
-            coll.Add (ni3);
-            Assert.AreEqual (2, coll.Count, "#5");
-            Assert.AreEqual (-1, ((IList) coll).IndexOf (ni3), "#6");
+			coll.Add (ni3);
+			Assert.AreEqual (2, coll.Count, "#5");
+			Assert.AreEqual (-1, ((IList) coll).IndexOf (ni3), "#6");
 
-            coll.Add (ni4);
-            Assert.AreEqual (2, coll.Count, "#7");
-            Assert.AreEqual (-1, ((IList) coll).IndexOf (ni4), "#8");
-        }
+			coll.Add (ni4);
+			Assert.AreEqual (2, coll.Count, "#7");
+			Assert.AreEqual (-1, ((IList) coll).IndexOf (ni4), "#8");
+		}
 
-        [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void Add_Null () {
-            CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection ();
-            coll.Add ((CodeNamespaceImport) null);
-        }
+		[Test]
+		[ExpectedException (typeof (NullReferenceException))]
+		public void Add_Null () {
+			CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection ();
+			coll.Add ((CodeNamespaceImport) null);
+		}
 
-        [Test]
-        public void AddRange ()
-        {
-            CodeNamespaceImport ni1 = new CodeNamespaceImport ("A");
-            CodeNamespaceImport ni2 = new CodeNamespaceImport ("B");
-            CodeNamespaceImport ni3 = new CodeNamespaceImport ("b");
-            CodeNamespaceImport ni4 = new CodeNamespaceImport ("B");
-            CodeNamespaceImport ni5 = new CodeNamespaceImport ("C");
+		[Test]
+		public void AddRange ()
+		{
+			CodeNamespaceImport ni1 = new CodeNamespaceImport ("A");
+			CodeNamespaceImport ni2 = new CodeNamespaceImport ("B");
+			CodeNamespaceImport ni3 = new CodeNamespaceImport ("b");
+			CodeNamespaceImport ni4 = new CodeNamespaceImport ("B");
+			CodeNamespaceImport ni5 = new CodeNamespaceImport ("C");
 
-            CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection ();
-            coll.AddRange (new CodeNamespaceImport[] {ni1, ni2});
-            Assert.AreEqual (2, coll.Count, "#1");
-            Assert.AreEqual (0, ((IList) coll).IndexOf (ni1), "#2");
-            Assert.AreEqual (1, ((IList) coll).IndexOf (ni2), "#3");
+			CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection ();
+			coll.AddRange (new CodeNamespaceImport[] {ni1, ni2});
+			Assert.AreEqual (2, coll.Count, "#1");
+			Assert.AreEqual (0, ((IList) coll).IndexOf (ni1), "#2");
+			Assert.AreEqual (1, ((IList) coll).IndexOf (ni2), "#3");
 
-            coll.AddRange (new CodeNamespaceImport[] { ni3, ni4, ni5 });
-            Assert.AreEqual (3, coll.Count, "#4");
-            Assert.AreEqual (0, ((IList) coll).IndexOf (ni1), "#5");
-            Assert.AreEqual (1, ((IList) coll).IndexOf (ni2), "#6");
-            Assert.AreEqual (-1, ((IList) coll).IndexOf (ni3), "#7");
-            Assert.AreEqual (-1, ((IList) coll).IndexOf (ni4), "#8");
-            Assert.AreEqual (2, ((IList) coll).IndexOf (ni5), "#9");
-        }
+			coll.AddRange (new CodeNamespaceImport[] { ni3, ni4, ni5 });
+			Assert.AreEqual (3, coll.Count, "#4");
+			Assert.AreEqual (0, ((IList) coll).IndexOf (ni1), "#5");
+			Assert.AreEqual (1, ((IList) coll).IndexOf (ni2), "#6");
+			Assert.AreEqual (-1, ((IList) coll).IndexOf (ni3), "#7");
+			Assert.AreEqual (-1, ((IList) coll).IndexOf (ni4), "#8");
+			Assert.AreEqual (2, ((IList) coll).IndexOf (ni5), "#9");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void AddRange_Null_Array ()
-        {
-            CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection ();
-            coll.AddRange ((CodeNamespaceImport[]) null);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void AddRange_Null_Array ()
+		{
+			CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection ();
+			coll.AddRange ((CodeNamespaceImport[]) null);
+		}
 
-        [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void AddRange_Null_Item()
-        {
-            CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection();
-            coll.AddRange(new CodeNamespaceImport[] { null });
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (NullReferenceException))]
+		public void AddRange_Null_Item()
+		{
+			CodeNamespaceImportCollection coll = new CodeNamespaceImportCollection();
+			coll.AddRange(new CodeNamespaceImport[] { null });
+		}
+	}
 }

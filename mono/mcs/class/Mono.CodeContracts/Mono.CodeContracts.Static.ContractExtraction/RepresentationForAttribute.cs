@@ -2,7 +2,7 @@
 // RepresentationForAttribute.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,20 +29,20 @@
 using System;
 
 namespace Mono.CodeContracts.Static.ContractExtraction {
-    [AttributeUsage (AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-    sealed class RepresentationForAttribute : Attribute {
-        public RepresentationForAttribute (string runtimeName)
-            : this (runtimeName, true)
-        {
-        }
+	[AttributeUsage (AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+	sealed class RepresentationForAttribute : Attribute {
+		public RepresentationForAttribute (string runtimeName)
+			: this (runtimeName, true)
+		{
+		}
 
-        private RepresentationForAttribute (string runtimeName, bool isRequired)
-        {
-            RuntimeName = runtimeName;
-            IsRequired = isRequired;
-        }
+		private RepresentationForAttribute (string runtimeName, bool isRequired)
+		{
+			RuntimeName = runtimeName;
+			IsRequired = isRequired;
+		}
 
-        public string RuntimeName { get; private set; }
-        public bool IsRequired { get; private set; }
-    }
+		public string RuntimeName { get; private set; }
+		public bool IsRequired { get; private set; }
+	}
 }

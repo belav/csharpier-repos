@@ -1,8 +1,8 @@
-//
+﻿//
 // RequestContext.cs
 //
 // Authors:
-//    Marek Habersack <mhabersack@novell.com>
+//	Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2010 Novell Inc. http://novell.com
 //
@@ -37,61 +37,61 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Routing
 {
-    [TestFixture]
-    public class RequestContextTest
-    {
-        [Test]
-        public void DefaultConstructor ()
-        {
-            var rc = new RequestContext ();
+	[TestFixture]
+	public class RequestContextTest
+	{
+		[Test]
+		public void DefaultConstructor ()
+		{
+			var rc = new RequestContext ();
 
-            Assert.AreEqual (null, rc.HttpContext, "#A1");
-            Assert.AreEqual (null, rc.RouteData, "#A2");
-        }
-        [Test]
-        public void Constructor_HttpContextBase_RouteData ()
-        {
-            RequestContext rc;
+			Assert.AreEqual (null, rc.HttpContext, "#A1");
+			Assert.AreEqual (null, rc.RouteData, "#A2");
+		}
+		[Test]
+		public void Constructor_HttpContextBase_RouteData ()
+		{
+			RequestContext rc;
 
-            Assert.Throws<ArgumentNullException> (() => {
-                rc = new RequestContext (null, new RouteData ());
-            }, "#A1");
+			Assert.Throws<ArgumentNullException> (() => {
+				rc = new RequestContext (null, new RouteData ());
+			}, "#A1");
 
-            var ctx = new HttpContextWrapper (new HttpContext (new HttpRequest ("filename", "http://localhost/filename", String.Empty), new HttpResponse (new StringWriter ())));
-            Assert.Throws<ArgumentNullException> (() => {
-                rc = new RequestContext (ctx, null);
-            }, "#A2");
-        }
+			var ctx = new HttpContextWrapper (new HttpContext (new HttpRequest ("filename", "http://localhost/filename", String.Empty), new HttpResponse (new StringWriter ())));
+			Assert.Throws<ArgumentNullException> (() => {
+				rc = new RequestContext (ctx, null);
+			}, "#A2");
+		}
 
-        [Test]
-        public void HttpContext ()
-        {
-            var ctx = new HttpContextWrapper (new HttpContext (new HttpRequest ("filename", "http://localhost/filename", String.Empty), new HttpResponse (new StringWriter ())));
-            var rc = new RequestContext (ctx, new RouteData ());
+		[Test]
+		public void HttpContext ()
+		{
+			var ctx = new HttpContextWrapper (new HttpContext (new HttpRequest ("filename", "http://localhost/filename", String.Empty), new HttpResponse (new StringWriter ())));
+			var rc = new RequestContext (ctx, new RouteData ());
 
-            Assert.AreSame (ctx, rc.HttpContext, "#A1");
-            ctx = new HttpContextWrapper (new HttpContext (new HttpRequest ("filename", "http://localhost/filename", String.Empty), new HttpResponse (new StringWriter ())));
-            rc.HttpContext = ctx;
-            Assert.AreSame (ctx, rc.HttpContext, "#A2");
+			Assert.AreSame (ctx, rc.HttpContext, "#A1");
+			ctx = new HttpContextWrapper (new HttpContext (new HttpRequest ("filename", "http://localhost/filename", String.Empty), new HttpResponse (new StringWriter ())));
+			rc.HttpContext = ctx;
+			Assert.AreSame (ctx, rc.HttpContext, "#A2");
 
-            rc.HttpContext = null;
-            Assert.IsNull (rc.HttpContext, "#A3");
-        }
+			rc.HttpContext = null;
+			Assert.IsNull (rc.HttpContext, "#A3");
+		}
 
-        [Test]
-        public void RouteData ()
-        {
-            var ctx = new HttpContextWrapper (new HttpContext (new HttpRequest ("filename", "http://localhost/filename", String.Empty), new HttpResponse (new StringWriter ())));
-            var rd = new RouteData ();
-            var rc = new RequestContext (ctx, rd);
+		[Test]
+		public void RouteData ()
+		{
+			var ctx = new HttpContextWrapper (new HttpContext (new HttpRequest ("filename", "http://localhost/filename", String.Empty), new HttpResponse (new StringWriter ())));
+			var rd = new RouteData ();
+			var rc = new RequestContext (ctx, rd);
 
-            Assert.AreSame (rd, rc.RouteData, "#A1");
-            rd = new RouteData ();
-            rc.RouteData = rd;
-            Assert.AreSame (rd, rc.RouteData, "#A2");
+			Assert.AreSame (rd, rc.RouteData, "#A1");
+			rd = new RouteData ();
+			rc.RouteData = rd;
+			Assert.AreSame (rd, rc.RouteData, "#A2");
 
-            rc.RouteData = null;
-            Assert.IsNull (rc.RouteData, "#A3");
-        }
-    }
+			rc.RouteData = null;
+			Assert.IsNull (rc.RouteData, "#A3");
+		}
+	}
 }

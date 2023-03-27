@@ -22,9 +22,9 @@
 using System;
 namespace System.DirectoryServices
 {
-    public enum PasswordEncodingMethod
-    {
-        PasswordEncodingSsl,
-        PasswordEncodingClear
-    }
+	public enum PasswordEncodingMethod
+	{
+		PasswordEncodingSsl,
+		PasswordEncodingClear
+	}
 }

@@ -7,7 +7,7 @@ using System;
 /// <see cref="Test.Foo(int)"/> Test has Foo, but is property that has no args.
 public class Test
 {
-    string Foo {
-        get { return null; }
-    }
+	string Foo {
+		get { return null; }
+	}
 }

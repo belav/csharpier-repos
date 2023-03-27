@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.UdpStatistics
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (c) 2006-2007 Novell, Inc. (http://www.novell.com)
 //
@@ -30,34 +30,34 @@ using System.Collections.Specialized;
 using System.Globalization;
 
 namespace System.Net.NetworkInformation {
-    class MibUdpStatistics : UdpStatistics
-    {
-        StringDictionary dic;
+	class MibUdpStatistics : UdpStatistics
+	{
+		StringDictionary dic;
 
-        public MibUdpStatistics (StringDictionary dic)
-        {
-            this.dic = dic;
-        }
+		public MibUdpStatistics (StringDictionary dic)
+		{
+			this.dic = dic;
+		}
 
-        long Get (string name)
-        {
-            return dic [name] != null ? long.Parse (dic [name], NumberFormatInfo.InvariantInfo) : 0;
-        }
+		long Get (string name)
+		{
+			return dic [name] != null ? long.Parse (dic [name], NumberFormatInfo.InvariantInfo) : 0;
+		}
 
-        public override long DatagramsReceived {
-            get { return Get ("InDatagrams"); }
-        }
-        public override long DatagramsSent {
-            get { return Get ("OutDatagrams"); }
-        }
-        public override long IncomingDatagramsDiscarded {
-            get { return Get ("NoPorts"); }
-        }
-        public override long IncomingDatagramsWithErrors {
-            get { return Get ("InErrors"); }
-        }
-        public override int UdpListeners {
-            get { return (int) Get ("NumAddrs"); }
-        }
-    }
+		public override long DatagramsReceived {
+			get { return Get ("InDatagrams"); }
+		}
+		public override long DatagramsSent {
+			get { return Get ("OutDatagrams"); }
+		}
+		public override long IncomingDatagramsDiscarded {
+			get { return Get ("NoPorts"); }
+		}
+		public override long IncomingDatagramsWithErrors {
+			get { return Get ("InErrors"); }
+		}
+		public override int UdpListeners {
+			get { return (int) Get ("NumAddrs"); }
+		}
+	}
 }

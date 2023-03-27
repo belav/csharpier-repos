@@ -30,26 +30,26 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    [AttributeUsageAttribute(AttributeTargets.Class|AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public sealed class XamlDeferLoadAttribute : Attribute
-    {
-        public XamlDeferLoadAttribute (string loaderType, string contentType)
-        {
-            LoaderTypeName = loaderType;
-            ContentTypeName = contentType;
-        }
+	[AttributeUsageAttribute(AttributeTargets.Class|AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+	public sealed class XamlDeferLoadAttribute : Attribute
+	{
+		public XamlDeferLoadAttribute (string loaderType, string contentType)
+		{
+			LoaderTypeName = loaderType;
+			ContentTypeName = contentType;
+		}
 
-        public XamlDeferLoadAttribute (Type loaderType, Type contentType)
-        {
-            LoaderType = loaderType;
-            ContentType = contentType;
-        }
-        
-        public Type ContentType { get; private set; }
-        public string ContentTypeName { get; private set; }
-        public Type LoaderType { get; private set; }
-        public string LoaderTypeName { get; private set; }
+		public XamlDeferLoadAttribute (Type loaderType, Type contentType)
+		{
+			LoaderType = loaderType;
+			ContentType = contentType;
+		}
+		
+		public Type ContentType { get; private set; }
+		public string ContentTypeName { get; private set; }
+		public Type LoaderType { get; private set; }
+		public string LoaderTypeName { get; private set; }
 
-    }
+	}
 }
 

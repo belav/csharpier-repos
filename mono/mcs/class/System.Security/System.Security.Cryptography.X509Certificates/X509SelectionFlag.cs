@@ -2,7 +2,7 @@
 // System.Security.Cryptography.X509Certificates.X509SelectionFlag
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2004-2005 Novell Inc. (http://www.novell.com)
@@ -30,9 +30,9 @@
 
 namespace System.Security.Cryptography.X509Certificates {
 
-    public enum X509SelectionFlag {
-        SingleSelection,
-        MultiSelection
-    }
+	public enum X509SelectionFlag {
+		SingleSelection,
+		MultiSelection
+	}
 }
 

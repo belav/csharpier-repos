@@ -3,10 +3,10 @@
 
 class C
 {
-    int Foo ()
-    {
-        foreach (void v in this)
-        {
-        }
-    }
+	int Foo ()
+	{
+		foreach (void v in this)
+		{
+		}
+	}
 }

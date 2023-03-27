@@ -1,4 +1,4 @@
-//
+﻿//
 // FaultContractInfo.cs
 //
 // Author: Atsushi Enomoto (atsushi@ximian.com)
@@ -32,30 +32,30 @@ using System.Collections.Generic;
 
 namespace System.ServiceModel.Dispatcher
 {
-    public class FaultContractInfo
-    {
-        public FaultContractInfo (string action, Type detail)
-        {
-            if (action == null)
-                throw new ArgumentNullException ("action");
-            if (detail == null)
-                throw new ArgumentNullException ("detail");
-            Action = action;
-            Detail = detail;
-        }
+	public class FaultContractInfo
+	{
+		public FaultContractInfo (string action, Type detail)
+		{
+			if (action == null)
+				throw new ArgumentNullException ("action");
+			if (detail == null)
+				throw new ArgumentNullException ("detail");
+			Action = action;
+			Detail = detail;
+		}
 
-        DataContractSerializer serializer;
+		DataContractSerializer serializer;
 
-        public string Action { get; private set; }
+		public string Action { get; private set; }
 
-        public Type Detail { get; private set; }
+		public Type Detail { get; private set; }
 
-        internal DataContractSerializer Serializer {
-            get {
-                if (serializer == null)
-                    serializer = new DataContractSerializer (Detail);
-                return serializer;
-            }
-        }
-    }
+		internal DataContractSerializer Serializer {
+			get {
+				if (serializer == null)
+					serializer = new DataContractSerializer (Detail);
+				return serializer;
+			}
+		}
+	}
 }

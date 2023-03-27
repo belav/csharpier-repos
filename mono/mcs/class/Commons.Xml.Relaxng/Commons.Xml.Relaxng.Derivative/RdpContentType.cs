@@ -2,7 +2,7 @@
 // RdpContentType.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // See RELAX NG spec 7.2
 //
@@ -33,10 +33,10 @@
 
 namespace Commons.Xml.Relaxng.Derivative
 {
-    public enum RdpContentType {
-        Invalid = 0,
-        Empty   = 1,
-        Complex = 2,
-        Simple  = 4
-    }
+	public enum RdpContentType {
+		Invalid = 0,
+		Empty   = 1,
+		Complex = 2,
+		Simple  = 4
+	}
 }

@@ -1,4 +1,4 @@
-//
+﻿//
 // RequestedSecurityToken.cs
 //
 // Author:
@@ -32,17 +32,17 @@ using System.Xml;
 
 namespace System.IdentityModel.Protocols.WSTrust
 {
-    public class RequestedSecurityToken
-    {
-        public SecurityToken SecurityToken { get; private set; }
-        public virtual XmlElement SecurityTokenXml { get; private set; }
+	public class RequestedSecurityToken
+	{
+		public SecurityToken SecurityToken { get; private set; }
+		public virtual XmlElement SecurityTokenXml { get; private set; }
 
-        public RequestedSecurityToken (SecurityToken token) {
-            SecurityToken = token;
-        }
+		public RequestedSecurityToken (SecurityToken token) {
+			SecurityToken = token;
+		}
 
-        public RequestedSecurityToken (XmlElement tokenAsXml) {
-            SecurityTokenXml = tokenAsXml;
-        }
-    }
+		public RequestedSecurityToken (XmlElement tokenAsXml) {
+			SecurityTokenXml = tokenAsXml;
+		}
+	}
 }

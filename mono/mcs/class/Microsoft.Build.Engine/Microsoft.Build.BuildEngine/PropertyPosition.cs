@@ -26,8 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Microsoft.Build.BuildEngine {
-    public enum PropertyPosition {
-        UseExistingOrCreateAfterLastPropertyGroup,
-        UseExistingOrCreateAfterLastImport
-    }
+	public enum PropertyPosition {
+		UseExistingOrCreateAfterLastPropertyGroup,
+		UseExistingOrCreateAfterLastImport
+	}
 }

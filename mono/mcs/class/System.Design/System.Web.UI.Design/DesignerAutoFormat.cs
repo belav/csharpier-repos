@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DesignerAutoFormat
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -37,35 +37,35 @@ using System.Collections;
 
 namespace System.Web.UI.Design
 {
-    public abstract class DesignerAutoFormat
-    {
-        protected DesignerAutoFormat (string name)
-        {
-        }
+	public abstract class DesignerAutoFormat
+	{
+		protected DesignerAutoFormat (string name)
+		{
+		}
 
-        [MonoTODO]
-        public string Name {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public string Name {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public DesignerAutoFormatStyle Style {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public DesignerAutoFormatStyle Style {
+			get { throw new NotImplementedException (); }
+		}
 
-        public abstract void Apply (Control control);
+		public abstract void Apply (Control control);
 
-        [MonoTODO]
-        public virtual Control GetPreviewControl (Control runtimeControl)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual Control GetPreviewControl (Control runtimeControl)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override string ToString ()
-        {
-            return base.ToString ();
-        }
-    }
+		[MonoTODO]
+		public override string ToString ()
+		{
+			return base.ToString ();
+		}
+	}
 }
 

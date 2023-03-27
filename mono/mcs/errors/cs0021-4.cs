@@ -3,9 +3,9 @@
 
 class X
 {
-    public void Foo ()
-    {
-        object baz = Foo [0];
-    }
+	public void Foo ()
+	{
+		object baz = Foo [0];
+	}
 }
 

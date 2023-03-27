@@ -2,7 +2,7 @@
 // TimerCas.cs - CAS unit tests for System.Timers.Timer
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,93 +37,93 @@ using System.Timers;
 
 namespace MonoCasTests.System.Timers {
 
-    class TestSyncInvoke: ISynchronizeInvoke {
+	class TestSyncInvoke: ISynchronizeInvoke {
 
-        public IAsyncResult BeginInvoke (Delegate method, object[] args)
-        {
-            return null;
-        }
+		public IAsyncResult BeginInvoke (Delegate method, object[] args)
+		{
+			return null;
+		}
 
-        public object EndInvoke (IAsyncResult result)
-        {
-            return null;
-        }
+		public object EndInvoke (IAsyncResult result)
+		{
+			return null;
+		}
 
-        public object Invoke (Delegate method, object[] args)
-        {
-            return EndInvoke (BeginInvoke (method, args));
-        }
+		public object Invoke (Delegate method, object[] args)
+		{
+			return EndInvoke (BeginInvoke (method, args));
+		}
 
-        public bool InvokeRequired {
-            get { return true; }
-        }
-    }
+		public bool InvokeRequired {
+			get { return true; }
+		}
+	}
 
-    [TestFixture]
-    [NUnit.Framework.Category ("CAS")]
-    public class TimerCas {
+	[TestFixture]
+	[NUnit.Framework.Category ("CAS")]
+	public class TimerCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        private void Callback (object sender, ElapsedEventArgs e)
-        {
-        }
+		private void Callback (object sender, ElapsedEventArgs e)
+		{
+		}
 
-        private void CommonTests (Timer t)
-        {
-            Assert.IsTrue (t.AutoReset, "AutoReset");
-            t.AutoReset = false;
-            Assert.IsFalse (t.Enabled, "Enabled");
-            t.Enabled = true;
-            Assert.IsNull (t.Site, "Site");
-            t.Site = null;
-            Assert.IsNull (t.SynchronizingObject, "SynchronizingObject");
-            t.SynchronizingObject = new TestSyncInvoke ();
+		private void CommonTests (Timer t)
+		{
+			Assert.IsTrue (t.AutoReset, "AutoReset");
+			t.AutoReset = false;
+			Assert.IsFalse (t.Enabled, "Enabled");
+			t.Enabled = true;
+			Assert.IsNull (t.Site, "Site");
+			t.Site = null;
+			Assert.IsNull (t.SynchronizingObject, "SynchronizingObject");
+			t.SynchronizingObject = new TestSyncInvoke ();
 
-            t.Elapsed += new ElapsedEventHandler (Callback);
-            t.Elapsed -= new ElapsedEventHandler (Callback);
+			t.Elapsed += new ElapsedEventHandler (Callback);
+			t.Elapsed -= new ElapsedEventHandler (Callback);
 
-            t.BeginInit ();
-            t.EndInit ();
-            t.Start ();
-            t.Stop ();
-            t.Close ();
+			t.BeginInit ();
+			t.EndInit ();
+			t.Start ();
+			t.Stop ();
+			t.Close ();
 
-            (t as IDisposable).Dispose ();
-        }
+			(t as IDisposable).Dispose ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor_Deny_Unrestricted ()
-        {
-            Timer t = new Timer ();
-            Assert.AreEqual (100.0, t.Interval, "Interval");
-            t.Interval = 200.0;
-            CommonTests (t);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor_Deny_Unrestricted ()
+		{
+			Timer t = new Timer ();
+			Assert.AreEqual (100.0, t.Interval, "Interval");
+			t.Interval = 200.0;
+			CommonTests (t);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ConstructorDouble_Deny_Unrestricted ()
-        {
-            Timer t = new Timer (200.0);
-            Assert.AreEqual (200.0, t.Interval, "Interval");
-            t.Interval = 100.0;
-            CommonTests (t);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ConstructorDouble_Deny_Unrestricted ()
+		{
+			Timer t = new Timer (200.0);
+			Assert.AreEqual (200.0, t.Interval, "Interval");
+			t.Interval = 100.0;
+			CommonTests (t);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (Timer).GetConstructor (new Type [0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (Timer).GetConstructor (new Type [0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

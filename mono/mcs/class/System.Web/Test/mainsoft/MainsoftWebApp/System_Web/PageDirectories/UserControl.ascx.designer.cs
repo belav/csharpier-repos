@@ -11,7 +11,7 @@
 namespace GHTTests.System_Web_dll.PageDirectories
 {
 
-    public partial class UserControl
-    {
-    }
+	public partial class UserControl
+	{
+	}
 }

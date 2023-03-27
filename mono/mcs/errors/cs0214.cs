@@ -3,5 +3,5 @@
 // Compiler options: -unsafe
 
 class X {
-    void *a;
+	void *a;
 }

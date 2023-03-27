@@ -57,9 +57,9 @@ namespace ClassLibrary
             a = b;
             b = c;
         }
-        
-        
-        // Calc the radius of a circle, with a center in (x, y), the is bounded with Lines. 
+		
+		
+		// Calc the radius of a circle, with a center in (x, y), the is bounded with Lines. 
         static public float radius(float x, float y, List<Line> l)
         {
             int n = (int)l.Count;
@@ -74,7 +74,7 @@ namespace ClassLibrary
             return res;
         }
 
-        // Find y and calc the radius of a circle, with a center in (x), tha is bounded with Lines.
+		// Find y and calc the radius of a circle, with a center in (x), tha is bounded with Lines.
         static public float y_radius(float x, List<Point> a, List<Line> l, out float yOut)
         {
             int n = (int)a.Count;

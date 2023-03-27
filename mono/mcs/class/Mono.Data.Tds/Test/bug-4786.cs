@@ -29,7 +29,7 @@
 
 namespace MonoTests.Mono.Data.Tds
 {
-    
+	
   using NUnit.Framework;
   using global::Mono.Data.Tds.Protocol;
   using System;
@@ -47,63 +47,63 @@ namespace MonoTests.Mono.Data.Tds
 
     TcpListener Listener = null;
 
-    //set up dummy sql listener, if there is a real sql server on this
-    //machine at that port, in theory this part will fail, but that's ok
-    //becuase something will be listening on the port and that's all we
-    //require at this point: a listener on port 1433...
+	//set up dummy sql listener, if there is a real sql server on this
+	//machine at that port, in theory this part will fail, but that's ok
+	//becuase something will be listening on the port and that's all we
+	//require at this point: a listener on port 1433...
 
-    try{
-        IPAddress hostIP =Dns.GetHostEntry("localhost").AddressList[0];
+	try{
+		IPAddress hostIP =Dns.GetHostEntry("localhost").AddressList[0];
         IPEndPoint ep = new IPEndPoint(hostIP, 1433);
         Listener = new TcpListener (ep);
         Listener.Start ();
-    } catch (Exception){
-        //ignore
-    }
+	} catch (Exception){
+		//ignore
+	}
 
-    //try to connect twice, in earlier failure would get null exception
-    //on 2nd call to pool.GetConnection();
-    //Most of this code ripped from sqlConnection.Open()
+	//try to connect twice, in earlier failure would get null exception
+	//on 2nd call to pool.GetConnection();
+	//Most of this code ripped from sqlConnection.Open()
 
-    TdsConnectionPool pool;
-    
-    TdsConnectionPoolManager sqlConnectionPools = 
-        new TdsConnectionPoolManager(TdsVersion.tds80);    
-    TdsConnectionInfo info=
-        new TdsConnectionInfo(SERVER/*dummyhost*/,1433/*port*/,
-        8192/*pktsize*/,15/*timeout*/,0/*minpoolsize*/,
-        100/*maxpoolsize*/, 0/*lifetime*/);
-    pool=sqlConnectionPools.GetConnectionPool("test",info);
-    Tds tds=null;
+	TdsConnectionPool pool;
+	
+	TdsConnectionPoolManager sqlConnectionPools = 
+		new TdsConnectionPoolManager(TdsVersion.tds80);	
+	TdsConnectionInfo info=
+		new TdsConnectionInfo(SERVER/*dummyhost*/,1433/*port*/,
+		8192/*pktsize*/,15/*timeout*/,0/*minpoolsize*/,
+		100/*maxpoolsize*/, 0/*lifetime*/);
+	pool=sqlConnectionPools.GetConnectionPool("test",info);
+	Tds tds=null;
 
-    //this first one succeeded regardless as long as something answered
-    //the phone on port 1433 of localhost
-    tds=pool.GetConnection();
+	//this first one succeeded regardless as long as something answered
+	//the phone on port 1433 of localhost
+	tds=pool.GetConnection();
 
-    pool.ReleaseConnection(tds);
+	pool.ReleaseConnection(tds);
 
 
-    // 2nd time thru: This will fail with nullreferenceexception 
-    // at pool.GetConnection() unless the patch by Rob Wilkens which 
-    // adds "result=null;" before retry in pool.getConnection() source
+	// 2nd time thru: This will fail with nullreferenceexception 
+	// at pool.GetConnection() unless the patch by Rob Wilkens which 
+	// adds "result=null;" before retry in pool.getConnection() source
 
-    //First let's pretend we're calling this test fresh, as if we
-    //call sqlConnection.Open() again :
+	//First let's pretend we're calling this test fresh, as if we
+	//call sqlConnection.Open() again :
 
-    info=new TdsConnectionInfo(SERVER/*dummyhost*/,1433/*port*/,
-        8192/*pktsize*/,15/*timeout*/,0/*minpoolsize*/,
-        100/*maxpoolsize*/, 0/*lifetime*/);
+	info=new TdsConnectionInfo(SERVER/*dummyhost*/,1433/*port*/,
+		8192/*pktsize*/,15/*timeout*/,0/*minpoolsize*/,
+		100/*maxpoolsize*/, 0/*lifetime*/);
 
-    pool=sqlConnectionPools.GetConnectionPool("test",info);
+	pool=sqlConnectionPools.GetConnectionPool("test",info);
 
-    //Then: Test for failure (will raise uncaught exception which
-    //causes failure of test if bug is not fixed
-    tds=pool.GetConnection();
+	//Then: Test for failure (will raise uncaught exception which
+	//causes failure of test if bug is not fixed
+	tds=pool.GetConnection();
 
-    pool.ReleaseConnection(tds);
+	pool.ReleaseConnection(tds);
 
-    Listener.Stop ();
-    //exit
+	Listener.Stop ();
+	//exit
     }
   }
 }

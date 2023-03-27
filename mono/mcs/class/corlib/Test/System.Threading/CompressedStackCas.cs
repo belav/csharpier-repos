@@ -2,7 +2,7 @@
 // CompressedStackCas.cs - CAS Unit Tests for CompressedStack
 //
 // Author:
-//    Sebastien Pouliot (sebastien@ximian.com)
+//	Sebastien Pouliot (sebastien@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -40,71 +40,71 @@ using NUnit.Framework;
 
 namespace MonoCasTests.System.Threading {
 
-    // NOTES
-    // The tests will fails on 2.0 beta 1 (and a few CTP afterwards) because it relies
-    // on a LinkDemand for ECMA key (and identity permissions now support unrestricted).
+	// NOTES
+	// The tests will fails on 2.0 beta 1 (and a few CTP afterwards) because it relies
+	// on a LinkDemand for ECMA key (and identity permissions now support unrestricted).
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CompressedStackCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CompressedStackCas {
 
-        static bool success;
+		static bool success;
 
-        static void Callback (object o)
-        {
-            new SecurityPermission (SecurityPermissionFlag.UnmanagedCode).Demand ();
-            success = (bool)o;
-        }
+		static void Callback (object o)
+		{
+			new SecurityPermission (SecurityPermissionFlag.UnmanagedCode).Demand ();
+			success = (bool)o;
+		}
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager isn't enabled");
-            success = false;
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager isn't enabled");
+			success = false;
+		}
 
-        [Test]
-        public void Run_Empty ()
-        {
-            Assert.IsFalse (success, "pre-check");
-            CompressedStack.Run (CompressedStack.Capture (), new ContextCallback (Callback), true);
-            Assert.IsTrue (success, "post-check");
-        }
+		[Test]
+		public void Run_Empty ()
+		{
+			Assert.IsFalse (success, "pre-check");
+			CompressedStack.Run (CompressedStack.Capture (), new ContextCallback (Callback), true);
+			Assert.IsTrue (success, "post-check");
+		}
 
-        [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-        private CompressedStack GetCompressedStackUnmanaged ()
-        {
-            return CompressedStack.Capture ();
-            // the Deny disappears with this stack frame but we got a capture of it
-        }
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		private CompressedStack GetCompressedStackUnmanaged ()
+		{
+			return CompressedStack.Capture ();
+			// the Deny disappears with this stack frame but we got a capture of it
+		}
 
-        private void Thread_Run_UnmanagedCode ()
-        {
-            bool result = false;
-            Assert.IsFalse (success, "pre-check");
-            try {
-                CompressedStack cs = GetCompressedStackUnmanaged ();
-                // run with the captured security stack (i.e. deny unmanaged)
-                CompressedStack.Run (cs, new ContextCallback (Callback), true);
-            }
-            catch (SecurityException) {
-                result = true;
-            }
-            finally {
-                Assert.IsFalse (success, "post-check");
-                Assert.IsTrue (result, "Result");
-            }
-        }
+		private void Thread_Run_UnmanagedCode ()
+		{
+			bool result = false;
+			Assert.IsFalse (success, "pre-check");
+			try {
+				CompressedStack cs = GetCompressedStackUnmanaged ();
+				// run with the captured security stack (i.e. deny unmanaged)
+				CompressedStack.Run (cs, new ContextCallback (Callback), true);
+			}
+			catch (SecurityException) {
+				result = true;
+			}
+			finally {
+				Assert.IsFalse (success, "post-check");
+				Assert.IsTrue (result, "Result");
+			}
+		}
 
-        [Test]
-        public void Run_UnmanagedCode ()
-        {
-            Thread t = new Thread (new ThreadStart (Thread_Run_UnmanagedCode));
-            t.Start ();
-            t.Join ();
-        }
-    }
+		[Test]
+		public void Run_UnmanagedCode ()
+		{
+			Thread t = new Thread (new ThreadStart (Thread_Run_UnmanagedCode));
+			t.Start ();
+			t.Join ();
+		}
+	}
 }
 
 #endif

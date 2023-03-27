@@ -9,13 +9,13 @@ class A
 
 class Program
 {
-    static string method (A a)
-    {
-        return "";
-    }
+	static string method (A a)
+	{
+		return "";
+	}
 
-    static void Main ()
-    {
-        var d = new D (method);
-    }
+	static void Main ()
+	{
+		var d = new D (method);
+	}
 }

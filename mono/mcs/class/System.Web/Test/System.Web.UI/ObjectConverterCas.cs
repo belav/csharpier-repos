@@ -2,7 +2,7 @@
 // ObjectConverterCas.cs - CAS unit tests for System.Web.UI.ObjectConverter
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,32 +36,32 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ObjectConverterCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ObjectConverterCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor ()
-        {
-            new ObjectConverter ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor ()
+		{
+			new ObjectConverter ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ConvertValue_Deny_Unrestricted ()
-        {
-            try {
-                ObjectConverter.ConvertValue (String.Empty, typeof (String), String.Empty);
-            }
-            catch (NotImplementedException) {
-            }
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ConvertValue_Deny_Unrestricted ()
+		{
+			try {
+				ObjectConverter.ConvertValue (String.Empty, typeof (String), String.Empty);
+			}
+			catch (NotImplementedException) {
+			}
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (ObjectConverter); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (ObjectConverter); }
+		}
+	}
 }

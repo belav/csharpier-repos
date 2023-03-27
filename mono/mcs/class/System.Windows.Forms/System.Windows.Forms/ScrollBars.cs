@@ -20,17 +20,17 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public enum ScrollBars {
-        None        = 0,
-        Horizontal    = 1,
-        Vertical    = 2,
-        Both        = 3
-    }
+	public enum ScrollBars {
+		None		= 0,
+		Horizontal	= 1,
+		Vertical	= 2,
+		Both		= 3
+	}
 }

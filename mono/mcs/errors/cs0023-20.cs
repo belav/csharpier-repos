@@ -5,9 +5,9 @@ using System;
 
 class C
 {
-    static void Main()
-    {
-        int k = 0;
-        var r = k?.ToString ();
-    }
+	static void Main()
+	{
+		int k = 0;
+		var r = k?.ToString ();
+	}
 }

@@ -15,19 +15,19 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
 {
-    [SkipKeptItemsValidation]
-    [LogDoesNotContain ("IL2026")]
-    class ModuleSuppressionWithNullScopeNullTarget
-    {
-        static void Main ()
-        {
-            TriggerWarning ();
-        }
+	[SkipKeptItemsValidation]
+	[LogDoesNotContain ("IL2026")]
+	class ModuleSuppressionWithNullScopeNullTarget
+	{
+		static void Main ()
+		{
+			TriggerWarning ();
+		}
 
-        [RequiresUnreferencedCode ("TriggerWarning")]
-        public static Type TriggerWarning ()
-        {
-            return typeof (ModuleSuppressionWithNullScopeNullTarget);
-        }
-    }
+		[RequiresUnreferencedCode ("TriggerWarning")]
+		public static Type TriggerWarning ()
+		{
+			return typeof (ModuleSuppressionWithNullScopeNullTarget);
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // System.Web.UI.BoundPropertyEntry
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // Copyright (c) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -33,59 +33,59 @@ using System.Web.Compilation;
 
 namespace System.Web.UI
 {
-    public class BoundPropertyEntry : PropertyEntry
-    {
-        internal BoundPropertyEntry ()
-        {
-        }
-        
-        public string ControlID {
-            get; set;
-        }
+	public class BoundPropertyEntry : PropertyEntry
+	{
+		internal BoundPropertyEntry ()
+		{
+		}
+		
+		public string ControlID {
+			get; set;
+		}
 
-        public Type ControlType {
-            get; set;
-        }
-        
-        public string Expression {
-            get; set;
-        }
+		public Type ControlType {
+			get; set;
+		}
+		
+		public string Expression {
+			get; set;
+		}
 
-        public ExpressionBuilder ExpressionBuilder {
-            get; set;
-        }
-        
-        public string ExpressionPrefix {
-            get; set;
-        }
-        
-        public string FieldName {
-            get; set;
-        }
-        
-        public string FormatString {
-            get; set;
-        }
-        
-        public bool Generated {
-            get; set;
-        }
-        
-        public object ParsedExpressionData {
-            get; set;
-        }
+		public ExpressionBuilder ExpressionBuilder {
+			get; set;
+		}
+		
+		public string ExpressionPrefix {
+			get; set;
+		}
+		
+		public string FieldName {
+			get; set;
+		}
+		
+		public string FormatString {
+			get; set;
+		}
+		
+		public bool Generated {
+			get; set;
+		}
+		
+		public object ParsedExpressionData {
+			get; set;
+		}
 
-        public bool ReadOnlyProperty {
-            get; set;
-        }
-        
-        public bool TwoWayBound {
-            get; set;
-        }
-        
-        public bool UseSetAttribute {
-            get; set;
-        }
-    }
+		public bool ReadOnlyProperty {
+			get; set;
+		}
+		
+		public bool TwoWayBound {
+			get; set;
+		}
+		
+		public bool UseSetAttribute {
+			get; set;
+		}
+	}
 }
 

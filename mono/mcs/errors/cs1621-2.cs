@@ -6,16 +6,16 @@ using System.Collections;
 
 public class Test
 {
-    public IEnumerator Foo ()
-    {
-        Call (() => {
-            yield break;
-        });
+	public IEnumerator Foo ()
+	{
+		Call (() => {
+			yield break;
+		});
 
-        yield break;
-    }
+		yield break;
+	}
 
-    void Call (Action a)
-    {
-    }
+	void Call (Action a)
+	{
+	}
 }

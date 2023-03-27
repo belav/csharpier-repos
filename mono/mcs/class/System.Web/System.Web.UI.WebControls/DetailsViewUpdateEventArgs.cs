@@ -32,40 +32,40 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    public class DetailsViewUpdateEventArgs : CancelEventArgs
-    {
-        object argument;
-        IOrderedDictionary keys;
-        IOrderedDictionary newValues;
-        IOrderedDictionary oldValues;
-        
-        public DetailsViewUpdateEventArgs (object commandArgument)
-        {
-            this.argument = commandArgument;
-        }
-        
-        internal DetailsViewUpdateEventArgs (object argument, IOrderedDictionary keys, IOrderedDictionary oldValues, IOrderedDictionary newValues)
-        {
-            this.argument = argument;
-            this.keys = keys;
-            this.newValues = newValues;
-            this.oldValues = oldValues;
-        }
-        
-        public object CommandArgument {
-            get { return argument; }
-        }
+	public class DetailsViewUpdateEventArgs : CancelEventArgs
+	{
+		object argument;
+		IOrderedDictionary keys;
+		IOrderedDictionary newValues;
+		IOrderedDictionary oldValues;
+		
+		public DetailsViewUpdateEventArgs (object commandArgument)
+		{
+			this.argument = commandArgument;
+		}
+		
+		internal DetailsViewUpdateEventArgs (object argument, IOrderedDictionary keys, IOrderedDictionary oldValues, IOrderedDictionary newValues)
+		{
+			this.argument = argument;
+			this.keys = keys;
+			this.newValues = newValues;
+			this.oldValues = oldValues;
+		}
+		
+		public object CommandArgument {
+			get { return argument; }
+		}
 
-        public IOrderedDictionary Keys {
-            get { return keys; }
-        }
+		public IOrderedDictionary Keys {
+			get { return keys; }
+		}
 
-        public IOrderedDictionary NewValues {
-            get { return newValues; }
-        }
+		public IOrderedDictionary NewValues {
+			get { return newValues; }
+		}
 
-        public IOrderedDictionary OldValues {
-            get { return oldValues; }
-        }
-    }
+		public IOrderedDictionary OldValues {
+			get { return oldValues; }
+		}
+	}
 }

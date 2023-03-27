@@ -31,23 +31,23 @@ using System;
 
 namespace System.Web.UI.Design
 {
-    public sealed class ControlDesignerState
-    {
-        internal ControlDesignerState ()
-        {
-        }
+	public sealed class ControlDesignerState
+	{
+		internal ControlDesignerState ()
+		{
+		}
 
-        [MonoNotSupported ("")]
-        public object this [string key] {
-            [MonoNotSupported ("")]
-            get {
-                throw new NotImplementedException ();
-            }
+		[MonoNotSupported ("")]
+		public object this [string key] {
+			[MonoNotSupported ("")]
+			get {
+				throw new NotImplementedException ();
+			}
 
-            [MonoNotSupported ("")]
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-    }
+			[MonoNotSupported ("")]
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+	}
 }

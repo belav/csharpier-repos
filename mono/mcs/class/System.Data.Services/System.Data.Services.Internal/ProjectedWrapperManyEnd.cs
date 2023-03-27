@@ -1,4 +1,4 @@
-// 
+﻿// 
 // ProjectedWrapperManyEnd.cs
 //  
 // Author:
@@ -31,17 +31,17 @@ using System.Runtime;
 
 namespace System.Data.Services.Internal
 {
-    [EditorBrowsable (EditorBrowsableState.Never)]
-    public sealed class ProjectedWrapperManyEnd : ProjectedWrapperMany
-    {
-        protected override object InternalGetProjectedPropertyValue (int propertyIndex)
-        {
-            throw new NotImplementedException ();
-        }
+	[EditorBrowsable (EditorBrowsableState.Never)]
+	public sealed class ProjectedWrapperManyEnd : ProjectedWrapperMany
+	{
+		protected override object InternalGetProjectedPropertyValue (int propertyIndex)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public ProjectedWrapperManyEnd ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public ProjectedWrapperManyEnd ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

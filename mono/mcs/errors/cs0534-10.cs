@@ -3,14 +3,14 @@
 
 class A
 {
-    public virtual void Foo ()
-    {
-    }
+	public virtual void Foo ()
+	{
+	}
 }
 
 abstract class B : A
 {
-    public abstract override void Foo ();
+	public abstract override void Foo ();
 }
 
 class C : B

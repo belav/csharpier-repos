@@ -2,8 +2,8 @@
 // System.Web.HttpUnhandledException.cs
 //
 // Authors:
-//    Tim Coleman (tim@timcoleman.com)
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Tim Coleman (tim@timcoleman.com)
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) Tim Coleman, 2002
 // Copyright (C) 2005-2009 Novell, Inc (http://www.novell.com)
@@ -32,23 +32,23 @@ using System.Security.Permissions;
 
 namespace System.Web
 {
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [Serializable]
-    public sealed class HttpUnhandledException : HttpException
-    {
-        public HttpUnhandledException ()
-        {
-        }
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[Serializable]
+	public sealed class HttpUnhandledException : HttpException
+	{
+		public HttpUnhandledException ()
+		{
+		}
 
-        public HttpUnhandledException (string message)
-            : base (message)
-        {
-        }
+		public HttpUnhandledException (string message)
+			: base (message)
+		{
+		}
 
-        public HttpUnhandledException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
-    }
+		public HttpUnhandledException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
+	}
 }

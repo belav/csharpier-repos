@@ -2,7 +2,7 @@
 // ServiceElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,89 +54,89 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class ServiceElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty behavior_configuration;
-        static ConfigurationProperty endpoints;
-        static ConfigurationProperty host;
-        static ConfigurationProperty name;
+	public sealed class ServiceElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty behavior_configuration;
+		static ConfigurationProperty endpoints;
+		static ConfigurationProperty host;
+		static ConfigurationProperty name;
 
-        static ServiceElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            behavior_configuration = new ConfigurationProperty ("behaviorConfiguration",
-                typeof (string), "", new StringConverter (), new StringValidator (0, int.MaxValue, null),
-                ConfigurationPropertyOptions.None);
+		static ServiceElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			behavior_configuration = new ConfigurationProperty ("behaviorConfiguration",
+				typeof (string), "", new StringConverter (), new StringValidator (0, int.MaxValue, null),
+				ConfigurationPropertyOptions.None);
 
-            endpoints = new ConfigurationProperty ("",
-                typeof (ServiceEndpointElementCollection), null, null, null,
-                ConfigurationPropertyOptions.IsDefaultCollection);
+			endpoints = new ConfigurationProperty ("",
+				typeof (ServiceEndpointElementCollection), null, null, null,
+				ConfigurationPropertyOptions.IsDefaultCollection);
 
-            host = new ConfigurationProperty ("host",
-                typeof (HostElement), null, null, null,
-                ConfigurationPropertyOptions.None);
+			host = new ConfigurationProperty ("host",
+				typeof (HostElement), null, null, null,
+				ConfigurationPropertyOptions.None);
 
-            name = new ConfigurationProperty ("name",
-                typeof (string), null, new StringConverter (), new StringValidator (1, int.MaxValue, null),
-                ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+			name = new ConfigurationProperty ("name",
+				typeof (string), null, new StringConverter (), new StringValidator (1, int.MaxValue, null),
+				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
 
-            properties.Add (behavior_configuration);
-            properties.Add (endpoints);
-            properties.Add (host);
-            properties.Add (name);
-        }
+			properties.Add (behavior_configuration);
+			properties.Add (endpoints);
+			properties.Add (host);
+			properties.Add (name);
+		}
 
-        public ServiceElement ()
-        {
-        }
-
-
-        // Properties
-
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        [ConfigurationProperty ("behaviorConfiguration",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "")]
-        public string BehaviorConfiguration {
-            get { return (string) base [behavior_configuration]; }
-            set { base [behavior_configuration] = value; }
-        }
-
-        [ConfigurationProperty ("",
-             Options = ConfigurationPropertyOptions.IsDefaultCollection,
-            IsDefaultCollection = true)]
-        public ServiceEndpointElementCollection Endpoints {
-            get { return (ServiceEndpointElementCollection) base [endpoints]; }
-        }
-
-        [ConfigurationProperty ("host",
-             Options = ConfigurationPropertyOptions.None)]
-        public HostElement Host {
-            get { return (HostElement) base [host]; }
-        }
-
-        [ConfigurationProperty ("name",
-             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-            IsRequired = true,
-            IsKey = true)]
-        [StringValidator ( MinLength = 1,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string Name {
-            get { return (string) base [name]; }
-            set { base [name] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		public ServiceElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+		[StringValidator ( MinLength = 0,
+			MaxLength = int.MaxValue,
+			 InvalidCharacters = null)]
+		[ConfigurationProperty ("behaviorConfiguration",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "")]
+		public string BehaviorConfiguration {
+			get { return (string) base [behavior_configuration]; }
+			set { base [behavior_configuration] = value; }
+		}
+
+		[ConfigurationProperty ("",
+			 Options = ConfigurationPropertyOptions.IsDefaultCollection,
+			IsDefaultCollection = true)]
+		public ServiceEndpointElementCollection Endpoints {
+			get { return (ServiceEndpointElementCollection) base [endpoints]; }
+		}
+
+		[ConfigurationProperty ("host",
+			 Options = ConfigurationPropertyOptions.None)]
+		public HostElement Host {
+			get { return (HostElement) base [host]; }
+		}
+
+		[ConfigurationProperty ("name",
+			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+			IsRequired = true,
+			IsKey = true)]
+		[StringValidator ( MinLength = 1,
+			MaxLength = int.MaxValue,
+			 InvalidCharacters = null)]
+		public string Name {
+			get { return (string) base [name]; }
+			set { base [name] = value; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+
+	}
 
 }

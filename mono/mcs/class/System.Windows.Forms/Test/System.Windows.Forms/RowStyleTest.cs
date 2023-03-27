@@ -29,59 +29,59 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {
-    [TestFixture]
-    public class RowStyleTest : TestHelper {
+	[TestFixture]
+	public class RowStyleTest : TestHelper {
 
-        [Test]
-        public void CtorTest1 ()
-        {
-            RowStyle rs = new RowStyle ();
-            Assert.AreEqual (0.0f, rs.Height, "1");
-            Assert.AreEqual (SizeType.AutoSize, rs.SizeType, "2");
-        }
+		[Test]
+		public void CtorTest1 ()
+		{
+			RowStyle rs = new RowStyle ();
+			Assert.AreEqual (0.0f, rs.Height, "1");
+			Assert.AreEqual (SizeType.AutoSize, rs.SizeType, "2");
+		}
 
-        [Test]
-        public void CtorTest2 ()
-        {
-            RowStyle rs = new RowStyle (SizeType.Absolute);
-            
-            Assert.AreEqual (0.0f, rs.Height, "1");
-            Assert.AreEqual (SizeType.Absolute, rs.SizeType, "2");
-        }
+		[Test]
+		public void CtorTest2 ()
+		{
+			RowStyle rs = new RowStyle (SizeType.Absolute);
+			
+			Assert.AreEqual (0.0f, rs.Height, "1");
+			Assert.AreEqual (SizeType.Absolute, rs.SizeType, "2");
+		}
 
-        [Test]
-        public void CtorTest3 ()
-        {
-            RowStyle rs = new RowStyle (SizeType.Absolute, 5.0f);
-            
-            Assert.AreEqual (5.0, rs.Height, "1");
-            Assert.AreEqual (SizeType.Absolute, rs.SizeType, "2");
-        }
+		[Test]
+		public void CtorTest3 ()
+		{
+			RowStyle rs = new RowStyle (SizeType.Absolute, 5.0f);
+			
+			Assert.AreEqual (5.0, rs.Height, "1");
+			Assert.AreEqual (SizeType.Absolute, rs.SizeType, "2");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void CtorTest4 ()
-        {
-            RowStyle rs = new RowStyle (SizeType.Absolute, -1.0f);
-            
-            TestHelper.RemoveWarning (rs);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void CtorTest4 ()
+		{
+			RowStyle rs = new RowStyle (SizeType.Absolute, -1.0f);
+			
+			TestHelper.RemoveWarning (rs);
+		}
 
-        [Test]
-        public void HeightTest1 ()
-        {
-            RowStyle rs = new RowStyle ();
-            rs.Height = 1.0f;
-            Assert.AreEqual (1.0f, rs.Height, "1");
-        }
+		[Test]
+		public void HeightTest1 ()
+		{
+			RowStyle rs = new RowStyle ();
+			rs.Height = 1.0f;
+			Assert.AreEqual (1.0f, rs.Height, "1");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void HeightTest2 ()
-        {
-            RowStyle rs = new RowStyle ();
-            rs.Height = -1.0f;
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void HeightTest2 ()
+		{
+			RowStyle rs = new RowStyle ();
+			rs.Height = -1.0f;
+		}
+	}
 }
 

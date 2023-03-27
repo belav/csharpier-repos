@@ -31,50 +31,50 @@
 
 namespace Mono.Cecil.Metadata {
 
-    internal sealed class ConstantTable : IMetadataTable {
+	internal sealed class ConstantTable : IMetadataTable {
 
-        public const int RId = 0x0b;
+		public const int RId = 0x0b;
 
-        RowCollection m_rows;
+		RowCollection m_rows;
 
-        public ConstantRow this [int index] {
-            get { return m_rows [index] as ConstantRow; }
-            set { m_rows [index] = value; }
-        }
+		public ConstantRow this [int index] {
+			get { return m_rows [index] as ConstantRow; }
+			set { m_rows [index] = value; }
+		}
 
-        public RowCollection Rows {
-            get { return m_rows; }
-            set { m_rows = value; }
-        }
+		public RowCollection Rows {
+			get { return m_rows; }
+			set { m_rows = value; }
+		}
 
-        public int Id {
-            get { return RId; }
-        }
+		public int Id {
+			get { return RId; }
+		}
 
-        internal ConstantTable ()
-        {
-        }
+		internal ConstantTable ()
+		{
+		}
 
-        public void Accept (IMetadataTableVisitor visitor)
-        {
-            visitor.VisitConstantTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
-        }
-    }
+		public void Accept (IMetadataTableVisitor visitor)
+		{
+			visitor.VisitConstantTable (this);
+			this.Rows.Accept (visitor.GetRowVisitor ());
+		}
+	}
 
-    internal sealed class ConstantRow : IMetadataRow {
+	internal sealed class ConstantRow : IMetadataRow {
 
-        public ElementType Type;
-        public MetadataToken Parent;
-        public uint Value;
+		public ElementType Type;
+		public MetadataToken Parent;
+		public uint Value;
 
-        internal ConstantRow ()
-        {
-        }
+		internal ConstantRow ()
+		{
+		}
 
-        public void Accept (IMetadataRowVisitor visitor)
-        {
-            visitor.VisitConstantRow (this);
-        }
-    }
+		public void Accept (IMetadataRowVisitor visitor)
+		{
+			visitor.VisitConstantRow (this);
+		}
+	}
 }

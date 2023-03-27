@@ -1,4 +1,4 @@
-#region MIT license
+﻿#region MIT license
 // 
 // MIT license
 //
@@ -257,10 +257,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             {
                 if (dataMember.IsDbGenerated)
                     type = ParameterType.Output;
-                else if ((dataMember.AutoSync == AutoSync.Always) || (dataMember.AutoSync == autoSync))
-                    type = ParameterType.AutoSync;
+				else if ((dataMember.AutoSync == AutoSync.Always) || (dataMember.AutoSync == autoSync))
+					type = ParameterType.AutoSync;
                 else
-                    type = ParameterType.Input;
+					type = ParameterType.Input;
             }
             return type;
         }

@@ -2,7 +2,7 @@
 // System.Security.AccessControl.ResourceType enum
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -29,22 +29,22 @@
 
 namespace System.Security.AccessControl
 {
-    // These directly correspond to Win32 SE_OBJECT_TYPE.
-    public enum ResourceType
-    {
-        Unknown            = 0,
-        FileObject        = 1,
-        Service            = 2,
-        Printer            = 3,
-        RegistryKey        = 4,
-        LMShare            = 5,
-        KernelObject        = 6,
-        WindowObject        = 7,
-        DSObject        = 8,
-        DSObjectAll        = 9,
-        ProviderDefined        = 10,
-        WmiGuidObject        = 11,
-        RegistryWow6432Key    = 12,
-    }
+	// These directly correspond to Win32 SE_OBJECT_TYPE.
+	public enum ResourceType
+	{
+		Unknown			= 0,
+		FileObject		= 1,
+		Service			= 2,
+		Printer			= 3,
+		RegistryKey		= 4,
+		LMShare			= 5,
+		KernelObject		= 6,
+		WindowObject		= 7,
+		DSObject		= 8,
+		DSObjectAll		= 9,
+		ProviderDefined		= 10,
+		WmiGuidObject		= 11,
+		RegistryWow6432Key	= 12,
+	}
 }
 

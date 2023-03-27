@@ -2,7 +2,7 @@
 // TransactionFlowAttribute.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -33,33 +33,33 @@ using System.Transactions;
 
 namespace System.ServiceModel
 {
-    [AttributeUsage (AttributeTargets.Method)]
-    public sealed class TransactionFlowAttribute : Attribute, IOperationBehavior
-    {
-        public TransactionFlowAttribute (TransactionFlowOption transactions)
-        {
-            Transactions = transactions;
-        }
+	[AttributeUsage (AttributeTargets.Method)]
+	public sealed class TransactionFlowAttribute : Attribute, IOperationBehavior
+	{
+		public TransactionFlowAttribute (TransactionFlowOption transactions)
+		{
+			Transactions = transactions;
+		}
 
-        public TransactionFlowOption Transactions { get; private set; }
+		public TransactionFlowOption Transactions { get; private set; }
 
-        void IOperationBehavior.AddBindingParameters (OperationDescription description, BindingParameterCollection parameters)
-        {
-        }
+		void IOperationBehavior.AddBindingParameters (OperationDescription description, BindingParameterCollection parameters)
+		{
+		}
 
-        [MonoTODO]
-        void IOperationBehavior.ApplyClientBehavior (OperationDescription description, ClientOperation proxy)
-        {
-        }
+		[MonoTODO]
+		void IOperationBehavior.ApplyClientBehavior (OperationDescription description, ClientOperation proxy)
+		{
+		}
 
-        [MonoTODO]
-        void IOperationBehavior.ApplyDispatchBehavior (OperationDescription description, DispatchOperation dispatch)
-        {
-        }
+		[MonoTODO]
+		void IOperationBehavior.ApplyDispatchBehavior (OperationDescription description, DispatchOperation dispatch)
+		{
+		}
 
-        [MonoTODO]
-        void IOperationBehavior.Validate (OperationDescription description)
-        {
-        }
-    }
+		[MonoTODO]
+		void IOperationBehavior.Validate (OperationDescription description)
+		{
+		}
+	}
 }

@@ -336,10 +336,10 @@ namespace System {
         internal static extern unsafe string FormatNumberBuffer(byte* number, string format, NumberFormatInfo info, char* allDigits);
 #else
         public static String FormatDecimal(Decimal value, String format, NumberFormatInfo info)
-    {
-        return NumberFormatter.NumberToString (format, value, info);
-    }
-       
+	{
+		return NumberFormatter.NumberToString (format, value, info);
+	}
+	   
         public static String FormatDouble(double value, String format, NumberFormatInfo info)
         {
             return NumberFormatter.NumberToString (format, value, info);

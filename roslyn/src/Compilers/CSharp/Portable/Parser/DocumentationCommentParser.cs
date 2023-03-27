@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -864,23 +864,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// Tokens start with underscores (I've cheated for _PredefinedTypeToken, which is not actually a
         /// SyntaxKind), "*" indicates "0 or more", "?" indicates "0 or 1", and parentheses are for grouping.
         /// 
-        /// Cref                 = CrefType _DotToken CrefMember
-        ///                     | CrefType
-        ///                     | CrefMember
+        /// Cref	 			= CrefType _DotToken CrefMember
+        /// 					| CrefType
+        /// 					| CrefMember
         ///                     | CrefFirstType _OpenParenToken CrefParameterList? _CloseParenToken
-        /// CrefName            = _IdentifierToken (_LessThanToken _IdentifierToken (_CommaToken _IdentifierToken)* _GreaterThanToken)?
-        /// CrefFirstType         = ((_IdentifierToken _ColonColonToken)? CrefName) 
+        /// CrefName			= _IdentifierToken (_LessThanToken _IdentifierToken (_CommaToken _IdentifierToken)* _GreaterThanToken)?
+        /// CrefFirstType 		= ((_IdentifierToken _ColonColonToken)? CrefName) 
         ///                     | _PredefinedTypeToken
-        /// CrefType             = CrefFirstType (_DotToken CrefName)*
-        /// CrefMember             = CrefName (_OpenParenToken CrefParameterList? _CloseParenToken)?
-        ///                     | _ThisKeyword (_OpenBracketToken CrefParameterList _CloseBracketToken)?
-        ///                     | _OperatorKeyword _OperatorToken (_OpenParenToken CrefParameterList? _CloseParenToken)?
-        ///                     | (_ImplicitKeyword | _ExplicitKeyword) _OperatorKeyword CrefParameterType (_OpenParenToken CrefParameterList? _CloseParenToken)?
-        /// CrefParameterList    = CrefParameter (_CommaToken CrefParameter)*
-        /// CrefParameter        = (_RefKeyword | _OutKeyword)? CrefParameterType
-        /// CrefParameterType    = CrefParameterType2 _QuestionToken? _AsteriskToken* (_OpenBracketToken _CommaToken* _CloseBracketToken)*
-        /// CrefParameterType2     = (((_IdentifierToken _ColonColonToken)? CrefParameterType3) | _PredefinedTypeToken) (_DotToken CrefParameterType3)*
-        /// CrefParameterType3     = _IdentifierToken (_LessThanToken CrefParameterType (_CommaToken CrefParameterType)* _GreaterThanToken)?
+        /// CrefType 			= CrefFirstType (_DotToken CrefName)*
+        /// CrefMember 			= CrefName (_OpenParenToken CrefParameterList? _CloseParenToken)?
+        /// 					| _ThisKeyword (_OpenBracketToken CrefParameterList _CloseBracketToken)?
+        /// 					| _OperatorKeyword _OperatorToken (_OpenParenToken CrefParameterList? _CloseParenToken)?
+        /// 					| (_ImplicitKeyword | _ExplicitKeyword) _OperatorKeyword CrefParameterType (_OpenParenToken CrefParameterList? _CloseParenToken)?
+        /// CrefParameterList	= CrefParameter (_CommaToken CrefParameter)*
+        /// CrefParameter		= (_RefKeyword | _OutKeyword)? CrefParameterType
+        /// CrefParameterType	= CrefParameterType2 _QuestionToken? _AsteriskToken* (_OpenBracketToken _CommaToken* _CloseBracketToken)*
+        /// CrefParameterType2 	= (((_IdentifierToken _ColonColonToken)? CrefParameterType3) | _PredefinedTypeToken) (_DotToken CrefParameterType3)*
+        /// CrefParameterType3 	= _IdentifierToken (_LessThanToken CrefParameterType (_CommaToken CrefParameterType)* _GreaterThanToken)?
         ///
         /// NOTE: type parameters, not type arguments
         /// NOTE: the first production of Cref is preferred to the other two

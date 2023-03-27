@@ -2,7 +2,7 @@
 // WebGetAttributeTest.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -36,31 +36,31 @@ using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.ServiceModel.Description
 {
-    [TestFixture]
-    public class WebGetAttributeTest
-    {
-        [Test]
-        public void IOperationBehaviorMethods ()
-        {
-            IOperationBehavior oper = new WebGetAttribute ();
-            var pl = new BindingParameterCollection ();
-            var od = ContractDescription.GetContract (typeof (TestService)).Operations [0];
-            oper.AddBindingParameters (od, pl);
-            Assert.AreEqual (0, pl.Count, "#1");
+	[TestFixture]
+	public class WebGetAttributeTest
+	{
+		[Test]
+		public void IOperationBehaviorMethods ()
+		{
+			IOperationBehavior oper = new WebGetAttribute ();
+			var pl = new BindingParameterCollection ();
+			var od = ContractDescription.GetContract (typeof (TestService)).Operations [0];
+			oper.AddBindingParameters (od, pl);
+			Assert.AreEqual (0, pl.Count, "#1");
 
-            // yeah it really does nothing.
-            oper.AddBindingParameters (null, null);
+			// yeah it really does nothing.
+			oper.AddBindingParameters (null, null);
 
-            oper.ApplyClientBehavior (od, null);
-            oper.ApplyDispatchBehavior (od, null);
-            oper.Validate (od);
-        }
+			oper.ApplyClientBehavior (od, null);
+			oper.ApplyDispatchBehavior (od, null);
+			oper.Validate (od);
+		}
 
-        [ServiceContract]
-        public interface TestService
-        {
-            [OperationContract]
-            string TestMethod (string input);
-        }
-    }
+		[ServiceContract]
+		public interface TestService
+		{
+			[OperationContract]
+			string TestMethod (string input);
+		}
+	}
 }

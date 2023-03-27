@@ -32,21 +32,21 @@ using System;
 using System.Collections;
 
 namespace System.EnterpriseServices {
-    internal interface ISecurityCallersColl {
+	internal interface ISecurityCallersColl {
 
-        #region Properties
+		#region Properties
 
-        int Count {
-            get;
-        }
+		int Count {
+			get;
+		}
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        void GetEnumerator (out IEnumerator enumerator);
-        ISecurityIdentityColl GetItem (int idx);
+		void GetEnumerator (out IEnumerator enumerator);
+		ISecurityIdentityColl GetItem (int idx);
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

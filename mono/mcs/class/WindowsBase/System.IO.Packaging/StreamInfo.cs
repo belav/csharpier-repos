@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,38 +28,38 @@ using System.IO;
 
 namespace System.IO.Packaging {
 
-    public class StreamInfo
-    {
-        internal StreamInfo ()
-        {
-        }
+	public class StreamInfo
+	{
+		internal StreamInfo ()
+		{
+		}
 
-        public CompressionOption CompressionOption {
-            get { throw new NotImplementedException (); }
-        }
+		public CompressionOption CompressionOption {
+			get { throw new NotImplementedException (); }
+		}
 
-        public EncryptionOption EncryptionOption {
-            get { throw new NotImplementedException (); }
-        }
+		public EncryptionOption EncryptionOption {
+			get { throw new NotImplementedException (); }
+		}
 
-        public string Name {
-            get { throw new NotImplementedException (); }
-        }
+		public string Name {
+			get { throw new NotImplementedException (); }
+		}
 
-        public Stream GetStream ()
-        {
-            throw new NotImplementedException ();
-        }
+		public Stream GetStream ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public Stream GetStream (FileMode mode)
-        {
-            throw new NotImplementedException ();
-        }
+		public Stream GetStream (FileMode mode)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public Stream GetStream (FileMode mode, FileAccess access)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public Stream GetStream (FileMode mode, FileAccess access)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 
 }

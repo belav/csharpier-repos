@@ -1,9 +1,9 @@
 //
 // HttpCapabilitiesBaseCas.cs 
-//    - CAS unit tests for System.Web.Configuration.HttpCapabilitiesBase
+//	- CAS unit tests for System.Web.Configuration.HttpCapabilitiesBase
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,12 +34,12 @@ using System.Web.Configuration;
 
 namespace MonoCasTests.System.Web.Configuration {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HttpCapabilitiesBaseCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HttpCapabilitiesBaseCas : AspNetHostingMinimal {
 
-        public override Type Type {
-            get { return typeof (HttpCapabilitiesBase); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HttpCapabilitiesBase); }
+		}
+	}
 }

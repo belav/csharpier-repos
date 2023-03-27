@@ -7,11 +7,11 @@ using System.Runtime.CompilerServices;
 
 public class Test
 {
-    public static void Main ()
-    {
-        try {
-        } catch (Exception) {
-        } catch {
-        }
-    }
+	public static void Main ()
+	{
+		try {
+		} catch (Exception) {
+		} catch {
+		}
+	}
 }

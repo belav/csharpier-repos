@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.DataControlButton.cs
 //
 // Authors:
-//    Igor Zelmanovich (igorz@mainsoft.com)
+//	Igor Zelmanovich (igorz@mainsoft.com)
 //
 // (C) 2006 Mainsoft, Inc (http://www.mainsoft.com)
 //
@@ -32,21 +32,21 @@ using System.Text;
 
 namespace System.Web.UI.WebControls
 {
-    class ContainedTable : Table
-    {
-        WebControl _container;
+	class ContainedTable : Table
+	{
+		WebControl _container;
 
-        public ContainedTable (WebControl container)
-        {
-            _container = container;
-        }
+		public ContainedTable (WebControl container)
+		{
+			_container = container;
+		}
 
-        protected override void AddAttributesToRender (HtmlTextWriter writer)
-        {
-            ControlStyle.CopyFrom (_container.ControlStyle);
-            base.AddAttributesToRender (writer);
-            writer.AddAttribute (HtmlTextWriterAttribute.Id, _container.ClientID);
-        }
-    }
+		protected override void AddAttributesToRender (HtmlTextWriter writer)
+		{
+			ControlStyle.CopyFrom (_container.ControlStyle);
+			base.AddAttributesToRender (writer);
+			writer.AddAttribute (HtmlTextWriterAttribute.Id, _container.ClientID);
+		}
+	}
 }
 

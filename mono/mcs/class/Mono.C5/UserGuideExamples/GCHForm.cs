@@ -29,9 +29,9 @@ using C5;
 
 namespace GConvexHull
 {
-    /// <summary>
-    /// Summary description for Form1.
-    /// </summary>
+	/// <summary>
+	/// Summary description for Form1.
+	/// </summary>
   public class TesterForm : System.Windows.Forms.Form
   {
     //My data

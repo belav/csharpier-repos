@@ -7,6 +7,6 @@ class C: IEnumerable
 {
    public IEnumerator GetEnumerator ()
    {
-       yield return;
+	   yield return;
    }
 }

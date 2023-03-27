@@ -41,102 +41,102 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataView_AllowDelete : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataView_AllowDelete tc = new DataView_AllowDelete();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataView_AllowDelete");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataView_AllowDelete tc = new DataView_AllowDelete();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataView_AllowDelete");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-        DataView dv = new DataView(dt);
-        
-        try
-        {
-            BeginCase("AllowDelete - default value");
-            Compare(dv.AllowDelete ,true );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("AllowDelete - true");
-            dv.AllowDelete = true;
-            Compare(dv.AllowDelete , true);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("AllowDelete - false");
-            dv.AllowDelete = false;
-            Compare(dv.AllowDelete , false);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-        dv.AllowDelete = false;
-        try
-        {
-            BeginCase("AllowDelete false- Exception");
-            try
-            {
-                dv.Delete(0);
-            }
-            catch(DataException ex)
-            {
-                exp=ex;
-            }
-            Compare(exp.GetType().FullName , typeof(DataException).FullName );
-            exp=null;
-            
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}    
-        
-        
-        dv.AllowDelete = true;
-        int RowsCount = dv.Count ;
-        try
-        {
-            BeginCase("AllowDelete true- Exception");
-            dv.Delete(0);
-            Compare(dv.Count , RowsCount-1);
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}    
-        
-    }
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	public void run()
+	{
+		Exception exp = null;
+		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+		DataView dv = new DataView(dt);
+		
+		try
+		{
+			BeginCase("AllowDelete - default value");
+			Compare(dv.AllowDelete ,true );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("AllowDelete - true");
+			dv.AllowDelete = true;
+			Compare(dv.AllowDelete , true);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("AllowDelete - false");
+			dv.AllowDelete = false;
+			Compare(dv.AllowDelete , false);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+
+		dv.AllowDelete = false;
+		try
+		{
+			BeginCase("AllowDelete false- Exception");
+			try
+			{
+				dv.Delete(0);
+			}
+			catch(DataException ex)
+			{
+				exp=ex;
+			}
+			Compare(exp.GetType().FullName , typeof(DataException).FullName );
+			exp=null;
+			
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}	
+		
+		
+		dv.AllowDelete = true;
+		int RowsCount = dv.Count ;
+		try
+		{
+			BeginCase("AllowDelete true- Exception");
+			dv.Delete(0);
+			Compare(dv.Count , RowsCount-1);
+
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}	
+		
+	}
 }
 }

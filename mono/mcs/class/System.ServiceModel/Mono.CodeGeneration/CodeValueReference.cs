@@ -28,9 +28,9 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public abstract class CodeValueReference: CodeExpression
-    {
-        public abstract void GenerateSet (ILGenerator gen, CodeExpression value);
-    }
+	public abstract class CodeValueReference: CodeExpression
+	{
+		public abstract void GenerateSet (ILGenerator gen, CodeExpression value);
+	}
 }
 #endif

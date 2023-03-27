@@ -20,22 +20,22 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@novell.com)
+//	Chris Toshok (toshok@novell.com)
 //
 
 using System;
 
 namespace System.Windows.Input {
 
-    public enum FocusNavigationDirection
-    {
-        Next,
-        Previous,
-        First,
-        Last,
-        Left,
-        Right,
-        Up,
-        Down
-    }
+	public enum FocusNavigationDirection
+	{
+		Next,
+		Previous,
+		First,
+		Last,
+		Left,
+		Right,
+		Up,
+		Down
+	}
 }

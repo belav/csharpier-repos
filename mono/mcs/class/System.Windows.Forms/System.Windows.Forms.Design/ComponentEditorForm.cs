@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Dennis Hayes    (dennish@raytek.com)
+//	Dennis Hayes	(dennish@raytek.com)
 
 using System;
 using System.ComponentModel;
@@ -28,69 +28,69 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms.Design {
-    [ToolboxItem (false)]
-    [ClassInterfaceAttribute (ClassInterfaceType.AutoDispatch)]
-    [ComVisible (true)]
-    public class ComponentEditorForm : Form {
+	[ToolboxItem (false)]
+	[ClassInterfaceAttribute (ClassInterfaceType.AutoDispatch)]
+	[ComVisible (true)]
+	public class ComponentEditorForm : Form {
 
-        [MonoTODO]
-        public ComponentEditorForm(object component, Type[] pageTypes){
-        }
+		[MonoTODO]
+		public ComponentEditorForm(object component, Type[] pageTypes){
+		}
 
-        #region Public Properties
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        new public virtual bool AutoSize {
-            get { return base.AutoSize; }
-            set { base.AutoSize = value; }
-        }
-        #endregion
-        
-        [MonoTODO]
-        protected override void OnActivated(EventArgs e){
-        }
+		#region Public Properties
+		[Browsable (false)]
+		[EditorBrowsable (EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		new public virtual bool AutoSize {
+			get { return base.AutoSize; }
+			set { base.AutoSize = value; }
+		}
+		#endregion
+		
+		[MonoTODO]
+		protected override void OnActivated(EventArgs e){
+		}
 
-        [MonoTODO]
-        protected virtual void OnSelChangeSelector(object source, TreeViewEventArgs e){
-        }
+		[MonoTODO]
+		protected virtual void OnSelChangeSelector(object source, TreeViewEventArgs e){
+		}
 
-        [MonoTODO]
-        public override bool PreProcessMessage(ref Message msg){
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override bool PreProcessMessage(ref Message msg){
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual DialogResult ShowForm(){
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual DialogResult ShowForm(){
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual DialogResult ShowForm(int page){
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual DialogResult ShowForm(int page){
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual DialogResult ShowForm(IWin32Window owner){
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual DialogResult ShowForm(IWin32Window owner){
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual DialogResult ShowForm(IWin32Window owner, int page){
-            throw new NotImplementedException ();
-        }
-        [MonoTODO]
-        // can't override the function in control. bug in compiler. Fixed?
-        protected override void OnHelpRequested(HelpEventArgs e){
-        }
+		[MonoTODO]
+		public virtual DialogResult ShowForm(IWin32Window owner, int page){
+			throw new NotImplementedException ();
+		}
+		[MonoTODO]
+		// can't override the function in control. bug in compiler. Fixed?
+		protected override void OnHelpRequested(HelpEventArgs e){
+		}
 
-        #region Public Events
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler AutoSizeChanged {
-            add { base.AutoSizeChanged += value; }
-            remove { base.AutoSizeChanged -= value; }
-        }
-        #endregion
-    }
+		#region Public Events
+		[Browsable (false)]
+		[EditorBrowsable (EditorBrowsableState.Never)]
+		public new event EventHandler AutoSizeChanged {
+			add { base.AutoSizeChanged += value; }
+			remove { base.AutoSizeChanged -= value; }
+		}
+		#endregion
+	}
 }

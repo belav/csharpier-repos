@@ -2,7 +2,7 @@
 // System.Web.UI.CollectionBuilder.cs
 //
 // Authors:
-//     Gonzalo Paniagua Javier (gonzalo@ximian.com)
+// 	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (c) 2003 Ximian, Inc. (http://www.ximian.com)
 //
@@ -35,24 +35,24 @@ using System.Text;
 
 namespace System.Web.UI
 {
-    sealed class CollectionBuilder : ControlBuilder
-    {
-        Type[] possibleElementTypes;
+	sealed class CollectionBuilder : ControlBuilder
+	{
+		Type[] possibleElementTypes;
 
-        internal CollectionBuilder ()
-        {
-        }
+		internal CollectionBuilder ()
+		{
+		}
 
-        public override void AppendLiteralString (string s)
-        {
-            if (s != null && s.Trim ().Length > 0)
-                throw new HttpException ("Literal content not allowed for " + ControlType);
-        }
+		public override void AppendLiteralString (string s)
+		{
+			if (s != null && s.Trim ().Length > 0)
+				throw new HttpException ("Literal content not allowed for " + ControlType);
+		}
 
-        public override Type GetChildControlType (string tagName, IDictionary attribs)
-        {
-            Type t = Root.GetChildControlType (tagName, attribs);
-            if (possibleElementTypes != null) {
+		public override Type GetChildControlType (string tagName, IDictionary attribs)
+		{
+			Type t = Root.GetChildControlType (tagName, attribs);
+			if (possibleElementTypes != null) {
                                bool foundMatchingType = false;
                                for (int i = 0; i < possibleElementTypes.Length && !foundMatchingType; ++i)
                                        foundMatchingType = possibleElementTypes[i].IsAssignableFrom (t);
@@ -66,31 +66,31 @@ namespace System.Web.UI
                                        }
                                        throw new HttpException ("Cannot add a " + t + " to " + possibleTypesString);
                                }
-            }
+			}
 
-            return t;
-        }
+			return t;
+		}
 
-        public override void Init (TemplateParser parser,
-                       ControlBuilder parentBuilder,
-                       Type type,
-                       string tagName,
-                       string id,
-                       IDictionary attribs)
-        {            
-            base.Init (parser, parentBuilder, type, tagName, id, attribs);
+		public override void Init (TemplateParser parser,
+					   ControlBuilder parentBuilder,
+					   Type type,
+					   string tagName,
+					   string id,
+					   IDictionary attribs)
+		{			
+			base.Init (parser, parentBuilder, type, tagName, id, attribs);
 
-            PropertyInfo prop = parentBuilder.ControlType.GetProperty (tagName, FlagsNoCase);
-            SetControlType (prop.PropertyType);
+			PropertyInfo prop = parentBuilder.ControlType.GetProperty (tagName, FlagsNoCase);
+			SetControlType (prop.PropertyType);
 
-            MemberInfo[] mems = ControlType.GetMember ("Item", MemberTypes.Property, FlagsNoCase & ~BindingFlags.IgnoreCase);
-            if (mems.Length > 0) {
+			MemberInfo[] mems = ControlType.GetMember ("Item", MemberTypes.Property, FlagsNoCase & ~BindingFlags.IgnoreCase);
+			if (mems.Length > 0) {
                                possibleElementTypes = new Type [mems.Length];
                                for (int i = 0; i < mems.Length; ++i)
                                        possibleElementTypes [i] = ((PropertyInfo)mems [i]).PropertyType;
-            } else
-                throw new HttpException ("Collection of type '" + ControlType + "' does not have an indexer.");
-        }
-    }
+			} else
+				throw new HttpException ("Collection of type '" + ControlType + "' does not have an indexer.");
+		}
+	}
 }
 

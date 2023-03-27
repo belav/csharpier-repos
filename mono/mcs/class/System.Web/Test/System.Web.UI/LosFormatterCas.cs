@@ -2,7 +2,7 @@
 // LosFormatterCas.cs - CAS unit tests for System.Web.UI.LosFormatter
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,48 +36,48 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class LosFormatterCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class LosFormatterCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor0_Deny_Unrestricted ()
-        {
-            LosFormatter lf = new LosFormatter ();
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor0_Deny_Unrestricted ()
+		{
+			LosFormatter lf = new LosFormatter ();
 
-            MemoryStream ms = new MemoryStream ();
-            lf.Serialize (ms, "mono");
-            ms.Position = 0;
-            Assert.IsNotNull (lf.Deserialize (ms), "Deserialize(Stream)");
+			MemoryStream ms = new MemoryStream ();
+			lf.Serialize (ms, "mono");
+			ms.Position = 0;
+			Assert.IsNotNull (lf.Deserialize (ms), "Deserialize(Stream)");
 
-            StringWriter sw = new StringWriter ();
-            lf.Serialize (sw, "mono");
-            string s = sw.ToString ();
-            StringReader sr = new StringReader (s);
-            Assert.IsNotNull (lf.Deserialize (sr), "Deserialize(TextReader)");
+			StringWriter sw = new StringWriter ();
+			lf.Serialize (sw, "mono");
+			string s = sw.ToString ();
+			StringReader sr = new StringReader (s);
+			Assert.IsNotNull (lf.Deserialize (sr), "Deserialize(TextReader)");
 
-            Assert.IsNotNull (lf.Deserialize (s), "Deserialize(string)");
-        }
+			Assert.IsNotNull (lf.Deserialize (s), "Deserialize(string)");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void CtorBoolString_Deny_Unrestricted ()
-        {
-            LosFormatter lf = new LosFormatter (true, String.Empty);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void CtorBoolString_Deny_Unrestricted ()
+		{
+			LosFormatter lf = new LosFormatter (true, String.Empty);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void CtorBoolByteArray_Deny_Unrestricted ()
-        {
-            LosFormatter lf = new LosFormatter (true, (byte[])null);
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void CtorBoolByteArray_Deny_Unrestricted ()
+		{
+			LosFormatter lf = new LosFormatter (true, (byte[])null);
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (LosFormatter); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (LosFormatter); }
+		}
+	}
 }

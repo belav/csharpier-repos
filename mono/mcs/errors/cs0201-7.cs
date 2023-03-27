@@ -5,8 +5,8 @@ using System.Linq;
 
 class C
 {
-    public static void Main ()
-    {
-        from s in "string" select s;
-    }
+	public static void Main ()
+	{
+		from s in "string" select s;
+	}
 }

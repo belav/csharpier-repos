@@ -14,8 +14,8 @@
  *
  * Port of the Java port that uses native GMP to use native GMP with C#
  * contributed by Miguel de Icaza, based on the Java version, that was:
- *     contributed by Mike Pall
- *     java port by Stefan Krause
+ * 	contributed by Mike Pall
+ * 	java port by Stefan Krause
 */
 using System;
 using System.Numerics;

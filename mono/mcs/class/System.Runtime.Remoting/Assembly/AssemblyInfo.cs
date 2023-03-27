@@ -38,15 +38,15 @@ using System.Runtime.InteropServices;
 
 // General Information about the System.Runtime.Remoting assembly
 
-    [assembly: AssemblyTitle ("System.Runtime.Remoting.dll")]
-    [assembly: AssemblyDescription ("System.Runtime.Remoting.dll")]
-    [assembly: AssemblyDefaultAlias ("System.Runtime.Remoting.dll")]
+	[assembly: AssemblyTitle ("System.Runtime.Remoting.dll")]
+	[assembly: AssemblyDescription ("System.Runtime.Remoting.dll")]
+	[assembly: AssemblyDefaultAlias ("System.Runtime.Remoting.dll")]
 
-    [assembly: AssemblyCompany (Consts.MonoCompany)]
-    [assembly: AssemblyProduct (Consts.MonoProduct)]
-    [assembly: AssemblyCopyright (Consts.MonoCopyright)]
+	[assembly: AssemblyCompany (Consts.MonoCompany)]
+	[assembly: AssemblyProduct (Consts.MonoProduct)]
+	[assembly: AssemblyCopyright (Consts.MonoCopyright)]
 
-    [assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
+	[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
 
 [assembly: AssemblyVersion (Consts.FxVersion)]
 [assembly: SatelliteContractVersion (Consts.FxVersion)]
@@ -54,7 +54,7 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage ("en-US")]
 [assembly: ComCompatibleVersion (1, 0, 3300, 0)]
 
-    [assembly: AssemblyDelaySign (true)]
+	[assembly: AssemblyDelaySign (true)]
 
 [assembly: AssemblyFileVersion (Consts.FxFileVersion)]
 [assembly: CLSCompliant (false)]

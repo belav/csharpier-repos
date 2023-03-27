@@ -30,7 +30,7 @@ namespace System.Web.UI {
         internal static readonly char [] formatSeparator = new char[] { ','};
 
         public ObjectConverter() { }
-        
+		
 
         /// <internalonly/>
         /// <devdoc>
@@ -56,17 +56,17 @@ namespace System.Web.UI {
                     return Convert.ToBoolean((string)value, CultureInfo.InvariantCulture);
                 }
                 else if (typeof(DateTime).IsAssignableFrom(toType)) {
-                    return Convert.ToDateTime((string)value, CultureInfo.InvariantCulture);
+					return Convert.ToDateTime((string)value, CultureInfo.InvariantCulture);
                 }
                 else if (typeof(Decimal).IsAssignableFrom(toType)) {
                     TypeConverter tc = new DecimalConverter();                
                     return tc.ConvertFromInvariantString((string)value);
                 }
                 else if (typeof(Double).IsAssignableFrom(toType)) {
-                    return Convert.ToDouble((string)value, CultureInfo.InvariantCulture);
+					return Convert.ToDouble((string)value, CultureInfo.InvariantCulture);
                 }
                 else if (typeof(Int16).IsAssignableFrom(toType)) {
-                    return Convert.ToInt16((Int16)value, CultureInfo.InvariantCulture);
+					return Convert.ToInt16((Int16)value, CultureInfo.InvariantCulture);
                 }
                 else {
                     throw new ArgumentException(

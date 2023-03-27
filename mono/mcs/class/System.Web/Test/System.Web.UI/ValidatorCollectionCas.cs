@@ -1,9 +1,9 @@
 //
 // ValidatorCollectionCas.cs 
-//    - CAS unit tests for System.Web.UI.ValidatorCollection
+//	- CAS unit tests for System.Web.UI.ValidatorCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,36 +38,36 @@ using System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ValidatorCollectionCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ValidatorCollectionCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            ValidatorCollection vc = new ValidatorCollection ();
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			ValidatorCollection vc = new ValidatorCollection ();
 
-            Assert.AreEqual (0, vc.Count, "Count");
-            Assert.IsFalse (vc.IsReadOnly, "IsReadOnly");
-            Assert.IsFalse (vc.IsSynchronized, "IsSynchronized");
-            Assert.IsNotNull (vc.SyncRoot, "SyncRoot");
+			Assert.AreEqual (0, vc.Count, "Count");
+			Assert.IsFalse (vc.IsReadOnly, "IsReadOnly");
+			Assert.IsFalse (vc.IsSynchronized, "IsSynchronized");
+			Assert.IsNotNull (vc.SyncRoot, "SyncRoot");
 
-            vc.Add (null);
-            Assert.IsNull (vc[0], "this[int]");
-            Assert.IsTrue (vc.Contains (null), "Contains");
-            Assert.IsNotNull (vc.GetEnumerator (), "GetEnumerator");
-            vc.Remove (null);
+			vc.Add (null);
+			Assert.IsNull (vc[0], "this[int]");
+			Assert.IsTrue (vc.Contains (null), "Contains");
+			Assert.IsNotNull (vc.GetEnumerator (), "GetEnumerator");
+			vc.Remove (null);
 
-            IValidator validator = new CustomValidator ();
-            vc.Add (validator);
-            vc.CopyTo (new IValidator[1], 0);
-        }
+			IValidator validator = new CustomValidator ();
+			vc.Add (validator);
+			vc.CopyTo (new IValidator[1], 0);
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (ValidatorCollection); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (ValidatorCollection); }
+		}
+	}
 }

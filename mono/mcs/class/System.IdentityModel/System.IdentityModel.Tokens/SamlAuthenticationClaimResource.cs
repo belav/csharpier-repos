@@ -2,7 +2,7 @@
 // SamlAuthenticationClaimResource.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -36,62 +36,62 @@ using System.IdentityModel.Selectors;
 
 namespace System.IdentityModel.Tokens
 {
-    [DataContract]
-    public class SamlAuthenticationClaimResource
-    {
-        public SamlAuthenticationClaimResource (
-            DateTime authenticationInstant, string authenticationMethod,
-            string dnsAddress, string ipAddress)
-        {
-            this.instant = authenticationInstant;
-            method = authenticationMethod;
-            dns = dnsAddress;
-            ip = ipAddress;
-        }
+	[DataContract]
+	public class SamlAuthenticationClaimResource
+	{
+		public SamlAuthenticationClaimResource (
+			DateTime authenticationInstant, string authenticationMethod,
+			string dnsAddress, string ipAddress)
+		{
+			this.instant = authenticationInstant;
+			method = authenticationMethod;
+			dns = dnsAddress;
+			ip = ipAddress;
+		}
 
-        public SamlAuthenticationClaimResource (
-            DateTime authenticationInstant, string authenticationMethod,
-            string dnsAddress, string ipAddress,
-            IEnumerable<SamlAuthorityBinding> authorityBindings)
-            : this (authenticationInstant, authenticationMethod, dnsAddress, ipAddress)
-        {
-            List<SamlAuthorityBinding> l = new List<SamlAuthorityBinding> ();
-            foreach (SamlAuthorityBinding b in authorityBindings)
-                l.Add (b);
-            bindings = new ReadOnlyCollection<SamlAuthorityBinding> (l);
-        }
+		public SamlAuthenticationClaimResource (
+			DateTime authenticationInstant, string authenticationMethod,
+			string dnsAddress, string ipAddress,
+			IEnumerable<SamlAuthorityBinding> authorityBindings)
+			: this (authenticationInstant, authenticationMethod, dnsAddress, ipAddress)
+		{
+			List<SamlAuthorityBinding> l = new List<SamlAuthorityBinding> ();
+			foreach (SamlAuthorityBinding b in authorityBindings)
+				l.Add (b);
+			bindings = new ReadOnlyCollection<SamlAuthorityBinding> (l);
+		}
 
-        public SamlAuthenticationClaimResource (
-            DateTime authenticationInstant, string authenticationMethod,
-            string dnsAddress, string ipAddress,
-            ReadOnlyCollection<SamlAuthorityBinding> authorityBindings)
-            : this (authenticationInstant, authenticationMethod, dnsAddress, ipAddress)
-        {
-            bindings = authorityBindings;
-        }
+		public SamlAuthenticationClaimResource (
+			DateTime authenticationInstant, string authenticationMethod,
+			string dnsAddress, string ipAddress,
+			ReadOnlyCollection<SamlAuthorityBinding> authorityBindings)
+			: this (authenticationInstant, authenticationMethod, dnsAddress, ipAddress)
+		{
+			bindings = authorityBindings;
+		}
 
-        ReadOnlyCollection<SamlAuthorityBinding> bindings;
-        DateTime instant;
-        string method, dns, ip;
+		ReadOnlyCollection<SamlAuthorityBinding> bindings;
+		DateTime instant;
+		string method, dns, ip;
 
-        public DateTime AuthenticationInstant {
-            get { return instant; }
-        }
+		public DateTime AuthenticationInstant {
+			get { return instant; }
+		}
 
-        public string AuthenticationMethod {
-            get { return method; }
-        }
+		public string AuthenticationMethod {
+			get { return method; }
+		}
 
-        public string DnsAddress {
-            get { return dns; }
-        }
+		public string DnsAddress {
+			get { return dns; }
+		}
 
-        public string IPAddress {
-            get { return ip; }
-        }
+		public string IPAddress {
+			get { return ip; }
+		}
 
-        public ReadOnlyCollection<SamlAuthorityBinding> AuthorityBindings {
-            get { return bindings; }
-        }
-    }
+		public ReadOnlyCollection<SamlAuthorityBinding> AuthorityBindings {
+			get { return bindings; }
+		}
+	}
 }

@@ -3,6 +3,6 @@
 
 public class Test
 {
-    const uint a = 2147483648;
-    const int b = -a;
+	const uint a = 2147483648;
+	const int b = -a;
 }

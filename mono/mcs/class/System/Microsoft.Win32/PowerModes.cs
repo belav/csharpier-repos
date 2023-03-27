@@ -29,11 +29,11 @@
 //
 namespace Microsoft.Win32 {
 
-    /// <summary>
-    /// </summary>
-    public enum PowerModes : int {
-        Resume = 1,
-        StatusChange = 2,
-        Suspend = 3,
-    };
+	/// <summary>
+	/// </summary>
+	public enum PowerModes : int {
+		Resume = 1,
+		StatusChange = 2,
+		Suspend = 3,
+	};
 }

@@ -10,17 +10,17 @@ interface I
 [Obsolete ("x", true)]
 class C
 {
-    public void Foo () { }
+	public void Foo () { }
 }
 
 class M
 {
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 
-    public void Test (C c)
-    {
-        c.Foo ();
-    }
+	public void Test (C c)
+	{
+		c.Foo ();
+	}
 }

@@ -23,14 +23,14 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-    public enum GroupBoxState
-    {
-        Normal = 1,
-        Disabled = 2
-    }
+	public enum GroupBoxState
+	{
+		Normal = 1,
+		Disabled = 2
+	}
 }

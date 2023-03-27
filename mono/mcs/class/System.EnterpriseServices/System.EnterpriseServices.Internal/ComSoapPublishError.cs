@@ -30,19 +30,19 @@ using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices.Internal
 {
-    public class ComSoapPublishError {
+	public class ComSoapPublishError {
 
-        [MonoTODO]
-        public ComSoapPublishError ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public ComSoapPublishError ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static void Report (string s)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static void Report (string s)
+		{
+			throw new NotImplementedException ();
+		}
 
-    }
+	}
 }

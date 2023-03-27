@@ -2,7 +2,7 @@
 // System.Web.WebCategoryAttribute class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -29,11 +29,11 @@
 using System.ComponentModel;
 namespace System.Web {
 
-    [AttributeUsage(AttributeTargets.All)]
-    internal class WebCategoryAttribute : CategoryAttribute {
+	[AttributeUsage(AttributeTargets.All)]
+	internal class WebCategoryAttribute : CategoryAttribute {
 
-        public WebCategoryAttribute (string category) : base (category)
-        {
-        }
-    }
+		public WebCategoryAttribute (string category) : base (category)
+		{
+		}
+	}
 }

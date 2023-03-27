@@ -2,8 +2,8 @@
 // Line: 5
 
 class X {
-    public static explicit operator X (ref X[] foo)
-    {
-        return null;
-    }
+	public static explicit operator X (ref X[] foo)
+	{
+		return null;
+	}
 }

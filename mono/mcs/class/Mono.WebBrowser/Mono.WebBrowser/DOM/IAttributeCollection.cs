@@ -20,18 +20,18 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
 
 namespace Mono.WebBrowser.DOM
 {
-    public interface IAttributeCollection : INodeList
-    {
-        IAttribute this[string name] { get; }
-        bool Exists (string name);
-        
-        int GetHashCode ();
-    }
+	public interface IAttributeCollection : INodeList
+	{
+		IAttribute this[string name] { get; }
+		bool Exists (string name);
+		
+		int GetHashCode ();
+	}
 }

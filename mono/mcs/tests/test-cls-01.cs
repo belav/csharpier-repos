@@ -16,11 +16,11 @@ public class CLSClass
 
 public class Big
 {
-    [CLSCompliant (false)]
-    public static implicit operator Big (uint value)
-    {
-        return null;
-    }
+	[CLSCompliant (false)]
+	public static implicit operator Big (uint value)
+	{
+		return null;
+	}
 }
 
 [CLSCompliant (false)]
@@ -30,8 +30,8 @@ public partial class C1
 
 public partial class C1
 {
-    public void method (uint u)
-    {
-    }
+	public void method (uint u)
+	{
+	}
 }
 

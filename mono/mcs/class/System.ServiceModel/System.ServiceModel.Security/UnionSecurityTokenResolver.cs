@@ -2,7 +2,7 @@
 // UnionSecurityTokenResolver.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -35,46 +35,46 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Channels
 {
-    class UnionSecurityTokenResolver : SecurityTokenResolver
-    {
-        SecurityTokenResolver [] resolvers;
+	class UnionSecurityTokenResolver : SecurityTokenResolver
+	{
+		SecurityTokenResolver [] resolvers;
 
-        public UnionSecurityTokenResolver (params SecurityTokenResolver [] resolvers)
-        {
-            this.resolvers = resolvers;
-        }
+		public UnionSecurityTokenResolver (params SecurityTokenResolver [] resolvers)
+		{
+			this.resolvers = resolvers;
+		}
 
-        protected override bool TryResolveSecurityKeyCore (
-            SecurityKeyIdentifierClause keyIdentifierClause,
-            out SecurityKey key)
-        {
-            key = null;
-            foreach (SecurityTokenResolver r in resolvers)
-                if (r != null && r.TryResolveSecurityKey (keyIdentifierClause, out key))
-                    return true;
-            return false;
-        }
+		protected override bool TryResolveSecurityKeyCore (
+			SecurityKeyIdentifierClause keyIdentifierClause,
+			out SecurityKey key)
+		{
+			key = null;
+			foreach (SecurityTokenResolver r in resolvers)
+				if (r != null && r.TryResolveSecurityKey (keyIdentifierClause, out key))
+					return true;
+			return false;
+		}
 
-        protected override bool TryResolveTokenCore (
-            SecurityKeyIdentifier keyIdentifier,
-            out SecurityToken token)
-        {
-            token = null;
-            foreach (SecurityTokenResolver r in resolvers)
-                if (r != null && r.TryResolveToken (keyIdentifier, out token))
-                    return true;
-            return false;
-        }
+		protected override bool TryResolveTokenCore (
+			SecurityKeyIdentifier keyIdentifier,
+			out SecurityToken token)
+		{
+			token = null;
+			foreach (SecurityTokenResolver r in resolvers)
+				if (r != null && r.TryResolveToken (keyIdentifier, out token))
+					return true;
+			return false;
+		}
 
-        protected override bool TryResolveTokenCore (
-            SecurityKeyIdentifierClause keyIdentifierClause,
-            out SecurityToken token)
-        {
-            token = null;
-            foreach (SecurityTokenResolver r in resolvers)
-                if (r != null && r.TryResolveToken (keyIdentifierClause, out token))
-                    return true;
-            return false;
-        }
-    }
+		protected override bool TryResolveTokenCore (
+			SecurityKeyIdentifierClause keyIdentifierClause,
+			out SecurityToken token)
+		{
+			token = null;
+			foreach (SecurityTokenResolver r in resolvers)
+				if (r != null && r.TryResolveToken (keyIdentifierClause, out token))
+					return true;
+			return false;
+		}
+	}
 }

@@ -2,7 +2,7 @@
 // IImmutableIntMap.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,16 +31,16 @@ using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.DataStructures {
         public interface IImmutableIntMap<T> {
-        T this [int key] { get; }
-        T Any { get; }
-        IEnumerable<T> Values { get; }
-        IEnumerable<int> Keys { get; }
-        int Count { get; }
-        T Lookup (int key);
-        bool Contains (int key);
-        IImmutableIntMap<T> Add (int key, T value);
-        IImmutableIntMap<T> Remove (int key);
-        void Visit (Action<T> action);
-        void Visit (Action<int, T> action);
-    }
+		T this [int key] { get; }
+		T Any { get; }
+		IEnumerable<T> Values { get; }
+		IEnumerable<int> Keys { get; }
+		int Count { get; }
+		T Lookup (int key);
+		bool Contains (int key);
+		IImmutableIntMap<T> Add (int key, T value);
+		IImmutableIntMap<T> Remove (int key);
+		void Visit (Action<T> action);
+		void Visit (Action<int, T> action);
+	}
 }

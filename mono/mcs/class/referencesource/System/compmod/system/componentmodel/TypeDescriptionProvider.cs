@@ -81,7 +81,7 @@ namespace System.ComponentModel {
         ///     The GetCache method returns an instance of this cache.  GetCache will return 
         ///     null if there is no supported cache for an object.
         /// </devdoc>
-        public virtual IDictionary GetCache(object instance)
+	    public virtual IDictionary GetCache(object instance)
         {
             if (_parent != null)
             {

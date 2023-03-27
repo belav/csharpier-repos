@@ -18,15 +18,15 @@
 using System;
 
 namespace System.Data.OracleClient.Oci {
-    internal struct OciColumnInfo 
-    {
-        public string ColumnName;
-        public int ColumnOrdinal;
-        public ushort ColumnSize;
-        public byte Precision;
-        public sbyte Scale;
-        public OciDataType DataType;
-        public bool AllowDBNull;
-        public string BaseColumnName;
-    }
+	internal struct OciColumnInfo 
+	{
+		public string ColumnName;
+		public int ColumnOrdinal;
+		public ushort ColumnSize;
+		public byte Precision;
+		public sbyte Scale;
+		public OciDataType DataType;
+		public bool AllowDBNull;
+		public string BaseColumnName;
+	}
 }

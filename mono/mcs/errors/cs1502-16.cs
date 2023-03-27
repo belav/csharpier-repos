@@ -3,13 +3,13 @@
 
 static class C
 {
-    public static void Foo (dynamic d)
-    {
-    }
+	public static void Foo (dynamic d)
+	{
+	}
 
-    static void Main()
-    {
-        dynamic d = null;
-        Foo (ref d);
-    }
+	static void Main()
+	{
+		dynamic d = null;
+		Foo (ref d);
+	}
 }

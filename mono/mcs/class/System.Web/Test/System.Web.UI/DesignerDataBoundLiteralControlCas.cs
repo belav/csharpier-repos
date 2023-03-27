@@ -1,9 +1,9 @@
 //
 // DesignerDataBoundLiteralControlCas.cs 
-//    - CAS unit tests for System.Web.UI.DesignerDataBoundLiteralControl
+//	- CAS unit tests for System.Web.UI.DesignerDataBoundLiteralControl
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,23 +38,23 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class DesignerDataBoundLiteralControlCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class DesignerDataBoundLiteralControlCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            DesignerDataBoundLiteralControl ddblc = new DesignerDataBoundLiteralControl ();
-            ddblc.Text = "mono";
-            Assert.AreEqual ("mono", ddblc.Text, "Text");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			DesignerDataBoundLiteralControl ddblc = new DesignerDataBoundLiteralControl ();
+			ddblc.Text = "mono";
+			Assert.AreEqual ("mono", ddblc.Text, "Text");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (DesignerDataBoundLiteralControl); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (DesignerDataBoundLiteralControl); }
+		}
+	}
 }

@@ -26,40 +26,40 @@
 using System;
 
 namespace System.ServiceModel.Channels {
-    [MonoTODO]
-    public sealed class WebSocketTransportSettings : IEquatable<WebSocketTransportSettings> {
-        public WebSocketTransportSettings ()
-        {
-            throw new NotImplementedException ();
-        }
-        
-        public const string BinaryEncoderTransferModeHeader = null;
-        public const string BinaryMessageReceivedAction = "http://schemas.microsoft.com/2011/02/websockets/onbinarymessage";
-        public const string ConnectionOpenedAction = null;
-        public const string SoapContentTypeHeader = null;
-        public const string TextMessageReceivedAction = "http://schemas.microsoft.com/2011/02/websockets/ontextmessage";
+	[MonoTODO]
+	public sealed class WebSocketTransportSettings : IEquatable<WebSocketTransportSettings> {
+		public WebSocketTransportSettings ()
+		{
+			throw new NotImplementedException ();
+		}
+		
+		public const string BinaryEncoderTransferModeHeader = null;
+		public const string BinaryMessageReceivedAction = "http://schemas.microsoft.com/2011/02/websockets/onbinarymessage";
+		public const string ConnectionOpenedAction = null;
+		public const string SoapContentTypeHeader = null;
+		public const string TextMessageReceivedAction = "http://schemas.microsoft.com/2011/02/websockets/ontextmessage";
 
-        public bool CreateNotificationOnConnection { get; set; }
-        public bool DisablePayloadMasking { get; set; }
-        public TimeSpan KeepAliveInterval { get; set; }
-        public int MaxPendingConnections { get; set; }
-        public int ReceiveBufferSize { get; set; }
-        public int SendBufferSize { get; set; }
-        public string SubProtocol { get; set; }
-        public WebSocketTransportUsage TransportUsage { get; set; }
+		public bool CreateNotificationOnConnection { get; set; }
+		public bool DisablePayloadMasking { get; set; }
+		public TimeSpan KeepAliveInterval { get; set; }
+		public int MaxPendingConnections { get; set; }
+		public int ReceiveBufferSize { get; set; }
+		public int SendBufferSize { get; set; }
+		public string SubProtocol { get; set; }
+		public WebSocketTransportUsage TransportUsage { get; set; }
 
-        public bool Equals (WebSocketTransportSettings other)
-        {
-            return other.CreateNotificationOnConnection == CreateNotificationOnConnection &&
-                other.DisablePayloadMasking == DisablePayloadMasking &&
-                other.KeepAliveInterval == KeepAliveInterval &&
-                other.MaxPendingConnections == MaxPendingConnections &&
-                other.ReceiveBufferSize == ReceiveBufferSize &&
-                other.SendBufferSize == SendBufferSize &&
-                other.SubProtocol == SubProtocol &&
-                other.TransportUsage == TransportUsage;
-        }
-        
-        
-    }
+		public bool Equals (WebSocketTransportSettings other)
+		{
+			return other.CreateNotificationOnConnection == CreateNotificationOnConnection &&
+				other.DisablePayloadMasking == DisablePayloadMasking &&
+				other.KeepAliveInterval == KeepAliveInterval &&
+				other.MaxPendingConnections == MaxPendingConnections &&
+				other.ReceiveBufferSize == ReceiveBufferSize &&
+				other.SendBufferSize == SendBufferSize &&
+				other.SubProtocol == SubProtocol &&
+				other.TransportUsage == TransportUsage;
+		}
+		
+		
+	}
 }

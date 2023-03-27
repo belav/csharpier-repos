@@ -35,20 +35,20 @@ using System.Runtime.InteropServices;
 
 namespace System 
 {
-    [ComVisible (true)]
-    public class AssemblyLoadEventArgs: EventArgs
-    {
-        private Assembly m_loadedAssembly;
+	[ComVisible (true)]
+	public class AssemblyLoadEventArgs: EventArgs
+	{
+		private Assembly m_loadedAssembly;
 
-        public AssemblyLoadEventArgs (Assembly loadedAssembly)
-        {
-            this.m_loadedAssembly = loadedAssembly;
-        }
+		public AssemblyLoadEventArgs (Assembly loadedAssembly)
+		{
+			this.m_loadedAssembly = loadedAssembly;
+		}
 
-        public Assembly LoadedAssembly {
-            get {
-                return m_loadedAssembly;
-            }
-        }
-    }
+		public Assembly LoadedAssembly {
+			get {
+				return m_loadedAssembly;
+			}
+		}
+	}
 }

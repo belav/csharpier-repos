@@ -3,5 +3,5 @@
 
 abstract class C
 {
-    public abstract void Foo<U> () where U : System.Console;
+	public abstract void Foo<U> () where U : System.Console;
 }

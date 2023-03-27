@@ -33,31 +33,31 @@ using System.Xml;
 
 namespace System.Web.Services.Protocols 
 {
-    [Serializable]
-    public class SoapFaultSubCode
-    {
-        XmlQualifiedName _code;
-        SoapFaultSubCode _subcode;
-        
-        public SoapFaultSubCode (XmlQualifiedName code)
-        {
-            _code = code;
-        }
-        
-        public SoapFaultSubCode (XmlQualifiedName code, SoapFaultSubCode subcode)
-        {
-            _code = code;
-            _subcode = subcode;
-        }
-        
-        public XmlQualifiedName Code {
-            get { return _code; }
-        }
+	[Serializable]
+	public class SoapFaultSubCode
+	{
+		XmlQualifiedName _code;
+		SoapFaultSubCode _subcode;
+		
+		public SoapFaultSubCode (XmlQualifiedName code)
+		{
+			_code = code;
+		}
+		
+		public SoapFaultSubCode (XmlQualifiedName code, SoapFaultSubCode subcode)
+		{
+			_code = code;
+			_subcode = subcode;
+		}
+		
+		public XmlQualifiedName Code {
+			get { return _code; }
+		}
 
-        public SoapFaultSubCode SubCode {
-            get { return _subcode; }
-        }
+		public SoapFaultSubCode SubCode {
+			get { return _subcode; }
+		}
 
-    }
+	}
 }
 

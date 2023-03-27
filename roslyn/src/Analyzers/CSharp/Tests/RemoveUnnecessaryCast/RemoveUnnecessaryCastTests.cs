@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -9490,8 +9490,8 @@ class E
 using System;
 public class TestClass
 {
-    public TestClass(object? value) { }
-    public TestClass(Func<object?> value) { }
+	public TestClass(object? value) { }
+	public TestClass(Func<object?> value) { }
 
     public TestClass Create1() => new ((object?)null);
 }";
@@ -9512,7 +9512,7 @@ public class TestClass
 using System;
 public class TestClass
 {
-    unsafe void M(nint** ptr)
+	unsafe void M(nint** ptr)
     {
         nint value = (nint)(void*)*ptr;
     }
@@ -11862,39 +11862,39 @@ using System;
 
 namespace WrongRedundantCastWarning
 {
-    struct Flag
-    {
-        public Flag(int value) => this.Value = value;
+	struct Flag
+	{
+		public Flag(int value) => this.Value = value;
 
-        public int Value { get; }
+		public int Value { get; }
 
-        // This cast is wrongly reported as redundant
-        public static FlagSet operator ~(Flag flag) => ~(FlagSet)flag;
-    }
+		// This cast is wrongly reported as redundant
+		public static FlagSet operator ~(Flag flag) => ~(FlagSet)flag;
+	}
 
-    struct FlagSet
-    {
-        public FlagSet(int value) => this.Value = value;
+	struct FlagSet
+	{
+		public FlagSet(int value) => this.Value = value;
 
-        public int Value { get; }
+		public int Value { get; }
 
-        public static implicit operator FlagSet(Flag flag) => new FlagSet(flag.Value);
+		public static implicit operator FlagSet(Flag flag) => new FlagSet(flag.Value);
 
-        public static FlagSet operator ~(FlagSet flagSet) => new FlagSet(~flagSet.Value);
-    }
+		public static FlagSet operator ~(FlagSet flagSet) => new FlagSet(~flagSet.Value);
+	}
 
-    class Program
-    {
-        static readonly Flag One = new Flag(1);
-        static readonly Flag Two = new Flag(2);
+	class Program
+	{
+		static readonly Flag One = new Flag(1);
+		static readonly Flag Two = new Flag(2);
 
-        static void Main(string[] args)
-        {
-            var flipped = ~Two;
+		static void Main(string[] args)
+		{
+			var flipped = ~Two;
 
-            Console.WriteLine(flipped.Value);
-        }
-    }
+			Console.WriteLine(flipped.Value);
+		}
+	}
 }
 ";
             await new VerifyCS.Test
@@ -12077,7 +12077,7 @@ class C
 {
     protected sbyte ExtractInt8(object data)
     {
-        return (data is sbyte value) ? value : (sbyte)0;
+	    return (data is sbyte value) ? value : (sbyte)0;
     }
 }
 ";

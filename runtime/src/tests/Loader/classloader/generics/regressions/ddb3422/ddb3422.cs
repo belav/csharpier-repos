@@ -20,7 +20,7 @@ class Derived : GenericBase<IFoo>, IGenericBase<IFoo> {
 //   public override void M<Z>() { }
 
     static int Main() {
-    Console.WriteLine( "Passed" );
-    return 100;
+	Console.WriteLine( "Passed" );
+	return 100;
     }
 }

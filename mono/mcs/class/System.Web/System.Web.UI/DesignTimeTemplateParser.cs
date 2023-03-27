@@ -33,53 +33,53 @@ using System.Security.Permissions;
 
 namespace System.Web.UI {
 
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public static class DesignTimeTemplateParser {
-        [SecurityPermission (SecurityAction.Demand, ControlThread = true, UnmanagedCode = true)]
-        public static Control ParseControl (DesignTimeParseData data)
-        {
-            TemplateParser NewParser = InitParser (data);
-            NewParser.RootBuilder.Text = data.ParseText;
-            if (NewParser.RootBuilder.Children == null)
-                return null;
-            foreach (ControlBuilder builder in NewParser.RootBuilder.Children)
-                return (Control) builder.CreateInstance ();
-            return null;
-        }
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public static class DesignTimeTemplateParser {
+		[SecurityPermission (SecurityAction.Demand, ControlThread = true, UnmanagedCode = true)]
+		public static Control ParseControl (DesignTimeParseData data)
+		{
+			TemplateParser NewParser = InitParser (data);
+			NewParser.RootBuilder.Text = data.ParseText;
+			if (NewParser.RootBuilder.Children == null)
+				return null;
+			foreach (ControlBuilder builder in NewParser.RootBuilder.Children)
+				return (Control) builder.CreateInstance ();
+			return null;
+		}
 
-        [SecurityPermission (SecurityAction.Demand, ControlThread = true, UnmanagedCode = true)]
-        public static ITemplate ParseTemplate (DesignTimeParseData data)
-        {
-            TemplateParser NewParser = InitParser (data);
-            NewParser.RootBuilder.Text = data.ParseText;
-            return NewParser.RootBuilder;
-        }
+		[SecurityPermission (SecurityAction.Demand, ControlThread = true, UnmanagedCode = true)]
+		public static ITemplate ParseTemplate (DesignTimeParseData data)
+		{
+			TemplateParser NewParser = InitParser (data);
+			NewParser.RootBuilder.Text = data.ParseText;
+			return NewParser.RootBuilder;
+		}
 
-        [MonoTODO]
-        static TemplateParser InitParser (DesignTimeParseData data)
-        {
-            // TODO create the parser and set data
-            TemplateParser NewParser = new PageParser(); // see FIXME in PageParser
-            // = data.DesignerHost;
-            // = data.DataBindingHandler;
-            // = data.ParseText;
-            // Parse data
-            return NewParser;
-        }
+		[MonoTODO]
+		static TemplateParser InitParser (DesignTimeParseData data)
+		{
+			// TODO create the parser and set data
+			TemplateParser NewParser = new PageParser(); // see FIXME in PageParser
+			// = data.DesignerHost;
+			// = data.DataBindingHandler;
+			// = data.ParseText;
+			// Parse data
+			return NewParser;
+		}
 
-        [MonoTODO("Not implemented")]
-        [SecurityPermission (SecurityAction.Demand, ControlThread = true, UnmanagedCode = true)]
-        public static Control[] ParseControls (DesignTimeParseData data)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO("Not implemented")]
+		[SecurityPermission (SecurityAction.Demand, ControlThread = true, UnmanagedCode = true)]
+		public static Control[] ParseControls (DesignTimeParseData data)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO("Not implemented")]
-        [SecurityPermission (SecurityAction.Demand, ControlThread = true)]
-        public static ControlBuilder ParseTheme (IDesignerHost host, string theme, string themePath)
-        {
-            throw new NotImplementedException ();
-        }
-    } 
+		[MonoTODO("Not implemented")]
+		[SecurityPermission (SecurityAction.Demand, ControlThread = true)]
+		public static ControlBuilder ParseTheme (IDesignerHost host, string theme, string themePath)
+		{
+			throw new NotImplementedException ();
+		}
+	} 
 }

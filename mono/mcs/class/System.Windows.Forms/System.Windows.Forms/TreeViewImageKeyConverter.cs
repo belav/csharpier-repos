@@ -32,19 +32,19 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-    public class TreeViewImageKeyConverter : ImageKeyConverter
-    {
-        #region Constructors
-        public TreeViewImageKeyConverter () { }
-        #endregion Constructors
+	public class TreeViewImageKeyConverter : ImageKeyConverter
+	{
+		#region Constructors
+		public TreeViewImageKeyConverter () { }
+		#endregion Constructors
 
-        #region Public Methods
-        // XXX - Can't find the difference from the base method
-        public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture,
-                          object value, Type destinationType)
-        {
-            return base.ConvertTo (context, culture, value, destinationType);
-        }
-        #endregion Public Methods
-    }
+		#region Public Methods
+		// XXX - Can't find the difference from the base method
+		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture,
+						  object value, Type destinationType)
+		{
+			return base.ConvertTo (context, culture, value, destinationType);
+		}
+		#endregion Public Methods
+	}
 }

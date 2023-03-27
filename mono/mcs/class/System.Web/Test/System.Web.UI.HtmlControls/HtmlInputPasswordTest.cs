@@ -1,9 +1,9 @@
 //
 // HtmlInputPasswordTest.cs
-//    - Unit tests for System.Web.UI.HtmlControls.HtmlInputPassword
+//	- Unit tests for System.Web.UI.HtmlControls.HtmlInputPassword
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,161 +38,161 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.HtmlControls {
 
-    public class TestHtmlInputPassword : HtmlInputPassword {
+	public class TestHtmlInputPassword : HtmlInputPassword {
 
-        bool value_changed; // true if the "value" is changed in RenderAttributes
-        string new_value; // "value" in ViewState if value_changed is true.
-        bool attr_value_changed; // same but for attributes (instead of viewstate)
-        string attr_new_value;
-
-
-        public TestHtmlInputPassword ()
-            : base ()
-        {
-        }
-
-        public string RenderAttributes ()
-        {
-            HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-            string val = (string) ViewState ["value"];
-            string att = Attributes ["value"];
-            base.RenderAttributes (writer);
-            if (val != (string) ViewState ["value"]) {
-                value_changed = true;
-                new_value = (string) ViewState ["value"];
-            }
-            if (att != Attributes ["value"]) {
-                attr_value_changed = true;
-                attr_new_value = Attributes ["value"];
-            }
-            return writer.InnerWriter.ToString ();
-        }
-
-        public bool ViewStateValueChanged {
-            get { return value_changed; }
-        }
-
-        public string ViewStateNewValue {
-            get { return new_value; }
-        }
-
-        public bool AttributeValueChanged {
-            get { return attr_value_changed; }
-        }
-
-        public string AttributeNewValue {
-            get { return attr_new_value; }
-        }
-
-        public bool LoadPost (string key, NameValueCollection nvc)
-        {
-            return base.LoadPostData (key, nvc);
-        }
-
-        public void Raise ()
-        {
-            base.RaisePostDataChangedEvent ();
-        }
-    }
+		bool value_changed; // true if the "value" is changed in RenderAttributes
+		string new_value; // "value" in ViewState if value_changed is true.
+		bool attr_value_changed; // same but for attributes (instead of viewstate)
+		string attr_new_value;
 
 
-    [TestFixture]
-    public class HtmlInputPasswordTest {
+		public TestHtmlInputPassword ()
+			: base ()
+		{
+		}
 
-        private const int defaultAttributesCount = 1;
+		public string RenderAttributes ()
+		{
+			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
+			string val = (string) ViewState ["value"];
+			string att = Attributes ["value"];
+			base.RenderAttributes (writer);
+			if (val != (string) ViewState ["value"]) {
+				value_changed = true;
+				new_value = (string) ViewState ["value"];
+			}
+			if (att != Attributes ["value"]) {
+				attr_value_changed = true;
+				attr_new_value = Attributes ["value"];
+			}
+			return writer.InnerWriter.ToString ();
+		}
 
-        [Test]
-        public void DefaultProperties ()
-        {
-            HtmlInputPassword it = new HtmlInputPassword ();
-            Assert.AreEqual (defaultAttributesCount, it.Attributes.Count, "Attributes.Count");
+		public bool ViewStateValueChanged {
+			get { return value_changed; }
+		}
 
-            Assert.AreEqual ("password", it.Type, "Type");
-            Assert.AreEqual (String.Empty, it.Value, "Value");
+		public string ViewStateNewValue {
+			get { return new_value; }
+		}
 
-            Assert.AreEqual ("input", it.TagName, "TagName");
-            Assert.AreEqual (defaultAttributesCount, it.Attributes.Count, "Attributes.Count-2");
-        }
+		public bool AttributeValueChanged {
+			get { return attr_value_changed; }
+		}
 
-        [Test]
-        public void RenderAttributes ()
-        {
-            TestHtmlInputPassword it = new TestHtmlInputPassword ();
-            it.MaxLength = 4;
-            it.Size = 2;
-            it.Name = "mono";
-            it.Value = "value";
-            Assert.AreEqual (" name type=\"password\" maxlength=\"4\" size=\"2\" /", it.RenderAttributes ());
-            Assert.IsTrue (it.ViewStateValueChanged, "ViewStateValueChanged");
-            Assert.IsTrue (it.AttributeValueChanged, "AttributeValueChanged");
-        }
+		public string AttributeNewValue {
+			get { return attr_new_value; }
+		}
 
-        private bool serverChange;
-        private void ServerChange (object sender, EventArgs e)
-        {
-            serverChange = true;
-        }
+		public bool LoadPost (string key, NameValueCollection nvc)
+		{
+			return base.LoadPostData (key, nvc);
+		}
 
-        [Test]
-        public void IPostBackDataHandler_RaisePostBackEvent ()
-        {
-            TestHtmlInputPassword it = new TestHtmlInputPassword ();
-            it.ServerChange += new EventHandler (ServerChange);
-            IPostBackDataHandler pbdh = (it as IPostBackDataHandler);
-            serverChange = false;
-            pbdh.RaisePostDataChangedEvent ();
-            Assert.IsTrue (serverChange, "ServerChange");
-        }
+		public void Raise ()
+		{
+			base.RaisePostDataChangedEvent ();
+		}
+	}
 
-        [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void IPostBackDataHandler_LoadPostData_NullCollection ()
-        {
-            TestHtmlInputPassword it = new TestHtmlInputPassword ();
-            IPostBackDataHandler pbdh = (it as IPostBackDataHandler);
-            pbdh.LoadPostData ("id1", null);
-        }
 
-        [Test]
-        public void IPostBackDataHandler_LoadPostData ()
-        {
-            TestHtmlInputPassword it = new TestHtmlInputPassword ();
-            it.ID = "id1";
-            IPostBackDataHandler pbdh = (it as IPostBackDataHandler);
-            NameValueCollection nvc = new NameValueCollection ();
-            nvc.Add ("id1", "mono");
-            Assert.IsTrue (pbdh.LoadPostData ("id1", nvc), "LoadPostData");
-            Assert.AreEqual ("mono", it.Value, "Value");
-        }
+	[TestFixture]
+	public class HtmlInputPasswordTest {
 
-        [Test]
-        public void RaisePostBackEvent ()
-        {
-            TestHtmlInputPassword it = new TestHtmlInputPassword ();
-            it.ServerChange += new EventHandler (ServerChange);
-            serverChange = false;
-            it.Raise ();
-            Assert.IsTrue (serverChange, "ServerClick");
-        }
+		private const int defaultAttributesCount = 1;
 
-        [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void LoadPostData_NullCollection ()
-        {
-            TestHtmlInputPassword it = new TestHtmlInputPassword ();
-            it.LoadPost ("id1", null);
-        }
+		[Test]
+		public void DefaultProperties ()
+		{
+			HtmlInputPassword it = new HtmlInputPassword ();
+			Assert.AreEqual (defaultAttributesCount, it.Attributes.Count, "Attributes.Count");
 
-        [Test]
-        public void LoadPostData ()
-        {
-            TestHtmlInputPassword it = new TestHtmlInputPassword ();
-            it.ID = "id1";
-            NameValueCollection nvc = new NameValueCollection ();
-            nvc.Add ("id1", "mono");
-            Assert.IsTrue (it.LoadPost ("id1", nvc), "LoadPostData");
-            Assert.AreEqual ("mono", it.Value, "Value");
-        }
-    }
+			Assert.AreEqual ("password", it.Type, "Type");
+			Assert.AreEqual (String.Empty, it.Value, "Value");
+
+			Assert.AreEqual ("input", it.TagName, "TagName");
+			Assert.AreEqual (defaultAttributesCount, it.Attributes.Count, "Attributes.Count-2");
+		}
+
+		[Test]
+		public void RenderAttributes ()
+		{
+			TestHtmlInputPassword it = new TestHtmlInputPassword ();
+			it.MaxLength = 4;
+			it.Size = 2;
+			it.Name = "mono";
+			it.Value = "value";
+			Assert.AreEqual (" name type=\"password\" maxlength=\"4\" size=\"2\" /", it.RenderAttributes ());
+			Assert.IsTrue (it.ViewStateValueChanged, "ViewStateValueChanged");
+			Assert.IsTrue (it.AttributeValueChanged, "AttributeValueChanged");
+		}
+
+		private bool serverChange;
+		private void ServerChange (object sender, EventArgs e)
+		{
+			serverChange = true;
+		}
+
+		[Test]
+		public void IPostBackDataHandler_RaisePostBackEvent ()
+		{
+			TestHtmlInputPassword it = new TestHtmlInputPassword ();
+			it.ServerChange += new EventHandler (ServerChange);
+			IPostBackDataHandler pbdh = (it as IPostBackDataHandler);
+			serverChange = false;
+			pbdh.RaisePostDataChangedEvent ();
+			Assert.IsTrue (serverChange, "ServerChange");
+		}
+
+		[Test]
+		[ExpectedException (typeof (NullReferenceException))]
+		public void IPostBackDataHandler_LoadPostData_NullCollection ()
+		{
+			TestHtmlInputPassword it = new TestHtmlInputPassword ();
+			IPostBackDataHandler pbdh = (it as IPostBackDataHandler);
+			pbdh.LoadPostData ("id1", null);
+		}
+
+		[Test]
+		public void IPostBackDataHandler_LoadPostData ()
+		{
+			TestHtmlInputPassword it = new TestHtmlInputPassword ();
+			it.ID = "id1";
+			IPostBackDataHandler pbdh = (it as IPostBackDataHandler);
+			NameValueCollection nvc = new NameValueCollection ();
+			nvc.Add ("id1", "mono");
+			Assert.IsTrue (pbdh.LoadPostData ("id1", nvc), "LoadPostData");
+			Assert.AreEqual ("mono", it.Value, "Value");
+		}
+
+		[Test]
+		public void RaisePostBackEvent ()
+		{
+			TestHtmlInputPassword it = new TestHtmlInputPassword ();
+			it.ServerChange += new EventHandler (ServerChange);
+			serverChange = false;
+			it.Raise ();
+			Assert.IsTrue (serverChange, "ServerClick");
+		}
+
+		[Test]
+		[ExpectedException (typeof (NullReferenceException))]
+		public void LoadPostData_NullCollection ()
+		{
+			TestHtmlInputPassword it = new TestHtmlInputPassword ();
+			it.LoadPost ("id1", null);
+		}
+
+		[Test]
+		public void LoadPostData ()
+		{
+			TestHtmlInputPassword it = new TestHtmlInputPassword ();
+			it.ID = "id1";
+			NameValueCollection nvc = new NameValueCollection ();
+			nvc.Add ("id1", "mono");
+			Assert.IsTrue (it.LoadPost ("id1", nvc), "LoadPostData");
+			Assert.AreEqual ("mono", it.Value, "Value");
+		}
+	}
 }
 

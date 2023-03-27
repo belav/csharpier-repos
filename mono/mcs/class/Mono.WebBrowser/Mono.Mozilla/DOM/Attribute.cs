@@ -20,7 +20,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -31,53 +31,53 @@ using Mono.WebBrowser.DOM;
 
 namespace Mono.Mozilla.DOM
 {
-    internal class Attribute : Node, IAttribute
-    {
-        private nsIDOMAttr attribute;
+	internal class Attribute : Node, IAttribute
+	{
+		private nsIDOMAttr attribute;
 
-        public Attribute (WebBrowser control, nsIDOMAttr domAttribute)
-            : base (control, domAttribute as nsIDOMNode)
-        {
-            if (control.platform != control.enginePlatform)
-                this.attribute = nsDOMAttr.GetProxy (control, domAttribute);
-            else
-                this.attribute = domAttribute;
-        }
+		public Attribute (WebBrowser control, nsIDOMAttr domAttribute)
+			: base (control, domAttribute as nsIDOMNode)
+		{
+			if (control.platform != control.enginePlatform)
+				this.attribute = nsDOMAttr.GetProxy (control, domAttribute);
+			else
+				this.attribute = domAttribute;
+		}
 
-        #region IDisposable Members
-        protected override void Dispose (bool disposing)
-        {
-            if (!disposed) {
-                if (disposing) {
-                    this.attribute = null;
-                }
-            }
-            base.Dispose (disposing);
-        }
-        #endregion
+		#region IDisposable Members
+		protected override void Dispose (bool disposing)
+		{
+			if (!disposed) {
+				if (disposing) {
+					this.attribute = null;
+				}
+			}
+			base.Dispose (disposing);
+		}
+		#endregion
 
-        #region IAttribute Members
-        public string Name {
-            get {
-                this.attribute.getName (storage);
-                return Base.StringGet (storage);
-            }
-        }
+		#region IAttribute Members
+		public string Name {
+			get {
+				this.attribute.getName (storage);
+				return Base.StringGet (storage);
+			}
+		}
 
-        public new string Value {
-            get {
-                this.attribute.getValue (storage);
-                return Base.StringGet (storage);
-            }
-            set {
-                Base.StringSet (storage, value);
-                this.attribute.setValue (storage);
-            }
-        }
-        #endregion
-        
-        public override int GetHashCode () {
-            return this.hashcode;
-        }
-    }
+		public new string Value {
+			get {
+				this.attribute.getValue (storage);
+				return Base.StringGet (storage);
+			}
+			set {
+				Base.StringSet (storage, value);
+				this.attribute.setValue (storage);
+			}
+		}
+		#endregion
+		
+		public override int GetHashCode () {
+			return this.hashcode;
+		}
+	}
 }

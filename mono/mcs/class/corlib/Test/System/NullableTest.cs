@@ -2,7 +2,7 @@
 // NullableTest.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2014 Xamarin Inc (http://www.xamarin.com)
 //
@@ -31,28 +31,28 @@ using NUnit.Framework;
 
 namespace MonoTests.System
 {
-    [TestFixture]
-    public class NullableTest
-    {
-        [Test]
-        public void GetUnderlyingType ()
-        {
-            Assert.AreSame (typeof (int), Nullable.GetUnderlyingType (typeof (Nullable<int>)), "#1");
-            Assert.IsNull (Nullable.GetUnderlyingType (typeof (Nullable<>)), "#2");
-        }
+	[TestFixture]
+	public class NullableTest
+	{
+		[Test]
+		public void GetUnderlyingType ()
+		{
+			Assert.AreSame (typeof (int), Nullable.GetUnderlyingType (typeof (Nullable<int>)), "#1");
+			Assert.IsNull (Nullable.GetUnderlyingType (typeof (Nullable<>)), "#2");
+		}
 
-        private struct MutatingStruct
-        {
-            public int Value;
-            public override bool Equals(object obj) => Value++.Equals(null);
-        }
+		private struct MutatingStruct
+		{
+			public int Value;
+			public override bool Equals(object obj) => Value++.Equals(null);
+		}
 
-        [Test]
-        public void EqualsImpl ()
-        {
-            MutatingStruct? ms = new MutatingStruct () { Value = 1 };
-            ms.Equals (new object ());
-            Assert.AreEqual (ms.Value.Value, 2, "#1");
-        }
-    }
+		[Test]
+		public void EqualsImpl ()
+		{
+			MutatingStruct? ms = new MutatingStruct () { Value = 1 };
+			ms.Equals (new object ());
+			Assert.AreEqual (ms.Value.Value, 2, "#1");
+		}
+	}
 }

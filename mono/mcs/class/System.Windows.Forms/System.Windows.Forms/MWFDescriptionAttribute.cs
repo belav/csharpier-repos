@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 //
 
@@ -30,22 +30,22 @@ using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace System {
-    [AttributeUsage (AttributeTargets.All, AllowMultiple=false)]
-    internal sealed class MWFDescriptionAttribute : System.ComponentModel.DescriptionAttribute {
-        #region Constructors
-        public MWFDescriptionAttribute() : base() {
-        }
+	[AttributeUsage (AttributeTargets.All, AllowMultiple=false)]
+	internal sealed class MWFDescriptionAttribute : System.ComponentModel.DescriptionAttribute {
+		#region Constructors
+		public MWFDescriptionAttribute() : base() {
+		}
 
-        public MWFDescriptionAttribute(string category) : base(category) {
-        }
-        #endregion    // Constructors
+		public MWFDescriptionAttribute(string category) : base(category) {
+		}
+		#endregion	// Constructors
 
-        #region Properties
-        public override string Description {
-            get {
-                return Locale.GetText(base.Description);
-            }
-        }
-        #endregion    // Properties
-    }
+		#region Properties
+		public override string Description {
+			get {
+				return Locale.GetText(base.Description);
+			}
+		}
+		#endregion	// Properties
+	}
 }

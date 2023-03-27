@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 class A
 {
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }

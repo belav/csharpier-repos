@@ -1,4 +1,4 @@
-namespace AutoMapper.IntegrationTests.CustomMapFrom;
+﻿namespace AutoMapper.IntegrationTests.CustomMapFrom;
 
 public class MemberWithSubQueryProjections : IntegrationTest<MemberWithSubQueryProjections.DatabaseInitializer>
 {

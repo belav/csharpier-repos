@@ -2,7 +2,7 @@
 // Rights.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,14 +29,14 @@ using System;
 
 namespace System.IdentityModel.Claims
 {
-    public static class Rights
-    {
-        public static string Identity {
-            get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/right/identity"; }
-        }
+	public static class Rights
+	{
+		public static string Identity {
+			get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/right/identity"; }
+		}
 
-        public static string PossessProperty {
-            get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/right/possessproperty"; }
-        }
-    }
+		public static string PossessProperty {
+			get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/right/possessproperty"; }
+		}
+	}
 }

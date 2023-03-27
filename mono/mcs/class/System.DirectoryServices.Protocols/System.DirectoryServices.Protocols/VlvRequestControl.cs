@@ -31,51 +31,51 @@ using System.Text;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class VlvRequestControl : DirectoryControl
-    {
-        [MonoTODO]
-        public VlvRequestControl ()
-            : base (null, null, false, false)
-        {
-            throw new NotImplementedException ("ctor-chain");
-        }
+	public class VlvRequestControl : DirectoryControl
+	{
+		[MonoTODO]
+		public VlvRequestControl ()
+			: base (null, null, false, false)
+		{
+			throw new NotImplementedException ("ctor-chain");
+		}
 
-        [MonoTODO]
-        public VlvRequestControl (int beforeCount, int afterCount, byte [] target)
-            : this ()
-        {
-            BeforeCount = beforeCount;
-            AfterCount = afterCount;
-            Target = target;
-        }
+		[MonoTODO]
+		public VlvRequestControl (int beforeCount, int afterCount, byte [] target)
+			: this ()
+		{
+			BeforeCount = beforeCount;
+			AfterCount = afterCount;
+			Target = target;
+		}
 
-        public VlvRequestControl (int beforeCount, int afterCount, int offset)
-            : this ()
-        {
-            BeforeCount = beforeCount;
-            AfterCount = afterCount;
-            Offset = offset;
-        }
+		public VlvRequestControl (int beforeCount, int afterCount, int offset)
+			: this ()
+		{
+			BeforeCount = beforeCount;
+			AfterCount = afterCount;
+			Offset = offset;
+		}
 
-        public VlvRequestControl (int beforeCount, int afterCount, string target)
-            : this ()
-        {
-            BeforeCount = beforeCount;
-            AfterCount = afterCount;
-            Target = Encoding.ASCII.GetBytes (target);
-        }
+		public VlvRequestControl (int beforeCount, int afterCount, string target)
+			: this ()
+		{
+			BeforeCount = beforeCount;
+			AfterCount = afterCount;
+			Target = Encoding.ASCII.GetBytes (target);
+		}
 
-        public int AfterCount { get; set; }
-        public int BeforeCount { get; set; }
-        public byte [] ContextId { get; set; }
-        public int EstimateCount { get; set; }
-        public int Offset { get; set; }
-        public byte [] Target { get; set; }
+		public int AfterCount { get; set; }
+		public int BeforeCount { get; set; }
+		public byte [] ContextId { get; set; }
+		public int EstimateCount { get; set; }
+		public int Offset { get; set; }
+		public byte [] Target { get; set; }
 
-        [MonoTODO]
-        public override byte [] GetValue ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override byte [] GetValue ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

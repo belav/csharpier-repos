@@ -26,17 +26,17 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-    public class AmbientPropertyValue
-    {
-        public AmbientPropertyValue (XamlMember property, object value)
-        {
-            // null arguments are allowed (4.0RC).
-            RetrievedProperty = property;
-            Value = value;
-        }
+	public class AmbientPropertyValue
+	{
+		public AmbientPropertyValue (XamlMember property, object value)
+		{
+			// null arguments are allowed (4.0RC).
+			RetrievedProperty = property;
+			Value = value;
+		}
 
-        public XamlMember RetrievedProperty { get; private set; }
+		public XamlMember RetrievedProperty { get; private set; }
 
-        public object Value { get; private set; }
-    }
+		public object Value { get; private set; }
+	}
 }

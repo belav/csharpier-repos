@@ -3,9 +3,9 @@
 
 public class C
 {
-    static int Value = 9;
+	static int Value = 9;
 
-    public static void Test (int v = Value)
-    {
-    }
+	public static void Test (int v = Value)
+	{
+	}
 }

@@ -1,4 +1,4 @@
-namespace AutoMapper.UnitTests.Bug;
+﻿namespace AutoMapper.UnitTests.Bug;
 
 public class Self_referencing_existing_destination : AutoMapperSpecBase
 {

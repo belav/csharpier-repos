@@ -5,19 +5,19 @@ using System;
 
 public class Base
 {
-    public Base (Action a)
-    {
-    }
+	public Base (Action a)
+	{
+	}
 }
 
 public class Derived : Base
 {
-    public Derived ()
-        : base (() => Foo ())
-    {
-    }
+	public Derived ()
+		: base (() => Foo ())
+	{
+	}
 
-    void Foo ()
-    {
-    }
+	void Foo ()
+	{
+	}
 }

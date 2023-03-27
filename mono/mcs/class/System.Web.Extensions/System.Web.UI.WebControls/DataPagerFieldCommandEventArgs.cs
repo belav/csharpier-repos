@@ -35,25 +35,25 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    [AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class DataPagerFieldCommandEventArgs : CommandEventArgs
-    {
-        public object CommandSource {
-            get;
-            private set;
-        }
+	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class DataPagerFieldCommandEventArgs : CommandEventArgs
+	{
+		public object CommandSource {
+			get;
+			private set;
+		}
 
-        public DataPagerFieldItem Item {
-            get;
-            private set;
-        }
-        
-        public DataPagerFieldCommandEventArgs (DataPagerFieldItem item, object commandSource, CommandEventArgs originalArgs)
-            : base (originalArgs)
-        {
-            Item = item;
-            CommandSource = commandSource;
-        }
-    }
+		public DataPagerFieldItem Item {
+			get;
+			private set;
+		}
+		
+		public DataPagerFieldCommandEventArgs (DataPagerFieldItem item, object commandSource, CommandEventArgs originalArgs)
+			: base (originalArgs)
+		{
+			Item = item;
+			CommandSource = commandSource;
+		}
+	}
 }

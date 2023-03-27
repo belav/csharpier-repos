@@ -52,11 +52,11 @@ namespace System.Data.Sql {
             Int32  bufferSize = 1024;
             Int32  readLength = 0;
             buffer            = new char[bufferSize];
-            bool   more       = true;
+			bool   more       = true;
             bool   failure    = false;
             IntPtr handle     = ADP.PtrZero;
 
-            RuntimeHelpers.PrepareConstrainedRegions();
+			RuntimeHelpers.PrepareConstrainedRegions();
             try {
                 timeoutTime = TdsParserStaticMethods.GetTimeoutSeconds(timeoutSeconds);
                 RuntimeHelpers.PrepareConstrainedRegions();
@@ -66,14 +66,14 @@ namespace System.Data.Sql {
 
                 if (ADP.PtrZero != handle) {
                     while (more && !TdsParserStaticMethods.TimeoutHasExpired(timeoutTime)) {
-                        readLength = SNINativeMethodWrapper.SNIServerEnumRead(handle, buffer, bufferSize, ref more);
+			            readLength = SNINativeMethodWrapper.SNIServerEnumRead(handle, buffer, bufferSize, ref more);
                         if (readLength > bufferSize) {
                             failure = true;
                             more = false;
                         }
                         else if (0 < readLength) {
-                            strbldr.Append(buffer, 0, readLength);
-                        }    
+							strbldr.Append(buffer, 0, readLength);
+						}    
                     }
                 }
             }
@@ -119,10 +119,10 @@ namespace System.Data.Sql {
                 if (0 == value.Length) {
                     continue;
                 }
-                foreach (string instance2 in value.Split(';')) {                    
-                    if (serverName == null) {
-                        foreach(string instance3 in instance2.Split('\\')) {                            
-                            if (serverName == null) {
+				foreach (string instance2 in value.Split(';')) {					
+					if (serverName == null) {
+                        foreach(string instance3 in instance2.Split('\\')) {							
+							if (serverName == null) {
                                 serverName = instance3;
                                 continue;
                             }

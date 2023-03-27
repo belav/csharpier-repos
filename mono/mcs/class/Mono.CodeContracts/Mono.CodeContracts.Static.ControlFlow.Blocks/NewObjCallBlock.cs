@@ -2,7 +2,7 @@
 // NewObjCallBlock.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,15 +30,15 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.ControlFlow.Subroutines;
 
 namespace Mono.CodeContracts.Static.ControlFlow.Blocks {
-    class NewObjCallBlock<Label> : MethodCallBlock<Label> {
-        public NewObjCallBlock (Method calledMethod, int parametersCount, SubroutineBase<Label> subroutine, ref int idGen)
-            : base (calledMethod, subroutine, ref idGen, parametersCount, false)
-        {
-        }
+	class NewObjCallBlock<Label> : MethodCallBlock<Label> {
+		public NewObjCallBlock (Method calledMethod, int parametersCount, SubroutineBase<Label> subroutine, ref int idGen)
+			: base (calledMethod, subroutine, ref idGen, parametersCount, false)
+		{
+		}
 
-        public override bool IsNewObj
-        {
-            get { return true; }
-        }
-    }
+		public override bool IsNewObj
+		{
+			get { return true; }
+		}
+	}
 }

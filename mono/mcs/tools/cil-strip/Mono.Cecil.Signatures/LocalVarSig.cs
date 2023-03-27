@@ -28,31 +28,31 @@
 
 namespace Mono.Cecil.Signatures {
 
-    internal sealed class LocalVarSig : Signature {
+	internal sealed class LocalVarSig : Signature {
 
-        public bool Local;
-        public int Count;
-        public LocalVariable [] LocalVariables;
+		public bool Local;
+		public int Count;
+		public LocalVariable [] LocalVariables;
 
-        public LocalVarSig () : base ()
-        {
-        }
+		public LocalVarSig () : base ()
+		{
+		}
 
-        public LocalVarSig (uint blobIndex) : base (blobIndex)
-        {
-        }
+		public LocalVarSig (uint blobIndex) : base (blobIndex)
+		{
+		}
 
-        public override void Accept (ISignatureVisitor visitor)
-        {
-            visitor.VisitLocalVarSig (this);
-        }
+		public override void Accept (ISignatureVisitor visitor)
+		{
+			visitor.VisitLocalVarSig (this);
+		}
 
-        internal struct LocalVariable {
+		internal struct LocalVariable {
 
-            public CustomMod [] CustomMods;
-            public Constraint Constraint;
-            public bool ByRef;
-            public SigType Type;
-        }
-    }
+			public CustomMod [] CustomMods;
+			public Constraint Constraint;
+			public bool ByRef;
+			public SigType Type;
+		}
+	}
 }

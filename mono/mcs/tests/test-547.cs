@@ -16,12 +16,12 @@
 #endif
 
 #if E1
-    #error E1
+	#error E1
 #elif E2
-    #error E2
+	#error E2
 #else
-    public class C
+	public class C
 #endif
-    {
-        public static void Main () {}
-    }
+	{
+		public static void Main () {}
+	}

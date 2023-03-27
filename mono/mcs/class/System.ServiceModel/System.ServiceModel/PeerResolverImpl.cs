@@ -2,7 +2,7 @@
 // PeerResolverImpl.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -32,40 +32,40 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.ServiceModel
 {
-    // FIXME: implement. However, for now we don't have any prefered
-    // P2P API like Pnrp that Microsoft uses.
-    internal class PeerResolverImpl : PeerResolver
-    {
-        public PeerResolverImpl ()
-        {
-        }
+	// FIXME: implement. However, for now we don't have any prefered
+	// P2P API like Pnrp that Microsoft uses.
+	internal class PeerResolverImpl : PeerResolver
+	{
+		public PeerResolverImpl ()
+		{
+		}
 
-        public override bool CanShareReferrals {
-            get { throw new NotImplementedException (); }
-        }
+		public override bool CanShareReferrals {
+			get { throw new NotImplementedException (); }
+		}
 
-        public override object Register (string meshId,
-            PeerNodeAddress nodeAddress, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		public override object Register (string meshId,
+			PeerNodeAddress nodeAddress, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override ReadOnlyCollection<PeerNodeAddress> Resolve (
-            string meshId, int maxAddresses, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		public override ReadOnlyCollection<PeerNodeAddress> Resolve (
+			string meshId, int maxAddresses, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void Unregister (object registrationId,
-            TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
+		public override void Unregister (object registrationId,
+			TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override void Update (object registrationId,
-            PeerNodeAddress updatedNodeAddress, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public override void Update (object registrationId,
+			PeerNodeAddress updatedNodeAddress, TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

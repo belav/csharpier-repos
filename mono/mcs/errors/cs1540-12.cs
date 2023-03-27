@@ -3,10 +3,10 @@
 
 class A
 {
-    public object[] Test {
-        set { }
-        protected get { return null; }
-    }
+	public object[] Test {
+		set { }
+		protected get { return null; }
+	}
 }
 
 class B : A
@@ -15,9 +15,9 @@ class B : A
 
 class C : A
 {
-    public void Test2 (B b)
-    {
-        foreach (object o in b.Test) {
-        }
-    }
+	public void Test2 (B b)
+	{
+		foreach (object o in b.Test) {
+		}
+	}
 }

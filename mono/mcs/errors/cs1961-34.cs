@@ -3,5 +3,5 @@
 
 interface A<in T>
 {
-    void B(ref T t);
+	void B(ref T t);
 }

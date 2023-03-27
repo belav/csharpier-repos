@@ -3,10 +3,10 @@
 
 public class A
 {
-    protected internal class B<T> where T : B<T>.C
-    {
-        internal class C
-        {
-        }
-    }
+	protected internal class B<T> where T : B<T>.C
+	{
+		internal class C
+		{
+		}
+	}
 }

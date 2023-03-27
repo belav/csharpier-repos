@@ -5,10 +5,10 @@
 using System;
 
 class A {
-    [Obsolete]
-    public virtual event EventHandler MyEvent;
+	[Obsolete]
+	public virtual event EventHandler MyEvent;
 }
 
 class B : A {
-    public override event EventHandler MyEvent;
+	public override event EventHandler MyEvent;
 }

@@ -4,6 +4,6 @@
 
 public class Test
 {
-    const var v = 9;
+	const var v = 9;
 }
 

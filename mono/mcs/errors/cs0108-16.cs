@@ -4,14 +4,14 @@
 
 class BaseGeneric<T>
 {
-    public class InnerDerived
-    {
-    }
+	public class InnerDerived
+	{
+	}
 }
 
 class BaseConcrete : BaseGeneric<string>
 {
-    public void InnerDerived<T> ()
-    {
-    }
+	public void InnerDerived<T> ()
+	{
+	}
 }

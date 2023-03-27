@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
         [Theory]
         [InlineData("C", 1)]
         [InlineData("C", 100)]
-        [InlineData("a?", 5)] // Unicode character with connection
+        [InlineData("a‿", 5)] // Unicode character with connection
         [InlineData("abcdefg", 99999)]
         public void TestArity(string typeName, int arity)
             => Verify(
@@ -271,10 +271,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
         [InlineData("_")]
         [InlineData("_s")]
         [InlineData("S0m3th1ng")]
-        [InlineData("�")] // Unicode character
-        [InlineData("u?")] // character and modifier character
+        [InlineData("ü")] // Unicode character
+        [InlineData("uʶ")] // character and modifier character
         [InlineData("a\u00AD")] // Soft hyphen formatting character
-        [InlineData("a?")] // Connecting punctuation (combining character)
+        [InlineData("a‿")] // Connecting punctuation (combining character)
         [InlineData("at")]
         [InlineData("line")]
         [InlineData("in")]
@@ -468,18 +468,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
                 );
 
         [Theory]
-        [InlineData("v", "v", "r�dek")] // Czech
+        [InlineData("v", "v", "řádek")] // Czech
         [InlineData("bei", "in", "Zeile")] // German
-        [InlineData("en", "en", "l�nea")] // Spanish
-        [InlineData("�", "dans", "ligne")] // French
+        [InlineData("en", "en", "línea")] // Spanish
+        [InlineData("à", "dans", "ligne")] // French
         [InlineData("in", "in", "riga")] // Italian
-        [InlineData("??", "??", "?")] // Japanese
-        [InlineData("??:", "??", "?")] // Korean
+        [InlineData("場所", "場所", "行")] // Japanese
+        [InlineData("위치:", "파일", "줄")] // Korean
         [InlineData("w", "w", "wiersz")] // Polish
         [InlineData("em", "na", "linha")] // Portuguese (Brazil)
-        [InlineData("?", "?", "??????")] // Russian
-        [InlineData("?", "??", "??")] // Chinese (Simplified)
-        [InlineData("?", "?", " ?")] // Chinese (Traditional)
+        [InlineData("в", "в", "строка")] // Russian
+        [InlineData("在", "位置", "行号")] // Chinese (Simplified)
+        [InlineData("於", "於", " 行")] // Chinese (Traditional)
         public void TestLanguages(string at, string @in, string line)
             => Verify(@$"{at} Program.Main() {@in} C:\repos\languages\Program.cs:{line} 16",
                 methodDeclaration: MethodDeclaration(

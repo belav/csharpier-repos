@@ -2,7 +2,7 @@
 // System.Web.UI.Design.DataSourceDesigner
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -36,101 +36,101 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design {
 
-    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-    public class DataSourceDesigner : ControlDesigner, IDataSourceDesigner
-    {
-        [MonoTODO]
-        public static bool SchemasEquivalent (IDataSourceSchema schema1, IDataSourceSchema schema2)
-        {
-            throw new NotImplementedException ();
-        }
+	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+	public class DataSourceDesigner : ControlDesigner, IDataSourceDesigner
+	{
+		[MonoTODO]
+		public static bool SchemasEquivalent (IDataSourceSchema schema1, IDataSourceSchema schema2)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public static bool ViewSchemasEquivalent (IDataSourceViewSchema viewSchema1, IDataSourceViewSchema viewSchema2)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public static bool ViewSchemasEquivalent (IDataSourceViewSchema viewSchema1, IDataSourceViewSchema viewSchema2)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public DataSourceDesigner ()
-        {
-        }
+		public DataSourceDesigner ()
+		{
+		}
 
-        public event EventHandler DataSourceChanged;
-        public event EventHandler SchemaRefreshed;
+		public event EventHandler DataSourceChanged;
+		public event EventHandler SchemaRefreshed;
 
-        [MonoTODO]
-        public override DesignerActionListCollection ActionLists {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public override DesignerActionListCollection ActionLists {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public virtual bool CanConfigure {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public virtual bool CanConfigure {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public virtual bool CanRefreshSchema {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public virtual bool CanRefreshSchema {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        protected bool SuppressingDataSourceEvents {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		protected bool SuppressingDataSourceEvents {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public virtual void Configure ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual void Configure ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override string GetDesignTimeHtml ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override string GetDesignTimeHtml ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual DesignerDataSourceView GetView (string viewName)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual DesignerDataSourceView GetView (string viewName)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual string [] GetViewNames ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual string [] GetViewNames ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected virtual void OnDataSourceChanged (EventArgs e)
-        {
-            if (DataSourceChanged != null)
-                DataSourceChanged (this, e);
-        }
+		protected virtual void OnDataSourceChanged (EventArgs e)
+		{
+			if (DataSourceChanged != null)
+				DataSourceChanged (this, e);
+		}
 
-        protected virtual void OnSchemaRefreshed (EventArgs e)
-        {
-            if (SchemaRefreshed != null)
-                SchemaRefreshed (this, e);
-        }
+		protected virtual void OnSchemaRefreshed (EventArgs e)
+		{
+			if (SchemaRefreshed != null)
+				SchemaRefreshed (this, e);
+		}
 
-        [MonoTODO]
-        public virtual void RefreshSchema (bool preferSilent)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual void RefreshSchema (bool preferSilent)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual void ResumeDataSourceEvents ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual void ResumeDataSourceEvents ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual void SuppressDataSourceEvents ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public virtual void SuppressDataSourceEvents ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

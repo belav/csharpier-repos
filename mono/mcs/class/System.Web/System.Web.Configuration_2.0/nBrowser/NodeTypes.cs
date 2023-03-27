@@ -23,11 +23,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace System.Web.Configuration.nBrowser
 {
-    internal enum NodeType
-    {
-        None = 0,
-        Browser = 1,
-        Gateway = 2,
-        DefaultBrowser = 3
-    }
+	internal enum NodeType
+	{
+		None = 0,
+		Browser = 1,
+		Gateway = 2,
+		DefaultBrowser = 3
+	}
 }

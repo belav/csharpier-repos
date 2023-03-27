@@ -24,9 +24,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 namespace System.ServiceModel.Channels {
-    public enum WebSocketTransportUsage {
-        WhenDuplex,
-        Always,
-        Never
-    }
+	public enum WebSocketTransportUsage {
+		WhenDuplex,
+		Always,
+		Never
+	}
 }

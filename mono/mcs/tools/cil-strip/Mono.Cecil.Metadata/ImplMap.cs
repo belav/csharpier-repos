@@ -31,53 +31,53 @@
 
 namespace Mono.Cecil.Metadata {
 
-    using Mono.Cecil;
+	using Mono.Cecil;
 
-    internal sealed class ImplMapTable : IMetadataTable {
+	internal sealed class ImplMapTable : IMetadataTable {
 
-        public const int RId = 0x1c;
+		public const int RId = 0x1c;
 
-        RowCollection m_rows;
+		RowCollection m_rows;
 
-        public ImplMapRow this [int index] {
-            get { return m_rows [index] as ImplMapRow; }
-            set { m_rows [index] = value; }
-        }
+		public ImplMapRow this [int index] {
+			get { return m_rows [index] as ImplMapRow; }
+			set { m_rows [index] = value; }
+		}
 
-        public RowCollection Rows {
-            get { return m_rows; }
-            set { m_rows = value; }
-        }
+		public RowCollection Rows {
+			get { return m_rows; }
+			set { m_rows = value; }
+		}
 
-        public int Id {
-            get { return RId; }
-        }
+		public int Id {
+			get { return RId; }
+		}
 
-        internal ImplMapTable ()
-        {
-        }
+		internal ImplMapTable ()
+		{
+		}
 
-        public void Accept (IMetadataTableVisitor visitor)
-        {
-            visitor.VisitImplMapTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
-        }
-    }
+		public void Accept (IMetadataTableVisitor visitor)
+		{
+			visitor.VisitImplMapTable (this);
+			this.Rows.Accept (visitor.GetRowVisitor ());
+		}
+	}
 
-    internal sealed class ImplMapRow : IMetadataRow {
+	internal sealed class ImplMapRow : IMetadataRow {
 
-        public PInvokeAttributes MappingFlags;
-        public MetadataToken MemberForwarded;
-        public uint ImportName;
-        public uint ImportScope;
+		public PInvokeAttributes MappingFlags;
+		public MetadataToken MemberForwarded;
+		public uint ImportName;
+		public uint ImportScope;
 
-        internal ImplMapRow ()
-        {
-        }
+		internal ImplMapRow ()
+		{
+		}
 
-        public void Accept (IMetadataRowVisitor visitor)
-        {
-            visitor.VisitImplMapRow (this);
-        }
-    }
+		public void Accept (IMetadataRowVisitor visitor)
+		{
+			visitor.VisitImplMapRow (this);
+		}
+	}
 }

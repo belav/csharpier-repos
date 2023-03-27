@@ -3,7 +3,7 @@
 // for System.Web.Services.Configuration.SoapExtensionTypeElement
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -34,59 +34,59 @@ using System.Web.Services.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services {
-    [TestFixture]
-    public class SoapExtensionTypeElementTest
-    {
-        [Test]
-        public void Ctors ()
-        {
-            SoapExtensionTypeElement el = new SoapExtensionTypeElement ();
+	[TestFixture]
+	public class SoapExtensionTypeElementTest
+	{
+		[Test]
+		public void Ctors ()
+		{
+			SoapExtensionTypeElement el = new SoapExtensionTypeElement ();
 
-            Assert.AreEqual (PriorityGroup.Low, el.Group, "A1");
-            Assert.AreEqual (0, el.Priority, "A2");
-            Assert.IsNull (el.Type, "A3");
+			Assert.AreEqual (PriorityGroup.Low, el.Group, "A1");
+			Assert.AreEqual (0, el.Priority, "A2");
+			Assert.IsNull (el.Type, "A3");
 
-            el = new SoapExtensionTypeElement (typeof (string), 5, PriorityGroup.High);
-            Assert.AreEqual (PriorityGroup.High, el.Group, "A4");
-            Assert.AreEqual (5, el.Priority, "A5");
-            Assert.AreEqual (typeof (string), el.Type, "A6");
+			el = new SoapExtensionTypeElement (typeof (string), 5, PriorityGroup.High);
+			Assert.AreEqual (PriorityGroup.High, el.Group, "A4");
+			Assert.AreEqual (5, el.Priority, "A5");
+			Assert.AreEqual (typeof (string), el.Type, "A6");
 
-            el = new SoapExtensionTypeElement ("System.String", 5, PriorityGroup.High);
-            Assert.AreEqual (PriorityGroup.High, el.Group, "A7");
-            Assert.AreEqual (5, el.Priority, "A8");
-            Assert.AreEqual (typeof (string), el.Type, "A9");
-        }
+			el = new SoapExtensionTypeElement ("System.String", 5, PriorityGroup.High);
+			Assert.AreEqual (PriorityGroup.High, el.Group, "A7");
+			Assert.AreEqual (5, el.Priority, "A8");
+			Assert.AreEqual (typeof (string), el.Type, "A9");
+		}
 
-        [Test]
-        public void GetSet ()
-        {
-            SoapExtensionTypeElement el = new SoapExtensionTypeElement ();
+		[Test]
+		public void GetSet ()
+		{
+			SoapExtensionTypeElement el = new SoapExtensionTypeElement ();
 
-            el.Group = PriorityGroup.High;
-            Assert.AreEqual (PriorityGroup.High, el.Group, "A1");
+			el.Group = PriorityGroup.High;
+			Assert.AreEqual (PriorityGroup.High, el.Group, "A1");
 
-            el.Priority = 2;
-            Assert.AreEqual (2, el.Priority, "A2");
+			el.Priority = 2;
+			Assert.AreEqual (2, el.Priority, "A2");
 
-            el.Type = typeof (string);
-            Assert.AreEqual (typeof (string), el.Type, "A3");
-        }
+			el.Type = typeof (string);
+			Assert.AreEqual (typeof (string), el.Type, "A3");
+		}
 
-        [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void PriorityValidator1 ()
-        {
-            SoapExtensionTypeElement el = new SoapExtensionTypeElement ();
-            el.Priority = -1;
-        }
+		[Test]
+		[ExpectedException (typeof (ConfigurationErrorsException))]
+		public void PriorityValidator1 ()
+		{
+			SoapExtensionTypeElement el = new SoapExtensionTypeElement ();
+			el.Priority = -1;
+		}
 
-        [Test]
-        public void PriorityValidator2 ()
-        {
-            SoapExtensionTypeElement el = new SoapExtensionTypeElement ();
-            el.Priority = 0;
-            el.Priority = Int32.MaxValue;
-        }
-    }
+		[Test]
+		public void PriorityValidator2 ()
+		{
+			SoapExtensionTypeElement el = new SoapExtensionTypeElement ();
+			el.Priority = 0;
+			el.Priority = Int32.MaxValue;
+		}
+	}
 }
 

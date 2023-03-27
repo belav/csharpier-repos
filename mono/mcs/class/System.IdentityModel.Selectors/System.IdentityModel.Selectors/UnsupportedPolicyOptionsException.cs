@@ -2,7 +2,7 @@
 // UnsupportedPolicyOptionsException.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,28 +30,28 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Selectors
 {
-    [Serializable]
-    public class UnsupportedPolicyOptionsException : Exception
-    {
-        public UnsupportedPolicyOptionsException ()
-            : this ("UnsupportedPolicyOptions exception.")
-        {
-        }
+	[Serializable]
+	public class UnsupportedPolicyOptionsException : Exception
+	{
+		public UnsupportedPolicyOptionsException ()
+			: this ("UnsupportedPolicyOptions exception.")
+		{
+		}
 
-        public UnsupportedPolicyOptionsException (string message)
-            : this (message, null)
-        {
-        }
+		public UnsupportedPolicyOptionsException (string message)
+			: this (message, null)
+		{
+		}
 
-        protected UnsupportedPolicyOptionsException (SerializationInfo info,
-            StreamingContext context)
-            : base (info, context)
-        {
-        }
+		protected UnsupportedPolicyOptionsException (SerializationInfo info,
+			StreamingContext context)
+			: base (info, context)
+		{
+		}
 
-        public UnsupportedPolicyOptionsException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
-    }
+		public UnsupportedPolicyOptionsException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
+	}
 }

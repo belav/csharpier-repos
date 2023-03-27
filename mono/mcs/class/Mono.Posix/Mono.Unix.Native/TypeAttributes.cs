@@ -31,108 +31,108 @@ using System;
 
 namespace Mono.Unix.Native {
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class blkcnt_tAttribute : MapAttribute {
-        
-        public blkcnt_tAttribute () : base ("blkcnt_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class blkcnt_tAttribute : MapAttribute {
+		
+		public blkcnt_tAttribute () : base ("blkcnt_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class blksize_tAttribute : MapAttribute {
-        
-        public blksize_tAttribute () : base ("blksize_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class blksize_tAttribute : MapAttribute {
+		
+		public blksize_tAttribute () : base ("blksize_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class dev_tAttribute : MapAttribute {
-        
-        public dev_tAttribute () : base ("dev_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class dev_tAttribute : MapAttribute {
+		
+		public dev_tAttribute () : base ("dev_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class gid_tAttribute : MapAttribute {
-        
-        public gid_tAttribute () : base ("gid_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class gid_tAttribute : MapAttribute {
+		
+		public gid_tAttribute () : base ("gid_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class fsblkcnt_tAttribute : MapAttribute {
-        
-        public fsblkcnt_tAttribute () : base ("fsblkcnt_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class fsblkcnt_tAttribute : MapAttribute {
+		
+		public fsblkcnt_tAttribute () : base ("fsblkcnt_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class fsfilcnt_tAttribute : MapAttribute {
-        
-        public fsfilcnt_tAttribute () : base ("fsfilcnt_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class fsfilcnt_tAttribute : MapAttribute {
+		
+		public fsfilcnt_tAttribute () : base ("fsfilcnt_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class ino_tAttribute : MapAttribute {
-        
-        public ino_tAttribute () : base ("ino_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class ino_tAttribute : MapAttribute {
+		
+		public ino_tAttribute () : base ("ino_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class nlink_tAttribute : MapAttribute {
-        
-        public nlink_tAttribute () : base ("nlink_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class nlink_tAttribute : MapAttribute {
+		
+		public nlink_tAttribute () : base ("nlink_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class off_tAttribute : MapAttribute {
-        
-        public off_tAttribute () : base ("off_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class off_tAttribute : MapAttribute {
+		
+		public off_tAttribute () : base ("off_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class pid_tAttribute : MapAttribute {
-        
-        public pid_tAttribute () : base ("pid_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class pid_tAttribute : MapAttribute {
+		
+		public pid_tAttribute () : base ("pid_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class suseconds_tAttribute : MapAttribute {
-        
-        public suseconds_tAttribute () : base ("suseconds_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class suseconds_tAttribute : MapAttribute {
+		
+		public suseconds_tAttribute () : base ("suseconds_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class uid_tAttribute : MapAttribute {
-        
-        public uid_tAttribute () : base ("uid_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class uid_tAttribute : MapAttribute {
+		
+		public uid_tAttribute () : base ("uid_t")
+		{
+		}
+	}
 
-    [AttributeUsage (AttributeTargets.Field)]
-    internal class time_tAttribute : MapAttribute {
-        
-        public time_tAttribute () : base ("time_t")
-        {
-        }
-    }
+	[AttributeUsage (AttributeTargets.Field)]
+	internal class time_tAttribute : MapAttribute {
+		
+		public time_tAttribute () : base ("time_t")
+		{
+		}
+	}
 }
 

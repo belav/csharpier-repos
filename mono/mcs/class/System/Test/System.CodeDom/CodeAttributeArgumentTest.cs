@@ -1,9 +1,9 @@
 //
 // CodeAttributeArgumentTest.cs
-//    - Unit tests for System.CodeDom.CodeAttributeArgument
+//	- Unit tests for System.CodeDom.CodeAttributeArgument
 //
 // Author:
-//    Gert Driesen  <drieseng@users.sourceforge.net>
+//	Gert Driesen  <drieseng@users.sourceforge.net>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,29 +34,29 @@ using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {
-    [TestFixture]
-    public class CodeAttributeArgumentTest
-    {
-        [Test]
-        public void DefaultConstructor ()
-        {
-            CodeAttributeArgument caa = new CodeAttributeArgument ();
-            Assert.IsNotNull (caa.Name, "#1");
-            Assert.AreEqual (string.Empty, caa.Name, "#2");
-            Assert.IsNull (caa.Value, "#3");
-        }
+	[TestFixture]
+	public class CodeAttributeArgumentTest
+	{
+		[Test]
+		public void DefaultConstructor ()
+		{
+			CodeAttributeArgument caa = new CodeAttributeArgument ();
+			Assert.IsNotNull (caa.Name, "#1");
+			Assert.AreEqual (string.Empty, caa.Name, "#2");
+			Assert.IsNull (caa.Value, "#3");
+		}
 
-        [Test]
-        public void NullName ()
-        {
-            CodeAttributeArgument caa = new CodeAttributeArgument ((string) null, (CodeExpression) null);
-            Assert.IsNotNull (caa.Name, "#1");
-            Assert.AreEqual (string.Empty, caa.Name, "#2");
-            Assert.IsNull (caa.Value, "#3");
+		[Test]
+		public void NullName ()
+		{
+			CodeAttributeArgument caa = new CodeAttributeArgument ((string) null, (CodeExpression) null);
+			Assert.IsNotNull (caa.Name, "#1");
+			Assert.AreEqual (string.Empty, caa.Name, "#2");
+			Assert.IsNull (caa.Value, "#3");
 
-            caa.Name = null;
-            Assert.IsNotNull (caa.Name, "#4");
-            Assert.AreEqual (string.Empty, caa.Name, "#5");
-        }
-    }
+			caa.Name = null;
+			Assert.IsNotNull (caa.Name, "#4");
+			Assert.AreEqual (string.Empty, caa.Name, "#5");
+		}
+	}
 }

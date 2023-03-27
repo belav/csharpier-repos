@@ -2,7 +2,7 @@
 // X509CertificateTrustedIssuerElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,20 +54,20 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (X509CertificateTrustedIssuerElement),
-         AddItemName = "add",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class X509CertificateTrustedIssuerElementCollection
-         : ServiceModelConfigurationElementCollection<X509CertificateTrustedIssuerElement>,  ICollection,  IEnumerable
-    {
+	[ConfigurationCollection (typeof (X509CertificateTrustedIssuerElement),
+		 AddItemName = "add",
+		 RemoveItemName = "remove",
+		 ClearItemsName = "clear",
+		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class X509CertificateTrustedIssuerElementCollection
+		 : ServiceModelConfigurationElementCollection<X509CertificateTrustedIssuerElement>,  ICollection,  IEnumerable
+	{
 
-        protected override object GetElementKey (ConfigurationElement element) {
-            X509CertificateTrustedIssuerElement el = (X509CertificateTrustedIssuerElement) element;
-            return el.FindValue + ";" + el.StoreLocation + ";" + el.StoreName + ";" + el.X509FindType;
-        }
+		protected override object GetElementKey (ConfigurationElement element) {
+			X509CertificateTrustedIssuerElement el = (X509CertificateTrustedIssuerElement) element;
+			return el.FindValue + ";" + el.StoreLocation + ";" + el.StoreName + ";" + el.X509FindType;
+		}
 
-    }
+	}
 
 }

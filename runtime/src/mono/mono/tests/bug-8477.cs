@@ -16,27 +16,27 @@ class Test
 {
     static void COMmunicate (COMponent c)
     {
-    if (c != null)
-        c.InCOMplete2 ();
+	if (c != null)
+	    c.InCOMplete2 ();
     }
 
     static int Main()
     {
-    // Check #1: An invocation of a ComImport class method w/o a corresponding interface method must lead to an exception.
-    try
-    {
-        COMponent.InCOMplete1();
-        // No exception has been thrown, something is wrong.
-        return 1;
-    }
-    catch (InvalidOperationException)
-    {
-        // An exception has been thrown and caught correctly.
-    }
+	// Check #1: An invocation of a ComImport class method w/o a corresponding interface method must lead to an exception.
+	try
+	{
+	    COMponent.InCOMplete1();
+	    // No exception has been thrown, something is wrong.
+	    return 1;
+	}
+	catch (InvalidOperationException)
+	{
+	    // An exception has been thrown and caught correctly.
+	}
 
-    // Check #2: Same as #1, but the method is not executed (i.e. it's located in a "cold" basic block). No exception should be thrown.
-    COMmunicate (null);
+	// Check #2: Same as #1, but the method is not executed (i.e. it's located in a "cold" basic block). No exception should be thrown.
+	COMmunicate (null);
 
-    return 0;
+	return 0;
     }
 }

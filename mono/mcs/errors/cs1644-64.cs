@@ -6,8 +6,8 @@ using System;
 
 class C
 {
-    public int Integer
-    {
-        get => 0;
-    }
+	public int Integer
+	{
+		get => 0;
+	}
 }

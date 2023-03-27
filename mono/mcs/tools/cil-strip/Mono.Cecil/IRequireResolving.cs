@@ -2,7 +2,7 @@
 // IRequireResolving.cs
 //
 // Author:
-//    Jb Evain <jbevain@gmail.com>
+//	Jb Evain <jbevain@gmail.com>
 //
 // Copyright (C) 2006 Jb Evain
 //
@@ -28,10 +28,10 @@
 
 namespace Mono.Cecil {
 
-    internal interface IRequireResolving {
+	internal interface IRequireResolving {
 
-        byte [] Blob { get; }
-        bool Resolved { get; }
-        bool Resolve ();
-    }
+		byte [] Blob { get; }
+		bool Resolved { get; }
+		bool Resolve ();
+	}
 }

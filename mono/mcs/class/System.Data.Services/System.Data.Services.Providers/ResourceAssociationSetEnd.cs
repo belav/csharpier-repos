@@ -1,4 +1,4 @@
-// 
+﻿// 
 // ResourceAssociationSetEnd.cs
 //  
 // Author:
@@ -31,24 +31,24 @@ using System.Runtime;
 
 namespace System.Data.Services.Providers
 {
-    [DebuggerDisplay ("ResourceAssociationSetEnd: {Name}: ({ResourceSet.Name}, {ResourceType.Name}, {ResourceProperty.Name})")]
-    public sealed class ResourceAssociationSetEnd
-    {
-        public ResourceSet ResourceSet {
-            get { throw new NotImplementedException (); }
-        }
+	[DebuggerDisplay ("ResourceAssociationSetEnd: {Name}: ({ResourceSet.Name}, {ResourceType.Name}, {ResourceProperty.Name})")]
+	public sealed class ResourceAssociationSetEnd
+	{
+		public ResourceSet ResourceSet {
+			get { throw new NotImplementedException (); }
+		}
 
-        public ResourceType ResourceType {
-            get { throw new NotImplementedException (); }
-        }
+		public ResourceType ResourceType {
+			get { throw new NotImplementedException (); }
+		}
 
-        public ResourceProperty ResourceProperty {
-            get { throw new NotImplementedException (); }
-        }
+		public ResourceProperty ResourceProperty {
+			get { throw new NotImplementedException (); }
+		}
 
-        public ResourceAssociationSetEnd (ResourceSet resourceSet, ResourceType resourceType, ResourceProperty resourceProperty)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public ResourceAssociationSetEnd (ResourceSet resourceSet, ResourceType resourceType, ResourceProperty resourceProperty)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

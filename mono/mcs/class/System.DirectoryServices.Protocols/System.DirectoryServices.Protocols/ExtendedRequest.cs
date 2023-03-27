@@ -33,30 +33,30 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class ExtendedRequest : DirectoryRequest
-    {
-        public ExtendedRequest ()
-        {
-        }
+	public class ExtendedRequest : DirectoryRequest
+	{
+		public ExtendedRequest ()
+		{
+		}
 
-        public ExtendedRequest (string requestName)
-        {
-            RequestName = requestName;
-        }
+		public ExtendedRequest (string requestName)
+		{
+			RequestName = requestName;
+		}
 
-        public ExtendedRequest (string requestName, byte [] requestValue)
-            : this (requestName)
-        {
-            RequestValue = requestValue;
-        }
+		public ExtendedRequest (string requestName, byte [] requestValue)
+			: this (requestName)
+		{
+			RequestValue = requestValue;
+		}
 
-        public string RequestName { get; set; }
-        public byte [] RequestValue { get; set; }
+		public string RequestName { get; set; }
+		public byte [] RequestValue { get; set; }
 
-        [MonoTODO]
-        protected override XmlElement ToXmlNode (XmlDocument doc)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected override XmlElement ToXmlNode (XmlDocument doc)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

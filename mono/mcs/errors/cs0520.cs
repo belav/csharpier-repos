@@ -4,7 +4,7 @@
 
 namespace System
 {
-    struct Object 
-    {
-    }
+	struct Object 
+	{
+	}
 }

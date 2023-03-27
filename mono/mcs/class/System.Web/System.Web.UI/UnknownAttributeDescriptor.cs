@@ -2,7 +2,7 @@
 // System.Web.UI.UnknownAttributeDescriptor
 //
 // Authors:
-//    Marek Habersack <mhabersack@novell.com>
+//	Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2007-2010 Novell, Inc (http://www.novell.com)
 //
@@ -30,15 +30,15 @@ using System.Reflection;
 
 namespace System.Web.UI 
 {
-    internal class UnknownAttributeDescriptor
-    {
-        public MemberInfo Info;
-        public object Value;
+	internal class UnknownAttributeDescriptor
+	{
+		public MemberInfo Info;
+		public object Value;
 
-        public UnknownAttributeDescriptor (MemberInfo memberInfo, object value)
-        {
-            this.Info = memberInfo;
-            this.Value = value;
-        }
-    }
+		public UnknownAttributeDescriptor (MemberInfo memberInfo, object value)
+		{
+			this.Info = memberInfo;
+			this.Value = value;
+		}
+	}
 }

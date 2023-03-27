@@ -8,43 +8,43 @@ using System.Linq;
 
 namespace Moq.Matchers
 {
-    internal class ConstantMatcher : IMatcher
-    {
-        private object constantValue;
+	internal class ConstantMatcher : IMatcher
+	{
+		private object constantValue;
 
-        public ConstantMatcher(object constantValue)
-        {
-            this.constantValue = constantValue;
-        }
+		public ConstantMatcher(object constantValue)
+		{
+			this.constantValue = constantValue;
+		}
 
-        public bool Matches(object argument, Type parameterType)
-        {
-            if (object.Equals(argument, constantValue))
-            {
-                return true;
-            }
+		public bool Matches(object argument, Type parameterType)
+		{
+			if (object.Equals(argument, constantValue))
+			{
+				return true;
+			}
 
-            if (this.constantValue is IEnumerable && argument is IEnumerable enumerable &&
-                !(this.constantValue is IMocked) && !(argument is IMocked))
-                // the above checks on the second line are necessary to ensure we have usable
-                // implementations of IEnumerable, which might very well not be the case for
-                // mocked objects.
-            {
-                return this.MatchesEnumerable(enumerable);
-            }
+			if (this.constantValue is IEnumerable && argument is IEnumerable enumerable &&
+				!(this.constantValue is IMocked) && !(argument is IMocked))
+				// the above checks on the second line are necessary to ensure we have usable
+				// implementations of IEnumerable, which might very well not be the case for
+				// mocked objects.
+			{
+				return this.MatchesEnumerable(enumerable);
+			}
 
-            return false;
-        }
+			return false;
+		}
 
-        public void SetupEvaluatedSuccessfully(object argument, Type parameterType)
-        {
-            Debug.Assert(this.Matches(argument, parameterType));
-        }
+		public void SetupEvaluatedSuccessfully(object argument, Type parameterType)
+		{
+			Debug.Assert(this.Matches(argument, parameterType));
+		}
 
-        private bool MatchesEnumerable(IEnumerable enumerable)
-        {
-            var constValues = (IEnumerable)constantValue;
-            return constValues.Cast<object>().SequenceEqual(enumerable.Cast<object>());
-        }
-    }
+		private bool MatchesEnumerable(IEnumerable enumerable)
+		{
+			var constValues = (IEnumerable)constantValue;
+			return constValues.Cast<object>().SequenceEqual(enumerable.Cast<object>());
+		}
+	}
 }

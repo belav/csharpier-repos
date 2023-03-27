@@ -20,13 +20,13 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
 
 namespace System.Windows.Interop {
 
-    public delegate void ThreadMessageEventHandler (ref MSG msg, ref bool handled);
+	public delegate void ThreadMessageEventHandler (ref MSG msg, ref bool handled);
 
 }

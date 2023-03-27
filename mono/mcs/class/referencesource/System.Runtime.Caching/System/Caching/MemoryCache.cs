@@ -1,4 +1,4 @@
-// <copyright file="MemoryCache.cs" company="Microsoft">
+﻿// <copyright file="MemoryCache.cs" company="Microsoft">
 //   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 // </copyright>
 using System;

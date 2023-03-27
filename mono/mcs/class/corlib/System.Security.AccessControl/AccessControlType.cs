@@ -2,7 +2,7 @@
 // System.Security.AccessControl.AccessControlType enum
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -27,8 +27,8 @@
 //
 
 namespace System.Security.AccessControl {
-    public enum AccessControlType {
-        Allow = 0,
-        Deny = 1
-    }
+	public enum AccessControlType {
+		Allow = 0,
+		Deny = 1
+	}
 }

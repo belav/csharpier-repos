@@ -38,73 +38,73 @@ namespace tests.system_data_dll.System_Data
 [TestFixture]
 public class DataTableCollection_Contains_S : GHTBase
 {
-    public static void Main()
-    {
-        DataTableCollection_Contains_S tc = new DataTableCollection_Contains_S();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataTableCollection_Contains_S");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    
-    }
+	public static void Main()
+	{
+		DataTableCollection_Contains_S tc = new DataTableCollection_Contains_S();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataTableCollection_Contains_S");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("DataTableCollection_Contains_S");
-            DataTableCollection_Contains_S1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-    [Test]
-    public void DataTableCollection_Contains_S1()
-    {
-        DataSet ds = new DataSet();
-        ds.Tables.Add("NewTable1");
-        ds.Tables.Add("NewTable2");
-
-        Compare(ds.Tables.Contains("NewTable1"),true);
-        Compare(ds.Tables.Contains("NewTable2"),true);
-        Compare(ds.Tables.Contains("NewTable3"),false);
-
-        ds.Tables["NewTable1"].TableName = "Tbl1";
-        Compare(ds.Tables.Contains("NewTable1"),false);
-        Compare(ds.Tables.Contains("Tbl1"),true);
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    }
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("DataTableCollection_Contains_S");
+			DataTableCollection_Contains_S1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
+	[Test]
+	public void DataTableCollection_Contains_S1()
+	{
+		DataSet ds = new DataSet();
+		ds.Tables.Add("NewTable1");
+		ds.Tables.Add("NewTable2");
+
+		Compare(ds.Tables.Contains("NewTable1"),true);
+		Compare(ds.Tables.Contains("NewTable2"),true);
+		Compare(ds.Tables.Contains("NewTable3"),false);
+
+		ds.Tables["NewTable1"].TableName = "Tbl1";
+		Compare(ds.Tables.Contains("NewTable1"),false);
+		Compare(ds.Tables.Contains("Tbl1"),true);
+
+
+
+	}
 }
 }

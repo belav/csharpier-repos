@@ -2,7 +2,7 @@
 // IdentityElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -55,75 +55,75 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class IdentityElement
-         : ConfigurationElement
-    {
-        // Properties
+	public sealed class IdentityElement
+		 : ConfigurationElement
+	{
+		// Properties
 
-        [ConfigurationProperty ("certificate",
-             Options = ConfigurationPropertyOptions.None)]
-        public CertificateElement Certificate {
-            get { return (CertificateElement) base ["certificate"]; }
-        }
+		[ConfigurationProperty ("certificate",
+			 Options = ConfigurationPropertyOptions.None)]
+		public CertificateElement Certificate {
+			get { return (CertificateElement) base ["certificate"]; }
+		}
 
-        [ConfigurationProperty ("certificateReference",
-             Options = ConfigurationPropertyOptions.None)]
-        public CertificateReferenceElement CertificateReference {
-            get { return (CertificateReferenceElement) base ["certificateReference"]; }
-        }
+		[ConfigurationProperty ("certificateReference",
+			 Options = ConfigurationPropertyOptions.None)]
+		public CertificateReferenceElement CertificateReference {
+			get { return (CertificateReferenceElement) base ["certificateReference"]; }
+		}
 
-        [ConfigurationProperty ("dns",
-             Options = ConfigurationPropertyOptions.None)]
-        public DnsElement Dns {
-            get { return (DnsElement) base ["dns"]; }
-        }
+		[ConfigurationProperty ("dns",
+			 Options = ConfigurationPropertyOptions.None)]
+		public DnsElement Dns {
+			get { return (DnsElement) base ["dns"]; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
 
-        [ConfigurationProperty ("rsa",
-             Options = ConfigurationPropertyOptions.None)]
-        public RsaElement Rsa {
-            get { return (RsaElement) base ["rsa"]; }
-        }
+		[ConfigurationProperty ("rsa",
+			 Options = ConfigurationPropertyOptions.None)]
+		public RsaElement Rsa {
+			get { return (RsaElement) base ["rsa"]; }
+		}
 
-        [ConfigurationProperty ("servicePrincipalName",
-             Options = ConfigurationPropertyOptions.None)]
-        public ServicePrincipalNameElement ServicePrincipalName {
-            get { return (ServicePrincipalNameElement) base ["servicePrincipalName"]; }
-        }
+		[ConfigurationProperty ("servicePrincipalName",
+			 Options = ConfigurationPropertyOptions.None)]
+		public ServicePrincipalNameElement ServicePrincipalName {
+			get { return (ServicePrincipalNameElement) base ["servicePrincipalName"]; }
+		}
 
-        [ConfigurationProperty ("userPrincipalName",
-             Options = ConfigurationPropertyOptions.None)]
-        public UserPrincipalNameElement UserPrincipalName {
-            get { return (UserPrincipalNameElement) base ["userPrincipalName"]; }
-        }
+		[ConfigurationProperty ("userPrincipalName",
+			 Options = ConfigurationPropertyOptions.None)]
+		public UserPrincipalNameElement UserPrincipalName {
+			get { return (UserPrincipalNameElement) base ["userPrincipalName"]; }
+		}
 
-        // it was extraneous...
-        internal EndpointIdentity Create ()
-        {
-            return ConfigUtil.CreateInstance (this);
-        }
+		// it was extraneous...
+		internal EndpointIdentity Create ()
+		{
+			return ConfigUtil.CreateInstance (this);
+		}
 
-        public void InitializeFrom (EndpointIdentity identity)
-        {
-            if (identity == null)
-                throw new ArgumentNullException ("identity");
+		public void InitializeFrom (EndpointIdentity identity)
+		{
+			if (identity == null)
+				throw new ArgumentNullException ("identity");
 
-            if (identity is X509CertificateEndpointIdentity)
-                Certificate.EncodedValue = Convert.ToBase64String (((X509CertificateEndpointIdentity) identity).Certificates [0].RawData);
-            else if (identity is DnsEndpointIdentity)
-                Dns.Value = (string) ((DnsEndpointIdentity) identity).IdentityClaim.Resource;
-            else if (identity is RsaEndpointIdentity)
-                Rsa.Value = (string) ((RsaEndpointIdentity) identity).IdentityClaim.Resource;
-            else if (identity is SpnEndpointIdentity)
-                ServicePrincipalName.Value = (string) ((SpnEndpointIdentity) identity).IdentityClaim.Resource;
-            else if (identity is UpnEndpointIdentity)
-                UserPrincipalName.Value = (string) ((UpnEndpointIdentity) identity).IdentityClaim.Resource;
-            else
-                throw new ArgumentException (String.Format ("Unexpected EndpointIdentity of type '{0}'", identity.GetType ()));
-        }
-    }
+			if (identity is X509CertificateEndpointIdentity)
+				Certificate.EncodedValue = Convert.ToBase64String (((X509CertificateEndpointIdentity) identity).Certificates [0].RawData);
+			else if (identity is DnsEndpointIdentity)
+				Dns.Value = (string) ((DnsEndpointIdentity) identity).IdentityClaim.Resource;
+			else if (identity is RsaEndpointIdentity)
+				Rsa.Value = (string) ((RsaEndpointIdentity) identity).IdentityClaim.Resource;
+			else if (identity is SpnEndpointIdentity)
+				ServicePrincipalName.Value = (string) ((SpnEndpointIdentity) identity).IdentityClaim.Resource;
+			else if (identity is UpnEndpointIdentity)
+				UserPrincipalName.Value = (string) ((UpnEndpointIdentity) identity).IdentityClaim.Resource;
+			else
+				throw new ArgumentException (String.Format ("Unexpected EndpointIdentity of type '{0}'", identity.GetType ()));
+		}
+	}
 
 }

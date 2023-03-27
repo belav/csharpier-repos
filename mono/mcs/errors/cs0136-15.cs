@@ -4,12 +4,12 @@ delegate string Fun (int i);
 
 class X
 {
-    static void Main ()
-    {
-        for (int i = 0; i < 5; i++) {
-            Fun m = delegate (int i) {
-                return "<<" + i + ">>";
-            };
-        }
-    }
+	static void Main ()
+	{
+		for (int i = 0; i < 5; i++) {
+			Fun m = delegate (int i) {
+				return "<<" + i + ">>";
+			};
+		}
+	}
 }

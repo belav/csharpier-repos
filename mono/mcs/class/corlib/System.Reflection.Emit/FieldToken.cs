@@ -31,72 +31,72 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit {
 
 
-    /// <summary>
-    ///  Represents the Token returned by the metadata to represent a Field.
-    /// </summary>
-    [ComVisible (true)]
-    [Serializable]
-    public readonly struct FieldToken : IEquatable<FieldToken> {
+	/// <summary>
+	///  Represents the Token returned by the metadata to represent a Field.
+	/// </summary>
+	[ComVisible (true)]
+	[Serializable]
+	public readonly struct FieldToken : IEquatable<FieldToken> {
 
-        internal readonly int tokValue;
+		internal readonly int tokValue;
 
-        public static readonly FieldToken Empty = new FieldToken ();
+		public static readonly FieldToken Empty = new FieldToken ();
 
-        internal FieldToken (int val)
-        {
-            tokValue = val;
-        }
+		internal FieldToken (int val)
+		{
+			tokValue = val;
+		}
 
-        /// <summary>
-        /// </summary>
-        public override bool Equals (object obj)
-        {
-            bool res = obj is FieldToken;
+		/// <summary>
+		/// </summary>
+		public override bool Equals (object obj)
+		{
+			bool res = obj is FieldToken;
 
-            if (res) {
-                FieldToken that = (FieldToken) obj;
-                res = (this.tokValue == that.tokValue);
-            }
+			if (res) {
+				FieldToken that = (FieldToken) obj;
+				res = (this.tokValue == that.tokValue);
+			}
 
-            return res;
-        }
-
-
-        public bool Equals (FieldToken obj)
-        {
-            return (this.tokValue == obj.tokValue);
-        }
-
-        public static bool operator == (FieldToken a, FieldToken b)
-        {
-            return Equals (a, b);
-        }
-
-        public static bool operator != (FieldToken a, FieldToken b)
-        {
-            return !Equals (a, b);
-        }
-
-        /// <summary>
-        ///  Tests whether the given object is an instance of
-        ///  FieldToken and has the same token value.
-        /// </summary>
-        public override int GetHashCode ()
-        {
-            return tokValue;
-        }
+			return res;
+		}
 
 
-        /// <summary>
-        ///  Returns the metadata token for this Field.
-        /// </summary>
-        public int Token {
-            get {
-                return tokValue;
-            }
-        }
+		public bool Equals (FieldToken obj)
+		{
+			return (this.tokValue == obj.tokValue);
+		}
 
-    }
+		public static bool operator == (FieldToken a, FieldToken b)
+		{
+			return Equals (a, b);
+		}
+
+		public static bool operator != (FieldToken a, FieldToken b)
+		{
+			return !Equals (a, b);
+		}
+
+		/// <summary>
+		///  Tests whether the given object is an instance of
+		///  FieldToken and has the same token value.
+		/// </summary>
+		public override int GetHashCode ()
+		{
+			return tokValue;
+		}
+
+
+		/// <summary>
+		///  Returns the metadata token for this Field.
+		/// </summary>
+		public int Token {
+			get {
+				return tokValue;
+			}
+		}
+
+	}
 
 }
 

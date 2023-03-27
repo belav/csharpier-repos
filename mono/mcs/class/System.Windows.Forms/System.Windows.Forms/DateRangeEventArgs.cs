@@ -21,47 +21,47 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    John BouAntoun    jba-mono@optusnet.com.au
+//	John BouAntoun	jba-mono@optusnet.com.au
 //
 
 using System;
 using System.Drawing;
 
 namespace System.Windows.Forms {
-    public class DateRangeEventArgs : EventArgs {
-        #region local members 
-    
-        DateTime end;
-        DateTime start;    
+	public class DateRangeEventArgs : EventArgs {
+		#region local members 
+	
+		DateTime end;
+		DateTime start;	
 
-        #endregion // local members 
+		#endregion // local members 
 
-        #region public constructors
+		#region public constructors
 
-        // constructor that receives two dates, uses the lower of the two as start
-        public DateRangeEventArgs (DateTime start, DateTime end) {
-            this.start = start;
-            this.end = end;
-        }
+		// constructor that receives two dates, uses the lower of the two as start
+		public DateRangeEventArgs (DateTime start, DateTime end) {
+			this.start = start;
+			this.end = end;
+		}
 
-        #endregion // public constructors
+		#endregion // public constructors
 
-        #region public properties
+		#region public properties
 
-        // end date of this range
-        public DateTime End {
-            get {
-                return end;
-            }
-        }
+		// end date of this range
+		public DateTime End {
+			get {
+				return end;
+			}
+		}
 
-        // start date of this range
-        public DateTime Start {
-            get {
-                return start;
-            }
-        }
-        
-        #endregion // public properties
-    }
+		// start date of this range
+		public DateTime Start {
+			get {
+				return start;
+			}
+		}
+		
+		#endregion // public properties
+	}
 }

@@ -2,7 +2,7 @@
 // Optional.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,20 +27,20 @@
 // 
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    struct Optional<T> {
-        public readonly bool IsValid;
+	struct Optional<T> {
+		public readonly bool IsValid;
 
-        public Optional (T value) : this ()
-        {
-            Value = value;
-            this.IsValid = true;
-        }
+		public Optional (T value) : this ()
+		{
+			Value = value;
+			this.IsValid = true;
+		}
 
-        public T Value { get; private set; }
+		public T Value { get; private set; }
 
-        public static implicit operator Optional<T> (T value)
-        {
-            return new Optional<T> (value);
-        }
-    }
+		public static implicit operator Optional<T> (T value)
+		{
+			return new Optional<T> (value);
+		}
+	}
 }

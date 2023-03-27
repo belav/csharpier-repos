@@ -2,7 +2,7 @@
 // X509ThumbprintKeyIdentifierClause.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,41 +32,41 @@ using System.IdentityModel.Claims;
 
 namespace System.IdentityModel.Tokens
 {
-    public class X509ThumbprintKeyIdentifierClause : BinaryKeyIdentifierClause
-    {
-        public X509ThumbprintKeyIdentifierClause (byte [] thumbprint)
-            : base (null, thumbprint, true)
-        {
-        }
+	public class X509ThumbprintKeyIdentifierClause : BinaryKeyIdentifierClause
+	{
+		public X509ThumbprintKeyIdentifierClause (byte [] thumbprint)
+			: base (null, thumbprint, true)
+		{
+		}
 
-        public X509ThumbprintKeyIdentifierClause (X509Certificate2 certificate)
-            : base (null, certificate.GetCertHash (), true)
-        {
-        }
+		public X509ThumbprintKeyIdentifierClause (X509Certificate2 certificate)
+			: base (null, certificate.GetCertHash (), true)
+		{
+		}
 
-        public byte [] GetX509Thumbprint ()
-        {
-            return GetBuffer ();
-        }
+		public byte [] GetX509Thumbprint ()
+		{
+			return GetBuffer ();
+		}
 
-        public bool Matches (X509Certificate2 certificate)
-        {
-            if (certificate == null)
-                throw new ArgumentNullException ("certificate");
-            byte [] b1 = GetRawBuffer ();
-            byte [] b2 = certificate.GetCertHash ();
-            if (b1.Length != b2.Length)
-                return false;
-            for (int i = 0; i < b1.Length; i++)
-                if (b1 [i] != b2 [i])
-                    return false;
-            return true;
-        }
+		public bool Matches (X509Certificate2 certificate)
+		{
+			if (certificate == null)
+				throw new ArgumentNullException ("certificate");
+			byte [] b1 = GetRawBuffer ();
+			byte [] b2 = certificate.GetCertHash ();
+			if (b1.Length != b2.Length)
+				return false;
+			for (int i = 0; i < b1.Length; i++)
+				if (b1 [i] != b2 [i])
+					return false;
+			return true;
+		}
 
-        [MonoTODO]
-        public override string ToString ()
-        {
-            return base.ToString ();
-        }
-    }
+		[MonoTODO]
+		public override string ToString ()
+		{
+			return base.ToString ();
+		}
+	}
 }

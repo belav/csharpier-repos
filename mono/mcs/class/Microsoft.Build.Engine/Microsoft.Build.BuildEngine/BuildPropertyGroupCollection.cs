@@ -29,67 +29,67 @@ using System;
 using System.Collections;
 
 namespace Microsoft.Build.BuildEngine {
-    public class BuildPropertyGroupCollection : ICollection, IEnumerable {
+	public class BuildPropertyGroupCollection : ICollection, IEnumerable {
 
-        GroupingCollection    groupingCollection;
-    
-        BuildPropertyGroupCollection ()
-        {
-            groupingCollection = new GroupingCollection (null);
-        }
+		GroupingCollection	groupingCollection;
+	
+		BuildPropertyGroupCollection ()
+		{
+			groupingCollection = new GroupingCollection (null);
+		}
 
-        internal BuildPropertyGroupCollection (GroupingCollection groupingCollection)
-        {
-            this.groupingCollection = groupingCollection;
-        }
-        
-        public void CopyTo (Array array, int index)
-        {
-            if (array == null)
-                throw new ArgumentNullException ("array");
-            if (index < 0)
-                throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
-            if (array.Rank > 1)
-                throw new ArgumentException ("array is multidimensional");
-            if ((array.Length > 0) && (index >= array.Length))
-                throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
-            if (index + this.Count > array.Length)
-                throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
-        
-            IEnumerator it = GetEnumerator ();
-            int i = index;
-            while (it.MoveNext ()) {
-                array.SetValue (it.Current, i++);
-            }
-        }
+		internal BuildPropertyGroupCollection (GroupingCollection groupingCollection)
+		{
+			this.groupingCollection = groupingCollection;
+		}
+		
+		public void CopyTo (Array array, int index)
+		{
+			if (array == null)
+				throw new ArgumentNullException ("array");
+			if (index < 0)
+				throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
+			if (array.Rank > 1)
+				throw new ArgumentException ("array is multidimensional");
+			if ((array.Length > 0) && (index >= array.Length))
+				throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
+			if (index + this.Count > array.Length)
+				throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
+		
+			IEnumerator it = GetEnumerator ();
+			int i = index;
+			while (it.MoveNext ()) {
+				array.SetValue (it.Current, i++);
+			}
+		}
 
-        public IEnumerator GetEnumerator ()
-        {
-            return groupingCollection.GetPropertyGroupEnumerator ();
-        }
-        
-        internal void Add (BuildPropertyGroup bpg)
-        {
-            bpg.GroupingCollection = groupingCollection;
-            groupingCollection.Add (bpg);
-        }
+		public IEnumerator GetEnumerator ()
+		{
+			return groupingCollection.GetPropertyGroupEnumerator ();
+		}
+		
+		internal void Add (BuildPropertyGroup bpg)
+		{
+			bpg.GroupingCollection = groupingCollection;
+			groupingCollection.Add (bpg);
+		}
 
-        public int Count {
-            get {
-                return groupingCollection.PropertyGroups;
-            }
-        }
+		public int Count {
+			get {
+				return groupingCollection.PropertyGroups;
+			}
+		}
 
-        public bool IsSynchronized {
-            get {
-                return false;
-            }
-        }
+		public bool IsSynchronized {
+			get {
+				return false;
+			}
+		}
 
-        public object SyncRoot {
-            get {
-                return this;
-            }
-        }
-    }
+		public object SyncRoot {
+			get {
+				return this;
+			}
+		}
+	}
 }

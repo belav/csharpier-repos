@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -308,7 +308,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             if (dte.Debugger.CurrentMode != EnvDTE.dbgDebugMode.dbgDesignMode)
             {
                 // Close the Find Source window in case it's open.
-                // ?? This is an ugly mitigation for https://github.com/dotnet/roslyn/issues/33785
+                // 🐛 This is an ugly mitigation for https://github.com/dotnet/roslyn/issues/33785
                 _sendKeys.Send(VirtualKey.Escape);
 
                 dte.Debugger.TerminateAll();

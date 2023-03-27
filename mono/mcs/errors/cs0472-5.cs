@@ -4,11 +4,11 @@
 
 class C
 {
-    public static bool Test (byte value)
-    {
-        if (value == null)
-            return false;
+	public static bool Test (byte value)
+	{
+		if (value == null)
+			return false;
 
-        return true;
-    }
+		return true;
+	}
 }

@@ -35,60 +35,60 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleConnection_Database : ADONetTesterClass 
 {
-    public static void Main()
-    {
-        OracleConnection_Database tc = new OracleConnection_Database();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OracleConnection_Database");
-            tc.run();
-        }
-        catch(Exception ex){exp = ex;}
-        finally    {tc.EndTest(exp);}
-    }
+	public static void Main()
+	{
+		OracleConnection_Database tc = new OracleConnection_Database();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OracleConnection_Database");
+			tc.run();
+		}
+		catch(Exception ex){exp = ex;}
+		finally	{tc.EndTest(exp);}
+	}
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
         OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
 
-        //test does not apply to ORACLE,DB2,Sybase,Postgres
-        if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.Oracle) return;
-        if (ConnectedDataProvider.GetDbType(con) ==  DataBaseServer.DB2) return;
-        if (ConnectedDataProvider.GetDbType(con) ==  DataBaseServer.Sybase) return;
-        if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL) return;
+		//test does not apply to ORACLE,DB2,Sybase,Postgres
+		if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.Oracle) return;
+		if (ConnectedDataProvider.GetDbType(con) ==  DataBaseServer.DB2) return;
+		if (ConnectedDataProvider.GetDbType(con) ==  DataBaseServer.Sybase) return;
+		if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.PostgreSQL) return;
 
-        //get the expected result from the connection string
-        string[] arrCon = con.ConnectionString.Split(';');
-        string result = null;
-        for (int i=0; i < arrCon.Length; i++)
-            if (arrCon[i].IndexOf("Initial Catalog") >= 0) 
-            {
-                result = arrCon[i];
-                break;
-            }
-        result = result.Substring(result.IndexOf('=')+1).Trim();
-        try
-        {
-            BeginCase("check Database");
-            Compare(((IDbConnection)con).Database , result);
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
-    }
+		//get the expected result from the connection string
+		string[] arrCon = con.ConnectionString.Split(';');
+		string result = null;
+		for (int i=0; i < arrCon.Length; i++)
+			if (arrCon[i].IndexOf("Initial Catalog") >= 0) 
+			{
+				result = arrCon[i];
+				break;
+			}
+		result = result.Substring(result.IndexOf('=')+1).Trim();
+		try
+		{
+			BeginCase("check Database");
+			Compare(((IDbConnection)con).Database , result);
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
+	}
 
 
-    //public TestClass():base(true){}
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

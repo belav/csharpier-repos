@@ -20,17 +20,17 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.Security.Permissions {
 
-    public enum MediaPermissionVideo {
-        NoVideo,
-        SiteOfOriginVideo,
-        SafeVideo,
-        AllVideo
-    }
+	public enum MediaPermissionVideo {
+		NoVideo,
+		SiteOfOriginVideo,
+		SafeVideo,
+		AllVideo
+	}
 
 }
 

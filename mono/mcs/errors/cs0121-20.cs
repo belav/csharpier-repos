@@ -3,16 +3,16 @@
 
 public class Test
 {
-    static void Foo (string s, params object[] args)
-    {
-    }
-    
-    static void Foo (string s, params int[] args)
-    {
-    }
-    
-    public static void Main ()
-    {
-        Foo ("a");
-    }
+	static void Foo (string s, params object[] args)
+	{
+	}
+	
+	static void Foo (string s, params int[] args)
+	{
+	}
+	
+	public static void Main ()
+	{
+		Foo ("a");
+	}
 }

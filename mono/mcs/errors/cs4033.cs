@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 class Tester
 {
-    void Test ()
-    {
-        Task<int> x = null;
-        var a = await x;
-    }
+	void Test ()
+	{
+		Task<int> x = null;
+		var a = await x;
+	}
 }

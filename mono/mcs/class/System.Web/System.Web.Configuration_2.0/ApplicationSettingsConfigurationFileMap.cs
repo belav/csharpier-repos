@@ -32,18 +32,18 @@ using System.Web.Configuration;
 
 namespace System.Web.Configuration
 {
-    // Part of fix for bug #491531
-    class ApplicationSettingsConfigurationFileMap : ConfigurationFileMap
-    {
-        public ApplicationSettingsConfigurationFileMap ()
-        {
-            HttpContext ctx = HttpContext.Current;
-            HttpRequest req = ctx != null ? ctx.Request : null;
-            
-            if (req != null) {
-                MachineConfigFilename = WebConfigurationHost.GetWebConfigFileName (req.MapPath (WebConfigurationManager.FindWebConfig (req.CurrentExecutionFilePath)));
-            } else
-                MachineConfigFilename = null;
-        }
-    }
+	// Part of fix for bug #491531
+	class ApplicationSettingsConfigurationFileMap : ConfigurationFileMap
+	{
+		public ApplicationSettingsConfigurationFileMap ()
+		{
+			HttpContext ctx = HttpContext.Current;
+			HttpRequest req = ctx != null ? ctx.Request : null;
+			
+			if (req != null) {
+				MachineConfigFilename = WebConfigurationHost.GetWebConfigFileName (req.MapPath (WebConfigurationManager.FindWebConfig (req.CurrentExecutionFilePath)));
+			} else
+				MachineConfigFilename = null;
+		}
+	}
 }

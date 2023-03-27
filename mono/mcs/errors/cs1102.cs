@@ -3,7 +3,7 @@
 
 static class S
 {
-    static void Foo (this out string s)
-    {
-    }
+	static void Foo (this out string s)
+	{
+	}
 }

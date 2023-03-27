@@ -1,4 +1,4 @@
-namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc {
     using System;
     using System.Diagnostics;
     using System.Web;
@@ -27,7 +27,7 @@ namespace System.Web.Mvc {
             : this(AntiForgery.Validate) {
         }
 
-    //Modified to compile MVC3 with the newer System.Web.WebPages helpers
+	//Modified to compile MVC3 with the newer System.Web.WebPages helpers
         internal ValidateAntiForgeryTokenAttribute(Action validateAction) {
             Debug.Assert(validateAction != null);
             ValidateAction = validateAction;
@@ -38,7 +38,7 @@ namespace System.Web.Mvc {
                 throw new ArgumentNullException("filterContext");
             }
 
-        //Modified to compile MVC3 with the newer System.Web.WebPages helpers
+	    //Modified to compile MVC3 with the newer System.Web.WebPages helpers
             ValidateAction();
         }
     }

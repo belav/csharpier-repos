@@ -35,36 +35,36 @@ using MonoTests.System.Data.Utils;
 
 namespace MonoTests.System.Data
 {
-    [TestFixture] public class InRowChangingEventExceptionTest
-    {
-        private bool _EventTriggered = false;
-        [Test] public void Generate()
-        {
-            DataTable dt = DataProvider.CreateParentDataTable();
+	[TestFixture] public class InRowChangingEventExceptionTest
+	{
+		private bool _EventTriggered = false;
+		[Test] public void Generate()
+		{
+			DataTable dt = DataProvider.CreateParentDataTable();
 
-            dt.RowChanging  += new DataRowChangeEventHandler ( Row_Changing );
-            dt.Rows[0][1] = "NewValue";
+			dt.RowChanging  += new DataRowChangeEventHandler ( Row_Changing );
+			dt.Rows[0][1] = "NewValue";
 
-            //this event must be raised in order to test the exception
-            // RowChanging - Event raised
-            Assert.AreEqual(true , _EventTriggered , "IRCEE1");
-        }
+			//this event must be raised in order to test the exception
+			// RowChanging - Event raised
+			Assert.AreEqual(true , _EventTriggered , "IRCEE1");
+		}
 
-        private void Row_Changing( object sender, DataRowChangeEventArgs e )
-        {
-            // InRowChangingEventException - EndEdit
-            try 
-            {
-                e.Row.EndEdit(); //can't invoke EndEdit while in ChangingEvent
-                Assert.Fail("IRCEE2: Row.EndEdit failed to raise InRowChangingEventException.");
-            }
-            catch (InRowChangingEventException) {}
-            catch (AssertionException) { throw; }
-            catch (Exception exc)
-            {
-                Assert.Fail("IRCEE3: Columns.Add wrong exception type. Got: " + exc);
-            }
-            _EventTriggered = true;
-        }
-    }
+		private void Row_Changing( object sender, DataRowChangeEventArgs e )
+		{
+			// InRowChangingEventException - EndEdit
+			try 
+			{
+				e.Row.EndEdit(); //can't invoke EndEdit while in ChangingEvent
+				Assert.Fail("IRCEE2: Row.EndEdit failed to raise InRowChangingEventException.");
+			}
+			catch (InRowChangingEventException) {}
+			catch (AssertionException) { throw; }
+			catch (Exception exc)
+			{
+				Assert.Fail("IRCEE3: Columns.Add wrong exception type. Got: " + exc);
+			}
+			_EventTriggered = true;
+		}
+	}
 }

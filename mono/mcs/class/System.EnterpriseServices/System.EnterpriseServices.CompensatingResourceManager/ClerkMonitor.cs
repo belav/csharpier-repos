@@ -31,63 +31,63 @@ using System.Collections;
 
 namespace System.EnterpriseServices.CompensatingResourceManager {
 
-    public sealed class ClerkMonitor : IEnumerable {
+	public sealed class ClerkMonitor : IEnumerable {
 
-        [MonoTODO]
-        ~ClerkMonitor ()
-        {
-        }
+		[MonoTODO]
+		~ClerkMonitor ()
+		{
+		}
 
-        #region Constructors
+		#region Constructors
 
-        [MonoTODO]
-        public ClerkMonitor ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public ClerkMonitor ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        [MonoTODO]
-        public int Count {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public int Count {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoTODO]
-        public ClerkInfo this [string index] {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public ClerkInfo this [string index] {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoTODO]
-        public ClerkInfo this [int index] {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public ClerkInfo this [int index] {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        #endregion
+		#endregion
 
 
-        #region Properties
+		#region Properties
 
-        [MonoTODO]
-        public IEnumerator GetEnumerator ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public IEnumerator GetEnumerator ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void Populate ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void Populate ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

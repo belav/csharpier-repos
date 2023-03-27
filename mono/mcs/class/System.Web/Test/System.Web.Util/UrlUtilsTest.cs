@@ -1,8 +1,8 @@
-//
+﻿//
 // System.Web.Util.UrlUtilsTest.cs - Unit tests for System.Web.Util.UrlUtils
 //
 // Author:
-//    Noam Lampert <noaml@mainsoft.com>
+//	Noam Lampert <noaml@mainsoft.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -35,34 +35,34 @@ using System.Diagnostics;
 
 namespace MonoTests.System.Web.Util
 {
-    [TestFixture]
-    public class UrlUtilsTest
-    {
-        [Test]
-        public void CanonicTest()
-        {
-            Assert.AreEqual("/Sample.aspx",SystemWebTestShim.UrlUtils.Canonic("/WebApplication1//../Sample.aspx"));
-        }
-        [Test]
-        public void CanonicTest2()
-        {
-            Assert.AreEqual("Sample.aspx",SystemWebTestShim.UrlUtils.Canonic("Path1/../Sample.aspx"));
-        }
-        [Test]
-        public void CanonicTest3()
-        {
-            Assert.AreEqual("/Path1/Sample.aspx",SystemWebTestShim.UrlUtils.Canonic("/../Path1/Sample.aspx"));
-        }
-        [Test]
-        public void CanonicTest4()
-        {
-            Assert.AreEqual("/Sample.aspx",SystemWebTestShim.UrlUtils.Canonic("/../Path1/../../Sample.aspx"));
-        }
-        [Test]
-        [ExpectedException(typeof(HttpException))]
-        public void CanonicTest5()
-        {
-            SystemWebTestShim.UrlUtils.Canonic("../Path1/../../Sample.aspx");
-        }
-    }
+	[TestFixture]
+	public class UrlUtilsTest
+	{
+		[Test]
+		public void CanonicTest()
+		{
+			Assert.AreEqual("/Sample.aspx",SystemWebTestShim.UrlUtils.Canonic("/WebApplication1//../Sample.aspx"));
+		}
+		[Test]
+		public void CanonicTest2()
+		{
+			Assert.AreEqual("Sample.aspx",SystemWebTestShim.UrlUtils.Canonic("Path1/../Sample.aspx"));
+		}
+		[Test]
+		public void CanonicTest3()
+		{
+			Assert.AreEqual("/Path1/Sample.aspx",SystemWebTestShim.UrlUtils.Canonic("/../Path1/Sample.aspx"));
+		}
+		[Test]
+		public void CanonicTest4()
+		{
+			Assert.AreEqual("/Sample.aspx",SystemWebTestShim.UrlUtils.Canonic("/../Path1/../../Sample.aspx"));
+		}
+		[Test]
+		[ExpectedException(typeof(HttpException))]
+		public void CanonicTest5()
+		{
+			SystemWebTestShim.UrlUtils.Canonic("../Path1/../../Sample.aspx");
+		}
+	}
 }

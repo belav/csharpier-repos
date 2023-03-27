@@ -38,56 +38,56 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbDataAdapter_UpdateCommand : GHTBase
 {
-    public static void Main()
-    {
-        OleDbDataAdapter_UpdateCommand tc = new OleDbDataAdapter_UpdateCommand();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OleDbDataAdapter_UpdateCommand");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
+	public static void Main()
+	{
+		OleDbDataAdapter_UpdateCommand tc = new OleDbDataAdapter_UpdateCommand();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OleDbDataAdapter_UpdateCommand");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
 
-    }
-
-
-    //public TestClass():base(true){}
-
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//public TestClass():base(true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
-        
-        OleDbDataAdapter oleDBda = new OleDbDataAdapter();
 
-        OleDbCommand Cmd = new OleDbCommand();
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-        oleDBda.UpdateCommand  = Cmd;
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-        try
-        {
-            BeginCase("UpdateCommand - Get");
-            Compare(oleDBda.UpdateCommand , Cmd);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}    
-    }
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
+		
+		OleDbDataAdapter oleDBda = new OleDbDataAdapter();
+
+		OleDbCommand Cmd = new OleDbCommand();
+
+		oleDBda.UpdateCommand  = Cmd;
+
+		try
+		{
+			BeginCase("UpdateCommand - Get");
+			Compare(oleDBda.UpdateCommand , Cmd);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}	
+	}
 }
 }

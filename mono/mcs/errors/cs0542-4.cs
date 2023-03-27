@@ -3,8 +3,8 @@
 
 class C
 {
-    public static void C<T> ()
-    {
-    }
+	public static void C<T> ()
+	{
+	}
 }
 

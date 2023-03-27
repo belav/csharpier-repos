@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -582,7 +582,7 @@ namespace Microsoft.Data.Sqlite
                 connection.Open();
                 connection.CreateCollation("MY_NOCASE", (s1, s2) => string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase));
 
-                Assert.Equal(1L, connection.ExecuteScalar<long>("SELECT '????s' = '????S' COLLATE MY_NOCASE;"));
+                Assert.Equal(1L, connection.ExecuteScalar<long>("SELECT 'Νικοσ' = 'ΝΙΚΟΣ' COLLATE MY_NOCASE;"));
             }
         }
 
@@ -596,7 +596,7 @@ namespace Microsoft.Data.Sqlite
                 connection.CreateCollation("MY_NOCASE", null);
 
                 var ex = Assert.Throws<SqliteException>(
-                    () => connection.ExecuteScalar<long>("SELECT '????s' = '????S' COLLATE MY_NOCASE;"));
+                    () => connection.ExecuteScalar<long>("SELECT 'Νικοσ' = 'ΝΙΚΟΣ' COLLATE MY_NOCASE;"));
 
                 Assert.Equal(Resources.SqliteNativeError(SQLITE_ERROR, "no such collation sequence: MY_NOCASE"), ex.Message);
             }
@@ -610,7 +610,7 @@ namespace Microsoft.Data.Sqlite
                 connection.CreateCollation("MY_NOCASE", (s1, s2) => string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase));
                 connection.Open();
 
-                Assert.Equal(1L, connection.ExecuteScalar<long>("SELECT '????s' = '????S' COLLATE MY_NOCASE;"));
+                Assert.Equal(1L, connection.ExecuteScalar<long>("SELECT 'Νικοσ' = 'ΝΙΚΟΣ' COLLATE MY_NOCASE;"));
             }
         }
 
@@ -642,7 +642,7 @@ namespace Microsoft.Data.Sqlite
                         return string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase);
                     });
 
-                Assert.Equal(1L, connection.ExecuteScalar<long>("SELECT '????s' = '????S' COLLATE MY_NOCASE;"));
+                Assert.Equal(1L, connection.ExecuteScalar<long>("SELECT 'Νικοσ' = 'ΝΙΚΟΣ' COLLATE MY_NOCASE;"));
                 var item = Assert.Single(list);
                 Assert.Equal("Invoked", item);
             }

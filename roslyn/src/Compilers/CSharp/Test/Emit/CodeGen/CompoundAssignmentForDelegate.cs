@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -165,8 +165,8 @@ class C
         goo();
         goo -= goo1; // Same type
         boo[] arrfoo = { p.bar, abc.far };
-        goo += (boo)Delegate.Combine(arrfoo);    // OK
-        goo += (boo)Delegate.Combine(goo, goo1);      // OK
+        goo += (boo)Delegate.Combine(arrfoo);	// OK
+        goo += (boo)Delegate.Combine(goo, goo1);  	// OK
         goo();
     }
 }
@@ -461,8 +461,8 @@ class C
     {
         int i = 0;
         D cd1 = new D(M1); // M1
-        cd1 -= M2;    // M1
-        cd1 -= M2;    // M1
+        cd1 -= M2;	// M1
+        cd1 -= M2;	// M1
         cd1(ref i);
     }
 }
@@ -714,7 +714,7 @@ Derived
             CompileAndVerify(text, expectedOutput: expectedOutPut);
         }
 
-        // delegate-in-a-generic-class (C<t>.goo(…)) += methodgroup-in-a-generic-class (C<T>.bar(…))
+        // delegate-in-a-generic-class (C<t>.goo(â€¦)) += methodgroup-in-a-generic-class (C<T>.bar(â€¦))
         [Fact]
         public void CompAssignOperatorForGenericClass()
         {

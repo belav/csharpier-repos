@@ -3,7 +3,7 @@
 // Compiler options: -warnaserror -warn:2
 
 class Base {
-    public enum EE {
+	public enum EE {
             Item
         };
 }

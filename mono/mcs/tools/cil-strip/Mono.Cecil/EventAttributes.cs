@@ -28,11 +28,11 @@
 
 namespace Mono.Cecil {
 
-    using System;
+	using System;
 
-    [Flags]
-    internal enum EventAttributes : ushort {
-        SpecialName        = 0x0200,    // Event is special
-        RTSpecialName    = 0x0400     // CLI provides 'special' behavior, depending upon the name of the event
-    }
+	[Flags]
+	internal enum EventAttributes : ushort {
+		SpecialName		= 0x0200,	// Event is special
+		RTSpecialName	= 0x0400	 // CLI provides 'special' behavior, depending upon the name of the event
+	}
 }

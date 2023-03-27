@@ -7,13 +7,13 @@ class E
 {
     public E (int[] args)
     {
-    using (MemoryStream m = new MemoryStream ()){
+	using (MemoryStream m = new MemoryStream ()){
             Init (out m);
-    }
+	}
     }
     
     void Init (out MemoryStream val)
     {
-    val = null;
+	val = null;
     }
 }

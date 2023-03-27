@@ -2,7 +2,7 @@
 // BaseAddressPrefixFilterElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -54,49 +54,49 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class BaseAddressPrefixFilterElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty prefix;
+	public sealed class BaseAddressPrefixFilterElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty prefix;
 
-        static BaseAddressPrefixFilterElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            prefix = new ConfigurationProperty ("prefix",
-                typeof (Uri), null, new UriTypeConverter (), new StringValidator (1, int.MaxValue, null),
-                ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+		static BaseAddressPrefixFilterElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			prefix = new ConfigurationProperty ("prefix",
+				typeof (Uri), null, new UriTypeConverter (), new StringValidator (1, int.MaxValue, null),
+				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
 
-            properties.Add (prefix);
-        }
+			properties.Add (prefix);
+		}
 
-        public BaseAddressPrefixFilterElement ()
-        {
-        }
+		public BaseAddressPrefixFilterElement ()
+		{
+		}
 
-        public BaseAddressPrefixFilterElement (Uri prefix)
-        {
-            Prefix = prefix;
-        }
-
-
-        // Properties
-
-        [ConfigurationProperty ("prefix",
-             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-            IsRequired = true,
-            IsKey = true)]
-        public Uri Prefix {
-            get { return (Uri) base [prefix]; }
-            set { base [prefix] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		public BaseAddressPrefixFilterElement (Uri prefix)
+		{
+			Prefix = prefix;
+		}
 
 
-    }
+		// Properties
+
+		[ConfigurationProperty ("prefix",
+			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+			IsRequired = true,
+			IsKey = true)]
+		public Uri Prefix {
+			get { return (Uri) base [prefix]; }
+			set { base [prefix] = value; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+
+	}
 
 }

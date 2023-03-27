@@ -2,8 +2,8 @@
 // FieldTemplateUserControl.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
-//    Marek Habersack <mhabersack@novell.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
+//	Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2008-2009 Novell Inc. http://novell.com
 //
@@ -41,187 +41,187 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class FieldTemplateUserControl : UserControl, IBindableControl, IFieldTemplate
-    {
-        public MetaChildrenColumn ChildrenColumn {
-            get {
-                MetaColumn column = Column;
-                var ret = column as MetaChildrenColumn;
-                if (ret == null) {
-                    string name = column == null ? null : column.Name;
-                    throw new Exception ("'" + name + "' is not a children column and cannot be used here.");
-                }
-                
-                return ret;
-            }
-        }        
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class FieldTemplateUserControl : UserControl, IBindableControl, IFieldTemplate
+	{
+		public MetaChildrenColumn ChildrenColumn {
+			get {
+				MetaColumn column = Column;
+				var ret = column as MetaChildrenColumn;
+				if (ret == null) {
+					string name = column == null ? null : column.Name;
+					throw new Exception ("'" + name + "' is not a children column and cannot be used here.");
+				}
+				
+				return ret;
+			}
+		}		
 
-        [MonoTODO]
-        protected string ChildrenPath {
-            get { return ChildrenColumn.GetChildrenListPath (Row); }
-            
-        }
+		[MonoTODO]
+		protected string ChildrenPath {
+			get { return ChildrenColumn.GetChildrenListPath (Row); }
+			
+		}
 
-        public MetaColumn Column {
-            get {
-                IFieldTemplateHost host = Host;
-                if (host != null)
-                    return host.Column;
+		public MetaColumn Column {
+			get {
+				IFieldTemplateHost host = Host;
+				if (host != null)
+					return host.Column;
 
-                return null;
-            }
-        }
-        
-        [MonoTODO]
-        public virtual Control DataControl { get; private set; }
-        [MonoTODO]
-        public virtual object FieldValue { get; set; }
-        [MonoTODO]
-        public virtual string FieldValueEditString { get; private set; }
-        [MonoTODO]
-        public virtual string FieldValueString { get; private set; }
+				return null;
+			}
+		}
+		
+		[MonoTODO]
+		public virtual Control DataControl { get; private set; }
+		[MonoTODO]
+		public virtual object FieldValue { get; set; }
+		[MonoTODO]
+		public virtual string FieldValueEditString { get; private set; }
+		[MonoTODO]
+		public virtual string FieldValueString { get; private set; }
 
-        [MonoTODO]
-        public MetaForeignKeyColumn ForeignKeyColumn {
-            get {
-                MetaColumn column = Column;
-                var ret = column as MetaForeignKeyColumn;
-                if (ret == null) {
-                    string name = column == null ? null : column.Name;
-                    throw new Exception ("'" + name + "' is not a foreign key column and cannot be used here.");
-                }
-                
-                return ret;
-            }
-        }
-        
-        [MonoTODO]
-        protected string ForeignKeyPath {
-            get { return ForeignKeyColumn.GetForeignKeyDetailsPath (Row); }
-        }
-        
-        [MonoTODO]
-        public IFieldFormattingOptions FormattingOptions { get; private set; }
+		[MonoTODO]
+		public MetaForeignKeyColumn ForeignKeyColumn {
+			get {
+				MetaColumn column = Column;
+				var ret = column as MetaForeignKeyColumn;
+				if (ret == null) {
+					string name = column == null ? null : column.Name;
+					throw new Exception ("'" + name + "' is not a foreign key column and cannot be used here.");
+				}
+				
+				return ret;
+			}
+		}
+		
+		[MonoTODO]
+		protected string ForeignKeyPath {
+			get { return ForeignKeyColumn.GetForeignKeyDetailsPath (Row); }
+		}
+		
+		[MonoTODO]
+		public IFieldFormattingOptions FormattingOptions { get; private set; }
 
-        public IFieldTemplateHost Host { get; private set; }
+		public IFieldTemplateHost Host { get; private set; }
 
-        [MonoTODO]
-        public System.ComponentModel.AttributeCollection MetadataAttributes {
-            get {
-                MetaColumn column = Column;
-                if (column == null)
-                    return null;
+		[MonoTODO]
+		public System.ComponentModel.AttributeCollection MetadataAttributes {
+			get {
+				MetaColumn column = Column;
+				if (column == null)
+					return null;
 
-                return column.Attributes;
-            }
-        }
-        
-        [MonoTODO]
-        public DataBoundControlMode Mode {
-            get {
-                IFieldTemplateHost host = Host;            
-                return host == null ? DataBoundControlMode.ReadOnly : host.Mode;
-            }
-        }
-        
-        [MonoTODO]
-        public virtual object Row {
-            get {
-                Page page = Page;
-                return page == null ? null : page.GetDataItem ();
-            }
-        }
-        
-        [MonoTODO]
-        public MetaTable Table {
-            get {
-                MetaColumn column = Column;
-                return column == null ? null : column.Table;
-            }
-        }
+				return column.Attributes;
+			}
+		}
+		
+		[MonoTODO]
+		public DataBoundControlMode Mode {
+			get {
+				IFieldTemplateHost host = Host;			
+				return host == null ? DataBoundControlMode.ReadOnly : host.Mode;
+			}
+		}
+		
+		[MonoTODO]
+		public virtual object Row {
+			get {
+				Page page = Page;
+				return page == null ? null : page.GetDataItem ();
+			}
+		}
+		
+		[MonoTODO]
+		public MetaTable Table {
+			get {
+				MetaColumn column = Column;
+				return column == null ? null : column.Table;
+			}
+		}
 
-        [MonoTODO]
-        protected string BuildChildrenPath (string path)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected string BuildChildrenPath (string path)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected string BuildForeignKeyPath (string path)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected string BuildForeignKeyPath (string path)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected virtual object ConvertEditedValue (string value)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected virtual object ConvertEditedValue (string value)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected virtual void ExtractForeignKey (IDictionary dictionary, string selectedValue)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected virtual void ExtractForeignKey (IDictionary dictionary, string selectedValue)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected virtual void ExtractValues (IOrderedDictionary dictionary)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected virtual void ExtractValues (IOrderedDictionary dictionary)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected FieldTemplateUserControl FindOtherFieldTemplate (string columnName)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected FieldTemplateUserControl FindOtherFieldTemplate (string columnName)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual string FormatFieldValue (object fieldValue)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual string FormatFieldValue (object fieldValue)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected virtual object GetColumnValue (MetaColumn column)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected virtual object GetColumnValue (MetaColumn column)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        void IBindableControl.ExtractValues (IOrderedDictionary dictionary)
-        {
-            ExtractValues (dictionary);
-        }
+		[MonoTODO]
+		void IBindableControl.ExtractValues (IOrderedDictionary dictionary)
+		{
+			ExtractValues (dictionary);
+		}
 
-        void IFieldTemplate.SetHost (IFieldTemplateHost host)
-        {
-            Host = host;
-        }
+		void IFieldTemplate.SetHost (IFieldTemplateHost host)
+		{
+			Host = host;
+		}
 
-        [MonoTODO]
-        protected void IgnoreModelValidationAttribute (Type attributeType)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected void IgnoreModelValidationAttribute (Type attributeType)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected void PopulateListControl (ListControl listControl)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected void PopulateListControl (ListControl listControl)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected virtual void SetUpValidator (BaseValidator validator)
-        {
-        }
+		[MonoTODO]
+		protected virtual void SetUpValidator (BaseValidator validator)
+		{
+		}
 
-        [MonoTODO]
-        protected virtual void SetUpValidator (BaseValidator validator, MetaColumn column)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected virtual void SetUpValidator (BaseValidator validator, MetaColumn column)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

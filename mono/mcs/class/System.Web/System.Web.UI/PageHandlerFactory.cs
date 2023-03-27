@@ -2,7 +2,7 @@
 // System.Web.UI.PageHandlerFactory
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 //
@@ -33,20 +33,20 @@ using System.Web.Compilation;
 
 namespace System.Web.UI
 {
-    public class PageHandlerFactory : IHttpHandlerFactory
-    {
-        protected internal PageHandlerFactory ()
-        {
-        }
-        
-        public virtual IHttpHandler GetHandler (HttpContext context, string requestType, string virtualPath, string path)
-        {
-            return PageParser.GetCompiledPageInstance (virtualPath, path, context);
-        }
+	public class PageHandlerFactory : IHttpHandlerFactory
+	{
+		protected internal PageHandlerFactory ()
+		{
+		}
+		
+		public virtual IHttpHandler GetHandler (HttpContext context, string requestType, string virtualPath, string path)
+		{
+			return PageParser.GetCompiledPageInstance (virtualPath, path, context);
+		}
 
-        public virtual void ReleaseHandler (IHttpHandler handler)
-        {
-        }
-    }
+		public virtual void ReleaseHandler (IHttpHandler handler)
+		{
+		}
+	}
 }
 

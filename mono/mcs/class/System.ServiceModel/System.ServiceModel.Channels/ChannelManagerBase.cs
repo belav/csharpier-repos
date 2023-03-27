@@ -2,7 +2,7 @@
 // ChannelManagerBase.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,47 +33,47 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    public abstract class ChannelManagerBase : CommunicationObject,
-        ICommunicationObject, IDefaultCommunicationTimeouts
-    {
-        protected ChannelManagerBase ()
-        {
-        }
+	public abstract class ChannelManagerBase : CommunicationObject,
+		ICommunicationObject, IDefaultCommunicationTimeouts
+	{
+		protected ChannelManagerBase ()
+		{
+		}
 
-        protected internal abstract TimeSpan DefaultReceiveTimeout { get; }
+		protected internal abstract TimeSpan DefaultReceiveTimeout { get; }
 
-        protected internal abstract TimeSpan DefaultSendTimeout { get; }
+		protected internal abstract TimeSpan DefaultSendTimeout { get; }
 
-        TimeSpan IDefaultCommunicationTimeouts.OpenTimeout {
-            get { return DefaultOpenTimeout; }
-        }
+		TimeSpan IDefaultCommunicationTimeouts.OpenTimeout {
+			get { return DefaultOpenTimeout; }
+		}
 
-        TimeSpan IDefaultCommunicationTimeouts.CloseTimeout {
-            get { return DefaultCloseTimeout; }
-        }
+		TimeSpan IDefaultCommunicationTimeouts.CloseTimeout {
+			get { return DefaultCloseTimeout; }
+		}
 
-        TimeSpan IDefaultCommunicationTimeouts.ReceiveTimeout {
-            get { return DefaultReceiveTimeout; }
-        }
+		TimeSpan IDefaultCommunicationTimeouts.ReceiveTimeout {
+			get { return DefaultReceiveTimeout; }
+		}
 
-        TimeSpan IDefaultCommunicationTimeouts.SendTimeout {
-            get { return DefaultSendTimeout; }
-        }
+		TimeSpan IDefaultCommunicationTimeouts.SendTimeout {
+			get { return DefaultSendTimeout; }
+		}
 
-        internal MessageEncoder CreateEncoder<TChannel> (MessageEncodingBindingElement mbe)
-        {
-            var f = mbe.CreateMessageEncoderFactory ();
-            var t = typeof (TChannel);
-            if (t == typeof (IRequestSessionChannel) ||
+		internal MessageEncoder CreateEncoder<TChannel> (MessageEncodingBindingElement mbe)
+		{
+			var f = mbe.CreateMessageEncoderFactory ();
+			var t = typeof (TChannel);
+			if (t == typeof (IRequestSessionChannel) ||
 #if !MOBILE
-                t == typeof (IReplySessionChannel) ||
+			    t == typeof (IReplySessionChannel) ||
 #endif
-                t == typeof (IInputSessionChannel) ||
-                t == typeof (IOutputSessionChannel) ||
-                t == typeof (IDuplexSessionChannel))
-                return f.CreateSessionEncoder ();
-            else
-                return f.Encoder;
-        }
-    }
+			    t == typeof (IInputSessionChannel) ||
+			    t == typeof (IOutputSessionChannel) ||
+			    t == typeof (IDuplexSessionChannel))
+				return f.CreateSessionEncoder ();
+			else
+				return f.Encoder;
+		}
+	}
 }

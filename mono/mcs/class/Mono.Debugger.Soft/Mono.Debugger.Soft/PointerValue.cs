@@ -28,57 +28,57 @@ using System.Collections.Generic;
 
 namespace Mono.Debugger.Soft
 {
-    /*
-     * Represents a value of a pointer type in the debuggee
-     */
-    public class PointerValue : Value {
-        TypeMirror type;
-        long addr;
+	/*
+	 * Represents a value of a pointer type in the debuggee
+	 */
+	public class PointerValue : Value {
+		TypeMirror type;
+		long addr;
 
-        public PointerValue (VirtualMachine vm, TypeMirror type, long addr) : base (vm, 0) {
-            this.type = type;
-            this.addr = addr;
-        }
+		public PointerValue (VirtualMachine vm, TypeMirror type, long addr) : base (vm, 0) {
+			this.type = type;
+			this.addr = addr;
+		}
 
-        public long Address {
-            get { return addr; }
-        }
+		public long Address {
+			get { return addr; }
+		}
 
-        public TypeMirror Type {
-            get { return type; }
-        }
+		public TypeMirror Type {
+			get { return type; }
+		}
 
-        // Since protocol version 2.46
-        public Value Value {
-            get {
-                ValueImpl value;
-                if (Address == 0)
-                    return null;
-                try {
-                    value = vm.conn.Pointer_GetValue (Address, Type);
-                }
-                catch (CommandException ex) {
-                if (ex.ErrorCode == ErrorCode.INVALID_ARGUMENT)
-                    throw new ArgumentException ("Invalid pointer address.");
-                else
-                    throw;
-                }
-                return vm.DecodeValue (value);
-            }
-        }
+		// Since protocol version 2.46
+		public Value Value {
+			get {
+				ValueImpl value;
+				if (Address == 0)
+					return null;
+				try {
+					value = vm.conn.Pointer_GetValue (Address, Type);
+				}
+				catch (CommandException ex) {
+				if (ex.ErrorCode == ErrorCode.INVALID_ARGUMENT)
+					throw new ArgumentException ("Invalid pointer address.");
+				else
+					throw;
+				}
+				return vm.DecodeValue (value);
+			}
+		}
 
-        public override bool Equals (object obj) {
-            if (obj != null && obj is PointerValue)
-                return addr == (obj as PointerValue).addr;
-            return base.Equals (obj);
-        }
+		public override bool Equals (object obj) {
+			if (obj != null && obj is PointerValue)
+				return addr == (obj as PointerValue).addr;
+			return base.Equals (obj);
+		}
 
-        public override int GetHashCode () {
-            return base.GetHashCode ();
-        }
+		public override int GetHashCode () {
+			return base.GetHashCode ();
+		}
 
-        public override string ToString () {
-            return string.Format ("PointerValue<({0}) 0x{1:x}>", type.CSharpName, addr);
-        }
-    }
+		public override string ToString () {
+			return string.Format ("PointerValue<({0}) 0x{1:x}>", type.CSharpName, addr);
+		}
+	}
 }

@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 // Francis Fisher (frankie@terrorise.me.uk)
@@ -30,65 +30,65 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class ChartGraphics : ChartElement, IDisposable
-    {
-        #region Constructors
-        internal ChartGraphics (Graphics graphics)
-        {
-            Graphics = graphics;
-        }
-        #endregion
+	public class ChartGraphics : ChartElement, IDisposable
+	{
+		#region Constructors
+		internal ChartGraphics (Graphics graphics)
+		{
+			Graphics = graphics;
+		}
+		#endregion
 
-        #region Public Properties
-        public Graphics Graphics { get; set; }
-        #endregion
+		#region Public Properties
+		public Graphics Graphics { get; set; }
+		#endregion
 
-        [MonoTODO]
-        protected override void Dispose (bool disposing)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected override void Dispose (bool disposing)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public PointF GetAbsolutePoint (PointF point)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public PointF GetAbsolutePoint (PointF point)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public RectangleF GetAbsoluteRectangle (RectangleF rectangle)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public RectangleF GetAbsoluteRectangle (RectangleF rectangle)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public SizeF GetAbsoluteSize (SizeF size)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public SizeF GetAbsoluteSize (SizeF size)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public double GetPositionFromAxis (string chartAreaName, AxisName axis, double axisValue)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public double GetPositionFromAxis (string chartAreaName, AxisName axis, double axisValue)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public PointF GetRelativePoint (PointF point)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public PointF GetRelativePoint (PointF point)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public RectangleF GetRelativeRectangle (RectangleF rectangle)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public RectangleF GetRelativeRectangle (RectangleF rectangle)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public SizeF GetRelativeSize (SizeF size)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public SizeF GetRelativeSize (SizeF size)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

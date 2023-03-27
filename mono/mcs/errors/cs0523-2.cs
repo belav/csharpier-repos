@@ -3,5 +3,5 @@
 
 struct A
 {
-    static A? a;
+	static A? a;
 }

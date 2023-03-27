@@ -32,64 +32,64 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-    [TestFixture]
-    public class OleDbCommand_Connection : GHTBase
-    {
-        OleDbCommand cmd;
-        OleDbConnection con;
+	[TestFixture]
+	public class OleDbCommand_Connection : GHTBase
+	{
+		OleDbCommand cmd;
+		OleDbConnection con;
 
-        [SetUp]
-        public void SetUp()
-        {
-            cmd = new OleDbCommand("SELECT * FROM Employees");
-            con = new OleDbConnection();
-        }
+		[SetUp]
+		public void SetUp()
+		{
+			cmd = new OleDbCommand("SELECT * FROM Employees");
+			con = new OleDbConnection();
+		}
 
-        [TearDown]
-        public void TearDown()
-        {
-            if (con != null)
-            {
-                if (con.State == ConnectionState.Open) con.Close();
-            }
-        }
+		[TearDown]
+		public void TearDown()
+		{
+			if (con != null)
+			{
+				if (con.State == ConnectionState.Open) con.Close();
+			}
+		}
 
-        public static void Main()
-        {
-            OleDbCommand_Connection tc = new OleDbCommand_Connection();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OleDbCommand_Connection");
-                tc.SetUp();
-                tc.run();
-                tc.TearDown();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+		public static void Main()
+		{
+			OleDbCommand_Connection tc = new OleDbCommand_Connection();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OleDbCommand_Connection");
+				tc.SetUp();
+				tc.run();
+				tc.TearDown();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            Exception exp = null;
-            try
-            {
-                BeginCase("Command Connection - set");
-                cmd.Connection = con;    
-                Compare(cmd.Connection ,con);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+		[Test]
+		public void run()
+		{
+			Exception exp = null;
+			try
+			{
+				BeginCase("Command Connection - set");
+				cmd.Connection = con;	
+				Compare(cmd.Connection ,con);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Command Connection - ctor");
-                cmd = new OleDbCommand("",con);
-                Compare(cmd.Connection ,con);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-        }
-    }
+			try
+			{
+				BeginCase("Command Connection - ctor");
+				cmd = new OleDbCommand("",con);
+				Compare(cmd.Connection ,con);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
+		}
+	}
 }

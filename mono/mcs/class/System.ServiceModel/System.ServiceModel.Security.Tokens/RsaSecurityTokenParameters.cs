@@ -2,7 +2,7 @@
 // RsaSecurityTokenParameters.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -31,58 +31,58 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel.Security.Tokens
 {
-    public class RsaSecurityTokenParameters : SecurityTokenParameters
-    {
-        public RsaSecurityTokenParameters ()
-        {
-            InclusionMode = SecurityTokenInclusionMode.Never;
-            RequireDerivedKeys = true;
-        }
+	public class RsaSecurityTokenParameters : SecurityTokenParameters
+	{
+		public RsaSecurityTokenParameters ()
+		{
+			InclusionMode = SecurityTokenInclusionMode.Never;
+			RequireDerivedKeys = true;
+		}
 
-        protected RsaSecurityTokenParameters (RsaSecurityTokenParameters other)
-            : base (other)
-        {
-        }
+		protected RsaSecurityTokenParameters (RsaSecurityTokenParameters other)
+			: base (other)
+		{
+		}
 
-        protected override bool HasAsymmetricKey {
-            get { return true; }
-        }
+		protected override bool HasAsymmetricKey {
+			get { return true; }
+		}
 
-        protected override bool SupportsClientAuthentication {
-            get { return true; }
-        }
+		protected override bool SupportsClientAuthentication {
+			get { return true; }
+		}
 
-        protected override bool SupportsClientWindowsIdentity {
-            get { return false; }
-        }
+		protected override bool SupportsClientWindowsIdentity {
+			get { return false; }
+		}
 
-        protected override bool SupportsServerAuthentication {
-            get { return true; }
-        }
+		protected override bool SupportsServerAuthentication {
+			get { return true; }
+		}
 
-        protected override SecurityTokenParameters CloneCore ()
-        {
-            return new RsaSecurityTokenParameters (this);
-        }
+		protected override SecurityTokenParameters CloneCore ()
+		{
+			return new RsaSecurityTokenParameters (this);
+		}
 
-        protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause (
-            SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
-        {
-            if (token == null)
-                throw new ArgumentNullException ("token");
-            RsaSecurityToken rt = token as RsaSecurityToken;
-            if (rt == null)
-                throw new NotSupportedException (String.Format ("Cannot create a key identifier clause from this security token '{0}'", token));
-            return new RsaKeyIdentifierClause (rt.Rsa);
-        }
+		protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause (
+			SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+		{
+			if (token == null)
+				throw new ArgumentNullException ("token");
+			RsaSecurityToken rt = token as RsaSecurityToken;
+			if (rt == null)
+				throw new NotSupportedException (String.Format ("Cannot create a key identifier clause from this security token '{0}'", token));
+			return new RsaKeyIdentifierClause (rt.Rsa);
+		}
 
-        protected internal override void InitializeSecurityTokenRequirement (SecurityTokenRequirement requirement)
-        {
-            if (requirement == null)
-                throw new ArgumentNullException ("requirement");
-            requirement.TokenType = SecurityTokenTypes.Rsa;
-            requirement.RequireCryptographicToken = true;
-            requirement.KeyType = SecurityKeyType.AsymmetricKey;
-        }
-    }
+		protected internal override void InitializeSecurityTokenRequirement (SecurityTokenRequirement requirement)
+		{
+			if (requirement == null)
+				throw new ArgumentNullException ("requirement");
+			requirement.TokenType = SecurityTokenTypes.Rsa;
+			requirement.RequireCryptographicToken = true;
+			requirement.KeyType = SecurityKeyType.AsymmetricKey;
+		}
+	}
 }

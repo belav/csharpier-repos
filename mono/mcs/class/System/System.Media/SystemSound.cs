@@ -30,22 +30,22 @@ using System.IO;
 
 namespace System.Media {
 
-    public class SystemSound {
+	public class SystemSound {
 
-        Stream resource;
+		Stream resource;
 
-        internal SystemSound (string tag)
-        {
-            resource = typeof (SystemSound).Assembly.GetManifestResourceStream (tag + ".wav");
-        }
+		internal SystemSound (string tag)
+		{
+			resource = typeof (SystemSound).Assembly.GetManifestResourceStream (tag + ".wav");
+		}
 
-        // plays async
-        public void Play ()
-        {
-            SoundPlayer sp = new SoundPlayer (resource);
-            sp.Play ();
-        }
-    }
+		// plays async
+		public void Play ()
+		{
+			SoundPlayer sp = new SoundPlayer (resource);
+			sp.Play ();
+		}
+	}
 }
 
 

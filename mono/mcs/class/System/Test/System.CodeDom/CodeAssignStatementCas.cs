@@ -1,9 +1,9 @@
 //
 // CodeAssignStatementCas.cs
-//    - CAS unit tests for System.CodeDom.CodeAssignStatement
+//	- CAS unit tests for System.CodeDom.CodeAssignStatement
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,48 +37,48 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeAssignStatementCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeAssignStatementCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeAssignStatement cas = new CodeAssignStatement ();
-            Assert.IsNull (cas.Left, "Left");
-            cas.Left = new CodeExpression ();
-            Assert.IsNull (cas.Right, "Right");
-            cas.Right = new CodeExpression ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeAssignStatement cas = new CodeAssignStatement ();
+			Assert.IsNull (cas.Left, "Left");
+			cas.Left = new CodeExpression ();
+			Assert.IsNull (cas.Right, "Right");
+			cas.Right = new CodeExpression ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            CodeExpression left = new CodeExpression ();
-            CodeExpression right = new CodeExpression ();
-            CodeAssignStatement cas = new CodeAssignStatement (left, right);
-            Assert.AreSame (left, cas.Left, "Left");
-            cas.Left = new CodeExpression ();
-            Assert.AreSame (right, cas.Right, "Right");
-            cas.Right = new CodeExpression ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			CodeExpression left = new CodeExpression ();
+			CodeExpression right = new CodeExpression ();
+			CodeAssignStatement cas = new CodeAssignStatement (left, right);
+			Assert.AreSame (left, cas.Left, "Left");
+			cas.Left = new CodeExpression ();
+			Assert.AreSame (right, cas.Right, "Right");
+			cas.Right = new CodeExpression ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeAssignStatement).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeAssignStatement).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

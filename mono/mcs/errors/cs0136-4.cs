@@ -3,17 +3,17 @@
 
 class C
 {
-    public void Foo (int i, int v)
-    {
-        switch (i) {
-            case 1:
-                if (v > 0) {
-                    int res = 1;
-                }
-                break;
-            case 2:
-                int res = 2;
-                break;
-        }
-    }
+	public void Foo (int i, int v)
+	{
+		switch (i) {
+			case 1:
+				if (v > 0) {
+					int res = 1;
+				}
+				break;
+			case 2:
+				int res = 2;
+				break;
+		}
+	}
 }

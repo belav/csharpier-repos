@@ -23,14 +23,14 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-    public enum ScrollBarSizeBoxState
-    {
-        RightAlign = 1,
-        LeftAlign = 2
-    }
+	public enum ScrollBarSizeBoxState
+	{
+		RightAlign = 1,
+		LeftAlign = 2
+	}
 }

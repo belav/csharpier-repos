@@ -2,8 +2,8 @@
 // System.Web.Security.MembershipHelper
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2003 Ben Maurer
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
@@ -35,46 +35,46 @@ using System.Web.Util;
 
 namespace System.Web.Security
 {
-    sealed class MembershipHelper
-    : IMembershipHelper
-    {
-        internal const int SALT_BYTES = 16;
+	sealed class MembershipHelper
+	: IMembershipHelper
+	{
+		internal const int SALT_BYTES = 16;
 
-        public int UserIsOnlineTimeWindow {
-            get { return Membership.UserIsOnlineTimeWindow; }
-        }
+		public int UserIsOnlineTimeWindow {
+			get { return Membership.UserIsOnlineTimeWindow; }
+		}
 
-        public MembershipProviderCollection Providers {
-            get { return Membership.Providers; }
-        }
-        
-        static SymmetricAlgorithm GetAlgorithm ()
-        {
-            MachineKeySection section = MachineKeySection.Config;
+		public MembershipProviderCollection Providers {
+			get { return Membership.Providers; }
+		}
+		
+		static SymmetricAlgorithm GetAlgorithm ()
+		{
+			MachineKeySection section = MachineKeySection.Config;
 
-            if (section.DecryptionKey.StartsWith ("AutoGenerate"))
-                throw new ProviderException ("You must explicitly specify a decryption key in the <machineKey> section when using encrypted passwords.");
+			if (section.DecryptionKey.StartsWith ("AutoGenerate"))
+				throw new ProviderException ("You must explicitly specify a decryption key in the <machineKey> section when using encrypted passwords.");
 
-            SymmetricAlgorithm sa = section.GetDecryptionAlgorithm ();
-            if (sa == null)
-                throw new ProviderException (String.Format ("Unsupported decryption attribute '{0}' in <machineKey> configuration section", section.Decryption));
+			SymmetricAlgorithm sa = section.GetDecryptionAlgorithm ();
+			if (sa == null)
+				throw new ProviderException (String.Format ("Unsupported decryption attribute '{0}' in <machineKey> configuration section", section.Decryption));
 
-            sa.Key = section.GetDecryptionKey ();
-            return sa;
-        }
-        
-        public byte [] DecryptPassword (byte [] encodedPassword)
-        {
-            using (SymmetricAlgorithm sa = GetAlgorithm ()) {
-                return MachineKeySectionUtils.Decrypt (sa, encodedPassword, 0, encodedPassword.Length);
-            }
-        }
+			sa.Key = section.GetDecryptionKey ();
+			return sa;
+		}
+		
+		public byte [] DecryptPassword (byte [] encodedPassword)
+		{
+			using (SymmetricAlgorithm sa = GetAlgorithm ()) {
+				return MachineKeySectionUtils.Decrypt (sa, encodedPassword, 0, encodedPassword.Length);
+			}
+		}
 
-        public byte[] EncryptPassword (byte[] password)
-        {
-            using (SymmetricAlgorithm sa = GetAlgorithm ()) {
-                return MachineKeySectionUtils.Encrypt (sa, password);
-            }
-        }
-    }
+		public byte[] EncryptPassword (byte[] password)
+		{
+			using (SymmetricAlgorithm sa = GetAlgorithm ()) {
+				return MachineKeySectionUtils.Encrypt (sa, password);
+			}
+		}
+	}
 }

@@ -4,10 +4,10 @@
 using System;
 
 class ErrorCS0076 {
-    enum Foo {
-        value__ = 0
-    }
-    public static void Main () {
-    }
+	enum Foo {
+		value__ = 0
+	}
+	public static void Main () {
+	}
 }
 

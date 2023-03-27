@@ -32,11 +32,11 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public enum DereferenceAlias
-    {
-        Never,
-        InSearching,
-        FindingBaseObject,
-        Always
-    }
+	public enum DereferenceAlias
+	{
+		Never,
+		InSearching,
+		FindingBaseObject,
+		Always
+	}
 }

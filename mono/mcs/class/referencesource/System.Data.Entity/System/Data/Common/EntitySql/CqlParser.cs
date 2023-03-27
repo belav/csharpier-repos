@@ -1,6 +1,6 @@
 //### This file created by BYACC 1.9(/C# extension  0.9)
 //### C# capabilities added 11 Sep 2000
-//### static char yysccsid[] = "@(#)yaccpar    1.9 (Berkeley) 02/21/93";
+//### static char yysccsid[] = "@(#)yaccpar	1.9 (Berkeley) 02/21/93";
 
 
 
@@ -1863,43 +1863,43 @@ int yyparse()
     yychar = (-1);
 
     yystate = 0;
-     state_push(yystate);
+	 state_push(yystate);
 
 yyloop:
 #if YYDEBUG
     debug("yyloop"); 
 #endif
-    yyn = yydefred[yystate];
+	yyn = yydefred[yystate];
     if (yyn!=0) goto yyreduce;
 #if YYDEBUG
-    debug("yyn:"+yyn+"  state:"+yystate+"  char:"+yychar);
+	debug("yyn:"+yyn+"  state:"+yystate+"  char:"+yychar);
 #endif
     if (yychar < 0)
     {
         yychar = yylex();
-        if (yychar < 0) yychar = 0;
+		if (yychar < 0) yychar = 0;
     }
-    yyn = yysindex[yystate];
+	yyn = yysindex[yystate];
     if ((yyn!=0) && (yyn += yychar) >= 0 &&
             yyn <= YYTABLESIZE && yycheck[yyn] == yychar)
     {
 #if YYDEBUG
         debug("state "+yystate+", shifting to state "+yytable[yyn]+"");
 #endif
-         yystate = yytable[yyn];
-         state_push(yystate);
+	     yystate = yytable[yyn];
+		 state_push(yystate);
         val_push( yylval );
         yychar = (-1);
         if (yyerrflag > 0)  --yyerrflag;
         goto yyloop;
     }
-    yyn = yyrindex[yystate];
+	yyn = yyrindex[yystate];
     if ((yyn!=0) && (yyn += yychar) >= 0 &&
             yyn <= YYTABLESIZE && yycheck[yyn] == yychar)
     {
         yyn = yytable[yyn];
 #if YYDEBUG
-         debug("reduce");
+	     debug("reduce");
 #endif
         goto yyreduce;
     }
@@ -1917,7 +1917,7 @@ yyinrecovery:
             {
                 goto yyoverflow;
             }
-             yyn = yysindex[state_peek(0)];
+			 yyn = yysindex[state_peek(0)];
             if ((yyn!=0) && (yyn += YYERRCODE) >= 0 &&
                     yyn <= YYTABLESIZE && yycheck[yyn] == YYERRCODE)
             {
@@ -1929,7 +1929,7 @@ yyinrecovery:
                 debug("state "+state_peek(0)+", error recovery shifting to state "+yytable[yyn]+" ");
 #endif
                 yystate = yytable[yyn];
-                 state_push(yystate);
+        		 state_push(yystate);
                 val_push( yylval );
                 goto yyloop;
             }
@@ -1942,7 +1942,7 @@ yyinrecovery:
 #if YYDEBUG
                 debug("error recovery discarding state "+state_peek(0)+" ");
 #endif
-                 state_pop();
+        		 state_pop();
                 val_pop();
             }
         }
@@ -3466,7 +3466,7 @@ break;
 #if YYDEBUG
     debug("reduce");
 #endif
-     state_drop( yym );
+	 state_drop( yym );
     yystate = state_peek(0);
     val_drop( yym );
     yym = yylhs[yyn];
@@ -3475,13 +3475,13 @@ break;
 #if YYDEBUG
         debug("After reduction, shifting from state 0 to state "+YYFINAL+"");
 #endif
-         yystate = YYFINAL;
+		 yystate = YYFINAL;
         state_push( YYFINAL );
         val_push( yyval );
         if (yychar < 0)
         {
             yychar = yylex();
-            if (yychar < 0) yychar = 0;
+			if (yychar < 0) yychar = 0;
 #if YYDEBUG
             if (yydebug)
             yylexdebug(yystate,yychar);
@@ -3490,7 +3490,7 @@ break;
         if (yychar == 0) goto yyaccept;
         goto yyloop;
     }
-    yyn = yygindex[yym];
+	yyn = yygindex[yym];
     if ((yyn!=0) && (yyn += yystate) >= 0 &&
             yyn <= YYTABLESIZE && yycheck[yyn] == yystate)
         yystate = yytable[yyn];
@@ -3503,7 +3503,7 @@ break;
 #if YYDEBUG
     debug("after reduction, shifting from state "+state_peek(0)+" to state "+yystate+"");
 #endif
-     state_push(yystate);
+	 state_push(yystate);
     val_push( yyval );
     goto yyloop;
 yyoverflow:

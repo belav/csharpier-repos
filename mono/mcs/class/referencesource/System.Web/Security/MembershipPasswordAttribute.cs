@@ -1,4 +1,4 @@
-namespace System.Web.Security {
+﻿namespace System.Web.Security {
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;

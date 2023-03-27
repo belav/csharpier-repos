@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingsPropertyWrongTypeException.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,25 +31,25 @@ using System.Runtime.Serialization;
 
 namespace System.Configuration
 {
-    [Serializable]
-    public class SettingsPropertyWrongTypeException : Exception
-    {
-        public SettingsPropertyWrongTypeException ()
-            : base ()
-        { }
+	[Serializable]
+	public class SettingsPropertyWrongTypeException : Exception
+	{
+		public SettingsPropertyWrongTypeException ()
+			: base ()
+		{ }
 
-        public SettingsPropertyWrongTypeException (String message)
-            : base (message)
-        { }
+		public SettingsPropertyWrongTypeException (String message)
+			: base (message)
+		{ }
 
-        protected SettingsPropertyWrongTypeException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        { }
+		protected SettingsPropertyWrongTypeException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{ }
 
-        public SettingsPropertyWrongTypeException (String message, Exception innerException)
-            : base (message, innerException)
-        { }
-    }
+		public SettingsPropertyWrongTypeException (String message, Exception innerException)
+			: base (message, innerException)
+		{ }
+	}
 
 }
 

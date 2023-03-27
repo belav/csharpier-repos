@@ -3,9 +3,9 @@
 
 using System;
 public class PerformanceTest2 {
-    public static void Main () {
-        uint j, k;
-        j = 0;
-        k = ((byte) 1 << (7 - j % 8));
-    }
+	public static void Main () {
+		uint j, k;
+		j = 0;
+		k = ((byte) 1 << (7 - j % 8));
+	}
 }

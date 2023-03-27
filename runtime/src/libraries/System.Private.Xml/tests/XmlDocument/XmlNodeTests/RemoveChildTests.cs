@@ -197,7 +197,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void Text_Comment_CDATA()
         {
-            var xml = @"<TMC>text<!-- comments --><![CDATA[ &lt; &amp; <tag> < ! > & </tag>      ]]></TMC>";
+            var xml = @"<TMC>text<!-- comments --><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></TMC>";
 
             foreach (var nodeType in s_XmlNodeTypes)
                 DeleteNonTextNodeBase(xml, InsertType.InsertBefore, nodeType);
@@ -206,7 +206,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void Text_Comment_SignificantWhitespace()
         {
-            var xml = @"<TCS xml:space=""preserve"">text<!-- comments -->       </TCS>";
+            var xml = @"<TCS xml:space=""preserve"">text<!-- comments -->   	</TCS>";
 
             foreach (var nodeType in s_XmlNodeTypes)
                 DeleteNonTextNodeBase(xml, InsertType.InsertBefore, nodeType);
@@ -245,7 +245,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void SignificantWhitespace_Element_SignificantWhitespace()
         {
-            var xml = @" <SES xml:space=""preserve"">     <E/>        </SES>";
+            var xml = @" <SES xml:space=""preserve""> 	<E/>		</SES>";
 
             foreach (var nodeType in s_XmlNodeTypes)
                 DeleteNonTextNodeBase(xml, InsertType.InsertAfter, nodeType);
@@ -254,7 +254,7 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void CDATA_Element_CDATA()
         {
-            var xml = @"<CEC><![CDATA[ &lt; &amp; <tag> < ! > & </tag>      ]]><E/><![CDATA[ &lt; &amp; <tag> < ! > & </tag>      ]]></CEC>";
+            var xml = @"<CEC><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]><E/><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></CEC>";
 
             foreach (var nodeType in s_XmlNodeTypes)
                 DeleteNonTextNodeBase(xml, InsertType.InsertAfter, nodeType);
@@ -400,7 +400,7 @@ namespace System.Xml.XmlDocumentTests
             switch (nodeType)
             {
                 case XmlNodeType.CDATA:
-                    return doc.CreateCDataSection(@"&lt; &amp; <tag> < ! > & </tag>      ");
+                    return doc.CreateCDataSection(@"&lt; &amp; <tag> < ! > & </tag> 	 ");
                 case XmlNodeType.Comment:
                     return doc.CreateComment(@"comment");
                 case XmlNodeType.Element:
@@ -408,9 +408,9 @@ namespace System.Xml.XmlDocumentTests
                 case XmlNodeType.Text:
                     return doc.CreateTextNode("text");
                 case XmlNodeType.Whitespace:
-                    return doc.CreateWhitespace(@"      ");
+                    return doc.CreateWhitespace(@"	  ");
                 case XmlNodeType.SignificantWhitespace:
-                    return doc.CreateSignificantWhitespace("    ");
+                    return doc.CreateSignificantWhitespace("	");
                 default:
                     throw new ArgumentException("Wrong XmlNodeType: '" + nodeType + "'");
             }

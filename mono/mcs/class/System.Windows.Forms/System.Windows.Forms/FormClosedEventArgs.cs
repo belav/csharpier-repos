@@ -23,26 +23,26 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public class FormClosedEventArgs : EventArgs
-    {
-        private CloseReason close_reason;
+	public class FormClosedEventArgs : EventArgs
+	{
+		private CloseReason close_reason;
 
-        #region Public Constructors
-        public FormClosedEventArgs (CloseReason closeReason)
-        {
-            this.close_reason = closeReason;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public FormClosedEventArgs (CloseReason closeReason)
+		{
+			this.close_reason = closeReason;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public CloseReason CloseReason {
-            get { return this.close_reason; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public CloseReason CloseReason {
+			get { return this.close_reason; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

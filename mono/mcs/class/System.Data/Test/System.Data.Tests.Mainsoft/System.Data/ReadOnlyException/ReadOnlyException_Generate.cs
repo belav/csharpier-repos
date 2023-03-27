@@ -39,124 +39,124 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class ReadOnlyException_Generate : GHTBase
 {
-    [Test] public void Main()
-    {
-        ReadOnlyException_Generate tc = new ReadOnlyException_Generate();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("ReadOnlyException");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		ReadOnlyException_Generate tc = new ReadOnlyException_Generate();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("ReadOnlyException");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        Exception tmpEx = new Exception() ;
+	public void run()
+	{
+		Exception exp = null;
+		Exception tmpEx = new Exception() ;
 
-        DataTable tbl = GHTUtils.DataProvider.CreateParentDataTable();
-        tbl.Columns[0].ReadOnly = true;
+		DataTable tbl = GHTUtils.DataProvider.CreateParentDataTable();
+		tbl.Columns[0].ReadOnly = true;
 
-        //chaeck for int column
-        try
-        {
-            BeginCase("ReadOnlyException - EndEdit");
-            //tbl.Rows[0].BeginEdit();   // this throw an exception but according to MSDN it shouldn't !!!
-            //tbl.Rows[0][0] = 99 ;
-            try
-            {
-                tbl.Rows[0][0] = 99 ;
-                //tbl.Rows[0].EndEdit();
-            }
-            catch (ReadOnlyException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(ReadOnlyException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-        try
-        {
-            BeginCase("ReadOnlyException - ItemArray");
-            try
-            {
-                tbl.Rows[0].ItemArray = new object[] {99,"value","value"};
-            }
-            catch (ReadOnlyException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(ReadOnlyException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-        //chaeck for string column
-        tbl.Columns[0].ReadOnly = false;
-        tbl.Columns[1].ReadOnly = true;
-        
-        try
-        {
-            BeginCase("ReadOnlyException - EndEdit");
-            //tbl.Rows[0].BeginEdit();   // this throw an exception but according to MSDN it shouldn't !!!
-            //tbl.Rows[0][0] = 99 ;
-            try
-            {
-                tbl.Rows[0][1] = "NewValue" ;
-                //tbl.Rows[0].EndEdit();
-            }
-            catch (ReadOnlyException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(ReadOnlyException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		//chaeck for int column
+		try
+		{
+			BeginCase("ReadOnlyException - EndEdit");
+			//tbl.Rows[0].BeginEdit();   // this throw an exception but according to MSDN it shouldn't !!!
+			//tbl.Rows[0][0] = 99 ;
+			try
+			{
+				tbl.Rows[0][0] = 99 ;
+				//tbl.Rows[0].EndEdit();
+			}
+			catch (ReadOnlyException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(ReadOnlyException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		try
+		{
+			BeginCase("ReadOnlyException - ItemArray");
+			try
+			{
+				tbl.Rows[0].ItemArray = new object[] {99,"value","value"};
+			}
+			catch (ReadOnlyException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(ReadOnlyException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		//chaeck for string column
+		tbl.Columns[0].ReadOnly = false;
+		tbl.Columns[1].ReadOnly = true;
+		
+		try
+		{
+			BeginCase("ReadOnlyException - EndEdit");
+			//tbl.Rows[0].BeginEdit();   // this throw an exception but according to MSDN it shouldn't !!!
+			//tbl.Rows[0][0] = 99 ;
+			try
+			{
+				tbl.Rows[0][1] = "NewValue" ;
+				//tbl.Rows[0].EndEdit();
+			}
+			catch (ReadOnlyException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(ReadOnlyException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("ReadOnlyException - ItemArray");
-            try
-            {
-                tbl.Rows[0].ItemArray = new object[] {99,"value","value"};
-            }
-            catch (ReadOnlyException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(ReadOnlyException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-    }
+		try
+		{
+			BeginCase("ReadOnlyException - ItemArray");
+			try
+			{
+				tbl.Rows[0].ItemArray = new object[] {99,"value","value"};
+			}
+			catch (ReadOnlyException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(ReadOnlyException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+	}
 }
 }

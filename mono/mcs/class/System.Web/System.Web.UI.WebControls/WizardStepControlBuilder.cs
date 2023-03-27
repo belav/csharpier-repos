@@ -31,8 +31,8 @@
 
 namespace System.Web.UI.WebControls
 {
-    public sealed class WizardStepControlBuilder: ControlBuilder
-    {
-    } 
+	public sealed class WizardStepControlBuilder: ControlBuilder
+	{
+	} 
 }
 

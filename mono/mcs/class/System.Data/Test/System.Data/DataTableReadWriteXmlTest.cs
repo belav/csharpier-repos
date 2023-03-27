@@ -1,4 +1,4 @@
-// Author:
+﻿// Author:
 //   Patrick Earl <mono@patearl.net>
 //
 // Copyright (c) 2006

@@ -1,4 +1,4 @@
-namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding {
     using System;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]

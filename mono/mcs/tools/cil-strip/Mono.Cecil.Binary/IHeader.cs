@@ -28,7 +28,7 @@
 
 namespace Mono.Cecil.Binary {
 
-    internal interface IHeader {
-        void SetDefaultValues ();
-    }
+	internal interface IHeader {
+		void SetDefaultValues ();
+	}
 }

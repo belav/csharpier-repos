@@ -31,8 +31,8 @@ using Microsoft.Build.BuildEngine;
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.BuildEngine {
-    [TestFixture]
-    public class BuildChooseTest {
+	[TestFixture]
+	public class BuildChooseTest {
 
         [Test]
         public void TestEmptyWhen () {
@@ -41,20 +41,20 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
             string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == ''"">
                             
                             <!-- A user comment is allowed here -->
 
-                            <ItemGroup>
-                                <A Include='a' />
-                            </ItemGroup>
+					        <ItemGroup>
+						        <A Include='a' />
+					        </ItemGroup>
                             
                         </When>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
             engine = new Engine (Consts.BinPath);
             project = engine.CreateNewProject ();
@@ -73,16 +73,16 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
             string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == 'False'"">
-                            <ItemGroup>
-                                <A Include='a' />
-                            </ItemGroup>
+					        <ItemGroup>
+						        <A Include='a' />
+					        </ItemGroup>
                         </When>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
             engine = new Engine (Consts.BinPath);
             project = engine.CreateNewProject ();
@@ -101,21 +101,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
             string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == ''"">
-                            <ItemGroup>
-                                <A Include='a' />
-                            </ItemGroup>
+					        <ItemGroup>
+						        <A Include='a' />
+					        </ItemGroup>
                         </When>
                         <When Condition=""'$(Configuration)' == ''"">
-                            <ItemGroup>
-                                <B Include='a' />
-                            </ItemGroup>
+					        <ItemGroup>
+						        <B Include='a' />
+					        </ItemGroup>
                         </When>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
             engine = new Engine (Consts.BinPath);
             project = engine.CreateNewProject ();
@@ -136,21 +136,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
             string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == 'False'"">
-                            <ItemGroup>
-                                <A Include='a' />
-                            </ItemGroup>
+				            <ItemGroup>
+					            <A Include='a' />
+				            </ItemGroup>
                         </When>
                         <When Condition=""'$(Configuration)' == 'False'"">
-                            <ItemGroup>
-                                <B Include='a' />
-                            </ItemGroup>
+				            <ItemGroup>
+					            <B Include='a' />
+				            </ItemGroup>
                         </When>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
             engine = new Engine (Consts.BinPath);
             project = engine.CreateNewProject ();
@@ -171,16 +171,16 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 
             // a <Choose> requires at least one <When>
             string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <Otherwise>
-                            <ItemGroup>
-                                <A Include='a' />
-                            </ItemGroup>
+					        <ItemGroup>
+						        <A Include='a' />
+					        </ItemGroup>
                         </Otherwise>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
             engine = new Engine (Consts.BinPath);
             project = engine.CreateNewProject ();
@@ -196,16 +196,16 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 
             // a <When> requires a Condition
             string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When>
-                            <ItemGroup>
-                                <A Include='a' />
-                            </ItemGroup>
+					        <ItemGroup>
+						        <A Include='a' />
+					        </ItemGroup>
                         </When>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
             engine = new Engine (Consts.BinPath);
             project = engine.CreateNewProject ();
@@ -219,21 +219,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
             string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == ''"">
-                            <ItemGroup>
-                                <A Include='a' />
-                            </ItemGroup>
+					        <ItemGroup>
+						        <A Include='a' />
+					        </ItemGroup>
                         </When>
                         <Otherwise>
-                            <ItemGroup>
-                                <B Include='a' />
-                            </ItemGroup>
+					        <ItemGroup>
+						        <B Include='a' />
+					        </ItemGroup>
                         </Otherwise>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
             engine = new Engine (Consts.BinPath);
             project = engine.CreateNewProject ();
@@ -253,21 +253,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             BuildItemGroup[] groups = new BuildItemGroup[1];
 
             string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == 'False'"">
-                            <ItemGroup>
-                                <A Include='a' />
-                            </ItemGroup>
+					        <ItemGroup>
+						        <A Include='a' />
+					        </ItemGroup>
                         </When>
                         <Otherwise>
-                            <ItemGroup>
-                                <B Include='a' />
-                            </ItemGroup>
+					        <ItemGroup>
+						        <B Include='a' />
+					        </ItemGroup>
                         </Otherwise>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
             engine = new Engine (Consts.BinPath);
             project = engine.CreateNewProject ();
@@ -279,161 +279,161 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             Assert.AreEqual ("B", project.EvaluatedItems[0].Name, "A4");
             Assert.AreEqual (1, project.EvaluatedItemsIgnoringCondition.Count, "A5");
         }
-        
-        [Test]
+		
+		[Test]
         public void ChooseWhenPropertyGroup () {
             
-            string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+			string documentString = @"
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == ''"">
-                            <PropertyGroup>
-                                <Foo>Bar</Foo>
-                            </PropertyGroup>
+					        <PropertyGroup>
+						        <Foo>Bar</Foo>
+					        </PropertyGroup>
                         </When>
                         <Otherwise>
-                            <PropertyGroup>
-                                <Foo>Baz</Foo>
-                            </PropertyGroup>
+					        <PropertyGroup>
+						        <Foo>Baz</Foo>
+					        </PropertyGroup>
                         </Otherwise>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
-            Engine engine = new Engine (Consts.BinPath);
+			Engine engine = new Engine (Consts.BinPath);
             Project project = engine.CreateNewProject ();
             project.LoadXml (documentString);
-            
-            Assert.AreEqual ("Bar", project.GetEvaluatedProperty ("Foo"), "A1");
+			
+			Assert.AreEqual ("Bar", project.GetEvaluatedProperty ("Foo"), "A1");
         }
-        
-        [Test]
+		
+		[Test]
         public void ChooseOtherwisePropertyGroup () {
             
-            string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+			string documentString = @"
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == 'dummy'"">
-                            <PropertyGroup>
-                                <Foo>Bar</Foo>
-                            </PropertyGroup>
+					        <PropertyGroup>
+						        <Foo>Bar</Foo>
+					        </PropertyGroup>
                         </When>
                         <Otherwise>
-                            <PropertyGroup>
-                                <Foo>Baz</Foo>
-                            </PropertyGroup>
+					        <PropertyGroup>
+						        <Foo>Baz</Foo>
+					        </PropertyGroup>
                         </Otherwise>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
-            Engine engine = new Engine (Consts.BinPath);
+			Engine engine = new Engine (Consts.BinPath);
             Project project = engine.CreateNewProject ();
             project.LoadXml (documentString);
-            
-            Assert.AreEqual ("Baz", project.GetEvaluatedProperty ("Foo"), "A1");
+			
+			Assert.AreEqual ("Baz", project.GetEvaluatedProperty ("Foo"), "A1");
         }
-        
-        [Test]
+		
+		[Test]
         public void NestedChooseInOtherwise () {
             
-            string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+			string documentString = @"
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Choose>
                         <When Condition=""'$(Configuration)' == 'dummy'"">
-                            <PropertyGroup>
-                                <Foo>Bar</Foo>
-                            </PropertyGroup>
+					        <PropertyGroup>
+						        <Foo>Bar</Foo>
+					        </PropertyGroup>
                         </When>
                         <Otherwise>
-                            <Choose>
-                                <When Condition="" 'foo' == 'bar' "">
-                                    <PropertyGroup>
-                                        <Foo>Baz</Foo>
-                                    </PropertyGroup>
-                                </When>
-                                <Otherwise>
-                                    <PropertyGroup>
-                                        <Foo>Baz</Foo>
-                                    </PropertyGroup>
-                                </Otherwise>
-                            </Choose>
+							<Choose>
+								<When Condition="" 'foo' == 'bar' "">
+									<PropertyGroup>
+										<Foo>Baz</Foo>
+									</PropertyGroup>
+								</When>
+								<Otherwise>
+									<PropertyGroup>
+										<Foo>Baz</Foo>
+									</PropertyGroup>
+								</Otherwise>
+							</Choose>
                         </Otherwise>
                     </Choose>
-                </Project>
-            ";
+				</Project>
+			";
 
-            Engine engine = new Engine (Consts.BinPath);
+			Engine engine = new Engine (Consts.BinPath);
             Project project = engine.CreateNewProject ();
             project.LoadXml (documentString);
-            
-            Assert.AreEqual ("Baz", project.GetEvaluatedProperty ("Foo"), "A1");
+			
+			Assert.AreEqual ("Baz", project.GetEvaluatedProperty ("Foo"), "A1");
         }
-        
-        
-        [Test]
-        public void UndefinedPropertyInExistsCondition()
-        {
-            string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
-                    <PropertyGroup>
-                        <Foo>Bar</Foo>
-                    </PropertyGroup>
-                    <Choose>
-                        <When Condition = "" '$(teamcity_dotnet_nunitlauncher_msbuild_task)' == '' "" >
-                            <Choose>
-                                <When Condition=""Exists('$(UndefinedProperty)\Foo\Bar')"">
-                                    <PropertyGroup>
-                                        <Exists>yes</Exists>
-                                    </PropertyGroup>
-                                </When>
-                                <Otherwise>
-                                    <PropertyGroup>
-                                        <Exists>no</Exists>
-                                    </PropertyGroup>
-                                </Otherwise>
-                            </Choose>
-                        </When>
-                    </Choose>
-                </Project>
-            ";
+		
+		
+		[Test]
+		public void UndefinedPropertyInExistsCondition()
+		{
+			string documentString = @"
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+					<PropertyGroup>
+						<Foo>Bar</Foo>
+					</PropertyGroup>
+					<Choose>
+						<When Condition = "" '$(teamcity_dotnet_nunitlauncher_msbuild_task)' == '' "" >
+							<Choose>
+								<When Condition=""Exists('$(UndefinedProperty)\Foo\Bar')"">
+									<PropertyGroup>
+										<Exists>yes</Exists>
+									</PropertyGroup>
+								</When>
+								<Otherwise>
+									<PropertyGroup>
+										<Exists>no</Exists>
+									</PropertyGroup>
+								</Otherwise>
+							</Choose>
+						</When>
+					</Choose>
+				</Project>
+			";
 
-            Engine engine = new Engine (Consts.BinPath);
+			Engine engine = new Engine (Consts.BinPath);
             Project project = engine.CreateNewProject ();
             project.LoadXml (documentString);
-            
-            Assert.AreEqual ("no", project.GetEvaluatedProperty ("Exists"), "A1");
-        }
+			
+			Assert.AreEqual ("no", project.GetEvaluatedProperty ("Exists"), "A1");
+		}
 
-        [Test]
-        public void EmptyExistsCondition()
-        {
-            string documentString = @"
-                <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
-                    <Choose>
-                        <When Condition=""Exists('$(UndefinedProperty)')"">
-                            <PropertyGroup>
-                                <Exists>yes</Exists>
-                            </PropertyGroup>
-                        </When>
-                        <Otherwise>
-                            <PropertyGroup>
-                                <Exists>no</Exists>
-                            </PropertyGroup>
-                        </Otherwise>
-                    </Choose>
-                </Project>
-            ";
+		[Test]
+		public void EmptyExistsCondition()
+		{
+			string documentString = @"
+				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+					<Choose>
+						<When Condition=""Exists('$(UndefinedProperty)')"">
+							<PropertyGroup>
+								<Exists>yes</Exists>
+							</PropertyGroup>
+						</When>
+						<Otherwise>
+							<PropertyGroup>
+								<Exists>no</Exists>
+							</PropertyGroup>
+						</Otherwise>
+					</Choose>
+				</Project>
+			";
 
-            Engine engine = new Engine (Consts.BinPath);
-            Project project = engine.CreateNewProject ();
-            //assign a real filename to be used as base path for the Exists
-            project.FullFileName = typeof (BuildChooseTest).Assembly.Location;
+			Engine engine = new Engine (Consts.BinPath);
+			Project project = engine.CreateNewProject ();
+			//assign a real filename to be used as base path for the Exists
+			project.FullFileName = typeof (BuildChooseTest).Assembly.Location;
 
-            project.LoadXml (documentString);
+			project.LoadXml (documentString);
 
-            Assert.AreEqual ("no", project.GetEvaluatedProperty ("Exists"), "A1");
-        }
+			Assert.AreEqual ("no", project.GetEvaluatedProperty ("Exists"), "A1");
+		}
         
         [Test]
         public void EvaluationOrder ()
@@ -464,5 +464,5 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             project.LoadXml (documentString);
             Assert.AreEqual ("Bar", project.GetEvaluatedProperty ("Test"));
         }
-    }
+	}
 }

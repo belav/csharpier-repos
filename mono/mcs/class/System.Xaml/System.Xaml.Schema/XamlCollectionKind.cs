@@ -25,11 +25,11 @@ using System.Collections.Generic;
 
 namespace System.Xaml.Schema
 {
-    public enum XamlCollectionKind : byte
-    {
-        None,
-        Collection,
-        Dictionary,
-        Array,
-    }
+	public enum XamlCollectionKind : byte
+	{
+		None,
+		Collection,
+		Dictionary,
+		Array,
+	}
 }

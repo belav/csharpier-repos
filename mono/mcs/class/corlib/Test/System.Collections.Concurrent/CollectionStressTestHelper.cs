@@ -39,89 +39,89 @@ using NUnit.Framework.Constraints;
 
 namespace MonoTests.System.Collections.Concurrent
 {
-    public enum CheckOrderingType {
-        InOrder,
-        Reversed,
-        DontCare
-    }
-    
-    public static class CollectionStressTestHelper
-    {
-        public static void AddStressTest (IProducerConsumerCollection<int> coll)
-        {
-            ParallelTestHelper.Repeat (delegate {
-                int amount = -1;
-                const int count = 10;
-                const int threads = 5;
-                
-                ParallelTestHelper.ParallelStressTest (coll, (q) => {
-                    int t = Interlocked.Increment (ref amount);
-                    for (int i = 0; i < count; i++)
-                        coll.TryAdd (t);
-                }, threads);
-                
-                Assert.AreEqual (threads * count, coll.Count, "#-1");
-                int[] values = new int[threads];
-                int temp;
-                while (coll.TryTake (out temp)) {
-                    values[temp]++;
-                }
-                
-                for (int i = 0; i < threads; i++)
-                    Assert.AreEqual (count, values[i], "#" + i);
-            });
-        }
-        
-        public static void RemoveStressTest (IProducerConsumerCollection<int> coll, CheckOrderingType order)
-        {
-            ParallelTestHelper.Repeat (delegate {
-                
-                const int count = 10;
-                const int threads = 5;
-                const int delta = 5;
-                
-                for (int i = 0; i < (count + delta) * threads; i++)
-                    while (!coll.TryAdd (i));
-                
-                bool state = true;
-                
-                Assert.AreEqual ((count + delta) * threads, coll.Count, "#0");
-                
-                ParallelTestHelper.ParallelStressTest (coll, (q) => {
-                    bool s = true;
-                    int t;
-                    
-                    for (int i = 0; i < count; i++) {
-                        s &= coll.TryTake (out t);
-                        // try again in case it was a transient failure
-                        if (!s && coll.TryTake (out t))
-                            s = true;
-                    }
-                    
-                    if (!s)
-                        state = false;
-                }, threads);
-                
-                Assert.IsTrue (state, "#1");
-                Assert.AreEqual (delta * threads, coll.Count, "#2");
-                
-                string actual = string.Empty;
-                int temp;
-                while (coll.TryTake (out temp)) {
-                    actual += temp.ToString ();;
-                }
-                
-                IEnumerable<int> range = Enumerable.Range (order == CheckOrderingType.Reversed ? 0 : count * threads, delta * threads);
-                if (order == CheckOrderingType.Reversed)
-                    range = range.Reverse ();
-                
-                string expected = range.Aggregate (string.Empty, (acc, v) => acc + v);
-                
-                if (order == CheckOrderingType.DontCare)
-                    Assert.That (actual, new CollectionEquivalentConstraint (expected), "#3");
-                else 
-                    Assert.AreEqual (expected, actual, "#3");
-            }, 10);
-        }
-    }
+	public enum CheckOrderingType {
+		InOrder,
+		Reversed,
+		DontCare
+	}
+	
+	public static class CollectionStressTestHelper
+	{
+		public static void AddStressTest (IProducerConsumerCollection<int> coll)
+		{
+			ParallelTestHelper.Repeat (delegate {
+				int amount = -1;
+				const int count = 10;
+				const int threads = 5;
+				
+				ParallelTestHelper.ParallelStressTest (coll, (q) => {
+					int t = Interlocked.Increment (ref amount);
+					for (int i = 0; i < count; i++)
+						coll.TryAdd (t);
+				}, threads);
+				
+				Assert.AreEqual (threads * count, coll.Count, "#-1");
+				int[] values = new int[threads];
+				int temp;
+				while (coll.TryTake (out temp)) {
+					values[temp]++;
+				}
+				
+				for (int i = 0; i < threads; i++)
+					Assert.AreEqual (count, values[i], "#" + i);
+			});
+		}
+		
+		public static void RemoveStressTest (IProducerConsumerCollection<int> coll, CheckOrderingType order)
+		{
+			ParallelTestHelper.Repeat (delegate {
+				
+				const int count = 10;
+				const int threads = 5;
+				const int delta = 5;
+				
+				for (int i = 0; i < (count + delta) * threads; i++)
+					while (!coll.TryAdd (i));
+				
+				bool state = true;
+				
+				Assert.AreEqual ((count + delta) * threads, coll.Count, "#0");
+				
+				ParallelTestHelper.ParallelStressTest (coll, (q) => {
+					bool s = true;
+					int t;
+					
+					for (int i = 0; i < count; i++) {
+						s &= coll.TryTake (out t);
+						// try again in case it was a transient failure
+						if (!s && coll.TryTake (out t))
+							s = true;
+					}
+					
+					if (!s)
+						state = false;
+				}, threads);
+				
+				Assert.IsTrue (state, "#1");
+				Assert.AreEqual (delta * threads, coll.Count, "#2");
+				
+				string actual = string.Empty;
+				int temp;
+				while (coll.TryTake (out temp)) {
+					actual += temp.ToString ();;
+				}
+				
+				IEnumerable<int> range = Enumerable.Range (order == CheckOrderingType.Reversed ? 0 : count * threads, delta * threads);
+				if (order == CheckOrderingType.Reversed)
+					range = range.Reverse ();
+				
+				string expected = range.Aggregate (string.Empty, (acc, v) => acc + v);
+				
+				if (order == CheckOrderingType.DontCare)
+					Assert.That (actual, new CollectionEquivalentConstraint (expected), "#3");
+				else 
+					Assert.AreEqual (expected, actual, "#3");
+			}, 10);
+		}
+	}
 }

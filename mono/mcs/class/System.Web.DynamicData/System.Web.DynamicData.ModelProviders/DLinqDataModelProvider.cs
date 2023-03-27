@@ -2,7 +2,7 @@
 // DLinqDataModelProvider.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008-2009 Novell Inc. http://novell.com
 //
@@ -41,39 +41,39 @@ using DMetaTable = System.Data.Linq.Mapping.MetaTable;
 
 namespace System.Web.DynamicData.ModelProviders
 {
-    class DLinqDataModelProvider : DataModelProvider
-    {
-        Func<object> factory;
-        DMetaModel model;
+	class DLinqDataModelProvider : DataModelProvider
+	{
+		Func<object> factory;
+		DMetaModel model;
 
-        public DLinqDataModelProvider (Func<object> factory)
-        {
-            this.factory = factory;
-            Type type = CreateContext ().GetType ();
+		public DLinqDataModelProvider (Func<object> factory)
+		{
+			this.factory = factory;
+			Type type = CreateContext ().GetType ();
 
-            if (!typeof (DataContext).IsAssignableFrom (type))
-                throw new ArgumentException (String.Format ("Type '{0}' is not supported as data context factory", type));
+			if (!typeof (DataContext).IsAssignableFrom (type))
+				throw new ArgumentException (String.Format ("Type '{0}' is not supported as data context factory", type));
 
-            this.factory = factory;
+			this.factory = factory;
 
-            model = new AttributeMappingSource ().GetModel (type);
-            ContextType = model.ContextType;
+			model = new AttributeMappingSource ().GetModel (type);
+			ContextType = model.ContextType;
 
-            var l = new List<TableProvider> ();
-            foreach (var m in model.GetTables ())
-                l.Add (new DLinqTableProvider (this, m));
-            tables = new ReadOnlyCollection<TableProvider> (l);
-        }
+			var l = new List<TableProvider> ();
+			foreach (var m in model.GetTables ())
+				l.Add (new DLinqTableProvider (this, m));
+			tables = new ReadOnlyCollection<TableProvider> (l);
+		}
 
-        ReadOnlyCollection<TableProvider> tables;
+		ReadOnlyCollection<TableProvider> tables;
 
-        public override ReadOnlyCollection<TableProvider> Tables {
-            get { return tables; }
-        }
+		public override ReadOnlyCollection<TableProvider> Tables {
+			get { return tables; }
+		}
 
-        public override object CreateContext ()
-        {
-            return factory ();
-        }
-    }
+		public override object CreateContext ()
+		{
+			return factory ();
+		}
+	}
 }

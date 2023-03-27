@@ -2,7 +2,7 @@
 // ServiceModelEnhancedConfigurationElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,24 +54,24 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public abstract class ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement>
-         : ServiceModelConfigurationElementCollection<TConfigurationElement>,  ICollection,  IEnumerable
-        where TConfigurationElement : ConfigurationElement, new()
-    {
-        internal ServiceModelEnhancedConfigurationElementCollection ()
-        {
-        }
+	public abstract class ServiceModelEnhancedConfigurationElementCollection<TConfigurationElement>
+		 : ServiceModelConfigurationElementCollection<TConfigurationElement>,  ICollection,  IEnumerable
+		where TConfigurationElement : ConfigurationElement, new()
+	{
+		internal ServiceModelEnhancedConfigurationElementCollection ()
+		{
+		}
 
-        // Properties
-        [MonoTODO]
-        protected override bool ThrowOnDuplicate {
-            get { return base.ThrowOnDuplicate; }
-        }
+		// Properties
+		[MonoTODO]
+		protected override bool ThrowOnDuplicate {
+			get { return base.ThrowOnDuplicate; }
+		}
 
-        [MonoTODO]
-        protected override void BaseAdd (ConfigurationElement element) {
-            base.BaseAdd (element);
-        }
-    }
+		[MonoTODO]
+		protected override void BaseAdd (ConfigurationElement element) {
+			base.BaseAdd (element);
+		}
+	}
 
 }

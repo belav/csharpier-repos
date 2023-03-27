@@ -34,130 +34,130 @@ using System.Web.Configuration;
 
 namespace Mono.Web.Util
 {
-    internal class MembershipSectionMapper : ISectionSettingsMapper
-    {
-        public object MapSection (object _section, List <SettingsMappingWhat> whats)
-        {
-            MembershipSection section = _section as MembershipSection;
-            if (section == null)
-                return _section;
-            
-            List <SettingsMappingWhatContents> contents;
+	internal class MembershipSectionMapper : ISectionSettingsMapper
+	{
+		public object MapSection (object _section, List <SettingsMappingWhat> whats)
+		{
+			MembershipSection section = _section as MembershipSection;
+			if (section == null)
+				return _section;
+			
+			List <SettingsMappingWhatContents> contents;
 
-            foreach (SettingsMappingWhat what in whats) {
-                contents = what.Contents;
-                if (contents == null || contents.Count == 0)
-                    continue;
+			foreach (SettingsMappingWhat what in whats) {
+				contents = what.Contents;
+				if (contents == null || contents.Count == 0)
+					continue;
 
-                foreach (SettingsMappingWhatContents item in contents) {
-                    switch (item.Operation) {
-                        case SettingsMappingWhatOperation.Add:
-                            ProcessAdd (section, item);
-                            break;
+				foreach (SettingsMappingWhatContents item in contents) {
+					switch (item.Operation) {
+						case SettingsMappingWhatOperation.Add:
+							ProcessAdd (section, item);
+							break;
 
-                        case SettingsMappingWhatOperation.Clear:
-                            ProcessClear (section, item);
-                            break;
+						case SettingsMappingWhatOperation.Clear:
+							ProcessClear (section, item);
+							break;
 
-                        case SettingsMappingWhatOperation.Replace:
-                            ProcessReplace (section, item);
-                            break;
+						case SettingsMappingWhatOperation.Replace:
+							ProcessReplace (section, item);
+							break;
 
-                        case SettingsMappingWhatOperation.Remove:
-                            ProcessRemove (section, item);
-                            break;
-                    }
-                }
-            }
-                
-            return section;
-        }
+						case SettingsMappingWhatOperation.Remove:
+							ProcessRemove (section, item);
+							break;
+					}
+				}
+			}
+				
+			return section;
+		}
 
-        bool GetCommonAttributes (SettingsMappingWhatContents how, out string name, out string type)
-        {
-            name = type = null;
-            
-            Dictionary <string, string> attrs = how.Attributes;
-            
-            if (attrs == null || attrs.Count == 0)
-                return false;
+		bool GetCommonAttributes (SettingsMappingWhatContents how, out string name, out string type)
+		{
+			name = type = null;
+			
+			Dictionary <string, string> attrs = how.Attributes;
+			
+			if (attrs == null || attrs.Count == 0)
+				return false;
 
-            if (!attrs.TryGetValue ("name", out name))
-                return false;
+			if (!attrs.TryGetValue ("name", out name))
+				return false;
 
-            if (String.IsNullOrEmpty (name))
-                return false;
+			if (String.IsNullOrEmpty (name))
+				return false;
 
-            attrs.TryGetValue ("type", out type);
+			attrs.TryGetValue ("type", out type);
 
-            return true;
-        }
+			return true;
+		}
 
-        void SetProviderProperties (SettingsMappingWhatContents how, ProviderSettings prov)
-        {
-            Dictionary <string, string> attrs = how.Attributes;
-            if (attrs == null || attrs.Count == 0)
-                return;
+		void SetProviderProperties (SettingsMappingWhatContents how, ProviderSettings prov)
+		{
+			Dictionary <string, string> attrs = how.Attributes;
+			if (attrs == null || attrs.Count == 0)
+				return;
 
-            string key;
-            foreach (KeyValuePair <string, string> kvp in attrs) {
-                key = kvp.Key;
-                if (key == "name")
-                    continue;
-                if (key == "type") {
-                    prov.Type = kvp.Value;
-                    continue;
-                }
-                prov.Parameters [key] = kvp.Value;
-            }
-        }
-        
-        void ProcessAdd (MembershipSection section, SettingsMappingWhatContents how)
-        {
-            string name, type;
-            if (!GetCommonAttributes (how, out name, out type))
-                return;
+			string key;
+			foreach (KeyValuePair <string, string> kvp in attrs) {
+				key = kvp.Key;
+				if (key == "name")
+					continue;
+				if (key == "type") {
+					prov.Type = kvp.Value;
+					continue;
+				}
+				prov.Parameters [key] = kvp.Value;
+			}
+		}
+		
+		void ProcessAdd (MembershipSection section, SettingsMappingWhatContents how)
+		{
+			string name, type;
+			if (!GetCommonAttributes (how, out name, out type))
+				return;
 
-            ProviderSettingsCollection providers = section.Providers;
-            ProviderSettings provider = providers [name];
-            if (provider != null)
-                return;
+			ProviderSettingsCollection providers = section.Providers;
+			ProviderSettings provider = providers [name];
+			if (provider != null)
+				return;
 
-            ProviderSettings prov = new ProviderSettings (name, type);
-            SetProviderProperties (how, prov);
-            
-            providers.Add (prov);
-        }
+			ProviderSettings prov = new ProviderSettings (name, type);
+			SetProviderProperties (how, prov);
+			
+			providers.Add (prov);
+		}
 
-        void ProcessRemove (MembershipSection section, SettingsMappingWhatContents how)
-        {
-            string name, type;
-            if (!GetCommonAttributes (how, out name, out type))
-                return;
+		void ProcessRemove (MembershipSection section, SettingsMappingWhatContents how)
+		{
+			string name, type;
+			if (!GetCommonAttributes (how, out name, out type))
+				return;
 
-            ProviderSettingsCollection providers = section.Providers;
-            ProviderSettings provider = providers [name];
-            if (provider != null) {
-                if (provider.Type != type)
-                    return;
-                providers.Remove (name);
-            }
-        }
-        
-        void ProcessClear (MembershipSection section, SettingsMappingWhatContents how)
-        {
-            section.Providers.Clear ();
-        }
+			ProviderSettingsCollection providers = section.Providers;
+			ProviderSettings provider = providers [name];
+			if (provider != null) {
+				if (provider.Type != type)
+					return;
+				providers.Remove (name);
+			}
+		}
+		
+		void ProcessClear (MembershipSection section, SettingsMappingWhatContents how)
+		{
+			section.Providers.Clear ();
+		}
 
-        void ProcessReplace (MembershipSection section, SettingsMappingWhatContents how)
-        {
-            string name, type;
-            if (!GetCommonAttributes (how, out name, out type))
-                return;
+		void ProcessReplace (MembershipSection section, SettingsMappingWhatContents how)
+		{
+			string name, type;
+			if (!GetCommonAttributes (how, out name, out type))
+				return;
 
-            ProviderSettings provider = section.Providers [name];
-            if (provider != null)
-                SetProviderProperties (how, provider);
-        }
-    }
+			ProviderSettings provider = section.Providers [name];
+			if (provider != null)
+				SetProviderProperties (how, provider);
+		}
+	}
 }

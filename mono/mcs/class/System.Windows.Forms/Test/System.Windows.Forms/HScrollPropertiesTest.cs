@@ -23,7 +23,7 @@
 // Copyright (c) 2007 Jonathan Pobst
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System;
@@ -33,93 +33,93 @@ using System.Windows.Forms;
 
 namespace MonoTests.System.Windows.Forms
 {
-    [TestFixture]
-    public class HScrollPropertiesTests : TestHelper
-    {
-        [Test]
-        public void Constructor ()
-        {
-            ScrollableControl sc = new ScrollableControl ();
-            ScrollProperties sp = sc.HorizontalScroll;
+	[TestFixture]
+	public class HScrollPropertiesTests : TestHelper
+	{
+		[Test]
+		public void Constructor ()
+		{
+			ScrollableControl sc = new ScrollableControl ();
+			ScrollProperties sp = sc.HorizontalScroll;
 
-            Assert.AreEqual (true, sp.Enabled, "A1");
-            Assert.AreEqual (10, sp.LargeChange, "A2");
-            Assert.AreEqual (100, sp.Maximum, "A3");
-            Assert.AreEqual (0, sp.Minimum, "A4");
-            Assert.AreEqual (1, sp.SmallChange, "A5");
-            Assert.AreEqual (0, sp.Value, "A6");
-            Assert.AreEqual (false, sp.Visible, "A7");
-        }
+			Assert.AreEqual (true, sp.Enabled, "A1");
+			Assert.AreEqual (10, sp.LargeChange, "A2");
+			Assert.AreEqual (100, sp.Maximum, "A3");
+			Assert.AreEqual (0, sp.Minimum, "A4");
+			Assert.AreEqual (1, sp.SmallChange, "A5");
+			Assert.AreEqual (0, sp.Value, "A6");
+			Assert.AreEqual (false, sp.Visible, "A7");
+		}
 
-        [Test]
-        public void PropertyEnabled ()
-        {
-            ScrollableControl sc = new ScrollableControl ();
-            ScrollProperties sp = sc.HorizontalScroll;
+		[Test]
+		public void PropertyEnabled ()
+		{
+			ScrollableControl sc = new ScrollableControl ();
+			ScrollProperties sp = sc.HorizontalScroll;
 
-            sp.Enabled = false;
-            Assert.AreEqual (false, sp.Enabled, "B1");
-        }
+			sp.Enabled = false;
+			Assert.AreEqual (false, sp.Enabled, "B1");
+		}
 
-        [Test]
-        public void PropertyLargeChange ()
-        {
-            ScrollableControl sc = new ScrollableControl ();
-            ScrollProperties sp = sc.HorizontalScroll;
+		[Test]
+		public void PropertyLargeChange ()
+		{
+			ScrollableControl sc = new ScrollableControl ();
+			ScrollProperties sp = sc.HorizontalScroll;
 
-            sp.LargeChange = 25;
-            Assert.AreEqual (25, sp.LargeChange, "B1");
-        }
+			sp.LargeChange = 25;
+			Assert.AreEqual (25, sp.LargeChange, "B1");
+		}
 
-        [Test]
-        public void PropertyMaximum ()
-        {
-            ScrollableControl sc = new ScrollableControl ();
-            ScrollProperties sp = sc.HorizontalScroll;
+		[Test]
+		public void PropertyMaximum ()
+		{
+			ScrollableControl sc = new ScrollableControl ();
+			ScrollProperties sp = sc.HorizontalScroll;
 
-            sp.Maximum = 200;
-            Assert.AreEqual (200, sp.Maximum, "B1");
-        }
+			sp.Maximum = 200;
+			Assert.AreEqual (200, sp.Maximum, "B1");
+		}
 
-        [Test]
-        public void PropertyMinimum ()
-        {
-            ScrollableControl sc = new ScrollableControl ();
-            ScrollProperties sp = sc.HorizontalScroll;
+		[Test]
+		public void PropertyMinimum ()
+		{
+			ScrollableControl sc = new ScrollableControl ();
+			ScrollProperties sp = sc.HorizontalScroll;
 
-            sp.Minimum = 20;
-            Assert.AreEqual (20, sp.Minimum, "B1");
-        }
+			sp.Minimum = 20;
+			Assert.AreEqual (20, sp.Minimum, "B1");
+		}
 
-        [Test]
-        public void PropertySmallChange ()
-        {
-            ScrollableControl sc = new ScrollableControl ();
-            ScrollProperties sp = sc.HorizontalScroll;
+		[Test]
+		public void PropertySmallChange ()
+		{
+			ScrollableControl sc = new ScrollableControl ();
+			ScrollProperties sp = sc.HorizontalScroll;
 
-            sp.SmallChange = 5;
-            Assert.AreEqual (5, sp.SmallChange, "B1");
-        }
+			sp.SmallChange = 5;
+			Assert.AreEqual (5, sp.SmallChange, "B1");
+		}
 
-        [Test]
-        public void PropertyValue ()
-        {
-            ScrollableControl sc = new ScrollableControl ();
-            ScrollProperties sp = sc.HorizontalScroll;
-            
-            sp.Value = 10;
-            Assert.AreEqual (10, sp.Value, "B1");
-        }
+		[Test]
+		public void PropertyValue ()
+		{
+			ScrollableControl sc = new ScrollableControl ();
+			ScrollProperties sp = sc.HorizontalScroll;
+			
+			sp.Value = 10;
+			Assert.AreEqual (10, sp.Value, "B1");
+		}
 
-        [Test]
-        public void PropertyVisible ()
-        {
-            ScrollableControl sc = new ScrollableControl ();
-            ScrollProperties sp = sc.HorizontalScroll;
+		[Test]
+		public void PropertyVisible ()
+		{
+			ScrollableControl sc = new ScrollableControl ();
+			ScrollProperties sp = sc.HorizontalScroll;
 
-            sp.Visible = true;
-            Assert.AreEqual (true, sp.Visible, "B1");
-        }
+			sp.Visible = true;
+			Assert.AreEqual (true, sp.Visible, "B1");
+		}
 
-    }
+	}
 }

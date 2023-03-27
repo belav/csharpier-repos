@@ -2,7 +2,7 @@
 // Statement.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,14 +27,14 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    class Statement : Node {
-        public Statement (NodeType nodeType) : base (nodeType)
-        {
-        }
+	class Statement : Node {
+		public Statement (NodeType nodeType) : base (nodeType)
+		{
+		}
 
-        public override string ToString ()
-        {
-            return string.Format ("Statement({0})", NodeType);
-        }
-    }
+		public override string ToString ()
+		{
+			return string.Format ("Statement({0})", NodeType);
+		}
+	}
 }

@@ -4,9 +4,9 @@
 
 public unsafe class C
 {
-    public static void Main ()
-    {
-        dynamic d = 1;
-        int* i = d;
-    }
+	public static void Main ()
+	{
+		dynamic d = 1;
+		int* i = d;
+	}
 }

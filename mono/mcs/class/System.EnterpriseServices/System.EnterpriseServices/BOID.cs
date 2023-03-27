@@ -33,14 +33,14 @@ using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
 
-    [ComVisible(false)]
-    public struct BOID {
+	[ComVisible(false)]
+	public struct BOID {
 
-        #region Fields
+		#region Fields
 
-        [MarshalAs (UnmanagedType.ByValArray, SizeConst = 0x10)]
-        public byte[] rgb;
+		[MarshalAs (UnmanagedType.ByValArray, SizeConst = 0x10)]
+		public byte[] rgb;
 
-        #endregion // Fields
-    }
+		#endregion // Fields
+	}
 }

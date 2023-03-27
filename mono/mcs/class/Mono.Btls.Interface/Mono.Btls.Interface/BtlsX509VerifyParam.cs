@@ -1,4 +1,4 @@
-//
+﻿//
 // BtlsX509VerifyParam.cs
 //
 // Author:
@@ -26,66 +26,66 @@
 using System;
 namespace Mono.Btls.Interface
 {
-    public class BtlsX509VerifyParam : BtlsObject
-    {
-        new internal MonoBtlsX509VerifyParam Instance {
-            get { return (MonoBtlsX509VerifyParam)base.Instance; }
-        }
+	public class BtlsX509VerifyParam : BtlsObject
+	{
+		new internal MonoBtlsX509VerifyParam Instance {
+			get { return (MonoBtlsX509VerifyParam)base.Instance; }
+		}
 
-        internal BtlsX509VerifyParam (MonoBtlsX509VerifyParam param)
-            : base (param)
-        {
-        }
+		internal BtlsX509VerifyParam (MonoBtlsX509VerifyParam param)
+			: base (param)
+		{
+		}
 
-        public BtlsX509VerifyParam Copy ()
-        {
-            return new BtlsX509VerifyParam (Instance.Copy ());
-        }
+		public BtlsX509VerifyParam Copy ()
+		{
+			return new BtlsX509VerifyParam (Instance.Copy ());
+		}
 
-        public void SetName (string name)
-        {
-            Instance.SetName (name);
-        }
+		public void SetName (string name)
+		{
+			Instance.SetName (name);
+		}
 
-        public void SetHost (string name)
-        {
-            Instance.SetHost (name);
-        }
+		public void SetHost (string name)
+		{
+			Instance.SetHost (name);
+		}
 
-        public void AddHost (string name)
-        {
-            Instance.AddHost (name);
-        }
+		public void AddHost (string name)
+		{
+			Instance.AddHost (name);
+		}
 
-        public BtlsX509VerifyFlags GetFlags ()
-        {
-            return (BtlsX509VerifyFlags)Instance.GetFlags ();
-        }
+		public BtlsX509VerifyFlags GetFlags ()
+		{
+			return (BtlsX509VerifyFlags)Instance.GetFlags ();
+		}
 
-        public void SetFlags (BtlsX509VerifyFlags flags)
-        {
-            Instance.SetFlags ((ulong)flags);
-        }
+		public void SetFlags (BtlsX509VerifyFlags flags)
+		{
+			Instance.SetFlags ((ulong)flags);
+		}
 
-        public void SetPurpose (BtlsX509Purpose purpose)
-        {
-            Instance.SetPurpose ((MonoBtlsX509Purpose)purpose);
-        }
+		public void SetPurpose (BtlsX509Purpose purpose)
+		{
+			Instance.SetPurpose ((MonoBtlsX509Purpose)purpose);
+		}
 
-        public int GetDepth ()
-        {
-            return Instance.GetDepth ();
-        }
+		public int GetDepth ()
+		{
+			return Instance.GetDepth ();
+		}
 
-        public void SetDepth (int depth)
-        {
-            Instance.SetDepth (depth);
-        }
+		public void SetDepth (int depth)
+		{
+			Instance.SetDepth (depth);
+		}
 
-        public void SetTime (DateTime time)
-        {
-            Instance.SetTime (time);
-        }
-    }
+		public void SetTime (DateTime time)
+		{
+			Instance.SetTime (time);
+		}
+	}
 }
 

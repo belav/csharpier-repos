@@ -30,59 +30,59 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Discovery.Configuration
 {
-    public sealed class DynamicEndpointElement : StandardEndpointElement
-    {
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty discovery_client_settings;
-        
-        static DynamicEndpointElement ()
-        {
-            discovery_client_settings = new ConfigurationProperty ("discoveryClientSettings", typeof (DiscoveryClientSettingsElement), null, null, null, ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (discovery_client_settings);
-        }
-        
-        public DynamicEndpointElement ()
-        {
-        }
+	public sealed class DynamicEndpointElement : StandardEndpointElement
+	{
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty discovery_client_settings;
+		
+		static DynamicEndpointElement ()
+		{
+			discovery_client_settings = new ConfigurationProperty ("discoveryClientSettings", typeof (DiscoveryClientSettingsElement), null, null, null, ConfigurationPropertyOptions.None);
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (discovery_client_settings);
+		}
+		
+		public DynamicEndpointElement ()
+		{
+		}
 
-        [ConfigurationProperty ("discoveryClientSettings")]
-        public DiscoveryClientSettingsElement DiscoveryClientSettings {
-            get { return (DiscoveryClientSettingsElement) base [discovery_client_settings]; }
-        }
-        
-        protected internal override Type EndpointType {
-            get { return typeof (DynamicEndpoint); }
-        }
-        
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-        
-        protected internal override ServiceEndpoint CreateServiceEndpoint (ContractDescription contractDescription)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        protected override void OnApplyConfiguration (ServiceEndpoint endpoint, ChannelEndpointElement serviceEndpointElement)
-        {
-            throw new NotImplementedException ();
-        }
+		[ConfigurationProperty ("discoveryClientSettings")]
+		public DiscoveryClientSettingsElement DiscoveryClientSettings {
+			get { return (DiscoveryClientSettingsElement) base [discovery_client_settings]; }
+		}
+		
+		protected internal override Type EndpointType {
+			get { return typeof (DynamicEndpoint); }
+		}
+		
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+		
+		protected internal override ServiceEndpoint CreateServiceEndpoint (ContractDescription contractDescription)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		protected override void OnApplyConfiguration (ServiceEndpoint endpoint, ChannelEndpointElement serviceEndpointElement)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnApplyConfiguration (ServiceEndpoint endpoint, ServiceEndpointElement serviceEndpointElement)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        protected override void OnInitializeAndValidate (ChannelEndpointElement channelEndpointElement)
-        {
-            // There seems nothing to do here.
-        }
-        
-        protected override void OnInitializeAndValidate (ServiceEndpointElement serviceEndpointElement)
-        {
-            // There seems nothing to do here.
-        }
-    }
+		protected override void OnApplyConfiguration (ServiceEndpoint endpoint, ServiceEndpointElement serviceEndpointElement)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		protected override void OnInitializeAndValidate (ChannelEndpointElement channelEndpointElement)
+		{
+			// There seems nothing to do here.
+		}
+		
+		protected override void OnInitializeAndValidate (ServiceEndpointElement serviceEndpointElement)
+		{
+			// There seems nothing to do here.
+		}
+	}
 }
 

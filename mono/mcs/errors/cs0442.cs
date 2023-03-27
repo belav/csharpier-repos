@@ -4,8 +4,8 @@
 abstract class C {
     protected abstract int Prop
     {
-    private get;
-    set;
+	private get;
+	set;
     }
 }
 

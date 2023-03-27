@@ -2,7 +2,7 @@
 // CodeLayer.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -33,58 +33,58 @@ using Mono.CodeContracts.Static.DataFlowAnalysis;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis {
-    class CodeLayer<Expression, Variable, ContextData, EdgeData>
-        : ICodeLayer<Expression, Variable, ContextData, EdgeData>
-        where ContextData : IMethodContextProvider {
-        private readonly Lazy<ILPrinter<APC>> printer;
+	class CodeLayer<Expression, Variable, ContextData, EdgeData>
+		: ICodeLayer<Expression, Variable, ContextData, EdgeData>
+		where ContextData : IMethodContextProvider {
+		private readonly Lazy<ILPrinter<APC>> printer;
 
-        public CodeLayer (IILDecoder<APC, Expression, Variable, ContextData, EdgeData> ilDecoder,
-                          IMetaDataProvider metadataDecoder,
-                          IContractProvider contractDecoder,
-                          Func<Expression, string> expressionToString,
-                          Func<Variable, string> variableToString)
-        {
-            ExpressionToString = expressionToString;
-            VariableToString = variableToString;
-            ILDecoder = ilDecoder;
-            MetaDataProvider = metadataDecoder;
-            ContractProvider = contractDecoder;
+		public CodeLayer (IILDecoder<APC, Expression, Variable, ContextData, EdgeData> ilDecoder,
+		                  IMetaDataProvider metadataDecoder,
+		                  IContractProvider contractDecoder,
+		                  Func<Expression, string> expressionToString,
+		                  Func<Variable, string> variableToString)
+		{
+			ExpressionToString = expressionToString;
+			VariableToString = variableToString;
+			ILDecoder = ilDecoder;
+			MetaDataProvider = metadataDecoder;
+			ContractProvider = contractDecoder;
 
-            this.printer = new Lazy<ILPrinter<APC>> (() => PrinterFactory.Create (ILDecoder, MetaDataProvider, ExpressionToString, VariableToString));
-        }
+			this.printer = new Lazy<ILPrinter<APC>> (() => PrinterFactory.Create (ILDecoder, MetaDataProvider, ExpressionToString, VariableToString));
+		}
 
-        public CodeLayer (IILDecoder<APC, Expression, Variable, ContextData, EdgeData> ilDecoder,
-                          IMetaDataProvider metadataDecoder,
-                          IContractProvider contractDecoder,
-                          Func<Expression, string> expressionToString,
-                          Func<Variable, string> variableToString, ILPrinter<APC> printer)
-            : this (ilDecoder, metadataDecoder, contractDecoder, expressionToString, variableToString)
-        {
-            this.printer = new Lazy<ILPrinter<APC>> (() => printer);
-        }
+		public CodeLayer (IILDecoder<APC, Expression, Variable, ContextData, EdgeData> ilDecoder,
+		                  IMetaDataProvider metadataDecoder,
+		                  IContractProvider contractDecoder,
+		                  Func<Expression, string> expressionToString,
+		                  Func<Variable, string> variableToString, ILPrinter<APC> printer)
+			: this (ilDecoder, metadataDecoder, contractDecoder, expressionToString, variableToString)
+		{
+			this.printer = new Lazy<ILPrinter<APC>> (() => printer);
+		}
 
-        public IILDecoder<APC, Expression, Variable, ContextData, EdgeData> ILDecoder { get; private set; }
+		public IILDecoder<APC, Expression, Variable, ContextData, EdgeData> ILDecoder { get; private set; }
 
-        public ILPrinter<APC> Printer
-        {
-            get { return this.printer.Value; }
-        }
+		public ILPrinter<APC> Printer
+		{
+			get { return this.printer.Value; }
+		}
 
-        public Func<Expression, string> ExpressionToString { get; private set; }
+		public Func<Expression, string> ExpressionToString { get; private set; }
 
-        public Func<Variable, string> VariableToString { get; private set; }
+		public Func<Variable, string> VariableToString { get; private set; }
 
-        public IMetaDataProvider MetaDataProvider { get; private set; }
-        public IContractProvider ContractProvider { get; private set; }
+		public IMetaDataProvider MetaDataProvider { get; private set; }
+		public IContractProvider ContractProvider { get; private set; }
 
-        public Func<AState, IFixPointInfo<APC, AState>> CreateForward<AState> (
-            IAnalysis<APC, AState, IILVisitor<APC, Expression, Variable, AState, AState>, EdgeData> analysis)
-        {
-            ForwardAnalysis<AState, EdgeData> solver = ForwardAnalysis<AState, EdgeData>.Make (ILDecoder, analysis);
-            return (initialState) => {
-                       solver.Run (initialState);
-                       return solver;
-                   };
-        }
-    }
+		public Func<AState, IFixPointInfo<APC, AState>> CreateForward<AState> (
+			IAnalysis<APC, AState, IILVisitor<APC, Expression, Variable, AState, AState>, EdgeData> analysis)
+		{
+			ForwardAnalysis<AState, EdgeData> solver = ForwardAnalysis<AState, EdgeData>.Make (ILDecoder, analysis);
+			return (initialState) => {
+			       	solver.Run (initialState);
+			       	return solver;
+			       };
+		}
+	}
 }

@@ -5,9 +5,9 @@ enum AA : short { a, b = 200 }
 
 public class C
 {
-    public static void Main ()
-    {
-        const long ul = 1;
-        AA b = AA.a - ul;
-    }
+	public static void Main ()
+	{
+		const long ul = 1;
+		AA b = AA.a - ul;
+	}
 }

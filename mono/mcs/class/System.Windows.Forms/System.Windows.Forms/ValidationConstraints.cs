@@ -23,20 +23,20 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    [Flags]
-    public enum ValidationConstraints
-    {
-        None = 0,
-        Selectable = 1,
-        Enabled = 2,
-        Visible = 4,
-        TabStop = 8,
-        ImmediateChildren = 16
-    }
+	[Flags]
+	public enum ValidationConstraints
+	{
+		None = 0,
+		Selectable = 1,
+		Enabled = 2,
+		Visible = 4,
+		TabStop = 8,
+		ImmediateChildren = 16
+	}
 }

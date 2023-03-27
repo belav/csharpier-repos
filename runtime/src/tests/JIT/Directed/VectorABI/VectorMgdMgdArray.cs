@@ -213,17 +213,17 @@ public static class VectorMgdMgd
             int i;
 
             i = 0;
-        hva64_01_a = new HVA64_01[5];
+	    hva64_01_a = new HVA64_01[5];
             hva64_01_a[4].v0 = Unsafe.As<T, Vector64<T>>(ref values[i]);
 
             i = 0;
-        hva64_02_a = new HVA64_02[4];
+	    hva64_02_a = new HVA64_02[4];
             hva64_02_a[3].v0 = Unsafe.As<T, Vector64<T>>(ref values[i]);
             i += Vector64<T>.Count;
             hva64_02_a[3].v1 = Unsafe.As<T, Vector64<T>>(ref values[i]);
 
             i = 0;
-        hva64_03_a = new HVA64_03[3];
+	    hva64_03_a = new HVA64_03[3];
             hva64_03_a[2].v0 = Unsafe.As<T, Vector64<T>>(ref values[i]);
             i += Vector64<T>.Count;
             hva64_03_a[2].v1 = Unsafe.As<T, Vector64<T>>(ref values[i]);
@@ -231,7 +231,7 @@ public static class VectorMgdMgd
             hva64_03_a[2].v2 = Unsafe.As<T, Vector64<T>>(ref values[i]);
 
             i = 0;
-        hva64_04_a = new HVA64_04[2];
+	    hva64_04_a = new HVA64_04[2];
             hva64_04_a[1].v0 = Unsafe.As<T, Vector64<T>>(ref values[i]);
             i += Vector64<T>.Count;
             hva64_04_a[1].v1 = Unsafe.As<T, Vector64<T>>(ref values[i]);
@@ -241,7 +241,7 @@ public static class VectorMgdMgd
             hva64_04_a[1].v3 = Unsafe.As<T, Vector64<T>>(ref values[i]);
 
             i = 0;
-        hva64_05_a = new HVA64_05[1];
+	    hva64_05_a = new HVA64_05[1];
             hva64_05_a[0].v0 = Unsafe.As<T, Vector64<T>>(ref values[i]);
             i += Vector64<T>.Count;
             hva64_05_a[0].v1 = Unsafe.As<T, Vector64<T>>(ref values[i]);
@@ -255,17 +255,17 @@ public static class VectorMgdMgd
             ////////////////////////////////////////
 
             i = 0;
-        hva128_01_a = new HVA128_01[5];
+	    hva128_01_a = new HVA128_01[5];
             hva128_01_a[4].v0 = Unsafe.As<T, Vector128<T>>(ref values[i]);
 
             i = 0;
-        hva128_02_a = new HVA128_02[4];
+	    hva128_02_a = new HVA128_02[4];
             hva128_02_a[3].v0 = Unsafe.As<T, Vector128<T>>(ref values[i]);
             i += Vector128<T>.Count;
             hva128_02_a[3].v1 = Unsafe.As<T, Vector128<T>>(ref values[i]);
 
             i = 0;
-        hva128_03_a = new HVA128_03[3];
+	    hva128_03_a = new HVA128_03[3];
             hva128_03_a[2].v0 = Unsafe.As<T, Vector128<T>>(ref values[i]);
             i += Vector128<T>.Count;
             hva128_03_a[2].v1 = Unsafe.As<T, Vector128<T>>(ref values[i]);
@@ -273,7 +273,7 @@ public static class VectorMgdMgd
             hva128_03_a[2].v2 = Unsafe.As<T, Vector128<T>>(ref values[i]);
 
             i = 0;
-        hva128_04_a = new HVA128_04[2];
+	    hva128_04_a = new HVA128_04[2];
             hva128_04_a[1].v0 = Unsafe.As<T, Vector128<T>>(ref values[i]);
             i += Vector128<T>.Count;
             hva128_04_a[1].v1 = Unsafe.As<T, Vector128<T>>(ref values[i]);
@@ -283,7 +283,7 @@ public static class VectorMgdMgd
             hva128_04_a[1].v3 = Unsafe.As<T, Vector128<T>>(ref values[i]);
 
             i = 0;
-        hva128_05_a = new HVA128_05[1];
+	    hva128_05_a = new HVA128_05[1];
             hva128_05_a[0].v0 = Unsafe.As<T, Vector128<T>>(ref values[i]);
             i += Vector128<T>.Count;
             hva128_05_a[0].v1 = Unsafe.As<T, Vector128<T>>(ref values[i]);

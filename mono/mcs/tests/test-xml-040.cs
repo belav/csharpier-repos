@@ -3,12 +3,12 @@ using System.Collections;
 
 /// <summary><see cref="IDictionary.this[object]" /></summary>
 public class Test {
-    static void Main () {
-    }
+	static void Main () {
+	}
 
-    /// <summary> test indexer doc </summary>
-    public string this [string name] {
-        get { return null; }
-    }
+	/// <summary> test indexer doc </summary>
+	public string this [string name] {
+		get { return null; }
+	}
 }
 

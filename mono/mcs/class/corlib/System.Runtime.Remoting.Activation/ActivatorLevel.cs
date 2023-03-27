@@ -32,13 +32,13 @@
 
 namespace System.Runtime.Remoting.Activation {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    [System.Serializable]
-    public enum ActivatorLevel  {
-        Construction = 4,
-        Context = 8,
-        AppDomain = 12,
-        Process = 16,
-        Machine = 20,
-    }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	[System.Serializable]
+	public enum ActivatorLevel  {
+		Construction = 4,
+		Context = 8,
+		AppDomain = 12,
+		Process = 16,
+		Machine = 20,
+	}
 }

@@ -6,20 +6,20 @@ using System.Diagnostics;
 
 namespace Moq.Behaviors
 {
-    internal sealed class Callback : Behavior
-    {
-        private readonly Action<IInvocation> callback;
+	internal sealed class Callback : Behavior
+	{
+		private readonly Action<IInvocation> callback;
 
-        public Callback(Action<IInvocation> callback)
-        {
-            Debug.Assert(callback != null);
+		public Callback(Action<IInvocation> callback)
+		{
+			Debug.Assert(callback != null);
 
-            this.callback = callback;
-        }
+			this.callback = callback;
+		}
 
-        public override void Execute(Invocation invocation)
-        {
-            this.callback.Invoke(invocation);
-        }
-    }
+		public override void Execute(Invocation invocation)
+		{
+			this.callback.Invoke(invocation);
+		}
+	}
 }

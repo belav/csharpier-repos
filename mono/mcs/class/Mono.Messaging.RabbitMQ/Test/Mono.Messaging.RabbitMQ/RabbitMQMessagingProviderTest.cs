@@ -2,7 +2,7 @@
 // Test.Mono.Messaging.RabbitMQ
 //
 // Authors:
-//      Michael Barker (mike@middlesoft.co.uk)
+//	  Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -37,31 +37,31 @@ using NUnit.Framework;
 
 namespace MonoTests.Mono.Messaging.RabbitMQ
 {
-    [TestFixture]
-    public class RabbitMQMessagingProviderTest {
-        
-        [Test]
-        public void CreateMessage ()
-        {
-            IMessagingProvider p = new RabbitMQMessagingProvider ();
-            IMessage m = p.CreateMessage ();
-            Assert.IsNotNull (m);   
-        }
-        
-        [Test]
-        public void GetMessageQueue ()
-        {
-            IMessagingProvider p = new RabbitMQMessagingProvider ();
-            IMessageQueue q = p.CreateMessageQueue (QueueReference.DEFAULT, true);
-            Assert.IsNotNull (q);   
-        }
-        
-        [Test]
-        public void GetProvider ()
-        {
-            IMessagingProvider p = MessagingProviderLocator.GetProvider ();
-            Assert.IsNotNull (p);
-        }
-        
-    }
+	[TestFixture]
+	public class RabbitMQMessagingProviderTest {
+		
+		[Test]
+		public void CreateMessage ()
+		{
+			IMessagingProvider p = new RabbitMQMessagingProvider ();
+			IMessage m = p.CreateMessage ();
+			Assert.IsNotNull (m);   
+		}
+		
+		[Test]
+		public void GetMessageQueue ()
+		{
+			IMessagingProvider p = new RabbitMQMessagingProvider ();
+			IMessageQueue q = p.CreateMessageQueue (QueueReference.DEFAULT, true);
+			Assert.IsNotNull (q);   
+		}
+		
+		[Test]
+		public void GetProvider ()
+		{
+			IMessagingProvider p = MessagingProviderLocator.GetProvider ();
+			Assert.IsNotNull (p);
+		}
+		
+	}
 }

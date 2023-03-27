@@ -1,4 +1,4 @@
-using System.CommandLine.Binding;
+﻿using System.CommandLine.Binding;
 using System.CommandLine.Invocation;
 using System.CommandLine.NamingConventionBinder;
 using System.Linq;

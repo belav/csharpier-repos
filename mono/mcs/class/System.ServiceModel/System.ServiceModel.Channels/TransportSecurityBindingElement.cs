@@ -2,7 +2,7 @@
 // TransportSecurityBindingElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -35,58 +35,58 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Channels
 {
-    public sealed class TransportSecurityBindingElement
+	public sealed class TransportSecurityBindingElement
 #if MOBILE
-        : SecurityBindingElement
+		: SecurityBindingElement
 #else
-        : SecurityBindingElement, IPolicyExportExtension
+		: SecurityBindingElement, IPolicyExportExtension
 #endif
-    {
-        public TransportSecurityBindingElement ()
-        {
-        }
+	{
+		public TransportSecurityBindingElement ()
+		{
+		}
 
-        private TransportSecurityBindingElement (
-            TransportSecurityBindingElement other)
-            : base (other)
-        {
-        }
+		private TransportSecurityBindingElement (
+			TransportSecurityBindingElement other)
+			: base (other)
+		{
+		}
 
-        public override BindingElement Clone ()
-        {
-            return new TransportSecurityBindingElement (this);
-        }
+		public override BindingElement Clone ()
+		{
+			return new TransportSecurityBindingElement (this);
+		}
 
-        [MonoTODO]
-        protected override IChannelFactory<TChannel>
-            BuildChannelFactoryCore<TChannel> (
-            BindingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected override IChannelFactory<TChannel>
+			BuildChannelFactoryCore<TChannel> (
+			BindingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
 #if !MOBILE && !XAMMAC_4_5
-        [MonoTODO]
-        protected override IChannelListener<TChannel>
-            BuildChannelListenerCore<TChannel> (
-            BindingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected override IChannelListener<TChannel>
+			BuildChannelListenerCore<TChannel> (
+			BindingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override T GetProperty<T> (BindingContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override T GetProperty<T> (BindingContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        void IPolicyExportExtension.ExportPolicy (
-            MetadataExporter exporter,
-            PolicyConversionContext policyContext)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		void IPolicyExportExtension.ExportPolicy (
+			MetadataExporter exporter,
+			PolicyConversionContext policyContext)
+		{
+			throw new NotImplementedException ();
+		}
 #endif
-    }
+	}
 }

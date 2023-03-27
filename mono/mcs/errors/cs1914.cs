@@ -7,13 +7,13 @@ using System.Collections.Generic;
 
 class Data
 {
-    public static int Count;
+	public static int Count;
 }
 
 public class Test
 {
-    static void Main ()
-    {
-        var c = new Data { Count = 10 };
-    }
+	static void Main ()
+	{
+		var c = new Data { Count = 10 };
+	}
 }

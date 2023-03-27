@@ -1,10 +1,10 @@
 interface I
 {
-    void Hello ();
+	void Hello ();
 }
 
 class Stack<T>
-    where T : I, new ()
+	where T : I, new ()
 {
 }
 
@@ -14,7 +14,7 @@ class Test
 
 class X
 {
-    public static void Main()
-    {
-    }
+	public static void Main()
+	{
+	}
 }

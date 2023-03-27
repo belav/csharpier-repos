@@ -39,16 +39,16 @@ using System.Web.UI;
 
 namespace System.Web.ClientServices
 {
-    public static class ConnectivityStatus
-    {        
-        public static bool IsOffline {
-            get {
-                throw new NotImplementedException ();
-            }
-            
-            set {
-                throw new NotImplementedException ();
-            }
-        }        
-    }
+	public static class ConnectivityStatus
+	{		
+		public static bool IsOffline {
+			get {
+				throw new NotImplementedException ();
+			}
+			
+			set {
+				throw new NotImplementedException ();
+			}
+		}		
+	}
 }

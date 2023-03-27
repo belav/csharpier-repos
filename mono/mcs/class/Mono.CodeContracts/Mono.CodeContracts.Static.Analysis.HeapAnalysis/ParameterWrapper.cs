@@ -2,7 +2,7 @@
 // ParameterWrapper.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -30,43 +30,43 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis {
-    class ParameterWrapper : Wrapper<Parameter>
-    {
-        private readonly int parameter_index;
+	class ParameterWrapper : Wrapper<Parameter>
+	{
+		private readonly int parameter_index;
 
-        public ParameterWrapper(Parameter parameter, ref int idGen, IMetaDataProvider metaDataProvider)
-            : base (parameter, ref idGen, metaDataProvider)
-        {
-            this.parameter_index = metaDataProvider.ParameterIndex (parameter);
-        }
+		public ParameterWrapper(Parameter parameter, ref int idGen, IMetaDataProvider metaDataProvider)
+			: base (parameter, ref idGen, metaDataProvider)
+		{
+			this.parameter_index = metaDataProvider.ParameterIndex (parameter);
+		}
 
-        public override bool ActsAsField
-        {
-            get { return false; }
-        }
+		public override bool ActsAsField
+		{
+			get { return false; }
+		}
 
-        public override TypeNode FieldAddressType()
-        {
-            throw new InvalidOperationException ();
-        }
+		public override TypeNode FieldAddressType()
+		{
+			throw new InvalidOperationException ();
+		}
 
-        public override string ToString()
-        {
-            return this.MetaDataProvider.Name (this.Item);
-        }
+		public override string ToString()
+		{
+			return this.MetaDataProvider.Name (this.Item);
+		}
 
-        public override bool Equals(object obj)
-        {
-            var other = obj as ParameterWrapper;
-            if (other == null)
-                return false;
+		public override bool Equals(object obj)
+		{
+			var other = obj as ParameterWrapper;
+			if (other == null)
+				return false;
 
-            return other.parameter_index == this.parameter_index;
-        }
+			return other.parameter_index == this.parameter_index;
+		}
 
-        public override int GetHashCode()
-        {
-            return this.parameter_index;
-        }
-    }
+		public override int GetHashCode()
+		{
+			return this.parameter_index;
+		}
+	}
 }

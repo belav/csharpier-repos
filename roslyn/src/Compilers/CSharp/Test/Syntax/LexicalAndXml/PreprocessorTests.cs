@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1737,43 +1737,43 @@ public class Test
 {
     public static int Main(string [] args)
     {
-        int i = 6;
+		int i = 6;
 
  #if True1 == true
-        i--;
+		i--;
  #endif
 
 #if False1 == false
-        i--;
+		i--;
 #endif
 
 # if false
-    #error #elif True2 == True1
+	#error #elif True2 == True1
 #elif True2 == True1
-        i--;
+		i--;
 #else
-    #error #else #elif True2 == True1
+	#error #else #elif True2 == True1
  #endif
 
 #if (True1 != false) && ((False1) == False2) && (true || false)
-        i--;
+		i--;
 # else
-    #error #if (True != false) && ((False1) == False2) && (true || false)
+	#error #if (True != false) && ((False1) == False2) && (true || false)
 # endif
 
 #if ((true == True1) != (false && true))
-        i--;
+		i--;
 #else
 #error ((true == True1) != (false && true))
 #endif
 
 #if !(!(!!(true))) != false
-        i--;
+		i--;
 #else
 #error !(!(!!(true))) != false
 #endif
 
-        return(i > 0 ? 1 : 0);
+		return(i > 0 ? 1 : 0);
     }
 }";
 
@@ -3634,22 +3634,22 @@ public class Test
         {
             var text = @"public class LineTests
 {
-    public static void Main() 
-    {
-        #line 10 ""ftp://test.cs""
-        #line 20 ""ftps://test.cs""
-        #line 30 ""http://test.cs""
-        #line 40 ""https://test.cs""
-        #line 50 ""gopher://test.cs""
-        #line 60 ""telnet://test.cs""
-        #line 70 ""dict://test.cs""
-        #line 80 ""file://goo.aspx""
-        #line 90 ""ldap://test.cs""
-        #line 100 ""news://test.cs""
-        #line 110 ""\\ddrelqa\logs\whidbey\2003-07-01\BVT64002\fx.Xml.XSLT\TESTPROCESSED20030701082505866.xml"" // parser error
-        #line 120 ""C:\Documents and Settings\someuser\Local Settings\Temp\{f0a37341-d692-11d4-a984-009027ec0a9c}\test.cs"" // parser error
-        #line 130 ""mailto://someuser@microsoft.com""
-    }
+	public static void Main() 
+	{
+		#line 10 ""ftp://test.cs""
+		#line 20 ""ftps://test.cs""
+		#line 30 ""http://test.cs""
+		#line 40 ""https://test.cs""
+		#line 50 ""gopher://test.cs""
+		#line 60 ""telnet://test.cs""
+		#line 70 ""dict://test.cs""
+		#line 80 ""file://goo.aspx""
+		#line 90 ""ldap://test.cs""
+		#line 100 ""news://test.cs""
+		#line 110 ""\\ddrelqa\logs\whidbey\2003-07-01\BVT64002\fx.Xml.XSLT\TESTPROCESSED20030701082505866.xml"" // parser error
+		#line 120 ""C:\Documents and Settings\someuser\Local Settings\Temp\{f0a37341-d692-11d4-a984-009027ec0a9c}\test.cs"" // parser error
+		#line 130 ""mailto://someuser@microsoft.com""
+	}
 }
 ";
             var node = Parse(text);

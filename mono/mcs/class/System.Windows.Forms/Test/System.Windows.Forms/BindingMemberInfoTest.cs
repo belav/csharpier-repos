@@ -20,7 +20,7 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper    jackson@ximian.com
+//	Jackson Harper	jackson@ximian.com
 
 
 using System;
@@ -32,81 +32,81 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.DataBinding {
 
-    [TestFixture]
-    public class BindingMemberInfoTest : TestHelper {
+	[TestFixture]
+	public class BindingMemberInfoTest : TestHelper {
 
-        [Test]
-        public void CtorNullTest ()
-        {
-            BindingMemberInfo bmi = new BindingMemberInfo (null);
+		[Test]
+		public void CtorNullTest ()
+		{
+			BindingMemberInfo bmi = new BindingMemberInfo (null);
 
-            Assert.AreEqual (bmi.BindingMember, String.Empty, "CTORNULL1");
-            Assert.AreEqual (bmi.BindingField, String.Empty, "CTORNULL2");
-            Assert.AreEqual (bmi.BindingPath, String.Empty, "CTORNULL3");
-        }
+			Assert.AreEqual (bmi.BindingMember, String.Empty, "CTORNULL1");
+			Assert.AreEqual (bmi.BindingField, String.Empty, "CTORNULL2");
+			Assert.AreEqual (bmi.BindingPath, String.Empty, "CTORNULL3");
+		}
 
-        [Test]
-        public void CtorMemberOnly ()
-        {
-            BindingMemberInfo bmi = new BindingMemberInfo ("Member");
+		[Test]
+		public void CtorMemberOnly ()
+		{
+			BindingMemberInfo bmi = new BindingMemberInfo ("Member");
 
-            Assert.AreEqual (bmi.BindingMember, "Member", "CTORMEMBER1");
-            Assert.AreEqual (bmi.BindingField, "Member", "CTORMEMBER2");
-            Assert.AreEqual (bmi.BindingPath, String.Empty, "CTORMEMBER3");
-        }
+			Assert.AreEqual (bmi.BindingMember, "Member", "CTORMEMBER1");
+			Assert.AreEqual (bmi.BindingField, "Member", "CTORMEMBER2");
+			Assert.AreEqual (bmi.BindingPath, String.Empty, "CTORMEMBER3");
+		}
 
-        [Test]
-        public void CtorMemberAndPathOnly ()
-        {
-            BindingMemberInfo bmi = new BindingMemberInfo ("Member.Path");
+		[Test]
+		public void CtorMemberAndPathOnly ()
+		{
+			BindingMemberInfo bmi = new BindingMemberInfo ("Member.Path");
 
-            Assert.AreEqual (bmi.BindingMember, "Member.Path", "CTMAF1");
-            Assert.AreEqual (bmi.BindingPath, "Member", "CTMAF2");
-            Assert.AreEqual (bmi.BindingField, "Path", "CTMAF3");
-        }
+			Assert.AreEqual (bmi.BindingMember, "Member.Path", "CTMAF1");
+			Assert.AreEqual (bmi.BindingPath, "Member", "CTMAF2");
+			Assert.AreEqual (bmi.BindingField, "Path", "CTMAF3");
+		}
 
-        [Test]
-        public void CtorAll ()
-        {
-            BindingMemberInfo bmi = new BindingMemberInfo ("Member.Path.Field");
+		[Test]
+		public void CtorAll ()
+		{
+			BindingMemberInfo bmi = new BindingMemberInfo ("Member.Path.Field");
 
-            Assert.AreEqual (bmi.BindingMember, "Member.Path.Field", "CTALL1");
-            Assert.AreEqual (bmi.BindingPath, "Member.Path", "CTALL2");
-            Assert.AreEqual (bmi.BindingField, "Field", "CTALL3");
-        }
+			Assert.AreEqual (bmi.BindingMember, "Member.Path.Field", "CTALL1");
+			Assert.AreEqual (bmi.BindingPath, "Member.Path", "CTALL2");
+			Assert.AreEqual (bmi.BindingField, "Field", "CTALL3");
+		}
 
-        [Test]
-        public void CtorEmpty ()
-        {
-            BindingMemberInfo bmi = new BindingMemberInfo ("...");
+		[Test]
+		public void CtorEmpty ()
+		{
+			BindingMemberInfo bmi = new BindingMemberInfo ("...");
 
-            Assert.AreEqual (bmi.BindingMember, "...", "CTEMPTY1");
-            Assert.AreEqual (bmi.BindingPath, "..", "CTEMPTY2");
-            Assert.AreEqual (bmi.BindingField, String.Empty, "CTEMPTY3");
-        }
+			Assert.AreEqual (bmi.BindingMember, "...", "CTEMPTY1");
+			Assert.AreEqual (bmi.BindingPath, "..", "CTEMPTY2");
+			Assert.AreEqual (bmi.BindingField, String.Empty, "CTEMPTY3");
+		}
 
-        [Test]
-        public void CtorSpecialChars ()
-        {
-            BindingMemberInfo bmi = new BindingMemberInfo (",/';.[]-=!.$%&*~");
+		[Test]
+		public void CtorSpecialChars ()
+		{
+			BindingMemberInfo bmi = new BindingMemberInfo (",/';.[]-=!.$%&*~");
 
-            Assert.AreEqual (bmi.BindingMember, ",/';.[]-=!.$%&*~", "CTORSPECIAL1");
-            Assert.AreEqual (bmi.BindingPath, ",/';.[]-=!", "CTORSPECIAL2");
-            Assert.AreEqual (bmi.BindingField, "$%&*~", "CTORSPECIAL3");
-        }
+			Assert.AreEqual (bmi.BindingMember, ",/';.[]-=!.$%&*~", "CTORSPECIAL1");
+			Assert.AreEqual (bmi.BindingPath, ",/';.[]-=!", "CTORSPECIAL2");
+			Assert.AreEqual (bmi.BindingField, "$%&*~", "CTORSPECIAL3");
+		}
 
-        [Test]
-        public void EqualsTest ()
-        {
-            BindingMemberInfo a = new BindingMemberInfo ("A.B.C");
-            BindingMemberInfo b = new BindingMemberInfo ("A.B.C");
+		[Test]
+		public void EqualsTest ()
+		{
+			BindingMemberInfo a = new BindingMemberInfo ("A.B.C");
+			BindingMemberInfo b = new BindingMemberInfo ("A.B.C");
 
-            Assert.AreEqual (a, b, "EQUALS1");
+			Assert.AreEqual (a, b, "EQUALS1");
 
-            b = new BindingMemberInfo ("A.B");
-            Assert.IsFalse (a.Equals (b), "EQUALS2");
-        }
-    }
+			b = new BindingMemberInfo ("A.B");
+			Assert.IsFalse (a.Equals (b), "EQUALS2");
+		}
+	}
 }
 
 

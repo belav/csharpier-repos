@@ -132,7 +132,7 @@ namespace CseTest
             int a = return_int(false, -27);
             int v;
 #if LOOP
-            for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 5; i++) {
 #endif
             v = (((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b))) * (((abc + c) - (a - (ad * a))) + r));
             if (v != 7523043)
@@ -155,8 +155,8 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-                ad = return_int(false,-31);
-            }
+				ad = return_int(false,-31);
+			}
 #endif
             b = return_int(false, -65);
             r = return_int(false, 55);
@@ -187,8 +187,8 @@ namespace CseTest
                 Console.WriteLine("test6: for (((c*c)-(c+d))*b)  failed actual value {0} ", v);
                 ret = ret + 1;
             }
-#if LOOP        
-            for (int i = 0; i < 10; i++) {
+#if LOOP		
+			for (int i = 0; i < 10; i++) {
 #endif
             v = ((c * c) - (c + d));
             if (v != 302)
@@ -211,8 +211,8 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-                d = return_int(false, 40);
-            }
+				d = return_int(false, 40);
+			}
 #endif
             v = (c * c);
             if (v != 361)
@@ -257,8 +257,8 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-            for (int j = 0; j < 4; j++) {
-                for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 4; j++) {
+				for (int i = 0; i < 3; i++) {
 #endif
             v = ((c * c) - (c + d));
             if (v != 302)
@@ -274,9 +274,9 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-                    d = return_int(false, 40);
-                }
-            }
+					d = return_int(false, 40);
+				}
+			}
 #endif
             ad = return_int(false, 22);
             v = (b * ((c * c) - (c + d)));
@@ -334,10 +334,10 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-            try {
+			try {
 #endif
 #if LOOP
-            for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < 4; i++) {
 #endif
             v = (a * a);
             if (v != 729)
@@ -353,11 +353,11 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-            }
+			}
 
-            for (int j = 0; j < a; j++) {
-            
-                for (int i = 0; i < b; i++) {
+			for (int j = 0; j < a; j++) {
+			
+				for (int i = 0; i < b; i++) {
 #endif
             v = (a * a);
             if (v != 729)
@@ -389,11 +389,11 @@ namespace CseTest
             }
 #if LOOP
 
-                }
-            }
+				}
+			}
 #endif
 #if TRY
-            } finally {
+			} finally {
 #endif
             v = (b * a);
             if (v != 1755)
@@ -409,7 +409,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-                try {
+				try {
 #endif
             r = return_int(false, 84);
             v = (a * b);
@@ -454,7 +454,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-                } finally {
+				} finally {
 #endif
             v = (b * a);
             if (v != 1755)
@@ -493,7 +493,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-                }
+				}
 #endif
             v = ((a * a) + (a * b));
             if (v != 2484)
@@ -623,7 +623,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-            if (v==173) {
+			if (v==173) {
 #endif
             v = ((abc + c) - (a - (ad * a)));
             if (v != 172)
@@ -688,7 +688,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP
-            }
+			}
 #endif
             v = (ad * a);
             if (v != 66)
@@ -746,7 +746,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-            }
+			}
 #endif
             Console.WriteLine(ret);
             return ret;

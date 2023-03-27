@@ -1,15 +1,15 @@
-using System;
+﻿using System;
 
 namespace Mono.Linker.Tests.Cases.Symbols.Dependencies
 {
-    public class LibraryWithEmbeddedPdbSymbols
-    {
-        public static void SomeMethod ()
-        {
-        }
+	public class LibraryWithEmbeddedPdbSymbols
+	{
+		public static void SomeMethod ()
+		{
+		}
 
-        static void NotUsed ()
-        {
-        }
-    }
+		static void NotUsed ()
+		{
+		}
+	}
 }

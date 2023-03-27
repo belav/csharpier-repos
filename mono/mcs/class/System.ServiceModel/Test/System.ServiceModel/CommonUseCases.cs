@@ -2,7 +2,7 @@
 // CommonUseCases.cs
 //
 // Author:
-//    Eyal Alaluf
+//	Eyal Alaluf
 //
 // Copyright (C) 2008 Mainsoft Co. http://www.mainsoft.com
 //
@@ -33,27 +33,27 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    // Use case with one endpoint configuration.
-    [ServiceContract]
-    public interface ICtorUseCase1
-    {
-        [OperationContract]
-        string Echo (string msg);
-    }
+	// Use case with one endpoint configuration.
+	[ServiceContract]
+	public interface ICtorUseCase1
+	{
+		[OperationContract]
+		string Echo (string msg);
+	}
 
-    // Use case with multiple endpoint configurations.
-    [ServiceContract(ConfigurationName = "CtorUseCase2")]
-    public interface ICtorUseCase2
-    {
-        [OperationContract]
-        string Echo (string msg);
-    }
+	// Use case with multiple endpoint configurations.
+	[ServiceContract(ConfigurationName = "CtorUseCase2")]
+	public interface ICtorUseCase2
+	{
+		[OperationContract]
+		string Echo (string msg);
+	}
 
-    // Use case without endpoint configuration.
-    [ServiceContract(ConfigurationName = "CtorUseCase3")]
-    public interface ICtorUseCase3
-    {
-        [OperationContract]
-        string Echo (string msg);
-    }
+	// Use case without endpoint configuration.
+	[ServiceContract(ConfigurationName = "CtorUseCase3")]
+	public interface ICtorUseCase3
+	{
+		[OperationContract]
+		string Echo (string msg);
+	}
 }

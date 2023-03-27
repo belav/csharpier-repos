@@ -4,22 +4,22 @@
 using System.Collections;
 
 struct P {
-    public int x;
+	public int x;
 }
 
 struct Q {
-    public P p;
+	public P p;
 }
 
 class Test {
-    static void bar (out int x) { x = 0; }
-    static IEnumerable foo () { return null; }
+	static void bar (out int x) { x = 0; }
+	static IEnumerable foo () { return null; }
 
-    static void Main ()
-    {
-        IEnumerable f = foo ();
-        if (f != null)
-            foreach (Q q in f)
-                bar (out q.p.x);
-    }
+	static void Main ()
+	{
+		IEnumerable f = foo ();
+		if (f != null)
+			foreach (Q q in f)
+				bar (out q.p.x);
+	}
 }

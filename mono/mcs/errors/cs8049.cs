@@ -6,7 +6,7 @@ using System;
 
 class ID () : IDisposable ()
 {
-    public void Dispose ()
-    {
-    }
+	public void Dispose ()
+	{
+	}
 }

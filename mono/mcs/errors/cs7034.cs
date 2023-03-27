@@ -8,8 +8,8 @@ using System.Reflection;
 
 public class Test {
 
-    public static int Main ()
-    {
-        return 1;
-    }
+	public static int Main ()
+	{
+		return 1;
+	}
 }

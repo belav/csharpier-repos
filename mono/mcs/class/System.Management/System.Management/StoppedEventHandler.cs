@@ -2,7 +2,7 @@
 // System.Management.StoppedEventHandler
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -30,6 +30,6 @@
 
 namespace System.Management
 {
-    public delegate void StoppedEventHandler (object sender, StoppedEventArgs e);
+	public delegate void StoppedEventHandler (object sender, StoppedEventArgs e);
 }
 

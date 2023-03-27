@@ -29,28 +29,28 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    public class PropertyDefinition : MemberDefinition
-    {
-        public PropertyDefinition ()
-        {
-            attributes = new List<Attribute> ();
-        }
+	public class PropertyDefinition : MemberDefinition
+	{
+		public PropertyDefinition ()
+		{
+			attributes = new List<Attribute> ();
+		}
 
-        List<Attribute> attributes;
-        public IList<Attribute> Attributes {
-            get { return attributes; }
-        }
+		List<Attribute> attributes;
+		public IList<Attribute> Attributes {
+			get { return attributes; }
+		}
 
-        [DefaultValue ("public")]
-        public string Modifier { get; set; }
+		[DefaultValue ("public")]
+		public string Modifier { get; set; }
 
-        string name;
-        public override string Name { 
-            get { return name; }
-            set { name = value; }
-        }
+		string name;
+		public override string Name { 
+			get { return name; }
+			set { name = value; }
+		}
 
-        [TypeConverter (typeof (XamlTypeTypeConverter))]
-        public XamlType Type { get; set; }
-    }
+		[TypeConverter (typeof (XamlTypeTypeConverter))]
+		public XamlType Type { get; set; }
+	}
 }

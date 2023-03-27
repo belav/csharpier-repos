@@ -28,64 +28,64 @@
 
 namespace Mono.Cecil {
 
-    using System.Collections;
+	using System.Collections;
 
-    internal abstract class Resource : IAnnotationProvider, IReflectionStructureVisitable {
+	internal abstract class Resource : IAnnotationProvider, IReflectionStructureVisitable {
 
-        string m_name;
-        ManifestResourceAttributes m_attributes;
-        IDictionary m_annotations;
+		string m_name;
+		ManifestResourceAttributes m_attributes;
+		IDictionary m_annotations;
 
-        public string Name {
-            get { return m_name; }
-            set { m_name = value; }
-        }
+		public string Name {
+			get { return m_name; }
+			set { m_name = value; }
+		}
 
-        public ManifestResourceAttributes Flags {
-            get { return m_attributes; }
-            set { m_attributes = value; }
-        }
+		public ManifestResourceAttributes Flags {
+			get { return m_attributes; }
+			set { m_attributes = value; }
+		}
 
-        IDictionary IAnnotationProvider.Annotations {
-            get {
-                if (m_annotations == null)
-                    m_annotations = new Hashtable ();
-                return m_annotations;
-            }
-        }
+		IDictionary IAnnotationProvider.Annotations {
+			get {
+				if (m_annotations == null)
+					m_annotations = new Hashtable ();
+				return m_annotations;
+			}
+		}
 
-        #region ManifestResourceAttributes
+		#region ManifestResourceAttributes
 
-        public bool IsPublic {
-            get { return (m_attributes & ManifestResourceAttributes.VisibilityMask) == ManifestResourceAttributes.Public; }
-            set {
-                if (value) {
-                    m_attributes &= ~ManifestResourceAttributes.VisibilityMask;
-                    m_attributes |= ManifestResourceAttributes.Public;
-                } else
-                    m_attributes &= ~(ManifestResourceAttributes.VisibilityMask & ManifestResourceAttributes.Public);
-            }
-        }
+		public bool IsPublic {
+			get { return (m_attributes & ManifestResourceAttributes.VisibilityMask) == ManifestResourceAttributes.Public; }
+			set {
+				if (value) {
+					m_attributes &= ~ManifestResourceAttributes.VisibilityMask;
+					m_attributes |= ManifestResourceAttributes.Public;
+				} else
+					m_attributes &= ~(ManifestResourceAttributes.VisibilityMask & ManifestResourceAttributes.Public);
+			}
+		}
 
-        public bool IsPrivate {
-            get { return (m_attributes & ManifestResourceAttributes.VisibilityMask) == ManifestResourceAttributes.Private; }
-            set {
-                if (value) {
-                    m_attributes &= ~ManifestResourceAttributes.VisibilityMask;
-                    m_attributes |= ManifestResourceAttributes.Private;
-                } else
-                    m_attributes &= ~(ManifestResourceAttributes.VisibilityMask & ManifestResourceAttributes.Private);
-            }
-        }
+		public bool IsPrivate {
+			get { return (m_attributes & ManifestResourceAttributes.VisibilityMask) == ManifestResourceAttributes.Private; }
+			set {
+				if (value) {
+					m_attributes &= ~ManifestResourceAttributes.VisibilityMask;
+					m_attributes |= ManifestResourceAttributes.Private;
+				} else
+					m_attributes &= ~(ManifestResourceAttributes.VisibilityMask & ManifestResourceAttributes.Private);
+			}
+		}
 
-        #endregion
+		#endregion
 
-        internal Resource (string name, ManifestResourceAttributes attributes)
-        {
-            m_name = name;
-            m_attributes = attributes;
-        }
+		internal Resource (string name, ManifestResourceAttributes attributes)
+		{
+			m_name = name;
+			m_attributes = attributes;
+		}
 
-        public abstract void Accept (IReflectionStructureVisitor visitor);
-    }
+		public abstract void Accept (IReflectionStructureVisitor visitor);
+	}
 }

@@ -2,7 +2,7 @@
 // CardSpaceException.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,28 +30,28 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Selectors
 {
-    [Serializable]
-    public class CardSpaceException : Exception
-    {
-        public CardSpaceException ()
-            : this ("CardSpace exception.")
-        {
-        }
+	[Serializable]
+	public class CardSpaceException : Exception
+	{
+		public CardSpaceException ()
+			: this ("CardSpace exception.")
+		{
+		}
 
-        public CardSpaceException (string message)
-            : this (message, null)
-        {
-        }
+		public CardSpaceException (string message)
+			: this (message, null)
+		{
+		}
 
-        protected CardSpaceException (SerializationInfo info,
-            StreamingContext context)
-            : base (info, context)
-        {
-        }
+		protected CardSpaceException (SerializationInfo info,
+			StreamingContext context)
+			: base (info, context)
+		{
+		}
 
-        public CardSpaceException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
-    }
+		public CardSpaceException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
+	}
 }

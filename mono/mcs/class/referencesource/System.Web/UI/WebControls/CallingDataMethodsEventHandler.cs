@@ -1,4 +1,4 @@
-namespace System.Web.UI.WebControls {
+﻿namespace System.Web.UI.WebControls {
 
     /// <summary>
     /// Represents a method that handles the CallingDataMethods event of Databound controls that support model binding.

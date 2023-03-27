@@ -527,7 +527,7 @@ namespace System.IO {
                 int num = InternalReadChars(bufferBytes, 0, buffer.Length);
                 if ((uint)num > (uint)buffer.Length)
                 {
-            throw new IOException(SR.IO_StreamTooLong);
+		    throw new IOException(SR.IO_StreamTooLong);
                 }
                 new ReadOnlySpan<char>(bufferBytes, 0, num).CopyTo(buffer);
                 return num;

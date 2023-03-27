@@ -8,10 +8,10 @@ using System;
 [assembly: CLSCompliant (true)]
 
 public interface I {
-    [IndexerName ("blah")]
-    int this [int a] {
+	[IndexerName ("blah")]
+	int this [int a] {
             get;
-    }
+	}
 
-     int BLAH { get; }
+ 	int BLAH { get; }
 }

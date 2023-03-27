@@ -5,11 +5,11 @@
 
 namespace ObjCRuntime
 {
-    internal class RuntimeOptions
-    {
-        internal static System.Net.Http.HttpMessageHandler GetHttpMessageHandler ()
-        {
-            return new System.Net.Http.HttpClientHandler ();
-        }
-    }
+	internal class RuntimeOptions
+	{
+		internal static System.Net.Http.HttpMessageHandler GetHttpMessageHandler ()
+		{
+			return new System.Net.Http.HttpClientHandler ();
+		}
+	}
 }

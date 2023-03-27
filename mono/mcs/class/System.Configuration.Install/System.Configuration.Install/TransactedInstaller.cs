@@ -1,7 +1,7 @@
 // System.Configuration.Install.TransactedInstaller.cs
 //
 // Author:
-//     Gert Driesen (drieseng@users.sourceforge.net)
+// 	Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) Novell
 //
@@ -31,20 +31,20 @@ using System.Collections;
 
 namespace System.Configuration.Install
 {
-    public class TransactedInstaller : Installer
-    {
-        public TransactedInstaller ()
-        {
-        }
+	public class TransactedInstaller : Installer
+	{
+		public TransactedInstaller ()
+		{
+		}
 
-        public override void Install (IDictionary savedState)
-        {
-            base.Install (savedState);
-        }
+		public override void Install (IDictionary savedState)
+		{
+			base.Install (savedState);
+		}
 
-        public override void Uninstall (IDictionary savedState)
-        {
-            base.Uninstall (savedState);
-        }
-    }
+		public override void Uninstall (IDictionary savedState)
+		{
+			base.Uninstall (savedState);
+		}
+	}
 }

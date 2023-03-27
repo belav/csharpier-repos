@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.LiteralControlBuilder
 //
 // Authors:
-//    Ben Maurer <bmaurer@novell.com>
+//	Ben Maurer <bmaurer@novell.com>
 //
 // (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -27,21 +27,21 @@
 //
 
 namespace System.Web.UI.WebControls {
-    public class LiteralControlBuilder : ControlBuilder {
-        public override bool AllowWhitespaceLiterals ()
-        {
-            return false;
-        }
+	public class LiteralControlBuilder : ControlBuilder {
+		public override bool AllowWhitespaceLiterals ()
+		{
+			return false;
+		}
 
-        public override void AppendSubBuilder (ControlBuilder subBuilder)
-        {
-            throw new HttpException ("LiteralControlBuilder should never be called");
-        }
+		public override void AppendSubBuilder (ControlBuilder subBuilder)
+		{
+			throw new HttpException ("LiteralControlBuilder should never be called");
+		}
 
-        public override void AppendLiteralString (string s)
-        {
-            // What does this method _really_ do? The MSDN documentation is vague
-            base.AppendLiteralString (s);
-        }
-    }
+		public override void AppendLiteralString (string s)
+		{
+			// What does this method _really_ do? The MSDN documentation is vague
+			base.AppendLiteralString (s);
+		}
+	}
 }

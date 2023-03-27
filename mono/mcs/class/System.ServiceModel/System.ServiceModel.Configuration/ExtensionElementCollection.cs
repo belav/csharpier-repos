@@ -2,7 +2,7 @@
 // ExtensionElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,59 +54,59 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (ExtensionElement),
-         AddItemName = "add",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.BasicMap)]
-    public class ExtensionElementCollection
-         : ServiceModelConfigurationElementCollection<ExtensionElement>, ICollection, IEnumerable
-    {
-        Dictionary<Type, ExtensionElement> _lookup;
+	[ConfigurationCollection (typeof (ExtensionElement),
+		 AddItemName = "add",
+		 RemoveItemName = "remove",
+		 ClearItemsName = "clear",
+		 CollectionType = ConfigurationElementCollectionType.BasicMap)]
+	public class ExtensionElementCollection
+		 : ServiceModelConfigurationElementCollection<ExtensionElement>, ICollection, IEnumerable
+	{
+		Dictionary<Type, ExtensionElement> _lookup;
 
-        Dictionary<Type, ExtensionElement> Lookup {
-            get {
-                if (_lookup == null) {
-                    _lookup = new Dictionary<Type, ExtensionElement> ();
-                    for (int i = 0; i < Count; i++) {
-                        ExtensionElement extension = this [i];
-                        Type type = Type.GetType (extension.Type);
-                        _lookup.Add (type, extension);
-                    }
-                }
-                return _lookup;
-            }
-        }
+		Dictionary<Type, ExtensionElement> Lookup {
+			get {
+				if (_lookup == null) {
+					_lookup = new Dictionary<Type, ExtensionElement> ();
+					for (int i = 0; i < Count; i++) {
+						ExtensionElement extension = this [i];
+						Type type = Type.GetType (extension.Type);
+						_lookup.Add (type, extension);
+					}
+				}
+				return _lookup;
+			}
+		}
 
-        protected override bool ThrowOnDuplicate {
-            get {
-                return base.ThrowOnDuplicate;
-            }
-        }
+		protected override bool ThrowOnDuplicate {
+			get {
+				return base.ThrowOnDuplicate;
+			}
+		}
 
-        protected override object GetElementKey (ConfigurationElement element) {
-            return ((ExtensionElement) element).Name;
-        }
+		protected override object GetElementKey (ConfigurationElement element) {
+			return ((ExtensionElement) element).Name;
+		}
 
-        protected override void BaseAdd (ConfigurationElement element) {
-            base.BaseAdd (element);
-        }
+		protected override void BaseAdd (ConfigurationElement element) {
+			base.BaseAdd (element);
+		}
 
-        protected override void BaseAdd (int index, ConfigurationElement element) {
-            base.BaseAdd (index, element);
-        }
+		protected override void BaseAdd (int index, ConfigurationElement element) {
+			base.BaseAdd (index, element);
+		}
 
-        private void AddLookup (ConfigurationElement element) {
-            ExtensionElement extension = (ExtensionElement) element;
-            Type type = Type.GetType (extension.Type);
-            _lookup.Add (type, extension);
-        }
+		private void AddLookup (ConfigurationElement element) {
+			ExtensionElement extension = (ExtensionElement) element;
+			Type type = Type.GetType (extension.Type);
+			_lookup.Add (type, extension);
+		}
 
-        internal string GetConfigurationElementName (Type type) {
-            if (Lookup.ContainsKey (type))
-                return Lookup [type].Name;
-            return null;
-        }
-    }
+		internal string GetConfigurationElementName (Type type) {
+			if (Lookup.ContainsKey (type))
+				return Lookup [type].Name;
+			return null;
+		}
+	}
 
 }

@@ -4,9 +4,9 @@ using System;
 
 class X
 {
-    static void Main ()
-    {
-        int a = 7;
-        +a = 9;
-    }
+	static void Main ()
+	{
+		int a = 7;
+		+a = 9;
+	}
 }

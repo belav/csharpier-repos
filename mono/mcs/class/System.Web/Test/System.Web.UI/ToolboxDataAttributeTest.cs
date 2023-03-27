@@ -21,7 +21,7 @@
 // ToolBoxDataAttributeTest.cs
 //
 // Author:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,56 +37,56 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI {
 
-    [TestFixture]
-    public class ToolboxDataAttributeTest {
+	[TestFixture]
+	public class ToolboxDataAttributeTest {
 
-        [Test]
-        public void Defaults ()
-        {
-            ToolboxDataAttribute at = new ToolboxDataAttribute (String.Empty);
-            Assert.AreEqual (at.Data, String.Empty, "Data Value");
+		[Test]
+		public void Defaults ()
+		{
+			ToolboxDataAttribute at = new ToolboxDataAttribute (String.Empty);
+			Assert.AreEqual (at.Data, String.Empty, "Data Value");
 
-            Assert.AreEqual (ToolboxDataAttribute.Default.Data,
-                    String.Empty, "Default Data Value");
-        }
+			Assert.AreEqual (ToolboxDataAttribute.Default.Data,
+					String.Empty, "Default Data Value");
+		}
 
-        [Test]
-        public void NullAllowed ()
-        {
-            ToolboxDataAttribute at = new ToolboxDataAttribute (null);
-            Assert.AreEqual (at.Data, null, "Null Data");
-        }
-            
-        [Test]
-        public void EqualsTest ()
-        {
-            string foo_built = new StringBuilder ("f").Append ("oo").ToString ();
-            ToolboxDataAttribute left = new ToolboxDataAttribute (foo_built);
-            ToolboxDataAttribute right = new ToolboxDataAttribute ("foo");
+		[Test]
+		public void NullAllowed ()
+		{
+			ToolboxDataAttribute at = new ToolboxDataAttribute (null);
+			Assert.AreEqual (at.Data, null, "Null Data");
+		}
+			
+		[Test]
+		public void EqualsTest ()
+		{
+			string foo_built = new StringBuilder ("f").Append ("oo").ToString ();
+			ToolboxDataAttribute left = new ToolboxDataAttribute (foo_built);
+			ToolboxDataAttribute right = new ToolboxDataAttribute ("foo");
 
-            Assert.IsTrue (left.Equals (right), "Equals True");
+			Assert.IsTrue (left.Equals (right), "Equals True");
 
-            right = new ToolboxDataAttribute ("bar");
-            Assert.IsFalse (left.Equals (right), "Equals False");
+			right = new ToolboxDataAttribute ("bar");
+			Assert.IsFalse (left.Equals (right), "Equals False");
 
-            Assert.IsFalse (left.Equals (45), "Equals Int");
-            Assert.IsFalse (left.Equals ("foo"), "Equals String");
-        }
+			Assert.IsFalse (left.Equals (45), "Equals Int");
+			Assert.IsFalse (left.Equals ("foo"), "Equals String");
+		}
 
-        [Test]
-        public void HashcodeTest ()
-        {
-            string foo_built = new StringBuilder ("f").Append ("oo").ToString ();
-            ToolboxDataAttribute left = new ToolboxDataAttribute ("foo");
-            ToolboxDataAttribute right = new ToolboxDataAttribute (foo_built);
+		[Test]
+		public void HashcodeTest ()
+		{
+			string foo_built = new StringBuilder ("f").Append ("oo").ToString ();
+			ToolboxDataAttribute left = new ToolboxDataAttribute ("foo");
+			ToolboxDataAttribute right = new ToolboxDataAttribute (foo_built);
 
-            Assert.AreEqual (left.GetHashCode (), right.GetHashCode (), "Hash identity");
+			Assert.AreEqual (left.GetHashCode (), right.GetHashCode (), "Hash identity");
 
-            left = new ToolboxDataAttribute (null);
-            right = new ToolboxDataAttribute (null);
+			left = new ToolboxDataAttribute (null);
+			right = new ToolboxDataAttribute (null);
 
-            Assert.AreEqual (left.GetHashCode (), right.GetHashCode (), "Hash identity (with null)");
-        }
-    }
+			Assert.AreEqual (left.GetHashCode (), right.GetHashCode (), "Hash identity (with null)");
+		}
+	}
 
 }

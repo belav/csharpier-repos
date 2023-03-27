@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.ViewCollection.cs
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -37,30 +37,30 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-    public class ViewCollection: ControlCollection
-    {
-        public ViewCollection (Control owner)
-            : base (owner)
-        {
-        }
-        
-        public override void Add (Control v)
-        {
-            if (!(v is View))
-                throw new ArgumentException ("The parameter is not a View control");
-            base.Add (v);
-        }
-        
-        public override void AddAt (int index, Control v)
-        {
-            if (!(v is View))
-                throw new ArgumentException ("The parameter is not a View control");
-            base.AddAt (index, v);
-        }
-        
-        public new View this [int i] {
-            get { return (View) base [i]; }
-        }
-    }
+	public class ViewCollection: ControlCollection
+	{
+		public ViewCollection (Control owner)
+			: base (owner)
+		{
+		}
+		
+		public override void Add (Control v)
+		{
+			if (!(v is View))
+				throw new ArgumentException ("The parameter is not a View control");
+			base.Add (v);
+		}
+		
+		public override void AddAt (int index, Control v)
+		{
+			if (!(v is View))
+				throw new ArgumentException ("The parameter is not a View control");
+			base.AddAt (index, v);
+		}
+		
+		public new View this [int i] {
+			get { return (View) base [i]; }
+		}
+	}
 }
 

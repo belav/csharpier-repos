@@ -6,14 +6,14 @@ using System;
 
 namespace Testing
 {
-    /// <summary>
-    /// description for class Test
-    /// </summary>
-    public class Test
-    {
-        public static bool operator ! (Test t)
-        {
-            return false;
-        }
-    }
+	/// <summary>
+	/// description for class Test
+	/// </summary>
+	public class Test
+	{
+		public static bool operator ! (Test t)
+		{
+			return false;
+		}
+	}
 }

@@ -93,7 +93,7 @@ namespace System.Net.Mail
         // FxCop: provide some way for derived classes to access GetObjectData even if the derived class
         // explicitly re-inherits ISerializable.
         //
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter)]         
+        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter)] 		
         public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
         {
             base.GetObjectData(serializationInfo, streamingContext);

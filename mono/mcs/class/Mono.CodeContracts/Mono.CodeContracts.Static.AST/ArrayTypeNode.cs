@@ -2,7 +2,7 @@
 // ArrayTypeNode.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,10 +29,10 @@
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Static.AST {
-    class ArrayTypeNode : TypeNode {
-        public ArrayTypeNode (TypeNode type, int lowerBound, int rank) :
-            base (new ArrayType (type.TypeDefinition, rank))
-        {
-        }
-    }
+	class ArrayTypeNode : TypeNode {
+		public ArrayTypeNode (TypeNode type, int lowerBound, int rank) :
+			base (new ArrayType (type.TypeDefinition, rank))
+		{
+		}
+	}
 }

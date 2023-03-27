@@ -2,7 +2,7 @@
 // UriParserTest.cs - Unit tests for System.UriParser
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,118 +33,118 @@ using System;
 
 namespace MonoTests.System {
 
-    public class UnitTestGenericUriParser: GenericUriParser {
+	public class UnitTestGenericUriParser: GenericUriParser {
 
-        static bool registered;
+		static bool registered;
 
-        public UnitTestGenericUriParser ()
-            : base (GenericUriParserOptions.Default)
-        {
-        }
+		public UnitTestGenericUriParser ()
+			: base (GenericUriParserOptions.Default)
+		{
+		}
 
-        public static bool Registered {
-            get {
-                return registered;
-            }
-        }
+		public static bool Registered {
+			get {
+				return registered;
+			}
+		}
 
-        protected override string GetComponents (Uri uri, UriComponents components, UriFormat format)
-        {
-            return base.GetComponents (uri, components, format);
-        }
+		protected override string GetComponents (Uri uri, UriComponents components, UriFormat format)
+		{
+			return base.GetComponents (uri, components, format);
+		}
 
-        protected override void InitializeAndValidate (Uri uri, out UriFormatException parsingError)
-        {
-            base.InitializeAndValidate (uri, out parsingError);
-        }
+		protected override void InitializeAndValidate (Uri uri, out UriFormatException parsingError)
+		{
+			base.InitializeAndValidate (uri, out parsingError);
+		}
 
-        protected override bool IsBaseOf (Uri baseUri, Uri relativeUri)
-        {
-            return base.IsBaseOf (baseUri, relativeUri);
-        }
+		protected override bool IsBaseOf (Uri baseUri, Uri relativeUri)
+		{
+			return base.IsBaseOf (baseUri, relativeUri);
+		}
 
-        protected override bool IsWellFormedOriginalString (Uri uri)
-        {
-            return base.IsWellFormedOriginalString (uri);
-        }
+		protected override bool IsWellFormedOriginalString (Uri uri)
+		{
+			return base.IsWellFormedOriginalString (uri);
+		}
 
-        protected override UriParser OnNewUri ()
-        {
-            return base.OnNewUri ();
-        }
+		protected override UriParser OnNewUri ()
+		{
+			return base.OnNewUri ();
+		}
 
-        protected override void OnRegister (string schemeName, int defaultPort)
-        {
-            registered = true;
-            // try to mess up registration
-            base.OnRegister (schemeName, 4040);
-            base.OnRegister ("s" + schemeName, 4444);
-        }
+		protected override void OnRegister (string schemeName, int defaultPort)
+		{
+			registered = true;
+			// try to mess up registration
+			base.OnRegister (schemeName, 4040);
+			base.OnRegister ("s" + schemeName, 4444);
+		}
 
-        protected override string Resolve (Uri baseUri, Uri relativeUri, out UriFormatException parsingError)
-        {
-            return base.Resolve (baseUri, relativeUri, out parsingError);
-        }
-    }
+		protected override string Resolve (Uri baseUri, Uri relativeUri, out UriFormatException parsingError)
+		{
+			return base.Resolve (baseUri, relativeUri, out parsingError);
+		}
+	}
 
-    [TestFixture]
-    public class GenericUriParserTest {
+	[TestFixture]
+	public class GenericUriParserTest {
 
-        private UnitTestGenericUriParser parser;
+		private UnitTestGenericUriParser parser;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            parser = new UnitTestGenericUriParser ();
-            // unit tests are being reused in CAS tests
-            if (!UriParser.IsKnownScheme ("generic"))
-                UriParser.Register (parser, "generic", 1);
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			parser = new UnitTestGenericUriParser ();
+			// unit tests are being reused in CAS tests
+			if (!UriParser.IsKnownScheme ("generic"))
+				UriParser.Register (parser, "generic", 1);
 
-            Assert.IsTrue (UnitTestGenericUriParser.Registered, "Registered");
-            // our parser code was called
-        }
+			Assert.IsTrue (UnitTestGenericUriParser.Registered, "Registered");
+			// our parser code was called
+		}
 
-        [Test]
-        public void Generic ()
-        {
-            Uri uri = new Uri ("generic://www.example.com/");
-            Assert.AreEqual (1, uri.Port, "Port");
-        }
+		[Test]
+		public void Generic ()
+		{
+			Uri uri = new Uri ("generic://www.example.com/");
+			Assert.AreEqual (1, uri.Port, "Port");
+		}
 
-        [Test]
-        [Category ("NotWorking")]
-        public void Generic_Methods ()
-        {
-            Uri uri = new Uri ("generic://www.example.com/");
-            Assert.AreEqual (String.Empty, uri.GetComponents (UriComponents.Path, UriFormat.SafeUnescaped), "GetComponents");
-            Assert.IsTrue (uri.IsBaseOf (uri), "IsBaseOf");
-            Assert.IsTrue (uri.IsWellFormedOriginalString (), "IsWellFormedOriginalString");
-        }
+		[Test]
+		[Category ("NotWorking")]
+		public void Generic_Methods ()
+		{
+			Uri uri = new Uri ("generic://www.example.com/");
+			Assert.AreEqual (String.Empty, uri.GetComponents (UriComponents.Path, UriFormat.SafeUnescaped), "GetComponents");
+			Assert.IsTrue (uri.IsBaseOf (uri), "IsBaseOf");
+			Assert.IsTrue (uri.IsWellFormedOriginalString (), "IsWellFormedOriginalString");
+		}
 
-        [Test]
-        public void SecureGeneric ()
-        {
-            Uri uri = new Uri ("sgenericx://www.example.com/");
-            Assert.AreEqual (-1, uri.Port, "Port");
-            // OnRegister cannot be used to change the registering informations
-        }
+		[Test]
+		public void SecureGeneric ()
+		{
+			Uri uri = new Uri ("sgenericx://www.example.com/");
+			Assert.AreEqual (-1, uri.Port, "Port");
+			// OnRegister cannot be used to change the registering informations
+		}
 
-        [Test]
-        public void AllOptions ()
-        {
-            for (int i = 0; i < 512; i++) {
-                GenericUriParserOptions gupo = (GenericUriParserOptions) i;
-                Assert.IsNotNull (new GenericUriParser (gupo), gupo.ToString ());
-            }
-        }
+		[Test]
+		public void AllOptions ()
+		{
+			for (int i = 0; i < 512; i++) {
+				GenericUriParserOptions gupo = (GenericUriParserOptions) i;
+				Assert.IsNotNull (new GenericUriParser (gupo), gupo.ToString ());
+			}
+		}
 
-        [Test]
-        public void InvalidOptions ()
-        {
-            Assert.IsNotNull (new GenericUriParser ((GenericUriParserOptions) 512), "512");
-            Assert.IsNotNull (new GenericUriParser ((GenericUriParserOptions) Int32.MinValue), "Int32.MinValue");
-            // there are no check for invalid values
-        }
-    }
+		[Test]
+		public void InvalidOptions ()
+		{
+			Assert.IsNotNull (new GenericUriParser ((GenericUriParserOptions) 512), "512");
+			Assert.IsNotNull (new GenericUriParser ((GenericUriParserOptions) Int32.MinValue), "Int32.MinValue");
+			// there are no check for invalid values
+		}
+	}
 }
 

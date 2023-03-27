@@ -30,17 +30,17 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    [AttributeUsage (AttributeTargets.Assembly, AllowMultiple = true)]
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-    public sealed class XmlnsCompatibleWithAttribute : Attribute
-    {
-        public XmlnsCompatibleWithAttribute (string oldNamespace, string newNamespace)
-        {
-            OldNamespace = oldNamespace;
-            NewNamespace = newNamespace;
-        }
-        
-        public string NewNamespace { get; private set; }
-        public string OldNamespace { get; private set; }
-    }
+	[AttributeUsage (AttributeTargets.Assembly, AllowMultiple = true)]
+	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+	public sealed class XmlnsCompatibleWithAttribute : Attribute
+	{
+		public XmlnsCompatibleWithAttribute (string oldNamespace, string newNamespace)
+		{
+			OldNamespace = oldNamespace;
+			NewNamespace = newNamespace;
+		}
+		
+		public string NewNamespace { get; private set; }
+		public string OldNamespace { get; private set; }
+	}
 }

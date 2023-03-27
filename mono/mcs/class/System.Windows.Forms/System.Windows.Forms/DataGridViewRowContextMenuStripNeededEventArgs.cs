@@ -20,30 +20,30 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    public class DataGridViewRowContextMenuStripNeededEventArgs : EventArgs {
+	public class DataGridViewRowContextMenuStripNeededEventArgs : EventArgs {
 
-        private int rowIndex;
-        private ContextMenuStrip contextMenuStrip;
+		private int rowIndex;
+		private ContextMenuStrip contextMenuStrip;
 
-        public DataGridViewRowContextMenuStripNeededEventArgs (int rowIndex) {
-            this.rowIndex = rowIndex;
-        }
+		public DataGridViewRowContextMenuStripNeededEventArgs (int rowIndex) {
+			this.rowIndex = rowIndex;
+		}
 
-        public ContextMenuStrip ContextMenuStrip {
-            get { return contextMenuStrip; }
-            set { contextMenuStrip = value; }
-        }
+		public ContextMenuStrip ContextMenuStrip {
+			get { return contextMenuStrip; }
+			set { contextMenuStrip = value; }
+		}
 
-        public int RowIndex {
-            get { return rowIndex; }
-        }
+		public int RowIndex {
+			get { return rowIndex; }
+		}
 
-    }
+	}
 
 }

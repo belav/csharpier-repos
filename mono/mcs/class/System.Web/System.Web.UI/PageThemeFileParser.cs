@@ -37,30 +37,30 @@ using System.Web.Util;
 
 namespace System.Web.UI
 {
-    internal sealed class PageThemeFileParser: UserControlParser
-    {
-        internal PageThemeFileParser (VirtualPath virtualPath, string inputFile, HttpContext context)
-        : base (virtualPath, inputFile, context, "System.Web.UI.PageTheme")
-        {
-        }
-        
-        internal override void HandleOptions (object obj)
-        {
-        }
+	internal sealed class PageThemeFileParser: UserControlParser
+	{
+		internal PageThemeFileParser (VirtualPath virtualPath, string inputFile, HttpContext context)
+		: base (virtualPath, inputFile, context, "System.Web.UI.PageTheme")
+		{
+		}
+		
+		internal override void HandleOptions (object obj)
+		{
+		}
 
-        internal override void AddDirective (string directive, IDictionary atts)
-        {
-            int cmp = String.Compare ("Register", directive, StringComparison.OrdinalIgnoreCase);
-            if (cmp == 0) {
-                base.AddDirective (directive, atts);
-                return;
-            }
+		internal override void AddDirective (string directive, IDictionary atts)
+		{
+			int cmp = String.Compare ("Register", directive, StringComparison.OrdinalIgnoreCase);
+			if (cmp == 0) {
+				base.AddDirective (directive, atts);
+				return;
+			}
 
-            ThrowParseException ("Unknown directive: " + directive);
-        }
+			ThrowParseException ("Unknown directive: " + directive);
+		}
 
-        internal override string DefaultBaseTypeName {
-            get { return "System.Web.UI.PageTheme"; }
-        }
-    }
+		internal override string DefaultBaseTypeName {
+			get { return "System.Web.UI.PageTheme"; }
+		}
+	}
 }

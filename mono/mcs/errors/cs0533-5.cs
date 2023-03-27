@@ -3,11 +3,11 @@
 
 abstract public class BaseClass
 {
-    abstract protected void Foo ();
+	abstract protected void Foo ();
 }
 
 abstract class DerivedClass: BaseClass
 {
-    public new int Foo;
+	public new int Foo;
 }
 

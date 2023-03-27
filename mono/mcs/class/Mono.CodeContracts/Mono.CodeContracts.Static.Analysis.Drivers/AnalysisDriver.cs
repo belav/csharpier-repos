@@ -2,7 +2,7 @@
 // AnalysisDriver.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,32 +31,32 @@ using Mono.CodeContracts.Static.ControlFlow.Subroutines;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis.Drivers {
-    abstract class AnalysisDriver<Expression, Variable>
-        : IBasicAnalysisDriver {
-        private readonly IBasicAnalysisDriver basic_driver;
+	abstract class AnalysisDriver<Expression, Variable>
+		: IBasicAnalysisDriver {
+		private readonly IBasicAnalysisDriver basic_driver;
 
-        protected AnalysisDriver (IBasicAnalysisDriver basicDriver)
-        {
-            this.basic_driver = basicDriver;
-        }
+		protected AnalysisDriver (IBasicAnalysisDriver basicDriver)
+		{
+			this.basic_driver = basicDriver;
+		}
 
-        #region IBasicAnalysisDriver Members
-        public SubroutineFacade SubroutineFacade
-        {
-            get { return this.basic_driver.SubroutineFacade; }
-        }
+		#region IBasicAnalysisDriver Members
+		public SubroutineFacade SubroutineFacade
+		{
+			get { return this.basic_driver.SubroutineFacade; }
+		}
 
-        public IMetaDataProvider MetaDataProvider
-        {
-            get { return this.basic_driver.MetaDataProvider; }
-        }
+		public IMetaDataProvider MetaDataProvider
+		{
+			get { return this.basic_driver.MetaDataProvider; }
+		}
 
-        public IContractProvider ContractProvider
-        {
-            get { return this.basic_driver.ContractProvider; }
-        }
-        #endregion
+		public IContractProvider ContractProvider
+		{
+			get { return this.basic_driver.ContractProvider; }
+		}
+		#endregion
 
-        public abstract IMethodDriver<Expression, Variable> CreateMethodDriver (Method method);
-    }
+		public abstract IMethodDriver<Expression, Variable> CreateMethodDriver (Method method);
+	}
 }

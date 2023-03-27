@@ -2,7 +2,7 @@
 // System.Configuration.DefaultValidator.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -29,20 +29,20 @@
 using System;
 
 namespace System.Configuration {
-    public sealed class DefaultValidator : ConfigurationValidatorBase
-    {
-        public DefaultValidator ()
-        {
-        }
+	public sealed class DefaultValidator : ConfigurationValidatorBase
+	{
+		public DefaultValidator ()
+		{
+		}
 
-        public override bool CanValidate (Type type)
-        {
-            return true;
-        }
+		public override bool CanValidate (Type type)
+		{
+			return true;
+		}
 
-        public override void Validate (object value)
-        {
-        }
-    }
+		public override void Validate (object value)
+		{
+		}
+	}
 }
 

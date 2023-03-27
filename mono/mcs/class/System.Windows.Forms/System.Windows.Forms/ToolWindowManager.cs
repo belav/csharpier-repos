@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Rolf Bjarne Kvinge  (RKvinge@novell.com)
+//	Rolf Bjarne Kvinge  (RKvinge@novell.com)
 //
 //
 
@@ -31,17 +31,17 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-    internal class ToolWindowManager : InternalWindowManager
-    {
-        public ToolWindowManager (Form form)
-            : base (form)
-        {
+	internal class ToolWindowManager : InternalWindowManager
+	{
+		public ToolWindowManager (Form form)
+			: base (form)
+		{
 
-        }
+		}
 
-        public override void SetWindowState (FormWindowState old_state, FormWindowState window_state)
-        {
-            // Do nothing here.
-        }
-    }
+		public override void SetWindowState (FormWindowState old_state, FormWindowState window_state)
+		{
+			// Do nothing here.
+		}
+	}
 }

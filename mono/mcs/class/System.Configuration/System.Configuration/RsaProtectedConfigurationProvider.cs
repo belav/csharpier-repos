@@ -2,7 +2,7 @@
 // System.Configuration.RsaProtectedConfigurationProvider.cs
 //
 // Authors:
-//     Chris Toshok (toshok@ximian.com)
+// 	Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,139 +34,139 @@ using System.Security.Cryptography.Xml;
 
 namespace System.Configuration
 {
-    public sealed class RsaProtectedConfigurationProvider: ProtectedConfigurationProvider
-    {
-        string cspProviderName;
-        string keyContainerName;
-        bool useMachineContainer;
-        bool useOAEP;
+	public sealed class RsaProtectedConfigurationProvider: ProtectedConfigurationProvider
+	{
+		string cspProviderName;
+		string keyContainerName;
+		bool useMachineContainer;
+		bool useOAEP;
 
-        RSACryptoServiceProvider rsa;
+		RSACryptoServiceProvider rsa;
 
-        RSACryptoServiceProvider GetProvider ()
-        {
-            if (rsa == null) {
-                CspParameters c = new CspParameters ();
-                c.ProviderName = cspProviderName;
-                c.KeyContainerName = keyContainerName;
-                if (useMachineContainer)
-                    c.Flags |= CspProviderFlags.UseMachineKeyStore;
+		RSACryptoServiceProvider GetProvider ()
+		{
+			if (rsa == null) {
+				CspParameters c = new CspParameters ();
+				c.ProviderName = cspProviderName;
+				c.KeyContainerName = keyContainerName;
+				if (useMachineContainer)
+					c.Flags |= CspProviderFlags.UseMachineKeyStore;
 
-                rsa = new RSACryptoServiceProvider (c);
-            }
+				rsa = new RSACryptoServiceProvider (c);
+			}
 
-            return rsa;
-        }
+			return rsa;
+		}
 
-        public RsaProtectedConfigurationProvider ()
-        {
-        }
+		public RsaProtectedConfigurationProvider ()
+		{
+		}
 
-        [MonoTODO]
-        public override XmlNode Decrypt (XmlNode encryptedNode)
-        {
-            XmlDocument doc = new ConfigurationXmlDocument ();
-            
-            doc.Load (new StringReader (encryptedNode.OuterXml));
+		[MonoTODO]
+		public override XmlNode Decrypt (XmlNode encryptedNode)
+		{
+			XmlDocument doc = new ConfigurationXmlDocument ();
+			
+			doc.Load (new StringReader (encryptedNode.OuterXml));
 
-            EncryptedXml ex = new EncryptedXml (doc);
+			EncryptedXml ex = new EncryptedXml (doc);
 
-            ex.AddKeyNameMapping ("Rsa Key", GetProvider ());
+			ex.AddKeyNameMapping ("Rsa Key", GetProvider ());
 
-            ex.DecryptDocument ();
-            
-            return doc.DocumentElement;
-        }
+			ex.DecryptDocument ();
+			
+			return doc.DocumentElement;
+		}
 
-        [MonoTODO]
-        public override XmlNode Encrypt (XmlNode node)
-        {
-            XmlDocument doc = new ConfigurationXmlDocument ();
-            
-            doc.Load (new StringReader (node.OuterXml));
+		[MonoTODO]
+		public override XmlNode Encrypt (XmlNode node)
+		{
+			XmlDocument doc = new ConfigurationXmlDocument ();
+			
+			doc.Load (new StringReader (node.OuterXml));
 
-            EncryptedXml ex = new EncryptedXml (doc);
+			EncryptedXml ex = new EncryptedXml (doc);
 
-            ex.AddKeyNameMapping ("Rsa Key", GetProvider ());
+			ex.AddKeyNameMapping ("Rsa Key", GetProvider ());
 
-            EncryptedData d = ex.Encrypt (doc.DocumentElement, "Rsa Key");
+			EncryptedData d = ex.Encrypt (doc.DocumentElement, "Rsa Key");
 
-            return d.GetXml();
-        }
+			return d.GetXml();
+		}
 
-        [MonoTODO]
-        public override void Initialize (string name, NameValueCollection configurationValues)
-        {
-            string flag;
+		[MonoTODO]
+		public override void Initialize (string name, NameValueCollection configurationValues)
+		{
+			string flag;
 
-            base.Initialize (name, configurationValues);
+			base.Initialize (name, configurationValues);
 
-            keyContainerName = configurationValues ["keyContainerName"];
-            cspProviderName = configurationValues ["cspProviderName"];
+			keyContainerName = configurationValues ["keyContainerName"];
+			cspProviderName = configurationValues ["cspProviderName"];
 
-            flag = configurationValues ["useMachineContainer"];
-            if (flag != null && flag.ToLower() == "true")
-                useMachineContainer = true;
+			flag = configurationValues ["useMachineContainer"];
+			if (flag != null && flag.ToLower() == "true")
+				useMachineContainer = true;
 
-            flag = configurationValues ["useOAEP"];
-            if (flag != null && flag.ToLower() == "true")
-                useOAEP = true;
-        }
+			flag = configurationValues ["useOAEP"];
+			if (flag != null && flag.ToLower() == "true")
+				useOAEP = true;
+		}
 
-        [MonoTODO]
-        public void AddKey (int keySize, bool exportable)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void AddKey (int keySize, bool exportable)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void DeleteKey ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void DeleteKey ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void ExportKey (string xmlFileName, bool includePrivateParameters)
-        {
-            RSACryptoServiceProvider prov = GetProvider ();
-            string xml = prov.ToXmlString (includePrivateParameters);
+		[MonoTODO]
+		public void ExportKey (string xmlFileName, bool includePrivateParameters)
+		{
+			RSACryptoServiceProvider prov = GetProvider ();
+			string xml = prov.ToXmlString (includePrivateParameters);
 
-            FileStream stream = new FileStream (xmlFileName, FileMode.OpenOrCreate, FileAccess.Write);
-            StreamWriter writer = new StreamWriter (stream);
+			FileStream stream = new FileStream (xmlFileName, FileMode.OpenOrCreate, FileAccess.Write);
+			StreamWriter writer = new StreamWriter (stream);
 
-            writer.Write (xml);
-            writer.Close ();
-        }
+			writer.Write (xml);
+			writer.Close ();
+		}
 
-        [MonoTODO]
-        public void ImportKey (string xmlFileName, bool exportable)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void ImportKey (string xmlFileName, bool exportable)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public string CspProviderName
-        {
-            get { return cspProviderName; }
-        }
+		public string CspProviderName
+		{
+			get { return cspProviderName; }
+		}
 
-        public string KeyContainerName {
-            get { return keyContainerName; }
-        }
+		public string KeyContainerName {
+			get { return keyContainerName; }
+		}
 
-        public RSAParameters RsaPublicKey {
-            get {
-                RSACryptoServiceProvider prov = GetProvider ();
-                return prov.ExportParameters (false);
-            }
-        }
+		public RSAParameters RsaPublicKey {
+			get {
+				RSACryptoServiceProvider prov = GetProvider ();
+				return prov.ExportParameters (false);
+			}
+		}
 
-        public bool UseMachineContainer {
-            get { return useMachineContainer; }
-        }
+		public bool UseMachineContainer {
+			get { return useMachineContainer; }
+		}
 
-        public bool UseOAEP {
-            get { return useOAEP; }
-        }
-    }
+		public bool UseOAEP {
+			get { return useOAEP; }
+		}
+	}
 }
 

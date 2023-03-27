@@ -2,7 +2,7 @@
 // UnitCas.cs - CAS unit tests for System.Web.UI.WebControls.Unit
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,32 +38,32 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class UnitCas : AspNetHostingNone {
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            UnitTest unit = new UnitTest ();
-            unit.UnitConstructors ();
-            unit.ParseCultures ();
-            unit.UnitEquality ();
-            unit.UnitImplicit ();
-            unit.Unit_IFormatProviderToString ();
-        }
+	[TestFixture]
+	[Category ("CAS")]
+	public class UnitCas : AspNetHostingNone {
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			UnitTest unit = new UnitTest ();
+			unit.UnitConstructors ();
+			unit.ParseCultures ();
+			unit.UnitEquality ();
+			unit.UnitImplicit ();
+			unit.Unit_IFormatProviderToString ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (int) });
-            Assert.IsNotNull (ci, ".ctor(int)");
-            return ci.Invoke (new object[1] { 0 });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (int) });
+			Assert.IsNotNull (ci, ".ctor(int)");
+			return ci.Invoke (new object[1] { 0 });
+		}
 
-        public override Type Type {
-            get { return typeof (Unit); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (Unit); }
+		}
+	}
 }

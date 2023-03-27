@@ -1,7 +1,7 @@
 //
 //
-//    Mono.Cairo drawing samples using image (png) as drawing surface
-//    Author: Hisham Mardam Bey <hisham@hisham.cc>
+//	Mono.Cairo drawing samples using image (png) as drawing surface
+//	Author: Hisham Mardam Bey <hisham@hisham.cc>
 //
 
 //
@@ -29,44 +29,44 @@
 
 using System;
 using Cairo;
-    
+	
 public class CairoTest
-{    
+{	
 
-    static void draw (Cairo.Context gr, int width, int height)
-    {
-        double x=0.1,  y=0.5;
-        double x1=0.4, y1=0.9, x2=0.6, y2=0.1, x3=0.9, y3=0.5;
-        
-                
-        gr.Scale (width, height);
-        gr.LineWidth = 0.04;        
-        
-        gr.MoveTo ( new PointD (x, y) );
-        
-        gr.CurveTo ( new PointD (x1, y1),
-                 new PointD (x2, y2), 
-                 new PointD (x3, y3)
-                 );
-        
-        gr.Stroke ();
-        
-        gr.Color = new Color (1, 0.2, 0.2, 0.6);
-        gr.LineWidth = 0.03;
-        gr.MoveTo ( new PointD (x, y) );
-        gr.LineTo ( new PointD (x1, y1) );
-        gr.MoveTo ( new PointD (x2, y2) );
-        gr.LineTo ( new PointD (x3, y3) );
-        gr.Stroke ();                        
-    }
-        
-    static void Main ()
-    {        
-        Surface s = new ImageSurface (Format.ARGB32, 500, 500);
-        Cairo.Context g = new Cairo.Context (s);
+	static void draw (Cairo.Context gr, int width, int height)
+	{
+		double x=0.1,  y=0.5;
+		double x1=0.4, y1=0.9, x2=0.6, y2=0.1, x3=0.9, y3=0.5;
+		
+				
+		gr.Scale (width, height);
+		gr.LineWidth = 0.04;		
+		
+		gr.MoveTo ( new PointD (x, y) );
+		
+		gr.CurveTo ( new PointD (x1, y1),
+			     new PointD (x2, y2), 
+			     new PointD (x3, y3)
+			     );
+		
+		gr.Stroke ();
+		
+		gr.Color = new Color (1, 0.2, 0.2, 0.6);
+		gr.LineWidth = 0.03;
+		gr.MoveTo ( new PointD (x, y) );
+		gr.LineTo ( new PointD (x1, y1) );
+		gr.MoveTo ( new PointD (x2, y2) );
+		gr.LineTo ( new PointD (x3, y3) );
+		gr.Stroke ();						
+	}
+		
+	static void Main ()
+	{		
+		Surface s = new ImageSurface (Format.ARGB32, 500, 500);
+		Cairo.Context g = new Cairo.Context (s);
 
-        draw (g, 500, 500);
-        
-        s.WriteToPng ("curve_to.png");
-    }
+		draw (g, 500, 500);
+		
+		s.WriteToPng ("curve_to.png");
+	}
 }

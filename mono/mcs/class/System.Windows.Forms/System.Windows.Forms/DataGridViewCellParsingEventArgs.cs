@@ -20,46 +20,46 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    public class DataGridViewCellParsingEventArgs : ConvertEventArgs {
+	public class DataGridViewCellParsingEventArgs : ConvertEventArgs {
 
-        private int columnIndex;
-        private DataGridViewCellStyle inheritedCellStyle;
-        private bool parsingApplied = false;
-        private int rowIndex;
+		private int columnIndex;
+		private DataGridViewCellStyle inheritedCellStyle;
+		private bool parsingApplied = false;
+		private int rowIndex;
 
-        public DataGridViewCellParsingEventArgs (int rowIndex, int columnIndex, object value, Type desiredType, DataGridViewCellStyle inheritedCellStyle)
-            : base (value, desiredType)
-        {
-            this.columnIndex = columnIndex;
-            this.rowIndex = rowIndex;
-            this.inheritedCellStyle = inheritedCellStyle;
-        }
+		public DataGridViewCellParsingEventArgs (int rowIndex, int columnIndex, object value, Type desiredType, DataGridViewCellStyle inheritedCellStyle)
+			: base (value, desiredType)
+		{
+			this.columnIndex = columnIndex;
+			this.rowIndex = rowIndex;
+			this.inheritedCellStyle = inheritedCellStyle;
+		}
 
-        public DataGridViewCellStyle InheritedCellStyle {
-            get { return inheritedCellStyle; }
-            set { inheritedCellStyle = value; }
-        }
+		public DataGridViewCellStyle InheritedCellStyle {
+			get { return inheritedCellStyle; }
+			set { inheritedCellStyle = value; }
+		}
 
-        public int ColumnIndex {
-            get { return columnIndex; }
-        }
+		public int ColumnIndex {
+			get { return columnIndex; }
+		}
 
-        public bool ParsingApplied {
-            get { return parsingApplied; }
-            set { parsingApplied = value; }
-        }
+		public bool ParsingApplied {
+			get { return parsingApplied; }
+			set { parsingApplied = value; }
+		}
 
-        public int RowIndex {
-            get { return rowIndex; }
-        }
+		public int RowIndex {
+			get { return rowIndex; }
+		}
 
-    }
+	}
 
 }
 

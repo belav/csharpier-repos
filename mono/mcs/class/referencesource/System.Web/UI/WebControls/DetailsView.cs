@@ -3367,7 +3367,7 @@ var {0} = new DetailsView();
 
             DetailsViewCommandEventArgs dvcea = new DetailsViewCommandEventArgs(this, cea);
             HandleEvent(dvcea, false, String.Empty);
-        }
+		}
 
 
         /// <devdoc>

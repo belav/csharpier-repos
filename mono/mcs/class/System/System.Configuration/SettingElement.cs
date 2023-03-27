@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingElement.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -30,89 +30,89 @@ using System;
 
 namespace System.Configuration
 {
-    public sealed class SettingElement
+	public sealed class SettingElement
 #if (CONFIGURATION_DEP)
-        : ConfigurationElement
+		: ConfigurationElement
 #endif
-    {
+	{
 #if CONFIGURATION_DEP
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty name_prop, serialize_as_prop, value_prop;
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty name_prop, serialize_as_prop, value_prop;
 #endif
 
-        static SettingElement ()
-        {
+		static SettingElement ()
+		{
 #if CONFIGURATION_DEP
-            name_prop = new ConfigurationProperty ("name", typeof (string), String.Empty, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-            serialize_as_prop = new ConfigurationProperty ("serializeAs", typeof (SettingsSerializeAs), null, ConfigurationPropertyOptions.IsRequired);
-            value_prop = new ConfigurationProperty ("value", typeof (SettingValueElement), null, ConfigurationPropertyOptions.IsRequired);
-            properties = new ConfigurationPropertyCollection ();
+			name_prop = new ConfigurationProperty ("name", typeof (string), String.Empty, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+			serialize_as_prop = new ConfigurationProperty ("serializeAs", typeof (SettingsSerializeAs), null, ConfigurationPropertyOptions.IsRequired);
+			value_prop = new ConfigurationProperty ("value", typeof (SettingValueElement), null, ConfigurationPropertyOptions.IsRequired);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (name_prop);
-            properties.Add (serialize_as_prop);
-            properties.Add (value_prop);
+			properties.Add (name_prop);
+			properties.Add (serialize_as_prop);
+			properties.Add (value_prop);
 #endif
-        }
+		}
 
-        public SettingElement ()
-        {
-        }
+		public SettingElement ()
+		{
+		}
 
-        public SettingElement (string name,
-                       SettingsSerializeAs serializeAs)
-        {
+		public SettingElement (string name,
+				       SettingsSerializeAs serializeAs)
+		{
 #if CONFIGURATION_DEP
-            Name = name;
-            SerializeAs = serializeAs;
+			Name = name;
+			SerializeAs = serializeAs;
 #endif
-        }
+		}
 
 #if (CONFIGURATION_DEP)
-        [ConfigurationProperty ("name", DefaultValue="",
-                    Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Name {
-            get { return (string) base [name_prop]; }
-            set { base [name_prop] = value; } // it does not reject null
-        }
+		[ConfigurationProperty ("name", DefaultValue="",
+					Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+		public string Name {
+			get { return (string) base [name_prop]; }
+			set { base [name_prop] = value; } // it does not reject null
+		}
 
-        [ConfigurationProperty ("value", DefaultValue=null,
-                    Options = ConfigurationPropertyOptions.IsRequired)]
-        public SettingValueElement Value {
-            get { return (SettingValueElement) base [value_prop]; }
-            set { base [value_prop] = value; }
-        }
+		[ConfigurationProperty ("value", DefaultValue=null,
+					Options = ConfigurationPropertyOptions.IsRequired)]
+		public SettingValueElement Value {
+			get { return (SettingValueElement) base [value_prop]; }
+			set { base [value_prop] = value; }
+		}
 
-        [ConfigurationProperty ("serializeAs", DefaultValue=SettingsSerializeAs.String,
-                    Options = ConfigurationPropertyOptions.IsRequired)]
-        public SettingsSerializeAs SerializeAs {
-            get { return base [serialize_as_prop] != null ? (SettingsSerializeAs) base [serialize_as_prop] : default (SettingsSerializeAs); }
-            set { base [serialize_as_prop] = value; }
-        }
+		[ConfigurationProperty ("serializeAs", DefaultValue=SettingsSerializeAs.String,
+					Options = ConfigurationPropertyOptions.IsRequired)]
+		public SettingsSerializeAs SerializeAs {
+			get { return base [serialize_as_prop] != null ? (SettingsSerializeAs) base [serialize_as_prop] : default (SettingsSerializeAs); }
+			set { base [serialize_as_prop] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        public override bool Equals (object settings)
-        {
-            SettingElement e = settings as SettingElement;
-            if (e == null)
-                return false;
+		public override bool Equals (object settings)
+		{
+			SettingElement e = settings as SettingElement;
+			if (e == null)
+				return false;
 
-            return e.SerializeAs == SerializeAs && e.Value == Value && e.Name == Name;
-        }
+			return e.SerializeAs == SerializeAs && e.Value == Value && e.Name == Name;
+		}
 
-        public override int GetHashCode ()
-        {
-            int v = (int) SerializeAs ^ 0x7F;
-            if (Name != null)
-                v += Name.GetHashCode () ^ 0x7F;
-            if (Value != null)
-                v += Value.GetHashCode ();
-            return v;
-        }
+		public override int GetHashCode ()
+		{
+			int v = (int) SerializeAs ^ 0x7F;
+			if (Name != null)
+				v += Name.GetHashCode () ^ 0x7F;
+			if (Value != null)
+				v += Value.GetHashCode ();
+			return v;
+		}
 #endif
-    }
+	}
 
 }
 

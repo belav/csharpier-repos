@@ -1,9 +1,9 @@
 //
 // CodeChecksumPragmaCas.cs
-//    - CAS unit tests for System.CodeDom.CodeChecksumPragma
+//	- CAS unit tests for System.CodeDom.CodeChecksumPragma
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,50 +38,50 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeChecksumPragmaCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeChecksumPragmaCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            CodeChecksumPragma ccp = new CodeChecksumPragma ();
-            Assert.AreEqual (Guid.Empty, ccp.ChecksumAlgorithmId, "ChecksumAlgorithmId");
-            ccp.ChecksumAlgorithmId = Guid.NewGuid ();
-            Assert.IsNull (ccp.ChecksumData, "ChecksumData");
-            ccp.ChecksumData = new byte [1];
-            Assert.AreEqual (String.Empty, ccp.FileName, "FileName");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor0_Deny_Unrestricted ()
+		{
+			CodeChecksumPragma ccp = new CodeChecksumPragma ();
+			Assert.AreEqual (Guid.Empty, ccp.ChecksumAlgorithmId, "ChecksumAlgorithmId");
+			ccp.ChecksumAlgorithmId = Guid.NewGuid ();
+			Assert.IsNull (ccp.ChecksumData, "ChecksumData");
+			ccp.ChecksumData = new byte [1];
+			Assert.AreEqual (String.Empty, ccp.FileName, "FileName");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
-        {
-            Guid g = Guid.NewGuid ();
-            CodeChecksumPragma ccp = new CodeChecksumPragma ("mono", g, new byte [1]);
-            Assert.AreEqual (g, ccp.ChecksumAlgorithmId, "ChecksumAlgorithmId");
-            ccp.ChecksumAlgorithmId = Guid.Empty;
-            Assert.AreEqual (1, ccp.ChecksumData.Length, "ChecksumData");
-            ccp.ChecksumData = new byte[0];
-            Assert.AreEqual ("mono", ccp.FileName, "FileName");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Constructor1_Deny_Unrestricted ()
+		{
+			Guid g = Guid.NewGuid ();
+			CodeChecksumPragma ccp = new CodeChecksumPragma ("mono", g, new byte [1]);
+			Assert.AreEqual (g, ccp.ChecksumAlgorithmId, "ChecksumAlgorithmId");
+			ccp.ChecksumAlgorithmId = Guid.Empty;
+			Assert.AreEqual (1, ccp.ChecksumData.Length, "ChecksumData");
+			ccp.ChecksumData = new byte[0];
+			Assert.AreEqual ("mono", ccp.FileName, "FileName");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeChecksumPragma).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeChecksumPragma).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }
 

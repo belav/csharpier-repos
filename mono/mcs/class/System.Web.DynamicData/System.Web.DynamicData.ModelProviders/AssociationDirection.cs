@@ -2,7 +2,7 @@
 // AssociationDirection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -32,11 +32,11 @@ using System.ComponentModel;
 
 namespace System.Web.DynamicData.ModelProviders
 {
-    public enum AssociationDirection
-    {
-        OneToOne,
-        OneToMany,
-        ManyToOne,
-        ManyToMany
-    }
+	public enum AssociationDirection
+	{
+		OneToOne,
+		OneToMany,
+		ManyToOne,
+		ManyToMany
+	}
 }

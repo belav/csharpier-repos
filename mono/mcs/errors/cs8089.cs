@@ -3,9 +3,9 @@
 
 public class Test
 {
-    public static int Main ()
-    {
-        int v = 0;
-        var s = $"{v:}";
-    }
+	public static int Main ()
+	{
+		int v = 0;
+		var s = $"{v:}";
+	}
 }

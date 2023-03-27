@@ -2,7 +2,7 @@
 // ActionMessageFilterTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -39,51 +39,51 @@ using Element = System.ServiceModel.Channels.TextMessageEncodingBindingElement;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {
-    [TestFixture]
-    public class ActionMessageFilterTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNull ()
-        {
-            new ActionMessageFilter (null);
-        }
+	[TestFixture]
+	public class ActionMessageFilterTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void ConstructorNull ()
+		{
+			new ActionMessageFilter (null);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNull2 ()
-        {
-            new ActionMessageFilter ("foo", null);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void ConstructorNull2 ()
+		{
+			new ActionMessageFilter ("foo", null);
+		}
 
-        [Test]
-        public void Match ()
-        {
-            ActionMessageFilter f = new ActionMessageFilter ("foo");
-            Assert.AreEqual (1, f.Actions.Count, "#1");
-            Message msg = Message.CreateMessage (MessageVersion.Default, "foo");
-            Assert.AreEqual ("foo", msg.Headers.Action, "#2");
-            Assert.IsTrue (f.Match (msg), "#3");
-            msg = Message.CreateMessage (MessageVersion.Default, "bar");
-            Assert.IsFalse (f.Match (msg), "#4");
+		[Test]
+		public void Match ()
+		{
+			ActionMessageFilter f = new ActionMessageFilter ("foo");
+			Assert.AreEqual (1, f.Actions.Count, "#1");
+			Message msg = Message.CreateMessage (MessageVersion.Default, "foo");
+			Assert.AreEqual ("foo", msg.Headers.Action, "#2");
+			Assert.IsTrue (f.Match (msg), "#3");
+			msg = Message.CreateMessage (MessageVersion.Default, "bar");
+			Assert.IsFalse (f.Match (msg), "#4");
 
-            f = new ActionMessageFilter ("foo", "bar");
-            Assert.AreEqual (2, f.Actions.Count, "#5");
-            Assert.IsTrue (f.Match (msg), "#6");
-        }
+			f = new ActionMessageFilter ("foo", "bar");
+			Assert.AreEqual (2, f.Actions.Count, "#5");
+			Assert.IsTrue (f.Match (msg), "#6");
+		}
 
 /*
-        [Test]
-        public void CreateMessageFilterTable ()
-        {
-            ActionMessageFilter f = new ActionMessageFilter ("foo");
-            IMessageFilterTable<int> t = f.CreateFilterTable<int> ();
-            Assert.AreEqual (0, t.Count, "#1");
+		[Test]
+		public void CreateMessageFilterTable ()
+		{
+			ActionMessageFilter f = new ActionMessageFilter ("foo");
+			IMessageFilterTable<int> t = f.CreateFilterTable<int> ();
+			Assert.AreEqual (0, t.Count, "#1");
 
-            t.Add (f, 0);
-            Assert.AreEqual (1, t.Count, "#2");
-        }
+			t.Add (f, 0);
+			Assert.AreEqual (1, t.Count, "#2");
+		}
 */
-    }
+	}
 }
 #endif

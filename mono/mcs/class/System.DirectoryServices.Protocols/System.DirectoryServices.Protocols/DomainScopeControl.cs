@@ -32,11 +32,11 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class DomainScopeControl : DirectoryControl
-    {
-        public DomainScopeControl ()
-            : base (null, null, false, false)
-        {
-        }
-    }
+	public class DomainScopeControl : DirectoryControl
+	{
+		public DomainScopeControl ()
+			: base (null, null, false, false)
+		{
+		}
+	}
 }

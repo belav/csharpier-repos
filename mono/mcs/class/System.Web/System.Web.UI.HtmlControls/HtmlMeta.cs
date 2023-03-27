@@ -2,7 +2,7 @@
 // System.Web.UI.HtmlControls.HtmlHead
 //
 // Authors:
-//     Chris Toshok (toshok@ximian.com)
+// 	Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 //
@@ -34,93 +34,93 @@ using System.Web.Configuration;
 
 namespace System.Web.UI.HtmlControls
 {
-    [ControlBuilder (typeof (HtmlEmptyTagControlBuilder))]
-    public class HtmlMeta: HtmlControl
-    {
-        public HtmlMeta () : base ("meta")
-        {
-        }
+	[ControlBuilder (typeof (HtmlEmptyTagControlBuilder))]
+	public class HtmlMeta: HtmlControl
+	{
+		public HtmlMeta () : base ("meta")
+		{
+		}
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual string Content {
-            get {
-                string s = Attributes["content"];
-                if (s == null)
-                    return String.Empty;
-                return s;
-            }
-            set {
-                if (value == null)
-                    Attributes.Remove ("content");
-                else
-                    Attributes["content"] = value;
-            }
-        }
+		[DefaultValue ("")]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public virtual string Content {
+			get {
+				string s = Attributes["content"];
+				if (s == null)
+					return String.Empty;
+				return s;
+			}
+			set {
+				if (value == null)
+					Attributes.Remove ("content");
+				else
+					Attributes["content"] = value;
+			}
+		}
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual string HttpEquiv {
-            get {
-                string s = Attributes["http-equiv"];
-                if (s == null)
-                    return String.Empty;
-                return s;
-            }
-            set {
-                if (value == null)
-                    Attributes.Remove ("http-equiv");
-                else
-                    Attributes["http-equiv"] = value;
-            }
-        }
+		[DefaultValue ("")]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public virtual string HttpEquiv {
+			get {
+				string s = Attributes["http-equiv"];
+				if (s == null)
+					return String.Empty;
+				return s;
+			}
+			set {
+				if (value == null)
+					Attributes.Remove ("http-equiv");
+				else
+					Attributes["http-equiv"] = value;
+			}
+		}
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual string Name {
-            get {
-                string s = Attributes["name"];
-                if (s == null)
-                    return String.Empty;
-                return s;
-            }
-            set {
-                if (value == null)
-                    Attributes.Remove ("name");
-                else
-                    Attributes["name"] = value;
-            }
-        }
+		[DefaultValue ("")]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public virtual string Name {
+			get {
+				string s = Attributes["name"];
+				if (s == null)
+					return String.Empty;
+				return s;
+			}
+			set {
+				if (value == null)
+					Attributes.Remove ("name");
+				else
+					Attributes["name"] = value;
+			}
+		}
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual string Scheme {
-            get {
-                string s = Attributes["scheme"];
-                if (s == null)
-                    return String.Empty;
-                return s;
-            }
-            set {
-                if (value == null)
-                    Attributes.Remove ("scheme");
-                else
-                    Attributes["scheme"] = value;
-            }
-        }
+		[DefaultValue ("")]
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public virtual string Scheme {
+			get {
+				string s = Attributes["scheme"];
+				if (s == null)
+					return String.Empty;
+				return s;
+			}
+			set {
+				if (value == null)
+					Attributes.Remove ("scheme");
+				else
+					Attributes["scheme"] = value;
+			}
+		}
 
-        protected internal override void Render (HtmlTextWriter writer)
-        {
-            XhtmlConformanceSection xhtml = WebConfigurationManager.GetSection ("system.web/xhtmlConformance") as XhtmlConformanceSection;
+		protected internal override void Render (HtmlTextWriter writer)
+		{
+			XhtmlConformanceSection xhtml = WebConfigurationManager.GetSection ("system.web/xhtmlConformance") as XhtmlConformanceSection;
 
-            if (xhtml != null && xhtml.Mode == XhtmlConformanceMode.Legacy)
-                base.Render (writer);
-            else {
-                writer.WriteBeginTag (TagName);
-                RenderAttributes (writer);
-                writer.Write ("/>");
-            }
-        }
-    }
+			if (xhtml != null && xhtml.Mode == XhtmlConformanceMode.Legacy)
+				base.Render (writer);
+			else {
+				writer.WriteBeginTag (TagName);
+				RenderAttributes (writer);
+				writer.Write ("/>");
+			}
+		}
+	}
 }
 

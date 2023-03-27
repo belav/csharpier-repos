@@ -20,19 +20,19 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    (pbartok@novell.com)
+//	Peter Bartok	(pbartok@novell.com)
 //
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public enum ErrorIconAlignment {
-        TopLeft        = 0,
-        TopRight    = 1,
-        MiddleLeft    = 2,
-        MiddleRight    = 3,
-        BottomLeft    = 4,
-        BottomRight    = 5
-    }
+	public enum ErrorIconAlignment {
+		TopLeft		= 0,
+		TopRight	= 1,
+		MiddleLeft	= 2,
+		MiddleRight	= 3,
+		BottomLeft	= 4,
+		BottomRight	= 5
+	}
 }

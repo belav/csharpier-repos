@@ -40,19 +40,19 @@ using System.Security;
 
 namespace MonoTests.System.Data.Connected.SqlClient
 {
-    [TestFixture]
-    [Category ("CAS")]
-    public class SqlClientFactoryTest
-    {
-        [Test]
-        public void CreatePermissionTest ()
-        {
-            SqlClientFactory factory = SqlClientFactory.Instance;
-            CodeAccessPermission permission, perm;
-            permission = factory.CreatePermission (PermissionState.None);
-            perm = factory.CreatePermission (PermissionState.Unrestricted);
-            Assert.AreEqual (false, perm.IsSubsetOf (permission), "#1");
-        }
-    }
+	[TestFixture]
+	[Category ("CAS")]
+	public class SqlClientFactoryTest
+	{
+		[Test]
+		public void CreatePermissionTest ()
+		{
+			SqlClientFactory factory = SqlClientFactory.Instance;
+			CodeAccessPermission permission, perm;
+			permission = factory.CreatePermission (PermissionState.None);
+			perm = factory.CreatePermission (PermissionState.Unrestricted);
+			Assert.AreEqual (false, perm.IsSubsetOf (permission), "#1");
+		}
+	}
 }
 

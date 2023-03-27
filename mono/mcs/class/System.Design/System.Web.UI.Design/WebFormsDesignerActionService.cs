@@ -2,7 +2,7 @@
 // System.Web.UI.Design.WebFormsDesignerActionService
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -36,20 +36,20 @@ using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {
-    public class WebFormsDesignerActionService : DesignerActionService
-    {
-        [MonoTODO]
-        public WebFormsDesignerActionService (IServiceProvider serviceProvider)
-            : base (serviceProvider)
-        {
-            throw new NotImplementedException ();
-        }
+	public class WebFormsDesignerActionService : DesignerActionService
+	{
+		[MonoTODO]
+		public WebFormsDesignerActionService (IServiceProvider serviceProvider)
+			: base (serviceProvider)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected override void GetComponentDesignerActions (IComponent component, DesignerActionListCollection actionLists)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		protected override void GetComponentDesignerActions (IComponent component, DesignerActionListCollection actionLists)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

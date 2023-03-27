@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Ravindra (rkumar@novell.com)
+//	Ravindra (rkumar@novell.com)
 
 
 // COMPLETE
@@ -36,62 +36,62 @@ using System.Reflection;
 
 namespace System.Windows.Forms
 {
-    public class ListViewItemConverter : ExpandableObjectConverter
-    {
-        #region Public Constructors
-        public ListViewItemConverter () { }
-        #endregion    // Public Constructors
+	public class ListViewItemConverter : ExpandableObjectConverter
+	{
+		#region Public Constructors
+		public ListViewItemConverter () { }
+		#endregion	// Public Constructors
 
-        #region Public Instance Methods
-        public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType) {
-            if (destinationType == typeof (string)) {
-                return true;
-            }
+		#region Public Instance Methods
+		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType) {
+			if (destinationType == typeof (string)) {
+				return true;
+			}
 
-            return base.CanConvertTo (context, destinationType);
-        }
+			return base.CanConvertTo (context, destinationType);
+		}
 
-        public override object ConvertTo (ITypeDescriptorContext context,
-                          CultureInfo culture, object value,
-                          Type destinationType)
-        {
-            if (destinationType == typeof (string)) {
-                return value.ToString ();
-            } else {
-                return base.ConvertTo (context, culture, value, destinationType);
-            }
-        }
-        #endregion    // Public Instance Methods
-    }
+		public override object ConvertTo (ITypeDescriptorContext context,
+						  CultureInfo culture, object value,
+						  Type destinationType)
+		{
+			if (destinationType == typeof (string)) {
+				return value.ToString ();
+			} else {
+				return base.ConvertTo (context, culture, value, destinationType);
+			}
+		}
+		#endregion	// Public Instance Methods
+	}
 
-    internal class ListViewSubItemConverter : ExpandableObjectConverter {
-        #region    Public Instance Methods
-        public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType) {
-            if (destinationType == typeof(InstanceDescriptor)) {
-                return true;
-            } else {
-                return base.CanConvertTo(context, destinationType);
-            }
-        }
+	internal class ListViewSubItemConverter : ExpandableObjectConverter {
+		#region	Public Instance Methods
+		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType) {
+			if (destinationType == typeof(InstanceDescriptor)) {
+				return true;
+			} else {
+				return base.CanConvertTo(context, destinationType);
+			}
+		}
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
-            if (destinationType == typeof(InstanceDescriptor) && value is ListViewItem.ListViewSubItem) {
-                ConstructorInfo            constructor_info;
-                Type[]                type;
-                ListViewItem.ListViewSubItem    sub_item;
+		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
+			if (destinationType == typeof(InstanceDescriptor) && value is ListViewItem.ListViewSubItem) {
+				ConstructorInfo			constructor_info;
+				Type[]				type;
+				ListViewItem.ListViewSubItem	sub_item;
 
-                sub_item = (ListViewItem.ListViewSubItem)value;
-                type = new Type[] { typeof(ListViewItem), typeof(string), typeof(Color), typeof(Color), typeof(Font)};
+				sub_item = (ListViewItem.ListViewSubItem)value;
+				type = new Type[] { typeof(ListViewItem), typeof(string), typeof(Color), typeof(Color), typeof(Font)};
 
-                constructor_info = typeof(ListViewItem.ListViewSubItem).GetConstructor(type);
-                if (constructor_info != null) {
-                    object[] arguments = new object[] {sub_item.Text, sub_item.ForeColor, sub_item.BackColor, sub_item.Font};
-                    return new InstanceDescriptor(constructor_info, (ICollection) arguments, true);
-                }
+				constructor_info = typeof(ListViewItem.ListViewSubItem).GetConstructor(type);
+				if (constructor_info != null) {
+					object[] arguments = new object[] {sub_item.Text, sub_item.ForeColor, sub_item.BackColor, sub_item.Font};
+					return new InstanceDescriptor(constructor_info, (ICollection) arguments, true);
+				}
 
-            }
-            return base.ConvertTo(context, culture, value, destinationType);
-        }
-        #endregion    // Public Instance Methods
-    }
+			}
+			return base.ConvertTo(context, culture, value, destinationType);
+		}
+		#endregion	// Public Instance Methods
+	}
 }

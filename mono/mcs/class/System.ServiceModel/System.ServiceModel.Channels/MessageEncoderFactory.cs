@@ -30,20 +30,20 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    public abstract class MessageEncoderFactory
-    {
-        protected MessageEncoderFactory ()
-        {
-        }
+	public abstract class MessageEncoderFactory
+	{
+		protected MessageEncoderFactory ()
+		{
+		}
 
-        public abstract MessageEncoder Encoder { get; }
+		public abstract MessageEncoder Encoder { get; }
 
-        public abstract MessageVersion MessageVersion { get; }
+		public abstract MessageVersion MessageVersion { get; }
 
-        [MonoTODO ("Not sure how it is used; it just returns Encoder so far")]
-        public virtual MessageEncoder CreateSessionEncoder ()
-        {
-            return Encoder;
-        }
-    }
+		[MonoTODO ("Not sure how it is used; it just returns Encoder so far")]
+		public virtual MessageEncoder CreateSessionEncoder ()
+		{
+			return Encoder;
+		}
+	}
 }

@@ -19,21 +19,21 @@ namespace Mono.ILASM {
                 private long l_operand;
 
                 public LdcInstr (MiscInstr op, double operand, Location loc)
-            : base (loc)
+			: base (loc)
                 {
                         this.op = op;
                         d_operand = operand;
                 }
 
                 public LdcInstr (MiscInstr op, long operand, Location loc)
-            : base (loc)
+			: base (loc)
                 {
                         this.op = op;
                         l_operand = operand;
                 }
 
                 public override void Emit (CodeGen code_gen, MethodDef meth,
-                       PEAPI.CILInstructions cil)
+					   PEAPI.CILInstructions cil)
                 {
                         switch (op) {
                         case MiscInstr.ldc_r8:

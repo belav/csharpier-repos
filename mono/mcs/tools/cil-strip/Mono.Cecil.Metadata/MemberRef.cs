@@ -31,50 +31,50 @@
 
 namespace Mono.Cecil.Metadata {
 
-    internal sealed class MemberRefTable : IMetadataTable {
+	internal sealed class MemberRefTable : IMetadataTable {
 
-        public const int RId = 0x0a;
+		public const int RId = 0x0a;
 
-        RowCollection m_rows;
+		RowCollection m_rows;
 
-        public MemberRefRow this [int index] {
-            get { return m_rows [index] as MemberRefRow; }
-            set { m_rows [index] = value; }
-        }
+		public MemberRefRow this [int index] {
+			get { return m_rows [index] as MemberRefRow; }
+			set { m_rows [index] = value; }
+		}
 
-        public RowCollection Rows {
-            get { return m_rows; }
-            set { m_rows = value; }
-        }
+		public RowCollection Rows {
+			get { return m_rows; }
+			set { m_rows = value; }
+		}
 
-        public int Id {
-            get { return RId; }
-        }
+		public int Id {
+			get { return RId; }
+		}
 
-        internal MemberRefTable ()
-        {
-        }
+		internal MemberRefTable ()
+		{
+		}
 
-        public void Accept (IMetadataTableVisitor visitor)
-        {
-            visitor.VisitMemberRefTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
-        }
-    }
+		public void Accept (IMetadataTableVisitor visitor)
+		{
+			visitor.VisitMemberRefTable (this);
+			this.Rows.Accept (visitor.GetRowVisitor ());
+		}
+	}
 
-    internal sealed class MemberRefRow : IMetadataRow {
+	internal sealed class MemberRefRow : IMetadataRow {
 
-        public MetadataToken Class;
-        public uint Name;
-        public uint Signature;
+		public MetadataToken Class;
+		public uint Name;
+		public uint Signature;
 
-        internal MemberRefRow ()
-        {
-        }
+		internal MemberRefRow ()
+		{
+		}
 
-        public void Accept (IMetadataRowVisitor visitor)
-        {
-            visitor.VisitMemberRefRow (this);
-        }
-    }
+		public void Accept (IMetadataRowVisitor visitor)
+		{
+			visitor.VisitMemberRefRow (this);
+		}
+	}
 }

@@ -33,97 +33,97 @@ using System.Collections.Generic;
 
 namespace System.Data.Linq
 {
-    public sealed class ChangeConflictCollection : ICollection<ObjectChangeConflict>, ICollection, IEnumerable<ObjectChangeConflict>, IEnumerable
+	public sealed class ChangeConflictCollection : ICollection<ObjectChangeConflict>, ICollection, IEnumerable<ObjectChangeConflict>, IEnumerable
 
-    {
-        internal ChangeConflictCollection ()
-        {
-        }
+	{
+		internal ChangeConflictCollection ()
+		{
+		}
 
-        [MonoTODO]
-        public int Count {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public int Count {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public ObjectChangeConflict this [int index] {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public ObjectChangeConflict this [int index] {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        bool ICollection<ObjectChangeConflict>.IsReadOnly {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		bool ICollection<ObjectChangeConflict>.IsReadOnly {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        bool ICollection.IsSynchronized {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		bool ICollection.IsSynchronized {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        object ICollection.SyncRoot {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		object ICollection.SyncRoot {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public void Clear ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void Clear ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public bool Contains (ObjectChangeConflict item)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public bool Contains (ObjectChangeConflict item)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void CopyTo (ObjectChangeConflict [] array, int arrayIndex)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void CopyTo (ObjectChangeConflict [] array, int arrayIndex)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public IEnumerator<ObjectChangeConflict> GetEnumerator ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public IEnumerator<ObjectChangeConflict> GetEnumerator ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public bool Remove (ObjectChangeConflict item)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public bool Remove (ObjectChangeConflict item)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void ResolveAll (RefreshMode mode)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void ResolveAll (RefreshMode mode)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void ResolveAll (RefreshMode mode, bool autoResolveDeletes)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public void ResolveAll (RefreshMode mode, bool autoResolveDeletes)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        void ICollection<ObjectChangeConflict>.Add (ObjectChangeConflict item)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		void ICollection<ObjectChangeConflict>.Add (ObjectChangeConflict item)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        void ICollection.CopyTo (Array array, int index)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		void ICollection.CopyTo (Array array, int index)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			throw new NotImplementedException ();
+		}
 
-    }
+	}
 }

@@ -7,5 +7,5 @@ using System.Reflection;
 
 class Const
 {
-    const string Version = "0.1";
+	const string Version = "0.1";
 }

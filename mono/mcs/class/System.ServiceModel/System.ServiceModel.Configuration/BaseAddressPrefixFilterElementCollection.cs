@@ -2,7 +2,7 @@
 // BaseAddressPrefixFilterElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (BaseAddressPrefixFilterElement),
-         AddItemName = "add",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.BasicMap)]
-    public sealed class BaseAddressPrefixFilterElementCollection
-         : ServiceModelConfigurationElementCollection<BaseAddressPrefixFilterElement>,  ICollection,  IEnumerable
-    {
-        protected override object GetElementKey (ConfigurationElement element) {
-            return ((BaseAddressPrefixFilterElement) element).Prefix;
-        }
+	[ConfigurationCollection (typeof (BaseAddressPrefixFilterElement),
+		 AddItemName = "add",
+		 RemoveItemName = "remove",
+		 ClearItemsName = "clear",
+		 CollectionType = ConfigurationElementCollectionType.BasicMap)]
+	public sealed class BaseAddressPrefixFilterElementCollection
+		 : ServiceModelConfigurationElementCollection<BaseAddressPrefixFilterElement>,  ICollection,  IEnumerable
+	{
+		protected override object GetElementKey (ConfigurationElement element) {
+			return ((BaseAddressPrefixFilterElement) element).Prefix;
+		}
 
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new BaseAddressPrefixFilterElement ();
-        }
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new BaseAddressPrefixFilterElement ();
+		}
 
-        protected override bool ThrowOnDuplicate {
-            get { return false; }
-        }
-    }
+		protected override bool ThrowOnDuplicate {
+			get { return false; }
+		}
+	}
 
 }

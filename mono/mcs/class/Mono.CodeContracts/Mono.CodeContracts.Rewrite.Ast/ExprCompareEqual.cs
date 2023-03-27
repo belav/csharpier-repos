@@ -2,7 +2,7 @@
 // ExprCompareEqual.cs
 //
 // Authors:
-//    Chris Bacon (chrisbacon76@gmail.com)
+//	Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -32,16 +32,16 @@ using System.Linq;
 using System.Text;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-    class ExprCompareEqual : ExprBinaryOpComparison {
+	class ExprCompareEqual : ExprBinaryOpComparison {
 
-        public ExprCompareEqual (MethodInfo methodInfo, Expr left, Expr right)
-            : base (methodInfo, left, right, Sn.None)
-        {
-        }
+		public ExprCompareEqual (MethodInfo methodInfo, Expr left, Expr right)
+			: base (methodInfo, left, right, Sn.None)
+		{
+		}
 
-        public override ExprType ExprType {
-            get { return ExprType.CompareEqual; }
-        }
+		public override ExprType ExprType {
+			get { return ExprType.CompareEqual; }
+		}
 
-    }
+	}
 }

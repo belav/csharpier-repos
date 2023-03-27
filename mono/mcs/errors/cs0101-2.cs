@@ -3,16 +3,16 @@
 using System;
 
 namespace AA {
-    namespace VV {
-        public enum SomeEnum {
-            Something1,
-            Something2
-        }
+	namespace VV {
+		public enum SomeEnum {
+			Something1,
+			Something2
+		}
 
-        public enum SomeEnum {
-            Dog,
-            Fish,
-            Cat
-        }
-    }
+		public enum SomeEnum {
+			Dog,
+			Fish,
+			Cat
+		}
+	}
 }

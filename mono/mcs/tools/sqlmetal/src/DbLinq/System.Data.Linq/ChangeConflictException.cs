@@ -31,21 +31,21 @@ using System;
 
 namespace System.Data.Linq
 {
-    public class ChangeConflictException : Exception
-    {
-        public ChangeConflictException ()
-            : this ("Change conflict occured")
-        {
-        }
+	public class ChangeConflictException : Exception
+	{
+		public ChangeConflictException ()
+			: this ("Change conflict occured")
+		{
+		}
 
-        public ChangeConflictException (string message)
-            : this (message, null)
-        {
-        }
+		public ChangeConflictException (string message)
+			: this (message, null)
+		{
+		}
 
-        public ChangeConflictException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
-    }
+		public ChangeConflictException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
+	}
 }

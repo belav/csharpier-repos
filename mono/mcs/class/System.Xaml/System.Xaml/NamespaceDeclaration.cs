@@ -25,16 +25,16 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-    public class NamespaceDeclaration
-    {
-        public NamespaceDeclaration (string ns, string prefix)
-        {
-            // null arguments are allowed.
-            Namespace = ns;
-            Prefix = prefix;
-        }
-        
-        public string Namespace { get; private set; }
-        public string Prefix { get; private set; }
-    }
+	public class NamespaceDeclaration
+	{
+		public NamespaceDeclaration (string ns, string prefix)
+		{
+			// null arguments are allowed.
+			Namespace = ns;
+			Prefix = prefix;
+		}
+		
+		public string Namespace { get; private set; }
+		public string Prefix { get; private set; }
+	}
 }

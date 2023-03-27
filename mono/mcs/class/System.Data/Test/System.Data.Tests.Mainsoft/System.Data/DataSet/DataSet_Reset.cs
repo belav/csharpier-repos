@@ -39,66 +39,66 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataSet_Reset : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataSet_Reset tc = new DataSet_Reset();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataSet_Reset");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataSet_Reset tc = new DataSet_Reset();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataSet_Reset");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        DataTable dt1 = GHTUtils.DataProvider.CreateParentDataTable();
-        DataTable dt2 = GHTUtils.DataProvider.CreateChildDataTable();
-        dt1.PrimaryKey  = new DataColumn[] {dt1.Columns[0]};
-        dt2.PrimaryKey  = new DataColumn[] {dt2.Columns[0],dt2.Columns[1]};
-        DataRelation rel = new DataRelation("Rel",dt1.Columns["ParentId"],dt2.Columns["ParentId"]);
-        DataSet ds = new DataSet();
-        ds.Tables.AddRange(new DataTable[] {dt1,dt2});
-        ds.Relations.Add(rel);
-        
-        ds.Reset();
+	public void run()
+	{
+		Exception exp = null;
+		DataTable dt1 = GHTUtils.DataProvider.CreateParentDataTable();
+		DataTable dt2 = GHTUtils.DataProvider.CreateChildDataTable();
+		dt1.PrimaryKey  = new DataColumn[] {dt1.Columns[0]};
+		dt2.PrimaryKey  = new DataColumn[] {dt2.Columns[0],dt2.Columns[1]};
+		DataRelation rel = new DataRelation("Rel",dt1.Columns["ParentId"],dt2.Columns["ParentId"]);
+		DataSet ds = new DataSet();
+		ds.Tables.AddRange(new DataTable[] {dt1,dt2});
+		ds.Relations.Add(rel);
+		
+		ds.Reset();
 
-        try
-        {
-            BeginCase("Reset - Relations");
-            Compare(ds.Relations.Count  ,0 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        try
-        {
-            BeginCase("Reset - Tables");
-            Compare(ds.Tables.Count  ,0 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-    }
+		try
+		{
+			BeginCase("Reset - Relations");
+			Compare(ds.Relations.Count  ,0 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("Reset - Tables");
+			Compare(ds.Tables.Count  ,0 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+	}
 }
 }

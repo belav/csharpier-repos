@@ -33,10 +33,10 @@ using System.Runtime.Versioning;
                             + "md   = System.Data.Metadata;"
                             + "ra   = System.Data.Query.ResultAssembly;"
                             + "pc   = System.Data.Query.PlanCompiler;"
-                        + "iqt  = System.Data.Query.InternalTrees;"
-                         + "mp   = System.Data.Mapping;"
-                    + "upd  = System.Data.Mapping.Update;"
-                    + "vgen = System.Data.Mapping.ViewGeneration;"
+	                    + "iqt  = System.Data.Query.InternalTrees;"
+     		    	    + "mp   = System.Data.Mapping;"
+		    	    + "upd  = System.Data.Mapping.Update;"
+		    	    + "vgen = System.Data.Mapping.ViewGeneration;"
 )]
 
 //

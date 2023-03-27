@@ -281,7 +281,7 @@ namespace System.Xml.Xsl.XsltOld {
 
                     if (nspace.Length != 0) continue;
 
-                    if (Ref.Equal(name, input.Atoms.Name)) {
+					if (Ref.Equal(name, input.Atoms.Name)) {
                         Name = compiler.CreateXPathQName(value);
                     }
                     else if (Ref.Equal(name, input.Atoms.Match)) {

@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationLocation.cs
 //
 // Authors:
-//    Duncan Mak (duncan@ximian.com)
+//	Duncan Mak (duncan@ximian.com)
 //  Lluis Sanchez Gual (lluis@novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -32,87 +32,87 @@ using System.IO;
 
 namespace System.Configuration {
 
-    public class ConfigurationLocation
-    {
-        static readonly char[] pathTrimChars = { '/' };
-        
-        string path;
-        Configuration configuration;
-        Configuration parent;
-        string xmlContent;
-        bool parentResolved;
-        bool allowOverride;
-        
-        internal ConfigurationLocation()
-        {
-        }
-        
-        internal ConfigurationLocation (string path, string xmlContent, Configuration parent, bool allowOverride)
-        {
-            if (!String.IsNullOrEmpty (path)) {
-                switch (path [0]) {
-                    case ' ':
-                    case '.':
-                    case '/':
-                    case '\\':
-                        throw new ConfigurationErrorsException ("<location> path attribute must be a relative virtual path.  It cannot start with any of ' ' '.' '/' or '\\'.");
-                }
+	public class ConfigurationLocation
+	{
+		static readonly char[] pathTrimChars = { '/' };
+		
+		string path;
+		Configuration configuration;
+		Configuration parent;
+		string xmlContent;
+		bool parentResolved;
+		bool allowOverride;
+		
+		internal ConfigurationLocation()
+		{
+		}
+		
+		internal ConfigurationLocation (string path, string xmlContent, Configuration parent, bool allowOverride)
+		{
+			if (!String.IsNullOrEmpty (path)) {
+				switch (path [0]) {
+					case ' ':
+					case '.':
+					case '/':
+					case '\\':
+						throw new ConfigurationErrorsException ("<location> path attribute must be a relative virtual path.  It cannot start with any of ' ' '.' '/' or '\\'.");
+				}
 
-                path = path.TrimEnd (pathTrimChars);
-            }
-            
-            this.path = path;
-            this.xmlContent = xmlContent;
-            this.parent = parent;
-            this.allowOverride = allowOverride;
-        }
-        
-        public string Path {
-            get { return path; }
-        }
-        
-        internal bool AllowOverride {
-            get { return allowOverride; }
-        }
-        
-        internal string XmlContent {
-            get { return xmlContent; }
-        }
-        
-        internal Configuration OpenedConfiguration {
-            get { return configuration; }
-        }
+				path = path.TrimEnd (pathTrimChars);
+			}
+			
+			this.path = path;
+			this.xmlContent = xmlContent;
+			this.parent = parent;
+			this.allowOverride = allowOverride;
+		}
+		
+		public string Path {
+			get { return path; }
+		}
+		
+		internal bool AllowOverride {
+			get { return allowOverride; }
+		}
+		
+		internal string XmlContent {
+			get { return xmlContent; }
+		}
+		
+		internal Configuration OpenedConfiguration {
+			get { return configuration; }
+		}
 
-        public Configuration OpenConfiguration ()
-        {
-            if (configuration == null) {
-                if (!parentResolved) {
-                    Configuration parentFile = parent.GetParentWithFile ();
-                    if (parentFile != null) {
-                        string parentRelativePath = parent.ConfigHost.GetConfigPathFromLocationSubPath (parent.LocationConfigPath, path);
-                        parent = parentFile.FindLocationConfiguration (parentRelativePath, parent);
-                    }
-                }
-                
-                configuration = new Configuration (parent, path);
-                using (XmlTextReader tr = new ConfigXmlTextReader (new StringReader (xmlContent), path))
-                    configuration.ReadData (tr, allowOverride);
+		public Configuration OpenConfiguration ()
+		{
+			if (configuration == null) {
+				if (!parentResolved) {
+					Configuration parentFile = parent.GetParentWithFile ();
+					if (parentFile != null) {
+						string parentRelativePath = parent.ConfigHost.GetConfigPathFromLocationSubPath (parent.LocationConfigPath, path);
+						parent = parentFile.FindLocationConfiguration (parentRelativePath, parent);
+					}
+				}
+				
+				configuration = new Configuration (parent, path);
+				using (XmlTextReader tr = new ConfigXmlTextReader (new StringReader (xmlContent), path))
+					configuration.ReadData (tr, allowOverride);
 
-                xmlContent = null;
-            }
-            return configuration;
-        }
-        
-        internal void SetParentConfiguration (Configuration parent)
-        {
-            if (parentResolved)
-                return;
+				xmlContent = null;
+			}
+			return configuration;
+		}
+		
+		internal void SetParentConfiguration (Configuration parent)
+		{
+			if (parentResolved)
+				return;
 
-            parentResolved = true;
-            this.parent = parent;
-            if (configuration != null)
-                configuration.Parent = parent;
-        }
-    }
+			parentResolved = true;
+			this.parent = parent;
+			if (configuration != null)
+				configuration.Parent = parent;
+		}
+	}
 }
 

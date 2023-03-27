@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -812,20 +812,20 @@ using System.Collections.Generic;
 
 class C 
 {
-    public IEnumerable<int> Iter2<T>() 
-    {
-        try
-        {
-            throw new IOException(""Hi"");
+	public IEnumerable<int> Iter2<T>() 
+	{
+		try
+		{
+			throw new IOException(""Hi"");
         }
-        catch (Exception e)
-        {
-            ( (Action) delegate { Console.WriteLine(e.Message); })();
-        }
+		catch (Exception e)
+		{
+			( (Action) delegate { Console.WriteLine(e.Message); })();
+		}
         yield return 1;
-    }
+	}
  
-    static void Main()
+	static void Main()
     {
         foreach (var x in new C().Iter2<object>()) { }
     }
@@ -843,20 +843,20 @@ using System.Collections.Generic;
 
 class C
 {
-    public IEnumerable<int> Iter2<T, E>() where E : Exception
-    {
-        try
-        {
-            throw new IOException(""Hi"");
+	public IEnumerable<int> Iter2<T, E>() where E : Exception
+	{
+		try
+		{
+			throw new IOException(""Hi"");
         }
-        catch (E e) when (new Func<bool>(() => e.Message != null)())
-        {
-            ( (Action) delegate { Console.WriteLine(e.Message); })();
-        }
+		catch (E e) when (new Func<bool>(() => e.Message != null)())
+		{
+			( (Action) delegate { Console.WriteLine(e.Message); })();
+		}
         yield return 1;
-    }
+	}
  
-    static void Main()
+	static void Main()
     {
         foreach (var x in new C().Iter2<object, IOException>()) { }
     }

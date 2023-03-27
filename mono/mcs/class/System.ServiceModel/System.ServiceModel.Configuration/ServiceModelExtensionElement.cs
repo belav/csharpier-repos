@@ -2,7 +2,7 @@
 // ServiceModelExtensionElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,44 +54,44 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public abstract class ServiceModelExtensionElement
-         : ConfigurationElement
-    {
-        string _configurationElementName;
+	[MonoTODO]
+	public abstract class ServiceModelExtensionElement
+		 : ConfigurationElement
+	{
+		string _configurationElementName;
 
-        protected ServiceModelExtensionElement () {
-        }
+		protected ServiceModelExtensionElement () {
+		}
 
-        public string ConfigurationElementName {
-            get {
-                return _configurationElementName ?? (_configurationElementName = GetConfigurationElementName ());
-            }
-        }
+		public string ConfigurationElementName {
+			get {
+				return _configurationElementName ?? (_configurationElementName = GetConfigurationElementName ());
+			}
+		}
 
-        internal virtual string GetConfigurationElementName () {
-            throw new NotImplementedException ();
-        }
+		internal virtual string GetConfigurationElementName () {
+			throw new NotImplementedException ();
+		}
 
-        public virtual void CopyFrom (ServiceModelExtensionElement from) {
-            throw new NotImplementedException ();
-        }
+		public virtual void CopyFrom (ServiceModelExtensionElement from) {
+			throw new NotImplementedException ();
+		}
 
-        protected override bool IsModified () {
-            throw new NotImplementedException ();
-        }
+		protected override bool IsModified () {
+			throw new NotImplementedException ();
+		}
 
-        protected override void Reset (ConfigurationElement parentElement) {
-            throw new NotImplementedException ();
-        }
+		protected override void Reset (ConfigurationElement parentElement) {
+			throw new NotImplementedException ();
+		}
 
-        protected override bool SerializeElement (XmlWriter writer, bool serializeCollectionKey) {
-            throw new NotImplementedException ();
-        }
+		protected override bool SerializeElement (XmlWriter writer, bool serializeCollectionKey) {
+			throw new NotImplementedException ();
+		}
 
-        internal void DeserializeElementInternal (XmlReader reader, bool serializeCollectionKey) {
-            DeserializeElement (reader, serializeCollectionKey);
-        }
-    }
+		internal void DeserializeElementInternal (XmlReader reader, bool serializeCollectionKey) {
+			DeserializeElement (reader, serializeCollectionKey);
+		}
+	}
 
 }

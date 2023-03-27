@@ -2,7 +2,7 @@
 // System.Web.Management.IRegiisUtility.cs
 //
 // Authors:
-//    Duncan Mak (duncan@ximian.com)
+//	Duncan Mak (duncan@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,9 +31,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Web.Management
 {
-    [InterfaceTypeAttribute (ComInterfaceType.InterfaceIsIUnknown)]
-    [GuidAttribute ("C84F668A-CC3F-11D7-B79E-505054503030")]
-    [ComImportAttribute]
+	[InterfaceTypeAttribute (ComInterfaceType.InterfaceIsIUnknown)]
+	[GuidAttribute ("C84F668A-CC3F-11D7-B79E-505054503030")]
+	[ComImportAttribute]
         public interface IRegiisUtility
         {
                 void ProtectedConfigAction (
@@ -54,8 +54,8 @@ namespace System.Web.Management
                         out IntPtr exception);
 
                 void RegisterSystemWebAssembly (int doReg,
-                        out IntPtr exception);
+						out IntPtr exception);
 
-        void RemoveBrowserCaps (out IntPtr exception);
+		void RemoveBrowserCaps (out IntPtr exception);
         }
 }

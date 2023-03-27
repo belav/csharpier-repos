@@ -82,7 +82,7 @@ namespace System.Web {
             _allKeys = null;
 
             if (append) {
-                // DevID 251951    Cookie is getting duplicated by ASP.NET when they are added via a native module
+                // DevID 251951	Cookie is getting duplicated by ASP.NET when they are added via a native module
                 // Need to not double add response cookies from native modules
                 if (!cookie.IsInResponseHeader) {
                     // mark cookie as new

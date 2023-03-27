@@ -35,24 +35,24 @@
 
 namespace ICSharpCode.SharpZipLib.Core
 {
-    /// <summary>
-    /// INameTransform defines how file system names are transformed for use with archives.
-    /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-    public interface INameTransform
-    {
-        /// <summary>
-        /// Given a file name determine the transformed equivalent.
-        /// </summary>
-        /// <param name="name">The name to transform.</param>
-        /// <returns>The transformed name.</returns>
-        string TransformFile(string name);
-        
-        /// <summary>
-        /// Given a directory name determine the transformed equivalent.
-        /// </summary>
-        /// <param name="name">The name to transform.</param>
-        /// <returns>The transformed directory name</returns>
-        string TransformDirectory(string name);
-    }
+	/// <summary>
+	/// INameTransform defines how file system names are transformed for use with archives.
+	/// </summary>
+	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+	public interface INameTransform
+	{
+		/// <summary>
+		/// Given a file name determine the transformed equivalent.
+		/// </summary>
+		/// <param name="name">The name to transform.</param>
+		/// <returns>The transformed name.</returns>
+		string TransformFile(string name);
+		
+		/// <summary>
+		/// Given a directory name determine the transformed equivalent.
+		/// </summary>
+		/// <param name="name">The name to transform.</param>
+		/// <returns>The transformed directory name</returns>
+		string TransformDirectory(string name);
+	}
 }

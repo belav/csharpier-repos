@@ -2,7 +2,7 @@
 // TraceSourceInfo.cs
 //
 // Author: 
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // (C) 2007 Novell, Inc.  http://www.novell.com
 //
@@ -32,38 +32,38 @@ using System.Diagnostics;
 
 namespace System.Diagnostics
 {
-    internal class TraceSourceInfo
-    {
-        string name;
-        SourceLevels levels;
-        TraceListenerCollection listeners;
+	internal class TraceSourceInfo
+	{
+		string name;
+		SourceLevels levels;
+		TraceListenerCollection listeners;
 
-        public TraceSourceInfo (string name, SourceLevels levels)
-        {
-            this.name = name;
-            this.levels = levels;
-            this.listeners = new TraceListenerCollection ();
-        }
+		public TraceSourceInfo (string name, SourceLevels levels)
+		{
+			this.name = name;
+			this.levels = levels;
+			this.listeners = new TraceListenerCollection ();
+		}
 
-        internal TraceSourceInfo (string name, SourceLevels levels, TraceImplSettings settings)
-        {
-            this.name = name;
-            this.levels = levels;
-            this.listeners = new TraceListenerCollection ();
-            this.listeners.Add (new DefaultTraceListener() { IndentSize = settings.IndentSize });
-        }
+		internal TraceSourceInfo (string name, SourceLevels levels, TraceImplSettings settings)
+		{
+			this.name = name;
+			this.levels = levels;
+			this.listeners = new TraceListenerCollection ();
+			this.listeners.Add (new DefaultTraceListener() { IndentSize = settings.IndentSize });
+		}
 
-        public string Name {
-            get { return name; }
-        }
+		public string Name {
+			get { return name; }
+		}
 
-        public SourceLevels Levels {
-            get { return levels; }
-        }
+		public SourceLevels Levels {
+			get { return levels; }
+		}
 
-        public TraceListenerCollection Listeners {
-            get { return listeners; }
-        }
-    }
+		public TraceListenerCollection Listeners {
+			get { return listeners; }
+		}
+	}
 }
 

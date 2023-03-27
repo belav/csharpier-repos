@@ -2,7 +2,7 @@
 // LocalIdKeyIdentifierClauseTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,24 +34,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-    [TestFixture]
-    public class LocalIdKeyIdentifierClauseTest
-    {
-        [Test]
-        public void LocalId ()
-        {
-            Assert.AreEqual ("urn:local-id1",
-                new LocalIdKeyIdentifierClause ("urn:local-id1").LocalId, "#1");
-            Assert.AreEqual ("#local-id1",
-                new LocalIdKeyIdentifierClause ("#local-id1").LocalId, "#2");
-        }
+	[TestFixture]
+	public class LocalIdKeyIdentifierClauseTest
+	{
+		[Test]
+		public void LocalId ()
+		{
+			Assert.AreEqual ("urn:local-id1",
+				new LocalIdKeyIdentifierClause ("urn:local-id1").LocalId, "#1");
+			Assert.AreEqual ("#local-id1",
+				new LocalIdKeyIdentifierClause ("#local-id1").LocalId, "#2");
+		}
 
-        [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void CreateKey ()
-        {
-            new LocalIdKeyIdentifierClause ("urn:local-id1").CreateKey ();
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (NotSupportedException))]
+		public void CreateKey ()
+		{
+			new LocalIdKeyIdentifierClause ("urn:local-id1").CreateKey ();
+		}
+	}
 }
 #endif

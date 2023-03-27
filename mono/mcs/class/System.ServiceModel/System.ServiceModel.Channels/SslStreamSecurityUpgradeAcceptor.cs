@@ -2,7 +2,7 @@
 // SslStreamSecurityUpgradeAcceptor.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -37,37 +37,37 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-    class SslStreamSecurityUpgradeAcceptor : StreamSecurityUpgradeAcceptor
-    {
-        SslStreamSecurityUpgradeProvider source;
-        public SslStreamSecurityUpgradeAcceptor (SslStreamSecurityUpgradeProvider source)
-        {
-            this.source = source;
-        }
+	class SslStreamSecurityUpgradeAcceptor : StreamSecurityUpgradeAcceptor
+	{
+		SslStreamSecurityUpgradeProvider source;
+		public SslStreamSecurityUpgradeAcceptor (SslStreamSecurityUpgradeProvider source)
+		{
+			this.source = source;
+		}
 
-        public override SecurityMessageProperty GetRemoteSecurity()
-        {
-            // FIXME: implement
-            throw new NotImplementedException ();
-        }
+		public override SecurityMessageProperty GetRemoteSecurity()
+		{
+			// FIXME: implement
+			throw new NotImplementedException ();
+		}
 
-        public override bool CanUpgrade (string contentType)
-        {
-            // FIXME: implement
-            throw new NotImplementedException ();
-        }
+		public override bool CanUpgrade (string contentType)
+		{
+			// FIXME: implement
+			throw new NotImplementedException ();
+		}
 
-        public override IAsyncResult BeginAcceptUpgrade (
-            Stream stream, AsyncCallback callback, object state)
-        {
-            // FIXME: implement
-            throw new NotImplementedException ();
-        }
+		public override IAsyncResult BeginAcceptUpgrade (
+			Stream stream, AsyncCallback callback, object state)
+		{
+			// FIXME: implement
+			throw new NotImplementedException ();
+		}
 
-        public override Stream EndAcceptUpgrade(IAsyncResult result)
-        {
-            // FIXME: implement
-            throw new NotImplementedException ();
-        }
-    }
+		public override Stream EndAcceptUpgrade(IAsyncResult result)
+		{
+			// FIXME: implement
+			throw new NotImplementedException ();
+		}
+	}
 }

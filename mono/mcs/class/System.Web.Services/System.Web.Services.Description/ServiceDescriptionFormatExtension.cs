@@ -32,55 +32,55 @@ using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
-    public abstract class ServiceDescriptionFormatExtension {
+	public abstract class ServiceDescriptionFormatExtension {
 
-        #region Fields
-        
-        bool handled;
-        object parent;
-        bool required;
+		#region Fields
+		
+		bool handled;
+		object parent;
+		bool required;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        protected ServiceDescriptionFormatExtension () 
-        {
-            handled = false;
-            parent = null;
-            required = false;    
-        }
-        
-        #endregion // Constructors
+		protected ServiceDescriptionFormatExtension () 
+		{
+			handled = false;
+			parent = null;
+			required = false;	
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [XmlIgnore]
-        public bool Handled {
-            get { return handled; }
-            set { handled = value; }
-        }
+		[XmlIgnore]
+		public bool Handled {
+			get { return handled; }
+			set { handled = value; }
+		}
 
-        public object Parent {
-            get { return parent; }
-        }
+		public object Parent {
+			get { return parent; }
+		}
 
-        [DefaultValue (false)]
-        [XmlAttribute ("required", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
-        public bool Required {    
-            get { return required; }
-            set { required = value; }
-        }
+		[DefaultValue (false)]
+		[XmlAttribute ("required", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
+		public bool Required {	
+			get { return required; }
+			set { required = value; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        internal void SetParent (object value)
-        {
-            parent = value; 
-        }
-        
-        #endregion // Methods
-    }
+		internal void SetParent (object value)
+		{
+			parent = value; 
+		}
+		
+		#endregion // Methods
+	}
 }

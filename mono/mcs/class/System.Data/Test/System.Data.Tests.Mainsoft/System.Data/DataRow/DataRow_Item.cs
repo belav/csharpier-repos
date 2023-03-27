@@ -39,124 +39,124 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRow_Item : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRow_Item tc = new DataRow_Item();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRow_Item");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRow_Item tc = new DataRow_Item();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRow_Item");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-        // init table with columns
-        DataTable myTable = new DataTable("myTable"); 
+	public void run()
+	{
+		Exception exp = null;
+		// init table with columns
+		DataTable myTable = new DataTable("myTable"); 
+		
+		myTable.Columns.Add(new DataColumn("Id",typeof(int)));
+		myTable.Columns.Add(new DataColumn("Name",typeof(string)));
+		DataColumn dc = myTable.Columns[0];
+		
+		myTable.Rows.Add(new object[] {1,"Ofer"});
+		myTable.Rows.Add(new object[] {2,"Ofer"});
+		
+		myTable.AcceptChanges();
+		
+		DataRow myRow = myTable.Rows[0];
+			
+
+		//Start checking
         
-        myTable.Columns.Add(new DataColumn("Id",typeof(int)));
-        myTable.Columns.Add(new DataColumn("Name",typeof(string)));
-        DataColumn dc = myTable.Columns[0];
-        
-        myTable.Rows.Add(new object[] {1,"Ofer"});
-        myTable.Rows.Add(new object[] {2,"Ofer"});
-        
-        myTable.AcceptChanges();
-        
-        DataRow myRow = myTable.Rows[0];
-            
+		try
+		{
+			BeginCase("Item - index");
+			Compare((int)myRow[0] , 1 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		try
+		{
+			BeginCase("Item - string");
+			Compare( (int)myRow["Id"] , 1 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		try
+		{
+			BeginCase("Item - Column");
+			Compare( (int)myRow[dc] , 1 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	
+		try
+		{
+			BeginCase("Item - index,Current");
+			Compare( (int)myRow[0,DataRowVersion.Current ] , 1 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	
+		try
+		{
+			BeginCase("Item - string,Current");
+			Compare( (int)myRow["Id",DataRowVersion.Current] , 1 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	
+		try
+		{
+			BeginCase("Item - columnn,Current");
+			Compare( (int)myRow[dc,DataRowVersion.Current] , 1 );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        //Start checking
-        
-        try
-        {
-            BeginCase("Item - index");
-            Compare((int)myRow[0] , 1 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-        try
-        {
-            BeginCase("Item - string");
-            Compare( (int)myRow["Id"] , 1 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-        try
-        {
-            BeginCase("Item - Column");
-            Compare( (int)myRow[dc] , 1 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    
-        try
-        {
-            BeginCase("Item - index,Current");
-            Compare( (int)myRow[0,DataRowVersion.Current ] , 1 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    
-        try
-        {
-            BeginCase("Item - string,Current");
-            Compare( (int)myRow["Id",DataRowVersion.Current] , 1 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    
-        try
-        {
-            BeginCase("Item - columnn,Current");
-            Compare( (int)myRow[dc,DataRowVersion.Current] , 1 );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	//	testMore();
+	
+	}
 
-    //    testMore();
-    
-    }
-
-    /*public void testMore()
-    {
-        try
-        {
-            DataTable dt = DataProvider.CreateParentDataTable();
-            dt.Rows[0].BeginEdit();
-            dt.Rows[0][0] = 10;
-            dt.Rows[0].EndEdit();
-            dt.AcceptChanges();
-            
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-    }*/
+	/*public void testMore()
+	{
+		try
+		{
+			DataTable dt = DataProvider.CreateParentDataTable();
+			dt.Rows[0].BeginEdit();
+			dt.Rows[0][0] = 10;
+			dt.Rows[0].EndEdit();
+			dt.AcceptChanges();
+			
+		}
+		catch (Exception ex)
+		{
+			throw ex;
+		}
+	}*/
 }
 }

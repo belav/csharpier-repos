@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jordi Mas i Hernandez, jordi@ximian.com
+//	Jordi Mas i Hernandez, jordi@ximian.com
 //
 
 //COMPLETE
@@ -29,11 +29,11 @@
 namespace System.Windows.Forms 
 {
 
-    public enum BootMode 
-    {
-        Normal = 0,
-        FailSafe = 1,
-        FailSafeWithNetwork = 2
-    }
+	public enum BootMode 
+	{
+		Normal = 0,
+		FailSafe = 1,
+		FailSafeWithNetwork = 2
+	}
 }
 

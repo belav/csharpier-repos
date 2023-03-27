@@ -2,7 +2,7 @@
 // BlockExpression.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,24 +27,24 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    class BlockExpression : Expression {
-        public Block Block;
+	class BlockExpression : Expression {
+		public Block Block;
 
-        public BlockExpression (Block block, TypeNode type)
-            : this ()
-        {
-            this.Block = block;
-            Type = type;
-        }
+		public BlockExpression (Block block, TypeNode type)
+			: this ()
+		{
+			this.Block = block;
+			Type = type;
+		}
 
-        public BlockExpression (Block block) : this ()
-        {
-            this.Block = block;
-        }
+		public BlockExpression (Block block) : this ()
+		{
+			this.Block = block;
+		}
 
-        public BlockExpression ()
-            : base (NodeType.BlockExpression)
-        {
-        }
-    }
+		public BlockExpression ()
+			: base (NodeType.BlockExpression)
+		{
+		}
+	}
 }

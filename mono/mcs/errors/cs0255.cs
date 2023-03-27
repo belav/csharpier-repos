@@ -4,11 +4,11 @@
 
 unsafe class X {
 
-    static void Main ()
-    {
-        try {
-        } catch {
-            char *ptr = stackalloc char [10];
-        }
-    }
-}    
+	static void Main ()
+	{
+		try {
+		} catch {
+			char *ptr = stackalloc char [10];
+		}
+	}
+}	

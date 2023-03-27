@@ -1,8 +1,8 @@
-//
+﻿//
 // ServiceTimeoutsElement.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -32,31 +32,31 @@ using System.Text;
 
 namespace System.ServiceModel.Description
 {
-    class ServiceTimeoutsBehavior : IServiceBehavior
-    {
-        public TimeSpan TransactionTimeout {
-            get;
-            set;
-        }
+	class ServiceTimeoutsBehavior : IServiceBehavior
+	{
+		public TimeSpan TransactionTimeout {
+			get;
+			set;
+		}
 
-        public ServiceTimeoutsBehavior (TimeSpan timeout) {
-            TransactionTimeout = timeout;
-        }
+		public ServiceTimeoutsBehavior (TimeSpan timeout) {
+			TransactionTimeout = timeout;
+		}
 
-        #region IServiceBehavior Members
+		#region IServiceBehavior Members
 
-        void IServiceBehavior.AddBindingParameters (ServiceDescription description, ServiceHostBase serviceHostBase, System.Collections.ObjectModel.Collection<ServiceEndpoint> endpoints, System.ServiceModel.Channels.BindingParameterCollection parameters) {
-            throw new NotImplementedException ();
-        }
+		void IServiceBehavior.AddBindingParameters (ServiceDescription description, ServiceHostBase serviceHostBase, System.Collections.ObjectModel.Collection<ServiceEndpoint> endpoints, System.ServiceModel.Channels.BindingParameterCollection parameters) {
+			throw new NotImplementedException ();
+		}
 
-        void IServiceBehavior.ApplyDispatchBehavior (ServiceDescription description, ServiceHostBase serviceHostBase) {
-            throw new NotImplementedException ();
-        }
+		void IServiceBehavior.ApplyDispatchBehavior (ServiceDescription description, ServiceHostBase serviceHostBase) {
+			throw new NotImplementedException ();
+		}
 
-        void IServiceBehavior.Validate (ServiceDescription description, ServiceHostBase serviceHostBase) {
-            throw new NotImplementedException ();
-        }
+		void IServiceBehavior.Validate (ServiceDescription description, ServiceHostBase serviceHostBase) {
+			throw new NotImplementedException ();
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

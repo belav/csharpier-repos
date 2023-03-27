@@ -5,16 +5,16 @@ using System;
 
 namespace Foo
 {
-    public delegate void VoidHandler ();
+	public delegate void VoidHandler ();
 
-    public class BaseFoo
-    {
-        public extern event VoidHandler Changed;
+	public class BaseFoo
+	{
+		public extern event VoidHandler Changed;
 
-        public string Name {
-            set {
-                Changed ();
-            }
-        }
-    }
+		public string Name {
+			set {
+				Changed ();
+			}
+		}
+	}
 }

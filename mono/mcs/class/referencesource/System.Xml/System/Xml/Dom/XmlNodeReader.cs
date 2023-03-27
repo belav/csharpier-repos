@@ -1453,15 +1453,15 @@ namespace System.Xml
         }
 
         // Reads the contents of an element as a string.
-        public override string ReadString() {
-            if ((this.NodeType == XmlNodeType.EntityReference) && bResolveEntity) {
-                if (! this.Read()) {
-                        throw new InvalidOperationException(Res.GetString(Res.Xml_InvalidOperation));
-                }
-            }
-            return base.ReadString();
-        }
-    
+	    public override string ReadString() {
+		    if ((this.NodeType == XmlNodeType.EntityReference) && bResolveEntity) {
+			    if (! this.Read()) {
+			            throw new InvalidOperationException(Res.GetString(Res.Xml_InvalidOperation));
+			    }
+		    }
+		    return base.ReadString();
+	    }
+	
         //
         // Partial Content Read Methods
         //

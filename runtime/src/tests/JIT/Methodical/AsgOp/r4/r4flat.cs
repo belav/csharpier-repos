@@ -22,7 +22,7 @@ public class test
         if (x != -6)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x = x + y failed.    x: {0}, \texpected: -6\n", x);
+            Console.WriteLine("x = x + y failed.	x: {0}, \texpected: -6\n", x);
             pass = false;
         }
 
@@ -32,7 +32,7 @@ public class test
         if (x != -14)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x = x - y failed.    x: {0}, \texpected: -14\n", x);
+            Console.WriteLine("x = x - y failed.	x: {0}, \texpected: -14\n", x);
             pass = false;
         }
 
@@ -42,7 +42,7 @@ public class test
         if (x != -40)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x = x * y failed.    x: {0}, \texpected: -40\n", x);
+            Console.WriteLine("x = x * y failed.	x: {0}, \texpected: -40\n", x);
             pass = false;
         }
 
@@ -52,7 +52,7 @@ public class test
         if (x != -2.5)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x = x / y failed.    x: {0}, \texpected: -2.5\n", x);
+            Console.WriteLine("x = x / y failed.	x: {0}, \texpected: -2.5\n", x);
             pass = false;
         }
 
@@ -62,7 +62,7 @@ public class test
         if (x != -2)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x = x % y failed.    x: {0}, \texpected: -2\n", x);
+            Console.WriteLine("x = x % y failed.	x: {0}, \texpected: -2\n", x);
             pass = false;
         }
 
@@ -72,7 +72,7 @@ public class test
         if (x != -16)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x += x + y failed.    x: {0}, \texpected: -16\n", x);
+            Console.WriteLine("x += x + y failed.	x: {0}, \texpected: -16\n", x);
             pass = false;
         }
 
@@ -82,7 +82,7 @@ public class test
         if (x != -24)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x += x - y failed.    x: {0}, \texpected: -24\n", x);
+            Console.WriteLine("x += x - y failed.	x: {0}, \texpected: -24\n", x);
             pass = false;
         }
 
@@ -92,7 +92,7 @@ public class test
         if (x != -50)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x += x * y failed.    x: {0}, \texpected: -50\n", x);
+            Console.WriteLine("x += x * y failed.	x: {0}, \texpected: -50\n", x);
             pass = false;
         }
 
@@ -102,7 +102,7 @@ public class test
         if (x != -12.5)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x += x / y failed.    x: {0}, \texpected: -12.5\n", x);
+            Console.WriteLine("x += x / y failed.	x: {0}, \texpected: -12.5\n", x);
             pass = false;
         }
 
@@ -112,7 +112,7 @@ public class test
         if (x != -12)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x += x % y failed.    x: {0}, \texpected: -12\n", x);
+            Console.WriteLine("x += x % y failed.	x: {0}, \texpected: -12\n", x);
             pass = false;
         }
 
@@ -122,7 +122,7 @@ public class test
         if (x != -4)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x -= x + y failed.    x: {0}, \texpected: -4\n", x);
+            Console.WriteLine("x -= x + y failed.	x: {0}, \texpected: -4\n", x);
             pass = false;
         }
 
@@ -132,7 +132,7 @@ public class test
         if (x != 4)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x -= x - y failed.    x: {0}, \texpected: 4\n", x);
+            Console.WriteLine("x -= x - y failed.	x: {0}, \texpected: 4\n", x);
             pass = false;
         }
 
@@ -142,7 +142,7 @@ public class test
         if (x != 30)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x -= x * y failed.    x: {0}, \texpected: 30\n", x);
+            Console.WriteLine("x -= x * y failed.	x: {0}, \texpected: 30\n", x);
             pass = false;
         }
 
@@ -152,7 +152,7 @@ public class test
         if (x != -7.5)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x -= x / y failed.    x: {0}, \texpected: -7.5\n", x);
+            Console.WriteLine("x -= x / y failed.	x: {0}, \texpected: -7.5\n", x);
             pass = false;
         }
 
@@ -162,7 +162,7 @@ public class test
         if (x != -8)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x -= x % y failed.    x: {0}, \texpected: -8\n", x);
+            Console.WriteLine("x -= x % y failed.	x: {0}, \texpected: -8\n", x);
             pass = false;
         }
 
@@ -172,7 +172,7 @@ public class test
         if (x != 60)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x *= x + y failed.    x: {0}, \texpected: 60\n", x);
+            Console.WriteLine("x *= x + y failed.	x: {0}, \texpected: 60\n", x);
             pass = false;
         }
 
@@ -182,7 +182,7 @@ public class test
         if (x != 140)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x *= x - y failed.    x: {0}, \texpected: 140\n", x);
+            Console.WriteLine("x *= x - y failed.	x: {0}, \texpected: 140\n", x);
             pass = false;
         }
 
@@ -192,7 +192,7 @@ public class test
         if (x != 400)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x *= x * y failed.    x: {0}, \texpected: 400\n", x);
+            Console.WriteLine("x *= x * y failed.	x: {0}, \texpected: 400\n", x);
             pass = false;
         }
 
@@ -202,7 +202,7 @@ public class test
         if (x != 25)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x *= x / y failed.    x: {0}, \texpected: 25\n", x);
+            Console.WriteLine("x *= x / y failed.	x: {0}, \texpected: 25\n", x);
             pass = false;
         }
 
@@ -212,7 +212,7 @@ public class test
         if (x != 20)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x *= x % y failed.    x: {0}, \texpected: 20\n", x);
+            Console.WriteLine("x *= x % y failed.	x: {0}, \texpected: 20\n", x);
             pass = false;
         }
 
@@ -222,7 +222,7 @@ public class test
         if (!x.Equals(1.66666663F))
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x /= x + y failed.    x: {0}, \texpected: 1.66666663F\n", x);
+            Console.WriteLine("x /= x + y failed.	x: {0}, \texpected: 1.66666663F\n", x);
             pass = false;
         }
 
@@ -232,7 +232,7 @@ public class test
         if (!x.Equals(0.714285731F))
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x /= x - y failed.    x: {0}, \texpected: 0.714285731F\n", x);
+            Console.WriteLine("x /= x - y failed.	x: {0}, \texpected: 0.714285731F\n", x);
             pass = false;
         }
 
@@ -242,7 +242,7 @@ public class test
         if (x != 0.25)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x /= x * y failed.    x: {0}, \texpected: 0.25\n", x);
+            Console.WriteLine("x /= x * y failed.	x: {0}, \texpected: 0.25\n", x);
             pass = false;
         }
 
@@ -252,7 +252,7 @@ public class test
         if (x != 4)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x /= x / y failed.    x: {0}, \texpected: 4\n", x);
+            Console.WriteLine("x /= x / y failed.	x: {0}, \texpected: 4\n", x);
             pass = false;
         }
 
@@ -262,7 +262,7 @@ public class test
         if (x != 5)
         {
             Console.WriteLine("\nInitial parameters: x is -10.0F and y is 4.0F");
-            Console.WriteLine("x /= x % y failed.    x: {0}, \texpected: 5\n", x);
+            Console.WriteLine("x /= x % y failed.	x: {0}, \texpected: 5\n", x);
             pass = false;
         }
 

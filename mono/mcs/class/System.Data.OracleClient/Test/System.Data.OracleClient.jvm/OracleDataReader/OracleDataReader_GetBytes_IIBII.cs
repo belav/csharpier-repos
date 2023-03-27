@@ -33,109 +33,109 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-    [TestFixture]
-    public class OracleDataReader_GetBytes_IIBII : GHTBase
-    {
-        int testTypesInvocations;
-        Exception exp = null;
-        public static void Main()
-        {
-            OracleDataReader_GetBytes_IIBII tc = new OracleDataReader_GetBytes_IIBII();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OracleDataReader_GetBytes_IIBII");
-                tc.run();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+	[TestFixture]
+	public class OracleDataReader_GetBytes_IIBII : GHTBase
+	{
+		int testTypesInvocations;
+		Exception exp = null;
+		public static void Main()
+		{
+			OracleDataReader_GetBytes_IIBII tc = new OracleDataReader_GetBytes_IIBII();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OracleDataReader_GetBytes_IIBII");
+				tc.run();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            DoTestTypes(ConnectedDataProvider.GetSimpleDbTypesParameters());
-            DoTestTypes(ConnectedDataProvider.GetExtendedDbTypesParameters());
-        }
-        public void DoTestTypes(DbTypeParametersCollection row)
-        {
-            testTypesInvocations++;
-            exp = null;
-            string rowId = "43966_" + this.testTypesInvocations.ToString();
-                OracleConnection con =null;
-                OracleDataReader rdr = null;
+		[Test]
+		public void run()
+		{
+			DoTestTypes(ConnectedDataProvider.GetSimpleDbTypesParameters());
+			DoTestTypes(ConnectedDataProvider.GetExtendedDbTypesParameters());
+		}
+		public void DoTestTypes(DbTypeParametersCollection row)
+		{
+			testTypesInvocations++;
+			exp = null;
+			string rowId = "43966_" + this.testTypesInvocations.ToString();
+				OracleConnection con =null;
+				OracleDataReader rdr = null;
 
-            try
-            {
-                row.ExecuteInsert(rowId);
-                row.ExecuteSelectReader(rowId, out rdr, out con);
-                while (rdr.Read())
-                {
-                    //Run over all the columns in the result set row.
-                    //For each column, try to read it as a byte array.
-                    for (int i=0; i<row.Count; i++)
-                    {
-                        if (row[i].Value.GetType() == typeof(byte[])) //The value in the result set should be a byte array.
-                        {
-                            try
-                            {
-                                BeginCase(string.Format("Calling GetBytes() on a field of dbtype {0}", row[i].DbTypeName));
-                                byte[] origBytes = (byte[])row[i].Value;
-                                byte[] retBytes = new byte[origBytes.Length];
-                                rdr.GetBytes(i, 0, retBytes, 0, origBytes.Length);
-                                Compare(origBytes, retBytes);
-                            }
-                            catch (Exception ex)
-                            {
-                                exp = ex;
-                            }
-                            finally
-                            {
-                                EndCase(exp);
-                                exp = null;
-                            }
-                        }
-                        else //The value in the result set should NOT be byte array. In this case an Invalid case exception should be thrown.
-                        {
-                            try
-                            {
-                                BeginCase(string.Format("Calling GetBytes() on a field of dbtype {0}", row[i].DbTypeName));
-                                byte[] retBytes = new byte[1];
-                                rdr.GetBytes(i, 0, retBytes, 0, 1);
-                                ExpectedExceptionNotCaught("InvalidCastException");
-                            }
-                            catch (InvalidCastException ex)
-                            {
-                                ExpectedExceptionCaught(ex);
-                            }
-                            catch (Exception ex)
-                            {
-                                exp = ex;
-                            }
-                            finally
-                            {
-                                EndCase(exp);
-                                exp = null;
-                            }
-                        }
-                    }
-                }
-            }
-            finally
-            {
-                row.ExecuteDelete(rowId);
-                if (rdr != null && !rdr.IsClosed)
-                {
-                    rdr.Close();
-                }
+			try
+			{
+				row.ExecuteInsert(rowId);
+				row.ExecuteSelectReader(rowId, out rdr, out con);
+				while (rdr.Read())
+				{
+					//Run over all the columns in the result set row.
+					//For each column, try to read it as a byte array.
+					for (int i=0; i<row.Count; i++)
+					{
+						if (row[i].Value.GetType() == typeof(byte[])) //The value in the result set should be a byte array.
+						{
+							try
+							{
+								BeginCase(string.Format("Calling GetBytes() on a field of dbtype {0}", row[i].DbTypeName));
+								byte[] origBytes = (byte[])row[i].Value;
+								byte[] retBytes = new byte[origBytes.Length];
+								rdr.GetBytes(i, 0, retBytes, 0, origBytes.Length);
+								Compare(origBytes, retBytes);
+							}
+							catch (Exception ex)
+							{
+								exp = ex;
+							}
+							finally
+							{
+								EndCase(exp);
+								exp = null;
+							}
+						}
+						else //The value in the result set should NOT be byte array. In this case an Invalid case exception should be thrown.
+						{
+							try
+							{
+								BeginCase(string.Format("Calling GetBytes() on a field of dbtype {0}", row[i].DbTypeName));
+								byte[] retBytes = new byte[1];
+								rdr.GetBytes(i, 0, retBytes, 0, 1);
+								ExpectedExceptionNotCaught("InvalidCastException");
+							}
+							catch (InvalidCastException ex)
+							{
+								ExpectedExceptionCaught(ex);
+							}
+							catch (Exception ex)
+							{
+								exp = ex;
+							}
+							finally
+							{
+								EndCase(exp);
+								exp = null;
+							}
+						}
+					}
+				}
+			}
+			finally
+			{
+				row.ExecuteDelete(rowId);
+				if (rdr != null && !rdr.IsClosed)
+				{
+					rdr.Close();
+				}
 
-                if (con != null && con.State != ConnectionState.Closed)
-                {
-                    con.Close();
-                }
-            }
-        }
+				if (con != null && con.State != ConnectionState.Closed)
+				{
+					con.Close();
+				}
+			}
+		}
 
-    }
+	}
 
 }

@@ -5447,7 +5447,7 @@ namespace System.Data {
 
                         if (reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI==Keywords.XDRNS) {
                             // load XDR schema
-                               if (!fSchemaFound && !fDataFound && (mode != XmlReadMode.IgnoreSchema) && (mode != XmlReadMode.InferSchema))  {
+                       	    if (!fSchemaFound && !fDataFound && (mode != XmlReadMode.IgnoreSchema) && (mode != XmlReadMode.InferSchema))  {
                                 ReadXDRSchema(reader);
                                 fSchemaFound = true;
                                 fIsXdr = true;

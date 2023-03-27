@@ -2,7 +2,7 @@
 // System.Web.Services.WsiProfiles
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -31,12 +31,12 @@
 
 namespace System.Web.Services {
 
-    [Flags]
-    public enum WsiProfiles
-    {
-        None = 0,
-        BasicProfile1_1 = 1
-    }
+	[Flags]
+	public enum WsiProfiles
+	{
+		None = 0,
+		BasicProfile1_1 = 1
+	}
 
 }
 

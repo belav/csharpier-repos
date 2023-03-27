@@ -30,8 +30,8 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    public abstract class MemberDefinition
-    {
-        public abstract string Name { get; set; }
-    }
+	public abstract class MemberDefinition
+	{
+		public abstract string Name { get; set; }
+	}
 }

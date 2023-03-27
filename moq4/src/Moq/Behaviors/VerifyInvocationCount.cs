@@ -3,45 +3,45 @@
 
 namespace Moq.Behaviors
 {
-    internal sealed class VerifyInvocationCount : Behavior
-    {
-        private int count;
-        private readonly Times times;
-        private readonly MethodCall setup;
+	internal sealed class VerifyInvocationCount : Behavior
+	{
+		private int count;
+		private readonly Times times;
+		private readonly MethodCall setup;
 
-        public VerifyInvocationCount(MethodCall setup, Times times)
-        {
-            this.setup = setup;
-            this.times = times;
-            this.count = 0;
-        }
+		public VerifyInvocationCount(MethodCall setup, Times times)
+		{
+			this.setup = setup;
+			this.times = times;
+			this.count = 0;
+		}
 
-        public void Reset()
-        {
-            this.count = 0;
-        }
+		public void Reset()
+		{
+			this.count = 0;
+		}
 
-        public override void Execute(Invocation invocation)
-        {
-            ++this.count;
-            this.VerifyUpperBound();
-        }
+		public override void Execute(Invocation invocation)
+		{
+			++this.count;
+			this.VerifyUpperBound();
+		}
 
-        public void Verify()
-        {
-            if (!this.times.Validate(this.count))
-            {
-                throw MockException.IncorrectNumberOfCalls(this.setup, this.times, this.count);
-            }
-        }
+		public void Verify()
+		{
+			if (!this.times.Validate(this.count))
+			{
+				throw MockException.IncorrectNumberOfCalls(this.setup, this.times, this.count);
+			}
+		}
 
-        public void VerifyUpperBound()
-        {
-            var (_, maxCount) = this.times;
-            if (this.count > maxCount)
-            {
-                throw MockException.IncorrectNumberOfCalls(this.setup, this.times, this.count);
-            }
-        }
-    }
+		public void VerifyUpperBound()
+		{
+			var (_, maxCount) = this.times;
+			if (this.count > maxCount)
+			{
+				throw MockException.IncorrectNumberOfCalls(this.setup, this.times, this.count);
+			}
+		}
+	}
 }

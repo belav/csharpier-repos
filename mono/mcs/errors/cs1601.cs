@@ -3,11 +3,11 @@
 using System;
 
 class X {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 
-    static void M (ref TypedReference a)
-    {
-    }
+	static void M (ref TypedReference a)
+	{
+	}
 }

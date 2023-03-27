@@ -3,9 +3,9 @@
 
 using System;
 namespace A.B.System {
-    public class Test { 
-        public static void Main () {
-            Console.WriteLine (typeof (System.Enum));
-        } 
-    } 
+	public class Test { 
+		public static void Main () {
+			Console.WriteLine (typeof (System.Enum));
+		} 
+	} 
 }

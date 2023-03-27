@@ -2,7 +2,7 @@
 // SecureConversationServiceCredential.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -36,35 +36,35 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-    public sealed class SecureConversationServiceCredential
-    {
-        Collection<Type> ctx_claim_types = new Collection<Type> (new Type [] {
-            typeof (SamlAuthorizationDecisionClaimResource),
-            typeof (SamlAuthenticationClaimResource),
-            typeof (SamlAccessDecision),
-            typeof (SamlAuthorityBinding),
-            typeof (SamlNameIdentifierClaimResource)});
-        SecurityStateEncoder encoder =
-            new DataProtectionSecurityStateEncoder ();
+	public sealed class SecureConversationServiceCredential
+	{
+		Collection<Type> ctx_claim_types = new Collection<Type> (new Type [] {
+			typeof (SamlAuthorizationDecisionClaimResource),
+			typeof (SamlAuthenticationClaimResource),
+			typeof (SamlAccessDecision),
+			typeof (SamlAuthorityBinding),
+			typeof (SamlNameIdentifierClaimResource)});
+		SecurityStateEncoder encoder =
+			new DataProtectionSecurityStateEncoder ();
 
-        internal SecureConversationServiceCredential ()
-        {
-        }
+		internal SecureConversationServiceCredential ()
+		{
+		}
 
-        internal SecureConversationServiceCredential Clone ()
-        {
-            var ret = (SecureConversationServiceCredential) MemberwiseClone ();
-            ret.ctx_claim_types = new Collection<Type> (ctx_claim_types);
-            return ret;
-        }
+		internal SecureConversationServiceCredential Clone ()
+		{
+			var ret = (SecureConversationServiceCredential) MemberwiseClone ();
+			ret.ctx_claim_types = new Collection<Type> (ctx_claim_types);
+			return ret;
+		}
 
-        public Collection<Type> SecurityContextClaimTypes {
-            get { return ctx_claim_types; }
-        }
+		public Collection<Type> SecurityContextClaimTypes {
+			get { return ctx_claim_types; }
+		}
 
-        public SecurityStateEncoder SecurityStateEncoder {
-            get { return encoder; }
-            set { encoder = value; }
-        }
-    }
+		public SecurityStateEncoder SecurityStateEncoder {
+			get { return encoder; }
+			set { encoder = value; }
+		}
+	}
 }

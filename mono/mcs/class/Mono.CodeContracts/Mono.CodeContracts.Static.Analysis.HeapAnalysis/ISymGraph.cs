@@ -2,7 +2,7 @@
 // ISymGraph.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -32,32 +32,32 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis {
-    interface ISymGraph<TFunc, TADomain, TGraph> : IAbstractDomain<TGraph>
-        where TFunc : IEquatable<TFunc>, IConstantInfo
-        where TADomain : IAbstractDomainForEGraph<TADomain> {
-        SymValue this [TFunc function, SymValue arg] { get; set; }
-        SymValue this [TFunc function] { get; set; }
-        TADomain this [SymValue symbol] { get; set; }
-        IEnumerable<TFunc> Constants { get; }
-        IEnumerable<SymValue> Variables { get; }
+	interface ISymGraph<TFunc, TADomain, TGraph> : IAbstractDomain<TGraph>
+		where TFunc : IEquatable<TFunc>, IConstantInfo
+		where TADomain : IAbstractDomainForEGraph<TADomain> {
+		SymValue this [TFunc function, SymValue arg] { get; set; }
+		SymValue this [TFunc function] { get; set; }
+		TADomain this [SymValue symbol] { get; set; }
+		IEnumerable<TFunc> Constants { get; }
+		IEnumerable<SymValue> Variables { get; }
 
-        SymValue FreshSymbol ();
+		SymValue FreshSymbol ();
 
-        SymValue TryLookup (TFunc function, SymValue arg);
-        SymValue TryLookup (TFunc function);
+		SymValue TryLookup (TFunc function, SymValue arg);
+		SymValue TryLookup (TFunc function);
 
-        IEnumerable<TFunc> Functions (SymValue symbol);
-        IEnumerable<SymGraphTerm<TFunc>> EqTerms (SymValue symbol);
+		IEnumerable<TFunc> Functions (SymValue symbol);
+		IEnumerable<SymGraphTerm<TFunc>> EqTerms (SymValue symbol);
 
-        void AssumeEqual (SymValue v1, SymValue v2);
-        bool IsEqual (SymValue v1, SymValue v2);
-        void Eliminate (TFunc function, SymValue arg);
-        void Eliminate (TFunc function);
-        void EliminateAll (SymValue arg);
+		void AssumeEqual (SymValue v1, SymValue v2);
+		bool IsEqual (SymValue v1, SymValue v2);
+		void Eliminate (TFunc function, SymValue arg);
+		void Eliminate (TFunc function);
+		void EliminateAll (SymValue arg);
 
-        TGraph Join (TGraph that, out IMergeInfo mergeInfo, bool widen);
+		TGraph Join (TGraph that, out IMergeInfo mergeInfo, bool widen);
 
-        bool LessEqual (TGraph that, out IImmutableMap<SymValue, Sequence<SymValue>> forward,
-                        out IImmutableMap<SymValue, SymValue> backward);
-    }
+		bool LessEqual (TGraph that, out IImmutableMap<SymValue, Sequence<SymValue>> forward,
+		                out IImmutableMap<SymValue, SymValue> backward);
+	}
 }

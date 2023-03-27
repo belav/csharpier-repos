@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
@@ -29,14 +29,14 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-    [ComVisible(true)]
-    [Flags]
-    public enum Border3DSide {
-        Left    = 0x00000001,
-        Top    = 0x00000002,
-        Right    = 0x00000004,
-        Bottom    = 0x00000008,
-        Middle    = 0x00000800,
-        All    = 0x0000080F
-    }
+	[ComVisible(true)]
+	[Flags]
+	public enum Border3DSide {
+		Left	= 0x00000001,
+		Top	= 0x00000002,
+		Right	= 0x00000004,
+		Bottom	= 0x00000008,
+		Middle	= 0x00000800,
+		All	= 0x0000080F
+	}
 }

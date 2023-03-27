@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,54 +32,54 @@ using Mono.WebBrowser.DOM;
 
 namespace Mono.Mozilla.DOM
 {
-    internal class History : DOMObject, IHistory
-    {
-        private Navigation navigation;
-        
-        public History (WebBrowser control, Navigation navigation)
-            : base (control)
-        {
-            this.navigation = navigation;
-        }
-        
-        public int Count { 
-            get { return navigation.HistoryCount; }
-        }
-        
-        public void Back (int count)
-        {
-            navigation.Go (count * -1, true);
-        }
-        
-        public void Forward (int count)
-        {
-            navigation.Go (count, true);
-        }
-            
-        public void GoToIndex (int index)
-        {
-            navigation.Go  (index);
-        }
-        public void GoToUrl (string url)
-        {
-            int index = -1;
-            nsISHistory history;
-            navigation.navigation.getSessionHistory(out history);
-            int count = Count;
-            nsIHistoryEntry entry;
-            for (int i = 0; i < count; i++) {
-                nsIURI uri;
-                history.getEntryAtIndex(i, false, out entry);
-                entry.getURI (out uri);
-                AsciiString spec = new AsciiString(String.Empty);
-                uri.getSpec (spec.Handle);
-                if (string.Compare (spec.ToString (), url, true) == 0) {
-                    index = i;
-                    break;
-                }
-            }
-            if (index > -1)
-                this.GoToIndex (index);
-        }
-    }
+	internal class History : DOMObject, IHistory
+	{
+		private Navigation navigation;
+		
+		public History (WebBrowser control, Navigation navigation)
+			: base (control)
+		{
+			this.navigation = navigation;
+		}
+		
+		public int Count { 
+			get { return navigation.HistoryCount; }
+		}
+		
+		public void Back (int count)
+		{
+			navigation.Go (count * -1, true);
+		}
+		
+		public void Forward (int count)
+		{
+			navigation.Go (count, true);
+		}
+			
+		public void GoToIndex (int index)
+		{
+			navigation.Go  (index);
+		}
+		public void GoToUrl (string url)
+		{
+			int index = -1;
+			nsISHistory history;
+			navigation.navigation.getSessionHistory(out history);
+			int count = Count;
+			nsIHistoryEntry entry;
+			for (int i = 0; i < count; i++) {
+				nsIURI uri;
+				history.getEntryAtIndex(i, false, out entry);
+				entry.getURI (out uri);
+				AsciiString spec = new AsciiString(String.Empty);
+				uri.getSpec (spec.Handle);
+				if (string.Compare (spec.ToString (), url, true) == 0) {
+					index = i;
+					break;
+				}
+			}
+			if (index > -1)
+				this.GoToIndex (index);
+		}
+	}
 }

@@ -37,106 +37,106 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System {
 
-    [Serializable]
-    [ClassInterface (ClassInterfaceType.AutoDual)]
-    [ComVisible (true)]
-    public class Object {
+	[Serializable]
+	[ClassInterface (ClassInterfaceType.AutoDual)]
+	[ComVisible (true)]
+	public class Object {
 
-        // <summary>
-        //   Compares this object to the specified object.
-        //   Returns true if they are equal, false otherwise.
-        // </summary>
-        public virtual bool Equals (object obj)
-        {
-            return this == obj;
-        }
+		// <summary>
+		//   Compares this object to the specified object.
+		//   Returns true if they are equal, false otherwise.
+		// </summary>
+		public virtual bool Equals (object obj)
+		{
+			return this == obj;
+		}
 
-        // <summary>
-        //   Compares two objects for equality
-        // </summary>
-        public static bool Equals (object objA, object objB)
-        {
-            if (objA == objB)
-                return true;
-            
-            if (objA == null || objB == null)
-                return false;
+		// <summary>
+		//   Compares two objects for equality
+		// </summary>
+		public static bool Equals (object objA, object objB)
+		{
+			if (objA == objB)
+				return true;
+			
+			if (objA == null || objB == null)
+				return false;
 
-            return objA.Equals (objB);
-        }
+			return objA.Equals (objB);
+		}
 
-        // <summary>
-        //   Initializes a new instance of the object class.
-        // </summary>
-        [ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.MayFail)]
-        public Object ()
-        {
-        }
+		// <summary>
+		//   Initializes a new instance of the object class.
+		// </summary>
+		[ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.MayFail)]
+		public Object ()
+		{
+		}
 
-        // <summary>
-        //   Object destructor. 
-        // </summary>
-        [ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.Success)]
-        ~Object ()
-        {
-        }
+		// <summary>
+		//   Object destructor. 
+		// </summary>
+		[ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.Success)]
+		~Object ()
+		{
+		}
 
-        // <summary>
-        //   Returns a hashcode for this object.  Each derived
-        //   class should return a hash code that makes sense
-        //   for that particular implementation of the object.
-        // </summary>
-        public virtual int GetHashCode () {
-            return InternalGetHashCode (this);
-        }
+		// <summary>
+		//   Returns a hashcode for this object.  Each derived
+		//   class should return a hash code that makes sense
+		//   for that particular implementation of the object.
+		// </summary>
+		public virtual int GetHashCode () {
+			return InternalGetHashCode (this);
+		}
 
-        // <summary>
-        //   Returns the Type associated with the object.
-        // </summary>
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Type GetType ();
+		// <summary>
+		//   Returns the Type associated with the object.
+		// </summary>
+		[MethodImplAttribute(MethodImplOptions.InternalCall)]
+		public extern Type GetType ();
 
-        // <summary>
-        //   Shallow copy of the object.
-        // </summary>
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        protected extern object MemberwiseClone ();
+		// <summary>
+		//   Shallow copy of the object.
+		// </summary>
+		[MethodImplAttribute(MethodImplOptions.InternalCall)]
+		protected extern object MemberwiseClone ();
 
-        // <summary>
-        //   Returns a stringified representation of the object.
-        //   This is not supposed to be used for user presentation,
-        //   use Format() for that and IFormattable.
-        //
-        //   ToString is mostly used for debugging purposes. 
-        // </summary>
-        public virtual string ToString ()
-        {
-            return GetType ().ToString ();
-        }
+		// <summary>
+		//   Returns a stringified representation of the object.
+		//   This is not supposed to be used for user presentation,
+		//   use Format() for that and IFormattable.
+		//
+		//   ToString is mostly used for debugging purposes. 
+		// </summary>
+		public virtual string ToString ()
+		{
+			return GetType ().ToString ();
+		}
 
-        // <summary>
-        //   Tests whether a is equal to b.
-        //   Can not figure out why this even exists
-        // </summary>
-        [ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.Success)]
-        public static bool ReferenceEquals (object objA, object objB)
-        {
-            return (objA == objB);
-        }
+		// <summary>
+		//   Tests whether a is equal to b.
+		//   Can not figure out why this even exists
+		// </summary>
+		[ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.Success)]
+		public static bool ReferenceEquals (object objA, object objB)
+		{
+			return (objA == objB);
+		}
 
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern int InternalGetHashCode (object o);
+		[MethodImplAttribute(MethodImplOptions.InternalCall)]
+		internal static extern int InternalGetHashCode (object o);
  
 #pragma warning disable 169
-        void FieldGetter (string typeName, string fieldName, ref object val)
-        {
-            /* never called */
-        }
+		void FieldGetter (string typeName, string fieldName, ref object val)
+		{
+			/* never called */
+		}
 
-        void FieldSetter (string typeName, string fieldName, object val)
-        {
-            /* never called */
-        }
+		void FieldSetter (string typeName, string fieldName, object val)
+		{
+			/* never called */
+		}
 #pragma warning restore 169
-    }
+	}
 }

@@ -30,22 +30,22 @@ using System.Security.Permissions;
 
 namespace System.Web.UI {
 
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [AttributeUsage (AttributeTargets.Class)]
-    public sealed class ValidationPropertyAttribute : Attribute
-    {
-        string name;
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[AttributeUsage (AttributeTargets.Class)]
+	public sealed class ValidationPropertyAttribute : Attribute
+	{
+		string name;
 
-        public ValidationPropertyAttribute (string name)
-        {
-            this.name = name;
-        }
+		public ValidationPropertyAttribute (string name)
+		{
+			this.name = name;
+		}
 
-        public string Name {
-            get { return name; }
-        }
-    }
+		public string Name {
+			get { return name; }
+		}
+	}
 }
  

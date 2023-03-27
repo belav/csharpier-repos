@@ -2,7 +2,7 @@
 // System.Security.AccessControl.InheritanceFlags enum
 //
 // Author:
-//    Dick Porter  <dick@ximian.com>
+//	Dick Porter  <dick@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -27,11 +27,11 @@
 //
 
 namespace System.Security.AccessControl {
-    [Flags]
-    public enum InheritanceFlags {
-        None = 0,
-        ContainerInherit = 1,
-        ObjectInherit = 2,
-    }
+	[Flags]
+	public enum InheritanceFlags {
+		None = 0,
+		ContainerInherit = 1,
+		ObjectInherit = 2,
+	}
 }
 

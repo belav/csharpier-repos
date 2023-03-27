@@ -30,13 +30,13 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace System.ServiceModel {
-    [Serializable]
-    public class EndpointNotFoundException : CommunicationException
-    {
-        public EndpointNotFoundException () : base () {}
-        public EndpointNotFoundException (string message) : base (message) {}
-        public EndpointNotFoundException (string message, Exception innerException) : base (message, innerException) {}
-        protected EndpointNotFoundException (SerializationInfo info, StreamingContext context) :
-            base (info, context) {}
-    }
+	[Serializable]
+	public class EndpointNotFoundException : CommunicationException
+	{
+		public EndpointNotFoundException () : base () {}
+		public EndpointNotFoundException (string message) : base (message) {}
+		public EndpointNotFoundException (string message, Exception innerException) : base (message, innerException) {}
+		protected EndpointNotFoundException (SerializationInfo info, StreamingContext context) :
+			base (info, context) {}
+	}
 }

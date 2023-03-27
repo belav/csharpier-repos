@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -286,7 +286,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             Contract.ThrowIfTrue(deltaLine < 0, $"deltaLine is less than 0: {deltaLine}");
 
             // 2. Token start character delta, relative to the previous token
-            // (Relative to 0 or the previous token�s start if they're on the same line)
+            // (Relative to 0 or the previous token’s start if they're on the same line)
             var deltaStartCharacter = linePosition.Character;
             if (lastLineNumber == lineNumber)
             {

@@ -37,56 +37,56 @@ namespace MonoTests.System.Data.OleDb
 [TestFixture]
 public class OleDbDataAdapter_DeleteCommand : GHTBase
 {
-    public static void Main()
-    {
-        OleDbDataAdapter_DeleteCommand tc = new OleDbDataAdapter_DeleteCommand();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OleDbDataAdapter_DeleteCommand");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	public static void Main()
+	{
+		OleDbDataAdapter_DeleteCommand tc = new OleDbDataAdapter_DeleteCommand();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OleDbDataAdapter_DeleteCommand");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
 
-    //public TestClass():base(true){}
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
-        
-        OleDbDataAdapter oleDBda = new OleDbDataAdapter();
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
+		
+		OleDbDataAdapter oleDBda = new OleDbDataAdapter();
 
-        OleDbCommand Cmd = new OleDbCommand();
+		OleDbCommand Cmd = new OleDbCommand();
 
-        oleDBda.DeleteCommand = Cmd;
+		oleDBda.DeleteCommand = Cmd;
 
-        try
-        {
-            BeginCase("DeleteCommand - Get");
-            Compare(oleDBda.DeleteCommand , Cmd);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("DeleteCommand - Get");
+			Compare(oleDBda.DeleteCommand , Cmd);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-    }
+	}
 }
 }

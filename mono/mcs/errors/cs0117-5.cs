@@ -5,10 +5,10 @@ using System;
 using System.Reflection;
 
 public class Test {
-    const BindingFlags Def = BindingFlags.Private | BindingFlags.Static;
-    const BindingFlags SetBindingFlags = Def | BindingFlags.SetProperty;
+	const BindingFlags Def = BindingFlags.Private | BindingFlags.Static;
+	const BindingFlags SetBindingFlags = Def | BindingFlags.SetProperty;
 
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

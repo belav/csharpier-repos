@@ -2,7 +2,7 @@
 // System.Web.MimeMapping
 //
 // Authors:
-//    Jb Evain (jbevain@gmail.com)
+//	Jb Evain (jbevain@gmail.com)
 //
 // (C) 2013 Jb Evain
 
@@ -30,12 +30,12 @@
 
 namespace System.Web {
 
-    public static class MimeMapping {
+	public static class MimeMapping {
 
-        public static string GetMimeMapping (string fileName)
-        {
-            return MimeTypes.GetMimeType (fileName);
-        }
-    }
+		public static string GetMimeMapping (string fileName)
+		{
+			return MimeTypes.GetMimeType (fileName);
+		}
+	}
 }
 

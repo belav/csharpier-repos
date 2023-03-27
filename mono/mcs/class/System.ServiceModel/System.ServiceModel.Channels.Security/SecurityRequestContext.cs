@@ -2,7 +2,7 @@
 // SecurityRequestContext.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2007 Novell, Inc.  http://www.novell.com
 //
@@ -44,86 +44,86 @@ using System.Xml.XPath;
 
 namespace System.ServiceModel.Channels.Security
 {
-    internal class SecurityRequestContext : RequestContext
-    {
-        RecipientMessageSecurityBindingSupport security;
-        SecurityReplyChannel channel;
-        RequestContext source;
-        Message msg;
-        MessageBuffer source_request;
+	internal class SecurityRequestContext : RequestContext
+	{
+		RecipientMessageSecurityBindingSupport security;
+		SecurityReplyChannel channel;
+		RequestContext source;
+		Message msg;
+		MessageBuffer source_request;
 
-        public SecurityRequestContext (SecurityReplyChannel channel, RequestContext source)
-        {
-            this.source = source;
-            this.channel = channel;
+		public SecurityRequestContext (SecurityReplyChannel channel, RequestContext source)
+		{
+			this.source = source;
+			this.channel = channel;
 
-            security = channel.Source.SecuritySupport;
-        }
+			security = channel.Source.SecuritySupport;
+		}
 
-        public override Message RequestMessage {
-            get {
-                if (msg == null)
-                    msg = new RecipientSecureMessageDecryptor (source.RequestMessage, security).DecryptMessage ();
-                return msg; 
-            }
-        }
+		public override Message RequestMessage {
+			get {
+				if (msg == null)
+					msg = new RecipientSecureMessageDecryptor (source.RequestMessage, security).DecryptMessage ();
+				return msg; 
+			}
+		}
 
-        public override void Abort ()
-        {
-            source.Abort ();
-        }
+		public override void Abort ()
+		{
+			source.Abort ();
+		}
 
-        public override IAsyncResult BeginReply (Message message, AsyncCallback callback, object state)
-        {
-            return BeginReply (message, channel.Listener.DefaultSendTimeout, callback, state);
-        }
+		public override IAsyncResult BeginReply (Message message, AsyncCallback callback, object state)
+		{
+			return BeginReply (message, channel.Listener.DefaultSendTimeout, callback, state);
+		}
 
-        public override IAsyncResult BeginReply (Message message, TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            // FIXME: implement
-            throw new NotImplementedException ();
-        }
+		public override IAsyncResult BeginReply (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+		{
+			// FIXME: implement
+			throw new NotImplementedException ();
+		}
 
-        public override void Close ()
-        {
-            Close (channel.Listener.DefaultCloseTimeout);
-        }
+		public override void Close ()
+		{
+			Close (channel.Listener.DefaultCloseTimeout);
+		}
 
-        public override void Close (TimeSpan timeout)
-        {
-            source.Close (timeout);
-        }
+		public override void Close (TimeSpan timeout)
+		{
+			source.Close (timeout);
+		}
 
-        public override void EndReply (IAsyncResult result)
-        {
-            // FIXME: implement
-            throw new NotImplementedException ();
-        }
+		public override void EndReply (IAsyncResult result)
+		{
+			// FIXME: implement
+			throw new NotImplementedException ();
+		}
 
-        public override void Reply (Message message)
-        {
-            Reply (message, channel.Listener.DefaultSendTimeout);
-        }
+		public override void Reply (Message message)
+		{
+			Reply (message, channel.Listener.DefaultSendTimeout);
+		}
 
-        public override void Reply (Message message, TimeSpan timeout)
-        {
-            try {
-                if (!message.IsFault && message.Headers.Action != Constants.WstIssueReplyAction)
-                    message = SecureMessage (message);
-                source.Reply (message, timeout);
-            } catch (Exception ex) {
-                FaultConverter fc = FaultConverter.GetDefaultFaultConverter (msg.Version);
-                Message fault;
-                if (fc.TryCreateFaultMessage (ex, out fault))
-                    source.Reply (fault, timeout);
-                else
-                    throw;
-            }
-        }
+		public override void Reply (Message message, TimeSpan timeout)
+		{
+			try {
+				if (!message.IsFault && message.Headers.Action != Constants.WstIssueReplyAction)
+					message = SecureMessage (message);
+				source.Reply (message, timeout);
+			} catch (Exception ex) {
+				FaultConverter fc = FaultConverter.GetDefaultFaultConverter (msg.Version);
+				Message fault;
+				if (fc.TryCreateFaultMessage (ex, out fault))
+					source.Reply (fault, timeout);
+				else
+					throw;
+			}
+		}
 
-        Message SecureMessage (Message input)
-        {
-            return new RecipientMessageSecurityGenerator (input, RequestMessage.Properties.Security, security).SecureMessage ();
-        }
-    }
+		Message SecureMessage (Message input)
+		{
+			return new RecipientMessageSecurityGenerator (input, RequestMessage.Properties.Security, security).SecureMessage ();
+		}
+	}
 }

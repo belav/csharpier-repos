@@ -1,4 +1,4 @@
-//
+﻿//
 // MonoBtlsX509FileType.cs
 //
 // Author:
@@ -27,11 +27,11 @@
 using System;
 namespace Mono.Btls
 {
-    enum MonoBtlsX509FileType
-    {
-        PEM = 1,
-        ASN1 = 2,
-        DEFAULT = 3
-    }
+	enum MonoBtlsX509FileType
+	{
+		PEM = 1,
+		ASN1 = 2,
+		DEFAULT = 3
+	}
 }
 #endif

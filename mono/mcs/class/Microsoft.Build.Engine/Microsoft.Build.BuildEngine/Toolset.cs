@@ -2,7 +2,7 @@
 // Toolset.cs
 //
 // Author:
-//    Ankit Jain (jankit@novell.com)
+//	Ankit Jain (jankit@novell.com)
 //
 // Copyright 2010 Novell, Inc (http://www.novell.com)
 //
@@ -29,23 +29,23 @@ using System;
 
 namespace Microsoft.Build.BuildEngine
 {
-    public class Toolset
-    {
-        public Toolset (string toolsVersion, string toolsPath, BuildPropertyGroup buildProperties)
-        {
-            ToolsVersion = toolsVersion;
-            ToolsPath = toolsPath;
-            BuildProperties = buildProperties;
-        }
+	public class Toolset
+	{
+		public Toolset (string toolsVersion, string toolsPath, BuildPropertyGroup buildProperties)
+		{
+			ToolsVersion = toolsVersion;
+			ToolsPath = toolsPath;
+			BuildProperties = buildProperties;
+		}
 
-        public Toolset (string toolsVersion, string toolsPath)
-            : this (toolsVersion, toolsPath, null)
-        {
-        }
+		public Toolset (string toolsVersion, string toolsPath)
+			: this (toolsVersion, toolsPath, null)
+		{
+		}
 
-        public BuildPropertyGroup BuildProperties { get; private set; }
+		public BuildPropertyGroup BuildProperties { get; private set; }
 
-        public string ToolsVersion { get; private set; }
-        public string ToolsPath { get; private set; }
-    }
+		public string ToolsVersion { get; private set; }
+		public string ToolsPath { get; private set; }
+	}
 }

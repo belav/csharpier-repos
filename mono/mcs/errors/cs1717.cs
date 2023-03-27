@@ -6,6 +6,6 @@ class A
 {    
     public A (int a)
     {
-    a = a;
+	a = a;
     }
 }

@@ -3,5 +3,5 @@
 
 interface A<in T>
 {
-    T B();
+	T B();
 }

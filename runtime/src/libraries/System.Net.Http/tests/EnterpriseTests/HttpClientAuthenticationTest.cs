@@ -25,8 +25,8 @@ namespace System.Net.Http.Enterprise.Tests
             RemoteExecutor.Invoke((url, useAltPort, useDomain) =>
             {
                 // This is safe as we have no parallel tests
-        if (!string.IsNullOrEmpty(useAltPort))
-        {
+		if (!string.IsNullOrEmpty(useAltPort))
+		{
                     AppContext.SetSwitch(AppContextSettingName, true);
                 }
                 using var handler = new HttpClientHandler();

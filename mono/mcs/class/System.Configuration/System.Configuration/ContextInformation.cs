@@ -31,32 +31,32 @@ using System.Xml;
 
 namespace System.Configuration
 {
-    public sealed class ContextInformation
-    {
-        object ctx;
-        Configuration config;
-        
-        internal ContextInformation (Configuration config, object ctx)
-        {
-            this.ctx = ctx;
-            this.config = config;
-        }
-        
-        public object GetSection (string sectionName)
-        {
-            return config.GetSection (sectionName);
-        }
-        
-        public object HostingContext {
-            get { return ctx; }
-        }
+	public sealed class ContextInformation
+	{
+		object ctx;
+		Configuration config;
+		
+		internal ContextInformation (Configuration config, object ctx)
+		{
+			this.ctx = ctx;
+			this.config = config;
+		}
+		
+		public object GetSection (string sectionName)
+		{
+			return config.GetSection (sectionName);
+		}
+		
+		public object HostingContext {
+			get { return ctx; }
+		}
 
-        [MonoInternalNote ("should this use HostingContext instead?")]
-        public bool IsMachineLevel {
-            get {
-                return config.ConfigPath == "machine";
-            }
-        }
-    }
+		[MonoInternalNote ("should this use HostingContext instead?")]
+		public bool IsMachineLevel {
+			get {
+				return config.ConfigPath == "machine";
+			}
+		}
+	}
 }
 

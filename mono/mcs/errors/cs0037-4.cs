@@ -2,11 +2,11 @@
 // Line: 9
 
 class X {
-    static void Main ()
-    {
-        int s = 44;
-        switch (s) {
-            case null: break;
-        }
-    }
+	static void Main ()
+	{
+		int s = 44;
+		switch (s) {
+			case null: break;
+		}
+	}
 }

@@ -2,8 +2,8 @@
 // System.Net.Configuration.BypassElement.cs
 //
 // Authors:
-//    Tim Coleman (tim@timcoleman.com)
-//    Chris Toshok (toshok@ximian.com)
+//	Tim Coleman (tim@timcoleman.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (C) 2004,2005 Novell, Inc. (http://www.novell.com)
@@ -36,51 +36,51 @@ using System.Configuration;
 
 namespace System.Net.Configuration 
 {
-    public sealed class BypassElement : ConfigurationElement
-    {
-        #region Fields
+	public sealed class BypassElement : ConfigurationElement
+	{
+		#region Fields
 
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty addressProp;
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty addressProp;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        static BypassElement ()
-        {
-            addressProp = new ConfigurationProperty ("address", typeof (string),
-                                 null, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+		static BypassElement ()
+		{
+			addressProp = new ConfigurationProperty ("address", typeof (string),
+								 null, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
 
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (addressProp);
-        }
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (addressProp);
+		}
 
-        public BypassElement ()
-        {
-        }
+		public BypassElement ()
+		{
+		}
 
-        public BypassElement (string address)
-        {
-            Address = address;
-        }
+		public BypassElement (string address)
+		{
+			Address = address;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [ConfigurationProperty ("address", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Address {
-            get { return (string) base [addressProp]; }
-            set { base [addressProp] = value; }
-        }
+		[ConfigurationProperty ("address", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+		public string Address {
+			get { return (string) base [addressProp]; }
+			set { base [addressProp] = value; }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }
 
 #endif

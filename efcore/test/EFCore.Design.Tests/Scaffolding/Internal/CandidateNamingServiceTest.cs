@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
@@ -25,7 +25,7 @@ public class CandidateNamingServiceTest
                 new DatabaseTable { Database = new DatabaseModel(), Name = input }));
 
     [ConditionalTheory]
-    [InlineData("???", "")]
+    [InlineData("‍🐶", "")]
     [InlineData(" ", "")]
     public void Generates_column_candidate_identifiers(string input, string output)
         => Assert.Equal(

@@ -30,10 +30,10 @@
 
 namespace System.Net.Http
 {
-    public enum CookieUsePolicy
-    {
-        IgnoreCookies = 0,
-        UseInternalCookieStoreOnly = 1,
-        UseSpecifiedCookieContainer = 2,
-    }
+	public enum CookieUsePolicy
+	{
+		IgnoreCookies = 0,
+		UseInternalCookieStoreOnly = 1,
+		UseSpecifiedCookieContainer = 2,
+	}
 }

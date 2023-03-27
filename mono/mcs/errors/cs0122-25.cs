@@ -3,7 +3,7 @@
 
 class AAttribute : System.Attribute
 {
-    protected AAttribute() { }
+	protected AAttribute() { }
 }
 
 [A]

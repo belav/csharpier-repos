@@ -10,29 +10,29 @@ class Class1 {
     {
         Dispatcher d = Dispatcher.CurrentDispatcher;
         Action a = delegate {
-        object x = d;
+		object x = d;
             d.Invoke (DispatcherPriority.Normal, new Action (mine));
             Console.WriteLine ("Task");
         };
 
-    d.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
-        Console.WriteLine ("First");
-    });
+	d.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
+		Console.WriteLine ("First");
+	});
         d.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
-        Console.WriteLine ("Second");
-        d.InvokeShutdown ();
-    });
-    d.BeginInvoke (DispatcherPriority.Send, (Action) delegate {
-        Console.WriteLine ("High Priority");
-        d.BeginInvoke (DispatcherPriority.Send, (Action) delegate {
-            Console.WriteLine ("INSERTED");
-        });
-    });
-    d.BeginInvoke (DispatcherPriority.SystemIdle, (Action) delegate {
-        Console.WriteLine ("Idle");
-    });
+		Console.WriteLine ("Second");
+		d.InvokeShutdown ();
+	});
+	d.BeginInvoke (DispatcherPriority.Send, (Action) delegate {
+		Console.WriteLine ("High Priority");
+		d.BeginInvoke (DispatcherPriority.Send, (Action) delegate {
+			Console.WriteLine ("INSERTED");
+		});
+	});
+	d.BeginInvoke (DispatcherPriority.SystemIdle, (Action) delegate {
+		Console.WriteLine ("Idle");
+	});
 
-    Dispatcher.Run ();
+	Dispatcher.Run ();
     }
 
     static void mine ()

@@ -2,7 +2,7 @@
 // EqualityPair.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,36 +29,36 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph {
-    struct EqualityPair<TFunc, TAbstractDomain> : IEquatable<EqualityPair<TFunc, TAbstractDomain>> 
-        where TFunc : IEquatable<TFunc>, IConstantInfo 
-        where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
+	struct EqualityPair<TFunc, TAbstractDomain> : IEquatable<EqualityPair<TFunc, TAbstractDomain>> 
+		where TFunc : IEquatable<TFunc>, IConstantInfo 
+		where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
 
-        public readonly SymValue Sv1;
-        public readonly SymValue Sv2;
+		public readonly SymValue Sv1;
+		public readonly SymValue Sv2;
 
-        public EqualityPair (SymValue v1, SymValue v2)
-        {
-            this.Sv1 = v1;
-            this.Sv2 = v2;
-        }
+		public EqualityPair (SymValue v1, SymValue v2)
+		{
+			this.Sv1 = v1;
+			this.Sv2 = v2;
+		}
 
-        #region Implementation of IEquatable<SymGraph<Constant,AbstractValue>.EqualityPair>
-        public bool Equals (EqualityPair<TFunc, TAbstractDomain> other)
-        {
-            return (this.Sv1 == other.Sv1 && this.Sv2 == other.Sv2);
-        }
-        #endregion
+		#region Implementation of IEquatable<SymGraph<Constant,AbstractValue>.EqualityPair>
+		public bool Equals (EqualityPair<TFunc, TAbstractDomain> other)
+		{
+			return (this.Sv1 == other.Sv1 && this.Sv2 == other.Sv2);
+		}
+		#endregion
 
-        public override bool Equals (object obj)
-        {
-            if (obj is EqualityPair<TFunc, TAbstractDomain>)
-                return Equals ((EqualityPair<TFunc, TAbstractDomain>) obj);
-            return false;
-        }
+		public override bool Equals (object obj)
+		{
+			if (obj is EqualityPair<TFunc, TAbstractDomain>)
+				return Equals ((EqualityPair<TFunc, TAbstractDomain>) obj);
+			return false;
+		}
 
-        public override int GetHashCode ()
-        {
-            return (this.Sv1 == null ? 1 : this.Sv1.GlobalId) + this.Sv2.GlobalId;
-        }
-    }
+		public override int GetHashCode ()
+		{
+			return (this.Sv1 == null ? 1 : this.Sv1.GlobalId) + this.Sv2.GlobalId;
+		}
+	}
 }

@@ -1,4 +1,4 @@
-//
+﻿//
 // SingleResultAttribute.cs
 //
 // Author:
@@ -27,7 +27,7 @@
 //
 
 namespace System.Data.Services {
-    [AttributeUsage (AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public sealed class SingleResultAttribute : Attribute {
-    }
+	[AttributeUsage (AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+	public sealed class SingleResultAttribute : Attribute {
+	}
 }

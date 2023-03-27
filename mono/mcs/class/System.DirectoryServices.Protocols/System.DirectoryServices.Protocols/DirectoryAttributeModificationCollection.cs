@@ -33,64 +33,64 @@ using System.Collections;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class DirectoryAttributeModificationCollection : CollectionBase
-    {
-        public DirectoryAttributeModificationCollection ()
-        {
-        }
+	public class DirectoryAttributeModificationCollection : CollectionBase
+	{
+		public DirectoryAttributeModificationCollection ()
+		{
+		}
 
-        public DirectoryAttributeModification this [int index] {
-            get { return (DirectoryAttributeModification) List [index]; }
-            set { List [index] = value; }
-        }
+		public DirectoryAttributeModification this [int index] {
+			get { return (DirectoryAttributeModification) List [index]; }
+			set { List [index] = value; }
+		}
 
-        public int Add (DirectoryAttributeModification attribute)
-        {
-            return List.Add (attribute);
-        }
+		public int Add (DirectoryAttributeModification attribute)
+		{
+			return List.Add (attribute);
+		}
 
-        public void AddRange (DirectoryAttributeModification [] attributes)
-        {
-            foreach (var a in attributes)
-                List.Add (a);
-        }
+		public void AddRange (DirectoryAttributeModification [] attributes)
+		{
+			foreach (var a in attributes)
+				List.Add (a);
+		}
 
-        public void AddRange (DirectoryAttributeModificationCollection attributeCollection)
-        {
-            foreach (var a in attributeCollection)
-                List.Add (a);
-        }
+		public void AddRange (DirectoryAttributeModificationCollection attributeCollection)
+		{
+			foreach (var a in attributeCollection)
+				List.Add (a);
+		}
 
-        public bool Contains (DirectoryAttributeModification value)
-        {
-            return List.Contains (value);
-        }
+		public bool Contains (DirectoryAttributeModification value)
+		{
+			return List.Contains (value);
+		}
 
-        public void CopyTo (DirectoryAttributeModification [] array, int index)
-        {
-            List.CopyTo (array, index);
-        }
+		public void CopyTo (DirectoryAttributeModification [] array, int index)
+		{
+			List.CopyTo (array, index);
+		}
 
-        public int IndexOf (DirectoryAttributeModification value)
-        {
-            return List.IndexOf (value);
-        }
+		public int IndexOf (DirectoryAttributeModification value)
+		{
+			return List.IndexOf (value);
+		}
 
-        public void Insert (int index, DirectoryAttributeModification value)
-        {
-            List.Insert (index, value);
-        }
+		public void Insert (int index, DirectoryAttributeModification value)
+		{
+			List.Insert (index, value);
+		}
 
-        [MonoTODO ("verify")]
-        protected override void OnValidate (object value)
-        {
-            if (!(value is DirectoryAttributeModification))
-                throw new ArgumentException ("value must be a DirectoryAttributeModification");
-        }
+		[MonoTODO ("verify")]
+		protected override void OnValidate (object value)
+		{
+			if (!(value is DirectoryAttributeModification))
+				throw new ArgumentException ("value must be a DirectoryAttributeModification");
+		}
 
-        public void Remove (DirectoryAttributeModification value)
-        {
-            List.Remove (value);
-        }
-    }
+		public void Remove (DirectoryAttributeModification value)
+		{
+			List.Remove (value);
+		}
+	}
 }

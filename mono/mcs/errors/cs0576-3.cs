@@ -5,11 +5,11 @@ using A = System;
 
 namespace A.Foo
 {
-    class X
-    {
-        public static void Main ()
-        {
-            A.GG ();
-        }
-    }
+	class X
+	{
+		public static void Main ()
+		{
+			A.GG ();
+		}
+	}
 }

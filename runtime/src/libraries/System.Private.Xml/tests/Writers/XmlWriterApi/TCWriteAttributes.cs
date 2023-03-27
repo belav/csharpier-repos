@@ -248,7 +248,7 @@ namespace System.Xml.XmlWriterApiTests
                     strxml = "<!DOCTYPE root[<!ENTITY e \"Test Entity\"> ]><root>&e;</root>";
                     break;
                 case "SignificantWhitespace":
-                    strxml = "<root xml:space=\"preserve\">             </root>";
+                    strxml = "<root xml:space=\"preserve\">			 </root>";
                     break;
                 case "Whitespace":
                     if (ReaderStripsWhitespace())
@@ -256,7 +256,7 @@ namespace System.Xml.XmlWriterApiTests
                         CError.WriteLine("{0} strips whitespace nodes by default", readerType);
                         return;
                     }
-                    strxml = "<root>             </root>";
+                    strxml = "<root>			 </root>";
                     break;
             }
 

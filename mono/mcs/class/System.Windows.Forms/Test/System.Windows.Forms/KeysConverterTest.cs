@@ -30,20 +30,20 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {
-    [TestFixture]
-    public class KeysConverterTest : TestHelper
-    {
-        [Test]
-        public void CanConvertTo ()
-        {
-            KeysConverter c = new KeysConverter ();
+	[TestFixture]
+	public class KeysConverterTest : TestHelper
+	{
+		[Test]
+		public void CanConvertTo ()
+		{
+			KeysConverter c = new KeysConverter ();
 
-            Assert.AreEqual (true, c.CanConvertTo (null, typeof (string)), "A1");
-            Assert.AreEqual (false, c.CanConvertTo (null, typeof (int)), "A2");
-            Assert.AreEqual (false, c.CanConvertTo (null, typeof (float)), "A3");
-            Assert.AreEqual (false, c.CanConvertTo (null, typeof (object)), "A4");
-            Assert.AreEqual (false, c.CanConvertTo (null, typeof (Enum)), "A5");
-            Assert.AreEqual (true, c.CanConvertTo (null, typeof (Enum [])), "A6");
-        }
-    }
+			Assert.AreEqual (true, c.CanConvertTo (null, typeof (string)), "A1");
+			Assert.AreEqual (false, c.CanConvertTo (null, typeof (int)), "A2");
+			Assert.AreEqual (false, c.CanConvertTo (null, typeof (float)), "A3");
+			Assert.AreEqual (false, c.CanConvertTo (null, typeof (object)), "A4");
+			Assert.AreEqual (false, c.CanConvertTo (null, typeof (Enum)), "A5");
+			Assert.AreEqual (true, c.CanConvertTo (null, typeof (Enum [])), "A6");
+		}
+	}
 }

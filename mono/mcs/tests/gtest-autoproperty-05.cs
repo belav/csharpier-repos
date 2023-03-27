@@ -4,12 +4,12 @@ partial class Test
 
 abstract partial class Test
 {
-    public string X { get; set; }
+	public string X { get; set; }
 }
 
 class M
 {
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }

@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------
+﻿//---------------------------------------------------------------------
 // <copyright file="AssociationTypeEmitter.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>

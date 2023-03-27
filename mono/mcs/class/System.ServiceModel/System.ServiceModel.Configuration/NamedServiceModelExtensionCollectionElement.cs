@@ -2,7 +2,7 @@
 // NamedServiceModelExtensionCollectionElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,40 +54,40 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public abstract class NamedServiceModelExtensionCollectionElement<TServiceModelExtensionElement>
-         : ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>,  ICollection<TServiceModelExtensionElement>,  IEnumerable<TServiceModelExtensionElement>,  IEnumerable
-        where TServiceModelExtensionElement : ServiceModelExtensionElement
-    {
-        const int minNameLength = 0;
-        ConfigurationPropertyCollection _properties;
+	public abstract class NamedServiceModelExtensionCollectionElement<TServiceModelExtensionElement>
+		 : ServiceModelExtensionCollectionElement<TServiceModelExtensionElement>,  ICollection<TServiceModelExtensionElement>,  IEnumerable<TServiceModelExtensionElement>,  IEnumerable
+		where TServiceModelExtensionElement : ServiceModelExtensionElement
+	{
+		const int minNameLength = 0;
+		ConfigurationPropertyCollection _properties;
 
-        internal NamedServiceModelExtensionCollectionElement ()
-        {
-        }
-
-
-        // Properties
-        [StringValidator ( MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
-        [ConfigurationProperty ("name",
-             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-            IsRequired = true,
-            IsKey = true)]
-        public virtual string Name {
-            get { return (string) base ["name"]; }
-            set { base ["name"] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = new ConfigurationPropertyCollection ();
-                    _properties.Add (new ConfigurationProperty ("name", typeof (string), null, new StringConverter (), new StringValidator (minNameLength, int.MaxValue, null), ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey));
-                }
-                return _properties;
-            }
-        }
+		internal NamedServiceModelExtensionCollectionElement ()
+		{
+		}
 
 
-    }
+		// Properties
+		[StringValidator ( MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+		[ConfigurationProperty ("name",
+			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+			IsRequired = true,
+			IsKey = true)]
+		public virtual string Name {
+			get { return (string) base ["name"]; }
+			set { base ["name"] = value; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get {
+				if (_properties == null) {
+					_properties = new ConfigurationPropertyCollection ();
+					_properties.Add (new ConfigurationProperty ("name", typeof (string), null, new StringConverter (), new StringValidator (minNameLength, int.MaxValue, null), ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey));
+				}
+				return _properties;
+			}
+		}
+
+
+	}
 
 }

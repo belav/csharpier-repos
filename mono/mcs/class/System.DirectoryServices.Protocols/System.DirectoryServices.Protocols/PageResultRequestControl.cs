@@ -30,32 +30,32 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class PageResultRequestControl : DirectoryControl
-    {
-        public PageResultRequestControl ()
-            : base (null, null, false, false)
-        {
-        }
+	public class PageResultRequestControl : DirectoryControl
+	{
+		public PageResultRequestControl ()
+			: base (null, null, false, false)
+		{
+		}
 
-        public PageResultRequestControl (byte [] cookie)
-            : this ()
-        {
-            Cookie = cookie;
-        }
+		public PageResultRequestControl (byte [] cookie)
+			: this ()
+		{
+			Cookie = cookie;
+		}
 
-        public PageResultRequestControl (int pageSize)
-            : this ()
-        {
-            PageSize = pageSize;
-        }
+		public PageResultRequestControl (int pageSize)
+			: this ()
+		{
+			PageSize = pageSize;
+		}
 
-        public byte [] Cookie { get; set; }
-        public int PageSize { get; set; }
+		public byte [] Cookie { get; set; }
+		public int PageSize { get; set; }
 
-        [MonoTODO]
-        public override byte [] GetValue ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override byte [] GetValue ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

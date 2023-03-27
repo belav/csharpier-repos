@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,25 +32,25 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("1ACDB2BA-1DD2-11B2-95BC-9542495D2569")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMDocumentView {
+	[Guid ("1ACDB2BA-1DD2-11B2-95BC-9542495D2569")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMDocumentView {
 
 #region nsIDOMDocumentView
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getDefaultView ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMAbstractView ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getDefaultView ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMAbstractView ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMDocumentView {
-        public static nsIDOMDocumentView GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocumentView obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMDocumentView).GUID, obj);
-            return o as nsIDOMDocumentView;
-        }
-    }
+	internal class nsDOMDocumentView {
+		public static nsIDOMDocumentView GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocumentView obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMDocumentView).GUID, obj);
+			return o as nsIDOMDocumentView;
+		}
+	}
 }

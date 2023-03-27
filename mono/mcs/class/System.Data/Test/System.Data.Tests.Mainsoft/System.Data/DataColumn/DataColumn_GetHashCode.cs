@@ -39,57 +39,57 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataColumn_GetHashCode : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataColumn_GetHashCode tc = new DataColumn_GetHashCode();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataColumn_GetHashCode");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
+	[Test] public void Main()
+	{
+		DataColumn_GetHashCode tc = new DataColumn_GetHashCode();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataColumn_GetHashCode");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
 
-    }
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
-    
-        DataColumn dc1;
-        int iHashCode1;
-        dc1 = new DataColumn();
+	public void run()
+	{
+		Exception exp = null;
+	
+		DataColumn dc1;
+		int iHashCode1;
+		dc1 = new DataColumn();
 
-        iHashCode1 = dc1.GetHashCode();
-        for (int i=0; i<10; i++)
-        {    //must return the same value each time
-            try
-            {
-                BeginCase("GetHashCode #" + i.ToString());
-                Compare(iHashCode1 , dc1.GetHashCode());
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        }
-    }
+		iHashCode1 = dc1.GetHashCode();
+		for (int i=0; i<10; i++)
+		{	//must return the same value each time
+			try
+			{
+				BeginCase("GetHashCode #" + i.ToString());
+				Compare(iHashCode1 , dc1.GetHashCode());
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		}
+	}
 }
 }

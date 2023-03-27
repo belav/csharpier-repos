@@ -214,49 +214,49 @@ public class BitArrayTest
   public void TestCopyToBool()
   {
     try {
-        bool[] barray = new bool[testBa.Length + 10];
-        
-        testBa.CopyTo(barray, 5);
+	    bool[] barray = new bool[testBa.Length + 10];
+	    
+	    testBa.CopyTo(barray, 5);
 
-        for (int i = 0; i < testBa.Length; i++)
-          Assert.AreEqual (testBa[i], barray[i+5]);
+	    for (int i = 0; i < testBa.Length; i++)
+	      Assert.AreEqual (testBa[i], barray[i+5]);
     }
     catch(Exception e){
-    Assert.Fail ("Unexpected exception thrown: " + e.ToString());
+	Assert.Fail ("Unexpected exception thrown: " + e.ToString());
     }
   }
 
   [Test]
   public void CopyToEmptyEmpty () {
-      BitArray bitarray = new BitArray(0);
+	  BitArray bitarray = new BitArray(0);
 
-      int[] intarray = new int[0];
+	  int[] intarray = new int[0];
 
-      bitarray.CopyTo(intarray, 0);
+	  bitarray.CopyTo(intarray, 0);
   }
 
   [Test]
   public void TestCopyToByte()
   {
     try {
-        testBa.Length = 34;
-        byte[] barray = new byte[5 + 10];
-        
-        testBa.CopyTo(barray, 5);
+	    testBa.Length = 34;
+	    byte[] barray = new byte[5 + 10];
+	    
+	    testBa.CopyTo(barray, 5);
 
-        for (int i = 5; i < 9; i++)
-          Assert.AreEqual (0x55, barray[i] & 0xff);
+	    for (int i = 5; i < 9; i++)
+	      Assert.AreEqual (0x55, barray[i] & 0xff);
 
-        // FIXME: MS fails on the next line.  This is because
-        // we truncated testBa.Length, and MS's internal array still
-        // has the old bits set.  CopyTo() doesn't say specifically
-        // whether the "junk" bits (bits past Length, but within Length
-        // rounded up to 32) will be copied as 0, or if those bits are
-        // undefined.
-        //Assert.AreEqual (0x01, barray[9] & 0xff);
+	    // FIXME: MS fails on the next line.  This is because
+	    // we truncated testBa.Length, and MS's internal array still
+	    // has the old bits set.  CopyTo() doesn't say specifically
+	    // whether the "junk" bits (bits past Length, but within Length
+	    // rounded up to 32) will be copied as 0, or if those bits are
+	    // undefined.
+	    //Assert.AreEqual (0x01, barray[9] & 0xff);
     }
     catch(Exception e){
-    Assert.Fail ("Unexpected exception thrown: " + e.ToString());
+	Assert.Fail ("Unexpected exception thrown: " + e.ToString());
     }
   }
 
@@ -264,17 +264,17 @@ public class BitArrayTest
   public void TestCopyToInt()
   {
     try {
-        testBa.Length = 34;
-        int[] iarray = new int[2 + 10];
-        
-        testBa.CopyTo(iarray, 5);
+	    testBa.Length = 34;
+	    int[] iarray = new int[2 + 10];
+	    
+	    testBa.CopyTo(iarray, 5);
 
-        Assert.AreEqual (0x55555555, iarray[5]);
-        // FIXME:  Same thing here as in TestCopyToByte
-        //Assert.AreEqual (0x01, iarray[6]);
+	    Assert.AreEqual (0x55555555, iarray[5]);
+	    // FIXME:  Same thing here as in TestCopyToByte
+	    //Assert.AreEqual (0x01, iarray[6]);
     }
     catch(Exception e){
-    Assert.Fail ("Unexpected exception thrown: " + e.ToString());
+	Assert.Fail ("Unexpected exception thrown: " + e.ToString());
     }
   }
 
@@ -283,32 +283,32 @@ public class BitArrayTest
   {
     
     try {
-        IEnumerator e = testBa.GetEnumerator();
-        
-        for (int i = 0; e.MoveNext(); i++)
-          Assert.AreEqual (e.Current, testPattern[i]);
+	    IEnumerator e = testBa.GetEnumerator();
+	    
+	    for (int i = 0; e.MoveNext(); i++)
+	      Assert.AreEqual (e.Current, testPattern[i]);
 
-        Assert.IsTrue (!e.MoveNext());
-        // read, to make sure reading isn't considered a write.
-        bool b = testBa[0];
+	    Assert.IsTrue (!e.MoveNext());
+	    // read, to make sure reading isn't considered a write.
+	    bool b = testBa[0];
 
-        e.Reset();
-        for (int i = 0; e.MoveNext(); i++)
-          Assert.AreEqual (e.Current, testPattern[i]);
+	    e.Reset();
+	    for (int i = 0; e.MoveNext(); i++)
+	      Assert.AreEqual (e.Current, testPattern[i]);
 
-        try
-        {
-          e.Reset();
-          testBa[0] = !testBa[0];
-          e.MoveNext();
-          Assert.Fail ("IEnumerator.MoveNext() should throw when collection modified.");
-        }
-        catch (InvalidOperationException)
-        {
-        }
+	    try
+	    {
+	      e.Reset();
+	      testBa[0] = !testBa[0];
+	      e.MoveNext();
+	      Assert.Fail ("IEnumerator.MoveNext() should throw when collection modified.");
+	    }
+	    catch (InvalidOperationException)
+	    {
+	    }
     }
     catch(Exception ex){
-    Assert.Fail ("Unexpected exception thrown: " + ex.ToString());
+	Assert.Fail ("Unexpected exception thrown: " + ex.ToString());
     }
   }
 }

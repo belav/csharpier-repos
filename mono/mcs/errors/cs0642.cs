@@ -3,8 +3,8 @@
 // Compiler options: -warnaserror -warn:3
 
 class X{
-    static void Main ()
-    {
-        if (true);
-    }
+	static void Main ()
+	{
+		if (true);
+	}
 }

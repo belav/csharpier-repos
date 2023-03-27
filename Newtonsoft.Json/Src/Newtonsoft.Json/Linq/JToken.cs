@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -144,7 +144,7 @@ namespace Newtonsoft.Json.Linq
         /// Gets a value indicating whether this token has child tokens.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if this token has child values; otherwise, <c>false</c>.
+        /// 	<c>true</c> if this token has child values; otherwise, <c>false</c>.
         /// </value>
         public abstract bool HasValues { get; }
 

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices; // For SafeHandle
 [SecurityCritical]
 public class MySafeValidHandle : SafeHandle
 {
-      [SecurityCritical]
+	  [SecurityCritical]
     public MySafeValidHandle()
         : base(IntPtr.Zero, true)
     {

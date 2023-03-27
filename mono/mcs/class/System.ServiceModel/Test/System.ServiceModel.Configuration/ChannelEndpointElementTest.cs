@@ -2,7 +2,7 @@
 // ChannelEndpointElementTest.cs
 //
 // Author:
-//    Eyal Alaluf <eyala@mainsoft.com>
+//	Eyal Alaluf <eyala@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -36,22 +36,22 @@ using System.Configuration;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-    [TestFixture]
-    public class ChannelEndpointElementTest
-    {
-        [Test]
-        public void TestEmptyProps ()
-        {
-            ChannelEndpointElement empty = new ChannelEndpointElement ();
-            Assert.AreEqual ("", empty.Name, "#01");
-            Assert.AreEqual (null, empty.Contract, "#02");
-            Assert.AreEqual (null, empty.Binding, "#03");
-            Assert.AreEqual (null, empty.Address, "#04");
-            Assert.AreEqual ("", empty.BindingConfiguration, "#05");
-            Assert.AreEqual ("", empty.BehaviorConfiguration, "#06");
-            Assert.IsNotNull (empty.Headers, "#07");
-            Assert.IsNotNull (empty.Identity, "#08");
-        }
-    }
+	[TestFixture]
+	public class ChannelEndpointElementTest
+	{
+		[Test]
+		public void TestEmptyProps ()
+		{
+			ChannelEndpointElement empty = new ChannelEndpointElement ();
+			Assert.AreEqual ("", empty.Name, "#01");
+			Assert.AreEqual (null, empty.Contract, "#02");
+			Assert.AreEqual (null, empty.Binding, "#03");
+			Assert.AreEqual (null, empty.Address, "#04");
+			Assert.AreEqual ("", empty.BindingConfiguration, "#05");
+			Assert.AreEqual ("", empty.BehaviorConfiguration, "#06");
+			Assert.IsNotNull (empty.Headers, "#07");
+			Assert.IsNotNull (empty.Identity, "#08");
+		}
+	}
 }
 #endif

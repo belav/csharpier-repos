@@ -40,8 +40,8 @@ namespace Novell.Directory.Ldap.Events
   public class SearchResultEventArgs : LdapEventArgs
   {
     public SearchResultEventArgs(LdapMessage sourceMessage,
-                 EventClassifiers aClassification,
-                 LdapEventType aType)
+				 EventClassifiers aClassification,
+				 LdapEventType aType)
       : base(sourceMessage, EventClassifiers.CLASSIFICATION_LDAP_PSEARCH, aType)
     {
     }
@@ -49,9 +49,9 @@ namespace Novell.Directory.Ldap.Events
     public LdapEntry Entry 
     {
         get
-    { 
-      return ((LdapSearchResult) ldap_message).Entry;
-    }
+	{ 
+	  return ((LdapSearchResult) ldap_message).Entry;
+	}
     }
 
     public override string ToString()
@@ -77,13 +77,13 @@ namespace Novell.Directory.Ldap.Events
 
       if (null != controls)
       {
-    buf.Append("(Controls=");
-    int i = 0;
-    foreach(LdapControl control in controls)
-    {
-      buf.AppendFormat("(Control{0}={1})", ++i, control.ToString());
-    }
-    buf.Append(")");
+	buf.Append("(Controls=");
+	int i = 0;
+	foreach(LdapControl control in controls)
+	{
+	  buf.AppendFormat("(Control{0}={1})", ++i, control.ToString());
+	}
+	buf.Append(")");
       }
       
       return buf.ToString();
@@ -94,19 +94,19 @@ namespace Novell.Directory.Ldap.Events
       switch (eType)
       {
       case LdapEventType.LDAP_PSEARCH_ADD:
-    return "ADD";
+	return "ADD";
 
       case LdapEventType.LDAP_PSEARCH_DELETE:
-    return "DELETE";
+	return "DELETE";
 
       case LdapEventType.LDAP_PSEARCH_MODIFY:
-    return "MODIFY";
+	return "MODIFY";
 
       case LdapEventType.LDAP_PSEARCH_MODDN:
-    return "MODDN";
+	return "MODDN";
 
       default:
-    return ("No change type: " + eType);
+	return ("No change type: " + eType);
       }
     }
 

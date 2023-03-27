@@ -2,7 +2,7 @@
 // CommonEndpointBehaviorElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public partial class CommonEndpointBehaviorElement
-         : ServiceModelExtensionCollectionElement<BehaviorExtensionElement>,  ICollection<BehaviorExtensionElement>,  IEnumerable<BehaviorExtensionElement>,  IEnumerable
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
+	[MonoTODO]
+	public partial class CommonEndpointBehaviorElement
+		 : ServiceModelExtensionCollectionElement<BehaviorExtensionElement>,  ICollection<BehaviorExtensionElement>,  IEnumerable<BehaviorExtensionElement>,  IEnumerable
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
 
-        static CommonEndpointBehaviorElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static CommonEndpointBehaviorElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public CommonEndpointBehaviorElement ()
-        {
-        }
-
-
-        // Properties
+		public CommonEndpointBehaviorElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+
+	}
 
 }

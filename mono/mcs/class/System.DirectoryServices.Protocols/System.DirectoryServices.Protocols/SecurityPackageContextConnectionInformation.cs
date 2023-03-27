@@ -32,33 +32,33 @@ using System.Security.Cryptography;
 
 namespace System.DirectoryServices.Protocols
 {
-    [MonoTODO]
-    public class SecurityPackageContextConnectionInformation
-    {
-        internal SecurityPackageContextConnectionInformation (
-            CipherAlgorithmType algorithmIdentifier,
-            int cipherStrength,
-            int exchangeStrength,
-            HashAlgorithmType hash,
-            int hashStrength,
-            int keyExchangeAlgorithm,
-            SecurityProtocol protocol)
-        {
-            AlgorithmIdentifier = algorithmIdentifier;
-            CipherStrength = cipherStrength;
-            ExchangeStrength = exchangeStrength;
-            Hash = hash;
-            HashStrength = hashStrength;
-            KeyExchangeAlgorithm = keyExchangeAlgorithm;
-            Protocol = protocol;
-        }
+	[MonoTODO]
+	public class SecurityPackageContextConnectionInformation
+	{
+		internal SecurityPackageContextConnectionInformation (
+			CipherAlgorithmType algorithmIdentifier,
+			int cipherStrength,
+			int exchangeStrength,
+			HashAlgorithmType hash,
+			int hashStrength,
+			int keyExchangeAlgorithm,
+			SecurityProtocol protocol)
+		{
+			AlgorithmIdentifier = algorithmIdentifier;
+			CipherStrength = cipherStrength;
+			ExchangeStrength = exchangeStrength;
+			Hash = hash;
+			HashStrength = hashStrength;
+			KeyExchangeAlgorithm = keyExchangeAlgorithm;
+			Protocol = protocol;
+		}
 
-        public CipherAlgorithmType AlgorithmIdentifier { get; private set; }
-        public int CipherStrength { get; private set; }
-        public int ExchangeStrength { get; private set; }
-        public HashAlgorithmType Hash { get; private set; }
-        public int HashStrength { get; private set; }
-        public int KeyExchangeAlgorithm { get; private set; }
-        public SecurityProtocol Protocol { get; private set; }
-    }
+		public CipherAlgorithmType AlgorithmIdentifier { get; private set; }
+		public int CipherStrength { get; private set; }
+		public int ExchangeStrength { get; private set; }
+		public HashAlgorithmType Hash { get; private set; }
+		public int HashStrength { get; private set; }
+		public int KeyExchangeAlgorithm { get; private set; }
+		public SecurityProtocol Protocol { get; private set; }
+	}
 }

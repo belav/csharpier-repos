@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,12 +27,12 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum TextStyle
-    {
-        Default = 0,
-        Shadow = 1,
-        Emboss = 2,
-        Embed = 3,
-        Frame = 4
-    }
+	public enum TextStyle
+	{
+		Default = 0,
+		Shadow = 1,
+		Emboss = 2,
+		Embed = 3,
+		Frame = 4
+	}
 }

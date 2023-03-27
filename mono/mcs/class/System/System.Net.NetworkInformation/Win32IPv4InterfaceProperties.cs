@@ -2,8 +2,8 @@
 // System.Net.NetworkInformation.IPv4InterfaceProperties
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //      Marek Habersack (mhabersack@novell.com)
 //
 // Copyright (c) 2006-2007 Novell, Inc. (http://www.novell.com)
@@ -31,66 +31,66 @@
 using System.Runtime.InteropServices;
 
 namespace System.Net.NetworkInformation {
-    sealed class Win32IPv4InterfaceProperties : IPv4InterfaceProperties
-    {
-        [DllImport ("iphlpapi.dll")]
-        static extern int GetPerAdapterInfo (int IfIndex, Win32_IP_PER_ADAPTER_INFO pPerAdapterInfo, ref int pOutBufLen);
+	sealed class Win32IPv4InterfaceProperties : IPv4InterfaceProperties
+	{
+		[DllImport ("iphlpapi.dll")]
+		static extern int GetPerAdapterInfo (int IfIndex, Win32_IP_PER_ADAPTER_INFO pPerAdapterInfo, ref int pOutBufLen);
 
-        Win32_IP_ADAPTER_ADDRESSES addr;
-        Win32_IP_PER_ADAPTER_INFO painfo;
-        Win32_MIB_IFROW mib;
+		Win32_IP_ADAPTER_ADDRESSES addr;
+		Win32_IP_PER_ADAPTER_INFO painfo;
+		Win32_MIB_IFROW mib;
 
-        public Win32IPv4InterfaceProperties (Win32_IP_ADAPTER_ADDRESSES addr, Win32_MIB_IFROW mib)
-        {
-            this.addr = addr;
-            this.mib = mib;
+		public Win32IPv4InterfaceProperties (Win32_IP_ADAPTER_ADDRESSES addr, Win32_MIB_IFROW mib)
+		{
+			this.addr = addr;
+			this.mib = mib;
 
-            // get per-adapter info.
-            int size = 0;
-            GetPerAdapterInfo (mib.Index, null, ref size);
-            painfo = new Win32_IP_PER_ADAPTER_INFO ();
-            int ret = GetPerAdapterInfo (mib.Index, painfo, ref size);
-            if (ret != 0)
-                throw new NetworkInformationException (ret);
-        }
+			// get per-adapter info.
+			int size = 0;
+			GetPerAdapterInfo (mib.Index, null, ref size);
+			painfo = new Win32_IP_PER_ADAPTER_INFO ();
+			int ret = GetPerAdapterInfo (mib.Index, painfo, ref size);
+			if (ret != 0)
+				throw new NetworkInformationException (ret);
+		}
 
-        public override int Index {
-            get { return mib.Index; }
-        }
+		public override int Index {
+			get { return mib.Index; }
+		}
 
-        public override bool IsAutomaticPrivateAddressingActive {
-            get { return painfo.AutoconfigActive != 0; }
-        }
+		public override bool IsAutomaticPrivateAddressingActive {
+			get { return painfo.AutoconfigActive != 0; }
+		}
 
-        public override bool IsAutomaticPrivateAddressingEnabled {
-            get { return painfo.AutoconfigEnabled != 0; }
-        }
+		public override bool IsAutomaticPrivateAddressingEnabled {
+			get { return painfo.AutoconfigEnabled != 0; }
+		}
 
-        public override bool IsDhcpEnabled {
-            get { return addr.DhcpEnabled; }
-        }
+		public override bool IsDhcpEnabled {
+			get { return addr.DhcpEnabled; }
+		}
 
-        public override bool IsForwardingEnabled {
-            // Is it the right answer? In Vista there is MIB_IPINTERFACEROW.ForwardingEnabled, but not in former versions.
-            get { return Win32NetworkInterface.FixedInfo.EnableRouting != 0; }
-        }
+		public override bool IsForwardingEnabled {
+			// Is it the right answer? In Vista there is MIB_IPINTERFACEROW.ForwardingEnabled, but not in former versions.
+			get { return Win32NetworkInterface.FixedInfo.EnableRouting != 0; }
+		}
 
-        public override int Mtu {
-            get { return mib.Mtu; }
-        }
+		public override int Mtu {
+			get { return mib.Mtu; }
+		}
 
-        public override bool UsesWins {
-            get { return addr.FirstWinsServerAddress != IntPtr.Zero; }
-        }
-    }
+		public override bool UsesWins {
+			get { return addr.FirstWinsServerAddress != IntPtr.Zero; }
+		}
+	}
 
-    [StructLayout (LayoutKind.Sequential)]
-    class Win32_IP_PER_ADAPTER_INFO
-    {
-        public uint AutoconfigEnabled;
-        public uint AutoconfigActive;
-        public IntPtr CurrentDnsServer; // to Win32_IP_ADDR_STRING
-        public Win32_IP_ADDR_STRING DnsServerList;
-    }
+	[StructLayout (LayoutKind.Sequential)]
+	class Win32_IP_PER_ADAPTER_INFO
+	{
+		public uint AutoconfigEnabled;
+		public uint AutoconfigActive;
+		public IntPtr CurrentDnsServer; // to Win32_IP_ADDR_STRING
+		public Win32_IP_ADDR_STRING DnsServerList;
+	}
 }
 #endif

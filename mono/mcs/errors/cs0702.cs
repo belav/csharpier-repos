@@ -4,6 +4,6 @@
 using System;
 
 class Foo<T>
-    where T : Array
+	where T : Array
 {
 }

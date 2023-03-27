@@ -131,7 +131,7 @@ namespace System.Diagnostics {
                         size = SharedPerformanceCounter.MaxCountersFileMappingSize;
 
                     return size;
-                  } 
+              	} 
                 else
                     return SharedPerformanceCounter.DefaultCountersFileMappingSize;
             }                

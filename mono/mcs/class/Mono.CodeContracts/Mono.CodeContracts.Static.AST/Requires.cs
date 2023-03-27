@@ -2,7 +2,7 @@
 // Requires.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,21 +27,21 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    class Requires : MethodContractElement {
-        public Requires ()
-            : base (NodeType.Requires)
-        {
-        }
+	class Requires : MethodContractElement {
+		public Requires ()
+			: base (NodeType.Requires)
+		{
+		}
 
-        public Requires (NodeType nodeType)
-            : base (nodeType)
-        {
-        }
+		public Requires (NodeType nodeType)
+			: base (nodeType)
+		{
+		}
 
-        public Requires (Expression condition)
-            : this ()
-        {
-            Assertion = condition;
-        }
-    }
+		public Requires (Expression condition)
+			: this ()
+		{
+			Assertion = condition;
+		}
+	}
 }

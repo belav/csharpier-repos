@@ -28,42 +28,42 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    [MarkupExtensionReturnType (typeof (object))]
-    [TypeConverter (typeof (StaticExtensionConverter))]
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyPresentationFramework_3_5)]
-    public class StaticExtension : MarkupExtension
-    {
-        public StaticExtension ()
-        {
-        }
+	[MarkupExtensionReturnType (typeof (object))]
+	[TypeConverter (typeof (StaticExtensionConverter))]
+	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyPresentationFramework_3_5)]
+	public class StaticExtension : MarkupExtension
+	{
+		public StaticExtension ()
+		{
+		}
 
-        public StaticExtension (string member)
-        {
-            Member = member;
-        }
+		public StaticExtension (string member)
+		{
+			Member = member;
+		}
 
-        [ConstructorArgument ("member")]
-        public string Member { get; set; }
+		[ConstructorArgument ("member")]
+		public string Member { get; set; }
 
-        [DefaultValue (null)]
-        public Type MemberType { get; set; }
+		[DefaultValue (null)]
+		public Type MemberType { get; set; }
 
-        public override object ProvideValue (IServiceProvider serviceProvider)
-        {
-            if (Member == null)
-                throw new InvalidOperationException ("Member property must be set to StaticExtension before calling ProvideValue method.");
-            if (MemberType != null) {
-                var pi = MemberType.GetProperty (Member, BindingFlags.Public | BindingFlags.Static);
-                if (pi != null)
-                    return pi.GetValue (null, null);
-                var fi = MemberType.GetField (Member, BindingFlags.Public | BindingFlags.Static);
-                if (fi != null)
-                    return fi.GetValue (null);
-            }
-            // there might be some cases that it could still
-            // resolve a static member without MemberType, 
-            // but we don't know any of such so far.
-            throw new ArgumentException (String.Format ("Member '{0}' could not be resolved to a static member", Member));
-        }
-    }
+		public override object ProvideValue (IServiceProvider serviceProvider)
+		{
+			if (Member == null)
+				throw new InvalidOperationException ("Member property must be set to StaticExtension before calling ProvideValue method.");
+			if (MemberType != null) {
+				var pi = MemberType.GetProperty (Member, BindingFlags.Public | BindingFlags.Static);
+				if (pi != null)
+					return pi.GetValue (null, null);
+				var fi = MemberType.GetField (Member, BindingFlags.Public | BindingFlags.Static);
+				if (fi != null)
+					return fi.GetValue (null);
+			}
+			// there might be some cases that it could still
+			// resolve a static member without MemberType, 
+			// but we don't know any of such so far.
+			throw new ArgumentException (String.Format ("Member '{0}' could not be resolved to a static member", Member));
+		}
+	}
 }

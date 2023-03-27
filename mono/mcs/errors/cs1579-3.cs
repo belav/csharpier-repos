@@ -5,36 +5,36 @@ using System;
 
 public class Enumerator
 {
-    public bool MoveNext ()
-    {
-        return false;
-    }
+	public bool MoveNext ()
+	{
+		return false;
+	}
 
-    public int Current { get; set; }
+	public int Current { get; set; }
 }
 
 
 public class Base
 {
-    public Enumerator GetEnumerator ()
-    {
-        return new Enumerator ();
-    }
+	public Enumerator GetEnumerator ()
+	{
+		return new Enumerator ();
+	}
 }
 
 public class C : Base
 {
-    new internal Enumerator GetEnumerator ()
-    {
-        return new Enumerator ();
-    }
+	new internal Enumerator GetEnumerator ()
+	{
+		return new Enumerator ();
+	}
 }
 
 class Test
 {
-    public static void Main ()
-    {
-        foreach (var e in new C ())
-            Console.WriteLine (e);
-    }
+	public static void Main ()
+	{
+		foreach (var e in new C ())
+			Console.WriteLine (e);
+	}
 }

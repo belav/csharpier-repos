@@ -2,7 +2,7 @@
 // System.Configuration.ConfigurationAllowExeDefinition.cs
 //
 // Authors:
-//    Duncan Mak (duncan@ximian.com)
+//	Duncan Mak (duncan@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -28,11 +28,11 @@
 
 namespace System.Configuration
 {
-    public enum ConfigurationAllowExeDefinition
-    {
-        MachineOnly,
-        MachineToApplication = 100,
-        MachineToLocalUser = 300,
-        MachineToRoamingUser = 200
-    }
+	public enum ConfigurationAllowExeDefinition
+	{
+		MachineOnly,
+		MachineToApplication = 100,
+		MachineToLocalUser = 300,
+		MachineToRoamingUser = 200
+	}
 }

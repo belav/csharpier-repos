@@ -40,82 +40,82 @@ namespace tests.system_data_dll.System_Data
 [TestFixture]
 public class DataSet_ReadXml_T : GHTBase
 {
-    [Test]
-    [Category ("NotWorking")]
-    public void Main()
-    {
-        DataSet_ReadXml_T tc = new DataSet_ReadXml_T();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataSet_ReadXml_T");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test]
+	[Category ("NotWorking")]
+	public void Main()
+	{
+		DataSet_ReadXml_T tc = new DataSet_ReadXml_T();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataSet_ReadXml_T");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    public void run()
-    {
-        Exception exp = null;
-    
-        DataSet ds1 = new DataSet();
-        ds1.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
-        ds1.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
+	public void run()
+	{
+		Exception exp = null;
+	
+		DataSet ds1 = new DataSet();
+		ds1.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
+		ds1.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
 
-        //add data to check GH bug of DataSet.ReadXml of empty strings
-        ds1.Tables[1].Rows.Add(new object[] {7,1,string.Empty,string.Empty,new DateTime(2000,1,1,0,0,0,0),35});
-        ds1.Tables[1].Rows.Add(new object[] {7,2," ","        ",new DateTime(2000,1,1,0,0,0,0),35});
-        ds1.Tables[1].Rows.Add(new object[] {7,3,"","",new DateTime(2000,1,1,0,0,0,0),35});
-
-
-        System.IO.StringWriter sw = new System.IO.StringWriter();
-        //write xml file, data only
-        ds1.WriteXml(sw);
-
-        //copy both data and schema
-        DataSet ds2 = ds1.Copy();
-        //clear the data
-        ds2.Clear();
-
-        System.IO.StringReader sr = new System.IO.StringReader(sw.GetStringBuilder().ToString());
-        ds2.ReadXml(sr);
-
-        //check xml data
-        try
-        {
-            BeginCase("ReadXml - Tables count");
-            Compare(ds1.Tables.Count ,ds2.Tables.Count );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("ReadXml - Table 1 row count");
-            Compare(ds1.Tables[0].Rows.Count ,ds2.Tables[0].Rows.Count);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("ReadXml - Table 2 row count");
-            Compare(ds1.Tables[1].Rows.Count ,ds2.Tables[1].Rows.Count);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-        sr.Close();
-        sw.Close();
+		//add data to check GH bug of DataSet.ReadXml of empty strings
+		ds1.Tables[1].Rows.Add(new object[] {7,1,string.Empty,string.Empty,new DateTime(2000,1,1,0,0,0,0),35});
+		ds1.Tables[1].Rows.Add(new object[] {7,2," ","		",new DateTime(2000,1,1,0,0,0,0),35});
+		ds1.Tables[1].Rows.Add(new object[] {7,3,"","",new DateTime(2000,1,1,0,0,0,0),35});
 
 
-    }
+		System.IO.StringWriter sw = new System.IO.StringWriter();
+		//write xml file, data only
+		ds1.WriteXml(sw);
+
+		//copy both data and schema
+		DataSet ds2 = ds1.Copy();
+		//clear the data
+		ds2.Clear();
+
+		System.IO.StringReader sr = new System.IO.StringReader(sw.GetStringBuilder().ToString());
+		ds2.ReadXml(sr);
+
+		//check xml data
+		try
+		{
+			BeginCase("ReadXml - Tables count");
+			Compare(ds1.Tables.Count ,ds2.Tables.Count );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("ReadXml - Table 1 row count");
+			Compare(ds1.Tables[0].Rows.Count ,ds2.Tables[0].Rows.Count);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("ReadXml - Table 2 row count");
+			Compare(ds1.Tables[1].Rows.Count ,ds2.Tables[1].Rows.Count);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		sr.Close();
+		sw.Close();
+
+
+	}
 }
 }

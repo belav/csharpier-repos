@@ -2,7 +2,7 @@
 // System.Web.Hosting.ApplicationInfo
 // 
 // Author:
-//    Gonzalo Paniagua Javier (gonzalo@novell.com)
+//	Gonzalo Paniagua Javier (gonzalo@novell.com)
 //
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
@@ -29,31 +29,31 @@
 using System;
 
 namespace System.Web.Hosting {
-    [Serializable]
-    public sealed class ApplicationInfo {
-        string id;
-        string physical_path;
-        string virtual_path;
+	[Serializable]
+	public sealed class ApplicationInfo {
+		string id;
+		string physical_path;
+		string virtual_path;
 
-        internal ApplicationInfo (string id, string phys, string virt)
-        {
-            this.id = id;
-            this.physical_path = phys;
-            this.virtual_path = virt;
-        }
+		internal ApplicationInfo (string id, string phys, string virt)
+		{
+			this.id = id;
+			this.physical_path = phys;
+			this.virtual_path = virt;
+		}
 
-        public string ID {
-            get { return id; }
-        }
+		public string ID {
+			get { return id; }
+		}
 
-        public string PhysicalPath {
-            get { return physical_path; }
-        }
+		public string PhysicalPath {
+			get { return physical_path; }
+		}
 
-        public string VirtualPath {
-            get { return virtual_path; }
-        }
-    }
+		public string VirtualPath {
+			get { return virtual_path; }
+		}
+	}
 }
 
 

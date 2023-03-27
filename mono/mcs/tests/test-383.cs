@@ -2,16 +2,16 @@ using System;
 
 public class X
 {
-    public readonly int Data;
+	public readonly int Data;
 
         public X testme (out int x)
-    {
+	{
                 x = 1;
-        return this;
+		return this;
         }
 
         public X ()
-    {
+	{
                 int x, y;
 
                 y = this.testme (out x).Data;
@@ -19,7 +19,7 @@ public class X
         }
 
         public static void Main ()
-    {
+	{
                 X x = new X ();
         }
 }

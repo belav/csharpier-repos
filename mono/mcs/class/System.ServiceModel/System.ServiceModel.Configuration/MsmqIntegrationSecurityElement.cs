@@ -2,7 +2,7 @@
 // MsmqIntegrationSecurityElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,56 +54,56 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public sealed partial class MsmqIntegrationSecurityElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty mode;
-        static ConfigurationProperty transport;
+	[MonoTODO]
+	public sealed partial class MsmqIntegrationSecurityElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty mode;
+		static ConfigurationProperty transport;
 
-        static MsmqIntegrationSecurityElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            mode = new ConfigurationProperty ("mode",
-                typeof (MsmqIntegrationSecurityMode), "Transport", null/* FIXME: get converter for MsmqIntegrationSecurityMode*/, null,
-                ConfigurationPropertyOptions.None);
+		static MsmqIntegrationSecurityElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			mode = new ConfigurationProperty ("mode",
+				typeof (MsmqIntegrationSecurityMode), "Transport", null/* FIXME: get converter for MsmqIntegrationSecurityMode*/, null,
+				ConfigurationPropertyOptions.None);
 
-            transport = new ConfigurationProperty ("transport",
-                typeof (MsmqTransportSecurityElement), null, null/* FIXME: get converter for MsmqTransportSecurityElement*/, null,
-                ConfigurationPropertyOptions.None);
+			transport = new ConfigurationProperty ("transport",
+				typeof (MsmqTransportSecurityElement), null, null/* FIXME: get converter for MsmqTransportSecurityElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (mode);
-            properties.Add (transport);
-        }
+			properties.Add (mode);
+			properties.Add (transport);
+		}
 
-        public MsmqIntegrationSecurityElement ()
-        {
-        }
-
-
-        // Properties
-
-        [ConfigurationProperty ("mode",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Transport")]
-        public MsmqIntegrationSecurityMode Mode {
-            get { return (MsmqIntegrationSecurityMode) base [mode]; }
-            set { base [mode] = value; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-
-        [ConfigurationProperty ("transport",
-             Options = ConfigurationPropertyOptions.None)]
-        public MsmqTransportSecurityElement Transport {
-            get { return (MsmqTransportSecurityElement) base [transport]; }
-        }
+		public MsmqIntegrationSecurityElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+		[ConfigurationProperty ("mode",
+			 Options = ConfigurationPropertyOptions.None,
+			 DefaultValue = "Transport")]
+		public MsmqIntegrationSecurityMode Mode {
+			get { return (MsmqIntegrationSecurityMode) base [mode]; }
+			set { base [mode] = value; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+		[ConfigurationProperty ("transport",
+			 Options = ConfigurationPropertyOptions.None)]
+		public MsmqTransportSecurityElement Transport {
+			get { return (MsmqTransportSecurityElement) base [transport]; }
+		}
+
+
+	}
 
 }

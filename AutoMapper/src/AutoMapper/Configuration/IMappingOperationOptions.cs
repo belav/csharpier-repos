@@ -1,4 +1,4 @@
-namespace AutoMapper;
+﻿namespace AutoMapper;
 
 using StringDictionary = Dictionary<string, object>;
 /// <summary>

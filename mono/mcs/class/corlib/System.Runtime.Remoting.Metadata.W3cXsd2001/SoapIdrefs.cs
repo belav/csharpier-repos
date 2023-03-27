@@ -35,43 +35,43 @@ using System;
 
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
-    [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public sealed class SoapIdrefs : ISoapXsd
-    {
-        string _value;
-        
-        public SoapIdrefs()
-        {
-        }
-        
-        public SoapIdrefs (string value)
-        {
-            _value = SoapHelper.Normalize (value);
-        }
-        
-        public string Value {
-            get { return _value; } 
-            set { _value = value; }
-        }
+	[Serializable]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public sealed class SoapIdrefs : ISoapXsd
+	{
+		string _value;
+		
+		public SoapIdrefs()
+		{
+		}
+		
+		public SoapIdrefs (string value)
+		{
+			_value = SoapHelper.Normalize (value);
+		}
+		
+		public string Value {
+			get { return _value; } 
+			set { _value = value; }
+		}
 
-        public static string XsdType {
-            get { return "IDREFS"; }
-        }
+		public static string XsdType {
+			get { return "IDREFS"; }
+		}
 
-        public string GetXsdType()
-        {
-            return XsdType;
-        }
-        
-        public static SoapIdrefs Parse (string value)
-        {
-            return new SoapIdrefs (value);
-        }
+		public string GetXsdType()
+		{
+			return XsdType;
+		}
+		
+		public static SoapIdrefs Parse (string value)
+		{
+			return new SoapIdrefs (value);
+		}
 
-        public override string ToString()
-        {
-            return _value;
-        }
-    }
+		public override string ToString()
+		{
+			return _value;
+		}
+	}
 }

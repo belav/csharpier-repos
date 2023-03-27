@@ -769,9 +769,9 @@ namespace C5
             */
 #else
             foreach (T item in items)
-                h ^= itemequalityComparer.GetHashCode(item);
+				h ^= itemequalityComparer.GetHashCode(item);
 
-            return (items.Count << 16) + h;
+			return (items.Count << 16) + h;
 #endif
     }
 

@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -37,32 +37,32 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Serialization
 {
-    public sealed class CodeDomLocalizationProvider : IDisposable, IDesignerSerializationProvider
-    {
-        [MonoTODO]
-        public CodeDomLocalizationProvider (IServiceProvider provider, CodeDomLocalizationModel model)
-        {
-            throw new NotImplementedException ();
-        }
+	public sealed class CodeDomLocalizationProvider : IDisposable, IDesignerSerializationProvider
+	{
+		[MonoTODO]
+		public CodeDomLocalizationProvider (IServiceProvider provider, CodeDomLocalizationModel model)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public CodeDomLocalizationProvider (IServiceProvider provider, CodeDomLocalizationModel model, CultureInfo [] supportedCultures)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public CodeDomLocalizationProvider (IServiceProvider provider, CodeDomLocalizationModel model, CultureInfo [] supportedCultures)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public void Dispose ()
-        {
-        }
+		[MonoTODO]
+		public void Dispose ()
+		{
+		}
 
-        [MonoTODO]
-        object IDesignerSerializationProvider.GetSerializer (IDesignerSerializationManager manager, 
-                                     object currentSerializer, Type objectType,
-                                     Type serializerType)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		object IDesignerSerializationProvider.GetSerializer (IDesignerSerializationManager manager, 
+								     object currentSerializer, Type objectType,
+								     Type serializerType)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

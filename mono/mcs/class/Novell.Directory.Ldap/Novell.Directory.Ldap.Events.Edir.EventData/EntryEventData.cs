@@ -45,7 +45,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get 
       {
-    return strPerpetratorDN;
+	return strPerpetratorDN;
       }
     }
 
@@ -54,7 +54,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strEntry;
+	return strEntry;
       }
     }
 
@@ -63,7 +63,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strNewDN;
+	return strNewDN;
       }
     }
 
@@ -72,7 +72,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strClassId;
+	return strClassId;
       }
     }
     
@@ -81,7 +81,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return nVerb;
+	return nVerb;
       }
     }
 
@@ -90,7 +90,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return nFlags;
+	return nFlags;
       }
     }
 
@@ -99,7 +99,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return timeStampObj;
+	return timeStampObj;
       }
     }
 

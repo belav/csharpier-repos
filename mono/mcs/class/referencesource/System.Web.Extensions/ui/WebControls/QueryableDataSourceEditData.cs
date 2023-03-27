@@ -28,7 +28,7 @@ namespace System.Web.UI.WebControls {
             set {
                 _originalDataObject = value;
             }
-        }    
+        }	
 
     }
 }

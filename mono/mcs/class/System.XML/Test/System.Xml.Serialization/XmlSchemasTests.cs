@@ -2,7 +2,7 @@
 // XmlSchemasTests.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc.
 //
@@ -39,47 +39,47 @@ using MonoTests.System.Xml.TestClasses;
 
 namespace MonoTests.System.XmlSerialization
 {
-    [TestFixture]
-    public class XmlSchemasTests
-    {
-        [Test]
-        public void Bug360541 ()
-        {
-            XmlSchemaComplexType stype = GetStype ();
-            
-            XmlSchemaElement selem1 = new XmlSchemaElement ();
-            selem1.Name = "schema";
-            selem1.SchemaType = stype;
+	[TestFixture]
+	public class XmlSchemasTests
+	{
+		[Test]
+		public void Bug360541 ()
+		{
+			XmlSchemaComplexType stype = GetStype ();
+			
+			XmlSchemaElement selem1 = new XmlSchemaElement ();
+			selem1.Name = "schema";
+			selem1.SchemaType = stype;
 
-            XmlSchema schema = new XmlSchema ();
-            schema.Items.Add (selem1);
+			XmlSchema schema = new XmlSchema ();
+			schema.Items.Add (selem1);
 
-            XmlSchemas xs = new XmlSchemas ();
-            xs.Add (schema);
+			XmlSchemas xs = new XmlSchemas ();
+			xs.Add (schema);
 
-            xs.Find (XmlQualifiedName.Empty, typeof (XmlSchemaElement));
+			xs.Find (XmlQualifiedName.Empty, typeof (XmlSchemaElement));
 
-            selem1 = new XmlSchemaElement ();
-            selem1.Name = "schema1";
-            selem1.SchemaType = stype;
+			selem1 = new XmlSchemaElement ();
+			selem1.Name = "schema1";
+			selem1.SchemaType = stype;
 
-            schema = new XmlSchema ();
-            schema.Items.Add (selem1);
+			schema = new XmlSchema ();
+			schema.Items.Add (selem1);
 
-            xs = new XmlSchemas ();
-            xs.Add (schema);
-            xs.Find (XmlQualifiedName.Empty, typeof (XmlSchemaElement));
-        }
+			xs = new XmlSchemas ();
+			xs.Add (schema);
+			xs.Find (XmlQualifiedName.Empty, typeof (XmlSchemaElement));
+		}
 
-        XmlSchemaComplexType GetStype ()
-        {
-            XmlSchemaSequence seq = new XmlSchemaSequence ();
-            seq.Items.Add (new XmlSchemaAny ());
-        
-            XmlSchemaComplexType stype = new XmlSchemaComplexType ();
-            stype.Particle = seq;
-            
-            return stype;
-        }
-    }
+		XmlSchemaComplexType GetStype ()
+		{
+			XmlSchemaSequence seq = new XmlSchemaSequence ();
+			seq.Items.Add (new XmlSchemaAny ());
+		
+			XmlSchemaComplexType stype = new XmlSchemaComplexType ();
+			stype.Particle = seq;
+			
+			return stype;
+		}
+	}
 }

@@ -1,9 +1,9 @@
 //
 // StorePermissionAttributeCas.cs - CAS unit tests for 
-//    System.Security.Permissions.StorePermissionAttribute
+//	System.Security.Permissions.StorePermissionAttribute
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,46 +39,46 @@ using MonoTests.System.Security.Permissions;
 
 namespace MonoCasTests.System.Security.Permissions {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class StorePermissionAttributeCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class StorePermissionAttributeCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests_Deny_Unrestricted ()
-        {
-            StorePermissionAttributeTest unit = new StorePermissionAttributeTest ();
-            unit.Default ();
-            unit.Action ();
-            unit.Action_Invalid ();
-            unit.AddToStore ();
-            unit.CreateStore ();
-            unit.DeleteStore ();
-            unit.EnumerateCertificates ();
-            unit.EnumerateStores ();
-            unit.OpenStore ();
-            unit.RemoveFromStore ();
-            unit.Unrestricted ();
-            unit.Flags ();
-            unit.Attributes ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTests_Deny_Unrestricted ()
+		{
+			StorePermissionAttributeTest unit = new StorePermissionAttributeTest ();
+			unit.Default ();
+			unit.Action ();
+			unit.Action_Invalid ();
+			unit.AddToStore ();
+			unit.CreateStore ();
+			unit.DeleteStore ();
+			unit.EnumerateCertificates ();
+			unit.EnumerateStores ();
+			unit.OpenStore ();
+			unit.RemoveFromStore ();
+			unit.Unrestricted ();
+			unit.Flags ();
+			unit.Attributes ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            Type[] types = new Type[1] { typeof (SecurityAction) };
-            ConstructorInfo ci = typeof (StorePermissionAttribute).GetConstructor (types);
-            Assert.IsNotNull (ci, ".ctor(SecurityAction)");
-            Assert.IsNotNull (ci.Invoke (new object[1] { SecurityAction.Demand }), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			Type[] types = new Type[1] { typeof (SecurityAction) };
+			ConstructorInfo ci = typeof (StorePermissionAttribute).GetConstructor (types);
+			Assert.IsNotNull (ci, ".ctor(SecurityAction)");
+			Assert.IsNotNull (ci.Invoke (new object[1] { SecurityAction.Demand }), "invoke");
+		}
+	}
 }
 

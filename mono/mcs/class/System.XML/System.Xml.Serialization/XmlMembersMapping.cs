@@ -32,61 +32,61 @@
 using System.Reflection;
 
 namespace System.Xml.Serialization {
-    public class XmlMembersMapping : XmlMapping {
+	public class XmlMembersMapping : XmlMapping {
 
-        bool _hasWrapperElement;
-        XmlMemberMapping[] _mapping;
+		bool _hasWrapperElement;
+		XmlMemberMapping[] _mapping;
 
-        internal XmlMembersMapping ()
-        {
-        }
+		internal XmlMembersMapping ()
+		{
+		}
 
-        internal XmlMembersMapping (XmlMemberMapping[] mapping): this ("", null, false, false, mapping)
-        {
-        }
+		internal XmlMembersMapping (XmlMemberMapping[] mapping): this ("", null, false, false, mapping)
+		{
+		}
 
-        internal XmlMembersMapping (string elementName, string ns, XmlMemberMapping[] mapping): this (elementName, ns, true, false, mapping)
-        {
-        }
+		internal XmlMembersMapping (string elementName, string ns, XmlMemberMapping[] mapping): this (elementName, ns, true, false, mapping)
+		{
+		}
 
-        internal XmlMembersMapping (string elementName, string ns, bool hasWrapperElement, bool writeAccessors, XmlMemberMapping[] mapping)
-        : base (elementName, ns)
-        {
-            _hasWrapperElement = hasWrapperElement;
-            _mapping = mapping;
+		internal XmlMembersMapping (string elementName, string ns, bool hasWrapperElement, bool writeAccessors, XmlMemberMapping[] mapping)
+		: base (elementName, ns)
+		{
+			_hasWrapperElement = hasWrapperElement;
+			_mapping = mapping;
 
-            ClassMap map = new ClassMap ();
-            map.IgnoreMemberNamespace = writeAccessors;
-            foreach (XmlMemberMapping mm in mapping)
-                map.AddMember (mm.TypeMapMember);
-            ObjectMap = map;
-        }
+			ClassMap map = new ClassMap ();
+			map.IgnoreMemberNamespace = writeAccessors;
+			foreach (XmlMemberMapping mm in mapping)
+				map.AddMember (mm.TypeMapMember);
+			ObjectMap = map;
+		}
 
-        #region Properties
+		#region Properties
 
-        public int Count {    
-            get { return _mapping.Length; }
-        }
+		public int Count {	
+			get { return _mapping.Length; }
+		}
 
 
-        public XmlMemberMapping this [int index] {    
-            get { return _mapping[index]; }
-        }
+		public XmlMemberMapping this [int index] {	
+			get { return _mapping[index]; }
+		}
 
-        public string TypeName {
-            [MonoTODO]
-            get { return null; } // when does it return non-null string?
-        }
+		public string TypeName {
+			[MonoTODO]
+			get { return null; } // when does it return non-null string?
+		}
 
-        public string TypeNamespace {
-            [MonoTODO]
-            get { return null; } // when does it return non-null string?
-        }
+		public string TypeNamespace {
+			[MonoTODO]
+			get { return null; } // when does it return non-null string?
+		}
 
-        internal bool HasWrapperElement {
-            get { return _hasWrapperElement; }
-        }
+		internal bool HasWrapperElement {
+			get { return _hasWrapperElement; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

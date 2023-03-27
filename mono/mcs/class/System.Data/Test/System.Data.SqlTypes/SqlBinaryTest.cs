@@ -39,63 +39,63 @@ using System.Data.SqlTypes;
 
 namespace MonoTests.System.Data.SqlTypes
 {
-    [TestFixture]
+	[TestFixture]
         public class SqlBinaryTest {
-    
-        SqlBinary Test1;
-        SqlBinary Test2;
-        SqlBinary Test3;
+	
+		SqlBinary Test1;
+		SqlBinary Test2;
+		SqlBinary Test3;
 
-        [SetUp]
-        public void GetReady() 
-        {
+		[SetUp]
+		public void GetReady() 
+		{
                         byte [] b1 = new Byte [2];
                         byte [] b2 = new Byte [3];
                         byte [] b3 = new Byte [2];
 
-            b1 [0] = 240;
-            b1 [1] = 15;
-            b2 [0] = 10;
-            b2 [1] = 10;
-            b2 [2] = 10;
-            b3 [0] = 240;
-            b3 [1] = 15;
+			b1 [0] = 240;
+			b1 [1] = 15;
+			b2 [0] = 10;
+			b2 [1] = 10;
+			b2 [2] = 10;
+			b3 [0] = 240;
+			b3 [1] = 15;
 
-            Test1 = new SqlBinary(b1);
-            Test2 = new SqlBinary(b2);
-            Test3 = new SqlBinary(b3);
-        }
+			Test1 = new SqlBinary(b1);
+			Test2 = new SqlBinary(b2);
+			Test3 = new SqlBinary(b3);
+		}
 
-        // Test constructor
-        [Test]
-        public void Create()
-        {
-            byte [] b = new byte [3];                        
-            SqlBinary Test = new SqlBinary (b);
+		// Test constructor
+		[Test]
+		public void Create()
+		{
+			byte [] b = new byte [3];                        
+			SqlBinary Test = new SqlBinary (b);
                         Assert.IsTrue (!(Test.IsNull) , "#A01");
-        }
+		}
 
-        // Test public fields
-        [Test]
-        public void PublicFields()
-        {
-            Assert.IsTrue (SqlBinary.Null.IsNull, "#B01");
-        }
+		// Test public fields
+		[Test]
+		public void PublicFields()
+		{
+			Assert.IsTrue (SqlBinary.Null.IsNull, "#B01");
+		}
 
-        // Test properties
-        [Test]
-        public void Properties()
-        {
-            byte [] b = new byte [2];
-            b [0] = 64;
-            b [1] = 128;
+		// Test properties
+		[Test]
+		public void Properties()
+		{
+			byte [] b = new byte [2];
+			b [0] = 64;
+			b [1] = 128;
 
-            SqlBinary TestBinary = new SqlBinary (b);
+			SqlBinary TestBinary = new SqlBinary (b);
 
-            // IsNull
-            Assert.IsTrue (SqlBinary.Null.IsNull, "#C01");
+			// IsNull
+			Assert.IsTrue (SqlBinary.Null.IsNull, "#C01");
 
-            // Item
+			// Item
                         Assert.AreEqual ((byte)128, TestBinary [1], "#C02");
                         Assert.AreEqual ((byte)64, TestBinary [0], "#C03");
 
@@ -103,204 +103,204 @@ namespace MonoTests.System.Data.SqlTypes
                         // but throws IndexOutOfRangeException
                         try {
                                 byte test = TestBinary [TestBinary.Length];
-                Assert.Fail ("#C04");
-            } catch (Exception e) {
-                Assert.AreEqual (typeof (IndexOutOfRangeException), e.GetType (), "#C05");
-            }
+				Assert.Fail ("#C04");
+			} catch (Exception e) {
+				Assert.AreEqual (typeof (IndexOutOfRangeException), e.GetType (), "#C05");
+			}
                  
-            try {
-                byte test = SqlBinary.Null [2];
-                Assert.Fail ("#C06");
-            } catch (Exception e) {
-                Assert.AreEqual (typeof (SqlNullValueException), e.GetType (), "#C07");
-            }
+			try {
+				byte test = SqlBinary.Null [2];
+				Assert.Fail ("#C06");
+			} catch (Exception e) {
+				Assert.AreEqual (typeof (SqlNullValueException), e.GetType (), "#C07");
+			}
 
-            // Length
+			// Length
                         Assert.AreEqual (2, TestBinary.Length, "#C08");
 
-            try {
-                int test = SqlBinary.Null.Length;
-                Assert.Fail ("#C09");
-            } catch (Exception e) {
-                Assert.AreEqual (typeof (SqlNullValueException), e.GetType (), "#C10");
-            }
+			try {
+				int test = SqlBinary.Null.Length;
+				Assert.Fail ("#C09");
+			} catch (Exception e) {
+				Assert.AreEqual (typeof (SqlNullValueException), e.GetType (), "#C10");
+			}
 
-            // Value
+			// Value
                         Assert.AreEqual ((byte)128, TestBinary [1], "#C11");
                         Assert.AreEqual ((byte)64, TestBinary [0], "#C12");
 
-            try {
+			try {
                                 Byte [] test = SqlBinary.Null.Value;
-                Assert.Fail ("#C13");
-            } catch (Exception e) {
-                Assert.AreEqual (typeof (SqlNullValueException), e.GetType (), "#C14");
-            }
-        }
+				Assert.Fail ("#C13");
+			} catch (Exception e) {
+				Assert.AreEqual (typeof (SqlNullValueException), e.GetType (), "#C14");
+			}
+		}
 
-        // Methods 
-        [Test]
-        public void ComparisonMethods()
-        {
-            // GreaterThan
-            Assert.IsTrue (SqlBinary.GreaterThan (Test1, Test2).Value, "#D01");
+		// Methods 
+		[Test]
+		public void ComparisonMethods()
+		{
+			// GreaterThan
+			Assert.IsTrue (SqlBinary.GreaterThan (Test1, Test2).Value, "#D01");
                         Assert.IsTrue (SqlBinary.GreaterThan (Test3, Test2).Value, "#D02");
-            Assert.IsTrue (!SqlBinary.GreaterThan (Test2, Test1).Value, "#D03");
-            
-            // GreaterThanOrEqual
-            Assert.IsTrue (SqlBinary.GreaterThanOrEqual (Test1, Test2).Value, "#D04");
+			Assert.IsTrue (!SqlBinary.GreaterThan (Test2, Test1).Value, "#D03");
+			
+			// GreaterThanOrEqual
+			Assert.IsTrue (SqlBinary.GreaterThanOrEqual (Test1, Test2).Value, "#D04");
                         Assert.IsTrue (SqlBinary.GreaterThanOrEqual (Test1, Test2).Value, "#D05");
-            Assert.IsTrue (!SqlBinary.GreaterThanOrEqual (Test2, Test1).Value, "#D06");
+			Assert.IsTrue (!SqlBinary.GreaterThanOrEqual (Test2, Test1).Value, "#D06");
 
-            // LessThan
-            Assert.IsTrue (!SqlBinary.LessThan (Test1, Test2).Value, "#D07");
-            Assert.IsTrue (!SqlBinary.LessThan (Test3, Test2).Value, "#D08");
-            Assert.IsTrue (SqlBinary.LessThan (Test2, Test1).Value, "#D09");
+			// LessThan
+			Assert.IsTrue (!SqlBinary.LessThan (Test1, Test2).Value, "#D07");
+			Assert.IsTrue (!SqlBinary.LessThan (Test3, Test2).Value, "#D08");
+			Assert.IsTrue (SqlBinary.LessThan (Test2, Test1).Value, "#D09");
 
-            // LessThanOrEqual
-            Assert.IsTrue (!SqlBinary.LessThanOrEqual (Test1, Test2).Value, "#D10");
+			// LessThanOrEqual
+			Assert.IsTrue (!SqlBinary.LessThanOrEqual (Test1, Test2).Value, "#D10");
                         Assert.IsTrue (SqlBinary.LessThanOrEqual (Test3, Test1).Value, "#D11");
                         Assert.IsTrue (SqlBinary.LessThanOrEqual (Test2, Test1).Value, "#D12");
 
-            // Equals
+			// Equals
                         Assert.IsTrue (!Test1.Equals (Test2), "#D13");
                         Assert.IsTrue (!Test3.Equals (Test2), "#D14");
                         Assert.IsTrue (Test3.Equals (Test1), "#D15");
 
-            // NotEquals
-            Assert.IsTrue (SqlBinary.NotEquals (Test1, Test2).Value, "#D16");
+			// NotEquals
+			Assert.IsTrue (SqlBinary.NotEquals (Test1, Test2).Value, "#D16");
                         Assert.IsTrue (!SqlBinary.NotEquals (Test3, Test1).Value, "#D17");
-            Assert.IsTrue (SqlBinary.NotEquals (Test2, Test1).Value, "#D18");
-        }
+			Assert.IsTrue (SqlBinary.NotEquals (Test2, Test1).Value, "#D18");
+		}
 
-        [Test]
-        public void CompareTo()
-        {
+		[Test]
+		public void CompareTo()
+		{
                         SqlString TestString = new SqlString ("This is a test");
-            
+			
                         Assert.IsTrue (Test1.CompareTo(Test2) > 0, "#E01");
                         Assert.IsTrue (Test2.CompareTo(Test1) < 0, "#E02");
                         Assert.IsTrue (Test1.CompareTo(Test3) == 0, "#E03");
-            
-            try {
+			
+			try {
                                 Test1.CompareTo (TestString);
                                 Assert.Fail ("#E04");
-            } catch(Exception e) {
+			} catch(Exception e) {
                                 Assert.AreEqual (typeof (ArgumentException), e.GetType (), "#E05");
-            }
-        }
+			}
+		}
 
-        [Test]
-        public void GetHashCodeTest()
-        {
-            Assert.AreEqual (Test1.GetHashCode (), Test1.GetHashCode (), "#F01");
-            Assert.IsTrue (Test2.GetHashCode () !=  Test1.GetHashCode (), "#F02");
-        }
+		[Test]
+		public void GetHashCodeTest()
+		{
+			Assert.AreEqual (Test1.GetHashCode (), Test1.GetHashCode (), "#F01");
+			Assert.IsTrue (Test2.GetHashCode () !=  Test1.GetHashCode (), "#F02");
+		}
 
-        [Test]
-        public void GetTypeTest()
-        {
-            Assert.AreEqual ("System.Data.SqlTypes.SqlBinary", Test1.GetType().ToString(), "#G01");
-        }
+		[Test]
+		public void GetTypeTest()
+		{
+			Assert.AreEqual ("System.Data.SqlTypes.SqlBinary", Test1.GetType().ToString(), "#G01");
+		}
 
-        [Test]
-        public void Concat()
-        {            
-            SqlBinary TestBinary;
+		[Test]
+		public void Concat()
+		{			
+			SqlBinary TestBinary;
 
-            TestBinary = SqlBinary.Concat (Test2, Test3);
+			TestBinary = SqlBinary.Concat (Test2, Test3);
                         Assert.AreEqual ((byte)15, TestBinary [4], "H01");
 
-            TestBinary = SqlBinary.Concat (Test1, Test2);
+			TestBinary = SqlBinary.Concat (Test1, Test2);
                         Assert.AreEqual ((byte)240, TestBinary [0], "#H02");
                         Assert.AreEqual ((byte)15, TestBinary [1], "#H03");
-        }
+		}
 
-        [Test]
-        public void ToSqlGuid()
-        {
+		[Test]
+		public void ToSqlGuid()
+		{
                         SqlBinary TestBinary = new SqlBinary (new byte [16]);
                         SqlGuid TestGuid = TestBinary.ToSqlGuid ();
                         Assert.IsTrue (!TestGuid.IsNull, "#I01");
-        }
+		}
 
-        [Test]
-        public void ToStringTest()
-        {
+		[Test]
+		public void ToStringTest()
+		{
                         Assert.AreEqual ("SqlBinary(3)", Test2.ToString (), "#J01");
                         Assert.AreEqual ("SqlBinary(2)", Test1.ToString (), "#J02");
-        }
+		}
 
-        // OPERATORS
-        [Test]
-        public void AdditionOperator()
-        {
-            SqlBinary TestBinary = Test1 + Test2;
+		// OPERATORS
+		[Test]
+		public void AdditionOperator()
+		{
+			SqlBinary TestBinary = Test1 + Test2;
                         Assert.AreEqual ((byte)240, TestBinary [0], "#K01");
                         Assert.AreEqual ((byte)15, TestBinary [1], "#K02");
-        }
+		}
 
-        [Test]
-        public void ComparisonOperators()
-        {
-            // Equality
+		[Test]
+		public void ComparisonOperators()
+		{
+			// Equality
                         Assert.IsTrue (!(Test1 == Test2).Value, "#L01");
                         Assert.IsTrue ((Test3 == Test1).Value, "#L02");
 
-            // Greater than
+			// Greater than
                         Assert.IsTrue ((Test1 > Test2).Value, "#L03");
                         Assert.IsTrue (!(Test3 > Test1).Value, "#L04");
 
-            // Greater than or equal
+			// Greater than or equal
                         Assert.IsTrue ((Test1 >= Test2).Value, "#L05");
                         Assert.IsTrue ((Test3 >= Test2).Value, "#L06");
 
-            // Inequality
+			// Inequality
                         Assert.IsTrue ((Test1 != Test2).Value, "#L07");
                         Assert.IsTrue (!(Test3 != Test1).Value, "#L08");
 
-            // Less than
+			// Less than
                         Assert.IsTrue (!(Test1 < Test2).Value, "#L09");
                         Assert.IsTrue (!(Test3 < Test2).Value, "#L10");
 
-            // Less than or equal
+			// Less than or equal
                         Assert.IsTrue (!(Test1 <= Test2).Value, "#L11");
                         Assert.IsTrue ((Test3 <= Test1).Value, "#L12");
-        }
+		}
 
-        [Test]
-        public void SqlBinaryToByteArray() 
-        {
-            byte [] TestByteArray = (Byte[])Test1;
-            Assert.AreEqual ((byte)240, TestByteArray[0], "#M01");
-        }
+		[Test]
+		public void SqlBinaryToByteArray() 
+		{
+			byte [] TestByteArray = (Byte[])Test1;
+			Assert.AreEqual ((byte)240, TestByteArray[0], "#M01");
+		}
 
-        [Test]
-        public void SqlGuidToSqlBinary()
-        {
+		[Test]
+		public void SqlGuidToSqlBinary()
+		{
                         byte [] TestByteArray = new Byte [16];
-            TestByteArray [0] = 15;
-            TestByteArray [1] = 200;
-            SqlGuid TestGuid = new SqlGuid (TestByteArray);
-            
-            SqlBinary TestBinary = (SqlBinary)TestGuid;
+			TestByteArray [0] = 15;
+			TestByteArray [1] = 200;
+			SqlGuid TestGuid = new SqlGuid (TestByteArray);
+			
+			SqlBinary TestBinary = (SqlBinary)TestGuid;
                         Assert.AreEqual ((byte)15, TestBinary [0], "#N01");
-        }
+		}
 
-        [Test]
-        public void ByteArrayToSqlBinary()
-        {
+		[Test]
+		public void ByteArrayToSqlBinary()
+		{
                         byte [] TestByteArray = new Byte [2];
-            TestByteArray [0] = 15;
-            TestByteArray [1] = 200;
-            SqlBinary TestBinary = (SqlBinary)TestByteArray;
+			TestByteArray [0] = 15;
+			TestByteArray [1] = 200;
+			SqlBinary TestBinary = (SqlBinary)TestByteArray;
                         Assert.AreEqual ((byte)15, TestBinary [0], "#O1");
-        }
-        [Test]
-        public void GetXsdTypeTest ()
-        {
-            XmlQualifiedName qualifiedName = SqlBinary.GetXsdType (null);
-            Assert.AreEqual ("base64Binary", qualifiedName.Name, "#A01");
-        }
-    }
+		}
+		[Test]
+		public void GetXsdTypeTest ()
+		{
+			XmlQualifiedName qualifiedName = SqlBinary.GetXsdType (null);
+			Assert.AreEqual ("base64Binary", qualifiedName.Name, "#A01");
+		}
+	}
 }
 

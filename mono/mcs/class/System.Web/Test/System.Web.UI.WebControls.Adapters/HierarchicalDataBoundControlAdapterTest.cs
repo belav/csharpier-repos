@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.Adapters.HierarchicalDataBoundControlAdapter
 //
 // Author:
-//    Dean Brettle (dean@brettle.com)
+//	Dean Brettle (dean@brettle.com)
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -42,54 +42,54 @@ using MonoTests.SystemWeb.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls.Adapters
 {
-    [TestFixture]
-    public class HierarchicalDataBoundControlAdapterTest
-    {
-        MyHierarchicalDataBoundControl c;
-        MyHierarchicalDataBoundControlAdapter a;
+	[TestFixture]
+	public class HierarchicalDataBoundControlAdapterTest
+	{
+		MyHierarchicalDataBoundControl c;
+		MyHierarchicalDataBoundControlAdapter a;
 
-        [SetUp]
-        public void SetUp ()
-        {
-            c = new MyHierarchicalDataBoundControl ();
-            a = new MyHierarchicalDataBoundControlAdapter (c);
-        }
-        
-        [Test]
-        public void PerformDataBinding ()
-        {
-            a.PerformDataBinding ();
-            Assert.IsTrue (c.perform_data_binding_called, "PerformDataBinding #1");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			c = new MyHierarchicalDataBoundControl ();
+			a = new MyHierarchicalDataBoundControlAdapter (c);
+		}
+		
+		[Test]
+		public void PerformDataBinding ()
+		{
+			a.PerformDataBinding ();
+			Assert.IsTrue (c.perform_data_binding_called, "PerformDataBinding #1");
+		}
 
-        [Test]
-        public void Control ()
-        {
-            Assert.AreEqual (c, a.Control, "Control #1");
-        }
-                
+		[Test]
+		public void Control ()
+		{
+			Assert.AreEqual (c, a.Control, "Control #1");
+		}
+				
 #region Support classes
-        
-        class MyHierarchicalDataBoundControl : HierarchicalDataBoundControl
-        {
-            internal bool perform_data_binding_called;
-            
-            protected internal override void PerformDataBinding ()
-            {
-                perform_data_binding_called = true;
-            }
-        }
+		
+		class MyHierarchicalDataBoundControl : HierarchicalDataBoundControl
+		{
+			internal bool perform_data_binding_called;
+			
+			protected internal override void PerformDataBinding ()
+			{
+				perform_data_binding_called = true;
+			}
+		}
 
-        class MyHierarchicalDataBoundControlAdapter : SystemWebTestShim.HierarchicalDataBoundControlAdapter
-        {
-            internal MyHierarchicalDataBoundControlAdapter (HierarchicalDataBoundControl c) : base (c)
-            {
-            }
-            
-            new internal HierarchicalDataBoundControl Control {
-                get { return base.Control; }
-            }
-        }
+		class MyHierarchicalDataBoundControlAdapter : SystemWebTestShim.HierarchicalDataBoundControlAdapter
+		{
+			internal MyHierarchicalDataBoundControlAdapter (HierarchicalDataBoundControl c) : base (c)
+			{
+			}
+			
+			new internal HierarchicalDataBoundControl Control {
+				get { return base.Control; }
+			}
+		}
 #endregion
-    }
+	}
 }

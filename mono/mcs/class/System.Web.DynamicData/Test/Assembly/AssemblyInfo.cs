@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using MonoTests.SystemWeb.Framework;
@@ -14,7 +14,7 @@ using MonoTests.Common;
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("Novell, Inc")]
 [assembly: AssemblyProduct ("System.Web.DynamicData_tests_net_2_0")]
-[assembly: AssemblyCopyright ("Copyright � 2009 Novell, Inc")]
+[assembly: AssemblyCopyright ("Copyright © 2009 Novell, Inc")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 

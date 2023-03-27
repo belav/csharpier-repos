@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+Ôªø// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -426,62 +426,62 @@ readonly ref struct B
             var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
             verifier.VerifyTypeIL("A",
 @".class private sequential ansi sealed beforefieldinit A
-    extends [System.Runtime]System.ValueType
+	extends [System.Runtime]System.ValueType
 {
-    .custom instance void [System.Runtime]System.Runtime.CompilerServices.IsByRefLikeAttribute::.ctor() = (
-        01 00 00 00
-    )
-    .custom instance void [System.Runtime]System.ObsoleteAttribute::.ctor(string, bool) = (
-        01 00 52 54 79 70 65 73 20 77 69 74 68 20 65 6d
-        62 65 64 64 65 64 20 72 65 66 65 72 65 6e 63 65
-        73 20 61 72 65 20 6e 6f 74 20 73 75 70 70 6f 72
-        74 65 64 20 69 6e 20 74 68 69 73 20 76 65 72 73
-        69 6f 6e 20 6f 66 20 79 6f 75 72 20 63 6f 6d 70
-        69 6c 65 72 2e 01 00 00
-    )
-    .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::.ctor(string) = (
-        01 00 0a 52 65 66 53 74 72 75 63 74 73 00 00
-    )
-    // Fields
-    .field private int32& A1
-    .field private int32& A2
-    .custom instance void [System.Runtime]System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
-        01 00 00 00
-    )
-    .field private initonly int32& A3
-    .field private initonly int32& A4
-    .custom instance void [System.Runtime]System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
-        01 00 00 00
-    )
+	.custom instance void [System.Runtime]System.Runtime.CompilerServices.IsByRefLikeAttribute::.ctor() = (
+		01 00 00 00
+	)
+	.custom instance void [System.Runtime]System.ObsoleteAttribute::.ctor(string, bool) = (
+		01 00 52 54 79 70 65 73 20 77 69 74 68 20 65 6d
+		62 65 64 64 65 64 20 72 65 66 65 72 65 6e 63 65
+		73 20 61 72 65 20 6e 6f 74 20 73 75 70 70 6f 72
+		74 65 64 20 69 6e 20 74 68 69 73 20 76 65 72 73
+		69 6f 6e 20 6f 66 20 79 6f 75 72 20 63 6f 6d 70
+		69 6c 65 72 2e 01 00 00
+	)
+	.custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::.ctor(string) = (
+		01 00 0a 52 65 66 53 74 72 75 63 74 73 00 00
+	)
+	// Fields
+	.field private int32& A1
+	.field private int32& A2
+	.custom instance void [System.Runtime]System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
+		01 00 00 00
+	)
+	.field private initonly int32& A3
+	.field private initonly int32& A4
+	.custom instance void [System.Runtime]System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
+		01 00 00 00
+	)
 } // end of class A
 ");
             verifier.VerifyTypeIL("B",
 @".class private sequential ansi sealed beforefieldinit B
-    extends [System.Runtime]System.ValueType
+	extends [System.Runtime]System.ValueType
 {
-    .custom instance void [System.Runtime]System.Runtime.CompilerServices.IsByRefLikeAttribute::.ctor() = (
-        01 00 00 00
-    )
-    .custom instance void [System.Runtime]System.ObsoleteAttribute::.ctor(string, bool) = (
-        01 00 52 54 79 70 65 73 20 77 69 74 68 20 65 6d
-        62 65 64 64 65 64 20 72 65 66 65 72 65 6e 63 65
-        73 20 61 72 65 20 6e 6f 74 20 73 75 70 70 6f 72
-        74 65 64 20 69 6e 20 74 68 69 73 20 76 65 72 73
-        69 6f 6e 20 6f 66 20 79 6f 75 72 20 63 6f 6d 70
-        69 6c 65 72 2e 01 00 00
-    )
-    .custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::.ctor(string) = (
-        01 00 0a 52 65 66 53 74 72 75 63 74 73 00 00
-    )
-    .custom instance void [System.Runtime]System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
-        01 00 00 00
-    )
-    // Fields
-    .field private initonly int32& B3
-    .field private initonly int32& B4
-    .custom instance void [System.Runtime]System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
-        01 00 00 00
-    )
+	.custom instance void [System.Runtime]System.Runtime.CompilerServices.IsByRefLikeAttribute::.ctor() = (
+		01 00 00 00
+	)
+	.custom instance void [System.Runtime]System.ObsoleteAttribute::.ctor(string, bool) = (
+		01 00 52 54 79 70 65 73 20 77 69 74 68 20 65 6d
+		62 65 64 64 65 64 20 72 65 66 65 72 65 6e 63 65
+		73 20 61 72 65 20 6e 6f 74 20 73 75 70 70 6f 72
+		74 65 64 20 69 6e 20 74 68 69 73 20 76 65 72 73
+		69 6f 6e 20 6f 66 20 79 6f 75 72 20 63 6f 6d 70
+		69 6c 65 72 2e 01 00 00
+	)
+	.custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::.ctor(string) = (
+		01 00 0a 52 65 66 53 74 72 75 63 74 73 00 00
+	)
+	.custom instance void [System.Runtime]System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
+		01 00 00 00
+	)
+	// Fields
+	.field private initonly int32& B3
+	.field private initonly int32& B4
+	.custom instance void [System.Runtime]System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
+		01 00 00 00
+	)
 } // end of class B
 ");
         }
@@ -898,7 +898,7 @@ class C
 ";
             // SPEC:
             // A fixed_pointer_initializer can be one of the following:
-            // The token ì&î followed by a variable_reference to a moveable variable of type T,
+            // The token ‚Äú&‚Äù followed by a variable_reference to a moveable variable of type T,
             // provided the type T* is implicitly convertible to the pointer type given in the fixed statement.
             var comp = CreateCompilation(source, options: TestOptions.UnsafeReleaseDll, targetFramework: TargetFramework.Net70);
             comp.VerifyEmitDiagnostics(
@@ -22686,53 +22686,53 @@ public class A<T>
             // }
             var ilSource = """
 .class public sequential ansi sealed beforefieldinit R`1<T>
-    extends [mscorlib]System.ValueType
+	extends [mscorlib]System.ValueType
 {
-    .method public hidebysig specialname rtspecialname instance void .ctor ( !T& t ) cil managed
-    {
+	.method public hidebysig specialname rtspecialname instance void .ctor ( !T& t ) cil managed
+	{
         IL_0000: ldnull
         IL_0001: throw
-    }
+	}
 }
 
 .class public auto ansi beforefieldinit A`1<T>
-    extends [mscorlib]System.Object
+	extends [mscorlib]System.Object
 {
     // [UnscopedRef] scoped parameter
-    .method public hidebysig instance !T& F4A ( valuetype R`1<!T>& r4 ) cil managed
-    {
-        .param [1]
-            .custom instance void System.Runtime.CompilerServices.ScopedRefAttribute::.ctor() = ( 01 00 00 00 )
-            .custom instance void System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = ( 01 00 00 00 )
+	.method public hidebysig instance !T& F4A ( valuetype R`1<!T>& r4 ) cil managed
+	{
+		.param [1]
+			.custom instance void System.Runtime.CompilerServices.ScopedRefAttribute::.ctor() = ( 01 00 00 00 )
+			.custom instance void System.Diagnostics.CodeAnalysis.UnscopedRefAttribute::.ctor() = ( 01 00 00 00 )
         IL_0000: ldnull
         IL_0001: throw
-    }
-    .method public hidebysig specialname rtspecialname instance void .ctor () cil managed
-    {
+	}
+	.method public hidebysig specialname rtspecialname instance void .ctor () cil managed
+	{
         IL_0000: ldnull
         IL_0001: throw
-    }
+	}
 }
 
 .class private auto ansi sealed beforefieldinit System.Runtime.CompilerServices.ScopedRefAttribute
-    extends [mscorlib]System.Attribute
+	extends [mscorlib]System.Attribute
 {
-    .method public hidebysig specialname rtspecialname instance void .ctor () cil managed
-    {
+	.method public hidebysig specialname rtspecialname instance void .ctor () cil managed
+	{
         IL_0000: ldnull
         IL_0001: throw
-    }
+	}
 }
 
 .class public auto ansi sealed beforefieldinit System.Diagnostics.CodeAnalysis.UnscopedRefAttribute
-    extends [mscorlib]System.Attribute
+	extends [mscorlib]System.Attribute
 {
-    .method public hidebysig specialname rtspecialname
-        instance void .ctor () cil managed
-    {
+	.method public hidebysig specialname rtspecialname
+		instance void .ctor () cil managed
+	{
         IL_0000: ldnull
         IL_0001: throw
-    }
+	}
 }
 """;
             var refA = CompileIL(ilSource);

@@ -36,50 +36,50 @@ using System.Globalization;
 
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
-    [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public sealed class SoapMonthDay : ISoapXsd
-    {
-        static readonly string[] _datetimeFormats = new string[]
-        {
-            "--MM-dd",
-            "--MM-ddzzz"
-        };
-        
-        DateTime _value;
-        
-        public SoapMonthDay ()
-        {
-        }
-        
-        public SoapMonthDay (DateTime value)
-        {
-            _value = value;
-        }
-        
-        public DateTime Value {
-            get { return _value; } 
-            set { _value = value; }
-        }
+	[Serializable]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public sealed class SoapMonthDay : ISoapXsd
+	{
+		static readonly string[] _datetimeFormats = new string[]
+		{
+			"--MM-dd",
+			"--MM-ddzzz"
+		};
+		
+		DateTime _value;
+		
+		public SoapMonthDay ()
+		{
+		}
+		
+		public SoapMonthDay (DateTime value)
+		{
+			_value = value;
+		}
+		
+		public DateTime Value {
+			get { return _value; } 
+			set { _value = value; }
+		}
 
-        public static string XsdType {
-            get { return "gMonthDay"; }
-        }
+		public static string XsdType {
+			get { return "gMonthDay"; }
+		}
 
-        public string GetXsdType()
-        {
-            return XsdType;
-        }
-        
-        public static SoapMonthDay Parse (string value)
-        {
-            DateTime d = DateTime.ParseExact (value, _datetimeFormats, null, DateTimeStyles.None);
-            return new SoapMonthDay (d);
-        }
+		public string GetXsdType()
+		{
+			return XsdType;
+		}
+		
+		public static SoapMonthDay Parse (string value)
+		{
+			DateTime d = DateTime.ParseExact (value, _datetimeFormats, null, DateTimeStyles.None);
+			return new SoapMonthDay (d);
+		}
 
-        public override string ToString()
-        {
-            return _value.ToString("--MM-dd", CultureInfo.InvariantCulture);
-        }
-    }
+		public override string ToString()
+		{
+			return _value.ToString("--MM-dd", CultureInfo.InvariantCulture);
+		}
+	}
 }

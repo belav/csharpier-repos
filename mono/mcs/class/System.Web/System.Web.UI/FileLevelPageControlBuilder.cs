@@ -35,47 +35,47 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI
 {
-    public class FileLevelPageControlBuilder : RootBuilder
-    {
-        bool hasContentControls;
-        bool hasLiteralControls;
-        bool hasOtherControls;
-        
-        public FileLevelPageControlBuilder ()
-        {
-        }
-        
-        public override void AppendLiteralString (string text)
-        {
-            bool emptyText = text != null ? text.Trim ().Length == 0 : true;
-            if (hasContentControls && !emptyText)
-                throw new HttpException ("Literal strings cannot be appended to Content pages.");
+	public class FileLevelPageControlBuilder : RootBuilder
+	{
+		bool hasContentControls;
+		bool hasLiteralControls;
+		bool hasOtherControls;
+		
+		public FileLevelPageControlBuilder ()
+		{
+		}
+		
+		public override void AppendLiteralString (string text)
+		{
+			bool emptyText = text != null ? text.Trim ().Length == 0 : true;
+			if (hasContentControls && !emptyText)
+				throw new HttpException ("Literal strings cannot be appended to Content pages.");
 
-            if (!emptyText)
-                hasLiteralControls = true;
-            
-            base.AppendLiteralString (text);
-        }
-        
-        public override void AppendSubBuilder (ControlBuilder subBuilder)
-        {
-            if (subBuilder == null) {
-                base.AppendSubBuilder (subBuilder);
-                return;
-            }
-            
-            if (typeof (ContentBuilderInternal).IsAssignableFrom (subBuilder.GetType ())) {
-                if (hasOtherControls)
-                    throw new HttpException ("Only Content controls are supported on content pages.");
-                
-                hasContentControls = true;
-                if (hasLiteralControls)
-                    throw new HttpParseException ("Only Content controls are supported on content pages.");
-            } else
-                hasOtherControls = true;
-            
-            base.AppendSubBuilder (subBuilder);
-        }
-    }
+			if (!emptyText)
+				hasLiteralControls = true;
+			
+			base.AppendLiteralString (text);
+		}
+		
+		public override void AppendSubBuilder (ControlBuilder subBuilder)
+		{
+			if (subBuilder == null) {
+				base.AppendSubBuilder (subBuilder);
+				return;
+			}
+			
+			if (typeof (ContentBuilderInternal).IsAssignableFrom (subBuilder.GetType ())) {
+				if (hasOtherControls)
+					throw new HttpException ("Only Content controls are supported on content pages.");
+				
+				hasContentControls = true;
+				if (hasLiteralControls)
+					throw new HttpParseException ("Only Content controls are supported on content pages.");
+			} else
+				hasOtherControls = true;
+			
+			base.AppendSubBuilder (subBuilder);
+		}
+	}
 }
 

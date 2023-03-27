@@ -32,14 +32,14 @@ using System.Runtime.Serialization;
 
 namespace System.ServiceModel
 {
-    [Serializable]
-    public class MsmqException : ExternalException
-    {
-        public MsmqException () : base () {}
-        public MsmqException (string message) : base (message) {}
-        public MsmqException (string message, int error) : base (message, error) {}
-        public MsmqException (string message, Exception inner) : base (message, inner) {}
-        protected MsmqException (SerializationInfo info, StreamingContext context) :
-            base (info, context) {}
-    }
+	[Serializable]
+	public class MsmqException : ExternalException
+	{
+		public MsmqException () : base () {}
+		public MsmqException (string message) : base (message) {}
+		public MsmqException (string message, int error) : base (message, error) {}
+		public MsmqException (string message, Exception inner) : base (message, inner) {}
+		protected MsmqException (SerializationInfo info, StreamingContext context) :
+			base (info, context) {}
+	}
 }

@@ -2,8 +2,8 @@
 // Line: 6
 
 class X {
-    static void Main () {
-        const float d = float.MaxValue;
-        ulong b = (ulong) d;
-    }
+	static void Main () {
+		const float d = float.MaxValue;
+		ulong b = (ulong) d;
+	}
 }

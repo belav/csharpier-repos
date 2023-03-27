@@ -2,7 +2,7 @@
 // ProxyGeneratorTest.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -36,44 +36,44 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Script.Services
 {
-    [TestFixture]
-    public class ProxyGeneratorTest
-    {
-        [Test]
-        public void ScriptGenerator ()
-        {
-            var s = ProxyGenerator.GetClientProxyScript (typeof (IHogeService), "/js", false);
-            Assert.IsTrue (s.IndexOf ("IHogeService") > 0, "#1");
-            Assert.IsTrue (s.IndexOf ("Join") > 0, "#2");
-            s = ProxyGenerator.GetClientProxyScript (typeof (IHogeService), "/jsdebug", true);
-            Assert.IsTrue (s.IndexOf ("IHogeService") > 0, "#3");
-            Assert.IsTrue (s.IndexOf ("Join") > 0, "#4");
-        }
+	[TestFixture]
+	public class ProxyGeneratorTest
+	{
+		[Test]
+		public void ScriptGenerator ()
+		{
+			var s = ProxyGenerator.GetClientProxyScript (typeof (IHogeService), "/js", false);
+			Assert.IsTrue (s.IndexOf ("IHogeService") > 0, "#1");
+			Assert.IsTrue (s.IndexOf ("Join") > 0, "#2");
+			s = ProxyGenerator.GetClientProxyScript (typeof (IHogeService), "/jsdebug", true);
+			Assert.IsTrue (s.IndexOf ("IHogeService") > 0, "#3");
+			Assert.IsTrue (s.IndexOf ("Join") > 0, "#4");
+		}
 
-        [ServiceContract]
-        public interface IHogeService
-        {
-//            [WebGet]
-            [OperationContract]
-            string Echo (string s);
+		[ServiceContract]
+		public interface IHogeService
+		{
+//			[WebGet]
+			[OperationContract]
+			string Echo (string s);
 
-//            [WebGet]
-            [OperationContract]
-            string Join (string s1, string s2);
-        }
+//			[WebGet]
+			[OperationContract]
+			string Join (string s1, string s2);
+		}
 
-        public class HogeService : IHogeService
-        {
-            public string Echo (string s)
-            {
-                return "heh, I don't";
-            }
+		public class HogeService : IHogeService
+		{
+			public string Echo (string s)
+			{
+				return "heh, I don't";
+			}
 
-            public string Join (string s1, string s2)
-            {
-                Console.WriteLine ("{0} + {1}", s1, s2);
-                return s1 + s2;
-            }
-        }
-    }
+			public string Join (string s1, string s2)
+			{
+				Console.WriteLine ("{0} + {1}", s1, s2);
+				return s1 + s2;
+			}
+		}
+	}
 }

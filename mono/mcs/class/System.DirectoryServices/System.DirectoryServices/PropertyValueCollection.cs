@@ -34,182 +34,182 @@ using System.Collections;
 
 namespace System.DirectoryServices
 {
-    public class PropertyValueCollection : CollectionBase
-    {
+	public class PropertyValueCollection : CollectionBase
+	{
 
-        private bool _Mbit;
-        private DirectoryEntry _parent;
+		private bool _Mbit;
+		private DirectoryEntry _parent;
 
-        internal PropertyValueCollection(DirectoryEntry parent):base()
-        {
-            _Mbit = false;
-            _parent = parent;
-        }
+		internal PropertyValueCollection(DirectoryEntry parent):base()
+		{
+			_Mbit = false;
+			_parent = parent;
+		}
 
-        internal bool Mbit
-        {
-            get
-            {
-                return _Mbit;
-            }
-            set
-            {
-                _Mbit = value;
-            }
-        }
+		internal bool Mbit
+		{
+			get
+			{
+				return _Mbit;
+			}
+			set
+			{
+				_Mbit = value;
+			}
+		}
 
-        public object  this[ int index ]  
-        {
-            get  
-            {
-                return( (object) List[index] );
-            }
-            set  
-            {
-                List[index] = value;
-                _Mbit = true;
-            }
-        }
+		public object  this[ int index ]  
+		{
+			get  
+			{
+				return( (object) List[index] );
+			}
+			set  
+			{
+				List[index] = value;
+				_Mbit = true;
+			}
+		}
 
-        public int Add( object value )  
-        {
-            if(Contains(value))
-            {
-                return -1;
-            }
-            else
-            {
-                _Mbit=true;
-                return( List.Add( value ) );
-            }
+		public int Add( object value )  
+		{
+			if(Contains(value))
+			{
+				return -1;
+			}
+			else
+			{
+				_Mbit=true;
+				return( List.Add( value ) );
+			}
 
-        }
+		}
 
-        public void AddRange(object[] value)
-        {
-            foreach (object val in value)
-                Add (val);
-        }
+		public void AddRange(object[] value)
+		{
+			foreach (object val in value)
+				Add (val);
+		}
 
-        public void AddRange (PropertyValueCollection value)
-        {
-            foreach (object val in value)
-                Add (val);
-        }
+		public void AddRange (PropertyValueCollection value)
+		{
+			foreach (object val in value)
+				Add (val);
+		}
 
-        public int IndexOf( object value )  
-        {
-            return( List.IndexOf( value ) );
-        }
+		public int IndexOf( object value )  
+		{
+			return( List.IndexOf( value ) );
+		}
 
-        public void Insert( int index, object value )  
-        {
-            List.Insert( index, value );
-            _Mbit = true;
-        }
+		public void Insert( int index, object value )  
+		{
+			List.Insert( index, value );
+			_Mbit = true;
+		}
 
-        public void Remove( object value )  
-        {
-            List.Remove( value );
-            _Mbit = true;
-        }
+		public void Remove( object value )  
+		{
+			List.Remove( value );
+			_Mbit = true;
+		}
 
-        public bool Contains( object value )  
-        {
-            return( List.Contains( value ) );
-        }
+		public bool Contains( object value )  
+		{
+			return( List.Contains( value ) );
+		}
 
-        internal bool ContainsCaselessStringValue( string value )  
-        {
-            for(int i=0; i< this.Count; ++i)
-            {
-                string lVal = (string) List[i];
-                if(String.Compare(value,lVal,true)==0)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+		internal bool ContainsCaselessStringValue( string value )  
+		{
+			for(int i=0; i< this.Count; ++i)
+			{
+				string lVal = (string) List[i];
+				if(String.Compare(value,lVal,true)==0)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 
-        public void CopyTo (object[] array, int index)
-        {
-            foreach (object o in List)
-                array[index++] = o;
-        }
+		public void CopyTo (object[] array, int index)
+		{
+			foreach (object o in List)
+				array[index++] = o;
+		}
 
-        [MonoTODO]
-        protected override void OnClearComplete ()
-        {
-            if (_parent != null) {
-                _parent.CommitDeferred();
-            }
-        }
+		[MonoTODO]
+		protected override void OnClearComplete ()
+		{
+			if (_parent != null) {
+				_parent.CommitDeferred();
+			}
+		}
 
-        [MonoTODO]
-        protected override void OnInsertComplete (int index, object value)
-        {
-            if (_parent != null) {
-                _parent.CommitDeferred();
-            }
-        }
+		[MonoTODO]
+		protected override void OnInsertComplete (int index, object value)
+		{
+			if (_parent != null) {
+				_parent.CommitDeferred();
+			}
+		}
 
-        [MonoTODO]
-        protected override void OnRemoveComplete (int index, object value)
-        {
-            if (_parent != null) {
-                _parent.CommitDeferred();
-            }
-        }
+		[MonoTODO]
+		protected override void OnRemoveComplete (int index, object value)
+		{
+			if (_parent != null) {
+				_parent.CommitDeferred();
+			}
+		}
 
-        [MonoTODO]
-        protected override void OnSetComplete (int index, object oldValue, object newValue)
-        {
-            if (_parent != null) {
-                _parent.CommitDeferred();
-            }
-        }
+		[MonoTODO]
+		protected override void OnSetComplete (int index, object oldValue, object newValue)
+		{
+			if (_parent != null) {
+				_parent.CommitDeferred();
+			}
+		}
 
-        [MonoTODO]
-        public string PropertyName
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+		[MonoTODO]
+		public string PropertyName
+		{
+			get
+			{
+				return string.Empty;
+			}
+		}
 
-        public object Value 
-        {
-            get
-            {
-                switch (Count) {
-                    case 0 : 
-                        return null;
-                    case 1 :
-                        return (object) List[0];
-                    default :
-//                    System.Object[] oArray= new System.Object[this.Count];
-//                    object[] oArray= new object[this.Count];
-//                    Array.Copy((System.Array)List,0,(System.Array)oArray,0,this.Count);
-                        Array LArray = new object[Count];
-                        for ( int i = LArray.GetLowerBound(0); i <= LArray.GetUpperBound(0); i++ )
-                            LArray.SetValue( List[i], i );
-                        return LArray;
-                }
-            }
-            set
-            {
-                if (value == null && List.Count == 0)
-                    return;
+		public object Value 
+		{
+			get
+			{
+				switch (Count) {
+					case 0 : 
+						return null;
+					case 1 :
+						return (object) List[0];
+					default :
+//					System.Object[] oArray= new System.Object[this.Count];
+//					object[] oArray= new object[this.Count];
+//					Array.Copy((System.Array)List,0,(System.Array)oArray,0,this.Count);
+						Array LArray = new object[Count];
+						for ( int i = LArray.GetLowerBound(0); i <= LArray.GetUpperBound(0); i++ )
+							LArray.SetValue( List[i], i );
+						return LArray;
+				}
+			}
+			set
+			{
+				if (value == null && List.Count == 0)
+					return;
 
-                List.Clear();
-                if (value != null) {
-                    Add(value);
-                }
-                _Mbit = true;
-            }
-        }
+				List.Clear();
+				if (value != null) {
+					Add(value);
+				}
+				_Mbit = true;
+			}
+		}
 
-    }
+	}
 }

@@ -36,73 +36,73 @@ using System.Globalization;
 
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
-    [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public sealed class SoapYearMonth : ISoapXsd
-    {
-        static readonly string[] _datetimeFormats = new string[]
-        {
-            "yyyy-MM",
-            "'+'yyyy-MM",
-            "'-'yyyy-MM",
-            "yyyy-MMzzz",
-            "'+'yyyy-MMzzz",
-            "'-'yyyy-MMzzz"
-        };
-        
-        int _sign;
-        DateTime _value;
-        
-        public SoapYearMonth()
-        {
-        }
+	[Serializable]
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public sealed class SoapYearMonth : ISoapXsd
+	{
+		static readonly string[] _datetimeFormats = new string[]
+		{
+			"yyyy-MM",
+			"'+'yyyy-MM",
+			"'-'yyyy-MM",
+			"yyyy-MMzzz",
+			"'+'yyyy-MMzzz",
+			"'-'yyyy-MMzzz"
+		};
+		
+		int _sign;
+		DateTime _value;
+		
+		public SoapYearMonth()
+		{
+		}
 
-        public SoapYearMonth (DateTime value)
-        {
-            _value = value;
-        }
+		public SoapYearMonth (DateTime value)
+		{
+			_value = value;
+		}
 
-        public SoapYearMonth (DateTime value, int sign)
-        {
-            _value = value;
-            _sign = sign;
-        }
+		public SoapYearMonth (DateTime value, int sign)
+		{
+			_value = value;
+			_sign = sign;
+		}
 
-        public int Sign {
-            get { return _sign; } 
-            set { _sign = value; }
-        }
-        
-        public DateTime Value {
-            get { return _value; } 
-            set { _value = value; }
-        }
+		public int Sign {
+			get { return _sign; } 
+			set { _sign = value; }
+		}
+		
+		public DateTime Value {
+			get { return _value; } 
+			set { _value = value; }
+		}
 
-        public static string XsdType {
-            get { return "gYearMonth"; }
-        }
+		public static string XsdType {
+			get { return "gYearMonth"; }
+		}
 
-        public string GetXsdType()
-        {
-            return XsdType;
-        }
-        
-        public static SoapYearMonth Parse (string value)
-        {
-            DateTime d = DateTime.ParseExact (value, _datetimeFormats, null, DateTimeStyles.None);
-            
-            SoapYearMonth res = new SoapYearMonth (d);
-            if (value.StartsWith ("-")) res.Sign = -1;
-            else res.Sign = 0;
-            return res;
-        }
+		public string GetXsdType()
+		{
+			return XsdType;
+		}
+		
+		public static SoapYearMonth Parse (string value)
+		{
+			DateTime d = DateTime.ParseExact (value, _datetimeFormats, null, DateTimeStyles.None);
+			
+			SoapYearMonth res = new SoapYearMonth (d);
+			if (value.StartsWith ("-")) res.Sign = -1;
+			else res.Sign = 0;
+			return res;
+		}
 
-        public override string ToString()
-        {
-            if (_sign >= 0)
-                return _value.ToString("yyyy-MM", CultureInfo.InvariantCulture);
-            else
-                return _value.ToString("'-'yyyy-MM", CultureInfo.InvariantCulture);
-        }
-    }
+		public override string ToString()
+		{
+			if (_sign >= 0)
+				return _value.ToString("yyyy-MM", CultureInfo.InvariantCulture);
+			else
+				return _value.ToString("'-'yyyy-MM", CultureInfo.InvariantCulture);
+		}
+	}
 }

@@ -46,7 +46,7 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
       get
       {
-    return specifier_list;
+	return specifier_list;
       }
     }
 
@@ -57,9 +57,9 @@ namespace Novell.Directory.Ldap.Events.Edir
       
       if (null == returnedValue)
       {
-    throw new LdapException(LdapException.resultCodeToString(ResultCode),
-                ResultCode, 
-                null);
+	throw new LdapException(LdapException.resultCodeToString(ResultCode),
+				ResultCode, 
+				null);
       }
 
       LBERDecoder decoder = new LBERDecoder();
@@ -72,14 +72,14 @@ namespace Novell.Directory.Ldap.Events.Edir
 
       for (int i = 0; i < length; i++) 
       {
-    Asn1Sequence eventspecifiersequence =
+	Asn1Sequence eventspecifiersequence =
                 (Asn1Sequence) sequenceSet.get_Renamed(i);
-    int classfication =
+	int classfication =
                 ((Asn1Integer) eventspecifiersequence.get_Renamed(0)).intValue();
-    int enumtype =
-      ((Asn1Enumerated) eventspecifiersequence.get_Renamed(1)).intValue();
-    specifier_list[i] =
-      new EdirEventSpecifier((EdirEventType)classfication, (EdirEventResultType)enumtype);
+	int enumtype =
+	  ((Asn1Enumerated) eventspecifiersequence.get_Renamed(1)).intValue();
+	specifier_list[i] =
+	  new EdirEventSpecifier((EdirEventType)classfication, (EdirEventResultType)enumtype);
         }
     }
   }

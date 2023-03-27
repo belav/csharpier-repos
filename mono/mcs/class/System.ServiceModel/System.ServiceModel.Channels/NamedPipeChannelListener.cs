@@ -2,7 +2,7 @@
 // NamedPipeChannelListener.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2009 Novell, Inc.  http://www.novell.com
 //
@@ -39,96 +39,96 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-    internal class NamedPipeChannelListener<TChannel> : InternalChannelListenerBase<TChannel> 
-        where TChannel : class, IChannel
-    {
-        NamedPipeTransportBindingElement source;
-        XmlDictionaryReaderQuotas quotas = null;
-        BindingContext context;
-        
-        public NamedPipeChannelListener (NamedPipeTransportBindingElement source, BindingContext context)
-            : base (context)
-        {
-            foreach (BindingElement be in context.Binding.Elements) {
-                MessageEncodingBindingElement mbe = be as MessageEncodingBindingElement;
-                if (mbe != null) {
-                    MessageEncoder = CreateEncoder<TChannel> (mbe);
-                    quotas = mbe.GetProperty<XmlDictionaryReaderQuotas> (context);
-                    break;
-                }
-            }
-            
-            if (MessageEncoder == null)
-                MessageEncoder = new BinaryMessageEncoder ();
-        }
+	internal class NamedPipeChannelListener<TChannel> : InternalChannelListenerBase<TChannel> 
+		where TChannel : class, IChannel
+	{
+		NamedPipeTransportBindingElement source;
+		XmlDictionaryReaderQuotas quotas = null;
+		BindingContext context;
+		
+		public NamedPipeChannelListener (NamedPipeTransportBindingElement source, BindingContext context)
+			: base (context)
+		{
+			foreach (BindingElement be in context.Binding.Elements) {
+				MessageEncodingBindingElement mbe = be as MessageEncodingBindingElement;
+				if (mbe != null) {
+					MessageEncoder = CreateEncoder<TChannel> (mbe);
+					quotas = mbe.GetProperty<XmlDictionaryReaderQuotas> (context);
+					break;
+				}
+			}
+			
+			if (MessageEncoder == null)
+				MessageEncoder = new BinaryMessageEncoder ();
+		}
 
-        NamedPipeServerStream active_server;
-        AutoResetEvent server_release_handle = new AutoResetEvent (false);
+		NamedPipeServerStream active_server;
+		AutoResetEvent server_release_handle = new AutoResetEvent (false);
 
-        protected override TChannel OnAcceptChannel (TimeSpan timeout)
-        {
+		protected override TChannel OnAcceptChannel (TimeSpan timeout)
+		{
 Console.WriteLine ("NamedPipeChannelListener.OnAcceptChannel");
 
-            if (active_server != null) {
-                try {
-                    server_release_handle.WaitOne (timeout);
-                } catch (TimeoutException) {
-                    return null;
-                }
-            }
+			if (active_server != null) {
+				try {
+					server_release_handle.WaitOne (timeout);
+				} catch (TimeoutException) {
+					return null;
+				}
+			}
 Console.WriteLine ("NamedPipeChannelListener.OnAcceptChannel.2");
 
-            var server = new NamedPipeServerStream (Uri.LocalPath.Substring (1).Replace ('/', '\\'), PipeDirection.InOut);
-            active_server = server;
+			var server = new NamedPipeServerStream (Uri.LocalPath.Substring (1).Replace ('/', '\\'), PipeDirection.InOut);
+			active_server = server;
 
 Console.WriteLine ("NamedPipeChannelListener.OnAcceptChannel.3");
-            Action a = delegate {
-                server.WaitForConnection ();
-            };
-            IAsyncResult r = a.BeginInvoke (null, null);
-            try {
-                r.AsyncWaitHandle.WaitOne (timeout);
-            } catch (TimeoutException) {
-                server.Close ();
-                return null;
-            }
+			Action a = delegate {
+				server.WaitForConnection ();
+			};
+			IAsyncResult r = a.BeginInvoke (null, null);
+			try {
+				r.AsyncWaitHandle.WaitOne (timeout);
+			} catch (TimeoutException) {
+				server.Close ();
+				return null;
+			}
 
-            // FIXME: support IDuplexSessionChannel
-            TChannel ch;
-            if (typeof (TChannel) == typeof (IDuplexSessionChannel))
-                throw new NotImplementedException ();
-            else if (typeof (TChannel) == typeof (IReplyChannel))
-                ch = (TChannel) (object) new NamedPipeReplyChannel (this, MessageEncoder, server);
-            else
-                throw new InvalidOperationException (String.Format ("Channel type {0} is not supported.", typeof (TChannel).Name));
+			// FIXME: support IDuplexSessionChannel
+			TChannel ch;
+			if (typeof (TChannel) == typeof (IDuplexSessionChannel))
+				throw new NotImplementedException ();
+			else if (typeof (TChannel) == typeof (IReplyChannel))
+				ch = (TChannel) (object) new NamedPipeReplyChannel (this, MessageEncoder, server);
+			else
+				throw new InvalidOperationException (String.Format ("Channel type {0} is not supported.", typeof (TChannel).Name));
 
-            ((CommunicationObject) (object) ch).Closed += delegate {
-                active_server = null;
-                server_release_handle.Set ();
-            };
-            return ch;
-        }
+			((CommunicationObject) (object) ch).Closed += delegate {
+				active_server = null;
+				server_release_handle.Set ();
+			};
+			return ch;
+		}
 
-        [MonoTODO]
-        protected override bool OnWaitForChannel (TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        // CommunicationObject
-        
-        protected override void OnAbort ()
-        {
-        }
+		[MonoTODO]
+		protected override bool OnWaitForChannel (TimeSpan timeout)
+		{
+			throw new NotImplementedException ();
+		}
+		
+		// CommunicationObject
+		
+		protected override void OnAbort ()
+		{
+		}
 
-        protected override void OnClose (TimeSpan timeout)
-        {
-        }
+		protected override void OnClose (TimeSpan timeout)
+		{
+		}
 
-        protected override void OnOpen (TimeSpan timeout)
-        {
-            if (!Uri.IsLoopback)
-                throw new NotSupportedException ("Only local namde pipes are supported in this binding");
-        }
-    }
+		protected override void OnOpen (TimeSpan timeout)
+		{
+			if (!Uri.IsLoopback)
+				throw new NotSupportedException ("Only local namde pipes are supported in this binding");
+		}
+	}
 }

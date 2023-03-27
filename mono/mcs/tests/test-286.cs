@@ -2,19 +2,19 @@
 
 abstract class MethodWrapper
 {
-    private string[] declaredExceptions;
+	private string[] declaredExceptions;
 
-    internal void SetDeclaredExceptions(MapXml.Throws[] throws)
-    {
-        if(throws != null)
-        {
-            declaredExceptions = new string[throws.Length];
-            for(int i = 0; i < throws.Length; i++)
-            {
-                declaredExceptions[i] = throws[i].Class;
-            }
-        }
-    }
+	internal void SetDeclaredExceptions(MapXml.Throws[] throws)
+	{
+		if(throws != null)
+		{
+			declaredExceptions = new string[throws.Length];
+			for(int i = 0; i < throws.Length; i++)
+			{
+				declaredExceptions[i] = throws[i].Class;
+			}
+		}
+	}
 }
 
 namespace MapXml {

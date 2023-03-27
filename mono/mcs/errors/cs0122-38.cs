@@ -4,8 +4,8 @@
 
 class M
 {
-    public static void Main ()
-    {
-        new InternalClass ();
-    }
+	public static void Main ()
+	{
+		new InternalClass ();
+	}
 }

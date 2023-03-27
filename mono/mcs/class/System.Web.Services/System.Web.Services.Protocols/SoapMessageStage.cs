@@ -30,10 +30,10 @@
 
 namespace System.Web.Services.Protocols {
 
-    public enum SoapMessageStage {
-        AfterDeserialize = 0x8,
-        AfterSerialize = 0x2,
-        BeforeDeserialize = 0x4,
-        BeforeSerialize = 0x1
-    }
+	public enum SoapMessageStage {
+		AfterDeserialize = 0x8,
+		AfterSerialize = 0x2,
+		BeforeDeserialize = 0x4,
+		BeforeSerialize = 0x1
+	}
 }

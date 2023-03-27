@@ -3,16 +3,16 @@
 
 abstract class B
 {
-    public virtual int P {
-        get;
-        private set;
-    }
+	public virtual int P {
+		get;
+		private set;
+	}
 }
 
 class C : B
 {
-    public override int P {
-        get { return 5; }
-        set { }
-    }
+	public override int P {
+		get { return 5; }
+		set { }
+	}
 }

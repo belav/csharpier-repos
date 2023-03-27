@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -153,7 +153,7 @@ public class Test
 public class A 
 {
     static void Main() 
-    {    
+    {	
          Console.WriteLine(/*<bind>*/ delegate  * delegate /*</bind>*/);
     }
 }
@@ -2439,7 +2439,7 @@ class C
 public class A 
 {
     static void Main() 
-    {    
+    {	
          Console.WriteLine(/*<bind>*/unchecked(42 + 42.1)/*</bind>*/);
     }
 }
@@ -3406,10 +3406,10 @@ class Z
 
             // Dev10 violates the spec for finding the most specific operator for an implicit user-defined conversion.
 
-            // SPEC:    �    Find the most specific conversion operator:
-            // SPEC:        (a)    If U contains exactly one user-defined conversion operator that converts from SX to TX, then this is the most specific conversion operator.
-            // SPEC:        (b)    Otherwise, if U contains exactly one lifted conversion operator that converts from SX to TX, then this is the most specific conversion operator.
-            // SPEC:        (c)    Otherwise, the conversion is ambiguous and a compile-time error occurs.
+            // SPEC:    •	Find the most specific conversion operator:
+            // SPEC:        (a)	If U contains exactly one user-defined conversion operator that converts from SX to TX, then this is the most specific conversion operator.
+            // SPEC:        (b)	Otherwise, if U contains exactly one lifted conversion operator that converts from SX to TX, then this is the most specific conversion operator.
+            // SPEC:        (c)	Otherwise, the conversion is ambiguous and a compile-time error occurs.
 
             // In this test we try to classify conversion from M? to G?.
             // 1) Classify conversion establishes that SX: M? and TX: G?.
@@ -4192,17 +4192,17 @@ class C
             var text =
 @"namespace N2
 {
-    using N1;
-    class Test
-    {
-        class N1<G1> {}
-        static void Main() 
-        {
-            int res = 0;
-            N1<int> n1 = new N1<int>();
-            global::N1 < > .C1 c1 = null;
-        }
-    }
+	using N1;
+	class Test
+	{
+		class N1<G1> {}
+		static void Main() 
+		{
+			int res = 0;
+			N1<int> n1 = new N1<int>();
+			global::N1 < > .C1 c1 = null;
+		}
+	}
 }";
             var compilation = CreateCompilation(text);
             var tree = compilation.SyntaxTrees.Single();
@@ -4222,17 +4222,17 @@ class C
             var text =
 @"namespace N2
 {
-    using N1;
-    class Test
-    {
-        class N1<G1> {}
-        static void Main() 
-        {
-            int res = 0;
-            N1<int> n1 = new N1<int>();
-            global::N1 < > .C1 c1 = null;
-        }
-    }
+	using N1;
+	class Test
+	{
+		class N1<G1> {}
+		static void Main() 
+		{
+			int res = 0;
+			N1<int> n1 = new N1<int>();
+			global::N1 < > .C1 c1 = null;
+		}
+	}
 }";
             var compilation = CreateCompilation(text);
             var tree = compilation.SyntaxTrees.Single();

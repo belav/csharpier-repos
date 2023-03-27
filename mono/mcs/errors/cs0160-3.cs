@@ -11,10 +11,10 @@ class C<T> : System.Exception
 
 class ClassMain
 {
-    public static void Main ()
-    {
-        try { }
-        catch (C<dynamic>) { }
-        catch (D<object>) { }
-    }
+	public static void Main ()
+	{
+		try { }
+		catch (C<dynamic>) { }
+		catch (D<object>) { }
+	}
 }

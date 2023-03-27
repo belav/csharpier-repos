@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,29 +27,29 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class AnnotationPathPoint : ChartElement
-    {
-        #region Constructors
-        public AnnotationPathPoint () : this (0, 0)
-        {
-        }
+	public class AnnotationPathPoint : ChartElement
+	{
+		#region Constructors
+		public AnnotationPathPoint () : this (0, 0)
+		{
+		}
 
-        public AnnotationPathPoint (float x, float y) : this (x, y, 0)
-        {
-        }
+		public AnnotationPathPoint (float x, float y) : this (x, y, 0)
+		{
+		}
 
-        public AnnotationPathPoint (float x, float y, byte type)
-        {
-            X = x;
-            Y = y;
-        }
-        #endregion
+		public AnnotationPathPoint (float x, float y, byte type)
+		{
+			X = x;
+			Y = y;
+		}
+		#endregion
 
-        #region Public Properties
-        public string Name { get; private set; }
-        public byte PointType { get; set; }
-        public float X { get; set; }
-        public float Y { get; set; }
-        #endregion
-    }
+		#region Public Properties
+		public string Name { get; private set; }
+		public byte PointType { get; set; }
+		public float X { get; set; }
+		public float Y { get; set; }
+		#endregion
+	}
 }

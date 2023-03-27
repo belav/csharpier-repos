@@ -3,8 +3,8 @@
 
 class X
 {
-    public static void Main ()
-    {
-        (int a, b) = (1, 2);
-    }
+	public static void Main ()
+	{
+		(int a, b) = (1, 2);
+	}
 }

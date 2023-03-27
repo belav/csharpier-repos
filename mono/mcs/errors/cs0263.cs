@@ -14,6 +14,6 @@ public partial class Foo : OtherBase
 
 class X
 {
-    static void Main ()
-    { }
+	static void Main ()
+	{ }
 }

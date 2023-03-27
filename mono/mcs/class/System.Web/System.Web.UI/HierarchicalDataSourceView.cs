@@ -2,8 +2,8 @@
 // System.Web.UI.HierarchicalDataSourceView
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
-//    Sanjay Gupta (gsanjay@novell.com)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
+//	Sanjay Gupta (gsanjay@novell.com)
 //
 // (C) 2003 Ben Maurer
 // (C) 2004-2010 Novell, Inc. (http://www.novell.com)
@@ -35,12 +35,12 @@ using System.Collections.Specialized;
 using System.Text;
 
 namespace System.Web.UI {
-    public abstract class HierarchicalDataSourceView {
-        protected HierarchicalDataSourceView ()
-        {
-        }
-    
-        public abstract IHierarchicalEnumerable Select();
-    }
+	public abstract class HierarchicalDataSourceView {
+		protected HierarchicalDataSourceView ()
+		{
+		}
+	
+		public abstract IHierarchicalEnumerable Select();
+	}
 }
 

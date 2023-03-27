@@ -15,17 +15,17 @@ using System.Collections.Generic;
 /// <see cref="T:List(int)" />
 public class Foo
 {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 
-    /// hogehoge
-    public string Bar;
+	/// hogehoge
+	public string Bar;
 
-    /// fugafuga
-    public void ListBase (string s)
-    {
-    }
+	/// fugafuga
+	public void ListBase (string s)
+	{
+	}
 }
 
 // <see cref="System.Nullable&lt;System.Int32&gt;" /> - cs1658/1574

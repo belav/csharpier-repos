@@ -23,20 +23,20 @@
 // Copyright (c) 2006 Jonathan Pobst
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    internal enum ToolStripItemEventType
-    {
-        MouseDown = 1,
-        MouseEnter = 2,
-        MouseHover = 3,
-        MouseLeave = 4,
-        MouseMove = 5,
-        MouseUp = 6,
-        Paint = 7,
-        Click = 8
-    }
+	internal enum ToolStripItemEventType
+	{
+		MouseDown = 1,
+		MouseEnter = 2,
+		MouseHover = 3,
+		MouseLeave = 4,
+		MouseMove = 5,
+		MouseUp = 6,
+		Paint = 7,
+		Click = 8
+	}
 }

@@ -3,12 +3,12 @@
 
 class Tester
 {
-    int await;
-    
-    async void Test ()
-    {
-        var a = new Initializer () {
-            await = 2
-        };
-    }
+	int await;
+	
+	async void Test ()
+	{
+		var a = new Initializer () {
+			await = 2
+		};
+	}
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2004-2005 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 
 
@@ -31,69 +31,69 @@ using System.Collections;
 using System.ComponentModel;
 
 namespace System.Windows.Forms {
-    public class BaseCollection : MarshalByRefObject, ICollection, IEnumerable {
-        internal ArrayList    list;
+	public class BaseCollection : MarshalByRefObject, ICollection, IEnumerable {
+		internal ArrayList	list;
 
-        #region Public Constructors
-        public BaseCollection ()
-        {
-        }         
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public BaseCollection ()
+		{
+		}		 
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public virtual int Count {
-            get {
-                return List.Count;
-            }
-        }
+		#region Public Instance Properties
+		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public virtual int Count {
+			get {
+				return List.Count;
+			}
+		}
 
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public bool IsReadOnly {
-            get {
-                return false;
-            }
-        }
+		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public bool IsReadOnly {
+			get {
+				return false;
+			}
+		}
 
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public bool IsSynchronized {
-            get {
-                return false;
-            }
-        }
+		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public bool IsSynchronized {
+			get {
+				return false;
+			}
+		}
 
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public object SyncRoot {
-            get {
-                return this;
-            }
-        }
-        #endregion    // Public Instance Properties
+		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public object SyncRoot {
+			get {
+				return this;
+			}
+		}
+		#endregion	// Public Instance Properties
 
-        #region Protected Instance Properties
-        protected virtual ArrayList List {
-            get {
-                if (list == null)
-                    list = new ArrayList ();
-                return list;
-            }
-        }
-        #endregion    // Protected Instance Properties
+		#region Protected Instance Properties
+		protected virtual ArrayList List {
+			get {
+				if (list == null)
+					list = new ArrayList ();
+				return list;
+			}
+		}
+		#endregion	// Protected Instance Properties
 
-        #region Public Instance Methods
-        public void CopyTo (Array ar, int index)
-        {
-            List.CopyTo (ar, index);
-        }
+		#region Public Instance Methods
+		public void CopyTo (Array ar, int index)
+		{
+			List.CopyTo (ar, index);
+		}
 
-        public IEnumerator GetEnumerator ()
-        {
-            return List.GetEnumerator ();
-        }
-        #endregion    // Public Instance Methods
-    }
+		public IEnumerator GetEnumerator ()
+		{
+			return List.GetEnumerator ();
+		}
+		#endregion	// Public Instance Methods
+	}
 }

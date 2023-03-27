@@ -1,4 +1,4 @@
-#region MIT license
+﻿#region MIT license
 // 
 // MIT license
 //
@@ -540,8 +540,8 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                                                     targetTable.Type.Name));
 
             var storageAttribute = NewAttributeDefinition<AssociationAttribute>();
-            storageAttribute["Storage"] = storageField;
-            storageAttribute["OtherKey"] = parent.OtherKey;
+			storageAttribute["Storage"] = storageField;
+			storageAttribute["OtherKey"] = parent.OtherKey;
             storageAttribute["ThisKey"] = parent.ThisKey;
             storageAttribute["Name"] = parent.Name;
             storageAttribute["IsForeignKey"] = parent.IsForeignKey;

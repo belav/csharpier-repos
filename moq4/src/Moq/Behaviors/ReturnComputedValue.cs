@@ -6,20 +6,20 @@ using System.Diagnostics;
 
 namespace Moq.Behaviors
 {
-    internal sealed class ReturnComputedValue : Behavior
-    {
-        private readonly Func<IInvocation, object> valueFactory;
+	internal sealed class ReturnComputedValue : Behavior
+	{
+		private readonly Func<IInvocation, object> valueFactory;
 
-        public ReturnComputedValue(Func<IInvocation, object> valueFactory)
-        {
-            Debug.Assert(valueFactory != null);
+		public ReturnComputedValue(Func<IInvocation, object> valueFactory)
+		{
+			Debug.Assert(valueFactory != null);
 
-            this.valueFactory = valueFactory;
-        }
+			this.valueFactory = valueFactory;
+		}
 
-        public override void Execute(Invocation invocation)
-        {
-            invocation.ReturnValue = this.valueFactory.Invoke(invocation);
-        }
-    }
+		public override void Execute(Invocation invocation)
+		{
+			invocation.ReturnValue = this.valueFactory.Invoke(invocation);
+		}
+	}
 }

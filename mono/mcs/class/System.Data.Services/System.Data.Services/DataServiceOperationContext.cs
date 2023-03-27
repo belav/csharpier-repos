@@ -1,4 +1,4 @@
-// 
+﻿// 
 // DataServiceOperationContext.cs
 //  
 // Author:
@@ -31,35 +31,35 @@ using System.Runtime;
 
 namespace System.Data.Services
 {
-    public sealed class DataServiceOperationContext
-    {
-        public bool IsBatchRequest {
-            get { throw new NotImplementedException (); }
-        }
+	public sealed class DataServiceOperationContext
+	{
+		public bool IsBatchRequest {
+			get { throw new NotImplementedException (); }
+		}
 
-        public string RequestMethod {
-            get { throw new NotImplementedException (); }
-        }
+		public string RequestMethod {
+			get { throw new NotImplementedException (); }
+		}
 
-        public Uri AbsoluteRequestUri {
-            get { throw new NotImplementedException (); }
-        }
+		public Uri AbsoluteRequestUri {
+			get { throw new NotImplementedException (); }
+		}
 
-        public Uri AbsoluteServiceUri {
-            get { throw new NotImplementedException (); }
-        }
+		public Uri AbsoluteServiceUri {
+			get { throw new NotImplementedException (); }
+		}
 
-        public WebHeaderCollection RequestHeaders {
-            get { throw new NotImplementedException (); }
-        }
+		public WebHeaderCollection RequestHeaders {
+			get { throw new NotImplementedException (); }
+		}
 
-        public WebHeaderCollection ResponseHeaders {
-            get { throw new NotImplementedException (); }
-        }
+		public WebHeaderCollection ResponseHeaders {
+			get { throw new NotImplementedException (); }
+		}
 
-        public int ResponseStatusCode {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
-    }
+		public int ResponseStatusCode {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
+	}
 }

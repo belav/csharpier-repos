@@ -7,10 +7,10 @@ class C: IEnumerable
 {
    public IEnumerator GetEnumerator ()
    {
-       try {
-           yield return this;
-       }
-       catch {
-       }
+	   try {
+		   yield return this;
+	   }
+	   catch {
+	   }
    }
 }

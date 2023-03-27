@@ -4,8 +4,8 @@
 
 class C
 {
-    public static implicit operator C (int i = 8)
-    {
-        return null;
-    }
+	public static implicit operator C (int i = 8)
+	{
+		return null;
+	}
 }

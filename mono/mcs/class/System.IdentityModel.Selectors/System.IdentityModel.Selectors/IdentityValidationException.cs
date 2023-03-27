@@ -2,7 +2,7 @@
 // IdentityValidationException.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,28 +30,28 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Selectors
 {
-    [Serializable]
-    public class IdentityValidationException : Exception
-    {
-        public IdentityValidationException ()
-            : this ("IdentityValidation exception.")
-        {
-        }
+	[Serializable]
+	public class IdentityValidationException : Exception
+	{
+		public IdentityValidationException ()
+			: this ("IdentityValidation exception.")
+		{
+		}
 
-        public IdentityValidationException (string message)
-            : this (message, null)
-        {
-        }
+		public IdentityValidationException (string message)
+			: this (message, null)
+		{
+		}
 
-        protected IdentityValidationException (SerializationInfo info,
-            StreamingContext context)
-            : base (info, context)
-        {
-        }
+		protected IdentityValidationException (SerializationInfo info,
+			StreamingContext context)
+			: base (info, context)
+		{
+		}
 
-        public IdentityValidationException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
-    }
+		public IdentityValidationException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
+	}
 }

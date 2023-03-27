@@ -2,7 +2,7 @@
 // System.Web.UI.ControlValuePropertyAttribute
 //
 // Authors:
-//    Sanjay Gupta (gsanjay@novell.com)
+//	Sanjay Gupta (gsanjay@novell.com)
 //
 // (C) 2004-2010 Novell, Inc. (http://www.novell.com)
 //
@@ -31,53 +31,53 @@ using System;
 using System.ComponentModel;
 
 namespace System.Web.UI {
-    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public sealed class ControlValuePropertyAttribute : Attribute
-    {
-        string propertyName;
-        object propertyValue;
-        Type propertyType;
+	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+	public sealed class ControlValuePropertyAttribute : Attribute
+	{
+		string propertyName;
+		object propertyValue;
+		Type propertyType;
 
-        public ControlValuePropertyAttribute (string name) 
-        {
-            this.propertyName = name;
-        }
+		public ControlValuePropertyAttribute (string name) 
+		{
+			this.propertyName = name;
+		}
 
-        public ControlValuePropertyAttribute (string name, object defaultValue) 
-        {
-            this.propertyName = name;
-            this.propertyValue = defaultValue;
-        }
+		public ControlValuePropertyAttribute (string name, object defaultValue) 
+		{
+			this.propertyName = name;
+			this.propertyValue = defaultValue;
+		}
 
-        public ControlValuePropertyAttribute (string name, Type type, string defaultValue) 
-        {
-            this.propertyName = name;
-            this.propertyValue = defaultValue;
-            this.propertyType = type;
-        }
+		public ControlValuePropertyAttribute (string name, Type type, string defaultValue) 
+		{
+			this.propertyName = name;
+			this.propertyValue = defaultValue;
+			this.propertyType = type;
+		}
 
-        public string Name {
-            get { return propertyName; }
-        }
+		public string Name {
+			get { return propertyName; }
+		}
 
-        public object DefaultValue {
-            get { return propertyValue; }
-        }
-        
-        public override bool Equals (object obj)
-        {
-            if (obj != null && obj is ControlValuePropertyAttribute) {
-                ControlValuePropertyAttribute propAttrib = (ControlValuePropertyAttribute)obj;
-                return (this.propertyName == propAttrib.propertyName && 
-                    this.propertyValue == propAttrib.propertyValue &&
-                    this.propertyType == propAttrib.propertyType);
-            }
-            return false;
-        }
+		public object DefaultValue {
+			get { return propertyValue; }
+		}
+		
+		public override bool Equals (object obj)
+		{
+			if (obj != null && obj is ControlValuePropertyAttribute) {
+				ControlValuePropertyAttribute propAttrib = (ControlValuePropertyAttribute)obj;
+				return (this.propertyName == propAttrib.propertyName && 
+					this.propertyValue == propAttrib.propertyValue &&
+					this.propertyType == propAttrib.propertyType);
+			}
+			return false;
+		}
 
-        public override int GetHashCode ()
-        {
-            return base.GetHashCode();
-        }
-    }
+		public override int GetHashCode ()
+		{
+			return base.GetHashCode();
+		}
+	}
 }

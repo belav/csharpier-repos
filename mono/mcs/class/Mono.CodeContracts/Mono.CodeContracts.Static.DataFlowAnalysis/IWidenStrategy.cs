@@ -2,7 +2,7 @@
 // IWidenStrategy.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,7 +29,7 @@
 using Mono.CodeContracts.Static.ControlFlow;
 
 namespace Mono.CodeContracts.Static.DataFlowAnalysis {
-    interface IWidenStrategy {
-        bool WantToWiden (APC from, APC to, bool isBackEdge);
-    }
+	interface IWidenStrategy {
+		bool WantToWiden (APC from, APC to, bool isBackEdge);
+	}
 }

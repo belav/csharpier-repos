@@ -3,5 +3,5 @@
 
 static class StaticClass
 {
-    public int i;
+	public int i;
 }

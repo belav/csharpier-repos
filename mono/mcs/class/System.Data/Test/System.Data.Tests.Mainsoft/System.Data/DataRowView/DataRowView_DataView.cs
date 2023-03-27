@@ -39,85 +39,85 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRowView_DataView : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRowView_DataView tc = new DataRowView_DataView();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRowView_DataView");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRowView_DataView tc = new DataRowView_DataView();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRowView_DataView");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-        DataView dv = new DataView(dt);
-
-        DataRowView drv1 = dv[0];
-        DataRowView drv2 = dv[4];
-        
-        try
-        {
-            BeginCase("check DataRowView.DataView ");
-            Compare(drv1.DataView ,dv);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("compare DataRowView.DataView ");
-            Compare(drv1.DataView ,drv2.DataView);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        //check that the DataRowView still has the same DataView even when the source table changed
-        try
-        {
-            BeginCase("check that the DataRowView still has the same DataView");
-            dv.Table = null;
-
-            // Console.WriteLine("*********" + (drv1.DataView == null));
-            Compare(drv1.DataView == dv ,true);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        //check that the DataRowView has a new DataView
-        try
-        {
-            BeginCase("check that the DataRowView has a new DataView");
-            dv = new DataView();
-            Compare(drv1.DataView.Equals(dv) ,false);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    }
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
+
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	public void run()
+	{
+		Exception exp = null;
+		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
+		DataView dv = new DataView(dt);
+
+		DataRowView drv1 = dv[0];
+		DataRowView drv2 = dv[4];
+		
+		try
+		{
+			BeginCase("check DataRowView.DataView ");
+			Compare(drv1.DataView ,dv);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("compare DataRowView.DataView ");
+			Compare(drv1.DataView ,drv2.DataView);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		//check that the DataRowView still has the same DataView even when the source table changed
+		try
+		{
+			BeginCase("check that the DataRowView still has the same DataView");
+			dv.Table = null;
+
+			// Console.WriteLine("*********" + (drv1.DataView == null));
+			Compare(drv1.DataView == dv ,true);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		//check that the DataRowView has a new DataView
+		try
+		{
+			BeginCase("check that the DataRowView has a new DataView");
+			dv = new DataView();
+			Compare(drv1.DataView.Equals(dv) ,false);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+
+	}
 }
 }

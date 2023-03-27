@@ -12,7 +12,7 @@ namespace System.Xml.Schema {
     using System.Resources;
     using System.Runtime.Serialization;
     using System.Diagnostics;
-    using System.Security.Permissions;
+	using System.Security.Permissions;
 
     /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException"]/*' />
     [Serializable]
@@ -45,7 +45,7 @@ namespace System.Xml.Schema {
         /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException3"]/*' />
         public XmlSchemaValidationException(String message, Exception innerException, int lineNumber, int linePosition) : 
             base(message, innerException, lineNumber, linePosition) {
-        }
+	    }
             
         internal XmlSchemaValidationException(string res, string[] args) : base(res, args, null, null, 0, 0, null) {
         }

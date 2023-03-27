@@ -2,8 +2,8 @@
 // System.Web.Configuration.AssemblyCollection
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
-//    Chris Toshok (toshok@ximian.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2004,2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,59 +35,59 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    [ConfigurationCollection (typeof (AssemblyInfo), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class AssemblyCollection: ConfigurationElementCollection
-    {
-        static ConfigurationPropertyCollection properties;
+	[ConfigurationCollection (typeof (AssemblyInfo), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class AssemblyCollection: ConfigurationElementCollection
+	{
+		static ConfigurationPropertyCollection properties;
 
-        static AssemblyCollection ()
-        {
-            properties = new ConfigurationPropertyCollection();
-        }
+		static AssemblyCollection ()
+		{
+			properties = new ConfigurationPropertyCollection();
+		}
 
-        public void Add (AssemblyInfo assemblyInformation)
-        {
-            BaseAdd (assemblyInformation, false);
-        }
-        
-        public void Clear ()
-        {
-            BaseClear ();
-        }
-        
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new AssemblyInfo ();
-        }
-        
-        protected override object GetElementKey (ConfigurationElement element)
-        {
-            return ((AssemblyInfo)element).Assembly;
-        }
-        
-        public void Remove (string key)
-        {
-            BaseRemove (key);
-        }
-        
-        public void RemoveAt (int index)
-        {
-            BaseRemoveAt (index);
-        }
+		public void Add (AssemblyInfo assemblyInformation)
+		{
+			BaseAdd (assemblyInformation, false);
+		}
+		
+		public void Clear ()
+		{
+			BaseClear ();
+		}
+		
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new AssemblyInfo ();
+		}
+		
+		protected override object GetElementKey (ConfigurationElement element)
+		{
+			return ((AssemblyInfo)element).Assembly;
+		}
+		
+		public void Remove (string key)
+		{
+			BaseRemove (key);
+		}
+		
+		public void RemoveAt (int index)
+		{
+			BaseRemoveAt (index);
+		}
 
-        public AssemblyInfo this [int index] {
-            get { return (AssemblyInfo) BaseGet (index); }
-            set {  if (BaseGet(index) != null)  BaseRemoveAt(index);  BaseAdd(index, value); }
-        }
+		public AssemblyInfo this [int index] {
+			get { return (AssemblyInfo) BaseGet (index); }
+			set {  if (BaseGet(index) != null)  BaseRemoveAt(index);  BaseAdd(index, value); }
+		}
 
-        public new AssemblyInfo this [string assemblyName] {
-            get { return (AssemblyInfo) BaseGet (assemblyName); }
-        }
+		public new AssemblyInfo this [string assemblyName] {
+			get { return (AssemblyInfo) BaseGet (assemblyName); }
+		}
 
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+	}
 }
 

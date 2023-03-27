@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation and contributors. All rights reserved.
+﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -114,9 +114,9 @@ namespace System.CommandLine.Rendering.Views
                     var contentSize = new Size(sizes[column, row].Width - paddingWidth, sizes[column, row].Height);
                     child.Render(renderer, new Region(left, top, contentSize));
 
-                    if (paddingWidth > 0)
+                	if (paddingWidth > 0)
                     { 
-                        // Explicit render the space between the columns to improve rendering in plain text 
+                    	// Explicit render the space between the columns to improve rendering in plain text 
                         var paddingSize = new Size(paddingWidth, sizes[column, row].Height);
                         renderer.RenderToRegion(TextSpan.Empty(), new Region(left + contentSize.Width, top, paddingSize));
                     }

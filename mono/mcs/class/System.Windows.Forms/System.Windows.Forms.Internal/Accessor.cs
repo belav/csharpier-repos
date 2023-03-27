@@ -20,31 +20,31 @@
 // Copyright (c) 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 #if DEBUG_shana
 using System;
 
 namespace System.Windows.Forms.Internal
 {
-    public class Accessor
-    {
-        public static IntPtr Display {
-            get { return XplatUIX11.Display; }
-        }
-        
-        public static int Screen {
-            get { return XplatUIX11.Screen; }
-        }
+	public class Accessor
+	{
+		public static IntPtr Display {
+			get { return XplatUIX11.Display; }
+		}
+		
+		public static int Screen {
+			get { return XplatUIX11.Screen; }
+		}
 
-        public static IntPtr ClientWindow (Control c) {
-            return Hwnd.ObjectFromHandle(c.Handle).ClientWindow;
-        }
+		public static IntPtr ClientWindow (Control c) {
+			return Hwnd.ObjectFromHandle(c.Handle).ClientWindow;
+		}
 
-        public static IntPtr Colormap {
-            get { return XplatUIX11.DefaultColorMap; }
-        }
+		public static IntPtr Colormap {
+			get { return XplatUIX11.DefaultColorMap; }
+		}
 
-    }
+	}
 }
 #endif

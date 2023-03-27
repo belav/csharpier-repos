@@ -456,8 +456,8 @@ namespace Wasm.Build.Tests
             string icallTable =
             """
             [
-             { "klass":"Interop", "icalls": [{}     ,{ "name": "Square(Numbers)", "func": "ves_abc", "handles": false }
-                ,{ "name": "Add(Numbers,Numbers)", "func": "ves_def", "handles": false }
+             { "klass":"Interop", "icalls": [{} 	,{ "name": "Square(Numbers)", "func": "ves_abc", "handles": false }
+            	,{ "name": "Add(Numbers,Numbers)", "func": "ves_def", "handles": false }
             ]}
             ]
 

@@ -1,4 +1,4 @@
-//
+﻿//
 // DataServiceHostFactory.cs
 //
 // Author:
@@ -30,10 +30,10 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 
 namespace System.Data.Services {
-    public class DataServiceHostFactory : ServiceHostFactory {
-        protected override ServiceHost CreateServiceHost (Type serviceType, Uri[] baseAddresses)
-        {
-            return new DataServiceHost (serviceType, baseAddresses);
-        }
-    }
+	public class DataServiceHostFactory : ServiceHostFactory {
+		protected override ServiceHost CreateServiceHost (Type serviceType, Uri[] baseAddresses)
+		{
+			return new DataServiceHost (serviceType, baseAddresses);
+		}
+	}
 }

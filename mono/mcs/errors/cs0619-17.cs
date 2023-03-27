@@ -4,5 +4,5 @@
 
 public class B: ObsoleteA
 {
-    public B (): base () {}
+	public B (): base () {}
 }

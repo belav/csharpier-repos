@@ -33,9 +33,9 @@ using System.Collections;
 
 namespace System.Web.UI.WebControls.WebParts
 {
-    public interface IPersonalizable
-    {
-        bool IsDirty { get; }
-    }
+	public interface IPersonalizable
+	{
+		bool IsDirty { get; }
+	}
 }
 

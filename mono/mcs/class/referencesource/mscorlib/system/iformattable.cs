@@ -25,7 +25,7 @@ namespace System {
        String IFormattable.ToString(String format, IFormatProvider formatProvider)
        {
            Contract.Ensures(Contract.Result<String>() != null);
-            throw new NotImplementedException();
+ 	       throw new NotImplementedException();
        }
     }
 #endif // CONTRACTS_FULL

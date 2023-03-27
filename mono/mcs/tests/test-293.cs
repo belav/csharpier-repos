@@ -4,17 +4,17 @@
 using System;
 
 public class A {
-    [Obsolete()]
-    public virtual string Warning {
-        get { return ""; }
-    }
+	[Obsolete()]
+	public virtual string Warning {
+		get { return ""; }
+	}
 }
 
 public class B : A {
-    [Obsolete()]
-    public override string Warning {
-        get { return ""; }
-    }
+	[Obsolete()]
+	public override string Warning {
+		get { return ""; }
+	}
         
         public static void Main ()
         {

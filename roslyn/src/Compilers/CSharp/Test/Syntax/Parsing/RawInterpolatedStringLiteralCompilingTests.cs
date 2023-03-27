@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,7 +13,7 @@ public class RawInterpolatedStringLiteralCompilingTests : CompilingTestBase
 {
     private static string Render(string markup, string? normalizedNewLine)
     {
-        markup = markup.Replace('?', ' ').Replace('?', '\t');
+        markup = markup.Replace('␠', ' ').Replace('␉', '\t');
 
         // If we're normalizing newlines, convert everything to \n, then convert that to the newline form asked for.
         if (normalizedNewLine != null)
@@ -866,7 +866,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""?
+    $""""""␠
     "");",
                 // (4,7): error CS8997: Unterminated raw string literal
                 //     ");
@@ -884,7 +884,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""?
+    $""""""␠
     """");",
                 // (4,8): error CS8997: Unterminated raw string literal
                 //     "");
@@ -902,7 +902,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""?
+    $""""""␠
     """""");",
                 // (4,5): error CS9002: Multi-line raw string literals must contain at least one line of content
                 //     """);
@@ -914,7 +914,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""?
+    $""""""␠
 
     """""");", expectedOutput: "");
     }
@@ -924,7 +924,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     "");",
                 // (4,7): error CS8997: Unterminated raw string literal
                 //     ");
@@ -942,7 +942,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     """");",
                 // (4,8): error CS8997: Unterminated raw string literal
                 //     "");
@@ -960,7 +960,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     """""");",
                 // (4,5): error CS9002: Multi-line raw string literals must contain at least one line of content
                 //     """);
@@ -972,7 +972,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
 
     """""");", expectedOutput: "");
     }
@@ -983,7 +983,7 @@ System.Console.Write(
         RenderAndVerify(@"
 System.Console.Write(
     $""""""
-    ?"");",
+    ␠"");",
                 // (4,8): error CS8997: Unterminated raw string literal
                 //      ");
                 Diagnostic(ErrorCode.ERR_UnterminatedRawString, ";").WithLocation(4, 8),
@@ -1001,7 +1001,7 @@ System.Console.Write(
         RenderAndVerify(@"
 System.Console.Write(
     $""""""
-    ?"""");",
+    ␠"""");",
                 // (4,9): error CS8997: Unterminated raw string literal
                 //      "");
                 Diagnostic(ErrorCode.ERR_UnterminatedRawString, ";").WithLocation(4, 9),
@@ -1018,8 +1018,8 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""?
-    ?"""");",
+    $""""""␠
+    ␠"""");",
                 // (4,9): error CS8997: Unterminated raw string literal
                 //      "");
                 Diagnostic(ErrorCode.ERR_UnterminatedRawString, ";").WithLocation(4, 9),
@@ -1036,8 +1036,8 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
-    ??"""");",
+    $""""""␠␠
+    ␠␠"""");",
                 // (4,10): error CS8997: Unterminated raw string literal
                 //       "");
                 Diagnostic(ErrorCode.ERR_UnterminatedRawString, ";").WithLocation(4, 10),
@@ -1054,8 +1054,8 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
-    ??"""""");",
+    $""""""␠␠
+    ␠␠"""""");",
                 // (4,7): error CS9002: Multi-line raw string literals must contain at least one line of content
                 //       """);
                 Diagnostic(ErrorCode.ERR_RawStringMustContainContent, @"""""""").WithLocation(4, 7));
@@ -1066,9 +1066,9 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
 
-    ??"""""");", expectedOutput: "");
+    ␠␠"""""");", expectedOutput: "");
     }
 
     [Fact]
@@ -1076,7 +1076,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     a""
     """""");", expectedOutput: "a\"");
     }
@@ -1086,7 +1086,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     a""""
     """""");", expectedOutput: "a\"\"");
     }
@@ -1096,7 +1096,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     ""a
     """""");", expectedOutput: "\"a");
     }
@@ -1106,7 +1106,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     """"a
     """""");", expectedOutput: "\"\"a");
     }
@@ -1116,7 +1116,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     a"""""");",
                 // (4,6): error CS9000: Raw string literal delimiter must be on its own line
                 //     a""");
@@ -1128,7 +1128,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     a"""""""");",
                 // (4,6): error CS9000: Raw string literal delimiter must be on its own line
                 //     a"""");
@@ -1140,7 +1140,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     a
     """""");", expectedOutput: "a");
     }
@@ -1150,8 +1150,8 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
-    ?a
+    $""""""␠␠
+    ␠a
     """""");", expectedOutput: " a");
     }
 
@@ -1160,8 +1160,8 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
-    a?
+    $""""""␠␠
+    a␠
     """""");", expectedOutput: "a ");
     }
 
@@ -1170,8 +1170,8 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
-    ?a?
+    $""""""␠␠
+    ␠a␠
     """""");", expectedOutput: " a ");
     }
 
@@ -1180,7 +1180,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     a
     """""""");",
                 // (5,8): error CS8998: Too many closing quotes for raw string literal
@@ -1193,7 +1193,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     a
     """""""""");",
                 // (5,8): error CS8998: Too many closing quotes for raw string literal
@@ -1206,7 +1206,7 @@ System.Console.Write(
     {
         RenderAndVerify(@"
 System.Console.Write(
-    $""""""??
+    $""""""␠␠
     a
     """""""""""");",
             // (5,4): error CS8998: Too many closing quotes for raw string literal
@@ -1507,7 +1507,7 @@ a43");
 System.Console.Write(
     $""""""
     {42}a
-?
+␠
     a{43}
     """""");", expectedOutput: @"42a
 
@@ -1521,10 +1521,10 @@ a43");
 System.Console.Write(
     $""""""
     {42}a
-?????
+␠␠␠␠␠
     a{43}
     """""");", expectedOutput: @"42a
-?
+␠
 a43");
     }
 
@@ -1554,7 +1554,7 @@ System.Console.Write(
     $""""""
     {42}a
     b
-?
+␠
     b
     a{43}
     """""");", expectedOutput: @"42a
@@ -1572,12 +1572,12 @@ System.Console.Write(
     $""""""
     {42}a
     b
-?????
+␠␠␠␠␠
     b
     a{43}
     """""");", expectedOutput: @"42a
 b
-?
+␠
 b
 a43");
     }
@@ -1615,7 +1615,7 @@ c");
 System.Console.Write(
     $""""""
     a
-?
+␠
     a
     {42}
     b
@@ -1641,7 +1641,7 @@ c");
 System.Console.Write(
     $""""""
     a
-?????
+␠␠␠␠␠
     a
     {42}
     b
@@ -1650,7 +1650,7 @@ System.Console.Write(
     c
     c
     """""");", expectedOutput: @"a
-?
+␠
 a
 42
 b
@@ -1667,7 +1667,7 @@ c");
 System.Console.Write(
     $""""""
     a
-?a
+␠a
     a
     {42}
     b
@@ -1694,7 +1694,7 @@ System.Console.Write(
     b
     a{43}
     c
-?
+␠
     c
     """""");", expectedOutput: @"a
 a
@@ -1720,7 +1720,7 @@ System.Console.Write(
     b
     a{43}
     c
-?????
+␠␠␠␠␠
     c
     """""");", expectedOutput: @"a
 a
@@ -1729,7 +1729,7 @@ b
 b
 a43
 c
-?
+␠
 c");
     }
 
@@ -1746,7 +1746,7 @@ System.Console.Write(
     b
     a{43}
     c
-?c
+␠c
     c
     """""");",
                 // (11,1): error CS8999: Line does not start with the same whitespace as the closing line of the raw string literal
@@ -1770,7 +1770,7 @@ System.Console.Write(
         RenderAndVerify(@"
 System.Console.Write(
     $""""""
-?
+␠
     """""");", expectedOutput: "");
     }
 
@@ -1780,7 +1780,7 @@ System.Console.Write(
         RenderAndVerify(@"
 System.Console.Write(
     $""""""
-??
+␠␠
     """""");", expectedOutput: "");
     }
 
@@ -1790,7 +1790,7 @@ System.Console.Write(
         RenderAndVerify(@"
 System.Console.Write(
     $""""""
-????
+␠␠␠␠
     """""");", expectedOutput: "");
     }
 
@@ -1800,8 +1800,8 @@ System.Console.Write(
         RenderAndVerify(@"
 System.Console.Write(
     $""""""
-?????
-    """""");", expectedOutput: "?");
+␠␠␠␠␠
+    """""");", expectedOutput: "␠");
     }
 
     [Fact]
@@ -1823,7 +1823,7 @@ System.Console.Write(
 System.Console.Write(
     $""""""
     a
-?
+␠
     """""");", expectedOutput: @"a
 ");
     }
@@ -1835,7 +1835,7 @@ System.Console.Write(
 System.Console.Write(
     $""""""
     a
-??
+␠␠
     """""");", expectedOutput: @"a
 ");
     }
@@ -1847,7 +1847,7 @@ System.Console.Write(
 System.Console.Write(
     $""""""
     a
-????
+␠␠␠␠
     """""");", expectedOutput: @"a
 ");
     }
@@ -1859,9 +1859,9 @@ System.Console.Write(
 System.Console.Write(
     $""""""
     a
-?????
+␠␠␠␠␠
     """""");", expectedOutput: @"a
-?");
+␠");
     }
 
     [Fact]
@@ -2168,7 +2168,7 @@ int M(out int val)
         RenderAndVerify(
 "class C\r\n{\r\nconst string s = $\"\"\"\r\n\t\r\n \"\"\";\r\n}",
                 // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\t' versus '\u0020'
-                Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, "    ").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
+                Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, "	").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
     }
 
     [Fact]
@@ -2186,7 +2186,7 @@ int M(out int val)
         RenderAndVerify(
 "class C\r\n{\r\nconst string s = $\"\"\"\r\n \t\r\n  \"\"\";\r\n}",
                 // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\t' versus '\u0020'
-                Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, "     ").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
+                Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, " 	").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
     }
 
     [Fact]
@@ -2195,7 +2195,7 @@ int M(out int val)
         RenderAndVerify(
 "class C\r\n{\r\nconst string s = $\"\"\"\r\n \t\r\n   \"\"\";\r\n}",
                     // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\t' versus '\u0020'
-                    Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, "     ").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
+                    Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, " 	").WithArguments(@"\t", @"\u0020").WithLocation(4, 1));
     }
 
     [Fact, WorkItem(59603, "https://github.com/dotnet/roslyn/issues/59603")]

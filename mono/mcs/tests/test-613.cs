@@ -3,23 +3,23 @@
 // See bug: 359789
 //
 public class M {
-    static bool called;
-    
-    public static bool g() {
-        called = true;
-        return false;
-    }
+	static bool called;
+	
+	public static bool g() {
+		called = true;
+		return false;
+	}
 
-    public static int Main() {
-        called = false;
-        System.Console.WriteLine (false & g());
-        if (!called)
-            return 1;
+	public static int Main() {
+		called = false;
+		System.Console.WriteLine (false & g());
+		if (!called)
+			return 1;
 
-        called = false;
-        System.Console.WriteLine (true | g());
-        if (!called)
-            return 1;
-        return 0;
-    }
+		called = false;
+		System.Console.WriteLine (true | g());
+		if (!called)
+			return 1;
+		return 0;
+	}
 }

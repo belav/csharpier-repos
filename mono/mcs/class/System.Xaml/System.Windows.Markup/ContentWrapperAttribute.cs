@@ -24,34 +24,34 @@ using System;
 
 namespace System.Windows.Markup
 {
-    [AttributeUsage (AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-    public sealed class ContentWrapperAttribute : Attribute
-    {
-        public ContentWrapperAttribute (Type contentWrapper)
-        {
-            ContentWrapper = contentWrapper;
-        }
-        
-        public Type ContentWrapper { get; private set; }
+	[AttributeUsage (AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
+	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+	public sealed class ContentWrapperAttribute : Attribute
+	{
+		public ContentWrapperAttribute (Type contentWrapper)
+		{
+			ContentWrapper = contentWrapper;
+		}
+		
+		public Type ContentWrapper { get; private set; }
 
 #if !__MOBILE__
-        public override Object TypeId {
-            get { return this; }
-        }
+		public override Object TypeId {
+			get { return this; }
+		}
 #endif
 
-        public override bool Equals (object obj)
-        {
-            var cwa = obj as ContentWrapperAttribute;
-            if (cwa == null)
-                return false;
-            return ContentWrapper != null ? ContentWrapper == cwa.ContentWrapper : cwa.ContentWrapper == null;
-        }
+		public override bool Equals (object obj)
+		{
+			var cwa = obj as ContentWrapperAttribute;
+			if (cwa == null)
+				return false;
+			return ContentWrapper != null ? ContentWrapper == cwa.ContentWrapper : cwa.ContentWrapper == null;
+		}
 
-        public override int GetHashCode ()
-        {
-            return ContentWrapper != null ? ContentWrapper.GetHashCode () : 0;
-        }
-    }
+		public override int GetHashCode ()
+		{
+			return ContentWrapper != null ? ContentWrapper.GetHashCode () : 0;
+		}
+	}
 }

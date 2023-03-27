@@ -2,7 +2,7 @@
 // System.Web.Configuration.TrustLevelCollection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,87 +34,87 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    [ConfigurationCollection (typeof (TrustLevel), AddItemName = "trustLevel")]
-    public sealed class TrustLevelCollection : ConfigurationElementCollection
-    {
-        static ConfigurationPropertyCollection properties;
+	[ConfigurationCollection (typeof (TrustLevel), AddItemName = "trustLevel")]
+	public sealed class TrustLevelCollection : ConfigurationElementCollection
+	{
+		static ConfigurationPropertyCollection properties;
 
-        static TrustLevelCollection ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static TrustLevelCollection ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public void Add (TrustLevel trustLevel)
-        {
-            BaseAdd (trustLevel);
-        }
+		public void Add (TrustLevel trustLevel)
+		{
+			BaseAdd (trustLevel);
+		}
 
-        public void Clear ()
-        {
-            BaseClear ();
-        }
+		public void Clear ()
+		{
+			BaseClear ();
+		}
 
-        public TrustLevel Get (int index)
-        {
-            return (TrustLevel) BaseGet (index);
-        }
+		public TrustLevel Get (int index)
+		{
+			return (TrustLevel) BaseGet (index);
+		}
 
-        public void Remove (TrustLevel trustLevel)
-        {
-            BaseRemove (trustLevel.Name);
-        }
+		public void Remove (TrustLevel trustLevel)
+		{
+			BaseRemove (trustLevel.Name);
+		}
 
-        public void RemoveAt (int index)
-        {
-            BaseRemoveAt (index);
-        }
+		public void RemoveAt (int index)
+		{
+			BaseRemoveAt (index);
+		}
 
-        public void Set (int index, TrustLevel trustLevel)
-        {
-            if (BaseGet (index) != null)
-                BaseRemoveAt (index);
-            BaseAdd (index, trustLevel);
-        }
+		public void Set (int index, TrustLevel trustLevel)
+		{
+			if (BaseGet (index) != null)
+				BaseRemoveAt (index);
+			BaseAdd (index, trustLevel);
+		}
 
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new TrustLevel ();
-        }
+		protected override ConfigurationElement CreateNewElement ()
+		{
+			return new TrustLevel ();
+		}
 
-        protected override object GetElementKey (ConfigurationElement element)
-        {
-            return ((TrustLevel)element).Name;
-        }
+		protected override object GetElementKey (ConfigurationElement element)
+		{
+			return ((TrustLevel)element).Name;
+		}
 
-        protected override bool IsElementName (string elementname)
-        {
-            return elementname == "trustlevel";
-        }
+		protected override bool IsElementName (string elementname)
+		{
+			return elementname == "trustlevel";
+		}
 
-        public override ConfigurationElementCollectionType CollectionType {
-            get { return ConfigurationElementCollectionType.BasicMap; }
-        }
+		public override ConfigurationElementCollectionType CollectionType {
+			get { return ConfigurationElementCollectionType.BasicMap; }
+		}
 
-        protected override string ElementName {
-            get { return "trustLevel"; }
-        }
+		protected override string ElementName {
+			get { return "trustLevel"; }
+		}
 
-        public new TrustLevel this [string key] {
-            get { return (TrustLevel) BaseGet (key); }
-        }
+		public new TrustLevel this [string key] {
+			get { return (TrustLevel) BaseGet (key); }
+		}
 
-        public TrustLevel this [int index] {
-            get { return (TrustLevel) BaseGet (index); }
-            set { Set (index, value); }
-        }
+		public TrustLevel this [int index] {
+			get { return (TrustLevel) BaseGet (index); }
+			set { Set (index, value); }
+		}
 
-        protected override bool ThrowOnDuplicate {
-            get { return false; }
-        }
+		protected override bool ThrowOnDuplicate {
+			get { return false; }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+	}
 }
 

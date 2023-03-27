@@ -36,21 +36,21 @@ namespace System.ComponentModel {
             return base.CanConvertFrom(context, sourceType);
         }
 
-        /// <devdoc>
-        ///      Converts the given object to another type.
-        /// </devdoc>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {
-            if (destinationType == typeof(string) && value is char)
-            {
-                if ((char)value == (char)0)
-                {
-                    return "";
-                }
-            }
+		/// <devdoc>
+		///      Converts the given object to another type.
+		/// </devdoc>
+		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
+		{
+			if (destinationType == typeof(string) && value is char)
+			{
+				if ((char)value == (char)0)
+				{
+					return "";
+				}
+			}
             
-            return base.ConvertTo(context, culture, value, destinationType);
-        }
+			return base.ConvertTo(context, culture, value, destinationType);
+		}
 
         /// <devdoc>
         ///    <para>Converts the given object to a Unicode character object.</para>

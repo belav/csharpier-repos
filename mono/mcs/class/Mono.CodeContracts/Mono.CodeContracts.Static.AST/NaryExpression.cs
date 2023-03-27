@@ -2,7 +2,7 @@
 // NaryExpression.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,17 +29,17 @@
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.AST {
-    abstract class NaryExpression : Expression {
-        public NaryExpression () : base (NodeType.Nop)
-        {
-        }
+	abstract class NaryExpression : Expression {
+		public NaryExpression () : base (NodeType.Nop)
+		{
+		}
 
-        public NaryExpression (List<Expression> arguments, NodeType nodeType)
-            : base (nodeType)
-        {
-            Arguments = arguments;
-        }
+		public NaryExpression (List<Expression> arguments, NodeType nodeType)
+			: base (nodeType)
+		{
+			Arguments = arguments;
+		}
 
-        public List<Expression> Arguments { get; set; }
-    }
+		public List<Expression> Arguments { get; set; }
+	}
 }

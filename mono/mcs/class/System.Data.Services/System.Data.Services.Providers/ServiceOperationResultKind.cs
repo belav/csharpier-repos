@@ -1,4 +1,4 @@
-// 
+﻿// 
 // ServiceOperationResultKind.cs
 //  
 // Author:
@@ -29,12 +29,12 @@ using System.Data.Services.Providers;
 
 namespace System.Data.Services.Providers
 {
-    public enum ServiceOperationResultKind
-    {
-        DirectValue = 0,
-        Enumeration = 1,
-        QueryWithMultipleResults = 2,
-        QueryWithSingleResult = 3,
-        Void = 4
-    }
+	public enum ServiceOperationResultKind
+	{
+		DirectValue = 0,
+		Enumeration = 1,
+		QueryWithMultipleResults = 2,
+		QueryWithSingleResult = 3,
+		Void = 4
+	}
 }

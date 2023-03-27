@@ -29,62 +29,62 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeBlock: CodeItem
-    {
-        ArrayList statements = new ArrayList ();
-        
-        public void Add (CodeItem code)
-        {
-            statements.Add (code);
-        }
-        
-        public bool IsEmpty
-        {
-            get { return statements.Count == 0; }
-        }
-        
-        public static CodeBlock operator+(CodeBlock cb, CodeExpression e)
-        {
-            cb.Add (e);
-            return cb;
-        }
-        
-        public CodeItem GetLastItem ()
-        {
-            return (CodeItem) statements [statements.Count - 1];
-        }
-        
-        public override void Generate (ILGenerator gen)
-        {
-            foreach (CodeItem item in statements) {
-                if (item is CodeExpression)
-                    ((CodeExpression)item).GenerateAsStatement (gen);
-                else
-                    item.Generate (gen);
-            }
-        }
-        
-        public override void PrintCode (CodeWriter cp)
-        {
-            foreach (CodeItem item in statements) {
-                cp.BeginLine ();
-                item.PrintCode (cp);
-                cp.Write (";");
-                cp.EndLine ();
-            }
-        }
-    }
-    
-    internal class CodePop: CodeStatement
-    {
-        public override void Generate (ILGenerator gen)
-        {
-            gen.Emit (OpCodes.Pop);
-        }
-        
-        public override void PrintCode (CodeWriter cp)
-        {
-        }
-    }
+	public class CodeBlock: CodeItem
+	{
+		ArrayList statements = new ArrayList ();
+		
+		public void Add (CodeItem code)
+		{
+			statements.Add (code);
+		}
+		
+		public bool IsEmpty
+		{
+			get { return statements.Count == 0; }
+		}
+		
+		public static CodeBlock operator+(CodeBlock cb, CodeExpression e)
+		{
+			cb.Add (e);
+			return cb;
+		}
+		
+		public CodeItem GetLastItem ()
+		{
+			return (CodeItem) statements [statements.Count - 1];
+		}
+		
+		public override void Generate (ILGenerator gen)
+		{
+			foreach (CodeItem item in statements) {
+				if (item is CodeExpression)
+					((CodeExpression)item).GenerateAsStatement (gen);
+				else
+					item.Generate (gen);
+			}
+		}
+		
+		public override void PrintCode (CodeWriter cp)
+		{
+			foreach (CodeItem item in statements) {
+				cp.BeginLine ();
+				item.PrintCode (cp);
+				cp.Write (";");
+				cp.EndLine ();
+			}
+		}
+	}
+	
+	internal class CodePop: CodeStatement
+	{
+		public override void Generate (ILGenerator gen)
+		{
+			gen.Emit (OpCodes.Pop);
+		}
+		
+		public override void PrintCode (CodeWriter cp)
+		{
+		}
+	}
 }
 #endif

@@ -2,7 +2,7 @@
 // Line: 5
 
 class X {
-    public static X ()
-    {
-    }
+	public static X ()
+	{
+	}
 }

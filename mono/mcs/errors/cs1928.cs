@@ -3,12 +3,12 @@
 
 static class C
 {
-    public static void Check (this string s, int i)
-    {
-    }
+	public static void Check (this string s, int i)
+	{
+	}
 
-    static void Main ()
-    {
-        "alo".Check ("o");
-    }
+	static void Main ()
+	{
+		"alo".Check ("o");
+	}
 }

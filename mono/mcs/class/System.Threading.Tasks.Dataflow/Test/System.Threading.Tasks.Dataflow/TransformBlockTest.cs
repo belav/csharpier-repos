@@ -34,83 +34,83 @@ using System.Threading.Tasks.Dataflow;
 using NUnit.Framework;
 
 namespace MonoTests.System.Threading.Tasks.Dataflow {
-    [TestFixture]
-    public class TransformBlockTest {
-        [Test]
-        public void BasicUsageTest ()
-        {
-            int[] array = new int[10];
-            var evt = new CountdownEvent (10);
-            var action = new ActionBlock<int> (i =>
-            {
-                array [Math.Abs (i)] = i;
-                evt.Signal ();
-            });
-            var block = new TransformBlock<int, int> (i => -i);
-            block.LinkTo (action);
+	[TestFixture]
+	public class TransformBlockTest {
+		[Test]
+		public void BasicUsageTest ()
+		{
+			int[] array = new int[10];
+			var evt = new CountdownEvent (10);
+			var action = new ActionBlock<int> (i =>
+			{
+				array [Math.Abs (i)] = i;
+				evt.Signal ();
+			});
+			var block = new TransformBlock<int, int> (i => -i);
+			block.LinkTo (action);
 
-            for (int i = 0; i < array.Length; ++i)
-                Assert.IsTrue (block.Post (i), "Not accepted");
+			for (int i = 0; i < array.Length; ++i)
+				Assert.IsTrue (block.Post (i), "Not accepted");
 
-            evt.Wait ();
+			evt.Wait ();
 
-            CollectionAssert.AreEqual (
-                new[] { 0, -1, -2, -3, -4, -5, -6, -7, -8, -9 }, array);
-        }
+			CollectionAssert.AreEqual (
+				new[] { 0, -1, -2, -3, -4, -5, -6, -7, -8, -9 }, array);
+		}
 
-        [Test]
-        public void DeferredUsageTest ()
-        {
-            int[] array = new int[10];
-            var action = new ActionBlock<int> (i => array[Math.Abs (i)] = i);
-            var block = new TransformBlock<int, int> (i => -i);
+		[Test]
+		public void DeferredUsageTest ()
+		{
+			int[] array = new int[10];
+			var action = new ActionBlock<int> (i => array[Math.Abs (i)] = i);
+			var block = new TransformBlock<int, int> (i => -i);
 
-            for (int i = 0; i < array.Length; ++i)
-                Assert.IsTrue (block.Post (i), "Not accepted");
+			for (int i = 0; i < array.Length; ++i)
+				Assert.IsTrue (block.Post (i), "Not accepted");
 
-            Thread.Sleep (600);
-            block.LinkTo (action);
-            Thread.Sleep (300);
+			Thread.Sleep (600);
+			block.LinkTo (action);
+			Thread.Sleep (300);
 
-            CollectionAssert.AreEqual (new[] { 0, -1, -2, -3, -4, -5, -6, -7, -8, -9 }, array);
-        }
+			CollectionAssert.AreEqual (new[] { 0, -1, -2, -3, -4, -5, -6, -7, -8, -9 }, array);
+		}
 
-        [Test]
-        public void AsyncNullTest ()
-        {
-            var scheduler = new TestScheduler ();
-            var block = new TransformBlock<int, int> (
-                i => null,
-                new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
+		[Test]
+		public void AsyncNullTest ()
+		{
+			var scheduler = new TestScheduler ();
+			var block = new TransformBlock<int, int> (
+				i => null,
+				new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
 
-            Assert.IsTrue (block.Post (1));
+			Assert.IsTrue (block.Post (1));
 
-            scheduler.ExecuteAll ();
+			scheduler.ExecuteAll ();
 
-            Assert.IsFalse (block.Completion.Wait (100));
+			Assert.IsFalse (block.Completion.Wait (100));
 
-            block.Complete ();
+			block.Complete ();
 
-            Assert.IsTrue (block.Completion.Wait (1000));
-        }
+			Assert.IsTrue (block.Completion.Wait (1000));
+		}
 
-        [Test]
-        public void AsyncCancelledTest ()
-        {
-            var scheduler = new TestScheduler ();
-            var block = new TransformBlock<int, int> (
-                i =>
-                {
-                    var tcs = new TaskCompletionSource<int> ();
-                    tcs.SetCanceled ();
-                    return tcs.Task;
-                }, new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
+		[Test]
+		public void AsyncCancelledTest ()
+		{
+			var scheduler = new TestScheduler ();
+			var block = new TransformBlock<int, int> (
+				i =>
+				{
+					var tcs = new TaskCompletionSource<int> ();
+					tcs.SetCanceled ();
+					return tcs.Task;
+				}, new ExecutionDataflowBlockOptions { TaskScheduler = scheduler });
 
-            Assert.IsTrue (block.Post (1));
+			Assert.IsTrue (block.Post (1));
 
-            scheduler.ExecuteAll ();
+			scheduler.ExecuteAll ();
 
-            Assert.IsFalse (block.Completion.Wait (100));
-        }
-    }
+			Assert.IsFalse (block.Completion.Wait (100));
+		}
+	}
 }

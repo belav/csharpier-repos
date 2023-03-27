@@ -38,95 +38,95 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class Bug36080
-    {
-        [Test]
-        public void Bug36080Test ()
-        {
-            int port = NetworkHelpers.FindFreePort ();
-            var url = "http://localhost:" + port + "/HelloWorldService";
+	[TestFixture]
+	public class Bug36080
+	{
+		[Test]
+		public void Bug36080Test ()
+		{
+			int port = NetworkHelpers.FindFreePort ();
+			var url = "http://localhost:" + port + "/HelloWorldService";
 
-            TransportBindingElement element = new HttpTransportBindingElement { MaxBufferSize = int.MaxValue, MaxReceivedMessageSize = int.MaxValue };
-            Binding binding = new CustomBinding(new BindingElement[]
-                {
-                    new TextMessageEncodingBindingElement (MessageVersion.Default, Encoding.UTF8),
-                    element
-                });
+			TransportBindingElement element = new HttpTransportBindingElement { MaxBufferSize = int.MaxValue, MaxReceivedMessageSize = int.MaxValue };
+			Binding binding = new CustomBinding(new BindingElement[]
+				{
+					new TextMessageEncodingBindingElement (MessageVersion.Default, Encoding.UTF8),
+					element
+				});
 
 #if !MOBILE && !XAMMAC_4_5
-            // Init service
-            ServiceHost serviceHost = new ServiceHost (typeof (HelloWorldServiceImpl), new Uri (url));
-            serviceHost.AddServiceEndpoint (typeof (IHelloWorldService), binding, string.Empty);
+			// Init service
+			ServiceHost serviceHost = new ServiceHost (typeof (HelloWorldServiceImpl), new Uri (url));
+			serviceHost.AddServiceEndpoint (typeof (IHelloWorldService), binding, string.Empty);
 
-            serviceHost.Open ();
+			serviceHost.Open ();
 #endif
-            // In Mobile we still run this tests without any server.
-            // Issue reported in #36080 was occuring before the connections fails.
-            var wait = new ManualResetEvent (false);
+			// In Mobile we still run this tests without any server.
+			// Issue reported in #36080 was occuring before the connections fails.
+			var wait = new ManualResetEvent (false);
 
-            Exception error = null;
-            string result = null;
+			Exception error = null;
+			string result = null;
 
-            try {
-                var client = new HelloWorldServiceClient (binding, new EndpointAddress(url));
-                client.SayHelloToCompleted += delegate (object o, SayHelloToCompletedEventArgs e) {
-                    try {
-                        error = e.Error;
-                        result = e.Error == null ? e.Result : null;
-                    } finally {
-                        wait.Set ();
-                    }
-                };
+			try {
+				var client = new HelloWorldServiceClient (binding, new EndpointAddress(url));
+				client.SayHelloToCompleted += delegate (object o, SayHelloToCompletedEventArgs e) {
+					try {
+						error = e.Error;
+						result = e.Error == null ? e.Result : null;
+					} finally {
+						wait.Set ();
+					}
+				};
 
-                var str = "Xamarin";
-                client.SayHelloToAsync(str);
+				var str = "Xamarin";
+				client.SayHelloToAsync(str);
 
-                Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "timeout");
+				Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "timeout");
 #if MOBILE || XAMMAC_4_5
-                if (error.GetType() == typeof(EndpointNotFoundException))
-                    return;
+				if (error.GetType() == typeof(EndpointNotFoundException))
+					return;
 #endif
 
-                Assert.IsNull (error, "#1, inner exception: {0}", error);
-                Assert.AreEqual (str, result, "#2");
-            }  finally {
+				Assert.IsNull (error, "#1, inner exception: {0}", error);
+				Assert.AreEqual (str, result, "#2");
+			}  finally {
 #if !MOBILE && !XAMMAC_4_5
-                serviceHost.Close ();
+				serviceHost.Close ();
 #endif
-            }
-        }
-    }
+			}
+		}
+	}
 
-    public class  HelloWorldServiceImpl : IHelloWorldService
-    {
-        Func<string, string> sayHelloToFunc = SayHelloTo;
+	public class  HelloWorldServiceImpl : IHelloWorldService
+	{
+		Func<string, string> sayHelloToFunc = SayHelloTo;
 
-        static string SayHelloTo (string name)
-        {
-            return name;
-        }
+		static string SayHelloTo (string name)
+		{
+			return name;
+		}
 
-        public IAsyncResult BeginSayHelloTo(string name, AsyncCallback callback, object asyncState)
-        {
-            return sayHelloToFunc.BeginInvoke (name, callback, asyncState);
-        }
-        
-        public string EndSayHelloTo(IAsyncResult result) 
-        {
-            return sayHelloToFunc.EndInvoke(result);
-        }
-        
-        public IAsyncResult BeginGetHelloData(TestXamarin4WCFService.HelloWorldData helloWorldData, AsyncCallback callback, object asyncState)
-        {
-            return null;
-        }
+		public IAsyncResult BeginSayHelloTo(string name, AsyncCallback callback, object asyncState)
+		{
+			return sayHelloToFunc.BeginInvoke (name, callback, asyncState);
+		}
+		
+		public string EndSayHelloTo(IAsyncResult result) 
+		{
+			return sayHelloToFunc.EndInvoke(result);
+		}
+		
+		public IAsyncResult BeginGetHelloData(TestXamarin4WCFService.HelloWorldData helloWorldData, AsyncCallback callback, object asyncState)
+		{
+			return null;
+		}
 
-        public TestXamarin4WCFService.HelloWorldData EndGetHelloData(IAsyncResult result)
-        {
-            return null;
-        }
-    }
+		public TestXamarin4WCFService.HelloWorldData EndGetHelloData(IAsyncResult result)
+		{
+			return null;
+		}
+	}
 }
 
 //------------------------------------------------------------------------------

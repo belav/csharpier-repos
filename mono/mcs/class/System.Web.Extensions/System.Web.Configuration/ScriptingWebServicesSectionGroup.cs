@@ -1,4 +1,4 @@
-//
+﻿//
 // ScriptingWebServicesSectionGroup.cs
 //
 // Author:
@@ -34,22 +34,22 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    public sealed class ScriptingWebServicesSectionGroup : ConfigurationSectionGroup
-    {
-        [ConfigurationProperty ("authenticationService")]
-        public ScriptingAuthenticationServiceSection AuthenticationService {
-            get { return (ScriptingAuthenticationServiceSection) Sections ["authenticationService"]; }
-        }
+	public sealed class ScriptingWebServicesSectionGroup : ConfigurationSectionGroup
+	{
+		[ConfigurationProperty ("authenticationService")]
+		public ScriptingAuthenticationServiceSection AuthenticationService {
+			get { return (ScriptingAuthenticationServiceSection) Sections ["authenticationService"]; }
+		}
 
-        [ConfigurationProperty ("jsonSerialization")]
-        public ScriptingJsonSerializationSection JsonSerialization {
-            get { return (ScriptingJsonSerializationSection) Sections ["jsonSerialization"]; }
-        }
+		[ConfigurationProperty ("jsonSerialization")]
+		public ScriptingJsonSerializationSection JsonSerialization {
+			get { return (ScriptingJsonSerializationSection) Sections ["jsonSerialization"]; }
+		}
 
-        [ConfigurationProperty ("profileService")]
-        public ScriptingProfileServiceSection ProfileService {
-            get { return (ScriptingProfileServiceSection) Sections ["profileService"]; }
-        }
+		[ConfigurationProperty ("profileService")]
+		public ScriptingProfileServiceSection ProfileService {
+			get { return (ScriptingProfileServiceSection) Sections ["profileService"]; }
+		}
 
-    }
+	}
 }

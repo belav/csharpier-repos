@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -688,24 +688,24 @@ End Module
         public async Task FixFullWidthSingleQuotes()
         {
             var code = @"[|
-�fullwidth 1 
-�fullwidth 2
-��fullwidth 3
-�'fullwidth 4
-'�fullwidth 5
-��fullwidth 6
-����fullwidth 7
-'����fullwidth 8|]";
+‘ｆｕｌｌｗｉｄｔｈ 1　
+’ｆｕｌｌｗｉｄｔｈ 2
+‘‘ｆｕｌｌｗｉｄｔｈ 3
+’'ｆｕｌｌｗｉｄｔｈ 4
+'‘ｆｕｌｌｗｉｄｔｈ 5
+‘’ｆｕｌｌｗｉｄｔｈ 6
+‘’‘’ｆｕｌｌｗｉｄｔｈ 7
+'‘’‘’ｆｕｌｌｗｉｄｔｈ 8|]";
 
             var expected = @"
-'fullwidth 1 
-'fullwidth 2
-'�fullwidth 3
-''fullwidth 4
-'�fullwidth 5
-'�fullwidth 6
-'���fullwidth 7
-'����fullwidth 8";
+'ｆｕｌｌｗｉｄｔｈ 1　
+'ｆｕｌｌｗｉｄｔｈ 2
+'‘ｆｕｌｌｗｉｄｔｈ 3
+''ｆｕｌｌｗｉｄｔｈ 4
+'‘ｆｕｌｌｗｉｄｔｈ 5
+'’ｆｕｌｌｗｉｄｔｈ 6
+'’‘’ｆｕｌｌｗｉｄｔｈ 7
+'‘’‘’ｆｕｌｌｗｉｄｔｈ 8";
             await VerifyAsync(code, expected);
         }
 
@@ -719,9 +719,9 @@ End Module
                 System.Threading.Thread.CurrentThread.CurrentCulture =
                     System.Globalization.CultureInfo.CreateSpecificCulture("zh-CN");
 
-                var code = @"[|��fullwidth 1|]";
+                var code = @"[|‘’ｆｕｌｌｗｉｄｔｈ 1|]";
 
-                var expected = @"'�fullwidth 1";
+                var expected = @"'’ｆｕｌｌｗｉｄｔｈ 1";
                 await VerifyAsync(code, expected);
             }
             finally

@@ -2,7 +2,7 @@
 // System.Diagnostics.EventInstance
 //
 // Authors:
-//    Gert Driesen (drieseng@users.sourceforge.net)
+//	Gert Driesen (drieseng@users.sourceforge.net)
 //
 // (C) 2006 Novell
 //
@@ -31,53 +31,53 @@ using System.ComponentModel;
 
 namespace System.Diagnostics
 {
-    public class EventInstance
-    {
-        int _categoryId;
-        EventLogEntryType _entryType;
-        long _instanceId;
+	public class EventInstance
+	{
+		int _categoryId;
+		EventLogEntryType _entryType;
+		long _instanceId;
 
-        public EventInstance (long instanceId, int categoryId)
-            : this (instanceId, categoryId, EventLogEntryType.Information)
-        {
-        }
+		public EventInstance (long instanceId, int categoryId)
+			: this (instanceId, categoryId, EventLogEntryType.Information)
+		{
+		}
 
-        public EventInstance (long instanceId, int categoryId, EventLogEntryType entryType)
-        {
-            InstanceId = instanceId;
-            CategoryId = categoryId;
-            EntryType = entryType;
-        }
+		public EventInstance (long instanceId, int categoryId, EventLogEntryType entryType)
+		{
+			InstanceId = instanceId;
+			CategoryId = categoryId;
+			EntryType = entryType;
+		}
 
-        public int CategoryId
-        {
-            get { return _categoryId; }
-            set {
-                if (value < 0 || value > ushort.MaxValue)
-                    throw new ArgumentOutOfRangeException ("value");
-                _categoryId = value; 
-            }
-        }
+		public int CategoryId
+		{
+			get { return _categoryId; }
+			set {
+				if (value < 0 || value > ushort.MaxValue)
+					throw new ArgumentOutOfRangeException ("value");
+				_categoryId = value; 
+			}
+		}
 
-        public EventLogEntryType EntryType
-        {
-            get { return _entryType; }
-            set {
-                if (!Enum.IsDefined (typeof (EventLogEntryType), value))
-                    throw new InvalidEnumArgumentException("value", (int) value,
-                        typeof(EventLogEntryType));
-                _entryType = value; 
-            }
-        }
+		public EventLogEntryType EntryType
+		{
+			get { return _entryType; }
+			set {
+				if (!Enum.IsDefined (typeof (EventLogEntryType), value))
+					throw new InvalidEnumArgumentException("value", (int) value,
+						typeof(EventLogEntryType));
+				_entryType = value; 
+			}
+		}
 
-        public long InstanceId
-        {
-            get { return _instanceId; }
-            set {
-                if (value < 0 || value > uint.MaxValue)
-                    throw new ArgumentOutOfRangeException ("value");
-                _instanceId = value;
-            }
-        }
-    }
+		public long InstanceId
+		{
+			get { return _instanceId; }
+			set {
+				if (value < 0 || value > uint.MaxValue)
+					throw new ArgumentOutOfRangeException ("value");
+				_instanceId = value;
+			}
+		}
+	}
 }

@@ -20,16 +20,16 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.Diagnostics {
 
-    public enum PresentationTraceLevel {
-        None,
-        Low,
-        Medium,
-        High
-    }
+	public enum PresentationTraceLevel {
+		None,
+		Low,
+		Medium,
+		High
+	}
 }
 

@@ -2,7 +2,7 @@
 // ImmutableSetExtensions.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,23 +29,23 @@
 using System;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    static class ImmutableSetExtensions {
-        public static bool ContainsSafe<T> (this IImmutableSet<T> set, T value)
-            where T : IEquatable<T>
-        {
-            if (set == null || value == null)
-                return false;
+	static class ImmutableSetExtensions {
+		public static bool ContainsSafe<T> (this IImmutableSet<T> set, T value)
+			where T : IEquatable<T>
+		{
+			if (set == null || value == null)
+				return false;
 
-            return set.Contains (value);
-        }
+			return set.Contains (value);
+		}
 
-        public static int Count<T> (this IImmutableSet<T> set)
-            where T : IEquatable<T>
-        {
-            if (set == null)
-                return 0;
+		public static int Count<T> (this IImmutableSet<T> set)
+			where T : IEquatable<T>
+		{
+			if (set == null)
+				return 0;
 
-            return set.Count;
-        }
-    }
+			return set.Count;
+		}
+	}
 }

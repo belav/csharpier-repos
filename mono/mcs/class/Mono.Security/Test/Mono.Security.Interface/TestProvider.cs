@@ -34,14 +34,14 @@ using NUnit.Framework;
 
 namespace MonoTests.Mono.Security
 {
-    [TestFixture]
-    public class TestProvider
-    {
-        [Test]
-        public void GetProvider ()
-        {
-            var provider = MonoTlsProviderFactory.GetProvider ();
-            Assert.IsNotNull (provider, "TLS Provider");
-        }
-    }
+	[TestFixture]
+	public class TestProvider
+	{
+		[Test]
+		public void GetProvider ()
+		{
+			var provider = MonoTlsProviderFactory.GetProvider ();
+			Assert.IsNotNull (provider, "TLS Provider");
+		}
+	}
 }

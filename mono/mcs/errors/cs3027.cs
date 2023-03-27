@@ -20,5 +20,5 @@ public interface I: I1, I2
 
 public class Foo
 {
-    static void Main () {}
+	static void Main () {}
 }

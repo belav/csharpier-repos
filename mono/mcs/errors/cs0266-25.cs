@@ -4,9 +4,9 @@
 
 public class C
 {
-    public static void Main ()
-    {
-        var t = new Test ();
-        string[] s = t.DynField;
-    }
+	public static void Main ()
+	{
+		var t = new Test ();
+		string[] s = t.DynField;
+	}
 }

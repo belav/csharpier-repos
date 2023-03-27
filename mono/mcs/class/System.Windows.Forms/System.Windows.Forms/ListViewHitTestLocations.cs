@@ -23,22 +23,22 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    [Flags]
-    public enum ListViewHitTestLocations
-    {
-        None = 1,
-        Image = 2,
-        Label = 4,
-        BelowClientArea = 16,
-        RightOfClientArea = 32,
-        LeftOfClientArea = 64,
-        AboveClientArea = 256,
-        StateImage = 512
-    }
+	[Flags]
+	public enum ListViewHitTestLocations
+	{
+		None = 1,
+		Image = 2,
+		Label = 4,
+		BelowClientArea = 16,
+		RightOfClientArea = 32,
+		LeftOfClientArea = 64,
+		AboveClientArea = 256,
+		StateImage = 512
+	}
 }

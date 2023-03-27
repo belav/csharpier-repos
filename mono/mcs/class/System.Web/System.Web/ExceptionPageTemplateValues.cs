@@ -31,64 +31,64 @@ using System.Collections.Generic;
 
 namespace System.Web
 {
-    sealed class ExceptionPageTemplateValues
-    {
-        Dictionary <string, ExceptionPageTemplateFragmentValue> values;
+	sealed class ExceptionPageTemplateValues
+	{
+		Dictionary <string, ExceptionPageTemplateFragmentValue> values;
 
-        Dictionary <string, ExceptionPageTemplateFragmentValue> Values {
-            get {
-                if (values == null)
-                    values = new Dictionary <string, ExceptionPageTemplateFragmentValue> (StringComparer.Ordinal);
-                return values;
-            }
-        }
+		Dictionary <string, ExceptionPageTemplateFragmentValue> Values {
+			get {
+				if (values == null)
+					values = new Dictionary <string, ExceptionPageTemplateFragmentValue> (StringComparer.Ordinal);
+				return values;
+			}
+		}
 
-        public int Count {
-            get {
-                return values == null ? 0 : values.Count;
-            }
-        }
-        
-        public string Get (string name)
-        {
-            if (values == null || values.Count == 0 || String.IsNullOrEmpty (name))
-                return null;
+		public int Count {
+			get {
+				return values == null ? 0 : values.Count;
+			}
+		}
+		
+		public string Get (string name)
+		{
+			if (values == null || values.Count == 0 || String.IsNullOrEmpty (name))
+				return null;
 
-            ExceptionPageTemplateFragmentValue value;
-            if (values.TryGetValue (name, out value))
-                return value.Value;
+			ExceptionPageTemplateFragmentValue value;
+			if (values.TryGetValue (name, out value))
+				return value.Value;
 
-            return null;
-        }
-        
-        public void Add (string name, Func <string, string> valueProvider)
-        {
-            if (String.IsNullOrEmpty (name))
-                throw new ArgumentNullException ("name");
+			return null;
+		}
+		
+		public void Add (string name, Func <string, string> valueProvider)
+		{
+			if (String.IsNullOrEmpty (name))
+				throw new ArgumentNullException ("name");
 
-            if (valueProvider == null && values == null)
-                return;
+			if (valueProvider == null && values == null)
+				return;
 
-            if (Values.ContainsKey (name))
-                return;
-            
-            Values [name] = new ExceptionPageTemplateFragmentValue (name, valueProvider);
-        }
+			if (Values.ContainsKey (name))
+				return;
+			
+			Values [name] = new ExceptionPageTemplateFragmentValue (name, valueProvider);
+		}
 
-        public void Add (string name, string value)
-        {
-            if (String.IsNullOrEmpty (name))
-                throw new ArgumentNullException ("name");
+		public void Add (string name, string value)
+		{
+			if (String.IsNullOrEmpty (name))
+				throw new ArgumentNullException ("name");
 
-            if (value == null && values == null)
-                return;
+			if (value == null && values == null)
+				return;
 
-            if (Values.ContainsKey (name))
-                return;
-            
-            Values [name] = new ExceptionPageTemplateFragmentValue (name, value);
-        }
-    }
+			if (Values.ContainsKey (name))
+				return;
+			
+			Values [name] = new ExceptionPageTemplateFragmentValue (name, value);
+		}
+	}
 }
 
-    
+	

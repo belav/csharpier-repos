@@ -2,7 +2,7 @@
 // AbstractWorkList.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,47 +29,47 @@
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    abstract class AbstractWorkList<T> : IWorkList<T> {
-        protected HashSet<T> Elements = new HashSet<T> ();
-        protected abstract IEnumerable<T> Collection { get; }
+	abstract class AbstractWorkList<T> : IWorkList<T> {
+		protected HashSet<T> Elements = new HashSet<T> ();
+		protected abstract IEnumerable<T> Collection { get; }
 
-        public int Count
-        {
-            get { return this.Elements.Count; }
-        }
+		public int Count
+		{
+			get { return this.Elements.Count; }
+		}
 
-        protected abstract void AddToCollection (T o);
+		protected abstract void AddToCollection (T o);
 
-        #region Implementation of IWorkList<T>
-        public virtual bool Add (T o)
-        {
-            if (!this.Elements.Add (o))
-                return false;
-            AddToCollection (o);
-            return true;
-        }
+		#region Implementation of IWorkList<T>
+		public virtual bool Add (T o)
+		{
+			if (!this.Elements.Add (o))
+				return false;
+			AddToCollection (o);
+			return true;
+		}
 
-        public virtual bool IsEmpty ()
-        {
-            return this.Elements.Count == 0;
-        }
+		public virtual bool IsEmpty ()
+		{
+			return this.Elements.Count == 0;
+		}
 
-        public abstract T Pull ();
+		public abstract T Pull ();
 
-        public virtual bool AddAll (IEnumerable<T> objs)
-        {
-            bool any = false;
-            foreach (T o in objs) {
-                if (Add (o))
-                    any = true;
-            }
-            return any;
-        }
+		public virtual bool AddAll (IEnumerable<T> objs)
+		{
+			bool any = false;
+			foreach (T o in objs) {
+				if (Add (o))
+					any = true;
+			}
+			return any;
+		}
 
-        public virtual IEnumerator<T> GetEnumerator ()
-        {
-            return Collection.GetEnumerator ();
-        }
-        #endregion
-    }
+		public virtual IEnumerator<T> GetEnumerator ()
+		{
+			return Collection.GetEnumerator ();
+		}
+		#endregion
+	}
 }

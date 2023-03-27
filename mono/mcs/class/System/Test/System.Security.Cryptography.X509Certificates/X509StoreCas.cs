@@ -1,9 +1,9 @@
 //
 // X509KeyUsageExtensionCas.cs - CAS unit tests for 
-//    System.Security.Cryptography.X509Certificates.X509KeyUsageExtension
+//	System.Security.Cryptography.X509Certificates.X509KeyUsageExtension
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -41,52 +41,52 @@ using MonoTests.System.Security.Cryptography.X509Certificates;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class X509StoreCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class X509StoreCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests_Deny_Unrestricted ()
-        {
-            X509StoreTest unit = new X509StoreTest ();
-            unit.ConstructorEmpty ();
-            unit.ConstructorStoreLocationCurrentUser ();
-            unit.ConstructorStoreLocationLocalMachine ();
-            unit.ConstructorStoreStringAddressBook ();
-            unit.ConstructorStoreStringAuthRoot ();
-            unit.ConstructorStoreStringCertificateAuthority ();
-            unit.ConstructorStoreStringDisallowed ();
-            unit.ConstructorStoreStringMy ();
-            unit.ConstructorStoreStringRoot ();
-            unit.ConstructorStoreStringTrustedPeople ();
-            unit.ConstructorStoreStringTrustedPublisher ();
-            unit.ConstructorStoreStringMono ();
-            unit.ConstructorStoreNameAddressBook ();
-            unit.ConstructorStoreNameAuthRoot ();
-            unit.ConstructorStoreNameCertificateAuthority ();
-            unit.ConstructorStoreNameDisallowed ();
-            unit.ConstructorStoreNameMy ();
-            unit.ConstructorStoreNameRoot ();
-            unit.ConstructorStoreNameTrustedPeople ();
-            unit.ConstructorStoreNameTrustedPublisher ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTests_Deny_Unrestricted ()
+		{
+			X509StoreTest unit = new X509StoreTest ();
+			unit.ConstructorEmpty ();
+			unit.ConstructorStoreLocationCurrentUser ();
+			unit.ConstructorStoreLocationLocalMachine ();
+			unit.ConstructorStoreStringAddressBook ();
+			unit.ConstructorStoreStringAuthRoot ();
+			unit.ConstructorStoreStringCertificateAuthority ();
+			unit.ConstructorStoreStringDisallowed ();
+			unit.ConstructorStoreStringMy ();
+			unit.ConstructorStoreStringRoot ();
+			unit.ConstructorStoreStringTrustedPeople ();
+			unit.ConstructorStoreStringTrustedPublisher ();
+			unit.ConstructorStoreStringMono ();
+			unit.ConstructorStoreNameAddressBook ();
+			unit.ConstructorStoreNameAuthRoot ();
+			unit.ConstructorStoreNameCertificateAuthority ();
+			unit.ConstructorStoreNameDisallowed ();
+			unit.ConstructorStoreNameMy ();
+			unit.ConstructorStoreNameRoot ();
+			unit.ConstructorStoreNameTrustedPeople ();
+			unit.ConstructorStoreNameTrustedPublisher ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (X509Store).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (X509Store).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }
 

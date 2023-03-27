@@ -28,39 +28,39 @@
 
 namespace Mono.Cecil.Binary {
 
-    internal class ResourceDirectoryEntry : ResourceNode {
+	internal class ResourceDirectoryEntry : ResourceNode {
 
-        private bool m_idByName;
+		private bool m_idByName;
 
-        public int ID;
-        public ResourceDirectoryString Name;
+		public int ID;
+		public ResourceDirectoryString Name;
 
-        public bool IdentifiedByName {
-            get { return m_idByName; }
-        }
+		public bool IdentifiedByName {
+			get { return m_idByName; }
+		}
 
-        public ResourceNode Child;
+		public ResourceNode Child;
 
-        public ResourceDirectoryEntry (ResourceDirectoryString name)
-        {
-            this.Name = name;
-            m_idByName = true;
-        }
+		public ResourceDirectoryEntry (ResourceDirectoryString name)
+		{
+			this.Name = name;
+			m_idByName = true;
+		}
 
-        public ResourceDirectoryEntry (ResourceDirectoryString name, int offset) : base (offset)
-        {
-            this.Name = name;
-            m_idByName = true;
-        }
+		public ResourceDirectoryEntry (ResourceDirectoryString name, int offset) : base (offset)
+		{
+			this.Name = name;
+			m_idByName = true;
+		}
 
-        public ResourceDirectoryEntry (int id)
-        {
-            this.ID = id;
-        }
+		public ResourceDirectoryEntry (int id)
+		{
+			this.ID = id;
+		}
 
-        public ResourceDirectoryEntry (int id, int offset) : base (offset)
-        {
-            this.ID = id;
-        }
-    }
+		public ResourceDirectoryEntry (int id, int offset) : base (offset)
+		{
+			this.ID = id;
+		}
+	}
 }

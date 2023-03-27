@@ -2,7 +2,7 @@
 // ExprNop.cs
 //
 // Authors:
-//    Chris Bacon (chrisbacon76@gmail.com)
+//	Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -32,20 +32,20 @@ using System.Linq;
 using System.Text;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-    class ExprNop : Expr {
+	class ExprNop : Expr {
 
-        public ExprNop (MethodInfo methodInfo)
-            : base (methodInfo)
-        {
-        }
+		public ExprNop (MethodInfo methodInfo)
+			: base (methodInfo)
+		{
+		}
 
-        public override ExprType ExprType {
-            get { return ExprType.Nop; }
-        }
+		public override ExprType ExprType {
+			get { return ExprType.Nop; }
+		}
 
-        public override Mono.Cecil.TypeReference ReturnType {
-            get { return base.MethodInfo.TypeVoid; }
-        }
+		public override Mono.Cecil.TypeReference ReturnType {
+			get { return base.MethodInfo.TypeVoid; }
+		}
 
-    }
+	}
 }

@@ -5,8 +5,8 @@ delegate void D (int i);
 
 public class C
 {
-    public static void Main ()
-    {
-        D d = delegate (int i = 9) { };
-    }
+	public static void Main ()
+	{
+		D d = delegate (int i = 9) { };
+	}
 }

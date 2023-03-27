@@ -3,12 +3,12 @@
 
 partial class C
 {
-    delegate void D ();
+	delegate void D ();
 
-    partial void Foo ();
+	partial void Foo ();
 
-    static void Main ()
-    {
-        D d = new D (new C ().Foo);
-    }
+	static void Main ()
+	{
+		D d = new D (new C ().Foo);
+	}
 }

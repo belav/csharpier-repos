@@ -34,23 +34,23 @@ using System.Reflection;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    [Serializable]
-    public sealed class EventRecorder : List <string>
-    {
-        List <string> list;
+	[Serializable]
+	public sealed class EventRecorder : List <string>
+	{
+		List <string> list;
 
-        public EventRecorder ()
-        {
-            list = (List <string>)this;
-        }
-        
-        public void Record (string suffix)
-        {
-            var sf = new StackFrame (2);
-            MethodBase mb = sf.GetMethod ();
-            list.Add (mb.Name + ":" + suffix);
-            sf = null;
-            mb = null;
-        }
-    }
+		public EventRecorder ()
+		{
+			list = (List <string>)this;
+		}
+		
+		public void Record (string suffix)
+		{
+			var sf = new StackFrame (2);
+			MethodBase mb = sf.GetMethod ();
+			list.Add (mb.Name + ":" + suffix);
+			sf = null;
+			mb = null;
+		}
+	}
 }

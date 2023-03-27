@@ -36,14 +36,14 @@ namespace System.Threading.Tasks
 #endif
 {
 #if INSIDE_MONO_PARALLEL
-    public
+	public
 #endif
-    interface IConcurrentDeque<T>
-    {
-        void PushBottom (T obj);
-        PopResult PopBottom (out T obj);
-        PopResult PopTop (out T obj);
-        IEnumerable<T> GetEnumerable ();
-    }
+	interface IConcurrentDeque<T>
+	{
+		void PushBottom (T obj);
+		PopResult PopBottom (out T obj);
+		PopResult PopTop (out T obj);
+		IEnumerable<T> GetEnumerable ();
+	}
 }
 

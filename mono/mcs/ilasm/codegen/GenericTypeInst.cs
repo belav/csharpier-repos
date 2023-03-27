@@ -98,7 +98,7 @@ namespace Mono.ILASM {
                 public override BaseMethodRef GetMethodRef (BaseTypeRef ret_type, PEAPI.CallConv call_conv,
                                 string meth_name, BaseTypeRef[] param, int gen_param_count)
                 {
-            /* Note: Using FullName here as we are caching in a static hashtable */
+			/* Note: Using FullName here as we are caching in a static hashtable */
                         string key = FullName + MethodDef.CreateSignature (ret_type, call_conv, meth_name, param, gen_param_count, true);
                         TypeSpecMethodRef mr = s_method_table [key] as TypeSpecMethodRef;
                         if (mr == null) {         
@@ -111,7 +111,7 @@ namespace Mono.ILASM {
 
                 protected override IFieldRef CreateFieldRef (BaseTypeRef ret_type, string field_name)
                 {
-            /* Note: Using FullName here as we are caching in a static hashtable */
+			/* Note: Using FullName here as we are caching in a static hashtable */
                         string key = FullName + ret_type.FullName + field_name;
 
                         IFieldRef fr = (IFieldRef) s_field_table [key];

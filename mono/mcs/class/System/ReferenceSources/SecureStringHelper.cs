@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 
 namespace System.Net
 {
-    static partial class UnsafeNclNativeMethods
-    {
+	static partial class UnsafeNclNativeMethods
+	{
         internal unsafe static class SecureStringHelper
         {
             internal static string CreateString(SecureString secureString)

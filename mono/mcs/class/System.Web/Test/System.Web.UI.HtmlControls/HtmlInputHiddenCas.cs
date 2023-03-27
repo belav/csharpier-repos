@@ -1,9 +1,9 @@
 //
 // HtmlInputHiddenCas.cs 
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlInputHidden
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlInputHidden
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,24 +37,24 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlInputHiddenCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlInputHiddenCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HtmlInputHiddenTest unit = new HtmlInputHiddenTest ();
-            unit.Defaults ();
-            unit.PropertiesNull ();
-            unit.Postback ();
-            unit.TestPostbackHandling ();
-            unit.Render ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HtmlInputHiddenTest unit = new HtmlInputHiddenTest ();
+			unit.Defaults ();
+			unit.PropertiesNull ();
+			unit.Postback ();
+			unit.TestPostbackHandling ();
+			unit.Render ();
+		}
 
-        public override Type Type {
-            get { return typeof (HtmlInputHidden); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlInputHidden); }
+		}
+	}
 }

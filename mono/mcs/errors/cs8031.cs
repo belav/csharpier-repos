@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 class Test
 {
-    public static void Main()
-    {
-        Func<Task> t = async delegate {
-            return null;
-        };
+	public static void Main()
+	{
+		Func<Task> t = async delegate {
+			return null;
+		};
 
-        return;
-    }
+		return;
+	}
 }

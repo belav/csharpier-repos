@@ -2,7 +2,7 @@
 // SecurityTokenManager.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -33,21 +33,21 @@ using System.Net.Security;
 
 namespace System.IdentityModel.Selectors
 {
-    public abstract class SecurityTokenManager
-    {
-        protected SecurityTokenManager ()
-        {
-        }
+	public abstract class SecurityTokenManager
+	{
+		protected SecurityTokenManager ()
+		{
+		}
 
-        public abstract SecurityTokenAuthenticator 
-            CreateSecurityTokenAuthenticator (
-            SecurityTokenRequirement tokenRequirement,
-            out SecurityTokenResolver outOfBandTokenResolver);
+		public abstract SecurityTokenAuthenticator 
+			CreateSecurityTokenAuthenticator (
+			SecurityTokenRequirement tokenRequirement,
+			out SecurityTokenResolver outOfBandTokenResolver);
 
-        public abstract SecurityTokenProvider 
-            CreateSecurityTokenProvider(SecurityTokenRequirement tokenRequirement);
+		public abstract SecurityTokenProvider 
+			CreateSecurityTokenProvider(SecurityTokenRequirement tokenRequirement);
 
-        public abstract SecurityTokenSerializer 
-            CreateSecurityTokenSerializer (SecurityTokenVersion version);
-    }
+		public abstract SecurityTokenSerializer 
+			CreateSecurityTokenSerializer (SecurityTokenVersion version);
+	}
 }

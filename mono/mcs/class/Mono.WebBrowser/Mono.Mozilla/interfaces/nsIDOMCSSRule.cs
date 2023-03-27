@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,41 +32,41 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("a6cf90c1-15b3-11d2-932e-00805f8add32")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMCSSRule {
+	[Guid ("a6cf90c1-15b3-11d2-932e-00805f8add32")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMCSSRule {
 
 #region nsIDOMCSSRule
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getType ( out ushort ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getType ( out ushort ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getCssText (  /*DOMString*/ HandleRef ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getCssText (  /*DOMString*/ HandleRef ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setCssText ( /*DOMString*/ HandleRef value);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int setCssText ( /*DOMString*/ HandleRef value);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getParentStyleSheet ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSStyleSheet ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getParentStyleSheet ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSStyleSheet ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getParentRule ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSRule ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getParentRule ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMCSSRule ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMCSSRule {
-        public static nsIDOMCSSRule GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSRule obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSRule).GUID, obj);
-            return o as nsIDOMCSSRule;
-        }
-    }
+	internal class nsDOMCSSRule {
+		public static nsIDOMCSSRule GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSRule obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSRule).GUID, obj);
+			return o as nsIDOMCSSRule;
+		}
+	}
 }

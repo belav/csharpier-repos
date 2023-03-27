@@ -23,13 +23,13 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-    public enum StringProperty
-    {
-        Text = 3201
-    }
+	public enum StringProperty
+	{
+		Text = 3201
+	}
 }

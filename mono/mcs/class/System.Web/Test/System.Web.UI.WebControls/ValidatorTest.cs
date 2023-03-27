@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.Validator
 //
 // Author:
-//    Chris Toshok (toshok@novell.com)
+//	Chris Toshok (toshok@novell.com)
 //
 
 //
@@ -38,49 +38,49 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    public class ValidatorTest
-    {
-        protected Page Page;
-        protected BaseValidator Validator;
+	public class ValidatorTest
+	{
+		protected Page Page;
+		protected BaseValidator Validator;
 
-        public ValidatorTest ()
-        {
-        }
+		public ValidatorTest ()
+		{
+		}
 
-        public void StartValidationTest (BaseValidator validator)
-        {
-            Page = new Page();
-            Validator = validator;
-            Validator.Page = Page;
-            Page.Controls.Add (Validator);
-        }
+		public void StartValidationTest (BaseValidator validator)
+		{
+			Page = new Page();
+			Validator = validator;
+			Validator.Page = Page;
+			Page.Controls.Add (Validator);
+		}
 
-        public void StopValidationTest ()
-        {
-            Page = null;
-            Validator = null;
-        }
+		public void StopValidationTest ()
+		{
+			Page = null;
+			Validator = null;
+		}
 
-        public TextBox SetValidationTextBox (string name, string value)
-        {
-            TextBox box = new TextBox ();
-            box.ID = name;
-            box.Text = value;
-            Validator.ControlToValidate = name;
-            Page.Controls.Add (box);
+		public TextBox SetValidationTextBox (string name, string value)
+		{
+			TextBox box = new TextBox ();
+			box.ID = name;
+			box.Text = value;
+			Validator.ControlToValidate = name;
+			Page.Controls.Add (box);
 
-            return box;
-        }
+			return box;
+		}
 
-        public TextBox AddTextBox (string name, string value)
-        {
-            TextBox box = new TextBox ();
-            box.ID = name;
-            box.Text = value;
+		public TextBox AddTextBox (string name, string value)
+		{
+			TextBox box = new TextBox ();
+			box.ID = name;
+			box.Text = value;
 
-            Page.Controls.Add (box);
+			Page.Controls.Add (box);
 
-            return box;
-        }
-    }
+			return box;
+		}
+	}
 }

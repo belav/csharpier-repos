@@ -5,18 +5,18 @@ using System;
 
 class T
 {
-    void Foo (int arg, Action a)
-    {
-    }
+	void Foo (int arg, Action a)
+	{
+	}
 
-    void Foo (string title, Action a)
-    {
-    }
+	void Foo (string title, Action a)
+	{
+	}
 
-    void Bar ()
-    {
-        Foo (arg: 1, a: () => {
-            Bar ("a", "b");
-        });
-    }
+	void Bar ()
+	{
+		Foo (arg: 1, a: () => {
+			Bar ("a", "b");
+		});
+	}
 }

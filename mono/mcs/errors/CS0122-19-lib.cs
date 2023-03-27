@@ -1,6 +1,6 @@
 namespace A {
-    interface IFileWatcher
-    {
-    }
+	interface IFileWatcher
+	{
+	}
 }
 

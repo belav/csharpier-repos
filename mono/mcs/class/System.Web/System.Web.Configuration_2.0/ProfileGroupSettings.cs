@@ -2,7 +2,7 @@
 // System.Web.Configuration.ProfileGroupSettings
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,70 +36,70 @@ using System.Xml;
 
 namespace System.Web.Configuration
 {
-    public sealed class ProfileGroupSettings : ConfigurationElement
-    {
-        static ConfigurationProperty propertySettingsProp;
-        static ConfigurationProperty nameProp;
-        
-        static ConfigurationPropertyCollection properties;
-        
-        static ProfileGroupSettings ()
-        {
-            propertySettingsProp = new ConfigurationProperty (null, typeof (ProfilePropertySettingsCollection), null, null, null,
-                                      ConfigurationPropertyOptions.IsDefaultCollection);
-            nameProp = new ConfigurationProperty ("name", typeof (string), null, null, PropertyHelper.NonEmptyStringValidator,
-                                  ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired);
-            
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (propertySettingsProp);
-            properties.Add (nameProp);
-        }
-        
-        internal ProfileGroupSettings ()
-        {
-        }
+	public sealed class ProfileGroupSettings : ConfigurationElement
+	{
+		static ConfigurationProperty propertySettingsProp;
+		static ConfigurationProperty nameProp;
+		
+		static ConfigurationPropertyCollection properties;
+		
+		static ProfileGroupSettings ()
+		{
+			propertySettingsProp = new ConfigurationProperty (null, typeof (ProfilePropertySettingsCollection), null, null, null,
+									  ConfigurationPropertyOptions.IsDefaultCollection);
+			nameProp = new ConfigurationProperty ("name", typeof (string), null, null, PropertyHelper.NonEmptyStringValidator,
+							      ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired);
+			
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (propertySettingsProp);
+			properties.Add (nameProp);
+		}
+		
+		internal ProfileGroupSettings ()
+		{
+		}
 
-        public ProfileGroupSettings (string name)
-        {
-            this.Name = name;
-        }
+		public ProfileGroupSettings (string name)
+		{
+			this.Name = name;
+		}
 
-        public override bool Equals (object obj)
-        {
-            ProfileGroupSettings other = obj as ProfileGroupSettings;
-            if (other == null)
-                return false;
+		public override bool Equals (object obj)
+		{
+			ProfileGroupSettings other = obj as ProfileGroupSettings;
+			if (other == null)
+				return false;
 
-            if (GetType () != other.GetType ())
-                return false;
+			if (GetType () != other.GetType ())
+				return false;
 
-            return Name.Equals (other.Name);
-        }
+			return Name.Equals (other.Name);
+		}
 
-        public override int GetHashCode ()
-        {
-            return Name.GetHashCode ();
-        }
+		public override int GetHashCode ()
+		{
+			return Name.GetHashCode ();
+		}
 
-        internal void DoDeserialize (XmlReader reader)
-        {
-            DeserializeElement (reader, false);
-        }
-        
-        [ConfigurationProperty ("name", IsRequired = true, IsKey = true)]
-        public string Name {
-            get { return (string)base [nameProp]; }
-            internal set { base [nameProp] = value; }
-        }
+		internal void DoDeserialize (XmlReader reader)
+		{
+			DeserializeElement (reader, false);
+		}
+		
+		[ConfigurationProperty ("name", IsRequired = true, IsKey = true)]
+		public string Name {
+			get { return (string)base [nameProp]; }
+			internal set { base [nameProp] = value; }
+		}
 
-        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public ProfilePropertySettingsCollection PropertySettings {
-            get { return (ProfilePropertySettingsCollection) base [propertySettingsProp]; }
-        }
+		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+		public ProfilePropertySettingsCollection PropertySettings {
+			get { return (ProfilePropertySettingsCollection) base [propertySettingsProp]; }
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+	}
 }
 

@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------
+﻿//---------------------------------------------------------------------
 // <copyright file="MethodCallTranslator.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -1014,7 +1014,7 @@ namespace System.Data.Objects.ELinq
                 }
 
                 // Translation:
-                //      IndexOf(arg1)             -> IndexOf(arg1, this) - 1
+                //      IndexOf(arg1)		     -> IndexOf(arg1, this) - 1
                 internal override CqtExpression Translate(ExpressionConverter parent, MethodCallExpression call)
                 {
                     Debug.Assert(call.Arguments.Count == 1, "Expecting 1 argument for String.IndexOf");

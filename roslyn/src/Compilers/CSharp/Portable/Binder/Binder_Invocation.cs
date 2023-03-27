@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -826,9 +826,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     //      ...
                     // * If the type parameters of F were substituted in the step above, their constraints are satisfied.
                     // * If F is a static method, the method group must have resulted from a simple-name, a member-access through a type, 
-                    //   or a member-access whose receiver can't be classified as a type or value until after overload resolution (see §7.6.4.1). 
+                    //   or a member-access whose receiver can't be classified as a type or value until after overload resolution (see Â§7.6.4.1). 
                     // * If F is an instance method, the method group must have resulted from a simple-name, a member-access through a variable or value, 
-                    //   or a member-access whose receiver can't be classified as a type or value until after overload resolution (see §7.6.4.1).
+                    //   or a member-access whose receiver can't be classified as a type or value until after overload resolution (see Â§7.6.4.1).
 
                     if (!MemberGroupFinalValidationAccessibilityChecks(receiverOpt, result.Member, syntax, candidateDiagnostics, invokedAsExtensionMethod: false) &&
                         (typeArgumentsOpt.IsDefault || ((MethodSymbol)(object)result.Member).CheckConstraints(new ConstraintsHelper.CheckConstraintsArgs(this.Compilation, this.Conversions, includeNullability: false, syntax.Location, candidateDiagnostics))))

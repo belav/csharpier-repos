@@ -2,7 +2,7 @@
 // System.Net.DecompressionMethods.cs
 //
 // Author:
-//    Dick Porter (dick@ximian.com)
+//	Dick Porter (dick@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc. (http://www.novell.com)
 //
@@ -29,11 +29,11 @@
 //
 namespace System.Net
 {
-    [Flags]
-    public enum DecompressionMethods {
-        None = 0,
-        GZip = 1,
-        Deflate = 2
-    }
+	[Flags]
+	public enum DecompressionMethods {
+		None = 0,
+		GZip = 1,
+		Deflate = 2
+	}
 }
 

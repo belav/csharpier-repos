@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -2724,59 +2724,59 @@ using System.Runtime.CompilerServices;
 /*<bind>*/
 await foreach (var x in new CustomAsyncEnumerable())
 {
-    Console.WriteLine(x);
+	Console.WriteLine(x);
 }
 /*</bind>*/
 
 struct CustomAsyncEnumerable : IAsyncEnumerable<int>
 {
-    public AsyncEnumerator GetAsyncEnumerator([CallerMemberName] string s = default,
-       [CallerLineNumber] int line = default)
-    {
-        Console.WriteLine($""line: {line}"");
-        Console.WriteLine($""member: {s}"");
-        Console.WriteLine(""GetAsyncEnumerator"");
-        return new();
-    }
+	public AsyncEnumerator GetAsyncEnumerator([CallerMemberName] string s = default,
+	   [CallerLineNumber] int line = default)
+	{
+		Console.WriteLine($""line: {line}"");
+		Console.WriteLine($""member: {s}"");
+		Console.WriteLine(""GetAsyncEnumerator"");
+		return new();
+	}
 
-    IAsyncEnumerator<int> IAsyncEnumerable<int>.GetAsyncEnumerator(CancellationToken token)
-    {
-        Console.WriteLine(""IAsyncEnumerable<int>.GetAsyncEnumerator(CancellationToken token)"");
-        return GetAsyncEnumerator();
-    }
+	IAsyncEnumerator<int> IAsyncEnumerable<int>.GetAsyncEnumerator(CancellationToken token)
+	{
+		Console.WriteLine(""IAsyncEnumerable<int>.GetAsyncEnumerator(CancellationToken token)"");
+		return GetAsyncEnumerator();
+	}
 }
 
 struct AsyncEnumerator : IAsyncEnumerator<int>
 {
-    private int x;
-    public ValueTask<bool> MoveNextAsync([CallerMemberName] string s = default,
-        [CallerLineNumber] int line = default, int r = 12)
-    {
-        Console.WriteLine($""line: {line}"");
-        Console.WriteLine($""member: {s}"");
-        return ValueTask.FromResult(x++ < 5);
-    }
+	private int x;
+	public ValueTask<bool> MoveNextAsync([CallerMemberName] string s = default,
+		[CallerLineNumber] int line = default, int r = 12)
+	{
+		Console.WriteLine($""line: {line}"");
+		Console.WriteLine($""member: {s}"");
+		return ValueTask.FromResult(x++ < 5);
+	}
 
-    ValueTask<bool> IAsyncEnumerator<int>.MoveNextAsync()
-    {
-        Console.WriteLine(""IAsyncEnumerator<int>.MoveNextAsync()"");
-        return MoveNextAsync();
-    }
-    ValueTask IAsyncDisposable.DisposeAsync()
-    {
-        Console.WriteLine(""IAsyncDisposable.DisposeAsync()"");
-        return DisposeAsync();
-    }
+	ValueTask<bool> IAsyncEnumerator<int>.MoveNextAsync()
+	{
+		Console.WriteLine(""IAsyncEnumerator<int>.MoveNextAsync()"");
+		return MoveNextAsync();
+	}
+	ValueTask IAsyncDisposable.DisposeAsync()
+	{
+		Console.WriteLine(""IAsyncDisposable.DisposeAsync()"");
+		return DisposeAsync();
+	}
 
-    public int Current => x;
-    
-    public ValueTask DisposeAsync([CallerMemberName] string s = default,
-                        [CallerLineNumber] int line = default, int xxx=12, string f = """")
-    {
-        Console.WriteLine($""line: {line}"");
-        Console.WriteLine($""member: {s}"");
-        return ValueTask.CompletedTask;
-    }
+	public int Current => x;
+	
+	public ValueTask DisposeAsync([CallerMemberName] string s = default,
+						[CallerLineNumber] int line = default, int xxx=12, string f = """")
+	{
+		Console.WriteLine($""line: {line}"");
+		Console.WriteLine($""member: {s}"");
+		return ValueTask.CompletedTask;
+	}
 }
 ";
 
@@ -2988,19 +2988,19 @@ using System.Threading.Tasks;
 /*<bind>*/
 await foreach (var x in new CustomAsyncEnumerable())
 {
-    Console.WriteLine(x);
+	Console.WriteLine(x);
 }
 /*</bind>*/
 
 struct CustomAsyncEnumerable
 {
-    public CustomAsyncEnumerator GetAsyncEnumerator() => new();
+	public CustomAsyncEnumerator GetAsyncEnumerator() => new();
 }
 
 struct CustomAsyncEnumerator
 {
-    public ValueTask<bool> MoveNextAsync() => ValueTask.FromResult(false);
-    public int Current => 0;
+	public ValueTask<bool> MoveNextAsync() => ValueTask.FromResult(false);
+	public int Current => 0;
 }
 ";
 

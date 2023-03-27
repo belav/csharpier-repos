@@ -1,9 +1,9 @@
 using System;
 using System.Xml.Linq;
 
-    public static class SRCore
-    {
-        // external/referencesource/System.Runtime.DurableInstancing$ grep -R SRCore. | sed -e "s/.*SRCore.\([a-zA-Z0-9_]*\).*/\\1/" | sort | uniq | sed -e "s/\(.*\)/public const string \1 = \"\1\";/"
+	public static class SRCore
+	{
+		// external/referencesource/System.Runtime.DurableInstancing$ grep -R SRCore. | sed -e "s/.*SRCore.\([a-zA-Z0-9_]*\).*/\\1/" | sort | uniq | sed -e "s/\(.*\)/public const string \1 = \"\1\";/"
 public const string AsyncTransactionException = "AsyncTransactionException";
 public const string BindLockRequiresCommandFlag = "BindLockRequiresCommandFlag";
 public const string BindReclaimedLockException = "BindReclaimedLockException";
@@ -89,5 +89,5 @@ public const string TryCommandCannotExecuteSubCommandsAndReduce = "TryCommandCan
 public const string UninitializedCannotHaveData = "UninitializedCannotHaveData";
 public const string WaitAlreadyInProgress = "WaitAlreadyInProgress";
 public static string WaitForEventsTimedOut (TimeSpan arg1) { return "WaitForEventsTimedOut"; }
-    }
+	}
 

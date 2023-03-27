@@ -38,156 +38,156 @@ using System.Runtime.Remoting;
 
 namespace Mono.Remoting.Channels.Unix
 {
-    internal class UnixClientTransportSink : IClientChannelSink
-    {
+	internal class UnixClientTransportSink : IClientChannelSink
+	{
         string _path;
-        
-        public UnixClientTransportSink (string url)
-        {
-            string objectUri;
+		
+		public UnixClientTransportSink (string url)
+		{
+			string objectUri;
             _path = UnixChannel.ParseUnixURL (url, out objectUri);
-        }
+		}
 
-        public IDictionary Properties
-        {
-            get 
-            {
-                return null;
-            }
-        }
+		public IDictionary Properties
+		{
+			get 
+			{
+				return null;
+			}
+		}
 
-        public IClientChannelSink NextChannelSink
-        {
-            get 
-            {
-                // we are the last one
-                return null;
-            }
-        }
+		public IClientChannelSink NextChannelSink
+		{
+			get 
+			{
+				// we are the last one
+				return null;
+			}
+		}
 
-        public void AsyncProcessRequest (IClientChannelSinkStack sinkStack, IMessage msg,
-            ITransportHeaders headers, Stream requestStream)
-        {
-            UnixConnection connection = null;
-            bool isOneWay = RemotingServices.IsOneWay (((IMethodMessage)msg).MethodBase);
+		public void AsyncProcessRequest (IClientChannelSinkStack sinkStack, IMessage msg,
+			ITransportHeaders headers, Stream requestStream)
+		{
+			UnixConnection connection = null;
+			bool isOneWay = RemotingServices.IsOneWay (((IMethodMessage)msg).MethodBase);
 
-            try
-            {
-                if (headers == null) headers = new TransportHeaders();
-                headers ["__RequestUri"] = ((IMethodMessage)msg).Uri;
-                
-                // Sends the stream using a connection from the pool
-                // and creates a WorkItem that will wait for the
-                // response of the server
+			try
+			{
+				if (headers == null) headers = new TransportHeaders();
+				headers ["__RequestUri"] = ((IMethodMessage)msg).Uri;
+				
+				// Sends the stream using a connection from the pool
+				// and creates a WorkItem that will wait for the
+				// response of the server
 
-                connection = UnixConnectionPool.GetConnection (_path);
-                UnixMessageIO.SendMessageStream (connection.Stream, requestStream, headers, connection.Buffer);
-                connection.Stream.Flush ();
+				connection = UnixConnectionPool.GetConnection (_path);
+				UnixMessageIO.SendMessageStream (connection.Stream, requestStream, headers, connection.Buffer);
+				connection.Stream.Flush ();
 
-                if (!isOneWay) 
-                {
-                    sinkStack.Push (this, connection);
-                    ThreadPool.QueueUserWorkItem (new WaitCallback(data => {
-                        try {
-                            ReadAsyncUnixMessage (data);
-                        } catch {}
-                        }), sinkStack);
-                }
-                else
-                    connection.Release();
-            }
-            catch
-            {
-                if (connection != null) connection.Release();
-                if (!isOneWay) throw;
-            }
-        }
+				if (!isOneWay) 
+				{
+					sinkStack.Push (this, connection);
+					ThreadPool.QueueUserWorkItem (new WaitCallback(data => {
+						try {
+							ReadAsyncUnixMessage (data);
+						} catch {}
+						}), sinkStack);
+				}
+				else
+					connection.Release();
+			}
+			catch
+			{
+				if (connection != null) connection.Release();
+				if (!isOneWay) throw;
+			}
+		}
 
-        private void ReadAsyncUnixMessage(object data)
-        {
-            // This method is called by a new thread to asynchronously
-            // read the response to a request
+		private void ReadAsyncUnixMessage(object data)
+		{
+			// This method is called by a new thread to asynchronously
+			// read the response to a request
 
-            // The stack was provided as state data in QueueUserWorkItem
-            IClientChannelSinkStack stack = (IClientChannelSinkStack)data;
+			// The stack was provided as state data in QueueUserWorkItem
+			IClientChannelSinkStack stack = (IClientChannelSinkStack)data;
 
-            // The first sink in the stack is this sink. Pop it and
-            // get the status data, which is the UnixConnection used to send
-            // the request
-            UnixConnection connection = (UnixConnection)stack.Pop(this);
+			// The first sink in the stack is this sink. Pop it and
+			// get the status data, which is the UnixConnection used to send
+			// the request
+			UnixConnection connection = (UnixConnection)stack.Pop(this);
 
-            try
-            {
-                ITransportHeaders responseHeaders;
+			try
+			{
+				ITransportHeaders responseHeaders;
 
-                // Read the response, blocking if necessary
-                MessageStatus status = UnixMessageIO.ReceiveMessageStatus (connection.Stream, connection.Buffer);
+				// Read the response, blocking if necessary
+				MessageStatus status = UnixMessageIO.ReceiveMessageStatus (connection.Stream, connection.Buffer);
 
-                if (status != MessageStatus.MethodMessage)
-                    throw new RemotingException ("Unknown response message from server");
+				if (status != MessageStatus.MethodMessage)
+					throw new RemotingException ("Unknown response message from server");
 
-                Stream responseStream = UnixMessageIO.ReceiveMessageStream (connection.Stream, out responseHeaders, connection.Buffer);
+				Stream responseStream = UnixMessageIO.ReceiveMessageStream (connection.Stream, out responseHeaders, connection.Buffer);
 
-                // Free the connection, so it can be reused
-                connection.Release();
-                connection = null;
+				// Free the connection, so it can be reused
+				connection.Release();
+				connection = null;
 
-                // Ok, proceed with the other sinks
-                stack.AsyncProcessResponse (responseHeaders, responseStream);
-            }
-            catch
-            {
-                if (connection != null) connection.Release();
-                throw;
-            }
-        }
-    
-        public void AsyncProcessResponse (IClientResponseChannelSinkStack sinkStack,
-            object state, ITransportHeaders headers,
-            Stream stream)
-        {
-            // Should never be called
-            throw new NotSupportedException();
-        }
+				// Ok, proceed with the other sinks
+				stack.AsyncProcessResponse (responseHeaders, responseStream);
+			}
+			catch
+			{
+				if (connection != null) connection.Release();
+				throw;
+			}
+		}
+	
+		public void AsyncProcessResponse (IClientResponseChannelSinkStack sinkStack,
+			object state, ITransportHeaders headers,
+			Stream stream)
+		{
+			// Should never be called
+			throw new NotSupportedException();
+		}
 
-        public Stream GetRequestStream (IMessage msg, ITransportHeaders headers)
-        {
-            return null;
-        }
-        
-        public void ProcessMessage (IMessage msg,
-            ITransportHeaders requestHeaders,
-            Stream requestStream,
-            out ITransportHeaders responseHeaders,
-            out Stream responseStream)
-        {
-            UnixConnection connection = null;
-            try
-            {
-                if (requestHeaders == null) requestHeaders = new TransportHeaders();
-                requestHeaders ["__RequestUri"] = ((IMethodMessage)msg).Uri;
-                
-                // Sends the message
-                connection = UnixConnectionPool.GetConnection (_path);
-                UnixMessageIO.SendMessageStream (connection.Stream, requestStream, requestHeaders, connection.Buffer);
-                connection.Stream.Flush ();
+		public Stream GetRequestStream (IMessage msg, ITransportHeaders headers)
+		{
+			return null;
+		}
+		
+		public void ProcessMessage (IMessage msg,
+			ITransportHeaders requestHeaders,
+			Stream requestStream,
+			out ITransportHeaders responseHeaders,
+			out Stream responseStream)
+		{
+			UnixConnection connection = null;
+			try
+			{
+				if (requestHeaders == null) requestHeaders = new TransportHeaders();
+				requestHeaders ["__RequestUri"] = ((IMethodMessage)msg).Uri;
+				
+				// Sends the message
+				connection = UnixConnectionPool.GetConnection (_path);
+				UnixMessageIO.SendMessageStream (connection.Stream, requestStream, requestHeaders, connection.Buffer);
+				connection.Stream.Flush ();
 
-                // Reads the response
-                MessageStatus status = UnixMessageIO.ReceiveMessageStatus (connection.Stream, connection.Buffer);
+				// Reads the response
+				MessageStatus status = UnixMessageIO.ReceiveMessageStatus (connection.Stream, connection.Buffer);
 
-                if (status != MessageStatus.MethodMessage)
-                    throw new RemotingException ("Unknown response message from server");
+				if (status != MessageStatus.MethodMessage)
+					throw new RemotingException ("Unknown response message from server");
 
-                responseStream = UnixMessageIO.ReceiveMessageStream (connection.Stream, out responseHeaders, connection.Buffer);
-            }
-            finally
-            {
-                if (connection != null) 
-                    connection.Release();
-            }
-        }
+				responseStream = UnixMessageIO.ReceiveMessageStream (connection.Stream, out responseHeaders, connection.Buffer);
+			}
+			finally
+			{
+				if (connection != null) 
+					connection.Release();
+			}
+		}
 
-    }
+	}
 
 
 }

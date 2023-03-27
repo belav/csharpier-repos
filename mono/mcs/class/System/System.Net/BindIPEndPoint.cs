@@ -2,7 +2,7 @@
 // System.Net.BindIPEndPoint
 //
 // Author:
-//    Gonzalo Paniagua Javier  <gonzalo@novell.com>
+//	Gonzalo Paniagua Javier  <gonzalo@novell.com>
 //
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
@@ -26,7 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 namespace System.Net {
-    public delegate IPEndPoint BindIPEndPoint (ServicePoint servicePoint, IPEndPoint remoteEndPoint, int retryCount);
+	public delegate IPEndPoint BindIPEndPoint (ServicePoint servicePoint, IPEndPoint remoteEndPoint, int retryCount);
 
 }
 

@@ -20,19 +20,19 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jordi Mas i Hernandez, jordi@ximian.com
+//	Jordi Mas i Hernandez, jordi@ximian.com
 //
 //
 
 namespace System.Windows.Forms
 {
-    public enum MenuMerge
-    {
-        Add         = 0,
-        Replace     = 1,
-        MergeItems     = 2,
-        Remove         = 3,
-    }
+	public enum MenuMerge
+	{
+		Add 		= 0,
+		Replace 	= 1,
+		MergeItems 	= 2,
+		Remove 		= 3,
+	}
 }
 
 

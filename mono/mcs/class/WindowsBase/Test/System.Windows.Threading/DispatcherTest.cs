@@ -38,197 +38,197 @@ using System.Threading;
 namespace MonoTests.System.Windows.Threading
 {
 
-    delegate void Action ();
-    
-    [TestFixture]
-    public class DispatcherTest {
-        EventWaitHandle wait, wait2;
-        DispatcherOperation op;
-        
-        [SetUp]
-        public void DispatcherSetup ()
-        {
-            wait = new EventWaitHandle (false, EventResetMode.AutoReset);
-            wait2 = new EventWaitHandle (false, EventResetMode.AutoReset);
-        }
+	delegate void Action ();
+	
+	[TestFixture]
+	public class DispatcherTest {
+		EventWaitHandle wait, wait2;
+		DispatcherOperation op;
+		
+		[SetUp]
+		public void DispatcherSetup ()
+		{
+			wait = new EventWaitHandle (false, EventResetMode.AutoReset);
+			wait2 = new EventWaitHandle (false, EventResetMode.AutoReset);
+		}
 
-        //
-        // Tests that fields in a DispatcherOperation can be issued from
-        // a separate thread
-        //
-        [Test]
-        public void TestDispatcherOpOnThread ()
-        {
-            Thread t = new Thread (new ThreadStart (thread));
-            Dispatcher d = Dispatcher.CurrentDispatcher;
-            
-            t.Start ();
-            op = Dispatcher.CurrentDispatcher.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
-                Console.WriteLine ("Some methods");
-            });
-            wait.Set ();
-            wait2.WaitOne ();
-        }
+		//
+		// Tests that fields in a DispatcherOperation can be issued from
+		// a separate thread
+		//
+		[Test]
+		public void TestDispatcherOpOnThread ()
+		{
+			Thread t = new Thread (new ThreadStart (thread));
+			Dispatcher d = Dispatcher.CurrentDispatcher;
+			
+			t.Start ();
+			op = Dispatcher.CurrentDispatcher.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
+				Console.WriteLine ("Some methods");
+			});
+			wait.Set ();
+			wait2.WaitOne ();
+		}
 
-        void thread ()
-        {
-            wait.WaitOne ();
-            op.Priority = DispatcherPriority.DataBind;
-            wait2.Set ();
-        }
+		void thread ()
+		{
+			wait.WaitOne ();
+			op.Priority = DispatcherPriority.DataBind;
+			wait2.Set ();
+		}
 
-        [Test]
-        public void TestDispatcherOrder ()
-        {
-            Dispatcher d = Dispatcher.CurrentDispatcher;
+		[Test]
+		public void TestDispatcherOrder ()
+		{
+			Dispatcher d = Dispatcher.CurrentDispatcher;
 
-            DispatcherFrame frame = new DispatcherFrame ();
-            bool fail = true;
-            int next = 1;
-            
-            d.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
-                if (next != 3)
-                    throw new Exception ("Expected state 3, got " + next.ToString ());
+			DispatcherFrame frame = new DispatcherFrame ();
+			bool fail = true;
+			int next = 1;
+			
+			d.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
+				if (next != 3)
+					throw new Exception ("Expected state 3, got " + next.ToString ());
 
-                next = 4;
-                Console.WriteLine ("First");
-            });
-            d.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
-                if (next != 4)
-                    throw new Exception ("Expected state 4, got " + next.ToString ());
+				next = 4;
+				Console.WriteLine ("First");
+			});
+			d.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
+				if (next != 4)
+					throw new Exception ("Expected state 4, got " + next.ToString ());
 
-                next = 5;
-                Console.WriteLine ("Second");
-            });
-            d.BeginInvoke (DispatcherPriority.Send, (Action) delegate {
-                if (next != 1)
-                    throw new Exception ("Expected state 1, got " + next.ToString ());
-                next = 2;
-                Console.WriteLine ("High Priority");
-                d.BeginInvoke (DispatcherPriority.Send, (Action) delegate {
-                    if (next != 2)
-                        throw new Exception ("Expected state 2, got " + next.ToString ());
+				next = 5;
+				Console.WriteLine ("Second");
+			});
+			d.BeginInvoke (DispatcherPriority.Send, (Action) delegate {
+				if (next != 1)
+					throw new Exception ("Expected state 1, got " + next.ToString ());
+				next = 2;
+				Console.WriteLine ("High Priority");
+				d.BeginInvoke (DispatcherPriority.Send, (Action) delegate {
+					if (next != 2)
+						throw new Exception ("Expected state 2, got " + next.ToString ());
 
-                    next = 3;
-                    Console.WriteLine ("INSERTED");
-                });
-            });
-            d.BeginInvoke (DispatcherPriority.SystemIdle, (Action) delegate {
-                if (next != 6)
-                    throw new Exception ("Expected state 6, got " + next.ToString ());
-                
-                Console.WriteLine ("Idle");
-                frame.Continue = false;
-                fail = false;
-            });
-            
-            d.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
-                if (next != 5)
-                    throw new Exception ("Expected state 5, got " + next.ToString ());
-                next = 6;
-                Console.WriteLine ("Last normal");
-            });
-            
-            Dispatcher.PushFrame (frame);
+					next = 3;
+					Console.WriteLine ("INSERTED");
+				});
+			});
+			d.BeginInvoke (DispatcherPriority.SystemIdle, (Action) delegate {
+				if (next != 6)
+					throw new Exception ("Expected state 6, got " + next.ToString ());
+				
+				Console.WriteLine ("Idle");
+				frame.Continue = false;
+				fail = false;
+			});
+			
+			d.BeginInvoke (DispatcherPriority.Normal, (Action) delegate {
+				if (next != 5)
+					throw new Exception ("Expected state 5, got " + next.ToString ());
+				next = 6;
+				Console.WriteLine ("Last normal");
+			});
+			
+			Dispatcher.PushFrame (frame);
 
-            if (fail)
-                throw new Exception ("Expected all states to run");
-        }
+			if (fail)
+				throw new Exception ("Expected all states to run");
+		}
 
-        [Test]
-        public void TestTwoArguments()
-        {
-            Dispatcher d = Dispatcher.CurrentDispatcher;
-            DispatcherFrame frame = new DispatcherFrame();
+		[Test]
+		public void TestTwoArguments()
+		{
+			Dispatcher d = Dispatcher.CurrentDispatcher;
+			DispatcherFrame frame = new DispatcherFrame();
 
-            d.BeginInvoke (DispatcherPriority.Normal, (Action<int, string>) delegate(int arg1, string arg2) {
-                Assert.AreEqual(10, arg1, "arg1");
-                Assert.AreEqual("OK", arg2, "arg2");
-                frame.Continue = false;
-            }, 10, "OK");
+			d.BeginInvoke (DispatcherPriority.Normal, (Action<int, string>) delegate(int arg1, string arg2) {
+				Assert.AreEqual(10, arg1, "arg1");
+				Assert.AreEqual("OK", arg2, "arg2");
+				frame.Continue = false;
+			}, 10, "OK");
 
-            Dispatcher.PushFrame(frame);
-        }
+			Dispatcher.PushFrame(frame);
+		}
 
-        [Test]
-        public void TestRunTwice()
-        {
-            Dispatcher d = Dispatcher.CurrentDispatcher;
-            Action exit = delegate { Dispatcher.ExitAllFrames(); };
-            int counter = 0;
-            Action increment = delegate { counter++; };
+		[Test]
+		public void TestRunTwice()
+		{
+			Dispatcher d = Dispatcher.CurrentDispatcher;
+			Action exit = delegate { Dispatcher.ExitAllFrames(); };
+			int counter = 0;
+			Action increment = delegate { counter++; };
 
-            d.BeginInvoke(DispatcherPriority.Normal, exit);
-            Dispatcher.Run();
-            d.BeginInvoke(DispatcherPriority.Normal, increment);
-            d.BeginInvoke(DispatcherPriority.Normal, increment);
-            d.BeginInvoke(DispatcherPriority.Normal, exit);
-            Dispatcher.Run();
+			d.BeginInvoke(DispatcherPriority.Normal, exit);
+			Dispatcher.Run();
+			d.BeginInvoke(DispatcherPriority.Normal, increment);
+			d.BeginInvoke(DispatcherPriority.Normal, increment);
+			d.BeginInvoke(DispatcherPriority.Normal, exit);
+			Dispatcher.Run();
 
-            Assert.AreEqual(2, counter, "Counter of delegate invocation");
-        }
+			Assert.AreEqual(2, counter, "Counter of delegate invocation");
+		}
 
-        [Test]
-        public void TestStopIfContinueIsFalse()
-        {
-            Dispatcher d = Dispatcher.CurrentDispatcher;
-            DispatcherFrame frame = new DispatcherFrame();
-            int counter = 0;
+		[Test]
+		public void TestStopIfContinueIsFalse()
+		{
+			Dispatcher d = Dispatcher.CurrentDispatcher;
+			DispatcherFrame frame = new DispatcherFrame();
+			int counter = 0;
 
-            d.BeginInvoke(DispatcherPriority.Normal, (Action) delegate {
-                counter++;
-            });
-            d.BeginInvoke(DispatcherPriority.Normal, (Action) delegate {
-                Dispatcher.ExitAllFrames();
-            });
+			d.BeginInvoke(DispatcherPriority.Normal, (Action) delegate {
+				counter++;
+			});
+			d.BeginInvoke(DispatcherPriority.Normal, (Action) delegate {
+				Dispatcher.ExitAllFrames();
+			});
 
-            frame.Continue = false;
-            Dispatcher.PushFrame(frame);
-            Assert.AreEqual(0, counter, "Counter of delegate invocation");
-            frame.Continue = true;
-            Dispatcher.PushFrame(frame);
-            Assert.AreEqual(1, counter, "Counter of delegate invocation");
-        }
+			frame.Continue = false;
+			Dispatcher.PushFrame(frame);
+			Assert.AreEqual(0, counter, "Counter of delegate invocation");
+			frame.Continue = true;
+			Dispatcher.PushFrame(frame);
+			Assert.AreEqual(1, counter, "Counter of delegate invocation");
+		}
 
-        //
-        // When a Dispatcher exits due to 'frame.Continue' being false,
-        // it should not try to deque the same operation second time.
-        //
-        [Test]
-        public void TestOperationDequeue()
-        {
+		//
+		// When a Dispatcher exits due to 'frame.Continue' being false,
+		// it should not try to deque the same operation second time.
+		//
+		[Test]
+		public void TestOperationDequeue()
+		{
 
-            Dispatcher d = Dispatcher.CurrentDispatcher;
-            DispatcherFrame frame = new DispatcherFrame();
-            Action exit = delegate { frame.Continue = false; };
+			Dispatcher d = Dispatcher.CurrentDispatcher;
+			DispatcherFrame frame = new DispatcherFrame();
+			Action exit = delegate { frame.Continue = false; };
 
-            d.BeginInvoke(DispatcherPriority.Normal, exit);
-            Dispatcher.PushFrame(frame);
+			d.BeginInvoke(DispatcherPriority.Normal, exit);
+			Dispatcher.PushFrame(frame);
 
-            frame = new DispatcherFrame();
-            d.BeginInvoke(DispatcherPriority.Background, exit);
-            Dispatcher.PushFrame(frame);
-        }
+			frame = new DispatcherFrame();
+			d.BeginInvoke(DispatcherPriority.Background, exit);
+			Dispatcher.PushFrame(frame);
+		}
 
-        [Test]
-        public void TestPreemptedByHigherPriorityTask()
-        {
-            Dispatcher d = Dispatcher.CurrentDispatcher;
-            DispatcherFrame frame = new DispatcherFrame();
-            int counter = 0;
-            Action increment = delegate { counter++; };
+		[Test]
+		public void TestPreemptedByHigherPriorityTask()
+		{
+			Dispatcher d = Dispatcher.CurrentDispatcher;
+			DispatcherFrame frame = new DispatcherFrame();
+			int counter = 0;
+			Action increment = delegate { counter++; };
 
-            d.BeginInvoke(DispatcherPriority.Normal, (Action) delegate {
-                d.BeginInvoke(DispatcherPriority.Send, increment);
-            });
-            d.BeginInvoke(DispatcherPriority.Background, (Action) delegate {
-                frame.Continue = false;
-            });
+			d.BeginInvoke(DispatcherPriority.Normal, (Action) delegate {
+				d.BeginInvoke(DispatcherPriority.Send, increment);
+			});
+			d.BeginInvoke(DispatcherPriority.Background, (Action) delegate {
+				frame.Continue = false;
+			});
 
-            Dispatcher.PushFrame(frame);
-            Assert.AreEqual(1, counter, "Counter of delegate invocation");
-        }
-    }
+			Dispatcher.PushFrame(frame);
+			Assert.AreEqual(1, counter, "Counter of delegate invocation");
+		}
+	}
 }
 
 

@@ -2,7 +2,7 @@
 // Line: 
 
 class Test {
-    internal void f ([System.Runtime.InteropServices.DefaultParameterValue ((short) 1)] int x)
-    {
-    }
+	internal void f ([System.Runtime.InteropServices.DefaultParameterValue ((short) 1)] int x)
+	{
+	}
 }

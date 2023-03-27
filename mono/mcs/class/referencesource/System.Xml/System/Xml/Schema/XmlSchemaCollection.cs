@@ -117,10 +117,10 @@ namespace System.Xml.Schema {
             return schema;
         }
 
-    /// <include file='doc\XmlSchemaCollection.uex' path='docs/doc[@for="XmlSchemaCollection.Add4"]/*' />
+	/// <include file='doc\XmlSchemaCollection.uex' path='docs/doc[@for="XmlSchemaCollection.Add4"]/*' />
         public XmlSchema Add(String ns, XmlReader reader) {
-        return Add(ns, reader, xmlResolver);    
-    }
+	    return Add(ns, reader, xmlResolver);	
+	}
 
         /// <include file='doc\XmlSchemaCollection.uex' path='docs/doc[@for="XmlSchemaCollection.Add1"]/*' />
         /// <devdoc>
@@ -133,7 +133,7 @@ namespace System.Xml.Schema {
                 throw new ArgumentNullException("reader");
             XmlNameTable readerNameTable = reader.NameTable;
             SchemaInfo schemaInfo = new SchemaInfo(); 
-            
+	        
             Parser parser = new Parser(SchemaType.None, readerNameTable, GetSchemaNames(readerNameTable), validationEventHandler);
             parser.XmlResolver = resolver;
             SchemaType schemaType;
@@ -146,7 +146,7 @@ namespace System.Xml.Schema {
             }
 
             if (schemaType == SchemaType.XSD) {
-                schemaInfo.SchemaType = SchemaType.XSD;
+				schemaInfo.SchemaType = SchemaType.XSD;
                 return Add(ns, schemaInfo, parser.XmlSchema, true, resolver);
             }
             else {
@@ -160,11 +160,11 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public XmlSchema Add(XmlSchema schema) {
-            return Add(schema, xmlResolver);
+			return Add(schema, xmlResolver);
         }
 
         /// <include file='doc\XmlSchemaCollection.uex' path='docs/doc[@for="XmlSchemaCollection.Add5"]/*' />
-        public XmlSchema Add(XmlSchema schema, XmlResolver resolver) {
+	    public XmlSchema Add(XmlSchema schema, XmlResolver resolver) {
             if (schema == null)
                 throw new ArgumentNullException("schema");
 
@@ -303,19 +303,19 @@ namespace System.Xml.Schema {
         }
 
         internal XmlSchema Add(string ns, SchemaInfo schemaInfo, XmlSchema schema, bool compile) {
-        return Add(ns, schemaInfo, schema, compile, xmlResolver);
-    }
+		return Add(ns, schemaInfo, schema, compile, xmlResolver);
+	}
 
         private XmlSchema Add(string ns, SchemaInfo schemaInfo, XmlSchema schema, bool compile, XmlResolver resolver) {
             int errorCount = 0;
             if (schema != null) {
                 if (schema.ErrorCount == 0 && compile) {
-                    if (!schema.CompileSchema(this, resolver, schemaInfo, ns, validationEventHandler, nameTable, true)) {
-                        errorCount = 1;
-                    }
-                    ns = schema.TargetNamespace == null ? string.Empty : schema.TargetNamespace;
+					if (!schema.CompileSchema(this, resolver, schemaInfo, ns, validationEventHandler, nameTable, true)) {
+						errorCount = 1;
+					}
+					ns = schema.TargetNamespace == null ? string.Empty : schema.TargetNamespace;
                 }
-                errorCount += schema.ErrorCount;
+				errorCount += schema.ErrorCount;
             } 
             else {
                 errorCount += schemaInfo.ErrorCount;
@@ -326,7 +326,7 @@ namespace System.Xml.Schema {
                 XmlSchemaCollectionNode node = new XmlSchemaCollectionNode();
                 node.NamespaceURI = ns;
                 node.SchemaInfo = schemaInfo; 
-                node.Schema = schema; 
+				node.Schema = schema; 
                 Add(ns, node);
                 return schema;
             }

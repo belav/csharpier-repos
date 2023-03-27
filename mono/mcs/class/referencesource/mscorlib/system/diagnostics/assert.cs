@@ -118,9 +118,9 @@ namespace System.Diagnostics {
         }
 
 #if MONO
-        internal static int ShowDefaultAssertDialog(String conditionString, String message, String stackTrace, String windowTitle) {
-            throw new NotImplementedException ();
-        }
+		internal static int ShowDefaultAssertDialog(String conditionString, String message, String stackTrace, String windowTitle) {
+			throw new NotImplementedException ();
+		}
 #else
       // Called when an assert happens.
       // windowTitle can be null.

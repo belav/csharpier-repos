@@ -1,9 +1,9 @@
 //
 // PartialCachingAttributeCas.cs 
-//    - CAS unit tests for System.Web.UI.PartialCachingAttribute
+//	- CAS unit tests for System.Web.UI.PartialCachingAttribute
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,73 +38,73 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class PartialCachingAttributeCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class PartialCachingAttributeCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor1_Deny_Unrestricted ()
-        {
-            PartialCachingAttribute pca = new PartialCachingAttribute (Int32.MinValue);
-            Assert.AreEqual (Int32.MinValue, pca.Duration, "Duration");
-            Assert.IsNull (pca.VaryByControls, "VaryByControls");
-            Assert.IsNull (pca.VaryByCustom, "VaryByCustom");
-            Assert.IsNull (pca.VaryByParams, "VaryByParams");
-            Assert.IsNull (pca.SqlDependency, "SqlDependency");
-            Assert.IsFalse (pca.Shared, "Shared");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor1_Deny_Unrestricted ()
+		{
+			PartialCachingAttribute pca = new PartialCachingAttribute (Int32.MinValue);
+			Assert.AreEqual (Int32.MinValue, pca.Duration, "Duration");
+			Assert.IsNull (pca.VaryByControls, "VaryByControls");
+			Assert.IsNull (pca.VaryByCustom, "VaryByCustom");
+			Assert.IsNull (pca.VaryByParams, "VaryByParams");
+			Assert.IsNull (pca.SqlDependency, "SqlDependency");
+			Assert.IsFalse (pca.Shared, "Shared");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor4_Deny_Unrestricted ()
-        {
-            PartialCachingAttribute pca = new PartialCachingAttribute (Int32.MaxValue, "1", "2", "3");
-            Assert.AreEqual (Int32.MaxValue, pca.Duration, "Duration");
-            Assert.AreEqual ("2", pca.VaryByControls, "VaryByControls");
-            Assert.AreEqual ("3", pca.VaryByCustom, "VaryByCustom");
-            Assert.AreEqual ("1", pca.VaryByParams, "VaryByParams");
-            Assert.IsNull (pca.SqlDependency, "SqlDependency");
-            Assert.IsFalse (pca.Shared, "Shared");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor4_Deny_Unrestricted ()
+		{
+			PartialCachingAttribute pca = new PartialCachingAttribute (Int32.MaxValue, "1", "2", "3");
+			Assert.AreEqual (Int32.MaxValue, pca.Duration, "Duration");
+			Assert.AreEqual ("2", pca.VaryByControls, "VaryByControls");
+			Assert.AreEqual ("3", pca.VaryByCustom, "VaryByCustom");
+			Assert.AreEqual ("1", pca.VaryByParams, "VaryByParams");
+			Assert.IsNull (pca.SqlDependency, "SqlDependency");
+			Assert.IsFalse (pca.Shared, "Shared");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor5_Deny_Unrestricted ()
-        {
-            PartialCachingAttribute pca = new PartialCachingAttribute (0, "a", "b", "c", true);
-            Assert.AreEqual (0, pca.Duration, "Duration");
-            Assert.AreEqual ("b", pca.VaryByControls, "VaryByControls");
-            Assert.AreEqual ("c", pca.VaryByCustom, "VaryByCustom");
-            Assert.AreEqual ("a", pca.VaryByParams, "VaryByParams");
-            Assert.IsNull (pca.SqlDependency, "SqlDependency");
-            Assert.IsTrue (pca.Shared, "Shared");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor5_Deny_Unrestricted ()
+		{
+			PartialCachingAttribute pca = new PartialCachingAttribute (0, "a", "b", "c", true);
+			Assert.AreEqual (0, pca.Duration, "Duration");
+			Assert.AreEqual ("b", pca.VaryByControls, "VaryByControls");
+			Assert.AreEqual ("c", pca.VaryByCustom, "VaryByCustom");
+			Assert.AreEqual ("a", pca.VaryByParams, "VaryByParams");
+			Assert.IsNull (pca.SqlDependency, "SqlDependency");
+			Assert.IsTrue (pca.Shared, "Shared");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor6_Deny_Unrestricted ()
-        {
-            PartialCachingAttribute pca = new PartialCachingAttribute (0, "a", "b", "c", "sql", false);
-            Assert.AreEqual (0, pca.Duration, "Duration");
-            Assert.AreEqual ("b", pca.VaryByControls, "VaryByControls");
-            Assert.AreEqual ("c", pca.VaryByCustom, "VaryByCustom");
-            Assert.AreEqual ("a", pca.VaryByParams, "VaryByParams");
-            Assert.AreEqual ("sql", pca.SqlDependency, "SqlDependency");
-            Assert.IsFalse (pca.Shared, "Shared");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor6_Deny_Unrestricted ()
+		{
+			PartialCachingAttribute pca = new PartialCachingAttribute (0, "a", "b", "c", "sql", false);
+			Assert.AreEqual (0, pca.Duration, "Duration");
+			Assert.AreEqual ("b", pca.VaryByControls, "VaryByControls");
+			Assert.AreEqual ("c", pca.VaryByCustom, "VaryByCustom");
+			Assert.AreEqual ("a", pca.VaryByParams, "VaryByParams");
+			Assert.AreEqual ("sql", pca.SqlDependency, "SqlDependency");
+			Assert.IsFalse (pca.Shared, "Shared");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (int) });
-            Assert.IsNotNull (ci, ".ctor(int)");
-            return ci.Invoke (new object[1] { 0 });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (int) });
+			Assert.IsNotNull (ci, ".ctor(int)");
+			return ci.Invoke (new object[1] { 0 });
+		}
 
-        public override Type Type {
-            get { return typeof (PartialCachingAttribute); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (PartialCachingAttribute); }
+		}
+	}
 }

@@ -2,8 +2,8 @@
 // System.Net.Configuration.AuthenticationModulesSection.cs
 //
 // Authors:
-//    Tim Coleman (tim@timcoleman.com)
-//    Chris Toshok (toshok@ximian.com)
+//	Tim Coleman (tim@timcoleman.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // Copyright (C) Tim Coleman, 2004
 // (C) 2004,2005 Novell, Inc. (http://www.novell.com)
@@ -36,59 +36,59 @@ using System.Configuration;
 
 namespace System.Net.Configuration 
 {
-    public sealed class AuthenticationModulesSection : ConfigurationSection
-    {
-        #region Fields
+	public sealed class AuthenticationModulesSection : ConfigurationSection
+	{
+		#region Fields
 
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty authenticationModulesProp;
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty authenticationModulesProp;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        static AuthenticationModulesSection ()
-        {
-            authenticationModulesProp = new ConfigurationProperty ("", typeof (AuthenticationModuleElementCollection),
-                                           null, ConfigurationPropertyOptions.IsDefaultCollection);
-                                           
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (authenticationModulesProp);
-        }
+		static AuthenticationModulesSection ()
+		{
+			authenticationModulesProp = new ConfigurationProperty ("", typeof (AuthenticationModuleElementCollection),
+									       null, ConfigurationPropertyOptions.IsDefaultCollection);
+									       
+			properties = new ConfigurationPropertyCollection ();
+			properties.Add (authenticationModulesProp);
+		}
 
-        public AuthenticationModulesSection ()
-        {
-        }
+		public AuthenticationModulesSection ()
+		{
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public AuthenticationModuleElementCollection AuthenticationModules {
-            get { return (AuthenticationModuleElementCollection) base [authenticationModulesProp]; }
-        }
+		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+		public AuthenticationModuleElementCollection AuthenticationModules {
+			get { return (AuthenticationModuleElementCollection) base [authenticationModulesProp]; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        [MonoTODO]
-        protected override void PostDeserialize ()
-        {
-        }
+		[MonoTODO]
+		protected override void PostDeserialize ()
+		{
+		}
 
-        [MonoTODO]
-        protected override void InitializeDefault ()
-        {
-        }
+		[MonoTODO]
+		protected override void InitializeDefault ()
+		{
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }
 
 #endif

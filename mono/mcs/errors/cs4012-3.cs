@@ -11,9 +11,9 @@ public ref struct S
 
 class C
 {
-    public async void Test ()
-    {
-        var tr = new S ();
-        await Task.Factory.StartNew (() => 6);
-    }
+	public async void Test ()
+	{
+		var tr = new S ();
+		await Task.Factory.StartNew (() => 6);
+	}
 }

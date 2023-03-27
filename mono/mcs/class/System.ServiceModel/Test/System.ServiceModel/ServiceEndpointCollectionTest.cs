@@ -2,7 +2,7 @@
 // ServiceEndpointCollectionTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,9 +33,9 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-    [TestFixture]
-    public class ServiceEndpointCollectionTest
-    {
-        // add tests.
-    }
+	[TestFixture]
+	public class ServiceEndpointCollectionTest
+	{
+		// add tests.
+	}
 }

@@ -30,48 +30,48 @@ using System;
 
 namespace System.Web.UI
 {
-    public sealed class PageAsyncTask
-    {
-        public PageAsyncTask (BeginEventHandler beginHandler, EndEventHandler endHandler,
-            EndEventHandler timeoutHandler, Object state)
-            : this(beginHandler, endHandler, timeoutHandler, state, false)
-        {
-        }
+	public sealed class PageAsyncTask
+	{
+		public PageAsyncTask (BeginEventHandler beginHandler, EndEventHandler endHandler,
+			EndEventHandler timeoutHandler, Object state)
+			: this(beginHandler, endHandler, timeoutHandler, state, false)
+		{
+		}
 
-        public PageAsyncTask (BeginEventHandler beginHandler, EndEventHandler endHandler,
-            EndEventHandler timeoutHandler, Object state, bool executeInParallel) 
-        {
-            this.beginHandler = beginHandler;
-            this.endHandler = endHandler;
-            this.timeoutHandler = timeoutHandler;
-            this.state = state;
-            this.executeInParallel = executeInParallel;
-        }
+		public PageAsyncTask (BeginEventHandler beginHandler, EndEventHandler endHandler,
+			EndEventHandler timeoutHandler, Object state, bool executeInParallel) 
+		{
+			this.beginHandler = beginHandler;
+			this.endHandler = endHandler;
+			this.timeoutHandler = timeoutHandler;
+			this.state = state;
+			this.executeInParallel = executeInParallel;
+		}
 
-        BeginEventHandler beginHandler;
-        public BeginEventHandler BeginHandler {
-            get { return beginHandler; } 
-        }
+		BeginEventHandler beginHandler;
+		public BeginEventHandler BeginHandler {
+			get { return beginHandler; } 
+		}
 
-        EndEventHandler endHandler;
-        public EndEventHandler EndHandler {
-            get { return endHandler; } 
-        }
+		EndEventHandler endHandler;
+		public EndEventHandler EndHandler {
+			get { return endHandler; } 
+		}
 
-        EndEventHandler timeoutHandler;
-        public EndEventHandler TimeoutHandler {
-            get { return timeoutHandler; } 
-        }
+		EndEventHandler timeoutHandler;
+		public EndEventHandler TimeoutHandler {
+			get { return timeoutHandler; } 
+		}
 
-        bool executeInParallel;
-        public bool ExecuteInParallel {
-            get { return executeInParallel; } 
-        }
+		bool executeInParallel;
+		public bool ExecuteInParallel {
+			get { return executeInParallel; } 
+		}
 
-        object state;
-        public object State {
-            get { return state; } 
-        }
-    }
+		object state;
+		public object State {
+			get { return state; } 
+		}
+	}
 }
 

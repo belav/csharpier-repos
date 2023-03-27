@@ -8,13 +8,13 @@ namespace B.X
 
 namespace Test
 {
-    using A.X;
-    using B.X;
-    
-    class C
-    {
-        public static void Main ()
-        {
-        }
-    }
+	using A.X;
+	using B.X;
+	
+	class C
+	{
+		public static void Main ()
+		{
+		}
+	}
 }

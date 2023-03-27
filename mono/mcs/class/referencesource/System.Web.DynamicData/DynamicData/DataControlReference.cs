@@ -1,4 +1,4 @@
-namespace System.Web.DynamicData {
+﻿namespace System.Web.DynamicData {
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;

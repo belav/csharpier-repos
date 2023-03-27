@@ -3,16 +3,16 @@
 
 class MainClass
 {
-    public static void Main ()
-    {
-        lock (Bar.Buzz) {
-        }
-    }
+	public static void Main ()
+	{
+		lock (Bar.Buzz) {
+		}
+	}
 }
 
 class Bar
 {
-    internal void Buzz ()
-    {
-    }
+	internal void Buzz ()
+	{
+	}
 }

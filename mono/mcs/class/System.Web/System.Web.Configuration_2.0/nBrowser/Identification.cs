@@ -23,81 +23,81 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace System.Web.Configuration.nBrowser
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
+	using System;
+	using System.Collections.Generic;
+	using System.Text;
 
-    class Identification
-    {
-        private bool MatchType = true;
-        private string MatchName = string.Empty;
-        private string MatchGroup = string.Empty;
-        //FxCop will complain that this is assigned to but never used.
-        //Reason I keep it around is to see the actual regex expresion 
-        //used without having to drill down deep in regex object to find it
-        private string MatchPattern = string.Empty;
-        private System.Text.RegularExpressions.Regex RegexPattern;
+	class Identification
+	{
+		private bool MatchType = true;
+		private string MatchName = string.Empty;
+		private string MatchGroup = string.Empty;
+		//FxCop will complain that this is assigned to but never used.
+		//Reason I keep it around is to see the actual regex expresion 
+		//used without having to drill down deep in regex object to find it
+		private string MatchPattern = string.Empty;
+		private System.Text.RegularExpressions.Regex RegexPattern;
 
-        /// <summary>
-        /// Sets up Initial Identification Object, So that it is easier debuging
-        /// and passing Regular expression objects around.
-        /// </summary>
-        /// <param name="matchType">True = Match, False = NonMatch</param>
-        /// <param name="matchGroup">Two Options, capability, header</param>
-        /// <param name="matchName">Header Name</param>
-        /// <param name="matchPattern">Regular Expression Pattern</param>
-        public Identification(bool matchType, string matchGroup, string matchName, string matchPattern)
-        {
-            this.MatchType = matchType;
-            this.MatchGroup = matchGroup;
-            this.MatchName = matchName;
-            this.MatchPattern = matchPattern;
-            RegexPattern = new System.Text.RegularExpressions.Regex(matchPattern);
-        }
-        /// <summary>
-        /// Builds a Match Object from the result of the regular expression
-        /// </summary>
-        /// <param name="Header">Header Value which the regular expression will evaluate.</param>
-        /// <returns>A Match object created from the regular expression and the passed in header.</returns>
-        public System.Text.RegularExpressions.Match GetMatch(string Header)
-        {
-            return RegexPattern.Match(Header == null ? string.Empty : Header);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool IsMatchSuccessful(System.Text.RegularExpressions.Match m)
-        {
-            // Return true if a "match" matched successfully or a "nonmatch" didn't match.
-            return (MatchType == m.Success);
-        }
+		/// <summary>
+		/// Sets up Initial Identification Object, So that it is easier debuging
+		/// and passing Regular expression objects around.
+		/// </summary>
+		/// <param name="matchType">True = Match, False = NonMatch</param>
+		/// <param name="matchGroup">Two Options, capability, header</param>
+		/// <param name="matchName">Header Name</param>
+		/// <param name="matchPattern">Regular Expression Pattern</param>
+		public Identification(bool matchType, string matchGroup, string matchName, string matchPattern)
+		{
+			this.MatchType = matchType;
+			this.MatchGroup = matchGroup;
+			this.MatchName = matchName;
+			this.MatchPattern = matchPattern;
+			RegexPattern = new System.Text.RegularExpressions.Regex(matchPattern);
+		}
+		/// <summary>
+		/// Builds a Match Object from the result of the regular expression
+		/// </summary>
+		/// <param name="Header">Header Value which the regular expression will evaluate.</param>
+		/// <returns>A Match object created from the regular expression and the passed in header.</returns>
+		public System.Text.RegularExpressions.Match GetMatch(string Header)
+		{
+			return RegexPattern.Match(Header == null ? string.Empty : Header);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsMatchSuccessful(System.Text.RegularExpressions.Match m)
+		{
+			// Return true if a "match" matched successfully or a "nonmatch" didn't match.
+			return (MatchType == m.Success);
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name
-        {
-            get
-            {
-                return this.MatchName;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Group
-        {
-            get
-            {
-                return this.MatchGroup;
-            }
-        }
-        public string Pattern
-        {
-            get
-            {
-                return MatchPattern;
-            }
-        }
-    }
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Name
+		{
+			get
+			{
+				return this.MatchName;
+			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Group
+		{
+			get
+			{
+				return this.MatchGroup;
+			}
+		}
+		public string Pattern
+		{
+			get
+			{
+				return MatchPattern;
+			}
+		}
+	}
 }

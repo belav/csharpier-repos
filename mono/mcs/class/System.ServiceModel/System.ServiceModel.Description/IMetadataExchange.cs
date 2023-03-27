@@ -2,7 +2,7 @@
 // IMetadataExchange.cs
 //
 // Author:
-//    Ankit Jain <jankit@novell.com>
+//	Ankit Jain <jankit@novell.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -30,23 +30,23 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Description
 {
-    [ServiceContract (Namespace = "http://schemas.microsoft.com/2006/04/mex", Name = "IMetadataExchange")]
-    public interface IMetadataExchange
-    {
-        [OperationContract (
-            ReplyAction = "http://schemas.xmlsoap.org/ws/2004/09/transfer/GetResponse",
-            Action = "http://schemas.xmlsoap.org/ws/2004/09/transfer/Get",
-            AsyncPattern = true)]
-        IAsyncResult BeginGet (Message request,
-                AsyncCallback callback,
-                Object state);
+	[ServiceContract (Namespace = "http://schemas.microsoft.com/2006/04/mex", Name = "IMetadataExchange")]
+	public interface IMetadataExchange
+	{
+		[OperationContract (
+			ReplyAction = "http://schemas.xmlsoap.org/ws/2004/09/transfer/GetResponse",
+			Action = "http://schemas.xmlsoap.org/ws/2004/09/transfer/Get",
+			AsyncPattern = true)]
+		IAsyncResult BeginGet (Message request,
+				AsyncCallback callback,
+				Object state);
 
-        Message EndGet (IAsyncResult result);
+		Message EndGet (IAsyncResult result);
 
-        [OperationContract (
-            ReplyAction = "http://schemas.xmlsoap.org/ws/2004/09/transfer/GetResponse",
-            Action = "http://schemas.xmlsoap.org/ws/2004/09/transfer/Get",
-            AsyncPattern = false)]
-        Message Get (Message request);
-    }
+		[OperationContract (
+			ReplyAction = "http://schemas.xmlsoap.org/ws/2004/09/transfer/GetResponse",
+			Action = "http://schemas.xmlsoap.org/ws/2004/09/transfer/Get",
+			AsyncPattern = false)]
+		Message Get (Message request);
+	}
 }

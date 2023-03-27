@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 //
 
@@ -29,12 +29,12 @@
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms {
-    [Flags]
-    [ComVisible(true)]
-    public enum ArrangeDirection {
-        Left        = 0,
-        Right        = 0,
-        Down        = 4,
-        Up        = 4
-    }
+	[Flags]
+	[ComVisible(true)]
+	public enum ArrangeDirection {
+		Left		= 0,
+		Right		= 0,
+		Down		= 4,
+		Up		= 4
+	}
 }

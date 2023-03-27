@@ -2,7 +2,7 @@
 // X509RecipientCertificateClientElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,66 +54,66 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public sealed partial class X509RecipientCertificateClientElement
-         : ConfigurationElement
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty authentication;
-        static ConfigurationProperty default_certificate;
-        static ConfigurationProperty scoped_certificates;
+	[MonoTODO]
+	public sealed partial class X509RecipientCertificateClientElement
+		 : ConfigurationElement
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
+		static ConfigurationProperty authentication;
+		static ConfigurationProperty default_certificate;
+		static ConfigurationProperty scoped_certificates;
 
-        static X509RecipientCertificateClientElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-            authentication = new ConfigurationProperty ("authentication",
-                typeof (X509ServiceCertificateAuthenticationElement), null, null/* FIXME: get converter for X509ServiceCertificateAuthenticationElement*/, null,
-                ConfigurationPropertyOptions.None);
+		static X509RecipientCertificateClientElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+			authentication = new ConfigurationProperty ("authentication",
+				typeof (X509ServiceCertificateAuthenticationElement), null, null/* FIXME: get converter for X509ServiceCertificateAuthenticationElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            default_certificate = new ConfigurationProperty ("defaultCertificate",
-                typeof (X509DefaultServiceCertificateElement), null, null/* FIXME: get converter for X509DefaultServiceCertificateElement*/, null,
-                ConfigurationPropertyOptions.None);
+			default_certificate = new ConfigurationProperty ("defaultCertificate",
+				typeof (X509DefaultServiceCertificateElement), null, null/* FIXME: get converter for X509DefaultServiceCertificateElement*/, null,
+				ConfigurationPropertyOptions.None);
 
-            scoped_certificates = new ConfigurationProperty ("scopedCertificates",
-                typeof (X509ScopedServiceCertificateElementCollection), null, null/* FIXME: get converter for X509ScopedServiceCertificateElementCollection*/, null,
-                ConfigurationPropertyOptions.None);
+			scoped_certificates = new ConfigurationProperty ("scopedCertificates",
+				typeof (X509ScopedServiceCertificateElementCollection), null, null/* FIXME: get converter for X509ScopedServiceCertificateElementCollection*/, null,
+				ConfigurationPropertyOptions.None);
 
-            properties.Add (authentication);
-            properties.Add (default_certificate);
-            properties.Add (scoped_certificates);
-        }
+			properties.Add (authentication);
+			properties.Add (default_certificate);
+			properties.Add (scoped_certificates);
+		}
 
-        public X509RecipientCertificateClientElement ()
-        {
-        }
-
-
-        // Properties
-
-        [ConfigurationProperty ("authentication",
-             Options = ConfigurationPropertyOptions.None)]
-        public X509ServiceCertificateAuthenticationElement Authentication {
-            get { return (X509ServiceCertificateAuthenticationElement) base [authentication]; }
-        }
-
-        [ConfigurationProperty ("defaultCertificate",
-             Options = ConfigurationPropertyOptions.None)]
-        public X509DefaultServiceCertificateElement DefaultCertificate {
-            get { return (X509DefaultServiceCertificateElement) base [default_certificate]; }
-        }
-
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-
-        [ConfigurationProperty ("scopedCertificates",
-             Options = ConfigurationPropertyOptions.None)]
-        public X509ScopedServiceCertificateElementCollection ScopedCertificates {
-            get { return (X509ScopedServiceCertificateElementCollection) base [scoped_certificates]; }
-        }
+		public X509RecipientCertificateClientElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+		[ConfigurationProperty ("authentication",
+			 Options = ConfigurationPropertyOptions.None)]
+		public X509ServiceCertificateAuthenticationElement Authentication {
+			get { return (X509ServiceCertificateAuthenticationElement) base [authentication]; }
+		}
+
+		[ConfigurationProperty ("defaultCertificate",
+			 Options = ConfigurationPropertyOptions.None)]
+		public X509DefaultServiceCertificateElement DefaultCertificate {
+			get { return (X509DefaultServiceCertificateElement) base [default_certificate]; }
+		}
+
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+
+		[ConfigurationProperty ("scopedCertificates",
+			 Options = ConfigurationPropertyOptions.None)]
+		public X509ScopedServiceCertificateElementCollection ScopedCertificates {
+			get { return (X509ScopedServiceCertificateElementCollection) base [scoped_certificates]; }
+		}
+
+
+	}
 
 }

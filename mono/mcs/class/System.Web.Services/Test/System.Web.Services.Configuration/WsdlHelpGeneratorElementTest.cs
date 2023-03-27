@@ -3,7 +3,7 @@
 // for System.Web.Services.Configuration.WsdlHelpGeneratorElement
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,25 +33,25 @@ using System.Web.Services.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services {
-    [TestFixture]
-    public class WsdlHelpGeneratorElementTest
-    {
-        [Test]
-        public void Ctors ()
-        {
-            WsdlHelpGeneratorElement el = new WsdlHelpGeneratorElement ();
+	[TestFixture]
+	public class WsdlHelpGeneratorElementTest
+	{
+		[Test]
+		public void Ctors ()
+		{
+			WsdlHelpGeneratorElement el = new WsdlHelpGeneratorElement ();
 
-            Assert.IsNull (el.Href, "A1");
-        }
+			Assert.IsNull (el.Href, "A1");
+		}
 
-        [Test]
-        public void GetSet ()
-        {
-            WsdlHelpGeneratorElement el = new WsdlHelpGeneratorElement ();
+		[Test]
+		public void GetSet ()
+		{
+			WsdlHelpGeneratorElement el = new WsdlHelpGeneratorElement ();
 
-            el.Href="http://www.ximian.com/";
-            Assert.AreEqual ("http://www.ximian.com/", el.Href, "A1");
-        }
-    }
+			el.Href="http://www.ximian.com/";
+			Assert.AreEqual ("http://www.ximian.com/", el.Href, "A1");
+		}
+	}
 }
 

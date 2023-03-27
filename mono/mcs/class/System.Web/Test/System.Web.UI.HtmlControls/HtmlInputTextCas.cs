@@ -1,9 +1,9 @@
 //
 // HtmlInputTextCas.cs 
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlInputText
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlInputText
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,30 +37,30 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlInputTextCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlInputTextCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HtmlInputTextTest unit = new HtmlInputTextTest ();
-            unit.ConstructorType ();
-            unit.DefaultProperties ();
-            unit.CleanProperties ();
-            unit.NullProperties ();
-            unit.Password ();
-            unit.RenderAttributes ();
-            unit.RenderAttributes_Password ();
-            unit.IPostBackDataHandler_RaisePostBackEvent ();
-            unit.IPostBackDataHandler_LoadPostData ();
-            unit.RaisePostBackEvent ();
-            unit.LoadPostData ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HtmlInputTextTest unit = new HtmlInputTextTest ();
+			unit.ConstructorType ();
+			unit.DefaultProperties ();
+			unit.CleanProperties ();
+			unit.NullProperties ();
+			unit.Password ();
+			unit.RenderAttributes ();
+			unit.RenderAttributes_Password ();
+			unit.IPostBackDataHandler_RaisePostBackEvent ();
+			unit.IPostBackDataHandler_LoadPostData ();
+			unit.RaisePostBackEvent ();
+			unit.LoadPostData ();
+		}
 
-        public override Type Type {
-            get { return typeof (HtmlInputText); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlInputText); }
+		}
+	}
 }

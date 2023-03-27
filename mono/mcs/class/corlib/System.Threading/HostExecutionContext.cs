@@ -2,7 +2,7 @@
 // System.Threading.HostExecutionContext class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
@@ -28,39 +28,39 @@
 
 namespace System.Threading {
 
-    [MonoTODO ("Useless until the runtime supports it")]
-    public class HostExecutionContext : IDisposable {
+	[MonoTODO ("Useless until the runtime supports it")]
+	public class HostExecutionContext : IDisposable {
 
-        private object _state;
+		private object _state;
 
-        public HostExecutionContext ()
-        {
-            _state = null;
-        }
+		public HostExecutionContext ()
+		{
+			_state = null;
+		}
 
-        public HostExecutionContext (object state)
-        {
-            _state = state;
-        }
+		public HostExecutionContext (object state)
+		{
+			_state = state;
+		}
 
-        public virtual HostExecutionContext CreateCopy ()
-        {
-            return new HostExecutionContext (_state);
-        }
+		public virtual HostExecutionContext CreateCopy ()
+		{
+			return new HostExecutionContext (_state);
+		}
 
-        protected internal object State {
-            get { return _state; }
-            set { _state = value; }
-        }
+		protected internal object State {
+			get { return _state; }
+			set { _state = value; }
+		}
 
-        public void Dispose ()
-        {
-            Dispose (true);
-            GC.SuppressFinalize (this);
-        }
+		public void Dispose ()
+		{
+			Dispose (true);
+			GC.SuppressFinalize (this);
+		}
 
-        public virtual void Dispose (bool disposing)
-        {
-        }
-    }
+		public virtual void Dispose (bool disposing)
+		{
+		}
+	}
 }

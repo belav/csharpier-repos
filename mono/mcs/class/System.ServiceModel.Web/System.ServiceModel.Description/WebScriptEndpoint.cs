@@ -1,6 +1,6 @@
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -31,21 +31,21 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Description
 {
-    [MonoTODO]
-    public class WebScriptEndpoint : WebServiceEndpoint
-    {
-        public WebScriptEndpoint (ContractDescription contract)
-            : this (contract, null)
-        {
-        }
-        
-        public WebScriptEndpoint (ContractDescription contract, EndpointAddress address)
-            : base (contract, address)
-        {
-        }
+	[MonoTODO]
+	public class WebScriptEndpoint : WebServiceEndpoint
+	{
+		public WebScriptEndpoint (ContractDescription contract)
+			: this (contract, null)
+		{
+		}
+		
+		public WebScriptEndpoint (ContractDescription contract, EndpointAddress address)
+			: base (contract, address)
+		{
+		}
 
-        protected override Type WebEndpointType {
-            get { throw new NotImplementedException (); }
-        }
-    }
+		protected override Type WebEndpointType {
+			get { throw new NotImplementedException (); }
+		}
+	}
 }

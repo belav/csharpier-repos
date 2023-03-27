@@ -31,25 +31,25 @@ using System.Security.Principal;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class QuotaControl : DirectoryControl
-    {
-        public QuotaControl ()
-            : base (null, null, false, false)
-        {
-        }
+	public class QuotaControl : DirectoryControl
+	{
+		public QuotaControl ()
+			: base (null, null, false, false)
+		{
+		}
 
-        public QuotaControl (SecurityIdentifier querySid)
-            : this ()
-        {
-            QuerySid = querySid;
-        }
+		public QuotaControl (SecurityIdentifier querySid)
+			: this ()
+		{
+			QuerySid = querySid;
+		}
 
-        public SecurityIdentifier QuerySid { get; set; }
+		public SecurityIdentifier QuerySid { get; set; }
 
-        [MonoTODO]
-        public override byte [] GetValue ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override byte [] GetValue ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

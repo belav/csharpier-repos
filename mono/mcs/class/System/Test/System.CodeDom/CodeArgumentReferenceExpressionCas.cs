@@ -1,9 +1,9 @@
 //
 // CodeArgumentReferenceExpressionCas.cs
-//    - CAS unit tests for System.CodeDom.CodeArgumentReferenceExpression
+//	- CAS unit tests for System.CodeDom.CodeArgumentReferenceExpression
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,42 +37,42 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class CodeArgumentReferenceExpressionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class CodeArgumentReferenceExpressionCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ConstructorEmpty_Deny_Unrestricted ()
-        {
-            CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression ();
-            Assert.AreEqual (String.Empty, care.ParameterName, "ParameterName");
-            care.ParameterName = "mono";
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ConstructorEmpty_Deny_Unrestricted ()
+		{
+			CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression ();
+			Assert.AreEqual (String.Empty, care.ParameterName, "ParameterName");
+			care.ParameterName = "mono";
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ConstructorString_Deny_Unrestricted ()
-        {
-            CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression ("mono");
-            Assert.AreEqual ("mono", care.ParameterName, "ParameterName");
-            care.ParameterName = String.Empty;
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ConstructorString_Deny_Unrestricted ()
+		{
+			CodeArgumentReferenceExpression care = new CodeArgumentReferenceExpression ("mono");
+			Assert.AreEqual ("mono", care.ParameterName, "ParameterName");
+			care.ParameterName = String.Empty;
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (CodeArgumentReferenceExpression).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (CodeArgumentReferenceExpression).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }

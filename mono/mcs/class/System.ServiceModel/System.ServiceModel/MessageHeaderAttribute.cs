@@ -2,7 +2,7 @@
 // MessageHeaderAttribute.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -29,26 +29,26 @@ using System;
 
 namespace System.ServiceModel
 {
-    [AttributeUsage (AttributeTargets.Property | AttributeTargets.Field,
-        Inherited = false)]
-    public class MessageHeaderAttribute : MessageContractMemberAttribute
-    {
-        string actor;
-        bool must_understand, relay;
+	[AttributeUsage (AttributeTargets.Property | AttributeTargets.Field,
+		Inherited = false)]
+	public class MessageHeaderAttribute : MessageContractMemberAttribute
+	{
+		string actor;
+		bool must_understand, relay;
 
-        public string Actor {
-            get { return actor; }
-            set { actor = value; }
-        }
+		public string Actor {
+			get { return actor; }
+			set { actor = value; }
+		}
 
-        public bool MustUnderstand {
-            get { return must_understand; }
-            set { must_understand = value; }
-        }
+		public bool MustUnderstand {
+			get { return must_understand; }
+			set { must_understand = value; }
+		}
 
-        public bool Relay {
-            get { return relay; }
-            set { relay = value; }
-        }
-    }
+		public bool Relay {
+			get { return relay; }
+			set { relay = value; }
+		}
+	}
 }

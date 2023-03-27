@@ -39,86 +39,86 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class SyntaxErrorException_Generate : GHTBase
 {
-    [Test] public void Main()
-    {
-        SyntaxErrorException_Generate tc = new SyntaxErrorException_Generate();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("SyntaxErrorException");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		SyntaxErrorException_Generate tc = new SyntaxErrorException_Generate();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("SyntaxErrorException");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        Exception tmpEx = new Exception() ;
-
-        DataTable tbl = new DataTable();
-        tbl.Columns.Add(new DataColumn("Column"));
-        DataColumn dc = new DataColumn();
-        dc.Expression = "something"; //invalid expression
-
-        try
-        {
-            BeginCase("SyntaxErrorException - Column Expression");
-            try
-            {
-                tbl.Columns[0].Expression = "Colummn +=+ 1"; //invalid expression
-            }
-            catch (SyntaxErrorException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(SyntaxErrorException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-        
-        
-        
-        try
-        {
-            BeginCase("SyntaxErrorException - Select ");
-            try
-            {
-                tbl.Select("Name += bulshit");
-            }
-            catch (SyntaxErrorException  ex)
-            {
-                tmpEx = ex;
-            }
-            base.Compare(tmpEx.GetType(),typeof(SyntaxErrorException));
-            tmpEx = new  Exception();
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    }
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	public void run()
+	{
+		Exception exp = null;
+		Exception tmpEx = new Exception() ;
+
+		DataTable tbl = new DataTable();
+		tbl.Columns.Add(new DataColumn("Column"));
+		DataColumn dc = new DataColumn();
+		dc.Expression = "something"; //invalid expression
+
+		try
+		{
+			BeginCase("SyntaxErrorException - Column Expression");
+			try
+			{
+				tbl.Columns[0].Expression = "Colummn +=+ 1"; //invalid expression
+			}
+			catch (SyntaxErrorException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(SyntaxErrorException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+		
+		
+		
+		try
+		{
+			BeginCase("SyntaxErrorException - Select ");
+			try
+			{
+				tbl.Select("Name += bulshit");
+			}
+			catch (SyntaxErrorException  ex)
+			{
+				tmpEx = ex;
+			}
+			base.Compare(tmpEx.GetType(),typeof(SyntaxErrorException));
+			tmpEx = new  Exception();
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+
+
+	}
 }
 }

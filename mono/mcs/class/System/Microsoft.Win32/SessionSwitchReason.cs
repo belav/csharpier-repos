@@ -2,7 +2,7 @@
 // Microsoft.Win32.SessionSwitchReason enumeration
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -28,15 +28,15 @@
 
 namespace Microsoft.Win32 {
 
-    public enum SessionSwitchReason {
-        ConsoleConnect = 1,
-        ConsoleDisconnect,
-        RemoteConnect,
-        RemoteDisconnect,
-        SessionLogon,
-        SessionLogoff,
-        SessionLock,
-        SessionUnlock,
-        SessionRemoteControl
-    }
+	public enum SessionSwitchReason {
+		ConsoleConnect = 1,
+		ConsoleDisconnect,
+		RemoteConnect,
+		RemoteDisconnect,
+		SessionLogon,
+		SessionLogoff,
+		SessionLock,
+		SessionUnlock,
+		SessionRemoteControl
+	}
 }

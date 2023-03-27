@@ -2,7 +2,7 @@
 
 namespace Test
 {
-    class Foo
-    {
-    }
+	class Foo
+	{
+	}
 }

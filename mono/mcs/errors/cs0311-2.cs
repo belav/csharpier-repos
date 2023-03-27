@@ -2,7 +2,7 @@
 // Line: 21
 
 public class Foo<T>
-    where T : A, I
+	where T : A, I
 {
 }
 
@@ -17,9 +17,9 @@ public class B : A
 
 class X
 {
-    Foo<B> foo;
+	Foo<B> foo;
 
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

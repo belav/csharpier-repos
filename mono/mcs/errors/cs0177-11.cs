@@ -7,13 +7,13 @@ public class C
 
 public struct S
 {
-    public C c;
+	public C c;
 }
 
 public class Test
 {
-    void M (out S s)
-    {
-        var xx = s.c;
-    }
+	void M (out S s)
+	{
+		var xx = s.c;
+	}
 }

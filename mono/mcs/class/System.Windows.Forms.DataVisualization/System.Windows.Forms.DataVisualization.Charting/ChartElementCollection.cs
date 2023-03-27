@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -28,50 +28,50 @@ using System.Collections.ObjectModel;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public abstract class ChartElementCollection<T> : Collection<T> where T : ChartElement
-    {
-        #region Public Methods
-        public void Dispose ()
-        {
-        }
+	public abstract class ChartElementCollection<T> : Collection<T> where T : ChartElement
+	{
+		#region Public Methods
+		public void Dispose ()
+		{
+		}
 
-        public virtual void Invalidate ()
-        {
-        }
+		public virtual void Invalidate ()
+		{
+		}
 
-        public virtual void ResumeUpdates ()
-        {
-        }
+		public virtual void ResumeUpdates ()
+		{
+		}
 
-        public virtual void SuspendUpdates ()
-        {
-        }
-        #endregion
+		public virtual void SuspendUpdates ()
+		{
+		}
+		#endregion
 
-        #region Protected Methods
-        protected override void ClearItems ()
-        {
-            base.ClearItems ();
-        }
+		#region Protected Methods
+		protected override void ClearItems ()
+		{
+			base.ClearItems ();
+		}
 
-        protected virtual void Dispose (bool disposing)
-        {
-        }
+		protected virtual void Dispose (bool disposing)
+		{
+		}
 
-        protected override void InsertItem (int index, T item)
-        {
-            base.InsertItem (index, item);
-        }
+		protected override void InsertItem (int index, T item)
+		{
+			base.InsertItem (index, item);
+		}
 
-        protected override void RemoveItem (int index)
-        {
-            base.RemoveItem (index);
-        }
+		protected override void RemoveItem (int index)
+		{
+			base.RemoveItem (index);
+		}
 
-        protected override void SetItem (int index, T item)
-        {
-            base.SetItem (index, item);
-        }
-        #endregion
-    }
+		protected override void SetItem (int index, T item)
+		{
+			base.SetItem (index, item);
+		}
+		#endregion
+	}
 }

@@ -29,10 +29,10 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    public interface IDuplexSessionChannel : IDuplexChannel,
-        IInputChannel, IOutputChannel,
-        IChannel, ICommunicationObject,
-        ISessionChannel<IDuplexSession>
-    {
-    }
+	public interface IDuplexSessionChannel : IDuplexChannel,
+		IInputChannel, IOutputChannel,
+		IChannel, ICommunicationObject,
+		ISessionChannel<IDuplexSession>
+	{
+	}
 }

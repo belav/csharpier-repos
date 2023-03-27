@@ -32,24 +32,24 @@ using System;
 using System.ComponentModel;
 
 namespace System.IO {
-    [AttributeUsage (AttributeTargets.All)]
-    public class IODescriptionAttribute : DescriptionAttribute {
+	[AttributeUsage (AttributeTargets.All)]
+	public class IODescriptionAttribute : DescriptionAttribute {
 
-        #region Constructors
+		#region Constructors
 
-        public IODescriptionAttribute (string description)
-            : base (description)
-        {
-        }
-        
-        #endregion // Constructors
+		public IODescriptionAttribute (string description)
+			: base (description)
+		{
+		}
+		
+		#endregion // Constructors
 
-        #region Methods
+		#region Methods
 
-        public override string Description {
-            get { return DescriptionValue; }
-        }
+		public override string Description {
+			get { return DescriptionValue; }
+		}
 
-        #endregion // Methods
-    }
+		#endregion // Methods
+	}
 }

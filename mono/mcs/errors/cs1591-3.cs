@@ -6,7 +6,7 @@ using System;
 
 namespace Testing
 {
-    public enum Foo
-    {
-    }
+	public enum Foo
+	{
+	}
 }

@@ -2,8 +2,8 @@
 // Line: 7
 
 class X {
-    static void Main ()
-    {
-        X x = new X;
-    }
+	static void Main ()
+	{
+		X x = new X;
+	}
 }

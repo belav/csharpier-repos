@@ -30,8 +30,8 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    public interface ITransactedBindingElement
-    {
-        bool TransactedReceiveEnabled { get; }
-    }
+	public interface ITransactedBindingElement
+	{
+		bool TransactedReceiveEnabled { get; }
+	}
 }

@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Peter Bartok    pbartok@novell.com
+//	Peter Bartok	pbartok@novell.com
 //
 //
 
@@ -28,21 +28,21 @@
 // COMPLETE
 
 namespace System.Windows.Forms {
-    public class ControlEventArgs : EventArgs {
-        private Control    control;
+	public class ControlEventArgs : EventArgs {
+		private Control	control;
 
-        #region Public Constructors
-        public ControlEventArgs(Control control) {
-            this.control=control;
-        }
-        #endregion    // Public Constructors
+		#region Public Constructors
+		public ControlEventArgs(Control control) {
+			this.control=control;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public Control Control {
-            get {
-                return this.control;
-            }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public Control Control {
+			get {
+				return this.control;
+			}
+		}
+		#endregion	// Public Instance Properties
+	}
 }

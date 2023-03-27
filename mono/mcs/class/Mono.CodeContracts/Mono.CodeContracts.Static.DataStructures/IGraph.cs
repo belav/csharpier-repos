@@ -2,7 +2,7 @@
 // IGraph.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,8 +29,8 @@
 using System.Collections.Generic;
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    interface IGraph<Node, EdgeInfo> {
-        IEnumerable<Node> Nodes { get; }
-        IEnumerable<Pair<EdgeInfo, Node>> Successors (Node node);
-    }
+	interface IGraph<Node, EdgeInfo> {
+		IEnumerable<Node> Nodes { get; }
+		IEnumerable<Pair<EdgeInfo, Node>> Successors (Node node);
+	}
 }

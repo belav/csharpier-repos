@@ -32,32 +32,32 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    [MonoTODO]
-    public class DsmlErrorResponse : DirectoryResponse
-    {
-        public override DirectoryControl [] Controls {
-            get { throw new NotImplementedException (); }
-        }
-        public string Detail {
-            get { throw new NotImplementedException (); }
-        }
-        public override string ErrorMessage {
-            get { throw new NotImplementedException (); }
-        }
-        public override string MatchedDN {
-            get { throw new NotImplementedException (); }
-        }
-        public string Message {
-            get { throw new NotImplementedException (); }
-        }
-        public override Uri [] Referral {
-            get { throw new NotImplementedException (); }
-        }
-        public override ResultCode ResultCode {
-            get { throw new NotImplementedException (); }
-        }
-        public ErrorResponseCategory Type {
-            get { throw new NotImplementedException (); }
-        }
-    }
+	[MonoTODO]
+	public class DsmlErrorResponse : DirectoryResponse
+	{
+		public override DirectoryControl [] Controls {
+			get { throw new NotImplementedException (); }
+		}
+		public string Detail {
+			get { throw new NotImplementedException (); }
+		}
+		public override string ErrorMessage {
+			get { throw new NotImplementedException (); }
+		}
+		public override string MatchedDN {
+			get { throw new NotImplementedException (); }
+		}
+		public string Message {
+			get { throw new NotImplementedException (); }
+		}
+		public override Uri [] Referral {
+			get { throw new NotImplementedException (); }
+		}
+		public override ResultCode ResultCode {
+			get { throw new NotImplementedException (); }
+		}
+		public ErrorResponseCategory Type {
+			get { throw new NotImplementedException (); }
+		}
+	}
 }

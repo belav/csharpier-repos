@@ -1,4 +1,4 @@
-#if SYSTEM_WEB
+﻿#if SYSTEM_WEB
     using System.Web;
 #else
     using System.ComponentModel.DataAnnotations.Resources;

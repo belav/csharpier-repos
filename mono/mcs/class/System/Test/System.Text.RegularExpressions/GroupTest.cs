@@ -2,7 +2,7 @@
 // GroupTest.cs - Unit tests for System.Text.RegularExpressions.Group
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,30 +33,30 @@ using System.Text.RegularExpressions;
 
 namespace MonoTests.System.Text.RegularExpressions
 {
-    [TestFixture]
-    public class GroupTest
-    {
-        [Test]
-        public void Synchronized_Inner_Null ()
-        {
-            try {
-                Group.Synchronized (null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
-                Assert.AreEqual ("inner", ex.ParamName, "#6");
-            }
-        }
+	[TestFixture]
+	public class GroupTest
+	{
+		[Test]
+		public void Synchronized_Inner_Null ()
+		{
+			try {
+				Group.Synchronized (null);
+				Assert.Fail ("#1");
+			} catch (ArgumentNullException ex) {
+				Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
+				Assert.IsNull (ex.InnerException, "#3");
+				Assert.IsNotNull (ex.Message, "#4");
+				Assert.IsNotNull (ex.ParamName, "#5");
+				Assert.AreEqual ("inner", ex.ParamName, "#6");
+			}
+		}
 
-        [Test]
-        public void Synchronized_Empty ()
-        {
-            Group eg = Match.Empty.Groups[0];
-            Group sg = Match.Synchronized (eg);
-            Assert.AreSame (eg, sg, "Synchronized");
-        }
-    }
+		[Test]
+		public void Synchronized_Empty ()
+		{
+			Group eg = Match.Empty.Groups[0];
+			Group sg = Match.Synchronized (eg);
+			Assert.AreSame (eg, sg, "Synchronized");
+		}
+	}
 }

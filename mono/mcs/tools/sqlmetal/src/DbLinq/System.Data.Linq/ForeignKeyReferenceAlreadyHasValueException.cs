@@ -31,22 +31,22 @@ using System;
 
 namespace System.Data.Linq
 {
-    public class ForeignKeyReferenceAlreadyHasValueException
-        : InvalidOperationException
-    {
-        public ForeignKeyReferenceAlreadyHasValueException ()
-            : this ("Foreign key reference already has a value")
-        {
-        }
+	public class ForeignKeyReferenceAlreadyHasValueException
+		: InvalidOperationException
+	{
+		public ForeignKeyReferenceAlreadyHasValueException ()
+			: this ("Foreign key reference already has a value")
+		{
+		}
 
-        public ForeignKeyReferenceAlreadyHasValueException (string message)
-            : this (message, null)
-        {
-        }
+		public ForeignKeyReferenceAlreadyHasValueException (string message)
+			: this (message, null)
+		{
+		}
 
-        public ForeignKeyReferenceAlreadyHasValueException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
-    }
+		public ForeignKeyReferenceAlreadyHasValueException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
+	}
 }

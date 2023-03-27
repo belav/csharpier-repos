@@ -2,7 +2,7 @@
 // WebInvokeAttribute.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -33,70 +33,70 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Web
 {
-    [AttributeUsage (AttributeTargets.Method)]
-    public sealed class WebInvokeAttribute : Attribute, IOperationBehavior
-    {
-        WebAttributeInfo info = new WebAttributeInfo ();
+	[AttributeUsage (AttributeTargets.Method)]
+	public sealed class WebInvokeAttribute : Attribute, IOperationBehavior
+	{
+		WebAttributeInfo info = new WebAttributeInfo ();
 
-        internal WebAttributeInfo Info {
-            get { return info; }
-        }
+		internal WebAttributeInfo Info {
+			get { return info; }
+		}
 
-        public WebMessageBodyStyle BodyStyle {
-            get { return info.BodyStyle; }
-            set { info.BodyStyle = value; }
-        }
+		public WebMessageBodyStyle BodyStyle {
+			get { return info.BodyStyle; }
+			set { info.BodyStyle = value; }
+		}
 
-        public bool IsBodyStyleSetExplicitly {
-            get { return info.IsBodyStyleSetExplicitly; }
-        }
+		public bool IsBodyStyleSetExplicitly {
+			get { return info.IsBodyStyleSetExplicitly; }
+		}
 
-        public bool IsRequestFormatSetExplicitly {
-            get { return info.IsRequestFormatSetExplicitly; }
-        }
+		public bool IsRequestFormatSetExplicitly {
+			get { return info.IsRequestFormatSetExplicitly; }
+		}
 
-        public bool IsResponseFormatSetExplicitly {
-            get { return info.IsResponseFormatSetExplicitly; }
-        }
+		public bool IsResponseFormatSetExplicitly {
+			get { return info.IsResponseFormatSetExplicitly; }
+		}
 
-        public WebMessageFormat RequestFormat {
-            get { return info.RequestFormat; }
-            set { info.RequestFormat = value; }
-        }
+		public WebMessageFormat RequestFormat {
+			get { return info.RequestFormat; }
+			set { info.RequestFormat = value; }
+		}
 
-        public WebMessageFormat ResponseFormat {
-            get { return info.ResponseFormat ; }
-            set { info.ResponseFormat = value; }
-        }
+		public WebMessageFormat ResponseFormat {
+			get { return info.ResponseFormat ; }
+			set { info.ResponseFormat = value; }
+		}
 
-        public string Method {
-            get { return info.Method; }
-            set { info.Method = value; }
-        }
+		public string Method {
+			get { return info.Method; }
+			set { info.Method = value; }
+		}
 
-        public string UriTemplate {
-            get { return info.UriTemplate; }
-            set { info.UriTemplate = value; }
-        }
+		public string UriTemplate {
+			get { return info.UriTemplate; }
+			set { info.UriTemplate = value; }
+		}
 
-        void IOperationBehavior.AddBindingParameters (OperationDescription operation, BindingParameterCollection parameters)
-        {
-            // "it is a passive operation behavior"
-        }
+		void IOperationBehavior.AddBindingParameters (OperationDescription operation, BindingParameterCollection parameters)
+		{
+			// "it is a passive operation behavior"
+		}
 
-        void IOperationBehavior.ApplyClientBehavior (OperationDescription operation, ClientOperation client)
-        {
-            // "it is a passive operation behavior"
-        }
+		void IOperationBehavior.ApplyClientBehavior (OperationDescription operation, ClientOperation client)
+		{
+			// "it is a passive operation behavior"
+		}
 
-        void IOperationBehavior.ApplyDispatchBehavior (OperationDescription operation, DispatchOperation service)
-        {
-            // "it is a passive operation behavior"
-        }
+		void IOperationBehavior.ApplyDispatchBehavior (OperationDescription operation, DispatchOperation service)
+		{
+			// "it is a passive operation behavior"
+		}
 
-        void IOperationBehavior.Validate (OperationDescription operation)
-        {
-            // "it is a passive operation behavior"
-        }
-    }
+		void IOperationBehavior.Validate (OperationDescription operation)
+		{
+			// "it is a passive operation behavior"
+		}
+	}
 }

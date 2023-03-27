@@ -2,7 +2,7 @@
 // NetPipeStyleUriParserCas.cs - CAS unit tests for System.NetPipeStyleUriParser
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,50 +39,50 @@ using MonoTests.System;
 
 namespace MonoCasTests.System {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class NetPipeStyleUriParserCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class NetPipeStyleUriParserCas {
 
-        private NetPipeStyleUriParserTest unit;
+		private NetPipeStyleUriParserTest unit;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            unit = new NetPipeStyleUriParserTest ();
-            unit.FixtureSetUp (); // fulltrust
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			unit = new NetPipeStyleUriParserTest ();
+			unit.FixtureSetUp (); // fulltrust
+		}
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            NetPipeStyleUriParser parser = new NetPipeStyleUriParser ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			NetPipeStyleUriParser parser = new NetPipeStyleUriParser ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests ()
-        {
-            unit.NetPipeX ();
-            unit.NetPipeX_Methods ();
-            unit.SecureNetPipeX ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTests ()
+		{
+			unit.NetPipeX ();
+			unit.NetPipeX_Methods ();
+			unit.SecureNetPipeX ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            ConstructorInfo ci = typeof (NetPipeStyleUriParser).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor()");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			ConstructorInfo ci = typeof (NetPipeStyleUriParser).GetConstructor (new Type[0]);
+			Assert.IsNotNull (ci, "default .ctor()");
+			Assert.IsNotNull (ci.Invoke (null), "invoke");
+		}
+	}
 }
 

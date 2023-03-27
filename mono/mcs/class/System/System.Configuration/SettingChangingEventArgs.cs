@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.SettingChangingEventArgs.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,50 +31,50 @@ using System.ComponentModel;
 
 namespace System.Configuration
 {
-    public class SettingChangingEventArgs : CancelEventArgs
-    {
-        public SettingChangingEventArgs (string settingName, 
-                         string settingClass, 
-                         string settingKey, 
-                         object newValue, 
-                         bool cancel)
-            : base (cancel)
-        {
-            this.settingName = settingName;
-            this.settingClass = settingClass;
-            this.settingKey = settingKey;
-            this.newValue = newValue;
-        }
+	public class SettingChangingEventArgs : CancelEventArgs
+	{
+		public SettingChangingEventArgs (string settingName, 
+						 string settingClass, 
+						 string settingKey, 
+						 object newValue, 
+						 bool cancel)
+			: base (cancel)
+		{
+			this.settingName = settingName;
+			this.settingClass = settingClass;
+			this.settingKey = settingKey;
+			this.newValue = newValue;
+		}
 
-        public string SettingName {
-            get {
-                return settingName;
-            }
-        }
+		public string SettingName {
+			get {
+				return settingName;
+			}
+		}
 
-        public string SettingClass {
-            get {
-                return settingClass;
-            }
-        }
+		public string SettingClass {
+			get {
+				return settingClass;
+			}
+		}
 
-        public string SettingKey {
-            get {
-                return settingKey;
-            }
-        }
+		public string SettingKey {
+			get {
+				return settingKey;
+			}
+		}
 
-        public object NewValue {
-            get {
-                return newValue;
-            }
-        }
+		public object NewValue {
+			get {
+				return newValue;
+			}
+		}
 
-        string settingName;
-        string settingClass;
-        string settingKey;
-        object newValue;
-    }
+		string settingName;
+		string settingClass;
+		string settingKey;
+		object newValue;
+	}
 
 }
 

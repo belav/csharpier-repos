@@ -2,7 +2,7 @@
 // Expr.cs
 //
 // Authors:
-//    Chris Bacon (chrisbacon76@gmail.com)
+//	Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -33,18 +33,18 @@ using System.Text;
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-    abstract class Expr {
+	abstract class Expr {
 
-        protected Expr (MethodInfo methodInfo)
-        {
-            this.MethodInfo = methodInfo;
-        }
+		protected Expr (MethodInfo methodInfo)
+		{
+			this.MethodInfo = methodInfo;
+		}
 
-        public abstract ExprType ExprType { get; }
-        public abstract TypeReference ReturnType { get; }
+		public abstract ExprType ExprType { get; }
+		public abstract TypeReference ReturnType { get; }
 
-        public MethodInfo MethodInfo { get; private set; }
+		public MethodInfo MethodInfo { get; private set; }
 
 
-    }
+	}
 }

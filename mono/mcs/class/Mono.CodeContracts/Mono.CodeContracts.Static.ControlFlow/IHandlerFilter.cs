@@ -2,7 +2,7 @@
 // IHandlerFilter.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,8 +29,8 @@
 using Mono.CodeContracts.Static.AST;
 
 namespace Mono.CodeContracts.Static.ControlFlow {
-    interface IHandlerFilter<Data> {
-        bool Catch (Data data, TypeNode exception, out bool stopPropagation);
-        bool Filter (Data data, APC filterCode, out bool stopPropagation);
-    }
+	interface IHandlerFilter<Data> {
+		bool Catch (Data data, TypeNode exception, out bool stopPropagation);
+		bool Filter (Data data, APC filterCode, out bool stopPropagation);
+	}
 }

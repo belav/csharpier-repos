@@ -3,10 +3,10 @@
 
 class X
 {
-    static void Main ()
-    {
-        if (delegate {} is int) {
-            return;
-        }
-    }
+	static void Main ()
+	{
+		if (delegate {} is int) {
+			return;
+		}
+	}
 }

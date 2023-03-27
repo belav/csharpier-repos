@@ -10,6 +10,6 @@ class B<T> : A<float>
 
 class X
 {
-    static void Main ()
-    { }
+	static void Main ()
+	{ }
 }

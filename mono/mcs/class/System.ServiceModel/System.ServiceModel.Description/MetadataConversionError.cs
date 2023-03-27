@@ -2,7 +2,7 @@
 // MetadataConversionError.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -33,42 +33,42 @@ using System.ServiceModel.Configuration;
 
 namespace System.ServiceModel.Description
 {
-    public class MetadataConversionError
-    {
-        string msg;
-        bool warning;
+	public class MetadataConversionError
+	{
+		string msg;
+		bool warning;
 
-        public MetadataConversionError (string message)
-            : this (message, false)
-        {
-        }
+		public MetadataConversionError (string message)
+			: this (message, false)
+		{
+		}
 
-        public MetadataConversionError (string message, bool isWarning)
-        {
-            msg = message;
-            warning = isWarning;
-        }
+		public MetadataConversionError (string message, bool isWarning)
+		{
+			msg = message;
+			warning = isWarning;
+		}
 
-        public bool IsWarning {
-            get { return warning; }
-        }
+		public bool IsWarning {
+			get { return warning; }
+		}
 
-        public string Message {
-            get { return msg; }
-        }
+		public string Message {
+			get { return msg; }
+		}
 
-        public override bool Equals (object obj)
-        {
-            MetadataConversionError e = obj as MetadataConversionError;
-            return e != null &&
-                e.warning == warning &&
-                e.msg == msg;
-        }
+		public override bool Equals (object obj)
+		{
+			MetadataConversionError e = obj as MetadataConversionError;
+			return e != null &&
+				e.warning == warning &&
+				e.msg == msg;
+		}
 
-        public override int GetHashCode ()
-        {
-            return warning ?
-                msg.GetHashCode () : - msg.GetHashCode ();
-        }
-    }
+		public override int GetHashCode ()
+		{
+			return warning ?
+				msg.GetHashCode () : - msg.GetHashCode ();
+		}
+	}
 }

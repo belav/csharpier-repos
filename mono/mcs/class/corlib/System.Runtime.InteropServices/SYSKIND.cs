@@ -32,12 +32,12 @@ using System;
 
 namespace System.Runtime.InteropServices
 {
-    [Obsolete]
-    [Serializable]
-    public enum SYSKIND
-    {
-        SYS_WIN16 = 0,
-        SYS_WIN32 = 1,
-        SYS_MAC = 2
-    }
+	[Obsolete]
+	[Serializable]
+	public enum SYSKIND
+	{
+		SYS_WIN16 = 0,
+		SYS_WIN32 = 1,
+		SYS_MAC = 2
+	}
 }

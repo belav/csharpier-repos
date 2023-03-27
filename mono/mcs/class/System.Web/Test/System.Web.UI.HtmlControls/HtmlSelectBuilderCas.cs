@@ -1,9 +1,9 @@
 //
 // HtmlSelectBuilderCas.cs 
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlSelectBuilder
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlSelectBuilder
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,13 +35,13 @@ using System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlSelectBuilderCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlSelectBuilderCas : AspNetHostingMinimal {
 
-        public override Type Type {
-            get { return typeof (HtmlSelectBuilder); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlSelectBuilder); }
+		}
+	}
 }
 

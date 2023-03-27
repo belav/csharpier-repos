@@ -3,5 +3,5 @@
 
 interface I
 {
-    int P { get; } = 4;
+	int P { get; } = 4;
 }

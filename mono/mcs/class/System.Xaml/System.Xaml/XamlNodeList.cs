@@ -25,34 +25,34 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-    public class XamlNodeList
-    {
-        public XamlNodeList (XamlSchemaContext schemaContext)
-        {
-            throw new NotImplementedException ();
-        }
+	public class XamlNodeList
+	{
+		public XamlNodeList (XamlSchemaContext schemaContext)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public XamlNodeList (XamlSchemaContext schemaContext, int size)
-        {
-            throw new NotImplementedException ();
-        }
+		public XamlNodeList (XamlSchemaContext schemaContext, int size)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public int Count {
-            get {throw new NotImplementedException (); }
-        }
+		public int Count {
+			get {throw new NotImplementedException (); }
+		}
 
-        public XamlWriter Writer {
-            get {throw new NotImplementedException (); }
-        }
+		public XamlWriter Writer {
+			get {throw new NotImplementedException (); }
+		}
 
-        public void Clear ()
-        {
-            throw new NotImplementedException ();
-        }
+		public void Clear ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public XamlReader GetReader ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public XamlReader GetReader ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

@@ -23,23 +23,23 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 
 namespace System.Windows.Forms
 {
-    [Flags]
-    public enum ListViewItemStates
-    {
-        Selected = 1,
-        Grayed = 2,
-        Checked = 8,
-        Focused = 16,
-        Default = 32,
-        Hot = 64,
-        Marked = 128,
-        Indeterminate = 256,
-        ShowKeyboardCues = 512
-    }
+	[Flags]
+	public enum ListViewItemStates
+	{
+		Selected = 1,
+		Grayed = 2,
+		Checked = 8,
+		Focused = 16,
+		Default = 32,
+		Hot = 64,
+		Marked = 128,
+		Indeterminate = 256,
+		ShowKeyboardCues = 512
+	}
 }

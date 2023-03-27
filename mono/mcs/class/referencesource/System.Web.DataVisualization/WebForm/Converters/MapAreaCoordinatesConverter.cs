@@ -5,15 +5,15 @@
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
 //=================================================================
-//  File:        MapAreaCoordinatesConverter.cs
+//  File:		MapAreaCoordinatesConverter.cs
 //
-//  Namespace:    System.Web.UI.DataVisualization.Charting
+//  Namespace:	System.Web.UI.DataVisualization.Charting
 //
-//    Classes:    MapAreaCoordinatesConverter
+//	Classes:	MapAreaCoordinatesConverter
 //
-//  Purpose:    Design-time converter for map area coordinates
+//  Purpose:	Design-time converter for map area coordinates
 //
-//    Reviewed:    AG - August 7, 2002
+//	Reviewed:	AG - August 7, 2002
 //
 //===================================================================
 

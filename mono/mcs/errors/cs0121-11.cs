@@ -3,7 +3,7 @@
 
 interface IA
 {
-    void Foo ();
+	void Foo ();
 }
 
 interface IBB : IB
@@ -12,7 +12,7 @@ interface IBB : IB
 
 interface IB
 {
-    int Foo ();
+	int Foo ();
 }
 
 interface IC : IA, IBB
@@ -21,9 +21,9 @@ interface IC : IA, IBB
 
 public class Program
 {
-    static void Main ()
-    {
-        IC i = null;
-        i.Foo ();
-    }
+	static void Main ()
+	{
+		IC i = null;
+		i.Foo ();
+	}
 }

@@ -2,7 +2,7 @@
 // NTAccountTest.cs - NUnit Test Cases for NTAccount
 //
 // Author:
-//    Kenneth Bell
+//	Kenneth Bell
 //
 
 using System;

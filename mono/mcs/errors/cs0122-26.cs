@@ -3,9 +3,9 @@
 
 class C
 {
-    protected interface I
-    {
-    }
+	protected interface I
+	{
+	}
 }
 
 class A : C.I

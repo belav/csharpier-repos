@@ -8,6 +8,6 @@ public partial class Foo
 
 class X
 {
-    static void Main ()
-    { }
+	static void Main ()
+	{ }
 }

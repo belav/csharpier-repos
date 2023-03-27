@@ -2,7 +2,7 @@
 // WS2007FederationHttpBinding.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -32,30 +32,30 @@ using System.Text;
 
 namespace System.ServiceModel
 {
-    [MonoTODO]
-    public class WS2007FederationHttpBinding : WSFederationHttpBinding
-    {
-        public WS2007FederationHttpBinding ()
-            : base ()
-        {
-        }
+	[MonoTODO]
+	public class WS2007FederationHttpBinding : WSFederationHttpBinding
+	{
+		public WS2007FederationHttpBinding ()
+			: base ()
+		{
+		}
 
-        public WS2007FederationHttpBinding (
-            WSFederationHttpSecurityMode securityMode)
-            : base (securityMode)
-        {
-        }
+		public WS2007FederationHttpBinding (
+			WSFederationHttpSecurityMode securityMode)
+			: base (securityMode)
+		{
+		}
 
-        public WS2007FederationHttpBinding (WSFederationHttpSecurityMode securityMode, bool reliableSessionEnabled)
-            : base (securityMode, reliableSessionEnabled)
-        {
-        }
+		public WS2007FederationHttpBinding (WSFederationHttpSecurityMode securityMode, bool reliableSessionEnabled)
+			: base (securityMode, reliableSessionEnabled)
+		{
+		}
 
-        [MonoTODO]
-        public WS2007FederationHttpBinding (string configName)
-            : base (configName)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public WS2007FederationHttpBinding (string configName)
+			: base (configName)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

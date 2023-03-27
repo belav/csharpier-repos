@@ -20,25 +20,25 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
 namespace System.Windows.Forms {
 
-    public class DataGridViewCellToolTipTextNeededEventArgs : DataGridViewCellEventArgs {
+	public class DataGridViewCellToolTipTextNeededEventArgs : DataGridViewCellEventArgs {
 
-        private string toolTipText;
+		private string toolTipText;
 
-        internal DataGridViewCellToolTipTextNeededEventArgs (string toolTipText, int rowIndex, int columnIndex) : base (columnIndex, rowIndex) {
-            this.toolTipText = toolTipText;
-        }
+		internal DataGridViewCellToolTipTextNeededEventArgs (string toolTipText, int rowIndex, int columnIndex) : base (columnIndex, rowIndex) {
+			this.toolTipText = toolTipText;
+		}
 
-        public string ToolTipText {
-            get { return toolTipText; }
-            set { toolTipText = value; }
-        }
+		public string ToolTipText {
+			get { return toolTipText; }
+			set { toolTipText = value; }
+		}
 
-    }
+	}
 
 }

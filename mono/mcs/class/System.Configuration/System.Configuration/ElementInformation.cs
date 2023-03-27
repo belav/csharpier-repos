@@ -30,69 +30,69 @@ using System.Collections;
 
 namespace System.Configuration
 {
-    public sealed class ElementInformation
-    {
-        readonly PropertyInformation propertyInfo;
-        readonly ConfigurationElement owner;
-        readonly PropertyInformationCollection properties;
+	public sealed class ElementInformation
+	{
+		readonly PropertyInformation propertyInfo;
+		readonly ConfigurationElement owner;
+		readonly PropertyInformationCollection properties;
 
-        internal ElementInformation (ConfigurationElement owner, PropertyInformation propertyInfo)
-        {
-            this.propertyInfo = propertyInfo;
-            this.owner = owner;
+		internal ElementInformation (ConfigurationElement owner, PropertyInformation propertyInfo)
+		{
+			this.propertyInfo = propertyInfo;
+			this.owner = owner;
 
-            properties = new PropertyInformationCollection ();
-            foreach (ConfigurationProperty prop in owner.Properties)
-                properties.Add (new PropertyInformation (owner, prop));
-        }
+			properties = new PropertyInformationCollection ();
+			foreach (ConfigurationProperty prop in owner.Properties)
+				properties.Add (new PropertyInformation (owner, prop));
+		}
 
-        [MonoTODO]
-        public ICollection Errors {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public ICollection Errors {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
 
-        public bool IsCollection {
-            get { return owner is ConfigurationElementCollection; }
-        }
-        
-        public bool IsLocked {
-            get { return propertyInfo != null ? propertyInfo.IsLocked : false; }
-        }
-        
-        [MonoTODO("Support multiple levels of inheritance")]
-        public bool IsPresent {
-            get { return owner.IsElementPresent; }
-        }
-        
-        public int LineNumber {
-            get { return propertyInfo != null ? propertyInfo.LineNumber : 0; }
-        }
-        
-        public string Source {
-            get { return propertyInfo != null ? propertyInfo.Source : null; }
-        }
-        
-        public Type Type {
-            get { return propertyInfo != null ? propertyInfo.Type : owner.GetType (); }
-        }
-        
-        public ConfigurationValidatorBase Validator {
-            get { return propertyInfo != null ? propertyInfo.Validator : new DefaultValidator(); }
-        }
-        
-        public PropertyInformationCollection Properties {
-            get { return properties; }
-        }
-        
-        internal void Reset (ElementInformation parentInfo)
-        {
-            foreach (PropertyInformation prop in Properties) {
-                PropertyInformation parentProp = parentInfo.Properties [prop.Name];
-                prop.Reset (parentProp);
-            }
-        }
-    }
+		public bool IsCollection {
+			get { return owner is ConfigurationElementCollection; }
+		}
+		
+		public bool IsLocked {
+			get { return propertyInfo != null ? propertyInfo.IsLocked : false; }
+		}
+		
+		[MonoTODO("Support multiple levels of inheritance")]
+		public bool IsPresent {
+			get { return owner.IsElementPresent; }
+		}
+		
+		public int LineNumber {
+			get { return propertyInfo != null ? propertyInfo.LineNumber : 0; }
+		}
+		
+		public string Source {
+			get { return propertyInfo != null ? propertyInfo.Source : null; }
+		}
+		
+		public Type Type {
+			get { return propertyInfo != null ? propertyInfo.Type : owner.GetType (); }
+		}
+		
+		public ConfigurationValidatorBase Validator {
+			get { return propertyInfo != null ? propertyInfo.Validator : new DefaultValidator(); }
+		}
+		
+		public PropertyInformationCollection Properties {
+			get { return properties; }
+		}
+		
+		internal void Reset (ElementInformation parentInfo)
+		{
+			foreach (PropertyInformation prop in Properties) {
+				PropertyInformation parentProp = parentInfo.Properties [prop.Name];
+				prop.Reset (parentProp);
+			}
+		}
+	}
 }
 

@@ -23,39 +23,39 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-    public class ColumnWidthChangingEventArgs : CancelEventArgs
-    {
-        private int column_index;
-        private int new_width;
+	public class ColumnWidthChangingEventArgs : CancelEventArgs
+	{
+		private int column_index;
+		private int new_width;
 
-        #region Public Constructors
-        public ColumnWidthChangingEventArgs (int columnIndex, int newWidth) : this (columnIndex, newWidth, false)
-        {
-        }
+		#region Public Constructors
+		public ColumnWidthChangingEventArgs (int columnIndex, int newWidth) : this (columnIndex, newWidth, false)
+		{
+		}
 
-        public ColumnWidthChangingEventArgs (int columnIndex, int newWidth, bool cancel) : base (cancel)
-        {
-            this.column_index = columnIndex;
-            this.new_width = newWidth;
-        }
-        #endregion    // Public Constructors
+		public ColumnWidthChangingEventArgs (int columnIndex, int newWidth, bool cancel) : base (cancel)
+		{
+			this.column_index = columnIndex;
+			this.new_width = newWidth;
+		}
+		#endregion	// Public Constructors
 
-        #region Public Instance Properties
-        public int ColumnIndex {
-            get { return this.column_index; }
-        }
-        
-        public int NewWidth {
-            get { return this.new_width; }
-            set { this.new_width = value; }
-        }
-        #endregion    // Public Instance Properties
-    }
+		#region Public Instance Properties
+		public int ColumnIndex {
+			get { return this.column_index; }
+		}
+		
+		public int NewWidth {
+			get { return this.new_width; }
+			set { this.new_width = value; }
+		}
+		#endregion	// Public Instance Properties
+	}
 }

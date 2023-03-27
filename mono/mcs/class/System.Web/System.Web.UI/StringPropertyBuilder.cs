@@ -2,7 +2,7 @@
 // System.Web.UI.StringPropertyBuilder.cs
 //
 // Authors:
-//     Gonzalo Paniagua Javier (gonzalo@ximian.com)
+// 	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // Copyright (c) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -27,27 +27,27 @@
 //
 using System.Web;
 namespace System.Web.UI {
-    class StringPropertyBuilder : ControlBuilder {
-        string prop_name;
+	class StringPropertyBuilder : ControlBuilder {
+		string prop_name;
 
-        public StringPropertyBuilder (string prop_name)
-        {
-            this.prop_name = prop_name;
-        }
+		public StringPropertyBuilder (string prop_name)
+		{
+			this.prop_name = prop_name;
+		}
 
-        public string PropertyName {
-            get { return prop_name; }
-        }
+		public string PropertyName {
+			get { return prop_name; }
+		}
 
-        public override bool AllowWhitespaceLiterals ()
-        {
-            return false;
-        }
+		public override bool AllowWhitespaceLiterals ()
+		{
+			return false;
+		}
 
-        public override void AppendSubBuilder (ControlBuilder subBuilder)
-        {
-            throw new HttpException ("StringPropertyBuilder should never be called");
-        }
-    }
+		public override void AppendSubBuilder (ControlBuilder subBuilder)
+		{
+			throw new HttpException ("StringPropertyBuilder should never be called");
+		}
+	}
 }
 

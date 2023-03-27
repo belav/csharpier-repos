@@ -5,8 +5,8 @@ delegate int d();
 
 class C
 {
-    public event d E {
-        private  add {}
-        remove {}
-    }
+	public event d E {
+		private  add {}
+		remove {}
+	}
 }

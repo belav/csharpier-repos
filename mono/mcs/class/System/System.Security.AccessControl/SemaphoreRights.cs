@@ -2,7 +2,7 @@
 // System.Security.AccessControl.SemaphoreRights enum
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,16 +31,16 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.AccessControl {
 
-    [ComVisible (false)]
-    [Flags]
-    public enum SemaphoreRights {
-        Modify            = 0x000002,
-        Delete            = 0x010000,
-        ReadPermissions        = 0x020000,
-        ChangePermissions    = 0x040000,
-        TakeOwnership        = 0x080000,
-        Synchronize        = 0x100000,
-        FullControl        = 0x1F0003    /* not 0x1F0002 according to corcompare */
-    }
+	[ComVisible (false)]
+	[Flags]
+	public enum SemaphoreRights {
+		Modify			= 0x000002,
+		Delete			= 0x010000,
+		ReadPermissions		= 0x020000,
+		ChangePermissions	= 0x040000,
+		TakeOwnership		= 0x080000,
+		Synchronize		= 0x100000,
+		FullControl		= 0x1F0003	/* not 0x1F0002 according to corcompare */
+	}
 }
 

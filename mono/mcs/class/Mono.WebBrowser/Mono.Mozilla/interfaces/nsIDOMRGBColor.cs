@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,35 +32,35 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("6aff3102-320d-4986-9790-12316bb87cf9")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMRGBColor {
+	[Guid ("6aff3102-320d-4986-9790-12316bb87cf9")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIDOMRGBColor {
 
 #region nsIDOMRGBColor
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getRed ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getRed ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getGreen ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getGreen ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getBlue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int getBlue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsDOMRGBColor {
-        public static nsIDOMRGBColor GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMRGBColor obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMRGBColor).GUID, obj);
-            return o as nsIDOMRGBColor;
-        }
-    }
+	internal class nsDOMRGBColor {
+		public static nsIDOMRGBColor GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMRGBColor obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIDOMRGBColor).GUID, obj);
+			return o as nsIDOMRGBColor;
+		}
+	}
 }
 #if example
 
@@ -69,27 +69,27 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-    internal class DOMRGBColor : nsIDOMRGBColor {
+	internal class DOMRGBColor : nsIDOMRGBColor {
 
 #region nsIDOMRGBColor
-        int nsIDOMRGBColor.getRed ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
+		int nsIDOMRGBColor.getRed ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIDOMRGBColor.getGreen ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
+		int nsIDOMRGBColor.getGreen ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
-        int nsIDOMRGBColor.getBlue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
+		int nsIDOMRGBColor.getBlue ([MarshalAs (UnmanagedType.Interface) ] out nsIDOMCSSPrimitiveValue ret)
 
-        {
-            return null;
-        }
+		{
+			return null;
+		}
 
 #endregion
-    }
+	}
 #endif

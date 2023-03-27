@@ -1,4 +1,4 @@
-using System.Security.Permissions;
+﻿using System.Security.Permissions;
 
 namespace System.Web.DynamicData {
     /// <summary>

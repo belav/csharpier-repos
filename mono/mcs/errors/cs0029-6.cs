@@ -3,8 +3,8 @@
 // Compiler options: -unsafe
 
 class T {
-    static unsafe void Main ()
-    {
-        int *a = (T) null;
-    }
+	static unsafe void Main ()
+	{
+		int *a = (T) null;
+	}
 }

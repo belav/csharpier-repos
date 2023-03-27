@@ -159,14 +159,14 @@ namespace System.Xml.Schema {
             }
             
             public int Count { 
-                get { return size; }
-            }
+    	        get { return size; }
+    	    }
 
             public Object SyncRoot {
-                get {
+    	        get {
                     return ((ICollection)entries).SyncRoot;
                 }
-            }
+    	    }
 
             public bool IsSynchronized {
                 get {
@@ -178,7 +178,7 @@ namespace System.Xml.Schema {
                 if (array == null)
                     throw new ArgumentNullException("array");
 
-                if (arrayIndex < 0) 
+			    if (arrayIndex < 0) 
                     throw new ArgumentOutOfRangeException("arrayIndex");
 
                 Debug.Assert(array.Length >= size, "array is not big enough to hold all the items in the ICollection");
@@ -204,14 +204,14 @@ namespace System.Xml.Schema {
             }
             
             public int Count { 
-                get { return size; }
-            }
+    	        get { return size; }
+    	    }
 
             public Object SyncRoot {
-                get {
+    	        get {
                     return ((ICollection)entries).SyncRoot;
                 }
-            }
+    	    }
 
             public bool IsSynchronized {
                 get {
@@ -223,7 +223,7 @@ namespace System.Xml.Schema {
                 if (array == null)
                     throw new ArgumentNullException("array");
 
-                if (arrayIndex < 0) 
+			    if (arrayIndex < 0) 
                     throw new ArgumentOutOfRangeException("arrayIndex");
 
                 Debug.Assert(array.Length >= size, "array is not big enough to hold all the items in the ICollection");

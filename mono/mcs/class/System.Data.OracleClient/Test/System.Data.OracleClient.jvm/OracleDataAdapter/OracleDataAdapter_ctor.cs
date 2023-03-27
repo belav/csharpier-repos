@@ -37,52 +37,52 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleDataAdapter_ctor : GHTBase
 {
-    public static void Main()
-    {
-        OracleDataAdapter_ctor tc = new OracleDataAdapter_ctor();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OracleDataAdapter_ctor");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	public static void Main()
+	{
+		OracleDataAdapter_ctor tc = new OracleDataAdapter_ctor();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OracleDataAdapter_ctor");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
 
-    //public TestClass():base(true){}
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
 
-        OracleDataAdapter oleDBda = new OracleDataAdapter();
-                
-        try
-        {
-            BeginCase("Ctor");
-            Compare(oleDBda != null,true );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-        
-    }
+		OracleDataAdapter oleDBda = new OracleDataAdapter();
+		        
+		try
+		{
+			BeginCase("Ctor");
+			Compare(oleDBda != null,true );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+		
+	}
 }
 }

@@ -1,4 +1,4 @@
-// 
+﻿// 
 // IDataServicePagingProvider.cs
 //  
 // Author:
@@ -31,9 +31,9 @@ using System.Linq;
 
 namespace System.Data.Services.Providers
 {
-    public interface IDataServicePagingProvider
-    {
-        object[] GetContinuationToken (IEnumerator enumerator);
-        void SetContinuationToken (IQueryable query, ResourceType resourceType, object[] continuationToken);
-    }
+	public interface IDataServicePagingProvider
+	{
+		object[] GetContinuationToken (IEnumerator enumerator);
+		void SetContinuationToken (IQueryable query, ResourceType resourceType, object[] continuationToken);
+	}
 }

@@ -31,18 +31,18 @@ using System.Windows.Forms;
 
 namespace System.Windows.Forms
 {
-    [AttributeUsageAttribute (AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public sealed class RelatedImageListAttribute : Attribute
-    {
-        private string related_image_list;
+	[AttributeUsageAttribute (AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+	public sealed class RelatedImageListAttribute : Attribute
+	{
+		private string related_image_list;
 
-        public RelatedImageListAttribute (string relatedImageList)
-        {
-            this.related_image_list = relatedImageList;
-        }
+		public RelatedImageListAttribute (string relatedImageList)
+		{
+			this.related_image_list = relatedImageList;
+		}
 
-        public string RelatedImageList {
-            get { return this.related_image_list; }
-        }
-    }
+		public string RelatedImageList {
+			get { return this.related_image_list; }
+		}
+	}
 }

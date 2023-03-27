@@ -2,7 +2,7 @@
 // BindingCollectionElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,35 +54,35 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public abstract class BindingCollectionElement
-         : ConfigurationElement
-    {
-        string _name;
+	[MonoTODO]
+	public abstract class BindingCollectionElement
+		 : ConfigurationElement
+	{
+		string _name;
 
-        protected BindingCollectionElement () {
-        }
+		protected BindingCollectionElement () {
+		}
 
-        // Properties
-        public string BindingName {
-            get {
-                if (_name != null)
-                    return _name;
-                var extensions = ConfigUtil.ExtensionsSection.BindingExtensions;
-                _name = extensions.GetConfigurationElementName (GetType ());
-                if (_name == null)
-                    throw new InvalidOperationException ();
-                return _name;
-            }
-        }
+		// Properties
+		public string BindingName {
+			get {
+				if (_name != null)
+					return _name;
+				var extensions = ConfigUtil.ExtensionsSection.BindingExtensions;
+				_name = extensions.GetConfigurationElementName (GetType ());
+				if (_name == null)
+					throw new InvalidOperationException ();
+				return _name;
+			}
+		}
 
-        public abstract Type BindingType { get; }
-        public abstract ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings { get; }
+		public abstract Type BindingType { get; }
+		public abstract ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings { get; }
 
-        public abstract bool ContainsKey (string name);
-        protected internal abstract Binding GetDefault ();
-        protected internal abstract bool TryAdd (string name, Binding binding, System.Configuration.Configuration config);
+		public abstract bool ContainsKey (string name);
+		protected internal abstract Binding GetDefault ();
+		protected internal abstract bool TryAdd (string name, Binding binding, System.Configuration.Configuration config);
 
-    }
+	}
 
 }

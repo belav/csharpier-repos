@@ -31,40 +31,40 @@ using System;
 
 namespace System.Web.UI
 {
-    public sealed class RegisteredExpandoAttribute
-    {
-        readonly Control _control;
-        readonly string _controlId;
-        readonly bool _encode;
-        readonly string _name;
-        readonly string _value;
+	public sealed class RegisteredExpandoAttribute
+	{
+		readonly Control _control;
+		readonly string _controlId;
+		readonly bool _encode;
+		readonly string _name;
+		readonly string _value;
 
-        internal RegisteredExpandoAttribute (Control control, string controlId, string name, string value, bool encode) {
-            _control = control;
-            _name = name;
-            _value = value;
-            _controlId = controlId;
-            _encode = encode;
-        }
+		internal RegisteredExpandoAttribute (Control control, string controlId, string name, string value, bool encode) {
+			_control = control;
+			_name = name;
+			_value = value;
+			_controlId = controlId;
+			_encode = encode;
+		}
 
-        public Control Control {
-            get { return _control; }
-        }
+		public Control Control {
+			get { return _control; }
+		}
 
-        public string Name {
-            get { return _name; }
-        }
+		public string Name {
+			get { return _name; }
+		}
 
-        public string Value {
-            get { return _value; }
-        }
+		public string Value {
+			get { return _value; }
+		}
 
-        public string ControlId {
-            get { return _controlId; }
-        }
+		public string ControlId {
+			get { return _controlId; }
+		}
 
-        public bool Encode {
-            get { return _encode; }
-        }
-    }
+		public bool Encode {
+			get { return _encode; }
+		}
+	}
 }

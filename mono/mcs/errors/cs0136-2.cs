@@ -2,9 +2,9 @@
 // Line: 7
 
 class X {
-    public static void Bar (int j, params int [] args)
-    {
-        foreach (int j in args)
-            ;
-    }
+	public static void Bar (int j, params int [] args)
+	{
+		foreach (int j in args)
+			;
+	}
 }

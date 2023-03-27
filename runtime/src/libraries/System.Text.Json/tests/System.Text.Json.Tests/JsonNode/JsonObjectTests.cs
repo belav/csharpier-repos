@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections;
@@ -925,10 +925,10 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static void TestJsonNodeOptionsSet()
         {
-            var options = new JsonNodeOptions()
-            {
-                PropertyNameCaseInsensitive = true
-            };
+	        var options = new JsonNodeOptions()
+	        {
+	            PropertyNameCaseInsensitive = true
+	        };
 
             // Ctor that takes just options
             var obj1 = new JsonObject(options);
@@ -939,7 +939,7 @@ namespace System.Text.Json.Nodes.Tests
             {
                 new KeyValuePair<string, JsonNode?>("Hello", "World")
             };
-            var obj2 = new JsonObject(props, options);
+	        var obj2 = new JsonObject(props, options);
 
             // Create method
             using JsonDocument doc = JsonDocument.Parse(@"{""Hello"":""World""}");

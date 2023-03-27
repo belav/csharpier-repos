@@ -30,10 +30,10 @@
 
 namespace System.ComponentModel.Design
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public enum DesignerActionListsChangedType
-    {
-        ActionListsAdded,
-        ActionListsRemoved
-    }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public enum DesignerActionListsChangedType
+	{
+		ActionListsAdded,
+		ActionListsRemoved
+	}
 }

@@ -2,7 +2,7 @@
 // ServiceElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,24 +54,24 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (ServiceElement),
-         AddItemName = "service",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class ServiceElementCollection
-         : ServiceModelEnhancedConfigurationElementCollection<ServiceElement>,  ICollection,  IEnumerable
-    {
+	[ConfigurationCollection (typeof (ServiceElement),
+		 AddItemName = "service",
+		 RemoveItemName = "remove",
+		 ClearItemsName = "clear",
+		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	public sealed class ServiceElementCollection
+		 : ServiceModelEnhancedConfigurationElementCollection<ServiceElement>,  ICollection,  IEnumerable
+	{
 
-        public ServiceElementCollection ()
-        {
-            AddElementName = "service";
-        }
+		public ServiceElementCollection ()
+		{
+			AddElementName = "service";
+		}
 
-        protected override object GetElementKey (ConfigurationElement element) {
-            return ((ServiceElement) element).Name;
-        }
+		protected override object GetElementKey (ConfigurationElement element) {
+			return ((ServiceElement) element).Name;
+		}
 
-    }
+	}
 
 }

@@ -36,47 +36,47 @@ using System.Runtime.Remoting.Contexts;
 
 namespace System.Runtime.Remoting {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public class ActivatedClientTypeEntry : TypeEntry
-    {
-        string applicationUrl;
-        Type obj_type;
-        
-        public ActivatedClientTypeEntry (Type type, string appUrl)
-        {
-            AssemblyName = type.Assembly.FullName;
-            TypeName = type.FullName;
-            applicationUrl = appUrl;
-            obj_type = type;
-        }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public class ActivatedClientTypeEntry : TypeEntry
+	{
+		string applicationUrl;
+		Type obj_type;
+		
+		public ActivatedClientTypeEntry (Type type, string appUrl)
+		{
+			AssemblyName = type.Assembly.FullName;
+			TypeName = type.FullName;
+			applicationUrl = appUrl;
+			obj_type = type;
+		}
 
-        public ActivatedClientTypeEntry (string typeName, string assemblyName, string appUrl)
-        {
-            AssemblyName = assemblyName;
-            TypeName = typeName;
-            applicationUrl = appUrl;
-            Assembly a = Assembly.Load (assemblyName);
-            obj_type = a.GetType (typeName);
-            if (obj_type == null)
-                throw new RemotingException ("Type not found: " + typeName + ", " + assemblyName);
-        }
+		public ActivatedClientTypeEntry (string typeName, string assemblyName, string appUrl)
+		{
+			AssemblyName = assemblyName;
+			TypeName = typeName;
+			applicationUrl = appUrl;
+			Assembly a = Assembly.Load (assemblyName);
+			obj_type = a.GetType (typeName);
+			if (obj_type == null)
+				throw new RemotingException ("Type not found: " + typeName + ", " + assemblyName);
+		}
 
-        public string ApplicationUrl {
-            get { return applicationUrl; }
-        }
+		public string ApplicationUrl {
+			get { return applicationUrl; }
+		}
 
-        public IContextAttribute [] ContextAttributes {
-            get { return null; }
-            set { } // This is not implemented in the MS runtime yet.
-        }
+		public IContextAttribute [] ContextAttributes {
+			get { return null; }
+			set { } // This is not implemented in the MS runtime yet.
+		}
 
-        public Type ObjectType {
-            get { return obj_type; }
-        }
+		public Type ObjectType {
+			get { return obj_type; }
+		}
 
-        public override string ToString ()
-        {
-            return TypeName + AssemblyName + ApplicationUrl;
-        }
-    }
+		public override string ToString ()
+		{
+			return TypeName + AssemblyName + ApplicationUrl;
+		}
+	}
 }

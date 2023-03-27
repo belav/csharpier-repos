@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+๏ปฟ// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -140,9 +140,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             //
             // The correct rules are spelled out in the spec:
             //
-            // Spec ง7.17.2:
+            // Spec ยง7.17.2:
             // An operation of the form x op= y is processed by applying binary operator overload
-            // resolution (ง7.3.4) as if the operation was written x op y.
+            // resolution (ยง7.3.4) as if the operation was written x op y.
             // Let R be the return type of the selected operator, and T the type of x. Then,
             //
             // * If an implicit conversion from an expression of type R to the type T exists,
@@ -3012,11 +3012,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // SPEC: When a decimal-integer-literal with the value 2147483648 and no integer-type-suffix
             // SPEC: appears as the token immediately following a unary minus operator token, the result is a
-            // SPEC: constant of type int with the value -2147483648.
+            // SPEC: constant of type int with the value โ’2147483648.
 
             // SPEC: When a decimal-integer-literal with the value 9223372036854775808 and no integer-type-suffix
             // SPEC: or the integer-type-suffix L or l appears as the token immediately following a unary minus
-            // SPEC: operator token, the result is a constant of type long with the value -9223372036854775808.
+            // SPEC: operator token, the result is a constant of type long with the value โ’9223372036854775808.
 
             if (node.Kind() != SyntaxKind.UnaryMinusExpression)
             {
@@ -3766,11 +3766,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC:    In an operation of the form E as T, E must be an expression and T must be a reference type,
             // SPEC:    a type parameter known to be a reference type, or a nullable type.
             // SPEC:    Furthermore, at least one of the following must be true, or otherwise a compile-time error occurs:
-            // SPEC:    •    An identity (ง6.1.1), implicit nullable (ง6.1.4), implicit reference (ง6.1.6), boxing (ง6.1.7),
-            // SPEC:        explicit nullable (ง6.2.3), explicit reference (ง6.2.4), or unboxing (ง6.2.5) conversion exists
+            // SPEC:    โ€ข	An identity (ยง6.1.1), implicit nullable (ยง6.1.4), implicit reference (ยง6.1.6), boxing (ยง6.1.7),
+            // SPEC:        explicit nullable (ยง6.2.3), explicit reference (ยง6.2.4), or unboxing (ยง6.2.5) conversion exists
             // SPEC:        from E to T.
-            // SPEC:    •    The type of E or T is an open type.
-            // SPEC:    •    E is the null literal.
+            // SPEC:    โ€ข	The type of E or T is an open type.
+            // SPEC:    โ€ข	E is the null literal.
 
             // SPEC VIOLATION:  The specification contains an error in the list of legal conversions above.
             // SPEC VIOLATION:  If we have "class C<T, U> where T : U where U : class" then there is

@@ -31,13 +31,13 @@ using System;
 
 namespace System.Configuration.Internal
 {
-    [System.Runtime.InteropServices.ComVisible (false)]
-    public interface IInternalConfigSystem
-    {
-        object GetSection (string configKey);
-        void RefreshConfig (string sectionName);
-        
-        bool SupportsUserConfig { get; }
-    }
+	[System.Runtime.InteropServices.ComVisible (false)]
+	public interface IInternalConfigSystem
+	{
+		object GetSection (string configKey);
+		void RefreshConfig (string sectionName);
+		
+		bool SupportsUserConfig { get; }
+	}
 }
 

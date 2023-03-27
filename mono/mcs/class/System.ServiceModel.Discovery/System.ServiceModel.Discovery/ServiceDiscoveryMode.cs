@@ -24,9 +24,9 @@
 //
 namespace System.ServiceModel.Discovery
 {
-    public enum ServiceDiscoveryMode
-    {
-        Adhoc,
-        Managed
-    }
+	public enum ServiceDiscoveryMode
+	{
+		Adhoc,
+		Managed
+	}
 }

@@ -2,7 +2,7 @@
 // IMethodContext.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -31,11 +31,11 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.ControlFlow;
 
 namespace Mono.CodeContracts.Static.Analysis {
-    interface IMethodContext
-    {
-        Method CurrentMethod { get; }
-        ICFG CFG { get; }
-        IEnumerable<Field> Modifies(Method method);
-        IEnumerable<Method> AffectedGetters(Field field);
-    }
+	interface IMethodContext
+	{
+		Method CurrentMethod { get; }
+		ICFG CFG { get; }
+		IEnumerable<Field> Modifies(Method method);
+		IEnumerable<Method> AffectedGetters(Field field);
+	}
 }

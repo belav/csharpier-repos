@@ -166,7 +166,7 @@ namespace System.Xml
         private static unsafe void Decode(char* pChars, char* pCharsEndPos, 
                                     byte* pBytes, byte* pBytesEndPos, 
                                     ref bool hasHalfByteCached, ref byte cachedHalfByte,
-                                    out int charsDecoded, out int bytesDecoded ) {
+								    out int charsDecoded, out int bytesDecoded ) {
 #if DEBUG
             Debug.Assert( pCharsEndPos - pChars >= 0 );
             Debug.Assert( pBytesEndPos - pBytes >= 0 );

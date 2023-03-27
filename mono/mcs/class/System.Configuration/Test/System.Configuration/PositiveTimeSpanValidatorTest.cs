@@ -3,7 +3,7 @@
 // for System.Configuration.PositiveTimeSpanValidator.
 //
 // Author:
-//    Chris Toshok  <toshok@ximian.com>
+//	Chris Toshok  <toshok@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -33,41 +33,41 @@ using System.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration {
-    [TestFixture]
-    public class PositiveTimeSpanValidatorTest
-    {
-        [Test]
-        public void CanValidate ()
-        {
-            PositiveTimeSpanValidator v = new PositiveTimeSpanValidator ();
+	[TestFixture]
+	public class PositiveTimeSpanValidatorTest
+	{
+		[Test]
+		public void CanValidate ()
+		{
+			PositiveTimeSpanValidator v = new PositiveTimeSpanValidator ();
 
-            Assert.IsTrue (v.CanValidate (typeof (TimeSpan)), "A1");
-            Assert.IsFalse (v.CanValidate (typeof (int)), "A2");
-            Assert.IsFalse (v.CanValidate (typeof (long)), "A3");
-        }
+			Assert.IsTrue (v.CanValidate (typeof (TimeSpan)), "A1");
+			Assert.IsFalse (v.CanValidate (typeof (int)), "A2");
+			Assert.IsFalse (v.CanValidate (typeof (long)), "A3");
+		}
 
-        [Test]
-        public void Validate_inRange ()
-        {
-            PositiveTimeSpanValidator v = new PositiveTimeSpanValidator ();
-            v.Validate (new TimeSpan (7000));
-        }
+		[Test]
+		public void Validate_inRange ()
+		{
+			PositiveTimeSpanValidator v = new PositiveTimeSpanValidator ();
+			v.Validate (new TimeSpan (7000));
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Validate_fail1 ()
-        {
-            PositiveTimeSpanValidator v = new PositiveTimeSpanValidator ();
-            v.Validate (new TimeSpan (0));
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentException))]
+		public void Validate_fail1 ()
+		{
+			PositiveTimeSpanValidator v = new PositiveTimeSpanValidator ();
+			v.Validate (new TimeSpan (0));
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Validate_fail2 ()
-        {
-            PositiveTimeSpanValidator v = new PositiveTimeSpanValidator ();
-            v.Validate (new TimeSpan (-10000));
-        }
-    }
+		[Test]
+		[ExpectedException (typeof (ArgumentException))]
+		public void Validate_fail2 ()
+		{
+			PositiveTimeSpanValidator v = new PositiveTimeSpanValidator ();
+			v.Validate (new TimeSpan (-10000));
+		}
+	}
 }
 

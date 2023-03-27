@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jordi Mas i Hernandez, jordi@ximian.com
+//	Jordi Mas i Hernandez, jordi@ximian.com
 //
 
 
@@ -29,13 +29,13 @@
 
 namespace System.Windows.Forms 
 {
-    public enum LinkState 
-    {
-        Normal     = 0,
-        Hover     = 1,
-        Active    = 2,        
-        Visited = 4
-    }
+	public enum LinkState 
+	{
+		Normal 	= 0,
+		Hover 	= 1,
+		Active	= 2,		
+		Visited = 4
+	}
 }
 
 

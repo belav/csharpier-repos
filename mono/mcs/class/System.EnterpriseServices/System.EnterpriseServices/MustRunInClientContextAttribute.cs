@@ -32,36 +32,36 @@ using System;
 using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Class)]
-    [ComVisible(false)]
-    public sealed class MustRunInClientContextAttribute : Attribute {
+	[AttributeUsage (AttributeTargets.Class)]
+	[ComVisible(false)]
+	public sealed class MustRunInClientContextAttribute : Attribute {
 
-        #region Fields
+		#region Fields
 
-        bool val;
+		bool val;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public MustRunInClientContextAttribute () 
-            : this (true)
-        {
-        }
+		public MustRunInClientContextAttribute () 
+			: this (true)
+		{
+		}
 
-        public MustRunInClientContextAttribute (bool val)
-        {
-            this.val = val;
-        }
+		public MustRunInClientContextAttribute (bool val)
+		{
+			this.val = val;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public bool Value {
-            get { return val; }
-        }
+		public bool Value {
+			get { return val; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

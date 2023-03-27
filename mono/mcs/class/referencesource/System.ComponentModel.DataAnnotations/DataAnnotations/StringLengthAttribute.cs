@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations.Resources;
+﻿using System.ComponentModel.DataAnnotations.Resources;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 

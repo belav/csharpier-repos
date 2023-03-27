@@ -31,15 +31,15 @@
 
 namespace System.Runtime.Remoting.Channels {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IChannelReceiver : IChannel
-    {
-        object ChannelData { get; }
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IChannelReceiver : IChannel
+	{
+		object ChannelData { get; }
 
-        string [] GetUrlsForUri (string objectURI);
+		string [] GetUrlsForUri (string objectURI);
 
-        void StartListening (object data);
+		void StartListening (object data);
 
-        void StopListening (object data);
-    }
+		void StopListening (object data);
+	}
 }

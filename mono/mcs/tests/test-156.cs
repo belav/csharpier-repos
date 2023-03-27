@@ -4,17 +4,17 @@ public class Public { }
 
 class X
 {
-    public class NestedPublic { }
+	public class NestedPublic { }
 
-    internal class NestedAssembly { }
+	internal class NestedAssembly { }
 
-    protected internal class NestedFamilyAndAssembly { }
+	protected internal class NestedFamilyAndAssembly { }
 
-    protected class NestedFamily { }
+	protected class NestedFamily { }
 
-    private class NestedPrivate { }
+	private class NestedPrivate { }
 
-    public static void Main () { }
+	public static void Main () { }
 }
 
 public class A : Public { }
@@ -28,80 +28,80 @@ class F : X.NestedFamilyAndAssembly { }
 
 public class Y
 {
-    public class YA : Public { }
+	public class YA : Public { }
 
-    class YB : Internal { }
+	class YB : Internal { }
 
-    class YC : X.NestedPublic { }
-    class YD : X.NestedAssembly { }
-    class YE : X.NestedFamilyAndAssembly { }
+	class YC : X.NestedPublic { }
+	class YD : X.NestedAssembly { }
+	class YE : X.NestedFamilyAndAssembly { }
 
-    internal class YF : Internal { }
+	internal class YF : Internal { }
 
-    internal class YG : X.NestedAssembly { }
-    internal class YH : X.NestedFamilyAndAssembly { }
+	internal class YG : X.NestedAssembly { }
+	internal class YH : X.NestedFamilyAndAssembly { }
 
-    internal enum YI { A, B }
+	internal enum YI { A, B }
 
-    internal void Test (YI yi) { }
+	internal void Test (YI yi) { }
 }
 
 public class Z
 {
-    public class P : Y.YA { }
+	public class P : Y.YA { }
 }
 
 class W : X
 {
-    public class WA : NestedPublic { }
-    public class WB : NestedAssembly { }
-    public class WC : NestedFamilyAndAssembly { }
-    internal class WD : NestedPublic { }
-    internal class WE : NestedFamilyAndAssembly { }
+	public class WA : NestedPublic { }
+	public class WB : NestedAssembly { }
+	public class WC : NestedFamilyAndAssembly { }
+	internal class WD : NestedPublic { }
+	internal class WE : NestedFamilyAndAssembly { }
 
-    private class WCA
-    {
-    }
+	private class WCA
+	{
+	}
 
-    private class WCB
-    {
-        public class WCD
-        {
-            public class WCE : WCA
-            {
-            }
-        }
-    }
+	private class WCB
+	{
+		public class WCD
+		{
+			public class WCE : WCA
+			{
+			}
+		}
+	}
 }
 
 class G
 {
-    public void Test (X x) { }
+	public void Test (X x) { }
 
-    private enum Foo { A, B };
+	private enum Foo { A, B };
 
-    enum Bar { C, D };
+	enum Bar { C, D };
 
-    private class I
-    {
-        public class J
-        {
-            public void Test (Foo foo) { }
-        }
-    }
+	private class I
+	{
+		public class J
+		{
+			public void Test (Foo foo) { }
+		}
+	}
 }
 
 public class H
 {
-    public void Test (int[] a) { }
+	public void Test (int[] a) { }
 }
 
 internal interface L
 {
-    void Hello (string hello);
+	void Hello (string hello);
 }
 
 public class M : L
 {
-    public void Hello (string hello) { }
+	public void Hello (string hello) { }
 }

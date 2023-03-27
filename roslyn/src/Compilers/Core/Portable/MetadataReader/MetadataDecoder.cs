@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1405,7 +1405,7 @@ tryAgain:
             // ELEMENT_TYPE_U8, ELEMENT_TYPE_R4, ELEMENT_TYPE_R8, ELEMENT_TYPE_STRING.
             // 
             // A single-dimensional, zero-based array is specified as a single byte 0x1D followed
-            // by the FieldOrPropType of the element type. (See �II.23.1.16) An enum is
+            // by the FieldOrPropType of the element type. (See §II.23.1.16) An enum is
             // specified as a single byte 0x55 followed by a SerString.
             // 
             // tomat: The spec is missing ELEMENT_TYPE_TYPE.

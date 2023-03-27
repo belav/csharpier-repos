@@ -37,93 +37,93 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class RepeaterItem_DataItem
-        : GHTBaseWeb 
-    {
-        protected System.Web.UI.WebControls.Repeater Repeater1;
-        protected GHTWebControls.GHTSubTest GHTSubTest1;
-        protected System.Web.UI.WebControls.Repeater Repeater2;
-        protected GHTWebControls.GHTSubTest Ghtsubtest2;
-        #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
-        {
-            //
-            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-            //
-            InitializeComponent();
-            base.OnInit(e);
-        }
-        
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent() 
-        {    
-            this.Load += new System.EventHandler(this.Page_Load);
-            this.Repeater1.ItemCreated += new RepeaterItemEventHandler(Repeater1_ItemCreated);
-            this.Repeater2.ItemCreated += new RepeaterItemEventHandler(Repeater2_ItemCreated);
-        }
-        #endregion
+	public class RepeaterItem_DataItem
+		: GHTBaseWeb 
+	{
+		protected System.Web.UI.WebControls.Repeater Repeater1;
+		protected GHTWebControls.GHTSubTest GHTSubTest1;
+		protected System.Web.UI.WebControls.Repeater Repeater2;
+		protected GHTWebControls.GHTSubTest Ghtsubtest2;
+		#region Web Form Designer generated code
+		override protected void OnInit(EventArgs e) 
+		{
+			//
+			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
+			//
+			InitializeComponent();
+			base.OnInit(e);
+		}
+		
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent() 
+		{    
+			this.Load += new System.EventHandler(this.Page_Load);
+			this.Repeater1.ItemCreated += new RepeaterItemEventHandler(Repeater1_ItemCreated);
+			this.Repeater2.ItemCreated += new RepeaterItemEventHandler(Repeater2_ItemCreated);
+		}
+		#endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
-        {
-            //Put user code to initialize the page here
+		private void Page_Load(object sender, System.EventArgs e) 
+		{
+			//Put user code to initialize the page here
 
-            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-            GHTTestBegin(frm);
+			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+			GHTTestBegin(frm);
 
-            GHTActiveSubTest = GHTSubTest1;
-            try 
-            {
-                Repeater1.DataSource = GHTTests.GHDataSources.DSArrayList();
-                Repeater1.DataBind();
+			GHTActiveSubTest = GHTSubTest1;
+			try 
+			{
+				Repeater1.DataSource = GHTTests.GHDataSources.DSArrayList();
+				Repeater1.DataBind();
 
-                IEnumerator items = Repeater1.Items.GetEnumerator();
-                System.Web.UI.WebControls.RepeaterItem item;
+				IEnumerator items = Repeater1.Items.GetEnumerator();
+				System.Web.UI.WebControls.RepeaterItem item;
 
-                while ( items.MoveNext() )
-                {
-                    item = (System.Web.UI.WebControls.RepeaterItem)items.Current;
-                    GHTSubTestAddResult(item.DataItem.ToString());
-                }
-            }
-            catch (Exception ex) 
-            {
-                GHTSubTestUnexpectedExceptionCaught(ex);
-            }
+				while ( items.MoveNext() )
+				{
+					item = (System.Web.UI.WebControls.RepeaterItem)items.Current;
+					GHTSubTestAddResult(item.DataItem.ToString());
+				}
+			}
+			catch (Exception ex) 
+			{
+				GHTSubTestUnexpectedExceptionCaught(ex);
+			}
 
-            GHTActiveSubTest = Ghtsubtest2;
-            try 
-            {
-                Repeater2.DataSource = GHTTests.GHDataSources.DSArrayList();
-                Repeater2.DataBind();
-            }
-            catch (Exception ex) 
-            {
-                GHTSubTestUnexpectedExceptionCaught(ex);
-            }
+			GHTActiveSubTest = Ghtsubtest2;
+			try 
+			{
+				Repeater2.DataSource = GHTTests.GHDataSources.DSArrayList();
+				Repeater2.DataBind();
+			}
+			catch (Exception ex) 
+			{
+				GHTSubTestUnexpectedExceptionCaught(ex);
+			}
 
-            GHTTestEnd();
-        }
+			GHTTestEnd();
+		}
 
-        private void Repeater1_ItemCreated(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemIndex >= 0)
-            {
-                e.Item.Controls.Add(new LiteralControl("<div>"));
-                e.Item.Controls.Add(new LiteralControl(e.Item.DataItem.GetType().ToString()));
-                e.Item.Controls.Add(new LiteralControl("</div>"));
-                e.Item.Controls.Add(new LiteralControl("<div>"));
-                e.Item.Controls.Add(new LiteralControl(e.Item.DataItem.ToString()));
-                e.Item.Controls.Add(new LiteralControl("</div>"));
-            }
-        }
+		private void Repeater1_ItemCreated(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
+		{
+			if (e.Item.ItemIndex >= 0)
+			{
+				e.Item.Controls.Add(new LiteralControl("<div>"));
+				e.Item.Controls.Add(new LiteralControl(e.Item.DataItem.GetType().ToString()));
+				e.Item.Controls.Add(new LiteralControl("</div>"));
+				e.Item.Controls.Add(new LiteralControl("<div>"));
+				e.Item.Controls.Add(new LiteralControl(e.Item.DataItem.ToString()));
+				e.Item.Controls.Add(new LiteralControl("</div>"));
+			}
+		}
 
-        private void Repeater2_ItemCreated(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemIndex >= 0)
-                e.Item.DataItem = "eee";
-        }
-    }
+		private void Repeater2_ItemCreated(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
+		{
+			if (e.Item.ItemIndex >= 0)
+				e.Item.DataItem = "eee";
+		}
+	}
 }

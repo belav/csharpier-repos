@@ -39,79 +39,79 @@ using MonoTests.Helpers;
 
 namespace MonoTests.WebMatrix.Data
 {
-    [TestFixtureAttribute]
-    public class DatabaseTests
-    {
-        Database database;
-        string dbPath;
+	[TestFixtureAttribute]
+	public class DatabaseTests
+	{
+		Database database;
+		string dbPath;
 
-        [SetUp]
-        public void Setup ()
-        {
-            dbPath = TestResourceHelper.GetFullPathOfResource ("Test/resources/testsqlite.db");
-            database = Database.OpenConnectionString ("Data Source="+dbPath+";Version=3;", "Mono.Data.Sqlite");
-        }
+		[SetUp]
+		public void Setup ()
+		{
+			dbPath = TestResourceHelper.GetFullPathOfResource ("Test/resources/testsqlite.db");
+			database = Database.OpenConnectionString ("Data Source="+dbPath+";Version=3;", "Mono.Data.Sqlite");
+		}
 
-        [Test]
-        public void QuerySingleTest ()
-        {
-            var result = database.QuerySingle ("select * from memos where Text=@0 limit 1", "Grendel");
+		[Test]
+		public void QuerySingleTest ()
+		{
+			var result = database.QuerySingle ("select * from memos where Text=@0 limit 1", "Grendel");
 
-            Assert.IsNotNull (result);
-            Assert.AreEqual ("Grendel", result.Text);
-            Assert.AreEqual (5, result.Priority);
-        }
+			Assert.IsNotNull (result);
+			Assert.AreEqual ("Grendel", result.Text);
+			Assert.AreEqual (5, result.Priority);
+		}
 
-        [Test]
-        public void SimpleQueryTest ()
-        {
-            var result = database.Query ("select * from memos");
+		[Test]
+		public void SimpleQueryTest ()
+		{
+			var result = database.Query ("select * from memos");
 
-            Assert.IsNotNull (result);
-            Assert.AreEqual (5, result.Count ());
+			Assert.IsNotNull (result);
+			Assert.AreEqual (5, result.Count ());
 
-            var col1 = new string[] { "Webmatrix", "Grendel", "Garuma", "jpobst", "Gonzalo" };
-            var col2 = new object[] { 10, 5, -1, 6, 4 };
-            int index = 0;
+			var col1 = new string[] { "Webmatrix", "Grendel", "Garuma", "jpobst", "Gonzalo" };
+			var col2 = new object[] { 10, 5, -1, 6, 4 };
+			int index = 0;
 
-            foreach (var row in result) {
-                Assert.AreEqual (col1[index], row.Text);
-                Assert.AreEqual (col2[index], row.Priority);
-                index++;
-            }
-        }
+			foreach (var row in result) {
+				Assert.AreEqual (col1[index], row.Text);
+				Assert.AreEqual (col2[index], row.Priority);
+				index++;
+			}
+		}
 
-        [Test]
-        public void InsertTest ()
-        {
-            string newPath = dbPath + ".tmp";
-            File.Copy (dbPath, newPath, true);
+		[Test]
+		public void InsertTest ()
+		{
+			string newPath = dbPath + ".tmp";
+			File.Copy (dbPath, newPath, true);
 
-            database = Database.OpenConnectionString ("Data Source="+newPath+";Version=3;", "Mono.Data.Sqlite");
-            database.Execute ("insert into memos values ('foo', @0);", 42);
+			database = Database.OpenConnectionString ("Data Source="+newPath+";Version=3;", "Mono.Data.Sqlite");
+			database.Execute ("insert into memos values ('foo', @0);", 42);
 
-            Assert.AreEqual (42, database.QueryValue ("select Priority from memos where Text='foo'"));
-            Assert.AreEqual (6, database.GetLastInsertId ());
+			Assert.AreEqual (42, database.QueryValue ("select Priority from memos where Text='foo'"));
+			Assert.AreEqual (6, database.GetLastInsertId ());
 
-            File.Delete (newPath);
-        }
+			File.Delete (newPath);
+		}
 
-        [Test]
-        public void QueryValueTest ()
-        {
-            var res = database.QueryValue ("select Priority from memos where Text='Webmatrix'");
-            Assert.AreEqual (10, res);
-        }
+		[Test]
+		public void QueryValueTest ()
+		{
+			var res = database.QueryValue ("select Priority from memos where Text='Webmatrix'");
+			Assert.AreEqual (10, res);
+		}
 
-        [Test]
-        public void ConnectionOpenedTest ()
-        {
-            bool opened = false;
-            Database.ConnectionOpened += (sender, e) => opened = sender == database;
+		[Test]
+		public void ConnectionOpenedTest ()
+		{
+			bool opened = false;
+			Database.ConnectionOpened += (sender, e) => opened = sender == database;
 
-            var result = database.QuerySingle ("select * from memos where Text=@0 limit 1", "Grendel");
+			var result = database.QuerySingle ("select * from memos where Text=@0 limit 1", "Grendel");
 
-            Assert.IsTrue (opened);
-        }
-    }
+			Assert.IsTrue (opened);
+		}
+	}
 }

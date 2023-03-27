@@ -1,4 +1,4 @@
-/********************************************************
+﻿/********************************************************
  * ADO.NET 2.0 Data Provider for SQLite Version 3.X
  * Written by Robert Simpson (robert@blackcastlesoft.com)
  * 
@@ -52,7 +52,7 @@ namespace Mono.Data.Sqlite
 #endif // USE_INTEROP_DLL
 
 #elif MONOTOUCH
-    private const string SQLITE_DLL = "/usr/lib/libsqlite3.dylib";
+	private const string SQLITE_DLL = "/usr/lib/libsqlite3.dylib";
 #else
     private const string SQLITE_DLL = "sqlite3";
 #endif
@@ -156,7 +156,7 @@ namespace Mono.Data.Sqlite
     [DllImport(SQLITE_DLL)]
 #endif
     internal static extern int sqlite3_close(IntPtr db);
-        
+		
 #if !PLATFORM_COMPACTFRAMEWORK
     [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
@@ -172,11 +172,11 @@ namespace Mono.Data.Sqlite
     internal static extern int sqlite3_create_function(IntPtr db, byte[] strName, int nArgs, int nType, IntPtr pvUser, SQLiteCallback func, SQLiteCallback fstep, SQLiteFinalCallback ffinal);
 
 #if !PLATFORM_COMPACTFRAMEWORK
-        [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-        [DllImport(SQLITE_DLL)]
+		[DllImport(SQLITE_DLL)]
 #endif
-        internal static extern int sqlite3_create_function_v2(IntPtr db, byte[] strName, int nArgs, int nType, IntPtr pvUser, SQLiteCallback func, SQLiteCallback fstep, SQLiteFinalCallback ffinal, SQLiteFinalCallback fdestroy);
+		internal static extern int sqlite3_create_function_v2(IntPtr db, byte[] strName, int nArgs, int nType, IntPtr pvUser, SQLiteCallback func, SQLiteCallback fstep, SQLiteFinalCallback ffinal, SQLiteFinalCallback fdestroy);
 
 #if !PLATFORM_COMPACTFRAMEWORK
     [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
@@ -738,11 +738,11 @@ namespace Mono.Data.Sqlite
     internal static extern int sqlite3_config (SQLiteConfig config);
 
 #if !PLATFORM_COMPACTFRAMEWORK
-        [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-        [DllImport(SQLITE_DLL)]
+		[DllImport(SQLITE_DLL)]
 #endif
-        internal static extern IntPtr sqlite3_user_data (IntPtr context);
+		internal static extern IntPtr sqlite3_user_data (IntPtr context);
 
 #if !PLATFORM_COMPACTFRAMEWORK
     [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]

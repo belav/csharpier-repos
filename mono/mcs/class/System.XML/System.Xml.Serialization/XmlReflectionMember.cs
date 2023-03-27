@@ -29,102 +29,102 @@
 //
 
 namespace System.Xml.Serialization {
-    public class XmlReflectionMember {
+	public class XmlReflectionMember {
 
-        #region Fields
+		#region Fields
 
-        bool isReturnValue;
-        string memberName;
-        Type memberType;
-        bool overrideIsNullable;
-        SoapAttributes soapAttributes;
-        XmlAttributes xmlAttributes;
-        Type declaringType;
+		bool isReturnValue;
+		string memberName;
+		Type memberType;
+		bool overrideIsNullable;
+		SoapAttributes soapAttributes;
+		XmlAttributes xmlAttributes;
+		Type declaringType;
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        public XmlReflectionMember ()
-        {
-        }
+		public XmlReflectionMember ()
+		{
+		}
 
-        internal XmlReflectionMember (string name, Type type, XmlAttributes attributes)
-        {
-            memberName = name;
-            memberType = type;
-            xmlAttributes = attributes;
-        }
+		internal XmlReflectionMember (string name, Type type, XmlAttributes attributes)
+		{
+			memberName = name;
+			memberType = type;
+			xmlAttributes = attributes;
+		}
 
-        internal XmlReflectionMember (string name, Type type, SoapAttributes attributes)
-        {
-            memberName = name;
-            memberType = type;
-            soapAttributes = attributes;
-        }
+		internal XmlReflectionMember (string name, Type type, SoapAttributes attributes)
+		{
+			memberName = name;
+			memberType = type;
+			soapAttributes = attributes;
+		}
 
-        #endregion // Constructors
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        public bool IsReturnValue {
-            get { return isReturnValue; }
-            set { isReturnValue = value; }
-        }
+		public bool IsReturnValue {
+			get { return isReturnValue; }
+			set { isReturnValue = value; }
+		}
 
-        public string MemberName {
-            get { return memberName; }
-            set { memberName = value; }
-        }
+		public string MemberName {
+			get { return memberName; }
+			set { memberName = value; }
+		}
 
-        public Type MemberType {
-            get { return memberType; }
-            set { memberType = value; }
-        }
+		public Type MemberType {
+			get { return memberType; }
+			set { memberType = value; }
+		}
 
-        public bool OverrideIsNullable {
-            get { return overrideIsNullable; }
-            set { overrideIsNullable = value; }
-        }
+		public bool OverrideIsNullable {
+			get { return overrideIsNullable; }
+			set { overrideIsNullable = value; }
+		}
 
-        public SoapAttributes SoapAttributes {
-            get { 
-                if (soapAttributes == null) soapAttributes = new SoapAttributes();
-                return soapAttributes; 
-            }
-            set { soapAttributes = value; }
-        }
+		public SoapAttributes SoapAttributes {
+			get { 
+				if (soapAttributes == null) soapAttributes = new SoapAttributes();
+				return soapAttributes; 
+			}
+			set { soapAttributes = value; }
+		}
 
-        public XmlAttributes XmlAttributes {
-            get { 
-                if (xmlAttributes == null) xmlAttributes = new XmlAttributes();
-                return xmlAttributes; 
-            }
-            set { xmlAttributes = value; }
-        }
-        
-        internal Type DeclaringType {
-            get { return declaringType; }
-            set { declaringType = value; }
-        }
-        
-        internal void AddKeyHash (System.Text.StringBuilder sb)
-        {
-            sb.Append ("XRM ");
-            KeyHelper.AddField (sb, 1, isReturnValue);
-            KeyHelper.AddField (sb, 1, memberName);
-            KeyHelper.AddField (sb, 1, memberType);
-            KeyHelper.AddField (sb, 1, overrideIsNullable);
-            
-            if (soapAttributes != null)
-                soapAttributes.AddKeyHash (sb);
-            
-            if (xmlAttributes != null)
-                xmlAttributes.AddKeyHash (sb);
-            
-            sb.Append ('|');
-        }
+		public XmlAttributes XmlAttributes {
+			get { 
+				if (xmlAttributes == null) xmlAttributes = new XmlAttributes();
+				return xmlAttributes; 
+			}
+			set { xmlAttributes = value; }
+		}
+		
+		internal Type DeclaringType {
+			get { return declaringType; }
+			set { declaringType = value; }
+		}
+		
+		internal void AddKeyHash (System.Text.StringBuilder sb)
+		{
+			sb.Append ("XRM ");
+			KeyHelper.AddField (sb, 1, isReturnValue);
+			KeyHelper.AddField (sb, 1, memberName);
+			KeyHelper.AddField (sb, 1, memberType);
+			KeyHelper.AddField (sb, 1, overrideIsNullable);
+			
+			if (soapAttributes != null)
+				soapAttributes.AddKeyHash (sb);
+			
+			if (xmlAttributes != null)
+				xmlAttributes.AddKeyHash (sb);
+			
+			sb.Append ('|');
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

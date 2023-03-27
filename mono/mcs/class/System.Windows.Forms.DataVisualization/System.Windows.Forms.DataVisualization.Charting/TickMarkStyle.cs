@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,11 +27,11 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum TickMarkStyle
-    {
-        None = 0,
-        OutsideArea = 1,
-        InsideArea = 2,
-        AcrossAxis = 3
-    }
+	public enum TickMarkStyle
+	{
+		None = 0,
+		OutsideArea = 1,
+		InsideArea = 2,
+		AcrossAxis = 3
+	}
 }

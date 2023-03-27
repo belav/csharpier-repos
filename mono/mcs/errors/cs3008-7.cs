@@ -6,9 +6,9 @@ using System;
 [assembly:CLSCompliant(true)]
 
 namespace System.Error {
-    public class __ComObject : MarshalByRefObject {
-        private __ComObject ()
-        {
-        }
-    }
+	public class __ComObject : MarshalByRefObject {
+		private __ComObject ()
+		{
+		}
+	}
 }

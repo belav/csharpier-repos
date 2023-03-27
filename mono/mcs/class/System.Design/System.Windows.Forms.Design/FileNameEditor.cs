@@ -32,39 +32,39 @@ using System.Drawing.Design;
 
 namespace System.Windows.Forms.Design
 {
-    public class FileNameEditor : UITypeEditor
-    {
-        #region Public Instance Constructors
+	public class FileNameEditor : UITypeEditor
+	{
+		#region Public Instance Constructors
 
-        public FileNameEditor ()
-        {
-        }
+		public FileNameEditor ()
+		{
+		}
 
-        #endregion Public Instance Constructors
+		#endregion Public Instance Constructors
 
-        #region Override implementation of UITypeEditor
+		#region Override implementation of UITypeEditor
 
-        [MonoTODO]
-        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
-        {
-            return UITypeEditorEditStyle.Modal;
-        }
+		public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+		{
+			return UITypeEditorEditStyle.Modal;
+		}
 
-        #endregion Override implementation of UITypeEditor
+		#endregion Override implementation of UITypeEditor
 
-        #region Protected Instance Methods
+		#region Protected Instance Methods
 
-        [MonoTODO]
-        protected virtual void InitializeDialog (OpenFileDialog openFileDialog)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected virtual void InitializeDialog (OpenFileDialog openFileDialog)
+		{
+			throw new NotImplementedException ();
+		}
 
-        #endregion Protected Instance Methods
-    }
+		#endregion Protected Instance Methods
+	}
 }

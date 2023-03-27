@@ -2,7 +2,7 @@
 // Tests for System.Web.UI.WebControls.View.cs
 //
 // Author:
-//    Yoni Klein (yonik@mainsoft.com)
+//	Yoni Klein (yonik@mainsoft.com)
 //
 // (C) 2005 Mainsoft Corporation (http://www.mainsoft.com)
 //
@@ -42,224 +42,224 @@ using MonoTests.stand_alone.WebHarness;
 namespace MonoTests.System.Web.UI.WebControls
 {
 
-    class PokerView : View
-    {
-        public PokerView ()
-        {
-            TrackViewState ();
-        }
+	class PokerView : View
+	{
+		public PokerView ()
+		{
+			TrackViewState ();
+		}
 
-        public object SaveState ()
-        {
-            return SaveViewState ();
-        }
+		public object SaveState ()
+		{
+			return SaveViewState ();
+		}
 
-        public void LoadState (object o)
-        {
-            LoadViewState (o);
-        }
+		public void LoadState (object o)
+		{
+			LoadViewState (o);
+		}
 
-        public StateBag StateBag
-        {
-            get { return base.ViewState; }
-        }
+		public StateBag StateBag
+		{
+			get { return base.ViewState; }
+		}
 
-        public string Render ()
-        {
-            StringWriter sw = new StringWriter ();
-            HtmlTextWriter tw = new HtmlTextWriter (sw);
-            Render (tw);
-            return sw.ToString ();
-        }
+		public string Render ()
+		{
+			StringWriter sw = new StringWriter ();
+			HtmlTextWriter tw = new HtmlTextWriter (sw);
+			Render (tw);
+			return sw.ToString ();
+		}
 
-        public void DoOnActivate (EventArgs e)
-        {
-            base.OnActivate (e);
-        }
+		public void DoOnActivate (EventArgs e)
+		{
+			base.OnActivate (e);
+		}
 
-        public void DoOnDeactivate (EventArgs e)
-        {
-            base.OnDeactivate (e);
-        }
-
-
-    }
-
-    [TestFixture]
-    public class ViewTest
-    {
-        [TestFixtureSetUp]
-        public void SetUp ()
-        {
-            WebTest.CopyResource (GetType (), "NoEventValidation.aspx", "NoEventValidation.aspx");
-        }
-
-        [Test]
-        public void View_DefaultProperties ()
-        {
-            PokerView b = new PokerView ();
-            Assert.AreEqual (0, b.StateBag.Count, "ViewState.Count");
-            Assert.AreEqual (true, b.EnableTheming, "ViewEnableTheming");        
-        }
-                
-        [Test]
-        public void View_NotWorkingDefaultProperties ()
-        {
-            PokerView b = new PokerView ();
-            Assert.AreEqual (false, b.Visible, "ViewVisible");
-        }
-
-        [Test]
-        public void View_AssignToDefaultProperties ()
-        {
-            PokerView b = new PokerView ();            
-            b.EnableTheming = false;
-            Assert.AreEqual (false, b.EnableTheming, "ThemingValidation");
-        }
+		public void DoOnDeactivate (EventArgs e)
+		{
+			base.OnDeactivate (e);
+		}
 
 
-        [Test]
-        public void View_Defaults_Render ()
-        {
-            PokerView b = new PokerView ();
-            string html = b.Render ();
-            Assert.AreEqual (b.Render (), string.Empty, "RenderViewState");
-        }
+	}
 
-        [Test]
-        public void View_RenderStateWithChilds ()
-        {
-            PokerView pv = new PokerView ();
-            Button btn = new Button ();
-            btn.ID = "btn";
-            btn.Text = "MyTestButton";
-            pv.Controls.Add (btn);
-            string my = pv.Render ();
-            Assert.AreEqual (@"<input type=""submit"" name=""btn"" value=""MyTestButton"" id=""btn"" />", my, "RenderViewStateWithChilds");
-        }
+	[TestFixture]
+	public class ViewTest
+	{
+		[TestFixtureSetUp]
+		public void SetUp ()
+		{
+			WebTest.CopyResource (GetType (), "NoEventValidation.aspx", "NoEventValidation.aspx");
+		}
 
+		[Test]
+		public void View_DefaultProperties ()
+		{
+			PokerView b = new PokerView ();
+			Assert.AreEqual (0, b.StateBag.Count, "ViewState.Count");
+			Assert.AreEqual (true, b.EnableTheming, "ViewEnableTheming");		
+		}
+				
+		[Test]
+		public void View_NotWorkingDefaultProperties ()
+		{
+			PokerView b = new PokerView ();
+			Assert.AreEqual (false, b.Visible, "ViewVisible");
+		}
 
-
-        // Events Stuff
-        private bool activated = false;
-        private bool deactivated = false;
-
-        private void ViewActivate (object sender, EventArgs e)
-        {
-            activated = true;
-        }
-
-        private void ViewDeActivate (object sender, EventArgs e)
-        {
-            deactivated = true;
-        }
-
-        private void ResetEvents ()
-        {
-            activated = false;
-            deactivated = false;
-        }
+		[Test]
+		public void View_AssignToDefaultProperties ()
+		{
+			PokerView b = new PokerView ();			
+			b.EnableTheming = false;
+			Assert.AreEqual (false, b.EnableTheming, "ThemingValidation");
+		}
 
 
-        [Test]
-        public void View_Events ()
-        {
-            PokerView pv = new PokerView ();
-            ResetEvents ();
-            pv.Activate += new EventHandler (ViewActivate);
-            Assert.AreEqual (false, activated, "BeforeActivate");
-            pv.DoOnActivate (new EventArgs ());
-            Assert.AreEqual (true, activated, "AfterActivate");
-            ResetEvents ();
-            pv.Deactivate += new EventHandler (ViewDeActivate);
-            Assert.AreEqual (false, deactivated, "BeforeDeactivate");
-            pv.DoOnDeactivate (new EventArgs ());
-            Assert.AreEqual (true, deactivated, "AfterDeactivate");
-        }        
+		[Test]
+		public void View_Defaults_Render ()
+		{
+			PokerView b = new PokerView ();
+			string html = b.Render ();
+			Assert.AreEqual (b.Render (), string.Empty, "RenderViewState");
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void View_Visible_Assign ()
-        {
-            PokerView b = new PokerView ();
-            b.Visible = true;
-        }
+		[Test]
+		public void View_RenderStateWithChilds ()
+		{
+			PokerView pv = new PokerView ();
+			Button btn = new Button ();
+			btn.ID = "btn";
+			btn.Text = "MyTestButton";
+			pv.Controls.Add (btn);
+			string my = pv.Render ();
+			Assert.AreEqual (@"<input type=""submit"" name=""btn"" value=""MyTestButton"" id=""btn"" />", my, "RenderViewStateWithChilds");
+		}
 
-        [Test]
-        [Category ("NunitWeb")]
-        public void View_Events_Base_PostBack ()
-        {
-            WebTest t = new WebTest ("NoEventValidation.aspx");
-            t.Invoker = PageInvoker.CreateOnInit (new PageDelegate (EventsTest));
-            string html = t.Run ();
 
-            if (html.IndexOf ("View_1_is_active") < 0)
-                Assert.Fail ("View_Events#1 Failed");
 
-            if (html.IndexOf ("Activate") < 0)
-                Assert.Fail ("View_Events#3 Failed");
+		// Events Stuff
+		private bool activated = false;
+		private bool deactivated = false;
 
-            FormRequest fr = new FormRequest (t.Response, "form1");
-            fr.Controls.Add ("bt");
-            fr.Controls["bt"].Value = "Button";
-            t.Request = fr;
-            html = t.Run ();
+		private void ViewActivate (object sender, EventArgs e)
+		{
+			activated = true;
+		}
 
-            if (html.IndexOf ("Deactivate") < 0) {
-                Assert.Fail ("View_Events#4 Failed");
-            }
+		private void ViewDeActivate (object sender, EventArgs e)
+		{
+			deactivated = true;
+		}
 
-            if (html.IndexOf ("View_2_is_active") < 0)
-                Assert.Fail ("View_Events#5 Failed");
-        }
+		private void ResetEvents ()
+		{
+			activated = false;
+			deactivated = false;
+		}
 
-        #region base_events
-        public static void EventsTest (Page p)
-        {
-            MultiView MultiView1 = new MultiView ();
-            MultiView1.ID = "MultiView1";
-            View view_1 = new View ();
-            view_1.ID = "view_1";
-            View view_2 = new View ();
-            view_2.ID = "view_2";
-            Button bt = new Button ();
-            bt.ID = "bt";
-            bt.CommandName = "NextView";
 
-            view_1.Controls.Add (bt);
-            view_1.Controls.Add (new LiteralControl ("View_1_is_active"));
-            view_2.Controls.Add (new LiteralControl ("View_2_is_active"));
+		[Test]
+		public void View_Events ()
+		{
+			PokerView pv = new PokerView ();
+			ResetEvents ();
+			pv.Activate += new EventHandler (ViewActivate);
+			Assert.AreEqual (false, activated, "BeforeActivate");
+			pv.DoOnActivate (new EventArgs ());
+			Assert.AreEqual (true, activated, "AfterActivate");
+			ResetEvents ();
+			pv.Deactivate += new EventHandler (ViewDeActivate);
+			Assert.AreEqual (false, deactivated, "BeforeDeactivate");
+			pv.DoOnDeactivate (new EventArgs ());
+			Assert.AreEqual (true, deactivated, "AfterDeactivate");
+		}		
 
-            view_1.Activate += new EventHandler (view_1_Activate);
-            view_1.Deactivate += new EventHandler (view_1_Deactivate);
-            MultiView1.Views.Add (view_1);
-            MultiView1.Views.Add (view_2);
-            p.Controls.Add (MultiView1);
-            MultiView1.ActiveViewIndex = 0;
-        }
+		[Test]
+		[ExpectedException (typeof (InvalidOperationException))]
+		public void View_Visible_Assign ()
+		{
+			PokerView b = new PokerView ();
+			b.Visible = true;
+		}
 
-        public static void view_1_Deactivate (object sender, EventArgs e)
-        {
-            View v = sender as View;
-            if (v == null)
-                Assert.Fail ("View_Events#2 Failed");
-            v.Page.Controls.Add (new LiteralControl ("Deactivate"));
-        }
-        public static void view_1_Activate (object sender, EventArgs e)
-        {
-            View v = sender as View;
-            if (v == null)
-                Assert.Fail ("View_Events#2 Failed");
-            v.Page.Controls.Add (new LiteralControl ("Activate"));
-        }
-        #endregion
+		[Test]
+		[Category ("NunitWeb")]
+		public void View_Events_Base_PostBack ()
+		{
+			WebTest t = new WebTest ("NoEventValidation.aspx");
+			t.Invoker = PageInvoker.CreateOnInit (new PageDelegate (EventsTest));
+			string html = t.Run ();
 
-        [TestFixtureTearDown]
-        public void TearDown ()
-        {
-            WebTest.Unload ();
-        }
-    }
+			if (html.IndexOf ("View_1_is_active") < 0)
+				Assert.Fail ("View_Events#1 Failed");
+
+			if (html.IndexOf ("Activate") < 0)
+				Assert.Fail ("View_Events#3 Failed");
+
+			FormRequest fr = new FormRequest (t.Response, "form1");
+			fr.Controls.Add ("bt");
+			fr.Controls["bt"].Value = "Button";
+			t.Request = fr;
+			html = t.Run ();
+
+			if (html.IndexOf ("Deactivate") < 0) {
+				Assert.Fail ("View_Events#4 Failed");
+			}
+
+			if (html.IndexOf ("View_2_is_active") < 0)
+				Assert.Fail ("View_Events#5 Failed");
+		}
+
+		#region base_events
+		public static void EventsTest (Page p)
+		{
+			MultiView MultiView1 = new MultiView ();
+			MultiView1.ID = "MultiView1";
+			View view_1 = new View ();
+			view_1.ID = "view_1";
+			View view_2 = new View ();
+			view_2.ID = "view_2";
+			Button bt = new Button ();
+			bt.ID = "bt";
+			bt.CommandName = "NextView";
+
+			view_1.Controls.Add (bt);
+			view_1.Controls.Add (new LiteralControl ("View_1_is_active"));
+			view_2.Controls.Add (new LiteralControl ("View_2_is_active"));
+
+			view_1.Activate += new EventHandler (view_1_Activate);
+			view_1.Deactivate += new EventHandler (view_1_Deactivate);
+			MultiView1.Views.Add (view_1);
+			MultiView1.Views.Add (view_2);
+			p.Controls.Add (MultiView1);
+			MultiView1.ActiveViewIndex = 0;
+		}
+
+		public static void view_1_Deactivate (object sender, EventArgs e)
+		{
+			View v = sender as View;
+			if (v == null)
+				Assert.Fail ("View_Events#2 Failed");
+			v.Page.Controls.Add (new LiteralControl ("Deactivate"));
+		}
+		public static void view_1_Activate (object sender, EventArgs e)
+		{
+			View v = sender as View;
+			if (v == null)
+				Assert.Fail ("View_Events#2 Failed");
+			v.Page.Controls.Add (new LiteralControl ("Activate"));
+		}
+		#endregion
+
+		[TestFixtureTearDown]
+		public void TearDown ()
+		{
+			WebTest.Unload ();
+		}
+	}
 }
 
 

@@ -2,7 +2,7 @@
 // WebHttpSecurityMode.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -27,10 +27,10 @@
 //
 namespace System.ServiceModel
 {
-    public enum WebHttpSecurityMode
-    {
-        None,
-        Transport,
-        TransportCredentialOnly
-    }
+	public enum WebHttpSecurityMode
+	{
+		None,
+		Transport,
+		TransportCredentialOnly
+	}
 }

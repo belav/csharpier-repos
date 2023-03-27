@@ -4,10 +4,10 @@
 using System;
 
 unsafe class ZZ {
-    static void Main () {
-        int *p = null;
+	static void Main () {
+		int *p = null;
 
-        if (p [10,4] == 4)
-            return;
-    }
+		if (p [10,4] == 4)
+			return;
+	}
 }

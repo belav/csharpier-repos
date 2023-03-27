@@ -58,7 +58,7 @@ namespace System.Xml.Xsl.XsltOld {
             }
             String prefix, localname;
             PrefixQName.ParseQualifiedName(value, out prefix, out localname);
-            manager.ResolveXmlNamespace(prefix);
+			manager.ResolveXmlNamespace(prefix);
             if (prefix.Length == 0 && ! this.forwardCompatibility) {
                 throw XsltException.Create(Res.Xslt_InvalidAttrValue, "data-type", value); 
             }

@@ -11,7 +11,7 @@ public interface I {
 
 [CLSCompliant (false)]
 public interface I2 {
-#pragma warning disable 3018    
+#pragma warning disable 3018	
         [CLSCompliant (true)]
         void Error (long arg);
 #pragma warning disable 3018        

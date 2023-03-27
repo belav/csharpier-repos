@@ -3,11 +3,11 @@ using N1;
 using N2;
 
 namespace N1.Derived {
-    class Dummy {}
+	class Dummy {}
 }
 
 namespace N2.Derived {
-    class Dummy {}
+	class Dummy {}
 }
 
 public class DerivedAttribute : Attribute {
@@ -15,5 +15,5 @@ public class DerivedAttribute : Attribute {
 
 [Derived ()]
 class T {
-    public static void Main () {}
+	public static void Main () {}
 }

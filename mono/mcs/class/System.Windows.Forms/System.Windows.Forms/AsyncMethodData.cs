@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 
 
 using System;
@@ -29,13 +29,13 @@ using System.Threading;
 
 namespace System.Windows.Forms {
 
-    internal class AsyncMethodData {
-        public IntPtr Handle;
-        public Delegate Method;
-        public object [] Args;
-        public AsyncMethodResult Result;
-        public ExecutionContext Context;
-        public SynchronizationContext SyncContext;
-    }
+	internal class AsyncMethodData {
+		public IntPtr Handle;
+		public Delegate Method;
+		public object [] Args;
+		public AsyncMethodResult Result;
+		public ExecutionContext Context;
+		public SynchronizationContext SyncContext;
+	}
 
 }

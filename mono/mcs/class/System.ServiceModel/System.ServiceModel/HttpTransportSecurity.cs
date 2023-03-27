@@ -2,7 +2,7 @@
 // HttpTransportSecurity.cs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -31,33 +31,33 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-    public sealed class HttpTransportSecurity
-    {
-        HttpClientCredentialType client;
-        HttpProxyCredentialType proxy;
-        string realm = String.Empty;
+	public sealed class HttpTransportSecurity
+	{
+		HttpClientCredentialType client;
+		HttpProxyCredentialType proxy;
+		string realm = String.Empty;
 
-        public
-        HttpTransportSecurity ()
-        {
-        }
+		public
+		HttpTransportSecurity ()
+		{
+		}
 
-        public HttpClientCredentialType ClientCredentialType {
-            get { return client; }
-            set { client = value; }
-        }
+		public HttpClientCredentialType ClientCredentialType {
+			get { return client; }
+			set { client = value; }
+		}
 
-        public HttpProxyCredentialType ProxyCredentialType {
-            get { return proxy; }
-            set { proxy = value; }
-        }
+		public HttpProxyCredentialType ProxyCredentialType {
+			get { return proxy; }
+			set { proxy = value; }
+		}
 
-        public string Realm {
-            get { return realm; }
-            set { realm = value; }
-        }
+		public string Realm {
+			get { return realm; }
+			set { realm = value; }
+		}
 
-        [MonoTODO]
-        public ExtendedProtectionPolicy ExtendedProtectionPolicy { get; set; }
-    }
+		[MonoTODO]
+		public ExtendedProtectionPolicy ExtendedProtectionPolicy { get; set; }
+	}
 }

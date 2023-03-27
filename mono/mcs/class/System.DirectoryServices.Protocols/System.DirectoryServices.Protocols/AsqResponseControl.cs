@@ -32,16 +32,16 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    [MonoTODO]
-    public class AsqResponseControl : DirectoryControl
-    {
-        internal AsqResponseControl (ResultCode result)
-            : base (null, null, false, false)
-        {
-            Result = result;
-            throw new NotImplementedException ();
-        }
+	[MonoTODO]
+	public class AsqResponseControl : DirectoryControl
+	{
+		internal AsqResponseControl (ResultCode result)
+			: base (null, null, false, false)
+		{
+			Result = result;
+			throw new NotImplementedException ();
+		}
 
-        public ResultCode Result { get; private set; }
-    }
+		public ResultCode Result { get; private set; }
+	}
 }

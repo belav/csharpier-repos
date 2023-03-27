@@ -1,7 +1,7 @@
 // System.Net.Sockets.SocketOperation.cs
 //
 // Authors:
-//    Ludovic Henry <ludovic@xamarin.com>
+//	Ludovic Henry <ludovic@xamarin.com>
 //
 // Copyright (C) 2015 Xamarin, Inc. (https://www.xamarin.com)
 //
@@ -28,19 +28,19 @@
 
 namespace System.Net.Sockets
 {
-    // Used by the runtime
-    internal enum SocketOperation {
-        Accept,
-        Connect,
-        Receive,
-        ReceiveFrom,
-        Send,
-        SendTo,
-        RecvJustCallback,
-        SendJustCallback,
-        Disconnect,
-        AcceptReceive,
-        ReceiveGeneric,
-        SendGeneric
-    }
+	// Used by the runtime
+	internal enum SocketOperation {
+		Accept,
+		Connect,
+		Receive,
+		ReceiveFrom,
+		Send,
+		SendTo,
+		RecvJustCallback,
+		SendJustCallback,
+		Disconnect,
+		AcceptReceive,
+		ReceiveGeneric,
+		SendGeneric
+	}
 }

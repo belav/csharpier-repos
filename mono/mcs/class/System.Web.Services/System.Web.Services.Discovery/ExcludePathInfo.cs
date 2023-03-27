@@ -31,35 +31,35 @@
 using System.Xml.Serialization;
 
 namespace System.Web.Services.Discovery {
-    public sealed class ExcludePathInfo {
-        
-        #region Fields
-        
-        private string path;
+	public sealed class ExcludePathInfo {
+		
+		#region Fields
+		
+		private string path;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
+		#region Constructors
 
-        public ExcludePathInfo () 
-        {
-        }
-        
-        public ExcludePathInfo (string path)
-        {
-            this.path = path;
-        }
-        
-        #endregion // Constructors
+		public ExcludePathInfo () 
+		{
+		}
+		
+		public ExcludePathInfo (string path)
+		{
+			this.path = path;
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
-        
-        [XmlAttribute("path")]
-        public string Path {
-            get { return path; }
-            set { path = value; }
-        }
-        
-        #endregion // Properties
-    }
+		#region Properties
+		
+		[XmlAttribute("path")]
+		public string Path {
+			get { return path; }
+			set { path = value; }
+		}
+		
+		#endregion // Properties
+	}
 }

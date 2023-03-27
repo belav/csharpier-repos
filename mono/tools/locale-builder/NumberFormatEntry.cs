@@ -1,9 +1,9 @@
-//
+﻿//
 // DateTimeFormatEntry.cs
 //
 // Authors:
 //  Jackson Harper (jackson@ximian.com)
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // (C) 2004, Novell, Inc (http://www.novell.com)
 // Copyright (C) 2012 Xamarin Inc (http://www.xamarin.com)
@@ -33,115 +33,115 @@ using System.Globalization;
 
 namespace Mono.Tools.LocaleBuilder
 {
-    public class NumberFormatEntry : Entry
-    {
-        public string CurrencyDecimalDigits;
-        public string CurrencyDecimalSeparator = ",";
-        public string CurrencyGroupSeparator = ",";
-        public string[] CurrencyGroupSizes = new string[Constants.GROUP_SIZE];
-        public string CurrencyNegativePattern;
-        public string CurrencyPositivePattern;
-        public string CurrencySymbol;
-        public string NaNSymbol;
-        public string NegativeSign = "-";
-        public int NumberDecimalDigits;
-        public string NumberDecimalSeparator = ",";
-        public string NumberGroupSeparator = ",";
-        public string[] NumberGroupSizes = new string[Constants.GROUP_SIZE];
-        public string NumberNegativePattern;
-        /*
-        public int PercentDecimalDigits;
-        public string PercentDecimalSeparator = ",";
-        public string PercentGroupSeparator = ",";
-        public string[] PercentGroupSizes = new string[Constants.GROUP_SIZE];
-        */
-        public string PercentNegativePattern;
-        public string PercentPositivePattern;
-        public string PercentSymbol = "%";
-        public string PerMilleSymbol = "�";
-        public string InfinitySymbol = "Infinity";
-        public string PositiveSign = "+";
-        public DigitShapes DigitSubstitution = DigitShapes.None;
-        public string[] NativeDigits = new string[10] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+	public class NumberFormatEntry : Entry
+	{
+		public string CurrencyDecimalDigits;
+		public string CurrencyDecimalSeparator = ",";
+		public string CurrencyGroupSeparator = ",";
+		public string[] CurrencyGroupSizes = new string[Constants.GROUP_SIZE];
+		public string CurrencyNegativePattern;
+		public string CurrencyPositivePattern;
+		public string CurrencySymbol;
+		public string NaNSymbol;
+		public string NegativeSign = "-";
+		public int NumberDecimalDigits;
+		public string NumberDecimalSeparator = ",";
+		public string NumberGroupSeparator = ",";
+		public string[] NumberGroupSizes = new string[Constants.GROUP_SIZE];
+		public string NumberNegativePattern;
+		/*
+		public int PercentDecimalDigits;
+		public string PercentDecimalSeparator = ",";
+		public string PercentGroupSeparator = ",";
+		public string[] PercentGroupSizes = new string[Constants.GROUP_SIZE];
+		*/
+		public string PercentNegativePattern;
+		public string PercentPositivePattern;
+		public string PercentSymbol = "%";
+		public string PerMilleSymbol = "‰";
+		public string InfinitySymbol = "Infinity";
+		public string PositiveSign = "+";
+		public DigitShapes DigitSubstitution = DigitShapes.None;
+		public string[] NativeDigits = new string[10] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-        public int Row;
+		public int Row;
 
-        public string NegativeInfinitySymbol
-        {
-            get
-            {
-                if (InfinitySymbol.StartsWith (PositiveSign))
-                    return NegativeSign + InfinitySymbol.Substring (1, InfinitySymbol.Length - 1);
-    
-                return NegativeSign + InfinitySymbol;
-            }
-        }
+		public string NegativeInfinitySymbol
+		{
+			get
+			{
+				if (InfinitySymbol.StartsWith (PositiveSign))
+					return NegativeSign + InfinitySymbol.Substring (1, InfinitySymbol.Length - 1);
+	
+				return NegativeSign + InfinitySymbol;
+			}
+		}
 
-        public string PositiveInfinitySymbol
-        {
-            get
-            {
-                return InfinitySymbol;
-            }
-        }
+		public string PositiveInfinitySymbol
+		{
+			get
+			{
+				return InfinitySymbol;
+			}
+		}
 
-        public void AppendTableRow (StringBuilder builder)
-        {
-            builder.Append ("\t{");
+		public void AppendTableRow (StringBuilder builder)
+		{
+			builder.Append ("\t{");
 
-            builder.Append (EncodeStringIdx (CurrencyDecimalSeparator) + ", ");
-            builder.Append (EncodeStringIdx (CurrencyGroupSeparator) + ", ");
-            builder.Append (EncodeStringIdx (NumberDecimalSeparator) + ", ");
-            builder.Append (EncodeStringIdx (NumberGroupSeparator) + ", ");
+			builder.Append (EncodeStringIdx (CurrencyDecimalSeparator) + ", ");
+			builder.Append (EncodeStringIdx (CurrencyGroupSeparator) + ", ");
+			builder.Append (EncodeStringIdx (NumberDecimalSeparator) + ", ");
+			builder.Append (EncodeStringIdx (NumberGroupSeparator) + ", ");
 
-            builder.Append (EncodeStringIdx (CurrencySymbol) + ", ");
-            builder.Append (EncodeStringIdx (PercentSymbol) + ", ");
-            builder.Append (EncodeStringIdx (NaNSymbol) + ", ");
-            builder.Append (EncodeStringIdx (PerMilleSymbol) + ", ");
-            builder.Append (EncodeStringIdx (NegativeInfinitySymbol) + ", ");
-            builder.Append (EncodeStringIdx (PositiveInfinitySymbol) + ", ");
+			builder.Append (EncodeStringIdx (CurrencySymbol) + ", ");
+			builder.Append (EncodeStringIdx (PercentSymbol) + ", ");
+			builder.Append (EncodeStringIdx (NaNSymbol) + ", ");
+			builder.Append (EncodeStringIdx (PerMilleSymbol) + ", ");
+			builder.Append (EncodeStringIdx (NegativeInfinitySymbol) + ", ");
+			builder.Append (EncodeStringIdx (PositiveInfinitySymbol) + ", ");
 
-            builder.Append (EncodeStringIdx (NegativeSign) + ", ");
-            builder.Append (EncodeStringIdx (PositiveSign) + ", ");
+			builder.Append (EncodeStringIdx (NegativeSign) + ", ");
+			builder.Append (EncodeStringIdx (PositiveSign) + ", ");
 
-            builder.Append (CurrencyNegativePattern + ", ");
-            builder.Append (CurrencyPositivePattern + ", ");
-            builder.Append (PercentNegativePattern + ", ");
-            builder.Append (PercentPositivePattern + ", ");
-            builder.Append (NumberNegativePattern + ", ");
+			builder.Append (CurrencyNegativePattern + ", ");
+			builder.Append (CurrencyPositivePattern + ", ");
+			builder.Append (PercentNegativePattern + ", ");
+			builder.Append (PercentPositivePattern + ", ");
+			builder.Append (NumberNegativePattern + ", ");
 
-            builder.Append (CurrencyDecimalDigits + ", ");
-            builder.Append (NumberDecimalDigits + ", ");
+			builder.Append (CurrencyDecimalDigits + ", ");
+			builder.Append (NumberDecimalDigits + ", ");
 
-            AppendGroupSizes (builder, CurrencyGroupSizes);
-            builder.Append (", ");
-            AppendGroupSizes (builder, NumberGroupSizes);
+			AppendGroupSizes (builder, CurrencyGroupSizes);
+			builder.Append (", ");
+			AppendGroupSizes (builder, NumberGroupSizes);
 
-            builder.Append ('}');
-        }
+			builder.Append ('}');
+		}
 
-        static void AppendGroupSizes (StringBuilder builder, string[] gs)
-        {
-            builder.Append ('{');
-            for (int i = 0; i < gs.Length; i++) {
-                if (i > 0)
-                    builder.Append (", ");
+		static void AppendGroupSizes (StringBuilder builder, string[] gs)
+		{
+			builder.Append ('{');
+			for (int i = 0; i < gs.Length; i++) {
+				if (i > 0)
+					builder.Append (", ");
 
-                if (gs[i] == null)
-                    builder.Append (-1);
-                else
-                    builder.Append (gs[i]);
-            }
+				if (gs[i] == null)
+					builder.Append (-1);
+				else
+					builder.Append (gs[i]);
+			}
 
-            builder.Append ('}');
-        }
+			builder.Append ('}');
+		}
 
-        public override string ToString ()
-        {
-            StringBuilder builder = new StringBuilder ();
-            AppendTableRow (builder);
-            return builder.ToString ();
-        }
-    }
+		public override string ToString ()
+		{
+			StringBuilder builder = new StringBuilder ();
+			AppendTableRow (builder);
+			return builder.ToString ();
+		}
+	}
 }
 

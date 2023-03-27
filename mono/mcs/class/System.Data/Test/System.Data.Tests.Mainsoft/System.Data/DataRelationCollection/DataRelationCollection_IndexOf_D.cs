@@ -37,86 +37,86 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRelationCollection_IndexOf_D : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRelationCollection_IndexOf_D tc = new DataRelationCollection_IndexOf_D();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRelationCollection_IndexOf_D");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-        
-    }
+	[Test] public void Main()
+	{
+		DataRelationCollection_IndexOf_D tc = new DataRelationCollection_IndexOf_D();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRelationCollection_IndexOf_D");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+		
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("DataRelationCollection_IndexOf_D");
-            DataRelationCollection_IndexOf_D1();
-        } 
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
-
-    private void DataRelationCollection_IndexOf_D1()
-    {
-        DataSet ds = getDataSet();
-        DataSet ds1 = getDataSet();
-
-        DataRelation rel1 = new DataRelation("rel1",ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]); 
-        DataRelation rel2 = new DataRelation("rel2",ds.Tables[0].Columns["String1"],ds.Tables[1].Columns["String1"]); 
-        DataRelation rel3 = new DataRelation("rel3",ds1.Tables[0].Columns["ParentId"],ds1.Tables[1].Columns["ParentId"]); 
-
-        ds.Relations.Add(rel1);
-        ds.Relations.Add(rel2);
-        
-        Compare(ds.Relations.IndexOf(rel2),1);
-        Compare(ds.Relations.IndexOf(rel1),0);
-        Compare(ds.Relations.IndexOf((DataRelation)null),-1);
-        Compare(ds.Relations.IndexOf(rel3),-1);
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    }
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    private DataSet getDataSet()
-    {
-        DataSet ds = new DataSet();
-        DataTable dt1 = DataProvider.CreateParentDataTable();
-        DataTable dt2 = DataProvider.CreateChildDataTable();
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-        ds.Tables.Add(dt1);
-        ds.Tables.Add(dt2);
-        return ds;
-    }
+	public void run()
+	{
+		Exception exp = null;
+		try
+		{
+			BeginCase("DataRelationCollection_IndexOf_D");
+			DataRelationCollection_IndexOf_D1();
+		} 
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			EndCase(exp);
+			exp = null;
+		}
+	}
+
+	private void DataRelationCollection_IndexOf_D1()
+	{
+		DataSet ds = getDataSet();
+		DataSet ds1 = getDataSet();
+
+		DataRelation rel1 = new DataRelation("rel1",ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]); 
+		DataRelation rel2 = new DataRelation("rel2",ds.Tables[0].Columns["String1"],ds.Tables[1].Columns["String1"]); 
+		DataRelation rel3 = new DataRelation("rel3",ds1.Tables[0].Columns["ParentId"],ds1.Tables[1].Columns["ParentId"]); 
+
+		ds.Relations.Add(rel1);
+		ds.Relations.Add(rel2);
+		
+		Compare(ds.Relations.IndexOf(rel2),1);
+		Compare(ds.Relations.IndexOf(rel1),0);
+		Compare(ds.Relations.IndexOf((DataRelation)null),-1);
+		Compare(ds.Relations.IndexOf(rel3),-1);
+
+
+	}
+
+	private DataSet getDataSet()
+	{
+		DataSet ds = new DataSet();
+		DataTable dt1 = DataProvider.CreateParentDataTable();
+		DataTable dt2 = DataProvider.CreateChildDataTable();
+
+		ds.Tables.Add(dt1);
+		ds.Tables.Add(dt2);
+		return ds;
+	}
 }
 }

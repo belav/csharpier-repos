@@ -4,10 +4,10 @@
 
 class A
 {
-    public static implicit operator ulong (A mask)
-    {
-        return 8;
-    }
+	public static implicit operator ulong (A mask)
+	{
+		return 8;
+	}
 }
 
 class X

@@ -2,7 +2,7 @@
 // System.Drawing.Drawing2D.GraphicPathIterator unit tests
 //
 // Authors:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
@@ -34,120 +34,120 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Drawing.Drawing2D {
 
-    [TestFixture]
-    [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-    public class GraphicsPathIteratorTest {
+	[TestFixture]
+	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	public class GraphicsPathIteratorTest {
 
-        private PointF [] pts_2f = new PointF [2] { new PointF (1, 2), new PointF (20, 30) };
+		private PointF [] pts_2f = new PointF [2] { new PointF (1, 2), new PointF (20, 30) };
 
-        [Test]
-        public void Ctor_Null ()
-        {
-            using (GraphicsPathIterator gpi = new GraphicsPathIterator (null)) {
-                Assert.AreEqual (0, gpi.Count, "Count");
-            }
-        }
+		[Test]
+		public void Ctor_Null ()
+		{
+			using (GraphicsPathIterator gpi = new GraphicsPathIterator (null)) {
+				Assert.AreEqual (0, gpi.Count, "Count");
+			}
+		}
 
-        [Test]
-        public void NextMarker_Null ()
-        {
-            using (GraphicsPath gp = new GraphicsPath ()) {
-                gp.AddLines (pts_2f);
-                using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
-                    Assert.AreEqual (0, gpi.NextMarker (null));
-                }
-            }
-        }
+		[Test]
+		public void NextMarker_Null ()
+		{
+			using (GraphicsPath gp = new GraphicsPath ()) {
+				gp.AddLines (pts_2f);
+				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
+					Assert.AreEqual (0, gpi.NextMarker (null));
+				}
+			}
+		}
 
-        [Test]
-        public void NextSubpath_Null ()
-        {
-            using (GraphicsPath gp = new GraphicsPath ()) {
-                gp.AddLines (pts_2f);
-                using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
-                    bool closed;
-                    Assert.AreEqual (0, gpi.NextSubpath (null, out closed));
-                    Assert.IsTrue (closed, "Closed");
-                }
-            }
-        }
+		[Test]
+		public void NextSubpath_Null ()
+		{
+			using (GraphicsPath gp = new GraphicsPath ()) {
+				gp.AddLines (pts_2f);
+				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
+					bool closed;
+					Assert.AreEqual (0, gpi.NextSubpath (null, out closed));
+					Assert.IsTrue (closed, "Closed");
+				}
+			}
+		}
 
-        [Test]
-        public void CopyData_NullPoints ()
-        {
-            using (GraphicsPath gp = new GraphicsPath ()) {
-                gp.AddLines (pts_2f);
-                using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
-                    PointF [] points = null;
-                    byte [] types = new byte [1];
-                    Assert.Throws<NullReferenceException> (() => gpi.CopyData (ref points, ref types, 0, 1));
-                }
-            }
-        }
+		[Test]
+		public void CopyData_NullPoints ()
+		{
+			using (GraphicsPath gp = new GraphicsPath ()) {
+				gp.AddLines (pts_2f);
+				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
+					PointF [] points = null;
+					byte [] types = new byte [1];
+					Assert.Throws<NullReferenceException> (() => gpi.CopyData (ref points, ref types, 0, 1));
+				}
+			}
+		}
 
-        [Test]
-        public void CopyData_NullTypes ()
-        {
-            using (GraphicsPath gp = new GraphicsPath ()) {
-                gp.AddLines (pts_2f);
-                using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
-                    PointF [] points = new PointF [1];
-                    byte [] types = null;
-                    Assert.Throws<NullReferenceException> (() =>gpi.CopyData (ref points, ref types, 0, 1));
-                }
-            }
-        }
+		[Test]
+		public void CopyData_NullTypes ()
+		{
+			using (GraphicsPath gp = new GraphicsPath ()) {
+				gp.AddLines (pts_2f);
+				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
+					PointF [] points = new PointF [1];
+					byte [] types = null;
+					Assert.Throws<NullReferenceException> (() =>gpi.CopyData (ref points, ref types, 0, 1));
+				}
+			}
+		}
 
-        [Test]
-        public void CopyData_DifferentSize ()
-        {
-            using (GraphicsPath gp = new GraphicsPath ()) {
-                gp.AddLines (pts_2f);
-                using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
-                    PointF [] points = new PointF [1];
-                    byte [] types = new byte [2];
-                    Assert.Throws<ArgumentException> (() => gpi.CopyData (ref points, ref types, 0, 1));
-                }
-            }
-        }
+		[Test]
+		public void CopyData_DifferentSize ()
+		{
+			using (GraphicsPath gp = new GraphicsPath ()) {
+				gp.AddLines (pts_2f);
+				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
+					PointF [] points = new PointF [1];
+					byte [] types = new byte [2];
+					Assert.Throws<ArgumentException> (() => gpi.CopyData (ref points, ref types, 0, 1));
+				}
+			}
+		}
 
-        [Test]
-        public void Enumerate_NullPoints ()
-        {
-            using (GraphicsPath gp = new GraphicsPath ()) {
-                gp.AddLines (pts_2f);
-                using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
-                    PointF [] points = null;
-                    byte [] types = new byte [2];
-                    Assert.Throws<NullReferenceException> (() => gpi.Enumerate (ref points, ref types));
-                }
-            }
-        }
+		[Test]
+		public void Enumerate_NullPoints ()
+		{
+			using (GraphicsPath gp = new GraphicsPath ()) {
+				gp.AddLines (pts_2f);
+				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
+					PointF [] points = null;
+					byte [] types = new byte [2];
+					Assert.Throws<NullReferenceException> (() => gpi.Enumerate (ref points, ref types));
+				}
+			}
+		}
 
-        [Test]
-        public void Enumerate_NullTypes ()
-        {
-            using (GraphicsPath gp = new GraphicsPath ()) {
-                gp.AddLines (pts_2f);
-                using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
-                    PointF [] points = new PointF [1];
-                    byte [] types = null;
-                    Assert.Throws<NullReferenceException> (() => gpi.Enumerate (ref points, ref types));
-                }
-            }
-        }
+		[Test]
+		public void Enumerate_NullTypes ()
+		{
+			using (GraphicsPath gp = new GraphicsPath ()) {
+				gp.AddLines (pts_2f);
+				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
+					PointF [] points = new PointF [1];
+					byte [] types = null;
+					Assert.Throws<NullReferenceException> (() => gpi.Enumerate (ref points, ref types));
+				}
+			}
+		}
 
-        [Test]
-        public void Enumerate_DifferentSize ()
-        {
-            using (GraphicsPath gp = new GraphicsPath ()) {
-                gp.AddLines (pts_2f);
-                using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
-                    PointF [] points = new PointF [1];
-                    byte [] types = new byte [2];
-                    Assert.Throws<ArgumentException> (() => gpi.Enumerate (ref points, ref types));
-                }
-            }
-        }
-    }
+		[Test]
+		public void Enumerate_DifferentSize ()
+		{
+			using (GraphicsPath gp = new GraphicsPath ()) {
+				gp.AddLines (pts_2f);
+				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
+					PointF [] points = new PointF [1];
+					byte [] types = new byte [2];
+					Assert.Throws<ArgumentException> (() => gpi.Enumerate (ref points, ref types));
+				}
+			}
+		}
+	}
 }

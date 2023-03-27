@@ -3,26 +3,26 @@
 
 enum E
 {
-    V
+	V
 }
 
 struct S
 {
-    public static explicit operator int (S val)
-    {
-        return 1;
-    }
+	public static explicit operator int (S val)
+	{
+		return 1;
+	}
 }
 
 class C
 {
-    E Foo ()
-    {
-        S s = new S ();
-        return (E) s;
-    }
+	E Foo ()
+	{
+		S s = new S ();
+		return (E) s;
+	}
 
-    public static void Main ()
-    {
-    }
+	public static void Main ()
+	{
+	}
 }

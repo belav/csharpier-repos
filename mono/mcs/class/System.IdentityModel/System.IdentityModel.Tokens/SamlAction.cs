@@ -2,7 +2,7 @@
 // SamlAction.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005-2006 Novell, Inc.  http://www.novell.com
 //
@@ -32,93 +32,93 @@ using System.IdentityModel.Selectors;
 
 namespace System.IdentityModel.Tokens
 {
-    public class SamlAction
-    {
-        string action, ns;
-        bool is_readonly;
+	public class SamlAction
+	{
+		string action, ns;
+		bool is_readonly;
 
-        public SamlAction ()
-        {
-        }
+		public SamlAction ()
+		{
+		}
 
-        public SamlAction (string action)
-        {
-            Action = action;
-        }
+		public SamlAction (string action)
+		{
+			Action = action;
+		}
 
-        public SamlAction (string action, string ns)
-        {
-            Action = action;
-            Namespace = ns;
-        }
+		public SamlAction (string action, string ns)
+		{
+			Action = action;
+			Namespace = ns;
+		}
 
-        public string Action {
-            get { return action; }
-            set {
-                CheckReadOnly ();
-                if (value == null || value.Length == 0)
-                    throw new ArgumentException ("SAML Action must be non-zero length string.");
-                action = value;
-            }
-        }
+		public string Action {
+			get { return action; }
+			set {
+				CheckReadOnly ();
+				if (value == null || value.Length == 0)
+					throw new ArgumentException ("SAML Action must be non-zero length string.");
+				action = value;
+			}
+		}
 
-        public bool IsReadOnly {
-            get { return is_readonly; }
-        }
+		public bool IsReadOnly {
+			get { return is_readonly; }
+		}
 
-        public string Namespace {
-            get { return ns; }
-            set {
-                CheckReadOnly ();
-                ns = value;
-            }
-        }
+		public string Namespace {
+			get { return ns; }
+			set {
+				CheckReadOnly ();
+				ns = value;
+			}
+		}
 
-        void CheckReadOnly ()
-        {
-            if (is_readonly)
-                throw new InvalidOperationException ("This SAML action is read-only.");
-        }
+		void CheckReadOnly ()
+		{
+			if (is_readonly)
+				throw new InvalidOperationException ("This SAML action is read-only.");
+		}
 
-        public void MakeReadOnly ()
-        {
-            is_readonly = true;
-        }
+		public void MakeReadOnly ()
+		{
+			is_readonly = true;
+		}
 
-        public virtual void ReadXml (XmlDictionaryReader reader,
-            SamlSerializer samlSerializer,
-            SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
-        {
-            if (reader == null)
-                throw new ArgumentNullException ("writer");
-            if (samlSerializer == null)
-                throw new ArgumentNullException ("samlSerializer");
+		public virtual void ReadXml (XmlDictionaryReader reader,
+			SamlSerializer samlSerializer,
+			SecurityTokenSerializer keyInfoSerializer,
+			SecurityTokenResolver outOfBandTokenResolver)
+		{
+			if (reader == null)
+				throw new ArgumentNullException ("writer");
+			if (samlSerializer == null)
+				throw new ArgumentNullException ("samlSerializer");
 
-            Namespace = reader.GetAttribute ("Namespace");
-            Action =  reader.ReadElementContentAsString ("Action", SamlConstants.Namespace);
+			Namespace = reader.GetAttribute ("Namespace");
+			Action =  reader.ReadElementContentAsString ("Action", SamlConstants.Namespace);
 
-            if (Action == null)
-                throw new SecurityTokenException ("non-zero length string must exist for SAML Action.");
-        }
+			if (Action == null)
+				throw new SecurityTokenException ("non-zero length string must exist for SAML Action.");
+		}
 
-        public virtual void WriteXml (XmlDictionaryWriter writer,
-            SamlSerializer samlSerializer,
-            SecurityTokenSerializer keyInfoSerializer)
-        {
-            if (writer == null)
-                throw new ArgumentNullException ("writer");
-            if (samlSerializer == null)
-                throw new ArgumentNullException ("samlSerializer");
+		public virtual void WriteXml (XmlDictionaryWriter writer,
+			SamlSerializer samlSerializer,
+			SecurityTokenSerializer keyInfoSerializer)
+		{
+			if (writer == null)
+				throw new ArgumentNullException ("writer");
+			if (samlSerializer == null)
+				throw new ArgumentNullException ("samlSerializer");
 
-            if (Action == null)
-                throw new SecurityTokenException ("non-zero length string must be set for SAML Action before being written.");
+			if (Action == null)
+				throw new SecurityTokenException ("non-zero length string must be set for SAML Action before being written.");
 
-            writer.WriteStartElement ("saml", "Action", SamlConstants.Namespace);
-            if (Namespace != null)
-                writer.WriteAttributeString ("Namespace", Namespace);
-            writer.WriteString (Action);
-            writer.WriteEndElement ();
-        }
-    }
+			writer.WriteStartElement ("saml", "Action", SamlConstants.Namespace);
+			if (Namespace != null)
+				writer.WriteAttributeString ("Namespace", Namespace);
+			writer.WriteString (Action);
+			writer.WriteEndElement ();
+		}
+	}
 }

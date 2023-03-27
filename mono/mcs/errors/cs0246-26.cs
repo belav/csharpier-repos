@@ -3,16 +3,16 @@
 
 interface I<T>
 {
-    void G<TT> ();
+	void G<TT> ();
 }
 
 class C
 {
-    void I<M>.G<M> ()
-    {
-    }
-    
-    public static void Main ()
-    {
-    }
+	void I<M>.G<M> ()
+	{
+	}
+	
+	public static void Main ()
+	{
+	}
 }

@@ -39,102 +39,102 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataView_Find_O : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataView_Find_O tc = new DataView_Find_O();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataView_Find_O");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataView_Find_O tc = new DataView_Find_O();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataView_Find_O");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-        
-        int FindResult,ExpectedResult=-1;
-
-        //create the source datatable
-        DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-
-        //create the dataview for the table
-        DataView dv = new DataView(dt);
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-        for (int i=0; i<dt.Rows.Count ; i++)
-        {
-            if ((int)dt.Rows[i]["ParentId"] == 3)
-            {
-                ExpectedResult = i;
-                break;
-            }
-        }
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-        
-        try
-        {
-            BeginCase("Find ,no sort - exception");
-            try
-            {
-                FindResult = dv.Find("3");
-            }
-            catch (System.ArgumentException ex)
-            {
-                exp = ex;
-            }
-            Compare(exp.GetType().FullName,typeof(System.ArgumentException).FullName);
-            exp=null;
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    
+	public void run()
+	{
+		Exception exp = null;
+		
+		int FindResult,ExpectedResult=-1;
 
-        dv.Sort = "String1";
-        try
-        {
-            BeginCase("Find = wrong sort, can not find");
-            FindResult = dv.Find("3");
-            Compare(FindResult ,-1);
-            exp=null;
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		//create the source datatable
+		DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
 
-        dv.Sort = "ParentId";
-        try
-        {
-            BeginCase("Find ");
-            FindResult = dv.Find("3");
-            Compare(FindResult ,ExpectedResult);
-            exp=null;
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    }
+		//create the dataview for the table
+		DataView dv = new DataView(dt);
 
-    }
+
+
+		for (int i=0; i<dt.Rows.Count ; i++)
+		{
+			if ((int)dt.Rows[i]["ParentId"] == 3)
+			{
+				ExpectedResult = i;
+				break;
+			}
+		}
+
+		
+		try
+		{
+			BeginCase("Find ,no sort - exception");
+			try
+			{
+				FindResult = dv.Find("3");
+			}
+			catch (System.ArgumentException ex)
+			{
+				exp = ex;
+			}
+			Compare(exp.GetType().FullName,typeof(System.ArgumentException).FullName);
+			exp=null;
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	
+
+		dv.Sort = "String1";
+		try
+		{
+			BeginCase("Find = wrong sort, can not find");
+			FindResult = dv.Find("3");
+			Compare(FindResult ,-1);
+			exp=null;
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		dv.Sort = "ParentId";
+		try
+		{
+			BeginCase("Find ");
+			FindResult = dv.Find("3");
+			Compare(FindResult ,ExpectedResult);
+			exp=null;
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	}
+
+	}
 
 }

@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,25 +27,25 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum BorderSkinStyle
-    {
-        None = 0,
-        Emboss = 1,
-        Raised = 2,
-        Sunken = 3,
-        FrameThin1 = 4,
-        FrameThin2 = 5,
-        FrameThin3 = 6,
-        FrameThin4 = 7,
-        FrameThin5 = 8,
-        FrameThin6 = 9,
-        FrameTitle1 = 10,
-        FrameTitle2 = 11,
-        FrameTitle3 = 12,
-        FrameTitle4 = 13,
-        FrameTitle5 = 14,
-        FrameTitle6 = 15,
-        FrameTitle7 = 16,
-        FrameTitle8 = 17
-    }
+	public enum BorderSkinStyle
+	{
+		None = 0,
+		Emboss = 1,
+		Raised = 2,
+		Sunken = 3,
+		FrameThin1 = 4,
+		FrameThin2 = 5,
+		FrameThin3 = 6,
+		FrameThin4 = 7,
+		FrameThin5 = 8,
+		FrameThin6 = 9,
+		FrameTitle1 = 10,
+		FrameTitle2 = 11,
+		FrameTitle3 = 12,
+		FrameTitle4 = 13,
+		FrameTitle5 = 14,
+		FrameTitle6 = 15,
+		FrameTitle7 = 16,
+		FrameTitle8 = 17
+	}
 }

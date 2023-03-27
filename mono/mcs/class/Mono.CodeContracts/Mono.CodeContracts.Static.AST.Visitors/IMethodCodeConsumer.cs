@@ -2,7 +2,7 @@
 // IMethodCodeConsumer.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,7 +29,7 @@
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.AST.Visitors {
-    interface IMethodCodeConsumer<Data, Result> {
-        Result Accept<Label, Handler> (IMethodCodeProvider<Label, Handler> codeProvider, Label entry, Method method, Data data);
-    }
+	interface IMethodCodeConsumer<Data, Result> {
+		Result Accept<Label, Handler> (IMethodCodeProvider<Label, Handler> codeProvider, Label entry, Method method, Data data);
+	}
 }

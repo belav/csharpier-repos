@@ -2,7 +2,7 @@
 // WSDualHttpBindingCollectionElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,26 +54,26 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [MonoTODO]
-    public partial class WSDualHttpBindingCollectionElement
-         : StandardBindingCollectionElement<WSDualHttpBinding, WSDualHttpBindingElement>
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
+	[MonoTODO]
+	public partial class WSDualHttpBindingCollectionElement
+		 : StandardBindingCollectionElement<WSDualHttpBinding, WSDualHttpBindingElement>
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
 
-        static WSDualHttpBindingCollectionElement ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static WSDualHttpBindingCollectionElement ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public WSDualHttpBindingCollectionElement ()
-        {
-        }
-
-
-        // Properties
+		public WSDualHttpBindingCollectionElement ()
+		{
+		}
 
 
-    }
+		// Properties
+
+
+	}
 
 }

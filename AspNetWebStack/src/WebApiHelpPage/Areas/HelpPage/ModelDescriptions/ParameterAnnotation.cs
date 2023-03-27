@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
 {

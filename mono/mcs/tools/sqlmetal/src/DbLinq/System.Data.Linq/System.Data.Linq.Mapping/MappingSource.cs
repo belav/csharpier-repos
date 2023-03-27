@@ -36,21 +36,21 @@ using System.Linq.Expressions;
 
 namespace System.Data.Linq.Mapping
 {
-    public abstract class MappingSource
-    {
-        Dictionary<Type, MetaModel> sources = new Dictionary<Type, MetaModel> ();
+	public abstract class MappingSource
+	{
+		Dictionary<Type, MetaModel> sources = new Dictionary<Type, MetaModel> ();
 
-        protected abstract MetaModel CreateModel (Type dataContextType);
+		protected abstract MetaModel CreateModel (Type dataContextType);
 
-        public MetaModel GetModel (Type dataContextType)
-        {
-            MetaModel m;
-            if (!sources.TryGetValue (dataContextType, out m)) {
-                m = CreateModel (dataContextType);
-                sources [dataContextType] = m;
-            }
-            return m;
-        }
+		public MetaModel GetModel (Type dataContextType)
+		{
+			MetaModel m;
+			if (!sources.TryGetValue (dataContextType, out m)) {
+				m = CreateModel (dataContextType);
+				sources [dataContextType] = m;
+			}
+			return m;
+		}
 
-    }
+	}
 }

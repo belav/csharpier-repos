@@ -20,7 +20,7 @@
 // Copyright (c) 2004 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Ravindra (rkumar@novell.com)
+//	Ravindra (rkumar@novell.com)
 //
 
 
@@ -29,5 +29,5 @@
 
 namespace System.Windows.Forms
 {
-    public delegate void ItemDragEventHandler (object sender, ItemDragEventArgs e);
+	public delegate void ItemDragEventHandler (object sender, ItemDragEventArgs e);
 }

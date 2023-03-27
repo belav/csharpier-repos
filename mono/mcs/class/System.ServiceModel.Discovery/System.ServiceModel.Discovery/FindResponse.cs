@@ -32,19 +32,19 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-    public class FindResponse
-    {
-        internal FindResponse ()
-        {
-            Endpoints = new Collection<EndpointDiscoveryMetadata> ();
-        }
+	public class FindResponse
+	{
+		internal FindResponse ()
+		{
+			Endpoints = new Collection<EndpointDiscoveryMetadata> ();
+		}
 
-        public Collection<EndpointDiscoveryMetadata> Endpoints { get; private set; }
+		public Collection<EndpointDiscoveryMetadata> Endpoints { get; private set; }
 
-        [MonoTODO]
-        public DiscoveryMessageSequence GetMessageSequence (EndpointDiscoveryMetadata endpointDiscoveryMetadata)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public DiscoveryMessageSequence GetMessageSequence (EndpointDiscoveryMetadata endpointDiscoveryMetadata)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

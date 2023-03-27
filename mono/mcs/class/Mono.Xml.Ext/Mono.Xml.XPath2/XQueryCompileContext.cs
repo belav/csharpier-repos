@@ -2,7 +2,7 @@
 // XQueryCompileContext.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -37,55 +37,55 @@ using Mono.Xml.XPath2;
 
 namespace Mono.Xml.XPath2
 {
-    // Holds dynamic compile context that is shared between one or more
-    // compilers that are created during one XQueryCommand.Compile().
-    internal class XQueryCompileContext
-    {
-        public XQueryCompileContext ()
-        {
-            schemaCache = new Hashtable ();
-            moduleCache = new Hashtable ();
+	// Holds dynamic compile context that is shared between one or more
+	// compilers that are created during one XQueryCommand.Compile().
+	internal class XQueryCompileContext
+	{
+		public XQueryCompileContext ()
+		{
+			schemaCache = new Hashtable ();
+			moduleCache = new Hashtable ();
 
-            inEffectSchemas = new XmlSchemaSet ();
-            inEffectVariables = new Hashtable ();
-            inEffectFunctions = new XQueryFunctionTable ();
-        }
+			inEffectSchemas = new XmlSchemaSet ();
+			inEffectVariables = new Hashtable ();
+			inEffectFunctions = new XQueryFunctionTable ();
+		}
 
-        // Compiled schema table; It is used to avoid multiple time
-        // compilation of the same schemas that is likely to happen
-        // when a library module is divided into multiple files.
-        // [location string] -> XmlSchema (done) or null (not).
-        IDictionary schemaCache;
-        // ditto for local module resources.
-        // [location] -> XQueryLibraryModule (done) or null (not).
-        IDictionary moduleCache;
+		// Compiled schema table; It is used to avoid multiple time
+		// compilation of the same schemas that is likely to happen
+		// when a library module is divided into multiple files.
+		// [location string] -> XmlSchema (done) or null (not).
+		IDictionary schemaCache;
+		// ditto for local module resources.
+		// [location] -> XQueryLibraryModule (done) or null (not).
+		IDictionary moduleCache;
 
-        // Collects the whole schemas, variables and functions.
-        XmlSchemaSet inEffectSchemas;
-        Hashtable inEffectVariables;
-        XQueryFunctionTable inEffectFunctions;
+		// Collects the whole schemas, variables and functions.
+		XmlSchemaSet inEffectSchemas;
+		Hashtable inEffectVariables;
+		XQueryFunctionTable inEffectFunctions;
 
-        public IDictionary SchemaCache {
-            get { return schemaCache; }
-        }
+		public IDictionary SchemaCache {
+			get { return schemaCache; }
+		}
 
-        public IDictionary ModuleCache {
-            get { return moduleCache; }
-        }
+		public IDictionary ModuleCache {
+			get { return moduleCache; }
+		}
 
-        // Compilation results
+		// Compilation results
 
-        public XmlSchemaSet InEffectSchemas {
-            get { return inEffectSchemas; }
-        }
+		public XmlSchemaSet InEffectSchemas {
+			get { return inEffectSchemas; }
+		}
 
-        public Hashtable InEffectVariables {
-            get { return inEffectVariables; }
-        }
+		public Hashtable InEffectVariables {
+			get { return inEffectVariables; }
+		}
 
-        public XQueryFunctionTable InEffectFunctions {
-            get { return inEffectFunctions; }
-        }
-    }
+		public XQueryFunctionTable InEffectFunctions {
+			get { return inEffectFunctions; }
+		}
+	}
 }
 

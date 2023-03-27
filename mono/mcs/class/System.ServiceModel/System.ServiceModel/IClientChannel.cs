@@ -29,28 +29,28 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-    public interface IClientChannel : IContextChannel, ICommunicationObject,
-        IDisposable
-    {
-        // Properties
+	public interface IClientChannel : IContextChannel, ICommunicationObject,
+		IDisposable
+	{
+		// Properties
 
-        bool AllowInitializationUI { get; set; }
+		bool AllowInitializationUI { get; set; }
 
-        bool DidInteractiveInitialization { get; }
+		bool DidInteractiveInitialization { get; }
 
-        Uri Via { get; }
+		Uri Via { get; }
 
-        // Methods
+		// Methods
 
-        IAsyncResult BeginDisplayInitializationUI (AsyncCallback callback, object state);
-        void EndDisplayInitializationUI(IAsyncResult result);
+		IAsyncResult BeginDisplayInitializationUI (AsyncCallback callback, object state);
+		void EndDisplayInitializationUI(IAsyncResult result);
 
-        void DisplayInitializationUI ();
+		void DisplayInitializationUI ();
 
-        // Event
+		// Event
 
-        event EventHandler<UnknownMessageReceivedEventArgs>
-            UnknownMessageReceived;
+		event EventHandler<UnknownMessageReceivedEventArgs>
+			UnknownMessageReceived;
 
-    }
+	}
 }

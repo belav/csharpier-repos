@@ -2,7 +2,7 @@
 // System.Configuration.Provider.ProviderException
 //
 // Authors:
-//    Ben Maurer (bmaurer@users.sourceforge.net)
+//	Ben Maurer (bmaurer@users.sourceforge.net)
 //
 // (C) 2003 Ben Maurer
 // Copyright (c) 2005 Novell, Inc (http://www.novell.com)
@@ -31,27 +31,27 @@ using System.Runtime.Serialization;
 
 namespace System.Configuration.Provider {
 
-    [Serializable]
-    public class ProviderException : Exception {
+	[Serializable]
+	public class ProviderException : Exception {
 
-        public ProviderException ()
-            : base ()
-        {
-        }
+		public ProviderException ()
+			: base ()
+		{
+		}
 
-        protected ProviderException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-        }
+		protected ProviderException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{
+		}
 
-        public ProviderException (string message)
-            : base (message)
-        {
-        }
+		public ProviderException (string message)
+			: base (message)
+		{
+		}
 
-        public ProviderException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
-    }
+		public ProviderException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
+	}
 }

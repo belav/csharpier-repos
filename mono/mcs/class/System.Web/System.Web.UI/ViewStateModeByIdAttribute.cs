@@ -30,10 +30,10 @@
 
 namespace System.Web.UI
 {
-    [AttributeUsageAttribute (AttributeTargets.Class)]
-    public sealed class ViewStateModeByIdAttribute : Attribute
-    {
-        public ViewStateModeByIdAttribute ()
-        {}
-    }
+	[AttributeUsageAttribute (AttributeTargets.Class)]
+	public sealed class ViewStateModeByIdAttribute : Attribute
+	{
+		public ViewStateModeByIdAttribute ()
+		{}
+	}
 }

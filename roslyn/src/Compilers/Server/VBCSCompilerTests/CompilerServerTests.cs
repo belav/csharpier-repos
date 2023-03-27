@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -326,7 +326,7 @@ End Module")
             var testableCompilerServerHost = new TestableCompilerServerHost(delegate { throw new Exception(); });
             using var serverData = await ServerUtil.CreateServer(_logger, compilerServerHost: testableCompilerServerHost);
 
-            var files = new Dictionary<string, string> { { "hello.cs", "?" } };
+            var files = new Dictionary<string, string> { { "hello.cs", "♕" } };
             var result = RunCommandLineCompiler(CSharpCompilerClientExecutable, $"/shared:{serverData.PipeName} /nologo hello.cs", _tempDirectory, files, redirectEncoding: Encoding.ASCII, shouldRunOnServer: false);
             Assert.Equal(1, result.ExitCode);
             Assert.Equal("hello.cs(1,1): error CS1056: Unexpected character '?'", result.Output.Trim());
@@ -338,7 +338,7 @@ End Module")
         [Fact]
         public async Task CscFallBackOutputUtf8()
         {
-            var srcFile = _tempDirectory.CreateFile("test.cs").WriteAllText("?").Path;
+            var srcFile = _tempDirectory.CreateFile("test.cs").WriteAllText("♕").Path;
 
             var testableCompilerServerHost = new TestableCompilerServerHost(delegate { throw new Exception(); });
             using var serverData = await ServerUtil.CreateServer(_logger, compilerServerHost: testableCompilerServerHost);
@@ -349,7 +349,7 @@ End Module")
                 redirectEncoding: UTF8Encoding,
                 shouldRunOnServer: false);
 
-            Assert.Equal("test.cs(1,1): error CS1056: Unexpected character '?'".Trim(),
+            Assert.Equal("test.cs(1,1): error CS1056: Unexpected character '♕'".Trim(),
                 result.Output.Trim().Replace(srcFile, "test.cs"));
             Assert.Equal(1, result.ExitCode);
 
@@ -360,7 +360,7 @@ End Module")
         [Fact]
         public async Task VbcFallbackNoUtf8()
         {
-            var srcFile = _tempDirectory.CreateFile("test.vb").WriteAllText("?").Path;
+            var srcFile = _tempDirectory.CreateFile("test.vb").WriteAllText("♕").Path;
 
             var testableCompilerServerHost = new TestableCompilerServerHost(delegate { throw new Exception(); });
             using var serverData = await ServerUtil.CreateServer(_logger, compilerServerHost: testableCompilerServerHost);
@@ -384,7 +384,7 @@ End Module")
         [Fact]
         public async Task VbcFallbackUtf8()
         {
-            var srcFile = _tempDirectory.CreateFile("test.vb").WriteAllText("?").Path;
+            var srcFile = _tempDirectory.CreateFile("test.vb").WriteAllText("♕").Path;
 
             var testableCompilerServerHost = new TestableCompilerServerHost(delegate { throw new Exception(); });
             using var serverData = await ServerUtil.CreateServer(_logger, compilerServerHost: testableCompilerServerHost);
@@ -397,7 +397,7 @@ End Module")
 
             Assert.Equal(@"test.vb(1) : error BC30037: Character is not valid.
 
-?
+♕
 ~", result.Output.Trim().Replace(srcFile, "test.vb"));
             Assert.Equal(1, result.ExitCode);
 
@@ -1145,7 +1145,7 @@ End Module
         [Trait(Traits.Environment, Traits.Environments.VSProductInstall)]
         public async Task Utf8Output_WithRedirecting_Off_Shared()
         {
-            var srcFile = _tempDirectory.CreateFile("test.cs").WriteAllText("?").Path;
+            var srcFile = _tempDirectory.CreateFile("test.cs").WriteAllText("♕").Path;
 
             using var serverData = await ServerUtil.CreateServer(_logger);
             var result = RunCommandLineCompiler(
@@ -1167,7 +1167,7 @@ End Module
         [Trait(Traits.Environment, Traits.Environments.VSProductInstall)]
         public async Task Utf8Output_WithRedirecting_Off_Share()
         {
-            var srcFile = _tempDirectory.CreateFile("test.vb").WriteAllText(@"?").Path;
+            var srcFile = _tempDirectory.CreateFile("test.vb").WriteAllText(@"♕").Path;
             var tempOut = _tempDirectory.CreateFile("output.txt");
 
             using var serverData = await ServerUtil.CreateServer(_logger);
@@ -1194,7 +1194,7 @@ End Module
         [Trait(Traits.Environment, Traits.Environments.VSProductInstall)]
         public async Task Utf8Output_WithRedirecting_On_Shared_CS()
         {
-            var srcFile = _tempDirectory.CreateFile("test.cs").WriteAllText("?").Path;
+            var srcFile = _tempDirectory.CreateFile("test.cs").WriteAllText("♕").Path;
 
             using var serverData = await ServerUtil.CreateServer(_logger);
             var result = RunCommandLineCompiler(
@@ -1203,7 +1203,7 @@ End Module
                 _tempDirectory,
                 redirectEncoding: UTF8Encoding);
 
-            Assert.Equal("test.cs(1,1): error CS1056: Unexpected character '?'".Trim(),
+            Assert.Equal("test.cs(1,1): error CS1056: Unexpected character '♕'".Trim(),
                 result.Output.Trim());
             Assert.Equal(1, result.ExitCode);
 
@@ -1216,7 +1216,7 @@ End Module
         [Trait(Traits.Environment, Traits.Environments.VSProductInstall)]
         public async Task Utf8Output_WithRedirecting_On_Shared_VB()
         {
-            var srcFile = _tempDirectory.CreateFile("test.vb").WriteAllText(@"?").Path;
+            var srcFile = _tempDirectory.CreateFile("test.vb").WriteAllText(@"♕").Path;
 
             using var serverData = await ServerUtil.CreateServer(_logger);
 
@@ -1228,7 +1228,7 @@ End Module
 
             Assert.Equal(@"SRC.VB(1) : error BC30037: Character is not valid.
 
-?
+♕
 ~
 ".Trim(),
                         result.Output.Trim().Replace(srcFile, "SRC.VB"));
@@ -1301,7 +1301,7 @@ static void Main(string[] args)
         {
             using var serverData = await ServerUtil.CreateServer(_logger);
 
-            var srcFile = _tempDirectory.CreateFile("test.cs").WriteAllText("?").Path;
+            var srcFile = _tempDirectory.CreateFile("test.cs").WriteAllText("♕").Path;
             var rspFile = _tempDirectory.CreateFile("temp.rsp").WriteAllText(
                 string.Format("/utf8output /nologo /t:library {0}", srcFile));
 
@@ -1311,7 +1311,7 @@ static void Main(string[] args)
                 _tempDirectory,
                 redirectEncoding: UTF8Encoding);
 
-            Assert.Equal("test.cs(1,1): error CS1056: Unexpected character '?'",
+            Assert.Equal("test.cs(1,1): error CS1056: Unexpected character '♕'",
                 result.Output.Trim());
             Assert.Equal(1, result.ExitCode);
 
@@ -1325,7 +1325,7 @@ static void Main(string[] args)
         {
             using var serverData = await ServerUtil.CreateServer(_logger);
 
-            var srcFile = _tempDirectory.CreateFile("test.cs").WriteAllText("?").Path;
+            var srcFile = _tempDirectory.CreateFile("test.cs").WriteAllText("♕").Path;
             var rspFile = _tempDirectory.CreateFile("temp.rsp").WriteAllText(
                 string.Format("/utf8output /nologo /vbruntime* /t:library {0}", srcFile));
 
@@ -1337,7 +1337,7 @@ static void Main(string[] args)
 
             Assert.Equal(@"src.vb(1) : error BC30037: Character is not valid.
 
-?
+♕
 ~", result.Output.Trim().Replace(srcFile, "src.vb"));
             Assert.Equal(1, result.ExitCode);
 

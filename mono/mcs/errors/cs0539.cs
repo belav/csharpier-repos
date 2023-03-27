@@ -5,6 +5,6 @@ interface A {
 }
 
 class X : A {
-    void A.B () {}
-    static void Main () {}
+	void A.B () {}
+	static void Main () {}
 }

@@ -2,7 +2,7 @@
 // System.Web.UI.Design.DataColumnSelectionConverter
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -36,43 +36,43 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design {
 
-    [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-    public class DataColumnSelectionConverter : TypeConverter
-    {
-        public DataColumnSelectionConverter ()
-        {
-        }
+	[SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+	public class DataColumnSelectionConverter : TypeConverter
+	{
+		public DataColumnSelectionConverter ()
+		{
+		}
 
-        [MonoTODO]
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 
 }
 

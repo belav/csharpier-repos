@@ -3,8 +3,8 @@
 
 class C
 {
-    int Foo {
-        get { }
-    }
-    int get_Foo;
+	int Foo {
+		get { }
+	}
+	int get_Foo;
 }

@@ -3,10 +3,10 @@
 
 class A
 {
-    int p;
+	int p;
 
-    ref int Test ()
-    {
-        return p;
-    }
+	ref int Test ()
+	{
+		return p;
+	}
 }

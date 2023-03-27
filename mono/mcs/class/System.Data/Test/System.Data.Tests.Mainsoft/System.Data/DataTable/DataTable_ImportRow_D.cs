@@ -36,71 +36,71 @@ using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {
-    [TestFixture] public class DataTable_ImportRow_D : GHTBase
-    {
-        public void SetUp()
-        {
-            Exception exp = null;
-            BeginCase("Setup");
-            try
-            {
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        }
+	[TestFixture] public class DataTable_ImportRow_D : GHTBase
+	{
+		public void SetUp()
+		{
+			Exception exp = null;
+			BeginCase("Setup");
+			try
+			{
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		}
 
-        public void TearDown()
-        {
-        }
+		public void TearDown()
+		{
+		}
 
-        [Test] public void Main()
-        {
-            DataTable_ImportRow_D tc = new DataTable_ImportRow_D();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("DataTable_ImportRow_D");
-                tc.SetUp();
-                tc.run();
-                tc.TearDown();
-            }
-            catch(Exception ex)
-            {
-                exp = ex;
-            }
-            finally
-            {
-                tc.EndTest(exp);
-            }
-        }
+		[Test] public void Main()
+		{
+			DataTable_ImportRow_D tc = new DataTable_ImportRow_D();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("DataTable_ImportRow_D");
+				tc.SetUp();
+				tc.run();
+				tc.TearDown();
+			}
+			catch(Exception ex)
+			{
+				exp = ex;
+			}
+			finally
+			{
+				tc.EndTest(exp);
+			}
+		}
 
-        public void run()
-        {
-            Exception exp = null;
-        
-            DataTable dt1,dt2;
-            dt1 = GHTUtils.DataProvider.CreateParentDataTable();
-            dt2 = GHTUtils.DataProvider.CreateParentDataTable();
-            DataRow dr = dt2.NewRow();
-            dr.ItemArray = new object[] {99,"",""};
-            dt2.Rows.Add(dr);
+		public void run()
+		{
+			Exception exp = null;
+		
+			DataTable dt1,dt2;
+			dt1 = GHTUtils.DataProvider.CreateParentDataTable();
+			dt2 = GHTUtils.DataProvider.CreateParentDataTable();
+			DataRow dr = dt2.NewRow();
+			dr.ItemArray = new object[] {99,"",""};
+			dt2.Rows.Add(dr);
 
-            try
-            {
-                BeginCase("ImportRow - Values");
-                dt1.ImportRow(dr);
-                Compare( dt1.Rows[dt1.Rows.Count-1].ItemArray  , dr.ItemArray);
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("ImportRow - Values");
+				dt1.ImportRow(dr);
+				Compare( dt1.Rows[dt1.Rows.Count-1].ItemArray  , dr.ItemArray);
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("ImportRow - DataRowState");
-                Compare( dt1.Rows[dt1.Rows.Count-1].RowState ,dr.RowState );
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}                
-        }
-    }
+			try
+			{
+				BeginCase("ImportRow - DataRowState");
+				Compare( dt1.Rows[dt1.Rows.Count-1].RowState ,dr.RowState );
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}				
+		}
+	}
 }

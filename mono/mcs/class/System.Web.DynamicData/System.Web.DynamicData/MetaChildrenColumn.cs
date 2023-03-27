@@ -2,7 +2,7 @@
 // MetaChildrenColumn.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //      Marek Habersack <mhabersack@novell.com>
 //
 // Copyright (C) 2008-2009 Novell Inc. http://novell.com
@@ -40,49 +40,49 @@ using System.Web.DynamicData.ModelProviders;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class MetaChildrenColumn : MetaColumn
-    {
-        internal MetaChildrenColumn (MetaTable table, ColumnProvider provider)
-            : base (table, provider)
-        {
-            if (table == null)
-                throw new ArgumentNullException ("table");
-        }
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class MetaChildrenColumn : MetaColumn
+	{
+		internal MetaChildrenColumn (MetaTable table, ColumnProvider provider)
+			: base (table, provider)
+		{
+			if (table == null)
+				throw new ArgumentNullException ("table");
+		}
 
-        [MonoTODO]
-        public MetaTable ChildTable { get; private set; }
-        [MonoTODO]
-        public MetaColumn ColumnInOtherTable { get; private set; }
+		[MonoTODO]
+		public MetaTable ChildTable { get; private set; }
+		[MonoTODO]
+		public MetaColumn ColumnInOtherTable { get; private set; }
 
-        [MonoTODO]
-        public string GetChildrenListPath (object row)
-        {
-            return ChildTable.GetActionPath (PageAction.List, row);
-        }
+		[MonoTODO]
+		public string GetChildrenListPath (object row)
+		{
+			return ChildTable.GetActionPath (PageAction.List, row);
+		}
 
-        [MonoTODO]
-        public string GetChildrenPath (string action, object row)
-        {
-            return ChildTable.GetActionPath (action, row);
-        }
+		[MonoTODO]
+		public string GetChildrenPath (string action, object row)
+		{
+			return ChildTable.GetActionPath (action, row);
+		}
 
-        [MonoTODO]
-        public string GetChildrenPath (string action, object row, string path)
-        {
-            return ChildTable.GetActionPath (action, row, path);
-        }
+		[MonoTODO]
+		public string GetChildrenPath (string action, object row, string path)
+		{
+			return ChildTable.GetActionPath (action, row, path);
+		}
 
-        internal override void Init ()
-        {
-            AssociationProvider association = Provider.Association;
-            ColumnProvider otherColumn = association.ToColumn;
-            string otherColumnName = otherColumn == null ? null : otherColumn.Name;
-            MetaTable childTable = Model.GetTable (association.ToTable.Name, Table.DataContextType);
-            ChildTable = childTable;
-            if (childTable != null && !String.IsNullOrEmpty (otherColumnName))
-                ColumnInOtherTable = childTable.GetColumn (otherColumnName);
-        }
-    }
+		internal override void Init ()
+		{
+			AssociationProvider association = Provider.Association;
+			ColumnProvider otherColumn = association.ToColumn;
+			string otherColumnName = otherColumn == null ? null : otherColumn.Name;
+			MetaTable childTable = Model.GetTable (association.ToTable.Name, Table.DataContextType);
+			ChildTable = childTable;
+			if (childTable != null && !String.IsNullOrEmpty (otherColumnName))
+				ColumnInOtherTable = childTable.GetColumn (otherColumnName);
+		}
+	}
 }

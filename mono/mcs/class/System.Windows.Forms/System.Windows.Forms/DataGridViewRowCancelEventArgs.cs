@@ -20,7 +20,7 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 
@@ -28,18 +28,18 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms {
 
-    public class DataGridViewRowCancelEventArgs : CancelEventArgs {
+	public class DataGridViewRowCancelEventArgs : CancelEventArgs {
 
-        DataGridViewRow dataGridViewRow;
+		DataGridViewRow dataGridViewRow;
 
-        public DataGridViewRowCancelEventArgs (DataGridViewRow dataGridViewRow) {
-            this.dataGridViewRow = dataGridViewRow;
-        }
+		public DataGridViewRowCancelEventArgs (DataGridViewRow dataGridViewRow) {
+			this.dataGridViewRow = dataGridViewRow;
+		}
 
-        public DataGridViewRow Row {
-            get { return dataGridViewRow; }
-        }
+		public DataGridViewRow Row {
+			get { return dataGridViewRow; }
+		}
 
-    }
+	}
 
 }

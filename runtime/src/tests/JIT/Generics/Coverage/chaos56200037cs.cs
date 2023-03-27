@@ -7,36 +7,36 @@
 ///<code>GenericChaos.exe /mtc:10 /mtcc:10 /mic:5 /ol:Cs /ol:Vb
 ///</code>
 ///Data:
-///<code>Help:    False
-/// MaxGenerationDepth:    2
-/// MaxTypeParameterCount:    1
-/// MaxMethodTypeParameterCount:    1
-/// MaxTypeCount:    10
-/// MaxMethodCallDepth:    1000
-/// MaxTypeInheranceCount:    10
-/// MaxStaticFieldCount:    2
-/// MaxInterfaceCount:    5
-/// GenerateInterfaces:    True
-/// GenerateVirtualMethods:    True
-/// GenerateMethods:    True
-/// GenerateGenericMethods:    True
-/// GenerateNonInlinableMethods:    True
-/// GenerateStaticMethods:    True
-/// GenerateInstanceMethods:    True
-/// GenerateRecursiveMethods:    True
-/// GenerateStaticFields:    True
-/// GenerateInstanceFields:    True
-/// IntermediateTypeRealization:    True
-/// GenerateConstructorConstraints:    True
-/// GenerateTypeParameterConstraints:    True
-/// GenerateMethodParameterConstraints:    True
-/// OutputPath:    chaos
+///<code>Help:	False
+/// MaxGenerationDepth:	2
+/// MaxTypeParameterCount:	1
+/// MaxMethodTypeParameterCount:	1
+/// MaxTypeCount:	10
+/// MaxMethodCallDepth:	1000
+/// MaxTypeInheranceCount:	10
+/// MaxStaticFieldCount:	2
+/// MaxInterfaceCount:	5
+/// GenerateInterfaces:	True
+/// GenerateVirtualMethods:	True
+/// GenerateMethods:	True
+/// GenerateGenericMethods:	True
+/// GenerateNonInlinableMethods:	True
+/// GenerateStaticMethods:	True
+/// GenerateInstanceMethods:	True
+/// GenerateRecursiveMethods:	True
+/// GenerateStaticFields:	True
+/// GenerateInstanceFields:	True
+/// IntermediateTypeRealization:	True
+/// GenerateConstructorConstraints:	True
+/// GenerateTypeParameterConstraints:	True
+/// GenerateMethodParameterConstraints:	True
+/// OutputPath:	chaos
 /// OutputLanguages:
-///     Cs
-///     Vb
-/// OutputNamespace:    Chaos
-/// ShowOutputInConsole:    False
-/// CompileAndRun:    False
+/// 	Cs
+/// 	Vb
+/// OutputNamespace:	Chaos
+/// ShowOutputInConsole:	False
+/// CompileAndRun:	False
 /// </code></remarks>
 namespace Chaos
 {

@@ -2,6 +2,6 @@
 // Line: 4
 
 Foo
-    tag = 0;
+	tag = 0;
 Bar
-    tag = 1;
+	tag = 1;

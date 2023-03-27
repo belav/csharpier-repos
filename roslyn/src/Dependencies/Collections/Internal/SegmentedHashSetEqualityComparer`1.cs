@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
 
             // Otherwise, do an O(N^2) match.
-            // ?? This is non-symmetrical, but matches original: https://github.com/dotnet/runtime/issues/69218
+            // 🐛 This is non-symmetrical, but matches original: https://github.com/dotnet/runtime/issues/69218
             foreach (var yi in y)
             {
                 var found = false;

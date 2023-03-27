@@ -32,17 +32,17 @@ using System.Xml.XPath;
 namespace System.ServiceModel.Dispatcher
 {
 
-    public abstract class SeekableXPathNavigator : XPathNavigator
-    {
-        protected SeekableXPathNavigator () {}
+	public abstract class SeekableXPathNavigator : XPathNavigator
+	{
+		protected SeekableXPathNavigator () {}
 
-        public abstract XmlNodeOrder ComparePosition (long firstPosition, long secondPosition);
-        public abstract string GetLocalName (long nodePosition);
-        public abstract string GetName (long nodePosition);
-        public abstract string GetNamespace (long nodePosition);
-        public abstract XPathNodeType GetNodeType (long nodePosition);
-        public abstract string GetValue (long nodePosition);
+		public abstract XmlNodeOrder ComparePosition (long firstPosition, long secondPosition);
+		public abstract string GetLocalName (long nodePosition);
+		public abstract string GetName (long nodePosition);
+		public abstract string GetNamespace (long nodePosition);
+		public abstract XPathNodeType GetNodeType (long nodePosition);
+		public abstract string GetValue (long nodePosition);
 
-        public abstract long CurrentPosition { get; set; }
-    }
+		public abstract long CurrentPosition { get; set; }
+	}
 }

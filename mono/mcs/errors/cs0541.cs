@@ -8,6 +8,6 @@ interface Interface: ICloneable {
 }
 
 class Test {
-    static void Main () {}
+	static void Main () {}
 }
 

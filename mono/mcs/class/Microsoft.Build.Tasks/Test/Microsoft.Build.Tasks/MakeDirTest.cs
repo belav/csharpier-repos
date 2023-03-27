@@ -36,69 +36,69 @@ using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Tasks {
 
-    [TestFixture]
-    public class MakeDirTest {
+	[TestFixture]
+	public class MakeDirTest {
 
-        [SetUp]
-        public void CreateDir ()
-        {
-            string path = Path.Combine (Path.Combine ("Test", "resources"), "MakeDir");
-            Directory.CreateDirectory (path);
-        }
+		[SetUp]
+		public void CreateDir ()
+		{
+			string path = Path.Combine (Path.Combine ("Test", "resources"), "MakeDir");
+			Directory.CreateDirectory (path);
+		}
 
-        [TearDown]
-        public void RemoveDirectories ()
-        {
-            string path = Path.Combine (Path.Combine ("Test", "resources"), "MakeDir");
-            Directory.Delete (path, true);
-        }
+		[TearDown]
+		public void RemoveDirectories ()
+		{
+			string path = Path.Combine (Path.Combine ("Test", "resources"), "MakeDir");
+			Directory.Delete (path, true);
+		}
 
-        [Test]
-        public void TestAssignment ()
-        {
-            MakeDir md = new MakeDir ();
+		[Test]
+		public void TestAssignment ()
+		{
+			MakeDir md = new MakeDir ();
 
-            md.Directories = new ITaskItem [2] { new TaskItem ("A"), new TaskItem ("B") };
+			md.Directories = new ITaskItem [2] { new TaskItem ("A"), new TaskItem ("B") };
 
-            Assert.AreEqual (2, md.Directories.Length, "A1");
-        }
+			Assert.AreEqual (2, md.Directories.Length, "A1");
+		}
 
-        [Test]
-        public void TestExecution1 ()
-        {
-            Engine engine;
-            Project project;
-            string path = Path.Combine (Path.Combine ("Test", "resources"), "MakeDir");
+		[Test]
+		public void TestExecution1 ()
+		{
+			Engine engine;
+			Project project;
+			string path = Path.Combine (Path.Combine ("Test", "resources"), "MakeDir");
 
-            string documentString = @"
+			string documentString = @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-                    <ItemGroup>
-                        <Dir Include='Test\resources\MakeDir\A' />
-                        <Dir Include='Test\resources\MakeDir\B' />
-                        <Dir Include='Test\resources\MakeDir\C' />
-                    </ItemGroup>
-                    <Target Name='1'>
-                        <MakeDir Directories='@(Dir)'>
-                            <Output
-                                TaskParameter='DirectoriesCreated'
-                                ItemName='Out'
-                            />
-                        </MakeDir>
-                    </Target>
-                </Project>
-            ";
+					<ItemGroup>
+						<Dir Include='Test\resources\MakeDir\A' />
+						<Dir Include='Test\resources\MakeDir\B' />
+						<Dir Include='Test\resources\MakeDir\C' />
+					</ItemGroup>
+					<Target Name='1'>
+						<MakeDir Directories='@(Dir)'>
+							<Output
+								TaskParameter='DirectoriesCreated'
+								ItemName='Out'
+							/>
+						</MakeDir>
+					</Target>
+				</Project>
+			";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            project.Build ("1");
+			engine = new Engine (Consts.BinPath);
+			project = engine.CreateNewProject ();
+			project.LoadXml (documentString);
+			project.Build ("1");
 
-            Assert.AreEqual (3, Directory.GetDirectories (path).Length, "A1");
+			Assert.AreEqual (3, Directory.GetDirectories (path).Length, "A1");
 
-            BuildItemGroup output = project.GetEvaluatedItemsByName ("Out");
-            Assert.AreEqual (Path.Combine (path, "A"), output [0].FinalItemSpec, "A5");
-            Assert.AreEqual (Path.Combine (path, "B"), output [1].FinalItemSpec, "A6");
-            Assert.AreEqual (Path.Combine (path, "C"), output [2].FinalItemSpec, "A7");
-        }
-    }
+			BuildItemGroup output = project.GetEvaluatedItemsByName ("Out");
+			Assert.AreEqual (Path.Combine (path, "A"), output [0].FinalItemSpec, "A5");
+			Assert.AreEqual (Path.Combine (path, "B"), output [1].FinalItemSpec, "A6");
+			Assert.AreEqual (Path.Combine (path, "C"), output [2].FinalItemSpec, "A7");
+		}
+	}
 }

@@ -1,4 +1,4 @@
-//
+﻿//
 // ScriptServiceAttribute.cs
 //
 // Author:
@@ -33,8 +33,8 @@ using System.Text;
 
 namespace System.Web.Script.Services
 {
-    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface)]
-    public sealed class ScriptServiceAttribute : Attribute
-    {
-    }
+	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface)]
+	public sealed class ScriptServiceAttribute : Attribute
+	{
+	}
 }

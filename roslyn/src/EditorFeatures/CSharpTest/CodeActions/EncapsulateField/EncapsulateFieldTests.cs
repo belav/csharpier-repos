@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1181,22 +1181,22 @@ namespace ConsoleApplication1
                 await TestAllOptionsOffAsync(host,
 @"class C
 {
-    int [|irak|];
+    int [|ırak|];
 }",
 @"class C
 {
-    int irak;
+    int ırak;
 
     public int Irak
     {
         get
         {
-            return irak;
+            return ırak;
         }
 
         set
         {
-            irak = value;
+            ırak = value;
         }
     }
 }");
@@ -1211,22 +1211,22 @@ namespace ConsoleApplication1
                 await TestAllOptionsOffAsync(host,
 @"class C
 {
-    int [|???|];
+    int [|بيت|];
 }",
 @"class C
 {
-    int ???;
+    int بيت;
 
-    public int ???1
+    public int بيت1
     {
         get
         {
-            return ???;
+            return بيت;
         }
 
         set
         {
-            ??? = value;
+            بيت = value;
         }
     }
 }");
@@ -1241,22 +1241,22 @@ namespace ConsoleApplication1
                 await TestAllOptionsOffAsync(host,
 @"class C
 {
-    int [|�rbol|];
+    int [|árbol|];
 }",
 @"class C
 {
-    int �rbol;
+    int árbol;
 
-    public int �rbol
+    public int Árbol
     {
         get
         {
-            return �rbol;
+            return árbol;
         }
 
         set
         {
-            �rbol = value;
+            árbol = value;
         }
     }
 }");
@@ -1271,22 +1271,22 @@ namespace ConsoleApplication1
                 await TestAllOptionsOffAsync(host,
 @"class C
 {
-    int [|s?????|];
+    int [|σκύλος|];
 }",
 @"class C
 {
-    int s?????;
+    int σκύλος;
 
-    public int S?????
+    public int Σκύλος
     {
         get
         {
-            return s?????;
+            return σκύλος;
         }
 
         set
         {
-            s????? = value;
+            σκύλος = value;
         }
     }
 }");

@@ -5,13 +5,13 @@ using System;
 
 class Program
 {
-    static void Main()
-    {
-        Action<dynamic> d = Foo;
-    }
+	static void Main()
+	{
+		Action<dynamic> d = Foo;
+	}
 
-    static int Foo (object o)
-    {
-        return 0;
-    }
+	static int Foo (object o)
+	{
+		return 0;
+	}
 }

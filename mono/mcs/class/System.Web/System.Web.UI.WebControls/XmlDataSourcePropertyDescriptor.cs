@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.XmlDataSourcePropertyDescriptor
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,59 +35,59 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls {
 
-    internal class XmlDataSourcePropertyDescriptor : PropertyDescriptor
-    {
-        bool readOnly;
-        
-        public XmlDataSourcePropertyDescriptor (string name, bool readOnly) : base (name, null)
-        {
-            this.readOnly = readOnly;
-        }
-        
-        public override bool CanResetValue (object o)
-        {
-            return false;
-        }
-        
-        public override void ResetValue (object o)
-        {
-        }
-        
-        public override object GetValue (object o)
-        {
-            XmlDataSourceNodeDescriptor nd = o as XmlDataSourceNodeDescriptor;
-            if (nd != null && nd.Node.Attributes != null) {
-                XmlAttribute a = nd.Node.Attributes [Name];
-                if (a != null) return a.Value;
-            }
-            return String.Empty;
-        }
-        
-        public override void SetValue (object o, object value)
-        {
-            XmlDataSourceNodeDescriptor nd = o as XmlDataSourceNodeDescriptor;
-            if (nd != null && nd.Node.Attributes != null) {
-                XmlAttribute a = nd.Node.Attributes [Name];
-                if (a != null) a.Value = value.ToString ();
-            }
-        }
-        
-        public override bool ShouldSerializeValue (object o)
-        {
-            return o is XmlNode;
-        }
-        
-        public override Type ComponentType {
-            get { return typeof (XmlDataSourceNodeDescriptor); }
-        }
-        
-        public override bool IsReadOnly {
-            get { return readOnly; }
-        }
-        
-        public override Type PropertyType {
-            get { return typeof (string); }
-        }
-    }
+	internal class XmlDataSourcePropertyDescriptor : PropertyDescriptor
+	{
+		bool readOnly;
+		
+		public XmlDataSourcePropertyDescriptor (string name, bool readOnly) : base (name, null)
+		{
+			this.readOnly = readOnly;
+		}
+		
+		public override bool CanResetValue (object o)
+		{
+			return false;
+		}
+		
+		public override void ResetValue (object o)
+		{
+		}
+		
+		public override object GetValue (object o)
+		{
+			XmlDataSourceNodeDescriptor nd = o as XmlDataSourceNodeDescriptor;
+			if (nd != null && nd.Node.Attributes != null) {
+				XmlAttribute a = nd.Node.Attributes [Name];
+				if (a != null) return a.Value;
+			}
+			return String.Empty;
+		}
+		
+		public override void SetValue (object o, object value)
+		{
+			XmlDataSourceNodeDescriptor nd = o as XmlDataSourceNodeDescriptor;
+			if (nd != null && nd.Node.Attributes != null) {
+				XmlAttribute a = nd.Node.Attributes [Name];
+				if (a != null) a.Value = value.ToString ();
+			}
+		}
+		
+		public override bool ShouldSerializeValue (object o)
+		{
+			return o is XmlNode;
+		}
+		
+		public override Type ComponentType {
+			get { return typeof (XmlDataSourceNodeDescriptor); }
+		}
+		
+		public override bool IsReadOnly {
+			get { return readOnly; }
+		}
+		
+		public override Type PropertyType {
+			get { return typeof (string); }
+		}
+	}
 }
 

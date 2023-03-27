@@ -2,7 +2,7 @@
 // System.Web.Hosting.VirtualFile
 //
 // Author:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 
 //
@@ -34,18 +34,18 @@ using System.IO;
 
 namespace System.Web.Hosting {
 
-    public abstract class VirtualFile : VirtualFileBase
-    {
-        protected VirtualFile (string virtualPath)
-        {
-            SetVirtualPath (virtualPath);
-        }
+	public abstract class VirtualFile : VirtualFileBase
+	{
+		protected VirtualFile (string virtualPath)
+		{
+			SetVirtualPath (virtualPath);
+		}
 
-        public override bool IsDirectory {
-            get { return false; }
-        }
+		public override bool IsDirectory {
+			get { return false; }
+		}
 
-        public abstract Stream Open ();
-    }
+		public abstract Stream Open ();
+	}
 }
 

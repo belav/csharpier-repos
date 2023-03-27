@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -831,16 +831,16 @@ namespace N
             var markup = @"
 public class Class<A, B, C, D, E, F, G, H, NO1> where E : F
 {
-    $$public void Goo1(A a) { }
-    public B Goo2() { return default(B); }
-    public void Goo3(List<C> list) { }
-    
-    public event Func<D> Goo4;
-    
-    public List<E> Prop { set { } }
-    public List<G> this[List<List<H>> list] { set { } }
-    
-    public void Bar1() { var x = default(NO1); }
+	$$public void Goo1(A a) { }
+	public B Goo2() { return default(B); }
+	public void Goo3(List<C> list) { }
+	
+	public event Func<D> Goo4;
+	
+	public List<E> Prop { set { } }
+	public List<G> this[List<List<H>> list] { set { } }
+	
+	public void Bar1() { var x = default(NO1); }
 }";
 
             var expectedInterfaceCode = @"public interface IClass<A, B, C, D, E, F, G, H> where E : F

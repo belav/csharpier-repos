@@ -2,7 +2,7 @@
 // TaskExecutionMode.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2014 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,9 +28,9 @@
 
 namespace Microsoft.Build.BuildEngine
 {
-    enum TaskExecutionMode
-    {
-       Complete = 0,
-       SkipAndSetOutput = 1
-    }
+	enum TaskExecutionMode
+	{
+	   Complete = 0,
+	   SkipAndSetOutput = 1
+	}
 }

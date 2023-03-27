@@ -23,18 +23,18 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms.VisualStyles
 {
-    [Flags]
-    public enum Edges
-    {
-        Left = 1,
-        Top = 2,
-        Right = 4,
-        Bottom = 8,
-        Diagonal = 16
-    }
+	[Flags]
+	public enum Edges
+	{
+		Left = 1,
+		Top = 2,
+		Right = 4,
+		Bottom = 8,
+		Diagonal = 16
+	}
 }

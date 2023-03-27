@@ -1688,7 +1688,7 @@ namespace SerializationTypes
         public string Name { get; set; }
     }
 
-    [DataContract(Name = "DCWith`@#$'\"     InName")]
+    [DataContract(Name = "DCWith`@#$'\" 	InName")]
     public class DataContractWithOtherSymbolsInName
     {
         [DataMember]

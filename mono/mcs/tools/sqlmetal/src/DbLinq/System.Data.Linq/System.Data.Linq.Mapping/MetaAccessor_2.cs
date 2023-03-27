@@ -31,26 +31,26 @@ using System;
 
 namespace System.Data.Linq.Mapping
 {
-    public abstract class MetaAccessor<TEntity, TMember> : MetaAccessor
-    {
-        public override Type Type {
-            get { return typeof (TEntity); }
-        }
+	public abstract class MetaAccessor<TEntity, TMember> : MetaAccessor
+	{
+		public override Type Type {
+			get { return typeof (TEntity); }
+		}
 
-        public override object GetBoxedValue (object instance)
-        {
-            return GetValue ((TEntity) instance);
-        }
+		public override object GetBoxedValue (object instance)
+		{
+			return GetValue ((TEntity) instance);
+		}
 
-        public abstract TMember GetValue (TEntity instance);
+		public abstract TMember GetValue (TEntity instance);
 
-        public override void SetBoxedValue (ref object instance, object value)
-        {
-            TEntity ent = (TEntity) instance;
-            SetValue (ref ent, (TMember) value);
-            instance = ent;
-        }
+		public override void SetBoxedValue (ref object instance, object value)
+		{
+			TEntity ent = (TEntity) instance;
+			SetValue (ref ent, (TMember) value);
+			instance = ent;
+		}
 
-        public abstract void SetValue (ref TEntity instance, TMember value);
-    }
+		public abstract void SetValue (ref TEntity instance, TMember value);
+	}
 }

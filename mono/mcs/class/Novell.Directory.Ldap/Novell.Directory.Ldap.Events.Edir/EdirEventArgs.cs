@@ -47,15 +47,15 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
       get
       {
-    if (ldap_message is EdirEventIntermediateResponse)
-      return (EdirEventIntermediateResponse)ldap_message;
-    else
-      return null;
+	if (ldap_message is EdirEventIntermediateResponse)
+	  return (EdirEventIntermediateResponse)ldap_message;
+	else
+	  return null;
       }
     }
 
     public EdirEventArgs(LdapMessage sourceMessage,
-             EventClassifiers aClassification)
+			 EventClassifiers aClassification)
       : base(sourceMessage, aClassification)
     {
     }

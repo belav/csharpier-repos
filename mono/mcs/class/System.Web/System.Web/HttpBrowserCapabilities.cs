@@ -33,28 +33,28 @@ using System.Web.UI;
 
 namespace System.Web
 {
-    //
-    // The real implementation lives in System.Web/BrowserCapabilities.cs
-    //
+	//
+	// The real implementation lives in System.Web/BrowserCapabilities.cs
+	//
 
-    // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class HttpBrowserCapabilities : HttpCapabilitiesBase, IFilterResolutionService
-    {
-        public HttpBrowserCapabilities ()
-        {
-        }
+	// CAS
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class HttpBrowserCapabilities : HttpCapabilitiesBase, IFilterResolutionService
+	{
+		public HttpBrowserCapabilities ()
+		{
+		}
 
-        bool IFilterResolutionService.EvaluateFilter (string filterName)
-        {
-            throw new NotImplementedException ();
-        }
+		bool IFilterResolutionService.EvaluateFilter (string filterName)
+		{
+			throw new NotImplementedException ();
+		}
 
-        int IFilterResolutionService.CompareFilters (string filter1, string filter2)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		int IFilterResolutionService.CompareFilters (string filter1, string filter2)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

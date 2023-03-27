@@ -60,8 +60,8 @@ namespace System.ComponentModel
         private const int FOUND_TYPES_LIMIT = 5;
 
         private AttributeEntry[] _foundAttributeTypes;
-        
-        private int _index = 0;
+		
+		private int _index = 0;
 
         /// <devdoc>
         ///     Creates a new AttributeCollection.
@@ -231,7 +231,7 @@ namespace System.ComponentModel
 
                     if (_index >= FOUND_TYPES_LIMIT)
                     {
-                        _index = 0;
+    	                _index = 0;
                     }
 
                     _foundAttributeTypes[ind].type = attributeType;

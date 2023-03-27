@@ -5,19 +5,19 @@ using System;
 
 class A
 {
-    public readonly int a=5;
-    
-    public void Inc (ref int a)
-    {
-        ++a;
-    }
-    
-    public void IncCall ()
-    {
-        Inc (ref a);
-    }
-    
-    static void Main ()
-    {
-    }
+	public readonly int a=5;
+	
+	public void Inc (ref int a)
+	{
+		++a;
+	}
+	
+	public void IncCall ()
+	{
+		Inc (ref a);
+	}
+	
+	static void Main ()
+	{
+	}
 }

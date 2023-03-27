@@ -3,16 +3,16 @@
 
 class C
 {
-    public virtual (int a, int b) M ()
-    {
-        throw null;
-    }
+	public virtual (int a, int b) M ()
+	{
+		throw null;
+	}
 }
 
 class D : C
 {
-    public override (int c, int d) M ()
-    {
-        throw null;
-    }
+	public override (int c, int d) M ()
+	{
+		throw null;
+	}
 }

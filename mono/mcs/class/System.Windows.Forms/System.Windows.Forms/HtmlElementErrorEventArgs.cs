@@ -20,46 +20,46 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst        monkey@jpobst.com
+//	Jonathan Pobst		monkey@jpobst.com
 //
 
 namespace System.Windows.Forms
 {
-    public sealed class HtmlElementErrorEventArgs : EventArgs
-    {
-        #region Fields
-        private string description;
-        private bool handled;
-        private int line_number;
-        private Uri url;
-        #endregion
+	public sealed class HtmlElementErrorEventArgs : EventArgs
+	{
+		#region Fields
+		private string description;
+		private bool handled;
+		private int line_number;
+		private Uri url;
+		#endregion
 
-        #region Internal Constructor
-        internal HtmlElementErrorEventArgs (string description, int lineNumber, Uri url)
-        {
-            this.description = description;
-            this.line_number = lineNumber;
-            this.url = url;
-        }
-        #endregion
+		#region Internal Constructor
+		internal HtmlElementErrorEventArgs (string description, int lineNumber, Uri url)
+		{
+			this.description = description;
+			this.line_number = lineNumber;
+			this.url = url;
+		}
+		#endregion
 
-        #region Public Properties
-        public string Description {
-            get { return this.description; }
-        }
-        
-        public bool Handled {
-            get { return this.handled; }
-            set { this.handled = value; }
-        }
-        
-        public int LineNumber {
-            get { return this.line_number; }
-        }
-        
-        public Uri Url {
-            get { return this.url; }
-        }
-        #endregion
-    }
+		#region Public Properties
+		public string Description {
+			get { return this.description; }
+		}
+		
+		public bool Handled {
+			get { return this.handled; }
+			set { this.handled = value; }
+		}
+		
+		public int LineNumber {
+			get { return this.line_number; }
+		}
+		
+		public Uri Url {
+			get { return this.url; }
+		}
+		#endregion
+	}
 }

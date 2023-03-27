@@ -941,8 +941,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             else
             {
                 string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><Book>
-            Name
-        </Book>";
+			Name
+		</Book>";
 
                 if (LoadXSL("books_entity_ref.xsl", XslInputType.Reader, readerType, new XmlUrlResolver()) != 1)
                 {
@@ -3384,11 +3384,11 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
         public void var4(XslInputType xslInputType, ReaderType readerType, OutputType outputType, NavType navType)
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
-        Node Count: {3}
+		Node Count: {3}
 
-        
-        Correct Output: (1)(2)(3)
-        Incorrect Output: [1][2][3]";
+		
+		Correct Output: (1)(2)(3)
+		Incorrect Output: [1][2][3]";
 
             if ((LoadXSL("Bug109644.xsl", xslInputType, readerType) == 1) && (Transform((string) "foo.xml", (OutputType) outputType, navType) == 1))
             {

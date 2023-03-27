@@ -1,13 +1,13 @@
 // Compiler options: -doc:xml-046.xml -warnaserror
 /// <summary />
 public interface IExecutable {
-    /// <summary />
-    void Execute ();
+	/// <summary />
+	void Execute ();
 
-    /// <summary />
-    object Current {
-        get; 
-    }
+	/// <summary />
+	object Current {
+		get; 
+	}
 }
 
 /// <summary>
@@ -15,16 +15,16 @@ public interface IExecutable {
 /// <see cref="Current" />
 /// </summary>
 public class A : IExecutable {
-    static void Main () {
-    }
+	static void Main () {
+	}
 
-    /// <summary />
-    public void Execute () {
-    }
+	/// <summary />
+	public void Execute () {
+	}
 
-    /// <summary />
-    public object Current {
-        get { return null; }
-    }
+	/// <summary />
+	public object Current {
+		get { return null; }
+	}
 }
 

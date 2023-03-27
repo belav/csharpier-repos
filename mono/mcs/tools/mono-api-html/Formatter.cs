@@ -1,4 +1,4 @@
-// 
+﻿// 
 // Authors
 //    Sebastien Pouliot  <sebastien@xamarin.com>
 //
@@ -32,62 +32,62 @@ using System.Text;
 
 namespace Mono.ApiTools {
 
-    abstract class Formatter {
+	abstract class Formatter {
 
-        public Formatter(State state)
-        {
-            State = state;
-        }
+		public Formatter(State state)
+		{
+			State = state;
+		}
 
-        public State State { get; }
+		public State State { get; }
 
-        public abstract string LesserThan { get; }
-        public abstract string GreaterThan { get; }
+		public abstract string LesserThan { get; }
+		public abstract string GreaterThan { get; }
 
-        public abstract void BeginDocument (TextWriter output, string title);
-        public virtual void EndDocument (TextWriter output)
-        {
-        }
+		public abstract void BeginDocument (TextWriter output, string title);
+		public virtual void EndDocument (TextWriter output)
+		{
+		}
 
-        public abstract void BeginAssembly (TextWriter output);
-        public virtual void EndAssembly (TextWriter output)
-        {
-        }
+		public abstract void BeginAssembly (TextWriter output);
+		public virtual void EndAssembly (TextWriter output)
+		{
+		}
 
-        public abstract void BeginNamespace (TextWriter output, string action = "");
-        public virtual void EndNamespace (TextWriter output)
-        {
-        }
+		public abstract void BeginNamespace (TextWriter output, string action = "");
+		public virtual void EndNamespace (TextWriter output)
+		{
+		}
 
-        public abstract void BeginTypeAddition (TextWriter output);
-        public abstract void EndTypeAddition (TextWriter output);
+		public abstract void BeginTypeAddition (TextWriter output);
+		public abstract void EndTypeAddition (TextWriter output);
 
-        public abstract void BeginTypeModification (TextWriter output);
-        public virtual void EndTypeModification (TextWriter output)
-        {
-        }
+		public abstract void BeginTypeModification (TextWriter output);
+		public virtual void EndTypeModification (TextWriter output)
+		{
+		}
 
-        public abstract void BeginTypeRemoval (TextWriter output);
-        public virtual void EndTypeRemoval (TextWriter output)
-        {
-        }
+		public abstract void BeginTypeRemoval (TextWriter output);
+		public virtual void EndTypeRemoval (TextWriter output)
+		{
+		}
 
-        public abstract void BeginMemberAddition (TextWriter output, IEnumerable<XElement> list, MemberComparer member);
-        public abstract void AddMember (TextWriter output, MemberComparer member, bool isInterfaceBreakingChange, string obsolete, string description);
-        public abstract void EndMemberAddition (TextWriter output);
+		public abstract void BeginMemberAddition (TextWriter output, IEnumerable<XElement> list, MemberComparer member);
+		public abstract void AddMember (TextWriter output, MemberComparer member, bool isInterfaceBreakingChange, string obsolete, string description);
+		public abstract void EndMemberAddition (TextWriter output);
 
-        public abstract void BeginMemberModification (TextWriter output, string sectionName);
-        public abstract void EndMemberModification (TextWriter output);
+		public abstract void BeginMemberModification (TextWriter output, string sectionName);
+		public abstract void EndMemberModification (TextWriter output);
 
-        public abstract void BeginMemberRemoval (TextWriter output, IEnumerable<XElement> list, MemberComparer member);
-        public abstract void RemoveMember (TextWriter output, MemberComparer member, bool breaking, string obsolete, string description);
-        public abstract void EndMemberRemoval (TextWriter output);
+		public abstract void BeginMemberRemoval (TextWriter output, IEnumerable<XElement> list, MemberComparer member);
+		public abstract void RemoveMember (TextWriter output, MemberComparer member, bool breaking, string obsolete, string description);
+		public abstract void EndMemberRemoval (TextWriter output);
 
-        public abstract void RenderObsoleteMessage (StringBuilder output, MemberComparer member, string description, string optionalObsoleteMessage);
+		public abstract void RenderObsoleteMessage (StringBuilder output, MemberComparer member, string description, string optionalObsoleteMessage);
 
-        public abstract void DiffAddition (StringBuilder output, string text, bool breaking);
-        public abstract void DiffModification (StringBuilder output, string old, string @new, bool breaking);
-        public abstract void DiffRemoval (StringBuilder output, string text, bool breaking);
-        public abstract void Diff (TextWriter output, ApiChange apichange);
-    }
+		public abstract void DiffAddition (StringBuilder output, string text, bool breaking);
+		public abstract void DiffModification (StringBuilder output, string old, string @new, bool breaking);
+		public abstract void DiffRemoval (StringBuilder output, string text, bool breaking);
+		public abstract void Diff (TextWriter output, ApiChange apichange);
+	}
 }

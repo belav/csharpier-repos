@@ -31,7 +31,7 @@ using System;
 
 namespace System.Messaging 
 {
-    [Serializable]
-    public delegate void ReceiveCompletedEventHandler(object sender, ReceiveCompletedEventArgs e);
-    
+	[Serializable]
+	public delegate void ReceiveCompletedEventHandler(object sender, ReceiveCompletedEventArgs e);
+	
 }

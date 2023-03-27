@@ -2,7 +2,7 @@
 // XPathMessageContextTest.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc (http://www.novell.com)
 //
@@ -36,24 +36,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {
-    [TestFixture]
-    public class XPathMessageContextTest
-    {
-        XPathMessageContext ctx = new XPathMessageContext ();
+	[TestFixture]
+	public class XPathMessageContextTest
+	{
+		XPathMessageContext ctx = new XPathMessageContext ();
 
-        [Test]
-        public void PredefinedNamespaces ()
-        {
-            Assert.AreEqual (Constants.Soap11, ctx.LookupNamespace ("s11"), "#1");
-            Assert.AreEqual (Constants.Soap12, ctx.LookupNamespace ("s12"), "#2");
-            // ... only them?
+		[Test]
+		public void PredefinedNamespaces ()
+		{
+			Assert.AreEqual (Constants.Soap11, ctx.LookupNamespace ("s11"), "#1");
+			Assert.AreEqual (Constants.Soap12, ctx.LookupNamespace ("s12"), "#2");
+			// ... only them?
 
-            foreach (char c in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-                Assert.IsNull (ctx.LookupNamespace (c + ""), "char:" + c);
+			foreach (char c in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+				Assert.IsNull (ctx.LookupNamespace (c + ""), "char:" + c);
 
-            Assert.IsNull (ctx.LookupNamespace ("wsa"), "#3");
-            Assert.IsNull (ctx.LookupNamespace ("wsu"), "#4");
-        }
-    }
+			Assert.IsNull (ctx.LookupNamespace ("wsa"), "#3");
+			Assert.IsNull (ctx.LookupNamespace ("wsu"), "#4");
+		}
+	}
 }
 #endif

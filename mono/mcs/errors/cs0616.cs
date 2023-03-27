@@ -5,8 +5,8 @@ class FakeAttribute {
 }
 
 class T {
-    [Fake]
-    static int Main() {
-        return 0;
-    }
+	[Fake]
+	static int Main() {
+		return 0;
+	}
 }

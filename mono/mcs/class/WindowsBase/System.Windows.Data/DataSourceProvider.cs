@@ -20,7 +20,7 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,98 +29,98 @@ using System.Windows.Threading;
 
 namespace System.Windows.Data {
 
-    public abstract class DataSourceProvider : INotifyPropertyChanged, ISupportInitialize
-    {
-        protected DataSourceProvider ()
-        {
-            throw new NotImplementedException ();
-        }
+	public abstract class DataSourceProvider : INotifyPropertyChanged, ISupportInitialize
+	{
+		protected DataSourceProvider ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public object Data {
-            get { throw new NotImplementedException (); }
-        }
+		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+		public object Data {
+			get { throw new NotImplementedException (); }
+		}
 
-        protected Dispatcher Dispatcher {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		protected Dispatcher Dispatcher {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        public Exception Error {
-            get { throw new NotImplementedException (); }
-        }
+		public Exception Error {
+			get { throw new NotImplementedException (); }
+		}
 
-        [DefaultValue (true)]
-        public bool IsInitialLoadEnabled {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		[DefaultValue (true)]
+		public bool IsInitialLoadEnabled {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        protected bool IsRefreshDeferred {
-            get { throw new NotImplementedException (); }
-        }
+		protected bool IsRefreshDeferred {
+			get { throw new NotImplementedException (); }
+		}
 
-        public event EventHandler DataChanged;
+		public event EventHandler DataChanged;
 
-        protected virtual event PropertyChangedEventHandler PropertyChanged;
+		protected virtual event PropertyChangedEventHandler PropertyChanged;
 
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged {
-            add { PropertyChanged += value; }
-            remove { PropertyChanged -= value; }
-        }
+		event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged {
+			add { PropertyChanged += value; }
+			remove { PropertyChanged -= value; }
+		}
 
-        protected virtual void BeginInit ()
-        {
-            throw new NotImplementedException ();
-        }
-        void ISupportInitialize.BeginInit ()
-        {
-            BeginInit ();
-        }
+		protected virtual void BeginInit ()
+		{
+			throw new NotImplementedException ();
+		}
+		void ISupportInitialize.BeginInit ()
+		{
+			BeginInit ();
+		}
 
-        protected virtual void EndInit ()
-        {
-            throw new NotImplementedException ();
-        }
-        void ISupportInitialize.EndInit ()
-        {
-            EndInit ();
-        }
+		protected virtual void EndInit ()
+		{
+			throw new NotImplementedException ();
+		}
+		void ISupportInitialize.EndInit ()
+		{
+			EndInit ();
+		}
 
-        protected virtual void BeginQuery ()
-        {
-            throw new NotImplementedException ();
-        }
+		protected virtual void BeginQuery ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public virtual IDisposable DeferRefresh ()
-        {
-            throw new NotImplementedException ();
-        }
+		public virtual IDisposable DeferRefresh ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public void InitialLoad ()
-        {
-            throw new NotImplementedException ();
-        }
+		public void InitialLoad ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected virtual void OnPropertyChanged (PropertyChangedEventArgs e)
-        {
-            throw new NotImplementedException ();
-        }
+		protected virtual void OnPropertyChanged (PropertyChangedEventArgs e)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected void OnQueryFinished (object newData)
-        {
-            throw new NotImplementedException ();
-        }
+		protected void OnQueryFinished (object newData)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected virtual void OnQueryFinished (object newData, Exception error, DispatcherOperationCallback completionWork, object callbackArguments)
-        {
-            throw new NotImplementedException ();
-        }
+		protected virtual void OnQueryFinished (object newData, Exception error, DispatcherOperationCallback completionWork, object callbackArguments)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public void Refresh ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public void Refresh ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

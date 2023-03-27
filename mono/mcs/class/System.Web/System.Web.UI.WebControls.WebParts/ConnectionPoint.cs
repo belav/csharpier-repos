@@ -30,56 +30,56 @@ using System.Reflection;
 
 namespace System.Web.UI.WebControls.WebParts {
         public abstract class ConnectionPoint 
-    {
-        bool allowMultiConn;
-        string name = string.Empty;
-        string id = "default";
-        Type interfaceType;
-        Type controlType;
-        MethodInfo callBackMethod;
-        
-        public const string DefaultID = "default";
+	{
+		bool allowMultiConn;
+		string name = string.Empty;
+		string id = "default";
+		Type interfaceType;
+		Type controlType;
+		MethodInfo callBackMethod;
+		
+		public const string DefaultID = "default";
 
-        internal ConnectionPoint (MethodInfo callBack, Type interFace, 
-                    Type control, string name, string id, 
-                            bool allowsMultiConnections)
-        {
-            this.allowMultiConn = allowsMultiConnections;
-            this.interfaceType = interFace;
-            this.controlType = control;
-            this.name = name;
-            this.id = id;
-            this.callBackMethod = callBack;
-        }
-        
-        internal MethodInfo CallbackMethod {
-            get{ return callBackMethod;  }
-        }
-        
-        [MonoTODO ("Not implemented")]
-        public virtual bool GetEnabled (Control control)
-        {
-            throw new NotImplementedException ();
-        }
+		internal ConnectionPoint (MethodInfo callBack, Type interFace, 
+					Type control, string name, string id, 
+							bool allowsMultiConnections)
+		{
+			this.allowMultiConn = allowsMultiConnections;
+			this.interfaceType = interFace;
+			this.controlType = control;
+			this.name = name;
+			this.id = id;
+			this.callBackMethod = callBack;
+		}
+		
+		internal MethodInfo CallbackMethod {
+			get{ return callBackMethod;  }
+		}
+		
+		[MonoTODO ("Not implemented")]
+		public virtual bool GetEnabled (Control control)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public bool AllowsMultipleConnections {
-            get { return allowMultiConn; }
-        }
+		public bool AllowsMultipleConnections {
+			get { return allowMultiConn; }
+		}
 
-        public Type ControlType {
-            get { return controlType; }
-        }
+		public Type ControlType {
+			get { return controlType; }
+		}
 
-        public string ID {
-            get { return id; }
-        }
+		public string ID {
+			get { return id; }
+		}
 
-        public Type InterfaceType { 
-            get { return interfaceType; }
-        }
+		public Type InterfaceType { 
+			get { return interfaceType; }
+		}
 
-        public string Name { 
-            get { return name;}
-        }    
+		public string Name { 
+			get { return name;}
+		}	
         }
 }

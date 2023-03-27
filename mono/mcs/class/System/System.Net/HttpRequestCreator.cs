@@ -2,7 +2,7 @@
 // System.Net.HttpWebRequestCreator
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -30,16 +30,16 @@
 
 namespace System.Net
 {
-    class HttpRequestCreator : IWebRequestCreate
-    {
-        internal HttpRequestCreator ()
-        {
-        }
+	class HttpRequestCreator : IWebRequestCreate
+	{
+		internal HttpRequestCreator ()
+		{
+		}
 
-        public WebRequest Create (Uri uri)
-        {
-            return new HttpWebRequest (uri);
-        }
-    }
+		public WebRequest Create (Uri uri)
+		{
+			return new HttpWebRequest (uri);
+		}
+	}
 }
 

@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Rolf Bjarne Kvinge  (RKvinge@novell.com)
+//	Rolf Bjarne Kvinge  (RKvinge@novell.com)
 //
 
 
@@ -35,50 +35,50 @@ using System.Collections;
 namespace MonoTests.System.Windows.Forms
 {
 
-    [TestFixture]
-    public class DataGridViewColumnHeaderTest : TestHelper
-    {
-        
-        [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void GetClipboardContentTestException ()
-        {
-            DataGridViewColumnHeaderClipboardCell cell = new DataGridViewColumnHeaderClipboardCell ();
-            
-            using (DataGridView dgv = new DataGridView ()) {
-                DataGridViewColumn col = new DataGridViewColumn ();
-                col.CellTemplate = new DataGridViewTextBoxCell ();
-                col.HeaderCell = cell;
-                dgv.Columns.Add (col);
-                DataGridViewRow row = new DataGridViewRow ();
-                dgv.Rows.Add (row);
-                dgv.Rows [0].SetValues ("abc");
-                dgv.Rows [0].Cells [0].Selected = true;
+	[TestFixture]
+	public class DataGridViewColumnHeaderTest : TestHelper
+	{
+		
+		[Test]
+		[ExpectedException (typeof (ArgumentOutOfRangeException))]
+		public void GetClipboardContentTestException ()
+		{
+			DataGridViewColumnHeaderClipboardCell cell = new DataGridViewColumnHeaderClipboardCell ();
+			
+			using (DataGridView dgv = new DataGridView ()) {
+				DataGridViewColumn col = new DataGridViewColumn ();
+				col.CellTemplate = new DataGridViewTextBoxCell ();
+				col.HeaderCell = cell;
+				dgv.Columns.Add (col);
+				DataGridViewRow row = new DataGridViewRow ();
+				dgv.Rows.Add (row);
+				dgv.Rows [0].SetValues ("abc");
+				dgv.Rows [0].Cells [0].Selected = true;
 
-                cell = dgv.Columns [0].HeaderCell as DataGridViewColumnHeaderClipboardCell;
-                cell.GetClipboardContentPublic (0, false, false, false, false, "Text");
+				cell = dgv.Columns [0].HeaderCell as DataGridViewColumnHeaderClipboardCell;
+				cell.GetClipboardContentPublic (0, false, false, false, false, "Text");
 
-            }
-        }
-        
-        public class DataGridViewColumnHeaderClipboardCell : DataGridViewColumnHeaderCell
-        {
-            public DataGridViewColumnHeaderClipboardCell ()
-            {
-            }
+			}
+		}
+		
+		public class DataGridViewColumnHeaderClipboardCell : DataGridViewColumnHeaderCell
+		{
+			public DataGridViewColumnHeaderClipboardCell ()
+			{
+			}
 
-            public object GetClipboardContentPublic (int rowIndex, bool firstCell, bool lastCell, bool inFirstRow, bool inLastRow, string format)
-            {
-                return GetClipboardContent (rowIndex, firstCell, lastCell, inFirstRow, inLastRow, format);
-            }
+			public object GetClipboardContentPublic (int rowIndex, bool firstCell, bool lastCell, bool inFirstRow, bool inLastRow, string format)
+			{
+				return GetClipboardContent (rowIndex, firstCell, lastCell, inFirstRow, inLastRow, format);
+			}
 
-            public override Type FormattedValueType
-            {
-                get
-                {
-                    return typeof (string);
-                }
-            }
-        }
-    }
+			public override Type FormattedValueType
+			{
+				get
+				{
+					return typeof (string);
+				}
+			}
+		}
+	}
 }

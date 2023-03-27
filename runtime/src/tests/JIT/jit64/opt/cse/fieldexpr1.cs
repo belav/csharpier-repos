@@ -43,7 +43,7 @@ namespace CseTest
             s.c = return_int(false, 6);
             int v;
 #if LOOP            
-            do {
+			do {
 #endif
             v = ((s.a + s.b) + s.c);
             if (v != -60)
@@ -88,7 +88,7 @@ namespace CseTest
             }
 
 #if LOOP
-                do {
+				do {
 #endif
             v = (s.a + (s.b + s.c));
             if (v != -60)
@@ -99,7 +99,7 @@ namespace CseTest
 
             v = (s.b + (s.a + s.c));
 #if TRY               
-                    try {
+					try {
 #endif
             if (v != -60)
             {
@@ -114,12 +114,12 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if TRY
-                    }
-                    finally { 
+					}
+					finally { 
 #endif
             v = (s.c + s.b);
 #if TRY                  
-                    }
+					}
 #endif
 
             if (v != 2)
@@ -177,7 +177,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP               
-                } while (v == 0);
+				} while (v == 0);
 #endif
 
             v = ((s.a + s.b) + s.c);
@@ -187,7 +187,7 @@ namespace CseTest
                 ret = ret + 1;
             }
 #if LOOP            
-            } while (v == 0);
+			} while (v == 0);
 #endif
             Console.WriteLine(ret);
             return ret;

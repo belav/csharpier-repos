@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 public class C
 {
-    public static TSource Test<TSource>(IEnumerable<TSource> source)
-    {
-        foreach (TSource element in source)
-            yield return element;
-    }
+	public static TSource Test<TSource>(IEnumerable<TSource> source)
+	{
+		foreach (TSource element in source)
+			yield return element;
+	}
 }

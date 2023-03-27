@@ -7,13 +7,13 @@
 #endregion
 
 #if FALSE
-    #region Fields
-        #if B
-            int a;
-        #else
-            bool a;
-        #endif
-    #endregion
+	#region Fields
+		#if B
+			int a;
+		#else
+			bool a;
+		#endif
+	#endregion
 #endif
 
 #if FLAG_FALSE
@@ -45,7 +45,7 @@
                 {
                 }
 
-        public void Run () {}
+		public void Run () {}
         }
 }
 
@@ -60,15 +60,15 @@
 #endif
 #else
 class X {
-    public static int Main ()
-    {
+	public static int Main ()
+	{
 #if (TEST)
-        ns5.Y y = new ns5.Y ();
+		ns5.Y y = new ns5.Y ();
 
-        y.Run ();
-        return 0;
+		y.Run ();
+		return 0;
 #endif
-    }
+	}
 }
 #endif
 

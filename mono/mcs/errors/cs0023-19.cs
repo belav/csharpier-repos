@@ -3,9 +3,9 @@
 
 class Z
 {
-    public static void Main ()
-    {
-        int? n = null;
-        var m = !n;
-    }
+	public static void Main ()
+	{
+		int? n = null;
+		var m = !n;
+	}
 }

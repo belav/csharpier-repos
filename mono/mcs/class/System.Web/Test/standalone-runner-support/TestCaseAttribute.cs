@@ -30,34 +30,34 @@ using System.Runtime.InteropServices;
 
 namespace StandAloneRunnerSupport
 {
-    [AttributeUsage (AttributeTargets.Class)]
-    [Serializable]
-    public class TestCaseAttribute : Attribute
-    {
-        public string Description {
-            get; set;
-        }
+	[AttributeUsage (AttributeTargets.Class)]
+	[Serializable]
+	public class TestCaseAttribute : Attribute
+	{
+		public string Description {
+			get; set;
+		}
 
-        public bool Disabled {
-            get; set;
-        }
-        
-        public string Name {
-            get; set;
-        }
+		public bool Disabled {
+			get; set;
+		}
+		
+		public string Name {
+			get; set;
+		}
 
-        public TestCaseAttribute (string name)
-            : this (name, null)
-        {
-        }
-        
-        public TestCaseAttribute (string name, string description)
-        {
-            if (String.IsNullOrEmpty (name))
-                throw new ArgumentNullException ("name");
-            
-            Description = description;
-            Name = name;
-        }
-    }
+		public TestCaseAttribute (string name)
+			: this (name, null)
+		{
+		}
+		
+		public TestCaseAttribute (string name, string description)
+		{
+			if (String.IsNullOrEmpty (name))
+				throw new ArgumentNullException ("name");
+			
+			Description = description;
+			Name = name;
+		}
+	}
 }

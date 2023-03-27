@@ -46,7 +46,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return ds_time;
+	return ds_time;
       }
     }
 
@@ -55,7 +55,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return milli_seconds;
+	return milli_seconds;
       }
     }
 
@@ -64,7 +64,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get 
       {
-    return strPerpetratorDN;
+	return strPerpetratorDN;
       }
     }
 
@@ -73,7 +73,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return strFormatString;
+	return strFormatString;
       }
     }
 
@@ -82,7 +82,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return nVerb;
+	return nVerb;
       }
     }
 
@@ -91,7 +91,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return parameter_count;
+	return parameter_count;
       }
     }
 
@@ -100,7 +100,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
     {
       get
       {
-    return parameter_collection;
+	return parameter_collection;
       }
     }
     
@@ -121,20 +121,20 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
         parameter_count =
             ((Asn1Integer) decoder.decode(decodedData, length)).intValue();
 
-    parameter_collection = new ArrayList();
+	parameter_collection = new ArrayList();
 
         if (parameter_count > 0) 
-    {
+	{
             Asn1Sequence seq = (Asn1Sequence) decoder.decode(decodedData, length);
             for (int i = 0; i < parameter_count; i++) 
-        {
+	    {
                 parameter_collection.Add(
                     new DebugParameter((Asn1Tagged) seq.get_Renamed(i))
-            );
+		    );
             }
         }
 
-    DataInitDone();
+	DataInitDone();
     }    
 
     /// <summary> 
@@ -151,7 +151,7 @@ namespace Novell.Directory.Ldap.Events.Edir.EventData
       buf.AppendFormat("(ParameterCount={0})", parameter_count);
       for (int i = 0; i < parameter_count; i++)
       {
-    buf.AppendFormat("(Parameter[{0}]={1})", i, parameter_collection[i]);
+	buf.AppendFormat("(Parameter[{0}]={1})", i, parameter_collection[i]);
       }
       buf.Append("]");
 

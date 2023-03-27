@@ -4,20 +4,20 @@
 
 namespace CS208
 {
-    public class Foo
-    {
-        public int Add (int a, int b)
-        {
-            return a + b;
-        }
-    }
+	public class Foo
+	{
+		public int Add (int a, int b)
+		{
+			return a + b;
+		}
+	}
 
-    public class Bar
-    {
-        unsafe static void Main ()
-        {            
-            Foo f = new Foo ();
-            void *s = &f;
-        }
-    }
+	public class Bar
+	{
+		unsafe static void Main ()
+		{			
+			Foo f = new Foo ();
+			void *s = &f;
+		}
+	}
 }

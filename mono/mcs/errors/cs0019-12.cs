@@ -2,11 +2,11 @@
 // Line : 10
 
 enum E: byte {
-    Min
+	Min
 }
 
 class T {
-    static void Main () {
-        E error = E.Min * E.Min;
-    }
+	static void Main () {
+		E error = E.Min * E.Min;
+	}
 }

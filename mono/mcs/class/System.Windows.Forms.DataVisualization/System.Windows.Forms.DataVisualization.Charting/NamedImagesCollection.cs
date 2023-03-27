@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,7 +27,7 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class NamedImagesCollection : ChartNamedElementCollection<NamedImage>
-    {
-    }
+	public class NamedImagesCollection : ChartNamedElementCollection<NamedImage>
+	{
+	}
 }

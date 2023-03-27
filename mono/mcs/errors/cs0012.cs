@@ -4,9 +4,9 @@
 
 class Test
 {
-    public static void Main ()
-    {
-        var b = new B ();
-        b.Test ();
-    }
+	public static void Main ()
+	{
+		var b = new B ();
+		b.Test ();
+	}
 }

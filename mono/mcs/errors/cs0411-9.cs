@@ -5,14 +5,14 @@ delegate void D<T> (T t);
 
 class Test
 {
-    public static D<A> Foo<A> (D<A> a)
-    {
-        return null;
-    }
-    
-    public static void Main ()
-    {
-        Foo (delegate {});
-    }
+	public static D<A> Foo<A> (D<A> a)
+	{
+		return null;
+	}
+	
+	public static void Main ()
+	{
+		Foo (delegate {});
+	}
 }
 

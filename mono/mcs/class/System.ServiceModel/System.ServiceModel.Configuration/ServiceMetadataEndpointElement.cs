@@ -1,6 +1,6 @@
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -52,48 +52,48 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public class ServiceMetadataEndpointElement : StandardEndpointElement
-    {
-        static ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection ();
+	public class ServiceMetadataEndpointElement : StandardEndpointElement
+	{
+		static ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection ();
 
-        static ServiceMetadataEndpointElement ()
-        {
-            foreach (var item in new ConfigurationProperty [] {})
-                properties.Add (item);
-        }
+		static ServiceMetadataEndpointElement ()
+		{
+			foreach (var item in new ConfigurationProperty [] {})
+				properties.Add (item);
+		}
 
-        protected internal override Type EndpointType {
-            get { return typeof (ServiceMetadataEndpoint); }
-        }
+		protected internal override Type EndpointType {
+			get { return typeof (ServiceMetadataEndpoint); }
+		}
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
 
-        protected internal override ServiceEndpoint CreateServiceEndpoint (ContractDescription contractDescription)
-        {
-            return new ServiceMetadataEndpoint ();
-        }
+		protected internal override ServiceEndpoint CreateServiceEndpoint (ContractDescription contractDescription)
+		{
+			return new ServiceMetadataEndpoint ();
+		}
 
-        protected override void OnApplyConfiguration (ServiceEndpoint endpoint, ChannelEndpointElement serviceEndpointElement)
-        {
-            throw new NotImplementedException ();
-        }
+		protected override void OnApplyConfiguration (ServiceEndpoint endpoint, ChannelEndpointElement serviceEndpointElement)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnApplyConfiguration (ServiceEndpoint endpoint, ServiceEndpointElement serviceEndpointElement)
-        {
-            throw new NotImplementedException ();
-        }
+		protected override void OnApplyConfiguration (ServiceEndpoint endpoint, ServiceEndpointElement serviceEndpointElement)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnInitializeAndValidate (ChannelEndpointElement channelEndpointElement)
-        {
-            throw new NotImplementedException ();
-        }
+		protected override void OnInitializeAndValidate (ChannelEndpointElement channelEndpointElement)
+		{
+			throw new NotImplementedException ();
+		}
 
-        protected override void OnInitializeAndValidate (ServiceEndpointElement serviceEndpointElement)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		protected override void OnInitializeAndValidate (ServiceEndpointElement serviceEndpointElement)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

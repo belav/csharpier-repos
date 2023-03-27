@@ -32,119 +32,119 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-    [TestFixture]
-    public class OracleDataReader_Read : ADONetTesterClass 
-    {
-        OracleConnection con;
-        OracleCommand cmd;
+	[TestFixture]
+	public class OracleDataReader_Read : ADONetTesterClass 
+	{
+		OracleConnection con;
+		OracleCommand cmd;
 
-        [SetUp]
-        public void SetUp()
-        {
-            Exception exp = null;
-            BeginCase("Setup");
-            try
-            {
-                //prepare data
-                base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+		[SetUp]
+		public void SetUp()
+		{
+			Exception exp = null;
+			BeginCase("Setup");
+			try
+			{
+				//prepare data
+				base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
 
-                con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-                cmd = new OracleCommand("", con);
-                con.Open();
-            }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        }
+				con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+				cmd = new OracleCommand("", con);
+				con.Open();
+			}
+			catch(Exception ex)	{exp = ex;}
+			finally	{EndCase(exp); exp = null;}
+		}
 
-        [TearDown]
-        public void TearDown()
-        {
-            if (con != null && con.State != ConnectionState.Closed)
-                con.Close();
-        }
+		[TearDown]
+		public void TearDown()
+		{
+			if (con != null && con.State != ConnectionState.Closed)
+				con.Close();
+		}
 
-        public static void Main()
-        {
-            OracleDataReader_Read tc = new OracleDataReader_Read();
-            Exception exp = null;
-            try
-            {
-                tc.BeginTest("OracleDataReader_Read");
-                tc.SetUp();
-                tc.run();
-                tc.TearDown();
-            }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
-        }
+		public static void Main()
+		{
+			OracleDataReader_Read tc = new OracleDataReader_Read();
+			Exception exp = null;
+			try
+			{
+				tc.BeginTest("OracleDataReader_Read");
+				tc.SetUp();
+				tc.run();
+				tc.TearDown();
+			}
+			catch(Exception ex){exp = ex;}
+			finally	{tc.EndTest(exp);}
+		}
 
-        [Test]
-        public void run()
-        {
-            Exception exp = null;
+		[Test]
+		public void run()
+		{
+			Exception exp = null;
 
-            cmd.CommandText = "Select EmployeeID, LastName, FirstName, Title, BirthDate From Employees where EmployeeID in (100,200) order by EmployeeID asc";
-            OracleDataReader rdr = cmd.ExecuteReader();
+			cmd.CommandText = "Select EmployeeID, LastName, FirstName, Title, BirthDate From Employees where EmployeeID in (100,200) order by EmployeeID asc";
+			OracleDataReader rdr = cmd.ExecuteReader();
 
-            try
-            {
-                BeginCase("first row");
-                bool read = rdr.Read();
-                Compare(read, true);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-
-
-            try
-            {
-                BeginCase("first row - value");
-                object obj = rdr.GetValue(0);
-                Compare(obj.ToString(), "100");
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("first row");
+				bool read = rdr.Read();
+				Compare(read, true);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
 
-            try
-            {
-                BeginCase("Second row");
-                bool read = rdr.Read();
-                Compare(read, true);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("first row - value");
+				object obj = rdr.GetValue(0);
+				Compare(obj.ToString(), "100");
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Second row - value");
-                object obj = rdr.GetValue(0);
-                Compare(obj.ToString(), "200");
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("End of data");
-                bool read = rdr.Read();
-                Compare(read, false);
-                rdr.Close();
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Second row");
+				bool read = rdr.Read();
+				Compare(read, true);
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-            try
-            {
-                BeginCase("Read return false");
-                cmd.CommandText= "select * from Orders where OrderID=-909";
-                rdr = cmd.ExecuteReader();
-                Compare(rdr.Read(),false);
-                rdr.Close();
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+			try
+			{
+				BeginCase("Second row - value");
+				object obj = rdr.GetValue(0);
+				Compare(obj.ToString(), "200");
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
 
-        }
-    }
+			try
+			{
+				BeginCase("End of data");
+				bool read = rdr.Read();
+				Compare(read, false);
+				rdr.Close();
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
+
+			try
+			{
+				BeginCase("Read return false");
+				cmd.CommandText= "select * from Orders where OrderID=-909";
+				rdr = cmd.ExecuteReader();
+				Compare(rdr.Read(),false);
+				rdr.Close();
+			} 
+			catch(Exception ex){exp = ex;}
+			finally{EndCase(exp); exp = null;}
+
+		}
+	}
 }

@@ -30,142 +30,142 @@ using System.ComponentModel;
 
 namespace System.Configuration
 {
-    public sealed class PropertyInformation
-    {
-        bool isLocked;
-        bool isModified;
-        int lineNumber;
-        string source;
-        object val;
-        PropertyValueOrigin origin;
-        readonly ConfigurationElement owner;
-        readonly ConfigurationProperty property;
-        
-        internal PropertyInformation (ConfigurationElement owner, ConfigurationProperty property)
-        {
-            if (owner == null)
-                throw new ArgumentNullException ("owner");
-            if (property == null)
-                throw new ArgumentNullException ("property");
-            this.owner = owner;
-            this.property = property;
-        }
-        
-        public TypeConverter Converter {
-            get { return property.Converter; }
-        }
-        
-        public object DefaultValue {
-            get { return property.DefaultValue; }
-        }
-        
-        public string Description {
-            get { return property.Description; }
-        }
-        
-        public bool IsKey {
-            get { return property.IsKey; }
-        }
-        
-        [MonoTODO]
-        public bool IsLocked {
-            get { return isLocked; }
-            internal set { isLocked = value; }
-        }
-        
-        public bool IsModified {
-            get { return isModified; }
-            internal set { isModified = value; }
-        }
-        
-        public bool IsRequired {
-            get { return property.IsRequired; }
-        }
-        
-        public int LineNumber {
-            get { return lineNumber; }
-            internal set { lineNumber = value; }
-        }
-        
-        public string Name {
-            get { return property.Name; }
-        }
-        
-        public string Source {
-            get { return source; }
-            internal set { source = value; }
-        }
-        
-        public Type Type {
-            get { return property.Type; }
-        }
-        
-        public ConfigurationValidatorBase Validator {
-            get { return property.Validator; }
-        }
-        
-        public object Value {
-            get {
-                if (origin == PropertyValueOrigin.Default) {
-                    if (property.IsElement) {
-                        ConfigurationElement elem = (ConfigurationElement) Activator.CreateInstance (Type, true);
-                        elem.InitFromProperty (this);
-                        if (owner != null && owner.IsReadOnly ())
-                            elem.SetReadOnly ();
-                        val = elem;
-                        origin = PropertyValueOrigin.Inherited;
-                    }
-                    else {
-                        return DefaultValue;
-                    }
-                }
-                return val;
-            }
-            set {
-                val = value;
-                isModified = true;
-                origin = PropertyValueOrigin.SetHere;
-            }
-        }
-        
-        internal void Reset (PropertyInformation parentProperty)
-        {
-            if (parentProperty != null) {
-                if (property.IsElement) {
-                    ((ConfigurationElement)Value).Reset ((ConfigurationElement) parentProperty.Value);
-                }
-                else {
-                    val = parentProperty.Value;
-                    origin = PropertyValueOrigin.Inherited;
-                }
-            } else {
-                origin = PropertyValueOrigin.Default;
-            }
-        }
-        
-        internal bool IsElement {
-            get { return property.IsElement; }
-        }
-        
-        public PropertyValueOrigin ValueOrigin {
-            get { return origin; }
-        }
-        
-        internal string GetStringValue ()
-        {
-            return property.ConvertToString (Value);
-        }
-        
-        internal void SetStringValue (string value)
-        {
-            val = property.ConvertFromString (value);
-            if (!object.Equals (val, DefaultValue))
-                origin = PropertyValueOrigin.SetHere;
-        }
-        
-        internal ConfigurationProperty Property {
-            get { return property; }
-        }
-    }
+	public sealed class PropertyInformation
+	{
+		bool isLocked;
+		bool isModified;
+		int lineNumber;
+		string source;
+		object val;
+		PropertyValueOrigin origin;
+		readonly ConfigurationElement owner;
+		readonly ConfigurationProperty property;
+		
+		internal PropertyInformation (ConfigurationElement owner, ConfigurationProperty property)
+		{
+			if (owner == null)
+				throw new ArgumentNullException ("owner");
+			if (property == null)
+				throw new ArgumentNullException ("property");
+			this.owner = owner;
+			this.property = property;
+		}
+		
+		public TypeConverter Converter {
+			get { return property.Converter; }
+		}
+		
+		public object DefaultValue {
+			get { return property.DefaultValue; }
+		}
+		
+		public string Description {
+			get { return property.Description; }
+		}
+		
+		public bool IsKey {
+			get { return property.IsKey; }
+		}
+		
+		[MonoTODO]
+		public bool IsLocked {
+			get { return isLocked; }
+			internal set { isLocked = value; }
+		}
+		
+		public bool IsModified {
+			get { return isModified; }
+			internal set { isModified = value; }
+		}
+		
+		public bool IsRequired {
+			get { return property.IsRequired; }
+		}
+		
+		public int LineNumber {
+			get { return lineNumber; }
+			internal set { lineNumber = value; }
+		}
+		
+		public string Name {
+			get { return property.Name; }
+		}
+		
+		public string Source {
+			get { return source; }
+			internal set { source = value; }
+		}
+		
+		public Type Type {
+			get { return property.Type; }
+		}
+		
+		public ConfigurationValidatorBase Validator {
+			get { return property.Validator; }
+		}
+		
+		public object Value {
+			get {
+				if (origin == PropertyValueOrigin.Default) {
+					if (property.IsElement) {
+						ConfigurationElement elem = (ConfigurationElement) Activator.CreateInstance (Type, true);
+						elem.InitFromProperty (this);
+						if (owner != null && owner.IsReadOnly ())
+							elem.SetReadOnly ();
+						val = elem;
+						origin = PropertyValueOrigin.Inherited;
+					}
+					else {
+						return DefaultValue;
+					}
+				}
+				return val;
+			}
+			set {
+				val = value;
+				isModified = true;
+				origin = PropertyValueOrigin.SetHere;
+			}
+		}
+		
+		internal void Reset (PropertyInformation parentProperty)
+		{
+			if (parentProperty != null) {
+				if (property.IsElement) {
+					((ConfigurationElement)Value).Reset ((ConfigurationElement) parentProperty.Value);
+				}
+				else {
+					val = parentProperty.Value;
+					origin = PropertyValueOrigin.Inherited;
+				}
+			} else {
+				origin = PropertyValueOrigin.Default;
+			}
+		}
+		
+		internal bool IsElement {
+			get { return property.IsElement; }
+		}
+		
+		public PropertyValueOrigin ValueOrigin {
+			get { return origin; }
+		}
+		
+		internal string GetStringValue ()
+		{
+			return property.ConvertToString (Value);
+		}
+		
+		internal void SetStringValue (string value)
+		{
+			val = property.ConvertFromString (value);
+			if (!object.Equals (val, DefaultValue))
+				origin = PropertyValueOrigin.SetHere;
+		}
+		
+		internal ConfigurationProperty Property {
+			get { return property; }
+		}
+	}
 }
 

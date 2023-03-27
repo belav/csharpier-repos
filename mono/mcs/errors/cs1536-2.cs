@@ -3,8 +3,8 @@
 
 public class Test
 {
-    public static void Main ()
-    {
-        object o = (void v) => 1;
-    }
+	public static void Main ()
+	{
+		object o = (void v) => 1;
+	}
 }

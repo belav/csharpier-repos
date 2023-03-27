@@ -5,10 +5,10 @@
 using System;
 
 class X {
-    public unsafe int* this [int i] { set { } }
-    
-    void Foo ()
-    {
-        this [0] = null;
-    }
+	public unsafe int* this [int i] { set { } }
+	
+	void Foo ()
+	{
+		this [0] = null;
+	}
 }

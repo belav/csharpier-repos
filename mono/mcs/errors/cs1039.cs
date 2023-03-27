@@ -3,4 +3,4 @@
 
 class X
 {
-    static string s = "foo
+	static string s = "foo

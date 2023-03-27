@@ -35,56 +35,56 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class ListItem_Selected
-        : GHTBaseWeb 
-    {
-        protected System.Web.UI.WebControls.CheckBoxList CheckBoxList1;
-        protected System.Web.UI.WebControls.CheckBoxList CheckBoxList2;
-        protected GHTWebControls.GHTSubTest GHTSubTest2;
-        #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
-        {
-            //
-            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-            //
-            InitializeComponent();
-            base.OnInit(e);
-        }
-        
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent() 
-        {    
-            this.Load += new System.EventHandler(this.Page_Load);
+	public class ListItem_Selected
+		: GHTBaseWeb 
+	{
+		protected System.Web.UI.WebControls.CheckBoxList CheckBoxList1;
+		protected System.Web.UI.WebControls.CheckBoxList CheckBoxList2;
+		protected GHTWebControls.GHTSubTest GHTSubTest2;
+		#region Web Form Designer generated code
+		override protected void OnInit(EventArgs e) 
+		{
+			//
+			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
+			//
+			InitializeComponent();
+			base.OnInit(e);
+		}
+		
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent() 
+		{    
+			this.Load += new System.EventHandler(this.Page_Load);
 
-        }
-        #endregion
+		}
+		#endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
-        {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
-            GHTTestBegin(frm);
+		private void Page_Load(object sender, System.EventArgs e) 
+		{
+			HtmlForm frm  = (HtmlForm)FindControl("Form1");
+			GHTTestBegin(frm);
       
-            // Selected - Get
-            GHTSubTestBegin("Selected - Get");
-            try 
-            {
-                GHTSubTestAddResult(CheckBoxList1.Items[0].Selected.ToString());
-                GHTSubTestAddResult(CheckBoxList1.Items[1].Selected.ToString());
-            }
-            catch (Exception ex) 
-            {
-                GHTSubTestUnexpectedExceptionCaught(ex);
-            }
-            GHTSubTestEnd();
+			// Selected - Get
+			GHTSubTestBegin("Selected - Get");
+			try 
+			{
+				GHTSubTestAddResult(CheckBoxList1.Items[0].Selected.ToString());
+				GHTSubTestAddResult(CheckBoxList1.Items[1].Selected.ToString());
+			}
+			catch (Exception ex) 
+			{
+				GHTSubTestUnexpectedExceptionCaught(ex);
+			}
+			GHTSubTestEnd();
 
-            // Selected - Set (output is to GHTsubTest2)
-            CheckBoxList2.Items[0].Selected = false;
-            CheckBoxList2.Items[1].Selected = true;
+			// Selected - Set (output is to GHTsubTest2)
+			CheckBoxList2.Items[0].Selected = false;
+			CheckBoxList2.Items[1].Selected = true;
 
-            GHTTestEnd();
-        }
-    }
+			GHTTestEnd();
+		}
+	}
 }

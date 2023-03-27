@@ -33,65 +33,65 @@ using System.Xml.XPath;
 
 namespace Mono.MonoConfig
 {
-    public class ConfigBlockNodeHandler : IDocumentNodeHandler, IStorageConsumer, IConfigBlockContainer
-    {
-        string name;
-        Section requirements;
-        string contents;
-        Dictionary <string, ConfigBlockBlock> storage;
-        
-        public void ReadConfiguration (XPathNavigator nav)
-        {
-            name = Helpers.GetRequiredNonEmptyAttribute (nav, "name");
-            
-            requirements = new Section ();
-            Helpers.BuildSectionTree (nav.Select ("requires/section[string-length(@name) > 0]"), requirements);
+	public class ConfigBlockNodeHandler : IDocumentNodeHandler, IStorageConsumer, IConfigBlockContainer
+	{
+		string name;
+		Section requirements;
+		string contents;
+		Dictionary <string, ConfigBlockBlock> storage;
+		
+		public void ReadConfiguration (XPathNavigator nav)
+		{
+			name = Helpers.GetRequiredNonEmptyAttribute (nav, "name");
+			
+			requirements = new Section ();
+			Helpers.BuildSectionTree (nav.Select ("requires/section[string-length(@name) > 0]"), requirements);
 
-            XPathNodeIterator iter = nav.Select ("contents/text()");
-            StringBuilder sb = new StringBuilder ();
-            
-            while (iter.MoveNext ())
-                sb.Append (iter.Current.Value);
-            if (sb.Length > 0)
-                contents = sb.ToString ();
-        }
-        
-        public void StoreConfiguration ()
-        {
-            AssertStorage ();
-            
-            ConfigBlockBlock block = new ConfigBlockBlock (name, requirements, contents);
-            if (storage.ContainsKey (name))
-                storage [name] = block; // allow for silent override
-            else
-                storage.Add (name, block);
+			XPathNodeIterator iter = nav.Select ("contents/text()");
+			StringBuilder sb = new StringBuilder ();
+			
+			while (iter.MoveNext ())
+				sb.Append (iter.Current.Value);
+			if (sb.Length > 0)
+				contents = sb.ToString ();
+		}
+		
+		public void StoreConfiguration ()
+		{
+			AssertStorage ();
+			
+			ConfigBlockBlock block = new ConfigBlockBlock (name, requirements, contents);
+			if (storage.ContainsKey (name))
+				storage [name] = block; // allow for silent override
+			else
+				storage.Add (name, block);
 
-            // Prepare to handle more sections
-            requirements = new Section ();
-            contents = null;
-        }
+			// Prepare to handle more sections
+			requirements = new Section ();
+			contents = null;
+		}
 
-        public void SetStorage (object storage)
-        {
-            this.storage = storage as Dictionary <string, ConfigBlockBlock>;
-            if (this.storage == null)
-                throw new ApplicationException ("Invalid storage type.");
-        }
+		public void SetStorage (object storage)
+		{
+			this.storage = storage as Dictionary <string, ConfigBlockBlock>;
+			if (this.storage == null)
+				throw new ApplicationException ("Invalid storage type.");
+		}
 
-        public ConfigBlockBlock FindConfigBlock (string name)
-        {
-            AssertStorage ();
+		public ConfigBlockBlock FindConfigBlock (string name)
+		{
+			AssertStorage ();
 
-            if (storage.ContainsKey (name))
-                return storage [name];
+			if (storage.ContainsKey (name))
+				return storage [name];
 
-            return null;
-        }
-        
-        void AssertStorage ()
-        {
-            if (storage == null)
-                throw new ApplicationException ("No storage attached");
-        }
-    }
+			return null;
+		}
+		
+		void AssertStorage ()
+		{
+			if (storage == null)
+				throw new ApplicationException ("No storage attached");
+		}
+	}
 }

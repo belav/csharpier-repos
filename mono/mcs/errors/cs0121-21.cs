@@ -3,16 +3,16 @@
 
 class C
 {
-    C (double[] o, int i = -1, object ii = null)
-    {
-    }
-    
-    C (double[] o, int i = -1, string[] s = null)
-    {
-    }
-    
-    public static void Main ()
-    {
-        new C (null, 1);
-    }
+	C (double[] o, int i = -1, object ii = null)
+	{
+	}
+	
+	C (double[] o, int i = -1, string[] s = null)
+	{
+	}
+	
+	public static void Main ()
+	{
+		new C (null, 1);
+	}
 }

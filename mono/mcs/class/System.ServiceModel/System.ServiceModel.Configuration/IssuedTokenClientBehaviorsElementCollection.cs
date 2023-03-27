@@ -2,7 +2,7 @@
 // IssuedTokenClientBehaviorsElementCollection.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,31 +54,31 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (IssuedTokenClientBehaviorsElement),
-         AddItemName = "add",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    [MonoTODO]
-    public sealed partial class IssuedTokenClientBehaviorsElementCollection
-         : ServiceModelConfigurationElementCollection<IssuedTokenClientBehaviorsElement>,  ICollection,  IEnumerable
-    {
-        // Static Fields
-        static ConfigurationPropertyCollection properties;
+	[ConfigurationCollection (typeof (IssuedTokenClientBehaviorsElement),
+		 AddItemName = "add",
+		 RemoveItemName = "remove",
+		 ClearItemsName = "clear",
+		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+	[MonoTODO]
+	public sealed partial class IssuedTokenClientBehaviorsElementCollection
+		 : ServiceModelConfigurationElementCollection<IssuedTokenClientBehaviorsElement>,  ICollection,  IEnumerable
+	{
+		// Static Fields
+		static ConfigurationPropertyCollection properties;
 
-        static IssuedTokenClientBehaviorsElementCollection ()
-        {
-            properties = new ConfigurationPropertyCollection ();
-        }
+		static IssuedTokenClientBehaviorsElementCollection ()
+		{
+			properties = new ConfigurationPropertyCollection ();
+		}
 
-        public IssuedTokenClientBehaviorsElementCollection ()
-        {
-        }
-
-
-        // Properties
+		public IssuedTokenClientBehaviorsElementCollection ()
+		{
+		}
 
 
-    }
+		// Properties
+
+
+	}
 
 }

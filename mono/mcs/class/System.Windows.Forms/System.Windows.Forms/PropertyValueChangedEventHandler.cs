@@ -20,12 +20,12 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jonathan Chambers (jonathan.chambers@ansys.com)
+//	Jonathan Chambers (jonathan.chambers@ansys.com)
 //
 
 // COMPLETE
 
 namespace System.Windows.Forms 
 {
-    public delegate void PropertyValueChangedEventHandler(object s, PropertyValueChangedEventArgs e);
+	public delegate void PropertyValueChangedEventHandler(object s, PropertyValueChangedEventArgs e);
 }

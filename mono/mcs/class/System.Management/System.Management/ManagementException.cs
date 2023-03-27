@@ -2,7 +2,7 @@
 // System.Management.ManagementException
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -32,43 +32,43 @@ using System.Runtime.Serialization;
 
 namespace System.Management
 {
-    [Serializable]
-    public class ManagementException : SystemException
-    {
-        public ManagementException ()
-            : this ("system management error has occured")
-        {
-        }
+	[Serializable]
+	public class ManagementException : SystemException
+	{
+		public ManagementException ()
+			: this ("system management error has occured")
+		{
+		}
 
-        public ManagementException (string message)
-            : base (message)
-        {
-        }
+		public ManagementException (string message)
+			: base (message)
+		{
+		}
 
-        public ManagementException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
+		public ManagementException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
 
-        protected ManagementException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-        }
+		protected ManagementException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
+		{
+		}
 
-        [MonoTODO]
-        public ManagementStatus ErrorCode {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public ManagementStatus ErrorCode {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public ManagementBaseObject ErrorInformation {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public ManagementBaseObject ErrorInformation {
+			get { throw new NotImplementedException (); }
+		}
 
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData (info, context);
-        }
-    }
+		public override void GetObjectData (SerializationInfo info, StreamingContext context)
+		{
+			base.GetObjectData (info, context);
+		}
+	}
 }
 

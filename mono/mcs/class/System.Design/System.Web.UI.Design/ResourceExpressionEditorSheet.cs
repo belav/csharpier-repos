@@ -2,7 +2,7 @@
 // System.Web.UI.Design.ResourceExpressionEditorSheet
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
@@ -35,39 +35,39 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.Design
 {
-    public class ResourceExpressionEditorSheet : ExpressionEditorSheet
-    {
-        [MonoTODO]
-        public ResourceExpressionEditorSheet (string expression, IServiceProvider serviceProvider)
-            : base (serviceProvider)
-        {
-            throw new NotImplementedException ();
-        }
+	public class ResourceExpressionEditorSheet : ExpressionEditorSheet
+	{
+		[MonoTODO]
+		public ResourceExpressionEditorSheet (string expression, IServiceProvider serviceProvider)
+			: base (serviceProvider)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        [DefaultValue ("")]
-        public string ClassKey {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		[DefaultValue ("")]
+		public string ClassKey {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public override bool IsValid {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public override bool IsValid {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        [DefaultValue ("")]
-        public string ResourceKey {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		[DefaultValue ("")]
+		public string ResourceKey {
+			get { throw new NotImplementedException (); }
+			set { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public override string GetExpression ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public override string GetExpression ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

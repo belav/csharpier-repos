@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -29,27 +29,27 @@ using System.Windows.Input;
 
 namespace System.Windows.Interop {
 
-    public interface IKeyboardInputSink
-    {
-        IKeyboardInputSite KeyboardInputSite {
-            get;
-            [SecurityCritical]
-            set;
-        }
+	public interface IKeyboardInputSink
+	{
+		IKeyboardInputSite KeyboardInputSite {
+			get;
+			[SecurityCritical]
+			set;
+		}
 
-        bool TabInto (TraversalRequest request);
-        bool HasFocusWithin ();
+		bool TabInto (TraversalRequest request);
+		bool HasFocusWithin ();
 
-        [SecurityCritical]
-        bool OnMnemonic (ref MSG msg, ModifierKeys modifiers);
+		[SecurityCritical]
+		bool OnMnemonic (ref MSG msg, ModifierKeys modifiers);
 
-        [SecurityCritical]
-        IKeyboardInputSite RegisterKeyboardInputSink (IKeyboardInputSink sink);
+		[SecurityCritical]
+		IKeyboardInputSite RegisterKeyboardInputSink (IKeyboardInputSink sink);
 
-        [SecurityCritical]
-        bool TranslateAccelerator (ref MSG msg, ModifierKeys modifiers);
+		[SecurityCritical]
+		bool TranslateAccelerator (ref MSG msg, ModifierKeys modifiers);
 
-        [SecurityCritical]
-        bool TranslateChar (ref MSG msg, ModifierKeys modifiers);
-    }
+		[SecurityCritical]
+		bool TranslateChar (ref MSG msg, ModifierKeys modifiers);
+	}
 }

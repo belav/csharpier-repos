@@ -2,7 +2,7 @@
 // System.Drawing.Text.InstalledFontCollection unit tests
 //
 // Authors:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -35,25 +35,25 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Drawing.Text {
 
-    [TestFixture]
-    [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-    public class InstalledFontCollectionTest {
+	[TestFixture]
+	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	public class InstalledFontCollectionTest {
 
-        [Test]
-        public void Family ()
-        {
-            InstalledFontCollection ifc = new InstalledFontCollection ();
-            Assert.IsNotNull (ifc.Families, "Families");
-        }
+		[Test]
+		public void Family ()
+		{
+			InstalledFontCollection ifc = new InstalledFontCollection ();
+			Assert.IsNotNull (ifc.Families, "Families");
+		}
 
-        [Test]
-        public void Dispose_Family ()
-        {
-            InstalledFontCollection ifc = new InstalledFontCollection ();
-            int count = ifc.Families.Length;
-            ifc.Dispose ();
-            Assert.AreEqual (count, ifc.Families.Length, "Families");
-            // there is *no* exception here
-        }
-    }
+		[Test]
+		public void Dispose_Family ()
+		{
+			InstalledFontCollection ifc = new InstalledFontCollection ();
+			int count = ifc.Families.Length;
+			ifc.Dispose ();
+			Assert.AreEqual (count, ifc.Families.Length, "Families");
+			// there is *no* exception here
+		}
+	}
 }

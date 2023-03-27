@@ -54,8 +54,8 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible (false)]
 [assembly: AllowPartiallyTrustedCallers]
 
-    [assembly: CLSCompliant (true)]
-    [assembly: AssemblyDelaySign (true)]
+	[assembly: CLSCompliant (true)]
+	[assembly: AssemblyDelaySign (true)]
 
 [assembly: AssemblyFileVersion (Consts.FxFileVersion)]
 [assembly: CompilationRelaxations (CompilationRelaxations.NoStringInterning)]

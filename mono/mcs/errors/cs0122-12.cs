@@ -5,13 +5,13 @@ using System;
 
 namespace Test
 {
-    public class SomeAttribute : Attribute
-    {
-        SomeAttribute() {}
-    }
+	public class SomeAttribute : Attribute
+	{
+		SomeAttribute() {}
+	}
 
-    [SomeAttribute]
-    public class SomeClass
-    {
-    } 
+	[SomeAttribute]
+	public class SomeClass
+	{
+	} 
 }

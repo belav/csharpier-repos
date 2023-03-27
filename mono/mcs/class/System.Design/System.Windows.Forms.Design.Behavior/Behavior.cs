@@ -2,7 +2,7 @@
 // System.Windows.Forms.Design.Behavior.Behavior
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -36,119 +36,119 @@ using System.Drawing.Drawing2D;
 
 namespace System.Windows.Forms.Design.Behavior
 {
-    public abstract class Behavior
-    {
-        [MonoTODO]
-        protected Behavior ()
-        {
-            throw new NotImplementedException ();
-        }
+	public abstract class Behavior
+	{
+		[MonoTODO]
+		protected Behavior ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        protected Behavior (bool callParentBehavior, BehaviorService behaviorService)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		protected Behavior (bool callParentBehavior, BehaviorService behaviorService)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual Cursor Cursor {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public virtual Cursor Cursor {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public virtual bool DisableAllCommands {
-            get { throw new NotImplementedException (); }
-        }
+		[MonoTODO]
+		public virtual bool DisableAllCommands {
+			get { throw new NotImplementedException (); }
+		}
 
-        [MonoTODO]
-        public virtual MenuCommand FindCommand (CommandID commandId)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual MenuCommand FindCommand (CommandID commandId)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual void OnDragDrop (Glyph g, DragEventArgs e)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual void OnDragDrop (Glyph g, DragEventArgs e)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual void OnDragEnter (Glyph g, DragEventArgs e)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual void OnDragEnter (Glyph g, DragEventArgs e)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual void OnDragLeave (Glyph g, EventArgs e)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual void OnDragLeave (Glyph g, EventArgs e)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual void OnDragOver (Glyph g, DragEventArgs e)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual void OnDragOver (Glyph g, DragEventArgs e)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual void OnGiveFeedback (Glyph g, GiveFeedbackEventArgs e)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual void OnGiveFeedback (Glyph g, GiveFeedbackEventArgs e)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual void OnLoseCapture (Glyph g, EventArgs e)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual void OnLoseCapture (Glyph g, EventArgs e)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual bool OnMouseDoubleClick (Glyph g, MouseButtons button, Point mouseLoc)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual bool OnMouseDoubleClick (Glyph g, MouseButtons button, Point mouseLoc)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual bool OnMouseDown (Glyph g, MouseButtons button, Point mouseLoc)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual bool OnMouseDown (Glyph g, MouseButtons button, Point mouseLoc)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual bool OnMouseEnter (Glyph g)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual bool OnMouseEnter (Glyph g)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual bool OnMouseHover (Glyph g, Point mouseLoc)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual bool OnMouseHover (Glyph g, Point mouseLoc)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual bool OnMouseLeave (Glyph g)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual bool OnMouseLeave (Glyph g)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual bool OnMouseMove (Glyph g, MouseButtons button, Point mouseLoc)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual bool OnMouseMove (Glyph g, MouseButtons button, Point mouseLoc)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual bool OnMouseUp (Glyph g, MouseButtons button)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public virtual bool OnMouseUp (Glyph g, MouseButtons button)
+		{
+			throw new NotImplementedException ();
+		}
 
-        [MonoTODO]
-        public virtual void OnQueryContinueDrag (Glyph g, QueryContinueDragEventArgs e)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[MonoTODO]
+		public virtual void OnQueryContinueDrag (Glyph g, QueryContinueDragEventArgs e)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }
 

@@ -6,7 +6,7 @@ using System;
 
 namespace TopNS
 {
-    internal /** comment */ /** comment2 */ class Hoge
-    {
-    }
+	internal /** comment */ /** comment2 */ class Hoge
+	{
+	}
 }

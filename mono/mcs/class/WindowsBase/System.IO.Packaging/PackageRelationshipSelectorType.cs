@@ -20,14 +20,14 @@
 // Copyright (c) 2008 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 namespace System.IO.Packaging {
 
-    public enum PackageRelationshipSelectorType {
-        Id,
-        Type
-    }
+	public enum PackageRelationshipSelectorType {
+		Id,
+		Type
+	}
 
 }

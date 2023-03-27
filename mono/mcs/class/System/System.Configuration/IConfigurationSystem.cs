@@ -2,7 +2,7 @@
 // System.Configuration.IConfigurationSystem
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2002 Ximian, Inc (http://www.ximian.com)
 //
@@ -32,11 +32,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Configuration
 {
-    [ComVisible (false)]
-    public interface IConfigurationSystem
-    {
-        object GetConfig (string configKey);
-        void Init ();
-    }
+	[ComVisible (false)]
+	public interface IConfigurationSystem
+	{
+		object GetConfig (string configKey);
+		void Init ();
+	}
 }
 

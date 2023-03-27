@@ -15,19 +15,19 @@ using System.Web.Services.Discovery;
 
 namespace MonoTests.System.Web.Services.Discovery {
 
-    [TestFixture]
-    public class ContractReferenceTest {
+	[TestFixture]
+	public class ContractReferenceTest {
 
-        [Test]
-        public void TestConstructors ()
-        {
-            ContractReference contractReference;
-        }
+		[Test]
+		public void TestConstructors ()
+		{
+			ContractReference contractReference;
+		}
 
-        [Test]
-        public void TestConstants ()
-        {
-            Assert.AreEqual ("http://schemas.xmlsoap.org/disco/scl/", ContractReference.Namespace);
-        }
-    }
+		[Test]
+		public void TestConstants ()
+		{
+			Assert.AreEqual ("http://schemas.xmlsoap.org/disco/scl/", ContractReference.Namespace);
+		}
+	}
 }

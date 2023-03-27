@@ -29,21 +29,21 @@ using Microsoft.Build.Framework;
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Framework {
-    [TestFixture]
-    public class BuildFinishedEventArgsTest {
-        [Test]
-        public void AssignmentTest ()
-        {
-            BuildFinishedEventArgs bfea;
-            string message = "message";
-            string helpKeyword = "helpKeyword";
-            bool succeeded = true;
-            
-            bfea = new BuildFinishedEventArgs (message, helpKeyword, succeeded);
-            
-            Assert.AreEqual (message, bfea.Message, "Message");
-            Assert.AreEqual (helpKeyword, bfea.HelpKeyword, "HelpKeyword");
-            Assert.AreEqual (succeeded, bfea.Succeeded, "Succeeded");
-        }
-    }
+	[TestFixture]
+	public class BuildFinishedEventArgsTest {
+		[Test]
+		public void AssignmentTest ()
+		{
+			BuildFinishedEventArgs bfea;
+			string message = "message";
+			string helpKeyword = "helpKeyword";
+			bool succeeded = true;
+			
+			bfea = new BuildFinishedEventArgs (message, helpKeyword, succeeded);
+			
+			Assert.AreEqual (message, bfea.Message, "Message");
+			Assert.AreEqual (helpKeyword, bfea.HelpKeyword, "HelpKeyword");
+			Assert.AreEqual (succeeded, bfea.Succeeded, "Succeeded");
+		}
+	}
 }

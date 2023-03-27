@@ -34,59 +34,59 @@ using System.Xml.Serialization;
 
 namespace System.Web.Services.Description 
 {
-    [XmlFormatExtensionPoint ("Extensions")]
-    public sealed class Port :
-        NamedItem
-    {
-        #region Fields
+	[XmlFormatExtensionPoint ("Extensions")]
+	public sealed class Port :
+		NamedItem
+	{
+		#region Fields
 
-        XmlQualifiedName binding;
-        ServiceDescriptionFormatExtensionCollection extensions;
-        Service service;
+		XmlQualifiedName binding;
+		ServiceDescriptionFormatExtensionCollection extensions;
+		Service service;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
-        
-        public Port ()
-        {
-            binding = null;
-            extensions = new ServiceDescriptionFormatExtensionCollection (this);
-            service = null;
-        }
-        
-        #endregion // Constructors
+		#region Constructors
+		
+		public Port ()
+		{
+			binding = null;
+			extensions = new ServiceDescriptionFormatExtensionCollection (this);
+			service = null;
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [XmlAttribute ("binding")]
-        public XmlQualifiedName Binding {
-            get { return binding; }
-            set { binding = value; }
-        }
+		[XmlAttribute ("binding")]
+		public XmlQualifiedName Binding {
+			get { return binding; }
+			set { binding = value; }
+		}
 
-        [XmlIgnore]
-        public 
-        override
-        ServiceDescriptionFormatExtensionCollection Extensions {     
-            get { return extensions; }
-        }
+		[XmlIgnore]
+		public 
+		override
+		ServiceDescriptionFormatExtensionCollection Extensions { 	
+			get { return extensions; }
+		}
 
 
-//        [XmlIgnore]
-        public Service Service {
-            get { return service; }
-        }
+//		[XmlIgnore]
+		public Service Service {
+			get { return service; }
+		}
 
-        #endregion // Properties
+		#endregion // Properties
 
-        #region Methods
+		#region Methods
 
-        internal void SetParent (Service service) 
-        {
-            this.service = service;
-        }
+		internal void SetParent (Service service) 
+		{
+			this.service = service;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

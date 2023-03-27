@@ -2,7 +2,7 @@
 // System.Web.UI.Design.AppSettingsExpressionEditor
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2006 Novell, Inc (http://www.novell.com)
 //
@@ -33,22 +33,22 @@ using System;
 
 namespace System.Web.UI.Design {
 
-    public class AppSettingsExpressionEditor : ExpressionEditor
-    {
-        public AppSettingsExpressionEditor ()
-        {
-        }
+	public class AppSettingsExpressionEditor : ExpressionEditor
+	{
+		public AppSettingsExpressionEditor ()
+		{
+		}
 
-        public override object EvaluateExpression (string expression, object parseTimeData, Type propertyType, IServiceProvider serviceProvider)
-        {
-            throw new NotImplementedException ();
-        }
+		public override object EvaluateExpression (string expression, object parseTimeData, Type propertyType, IServiceProvider serviceProvider)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override ExpressionEditorSheet GetExpressionEditorSheet (string expression, IServiceProvider serviceProvider)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public override ExpressionEditorSheet GetExpressionEditorSheet (string expression, IServiceProvider serviceProvider)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 
 }
 

@@ -2,7 +2,7 @@
 // MethodWrapper.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,20 +29,20 @@ using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.Providers;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis {
-    class MethodWrapper : Wrapper<Method> {
-        public MethodWrapper (Method value, ref int idGen, IMetaDataProvider metaDataProvider)
-            : base (value, ref idGen, metaDataProvider)
-        {
-        }
+	class MethodWrapper : Wrapper<Method> {
+		public MethodWrapper (Method value, ref int idGen, IMetaDataProvider metaDataProvider)
+			: base (value, ref idGen, metaDataProvider)
+		{
+		}
 
-        public override bool ActsAsField
-        {
-            get { return true; }
-        }
+		public override bool ActsAsField
+		{
+			get { return true; }
+		}
 
-        public override TypeNode FieldAddressType ()
-        {
-            return this.MetaDataProvider.ManagedPointer (this.MetaDataProvider.ReturnType (this.Item));
-        }
-    }
+		public override TypeNode FieldAddressType ()
+		{
+			return this.MetaDataProvider.ManagedPointer (this.MetaDataProvider.ReturnType (this.Item));
+		}
+	}
 }

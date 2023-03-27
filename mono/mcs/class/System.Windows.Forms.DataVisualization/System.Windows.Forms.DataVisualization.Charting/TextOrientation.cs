@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -27,12 +27,12 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public enum TextOrientation
-    {
-        Auto = 0,
-        Horizontal = 1,
-        Rotated90 = 2,
-        Rotated270 = 3,
-        Stacked = 4
-    }
+	public enum TextOrientation
+	{
+		Auto = 0,
+		Horizontal = 1,
+		Rotated90 = 2,
+		Rotated270 = 3,
+		Stacked = 4
+	}
 }

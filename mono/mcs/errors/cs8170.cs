@@ -3,8 +3,8 @@
 
 public struct S
 {
-    public ref S Foo ()
-    {
-        return ref this;
-    }
+	public ref S Foo ()
+	{
+		return ref this;
+	}
 }

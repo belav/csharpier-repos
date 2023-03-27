@@ -34,11 +34,11 @@ using System.Runtime.Remoting.Activation;
 
 namespace System.Runtime.Remoting.Contexts {
 
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public interface IContextAttribute {
+	[System.Runtime.InteropServices.ComVisible (true)]
+	public interface IContextAttribute {
 
-        void GetPropertiesForNewContext (IConstructionCallMessage msg);
+		void GetPropertiesForNewContext (IConstructionCallMessage msg);
 
-        bool IsContextOK (Context ctx, IConstructionCallMessage msg);
-    }
+		bool IsContextOK (Context ctx, IConstructionCallMessage msg);
+	}
 }

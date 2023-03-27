@@ -23,8 +23,8 @@ namespace Mono.ILASM {
 
                 public override void Resolve (CodeGen code_gen)
                 {
-            if (is_resolved)
-                return;
+			if (is_resolved)
+				return;
 
                         if ((call_conv & PEAPI.CallConv.Vararg) == 0) {
                                 string sig = MethodDef.CreateSignature (ret_type, call_conv, name, param, gen_param_count, false);
@@ -48,8 +48,8 @@ namespace Mono.ILASM {
                         }
 
                         peapi_method.AddCallConv (call_conv);
-            
-            is_resolved = true;
+			
+			is_resolved = true;
                 }
 
         }

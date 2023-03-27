@@ -20,117 +20,117 @@
 // Copyright (c) 2005 Novell, Inc. (http://www.novell.com)
 //
 // Author:
-//    Pedro Martínez Juliá <pedromj@gmail.com>
+//	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
 using System.Drawing;
 
 namespace System.Windows.Forms
 {
-    public class DataGridViewTopLeftHeaderCell : DataGridViewColumnHeaderCell
-    {
-        public DataGridViewTopLeftHeaderCell ()
-        {
-        }
+	public class DataGridViewTopLeftHeaderCell : DataGridViewColumnHeaderCell
+	{
+		public DataGridViewTopLeftHeaderCell ()
+		{
+		}
 
-        public override string ToString ()
-        {
-            return GetType ().Name;
-        }
+		public override string ToString ()
+		{
+			return GetType ().Name;
+		}
 
-        protected override AccessibleObject CreateAccessibilityInstance ()
-        {
-            return new DataGridViewTopLeftHeaderCellAccessibleObject (this);
-        }
+		protected override AccessibleObject CreateAccessibilityInstance ()
+		{
+			return new DataGridViewTopLeftHeaderCellAccessibleObject (this);
+		}
 
-        protected override Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
-        {
-            if (DataGridView == null)
-                return Rectangle.Empty;
+		protected override Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		{
+			if (DataGridView == null)
+				return Rectangle.Empty;
 
-            Size s = new Size (36, 13);
-            return new Rectangle (2, (DataGridView.ColumnHeadersHeight - s.Height) / 2, s.Width, s.Height);
-        }
+			Size s = new Size (36, 13);
+			return new Rectangle (2, (DataGridView.ColumnHeadersHeight - s.Height) / 2, s.Width, s.Height);
+		}
 
-        protected override Rectangle GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
-        {
-            if (DataGridView == null || string.IsNullOrEmpty (ErrorText))
-                return Rectangle.Empty;
+		protected override Rectangle GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		{
+			if (DataGridView == null || string.IsNullOrEmpty (ErrorText))
+				return Rectangle.Empty;
 
-            Size error_icon = new Size (12, 11);
-            return new Rectangle (new Point (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
-        }
+			Size error_icon = new Size (12, 11);
+			return new Rectangle (new Point (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
+		}
 
-        protected override Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
-        {
-            object o = Value;
+		protected override Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+		{
+			object o = Value;
 
-            if (o != null) {
-                Size s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
-                s.Height = Math.Max (s.Height, 17);
-                s.Width += 29;
-                return s;
-            } else
-                return new Size (39, 17);
-        }
+			if (o != null) {
+				Size s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
+				s.Height = Math.Max (s.Height, 17);
+				s.Width += 29;
+				return s;
+			} else
+				return new Size (39, 17);
+		}
 
-        protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates  cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
-        {
-            base.Paint (graphics, clipBounds, cellBounds, rowIndex,  cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
-        }
-    
-        protected override void PaintBorder (Graphics graphics, Rectangle clipBounds, Rectangle bounds, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle)
-        {
-            base.PaintBorder (graphics, clipBounds, bounds, cellStyle, advancedBorderStyle);
-        }
+		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates  cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		{
+			base.Paint (graphics, clipBounds, cellBounds, rowIndex,  cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
+		}
+	
+		protected override void PaintBorder (Graphics graphics, Rectangle clipBounds, Rectangle bounds, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle)
+		{
+			base.PaintBorder (graphics, clipBounds, bounds, cellStyle, advancedBorderStyle);
+		}
 
-        protected class DataGridViewTopLeftHeaderCellAccessibleObject : DataGridViewColumnHeaderCellAccessibleObject
-        {
-            public DataGridViewTopLeftHeaderCellAccessibleObject (DataGridViewTopLeftHeaderCell owner) : base (owner)
-            {
-            }
+		protected class DataGridViewTopLeftHeaderCellAccessibleObject : DataGridViewColumnHeaderCellAccessibleObject
+		{
+			public DataGridViewTopLeftHeaderCellAccessibleObject (DataGridViewTopLeftHeaderCell owner) : base (owner)
+			{
+			}
 
-            public override Rectangle Bounds {
-                get { throw new NotImplementedException (); }
-            }
+			public override Rectangle Bounds {
+				get { throw new NotImplementedException (); }
+			}
 
-            public override string DefaultAction {
-                get {
-                    if (Owner.DataGridView != null && Owner.DataGridView.MultiSelect) {
-                        return "Press to Select All";
-                    }
-                    return string.Empty;
-                }
-            }
+			public override string DefaultAction {
+				get {
+					if (Owner.DataGridView != null && Owner.DataGridView.MultiSelect) {
+						return "Press to Select All";
+					}
+					return string.Empty;
+				}
+			}
 
-            public override string Name {
-                get { return base.Name; }
-            }
+			public override string Name {
+				get { return base.Name; }
+			}
 
-            public override AccessibleStates State {
-                get { return base.State; }
-            }
+			public override AccessibleStates State {
+				get { return base.State; }
+			}
 
-            public override string Value {
-                get { return base.Value; }
-            }
-            
-            public override void DoDefaultAction ()
-            {
-                if (Owner.DataGridView != null)
-                    Owner.DataGridView.SelectAll();
-            }
+			public override string Value {
+				get { return base.Value; }
+			}
+			
+			public override void DoDefaultAction ()
+			{
+				if (Owner.DataGridView != null)
+					Owner.DataGridView.SelectAll();
+			}
 
-            public override AccessibleObject Navigate (AccessibleNavigation navigationDirection)
-            {
-                throw new NotImplementedException ();
-            }
+			public override AccessibleObject Navigate (AccessibleNavigation navigationDirection)
+			{
+				throw new NotImplementedException ();
+			}
 
-            public override void Select (AccessibleSelection flags)
-            {
-                base.Select (flags);
-            }
-        }
-    }
+			public override void Select (AccessibleSelection flags)
+			{
+				base.Select (flags);
+			}
+		}
+	}
 }
 

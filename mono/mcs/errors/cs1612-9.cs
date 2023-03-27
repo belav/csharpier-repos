@@ -3,19 +3,19 @@
 
 struct R
 {
-    public S Size { get; set; }
+	public S Size { get; set; }
 }
 
 struct S
 {
-    public float Height { get; set; }
+	public float Height { get; set; }
 }
 
 public class Test
 {
-    public static void Main ()
-    {
-        var r = new R ();
-        r.Size.Height = 3;
-    }
+	public static void Main ()
+	{
+		var r = new R ();
+		r.Size.Height = 3;
+	}
 }

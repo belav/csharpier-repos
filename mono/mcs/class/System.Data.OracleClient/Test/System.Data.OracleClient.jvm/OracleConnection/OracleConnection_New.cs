@@ -35,62 +35,62 @@ namespace MonoTests.System.Data.OracleClient
 [TestFixture]
 public class OracleConnection_New : GHTBase
 {
-    public static void Main()
-    {
-        OracleConnection_New tc = new OracleConnection_New();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("OracleConnection_New");
-            tc.run();
-        }
-        catch(Exception ex){exp = ex;}
-        finally    {tc.EndTest(exp);}
-    }
+	public static void Main()
+	{
+		OracleConnection_New tc = new OracleConnection_New();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("OracleConnection_New");
+			tc.run();
+		}
+		catch(Exception ex){exp = ex;}
+		finally	{tc.EndTest(exp);}
+	}
 
-    [Test]
-    public void run()
-    {
-        Exception exp = null;
-        OracleConnection con = null;
-        try
-        {
-            BeginCase("OracleConnection ctor");
-            con = new OracleConnection();
-            Compare(con != null ,true);
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
+	[Test]
+	public void run()
+	{
+		Exception exp = null;
+		OracleConnection con = null;
+		try
+		{
+			BeginCase("OracleConnection ctor");
+			con = new OracleConnection();
+			Compare(con != null ,true);
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("OracleConnection ctor connection string");
-            con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-            Compare(con != null ,true);
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("OracleConnection ctor connection string");
+			con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+			Compare(con != null ,true);
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
 
-        try
-        {
-            BeginCase("OracleConnection check connection string");
-            Compare(con.ConnectionString  ,MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString  );
-        } 
-        catch(Exception ex){exp = ex;}
-        finally{EndCase(exp); exp = null;}
+		try
+		{
+			BeginCase("OracleConnection check connection string");
+			Compare(con.ConnectionString  ,MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString  );
+		} 
+		catch(Exception ex){exp = ex;}
+		finally{EndCase(exp); exp = null;}
 
-    }
+	}
 
 
-    //public TestClass():base(true){}
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
 }
 }

@@ -1,9 +1,9 @@
 //
 // HtmlInputRadioButtonCas.cs 
-//    - CAS unit tests for System.Web.UI.HtmlControls.HtmlInputRadioButton
+//	- CAS unit tests for System.Web.UI.HtmlControls.HtmlInputRadioButton
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,32 +37,32 @@ using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HtmlInputRadioButtonCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HtmlInputRadioButtonCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HtmlInputRadioButtonTest unit = new HtmlInputRadioButtonTest ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.CleanProperties ();
-            unit.Value_Existing ();
-            unit.Value_Resetting ();
-            unit.Value_ResetNull ();
-            unit.IDversusValue ();
-            unit.IPostBackDataHandler_RaisePostBackEvent ();
-            unit.IPostBackDataHandler_LoadPostData_WrongId ();
-            unit.IPostBackDataHandler_LoadPostData ();
-            unit.RaisePostBackEvent ();
-            unit.LoadPostData_WrongId ();
-            unit.LoadPostData ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HtmlInputRadioButtonTest unit = new HtmlInputRadioButtonTest ();
+			unit.DefaultProperties ();
+			unit.NullProperties ();
+			unit.CleanProperties ();
+			unit.Value_Existing ();
+			unit.Value_Resetting ();
+			unit.Value_ResetNull ();
+			unit.IDversusValue ();
+			unit.IPostBackDataHandler_RaisePostBackEvent ();
+			unit.IPostBackDataHandler_LoadPostData_WrongId ();
+			unit.IPostBackDataHandler_LoadPostData ();
+			unit.RaisePostBackEvent ();
+			unit.LoadPostData_WrongId ();
+			unit.LoadPostData ();
+		}
 
-        public override Type Type {
-            get { return typeof (HtmlInputRadioButton); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HtmlInputRadioButton); }
+		}
+	}
 }

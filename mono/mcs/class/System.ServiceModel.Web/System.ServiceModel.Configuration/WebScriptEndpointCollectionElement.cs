@@ -1,6 +1,6 @@
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -30,9 +30,9 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Configuration
 {
-    public class WebScriptEndpointCollectionElement : StandardEndpointCollectionElement<WebScriptEndpoint, WebScriptEndpointElement>
-    {
-    }
+	public class WebScriptEndpointCollectionElement : StandardEndpointCollectionElement<WebScriptEndpoint, WebScriptEndpointElement>
+	{
+	}
 
 }
 

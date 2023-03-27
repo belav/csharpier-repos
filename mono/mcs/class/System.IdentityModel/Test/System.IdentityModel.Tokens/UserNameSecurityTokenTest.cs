@@ -2,7 +2,7 @@
 // UserNameSecurityTokenTest.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -34,21 +34,21 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-    [TestFixture]
-    public class UserNameSecurityTokenTest
-    {
-        [Test]
-        public void DefaultValues ()
-        {
-            UniqueId id = new UniqueId ();
-            UserNameSecurityToken t = new UserNameSecurityToken ("mono", "poly", id.ToString ());
-            Assert.AreEqual (id.ToString (), t.Id, "#1");
-            Assert.AreEqual ("mono", t.UserName, "#2");
-            Assert.AreEqual ("poly", t.Password,"#3");
-            Assert.IsTrue (DateTime.Today.ToUniversalTime () <= t.ValidFrom && DateTime.Now.ToUniversalTime () >= t.ValidFrom, "#4");
-            Assert.AreEqual (DateTime.MaxValue.AddDays (-1), t.ValidTo, "#5");
-            Assert.AreEqual (0, t.SecurityKeys.Count, "#6");
-        }
-    }
+	[TestFixture]
+	public class UserNameSecurityTokenTest
+	{
+		[Test]
+		public void DefaultValues ()
+		{
+			UniqueId id = new UniqueId ();
+			UserNameSecurityToken t = new UserNameSecurityToken ("mono", "poly", id.ToString ());
+			Assert.AreEqual (id.ToString (), t.Id, "#1");
+			Assert.AreEqual ("mono", t.UserName, "#2");
+			Assert.AreEqual ("poly", t.Password,"#3");
+			Assert.IsTrue (DateTime.Today.ToUniversalTime () <= t.ValidFrom && DateTime.Now.ToUniversalTime () >= t.ValidFrom, "#4");
+			Assert.AreEqual (DateTime.MaxValue.AddDays (-1), t.ValidTo, "#5");
+			Assert.AreEqual (0, t.SecurityKeys.Count, "#6");
+		}
+	}
 }
 #endif

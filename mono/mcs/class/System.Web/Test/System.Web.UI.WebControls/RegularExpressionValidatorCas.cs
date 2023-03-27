@@ -1,9 +1,9 @@
 //
 // RegularExpressionValidatorCas.cs 
-//    - CAS unit tests for System.Web.UI.WebControls.RegularExpressionValidator
+//	- CAS unit tests for System.Web.UI.WebControls.RegularExpressionValidator
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -39,42 +39,42 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class RegularExpressionValidatorCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class RegularExpressionValidatorCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            RegularExpressionValidatorTest unit = new RegularExpressionValidatorTest ();
-            unit.REValidator_ViewState ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			RegularExpressionValidatorTest unit = new RegularExpressionValidatorTest ();
+			unit.REValidator_ViewState ();
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-        [ExpectedException (typeof (TargetInvocationException))]
-        public void ValidationTests_Deny_Minimal ()
-        {
-            RegularExpressionValidatorTest unit = new RegularExpressionValidatorTest ();
-            unit.REValidator_ValidationTests ();
-            // note: this is a failing security check on reflection,
-            // the SecurityException is the InnerException of the 
-            // TargetInvocationException
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+		[ExpectedException (typeof (TargetInvocationException))]
+		public void ValidationTests_Deny_Minimal ()
+		{
+			RegularExpressionValidatorTest unit = new RegularExpressionValidatorTest ();
+			unit.REValidator_ValidationTests ();
+			// note: this is a failing security check on reflection,
+			// the SecurityException is the InnerException of the 
+			// TargetInvocationException
+		}
 
-        [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-        public void ValidationTests_PermitOnly_Minimal ()
-        {
-            RegularExpressionValidatorTest unit = new RegularExpressionValidatorTest ();
-            unit.REValidator_ValidationTests ();
-        }
+		[Test]
+		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
+		public void ValidationTests_PermitOnly_Minimal ()
+		{
+			RegularExpressionValidatorTest unit = new RegularExpressionValidatorTest ();
+			unit.REValidator_ValidationTests ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (RegularExpressionValidator); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (RegularExpressionValidator); }
+		}
+	}
 }

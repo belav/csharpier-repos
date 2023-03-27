@@ -2,7 +2,7 @@
 // IFieldTemplateHost.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2008 Novell Inc. http://novell.com
 //
@@ -39,10 +39,10 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public interface IWhereParametersProvider
-    {
-        IEnumerable<Parameter> GetWhereParameters (IDynamicDataSource dataSource);
-    }
+	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public interface IWhereParametersProvider
+	{
+		IEnumerable<Parameter> GetWhereParameters (IDynamicDataSource dataSource);
+	}
 }

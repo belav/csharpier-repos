@@ -2,7 +2,7 @@
 // System.Configuration.CommaDelimitedStringCollectionConverter.cs
 //
 // Authors:
-//     Chris Toshok (toshok@ximian.com)
+// 	Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -32,33 +32,33 @@ using System.Globalization;
 
 namespace System.Configuration
 {
-    public sealed class CommaDelimitedStringCollectionConverter: ConfigurationConverterBase
-    {
-        public CommaDelimitedStringCollectionConverter ()
-        {
-        }
+	public sealed class CommaDelimitedStringCollectionConverter: ConfigurationConverterBase
+	{
+		public CommaDelimitedStringCollectionConverter ()
+		{
+		}
 
-        public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
-        {
-            CommaDelimitedStringCollection col = new CommaDelimitedStringCollection ();
-            string[] datums = ((string)data).Split(',');
+		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
+		{
+			CommaDelimitedStringCollection col = new CommaDelimitedStringCollection ();
+			string[] datums = ((string)data).Split(',');
 
-            foreach (string datum in datums)
-                col.Add (datum.Trim());
+			foreach (string datum in datums)
+				col.Add (datum.Trim());
 
-            col.UpdateStringHash ();
-            return col;
-        }
+			col.UpdateStringHash ();
+			return col;
+		}
 
-        public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-        {
-            if (value == null) return null;
+		public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+		{
+			if (value == null) return null;
 
-            if (!typeof (StringCollection).IsAssignableFrom (value.GetType()))
-                throw new ArgumentException ();
+			if (!typeof (StringCollection).IsAssignableFrom (value.GetType()))
+				throw new ArgumentException ();
 
-            return value.ToString ();
-        }
-    }
+			return value.ToString ();
+		}
+	}
 }
 

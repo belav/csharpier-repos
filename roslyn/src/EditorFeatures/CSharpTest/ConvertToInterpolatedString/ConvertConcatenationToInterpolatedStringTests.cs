@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1027,8 +1027,8 @@ class C
         [Theory, WorkItem(49229, "https://github.com/dotnet/roslyn/issues/49229")]
         [InlineData(@"""\t"" [|+|] 1",
                    @"$""\t{1}""")]
-        [InlineData(@"""??"" [|+|] 1",
-                   @"$""??{1}""")]
+        [InlineData(@"""😀"" [|+|] 1",
+                   @"$""😀{1}""")]
         [InlineData(@"""\u2764"" [|+|] 1",
                    @"$""\u2764{1}""")]
         [InlineData(@"""\"""" [|+|] 1",

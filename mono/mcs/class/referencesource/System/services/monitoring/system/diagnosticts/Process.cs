@@ -93,7 +93,7 @@ namespace System.Diagnostics {
         bool exited;
         int exitCode;
         bool signaled;
-        
+		
         DateTime exitTime;
         bool haveExitTime;
 
@@ -281,7 +281,7 @@ namespace System.Diagnostics {
                                     try 
                                     {
                                         wh = new ProcessWaitHandle(handle);
-                                        this.signaled = wh.WaitOne(0, false);                    
+                                        this.signaled = wh.WaitOne(0, false);					
                                     }
                                     finally
                                     {
@@ -302,7 +302,7 @@ namespace System.Diagnostics {
                                     this.exitCode = exitCode;
                                 }
                             }
-                        }    
+                        }	
                     }
                     finally 
                     {
@@ -1405,7 +1405,7 @@ namespace System.Diagnostics {
 
                 output = null;
                 error = null;
-    
+	
 #endif
 
                 Refresh();
@@ -2565,7 +2565,7 @@ namespace System.Diagnostics {
         /// </devdoc>
         public bool WaitForExit(int milliseconds) {
             SafeProcessHandle handle = null;
-         bool exited;
+	     bool exited;
             ProcessWaitHandle processWaitHandle = null;
             try {
                 handle = GetProcessHandle(NativeMethods.SYNCHRONIZE, false);                
@@ -2605,7 +2605,7 @@ namespace System.Diagnostics {
             if (exited && watchForExit) {
                 RaiseOnExited();
             }
-            
+			
             return exited;
         }
 

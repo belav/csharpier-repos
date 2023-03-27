@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+ï»¿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -165,12 +165,12 @@ namespace Roslyn.Utilities
                 // | Cancelled (matching token) | Cancelled           | Cancel result without applying transform |
                 // | Cancelled (mismatch token) | Not cancelled       | Cancel result without applying transform |
                 // | Cancelled (mismatch token) | Cancelled           | Cancel result without applying transform |
-                // | Direct fault¹              | Not cancelled       | Directly fault (exception is not caught) |
-                // | Direct fault¹              | Cancelled           | Directly fault (exception is not caught) |
+                // | Direct faultÂ¹              | Not cancelled       | Directly fault (exception is not caught) |
+                // | Direct faultÂ¹              | Cancelled           | Directly fault (exception is not caught) |
                 // | Indirect fault             | Not cancelled       | Fault result without applying transform  |
                 // | Indirect fault             | Cancelled           | Cancel result without applying transform |
                 //
-                // ¹ Direct faults are exceptions thrown from 'func' prior to returning a ValueTask<TIntermediate>
+                // Â¹ Direct faults are exceptions thrown from 'func' prior to returning a ValueTask<TIntermediate>
                 //   instances. Indirect faults are exceptions captured by return an instance of
                 //   ValueTask<TIntermediate> which (immediately or eventually) transitions to the faulted state. The
                 //   direct fault behavior is currently handled without calling UnwrapAndTransformAsync.

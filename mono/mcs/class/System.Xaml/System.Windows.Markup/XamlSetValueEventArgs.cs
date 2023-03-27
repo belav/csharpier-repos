@@ -29,21 +29,21 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    public class XamlSetValueEventArgs : EventArgs
-    {
-        public XamlSetValueEventArgs (XamlMember member, object value)
-        {
-            Member = member;
-            Value = value;
-        }
-        
-        public bool Handled { get; set; }
-        public XamlMember Member { get; private set; }
-        public object Value { get; private set; }
+	public class XamlSetValueEventArgs : EventArgs
+	{
+		public XamlSetValueEventArgs (XamlMember member, object value)
+		{
+			Member = member;
+			Value = value;
+		}
+		
+		public bool Handled { get; set; }
+		public XamlMember Member { get; private set; }
+		public object Value { get; private set; }
 
-        public virtual void CallBase ()
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		public virtual void CallBase ()
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

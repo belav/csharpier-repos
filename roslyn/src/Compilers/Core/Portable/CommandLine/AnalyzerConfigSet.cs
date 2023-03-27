@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -593,7 +593,7 @@ namespace Microsoft.CodeAnalysis
                     (int globalLevel, ArrayBuilder<string> configPaths) duplicateValue = default;
                     bool keyDuplicated = !keyInSection && duplicateDict?.TryGetValue(key, out duplicateValue) == true;
 
-                    // if this key is neither already present, or already duplicate, we can add it    
+                    // if this key is neither already present, or already duplicate, we can add it	
                     if (!keyInSection && !keyDuplicated)
                     {
                         sectionDict.Add(key, (value, configPath, globalLevel));

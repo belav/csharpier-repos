@@ -2,7 +2,7 @@
 // AesCng.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -28,77 +28,77 @@
 
 namespace System.Security.Cryptography
 {
-    public sealed class AesCng : Aes
-    {
-        public AesCng ()
-        {
-            throw new NotImplementedException ();
-         }
+	public sealed class AesCng : Aes
+	{
+		public AesCng ()
+		{
+			throw new NotImplementedException ();
+ 		}
 
-        public AesCng (string keyName)
-        {
-            throw new NotImplementedException ();
-         }
+		public AesCng (string keyName)
+		{
+			throw new NotImplementedException ();
+ 		}
 
-        public AesCng (string keyName, CngProvider provider)
-        {
-            throw new NotImplementedException ();
-         }
+		public AesCng (string keyName, CngProvider provider)
+		{
+			throw new NotImplementedException ();
+ 		}
 
-        public AesCng (string keyName, CngProvider provider, CngKeyOpenOptions openOptions)
-        {
-            throw new NotImplementedException ();
-         }
+		public AesCng (string keyName, CngProvider provider, CngKeyOpenOptions openOptions)
+		{
+			throw new NotImplementedException ();
+ 		}
 
-        public override Byte[] Key {
-            get {
-                throw new NotImplementedException ();
-            } set {
-                throw new NotImplementedException ();
-            }
-        }
+		public override Byte[] Key {
+			get {
+				throw new NotImplementedException ();
+			} set {
+				throw new NotImplementedException ();
+			}
+		}
  
-         public override int KeySize {
-            get {
-                throw new NotImplementedException ();
-             }
+ 		public override int KeySize {
+			get {
+				throw new NotImplementedException ();
+ 			}
 
-             set {
-                throw new NotImplementedException ();
-            }
-        }
-        public override ICryptoTransform CreateDecryptor ()
-        {
-            throw new NotImplementedException ();
-        }
+ 			set {
+				throw new NotImplementedException ();
+			}
+		}
+		public override ICryptoTransform CreateDecryptor ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override ICryptoTransform CreateDecryptor (Byte[] rgbKey, Byte[] rgbIV)
-        {
-            throw new NotImplementedException ();
-        }
+		public override ICryptoTransform CreateDecryptor (Byte[] rgbKey, Byte[] rgbIV)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override ICryptoTransform CreateEncryptor ()
-        {
-            throw new NotImplementedException ();
-        }
+		public override ICryptoTransform CreateEncryptor ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override ICryptoTransform CreateEncryptor (Byte[] rgbKey, Byte[] rgbIV)
-        {
-            return default(System.Security.Cryptography.ICryptoTransform);
-        }
+		public override ICryptoTransform CreateEncryptor (Byte[] rgbKey, Byte[] rgbIV)
+		{
+			return default(System.Security.Cryptography.ICryptoTransform);
+		}
 
-        protected override void Dispose (bool disposing) {
-            throw new NotImplementedException ();
-         }
+		protected override void Dispose (bool disposing) {
+			throw new NotImplementedException ();
+ 		}
 
-        public override void GenerateIV ()
-        {
-            throw new NotImplementedException ();
-         }
+		public override void GenerateIV ()
+		{
+			throw new NotImplementedException ();
+ 		}
 
-        public override void GenerateKey ()
-        {
-            throw new NotImplementedException ();
-         }
-    }
+		public override void GenerateKey ()
+		{
+			throw new NotImplementedException ();
+ 		}
+	}
 }

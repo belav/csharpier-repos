@@ -1,6 +1,6 @@
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2010 Novell, Inc.  http://www.novell.com
 //
@@ -30,22 +30,22 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Description
 {
-    public class ServiceMetadataEndpoint : ServiceEndpoint
-    {
-        public ServiceMetadataEndpoint ()
-            : this (null)
-        {
-        }
-        
-        public ServiceMetadataEndpoint (EndpointAddress address)
-            : this (MetadataExchangeBindings.CreateMexHttpBinding (), address)
-        {
-        }
-        
-        public ServiceMetadataEndpoint (Binding binding, EndpointAddress address)
-            : base (ContractDescription.GetContract (typeof (IMetadataExchange)), binding, address)
-        {
-        }
-    }
+	public class ServiceMetadataEndpoint : ServiceEndpoint
+	{
+		public ServiceMetadataEndpoint ()
+			: this (null)
+		{
+		}
+		
+		public ServiceMetadataEndpoint (EndpointAddress address)
+			: this (MetadataExchangeBindings.CreateMexHttpBinding (), address)
+		{
+		}
+		
+		public ServiceMetadataEndpoint (Binding binding, EndpointAddress address)
+			: base (ContractDescription.GetContract (typeof (IMetadataExchange)), binding, address)
+		{
+		}
+	}
 }
 

@@ -1,4 +1,4 @@
-namespace AutoMapper.IntegrationTests.ExplicitExpansion;
+﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
 public class MembersToExpandExpressions  : AutoMapperSpecBase, IAsyncLifetime
 {

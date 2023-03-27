@@ -31,57 +31,57 @@
 
 namespace Mono.Cecil.Metadata {
 
-    using Mono.Cecil;
+	using Mono.Cecil;
 
-    using Mono.Cecil.Binary;
+	using Mono.Cecil.Binary;
 
-    internal sealed class MethodTable : IMetadataTable {
+	internal sealed class MethodTable : IMetadataTable {
 
-        public const int RId = 0x06;
+		public const int RId = 0x06;
 
-        RowCollection m_rows;
+		RowCollection m_rows;
 
-        public MethodRow this [int index] {
-            get { return m_rows [index] as MethodRow; }
-            set { m_rows [index] = value; }
-        }
+		public MethodRow this [int index] {
+			get { return m_rows [index] as MethodRow; }
+			set { m_rows [index] = value; }
+		}
 
-        public RowCollection Rows {
-            get { return m_rows; }
-            set { m_rows = value; }
-        }
+		public RowCollection Rows {
+			get { return m_rows; }
+			set { m_rows = value; }
+		}
 
-        public int Id {
-            get { return RId; }
-        }
+		public int Id {
+			get { return RId; }
+		}
 
-        internal MethodTable ()
-        {
-        }
+		internal MethodTable ()
+		{
+		}
 
-        public void Accept (IMetadataTableVisitor visitor)
-        {
-            visitor.VisitMethodTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
-        }
-    }
+		public void Accept (IMetadataTableVisitor visitor)
+		{
+			visitor.VisitMethodTable (this);
+			this.Rows.Accept (visitor.GetRowVisitor ());
+		}
+	}
 
-    internal sealed class MethodRow : IMetadataRow {
+	internal sealed class MethodRow : IMetadataRow {
 
-        public RVA RVA;
-        public MethodImplAttributes ImplFlags;
-        public MethodAttributes Flags;
-        public uint Name;
-        public uint Signature;
-        public uint ParamList;
+		public RVA RVA;
+		public MethodImplAttributes ImplFlags;
+		public MethodAttributes Flags;
+		public uint Name;
+		public uint Signature;
+		public uint ParamList;
 
-        internal MethodRow ()
-        {
-        }
+		internal MethodRow ()
+		{
+		}
 
-        public void Accept (IMetadataRowVisitor visitor)
-        {
-            visitor.VisitMethodRow (this);
-        }
-    }
+		public void Accept (IMetadataRowVisitor visitor)
+		{
+			visitor.VisitMethodRow (this);
+		}
+	}
 }

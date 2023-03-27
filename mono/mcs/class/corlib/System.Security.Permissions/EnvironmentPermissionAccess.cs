@@ -34,14 +34,14 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Permissions {
 
-    [ComVisible (true)]
-    [Serializable]
-    [Flags]
-    public enum EnvironmentPermissionAccess {
+	[ComVisible (true)]
+	[Serializable]
+	[Flags]
+	public enum EnvironmentPermissionAccess {
 
-        NoAccess = 0x00000000,
-        Read = 0x00000001,
-        Write = 0x00000002,
-        AllAccess = Read | Write,
-    }
+		NoAccess = 0x00000000,
+		Read = 0x00000001,
+		Write = 0x00000002,
+		AllAccess = Read | Write,
+	}
 }

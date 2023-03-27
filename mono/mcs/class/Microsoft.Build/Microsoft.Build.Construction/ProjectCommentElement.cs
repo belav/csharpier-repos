@@ -1,4 +1,4 @@
-//
+﻿//
 // ProjectCommentElement.cs
 //
 // Author:

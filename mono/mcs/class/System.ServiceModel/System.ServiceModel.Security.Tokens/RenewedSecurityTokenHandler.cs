@@ -2,7 +2,7 @@
 // RenewedSecurityTokenHandler.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -29,7 +29,7 @@ using System.IdentityModel.Tokens;
 
 namespace System.ServiceModel.Security.Tokens
 {
-    public delegate void RenewedSecurityTokenHandler (
-        SecurityToken newSecurityToken,
-        SecurityToken oldSecurityToken);
+	public delegate void RenewedSecurityTokenHandler (
+		SecurityToken newSecurityToken,
+		SecurityToken oldSecurityToken);
 }

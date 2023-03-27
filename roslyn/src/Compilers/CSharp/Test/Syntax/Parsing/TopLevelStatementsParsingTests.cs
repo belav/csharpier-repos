@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -1224,17 +1224,17 @@ aeu";
             var test = @"
 public class A 
 {
-    int goo    {    void goo() {}    } // Error
-    static int Main() {    return 1;    }
+	int goo	{	void goo() {}	} // Error
+	static int Main() {	return 1;    }
 }
 ";
             UsingTree(test,
                 // (4,12): error CS1513: } expected
-                //     int goo    {    void goo() {}    } // Error
+                // 	int goo	{	void goo() {}	} // Error
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "void").WithLocation(4, 12),
                 // (5,2): error CS8803: Top-level statements must precede namespace and type declarations.
-                //     static int Main() {    return 1;    }
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "static int Main() {    return 1;    }").WithLocation(5, 2),
+                // 	static int Main() {	return 1;    }
+                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "static int Main() {	return 1;    }").WithLocation(5, 2),
                 // (6,1): error CS1022: Type or namespace definition, or end-of-file expected
                 // }
                 Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(6, 1)
@@ -3585,24 +3585,24 @@ global using Bar x;
         public void ErrorRecovery_15()
         {
             var test = @"
-                   W   )b
+			       W   )b
 ";
 
             UsingTree(test,
                 // (2,15): error CS1001: Identifier expected
-                //                    W   )b
+                // 			       W   )b
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(2, 15),
                 // (2,15): error CS1002: ; expected
-                //                    W   )b
+                // 			       W   )b
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(2, 15),
                 // (2,15): error CS1022: Type or namespace definition, or end-of-file expected
-                //                    W   )b
+                // 			       W   )b
                 Diagnostic(ErrorCode.ERR_EOFExpected, ")").WithLocation(2, 15),
                 // (2,17): error CS1001: Identifier expected
-                //                    W   )b
+                // 			       W   )b
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(2, 17),
                 // (2,17): error CS1002: ; expected
-                //                    W   )b
+                // 			       W   )b
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 17)
                 );
 

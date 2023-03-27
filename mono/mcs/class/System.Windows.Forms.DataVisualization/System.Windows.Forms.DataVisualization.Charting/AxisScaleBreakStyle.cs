@@ -1,4 +1,4 @@
-//
+﻿//
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
@@ -28,33 +28,33 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-    public class AxisScaleBreakStyle
-    {
-        #region Constructors
-        public AxisScaleBreakStyle ()
-        {
-            BreakLineStyle = BreakLineStyle.Ragged;
-            CollapsibleSpaceThreshold = 25;
-            Enabled = false;
-            LineColor = Color.Black;
-            LineDashStyle = ChartDashStyle.Solid;
-            LineWidth = 1;
-            MaxNumberOfBreaks = 2;
-            Spacing = 1.5d;
-            StartFromZero = StartFromZero.Auto;
-        }
-        #endregion
+	public class AxisScaleBreakStyle
+	{
+		#region Constructors
+		public AxisScaleBreakStyle ()
+		{
+			BreakLineStyle = BreakLineStyle.Ragged;
+			CollapsibleSpaceThreshold = 25;
+			Enabled = false;
+			LineColor = Color.Black;
+			LineDashStyle = ChartDashStyle.Solid;
+			LineWidth = 1;
+			MaxNumberOfBreaks = 2;
+			Spacing = 1.5d;
+			StartFromZero = StartFromZero.Auto;
+		}
+		#endregion
 
-        #region Public Properties
-        public BreakLineStyle BreakLineStyle { get; set; }
-        public int CollapsibleSpaceThreshold { get; set; }
-        public bool Enabled { get; set; }
-        public Color LineColor { get; set; }
-        public ChartDashStyle LineDashStyle { get; set; }
-        public int LineWidth { get; set; }
-        public int MaxNumberOfBreaks { get; set; }
-        public double Spacing { get; set; }
-        public StartFromZero StartFromZero { get; set; }
-        #endregion
-    }
+		#region Public Properties
+		public BreakLineStyle BreakLineStyle { get; set; }
+		public int CollapsibleSpaceThreshold { get; set; }
+		public bool Enabled { get; set; }
+		public Color LineColor { get; set; }
+		public ChartDashStyle LineDashStyle { get; set; }
+		public int LineWidth { get; set; }
+		public int MaxNumberOfBreaks { get; set; }
+		public double Spacing { get; set; }
+		public StartFromZero StartFromZero { get; set; }
+		#endregion
+	}
 }

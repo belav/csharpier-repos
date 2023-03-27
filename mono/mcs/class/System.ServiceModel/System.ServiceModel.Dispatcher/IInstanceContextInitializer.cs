@@ -30,8 +30,8 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
-    public interface IInstanceContextInitializer
-    {
-        void Initialize (InstanceContext instanceContext, Message message);
-    }
+	public interface IInstanceContextInitializer
+	{
+		void Initialize (InstanceContext instanceContext, Message message);
+	}
 }

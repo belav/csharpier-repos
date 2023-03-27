@@ -976,7 +976,7 @@ namespace System.Net {
                typedef struct _SOCKET_ADDRESS {  
                    PSOCKADDR lpSockaddr;  
                    INT iSockaddrLength;
-               } SOCKET_ADDRESS, *PSOCKET_ADDRESS;            
+               } SOCKET_ADDRESS, *PSOCKET_ADDRESS;			
             */
             [StructLayout(LayoutKind.Sequential)]
             internal struct SOCKET_ADDRESS {
@@ -1488,7 +1488,7 @@ namespace System.Net {
                                                 [Out] out int bytesTransferred,
                                                 [In]  SafeHandle overlapped,
                                                 [In]  IntPtr completionRoutine
-                                                );            
+                                                );		    
 
             [DllImport(WS2_32,SetLastError=true)]
             internal static extern SocketError WSAEnumNetworkEvents(

@@ -2,7 +2,7 @@
 // System.Web.UI.WebControls.GridViewRow.cs
 //
 // Authors:
-//    Lluis Sanchez Gual (lluis@novell.com)
+//	Lluis Sanchez Gual (lluis@novell.com)
 //
 // (C) 2004-2010 Novell, Inc (http://www.novell.com)
 //
@@ -35,71 +35,71 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class GridViewRow: TableRow, IDataItemContainer, INamingContainer
-    {
-        object dataItem;
-        int rowIndex;
-        int dataItemIndex;
-        DataControlRowState rowState;
-        DataControlRowType rowType;
-        
-        public GridViewRow (int rowIndex, int dataItemIndex, DataControlRowType rowType, DataControlRowState rowState)
-        {
-            this.rowIndex = rowIndex;
-            this.dataItemIndex = dataItemIndex;
-            this.rowType = rowType;
-            this.rowState = rowState;
-        }
-        
-        public virtual object DataItem {
-            get { return dataItem; }
-            set { dataItem = value; }
-        }
-        
-        public virtual int DataItemIndex {
-            get { return dataItemIndex; }
-        }
-        
-        public virtual int RowIndex {
-            get { return rowIndex; }
-        }
-        
-        public virtual DataControlRowState RowState {
-            get { return rowState; }
-            set { rowState = value; }
-        }
-        
-        public virtual DataControlRowType RowType {
-            get { return rowType; }
-            set { rowType = value; }
-        }
-        
-        object IDataItemContainer.DataItem {
-            get { return DataItem; }
-        }
-        
-        int IDataItemContainer.DataItemIndex {
-            get { return DataItemIndex; }
-        }
-        
-        int IDataItemContainer.DisplayIndex {
-            get { return RowIndex; }
-        }
-        
-        protected override bool OnBubbleEvent (object source, EventArgs e)
-        {
-            if (base.OnBubbleEvent (source, e))
-                return true;
-            
-            if (e is CommandEventArgs) {
-                GridViewCommandEventArgs args = new GridViewCommandEventArgs (this, source, (CommandEventArgs)e);
-                RaiseBubbleEvent (source, args);
-                return true;
-            }
-            return false;
-        }
-    }
+	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	public class GridViewRow: TableRow, IDataItemContainer, INamingContainer
+	{
+		object dataItem;
+		int rowIndex;
+		int dataItemIndex;
+		DataControlRowState rowState;
+		DataControlRowType rowType;
+		
+		public GridViewRow (int rowIndex, int dataItemIndex, DataControlRowType rowType, DataControlRowState rowState)
+		{
+			this.rowIndex = rowIndex;
+			this.dataItemIndex = dataItemIndex;
+			this.rowType = rowType;
+			this.rowState = rowState;
+		}
+		
+		public virtual object DataItem {
+			get { return dataItem; }
+			set { dataItem = value; }
+		}
+		
+		public virtual int DataItemIndex {
+			get { return dataItemIndex; }
+		}
+		
+		public virtual int RowIndex {
+			get { return rowIndex; }
+		}
+		
+		public virtual DataControlRowState RowState {
+			get { return rowState; }
+			set { rowState = value; }
+		}
+		
+		public virtual DataControlRowType RowType {
+			get { return rowType; }
+			set { rowType = value; }
+		}
+		
+		object IDataItemContainer.DataItem {
+			get { return DataItem; }
+		}
+		
+		int IDataItemContainer.DataItemIndex {
+			get { return DataItemIndex; }
+		}
+		
+		int IDataItemContainer.DisplayIndex {
+			get { return RowIndex; }
+		}
+		
+		protected override bool OnBubbleEvent (object source, EventArgs e)
+		{
+			if (base.OnBubbleEvent (source, e))
+				return true;
+			
+			if (e is CommandEventArgs) {
+				GridViewCommandEventArgs args = new GridViewCommandEventArgs (this, source, (CommandEventArgs)e);
+				RaiseBubbleEvent (source, args);
+				return true;
+			}
+			return false;
+		}
+	}
 }
 

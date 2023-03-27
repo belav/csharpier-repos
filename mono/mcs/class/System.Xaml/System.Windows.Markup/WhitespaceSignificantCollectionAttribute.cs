@@ -30,10 +30,10 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    [System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-    public sealed class WhitespaceSignificantCollectionAttribute : Attribute
-    {
-    }
+	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
+	public sealed class WhitespaceSignificantCollectionAttribute : Attribute
+	{
+	}
 }
 

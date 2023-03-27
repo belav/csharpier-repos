@@ -2,7 +2,7 @@
 // ExprCompareLessThan.cs
 //
 // Authors:
-//    Chris Bacon (chrisbacon76@gmail.com)
+//	Chris Bacon (chrisbacon76@gmail.com)
 //
 // Copyright (C) 2010 Chris Bacon
 //
@@ -32,16 +32,16 @@ using System.Linq;
 using System.Text;
 
 namespace Mono.CodeContracts.Rewrite.Ast {
-    class ExprCompareLessThan : ExprBinaryOpComparison {
+	class ExprCompareLessThan : ExprBinaryOpComparison {
 
-        public ExprCompareLessThan (MethodInfo methodInfo, Expr left, Expr right, Sn signage)
-            : base (methodInfo, left, right, signage)
-        {
-        }
+		public ExprCompareLessThan (MethodInfo methodInfo, Expr left, Expr right, Sn signage)
+			: base (methodInfo, left, right, signage)
+		{
+		}
 
-        public override ExprType ExprType {
-            get { return ExprType.CompareLessThan; }
-        }
+		public override ExprType ExprType {
+			get { return ExprType.CompareLessThan; }
+		}
 
-    }
+	}
 }

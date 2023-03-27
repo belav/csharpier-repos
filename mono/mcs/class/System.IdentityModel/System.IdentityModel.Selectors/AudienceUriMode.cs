@@ -1,8 +1,8 @@
-//
+﻿//
 // AudienceUriMode.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -32,10 +32,10 @@ using System.Text;
 
 namespace System.IdentityModel.Selectors
 {
-    public enum AudienceUriMode
-    {
-        Never = 0,
-        Always = 1,
-        BearerKeyOnly = 2,
-    }
+	public enum AudienceUriMode
+	{
+		Never = 0,
+		Always = 1,
+		BearerKeyOnly = 2,
+	}
 }

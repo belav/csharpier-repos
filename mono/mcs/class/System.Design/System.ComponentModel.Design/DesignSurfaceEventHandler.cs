@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.DesignSurfaceEventHandler
 //
-// Authors:     
-//      Ivan N. Zlatev (contact i-nZ.net)
+// Authors:	 
+//	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
 
@@ -33,7 +33,7 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-    
-    public delegate void DesignSurfaceEventHandler (Object sender, DesignSurfaceEventArgs e);
+	
+	public delegate void DesignSurfaceEventHandler (Object sender, DesignSurfaceEventArgs e);
 }
 

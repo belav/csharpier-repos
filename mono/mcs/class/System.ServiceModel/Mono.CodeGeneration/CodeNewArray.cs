@@ -28,36 +28,36 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeNewArray: CodeExpression
-    {
-        Type elemType;
-        CodeExpression size;
-        
-        public CodeNewArray (Type type, CodeExpression size)
-        {
-            this.elemType = type;
-            this.size = size;
-            if (size.GetResultType () != typeof(int))
-                throw new InvalidOperationException ("Array size must be an Int32");
-        }
+	public class CodeNewArray: CodeExpression
+	{
+		Type elemType;
+		CodeExpression size;
+		
+		public CodeNewArray (Type type, CodeExpression size)
+		{
+			this.elemType = type;
+			this.size = size;
+			if (size.GetResultType () != typeof(int))
+				throw new InvalidOperationException ("Array size must be an Int32");
+		}
 
-        public override void Generate (ILGenerator gen)
-        {
-            size.Generate (gen);
-            gen.Emit (OpCodes.Newarr, elemType);
-        }
-        
-        public override void PrintCode (CodeWriter cp)
-        {
-            cp.Write ("new " + elemType.Name + " [");
-            size.PrintCode (cp);
-            cp.Write ("]");
-        }
-        
-        public override Type GetResultType ()
-        {
-            return Type.GetType (elemType.FullName + "[]");
-        }
-    }
+		public override void Generate (ILGenerator gen)
+		{
+			size.Generate (gen);
+			gen.Emit (OpCodes.Newarr, elemType);
+		}
+		
+		public override void PrintCode (CodeWriter cp)
+		{
+			cp.Write ("new " + elemType.Name + " [");
+			size.PrintCode (cp);
+			cp.Write ("]");
+		}
+		
+		public override Type GetResultType ()
+		{
+			return Type.GetType (elemType.FullName + "[]");
+		}
+	}
 }
 #endif

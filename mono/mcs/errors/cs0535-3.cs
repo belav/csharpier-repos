@@ -3,17 +3,17 @@
 
 using System;
 interface X {
-    void Hola (ref string name);
+	void Hola (ref string name);
 }
 
 class Test : X {
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 
-    public void Hola (out string name)
-    {
-        name = null;
-    }
+	public void Hola (out string name)
+	{
+		name = null;
+	}
 }
 

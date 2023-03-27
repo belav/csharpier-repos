@@ -3,6 +3,6 @@
 
 class C
 {
-    public int[] a = { 2, {1} };
+	public int[] a = { 2, {1} };
 }
  

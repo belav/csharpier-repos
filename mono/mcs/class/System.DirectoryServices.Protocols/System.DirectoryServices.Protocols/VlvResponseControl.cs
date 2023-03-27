@@ -30,26 +30,26 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-    public class VlvResponseControl : DirectoryControl
-    {
-        internal VlvResponseControl (int contentCount, byte [] contextId, ResultCode result, int targetPosition)
-            : base (null, null, false, true)
-        {
-            ContentCount = contentCount;
-            ContextId = contextId;
-            Result = result;
-            TargetPosition = targetPosition;
+	public class VlvResponseControl : DirectoryControl
+	{
+		internal VlvResponseControl (int contentCount, byte [] contextId, ResultCode result, int targetPosition)
+			: base (null, null, false, true)
+		{
+			ContentCount = contentCount;
+			ContextId = contextId;
+			Result = result;
+			TargetPosition = targetPosition;
 
-            throw new NotImplementedException ("ctor-chain");
-        }
+			throw new NotImplementedException ("ctor-chain");
+		}
 
-        [MonoTODO]
-        public int ContentCount { get; private set; }
-        [MonoTODO]
-        public byte [] ContextId { get; private set; }
-        [MonoTODO]
-        public ResultCode Result { get; private set; }
-        [MonoTODO]
-        public int TargetPosition { get; private set; }
-    }
+		[MonoTODO]
+		public int ContentCount { get; private set; }
+		[MonoTODO]
+		public byte [] ContextId { get; private set; }
+		[MonoTODO]
+		public ResultCode Result { get; private set; }
+		[MonoTODO]
+		public int TargetPosition { get; private set; }
+	}
 }

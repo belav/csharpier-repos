@@ -1,8 +1,8 @@
-//
+﻿//
 // MessageSecurityVersionConverter.cs
 //
 // Author:
-//    Igor Zelmanovich <igorz@mainsoft.com>
+//	Igor Zelmanovich <igorz@mainsoft.com>
 //
 // Copyright (C) 2008 Mainsoft, Inc.  http://www.mainsoft.com
 //
@@ -33,27 +33,27 @@ using System.ComponentModel;
 
 namespace System.ServiceModel.Configuration
 {
-    class MessageSecurityVersionConverter : TypeConverter
-    {
-        static readonly Dictionary<string, MessageSecurityVersion> _lookup;
+	class MessageSecurityVersionConverter : TypeConverter
+	{
+		static readonly Dictionary<string, MessageSecurityVersion> _lookup;
 
-        static MessageSecurityVersionConverter () {
-            _lookup = new Dictionary<string, MessageSecurityVersion> (StringComparer.OrdinalIgnoreCase);
-            _lookup.Add ("Default", MessageSecurityVersion.Default);
-            _lookup.Add ("WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10", MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10);
-            _lookup.Add ("WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11", MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11);
-            _lookup.Add ("WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10", MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10);
-        }
+		static MessageSecurityVersionConverter () {
+			_lookup = new Dictionary<string, MessageSecurityVersion> (StringComparer.OrdinalIgnoreCase);
+			_lookup.Add ("Default", MessageSecurityVersion.Default);
+			_lookup.Add ("WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10", MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10);
+			_lookup.Add ("WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11", MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11);
+			_lookup.Add ("WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10", MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10);
+		}
 
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
-            return sourceType == typeof (string);
-        }
+		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
+			return sourceType == typeof (string);
+		}
 
-        public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-            string stringValue = (string) value;
-            if (_lookup.ContainsKey (stringValue))
-                return _lookup [stringValue];
-            throw new ArgumentOutOfRangeException ();
-        }
-    }
+		public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+			string stringValue = (string) value;
+			if (_lookup.ContainsKey (stringValue))
+				return _lookup [stringValue];
+			throw new ArgumentOutOfRangeException ();
+		}
+	}
 }

@@ -3,15 +3,15 @@
 
 class Foo
 {
-    static Foo ()
-    {
-    }
+	static Foo ()
+	{
+	}
 
-    static Foo (int x)
-    {
-    }
+	static Foo (int x)
+	{
+	}
 
-    static void Main ()
-    {
-    }
+	static void Main ()
+	{
+	}
 }

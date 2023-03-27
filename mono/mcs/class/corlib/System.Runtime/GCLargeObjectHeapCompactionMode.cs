@@ -2,7 +2,7 @@
 // GCLargeObjectHeapCompactionMode.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2014 Xamarin Inc (http://www.xamarin.com)
 //
@@ -29,10 +29,10 @@
 
 namespace System.Runtime
 {
-    public enum GCLargeObjectHeapCompactionMode
-    {
-        Default = 1,
-        CompactOnce = 2
-    }
+	public enum GCLargeObjectHeapCompactionMode
+	{
+		Default = 1,
+		CompactOnce = 2
+	}
 }
 

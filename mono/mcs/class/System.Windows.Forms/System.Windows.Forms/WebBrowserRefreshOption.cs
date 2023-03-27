@@ -23,16 +23,16 @@
 // Copyright (c) 2006 Novell, Inc.
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 namespace System.Windows.Forms
 {
-    public enum WebBrowserRefreshOption
-    {
-        Normal = 0,
-        IfExpired = 1,
-        Continue = 2,
-        Completely = 3
-    }
+	public enum WebBrowserRefreshOption
+	{
+		Normal = 0,
+		IfExpired = 1,
+		Continue = 2,
+		Completely = 3
+	}
 }

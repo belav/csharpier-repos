@@ -2,7 +2,7 @@
 // System.Web.Compilation.ParseException
 //
 // Authors:
-//    Gonzalo Paniagua Javier (gonzalo@ximian.com)
+//	Gonzalo Paniagua Javier (gonzalo@ximian.com)
 //
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
@@ -35,95 +35,95 @@ using System.Security.Permissions;
 
 namespace System.Web.Compilation
 {
-    [Serializable]
-    internal class ParseException : HtmlizedException
-    {
-        ILocation location;
-        string fileText;
+	[Serializable]
+	internal class ParseException : HtmlizedException
+	{
+		ILocation location;
+		string fileText;
 
-        ParseException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
+		ParseException (SerializationInfo info, StreamingContext context)
+			: base (info, context)
                 {
                 }
-        
-        public ParseException (ILocation location, string message)
-            : this (location, message, null)
-        {
-            location = new Location (location);
-        }
+		
+		public ParseException (ILocation location, string message)
+			: this (location, message, null)
+		{
+			location = new Location (location);
+		}
 
 
-        public ParseException (ILocation location, string message, Exception inner)
-            : base (message, inner)
-        {
-            this.location = location;
-        }
+		public ParseException (ILocation location, string message, Exception inner)
+			: base (message, inner)
+		{
+			this.location = location;
+		}
 
-        public override string Title {
-            get { return "Parser Error"; }
-        }
+		public override string Title {
+			get { return "Parser Error"; }
+		}
 
-        public override string Description {
-            get {
-                return "Error parsing a resource required to service this request. " +
-                       "Review your source file and modify it to fix this error.";
-            }
-        }
+		public override string Description {
+			get {
+				return "Error parsing a resource required to service this request. " +
+				       "Review your source file and modify it to fix this error.";
+			}
+		}
 
-        public override string ErrorMessage {
-            get { return Message; }
-        }
+		public override string ErrorMessage {
+			get { return Message; }
+		}
 
-        public override string SourceFile {
-            get { return FileName; }
-        }
-        
-        public override string FileName {
-            get {
-                if (location == null)
-                    return null;
+		public override string SourceFile {
+			get { return FileName; }
+		}
+		
+		public override string FileName {
+			get {
+				if (location == null)
+					return null;
 
-                return location.Filename;
-            }
-        }
+				return location.Filename;
+			}
+		}
 
-        public override string FileText {
-            get {
-                if (fileText != null)
-                    return fileText;
+		public override string FileText {
+			get {
+				if (fileText != null)
+					return fileText;
 
-                string text = location != null ? location.FileText : null;
-                if (text != null && text.Length > 0)
-                    return text;
-                
-                if (FileName == null)
-                    return null;
+				string text = location != null ? location.FileText : null;
+				if (text != null && text.Length > 0)
+					return text;
+				
+				if (FileName == null)
+					return null;
 
-                //FIXME: encoding
-                using (TextReader reader = new StreamReader (FileName))
-                    fileText = reader.ReadToEnd ();
-                return fileText;
-            }
-        }
+				//FIXME: encoding
+				using (TextReader reader = new StreamReader (FileName))
+					fileText = reader.ReadToEnd ();
+				return fileText;
+			}
+		}
 
-        public override int [] ErrorLines {
-            get {
-                if (location == null)
-                    return null;
+		public override int [] ErrorLines {
+			get {
+				if (location == null)
+					return null;
 
-                return new int [] {location.BeginLine, location.EndLine};
-            }
-        }
+				return new int [] {location.BeginLine, location.EndLine};
+			}
+		}
 
-        public override bool ErrorLinesPaired {
-            get { return true; }
-        }
+		public override bool ErrorLinesPaired {
+			get { return true; }
+		}
 
-        [SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData (SerializationInfo info, StreamingContext ctx)
-        {
-            base.GetObjectData (info, ctx);
-        }
-    }
+		[SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
+		public override void GetObjectData (SerializationInfo info, StreamingContext ctx)
+		{
+			base.GetObjectData (info, ctx);
+		}
+	}
 }
 

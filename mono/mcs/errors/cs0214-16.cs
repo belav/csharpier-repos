@@ -5,5 +5,5 @@ public class G<T> {}
 
 abstract class A
 {
-    public abstract G<int*[]> Foo1 ();
+	public abstract G<int*[]> Foo1 ();
 }

@@ -35,28 +35,28 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.InteropServices {
 
-    [TestFixture]
-    public class StructLayoutAttributeTest
-    {
-        [Test]
-        public void CtorTest ()
-        {
-            var a = new StructLayoutAttribute (LayoutKind.Explicit);
-            Assert.AreEqual (LayoutKind.Explicit, a.Value);
+	[TestFixture]
+	public class StructLayoutAttributeTest
+	{
+		[Test]
+		public void CtorTest ()
+		{
+			var a = new StructLayoutAttribute (LayoutKind.Explicit);
+			Assert.AreEqual (LayoutKind.Explicit, a.Value);
 
-            a = new StructLayoutAttribute (LayoutKind.Auto);
-            Assert.AreEqual (LayoutKind.Auto, a.Value);
-        }
+			a = new StructLayoutAttribute (LayoutKind.Auto);
+			Assert.AreEqual (LayoutKind.Auto, a.Value);
+		}
 
-        [Test]
-        public void FieldsTest ()
-        {
-            var a = new StructLayoutAttribute (LayoutKind.Explicit);
+		[Test]
+		public void FieldsTest ()
+		{
+			var a = new StructLayoutAttribute (LayoutKind.Explicit);
 
-            Assert.AreEqual ((CharSet)0, a.CharSet);
-            Assert.AreEqual (0, a.Pack);
-            Assert.AreEqual (0, a.Size);
-        }
-    }
+			Assert.AreEqual ((CharSet)0, a.CharSet);
+			Assert.AreEqual (0, a.Pack);
+			Assert.AreEqual (0, a.Size);
+		}
+	}
 }
 

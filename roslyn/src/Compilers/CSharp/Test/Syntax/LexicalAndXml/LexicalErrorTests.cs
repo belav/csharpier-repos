@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -332,26 +332,26 @@ class Test
 using System;
 class Test
 {
-    public static void Main()
-    {
-        int \\u070Fidentifier1 = 1;
-        Console.WriteLine(identifier1);
-    }
+	public static void Main()
+	{
+		int \\u070Fidentifier1 = 1;
+		Console.WriteLine(identifier1);
+	}
 }
 ";
 
             ParserErrorMessageTests.ParseAndValidate(test,
     // (7,7): error CS1001: Identifier expected
-    //         int \\u070Fidentifier1 = 1;
+    // 		int \\u070Fidentifier1 = 1;
     Diagnostic(ErrorCode.ERR_IdentifierExpected, @"\"),
     // (7,7): error CS1056: Unexpected character '\'
-    //         int \\u070Fidentifier1 = 1;
+    // 		int \\u070Fidentifier1 = 1;
     Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "").WithArguments(@"\"),
     // (7,8): error CS1056: Unexpected character '\u070F'
-    //         int \\u070Fidentifier1 = 1;
+    // 		int \\u070Fidentifier1 = 1;
     Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "").WithArguments(@"\u070F"),
     // (7,14): error CS1002: ; expected
-    //         int \\u070Fidentifier1 = 1;
+    // 		int \\u070Fidentifier1 = 1;
     Diagnostic(ErrorCode.ERR_SemicolonExpected, "identifier1"));
         }
 

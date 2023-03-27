@@ -7,5 +7,5 @@ class A {
 }
 
 class B : A {
-    public override event EventHandler MyMissingSuperclassEvent;
+	public override event EventHandler MyMissingSuperclassEvent;
 }

@@ -2,7 +2,7 @@
 // SettingsManageability.cs
 //
 // Author:
-//    Atsushi Enomoto  <atsushi@ximian.com>
+//	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,9 +30,9 @@ using System.Collections;
 
 namespace System.Configuration
 {
-    public enum SettingsManageability
-    {
-        Roaming
-    }
+	public enum SettingsManageability
+	{
+		Roaming
+	}
 }
 

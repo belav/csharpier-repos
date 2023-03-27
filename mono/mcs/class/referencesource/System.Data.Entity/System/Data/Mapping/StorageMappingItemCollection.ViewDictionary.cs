@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------
+﻿//---------------------------------------------------------------------
 // <copyright file="StorageMappingItemCollection.ViewDictionary.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>

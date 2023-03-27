@@ -2,7 +2,7 @@
 // X509ChainElementCollection.cs - System.Security.Cryptography.X509Certificates.X509ChainElementCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 // Copyright (C) 2006 Novell Inc. (http://www.novell.com)
@@ -33,79 +33,79 @@ using System.Collections;
 
 namespace System.Security.Cryptography.X509Certificates {
 
-    public sealed class X509ChainElementCollection : ICollection, IEnumerable {
+	public sealed class X509ChainElementCollection : ICollection, IEnumerable {
 
-        private ArrayList _list;
+		private ArrayList _list;
 
-        // constructors
+		// constructors
 
-        // only accessible from X509Chain
-        internal X509ChainElementCollection () 
-        {
-            _list = new ArrayList ();
-        }
+		// only accessible from X509Chain
+		internal X509ChainElementCollection () 
+		{
+			_list = new ArrayList ();
+		}
 
-        // properties
+		// properties
 
-        public int Count {
-            get { return _list.Count; }
-        }
+		public int Count {
+			get { return _list.Count; }
+		}
 
-        public bool IsSynchronized {
-            get { return _list.IsSynchronized; }
-        }
+		public bool IsSynchronized {
+			get { return _list.IsSynchronized; }
+		}
 
-        public X509ChainElement this [int index] {
-            get { return (X509ChainElement) _list [index]; }
-        }
+		public X509ChainElement this [int index] {
+			get { return (X509ChainElement) _list [index]; }
+		}
 
-        public object SyncRoot {
-            get { return _list.SyncRoot; }
-        }
+		public object SyncRoot {
+			get { return _list.SyncRoot; }
+		}
 
-        // methods
+		// methods
 
-        public void CopyTo (X509ChainElement[] array, int index) 
-        {
-            _list.CopyTo ((Array)array, index);
-        }
+		public void CopyTo (X509ChainElement[] array, int index) 
+		{
+			_list.CopyTo ((Array)array, index);
+		}
 
-        void ICollection.CopyTo (Array array, int index) 
-        {
-            _list.CopyTo (array, index);
-        }
+		void ICollection.CopyTo (Array array, int index) 
+		{
+			_list.CopyTo (array, index);
+		}
 
-        public X509ChainElementEnumerator GetEnumerator ()
-        {
-            return new X509ChainElementEnumerator (_list);
-        }
+		public X509ChainElementEnumerator GetEnumerator ()
+		{
+			return new X509ChainElementEnumerator (_list);
+		}
 
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return new X509ChainElementEnumerator (_list);
-        }
+		IEnumerator IEnumerable.GetEnumerator ()
+		{
+			return new X509ChainElementEnumerator (_list);
+		}
 
-        // private stuff
+		// private stuff
 
-        internal void Add (X509Certificate2 certificate)
-        {
-            _list.Add (new X509ChainElement (certificate));
-        }
+		internal void Add (X509Certificate2 certificate)
+		{
+			_list.Add (new X509ChainElement (certificate));
+		}
 
-        internal void Clear ()
-        {
-            _list.Clear ();
-        }
+		internal void Clear ()
+		{
+			_list.Clear ();
+		}
 
-        internal bool Contains (X509Certificate2 certificate)
-        {
-            for (int i=0; i < _list.Count; i++) {
-                if (certificate.Equals (( _list [i] as X509ChainElement).Certificate))
-                    return true;
-            }
-            return false;
-        }
-    }
+		internal bool Contains (X509Certificate2 certificate)
+		{
+			for (int i=0; i < _list.Count; i++) {
+				if (certificate.Equals (( _list [i] as X509ChainElement).Certificate))
+					return true;
+			}
+			return false;
+		}
+	}
 }
 
 #endif

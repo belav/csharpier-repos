@@ -2,7 +2,7 @@
 // System.Web.Configuration.SecurityPolicySection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -34,28 +34,28 @@ using System.Configuration;
 
 namespace System.Web.Configuration {
 
-    public sealed class SecurityPolicySection : ConfigurationSection
-    {
-        static ConfigurationProperty Prop;
-        static ConfigurationPropertyCollection properties;
+	public sealed class SecurityPolicySection : ConfigurationSection
+	{
+		static ConfigurationProperty Prop;
+		static ConfigurationPropertyCollection properties;
 
-        static SecurityPolicySection ()
-        {
-            Prop = new ConfigurationProperty ("", typeof (TrustLevelCollection), null,
-                              null, null, ConfigurationPropertyOptions.IsDefaultCollection);
-            properties = new ConfigurationPropertyCollection ();
+		static SecurityPolicySection ()
+		{
+			Prop = new ConfigurationProperty ("", typeof (TrustLevelCollection), null,
+							  null, null, ConfigurationPropertyOptions.IsDefaultCollection);
+			properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (Prop);
-        }
+			properties.Add (Prop);
+		}
 
-        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public TrustLevelCollection TrustLevels {
-            get { return (TrustLevelCollection) base [Prop];}
-        }
+		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+		public TrustLevelCollection TrustLevels {
+			get { return (TrustLevelCollection) base [Prop];}
+		}
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get { return properties; }
-        }
-    }
+		protected internal override ConfigurationPropertyCollection Properties {
+			get { return properties; }
+		}
+	}
 }
 

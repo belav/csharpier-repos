@@ -2,7 +2,7 @@
 // XmlElementElement.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2006 Novell, Inc.  http://www.novell.com
 //
@@ -54,42 +54,42 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class XmlElementElement
-         : ConfigurationElement
-    {
-        public XmlElementElement () {
-        }
+	public sealed class XmlElementElement
+		 : ConfigurationElement
+	{
+		public XmlElementElement () {
+		}
 
-        public XmlElementElement (XmlElement element) {
-            XmlElement = element;
-        }
+		public XmlElementElement (XmlElement element) {
+			XmlElement = element;
+		}
 
-        // Properties
+		// Properties
 
-        protected override ConfigurationPropertyCollection Properties {
-            get { return base.Properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			get { return base.Properties; }
+		}
 
-        [ConfigurationProperty ("xmlElement",
-             DefaultValue = null,
-             Options = ConfigurationPropertyOptions.IsKey,
-            IsKey = true)]
-        public XmlElement XmlElement {
-            get { return (XmlElement) base ["xmlElement"]; }
-            set { base ["xmlElement"] = value; }
-        }
+		[ConfigurationProperty ("xmlElement",
+			 DefaultValue = null,
+			 Options = ConfigurationPropertyOptions.IsKey,
+			IsKey = true)]
+		public XmlElement XmlElement {
+			get { return (XmlElement) base ["xmlElement"]; }
+			set { base ["xmlElement"] = value; }
+		}
 
-        protected override void DeserializeElement (XmlReader reader, bool serializeCollectionKey) {
-            base.DeserializeElement (reader, serializeCollectionKey);
-        }
+		protected override void DeserializeElement (XmlReader reader, bool serializeCollectionKey) {
+			base.DeserializeElement (reader, serializeCollectionKey);
+		}
 
-        protected override void PostDeserialize () {
-            base.PostDeserialize ();
-        }
+		protected override void PostDeserialize () {
+			base.PostDeserialize ();
+		}
 
-        protected override bool SerializeToXmlElement (XmlWriter writer, string elementName) {
-            return base.SerializeToXmlElement (writer, elementName);
-        }
-    }
+		protected override bool SerializeToXmlElement (XmlWriter writer, string elementName) {
+			return base.SerializeToXmlElement (writer, elementName);
+		}
+	}
 
 }

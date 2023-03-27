@@ -2,7 +2,7 @@
 // UserCancellationException.cs
 //
 // Author:
-//    Atsushi Enomoto <atsushi@ximian.com>
+//	Atsushi Enomoto <atsushi@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
@@ -30,28 +30,28 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Selectors
 {
-    [Serializable]
-    public class UserCancellationException : Exception
-    {
-        public UserCancellationException ()
-            : this ("the InfoCard user cancelled the operation.")
-        {
-        }
+	[Serializable]
+	public class UserCancellationException : Exception
+	{
+		public UserCancellationException ()
+			: this ("the InfoCard user cancelled the operation.")
+		{
+		}
 
-        public UserCancellationException (string message)
-            : this (message, null)
-        {
-        }
+		public UserCancellationException (string message)
+			: this (message, null)
+		{
+		}
 
-        protected UserCancellationException (SerializationInfo info,
-            StreamingContext context)
-            : base (info, context)
-        {
-        }
+		protected UserCancellationException (SerializationInfo info,
+			StreamingContext context)
+			: base (info, context)
+		{
+		}
 
-        public UserCancellationException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
-    }
+		public UserCancellationException (string message, Exception innerException)
+			: base (message, innerException)
+		{
+		}
+	}
 }

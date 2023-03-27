@@ -1,4 +1,4 @@
-namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc {
     using System;
     using System.Reflection;
     using System.Web.Mvc.Resources;

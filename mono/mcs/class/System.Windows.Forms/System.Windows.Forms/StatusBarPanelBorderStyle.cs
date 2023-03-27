@@ -20,14 +20,14 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 
 
 namespace System.Windows.Forms {
 
-    public enum StatusBarPanelBorderStyle {
-        None = 1,
-        Raised,
-        Sunken
-    }
+	public enum StatusBarPanelBorderStyle {
+		None = 1,
+		Raised,
+		Sunken
+	}
 }

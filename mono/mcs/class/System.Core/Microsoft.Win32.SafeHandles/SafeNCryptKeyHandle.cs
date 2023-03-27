@@ -2,7 +2,7 @@
 // SafeNCryptKeyHandle.cs
 //
 // Authors:
-//    Marek Safar  <marek.safar@gmail.com>
+//	Marek Safar  <marek.safar@gmail.com>
 //
 // Copyright (C) 2016 Xamarin Inc (http://www.xamarin.com)
 //
@@ -30,21 +30,21 @@ using System;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed class SafeNCryptKeyHandle : SafeNCryptHandle
-    {
-        public SafeNCryptKeyHandle ()
-        {
-        }
+	public sealed class SafeNCryptKeyHandle : SafeNCryptHandle
+	{
+		public SafeNCryptKeyHandle ()
+		{
+		}
 
-        public SafeNCryptKeyHandle (IntPtr handle, System.Runtime.InteropServices.SafeHandle parentHandle)
-            : base (handle, parentHandle)
-        {
+		public SafeNCryptKeyHandle (IntPtr handle, System.Runtime.InteropServices.SafeHandle parentHandle)
+			: base (handle, parentHandle)
+		{
 
-        }
+		}
 
-        protected override bool ReleaseNativeHandle ()
-        {
-            return false;
-        }
-    }
-}    
+		protected override bool ReleaseNativeHandle ()
+		{
+			return false;
+		}
+	}
+}	

@@ -32,52 +32,52 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-    internal class DiscoveryEndpointPublisherBehavior : IEndpointBehavior
-    {
-        DiscoveryServiceExtension extension;
+	internal class DiscoveryEndpointPublisherBehavior : IEndpointBehavior
+	{
+		DiscoveryServiceExtension extension;
 
-        internal DiscoveryEndpointPublisherBehavior (DiscoveryServiceExtension extension)
-        {
-            this.extension = extension;
-        }
+		internal DiscoveryEndpointPublisherBehavior (DiscoveryServiceExtension extension)
+		{
+			this.extension = extension;
+		}
 
-        void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-        {
-            if (endpoint == null)
-                throw new ArgumentNullException ("endpoint");
-            if (bindingParameters == null)
-                throw new ArgumentNullException ("bindingParameters");
-        }
+		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+		{
+			if (endpoint == null)
+				throw new ArgumentNullException ("endpoint");
+			if (bindingParameters == null)
+				throw new ArgumentNullException ("bindingParameters");
+		}
 
-        void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-        {
-            if (endpoint == null)
-                throw new ArgumentNullException ("endpoint");
-            if (clientRuntime == null)
-                throw new ArgumentNullException ("clientRuntime");
-        }
+		void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint endpoint, ClientRuntime clientRuntime)
+		{
+			if (endpoint == null)
+				throw new ArgumentNullException ("endpoint");
+			if (clientRuntime == null)
+				throw new ArgumentNullException ("clientRuntime");
+		}
 
-        void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
-        {
-        // It is applied to the ServiceEndpoints in the ServiceHost which has ServiceDiscoveryBehavior as one of its service behaviors.
-        // That is, this target endpoint is an endpoint in the target service itself, not for "announcement service".
-            if (endpoint == null)
-                throw new ArgumentNullException ("endpoint");
-            if (endpointDispatcher == null)
-                throw new ArgumentNullException ("endpointDispatcher");
+		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+		{
+		// It is applied to the ServiceEndpoints in the ServiceHost which has ServiceDiscoveryBehavior as one of its service behaviors.
+		// That is, this target endpoint is an endpoint in the target service itself, not for "announcement service".
+			if (endpoint == null)
+				throw new ArgumentNullException ("endpoint");
+			if (endpointDispatcher == null)
+				throw new ArgumentNullException ("endpointDispatcher");
 
-            var edb = endpoint.Behaviors.Find<EndpointDiscoveryBehavior> ();
-            if (edb != null && !edb.Enabled)
-                return;
+			var edb = endpoint.Behaviors.Find<EndpointDiscoveryBehavior> ();
+			if (edb != null && !edb.Enabled)
+				return;
 
-            var edm = EndpointDiscoveryMetadata.FromServiceEndpoint (endpoint);
-            extension.PublishedInternalEndpoints.Add (edm);
-        }
+			var edm = EndpointDiscoveryMetadata.FromServiceEndpoint (endpoint);
+			extension.PublishedInternalEndpoints.Add (edm);
+		}
 
-        void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
-        {
-            if (endpoint == null)
-                throw new ArgumentNullException ("endpoint");
-        }
-    }
+		void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
+		{
+			if (endpoint == null)
+				throw new ArgumentNullException ("endpoint");
+		}
+	}
 }

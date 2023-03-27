@@ -25,9 +25,9 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-    public interface IXamlSchemaContextProvider
-    {
-        XamlSchemaContext SchemaContext { get; }
-    }
+	public interface IXamlSchemaContextProvider
+	{
+		XamlSchemaContext SchemaContext { get; }
+	}
 
 }

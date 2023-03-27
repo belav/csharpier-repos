@@ -5,12 +5,12 @@ using System;
 
 class C
 {
-    static void Main ()
-    {
-        Foo (new TypedReference ());
-    }
+	static void Main ()
+	{
+		Foo (new TypedReference ());
+	}
 
-    static void Foo<T> (T arg)
-    {
-    }
+	static void Foo<T> (T arg)
+	{
+	}
 }

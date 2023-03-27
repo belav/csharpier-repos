@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -42,47 +42,47 @@ using System.Threading.Tasks;
 
 namespace X
 { 
-    class DynamicMembers
-    {
-        public Func<Task<int>> Prop { get; set; }
-    }
-    public sealed partial class TestCase
-    {
-        private static int Count = 0;
-        public async void Run()
-        {
-            DynamicMembers dc2 = new DynamicMembers();
-            dc2.Prop = async () => { await Task.Delay(10000); return 3; };
-            var rez2 = await dc2.Prop();
-            if (rez2 == 3) Count++;
-     
-            Driver.Result = TestCase.Count - 1;
-            //When test complete, set the flag.
-            Driver.CompletedSignal.Set();
-        }
+	class DynamicMembers
+	{
+		public Func<Task<int>> Prop { get; set; }
+	}
+	public sealed partial class TestCase
+	{
+		private static int Count = 0;
+		public async void Run()
+		{
+			DynamicMembers dc2 = new DynamicMembers();
+			dc2.Prop = async () => { await Task.Delay(10000); return 3; };
+			var rez2 = await dc2.Prop();
+			if (rez2 == 3) Count++;
+	 
+			Driver.Result = TestCase.Count - 1;
+			//When test complete, set the flag.
+			Driver.CompletedSignal.Set();
+		}
 
         static  partial void Goo();
         static  partial void Bar();
-    }
+	}
 
-    public sealed partial class TestCase
+	public sealed partial class TestCase
     {
         static partial void Bar(){}
     }
 
-    class Driver
-    {
-        public static int Result = -1;
-        public static AutoResetEvent CompletedSignal = new AutoResetEvent(false);
-        static int Main()
-        {
-            var t = new TestCase();
-            t.Run();
-     
-            CompletedSignal.WaitOne();
-            return Driver.Result;
-        }
-    }
+	class Driver
+	{
+		public static int Result = -1;
+		public static AutoResetEvent CompletedSignal = new AutoResetEvent(false);
+		static int Main()
+		{
+			var t = new TestCase();
+			t.Run();
+	 
+			CompletedSignal.WaitOne();
+			return Driver.Result;
+		}
+	}
 }";
             string expected = @"
 <token-map>
@@ -122,8 +122,8 @@ namespace X
             var text = @"
 namespace X
 { 
-    class DynamicMembers
-    {
+	class DynamicMembers
+	{
         enum HRESULT : int
         {
             S_OK = 0x0000,
@@ -170,36 +170,36 @@ using System;
 
 namespace X
 { 
-    public delegate void D(int k);
+	public delegate void D(int k);
 
-    public sealed class TestCase
-    {
-        static TestCase()
-        {
-        }
+	public sealed class TestCase
+	{
+		static TestCase()
+		{
+		}
 
-        public TestCase(int rr)
-        {
-        }
-        
-        public event D E;
-        
-        public event Action E2;
-        
-        public int P { get; set; }
-        
-        public int P2 
-        { 
-            get{ return 1; }
-            set{}
-        }
-        
-        public int this[int a]
-        {
-            get{ return 1; }
-            set{}
-        }
-    }
+		public TestCase(int rr)
+		{
+		}
+		
+		public event D E;
+		
+		public event Action E2;
+		
+		public int P { get; set; }
+		
+		public int P2 
+		{ 
+			get{ return 1; }
+			set{}
+		}
+		
+		public int this[int a]
+		{
+			get{ return 1; }
+			set{}
+		}
+	}
 }";
             #endregion
 
@@ -249,14 +249,14 @@ namespace X
             var text = @"
 namespace X
 { 
-    public sealed class TestCase
-    {
-        public void M() 
-        { 
-            var a = new { x = 1, y = new { a = 1 } };
-            var b = new { t = new { t = new { t = new { t = new { a = 1 } } } } };
-        }
-    }
+	public sealed class TestCase
+	{
+		public void M() 
+		{ 
+			var a = new { x = 1, y = new { a = 1 } };
+			var b = new { t = new { t = new { t = new { t = new { a = 1 } } } } };
+		}
+	}
 }";
             #endregion
 

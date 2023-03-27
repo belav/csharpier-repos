@@ -20,7 +20,7 @@
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 
 using System;
@@ -28,46 +28,46 @@ using System.Security;
 
 namespace System.Windows.Interop {
 
-    public static class ComponentDispatcher
-    {
-        public static MSG CurrentKeyboardMessage {
-            [SecurityCritical]
-            get { throw new NotImplementedException (); }
-        }
+	public static class ComponentDispatcher
+	{
+		public static MSG CurrentKeyboardMessage {
+			[SecurityCritical]
+			get { throw new NotImplementedException (); }
+		}
 
-        public static bool IsThreadModal {
-            [SecurityCritical]
-            get { throw new NotImplementedException (); }
-        }
+		public static bool IsThreadModal {
+			[SecurityCritical]
+			get { throw new NotImplementedException (); }
+		}
 
-        public static event EventHandler EnterThreadModal;
-        public static event EventHandler LeaveThreadModal;
-        public static event ThreadMessageEventHandler ThreadFilterMessage;
-        public static event EventHandler ThreadIdle;
-        public static event ThreadMessageEventHandler ThreadPreprocessMessage;
+		public static event EventHandler EnterThreadModal;
+		public static event EventHandler LeaveThreadModal;
+		public static event ThreadMessageEventHandler ThreadFilterMessage;
+		public static event EventHandler ThreadIdle;
+		public static event ThreadMessageEventHandler ThreadPreprocessMessage;
 
-        [SecurityCritical]
-        public static void PopModal()
-        {
-            throw new NotImplementedException ();
-        }
+		[SecurityCritical]
+		public static void PopModal()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [SecurityCritical]
-        public static void PushModal()
-        {
-            throw new NotImplementedException ();
-        }
+		[SecurityCritical]
+		public static void PushModal()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [SecurityCritical]
-        public static void RaiseIdle()
-        {
-            throw new NotImplementedException ();
-        }
+		[SecurityCritical]
+		public static void RaiseIdle()
+		{
+			throw new NotImplementedException ();
+		}
 
-        [SecurityCritical]
-        public static bool RaiseThreadMessage (ref MSG msg)
-        {
-            throw new NotImplementedException ();
-        }
-    }
+		[SecurityCritical]
+		public static bool RaiseThreadMessage (ref MSG msg)
+		{
+			throw new NotImplementedException ();
+		}
+	}
 }

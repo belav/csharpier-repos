@@ -36,9 +36,9 @@ namespace MonoTests.System.MarshalByRefObjectTestInternal
       // By default InitialLeaseTime is set to 5 minutes
       // we set it at 10 seconds
       if(lease.CurrentState == LeaseState.Initial)
-    {
-    lease.InitialLeaseTime = TimeSpan.FromSeconds(10);
-    }
+	{
+	lease.InitialLeaseTime = TimeSpan.FromSeconds(10);
+	}
       return lease;
       }
 

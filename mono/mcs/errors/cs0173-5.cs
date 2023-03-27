@@ -3,9 +3,9 @@
 
 class X
 {
-    static void Main ()
-    {
-        dynamic d = null;
-        dynamic t = true ? d : Main ();
-    }
+	static void Main ()
+	{
+		dynamic d = null;
+		dynamic t = true ? d : Main ();
+	}
 }

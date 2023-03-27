@@ -2598,7 +2598,7 @@ namespace System {
                 currBlockCodes = 0x000000FFu;                
 
             } else { // '=' can also be at the pre-last position iff the last is also a '=' excluding the white spaces:
-                
+				
                 // We need to get rid of any intermediate white spaces.
                 // Otherwise we would be rejecting input such as "abc= =":
                 while (inputPtr < (endInputPtr - 1))

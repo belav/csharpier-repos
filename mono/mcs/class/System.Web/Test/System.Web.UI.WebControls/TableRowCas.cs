@@ -2,7 +2,7 @@
 // TableRowCas.cs - CAS unit tests for System.Web.UI.WebControls.TableRow
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -37,40 +37,40 @@ using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class TableRowCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class TableRowCas : AspNetHostingMinimal {
 
-        public virtual TableRowTest GetUnitTests ()
-        {
-            return new TableRowTest ();
-        }
+		public virtual TableRowTest GetUnitTests ()
+		{
+			return new TableRowTest ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            TableRowTest unit = GetUnitTests ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.CleanProperties ();
-            unit.Render ();
-            unit.Render_Style ();
-            unit.CreateControlStyle ();
-            unit.Cells ();
-            unit.ControlsAdd_TableCell ();
-            unit.ControlsAdd_TestTableRow ();
-            unit.ControlsAddAt_TableRow ();
-            unit.ControlsAddAt_TestTableRow ();
-            unit.RenderBeginTag_Empty ();
-            unit.RenderBeginTag_HorizontalAlign ();
-            unit.RenderBeginTag_Cells ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			TableRowTest unit = GetUnitTests ();
+			unit.DefaultProperties ();
+			unit.NullProperties ();
+			unit.CleanProperties ();
+			unit.Render ();
+			unit.Render_Style ();
+			unit.CreateControlStyle ();
+			unit.Cells ();
+			unit.ControlsAdd_TableCell ();
+			unit.ControlsAdd_TestTableRow ();
+			unit.ControlsAddAt_TableRow ();
+			unit.ControlsAddAt_TestTableRow ();
+			unit.RenderBeginTag_Empty ();
+			unit.RenderBeginTag_HorizontalAlign ();
+			unit.RenderBeginTag_Cells ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (TableRow); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (TableRow); }
+		}
+	}
 }

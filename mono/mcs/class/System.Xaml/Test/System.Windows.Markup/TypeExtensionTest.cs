@@ -34,88 +34,88 @@ using Category = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.Windows.Markup
 {
-    [TestFixture]
-    public class TypeExtensionTest
-    {
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNullType ()
-        {
-            new TypeExtension ((Type) null);
-        }
+	[TestFixture]
+	public class TypeExtensionTest
+	{
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void ConstructorNullType ()
+		{
+			new TypeExtension ((Type) null);
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNullName ()
-        {
-            new TypeExtension ((string) null);
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void ConstructorNullName ()
+		{
+			new TypeExtension ((string) null);
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ProvideValueWithoutTypeOrName ()
-        {
-            new TypeExtension ().ProvideValue (null);
-        }
+		[Test]
+		[ExpectedException (typeof (InvalidOperationException))]
+		public void ProvideValueWithoutTypeOrName ()
+		{
+			new TypeExtension ().ProvideValue (null);
+		}
 
-        [Test]
-        public void ProvideValueWithType ()
-        {
-            var x = new TypeExtension (typeof (int));
-            Assert.AreEqual (typeof (int), x.ProvideValue (null), "#1"); // serviceProvider is not required.
-        }
+		[Test]
+		public void ProvideValueWithType ()
+		{
+			var x = new TypeExtension (typeof (int));
+			Assert.AreEqual (typeof (int), x.ProvideValue (null), "#1"); // serviceProvider is not required.
+		}
 
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ProvideValueWithNameWithoutResolver ()
-        {
-            var x = new TypeExtension ("System.Int32");
-            x.ProvideValue (null); // serviceProvider is required.
-        }
+		[Test]
+		[ExpectedException (typeof (ArgumentNullException))]
+		public void ProvideValueWithNameWithoutResolver ()
+		{
+			var x = new TypeExtension ("System.Int32");
+			x.ProvideValue (null); // serviceProvider is required.
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ProvideValueWithNameWithProviderNoResolver ()
-        {
-            var x = new TypeExtension ("System.Int32");
-            x.ProvideValue (new Resolver (false, false));
-        }
+		[Test]
+		[ExpectedException (typeof (InvalidOperationException))]
+		public void ProvideValueWithNameWithProviderNoResolver ()
+		{
+			var x = new TypeExtension ("System.Int32");
+			x.ProvideValue (new Resolver (false, false));
+		}
 
-        [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ProvideValueWithNameWithProviderResolveFail ()
-        {
-            var x = new TypeExtension ("System.Int32");
-            x.ProvideValue (new Resolver (true, false)); // raise an error (do not return null)
-        }
+		[Test]
+		[ExpectedException (typeof (InvalidOperationException))]
+		public void ProvideValueWithNameWithProviderResolveFail ()
+		{
+			var x = new TypeExtension ("System.Int32");
+			x.ProvideValue (new Resolver (true, false)); // raise an error (do not return null)
+		}
 
-        [Test]
-        public void ProvideValueWithNameWithProviderResolveSuccess ()
-        {
-            var x = new TypeExtension ("System.Int32");
-            x.ProvideValue (new Resolver (true, true));
-        }
+		[Test]
+		public void ProvideValueWithNameWithProviderResolveSuccess ()
+		{
+			var x = new TypeExtension ("System.Int32");
+			x.ProvideValue (new Resolver (true, true));
+		}
 
-        class Resolver : IServiceProvider, IXamlTypeResolver
-        {
-            bool works, resolves;
+		class Resolver : IServiceProvider, IXamlTypeResolver
+		{
+			bool works, resolves;
 
-            public Resolver (bool worksFine, bool resolvesFine)
-            {
-                works = worksFine;
-                resolves = resolvesFine;
-            }
+			public Resolver (bool worksFine, bool resolvesFine)
+			{
+				works = worksFine;
+				resolves = resolvesFine;
+			}
 
-            public object GetService (Type serviceType)
-            {
-                Assert.AreEqual (typeof (IXamlTypeResolver), serviceType, "TypeToResolve");
-                return works ? this : null;
-            }
+			public object GetService (Type serviceType)
+			{
+				Assert.AreEqual (typeof (IXamlTypeResolver), serviceType, "TypeToResolve");
+				return works ? this : null;
+			}
 
-            public Type Resolve (string name)
-            {
-                return resolves ? Type.GetType (name) : null;
-            }
-        }
-    }
+			public Type Resolve (string name)
+			{
+				return resolves ? Type.GetType (name) : null;
+			}
+		}
+	}
 }

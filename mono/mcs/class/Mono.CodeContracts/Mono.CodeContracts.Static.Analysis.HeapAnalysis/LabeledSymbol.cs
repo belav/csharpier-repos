@@ -2,7 +2,7 @@
 // LabeledSymbol.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -28,37 +28,37 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis {
-    struct LabeledSymbol<Label, TSymValue> : IEquatable<LabeledSymbol<Label, TSymValue>>
-        where TSymValue : IEquatable<TSymValue> {
-        public readonly Label ReadAt;
-        public readonly TSymValue Symbol;
+	struct LabeledSymbol<Label, TSymValue> : IEquatable<LabeledSymbol<Label, TSymValue>>
+		where TSymValue : IEquatable<TSymValue> {
+		public readonly Label ReadAt;
+		public readonly TSymValue Symbol;
 
-        public LabeledSymbol (Label readAt, TSymValue symbol)
-        {
-            this.ReadAt = readAt;
-            this.Symbol = symbol;
-        }
+		public LabeledSymbol (Label readAt, TSymValue symbol)
+		{
+			this.ReadAt = readAt;
+			this.Symbol = symbol;
+		}
 
-        #region Implementation of IEquatable<ExternalExpression<Label,SymbolicValue>>
-        public bool Equals (LabeledSymbol<Label, TSymValue> other)
-        {
-            return this.Symbol.Equals (other.Symbol);
-        }
-        #endregion
+		#region Implementation of IEquatable<ExternalExpression<Label,SymbolicValue>>
+		public bool Equals (LabeledSymbol<Label, TSymValue> other)
+		{
+			return this.Symbol.Equals (other.Symbol);
+		}
+		#endregion
 
-        public override bool Equals (object obj)
-        {
-            return obj is LabeledSymbol<Label, TSymValue> && Equals ((LabeledSymbol<Label, TSymValue>) obj);
-        }
+		public override bool Equals (object obj)
+		{
+			return obj is LabeledSymbol<Label, TSymValue> && Equals ((LabeledSymbol<Label, TSymValue>) obj);
+		}
 
-        public override int GetHashCode ()
-        {
-            return this.Symbol.GetHashCode ();
-        }
+		public override int GetHashCode ()
+		{
+			return this.Symbol.GetHashCode ();
+		}
 
-        public override string ToString ()
-        {
-            return string.Format ("{0}@{1}", this.Symbol, this.ReadAt);
-        }
-    }
+		public override string ToString ()
+		{
+			return string.Format ("{0}@{1}", this.Symbol, this.ReadAt);
+		}
+	}
 }

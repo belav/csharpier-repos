@@ -28,71 +28,71 @@
 
 namespace Mono.Cecil.Binary {
 
-    internal sealed class ImportAddressTable : IBinaryVisitable {
+	internal sealed class ImportAddressTable : IBinaryVisitable {
 
-        public RVA HintNameTableRVA;
+		public RVA HintNameTableRVA;
 
-        internal ImportAddressTable ()
-        {
-        }
+		internal ImportAddressTable ()
+		{
+		}
 
-        public void Accept (IBinaryVisitor visitor)
-        {
-            visitor.VisitImportAddressTable (this);
-        }
-    }
+		public void Accept (IBinaryVisitor visitor)
+		{
+			visitor.VisitImportAddressTable (this);
+		}
+	}
 
-    internal sealed class ImportTable : IBinaryVisitable {
+	internal sealed class ImportTable : IBinaryVisitable {
 
-        public RVA ImportLookupTable;
-        public uint DateTimeStamp;
-        public uint ForwardChain;
-        public RVA Name;
-        public RVA ImportAddressTable;
+		public RVA ImportLookupTable;
+		public uint DateTimeStamp;
+		public uint ForwardChain;
+		public RVA Name;
+		public RVA ImportAddressTable;
 
-        internal ImportTable ()
-        {
-        }
+		internal ImportTable ()
+		{
+		}
 
-        public void Accept (IBinaryVisitor visitor)
-        {
-            visitor.VisitImportTable (this);
-        }
-    }
+		public void Accept (IBinaryVisitor visitor)
+		{
+			visitor.VisitImportTable (this);
+		}
+	}
 
-    internal sealed class ImportLookupTable : IBinaryVisitable {
+	internal sealed class ImportLookupTable : IBinaryVisitable {
 
-        public RVA HintNameRVA;
+		public RVA HintNameRVA;
 
-        internal ImportLookupTable ()
-        {
-        }
+		internal ImportLookupTable ()
+		{
+		}
 
-        public void Accept (IBinaryVisitor visitor)
-        {
-            visitor.VisitImportLookupTable (this);
-        }
-    }
+		public void Accept (IBinaryVisitor visitor)
+		{
+			visitor.VisitImportLookupTable (this);
+		}
+	}
 
-    internal sealed class HintNameTable : IBinaryVisitable {
+	internal sealed class HintNameTable : IBinaryVisitable {
 
-        public const string RuntimeMainExe = "_CorExeMain";
-        public const string RuntimeMainDll = "_CorDllMain";
-        public const string RuntimeCorEE = "mscoree.dll";
+		public const string RuntimeMainExe = "_CorExeMain";
+		public const string RuntimeMainDll = "_CorDllMain";
+		public const string RuntimeCorEE = "mscoree.dll";
 
-        public ushort Hint;
-        public string RuntimeMain;
-        public string RuntimeLibrary;
-        public ushort EntryPoint;
-        public RVA RVA;
+		public ushort Hint;
+		public string RuntimeMain;
+		public string RuntimeLibrary;
+		public ushort EntryPoint;
+		public RVA RVA;
 
-        internal HintNameTable ()
-        {
-        }
+		internal HintNameTable ()
+		{
+		}
 
-        public void Accept (IBinaryVisitor visitor)
-        {
-            visitor.VisitHintNameTable (this);
-        }
-    }
+		public void Accept (IBinaryVisitor visitor)
+		{
+			visitor.VisitHintNameTable (this);
+		}
+	}
 }

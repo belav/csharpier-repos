@@ -19,21 +19,21 @@ using Microsoft.Win32;
 namespace System.IO.Ports
 {
     public enum SerialData 
-    {
-        Chars = NativeMethods.EV_RXCHAR,
-        Eof = NativeMethods.EV_RXFLAG,
-    }
+	{
+	    Chars = NativeMethods.EV_RXCHAR,
+		Eof = NativeMethods.EV_RXFLAG,
+	}
 
     public class SerialDataReceivedEventArgs : EventArgs 
     {
         internal SerialData receiveType;
-        internal SerialDataReceivedEventArgs (SerialData eventCode) {
-            receiveType = eventCode;
-        }
+    	internal SerialDataReceivedEventArgs (SerialData eventCode) {
+    	    receiveType = eventCode;
+    	}
 
-        public SerialData EventType { 
-            get { return receiveType; }
-        }
+    	public SerialData EventType { 
+    	    get { return receiveType; }
+    	}
     }
 
     public delegate void SerialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e);

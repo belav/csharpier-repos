@@ -1,8 +1,8 @@
 //
 // System.ComponentModel.Design.ExtenderService
 //
-// Authors:     
-//      Ivan N. Zlatev (contact i-nZ.net)
+// Authors:	 
+//	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
 
@@ -34,50 +34,50 @@ using System.ComponentModel;
 namespace System.ComponentModel.Design
 {
 
-    internal sealed class ExtenderService : IExtenderProviderService, IExtenderListService, IDisposable
-    {
+	internal sealed class ExtenderService : IExtenderProviderService, IExtenderListService, IDisposable
+	{
 
-        private ArrayList _extenderProviders;
+		private ArrayList _extenderProviders;
 
-        public ExtenderService ()
-        {
-            _extenderProviders = new ArrayList ();
-        }
-        
-        public void AddExtenderProvider (IExtenderProvider provider)
-        {
-            if (_extenderProviders != null) {
-                if (!_extenderProviders.Contains (provider))
-                    _extenderProviders.Add (provider);
-            }
-        }
+		public ExtenderService ()
+		{
+			_extenderProviders = new ArrayList ();
+		}
+		
+		public void AddExtenderProvider (IExtenderProvider provider)
+		{
+			if (_extenderProviders != null) {
+				if (!_extenderProviders.Contains (provider))
+					_extenderProviders.Add (provider);
+			}
+		}
 
-        public void RemoveExtenderProvider (IExtenderProvider provider)
-        {
-            if (_extenderProviders != null) {
-                if (_extenderProviders.Contains (provider))
-                    _extenderProviders.Remove (provider);
-            }
-        }
-        
-        public IExtenderProvider[] GetExtenderProviders()
-        {
-            if (_extenderProviders != null) {
-                IExtenderProvider[] result = new IExtenderProvider[_extenderProviders.Count];
-                _extenderProviders.CopyTo (result, 0);
-                
-                return result;
-            }
-            return null;
-        }
+		public void RemoveExtenderProvider (IExtenderProvider provider)
+		{
+			if (_extenderProviders != null) {
+				if (_extenderProviders.Contains (provider))
+					_extenderProviders.Remove (provider);
+			}
+		}
+		
+		public IExtenderProvider[] GetExtenderProviders()
+		{
+			if (_extenderProviders != null) {
+				IExtenderProvider[] result = new IExtenderProvider[_extenderProviders.Count];
+				_extenderProviders.CopyTo (result, 0);
+				
+				return result;
+			}
+			return null;
+		}
 
-        public void Dispose ()
-        {
-            if (_extenderProviders != null) {
-                _extenderProviders.Clear ();
-                _extenderProviders = null;
-            }
-        }
-    }
+		public void Dispose ()
+		{
+			if (_extenderProviders != null) {
+				_extenderProviders.Clear ();
+				_extenderProviders = null;
+			}
+		}
+	}
 }
 

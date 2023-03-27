@@ -2,7 +2,7 @@
 // FileLoadExceptionCas.cs - CAS unit tests for System.IO.FileLoadException
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -35,138 +35,138 @@ using System.Security.Permissions;
 
 namespace MonoCasTests.System.IO {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class FileLoadExceptionCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class FileLoadExceptionCas {
 
-        [SetUp]
-        public void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
-
-
-        [Test]
-        public void NoRestriction ()
-        {
-            FileLoadException fle = new FileLoadException ("message", "filename",
-                new FileLoadException ("inner message", "inner filename"));
-
-            Assert.AreEqual ("message", fle.Message, "Message");
-            Assert.AreEqual ("filename", fle.FileName, "FileName");
-            Assert.IsNull (fle.FusionLog, "FusionLog");
-            Assert.IsNotNull (fle.ToString (), "ToString");
-        }
-
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void FullRestriction ()
-        {
-            FileLoadException fle = new FileLoadException ("message", "filename",
-                new FileLoadException ("inner message", "inner filename"));
-
-            Assert.AreEqual ("message", fle.Message, "Message");
-            Assert.AreEqual ("filename", fle.FileName, "FileName");
-            Assert.IsNull (fle.FusionLog, "FusionLog");
-            // ToString doesn't work in this case and strangely throws a FileLoadException
-            Assert.IsNotNull (fle.ToString (), "ToString");
-        }
-
-        [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, ControlEvidence = true, ControlPolicy = true)]
-        public void GetFusionLog_Pass ()
-        {
-            FileLoadException fle = new FileLoadException ("message", "filename");
-            Assert.AreEqual ("message", fle.Message, "Message");
-            Assert.AreEqual ("filename", fle.FileName, "FileName");
-            Assert.IsNull (fle.FusionLog, "FusionLog");
-            // note: ToString doesn't work in this case
-        }
-
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlEvidence = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetFusionLog_Fail_ControlEvidence ()
-        {
-            FileLoadException fle = new FileLoadException ();
-            Assert.IsNull (fle.FusionLog, "FusionLog");
-        }
-
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetFusionLog_Fail_ControlPolicy ()
-        {
-            FileLoadException fle = new FileLoadException ();
-            Assert.IsNull (fle.FusionLog, "FusionLog");
-            // we don't have to throw the exception to have FusionLog
-            // informations restricted (even if there could be no
-            // data in this state).
-        }
+		[SetUp]
+		public void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
 
-        [Test]
-        public void Throw_NoRestriction ()
-        {
-            try {
-                throw new FileLoadException ("message", "filename",
-                    new FileLoadException ("inner message", "inner filename"));
-            }
-            catch (FileLoadException fle) {
-                Assert.AreEqual ("message", fle.Message, "Message");
-                Assert.AreEqual ("filename", fle.FileName, "FileName");
-                Assert.IsNull (fle.FusionLog, "FusionLog");
-                Assert.IsNotNull (fle.ToString (), "ToString");
-            }
-        }
+		[Test]
+		public void NoRestriction ()
+		{
+			FileLoadException fle = new FileLoadException ("message", "filename",
+				new FileLoadException ("inner message", "inner filename"));
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Throw_FullRestriction ()
-        {
-            try {
-                throw new FileLoadException ("message", "filename",
-                    new FileLoadException ("inner message", "inner filename"));
-            }
-            catch (FileLoadException fle) {
-                Assert.AreEqual ("message", fle.Message, "Message");
-                Assert.AreEqual ("filename", fle.FileName, "FileName");
-                // both FusionLog and ToString doesn't work in this case
-                // but strangely we get a FileLoadException
-                Assert.IsNull (fle.FusionLog, "FusionLog");
-                Assert.IsNotNull (fle.ToString (), "ToString");
-            }
-        }
+			Assert.AreEqual ("message", fle.Message, "Message");
+			Assert.AreEqual ("filename", fle.FileName, "FileName");
+			Assert.IsNull (fle.FusionLog, "FusionLog");
+			Assert.IsNotNull (fle.ToString (), "ToString");
+		}
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlEvidence = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Throw_GetFusionLog_Fail_ControlEvidence ()
-        {
-            try {
-                throw new FileLoadException ("message", "filename",
-                    new FileLoadException ("inner message", "inner filename"));
-            }
-            catch (FileLoadException fle) {
-                Assert.IsNull (fle.FusionLog, "FusionLog");
-            }
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void FullRestriction ()
+		{
+			FileLoadException fle = new FileLoadException ("message", "filename",
+				new FileLoadException ("inner message", "inner filename"));
 
-        [Test]
-        [SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Throw_GetFusionLog_Fail_ControlPolicy ()
-        {
-            try {
-                throw new FileLoadException ("message", "filename",
-                    new FileLoadException ("inner message", "inner filename"));
-            }
-            catch (FileLoadException fle) {
-                Assert.IsNull (fle.FusionLog, "FusionLog");
-            }
-        }
-    }
+			Assert.AreEqual ("message", fle.Message, "Message");
+			Assert.AreEqual ("filename", fle.FileName, "FileName");
+			Assert.IsNull (fle.FusionLog, "FusionLog");
+			// ToString doesn't work in this case and strangely throws a FileLoadException
+			Assert.IsNotNull (fle.ToString (), "ToString");
+		}
+
+		[Test]
+		[SecurityPermission (SecurityAction.PermitOnly, ControlEvidence = true, ControlPolicy = true)]
+		public void GetFusionLog_Pass ()
+		{
+			FileLoadException fle = new FileLoadException ("message", "filename");
+			Assert.AreEqual ("message", fle.Message, "Message");
+			Assert.AreEqual ("filename", fle.FileName, "FileName");
+			Assert.IsNull (fle.FusionLog, "FusionLog");
+			// note: ToString doesn't work in this case
+		}
+
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, ControlEvidence = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void GetFusionLog_Fail_ControlEvidence ()
+		{
+			FileLoadException fle = new FileLoadException ();
+			Assert.IsNull (fle.FusionLog, "FusionLog");
+		}
+
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void GetFusionLog_Fail_ControlPolicy ()
+		{
+			FileLoadException fle = new FileLoadException ();
+			Assert.IsNull (fle.FusionLog, "FusionLog");
+			// we don't have to throw the exception to have FusionLog
+			// informations restricted (even if there could be no
+			// data in this state).
+		}
+
+
+		[Test]
+		public void Throw_NoRestriction ()
+		{
+			try {
+				throw new FileLoadException ("message", "filename",
+					new FileLoadException ("inner message", "inner filename"));
+			}
+			catch (FileLoadException fle) {
+				Assert.AreEqual ("message", fle.Message, "Message");
+				Assert.AreEqual ("filename", fle.FileName, "FileName");
+				Assert.IsNull (fle.FusionLog, "FusionLog");
+				Assert.IsNotNull (fle.ToString (), "ToString");
+			}
+		}
+
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void Throw_FullRestriction ()
+		{
+			try {
+				throw new FileLoadException ("message", "filename",
+					new FileLoadException ("inner message", "inner filename"));
+			}
+			catch (FileLoadException fle) {
+				Assert.AreEqual ("message", fle.Message, "Message");
+				Assert.AreEqual ("filename", fle.FileName, "FileName");
+				// both FusionLog and ToString doesn't work in this case
+				// but strangely we get a FileLoadException
+				Assert.IsNull (fle.FusionLog, "FusionLog");
+				Assert.IsNotNull (fle.ToString (), "ToString");
+			}
+		}
+
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, ControlEvidence = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void Throw_GetFusionLog_Fail_ControlEvidence ()
+		{
+			try {
+				throw new FileLoadException ("message", "filename",
+					new FileLoadException ("inner message", "inner filename"));
+			}
+			catch (FileLoadException fle) {
+				Assert.IsNull (fle.FusionLog, "FusionLog");
+			}
+		}
+
+		[Test]
+		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
+		[ExpectedException (typeof (SecurityException))]
+		public void Throw_GetFusionLog_Fail_ControlPolicy ()
+		{
+			try {
+				throw new FileLoadException ("message", "filename",
+					new FileLoadException ("inner message", "inner filename"));
+			}
+			catch (FileLoadException fle) {
+				Assert.IsNull (fle.FusionLog, "FusionLog");
+			}
+		}
+	}
 }

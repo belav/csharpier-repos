@@ -2,7 +2,7 @@
 // ExprDomain.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -34,90 +34,90 @@ using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis {
-    class ExprDomain<TSymValue> : IGraph<TSymValue, Dummy> 
-        where TSymValue : IEquatable<TSymValue> {
-        private readonly EnvironmentDomain<TSymValue, FlatDomain<Expr<TSymValue>>> expressions;
+	class ExprDomain<TSymValue> : IGraph<TSymValue, Dummy> 
+		where TSymValue : IEquatable<TSymValue> {
+		private readonly EnvironmentDomain<TSymValue, FlatDomain<Expr<TSymValue>>> expressions;
 
-        private ExprDomain (EnvironmentDomain<TSymValue, FlatDomain<Expr<TSymValue>>> expressions)
-        {
-            this.expressions = expressions;
-        }
+		private ExprDomain (EnvironmentDomain<TSymValue, FlatDomain<Expr<TSymValue>>> expressions)
+		{
+			this.expressions = expressions;
+		}
 
-        #region Implementation of IGraph<SymbolicValue,Dummy>
-        public IEnumerable<TSymValue> Keys
-        {
-            get { return this.expressions.Keys; }
-        }
+		#region Implementation of IGraph<SymbolicValue,Dummy>
+		public IEnumerable<TSymValue> Keys
+		{
+			get { return this.expressions.Keys; }
+		}
 
-        public bool IsBottom
-        {
-            get { return this.expressions.IsBottom; }
-        }
+		public bool IsBottom
+		{
+			get { return this.expressions.IsBottom; }
+		}
 
-        IEnumerable<TSymValue> IGraph<TSymValue, Dummy>.Nodes
-        {
-            get { return this.expressions.Keys; }
-        }
+		IEnumerable<TSymValue> IGraph<TSymValue, Dummy>.Nodes
+		{
+			get { return this.expressions.Keys; }
+		}
 
-        public IEnumerable<Pair<Dummy, TSymValue>> Successors(TSymValue node)
-        {
-            FlatDomain<Expr<TSymValue>> expr = this.expressions[node];
-            if (expr.IsNormal()) 
+		public IEnumerable<Pair<Dummy, TSymValue>> Successors(TSymValue node)
+		{
+			FlatDomain<Expr<TSymValue>> expr = this.expressions[node];
+			if (expr.IsNormal()) 
                 foreach (TSymValue sv in expr.Value.Variables) 
                     yield return new Pair<Dummy, TSymValue> (Dummy.Value, sv);
-        }
-        #endregion
+		}
+		#endregion
 
-        public FlatDomain<Expr<TSymValue>> this[TSymValue sv]
-        {
-            get { return this.expressions[sv]; }
-        }
+		public FlatDomain<Expr<TSymValue>> this[TSymValue sv]
+		{
+			get { return this.expressions[sv]; }
+		}
 
-        public ExprDomain<TSymValue> Join(ExprDomain<TSymValue> that, bool widening, out bool weaker)
-        {
-            return new ExprDomain<TSymValue> (this.expressions.Join (that.expressions, widening, out weaker));
-        }
+		public ExprDomain<TSymValue> Join(ExprDomain<TSymValue> that, bool widening, out bool weaker)
+		{
+			return new ExprDomain<TSymValue> (this.expressions.Join (that.expressions, widening, out weaker));
+		}
 
-        public static ExprDomain<TSymValue> TopValue(Func<TSymValue, int> keyConverter)
-        {
-            return new ExprDomain<TSymValue> (EnvironmentDomain<TSymValue, FlatDomain<Expr<TSymValue>>>.TopValue (keyConverter));
-        }
+		public static ExprDomain<TSymValue> TopValue(Func<TSymValue, int> keyConverter)
+		{
+			return new ExprDomain<TSymValue> (EnvironmentDomain<TSymValue, FlatDomain<Expr<TSymValue>>>.TopValue (keyConverter));
+		}
 
-        public ExprDomain<TSymValue> Add (TSymValue sv, Expr<TSymValue> expr)
-        {
-            return new ExprDomain<TSymValue> (this.expressions.With (sv, expr));
-        }
+		public ExprDomain<TSymValue> Add (TSymValue sv, Expr<TSymValue> expr)
+		{
+			return new ExprDomain<TSymValue> (this.expressions.With (sv, expr));
+		}
 
-        public ExprDomain<TSymValue> Remove(TSymValue sv)
-        {
-            return new ExprDomain<TSymValue> (this.expressions.Without (sv));
-        }
+		public ExprDomain<TSymValue> Remove(TSymValue sv)
+		{
+			return new ExprDomain<TSymValue> (this.expressions.Without (sv));
+		}
 
-        public ExprDomain<TSymValue> Empty()
-        {
-            return new ExprDomain<TSymValue> (this.expressions.Empty ());
-        }
+		public ExprDomain<TSymValue> Empty()
+		{
+			return new ExprDomain<TSymValue> (this.expressions.Empty ());
+		}
 
-        public bool HasRefinement(TSymValue sv)
-        {
-            return this.expressions.Contains (sv);
-        }
+		public bool HasRefinement(TSymValue sv)
+		{
+			return this.expressions.Contains (sv);
+		}
 
-        public bool IsReachableFrom(TSymValue source, TSymValue target)
-        {
-            bool reachable = false;
-            DepthFirst.Visit (this, source, sv => {
-                                                if (sv.Equals (target))
-                                                    reachable = true;
+		public bool IsReachableFrom(TSymValue source, TSymValue target)
+		{
+			bool reachable = false;
+			DepthFirst.Visit (this, source, sv => {
+			                                	if (sv.Equals (target))
+			                                		reachable = true;
 
-                                                return !reachable; // break if reachable
-                                            }, null);
-            return reachable;
-        }
+			                                	return !reachable; // break if reachable
+			                                }, null);
+			return reachable;
+		}
 
-        public void Dump(TextWriter tw)
-        {
-            this.expressions.Dump (tw);
-        }
-    }
+		public void Dump(TextWriter tw)
+		{
+			this.expressions.Dump (tw);
+		}
+	}
 }

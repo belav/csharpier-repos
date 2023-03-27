@@ -20,7 +20,7 @@ namespace System.ComponentModel.Design.Serialization {
     ///     instance.
     /// </devdoc>
 #if MONO_FEATURE_CAS 
-    [HostProtection(SharedState = true)]        
+    [HostProtection(SharedState = true)]		
     [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Name = "FullTrust")]
 #endif
     public sealed class InstanceDescriptor {

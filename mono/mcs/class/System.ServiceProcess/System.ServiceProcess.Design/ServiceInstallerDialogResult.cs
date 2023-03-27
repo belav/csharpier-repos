@@ -2,7 +2,7 @@
 // System.ServiceProcess.Design.ServiceInstallerDialogResult.cs
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -32,10 +32,10 @@ using System.ComponentModel.Design;
 
 namespace System.ServiceProcess.Design
 {
-    public enum ServiceInstallerDialogResult
-    {
-        OK,
-        UseSystem,
-        Canceled,
-    }
+	public enum ServiceInstallerDialogResult
+	{
+		OK,
+		UseSystem,
+		Canceled,
+	}
 }

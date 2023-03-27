@@ -2,7 +2,7 @@
 // System.ComponentModel.Design.Data.DesignerDataSchemaClass
 //
 // Author:
-//    Atsushi Enomoto (atsushi@ximian.com)
+//	Atsushi Enomoto (atsushi@ximian.com)
 //
 // Copyright (C) 2007 Novell, Inc.
 //
@@ -34,15 +34,15 @@ using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Data
 {
-    public sealed class DesignerDataSchemaClass
-    {
-        public static readonly DesignerDataSchemaClass StoredProcedures = new DesignerDataSchemaClass ();
-        public static readonly DesignerDataSchemaClass Tables = new DesignerDataSchemaClass ();
-        public static readonly DesignerDataSchemaClass Views = new DesignerDataSchemaClass ();
+	public sealed class DesignerDataSchemaClass
+	{
+		public static readonly DesignerDataSchemaClass StoredProcedures = new DesignerDataSchemaClass ();
+		public static readonly DesignerDataSchemaClass Tables = new DesignerDataSchemaClass ();
+		public static readonly DesignerDataSchemaClass Views = new DesignerDataSchemaClass ();
 
-        private DesignerDataSchemaClass ()
-        {
-        }
-    }
+		private DesignerDataSchemaClass ()
+		{
+		}
+	}
 }
 

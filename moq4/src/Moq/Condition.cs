@@ -5,19 +5,19 @@ using System;
 
 namespace Moq
 {
-    internal sealed class Condition
-    {
-        private Func<bool> condition;
-        private Action success;
+	internal sealed class Condition
+	{
+		private Func<bool> condition;
+		private Action success;
 
-        public Condition(Func<bool> condition, Action success = null)
-        {
-            this.condition = condition;
-            this.success = success;
-        }
+		public Condition(Func<bool> condition, Action success = null)
+		{
+			this.condition = condition;
+			this.success = success;
+		}
 
-        public bool IsTrue => this.condition?.Invoke() == true;
+		public bool IsTrue => this.condition?.Invoke() == true;
 
-        public void SetupEvaluatedSuccessfully() => this.success?.Invoke();
-    }
+		public void SetupEvaluatedSuccessfully() => this.success?.Invoke();
+	}
 }

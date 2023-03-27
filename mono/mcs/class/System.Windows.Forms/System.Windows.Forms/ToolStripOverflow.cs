@@ -23,7 +23,7 @@
 // Copyright (c) 2007 Novell
 //
 // Authors:
-//    Jonathan Pobst (monkey@jpobst.com)
+//	Jonathan Pobst (monkey@jpobst.com)
 //
 
 using System;
@@ -34,83 +34,83 @@ using System.Windows.Forms.Layout;
 
 namespace System.Windows.Forms
 {
-    [ComVisible (true)]
-    [ClassInterface (ClassInterfaceType.AutoDispatch)]
-    public class ToolStripOverflow : ToolStripDropDown, IComponent, IDisposable, IArrangedContainer
-    {
-        #region Public Constructors
-        public ToolStripOverflow (ToolStripItem parentItem)
-        {
-            this.OwnerItem = parentItem;
-        }
-        #endregion
-        
-        #region Public Properties
-        // XXX - This probably adds ToolStripOverflowButton to the returned collection
-        public override ToolStripItemCollection Items {
-            get { return base.Items; }
-        }
-        #endregion
+	[ComVisible (true)]
+	[ClassInterface (ClassInterfaceType.AutoDispatch)]
+	public class ToolStripOverflow : ToolStripDropDown, IComponent, IDisposable, IArrangedContainer
+	{
+		#region Public Constructors
+		public ToolStripOverflow (ToolStripItem parentItem)
+		{
+			this.OwnerItem = parentItem;
+		}
+		#endregion
+		
+		#region Public Properties
+		// XXX - This probably adds ToolStripOverflowButton to the returned collection
+		public override ToolStripItemCollection Items {
+			get { return base.Items; }
+		}
+		#endregion
 
-        #region Protected Properties
-        protected internal override ToolStripItemCollection DisplayedItems {
-            get { return base.DisplayedItems; }
-        }
-        #endregion
+		#region Protected Properties
+		protected internal override ToolStripItemCollection DisplayedItems {
+			get { return base.DisplayedItems; }
+		}
+		#endregion
 
-        #region Public Methods
-        public override Size GetPreferredSize (Size constrainingSize)
-        {
-            constrainingSize.Width = 200;
-            return base.GetPreferredSize (constrainingSize);
-        }
-        #endregion
+		#region Public Methods
+		public override Size GetPreferredSize (Size constrainingSize)
+		{
+			constrainingSize.Width = 200;
+			return base.GetPreferredSize (constrainingSize);
+		}
+		#endregion
 
-        #region Protected Methods
-        protected override AccessibleObject CreateAccessibilityInstance ()
-        {
-            return new ToolStripOverflowAccessibleObject ();
-        }
+		#region Protected Methods
+		protected override AccessibleObject CreateAccessibilityInstance ()
+		{
+			return new ToolStripOverflowAccessibleObject ();
+		}
 
-        protected override LayoutSettings CreateLayoutSettings(ToolStripLayoutStyle style) {
-            LayoutSettings layout_settings = base.CreateLayoutSettings (style);
-            if (style == ToolStripLayoutStyle.Flow) {
-                ((FlowLayoutSettings)layout_settings).FlowDirection = FlowDirection.LeftToRight;
-                ((FlowLayoutSettings)layout_settings).WrapContents = true;
-            }
-            return layout_settings;
-        }
-        
-        protected override void SetDisplayedItems ()
-        {
-            this.displayed_items.ClearInternal ();
+		protected override LayoutSettings CreateLayoutSettings(ToolStripLayoutStyle style) {
+			LayoutSettings layout_settings = base.CreateLayoutSettings (style);
+			if (style == ToolStripLayoutStyle.Flow) {
+				((FlowLayoutSettings)layout_settings).FlowDirection = FlowDirection.LeftToRight;
+				((FlowLayoutSettings)layout_settings).WrapContents = true;
+			}
+			return layout_settings;
+		}
+		
+		protected override void SetDisplayedItems ()
+		{
+			this.displayed_items.ClearInternal ();
 
-            if (this.OwnerItem != null && this.OwnerItem.Parent != null)
-                foreach (ToolStripItem tsi in this.OwnerItem.Parent.Items)
-                    if (tsi.Placement == ToolStripItemPlacement.Overflow && tsi.Available && !(tsi is ToolStripSeparator)) {
-                        this.displayed_items.AddNoOwnerOrLayout (tsi);
-                        //tsi.Parent = this;
-                    }
+			if (this.OwnerItem != null && this.OwnerItem.Parent != null)
+				foreach (ToolStripItem tsi in this.OwnerItem.Parent.Items)
+					if (tsi.Placement == ToolStripItemPlacement.Overflow && tsi.Available && !(tsi is ToolStripSeparator)) {
+						this.displayed_items.AddNoOwnerOrLayout (tsi);
+						//tsi.Parent = this;
+					}
 
-            this.PerformLayout ();
-        }
-        #endregion
+			this.PerformLayout ();
+		}
+		#endregion
 
-        #region Internal Methods
-        internal ToolStrip ParentToolStrip {
-            get { return (ToolStrip)this.OwnerItem.Parent; }
-        }
+		#region Internal Methods
+		internal ToolStrip ParentToolStrip {
+			get { return (ToolStrip)this.OwnerItem.Parent; }
+		}
 
-        ArrangedElementCollection IArrangedContainer.Controls {
-            get { return DisplayedItems; }
-        }
+		ArrangedElementCollection IArrangedContainer.Controls {
+			get { return DisplayedItems; }
+		}
 
-        #endregion
+		#endregion
 
-        #region ToolStripOverflowAccessibleObject Class
-        private class ToolStripOverflowAccessibleObject : AccessibleObject
-        {
-        }
-        #endregion
-    }
+		#region ToolStripOverflowAccessibleObject Class
+		private class ToolStripOverflowAccessibleObject : AccessibleObject
+		{
+		}
+		#endregion
+	}
 }

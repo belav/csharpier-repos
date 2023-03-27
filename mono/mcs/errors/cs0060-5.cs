@@ -3,18 +3,18 @@
 
 internal class X
 {
-    protected class A
-    {
-        protected internal class B
-        {
-            internal class F : D.E
-            {
-            }
-        }
+	protected class A
+	{
+		protected internal class B
+		{
+			internal class F : D.E
+			{
+			}
+		}
 
-        protected class D : B
-        {
-            internal class E { }
-        }
-    }
+		protected class D : B
+		{
+			internal class E { }
+		}
+	}
 }

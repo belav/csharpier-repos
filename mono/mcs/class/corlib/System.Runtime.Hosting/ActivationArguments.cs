@@ -2,7 +2,7 @@
 // System.Runtime.Hosting.ActivationArguments class
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -31,65 +31,65 @@ using System.Security.Policy;
 
 namespace System.Runtime.Hosting {
 
-    [Serializable]
-    [ComVisible (true)]
-    public sealed class ActivationArguments
-        : EvidenceBase
-    {
+	[Serializable]
+	[ComVisible (true)]
+	public sealed class ActivationArguments
+		: EvidenceBase
+	{
 
-        private ActivationContext _context;
-        private ApplicationIdentity _identity;
-        private string[] _data;
+		private ActivationContext _context;
+		private ApplicationIdentity _identity;
+		private string[] _data;
 
-        public ActivationArguments (ActivationContext activationData)
-        {
-            if (activationData == null)
-                throw new ArgumentNullException ("activationData");
+		public ActivationArguments (ActivationContext activationData)
+		{
+			if (activationData == null)
+				throw new ArgumentNullException ("activationData");
 
-            _context = activationData;
-            _identity = activationData.Identity;
-        }
+			_context = activationData;
+			_identity = activationData.Identity;
+		}
 
-        public ActivationArguments (ApplicationIdentity applicationIdentity)
-        {
-            if (applicationIdentity == null)
-                throw new ArgumentNullException ("applicationIdentity");
+		public ActivationArguments (ApplicationIdentity applicationIdentity)
+		{
+			if (applicationIdentity == null)
+				throw new ArgumentNullException ("applicationIdentity");
 
-            _identity = applicationIdentity;
-        }
+			_identity = applicationIdentity;
+		}
 
-        public ActivationArguments (ActivationContext activationContext, string[] activationData)
-        {
-            if (activationContext == null)
-                throw new ArgumentNullException ("activationContext");
+		public ActivationArguments (ActivationContext activationContext, string[] activationData)
+		{
+			if (activationContext == null)
+				throw new ArgumentNullException ("activationContext");
 
-            _context = activationContext;
-            _identity = activationContext.Identity;
-            _data = activationData;
-        }
+			_context = activationContext;
+			_identity = activationContext.Identity;
+			_data = activationData;
+		}
 
-        public ActivationArguments (ApplicationIdentity applicationIdentity, string[] activationData)
-        {
-            if (applicationIdentity == null)
-                throw new ArgumentNullException ("applicationIdentity");
+		public ActivationArguments (ApplicationIdentity applicationIdentity, string[] activationData)
+		{
+			if (applicationIdentity == null)
+				throw new ArgumentNullException ("applicationIdentity");
 
-            _identity = applicationIdentity;
-            _data = activationData;
-        }
+			_identity = applicationIdentity;
+			_data = activationData;
+		}
 
-        // properties
+		// properties
 
-        public ActivationContext ActivationContext {
-            get { return _context; }
-        }
+		public ActivationContext ActivationContext {
+			get { return _context; }
+		}
 
-        public string[] ActivationData {
-            get { return _data; }
-        }
+		public string[] ActivationData {
+			get { return _data; }
+		}
 
-        public ApplicationIdentity ApplicationIdentity {
-            get { return _identity; }
-        }
-    }
+		public ApplicationIdentity ApplicationIdentity {
+			get { return _identity; }
+		}
+	}
 }
 

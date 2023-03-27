@@ -20,12 +20,12 @@
 // Copyright (c) 2004 Novell, Inc.
 //
 // Authors:
-//    Jordi Mas i Hernandez, jordi@ximian.com
+//	Jordi Mas i Hernandez, jordi@ximian.com
 //
 //
 // COMPLETE
 
 namespace System.Windows.Forms
 {
-    public delegate void DrawItemEventHandler (object sender, DrawItemEventArgs e);
+	public delegate void DrawItemEventHandler (object sender, DrawItemEventArgs e);
 }

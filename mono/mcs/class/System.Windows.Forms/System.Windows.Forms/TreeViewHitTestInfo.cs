@@ -23,29 +23,29 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 // Authors:
-//    Jackson Harper (jackson@ximian.com)
+//	Jackson Harper (jackson@ximian.com)
 //
 
 
 namespace System.Windows.Forms {
 
-    public class TreeViewHitTestInfo {
+	public class TreeViewHitTestInfo {
 
-        private TreeNode node;
-        private TreeViewHitTestLocations location;
+		private TreeNode node;
+		private TreeViewHitTestLocations location;
 
-        public TreeViewHitTestInfo (TreeNode hitNode, TreeViewHitTestLocations hitLocation)
-        {
-            this.node = hitNode;
-            this.location = hitLocation;
-        }
+		public TreeViewHitTestInfo (TreeNode hitNode, TreeViewHitTestLocations hitLocation)
+		{
+			this.node = hitNode;
+			this.location = hitLocation;
+		}
 
-        public TreeNode Node {
-            get { return node; }
-        }
+		public TreeNode Node {
+			get { return node; }
+		}
 
-        public TreeViewHitTestLocations Location {
-            get { return location; }
-        }
-    }
+		public TreeViewHitTestLocations Location {
+			get { return location; }
+		}
+	}
 }

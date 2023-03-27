@@ -28,15 +28,15 @@ using System.Windows.Markup;
 
 namespace System.Xaml
 {
-    public class XamlObjectEventArgs : EventArgs
-    {
-        public XamlObjectEventArgs (object instance)
-        {
-            if (instance == null)
-                throw new ArgumentNullException ("instance");
-            Instance = instance;
-        }
+	public class XamlObjectEventArgs : EventArgs
+	{
+		public XamlObjectEventArgs (object instance)
+		{
+			if (instance == null)
+				throw new ArgumentNullException ("instance");
+			Instance = instance;
+		}
 
-        public object Instance { get; private set; }
-    }
+		public object Instance { get; private set; }
+	}
 }

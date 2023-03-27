@@ -3,14 +3,14 @@
 
 class BaseClass
 {
-    public void Foo() {}
+	public void Foo() {}
 }
 
 class InstanceClass: BaseClass
 {
-    void BaseClass.Foo()
-    {
-    }
+	void BaseClass.Foo()
+	{
+	}
 }
 
 

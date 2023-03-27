@@ -1,6 +1,6 @@
 //
 // ResourceExposureAttributeCas.cs - CAS unit tests for 
-//    System.Runtime.Versioning.ResourceExposureAttribute
+//	System.Runtime.Versioning.ResourceExposureAttribute
 //
 // Author:
 //      Sebastien Pouliot  <sebastien@ximian.com>
@@ -39,35 +39,35 @@ using MonoTests.System.Runtime.Versioning;
 
 namespace MonoCasTests.System.Runtime.Versioning {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class ResourceExposureAttributeCas {
+	[TestFixture]
+	[Category ("CAS")]
+	public class ResourceExposureAttributeCas {
 
-        [SetUp]
-        public virtual void SetUp ()
-        {
-            if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-        }
+		[SetUp]
+		public virtual void SetUp ()
+		{
+			if (!SecurityManager.SecurityEnabled)
+				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTest ()
-        {
-            ResourceExposureAttributeTest unit = new ResourceExposureAttributeTest ();
-            unit.Constructor1 ();
-            unit.InvalidResourceScope1 ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void ReuseUnitTest ()
+		{
+			ResourceExposureAttributeTest unit = new ResourceExposureAttributeTest ();
+			unit.Constructor1 ();
+			unit.InvalidResourceScope1 ();
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
-        {
-            Type[] types = new Type[1] { typeof (ResourceScope) };
-            ConstructorInfo ci = typeof (ResourceExposureAttribute).GetConstructor (types);
-            Assert.IsNotNull (ci, ".ctor(ResourceScope)");
-            Assert.IsNotNull (ci.Invoke (new object[1] { ResourceScope.None }), "invoke");
-        }
-    }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void LinkDemand_Deny_Unrestricted ()
+		{
+			Type[] types = new Type[1] { typeof (ResourceScope) };
+			ConstructorInfo ci = typeof (ResourceExposureAttribute).GetConstructor (types);
+			Assert.IsNotNull (ci, ".ctor(ResourceScope)");
+			Assert.IsNotNull (ci.Invoke (new object[1] { ResourceScope.None }), "invoke");
+		}
+	}
 }
 

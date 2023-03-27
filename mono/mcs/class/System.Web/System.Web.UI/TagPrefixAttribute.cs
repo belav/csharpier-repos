@@ -30,33 +30,33 @@ using System.Security.Permissions;
 
 namespace System.Web.UI {
 
-    // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    // attributes
-    [AttributeUsage (AttributeTargets.Assembly, AllowMultiple=true)]
-    public sealed class TagPrefixAttribute : Attribute
-    {
-        string namespaceName;
-        string tagPrefix;
-        
-        public TagPrefixAttribute (string namespaceName,
-                       string tagPrefix)
-        {
-            if ((namespaceName == null) || (namespaceName.Length == 0))
-                throw new ArgumentNullException ("namespaceName");
-            if ((tagPrefix == null) || (tagPrefix.Length == 0))
-                throw new ArgumentNullException ("tagPrefix");
+	// CAS - no InheritanceDemand here as the class is sealed
+	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+	// attributes
+	[AttributeUsage (AttributeTargets.Assembly, AllowMultiple=true)]
+	public sealed class TagPrefixAttribute : Attribute
+	{
+		string namespaceName;
+		string tagPrefix;
+		
+		public TagPrefixAttribute (string namespaceName,
+					   string tagPrefix)
+		{
+			if ((namespaceName == null) || (namespaceName.Length == 0))
+				throw new ArgumentNullException ("namespaceName");
+			if ((tagPrefix == null) || (tagPrefix.Length == 0))
+				throw new ArgumentNullException ("tagPrefix");
 
-            this.namespaceName = namespaceName;
-            this.tagPrefix = tagPrefix;
-        }
+			this.namespaceName = namespaceName;
+			this.tagPrefix = tagPrefix;
+		}
 
-        public string NamespaceName {
-            get { return namespaceName; }
-        }
+		public string NamespaceName {
+			get { return namespaceName; }
+		}
 
-        public string TagPrefix {
-            get { return tagPrefix; }
-        }
-    }
+		public string TagPrefix {
+			get { return tagPrefix; }
+		}
+	}
 }

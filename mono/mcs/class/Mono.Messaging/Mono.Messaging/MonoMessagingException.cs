@@ -2,7 +2,7 @@
 // Mono.Messaging
 //
 // Authors:
-//      Michael Barker (mike@middlesoft.co.uk)
+//	  Michael Barker (mike@middlesoft.co.uk)
 //
 // (C) 2008 Michael Barker
 //
@@ -32,19 +32,19 @@ using System;
 
 namespace Mono.Messaging {
 
-    [Serializable]
-    public class MonoMessagingException : Exception {
-        public MonoMessagingException () : base ()
-        {
-        }
-        
-        public MonoMessagingException (string msg) : base (msg)
-        {
-        }
-        
-        public MonoMessagingException (string msg, Exception e) 
-            : base (msg, e)
-        {
-        }
-    }
+	[Serializable]
+	public class MonoMessagingException : Exception {
+		public MonoMessagingException () : base ()
+		{
+		}
+		
+		public MonoMessagingException (string msg) : base (msg)
+		{
+		}
+		
+		public MonoMessagingException (string msg, Exception e) 
+			: base (msg, e)
+		{
+		}
+	}
 }

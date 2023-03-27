@@ -25,7 +25,7 @@ public class Helper
         return inner_seq;
     }
 
-    //    Prints InnerSequential
+    //	Prints InnerSequential
     public static void PrintInnerSequential(InnerSequential inner_seq, string name)
     {
         Console.WriteLine("\t{0}.f1 = {1}", name, inner_seq.f1);
@@ -65,7 +65,7 @@ public class Helper
         return inner;
     }
 
-    //    Prints INNER2
+    //	Prints INNER2
     public static void PrintINNER2(INNER2 inner, string name)
     {
         Console.WriteLine("\t{0}.f1 = {1}", name, inner.f1);
@@ -105,7 +105,7 @@ public class Helper
         return inner;
     }
 
-    //    Prints InnerExplicit
+    //	Prints InnerExplicit
     public static void PrintInnerExplicit(InnerExplicit inner, string name)
     {
         Console.WriteLine("\t{0}.f1 = {1}", name, inner.f1);
@@ -135,8 +135,8 @@ public class Helper
 
     #region methods for InnerArraySequential struct
 
-    //    Returns new OUTER instance; the params are the fields of INNER;
-    //    all the INNER elements have the same field values
+    //	Returns new OUTER instance; the params are the fields of INNER;
+    //	all the INNER elements have the same field values
     public static InnerArraySequential NewInnerArraySequential(int f1, float f2, string f3)
     {
         InnerArraySequential outer = new InnerArraySequential();
@@ -150,7 +150,7 @@ public class Helper
         return outer;
     }
 
-    //    Prints InnerArraySequential
+    //	Prints InnerArraySequential
     public static void PrintInnerArraySequential(InnerArraySequential outer, string name)
     {
         for (int i = 0; i < Common.NumArrElements; i++)
@@ -161,7 +161,7 @@ public class Helper
         }
     }
 
-    //    Returns true if the two params have the same fields
+    //	Returns true if the two params have the same fields
     public static bool ValidateInnerArraySequential(InnerArraySequential outer1, InnerArraySequential outer2, string methodName)
     {
         for (int i = 0; i < Common.NumArrElements; i++)
@@ -190,8 +190,8 @@ public class Helper
 
     #region methods for InnerArrayExplicit struct
 
-    //    Returns new InnerArrayExplicit instance; the params are the fields of INNER;
-    //    all the INNER elements have the same field values
+    //	Returns new InnerArrayExplicit instance; the params are the fields of INNER;
+    //	all the INNER elements have the same field values
     public static InnerArrayExplicit NewInnerArrayExplicit(int f1, float f2, string f3, string f4)
     {
         InnerArrayExplicit outer = new InnerArrayExplicit();
@@ -206,7 +206,7 @@ public class Helper
         return outer;
     }
 
-    //    Prints InnerArrayExplicit
+    //	Prints InnerArrayExplicit
     public static void PrintInnerArrayExplicit(InnerArrayExplicit outer, string name)
     {
         for (int i = 0; i < Common.NumArrElements; i++)
@@ -218,7 +218,7 @@ public class Helper
         Console.WriteLine("\t{0}.f4 = {1}", name, outer.f4);
     }
 
-    //    Returns true if the two params have the same fields
+    //	Returns true if the two params have the same fields
     public static bool ValidateInnerArrayExplicit(InnerArrayExplicit outer1, InnerArrayExplicit InnerArrayExplicit, string methodName)
     {
         for (int i = 0; i < Common.NumArrElements; i++)
@@ -250,8 +250,8 @@ public class Helper
 
     #region methods for OUTER3 struct
 
-    //    Returns new OUTER3 instance; the params are the fields of INNER;
-    //    all the INNER elements have the same field values
+    //	Returns new OUTER3 instance; the params are the fields of INNER;
+    //	all the INNER elements have the same field values
     public static OUTER3 NewOUTER3(int f1, float f2, string f3, string f4)
     {
         OUTER3 outer = new OUTER3();
@@ -266,7 +266,7 @@ public class Helper
         return outer;
     }
 
-    //    Prints OUTER3
+    //	Prints OUTER3
     public static void PrintOUTER3(OUTER3 outer, string name)
     {
         for (int i = 0; i < Common.NumArrElements; i++)
@@ -278,7 +278,7 @@ public class Helper
         Console.WriteLine("\t{0}.f4 = {1}", name, outer.f4);
     }
 
-    //    Returns true if the two params have the same fields
+    //	Returns true if the two params have the same fields
     public static bool ValidateOUTER3(OUTER3 outer1, OUTER3 InnerArrayExplicit, string methodName)
     {
         for (int i = 0; i < Common.NumArrElements; i++)
@@ -332,7 +332,7 @@ public class Helper
         Console.WriteLine("\t{0}.f2 = {1}", name, str1.f2);
     }
 
-    //    Returns true if the two params have the same fields
+    //	Returns true if the two params have the same fields
     public static bool ValidateCharSetAnsiSequential(CharSetAnsiSequential str1, CharSetAnsiSequential str2, string methodName)
     {
         if (str1.f1 != str2.f1 || str1.f2 != str2.f2)
@@ -371,7 +371,7 @@ public class Helper
         Console.WriteLine("\t{0}.f2 = {1}", name, str1.f2);
     }
 
-    //    Returns true if the two params have the same fields
+    //	Returns true if the two params have the same fields
     public static bool ValidateCharSetUnicodeSequential(CharSetUnicodeSequential str1, CharSetUnicodeSequential str2, string methodName)
     {
         if (str1.f1 != str2.f1 || str1.f2 != str2.f2)

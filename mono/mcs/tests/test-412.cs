@@ -8,7 +8,7 @@ namespace Foo {
     [DllImport("foo.so", CallingConvention=Bar.CConv)]
     public static extern void doFoo();
 
-      public static void Main ()
-      { }
+	  public static void Main ()
+	  { }
   }
 }

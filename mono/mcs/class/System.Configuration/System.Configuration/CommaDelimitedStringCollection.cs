@@ -2,7 +2,7 @@
 // System.Configuration.CommaDelimitedStringCollection.cs
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -31,119 +31,119 @@ using System.Collections.Specialized;
 
 namespace System.Configuration {
 
-    /* i really hate all these "new"s... maybe
-     * StringCollection marks these methods as virtual in
-     * 2.0? */
-    public sealed class CommaDelimitedStringCollection : StringCollection {
+	/* i really hate all these "new"s... maybe
+	 * StringCollection marks these methods as virtual in
+	 * 2.0? */
+	public sealed class CommaDelimitedStringCollection : StringCollection {
 
-        bool modified;
-        bool readOnly;
-        int originalStringHash = 0;
+		bool modified;
+		bool readOnly;
+		int originalStringHash = 0;
 
-        public bool IsModified {
-            get { 
-                if (modified)
-                    return true;
+		public bool IsModified {
+			get { 
+				if (modified)
+					return true;
 
-                string str = ToString ();
-                if (str == null)
-                    return false;
+				string str = ToString ();
+				if (str == null)
+					return false;
 
-                return str.GetHashCode () != originalStringHash;
-            }
-        }
+				return str.GetHashCode () != originalStringHash;
+			}
+		}
 
-        public new bool IsReadOnly {
-            get { return readOnly; }
-        }
+		public new bool IsReadOnly {
+			get { return readOnly; }
+		}
 
-        public new string this [int index] {
-            get { return base [index]; }
-            set {
-                if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+		public new string this [int index] {
+			get { return base [index]; }
+			set {
+				if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
 
-                base [index] = value;
-                modified = true;
-            }
-        }
+				base [index] = value;
+				modified = true;
+			}
+		}
 
-        public new void Add (string value)
-        {
-            if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+		public new void Add (string value)
+		{
+			if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
 
-            base.Add (value);
-            modified = true;
-        }
+			base.Add (value);
+			modified = true;
+		}
 
-        public new void AddRange (string[] range)
-        {
-            if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+		public new void AddRange (string[] range)
+		{
+			if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
 
-            base.AddRange (range);
-            modified = true;
-        }
+			base.AddRange (range);
+			modified = true;
+		}
 
-        public new void Clear ()
-        {
-            if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+		public new void Clear ()
+		{
+			if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
 
-            base.Clear ();
-            modified = true;
-        }
+			base.Clear ();
+			modified = true;
+		}
 
-        public CommaDelimitedStringCollection Clone ()
-        {
-            CommaDelimitedStringCollection col = new CommaDelimitedStringCollection();
-            string[] contents = new string[this.Count];
-            CopyTo (contents, 0);
-            
-            col.AddRange (contents);
-            col.originalStringHash = originalStringHash;
+		public CommaDelimitedStringCollection Clone ()
+		{
+			CommaDelimitedStringCollection col = new CommaDelimitedStringCollection();
+			string[] contents = new string[this.Count];
+			CopyTo (contents, 0);
+			
+			col.AddRange (contents);
+			col.originalStringHash = originalStringHash;
 
-            return col;
-        }
+			return col;
+		}
 
-        public new void Insert (int index, string value)
-        {
-            if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+		public new void Insert (int index, string value)
+		{
+			if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
 
-            base.Insert (index, value);
-            modified = true;
-        }
+			base.Insert (index, value);
+			modified = true;
+		}
 
-        public new void Remove (string value)
-        {
-            if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
+		public new void Remove (string value)
+		{
+			if (readOnly) throw new ConfigurationErrorsException ("The configuration is read only");
 
-            base.Remove (value);
-            modified = true;
-        }
+			base.Remove (value);
+			modified = true;
+		}
 
-        public void SetReadOnly ()
-        {
-            readOnly = true;
-        }
+		public void SetReadOnly ()
+		{
+			readOnly = true;
+		}
 
-        public override string ToString ()
-        {
-            if (this.Count == 0)
-                return null;
+		public override string ToString ()
+		{
+			if (this.Count == 0)
+				return null;
 
-            string[] contents = new string[this.Count];
+			string[] contents = new string[this.Count];
 
-            CopyTo (contents, 0);
+			CopyTo (contents, 0);
 
-            return String.Join (",", contents);
-        }
+			return String.Join (",", contents);
+		}
 
-        internal void UpdateStringHash ()
-        {
-            string str = ToString ();
-            if (str == null)
-                originalStringHash = 0;
-            else
-                originalStringHash = str.GetHashCode ();
-        }
-    }
+		internal void UpdateStringHash ()
+		{
+			string str = ToString ();
+			if (str == null)
+				originalStringHash = 0;
+			else
+				originalStringHash = str.GetHashCode ();
+		}
+	}
 
 }

@@ -36,42 +36,42 @@ using System.Web.UI;
 
 namespace System.Web.Script.Services
 {
-    sealed class ScriptHandlerFactory : IHttpHandlerFactory
-    {
-        readonly WebServiceHandlerFactory _wsFactory;
-        public ScriptHandlerFactory () {
-            _wsFactory = new WebServiceHandlerFactory ();
-        }
-        #region IHttpHandlerFactory Members
+	sealed class ScriptHandlerFactory : IHttpHandlerFactory
+	{
+		readonly WebServiceHandlerFactory _wsFactory;
+		public ScriptHandlerFactory () {
+			_wsFactory = new WebServiceHandlerFactory ();
+		}
+		#region IHttpHandlerFactory Members
 
-        public IHttpHandler GetHandler (HttpContext context, string requestType, string url, string pathTranslated) {
-            HttpRequest request = context.Request;
-            string contentType = request.ContentType;
-            if (!String.IsNullOrEmpty (contentType) && contentType.StartsWith ("application/json", StringComparison.OrdinalIgnoreCase)) {
-                Type handlerType = null;
-                if (url.EndsWith (ProfileService.DefaultWebServicePath, StringComparison.Ordinal))
-                    handlerType = typeof (ProfileService);
-                else
-                if (url.EndsWith (AuthenticationService.DefaultWebServicePath, StringComparison.Ordinal))
-                    handlerType = typeof(AuthenticationService);
-                else {
-                    handlerType = BuildManager.GetCompiledType (url);
-                    if (handlerType == null)
-                        handlerType = WebServiceParser.GetCompiledType (url, context);
-                }
+		public IHttpHandler GetHandler (HttpContext context, string requestType, string url, string pathTranslated) {
+			HttpRequest request = context.Request;
+			string contentType = request.ContentType;
+			if (!String.IsNullOrEmpty (contentType) && contentType.StartsWith ("application/json", StringComparison.OrdinalIgnoreCase)) {
+				Type handlerType = null;
+				if (url.EndsWith (ProfileService.DefaultWebServicePath, StringComparison.Ordinal))
+					handlerType = typeof (ProfileService);
+				else
+				if (url.EndsWith (AuthenticationService.DefaultWebServicePath, StringComparison.Ordinal))
+					handlerType = typeof(AuthenticationService);
+				else {
+					handlerType = BuildManager.GetCompiledType (url);
+					if (handlerType == null)
+						handlerType = WebServiceParser.GetCompiledType (url, context);
+				}
 
-                return RestHandler.GetHandler (context, handlerType, url);
-            }
-            if (request.PathInfo.StartsWith ("/js", StringComparison.OrdinalIgnoreCase))
-                return new ClientProxyHandler (WebServiceParser.GetCompiledType (url, context), url);
+				return RestHandler.GetHandler (context, handlerType, url);
+			}
+			if (request.PathInfo.StartsWith ("/js", StringComparison.OrdinalIgnoreCase))
+				return new ClientProxyHandler (WebServiceParser.GetCompiledType (url, context), url);
 
-            return _wsFactory.GetHandler (context, requestType, url, pathTranslated);
-        }
+			return _wsFactory.GetHandler (context, requestType, url, pathTranslated);
+		}
 
-        public void ReleaseHandler (IHttpHandler handler) {
+		public void ReleaseHandler (IHttpHandler handler) {
 
-        }
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

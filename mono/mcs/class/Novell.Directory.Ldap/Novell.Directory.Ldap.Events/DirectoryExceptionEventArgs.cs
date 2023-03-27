@@ -46,7 +46,7 @@ namespace Novell.Directory.Ldap.Events
     {
       get
       {
-    return ldap_exception_object;
+	return ldap_exception_object;
       }
     }
 

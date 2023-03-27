@@ -2,7 +2,7 @@
 // MultiEdgeUpdate.cs
 // 
 // Authors:
-//    Alexander Chebaturkin (chebaturkin@gmail.com)
+//	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -29,32 +29,32 @@
 using System;
 
 namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph {
-    class MultiEdgeUpdate<TFunc, TAbstractDomain> : Update<TFunc, TAbstractDomain>
-        where TFunc : IEquatable<TFunc>, IConstantInfo
-        where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
-        private readonly SymValue[] from;
-        private readonly TFunc function;
+	class MultiEdgeUpdate<TFunc, TAbstractDomain> : Update<TFunc, TAbstractDomain>
+		where TFunc : IEquatable<TFunc>, IConstantInfo
+		where TAbstractDomain : IAbstractDomainForEGraph<TAbstractDomain>, IEquatable<TAbstractDomain> {
+		private readonly SymValue[] from;
+		private readonly TFunc function;
 
-        public MultiEdgeUpdate (SymValue[] from, TFunc function)
-        {
-            this.function = function;
-            this.from = from;
-        }
+		public MultiEdgeUpdate (SymValue[] from, TFunc function)
+		{
+			this.function = function;
+			this.from = from;
+		}
 
-        #region Overrides of Update
-        public override void Replay (MergeInfo<TFunc, TAbstractDomain> merge)
-        {
-            int len = this.from.Length;
-            for (int i = 0; i < len; i++) {
-                SymValue sv = this.from [i];
-                if (merge.IsCommon (sv))
-                    merge.JoinMultiEdge (sv, sv, new MultiEdge<TFunc, TAbstractDomain> (this.function, i, len));
-            }
-        }
+		#region Overrides of Update
+		public override void Replay (MergeInfo<TFunc, TAbstractDomain> merge)
+		{
+			int len = this.from.Length;
+			for (int i = 0; i < len; i++) {
+				SymValue sv = this.from [i];
+				if (merge.IsCommon (sv))
+					merge.JoinMultiEdge (sv, sv, new MultiEdge<TFunc, TAbstractDomain> (this.function, i, len));
+			}
+		}
 
-        public override void ReplayElimination (MergeInfo<TFunc, TAbstractDomain> merge)
-        {
-        }
-        #endregion
-    }
+		public override void ReplayElimination (MergeInfo<TFunc, TAbstractDomain> merge)
+		{
+		}
+		#endregion
+	}
 }

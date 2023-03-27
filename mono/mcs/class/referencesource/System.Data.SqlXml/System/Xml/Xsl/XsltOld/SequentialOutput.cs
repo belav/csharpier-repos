@@ -616,8 +616,8 @@ namespace System.Xml.Xsl.XsltOld {
                         if(htmlAttrProps != null) {
                             abr = htmlElementsProps.AbrParent  && htmlAttrProps.Abr;
                             uri = htmlElementsProps.UriParent  && ( htmlAttrProps.Uri ||
-                                  htmlElementsProps.NameParent && htmlAttrProps.Name
-                            );
+								  htmlElementsProps.NameParent && htmlAttrProps.Name
+							);
                         }
                     }
                 }

@@ -35,67 +35,67 @@ using System.Xml.Serialization;
 
 namespace System.Web.Services.Description {
 
-    public class SoapHeaderFaultBinding : ServiceDescriptionFormatExtension {
+	public class SoapHeaderFaultBinding : ServiceDescriptionFormatExtension {
 
-        #region Fields
+		#region Fields
 
-        string encoding;
-        XmlQualifiedName message;
-        string ns;
-        string part;
-        SoapBindingUse use;
+		string encoding;
+		XmlQualifiedName message;
+		string ns;
+		string part;
+		SoapBindingUse use;
 
-        #endregion // Fields
+		#endregion // Fields
 
-        #region Constructors
-    
-        [MonoTODO]    
-        public SoapHeaderFaultBinding ()
-        {
-            encoding = String.Empty;
-            message = XmlQualifiedName.Empty;
-            ns = String.Empty;
-            part = String.Empty;
-            use = SoapBindingUse.Default;
-        }
-        
-        #endregion // Constructors
+		#region Constructors
+	
+		[MonoTODO]	
+		public SoapHeaderFaultBinding ()
+		{
+			encoding = String.Empty;
+			message = XmlQualifiedName.Empty;
+			ns = String.Empty;
+			part = String.Empty;
+			use = SoapBindingUse.Default;
+		}
+		
+		#endregion // Constructors
 
-        #region Properties
+		#region Properties
 
-        [DefaultValue ("")]
-        [XmlAttribute ("encodingStyle")]
-        public string Encoding {
-            get { return encoding; }
-            set { encoding = value; }
-        }
+		[DefaultValue ("")]
+		[XmlAttribute ("encodingStyle")]
+		public string Encoding {
+			get { return encoding; }
+			set { encoding = value; }
+		}
 
-        [XmlAttribute ("message")]
-        public XmlQualifiedName Message {
-            get { return message; }
-            set { message = value; }
-        }
-    
-        [DefaultValue ("")]
-        [XmlAttribute ("namespace")]    
-        public string Namespace {
-            get { return ns; }
-            set { ns = value; }
-        }
+		[XmlAttribute ("message")]
+		public XmlQualifiedName Message {
+			get { return message; }
+			set { message = value; }
+		}
+	
+		[DefaultValue ("")]
+		[XmlAttribute ("namespace")]	
+		public string Namespace {
+			get { return ns; }
+			set { ns = value; }
+		}
 
-        [XmlAttribute ("part")]
-        public string Part {
-            get { return part; }
-            set { part = value; }
-        }
+		[XmlAttribute ("part")]
+		public string Part {
+			get { return part; }
+			set { part = value; }
+		}
 
-        [DefaultValue (SoapBindingUse.Default)]
-        [XmlAttribute ("use")]
-        public SoapBindingUse Use {
-            get { return use; }
-            set { use = value; }
-        }
+		[DefaultValue (SoapBindingUse.Default)]
+		[XmlAttribute ("use")]
+		public SoapBindingUse Use {
+			get { return use; }
+			set { use = value; }
+		}
 
-        #endregion // Properties
-    }
+		#endregion // Properties
+	}
 }

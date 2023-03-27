@@ -39,90 +39,90 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRowView_CreateChildView_S : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataRowView_CreateChildView_S tc = new DataRowView_CreateChildView_S();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRowView_CreateChildView_S");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataRowView_CreateChildView_S tc = new DataRowView_CreateChildView_S();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataRowView_CreateChildView_S");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-    public void run()
-    {
-        Exception exp = null;
-
-        //create a dataset with two tables, with a DataRelation between them
-        DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
-        DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable();
-        DataSet ds = new DataSet();
-        ds.Tables.Add(dtParent);
-        ds.Tables.Add(dtChild);
-        DataRelation drel = new DataRelation("ParentChild",dtParent.Columns["ParentId"],dtChild.Columns["ParentId"]);
-        ds.Relations.Add(drel);
-
-        //DataView dvChild = null;
-        DataView dvParent = new DataView(dtParent);
-
-        DataView dvTmp1 = dvParent[0].CreateChildView("ParentChild");
-        DataView dvTmp2 = dvParent[3].CreateChildView("ParentChild");
-
-        try
-        {
-            BeginCase("ChildView != null");
-            Compare(dvTmp1!=null,true);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("Child view table = ChildTable");
-            Compare(dvTmp1.Table ,dtChild );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-
-        try
-        {
-            BeginCase("ChildView1.Table = ChildView2.Table");
-            Compare(dvTmp1.Table ,dvTmp2.Table);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-        //the child dataview are different
-        try
-        {
-            BeginCase("Child DataViews different ");
-            Compare(dvTmp1.Equals(dvTmp2),false);
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    }
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+
+	public void run()
+	{
+		Exception exp = null;
+
+		//create a dataset with two tables, with a DataRelation between them
+		DataTable dtParent = GHTUtils.DataProvider.CreateParentDataTable();
+		DataTable dtChild = GHTUtils.DataProvider.CreateChildDataTable();
+		DataSet ds = new DataSet();
+		ds.Tables.Add(dtParent);
+		ds.Tables.Add(dtChild);
+		DataRelation drel = new DataRelation("ParentChild",dtParent.Columns["ParentId"],dtChild.Columns["ParentId"]);
+		ds.Relations.Add(drel);
+
+		//DataView dvChild = null;
+		DataView dvParent = new DataView(dtParent);
+
+		DataView dvTmp1 = dvParent[0].CreateChildView("ParentChild");
+		DataView dvTmp2 = dvParent[3].CreateChildView("ParentChild");
+
+		try
+		{
+			BeginCase("ChildView != null");
+			Compare(dvTmp1!=null,true);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("Child view table = ChildTable");
+			Compare(dvTmp1.Table ,dtChild );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+		try
+		{
+			BeginCase("ChildView1.Table = ChildView2.Table");
+			Compare(dvTmp1.Table ,dvTmp2.Table);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+
+		//the child dataview are different
+		try
+		{
+			BeginCase("Child DataViews different ");
+			Compare(dvTmp1.Equals(dvTmp2),false);
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+
+	}
 }
 }

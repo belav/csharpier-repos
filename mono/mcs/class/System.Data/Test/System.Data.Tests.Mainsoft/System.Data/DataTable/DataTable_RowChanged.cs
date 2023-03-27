@@ -39,92 +39,92 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataTable_RowChanged : GHTBase
 {
-    [Test] public void Main()
-    {
-        DataTable_RowChanged tc = new DataTable_RowChanged();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataTable_RowChanged");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+	[Test] public void Main()
+	{
+		DataTable_RowChanged tc = new DataTable_RowChanged();
+		Exception exp = null;
+		try
+		{
+			tc.BeginTest("DataTable_RowChanged");
+			tc.run();
+		}
+		catch(Exception ex)
+		{
+			exp = ex;
+		}
+		finally
+		{
+			tc.EndTest(exp);
+		}
+	}
 
-    //Activate This Construntor to log All To Standard output
-    //public TestClass():base(true){}
+	//Activate This Construntor to log All To Standard output
+	//public TestClass():base(true){}
 
-    //Activate this constructor to log Failures to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, false){}
+	//Activate this constructor to log Failures to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
 
-    //Activate this constructor to log All to a log file
-    //public TestClass(System.IO.TextWriter tw):base(tw, true){}
+	//Activate this constructor to log All to a log file
+	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-    //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
 
-    public void run()
-    {
-        Exception exp = null;
+	public void run()
+	{
+		Exception exp = null;
         DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
 
-        dt.RowChanged += new DataRowChangeEventHandler ( Row_Changed );
-        
-        _EventTriggered=false;
-        try
-        {
-            BeginCase("RowChanged - 1");
-            dt.Rows[0][1] = "NewValue";
-            Compare(_EventTriggered ,true );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		dt.RowChanged += new DataRowChangeEventHandler ( Row_Changed );
+		
+		_EventTriggered=false;
+		try
+		{
+			BeginCase("RowChanged - 1");
+			dt.Rows[0][1] = "NewValue";
+			Compare(_EventTriggered ,true );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        _EventTriggered=false;
-        try
-        {
-            BeginCase("RowChanged - 2");
-            dt.Rows[0].BeginEdit(); 
-            dt.Rows[0][1] = "NewValue";
-            Compare(_EventTriggered ,false );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		_EventTriggered=false;
+		try
+		{
+			BeginCase("RowChanged - 2");
+			dt.Rows[0].BeginEdit(); 
+			dt.Rows[0][1] = "NewValue";
+			Compare(_EventTriggered ,false );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
-        _EventTriggered=false;
-        try
-        {
-            BeginCase("RowChanged - 3");
-            dt.Rows[0].EndEdit();
-            Compare(_EventTriggered ,true );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
+		_EventTriggered=false;
+		try
+		{
+			BeginCase("RowChanged - 3");
+			dt.Rows[0].EndEdit();
+			Compare(_EventTriggered ,true );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
 
 
-        _EventTriggered=false;
+		_EventTriggered=false;
         dt.RowChanged -= new DataRowChangeEventHandler  ( Row_Changed );
-        try
-        {
-            BeginCase("RowChanged - 4");
-            dt.Rows[0][1] = "NewValue A";
-            Compare(_EventTriggered ,false );
-        }
-        catch(Exception ex)    {exp = ex;}
-        finally    {EndCase(exp); exp = null;}
-    }
+		try
+		{
+			BeginCase("RowChanged - 4");
+			dt.Rows[0][1] = "NewValue A";
+			Compare(_EventTriggered ,false );
+		}
+		catch(Exception ex)	{exp = ex;}
+		finally	{EndCase(exp); exp = null;}
+	}
 
-    private bool _EventTriggered = false;
-    private void Row_Changed( object sender, DataRowChangeEventArgs e )
-    {
-        _EventTriggered = true;
-    }
+	private bool _EventTriggered = false;
+	private void Row_Changed( object sender, DataRowChangeEventArgs e )
+	{
+		_EventTriggered = true;
+	}
 }
 }

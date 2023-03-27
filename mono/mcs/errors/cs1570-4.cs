@@ -6,11 +6,11 @@ using System;
 
 namespace Testing
 {
-    ///<summary>
-    /// incorrect markup comment for interface
-    ///</incorrect>
-    public interface InterfaceTest2
-    {
-    }
+	///<summary>
+	/// incorrect markup comment for interface
+	///</incorrect>
+	public interface InterfaceTest2
+	{
+	}
 }
 

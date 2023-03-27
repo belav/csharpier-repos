@@ -31,82 +31,82 @@ using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices {
 
-    [Serializable]
-    [Guid("36dcda30-dc3b-4d93-be42-90b2d74c64e7")]
-    public class RegistrationConfig {
+	[Serializable]
+	[Guid("36dcda30-dc3b-4d93-be42-90b2d74c64e7")]
+	public class RegistrationConfig {
 
-        #region Constructors
+		#region Constructors
 
-        [MonoTODO]
-        public RegistrationConfig ()
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public RegistrationConfig ()
+		{
+			throw new NotImplementedException ();
+		}
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        [MonoTODO]
-        public string Application {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public string Application {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoTODO]
-        public string ApplicationRootDirectory {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public string ApplicationRootDirectory {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoTODO]
-        public string AssemblyFile {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public string AssemblyFile {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoTODO]
-        public InstallationFlags InstallationFlags {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public InstallationFlags InstallationFlags {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoTODO]
-        public string Partition {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public string Partition {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
 
-        [MonoTODO]
-        public string TypeLibrary {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
+		[MonoTODO]
+		public string TypeLibrary {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

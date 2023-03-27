@@ -2,7 +2,7 @@
 // System.Net.Configuration.SmtpSection
 //
 // Authors:
-//    Chris Toshok (toshok@ximian.com)
+//	Chris Toshok (toshok@ximian.com)
 //
 // (C) 2005 Novell, Inc. (http://www.novell.com)
 //
@@ -40,8 +40,8 @@ namespace System.Net.Configuration {
         {
                 [ConfigurationProperty ("deliveryMethod", DefaultValue = "Network")]
                 public SmtpDeliveryMethod DeliveryMethod {
-                    get { return (SmtpDeliveryMethod) base ["deliveryMethod"]; }
-                    set { base ["deliveryMethod"] = value; }
+					get { return (SmtpDeliveryMethod) base ["deliveryMethod"]; }
+					set { base ["deliveryMethod"] = value; }
                 }
 
                 [ConfigurationProperty ("deliveryFormat", DefaultValue = SmtpDeliveryFormat.SevenBit)]
@@ -52,24 +52,24 @@ namespace System.Net.Configuration {
 
                 [ConfigurationProperty ("from")]
                 public string From {
-                    get { return (string) base ["from"]; }
-                    set { base ["from"] = value; }
+					get { return (string) base ["from"]; }
+					set { base ["from"] = value; }
                 }
 
                 [ConfigurationProperty ("network")]
                 public SmtpNetworkElement Network {
-                    get { return (SmtpNetworkElement) base ["network"]; }
+					get { return (SmtpNetworkElement) base ["network"]; }
                 }
 
                 [ConfigurationProperty ("specifiedPickupDirectory")]
                 public SmtpSpecifiedPickupDirectoryElement SpecifiedPickupDirectory {
-                    get { return (SmtpSpecifiedPickupDirectoryElement) base ["specifiedPickupDirectory"]; }
+					get { return (SmtpSpecifiedPickupDirectoryElement) base ["specifiedPickupDirectory"]; }
                 }
 
-        protected override ConfigurationPropertyCollection Properties {
-            // what to do here?
-            get { return base.Properties; }
-        }
+		protected override ConfigurationPropertyCollection Properties {
+			// what to do here?
+			get { return base.Properties; }
+		}
         }
 
 }

@@ -2,7 +2,7 @@
 // ExpressionStatement.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,22 +27,22 @@
 // 
 
 namespace Mono.CodeContracts.Static.AST {
-    class ExpressionStatement : Statement {
-        public ExpressionStatement () : base (NodeType.ExpressionStatement)
-        {
-        }
+	class ExpressionStatement : Statement {
+		public ExpressionStatement () : base (NodeType.ExpressionStatement)
+		{
+		}
 
-        public ExpressionStatement (Expression expression)
-            : base (NodeType.ExpressionStatement)
-        {
-            Expression = expression;
-        }
+		public ExpressionStatement (Expression expression)
+			: base (NodeType.ExpressionStatement)
+		{
+			Expression = expression;
+		}
 
-        public Expression Expression { get; set; }
+		public Expression Expression { get; set; }
 
-        public override string ToString ()
-        {
-            return string.Format ("ExpressionStatement({0})", Expression);
-        }
-    }
+		public override string ToString ()
+		{
+			return string.Format ("ExpressionStatement({0})", Expression);
+		}
+	}
 }

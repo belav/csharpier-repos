@@ -1,9 +1,9 @@
 //
 // HttpCookieCollectionCas.cs 
-//    - CAS unit tests for System.Web.HttpCookieCollection
+//	- CAS unit tests for System.Web.HttpCookieCollection
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -36,40 +36,40 @@ using System.Web;
 
 namespace MonoCasTests.System.Web {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class HttpCookieCollectionCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class HttpCookieCollectionCas : AspNetHostingMinimal {
 
-        private HttpCookie biscuit;
+		private HttpCookie biscuit;
 
-        [TestFixtureSetUp]
-        public void FixtureSetUp ()
-        {
-            biscuit = new HttpCookie (null);
-        }
+		[TestFixtureSetUp]
+		public void FixtureSetUp ()
+		{
+			biscuit = new HttpCookie (null);
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
-        {
-            HttpCookieCollection jar = new HttpCookieCollection ();
-            jar.Add (biscuit);
-            jar.CopyTo (new object[1], 0);
-            Assert.IsNull (jar.GetKey (0), "GetKey");
-            jar.Remove ("chocolat");
-            jar.Set (biscuit);
-            Assert.IsNotNull (jar.Get (0), "Get(int)");
-            Assert.IsNull (jar.Get ("chocolat"), "Get(string)");
-            Assert.IsNotNull (jar[0], "this[int]");
-            Assert.IsNull (jar["chocolat"], "this[string]");
-            Assert.AreEqual (1, jar.AllKeys.Length, "AllKeys");
-            jar.Clear ();
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Deny_Unrestricted ()
+		{
+			HttpCookieCollection jar = new HttpCookieCollection ();
+			jar.Add (biscuit);
+			jar.CopyTo (new object[1], 0);
+			Assert.IsNull (jar.GetKey (0), "GetKey");
+			jar.Remove ("chocolat");
+			jar.Set (biscuit);
+			Assert.IsNotNull (jar.Get (0), "Get(int)");
+			Assert.IsNull (jar.Get ("chocolat"), "Get(string)");
+			Assert.IsNotNull (jar[0], "this[int]");
+			Assert.IsNull (jar["chocolat"], "this[string]");
+			Assert.AreEqual (1, jar.AllKeys.Length, "AllKeys");
+			jar.Clear ();
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override Type Type {
-            get { return typeof (HttpCookieCollection); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (HttpCookieCollection); }
+		}
+	}
 }

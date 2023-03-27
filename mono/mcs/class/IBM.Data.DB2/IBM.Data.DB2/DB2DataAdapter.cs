@@ -25,160 +25,160 @@ using System.Data;
 using System.Data.Common;
 
 namespace IBM.Data.DB2 {
-    
-    public sealed class DB2DataAdapter : DbDataAdapter, IDbDataAdapter 
-    {
-        #region Fields
+	
+	public sealed class DB2DataAdapter : DbDataAdapter, IDbDataAdapter 
+	{
+		#region Fields
 
-        bool disposed = false;    
-        DB2Command deleteCommand;
-        DB2Command insertCommand;
-        DB2Command selectCommand;
-        DB2Command updateCommand;
+		bool disposed = false;	
+		DB2Command deleteCommand;
+		DB2Command insertCommand;
+		DB2Command selectCommand;
+		DB2Command updateCommand;
 
-        #endregion
+		#endregion
 
-        #region Constructors
-        
-        public DB2DataAdapter ()     
-            : this (new DB2Command ())
-        {
-        }
+		#region Constructors
+		
+		public DB2DataAdapter () 	
+			: this (new DB2Command ())
+		{
+		}
 
-        public DB2DataAdapter (DB2Command selectCommand) 
-        {
-            DeleteCommand = null;
-            InsertCommand = null;
-            SelectCommand = selectCommand;
-            UpdateCommand = null;
-        }
+		public DB2DataAdapter (DB2Command selectCommand) 
+		{
+			DeleteCommand = null;
+			InsertCommand = null;
+			SelectCommand = selectCommand;
+			UpdateCommand = null;
+		}
 
-        public DB2DataAdapter (string selectCommandText, DB2Connection selectConnection) 
-            : this (new DB2Command (selectCommandText, selectConnection))
-        { 
-        }
+		public DB2DataAdapter (string selectCommandText, DB2Connection selectConnection) 
+			: this (new DB2Command (selectCommandText, selectConnection))
+		{ 
+		}
 
-        public DB2DataAdapter (string selectCommandText, string selectConnectionString)
-            : this (selectCommandText, new DB2Connection (selectConnectionString))
-        {
-        }
+		public DB2DataAdapter (string selectCommandText, string selectConnectionString)
+			: this (selectCommandText, new DB2Connection (selectConnectionString))
+		{
+		}
 
-        #endregion
+		#endregion
 
-        #region Properties
-
-
-        public DB2Command DeleteCommand {
-            get { return deleteCommand; }
-            set { deleteCommand = value; }
-        }
+		#region Properties
 
 
-        public DB2Command InsertCommand {
-            get { return insertCommand; }
-            set { insertCommand = value; }
-        }
+		public DB2Command DeleteCommand {
+			get { return deleteCommand; }
+			set { deleteCommand = value; }
+		}
 
 
-        public DB2Command SelectCommand {
-            get { return selectCommand; }
-            set { selectCommand = value; }
-        }
+		public DB2Command InsertCommand {
+			get { return insertCommand; }
+			set { insertCommand = value; }
+		}
 
 
-        public DB2Command UpdateCommand {
-            get { return updateCommand; }
-            set { updateCommand = value; }
-        }
-
-        IDbCommand IDbDataAdapter.DeleteCommand {
-            get { return DeleteCommand; }
-            set { 
-                if (!(value is DB2Command)) 
-                    throw new ArgumentException ();
-                DeleteCommand = (DB2Command)value;
-            }
-        }
-
-        IDbCommand IDbDataAdapter.InsertCommand {
-            get { return InsertCommand; }
-            set { 
-                if (!(value is DB2Command)) 
-                    throw new ArgumentException ();
-                InsertCommand = (DB2Command)value;
-            }
-        }
-
-        IDbCommand IDbDataAdapter.SelectCommand {
-            get { return SelectCommand; }
-            set { 
-                if (!(value is DB2Command)) 
-                    throw new ArgumentException ();
-                SelectCommand = (DB2Command)value;
-            }
-        }
-
-        IDbCommand IDbDataAdapter.UpdateCommand {
-            get { return UpdateCommand; }
-            set { 
-                if (!(value is DB2Command)) 
-                    throw new ArgumentException ();
-                UpdateCommand = (DB2Command)value;
-            }
-        }
+		public DB2Command SelectCommand {
+			get { return selectCommand; }
+			set { selectCommand = value; }
+		}
 
 
-        ITableMappingCollection IDataAdapter.TableMappings {
-            get { return TableMappings; }
-        }
+		public DB2Command UpdateCommand {
+			get { return updateCommand; }
+			set { updateCommand = value; }
+		}
 
-        #endregion 
+		IDbCommand IDbDataAdapter.DeleteCommand {
+			get { return DeleteCommand; }
+			set { 
+				if (!(value is DB2Command)) 
+					throw new ArgumentException ();
+				DeleteCommand = (DB2Command)value;
+			}
+		}
 
-        #region Methods
+		IDbCommand IDbDataAdapter.InsertCommand {
+			get { return InsertCommand; }
+			set { 
+				if (!(value is DB2Command)) 
+					throw new ArgumentException ();
+				InsertCommand = (DB2Command)value;
+			}
+		}
 
-        protected override RowUpdatedEventArgs CreateRowUpdatedEvent (DataRow dataRow, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) 
-        {
-            return new DB2RowUpdatedEventArgs (dataRow, command, statementType, tableMapping);
-        }
+		IDbCommand IDbDataAdapter.SelectCommand {
+			get { return SelectCommand; }
+			set { 
+				if (!(value is DB2Command)) 
+					throw new ArgumentException ();
+				SelectCommand = (DB2Command)value;
+			}
+		}
+
+		IDbCommand IDbDataAdapter.UpdateCommand {
+			get { return UpdateCommand; }
+			set { 
+				if (!(value is DB2Command)) 
+					throw new ArgumentException ();
+				UpdateCommand = (DB2Command)value;
+			}
+		}
 
 
-        protected override RowUpdatingEventArgs CreateRowUpdatingEvent (DataRow dataRow, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) 
-        {
-            return new DB2RowUpdatingEventArgs (dataRow, command, statementType, tableMapping);
-        }
+		ITableMappingCollection IDataAdapter.TableMappings {
+			get { return TableMappings; }
+		}
 
-        protected override void Dispose (bool disposing)
-        {
-            if (!disposed) {
-                if (disposing) {
-                    
-                }
-                
-                disposed = true;
-            }
-        }
+		#endregion 
 
-        protected override void OnRowUpdated (RowUpdatedEventArgs value) 
-        {
-            if (RowUpdated != null)
-                RowUpdated (this, (DB2RowUpdatedEventArgs) value);
-        }
+		#region Methods
 
-        protected override void OnRowUpdating (RowUpdatingEventArgs value) 
-        {
-            if (RowUpdating != null)
-                RowUpdating (this, (DB2RowUpdatingEventArgs) value);
-        }
+		protected override RowUpdatedEventArgs CreateRowUpdatedEvent (DataRow dataRow, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) 
+		{
+			return new DB2RowUpdatedEventArgs (dataRow, command, statementType, tableMapping);
+		}
 
-        #endregion 
 
-        #region Events and Delegates
+		protected override RowUpdatingEventArgs CreateRowUpdatingEvent (DataRow dataRow, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) 
+		{
+			return new DB2RowUpdatingEventArgs (dataRow, command, statementType, tableMapping);
+		}
 
-        public event DB2RowUpdatedEventHandler RowUpdated;
+		protected override void Dispose (bool disposing)
+		{
+			if (!disposed) {
+				if (disposing) {
+					
+				}
+				
+				disposed = true;
+			}
+		}
 
-        public event DB2RowUpdatingEventHandler RowUpdating;
+		protected override void OnRowUpdated (RowUpdatedEventArgs value) 
+		{
+			if (RowUpdated != null)
+				RowUpdated (this, (DB2RowUpdatedEventArgs) value);
+		}
 
-        #endregion 
+		protected override void OnRowUpdating (RowUpdatingEventArgs value) 
+		{
+			if (RowUpdating != null)
+				RowUpdating (this, (DB2RowUpdatingEventArgs) value);
+		}
 
-    }
+		#endregion 
+
+		#region Events and Delegates
+
+		public event DB2RowUpdatedEventHandler RowUpdated;
+
+		public event DB2RowUpdatingEventHandler RowUpdating;
+
+		#endregion 
+
+	}
 }

@@ -3,8 +3,8 @@
 
 class C
 {
-    static void Main ()
-    {
-        bool b = 1 is void;
-    }
+	static void Main ()
+	{
+		bool b = 1 is void;
+	}
 }

@@ -1,9 +1,9 @@
 //
 // PersistChildrenAttributeCas.cs 
-//    - CAS unit tests for System.Web.UI.PersistChildrenAttribute
+//	- CAS unit tests for System.Web.UI.PersistChildrenAttribute
 //
 // Author:
-//    Sebastien Pouliot  <sebastien@ximian.com>
+//	Sebastien Pouliot  <sebastien@ximian.com>
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -38,52 +38,52 @@ using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI {
 
-    [TestFixture]
-    [Category ("CAS")]
-    public class PersistChildrenAttributeCas : AspNetHostingMinimal {
+	[TestFixture]
+	[Category ("CAS")]
+	public class PersistChildrenAttributeCas : AspNetHostingMinimal {
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor1_Deny_Unrestricted ()
-        {
-            PersistChildrenAttribute pca = new PersistChildrenAttribute (true);
-            Assert.IsTrue (pca.Persist, "Persist");
-            Assert.IsFalse (pca.UsesCustomPersistence, "UsesCustomPersistence");
-            Assert.IsTrue (pca.Equals (pca), "Equals");
-            Assert.IsTrue (pca.IsDefaultAttribute (), "IsDefaultAttribute");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor1_Deny_Unrestricted ()
+		{
+			PersistChildrenAttribute pca = new PersistChildrenAttribute (true);
+			Assert.IsTrue (pca.Persist, "Persist");
+			Assert.IsFalse (pca.UsesCustomPersistence, "UsesCustomPersistence");
+			Assert.IsTrue (pca.Equals (pca), "Equals");
+			Assert.IsTrue (pca.IsDefaultAttribute (), "IsDefaultAttribute");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor2_Deny_Unrestricted ()
-        {
-            PersistChildrenAttribute pca = new PersistChildrenAttribute (false, true);
-            Assert.IsFalse (pca.Persist, "Persist");
-            Assert.IsTrue (pca.UsesCustomPersistence, "UsesCustomPersistence");
-            Assert.IsTrue (pca.Equals (pca), "Equals");
-            Assert.IsFalse (pca.IsDefaultAttribute (), "IsDefaultAttribute");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Ctor2_Deny_Unrestricted ()
+		{
+			PersistChildrenAttribute pca = new PersistChildrenAttribute (false, true);
+			Assert.IsFalse (pca.Persist, "Persist");
+			Assert.IsTrue (pca.UsesCustomPersistence, "UsesCustomPersistence");
+			Assert.IsTrue (pca.Equals (pca), "Equals");
+			Assert.IsFalse (pca.IsDefaultAttribute (), "IsDefaultAttribute");
+		}
 
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Static_Deny_Unrestricted ()
-        {
-            Assert.IsNotNull (PersistChildrenAttribute.Default, "Default");
-            Assert.IsNotNull (PersistChildrenAttribute.Yes, "Yes");
-            Assert.IsNotNull (PersistChildrenAttribute.No, "No");
-        }
+		[Test]
+		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
+		public void Static_Deny_Unrestricted ()
+		{
+			Assert.IsNotNull (PersistChildrenAttribute.Default, "Default");
+			Assert.IsNotNull (PersistChildrenAttribute.Yes, "Yes");
+			Assert.IsNotNull (PersistChildrenAttribute.No, "No");
+		}
 
-        // LinkDemand
+		// LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-        {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (bool) });
-            Assert.IsNotNull (ci, ".ctor(bool)");
-            return ci.Invoke (new object[1] { false });
-        }
+		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+		{
+			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (bool) });
+			Assert.IsNotNull (ci, ".ctor(bool)");
+			return ci.Invoke (new object[1] { false });
+		}
 
-        public override Type Type {
-            get { return typeof (PersistChildrenAttribute); }
-        }
-    }
+		public override Type Type {
+			get { return typeof (PersistChildrenAttribute); }
+		}
+	}
 }

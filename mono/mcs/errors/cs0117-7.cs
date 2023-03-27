@@ -3,9 +3,9 @@
 
 class X
 {
-    public static void Foo (int i, string code = A.CODE)
-    {
-    }
+	public static void Foo (int i, string code = A.CODE)
+	{
+	}
 }
 
 class A

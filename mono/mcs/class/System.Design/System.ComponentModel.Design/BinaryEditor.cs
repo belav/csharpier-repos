@@ -33,21 +33,21 @@ using System.Drawing.Design;
 
 namespace System.ComponentModel.Design
 {
-    public sealed class BinaryEditor : UITypeEditor
-    {
-        public BinaryEditor ()
-        {
-        }
+	public sealed class BinaryEditor : UITypeEditor
+	{
+		public BinaryEditor ()
+		{
+		}
 
-        [MonoTODO]
-        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
-        {
-            throw new NotImplementedException ();
-        }
+		[MonoTODO]
+		public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+		{
+			throw new NotImplementedException ();
+		}
 
-        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
-        {
-            return UITypeEditorEditStyle.Modal;
-        }
-    }
+		public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+		{
+			return UITypeEditorEditStyle.Modal;
+		}
+	}
 }

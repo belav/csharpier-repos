@@ -3,10 +3,10 @@
 
 class Test<T>
 {
-    void test (Test<T> t, System.Predicate<T> p)
-    {
-        test (t, delegate (Test<T> item) {
-            return false;
-        });
-    }
+	void test (Test<T> t, System.Predicate<T> p)
+	{
+		test (t, delegate (Test<T> item) {
+			return false;
+		});
+	}
 }

@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+ï»¿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -169,7 +169,7 @@ namespace WebMatrix.WebData.Test
         {
             // Arrange
             var generator = new Mock<RandomNumberGenerator>(MockBehavior.Strict);
-            var generatedBytes = Encoding.Default.GetBytes("|aÿx§#½oÿ?îA8Eµ");
+            var generatedBytes = Encoding.Default.GetBytes("|aÃ¿xÂ§#Â½oÃ¿â†¨Ã®A8EÂµ");
             generator.Setup(g => g.GetBytes(It.IsAny<byte[]>())).Callback((byte[] array) => Array.Copy(generatedBytes, array, generatedBytes.Length));
 
             // Act

@@ -22,7 +22,7 @@
 // Copyright (c) 2007, 2008 Novell, Inc.
 //
 // Authors:
-//    Andreia Gaita (avidigal@novell.com)
+//	Andreia Gaita (avidigal@novell.com)
 //
 
 using System;
@@ -32,54 +32,54 @@ using System.Text;
 
 namespace Mono.Mozilla {
 
-    [Guid ("0d0acd2a-61b4-11d4-9877-00c04fa0cf4a")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIOutputStream {
+	[Guid ("0d0acd2a-61b4-11d4-9877-00c04fa0cf4a")]
+	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+	[ComImport ()]
+	internal interface nsIOutputStream {
 
 #region nsIOutputStream
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int close ();
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int close ();
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int flush ();
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int flush ();
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int write ([MarshalAs (UnmanagedType.LPStr) ]  string aBuf,
-                 uint aCount,
-                out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int write ([MarshalAs (UnmanagedType.LPStr) ]  string aBuf,
+				 uint aCount,
+				out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int writeFrom ([MarshalAs (UnmanagedType.Interface) ]  nsIInputStream aFromStream,
-                 uint aCount,
-                out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int writeFrom ([MarshalAs (UnmanagedType.Interface) ]  nsIInputStream aFromStream,
+				 uint aCount,
+				out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int writeSegments ( nsIReadSegmentFunDelegate aReader,
-                 IntPtr aClosure,
-                 uint aCount,
-                out uint ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int writeSegments ( nsIReadSegmentFunDelegate aReader,
+				 IntPtr aClosure,
+				 uint aCount,
+				out uint ret);
 
-        [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int isNonBlocking (out bool ret);
+		[PreserveSigAttribute]
+		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+		int isNonBlocking (out bool ret);
 
 #endregion
-    }
+	}
 
 
-    internal class nsOutputStream {
-        public static nsIOutputStream GetProxy (Mono.WebBrowser.IWebBrowser control, nsIOutputStream obj)
-        {
-            object o = Base.GetProxyForObject (control, typeof(nsIOutputStream).GUID, obj);
-            return o as nsIOutputStream;
-        }
-    }
+	internal class nsOutputStream {
+		public static nsIOutputStream GetProxy (Mono.WebBrowser.IWebBrowser control, nsIOutputStream obj)
+		{
+			object o = Base.GetProxyForObject (control, typeof(nsIOutputStream).GUID, obj);
+			return o as nsIOutputStream;
+		}
+	}
 }
 #if example
 
@@ -88,58 +88,58 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-    internal class OutputStream : nsIOutputStream {
+	internal class OutputStream : nsIOutputStream {
 
 #region nsIOutputStream
-        int nsIOutputStream.close ()
-        {
-            return ;
-        }
+		int nsIOutputStream.close ()
+		{
+			return ;
+		}
 
 
 
-        int nsIOutputStream.flush ()
-        {
-            return ;
-        }
+		int nsIOutputStream.flush ()
+		{
+			return ;
+		}
 
 
 
-        int nsIOutputStream.write ([MarshalAs (UnmanagedType.LPStr) ]  string aBuf,
-                 uint aCount,
-                out uint ret)
-        {
-            return ;
-        }
+		int nsIOutputStream.write ([MarshalAs (UnmanagedType.LPStr) ]  string aBuf,
+				 uint aCount,
+				out uint ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIOutputStream.writeFrom ([MarshalAs (UnmanagedType.Interface) ]  nsIInputStream aFromStream,
-                 uint aCount,
-                out uint ret)
-        {
-            return ;
-        }
+		int nsIOutputStream.writeFrom ([MarshalAs (UnmanagedType.Interface) ]  nsIInputStream aFromStream,
+				 uint aCount,
+				out uint ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIOutputStream.writeSegments ( nsIReadSegmentFunDelegate aReader,
-                 IntPtr aClosure,
-                 uint aCount,
-                out uint ret)
-        {
-            return ;
-        }
+		int nsIOutputStream.writeSegments ( nsIReadSegmentFunDelegate aReader,
+				 IntPtr aClosure,
+				 uint aCount,
+				out uint ret)
+		{
+			return ;
+		}
 
 
 
-        int nsIOutputStream.isNonBlocking (out bool ret)
-        {
-            return ;
-        }
+		int nsIOutputStream.isNonBlocking (out bool ret)
+		{
+			return ;
+		}
 
 
 
 #endregion
-    }
+	}
 #endif

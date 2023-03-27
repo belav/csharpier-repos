@@ -2,7 +2,7 @@
 // VisitStatus.cs
 // 
 // Authors:
-//     Alexander Chebaturkin (chebaturkin@gmail.com)
+// 	Alexander Chebaturkin (chebaturkin@gmail.com)
 // 
 // Copyright (C) 2011 Alexander Chebaturkin
 // 
@@ -27,8 +27,8 @@
 // 
 
 namespace Mono.CodeContracts.Static.DataStructures {
-    enum VisitStatus {
-        ContinueVisit,
-        StopVisit
-    }
+	enum VisitStatus {
+		ContinueVisit,
+		StopVisit
+	}
 }

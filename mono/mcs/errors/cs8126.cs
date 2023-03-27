@@ -3,7 +3,7 @@
 
 class C
 {
-    static void Test ((int Rest, int b) arg)
-    {
-    }
+	static void Test ((int Rest, int b) arg)
+	{
+	}
 }
