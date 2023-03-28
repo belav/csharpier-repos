@@ -1,9 +1,8 @@
 <Project>
-  <Import Project="..\Directory.Build.props" />
-
-  <PropertyGroup>
-    <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
-    <OutputPath>$([MSBuild]::NormalizeDirectory('$(BaseOutputPath)', '$(TargetFramework)-$(MonoConfiguration)'))</OutputPath>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <Import Project="..\Directory.Build.props" />
+    <PropertyGroup>
+        <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
+        <OutputPath>$([MSBuild]::NormalizeDirectory('$(BaseOutputPath)', '$(TargetFramework)-$(MonoConfiguration)'))</OutputPath>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 </Project>

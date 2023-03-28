@@ -1,14 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DebugType>PdbOnly</DebugType>
-    <Optimize>False</Optimize>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="moduleHandleCache.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="moduleLibrary.csproj" />
-  </ItemGroup>
+    <PropertyGroup></PropertyGroup>
+    <PropertyGroup>
+        <DebugType>PdbOnly</DebugType>
+        <Optimize>False</Optimize>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="moduleHandleCache.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="moduleLibrary.csproj" />
+    </ItemGroup>
 </Project>

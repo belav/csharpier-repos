@@ -51,6 +51,7 @@ namespace System.Net.Http
         public HttpClient()
             : this(new HttpClientHandler(), true) { }
 #endif
+
         public HttpClient(HttpMessageHandler handler)
             : this(handler, true) { }
 

@@ -1,33 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>$(TestInfraTargetFramework)</TargetFramework>
-
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NuGet.Packaging" Version="$(NugetPackagingVersion)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TestUtils\TestUtils.csproj" />
-    <OrderProjectReference Include="@(PkgprojProjectToBuild)" />
-  </ItemGroup>
-
-  <!--
+    <PropertyGroup>
+        <TargetFramework>$(TestInfraTargetFramework)</TargetFramework>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="NuGet.Packaging" Version="$(NugetPackagingVersion)" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\TestUtils\TestUtils.csproj" />
+        <OrderProjectReference Include="@(PkgprojProjectToBuild)" />
+    </ItemGroup>
+    <!--
     Ensure the packaging projects build first. Don't do this in VS: the build takes too long and
     isn't incremental.
   -->
-  <Target Name="EnsureOrder"
-          Condition="
-            '$(SkipBuildingSharedFrameworkTestDependencies)' != 'true' and
-            '$(BuildingInsideVisualStudio)' != 'true'"
-          BeforeTargets="Build">
-    <MSBuild
-      Projects="@(OrderProjectReference)"
-      Targets="Build"
-      BuildInParallel="$(BuildInParallel)" />
-  </Target>
-
+    <Target Name="EnsureOrder" Condition="&#xD;&#xA;            '$(SkipBuildingSharedFrameworkTestDependencies)' != 'true' and&#xD;&#xA;            '$(BuildingInsideVisualStudio)' != 'true'" BeforeTargets="Build">
+        <MSBuild Projects="@(OrderProjectReference)" Targets="Build" BuildInParallel="$(BuildInParallel)" />
+    </Target>
 </Project>

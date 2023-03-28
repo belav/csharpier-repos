@@ -174,6 +174,7 @@ namespace System.Reflection.Emit
             throw new NotImplementedException();
         }
 #endif
+
         internal int MetadataTokenInternal
         {
             get { return m_pdToken.Token; }

@@ -35,6 +35,7 @@ namespace MonoTests.System.Threading.Tasks
 #else
         const int NumRun = 500;
 #endif
+
         public static void Repeat(Action action)
         {
             Repeat(action, NumRun);

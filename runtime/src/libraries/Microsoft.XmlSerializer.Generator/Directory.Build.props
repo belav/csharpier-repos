@@ -1,6 +1,6 @@
 ﻿<Project>
-  <Import Project="..\Directory.Build.props" />
-  <PropertyGroup>
-    <AssemblyFileVersion>$(AssemblyVersion)</AssemblyFileVersion>
-  </PropertyGroup>
+    <Import Project="..\Directory.Build.props" />
+    <PropertyGroup>
+        <AssemblyFileVersion>$(AssemblyVersion)</AssemblyFileVersion>
+    </PropertyGroup>
 </Project>

@@ -1,5 +1,5 @@
 <Project>
-  <PropertyGroup>
-    <BlazorWebAssemblyJSPath>$(MSBuildThisFileDirectory)blazor.webassembly.js</BlazorWebAssemblyJSPath>
-  </PropertyGroup>
+    <PropertyGroup>
+        <BlazorWebAssemblyJSPath>$(MSBuildThisFileDirectory)blazor.webassembly.js</BlazorWebAssemblyJSPath>
+    </PropertyGroup>
 </Project>

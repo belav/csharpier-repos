@@ -17,28 +17,24 @@ WARNING:   When setting properties based on their current state (for example:
 ***********************************************************************************************
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-  <!--
+    <!--
     Target: GetExecuteCmdFullPath
     Return Executed Cmd Relative Full Path
     We can use this target get its toRun Project's Cmd Full Path to avoid hard-code
   -->
-  <Target
-    Name="GetExecuteCmdFullPath"
-    Returns="$(ExecuteCmdFullPath)">
-    <PropertyGroup Condition="$(GenerateRunScript)">
-        <ExecuteCmdFullPath>$(OutputPath)$(AssemblyName).cmd</ExecuteCmdFullPath>
-    </PropertyGroup>
-    <!-- In order to avoid the overhead of calling MSBuild (as it may result in chains of MSBuild calls) I am assuming the extension in this circumstance. -->
-    <PropertyGroup Condition="$(CLRTestProjectToRun) != '' AND $(GenerateRunScript)">
-      <ExecuteCmdFullPath>$(OutputPath)$([System.IO.Path]::GetFilenameWithoutExtension(&quot;$(CLRTestProjectToRun)&quot;)).dll</ExecuteCmdFullPath>
-    </PropertyGroup>
-    <PropertyGroup Condition="!$(GenerateRunScript)">
-        <ExecuteCmdFullPath>$(OutputPath)$(AssemblyName).$(OutputType.ToLower())</ExecuteCmdFullPath>
-    </PropertyGroup>
-  </Target>
-
-  <!--
+    <Target Name="GetExecuteCmdFullPath" Returns="$(ExecuteCmdFullPath)">
+        <PropertyGroup Condition="$(GenerateRunScript)">
+            <ExecuteCmdFullPath>$(OutputPath)$(AssemblyName).cmd</ExecuteCmdFullPath>
+        </PropertyGroup>
+        <!-- In order to avoid the overhead of calling MSBuild (as it may result in chains of MSBuild calls) I am assuming the extension in this circumstance. -->
+        <PropertyGroup Condition="$(CLRTestProjectToRun) != '' AND $(GenerateRunScript)">
+            <ExecuteCmdFullPath>$(OutputPath)$([System.IO.Path]::GetFilenameWithoutExtension("$(CLRTestProjectToRun)")).dll</ExecuteCmdFullPath>
+        </PropertyGroup>
+        <PropertyGroup Condition="!$(GenerateRunScript)">
+            <ExecuteCmdFullPath>$(OutputPath)$(AssemblyName).$(OutputType.ToLower())</ExecuteCmdFullPath>
+        </PropertyGroup>
+    </Target>
+    <!--
   *******************************************************************************************
   TARGET: GenerateExecutionScriptInternal
 
@@ -49,16 +45,11 @@ WARNING:   When setting properties based on their current state (for example:
   Notice this is hooked up to run after targets that generate the stores that are marked with GenerateScripts metadata.
   Note also that this means it will run after the first of such targets.
   -->
-  <Target Name="GenerateBatchExecutionScript"
-    Inputs="$(MSBuildProjectFullPath)"
-    Outputs="$(OutputPath)\$(AssemblyName).cmd"
-    DependsOnTargets="$(BatchScriptSnippetGen);GetIlasmRoundTripBatchScript;GetSuperPMICollectionBatchScript">
-
-    <Message Text="Project depends on $(_CLRTestToRunFileFullPath)." Condition="'$(_CLRTestNeedsProjectToRun)' == 'True'" />
-
-    <PropertyGroup>
-      <CoreRunArgs>@(RuntimeHostConfigurationOption -> '-p &quot;%(Identity)=%(Value)&quot;', ' ')</CoreRunArgs>
-      <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(GCStressIncompatible)' == 'true'"><![CDATA[
+    <Target Name="GenerateBatchExecutionScript" Inputs="$(MSBuildProjectFullPath)" Outputs="$(OutputPath)\$(AssemblyName).cmd" DependsOnTargets="$(BatchScriptSnippetGen);GetIlasmRoundTripBatchScript;GetSuperPMICollectionBatchScript">
+        <Message Text="Project depends on $(_CLRTestToRunFileFullPath)." Condition="'$(_CLRTestNeedsProjectToRun)' == 'True'" />
+        <PropertyGroup>
+            <CoreRunArgs>@(RuntimeHostConfigurationOption -&gt; '-p "%(Identity)=%(Value)"', ' ')</CoreRunArgs>
+            <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(GCStressIncompatible)' == 'true'"><![CDATA[
 $(BatchCLRTestEnvironmentCompatibilityCheck)
 IF NOT "%DOTNET_GCStress%"=="" (
   ECHO SKIPPING EXECUTION BECAUSE DOTNET_GCStress IS SET
@@ -66,7 +57,7 @@ IF NOT "%DOTNET_GCStress%"=="" (
   Exit /b 0
 )
       ]]></BatchCLRTestEnvironmentCompatibilityCheck>
-      <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(UnloadabilityIncompatible)' == 'true'"><![CDATA[
+            <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(UnloadabilityIncompatible)' == 'true'"><![CDATA[
 $(BatchCLRTestEnvironmentCompatibilityCheck)
 IF NOT "%RunInUnloadableContext%"=="" (
   ECHO SKIPPING EXECUTION BECAUSE the test is incompatible with unloadability
@@ -74,7 +65,7 @@ IF NOT "%RunInUnloadableContext%"=="" (
   Exit /b 0
 )
       ]]></BatchCLRTestEnvironmentCompatibilityCheck>
-      <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(TieringTestIncompatible)' == 'true'"><![CDATA[
+            <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(TieringTestIncompatible)' == 'true'"><![CDATA[
 $(BatchCLRTestEnvironmentCompatibilityCheck)
 IF NOT "%RunTieringTest%"=="" (
   ECHO SKIPPING EXECUTION BECAUSE the test is incompatible with the tiering test harness
@@ -82,8 +73,7 @@ IF NOT "%RunTieringTest%"=="" (
   Exit /b 0
 )
       ]]></BatchCLRTestEnvironmentCompatibilityCheck>
-      <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(JitOptimizationSensitive)' == 'true' And '$(RuntimeFlavor)' != 'mono'">
-    <![CDATA[
+            <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(JitOptimizationSensitive)' == 'true' And '$(RuntimeFlavor)' != 'mono'"><![CDATA[
 $(BatchCLRTestEnvironmentCompatibilityCheck)
 REM JitOptimizationSensitive includes our set of tests which cannot run under:
 REM     JitMinOpts=1
@@ -108,7 +98,7 @@ IF "%DOTNET_TieredCompilation%"=="0" goto :TieredCompilationDisabledCorrectly
   Exit /b 0
 :TieredCompilationDisabledCorrectly
       ]]></BatchCLRTestEnvironmentCompatibilityCheck>
-      <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(HeapVerifyIncompatible)' == 'true'"><![CDATA[
+            <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(HeapVerifyIncompatible)' == 'true'"><![CDATA[
 $(BatchCLRTestEnvironmentCompatibilityCheck)
 IF NOT "%DOTNET_HeapVerify%"=="" (
   ECHO SKIPPING EXECUTION BECAUSE DOTNET_HeapVerify IS SET
@@ -116,7 +106,7 @@ IF NOT "%DOTNET_HeapVerify%"=="" (
   Exit /b 0
 )
       ]]></BatchCLRTestEnvironmentCompatibilityCheck>
-      <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(IlasmRoundTripIncompatible)' == 'true'"><![CDATA[
+            <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(IlasmRoundTripIncompatible)' == 'true'"><![CDATA[
 $(BatchCLRTestEnvironmentCompatibilityCheck)
 IF NOT "%RunningIlasmRoundTrip%"=="" (
   ECHO SKIPPING EXECUTION BECAUSE RunningIlasmRoundTrip IS SET
@@ -124,8 +114,7 @@ IF NOT "%RunningIlasmRoundTrip%"=="" (
   Exit /b 0
 )
       ]]></BatchCLRTestEnvironmentCompatibilityCheck>
-
-      <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(SynthesizedPgoIncompatible)' == 'true'"><![CDATA[
+            <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(SynthesizedPgoIncompatible)' == 'true'"><![CDATA[
 $(BatchCLRTestEnvironmentCompatibilityCheck)
 IF NOT "%CrossGen2SynthesizePgo"=="" (
   ECHO SKIPPING EXECUTION BECAUSE CrossGen2SynthesizePgo IS SET
@@ -133,20 +122,15 @@ IF NOT "%CrossGen2SynthesizePgo"=="" (
   Exit /b 0
 )
       ]]></BatchCLRTestEnvironmentCompatibilityCheck>
-
-      <BatchCLRTestExitCodePrep Condition="$(_CLRTestNeedsToRun)">
-        <![CDATA[
+            <BatchCLRTestExitCodePrep Condition="$(_CLRTestNeedsToRun)"><![CDATA[
 if not defined CLRTestExpectedExitCode (set CLRTestExpectedExitCode=$(CLRTestExitCode))
 ECHO BEGIN EXECUTION
-      ]]>
-      </BatchCLRTestExitCodePrep>
-
-      <BatchCLRTestArgPrep Condition=" '$(CLRTestExecutionArguments)'!='' "><![CDATA[
+      ]]></BatchCLRTestExitCodePrep>
+            <BatchCLRTestArgPrep Condition=" '$(CLRTestExecutionArguments)'!='' "><![CDATA[
 if not defined CLRTestExecutionArguments (set CLRTestExecutionArguments=$(CLRTestExecutionArguments) )
       ]]></BatchCLRTestArgPrep>
-
-      <!-- By default, be prepared to do a full check -->
-      <BatchCLRTestExitCodeCheck><![CDATA[
+            <!-- By default, be prepared to do a full check -->
+            <BatchCLRTestExitCodeCheck><![CDATA[
 ECHO Expected: %CLRTestExpectedExitCode%
 ECHO Actual: %CLRTestExitCode%
 IF NOT "%CLRTestExitCode%"=="%CLRTestExpectedExitCode%" (
@@ -174,15 +158,13 @@ Exit /b 2
 if exist %lockFolder% rd /s /q %lockFolder%
 Exit /b 0
       ]]></BatchCLRTestExitCodeCheck>
-    </PropertyGroup>
-
-    <ItemGroup Condition="$(_CLRTestNeedsToRun)">
-      <Clean Include="$(OutputPath)\$(AssemblyName).cmd"/>
-
-      <BatchCLRTestExecutionScriptArgument Include="debug">
-        <HasParam>true</HasParam>
-        <ParamName>debuggerFullPath</ParamName>
-        <Command><![CDATA[
+        </PropertyGroup>
+        <ItemGroup Condition="$(_CLRTestNeedsToRun)">
+            <Clean Include="$(OutputPath)\$(AssemblyName).cmd" />
+            <BatchCLRTestExecutionScriptArgument Include="debug">
+                <HasParam>true</HasParam>
+                <ParamName>debuggerFullPath</ParamName>
+                <Command><![CDATA[
     IF EXIST "%2" (
         set _DebuggerFullPath=%2
         shift
@@ -191,13 +173,12 @@ Exit /b 0
         GOTO :USAGE
     )
         ]]></Command>
-        <Description>Run testcases under debugger.</Description>
-      </BatchCLRTestExecutionScriptArgument>
-
-      <BatchCLRTestExecutionScriptArgument Include="e;env">
-        <HasParam>true</HasParam>
-        <ParamName>dotenvFileFullPath</ParamName>
-        <Command><![CDATA[
+                <Description>Run testcases under debugger.</Description>
+            </BatchCLRTestExecutionScriptArgument>
+            <BatchCLRTestExecutionScriptArgument Include="e;env">
+                <HasParam>true</HasParam>
+                <ParamName>dotenvFileFullPath</ParamName>
+                <Command><![CDATA[
     IF EXIST "%2" (
         set __DotEnvArg=-e %2
     ) ELSE (
@@ -205,22 +186,20 @@ Exit /b 0
         GOTO :USAGE
     )
         ]]></Command>
-        <Description>A dotenv file to pass to corerun to set environment variables for the test run.</Description>
-      </BatchCLRTestExecutionScriptArgument>
-
-      <BatchCLRTestExecutionScriptArgument Include="coreroot">
-        <HasParam>true</HasParam>
-        <ParamName>CoreRootFullPath</ParamName>
-        <Command><![CDATA[
+                <Description>A dotenv file to pass to corerun to set environment variables for the test run.</Description>
+            </BatchCLRTestExecutionScriptArgument>
+            <BatchCLRTestExecutionScriptArgument Include="coreroot">
+                <HasParam>true</HasParam>
+                <ParamName>CoreRootFullPath</ParamName>
+                <Command><![CDATA[
     set CORE_ROOT=%2
         ]]></Command>
-        <Description>Set CORE_ROOT to the specified value before running the test.</Description>
-      </BatchCLRTestExecutionScriptArgument>
-    </ItemGroup>
-
-      <PropertyGroup>
-          <ReflectionRootsXml>$(AssemblyName).reflect.xml</ReflectionRootsXml>
-          <BatchLinkerTestLaunchCmds><![CDATA[
+                <Description>Set CORE_ROOT to the specified value before running the test.</Description>
+            </BatchCLRTestExecutionScriptArgument>
+        </ItemGroup>
+        <PropertyGroup>
+            <ReflectionRootsXml>$(AssemblyName).reflect.xml</ReflectionRootsXml>
+            <BatchLinkerTestLaunchCmds><![CDATA[
 REM Linker commands
 
 set LinkBin=__Link
@@ -272,10 +251,8 @@ IF defined DoLink (
     set ExePath=%LinkBin%\$(InputAssemblyName)
     set CORE_ROOT=%scriptPath%LinkBin%
 )
-]]>
-          </BatchLinkerTestLaunchCmds>
-          <BatchLinkerTestCleanupCmds>
-              <![CDATA[
+]]></BatchLinkerTestLaunchCmds>
+            <BatchLinkerTestCleanupCmds><![CDATA[
 REM Clean up the LinkBin directories after test execution.
 REM Otherwise, RunTests may run out of disk space.
 
@@ -284,18 +261,16 @@ if defined DoLink (
         IF EXIST %LinkBin% rmdir /s /q %LinkBin%
     )
 )
-]]>
-          </BatchLinkerTestCleanupCmds>
-      </PropertyGroup>
-      <PropertyGroup>
-      <CLRTestRunFile Condition="'$(CLRTestIsHosted)'=='true'">"%CORE_ROOT%\corerun.exe" $(CoreRunArgs) %__DotEnvArg%</CLRTestRunFile>
-      <BatchCopyCoreShimLocalCmds Condition="'$(CLRTestScriptLocalCoreShim)' == 'true'"><![CDATA[
+]]></BatchLinkerTestCleanupCmds>
+        </PropertyGroup>
+        <PropertyGroup>
+            <CLRTestRunFile Condition="'$(CLRTestIsHosted)'=='true'">"%CORE_ROOT%\corerun.exe" $(CoreRunArgs) %__DotEnvArg%</CLRTestRunFile>
+            <BatchCopyCoreShimLocalCmds Condition="'$(CLRTestScriptLocalCoreShim)' == 'true'"><![CDATA[
 REM Local CoreShim requested - see MSBuild property 'CLRTestScriptLocalCoreShim'
 ECHO Copying '%CORE_ROOT%\CoreShim.dll'...
 COPY /y %CORE_ROOT%\CoreShim.dll .
       ]]></BatchCopyCoreShimLocalCmds>
-      <BatchCLRTestLaunchCmds Condition="'$(CLRTestKind)' == 'BuildAndRun' And $(TargetOS) != 'Android' ">
-    <![CDATA[
+            <BatchCLRTestLaunchCmds Condition="'$(CLRTestKind)' == 'BuildAndRun' And $(TargetOS) != 'Android' "><![CDATA[
 $(BatchLinkerTestLaunchCmds)
 $(BatchCopyCoreShimLocalCmds)
 
@@ -319,8 +294,7 @@ if defined RunCrossGen2 (
 )
 $(BatchLinkerTestCleanupCmds)
       ]]></BatchCLRTestLaunchCmds>
-      <BatchCLRTestLaunchCmds Condition="'$(CLRTestKind)' == 'BuildAndRun' And $(TargetOS) == 'Android' ">
-    <![CDATA[
+            <BatchCLRTestLaunchCmds Condition="'$(CLRTestKind)' == 'BuildAndRun' And $(TargetOS) == 'Android' "><![CDATA[
 REM run Android app
 IF NOT "%__TestDotNetCmd%"=="" (
   set __Command=%__TestDotNetCmd%
@@ -340,43 +314,37 @@ IF NOT "%XHARNESS_CLI_PATH%"=="" (
 set CLRTestExitCode=!ERRORLEVEL!
 set CLRTestExpectedExitCode=0
     ]]></BatchCLRTestLaunchCmds>
-
-      <BatchCLRTestLaunchCmds Condition="'$(CLRTestKind)' == 'RunOnly'"><![CDATA[
+            <BatchCLRTestLaunchCmds Condition="'$(CLRTestKind)' == 'RunOnly'"><![CDATA[
 $(BatchCopyCoreShimLocalCmds)
 ECHO  cmd /c $(InputAssemblyName)
 cmd /c $(InputAssemblyName)
 set CLRTestExitCode=!ERRORLEVEL!
 set CLRTestExpectedExitCode=0
       ]]></BatchCLRTestLaunchCmds>
-    </PropertyGroup>
-
-    <PropertyGroup>
-      <BatchEnvironmentVariables>
-@(CLRTestBatchEnvironmentVariable -> 'set %(Identity)=%(Value)', '%0d%0a')
-@(CLRTestEnvironmentVariable -> 'set %(Identity)=%(Value)', '%0d%0a')
+        </PropertyGroup>
+        <PropertyGroup>
+            <BatchEnvironmentVariables>
+@(CLRTestBatchEnvironmentVariable -&gt; 'set %(Identity)=%(Value)', '%0d%0a')
+@(CLRTestEnvironmentVariable -&gt; 'set %(Identity)=%(Value)', '%0d%0a')
       </BatchEnvironmentVariables>
-    </PropertyGroup>
-
-    <Message Text="MSBuildProjectDirectory:$(MSBuildProjectDirectory)" />
-    <Message Text="_CLRTestToRunFileFullPath:$(_CLRTestToRunFileFullPath)"/>
-    <Message Text="CLRTestRunFile:$(CLRTestRunFile)" />
-
-    <ItemGroup>
-      <_RequiredProperties Include="CLRTestRunFile">
-        <Value>$(CLRTestRunFile)</Value>
-      </_RequiredProperties>
-    </ItemGroup>
-
-    <!-- Raise an error if any value in _RequiredProperties is missing  -->
-    <Error Condition=" '%(_RequiredProperties.Value)'=='' "
-      Text="Missing required test property [%(_RequiredProperties.Identity)]. Something isn't plumbed through correctly.  Contact $(_CLRTestBuildSystemOwner)." />
-    <PropertyGroup>
-      <!--
+        </PropertyGroup>
+        <Message Text="MSBuildProjectDirectory:$(MSBuildProjectDirectory)" />
+        <Message Text="_CLRTestToRunFileFullPath:$(_CLRTestToRunFileFullPath)" />
+        <Message Text="CLRTestRunFile:$(CLRTestRunFile)" />
+        <ItemGroup>
+            <_RequiredProperties Include="CLRTestRunFile">
+                <Value>$(CLRTestRunFile)</Value>
+            </_RequiredProperties>
+        </ItemGroup>
+        <!-- Raise an error if any value in _RequiredProperties is missing  -->
+        <Error Condition=" '%(_RequiredProperties.Value)'=='' " Text="Missing required test property [%(_RequiredProperties.Identity)]. Something isn't plumbed through correctly.  Contact $(_CLRTestBuildSystemOwner)." />
+        <PropertyGroup>
+            <!--
       This generates the script portion to parse all of the command line arguments.
       The Command metadata for BatchCLRTestExecutionScriptArgument items is executed
       when the argument is found.
       -->
-      <BatchCLRTestArgPrep><![CDATA[
+            <BatchCLRTestArgPrep><![CDATA[
 REM Parse Command Line
 :NextArg
 
@@ -417,9 +385,8 @@ Exit /b 1
 :ArgsDone
 $(BatchCLRTestArgPrep)
       ]]></BatchCLRTestArgPrep>
-      <!-- NOTE! semicolons must be escaped with %3B boooo -->
-      <_CLRTestExecutionScriptText>
-  <![CDATA[
+            <!-- NOTE! semicolons must be escaped with %3B boooo -->
+            <_CLRTestExecutionScriptText><![CDATA[
 @ECHO OFF
 setlocal ENABLEDELAYEDEXPANSION
 set "lockFolder=%~dp0\lock"
@@ -460,12 +427,8 @@ REM PostCommands
 $(CLRTestBatchPostCommands)
 $(BatchCLRTestExitCodeCheck)
       ]]></_CLRTestExecutionScriptText>
-    </PropertyGroup>
-    <!-- Write the file -->
-    <WriteLinesToFile
-      File="$(OutputPath)\$(AssemblyName).cmd"
-      Lines="$(_CLRTestExecutionScriptText)"
-      Overwrite="true" />
-  </Target>
-
+        </PropertyGroup>
+        <!-- Write the file -->
+        <WriteLinesToFile File="$(OutputPath)\$(AssemblyName).cmd" Lines="$(_CLRTestExecutionScriptText)" Overwrite="true" />
+    </Target>
 </Project>

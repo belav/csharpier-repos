@@ -1,30 +1,28 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <BuildTaskAssemblyReference Condition=" '$(BuildTaskAssemblyReference)' == '' And Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll') ">Microsoft.Build.Tasks.Core</BuildTaskAssemblyReference>
-    <BuildTaskAssemblyReference Condition=" '$(BuildTaskAssemblyReference)' == '' And Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll') ">Microsoft.Build.Tasks.v$(MSBuildToolsVersion)</BuildTaskAssemblyReference>
-    <BuildTaskAssemblyReference Condition=" '$(BuildTaskAssemblyReference)' == '' And Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll') ">Microsoft.Build.Tasks.v4.0</BuildTaskAssemblyReference>
-    <!-- Know this file does not exist. But, error message will contain meaningful information. -->
-    <BuildTaskAssemblyReference Condition=" '$(BuildTaskAssemblyReference)' == '' ">Microsoft.Build.Tasks.Core</BuildTaskAssemblyReference>
-    <CodeTaskFactoryAssemblyFile Condition=" '$(CodeTaskFactoryAssemblyFile)' == '' ">$(MSBuildToolsPath)\$(BuildTaskAssemblyReference).dll</CodeTaskFactoryAssemblyFile>
-  </PropertyGroup>
-
-  <!-- This task does not support concurrent execution from multiple project files. Its use is only appropriate when
+    <PropertyGroup>
+        <BuildTaskAssemblyReference Condition=" '$(BuildTaskAssemblyReference)' == '' And Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll') ">Microsoft.Build.Tasks.Core</BuildTaskAssemblyReference>
+        <BuildTaskAssemblyReference Condition=" '$(BuildTaskAssemblyReference)' == '' And Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll') ">Microsoft.Build.Tasks.v$(MSBuildToolsVersion)</BuildTaskAssemblyReference>
+        <BuildTaskAssemblyReference Condition=" '$(BuildTaskAssemblyReference)' == '' And Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll') ">Microsoft.Build.Tasks.v4.0</BuildTaskAssemblyReference>
+        <!-- Know this file does not exist. But, error message will contain meaningful information. -->
+        <BuildTaskAssemblyReference Condition=" '$(BuildTaskAssemblyReference)' == '' ">Microsoft.Build.Tasks.Core</BuildTaskAssemblyReference>
+        <CodeTaskFactoryAssemblyFile Condition=" '$(CodeTaskFactoryAssemblyFile)' == '' ">$(MSBuildToolsPath)\$(BuildTaskAssemblyReference).dll</CodeTaskFactoryAssemblyFile>
+    </PropertyGroup>
+    <!-- This task does not support concurrent execution from multiple project files. Its use is only appropriate when
         NuGet.exe is not in use. -->
-  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
-    <ParameterGroup>
-      <OutputFileName ParameterType="System.String" Required="true" />
-      <MinimumVersion ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Reference Include="System.Core" />
-      <Using Namespace="System" />
-      <Using Namespace="System.Diagnostics" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="System.Net" />
-      <Using Namespace="Microsoft.Build.Framework" />
-      <Using Namespace="Microsoft.Build.Utilities" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
+    <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+        <ParameterGroup>
+            <OutputFileName ParameterType="System.String" Required="true" />
+            <MinimumVersion ParameterType="System.String" Required="true" />
+        </ParameterGroup>
+        <Task>
+            <Reference Include="System.Core" />
+            <Using Namespace="System" />
+            <Using Namespace="System.Diagnostics" />
+            <Using Namespace="System.IO" />
+            <Using Namespace="System.Net" />
+            <Using Namespace="Microsoft.Build.Framework" />
+            <Using Namespace="Microsoft.Build.Utilities" />
+            <Code Type="Fragment" Language="cs"><![CDATA[
                 Version minimumRequiredVersion;
 
                 if (!Version.TryParse(MinimumVersion, out minimumRequiredVersion))
@@ -87,29 +85,26 @@
                     Log.LogErrorFromException(ex);
                     return false;
                 }
-            ]]>
-      </Code>
-    </Task>
-  </UsingTask>
-
-  <UsingTask TaskName="PrintTestRunSummary" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
-    <ParameterGroup>
-      <TestResultsDirectory ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Reference Include="System.Xml" />
-      <Reference Include="System.Xml.Linq" />
-      <Using Namespace="System" />
-      <Using Namespace="System.Collections.Generic" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="System.Linq" />
-      <Using Namespace="System.Text" />
-      <Using Namespace="System.Text.RegularExpressions" />
-      <Using Namespace="System.Xml.Linq" />
-      <Using Namespace="Microsoft.Build.Framework" />
-      <Using Namespace="Microsoft.Build.Utilities" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
+            ]]></Code>
+        </Task>
+    </UsingTask>
+    <UsingTask TaskName="PrintTestRunSummary" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+        <ParameterGroup>
+            <TestResultsDirectory ParameterType="System.String" Required="true" />
+        </ParameterGroup>
+        <Task>
+            <Reference Include="System.Xml" />
+            <Reference Include="System.Xml.Linq" />
+            <Using Namespace="System" />
+            <Using Namespace="System.Collections.Generic" />
+            <Using Namespace="System.IO" />
+            <Using Namespace="System.Linq" />
+            <Using Namespace="System.Text" />
+            <Using Namespace="System.Text.RegularExpressions" />
+            <Using Namespace="System.Xml.Linq" />
+            <Using Namespace="Microsoft.Build.Framework" />
+            <Using Namespace="Microsoft.Build.Utilities" />
+            <Code Type="Fragment" Language="cs"><![CDATA[
                 try
                 {
                     string[] testResultFiles = Directory.GetFiles(TestResultsDirectory);
@@ -211,8 +206,7 @@
                     Log.LogErrorFromException(ex);
                     return false;
                 }
-            ]]>
-      </Code>
-    </Task>
-  </UsingTask>
+            ]]></Code>
+        </Task>
+    </UsingTask>
 </Project>

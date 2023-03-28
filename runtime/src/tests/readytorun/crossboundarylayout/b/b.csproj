@@ -1,16 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>library</OutputType>
-    <CLRTestKind>SharedLibrary</CLRTestKind>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="b.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\a\a.csproj" />
-    <ProjectReference Include="..\d\d.csproj" />
-    <ProjectReference Include="..\e\e.csproj" />
-  </ItemGroup>
+    <PropertyGroup>
+        <OutputType>library</OutputType>
+        <CLRTestKind>SharedLibrary</CLRTestKind>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="b.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\a\a.csproj" />
+        <ProjectReference Include="..\d\d.csproj" />
+        <ProjectReference Include="..\e\e.csproj" />
+    </ItemGroup>
 </Project>

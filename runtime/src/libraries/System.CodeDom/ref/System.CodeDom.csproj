@@ -1,11 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="System.CodeDom.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
-    <Compile Include="System.CodeDom.netframework.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="System.CodeDom.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
+        <Compile Include="System.CodeDom.netframework.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+    </ItemGroup>
 </Project>

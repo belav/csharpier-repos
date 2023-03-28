@@ -1,19 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <CLRTestKind>BuildAndRun</CLRTestKind>
-    <CLRTestPriority>0</CLRTestPriority>
-    <CLRTestTargetUnsupported Condition="'$(TargetArchitecture)' != 'x64'">true</CLRTestTargetUnsupported>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>$(DefineConstants);VEX_INTRINSICS</DefineConstants>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <IlcArg Include="--instruction-set:avx2" />
-  </ItemGroup>
-
-  <PropertyGroup>
-    <CLRTestBashPreCommands><![CDATA[
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <CLRTestKind>BuildAndRun</CLRTestKind>
+        <CLRTestPriority>0</CLRTestPriority>
+        <CLRTestTargetUnsupported Condition="'$(TargetArchitecture)' != 'x64'">true</CLRTestTargetUnsupported>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DefineConstants>$(DefineConstants);VEX_INTRINSICS</DefineConstants>
+    </PropertyGroup>
+    <ItemGroup>
+        <IlcArg Include="--instruction-set:avx2" />
+    </ItemGroup>
+    <PropertyGroup>
+        <CLRTestBashPreCommands><![CDATA[
 $(CLRTestBashPreCommands)
     if [[ "$OSTYPE" == "darwin"* ]]; then
         sysctl -a
@@ -31,9 +29,8 @@ $(CLRTestBashPreCommands)
         fi
     fi
 ]]></CLRTestBashPreCommands>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="Program.cs" />
-  </ItemGroup>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Program.cs" />
+    </ItemGroup>
 </Project>

@@ -1,9 +1,8 @@
 ﻿<Project>
-  <!--
+    <!--
     Define all of the configuration options supported for the ComInterfaceGenerator.
     To use, set an MSBuild property with the name of the option to `true`.
     See OptionsHelper.cs for more information on usage.
   -->
-  <ItemGroup>
-  </ItemGroup>
+    <ItemGroup></ItemGroup>
 </Project>

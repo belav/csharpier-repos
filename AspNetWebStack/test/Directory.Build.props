@@ -1,12 +1,8 @@
 <Project>
-  <Import Project="..\Directory.Build.props" />
-
-  <PropertyGroup>
-    <IsPackable>false</IsPackable>
-    <IsTestProject>true</IsTestProject>
-    <TargetFrameworkVersion
-        Condition=" '$(MSBuildProjectName)' != 'Microsoft.TestCommon' AND
-          '$(MSBuildProjectName)' != 'System.Net.Http.Formatting.NetCore.Test' AND
-          '$(MSBuildProjectName)' != 'System.Net.Http.Formatting.NetStandard.Test' ">v4.5.2</TargetFrameworkVersion>
-  </PropertyGroup>
+    <Import Project="..\Directory.Build.props" />
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+        <TargetFrameworkVersion Condition=" '$(MSBuildProjectName)' != 'Microsoft.TestCommon' AND&#xD;&#xA;          '$(MSBuildProjectName)' != 'System.Net.Http.Formatting.NetCore.Test' AND&#xD;&#xA;          '$(MSBuildProjectName)' != 'System.Net.Http.Formatting.NetStandard.Test' ">v4.5.2</TargetFrameworkVersion>
+    </PropertyGroup>
 </Project>

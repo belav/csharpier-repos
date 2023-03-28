@@ -1,143 +1,122 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<Import Project="$(BuildDirectory)AssemblyInfo.props" />
-	<Import Project="$(BuildDirectory)GitVersion.props" />
-	<Import Project="$(BuildDirectory)SignAssembly.props" />
-	<Import Project="$(BuildDirectory)SourceLink.props" />
-
-	<PropertyGroup>
-		<TargetFrameworks>net462;netstandard2.0;netstandard2.1;net6.0</TargetFrameworks>
-		<AssemblyName>Moq</AssemblyName>
-		<DebugSymbols>True</DebugSymbols>
-		<DebugType>embedded</DebugType>
-		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile> 
-		<GenerateDocumentation>true</GenerateDocumentation>
-		<NoWarn>$(NoWarn);0419;CS8032</NoWarn>
-		<RootNamespace>Moq</RootNamespace>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<WarningLevel>4</WarningLevel>
-		<LangVersion>9.0</LangVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' Or '$(TargetFramework)' == 'net6.0' ">
-		<DefineConstants>$(DefineConstants);FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<!-- Properties related to NuGet packaging: -->
-		<IsPackable>True</IsPackable>
-		<PackageId>Moq</PackageId>
-		<Title>Moq: an enjoyable mocking library</Title>
-		<Description>Moq is the most popular and friendly mocking framework for .NET.</Description>
-		<PackageReleaseNotes>A changelog is available at https://github.com/moq/moq4/blob/main/CHANGELOG.md.</PackageReleaseNotes>
-		<Authors>Daniel Cazzulino, kzu</Authors>
-		<PackageIcon>moq.png</PackageIcon>
-		<PackageLicenseUrl>https://raw.githubusercontent.com/moq/moq4/main/License.txt</PackageLicenseUrl>
-		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-		<NoPackageAnalysis>True</NoPackageAnalysis>
-		<PackageOutputPath>$(OutputDirectory)</PackageOutputPath>
-		<PackageTags>moq;tdd;mocking;mocks;unittesting;agile;unittest</PackageTags>
-		<PackageProjectUrl>https://github.com/moq/moq4</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/moq/moq4</RepositoryUrl>
-		<IncludeSymbols>false</IncludeSymbols>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Castle.Core" Version="5.1.1" />
-		<PackageReference Include="IFluentInterface" Version="2.1.0" PrivateAssets="All" />
-		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
-		<PackageReference Include="TypeNameFormatter.Sources" Version="1.0.0" PrivateAssets="All" />
-	</ItemGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net462' Or '$(TargetFramework)' == 'netstandard2.0' ">
-		<PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Update="Properties\Resources.resx">
-			<Generator>ResXFileCodeGenerator</Generator>
-			<SubType>Designer</SubType>
-			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
-		</EmbeddedResource>
-		<Compile Update="Properties\Resources.Designer.cs">
-			<AutoGen>True</AutoGen>
-			<DesignTime>True</DesignTime>
-			<DependentUpon>Resources.resx</DependentUpon>
-		</Compile>
-
-		<None Update="Language\GenericTypeParameters.tt">
-			<Generator>TextTemplatingFileGenerator</Generator>
-		</None>
-
-		<None Update="Language\ICallback.tt">
-			<Generator>TextTemplatingFileGenerator</Generator>
-			<LastGenOutput>ICallback.Generated.cs</LastGenOutput>
-		</None>
-		<Compile Update="Language\ICallback.Generated.cs">
-			<AutoGen>True</AutoGen>
-			<DesignTime>True</DesignTime>
-			<DependentUpon>ICallback.tt</DependentUpon>
-		</Compile>
-
-		<None Update="Language\IRaise.tt">
-			<Generator>TextTemplatingFileGenerator</Generator>
-			<LastGenOutput>IRaise.Generated.cs</LastGenOutput>
-		</None>
-		<Compile Update="Language\IRaise.Generated.cs">
-			<AutoGen>True</AutoGen>
-			<DesignTime>True</DesignTime>
-			<DependentUpon>IRaise.tt</DependentUpon>
-		</Compile>
-
-		<None Update="Language\IReturns.tt">
-			<Generator>TextTemplatingFileGenerator</Generator>
-			<LastGenOutput>IReturns.Generated.cs</LastGenOutput>
-		</None>
-		<Compile Update="Language\IReturns.Generated.cs">
-			<AutoGen>True</AutoGen>
-			<DesignTime>True</DesignTime>
-			<DependentUpon>IReturns.tt</DependentUpon>
-		</Compile>
-
-		<None Update="Language\IThrows.tt">
-			<Generator>TextTemplatingFileGenerator</Generator>
-			<LastGenOutput>IThrows.Generated.cs</LastGenOutput>
-		</None>
-		<Compile Update="Language\IThrows.Generated.cs">
-			<AutoGen>True</AutoGen>
-			<DesignTime>True</DesignTime>
-			<DependentUpon>IThrows.tt</DependentUpon>
-		</Compile>
-
-		<None Update="ReturnsExtensions.tt">
-			<Generator>TextTemplatingFileGenerator</Generator>
-			<LastGenOutput>ReturnsExtensions.Generated.cs</LastGenOutput>
-		</None>
-		<Compile Update="ReturnsExtensions.Generated.cs">
-			<AutoGen>True</AutoGen>
-			<DesignTime>True</DesignTime>
-			<DependentUpon>ReturnsExtensions.tt</DependentUpon>
-		</Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), moq-icon.png))\moq-icon.png" Pack="true" PackagePath="moq.png" Visible="False" />
-	</ItemGroup>
-
-	<Target Name="Test" />
-
-	<Target Name="UpdatePackageMetadata"
-          BeforeTargets="PrepareForBuild;GetAssemblyVersion;GenerateNuspec;Pack"
-          DependsOnTargets="InitializeSourceControlInformation"
-          Condition="'$(SourceControlInformationFeatureSupported)' And
-                     '$(RepositoryUrl)' != '' And 
-                     '$(SourceRevisionId)' != ''">
-		<PropertyGroup>
-			<Description>$(Description)
+    <Import Project="$(BuildDirectory)AssemblyInfo.props" />
+    <Import Project="$(BuildDirectory)GitVersion.props" />
+    <Import Project="$(BuildDirectory)SignAssembly.props" />
+    <Import Project="$(BuildDirectory)SourceLink.props" />
+    <PropertyGroup>
+        <TargetFrameworks>net462;netstandard2.0;netstandard2.1;net6.0</TargetFrameworks>
+        <AssemblyName>Moq</AssemblyName>
+        <DebugSymbols>True</DebugSymbols>
+        <DebugType>embedded</DebugType>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+        <GenerateDocumentation>true</GenerateDocumentation>
+        <NoWarn>$(NoWarn);0419;CS8032</NoWarn>
+        <RootNamespace>Moq</RootNamespace>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <WarningLevel>4</WarningLevel>
+        <LangVersion>9.0</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' Or '$(TargetFramework)' == 'net6.0' ">
+        <DefineConstants>$(DefineConstants);FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS</DefineConstants>
+    </PropertyGroup>
+    <PropertyGroup>
+        <!-- Properties related to NuGet packaging: -->
+        <IsPackable>True</IsPackable>
+        <PackageId>Moq</PackageId>
+        <Title>Moq: an enjoyable mocking library</Title>
+        <Description>Moq is the most popular and friendly mocking framework for .NET.</Description>
+        <PackageReleaseNotes>A changelog is available at https://github.com/moq/moq4/blob/main/CHANGELOG.md.</PackageReleaseNotes>
+        <Authors>Daniel Cazzulino, kzu</Authors>
+        <PackageIcon>moq.png</PackageIcon>
+        <PackageLicenseUrl>https://raw.githubusercontent.com/moq/moq4/main/License.txt</PackageLicenseUrl>
+        <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+        <NoPackageAnalysis>True</NoPackageAnalysis>
+        <PackageOutputPath>$(OutputDirectory)</PackageOutputPath>
+        <PackageTags>moq;tdd;mocking;mocks;unittesting;agile;unittest</PackageTags>
+        <PackageProjectUrl>https://github.com/moq/moq4</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/moq/moq4</RepositoryUrl>
+        <IncludeSymbols>false</IncludeSymbols>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Castle.Core" Version="5.1.1" />
+        <PackageReference Include="IFluentInterface" Version="2.1.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+        <PackageReference Include="TypeNameFormatter.Sources" Version="1.0.0" PrivateAssets="All" />
+    </ItemGroup>
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net462' Or '$(TargetFramework)' == 'netstandard2.0' ">
+        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="Properties\Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <SubType>Designer</SubType>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <Compile Update="Properties\Resources.Designer.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <None Update="Language\GenericTypeParameters.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+        </None>
+        <None Update="Language\ICallback.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>ICallback.Generated.cs</LastGenOutput>
+        </None>
+        <Compile Update="Language\ICallback.Generated.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>ICallback.tt</DependentUpon>
+        </Compile>
+        <None Update="Language\IRaise.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>IRaise.Generated.cs</LastGenOutput>
+        </None>
+        <Compile Update="Language\IRaise.Generated.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>IRaise.tt</DependentUpon>
+        </Compile>
+        <None Update="Language\IReturns.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>IReturns.Generated.cs</LastGenOutput>
+        </None>
+        <Compile Update="Language\IReturns.Generated.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>IReturns.tt</DependentUpon>
+        </Compile>
+        <None Update="Language\IThrows.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>IThrows.Generated.cs</LastGenOutput>
+        </None>
+        <Compile Update="Language\IThrows.Generated.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>IThrows.tt</DependentUpon>
+        </Compile>
+        <None Update="ReturnsExtensions.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>ReturnsExtensions.Generated.cs</LastGenOutput>
+        </None>
+        <Compile Update="ReturnsExtensions.Generated.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>ReturnsExtensions.tt</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), moq-icon.png))\moq-icon.png" Pack="true" PackagePath="moq.png" Visible="False" />
+    </ItemGroup>
+    <Target Name="Test" />
+    <Target Name="UpdatePackageMetadata" BeforeTargets="PrepareForBuild;GetAssemblyVersion;GenerateNuspec;Pack" DependsOnTargets="InitializeSourceControlInformation" Condition="'$(SourceControlInformationFeatureSupported)' And&#xD;&#xA;                     '$(RepositoryUrl)' != '' And &#xD;&#xA;                     '$(SourceRevisionId)' != ''">
+        <PropertyGroup>
+            <Description>$(Description)
 
 Built from $(RepositoryUrl)/tree/$(SourceRevisionId.Substring(0, 9))
 			</Description>
-			<PackageDescription>$(Description)</PackageDescription>
-		</PropertyGroup>
-	</Target>
-
+            <PackageDescription>$(Description)</PackageDescription>
+        </PropertyGroup>
+    </Target>
 </Project>

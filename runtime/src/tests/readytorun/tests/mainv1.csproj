@@ -1,22 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>exe</OutputType>
-    <CrossGenTest>false</CrossGenTest>
-    <!-- https://github.com/dotnet/runtime/issues/73138 -->
-    <IlasmRoundTripIncompatible>true</IlasmRoundTripIncompatible>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="fieldgetter.ilproj" />
-    <ProjectReference Include="testv1\test.csproj">
-      <Project>{F74F55A1-DFCF-4C7C-B462-E96E1D0BB667}</Project>
-    </ProjectReference>
-    <CMakeProjectReference Include="CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="main.cs" />
-  </ItemGroup>
-  <PropertyGroup>
-    <CLRTestBatchPreCommands><![CDATA[
+    <PropertyGroup>
+        <OutputType>exe</OutputType>
+        <CrossGenTest>false</CrossGenTest>
+        <!-- https://github.com/dotnet/runtime/issues/73138 -->
+        <IlasmRoundTripIncompatible>true</IlasmRoundTripIncompatible>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="fieldgetter.ilproj" />
+        <ProjectReference Include="testv1\test.csproj">
+            <Project>{F74F55A1-DFCF-4C7C-B462-E96E1D0BB667}</Project>
+        </ProjectReference>
+        <CMakeProjectReference Include="CMakeLists.txt" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="main.cs" />
+    </ItemGroup>
+    <PropertyGroup>
+        <CLRTestBatchPreCommands><![CDATA[
 $(CLRTestBatchPreCommands)
 
 REM Suppress some DOTNET and COMPlus variables for the duration of Crossgen2 execution
@@ -85,7 +85,7 @@ if not exist mainv1.map (
 
 endlocal
 ]]></CLRTestBatchPreCommands>
-    <CLRTestBashPreCommands><![CDATA[
+        <CLRTestBashPreCommands><![CDATA[
 $(CLRTestBashPreCommands)
 
 # Suppress some DOTNET and COMPlus variables for the duration of Crossgen2 execution
@@ -158,5 +158,5 @@ fi
 
 export DOTNET_GCName DOTNET_GCStress DOTNET_HeapVerify DOTNET_ReadyToRun
 ]]></CLRTestBashPreCommands>
-  </PropertyGroup>
+    </PropertyGroup>
 </Project>

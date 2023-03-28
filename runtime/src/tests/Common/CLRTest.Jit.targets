@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
 ***********************************************************************************************
 CLRTest.Jit.targets
@@ -19,13 +17,11 @@ WARNING:   When setting properties based on their current state (for example:
 ***********************************************************************************************
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-  <PropertyGroup>
-    <BashScriptSnippetGen>$(BashScriptSnippetGen);GetIlasmRoundTripBashScript;GetDisasmCheckBashScript</BashScriptSnippetGen>
-    <BatchScriptSnippetGen>$(BatchScriptSnippetGen);GetIlasmRoundTripBatchScript;GetDisasmCheckBatchScript</BatchScriptSnippetGen>
-  </PropertyGroup>
-
-  <!--
+    <PropertyGroup>
+        <BashScriptSnippetGen>$(BashScriptSnippetGen);GetIlasmRoundTripBashScript;GetDisasmCheckBashScript</BashScriptSnippetGen>
+        <BatchScriptSnippetGen>$(BatchScriptSnippetGen);GetIlasmRoundTripBatchScript;GetDisasmCheckBatchScript</BatchScriptSnippetGen>
+    </PropertyGroup>
+    <!--
   ***********************************************************************************************
   ildasm / ilasm round trip testing
 
@@ -33,29 +29,23 @@ WARNING:   When setting properties based on their current state (for example:
   us to use the "/raweh" argument.
   ***********************************************************************************************
   -->
-
-  <PropertyGroup>
-    <_IlasmSwitches Condition="'$(DebugType)' == 'Full' and '$(Optimize)' != 'True'">$(_IlasmSwitches) -DEBUG</_IlasmSwitches>
-    <_IlasmSwitches Condition="'$(DebugType)' == 'Impl' and '$(Optimize)' != 'True'">$(_IlasmSwitches) -DEBUG=IMPL</_IlasmSwitches>
-    <_IlasmSwitches Condition="'$(DebugType)' == 'PdbOnly' and '$(Optimize)' != 'True'">$(_IlasmSwitches) -DEBUG</_IlasmSwitches>
-  </PropertyGroup>
-
-  <Target Name="GetIlasmRoundTripBashScript"
-          Returns="$(IlasmRoundTripBashScript);$(BashIlrtTestLaunchCmds)">
     <PropertyGroup>
-      <DisassemblyName>$(AssemblyName).dasm.il</DisassemblyName>
-      <TargetAssemblyName>$(AssemblyName).asm.dll</TargetAssemblyName>
-
-      <IlasmRoundTripBashScript Condition="'$(CLRTestKind)' == 'RunOnly'"><![CDATA[
+        <_IlasmSwitches Condition="'$(DebugType)' == 'Full' and '$(Optimize)' != 'True'">$(_IlasmSwitches) -DEBUG</_IlasmSwitches>
+        <_IlasmSwitches Condition="'$(DebugType)' == 'Impl' and '$(Optimize)' != 'True'">$(_IlasmSwitches) -DEBUG=IMPL</_IlasmSwitches>
+        <_IlasmSwitches Condition="'$(DebugType)' == 'PdbOnly' and '$(Optimize)' != 'True'">$(_IlasmSwitches) -DEBUG</_IlasmSwitches>
+    </PropertyGroup>
+    <Target Name="GetIlasmRoundTripBashScript" Returns="$(IlasmRoundTripBashScript);$(BashIlrtTestLaunchCmds)">
+        <PropertyGroup>
+            <DisassemblyName>$(AssemblyName).dasm.il</DisassemblyName>
+            <TargetAssemblyName>$(AssemblyName).asm.dll</TargetAssemblyName>
+            <IlasmRoundTripBashScript Condition="'$(CLRTestKind)' == 'RunOnly'"><![CDATA[
 # IlasmRoundTrip Script
 # For CLRTestKind==RunOnly, we don't do any ilasm round-trip testing. We also need to disable
 # ilasm round-trip testing for the project we call, as there might be multiple RunOnly tests
 # concurrently invoking the same project, which can lead to race conditions on the ilasm/ildasm commands.
 export RunningIlasmRoundTrip=
-]]>
-      </IlasmRoundTripBashScript>
-
-      <IlasmRoundTripBashScript Condition="'$(CLRTestKind)' == 'BuildAndRun'"><![CDATA[
+]]></IlasmRoundTripBashScript>
+            <IlasmRoundTripBashScript Condition="'$(CLRTestKind)' == 'BuildAndRun'"><![CDATA[
 # IlasmRoundTrip Script
 # Disable Ilasm round-tripping for Linker tests.
 # Todo: Ilasm round-trip on linked binaries.
@@ -104,9 +94,8 @@ then
     exit 1
   fi
 fi
-]]>
-      </IlasmRoundTripBashScript>
-      <BashIlrtTestLaunchCmds Condition="'$(CLRTestKind)' == 'BuildAndRun'"><![CDATA[
+]]></IlasmRoundTripBashScript>
+            <BashIlrtTestLaunchCmds Condition="'$(CLRTestKind)' == 'BuildAndRun'"><![CDATA[
 if [ -z "$DoLink" -a ! -z "$RunningIlasmRoundTrip" ];
 then
   echo $LAUNCHER $(TargetAssemblyName) %24(printf "'%s' " "${CLRTestExecutionArguments[@]}")
@@ -118,27 +107,21 @@ then
     exit 1
   fi
 fi
-]]>
-      </BashIlrtTestLaunchCmds>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="GetIlasmRoundTripBatchScript"
-          Returns="$(IlasmRoundTripBatchScript);$(BatchIlrtTestLaunchCmds)">
-    <PropertyGroup>
-      <DisassemblyName>$(AssemblyName).dasm.il</DisassemblyName>
-      <TargetAssemblyName>$(AssemblyName).asm.dll</TargetAssemblyName>
-
-      <IlasmRoundTripBatchScript Condition="'$(CLRTestKind)' == 'RunOnly'"><![CDATA[
+]]></BashIlrtTestLaunchCmds>
+        </PropertyGroup>
+    </Target>
+    <Target Name="GetIlasmRoundTripBatchScript" Returns="$(IlasmRoundTripBatchScript);$(BatchIlrtTestLaunchCmds)">
+        <PropertyGroup>
+            <DisassemblyName>$(AssemblyName).dasm.il</DisassemblyName>
+            <TargetAssemblyName>$(AssemblyName).asm.dll</TargetAssemblyName>
+            <IlasmRoundTripBatchScript Condition="'$(CLRTestKind)' == 'RunOnly'"><![CDATA[
 REM IlasmRoundTrip Script
 REM For CLRTestKind==RunOnly, we don't do any ilasm round-trip testing. We also need to disable
 REM ilasm round-trip testing for the project we call, as there might be multiple RunOnly tests
 REM concurrently invoking the same project, which can lead to race conditions on the ilasm/ildasm commands.
 set RunningIlasmRoundTrip=
-]]>
-      </IlasmRoundTripBatchScript>
-
-      <IlasmRoundTripBatchScript Condition="'$(CLRTestKind)' == 'BuildAndRun'"><![CDATA[
+]]></IlasmRoundTripBatchScript>
+            <IlasmRoundTripBatchScript Condition="'$(CLRTestKind)' == 'BuildAndRun'"><![CDATA[
 REM IlasmRoundTrip Script
 REM Disable Ilasm round-tripping for Linker tests.
 REM Todo: Ilasm round-trip on linked binaries.
@@ -173,9 +156,8 @@ IF NOT DEFINED DoLink (
     )
   )
 )
-]]>
-      </IlasmRoundTripBatchScript>
-      <BatchIlrtTestLaunchCmds Condition="'$(CLRTestKind)' == 'BuildAndRun'"><![CDATA[
+]]></IlasmRoundTripBatchScript>
+            <BatchIlrtTestLaunchCmds Condition="'$(CLRTestKind)' == 'BuildAndRun'"><![CDATA[
 IF NOT DEFINED DoLink (
   if defined RunningIlasmRoundTrip (
     ECHO %LAUNCHER% $(TargetAssemblyName) %CLRTestExecutionArguments%
@@ -186,48 +168,37 @@ IF NOT DEFINED DoLink (
     )
   )
 )
-]]>
-      </BatchIlrtTestLaunchCmds>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="GetDisasmCheckData">
-    <ItemGroup>
-      <DisasmCheckFiles Include="%(Compile.Identity)" Condition="'%(Compile.HasDisasmCheck)' == 'true'" />
-    </ItemGroup>
-    <PropertyGroup>
-      <HasDisasmCheck>false</HasDisasmCheck>
-      <HasDisasmCheck Condition="@(DisasmCheckFiles->Count()) &gt; 0 And '$(CLRTestKind)' == 'BuildAndRun'">true</HasDisasmCheck>
-
-      <GCStressIncompatible Condition="'$(HasDisasmCheck)' == 'true'">true</GCStressIncompatible>
-      <HeapVerifyIncompatible Condition="'$(HasDisasmCheck)' == 'true'">true</HeapVerifyIncompatible>
-    </PropertyGroup>
-  </Target>
-
-  <!--
+]]></BatchIlrtTestLaunchCmds>
+        </PropertyGroup>
+    </Target>
+    <Target Name="GetDisasmCheckData">
+        <ItemGroup>
+            <DisasmCheckFiles Include="%(Compile.Identity)" Condition="'%(Compile.HasDisasmCheck)' == 'true'" />
+        </ItemGroup>
+        <PropertyGroup>
+            <HasDisasmCheck>false</HasDisasmCheck>
+            <HasDisasmCheck Condition="@(DisasmCheckFiles-&gt;Count()) &gt; 0 And '$(CLRTestKind)' == 'BuildAndRun'">true</HasDisasmCheck>
+            <GCStressIncompatible Condition="'$(HasDisasmCheck)' == 'true'">true</GCStressIncompatible>
+            <HeapVerifyIncompatible Condition="'$(HasDisasmCheck)' == 'true'">true</HeapVerifyIncompatible>
+        </PropertyGroup>
+    </Target>
+    <!--
   The source code file(s) (specified by HasDisasmCheck in the test's project file) contain
   the patterns used by FileCheck.  They need to be copied to the output directory for the
   test to be self-contained.
   -->
-  <Target Name="PropagateHasDisasmCheckToCopy"
-          BeforeTargets="AssignTargetPaths">
-    <ItemGroup>
-      <Compile Update="@(Compile)"
-               Condition="'%(Compile.HasDisasmCheck)' == 'true'"
-               CopyToOutputDirectory="PreserveNewest" />
-    </ItemGroup>
-  </Target>
-
-  <Target Name="GetDisasmCheckBashScript"
-          DependsOnTargets="GetDisasmCheckData">
-    <PropertyGroup>
-      <HasBashDisasmCheck>false</HasBashDisasmCheck>
-      <HasBashDisasmCheck Condition="'$(HasDisasmCheck)' == 'true' and '$(RuntimeFlavor)' == 'coreclr' and ('$(TargetOS)' == 'Linux' or '$(TargetOS)' == 'OSX') and ('$(TargetArchitecture)' == 'x64' or '$(TargetArchitecture)' == 'arm64')">true</HasBashDisasmCheck>
-
-      <BashDisasmOutputFile Condition="'$(HasBashDisasmCheck)' == 'true'">$(scriptPath)__jit_disasm.out</BashDisasmOutputFile>
-      <BashDisasmListOutputFile Condition="'$(HasBashDisasmCheck)' == 'true'">$(scriptPath)__jit_disasm_list.out</BashDisasmListOutputFile>
-
-      <CLRTestBashPreCommands Condition="'$(HasBashDisasmCheck)' == 'true'"><![CDATA[
+    <Target Name="PropagateHasDisasmCheckToCopy" BeforeTargets="AssignTargetPaths">
+        <ItemGroup>
+            <Compile Update="@(Compile)" Condition="'%(Compile.HasDisasmCheck)' == 'true'" CopyToOutputDirectory="PreserveNewest" />
+        </ItemGroup>
+    </Target>
+    <Target Name="GetDisasmCheckBashScript" DependsOnTargets="GetDisasmCheckData">
+        <PropertyGroup>
+            <HasBashDisasmCheck>false</HasBashDisasmCheck>
+            <HasBashDisasmCheck Condition="'$(HasDisasmCheck)' == 'true' and '$(RuntimeFlavor)' == 'coreclr' and ('$(TargetOS)' == 'Linux' or '$(TargetOS)' == 'OSX') and ('$(TargetArchitecture)' == 'x64' or '$(TargetArchitecture)' == 'arm64')">true</HasBashDisasmCheck>
+            <BashDisasmOutputFile Condition="'$(HasBashDisasmCheck)' == 'true'">$(scriptPath)__jit_disasm.out</BashDisasmOutputFile>
+            <BashDisasmListOutputFile Condition="'$(HasBashDisasmCheck)' == 'true'">$(scriptPath)__jit_disasm_list.out</BashDisasmListOutputFile>
+            <CLRTestBashPreCommands Condition="'$(HasBashDisasmCheck)' == 'true'"><![CDATA[
 $(CLRTestBashPreCommands)
 if [[ ( -z "$DOTNET_JitStress" ) && ( -z "$DOTNET_JitStressRegs" ) && ( -z "$DOTNET_TailcallStress" ) && ( "$DOTNET_TieredPGO" != "1" ) && ( -z "$RunCrossGen2" ) && ( -z "$DOTNET_JitForceControlFlowGuard" ) ]]; then
   @(DisasmCheckFiles -> '  dotnet $CORE_ROOT/SuperFileCheck/SuperFileCheck.dll --csharp-list-method-names "%(Identity)" --allow-unused-prefixes --check-prefixes=CHECK,$(TargetArchitecture.ToUpperInvariant()),$(TargetArchitecture.ToUpperInvariant())-$(TargetOS.ToUpperInvariant()) > "$(BashDisasmListOutputFile)"
@@ -241,10 +212,8 @@ if [[ ( -z "$DOTNET_JitStress" ) && ( -z "$DOTNET_JitStressRegs" ) && ( -z "$DOT
       exit 1
     fi', '%0a')
 fi
-]]>
-      </CLRTestBashPreCommands>
-
-      <CLRTestBashPostCommands Condition="'$(HasBashDisasmCheck)' == 'true'"><![CDATA[
+]]></CLRTestBashPreCommands>
+            <CLRTestBashPostCommands Condition="'$(HasBashDisasmCheck)' == 'true'"><![CDATA[
 $(CLRTestBashPostCommands)
 if [[ -n $DOTNET_JitDisasm ]]; then
   @(DisasmCheckFiles -> '  dotnet $CORE_ROOT/SuperFileCheck/SuperFileCheck.dll --csharp "%(Identity)" --allow-unused-prefixes --check-prefixes=CHECK,$(TargetArchitecture.ToUpperInvariant()),$(TargetArchitecture.ToUpperInvariant())-$(TargetOS.ToUpperInvariant()) --dump-input-context 40 --input-file "$(BashDisasmOutputFile)"
@@ -255,22 +224,16 @@ if [[ -n $DOTNET_JitDisasm ]]; then
       exit 1
     fi', '%0a')
 fi
-]]>
-      </CLRTestBashPostCommands>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="GetDisasmCheckBatchScript"
-          DependsOnTargets="GetDisasmCheckData">
-    <PropertyGroup>
-      <HasBatchDisasmCheck>false</HasBatchDisasmCheck>
-      <HasBatchDisasmCheck Condition="'$(HasDisasmCheck)' == 'true' and '$(RuntimeFlavor)' == 'coreclr'">true</HasBatchDisasmCheck>
-
-      <BatchDisasmOutputFile Condition="'$(HasBatchDisasmCheck)' == 'true'">$(scriptPath)__jit_disasm.out</BatchDisasmOutputFile>
-      <BatchDisasmListOutputFile Condition="'$(HasBatchDisasmCheck)' == 'true'">$(scriptPath)__jit_disasm_list.out</BatchDisasmListOutputFile>
-
-      <CLRTestBatchPreCommands Condition="'$(HasBatchDisasmCheck)' == 'true'">
-<![CDATA[
+]]></CLRTestBashPostCommands>
+        </PropertyGroup>
+    </Target>
+    <Target Name="GetDisasmCheckBatchScript" DependsOnTargets="GetDisasmCheckData">
+        <PropertyGroup>
+            <HasBatchDisasmCheck>false</HasBatchDisasmCheck>
+            <HasBatchDisasmCheck Condition="'$(HasDisasmCheck)' == 'true' and '$(RuntimeFlavor)' == 'coreclr'">true</HasBatchDisasmCheck>
+            <BatchDisasmOutputFile Condition="'$(HasBatchDisasmCheck)' == 'true'">$(scriptPath)__jit_disasm.out</BatchDisasmOutputFile>
+            <BatchDisasmListOutputFile Condition="'$(HasBatchDisasmCheck)' == 'true'">$(scriptPath)__jit_disasm_list.out</BatchDisasmListOutputFile>
+            <CLRTestBatchPreCommands Condition="'$(HasBatchDisasmCheck)' == 'true'"><![CDATA[
 $(CLRTestBatchPreCommands)
 IF "%DOTNET_JitStress%"=="" IF "%DOTNET_JitStressRegs%"=="" IF "%DOTNET_TailcallStress%"=="" IF NOT "%DOTNET_TieredPGO%" == "1" IF NOT "%RunCrossGen2%" == "1" IF "%DOTNET_JitForceControlFlowGuard%"=="" (
   @(DisasmCheckFiles -> '  dotnet %CORE_ROOT%\SuperFileCheck\SuperFileCheck.dll --csharp-list-method-names "%(Identity)" --check-prefixes=CHECK,$(TargetArchitecture.ToUpperInvariant()),$(TargetArchitecture.ToUpperInvariant())-$(TargetOS.ToUpperInvariant()) > "$(BatchDisasmListOutputFile)"
@@ -282,10 +245,8 @@ IF "%DOTNET_JitStress%"=="" IF "%DOTNET_JitStressRegs%"=="" IF "%DOTNET_Tailcall
     set DOTNET_JitDiffableDasm=1
     set DOTNET_JitStdOutFile=$(BatchDisasmOutputFile)
 )
-]]>
-      </CLRTestBatchPreCommands>
-
-      <CLRTestBatchPostCommands Condition="'$(HasBatchDisasmCheck)' == 'true'"><![CDATA[
+]]></CLRTestBatchPreCommands>
+            <CLRTestBatchPostCommands Condition="'$(HasBatchDisasmCheck)' == 'true'"><![CDATA[
 $(CLRTestBatchPostCommands)
 IF NOT "%DOTNET_JitDisasm%" == "" (
   @(DisasmCheckFiles -> '  dotnet %CORE_ROOT%\SuperFileCheck\SuperFileCheck.dll --csharp "%(Identity)" --allow-unused-prefixes --check-prefixes=CHECK,$(TargetArchitecture.ToUpperInvariant()),$(TargetArchitecture.ToUpperInvariant())-$(TargetOS.ToUpperInvariant()) --dump-input-context 40 --input-file "$(BatchDisasmOutputFile)"
@@ -294,12 +255,10 @@ IF NOT "%DOTNET_JitDisasm%" == "" (
       Exit /b 1
     )', '%0d%0a')
 )
-]]>
-      </CLRTestBatchPostCommands>
-    </PropertyGroup>
-  </Target>
-
-  <!--
+]]></CLRTestBatchPostCommands>
+        </PropertyGroup>
+    </Target>
+    <!--
   ***********************************************************************************************
   SuperPMI collection of CoreCLR tests
   ***********************************************************************************************
@@ -307,11 +266,9 @@ IF NOT "%DOTNET_JitDisasm%" == "" (
   You shouldn't have to escape characters in a CDATA block, but it appears that you do actually need
   to escape semicolons with %3B here.
   -->
-
-  <Target Name="GetSuperPMICollectionBashScript"
-          Returns="$(SuperPMICollectionBashScript)">
-    <PropertyGroup>
-      <SuperPMICollectionBashScript><![CDATA[
+    <Target Name="GetSuperPMICollectionBashScript" Returns="$(SuperPMICollectionBashScript)">
+        <PropertyGroup>
+            <SuperPMICollectionBashScript><![CDATA[
 # SuperPMI collection
 if [ ! -z $spmi_enable_collection ]%3B
 then
@@ -332,15 +289,12 @@ then
   export DOTNET_EnableExtraSuperPmiQueries=1
   export DOTNET_JitPath=$CORE_ROOT/libsuperpmi-shim-collector.$spmi_file_extension
 fi
-]]>
-      </SuperPMICollectionBashScript>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="GetSuperPMICollectionBatchScript"
-          Returns="$(SuperPMICollectionBatchScript)">
-    <PropertyGroup>
-      <SuperPMICollectionBatchScript><![CDATA[
+]]></SuperPMICollectionBashScript>
+        </PropertyGroup>
+    </Target>
+    <Target Name="GetSuperPMICollectionBatchScript" Returns="$(SuperPMICollectionBatchScript)">
+        <PropertyGroup>
+            <SuperPMICollectionBatchScript><![CDATA[
 REM SuperPMI collection
 if not defined spmi_enable_collection goto :skip_spmi_enable_collection
 REM spmi_collect_dir needs to be set before this script is run, if SuperPMI collection is enabled.
@@ -352,20 +306,15 @@ set SuperPMIShimPath=%spmi_jitlib%
 set DOTNET_EnableExtraSuperPmiQueries=1
 set DOTNET_JitPath=%CORE_ROOT%\superpmi-shim-collector.dll
 :skip_spmi_enable_collection
-]]>
-      </SuperPMICollectionBatchScript>
-    </PropertyGroup>
-  </Target>
-
-  <!--
+]]></SuperPMICollectionBatchScript>
+        </PropertyGroup>
+    </Target>
+    <!--
   ***********************************************************************************************
   GCStress settings
   ***********************************************************************************************
   -->
-
-  <ItemGroup>
-    <CLRTestEnvironmentVariable Condition="'$(RunWithGcStress)' != ''"
-      Include="DOTNET_GCStress" Value="$(RunWithGcStress)" />
-  </ItemGroup>
-
-</Project> 
+    <ItemGroup>
+        <CLRTestEnvironmentVariable Condition="'$(RunWithGcStress)' != ''" Include="DOTNET_GCStress" Value="$(RunWithGcStress)" />
+    </ItemGroup>
+</Project>

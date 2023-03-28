@@ -1,24 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <!-- Generated shell script and corresponding assembly have different names -->
-    <CLRTestTargetUnsupported Condition="'$(TargetOS)' == 'Android'">true</CLRTestTargetUnsupported>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="BasicTestWithMcj.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RunBasicTestWithMcj.cmd">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="RunBasicTestWithMcj.sh">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <PropertyGroup>
-    <CLRTestBatchPreCommands><![CDATA[
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <Optimize>true</Optimize>
+        <!-- Generated shell script and corresponding assembly have different names -->
+        <CLRTestTargetUnsupported Condition="'$(TargetOS)' == 'Android'">true</CLRTestTargetUnsupported>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="BasicTestWithMcj.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="RunBasicTestWithMcj.cmd">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="RunBasicTestWithMcj.sh">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <PropertyGroup>
+        <CLRTestBatchPreCommands><![CDATA[
 $(CLRTestBatchPreCommands)
 mkdir r2r
 
@@ -38,7 +38,7 @@ set "COMPlus_ReadyToRun="
 endlocal
 set CLRCustomTestLauncher=RunBasicTestWithMcj.cmd --runCustomTest
 ]]></CLRTestBatchPreCommands>
-    <CLRTestBashPreCommands><![CDATA[
+        <CLRTestBashPreCommands><![CDATA[
 $(CLRTestBashPreCommands)
 mkdir r2r
 
@@ -53,5 +53,5 @@ export COMPlus_GCName COMPlus_GCStress COMPlus_HeapVerify COMPlus_ReadyToRun
 chmod +x ./RunBasicTestWithMcj.sh
 export CLRCustomTestLauncher="./RunBasicTestWithMcj.sh --runCustomTest"
 ]]></CLRTestBashPreCommands>
-  </PropertyGroup>
+    </PropertyGroup>
 </Project>

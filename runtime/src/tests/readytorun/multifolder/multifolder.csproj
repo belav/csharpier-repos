@@ -1,28 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>exe</OutputType>
-    <!-- Running Crossgen2 under GCStress takes too long -->
-    <GCStressIncompatible>true</GCStressIncompatible>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-
-    <!-- Crossgen2 currently targets x64 and ARM64 only -->
-    <DisableProjectBuild Condition="'$(TargetArchitecture)' != 'x64' and '$(TargetArchitecture)' != 'arm64'">true</DisableProjectBuild>
-
-    <!-- This is an explicit crossgen test -->
-    <CrossGenTest>false</CrossGenTest>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="Root.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="FolderA/FolderA.csproj" />
-    <ProjectReference Include="FolderB/FolderB.csproj" />
-  </ItemGroup>
-
-  <PropertyGroup>
-    <CLRTestBatchPreCommands><![CDATA[
+    <PropertyGroup>
+        <OutputType>exe</OutputType>
+        <!-- Running Crossgen2 under GCStress takes too long -->
+        <GCStressIncompatible>true</GCStressIncompatible>
+        <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+        <!-- Crossgen2 currently targets x64 and ARM64 only -->
+        <DisableProjectBuild Condition="'$(TargetArchitecture)' != 'x64' and '$(TargetArchitecture)' != 'arm64'">true</DisableProjectBuild>
+        <!-- This is an explicit crossgen test -->
+        <CrossGenTest>false</CrossGenTest>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Root.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="FolderA/FolderA.csproj" />
+        <ProjectReference Include="FolderB/FolderB.csproj" />
+    </ItemGroup>
+    <PropertyGroup>
+        <CLRTestBatchPreCommands><![CDATA[
 $(CLRTestBatchPreCommands)
 
     set __ResponseFile=%scriptPath%\multifolder.rsp
@@ -73,7 +68,7 @@ $(CLRTestBatchPreCommands)
     set DOTNET_GCName=!__gcStandaloneModeToRestore!
 
 ]]></CLRTestBatchPreCommands>
-    <CLRTestBashPreCommands><![CDATA[
+        <CLRTestBashPreCommands><![CDATA[
 $(CLRTestBashPreCommands)
 
     __OutputDir=$PWD
@@ -117,5 +112,5 @@ $(CLRTestBashPreCommands)
     export DOTNET_NativeImageSearchPaths=$__OutputDir
 
 ]]></CLRTestBashPreCommands>
-  </PropertyGroup>
+    </PropertyGroup>
 </Project>

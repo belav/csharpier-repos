@@ -1,14 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum)</TargetFrameworks>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="System.Windows.Extensions.cs" />
-    <Compile Include="System.Windows.Extensions.Forwards.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Drawing.Common\ref\System.Drawing.Common.csproj" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum)</TargetFrameworks>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="System.Windows.Extensions.cs" />
+        <Compile Include="System.Windows.Extensions.Forwards.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="$(LibrariesProjectRoot)System.Drawing.Common\ref\System.Drawing.Common.csproj" />
+    </ItemGroup>
 </Project>

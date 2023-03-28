@@ -11,10 +11,8 @@
         <FeatureBasicFreeze>true</FeatureBasicFreeze>
         <ProfilingSupportedBuild>true</ProfilingSupportedBuild>
     </PropertyGroup>
-
     <PropertyGroup Condition="'$(TargetsUnix)' == 'true'">
         <FeatureXplatEventSource Condition="'$(TargetOS)' == 'Linux'">true</FeatureXplatEventSource>
-
         <FeatureArrayStubAsIL>true</FeatureArrayStubAsIL>
         <FeatureMulticastStubAsIL>true</FeatureMulticastStubAsIL>
         <FeaturePortableShuffleThunks Condition="'$(Platform)' != 'x86'">true</FeaturePortableShuffleThunks>
@@ -22,7 +20,6 @@
         <FeatureStubsAsIL>true</FeatureStubsAsIL>
         <FeatureComWrappers>true</FeatureComWrappers>
     </PropertyGroup>
-
     <PropertyGroup Condition="'$(TargetsWindows)' == 'true'">
         <FeatureArrayStubAsIL Condition="'$(Platform)' != 'x86'">true</FeatureArrayStubAsIL>
         <FeatureMulticastStubAsIL Condition="'$(Platform)' != 'x86'">true</FeatureMulticastStubAsIL>
@@ -35,11 +32,9 @@
         <FeaturePortableShuffleThunks Condition="'$(Platform)' != 'x86'">true</FeaturePortableShuffleThunks>
         <FeatureInstantiatingStubAsIL Condition="'$(Platform)' != 'x86'">true</FeatureInstantiatingStubAsIL>
     </PropertyGroup>
-
     <PropertyGroup Condition="'$(TargetsOSX)' == 'true' OR '$(TargetsMacCatalyst)' == 'true' OR '$(TargetsiOS)' == 'true' OR '$(TargetstvOS)' == 'true'">
         <FeatureObjCMarshal>true</FeatureObjCMarshal>
     </PropertyGroup>
-
     <PropertyGroup>
         <DefineConstants Condition="'$(FeatureArrayStubAsIL)' == 'true'">$(DefineConstants);FEATURE_ARRAYSTUB_AS_IL</DefineConstants>
         <DefineConstants Condition="'$(FeatureMulticastStubAsIL)' == 'true'">$(DefineConstants);FEATURE_MULTICASTSTUB_AS_IL</DefineConstants>
@@ -59,7 +54,6 @@
         <DefineConstants Condition="'$(FeatureBasicFreeze)' == 'true'">$(DefineConstants);FEATURE_BASICFREEZE</DefineConstants>
         <DefineConstants Condition="'$(FeaturePortableShuffleThunks)' == 'true'">$(DefineConstants);FEATURE_PORTABLE_SHUFFLE_THUNKS</DefineConstants>
         <DefineConstants Condition="'$(FeatureICastable)' == 'true'">$(DefineConstants);FEATURE_ICASTABLE</DefineConstants>
-
         <DefineConstants Condition="'$(ProfilingSupportedBuild)' == 'true'">$(DefineConstants);PROFILING_SUPPORTED</DefineConstants>
         <DefineConstants Condition="'$(FeatureProfAttach)' == 'true'">$(DefineConstants);FEATURE_PROFAPI_ATTACH_DETACH</DefineConstants>
     </PropertyGroup>

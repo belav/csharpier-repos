@@ -1,23 +1,16 @@
 <Project>
-  <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
-
-  <PropertyGroup>
-    <CLRTestBatchPreCommands>
-      <![CDATA[
+    <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
+    <PropertyGroup>
+        <CLRTestBatchPreCommands><![CDATA[
 $(CLRTestBatchPreCommands)
 if EXIST SIMD.log (del SIMD.log)
-]]>
-    </CLRTestBatchPreCommands>
-    <CLRTestBashPreCommands>
-      <![CDATA[
+]]></CLRTestBatchPreCommands>
+        <CLRTestBashPreCommands><![CDATA[
 $(CLRTestBashPreCommands)
 rm -f SIMD.log
-]]>
-    </CLRTestBashPreCommands>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <CLRTestBashEnvironmentVariable Include="DOTNET_JitFuncInfoLogFile" Value="SIMD.log" />
-  </ItemGroup>
-
+]]></CLRTestBashPreCommands>
+    </PropertyGroup>
+    <ItemGroup>
+        <CLRTestBashEnvironmentVariable Include="DOTNET_JitFuncInfoLogFile" Value="SIMD.log" />
+    </ItemGroup>
 </Project>

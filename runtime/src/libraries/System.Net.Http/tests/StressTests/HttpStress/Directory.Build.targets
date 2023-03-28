@@ -1,11 +1,10 @@
 <Project>
-  <Import Project="$(TargetingPacksTargetsLocation)" />
-
-  <PropertyGroup>
-    <!--
+    <Import Project="$(TargetingPacksTargetsLocation)" />
+    <PropertyGroup>
+        <!--
       Define this here because the SDK resets it
       unconditionally in Microsoft.NETCoreSdk.BundledVersions.props.
     -->
-    <NETCoreAppMaximumVersion>8.0</NETCoreAppMaximumVersion>
-  </PropertyGroup>
+        <NETCoreAppMaximumVersion>8.0</NETCoreAppMaximumVersion>
+    </PropertyGroup>
 </Project>

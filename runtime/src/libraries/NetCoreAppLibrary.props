@@ -1,7 +1,7 @@
 <Project>
-  <PropertyGroup>
-    <!-- The trailing semicolon is important for each entry! -->
-    <NetFxReference>
+    <PropertyGroup>
+        <!-- The trailing semicolon is important for each entry! -->
+        <NetFxReference>
       mscorlib;
       Microsoft.VisualBasic;
       System;
@@ -25,7 +25,7 @@
       System.Xml.Linq;
       WindowsBase;
     </NetFxReference>
-    <NetCoreAppLibrary>
+        <NetCoreAppLibrary>
       $(NetFxReference)
       netstandard;
       Microsoft.CSharp;
@@ -174,22 +174,22 @@
       System.Xml.XPath;
       System.Xml.XPath.XDocument;
     </NetCoreAppLibrary>
-    <NetCoreAppLibraryNoReference>
+        <NetCoreAppLibraryNoReference>
       System.Private.CoreLib;
       System.Private.DataContractSerialization;
       System.Private.Uri;
       System.Private.Xml;
       System.Private.Xml.Linq;
     </NetCoreAppLibraryNoReference>
-    <!-- List .NETCoreApp shared framework generator project names below. -->
-    <NetCoreAppLibraryGenerator>
+        <!-- List .NETCoreApp shared framework generator project names below. -->
+        <NetCoreAppLibraryGenerator>
       LibraryImportGenerator;
       JSImportGenerator;
       Microsoft.Interop.SourceGeneration;
       System.Text.Json.SourceGeneration.Roslyn4.4;
       System.Text.RegularExpressions.Generator;
     </NetCoreAppLibraryGenerator>
-    <AspNetCoreAppLibrary>
+        <AspNetCoreAppLibrary>
       Microsoft.Extensions.Caching.Abstractions;
       Microsoft.Extensions.Caching.Memory;
       Microsoft.Extensions.Configuration;
@@ -228,7 +228,7 @@
       System.Security.Cryptography.Xml;
       System.Threading.RateLimiting;
     </AspNetCoreAppLibrary>
-    <WindowsDesktopCoreAppLibrary>
+        <WindowsDesktopCoreAppLibrary>
       Microsoft.Win32.Registry.AccessControl;
       Microsoft.Win32.SystemEvents;
       System.CodeDom;
@@ -246,14 +246,14 @@
       System.Threading.AccessControl;
       System.Windows.Extensions;
     </WindowsDesktopCoreAppLibrary>
-  </PropertyGroup>
-  <!-- Make available as an item. -->
-  <ItemGroup>
-    <NetFxReference Include="$(NetFxReference)" />
-    <NetCoreAppLibrary Include="$(NetCoreAppLibrary)" />
-    <NetCoreAppLibraryNoReference Include="$(NetCoreAppLibraryNoReference)" />
-    <NetCoreAppLibraryGenerator Include="$(NetCoreAppLibraryGenerator)" />
-    <AspNetCoreAppLibrary Include="$(AspNetCoreAppLibrary)" />
-    <WindowsDesktopCoreAppLibrary Include="$(WindowsDesktopCoreAppLibrary)" />
-  </ItemGroup>
+    </PropertyGroup>
+    <!-- Make available as an item. -->
+    <ItemGroup>
+        <NetFxReference Include="$(NetFxReference)" />
+        <NetCoreAppLibrary Include="$(NetCoreAppLibrary)" />
+        <NetCoreAppLibraryNoReference Include="$(NetCoreAppLibraryNoReference)" />
+        <NetCoreAppLibraryGenerator Include="$(NetCoreAppLibraryGenerator)" />
+        <AspNetCoreAppLibrary Include="$(AspNetCoreAppLibrary)" />
+        <WindowsDesktopCoreAppLibrary Include="$(WindowsDesktopCoreAppLibrary)" />
+    </ItemGroup>
 </Project>

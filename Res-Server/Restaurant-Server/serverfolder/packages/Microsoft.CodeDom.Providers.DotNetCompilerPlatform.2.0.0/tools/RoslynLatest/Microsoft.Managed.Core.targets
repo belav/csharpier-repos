@@ -1,48 +1,39 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (c)  Microsoft.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information. -->
+﻿<!-- Copyright (c)  Microsoft.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information. -->
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--
+    <!--
     Common targets for managed compilers.
   -->
-  <UsingTask TaskName="Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots" AssemblyFile="$(MSBuildThisFileDirectory)Microsoft.Build.Tasks.CodeAnalysis.dll" />
-
-  <Target Name="ShimReferencePathsWhenCommonTargetsDoesNotUnderstandReferenceAssemblies"
-          BeforeTargets="CoreCompile"
-          Condition="'@(ReferencePathWithRefAssemblies)' == ''">
-    <!-- Common targets should populate this item from dev15.3, but this file
+    <UsingTask TaskName="Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots" AssemblyFile="$(MSBuildThisFileDirectory)Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Target Name="ShimReferencePathsWhenCommonTargetsDoesNotUnderstandReferenceAssemblies" BeforeTargets="CoreCompile" Condition="'@(ReferencePathWithRefAssemblies)' == ''">
+        <!-- Common targets should populate this item from dev15.3, but this file
          may be used (via NuGet package) on earlier MSBuilds. If the
          adjusted-for-reference-assemblies item is not populated, just use
          the older item's contents. -->
-    <ItemGroup>
-      <ReferencePathWithRefAssemblies Include="@(ReferencePath)" />
-    </ItemGroup>
-  </Target>
-
-  <Target Name="_BeforeVBCSCoreCompile">
-    <ItemGroup Condition="'$(TargetingClr2Framework)' == 'true'">
-      <ReferencePathWithRefAssemblies>
-        <EmbedInteropTypes />
-      </ReferencePathWithRefAssemblies>
-    </ItemGroup>
-
-    <!-- Prefer32Bit was introduced in .NET 4.5. Set it to false if we are targeting 4.0 -->
-    <PropertyGroup Condition="('$(TargetFrameworkVersion)' == 'v4.0')">
-      <Prefer32Bit>false</Prefer32Bit>
-    </PropertyGroup>
-
-    <!-- TODO: Remove this ItemGroup once it has been moved to "_GenerateCompileInputs" target in Microsoft.Common.CurrentVersion.targets.
+        <ItemGroup>
+            <ReferencePathWithRefAssemblies Include="@(ReferencePath)" />
+        </ItemGroup>
+    </Target>
+    <Target Name="_BeforeVBCSCoreCompile">
+        <ItemGroup Condition="'$(TargetingClr2Framework)' == 'true'">
+            <ReferencePathWithRefAssemblies>
+                <EmbedInteropTypes />
+            </ReferencePathWithRefAssemblies>
+        </ItemGroup>
+        <!-- Prefer32Bit was introduced in .NET 4.5. Set it to false if we are targeting 4.0 -->
+        <PropertyGroup Condition="('$(TargetFrameworkVersion)' == 'v4.0')">
+            <Prefer32Bit>false</Prefer32Bit>
+        </PropertyGroup>
+        <!-- TODO: Remove this ItemGroup once it has been moved to "_GenerateCompileInputs" target in Microsoft.Common.CurrentVersion.targets.
          https://github.com/dotnet/roslyn/issues/12223 -->
-    <ItemGroup Condition="('$(AdditionalFileItemNames)' != '')">
-      <AdditionalFileItems Include="$(AdditionalFileItemNames)" />
-      <AdditionalFiles Include="@(%(AdditionalFileItems.Identity))" />
-    </ItemGroup>
-
-    <PropertyGroup Condition="'$(UseSharedCompilation)' == ''">
-      <UseSharedCompilation>true</UseSharedCompilation>
-    </PropertyGroup>
-  </Target>
-
-  <!--
+        <ItemGroup Condition="('$(AdditionalFileItemNames)' != '')">
+            <AdditionalFileItems Include="$(AdditionalFileItemNames)" />
+            <AdditionalFiles Include="@(%(AdditionalFileItems.Identity))" />
+        </ItemGroup>
+        <PropertyGroup Condition="'$(UseSharedCompilation)' == ''">
+            <UseSharedCompilation>true</UseSharedCompilation>
+        </PropertyGroup>
+    </Target>
+    <!--
     ========================
     DeterministicSourcePaths
     ========================
@@ -50,11 +41,10 @@
     Unless specified otherwise enable deterministic source root (PathMap) when building deterministically on CI server, but not for local builds.
     In order for the debugger to find source files when debugging a locally built binary the PDB must contain original, unmapped local paths.
   -->
-  <PropertyGroup>
-    <DeterministicSourcePaths Condition="'$(DeterministicSourcePaths)' == '' and '$(Deterministic)' == 'true' and '$(ContinuousIntegrationBuild)' == 'true'">true</DeterministicSourcePaths>
-  </PropertyGroup>
-
-  <!--
+    <PropertyGroup>
+        <DeterministicSourcePaths Condition="'$(DeterministicSourcePaths)' == '' and '$(Deterministic)' == 'true' and '$(ContinuousIntegrationBuild)' == 'true'">true</DeterministicSourcePaths>
+    </PropertyGroup>
+    <!--
     ==========
     SourceRoot
     ==========
@@ -71,40 +61,30 @@
 
     A consumer of SourceRoot.MappedPath metadata, such as Source Link generator, shall depend on this target. 
   -->
-
-  <Target Name="InitializeSourceRootMappedPaths"
-          DependsOnTargets="_InitializeSourceRootMappedPathsFromSourceControl">
-
-    <ItemGroup Condition="'@(_MappedSourceRoot)' != ''">
-      <_MappedSourceRoot Remove="@(_MappedSourceRoot)" />
-    </ItemGroup>
-
-    <Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots SourceRoots="@(SourceRoot)" Deterministic="$(DeterministicSourcePaths)">
-      <Output TaskParameter="MappedSourceRoots" ItemName="_MappedSourceRoot" />
-    </Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots>
-
-    <ItemGroup>
-      <SourceRoot Remove="@(SourceRoot)" />
-      <SourceRoot Include="@(_MappedSourceRoot)" />
-    </ItemGroup>
-  </Target>
-
-  <!-- 
+    <Target Name="InitializeSourceRootMappedPaths" DependsOnTargets="_InitializeSourceRootMappedPathsFromSourceControl">
+        <ItemGroup Condition="'@(_MappedSourceRoot)' != ''">
+            <_MappedSourceRoot Remove="@(_MappedSourceRoot)" />
+        </ItemGroup>
+        <Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots SourceRoots="@(SourceRoot)" Deterministic="$(DeterministicSourcePaths)">
+            <Output TaskParameter="MappedSourceRoots" ItemName="_MappedSourceRoot" />
+        </Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots>
+        <ItemGroup>
+            <SourceRoot Remove="@(SourceRoot)" />
+            <SourceRoot Include="@(_MappedSourceRoot)" />
+        </ItemGroup>
+    </Target>
+    <!-- 
     Declare that target InitializeSourceRootMappedPaths that populates MappedPaths metadata on SourceRoot items is available.
   -->
-  <PropertyGroup>
-    <SourceRootMappedPathsFeatureSupported>true</SourceRootMappedPathsFeatureSupported>
-  </PropertyGroup>
-
-  <!-- 
+    <PropertyGroup>
+        <SourceRootMappedPathsFeatureSupported>true</SourceRootMappedPathsFeatureSupported>
+    </PropertyGroup>
+    <!-- 
     If InitializeSourceControlInformation target isn't supported, we just continue without invoking that synchronization target. 
     We'll proceed with SourceRoot (and other source control properties) provided by the user (or blank).
   -->
-  <Target Name="_InitializeSourceRootMappedPathsFromSourceControl"
-          DependsOnTargets="InitializeSourceControlInformation"
-          Condition="'$(SourceControlInformationFeatureSupported)' == 'true'" />
-
-  <!-- 
+    <Target Name="_InitializeSourceRootMappedPathsFromSourceControl" DependsOnTargets="InitializeSourceControlInformation" Condition="'$(SourceControlInformationFeatureSupported)' == 'true'" />
+    <!-- 
     =======
     PathMap
     =======
@@ -114,23 +94,15 @@
     This target requires SourceRoot to be initialized in order to calculate the PathMap.
     If SourceRoot doesn't contain any top-level roots an error is reported.
   -->
-
-  <Target Name="_SetPathMapFromSourceRoots"
-          DependsOnTargets="InitializeSourceRootMappedPaths"
-          BeforeTargets="CoreCompile"
-          Condition="'$(DeterministicSourcePaths)' == 'true'">
-
-    <ItemGroup>
-      <_TopLevelSourceRoot Include="@(SourceRoot)" Condition="'%(SourceRoot.NestedRoot)' == ''"/>
-    </ItemGroup>
-
-    <PropertyGroup Condition="'@(_TopLevelSourceRoot)' != ''">
-      <!-- TODO: Report error/warning if /pathmap doesn't cover all emitted source paths: https://github.com/dotnet/roslyn/issues/23969 -->
-
-      <!-- TODO: PathMap should accept and ignore empty mapping: https://github.com/dotnet/roslyn/issues/23523 -->
-      <PathMap Condition="'$(PathMap)' != ''">,$(PathMap)</PathMap>
-
-      <!--
+    <Target Name="_SetPathMapFromSourceRoots" DependsOnTargets="InitializeSourceRootMappedPaths" BeforeTargets="CoreCompile" Condition="'$(DeterministicSourcePaths)' == 'true'">
+        <ItemGroup>
+            <_TopLevelSourceRoot Include="@(SourceRoot)" Condition="'%(SourceRoot.NestedRoot)' == ''" />
+        </ItemGroup>
+        <PropertyGroup Condition="'@(_TopLevelSourceRoot)' != ''">
+            <!-- TODO: Report error/warning if /pathmap doesn't cover all emitted source paths: https://github.com/dotnet/roslyn/issues/23969 -->
+            <!-- TODO: PathMap should accept and ignore empty mapping: https://github.com/dotnet/roslyn/issues/23523 -->
+            <PathMap Condition="'$(PathMap)' != ''">,$(PathMap)</PathMap>
+            <!--
         Prepend the SourceRoot.MappedPath values to PathMap, if it already has a value.
         For each emitted source path the compiler applies the first mapping that matches the path.
         PathMap values set previously will thus only be applied if the mapping provided by 
@@ -140,8 +112,7 @@
         TODO: quote the paths to avoid misinterpreting ',' and '=' in them as separators, 
         but quoting doesn't currently work (see https://github.com/dotnet/roslyn/issues/22835).
       -->
-      <PathMap>@(_TopLevelSourceRoot->'%(Identity)=%(MappedPath)', ',')$(PathMap)</PathMap>
-    </PropertyGroup>
-  </Target>
-
+            <PathMap>@(_TopLevelSourceRoot-&gt;'%(Identity)=%(MappedPath)', ',')$(PathMap)</PathMap>
+        </PropertyGroup>
+    </Target>
 </Project>

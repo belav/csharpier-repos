@@ -1,12 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
-    <RuntimeFrameworkVersion>$(MNAVersion)</RuntimeFrameworkVersion>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="StartupHookInvalidAssembly.dll" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
+    <PropertyGroup>
+        <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
+        <RuntimeFrameworkVersion>$(MNAVersion)</RuntimeFrameworkVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="StartupHookInvalidAssembly.dll" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
 </Project>

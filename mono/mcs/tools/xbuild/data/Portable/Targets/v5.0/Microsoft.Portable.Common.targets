@@ -10,7 +10,6 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
 
 ***********************************************************************************************
 -->
-
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <PortableNuGetMode>true</PortableNuGetMode>
@@ -20,5 +19,4 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
         <NuGetTargetMoniker>.NETPlatform,Version=v5.0;.NETStandard,Version=v1.0;.NETStandard,Version=v1.1;.NETStandard,Version=v1.2;.NETStandard,Version=v1.3;.NETStandard,Version=v1.4;.NETStandard,Version=v1.5;.NETStandard,Version=v1.6</NuGetTargetMoniker>
     </PropertyGroup>
     <Import Project="..\Microsoft.Portable.Core.props" />
-
 </Project>

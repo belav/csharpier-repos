@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
 ***********************************************************************************************
 Sdk.targets
@@ -11,11 +10,8 @@ Copyright (c) .NET Foundation. All rights reserved.
 ***********************************************************************************************
 -->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-  <PropertyGroup>
-    <LanguageTargets Condition="'$(MSBuildProjectExtension)' == '.ilproj'">$(MSBuildThisFileDirectory)..\targets\Microsoft.NET.Sdk.IL.Common.targets</LanguageTargets>
-  </PropertyGroup>
-
-  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
-
+    <PropertyGroup>
+        <LanguageTargets Condition="'$(MSBuildProjectExtension)' == '.ilproj'">$(MSBuildThisFileDirectory)..\targets\Microsoft.NET.Sdk.IL.Common.targets</LanguageTargets>
+    </PropertyGroup>
+    <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 </Project>

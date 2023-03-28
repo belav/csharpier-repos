@@ -9,10 +9,10 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
 Copyright (c) .NET Foundation. All rights reserved.
 ***********************************************************************************************
 -->
-<Project>  
-  <!--We need to support SDK6.0 loading the latest ILC packages-->
-  <PropertyGroup>
-    <NeedNativePublishSupportForSDK6>$(NETCoreSdkVersion.StartsWith('6'))</NeedNativePublishSupportForSDK6>
-  </PropertyGroup>
- <Import Project="$(ILCompilerTargetsPath)" Condition="'$(NeedNativePublishSupportForSDK6)' == 'true'"/>
+<Project>
+    <!--We need to support SDK6.0 loading the latest ILC packages-->
+    <PropertyGroup>
+        <NeedNativePublishSupportForSDK6>$(NETCoreSdkVersion.StartsWith('6'))</NeedNativePublishSupportForSDK6>
+    </PropertyGroup>
+    <Import Project="$(ILCompilerTargetsPath)" Condition="'$(NeedNativePublishSupportForSDK6)' == 'true'" />
 </Project>

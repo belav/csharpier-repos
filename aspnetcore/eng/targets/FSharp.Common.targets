@@ -1,4 +1,4 @@
 <Project>
-  <Import Project="Packaging.targets" />
-  <Import Project="ResolveReferences.targets" />
+    <Import Project="Packaging.targets" />
+    <Import Project="ResolveReferences.targets" />
 </Project>

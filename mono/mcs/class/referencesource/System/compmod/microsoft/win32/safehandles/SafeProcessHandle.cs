@@ -61,6 +61,7 @@ namespace Microsoft.Win32.SafeHandles
             int processId
         );
 #endif
+
         internal void InitialSetHandle(IntPtr h)
         {
             Debug.Assert(base.IsInvalid, "Safe handle should only be set once");

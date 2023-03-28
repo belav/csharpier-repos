@@ -173,6 +173,7 @@ namespace System.Web.Services.Protocols
             return exts;
         }
 #endif
+
         internal static SoapExtensionRuntimeConfig[] GetMethodExtensions(LogicalMethodInfo method)
         {
             object[] ats = method.GetCustomAttributes(typeof(SoapExtensionAttribute));

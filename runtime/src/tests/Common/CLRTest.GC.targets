@@ -35,8 +35,6 @@ then
     exit $(GCBashScriptExitCode)
 fi
         ]]></GCLongGCTestBashScript>
-
-
         <GCSimulatorTestBashScript Condition="'$(IsGCSimulatorTest)' != 'true'"><![CDATA[
 # GCSimulator script
 if [ ! -z $RunningGCSimulatorTests ]
@@ -53,7 +51,6 @@ then
     exit $(GCBashScriptExitCode)
 fi
         ]]></GCSimulatorTestBashScript>
-
         <CLRTestBashPreCommands>$(CLRTestBashPreCommands);$(GCLongGCTestBashScript);$(GCSimulatorTestBashScript)</CLRTestBashPreCommands>
         <GCLongGCTestBatchScript Condition="'$(IsLongRunningGCTest)' != 'true'"><![CDATA[
 REM Long GC script
@@ -69,23 +66,20 @@ if not defined RunningLongGCTests (
   Exit /b 0
 )
         ]]></GCLongGCTestBatchScript>
-      
-      
-        <GCSimulatorTestBatchScript  Condition="'$(IsGCSimulatorTest)' != 'true'"><![CDATA[
+        <GCSimulatorTestBatchScript Condition="'$(IsGCSimulatorTest)' != 'true'"><![CDATA[
 REM GCSimulator script
 if defined RunningGCSimulatorTests (
   echo Skipping execution because this is not a GCSimulator test.
   Exit /b 0
 )
         ]]></GCSimulatorTestBatchScript>
-        <GCSimulatorTestBatchScript  Condition="'$(IsGCSimulatorTest)' == 'true'"><![CDATA[
+        <GCSimulatorTestBatchScript Condition="'$(IsGCSimulatorTest)' == 'true'"><![CDATA[
 REM GCSimulator script
 if not defined RunningGCSimulatorTests (
   echo Skipping execution because GCSimulator tests are not enabled
   Exit /b 0
 )
-        ]]></GCSimulatorTestBatchScript >
-
+        ]]></GCSimulatorTestBatchScript>
         <CLRTestBatchPreCommands>$(CLRTestBatchPreCommands);$(GCLongGCTestBatchScript);$(GCSimulatorTestBatchScript)</CLRTestBatchPreCommands>
     </PropertyGroup>
-</Project> 
+</Project>

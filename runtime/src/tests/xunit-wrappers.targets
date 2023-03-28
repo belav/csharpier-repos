@@ -1,26 +1,17 @@
 <Project>
-  <Target Name="CreateAllWrappers" DependsOnTargets="GetListOfTestCmds;FindCmdDirectories">
-    <MSBuild
-      Projects="$(MSBuildProjectFile)"
-      Targets="CreateXunitWrapper;BuildXunitWrapper"
-      Properties="_CMDDIR=%(TestDirectories.Identity)"
-      Condition="'@(TestDirectories)' != ''" />
-  </Target>
-
-  <Target Name="CreateXunitWrapper" DependsOnTargets="CreateXunitFacts">
-
-    <PropertyGroup>
-      <_XunitWrapperGen >
-        <![CDATA[
+    <Target Name="CreateAllWrappers" DependsOnTargets="GetListOfTestCmds;FindCmdDirectories">
+        <MSBuild Projects="$(MSBuildProjectFile)" Targets="CreateXunitWrapper;BuildXunitWrapper" Properties="_CMDDIR=%(TestDirectories.Identity)" Condition="'@(TestDirectories)' != ''" />
+    </Target>
+    <Target Name="CreateXunitWrapper" DependsOnTargets="CreateXunitFacts">
+        <PropertyGroup>
+            <_XunitWrapperGen><![CDATA[
 
 $(_XunitProlog)
 @(AllXUnitFacts)
 $(_XunitEpilog)
 
-]]>
-      </_XunitWrapperGen>
-      <XunitWrapperGenCsProj>
-        <![CDATA[
+]]></_XunitWrapperGen>
+            <XunitWrapperGenCsProj><![CDATA[
 <Project>
 
   <Import Project="$(TestProjectDir)Common/dir.sdkbuild.props" />
@@ -53,66 +44,44 @@ $(_XunitEpilog)
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
 
 </Project>
-]]>
-      </XunitWrapperGenCsProj>
-      <XunitRunnerConfig>
-        <![CDATA[
+]]></XunitWrapperGenCsProj>
+            <XunitRunnerConfig><![CDATA[
 {
     "diagnosticMessages": true,
     "longRunningTestSeconds": 120,
     "shadowCopy": false,
     "preEnumerateTheories": false
 }
-]]>
-      </XunitRunnerConfig>
-    </PropertyGroup>
-
-    <!-- <Exec Command="md" -->
-    <MakeDir  Directories="$(XunitWrapperGeneratedCSDirBase)$(Category)"/>
-
-    <!-- Write the file -->
-    <WriteLinesToFile
-      File="$(XunitWrapperSrcDir)\$(XunitWrapper).cs"
-      Lines="$(_XunitWrapperGen)"
-      Overwrite="true" />
-
-    <!-- Write the file -->
-    <WriteLinesToFile
-      File="$(XunitWrapperSrcDir)\$(XunitWrapper).csproj"
-      Lines="$(XunitWrapperGenCsProj)"
-      Overwrite="true" />
-
-    <!-- Write the file -->
-    <WriteLinesToFile
-      File="$(XunitWrapperSrcDir)\xunit.runner.json"
-      Lines="$(XunitRunnerConfig)"
-      Overwrite="true" />
-  </Target>
-
-  <Target Name="BuildXunitWrapper">
-    <MSBuild Projects="$(XunitWrapperSrcDir)\$(XunitWrapper).csproj" Targets="Restore;Build" />
-  </Target>
-
-  <Import Project="$(MSBuildThisFileDirectory)Common/testgrouping.proj" />
-
-  <Target Name="CreateXunitFacts" DependsOnTargets="GetListOfTestCmds">
-    <!-- NOTE! semicolons must be escaped with %3B boooo -->
-
-    <PropertyGroup>
-      <CategoryWithSlash>$([System.IO.Path]::GetRelativePath('$(XunitTestBinBase)', '$(_CMDDIR)'))</CategoryWithSlash>
-      <Category Condition="'$(RunningOnUnix)' != 'true'" >$([System.String]::Copy('$(CategoryWithSlash)').Replace('\','.'))</Category>
-      <Category Condition="'$(RunningOnUnix)' == 'true'" >$([System.String]::Copy('$(CategoryWithSlash)').Replace('/','.'))</Category>
-      <XunitWrapper>$(Category).XUnitWrapper</XunitWrapper>
-      <XunitWrapperSrcDir>$(XunitWrapperGeneratedCSDirBase)$(Category)</XunitWrapperSrcDir>
-      <MobilePlatform Condition=" '$(TargetOS)' == 'Android' ">android</MobilePlatform>
-      <MobilePlatform Condition=" '$(TargetOS)' == 'iOS' Or '$(TargetOS)' == 'iOSSimulator' ">apple</MobilePlatform>
-      <IsMobile>false</IsMobile>
-      <IsMobile Condition=" '$(TargetOS)' == 'Android' Or '$(TargetOS)' == 'iOS' Or '$(TargetOS)' == 'iOSSimulator' ">true</IsMobile>
-    </PropertyGroup>
-
-    <PropertyGroup>
-      <_XunitProlog Condition=" '$(_XunitProlog)'=='' and '$(IsMobile)'=='false' ">
-        <![CDATA[
+]]></XunitRunnerConfig>
+        </PropertyGroup>
+        <!-- <Exec Command="md" -->
+        <MakeDir Directories="$(XunitWrapperGeneratedCSDirBase)$(Category)" />
+        <!-- Write the file -->
+        <WriteLinesToFile File="$(XunitWrapperSrcDir)\$(XunitWrapper).cs" Lines="$(_XunitWrapperGen)" Overwrite="true" />
+        <!-- Write the file -->
+        <WriteLinesToFile File="$(XunitWrapperSrcDir)\$(XunitWrapper).csproj" Lines="$(XunitWrapperGenCsProj)" Overwrite="true" />
+        <!-- Write the file -->
+        <WriteLinesToFile File="$(XunitWrapperSrcDir)\xunit.runner.json" Lines="$(XunitRunnerConfig)" Overwrite="true" />
+    </Target>
+    <Target Name="BuildXunitWrapper">
+        <MSBuild Projects="$(XunitWrapperSrcDir)\$(XunitWrapper).csproj" Targets="Restore;Build" />
+    </Target>
+    <Import Project="$(MSBuildThisFileDirectory)Common/testgrouping.proj" />
+    <Target Name="CreateXunitFacts" DependsOnTargets="GetListOfTestCmds">
+        <!-- NOTE! semicolons must be escaped with %3B boooo -->
+        <PropertyGroup>
+            <CategoryWithSlash>$([System.IO.Path]::GetRelativePath('$(XunitTestBinBase)', '$(_CMDDIR)'))</CategoryWithSlash>
+            <Category Condition="'$(RunningOnUnix)' != 'true'">$([System.String]::Copy('$(CategoryWithSlash)').Replace('\','.'))</Category>
+            <Category Condition="'$(RunningOnUnix)' == 'true'">$([System.String]::Copy('$(CategoryWithSlash)').Replace('/','.'))</Category>
+            <XunitWrapper>$(Category).XUnitWrapper</XunitWrapper>
+            <XunitWrapperSrcDir>$(XunitWrapperGeneratedCSDirBase)$(Category)</XunitWrapperSrcDir>
+            <MobilePlatform Condition=" '$(TargetOS)' == 'Android' ">android</MobilePlatform>
+            <MobilePlatform Condition=" '$(TargetOS)' == 'iOS' Or '$(TargetOS)' == 'iOSSimulator' ">apple</MobilePlatform>
+            <IsMobile>false</IsMobile>
+            <IsMobile Condition=" '$(TargetOS)' == 'Android' Or '$(TargetOS)' == 'iOS' Or '$(TargetOS)' == 'iOSSimulator' ">true</IsMobile>
+        </PropertyGroup>
+        <PropertyGroup>
+            <_XunitProlog Condition=" '$(_XunitProlog)'=='' and '$(IsMobile)'=='false' "><![CDATA[
 using Xunit%3B
 using Xunit.Abstractions%3B
 using System%3B
@@ -163,10 +132,8 @@ namespace $([System.String]::Copy($(Category)).Replace(".","_").Replace("\","").
                 runningInWindows = (operatingSystem != null && operatingSystem.StartsWith("Windows"))%3B
             }
         }
-]]>
-      </_XunitProlog>
-      <_XunitProlog Condition=" '$(_XunitProlog)'=='' and '$(IsMobile)'=='true' ">
-        <![CDATA[
+]]></_XunitProlog>
+            <_XunitProlog Condition=" '$(_XunitProlog)'=='' and '$(IsMobile)'=='true' "><![CDATA[
 using Xunit%3B
 using Xunit.Abstractions%3B
 using System%3B
@@ -238,47 +205,40 @@ namespace $([System.String]::Copy($(Category)).Replace(".","_").Replace("\","").
             // to be the place to apply [CollectionDefinition] and all the
             // ICollectionFixture<> interfaces.
         }
-]]>
-      </_XunitProlog>
-      <_XunitEpilog Condition=" '$(_XunitEpilog)'=='' ">
-      <![CDATA[
+]]></_XunitProlog>
+            <_XunitEpilog Condition=" '$(_XunitEpilog)'=='' "><![CDATA[
 }
 
-]]>
-      </_XunitEpilog>
-    </PropertyGroup>
-
-    <PropertyGroup>
-      <TestExecutableReplacement Condition="'$(TestWrapperTargetsWindows)' != 'true' ">testExecutable = testExecutable.Replace("\\", "/")%3B</TestExecutableReplacement>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <AllCMDsPresent Include="$(_CMDDIR)\**\*.$(TestScriptExtension)" Exclude="$(_CMDDIR)\**\AppBundle\*.$(TestScriptExtension)" />
-      <AllCMDsPresent Remove="$(_CMDDIR)\**\run-v8.sh" Condition="'$(TargetArchitecture)' == 'wasm'" />
-      <AllCMDsPresent Remove="@(MergedRunnableTestPaths)" />
-      <AllCMDsPresent Remove="@(OutOfProcessTestPaths)" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'@(AllCMDsPresent)' != ''">
-      <TestGroupingDistinctWithCase Include="@(TestGrouping->Metadata('FullPath')->DistinctWithCase())" />
-      <TestGroupingNotRelevant Include="@(TestGroupingDistinctWithCase)" Exclude="@(AllCMDsPresent)" />
-      <GroupedCMDs Include="@(TestGroupingDistinctWithCase)" Exclude="@(TestGroupingNotRelevant)" />
-      <GroupedCMDs Include="@(AllCMDsPresent)" Exclude="@(GroupedCMDs)">
-        <TestGroup>$(Category)</TestGroup>
-      </GroupedCMDs>
-      <AllCMDExcludeFilter Include="@(ExcludeList->Metadata('FullPath'))" Condition="$(HaveExcludes)" />
-      <AllCMDs Include="@(GroupedCMDs)" Exclude="@(AllCMDExcludeFilter)">
-        <RelativeToCMDDIR>$([MSBuild]::MakeRelative($(_CMDDIR), %(FullPath)))</RelativeToCMDDIR>
-      </AllCMDs>
-      <AllCommands Include="@(AllCMDs)" Condition="@(AllCMDs->Count()) &gt; 0">
-        <DisplayName>$([MSBuild]::MakeRelative($(XunitTestBinBase), %(AllCMDs.FullPath)))</DisplayName>
-        <FactName Condition="'$(RunningOnUnix)' != 'true'" >_$([MSBuild]::ValueOrDefault(%(AllCMDs.RelativeToCMDDIR),"").Replace(".","_").Replace("\","_").Replace("-","_"))</FactName>
-        <ClassName Condition="'$(RunningOnUnix)' != 'true'" >_$([MSBuild]::ValueOrDefault(%(AllCMDs.RelativeToCMDDIR),"").Replace($(TestScriptExtension),"").Replace(".","_").Replace("\","_").Replace("-","_"))</ClassName>
-        <FactName Condition="'$(RunningOnUnix)' == 'true'" >_$([MSBuild]::ValueOrDefault(%(AllCMDs.RelativeToCMDDIR),"").Replace(".","_").Replace("/","_").Replace("-","_"))</FactName>
-        <ClassName Condition="'$(RunningOnUnix)' == 'true'" >_$([MSBuild]::ValueOrDefault(%(AllCMDs.RelativeToCMDDIR), '').Replace($(TestScriptExtension),'').Replace('.','_').Replace('/','_').Replace('-','_'))</ClassName>
-        <TestGroup>%(AllCMDs.TestGroup)</TestGroup>
-        <XUnitFact Condition=" '$(IsMobile)'=='false' ">
-          <![CDATA[
+]]></_XunitEpilog>
+        </PropertyGroup>
+        <PropertyGroup>
+            <TestExecutableReplacement Condition="'$(TestWrapperTargetsWindows)' != 'true' ">testExecutable = testExecutable.Replace("\\", "/")%3B</TestExecutableReplacement>
+        </PropertyGroup>
+        <ItemGroup>
+            <AllCMDsPresent Include="$(_CMDDIR)\**\*.$(TestScriptExtension)" Exclude="$(_CMDDIR)\**\AppBundle\*.$(TestScriptExtension)" />
+            <AllCMDsPresent Remove="$(_CMDDIR)\**\run-v8.sh" Condition="'$(TargetArchitecture)' == 'wasm'" />
+            <AllCMDsPresent Remove="@(MergedRunnableTestPaths)" />
+            <AllCMDsPresent Remove="@(OutOfProcessTestPaths)" />
+        </ItemGroup>
+        <ItemGroup Condition="'@(AllCMDsPresent)' != ''">
+            <TestGroupingDistinctWithCase Include="@(TestGrouping-&gt;Metadata('FullPath')-&gt;DistinctWithCase())" />
+            <TestGroupingNotRelevant Include="@(TestGroupingDistinctWithCase)" Exclude="@(AllCMDsPresent)" />
+            <GroupedCMDs Include="@(TestGroupingDistinctWithCase)" Exclude="@(TestGroupingNotRelevant)" />
+            <GroupedCMDs Include="@(AllCMDsPresent)" Exclude="@(GroupedCMDs)">
+                <TestGroup>$(Category)</TestGroup>
+            </GroupedCMDs>
+            <AllCMDExcludeFilter Include="@(ExcludeList-&gt;Metadata('FullPath'))" Condition="$(HaveExcludes)" />
+            <AllCMDs Include="@(GroupedCMDs)" Exclude="@(AllCMDExcludeFilter)">
+                <RelativeToCMDDIR>$([MSBuild]::MakeRelative($(_CMDDIR), %(FullPath)))</RelativeToCMDDIR>
+            </AllCMDs>
+            <AllCommands Include="@(AllCMDs)" Condition="@(AllCMDs-&gt;Count()) &gt; 0">
+                <DisplayName>$([MSBuild]::MakeRelative($(XunitTestBinBase), %(AllCMDs.FullPath)))</DisplayName>
+                <FactName Condition="'$(RunningOnUnix)' != 'true'">_$([MSBuild]::ValueOrDefault(%(AllCMDs.RelativeToCMDDIR),"").Replace(".","_").Replace("\","_").Replace("-","_"))</FactName>
+                <ClassName Condition="'$(RunningOnUnix)' != 'true'">_$([MSBuild]::ValueOrDefault(%(AllCMDs.RelativeToCMDDIR),"").Replace($(TestScriptExtension),"").Replace(".","_").Replace("\","_").Replace("-","_"))</ClassName>
+                <FactName Condition="'$(RunningOnUnix)' == 'true'">_$([MSBuild]::ValueOrDefault(%(AllCMDs.RelativeToCMDDIR),"").Replace(".","_").Replace("/","_").Replace("-","_"))</FactName>
+                <ClassName Condition="'$(RunningOnUnix)' == 'true'">_$([MSBuild]::ValueOrDefault(%(AllCMDs.RelativeToCMDDIR), '').Replace($(TestScriptExtension),'').Replace('.','_').Replace('/','_').Replace('-','_'))</ClassName>
+                <TestGroup>%(AllCMDs.TestGroup)</TestGroup>
+                <XUnitFact Condition=" '$(IsMobile)'=='false' "><![CDATA[
 
         public class %(AllCommands.ClassName)
         {
@@ -380,10 +340,8 @@ namespace $([System.String]::Copy($(Category)).Replace(".","_").Replace("\","").
             }
         }
 
-        ]]>
-        </XUnitFact>
-        <XUnitFact Condition=" '$(IsMobile)'=='true' ">
-          <![CDATA[
+        ]]></XUnitFact>
+                <XUnitFact Condition=" '$(IsMobile)'=='true' "><![CDATA[
         [Collection("Runtime test collection")]
         public class %(AllCommands.ClassName)
         {
@@ -496,10 +454,9 @@ namespace $([System.String]::Copy($(Category)).Replace(".","_").Replace("\","").
                 }
             }
         }
-        ]]>
-        </XUnitFact>
-      </AllCommands>
-      <AllXUnitFacts Include= "@(AllCommands->Metadata(XUnitFact))" />
-    </ItemGroup>
-  </Target>
+        ]]></XUnitFact>
+            </AllCommands>
+            <AllXUnitFacts Include="@(AllCommands-&gt;Metadata(XUnitFact))" />
+        </ItemGroup>
+    </Target>
 </Project>

@@ -1,11 +1,10 @@
 <Project>
-  <!-- Change AfterTargets back to 'UpdateTargetingAndRuntimePack' when reenabling pack injection -->
-  <Target Name="PrintRuntimePackLocation" AfterTargets="ResolveFrameworkReferences">
-    <Message Text="Used runtime pack: %(ResolvedRuntimePack.PackageDirectory)" Importance="high" />
-  </Target>
-
-   <!--Use local targeting pack for NetCoreAppCurrent.-->
-  <!--
+    <!-- Change AfterTargets back to 'UpdateTargetingAndRuntimePack' when reenabling pack injection -->
+    <Target Name="PrintRuntimePackLocation" AfterTargets="ResolveFrameworkReferences">
+        <Message Text="Used runtime pack: %(ResolvedRuntimePack.PackageDirectory)" Importance="high" />
+    </Target>
+    <!--Use local targeting pack for NetCoreAppCurrent.-->
+    <!--
    Uncomment to reenable package replacement
   <Target Name="UpdateTargetingAndRuntimePack"
           AfterTargets="ResolveFrameworkReferences">

@@ -1,9 +1,8 @@
 <Project>
-  <Import Project="..\Directory.Build.props" />
-
-  <PropertyGroup>
-    <RunAnalyzers>false</RunAnalyzers>
-    <Nullable>disable</Nullable>
-    <LinkerTestDir>$(MSBuildThisFileDirectory)</LinkerTestDir>
-  </PropertyGroup>
+    <Import Project="..\Directory.Build.props" />
+    <PropertyGroup>
+        <RunAnalyzers>false</RunAnalyzers>
+        <Nullable>disable</Nullable>
+        <LinkerTestDir>$(MSBuildThisFileDirectory)</LinkerTestDir>
+    </PropertyGroup>
 </Project>
