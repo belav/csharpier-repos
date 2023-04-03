@@ -26,13 +26,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public RenameClassificationTaggerProvider(
             InlineRenameService renameService,
-            IClassificationTypeRegistryService classificationTypeRegistryService)
+            IClassificationTypeRegistryService classificationTypeRegistryService
+        )
         {
             _renameService = renameService;
-            _classificationType = classificationTypeRegistryService.GetClassificationType(ClassificationTypeDefinitions.InlineRenameField);
+            _classificationType = classificationTypeRegistryService.GetClassificationType(
+                ClassificationTypeDefinitions.InlineRenameField
+            );
         }
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
-            => new RenameClassificationTagger(buffer, _renameService, _classificationType) as ITagger<T>;
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag =>
+            new RenameClassificationTagger(buffer, _renameService, _classificationType)
+            as ITagger<T>;
     }
 }

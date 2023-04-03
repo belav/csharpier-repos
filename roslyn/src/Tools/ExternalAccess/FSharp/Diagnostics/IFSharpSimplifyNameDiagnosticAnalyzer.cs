@@ -12,6 +12,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Diagnostics
 {
     internal interface IFSharpSimplifyNameDiagnosticAnalyzer
     {
-        Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(DiagnosticDescriptor descriptor, Document document, CancellationToken cancellationToken);
+        Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            DiagnosticDescriptor descriptor,
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -3,16 +3,18 @@
 
 abstract class A<T>
 {
-	public abstract void set_Prop (int value);
+    public abstract void set_Prop(int value);
 
-	public virtual T Prop {
-		set { }
-	}
+    public virtual T Prop
+    {
+        set { }
+    }
 }
 
 class B : A<int>
 {
-	public override int Prop {
-		set { }
-	}
+    public override int Prop
+    {
+        set { }
+    }
 }

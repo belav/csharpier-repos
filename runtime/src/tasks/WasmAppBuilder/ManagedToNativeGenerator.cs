@@ -38,13 +38,17 @@ public class ManagedToNativeGenerator : Task
     {
         if (Assemblies!.Length == 0)
         {
-            Log.LogError($"{nameof(ManagedToNativeGenerator)}.{nameof(Assemblies)} cannot be empty");
+            Log.LogError(
+                $"{nameof(ManagedToNativeGenerator)}.{nameof(Assemblies)} cannot be empty"
+            );
             return false;
         }
 
         if (PInvokeModules!.Length == 0)
         {
-            Log.LogError($"{nameof(ManagedToNativeGenerator)}.{nameof(PInvokeModules)} cannot be empty");
+            Log.LogError(
+                $"{nameof(ManagedToNativeGenerator)}.{nameof(PInvokeModules)} cannot be empty"
+            );
             return false;
         }
 
@@ -73,9 +77,10 @@ public class ManagedToNativeGenerator : Task
         var m2n = new InterpToNativeGenerator(Log);
         m2n.Generate(cookies, InterpToNativeOutputPath!);
 
-        FileWrites = IcallOutputPath != null
-            ? new string[] { PInvokeOutputPath, IcallOutputPath, InterpToNativeOutputPath }
-            : new string[] { PInvokeOutputPath, InterpToNativeOutputPath };
+        FileWrites =
+            IcallOutputPath != null
+                ? new string[] { PInvokeOutputPath, IcallOutputPath, InterpToNativeOutputPath }
+                : new string[] { PInvokeOutputPath, InterpToNativeOutputPath };
     }
 
     public string FixupSymbolName(string name)
@@ -89,10 +94,12 @@ public class ManagedToNativeGenerator : Task
 
         foreach (byte b in bytes)
         {
-            if ((b >= (byte)'0' && b <= (byte)'9') ||
-                (b >= (byte)'a' && b <= (byte)'z') ||
-                (b >= (byte)'A' && b <= (byte)'Z') ||
-                (b == (byte)'_'))
+            if (
+                (b >= (byte)'0' && b <= (byte)'9')
+                || (b >= (byte)'a' && b <= (byte)'z')
+                || (b >= (byte)'A' && b <= (byte)'Z')
+                || (b == (byte)'_')
+            )
             {
                 sb.Append((char)b);
             }

@@ -8,12 +8,8 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.StartupFactsTest
 {
     public class BasicStartup
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-        }
+        public void ConfigureServices(IServiceCollection services) { }
 
-        public void Configure(IApplicationBuilder app)
-        {
-        }
+        public void Configure(IApplicationBuilder app) { }
     }
 }

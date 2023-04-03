@@ -15,10 +15,9 @@ public class PerformanceTest
     public PerformanceTest(
         BrowserFixture browserFixture,
         BlazorWasmTestAppFixture<Wasm.Performance.TestApp.Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -39,7 +38,9 @@ public class PerformanceTest
         // In CI, we only verify that the benchmarks run without throwing any
         // errors. To get actual perf numbers, you must run the E2EPerformance
         // site manually.
-        var verifyOnlyLabel = Browser.Exists(By.XPath("//label[contains(text(), 'Verify only')]/input"));
+        var verifyOnlyLabel = Browser.Exists(
+            By.XPath("//label[contains(text(), 'Verify only')]/input")
+        );
         verifyOnlyLabel.Click();
 
         var runAllButton = Browser.Exists(By.CssSelector("button.btn-success.run-button"));
@@ -48,8 +49,11 @@ public class PerformanceTest
         // The "run" button goes away while the benchmarks execute, then it comes back
         Browser.False(() => runAllButton.Displayed);
         Browser.True(
-            () => runAllButton.Displayed || Browser.FindElements(By.CssSelector(".benchmark-error")).Any(),
-            TimeSpan.FromSeconds(60));
+            () =>
+                runAllButton.Displayed
+                || Browser.FindElements(By.CssSelector(".benchmark-error")).Any(),
+            TimeSpan.FromSeconds(60)
+        );
 
         Browser.DoesNotExist(By.CssSelector(".benchmark-error")); // no failures
         Browser.Exists(By.CssSelector(".benchmark-idle")); // everything's done

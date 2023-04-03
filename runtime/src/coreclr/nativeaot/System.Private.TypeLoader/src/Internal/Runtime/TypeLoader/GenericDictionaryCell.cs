@@ -18,7 +18,12 @@ namespace Internal.Runtime.TypeLoader
     {
         internal abstract void Prepare(TypeBuilder builder);
         internal abstract IntPtr Create(TypeBuilder builder);
-        internal virtual unsafe void WriteCellIntoDictionary(TypeBuilder typeBuilder, IntPtr* pDictionary, int slotIndex)
+
+        internal virtual unsafe void WriteCellIntoDictionary(
+            TypeBuilder typeBuilder,
+            IntPtr* pDictionary,
+            int slotIndex
+        )
         {
             pDictionary[slotIndex] = Create(typeBuilder);
         }
@@ -32,7 +37,10 @@ namespace Internal.Runtime.TypeLoader
         // Helper method for nullable transform. Ideally, we would do the nullable transform upfront before
         // the types is build. Unfortunately, there does not seem to be easy way to test for Nullable<> type definition
         // without introducing type builder recursion
-        private static RuntimeTypeHandle GetRuntimeTypeHandleWithNullableTransform(TypeBuilder builder, TypeDesc type)
+        private static RuntimeTypeHandle GetRuntimeTypeHandleWithNullableTransform(
+            TypeBuilder builder,
+            TypeDesc type
+        )
         {
             RuntimeTypeHandle th = builder.GetRuntimeTypeHandle(type);
             if (RuntimeAugments.IsNullable(th))
@@ -93,14 +101,19 @@ namespace Internal.Runtime.TypeLoader
             internal override void Prepare(TypeBuilder builder)
             {
                 if (InterfaceType.IsCanonicalSubtype(CanonicalFormKind.Any))
-                    Environment.FailFast("Unable to compute call information for a canonical interface");
+                    Environment.FailFast(
+                        "Unable to compute call information for a canonical interface"
+                    );
 
                 builder.RegisterForPreparation(InterfaceType);
             }
 
             internal override IntPtr Create(TypeBuilder builder)
             {
-                return RuntimeAugments.NewInterfaceDispatchCell(builder.GetRuntimeTypeHandle(InterfaceType), Slot);
+                return RuntimeAugments.NewInterfaceDispatchCell(
+                    builder.GetRuntimeTypeHandle(InterfaceType),
+                    Slot
+                );
             }
         }
 
@@ -115,8 +128,13 @@ namespace Internal.Runtime.TypeLoader
 
             internal override void Prepare(TypeBuilder builder)
             {
-                if (ConstraintType.IsCanonicalSubtype(CanonicalFormKind.Any) || ConstrainedMethodType.IsCanonicalSubtype(CanonicalFormKind.Any))
-                    Environment.FailFast("Unable to compute call information for a canonical type/method.");
+                if (
+                    ConstraintType.IsCanonicalSubtype(CanonicalFormKind.Any)
+                    || ConstrainedMethodType.IsCanonicalSubtype(CanonicalFormKind.Any)
+                )
+                    Environment.FailFast(
+                        "Unable to compute call information for a canonical type/method."
+                    );
 
                 builder.RegisterForPreparation(ConstraintType);
                 builder.RegisterForPreparation(ConstrainedMethodType);
@@ -128,13 +146,17 @@ namespace Internal.Runtime.TypeLoader
                     builder.GetRuntimeTypeHandle(ConstraintType),
                     builder.GetRuntimeTypeHandle(ConstrainedMethodType),
                     ConstrainedMethodSlot,
-                    out RuntimeTypeHandle genericContext);
+                    out RuntimeTypeHandle genericContext
+                );
 
                 Debug.Assert(result != IntPtr.Zero);
 
                 if (!genericContext.IsNull())
                 {
-                    result = FunctionPointerOps.GetGenericMethodFunctionPointer(result, genericContext.ToIntPtr());
+                    result = FunctionPointerOps.GetGenericMethodFunctionPointer(
+                        result,
+                        genericContext.ToIntPtr()
+                    );
                 }
 
                 return result;
@@ -149,7 +171,9 @@ namespace Internal.Runtime.TypeLoader
             internal override void Prepare(TypeBuilder builder)
             {
                 if (Type.IsCanonicalSubtype(CanonicalFormKind.Any))
-                    Environment.FailFast("Unable to compute static field locations for a canonical type.");
+                    Environment.FailFast(
+                        "Unable to compute static field locations for a canonical type."
+                    );
 
                 builder.RegisterForPreparation(Type);
             }
@@ -160,7 +184,9 @@ namespace Internal.Runtime.TypeLoader
                 switch (DataKind)
                 {
                     case StaticDataKind.NonGc:
-                        return TypeLoaderEnvironment.Instance.TryGetNonGcStaticFieldData(typeHandle);
+                        return TypeLoaderEnvironment.Instance.TryGetNonGcStaticFieldData(
+                            typeHandle
+                        );
 
                     case StaticDataKind.Gc:
                         return TypeLoaderEnvironment.Instance.TryGetGcStaticFieldData(typeHandle);
@@ -171,7 +197,10 @@ namespace Internal.Runtime.TypeLoader
                 }
             }
 
-            internal override unsafe IntPtr CreateLazyLookupCell(TypeBuilder builder, out IntPtr auxResult)
+            internal override unsafe IntPtr CreateLazyLookupCell(
+                TypeBuilder builder,
+                out IntPtr auxResult
+            )
             {
                 auxResult = IntPtr.Zero;
                 return *(IntPtr*)Create(builder);
@@ -185,14 +214,18 @@ namespace Internal.Runtime.TypeLoader
             internal override void Prepare(TypeBuilder builder)
             {
                 if (Type.IsCanonicalSubtype(CanonicalFormKind.Any))
-                    Environment.FailFast("Unable to compute static field locations for a canonical type.");
+                    Environment.FailFast(
+                        "Unable to compute static field locations for a canonical type."
+                    );
 
                 builder.RegisterForPreparation(Type);
             }
 
             internal override unsafe IntPtr Create(TypeBuilder builder)
             {
-                return TypeLoaderEnvironment.Instance.TryGetThreadStaticFieldData(builder.GetRuntimeTypeHandle(Type));
+                return TypeLoaderEnvironment.Instance.TryGetThreadStaticFieldData(
+                    builder.GetRuntimeTypeHandle(Type)
+                );
             }
         }
 
@@ -233,9 +266,11 @@ namespace Internal.Runtime.TypeLoader
 
             internal override unsafe IntPtr Create(TypeBuilder builder)
             {
-                RuntimeFieldHandle handle = TypeLoaderEnvironment.Instance.GetRuntimeFieldHandleForComponents(
-                    builder.GetRuntimeTypeHandle(ContainingType),
-                    FieldName);
+                RuntimeFieldHandle handle =
+                    TypeLoaderEnvironment.Instance.GetRuntimeFieldHandleForComponents(
+                        builder.GetRuntimeTypeHandle(ContainingType),
+                        FieldName
+                    );
 
                 return *(IntPtr*)&handle;
             }
@@ -264,14 +299,18 @@ namespace Internal.Runtime.TypeLoader
 
             internal override unsafe IntPtr Create(TypeBuilder builder)
             {
-                RuntimeTypeHandle[] genericArgHandles = Method.HasInstantiation && !Method.IsMethodDefinition ?
-                    builder.GetRuntimeTypeHandles(Method.Instantiation) : null;
+                RuntimeTypeHandle[] genericArgHandles =
+                    Method.HasInstantiation && !Method.IsMethodDefinition
+                        ? builder.GetRuntimeTypeHandles(Method.Instantiation)
+                        : null;
 
-                RuntimeMethodHandle handle = TypeLoaderEnvironment.Instance.GetRuntimeMethodHandleForComponents(
-                    builder.GetRuntimeTypeHandle(Method.OwningType),
-                    MethodName,
-                    MethodSignature,
-                    genericArgHandles);
+                RuntimeMethodHandle handle =
+                    TypeLoaderEnvironment.Instance.GetRuntimeMethodHandleForComponents(
+                        builder.GetRuntimeTypeHandle(Method.OwningType),
+                        MethodName,
+                        MethodSignature,
+                        genericArgHandles
+                    );
 
                 return *(IntPtr*)&handle;
             }
@@ -295,7 +334,10 @@ namespace Internal.Runtime.TypeLoader
                 return RuntimeAugments.GetAllocateObjectHelperForType(th);
             }
 
-            internal override unsafe IntPtr CreateLazyLookupCell(TypeBuilder builder, out IntPtr auxResult)
+            internal override unsafe IntPtr CreateLazyLookupCell(
+                TypeBuilder builder,
+                out IntPtr auxResult
+            )
             {
                 RuntimeTypeHandle th = GetRuntimeTypeHandleWithNullableTransform(builder, Type);
                 auxResult = th.ToIntPtr();
@@ -316,7 +358,6 @@ namespace Internal.Runtime.TypeLoader
             {
                 IntPtr result = TypeLoaderEnvironment.TryGetDefaultConstructorForType(Type);
 
-
                 if (result == IntPtr.Zero)
                     result = RuntimeAugments.GetFallbackDefaultConstructor();
                 return result;
@@ -334,21 +375,35 @@ namespace Internal.Runtime.TypeLoader
 
             internal override unsafe IntPtr Create(TypeBuilder builder)
             {
-                IntPtr methodDictionary = Method.Instantiation.Length > 0 ?
-                    ((InstantiatedMethod)Method).RuntimeMethodDictionary :
-                    builder.GetRuntimeTypeHandle(Method.OwningType).ToIntPtr();
-                return FunctionPointerOps.GetGenericMethodFunctionPointer(Method.FunctionPointer, methodDictionary);
+                IntPtr methodDictionary =
+                    Method.Instantiation.Length > 0
+                        ? ((InstantiatedMethod)Method).RuntimeMethodDictionary
+                        : builder.GetRuntimeTypeHandle(Method.OwningType).ToIntPtr();
+                return FunctionPointerOps.GetGenericMethodFunctionPointer(
+                    Method.FunctionPointer,
+                    methodDictionary
+                );
             }
         }
 
-        internal static unsafe GenericDictionaryCell[] BuildDictionary(TypeBuilder typeBuilder, NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext, NativeParser parser)
+        internal static unsafe GenericDictionaryCell[] BuildDictionary(
+            TypeBuilder typeBuilder,
+            NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext,
+            NativeParser parser
+        )
         {
             uint parserStartOffset = parser.Offset;
 
             uint count = parser.GetSequenceCount();
             Debug.Assert(count > 0);
 
-            TypeLoaderLogger.WriteLine("Parsing dictionary layout @ " + parserStartOffset.LowLevelToString() + " (" + count.LowLevelToString() + " entries)");
+            TypeLoaderLogger.WriteLine(
+                "Parsing dictionary layout @ "
+                    + parserStartOffset.LowLevelToString()
+                    + " ("
+                    + count.LowLevelToString()
+                    + " entries)"
+            );
 
             GenericDictionaryCell[] dictionary = new GenericDictionaryCell[count];
 
@@ -365,7 +420,10 @@ namespace Internal.Runtime.TypeLoader
             return dictionary;
         }
 
-        internal static GenericDictionaryCell ParseAndCreateCell(NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext, ref NativeParser parser)
+        internal static GenericDictionaryCell ParseAndCreateCell(
+            NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext,
+            ref NativeParser parser
+        )
         {
             GenericDictionaryCell cell;
 
@@ -373,6 +431,7 @@ namespace Internal.Runtime.TypeLoader
             switch (kind)
             {
                 case FixupSignatureKind.TypeHandle:
+
                     {
                         var type = nativeLayoutInfoLoadContext.GetType(ref parser);
                         TypeLoaderLogger.WriteLine("TypeHandle: " + type.ToString());
@@ -382,36 +441,57 @@ namespace Internal.Runtime.TypeLoader
                     break;
 
                 case FixupSignatureKind.InterfaceCall:
+
                     {
                         var interfaceType = nativeLayoutInfoLoadContext.GetType(ref parser);
                         var slot = parser.GetUnsigned();
-                        TypeLoaderLogger.WriteLine("InterfaceCall: " + interfaceType.ToString() + ", slot #" + slot.LowLevelToString());
+                        TypeLoaderLogger.WriteLine(
+                            "InterfaceCall: "
+                                + interfaceType.ToString()
+                                + ", slot #"
+                                + slot.LowLevelToString()
+                        );
 
-                        cell = new InterfaceCallCell() { InterfaceType = interfaceType, Slot = (int)slot };
+                        cell = new InterfaceCallCell()
+                        {
+                            InterfaceType = interfaceType,
+                            Slot = (int)slot
+                        };
                     }
                     break;
 
                 case FixupSignatureKind.MethodDictionary:
+
                     {
                         var genericMethod = nativeLayoutInfoLoadContext.GetMethod(ref parser);
                         Debug.Assert(genericMethod.Instantiation.Length > 0);
                         TypeLoaderLogger.WriteLine("MethodDictionary: " + genericMethod.ToString());
 
-                        cell = new MethodDictionaryCell { GenericMethod = (InstantiatedMethod)genericMethod };
+                        cell = new MethodDictionaryCell
+                        {
+                            GenericMethod = (InstantiatedMethod)genericMethod
+                        };
                     }
                     break;
 
                 case FixupSignatureKind.StaticData:
+
                     {
                         var type = nativeLayoutInfoLoadContext.GetType(ref parser);
                         StaticDataKind staticDataKind = (StaticDataKind)parser.GetUnsigned();
-                        TypeLoaderLogger.WriteLine("StaticData (" + (staticDataKind == StaticDataKind.Gc ? "Gc" : "NonGc") + ": " + type.ToString());
+                        TypeLoaderLogger.WriteLine(
+                            "StaticData ("
+                                + (staticDataKind == StaticDataKind.Gc ? "Gc" : "NonGc")
+                                + ": "
+                                + type.ToString()
+                        );
 
                         cell = new StaticDataCell() { DataKind = staticDataKind, Type = type };
                     }
                     break;
 
                 case FixupSignatureKind.UnwrapNullableType:
+
                     {
                         var type = nativeLayoutInfoLoadContext.GetType(ref parser);
                         TypeLoaderLogger.WriteLine("UnwrapNullableType of: " + type.ToString());
@@ -424,25 +504,44 @@ namespace Internal.Runtime.TypeLoader
                     break;
 
                 case FixupSignatureKind.FieldLdToken:
+
                     {
                         NativeParser ldtokenSigParser = parser.GetParserFromRelativeOffset();
 
                         var type = nativeLayoutInfoLoadContext.GetType(ref ldtokenSigParser);
-                        IntPtr fieldNameSig = ldtokenSigParser.Reader.OffsetToAddress(ldtokenSigParser.Offset);
-                        TypeLoaderLogger.WriteLine("LdToken on: " + type.ToString() + "." + ldtokenSigParser.GetString());
+                        IntPtr fieldNameSig = ldtokenSigParser.Reader.OffsetToAddress(
+                            ldtokenSigParser.Offset
+                        );
+                        TypeLoaderLogger.WriteLine(
+                            "LdToken on: " + type.ToString() + "." + ldtokenSigParser.GetString()
+                        );
 
-                        cell = new FieldLdTokenCell() { FieldName = fieldNameSig, ContainingType = type };
+                        cell = new FieldLdTokenCell()
+                        {
+                            FieldName = fieldNameSig,
+                            ContainingType = type
+                        };
                     }
                     break;
 
                 case FixupSignatureKind.MethodLdToken:
+
                     {
                         NativeParser ldtokenSigParser = parser.GetParserFromRelativeOffset();
 
                         RuntimeSignature methodNameSig;
                         RuntimeSignature methodSig;
-                        var method = nativeLayoutInfoLoadContext.GetMethod(ref ldtokenSigParser, out methodNameSig, out methodSig);
-                        TypeLoaderLogger.WriteLine("LdToken on: " + method.OwningType.ToString() + "::" + method.NameAndSignature.Name);
+                        var method = nativeLayoutInfoLoadContext.GetMethod(
+                            ref ldtokenSigParser,
+                            out methodNameSig,
+                            out methodSig
+                        );
+                        TypeLoaderLogger.WriteLine(
+                            "LdToken on: "
+                                + method.OwningType.ToString()
+                                + "::"
+                                + method.NameAndSignature.Name
+                        );
 
                         cell = new MethodLdTokenCell
                         {
@@ -454,6 +553,7 @@ namespace Internal.Runtime.TypeLoader
                     break;
 
                 case FixupSignatureKind.AllocateObject:
+
                     {
                         var type = nativeLayoutInfoLoadContext.GetType(ref parser);
                         TypeLoaderLogger.WriteLine("AllocateObject on: " + type.ToString());
@@ -463,6 +563,7 @@ namespace Internal.Runtime.TypeLoader
                     break;
 
                 case FixupSignatureKind.DefaultConstructor:
+
                     {
                         var type = nativeLayoutInfoLoadContext.GetType(ref parser);
                         TypeLoaderLogger.WriteLine("DefaultConstructor on: " + type.ToString());
@@ -472,23 +573,33 @@ namespace Internal.Runtime.TypeLoader
                     break;
 
                 case FixupSignatureKind.Method:
+
                     {
-                        var method = nativeLayoutInfoLoadContext.GetMethod(ref parser, out _, out _);
+                        var method = nativeLayoutInfoLoadContext.GetMethod(
+                            ref parser,
+                            out _,
+                            out _
+                        );
                         TypeLoaderLogger.WriteLine("Method: " + method.ToString());
 
-                        cell = new MethodCell
-                        {
-                            Method = method,
-                        };
+                        cell = new MethodCell { Method = method, };
                     }
                     break;
 
                 case FixupSignatureKind.NonGenericStaticConstrainedMethod:
+
                     {
                         var constraintType = nativeLayoutInfoLoadContext.GetType(ref parser);
                         var constrainedMethodType = nativeLayoutInfoLoadContext.GetType(ref parser);
                         var constrainedMethodSlot = parser.GetUnsigned();
-                        TypeLoaderLogger.WriteLine("NonGenericStaticConstrainedMethod: " + constraintType.ToString() + " Method " + constrainedMethodType.ToString() + ", slot #" + constrainedMethodSlot.LowLevelToString());
+                        TypeLoaderLogger.WriteLine(
+                            "NonGenericStaticConstrainedMethod: "
+                                + constraintType.ToString()
+                                + " Method "
+                                + constrainedMethodType.ToString()
+                                + ", slot #"
+                                + constrainedMethodSlot.LowLevelToString()
+                        );
 
                         cell = new NonGenericStaticConstrainedMethodCell()
                         {
@@ -500,6 +611,7 @@ namespace Internal.Runtime.TypeLoader
                     break;
 
                 case FixupSignatureKind.ThreadStaticIndex:
+
                     {
                         var type = nativeLayoutInfoLoadContext.GetType(ref parser);
                         TypeLoaderLogger.WriteLine("ThreadStaticIndex on: " + type.ToString());
@@ -510,7 +622,9 @@ namespace Internal.Runtime.TypeLoader
 
                 case FixupSignatureKind.NotYetSupported:
                 case FixupSignatureKind.GenericStaticConstrainedMethod:
-                    TypeLoaderLogger.WriteLine("Valid dictionary entry, but not yet supported by the TypeLoader!");
+                    TypeLoaderLogger.WriteLine(
+                        "Valid dictionary entry, but not yet supported by the TypeLoader!"
+                    );
                     throw new TypeBuilder.MissingTemplateException();
 
                 default:

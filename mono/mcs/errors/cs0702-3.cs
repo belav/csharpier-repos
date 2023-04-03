@@ -3,6 +3,5 @@
 
 using System;
 
-class C<T> where T : MulticastDelegate
-{
-}
+class C<T>
+    where T : MulticastDelegate { }

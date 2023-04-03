@@ -3,5 +3,5 @@
 
 class S
 {
-	const bool res = true > false;
+    const bool res = true > false;
 }

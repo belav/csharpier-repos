@@ -4,8 +4,8 @@
 
 class Program
 {
-	static void Main ()
-	{
-		var s = $"{1, int.MinValue }";
-	}
+    static void Main()
+    {
+        var s = $"{1, int.MinValue}";
+    }
 }

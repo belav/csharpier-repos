@@ -2,14 +2,16 @@
 // Line: 13
 // Compiler options: -warnaserror
 
-class A {
+class A
+{
     [System.Obsolete]
-    int Value {
-        set {
-        }
+    int Value
+    {
+        set { }
     }
-    
-    public A () {
+
+    public A()
+    {
         Value = 4;
     }
 }

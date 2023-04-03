@@ -4,6 +4,7 @@
 public class Runtime_61908
 {
     public static bool s_3;
+
     public static int Main()
     {
         var vr6 = M3(s_3);

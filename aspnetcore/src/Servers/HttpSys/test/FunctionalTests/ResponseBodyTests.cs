@@ -21,26 +21,36 @@ public class ResponseBodyTests
     [ConditionalFact]
     public async Task ResponseBody_StartAsync_LocksHeadersAndTriggersOnStarting()
     {
-        using (Utilities.CreateHttpServer(out var address, async httpContext =>
-        {
-            var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            httpContext.Response.OnStarting(() =>
-            {
-                startingTcs.SetResult();
-                return Task.CompletedTask;
-            });
-            await httpContext.Response.StartAsync();
-            Assert.True(httpContext.Response.HasStarted);
-            Assert.True(httpContext.Response.Headers.IsReadOnly);
-            await startingTcs.Task.DefaultTimeout();
-            await httpContext.Response.WriteAsync("Hello World");
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out var address,
+                async httpContext =>
+                {
+                    var startingTcs = new TaskCompletionSource(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
+                    await httpContext.Response.StartAsync();
+                    Assert.True(httpContext.Response.HasStarted);
+                    Assert.True(httpContext.Response.Headers.IsReadOnly);
+                    await startingTcs.Task.DefaultTimeout();
+                    await httpContext.Response.WriteAsync("Hello World");
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
             Assert.Equal(new Version(1, 1), response.Version);
             IEnumerable<string> ignored;
-            Assert.False(response.Content.Headers.TryGetValues("content-length", out ignored), "Content-Length");
+            Assert.False(
+                response.Content.Headers.TryGetValues("content-length", out ignored),
+                "Content-Length"
+            );
             Assert.True(response.Headers.TransferEncodingChunked.HasValue, "Chunked");
             Assert.Equal("Hello World", await response.Content.ReadAsStringAsync());
         }
@@ -49,21 +59,30 @@ public class ResponseBodyTests
     [ConditionalFact]
     public async Task ResponseBody_CompleteAsync_TriggersOnStartingAndLocksHeaders()
     {
-        var responseReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        using (Utilities.CreateHttpServer(out var address, async httpContext =>
-        {
-            var startingTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            httpContext.Response.OnStarting(() =>
-            {
-                startingTcs.SetResult();
-                return Task.CompletedTask;
-            });
-            await httpContext.Response.CompleteAsync();
-            Assert.True(httpContext.Response.HasStarted);
-            Assert.True(httpContext.Response.Headers.IsReadOnly);
-            await startingTcs.Task.DefaultTimeout();
-            await responseReceived.Task.DefaultTimeout();
-        }))
+        var responseReceived = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        using (
+            Utilities.CreateHttpServer(
+                out var address,
+                async httpContext =>
+                {
+                    var startingTcs = new TaskCompletionSource(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
+                    await httpContext.Response.CompleteAsync();
+                    Assert.True(httpContext.Response.HasStarted);
+                    Assert.True(httpContext.Response.Headers.IsReadOnly);
+                    await startingTcs.Task.DefaultTimeout();
+                    await responseReceived.Task.DefaultTimeout();
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
@@ -76,15 +95,22 @@ public class ResponseBodyTests
     [ConditionalFact]
     public async Task ResponseBody_CompleteAsync_FlushesThePipe()
     {
-        var responseReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        using (Utilities.CreateHttpServer(out var address, async httpContext =>
-        {
-            var writer = httpContext.Response.BodyWriter;
-            var memory = writer.GetMemory();
-            writer.Advance(memory.Length);
-            await httpContext.Response.CompleteAsync();
-            await responseReceived.Task.DefaultTimeout();
-        }))
+        var responseReceived = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        using (
+            Utilities.CreateHttpServer(
+                out var address,
+                async httpContext =>
+                {
+                    var writer = httpContext.Response.BodyWriter;
+                    var memory = writer.GetMemory();
+                    writer.Advance(memory.Length);
+                    await httpContext.Response.CompleteAsync();
+                    await responseReceived.Task.DefaultTimeout();
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
@@ -97,13 +123,18 @@ public class ResponseBodyTests
     [ConditionalFact]
     public async Task ResponseBody_PipeAdapter_AutomaticallyFlushed()
     {
-        using (Utilities.CreateHttpServer(out var address, httpContext =>
-        {
-            var writer = httpContext.Response.BodyWriter;
-            var memory = writer.GetMemory();
-            writer.Advance(memory.Length);
-            return Task.CompletedTask;
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out var address,
+                httpContext =>
+                {
+                    var writer = httpContext.Response.BodyWriter;
+                    var memory = writer.GetMemory();
+                    writer.Advance(memory.Length);
+                    return Task.CompletedTask;
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
@@ -116,18 +147,26 @@ public class ResponseBodyTests
     public async Task ResponseBody_WriteNoHeaders_SetsChunked()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-            httpContext.Response.Body.Write(new byte[10], 0, 10);
-            return httpContext.Response.Body.WriteAsync(new byte[10], 0, 10);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
+                    httpContext.Response.Body.Write(new byte[10], 0, 10);
+                    return httpContext.Response.Body.WriteAsync(new byte[10], 0, 10);
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
             Assert.Equal(new Version(1, 1), response.Version);
             IEnumerable<string> ignored;
-            Assert.False(response.Content.Headers.TryGetValues("content-length", out ignored), "Content-Length");
+            Assert.False(
+                response.Content.Headers.TryGetValues("content-length", out ignored),
+                "Content-Length"
+            );
             Assert.True(response.Headers.TransferEncodingChunked.HasValue, "Chunked");
             Assert.Equal(new byte[20], await response.Content.ReadAsByteArrayAsync());
         }
@@ -137,19 +176,27 @@ public class ResponseBodyTests
     public async Task ResponseBody_WriteNoHeadersAndFlush_DefaultsToChunked()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, async httpContext =>
-        {
-            httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-            httpContext.Response.Body.Write(new byte[10], 0, 10);
-            await httpContext.Response.Body.WriteAsync(new byte[10], 0, 10);
-            await httpContext.Response.Body.FlushAsync();
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                async httpContext =>
+                {
+                    httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
+                    httpContext.Response.Body.Write(new byte[10], 0, 10);
+                    await httpContext.Response.Body.WriteAsync(new byte[10], 0, 10);
+                    await httpContext.Response.Body.FlushAsync();
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
             Assert.Equal(new Version(1, 1), response.Version);
             IEnumerable<string> ignored;
-            Assert.False(response.Content.Headers.TryGetValues("content-length", out ignored), "Content-Length");
+            Assert.False(
+                response.Content.Headers.TryGetValues("content-length", out ignored),
+                "Content-Length"
+            );
             Assert.True(response.Headers.TransferEncodingChunked.Value, "Chunked");
             Assert.Equal(new byte[20], await response.Content.ReadAsByteArrayAsync());
         }
@@ -159,19 +206,29 @@ public class ResponseBodyTests
     public async Task ResponseBody_WriteChunked_ManuallyChunked()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, async httpContext =>
-        {
-            httpContext.Response.Headers["transfeR-Encoding"] = "CHunked";
-            Stream stream = httpContext.Response.Body;
-            var responseBytes = Encoding.ASCII.GetBytes("10\r\nManually Chunked\r\n0\r\n\r\n");
-            await stream.WriteAsync(responseBytes, 0, responseBytes.Length);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                async httpContext =>
+                {
+                    httpContext.Response.Headers["transfeR-Encoding"] = "CHunked";
+                    Stream stream = httpContext.Response.Body;
+                    var responseBytes = Encoding.ASCII.GetBytes(
+                        "10\r\nManually Chunked\r\n0\r\n\r\n"
+                    );
+                    await stream.WriteAsync(responseBytes, 0, responseBytes.Length);
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
             Assert.Equal(new Version(1, 1), response.Version);
             IEnumerable<string> ignored;
-            Assert.False(response.Content.Headers.TryGetValues("content-length", out ignored), "Content-Length");
+            Assert.False(
+                response.Content.Headers.TryGetValues("content-length", out ignored),
+                "Content-Length"
+            );
             Assert.True(response.Headers.TransferEncodingChunked.Value, "Chunked");
             Assert.Equal("Manually Chunked", await response.Content.ReadAsStringAsync());
         }
@@ -181,21 +238,29 @@ public class ResponseBodyTests
     public async Task ResponseBody_WriteContentLength_PassedThrough()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, async httpContext =>
-        {
-            httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-            httpContext.Response.Headers["Content-lenGth"] = " 30 ";
-            Stream stream = httpContext.Response.Body;
-            stream.EndWrite(stream.BeginWrite(new byte[10], 0, 10, null, null));
-            stream.Write(new byte[10], 0, 10);
-            await stream.WriteAsync(new byte[10], 0, 10);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                async httpContext =>
+                {
+                    httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
+                    httpContext.Response.Headers["Content-lenGth"] = " 30 ";
+                    Stream stream = httpContext.Response.Body;
+                    stream.EndWrite(stream.BeginWrite(new byte[10], 0, 10, null, null));
+                    stream.Write(new byte[10], 0, 10);
+                    await stream.WriteAsync(new byte[10], 0, 10);
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
             Assert.Equal(new Version(1, 1), response.Version);
             IEnumerable<string> contentLength;
-            Assert.True(response.Content.Headers.TryGetValues("content-length", out contentLength), "Content-Length");
+            Assert.True(
+                response.Content.Headers.TryGetValues("content-length", out contentLength),
+                "Content-Length"
+            );
             Assert.Equal("30", contentLength.First());
             Assert.Null(response.Headers.TransferEncodingChunked);
             Assert.Equal(new byte[30], await response.Content.ReadAsByteArrayAsync());
@@ -206,11 +271,16 @@ public class ResponseBodyTests
     public async Task ResponseBody_WriteContentLengthNoneWritten_Throws()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            httpContext.Response.Headers["Content-lenGth"] = " 20 ";
-            return Task.FromResult(0);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    httpContext.Response.Headers["Content-lenGth"] = " 20 ";
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
             await Assert.ThrowsAsync<HttpRequestException>(() => SendRequestAsync(address));
         }
@@ -220,13 +290,20 @@ public class ResponseBodyTests
     public async Task ResponseBody_WriteContentLengthNotEnoughWritten_Throws()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    httpContext.Response.Headers["Content-lenGth"] = " 20 ";
+                    return httpContext.Response.Body.WriteAsync(new byte[5], 0, 5);
+                }
+            )
+        )
         {
-            httpContext.Response.Headers["Content-lenGth"] = " 20 ";
-            return httpContext.Response.Body.WriteAsync(new byte[5], 0, 5);
-        }))
-        {
-            await Assert.ThrowsAsync<HttpRequestException>(async () => await SendRequestAsync(address));
+            await Assert.ThrowsAsync<HttpRequestException>(
+                async () => await SendRequestAsync(address)
+            );
         }
     }
 
@@ -235,14 +312,20 @@ public class ResponseBodyTests
     {
         var completed = false;
         string address;
-        using (Utilities.CreateHttpServer(out address, async httpContext =>
-        {
-            httpContext.Response.Headers["Content-lenGth"] = " 10 ";
-            await httpContext.Response.Body.WriteAsync(new byte[5], 0, 5);
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                httpContext.Response.Body.WriteAsync(new byte[6], 0, 6));
-            completed = true;
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                async httpContext =>
+                {
+                    httpContext.Response.Headers["Content-lenGth"] = " 10 ";
+                    await httpContext.Response.Body.WriteAsync(new byte[5], 0, 5);
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => httpContext.Response.Body.WriteAsync(new byte[6], 0, 6)
+                    );
+                    completed = true;
+                }
+            )
+        )
         {
             await Assert.ThrowsAsync<HttpRequestException>(() => SendRequestAsync(address));
             Assert.True(completed);
@@ -252,30 +335,41 @@ public class ResponseBodyTests
     [ConditionalFact]
     public async Task ResponseBody_WriteContentLengthExtraWritten_Throws()
     {
-        var requestThrew = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
-        using (Utilities.CreateHttpServer(out var address, httpContext =>
-        {
-            try
-            {
-                httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-                httpContext.Response.Headers["Content-lenGth"] = " 10 ";
-                httpContext.Response.Body.Write(new byte[10], 0, 10);
-                httpContext.Response.Body.Write(new byte[9], 0, 9);
-                requestThrew.SetResult(false);
-            }
-            catch (Exception)
-            {
-                requestThrew.SetResult(true);
-            }
-            return Task.FromResult(0);
-        }))
+        var requestThrew = new TaskCompletionSource<bool>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        using (
+            Utilities.CreateHttpServer(
+                out var address,
+                httpContext =>
+                {
+                    try
+                    {
+                        httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO =
+                            true;
+                        httpContext.Response.Headers["Content-lenGth"] = " 10 ";
+                        httpContext.Response.Body.Write(new byte[10], 0, 10);
+                        httpContext.Response.Body.Write(new byte[9], 0, 9);
+                        requestThrew.SetResult(false);
+                    }
+                    catch (Exception)
+                    {
+                        requestThrew.SetResult(true);
+                    }
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
             // The full response is received.
             HttpResponseMessage response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
             Assert.Equal(new Version(1, 1), response.Version);
             IEnumerable<string> contentLength;
-            Assert.True(response.Content.Headers.TryGetValues("content-length", out contentLength), "Content-Length");
+            Assert.True(
+                response.Content.Headers.TryGetValues("content-length", out contentLength),
+                "Content-Length"
+            );
             Assert.Equal("10", contentLength.First());
             Assert.Null(response.Headers.TransferEncodingChunked);
             Assert.Equal(new byte[10], await response.Content.ReadAsByteArrayAsync());
@@ -289,25 +383,36 @@ public class ResponseBodyTests
     {
         var onStartingCalled = false;
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-            httpContext.Response.OnStarting(state =>
-            {
-                onStartingCalled = true;
-                Assert.Same(state, httpContext);
-                return Task.FromResult(0);
-            }, httpContext);
-            httpContext.Response.Body.Write(new byte[10], 0, 10);
-            return Task.FromResult(0);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
+                    httpContext.Response.OnStarting(
+                        state =>
+                        {
+                            onStartingCalled = true;
+                            Assert.Same(state, httpContext);
+                            return Task.FromResult(0);
+                        },
+                        httpContext
+                    );
+                    httpContext.Response.Body.Write(new byte[10], 0, 10);
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
             Assert.Equal(new Version(1, 1), response.Version);
             Assert.True(onStartingCalled);
             IEnumerable<string> ignored;
-            Assert.False(response.Content.Headers.TryGetValues("content-length", out ignored), "Content-Length");
+            Assert.False(
+                response.Content.Headers.TryGetValues("content-length", out ignored),
+                "Content-Length"
+            );
             Assert.True(response.Headers.TransferEncodingChunked.HasValue, "Chunked");
             Assert.Equal(new byte[10], await response.Content.ReadAsByteArrayAsync());
         }
@@ -318,24 +423,37 @@ public class ResponseBodyTests
     {
         var onStartingCalled = false;
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            httpContext.Response.OnStarting(state =>
-            {
-                onStartingCalled = true;
-                Assert.Same(state, httpContext);
-                return Task.FromResult(0);
-            }, httpContext);
-            httpContext.Response.Body.EndWrite(httpContext.Response.Body.BeginWrite(new byte[10], 0, 10, null, null));
-            return Task.FromResult(0);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    httpContext.Response.OnStarting(
+                        state =>
+                        {
+                            onStartingCalled = true;
+                            Assert.Same(state, httpContext);
+                            return Task.FromResult(0);
+                        },
+                        httpContext
+                    );
+                    httpContext.Response.Body.EndWrite(
+                        httpContext.Response.Body.BeginWrite(new byte[10], 0, 10, null, null)
+                    );
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
             Assert.Equal(new Version(1, 1), response.Version);
             Assert.True(onStartingCalled);
             IEnumerable<string> ignored;
-            Assert.False(response.Content.Headers.TryGetValues("content-length", out ignored), "Content-Length");
+            Assert.False(
+                response.Content.Headers.TryGetValues("content-length", out ignored),
+                "Content-Length"
+            );
             Assert.True(response.Headers.TransferEncodingChunked.HasValue, "Chunked");
             Assert.Equal(new byte[10], await response.Content.ReadAsByteArrayAsync());
         }
@@ -346,23 +464,34 @@ public class ResponseBodyTests
     {
         var onStartingCalled = false;
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            httpContext.Response.OnStarting(state =>
-            {
-                onStartingCalled = true;
-                Assert.Same(state, httpContext);
-                return Task.FromResult(0);
-            }, httpContext);
-            return httpContext.Response.Body.WriteAsync(new byte[10], 0, 10);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    httpContext.Response.OnStarting(
+                        state =>
+                        {
+                            onStartingCalled = true;
+                            Assert.Same(state, httpContext);
+                            return Task.FromResult(0);
+                        },
+                        httpContext
+                    );
+                    return httpContext.Response.Body.WriteAsync(new byte[10], 0, 10);
+                }
+            )
+        )
         {
             var response = await SendRequestAsync(address);
             Assert.Equal(200, (int)response.StatusCode);
             Assert.Equal(new Version(1, 1), response.Version);
             Assert.True(onStartingCalled);
             IEnumerable<string> ignored;
-            Assert.False(response.Content.Headers.TryGetValues("content-length", out ignored), "Content-Length");
+            Assert.False(
+                response.Content.Headers.TryGetValues("content-length", out ignored),
+                "Content-Length"
+            );
             Assert.True(response.Headers.TransferEncodingChunked.HasValue, "Chunked");
             Assert.Equal(new byte[10], await response.Content.ReadAsByteArrayAsync());
         }

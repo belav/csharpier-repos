@@ -4,8 +4,8 @@
 
 class A
 {
-	static void Main ()
-	{ 
-		System.Console.WriteLine (1 is decimal);
-	}
+    static void Main()
+    {
+        System.Console.WriteLine(1 is decimal);
+    }
 }

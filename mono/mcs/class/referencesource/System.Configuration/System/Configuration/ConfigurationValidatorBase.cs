@@ -17,12 +17,15 @@ using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace System.Configuration {
-
-    public abstract class ConfigurationValidatorBase {
-        public virtual bool CanValidate(Type type) {
+namespace System.Configuration
+{
+    public abstract class ConfigurationValidatorBase
+    {
+        public virtual bool CanValidate(Type type)
+        {
             return false;
         }
+
         public abstract void Validate(object value);
     }
 }

@@ -13,15 +13,19 @@ namespace System.Text.Json
             }
 
 #if NETCOREAPP
-            return string.Create(name.Length, name, (chars, name) =>
-            {
-                name
+            return string.Create(
+                name.Length,
+                name,
+                (chars, name) =>
+                {
+                    name
 #if !NETCOREAPP
                 .AsSpan()
 #endif
-                .CopyTo(chars);
-                FixCasing(chars);
-            });
+                    .CopyTo(chars);
+                    FixCasing(chars);
+                }
+            );
 #else
             char[] chars = name.ToCharArray();
             FixCasing(chars);

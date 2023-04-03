@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 {
-    // TODO: Remove. This is only needed to support Solution Explorer Analyzer node population. 
+    // TODO: Remove. This is only needed to support Solution Explorer Analyzer node population.
     // Analyzers should not be loaded in devenv process (see https://github.com/dotnet/roslyn/issues/43008).
     internal sealed class ProjectAnalyzerReference : IDisposable
     {
@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         // NOTE: It is important that we share the same shadow copy assembly loader for all VisualStudioAnalyzer instances.
         // This is required to ensure that shadow copied analyzer dependencies are correctly loaded.
         private static readonly IAnalyzerAssemblyLoader s_analyzerAssemblyLoader =
-            new ShadowCopyAnalyzerAssemblyLoader(Path.Combine(Path.GetTempPath(), "VS", "AnalyzerAssemblyLoader"));
+            new ShadowCopyAnalyzerAssemblyLoader(
+                Path.Combine(Path.GetTempPath(), "VS", "AnalyzerAssemblyLoader")
+            );
 
         private readonly ProjectId _projectId;
         private readonly IProjectSystemDiagnosticSource _projectSystemDiagnosticSource;
@@ -26,9 +28,15 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         // these 2 are mutable states that must be guarded under the _gate.
         private readonly object _gate = new();
         private AnalyzerReference? _analyzerReference;
-        private ImmutableArray<DiagnosticData> _analyzerLoadErrors = ImmutableArray<DiagnosticData>.Empty;
+        private ImmutableArray<DiagnosticData> _analyzerLoadErrors =
+            ImmutableArray<DiagnosticData>.Empty;
 
-        public ProjectAnalyzerReference(string fullPath, IProjectSystemDiagnosticSource projectSystemDiagnosticSource, ProjectId projectId, string language)
+        public ProjectAnalyzerReference(
+            string fullPath,
+            IProjectSystemDiagnosticSource projectSystemDiagnosticSource,
+            ProjectId projectId,
+            string language
+        )
         {
             FullPath = fullPath;
             _projectSystemDiagnosticSource = projectSystemDiagnosticSource;
@@ -47,7 +55,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     // TODO: ensure the file watcher is subscribed
                     // (tracked by https://devdiv.visualstudio.com/DevDiv/_workitems/edit/661546)
 
-                    var analyzerFileReference = new AnalyzerFileReference(FullPath, s_analyzerAssemblyLoader);
+                    var analyzerFileReference = new AnalyzerFileReference(
+                        FullPath,
+                        s_analyzerAssemblyLoader
+                    );
                     analyzerFileReference.AnalyzerLoadFailed += OnAnalyzerLoadError;
                     _analyzerReference = analyzerFileReference;
                 }
@@ -58,12 +69,21 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 
         private void OnAnalyzerLoadError(object? sender, AnalyzerLoadFailureEventArgs e)
         {
-            var data = _projectSystemDiagnosticSource.CreateAnalyzerLoadFailureDiagnostic(e, FullPath, _projectId, _language);
+            var data = _projectSystemDiagnosticSource.CreateAnalyzerLoadFailureDiagnostic(
+                e,
+                FullPath,
+                _projectId,
+                _language
+            );
 
             lock (_gate)
             {
                 _analyzerLoadErrors = _analyzerLoadErrors.Add(data);
-                _projectSystemDiagnosticSource.UpdateDiagnosticsForProject(_projectId, this, _analyzerLoadErrors);
+                _projectSystemDiagnosticSource.UpdateDiagnosticsForProject(
+                    _projectId,
+                    this,
+                    _analyzerLoadErrors
+                );
             }
         }
 
@@ -80,11 +100,18 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     _projectSystemDiagnosticSource.ClearDiagnosticsForProject(_projectId, this);
                 }
 
-                _projectSystemDiagnosticSource.ClearAnalyzerReferenceDiagnostics(fileReference, _language, _projectId);
+                _projectSystemDiagnosticSource.ClearAnalyzerReferenceDiagnostics(
+                    fileReference,
+                    _language,
+                    _projectId
+                );
             }
         }
 
-        private void ResetReferenceAndErrors(out AnalyzerReference? reference, out ImmutableArray<DiagnosticData> loadErrors)
+        private void ResetReferenceAndErrors(
+            out AnalyzerReference? reference,
+            out ImmutableArray<DiagnosticData> loadErrors
+        )
         {
             lock (_gate)
             {

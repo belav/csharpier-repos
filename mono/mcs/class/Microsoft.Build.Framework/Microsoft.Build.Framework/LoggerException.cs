@@ -30,70 +30,62 @@ using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class LoggerException : Exception {
-	
-		string errorCode;
-		string helpKeyword;
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class LoggerException : Exception
+    {
+        string errorCode;
+        string helpKeyword;
 
-		public LoggerException ()
-			: base ("Logger exception has occured.")
-		{
-		}
+        public LoggerException()
+            : base("Logger exception has occured.") { }
 
-		public LoggerException (string message)
-			: base (message)
-		{
-		}
+        public LoggerException(string message)
+            : base(message) { }
 
-		public LoggerException (string message,
-					Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public LoggerException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		public LoggerException (string message,
-					Exception innerException,
-					string errorCode, string helpKeyword)
-			: base (message, innerException)
-		{
-			this.errorCode = errorCode;
-			this.helpKeyword = helpKeyword;
-		}
+        public LoggerException(
+            string message,
+            Exception innerException,
+            string errorCode,
+            string helpKeyword
+        )
+            : base(message, innerException)
+        {
+            this.errorCode = errorCode;
+            this.helpKeyword = helpKeyword;
+        }
 
-		protected LoggerException (SerializationInfo info,
-					   StreamingContext context)
-			: base (info, context)
-		{
-			errorCode = info.GetString ("errorCode");
-			helpKeyword = info.GetString ("helpKeyword");
-		}
-		
-		[SecurityPermission (SecurityAction.LinkDemand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo info,
-						    StreamingContext context)
-		{
-			if (info == null)
-				throw new ArgumentNullException ();
-		
-			base.GetObjectData (info, context);
-			
-			info.AddValue ("errorCode", errorCode);
-			info.AddValue ("helpKeyword", helpKeyword);
-		}
+        protected LoggerException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            errorCode = info.GetString("errorCode");
+            helpKeyword = info.GetString("helpKeyword");
+        }
 
-		public string ErrorCode {
-			get {
-				return errorCode;
-			}
-		}
+        [SecurityPermission(SecurityAction.LinkDemand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+                throw new ArgumentNullException();
 
-		public string HelpKeyword {
-			get {
-				return helpKeyword;
-			}
-		}
-	}
+            base.GetObjectData(info, context);
+
+            info.AddValue("errorCode", errorCode);
+            info.AddValue("helpKeyword", helpKeyword);
+        }
+
+        public string ErrorCode
+        {
+            get { return errorCode; }
+        }
+
+        public string HelpKeyword
+        {
+            get { return helpKeyword; }
+        }
+    }
 }
-

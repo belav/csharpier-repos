@@ -15,6 +15,10 @@ internal abstract class ComponentIntermediateNodePassBase : IntermediateNodePass
             throw new ArgumentNullException(nameof(document));
         }
 
-        return string.Equals(document.DocumentKind, ComponentDocumentClassifierPass.ComponentDocumentKind, StringComparison.Ordinal);
+        return string.Equals(
+            document.DocumentKind,
+            ComponentDocumentClassifierPass.ComponentDocumentKind,
+            StringComparison.Ordinal
+        );
     }
 }

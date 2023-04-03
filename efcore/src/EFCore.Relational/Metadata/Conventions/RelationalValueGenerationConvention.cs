@@ -14,10 +14,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> and
 ///     <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for more information and examples.
 /// </remarks>
-public class RelationalValueGenerationConvention :
-    ValueGenerationConvention,
-    IPropertyAnnotationChangedConvention,
-    IEntityTypeAnnotationChangedConvention
+public class RelationalValueGenerationConvention
+    : ValueGenerationConvention,
+        IPropertyAnnotationChangedConvention,
+        IEntityTypeAnnotationChangedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="RelationalValueGenerationConvention" />.
@@ -26,7 +26,8 @@ public class RelationalValueGenerationConvention :
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public RelationalValueGenerationConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
         : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
@@ -50,7 +51,8 @@ public class RelationalValueGenerationConvention :
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
         var property = propertyBuilder.Metadata;
         switch (name)
@@ -76,7 +78,8 @@ public class RelationalValueGenerationConvention :
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
         switch (name)
@@ -85,16 +88,19 @@ public class RelationalValueGenerationConvention :
             case RelationalAnnotationNames.FunctionName:
             case RelationalAnnotationNames.SqlQuery:
             case RelationalAnnotationNames.InsertStoredProcedure:
-                if (annotation?.Value != null
+                if (
+                    annotation?.Value != null
                     && oldAnnotation?.Value == null
-                    && entityType.GetTableName() == null)
+                    && entityType.GetTableName() == null
+                )
                 {
                     ProcessTableChanged(
                         entityTypeBuilder,
                         entityType.GetDefaultTableName(),
                         entityType.GetDefaultSchema(),
                         null,
-                        null);
+                        null
+                    );
                 }
 
                 break;
@@ -106,7 +112,8 @@ public class RelationalValueGenerationConvention :
                     (string?)oldAnnotation?.Value ?? entityType.GetDefaultTableName(),
                     schema,
                     entityType.GetTableName(),
-                    schema);
+                    schema
+                );
                 break;
 
             case RelationalAnnotationNames.Schema:
@@ -116,7 +123,8 @@ public class RelationalValueGenerationConvention :
                     tableName,
                     (string?)oldAnnotation?.Value ?? entityType.GetDefaultSchema(),
                     tableName,
-                    entityTypeBuilder.Metadata.GetSchema());
+                    entityTypeBuilder.Metadata.GetSchema()
+                );
                 break;
 
             case RelationalAnnotationNames.MappingStrategy:
@@ -140,7 +148,8 @@ public class RelationalValueGenerationConvention :
         string? oldTable,
         string? oldSchema,
         string? newTable,
-        string? newSchema)
+        string? newSchema
+    )
     {
         if (newTable == null || oldTable == null)
         {
@@ -158,11 +167,14 @@ public class RelationalValueGenerationConvention :
             return;
         }
 
-        var oldLink = entityTypeBuilder.Metadata.FindRowInternalForeignKeys(StoreObjectIdentifier.Table(oldTable, oldSchema));
-        var newLink = entityTypeBuilder.Metadata.FindRowInternalForeignKeys(StoreObjectIdentifier.Table(newTable, newSchema));
+        var oldLink = entityTypeBuilder.Metadata.FindRowInternalForeignKeys(
+            StoreObjectIdentifier.Table(oldTable, oldSchema)
+        );
+        var newLink = entityTypeBuilder.Metadata.FindRowInternalForeignKeys(
+            StoreObjectIdentifier.Table(newTable, newSchema)
+        );
 
-        if (!oldLink.Any()
-            && !newLink.Any())
+        if (!oldLink.Any() && !newLink.Any())
         {
             return;
         }
@@ -181,13 +193,16 @@ public class RelationalValueGenerationConvention :
     protected override ValueGenerated? GetValueGenerated(IConventionProperty property)
     {
         var table = property.GetMappedStoreObjects(StoreObjectType.Table).FirstOrDefault();
-        return !MappingStrategyAllowsValueGeneration(property, property.DeclaringEntityType.GetMappingStrategy())
+        return !MappingStrategyAllowsValueGeneration(
+            property,
+            property.DeclaringEntityType.GetMappingStrategy()
+        )
             ? null
             : table.Name != null
                 ? GetValueGenerated(property, table)
                 : property.DeclaringEntityType.IsMappedToJson()
-                    && !property.DeclaringEntityType.FindOwnership()!.IsUnique
-                    && property.IsOrdinalKeyProperty()
+                && !property.DeclaringEntityType.FindOwnership()!.IsUnique
+                && property.IsOrdinalKeyProperty()
                     ? ValueGenerated.OnAddOrUpdate
                     : property.GetMappedStoreObjects(StoreObjectType.InsertStoredProcedure).Any()
                         ? GetValueGenerated((IReadOnlyProperty)property)
@@ -202,14 +217,13 @@ public class RelationalValueGenerationConvention :
     /// <returns><see langword="true" /> if value generation is allowed; <see langword="false" /> otherwise.</returns>
     protected virtual bool MappingStrategyAllowsValueGeneration(
         IConventionProperty property,
-        string? mappingStrategy)
+        string? mappingStrategy
+    )
     {
         if (mappingStrategy == RelationalAnnotationNames.TpcMappingStrategy)
         {
             var propertyType = property.ClrType.UnwrapNullableType();
-            if (property.IsPrimaryKey()
-                && propertyType.IsInteger()
-                && propertyType != typeof(byte))
+            if (property.IsPrimaryKey() && propertyType.IsInteger() && propertyType != typeof(byte))
             {
                 return false;
             }
@@ -224,14 +238,20 @@ public class RelationalValueGenerationConvention :
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The new store value generation strategy to set for the given property.</returns>
-    public static ValueGenerated? GetValueGenerated(IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+    public static ValueGenerated? GetValueGenerated(
+        IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    )
     {
         var valueGenerated = GetValueGenerated(property);
         return valueGenerated
-            ?? (property.GetComputedColumnSql(storeObject) != null
-                ? ValueGenerated.OnAddOrUpdate
-                : property.TryGetDefaultValue(storeObject, out _) || property.GetDefaultValueSql(storeObject) != null
-                    ? ValueGenerated.OnAdd
-                    : null);
+            ?? (
+                property.GetComputedColumnSql(storeObject) != null
+                    ? ValueGenerated.OnAddOrUpdate
+                    : property.TryGetDefaultValue(storeObject, out _)
+                    || property.GetDefaultValueSql(storeObject) != null
+                        ? ValueGenerated.OnAdd
+                        : null
+            );
     }
 }

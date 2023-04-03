@@ -5,8 +5,6 @@ using System.Runtime.CompilerServices;
 
 class Test
 {
-	[MethodImplAttribute(445)]
-	public void test ()
-	{
-	}
+    [MethodImplAttribute(445)]
+    public void test() { }
 }

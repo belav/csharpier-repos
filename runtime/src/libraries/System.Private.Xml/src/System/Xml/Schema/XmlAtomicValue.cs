@@ -27,12 +27,16 @@ namespace System.Xml.Schema
         {
             [FieldOffset(0)]
             public bool boolVal;
+
             [FieldOffset(0)]
             public double dblVal;
+
             [FieldOffset(0)]
             public long i64Val;
+
             [FieldOffset(0)]
             public int i32Val;
+
             [FieldOffset(0)]
             public DateTime dtVal;
         }
@@ -132,17 +136,30 @@ namespace System.Xml.Schema
             _objVal = value;
         }
 
-        internal XmlAtomicValue(XmlSchemaType xmlType, string value, IXmlNamespaceResolver? nsResolver)
+        internal XmlAtomicValue(
+            XmlSchemaType xmlType,
+            string value,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(xmlType);
             ArgumentNullException.ThrowIfNull(value);
 
             _xmlType = xmlType;
             _objVal = value;
-            if (nsResolver != null && (_xmlType.TypeCode == XmlTypeCode.QName || _xmlType.TypeCode == XmlTypeCode.Notation))
+            if (
+                nsResolver != null
+                && (
+                    _xmlType.TypeCode == XmlTypeCode.QName
+                    || _xmlType.TypeCode == XmlTypeCode.Notation
+                )
+            )
             {
                 string prefix = GetPrefixFromQName(value)!;
-                _nsPrefix = new NamespacePrefixForQName(prefix, nsResolver.LookupNamespace(prefix)!);
+                _nsPrefix = new NamespacePrefixForQName(
+                    prefix,
+                    nsResolver.LookupNamespace(prefix)!
+                );
             }
         }
 
@@ -155,7 +172,11 @@ namespace System.Xml.Schema
             _objVal = value;
         }
 
-        internal XmlAtomicValue(XmlSchemaType xmlType, object value, IXmlNamespaceResolver? nsResolver)
+        internal XmlAtomicValue(
+            XmlSchemaType xmlType,
+            object value,
+            IXmlNamespaceResolver? nsResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(xmlType);
             ArgumentNullException.ThrowIfNull(value);
@@ -163,7 +184,13 @@ namespace System.Xml.Schema
             _xmlType = xmlType;
             _objVal = value;
 
-            if (nsResolver != null && (_xmlType.TypeCode == XmlTypeCode.QName || _xmlType.TypeCode == XmlTypeCode.Notation))
+            if (
+                nsResolver != null
+                && (
+                    _xmlType.TypeCode == XmlTypeCode.QName
+                    || _xmlType.TypeCode == XmlTypeCode.Notation
+                )
+            )
             { //Its a qualifiedName
                 XmlQualifiedName qname = (_objVal as XmlQualifiedName)!;
                 Debug.Assert(qname != null); //string representation is handled in a different overload
@@ -180,7 +207,6 @@ namespace System.Xml.Schema
             return this;
         }
 
-
         //-----------------------------------------------
         // ICloneable methods
         //-----------------------------------------------
@@ -192,7 +218,6 @@ namespace System.Xml.Schema
         {
             return this;
         }
-
 
         //-----------------------------------------------
         // XPathItem methods
@@ -223,12 +248,19 @@ namespace System.Xml.Schema
                 {
                     switch (_clrType)
                     {
-                        case TypeCode.Boolean: return valueConverter.ChangeType(_unionVal.boolVal, ValueType);
-                        case TypeCode.Int32: return valueConverter.ChangeType(_unionVal.i32Val, ValueType);
-                        case TypeCode.Int64: return valueConverter.ChangeType(_unionVal.i64Val, ValueType);
-                        case TypeCode.Double: return valueConverter.ChangeType(_unionVal.dblVal, ValueType);
-                        case TypeCode.DateTime: return valueConverter.ChangeType(_unionVal.dtVal, ValueType);
-                        default: Debug.Fail("Should never get here"); break;
+                        case TypeCode.Boolean:
+                            return valueConverter.ChangeType(_unionVal.boolVal, ValueType);
+                        case TypeCode.Int32:
+                            return valueConverter.ChangeType(_unionVal.i32Val, ValueType);
+                        case TypeCode.Int64:
+                            return valueConverter.ChangeType(_unionVal.i64Val, ValueType);
+                        case TypeCode.Double:
+                            return valueConverter.ChangeType(_unionVal.dblVal, ValueType);
+                        case TypeCode.DateTime:
+                            return valueConverter.ChangeType(_unionVal.dtVal, ValueType);
+                        default:
+                            Debug.Fail("Should never get here");
+                            break;
                     }
                 }
                 return valueConverter.ChangeType(_objVal, ValueType, _nsPrefix);
@@ -245,12 +277,19 @@ namespace System.Xml.Schema
                 {
                     switch (_clrType)
                     {
-                        case TypeCode.Boolean: return _unionVal.boolVal;
-                        case TypeCode.Int32: return valueConverter.ToBoolean(_unionVal.i32Val);
-                        case TypeCode.Int64: return valueConverter.ToBoolean(_unionVal.i64Val);
-                        case TypeCode.Double: return valueConverter.ToBoolean(_unionVal.dblVal);
-                        case TypeCode.DateTime: return valueConverter.ToBoolean(_unionVal.dtVal);
-                        default: Debug.Fail("Should never get here"); break;
+                        case TypeCode.Boolean:
+                            return _unionVal.boolVal;
+                        case TypeCode.Int32:
+                            return valueConverter.ToBoolean(_unionVal.i32Val);
+                        case TypeCode.Int64:
+                            return valueConverter.ToBoolean(_unionVal.i64Val);
+                        case TypeCode.Double:
+                            return valueConverter.ToBoolean(_unionVal.dblVal);
+                        case TypeCode.DateTime:
+                            return valueConverter.ToBoolean(_unionVal.dtVal);
+                        default:
+                            Debug.Fail("Should never get here");
+                            break;
                     }
                 }
 
@@ -268,19 +307,25 @@ namespace System.Xml.Schema
                 {
                     switch (_clrType)
                     {
-                        case TypeCode.Boolean: return valueConverter.ToDateTime(_unionVal.boolVal);
-                        case TypeCode.Int32: return valueConverter.ToDateTime(_unionVal.i32Val);
-                        case TypeCode.Int64: return valueConverter.ToDateTime(_unionVal.i64Val);
-                        case TypeCode.Double: return valueConverter.ToDateTime(_unionVal.dblVal);
-                        case TypeCode.DateTime: return _unionVal.dtVal;
-                        default: Debug.Fail("Should never get here"); break;
+                        case TypeCode.Boolean:
+                            return valueConverter.ToDateTime(_unionVal.boolVal);
+                        case TypeCode.Int32:
+                            return valueConverter.ToDateTime(_unionVal.i32Val);
+                        case TypeCode.Int64:
+                            return valueConverter.ToDateTime(_unionVal.i64Val);
+                        case TypeCode.Double:
+                            return valueConverter.ToDateTime(_unionVal.dblVal);
+                        case TypeCode.DateTime:
+                            return _unionVal.dtVal;
+                        default:
+                            Debug.Fail("Should never get here");
+                            break;
                     }
                 }
 
                 return valueConverter.ToDateTime(_objVal);
             }
         }
-
 
         public override double ValueAsDouble
         {
@@ -292,12 +337,19 @@ namespace System.Xml.Schema
                 {
                     switch (_clrType)
                     {
-                        case TypeCode.Boolean: return valueConverter.ToDouble(_unionVal.boolVal);
-                        case TypeCode.Int32: return valueConverter.ToDouble(_unionVal.i32Val);
-                        case TypeCode.Int64: return valueConverter.ToDouble(_unionVal.i64Val);
-                        case TypeCode.Double: return _unionVal.dblVal;
-                        case TypeCode.DateTime: return valueConverter.ToDouble(_unionVal.dtVal);
-                        default: Debug.Fail("Should never get here"); break;
+                        case TypeCode.Boolean:
+                            return valueConverter.ToDouble(_unionVal.boolVal);
+                        case TypeCode.Int32:
+                            return valueConverter.ToDouble(_unionVal.i32Val);
+                        case TypeCode.Int64:
+                            return valueConverter.ToDouble(_unionVal.i64Val);
+                        case TypeCode.Double:
+                            return _unionVal.dblVal;
+                        case TypeCode.DateTime:
+                            return valueConverter.ToDouble(_unionVal.dtVal);
+                        default:
+                            Debug.Fail("Should never get here");
+                            break;
                     }
                 }
 
@@ -315,12 +367,19 @@ namespace System.Xml.Schema
                 {
                     switch (_clrType)
                     {
-                        case TypeCode.Boolean: return valueConverter.ToInt32(_unionVal.boolVal);
-                        case TypeCode.Int32: return _unionVal.i32Val;
-                        case TypeCode.Int64: return valueConverter.ToInt32(_unionVal.i64Val);
-                        case TypeCode.Double: return valueConverter.ToInt32(_unionVal.dblVal);
-                        case TypeCode.DateTime: return valueConverter.ToInt32(_unionVal.dtVal);
-                        default: Debug.Fail("Should never get here"); break;
+                        case TypeCode.Boolean:
+                            return valueConverter.ToInt32(_unionVal.boolVal);
+                        case TypeCode.Int32:
+                            return _unionVal.i32Val;
+                        case TypeCode.Int64:
+                            return valueConverter.ToInt32(_unionVal.i64Val);
+                        case TypeCode.Double:
+                            return valueConverter.ToInt32(_unionVal.dblVal);
+                        case TypeCode.DateTime:
+                            return valueConverter.ToInt32(_unionVal.dtVal);
+                        default:
+                            Debug.Fail("Should never get here");
+                            break;
                     }
                 }
 
@@ -338,12 +397,19 @@ namespace System.Xml.Schema
                 {
                     switch (_clrType)
                     {
-                        case TypeCode.Boolean: return valueConverter.ToInt64(_unionVal.boolVal);
-                        case TypeCode.Int32: return valueConverter.ToInt64(_unionVal.i32Val);
-                        case TypeCode.Int64: return _unionVal.i64Val;
-                        case TypeCode.Double: return valueConverter.ToInt64(_unionVal.dblVal);
-                        case TypeCode.DateTime: return valueConverter.ToInt64(_unionVal.dtVal);
-                        default: Debug.Fail("Should never get here"); break;
+                        case TypeCode.Boolean:
+                            return valueConverter.ToInt64(_unionVal.boolVal);
+                        case TypeCode.Int32:
+                            return valueConverter.ToInt64(_unionVal.i32Val);
+                        case TypeCode.Int64:
+                            return _unionVal.i64Val;
+                        case TypeCode.Double:
+                            return valueConverter.ToInt64(_unionVal.dblVal);
+                        case TypeCode.DateTime:
+                            return valueConverter.ToInt64(_unionVal.dtVal);
+                        default:
+                            Debug.Fail("Should never get here");
+                            break;
                     }
                 }
 
@@ -362,12 +428,19 @@ namespace System.Xml.Schema
             {
                 switch (_clrType)
                 {
-                    case TypeCode.Boolean: return valueConverter.ChangeType(_unionVal.boolVal, type);
-                    case TypeCode.Int32: return valueConverter.ChangeType(_unionVal.i32Val, type);
-                    case TypeCode.Int64: return valueConverter.ChangeType(_unionVal.i64Val, type);
-                    case TypeCode.Double: return valueConverter.ChangeType(_unionVal.dblVal, type);
-                    case TypeCode.DateTime: return valueConverter.ChangeType(_unionVal.dtVal, type);
-                    default: Debug.Fail("Should never get here"); break;
+                    case TypeCode.Boolean:
+                        return valueConverter.ChangeType(_unionVal.boolVal, type);
+                    case TypeCode.Int32:
+                        return valueConverter.ChangeType(_unionVal.i32Val, type);
+                    case TypeCode.Int64:
+                        return valueConverter.ChangeType(_unionVal.i64Val, type);
+                    case TypeCode.Double:
+                        return valueConverter.ChangeType(_unionVal.dblVal, type);
+                    case TypeCode.DateTime:
+                        return valueConverter.ChangeType(_unionVal.dtVal, type);
+                    default:
+                        Debug.Fail("Should never get here");
+                        break;
                 }
             }
 
@@ -384,12 +457,19 @@ namespace System.Xml.Schema
                 {
                     switch (_clrType)
                     {
-                        case TypeCode.Boolean: return valueConverter.ToString(_unionVal.boolVal);
-                        case TypeCode.Int32: return valueConverter.ToString(_unionVal.i32Val);
-                        case TypeCode.Int64: return valueConverter.ToString(_unionVal.i64Val);
-                        case TypeCode.Double: return valueConverter.ToString(_unionVal.dblVal);
-                        case TypeCode.DateTime: return valueConverter.ToString(_unionVal.dtVal);
-                        default: Debug.Fail("Should never get here"); break;
+                        case TypeCode.Boolean:
+                            return valueConverter.ToString(_unionVal.boolVal);
+                        case TypeCode.Int32:
+                            return valueConverter.ToString(_unionVal.i32Val);
+                        case TypeCode.Int64:
+                            return valueConverter.ToString(_unionVal.i64Val);
+                        case TypeCode.Double:
+                            return valueConverter.ToString(_unionVal.dblVal);
+                        case TypeCode.DateTime:
+                            return valueConverter.ToString(_unionVal.dtVal);
+                        default:
+                            Debug.Fail("Should never get here");
+                            break;
                     }
                 }
                 return valueConverter.ToString(_objVal, _nsPrefix);

@@ -16,7 +16,17 @@ namespace Internal.Cryptography
         private SafeProvHandle _hProvider;
         private SafeKeyHandle _hKey;
 
-        public BasicSymmetricCipherCsp(int algId, CipherMode cipherMode, int blockSizeInBytes, byte[] key, bool addNoSaltFlag, byte[]? iv, bool encrypting, int feedbackSize, int paddingSizeInBytes)
+        public BasicSymmetricCipherCsp(
+            int algId,
+            CipherMode cipherMode,
+            int blockSizeInBytes,
+            byte[] key,
+            bool addNoSaltFlag,
+            byte[]? iv,
+            bool encrypting,
+            int feedbackSize,
+            int paddingSizeInBytes
+        )
             : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
         {
             _encrypting = encrypting;
@@ -38,7 +48,11 @@ namespace Internal.Cryptography
 
             if (algId == CapiHelper.CALG_RC2)
             {
-                SetKeyParameter(_hKey, CryptGetKeyParamQueryType.KP_EFFECTIVE_KEYLEN, key.Length * 8);
+                SetKeyParameter(
+                    _hKey,
+                    CryptGetKeyParamQueryType.KP_EFFECTIVE_KEYLEN,
+                    key.Length * 8
+                );
             }
         }
 
@@ -78,7 +92,7 @@ namespace Internal.Cryptography
             if (input.Length != 0)
             {
                 numBytesWritten = Transform(input, output, true);
-                Debug.Assert(numBytesWritten == input.Length);  // Our implementation of Transform() guarantees this.
+                Debug.Assert(numBytesWritten == input.Length); // Our implementation of Transform() guarantees this.
             }
 
             Reset();
@@ -110,11 +124,22 @@ namespace Internal.Cryptography
             return numBytesWritten;
         }
 
-        private static SafeKeyHandle ImportCspBlob(SafeProvHandle safeProvHandle, int algId, byte[] rawKey, bool addNoSaltFlag)
+        private static SafeKeyHandle ImportCspBlob(
+            SafeProvHandle safeProvHandle,
+            int algId,
+            byte[] rawKey,
+            bool addNoSaltFlag
+        )
         {
             SafeKeyHandle safeKeyHandle;
             byte[] keyBlob = ToPlainTextKeyBlob(algId, rawKey);
-            ImportKeyBlob(safeProvHandle, (CspProviderFlags)0, addNoSaltFlag, keyBlob, out safeKeyHandle);
+            ImportKeyBlob(
+                safeProvHandle,
+                (CspProviderFlags)0,
+                addNoSaltFlag,
+                keyBlob,
+                out safeKeyHandle
+            );
             // Note if plain text import fails, .NET Framework falls back to "ExponentOfOneImport" which is not handled here
             return safeKeyHandle;
         }

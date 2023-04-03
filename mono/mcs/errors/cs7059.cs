@@ -7,13 +7,13 @@ using System.Reflection;
 [assembly: AssemblyCulture("es")]
 [assembly: AssemblyVersion("1.2.3456.7")]
 
-namespace NS 
+namespace NS
 {
-	class MyClass 
-	{
-		static void Main ()
-		{
-			Console.WriteLine (typeof(MyClass).Assembly.FullName);
-		}
-	}
+    class MyClass
+    {
+        static void Main()
+        {
+            Console.WriteLine(typeof(MyClass).Assembly.FullName);
+        }
+    }
 }

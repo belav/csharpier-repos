@@ -3,14 +3,16 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    sealed class MsmqTransportReceiveParameters
-        : MsmqReceiveParameters
+    sealed class MsmqTransportReceiveParameters : MsmqReceiveParameters
     {
         int maxPoolSize;
         bool useActiveDirectory;
         QueueTransferProtocol queueTransferProtocol;
 
-        internal MsmqTransportReceiveParameters(MsmqTransportBindingElement bindingElement, MsmqUri.IAddressTranslator addressTranslator)
+        internal MsmqTransportReceiveParameters(
+            MsmqTransportBindingElement bindingElement,
+            MsmqUri.IAddressTranslator addressTranslator
+        )
             : base(bindingElement, addressTranslator)
         {
             this.maxPoolSize = bindingElement.MaxPoolSize;

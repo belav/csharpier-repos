@@ -9,10 +9,7 @@ namespace HtmlAgilityPack
         #region Constructors
 
         internal MixedCodeDocumentTextFragment(MixedCodeDocument doc)
-            :
-                base(doc, MixedCodeDocumentFragmentType.Text)
-        {
-        }
+            : base(doc, MixedCodeDocumentFragmentType.Text) { }
 
         #endregion
 

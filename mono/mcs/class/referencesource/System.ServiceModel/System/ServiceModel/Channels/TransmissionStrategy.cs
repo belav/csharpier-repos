@@ -19,13 +19,19 @@ namespace System.ServiceModel.Channels
         readonly Int64 sequenceNumber;
         readonly object state;
 
-        public MessageAttemptInfo(Message message, Int64 sequenceNumber, int retryCount, object state)
+        public MessageAttemptInfo(
+            Message message,
+            Int64 sequenceNumber,
+            int retryCount,
+            object state
+        )
         {
             this.message = message;
             this.sequenceNumber = sequenceNumber;
             this.retryCount = retryCount;
             this.state = state;
         }
+
         public Message Message
         {
             get { return this.message; }
@@ -45,7 +51,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.sequenceNumber <= 0)
             {
-                throw Fx.AssertAndThrow("The caller is not allowed to get an invalid SequenceNumber.");
+                throw Fx.AssertAndThrow(
+                    "The caller is not allowed to get an invalid SequenceNumber."
+                );
             }
 
             return this.sequenceNumber;
@@ -79,15 +87,24 @@ namespace System.ServiceModel.Channels
         int windowSize = 1;
         Int64 windowStart = 1;
 
-        public TransmissionStrategy(ReliableMessagingVersion reliableMessagingVersion, TimeSpan initRtt,
-            int maxWindowSize, bool requestAcks, UniqueId id)
+        public TransmissionStrategy(
+            ReliableMessagingVersion reliableMessagingVersion,
+            TimeSpan initRtt,
+            int maxWindowSize,
+            bool requestAcks,
+            UniqueId id
+        )
         {
             if (initRtt < TimeSpan.Zero)
             {
                 if (DiagnosticUtility.ShouldTrace(TraceEventType.Warning))
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.WsrmNegativeElapsedTimeDetected,
-                    SR.GetString(SR.TraceCodeWsrmNegativeElapsedTimeDetected), this);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
+                        TraceCode.WsrmNegativeElapsedTimeDetected,
+                        SR.GetString(SR.TraceCodeWsrmNegativeElapsedTimeDetected),
+                        this
+                    );
                 }
 
                 initRtt = ReliableMessagingConstants.UnknownInitiationTime;
@@ -100,11 +117,18 @@ namespace System.ServiceModel.Channels
 
             this.id = id;
             this.maxWindowSize = this.lossWindowSize = maxWindowSize;
-            this.meanRtt = Math.Min((long)initRtt.TotalMilliseconds, Constants.MaxMeanRtt >> Constants.TimeMultiplier) << Constants.TimeMultiplier;
+            this.meanRtt =
+                Math.Min(
+                    (long)initRtt.TotalMilliseconds,
+                    Constants.MaxMeanRtt >> Constants.TimeMultiplier
+                ) << Constants.TimeMultiplier;
             this.serrRtt = this.meanRtt >> 1;
             this.window = new SlidingWindow(maxWindowSize);
             this.slowStartThreshold = maxWindowSize;
-            this.timeout = Math.Max(((200 << Constants.TimeMultiplier) * 2) + this.meanRtt, this.meanRtt + (this.serrRtt << Constants.ChebychevFactor));
+            this.timeout = Math.Max(
+                ((200 << Constants.TimeMultiplier) * 2) + this.meanRtt,
+                this.meanRtt + (this.serrRtt << Constants.ChebychevFactor)
+            );
             this.quotaRemaining = Int32.MaxValue;
             this.retryTimer = new IOThreadTimer(new Action<object>(OnRetryElapsed), null, true);
             this.requestAcks = requestAcks;
@@ -113,77 +137,49 @@ namespace System.ServiceModel.Channels
 
         public bool DoneTransmitting
         {
-            get
-            {
-                return (this.last != 0 && this.windowStart == this.last + 1);
-            }
+            get { return (this.last != 0 && this.windowStart == this.last + 1); }
         }
 
         public bool HasPending
         {
-            get
-            {
-                return (this.window.Count > 0 || this.waitQueue.Count > 0);
-            }
+            get { return (this.window.Count > 0 || this.waitQueue.Count > 0); }
         }
 
         public Int64 Last
         {
-            get
-            {
-                return this.last;
-            }
+            get { return this.last; }
         }
 
         // now in 128ths of a millisecond.
         static Int64 Now
         {
-            get
-            {
-                return (Ticks.Now / TimeSpan.TicksPerMillisecond) << Constants.TimeMultiplier;
-            }
+            get { return (Ticks.Now / TimeSpan.TicksPerMillisecond) << Constants.TimeMultiplier; }
         }
 
         public ComponentExceptionHandler OnException
         {
-            set
-            {
-                this.onException = value;
-            }
+            set { this.onException = value; }
         }
 
         public RetryHandler RetryTimeoutElapsed
         {
-            set
-            {
-                this.retryTimeoutElapsedHandler = value;
-            }
+            set { this.retryTimeoutElapsedHandler = value; }
         }
 
         public int QuotaRemaining
         {
-            get
-            {
-                return this.quotaRemaining;
-            }
+            get { return this.quotaRemaining; }
         }
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         public int Timeout
         {
-            get
-            {
-                return (int)(this.timeout >> Constants.TimeMultiplier);
-            }
+            get { return (int)(this.timeout >> Constants.TimeMultiplier); }
         }
-
 
         public void Abort(ChannelBase channel)
         {
@@ -205,14 +201,22 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public bool Add(Message message, TimeSpan timeout, object state, out MessageAttemptInfo attemptInfo)
+        public bool Add(
+            Message message,
+            TimeSpan timeout,
+            object state,
+            out MessageAttemptInfo attemptInfo
+        )
         {
             return InternalAdd(message, false, timeout, state, out attemptInfo);
         }
 
         public MessageAttemptInfo AddLast(Message message, TimeSpan timeout, object state)
         {
-            if (this.reliableMessagingVersion != ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.reliableMessagingVersion
+                != ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 throw Fx.AssertAndThrow("Last message supported only in February 2005.");
             }
@@ -229,12 +233,25 @@ namespace System.ServiceModel.Channels
             Int64 sequenceNumber;
 
             sequenceNumber = this.windowStart + this.window.Count;
-            WsrmUtilities.AddSequenceHeader(this.reliableMessagingVersion, message, this.id, sequenceNumber, isLast);
+            WsrmUtilities.AddSequenceHeader(
+                this.reliableMessagingVersion,
+                message,
+                this.id,
+                sequenceNumber,
+                isLast
+            );
 
-            if (this.requestAcks && (this.window.Count == this.windowSize - 1 || this.quotaRemaining == 1)) // can't add any more
+            if (
+                this.requestAcks
+                && (this.window.Count == this.windowSize - 1 || this.quotaRemaining == 1)
+            ) // can't add any more
             {
                 message.Properties.AllowOutputBatching = false;
-                WsrmUtilities.AddAckRequestedHeader(this.reliableMessagingVersion, message, this.id);
+                WsrmUtilities.AddAckRequestedHeader(
+                    this.reliableMessagingVersion,
+                    message,
+                    this.id
+                );
             }
 
             if (this.window.Count == 0)
@@ -248,19 +265,39 @@ namespace System.ServiceModel.Channels
                 this.last = sequenceNumber;
 
             int index = (int)(sequenceNumber - this.windowStart);
-            attemptInfo = new MessageAttemptInfo(this.window.GetMessage(index), sequenceNumber, 0, state);
+            attemptInfo = new MessageAttemptInfo(
+                this.window.GetMessage(index),
+                sequenceNumber,
+                0,
+                state
+            );
 
             return attemptInfo;
         }
 
-        public IAsyncResult BeginAdd(Message message, TimeSpan timeout, object state, AsyncCallback callback, object asyncState)
+        public IAsyncResult BeginAdd(
+            Message message,
+            TimeSpan timeout,
+            object state,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
             return InternalBeginAdd(message, false, timeout, state, callback, asyncState);
         }
 
-        public IAsyncResult BeginAddLast(Message message, TimeSpan timeout, object state, AsyncCallback callback, object asyncState)
+        public IAsyncResult BeginAddLast(
+            Message message,
+            TimeSpan timeout,
+            object state,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
-            if (this.reliableMessagingVersion != ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.reliableMessagingVersion
+                != ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 throw Fx.AssertAndThrow("Last message supported only in February 2005.");
             }
@@ -270,9 +307,13 @@ namespace System.ServiceModel.Channels
 
         bool CanAdd()
         {
-            return (this.window.Count < this.windowSize &&  // Does the message fit in the transmission window?
-                this.quotaRemaining > 0 &&                  // Can the receiver handle another message?
-                this.waitQueue.Count == 0);                 // Don't get ahead of anyone in the wait queue.
+            return (
+                this.window.Count < this.windowSize
+                && // Does the message fit in the transmission window?
+                this.quotaRemaining > 0
+                && // Can the receiver handle another message?
+                this.waitQueue.Count == 0
+            ); // Don't get ahead of anyone in the wait queue.
         }
 
         public void Close()
@@ -288,7 +329,9 @@ namespace System.ServiceModel.Channels
 
                 if (waitQueue.Count != 0)
                 {
-                    throw Fx.AssertAndThrow("The reliable channel must throw prior to the call to Close() if there are outstanding send or request operations.");
+                    throw Fx.AssertAndThrow(
+                        "The reliable channel must throw prior to the call to Close() if there are outstanding send or request operations."
+                    );
                 }
 
                 window.Close();
@@ -362,7 +405,12 @@ namespace System.ServiceModel.Channels
                     this.timeout <<= 1;
                     this.startup = false;
 
-                    attemptInfo = new MessageAttemptInfo(this.window.GetMessage(0), this.windowStart, this.window.GetRetryCount(0), this.window.GetState(0));
+                    attemptInfo = new MessageAttemptInfo(
+                        this.window.GetMessage(0),
+                        this.windowStart,
+                        this.window.GetRetryCount(0),
+                        this.window.GetState(0)
+                    );
                 }
 
                 retryTimeoutElapsedHandler(attemptInfo);
@@ -417,7 +465,9 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.retransmissionWindow.Count == 0)
                     {
-                        throw Fx.AssertAndThrow("The caller is not allowed to remove a message attempt when there are no message attempts.");
+                        throw Fx.AssertAndThrow(
+                            "The caller is not allowed to remove a message attempt when there are no message attempts."
+                        );
                     }
 
                     this.retransmissionWindow.RemoveAt(0);
@@ -437,7 +487,12 @@ namespace System.ServiceModel.Channels
                         if (this.window.GetTransferred(index))
                             this.retransmissionWindow.RemoveAt(0);
                         else
-                            return new MessageAttemptInfo(this.window.GetMessage(index), next, this.window.GetRetryCount(index), this.window.GetState(index));
+                            return new MessageAttemptInfo(
+                                this.window.GetMessage(index),
+                                next,
+                                this.window.GetRetryCount(index),
+                                this.window.GetState(index)
+                            );
                     }
                 }
 
@@ -465,7 +520,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        bool InternalAdd(Message message, bool isLast, TimeSpan timeout, object state, out MessageAttemptInfo attemptInfo)
+        bool InternalAdd(
+            Message message,
+            bool isLast,
+            TimeSpan timeout,
+            object state,
+            out MessageAttemptInfo attemptInfo
+        )
         {
             attemptInfo = default(MessageAttemptInfo);
 
@@ -497,7 +558,14 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        IAsyncResult InternalBeginAdd(Message message, bool isLast, TimeSpan timeout, object state, AsyncCallback callback, object asyncState)
+        IAsyncResult InternalBeginAdd(
+            Message message,
+            bool isLast,
+            TimeSpan timeout,
+            object state,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
             MessageAttemptInfo attemptInfo = default(MessageAttemptInfo);
             bool isAddValid;
@@ -521,7 +589,15 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        AsyncQueueAdder adder = new AsyncQueueAdder(message, isLast, timeout, state, this, callback, asyncState);
+                        AsyncQueueAdder adder = new AsyncQueueAdder(
+                            message,
+                            isLast,
+                            timeout,
+                            state,
+                            this,
+                            callback,
+                            asyncState
+                        );
                         this.waitQueue.Enqueue(adder);
 
                         return adder;
@@ -529,7 +605,12 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            return new CompletedAsyncResult<bool, MessageAttemptInfo>(isAddValid, attemptInfo, callback, asyncState);
+            return new CompletedAsyncResult<bool, MessageAttemptInfo>(
+                isAddValid,
+                attemptInfo,
+                callback,
+                asyncState
+            );
         }
 
         bool InternalEndAdd(IAsyncResult result, out MessageAttemptInfo attemptInfo)
@@ -570,7 +651,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public void ProcessAcknowledgement(SequenceRangeCollection ranges, out bool invalidAck, out bool inconsistentAck)
+        public void ProcessAcknowledgement(
+            SequenceRangeCollection ranges,
+            out bool invalidAck,
+            out bool inconsistentAck
+        )
         {
             invalidAck = false;
             inconsistentAck = false;
@@ -599,7 +684,10 @@ namespace System.ServiceModel.Channels
                         return;
                     }
 
-                    if (((range.Lower > 1) && (range.Lower <= lastMessageAcked)) || (range.Upper < lastMessageAcked))
+                    if (
+                        ((range.Lower > 1) && (range.Lower <= lastMessageAcked))
+                        || (range.Upper < lastMessageAcked)
+                    )
                     {
                         oldAck = true;
                     }
@@ -614,17 +702,34 @@ namespace System.ServiceModel.Channels
                         if (!newAck)
                         {
                             int beginIndex = (int)(range.Lower - this.windowStart);
-                            int endIndex = (int)((range.Upper > lastMessageSent) ? (this.window.Count - 1) : (range.Upper - this.windowStart));
+                            int endIndex = (int)(
+                                (range.Upper > lastMessageSent)
+                                    ? (this.window.Count - 1)
+                                    : (range.Upper - this.windowStart)
+                            );
 
-                            newAck = this.window.GetTransferredInRangeCount(beginIndex, endIndex) < (endIndex - beginIndex + 1);
+                            newAck =
+                                this.window.GetTransferredInRangeCount(beginIndex, endIndex)
+                                < (endIndex - beginIndex + 1);
                         }
 
                         if (transferredInWindow > 0 && !oldAck)
                         {
-                            int beginIndex = (int)((range.Lower < this.windowStart) ? 0 : (range.Lower - this.windowStart));
-                            int endIndex = (int)((range.Upper > lastMessageSent) ? (this.window.Count - 1) : (range.Upper - this.windowStart));
+                            int beginIndex = (int)(
+                                (range.Lower < this.windowStart)
+                                    ? 0
+                                    : (range.Lower - this.windowStart)
+                            );
+                            int endIndex = (int)(
+                                (range.Upper > lastMessageSent)
+                                    ? (this.window.Count - 1)
+                                    : (range.Upper - this.windowStart)
+                            );
 
-                            transferredInWindow -= this.window.GetTransferredInRangeCount(beginIndex, endIndex);
+                            transferredInWindow -= this.window.GetTransferredInRangeCount(
+                                beginIndex,
+                                endIndex
+                            );
                         }
                     }
                 }
@@ -685,16 +790,21 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        // It is necessary that ProcessAcknowledgement be called prior, as 
+        // It is necessary that ProcessAcknowledgement be called prior, as
         // this method does not check for valid ack ranges.
-        // This method returns true if the calling method should start sending retries 
+        // This method returns true if the calling method should start sending retries
         // obtained from GetMessageInfoForRetry.
         bool ProcessTransferred(SequenceRange range, int quotaRemaining)
         {
             if (range.Upper < this.windowStart)
             {
-                if (range.Upper == this.windowStart - 1 && (quotaRemaining != -1) && quotaRemaining > this.quotaRemaining)
-                    this.quotaRemaining = quotaRemaining - Math.Min(this.windowSize, this.window.Count);
+                if (
+                    range.Upper == this.windowStart - 1
+                    && (quotaRemaining != -1)
+                    && quotaRemaining > this.quotaRemaining
+                )
+                    this.quotaRemaining =
+                        quotaRemaining - Math.Min(this.windowSize, this.window.Count);
 
                 return false;
             }
@@ -733,7 +843,8 @@ namespace System.ServiceModel.Channels
 
                 if (quotaRemaining != -1)
                 {
-                    int inFlightAfterAck = Math.Min(this.windowSize, this.window.Count) - (int)slide;
+                    int inFlightAfterAck =
+                        Math.Min(this.windowSize, this.window.Count) - (int)slide;
                     this.quotaRemaining = quotaRemaining - Math.Max(0, inFlightAfterAck);
                 }
 
@@ -745,7 +856,10 @@ namespace System.ServiceModel.Channels
 
                 if (this.windowSize <= this.slowStartThreshold)
                 {
-                    this.windowSize = Math.Min(this.maxWindowSize, Math.Min(this.slowStartThreshold + 1, this.windowSize + (int)slide));
+                    this.windowSize = Math.Min(
+                        this.maxWindowSize,
+                        Math.Min(this.slowStartThreshold + 1, this.windowSize + (int)slide)
+                    );
 
                     if (!startup)
                         sendBeginIndex = 0;
@@ -757,8 +871,13 @@ namespace System.ServiceModel.Channels
                     this.congestionControlModeAcks += (int)slide;
 
                     // EXPERIMENTAL, needs optimizing ///
-                    int segmentSize = Math.Max(1, (this.lossWindowSize - this.slowStartThreshold) / 8);
-                    int windowGrowthAckThreshold = ((this.windowSize - this.slowStartThreshold) * this.windowSize) / segmentSize;
+                    int segmentSize = Math.Max(
+                        1,
+                        (this.lossWindowSize - this.slowStartThreshold) / 8
+                    );
+                    int windowGrowthAckThreshold =
+                        ((this.windowSize - this.slowStartThreshold) * this.windowSize)
+                        / segmentSize;
 
                     if (this.congestionControlModeAcks > windowGrowthAckThreshold)
                     {
@@ -779,7 +898,10 @@ namespace System.ServiceModel.Channels
                     {
                         Int64 sequenceNumber = this.windowStart + i;
 
-                        if (!this.window.GetTransferred(i) && !this.retransmissionWindow.Contains(sequenceNumber))
+                        if (
+                            !this.window.GetTransferred(i)
+                            && !this.retransmissionWindow.Contains(sequenceNumber)
+                        )
                         {
                             this.window.RecordRetry(i, Now);
                             retransmissionWindow.Add(sequenceNumber);
@@ -829,7 +951,9 @@ namespace System.ServiceModel.Channels
         void ThrowIfRollover()
         {
             if (this.windowStart + this.window.Count + this.waitQueue.Count == Int64.MaxValue)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageNumberRolloverFault(this.id).CreateException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageNumberRolloverFault(this.id).CreateException()
+                );
         }
 
         void UpdateStats(Int64 now, Int64 lastAttemptTime)
@@ -837,9 +961,15 @@ namespace System.ServiceModel.Channels
             now = Math.Max(now, lastAttemptTime);
             Int64 measuredRtt = now - lastAttemptTime;
             Int64 error = measuredRtt - this.meanRtt;
-            this.serrRtt = Math.Min(this.serrRtt + ((Math.Abs(error) - this.serrRtt) >> Constants.Gain), Constants.MaxSerrRtt);
+            this.serrRtt = Math.Min(
+                this.serrRtt + ((Math.Abs(error) - this.serrRtt) >> Constants.Gain),
+                Constants.MaxSerrRtt
+            );
             this.meanRtt = Math.Min(this.meanRtt + (error >> Constants.Gain), Constants.MaxMeanRtt);
-            this.timeout = Math.Max(((200 << Constants.TimeMultiplier) * 2) + this.meanRtt, this.meanRtt + (this.serrRtt << Constants.ChebychevFactor));
+            this.timeout = Math.Max(
+                ((200 << Constants.TimeMultiplier) * 2) + this.meanRtt,
+                this.meanRtt + (this.serrRtt << Constants.ChebychevFactor)
+            );
         }
 
         class AsyncQueueAdder : WaitAsyncResult, IQueueAdder
@@ -848,7 +978,15 @@ namespace System.ServiceModel.Channels
             MessageAttemptInfo attemptInfo = default(MessageAttemptInfo);
             TransmissionStrategy strategy;
 
-            public AsyncQueueAdder(Message message, bool isLast, TimeSpan timeout, object state, TransmissionStrategy strategy, AsyncCallback callback, object asyncState)
+            public AsyncQueueAdder(
+                Message message,
+                bool isLast,
+                TimeSpan timeout,
+                object state,
+                TransmissionStrategy strategy,
+                AsyncCallback callback,
+                object asyncState
+            )
                 : base(timeout, true, callback, asyncState)
             {
                 // MessageAttemptInfo(Message message, Int64 sequenceNumber, int retryCount, object state)
@@ -867,7 +1005,11 @@ namespace System.ServiceModel.Channels
 
             public void Complete0()
             {
-                this.attemptInfo = strategy.AddToWindow(this.attemptInfo.Message, this.isLast, this.attemptInfo.State);
+                this.attemptInfo = strategy.AddToWindow(
+                    this.attemptInfo.Message,
+                    this.isLast,
+                    this.attemptInfo.State
+                );
             }
 
             public void Complete1()
@@ -963,7 +1105,9 @@ namespace System.ServiceModel.Channels
             {
                 if (this.Count >= (this.maxSize - 1))
                 {
-                    throw Fx.AssertAndThrow("The caller is not allowed to add messages beyond the sliding window's maximum size.");
+                    throw Fx.AssertAndThrow(
+                        "The caller is not allowed to add messages beyond the sliding window's maximum size."
+                    );
                 }
 
                 this.buffer[this.tail] = new TransmissionInfo(message, addTime, state);
@@ -1035,7 +1179,9 @@ namespace System.ServiceModel.Channels
 
                 if (endIndex < beginIndex)
                 {
-                    throw Fx.AssertAndThrow("Argument endIndex cannot be less than argument beginIndex.");
+                    throw Fx.AssertAndThrow(
+                        "Argument endIndex cannot be less than argument beginIndex."
+                    );
                 }
 
                 int result = 0;
@@ -1105,7 +1251,12 @@ namespace System.ServiceModel.Channels
             MessageAttemptInfo attemptInfo = default(MessageAttemptInfo);
             TransmissionStrategy strategy;
 
-            public WaitQueueAdder(TransmissionStrategy strategy, Message message, bool isLast, object state)
+            public WaitQueueAdder(
+                TransmissionStrategy strategy,
+                Message message,
+                bool isLast,
+                object state
+            )
             {
                 this.strategy = strategy;
                 this.isLast = isLast;
@@ -1120,13 +1271,15 @@ namespace System.ServiceModel.Channels
 
             public void Complete0()
             {
-                attemptInfo = this.strategy.AddToWindow(this.attemptInfo.Message, this.isLast, this.attemptInfo.State);
+                attemptInfo = this.strategy.AddToWindow(
+                    this.attemptInfo.Message,
+                    this.isLast,
+                    this.attemptInfo.State
+                );
                 this.completeEvent.Set();
             }
 
-            public void Complete1()
-            {
-            }
+            public void Complete1() { }
 
             public void Fault(CommunicationObject communicationObject)
             {
@@ -1139,7 +1292,9 @@ namespace System.ServiceModel.Channels
                 if (!TimeoutHelper.WaitOne(this.completeEvent, timeout))
                 {
                     if (this.strategy.RemoveAdder(this) && this.exception == null)
-                        this.exception = new TimeoutException(SR.GetString(SR.TimeoutOnAddToWindow, timeout));
+                        this.exception = new TimeoutException(
+                            SR.GetString(SR.TimeoutOnAddToWindow, timeout)
+                        );
                 }
 
                 if (this.exception != null)
@@ -1149,8 +1304,8 @@ namespace System.ServiceModel.Channels
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(this.exception);
                 }
 
-                // This is safe because, Abort, Complete0, Fault, and RemoveAdder all occur under 
-                // the TransmissionStrategy's lock and RemoveAdder ensures that the 
+                // This is safe because, Abort, Complete0, Fault, and RemoveAdder all occur under
+                // the TransmissionStrategy's lock and RemoveAdder ensures that the
                 // TransmissionStrategy will never call into this object again.
                 this.completeEvent.Close();
                 return this.attemptInfo;

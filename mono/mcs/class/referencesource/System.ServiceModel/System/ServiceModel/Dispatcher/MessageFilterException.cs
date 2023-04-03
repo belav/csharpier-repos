@@ -16,44 +16,37 @@ namespace System.ServiceModel.Dispatcher
     {
         [NonSerialized]
         Collection<MessageFilter> filters;
-        
+
         protected MessageFilterException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             this.filters = null;
         }
-        
-        public MessageFilterException()
-        {
-        }
-        
+
+        public MessageFilterException() { }
+
         public MessageFilterException(string message)
-            : this(message, null, null)
-        {
-        }
-        
+            : this(message, null, null) { }
+
         public MessageFilterException(string message, Exception innerException)
-            : this(message, innerException, null)
-        {
-        }
+            : this(message, innerException, null) { }
 
         public MessageFilterException(string message, Collection<MessageFilter> filters)
-            : this(message, null, filters)
-        {
-        }
-        
-        public MessageFilterException(string message, Exception innerException, Collection<MessageFilter> filters)
+            : this(message, null, filters) { }
+
+        public MessageFilterException(
+            string message,
+            Exception innerException,
+            Collection<MessageFilter> filters
+        )
             : base(message, innerException)
         {
             this.filters = filters;
         }
-        
+
         public Collection<MessageFilter> Filters
         {
-            get
-            {
-                return this.filters;
-            }
+            get { return this.filters; }
         }
     }
 }

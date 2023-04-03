@@ -5,14 +5,15 @@ using System;
 
 public class Blah
 {
-	static readonly string Test;
-	
-	public static void Main ()
-	{
-		string s = null;
-		switch (s) {
-			case Blah.Test:
-				break;
-		}
-	}
+    static readonly string Test;
+
+    public static void Main()
+    {
+        string s = null;
+        switch (s)
+        {
+            case Blah.Test:
+                break;
+        }
+    }
 }

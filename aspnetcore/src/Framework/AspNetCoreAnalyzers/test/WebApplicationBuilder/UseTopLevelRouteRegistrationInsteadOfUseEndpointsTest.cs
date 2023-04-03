@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.AspNetCore.Analyzers.WebApplicationBuilder;
+
 public partial class UseTopLevelRouteRegistrationsInsteadOfUseEndpointsTest
 {
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new WebApplicationBuilderAnalyzer());
@@ -20,7 +21,8 @@ public partial class UseTopLevelRouteRegistrationsInsteadOfUseEndpointsTest
     public async Task DoesNotWarnWhenEndpointRegistrationIsTopLevel()
     {
         //arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -38,7 +40,8 @@ app.MapGet(""/"", () => ""Hello World!"");
     public async Task DoesNotWarnWhenEnpointRegistrationIsTopLevel_InMain()
     {
         //arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 public static class Program
 {
@@ -62,7 +65,8 @@ public static class Program
     public async Task WarnsWhenEndpointRegistrationIsNotTopLevel()
     {
         //arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -71,22 +75,30 @@ app./*MM*/UseEndpoints(endpoints =>
 {
     endpoints.MapGet(""/"", () => ""Hello World!"");
 });
-");
+"
+        );
         //act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         //assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("Suggest using top level route registrations instead of UseEndpoints", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Suggest using top level route registrations instead of UseEndpoints",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WarnsWhenEndpointRegistrationIsNotTopLevel_OtherMapMethods()
     {
         //arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -107,7 +119,8 @@ app./*MM4*/UseEndpoints(endpoints =>
 {
     endpoints.MapDelete(""/"", () => ""This is a DELETE"");
 });
-");
+"
+        );
         //act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -118,28 +131,53 @@ app./*MM4*/UseEndpoints(endpoints =>
         var diagnostic3 = diagnostics[2];
         var diagnostic4 = diagnostics[3];
 
-        Assert.Same(DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints, diagnostic1.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints,
+            diagnostic1.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MM1"], diagnostic1.Location);
-        Assert.Equal("Suggest using top level route registrations instead of UseEndpoints", diagnostic1.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Suggest using top level route registrations instead of UseEndpoints",
+            diagnostic1.GetMessage(CultureInfo.InvariantCulture)
+        );
 
-        Assert.Same(DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints, diagnostic2.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints,
+            diagnostic2.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MM2"], diagnostic2.Location);
-        Assert.Equal("Suggest using top level route registrations instead of UseEndpoints", diagnostic2.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Suggest using top level route registrations instead of UseEndpoints",
+            diagnostic2.GetMessage(CultureInfo.InvariantCulture)
+        );
 
-        Assert.Same(DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints, diagnostic3.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints,
+            diagnostic3.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MM3"], diagnostic3.Location);
-        Assert.Equal("Suggest using top level route registrations instead of UseEndpoints", diagnostic3.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Suggest using top level route registrations instead of UseEndpoints",
+            diagnostic3.GetMessage(CultureInfo.InvariantCulture)
+        );
 
-        Assert.Same(DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints, diagnostic2.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints,
+            diagnostic2.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MM4"], diagnostic4.Location);
-        Assert.Equal("Suggest using top level route registrations instead of UseEndpoints", diagnostic2.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Suggest using top level route registrations instead of UseEndpoints",
+            diagnostic2.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WarnsWhenEndpointRegistrationIsNotTopLevel_InMain_MapControllers()
     {
         //arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 public static class Program
@@ -156,22 +194,30 @@ public static class Program
         });
     }
 }
-");
+"
+        );
         //act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         //assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("Suggest using top level route registrations instead of UseEndpoints", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Suggest using top level route registrations instead of UseEndpoints",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WarnsWhenEndpointRegistrationIsNotTopLevel_OnDifferentLine_WithRouteParameters()
     {
         //arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -182,22 +228,30 @@ app.
     endpoints.MapGet(""/users/{userId}/books/{bookId}"", 
         (int userId, int bookId) => $""The user id is {userId} and book id is {bookId}"");
 });
-");
+"
+        );
         //act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         //assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("Suggest using top level route registrations instead of UseEndpoints", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Suggest using top level route registrations instead of UseEndpoints",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WarnsTwiceWhenEndpointRegistrationIsNotTopLevel_OnDifferentLine()
     {
         //arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -210,7 +264,8 @@ app./*MM2*/UseEndpoints(endpoints =>
 {
     endpoints.MapGet(""/"", () => ""Hello World!"");
 });
-");
+"
+        );
         //act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
         //assert
@@ -218,12 +273,24 @@ app./*MM2*/UseEndpoints(endpoints =>
         var diagnostic1 = diagnostics[0];
         var diagnostic2 = diagnostics[1];
 
-        Assert.Same(DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints, diagnostic1.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints,
+            diagnostic1.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MM1"], diagnostic1.Location);
-        Assert.Equal("Suggest using top level route registrations instead of UseEndpoints", diagnostic1.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Suggest using top level route registrations instead of UseEndpoints",
+            diagnostic1.GetMessage(CultureInfo.InvariantCulture)
+        );
 
-        Assert.Same(DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints, diagnostic2.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.UseTopLevelRouteRegistrationsInsteadOfUseEndpoints,
+            diagnostic2.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MM2"], diagnostic2.Location);
-        Assert.Equal("Suggest using top level route registrations instead of UseEndpoints", diagnostic2.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "Suggest using top level route registrations instead of UseEndpoints",
+            diagnostic2.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 }

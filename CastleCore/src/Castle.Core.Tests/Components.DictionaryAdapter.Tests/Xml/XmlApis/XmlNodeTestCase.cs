@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -83,7 +83,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void XsiType_OfElement_WhenXsiTypeAttributeIsPresent()
         {
-            var node = NodeForElement("<X xsi:type='p:T' xmlns:p='urn:a' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>");
+            var node = NodeForElement(
+                "<X xsi:type='p:T' xmlns:p='urn:a' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
+            );
 
             Assert.AreEqual(new XmlName("T", "urn:a"), node.XsiType);
         }
@@ -134,7 +136,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void IsNil_OfElement_WhenXsiNilAttributeIsPresent()
         {
-            var node = NodeForElement("<X xsi:nil='true' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>");
+            var node = NodeForElement(
+                "<X xsi:nil='true' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
+            );
 
             Assert.True(node.IsNil);
         }
@@ -146,7 +150,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
             node.IsNil = true;
 
-            CustomAssert.AreXmlEquivalent("<X xsi:nil='true' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>", node.Xml);
+            CustomAssert.AreXmlEquivalent(
+                "<X xsi:nil='true' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
+                node.Xml
+            );
         }
 
         [Test]
@@ -162,7 +169,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void IsNil_OfElement_WhenValueSet()
         {
-            var node = NodeForElement("<X xsi:nil='true' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>");
+            var node = NodeForElement(
+                "<X xsi:nil='true' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
+            );
 
             node.Value = "V";
 
@@ -250,7 +259,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             var node = NodeForElement("<X> <A/> </X>");
 
-            var cursor = node.SelectChildren(KnownTypes, NamespaceSource.Instance, CursorFlags.Elements);
+            var cursor = node.SelectChildren(
+                KnownTypes,
+                NamespaceSource.Instance,
+                CursorFlags.Elements
+            );
 
             Assert.NotNull(cursor);
             Assert.True(cursor.MoveNext());
@@ -264,7 +277,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             var node = NodeForElement("<X> <A/> </X>");
             var path = XPathCompiler.Compile("A");
 
-            var cursor = node.Select(path, IncludedTypes, NamespaceSource.Instance, CursorFlags.Elements);
+            var cursor = node.Select(
+                path,
+                IncludedTypes,
+                NamespaceSource.Instance,
+                CursorFlags.Elements
+            );
 
             Assert.NotNull(cursor);
             Assert.True(cursor.MoveNext());
@@ -332,7 +350,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             CustomAssert.AreXmlEquivalent("<X A='a'/>", node.Xml);
         }
 
-        protected abstract IXmlNode NodeForElement  (params string[] xml);
+        protected abstract IXmlNode NodeForElement(params string[] xml);
         protected abstract IXmlNode NodeForAttribute(params string[] xml);
         protected abstract IXmlNode NodeForRoot();
 
@@ -357,8 +375,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             OneTimeSetUp();
         }
 
-        protected static XmlKnownTypeSet        KnownTypes;
+        protected static XmlKnownTypeSet KnownTypes;
         protected static MockXmlIncludedTypeMap IncludedTypes;
+
         protected sealed class T { }
     }
 }

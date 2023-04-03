@@ -32,22 +32,38 @@ namespace ILCompiler
 
     internal static class DependencyTrackingLevelExtensions
     {
-        public static DependencyAnalyzerBase<NodeFactory> CreateDependencyGraph(this DependencyTrackingLevel trackingLevel, NodeFactory factory, IComparer<DependencyNodeCore<NodeFactory>> comparer = null)
+        public static DependencyAnalyzerBase<NodeFactory> CreateDependencyGraph(
+            this DependencyTrackingLevel trackingLevel,
+            NodeFactory factory,
+            IComparer<DependencyNodeCore<NodeFactory>> comparer = null
+        )
         {
             // Choose which dependency graph implementation to use based on the amount of logging requested.
             switch (trackingLevel)
             {
                 case DependencyTrackingLevel.None:
                     if (EventSourceLogStrategy<NodeFactory>.IsEventSourceEnabled)
-                        return new DependencyAnalyzer<EventSourceLogStrategy<NodeFactory>, NodeFactory>(factory, comparer);
+                        return new DependencyAnalyzer<
+                            EventSourceLogStrategy<NodeFactory>,
+                            NodeFactory
+                        >(factory, comparer);
                     else
-                        return new DependencyAnalyzer<NoLogStrategy<NodeFactory>, NodeFactory>(factory, comparer);
+                        return new DependencyAnalyzer<NoLogStrategy<NodeFactory>, NodeFactory>(
+                            factory,
+                            comparer
+                        );
 
                 case DependencyTrackingLevel.First:
-                    return new DependencyAnalyzer<FirstMarkLogStrategy<NodeFactory>, NodeFactory>(factory, comparer);
+                    return new DependencyAnalyzer<FirstMarkLogStrategy<NodeFactory>, NodeFactory>(
+                        factory,
+                        comparer
+                    );
 
                 case DependencyTrackingLevel.All:
-                    return new DependencyAnalyzer<FullGraphLogStrategy<NodeFactory>, NodeFactory>(factory, comparer);
+                    return new DependencyAnalyzer<FullGraphLogStrategy<NodeFactory>, NodeFactory>(
+                        factory,
+                        comparer
+                    );
 
                 default:
                     throw new InvalidOperationException();

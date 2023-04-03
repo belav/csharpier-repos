@@ -6,10 +6,8 @@ using System.Linq;
 
 class C
 {
-	public void Foo (int i)
-	{
-		var e = from v in "a"
-			let ii = Foo
-			select v;
-	}
+    public void Foo(int i)
+    {
+        var e = from v in "a" let ii = Foo select v;
+    }
 }

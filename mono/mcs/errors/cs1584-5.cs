@@ -3,6 +3,4 @@
 // Compiler options: -doc:dummy.xml -warnaserror -warn:1
 
 /// <see cref="Test[]" />
-public class Test
-{
-}
+public class Test { }

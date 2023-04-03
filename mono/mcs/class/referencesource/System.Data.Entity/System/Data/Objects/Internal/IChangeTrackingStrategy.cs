@@ -39,7 +39,13 @@ namespace System.Data.Objects.Internal
         /// <param name="ordinal">The ordinal of the member to set</param>
         /// <param name="target">The object onto which the value should be set; may be the entity, or a contained complex value</param>
         /// <param name="value">The value to set</param>
-        void SetCurrentValue(EntityEntry entry, StateManagerMemberMetadata member, int ordinal, object target, object value);
+        void SetCurrentValue(
+            EntityEntry entry,
+            StateManagerMemberMetadata member,
+            int ordinal,
+            object target,
+            object value
+        );
 
         /// <summary>
         /// Updates the current value records using Shaper.UpdateRecord but with additional change tracking logic

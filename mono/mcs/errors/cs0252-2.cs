@@ -6,23 +6,23 @@ using System;
 
 class A
 {
-	public override int GetHashCode ()
-	{
-		return base.GetHashCode ();
-	}
-	
-	public override bool Equals (object obj)
-	{
-		return obj != this;
-	}
-	
-	public static bool operator == (A left, A right)
-	{
-		return true;
-	}
-	
-	public static bool operator != (A left, A right)
-	{
-		return false;
-	}
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj != this;
+    }
+
+    public static bool operator ==(A left, A right)
+    {
+        return true;
+    }
+
+    public static bool operator !=(A left, A right)
+    {
+        return false;
+    }
 }

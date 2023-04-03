@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// including access failures and lockout status
 /// </summary>
 /// <typeparam name="TUser">The type that represents a user.</typeparam>
-public interface IUserLockoutStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserLockoutStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Gets the last <see cref="DateTimeOffset"/> a user's last lockout expired, if any.
@@ -33,7 +34,11 @@ public interface IUserLockoutStore<TUser> : IUserStore<TUser> where TUser : clas
     /// <param name="lockoutEnd">The <see cref="DateTimeOffset"/> after which the <paramref name="user"/>'s lockout should end.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken);
+    Task SetLockoutEndDateAsync(
+        TUser user,
+        DateTimeOffset? lockoutEnd,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Records that a failed access has occurred, incrementing the failed access count.

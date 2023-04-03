@@ -2,11 +2,11 @@
 
 namespace n1
 {
-        public class Adder
+    public class Adder
+    {
+        public int Add(int x, int y)
         {
-                public int Add(int x, int y)
-                {
-                        return x+y;
-                }
+            return x + y;
         }
+    }
 }

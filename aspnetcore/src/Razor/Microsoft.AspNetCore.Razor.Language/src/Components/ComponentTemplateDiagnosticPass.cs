@@ -7,13 +7,18 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentTemplateDiagnosticPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+internal class ComponentTemplateDiagnosticPass
+    : ComponentIntermediateNodePassBase,
+        IRazorOptimizationPass
 {
     // Runs after components/eventhandlers/ref/bind. We need to check for templates in all of those
     // places.
     public override int Order => 150;
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         if (!IsComponentDocument(documentNode))
         {
@@ -26,7 +31,9 @@ internal class ComponentTemplateDiagnosticPass : ComponentIntermediateNodePassBa
         for (var i = 0; i < visitor.Candidates.Count; i++)
         {
             var candidate = visitor.Candidates[i];
-            candidate.Parent.Diagnostics.Add(ComponentDiagnosticFactory.Create_TemplateInvalidLocation(candidate.Node.Source));
+            candidate.Parent.Diagnostics.Add(
+                ComponentDiagnosticFactory.Create_TemplateInvalidLocation(candidate.Node.Source)
+            );
 
             // Remove the offending node since we don't know how to render it. This means that the user won't get C#
             // completion at this location, which is fine because it's inside an HTML attribute.
@@ -34,9 +41,12 @@ internal class ComponentTemplateDiagnosticPass : ComponentIntermediateNodePassBa
         }
     }
 
-    private class Visitor : IntermediateNodeWalker, IExtensionIntermediateNodeVisitor<TemplateIntermediateNode>
+    private class Visitor
+        : IntermediateNodeWalker,
+            IExtensionIntermediateNodeVisitor<TemplateIntermediateNode>
     {
-        public List<IntermediateNodeReference> Candidates { get; } = new List<IntermediateNodeReference>();
+        public List<IntermediateNodeReference> Candidates { get; } =
+            new List<IntermediateNodeReference>();
 
         public void VisitExtension(TemplateIntermediateNode node)
         {
@@ -47,16 +57,17 @@ internal class ComponentTemplateDiagnosticPass : ComponentIntermediateNodePassBa
 
                 if (
                     // Inside markup attribute
-                    ancestor is HtmlAttributeIntermediateNode ||
-
+                    ancestor is HtmlAttributeIntermediateNode
+                    ||
                     // Inside component attribute
-                    ancestor is ComponentAttributeIntermediateNode ||
-
+                    ancestor is ComponentAttributeIntermediateNode
+                    ||
                     // Inside malformed ref attribute
-                    ancestor is TagHelperPropertyIntermediateNode ||
-
+                    ancestor is TagHelperPropertyIntermediateNode
+                    ||
                     // Inside a directive attribute
-                    ancestor is TagHelperDirectiveAttributeIntermediateNode)
+                    ancestor is TagHelperDirectiveAttributeIntermediateNode
+                )
                 {
                     Candidates.Add(new IntermediateNodeReference(Parent, node));
                 }

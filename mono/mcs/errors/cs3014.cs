@@ -4,7 +4,8 @@
 
 using System;
 
-public interface I {
-        [CLSCompliant (true)]
-        void Valid (bool arg);
+public interface I
+{
+    [CLSCompliant(true)]
+    void Valid(bool arg);
 }

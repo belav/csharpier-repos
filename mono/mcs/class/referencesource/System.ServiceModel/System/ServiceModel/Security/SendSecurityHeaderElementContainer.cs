@@ -24,7 +24,10 @@ namespace System.ServiceModel.Security
         List<SecurityToken> signedEndorsingDerivedSupportingTokens = null;
         List<SendSecurityHeaderElement> signatureConfirmations = null;
         List<SendSecurityHeaderElement> endorsingSignatures = null;
-        Dictionary<SecurityToken, SecurityKeyIdentifierClause> securityTokenMappedToIdentifierClause = null;
+        Dictionary<
+            SecurityToken,
+            SecurityKeyIdentifierClause
+        > securityTokenMappedToIdentifierClause = null;
 
         public SecurityTimestamp Timestamp;
         public SecurityToken PrerequisiteToken;
@@ -47,7 +50,9 @@ namespace System.ServiceModel.Security
 
         public SecurityToken[] GetSignedSupportingTokens()
         {
-            return (this.signedSupportingTokens != null) ? this.signedSupportingTokens.ToArray() : null;
+            return (this.signedSupportingTokens != null)
+                ? this.signedSupportingTokens.ToArray()
+                : null;
         }
 
         public void AddSignedSupportingToken(SecurityToken token)
@@ -62,7 +67,9 @@ namespace System.ServiceModel.Security
 
         public SendSecurityHeaderElement[] GetBasicSupportingTokens()
         {
-            return (this.basicSupportingTokens != null) ? this.basicSupportingTokens.ToArray() : null;
+            return (this.basicSupportingTokens != null)
+                ? this.basicSupportingTokens.ToArray()
+                : null;
         }
 
         public void AddBasicSupportingToken(SendSecurityHeaderElement tokenElement)
@@ -72,7 +79,9 @@ namespace System.ServiceModel.Security
 
         public SecurityToken[] GetSignedEndorsingSupportingTokens()
         {
-            return (this.signedEndorsingSupportingTokens != null) ? this.signedEndorsingSupportingTokens.ToArray() : null;
+            return (this.signedEndorsingSupportingTokens != null)
+                ? this.signedEndorsingSupportingTokens.ToArray()
+                : null;
         }
 
         public void AddSignedEndorsingSupportingToken(SecurityToken token)
@@ -82,7 +91,9 @@ namespace System.ServiceModel.Security
 
         public SecurityToken[] GetSignedEndorsingDerivedSupportingTokens()
         {
-            return (this.signedEndorsingDerivedSupportingTokens != null) ? this.signedEndorsingDerivedSupportingTokens.ToArray() : null;
+            return (this.signedEndorsingDerivedSupportingTokens != null)
+                ? this.signedEndorsingDerivedSupportingTokens.ToArray()
+                : null;
         }
 
         public void AddSignedEndorsingDerivedSupportingToken(SecurityToken token)
@@ -92,7 +103,9 @@ namespace System.ServiceModel.Security
 
         public SecurityToken[] GetEndorsingSupportingTokens()
         {
-            return (this.endorsingSupportingTokens != null) ? this.endorsingSupportingTokens.ToArray() : null;
+            return (this.endorsingSupportingTokens != null)
+                ? this.endorsingSupportingTokens.ToArray()
+                : null;
         }
 
         public void AddEndorsingSupportingToken(SecurityToken token)
@@ -102,7 +115,9 @@ namespace System.ServiceModel.Security
 
         public SecurityToken[] GetEndorsingDerivedSupportingTokens()
         {
-            return (this.endorsingDerivedSupportingTokens != null) ? this.endorsingDerivedSupportingTokens.ToArray() : null;
+            return (this.endorsingDerivedSupportingTokens != null)
+                ? this.endorsingDerivedSupportingTokens.ToArray()
+                : null;
         }
 
         public void AddEndorsingDerivedSupportingToken(SecurityToken token)
@@ -112,7 +127,9 @@ namespace System.ServiceModel.Security
 
         public SendSecurityHeaderElement[] GetSignatureConfirmations()
         {
-            return (this.signatureConfirmations != null) ? this.signatureConfirmations.ToArray() : null;
+            return (this.signatureConfirmations != null)
+                ? this.signatureConfirmations.ToArray()
+                : null;
         }
 
         public void AddSignatureConfirmation(SendSecurityHeaderElement confirmation)
@@ -130,11 +147,15 @@ namespace System.ServiceModel.Security
             Add<SendSecurityHeaderElement>(ref this.endorsingSignatures, signature);
         }
 
-        public void MapSecurityTokenToStrClause(SecurityToken securityToken, SecurityKeyIdentifierClause keyIdentifierClause)
+        public void MapSecurityTokenToStrClause(
+            SecurityToken securityToken,
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             if (this.securityTokenMappedToIdentifierClause == null)
             {
-                this.securityTokenMappedToIdentifierClause = new Dictionary<SecurityToken, SecurityKeyIdentifierClause>();
+                this.securityTokenMappedToIdentifierClause =
+                    new Dictionary<SecurityToken, SecurityKeyIdentifierClause>();
             }
 
             if (!this.securityTokenMappedToIdentifierClause.ContainsKey(securityToken))
@@ -143,16 +164,24 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public bool TryGetIdentifierClauseFromSecurityToken(SecurityToken securityToken, out SecurityKeyIdentifierClause keyIdentifierClause)
+        public bool TryGetIdentifierClauseFromSecurityToken(
+            SecurityToken securityToken,
+            out SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             keyIdentifierClause = null;
-            if (securityToken == null
+            if (
+                securityToken == null
                 || this.securityTokenMappedToIdentifierClause == null
-                || !this.securityTokenMappedToIdentifierClause.TryGetValue(securityToken, out keyIdentifierClause))
+                || !this.securityTokenMappedToIdentifierClause.TryGetValue(
+                    securityToken,
+                    out keyIdentifierClause
+                )
+            )
             {
                 return false;
             }
             return true;
-        }       
+        }
     }
 }

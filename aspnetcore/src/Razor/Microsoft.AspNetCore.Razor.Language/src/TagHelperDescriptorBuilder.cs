@@ -19,7 +19,11 @@ public abstract class TagHelperDescriptorBuilder
             throw new ArgumentNullException(nameof(assemblyName));
         }
 
-        return new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, name, assemblyName);
+        return new DefaultTagHelperDescriptorBuilder(
+            TagHelperConventions.DefaultKind,
+            name,
+            assemblyName
+        );
     }
 
     public static TagHelperDescriptorBuilder Create(string kind, string name, string assemblyName)

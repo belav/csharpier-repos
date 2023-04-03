@@ -3,5 +3,6 @@
 
 interface I
 {
-	void Foo<T> () where T : class, struct;
+    void Foo<T>()
+        where T : class, struct;
 }

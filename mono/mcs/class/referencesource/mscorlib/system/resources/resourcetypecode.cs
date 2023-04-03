@@ -1,23 +1,24 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  ResourceTypeCode
-** 
+**
 ** <OWNER>kimhamil</OWNER>
 **
 **
 ** Purpose: Marker for types in .resources files
 **
-** 
+**
 ===========================================================*/
 
-namespace System.Resources {
+namespace System.Resources
+{
     /* An internal implementation detail for .resources files, describing
-       what type an object is.  
+       what type an object is.
        Ranges:
        0 - 0x1F     Primitives and reserved values
        0x20 - 0x3F  Specially recognized types, like byte[] and Streams
@@ -26,7 +27,8 @@ namespace System.Resources {
        internals of .resources files.
     */
     [Serializable]
-    internal enum ResourceTypeCode {
+    internal enum ResourceTypeCode
+    {
         // Primitives
         Null = 0,
         String = 1,

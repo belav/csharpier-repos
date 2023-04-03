@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         [WpfFact]
         public async Task AddOptionalParameter_ToConstructor()
         {
-            var markup = @"
+            var markup =
+                @"
 class B
 {
     public B() : this(1) { }
@@ -34,12 +35,35 @@ class D : B
 {
     public D() : base(1) { }
 }";
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "x", CallSiteKind.Value, callSiteValue: "100", isRequired: false, defaultValue: "10"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "y", CallSiteKind.Omitted, isRequired: false, defaultValue: "11"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "z", CallSiteKind.Value, callSiteValue: "102", isRequired: false, defaultValue: "12")};
-            var updatedCode = @"
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "x",
+                    CallSiteKind.Value,
+                    callSiteValue: "100",
+                    isRequired: false,
+                    defaultValue: "10"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "y",
+                    CallSiteKind.Omitted,
+                    isRequired: false,
+                    defaultValue: "11"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "z",
+                    CallSiteKind.Value,
+                    callSiteValue: "102",
+                    isRequired: false,
+                    defaultValue: "12"
+                )
+            };
+            var updatedCode =
+                @"
 class B
 {
     public B() : this(1, 100, z: 102) { }
@@ -54,14 +78,20 @@ class D : B
     public D() : base(1, 100, z: 102) { }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [WorkItem(44126, "https://github.com/dotnet/roslyn/issues/44126")]
         [WpfFact]
         public async Task AddOptionalParameter_ToConstructor_ImplicitObjectCreation()
         {
-            var markup = @"
+            var markup =
+                @"
 class B
 {
     public B() : this(1) { }
@@ -75,12 +105,35 @@ class D : B
 {
     public D() : base(1) { }
 }";
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "x", CallSiteKind.Value, callSiteValue: "100", isRequired: false, defaultValue: "10"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "y", CallSiteKind.Omitted, isRequired: false, defaultValue: "11"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "z", CallSiteKind.Value, callSiteValue: "102", isRequired: false, defaultValue: "12")};
-            var updatedCode = @"
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "x",
+                    CallSiteKind.Value,
+                    callSiteValue: "100",
+                    isRequired: false,
+                    defaultValue: "10"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "y",
+                    CallSiteKind.Omitted,
+                    isRequired: false,
+                    defaultValue: "11"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "z",
+                    CallSiteKind.Value,
+                    callSiteValue: "102",
+                    isRequired: false,
+                    defaultValue: "12"
+                )
+            };
+            var updatedCode =
+                @"
 class B
 {
     public B() : this(1, 100, z: 102) { }
@@ -95,13 +148,19 @@ class D : B
     public D() : base(1, 100, z: 102) { }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [WpfFact]
         public async Task AddOptionalParameter_ToIndexer()
         {
-            var markup = @"
+            var markup =
+                @"
 class B
 {
     public int this$$[int a] { get { return 5; } }
@@ -111,12 +170,35 @@ class B
         var d = this[1];
     }
 }";
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "x", CallSiteKind.Value, callSiteValue: "100", isRequired: false, defaultValue: "10"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "y", CallSiteKind.Omitted, isRequired: false, defaultValue: "11"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "z", CallSiteKind.Value, callSiteValue: "102", isRequired: false, defaultValue: "12")};
-            var updatedCode = @"
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "x",
+                    CallSiteKind.Value,
+                    callSiteValue: "100",
+                    isRequired: false,
+                    defaultValue: "10"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "y",
+                    CallSiteKind.Omitted,
+                    isRequired: false,
+                    defaultValue: "11"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "z",
+                    CallSiteKind.Value,
+                    callSiteValue: "102",
+                    isRequired: false,
+                    defaultValue: "12"
+                )
+            };
+            var updatedCode =
+                @"
 class B
 {
     public int this[int a, int x = 10, int y = 11, int z = 12] { get { return 5; } }
@@ -127,34 +209,68 @@ class B
     }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [WpfFact]
         public async Task AddOptionalParameter_ToAttribute()
         {
-            var markup = @"
+            var markup =
+                @"
 [My(1)]
 class MyAttribute : System.Attribute
 {
     public MyAttribute($$int a) { }
 }";
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "x", CallSiteKind.Value, callSiteValue: "100", isRequired: false, defaultValue: "10"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "y", CallSiteKind.Omitted, isRequired: false, defaultValue: "11"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "z", CallSiteKind.Value, callSiteValue: "102", isRequired: false, defaultValue: "12")};
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "x",
+                    CallSiteKind.Value,
+                    callSiteValue: "100",
+                    isRequired: false,
+                    defaultValue: "10"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "y",
+                    CallSiteKind.Omitted,
+                    isRequired: false,
+                    defaultValue: "11"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "z",
+                    CallSiteKind.Value,
+                    callSiteValue: "102",
+                    isRequired: false,
+                    defaultValue: "12"
+                )
+            };
 
             // TODO: The = in the attribute is a bug. You cannot specify that the attribute should use : instead in the SyntaxGenerator
             // https://github.com/dotnet/roslyn/issues/43354
-            var updatedCode = @"
+            var updatedCode =
+                @"
 [My(1, 100, z = 102)]
 class MyAttribute : System.Attribute
 {
     public MyAttribute(int a, int x = 10, int y = 11, int z = 12) { }
 }";
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
     }
 }

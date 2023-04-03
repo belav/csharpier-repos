@@ -27,7 +27,11 @@ namespace System
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "Non-negative number required.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "Non-negative number required."
+                );
             }
 
             if (fromEnd)
@@ -55,7 +59,11 @@ namespace System
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "Non-negative number required.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "Non-negative number required."
+                );
             }
 
             return new Index(value);
@@ -68,7 +76,11 @@ namespace System
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "Non-negative number required.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "Non-negative number required."
+                );
             }
 
             return new Index(~value);
@@ -114,7 +126,8 @@ namespace System
 
         /// <summary>Indicates whether the current Index object is equal to another object of the same type.</summary>
         /// <param name="value">An object to compare with this object</param>
-        public override bool Equals(object? value) => value is Index index && _value == index._value;
+        public override bool Equals(object? value) =>
+            value is Index index && _value == index._value;
 
         /// <summary>Indicates whether the current Index object is equal to another Index object.</summary>
         /// <param name="other">An object to compare with this object</param>

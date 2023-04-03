@@ -42,7 +42,8 @@ internal class AnnotatedProblemDetails
     public string? Instance { get; set; }
 
     [JsonExtensionData]
-    public IDictionary<string, object?> Extensions { get; } = new Dictionary<string, object?>(StringComparer.Ordinal);
+    public IDictionary<string, object?> Extensions { get; } =
+        new Dictionary<string, object?>(StringComparer.Ordinal);
 
     public void CopyTo(ProblemDetails problemDetails)
     {

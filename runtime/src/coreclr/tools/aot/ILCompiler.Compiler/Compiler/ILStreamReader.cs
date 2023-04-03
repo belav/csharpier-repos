@@ -28,10 +28,7 @@ namespace Internal.Compiler
 
         public bool HasNextInstruction
         {
-            get
-            {
-                return _reader.HasNext;
-            }
+            get { return _reader.HasNext; }
         }
 
         public bool TryReadLdtoken(out int token)

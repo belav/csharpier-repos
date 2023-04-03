@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal abstract partial class Operation : IOperation
     {
-        protected static readonly IOperation s_unset = new EmptyOperation(semanticModel: null, syntax: null!, isImplicit: true);
+        protected static readonly IOperation s_unset = new EmptyOperation(
+            semanticModel: null,
+            syntax: null!,
+            isImplicit: true
+        );
         private readonly SemanticModel? _owningSemanticModelOpt;
 
         // this will be lazily initialized. this will be initialized only once
@@ -32,7 +36,10 @@ namespace Microsoft.CodeAnalysis
             {
                 Debug.Assert(semanticModel.ContainingPublicModelOrSelf != null);
                 Debug.Assert(semanticModel.ContainingPublicModelOrSelf != semanticModel);
-                Debug.Assert(semanticModel.ContainingPublicModelOrSelf.ContainingPublicModelOrSelf == semanticModel.ContainingPublicModelOrSelf);
+                Debug.Assert(
+                    semanticModel.ContainingPublicModelOrSelf.ContainingPublicModelOrSelf
+                        == semanticModel.ContainingPublicModelOrSelf
+                );
             }
 #endif
             _owningSemanticModelOpt = semanticModel;
@@ -50,7 +57,10 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                Debug.Assert(_parentDoNotAccessDirectly != s_unset, "Attempt to access parent node before construction is complete!");
+                Debug.Assert(
+                    _parentDoNotAccessDirectly != s_unset,
+                    "Attempt to access parent node before construction is complete!"
+                );
                 return _parentDoNotAccessDirectly;
             }
         }
@@ -112,16 +122,25 @@ namespace Microsoft.CodeAnalysis
 
         internal abstract int ChildOperationsCount { get; }
         internal abstract IOperation GetCurrent(int slot, int index);
+
         /// <summary>
         /// A slot of -1 means start at the beginning.
         /// </summary>
-        internal abstract (bool hasNext, int nextSlot, int nextIndex) MoveNext(int previousSlot, int previousIndex);
+        internal abstract (bool hasNext, int nextSlot, int nextIndex) MoveNext(
+            int previousSlot,
+            int previousIndex
+        );
+
         /// <summary>
         /// A slot of int.MaxValue means start from the end.
         /// </summary>
-        internal abstract (bool hasNext, int nextSlot, int nextIndex) MoveNextReversed(int previousSlot, int previousIndex);
+        internal abstract (bool hasNext, int nextSlot, int nextIndex) MoveNextReversed(
+            int previousSlot,
+            int previousIndex
+        );
 
-        SemanticModel? IOperation.SemanticModel => _owningSemanticModelOpt?.ContainingPublicModelOrSelf;
+        SemanticModel? IOperation.SemanticModel =>
+            _owningSemanticModelOpt?.ContainingPublicModelOrSelf;
 
         /// <summary>
         /// Gets the owning semantic model for this operation node.
@@ -133,7 +152,10 @@ namespace Microsoft.CodeAnalysis
 
         public abstract void Accept(OperationVisitor visitor);
 
-        public abstract TResult? Accept<TArgument, TResult>(OperationVisitor<TArgument, TResult> visitor, TArgument argument);
+        public abstract TResult? Accept<TArgument, TResult>(
+            OperationVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        );
 
         protected void SetParentOperation(IOperation? parent)
         {
@@ -142,11 +164,14 @@ namespace Microsoft.CodeAnalysis
             _parentDoNotAccessDirectly = parent;
 
             // tree must belong to same semantic model if parent is given
-            Debug.Assert(parent == null || ((Operation)parent).OwningSemanticModel == OwningSemanticModel);
+            Debug.Assert(
+                parent == null || ((Operation)parent).OwningSemanticModel == OwningSemanticModel
+            );
         }
 
         [return: NotNullIfNotNull(nameof(operation))]
-        public static T? SetParentOperation<T>(T? operation, IOperation? parent) where T : IOperation
+        public static T? SetParentOperation<T>(T? operation, IOperation? parent)
+            where T : IOperation
         {
             // For simplicity of implementation of derived types, we handle `null` children, as some children
             // are optional.
@@ -154,7 +179,11 @@ namespace Microsoft.CodeAnalysis
             return operation;
         }
 
-        public static ImmutableArray<T> SetParentOperation<T>(ImmutableArray<T> operations, IOperation? parent) where T : IOperation
+        public static ImmutableArray<T> SetParentOperation<T>(
+            ImmutableArray<T> operations,
+            IOperation? parent
+        )
+            where T : IOperation
         {
             // check quick bail out case first
             if (operations.Length == 0)
@@ -181,7 +210,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         [Conditional("DEBUG")]
-        internal static void VerifyParentOperation<T>(IOperation? parent, ImmutableArray<T> children) where T : IOperation
+        internal static void VerifyParentOperation<T>(
+            IOperation? parent,
+            ImmutableArray<T> children
+        )
+            where T : IOperation
         {
             Debug.Assert(!children.IsDefault);
             foreach (var child in children)
@@ -190,7 +223,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static readonly ObjectPool<Queue<IOperation>> s_queuePool =
-            new ObjectPool<Queue<IOperation>>(() => new Queue<IOperation>(), 10);
+        private static readonly ObjectPool<Queue<IOperation>> s_queuePool = new ObjectPool<
+            Queue<IOperation>
+        >(() => new Queue<IOperation>(), 10);
     }
 }

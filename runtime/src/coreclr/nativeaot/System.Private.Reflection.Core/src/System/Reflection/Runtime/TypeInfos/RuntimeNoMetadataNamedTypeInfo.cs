@@ -24,7 +24,10 @@ namespace System.Reflection.Runtime.TypeInfos
     //
     internal sealed partial class RuntimeNoMetadataNamedTypeInfo : RuntimeTypeDefinitionTypeInfo
     {
-        private RuntimeNoMetadataNamedTypeInfo(RuntimeTypeHandle typeHandle, bool isGenericTypeDefinition)
+        private RuntimeNoMetadataNamedTypeInfo(
+            RuntimeTypeHandle typeHandle,
+            bool isGenericTypeDefinition
+        )
         {
             _typeHandle = typeHandle;
             _isGenericTypeDefinition = isGenericTypeDefinition;
@@ -40,10 +43,7 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override bool ContainsGenericParameters
         {
-            get
-            {
-                return _isGenericTypeDefinition;
-            }
+            get { return _isGenericTypeDefinition; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
@@ -76,14 +76,12 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override bool IsGenericTypeDefinition
         {
-            get
-            {
-                return _isGenericTypeDefinition;
-            }
+            get { return _isGenericTypeDefinition; }
         }
 
 #if DEBUG
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => base.HasSameMetadataDefinitionAs(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            base.HasSameMetadataDefinitionAs(other);
 #endif
 
         public sealed override string Namespace
@@ -113,10 +111,7 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
         protected sealed override TypeAttributes GetAttributeFlagsImpl()
@@ -177,10 +172,7 @@ namespace System.Reflection.Runtime.TypeInfos
 
         internal sealed override RuntimeTypeHandle InternalTypeHandleIfAvailable
         {
-            get
-            {
-                return _typeHandle;
-            }
+            get { return _typeHandle; }
         }
 
         internal sealed override RuntimeTypeInfo[] RuntimeGenericTypeParameters

@@ -7,7 +7,8 @@ public static class Module
 {
     public static int Main()
     {
-        int Var1, Temp;
+        int Var1,
+            Temp;
         try
         {
             checked

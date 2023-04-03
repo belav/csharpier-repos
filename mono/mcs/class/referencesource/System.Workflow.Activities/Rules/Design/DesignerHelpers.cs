@@ -17,7 +17,11 @@ namespace System.Workflow.Activities.Rules.Design
     /// </summary>
     internal static class DesignerHelpers
     {
-        internal static void DisplayError(string message, string messageBoxTitle, IServiceProvider serviceProvider)
+        internal static void DisplayError(
+            string message,
+            string messageBoxTitle,
+            IServiceProvider serviceProvider
+        )
         {
             IUIService uis = null;
             if (serviceProvider != null)
@@ -26,7 +30,14 @@ namespace System.Workflow.Activities.Rules.Design
             if (uis != null)
                 uis.ShowError(message);
             else
-                MessageBox.Show(message, messageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, 0);
+                MessageBox.Show(
+                    message,
+                    messageBoxTitle,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1,
+                    0
+                );
         }
 
         static internal string GetRulePreview(Rule rule)

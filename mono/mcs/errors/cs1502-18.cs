@@ -3,16 +3,12 @@
 
 class X
 {
-	public static void Main ()
-	{
-		Add (Foo (), Foo ());
-	}
+    public static void Main()
+    {
+        Add(Foo(), Foo());
+    }
 
-	public static void Add (params object[] args)
-	{
-	}
+    public static void Add(params object[] args) { }
 
-	static void Foo ()
-	{
-	}
+    static void Foo() { }
 }

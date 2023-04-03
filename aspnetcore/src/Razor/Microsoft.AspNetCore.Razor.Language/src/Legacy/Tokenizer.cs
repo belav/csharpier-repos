@@ -63,7 +63,11 @@ internal abstract class Tokenizer : ITokenizer
 
     public SourceLocation CurrentStart { get; private set; }
 
-    protected abstract SyntaxToken CreateToken(string content, SyntaxKind type, RazorDiagnostic[] errors);
+    protected abstract SyntaxToken CreateToken(
+        string content,
+        SyntaxKind type,
+        RazorDiagnostic[] errors
+    );
 
     protected abstract StateResult Dispatch();
 
@@ -105,8 +109,7 @@ internal abstract class Tokenizer : ITokenizer
 
                 CurrentState = next.State;
                 CurrenSyntaxToken = next.Result;
-            }
-            while (CurrentState != null && CurrenSyntaxToken == null);
+            } while (CurrentState != null && CurrenSyntaxToken == null);
 
             if (CurrentState == null)
             {
@@ -204,7 +207,10 @@ internal abstract class Tokenizer : ITokenizer
         if (HaveContent)
         {
             // Perf: Don't allocate a new errors array unless necessary.
-            var errors = CurrentErrors.Count == 0 ? RazorDiagnostic.EmptyArray : new RazorDiagnostic[CurrentErrors.Count];
+            var errors =
+                CurrentErrors.Count == 0
+                    ? RazorDiagnostic.EmptyArray
+                    : new RazorDiagnostic[CurrentErrors.Count];
             for (var i = 0; i < CurrentErrors.Count; i++)
             {
                 errors[i] = CurrentErrors[i];
@@ -291,7 +297,8 @@ internal abstract class Tokenizer : ITokenizer
                 {
                     return Transition(
                         RazorCommentTokenizerState.StarAfterRazorCommentBody,
-                        EndToken(RazorCommentKind));
+                        EndToken(RazorCommentKind)
+                    );
                 }
                 else
                 {
@@ -314,7 +321,8 @@ internal abstract class Tokenizer : ITokenizer
         TakeCurrent();
         return Transition(
             RazorCommentTokenizerState.AtTokenAfterRazorCommentBody,
-            EndToken(RazorCommentStarKind));
+            EndToken(RazorCommentStarKind)
+        );
     }
 
     protected StateResult AtTokenAfterRazorCommentBody()
@@ -382,7 +390,13 @@ internal abstract class Tokenizer : ITokenizer
     [Conditional("DEBUG")]
     internal void AssertCurrent(char current)
     {
-        Debug.Assert(CurrentCharacter == current, "CurrentCharacter Assumption violated", "Assumed that the current character would be {0}, but it is actually {1}", current, CurrentCharacter);
+        Debug.Assert(
+            CurrentCharacter == current,
+            "CurrentCharacter Assumption violated",
+            "Assumed that the current character would be {0}, but it is actually {1}",
+            current,
+            CurrentCharacter
+        );
     }
 
     protected enum RazorCommentTokenizerState

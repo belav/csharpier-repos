@@ -21,7 +21,8 @@ public class TriggerConvention : IEntityTypeBaseTypeChangedConvention, IEntityTy
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public TriggerConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -40,7 +41,8 @@ public class TriggerConvention : IEntityTypeBaseTypeChangedConvention, IEntityTy
     /// <inheritdoc />
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
         if (!entityType.HasSharedClrType)
@@ -81,7 +83,8 @@ public class TriggerConvention : IEntityTypeBaseTypeChangedConvention, IEntityTy
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
         if (newBaseType != null)
@@ -90,21 +93,33 @@ public class TriggerConvention : IEntityTypeBaseTypeChangedConvention, IEntityTy
             var baseTriggers = newBaseType.GetTriggers().ToDictionary(c => c.ModelName);
             List<IConventionTrigger>? triggersToBeDetached = null;
             List<IConventionTrigger>? triggersToBeRemoved = null;
-            foreach (var trigger in entityType.GetDerivedTypesInclusive().SelectMany(et => et.GetDeclaredTriggers()))
+            foreach (
+                var trigger in entityType
+                    .GetDerivedTypesInclusive()
+                    .SelectMany(et => et.GetDeclaredTriggers())
+            )
             {
-                if (baseTriggers.TryGetValue(trigger.ModelName, out var baseTrigger)
-                    && baseTrigger.GetConfigurationSource().Overrides(trigger.GetConfigurationSource())
-                    && !AreCompatible(trigger, baseTrigger))
+                if (
+                    baseTriggers.TryGetValue(trigger.ModelName, out var baseTrigger)
+                    && baseTrigger
+                        .GetConfigurationSource()
+                        .Overrides(trigger.GetConfigurationSource())
+                    && !AreCompatible(trigger, baseTrigger)
+                )
                 {
-                    if (baseTrigger.GetConfigurationSource() == ConfigurationSource.Explicit
+                    if (
+                        baseTrigger.GetConfigurationSource() == ConfigurationSource.Explicit
                         && configurationSource == ConfigurationSource.Explicit
-                        && trigger.GetConfigurationSource() == ConfigurationSource.Explicit)
+                        && trigger.GetConfigurationSource() == ConfigurationSource.Explicit
+                    )
                     {
                         throw new InvalidOperationException(
                             RelationalStrings.DuplicateTrigger(
                                 trigger.ModelName,
                                 trigger.EntityType.DisplayName(),
-                                baseTrigger.EntityType.DisplayName()));
+                                baseTrigger.EntityType.DisplayName()
+                            )
+                        );
                     }
 
                     triggersToBeRemoved ??= new List<IConventionTrigger>();
@@ -125,7 +140,9 @@ public class TriggerConvention : IEntityTypeBaseTypeChangedConvention, IEntityTy
             {
                 foreach (var checkConstraintToBeRemoved in triggersToBeRemoved)
                 {
-                    checkConstraintToBeRemoved.EntityType.RemoveTrigger(checkConstraintToBeRemoved.ModelName);
+                    checkConstraintToBeRemoved.EntityType.RemoveTrigger(
+                        checkConstraintToBeRemoved.ModelName
+                    );
                 }
             }
 
@@ -142,7 +159,10 @@ public class TriggerConvention : IEntityTypeBaseTypeChangedConvention, IEntityTy
         }
     }
 
-    private static bool AreCompatible(IConventionTrigger checkConstraint, IConventionTrigger baseTrigger)
+    private static bool AreCompatible(
+        IConventionTrigger checkConstraint,
+        IConventionTrigger baseTrigger
+    )
     {
         var baseTable = StoreObjectIdentifier.Create(baseTrigger.EntityType, StoreObjectType.Table);
         if (baseTable == null)
@@ -150,9 +170,12 @@ public class TriggerConvention : IEntityTypeBaseTypeChangedConvention, IEntityTy
             return true;
         }
 
-        if (checkConstraint.GetName(baseTable.Value) != baseTrigger.GetName(baseTable.Value)
-            && checkConstraint.GetNameConfigurationSource() is ConfigurationSource nameConfigurationSource
-            && !nameConfigurationSource.OverridesStrictly(baseTrigger.GetNameConfigurationSource()))
+        if (
+            checkConstraint.GetName(baseTable.Value) != baseTrigger.GetName(baseTable.Value)
+            && checkConstraint.GetNameConfigurationSource()
+                is ConfigurationSource nameConfigurationSource
+            && !nameConfigurationSource.OverridesStrictly(baseTrigger.GetNameConfigurationSource())
+        )
         {
             return false;
         }

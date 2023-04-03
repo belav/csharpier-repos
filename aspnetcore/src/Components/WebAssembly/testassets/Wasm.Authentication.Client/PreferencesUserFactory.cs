@@ -16,7 +16,10 @@ public class PreferencesUserFactory : AccountClaimsPrincipalFactory<OidcAccount>
 {
     private readonly HttpClient _httpClient;
 
-    public PreferencesUserFactory(NavigationManager navigationManager, IAccessTokenProviderAccessor accessor)
+    public PreferencesUserFactory(
+        NavigationManager navigationManager,
+        IAccessTokenProviderAccessor accessor
+    )
         : base(accessor)
     {
         _httpClient = new HttpClient { BaseAddress = new Uri(navigationManager.BaseUri) };
@@ -24,7 +27,8 @@ public class PreferencesUserFactory : AccountClaimsPrincipalFactory<OidcAccount>
 
     public override async ValueTask<ClaimsPrincipal> CreateUserAsync(
         OidcAccount account,
-        RemoteAuthenticationUserOptions options)
+        RemoteAuthenticationUserOptions options
+    )
     {
         var initialUser = await base.CreateUserAsync(account, options);
 
@@ -38,8 +42,14 @@ public class PreferencesUserFactory : AccountClaimsPrincipalFactory<OidcAccount>
             var tokenResponse = await TokenProvider.RequestAccessToken();
             if (tokenResponse.TryGetToken(out var token))
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, "Preferences/HasCompletedAdditionalInformation");
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Value);
+                var request = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "Preferences/HasCompletedAdditionalInformation"
+                );
+                request.Headers.Authorization = new AuthenticationHeaderValue(
+                    "Bearer",
+                    token.Value
+                );
 
                 var response = await _httpClient.SendAsync(request);
                 if (response.StatusCode != HttpStatusCode.OK)
@@ -47,7 +57,9 @@ public class PreferencesUserFactory : AccountClaimsPrincipalFactory<OidcAccount>
                     throw new InvalidOperationException("Error accessing additional user info.");
                 }
 
-                var hasInfo = JsonSerializer.Deserialize<bool>(await response.Content.ReadAsStringAsync());
+                var hasInfo = JsonSerializer.Deserialize<bool>(
+                    await response.Content.ReadAsStringAsync()
+                );
                 if (!hasInfo)
                 {
                     // The actual pattern would be to cache this info to avoid constant queries to the server per auth update.

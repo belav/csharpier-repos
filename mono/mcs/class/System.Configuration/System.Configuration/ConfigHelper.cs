@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,32 +34,29 @@ using System.Xml;
 
 namespace System.Configuration
 {
-	internal class ConfigNameValueCollection: NameValueCollection
-	{
-		bool modified;
-		
-		public ConfigNameValueCollection ()
-		{
-		}
-		
-		public ConfigNameValueCollection (ConfigNameValueCollection col)
-		: base (col.Count, col)
-		{
-		}
-		
-		public void ResetModified ()
-		{
-			modified = false;
-		}
-		
-		public bool IsModified {
-			get { return modified; }
-		}
-		
-		public override void Set (string name, string value)
-		{
-			base.Set (name, value);
-			modified = true;
-		}
-	}
+    internal class ConfigNameValueCollection : NameValueCollection
+    {
+        bool modified;
+
+        public ConfigNameValueCollection() { }
+
+        public ConfigNameValueCollection(ConfigNameValueCollection col)
+            : base(col.Count, col) { }
+
+        public void ResetModified()
+        {
+            modified = false;
+        }
+
+        public bool IsModified
+        {
+            get { return modified; }
+        }
+
+        public override void Set(string name, string value)
+        {
+            base.Set(name, value);
+            modified = true;
+        }
+    }
 }

@@ -2,21 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 
-public class xa {
-
-  public static int Main() {
-
-    try {
-
-      x.doX(null);
-
-    } catch(NullReferenceException) {
-	//Expected
-        return 100;
+public class xa
+{
+    public static int Main()
+    {
+        try
+        {
+            x.doX(null);
+        }
+        catch (NullReferenceException)
+        {
+            //Expected
+            return 100;
+        }
+        return 0;
     }
-    return 0;
-  }
-
 }
-
-  

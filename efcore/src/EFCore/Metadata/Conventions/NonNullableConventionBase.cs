@@ -36,7 +36,8 @@ public abstract class NonNullableConventionBase : IModelFinalizingConvention
     /// <returns><see langword="true" /> if the member type is a non-nullable reference type.</returns>
     protected virtual bool IsNonNullableReferenceType(
         IConventionModelBuilder modelBuilder,
-        MemberInfo memberInfo)
+        MemberInfo memberInfo
+    )
     {
         if (memberInfo.GetMemberType().IsValueType)
         {
@@ -45,7 +46,10 @@ public abstract class NonNullableConventionBase : IModelFinalizingConvention
 
         var annotation =
             modelBuilder.Metadata.FindAnnotation(StateAnnotationName)
-            ?? modelBuilder.Metadata.AddAnnotation(StateAnnotationName, new NullabilityInfoContext());
+            ?? modelBuilder.Metadata.AddAnnotation(
+                StateAnnotationName,
+                new NullabilityInfoContext()
+            );
 
         var nullabilityInfoContext = (NullabilityInfoContext)annotation.Value!;
 
@@ -62,6 +66,6 @@ public abstract class NonNullableConventionBase : IModelFinalizingConvention
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
-        => modelBuilder.Metadata.RemoveAnnotation(StateAnnotationName);
+        IConventionContext<IConventionModelBuilder> context
+    ) => modelBuilder.Metadata.RemoveAnnotation(StateAnnotationName);
 }

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -13,15 +13,16 @@
 **
 **
 ===========================================================*/
-namespace System.Runtime.Serialization {
+namespace System.Runtime.Serialization
+{
     using System;
 
-    // Interface does not need to be marked with the serializable attribute    
+    // Interface does not need to be marked with the serializable attribute
     [System.Runtime.InteropServices.ComVisible(true)]
-    public interface IDeserializationCallback {
+    public interface IDeserializationCallback
+    {
 #if FEATURE_SERIALIZATION
         void OnDeserialization(Object sender);
 #endif
-    
     }
 }

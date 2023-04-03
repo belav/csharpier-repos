@@ -6,6 +6,7 @@ using System;
 
 [module: CLSCompliant(true)]
 
-public class ClsMain {
-        public static void Main () {}
+public class ClsMain
+{
+    public static void Main() { }
 }

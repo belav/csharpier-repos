@@ -72,9 +72,7 @@ namespace Castle.DynamicProxy.Tests
     }
 
     public interface IEventHandler<T> : IEventHandler
-        where T : EventArgs
-    {
-    }
+        where T : EventArgs { }
 
     public class EventArgs1 : EventArgs { }
 
@@ -114,21 +112,28 @@ namespace Castle.DynamicProxy.Tests
         {
             var lazyTarget1 = new Lazy<IEventHandler<EventArgs1>>(() => new Handler1());
             var lazyInterceptor1 = new LazyInterceptorV1<IEventHandler<EventArgs1>>(lazyTarget1);
-            var proxy1 = generator.CreateInterfaceProxyWithTargetInterface<IEventHandler<EventArgs1>>(null, new[] { lazyInterceptor1 });
+            var proxy1 = generator.CreateInterfaceProxyWithTargetInterface<
+                IEventHandler<EventArgs1>
+            >(null, new[] { lazyInterceptor1 });
 
             var result1 = proxy1.Handle(EventArgs.Empty);
             Assert.AreEqual("Handler1", result1);
 
             var lazyTarget2 = new Lazy<IEventHandler<EventArgs2>>(() => new Handler2());
             var lazyInterceptor2 = new LazyInterceptorV1<IEventHandler<EventArgs2>>(lazyTarget2);
-            var proxy2 = generator.CreateInterfaceProxyWithTargetInterface<IEventHandler<EventArgs2>>(null, new[] { lazyInterceptor2 });
+            var proxy2 = generator.CreateInterfaceProxyWithTargetInterface<
+                IEventHandler<EventArgs2>
+            >(null, new[] { lazyInterceptor2 });
 
             var result2 = proxy2.Handle(EventArgs.Empty);
             Assert.AreEqual("Handler2", result2);
 
             var lazyTarget3 = new Lazy<IEventHandler3>(() => new Handler3());
             var lazyInterceptor3 = new LazyInterceptorV1<IEventHandler3>(lazyTarget3);
-            var proxy3 = generator.CreateInterfaceProxyWithTargetInterface<IEventHandler3>(null, new[] { lazyInterceptor3 });
+            var proxy3 = generator.CreateInterfaceProxyWithTargetInterface<IEventHandler3>(
+                null,
+                new[] { lazyInterceptor3 }
+            );
 
             var result3 = proxy3.Handle(EventArgs.Empty);
             Assert.AreEqual("Handler3", result3);
@@ -140,21 +145,28 @@ namespace Castle.DynamicProxy.Tests
             // issue #293
             var lazyTarget1 = new Lazy<IEventHandler<EventArgs1>>(() => new Handler1());
             var lazyInterceptor1 = new LazyInterceptorV2<IEventHandler<EventArgs1>>(lazyTarget1);
-            var proxy1 = generator.CreateInterfaceProxyWithTargetInterface<IEventHandler<EventArgs1>>(null, new[] { lazyInterceptor1 });
+            var proxy1 = generator.CreateInterfaceProxyWithTargetInterface<
+                IEventHandler<EventArgs1>
+            >(null, new[] { lazyInterceptor1 });
 
             var result1 = proxy1.Handle(EventArgs.Empty);
             Assert.AreEqual("Handler1", result1);
 
             var lazyTarget2 = new Lazy<IEventHandler<EventArgs2>>(() => new Handler2());
             var lazyInterceptor2 = new LazyInterceptorV2<IEventHandler<EventArgs2>>(lazyTarget2);
-            var proxy2 = generator.CreateInterfaceProxyWithTargetInterface<IEventHandler<EventArgs2>>(null, new[] { lazyInterceptor2 });
+            var proxy2 = generator.CreateInterfaceProxyWithTargetInterface<
+                IEventHandler<EventArgs2>
+            >(null, new[] { lazyInterceptor2 });
 
             var result2 = proxy2.Handle(EventArgs.Empty);
             Assert.AreEqual("Handler2", result2);
 
             var lazyTarget3 = new Lazy<IEventHandler3>(() => new Handler3());
             var lazyInterceptor3 = new LazyInterceptorV2<IEventHandler3>(lazyTarget3);
-            var proxy3 = generator.CreateInterfaceProxyWithTargetInterface<IEventHandler3>(null, new[] { lazyInterceptor3 });
+            var proxy3 = generator.CreateInterfaceProxyWithTargetInterface<IEventHandler3>(
+                null,
+                new[] { lazyInterceptor3 }
+            );
 
             var result3 = proxy3.Handle(EventArgs.Empty);
             Assert.AreEqual("Handler3", result3);

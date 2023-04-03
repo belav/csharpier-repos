@@ -3,12 +3,12 @@
 
 // <Area> Nullable - CastClass </Area>
 // <Title> Nullable type with castclass expr  </Title>
-// <Description>  
+// <Description>
 // checking type of EmptyStructGen<int> using cast expr
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
 using System.Runtime.InteropServices;
@@ -18,12 +18,18 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ(object o)
     {
-        return Helper.Compare((EmptyStructGen<int>)(ValueType)o, Helper.Create(default(EmptyStructGen<int>)));
+        return Helper.Compare(
+            (EmptyStructGen<int>)(ValueType)o,
+            Helper.Create(default(EmptyStructGen<int>))
+        );
     }
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((EmptyStructGen<int>?)(ValueType)o, Helper.Create(default(EmptyStructGen<int>)));
+        return Helper.Compare(
+            (EmptyStructGen<int>?)(ValueType)o,
+            Helper.Create(default(EmptyStructGen<int>))
+        );
     }
 
     private static int Main()
@@ -36,5 +42,3 @@ internal class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

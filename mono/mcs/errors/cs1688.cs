@@ -3,13 +3,13 @@
 
 class C
 {
-	delegate void WithOutParam (out string value);
+    delegate void WithOutParam(out string value);
 
-    static void Main() 
+    static void Main()
     {
         WithOutParam o = delegate
-			{ 
-				return;
-			};
+        {
+            return;
+        };
     }
 }

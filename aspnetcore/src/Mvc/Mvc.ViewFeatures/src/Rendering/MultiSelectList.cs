@@ -71,7 +71,8 @@ public class MultiSelectList : IEnumerable<SelectListItem>
         IEnumerable items,
         string dataValueField,
         string dataTextField,
-        IEnumerable selectedValues)
+        IEnumerable selectedValues
+    )
         : this(items, dataValueField, dataTextField, selectedValues, dataGroupField: null)
     {
         if (items == null)
@@ -98,7 +99,8 @@ public class MultiSelectList : IEnumerable<SelectListItem>
         string dataValueField,
         string dataTextField,
         IEnumerable selectedValues,
-        string dataGroupField)
+        string dataGroupField
+    )
     {
         if (items == null)
         {
@@ -155,9 +157,9 @@ public class MultiSelectList : IEnumerable<SelectListItem>
 
     private IList<SelectListItem> GetListItems()
     {
-        return (!string.IsNullOrEmpty(DataValueField)) ?
-            GetListItemsWithValueField() :
-            GetListItemsWithoutValueField();
+        return (!string.IsNullOrEmpty(DataValueField))
+            ? GetListItemsWithValueField()
+            : GetListItemsWithoutValueField();
     }
 
     private IList<SelectListItem> GetListItemsWithValueField()

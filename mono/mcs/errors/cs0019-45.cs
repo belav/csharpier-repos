@@ -3,13 +3,13 @@
 
 public class C
 {
-	public static void Main ()
-	{
-		bool a = DelegateMethod == null;
-	}
+    public static void Main()
+    {
+        bool a = DelegateMethod == null;
+    }
 
-	static int DelegateMethod(bool b)
-	{
-		return 3;
-	}	
+    static int DelegateMethod(bool b)
+    {
+        return 3;
+    }
 }

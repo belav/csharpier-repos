@@ -3,19 +3,16 @@
 
 using System;
 
-[AttributeUsage (AttributeTargets.ReturnValue)]
+[AttributeUsage(AttributeTargets.ReturnValue)]
 public class ReturnAttribute : Attribute
 {
-        public ReturnAttribute ()
-        {
-	}
+    public ReturnAttribute() { }
 }
 
-class MainClass {
-        [Obsolete]
-        [return: Return]
-        [Obsolete]
-        static void Main()
-        {
-        }
+class MainClass
+{
+    [Obsolete]
+    [return: Return]
+    [Obsolete]
+    static void Main() { }
 }

@@ -31,16 +31,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             InitializeComponent();
         }
 
-        private void SelectDependentsButton_Click(object sender, RoutedEventArgs e)
-            => ViewModel.SelectDependents();
+        private void SelectDependentsButton_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.SelectDependents();
 
-        private void SelectPublic_Click(object sender, RoutedEventArgs e)
-            => ViewModel.SelectPublic();
+        private void SelectPublic_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.SelectPublic();
 
-        private void SelectAllButton_Click(object sender, RoutedEventArgs e)
-            => ViewModel.SelectAll();
+        private void SelectAllButton_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.SelectAll();
 
-        private void DeselectAllButton_Click(object sender, RoutedEventArgs e)
-            => ViewModel.DeselectAll();
+        private void DeselectAllButton_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.DeselectAll();
     }
 }

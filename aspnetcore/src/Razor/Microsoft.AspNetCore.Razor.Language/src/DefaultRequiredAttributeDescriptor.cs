@@ -15,7 +15,8 @@ internal class DefaultRequiredAttributeDescriptor : RequiredAttributeDescriptor
         ValueComparisonMode valueComparison,
         string displayName,
         RazorDiagnostic[] diagnostics,
-        Dictionary<string, string> metadata)
+        Dictionary<string, string> metadata
+    )
     {
         Name = name;
         NameComparison = nameComparison;

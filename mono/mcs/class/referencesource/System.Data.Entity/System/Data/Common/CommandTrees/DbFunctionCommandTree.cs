@@ -16,11 +16,14 @@ using System.Linq;
 
 namespace System.Data.Common.CommandTrees
 {
-
     /// <summary>
     /// Represents a function invocation expressed as a canonical command tree
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public sealed class DbFunctionCommandTree : DbCommandTree
     {
         private readonly EdmFunction _edmFunction;
@@ -39,7 +42,14 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="metadata"/>, <paramref name="dataSpace"/> or <paramref name="edmFunction"/> is null</exception>
         /// <exception cref="ArgumentException"><paramref name="dataSpace"/> does not represent a valid data space or
         /// <paramref name="edmFunction">is a composable function</paramref></exception>
-        /*CQT_PUBLIC_API(*/internal/*)*/ DbFunctionCommandTree(MetadataWorkspace metadata, DataSpace dataSpace, EdmFunction edmFunction, TypeUsage resultType, IEnumerable<KeyValuePair<string, TypeUsage>> parameters)
+        /*CQT_PUBLIC_API(*/internal /*)*/
+        DbFunctionCommandTree(
+            MetadataWorkspace metadata,
+            DataSpace dataSpace,
+            EdmFunction edmFunction,
+            TypeUsage resultType,
+            IEnumerable<KeyValuePair<string, TypeUsage>> parameters
+        )
             : base(metadata, dataSpace)
         {
             EntityUtil.CheckArgumentNull(edmFunction, "edmFunction");
@@ -65,13 +75,14 @@ namespace System.Data.Common.CommandTrees
         /// <summary>
         /// Gets the <see cref="EdmFunction"/> that represents the function to invoke
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         public EdmFunction EdmFunction
         {
-            get
-            {
-                return _edmFunction;
-            }
+            get { return _edmFunction; }
         }
 
         /// <summary>
@@ -81,10 +92,7 @@ namespace System.Data.Common.CommandTrees
         /// </summary>
         public TypeUsage ResultType
         {
-            get
-            {
-                return _resultType;
-            }
+            get { return _resultType; }
         }
 
         internal override DbCommandTreeKind CommandTreeKind
@@ -96,7 +104,10 @@ namespace System.Data.Common.CommandTrees
         {
             for (int idx = 0; idx < this._parameterNames.Count; idx++)
             {
-                yield return new KeyValuePair<string, TypeUsage>(this._parameterNames[idx], this._parameterTypes[idx]);
+                yield return new KeyValuePair<string, TypeUsage>(
+                    this._parameterNames[idx],
+                    this._parameterTypes[idx]
+                );
             }
         }
 

@@ -3,9 +3,10 @@
 
 using foo = System.Console;
 
-class X {
-	static void Main ()
-	{
-		foo::WriteLine ("hello");
-	}
+class X
+{
+    static void Main()
+    {
+        foo::WriteLine("hello");
+    }
 }

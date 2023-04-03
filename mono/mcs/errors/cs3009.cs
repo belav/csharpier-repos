@@ -3,11 +3,10 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (true)]
 
-[CLSCompliant (false)]
-public class BaseClass {
-}
+[assembly: CLSCompliant(true)]
 
-public class CLSClass: BaseClass {
-}
+[CLSCompliant(false)]
+public class BaseClass { }
+
+public class CLSClass : BaseClass { }

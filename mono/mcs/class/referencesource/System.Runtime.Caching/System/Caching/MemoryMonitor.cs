@@ -6,14 +6,16 @@ using System;
 using System.Collections.Specialized;
 using System.Security;
 
-namespace System.Runtime.Caching {
+namespace System.Runtime.Caching
+{
     // MemoryMonitor is the base class for memory monitors.  The MemoryCache has two
     // types of monitors:  PhysicalMemoryMonitor and CacheMemoryMonitor.  The first monitors
     // the amount of physical memory used on the machine, and helps determine when we should
     // drop cache entries to avoid paging.  The second monitors the amount of memory used by
-    // the cache itself, and helps determine when we should drop cache entries to avoid 
+    // the cache itself, and helps determine when we should drop cache entries to avoid
     // exceeding the cache's memory limit.  Both are configurable (see ConfigUtil.cs).
-    internal abstract class MemoryMonitor {
+    internal abstract class MemoryMonitor
+    {
         protected const int TERABYTE_SHIFT = 40;
         protected const long TERABYTE = 1L << TERABYTE_SHIFT;
 
@@ -28,8 +30,8 @@ namespace System.Runtime.Caching {
 
         protected const int HISTORY_COUNT = 6;
 
-        protected int _pressureHigh;      // high pressure level
-        protected int _pressureLow;       // low pressure level - slow growth here
+        protected int _pressureHigh; // high pressure level
+        protected int _pressureLow; // low pressure level - slow growth here
 
         protected int _i0;
         protected int[] _pressureHist;
@@ -39,9 +41,13 @@ namespace System.Runtime.Caching {
         private static long s_totalVirtual;
 
         [SecuritySafeCritical]
-        static MemoryMonitor() {
+        static MemoryMonitor()
+        {
 #if MONO
-            var pc = new System.Diagnostics.PerformanceCounter ("Mono Memory", "Total Physical Memory");
+            var pc = new System.Diagnostics.PerformanceCounter(
+                "Mono Memory",
+                "Total Physical Memory"
+            );
             s_totalPhysical = pc.RawValue;
 
             // We should set the the total virtual memory with a system value.
@@ -51,21 +57,38 @@ namespace System.Runtime.Caching {
 #else
             MEMORYSTATUSEX memoryStatusEx = new MEMORYSTATUSEX();
             memoryStatusEx.Init();
-            if (UnsafeNativeMethods.GlobalMemoryStatusEx(ref memoryStatusEx) != 0) {
+            if (UnsafeNativeMethods.GlobalMemoryStatusEx(ref memoryStatusEx) != 0)
+            {
                 s_totalPhysical = memoryStatusEx.ullTotalPhys;
                 s_totalVirtual = memoryStatusEx.ullTotalVirtual;
             }
 #endif
         }
 
-        internal static long TotalPhysical { get { return s_totalPhysical; } }
-        internal static long TotalVirtual { get { return s_totalVirtual; } }
+        internal static long TotalPhysical
+        {
+            get { return s_totalPhysical; }
+        }
+        internal static long TotalVirtual
+        {
+            get { return s_totalVirtual; }
+        }
 
-        internal int PressureLast { get { return _pressureHist[_i0]; } }
-        internal int PressureHigh { get { return _pressureHigh; } }
-        internal int PressureLow { get { return _pressureLow; } }
+        internal int PressureLast
+        {
+            get { return _pressureHist[_i0]; }
+        }
+        internal int PressureHigh
+        {
+            get { return _pressureHigh; }
+        }
+        internal int PressureLow
+        {
+            get { return _pressureLow; }
+        }
 
-        internal bool IsAboveHighPressure() {
+        internal bool IsAboveHighPressure()
+        {
             return PressureLast >= PressureHigh;
         }
 
@@ -73,7 +96,8 @@ namespace System.Runtime.Caching {
 
         internal abstract int GetPercentToTrim(DateTime lastTrimTime, int lastTrimPercent);
 
-        protected void InitHistory() {
+        protected void InitHistory()
+        {
             Dbg.Assert(_pressureHigh > 0, "_pressureHigh > 0");
             Dbg.Assert(_pressureLow > 0, "_pressureLow > 0");
             Dbg.Assert(_pressureLow <= _pressureHigh, "_pressureLow <= _pressureHigh");
@@ -81,14 +105,16 @@ namespace System.Runtime.Caching {
             int pressure = GetCurrentPressure();
 
             _pressureHist = new int[HISTORY_COUNT];
-            for (int i = 0; i < HISTORY_COUNT; i++) {
+            for (int i = 0; i < HISTORY_COUNT; i++)
+            {
                 _pressureHist[i] = pressure;
                 _pressureTotal += pressure;
             }
         }
 
         // Get current pressure and update history
-        internal void Update() {
+        internal void Update()
+        {
             int pressure = GetCurrentPressure();
 
             _i0 = (_i0 + 1) % HISTORY_COUNT;
@@ -97,10 +123,18 @@ namespace System.Runtime.Caching {
             _pressureHist[_i0] = pressure;
 
 #if DBG
-            Dbg.Trace("MemoryCacheStats", this.GetType().Name + ".Update: last=" + pressure
-                        + ",high=" + PressureHigh
-                        + ",low=" + PressureLow
-                        + " " + Dbg.FormatLocalDate(DateTime.Now));
+            Dbg.Trace(
+                "MemoryCacheStats",
+                this.GetType().Name
+                    + ".Update: last="
+                    + pressure
+                    + ",high="
+                    + PressureHigh
+                    + ",low="
+                    + PressureLow
+                    + " "
+                    + Dbg.FormatLocalDate(DateTime.Now)
+            );
 #endif
         }
     }

@@ -5,8 +5,8 @@ using A = Test;
 
 class Test
 {
-	static void Main ()
-	{
-		A::P p;
-	}
+    static void Main()
+    {
+        A::P p;
+    }
 }

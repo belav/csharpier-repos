@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,60 +28,45 @@
 
 using System.Drawing;
 
-namespace System.Windows.Forms {
-	public sealed class AmbientProperties {
-		#region Local Variables
-		private Color	fore_color;
-		private Color	back_color;
-		private Font	font;
-		private Cursor	cursor;
-		#endregion	// Local Variables
+namespace System.Windows.Forms
+{
+    public sealed class AmbientProperties
+    {
+        #region Local Variables
+        private Color fore_color;
+        private Color back_color;
+        private Font font;
+        private Cursor cursor;
+        #endregion	// Local Variables
 
-		#region Public Constructors
-		public AmbientProperties() {
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public AmbientProperties() { }
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
-		public Color BackColor {
-			get {
-				return back_color;
-			}
+        #region Public Instance Properties
+        public Color BackColor
+        {
+            get { return back_color; }
+            set { back_color = value; }
+        }
 
-			set {
-				back_color = value;
-			}
-		}
+        public Cursor Cursor
+        {
+            get { return cursor; }
+            set { cursor = value; }
+        }
 
-		public Cursor Cursor {
-			get {
-				return cursor;
-			}
+        public Font Font
+        {
+            get { return font; }
+            set { font = value; }
+        }
 
-			set {
-				cursor = value;
-			}
-		}
-
-		public Font Font {
-			get {
-				return font;
-			}
-
-			set {
-				font = value;
-			}
-		}
-
-		public Color ForeColor {
-			get {
-				return fore_color;
-			}
-
-			set {
-				fore_color = value;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public Color ForeColor
+        {
+            get { return fore_color; }
+            set { fore_color = value; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

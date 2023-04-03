@@ -2,9 +2,9 @@
 // Line: 8
 class X
 {
-	static void Main ()
-	{
-		int a = 5;
-		int b = a ?? 3;
-	}
+    static void Main()
+    {
+        int a = 5;
+        int b = a ?? 3;
+    }
 }

@@ -14,9 +14,11 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(WSFederationHttpSecurityMode value)
         {
-            return (value == WSFederationHttpSecurityMode.None ||
-                value == WSFederationHttpSecurityMode.Message ||
-                value == WSFederationHttpSecurityMode.TransportWithMessageCredential);
+            return (
+                value == WSFederationHttpSecurityMode.None
+                || value == WSFederationHttpSecurityMode.Message
+                || value == WSFederationHttpSecurityMode.TransportWithMessageCredential
+            );
         }
     }
 }

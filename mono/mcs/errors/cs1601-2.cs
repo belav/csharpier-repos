@@ -2,12 +2,9 @@
 // Line: 10
 using System;
 
-class X {
-	static void Main ()
-	{
-	}
+class X
+{
+    static void Main() { }
 
-	static void M (ref ArgIterator a)
-	{
-	}
+    static void M(ref ArgIterator a) { }
 }

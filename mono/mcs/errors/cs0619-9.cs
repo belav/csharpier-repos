@@ -4,8 +4,6 @@
 using System;
 
 [Obsolete("", true)]
-interface ObsoleteInterface
-{
-}
+interface ObsoleteInterface { }
 
-delegate ObsoleteInterface @delegate ();
+delegate ObsoleteInterface @delegate();

@@ -21,19 +21,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class CodeDefinitionWindow_InProc : InProcComponent
     {
-        private CodeDefinitionWindow_InProc()
-        {
-        }
+        private CodeDefinitionWindow_InProc() { }
 
-        public static CodeDefinitionWindow_InProc Create()
-            => new CodeDefinitionWindow_InProc();
+        public static CodeDefinitionWindow_InProc Create() => new CodeDefinitionWindow_InProc();
 
         private static IWpfTextView GetCodeDefinitionWpfTextView()
         {
             var shell = GetGlobalService<SVsUIShell, IVsUIShell>();
             var windowGuid = Guid.Parse(ToolWindowGuids80.CodedefinitionWindow);
 
-            Marshal.ThrowExceptionForHR(shell.FindToolWindow(0, ref windowGuid, out var windowFrame));
+            Marshal.ThrowExceptionForHR(
+                shell.FindToolWindow(0, ref windowGuid, out var windowFrame)
+            );
 
             var view = VsShellUtilities.GetTextView(windowFrame);
             var editorAdaptersService = GetComponentModelService<IVsEditorAdaptersFactoryService>();

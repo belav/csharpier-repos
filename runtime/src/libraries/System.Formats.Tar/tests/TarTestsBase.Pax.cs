@@ -85,13 +85,21 @@ namespace System.Formats.Tar.Tests
             VerifyPosixFifo(fifo);
         }
 
-        private DateTimeOffset GetDateTimeOffsetFromSecondsSinceEpoch(decimal secondsSinceUnixEpoch) =>
-            new DateTimeOffset((long)(secondsSinceUnixEpoch * TimeSpan.TicksPerSecond) + DateTime.UnixEpoch.Ticks, TimeSpan.Zero);
+        private DateTimeOffset GetDateTimeOffsetFromSecondsSinceEpoch(
+            decimal secondsSinceUnixEpoch
+        ) =>
+            new DateTimeOffset(
+                (long)(secondsSinceUnixEpoch * TimeSpan.TicksPerSecond) + DateTime.UnixEpoch.Ticks,
+                TimeSpan.Zero
+            );
 
         private decimal GetSecondsSinceEpochFromDateTimeOffset(DateTimeOffset value) =>
             ((decimal)(value.UtcDateTime - DateTime.UnixEpoch).Ticks) / TimeSpan.TicksPerSecond;
 
-        protected DateTimeOffset GetDateTimeOffsetFromTimestampString(IReadOnlyDictionary<string, string> ea, string fieldName)
+        protected DateTimeOffset GetDateTimeOffsetFromTimestampString(
+            IReadOnlyDictionary<string, string> ea,
+            string fieldName
+        )
         {
             Assert.Contains(fieldName, ea);
             return GetDateTimeOffsetFromTimestampString(ea[fieldName]);
@@ -99,7 +107,14 @@ namespace System.Formats.Tar.Tests
 
         protected DateTimeOffset GetDateTimeOffsetFromTimestampString(string strNumber)
         {
-            Assert.True(decimal.TryParse(strNumber, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal secondsSinceEpoch));
+            Assert.True(
+                decimal.TryParse(
+                    strNumber,
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out decimal secondsSinceEpoch
+                )
+            );
             return GetDateTimeOffsetFromSecondsSinceEpoch(secondsSinceEpoch);
         }
 
@@ -109,9 +124,16 @@ namespace System.Formats.Tar.Tests
             return secondsSinceEpoch.ToString("G", CultureInfo.InvariantCulture);
         }
 
-        protected void VerifyExtendedAttributeTimestamp(PaxTarEntry paxEntry, string fieldName, DateTimeOffset minimumTime)
+        protected void VerifyExtendedAttributeTimestamp(
+            PaxTarEntry paxEntry,
+            string fieldName,
+            DateTimeOffset minimumTime
+        )
         {
-            DateTimeOffset converted = GetDateTimeOffsetFromTimestampString(paxEntry.ExtendedAttributes, fieldName);
+            DateTimeOffset converted = GetDateTimeOffsetFromTimestampString(
+                paxEntry.ExtendedAttributes,
+                fieldName
+            );
             AssertExtensions.GreaterThanOrEqualTo(converted, minimumTime);
         }
 

@@ -12,7 +12,11 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             return SHA1.Create();
         }
 
-        protected override bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        protected override bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             return SHA1.TryHashData(source, destination, out bytesWritten);
         }
@@ -41,13 +45,21 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         [Fact]
         public void Sha1_Rfc3174_MultiBlock()
         {
-            VerifyMultiBlock("ab", "c", "A9993E364706816ABA3E25717850C26C9CD0D89D", "DA39A3EE5E6B4B0D3255BFEF95601890AFD80709");
+            VerifyMultiBlock(
+                "ab",
+                "c",
+                "A9993E364706816ABA3E25717850C26C9CD0D89D",
+                "DA39A3EE5E6B4B0D3255BFEF95601890AFD80709"
+            );
         }
 
         [Fact]
         public void Sha1_Rfc3174_2()
         {
-            Verify("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq", "84983E441C3BD26EBAAE4AA1F95129E5E54670F1");
+            Verify(
+                "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
+                "84983E441C3BD26EBAAE4AA1F95129E5E54670F1"
+            );
         }
 
         [Fact]
@@ -59,7 +71,11 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         [Fact]
         public void Sha1_Rfc3174_4()
         {
-            VerifyRepeating("0123456701234567012345670123456701234567012345670123456701234567", 10, "DEA356A2CDDD90C7A7ECEDC5EBB563934F460452");
+            VerifyRepeating(
+                "0123456701234567012345670123456701234567012345670123456701234567",
+                10,
+                "DEA356A2CDDD90C7A7ECEDC5EBB563934F460452"
+            );
         }
     }
 }

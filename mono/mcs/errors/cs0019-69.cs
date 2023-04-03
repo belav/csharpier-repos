@@ -3,22 +3,20 @@
 
 struct S
 {
-	public static implicit operator E (S s)
-	{
-		return 0;
-	}
+    public static implicit operator E(S s)
+    {
+        return 0;
+    }
 }
 
-public enum E
-{
-}
+public enum E { }
 
 class C
 {
-	public static void Main ()
-	{
-		S s;
-		S s2;
-		var x = s == s2;
-	}
+    public static void Main()
+    {
+        S s;
+        S s2;
+        var x = s == s2;
+    }
 }

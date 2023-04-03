@@ -3,14 +3,13 @@
 
 class Tester
 {
-	static void Foo<T> (T t) where T : struct
-	{
-	}
-	
-	public static int Main ()
-	{
-		dynamic d = 1;
-		Foo<dynamic>(d);
-		return 0;
-	}
+    static void Foo<T>(T t)
+        where T : struct { }
+
+    public static int Main()
+    {
+        dynamic d = 1;
+        Foo<dynamic>(d);
+        return 0;
+    }
 }

@@ -50,7 +50,9 @@ public sealed class LazyAssemblyLoader
         return LoadAssembliesInServerAsync(assembliesToLoad);
     }
 
-    private static Task<IEnumerable<Assembly>> LoadAssembliesInServerAsync(IEnumerable<string> assembliesToLoad)
+    private static Task<IEnumerable<Assembly>> LoadAssembliesInServerAsync(
+        IEnumerable<string> assembliesToLoad
+    )
     {
         var loadedAssemblies = new List<Assembly>();
 
@@ -63,14 +65,18 @@ public sealed class LazyAssemblyLoader
         }
         catch (FileNotFoundException ex)
         {
-            throw new InvalidOperationException($"Unable to find the following assembly: {ex.FileName}. Make sure that the appplication is referencing the assemblies and that they are present in the output folder.");
+            throw new InvalidOperationException(
+                $"Unable to find the following assembly: {ex.FileName}. Make sure that the appplication is referencing the assemblies and that they are present in the output folder."
+            );
         }
 
         return Task.FromResult<IEnumerable<Assembly>>(loadedAssemblies);
     }
 
     [RequiresUnreferencedCode("Types and members the loaded assemblies depend on might be removed")]
-    private async Task<IEnumerable<Assembly>> LoadAssembliesInClientAsync(IEnumerable<string> assembliesToLoad)
+    private async Task<IEnumerable<Assembly>> LoadAssembliesInClientAsync(
+        IEnumerable<string> assembliesToLoad
+    )
     {
         if (_loadedAssemblyCache is null)
         {
@@ -106,9 +112,11 @@ public sealed class LazyAssemblyLoader
 
         var jsRuntime = (IJSUnmarshalledRuntime)_jsRuntime;
 #pragma warning disable CS0618 // Type or member is obsolete
-        var count = (int)await jsRuntime.InvokeUnmarshalled<string[], Task<object>>(
-           GetLazyAssemblies,
-           newAssembliesToLoad.ToArray());
+        var count = (int)
+            await jsRuntime.InvokeUnmarshalled<string[], Task<object>>(
+                GetLazyAssemblies,
+                newAssembliesToLoad.ToArray()
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
         if (count == 0)
@@ -130,9 +138,13 @@ public sealed class LazyAssemblyLoader
             // into the default app context.
             var assembly = assemblies[i];
             var pdb = pdbs[i];
-            var loadedAssembly = pdb.Length == 0 ?
-                AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(assembly)) :
-                AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(assembly), new MemoryStream(pdb));
+            var loadedAssembly =
+                pdb.Length == 0
+                    ? AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(assembly))
+                    : AssemblyLoadContext.Default.LoadFromStream(
+                        new MemoryStream(assembly),
+                        new MemoryStream(pdb)
+                    );
             loadedAssemblies.Add(loadedAssembly);
             _loadedAssemblyCache.Add(loadedAssembly.GetName().Name + ".dll");
         }

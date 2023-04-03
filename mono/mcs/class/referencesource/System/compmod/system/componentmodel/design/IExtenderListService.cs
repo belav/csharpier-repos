@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="IExtenderListService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using System.Diagnostics;
     using System;
     using System.ComponentModel;
@@ -15,12 +16,11 @@ namespace System.ComponentModel.Design {
     /// <devdoc>
     ///    <para>Provides an interface to list extender providers.</para>
     /// </devdoc>
-    public interface IExtenderListService {
-
+    public interface IExtenderListService
+    {
         /// <devdoc>
         ///    <para>Gets the set of extender providers for the component.</para>
         /// </devdoc>
         IExtenderProvider[] GetExtenderProviders();
     }
-
 }

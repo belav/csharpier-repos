@@ -16,9 +16,11 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(TcpClientCredentialType value)
         {
-            return (value == TcpClientCredentialType.None ||
-                value == TcpClientCredentialType.Windows ||
-                value == TcpClientCredentialType.Certificate);
+            return (
+                value == TcpClientCredentialType.None
+                || value == TcpClientCredentialType.Windows
+                || value == TcpClientCredentialType.Certificate
+            );
         }
     }
 }

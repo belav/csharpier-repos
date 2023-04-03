@@ -2,6 +2,7 @@
 // Line: 6
 // Compiler options: -unsafe
 
-class X {
-	void *a;
+class X
+{
+    void* a;
 }

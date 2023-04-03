@@ -25,7 +25,9 @@ struct S1
     public S0 F2;
     public S0 F3;
     public int F4;
-    public S1(int f4): this()
+
+    public S1(int f4)
+        : this()
     {
         F4 = f4;
     }
@@ -34,7 +36,8 @@ struct S1
 public class GitHub_18522_2
 {
     static S1 s_6;
-    static S1[] s_13 = new S1[]{new S1(-1)};
+    static S1[] s_13 = new S1[] { new S1(-1) };
+
     public static int Main()
     {
         // When generating code for the x64 SysV ABI, the jit was

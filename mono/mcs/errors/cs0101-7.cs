@@ -2,4 +2,4 @@
 // Line: 5
 // Compiler options: CS0101-7-2.cs
 
-class Test {}
+class Test { }

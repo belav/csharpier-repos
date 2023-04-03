@@ -45,7 +45,12 @@ namespace System.Threading
                 case OpenExistingResult.NameNotFound:
                     throw new WaitHandleCannotBeOpenedException();
                 case OpenExistingResult.NameInvalid:
-                    throw new WaitHandleCannotBeOpenedException(SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                    throw new WaitHandleCannotBeOpenedException(
+                        SR.Format(
+                            SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                            name
+                        )
+                    );
                 case OpenExistingResult.PathNotFound:
                     throw new DirectoryNotFoundException(SR.Format(SR.IO_PathNotFound_Path, name));
 

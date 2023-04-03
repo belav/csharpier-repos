@@ -30,7 +30,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
             return ValueTaskFactory.CompletedTask;
         }
 
-        public async Task AddAdditionalFilesAsync(IReadOnlyList<string> additionalFilePaths, CancellationToken cancellationToken)
+        public async Task AddAdditionalFilesAsync(
+            IReadOnlyList<string> additionalFilePaths,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -38,7 +41,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
                 _project.AddAdditionalFile(additionalFilePath);
         }
 
-        public async Task RemoveAdditionalFilesAsync(IReadOnlyList<string> additionalFilePaths, CancellationToken cancellationToken)
+        public async Task RemoveAdditionalFilesAsync(
+            IReadOnlyList<string> additionalFilePaths,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -46,14 +52,21 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
                 _project.RemoveAdditionalFile(additionalFilePath);
         }
 
-        public async Task AddAnalyzerConfigFilesAsync(IReadOnlyList<string> analyzerConfigPaths, CancellationToken cancellationToken)
+        public async Task AddAnalyzerConfigFilesAsync(
+            IReadOnlyList<string> analyzerConfigPaths,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
             foreach (var analyzerConfigPath in analyzerConfigPaths)
                 _project.AddAnalyzerConfigFile(analyzerConfigPath);
         }
-        public async Task RemoveAnalyzerConfigFilesAsync(IReadOnlyList<string> analyzerConfigPaths, CancellationToken cancellationToken)
+
+        public async Task RemoveAnalyzerConfigFilesAsync(
+            IReadOnlyList<string> analyzerConfigPaths,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -61,7 +74,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
                 _project.RemoveAnalyzerConfigFile(analyzerConfigPath);
         }
 
-        public async Task AddAnalyzerReferencesAsync(IReadOnlyList<string> analyzerPaths, CancellationToken cancellationToken)
+        public async Task AddAnalyzerReferencesAsync(
+            IReadOnlyList<string> analyzerPaths,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -69,7 +85,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
                 _project.AddAnalyzerReference(analyzerPath);
         }
 
-        public async Task RemoveAnalyzerReferencesAsync(IReadOnlyList<string> analyzerPaths, CancellationToken cancellationToken)
+        public async Task RemoveAnalyzerReferencesAsync(
+            IReadOnlyList<string> analyzerPaths,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -77,7 +96,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
                 _project.RemoveAnalyzerReference(analyzerPath);
         }
 
-        public async Task AddMetadataReferencesAsync(IReadOnlyList<MetadataReferenceInfo> metadataReferences, CancellationToken cancellationToken)
+        public async Task AddMetadataReferencesAsync(
+            IReadOnlyList<MetadataReferenceInfo> metadataReferences,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -85,11 +107,19 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
             {
                 _project.AddMetadataReference(
                     metadataReference.FilePath,
-                    new MetadataReferenceProperties(MetadataImageKind.Assembly, default, metadataReference.EmbedInteropTypes));
+                    new MetadataReferenceProperties(
+                        MetadataImageKind.Assembly,
+                        default,
+                        metadataReference.EmbedInteropTypes
+                    )
+                );
             }
         }
 
-        public async Task RemoveMetadataReferencesAsync(IReadOnlyList<MetadataReferenceInfo> metadataReferences, CancellationToken cancellationToken)
+        public async Task RemoveMetadataReferencesAsync(
+            IReadOnlyList<MetadataReferenceInfo> metadataReferences,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -99,18 +129,23 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
                 _project.RemoveMetadataReference(metadataReference.FilePath);
         }
 
-        public async Task AddSourceFilesAsync(IReadOnlyList<SourceFileInfo> sourceFiles, CancellationToken cancellationToken)
+        public async Task AddSourceFilesAsync(
+            IReadOnlyList<SourceFileInfo> sourceFiles,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
             foreach (var sourceFile in sourceFiles)
             {
-                _project.AddSourceFile(
-                    sourceFile.FilePath,
-                    folderNames: sourceFile.FolderNames);
+                _project.AddSourceFile(sourceFile.FilePath, folderNames: sourceFile.FolderNames);
             }
         }
-        public async Task RemoveSourceFilesAsync(IReadOnlyList<string> sourceFiles, CancellationToken cancellationToken)
+
+        public async Task RemoveSourceFilesAsync(
+            IReadOnlyList<string> sourceFiles,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -118,7 +153,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
                 _project.RemoveSourceFile(sourceFile);
         }
 
-        public async Task AddDynamicFilesAsync(IReadOnlyList<string> dynamicFilePaths, CancellationToken cancellationToken)
+        public async Task AddDynamicFilesAsync(
+            IReadOnlyList<string> dynamicFilePaths,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -126,7 +164,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
                 _project.AddDynamicFile(dynamicFilePath);
         }
 
-        public async Task RemoveDynamicFilesAsync(IReadOnlyList<string> dynamicFilePaths, CancellationToken cancellationToken)
+        public async Task RemoveDynamicFilesAsync(
+            IReadOnlyList<string> dynamicFilePaths,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -134,7 +175,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
                 _project.RemoveDynamicFile(dynamicFilePath);
         }
 
-        public async Task SetBuildSystemPropertiesAsync(IReadOnlyDictionary<string, string> properties, CancellationToken cancellationToken)
+        public async Task SetBuildSystemPropertiesAsync(
+            IReadOnlyDictionary<string, string> properties,
+            CancellationToken cancellationToken
+        )
         {
             await using var batch = _project.CreateBatchScope().ConfigureAwait(false);
 
@@ -142,7 +186,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
                 _project.SetProperty(property.Key, property.Value);
         }
 
-        public Task SetCommandLineArgumentsAsync(IReadOnlyList<string> arguments, CancellationToken cancellationToken)
+        public Task SetCommandLineArgumentsAsync(
+            IReadOnlyList<string> arguments,
+            CancellationToken cancellationToken
+        )
         {
             _project.SetOptions(arguments.ToImmutableArray());
             return Task.CompletedTask;
@@ -154,7 +201,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
             return Task.CompletedTask;
         }
 
-        public Task SetProjectHasAllInformationAsync(bool hasAllInformation, CancellationToken cancellationToken)
+        public Task SetProjectHasAllInformationAsync(
+            bool hasAllInformation,
+            CancellationToken cancellationToken
+        )
         {
             _project.LastDesignTimeBuildSucceeded = hasAllInformation;
             return Task.CompletedTask;

@@ -1,7 +1,5 @@
 // CS0527: Type `X' in interface list is not an interface
 // Line: 6
-class X {
-}
+class X { }
 
-interface A : X {
-}
+interface A : X { }

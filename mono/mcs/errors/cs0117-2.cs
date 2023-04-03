@@ -4,14 +4,12 @@
 
 using System;
 
-class Data
-{
-}
+class Data { }
 
 public class Test
 {
-	static void Main ()
-	{
-		var c = new Data { Count = 10 };
-	}
+    static void Main()
+    {
+        var c = new Data { Count = 10 };
+    }
 }

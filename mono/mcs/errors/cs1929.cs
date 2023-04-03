@@ -3,12 +3,10 @@
 
 static class C
 {
-	public static void Check (this string s)
-	{
-	}
+    public static void Check(this string s) { }
 
-	static void Main ()
-	{
-		1.Check ();
-	}
+    static void Main()
+    {
+        1.Check();
+    }
 }

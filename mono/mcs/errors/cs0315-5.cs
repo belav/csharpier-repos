@@ -3,28 +3,22 @@
 
 using System;
 
-interface I
-{
-}
+interface I { }
 
-class H<T> where T : I, new()
-{
-}
+class H<T>
+    where T : I, new() { }
 
 public class A
 {
-	static void Test (Action a)
-	{
-	}
+    static void Test(Action a) { }
 
-	static void Foo<T>()
-	{
-	}
+    static void Foo<T>() { }
 
-	static void Main ()
-	{
-		Test (() => {
-			Foo<H<int>> ();
-		});
-	}
+    static void Main()
+    {
+        Test(() =>
+        {
+            Foo<H<int>>();
+        });
+    }
 }

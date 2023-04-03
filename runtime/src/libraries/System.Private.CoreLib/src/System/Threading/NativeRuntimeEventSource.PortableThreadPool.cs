@@ -18,7 +18,9 @@ namespace System.Diagnostics.Tracing
             public const EventKeywords ThreadTransferKeyword = (EventKeywords)0x80000000;
         }
 
-        private const string EventSourceSuppressMessage = "Parameters to this method are primitive and are trimmer safe";
+        private const string EventSourceSuppressMessage =
+            "Parameters to this method are primitive and are trimmer safe";
+
         // This value does not seem to be used, leaving it as zero for now. It may be useful for a scenario that may involve
         // multiple instances of the runtime within the same process, but then it seems unlikely that both instances' thread
         // pools would be in moderate use.
@@ -26,12 +28,17 @@ namespace System.Diagnostics.Tracing
 
         private static class Messages
         {
-            public const string WorkerThread = "ActiveWorkerThreadCount={0};\nRetiredWorkerThreadCount={1};\nClrInstanceID={2}";
-            public const string MinMaxThreads = "MinWorkerThreads={0};\nMaxWorkerThreads={1};\nMinIOCompletionThreads={2};\nMaxIOCompletionThreads={3};\nClrInstanceID={4}";
+            public const string WorkerThread =
+                "ActiveWorkerThreadCount={0};\nRetiredWorkerThreadCount={1};\nClrInstanceID={2}";
+            public const string MinMaxThreads =
+                "MinWorkerThreads={0};\nMaxWorkerThreads={1};\nMinIOCompletionThreads={2};\nMaxIOCompletionThreads={3};\nClrInstanceID={4}";
             public const string WorkerThreadAdjustmentSample = "Throughput={0};\nClrInstanceID={1}";
-            public const string WorkerThreadAdjustmentAdjustment = "AverageThroughput={0};\nNewWorkerThreadCount={1};\nReason={2};\nClrInstanceID={3}";
-            public const string WorkerThreadAdjustmentStats = "Duration={0};\nThroughput={1};\nThreadWave={2};\nThroughputWave={3};\nThroughputErrorEstimate={4};\nAverageThroughputErrorEstimate={5};\nThroughputRatio={6};\nConfidence={7};\nNewControlSetting={8};\nNewThreadWaveMagnitude={9};\nClrInstanceID={10}";
-            public const string IOEnqueue = "NativeOverlapped={0};\nOverlapped={1};\nMultiDequeues={2};\nClrInstanceID={3}";
+            public const string WorkerThreadAdjustmentAdjustment =
+                "AverageThroughput={0};\nNewWorkerThreadCount={1};\nReason={2};\nClrInstanceID={3}";
+            public const string WorkerThreadAdjustmentStats =
+                "Duration={0};\nThroughput={1};\nThreadWave={2};\nThroughputWave={3};\nThroughputErrorEstimate={4};\nAverageThroughputErrorEstimate={5};\nThroughputRatio={6};\nConfidence={7};\nNewControlSetting={8};\nNewThreadWaveMagnitude={9};\nClrInstanceID={10}";
+            public const string IOEnqueue =
+                "NativeOverlapped={0};\nOverlapped={1};\nMultiDequeues={2};\nClrInstanceID={3}";
             public const string IO = "NativeOverlapped={0};\nOverlapped={1};\nClrInstanceID={2}";
             public const string WorkingThreadCount = "Count={0};\nClrInstanceID={1}";
         }
@@ -70,8 +77,11 @@ namespace System.Diagnostics.Tracing
             CooperativeBlocking,
         }
 
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
         [NonEvent]
         private unsafe void WriteThreadEvent(int eventId, uint numExistingThreads)
         {
@@ -92,11 +102,20 @@ namespace System.Diagnostics.Tracing
         }
 
 #pragma warning disable IDE0060
-        [Event(50, Level = EventLevel.Informational, Message = Messages.WorkerThread, Task = Tasks.ThreadPoolWorkerThread, Opcode = EventOpcode.Start, Version = 0, Keywords = Keywords.ThreadingKeyword)]
+        [Event(
+            50,
+            Level = EventLevel.Informational,
+            Message = Messages.WorkerThread,
+            Task = Tasks.ThreadPoolWorkerThread,
+            Opcode = EventOpcode.Start,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword
+        )]
         public unsafe void ThreadPoolWorkerThreadStart(
             uint ActiveWorkerThreadCount,
             uint RetiredWorkerThreadCount = 0,
-            ushort ClrInstanceID = DefaultClrInstanceId)
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             if (IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
@@ -104,11 +123,20 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-        [Event(51, Level = EventLevel.Informational, Message = Messages.WorkerThread, Task = Tasks.ThreadPoolWorkerThread, Opcode = EventOpcode.Stop, Version = 0, Keywords = Keywords.ThreadingKeyword)]
+        [Event(
+            51,
+            Level = EventLevel.Informational,
+            Message = Messages.WorkerThread,
+            Task = Tasks.ThreadPoolWorkerThread,
+            Opcode = EventOpcode.Stop,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword
+        )]
         public void ThreadPoolWorkerThreadStop(
             uint ActiveWorkerThreadCount,
             uint RetiredWorkerThreadCount = 0,
-            ushort ClrInstanceID = DefaultClrInstanceId)
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             if (IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
@@ -116,12 +144,21 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-        [Event(57, Level = EventLevel.Informational, Message = Messages.WorkerThread, Task = Tasks.ThreadPoolWorkerThread, Opcode = Opcodes.Wait, Version = 0, Keywords = Keywords.ThreadingKeyword)]
+        [Event(
+            57,
+            Level = EventLevel.Informational,
+            Message = Messages.WorkerThread,
+            Task = Tasks.ThreadPoolWorkerThread,
+            Opcode = Opcodes.Wait,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword
+        )]
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void ThreadPoolWorkerThreadWait(
             uint ActiveWorkerThreadCount,
             uint RetiredWorkerThreadCount = 0,
-            ushort ClrInstanceID = DefaultClrInstanceId)
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             if (IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
@@ -130,12 +167,24 @@ namespace System.Diagnostics.Tracing
         }
 #pragma warning restore IDE0060
 
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(54, Level = EventLevel.Informational, Message = Messages.WorkerThreadAdjustmentSample, Task = Tasks.ThreadPoolWorkerThreadAdjustment, Opcode = Opcodes.Sample, Version = 0, Keywords = Keywords.ThreadingKeyword)]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            54,
+            Level = EventLevel.Informational,
+            Message = Messages.WorkerThreadAdjustmentSample,
+            Task = Tasks.ThreadPoolWorkerThreadAdjustment,
+            Opcode = Opcodes.Sample,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword
+        )]
         public unsafe void ThreadPoolWorkerThreadAdjustmentSample(
             double Throughput,
-            ushort ClrInstanceID = DefaultClrInstanceId)
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             if (!IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
@@ -151,14 +200,26 @@ namespace System.Diagnostics.Tracing
             WriteEventCore(54, 2, data);
         }
 
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(55, Level = EventLevel.Informational, Message = Messages.WorkerThreadAdjustmentAdjustment, Task = Tasks.ThreadPoolWorkerThreadAdjustment, Opcode = Opcodes.Adjustment, Version = 0, Keywords = Keywords.ThreadingKeyword)]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            55,
+            Level = EventLevel.Informational,
+            Message = Messages.WorkerThreadAdjustmentAdjustment,
+            Task = Tasks.ThreadPoolWorkerThreadAdjustment,
+            Opcode = Opcodes.Adjustment,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword
+        )]
         public unsafe void ThreadPoolWorkerThreadAdjustmentAdjustment(
             double AverageThroughput,
             uint NewWorkerThreadCount,
             ThreadAdjustmentReasonMap Reason,
-            ushort ClrInstanceID = DefaultClrInstanceId)
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             if (!IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
@@ -180,9 +241,20 @@ namespace System.Diagnostics.Tracing
             WriteEventCore(55, 4, data);
         }
 
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(56, Level = EventLevel.Verbose, Message = Messages.WorkerThreadAdjustmentStats, Task = Tasks.ThreadPoolWorkerThreadAdjustment, Opcode = Opcodes.Stats, Version = 0, Keywords = Keywords.ThreadingKeyword)]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            56,
+            Level = EventLevel.Verbose,
+            Message = Messages.WorkerThreadAdjustmentStats,
+            Task = Tasks.ThreadPoolWorkerThreadAdjustment,
+            Opcode = Opcodes.Stats,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword
+        )]
         public unsafe void ThreadPoolWorkerThreadAdjustmentStats(
             double Duration,
             double Throughput,
@@ -194,7 +266,8 @@ namespace System.Diagnostics.Tracing
             double Confidence,
             double NewControlSetting,
             ushort NewThreadWaveMagnitude,
-            ushort ClrInstanceID = DefaultClrInstanceId)
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             if (!IsEnabled(EventLevel.Verbose, Keywords.ThreadingKeyword))
             {
@@ -237,14 +310,26 @@ namespace System.Diagnostics.Tracing
             WriteEventCore(56, 11, data);
         }
 
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(63, Level = EventLevel.Verbose, Message = Messages.IOEnqueue, Task = Tasks.ThreadPool, Opcode = Opcodes.IOEnqueue, Version = 0, Keywords = Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword)]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            63,
+            Level = EventLevel.Verbose,
+            Message = Messages.IOEnqueue,
+            Task = Tasks.ThreadPool,
+            Opcode = Opcodes.IOEnqueue,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword
+        )]
         private unsafe void ThreadPoolIOEnqueue(
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
             bool MultiDequeues,
-            ushort ClrInstanceID = DefaultClrInstanceId)
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             int multiDequeuesInt = Convert.ToInt32(MultiDequeues); // bool maps to "win:Boolean", a 4-byte boolean
             EventData* data = stackalloc EventData[4];
@@ -267,12 +352,18 @@ namespace System.Diagnostics.Tracing
         [MethodImpl(MethodImplOptions.NoInlining)]
         public unsafe void ThreadPoolIOEnqueue(NativeOverlapped* nativeOverlapped)
         {
-            if (IsEnabled(EventLevel.Verbose, Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword))
+            if (
+                IsEnabled(
+                    EventLevel.Verbose,
+                    Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword
+                )
+            )
             {
                 ThreadPoolIOEnqueue(
                     (IntPtr)nativeOverlapped,
                     (IntPtr)Overlapped.GetOverlappedFromNative(nativeOverlapped).GetHashCode(),
-                    false);
+                    false
+                );
             }
         }
 
@@ -282,19 +373,40 @@ namespace System.Diagnostics.Tracing
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void ThreadPoolIOEnqueue(RegisteredWaitHandle registeredWaitHandle)
         {
-            if (IsEnabled(EventLevel.Verbose, Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword))
+            if (
+                IsEnabled(
+                    EventLevel.Verbose,
+                    Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword
+                )
+            )
             {
-                ThreadPoolIOEnqueue((IntPtr)registeredWaitHandle.GetHashCode(), IntPtr.Zero, registeredWaitHandle.Repeating);
+                ThreadPoolIOEnqueue(
+                    (IntPtr)registeredWaitHandle.GetHashCode(),
+                    IntPtr.Zero,
+                    registeredWaitHandle.Repeating
+                );
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(64, Level = EventLevel.Verbose, Message = Messages.IO, Task = Tasks.ThreadPool, Opcode = Opcodes.IODequeue, Version = 0, Keywords = Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword)]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            64,
+            Level = EventLevel.Verbose,
+            Message = Messages.IO,
+            Task = Tasks.ThreadPool,
+            Opcode = Opcodes.IODequeue,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword
+        )]
         private unsafe void ThreadPoolIODequeue(
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
-            ushort ClrInstanceID = DefaultClrInstanceId)
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             EventData* data = stackalloc EventData[3];
             data[0].DataPointer = (IntPtr)(&NativeOverlapped);
@@ -313,11 +425,17 @@ namespace System.Diagnostics.Tracing
         [MethodImpl(MethodImplOptions.NoInlining)]
         public unsafe void ThreadPoolIODequeue(NativeOverlapped* nativeOverlapped)
         {
-            if (IsEnabled(EventLevel.Verbose, Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword))
+            if (
+                IsEnabled(
+                    EventLevel.Verbose,
+                    Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword
+                )
+            )
             {
                 ThreadPoolIODequeue(
                     (IntPtr)nativeOverlapped,
-                    (IntPtr)Overlapped.GetOverlappedFromNative(nativeOverlapped).GetHashCode());
+                    (IntPtr)Overlapped.GetOverlappedFromNative(nativeOverlapped).GetHashCode()
+                );
             }
         }
 
@@ -327,16 +445,35 @@ namespace System.Diagnostics.Tracing
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void ThreadPoolIODequeue(RegisteredWaitHandle registeredWaitHandle)
         {
-            if (IsEnabled(EventLevel.Verbose, Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword))
+            if (
+                IsEnabled(
+                    EventLevel.Verbose,
+                    Keywords.ThreadingKeyword | Keywords.ThreadTransferKeyword
+                )
+            )
             {
                 ThreadPoolIODequeue((IntPtr)registeredWaitHandle.GetHashCode(), IntPtr.Zero);
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(60, Level = EventLevel.Verbose, Message = Messages.WorkingThreadCount, Task = Tasks.ThreadPoolWorkingThreadCount, Opcode = EventOpcode.Start, Version = 0, Keywords = Keywords.ThreadingKeyword)]
-        public unsafe void ThreadPoolWorkingThreadCount(uint Count, ushort ClrInstanceID = DefaultClrInstanceId)
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            60,
+            Level = EventLevel.Verbose,
+            Message = Messages.WorkingThreadCount,
+            Task = Tasks.ThreadPoolWorkingThreadCount,
+            Opcode = EventOpcode.Start,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword
+        )]
+        public unsafe void ThreadPoolWorkingThreadCount(
+            uint Count,
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             if (!IsEnabled(EventLevel.Verbose, Keywords.ThreadingKeyword))
             {
@@ -360,41 +497,65 @@ namespace System.Diagnostics.Tracing
             {
                 ThreadPoolIOPack(
                     (IntPtr)nativeOverlapped,
-                    (IntPtr)Overlapped.GetOverlappedFromNative(nativeOverlapped).GetHashCode());
+                    (IntPtr)Overlapped.GetOverlappedFromNative(nativeOverlapped).GetHashCode()
+                );
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(65, Level = EventLevel.Verbose, Message = Messages.IO, Task = Tasks.ThreadPool, Opcode = Opcodes.IOPack, Version = 0, Keywords = Keywords.ThreadingKeyword)]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            65,
+            Level = EventLevel.Verbose,
+            Message = Messages.IO,
+            Task = Tasks.ThreadPool,
+            Opcode = Opcodes.IOPack,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword
+        )]
         private unsafe void ThreadPoolIOPack(
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
-            ushort ClrInstanceID = DefaultClrInstanceId)
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             EventData* data = stackalloc EventData[3];
             data[0].DataPointer = NativeOverlapped;
-            data[0].Size        = sizeof(IntPtr);
-            data[0].Reserved    = 0;
+            data[0].Size = sizeof(IntPtr);
+            data[0].Reserved = 0;
             data[1].DataPointer = Overlapped;
-            data[1].Size        = sizeof(IntPtr);
-            data[1].Reserved    = 0;
+            data[1].Size = sizeof(IntPtr);
+            data[1].Reserved = 0;
             data[2].DataPointer = (IntPtr)(&ClrInstanceID);
-            data[2].Size        = sizeof(ushort);
-            data[2].Reserved    = 0;
+            data[2].Size = sizeof(ushort);
+            data[2].Reserved = 0;
             WriteEventCore(65, 3, data);
         }
 
-
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
-        [Event(59, Level = EventLevel.Informational, Message = Messages.MinMaxThreads, Task = Tasks.ThreadPoolMinMaxThreads, Opcode = EventOpcode.Info, Version = 0, Keywords = Keywords.ThreadingKeyword)]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
+        [Event(
+            59,
+            Level = EventLevel.Informational,
+            Message = Messages.MinMaxThreads,
+            Task = Tasks.ThreadPoolMinMaxThreads,
+            Opcode = EventOpcode.Info,
+            Version = 0,
+            Keywords = Keywords.ThreadingKeyword
+        )]
         public unsafe void ThreadPoolMinMaxThreads(
             ushort MinWorkerThreads,
             ushort MaxWorkerThreads,
             ushort MinIOCompletionThreads,
             ushort MaxIOCompletionThreads,
-            ushort ClrInstanceID = DefaultClrInstanceId)
+            ushort ClrInstanceID = DefaultClrInstanceId
+        )
         {
             if (!IsEnabled(EventLevel.Informational, Keywords.ThreadingKeyword))
             {
@@ -418,6 +579,5 @@ namespace System.Diagnostics.Tracing
             data[4].Reserved = 0;
             WriteEventCore(59, 5, data);
         }
-
     }
 }

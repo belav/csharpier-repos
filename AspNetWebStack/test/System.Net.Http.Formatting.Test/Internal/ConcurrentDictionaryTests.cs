@@ -18,7 +18,7 @@ namespace System.Collections.Concurrent
         {
             // Arrange
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
-            
+
             // Act & Assert
             Assert.False(dictionary.IsReadOnly);
         }
@@ -41,7 +41,7 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act
-            dictionary.TryAdd(1, 2);            
+            dictionary.TryAdd(1, 2);
 
             // Assert
             Assert.True(dictionary.ContainsKey(1));
@@ -54,7 +54,13 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act
-            int returnedValue = dictionary.GetOrAdd(1, (key) => { return ++key; });
+            int returnedValue = dictionary.GetOrAdd(
+                1,
+                (key) =>
+                {
+                    return ++key;
+                }
+            );
 
             // Assert
             Assert.Equal(2, returnedValue);
@@ -68,7 +74,13 @@ namespace System.Collections.Concurrent
             dictionary.TryAdd(1, -1);
 
             // Act
-            int returnedValue = dictionary.GetOrAdd(1, (key) => { return ++key; });
+            int returnedValue = dictionary.GetOrAdd(
+                1,
+                (key) =>
+                {
+                    return ++key;
+                }
+            );
 
             // Assert
             Assert.Equal(-1, returnedValue);
@@ -109,11 +121,27 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act
-            int result = dictionary.AddOrUpdate(1, 2, (key, current) => { return ++current; });
+            int result = dictionary.AddOrUpdate(
+                1,
+                2,
+                (key, current) =>
+                {
+                    return ++current;
+                }
+            );
 
             // Assert
             Assert.Equal(2, result);
-            Assert.Equal(2, dictionary.GetOrAdd(1, (key) => { return -1; }));
+            Assert.Equal(
+                2,
+                dictionary.GetOrAdd(
+                    1,
+                    (key) =>
+                    {
+                        return -1;
+                    }
+                )
+            );
         }
 
         [Fact]
@@ -124,7 +152,14 @@ namespace System.Collections.Concurrent
             dictionary.TryAdd(1, 2);
 
             // Act
-            int result = dictionary.AddOrUpdate(1, 2, (key, current) => { return ++current; });
+            int result = dictionary.AddOrUpdate(
+                1,
+                2,
+                (key, current) =>
+                {
+                    return ++current;
+                }
+            );
 
             // Assert
             Assert.Equal(3, result);
@@ -148,7 +183,9 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act/Assert
-            Assert.Throws<NotImplementedException>(() => dictionary.Add(new KeyValuePair<int, int>(0, 0)));
+            Assert.Throws<NotImplementedException>(
+                () => dictionary.Add(new KeyValuePair<int, int>(0, 0))
+            );
         }
 
         [Fact]
@@ -168,7 +205,9 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act/Assert
-            Assert.Throws<NotImplementedException>(() => dictionary.Contains(new KeyValuePair<int, int>(0, 0)));
+            Assert.Throws<NotImplementedException>(
+                () => dictionary.Contains(new KeyValuePair<int, int>(0, 0))
+            );
         }
 
         [Fact]
@@ -178,7 +217,9 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act/Assert
-            Assert.Throws<NotImplementedException>(() => dictionary.CopyTo(new KeyValuePair<int, int>[1], 1));
+            Assert.Throws<NotImplementedException>(
+                () => dictionary.CopyTo(new KeyValuePair<int, int>[1], 1)
+            );
         }
 
         [Fact]
@@ -208,7 +249,9 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act/Assert
-            Assert.Throws<NotImplementedException>(() => dictionary.Remove(new KeyValuePair<int, int>(0, 0)));
+            Assert.Throws<NotImplementedException>(
+                () => dictionary.Remove(new KeyValuePair<int, int>(0, 0))
+            );
         }
 
         [Fact]
@@ -218,7 +261,9 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act/Assert
-            Assert.Throws<NotImplementedException>(() => ((System.Collections.IEnumerable)dictionary).GetEnumerator());
+            Assert.Throws<NotImplementedException>(
+                () => ((System.Collections.IEnumerable)dictionary).GetEnumerator()
+            );
         }
 
         [Fact]
@@ -259,7 +304,7 @@ namespace System.Collections.Concurrent
             // Arrange
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
             dictionary.TryAdd(1, -1);
-            
+
             // Act
             int returnedValue;
             bool tryResult = dictionary.TryGetValue(1, out returnedValue);

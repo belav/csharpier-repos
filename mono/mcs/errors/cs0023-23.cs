@@ -5,8 +5,8 @@ using System;
 
 class C
 {
-	static void Main ()
-	{
-		var v = Console.WriteLine ()?[0];
-	}
+    static void Main()
+    {
+        var v = Console.WriteLine()?[0];
+    }
 }

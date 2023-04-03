@@ -23,8 +23,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private readonly bool _supportsGoToDefinition;
         private readonly bool _supportsFindAllReferences;
 
-        protected SymbolListItem(ProjectId projectId, ISymbol symbol, string displayText, string fullNameText, string searchText, bool isHidden)
-            : base(projectId, symbol.GetGlyph().GetStandardGlyphGroup(), symbol.GetGlyph().GetStandardGlyphItem(), isHidden)
+        protected SymbolListItem(
+            ProjectId projectId,
+            ISymbol symbol,
+            string displayText,
+            string fullNameText,
+            string searchText,
+            bool isHidden
+        )
+            : base(
+                projectId,
+                symbol.GetGlyph().GetStandardGlyphGroup(),
+                symbol.GetGlyph().GetStandardGlyphItem(),
+                isHidden
+            )
         {
             _symbolKey = symbol.GetSymbolKey();
             _accessibility = symbol.DeclaredAccessibility;
@@ -32,9 +44,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             _fullNameText = fullNameText;
             _searchText = searchText;
 
-            _supportsGoToDefinition = symbol.Kind != SymbolKind.Namespace
-                ? symbol.Locations.Any(l => l.IsInSource)
-                : false;
+            _supportsGoToDefinition =
+                symbol.Kind != SymbolKind.Namespace
+                    ? symbol.Locations.Any(l => l.IsInSource)
+                    : false;
 
             _supportsFindAllReferences = symbol.Kind != SymbolKind.Namespace;
         }
@@ -69,7 +82,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             get { return _supportsFindAllReferences; }
         }
 
-        public ISymbol ResolveSymbol(Compilation compilation)
-            => _symbolKey.Resolve(compilation, ignoreAssemblyKey: false).Symbol;
+        public ISymbol ResolveSymbol(Compilation compilation) =>
+            _symbolKey.Resolve(compilation, ignoreAssemblyKey: false).Symbol;
     }
 }

@@ -3,19 +3,23 @@
 // this is bug #70402
 
 using System;
- 
-class T {
- 
-        enum A { a, b }
- 
-        static void Convert (out A a)
-        {
-                a = A.a;
-        }
- 
-        static void Main ()
-        {
-                int a = 0;
-                Convert (out (A) a);
-        }
+
+class T
+{
+    enum A
+    {
+        a,
+        b
+    }
+
+    static void Convert(out A a)
+    {
+        a = A.a;
+    }
+
+    static void Main()
+    {
+        int a = 0;
+        Convert(out (A)a);
+    }
 }

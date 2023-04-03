@@ -3,7 +3,6 @@
 
 namespace DefaultNamespace
 {
-
     using System.Threading;
     using System.Runtime.InteropServices;
     using System;
@@ -18,7 +17,6 @@ namespace DefaultNamespace
             throw ee;
         }
     }
-
 
     public class ExternalException : Exception
     {
@@ -61,12 +59,16 @@ namespace DefaultNamespace
                 {
                     if (Thread.CurrentThread.Name.Equals("0"))
                     {
-                        Console.WriteLine("THREAD " + Thread.CurrentThread.Name + " COUNTER = " + j);
+                        Console.WriteLine(
+                            "THREAD " + Thread.CurrentThread.Name + " COUNTER = " + j
+                        );
                         counter = j / (j - counter);
                     }
                     else
                     {
-                        Console.WriteLine("Thread " + Thread.CurrentThread.Name + " counter = " + j);
+                        Console.WriteLine(
+                            "Thread " + Thread.CurrentThread.Name + " counter = " + j
+                        );
                         counter = j / (j - j);
                     }
                 }
@@ -117,11 +119,23 @@ namespace DefaultNamespace
             {
                 if (Thread.CurrentThread.Name.Equals("0"))
                 {
-                    Console.WriteLine("THREAD " + Thread.CurrentThread.Name + " COUNTER = " + i + " : THROWING EXTERNAL EX");
+                    Console.WriteLine(
+                        "THREAD "
+                            + Thread.CurrentThread.Name
+                            + " COUNTER = "
+                            + i
+                            + " : THROWING EXTERNAL EX"
+                    );
                 }
                 else
                 {
-                    Console.WriteLine("Thread " + Thread.CurrentThread.Name + " counter = " + i + " : Throwing external ex ");
+                    Console.WriteLine(
+                        "Thread "
+                            + Thread.CurrentThread.Name
+                            + " counter = "
+                            + i
+                            + " : Throwing external ex "
+                    );
                 }
                 (new ExternalClass()).ThrowException();
             }

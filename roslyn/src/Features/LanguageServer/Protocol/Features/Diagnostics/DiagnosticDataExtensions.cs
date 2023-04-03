@@ -13,14 +13,20 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Features.Diagnostics;
+
 internal static class DiagnosticDataExtensions
 {
-    internal static bool TryGetUnnecessaryDataLocations(this DiagnosticData diagnosticData, [NotNullWhen(true)] out ImmutableArray<DiagnosticDataLocation>? unnecessaryLocations)
+    internal static bool TryGetUnnecessaryDataLocations(
+        this DiagnosticData diagnosticData,
+        [NotNullWhen(true)] out ImmutableArray<DiagnosticDataLocation>? unnecessaryLocations
+    )
     {
         // If there are 'unnecessary' locations specified in the property bag, use those instead of the main diagnostic location.
         if (diagnosticData.TryGetUnnecessaryLocationIndices(out var unnecessaryIndices))
         {
-            using var _ = PooledObjects.ArrayBuilder<DiagnosticDataLocation>.GetInstance(out var locationsToTag);
+            using var _ = PooledObjects.ArrayBuilder<DiagnosticDataLocation>.GetInstance(
+                out var locationsToTag
+            );
 
             foreach (var index in GetLocationIndices(unnecessaryIndices))
                 locationsToTag.Add(diagnosticData.AdditionalLocations[index]);
@@ -49,13 +55,18 @@ internal static class DiagnosticDataExtensions
     }
 
     internal static bool TryGetUnnecessaryLocationIndices(
-            this DiagnosticData diagnosticData, [NotNullWhen(true)] out string? unnecessaryIndices)
+        this DiagnosticData diagnosticData,
+        [NotNullWhen(true)] out string? unnecessaryIndices
+    )
     {
         unnecessaryIndices = null;
 
         return diagnosticData.AdditionalLocations.Length > 0
             && diagnosticData.Properties != null
-            && diagnosticData.Properties.TryGetValue(WellKnownDiagnosticTags.Unnecessary, out unnecessaryIndices)
+            && diagnosticData.Properties.TryGetValue(
+                WellKnownDiagnosticTags.Unnecessary,
+                out unnecessaryIndices
+            )
             && unnecessaryIndices != null;
     }
 }

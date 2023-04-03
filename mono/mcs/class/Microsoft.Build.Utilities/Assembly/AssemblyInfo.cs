@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,22 +38,21 @@ using System.Runtime.InteropServices;
 
 // General Information about the Microsoft.Build.Utilities assembly
 
-[assembly: AssemblyTitle ("Microsoft.Build.Utilities.dll")]
-[assembly: AssemblyDescription ("Microsoft.Build.Utilities.dll")]
-[assembly: AssemblyDefaultAlias ("Microsoft.Build.Utilities.dll")]
+[assembly: AssemblyTitle("Microsoft.Build.Utilities.dll")]
+[assembly: AssemblyDescription("Microsoft.Build.Utilities.dll")]
+[assembly: AssemblyDefaultAlias("Microsoft.Build.Utilities.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (XBuildConsts.AssemblyVersion)]
-[assembly: SatelliteContractVersion (XBuildConsts.AssemblyVersion)]
-[assembly: AssemblyInformationalVersion (XBuildConsts.FileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(XBuildConsts.AssemblyVersion)]
+[assembly: SatelliteContractVersion(XBuildConsts.AssemblyVersion)]
+[assembly: AssemblyInformationalVersion(XBuildConsts.FileVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: ComVisible (false)]
-[assembly: CLSCompliant (true)]
-[assembly: AssemblyDelaySign (true)]
+[assembly: ComVisible(false)]
+[assembly: CLSCompliant(true)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: AssemblyFileVersion (XBuildConsts.FileVersion)]
-
+[assembly: AssemblyFileVersion(XBuildConsts.FileVersion)]

@@ -24,7 +24,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             private readonly WeakReference<AssemblyMetadata> _weakValue;
             private readonly ImmutableArray<TemporaryStorageService.TemporaryStreamStorage> _storages;
 
-            public RecoverableMetadataValueSource(AssemblyMetadata value, ImmutableArray<TemporaryStorageService.TemporaryStreamStorage> storages)
+            public RecoverableMetadataValueSource(
+                AssemblyMetadata value,
+                ImmutableArray<TemporaryStorageService.TemporaryStreamStorage> storages
+            )
             {
                 Contract.ThrowIfFalse(storages.Length > 0);
 
@@ -44,8 +47,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return false;
             }
 
-            public override Task<AssemblyMetadata> GetValueAsync(CancellationToken cancellationToken)
-                => Task.FromResult(GetValue(cancellationToken));
+            public override Task<AssemblyMetadata> GetValueAsync(
+                CancellationToken cancellationToken
+            ) => Task.FromResult(GetValue(cancellationToken));
 
             public override AssemblyMetadata GetValue(CancellationToken cancellationToken)
             {
@@ -59,7 +63,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             private AssemblyMetadata RecoverMetadata()
             {
-                using var _ = ArrayBuilder<ModuleMetadata>.GetInstance(_storages.Length, out var moduleBuilder);
+                using var _ = ArrayBuilder<ModuleMetadata>.GetInstance(
+                    _storages.Length,
+                    out var moduleBuilder
+                );
 
                 foreach (var storage in _storages)
                     moduleBuilder.Add(GetModuleMetadata(storage));
@@ -71,13 +78,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             private static ModuleMetadata GetModuleMetadata(
-                TemporaryStorageService.TemporaryStreamStorage storage)
+                TemporaryStorageService.TemporaryStreamStorage storage
+            )
             {
                 // For an unmanaged memory stream, ModuleMetadata can take ownership directly.
                 var stream = storage.ReadStream(CancellationToken.None);
                 unsafe
                 {
-                    return ModuleMetadata.CreateFromMetadata((IntPtr)stream.PositionPointer, (int)stream.Length, stream.Dispose);
+                    return ModuleMetadata.CreateFromMetadata(
+                        (IntPtr)stream.PositionPointer,
+                        (int)stream.Length,
+                        stream.Dispose
+                    );
                 }
             }
         }

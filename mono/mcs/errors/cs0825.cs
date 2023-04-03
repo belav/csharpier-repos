@@ -4,6 +4,5 @@
 
 public class Test
 {
-	var v = "a";
+    var v = "a";
 }
-

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,72 +54,85 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public partial class StandardBindingReliableSessionElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty inactivity_timeout;
-		static ConfigurationProperty ordered;
+    [MonoTODO]
+    public partial class StandardBindingReliableSessionElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty inactivity_timeout;
+        static ConfigurationProperty ordered;
 
-		internal static ConfigurationPropertyCollection CreateBaseProperties () {
-			ConfigurationPropertyCollection baseProperties = new ConfigurationPropertyCollection ();
-			foreach (ConfigurationProperty prop in properties)
-				baseProperties.Add (prop);
-			return baseProperties;
-		}
+        internal static ConfigurationPropertyCollection CreateBaseProperties()
+        {
+            ConfigurationPropertyCollection baseProperties = new ConfigurationPropertyCollection();
+            foreach (ConfigurationProperty prop in properties)
+                baseProperties.Add(prop);
+            return baseProperties;
+        }
 
-		static StandardBindingReliableSessionElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			inactivity_timeout = new ConfigurationProperty ("inactivityTimeout",
-				typeof (TimeSpan), "00:10:00", new TimeSpanConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static StandardBindingReliableSessionElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            inactivity_timeout = new ConfigurationProperty(
+                "inactivityTimeout",
+                typeof(TimeSpan),
+                "00:10:00",
+                new TimeSpanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			ordered = new ConfigurationProperty ("ordered",
-				typeof (bool), "true", new BooleanConverter (), null,
-				ConfigurationPropertyOptions.None);
+            ordered = new ConfigurationProperty(
+                "ordered",
+                typeof(bool),
+                "true",
+                new BooleanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (inactivity_timeout);
-			properties.Add (ordered);
-		}
+            properties.Add(inactivity_timeout);
+            properties.Add(ordered);
+        }
 
-		public StandardBindingReliableSessionElement ()
-		{
-		}
+        public StandardBindingReliableSessionElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "inactivityTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:10:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan InactivityTimeout
+        {
+            get { return (TimeSpan)base[inactivity_timeout]; }
+            set { base[inactivity_timeout] = value; }
+        }
 
-		[ConfigurationProperty ("inactivityTimeout",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "00:10:00")]
-		[TypeConverter (typeof (TimeSpanConverter))]
-		public TimeSpan InactivityTimeout {
-			get { return (TimeSpan) base [inactivity_timeout]; }
-			set { base [inactivity_timeout] = value; }
-		}
+        [ConfigurationProperty(
+            "ordered",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = true
+        )]
+        public bool Ordered
+        {
+            get { return (bool)base[ordered]; }
+            set { base[ordered] = value; }
+        }
 
-		[ConfigurationProperty ("ordered",
-			 Options = ConfigurationPropertyOptions.None,
-			DefaultValue = true)]
-		public bool Ordered {
-			get { return (bool) base [ordered]; }
-			set { base [ordered] = value; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        // Methods
 
-		// Methods
-
-		public void ApplyConfiguration (ReliableSession reliableSession)
-		{
-			reliableSession.InactivityTimeout = InactivityTimeout;
-			reliableSession.Ordered = Ordered;
-		}
-	}
-
+        public void ApplyConfiguration(ReliableSession reliableSession)
+        {
+            reliableSession.InactivityTimeout = InactivityTimeout;
+            reliableSession.Ordered = Ordered;
+        }
+    }
 }

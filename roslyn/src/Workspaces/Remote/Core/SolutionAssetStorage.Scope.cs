@@ -36,21 +36,24 @@ internal partial class SolutionAssetStorage
         public Scope(
             SolutionAssetStorage storage,
             Checksum solutionChecksum,
-            SolutionState solution)
+            SolutionState solution
+        )
         {
             _storage = storage;
             SolutionChecksum = solutionChecksum;
             Solution = solution;
         }
 
-        public void Dispose()
-            => _storage.DecreaseScopeRefCount(this);
+        public void Dispose() => _storage.DecreaseScopeRefCount(this);
 
         /// <summary>
         /// Retrieve asset of a specified <paramref name="checksum"/> available within <see langword="this"/> from
         /// the storage.
         /// </summary>
-        public async ValueTask<SolutionAsset?> GetAssetAsync(Checksum checksum, CancellationToken cancellationToken)
+        public async ValueTask<SolutionAsset?> GetAssetAsync(
+            Checksum checksum,
+            CancellationToken cancellationToken
+        )
         {
             if (checksum == Checksum.Null)
             {
@@ -58,7 +61,8 @@ internal partial class SolutionAssetStorage
                 return SolutionAsset.Null;
             }
 
-            var remotableData = await FindAssetAsync(checksum, cancellationToken).ConfigureAwait(false);
+            var remotableData = await FindAssetAsync(checksum, cancellationToken)
+                .ConfigureAwait(false);
             if (remotableData != null)
             {
                 return remotableData;
@@ -79,7 +83,9 @@ internal partial class SolutionAssetStorage
         /// the storage.
         /// </summary>
         public async ValueTask<IReadOnlyDictionary<Checksum, SolutionAsset>> GetAssetsAsync(
-            IEnumerable<Checksum> checksums, CancellationToken cancellationToken)
+            IEnumerable<Checksum> checksums,
+            CancellationToken cancellationToken
+        )
         {
             using var checksumsToFind = Creator.CreateChecksumSet(checksums);
 
@@ -91,7 +97,8 @@ internal partial class SolutionAssetStorage
                 result[Checksum.Null] = SolutionAsset.Null;
             }
 
-            await FindAssetsAsync(checksumsToFind.Object, result, cancellationToken).ConfigureAwait(false);
+            await FindAssetsAsync(checksumsToFind.Object, result, cancellationToken)
+                .ConfigureAwait(false);
             if (result.Count == numberOfChecksumsToSearch)
             {
                 // no checksum left to find
@@ -112,12 +119,18 @@ internal partial class SolutionAssetStorage
         /// <summary>
         /// Find an asset of the specified <paramref name="checksum"/> within <see langword="this"/>.
         /// </summary>
-        private async ValueTask<SolutionAsset?> FindAssetAsync(Checksum checksum, CancellationToken cancellationToken)
+        private async ValueTask<SolutionAsset?> FindAssetAsync(
+            Checksum checksum,
+            CancellationToken cancellationToken
+        )
         {
-            using var checksumPool = Creator.CreateChecksumSet(SpecializedCollections.SingletonEnumerable(checksum));
+            using var checksumPool = Creator.CreateChecksumSet(
+                SpecializedCollections.SingletonEnumerable(checksum)
+            );
             using var resultPool = Creator.CreateResultSet();
 
-            await FindAssetsAsync(checksumPool.Object, resultPool.Object, cancellationToken).ConfigureAwait(false);
+            await FindAssetsAsync(checksumPool.Object, resultPool.Object, cancellationToken)
+                .ConfigureAwait(false);
 
             if (resultPool.Object.Count == 1)
             {
@@ -135,11 +148,16 @@ internal partial class SolutionAssetStorage
         /// langword="this"/>. Once an asset of given checksum is found the corresponding asset is placed to
         /// <paramref name="result"/> and the checksum is removed from <paramref name="remainingChecksumsToFind"/>.
         /// </summary>
-        private async Task FindAssetsAsync(HashSet<Checksum> remainingChecksumsToFind, Dictionary<Checksum, SolutionAsset> result, CancellationToken cancellationToken)
+        private async Task FindAssetsAsync(
+            HashSet<Checksum> remainingChecksumsToFind,
+            Dictionary<Checksum, SolutionAsset> result,
+            CancellationToken cancellationToken
+        )
         {
             using var resultPool = Creator.CreateResultSet();
 
-            await FindAssetsAsync(remainingChecksumsToFind, resultPool.Object, cancellationToken).ConfigureAwait(false);
+            await FindAssetsAsync(remainingChecksumsToFind, resultPool.Object, cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var (checksum, value) in resultPool.Object)
             {
@@ -147,11 +165,17 @@ internal partial class SolutionAssetStorage
             }
         }
 
-        private async Task FindAssetsAsync(HashSet<Checksum> remainingChecksumsToFind, Dictionary<Checksum, object> result, CancellationToken cancellationToken)
+        private async Task FindAssetsAsync(
+            HashSet<Checksum> remainingChecksumsToFind,
+            Dictionary<Checksum, object> result,
+            CancellationToken cancellationToken
+        )
         {
             var solutionState = this.Solution;
             if (solutionState.TryGetStateChecksums(out var stateChecksums))
-                await stateChecksums.FindAsync(solutionState, remainingChecksumsToFind, result, cancellationToken).ConfigureAwait(false);
+                await stateChecksums
+                    .FindAsync(solutionState, remainingChecksumsToFind, result, cancellationToken)
+                    .ConfigureAwait(false);
 
             foreach (var projectId in solutionState.ProjectIds)
             {
@@ -159,7 +183,14 @@ internal partial class SolutionAssetStorage
                     break;
 
                 if (solutionState.TryGetStateChecksums(projectId, out var checksums))
-                    await checksums.FindAsync(solutionState, remainingChecksumsToFind, result, cancellationToken).ConfigureAwait(false);
+                    await checksums
+                        .FindAsync(
+                            solutionState,
+                            remainingChecksumsToFind,
+                            result,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
             }
         }
     }

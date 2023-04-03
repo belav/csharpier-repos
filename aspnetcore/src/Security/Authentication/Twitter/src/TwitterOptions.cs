@@ -107,12 +107,26 @@ public class TwitterOptions : RemoteAuthenticationOptions
         base.Validate();
         if (string.IsNullOrEmpty(ConsumerKey))
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(ConsumerKey)), nameof(ConsumerKey));
+            throw new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.Exception_OptionMustBeProvided,
+                    nameof(ConsumerKey)
+                ),
+                nameof(ConsumerKey)
+            );
         }
 
         if (string.IsNullOrEmpty(ConsumerSecret))
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(ConsumerSecret)), nameof(ConsumerSecret));
+            throw new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.Exception_OptionMustBeProvided,
+                    nameof(ConsumerSecret)
+                ),
+                nameof(ConsumerSecret)
+            );
         }
     }
 

@@ -6,5 +6,5 @@ using System;
 
 static class S
 {
-	public static event EventHandler EH;
+    public static event EventHandler EH;
 }

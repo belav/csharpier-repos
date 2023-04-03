@@ -18,9 +18,7 @@ namespace Wasm.Build.Tests
     public class WorkloadTests : BuildTestBase
     {
         public WorkloadTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+            : base(output, buildContext) { }
 
         [Fact]
         [SkipOnPlatform(TestPlatforms.Windows, "Not applicable on windows")]
@@ -33,7 +31,11 @@ namespace Wasm.Build.Tests
             string packsDir = Path.Combine(Path.GetDirectoryName(s_buildEnv.DotNet)!, "packs");
             Assert.True(Directory.Exists(packsDir), $"Could not find packs directory {packsDir}");
 
-            var unixPermFiles = Directory.EnumerateFiles(packsDir, "UnixFilePermissions.xml", new EnumerationOptions { RecurseSubdirectories = true });
+            var unixPermFiles = Directory.EnumerateFiles(
+                packsDir,
+                "UnixFilePermissions.xml",
+                new EnumerationOptions { RecurseSubdirectories = true }
+            );
             foreach (string unixPermFile in unixPermFiles)
             {
                 Assert.True(File.Exists(unixPermFile), $"Could not find {unixPermFile}");
@@ -47,10 +49,15 @@ namespace Wasm.Build.Tests
                 foreach (FileListFile flf in list.File)
                 {
                     if (flf.Path == null)
-                        throw new Exception($"Path for FileListFile should not be null. xml: {unixPermFile}");
+                        throw new Exception(
+                            $"Path for FileListFile should not be null. xml: {unixPermFile}"
+                        );
 
                     var targetFile = Path.Combine(thisPackDir, flf.Path);
-                    Assert.True(File.Exists(targetFile), $"Expected file {targetFile} to exist in the pack, as it is referenced in {unixPermFile}");
+                    Assert.True(
+                        File.Exists(targetFile),
+                        $"Expected file {targetFile} to exist in the pack, as it is referenced in {unixPermFile}"
+                    );
                 }
             }
 
@@ -63,8 +70,10 @@ namespace Wasm.Build.Tests
 
             int permFileCount = unixPermFiles.Count();
             if (permFileCount != expectedPermFileCount)
-                throw new XunitException($"Expected to find 3 UnixFilePermissions.xml files, but got {permFileCount}."
-                                            + $"{Environment.NewLine}Files: {string.Join(", ", unixPermFiles)}");
+                throw new XunitException(
+                    $"Expected to find 3 UnixFilePermissions.xml files, but got {permFileCount}."
+                        + $"{Environment.NewLine}Files: {string.Join(", ", unixPermFiles)}"
+                );
         }
     }
 

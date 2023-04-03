@@ -12,20 +12,16 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             private readonly Matcher<T> _matcher;
 
-            public RepeatMatcher(Matcher<T> matcher)
-                => _matcher = matcher;
+            public RepeatMatcher(Matcher<T> matcher) => _matcher = matcher;
 
             public override bool TryMatch(IList<T> sequence, ref int index)
             {
-                while (_matcher.TryMatch(sequence, ref index))
-                {
-                }
+                while (_matcher.TryMatch(sequence, ref index)) { }
 
                 return true;
             }
 
-            public override string ToString()
-                => string.Format("({0}*)", _matcher);
+            public override string ToString() => string.Format("({0}*)", _matcher);
         }
     }
 }

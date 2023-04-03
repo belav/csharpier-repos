@@ -7,11 +7,19 @@ namespace System.DirectoryServices.AccountManagement.Tests
     [DirectoryObjectClass("User")]
     public class ExtendedUserPrincipal : UserPrincipal, IExtendedPrincipalTest
     {
-        public ExtendedUserPrincipal(PrincipalContext context) : base(context) { }
+        public ExtendedUserPrincipal(PrincipalContext context)
+            : base(context) { }
 
-        public static new ExtendedUserPrincipal FindByIdentity(PrincipalContext context,string identityValue)
+        public static new ExtendedUserPrincipal FindByIdentity(
+            PrincipalContext context,
+            string identityValue
+        )
         {
-            return (ExtendedUserPrincipal)FindByIdentityWithType(context, typeof(ExtendedUserPrincipal), identityValue);
+            return (ExtendedUserPrincipal)FindByIdentityWithType(
+                context,
+                typeof(ExtendedUserPrincipal),
+                identityValue
+            );
         }
 
         [DirectoryProperty("jpegPhoto")]

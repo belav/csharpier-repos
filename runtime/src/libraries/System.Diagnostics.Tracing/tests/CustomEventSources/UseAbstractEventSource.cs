@@ -17,11 +17,10 @@ namespace SdtEventSources
     public abstract class UtilBaseEventSource : EventSource
     {
         protected UtilBaseEventSource()
-            : base()
-        { }
+            : base() { }
+
         protected UtilBaseEventSource(bool throwOnEventWriteErrors)
-            : base(throwOnEventWriteErrors)
-        { }
+            : base(throwOnEventWriteErrors) { }
 
         protected unsafe void WriteEvent(int eventId, int arg1, short arg2, long arg3)
         {
@@ -45,17 +44,18 @@ namespace SdtEventSources
         public static OptimizedEventSource Log = new OptimizedEventSource();
 
         public OptimizedEventSource()
-            : base(true)
-        { }
+            : base(true) { }
 
-        [Event(1,
+        [Event(
+            1,
             Channel = EventChannel.Admin,
-            Keywords = Keywords.Kwd1, Level = EventLevel.Informational, Message = "WriteIntToAdmin called with argument {0}")]
+            Keywords = Keywords.Kwd1,
+            Level = EventLevel.Informational,
+            Message = "WriteIntToAdmin called with argument {0}"
+        )]
         public void WriteToAdmin(int n, short sh, long l)
         {
-            if (IsEnabled(EventLevel.Informational, Keywords.Kwd1
-                , EventChannel.Admin
-                ))
+            if (IsEnabled(EventLevel.Informational, Keywords.Kwd1, EventChannel.Admin))
                 WriteEvent(1, n, sh, l);
         }
 

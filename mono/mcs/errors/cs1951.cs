@@ -6,10 +6,10 @@ using System.Linq.Expressions;
 
 class C
 {
-	delegate int D (ref int a);
-	
-	public static void Main ()
-	{
-		Expression<D> e = (ref int a) => a;
-	}
+    delegate int D(ref int a);
+
+    public static void Main()
+    {
+        Expression<D> e = (ref int a) => a;
+    }
 }

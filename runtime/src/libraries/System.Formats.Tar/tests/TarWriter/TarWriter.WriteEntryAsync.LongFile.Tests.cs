@@ -12,20 +12,40 @@ namespace System.Formats.Tar.Tests
     [Collection(nameof(DisableParallelization))] // don't create multiple large files at the same time
     public class TarWriter_WriteEntryAsync_LongFile_Tests : TarTestsBase
     {
-        public static IEnumerable<object[]> WriteEntry_LongFileSize_TheoryDataAsync()
-            => TarWriter_WriteEntry_LongFile_Tests.WriteEntry_LongFileSize_TheoryData();
+        public static IEnumerable<object[]> WriteEntry_LongFileSize_TheoryDataAsync() =>
+            TarWriter_WriteEntry_LongFile_Tests.WriteEntry_LongFileSize_TheoryData();
 
         [Theory]
         [MemberData(nameof(WriteEntry_LongFileSize_TheoryDataAsync))]
-        public async Task WriteEntry_LongFileSizeAsync(TarEntryFormat entryFormat, long size, bool unseekableStream)
+        public async Task WriteEntry_LongFileSizeAsync(
+            TarEntryFormat entryFormat,
+            long size,
+            bool unseekableStream
+        )
         {
             // Write archive with a 8 Gb long entry.
-            await using FileStream tarFile = File.Open(GetTestFilePath(), new FileStreamOptions { Access = FileAccess.ReadWrite, Mode = FileMode.Create, Options = FileOptions.DeleteOnClose });
-            Stream s = unseekableStream ? new WrappedStream(tarFile, tarFile.CanRead, tarFile.CanWrite, canSeek: false) : tarFile;
+            await using FileStream tarFile = File.Open(
+                GetTestFilePath(),
+                new FileStreamOptions
+                {
+                    Access = FileAccess.ReadWrite,
+                    Mode = FileMode.Create,
+                    Options = FileOptions.DeleteOnClose
+                }
+            );
+            Stream s = unseekableStream
+                ? new WrappedStream(tarFile, tarFile.CanRead, tarFile.CanWrite, canSeek: false)
+                : tarFile;
 
             await using (TarWriter writer = new(s, leaveOpen: true))
             {
-                TarEntry writeEntry = InvokeTarEntryCreationConstructor(entryFormat, entryFormat is TarEntryFormat.V7 ? TarEntryType.V7RegularFile : TarEntryType.RegularFile, "foo");
+                TarEntry writeEntry = InvokeTarEntryCreationConstructor(
+                    entryFormat,
+                    entryFormat is TarEntryFormat.V7
+                        ? TarEntryType.V7RegularFile
+                        : TarEntryType.RegularFile,
+                    "foo"
+                );
                 writeEntry.DataStream = new SimulatedDataStream(size);
                 await writer.WriteEntryAsync(writeEntry);
             }
@@ -64,9 +84,13 @@ namespace System.Formats.Tar.Tests
 
                 while (dataStream.Position < dummyDataOffset)
                 {
-                    int bufSize = (int)Math.Min(seekBuffer.Length, dummyDataOffset - dataStream.Position);
+                    int bufSize = (int)
+                        Math.Min(seekBuffer.Length, dummyDataOffset - dataStream.Position);
                     int res = await dataStream.ReadAsync(seekBuffer.Slice(0, bufSize));
-                    Assert.True(res > 0, "Unseekable stream finished before expected - Something went very wrong");
+                    Assert.True(
+                        res > 0,
+                        "Unseekable stream finished before expected - Something went very wrong"
+                    );
                 }
             }
 

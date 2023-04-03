@@ -41,11 +41,14 @@ namespace System
         public static bool IsOSXLike => IsOSX || IsiOS || IstvOS || IsMacCatalyst;
         public static bool IsOSX => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
         public static bool IsNotOSX => !IsOSX;
-        public static bool IsMacOsMojaveOrHigher => IsOSX && Environment.OSVersion.Version >= new Version(10, 14);
-        public static bool IsMacOsCatalinaOrHigher => IsOSX && Environment.OSVersion.Version >= new Version(10, 15);
+        public static bool IsMacOsMojaveOrHigher =>
+            IsOSX && Environment.OSVersion.Version >= new Version(10, 14);
+        public static bool IsMacOsCatalinaOrHigher =>
+            IsOSX && Environment.OSVersion.Version >= new Version(10, 15);
         public static bool IsMacOsAppleSilicon => IsOSX && IsArm64Process;
         public static bool IsNotMacOsAppleSilicon => !IsMacOsAppleSilicon;
-        public static bool IsAppSandbox => Environment.GetEnvironmentVariable("APP_SANDBOX_CONTAINER_ID") != null;
+        public static bool IsAppSandbox =>
+            Environment.GetEnvironmentVariable("APP_SANDBOX_CONTAINER_ID") != null;
         public static bool IsNotAppSandbox => !IsAppSandbox;
 
         // RedHat family covers RedHat and CentOS
@@ -55,14 +58,16 @@ namespace System
         public static bool IsNotFedoraOrRedHatFamily => !IsFedora && !IsRedHatFamily;
         public static bool IsNotDebian10 => !IsDebian10;
 
-        public static Version OpenSslVersion => !IsOSXLike && !IsWindows && !IsAndroid ?
-            GetOpenSslVersion() :
-            throw new PlatformNotSupportedException();
+        public static Version OpenSslVersion =>
+            !IsOSXLike && !IsWindows && !IsAndroid
+                ? GetOpenSslVersion()
+                : throw new PlatformNotSupportedException();
 
         private static readonly Version s_openssl3Version = new Version(3, 0, 0);
-        public static bool IsOpenSsl3 => !IsOSXLike && !IsWindows && !IsAndroid && !IsBrowser ?
-            GetOpenSslVersion() >= s_openssl3Version :
-            false;
+        public static bool IsOpenSsl3 =>
+            !IsOSXLike && !IsWindows && !IsAndroid && !IsBrowser
+                ? GetOpenSslVersion() >= s_openssl3Version
+                : false;
 
         /// <summary>
         /// If gnulibc is available, returns the release, such as "stable".
@@ -81,7 +86,8 @@ namespace System
                 {
                     return Marshal.PtrToStringAnsi(libc.gnu_get_libc_release());
                 }
-                catch (Exception e) when (e is DllNotFoundException || e is EntryPointNotFoundException)
+                catch (Exception e)
+                    when (e is DllNotFoundException || e is EntryPointNotFoundException)
                 {
                     return "glibc_not_found";
                 }
@@ -105,7 +111,8 @@ namespace System
                 {
                     return Marshal.PtrToStringAnsi(libc.gnu_get_libc_version());
                 }
-                catch (Exception e) when (e is DllNotFoundException || e is EntryPointNotFoundException)
+                catch (Exception e)
+                    when (e is DllNotFoundException || e is EntryPointNotFoundException)
                 {
                     return "glibc_not_found";
                 }
@@ -126,6 +133,7 @@ namespace System
         }
 
         private static Version s_opensslVersion;
+
         private static Version GetOpenSslVersion()
         {
             if (s_opensslVersion == null)
@@ -169,7 +177,10 @@ namespace System
             }
             catch (Exception exc)
             {
-                throw new FormatException($"Failed to parse version string: '{versionString}'", exc);
+                throw new FormatException(
+                    $"Failed to parse version string: '{versionString}'",
+                    exc
+                );
             }
         }
 
@@ -198,7 +209,9 @@ namespace System
                 // example:
                 // FreeBSD 11.0-RELEASE-p1 FreeBSD 11.0-RELEASE-p1 #0 r306420: Thu Sep 29 01:43:23 UTC 2016     root@releng2.nyi.freebsd.org:/usr/obj/usr/src/sys/GENERIC
                 // What we want is major release as minor releases should be compatible.
-                result.VersionId = ToVersion(RuntimeInformation.OSDescription.Split()[1].Split('.')[0]);
+                result.VersionId = ToVersion(
+                    RuntimeInformation.OSDescription.Split()[1].Split('.')[0]
+                );
             }
             else if (Isillumos)
             {
@@ -232,7 +245,9 @@ namespace System
                 //   SunOS 5.11 11.3
                 result.Id = "Solaris";
                 // we only need the major version; 11
-                result.VersionId = ToVersion(RuntimeInformation.OSDescription.Split(' ')[2].Split('.')[0]); // e.g. 11
+                result.VersionId = ToVersion(
+                    RuntimeInformation.OSDescription.Split(' ')[2].Split('.')[0]
+                ); // e.g. 11
             }
             else if (File.Exists("/etc/os-release"))
             {
@@ -255,9 +270,20 @@ namespace System
             return result;
         }
 
-        private static bool IsRedHatFamilyAndVersion(int major = -1, int minor = -1, int build = -1, int revision = -1)
+        private static bool IsRedHatFamilyAndVersion(
+            int major = -1,
+            int minor = -1,
+            int build = -1,
+            int revision = -1
+        )
         {
-            return IsDistroAndVersion((distro) => distro == "rhel" || distro == "centos", major, minor, build, revision);
+            return IsDistroAndVersion(
+                (distro) => distro == "rhel" || distro == "centos",
+                major,
+                minor,
+                build,
+                revision
+            );
         }
 
         /// <summary>
@@ -269,9 +295,21 @@ namespace System
         /// <param name="build">The distro build version. If omitted, this portion of the version is not included in the comparison.</param>
         /// <param name="revision">The distro revision version. If omitted, this portion of the version is not included in the comparison.</param>
         /// <returns>Whether the OS platform matches the given Linux distro and optional version.</returns>
-        private static bool IsDistroAndVersion(string distroId, int major = -1, int minor = -1, int build = -1, int revision = -1)
+        private static bool IsDistroAndVersion(
+            string distroId,
+            int major = -1,
+            int minor = -1,
+            int build = -1,
+            int revision = -1
+        )
         {
-            return IsDistroAndVersion(distro => (distro == distroId), major, minor, build, revision);
+            return IsDistroAndVersion(
+                distro => (distro == distroId),
+                major,
+                minor,
+                build,
+                revision
+            );
         }
 
         /// <summary>
@@ -283,17 +321,38 @@ namespace System
         /// <param name="build">The distro build version. If omitted, this portion of the version is not included in the comparison.</param>
         /// <param name="revision">The distro revision version.  If omitted, this portion of the version is not included in the comparison.</param>
         /// <returns>Whether the OS platform matches the given Linux distro and optional version is same or higher.</returns>
-        private static bool IsDistroAndVersionOrHigher(string distroId, int major = -1, int minor = -1, int build = -1, int revision = -1)
+        private static bool IsDistroAndVersionOrHigher(
+            string distroId,
+            int major = -1,
+            int minor = -1,
+            int build = -1,
+            int revision = -1
+        )
         {
-            return IsDistroAndVersionOrHigher(distro => (distro == distroId), major, minor, build, revision);
+            return IsDistroAndVersionOrHigher(
+                distro => (distro == distroId),
+                major,
+                minor,
+                build,
+                revision
+            );
         }
 
-        private static bool IsDistroAndVersion(Predicate<string> distroPredicate, int major = -1, int minor = -1, int build = -1, int revision = -1)
+        private static bool IsDistroAndVersion(
+            Predicate<string> distroPredicate,
+            int major = -1,
+            int minor = -1,
+            int build = -1,
+            int revision = -1
+        )
         {
             if (IsLinux)
             {
                 DistroInfo v = GetDistroInfo();
-                if (distroPredicate(v.Id) && VersionEquivalentTo(major, minor, build, revision, v.VersionId))
+                if (
+                    distroPredicate(v.Id)
+                    && VersionEquivalentTo(major, minor, build, revision, v.VersionId)
+                )
                 {
                     return true;
                 }
@@ -302,12 +361,21 @@ namespace System
             return false;
         }
 
-        private static bool IsDistroAndVersionOrHigher(Predicate<string> distroPredicate, int major = -1, int minor = -1, int build = -1, int revision = -1)
+        private static bool IsDistroAndVersionOrHigher(
+            Predicate<string> distroPredicate,
+            int major = -1,
+            int minor = -1,
+            int build = -1,
+            int revision = -1
+        )
         {
             if (IsLinux)
             {
                 DistroInfo v = GetDistroInfo();
-                if (distroPredicate(v.Id) && VersionEquivalentToOrHigher(major, minor, build, revision, v.VersionId))
+                if (
+                    distroPredicate(v.Id)
+                    && VersionEquivalentToOrHigher(major, minor, build, revision, v.VersionId)
+                )
                 {
                     return true;
                 }
@@ -316,7 +384,13 @@ namespace System
             return false;
         }
 
-        private static bool VersionEquivalentTo(int major, int minor, int build, int revision, Version actualVersionId)
+        private static bool VersionEquivalentTo(
+            int major,
+            int minor,
+            int build,
+            int revision,
+            Version actualVersionId
+        )
         {
             return (major == -1 || major == actualVersionId.Major)
                 && (minor == -1 || minor == actualVersionId.Minor)
@@ -324,15 +398,37 @@ namespace System
                 && (revision == -1 || revision == actualVersionId.Revision);
         }
 
-        private static bool VersionEquivalentToOrHigher(int major, int minor, int build, int revision, Version actualVersionId)
+        private static bool VersionEquivalentToOrHigher(
+            int major,
+            int minor,
+            int build,
+            int revision,
+            Version actualVersionId
+        )
         {
-            return
-                VersionEquivalentTo(major, minor, build, revision, actualVersionId) ||
-                    (actualVersionId.Major > major ||
-                        (actualVersionId.Major == major && (actualVersionId.Minor > minor ||
-                            (actualVersionId.Minor == minor && (actualVersionId.Build > build ||
-                                (actualVersionId.Build == build && (actualVersionId.Revision > revision ||
-                                    (actualVersionId.Revision == revision))))))));
+            return VersionEquivalentTo(major, minor, build, revision, actualVersionId)
+                || (
+                    actualVersionId.Major > major
+                    || (
+                        actualVersionId.Major == major
+                        && (
+                            actualVersionId.Minor > minor
+                            || (
+                                actualVersionId.Minor == minor
+                                && (
+                                    actualVersionId.Build > build
+                                    || (
+                                        actualVersionId.Build == build
+                                        && (
+                                            actualVersionId.Revision > revision
+                                            || (actualVersionId.Revision == revision)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
         }
 
         private struct DistroInfo

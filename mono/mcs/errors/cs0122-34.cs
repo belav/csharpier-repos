@@ -6,16 +6,14 @@ using System;
 
 static class Foo
 {
-	static void Print (this string s)
-	{
-	}
+    static void Print(this string s) { }
 }
 
 static class Program
 {
-	static void Main(string[] args)
-	{
-		string s = "Hello, world";
-		Foo.Print(s);
-	}
+    static void Main(string[] args)
+    {
+        string s = "Hello, world";
+        Foo.Print(s);
+    }
 }

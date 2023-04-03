@@ -3,9 +3,9 @@
 
 class C
 {
-	public static void Main ()
-	{
-		dynamic d = null;
-		d (__arglist (111));
-	}
+    public static void Main()
+    {
+        dynamic d = null;
+        d(__arglist(111));
+    }
 }

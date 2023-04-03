@@ -3,11 +3,11 @@
 
 struct S
 {
-	int i;
+    int i;
 
-	ref int M ()
-	{
-		ref int r = ref i;
-		return ref r;
-	}
+    ref int M()
+    {
+        ref int r = ref i;
+        return ref r;
+    }
 }

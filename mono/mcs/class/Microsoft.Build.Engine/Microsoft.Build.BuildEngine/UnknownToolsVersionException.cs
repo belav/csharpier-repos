@@ -3,7 +3,7 @@
 //
 // Author:
 // 	Ankit Jain (jankit@novell.com)
-// 
+//
 // Copyright 2010 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -29,46 +29,43 @@ using System;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Microsoft.Build.BuildEngine {
-	[Serializable]
-	internal class UnknownToolsVersionException : Exception {
-		string message;
+namespace Microsoft.Build.BuildEngine
+{
+    [Serializable]
+    internal class UnknownToolsVersionException : Exception
+    {
+        string message;
 
-		public UnknownToolsVersionException (string toolsVersion)
-		{
-			this.message = GetErrorMessage (toolsVersion);
-		}
+        public UnknownToolsVersionException(string toolsVersion)
+        {
+            this.message = GetErrorMessage(toolsVersion);
+        }
 
-		public UnknownToolsVersionException (string toolsVersion, string message)
-		{
-			this.message = String.Format ("{0}. {1}", message, GetErrorMessage (toolsVersion));
-		}
+        public UnknownToolsVersionException(string toolsVersion, string message)
+        {
+            this.message = String.Format("{0}. {1}", message, GetErrorMessage(toolsVersion));
+        }
 
-		public UnknownToolsVersionException (string message,
-					Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public UnknownToolsVersionException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		protected UnknownToolsVersionException (SerializationInfo info,
-					   StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected UnknownToolsVersionException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		public override string Message {
-			get { return message; }
-		}
+        public override string Message
+        {
+            get { return message; }
+        }
 
-		string GetErrorMessage (string toolsVersion)
-		{
-			StringBuilder sb = new StringBuilder ();
-			sb.AppendFormat ("Unknown tools version: '{0}' . Known versions:", toolsVersion);
+        string GetErrorMessage(string toolsVersion)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("Unknown tools version: '{0}' . Known versions:", toolsVersion);
 
-			foreach (var ts in Engine.GlobalEngine.Toolsets)
-				sb.AppendFormat (" '{0}'", ts.ToolsVersion);
+            foreach (var ts in Engine.GlobalEngine.Toolsets)
+                sb.AppendFormat(" '{0}'", ts.ToolsVersion);
 
-			return sb.ToString ();
-		}
-	}
+            return sb.ToString();
+        }
+    }
 }

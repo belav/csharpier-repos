@@ -1,36 +1,39 @@
 // CS0110: The evaluation of the constant value for `A.B.C.X' involves a circular definition
 // Line: 9
 
-class A {
-	int a;
-	
-	class B {
-		int b;
+class A
+{
+    int a;
 
-		class C {
-			int c;
+    class B
+    {
+        int b;
 
-			void m ()
-			{
-				c = 1;
-			}
+        class C
+        {
+            int c;
 
-			enum F {
-			    A, 
-			    B,
-			    C,
-			    D = X,
-			    E
-			}
+            void m()
+            {
+                c = 1;
+            }
 
-			const int X = Y + 1;
-			const int Y = 1 + (int) F.E;
-		}
-	}
+            enum F
+            {
+                A,
+                B,
+                C,
+                D = X,
+                E
+            }
 
-	static int Main (string [] args)
-	{
-		return 0;
-	}
+            const int X = Y + 1;
+            const int Y = 1 + (int)F.E;
+        }
+    }
 
+    static int Main(string[] args)
+    {
+        return 0;
+    }
 }

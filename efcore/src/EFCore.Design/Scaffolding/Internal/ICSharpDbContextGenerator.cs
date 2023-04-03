@@ -26,5 +26,6 @@ public interface ICSharpDbContextGenerator
         bool useDataAnnotations,
         bool useNullableReferenceTypes,
         bool suppressConnectionStringWarning,
-        bool suppressOnConfiguring);
+        bool suppressOnConfiguring
+    );
 }

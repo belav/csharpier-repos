@@ -3,9 +3,9 @@
 
 public class Tests
 {
-	public static void Main ()
-	{
-		var d = 0;
-		d<int> ();
-	}
+    public static void Main()
+    {
+        var d = 0;
+        d<int>();
+    }
 }

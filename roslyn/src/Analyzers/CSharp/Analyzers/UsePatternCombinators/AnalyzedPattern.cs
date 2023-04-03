@@ -16,8 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
     {
         public readonly IOperation Target;
 
-        private AnalyzedPattern(IOperation target)
-            => Target = target;
+        private AnalyzedPattern(IOperation target) => Target = target;
 
         /// <summary>
         /// Represents a type-pattern, constructed from an is-expression
@@ -26,7 +25,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             private static readonly SyntaxAnnotation s_annotation = new();
 
-            public static Type? TryCreate(BinaryExpressionSyntax binaryExpression, IIsTypeOperation operation)
+            public static Type? TryCreate(
+                BinaryExpressionSyntax binaryExpression,
+                IIsTypeOperation operation
+            )
             {
                 Contract.ThrowIfNull(operation.SemanticModel);
                 if (binaryExpression.Right is not TypeSyntax typeSyntax)
@@ -48,19 +50,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 // semantics, and for 'C.X' could be a compile error.
                 //
                 // So lets create a pattern syntax and make sure the result is the same
-                var dummyStatement = SyntaxFactory.ExpressionStatement(SyntaxFactory.AssignmentExpression(
-                    SyntaxKind.SimpleAssignmentExpression,
-                    SyntaxFactory.IdentifierName("_"),
-                    SyntaxFactory.IsPatternExpression(
-                        binaryExpression.Left,
-                        SyntaxFactory.ConstantPattern(SyntaxFactory.ParenthesizedExpression(binaryExpression.Right.WithAdditionalAnnotations(s_annotation)))
+                var dummyStatement = SyntaxFactory.ExpressionStatement(
+                    SyntaxFactory.AssignmentExpression(
+                        SyntaxKind.SimpleAssignmentExpression,
+                        SyntaxFactory.IdentifierName("_"),
+                        SyntaxFactory.IsPatternExpression(
+                            binaryExpression.Left,
+                            SyntaxFactory.ConstantPattern(
+                                SyntaxFactory.ParenthesizedExpression(
+                                    binaryExpression.Right.WithAdditionalAnnotations(s_annotation)
+                                )
+                            )
+                        )
                     )
-                ));
+                );
 
-                if (operation.SemanticModel.TryGetSpeculativeSemanticModel(typeSyntax.SpanStart, dummyStatement, out var speculativeModel))
+                if (
+                    operation.SemanticModel.TryGetSpeculativeSemanticModel(
+                        typeSyntax.SpanStart,
+                        dummyStatement,
+                        out var speculativeModel
+                    )
+                )
                 {
                     var originalInfo = operation.SemanticModel.GetTypeInfo(binaryExpression.Right);
-                    var newInfo = speculativeModel.GetTypeInfo(dummyStatement.GetAnnotatedNodes(s_annotation).Single());
+                    var newInfo = speculativeModel.GetTypeInfo(
+                        dummyStatement.GetAnnotatedNodes(s_annotation).Single()
+                    );
                     if (!originalInfo.Equals(newInfo))
                     {
                         return null;
@@ -72,8 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
 
             public readonly TypeSyntax TypeSyntax;
 
-            private Type(TypeSyntax type, IOperation target) : base(target)
-                => TypeSyntax = type;
+            private Type(TypeSyntax type, IOperation target)
+                : base(target) => TypeSyntax = type;
         }
 
         /// <summary>
@@ -83,8 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             public readonly PatternSyntax PatternSyntax;
 
-            public Source(PatternSyntax patternSyntax, IOperation target) : base(target)
-                => PatternSyntax = patternSyntax;
+            public Source(PatternSyntax patternSyntax, IOperation target)
+                : base(target) => PatternSyntax = patternSyntax;
         }
 
         /// <summary>
@@ -94,8 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             public readonly ExpressionSyntax ExpressionSyntax;
 
-            public Constant(ExpressionSyntax expression, IOperation target) : base(target)
-                => ExpressionSyntax = expression;
+            public Constant(ExpressionSyntax expression, IOperation target)
+                : base(target) => ExpressionSyntax = expression;
         }
 
         /// <summary>
@@ -106,7 +122,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             public readonly BinaryOperatorKind OperatorKind;
             public readonly ExpressionSyntax Value;
 
-            public Relational(BinaryOperatorKind operatorKind, ExpressionSyntax value, IOperation target) : base(target)
+            public Relational(
+                BinaryOperatorKind operatorKind,
+                ExpressionSyntax value,
+                IOperation target
+            )
+                : base(target)
             {
                 OperatorKind = operatorKind;
                 Value = value;
@@ -123,7 +144,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             public readonly bool IsDisjunctive;
             public readonly SyntaxToken Token;
 
-            private Binary(AnalyzedPattern leftPattern, AnalyzedPattern rightPattern, bool isDisjunctive, SyntaxToken token, IOperation target) : base(target)
+            private Binary(
+                AnalyzedPattern leftPattern,
+                AnalyzedPattern rightPattern,
+                bool isDisjunctive,
+                SyntaxToken token,
+                IOperation target
+            )
+                : base(target)
             {
                 Left = leftPattern;
                 Right = rightPattern;
@@ -131,7 +159,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 Token = token;
             }
 
-            public static AnalyzedPattern? TryCreate(AnalyzedPattern leftPattern, AnalyzedPattern rightPattern, bool isDisjunctive, SyntaxToken token)
+            public static AnalyzedPattern? TryCreate(
+                AnalyzedPattern leftPattern,
+                AnalyzedPattern rightPattern,
+                bool isDisjunctive,
+                SyntaxToken token
+            )
             {
                 var leftTarget = leftPattern.Target;
                 var rightTarget = rightPattern.Target;
@@ -141,12 +174,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
 
                 var target = (leftConv, rightConv) switch
                 {
-                    ({ IsUserDefined: true }, _) or
-                    (_, { IsUserDefined: true }) => null,
+                    ({ IsUserDefined: true }, _) or (_, { IsUserDefined: true }) => null,
 
                     // If the original targets are implicitly converted due to usage of operators,
                     // both targets must have been converted to the same type, otherwise we bail.
-                    ({ IsImplicit: true }, { IsImplicit: true }) when !Equals(leftTarget.Type, rightTarget.Type) => null,
+                    ({ IsImplicit: true }, { IsImplicit: true })
+                        when !Equals(leftTarget.Type, rightTarget.Type)
+                        => null,
 
                     // If either of targets are implicitly converted but not both,
                     // we take the conversion node so that we can generate a cast off of it.
@@ -175,8 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             public readonly AnalyzedPattern Pattern;
 
-            private Not(AnalyzedPattern pattern, IOperation target) : base(target)
-                => Pattern = pattern;
+            private Not(AnalyzedPattern pattern, IOperation target)
+                : base(target) => Pattern = pattern;
 
             private static BinaryOperatorKind Negate(BinaryOperatorKind kind)
             {

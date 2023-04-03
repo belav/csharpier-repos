@@ -5,7 +5,8 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class TPCInheritanceQuerySqlServerTest : TPCInheritanceQuerySqlServerTestBase<TPCInheritanceQuerySqlServerFixture>
+public class TPCInheritanceQuerySqlServerTest
+    : TPCInheritanceQuerySqlServerTestBase<TPCInheritanceQuerySqlServerFixture>
 {
     public TPCInheritanceQuerySqlServerTest(TPCInheritanceQuerySqlServerFixture fixture)
         : base(fixture)

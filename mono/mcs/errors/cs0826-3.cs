@@ -4,13 +4,10 @@
 
 public class Test
 {
-	static void TestMethod ()
-	{
-	}
-	
-	static void Main ()
-	{
-		var e = new[] { TestMethod () };
-	}
-}
+    static void TestMethod() { }
 
+    static void Main()
+    {
+        var e = new[] { TestMethod() };
+    }
+}

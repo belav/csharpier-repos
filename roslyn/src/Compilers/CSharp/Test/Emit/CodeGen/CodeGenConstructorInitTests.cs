@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact]
         public void TestImplicitConstructor()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -30,8 +31,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty).
-                VerifyIL("C..ctor", @"
+            CompileAndVerify(source, expectedOutput: string.Empty)
+                .VerifyIL(
+                    "C..ctor",
+                    @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -39,13 +42,15 @@ class C
   IL_0001:  call       ""object..ctor()""
   IL_0006:  ret       
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestImplicitConstructorInitializer()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     C()
@@ -58,8 +63,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty).
-                VerifyIL("C..ctor", @"
+            CompileAndVerify(source, expectedOutput: string.Empty)
+                .VerifyIL(
+                    "C..ctor",
+                    @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -67,13 +74,15 @@ class C
   IL_0001:  call       ""object..ctor()""
   IL_0006:  ret       
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestExplicitBaseConstructorInitializer()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     C() : base()
@@ -86,8 +95,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty).
-                VerifyIL("C..ctor", @"
+            CompileAndVerify(source, expectedOutput: string.Empty)
+                .VerifyIL(
+                    "C..ctor",
+                    @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -95,13 +106,15 @@ class C
   IL_0001:  call       ""object..ctor()""
   IL_0006:  ret       
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestExplicitThisConstructorInitializer()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     C() : this(1)
@@ -118,8 +131,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty).
-                VerifyIL("C..ctor", @"
+            CompileAndVerify(source, expectedOutput: string.Empty)
+                .VerifyIL(
+                    "C..ctor",
+                    @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -128,13 +143,15 @@ class C
   IL_0002:  call       ""C..ctor(int)""
   IL_0007:  ret       
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestExplicitOverloadedBaseConstructorInitializer()
         {
-            var source = @"
+            var source =
+                @"
 class B
 {
     public B(int x)
@@ -158,8 +175,10 @@ class C : B
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty).
-                VerifyIL("C..ctor", @"
+            CompileAndVerify(source, expectedOutput: string.Empty)
+                .VerifyIL(
+                    "C..ctor",
+                    @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -168,13 +187,15 @@ class C : B
   IL_0002:  call       ""B..ctor(int)""
   IL_0007:  ret       
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestExplicitOverloadedThisConstructorInitializer()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     C() : this(1)
@@ -195,8 +216,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: string.Empty).
-                VerifyIL("C..ctor", @"
+            CompileAndVerify(source, expectedOutput: string.Empty)
+                .VerifyIL(
+                    "C..ctor",
+                    @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -205,13 +228,15 @@ class C
   IL_0002:  call       ""C..ctor(int)""
   IL_0007:  ret       
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestComplexInitialization()
         {
-            var source = @"
+            var source =
+                @"
 class B
 {
     private int f = E.Init(3, ""B.f"");
@@ -267,7 +292,9 @@ class E
 }
 ";
             //interested in execution order and number of field initializations
-            CompileAndVerify(source, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 C.f
 B.f
 B()
@@ -276,7 +303,8 @@ B(int)
 C(string)
 C(int)
 C()
-");
+"
+            );
         }
 
         // Successive Operator On Class
@@ -284,7 +312,8 @@ C()
         [Fact]
         public void TestSuccessiveOperatorOnClass()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 class C
 {
@@ -310,7 +339,8 @@ class C
         [Fact]
         public void TestInitializerInCtor001()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public int I{get;}
@@ -327,8 +357,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "42").
-                VerifyIL("C..ctor", @"
+            CompileAndVerify(source, expectedOutput: "42")
+                .VerifyIL(
+                    "C..ctor",
+                    @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -339,13 +371,15 @@ class C
   IL_0009:  stfld      ""int C.<I>k__BackingField""
   IL_000e:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestInitializerInCtor002()
         {
-            var source = @"
+            var source =
+                @"
 public struct S
 {
     public int X{get;}
@@ -364,8 +398,10 @@ public struct S
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "42").
-                VerifyIL("S..ctor", @"
+            CompileAndVerify(source, expectedOutput: "42")
+                .VerifyIL(
+                    "S..ctor",
+                    @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -378,13 +414,15 @@ public struct S
   IL_000f:  stfld      ""int S.<Y>k__BackingField""
   IL_0014:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestInitializerInCtor003()
         {
-            var source = @"
+            var source =
+                @"
 struct C
 {
     public int I{get;}
@@ -405,8 +443,10 @@ struct C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "42").
-                VerifyIL("C..ctor(int)", @"
+            CompileAndVerify(source, expectedOutput: "42")
+                .VerifyIL(
+                    "C..ctor(int)",
+                    @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -426,13 +466,15 @@ struct C
   IL_0022:  stfld      ""int C.<I>k__BackingField""
   IL_0027:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestInitializerInCtor004()
         {
-            var source = @"
+            var source =
+                @"
 struct C
 {
     public static int I{get;}
@@ -452,8 +494,10 @@ struct C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: "42").
-                VerifyIL("C..cctor()", @"
+            CompileAndVerify(source, expectedOutput: "42")
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size       35 (0x23)
   .maxstack  1
@@ -467,13 +511,15 @@ struct C
   IL_001d:  stsfld     ""int C.<I>k__BackingField""
   IL_0022:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestInitializerInCtor005()
         {
-            var source = @"
+            var source =
+                @"
 struct C
 {
     static int P1 { get; }
@@ -487,9 +533,14 @@ struct C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: @"123
-123").
-                VerifyIL("C..cctor()", @"
+            CompileAndVerify(
+                    source,
+                    expectedOutput: @"123
+123"
+                )
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -499,13 +550,15 @@ struct C
   IL_0008:  stsfld     ""int C.y""
   IL_000d:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestInitializerInCtor006()
         {
-            var source = @"
+            var source =
+                @"
 struct C
 {
     static int P1 { get; }
@@ -519,9 +572,14 @@ struct C
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: @"123
-123").
-                VerifyIL("C..cctor()", @"
+            CompileAndVerify(
+                    source,
+                    expectedOutput: @"123
+123"
+                )
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -531,14 +589,16 @@ struct C
   IL_0008:  stsfld     ""int C.<y>k__BackingField""
   IL_000d:  ret
 }
-");
+"
+                );
         }
 
         [WorkItem(4383, "https://github.com/dotnet/roslyn/issues/4383")]
         [Fact]
         public void DecimalConstInit001()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -569,8 +629,10 @@ public static class Module1
         }
     }
 ";
-            CompileAndVerify(source, expectedOutput: "3").
-                VerifyIL("ClassWithStaticField..cctor", @"
+            CompileAndVerify(source, expectedOutput: "3")
+                .VerifyIL(
+                    "ClassWithStaticField..cctor",
+                    @"
 {
   // Code size       74 (0x4a)
   .maxstack  4
@@ -593,26 +655,30 @@ public static class Module1
   IL_0044:  stsfld     ""System.Collections.Generic.Dictionary<string, float> ClassWithStaticField.DictionaryField""
   IL_0049:  ret
 }
-");
+"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void DecimalConstInit002()
         {
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     const decimal d1 = 0.1m;
 }
 ";
-            var source2 = @"
+            var source2 =
+                @"
 class C
 {
     static readonly decimal d1 = 0.1m;
 }
 ";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  5
@@ -634,21 +700,24 @@ class C
         [Fact]
         public void DecimalConstInit003()
         {
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     const decimal d1 = 0.0m;
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 class C
 {
     static readonly decimal d1 = 0.0m;
 }
 ";
 
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  5
@@ -670,7 +739,8 @@ class C
         [Fact]
         public void DecimalConstInit004()
         {
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     const decimal d1 = default;
@@ -679,7 +749,8 @@ class C
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 class C
 {
     static readonly decimal d1 = default;
@@ -703,7 +774,8 @@ class C
         [Fact]
         public void StaticLambdaConstructorAlwaysEmitted()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -712,8 +784,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(source).
-                VerifyIL("C.<>c..cctor", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C.<>c..cctor",
+                    @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -721,7 +795,8 @@ class C
   IL_0005:  stsfld     ""C.<>c C.<>c.<>9""
   IL_000a:  ret
 }
-");
+"
+                );
         }
 
         [WorkItem(217748, "https://devdiv.visualstudio.com/DevDiv/_workitems?_a=edit&id=217748")]
@@ -729,22 +804,30 @@ class C
         public void BadExpressionConstructor()
         {
             string source =
-@"class C
+                @"class C
 {
     static dynamic F() => 0;
     dynamic d = F() * 2;
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyEmitDiagnostics(
-                // (4,17): error CS0656: Missing compiler required member 'Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create'
-                //     dynamic d = F() * 2;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F()").WithArguments("Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo", "Create").WithLocation(4, 17));
+            CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyEmitDiagnostics(
+                    // (4,17): error CS0656: Missing compiler required member 'Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create'
+                    //     dynamic d = F() * 2;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F()")
+                        .WithArguments(
+                            "Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo",
+                            "Create"
+                        )
+                        .WithLocation(4, 17)
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_01()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 class C
 {
@@ -754,7 +837,8 @@ class C
             CompileAndVerify(
                 source,
                 symbolValidator: validator,
-                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
 
             void validator(ModuleSymbol module)
             {
@@ -767,7 +851,8 @@ class C
         [Fact]
         public void SkipSynthesizedStaticConstructor_02()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 class C
 {
@@ -776,7 +861,8 @@ class C
             CompileAndVerify(
                 source,
                 symbolValidator: validator,
-                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
 
             void validator(ModuleSymbol module)
             {
@@ -789,13 +875,17 @@ class C
         [Fact]
         public void SkipSynthesizedStaticConstructor_03()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 class C
 {
     static (int, object) pair = (0, null!);
 }";
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"{
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"{
   // Code size       13 (0xd)
   .maxstack  2
   IL_0000:  ldc.i4.0
@@ -803,14 +893,16 @@ class C
   IL_0002:  newobj     ""System.ValueTuple<int, object>..ctor(int, object)""
   IL_0007:  stsfld     ""System.ValueTuple<int, object> C.pair""
   IL_000c:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_04()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 class C
 {
@@ -822,19 +914,24 @@ class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for these initializers.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_05()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 class C
 {
@@ -843,7 +940,8 @@ class C
             CompileAndVerify(
                 source,
                 symbolValidator: validator,
-                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
 
             void validator(ModuleSymbol module)
             {
@@ -856,7 +954,8 @@ class C
         [Fact]
         public void SkipSynthesizedStaticConstructor_06()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 
 struct S
@@ -874,39 +973,49 @@ class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for these initializers.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_08()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 class C
 {
     static int x = 1;
 }";
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldc.i4.1
   IL_0001:  stsfld     ""int C.x""
   IL_0006:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_09()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 
 struct S
@@ -922,7 +1031,8 @@ class C
             CompileAndVerify(
                 source,
                 symbolValidator: validator,
-                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
 
             void validator(ModuleSymbol module)
             {
@@ -935,7 +1045,8 @@ class C
         [Fact]
         public void SkipSynthesizedStaticConstructor_10()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 
 struct S
@@ -950,19 +1061,24 @@ class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for these initializers.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_11()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 
 struct S
@@ -977,19 +1093,24 @@ class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for these initializers.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_12()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 
 struct S
@@ -1001,7 +1122,10 @@ class C
 {
     static S? s1 = default(S);
 }";
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -1012,14 +1136,16 @@ class C
   IL_0009:  newobj     ""S?..ctor(S)""
   IL_000e:  stsfld     ""S? C.s1""
   IL_0013:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_13()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 
 struct S
@@ -1031,7 +1157,10 @@ class C
 {
     static S? s1 = new S();
 }";
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -1042,14 +1171,16 @@ class C
   IL_0009:  newobj     ""S?..ctor(S)""
   IL_000e:  stsfld     ""S? C.s1""
   IL_0013:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_14()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 
 struct S
@@ -1061,7 +1192,10 @@ class C
 {
     static object s1 = default(S);
 }";
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -1072,14 +1206,16 @@ class C
   IL_0009:  box        ""S""
   IL_000e:  stsfld     ""object C.s1""
   IL_0013:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_15()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 
 struct S
@@ -1091,7 +1227,10 @@ class C
 {
     static object s1 = new S();
 }";
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -1102,14 +1241,16 @@ class C
   IL_0009:  box        ""S""
   IL_000e:  stsfld     ""object C.s1""
   IL_0013:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_16()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 
 struct S
@@ -1126,19 +1267,24 @@ class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for these initializers.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SkipSynthesizedStaticConstructor_17()
         {
-            string source = @"
+            string source =
+                @"
 unsafe class C
 {
     static System.IntPtr s1 = (System.IntPtr)0;
@@ -1148,7 +1294,14 @@ unsafe class C
             // note: we could make the synthesized constructor smarter and realize that
             // nothing needs to be emitted for the `(void*)0` initializer.
             // but it doesn't serve any realistic scenarios at this time.
-            CompileAndVerify(source, options: TestOptions.UnsafeDebugDll, verify: Verification.Skipped).VerifyIL("C..cctor()", @"
+            CompileAndVerify(
+                    source,
+                    options: TestOptions.UnsafeDebugDll,
+                    verify: Verification.Skipped
+                )
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size       31 (0x1f)
   .maxstack  1
@@ -1163,28 +1316,32 @@ unsafe class C
   IL_0018:  conv.i
   IL_0019:  stsfld     ""void* C.s3""
   IL_001e:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(543606, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543606")]
         [ConditionalFact(typeof(DesktopOnly))]
         public void StaticNullInitializerHasNoEffectOnTypeIL()
         {
-            var source1 = @"
+            var source1 =
+                @"
 #nullable enable
 class C
 {
     static string s1;
 }";
 
-            var source2 = @"
+            var source2 =
+                @"
 #nullable enable
 class C
 {
     static string s1 = null!;
 }";
 
-            var expectedIL = @"
+            var expectedIL =
+                @"
 .class private auto ansi beforefieldinit C
         extends [mscorlib]System.Object
 {
@@ -1215,7 +1372,8 @@ class C
         [Fact]
         public void ExplicitStaticConstructor_01()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 class C
 {
@@ -1225,19 +1383,24 @@ class C
     {
     }
 }";
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void ExplicitStaticConstructor_02()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 class C
 {
@@ -1248,20 +1411,25 @@ class C
         x = null!;
     }
 }";
-            CompileAndVerify(source).VerifyIL("C..cctor()", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"
 {
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldnull
   IL_0001:  stsfld     ""string C.x""
   IL_0006:  ret
-}");
+}"
+                );
         }
 
         [Fact, WorkItem(55797, "https://github.com/dotnet/roslyn/issues/55797")]
         public void TwoParameterlessConstructors()
         {
-            string source = @"
+            string source =
+                @"
 public class C
 {
     public C() : Garbage()
@@ -1273,7 +1441,9 @@ public class C
             comp.VerifyDiagnostics(
                 // (4,12): error CS0501: 'C.C()' must declare a body because it is not marked abstract, extern, or partial
                 //     public C() : Garbage()
-                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "C").WithArguments("C.C()").WithLocation(4, 12),
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "C")
+                    .WithArguments("C.C()")
+                    .WithLocation(4, 12),
                 // (4,18): error CS1018: Keyword 'this' or 'base' expected
                 //     public C() : Garbage()
                 Diagnostic(ErrorCode.ERR_ThisOrBaseExpected, "Garbage").WithLocation(4, 18),
@@ -1285,14 +1455,17 @@ public class C
                 Diagnostic(ErrorCode.ERR_MemberNeedsType, "Garbage").WithLocation(4, 18),
                 // (4,18): error CS0121: The call is ambiguous between the following methods or properties: 'C.C()' and 'C.C()'
                 //     public C() : Garbage()
-                Diagnostic(ErrorCode.ERR_AmbigCall, "").WithArguments("C.C()", "C.C()").WithLocation(4, 18)
-                );
+                Diagnostic(ErrorCode.ERR_AmbigCall, "")
+                    .WithArguments("C.C()", "C.C()")
+                    .WithLocation(4, 18)
+            );
         }
 
         [Fact, WorkItem(55797, "https://github.com/dotnet/roslyn/issues/55797")]
         public void TwoParameterlessConstructors_2()
         {
-            string source = @"
+            string source =
+                @"
 public class C
 {
     public C() : this()
@@ -1307,17 +1480,22 @@ public class C
             comp.VerifyDiagnostics(
                 // (4,18): error CS0121: The call is ambiguous between the following methods or properties: 'C.C()' and 'C.C()'
                 //     public C() : this()
-                Diagnostic(ErrorCode.ERR_AmbigCall, "this").WithArguments("C.C()", "C.C()").WithLocation(4, 18),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "this")
+                    .WithArguments("C.C()", "C.C()")
+                    .WithLocation(4, 18),
                 // (7,12): error CS0111: Type 'C' already defines a member called 'C' with the same parameter types
                 //     public C()
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C").WithArguments("C", "C").WithLocation(7, 12)
-                );
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
+                    .WithArguments("C", "C")
+                    .WithLocation(7, 12)
+            );
         }
 
         [Fact, WorkItem(55797, "https://github.com/dotnet/roslyn/issues/55797")]
         public void TwoParameterlessConstructors_3()
         {
-            string source = @"
+            string source =
+                @"
 public class C
 {
     public C() : this()
@@ -1332,17 +1510,20 @@ public class C
             comp.VerifyDiagnostics(
                 // (4,18): error CS0121: The call is ambiguous between the following methods or properties: 'C.C()' and 'C.C()'
                 //     public C() : this()
-                Diagnostic(ErrorCode.ERR_AmbigCall, "this").WithArguments("C.C()", "C.C()").WithLocation(4, 18),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "this")
+                    .WithArguments("C.C()", "C.C()")
+                    .WithLocation(4, 18),
                 // (7,12): error CS1520: Method must have a return type
                 //     public C2()
                 Diagnostic(ErrorCode.ERR_MemberNeedsType, "C2").WithLocation(7, 12)
-                );
+            );
         }
 
         [Fact, WorkItem(55797, "https://github.com/dotnet/roslyn/issues/55797")]
         public void TwoParameterlessConstructors_Struct()
         {
-            string source = @"
+            string source =
+                @"
 public struct C
 {
     public C() : this()
@@ -1357,11 +1538,13 @@ public struct C
             comp.VerifyDiagnostics(
                 // (4,18): error CS0121: The call is ambiguous between the following methods or properties: 'C.C()' and 'C.C()'
                 //     public C() : this()
-                Diagnostic(ErrorCode.ERR_AmbigCall, "this").WithArguments("C.C()", "C.C()").WithLocation(4, 18),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "this")
+                    .WithArguments("C.C()", "C.C()")
+                    .WithLocation(4, 18),
                 // (7,12): error CS1520: Method must have a return type
                 //     public C2()
                 Diagnostic(ErrorCode.ERR_MemberNeedsType, "C2").WithLocation(7, 12)
-                );
+            );
         }
     }
 }

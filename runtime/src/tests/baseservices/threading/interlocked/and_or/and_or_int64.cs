@@ -11,7 +11,18 @@ public class Program
 
     public static int Main()
     {
-        long[] testData = new long[] { long.MinValue, long.MinValue + 1, -1, 0, 1, 2, 1000, long.MaxValue - 1, long.MaxValue };
+        long[] testData = new long[]
+        {
+            long.MinValue,
+            long.MinValue + 1,
+            -1,
+            0,
+            1,
+            2,
+            1000,
+            long.MaxValue - 1,
+            long.MaxValue
+        };
         for (long i = 0; i < testData.Length; i++)
         {
             for (long j = 0; j < testData.Length; j++)
@@ -84,7 +95,6 @@ public class Program
             });
         }
 
-
         return s_RetCode;
     }
 
@@ -116,13 +126,23 @@ public class Program
 class RefImpl
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static long XAnd64(ref long a, long b) { long src = a; a &= b; return src; }
+    public static long XAnd64(ref long a, long b)
+    {
+        long src = a;
+        a &= b;
+        return src;
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void XAnd64_noret(ref long a, long b) => a &= b;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static long XOr64(ref long a, long b) { long src = a; a |= b; return src; }
+    public static long XOr64(ref long a, long b)
+    {
+        long src = a;
+        a |= b;
+        return src;
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void XOr64_noret(ref long a, long b) => a |= b;

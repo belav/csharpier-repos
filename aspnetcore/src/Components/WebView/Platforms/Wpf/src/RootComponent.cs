@@ -37,15 +37,20 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
 
             if (string.IsNullOrWhiteSpace(Selector))
             {
-                throw new InvalidOperationException($"{nameof(RootComponent)} requires a value for its {nameof(Selector)} property, but no value was set.");
+                throw new InvalidOperationException(
+                    $"{nameof(RootComponent)} requires a value for its {nameof(Selector)} property, but no value was set."
+                );
             }
 
             if (ComponentType is null)
             {
-                throw new InvalidOperationException($"{nameof(RootComponent)} requires a value for its {nameof(ComponentType)} property, but no value was set.");
+                throw new InvalidOperationException(
+                    $"{nameof(RootComponent)} requires a value for its {nameof(ComponentType)} property, but no value was set."
+                );
             }
 
-            var parameterView = Parameters == null ? ParameterView.Empty : ParameterView.FromDictionary(Parameters);
+            var parameterView =
+                Parameters == null ? ParameterView.Empty : ParameterView.FromDictionary(Parameters);
             return webViewManager.AddRootComponentAsync(ComponentType, Selector, parameterView);
         }
 

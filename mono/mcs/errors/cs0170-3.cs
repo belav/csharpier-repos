@@ -5,19 +5,19 @@ using System;
 
 struct S2
 {
-	public int p;
+    public int p;
 }
 
 struct S
 {
-	public S2 s2;
+    public S2 s2;
 }
 
 class C
 {
     static void Main()
     {
-		S s;
-		Console.WriteLine (s.s2.p);
+        S s;
+        Console.WriteLine(s.s2.p);
     }
 }

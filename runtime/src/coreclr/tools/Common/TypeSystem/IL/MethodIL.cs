@@ -35,7 +35,8 @@ namespace Internal.IL
             int handlerOffset,
             int handlerLength,
             int classToken,
-            int filterOffset)
+            int filterOffset
+        )
         {
             Kind = kind;
             TryOffset = tryOffset;
@@ -71,7 +72,10 @@ namespace Internal.IL
         /// (typically a <see cref="MethodDesc"/>, <see cref="FieldDesc"/>, <see cref="TypeDesc"/>,
         /// or <see cref="MethodSignature"/>).
         /// </summary>
-        public abstract object GetObject(int token, NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw);
+        public abstract object GetObject(
+            int token,
+            NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw
+        );
 
         public override string ToString()
         {

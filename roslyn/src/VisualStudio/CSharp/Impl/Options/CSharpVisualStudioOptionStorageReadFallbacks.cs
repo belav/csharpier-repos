@@ -21,46 +21,90 @@ internal static class CSharpVisualStudioOptionStorageReadFallbacks
     [ExportVisualStudioStorageReadFallback("csharp_space_between_parentheses"), Shared]
     internal sealed class SpaceBetweenFarentheses : IVisualStudioStorageReadFallback
     {
-        private static ImmutableArray<(string key, int flag)> s_storages => ImmutableArray.Create(
-            ("TextEditor.CSharp.Specific.SpaceWithinExpressionParentheses", (int)SpacePlacementWithinParentheses.Expressions),
-            ("TextEditor.CSharp.Specific.SpaceWithinCastParentheses", (int)SpacePlacementWithinParentheses.Expressions),
-            ("TextEditor.CSharp.Specific.SpaceWithinOtherParentheses", (int)SpacePlacementWithinParentheses.ControlFlowStatements));
+        private static ImmutableArray<(string key, int flag)> s_storages =>
+            ImmutableArray.Create(
+                (
+                    "TextEditor.CSharp.Specific.SpaceWithinExpressionParentheses",
+                    (int)SpacePlacementWithinParentheses.Expressions
+                ),
+                (
+                    "TextEditor.CSharp.Specific.SpaceWithinCastParentheses",
+                    (int)SpacePlacementWithinParentheses.Expressions
+                ),
+                (
+                    "TextEditor.CSharp.Specific.SpaceWithinOtherParentheses",
+                    (int)SpacePlacementWithinParentheses.ControlFlowStatements
+                )
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SpaceBetweenFarentheses()
-        {
-        }
+        public SpaceBetweenFarentheses() { }
 
-        public Optional<object?> TryRead(string? language, TryReadValueDelegate readValue)
-            => TryReadFlags(s_storages, readValue, out var intValue) ? (SpacePlacementWithinParentheses)intValue : default;
+        public Optional<object?> TryRead(string? language, TryReadValueDelegate readValue) =>
+            TryReadFlags(s_storages, readValue, out var intValue)
+                ? (SpacePlacementWithinParentheses)intValue
+                : default;
     }
 
     [ExportVisualStudioStorageReadFallback("csharp_new_line_before_open_brace"), Shared]
     internal sealed class NewLinesForBraces : IVisualStudioStorageReadFallback
     {
-        private static ImmutableArray<(string key, int flag)> s_storages => ImmutableArray.Create(
-            ("TextEditor.CSharp.Specific.NewLinesForBracesInTypes", (int)NewLineBeforeOpenBracePlacement.Types),
-            ("TextEditor.CSharp.Specific.NewLinesForBracesInAnonymousTypes", (int)NewLineBeforeOpenBracePlacement.AnonymousTypes),
-            ("TextEditor.CSharp.Specific.NewLinesForBracesInObjectCollectionArrayInitializers", (int)NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers),
-            ("TextEditor.CSharp.Specific.NewLinesForBracesInProperties", (int)NewLineBeforeOpenBracePlacement.Properties),
-            ("TextEditor.CSharp.Specific.NewLinesForBracesInMethods", (int)NewLineBeforeOpenBracePlacement.Methods),
-            ("TextEditor.CSharp.Specific.NewLinesForBracesInAccessors", (int)NewLineBeforeOpenBracePlacement.Accessors),
-            ("TextEditor.CSharp.Specific.NewLinesForBracesInAnonymousMethods", (int)NewLineBeforeOpenBracePlacement.AnonymousMethods),
-            ("TextEditor.CSharp.Specific.NewLinesForBracesInLambdaExpressionBody", (int)NewLineBeforeOpenBracePlacement.LambdaExpressionBody),
-            ("TextEditor.CSharp.Specific.NewLinesForBracesInControlBlocks", (int)NewLineBeforeOpenBracePlacement.ControlBlocks));
+        private static ImmutableArray<(string key, int flag)> s_storages =>
+            ImmutableArray.Create(
+                (
+                    "TextEditor.CSharp.Specific.NewLinesForBracesInTypes",
+                    (int)NewLineBeforeOpenBracePlacement.Types
+                ),
+                (
+                    "TextEditor.CSharp.Specific.NewLinesForBracesInAnonymousTypes",
+                    (int)NewLineBeforeOpenBracePlacement.AnonymousTypes
+                ),
+                (
+                    "TextEditor.CSharp.Specific.NewLinesForBracesInObjectCollectionArrayInitializers",
+                    (int)NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers
+                ),
+                (
+                    "TextEditor.CSharp.Specific.NewLinesForBracesInProperties",
+                    (int)NewLineBeforeOpenBracePlacement.Properties
+                ),
+                (
+                    "TextEditor.CSharp.Specific.NewLinesForBracesInMethods",
+                    (int)NewLineBeforeOpenBracePlacement.Methods
+                ),
+                (
+                    "TextEditor.CSharp.Specific.NewLinesForBracesInAccessors",
+                    (int)NewLineBeforeOpenBracePlacement.Accessors
+                ),
+                (
+                    "TextEditor.CSharp.Specific.NewLinesForBracesInAnonymousMethods",
+                    (int)NewLineBeforeOpenBracePlacement.AnonymousMethods
+                ),
+                (
+                    "TextEditor.CSharp.Specific.NewLinesForBracesInLambdaExpressionBody",
+                    (int)NewLineBeforeOpenBracePlacement.LambdaExpressionBody
+                ),
+                (
+                    "TextEditor.CSharp.Specific.NewLinesForBracesInControlBlocks",
+                    (int)NewLineBeforeOpenBracePlacement.ControlBlocks
+                )
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NewLinesForBraces()
-        {
-        }
+        public NewLinesForBraces() { }
 
-        public Optional<object?> TryRead(string? language, TryReadValueDelegate readValue)
-            => TryReadFlags(s_storages, readValue, out var intValue) ? (NewLineBeforeOpenBracePlacement)intValue : default;
+        public Optional<object?> TryRead(string? language, TryReadValueDelegate readValue) =>
+            TryReadFlags(s_storages, readValue, out var intValue)
+                ? (NewLineBeforeOpenBracePlacement)intValue
+                : default;
     }
 
-    private static bool TryReadFlags(ImmutableArray<(string key, int flag)> storages, TryReadValueDelegate read, out int result)
+    private static bool TryReadFlags(
+        ImmutableArray<(string key, int flag)> storages,
+        TryReadValueDelegate read,
+        out int result
+    )
     {
         var hasAnyFlag = false;
         result = 0;

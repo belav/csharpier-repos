@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="EntryWrittenEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Diagnostics {
-
+namespace System.Diagnostics
+{
     using System.Diagnostics;
 
     using System;
@@ -16,7 +16,8 @@ namespace System.Diagnostics {
     ///       Provides data for the <see cref='System.Diagnostics.EventLog.EntryWritten'/> event.
     ///    </para>
     /// </devdoc>
-    public class EntryWrittenEventArgs : EventArgs {
+    public class EntryWrittenEventArgs : EventArgs
+    {
         private EventLogEntry entry;
 
         /// <devdoc>
@@ -24,11 +25,10 @@ namespace System.Diagnostics {
         ///       The default constructor, which
         ///       initializes a new instance of the <see cref='System.Diagnostics.EntryWrittenEventArgs'/> class without
         ///       specifying a value for <see cref='System.Diagnostics.EntryWrittenEventArgs.Entry'/>.
-        ///       
+        ///
         ///    </para>
         /// </devdoc>
-        public EntryWrittenEventArgs() {
-        }
+        public EntryWrittenEventArgs() { }
 
         /// <devdoc>
         ///    <para>
@@ -36,21 +36,21 @@ namespace System.Diagnostics {
         ///       specified event log entry.
         ///    </para>
         /// </devdoc>
-        public EntryWrittenEventArgs(EventLogEntry entry) {
+        public EntryWrittenEventArgs(EventLogEntry entry)
+        {
             this.entry = entry;
         }
-        
+
         /// <devdoc>
         ///    <para>
         ///       Represents
         ///       an event log entry.
-        ///       
+        ///
         ///    </para>
         /// </devdoc>
-        public EventLogEntry Entry {
-            get {
-                return this.entry;
-            }
+        public EventLogEntry Entry
+        {
+            get { return this.entry; }
         }
     }
 }

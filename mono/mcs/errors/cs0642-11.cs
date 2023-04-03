@@ -4,9 +4,10 @@
 
 public class C
 {
-	public void Test ()
-	{
-		using (System.IDisposable arg = null);
-		{ }
-	}
+    public void Test()
+    {
+        using (System.IDisposable arg = null)
+            ;
+        { }
+    }
 }

@@ -4,11 +4,9 @@
 using System;
 
 [Obsolete("Is obsolete", true)]
-class ObsoleteClass
-{
-}
+class ObsoleteClass { }
 
 interface Ex
 {
-	void Foo (ObsoleteClass o1, ObsoleteClass o2);
+    void Foo(ObsoleteClass o1, ObsoleteClass o2);
 }

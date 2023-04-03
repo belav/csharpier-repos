@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Classification
 
             public event EventHandler<SnapshotSpanEventArgs>? TagsChanged;
 
-            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(NormalizedSnapshotSpanCollection spans)
+            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(
+                NormalizedSnapshotSpanCollection spans
+            )
             {
                 if (_tagComputer == null)
                     throw new ObjectDisposedException(GetType().FullName);
@@ -31,8 +33,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 return _tagComputer.GetTags(spans);
             }
 
-            private void OnTagsChanged(object? sender, SnapshotSpanEventArgs e)
-                => TagsChanged?.Invoke(this, e);
+            private void OnTagsChanged(object? sender, SnapshotSpanEventArgs e) =>
+                TagsChanged?.Invoke(this, e);
 
             public void Dispose()
             {

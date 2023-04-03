@@ -3,13 +3,13 @@
 
 public class Test
 {
-	public static void Main ()
-	{
-		var x = nameof (A.Y);
-	}
+    public static void Main()
+    {
+        var x = nameof(A.Y);
+    }
 }
-	 
+
 public class A
 {
-	private int Y { get; set; }
+    private int Y { get; set; }
 }

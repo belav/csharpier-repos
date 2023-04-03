@@ -8,16 +8,16 @@ namespace System.Web.Razor.Generator
 {
     public abstract class BlockCodeGenerator : IBlockCodeGenerator
     {
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = "This class has no instance state")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+            Justification = "This class has no instance state"
+        )]
         public static readonly IBlockCodeGenerator Null = new NullBlockCodeGenerator();
 
-        public virtual void GenerateStartBlockCode(Block target, CodeGeneratorContext context)
-        {
-        }
+        public virtual void GenerateStartBlockCode(Block target, CodeGeneratorContext context) { }
 
-        public virtual void GenerateEndBlockCode(Block target, CodeGeneratorContext context)
-        {
-        }
+        public virtual void GenerateEndBlockCode(Block target, CodeGeneratorContext context) { }
 
         public override bool Equals(object obj)
         {
@@ -31,13 +31,9 @@ namespace System.Web.Razor.Generator
 
         private class NullBlockCodeGenerator : IBlockCodeGenerator
         {
-            public void GenerateStartBlockCode(Block target, CodeGeneratorContext context)
-            {
-            }
+            public void GenerateStartBlockCode(Block target, CodeGeneratorContext context) { }
 
-            public void GenerateEndBlockCode(Block target, CodeGeneratorContext context)
-            {
-            }
+            public void GenerateEndBlockCode(Block target, CodeGeneratorContext context) { }
 
             public override string ToString()
             {

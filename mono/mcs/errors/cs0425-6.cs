@@ -3,19 +3,16 @@
 
 interface IA
 {
-	void Foo<U> ();
+    void Foo<U>();
 }
 
 class CA
 {
-	public void Foo<T> () where T : class
-	{
-	}
+    public void Foo<T>()
+        where T : class { }
 }
 
 class CB : CA, IA
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

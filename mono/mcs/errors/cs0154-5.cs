@@ -3,17 +3,15 @@
 
 static class BugReport
 {
-	static float MyProperty {
-		set { }
-	}
+    static float MyProperty
+    {
+        set { }
+    }
 
-	static void MyExtension (this float val)
-	{
-	}
+    static void MyExtension(this float val) { }
 
-	public static void Main ()
-	{
-		MyProperty.MyExtension ();
-	}
+    public static void Main()
+    {
+        MyProperty.MyExtension();
+    }
 }
-

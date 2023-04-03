@@ -30,7 +30,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         private readonly Dictionary<ProjectId, AbstractProject> _projects = new();
 
         [Obsolete("This is a compatibility shim; please do not use it.")]
-        public VisualStudioProjectTracker(Workspace workspace, VisualStudioProjectFactory projectFactory, IThreadingContext threadingContext)
+        public VisualStudioProjectTracker(
+            Workspace workspace,
+            VisualStudioProjectFactory projectFactory,
+            IThreadingContext threadingContext
+        )
         {
             _workspace = workspace;
             _projectFactory = projectFactory;
@@ -65,7 +69,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // HACK: to keep F# working, we will ensure we return the ProjectId if there is a project that matches this path. Otherwise, we'll just return
             // a random ProjectId, which is sufficient for their needs. They'll simply observe there is no project with that ID, and then go and create a
             // new project. Then they call this function again, and fetch the real ID.
-            return _workspace.CurrentSolution.Projects.FirstOrDefault(p => p.FilePath == filePath)?.Id ?? ProjectId.CreateNewId("ProjectNotFound");
+            return _workspace.CurrentSolution.Projects
+                    .FirstOrDefault(p => p.FilePath == filePath)
+                    ?.Id ?? ProjectId.CreateNewId("ProjectNotFound");
         }
 
         [Obsolete("This is a compatibility shim for TypeScript and F#; please do not use it.")]
@@ -94,7 +100,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         [Obsolete("This is a compatibility shim for TypeScript and F#; please do not use it.")]
         internal bool TryGetProjectByBinPath(string filePath, out AbstractProject project)
         {
-            var projectsWithBinPath = _workspace.CurrentSolution.Projects.Where(p => string.Equals(p.OutputFilePath, filePath, StringComparison.OrdinalIgnoreCase)).ToList();
+            var projectsWithBinPath = _workspace.CurrentSolution.Projects
+                .Where(
+                    p =>
+                        string.Equals(
+                            p.OutputFilePath,
+                            filePath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                )
+                .ToList();
 
             if (projectsWithBinPath.Count == 1)
             {
@@ -114,7 +129,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             private readonly ProjectId _id;
 
             public StubProject(VisualStudioProjectTracker projectTracker, Project project)
-                : base(projectTracker, null, project.Name + "_Stub", project.FilePath, null, project.Language, Guid.Empty, null, null, null, null)
+                : base(
+                    projectTracker,
+                    null,
+                    project.Name + "_Stub",
+                    project.FilePath,
+                    null,
+                    project.Language,
+                    Guid.Empty,
+                    null,
+                    null,
+                    null,
+                    null
+                )
             {
                 _id = project.Id;
             }
@@ -134,15 +161,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     Hierarchy = project.Hierarchy,
                     ProjectGuid = project.Guid,
                 };
-                project.VisualStudioProject = this.ThreadingContext.JoinableTaskFactory.Run(() => _projectFactory.CreateAndAddToWorkspaceAsync(
-                    project.ProjectSystemName, project.Language, creationInfo, CancellationToken.None));
+                project.VisualStudioProject = this.ThreadingContext.JoinableTaskFactory.Run(
+                    () =>
+                        _projectFactory.CreateAndAddToWorkspaceAsync(
+                            project.ProjectSystemName,
+                            project.Language,
+                            creationInfo,
+                            CancellationToken.None
+                        )
+                );
                 project.UpdateVisualStudioProjectProperties();
             }
             else
             {
                 // We don't have an ID, so make something up
                 project.ExplicitId = ProjectId.CreateNewId(project.ProjectSystemName);
-                Workspace.OnProjectAdded(ProjectInfo.Create(project.ExplicitId, VersionStamp.Create(), project.ProjectSystemName, project.ProjectSystemName, project.Language));
+                Workspace.OnProjectAdded(
+                    ProjectInfo.Create(
+                        project.ExplicitId,
+                        VersionStamp.Create(),
+                        project.ProjectSystemName,
+                        project.ProjectSystemName,
+                        project.Language
+                    )
+                );
             }
 
             _projects[project.Id] = project;

@@ -4,16 +4,14 @@
 
 namespace CS208
 {
-	public class Foo
-	{
-	}
+    public class Foo { }
 
-	public class Bar
-	{
-		unsafe static void Main ()
-		{			
-			Foo f = new Foo ();
-			Foo *s = &f;
-		}
-	}
+    public class Bar
+    {
+        unsafe static void Main()
+        {
+            Foo f = new Foo();
+            Foo* s = &f;
+        }
+    }
 }

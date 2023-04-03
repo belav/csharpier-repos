@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'channel': {
                 'title': 'James Newton-King',
                 'link': 'http://james.newtonking.com',
@@ -80,9 +81,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
 
             JObject rss = JObject.Parse(json);
 
-            var postTitles =
-                from p in rss["channel"]["item"]
-                select (string)p["title"];
+            var postTitles = from p in rss["channel"]["item"] select (string)p["title"];
 
             foreach (var item in postTitles)
             {
@@ -93,8 +92,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
 
             var categories =
                 from c in rss["channel"]["item"].Children()["category"].Values<string>()
-                group c by c
-                into g
+                group c by c into g
                 orderby g.Count() descending
                 select new { Category = g.Key, Count = g.Count() };
 

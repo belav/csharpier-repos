@@ -4,8 +4,8 @@
 
 public class D
 {
-	static void Main ()
-	{
-		new C ();
-	}
+    static void Main()
+    {
+        new C();
+    }
 }

@@ -4,11 +4,12 @@
 
 public class X
 {
-	static void test (int stop)
-	{
-		int pos = 0;
-		do {
-			break;
-		} while (pos < stop);
-	}
+    static void test(int stop)
+    {
+        int pos = 0;
+        do
+        {
+            break;
+        } while (pos < stop);
+    }
 }

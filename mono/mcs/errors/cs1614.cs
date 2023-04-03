@@ -3,9 +3,11 @@
 // Bug #56456
 
 using System;
-public class A : Attribute {
-	[A]
-	public static void Main() {
-	}
+
+public class A : Attribute
+{
+    [A]
+    public static void Main() { }
 }
-public class AAttribute : Attribute {}
+
+public class AAttribute : Attribute { }

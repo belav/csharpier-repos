@@ -18,23 +18,33 @@ namespace Microsoft.CodeAnalysis.Host
     {
         public abstract bool SupportsMappingImportDirectives { get; }
 
-        public abstract Task<ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)>> GetMappedTextChangesAsync(
+        public abstract Task<
+            ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)>
+        > GetMappedTextChangesAsync(
             Document oldDocument,
             Document newDocument,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         public abstract Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(
             Document document,
             IEnumerable<TextSpan> spans,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
-        protected static ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)> MatchMappedSpansToTextChanges(
+        protected static ImmutableArray<(
+            string mappedFilePath,
+            TextChange mappedTextChange
+        )> MatchMappedSpansToTextChanges(
             ImmutableArray<TextChange> textChanges,
-            ImmutableArray<MappedSpanResult> mappedSpanResults)
+            ImmutableArray<MappedSpanResult> mappedSpanResults
+        )
         {
             Contract.ThrowIfFalse(mappedSpanResults.Length == textChanges.Length);
 
-            using var _ = ArrayBuilder<(string, TextChange)>.GetInstance(out var mappedFilePathAndTextChange);
+            using var _ = ArrayBuilder<(string, TextChange)>.GetInstance(
+                out var mappedFilePathAndTextChange
+            );
             for (var i = 0; i < mappedSpanResults.Length; i++)
             {
                 // Only include changes that could be mapped.

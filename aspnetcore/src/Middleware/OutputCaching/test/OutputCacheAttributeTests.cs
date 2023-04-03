@@ -78,7 +78,9 @@ public class OutputCacheAttributeTests
         context.HttpContext.Request.Headers["HeaderA"] = "ValueA";
         context.HttpContext.Request.Headers["HeaderB"] = "ValueB";
 
-        var attribute = OutputCacheMethods.GetAttribute(nameof(OutputCacheMethods.VaryByHeaderNames));
+        var attribute = OutputCacheMethods.GetAttribute(
+            nameof(OutputCacheMethods.VaryByHeaderNames)
+        );
         await attribute.BuildPolicy().CacheRequestAsync(context, cancellation: default);
 
         Assert.True(context.EnableOutputCaching);
@@ -112,20 +114,30 @@ public class OutputCacheAttributeTests
             ["RouteB"] = 123.456,
         };
 
-        var attribute = OutputCacheMethods.GetAttribute(nameof(OutputCacheMethods.VaryByRouteValueNames));
+        var attribute = OutputCacheMethods.GetAttribute(
+            nameof(OutputCacheMethods.VaryByRouteValueNames)
+        );
         await attribute.BuildPolicy().CacheRequestAsync(context, cancellation: default);
 
         Assert.True(context.EnableOutputCaching);
         Assert.Contains("RouteA", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
         Assert.Contains("RouteC", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
-        Assert.DoesNotContain("RouteB", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
+        Assert.DoesNotContain(
+            "RouteB",
+            (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames
+        );
     }
 
     private class OutputCacheMethods
     {
         public static OutputCacheAttribute GetAttribute(string methodName)
         {
-            return typeof(OutputCacheMethods).GetMethod(methodName, System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public).GetAttribute<OutputCacheAttribute>();
+            return typeof(OutputCacheMethods)
+                .GetMethod(
+                    methodName,
+                    System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public
+                )
+                .GetAttribute<OutputCacheAttribute>();
         }
 
         [OutputCache()]

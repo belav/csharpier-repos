@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,43 +37,42 @@ using System.Xml;
 
 namespace System.Web.UI.WebControls
 {
-	public
-	class XmlBuilder : ControlBuilder
-	{
-		public override void AppendLiteralString (string s)
-		{
-		}
+    public class XmlBuilder : ControlBuilder
+    {
+        public override void AppendLiteralString(string s) { }
 
-		public override Type GetChildControlType (string tagName, IDictionary attribs)
-		{
-			return null;
-		}
+        public override Type GetChildControlType(string tagName, IDictionary attribs)
+        {
+            return null;
+        }
 
-		public override bool NeedsTagInnerText ()
-		{
-			return true;
-		}
+        public override bool NeedsTagInnerText()
+        {
+            return true;
+        }
 
-		public override void SetTagInnerText (string text)
-		{
-			string trimmed = text.Trim ();
-			if (trimmed == "")
-				return;
+        public override void SetTagInnerText(string text)
+        {
+            string trimmed = text.Trim();
+            if (trimmed == "")
+                return;
 
-			XmlDocument doc = new XmlDocument ();
-			try {
-				doc.LoadXml (text);
-			} catch (XmlException xmle) {
-				Location newloc = new Location (Location);
-				if (xmle.LineNumber >= 0)
-					newloc.BeginLine += xmle.LineNumber - 1;
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                doc.LoadXml(text);
+            }
+            catch (XmlException xmle)
+            {
+                Location newloc = new Location(Location);
+                if (xmle.LineNumber >= 0)
+                    newloc.BeginLine += xmle.LineNumber - 1;
 
-				Location = newloc;
-				throw;
-			}
+                Location = newloc;
+                throw;
+            }
 
-			base.AppendLiteralString (trimmed);
-		}
-	}
+            base.AppendLiteralString(trimmed);
+        }
+    }
 }
-

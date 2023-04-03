@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,7 +35,8 @@ namespace Castle.DynamicProxy.Tests
 
             var options = new ProxyGenerationOptions(hook);
 
-            var proxy = (ServiceClass)generator.CreateClassProxy(typeof(ServiceClass), options, logger);
+            var proxy = (ServiceClass)
+                generator.CreateClassProxy(typeof(ServiceClass), options, logger);
 
             Assert.IsTrue(hook.Completed);
             Assert.AreEqual(13, hook.AskedMembers.Count, "Asked members");
@@ -56,8 +57,12 @@ namespace Castle.DynamicProxy.Tests
             var options = new ProxyGenerationOptions(hook);
 
             var proxy = (IService)
-                        generator.CreateInterfaceProxyWithTarget(
-                            typeof(IService), new ServiceImpl(), options, logger);
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IService),
+                    new ServiceImpl(),
+                    options,
+                    logger
+                );
 
             Assert.IsTrue(hook.Completed);
             Assert.AreEqual(10, hook.AskedMembers.Count);
@@ -110,7 +115,10 @@ namespace Castle.DynamicProxy.Tests
 
             generator.CreateClassProxy(typeof(EmptyClass), new ProxyGenerationOptions(hook));
 
-            var memberwiseClone = typeof(EmptyClass).GetMethod("MemberwiseClone", BindingFlags.NonPublic | BindingFlags.Instance);
+            var memberwiseClone = typeof(EmptyClass).GetMethod(
+                "MemberwiseClone",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             CollectionAssert.DoesNotContain(hook.AskedMembers, memberwiseClone);
             CollectionAssert.DoesNotContain(hook.NonVirtualMembers, memberwiseClone);
         }

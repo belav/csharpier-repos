@@ -22,7 +22,12 @@ namespace ILCompiler.DependencyAnalysis
 
         public DynamicInvokeTemplateDataNode(ExternalReferencesTableNode externalReferences)
         {
-            _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, "__dynamic_invoke_template_data_end", true);
+            _endSymbol = new ObjectAndOffsetSymbolNode(
+                this,
+                0,
+                "__dynamic_invoke_template_data_end",
+                true
+            );
             _externalReferences = externalReferences;
         }
 
@@ -36,13 +41,20 @@ namespace ILCompiler.DependencyAnalysis
         public override ObjectNodeSection Section => _externalReferences.Section;
         public override bool IsShareable => false;
         public override bool StaticDependenciesAreComputed => true;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
-        public override bool ShouldSkipEmittingObjectNode(NodeFactory factory) => !factory.MetadataManager.GetDynamicInvokeTemplateMethods().GetEnumerator().MoveNext();
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
+
+        public override bool ShouldSkipEmittingObjectNode(NodeFactory factory) =>
+            !factory.MetadataManager.GetDynamicInvokeTemplateMethods().GetEnumerator().MoveNext();
 
         public int GetIdForMethod(MethodDesc dynamicInvokeMethod, NodeFactory factory)
         {
             // We should only see canonical or non-shared methods here
-            Debug.Assert(dynamicInvokeMethod.GetCanonMethodTarget(CanonicalFormKind.Specific) == dynamicInvokeMethod);
+            Debug.Assert(
+                dynamicInvokeMethod.GetCanonMethodTarget(CanonicalFormKind.Specific)
+                    == dynamicInvokeMethod
+            );
             Debug.Assert(!dynamicInvokeMethod.IsCanonicalMethod(CanonicalFormKind.Universal));
 
             if (_methodToTemplateIndex == null)
@@ -56,7 +68,9 @@ namespace ILCompiler.DependencyAnalysis
         private void BuildMethodToIdMap(NodeFactory factory)
         {
             // Get a sorted list of generated stubs
-            List<MethodDesc> methods = new List<MethodDesc>(factory.MetadataManager.GetDynamicInvokeTemplateMethods());
+            List<MethodDesc> methods = new List<MethodDesc>(
+                factory.MetadataManager.GetDynamicInvokeTemplateMethods()
+            );
 
             // Assign each stub an ID
             var methodToTemplateIndex = new Dictionary<MethodDesc, int>();
@@ -72,22 +86,44 @@ namespace ILCompiler.DependencyAnalysis
             _methodToTemplateIndex = methodToTemplateIndex;
         }
 
-        internal static DependencyListEntry[] GetDependenciesDueToInvokeTemplatePresence(NodeFactory factory, MethodDesc method)
+        internal static DependencyListEntry[] GetDependenciesDueToInvokeTemplatePresence(
+            NodeFactory factory,
+            MethodDesc method
+        )
         {
             return new[]
             {
                 new DependencyListEntry(factory.MethodEntrypoint(method), "Dynamic invoke stub"),
-                new DependencyListEntry(factory.NativeLayout.PlacedSignatureVertex(factory.NativeLayout.MethodNameAndSignatureVertex(method)), "Dynamic invoke stub"),
-                new DependencyListEntry(factory.NecessaryTypeSymbol(method.OwningType), "Dynamic invoke stub containing type"),
-                new DependencyListEntry(factory.NativeLayout.TemplateMethodLayout(method), "Template"),
-                new DependencyListEntry(factory.NativeLayout.TemplateMethodEntry(method), "Template"),
+                new DependencyListEntry(
+                    factory.NativeLayout.PlacedSignatureVertex(
+                        factory.NativeLayout.MethodNameAndSignatureVertex(method)
+                    ),
+                    "Dynamic invoke stub"
+                ),
+                new DependencyListEntry(
+                    factory.NecessaryTypeSymbol(method.OwningType),
+                    "Dynamic invoke stub containing type"
+                ),
+                new DependencyListEntry(
+                    factory.NativeLayout.TemplateMethodLayout(method),
+                    "Template"
+                ),
+                new DependencyListEntry(
+                    factory.NativeLayout.TemplateMethodEntry(method),
+                    "Template"
+                ),
             };
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             // Ensure the native layout blob has been saved
             factory.MetadataManager.NativeLayoutInfo.SaveNativeLayoutInfoWriter(factory);
@@ -112,21 +148,33 @@ namespace ILCompiler.DependencyAnalysis
             }
 
             if (factory.Target.SupportsRelativePointers)
-                objData.EmitReloc(factory.NecessaryTypeSymbol(containerType), RelocType.IMAGE_REL_BASED_RELPTR32);
+                objData.EmitReloc(
+                    factory.NecessaryTypeSymbol(containerType),
+                    RelocType.IMAGE_REL_BASED_RELPTR32
+                );
             else
                 objData.EmitPointerReloc(factory.NecessaryTypeSymbol(containerType));
 
-            List<KeyValuePair<MethodDesc, int>> sortedList = new List<KeyValuePair<MethodDesc, int>>(_methodToTemplateIndex);
-            sortedList.Sort((firstEntry, secondEntry) => firstEntry.Value.CompareTo(secondEntry.Value));
+            List<KeyValuePair<MethodDesc, int>> sortedList = new List<
+                KeyValuePair<MethodDesc, int>
+            >(_methodToTemplateIndex);
+            sortedList.Sort(
+                (firstEntry, secondEntry) => firstEntry.Value.CompareTo(secondEntry.Value)
+            );
 
             for (int i = 0; i < sortedList.Count; i++)
             {
-                var nameAndSig = factory.NativeLayout.PlacedSignatureVertex(factory.NativeLayout.MethodNameAndSignatureVertex(sortedList[i].Key));
+                var nameAndSig = factory.NativeLayout.PlacedSignatureVertex(
+                    factory.NativeLayout.MethodNameAndSignatureVertex(sortedList[i].Key)
+                );
 
                 if (factory.Target.SupportsRelativePointers)
                 {
                     objData.EmitInt(nameAndSig.SavedVertex.VertexOffset);
-                    objData.EmitReloc(factory.MethodEntrypoint(sortedList[i].Key), RelocType.IMAGE_REL_BASED_RELPTR32);
+                    objData.EmitReloc(
+                        factory.MethodEntrypoint(sortedList[i].Key),
+                        RelocType.IMAGE_REL_BASED_RELPTR32
+                    );
                 }
                 else
                 {

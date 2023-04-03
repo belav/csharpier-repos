@@ -29,21 +29,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
             _registryKey = registryKey;
         }
 
-        public static async Task<LocalUserRegistryOptionPersister> CreateAsync(IAsyncServiceProvider provider)
+        public static async Task<LocalUserRegistryOptionPersister> CreateAsync(
+            IAsyncServiceProvider provider
+        )
         {
             // SLocalRegistry service is free-threaded -- see https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1408594.
             // Note: not using IAsyncServiceProvider.GetServiceAsync<TService, TInterface> since the extension method might switch to UI thread.
             // See https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1408619/.
-            var localRegistry = (ILocalRegistry4?)await provider.GetServiceAsync(typeof(SLocalRegistry)).ConfigureAwait(false);
+            var localRegistry = (ILocalRegistry4?)
+                await provider.GetServiceAsync(typeof(SLocalRegistry)).ConfigureAwait(false);
             Contract.ThrowIfNull(localRegistry);
-            Contract.ThrowIfFalse(ErrorHandler.Succeeded(localRegistry.GetLocalRegistryRootEx((uint)__VsLocalRegistryType.RegType_UserSettings, out var rootHandle, out var rootPath)));
+            Contract.ThrowIfFalse(
+                ErrorHandler.Succeeded(
+                    localRegistry.GetLocalRegistryRootEx(
+                        (uint)__VsLocalRegistryType.RegType_UserSettings,
+                        out var rootHandle,
+                        out var rootPath
+                    )
+                )
+            );
 
             var handle = (__VsLocalRegistryRootHandle)rootHandle;
             Contract.ThrowIfTrue(string.IsNullOrEmpty(rootPath));
             Contract.ThrowIfTrue(handle == __VsLocalRegistryRootHandle.RegHandle_Invalid);
 
-            var root = (__VsLocalRegistryRootHandle.RegHandle_LocalMachine == handle) ? Registry.LocalMachine : Registry.CurrentUser;
-            return new LocalUserRegistryOptionPersister(root.CreateSubKey(rootPath, RegistryKeyPermissionCheck.ReadWriteSubTree));
+            var root =
+                (__VsLocalRegistryRootHandle.RegHandle_LocalMachine == handle)
+                    ? Registry.LocalMachine
+                    : Registry.CurrentUser;
+            return new LocalUserRegistryOptionPersister(
+                root.CreateSubKey(rootPath, RegistryKeyPermissionCheck.ReadWriteSubTree)
+            );
         }
 
         public bool TryFetch(OptionKey2 optionKey, string path, string key, out object? value)
@@ -60,22 +76,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                 // Options that are of type bool have to be serialized as integers
                 if (optionKey.Option.Type == typeof(bool))
                 {
-                    value = subKey.GetValue(key, defaultValue: (bool)optionKey.Option.DefaultValue! ? 1 : 0).Equals(1);
+                    value = subKey
+                        .GetValue(key, defaultValue: (bool)optionKey.Option.DefaultValue! ? 1 : 0)
+                        .Equals(1);
                     return true;
                 }
                 else if (optionKey.Option.Type == typeof(long))
                 {
-                    var untypedValue = subKey.GetValue(key, defaultValue: optionKey.Option.DefaultValue);
+                    var untypedValue = subKey.GetValue(
+                        key,
+                        defaultValue: optionKey.Option.DefaultValue
+                    );
                     switch (untypedValue)
                     {
                         case string stringValue:
-                            {
-                                // Due to a previous bug we were accidentally serializing longs as strings.
-                                // Gracefully convert those back.
-                                var suceeded = long.TryParse(stringValue, out var longValue);
-                                value = longValue;
-                                return suceeded;
-                            }
+                        {
+                            // Due to a previous bug we were accidentally serializing longs as strings.
+                            // Gracefully convert those back.
+                            var suceeded = long.TryParse(stringValue, out var longValue);
+                            value = longValue;
+                            return suceeded;
+                        }
 
                         case long longValue:
                             value = longValue;
@@ -84,17 +105,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                 }
                 else if (optionKey.Option.Type == typeof(int))
                 {
-                    var untypedValue = subKey.GetValue(key, defaultValue: optionKey.Option.DefaultValue);
+                    var untypedValue = subKey.GetValue(
+                        key,
+                        defaultValue: optionKey.Option.DefaultValue
+                    );
                     switch (untypedValue)
                     {
                         case string stringValue:
-                            {
-                                // Due to a previous bug we were accidentally serializing ints as strings. 
-                                // Gracefully convert those back.
-                                var suceeded = int.TryParse(stringValue, out var intValue);
-                                value = intValue;
-                                return suceeded;
-                            }
+                        {
+                            // Due to a previous bug we were accidentally serializing ints as strings.
+                            // Gracefully convert those back.
+                            var suceeded = int.TryParse(stringValue, out var intValue);
+                            value = intValue;
+                            return suceeded;
+                        }
 
                         case int intValue:
                             value = intValue;
@@ -159,7 +183,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                     Contract.ThrowIfNull(value);
 
                     // If the enum is larger than an int, store as a QWord
-                    if (Marshal.SizeOf(Enum.GetUnderlyingType(optionType)) > Marshal.SizeOf(typeof(int)))
+                    if (
+                        Marshal.SizeOf(Enum.GetUnderlyingType(optionType))
+                        > Marshal.SizeOf(typeof(int))
+                    )
                     {
                         subKey.SetValue(key, (long)value, RegistryValueKind.QWord);
                     }

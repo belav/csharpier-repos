@@ -3,13 +3,13 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSAttribute (new bool [] {true, false})]
-[assembly:CLSCompliant (true)]
 
-public class CLSAttribute: Attribute {
-        public CLSAttribute () {
-        }
-        
-        public CLSAttribute(bool[] array) {
-        }
+[assembly: CLSAttribute(new bool[] { true, false })]
+[assembly: CLSCompliant(true)]
+
+public class CLSAttribute : Attribute
+{
+    public CLSAttribute() { }
+
+    public CLSAttribute(bool[] array) { }
 }

@@ -73,7 +73,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             };
 
             Assert.True(task.Execute());
-            AssertEx.AssertEqualToleratingWhitespaceDifferences($$"""Copying reference assembly from "{{file.Path}}" to "{{dest}}".""", engine.Log);
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                $$"""Copying reference assembly from "{{file.Path}}" to "{{dest}}".""",
+                engine.Log
+            );
             Assert.Equal("test", File.ReadAllText(dest));
         }
 
@@ -95,11 +98,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 
             Assert.True(task.Execute());
 
-            AssertEx.AssertEqualToleratingWhitespaceDifferences($$"""
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                $$"""
                 Could not extract the MVID from "{{source.Path}}". Are you sure it is a reference assembly?
                 Copying reference assembly from "{{source.Path}}" to "{{dest}}".
                 """,
-                engine.Log);
+                engine.Log
+            );
 
             Assert.Equal("test", File.ReadAllText(dest.Path));
         }
@@ -126,11 +131,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 
             Assert.True(task.Execute());
 
-            AssertEx.AssertEqualToleratingWhitespaceDifferences($$"""
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                $$"""
                 Source reference assembly "{{source.Path}}" (timestamp "{{sourceTimestamp}}", MVID "f851dda2-6ea3-475e-8c0d-19bd3c4d9437") differs from destination "{{dest.Path}}" (timestamp "{{destTimestamp}}", MVID "8e1ed25b-2980-4f32-9dee-c1e3b0a57c4b").
                 Copying reference assembly from "{{source.Path}}" to "{{dest.Path}}".
                 """,
-                engine.Log);
+                engine.Log
+            );
         }
     }
 }

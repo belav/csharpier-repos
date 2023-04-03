@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         /// </summary>
         public override ImmutableArray<string> Tags => RequiresNonDocumentChangeTags;
 
-        public ChangeSignatureCodeAction(AbstractChangeSignatureService changeSignatureService, ChangeSignatureAnalysisSucceededContext context)
+        public ChangeSignatureCodeAction(
+            AbstractChangeSignatureService changeSignatureService,
+            ChangeSignatureAnalysisSucceededContext context
+        )
         {
             _changeSignatureService = changeSignatureService;
             _context = context;
@@ -33,18 +36,35 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
         public override string Title => FeaturesResources.Change_signature;
 
-        public override object? GetOptions(CancellationToken cancellationToken)
-            => AbstractChangeSignatureService.GetChangeSignatureOptions(_context);
+        public override object? GetOptions(CancellationToken cancellationToken) =>
+            AbstractChangeSignatureService.GetChangeSignatureOptions(_context);
 
-        protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(object options, CancellationToken cancellationToken)
+        protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+            object options,
+            CancellationToken cancellationToken
+        )
         {
-            if (options is ChangeSignatureOptionsResult changeSignatureOptions && changeSignatureOptions != null)
+            if (
+                options is ChangeSignatureOptionsResult changeSignatureOptions
+                && changeSignatureOptions != null
+            )
             {
-                var changeSignatureResult = await _changeSignatureService.ChangeSignatureWithContextAsync(_context, changeSignatureOptions, cancellationToken).ConfigureAwait(false);
+                var changeSignatureResult = await _changeSignatureService
+                    .ChangeSignatureWithContextAsync(
+                        _context,
+                        changeSignatureOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (changeSignatureResult.Succeeded)
                 {
-                    return SpecializedCollections.SingletonEnumerable<CodeActionOperation>(new ChangeSignatureCodeActionOperation(changeSignatureResult.UpdatedSolution, changeSignatureResult.ConfirmationMessage));
+                    return SpecializedCollections.SingletonEnumerable<CodeActionOperation>(
+                        new ChangeSignatureCodeActionOperation(
+                            changeSignatureResult.UpdatedSolution,
+                            changeSignatureResult.ConfirmationMessage
+                        )
+                    );
                 }
             }
 

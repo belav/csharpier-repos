@@ -3,23 +3,21 @@
 
 using System;
 
-[AttributeUsage (AttributeTargets.Class, AllowMultiple = true)]
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class SimpleAttribute : Attribute
 {
-	string name;
+    string name;
 
-	public readonly string MyNamedArg;
+    public readonly string MyNamedArg;
 
-	public SimpleAttribute (string name)
-	{
-		this.name = name;
-	}
+    public SimpleAttribute(string name)
+    {
+        this.name = name;
+    }
 }
 
-[Simple ("Dummy", MyNamedArg = "Dude!")]
-public class Blah {
-
-	public static void Main ()
-	{
-	}
+[Simple("Dummy", MyNamedArg = "Dude!")]
+public class Blah
+{
+    public static void Main() { }
 }

@@ -5,12 +5,10 @@ using System.Linq;
 
 class C
 {
-	public static void Main ()
-	{
-		var e = 
-			from a1 in "abcd"
-			select a1;
-		
-		a1 = null;
-	}
+    public static void Main()
+    {
+        var e = from a1 in "abcd" select a1;
+
+        a1 = null;
+    }
 }

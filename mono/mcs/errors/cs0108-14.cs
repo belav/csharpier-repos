@@ -4,10 +4,10 @@
 
 public class B : A
 {
-	public delegate void D ();
+    public delegate void D();
 }
 
 public class A
 {
-	public int D;
+    public int D;
 }

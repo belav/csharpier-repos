@@ -3,13 +3,12 @@
 //
 
 //Disable tailcall if the caller is marked no-inline.
-//Test expects Foo() to catch the exception thrown by Bar(). 
+//Test expects Foo() to catch the exception thrown by Bar().
 using System;
 using System.Runtime.CompilerServices;
 
 public class My
 {
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void bar()
     {
@@ -35,14 +34,11 @@ public class My
         try
         {
             return foo();
-
         }
         catch (System.Exception e)
         {
             Console.WriteLine(e);
             return 101;
         }
-
     }
-
 }

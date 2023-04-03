@@ -3,17 +3,16 @@
 
 using System.Runtime.CompilerServices;
 
-interface PropertyInterface {
-        int this[bool b] { set; }
+interface PropertyInterface
+{
+    int this[bool b] { set; }
 }
 
-public class PropertyClass: PropertyInterface {
-        int PropertyInterface.this [bool b]{ 
-                get { 
-                        return 0;
-                } 
-                set { }
-        }
+public class PropertyClass : PropertyInterface
+{
+    int PropertyInterface.this[bool b]
+    {
+        get { return 0; }
+        set { }
+    }
 }
-
-

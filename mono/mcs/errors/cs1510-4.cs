@@ -3,13 +3,11 @@
 
 class M
 {
-	static void Test (ref byte b)
-	{
-	}
-	
-	public static void Main ()
-	{
-		byte b = 1;
-		Test (ref (byte) b);
-	}
+    static void Test(ref byte b) { }
+
+    public static void Main()
+    {
+        byte b = 1;
+        Test(ref (byte)b);
+    }
 }

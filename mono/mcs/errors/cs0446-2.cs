@@ -3,10 +3,8 @@
 
 class C
 {
-	static void M ()
-	{
-		foreach (int i in delegate { } )
-		{
-		}
-	}
+    static void M()
+    {
+        foreach (int i in delegate { }) { }
+    }
 }

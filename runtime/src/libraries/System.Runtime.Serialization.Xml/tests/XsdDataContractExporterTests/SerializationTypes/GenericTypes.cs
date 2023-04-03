@@ -22,7 +22,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [Serializable]
-    internal class Foo<Q> where Q : new()
+    internal class Foo<Q>
+        where Q : new()
     {
         Q single;
         Q[] array;
@@ -35,6 +36,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     {
         [DataMember]
         T1 t1;
+
         [DataMember]
         T2 t2;
     }
@@ -88,10 +90,19 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             return schemaType;
         }
 
-        public XmlSchema GetSchema() { throw new NotImplementedException(); }
-        public void ReadXml(XmlReader reader) { throw new NotImplementedException(); }
-        public void WriteXml(XmlWriter writer) { throw new NotImplementedException(); }
+        public XmlSchema GetSchema()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
-
 }
-

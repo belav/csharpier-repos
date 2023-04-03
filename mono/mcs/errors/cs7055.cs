@@ -4,8 +4,8 @@
 using System;
 using System.Runtime.InteropServices;
 
-public class main {
-
+public class main
+{
     [DllImport("libname", EntryPoint = "scumbag")]
     static extern int scumbag(ref int X, [MarshalAs(UnmanagedType.ByValArray)] ref byte[] fb);
 }

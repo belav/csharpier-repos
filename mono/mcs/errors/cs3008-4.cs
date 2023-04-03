@@ -3,7 +3,7 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant(true)]
 
-public interface _I {
-}
+[assembly: CLSCompliant(true)]
+
+public interface _I { }

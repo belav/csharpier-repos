@@ -6,6 +6,6 @@ using System;
 
 public enum E
 {
-    [assembly: CLSCompliant (false)]
+    [assembly: CLSCompliant(false)]
     item
 }

@@ -22,28 +22,27 @@ namespace System.Activities.Debugger.Symbol
         public ICollection<ActivitySymbol> Symbols { get; set; }
 
         private byte[] checksum;
+
         public byte[] GetChecksum()
         {
             if (this.checksum == null)
             {
                 return null;
             }
-            return (byte[]) this.checksum.Clone();
+            return (byte[])this.checksum.Clone();
         }
-        
+
         [Flags]
         internal enum EncodingFormat : byte
         {
-            String = 0x76,    // Format as well as cookie. String format is hidden from public.
+            String = 0x76, // Format as well as cookie. String format is hidden from public.
             Binary = 0x77,
-            Checksum = 0x80            
+            Checksum = 0x80
         }
 
         internal const EncodingFormat DefaultEncodingFormat = EncodingFormat.Binary;
 
-        public WorkflowSymbol()
-        {
-        }
+        public WorkflowSymbol() { }
 
         // These constructors are private and used by Decode() method.
 
@@ -79,7 +78,7 @@ namespace System.Activities.Debugger.Symbol
                 switch (format)
                 {
                     case EncodingFormat.Binary:
-                        return ParseBinary(reader.ReadBytes(payloadBytesCount), checksum); // Compute the 
+                        return ParseBinary(reader.ReadBytes(payloadBytesCount), checksum); // Compute the
                     case EncodingFormat.String:
                         return ParseStringRepresentation(reader.ReadString(), checksum);
                 }
@@ -127,7 +126,7 @@ namespace System.Activities.Debugger.Symbol
                     Array.Copy(ms.GetBuffer(), buffer, ms.Length);
                     return Convert.ToBase64String(buffer);
                 }
-            } 
+            }
         }
 
         // Binary deserializer
@@ -200,7 +199,6 @@ namespace System.Activities.Debugger.Symbol
                 Symbols = symbols,
                 checksum = checksum
             };
-
         }
 
         public bool CalculateChecksum()
@@ -212,6 +210,5 @@ namespace System.Activities.Debugger.Symbol
             }
             return (this.checksum != null);
         }
-
     }
 }

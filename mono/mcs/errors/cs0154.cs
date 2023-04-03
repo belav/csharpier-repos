@@ -3,21 +3,17 @@
 
 public class A
 {
-	public string name 
-	{
-		set
-		{
-			name = value;
-		}
-	}
+    public string name
+    {
+        set { name = value; }
+    }
 }
 
 public class B
 {
-	public static void Main ()
-	{
-		A a = new A ();
-		string b = a.name;
-	}
+    public static void Main()
+    {
+        A a = new A();
+        string b = a.name;
+    }
 }
-			

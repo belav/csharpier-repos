@@ -2,6 +2,4 @@
 // Line: 5
 // Compiler options: -langversion:7
 
-readonly struct S
-{
-}
+readonly struct S { }

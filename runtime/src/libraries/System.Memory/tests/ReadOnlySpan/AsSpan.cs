@@ -89,17 +89,29 @@ namespace System.SpanTests
         }
 
         [Theory]
-        [MemberData(nameof(TestHelpers.StringSlice2ArgTestOutOfRangeData), MemberType = typeof(TestHelpers))]
+        [MemberData(
+            nameof(TestHelpers.StringSlice2ArgTestOutOfRangeData),
+            MemberType = typeof(TestHelpers)
+        )]
         public static unsafe void AsSpan_2Arg_OutOfRange(string text, int start)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("start", () => text.AsSpan(start).DontBox());
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "start",
+                () => text.AsSpan(start).DontBox()
+            );
         }
 
         [Theory]
-        [MemberData(nameof(TestHelpers.StringSlice3ArgTestOutOfRangeData), MemberType = typeof(TestHelpers))]
+        [MemberData(
+            nameof(TestHelpers.StringSlice3ArgTestOutOfRangeData),
+            MemberType = typeof(TestHelpers)
+        )]
         public static unsafe void AsSpan_3Arg_OutOfRange(string text, int start, int length)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("start", () => text.AsSpan(start, length).DontBox());
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "start",
+                () => text.AsSpan(start, length).DontBox()
+            );
         }
     }
 }

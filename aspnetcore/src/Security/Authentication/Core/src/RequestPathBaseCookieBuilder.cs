@@ -25,15 +25,15 @@ public class RequestPathBaseCookieBuilder : CookieBuilder
         var path = Path;
         if (path == null)
         {
-            var originalPathBase = context.Features.Get<IAuthenticationFeature>()?.OriginalPathBase ?? context.Request.PathBase;
+            var originalPathBase =
+                context.Features.Get<IAuthenticationFeature>()?.OriginalPathBase
+                ?? context.Request.PathBase;
             path = originalPathBase + AdditionalPath;
         }
 
         var options = base.Build(context, expiresFrom);
 
-        options.Path = !string.IsNullOrEmpty(path)
-            ? path
-            : "/";
+        options.Path = !string.IsNullOrEmpty(path) ? path : "/";
 
         return options;
     }

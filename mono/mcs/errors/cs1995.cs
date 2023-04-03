@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 class C
 {
-	public static async void Test ()
-	{
-		Task<int>[] d = null;
-		var r = from x in d select await x;
-	}
+    public static async void Test()
+    {
+        Task<int>[] d = null;
+        var r = from x in d select await x;
+    }
 }

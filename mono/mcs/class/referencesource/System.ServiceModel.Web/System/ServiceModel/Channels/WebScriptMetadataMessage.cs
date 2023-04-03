@@ -21,7 +21,8 @@ namespace System.ServiceModel.Channels
         const string proxyContentTag = "JavaScriptProxy";
         string proxyContent;
 
-        public WebScriptMetadataMessage(string action, string proxyContent) : base(MessageVersion.None, action, new WebScriptMetadataBodyWriter(proxyContent))
+        public WebScriptMetadataMessage(string action, string proxyContent)
+            : base(MessageVersion.None, action, new WebScriptMetadataBodyWriter(proxyContent))
         {
             this.proxyContent = proxyContent;
         }

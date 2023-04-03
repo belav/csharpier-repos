@@ -27,7 +27,9 @@ namespace System
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class WeakReference : ISerializable
     {
         // If you fix bugs here, please fix them in WeakReference<T> at the same time.
@@ -42,9 +44,7 @@ namespace System
         // Assumes a Short Weak Reference (ie TrackResurrection is false.)
         //
         public WeakReference(object? target)
-            : this(target, false)
-        {
-        }
+            : this(target, false) { }
 
         public WeakReference(object? target, bool trackResurrection)
         {
@@ -75,13 +75,16 @@ namespace System
 
         private void Create(object? target, bool trackResurrection)
         {
-            nint h = GCHandle.InternalAlloc(target, trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak);
-            _taggedHandle = trackResurrection ?
-                h | TracksResurrectionBit :
-                h;
+            nint h = GCHandle.InternalAlloc(
+                target,
+                trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak
+            );
+            _taggedHandle = trackResurrection ? h | TracksResurrectionBit : h;
 
 #if FEATURE_COMINTEROP || FEATURE_COMWRAPPERS
-            ComAwareWeakReference.ComInfo? comInfo = ComAwareWeakReference.ComInfo.FromObject(target);
+            ComAwareWeakReference.ComInfo? comInfo = ComAwareWeakReference.ComInfo.FromObject(
+                target
+            );
             if (comInfo != null)
             {
                 ComAwareWeakReference.SetComInfoInConstructor(ref _taggedHandle, comInfo);
@@ -165,7 +168,6 @@ namespace System
 
                 return target;
             }
-
             set
             {
                 nint th = _taggedHandle & ~TracksResurrectionBit;

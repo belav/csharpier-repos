@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,57 +33,71 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public class UserNameSecurityTokenParameters : SecurityTokenParameters
-	{
-		public UserNameSecurityTokenParameters ()
-		{
-			RequireDerivedKeys = false;
-		}
+    public class UserNameSecurityTokenParameters : SecurityTokenParameters
+    {
+        public UserNameSecurityTokenParameters()
+        {
+            RequireDerivedKeys = false;
+        }
 
-		protected UserNameSecurityTokenParameters (UserNameSecurityTokenParameters other)
-			: base (other)
-		{
-		}
+        protected UserNameSecurityTokenParameters(UserNameSecurityTokenParameters other)
+            : base(other) { }
 
-		protected override bool HasAsymmetricKey {
-			get { return false; }
-		}
+        protected override bool HasAsymmetricKey
+        {
+            get { return false; }
+        }
 
-		protected override bool SupportsClientAuthentication {
-			get { return true; }
-		}
+        protected override bool SupportsClientAuthentication
+        {
+            get { return true; }
+        }
 
-		protected override bool SupportsClientWindowsIdentity {
-			get { return true; }
-		}
+        protected override bool SupportsClientWindowsIdentity
+        {
+            get { return true; }
+        }
 
-		protected override bool SupportsServerAuthentication {
-			get { return false; }
-		}
+        protected override bool SupportsServerAuthentication
+        {
+            get { return false; }
+        }
 
-		protected override SecurityTokenParameters CloneCore ()
-		{
-			return new UserNameSecurityTokenParameters (this);
-		}
+        protected override SecurityTokenParameters CloneCore()
+        {
+            return new UserNameSecurityTokenParameters(this);
+        }
 
 #if !MOBILE && !XAMMAC_4_5
-		protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause (
-			SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
-		{
-			if (token == null)
-				throw new ArgumentNullException ("token");
-			if (token is UserNameSecurityToken &&
-			    referenceStyle == SecurityTokenReferenceStyle.Internal)
-				return new LocalIdKeyIdentifierClause (token.Id);
-			// External reference is not supported.
-			throw new NotSupportedException (String.Format ("This security token '{0}' with {1} reference mode is not supported.", token, referenceStyle));
-		}
+        protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        )
+        {
+            if (token == null)
+                throw new ArgumentNullException("token");
+            if (
+                token is UserNameSecurityToken
+                && referenceStyle == SecurityTokenReferenceStyle.Internal
+            )
+                return new LocalIdKeyIdentifierClause(token.Id);
+            // External reference is not supported.
+            throw new NotSupportedException(
+                String.Format(
+                    "This security token '{0}' with {1} reference mode is not supported.",
+                    token,
+                    referenceStyle
+                )
+            );
+        }
 
-		protected internal override void InitializeSecurityTokenRequirement (SecurityTokenRequirement requirement)
-		{
-			requirement.TokenType = SecurityTokenTypes.UserName;
-			requirement.RequireCryptographicToken = true;
-		}
+        protected internal override void InitializeSecurityTokenRequirement(
+            SecurityTokenRequirement requirement
+        )
+        {
+            requirement.TokenType = SecurityTokenTypes.UserName;
+            requirement.RequireCryptographicToken = true;
+        }
 #endif
-	}
+    }
 }

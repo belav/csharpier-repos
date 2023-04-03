@@ -13,7 +13,10 @@ internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRaz
     // tag helper nodes.
     public override int Order => DefaultFeatureOrder + 1000;
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         var @class = documentNode.FindPrimaryClass();
         if (@class == null)
@@ -73,7 +76,10 @@ internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRaz
         // We also want to preserve the ordering of the nodes for testability. So insert at the end of any existing
         // field nodes.
         var i = 0;
-        while (i < context.Class.Children.Count && context.Class.Children[i] is FieldDeclarationIntermediateNode)
+        while (
+            i < context.Class.Children.Count
+            && context.Class.Children[i] is FieldDeclarationIntermediateNode
+        )
         {
             i++;
         }
@@ -111,12 +117,18 @@ internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRaz
         {
             if (node.Children[i] is TagHelperHtmlAttributeIntermediateNode htmlAttributeNode)
             {
-                node.Children[i] = new DefaultTagHelperHtmlAttributeIntermediateNode(htmlAttributeNode);
+                node.Children[i] = new DefaultTagHelperHtmlAttributeIntermediateNode(
+                    htmlAttributeNode
+                );
             }
         }
     }
 
-    private void RewriteUsage(Context context, TagHelperIntermediateNode node, TagHelperDescriptor tagHelper)
+    private void RewriteUsage(
+        Context context,
+        TagHelperIntermediateNode node,
+        TagHelperDescriptor tagHelper
+    )
     {
         if (!tagHelper.IsDefaultKind())
         {
@@ -143,25 +155,32 @@ internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRaz
         }
 
         // Now find the last create node.
-        while (i < node.Children.Count && node.Children[i] is DefaultTagHelperCreateIntermediateNode)
+        while (
+            i < node.Children.Count && node.Children[i] is DefaultTagHelperCreateIntermediateNode
+        )
         {
             i++;
         }
 
         // Now i has the right insertion point.
-        node.Children.Insert(i, new DefaultTagHelperCreateIntermediateNode()
-        {
-            FieldName = context.GetFieldName(tagHelper),
-            TagHelper = tagHelper,
-            TypeName = tagHelper.GetTypeName(),
-        });
+        node.Children.Insert(
+            i,
+            new DefaultTagHelperCreateIntermediateNode()
+            {
+                FieldName = context.GetFieldName(tagHelper),
+                TagHelper = tagHelper,
+                TypeName = tagHelper.GetTypeName(),
+            }
+        );
 
         // Next we need to rewrite any property nodes to use the field and property name for this
         // tag helper.
         for (i = 0; i < node.Children.Count; i++)
         {
-            if (node.Children[i] is TagHelperPropertyIntermediateNode propertyNode &&
-                propertyNode.TagHelper == tagHelper)
+            if (
+                node.Children[i] is TagHelperPropertyIntermediateNode propertyNode
+                && propertyNode.TagHelper == tagHelper
+            )
             {
                 // This belongs to the current tag helper, replace it.
                 node.Children[i] = new DefaultTagHelperPropertyIntermediateNode(propertyNode)
@@ -181,29 +200,35 @@ internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRaz
         // We also want to preserve the ordering of the nodes for testability. So insert at the end of any existing
         // field nodes.
         var i = 0;
-        while (i < context.Class.Children.Count && context.Class.Children[i] is DefaultTagHelperRuntimeIntermediateNode)
+        while (
+            i < context.Class.Children.Count
+            && context.Class.Children[i] is DefaultTagHelperRuntimeIntermediateNode
+        )
         {
             i++;
         }
 
-        while (i < context.Class.Children.Count && context.Class.Children[i] is FieldDeclarationIntermediateNode)
+        while (
+            i < context.Class.Children.Count
+            && context.Class.Children[i] is FieldDeclarationIntermediateNode
+        )
         {
             i++;
         }
 
-        context.Class.Children.Insert(i, new FieldDeclarationIntermediateNode()
-        {
-            Annotations =
+        context.Class.Children.Insert(
+            i,
+            new FieldDeclarationIntermediateNode()
+            {
+                Annotations =
                 {
                     { CommonAnnotations.DefaultTagHelperExtension.TagHelperField, bool.TrueString },
                 },
-            Modifiers =
-                {
-                    "private",
-                },
-            FieldName = context.GetFieldName(tagHelper),
-            FieldType = "global::" + tagHelper.GetTypeName(),
-        });
+                Modifiers = { "private", },
+                FieldName = context.GetFieldName(tagHelper),
+                FieldType = "global::" + tagHelper.GetTypeName(),
+            }
+        );
     }
 
     private bool IsTagHelperRuntimeNode(TagHelperIntermediateNode node)
@@ -227,7 +252,9 @@ internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRaz
         {
             Class = @class;
 
-            _tagHelpers = new Dictionary<TagHelperDescriptor, string>(TagHelperDescriptorComparer.Default);
+            _tagHelpers = new Dictionary<TagHelperDescriptor, string>(
+                TagHelperDescriptorComparer.Default
+            );
         }
 
         public ClassDeclarationIntermediateNode Class { get; }

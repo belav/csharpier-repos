@@ -4,8 +4,8 @@
 
 public class Test
 {
-	static void Main ()
-	{
-		var v1 = new { Value = 1, Value = 0 };
-	}
+    static void Main()
+    {
+        var v1 = new { Value = 1, Value = 0 };
+    }
 }

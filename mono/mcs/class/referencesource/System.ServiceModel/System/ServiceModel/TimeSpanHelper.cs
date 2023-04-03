@@ -15,18 +15,21 @@ namespace System.ServiceModel
             Fx.Assert(value == TimeSpan.Parse(text, CultureInfo.InvariantCulture), "");
             return value;
         }
+
         static public TimeSpan FromSeconds(int seconds, string text)
         {
             TimeSpan value = TimeSpan.FromTicks(TimeSpan.TicksPerSecond * seconds);
             Fx.Assert(value == TimeSpan.Parse(text, CultureInfo.InvariantCulture), "");
             return value;
         }
+
         static public TimeSpan FromMilliseconds(int ms, string text)
         {
             TimeSpan value = TimeSpan.FromTicks(TimeSpan.TicksPerMillisecond * ms);
             Fx.Assert(value == TimeSpan.Parse(text, CultureInfo.InvariantCulture), "");
             return value;
         }
+
         static public TimeSpan FromDays(int days, string text)
         {
             TimeSpan value = TimeSpan.FromTicks(TimeSpan.TicksPerDay * days);

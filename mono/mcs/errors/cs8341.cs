@@ -4,5 +4,5 @@
 
 readonly struct S
 {
-	int field { get; set; }
+    int field { get; set; }
 }

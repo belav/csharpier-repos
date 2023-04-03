@@ -14,18 +14,15 @@ public class IdentityResourceCollection : Collection<IdentityResource>
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityResourceCollection"/>.
     /// </summary>
-    public IdentityResourceCollection()
-    {
-    }
+    public IdentityResourceCollection() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityResourceCollection"/> with the given
     /// identity resources in <paramref name="list"/>.
     /// </summary>
     /// <param name="list">The initial list of <see cref="IdentityResource"/>.</param>
-    public IdentityResourceCollection(IList<IdentityResource> list) : base(list)
-    {
-    }
+    public IdentityResourceCollection(IList<IdentityResource> list)
+        : base(list) { }
 
     /// <summary>
     /// Gets an identity resource given its name.
@@ -64,8 +61,7 @@ public class IdentityResourceCollection : Collection<IdentityResource>
     /// <summary>
     /// Adds an openid resource.
     /// </summary>
-    public void AddOpenId() =>
-        Add(IdentityResourceBuilder.OpenId().Build());
+    public void AddOpenId() => Add(IdentityResourceBuilder.OpenId().Build());
 
     /// <summary>
     /// Adds an openid resource.
@@ -81,8 +77,7 @@ public class IdentityResourceCollection : Collection<IdentityResource>
     /// <summary>
     /// Adds a profile resource.
     /// </summary>
-    public void AddProfile() =>
-        Add(IdentityResourceBuilder.Profile().Build());
+    public void AddProfile() => Add(IdentityResourceBuilder.Profile().Build());
 
     /// <summary>
     /// Adds a profile resource.
@@ -98,8 +93,7 @@ public class IdentityResourceCollection : Collection<IdentityResource>
     /// <summary>
     /// Adds an address resource.
     /// </summary>
-    public void AddAddress() =>
-        Add(IdentityResourceBuilder.Address().Build());
+    public void AddAddress() => Add(IdentityResourceBuilder.Address().Build());
 
     /// <summary>
     /// Adds an address resource.
@@ -115,8 +109,7 @@ public class IdentityResourceCollection : Collection<IdentityResource>
     /// <summary>
     /// Adds an email resource.
     /// </summary>
-    public void AddEmail() =>
-        Add(IdentityResourceBuilder.Email().Build());
+    public void AddEmail() => Add(IdentityResourceBuilder.Email().Build());
 
     /// <summary>
     /// Adds an email resource.
@@ -132,8 +125,7 @@ public class IdentityResourceCollection : Collection<IdentityResource>
     /// <summary>
     /// Adds a phone resource.
     /// </summary>
-    public void AddPhone() =>
-        Add(IdentityResourceBuilder.Phone().Build());
+    public void AddPhone() => Add(IdentityResourceBuilder.Phone().Build());
 
     /// <summary>
     /// Adds a phone resource.

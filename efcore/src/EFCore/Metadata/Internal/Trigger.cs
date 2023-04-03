@@ -21,10 +21,7 @@ public class Trigger : ConventionAnnotatable, IMutableTrigger, IConventionTrigge
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public Trigger(
-        string modelName,
-        EntityType entityType,
-        ConfigurationSource configurationSource)
+    public Trigger(string modelName, EntityType entityType, ConfigurationSource configurationSource)
     {
         EntityType = entityType;
         ModelName = modelName;
@@ -51,9 +48,7 @@ public class Trigger : ConventionAnnotatable, IMutableTrigger, IConventionTrigge
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null
-            && EntityType.IsInModel;
+    public virtual bool IsInModel => _builder is not null && EntityType.IsInModel;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,8 +56,7 @@ public class Trigger : ConventionAnnotatable, IMutableTrigger, IConventionTrigge
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetRemovedFromModel()
-        => _builder = null;
+    public virtual void SetRemovedFromModel() => _builder = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -86,8 +80,7 @@ public class Trigger : ConventionAnnotatable, IMutableTrigger, IConventionTrigge
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource GetConfigurationSource()
-        => _configurationSource;
+    public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -95,8 +88,8 @@ public class Trigger : ConventionAnnotatable, IMutableTrigger, IConventionTrigge
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource)
-        => _configurationSource = _configurationSource.Max(configurationSource);
+    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource) =>
+        _configurationSource = _configurationSource.Max(configurationSource);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -104,8 +97,8 @@ public class Trigger : ConventionAnnotatable, IMutableTrigger, IConventionTrigge
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((ITrigger)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((ITrigger)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -114,10 +107,11 @@ public class Trigger : ConventionAnnotatable, IMutableTrigger, IConventionTrigge
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((ITrigger)this).ToDebugString(),
-            () => ((ITrigger)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((ITrigger)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

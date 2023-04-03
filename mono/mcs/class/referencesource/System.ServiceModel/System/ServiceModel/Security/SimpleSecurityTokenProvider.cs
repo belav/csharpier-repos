@@ -33,7 +33,10 @@ namespace System.ServiceModel.Security
         /// messages.
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="token"/> is set to null.</exception>
-        public SimpleSecurityTokenProvider(SecurityToken token, SecurityTokenRequirement tokenRequirement)
+        public SimpleSecurityTokenProvider(
+            SecurityToken token,
+            SecurityTokenRequirement tokenRequirement
+        )
         {
             if (token == null)
             {
@@ -65,45 +68,60 @@ namespace System.ServiceModel.Security
         /// Gets a GenericXmlSecurityToken that wraps the provided issued token
         /// with the authorization policies necessary.
         /// </summary>
-        static GenericXmlSecurityToken WrapWithAuthPolicy(GenericXmlSecurityToken issuedToken,
-                                                           SecurityTokenRequirement tokenRequirement)
+        static GenericXmlSecurityToken WrapWithAuthPolicy(
+            GenericXmlSecurityToken issuedToken,
+            SecurityTokenRequirement tokenRequirement
+        )
         {
             EndpointIdentity endpointIdentity = null;
 
-            var issuedTokenRequirement = tokenRequirement as InitiatorServiceModelSecurityTokenRequirement;
+            var issuedTokenRequirement =
+                tokenRequirement as InitiatorServiceModelSecurityTokenRequirement;
             if (issuedTokenRequirement != null)
             {
                 EndpointAddress targetAddress = issuedTokenRequirement.TargetAddress;
                 if (targetAddress.Uri.IsAbsoluteUri)
                 {
-                    endpointIdentity = EndpointIdentity.CreateDnsIdentity(targetAddress.Uri.DnsSafeHost);
+                    endpointIdentity = EndpointIdentity.CreateDnsIdentity(
+                        targetAddress.Uri.DnsSafeHost
+                    );
                 }
             }
 
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
-                = GetServiceAuthorizationPolicies(endpointIdentity);
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                GetServiceAuthorizationPolicies(endpointIdentity);
 
-            return new GenericXmlSecurityToken(issuedToken.TokenXml,
-                                                issuedToken.ProofToken,
-                                                issuedToken.ValidFrom,
-                                                issuedToken.ValidTo,
-                                                issuedToken.InternalTokenReference,
-                                                issuedToken.ExternalTokenReference,
-                                                authorizationPolicies);
+            return new GenericXmlSecurityToken(
+                issuedToken.TokenXml,
+                issuedToken.ProofToken,
+                issuedToken.ValidFrom,
+                issuedToken.ValidTo,
+                issuedToken.InternalTokenReference,
+                issuedToken.ExternalTokenReference,
+                authorizationPolicies
+            );
         }
 
         //
         // Modeled after WCF's CoreFederatedTokenProvider.GetServiceAuthorizationPolicies
         //
-        static ReadOnlyCollection<IAuthorizationPolicy> GetServiceAuthorizationPolicies(EndpointIdentity endpointIdentity)
+        static ReadOnlyCollection<IAuthorizationPolicy> GetServiceAuthorizationPolicies(
+            EndpointIdentity endpointIdentity
+        )
         {
             if (endpointIdentity != null)
             {
                 List<Claim> claims = new List<Claim>(1);
                 claims.Add(endpointIdentity.IdentityClaim);
                 List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>(1);
-                policies.Add(new UnconditionalPolicy(SecurityUtils.CreateIdentity(endpointIdentity.IdentityClaim.Resource.ToString()),
-                               new DefaultClaimSet(ClaimSet.System, claims)));
+                policies.Add(
+                    new UnconditionalPolicy(
+                        SecurityUtils.CreateIdentity(
+                            endpointIdentity.IdentityClaim.Resource.ToString()
+                        ),
+                        new DefaultClaimSet(ClaimSet.System, claims)
+                    )
+                );
                 return policies.AsReadOnly();
             }
             else

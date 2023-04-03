@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 public static class Program
 {
     [DllImport("__Internal")]
-    public static extern void mono_ios_set_summary (string value);
-    
+    public static extern void mono_ios_set_summary(string value);
+
     public static async Task<int> Main(string[] args)
     {
         mono_ios_set_summary($"Starting functional test");

@@ -3,17 +3,18 @@
 
 struct Rectangle
 {
-	internal int x;
-	public int X {
-		set { }
-	}
+    internal int x;
+    public int X
+    {
+        set { }
+    }
 }
 
 public class Foo
 {
-	public static void Main ()
-	{
-		Rectangle foo;
-		foo.X = 5;
-	}
+    public static void Main()
+    {
+        Rectangle foo;
+        foo.X = 5;
+    }
 }

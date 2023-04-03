@@ -23,11 +23,13 @@ namespace Castle.DynamicProxy.Contributors
     internal sealed class DelegateTypeMembersCollector : MembersCollector
     {
         public DelegateTypeMembersCollector(Type delegateType)
-            : base(delegateType)
-        {
-        }
+            : base(delegateType) { }
 
-        protected override MetaMethod GetMethodToGenerate(MethodInfo method, IProxyGenerationHook hook, bool isStandalone)
+        protected override MetaMethod GetMethodToGenerate(
+            MethodInfo method,
+            IProxyGenerationHook hook,
+            bool isStandalone
+        )
         {
             if (method.Name == "Invoke" && method.DeclaringType.IsDelegateType())
             {

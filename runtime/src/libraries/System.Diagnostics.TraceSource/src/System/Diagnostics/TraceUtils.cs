@@ -13,7 +13,11 @@ namespace System.Diagnostics
 {
     internal static class TraceUtils
     {
-        internal static void VerifyAttributes(StringDictionary? attributes, string[]? supportedAttributes, object parent)
+        internal static void VerifyAttributes(
+            StringDictionary? attributes,
+            string[]? supportedAttributes,
+            object parent
+        )
         {
             if (attributes == null)
             {
@@ -34,7 +38,9 @@ namespace System.Diagnostics
 
                 if (!found)
                 {
-                    throw new ArgumentException(SR.Format(SR.AttributeNotSupported, key, parent.GetType().FullName));
+                    throw new ArgumentException(
+                        SR.Format(SR.AttributeNotSupported, key, parent.GetType().FullName)
+                    );
                 }
             }
         }

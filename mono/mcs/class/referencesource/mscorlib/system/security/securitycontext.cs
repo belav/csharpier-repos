@@ -1,20 +1,20 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 /*============================================================
 **
 ** Class:  SecurityContext
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
 ** Purpose: Capture security  context for a thread
 **
-** 
+**
 ===========================================================*/
 namespace System.Security
-{    
+{
     using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
     using System.Threading;
@@ -56,7 +56,7 @@ namespace System.Security
 #endif
 
 #if FEATURE_COMPRESSEDSTACK
-    internal struct SecurityContextSwitcher: IDisposable
+    internal struct SecurityContextSwitcher : IDisposable
     {
         internal SecurityContext.Reader prevSC; // prev SC that we restore on an Undo
         internal SecurityContext currSC; //current SC  - SetSecurityContext that created the switcher set this on the Thread
@@ -72,7 +72,7 @@ namespace System.Security
             Undo();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
 #if FEATURE_CORRUPTING_EXCEPTIONS
         [HandleProcessCorruptedStateExceptions] // 
@@ -90,35 +90,43 @@ namespace System.Security
             return true;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [ResourceExposure(ResourceScope.None)]
-        [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]  // FailFast
+        [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)] // FailFast
 #if FEATURE_CORRUPTING_EXCEPTIONS
         [HandleProcessCorruptedStateExceptions] // 
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
         public void Undo()
-        {        
-            if (currSC == null) 
+        {
+            if (currSC == null)
             {
                 return; // mutiple Undo()s called on this switcher object
-            }  
+            }
 
             if (currEC != null)
             {
-                Contract.Assert(currEC == Thread.CurrentThread.GetMutableExecutionContext(), "SecurityContextSwitcher used from another thread");
-                Contract.Assert(currSC == currEC.SecurityContext, "SecurityContextSwitcher context mismatch");
-            
-                // restore the saved security context 
+                Contract.Assert(
+                    currEC == Thread.CurrentThread.GetMutableExecutionContext(),
+                    "SecurityContextSwitcher used from another thread"
+                );
+                Contract.Assert(
+                    currSC == currEC.SecurityContext,
+                    "SecurityContextSwitcher context mismatch"
+                );
+
+                // restore the saved security context
                 currEC.SecurityContext = prevSC.DangerousGetRawSecurityContext();
             }
             else
             {
                 // caller must have already restored the ExecutionContext
-                Contract.Assert(Thread.CurrentThread.GetExecutionContextReader().SecurityContext.IsSame(prevSC));
+                Contract.Assert(
+                    Thread.CurrentThread.GetExecutionContextReader().SecurityContext.IsSame(prevSC)
+                );
             }
 
-            currSC = null; // this will prevent the switcher object being used again        
+            currSC = null; // this will prevent the switcher object being used again
 
             bool bNoException = true;
 #if !FEATURE_PAL && FEATURE_IMPERSONATION
@@ -137,18 +145,17 @@ namespace System.Security
 #endif
             bNoException &= cssw.UndoNoThrow();
 
-
             if (!bNoException)
             {
                 // Failfast since we can't continue safely...
-                System.Environment.FailFast(Environment.GetResourceString("ExecutionContext_UndoFailed"));                
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionContext_UndoFailed")
+                );
             }
-
         }
     }
-    
 
-    public sealed class SecurityContext : IDisposable 
+    public sealed class SecurityContext : IDisposable
     {
 #if !FEATURE_PAL && FEATURE_IMPERSONATION
         // Note that only one of the following variables will be true. The way we set up the flow mode in the g_pConfig guarantees this.
@@ -156,59 +163,77 @@ namespace System.Security
         static bool _alwaysFlowImpersonationPolicy = (GetImpersonationFlowMode() == WindowsImpersonationFlowMode.IMP_ALWAYSFLOW);
 #endif
         /*=========================================================================
-        ** Data accessed from managed code that needs to be defined in 
+        ** Data accessed from managed code that needs to be defined in
         ** SecurityContextObject  to maintain alignment between the two classes.
         ** DON'T CHANGE THESE UNLESS YOU MODIFY SecurityContextObject in vm\object.h
         =========================================================================*/
-        
-        private ExecutionContext            _executionContext;
+
+        private ExecutionContext _executionContext;
 #if !FEATURE_PAL && FEATURE_IMPERSONATION
         private volatile WindowsIdentity             _windowsIdentity;
 #endif
 #if FEATURE_COMPRESSEDSTACK
-        private volatile CompressedStack          _compressedStack;
+        private volatile CompressedStack _compressedStack;
 #endif
         static private volatile SecurityContext _fullTrustSC;
-        
+
         internal volatile bool isNewCapture = false;
-        internal volatile SecurityContextDisableFlow _disableFlow = SecurityContextDisableFlow.Nothing;
-                
+        internal volatile SecurityContextDisableFlow _disableFlow =
+            SecurityContextDisableFlow.Nothing;
+
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal SecurityContext()
-        {
-        }
+        internal SecurityContext() { }
 
         internal struct Reader
         {
             SecurityContext m_sc;
 
-            public Reader(SecurityContext sc) { m_sc = sc; }
+            public Reader(SecurityContext sc)
+            {
+                m_sc = sc;
+            }
 
-            public SecurityContext DangerousGetRawSecurityContext() { return m_sc; }
+            public SecurityContext DangerousGetRawSecurityContext()
+            {
+                return m_sc;
+            }
 
-            public bool IsNull { get { return m_sc == null; } }
-            public bool IsSame(SecurityContext sc) { return m_sc == sc; }
-            public bool IsSame(SecurityContext.Reader sc) { return m_sc == sc.m_sc; }
+            public bool IsNull
+            {
+                get { return m_sc == null; }
+            }
+
+            public bool IsSame(SecurityContext sc)
+            {
+                return m_sc == sc;
+            }
+
+            public bool IsSame(SecurityContext.Reader sc)
+            {
+                return m_sc == sc.m_sc;
+            }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public bool IsFlowSuppressed(SecurityContextDisableFlow flags)
-            {           
+            {
                 return (m_sc == null) ? false : ((m_sc._disableFlow & flags) == flags);
             }
-        
-            public CompressedStack CompressedStack { get { return IsNull ? null : m_sc.CompressedStack; } }
 
-            public WindowsIdentity WindowsIdentity 
-            { 
+            public CompressedStack CompressedStack
+            {
+                get { return IsNull ? null : m_sc.CompressedStack; }
+            }
+
+            public WindowsIdentity WindowsIdentity
+            {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                get { return IsNull ? null : m_sc.WindowsIdentity; } 
+                get { return IsNull ? null : m_sc.WindowsIdentity; }
             }
         }
-        
-            
+
         static internal SecurityContext FullTrustSecurityContext
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_fullTrustSC == null)
@@ -221,12 +246,9 @@ namespace System.Security
         internal ExecutionContext ExecutionContext
         {
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            set
-            {
-                _executionContext = value;
-            }
+            set { _executionContext = value; }
         }
-                
+
 #if !FEATURE_PAL && FEATURE_IMPERSONATION
 
 
@@ -246,18 +268,11 @@ namespace System.Security
         }
 #endif // !FEATURE_PAL && FEATURE_IMPERSONATION
 
-              
         internal CompressedStack CompressedStack
         {
-            get
-            {
-                return _compressedStack; 
-            }
+            get { return _compressedStack; }
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            set
-            {
-                _compressedStack =  value;                    
-            }
+            set { _compressedStack = value; }
         }
 
         public void Dispose()
@@ -268,13 +283,13 @@ namespace System.Security
 #endif // !FEATURE_PAL
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static AsyncFlowControl SuppressFlow()
         {
             return SuppressFlow(SecurityContextDisableFlow.All);
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static AsyncFlowControl SuppressFlowWindowsIdentity()
         {
             return SuppressFlow(SecurityContextDisableFlow.WI);
@@ -288,7 +303,9 @@ namespace System.Security
 #else
             if (IsFlowSuppressed(flags))
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CannotSupressFlowMultipleTimes"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_CannotSupressFlowMultipleTimes")
+                );
             }
 
             ExecutionContext ec = Thread.CurrentThread.GetMutableExecutionContext();
@@ -307,9 +324,11 @@ namespace System.Security
             SecurityContext sc = Thread.CurrentThread.GetMutableExecutionContext().SecurityContext;
             if (sc == null || sc._disableFlow == SecurityContextDisableFlow.Nothing)
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CannotRestoreUnsupressedFlow"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_CannotRestoreUnsupressedFlow")
+                );
             }
-            sc._disableFlow = SecurityContextDisableFlow.Nothing;        
+            sc._disableFlow = SecurityContextDisableFlow.Nothing;
 #endif
         }
 
@@ -322,14 +341,16 @@ namespace System.Security
         {
             return (_LegacyImpersonationPolicy|| SecurityContext.IsFlowSuppressed(SecurityContextDisableFlow.WI));
         }
-#endif        
+#endif
         [SecuritySafeCritical]
         internal static bool IsFlowSuppressed(SecurityContextDisableFlow flags)
-        {  
+        {
 #if MOBILE
             return false;
 #else
-            return Thread.CurrentThread.GetExecutionContextReader().SecurityContext.IsFlowSuppressed(flags);
+            return Thread.CurrentThread
+                .GetExecutionContextReader()
+                .SecurityContext.IsFlowSuppressed(flags);
 #endif
         }
 
@@ -337,14 +358,20 @@ namespace System.Security
         // continue past the call to SecurityContext.Run.  If you change the signature to this method, or
         // provide an alternate way to do a SecurityContext.Run make sure to update
         // SecurityStackWalk::IsSpecialRunFrame in the VM to search for the new method.
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [DynamicSecurityMethodAttribute()]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        public static void Run(SecurityContext securityContext, ContextCallback callback, Object state)
+        public static void Run(
+            SecurityContext securityContext,
+            ContextCallback callback,
+            Object state
+        )
         {
-            if (securityContext == null )
+            if (securityContext == null)
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NullContext"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_NullContext")
+                );
             }
             Contract.EndContractBlock();
 
@@ -352,29 +379,35 @@ namespace System.Security
 
             if (!securityContext.isNewCapture)
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NotNewCaptureContext"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_NotNewCaptureContext")
+                );
             }
 
             securityContext.isNewCapture = false;
 #if !MOBILE
             ExecutionContext.Reader ec = Thread.CurrentThread.GetExecutionContextReader();
-            
+
             // Optimization: do the callback directly if both the current and target contexts are equal to the
             // default full-trust security context
-            if ( SecurityContext.CurrentlyInDefaultFTSecurityContext(ec)
-                && securityContext.IsDefaultFTSecurityContext())
+            if (
+                SecurityContext.CurrentlyInDefaultFTSecurityContext(ec)
+                && securityContext.IsDefaultFTSecurityContext()
+            )
             {
                 callback(state);
-                
-                if (GetCurrentWI(Thread.CurrentThread.GetExecutionContextReader()) != null) 
+
+                if (GetCurrentWI(Thread.CurrentThread.GetExecutionContextReader()) != null)
                 {
                     // If we enter here it means the callback did an impersonation
                     // that we need to revert.
-                    // We don't need to revert any other security state since it is stack-based 
+                    // We don't need to revert any other security state since it is stack-based
                     // and automatically goes away when the callback returns.
                     WindowsIdentity.SafeRevertToSelf(ref stackMark);
                     // Ensure we have reverted to the state we entered in.
-                    Contract.Assert(GetCurrentWI(Thread.CurrentThread.GetExecutionContextReader()) == null);
+                    Contract.Assert(
+                        GetCurrentWI(Thread.CurrentThread.GetExecutionContextReader()) == null
+                    );
                 }
             }
             else
@@ -382,28 +415,40 @@ namespace System.Security
             {
                 RunInternal(securityContext, callback, state);
             }
-
         }
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static void RunInternal(SecurityContext securityContext, ContextCallback callBack, Object state)
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void RunInternal(
+            SecurityContext securityContext,
+            ContextCallback callBack,
+            Object state
+        )
         {
             if (cleanupCode == null)
             {
                 tryCode = new RuntimeHelpers.TryCode(runTryCode);
                 cleanupCode = new RuntimeHelpers.CleanupCode(runFinallyCode);
             }
-            SecurityContextRunData runData = new SecurityContextRunData(securityContext, callBack, state);
+            SecurityContextRunData runData = new SecurityContextRunData(
+                securityContext,
+                callBack,
+                state
+            );
             RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(tryCode, cleanupCode, runData);
-
         }
-        
+
         internal class SecurityContextRunData
         {
             internal SecurityContext sc;
             internal ContextCallback callBack;
             internal Object state;
             internal SecurityContextSwitcher scsw;
-            internal SecurityContextRunData(SecurityContext securityContext, ContextCallback cb, Object state)
+
+            internal SecurityContextRunData(
+                SecurityContext securityContext,
+                ContextCallback cb,
+                Object state
+            )
             {
                 this.sc = securityContext;
                 this.callBack = cb;
@@ -412,56 +457,71 @@ namespace System.Security
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Process)]
         static internal void runTryCode(Object userData)
         {
-            SecurityContextRunData rData = (SecurityContextRunData) userData;
-            rData.scsw = SetSecurityContext(rData.sc, Thread.CurrentThread.GetExecutionContextReader().SecurityContext, modifyCurrentExecutionContext: true);
+            SecurityContextRunData rData = (SecurityContextRunData)userData;
+            rData.scsw = SetSecurityContext(
+                rData.sc,
+                Thread.CurrentThread.GetExecutionContextReader().SecurityContext,
+                modifyCurrentExecutionContext: true
+            );
             rData.callBack(rData.state);
-            
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [PrePrepareMethod]
         static internal void runFinallyCode(Object userData, bool exceptionThrown)
         {
-            SecurityContextRunData rData = (SecurityContextRunData) userData;
+            SecurityContextRunData rData = (SecurityContextRunData)userData;
             rData.scsw.Undo();
         }
-                    
+
         static volatile internal RuntimeHelpers.TryCode tryCode;
         static volatile internal RuntimeHelpers.CleanupCode cleanupCode;
 
-
-
         // Internal API that gets called from public SetSecurityContext and from SetExecutionContext
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Process)]
         [DynamicSecurityMethodAttribute()]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        internal static SecurityContextSwitcher SetSecurityContext(SecurityContext sc, SecurityContext.Reader prevSecurityContext, bool modifyCurrentExecutionContext)
+        internal static SecurityContextSwitcher SetSecurityContext(
+            SecurityContext sc,
+            SecurityContext.Reader prevSecurityContext,
+            bool modifyCurrentExecutionContext
+        )
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return SetSecurityContext(sc, prevSecurityContext, modifyCurrentExecutionContext, ref stackMark);
+            return SetSecurityContext(
+                sc,
+                prevSecurityContext,
+                modifyCurrentExecutionContext,
+                ref stackMark
+            );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
 #if FEATURE_CORRUPTING_EXCEPTIONS
         [HandleProcessCorruptedStateExceptions] // 
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
-        internal static SecurityContextSwitcher SetSecurityContext(SecurityContext sc, SecurityContext.Reader prevSecurityContext, bool modifyCurrentExecutionContext, ref StackCrawlMark stackMark)
+        internal static SecurityContextSwitcher SetSecurityContext(
+            SecurityContext sc,
+            SecurityContext.Reader prevSecurityContext,
+            bool modifyCurrentExecutionContext,
+            ref StackCrawlMark stackMark
+        )
         {
             // Save the flow state at capture and reset it in the SC.
             SecurityContextDisableFlow _capturedFlowState = sc._disableFlow;
             sc._disableFlow = SecurityContextDisableFlow.Nothing;
-            
+
             //Set up the switcher object
             SecurityContextSwitcher scsw = new SecurityContextSwitcher();
-            scsw.currSC = sc;   
+            scsw.currSC = sc;
             scsw.prevSC = prevSecurityContext;
 
             if (modifyCurrentExecutionContext)
@@ -493,25 +553,30 @@ namespace System.Security
                         }
                     }
 #endif
-                    scsw.cssw = CompressedStack.SetCompressedStack(sc.CompressedStack, prevSecurityContext.CompressedStack);
+                    scsw.cssw = CompressedStack.SetCompressedStack(
+                        sc.CompressedStack,
+                        prevSecurityContext.CompressedStack
+                    );
                 }
-                catch 
+                catch
                 {
                     scsw.UndoNoThrow();
                     throw;
-                }      
+                }
             }
             return scsw;
         }
 
         /// <internalonly/>
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public SecurityContext CreateCopy()
         {
             if (!isNewCapture)
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NotNewCaptureContext"));
-            }                                
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_NotNewCaptureContext")
+                );
+            }
 
             SecurityContext sc = new SecurityContext();
             sc.isNewCapture = true;
@@ -529,7 +594,7 @@ namespace System.Security
         }
 
         /// <internalonly/>
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal SecurityContext CreateMutableCopy()
         {
             Contract.Assert(!this.isNewCapture);
@@ -542,37 +607,43 @@ namespace System.Security
                 sc._windowsIdentity = new WindowsIdentity(this.WindowsIdentity.AccessToken);
 #endif //!FEATURE_PAL && FEATURE_IMPERSONATION
 
-            // 
+            //
             if (this._compressedStack != null)
                 sc._compressedStack = this._compressedStack.CreateCopy();
 
             return sc;
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        public static SecurityContext Capture( )
+        public static SecurityContext Capture()
         {
             // check to see if Flow is suppressed
-            if (IsFlowSuppressed()) 
+            if (IsFlowSuppressed())
                 return null;
 
-            StackCrawlMark stackMark= StackCrawlMark.LookForMyCaller;
-            SecurityContext sc = SecurityContext.Capture(Thread.CurrentThread.GetExecutionContextReader(), ref stackMark);
+            StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
+            SecurityContext sc = SecurityContext.Capture(
+                Thread.CurrentThread.GetExecutionContextReader(),
+                ref stackMark
+            );
             if (sc == null)
                 sc = CreateFullTrustSecurityContext();
             return sc;
-         }
+        }
 
         // create a clone from a non-existing SecurityContext
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static internal SecurityContext Capture(ExecutionContext.Reader currThreadEC, ref StackCrawlMark stackMark)
+        static internal SecurityContext Capture(
+            ExecutionContext.Reader currThreadEC,
+            ref StackCrawlMark stackMark
+        )
         {
             // check to see if Flow is suppressed
-            if (currThreadEC.SecurityContext.IsFlowSuppressed(SecurityContextDisableFlow.All)) 
+            if (currThreadEC.SecurityContext.IsFlowSuppressed(SecurityContextDisableFlow.All))
                 return null;
-        
+
             // If we're in FT right now, return null
             if (CurrentlyInDefaultFTSecurityContext(currThreadEC))
                 return null;
@@ -580,13 +651,16 @@ namespace System.Security
             return CaptureCore(currThreadEC, ref stackMark);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        static private SecurityContext CaptureCore(ExecutionContext.Reader currThreadEC, ref StackCrawlMark stackMark)
+        [System.Security.SecurityCritical] // auto-generated
+        static private SecurityContext CaptureCore(
+            ExecutionContext.Reader currThreadEC,
+            ref StackCrawlMark stackMark
+        )
         {
             SecurityContext sc = new SecurityContext();
             sc.isNewCapture = true;
 
-    #if !FEATURE_PAL && FEATURE_IMPERSONATION
+#if !FEATURE_PAL && FEATURE_IMPERSONATION
                 // Force create WindowsIdentity
             if (!IsWindowsIdentityFlowSuppressed())
             {
@@ -598,25 +672,25 @@ namespace System.Security
             {
                 sc._disableFlow = SecurityContextDisableFlow.WI;
             }
-    #endif // !FEATURE_PAL && FEATURE_IMPERSONATION
+#endif // !FEATURE_PAL && FEATURE_IMPERSONATION
 
             // Force create CompressedStack
             sc.CompressedStack = CompressedStack.GetCompressedStack(ref stackMark);
             return sc;
         }
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         static internal SecurityContext CreateFullTrustSecurityContext()
         {
             SecurityContext sc = new SecurityContext();
             sc.isNewCapture = true;
-        
-    #if !FEATURE_PAL && FEATURE_IMPERSONATION
+
+#if !FEATURE_PAL && FEATURE_IMPERSONATION
             if (IsWindowsIdentityFlowSuppressed())
             {
                 sc._disableFlow = SecurityContextDisableFlow.WI;
             }
-    #endif // !FEATURE_PAL && FEATURE_IMPERSONATION
-        
+#endif // !FEATURE_PAL && FEATURE_IMPERSONATION
 #if FEATURE_COMPRESSEDSTACK
             // Force create CompressedStack
             sc.CompressedStack = new CompressedStack(null);
@@ -707,11 +781,12 @@ namespace System.Security
         return (IsDefaultThreadSecurityInfo() && GetCurrentWI(threadEC) == null);
     }
 #else
-        
+
         internal bool IsDefaultFTSecurityContext()
         {
             return (CompressedStack == null || CompressedStack.CompressedStackHandle == null);
         }
+
         static internal bool CurrentlyInDefaultFTSecurityContext(ExecutionContext threadEC)
         {
             return (IsDefaultThreadSecurityInfo());
@@ -723,11 +798,13 @@ namespace System.Security
         [MethodImplAttribute(MethodImplOptions.InternalCall), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         internal extern static WindowsImpersonationFlowMode GetImpersonationFlowMode();
 #endif
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [
+            MethodImplAttribute(MethodImplOptions.InternalCall),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
         internal extern static bool IsDefaultThreadSecurityInfo();
-        
     }
 #endif // FEATURE_COMPRESSEDSTACK
 }

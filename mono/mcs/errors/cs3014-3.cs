@@ -4,6 +4,5 @@
 
 using System;
 
-[CLSCompliant (true)]
-public interface I {
-}
+[CLSCompliant(true)]
+public interface I { }

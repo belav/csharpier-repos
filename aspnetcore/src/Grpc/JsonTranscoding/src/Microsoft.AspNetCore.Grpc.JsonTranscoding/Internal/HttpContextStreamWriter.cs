@@ -16,7 +16,10 @@ internal sealed class HttpContextStreamWriter<TResponse> : IServerStreamWriter<T
     private Task? _writeTask;
     private bool _completed;
 
-    public HttpContextStreamWriter(JsonTranscodingServerCallContext context, JsonSerializerOptions serializerOptions)
+    public HttpContextStreamWriter(
+        JsonTranscodingServerCallContext context,
+        JsonSerializerOptions serializerOptions
+    )
     {
         _context = context;
         _serializerOptions = serializerOptions;
@@ -29,7 +32,10 @@ internal sealed class HttpContextStreamWriter<TResponse> : IServerStreamWriter<T
         set => _context.WriteOptions = value;
     }
 
-    Task IAsyncStreamWriter<TResponse>.WriteAsync(TResponse message, CancellationToken cancellationToken)
+    Task IAsyncStreamWriter<TResponse>.WriteAsync(
+        TResponse message,
+        CancellationToken cancellationToken
+    )
     {
         return WriteAsyncCore(message, cancellationToken);
     }
@@ -52,7 +58,8 @@ internal sealed class HttpContextStreamWriter<TResponse> : IServerStreamWriter<T
         {
             registration = cancellationToken.Register(
                 static (state) => ((JsonTranscodingServerCallContext)state!).HttpContext.Abort(),
-                _context);
+                _context
+            );
         }
 
         try
@@ -61,7 +68,9 @@ internal sealed class HttpContextStreamWriter<TResponse> : IServerStreamWriter<T
 
             if (_completed || _context.CancellationToken.IsCancellationRequested)
             {
-                throw new InvalidOperationException("Can't write the message because the request is complete.");
+                throw new InvalidOperationException(
+                    "Can't write the message because the request is complete."
+                );
             }
 
             lock (_writeLock)
@@ -69,7 +78,9 @@ internal sealed class HttpContextStreamWriter<TResponse> : IServerStreamWriter<T
                 // Pending writes need to be awaited first
                 if (IsWriteInProgressUnsynchronized)
                 {
-                    throw new InvalidOperationException("Can't write the message because the previous write is in progress.");
+                    throw new InvalidOperationException(
+                        "Can't write the message because the previous write is in progress."
+                    );
                 }
 
                 // Save write task to track whether it is complete. Must be set inside lock.
@@ -84,20 +95,34 @@ internal sealed class HttpContextStreamWriter<TResponse> : IServerStreamWriter<T
         }
     }
 
-    private async Task WriteMessageAndDelimiter(TResponse message, CancellationToken cancellationToken)
+    private async Task WriteMessageAndDelimiter(
+        TResponse message,
+        CancellationToken cancellationToken
+    )
     {
         if (message is HttpBody httpBody)
         {
             _context.EnsureResponseHeaders(httpBody.ContentType);
-            await _context.HttpContext.Response.Body.WriteAsync(httpBody.Data.Memory, cancellationToken);
+            await _context.HttpContext.Response.Body.WriteAsync(
+                httpBody.Data.Memory,
+                cancellationToken
+            );
         }
         else
         {
             _context.EnsureResponseHeaders();
-            await JsonRequestHelpers.SendMessage(_context, _serializerOptions, message, cancellationToken);
+            await JsonRequestHelpers.SendMessage(
+                _context,
+                _serializerOptions,
+                message,
+                cancellationToken
+            );
         }
 
-        await _context.HttpContext.Response.Body.WriteAsync(GrpcProtocolConstants.StreamingDelimiter, cancellationToken);
+        await _context.HttpContext.Response.Body.WriteAsync(
+            GrpcProtocolConstants.StreamingDelimiter,
+            cancellationToken
+        );
     }
 
     public void Complete()

@@ -4,5 +4,5 @@
 
 class X
 {
-	public readonly int x;
+    public readonly int x;
 }

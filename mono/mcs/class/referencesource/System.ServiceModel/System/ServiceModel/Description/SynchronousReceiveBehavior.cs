@@ -11,26 +11,31 @@ namespace System.ServiceModel.Description
     {
         public SynchronousReceiveBehavior() { }
 
-        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
-        {
-        }
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint) { }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection parameters)
-        {
-        }
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint serviceEndpoint,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
-        { 
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher endpointDispatcher
+        )
+        {
             if (endpointDispatcher == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointDispatcher");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointDispatcher"
+                );
             }
 
             endpointDispatcher.ChannelDispatcher.ReceiveSynchronously = true;
         }
 
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
-        {
-        }
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        ) { }
     }
 }

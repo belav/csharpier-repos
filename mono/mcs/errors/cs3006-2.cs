@@ -3,11 +3,12 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
+
 [assembly: CLSCompliant(true)]
 
-public abstract class CLSClass {
-   public void Test(bool a) {
-   }
+public abstract class CLSClass
+{
+    public void Test(bool a) { }
 
-   public abstract void Test(out bool b);
+    public abstract void Test(out bool b);
 }

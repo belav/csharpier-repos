@@ -19,11 +19,10 @@ namespace Microsoft.CodeAnalysis.Editor
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDecompilerEulaService()
-            => _isAccepted = false;
+        public DefaultDecompilerEulaService() => _isAccepted = false;
 
-        public Task<bool> IsAcceptedAsync(CancellationToken cancellationToken)
-            => _isAccepted ? SpecializedTasks.True : SpecializedTasks.False;
+        public Task<bool> IsAcceptedAsync(CancellationToken cancellationToken) =>
+            _isAccepted ? SpecializedTasks.True : SpecializedTasks.False;
 
         public Task MarkAcceptedAsync(CancellationToken cancellationToken)
         {

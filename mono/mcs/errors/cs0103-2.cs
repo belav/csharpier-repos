@@ -4,8 +4,8 @@
 
 class A : C
 {
-	void Test ()
-	{
-		i = 0;
-	}
+    void Test()
+    {
+        i = 0;
+    }
 }

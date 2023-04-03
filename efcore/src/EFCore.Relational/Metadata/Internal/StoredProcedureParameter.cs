@@ -11,11 +11,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class StoredProcedureParameter :
-    ConventionAnnotatable,
-    IMutableStoredProcedureParameter,
-    IConventionStoredProcedureParameter,
-    IRuntimeStoredProcedureParameter
+public class StoredProcedureParameter
+    : ConventionAnnotatable,
+        IMutableStoredProcedureParameter,
+        IConventionStoredProcedureParameter,
+        IRuntimeStoredProcedureParameter
 {
     private string? _name;
     private ParameterDirection? _direction;
@@ -34,7 +34,8 @@ public class StoredProcedureParameter :
         StoredProcedure storedProcedure,
         bool rowsAffected,
         string? propertyName,
-        bool? originalValue)
+        bool? originalValue
+    )
     {
         StoredProcedure = storedProcedure;
         ForRowsAffected = rowsAffected;
@@ -46,7 +47,10 @@ public class StoredProcedureParameter :
             _directionConfigurationSource = ConfigurationSource.Explicit;
         }
 
-        _builder = new InternalStoredProcedureParameterBuilder(this, storedProcedure.Builder.ModelBuilder);
+        _builder = new InternalStoredProcedureParameterBuilder(
+            this,
+            storedProcedure.Builder.ModelBuilder
+        );
     }
 
     /// <summary>
@@ -67,9 +71,7 @@ public class StoredProcedureParameter :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null
-            && StoredProcedure.IsInModel;
+    public virtual bool IsInModel => _builder is not null && StoredProcedure.IsInModel;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -77,8 +79,7 @@ public class StoredProcedureParameter :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetRemovedFromModel()
-        => _builder = null;
+    public virtual void SetRemovedFromModel() => _builder = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -86,8 +87,7 @@ public class StoredProcedureParameter :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => ((Annotatable)StoredProcedure.EntityType).IsReadOnly;
+    public override bool IsReadOnly => ((Annotatable)StoredProcedure.EntityType).IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -149,10 +149,15 @@ public class StoredProcedureParameter :
                 return "RowsAffected";
             }
 
-            var baseName = GetProperty().GetDefaultColumnName(
-                ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()!.Value)!;
+            var baseName = GetProperty()
+                .GetDefaultColumnName(
+                    ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()!.Value
+                )!;
             return ForOriginalValue ?? false
-                ? Uniquifier.Truncate(baseName + "_Original", GetProperty().DeclaringEntityType.Model.GetMaxIdentifierLength())
+                ? Uniquifier.Truncate(
+                    baseName + "_Original",
+                    GetProperty().DeclaringEntityType.Model.GetMaxIdentifierLength()
+                )
                 : baseName;
         }
         set => SetName(value, ConfigurationSource.Explicit);
@@ -179,8 +184,7 @@ public class StoredProcedureParameter :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetNameConfigurationSource()
-        => _nameConfigurationSource;
+    public virtual ConfigurationSource? GetNameConfigurationSource() => _nameConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -200,20 +204,31 @@ public class StoredProcedureParameter :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ParameterDirection SetDirection(ParameterDirection direction, ConfigurationSource configurationSource)
+    public virtual ParameterDirection SetDirection(
+        ParameterDirection direction,
+        ConfigurationSource configurationSource
+    )
     {
         if (ForRowsAffected)
         {
             throw new InvalidOperationException(
                 RelationalStrings.StoredProcedureParameterInvalidConfiguration(
-                    nameof(Direction), Name, ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()?.DisplayName()));
+                    nameof(Direction),
+                    Name,
+                    ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()?.DisplayName()
+                )
+            );
         }
 
         if (!IsValid(direction))
         {
             throw new InvalidOperationException(
                 RelationalStrings.StoredProcedureParameterInvalidDirection(
-                    direction, Name, ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()?.DisplayName()));
+                    direction,
+                    Name,
+                    ((IReadOnlyStoredProcedure)StoredProcedure).GetStoreIdentifier()?.DisplayName()
+                )
+            );
         }
 
         _direction = direction;
@@ -229,8 +244,8 @@ public class StoredProcedureParameter :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsValid(ParameterDirection direction)
-        => direction switch
+    public virtual bool IsValid(ParameterDirection direction) =>
+        direction switch
         {
             ParameterDirection.Output => ForOriginalValue != true,
             ParameterDirection.ReturnValue => false,
@@ -243,13 +258,15 @@ public class StoredProcedureParameter :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetDirectionConfigurationSource()
-        => _directionConfigurationSource;
+    public virtual ConfigurationSource? GetDirectionConfigurationSource() =>
+        _directionConfigurationSource;
 
-    private IMutableProperty GetProperty()
-        => StoredProcedure.EntityType.FindProperty(PropertyName!)
-            ?? StoredProcedure.EntityType.GetDerivedTypes().Select(t => t.FindDeclaredProperty(PropertyName!)!)
-                .First(n => n != null);
+    private IMutableProperty GetProperty() =>
+        StoredProcedure.EntityType.FindProperty(PropertyName!)
+        ?? StoredProcedure.EntityType
+            .GetDerivedTypes()
+            .Select(t => t.FindDeclaredProperty(PropertyName!)!)
+            .First(n => n != null);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -257,8 +274,10 @@ public class StoredProcedureParameter :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IStoredProcedureParameter)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IStoredProcedureParameter)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -267,10 +286,14 @@ public class StoredProcedureParameter :
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IStoredProcedureParameter)this).ToDebugString(),
-            () => ((IStoredProcedureParameter)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IStoredProcedureParameter)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IReadOnlyStoredProcedure IReadOnlyStoredProcedureParameter.StoredProcedure
@@ -308,10 +331,19 @@ public class StoredProcedureParameter :
     }
 
     /// <inheritdoc />
-    string IConventionStoredProcedureParameter.SetName(string name, bool fromDataAnnotation)
-        => SetName(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    string IConventionStoredProcedureParameter.SetName(string name, bool fromDataAnnotation) =>
+        SetName(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
-    ParameterDirection IConventionStoredProcedureParameter.SetDirection(ParameterDirection direction, bool fromDataAnnotation)
-        => SetDirection(direction, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    ParameterDirection IConventionStoredProcedureParameter.SetDirection(
+        ParameterDirection direction,
+        bool fromDataAnnotation
+    ) =>
+        SetDirection(
+            direction,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

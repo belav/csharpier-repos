@@ -6,8 +6,6 @@ using System;
 
 public class C
 {
-	[return: CLSCompliant (false)]
-	~C ()
-	{
-	}
+    [return: CLSCompliant(false)]
+    ~C() { }
 }

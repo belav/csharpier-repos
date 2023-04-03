@@ -4,8 +4,8 @@
 
 public class Test
 {
-	public static void Main ()
-	{
-		new B.BB ().Foo ();
-	}
+    public static void Main()
+    {
+        new B.BB().Foo();
+    }
 }

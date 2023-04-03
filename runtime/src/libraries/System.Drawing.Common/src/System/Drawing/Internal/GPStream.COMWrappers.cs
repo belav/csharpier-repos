@@ -16,17 +16,22 @@ namespace System.Drawing.Internal
             }
 
             // The cloned object should have the same current "position"
-            var clone = new GPStream(_dataStream)
-            {
-                _virtualPosition = _virtualPosition
-            };
+            var clone = new GPStream(_dataStream) { _virtualPosition = _virtualPosition };
 
-            *ppstm = DrawingCom.Instance.GetOrCreateComInterfaceForObject(clone, CreateComInterfaceFlags.None);
+            *ppstm = DrawingCom.Instance.GetOrCreateComInterfaceForObject(
+                clone,
+                CreateComInterfaceFlags.None
+            );
 
             return Interop.HRESULT.S_OK;
         }
 
-        public unsafe Interop.HRESULT CopyTo(IntPtr pstm, ulong cb, ulong* pcbRead, ulong* pcbWritten)
+        public unsafe Interop.HRESULT CopyTo(
+            IntPtr pstm,
+            ulong cb,
+            ulong* pcbRead,
+            ulong* pcbWritten
+        )
         {
             byte[] buffer = ArrayPool<byte>.Shared.Rent(4096);
 
@@ -38,7 +43,8 @@ namespace System.Drawing.Internal
             {
                 while (remaining > 0)
                 {
-                    uint read = remaining < (ulong)buffer.Length ? (uint)remaining : (uint)buffer.Length;
+                    uint read =
+                        remaining < (ulong)buffer.Length ? (uint)remaining : (uint)buffer.Length;
                     Read(b, read, &read);
                     remaining -= read;
                     totalRead += read;
@@ -75,8 +81,13 @@ namespace System.Drawing.Internal
 
         private static unsafe int WriteToStream(IntPtr pstm, byte* pv, uint cb, uint* pcbWritten)
         {
-            return ((delegate* unmanaged<IntPtr, byte*, uint, uint*, int>)(*(*(void***)pstm + 4 /* IStream.Write slot */)))
-                (pstm, pv, cb, pcbWritten);
+            return (
+                (delegate* unmanaged<IntPtr, byte*, uint, uint*, int>)(
+                    *(
+                        *(void***)pstm + 4 /* IStream.Write slot */
+                    )
+                )
+            )(pstm, pv, cb, pcbWritten);
         }
     }
 }

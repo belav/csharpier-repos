@@ -48,15 +48,17 @@ namespace System.Web.Http.SelfHost
         /// </summary>
         /// <param name="baseAddress">The base address.</param>
         public HttpSelfHostConfiguration(string baseAddress)
-            : this(CreateBaseAddress(baseAddress))
-        {
-        }
+            : this(CreateBaseAddress(baseAddress)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpSelfHostConfiguration"/> class.
         /// </summary>
         /// <param name="baseAddress">The base address.</param>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "caller owns object")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "caller owns object"
+        )]
         public HttpSelfHostConfiguration(Uri baseAddress)
             : base(new HttpRouteCollection(ValidateBaseAddress(baseAddress).AbsolutePath))
         {
@@ -78,7 +80,7 @@ namespace System.Web.Http.SelfHost
         }
 
         /// <summary>
-        /// Gets or sets the upper limit of how many concurrent <see cref="T:System.Net.Http.HttpRequestMessage"/> instances 
+        /// Gets or sets the upper limit of how many concurrent <see cref="T:System.Net.Http.HttpRequestMessage"/> instances
         /// can be processed at any given time. The default is 100 times the number of CPU cores.
         /// </summary>
         /// <value>
@@ -87,12 +89,15 @@ namespace System.Web.Http.SelfHost
         public int MaxConcurrentRequests
         {
             get { return _maxConcurrentRequests; }
-
             set
             {
                 if (value < MinConcurrentRequests)
                 {
-                    throw Error.ArgumentMustBeGreaterThanOrEqualTo("value", value, MinConcurrentRequests);
+                    throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                        "value",
+                        value,
+                        MinConcurrentRequests
+                    );
                 }
                 _maxConcurrentRequests = value;
             }
@@ -107,7 +112,6 @@ namespace System.Web.Http.SelfHost
         public TransferMode TransferMode
         {
             get { return _transferMode; }
-
             set
             {
                 TransferModeHelper.Validate(value, "value");
@@ -121,7 +125,6 @@ namespace System.Web.Http.SelfHost
         public HostNameComparisonMode HostNameComparisonMode
         {
             get { return _hostNameComparisonMode; }
-
             set
             {
                 HostNameComparisonModeHelper.Validate(value, "value");
@@ -151,7 +154,6 @@ namespace System.Web.Http.SelfHost
                 }
                 return (int)maxReceivedMessageSize;
             }
-
             set
             {
                 if (value < MinBufferSize)
@@ -172,12 +174,15 @@ namespace System.Web.Http.SelfHost
         public long MaxReceivedMessageSize
         {
             get { return _maxReceivedMessageSize; }
-
             set
             {
                 if (value < MinReceivedMessageSize)
                 {
-                    throw Error.ArgumentMustBeGreaterThanOrEqualTo("value", value, MinReceivedMessageSize);
+                    throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                        "value",
+                        value,
+                        MinReceivedMessageSize
+                    );
                 }
                 _maxReceivedMessageSize = value;
             }
@@ -192,7 +197,6 @@ namespace System.Web.Http.SelfHost
         public TimeSpan ReceiveTimeout
         {
             get { return _receiveTimeout; }
-
             set
             {
                 if (value < TimeSpan.Zero)
@@ -213,7 +217,6 @@ namespace System.Web.Http.SelfHost
         public TimeSpan SendTimeout
         {
             get { return _sendTimeout; }
-
             set
             {
                 if (value < TimeSpan.Zero)
@@ -235,8 +238,7 @@ namespace System.Web.Http.SelfHost
         public UserNamePasswordValidator UserNamePasswordValidator
         {
             get { return _credentials.UserNameAuthentication.CustomUserNamePasswordValidator; }
-
-            set 
+            set
             {
                 if (value == null)
                 {
@@ -245,7 +247,8 @@ namespace System.Web.Http.SelfHost
 
                 _clientCredentialType = HttpClientCredentialType.Basic;
                 _credentials.UserNameAuthentication.CustomUserNamePasswordValidator = value;
-                _credentials.UserNameAuthentication.UserNamePasswordValidationMode = UserNamePasswordValidationMode.Custom;
+                _credentials.UserNameAuthentication.UserNamePasswordValidationMode =
+                    UserNamePasswordValidationMode.Custom;
             }
         }
 
@@ -259,7 +262,6 @@ namespace System.Web.Http.SelfHost
         public X509CertificateValidator X509CertificateValidator
         {
             get { return _credentials.ClientCertificate.Authentication.CustomCertificateValidator; }
-
             set
             {
                 if (value == null)
@@ -269,12 +271,13 @@ namespace System.Web.Http.SelfHost
 
                 _clientCredentialType = HttpClientCredentialType.Certificate;
                 _credentials.ClientCertificate.Authentication.CustomCertificateValidator = value;
-                _credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+                _credentials.ClientCertificate.Authentication.CertificateValidationMode =
+                    X509CertificateValidationMode.Custom;
             }
         }
 
         /// <summary>
-        /// Gets/Sets the ClientCredentialType that server is expecting. 
+        /// Gets/Sets the ClientCredentialType that server is expecting.
         /// </summary>
         /// <value>
         /// The default value is HttpClientCredentialType.None.
@@ -307,14 +310,24 @@ namespace System.Web.Http.SelfHost
                 throw Error.ArgumentNull("httpBinding");
             }
 
-            if (_clientCredentialType != HttpClientCredentialType.Basic && _credentials.UserNameAuthentication.CustomUserNamePasswordValidator != null)
+            if (
+                _clientCredentialType != HttpClientCredentialType.Basic
+                && _credentials.UserNameAuthentication.CustomUserNamePasswordValidator != null
+            )
             {
-                throw Error.InvalidOperation(SRResources.CannotUseOtherClientCredentialTypeWithUserNamePasswordValidator);
+                throw Error.InvalidOperation(
+                    SRResources.CannotUseOtherClientCredentialTypeWithUserNamePasswordValidator
+                );
             }
 
-            if (_clientCredentialType != HttpClientCredentialType.Certificate && _credentials.ClientCertificate.Authentication.CustomCertificateValidator != null)
+            if (
+                _clientCredentialType != HttpClientCredentialType.Certificate
+                && _credentials.ClientCertificate.Authentication.CustomCertificateValidator != null
+            )
             {
-                throw Error.InvalidOperation(SRResources.CannotUseOtherClientCredentialTypeWithX509CertificateValidator);
+                throw Error.InvalidOperation(
+                    SRResources.CannotUseOtherClientCredentialTypeWithX509CertificateValidator
+                );
             }
 
             httpBinding.MaxBufferSize = MaxBufferSize;
@@ -333,10 +346,13 @@ namespace System.Web.Http.SelfHost
                     Mode = HttpBindingSecurityMode.Transport,
                 };
             }
-            
+
             if (_clientCredentialType != HttpClientCredentialType.None)
-            {       
-                if (httpBinding.Security == null || httpBinding.Security.Mode == HttpBindingSecurityMode.None)
+            {
+                if (
+                    httpBinding.Security == null
+                    || httpBinding.Security.Mode == HttpBindingSecurityMode.None
+                )
                 {
                     // Basic over HTTP case
                     httpBinding.Security = new HttpBindingSecurity()
@@ -345,7 +361,7 @@ namespace System.Web.Http.SelfHost
                     };
                 }
 
-                httpBinding.Security.Transport.ClientCredentialType = _clientCredentialType;                
+                httpBinding.Security.Transport.ClientCredentialType = _clientCredentialType;
             }
 
             if (UserNamePasswordValidator != null || X509CertificateValidator != null)
@@ -388,12 +404,18 @@ namespace System.Web.Http.SelfHost
                 throw Error.ArgumentUriNotAbsolute("baseAddress", baseAddress);
             }
 
-            if (!String.IsNullOrEmpty(baseAddress.Query) || !String.IsNullOrEmpty(baseAddress.Fragment))
+            if (
+                !String.IsNullOrEmpty(baseAddress.Query)
+                || !String.IsNullOrEmpty(baseAddress.Fragment)
+            )
             {
                 throw Error.ArgumentUriHasQueryOrFragment("baseAddress", baseAddress);
             }
 
-            if (!ReferenceEquals(baseAddress.Scheme, Uri.UriSchemeHttp) && !ReferenceEquals(baseAddress.Scheme, Uri.UriSchemeHttps))
+            if (
+                !ReferenceEquals(baseAddress.Scheme, Uri.UriSchemeHttp)
+                && !ReferenceEquals(baseAddress.Scheme, Uri.UriSchemeHttps)
+            )
             {
                 throw Error.ArgumentUriNotHttpOrHttpsScheme("baseAddress", baseAddress);
             }
@@ -401,7 +423,11 @@ namespace System.Web.Http.SelfHost
             return baseAddress;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         internal static int MultiplyByProcessorCount(int value)
         {
             Contract.Assert(value > 0);

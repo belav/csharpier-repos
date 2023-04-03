@@ -3,12 +3,10 @@
 
 class Test
 {
-	public static void Foo (string s = null, int value = 2)
-	{
-	}
+    public static void Foo(string s = null, int value = 2) { }
 
-	static void Main ()
-	{
-		Foo ("a", 2, 6);
-	}
+    static void Main()
+    {
+        Foo("a", 2, 6);
+    }
 }

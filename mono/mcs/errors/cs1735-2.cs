@@ -4,11 +4,9 @@
 
 struct S
 {
-	/// <summary>
-	///  Test
-	///  <typeparamref name="T" />
-	/// </summary>
-	public void Test<U> ()
-	{
-	}
+    /// <summary>
+    ///  Test
+    ///  <typeparamref name="T" />
+    /// </summary>
+    public void Test<U>() { }
 }

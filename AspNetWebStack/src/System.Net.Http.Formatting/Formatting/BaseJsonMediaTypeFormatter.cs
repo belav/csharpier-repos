@@ -42,8 +42,16 @@ namespace System.Net.Http.Formatting
             _jsonSerializerSettings = CreateDefaultSerializerSettings();
 
             // Set default supported character encodings
-            SupportedEncodings.Add(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true));
-            SupportedEncodings.Add(new UnicodeEncoding(bigEndian: false, byteOrderMark: true, throwOnInvalidBytes: true));
+            SupportedEncodings.Add(
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true)
+            );
+            SupportedEncodings.Add(
+                new UnicodeEncoding(
+                    bigEndian: false,
+                    byteOrderMark: true,
+                    throwOnInvalidBytes: true
+                )
+            );
         }
 
         /// <summary>
@@ -51,8 +59,11 @@ namespace System.Net.Http.Formatting
         /// </summary>
         /// <param name="formatter">The <see cref="BaseJsonMediaTypeFormatter"/> instance to copy settings from.</param>
 #if !NETFX_CORE
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors",
-            Justification = "MaxDepth is sealed in existing subclasses and its documentation carries warnings.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "MaxDepth is sealed in existing subclasses and its documentation carries warnings."
+        )]
 #endif
         protected BaseJsonMediaTypeFormatter(BaseJsonMediaTypeFormatter formatter)
             : base(formatter)
@@ -92,15 +103,16 @@ namespace System.Net.Http.Formatting
         /// </remarks>
         public virtual int MaxDepth
         {
-            get
-            {
-                return _maxDepth;
-            }
+            get { return _maxDepth; }
             set
             {
                 if (value < FormattingUtilities.DefaultMinDepth)
                 {
-                    throw Error.ArgumentMustBeGreaterThanOrEqualTo("value", value, FormattingUtilities.DefaultMinDepth);
+                    throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                        "value",
+                        value,
+                        FormattingUtilities.DefaultMinDepth
+                    );
                 }
 
                 _maxDepth = value;
@@ -112,7 +124,11 @@ namespace System.Net.Http.Formatting
         /// Creates a <see cref="JsonSerializerSettings"/> instance with the default settings used by the <see cref="BaseJsonMediaTypeFormatter"/>.
         /// </summary>
 #if NETFX_CORE
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This could only be static half the time.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This could only be static half the time."
+        )]
 #endif
         public JsonSerializerSettings CreateDefaultSerializerSettings()
         {
@@ -123,7 +139,6 @@ namespace System.Net.Http.Formatting
 #endif
 
                 MissingMemberHandling = MissingMemberHandling.Ignore,
-
                 // Do not change this setting
                 // Setting this to None prevents Json.NET from loading malicious, unsafe, or security-sensitive types
                 TypeNameHandling = TypeNameHandling.None
@@ -171,8 +186,17 @@ namespace System.Net.Http.Formatting
         /// <param name="content">The <see cref="HttpContent"/> for the content being written.</param>
         /// <param name="formatterLogger">The <see cref="IFormatterLogger"/> to log events to.</param>
         /// <returns>A <see cref="Task"/> whose result will be the object instance that has been read.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The caught exception type is reflected into a faulted task.")]
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "The caught exception type is reflected into a faulted task."
+        )]
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             if (type == null)
             {
@@ -194,9 +218,17 @@ namespace System.Net.Http.Formatting
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Caller's formatterLogger is notified of problem in all cases where Exception is not rethrown.")]
-        private object ReadFromStream(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Caller's formatterLogger is notified of problem in all cases where Exception is not rethrown."
+        )]
+        private object ReadFromStream(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             Contract.Assert(type != null);
             Contract.Assert(readStream != null);
@@ -242,7 +274,12 @@ namespace System.Net.Http.Formatting
         /// <param name="effectiveEncoding">The <see cref="Encoding"/> to use when reading.</param>
         /// <param name="formatterLogger">The <see cref="IFormatterLogger"/> to log events to.</param>
         /// <returns>The <see cref="object"/> instance that has been read.</returns>
-        public virtual object ReadFromStream(Type type, Stream readStream, Encoding effectiveEncoding, IFormatterLogger formatterLogger)
+        public virtual object ReadFromStream(
+            Type type,
+            Stream readStream,
+            Encoding effectiveEncoding,
+            IFormatterLogger formatterLogger
+        )
         {
             if (type == null)
             {
@@ -259,7 +296,13 @@ namespace System.Net.Http.Formatting
                 throw Error.ArgumentNull("effectiveEncoding");
             }
 
-            using (JsonReader jsonReader = CreateJsonReaderInternal(type, readStream, effectiveEncoding))
+            using (
+                JsonReader jsonReader = CreateJsonReaderInternal(
+                    type,
+                    readStream,
+                    effectiveEncoding
+                )
+            )
             {
                 jsonReader.CloseInput = false;
                 jsonReader.MaxDepth = _maxDepth;
@@ -295,7 +338,11 @@ namespace System.Net.Http.Formatting
             }
         }
 
-        private JsonReader CreateJsonReaderInternal(Type type, Stream readStream, Encoding effectiveEncoding)
+        private JsonReader CreateJsonReaderInternal(
+            Type type,
+            Stream readStream,
+            Encoding effectiveEncoding
+        )
         {
             Contract.Assert(type != null);
             Contract.Assert(readStream != null);
@@ -304,7 +351,10 @@ namespace System.Net.Http.Formatting
             JsonReader reader = CreateJsonReader(type, readStream, effectiveEncoding);
             if (reader == null)
             {
-                throw Error.InvalidOperation(Properties.Resources.MediaTypeFormatter_JsonReaderFactoryReturnedNull, "CreateJsonReader");
+                throw Error.InvalidOperation(
+                    Properties.Resources.MediaTypeFormatter_JsonReaderFactoryReturnedNull,
+                    "CreateJsonReader"
+                );
             }
 
             return reader;
@@ -321,9 +371,17 @@ namespace System.Net.Http.Formatting
         /// <param name="readStream">The <see cref="Stream"/> from which to read.</param>
         /// <param name="effectiveEncoding">The <see cref="Encoding"/> to use when reading.</param>
         /// <returns>The <see cref="JsonWriter"/> used during deserialization.</returns>
-        public abstract JsonReader CreateJsonReader(Type type, Stream readStream, Encoding effectiveEncoding);
+        public abstract JsonReader CreateJsonReader(
+            Type type,
+            Stream readStream,
+            Encoding effectiveEncoding
+        );
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is a public extensibility point, we can't predict what exceptions will come through")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "This is a public extensibility point, we can't predict what exceptions will come through"
+        )]
         private JsonSerializer CreateJsonSerializerInternal()
         {
             JsonSerializer serializer = null;
@@ -333,12 +391,19 @@ namespace System.Net.Http.Formatting
             }
             catch (Exception exception)
             {
-                throw Error.InvalidOperation(exception, Properties.Resources.JsonSerializerFactoryThrew, "CreateJsonSerializer");
+                throw Error.InvalidOperation(
+                    exception,
+                    Properties.Resources.JsonSerializerFactoryThrew,
+                    "CreateJsonSerializer"
+                );
             }
 
             if (serializer == null)
             {
-                throw Error.InvalidOperation(Properties.Resources.JsonSerializerFactoryReturnedNull, "CreateJsonSerializer");
+                throw Error.InvalidOperation(
+                    Properties.Resources.JsonSerializerFactoryReturnedNull,
+                    "CreateJsonSerializer"
+                );
             }
 
             return serializer;
@@ -359,9 +424,19 @@ namespace System.Net.Http.Formatting
         }
 
         /// <inheritdoc />
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The caught exception type is reflected into a faulted task.")]
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
-            TransportContext transportContext, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "The caught exception type is reflected into a faulted task."
+        )]
+        public override Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext,
+            CancellationToken cancellationToken
+        )
         {
             if (type == null)
             {
@@ -392,7 +467,9 @@ namespace System.Net.Http.Formatting
             Contract.Assert(type != null);
             Contract.Assert(writeStream != null);
 
-            Encoding effectiveEncoding = SelectCharacterEncoding(content == null ? null : content.Headers);
+            Encoding effectiveEncoding = SelectCharacterEncoding(
+                content == null ? null : content.Headers
+            );
             WriteToStream(type, value, writeStream, effectiveEncoding);
         }
 
@@ -408,7 +485,12 @@ namespace System.Net.Http.Formatting
         /// <param name="value">The object to write.</param>
         /// <param name="writeStream">The <see cref="Stream"/> to which to write.</param>
         /// <param name="effectiveEncoding">The <see cref="Encoding"/> to use when writing.</param>
-        public virtual void WriteToStream(Type type, object value, Stream writeStream, Encoding effectiveEncoding)
+        public virtual void WriteToStream(
+            Type type,
+            object value,
+            Stream writeStream,
+            Encoding effectiveEncoding
+        )
         {
             if (type == null)
             {
@@ -425,7 +507,13 @@ namespace System.Net.Http.Formatting
                 throw Error.ArgumentNull("effectiveEncoding");
             }
 
-            using (JsonWriter jsonWriter = CreateJsonWriterInternal(type, writeStream, effectiveEncoding))
+            using (
+                JsonWriter jsonWriter = CreateJsonWriterInternal(
+                    type,
+                    writeStream,
+                    effectiveEncoding
+                )
+            )
             {
                 jsonWriter.CloseOutput = false;
 
@@ -435,7 +523,11 @@ namespace System.Net.Http.Formatting
             }
         }
 
-        private JsonWriter CreateJsonWriterInternal(Type type, Stream writeStream, Encoding effectiveEncoding)
+        private JsonWriter CreateJsonWriterInternal(
+            Type type,
+            Stream writeStream,
+            Encoding effectiveEncoding
+        )
         {
             Contract.Assert(type != null);
             Contract.Assert(writeStream != null);
@@ -444,7 +536,10 @@ namespace System.Net.Http.Formatting
             JsonWriter writer = CreateJsonWriter(type, writeStream, effectiveEncoding);
             if (writer == null)
             {
-                throw Error.InvalidOperation(Properties.Resources.MediaTypeFormatter_JsonWriterFactoryReturnedNull, "CreateJsonWriter");
+                throw Error.InvalidOperation(
+                    Properties.Resources.MediaTypeFormatter_JsonWriterFactoryReturnedNull,
+                    "CreateJsonWriter"
+                );
             }
 
             return writer;
@@ -461,6 +556,10 @@ namespace System.Net.Http.Formatting
         /// <param name="writeStream">The <see cref="Stream"/> to which to write.</param>
         /// <param name="effectiveEncoding">The <see cref="Encoding"/> to use when writing.</param>
         /// <returns>The <see cref="JsonWriter"/> used during serialization.</returns>
-        public abstract JsonWriter CreateJsonWriter(Type type, Stream writeStream, Encoding effectiveEncoding);
+        public abstract JsonWriter CreateJsonWriter(
+            Type type,
+            Stream writeStream,
+            Encoding effectiveEncoding
+        );
     }
 }

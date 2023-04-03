@@ -10,13 +10,14 @@ namespace GitHub_23861
     public class Program
     {
         static int returnVal = 100;
+
         public static int Main()
         {
             LessThanAllDouble();
 
             if (returnVal == 100)
             {
-                Console.WriteLine("Pass");                
+                Console.WriteLine("Pass");
             }
             else
             {
@@ -25,9 +26,13 @@ namespace GitHub_23861
             return returnVal;
         }
 
-        public static void LessThanAllDouble() { TestVectorLessThanAll<double>(); }
+        public static void LessThanAllDouble()
+        {
+            TestVectorLessThanAll<double>();
+        }
 
-        private static void TestVectorLessThanAll<T>() where T : struct
+        private static void TestVectorLessThanAll<T>()
+            where T : struct
         {
             T[] values1 = new T[Vector<T>.Count];
             for (int g = 0; g < Vector<T>.Count; g++)
@@ -65,4 +70,3 @@ namespace GitHub_23861
         }
     }
 }
-

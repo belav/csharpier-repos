@@ -4,5 +4,5 @@
 
 class C
 {
-	public extern C();
+    public extern C();
 }

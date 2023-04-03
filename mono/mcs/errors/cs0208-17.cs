@@ -2,11 +2,11 @@
 // Line: 7
 // Compiler options: -unsafe
 
-unsafe class Foo<T> where T : struct
+unsafe class Foo<T>
+    where T : struct
 {
-	public T* Elements {
-		get {
-			return null;
-		}
-	}
+    public T* Elements
+    {
+        get { return null; }
+    }
 }

@@ -8,26 +8,38 @@ namespace Microsoft.CodeAnalysis
     {
         private static class PointerTypeSymbolKey
         {
-            public static void Create(IPointerTypeSymbol symbol, SymbolKeyWriter visitor)
-                => visitor.WriteSymbolKey(symbol.PointedAtType);
+            public static void Create(IPointerTypeSymbol symbol, SymbolKeyWriter visitor) =>
+                visitor.WriteSymbolKey(symbol.PointedAtType);
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
-                var pointedAtTypeResolution = reader.ReadSymbolKey(out var pointedAtTypeFailureReason);
+                var pointedAtTypeResolution = reader.ReadSymbolKey(
+                    out var pointedAtTypeFailureReason
+                );
 
                 if (pointedAtTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(PointerTypeSymbolKey)} {nameof(pointedAtTypeResolution)} failed -> {pointedAtTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(PointerTypeSymbolKey)} {nameof(pointedAtTypeResolution)} failed -> {pointedAtTypeFailureReason})";
                     return default;
                 }
 
-                using var result = PooledArrayBuilder<IPointerTypeSymbol>.GetInstance(pointedAtTypeResolution.SymbolCount);
+                using var result = PooledArrayBuilder<IPointerTypeSymbol>.GetInstance(
+                    pointedAtTypeResolution.SymbolCount
+                );
                 foreach (var typeSymbol in pointedAtTypeResolution.OfType<ITypeSymbol>())
                 {
                     result.AddIfNotNull(reader.Compilation.CreatePointerTypeSymbol(typeSymbol));
                 }
 
-                return CreateResolution(result, $"({nameof(PointerTypeSymbolKey)} could not resolve)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(PointerTypeSymbolKey)} could not resolve)",
+                    out failureReason
+                );
             }
         }
     }

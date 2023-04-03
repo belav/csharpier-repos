@@ -4,8 +4,8 @@
 
 public class aClass
 {
-	public struct foo_t
-	{
-		public fixed char b[16];
-	}
+    public struct foo_t
+    {
+        public fixed char b[16];
+    }
 }

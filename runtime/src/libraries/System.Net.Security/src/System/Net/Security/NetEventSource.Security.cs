@@ -11,7 +11,10 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net
 {
-    [EventSource(Name = "Private.InternalDiagnostics.System.Net.Security", LocalizationResources = "FxResources.System.Net.Security.SR")]
+    [EventSource(
+        Name = "Private.InternalDiagnostics.System.Net.Security",
+        LocalizationResources = "FxResources.System.Net.Security.SR"
+    )]
     internal sealed partial class NetEventSource
     {
 #if WINDOWS
@@ -56,7 +59,8 @@ namespace System.Net
                     localId = ns.Socket.LocalEndPoint?.ToString();
                     remoteId = ns.Socket.RemoteEndPoint?.ToString();
                 }
-                catch { };
+                catch { }
+                ;
             }
 
             localId ??= IdOf(innerStream);
@@ -66,7 +70,7 @@ namespace System.Net
 
         [Event(SslStreamCtorId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
         private void SslStreamCtor(string thisOrContextObject, string? localId, string? remoteId) =>
-              WriteEvent(SslStreamCtorId, thisOrContextObject, localId, remoteId);
+            WriteEvent(SslStreamCtorId, thisOrContextObject, localId, remoteId);
 
         [NonEvent]
         public void LocatingPrivateKey(X509Certificate x509Certificate, object instance) =>
@@ -77,12 +81,10 @@ namespace System.Net
             WriteEvent(LocatingPrivateKeyId, x509Certificate, sslStreamHash);
 
         [NonEvent]
-        public void CertIsType2(object instance) =>
-            CertIsType2(GetHashCode(instance));
+        public void CertIsType2(object instance) => CertIsType2(GetHashCode(instance));
 
         [Event(CertIsType2Id, Keywords = Keywords.Default, Level = EventLevel.Informational)]
-        private void CertIsType2(int sslStreamHash) =>
-            WriteEvent(CertIsType2Id, sslStreamHash);
+        private void CertIsType2(int sslStreamHash) => WriteEvent(CertIsType2Id, sslStreamHash);
 
         [NonEvent]
         public void FoundCertInStore(bool serverMode, object instance) =>
@@ -96,7 +98,11 @@ namespace System.Net
         public void NotFoundCertInStore(object instance) =>
             NotFoundCertInStore(GetHashCode(instance));
 
-        [Event(NotFoundCertInStoreId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            NotFoundCertInStoreId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         private void NotFoundCertInStore(int sslStreamHash) =>
             WriteEvent(NotFoundCertInStoreId, sslStreamHash);
 
@@ -112,7 +118,11 @@ namespace System.Net
         public void CertificateFromDelegate(SslStream SslStream) =>
             CertificateFromDelegate(GetHashCode(SslStream));
 
-        [Event(CertificateFromDelegateId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            CertificateFromDelegateId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         private void CertificateFromDelegate(int sslStreamHash) =>
             WriteEvent(CertificateFromDelegateId, sslStreamHash);
 
@@ -120,7 +130,11 @@ namespace System.Net
         public void NoDelegateNoClientCert(SslStream SslStream) =>
             NoDelegateNoClientCert(GetHashCode(SslStream));
 
-        [Event(NoDelegateNoClientCertId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            NoDelegateNoClientCertId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         private void NoDelegateNoClientCert(int sslStreamHash) =>
             WriteEvent(NoDelegateNoClientCertId, sslStreamHash);
 
@@ -128,15 +142,29 @@ namespace System.Net
         public void NoDelegateButClientCert(SslStream SslStream) =>
             NoDelegateButClientCert(GetHashCode(SslStream));
 
-        [Event(NoDelegateButClientCertId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            NoDelegateButClientCertId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         private void NoDelegateButClientCert(int sslStreamHash) =>
             WriteEvent(NoDelegateButClientCertId, sslStreamHash);
 
         [NonEvent]
-        public void AttemptingRestartUsingCert(X509Certificate? clientCertificate, SslStream SslStream) =>
-            AttemptingRestartUsingCert(clientCertificate?.ToString(fVerbose: true), GetHashCode(SslStream));
+        public void AttemptingRestartUsingCert(
+            X509Certificate? clientCertificate,
+            SslStream SslStream
+        ) =>
+            AttemptingRestartUsingCert(
+                clientCertificate?.ToString(fVerbose: true),
+                GetHashCode(SslStream)
+            );
 
-        [Event(AttemptingRestartUsingCertId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            AttemptingRestartUsingCertId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         private void AttemptingRestartUsingCert(string? clientCertificate, int sslStreamHash) =>
             WriteEvent(AttemptingRestartUsingCertId, clientCertificate, sslStreamHash);
 
@@ -144,7 +172,11 @@ namespace System.Net
         public void NoIssuersTryAllCerts(SslStream SslStream) =>
             NoIssuersTryAllCerts(GetHashCode(SslStream));
 
-        [Event(NoIssuersTryAllCertsId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            NoIssuersTryAllCertsId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         private void NoIssuersTryAllCerts(int sslStreamHash) =>
             WriteEvent(NoIssuersTryAllCertsId, sslStreamHash);
 
@@ -152,7 +184,11 @@ namespace System.Net
         public void LookForMatchingCerts(int issuersCount, SslStream SslStream) =>
             LookForMatchingCerts(issuersCount, GetHashCode(SslStream));
 
-        [Event(LookForMatchingCertsId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            LookForMatchingCertsId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         private void LookForMatchingCerts(int issuersCount, int sslStreamHash) =>
             WriteEvent(LookForMatchingCertsId, issuersCount, sslStreamHash);
 
@@ -168,7 +204,11 @@ namespace System.Net
         public void CertsAfterFiltering(int filteredCertsCount, SslStream SslStream) =>
             CertsAfterFiltering(filteredCertsCount, GetHashCode(SslStream));
 
-        [Event(CertsAfterFilteringId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            CertsAfterFilteringId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         private void CertsAfterFiltering(int filteredCertsCount, int sslStreamHash) =>
             WriteEvent(CertsAfterFilteringId, filteredCertsCount, sslStreamHash);
 
@@ -176,7 +216,11 @@ namespace System.Net
         public void FindingMatchingCerts(SslStream SslStream) =>
             FindingMatchingCerts(GetHashCode(SslStream));
 
-        [Event(FindingMatchingCertsId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            FindingMatchingCertsId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         private void FindingMatchingCerts(int sslStreamHash) =>
             WriteEvent(FindingMatchingCertsId, sslStreamHash);
 
@@ -184,11 +228,19 @@ namespace System.Net
         public void UsingCachedCredential(SslStream SslStream) =>
             UsingCachedCredential(GetHashCode(SslStream));
 
-        [Event(UsingCachedCredentialId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            UsingCachedCredentialId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         private void UsingCachedCredential(int sslStreamHash) =>
             WriteEvent(UsingCachedCredentialId, sslStreamHash);
 
-        [Event(SspiSelectedCipherSuitId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            SspiSelectedCipherSuitId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         public void SspiSelectedCipherSuite(
             string process,
             SslProtocols sslProtocol,
@@ -197,11 +249,20 @@ namespace System.Net
             HashAlgorithmType hashAlgorithm,
             int hashStrength,
             ExchangeAlgorithmType keyExchangeAlgorithm,
-            int keyExchangeStrength)
+            int keyExchangeStrength
+        )
         {
-            WriteEvent(SspiSelectedCipherSuitId,
-                process, (int)sslProtocol, (int)cipherAlgorithm, cipherStrength,
-                (int)hashAlgorithm, hashStrength, (int)keyExchangeAlgorithm, keyExchangeStrength);
+            WriteEvent(
+                SspiSelectedCipherSuitId,
+                process,
+                (int)sslProtocol,
+                (int)cipherAlgorithm,
+                cipherStrength,
+                (int)hashAlgorithm,
+                hashStrength,
+                (int)keyExchangeAlgorithm,
+                keyExchangeStrength
+            );
         }
 
         [NonEvent]
@@ -272,10 +333,23 @@ namespace System.Net
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
         [NonEvent]
-        private unsafe void WriteEvent(int eventId, string arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8)
+        private unsafe void WriteEvent(
+            int eventId,
+            string arg1,
+            int arg2,
+            int arg3,
+            int arg4,
+            int arg5,
+            int arg6,
+            int arg7,
+            int arg8
+        )
         {
             arg1 ??= "";
 
@@ -289,41 +363,13 @@ namespace System.Net
                     DataPointer = (IntPtr)(arg1Ptr),
                     Size = (arg1.Length + 1) * sizeof(char)
                 };
-                descrs[1] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg2),
-                    Size = sizeof(int)
-                };
-                descrs[2] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg3),
-                    Size = sizeof(int)
-                };
-                descrs[3] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg4),
-                    Size = sizeof(int)
-                };
-                descrs[4] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg5),
-                    Size = sizeof(int)
-                };
-                descrs[5] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg6),
-                    Size = sizeof(int)
-                };
-                descrs[6] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg7),
-                    Size = sizeof(int)
-                };
-                descrs[7] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg8),
-                    Size = sizeof(int)
-                };
+                descrs[1] = new EventData { DataPointer = (IntPtr)(&arg2), Size = sizeof(int) };
+                descrs[2] = new EventData { DataPointer = (IntPtr)(&arg3), Size = sizeof(int) };
+                descrs[3] = new EventData { DataPointer = (IntPtr)(&arg4), Size = sizeof(int) };
+                descrs[4] = new EventData { DataPointer = (IntPtr)(&arg5), Size = sizeof(int) };
+                descrs[5] = new EventData { DataPointer = (IntPtr)(&arg6), Size = sizeof(int) };
+                descrs[6] = new EventData { DataPointer = (IntPtr)(&arg7), Size = sizeof(int) };
+                descrs[7] = new EventData { DataPointer = (IntPtr)(&arg8), Size = sizeof(int) };
 
                 WriteEventCore(eventId, NumEventDatas, descrs);
             }

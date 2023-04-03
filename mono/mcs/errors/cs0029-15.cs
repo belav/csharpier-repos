@@ -4,9 +4,9 @@
 
 public class Test
 {
-	static void Main ()
-	{
-		var o = new { Value = 1 };
-		bool b = o;
-	}
+    static void Main()
+    {
+        var o = new { Value = 1 };
+        bool b = o;
+    }
 }

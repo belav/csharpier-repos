@@ -3,17 +3,15 @@
 
 public class S
 {
-	public static void Test()
-	{
-	}
+    public static void Test() { }
 }
 
 public class M
 {
-	public object S { get; set; }
+    public object S { get; set; }
 
-	public void Main ()
-	{
-		S.Test ();
-	}
+    public void Main()
+    {
+        S.Test();
+    }
 }

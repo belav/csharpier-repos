@@ -17,42 +17,33 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             private readonly ISet<INamedTypeSymbol> _seenTypes = new HashSet<INamedTypeSymbol>();
             private readonly ICollection<INamedTypeSymbol> _namedTypes;
 
-            public NormalAnonymousTypeCollectorVisitor(ICollection<INamedTypeSymbol> namedTypes)
-                => _namedTypes = namedTypes;
+            public NormalAnonymousTypeCollectorVisitor(ICollection<INamedTypeSymbol> namedTypes) =>
+                _namedTypes = namedTypes;
 
-            public override void DefaultVisit(ISymbol node)
-                => throw new NotImplementedException();
+            public override void DefaultVisit(ISymbol node) => throw new NotImplementedException();
 
             public override void VisitAlias(IAliasSymbol symbol)
             {
                 // TODO(cyrusn): I don't think we need to inspect the target of an alias.
             }
 
-            public override void VisitArrayType(IArrayTypeSymbol symbol)
-                => symbol.ElementType.Accept(this);
+            public override void VisitArrayType(IArrayTypeSymbol symbol) =>
+                symbol.ElementType.Accept(this);
 
-            public override void VisitAssembly(IAssemblySymbol symbol)
-            {
-            }
+            public override void VisitAssembly(IAssemblySymbol symbol) { }
 
-            public override void VisitDynamicType(IDynamicTypeSymbol symbol)
-            {
-            }
+            public override void VisitDynamicType(IDynamicTypeSymbol symbol) { }
 
-            public override void VisitField(IFieldSymbol symbol)
-                => symbol.Type.Accept(this);
+            public override void VisitField(IFieldSymbol symbol) => symbol.Type.Accept(this);
 
-            public override void VisitLabel(ILabelSymbol symbol)
-            {
-            }
+            public override void VisitLabel(ILabelSymbol symbol) { }
 
-            public override void VisitLocal(ILocalSymbol symbol)
-                => symbol.Type.Accept(this);
+            public override void VisitLocal(ILocalSymbol symbol) => symbol.Type.Accept(this);
 
             public override void VisitMethod(IMethodSymbol symbol)
             {
                 // Visit the type arguments first.  That way we'll see things in the proper order.
-                // i.e. if we have:  anon Select<anon, anon>(anon a) it will come out as: 
+                // i.e. if we have:  anon Select<anon, anon>(anon a) it will come out as:
                 //
                 // 'b Select<'a, 'b>('a a);
 
@@ -69,9 +60,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 symbol.ReturnType.Accept(this);
             }
 
-            public override void VisitModule(IModuleSymbol symbol)
-            {
-            }
+            public override void VisitModule(IModuleSymbol symbol) { }
 
             public override void VisitNamedType(INamedTypeSymbol symbol)
             {
@@ -100,15 +89,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 }
             }
 
-            public override void VisitNamespace(INamespaceSymbol symbol)
-            {
-            }
+            public override void VisitNamespace(INamespaceSymbol symbol) { }
 
-            public override void VisitParameter(IParameterSymbol symbol)
-                => symbol.Type.Accept(this);
+            public override void VisitParameter(IParameterSymbol symbol) =>
+                symbol.Type.Accept(this);
 
-            public override void VisitPointerType(IPointerTypeSymbol symbol)
-                => symbol.PointedAtType.Accept(this);
+            public override void VisitPointerType(IPointerTypeSymbol symbol) =>
+                symbol.PointedAtType.Accept(this);
 
             public override void VisitProperty(IPropertySymbol symbol)
             {
@@ -120,8 +107,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 }
             }
 
-            public override void VisitEvent(IEventSymbol symbol)
-                => symbol.Type.Accept(this);
+            public override void VisitEvent(IEventSymbol symbol) => symbol.Type.Accept(this);
 
             public override void VisitTypeParameter(ITypeParameterSymbol symbol)
             {
@@ -131,9 +117,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 }
             }
 
-            public override void VisitRangeVariable(IRangeVariableSymbol symbol)
-            {
-            }
+            public override void VisitRangeVariable(IRangeVariableSymbol symbol) { }
         }
     }
 }

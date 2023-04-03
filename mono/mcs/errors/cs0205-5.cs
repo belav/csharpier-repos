@@ -3,14 +3,13 @@
 
 public abstract class A
 {
-        public abstract int this[int i] { set; }
+    public abstract int this[int i] { set; }
 }
 
-public class B: A
+public class B : A
 {
-		public override int this[int i]  {
-			set {
-				base[i] = value;
-			}
-		}
+    public override int this[int i]
+    {
+        set { base[i] = value; }
+    }
 }

@@ -5,11 +5,15 @@ using System;
 
 public sealed class BoundAttribute : System.Attribute
 {
-	public bool Dec { set { } get { return false; } }
+    public bool Dec
+    {
+        set { }
+        get { return false; }
+    }
 }
 
 class C
 {
-	[Bound (Dec = null)]
-	double d2;
+    [Bound(Dec = null)]
+    double d2;
 }

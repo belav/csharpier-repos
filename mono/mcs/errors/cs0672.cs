@@ -6,12 +6,11 @@ using System;
 
 public class A
 {
-        [Obsolete ("Causes an error", true)]
-        public virtual void Test (string arg) {}
+    [Obsolete("Causes an error", true)]
+    public virtual void Test(string arg) { }
 }
 
-public class B: A
+public class B : A
 {
-        public override void Test (string arg) {}
+    public override void Test(string arg) { }
 }
-

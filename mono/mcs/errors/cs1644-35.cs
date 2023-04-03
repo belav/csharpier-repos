@@ -6,12 +6,13 @@ using System;
 
 class X
 {
-	public static void Main ()
-	{
-		int x = 4;
-		try {
-			throw null;
-		} catch (Exception) when (x > 0) {
-		}
-	}
+    public static void Main()
+    {
+        int x = 4;
+        try
+        {
+            throw null;
+        }
+        catch (Exception) when (x > 0) { }
+    }
 }

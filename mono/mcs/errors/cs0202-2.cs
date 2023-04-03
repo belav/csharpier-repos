@@ -3,16 +3,16 @@
 using System;
 using System.Collections.Generic;
 
-class Test {
-        static void Main ()
-        {
-                Test obj = new Test ();
-                foreach (string s in obj) {
-                }
-        }
+class Test
+{
+    static void Main()
+    {
+        Test obj = new Test();
+        foreach (string s in obj) { }
+    }
 
-        public IEnumerable<string> GetEnumerator ()
-        {
-		return null;
-        }
+    public IEnumerable<string> GetEnumerator()
+    {
+        return null;
+    }
 }

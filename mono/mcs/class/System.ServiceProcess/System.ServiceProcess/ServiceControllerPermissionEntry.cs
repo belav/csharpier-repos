@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,50 +31,59 @@
 using System.ComponentModel;
 using System.Security.Permissions;
 
-namespace System.ServiceProcess {
+namespace System.ServiceProcess
+{
+    [Serializable]
+    public class ServiceControllerPermissionEntry
+    {
+        string machine_name;
+        string service_name;
+        ServiceControllerPermissionAccess permission_access;
 
-	[Serializable]
-	public class ServiceControllerPermissionEntry {
+        public ServiceControllerPermissionEntry()
+        {
+            machine_name = ResourcePermissionBase.Local;
+            service_name = ResourcePermissionBase.Any;
+            permission_access = ServiceControllerPermissionAccess.Browse;
+        }
 
-		string machine_name;
-		string service_name;
-		ServiceControllerPermissionAccess permission_access;
-		
-		public ServiceControllerPermissionEntry ()
-		{
-			machine_name = ResourcePermissionBase.Local;
-			service_name = ResourcePermissionBase.Any;
-			permission_access = ServiceControllerPermissionAccess.Browse;
-		}
+        public ServiceControllerPermissionEntry(
+            ServiceControllerPermissionAccess permissionAccess,
+            string machineName,
+            string serviceName
+        )
+        {
+            ServiceControllerPermission.ValidateMachineName(machineName);
+            ServiceControllerPermission.ValidateServiceName(serviceName);
 
-		public ServiceControllerPermissionEntry (ServiceControllerPermissionAccess permissionAccess,
-			string machineName, string serviceName)
-		{
-			ServiceControllerPermission.ValidateMachineName (machineName);
-			ServiceControllerPermission.ValidateServiceName (serviceName);
+            permission_access = permissionAccess;
+            machine_name = machineName;
+            service_name = serviceName;
+        }
 
-			permission_access = permissionAccess;
-			machine_name = machineName;
-			service_name = serviceName;
-		}
+        public string MachineName
+        {
+            get { return machine_name; }
+        }
 
-		public string MachineName {
-			get { return machine_name; }
-		}
+        public string ServiceName
+        {
+            get { return service_name; }
+        }
 
-		public string ServiceName {
-			get { return service_name; }
-		}
+        public ServiceControllerPermissionAccess PermissionAccess
+        {
+            get { return permission_access; }
+        }
 
-		public ServiceControllerPermissionAccess PermissionAccess {
-			get { return permission_access; }
-		}
+        // look at MSDN library ResourcePermissionBaseEntry sample for the "design"
 
-		// look at MSDN library ResourcePermissionBaseEntry sample for the "design"
-
-		internal ResourcePermissionBaseEntry GetBaseEntry ()
-		{
-			return new ResourcePermissionBaseEntry ((int) permission_access, new string[] { machine_name, service_name });
-		} 
-	}
+        internal ResourcePermissionBaseEntry GetBaseEntry()
+        {
+            return new ResourcePermissionBaseEntry(
+                (int)permission_access,
+                new string[] { machine_name, service_name }
+            );
+        }
+    }
 }

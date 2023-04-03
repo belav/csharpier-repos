@@ -24,8 +24,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal ComTypeClassDesc(ComTypes.ITypeInfo typeInfo, ComTypeLibDesc typeLibDesc) :
-            base(typeInfo, typeLibDesc)
+        internal ComTypeClassDesc(ComTypes.ITypeInfo typeInfo, ComTypeLibDesc typeLibDesc)
+            : base(typeInfo, typeLibDesc)
         {
             ComTypes.TYPEATTR typeAttr = ComRuntimeHelpers.GetTypeAttrForTypeInfo(typeInfo);
             Guid = typeAttr.guid;
@@ -36,7 +36,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 typeInfo.GetRefTypeInfo(hRefType, out ComTypes.ITypeInfo currentTypeInfo);
                 typeInfo.GetImplTypeFlags(i, out ComTypes.IMPLTYPEFLAGS implTypeFlags);
 
-                bool isSourceItf = (implTypeFlags & ComTypes.IMPLTYPEFLAGS.IMPLTYPEFLAG_FSOURCE) != 0;
+                bool isSourceItf =
+                    (implTypeFlags & ComTypes.IMPLTYPEFLAGS.IMPLTYPEFLAG_FSOURCE) != 0;
                 AddInterface(currentTypeInfo, isSourceItf);
             }
         }
@@ -67,8 +68,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         #region IDynamicMetaObjectProvider Members
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public DynamicMetaObject GetMetaObject(Expression parameter)
         {
             return new ComClassMetaObject(parameter, this);

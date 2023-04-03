@@ -5,8 +5,5 @@ using System;
 
 public class X
 {
-        public void Error ([ParamArray] int args)
-        {
-        }
-       
+    public void Error([ParamArray] int args) { }
 }

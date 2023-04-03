@@ -3,19 +3,15 @@
 
 public class E : A
 {
-	void Test ()
-	{
-		base.Method ();
-	}
+    void Test()
+    {
+        base.Method();
+    }
 }
 
 static class S
 {
-	public static void Method (this A a)
-	{
-	}
+    public static void Method(this A a) { }
 }
 
-public class A
-{
-}
+public class A { }

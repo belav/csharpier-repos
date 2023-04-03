@@ -52,8 +52,13 @@ namespace System.Reflection.Runtime.PropertyInfos.EcmaFormat
         //
         //  We don't report any DeclaredMembers for arrays or generic parameters so those don't apply.
         //
-        private EcmaFormatRuntimePropertyInfo(PropertyDefinitionHandle propertyHandle, EcmaFormatRuntimeNamedTypeInfo definingTypeInfo, RuntimeTypeInfo contextTypeInfo, RuntimeTypeInfo reflectedType) :
-            base(contextTypeInfo, reflectedType)
+        private EcmaFormatRuntimePropertyInfo(
+            PropertyDefinitionHandle propertyHandle,
+            EcmaFormatRuntimeNamedTypeInfo definingTypeInfo,
+            RuntimeTypeInfo contextTypeInfo,
+            RuntimeTypeInfo reflectedType
+        )
+            : base(contextTypeInfo, reflectedType)
         {
             _propertyHandle = propertyHandle;
             _definingTypeInfo = definingTypeInfo;
@@ -63,10 +68,7 @@ namespace System.Reflection.Runtime.PropertyInfos.EcmaFormat
 
         public sealed override PropertyAttributes Attributes
         {
-            get
-            {
-                return _property.Attributes;
-            }
+            get { return _property.Attributes; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
@@ -78,7 +80,10 @@ namespace System.Reflection.Runtime.PropertyInfos.EcmaFormat
                     ReflectionTrace.PropertyInfo_CustomAttributes(this);
 #endif
 
-                return RuntimeCustomAttributeData.GetCustomAttributes(_reader, _property.GetCustomAttributes());
+                return RuntimeCustomAttributeData.GetCustomAttributes(
+                    _reader,
+                    _property.GetCustomAttributes()
+                );
             }
         }
 
@@ -118,26 +123,34 @@ namespace System.Reflection.Runtime.PropertyInfos.EcmaFormat
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                return MetadataTokens.GetToken(_propertyHandle);
-            }
+            get { return MetadataTokens.GetToken(_propertyHandle); }
         }
 
         protected sealed override QSignatureTypeHandle PropertyTypeHandle
         {
             get
             {
-                return new QSignatureTypeHandle(_reader, _reader.GetBlobReader(_property.Signature));
+                return new QSignatureTypeHandle(
+                    _reader,
+                    _reader.GetBlobReader(_property.Signature)
+                );
             }
         }
 
         protected sealed override bool GetDefaultValueIfAny(bool raw, out object defaultValue)
         {
-            return DefaultValueProcessing.GetDefaultValueIfAny(_reader, ref _property, this, raw, out defaultValue);
+            return DefaultValueProcessing.GetDefaultValueIfAny(
+                _reader,
+                ref _property,
+                this,
+                raw,
+                out defaultValue
+            );
         }
 
-        protected sealed override RuntimeNamedMethodInfo GetPropertyMethod(PropertyMethodSemantics whichMethod)
+        protected sealed override RuntimeNamedMethodInfo GetPropertyMethod(
+            PropertyMethodSemantics whichMethod
+        )
         {
             MethodDefinitionHandle methodHandle;
             PropertyAccessors propertyAccessors = _property.GetAccessors();
@@ -164,23 +177,20 @@ namespace System.Reflection.Runtime.PropertyInfos.EcmaFormat
                     return null;
             }
 
-            return RuntimeNamedMethodInfo<EcmaFormatMethodCommon>.GetRuntimeNamedMethodInfo(new EcmaFormatMethodCommon(methodHandle, _definingTypeInfo, ContextTypeInfo), _reflectedType);
+            return RuntimeNamedMethodInfo<EcmaFormatMethodCommon>.GetRuntimeNamedMethodInfo(
+                new EcmaFormatMethodCommon(methodHandle, _definingTypeInfo, ContextTypeInfo),
+                _reflectedType
+            );
         }
 
         protected sealed override string MetadataName
         {
-            get
-            {
-                return _property.Name.GetString(_reader);
-            }
+            get { return _property.Name.GetString(_reader); }
         }
 
         protected sealed override RuntimeTypeInfo DefiningTypeInfo
         {
-            get
-            {
-                return _definingTypeInfo;
-            }
+            get { return _definingTypeInfo; }
         }
 
         private readonly EcmaFormatRuntimeNamedTypeInfo _definingTypeInfo;

@@ -3,7 +3,5 @@
 
 static class S
 {
-	static void Foo (params params ulong[] u)
-	{
-	}
+    static void Foo(params params ulong[] u) { }
 }

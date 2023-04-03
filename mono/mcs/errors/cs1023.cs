@@ -3,9 +3,9 @@
 
 class Test
 {
-        static void Main ()
-        {
-                for (int i = 0; i < 1000000; i++)
-                        int k = i;
-        }
+    static void Main()
+    {
+        for (int i = 0; i < 1000000; i++)
+            int k = i;
+    }
 }

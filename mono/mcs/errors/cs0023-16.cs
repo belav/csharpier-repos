@@ -5,11 +5,9 @@ using System;
 
 public class Test
 {
-    public static void E () 
-    { 
-    }
+    public static void E() { }
 
-    public static void Main () 
+    public static void Main()
     {
         Console.WriteLine(E.x);
     }

@@ -4,9 +4,10 @@
 
 using System;
 
-class MainClass {
-    public static void Main ()
+class MainClass
+{
+    public static void Main()
     {
-        Console.WriteLine (E.item_a);
+        Console.WriteLine(E.item_a);
     }
 }

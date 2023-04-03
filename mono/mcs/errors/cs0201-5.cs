@@ -3,11 +3,10 @@
 
 class TestClass
 {
-	delegate void test_delegate (int arg);
+    delegate void test_delegate(int arg);
 
-	public TestClass ()
-	{
-		test_delegate D = (b) => "a";
-	}
+    public TestClass()
+    {
+        test_delegate D = (b) => "a";
+    }
 }
-

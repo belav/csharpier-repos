@@ -20,7 +20,10 @@ namespace ILCompiler
         /// for a non-versionable type, false otherwise.</returns>
         public static bool IsNonVersionable(this MetadataType type)
         {
-            bool result = type.HasCustomAttribute("System.Runtime.Versioning", "NonVersionableAttribute");
+            bool result = type.HasCustomAttribute(
+                "System.Runtime.Versioning",
+                "NonVersionableAttribute"
+            );
 
             if (!type.IsValueType)
             {
@@ -50,7 +53,10 @@ namespace ILCompiler
         /// <returns>True when the method is marked as non-versionable, false otherwise.</returns>
         public static bool IsNonVersionable(this MethodDesc method)
         {
-            return method.HasCustomAttribute("System.Runtime.Versioning", "NonVersionableAttribute");
+            return method.HasCustomAttribute(
+                "System.Runtime.Versioning",
+                "NonVersionableAttribute"
+            );
         }
     }
 }

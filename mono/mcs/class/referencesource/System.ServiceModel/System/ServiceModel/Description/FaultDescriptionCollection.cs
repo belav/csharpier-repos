@@ -9,9 +9,7 @@ namespace System.ServiceModel.Description
 
     public class FaultDescriptionCollection : Collection<FaultDescription>
     {
-        internal FaultDescriptionCollection()
-        {            
-        }
+        internal FaultDescriptionCollection() { }
 
         public FaultDescription Find(string action)
         {

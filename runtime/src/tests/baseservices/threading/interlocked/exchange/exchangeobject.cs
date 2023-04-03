@@ -49,7 +49,10 @@ namespace InteropTests
         private Object newValueA = new Object();
         private Object newValueB = new Object();
         private bool success;
-        public ThreadSafe(): this(10000) { }
+
+        public ThreadSafe()
+            : this(10000) { }
+
         public ThreadSafe(int loops)
         {
             totalValue = newValueA;
@@ -68,15 +71,15 @@ namespace InteropTests
             signal.WaitOne();
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Exchange(ref totalValue, newValueB);
-
         }
+
         public void ThreadWorkerB()
         {
             signal.WaitOne();
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Exchange(ref totalValue, newValueB);
-
         }
+
         public void ThreadChecker()
         {
             signal.WaitOne();
@@ -91,15 +94,11 @@ namespace InteropTests
                 }
                 Thread.Sleep(0);
             }
-
         }
 
         public bool Pass
         {
-            get
-            {
-                return (success);
-            }
+            get { return (success); }
         }
     }
 }

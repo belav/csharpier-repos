@@ -33,19 +33,37 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <summary>
         /// Creates a new instance of this additional document updated to have the text specified.
         /// </summary>
-        public static TextDocument WithAdditionalDocumentText(this TextDocument textDocument, SourceText text)
+        public static TextDocument WithAdditionalDocumentText(
+            this TextDocument textDocument,
+            SourceText text
+        )
         {
             Contract.ThrowIfFalse(textDocument is AdditionalDocument);
-            return textDocument.Project.Solution.WithAdditionalDocumentText(textDocument.Id, text, PreservationMode.PreserveIdentity).GetTextDocument(textDocument.Id)!;
+            return textDocument.Project.Solution
+                .WithAdditionalDocumentText(
+                    textDocument.Id,
+                    text,
+                    PreservationMode.PreserveIdentity
+                )
+                .GetTextDocument(textDocument.Id)!;
         }
 
         /// <summary>
         /// Creates a new instance of this analyzer config document updated to have the text specified.
         /// </summary>
-        public static TextDocument WithAnalyzerConfigDocumentText(this TextDocument textDocument, SourceText text)
+        public static TextDocument WithAnalyzerConfigDocumentText(
+            this TextDocument textDocument,
+            SourceText text
+        )
         {
             Contract.ThrowIfFalse(textDocument is AnalyzerConfigDocument);
-            return textDocument.Project.Solution.WithAnalyzerConfigDocumentText(textDocument.Id, text, PreservationMode.PreserveIdentity).GetTextDocument(textDocument.Id)!;
+            return textDocument.Project.Solution
+                .WithAnalyzerConfigDocumentText(
+                    textDocument.Id,
+                    text,
+                    PreservationMode.PreserveIdentity
+                )
+                .GetTextDocument(textDocument.Id)!;
         }
     }
 }

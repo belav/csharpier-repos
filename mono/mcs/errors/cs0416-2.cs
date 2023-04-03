@@ -9,14 +9,8 @@ public class TestAttribute : Attribute
 
     public object Type
     {
-        get
-        {
-            return type;
-        }
-        set
-        {
-            type = value;
-        }
+        get { return type; }
+        set { type = value; }
     }
 }
 
@@ -24,9 +18,7 @@ namespace N
 {
     class C<T>
     {
-        [Test(Type=typeof(C<T>))]
-        public void Foo()
-        {
-        }
+        [Test(Type = typeof(C<T>))]
+        public void Foo() { }
     }
 }

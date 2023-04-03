@@ -2,11 +2,7 @@
 // Line: 9
 using System;
 
-public class classAttribute : Attribute
-{
-}
+public class classAttribute : Attribute { }
 
 [@class]
-class Foo
-{
-}
+class Foo { }

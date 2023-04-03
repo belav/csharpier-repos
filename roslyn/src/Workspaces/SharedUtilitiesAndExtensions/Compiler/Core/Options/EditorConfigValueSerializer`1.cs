@@ -14,16 +14,25 @@ namespace Microsoft.CodeAnalysis.Options
     /// </summary>
     internal sealed class EditorConfigValueSerializer<T> : IEditorConfigValueSerializer
     {
-        public static readonly EditorConfigValueSerializer<T> Unsupported = new(
-            parseValue: _ => throw new NotSupportedException("Option does not support serialization to editorconfig format"),
-            serializeValue: _ => throw new NotSupportedException("Option does not support serialization to editorconfig format"));
+        public static readonly EditorConfigValueSerializer<T> Unsupported =
+            new(
+                parseValue: _ =>
+                    throw new NotSupportedException(
+                        "Option does not support serialization to editorconfig format"
+                    ),
+                serializeValue: _ =>
+                    throw new NotSupportedException(
+                        "Option does not support serialization to editorconfig format"
+                    )
+            );
 
         private readonly Func<string, Optional<T>> _parseValue;
         private readonly Func<T, string> _serializeValue;
 
         public EditorConfigValueSerializer(
             Func<string, Optional<T>> parseValue,
-            Func<T, string> serializeValue)
+            Func<T, string> serializeValue
+        )
         {
             _parseValue = parseValue;
             _serializeValue = serializeValue;
@@ -63,7 +72,7 @@ namespace Microsoft.CodeAnalysis.Options
             return editorConfigStringForValue;
         }
 
-        string IEditorConfigValueSerializer.Serialize(object? value)
-            => GetEditorConfigStringValue((T)value!);
+        string IEditorConfigValueSerializer.Serialize(object? value) =>
+            GetEditorConfigStringValue((T)value!);
     }
 }

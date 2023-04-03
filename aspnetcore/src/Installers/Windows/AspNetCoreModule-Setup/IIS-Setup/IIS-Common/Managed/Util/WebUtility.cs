@@ -10,13 +10,23 @@ namespace Microsoft.Web.Utility
 {
     internal static class WebUtility
     {
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification="We want to count any error as host doesn't exist")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We want to count any error as host doesn't exist"
+        )]
         public static bool IsLocalMachine(string serverName, bool useDns)
         {
-            if (String.Equals(serverName, Environment.MachineName, StringComparison.CurrentCultureIgnoreCase) ||
-                String.Equals(serverName, "localhost", StringComparison.OrdinalIgnoreCase) ||
-                String.Equals(serverName, "127.0.0.1") ||
-                String.Equals(serverName, "::1"))
+            if (
+                String.Equals(
+                    serverName,
+                    Environment.MachineName,
+                    StringComparison.CurrentCultureIgnoreCase
+                )
+                || String.Equals(serverName, "localhost", StringComparison.OrdinalIgnoreCase)
+                || String.Equals(serverName, "127.0.0.1")
+                || String.Equals(serverName, "::1")
+            )
             {
                 return true;
             }
@@ -35,7 +45,9 @@ namespace Microsoft.Web.Utility
                     serverAddressesList.AddRange(serverAddress);
 
                     /// All the IP addresses of the current machine
-                    IPAddress[] currentMachineAddress = Dns.GetHostAddresses(Environment.MachineName);
+                    IPAddress[] currentMachineAddress = Dns.GetHostAddresses(
+                        Environment.MachineName
+                    );
                     currentMachineAddressesList.AddRange(currentMachineAddress);
 
                     // The address 127.0.0.1 also refers to the current machine
@@ -54,7 +66,7 @@ namespace Microsoft.Web.Utility
                 }
                 catch
                 {
-                    // If the Dns class throws an exception the host propbably does not 
+                    // If the Dns class throws an exception the host propbably does not
                     // exist so we return false
                 }
             }

@@ -43,154 +43,185 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.Data.Common
 {
-	[TestFixture]
-	public class DbDataAdapterTest
-	{
-		[Test]
-		public void UpdateBatchSize ()
-		{
-			MyAdapter da = new MyAdapter ();
-			try {
-				da.UpdateBatchSize = 0;
-				Assert.Fail ("#A1");
-			} catch (NotSupportedException ex) {
-				// Specified method is not supported
-				Assert.AreEqual (typeof (NotSupportedException), ex.GetType (), "#A2");
-				Assert.IsNull (ex.InnerException, "#A3");
-				Assert.IsNotNull (ex.Message, "#A4");
-			}
-			Assert.AreEqual (1, da.UpdateBatchSize, "#A5");
+    [TestFixture]
+    public class DbDataAdapterTest
+    {
+        [Test]
+        public void UpdateBatchSize()
+        {
+            MyAdapter da = new MyAdapter();
+            try
+            {
+                da.UpdateBatchSize = 0;
+                Assert.Fail("#A1");
+            }
+            catch (NotSupportedException ex)
+            {
+                // Specified method is not supported
+                Assert.AreEqual(typeof(NotSupportedException), ex.GetType(), "#A2");
+                Assert.IsNull(ex.InnerException, "#A3");
+                Assert.IsNotNull(ex.Message, "#A4");
+            }
+            Assert.AreEqual(1, da.UpdateBatchSize, "#A5");
 
-			try {
-				da.UpdateBatchSize = int.MaxValue;
-				Assert.Fail ("#B1");
-			} catch (NotSupportedException ex) {
-				// Specified method is not supported
-				Assert.AreEqual (typeof (NotSupportedException), ex.GetType (), "#B2");
-				Assert.IsNull (ex.InnerException, "#B3");
-				Assert.IsNotNull (ex.Message, "#B4");
-			}
-			Assert.AreEqual (1, da.UpdateBatchSize, "#B5");
+            try
+            {
+                da.UpdateBatchSize = int.MaxValue;
+                Assert.Fail("#B1");
+            }
+            catch (NotSupportedException ex)
+            {
+                // Specified method is not supported
+                Assert.AreEqual(typeof(NotSupportedException), ex.GetType(), "#B2");
+                Assert.IsNull(ex.InnerException, "#B3");
+                Assert.IsNotNull(ex.Message, "#B4");
+            }
+            Assert.AreEqual(1, da.UpdateBatchSize, "#B5");
 
-			da.UpdateBatchSize = 1;
-			Assert.AreEqual (1, da.UpdateBatchSize, "#C");
-		}
+            da.UpdateBatchSize = 1;
+            Assert.AreEqual(1, da.UpdateBatchSize, "#C");
+        }
 
-		[Test]
-		public void UpdateBatchSize_Negative ()
-		{
-			MyAdapter da = new MyAdapter ();
-			try {
-				da.UpdateBatchSize = -1;
-				Assert.Fail ("#1");
-			} catch (NotSupportedException ex) {
-				// Specified method is not supported
-				Assert.AreEqual (typeof (NotSupportedException), ex.GetType (), "#2");
-				Assert.IsNull (ex.InnerException, "#3");
-				Assert.IsNotNull (ex.Message, "#4");
-			}
-		}
+        [Test]
+        public void UpdateBatchSize_Negative()
+        {
+            MyAdapter da = new MyAdapter();
+            try
+            {
+                da.UpdateBatchSize = -1;
+                Assert.Fail("#1");
+            }
+            catch (NotSupportedException ex)
+            {
+                // Specified method is not supported
+                Assert.AreEqual(typeof(NotSupportedException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+            }
+        }
 
-		[Test]
-		public void AddToBatch ()
-		{
-			MyAdapter da = new MyAdapter ();
-			try {
-				da.AddToBatch (new SqlCommand ());
-				Assert.Fail ("#1");
+        [Test]
+        public void AddToBatch()
+        {
+            MyAdapter da = new MyAdapter();
+            try
+            {
+                da.AddToBatch(new SqlCommand());
+                Assert.Fail("#1");
 #if FEATURE_NO_BSD_SOCKETS
-			} catch (PlatformNotSupportedException) {
+            }
+            catch (PlatformNotSupportedException)
+            {
 #else
-			} catch (NotSupportedException ex) {
-				Assert.AreEqual (typeof (NotSupportedException), ex.GetType (), "#2");
-				Assert.IsNull (ex.InnerException, "#3");
-				Assert.IsNotNull (ex.Message, "#4");
+            }
+            catch (NotSupportedException ex)
+            {
+                Assert.AreEqual(typeof(NotSupportedException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
 #endif
-			}
-		}
+            }
+        }
 
-		[Test]
-		public void ClearBatch ()
-		{
-			MyAdapter da = new MyAdapter ();
-			try {
-				da.ClearBatch ();
-				Assert.Fail ("#1");
-			} catch (NotSupportedException ex) {
-				Assert.AreEqual (typeof (NotSupportedException), ex.GetType (), "#2");
-				Assert.IsNull (ex.InnerException, "#3");
-				Assert.IsNotNull (ex.Message, "#4");
-			}
-		}
+        [Test]
+        public void ClearBatch()
+        {
+            MyAdapter da = new MyAdapter();
+            try
+            {
+                da.ClearBatch();
+                Assert.Fail("#1");
+            }
+            catch (NotSupportedException ex)
+            {
+                Assert.AreEqual(typeof(NotSupportedException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+            }
+        }
 
-		[Test]
-		public void ExecuteBatch ()
-		{
-			MyAdapter da = new MyAdapter ();
-			try {
-				da.ExecuteBatch ();
-				Assert.Fail ("#1");
-			} catch (NotSupportedException ex) {
-				Assert.AreEqual (typeof (NotSupportedException), ex.GetType (), "#2");
-				Assert.IsNull (ex.InnerException, "#3");
-				Assert.IsNotNull (ex.Message, "#4");
-			}
-		}
+        [Test]
+        public void ExecuteBatch()
+        {
+            MyAdapter da = new MyAdapter();
+            try
+            {
+                da.ExecuteBatch();
+                Assert.Fail("#1");
+            }
+            catch (NotSupportedException ex)
+            {
+                Assert.AreEqual(typeof(NotSupportedException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+            }
+        }
 
-		[Test]
-		public void GetBatchedParameter ()
-		{
-			MyAdapter da = new MyAdapter ();
-			try {
-				da.GetBatchedParameter (1, 1);
-				Assert.Fail ("#1");
-			} catch (NotSupportedException ex) {
-				Assert.AreEqual (typeof (NotSupportedException), ex.GetType (), "#2");
-				Assert.IsNull (ex.InnerException, "#3");
-				Assert.IsNotNull (ex.Message, "#4");
-			}
-		}
+        [Test]
+        public void GetBatchedParameter()
+        {
+            MyAdapter da = new MyAdapter();
+            try
+            {
+                da.GetBatchedParameter(1, 1);
+                Assert.Fail("#1");
+            }
+            catch (NotSupportedException ex)
+            {
+                Assert.AreEqual(typeof(NotSupportedException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+            }
+        }
 
-		[Test]
-		public void GetBatchedRecordsAffected ()
-		{
-			MyAdapter da = new MyAdapter ();
-			int recordsAffected = 0;
-			Exception error = null;
+        [Test]
+        public void GetBatchedRecordsAffected()
+        {
+            MyAdapter da = new MyAdapter();
+            int recordsAffected = 0;
+            Exception error = null;
 
-			Assert.IsTrue (da. GetBatchedRecordsAffected (int.MinValue,
-				out recordsAffected, out error), "#1");
-			Assert.AreEqual (1, recordsAffected, "#2");
-			Assert.IsNull (error, "#3");
-		}
+            Assert.IsTrue(
+                da.GetBatchedRecordsAffected(int.MinValue, out recordsAffected, out error),
+                "#1"
+            );
+            Assert.AreEqual(1, recordsAffected, "#2");
+            Assert.IsNull(error, "#3");
+        }
 
-		[Test]
-		public void InitializeBatching ()
-		{
-			MyAdapter da = new MyAdapter ();
-			try {
-				da.InitializeBatching ();
-				Assert.Fail ("#1");
-			} catch (NotSupportedException ex) {
-				Assert.AreEqual (typeof (NotSupportedException), ex.GetType (), "#2");
-				Assert.IsNull (ex.InnerException, "#3");
-				Assert.IsNotNull (ex.Message, "#4");
-			}
-		}
+        [Test]
+        public void InitializeBatching()
+        {
+            MyAdapter da = new MyAdapter();
+            try
+            {
+                da.InitializeBatching();
+                Assert.Fail("#1");
+            }
+            catch (NotSupportedException ex)
+            {
+                Assert.AreEqual(typeof(NotSupportedException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+            }
+        }
 
-		[Test]
-		public void TerminateBatching ()
-		{
-			MyAdapter da = new MyAdapter ();
-			try {
-				da.TerminateBatching ();
-				Assert.Fail ("#1");
-			} catch (NotSupportedException ex) {
-				Assert.AreEqual (typeof (NotSupportedException), ex.GetType (), "#2");
-				Assert.IsNull (ex.InnerException, "#3");
-				Assert.IsNotNull (ex.Message, "#4");
-			}
-		}
+        [Test]
+        public void TerminateBatching()
+        {
+            MyAdapter da = new MyAdapter();
+            try
+            {
+                da.TerminateBatching();
+                Assert.Fail("#1");
+            }
+            catch (NotSupportedException ex)
+            {
+                Assert.AreEqual(typeof(NotSupportedException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+            }
+        }
 #if !MOBILE && !XAMMAC_4_5 && WORKING_SQLITE
 		[Test]
 		[Category ("NotWorking")] // Requires newer sqlite than is on wrench
@@ -265,44 +296,50 @@ sqliteDataAdapter.Update (dataSet, "Primus");
 		}
 #endif
 
+        class MyAdapter : DbDataAdapter
+        {
+            public new int AddToBatch(IDbCommand command)
+            {
+                return base.AddToBatch(command);
+            }
 
-		class MyAdapter : DbDataAdapter
-		{
+            public new void ClearBatch()
+            {
+                base.ClearBatch();
+            }
 
-			public new int AddToBatch (IDbCommand command)
-			{
-				return base.AddToBatch (command);
-			}
+            public new void ExecuteBatch()
+            {
+                base.ClearBatch();
+            }
 
-			public new void ClearBatch ()
-			{
-				base.ClearBatch ();
-			}
+            public new IDataParameter GetBatchedParameter(int commandIdentifier, int parameterIndex)
+            {
+                return base.GetBatchedParameter(commandIdentifier, parameterIndex);
+            }
 
-			public new void ExecuteBatch ()
-			{
-				base.ClearBatch ();
-			}
+            public new bool GetBatchedRecordsAffected(
+                int commandIdentifier,
+                out int recordsAffected,
+                out Exception error
+            )
+            {
+                return base.GetBatchedRecordsAffected(
+                    commandIdentifier,
+                    out recordsAffected,
+                    out error
+                );
+            }
 
-			public new IDataParameter GetBatchedParameter (int commandIdentifier, int parameterIndex)
-			{
-				return base.GetBatchedParameter (commandIdentifier, parameterIndex);
-			}
+            public new void InitializeBatching()
+            {
+                base.InitializeBatching();
+            }
 
-			public new bool GetBatchedRecordsAffected (int commandIdentifier, out int recordsAffected, out Exception error)
-			{
-				return base.GetBatchedRecordsAffected (commandIdentifier, out recordsAffected, out error);
-			}
-
-			public new void InitializeBatching ()
-			{
-				base.InitializeBatching ();
-			}
-
-			public new void TerminateBatching ()
-			{
-				base.TerminateBatching ();
-			}
-		}
-	}
+            public new void TerminateBatching()
+            {
+                base.TerminateBatching();
+            }
+        }
+    }
 }

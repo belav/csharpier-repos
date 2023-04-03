@@ -5,7 +5,5 @@
 
 static class C
 {
-	public static void Test (dynamic i)
-	{
-	}
+    public static void Test(dynamic i) { }
 }

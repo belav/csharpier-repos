@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,30 +31,32 @@
 using System;
 using System.Diagnostics;
 
-namespace System.Diagnostics {
+namespace System.Diagnostics
+{
+    public class InstanceData
+    {
+        private string instanceName;
+        private CounterSample sample;
 
-	public class InstanceData {
+        public InstanceData(string instanceName, CounterSample sample)
+        {
+            this.instanceName = instanceName;
+            this.sample = sample;
+        }
 
-		private string instanceName;
-		private CounterSample sample;
+        public string InstanceName
+        {
+            get { return instanceName; }
+        }
 
-		public InstanceData (string instanceName, CounterSample sample)
-		{
-			this.instanceName = instanceName;
-			this.sample = sample;
-		}
+        public long RawValue
+        {
+            get { return sample.RawValue; }
+        }
 
-		public string InstanceName {
-			get {return instanceName;}
-		}
-
-		public long RawValue {
-			get {return sample.RawValue;}
-		}
-
-		public CounterSample Sample {
-			get {return sample;}
-		}
-	}
+        public CounterSample Sample
+        {
+            get { return sample; }
+        }
+    }
 }
-

@@ -3,11 +3,9 @@
 
 using System.Reflection;
 
-[assembly: AssemblyKeyFile ("file_not_found.snk")]
+[assembly: AssemblyKeyFile("file_not_found.snk")]
 
-class MyClass {
-
-	public static void Main (string [] args)
-	{
-	}
+class MyClass
+{
+    public static void Main(string[] args) { }
 }

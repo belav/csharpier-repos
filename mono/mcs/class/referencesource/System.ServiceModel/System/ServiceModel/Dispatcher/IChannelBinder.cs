@@ -24,11 +24,21 @@ namespace System.ServiceModel.Dispatcher
         bool EndTryReceive(IAsyncResult result, out RequestContext requestContext);
 
         void Send(Message message, TimeSpan timeout);
-        IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         void EndSend(IAsyncResult result);
 
         Message Request(Message message, TimeSpan timeout);
-        IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         Message EndRequest(IAsyncResult result);
 
         bool WaitForMessage(TimeSpan timeout);

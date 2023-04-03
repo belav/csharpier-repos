@@ -13,12 +13,18 @@ internal sealed class ManifestFile : ManifestEntry
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
+            throw new ArgumentException(
+                $"'{nameof(name)}' must not be null, empty or whitespace.",
+                nameof(name)
+            );
         }
 
         if (string.IsNullOrWhiteSpace(resourcePath))
         {
-            throw new ArgumentException($"'{nameof(resourcePath)}' must not be null, empty or whitespace.", nameof(resourcePath));
+            throw new ArgumentException(
+                $"'{nameof(resourcePath)}' must not be null, empty or whitespace.",
+                nameof(resourcePath)
+            );
         }
 
         ResourcePath = resourcePath;

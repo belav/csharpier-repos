@@ -6,7 +6,9 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class TypeLoadException : SystemException, ISerializable
     {
         public TypeLoadException()
@@ -38,7 +40,8 @@ namespace System
 
         public string TypeName => _className ?? string.Empty;
 
-        protected TypeLoadException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected TypeLoadException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _className = info.GetString("TypeLoadClassName");
             _assemblyName = info.GetString("TypeLoadAssemblyName");

@@ -3,21 +3,21 @@
 
 public class C
 {
-	public int v;
+    public int v;
 }
 
 public struct S
 {
-	public int a;
-	public C c;
+    public int a;
+    public C c;
 }
 
 public class Test
 {
-	static void Main ()
-	{
-		S s;
-		s.a = 2;
-		int xx = s.c.v;
-	}
+    static void Main()
+    {
+        S s;
+        s.a = 2;
+        int xx = s.c.v;
+    }
 }

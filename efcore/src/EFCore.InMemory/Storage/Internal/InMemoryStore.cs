@@ -27,9 +27,7 @@ public class InMemoryStore : IInMemoryStore
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public InMemoryStore(
-        IInMemoryTableFactory tableFactory,
-        bool useNameMatching)
+    public InMemoryStore(IInMemoryTableFactory tableFactory, bool useNameMatching)
     {
         _tableFactory = tableFactory;
         _useNameMatching = useNameMatching;
@@ -42,15 +40,21 @@ public class InMemoryStore : IInMemoryStore
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual InMemoryIntegerValueGenerator<TProperty> GetIntegerValueGenerator<TProperty>(
-        IProperty property)
+        IProperty property
+    )
     {
         lock (_lock)
         {
             var entityType = property.DeclaringEntityType;
 
-            return EnsureTable(entityType).GetIntegerValueGenerator<TProperty>(
-                property,
-                entityType.GetDerivedTypesInclusive().Select(type => EnsureTable(type)).ToArray());
+            return EnsureTable(entityType)
+                .GetIntegerValueGenerator<TProperty>(
+                    property,
+                    entityType
+                        .GetDerivedTypesInclusive()
+                        .Select(type => EnsureTable(type))
+                        .ToArray()
+                );
         }
     }
 
@@ -63,7 +67,8 @@ public class InMemoryStore : IInMemoryStore
     public virtual bool EnsureCreated(
         IUpdateAdapterFactory updateAdapterFactory,
         IModel designModel,
-        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger)
+        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
+    )
     {
         lock (_lock)
         {
@@ -115,8 +120,7 @@ public class InMemoryStore : IInMemoryStore
         }
     }
 
-    private static Dictionary<object, IInMemoryTable> CreateTables()
-        => new();
+    private static Dictionary<object, IInMemoryTable> CreateTables() => new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -131,7 +135,9 @@ public class InMemoryStore : IInMemoryStore
         {
             if (_tables != null)
             {
-                foreach (var et in entityType.GetDerivedTypesInclusive().Where(et => !et.IsAbstract()))
+                foreach (
+                    var et in entityType.GetDerivedTypesInclusive().Where(et => !et.IsAbstract())
+                )
                 {
                     var key = _useNameMatching ? (object)et.Name : et;
                     if (_tables.TryGetValue(key, out var table))
@@ -153,7 +159,8 @@ public class InMemoryStore : IInMemoryStore
     /// </summary>
     public virtual int ExecuteTransaction(
         IList<IUpdateEntry> entries,
-        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger)
+        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
+    )
     {
         var rowsAffected = 0;
 

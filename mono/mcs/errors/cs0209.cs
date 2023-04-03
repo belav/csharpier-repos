@@ -4,12 +4,8 @@
 
 public class A
 {
-        unsafe static void Main ()
-        {
-                fixed (string s = null)
-                {
-                }
-        }
+    unsafe static void Main()
+    {
+        fixed (string s = null) { }
+    }
 }
-
-

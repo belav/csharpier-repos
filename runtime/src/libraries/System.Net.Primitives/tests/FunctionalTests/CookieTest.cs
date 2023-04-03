@@ -229,7 +229,14 @@ namespace System.Net.Primitives.Functional.Tests
         [Fact]
         public static void Timestamp_GetSet_Success()
         {
-            DateTime dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0); //DateTime.Now changes as the test runs
+            DateTime dt = new DateTime(
+                DateTime.Now.Year,
+                DateTime.Now.Month,
+                DateTime.Now.Day,
+                DateTime.Now.Hour,
+                DateTime.Now.Minute,
+                0
+            ); //DateTime.Now changes as the test runs
             Cookie c = new Cookie();
             Assert.True(c.TimeStamp >= dt);
         }
@@ -344,7 +351,10 @@ namespace System.Net.Primitives.Functional.Tests
             c = new Cookie("name", "value", "path", "domain");
             c.Port = "\"80\"";
             c.Version = 100;
-            Assert.Equal("$Version=100; name=value; $Path=path; $Domain=domain; $Port=\"80\"", c.ToString());
+            Assert.Equal(
+                "$Version=100; name=value; $Path=path; $Domain=domain; $Port=\"80\"",
+                c.ToString()
+            );
 
             c.Version = 0;
             Assert.Equal("name=value; $Path=path; $Domain=domain; $Port=\"80\"", c.ToString());

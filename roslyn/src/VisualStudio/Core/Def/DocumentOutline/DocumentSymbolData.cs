@@ -22,7 +22,12 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         public SnapshotSpan SelectionRangeSpan { get; }
         public ImmutableArray<DocumentSymbolData> Children { get; }
 
-        public DocumentSymbolData(DocumentSymbol documentSymbol, SnapshotSpan rangeSpan, SnapshotSpan selectionRangeSpan, ImmutableArray<DocumentSymbolData> children)
+        public DocumentSymbolData(
+            DocumentSymbol documentSymbol,
+            SnapshotSpan rangeSpan,
+            SnapshotSpan selectionRangeSpan,
+            ImmutableArray<DocumentSymbolData> children
+        )
         {
             Name = documentSymbol.Name;
             SymbolKind = documentSymbol.Kind;
@@ -31,7 +36,10 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             Children = children;
         }
 
-        private DocumentSymbolData(DocumentSymbolData documentSymbolData, ImmutableArray<DocumentSymbolData> children)
+        private DocumentSymbolData(
+            DocumentSymbolData documentSymbolData,
+            ImmutableArray<DocumentSymbolData> children
+        )
         {
             Name = documentSymbolData.Name;
             SymbolKind = documentSymbolData.SymbolKind;
@@ -40,7 +48,7 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             Children = children;
         }
 
-        public DocumentSymbolData WithChildren(ImmutableArray<DocumentSymbolData> children)
-            => new(this, children);
+        public DocumentSymbolData WithChildren(ImmutableArray<DocumentSymbolData> children) =>
+            new(this, children);
     }
 }

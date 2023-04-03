@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         private static Dictionary<string, string>? s_capturedFileContent;
 
         private static readonly object _guard = new();
-        private static ImmutableArray<TelemetrySession> s_telemetrySessions = ImmutableArray<TelemetrySession>.Empty;
+        private static ImmutableArray<TelemetrySession> s_telemetrySessions =
+            ImmutableArray<TelemetrySession>.Empty;
         private static ImmutableArray<TraceSource> s_loggers = ImmutableArray<TraceSource>.Empty;
 
         public static void InitializeFatalErrorHandlers()
@@ -35,9 +36,18 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 
             // We also must set the handlers for the compiler layer as well.
             var compilerAssembly = typeof(Compilation).Assembly;
-            var compilerFatalErrorType = compilerAssembly.GetType("Microsoft.CodeAnalysis.FatalError", throwOnError: true)!;
-            var compilerFatalErrorHandlerProperty = compilerFatalErrorType.GetProperty(nameof(FatalError.Handler), BindingFlags.Static | BindingFlags.Public)!;
-            var compilerNonFatalErrorHandlerProperty = compilerFatalErrorType.GetProperty(nameof(FatalError.NonFatalHandler), BindingFlags.Static | BindingFlags.Public)!;
+            var compilerFatalErrorType = compilerAssembly.GetType(
+                "Microsoft.CodeAnalysis.FatalError",
+                throwOnError: true
+            )!;
+            var compilerFatalErrorHandlerProperty = compilerFatalErrorType.GetProperty(
+                nameof(FatalError.Handler),
+                BindingFlags.Static | BindingFlags.Public
+            )!;
+            var compilerNonFatalErrorHandlerProperty = compilerFatalErrorType.GetProperty(
+                nameof(FatalError.NonFatalHandler),
+                BindingFlags.Static | BindingFlags.Public
+            )!;
             compilerFatalErrorHandlerProperty.SetValue(null, fatalHandler);
             compilerNonFatalErrorHandlerProperty.SetValue(null, nonFatalHandler);
         }
@@ -86,7 +96,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                 var currentProcess = Process.GetCurrentProcess();
 
                 // write the exception to a log file:
-                var logMessage = $"[{currentProcess.ProcessName}:{currentProcess.Id}] Unexpected exception: {exception}";
+                var logMessage =
+                    $"[{currentProcess.ProcessName}:{currentProcess.Id}] Unexpected exception: {exception}";
                 foreach (var logger in s_loggers)
                 {
                     logger.TraceEvent(TraceEventType.Error, 1, logMessage);
@@ -108,16 +119,17 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                             }
                         }
 
-                        // Returning "0" signals that, if sampled, we should send data to Watson. 
-                        // Any other value will cancel the Watson report. We never want to trigger a process dump manually, 
+                        // Returning "0" signals that, if sampled, we should send data to Watson.
+                        // Any other value will cancel the Watson report. We never want to trigger a process dump manually,
                         // we'll let TargetedNotifications determine if a dump should be collected.
                         // See https://aka.ms/roslynnfwdocs for more details
                         return 0;
-                    });
+                    }
+                );
 
                 // add extra bucket parameters to bucket better in NFW
                 // we do it here so that it gets bucketted better in both
-                // watson and telemetry. 
+                // watson and telemetry.
                 faultEvent.SetExtraParameters(exception, emptyCallstack);
 
                 foreach (var session in s_telemetrySessions)
@@ -161,9 +173,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                     return declaringTypeName + "." + methodName;
                 }
             }
-            catch
-            {
-            }
+            catch { }
 
             return "Roslyn NonFatal Watson";
         }
@@ -190,14 +200,16 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                     {
                         var name = Path.GetFileNameWithoutExtension(path);
 
-                        // TODO: https://github.com/dotnet/roslyn/issues/42582 
+                        // TODO: https://github.com/dotnet/roslyn/issues/42582
                         // name our services more consistently to simplify filtering
 
                         // filter logs that are not relevant to Roslyn investigation
-                        if (!name.Contains("-" + ServiceDescriptor.ServiceNameTopLevelPrefix) &&
-                            !name.Contains("-CodeLens") &&
-                            !name.Contains("-ManagedLanguage.IDE.RemoteHostClient") &&
-                            !name.Contains("-hub"))
+                        if (
+                            !name.Contains("-" + ServiceDescriptor.ServiceNameTopLevelPrefix)
+                            && !name.Contains("-CodeLens")
+                            && !name.Contains("-ManagedLanguage.IDE.RemoteHostClient")
+                            && !name.Contains("-hub")
+                        )
                         {
                             continue;
                         }

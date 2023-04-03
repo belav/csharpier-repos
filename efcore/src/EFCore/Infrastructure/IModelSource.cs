@@ -36,5 +36,6 @@ public interface IModelSource
     IModel GetModel(
         DbContext context,
         ModelCreationDependencies modelCreationDependencies,
-        bool designTime);
+        bool designTime
+    );
 }

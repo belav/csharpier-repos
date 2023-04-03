@@ -2,15 +2,16 @@
 // Line: 8
 // Compiler options: -langversion:ISO-1
 
-class Class {
-	public void Foo (bool b)
-	{
-		switch (b)
-		{
-			case true:
-				break;
-			case false:
-				break;
-		}
-	}
+class Class
+{
+    public void Foo(bool b)
+    {
+        switch (b)
+        {
+            case true:
+                break;
+            case false:
+                break;
+        }
+    }
 }

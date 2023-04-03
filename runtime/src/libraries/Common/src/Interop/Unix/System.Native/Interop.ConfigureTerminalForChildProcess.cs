@@ -8,7 +8,12 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_ConfigureTerminalForChildProcess")]
-        internal static partial void ConfigureTerminalForChildProcess([MarshalAs(UnmanagedType.Bool)] bool childUsesTerminal);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_ConfigureTerminalForChildProcess"
+        )]
+        internal static partial void ConfigureTerminalForChildProcess(
+            [MarshalAs(UnmanagedType.Bool)] bool childUsesTerminal
+        );
     }
 }

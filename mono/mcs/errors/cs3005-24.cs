@@ -2,8 +2,8 @@
 // Line: 9
 // Compiler options: -warnaserror
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
-public partial class CLSClass {}
+public partial class CLSClass { }
 
-public partial struct ClsClass {}
+public partial struct ClsClass { }

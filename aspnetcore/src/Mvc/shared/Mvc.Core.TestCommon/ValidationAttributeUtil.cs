@@ -13,7 +13,11 @@ public static class ValidationAttributeUtil
         return attr.FormatErrorMessage(field);
     }
 
-    public static string GetStringLengthErrorMessage(int? minimumLength, int maximumLength, string field)
+    public static string GetStringLengthErrorMessage(
+        int? minimumLength,
+        int maximumLength,
+        string field
+    )
     {
         var attr = new StringLengthAttribute(maximumLength);
         if (minimumLength != null)

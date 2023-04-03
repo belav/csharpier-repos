@@ -3,11 +3,12 @@
 
 using System;
 
-interface Interface: ICloneable {
-        void ICloneable.Clone ();
+interface Interface : ICloneable
+{
+    void ICloneable.Clone();
 }
 
-class Test {
-	static void Main () {}
+class Test
+{
+    static void Main() { }
 }
-

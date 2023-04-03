@@ -8,10 +8,13 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
     using System.Configuration;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(CancelRequestedQueryElement),
+    [ConfigurationCollection(
+        typeof(CancelRequestedQueryElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.CancelRequestedQuery)]
-    public class CancelRequestedQueryElementCollection : TrackingConfigurationCollection<CancelRequestedQueryElement>
+        AddItemName = TrackingConfigurationStrings.CancelRequestedQuery
+    )]
+    public class CancelRequestedQueryElementCollection
+        : TrackingConfigurationCollection<CancelRequestedQueryElement>
     {
         protected override string ElementName
         {

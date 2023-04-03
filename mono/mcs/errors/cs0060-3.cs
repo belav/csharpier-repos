@@ -3,9 +3,10 @@
 
 internal class A
 {
-	protected class B
-	{
-		protected class Base {}
-		public class Derived : Base { }
-	}
+    protected class B
+    {
+        protected class Base { }
+
+        public class Derived : Base { }
+    }
 }

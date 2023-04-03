@@ -41,7 +41,11 @@ namespace System.Collections.Frozen
         /// then uses this index to reference individual entries by indexing into <see cref="HashCodes"/>.
         /// </remarks>
         /// <returns>A frozen hash table.</returns>
-        public static FrozenHashTable Create<T>(T[] entries, Func<T, int> hasher, Action<int, T> setter)
+        public static FrozenHashTable Create<T>(
+            T[] entries,
+            Func<T, int> hasher,
+            Action<int, T> setter
+        )
         {
             Debug.Assert(entries.Length != 0);
 
@@ -58,7 +62,11 @@ namespace System.Collections.Frozen
             for (int index = 0; index < hashCodes.Length; index++)
             {
                 int hashCode = hashCodes[index];
-                uint bucket = HashHelpers.FastMod((uint)hashCode, (uint)numBuckets, fastModMultiplier);
+                uint bucket = HashHelpers.FastMod(
+                    (uint)hashCode,
+                    (uint)numBuckets,
+                    fastModMultiplier
+                );
 
                 if (!chainBuddies.TryGetValue(bucket, out List<ChainBuddy>? list))
                 {
@@ -73,7 +81,11 @@ namespace System.Collections.Frozen
             int count = 0;
             foreach (List<ChainBuddy> list in chainBuddies.Values)
             {
-                uint bucket = HashHelpers.FastMod((uint)list[0].HashCode, (uint)buckets.Length, fastModMultiplier);
+                uint bucket = HashHelpers.FastMod(
+                    (uint)list[0].HashCode,
+                    (uint)buckets.Length,
+                    fastModMultiplier
+                );
 
                 buckets[bucket] = new Bucket(count, list.Count);
                 for (int i = 0; i < list.Count; i++)
@@ -96,7 +108,9 @@ namespace System.Collections.Frozen
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void FindMatchingEntries(int hashCode, out int startIndex, out int endIndex)
         {
-            ref Bucket b = ref _buckets[HashHelpers.FastMod((uint)hashCode, (uint)_buckets.Length, _fastModMultiplier)];
+            ref Bucket b = ref _buckets[
+                HashHelpers.FastMod((uint)hashCode, (uint)_buckets.Length, _fastModMultiplier)
+            ];
             startIndex = b.StartIndex;
             endIndex = b.EndIndex;
         }
@@ -115,10 +129,10 @@ namespace System.Collections.Frozen
         /// </remarks>
         private static int CalcNumBuckets(int[] hashCodes)
         {
-            const double AcceptableCollisionRate = 0.05;  // What is a satifactory rate of hash collisions?
-            const int LargeInputSizeThreshold = 1000;     // What is the limit for an input to be considered "small"?
+            const double AcceptableCollisionRate = 0.05; // What is a satifactory rate of hash collisions?
+            const int LargeInputSizeThreshold = 1000; // What is the limit for an input to be considered "small"?
             const int MaxSmallBucketTableMultiplier = 16; // How large a bucket table should be allowed for small inputs?
-            const int MaxLargeBucketTableMultiplier = 3;  // How large a bucket table should be allowed for large inputs?
+            const int MaxLargeBucketTableMultiplier = 3; // How large a bucket table should be allowed for large inputs?
 
             // Filter out duplicate codes, since no increase in buckets will avoid collisions from duplicate input hash codes.
             var codes = new HashSet<int>(hashCodes);
@@ -128,7 +142,10 @@ namespace System.Collections.Frozen
             // hash codes. If there are more codes than in our precomputed primes table, which accomodates millions of values,
             // give up and just use the next prime.
             int minPrimeIndexInclusive = 0;
-            while (minPrimeIndexInclusive < HashHelpers.s_primes.Length && codes.Count > HashHelpers.s_primes[minPrimeIndexInclusive])
+            while (
+                minPrimeIndexInclusive < HashHelpers.s_primes.Length
+                && codes.Count > HashHelpers.s_primes[minPrimeIndexInclusive]
+            )
             {
                 minPrimeIndexInclusive++;
             }
@@ -140,12 +157,19 @@ namespace System.Collections.Frozen
             // Determine the largest number of buckets we're willing to use, based on a multiple of the number of inputs.
             // For smaller inputs, we allow for a larger multiplier.
             int maxNumBuckets =
-                codes.Count *
-                (codes.Count >= LargeInputSizeThreshold ? MaxLargeBucketTableMultiplier : MaxSmallBucketTableMultiplier);
+                codes.Count
+                * (
+                    codes.Count >= LargeInputSizeThreshold
+                        ? MaxLargeBucketTableMultiplier
+                        : MaxSmallBucketTableMultiplier
+                );
 
             // Find the index of the smallest prime that accomodates our max buckets.
             int maxPrimeIndexExclusive = minPrimeIndexInclusive;
-            while (maxPrimeIndexExclusive < HashHelpers.s_primes.Length && maxNumBuckets > HashHelpers.s_primes[maxPrimeIndexExclusive])
+            while (
+                maxPrimeIndexExclusive < HashHelpers.s_primes.Length
+                && maxNumBuckets > HashHelpers.s_primes[maxPrimeIndexExclusive]
+            )
             {
                 maxPrimeIndexExclusive++;
             }
@@ -163,7 +187,11 @@ namespace System.Collections.Frozen
 
             // Iterate through each available prime between the min and max discovered. For each, compute
             // the collision ratio.
-            for (int primeIndex = minPrimeIndexInclusive; primeIndex < maxPrimeIndexExclusive; primeIndex++)
+            for (
+                int primeIndex = minPrimeIndexInclusive;
+                primeIndex < maxPrimeIndexExclusive;
+                primeIndex++
+            )
             {
                 // Get the number of buckets to try, and clear our seen bucket bitmap.
                 int numBuckets = HashHelpers.s_primes[primeIndex];

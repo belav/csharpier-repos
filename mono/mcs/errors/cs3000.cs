@@ -4,11 +4,9 @@
 
 using System;
 
-[assembly: CLSCompliant (true)]
+[assembly: CLSCompliant(true)]
 
 public class M
 {
-    public void Method (__arglist)
-    {
-    }
+    public void Method(__arglist) { }
 }

@@ -14,10 +14,11 @@ namespace Wasm.Build.Tests
 {
     public class WasmTemplateTests : BuildTestBase
     {
-        public WasmTemplateTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public WasmTemplateTests(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        )
+            : base(output, buildContext) { }
 
         [Theory]
         [InlineData("Debug")]
@@ -31,35 +32,44 @@ namespace Wasm.Build.Tests
             var buildArgs = new BuildArgs(projectName, config, false, id, null);
             buildArgs = ExpandBuildArgs(buildArgs);
 
-            BuildProject(buildArgs,
-                        id: id,
-                        new BuildProjectOptions(
-                            DotnetWasmFromRuntimePack: false,
-                            CreateProject: false,
-                            HasV8Script: false,
-                            MainJS: "main.js",
-                            Publish: false,
-                            TargetFramework: "net7.0"
-                        ));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    DotnetWasmFromRuntimePack: false,
+                    CreateProject: false,
+                    HasV8Script: false,
+                    MainJS: "main.js",
+                    Publish: false,
+                    TargetFramework: "net7.0"
+                )
+            );
 
             if (!_buildContext.TryGetBuildFor(buildArgs, out BuildProduct? product))
                 throw new XunitException($"Test bug: could not get the build product in the cache");
 
             File.Move(product!.LogFile, Path.ChangeExtension(product.LogFile!, ".first.binlog"));
 
-            _testOutput.WriteLine($"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}");
-            _testOutput.WriteLine($"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}");
+            _testOutput.WriteLine(
+                $"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}"
+            );
+            _testOutput.WriteLine(
+                $"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}"
+            );
 
-            BuildProject(buildArgs,
-                        id: id,
-                        new BuildProjectOptions(
-                            DotnetWasmFromRuntimePack: false,
-                            CreateProject: false,
-                            HasV8Script: false,
-                            MainJS: "main.js",
-                            Publish: true,
-                            TargetFramework: "net7.0",
-                            UseCache: false));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    DotnetWasmFromRuntimePack: false,
+                    CreateProject: false,
+                    HasV8Script: false,
+                    MainJS: "main.js",
+                    Publish: true,
+                    TargetFramework: "net7.0",
+                    UseCache: false
+                )
+            );
         }
 
         [Theory]
@@ -74,18 +84,25 @@ namespace Wasm.Build.Tests
             var buildArgs = new BuildArgs(projectName, config, false, id, null);
             buildArgs = ExpandBuildArgs(buildArgs);
 
-            BuildProject(buildArgs,
-                        id: id,
-                        new BuildProjectOptions(
-                        DotnetWasmFromRuntimePack: true,
-                        CreateProject: false,
-                        HasV8Script: false,
-                        MainJS: "main.cjs",
-                        Publish: false,
-                        TargetFramework: "net7.0"
-                        ));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    DotnetWasmFromRuntimePack: true,
+                    CreateProject: false,
+                    HasV8Script: false,
+                    MainJS: "main.cjs",
+                    Publish: false,
+                    TargetFramework: "net7.0"
+                )
+            );
 
-            (int exitCode, string output) = RunProcess(s_buildEnv.DotNet, _testOutput, args: $"run --no-build -c {config}", workingDir: _projectDir);
+            (int exitCode, string output) = RunProcess(
+                s_buildEnv.DotNet,
+                _testOutput,
+                args: $"run --no-build -c {config}",
+                workingDir: _projectDir
+            );
             Assert.Equal(0, exitCode);
             Assert.Contains("Hello, Console!", output);
 
@@ -94,19 +111,24 @@ namespace Wasm.Build.Tests
 
             File.Move(product!.LogFile, Path.ChangeExtension(product.LogFile!, ".first.binlog"));
 
-            _testOutput.WriteLine($"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}");
+            _testOutput.WriteLine(
+                $"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}"
+            );
 
             bool expectRelinking = config == "Release";
-            BuildProject(buildArgs,
-                        id: id,
-                        new BuildProjectOptions(
-                            DotnetWasmFromRuntimePack: !expectRelinking,
-                            CreateProject: false,
-                            HasV8Script: false,
-                            MainJS: "main.cjs",
-                            Publish: true,
-                            TargetFramework: "net7.0",
-                            UseCache: false));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    DotnetWasmFromRuntimePack: !expectRelinking,
+                    CreateProject: false,
+                    HasV8Script: false,
+                    MainJS: "main.cjs",
+                    Publish: true,
+                    TargetFramework: "net7.0",
+                    UseCache: false
+                )
+            );
         }
 
         [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
@@ -129,18 +151,25 @@ namespace Wasm.Build.Tests
             var buildArgs = new BuildArgs(projectName, config, false, id, null);
             buildArgs = ExpandBuildArgs(buildArgs);
 
-            BuildProject(buildArgs,
-                        id: id,
-                        new BuildProjectOptions(
-                            DotnetWasmFromRuntimePack: true,
-                            CreateProject: false,
-                            HasV8Script: false,
-                            MainJS: "main.cjs",
-                            Publish: false,
-                            TargetFramework: "net7.0"
-                            ));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    DotnetWasmFromRuntimePack: true,
+                    CreateProject: false,
+                    HasV8Script: false,
+                    MainJS: "main.cjs",
+                    Publish: false,
+                    TargetFramework: "net7.0"
+                )
+            );
 
-            (int exitCode, string output) = RunProcess(s_buildEnv.DotNet, _testOutput, args: $"run --no-build -c {config} x y z", workingDir: _projectDir);
+            (int exitCode, string output) = RunProcess(
+                s_buildEnv.DotNet,
+                _testOutput,
+                args: $"run --no-build -c {config} x y z",
+                workingDir: _projectDir
+            );
             Assert.Equal(0, exitCode);
             Assert.Contains("args[0] = x", output);
             Assert.Contains("args[1] = y", output);
@@ -166,22 +195,28 @@ namespace Wasm.Build.Tests
             """;
             File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText);
             if (aot)
-                AddItemsPropertiesToProject(projectFile, "<RunAOTCompilation>true</RunAOTCompilation>");
+                AddItemsPropertiesToProject(
+                    projectFile,
+                    "<RunAOTCompilation>true</RunAOTCompilation>"
+                );
 
             var buildArgs = new BuildArgs(projectName, config, aot, id, null);
             buildArgs = ExpandBuildArgs(buildArgs);
 
             bool expectRelinking = config == "Release" || aot;
-            BuildProject(buildArgs,
-                        id: id,
-                        new BuildProjectOptions(
-                            DotnetWasmFromRuntimePack: !expectRelinking,
-                            CreateProject: false,
-                            HasV8Script: false,
-                            MainJS: "main.cjs",
-                            Publish: true,
-                            TargetFramework: "net7.0",
-                            UseCache: false));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    DotnetWasmFromRuntimePack: !expectRelinking,
+                    CreateProject: false,
+                    HasV8Script: false,
+                    MainJS: "main.cjs",
+                    Publish: true,
+                    TargetFramework: "net7.0",
+                    UseCache: false
+                )
+            );
 
             // FIXME: pass envvars via the environment, once that is supported
             string runArgs = $"run --no-build -c {config}";
@@ -189,12 +224,15 @@ namespace Wasm.Build.Tests
                 runArgs += $" --setenv=MONO_LOG_MASK=aot --setenv=MONO_LOG_LEVEL=debug";
             runArgs += " x y z";
             var res = new RunCommand(s_buildEnv, _testOutput, label: id)
-                                .WithWorkingDirectory(_projectDir!)
-                                .ExecuteWithCapturedOutput(runArgs)
-                                .EnsureSuccessful();
+                .WithWorkingDirectory(_projectDir!)
+                .ExecuteWithCapturedOutput(runArgs)
+                .EnsureSuccessful();
 
             if (aot)
-                Assert.Contains($"AOT: image '{Path.GetFileNameWithoutExtension(projectFile)}' found", res.Output);
+                Assert.Contains(
+                    $"AOT: image '{Path.GetFileNameWithoutExtension(projectFile)}' found",
+                    res.Output
+                );
             Assert.Contains("args[0] = x", res.Output);
             Assert.Contains("args[1] = y", res.Output);
             Assert.Contains("args[2] = z", res.Output);

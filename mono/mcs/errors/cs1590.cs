@@ -4,9 +4,6 @@
 
 namespace Testing
 {
-   /// <include/>
-   public class Test
-   {
-   }
+    /// <include/>
+    public class Test { }
 }
-

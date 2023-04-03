@@ -3,22 +3,20 @@
 
 using System;
 
-struct Color
-{
-}
+struct Color { }
 
 static class ExtensionMethods
 {
-	public static Color Transparent (this Color c)
-	{
-		return new Color ();
-	}
+    public static Color Transparent(this Color c)
+    {
+        return new Color();
+    }
 }
 
 class MainClass
 {
-	public static void Main ()
-	{
-		var c = Color.Transparent ();
-	}
+    public static void Main()
+    {
+        var c = Color.Transparent();
+    }
 }

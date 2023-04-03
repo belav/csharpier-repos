@@ -26,13 +26,13 @@ namespace Exchange
                 threads[i].Name = i.ToString();
                 threads[i].Start();
             }
-            
+
             tsi.Signal();
 
-            for(int i=0;i<threads.Length;i++)
+            for (int i = 0; i < threads.Length; i++)
                 threads[i].Join();
-            
-            if(tsi.Success)
+
+            if (tsi.Success)
                 rValue = 100;
             Console.WriteLine("Test {0}", rValue == 100 ? "Passed" : "Failed");
             return rValue;
@@ -58,17 +58,29 @@ namespace Exchange
         {
             signal.Set();
         }
+
         public bool Success
-        {            
-            get { 
-                Console.WriteLine("AccessCount {0} should equal threadCount {1}", accessCount, threadCount);
-                Console.WriteLine("mValue.ToInt32 {0} should equal threadCount {1}", mValue.ToInt32(), threadCount);
-                return (accessCount == threadCount) && (mValue.ToInt32() == threadCount); 
+        {
+            get
+            {
+                Console.WriteLine(
+                    "AccessCount {0} should equal threadCount {1}",
+                    accessCount,
+                    threadCount
+                );
+                Console.WriteLine(
+                    "mValue.ToInt32 {0} should equal threadCount {1}",
+                    mValue.ToInt32(),
+                    threadCount
+                );
+                return (accessCount == threadCount) && (mValue.ToInt32() == threadCount);
             }
         }
+
         public void ChangeValue()
         {
-            IntPtr initialValue, newValue;
+            IntPtr initialValue,
+                newValue;
 
             signal.WaitOne();
             do
@@ -78,8 +90,10 @@ namespace Exchange
                 {
                     newValue = new IntPtr(mValue.ToInt32() + 1);
                 }
-            } while (initialValue != Interlocked.CompareExchange(ref mValue, newValue, initialValue));
+            } while (
+                initialValue != Interlocked.CompareExchange(ref mValue, newValue, initialValue)
+            );
             Interlocked.Increment(ref accessCount);
         }
-    }    
+    }
 }

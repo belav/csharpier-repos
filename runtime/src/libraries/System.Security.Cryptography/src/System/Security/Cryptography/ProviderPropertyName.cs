@@ -8,6 +8,6 @@ namespace System.Security.Cryptography
     /// </summary>
     internal static class ProviderPropertyName
     {
-        internal const string Name = "Name";        // NCRYPT_NAME_PROPERTY
+        internal const string Name = "Name"; // NCRYPT_NAME_PROPERTY
     }
 }

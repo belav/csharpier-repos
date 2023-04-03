@@ -23,6 +23,7 @@ public struct S1
 public class Runtime_66242
 {
     public static short s_3;
+
     public static int Main()
     {
         var vr3 = new S1();

@@ -2,11 +2,9 @@
 // Line: 9
 
 [System.Obsolete("!!!", true)]
-class Obsolete {
-}
+class Obsolete { }
 
-class Class {
-        public void Method (Obsolete[] o)
-        {
-        }
+class Class
+{
+    public void Method(Obsolete[] o) { }
 }

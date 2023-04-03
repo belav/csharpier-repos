@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpTransposeRecordKeywordCodeFixProvider>;
+        CSharpTransposeRecordKeywordCodeFixProvider
+    >;
 
     public class TransposeRecordKeywordTests
     {
@@ -55,10 +56,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 // my struct
 public struct {|CS9012:record|} C { }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 // my struct
 public record struct C { }",
                 LanguageVersion = LanguageVersion.CSharp10
@@ -70,10 +73,12 @@ public record struct C { }",
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 /// <summary></summary>
 public struct {|CS9012:record|} C { }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 /// <summary></summary>
 public record struct C { }",
                 LanguageVersion = LanguageVersion.CSharp10
@@ -85,10 +90,12 @@ public record struct C { }",
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [System.CLSCompliant(false)]
 struct {|CS9012:record|} C { }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 [System.CLSCompliant(false)]
 record struct C { }",
                 LanguageVersion = LanguageVersion.CSharp10
@@ -100,9 +107,11 @@ record struct C { }",
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [System.CLSCompliant(false)] struct {|CS9012:record|} C { }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 [System.CLSCompliant(false)] record struct C { }",
                 LanguageVersion = LanguageVersion.CSharp10
             }.RunAsync();
@@ -113,12 +122,14 @@ record struct C { }",
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class {|CS9012:record|} C
 {
     struct {|CS9012:record|} D { }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 record class C
 {
     record struct D { }
@@ -132,14 +143,16 @@ record class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 // my class
 class {|CS9012:record|} C
 {
     // my struct
     struct {|CS9012:record|} D { }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 // my class
 record class C
 {
@@ -155,12 +168,14 @@ record class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 /*1*/
 class /**/
 /*3*/
 {|CS9012:record|} /*4*/ C { }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 /*1*/
 record /**/
 /*3*/

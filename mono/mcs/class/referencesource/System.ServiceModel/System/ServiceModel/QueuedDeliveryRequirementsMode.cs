@@ -14,11 +14,10 @@ namespace System.ServiceModel
     {
         static public bool IsDefined(QueuedDeliveryRequirementsMode x)
         {
-            return
-                x == QueuedDeliveryRequirementsMode.Allowed ||
-                x == QueuedDeliveryRequirementsMode.Required ||
-                x == QueuedDeliveryRequirementsMode.NotAllowed ||
-                false;
+            return x == QueuedDeliveryRequirementsMode.Allowed
+                || x == QueuedDeliveryRequirementsMode.Required
+                || x == QueuedDeliveryRequirementsMode.NotAllowed
+                || false;
         }
     }
 }

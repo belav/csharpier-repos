@@ -5,8 +5,8 @@ using System;
 
 class C
 {
-	public static void Main ()
-	{
-		Func<long> a = new long?().GetValueOrDefault;
-	}
+    public static void Main()
+    {
+        Func<long> a = new long?().GetValueOrDefault;
+    }
 }

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="UnsafeCollabNativeMethods.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Net.PeerToPeer.Collaboration
@@ -29,11 +29,12 @@ namespace System.Net.PeerToPeer.Collaboration
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
     internal sealed class SafeCollabData : SafeHandleZeroOrMinusOneIsInvalid
     {
-        internal SafeCollabData() : base(true) { }
+        internal SafeCollabData()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {
-            if(!IsInvalid)
+            if (!IsInvalid)
                 UnsafeCollabNativeMethods.PeerFreeData(handle);
             SetHandleAsInvalid(); //Mark it closed - This does not change the value of the handle it self
             SetHandle(IntPtr.Zero); //Mark it invalid - Change the value to Zero
@@ -53,7 +54,8 @@ namespace System.Net.PeerToPeer.Collaboration
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
     internal sealed class SafeCollabEnum : SafeHandleZeroOrMinusOneIsInvalid
     {
-        internal SafeCollabEnum() : base(true) { }
+        internal SafeCollabEnum()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -77,7 +79,8 @@ namespace System.Net.PeerToPeer.Collaboration
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
     internal sealed class SafeCollabInvite : SafeHandleZeroOrMinusOneIsInvalid
     {
-        internal SafeCollabInvite() : base(true) { }
+        internal SafeCollabInvite()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -101,7 +104,8 @@ namespace System.Net.PeerToPeer.Collaboration
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
     internal sealed class SafeCertStore : SafeHandleZeroOrMinusOneIsInvalid
     {
-        internal SafeCertStore() : base(true) { }
+        internal SafeCertStore()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -125,14 +129,17 @@ namespace System.Net.PeerToPeer.Collaboration
     internal sealed class SafeCollabMemory : SafeHandleZeroOrMinusOneIsInvalid
     {
         private bool allocated;
-        internal SafeCollabMemory() : base(true) { }
+
+        internal SafeCollabMemory()
+            : base(true) { }
 
         [SecurityPermissionAttribute(SecurityAction.LinkDemand, UnmanagedCode = true)]
         internal SafeCollabMemory(int cb)
             : base(true)
         {
             handle = Marshal.AllocHGlobal(cb);
-            if (IntPtr.Equals(handle, IntPtr.Zero)){
+            if (IntPtr.Equals(handle, IntPtr.Zero))
+            {
                 SetHandleAsInvalid();
                 throw new PeerToPeerException(SR.GetString(SR.MemoryAllocFailed));
             }
@@ -161,7 +168,9 @@ namespace System.Net.PeerToPeer.Collaboration
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
     internal sealed class SafeCollabEvent : SafeHandleZeroOrMinusOneIsInvalid
     {
-        internal SafeCollabEvent() : base(true) { }
+        internal SafeCollabEvent()
+            : base(true) { }
+
         protected override bool ReleaseHandle()
         {
             UnsafeCollabNativeMethods.PeerCollabUnregisterEvent(handle);
@@ -191,8 +200,8 @@ namespace System.Net.PeerToPeer.Collaboration
         internal PeerPresenceStatus status;
         internal string descText;
     }
-    
-    // 
+
+    //
     /*
         typedef struct sockaddr_in6 {
             ADDRESS_FAMILY sin6_family; // AF_INET6.
@@ -201,7 +210,7 @@ namespace System.Net.PeerToPeer.Collaboration
             IN6_ADDR sin6_addr;         // IPv6 address.
             union {
                 ULONG sin6_scope_id;     // Set of interfaces for a scope.
-                SCOPE_ID sin6_scope_struct; 
+                SCOPE_ID sin6_scope_struct;
             };
         } SOCKADDR_IN6_LH
     */
@@ -214,7 +223,7 @@ namespace System.Net.PeerToPeer.Collaboration
         internal byte sin6_addr0;
         internal byte sin6_addr1;
         internal byte sin6_addr2;
-        internal byte sin6_addr3; 
+        internal byte sin6_addr3;
         internal byte sin6_addr4;
         internal byte sin6_addr5;
         internal byte sin6_addr6;
@@ -244,7 +253,7 @@ namespace System.Net.PeerToPeer.Collaboration
         internal SOCKADDR_IN6 sin6;
     }
 
-    /* 
+    /*
         typedef struct peer_endpoint_tag {
             PEER_ADDRESS                address;
             PWSTR                       pwzEndpointName;
@@ -271,8 +280,9 @@ namespace System.Net.PeerToPeer.Collaboration
         internal UInt32 cbData;
         internal IntPtr pbData;
     }
+
     // for Guid
-    /*    
+    /*
         typedef struct _GUID {
             unsigned long  Data1;
             unsigned short Data2;
@@ -281,20 +291,22 @@ namespace System.Net.PeerToPeer.Collaboration
         } GUID;
     */
 
-    [StructLayout(LayoutKind.Sequential/*, Pack=1*/)]
+    [StructLayout(
+        LayoutKind.Sequential /*, Pack=1*/
+    )]
     internal struct GUID
     {
-        internal uint   data1;
+        internal uint data1;
         internal ushort data2;
         internal ushort data3;
-        internal byte   data4;
-        internal byte   data5;
-        internal byte   data6;
-        internal byte   data7;
-        internal byte   data8;
-        internal byte   data9;
-        internal byte   data10;
-        internal byte   data11;
+        internal byte data4;
+        internal byte data5;
+        internal byte data6;
+        internal byte data7;
+        internal byte data8;
+        internal byte data9;
+        internal byte data10;
+        internal byte data11;
     }
 
     /*
@@ -304,7 +316,7 @@ namespace System.Net.PeerToPeer.Collaboration
             DWORD           dwPublicationScope;
         } PEER_OBJECT
     */
-    
+
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_OBJECT
     {
@@ -371,7 +383,7 @@ namespace System.Net.PeerToPeer.Collaboration
         internal SubscriptionType WatcherPermissions;
         internal PEER_DATA credentials;
     }
-    
+
     /*
         typedef struct peer_people_near_me_tag {
             PWSTR                       pwzNickName;
@@ -387,7 +399,6 @@ namespace System.Net.PeerToPeer.Collaboration
         internal PEER_ENDPOINT endpoint;
         internal GUID id;
     }
-
 
     /*
         typedef struct peer_invitation_tag {
@@ -593,52 +604,38 @@ namespace System.Net.PeerToPeer.Collaboration
 
         internal PEER_EVENT_WATCHLIST_CHANGED_DATA watchListChangedData
         {
-            get{
-                return changedData.watchListChangedData;
-            }
+            get { return changedData.watchListChangedData; }
         }
 
         internal PEER_EVENT_PRESENCE_CHANGED_DATA presenceChangedData
         {
-            get{
-                return changedData.presenceChangedData;
-            }
+            get { return changedData.presenceChangedData; }
         }
 
         internal PEER_EVENT_APPLICATION_CHANGED_DATA applicationChangedData
         {
-            get{
-                return changedData.applicationChangedData;
-            }
+            get { return changedData.applicationChangedData; }
         }
 
         internal PEER_EVENT_OBJECT_CHANGED_DATA objectChangedData
         {
-            get{
-                return changedData.objectChangedData;
-            }
+            get { return changedData.objectChangedData; }
         }
 
         internal PEER_EVENT_ENDPOINT_CHANGED_DATA endpointChangedData
         {
-            get{
-                return changedData.endpointChangedData;
-            }
+            get { return changedData.endpointChangedData; }
         }
 
         internal PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA peopleNearMeChangedData
         {
-            get{
-                return changedData.peopleNearMeChangedData;
-            }
+            get { return changedData.peopleNearMeChangedData; }
         }
 
         internal PEER_EVENT_REQUEST_STATUS_CHANGED_DATA requestStatusChangedData
         {
-            get{
-                return changedData.requestStatusChangedData;
-            }
-        } 
+            get { return changedData.requestStatusChangedData; }
+        }
     }
 
     [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
@@ -646,19 +643,24 @@ namespace System.Net.PeerToPeer.Collaboration
     {
         [FieldOffset(0)]
         internal PEER_EVENT_WATCHLIST_CHANGED_DATA watchListChangedData;
+
         [FieldOffset(0)]
         internal PEER_EVENT_PRESENCE_CHANGED_DATA presenceChangedData;
+
         [FieldOffset(0)]
         internal PEER_EVENT_APPLICATION_CHANGED_DATA applicationChangedData;
+
         [FieldOffset(0)]
         internal PEER_EVENT_OBJECT_CHANGED_DATA objectChangedData;
+
         [FieldOffset(0)]
         internal PEER_EVENT_ENDPOINT_CHANGED_DATA endpointChangedData;
+
         [FieldOffset(0)]
         internal PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA peopleNearMeChangedData;
+
         [FieldOffset(0)]
         internal PEER_EVENT_REQUEST_STATUS_CHANGED_DATA requestStatusChangedData;
-
     }
 
     /// <summary>
@@ -670,11 +672,21 @@ namespace System.Net.PeerToPeer.Collaboration
         private const UInt32 FACILITY_WIN32 = 7;
         internal const int PEER_S_NO_EVENT_DATA = (int)(((int)FACILITY_P2P << 16) | 0x0002);
         internal const int PEER_S_SUBSCRIPTION_EXISTS = (int)(((int)FACILITY_P2P << 16) | 0x6000);
-        internal const int PEER_E_NOT_FOUND = (int)(((int)1 << 31) | ((int)FACILITY_WIN32 << 16) | 1168);
-        internal const int PEER_E_CONTACT_NOT_FOUND = (int)(((int)1 << 31) | ((int)FACILITY_P2P << 16) | 0x6001);
-        internal const int PEER_E_ALREADY_EXISTS = (int)(((int)1 << 31) | ((int)FACILITY_WIN32 << 16) | 183);
-        internal const int PEER_E_TIMEOUT = (int)(((int)1 << 31) | ((int)FACILITY_P2P << 16) | 0x7005);
-        internal const int ERROR_TIMEOUT = (int)(((int)1 << 31) | ((int)FACILITY_WIN32 << 16) | 0x05B4);
+        internal const int PEER_E_NOT_FOUND = (int)(
+            ((int)1 << 31) | ((int)FACILITY_WIN32 << 16) | 1168
+        );
+        internal const int PEER_E_CONTACT_NOT_FOUND = (int)(
+            ((int)1 << 31) | ((int)FACILITY_P2P << 16) | 0x6001
+        );
+        internal const int PEER_E_ALREADY_EXISTS = (int)(
+            ((int)1 << 31) | ((int)FACILITY_WIN32 << 16) | 183
+        );
+        internal const int PEER_E_TIMEOUT = (int)(
+            ((int)1 << 31) | ((int)FACILITY_P2P << 16) | 0x7005
+        );
+        internal const int ERROR_TIMEOUT = (int)(
+            ((int)1 << 31) | ((int)FACILITY_WIN32 << 16) | 0x05B4
+        );
     }
 
     /// <summary>
@@ -706,19 +718,26 @@ namespace System.Net.PeerToPeer.Collaboration
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabGetPresenceInfo(IntPtr endpoint, out SafeCollabData pPresenceInfo);
+        internal extern static int PeerCollabGetPresenceInfo(
+            IntPtr endpoint,
+            out SafeCollabData pPresenceInfo
+        );
 
-        
         //
         // Application registration functions
         //
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabRegisterApplication(ref PEER_APPLICATION_REGISTRATION_INFO appRegInfo,
-                                                                    PeerApplicationRegistrationType appRegType);
+        internal extern static int PeerCollabRegisterApplication(
+            ref PEER_APPLICATION_REGISTRATION_INFO appRegInfo,
+            PeerApplicationRegistrationType appRegType
+        );
 
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabUnregisterApplication(ref GUID pApplicationId,
-                                                                    PeerApplicationRegistrationType appRegType);
+        internal extern static int PeerCollabUnregisterApplication(
+            ref GUID pApplicationId,
+            PeerApplicationRegistrationType appRegType
+        );
+
         //
         // Object set functions
         //
@@ -733,15 +752,19 @@ namespace System.Net.PeerToPeer.Collaboration
         //
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabEnumObjects(  IntPtr pcEndpoint,
-                                                            IntPtr pObjectId,
-                                                            out SafeCollabEnum phPeerEnum);
+        internal extern static int PeerCollabEnumObjects(
+            IntPtr pcEndpoint,
+            IntPtr pObjectId,
+            out SafeCollabEnum phPeerEnum
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabEnumApplications( IntPtr pcEndpoint,
-                                                                IntPtr pObjectId,
-                                                                out SafeCollabEnum phPeerEnum);
+        internal extern static int PeerCollabEnumApplications(
+            IntPtr pcEndpoint,
+            IntPtr pObjectId,
+            out SafeCollabEnum phPeerEnum
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
@@ -749,8 +772,10 @@ namespace System.Net.PeerToPeer.Collaboration
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabEnumEndpoints(ref PEER_CONTACT pcContact,
-                                                out SafeCollabEnum phPeerEnum);
+        internal extern static int PeerCollabEnumEndpoints(
+            ref PEER_CONTACT pcContact,
+            out SafeCollabEnum phPeerEnum
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
@@ -762,15 +787,17 @@ namespace System.Net.PeerToPeer.Collaboration
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerGetNextItem(SafeCollabEnum hPeerEnum,
-                                                    ref UInt32 pCount,
-                                                    out SafeCollabData pppvItems);
+        internal extern static int PeerGetNextItem(
+            SafeCollabEnum hPeerEnum,
+            ref UInt32 pCount,
+            out SafeCollabData pppvItems
+        );
 
         [DllImport(P2P, CharSet = CharSet.Unicode)]
         internal extern static int PeerEndEnumeration(IntPtr hPeerEnum);
 
         //
-        // Misc application functions 
+        // Misc application functions
         //
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
@@ -778,37 +805,54 @@ namespace System.Net.PeerToPeer.Collaboration
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabGetApplicationRegistrationInfo(ref GUID pApplicationId,
-                                                PeerApplicationRegistrationType registrationType,
-                                                out SafeCollabData ppApplication);
+        internal extern static int PeerCollabGetApplicationRegistrationInfo(
+            ref GUID pApplicationId,
+            PeerApplicationRegistrationType registrationType,
+            out SafeCollabData ppApplication
+        );
 
         //
         // Contact functions
         //
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabExportContact(string pwzPeerNAme, ref string ppwzContactData);
+        internal extern static int PeerCollabExportContact(
+            string pwzPeerNAme,
+            ref string ppwzContactData
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabParseContact(string pwzContactData, out SafeCollabData ppContactData);
+        internal extern static int PeerCollabParseContact(
+            string pwzContactData,
+            out SafeCollabData ppContactData
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabGetContact(string pwzPeerName, out SafeCollabData ppwzContactData);
+        internal extern static int PeerCollabGetContact(
+            string pwzPeerName,
+            out SafeCollabData ppwzContactData
+        );
 
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabQueryContactData(IntPtr pcEndpoint, ref string ppwzContactData);
+        internal extern static int PeerCollabQueryContactData(
+            IntPtr pcEndpoint,
+            ref string ppwzContactData
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabAddContact(string pwzContactData, out SafeCollabData ppContact);
+        internal extern static int PeerCollabAddContact(
+            string pwzContactData,
+            out SafeCollabData ppContact
+        );
 
         [DllImport(P2P, CharSet = CharSet.Unicode)]
         internal extern static int PeerCollabDeleteContact(string pwzPeerName);
 
         [DllImport(P2P, CharSet = CharSet.Unicode)]
         internal extern static int PeerCollabUpdateContact(ref PEER_CONTACT pc);
-        
+
         //
         // Endpoint functions
         //
@@ -820,18 +864,22 @@ namespace System.Net.PeerToPeer.Collaboration
         //
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabRegisterEvent(SafeWaitHandle hEvent, UInt32 cEventRegistration,
-                                                            ref PEER_COLLAB_EVENT_REGISTRATION pEventRegistrations,
-                                                            out SafeCollabEvent phPeerEvent);
+        internal extern static int PeerCollabRegisterEvent(
+            SafeWaitHandle hEvent,
+            UInt32 cEventRegistration,
+            ref PEER_COLLAB_EVENT_REGISTRATION pEventRegistrations,
+            out SafeCollabEvent phPeerEvent
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabGetEventData(SafeCollabEvent hPeerEvent,
-                                                            out SafeCollabData ppEventData);
+        internal extern static int PeerCollabGetEventData(
+            SafeCollabEvent hPeerEvent,
+            out SafeCollabData ppEventData
+        );
 
         [DllImport(P2P, CharSet = CharSet.Unicode)]
         internal extern static int PeerCollabUnregisterEvent(IntPtr handle);
-
 
         //
 
@@ -842,13 +890,23 @@ namespace System.Net.PeerToPeer.Collaboration
         //
         [System.Security.SecurityCritical]
         [DllImport(CRYPT32, CharSet = CharSet.Auto, SetLastError = true)]
-        internal extern static SafeCertStore CertOpenStore(IntPtr lpszStoreProvider, uint dwMsgAndCertEncodingType, 
-                                                            IntPtr hCryptProv, uint dwFlags, ref PEER_DATA pvPara);
+        internal extern static SafeCertStore CertOpenStore(
+            IntPtr lpszStoreProvider,
+            uint dwMsgAndCertEncodingType,
+            IntPtr hCryptProv,
+            uint dwFlags,
+            ref PEER_DATA pvPara
+        );
 
         [System.Security.SecurityCritical]
         [DllImport(CRYPT32, CharSet = CharSet.Auto, SetLastError = true)]
-        internal extern static SafeCertStore CertOpenStore(IntPtr lpszStoreProvider, uint dwMsgAndCertEncodingType, 
-                                                            IntPtr hCryptProv, uint dwFlags, IntPtr pvPara);
+        internal extern static SafeCertStore CertOpenStore(
+            IntPtr lpszStoreProvider,
+            uint dwMsgAndCertEncodingType,
+            IntPtr hCryptProv,
+            uint dwFlags,
+            IntPtr pvPara
+        );
 
         [DllImport(CRYPT32, CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.U1)]
@@ -857,8 +915,14 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         [DllImport(CRYPT32, CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        internal extern static bool CertSaveStore(  SafeCertStore hCertStore, uint dwMsgAndCertEncodingType,
-                                                    uint dwSaveAs, uint dwSaveTo, ref PEER_DATA pvSafeToPara, uint dwFlags);
+        internal extern static bool CertSaveStore(
+            SafeCertStore hCertStore,
+            uint dwMsgAndCertEncodingType,
+            uint dwSaveAs,
+            uint dwSaveTo,
+            ref PEER_DATA pvSafeToPara,
+            uint dwFlags
+        );
 
         //
         // My Contact functions
@@ -874,8 +938,10 @@ namespace System.Net.PeerToPeer.Collaboration
         //
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabGetInvitationResponse(SafeCollabInvite hInvitation,
-                                                                    out SafeCollabData ppInvitationResponse);
+        internal extern static int PeerCollabGetInvitationResponse(
+            SafeCollabInvite hInvitation,
+            out SafeCollabData ppInvitationResponse
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
@@ -886,31 +952,38 @@ namespace System.Net.PeerToPeer.Collaboration
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabInviteContact( ref PEER_CONTACT pcContact,
-                                                            IntPtr pcEndpoint,
-                                                            ref PEER_INVITATION pcInvitation,
-                                                            out SafeCollabData ppResponse);
+        internal extern static int PeerCollabInviteContact(
+            ref PEER_CONTACT pcContact,
+            IntPtr pcEndpoint,
+            ref PEER_INVITATION pcInvitation,
+            out SafeCollabData ppResponse
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabAsyncInviteContact(ref PEER_CONTACT pcContact,
-                                                                IntPtr pcEndpoint,
-                                                                ref PEER_INVITATION pcInvitation,
-                                                                SafeWaitHandle hEvent,
-                                                                out SafeCollabInvite phInvitation);
+        internal extern static int PeerCollabAsyncInviteContact(
+            ref PEER_CONTACT pcContact,
+            IntPtr pcEndpoint,
+            ref PEER_INVITATION pcInvitation,
+            SafeWaitHandle hEvent,
+            out SafeCollabInvite phInvitation
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabInviteEndpoint(    IntPtr pcEndpoint,
-                                                                ref PEER_INVITATION pcInvitation,
-                                                                out SafeCollabData ppResponse);
+        internal extern static int PeerCollabInviteEndpoint(
+            IntPtr pcEndpoint,
+            ref PEER_INVITATION pcInvitation,
+            out SafeCollabData ppResponse
+        );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static int PeerCollabAsyncInviteEndpoint(  IntPtr pcEndpoint,
-                                                                    ref PEER_INVITATION pcInvitation,
-                                                                    SafeWaitHandle hEvent,
-                                                                    out SafeCollabInvite phInvitation);
-
+        internal extern static int PeerCollabAsyncInviteEndpoint(
+            IntPtr pcEndpoint,
+            ref PEER_INVITATION pcInvitation,
+            SafeWaitHandle hEvent,
+            out SafeCollabInvite phInvitation
+        );
     }
 }

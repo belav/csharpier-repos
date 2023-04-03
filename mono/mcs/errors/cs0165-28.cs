@@ -5,11 +5,11 @@ using System;
 
 class Program
 {
-	public static void Main ()
-	{
-		int a;
-		string s = "";
-		var res = s == null || ((a = 1) > 0);
-		Console.WriteLine (a);
-	}
+    public static void Main()
+    {
+        int a;
+        string s = "";
+        var res = s == null || ((a = 1) > 0);
+        Console.WriteLine(a);
+    }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,166 +35,171 @@ using System.Web.Hosting;
 
 namespace StandAloneRunnerSupport
 {
-	sealed class TestWorkerRequest : SimpleWorkerRequest
-	{
-		const string POST_CONTENT_TYPE = "application/x-www-form-urlencoded";
-		static readonly char[] vpathTrimChars = { '/' };
-		
-		string page;
-		string query;
-		string appVirtualDir;
-		string pathInfo;
-		byte[] entityBody;
-		SortedDictionary <string, string> originalPostData;
-		
-		public bool IsPost { get; set; }
-		public HttpStatusCode StatusCode { get; set; }
-		public string StatusDescription { get; set; }
-		public string RedirectLocation { get; set; }
-		public bool Redirected {
-			get {
-				int code = (int) StatusCode;
-				
-				return code == 301 || code == 302;
-			}
-		}
-		
-		public TestWorkerRequest (string page, string query, TextWriter output)
-			: this (page, query, null, output)
-		{
-		}
-		
-		public TestWorkerRequest (string page, string query, string pathInfo, TextWriter output)
-			: base (page, query, output)
-		{
-			this.page = page;
-			this.query = query;
-			this.appVirtualDir = GetAppPath ();
-			this.pathInfo = pathInfo;
-		}
-		
-		public override string GetFilePath ()
-		{
-			return page;
-		}
+    sealed class TestWorkerRequest : SimpleWorkerRequest
+    {
+        const string POST_CONTENT_TYPE = "application/x-www-form-urlencoded";
+        static readonly char[] vpathTrimChars = { '/' };
 
-		public override string GetHttpVerbName ()
-		{
-			if (IsPost)
-				return "POST";
+        string page;
+        string query;
+        string appVirtualDir;
+        string pathInfo;
+        byte[] entityBody;
+        SortedDictionary<string, string> originalPostData;
 
-			return base.GetHttpVerbName ();
-		}
+        public bool IsPost { get; set; }
+        public HttpStatusCode StatusCode { get; set; }
+        public string StatusDescription { get; set; }
+        public string RedirectLocation { get; set; }
+        public bool Redirected
+        {
+            get
+            {
+                int code = (int)StatusCode;
 
-		public override string GetKnownRequestHeader (int index)
-		{
-			if (!IsPost || entityBody == null)
-				return base.GetKnownRequestHeader (index);
+                return code == 301 || code == 302;
+            }
+        }
 
+        public TestWorkerRequest(string page, string query, TextWriter output)
+            : this(page, query, null, output) { }
 
-			switch (index) {
-				case HttpWorkerRequest.HeaderContentLength:
-					return entityBody.Length.ToString ();
+        public TestWorkerRequest(string page, string query, string pathInfo, TextWriter output)
+            : base(page, query, output)
+        {
+            this.page = page;
+            this.query = query;
+            this.appVirtualDir = GetAppPath();
+            this.pathInfo = pathInfo;
+        }
 
-				case HttpWorkerRequest.HeaderContentType:
-					return POST_CONTENT_TYPE;
+        public override string GetFilePath()
+        {
+            return page;
+        }
 
-				default:
-					return base.GetKnownRequestHeader (index);
-			}
-		}
+        public override string GetHttpVerbName()
+        {
+            if (IsPost)
+                return "POST";
 
-		public override byte[] GetPreloadedEntityBody ()
-		{
-			if (!IsPost || entityBody == null)
-				return base.GetPreloadedEntityBody ();
+            return base.GetHttpVerbName();
+        }
 
-			return entityBody;
-		}
-		
-		public override string GetPathInfo ()
-		{
-			if (pathInfo == null)
-				return base.GetPathInfo ();
+        public override string GetKnownRequestHeader(int index)
+        {
+            if (!IsPost || entityBody == null)
+                return base.GetKnownRequestHeader(index);
 
-			return pathInfo;
-		}
-		
-		public override string GetRawUrl ()
-		{
-			return TrimLeadingSlash (base.GetRawUrl ());
-		}
+            switch (index)
+            {
+                case HttpWorkerRequest.HeaderContentLength:
+                    return entityBody.Length.ToString();
 
-		public override string GetUriPath ()
-		{
-			return TrimLeadingSlash (base.GetUriPath ());
-		}
+                case HttpWorkerRequest.HeaderContentType:
+                    return POST_CONTENT_TYPE;
 
-		public override void SendKnownResponseHeader (int index, string value)
-		{
-			if (index == HttpWorkerRequest.HeaderLocation)
-				RedirectLocation = value;
-			
-			base.SendKnownResponseHeader (index, value);
-		}
-		
-		public override void SendStatus (int code, string description)
-		{
-			StatusCode = (HttpStatusCode) code;
-			StatusDescription = description;
+                default:
+                    return base.GetKnownRequestHeader(index);
+            }
+        }
 
-			base.SendStatus (code, description);
-		}
+        public override byte[] GetPreloadedEntityBody()
+        {
+            if (!IsPost || entityBody == null)
+                return base.GetPreloadedEntityBody();
 
-		public void AppendPostData (string[] postData, bool isEncoded)
-		{
-			int len = postData != null ? postData.Length : 0;
-			if (len == 0)
-				return;
+            return entityBody;
+        }
 
-			if (len % 2 != 0)
-				throw new InvalidOperationException ("POST data array must have an even number of elements.");
+        public override string GetPathInfo()
+        {
+            if (pathInfo == null)
+                return base.GetPathInfo();
 
-			if (originalPostData == null)
-				originalPostData = new SortedDictionary <string, string> ();
+            return pathInfo;
+        }
 
-			string key, value;
-			for (int i = 0; i < len; i += 2) {
-				key = postData [i];
-				value = postData [i + 1];
+        public override string GetRawUrl()
+        {
+            return TrimLeadingSlash(base.GetRawUrl());
+        }
 
-				if (originalPostData.ContainsKey (key))
-					originalPostData [key] = value;
-				else
-					originalPostData.Add (key, value);
-			}
-			
-			len = originalPostData.Count;
-			var sb = new StringBuilder ();
-			bool first = true;
-			
-			foreach (var de in originalPostData) {
-				if (first)
-					first = false;
-				else
-					sb.Append ('&');
-				key = de.Key;
-				value = de.Value;
-				sb.Append (isEncoded ? key : HttpUtility.UrlEncode (key));
-				sb.Append ('=');
-				if (!String.IsNullOrEmpty (value))
-					sb.Append (isEncoded ? value : HttpUtility.UrlEncode (value));
-			}
+        public override string GetUriPath()
+        {
+            return TrimLeadingSlash(base.GetUriPath());
+        }
 
-			entityBody = Encoding.ASCII.GetBytes (sb.ToString ());
-		}
-		
-		static string TrimLeadingSlash (string input)
-		{
-			if (String.IsNullOrEmpty (input))
-				return input;
+        public override void SendKnownResponseHeader(int index, string value)
+        {
+            if (index == HttpWorkerRequest.HeaderLocation)
+                RedirectLocation = value;
 
-			return "/" + input.TrimStart (vpathTrimChars);
-		}
- 	}
+            base.SendKnownResponseHeader(index, value);
+        }
+
+        public override void SendStatus(int code, string description)
+        {
+            StatusCode = (HttpStatusCode)code;
+            StatusDescription = description;
+
+            base.SendStatus(code, description);
+        }
+
+        public void AppendPostData(string[] postData, bool isEncoded)
+        {
+            int len = postData != null ? postData.Length : 0;
+            if (len == 0)
+                return;
+
+            if (len % 2 != 0)
+                throw new InvalidOperationException(
+                    "POST data array must have an even number of elements."
+                );
+
+            if (originalPostData == null)
+                originalPostData = new SortedDictionary<string, string>();
+
+            string key,
+                value;
+            for (int i = 0; i < len; i += 2)
+            {
+                key = postData[i];
+                value = postData[i + 1];
+
+                if (originalPostData.ContainsKey(key))
+                    originalPostData[key] = value;
+                else
+                    originalPostData.Add(key, value);
+            }
+
+            len = originalPostData.Count;
+            var sb = new StringBuilder();
+            bool first = true;
+
+            foreach (var de in originalPostData)
+            {
+                if (first)
+                    first = false;
+                else
+                    sb.Append('&');
+                key = de.Key;
+                value = de.Value;
+                sb.Append(isEncoded ? key : HttpUtility.UrlEncode(key));
+                sb.Append('=');
+                if (!String.IsNullOrEmpty(value))
+                    sb.Append(isEncoded ? value : HttpUtility.UrlEncode(value));
+            }
+
+            entityBody = Encoding.ASCII.GetBytes(sb.ToString());
+        }
+
+        static string TrimLeadingSlash(string input)
+        {
+            if (String.IsNullOrEmpty(input))
+                return input;
+
+            return "/" + input.TrimStart(vpathTrimChars);
+        }
+    }
 }

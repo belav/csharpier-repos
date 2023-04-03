@@ -4,8 +4,8 @@
 
 class C
 {
-	public static void Main ()
-	{
-		dynamic d = 9;
-	}
+    public static void Main()
+    {
+        dynamic d = 9;
+    }
 }

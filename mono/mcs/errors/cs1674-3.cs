@@ -3,39 +3,37 @@
 
 using System;
 
-class MyDispose : IDisposable {
-	public bool disposed;
-	
-	public void Dispose ()
-	{
-		disposed = true;
-	}
+class MyDispose : IDisposable
+{
+    public bool disposed;
+
+    public void Dispose()
+    {
+        disposed = true;
+    }
 }
 
-class NoIDispose {
-	static public MyDispose x;
+class NoIDispose
+{
+    static public MyDispose x;
 
-	public NoIDispose ()
-	{
-	}
-	
-	static NoIDispose ()
-	{
-		x = new MyDispose ();
-	}
-	
-	public static implicit operator MyDispose (NoIDispose a)
-	{
-		return x;
-	}
+    public NoIDispose() { }
+
+    static NoIDispose()
+    {
+        x = new MyDispose();
+    }
+
+    public static implicit operator MyDispose(NoIDispose a)
+    {
+        return x;
+    }
 }
 
-class Y {
-	static void B ()
-	{
-		using (NoIDispose a = new NoIDispose ()){
-		}
-	}
-	
+class Y
+{
+    static void B()
+    {
+        using (NoIDispose a = new NoIDispose()) { }
+    }
 }
-

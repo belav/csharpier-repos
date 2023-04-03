@@ -7,9 +7,8 @@ using System.Runtime.InteropServices;
 
 class C
 {
-	[DllImport ("xml2")]
-	unsafe static extern object* valuePop (IntPtr context);
-	public static void Main ()
-	{
-	}
+    [DllImport("xml2")]
+    unsafe static extern object* valuePop(IntPtr context);
+
+    public static void Main() { }
 }

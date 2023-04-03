@@ -4,7 +4,5 @@
 
 class C
 {
-	public unsafe async void Test (int* arg)
-	{
-	}
+    public unsafe async void Test(int* arg) { }
 }

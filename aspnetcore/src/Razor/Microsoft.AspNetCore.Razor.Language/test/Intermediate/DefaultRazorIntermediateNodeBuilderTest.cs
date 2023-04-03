@@ -62,7 +62,8 @@ public class DefaultRazorIntermediateNodeBuilderTest
         // Act & Assert
         ExceptionAssert.Throws<InvalidOperationException>(
             () => builder.Pop(),
-            "The 'Pop' operation is not valid when the builder is empty.");
+            "The 'Pop' operation is not valid when the builder is empty."
+        );
     }
 
     [Fact]
@@ -206,7 +207,8 @@ public class DefaultRazorIntermediateNodeBuilderTest
 
     private class BasicIntermediateNode : IntermediateNode
     {
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public override void Accept(IntermediateNodeVisitor visitor)
         {

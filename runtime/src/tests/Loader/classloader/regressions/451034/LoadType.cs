@@ -8,12 +8,11 @@ using System;
 
 public class Test_LoadType
 {
-	public static int Main()
-	{
-		S s = CReloc5<char>.s;
-			
-		Console.WriteLine("PASS");
-		return 100;
-	
-	}
+    public static int Main()
+    {
+        S s = CReloc5<char>.s;
+
+        Console.WriteLine("PASS");
+        return 100;
+    }
 }

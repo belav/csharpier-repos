@@ -29,7 +29,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
         }
 
         [Benchmark]
-        public ParseResult OneOptWithNestedCommand_Parse() 
-            => _testParser.Parse(_testSymbolsAsString);
+        public ParseResult OneOptWithNestedCommand_Parse() =>
+            _testParser.Parse(_testSymbolsAsString);
     }
 }

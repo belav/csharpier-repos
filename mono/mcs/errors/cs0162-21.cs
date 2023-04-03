@@ -6,14 +6,12 @@ using System;
 
 class X
 {
-    void Test ()
+    void Test()
     {
-        var x = true ? throw new NullReferenceException () : 1;
+        var x = true ? throw new NullReferenceException() : 1;
         x = 2;
         return;
     }
 
-	static void Main () 
-	{
-	}
+    static void Main() { }
 }

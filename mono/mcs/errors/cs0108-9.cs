@@ -4,14 +4,15 @@
 
 public class Base
 {
-    public int Inner { set { } }
+    public int Inner
+    {
+        set { }
+    }
 }
 
-class Outer: Base
+class Outer : Base
 {
-    public void M () {}
-    
-    public class Inner
-    {
-    }
+    public void M() { }
+
+    public class Inner { }
 }

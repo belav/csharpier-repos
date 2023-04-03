@@ -22,7 +22,8 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             {
                 builder.AddStringToken();
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
-            });
+            }
+        );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
@@ -31,7 +32,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             b.AddDirective(directive);
         });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
-        var importSource = TestRazorSourceDocument.Create("@custom \"hello\"", filePath: "import.cshtml");
+        var importSource = TestRazorSourceDocument.Create(
+            "@custom \"hello\"",
+            filePath: "import.cshtml"
+        );
         var codeDocument = TestRazorCodeDocument.Create("<p>NonDirective</p>");
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source, options));
         codeDocument.SetImportSyntaxTrees(new[] { RazorSyntaxTree.Parse(importSource, options) });
@@ -57,7 +61,8 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             {
                 builder.AddStringToken();
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
-            });
+            }
+        );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
@@ -66,7 +71,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             b.AddDirective(directive);
         });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
-        var importSource = TestRazorSourceDocument.Create("@custom \"hello\"", filePath: "import.cshtml");
+        var importSource = TestRazorSourceDocument.Create(
+            "@custom \"hello\"",
+            filePath: "import.cshtml"
+        );
         var codeDocument = TestRazorCodeDocument.Create("@custom \"world\"");
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source, options));
         codeDocument.SetImportSyntaxTrees(new[] { RazorSyntaxTree.Parse(importSource, options) });
@@ -92,7 +100,8 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             {
                 builder.AddStringToken();
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
-            });
+            }
+        );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
@@ -101,11 +110,23 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             b.AddDirective(directive);
         });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
-        var importSource1 = TestRazorSourceDocument.Create("@custom \"hello\"", filePath: "import1.cshtml");
-        var importSource2 = TestRazorSourceDocument.Create("@custom \"world\"", filePath: "import2.cshtml");
+        var importSource1 = TestRazorSourceDocument.Create(
+            "@custom \"hello\"",
+            filePath: "import1.cshtml"
+        );
+        var importSource2 = TestRazorSourceDocument.Create(
+            "@custom \"world\"",
+            filePath: "import2.cshtml"
+        );
         var codeDocument = TestRazorCodeDocument.Create("<p>NonDirective</p>");
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source, options));
-        codeDocument.SetImportSyntaxTrees(new[] { RazorSyntaxTree.Parse(importSource1, options), RazorSyntaxTree.Parse(importSource2, options) });
+        codeDocument.SetImportSyntaxTrees(
+            new[]
+            {
+                RazorSyntaxTree.Parse(importSource1, options),
+                RazorSyntaxTree.Parse(importSource2, options)
+            }
+        );
 
         // Act
         phase.Execute(codeDocument);
@@ -122,8 +143,14 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     public void Execute_DoesNotImportNonFileScopedSinglyOccurringDirectives_Block()
     {
         // Arrange
-        var codeBlockDirective = DirectiveDescriptor.CreateCodeBlockDirective("code", b => b.AddStringToken());
-        var razorBlockDirective = DirectiveDescriptor.CreateRazorBlockDirective("razor", b => b.AddStringToken());
+        var codeBlockDirective = DirectiveDescriptor.CreateCodeBlockDirective(
+            "code",
+            b => b.AddStringToken()
+        );
+        var razorBlockDirective = DirectiveDescriptor.CreateRazorBlockDirective(
+            "razor",
+            b => b.AddStringToken()
+        );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
@@ -138,9 +165,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             builder.Directives.Add(razorBlockDirective);
         });
         var importSource = TestRazorSourceDocument.Create(
-@"@code ""code block"" { }
+            @"@code ""code block"" { }
 @razor ""razor block"" { }",
-            filePath: "testImports.cshtml");
+            filePath: "testImports.cshtml"
+        );
         var codeDocument = TestRazorCodeDocument.Create("<p>NonDirective</p>");
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source, options));
         codeDocument.SetImportSyntaxTrees(new[] { RazorSyntaxTree.Parse(importSource, options) });
@@ -158,7 +186,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     public void Execute_ErrorsForCodeBlockFileScopedSinglyOccurringDirectives()
     {
         // Arrange
-        var directive = DirectiveDescriptor.CreateCodeBlockDirective("custom", b => b.Usage = DirectiveUsage.FileScopedSinglyOccurring);
+        var directive = DirectiveDescriptor.CreateCodeBlockDirective(
+            "custom",
+            b => b.Usage = DirectiveUsage.FileScopedSinglyOccurring
+        );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
@@ -171,7 +202,8 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var codeDocument = TestRazorCodeDocument.Create("<p>NonDirective</p>");
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source, options));
         codeDocument.SetImportSyntaxTrees(new[] { RazorSyntaxTree.Parse(importSource, options) });
-        var expectedDiagnostic = RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported("custom");
+        var expectedDiagnostic =
+            RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported("custom");
 
         // Act
         phase.Execute(codeDocument);
@@ -188,7 +220,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     public void Execute_ErrorsForRazorBlockFileScopedSinglyOccurringDirectives()
     {
         // Arrange
-        var directive = DirectiveDescriptor.CreateRazorBlockDirective("custom", b => b.Usage = DirectiveUsage.FileScopedSinglyOccurring);
+        var directive = DirectiveDescriptor.CreateRazorBlockDirective(
+            "custom",
+            b => b.Usage = DirectiveUsage.FileScopedSinglyOccurring
+        );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
         var engine = RazorProjectEngine.CreateEmpty(b =>
         {
@@ -201,7 +236,8 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         var codeDocument = TestRazorCodeDocument.Create("<p>NonDirective</p>");
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source, options));
         codeDocument.SetImportSyntaxTrees(new[] { RazorSyntaxTree.Parse(importSource, options) });
-        var expectedDiagnostic = RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported("custom");
+        var expectedDiagnostic =
+            RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported("custom");
 
         // Act
         phase.Execute(codeDocument);
@@ -231,8 +267,9 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         // Act & Assert
         ExceptionAssert.Throws<InvalidOperationException>(
             () => phase.Execute(codeDocument),
-            $"The '{nameof(DefaultRazorIntermediateNodeLoweringPhase)}' phase requires a '{nameof(RazorSyntaxTree)}' " +
-            $"provided by the '{nameof(RazorCodeDocument)}'.");
+            $"The '{nameof(DefaultRazorIntermediateNodeLoweringPhase)}' phase requires a '{nameof(RazorSyntaxTree)}' "
+                + $"provided by the '{nameof(RazorCodeDocument)}'."
+        );
     }
 
     [Fact]
@@ -254,8 +291,10 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         // Assert
         var documentNode = codeDocument.GetDocumentIntermediateNode();
         var diagnostic = Assert.Single(documentNode.Diagnostics);
-        Assert.Equal(@"The explicit expression block is missing a closing "")"" character.  Make sure you have a matching "")"" character for all the ""("" characters within this block, and that none of the "")"" characters are being interpreted as markup.",
-            diagnostic.GetMessage(CultureInfo.CurrentCulture));
+        Assert.Equal(
+            @"The explicit expression block is missing a closing "")"" character.  Make sure you have a matching "")"" character for all the ""("" characters within this block, and that none of the "")"" characters are being interpreted as markup.",
+            diagnostic.GetMessage(CultureInfo.CurrentCulture)
+        );
     }
 
     [Fact]
@@ -271,11 +310,13 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source));
-        codeDocument.SetImportSyntaxTrees(new[]
-        {
+        codeDocument.SetImportSyntaxTrees(
+            new[]
+            {
                 RazorSyntaxTree.Parse(TestRazorSourceDocument.Create("@ ")),
                 RazorSyntaxTree.Parse(TestRazorSourceDocument.Create("<p @(")),
-            });
+            }
+        );
         var options = RazorCodeGenerationOptions.CreateDefault();
 
         // Act
@@ -283,16 +324,22 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
 
         // Assert
         var documentNode = codeDocument.GetDocumentIntermediateNode();
-        Assert.Collection(documentNode.Diagnostics,
+        Assert.Collection(
+            documentNode.Diagnostics,
             diagnostic =>
             {
-                Assert.Equal(@"A space or line break was encountered after the ""@"" character.  Only valid identifiers, keywords, comments, ""("" and ""{"" are valid at the start of a code block and they must occur immediately following ""@"" with no space in between.",
-                    diagnostic.GetMessage(CultureInfo.CurrentCulture));
+                Assert.Equal(
+                    @"A space or line break was encountered after the ""@"" character.  Only valid identifiers, keywords, comments, ""("" and ""{"" are valid at the start of a code block and they must occur immediately following ""@"" with no space in between.",
+                    diagnostic.GetMessage(CultureInfo.CurrentCulture)
+                );
             },
             diagnostic =>
             {
-                Assert.Equal(@"The explicit expression block is missing a closing "")"" character.  Make sure you have a matching "")"" character for all the ""("" characters within this block, and that none of the "")"" characters are being interpreted as markup.",
-                    diagnostic.GetMessage(CultureInfo.CurrentCulture));
-            });
+                Assert.Equal(
+                    @"The explicit expression block is missing a closing "")"" character.  Make sure you have a matching "")"" character for all the ""("" characters within this block, and that none of the "")"" characters are being interpreted as markup.",
+                    diagnostic.GetMessage(CultureInfo.CurrentCulture)
+                );
+            }
+        );
     }
 }

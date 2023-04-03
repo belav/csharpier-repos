@@ -12,9 +12,7 @@ internal sealed class AcceptedResult : ObjectResult
     /// provided.
     /// </summary>
     public AcceptedResult()
-        : base(value: null, StatusCodes.Status202Accepted)
-    {
-    }
+        : base(value: null, StatusCodes.Status202Accepted) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AcceptedResult"/> class with the values
@@ -48,7 +46,10 @@ internal sealed class AcceptedResult : ObjectResult
         }
         else
         {
-            Location = locationUri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+            Location = locationUri.GetComponents(
+                UriComponents.SerializationInfoString,
+                UriFormat.UriEscaped
+            );
         }
     }
 

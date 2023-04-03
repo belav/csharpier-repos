@@ -7,5 +7,5 @@ using System;
 struct S
 {
     [param: Obsolete]
-    void method () {}
+    void method() { }
 }

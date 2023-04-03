@@ -3,13 +3,11 @@
 
 using System;
 
-class ErrorCS0059 {
+class ErrorCS0059 { }
+
+public class Foo
+{
+    public delegate void ErrorCS0059Delegate(ErrorCS0059 e);
+
+    public static void Main() { }
 }
-
-public class Foo {
-	public delegate void ErrorCS0059Delegate (ErrorCS0059 e);
-
-	public static void Main () {
-	}
-}
-

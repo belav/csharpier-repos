@@ -42,7 +42,10 @@ public interface IConventionNavigationBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionNavigationBuilder? HasField(FieldInfo? fieldInfo, bool fromDataAnnotation = false);
+    new IConventionNavigationBuilder? HasField(
+        FieldInfo? fieldInfo,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the <see cref="PropertyAccessMode" /> to use for this navigation.
@@ -53,7 +56,10 @@ public interface IConventionNavigationBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionNavigationBuilder? UsePropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false);
+    new IConventionNavigationBuilder? UsePropertyAccessMode(
+        PropertyAccessMode? propertyAccessMode,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether this navigation can be configured to be automatically included in a query
@@ -93,7 +99,10 @@ public interface IConventionNavigationBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionNavigationBuilder? EnableLazyLoading(bool? lazyLoadingEnabled, bool fromDataAnnotation = false);
+    IConventionNavigationBuilder? EnableLazyLoading(
+        bool? lazyLoadingEnabled,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether this navigation requiredness can be configured

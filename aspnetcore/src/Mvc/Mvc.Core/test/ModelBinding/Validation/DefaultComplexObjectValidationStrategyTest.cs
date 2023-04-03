@@ -18,7 +18,9 @@ public class DefaultComplexObjectValidationStrategyTest
             Name = "Joey",
         };
 
-        var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(Person));
+        var metadata = TestModelMetadataProvider
+            .CreateDefaultProvider()
+            .GetMetadataForType(typeof(Person));
         var strategy = DefaultComplexObjectValidationStrategy.Instance;
 
         // Act
@@ -44,7 +46,8 @@ public class DefaultComplexObjectValidationStrategyTest
                 Assert.Equal("prefix.Name", entry.Key);
                 Assert.Equal("Joey", entry.Model);
                 Assert.Same(metadata.Properties["Name"], entry.Metadata);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -58,7 +61,11 @@ public class DefaultComplexObjectValidationStrategyTest
             Name = "Joey",
         };
 
-        var metadata = TestModelMetadataProvider.CreateDefaultProvider(new List<IMetadataDetailsProvider> { new TestValidationModelNameProvider() }).GetMetadataForType(typeof(Person));
+        var metadata = TestModelMetadataProvider
+            .CreateDefaultProvider(
+                new List<IMetadataDetailsProvider> { new TestValidationModelNameProvider() }
+            )
+            .GetMetadataForType(typeof(Person));
         var strategy = DefaultComplexObjectValidationStrategy.Instance;
 
         // Act
@@ -84,7 +91,8 @@ public class DefaultComplexObjectValidationStrategyTest
                 Assert.Equal("prefix.NAME", entry.Key);
                 Assert.Equal("Joey", entry.Model);
                 Assert.Same(metadata.Properties["Name"], entry.Metadata);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -92,7 +100,9 @@ public class DefaultComplexObjectValidationStrategyTest
     {
         // Arrange
         Person model = null;
-        var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(Person));
+        var metadata = TestModelMetadataProvider
+            .CreateDefaultProvider()
+            .GetMetadataForType(typeof(Person));
         var strategy = DefaultComplexObjectValidationStrategy.Instance;
 
         // Act
@@ -118,7 +128,8 @@ public class DefaultComplexObjectValidationStrategyTest
                 Assert.Equal("prefix.Name", entry.Key);
                 Assert.Null(entry.Model);
                 Assert.Same(metadata.Properties["Name"], entry.Metadata);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -126,7 +137,9 @@ public class DefaultComplexObjectValidationStrategyTest
     {
         // Arrange
         var model = new LazyPerson(input: null);
-        var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(LazyPerson));
+        var metadata = TestModelMetadataProvider
+            .CreateDefaultProvider()
+            .GetMetadataForType(typeof(LazyPerson));
         var strategy = DefaultComplexObjectValidationStrategy.Instance;
 
         // Act
@@ -153,7 +166,8 @@ public class DefaultComplexObjectValidationStrategyTest
                 Assert.Equal("prefix.Name", entry.Key);
                 Assert.Throws<NullReferenceException>(() => entry.Model);
                 Assert.Same(metadata.Properties["Name"], entry.Metadata);
-            });
+            }
+        );
     }
 
     private List<ValidationEntry> BufferEntries(IEnumerator<ValidationEntry> enumerator)
@@ -194,7 +208,7 @@ public class DefaultComplexObjectValidationStrategyTest
 
     private class TestValidationModelNameProvider : IValidationMetadataProvider
     {
-        public void CreateValidationMetadata(ValidationMetadataProviderContext context)
-            => context.ValidationMetadata.ValidationModelName = context.Key.Name?.ToUpperInvariant();
+        public void CreateValidationMetadata(ValidationMetadataProviderContext context) =>
+            context.ValidationMetadata.ValidationModelName = context.Key.Name?.ToUpperInvariant();
     }
 }

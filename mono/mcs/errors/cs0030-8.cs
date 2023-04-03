@@ -3,9 +3,9 @@
 
 class X
 {
-	static void Main ()
-	{
-		const bool b = true;
-		int a = (int)(b ? true : false);
-	}
+    static void Main()
+    {
+        const bool b = true;
+        int a = (int)(b ? true : false);
+    }
 }

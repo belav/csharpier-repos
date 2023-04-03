@@ -3,13 +3,10 @@
 
 public abstract class A
 {
-	public abstract int Foo ();
+    public abstract int Foo();
 }
 
 public class B : A
 {
-	public override ref int Foo ()
-	{
-
-	}
+    public override ref int Foo() { }
 }

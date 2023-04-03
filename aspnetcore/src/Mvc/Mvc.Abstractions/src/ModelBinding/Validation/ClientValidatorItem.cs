@@ -14,9 +14,7 @@ public class ClientValidatorItem
     /// <summary>
     /// Creates a new <see cref="ClientValidatorItem"/>.
     /// </summary>
-    public ClientValidatorItem()
-    {
-    }
+    public ClientValidatorItem() { }
 
     /// <summary>
     /// Creates a new <see cref="ClientValidatorItem"/>.

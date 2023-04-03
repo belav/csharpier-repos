@@ -5,8 +5,8 @@ using System;
 
 public class Program
 {
-    public static TypedReference operator + (int a, Program b)
+    public static TypedReference operator +(int a, Program b)
     {
-    	throw new ApplicationException ();
+        throw new ApplicationException();
     }
 }

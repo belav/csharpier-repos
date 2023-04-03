@@ -3,10 +3,8 @@
 
 class AAttribute : System.Attribute
 {
-	protected AAttribute() { }
+    protected AAttribute() { }
 }
 
 [A]
-class C
-{
-}
+class C { }

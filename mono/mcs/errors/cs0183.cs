@@ -2,13 +2,12 @@
 // Line:
 // Compiler options: -warnaserror -warn:1
 
-class X {
+class X
+{
+    static void Main()
+    {
+        int i = 5;
 
-	static void Main ()
-	{
-		int i = 5;
-
-		if (i is int){
-		}
-	}
+        if (i is int) { }
+    }
 }

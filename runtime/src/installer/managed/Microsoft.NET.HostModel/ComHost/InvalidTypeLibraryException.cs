@@ -16,7 +16,7 @@ namespace Microsoft.NET.HostModel.ComHost
         }
 
         public InvalidTypeLibraryException(string path, Exception innerException)
-            :base($"Invalid type library at '{path}'.", innerException)
+            : base($"Invalid type library at '{path}'.", innerException)
         {
             Path = path;
         }

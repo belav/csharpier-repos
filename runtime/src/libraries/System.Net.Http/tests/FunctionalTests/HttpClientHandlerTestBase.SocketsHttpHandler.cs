@@ -28,11 +28,17 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        protected static HttpClientHandler CreateHttpClientHandler(Version useVersion = null, bool allowAllCertificates = true)
+        protected static HttpClientHandler CreateHttpClientHandler(
+            Version useVersion = null,
+            bool allowAllCertificates = true
+        )
         {
             useVersion ??= HttpVersion.Version11;
 
-            HttpClientHandler handler = (PlatformDetection.SupportsAlpn && useVersion != HttpVersion.Version30) ? new HttpClientHandler() : new VersionHttpClientHandler(useVersion);
+            HttpClientHandler handler =
+                (PlatformDetection.SupportsAlpn && useVersion != HttpVersion.Version30)
+                    ? new HttpClientHandler()
+                    : new VersionHttpClientHandler(useVersion);
 
             // Browser doesn't support ServerCertificateCustomValidationCallback
             if (allowAllCertificates && PlatformDetection.IsNotBrowser)
@@ -50,31 +56,44 @@ namespace System.Net.Http.Functional.Tests
             return handler;
         }
 
-        protected static SocketsHttpHandler CreateSocketsHttpHandler(bool allowAllCertificates)
-            => TestHelper.CreateSocketsHttpHandler(allowAllCertificates);
+        protected static SocketsHttpHandler CreateSocketsHttpHandler(bool allowAllCertificates) =>
+            TestHelper.CreateSocketsHttpHandler(allowAllCertificates);
 
         protected Http3LoopbackServer CreateHttp3LoopbackServer(Http3Options options = default)
         {
             return new Http3LoopbackServer(options);
         }
 
-        protected HttpClientHandler CreateHttpClientHandler() => CreateHttpClientHandler(UseVersion);
+        protected HttpClientHandler CreateHttpClientHandler() =>
+            CreateHttpClientHandler(UseVersion);
 
         protected static HttpClientHandler CreateHttpClientHandler(string useVersionString) =>
             CreateHttpClientHandler(Version.Parse(useVersionString));
 
-        protected static SocketsHttpHandler GetUnderlyingSocketsHttpHandler(HttpClientHandler handler)
+        protected static SocketsHttpHandler GetUnderlyingSocketsHttpHandler(
+            HttpClientHandler handler
+        )
         {
             var fieldName = PlatformDetection.IsMobile ? "_socketHandler" : "_underlyingHandler";
-            FieldInfo field = typeof(HttpClientHandler).GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo field = typeof(HttpClientHandler).GetField(
+                fieldName,
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             return (SocketsHttpHandler)field?.GetValue(handler);
         }
 
-        protected static HttpRequestMessage CreateRequest(HttpMethod method, Uri uri, Version version, bool exactVersion = false) =>
+        protected static HttpRequestMessage CreateRequest(
+            HttpMethod method,
+            Uri uri,
+            Version version,
+            bool exactVersion = false
+        ) =>
             new HttpRequestMessage(method, uri)
             {
                 Version = version,
-                VersionPolicy = exactVersion ? HttpVersionPolicy.RequestVersionExact : HttpVersionPolicy.RequestVersionOrLower
+                VersionPolicy = exactVersion
+                    ? HttpVersionPolicy.RequestVersionExact
+                    : HttpVersionPolicy.RequestVersionOrLower
             };
 
         protected LoopbackServerFactory LoopbackServerFactory => GetFactoryForVersion(UseVersion);
@@ -95,7 +114,6 @@ namespace System.Net.Http.Functional.Tests
                 _ => Http11LoopbackServerFactory.Singleton
             };
         }
-
     }
 
     internal class VersionHttpClientHandler : HttpClientHandler
@@ -107,7 +125,10 @@ namespace System.Net.Http.Functional.Tests
             _useVersion = useVersion;
         }
 
-        protected override HttpResponseMessage Send(HttpRequestMessage request, Threading.CancellationToken cancellationToken)
+        protected override HttpResponseMessage Send(
+            HttpRequestMessage request,
+            Threading.CancellationToken cancellationToken
+        )
         {
             if (request.Version == _useVersion)
             {
@@ -117,9 +138,11 @@ namespace System.Net.Http.Functional.Tests
             return base.Send(request, cancellationToken);
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Threading.CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            Threading.CancellationToken cancellationToken
+        )
         {
-
             if (request.Version == _useVersion)
             {
                 request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
@@ -128,10 +151,11 @@ namespace System.Net.Http.Functional.Tests
             return base.SendAsync(request, cancellationToken);
         }
 
-        protected static HttpRequestMessage CreateRequest(HttpMethod method, Uri uri, Version version, bool exactVersion = false) =>
-            new HttpRequestMessage(method, uri)
-            {
-                Version = version,
-            };
+        protected static HttpRequestMessage CreateRequest(
+            HttpMethod method,
+            Uri uri,
+            Version version,
+            bool exactVersion = false
+        ) => new HttpRequestMessage(method, uri) { Version = version, };
     }
 }

@@ -4,9 +4,9 @@
 
 class CompilerBugDemo
 {
-	public static object Wrong()
-	{
-		object y2;
-		return null;
-	}
+    public static object Wrong()
+    {
+        object y2;
+        return null;
+    }
 }

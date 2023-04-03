@@ -9,11 +9,14 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     [RequiresDynamicCode(ServiceProvider.RequiresDynamicCodeMessage)]
     internal sealed class RuntimeServiceProviderEngine : ServiceProviderEngine
     {
-        public static RuntimeServiceProviderEngine Instance { get; } = new RuntimeServiceProviderEngine();
+        public static RuntimeServiceProviderEngine Instance { get; } =
+            new RuntimeServiceProviderEngine();
 
         private RuntimeServiceProviderEngine() { }
 
-        public override Func<ServiceProviderEngineScope, object?> RealizeService(ServiceCallSite callSite)
+        public override Func<ServiceProviderEngineScope, object?> RealizeService(
+            ServiceCallSite callSite
+        )
         {
             return scope =>
             {

@@ -1,31 +1,22 @@
 public class UndoableDictionary<TKey, TValue> : UpdateableCollection<TValue>
 {
-	public override void TestFunc ()
-	{
-	}
+    public override void TestFunc() { }
 }
 
 public abstract class UpdateableCollection<T>
 {
-	internal void AddReferences ()
-	{
-	}
+    internal void AddReferences() { }
 
-	public virtual void TestFunc ()
-	{
-	}
+    public virtual void TestFunc() { }
 
-	class X : UndoableDictionary<int, int>
-	{
-	}
-
+    class X : UndoableDictionary<int, int> { }
 }
 
 public class C
 {
-	public static int Main ()
-	{
-		new UndoableDictionary<string, decimal> ();
-		return 0;
-	}
+    public static int Main()
+    {
+        new UndoableDictionary<string, decimal>();
+        return 0;
+    }
 }

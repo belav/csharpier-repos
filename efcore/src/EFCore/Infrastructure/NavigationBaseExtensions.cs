@@ -16,7 +16,5 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///     </para>
     /// </summary>
     [Obsolete("Use INavigationBase")]
-    public static class NavigationBaseExtensions
-    {
-    }
+    public static class NavigationBaseExtensions { }
 }

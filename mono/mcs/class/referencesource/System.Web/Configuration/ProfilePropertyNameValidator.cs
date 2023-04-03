@@ -17,26 +17,35 @@ namespace System.Web.Configuration
 
     internal sealed class ProfilePropertyNameValidator : ConfigurationValidatorBase
     {
-        public override bool CanValidate(Type type) {
+        public override bool CanValidate(Type type)
+        {
             return (type == typeof(string));
         }
-        public override void Validate(object value) {
-            if (value == null) {
+
+        public override void Validate(object value)
+        {
+            if (value == null)
+            {
                 throw new ArgumentNullException("value");
             }
-            
+
             string s = value as string;
-            if (s != null) {
+            if (s != null)
+            {
                 s = s.Trim();
             }
-            if (string.IsNullOrEmpty(s)) {
+            if (string.IsNullOrEmpty(s))
+            {
                 throw new ArgumentException(SR.GetString(SR.Profile_name_can_not_be_empty));
             }
 
-            if (s.Contains(".")) {
+            if (s.Contains("."))
+            {
                 throw new ArgumentException(SR.GetString(SR.Profile_name_can_not_contain_period));
             }
         }
-        internal static ProfilePropertyNameValidator SingletonInstance = new ProfilePropertyNameValidator();
+
+        internal static ProfilePropertyNameValidator SingletonInstance =
+            new ProfilePropertyNameValidator();
     }
 }

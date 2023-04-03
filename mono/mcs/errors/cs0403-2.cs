@@ -3,11 +3,11 @@
 
 struct S
 {
-	public void Foo<T> () where T : struct
-	{
-		T t = null;
-	}
+    public void Foo<T>()
+        where T : struct
+    {
+        T t = null;
+    }
 
-	static void Main ()
-	{ }
+    static void Main() { }
 }

@@ -4,10 +4,8 @@
 
 class R<U>
 {
-	class A<T>
-	{
-		struct I<U>
-		{
-		}
-	}
+    class A<T>
+    {
+        struct I<U> { }
+    }
 }

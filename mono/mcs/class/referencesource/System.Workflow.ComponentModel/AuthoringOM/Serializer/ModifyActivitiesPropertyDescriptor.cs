@@ -35,10 +35,7 @@ namespace System.Workflow.ComponentModel.Serialization
 
         public override Type ComponentType
         {
-            get
-            {
-                return typeof(CompositeActivity);
-            }
+            get { return typeof(CompositeActivity); }
         }
 
         public override object GetValue(object component)
@@ -48,18 +45,12 @@ namespace System.Workflow.ComponentModel.Serialization
 
         public override bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override Type PropertyType
         {
-            get
-            {
-                return typeof(bool);
-            }
+            get { return typeof(bool); }
         }
 
         public override void ResetValue(object component)
@@ -72,7 +63,10 @@ namespace System.Workflow.ComponentModel.Serialization
             this.propInfo.SetValue(component, true, null);
             // Design time, allow changes
             if (component is CompositeActivity)
-                (component as CompositeActivity).SetValue(CompositeActivity.CustomActivityProperty, false);
+                (component as CompositeActivity).SetValue(
+                    CompositeActivity.CustomActivityProperty,
+                    false
+                );
         }
 
         public override bool ShouldSerializeValue(object component)

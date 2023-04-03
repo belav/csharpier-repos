@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 internal sealed class WebAssemblyNavigationInterception : INavigationInterception
 {
-    public static readonly WebAssemblyNavigationInterception Instance = new WebAssemblyNavigationInterception();
+    public static readonly WebAssemblyNavigationInterception Instance =
+        new WebAssemblyNavigationInterception();
 
     public Task EnableNavigationInterceptionAsync()
     {

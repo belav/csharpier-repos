@@ -5,14 +5,13 @@ using System;
 
 class Program
 {
-	public static void Main ()
-	{
-		int a;
-		string s = "";
+    public static void Main()
+    {
+        int a;
+        string s = "";
 
-		do {
-		} while (s != "s" && (a = 4) > 3);
+        do { } while (s != "s" && (a = 4) > 3);
 
-		Console.WriteLine (a);
-	}
+        Console.WriteLine(a);
+    }
 }

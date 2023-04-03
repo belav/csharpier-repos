@@ -3,15 +3,14 @@
 // Compiler options: /warn:2 /warnaserror
 using System;
 
-public class CS0652 {
-
-	public static void Main () 
-	{
-		ushort us = 0;
-		if (us == -1)
-			Console.WriteLine (":(");
-		else
-			Console.WriteLine (":)");
-	}
+public class CS0652
+{
+    public static void Main()
+    {
+        ushort us = 0;
+        if (us == -1)
+            Console.WriteLine(":(");
+        else
+            Console.WriteLine(":)");
+    }
 }
-

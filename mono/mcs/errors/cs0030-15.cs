@@ -5,8 +5,8 @@ using System;
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
-		var dow = (DayOfWeek?) long.MaxValue;
+        var dow = (DayOfWeek?)long.MaxValue;
     }
 }

@@ -4,8 +4,8 @@
 
 readonly struct S
 {
-	void Foo ()
-	{
-		this = new S ();
-	}
+    void Foo()
+    {
+        this = new S();
+    }
 }

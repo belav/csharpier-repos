@@ -5,12 +5,12 @@
 using System;
 using System.Diagnostics;
 
-class Class1 
+class Class1
 {
-        public event ResolveEventHandler G {
-            [CLSCompliant(false)]
-            add {}
-            remove {}
-	}
+    public event ResolveEventHandler G
+    {
+        [CLSCompliant(false)]
+        add { }
+        remove { }
+    }
 }
-

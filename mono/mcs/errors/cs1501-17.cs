@@ -3,12 +3,10 @@
 
 class C
 {
-    static void Foo (string foo, params object [] moreFoo)
-    {
-    }
+    static void Foo(string foo, params object[] moreFoo) { }
 
-    static void Main ()
+    static void Main()
     {
-        Foo ();
+        Foo();
     }
 }

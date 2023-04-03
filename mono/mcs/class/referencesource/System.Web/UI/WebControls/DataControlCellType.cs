@@ -1,36 +1,32 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataControlCellType.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
-    
 
     /// <devdoc>
     ///    <para>Specifies the type of the item in a list.</para>
     /// </devdoc>
-    public enum DataControlCellType {
-        
-
+    public enum DataControlCellType
+    {
         /// <devdoc>
-        ///    <para> 
+        ///    <para>
         ///       A header. It is not databound.</para>
         /// </devdoc>
         Header = 0,
 
-
         /// <devdoc>
-        ///    <para> 
+        ///    <para>
         ///       A footer. It is not databound.</para>
         /// </devdoc>
         Footer = 1,
-        
 
         /// <devdoc>
         ///    An item. It is databound.
@@ -38,4 +34,3 @@ namespace System.Web.UI.WebControls {
         DataCell = 2
     }
 }
-

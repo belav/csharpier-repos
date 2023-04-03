@@ -26,59 +26,124 @@ namespace DllImportGenerator.IntegrationTests
             public static partial int SumInArray(in int[] values, int numValues);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "duplicate_int_array")]
-            public static partial void Duplicate([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref int[] values, int numValues);
+            public static partial void Duplicate(
+                [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref int[] values,
+                int numValues
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "create_range_array")]
-            [return:MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+            [return: MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             public static partial int[] CreateRange(int start, int end, out int numValues);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "create_range_array_out")]
-            public static partial void CreateRange_Out(int start, int end, out int numValues, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] out int[] res);
+            public static partial void CreateRange_Out(
+                int start,
+                int end,
+                out int numValues,
+                [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] out int[] res
+            );
 
-            [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_char_array", CharSet = CharSet.Unicode)]
+            [GeneratedDllImport(
+                NativeExportsNE_Binary,
+                EntryPoint = "sum_char_array",
+                CharSet = CharSet.Unicode
+            )]
             public static partial int SumChars(char[] chars, int numElements);
 
-            [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "fill_char_array", CharSet = CharSet.Unicode)]
+            [GeneratedDllImport(
+                NativeExportsNE_Binary,
+                EntryPoint = "fill_char_array",
+                CharSet = CharSet.Unicode
+            )]
             public static partial void FillChars([Out] char[] chars, int length, ushort start);
 
-            [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_char_array", CharSet = CharSet.Unicode)]
-            public static partial void ReverseChars([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref char[] chars, int numElements);
+            [GeneratedDllImport(
+                NativeExportsNE_Binary,
+                EntryPoint = "reverse_char_array",
+                CharSet = CharSet.Unicode
+            )]
+            public static partial void ReverseChars(
+                [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref char[] chars,
+                int numElements
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_string_lengths")]
-            public static partial int SumStringLengths([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)] string[] strArray);
+            public static partial int SumStringLengths(
+                [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)]
+                    string[] strArray
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_replace")]
-            public static partial void ReverseStrings_Ref([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 1)] ref string[] strArray, out int numElements);
+            public static partial void ReverseStrings_Ref(
+                [MarshalAs(
+                    UnmanagedType.LPArray,
+                    ArraySubType = UnmanagedType.LPWStr,
+                    SizeParamIndex = 1
+                )]
+                    ref string[] strArray,
+                out int numElements
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_return")]
-            [return: MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 1)]
-            public static partial string[] ReverseStrings_Return([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)] string[] strArray, out int numElements);
+            [return: MarshalAs(
+                UnmanagedType.LPArray,
+                ArraySubType = UnmanagedType.LPWStr,
+                SizeParamIndex = 1
+            )]
+            public static partial string[] ReverseStrings_Return(
+                [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)]
+                    string[] strArray,
+                out int numElements
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_out")]
-            public static partial void ReverseStrings_Out([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)] string[] strArray, out int numElements, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 1)] out string[] res);
+            public static partial void ReverseStrings_Out(
+                [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)]
+                    string[] strArray,
+                out int numElements,
+                [MarshalAs(
+                    UnmanagedType.LPArray,
+                    ArraySubType = UnmanagedType.LPWStr,
+                    SizeParamIndex = 1
+                )]
+                    out string[] res
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "get_long_bytes")]
-            [return:MarshalAs(UnmanagedType.LPArray, SizeConst = sizeof(long))]
+            [return: MarshalAs(UnmanagedType.LPArray, SizeConst = sizeof(long))]
             public static partial byte[] GetLongBytes(long l);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "append_int_to_array")]
-            public static partial void Append([MarshalAs(UnmanagedType.LPArray, SizeConst = 1, SizeParamIndex = 1)] ref int[] values, int numOriginalValues, int newValue);
+            public static partial void Append(
+                [MarshalAs(UnmanagedType.LPArray, SizeConst = 1, SizeParamIndex = 1)]
+                    ref int[] values,
+                int numOriginalValues,
+                int newValue
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "fill_range_array")]
             [return: MarshalAs(UnmanagedType.U1)]
-            public static partial bool FillRangeArray([Out] IntStructWrapper[] array, int length, int start);
+            public static partial bool FillRangeArray(
+                [Out] IntStructWrapper[] array,
+                int length,
+                int start
+            );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "double_values")]
             public static partial bool DoubleValues([In, Out] IntStructWrapper[] array, int length);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "and_all_members")]
-            [return:MarshalAs(UnmanagedType.U1)]
+            [return: MarshalAs(UnmanagedType.U1)]
             public static partial bool AndAllMembers(BoolStruct[] pArray, int length);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "transpose_matrix")]
             [return: MarshalUsing(CountElementName = "numColumns")]
             [return: MarshalUsing(CountElementName = "numRows", ElementIndirectionLevel = 1)]
-            public static partial int[][] TransposeMatrix(int[][] matrix, int[] numRows, int numColumns);
+            public static partial int[][] TransposeMatrix(
+                int[][] matrix,
+                int[] numRows,
+                int numColumns
+            );
         }
     }
 
@@ -121,7 +186,7 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void IntArrayRefParameter()
         {
-            var array = new [] { 1, 5, 79, 165, 32, 3 };
+            var array = new[] { 1, 5, 79, 165, 32, 3 };
             var newArray = array;
             NativeExportsNE.Arrays.Duplicate(ref newArray, array.Length);
             Assert.Equal((IEnumerable<int>)array, newArray);
@@ -169,11 +234,11 @@ namespace DllImportGenerator.IntegrationTests
 
         private static string[] GetStringArray()
         {
-            return new []
+            return new[]
             {
                 "ABCdef 123$%^",
                 "?? !! ?? !!",
-                "?? ? ?? ? ?? ? ?? ? ?? ?" ,
+                "?? ? ?? ? ?? ? ?? ? ?? ?",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae posuere mauris, sed ultrices leo. Suspendisse potenti. Mauris enim enim, blandit tincidunt consequat in, varius sit amet neque. Morbi eget porttitor ex. Duis mattis aliquet ante quis imperdiet. Duis sit.",
                 string.Empty,
                 null
@@ -184,7 +249,10 @@ namespace DllImportGenerator.IntegrationTests
         public void ByValueArrayWithElementMarshalling()
         {
             var strings = GetStringArray();
-            Assert.Equal(strings.Sum(str => str?.Length ?? 0), NativeExportsNE.Arrays.SumStringLengths(strings));
+            Assert.Equal(
+                strings.Sum(str => str?.Length ?? 0),
+                NativeExportsNE.Arrays.SumStringLengths(strings)
+            );
         }
 
         [Fact]
@@ -208,7 +276,10 @@ namespace DllImportGenerator.IntegrationTests
         {
             var strings = GetStringArray();
             var expectedStrings = strings.Select(s => ReverseChars(s)).ToArray();
-            Assert.Equal(expectedStrings, NativeExportsNE.Arrays.ReverseStrings_Return(strings, out _));
+            Assert.Equal(
+                expectedStrings,
+                NativeExportsNE.Arrays.ReverseStrings_Return(strings, out _)
+            );
 
             string[] res;
             NativeExportsNE.Arrays.ReverseStrings_Out(strings, out _, out res);
@@ -240,17 +311,20 @@ namespace DllImportGenerator.IntegrationTests
         {
             var longVal = 0x12345678ABCDEF10L;
 
-            Assert.Equal(longVal, MemoryMarshal.Read<long>(NativeExportsNE.Arrays.GetLongBytes(longVal)));
+            Assert.Equal(
+                longVal,
+                MemoryMarshal.Read<long>(NativeExportsNE.Arrays.GetLongBytes(longVal))
+            );
         }
 
         [Fact]
         public void DynamicSizedArrayWithConstantComponent()
         {
-            var array = new [] { 1, 5, 79, 165, 32, 3 };
+            var array = new[] { 1, 5, 79, 165, 32, 3 };
             int newValue = 42;
             var newArray = array;
             NativeExportsNE.Arrays.Append(ref newArray, array.Length, newValue);
-            Assert.Equal(array.Concat(new [] { newValue }), newArray);
+            Assert.Equal(array.Concat(new[] { newValue }), newArray);
         }
 
         [Fact]
@@ -261,13 +335,19 @@ namespace DllImportGenerator.IntegrationTests
                 int start = 5;
 
                 NativeExportsNE.Arrays.FillRangeArray(testArray, testArray.Length, start);
-                Assert.Equal(Enumerable.Range(start, testArray.Length), testArray.Select(wrapper => wrapper.Value));
+                Assert.Equal(
+                    Enumerable.Range(start, testArray.Length),
+                    testArray.Select(wrapper => wrapper.Value)
+                );
 
                 // Any items not populated by the invoke target should be initialized to default
                 testArray = new IntStructWrapper[10];
                 int lengthToFill = testArray.Length / 2;
                 NativeExportsNE.Arrays.FillRangeArray(testArray, lengthToFill, start);
-                Assert.Equal(Enumerable.Range(start, lengthToFill), testArray[..lengthToFill].Select(wrapper => wrapper.Value));
+                Assert.Equal(
+                    Enumerable.Range(start, lengthToFill),
+                    testArray[..lengthToFill].Select(wrapper => wrapper.Value)
+                );
                 Assert.All(testArray[lengthToFill..], wrapper => Assert.Equal(0, wrapper.Value));
             }
             {
@@ -275,13 +355,19 @@ namespace DllImportGenerator.IntegrationTests
                 ushort start = 65;
 
                 NativeExportsNE.Arrays.FillChars(testArray, testArray.Length, start);
-                Assert.Equal(Enumerable.Range(start, testArray.Length), testArray.Select(c => (int)c));
+                Assert.Equal(
+                    Enumerable.Range(start, testArray.Length),
+                    testArray.Select(c => (int)c)
+                );
 
                 // Any items not populated by the invoke target should be initialized to default
                 testArray = new char[10];
                 int lengthToFill = testArray.Length / 2;
                 NativeExportsNE.Arrays.FillChars(testArray, lengthToFill, start);
-                Assert.Equal(Enumerable.Range(start, lengthToFill), testArray[..lengthToFill].Select(c => (int)c));
+                Assert.Equal(
+                    Enumerable.Range(start, lengthToFill),
+                    testArray[..lengthToFill].Select(c => (int)c)
+                );
                 Assert.All(testArray[lengthToFill..], c => Assert.Equal(0, c));
             }
         }
@@ -289,19 +375,29 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void ArrayByValueInOutParameter()
         {
-            var testValues = Enumerable.Range(42, 15).Select(i => new IntStructWrapper { Value = i });
+            var testValues = Enumerable
+                .Range(42, 15)
+                .Select(i => new IntStructWrapper { Value = i });
 
             var testArray = testValues.ToArray();
 
             NativeExportsNE.Arrays.DoubleValues(testArray, testArray.Length);
 
-            Assert.Equal(testValues.Select(wrapper => wrapper.Value * 2), testArray.Select(wrapper => wrapper.Value));
+            Assert.Equal(
+                testValues.Select(wrapper => wrapper.Value * 2),
+                testArray.Select(wrapper => wrapper.Value)
+            );
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60624", typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsArm64Process))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60624",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsArm64Process)
+        )]
         public void ArrayWithSimpleNonBlittableTypeMarshalling(bool result)
         {
             var boolValues = new[]
@@ -326,7 +422,10 @@ namespace DllImportGenerator.IntegrationTests
                 },
             };
 
-            Assert.Equal(result, NativeExportsNE.Arrays.AndAllMembers(boolValues, boolValues.Length));
+            Assert.Equal(
+                result,
+                NativeExportsNE.Arrays.AndAllMembers(boolValues, boolValues.Length)
+            );
         }
 
         [Fact]
@@ -348,7 +447,11 @@ namespace DllImportGenerator.IntegrationTests
             int[] numRowsArray = new int[numColumns];
             numRowsArray.AsSpan().Fill(numRows);
 
-            int[][] transposed = NativeExportsNE.Arrays.TransposeMatrix(matrix, numRowsArray, numColumns);
+            int[][] transposed = NativeExportsNE.Arrays.TransposeMatrix(
+                matrix,
+                numRowsArray,
+                numColumns
+            );
 
             for (int i = 0; i < numRows; i++)
             {

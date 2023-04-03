@@ -4,26 +4,27 @@
 
 using System;
 
-public struct Coord 
+public struct Coord
 {
-        public int val; 
+    public int val;
 }
 
-public struct Point {
-	public Coord x;
-	public Coord y;
+public struct Point
+{
+    public Coord x;
+    public Coord y;
 }
 
 public class A : MarshalByRefObject
 {
-   public Point point = new Point ();
+    public Point point = new Point();
 }
 
 public class Test
 {
-   public static void Main ()
-   {
-        A a = new A ();
+    public static void Main()
+    {
+        A a = new A();
         a.point.x.val = 0;
-   }
+    }
 }

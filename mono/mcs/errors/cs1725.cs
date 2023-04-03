@@ -3,11 +3,9 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo ("main, Version=1.1.1.1")]
+[assembly: InternalsVisibleTo("main, Version=1.1.1.1")]
 
 class A
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

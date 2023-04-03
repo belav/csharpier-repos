@@ -3,7 +3,5 @@
 
 class A
 {
-	public static int Main () 
-	{
-	}
+    public static int Main() { }
 }

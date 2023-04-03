@@ -5,22 +5,16 @@ using System;
 
 public class foo
 {
-	static int intval = 3;
+    static int intval = 3;
 
-	public static void voidfunc()
-	{
-	}
-	
-	static void p (string s, object o1, object o2)
-	{
-	}
-	
-	static void p (string s, params object[] o)
-	{
-	}
+    public static void voidfunc() { }
 
-	public static void Main()
-	{
-		p ("Whoops: {0} {1}", intval, voidfunc());
-	}
+    static void p(string s, object o1, object o2) { }
+
+    static void p(string s, params object[] o) { }
+
+    public static void Main()
+    {
+        p("Whoops: {0} {1}", intval, voidfunc());
+    }
 }

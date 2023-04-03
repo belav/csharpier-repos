@@ -16,8 +16,11 @@ namespace System
 
     [Serializable]
     [NonVersionable] // This only applies to field layout
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public partial struct Nullable<T> where T : struct
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public partial struct Nullable<T>
+        where T : struct
     {
         private readonly bool hasValue; // Do not rename (binary serialization)
         internal T value; // Do not rename (binary serialization) or make readonly (can be mutated in ToString, etc.)
@@ -51,13 +54,14 @@ namespace System
         public readonly T GetValueOrDefault() => value;
 
         [NonVersionable]
-        public readonly T GetValueOrDefault(T defaultValue) =>
-            hasValue ? value : defaultValue;
+        public readonly T GetValueOrDefault(T defaultValue) => hasValue ? value : defaultValue;
 
         public override bool Equals(object? other)
         {
-            if (!hasValue) return other == null;
-            if (other == null) return false;
+            if (!hasValue)
+                return other == null;
+            if (other == null)
+                return false;
             return value.Equals(other);
         }
 
@@ -66,8 +70,7 @@ namespace System
         public override string? ToString() => hasValue ? value.ToString() : "";
 
         [NonVersionable]
-        public static implicit operator Nullable<T>(T value) =>
-            new Nullable<T>(value);
+        public static implicit operator Nullable<T>(T value) => new Nullable<T>(value);
 
         [NonVersionable]
         public static explicit operator T(Nullable<T> value) => value!.Value;
@@ -75,25 +78,31 @@ namespace System
 
     public static class Nullable
     {
-        public static int Compare<T>(Nullable<T> n1, Nullable<T> n2) where T : struct
+        public static int Compare<T>(Nullable<T> n1, Nullable<T> n2)
+            where T : struct
         {
             if (n1.HasValue)
             {
-                if (n2.HasValue) return Comparer<T>.Default.Compare(n1.value, n2.value);
+                if (n2.HasValue)
+                    return Comparer<T>.Default.Compare(n1.value, n2.value);
                 return 1;
             }
-            if (n2.HasValue) return -1;
+            if (n2.HasValue)
+                return -1;
             return 0;
         }
 
-        public static bool Equals<T>(Nullable<T> n1, Nullable<T> n2) where T : struct
+        public static bool Equals<T>(Nullable<T> n1, Nullable<T> n2)
+            where T : struct
         {
             if (n1.HasValue)
             {
-                if (n2.HasValue) return EqualityComparer<T>.Default.Equals(n1.value, n2.value);
+                if (n2.HasValue)
+                    return EqualityComparer<T>.Default.Equals(n1.value, n2.value);
                 return false;
             }
-            if (n2.HasValue) return false;
+            if (n2.HasValue)
+                return false;
             return true;
         }
 

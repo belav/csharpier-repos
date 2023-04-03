@@ -12,10 +12,14 @@ internal class Program
 {
     private static void Eval(int testCase, bool b1, bool b2)
     {
-        if (b1 != b2) throw new Exception(string.Format("case {0:000} failed: v1 {1} v2 {2}", testCase, b1, b2));
+        if (b1 != b2)
+            throw new Exception(
+                string.Format("case {0:000} failed: v1 {1} v2 {2}", testCase, b1, b2)
+            );
     }
 
-    private static void TestCase0001<T>() where T : struct
+    private static void TestCase0001<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -972,8 +976,10 @@ internal class Program
             Eval(0979, v is SealedClass, false);
             Eval(0980, v is SealedClass[], false);
         }
-    }  // end of test case 0001
-    private static void TestCase0002<T>() where T : struct
+    } // end of test case 0001
+
+    private static void TestCase0002<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -1930,8 +1936,10 @@ internal class Program
             Eval(1959, v is SealedClass, false);
             Eval(1960, v is SealedClass[], false);
         }
-    }  // end of test case 0002
-    private static void TestCase0003<T>() where T : struct
+    } // end of test case 0002
+
+    private static void TestCase0003<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -2888,8 +2896,10 @@ internal class Program
             Eval(2939, v is SealedClass, false);
             Eval(2940, v is SealedClass[], false);
         }
-    }  // end of test case 0003
-    private static void TestCase0004<T>() where T : struct
+    } // end of test case 0003
+
+    private static void TestCase0004<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -3846,8 +3856,10 @@ internal class Program
             Eval(3919, v is SealedClass, false);
             Eval(3920, v is SealedClass[], false);
         }
-    }  // end of test case 0004
-    private static void TestCase0005<T>() where T : struct
+    } // end of test case 0004
+
+    private static void TestCase0005<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -4804,8 +4816,10 @@ internal class Program
             Eval(4899, v is SealedClass, false);
             Eval(4900, v is SealedClass[], false);
         }
-    }  // end of test case 0005
-    private static void TestCase0006<T>() where T : struct
+    } // end of test case 0005
+
+    private static void TestCase0006<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -5762,8 +5776,10 @@ internal class Program
             Eval(5879, v is SealedClass, false);
             Eval(5880, v is SealedClass[], false);
         }
-    }  // end of test case 0006
-    private static void TestCase0007<T>() where T : struct
+    } // end of test case 0006
+
+    private static void TestCase0007<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -6720,8 +6736,10 @@ internal class Program
             Eval(6859, v is SealedClass, false);
             Eval(6860, v is SealedClass[], false);
         }
-    }  // end of test case 0007
-    private static void TestCase0008<T>() where T : struct
+    } // end of test case 0007
+
+    private static void TestCase0008<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -7678,8 +7696,10 @@ internal class Program
             Eval(7839, v is SealedClass, false);
             Eval(7840, v is SealedClass[], false);
         }
-    }  // end of test case 0008
-    private static void TestCase0009<T>() where T : struct
+    } // end of test case 0008
+
+    private static void TestCase0009<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -8636,8 +8656,10 @@ internal class Program
             Eval(8819, v is SealedClass, false);
             Eval(8820, v is SealedClass[], false);
         }
-    }  // end of test case 0009
-    private static void TestCase0010<T>() where T : struct
+    } // end of test case 0009
+
+    private static void TestCase0010<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -9594,8 +9616,10 @@ internal class Program
             Eval(9799, v is SealedClass, false);
             Eval(9800, v is SealedClass[], false);
         }
-    }  // end of test case 0010
-    private static void TestCase0011<T>() where T : struct
+    } // end of test case 0010
+
+    private static void TestCase0011<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -10552,8 +10576,10 @@ internal class Program
             Eval(10779, v is SealedClass, false);
             Eval(10780, v is SealedClass[], false);
         }
-    }  // end of test case 0011
-    private static void TestCase0012<T>() where T : struct
+    } // end of test case 0011
+
+    private static void TestCase0012<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -11510,8 +11536,10 @@ internal class Program
             Eval(11759, v is SealedClass, false);
             Eval(11760, v is SealedClass[], false);
         }
-    }  // end of test case 0012
-    private static void TestCase0013<T>() where T : struct
+    } // end of test case 0012
+
+    private static void TestCase0013<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -12468,8 +12496,10 @@ internal class Program
             Eval(12739, v is SealedClass, false);
             Eval(12740, v is SealedClass[], false);
         }
-    }  // end of test case 0013
-    private static void TestCase0014<T>() where T : struct
+    } // end of test case 0013
+
+    private static void TestCase0014<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -13426,8 +13456,10 @@ internal class Program
             Eval(13719, v is SealedClass, false);
             Eval(13720, v is SealedClass[], false);
         }
-    }  // end of test case 0014
-    private static void TestCase0015<T>() where T : struct
+    } // end of test case 0014
+
+    private static void TestCase0015<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -14384,8 +14416,10 @@ internal class Program
             Eval(14699, v is SealedClass, false);
             Eval(14700, v is SealedClass[], false);
         }
-    }  // end of test case 0015
-    private static void TestCase0016<T>() where T : struct
+    } // end of test case 0015
+
+    private static void TestCase0016<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -15342,8 +15376,10 @@ internal class Program
             Eval(15679, v is SealedClass, false);
             Eval(15680, v is SealedClass[], false);
         }
-    }  // end of test case 0016
-    private static void TestCase0017<T>() where T : struct
+    } // end of test case 0016
+
+    private static void TestCase0017<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -16300,8 +16336,7 @@ internal class Program
             Eval(16659, v is SealedClass, false);
             Eval(16660, v is SealedClass[], false);
         }
-    }  // end of test case 0017
-
+    } // end of test case 0017
 
     private static int Main()
     {

@@ -13,18 +13,18 @@ using System.Collections.Generic;
 
 namespace System.Data.Mapping.ViewGeneration.Validation
 {
-
     using BasicSchemaConstraints = SchemaConstraints<BasicKeyConstraint>;
 
     // Class representing a key constraint on the basic cell relations
     internal class BasicKeyConstraint : KeyConstraint<BasicCellRelation, MemberProjectedSlot>
     {
-
         #region Constructor
         //  Constructs a key constraint for the given relation and keyslots
-        internal BasicKeyConstraint(BasicCellRelation relation, IEnumerable<MemberProjectedSlot> keySlots)
-            : base(relation, keySlots, ProjectedSlot.EqualityComparer)
-        { }
+        internal BasicKeyConstraint(
+            BasicCellRelation relation,
+            IEnumerable<MemberProjectedSlot> keySlots
+        )
+            : base(relation, keySlots, ProjectedSlot.EqualityComparer) { }
         #endregion
 
         #region Methods
@@ -48,7 +48,10 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             }
 
             // Create a key on view relation
-            ViewKeyConstraint viewKeyConstraint = new ViewKeyConstraint(viewCellRelation, viewSlots);
+            ViewKeyConstraint viewKeyConstraint = new ViewKeyConstraint(
+                viewCellRelation,
+                viewSlots
+            );
             return viewKeyConstraint;
         }
         #endregion

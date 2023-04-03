@@ -2,6 +2,7 @@
 // Line: 6
 // Compiler options: -warnaserror -warn:1
 
-class ExternClass {
-        public static extern int ExternMethod { set; }
+class ExternClass
+{
+    public static extern int ExternMethod { set; }
 }

@@ -9,12 +9,10 @@ interface I<T, U>
 
 class A : I<int, int>
 {
-    void I<int, int>.Foo(ref int arg)
-	{
-	}
-	
+    void I<int, int>.Foo(ref int arg) { }
+
     public virtual void Foo(out int arg)
-	{
-		arg = 8;
-	}
+    {
+        arg = 8;
+    }
 }

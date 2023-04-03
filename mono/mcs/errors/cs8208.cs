@@ -3,10 +3,9 @@
 
 static class Program
 {
-	public static void Main ()
-	{
-		object o = null;            
-		if (o is dynamic res) {
-		}
-	}
+    public static void Main()
+    {
+        object o = null;
+        if (o is dynamic res) { }
+    }
 }

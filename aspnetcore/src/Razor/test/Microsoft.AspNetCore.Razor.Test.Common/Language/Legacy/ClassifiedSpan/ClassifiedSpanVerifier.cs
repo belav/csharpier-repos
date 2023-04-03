@@ -28,7 +28,8 @@ internal class ClassifiedSpanVerifier
 
         private int _index;
 
-        public Walker(StringWriter writer, RazorSyntaxTree syntaxTree, string[] baseline) : base(writer, syntaxTree)
+        public Walker(StringWriter writer, RazorSyntaxTree syntaxTree, string[] baseline)
+            : base(writer, syntaxTree)
         {
             _writer = writer;
             _baseline = baseline;
@@ -47,7 +48,10 @@ internal class ClassifiedSpanVerifier
         public void AssertReachedEndOfBaseline()
         {
             // Since we're walking the list of classified spans there's the chance that our baseline is longer.
-            Assert.True(_baseline.Length == _index, $"Not all lines of the baseline were visited! {_baseline.Length} {_index}");
+            Assert.True(
+                _baseline.Length == _index,
+                $"Not all lines of the baseline were visited! {_baseline.Length} {_index}"
+            );
         }
 
         private void AssertEqual(ClassifiedSpanInternal span, string expected, string actual)
@@ -71,7 +75,12 @@ internal class ClassifiedSpanVerifier
 
         private class ClassifiedSpanBaselineException : XunitException
         {
-            public ClassifiedSpanBaselineException(ClassifiedSpanInternal span, string expected, string actual, string userMessage)
+            public ClassifiedSpanBaselineException(
+                ClassifiedSpanInternal span,
+                string expected,
+                string actual,
+                string userMessage
+            )
                 : base(Format(span, expected, actual, userMessage))
             {
                 Span = span;
@@ -85,7 +94,12 @@ internal class ClassifiedSpanVerifier
 
             public string Expected { get; }
 
-            private static string Format(ClassifiedSpanInternal span, string expected, string actual, string userMessage)
+            private static string Format(
+                ClassifiedSpanInternal span,
+                string expected,
+                string actual,
+                string userMessage
+            )
             {
                 var builder = new StringBuilder();
                 builder.AppendLine(userMessage);

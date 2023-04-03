@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -19,28 +19,29 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     internal class XmlCollectionAdapter<T> : ICollectionAdapter<T>, IXmlNodeSource
     {
-        private List<XmlCollectionItem<T>>  items;
-        private List<XmlCollectionItem<T>>  snapshot;
+        private List<XmlCollectionItem<T>> items;
+        private List<XmlCollectionItem<T>> snapshot;
         private ICollectionAdapterObserver<T> advisor;
 
-        private readonly IXmlCursor             cursor;
+        private readonly IXmlCursor cursor;
         private readonly IXmlCollectionAccessor accessor;
-        private readonly IXmlNode               parentNode;
-        private readonly IDictionaryAdapter     parentObject;
-        private readonly XmlReferenceManager    references;
+        private readonly IXmlNode parentNode;
+        private readonly IDictionaryAdapter parentObject;
+        private readonly XmlReferenceManager references;
 
         public XmlCollectionAdapter(
             IXmlNode parentNode,
             IDictionaryAdapter parentObject,
-            IXmlCollectionAccessor accessor)
+            IXmlCollectionAccessor accessor
+        )
         {
             items = new List<XmlCollectionItem<T>>();
 
-            this.accessor     = accessor;
-            this.cursor       = accessor.SelectCollectionItems(parentNode, true);
-            this.parentNode   = parentNode;
+            this.accessor = accessor;
+            this.cursor = accessor.SelectCollectionItems(parentNode, true);
+            this.parentNode = parentNode;
             this.parentObject = parentObject;
-            this.references   = XmlAdapter.For(parentObject).References;
+            this.references = XmlAdapter.For(parentObject).References;
 
             while (cursor.MoveNext())
                 items.Add(new XmlCollectionItem<T>(cursor.Save()));
@@ -104,12 +105,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
             cursor.MoveToEnd();
             cursor.Create(typeof(T));
 
-            var node  = cursor.Save();
+            var node = cursor.Save();
             var value = GetValue(node);
             var index = items.Count;
 
             CommitInsert(index, node, value, true);
-            return (T) value;
+            return (T)value;
         }
 
         public bool Add(T value)
@@ -198,21 +199,19 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private T GetValue(IXmlNode node)
         {
-            return (T) (accessor.GetValue(node, parentObject, references, true, true) ?? default(T));
+            return (T)(accessor.GetValue(node, parentObject, references, true, true) ?? default(T));
         }
 
         private void SetValue(IXmlCursor cursor, object oldValue, ref T value)
         {
             object obj = value;
             accessor.SetValue(cursor, parentObject, references, true, oldValue, ref obj);
-            value = (T) (obj ?? default(T));
+            value = (T)(obj ?? default(T));
         }
 
         private static Type GetTypeOrDefault(T value)
         {
-            return (null == value)
-                ? typeof(T)
-                : value.GetComponentType();
+            return (null == value) ? typeof(T) : value.GetComponentType();
         }
 
         public IEqualityComparer<T> Comparer

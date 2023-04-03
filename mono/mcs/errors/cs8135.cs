@@ -3,8 +3,8 @@
 
 class XX
 {
-	public static void Main ()
-	{
-		object m = (1, Main);
-	}
+    public static void Main()
+    {
+        object m = (1, Main);
+    }
 }

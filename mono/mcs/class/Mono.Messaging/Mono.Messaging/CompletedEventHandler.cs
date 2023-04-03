@@ -8,6 +8,6 @@ using System;
 
 namespace Mono.Messaging
 {
-	[Serializable]
-	public delegate void CompletedEventHandler(object sender, CompletedEventArgs e);
+    [Serializable]
+    public delegate void CompletedEventHandler(object sender, CompletedEventArgs e);
 }

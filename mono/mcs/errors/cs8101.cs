@@ -2,6 +2,4 @@
 // Line: 0
 // Compiler options: -pathmap:a=
 
-class X
-{
-}
+class X { }

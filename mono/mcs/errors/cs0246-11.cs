@@ -3,6 +3,6 @@
 
 public class Test
 {
-	[aa.bb] int dummy;
+    [aa.bb]
+    int dummy;
 }
-

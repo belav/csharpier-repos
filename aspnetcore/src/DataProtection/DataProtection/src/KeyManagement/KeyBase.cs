@@ -24,7 +24,8 @@ internal abstract class KeyBase : IKey
         DateTimeOffset activationDate,
         DateTimeOffset expirationDate,
         Lazy<IAuthenticatedEncryptorDescriptor> lazyDescriptor,
-        IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories)
+        IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories
+    )
     {
         KeyId = keyId;
         CreationDate = creationDate;
@@ -46,10 +47,7 @@ internal abstract class KeyBase : IKey
 
     public IAuthenticatedEncryptorDescriptor Descriptor
     {
-        get
-        {
-            return _lazyDescriptor.Value;
-        }
+        get { return _lazyDescriptor.Value; }
     }
 
     public IAuthenticatedEncryptor? CreateEncryptor()

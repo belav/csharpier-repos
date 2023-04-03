@@ -3,8 +3,8 @@
 
 class Test
 {
-	ref int Foo ()
-	{
-		return ref 2;
-	}
+    ref int Foo()
+    {
+        return ref 2;
+    }
 }

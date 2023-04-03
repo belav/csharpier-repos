@@ -4,6 +4,4 @@
 using System;
 using System.Collections;
 
-namespace Butt {
-}
-
+namespace Butt { }

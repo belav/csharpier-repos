@@ -15,13 +15,9 @@ namespace System.ServiceModel.Configuration
     public partial class MexNamedPipeBindingElement : MexBindingElement<CustomBinding>
     {
         public MexNamedPipeBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public MexNamedPipeBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
     }
 }

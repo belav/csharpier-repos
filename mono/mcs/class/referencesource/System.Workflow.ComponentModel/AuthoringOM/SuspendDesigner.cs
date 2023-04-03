@@ -13,9 +13,7 @@ namespace System.Workflow.ComponentModel.Design
 
     #region Class SuspendDesigner
     [ActivityDesignerTheme(typeof(SuspendDesignerTheme))]
-    internal sealed class SuspendDesigner : ActivityDesigner
-    {
-    }
+    internal sealed class SuspendDesigner : ActivityDesigner { }
     #endregion
 
     #region SuspendDesignerTheme

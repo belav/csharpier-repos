@@ -3,12 +3,10 @@
 
 class C
 {
-	static void Foo (params int[] i)
-	{
-	}
-	
-	public static void Main ()
-	{
-		Foo (new int[1], 1);
-	}
+    static void Foo(params int[] i) { }
+
+    public static void Main()
+    {
+        Foo(new int[1], 1);
+    }
 }

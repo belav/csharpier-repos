@@ -2,13 +2,15 @@
 // Line: 10
 // Compiler options: -unsafe
 
-unsafe class X {
+unsafe class X
+{
+    static int x = 0;
 
-	static int x = 0;
-	static void Main () {
-		fixed (int* p = &x) {
-		    p = (int*)22;
-		}
-	}		    
+    static void Main()
+    {
+        fixed (int* p = &x)
+        {
+            p = (int*)22;
+        }
+    }
 }
-	

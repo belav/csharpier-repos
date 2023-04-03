@@ -14,7 +14,8 @@ using System.Diagnostics;
 internal static class DataSetUtil
 {
     #region CheckArgument
-    internal static void CheckArgumentNull<T>(T argumentValue, string argumentName) where T : class
+    internal static void CheckArgumentNull<T>(T argumentValue, string argumentName)
+        where T : class
     {
         if (null == argumentValue)
         {
@@ -51,7 +52,10 @@ internal static class DataSetUtil
         return TraceExceptionAsReturnValue(new ArgumentNullException(message));
     }
 
-    internal static ArgumentOutOfRangeException ArgumentOutOfRange(string message, string parameterName)
+    internal static ArgumentOutOfRangeException ArgumentOutOfRange(
+        string message,
+        string parameterName
+    )
     {
         return TraceExceptionAsReturnValue(new ArgumentOutOfRangeException(parameterName, message));
     }
@@ -75,7 +79,13 @@ internal static class DataSetUtil
     #region new EnumerationValueNotValid
     static internal ArgumentOutOfRangeException InvalidEnumerationValue(Type type, int value)
     {
-        return ArgumentOutOfRange(Strings.DataSetLinq_InvalidEnumerationValue(type.Name, value.ToString(System.Globalization.CultureInfo.InvariantCulture)), type.Name);
+        return ArgumentOutOfRange(
+            Strings.DataSetLinq_InvalidEnumerationValue(
+                type.Name,
+                value.ToString(System.Globalization.CultureInfo.InvariantCulture)
+            ),
+            type.Name
+        );
     }
 
     static internal ArgumentOutOfRangeException InvalidDataRowState(DataRowState value)
@@ -124,11 +134,13 @@ internal static class DataSetUtil
         // a 'catchable' exception is defined by what it is not.
         Type type = e.GetType();
 
-        return ((type != StackOverflowType) &&
-                 (type != OutOfMemoryType) &&
-                 (type != ThreadAbortType) &&
-                 (type != NullReferenceType) &&
-                 (type != AccessViolationType) &&
-                 !SecurityType.IsAssignableFrom(type));
+        return (
+            (type != StackOverflowType)
+            && (type != OutOfMemoryType)
+            && (type != ThreadAbortType)
+            && (type != NullReferenceType)
+            && (type != AccessViolationType)
+            && !SecurityType.IsAssignableFrom(type)
+        );
     }
 }

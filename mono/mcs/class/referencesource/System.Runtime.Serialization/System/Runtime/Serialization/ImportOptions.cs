@@ -96,4 +96,3 @@ namespace System.Runtime.Serialization
         }
     }
 }
-

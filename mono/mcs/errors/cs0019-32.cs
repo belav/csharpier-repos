@@ -3,9 +3,9 @@
 
 class C
 {
-	public static void Main ()
-	{
-		bool b = true;
-		b = b && null;
-	}
+    public static void Main()
+    {
+        bool b = true;
+        b = b && null;
+    }
 }

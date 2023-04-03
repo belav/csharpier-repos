@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpMakeTypePartialCodeFixProvider>;
+        CSharpMakeTypePartialCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypePartial)]
     public sealed class MakeTypePartialTests
@@ -187,14 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CSharp.UnitTests.MakeTypePartial
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { document1, document2 }
-                },
-                FixedState =
-                {
-                    Sources = { document1, fixedDocument2 }
-                },
+                TestState = { Sources = { document1, document2 } },
+                FixedState = { Sources = { document1, fixedDocument2 } },
                 LanguageVersion = LanguageVersion.CSharp10
             }.RunAsync();
         }

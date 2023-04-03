@@ -54,7 +54,8 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
             IDiagnosticAnalyzerService analyzerService,
             IGlobalOptionService globalOptions,
             ITextBufferVisibilityTracker? visibilityTracker,
-            IAsynchronousOperationListener listener)
+            IAsynchronousOperationListener listener
+        )
             : base(threadingContext, globalOptions, visibilityTracker, listener)
         {
             _callback = callback;
@@ -71,20 +72,29 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
         /// </summary>
         protected sealed override bool CancelOnNewWork => true;
 
-        protected sealed override bool TagEquals(TTag tag1, TTag tag2)
-            => _callback.TagEquals(tag1, tag2);
+        protected sealed override bool TagEquals(TTag tag1, TTag tag2) =>
+            _callback.TagEquals(tag1, tag2);
 
-        protected sealed override ITaggerEventSource CreateEventSource(ITextView? textView, ITextBuffer subjectBuffer)
-            => CreateEventSourceWorker(subjectBuffer, _diagnosticService);
+        protected sealed override ITaggerEventSource CreateEventSource(
+            ITextView? textView,
+            ITextBuffer subjectBuffer
+        ) => CreateEventSourceWorker(subjectBuffer, _diagnosticService);
 
         protected sealed override Task ProduceTagsAsync(
-            TaggerContext<TTag> context, DocumentSnapshotSpan spanToTag, int? caretPosition, CancellationToken cancellationToken)
+            TaggerContext<TTag> context,
+            DocumentSnapshotSpan spanToTag,
+            int? caretPosition,
+            CancellationToken cancellationToken
+        )
         {
             return ProduceTagsAsync(context, spanToTag, cancellationToken);
         }
 
         private async Task ProduceTagsAsync(
-            TaggerContext<TTag> context, DocumentSnapshotSpan documentSpanToTag, CancellationToken cancellationToken)
+            TaggerContext<TTag> context,
+            DocumentSnapshotSpan documentSpanToTag,
+            CancellationToken cancellationToken
+        )
         {
             if (!_callback.IsEnabled)
                 return;
@@ -107,7 +117,10 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
             // is generating code that it doesn't want errors shown for.
             var buffer = snapshot.TextBuffer;
             var suppressedDiagnosticsSpans = (NormalizedSnapshotSpanCollection?)null;
-            buffer?.Properties.TryGetProperty(PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey, out suppressedDiagnosticsSpans);
+            buffer?.Properties.TryGetProperty(
+                PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
+                out suppressedDiagnosticsSpans
+            );
 
             var sourceText = snapshot.AsText();
 
@@ -119,7 +132,8 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
                 // correct project info to get reasonable results.
                 if (_diagnosticKind != DiagnosticKind.CompilerSyntax)
                 {
-                    var service = project.Solution.Services.GetRequiredService<IWorkspaceStatusService>();
+                    var service =
+                        project.Solution.Services.GetRequiredService<IWorkspaceStatusService>();
                     if (!await service.IsFullyLoadedAsync(cancellationToken).ConfigureAwait(false))
                         return;
 
@@ -130,23 +144,40 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
 
                 var requestedSpan = documentSpanToTag.SnapshotSpan;
 
-                var diagnostics = await _analyzerService.GetDiagnosticsForSpanAsync(
-                    document,
-                    requestedSpan.Span.ToTextSpan(),
-                    diagnosticKind: _diagnosticKind,
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
+                var diagnostics = await _analyzerService
+                    .GetDiagnosticsForSpanAsync(
+                        document,
+                        requestedSpan.Span.ToTextSpan(),
+                        diagnosticKind: _diagnosticKind,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 foreach (var diagnosticData in diagnostics)
                 {
                     if (_callback.IncludeDiagnostic(diagnosticData))
                     {
-                        var diagnosticSpans = _callback.GetLocationsToTag(diagnosticData)
-                            .Select(loc => loc.UnmappedFileSpan.GetClampedTextSpan(sourceText).ToSnapshotSpan(snapshot));
+                        var diagnosticSpans = _callback
+                            .GetLocationsToTag(diagnosticData)
+                            .Select(
+                                loc =>
+                                    loc.UnmappedFileSpan
+                                        .GetClampedTextSpan(sourceText)
+                                        .ToSnapshotSpan(snapshot)
+                            );
                         foreach (var diagnosticSpan in diagnosticSpans)
                         {
-                            if (diagnosticSpan.IntersectsWith(requestedSpan) && !IsSuppressed(suppressedDiagnosticsSpans, diagnosticSpan))
+                            if (
+                                diagnosticSpan.IntersectsWith(requestedSpan)
+                                && !IsSuppressed(suppressedDiagnosticsSpans, diagnosticSpan)
+                            )
                             {
-                                var tagSpan = _callback.CreateTagSpan(workspace, isLiveUpdate: true, diagnosticSpan, diagnosticData);
+                                var tagSpan = _callback.CreateTagSpan(
+                                    workspace,
+                                    isLiveUpdate: true,
+                                    diagnosticSpan,
+                                    diagnosticData
+                                );
                                 if (tagSpan != null)
                                     context.AddTag(tagSpan);
                             }
@@ -174,7 +205,12 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
                 // compilations for them.
                 foreach (var reference in project.ProjectReferences)
                 {
-                    if (!HasSuccessfullyLoaded(project.Solution.GetProject(reference.ProjectId), seenProjects))
+                    if (
+                        !HasSuccessfullyLoaded(
+                            project.Solution.GetProject(reference.ProjectId),
+                            seenProjects
+                        )
+                    )
                         return false;
                 }
             }
@@ -182,7 +218,9 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
             return true;
         }
 
-        private static bool IsSuppressed(NormalizedSnapshotSpanCollection? suppressedSpans, SnapshotSpan span)
-            => suppressedSpans != null && suppressedSpans.IntersectsWith(span);
+        private static bool IsSuppressed(
+            NormalizedSnapshotSpanCollection? suppressedSpans,
+            SnapshotSpan span
+        ) => suppressedSpans != null && suppressedSpans.IntersectsWith(span);
     }
 }

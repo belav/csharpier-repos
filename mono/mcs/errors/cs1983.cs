@@ -3,7 +3,5 @@
 
 class C
 {
-	public async object Test ()
-	{
-	}
+    public async object Test() { }
 }

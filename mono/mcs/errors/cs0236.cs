@@ -3,15 +3,12 @@
 
 class X
 {
-	int Foo {
-		get {
-			return 9;
-		}
-	}
+    int Foo
+    {
+        get { return 9; }
+    }
 
-	long Bar = Foo;
+    long Bar = Foo;
 
-	static void Main () {
-	}
+    static void Main() { }
 }
-

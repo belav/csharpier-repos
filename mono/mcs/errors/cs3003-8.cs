@@ -4,9 +4,9 @@
 
 using System;
 
-[assembly: CLSCompliant (true)]
+[assembly: CLSCompliant(true)]
 
 public unsafe struct S
 {
-    public fixed bool test2 [4];
+    public fixed bool test2[4];
 }

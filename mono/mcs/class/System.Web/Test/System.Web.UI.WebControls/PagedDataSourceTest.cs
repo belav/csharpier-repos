@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,459 +35,471 @@ using System.Diagnostics;
 using System.Web.UI.WebControls;
 using System.ComponentModel;
 
-namespace MonoTests.System.Web.UI.WebControls {
+namespace MonoTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    public class PagedDataSourceTest
+    {
+        PagedDataSource ds;
 
-	[TestFixture]
-	public class PagedDataSourceTest {
+        [SetUp]
+        public void SetUp()
+        {
+            ds = new PagedDataSource();
+        }
 
-		PagedDataSource ds;
+        public void SetUpTest()
+        {
+            Assert.AreEqual(10, ds.PageSize);
+            Assert.IsFalse(ds.AllowPaging);
+            Assert.AreEqual(0, ds.CurrentPageIndex);
+            Assert.IsFalse(ds.AllowCustomPaging);
+            Assert.AreEqual(0, ds.VirtualCount);
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			ds = new PagedDataSource ();
-		}
+        public void Reset()
+        {
+            ds.DataSource = null;
+            ds.PageSize = 10;
+            ds.AllowPaging = false;
+            ds.CurrentPageIndex = 0;
+            ds.AllowCustomPaging = false;
+            ds.VirtualCount = 0;
+        }
 
-		public void SetUpTest ()
-		{
-			Assert.AreEqual (10, ds.PageSize);
-			Assert.IsFalse (ds.AllowPaging);
-			Assert.AreEqual (0, ds.CurrentPageIndex);
-			Assert.IsFalse (ds.AllowCustomPaging);
-			Assert.AreEqual (0, ds.VirtualCount);
-		}
+        void SetSource(IEnumerable source)
+        {
+            Reset();
+            ds.DataSource = source;
+        }
 
-		public void Reset ()
-		{
-			ds.DataSource = null;
-			ds.PageSize = 10;
-			ds.AllowPaging = false;
-			ds.CurrentPageIndex = 0;
-			ds.AllowCustomPaging = false;
-			ds.VirtualCount = 0;
-		}
+        [Test]
+        public void GetItemProperties()
+        {
+            PagedDataSource ds = new PagedDataSource();
+            DataTable table = new DataTable();
 
-		void SetSource (IEnumerable source)
-		{
-			Reset ();
-			ds.DataSource = source;
-		}
+            table.Columns.Add(new DataColumn("one", typeof(string)));
+            table.Columns.Add(new DataColumn("two", typeof(string)));
+            table.Columns.Add(new DataColumn("three", typeof(string)));
 
-		[Test]
-		public void GetItemProperties ()
-		{
-			PagedDataSource ds = new PagedDataSource ();
-			DataTable table = new DataTable ();
+            ds.DataSource = new DataView(table);
+            PropertyDescriptorCollection props = ds.GetItemProperties(null);
 
-			table.Columns.Add (new DataColumn ("one", typeof (string)));
-			table.Columns.Add (new DataColumn ("two", typeof (string)));
-			table.Columns.Add (new DataColumn ("three", typeof (string)));
+            Assert.AreEqual(props.Count, 3, "A1");
+            Assert.AreEqual(props[0].Name, "one", "A2");
+            Assert.AreEqual(props[1].Name, "two", "A3");
+            Assert.AreEqual(props[2].Name, "three", "A4");
 
-			ds.DataSource = new DataView (table);
-			PropertyDescriptorCollection props = ds.GetItemProperties (null);
+            ds.DataSource = new ArrayList();
+            props = ds.GetItemProperties(null);
+            Assert.AreEqual(props, null, "A5");
+        }
 
-			Assert.AreEqual (props.Count, 3, "A1");
-			Assert.AreEqual (props [0].Name, "one", "A2");
-			Assert.AreEqual (props [1].Name, "two", "A3");
-			Assert.AreEqual (props [2].Name, "three", "A4");
+        [Test]
+        public void GetEnumeratorTest()
+        {
+            // Found out that there are 3 possibilities
+            // for GetEnumerator () from this test.
+            // One for ICollection, one for IList and otherwise, it uses the DataSource directly
 
-			ds.DataSource = new ArrayList ();
-			props = ds.GetItemProperties (null);
-			Assert.AreEqual (props, null, "A5");
-		}
+            // Hashtable implements ICollection
+            SetSource(new Hashtable());
+            //Console.WriteLine (ds.GetEnumerator ().GetType ().Name);
 
-		[Test]
-		public void GetEnumeratorTest ()
-		{
-			// Found out that there are 3 possibilities
-			// for GetEnumerator () from this test.
-			// One for ICollection, one for IList and otherwise, it uses the DataSource directly
+            // IList implementations
+            SetSource(new int[] { 1, 2, 3, 4, 5 });
+            //Console.WriteLine (ds.GetEnumerator ().GetType ().Name);
 
-			// Hashtable implements ICollection
-			SetSource (new Hashtable ());
-			//Console.WriteLine (ds.GetEnumerator ().GetType ().Name);
+            SetSource(new ArrayList().ToArray());
+            //Console.WriteLine (ds.GetEnumerator ().GetType ().Name);
 
-			// IList implementations
-			SetSource (new int [] { 1, 2, 3, 4, 5 });
-			//Console.WriteLine (ds.GetEnumerator ().GetType ().Name);
+            // Default case
+            SetSource(new MyEnumerable());
+        }
 
-			SetSource (new ArrayList ().ToArray ());
-			//Console.WriteLine (ds.GetEnumerator ().GetType ().Name);
+        public class MyEnumerable : IEnumerable, IEnumerator
+        {
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return this;
+            }
 
-			// Default case
-			SetSource (new MyEnumerable ());
-		}
+            object IEnumerator.Current
+            {
+                get { return null; }
+            }
 
-		public class MyEnumerable : IEnumerable, IEnumerator
-		{
-			IEnumerator IEnumerable.GetEnumerator () { return this; }
-			object IEnumerator.Current { get { return null; } }
-			bool IEnumerator.MoveNext () { return false; }
-			void IEnumerator.Reset () {}
-		}
+            bool IEnumerator.MoveNext()
+            {
+                return false;
+            }
 
-		[Test]
-		public void FirstIndexInPageTest ()
-		{
-			SetSource (null);
-			Assert.AreEqual (0, ds.FirstIndexInPage);
-			
-			SetSource (new int [] { 1, 2, 3, 4, 5 });
-			ds.AllowPaging = false;
-			Assert.AreEqual (0, ds.FirstIndexInPage);
-			
-			ds.AllowCustomPaging = false;
-			Assert.AreEqual (0, ds.FirstIndexInPage);
-			
-			ds.AllowPaging = true;
-			ds.CurrentPageIndex = 10;
-			ds.PageSize = 5;
-			Assert.AreEqual (ds.CurrentPageIndex * ds.PageSize, ds.FirstIndexInPage);
-		}
+            void IEnumerator.Reset() { }
+        }
 
-		[Test]
-		public void PageCountTest ()
-		{
-			SetSource (null);
-			Assert.AreEqual (0, ds.PageCount, "A1");
+        [Test]
+        public void FirstIndexInPageTest()
+        {
+            SetSource(null);
+            Assert.AreEqual(0, ds.FirstIndexInPage);
 
-			SetSource (new int [] {});
-			ds.AllowPaging = false;
-			Assert.AreEqual (1, ds.PageCount, "A2");
+            SetSource(new int[] { 1, 2, 3, 4, 5 });
+            ds.AllowPaging = false;
+            Assert.AreEqual(0, ds.FirstIndexInPage);
 
-			ds.PageSize = 0;
-			Assert.AreEqual (1, ds.PageCount, "A3");
+            ds.AllowCustomPaging = false;
+            Assert.AreEqual(0, ds.FirstIndexInPage);
 
-			SetSource (new int [] { 1, 2, 3, 4, 5 });
-			ds.AllowPaging = true;
-			ds.PageSize = 10;
-			Assert.AreEqual (1, ds.PageCount, "A4");
+            ds.AllowPaging = true;
+            ds.CurrentPageIndex = 10;
+            ds.PageSize = 5;
+            Assert.AreEqual(ds.CurrentPageIndex * ds.PageSize, ds.FirstIndexInPage);
+        }
 
-			SetSource (new int [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 });
-			ds.AllowPaging = true;
-			ds.PageSize = 10;
-			Assert.AreEqual (2, ds.PageCount, "A5");
+        [Test]
+        public void PageCountTest()
+        {
+            SetSource(null);
+            Assert.AreEqual(0, ds.PageCount, "A1");
 
-			SetSource (new int [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 });
-			ds.PageSize = 5;
-			ds.AllowPaging = true;
-			Assert.AreEqual (3, ds.PageCount, "A6");
+            SetSource(new int[] { });
+            ds.AllowPaging = false;
+            Assert.AreEqual(1, ds.PageCount, "A2");
 
-			SetSource (new int [] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 });
-			ds.AllowPaging = true;
-			ds.PageSize = 3;
-			Assert.AreEqual (4, ds.PageCount, "A7");
-		}
+            ds.PageSize = 0;
+            Assert.AreEqual(1, ds.PageCount, "A3");
 
-		[Test]
-		public void CountTest ()
-		{
-			SetSource (null);
-			Assert.AreEqual (0, ds.Count);
+            SetSource(new int[] { 1, 2, 3, 4, 5 });
+            ds.AllowPaging = true;
+            ds.PageSize = 10;
+            Assert.AreEqual(1, ds.PageCount, "A4");
 
-			SetSource (new int [] { 1, 2, 3, 4, 5 });
-			ds.AllowPaging = true;
+            SetSource(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 });
+            ds.AllowPaging = true;
+            ds.PageSize = 10;
+            Assert.AreEqual(2, ds.PageCount, "A5");
 
-			ds.AllowCustomPaging = true;
-			Assert.AreEqual (ds.PageSize, ds.Count);
+            SetSource(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 });
+            ds.PageSize = 5;
+            ds.AllowPaging = true;
+            Assert.AreEqual(3, ds.PageCount, "A6");
 
-			// ds.AllowCustomPaging = false;
-			// ds.CurrentPageIndex = ds.PageCount;
+            SetSource(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 });
+            ds.AllowPaging = true;
+            ds.PageSize = 3;
+            Assert.AreEqual(4, ds.PageCount, "A7");
+        }
 
-			// Assert.AreEqual (ds.FirstIndexInPage - ds.DataSourceCount, ds.Count);
+        [Test]
+        public void CountTest()
+        {
+            SetSource(null);
+            Assert.AreEqual(0, ds.Count);
 
-			// ds.AllowPaging = false;
-			// Assert.AreEqual (ds.DataSourceCount, ds.Count);
-		}
+            SetSource(new int[] { 1, 2, 3, 4, 5 });
+            ds.AllowPaging = true;
 
-		[Test]
-		public void IsFirstPageTest ()
-		{
-			ds.AllowPaging = false;
-			ds.CurrentPageIndex = 100;
-			Assert.IsTrue (ds.IsFirstPage);
-			
-			ds.AllowPaging = true;
-			ds.CurrentPageIndex = 0;
-			Assert.IsTrue (ds.IsFirstPage);
+            ds.AllowCustomPaging = true;
+            Assert.AreEqual(ds.PageSize, ds.Count);
 
-			ds.CurrentPageIndex = 10;
-			Assert.IsFalse (ds.IsFirstPage);
-		}
-				
-		[Test]
-		public void IsLastPageTest ()
-		{
-			Reset ();
-			ds.AllowPaging = false;
-			Assert.IsTrue (ds.IsLastPage);
+            // ds.AllowCustomPaging = false;
+            // ds.CurrentPageIndex = ds.PageCount;
 
-			// When PageCount is 0, IsLastPage is false
-			ds.AllowPaging = true;
-			Assert.AreEqual (0, ds.PageCount);
-			Assert.IsFalse (ds.IsLastPage);
+            // Assert.AreEqual (ds.FirstIndexInPage - ds.DataSourceCount, ds.Count);
 
-			SetSource (new int [] { 1, 2, 3 });
-			Assert.IsTrue (ds.IsLastPage);
-			Assert.IsTrue (ds.IsLastPage == (ds.CurrentPageIndex == ds.PageCount - 1));
-			ds.CurrentPageIndex = 3;
-			// Assert.IsTrue (ds.IsLastPage);
-			
-		}
+            // ds.AllowPaging = false;
+            // Assert.AreEqual (ds.DataSourceCount, ds.Count);
+        }
 
-		// Need mucho grande more here
-		public void EnumeratorTester (IEnumerator e, string name)
-		{			
-			int index = 20;
+        [Test]
+        public void IsFirstPageTest()
+        {
+            ds.AllowPaging = false;
+            ds.CurrentPageIndex = 100;
+            Assert.IsTrue(ds.IsFirstPage);
 
-			while (e.MoveNext ()) {
-				Assert.AreEqual (e.Current, index, name + "-A1-" + index);
-				index++;
-			}
-			
-			Assert.AreEqual (30, index, name + "-A2");
-		}
+            ds.AllowPaging = true;
+            ds.CurrentPageIndex = 0;
+            Assert.IsTrue(ds.IsFirstPage);
 
-		public void EnumeratorTester_NoPaging (IEnumerator e, string name)
-		{			
-			int index = 0;
+            ds.CurrentPageIndex = 10;
+            Assert.IsFalse(ds.IsFirstPage);
+        }
 
-			while (e.MoveNext ()) {
-				Assert.AreEqual (e.Current, index, name + "-A1-" + index);
-				index++;
-			}
-			
-			Assert.AreEqual (50, index, name + "-A2");
-		}
+        [Test]
+        public void IsLastPageTest()
+        {
+            Reset();
+            ds.AllowPaging = false;
+            Assert.IsTrue(ds.IsLastPage);
 
-		[Test]
-		public void TestEnumerators ()
-		{
-			PagedDataSource ds = new PagedDataSource ();
-			ds.AllowPaging = true;
-			ds.PageSize = 10;
-			ds.CurrentPageIndex = 2;
+            // When PageCount is 0, IsLastPage is false
+            ds.AllowPaging = true;
+            Assert.AreEqual(0, ds.PageCount);
+            Assert.IsFalse(ds.IsLastPage);
 
+            SetSource(new int[] { 1, 2, 3 });
+            Assert.IsTrue(ds.IsLastPage);
+            Assert.IsTrue(ds.IsLastPage == (ds.CurrentPageIndex == ds.PageCount - 1));
+            ds.CurrentPageIndex = 3;
+            // Assert.IsTrue (ds.IsLastPage);
+        }
 
-			//
-			// Collection Enumerator
-			//
-			Queue q = new Queue ();
-			for (int i = 0; i < 50; i++)
-				q.Enqueue (i);
-			ds.DataSource = q;
-			EnumeratorTester (ds.GetEnumerator (), "collection");
-			
-			//
-			// List Enumerator
-			//
-			ArrayList l = new ArrayList ();
-			for (int i = 0; i < 50; i++)
-				l.Add (i);
-			EnumeratorTester (ds.GetEnumerator (), "list");
-		}
+        // Need mucho grande more here
+        public void EnumeratorTester(IEnumerator e, string name)
+        {
+            int index = 20;
 
-		[Test]
-		public void TestEnumerators_NoPaging ()
-		{
-			PagedDataSource ds = new PagedDataSource ();
-			ds.AllowPaging = false;
+            while (e.MoveNext())
+            {
+                Assert.AreEqual(e.Current, index, name + "-A1-" + index);
+                index++;
+            }
 
-			//
-			// Collection Enumerator
-			//
-			Queue q = new Queue ();
-			for (int i = 0; i < 50; i++)
-				q.Enqueue (i);
-			ds.DataSource = q;
-			EnumeratorTester_NoPaging (ds.GetEnumerator (), "collection");
-			
-			//
-			// List Enumerator
-			//
-			ArrayList l = new ArrayList ();
-			for (int i = 0; i < 50; i++)
-				l.Add (i);
-			EnumeratorTester_NoPaging (ds.GetEnumerator (), "list");
-		}
+            Assert.AreEqual(30, index, name + "-A2");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void NullSource ()
-		{
-			PagedDataSource ds = new PagedDataSource ();
-			ds.DataSource = null;
-			IEnumerator data = ds.GetEnumerator ();
-		}
+        public void EnumeratorTester_NoPaging(IEnumerator e, string name)
+        {
+            int index = 0;
 
-		static void FillTable (DataTable table, int nelems)
-		{
-			table.Columns.Add (new DataColumn ("one", typeof (string)));
-			table.Columns.Add (new DataColumn ("two", typeof (string)));
+            while (e.MoveNext())
+            {
+                Assert.AreEqual(e.Current, index, name + "-A1-" + index);
+                index++;
+            }
 
-			for (int i = 0; i < nelems; i++) {
-				DataRow row = table.NewRow ();
-				row ["one"] = i % 2;
-				row ["two"] = i / 2;
-				table.Rows.Add (row);
-			}
-		}
+            Assert.AreEqual(50, index, name + "-A2");
+        }
 
-		[Test]
-		public void Paging1 ()
-		{
-			PagedDataSource paged = new PagedDataSource ();
-			paged.AllowPaging = true;
-			paged.PageSize = 5;
-			DataTable table = new DataTable ();
-			FillTable (table, 100);
-			paged.DataSource = new DataView (table);
+        [Test]
+        public void TestEnumerators()
+        {
+            PagedDataSource ds = new PagedDataSource();
+            ds.AllowPaging = true;
+            ds.PageSize = 10;
+            ds.CurrentPageIndex = 2;
 
-			Assert.IsTrue (paged.IsFirstPage, "first-1");
-			Assert.IsFalse (paged.IsLastPage, "last-1");
+            //
+            // Collection Enumerator
+            //
+            Queue q = new Queue();
+            for (int i = 0; i < 50; i++)
+                q.Enqueue(i);
+            ds.DataSource = q;
+            EnumeratorTester(ds.GetEnumerator(), "collection");
 
-			paged.CurrentPageIndex = 100; // no problem setting this.
-			Assert.AreEqual (100, paged.CurrentPageIndex, "current-1");
-			Assert.IsFalse (paged.IsFirstPage, "first-2");
-			Assert.IsFalse (paged.IsLastPage, "last-2");
-			IEnumerator rator = paged.GetEnumerator ();
-			Assert.IsFalse (rator.MoveNext (), "beyondtheend-1");
-		}
+            //
+            // List Enumerator
+            //
+            ArrayList l = new ArrayList();
+            for (int i = 0; i < 50; i++)
+                l.Add(i);
+            EnumeratorTester(ds.GetEnumerator(), "list");
+        }
 
-		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
-		public void Paging2 ()
-		{
-			PagedDataSource paged = new PagedDataSource ();
-			paged.AllowPaging = true;
-			paged.PageSize = 5;
-			DataTable table = new DataTable ();
-			FillTable (table, 100);
-			paged.DataSource = new DataView (table);
+        [Test]
+        public void TestEnumerators_NoPaging()
+        {
+            PagedDataSource ds = new PagedDataSource();
+            ds.AllowPaging = false;
 
-			paged.CurrentPageIndex = -1;
-			Assert.AreEqual (-1, paged.CurrentPageIndex, "current");
-			Assert.IsFalse (paged.IsFirstPage, "first");
-			Assert.IsFalse (paged.IsLastPage, "last");
-			IEnumerator rator = paged.GetEnumerator ();
-			Assert.AreEqual (-1, paged.CurrentPageIndex, "current-2");
-			Assert.IsTrue (rator.MoveNext (), "beyondtheend");
-			DataRowView drv = (DataRowView) rator.Current; // Throws (out of range)
-		}
+            //
+            // Collection Enumerator
+            //
+            Queue q = new Queue();
+            for (int i = 0; i < 50; i++)
+                q.Enqueue(i);
+            ds.DataSource = q;
+            EnumeratorTester_NoPaging(ds.GetEnumerator(), "collection");
 
-		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
-		public void Paging3 ()
-		{
-			PagedDataSource paged = new PagedDataSource ();
-			paged.AllowPaging = true;
-			paged.PageSize = 5;
-			DataTable table = new DataTable ();
-			FillTable (table, 100);
-			paged.DataSource = new DataView (table);
+            //
+            // List Enumerator
+            //
+            ArrayList l = new ArrayList();
+            for (int i = 0; i < 50; i++)
+                l.Add(i);
+            EnumeratorTester_NoPaging(ds.GetEnumerator(), "list");
+        }
 
-			paged.CurrentPageIndex = -7;
-			Assert.AreEqual (-7, paged.CurrentPageIndex, "current");
-			Assert.IsFalse (paged.IsFirstPage, "first");
-			Assert.IsFalse (paged.IsLastPage, "last");
-			IEnumerator rator = paged.GetEnumerator ();
-			Assert.AreEqual (-7, paged.CurrentPageIndex, "current-2");
-			Assert.IsTrue (rator.MoveNext (), "beyondtheend");
-			DataRowView drv = (DataRowView) rator.Current; // Throws (out of range)
-		}
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void NullSource()
+        {
+            PagedDataSource ds = new PagedDataSource();
+            ds.DataSource = null;
+            IEnumerator data = ds.GetEnumerator();
+        }
 
-		[Test]
-		public void Paging4 ()
-		{
-			PagedDataSource paged = new PagedDataSource ();
-			paged.AllowPaging = true;
-			paged.PageSize = 5;
-			DataTable table = new DataTable ();
-			FillTable (table, 100);
-			paged.DataSource = new DataView (table);
+        static void FillTable(DataTable table, int nelems)
+        {
+            table.Columns.Add(new DataColumn("one", typeof(string)));
+            table.Columns.Add(new DataColumn("two", typeof(string)));
 
-			paged.CurrentPageIndex = 1;
-			IEnumerator rator = paged.GetEnumerator ();
-			Assert.IsTrue (rator.MoveNext (), "beginning-1");
-			DataRowView drv = (DataRowView) rator.Current;
-			int one = Int32.Parse ((string) drv ["one"]);
-			Assert.IsTrue (one == 0 || one == 1, "one-1");
-			int res =  one + 2 * Int32.Parse ((string) drv ["two"]);
-			Assert.AreEqual (5, res, "five");
-		}
+            for (int i = 0; i < nelems; i++)
+            {
+                DataRow row = table.NewRow();
+                row["one"] = i % 2;
+                row["two"] = i / 2;
+                table.Rows.Add(row);
+            }
+        }
 
-		[Test]
-		public void Copy1 ()
-		{
-			PagedDataSource paged = new PagedDataSource ();
-			DataTable table = new DataTable ();
-			FillTable (table, 100);
-			paged.DataSource = new DataView (table);
-			object [] data = new object [100];
-			paged.CopyTo (data, 0);
-			Type t = typeof (DataRowView);
-			Assert.AreEqual (t, data [0].GetType ());
-		}
+        [Test]
+        public void Paging1()
+        {
+            PagedDataSource paged = new PagedDataSource();
+            paged.AllowPaging = true;
+            paged.PageSize = 5;
+            DataTable table = new DataTable();
+            FillTable(table, 100);
+            paged.DataSource = new DataView(table);
 
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void Copy2 ()
-		{
-			PagedDataSource paged = new PagedDataSource ();
-			paged.DataSource = null;
-			object [] data = new object [100];
-			paged.CopyTo (data, 0);
-		}
+            Assert.IsTrue(paged.IsFirstPage, "first-1");
+            Assert.IsFalse(paged.IsLastPage, "last-1");
 
-		[Test]
-		public void Copy3 ()
-		{
-			PagedDataSource paged = new PagedDataSource ();
-			paged.DataSource = new object [] {"1", "2"};
-			object [] data = new object [100];
-			paged.CopyTo (data, 0);
-		}
+            paged.CurrentPageIndex = 100; // no problem setting this.
+            Assert.AreEqual(100, paged.CurrentPageIndex, "current-1");
+            Assert.IsFalse(paged.IsFirstPage, "first-2");
+            Assert.IsFalse(paged.IsLastPage, "last-2");
+            IEnumerator rator = paged.GetEnumerator();
+            Assert.IsFalse(rator.MoveNext(), "beyondtheend-1");
+        }
 
-		[Test]
-		public void VirtualPager1 ()
-		{
-			PagedDataSource paged = new PagedDataSource ();
-			paged.AllowPaging = true;
-			paged.PageSize = 20;
-			paged.VirtualCount = 100;
-			DataTable table = new DataTable ();
-			FillTable (table, 100);
-			paged.DataSource = new DataView (table);
+        [Test]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void Paging2()
+        {
+            PagedDataSource paged = new PagedDataSource();
+            paged.AllowPaging = true;
+            paged.PageSize = 5;
+            DataTable table = new DataTable();
+            FillTable(table, 100);
+            paged.DataSource = new DataView(table);
 
-			int count = 0;
-			IEnumerator rator = paged.GetEnumerator ();
-			while (rator.MoveNext ())
-				count++;
-			Assert.AreEqual (20, count, "count");
-			Assert.AreEqual (true, paged.IsFirstPage, "first");
-			Assert.AreEqual (false, paged.IsLastPage, "last");
-		}
+            paged.CurrentPageIndex = -1;
+            Assert.AreEqual(-1, paged.CurrentPageIndex, "current");
+            Assert.IsFalse(paged.IsFirstPage, "first");
+            Assert.IsFalse(paged.IsLastPage, "last");
+            IEnumerator rator = paged.GetEnumerator();
+            Assert.AreEqual(-1, paged.CurrentPageIndex, "current-2");
+            Assert.IsTrue(rator.MoveNext(), "beyondtheend");
+            DataRowView drv = (DataRowView)rator.Current; // Throws (out of range)
+        }
 
-		[Test]
-		public void VirtualPager2 ()
-		{
-			PagedDataSource paged = new PagedDataSource ();
-			paged.AllowPaging = true;
-			paged.PageSize = 100;
-			paged.VirtualCount = 50;
-			paged.AllowCustomPaging = true;
-			DataTable table = new DataTable ();
-			FillTable (table, 100);
-			paged.DataSource = new DataView (table);
+        [Test]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void Paging3()
+        {
+            PagedDataSource paged = new PagedDataSource();
+            paged.AllowPaging = true;
+            paged.PageSize = 5;
+            DataTable table = new DataTable();
+            FillTable(table, 100);
+            paged.DataSource = new DataView(table);
 
-			int count = 0;
-			IEnumerator rator = paged.GetEnumerator ();
-			while (rator.MoveNext ())
-				count++;
-			Assert.AreEqual (100, count, "count");
-			Assert.AreEqual (true, paged.IsFirstPage, "first");
-			Assert.AreEqual (true, paged.IsLastPage, "last");
-		}
-	}
+            paged.CurrentPageIndex = -7;
+            Assert.AreEqual(-7, paged.CurrentPageIndex, "current");
+            Assert.IsFalse(paged.IsFirstPage, "first");
+            Assert.IsFalse(paged.IsLastPage, "last");
+            IEnumerator rator = paged.GetEnumerator();
+            Assert.AreEqual(-7, paged.CurrentPageIndex, "current-2");
+            Assert.IsTrue(rator.MoveNext(), "beyondtheend");
+            DataRowView drv = (DataRowView)rator.Current; // Throws (out of range)
+        }
+
+        [Test]
+        public void Paging4()
+        {
+            PagedDataSource paged = new PagedDataSource();
+            paged.AllowPaging = true;
+            paged.PageSize = 5;
+            DataTable table = new DataTable();
+            FillTable(table, 100);
+            paged.DataSource = new DataView(table);
+
+            paged.CurrentPageIndex = 1;
+            IEnumerator rator = paged.GetEnumerator();
+            Assert.IsTrue(rator.MoveNext(), "beginning-1");
+            DataRowView drv = (DataRowView)rator.Current;
+            int one = Int32.Parse((string)drv["one"]);
+            Assert.IsTrue(one == 0 || one == 1, "one-1");
+            int res = one + 2 * Int32.Parse((string)drv["two"]);
+            Assert.AreEqual(5, res, "five");
+        }
+
+        [Test]
+        public void Copy1()
+        {
+            PagedDataSource paged = new PagedDataSource();
+            DataTable table = new DataTable();
+            FillTable(table, 100);
+            paged.DataSource = new DataView(table);
+            object[] data = new object[100];
+            paged.CopyTo(data, 0);
+            Type t = typeof(DataRowView);
+            Assert.AreEqual(t, data[0].GetType());
+        }
+
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void Copy2()
+        {
+            PagedDataSource paged = new PagedDataSource();
+            paged.DataSource = null;
+            object[] data = new object[100];
+            paged.CopyTo(data, 0);
+        }
+
+        [Test]
+        public void Copy3()
+        {
+            PagedDataSource paged = new PagedDataSource();
+            paged.DataSource = new object[] { "1", "2" };
+            object[] data = new object[100];
+            paged.CopyTo(data, 0);
+        }
+
+        [Test]
+        public void VirtualPager1()
+        {
+            PagedDataSource paged = new PagedDataSource();
+            paged.AllowPaging = true;
+            paged.PageSize = 20;
+            paged.VirtualCount = 100;
+            DataTable table = new DataTable();
+            FillTable(table, 100);
+            paged.DataSource = new DataView(table);
+
+            int count = 0;
+            IEnumerator rator = paged.GetEnumerator();
+            while (rator.MoveNext())
+                count++;
+            Assert.AreEqual(20, count, "count");
+            Assert.AreEqual(true, paged.IsFirstPage, "first");
+            Assert.AreEqual(false, paged.IsLastPage, "last");
+        }
+
+        [Test]
+        public void VirtualPager2()
+        {
+            PagedDataSource paged = new PagedDataSource();
+            paged.AllowPaging = true;
+            paged.PageSize = 100;
+            paged.VirtualCount = 50;
+            paged.AllowCustomPaging = true;
+            DataTable table = new DataTable();
+            FillTable(table, 100);
+            paged.DataSource = new DataView(table);
+
+            int count = 0;
+            IEnumerator rator = paged.GetEnumerator();
+            while (rator.MoveNext())
+                count++;
+            Assert.AreEqual(100, count, "count");
+            Assert.AreEqual(true, paged.IsFirstPage, "first");
+            Assert.AreEqual(true, paged.IsLastPage, "last");
+        }
+    }
 }
-

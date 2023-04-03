@@ -27,10 +27,13 @@ namespace TestSuite
                 using (HttpClient httpClient = CreateHttpClient())
                 {
                     var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url);
-                    httpRequestMessage.Properties["WebAssemblyEnableStreamingResponse"] = streamingEnabled;
+                    httpRequestMessage.Properties["WebAssemblyEnableStreamingResponse"] =
+                        streamingEnabled;
                     using (var rspMsg = await httpClient.SendAsync(httpRequestMessage, cts.Token))
                     {
-                        requestTcs.SetResult((int)rspMsg.Content?.ReadAsStreamAsync().Result.Length);
+                        requestTcs.SetResult(
+                            (int)rspMsg.Content?.ReadAsStreamAsync().Result.Length
+                        );
                     }
                 }
             }
@@ -52,7 +55,8 @@ namespace TestSuite
                 using (HttpClient httpClient = CreateHttpClient())
                 {
                     var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url);
-                    httpRequestMessage.Properties["WebAssemblyEnableStreamingResponse"] = streamingEnabled;
+                    httpRequestMessage.Properties["WebAssemblyEnableStreamingResponse"] =
+                        streamingEnabled;
                     Console.WriteLine($"url: {url}");
 
                     using (var rspMsg = await httpClient.SendAsync(httpRequestMessage, cts.Token))
@@ -74,7 +78,10 @@ namespace TestSuite
 
             using (HttpClient client = CreateHttpClient())
             {
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "base/publish/NowIsTheTime.txt");
+                var httpRequestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "base/publish/NowIsTheTime.txt"
+                );
                 httpRequestMessage.Properties["WebAssemblyEnableStreamingResponse"] = true;
 
                 using (var response = await client.SendAsync(httpRequestMessage))

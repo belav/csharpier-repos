@@ -3,10 +3,11 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (true)]
 
-[CLSCompliant (true)]
-public interface I {
+[assembly: CLSCompliant(true)]
+
+[CLSCompliant(true)]
+public interface I
+{
     uint Foo { set; }
 }
-

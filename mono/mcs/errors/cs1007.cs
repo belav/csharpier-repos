@@ -3,12 +3,9 @@
 
 public class C
 {
-	public int Prop {
-		get {
-			return 0;
-		}
-		get {
-			return 0;
-		}
-	}
+    public int Prop
+    {
+        get { return 0; }
+        get { return 0; }
+    }
 }

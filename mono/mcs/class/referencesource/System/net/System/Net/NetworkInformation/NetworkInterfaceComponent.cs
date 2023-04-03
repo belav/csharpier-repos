@@ -1,9 +1,7 @@
-
 using System;
 
 namespace System.Net.NetworkInformation
 {
-    
     /// Specified the list of Networking components that are supported on a Network Interface
     public enum NetworkInterfaceComponent
     {
@@ -13,6 +11,4 @@ namespace System.Net.NetworkInformation
         /// Internet Protocol version 6 is supported.
         IPv6
     }
-  
 }
-

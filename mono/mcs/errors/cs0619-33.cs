@@ -4,10 +4,11 @@
 
 using System;
 
-class MainClass {
-    public static void Main ()
+class MainClass
+{
+    public static void Main()
     {
-        Error e = new Error ();
-        e.Report ("text");
+        Error e = new Error();
+        e.Report("text");
     }
 }

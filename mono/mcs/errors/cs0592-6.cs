@@ -3,9 +3,8 @@
 
 using System;
 
-[TestAttribute ()]
-delegate void D ();
+[TestAttribute()]
+delegate void D();
 
 [AttributeUsage(AttributeTargets.Constructor)]
-public class TestAttribute: Attribute {
-}
+public class TestAttribute : Attribute { }

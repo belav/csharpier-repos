@@ -16,18 +16,17 @@ internal sealed class LegacyWorkspaceOptionService : ILegacyWorkspaceOptionServi
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public LegacyWorkspaceOptionService(IGlobalOptionService globalOptionService)
-        => GlobalOptions = globalOptionService;
+    public LegacyWorkspaceOptionService(IGlobalOptionService globalOptionService) =>
+        GlobalOptions = globalOptionService;
 
-    public void RegisterWorkspace(Workspace workspace)
-        => GlobalOptions.RegisterWorkspace(workspace);
+    public void RegisterWorkspace(Workspace workspace) =>
+        GlobalOptions.RegisterWorkspace(workspace);
 
-    public void UnregisterWorkspace(Workspace workspace)
-        => GlobalOptions.UnregisterWorkspace(workspace);
+    public void UnregisterWorkspace(Workspace workspace) =>
+        GlobalOptions.UnregisterWorkspace(workspace);
 
-    public object? GetOption(OptionKey key)
-        => GlobalOptions.GetOption(key);
+    public object? GetOption(OptionKey key) => GlobalOptions.GetOption(key);
 
-    public void SetOptions(OptionSet optionSet, IEnumerable<OptionKey> optionKeys)
-        => GlobalOptions.SetOptions(optionSet, optionKeys);
+    public void SetOptions(OptionSet optionSet, IEnumerable<OptionKey> optionKeys) =>
+        GlobalOptions.SetOptions(optionSet, optionKeys);
 }

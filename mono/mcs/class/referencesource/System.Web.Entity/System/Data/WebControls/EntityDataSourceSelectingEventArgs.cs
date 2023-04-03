@@ -23,7 +23,10 @@ namespace System.Web.UI.WebControls
         private readonly EntityDataSource _dataSource;
         private readonly DataSourceSelectArguments _selectArguments;
 
-        internal EntityDataSourceSelectingEventArgs(EntityDataSource dataSource, DataSourceSelectArguments selectArgs)
+        internal EntityDataSourceSelectingEventArgs(
+            EntityDataSource dataSource,
+            DataSourceSelectArguments selectArgs
+        )
         {
             _dataSource = dataSource;
             _selectArguments = selectArgs;
@@ -38,6 +41,5 @@ namespace System.Web.UI.WebControls
         {
             get { return _selectArguments; }
         }
-
-     }
+    }
 }

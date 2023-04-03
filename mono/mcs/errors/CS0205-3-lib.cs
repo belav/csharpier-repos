@@ -3,7 +3,7 @@
 
 public abstract class A
 {
-        protected abstract int Foobar { get; }
+    protected abstract int Foobar { get; }
 }
 
 public abstract class A1 : A { }

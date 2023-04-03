@@ -4,5 +4,5 @@
 
 public unsafe struct S
 {
-    public fixed bool test20 [-4];
+    public fixed bool test20[-4];
 }

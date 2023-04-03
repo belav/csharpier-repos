@@ -4,11 +4,9 @@
 using System;
 
 [Obsolete("Yeah, is obsolete", true)]
-enum ObsoleteEnum
-{
-}
+enum ObsoleteEnum { }
 
 interface Ex
 {
-	ObsoleteEnum Foo ();
+    ObsoleteEnum Foo();
 }

@@ -3,13 +3,13 @@
 
 interface I
 {
-	void Test (int a);
+    void Test(int a);
 }
 
-class B: I
+class B : I
 {
-	public int Test (int a)
-	{
-		return a;
-	}
+    public int Test(int a)
+    {
+        return a;
+    }
 }

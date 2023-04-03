@@ -9,13 +9,19 @@ namespace System.Security.Cryptography.Xml.Tests
 {
     public static class Helpers
     {
-        public static void VerifyCryptoExceptionOnLoad(string xml, bool loadXmlThrows, bool validSignature = true, bool checkSignatureThrows = false)
+        public static void VerifyCryptoExceptionOnLoad(
+            string xml,
+            bool loadXmlThrows,
+            bool validSignature = true,
+            bool checkSignatureThrows = false
+        )
         {
             var xmlDoc = new XmlDocument();
             xmlDoc.PreserveWhitespace = true;
             xmlDoc.LoadXml(xml);
 
-            var signatureNode = (XmlElement)xmlDoc.GetElementsByTagName("Signature", SignedXml.XmlDsigNamespaceUrl)[0];
+            var signatureNode = (XmlElement)
+                xmlDoc.GetElementsByTagName("Signature", SignedXml.XmlDsigNamespaceUrl)[0];
 
             SignedXml signedXml = new SignedXml(xmlDoc);
             if (loadXmlThrows)

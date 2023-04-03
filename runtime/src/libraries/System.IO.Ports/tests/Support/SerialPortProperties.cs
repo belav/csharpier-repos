@@ -180,11 +180,20 @@ namespace Legacy.Support
                     PropertyInfo serialPortProperty = serialPortType.GetProperty((string)key);
                     object serialPortValue;
 
-                    if ((string)key == "RtsEnable" &&
-                        ((port.Handshake == Handshake.RequestToSend &&
-                            (Handshake)_properties["Handshake"] == Handshake.RequestToSend) ||
-                        (port.Handshake == Handshake.RequestToSendXOnXOff &&
-                            (Handshake)_properties["Handshake"] == Handshake.RequestToSendXOnXOff)))
+                    if (
+                        (string)key == "RtsEnable"
+                        && (
+                            (
+                                port.Handshake == Handshake.RequestToSend
+                                && (Handshake)_properties["Handshake"] == Handshake.RequestToSend
+                            )
+                            || (
+                                port.Handshake == Handshake.RequestToSendXOnXOff
+                                && (Handshake)_properties["Handshake"]
+                                    == Handshake.RequestToSendXOnXOff
+                            )
+                        )
+                    )
                     {
                         continue;
                     }

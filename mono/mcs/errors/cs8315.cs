@@ -4,8 +4,8 @@
 
 class C
 {
-	static void Main ()
-	{
-		bool d = default == default;
-	}
+    static void Main()
+    {
+        bool d = default == default;
+    }
 }

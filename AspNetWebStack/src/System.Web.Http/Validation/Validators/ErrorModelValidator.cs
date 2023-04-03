@@ -13,7 +13,11 @@ namespace System.Web.Http.Validation.Validators
     {
         private string _errorMessage;
 
-        public ErrorModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders, string errorMessage) : base(validatorProviders)
+        public ErrorModelValidator(
+            IEnumerable<ModelValidatorProvider> validatorProviders,
+            string errorMessage
+        )
+            : base(validatorProviders)
         {
             if (errorMessage == null)
             {
@@ -23,7 +27,10 @@ namespace System.Web.Http.Validation.Validators
             _errorMessage = errorMessage;
         }
 
-        public override IEnumerable<ModelValidationResult> Validate(ModelMetadata metadata, object container)
+        public override IEnumerable<ModelValidationResult> Validate(
+            ModelMetadata metadata,
+            object container
+        )
         {
             throw Error.InvalidOperation(_errorMessage);
         }

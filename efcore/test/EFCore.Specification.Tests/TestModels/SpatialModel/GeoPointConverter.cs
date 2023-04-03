@@ -8,18 +8,15 @@ namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel;
 
 public class GeoPointConverter : ValueConverter<GeoPoint, Point>
 {
-    private static readonly GeometryFactory _geometryFactory
-        = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 0);
+    private static readonly GeometryFactory _geometryFactory =
+        NtsGeometryServices.Instance.CreateGeometryFactory(srid: 0);
 
     public GeoPointConverter()
-        : this(_geometryFactory)
-    {
-    }
+        : this(_geometryFactory) { }
 
     public GeoPointConverter(GeometryFactory geoFactory)
         : base(
             v => geoFactory.CreatePoint(new Coordinate(v.Lon, v.Lat)),
-            v => new GeoPoint(v.Y, v.X))
-    {
-    }
+            v => new GeoPoint(v.Y, v.X)
+        ) { }
 }

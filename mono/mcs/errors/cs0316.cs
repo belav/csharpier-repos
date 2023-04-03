@@ -3,7 +3,8 @@
 
 class C
 {
-	int this [string value]	{
-		set { }
-	}
+    int this[string value]
+    {
+        set { }
+    }
 }

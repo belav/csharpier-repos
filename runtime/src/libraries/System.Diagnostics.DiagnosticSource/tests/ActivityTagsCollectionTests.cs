@@ -15,21 +15,21 @@ namespace System.Diagnostics.Tests
 {
     public class ActivityTagsCollectionTests : IDisposable
     {
-        private readonly static KeyValuePair<string, object> [] s_list = new KeyValuePair<string, object>[]
+        private readonly static KeyValuePair<string, object>[] s_list = new KeyValuePair<
+            string,
+            object
+        >[]
         {
             new KeyValuePair<string, object>("Key1", "Value1"),
             new KeyValuePair<string, object>("Key2", "Value2"),
             new KeyValuePair<string, object>("Key3", "Value3"),
             new KeyValuePair<string, object>("Key4", "Value4"),
-
             // Duplicate Keys to replace the old one
             new KeyValuePair<string, object>("Key3", 3),
             new KeyValuePair<string, object>("Key4", true),
-
             // null values is not allowed.
             new KeyValuePair<string, object>("Key5", null),
         };
-
 
         [Fact]
         public void TestDefaultConstructor()
@@ -57,7 +57,7 @@ namespace System.Diagnostics.Tests
             Assert.Equal(4, tags.Values.Count);
 
             Assert.Equal(3, tags["Key3"]);
-            Assert.True((bool) tags["Key4"]);
+            Assert.True((bool)tags["Key4"]);
         }
 
         [Fact]
@@ -193,7 +193,6 @@ namespace System.Diagnostics.Tests
             }
             Assert.Equal(list.Length, index);
         }
-
 
         public void Dispose() => Activity.Current = null;
     }

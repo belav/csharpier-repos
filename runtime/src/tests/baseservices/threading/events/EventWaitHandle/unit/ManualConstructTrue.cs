@@ -28,6 +28,6 @@ public class ManualConstructTrue : EventWaitHandleTest
         if (!ewh.TestWaitOne(0, null))
             return -3;
 
-        return TestPassed;        
+        return TestPassed;
     }
 }

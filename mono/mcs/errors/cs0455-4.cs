@@ -3,12 +3,11 @@
 
 abstract class A<T1, T2>
 {
-	public abstract void Foo<U> () where U : T1, T2;
+    public abstract void Foo<U>()
+        where U : T1, T2;
 }
 
 class B : A<long, long?>
 {
-	public override void Foo<Y> ()
-	{
-	}
+    public override void Foo<Y>() { }
 }

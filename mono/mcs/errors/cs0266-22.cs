@@ -3,9 +3,9 @@
 
 class X
 {
-	static void Main ()
-	{
-		bool? a = true;
-		bool b = a & a;
-	}
+    static void Main()
+    {
+        bool? a = true;
+        bool b = a & a;
+    }
 }
