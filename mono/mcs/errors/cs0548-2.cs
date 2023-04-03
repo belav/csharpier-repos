@@ -3,5 +3,7 @@
 
 interface PropertyInterface
 {
-    int Value { }
+    int Value
+    {
+    }
 }

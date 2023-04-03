@@ -3,5 +3,7 @@
 
 class IndexerClass
 {
-    public int this[bool b] { }
+    public int this[bool b]
+    {
+    }
 }

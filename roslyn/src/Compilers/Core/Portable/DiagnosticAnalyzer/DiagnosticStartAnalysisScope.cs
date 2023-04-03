@@ -1060,7 +1060,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             get { return _codeBlockActions.Length; }
         }
         public readonly bool Concurrent => _concurrent;
-        public bool IsEmpty { readonly get; private set; }
+        public bool IsEmpty
+        {
+            readonly get;
+            private set;
+        }
         public readonly bool IsDefault => _compilationStartActions.IsDefault;
 
         internal readonly ImmutableArray<CompilationStartAnalyzerAction> CompilationStartActions

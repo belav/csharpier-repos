@@ -84,7 +84,11 @@ namespace System.Buffers
 #if __MonoCS__
         public ReadOnlySpan<T> CurrentSpan { get; private set; }
 #else
-        public ReadOnlySpan<T> CurrentSpan { readonly get; private set; }
+        public ReadOnlySpan<T> CurrentSpan
+        {
+            readonly get;
+            private set;
+        }
 #endif
 
         /// <summary>
@@ -93,7 +97,11 @@ namespace System.Buffers
 #if __MonoCS__
         public int CurrentSpanIndex { get; private set; }
 #else
-        public int CurrentSpanIndex { readonly get; private set; }
+        public int CurrentSpanIndex
+        {
+            readonly get;
+            private set;
+        }
 #endif
 
         /// <summary>
@@ -115,7 +123,11 @@ namespace System.Buffers
 #if __MonoCS__
         public long Consumed { get; private set; }
 #else
-        public long Consumed { readonly get; private set; }
+        public long Consumed
+        {
+            readonly get;
+            private set;
+        }
 #endif
 
         /// <summary>

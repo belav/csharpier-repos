@@ -3,5 +3,7 @@
 
 interface PropertyInterface
 {
-    int this[long l] { }
+    int this[long l]
+    {
+    }
 }

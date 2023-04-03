@@ -64,12 +64,20 @@ namespace System.Buffers
         /// <summary>
         /// The current segment in the <see cref="Sequence"/> as a span.
         /// </summary>
-        public ReadOnlySpan<T> CurrentSpan { readonly get; private set; }
+        public ReadOnlySpan<T> CurrentSpan
+        {
+            readonly get;
+            private set;
+        }
 
         /// <summary>
         /// The index in the <see cref="CurrentSpan"/>.
         /// </summary>
-        public int CurrentSpanIndex { readonly get; private set; }
+        public int CurrentSpanIndex
+        {
+            readonly get;
+            private set;
+        }
 
         /// <summary>
         /// The unread portion of the <see cref="CurrentSpan"/>.
@@ -83,7 +91,11 @@ namespace System.Buffers
         /// <summary>
         /// The total number of <typeparamref name="T"/>'s processed by the reader.
         /// </summary>
-        public long Consumed { readonly get; private set; }
+        public long Consumed
+        {
+            readonly get;
+            private set;
+        }
 
         /// <summary>
         /// Remaining <typeparamref name="T"/>'s in the reader's <see cref="Sequence"/>.
