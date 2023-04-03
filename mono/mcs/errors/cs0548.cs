@@ -3,7 +3,5 @@
 
 class PropertyClass
 {
-    public int Value
-    {
-    }
+    public int Value { }
 }
