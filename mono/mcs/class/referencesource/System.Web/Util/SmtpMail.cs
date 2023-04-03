@@ -603,6 +603,7 @@ namespace System.Web.Mail
             }
         }
 #endif // !FEATURE_PAL
+
         private static String _server;
 
         /// <devdoc>

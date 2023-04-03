@@ -35,6 +35,7 @@ class Tests
         return TestDriver.RunTests(typeof(Tests), args);
     }
 #endif
+
     public static int test_0_return()
     {
         return 0;
