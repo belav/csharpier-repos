@@ -130,4 +130,6 @@
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/Linq_101_Samples/String_Date_functions.cs
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/Linq_101_Samples/Insert_Update_Delete.cs
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/Linq_101_Samples/OptimisticConcurrence.cs
+/mono/mcs/errors/*.cs
+/mono/mcs/jay/skeleton.cs
 /runtime/src/libraries/Common/tests/System/Xml/XPath/XDocument/NavigatorComparer.cs
