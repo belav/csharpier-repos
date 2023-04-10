@@ -168,7 +168,7 @@
 /mono/mcs/class/System.Data.OracleClient/Test/testclob.cs 
 /mono/mcs/class/System.Web/System.Web.UI/MasterPage.cs 
 /mono/mcs/class/System.Web/System.Web.UI.WebControls/Image.cs 
-/mono/mcs/class/corlib/Test/System/IntegerFormatterTest.cs - We can't handle this deep of recursion yet.
+/mono/mcs/class/corlib/Test/System/IntegerFormatterTest.cs
 /mono/mcs/class/corlib/Test/System.Runtime.Remoting/RemotingConfigurationTest.cs 
 /mono/mcs/class/Mono.Cairo/Samples/x11/pattern_fill.cs 
 /mono/mcs/class/Mono.Security.Win32/Test/Mono.Security.Cryptography/MD2Test.cs 
@@ -198,7 +198,7 @@
 /mono/mcs/class/referencesource/System.Web/Hosting/ApplicationManager.cs 
 /mono/mcs/class/referencesource/System.Web/Util/versioninfo.cs 
 /mono/mcs/class/System.Configuration/Test/System.Configuration/ConfigurationElementCollectionTest.cs 
-/mono/mcs/class/System.XML/Test/System.Xml.Serialization/XmlCodeExporterTests.cs - We can't handle this deep of recursion yet.
+/mono/mcs/class/System.XML/Test/System.Xml.Serialization/XmlCodeExporterTests.cs
 /runtime/src/libraries/System.Private.CoreLib/src/System/OperatingSystem.cs 
 /mono/mcs/class/referencesource/System/net/System/URI.cs 
 /mono/mcs/class/referencesource/System.Runtime.Serialization/System/Xml/XmlMtomWriter.cs 
@@ -206,7 +206,7 @@
 /mono/sdks/wasm/sdk/Templates/templates/DotNet/Program.cs 
 /roslyn/src/Compilers/CSharp/Test/Emit/CodeGen/CodeGenDynamicTests.cs 
 /roslyn/src/Compilers/Test/Resources/Core/Encoding/sjis.cs 
-/runtime/src/libraries/System.Private.CoreLib/src/System/Globalization/IcuLocaleData.cs - We can't handle this deep of recursion yet.
+/runtime/src/libraries/System.Private.CoreLib/src/System/Globalization/IcuLocaleData.cs
 /runtime/src/libraries/System.Private.Xml/src/System/Xml/MTNameTable.cs 
 /runtime/src/tests/Loader/classloader/StaticVirtualMethods/DiamondShape/svm_diamondshape.cs 
 /mono/mcs/class/referencesource/mscorlib/system/security/principal/windowsidentity.cs 
