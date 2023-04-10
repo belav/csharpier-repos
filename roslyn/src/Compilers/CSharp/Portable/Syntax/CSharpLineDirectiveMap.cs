@@ -14,18 +14,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
     internal class CSharpLineDirectiveMap : LineDirectiveMap<DirectiveTriviaSyntax>
     {
         public CSharpLineDirectiveMap(SyntaxTree syntaxTree)
-            : base(syntaxTree)
-        {
-        }
+            : base(syntaxTree) { }
 
         // Add all active #line directives under trivia into the list, in source code order.
         protected override bool ShouldAddDirective(DirectiveTriviaSyntax directive)
         {
-            return directive.IsActive && (directive.Kind() is SyntaxKind.LineDirectiveTrivia or SyntaxKind.LineSpanDirectiveTrivia);
+            return directive.IsActive
+                && (
+                    directive.Kind()
+                    is SyntaxKind.LineDirectiveTrivia
+                        or SyntaxKind.LineSpanDirectiveTrivia
+                );
         }
 
         // Given a directive and the previous entry, create a new entry.
-        protected override LineMappingEntry GetEntry(DirectiveTriviaSyntax directiveNode, SourceText sourceText, LineMappingEntry previous)
+        protected override LineMappingEntry GetEntry(
+            DirectiveTriviaSyntax directiveNode,
+            SourceText sourceText,
+            LineMappingEntry previous
+        )
         {
             Debug.Assert(ShouldAddDirective(directiveNode));
 
@@ -42,8 +49,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             // The default for the current entry does the same thing as the previous entry, except
             // resetting hidden.
             var unmappedLine = directiveLineNumber;
-            var mappedLine = (previous.State == PositionState.RemappedSpan) ? unmappedLine : previous.MappedLine + directiveLineNumber - previous.UnmappedLine;
-            var mappedPathOpt = (previous.State == PositionState.RemappedSpan) ? null : previous.MappedPathOpt;
+            var mappedLine =
+                (previous.State == PositionState.RemappedSpan)
+                    ? unmappedLine
+                    : previous.MappedLine + directiveLineNumber - previous.UnmappedLine;
+            var mappedPathOpt =
+                (previous.State == PositionState.RemappedSpan) ? null : previous.MappedPathOpt;
             PositionState state = PositionState.Unmapped;
 
             // Modify the current entry based on the directive.
@@ -86,30 +97,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 }
             }
 
-            return new LineMappingEntry(
-                unmappedLine,
-                mappedLine,
-                mappedPathOpt,
-                state);
+            return new LineMappingEntry(unmappedLine, mappedLine, mappedPathOpt, state);
         }
 
-        private static LineMappingEntry GetLineSpanDirectiveEntry(LineSpanDirectiveTriviaSyntax spanDirective, int unmappedLine)
+        private static LineMappingEntry GetLineSpanDirectiveEntry(
+            LineSpanDirectiveTriviaSyntax spanDirective,
+            int unmappedLine
+        )
         {
-            if (!spanDirective.HasErrors &&
-                tryGetPosition(spanDirective.Start, isEnd: false, out LinePosition mappedStart) &&
-                tryGetPosition(spanDirective.End, isEnd: true, out LinePosition mappedEnd) &&
-                tryGetOptionalCharacterOffset(spanDirective.CharacterOffset, out int? characterOffset) &&
-                tryGetStringLiteralValue(spanDirective.File, out string? mappedPathOpt))
+            if (
+                !spanDirective.HasErrors
+                && tryGetPosition(spanDirective.Start, isEnd: false, out LinePosition mappedStart)
+                && tryGetPosition(spanDirective.End, isEnd: true, out LinePosition mappedEnd)
+                && tryGetOptionalCharacterOffset(
+                    spanDirective.CharacterOffset,
+                    out int? characterOffset
+                )
+                && tryGetStringLiteralValue(spanDirective.File, out string? mappedPathOpt)
+            )
             {
-                return new LineMappingEntry(unmappedLine, new LinePositionSpan(mappedStart, mappedEnd), characterOffset, mappedPathOpt);
+                return new LineMappingEntry(
+                    unmappedLine,
+                    new LinePositionSpan(mappedStart, mappedEnd),
+                    characterOffset,
+                    mappedPathOpt
+                );
             }
-            return new LineMappingEntry(unmappedLine, unmappedLine, mappedPathOpt: null, PositionState.Unmapped);
+            return new LineMappingEntry(
+                unmappedLine,
+                unmappedLine,
+                mappedPathOpt: null,
+                PositionState.Unmapped
+            );
 
             static bool tryGetOneBasedNumericLiteralValue(in SyntaxToken token, out int value)
             {
-                if (!token.IsMissing &&
-                    token.Kind() == SyntaxKind.NumericLiteralToken &&
-                    token.Value is int tokenValue)
+                if (
+                    !token.IsMissing
+                    && token.Kind() == SyntaxKind.NumericLiteralToken
+                    && token.Value is int tokenValue
+                )
                 {
                     // convert one-based line number into zero-based line number
                     value = tokenValue - 1;
@@ -152,10 +179,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
 
             // returns false on error
-            static bool tryGetPosition(LineDirectivePositionSyntax syntax, bool isEnd, out LinePosition position)
+            static bool tryGetPosition(
+                LineDirectivePositionSyntax syntax,
+                bool isEnd,
+                out LinePosition position
+            )
             {
-                if (tryGetOneBasedNumericLiteralValue(syntax.Line, out int line) &&
-                    tryGetOneBasedNumericLiteralValue(syntax.Character, out int character))
+                if (
+                    tryGetOneBasedNumericLiteralValue(syntax.Line, out int line)
+                    && tryGetOneBasedNumericLiteralValue(syntax.Character, out int character)
+                )
                 {
                     position = new LinePosition(line, isEnd ? character + 1 : character);
                     return true;
@@ -187,9 +220,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             var entry = Entries[index];
 
             // the state should not be set to the ones used for VB only.
-            Debug.Assert(entry.State != PositionState.Unknown &&
-                         entry.State != PositionState.RemappedAfterHidden &&
-                         entry.State != PositionState.RemappedAfterUnknown);
+            Debug.Assert(
+                entry.State != PositionState.Unknown
+                    && entry.State != PositionState.RemappedAfterHidden
+                    && entry.State != PositionState.RemappedAfterUnknown
+            );
 
             switch (entry.State)
             {
@@ -216,10 +251,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         }
 
         // C# does not have unknown visibility state
-        protected override LineVisibility GetUnknownStateVisibility(int index)
-            => throw ExceptionUtilities.Unreachable();
+        protected override LineVisibility GetUnknownStateVisibility(int index) =>
+            throw ExceptionUtilities.Unreachable();
 
-        internal override FileLinePositionSpan TranslateSpanAndVisibility(SourceText sourceText, string treeFilePath, TextSpan span, out bool isHiddenPosition)
+        internal override FileLinePositionSpan TranslateSpanAndVisibility(
+            SourceText sourceText,
+            string treeFilePath,
+            TextSpan span,
+            out bool isHiddenPosition
+        )
         {
             var lines = sourceText.Lines;
             var unmappedStartPos = lines.GetLinePosition(span.Start);
@@ -240,9 +280,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             var entry = FindEntry(unmappedStartPos.Line);
 
             // the state should not be set to the ones used for VB only.
-            Debug.Assert(entry.State != PositionState.Unknown &&
-                            entry.State != PositionState.RemappedAfterHidden &&
-                            entry.State != PositionState.RemappedAfterUnknown);
+            Debug.Assert(
+                entry.State != PositionState.Unknown
+                    && entry.State != PositionState.RemappedAfterHidden
+                    && entry.State != PositionState.RemappedAfterUnknown
+            );
 
             isHiddenPosition = entry.State == PositionState.Hidden;
 

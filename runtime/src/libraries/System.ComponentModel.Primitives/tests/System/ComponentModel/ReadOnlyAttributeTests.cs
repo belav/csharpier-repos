@@ -30,7 +30,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(ReadOnlyAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            ReadOnlyAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is ReadOnlyAttribute)
@@ -48,7 +52,10 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(DefaultProperties_TestData))]
-        public void DefaultProperties_GetIsReadOnly_ReturnsExpected(ReadOnlyAttribute attribute, bool expectedAllowMerge)
+        public void DefaultProperties_GetIsReadOnly_ReturnsExpected(
+            ReadOnlyAttribute attribute,
+            bool expectedAllowMerge
+        )
         {
             Assert.Equal(expectedAllowMerge, attribute.IsReadOnly);
             Assert.Equal(!expectedAllowMerge, attribute.IsDefaultAttribute());

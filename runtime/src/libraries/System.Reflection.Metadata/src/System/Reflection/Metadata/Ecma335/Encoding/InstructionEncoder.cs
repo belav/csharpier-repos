@@ -32,7 +32,10 @@ namespace System.Reflection.Metadata.Ecma335
         /// Must be specified to be able to use some of the control-flow factory methods of <see cref="InstructionEncoder"/>,
         /// such as <see cref="Branch(ILOpCode, LabelHandle)"/>, <see cref="DefineLabel"/>, <see cref="MarkLabel(LabelHandle)"/> etc.
         /// </param>
-        public InstructionEncoder(BlobBuilder codeBuilder, ControlFlowBuilder? controlFlowBuilder = null)
+        public InstructionEncoder(
+            BlobBuilder codeBuilder,
+            ControlFlowBuilder? controlFlowBuilder = null
+        )
         {
             if (codeBuilder == null)
             {
@@ -99,9 +102,11 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         public void Call(EntityHandle methodHandle)
         {
-            if (methodHandle.Kind != HandleKind.MethodDefinition &&
-                methodHandle.Kind != HandleKind.MethodSpecification &&
-                methodHandle.Kind != HandleKind.MemberReference)
+            if (
+                methodHandle.Kind != HandleKind.MethodDefinition
+                && methodHandle.Kind != HandleKind.MethodSpecification
+                && methodHandle.Kind != HandleKind.MemberReference
+            )
             {
                 Throw.InvalidArgument_Handle(nameof(methodHandle));
             }
@@ -154,16 +159,36 @@ namespace System.Reflection.Metadata.Ecma335
             ILOpCode code;
             switch (value)
             {
-                case -1: code = ILOpCode.Ldc_i4_m1; break;
-                case 0: code = ILOpCode.Ldc_i4_0; break;
-                case 1: code = ILOpCode.Ldc_i4_1; break;
-                case 2: code = ILOpCode.Ldc_i4_2; break;
-                case 3: code = ILOpCode.Ldc_i4_3; break;
-                case 4: code = ILOpCode.Ldc_i4_4; break;
-                case 5: code = ILOpCode.Ldc_i4_5; break;
-                case 6: code = ILOpCode.Ldc_i4_6; break;
-                case 7: code = ILOpCode.Ldc_i4_7; break;
-                case 8: code = ILOpCode.Ldc_i4_8; break;
+                case -1:
+                    code = ILOpCode.Ldc_i4_m1;
+                    break;
+                case 0:
+                    code = ILOpCode.Ldc_i4_0;
+                    break;
+                case 1:
+                    code = ILOpCode.Ldc_i4_1;
+                    break;
+                case 2:
+                    code = ILOpCode.Ldc_i4_2;
+                    break;
+                case 3:
+                    code = ILOpCode.Ldc_i4_3;
+                    break;
+                case 4:
+                    code = ILOpCode.Ldc_i4_4;
+                    break;
+                case 5:
+                    code = ILOpCode.Ldc_i4_5;
+                    break;
+                case 6:
+                    code = ILOpCode.Ldc_i4_6;
+                    break;
+                case 7:
+                    code = ILOpCode.Ldc_i4_7;
+                    break;
+                case 8:
+                    code = ILOpCode.Ldc_i4_8;
+                    break;
 
                 default:
                     if (unchecked((sbyte)value == value))
@@ -219,10 +244,18 @@ namespace System.Reflection.Metadata.Ecma335
         {
             switch (slotIndex)
             {
-                case 0: OpCode(ILOpCode.Ldloc_0); break;
-                case 1: OpCode(ILOpCode.Ldloc_1); break;
-                case 2: OpCode(ILOpCode.Ldloc_2); break;
-                case 3: OpCode(ILOpCode.Ldloc_3); break;
+                case 0:
+                    OpCode(ILOpCode.Ldloc_0);
+                    break;
+                case 1:
+                    OpCode(ILOpCode.Ldloc_1);
+                    break;
+                case 2:
+                    OpCode(ILOpCode.Ldloc_2);
+                    break;
+                case 3:
+                    OpCode(ILOpCode.Ldloc_3);
+                    break;
 
                 default:
                     if (unchecked((uint)slotIndex) <= byte.MaxValue)
@@ -253,10 +286,18 @@ namespace System.Reflection.Metadata.Ecma335
         {
             switch (slotIndex)
             {
-                case 0: OpCode(ILOpCode.Stloc_0); break;
-                case 1: OpCode(ILOpCode.Stloc_1); break;
-                case 2: OpCode(ILOpCode.Stloc_2); break;
-                case 3: OpCode(ILOpCode.Stloc_3); break;
+                case 0:
+                    OpCode(ILOpCode.Stloc_0);
+                    break;
+                case 1:
+                    OpCode(ILOpCode.Stloc_1);
+                    break;
+                case 2:
+                    OpCode(ILOpCode.Stloc_2);
+                    break;
+                case 3:
+                    OpCode(ILOpCode.Stloc_3);
+                    break;
 
                 default:
                     if (unchecked((uint)slotIndex) <= byte.MaxValue)
@@ -310,10 +351,18 @@ namespace System.Reflection.Metadata.Ecma335
         {
             switch (argumentIndex)
             {
-                case 0: OpCode(ILOpCode.Ldarg_0); break;
-                case 1: OpCode(ILOpCode.Ldarg_1); break;
-                case 2: OpCode(ILOpCode.Ldarg_2); break;
-                case 3: OpCode(ILOpCode.Ldarg_3); break;
+                case 0:
+                    OpCode(ILOpCode.Ldarg_0);
+                    break;
+                case 1:
+                    OpCode(ILOpCode.Ldarg_1);
+                    break;
+                case 2:
+                    OpCode(ILOpCode.Ldarg_2);
+                    break;
+                case 3:
+                    OpCode(ILOpCode.Ldarg_3);
+                    break;
 
                 default:
                     if (unchecked((uint)argumentIndex) <= byte.MaxValue)
@@ -391,7 +440,12 @@ namespace System.Reflection.Metadata.Ecma335
             return GetBranchBuilder().AddLabel();
         }
 
-        internal void LabelOperand(ILOpCode code, LabelHandle label, int instructionEndDisplacement, int ilOffset)
+        internal void LabelOperand(
+            ILOpCode code,
+            LabelHandle label,
+            int instructionEndDisplacement,
+            int ilOffset
+        )
         {
             GetBranchBuilder().AddBranch(Offset, label, instructionEndDisplacement, ilOffset, code);
 

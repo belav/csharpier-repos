@@ -20,7 +20,8 @@ internal readonly record struct OmniSharpNavigateToSearchResult(
     ImmutableArray<TextSpan> NameMatchSpans,
     string SecondarySort,
     string Summary,
-    OmniSharpNavigableItem NavigableItem);
+    OmniSharpNavigableItem NavigableItem
+);
 
 internal enum OmniSharpNavigateToMatchKind
 {

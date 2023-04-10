@@ -13,10 +13,11 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class SystemCollectionsICollection_Field : System.Web.DynamicData.FieldTemplateUserControl {
-    public override Control DataControl {
-        get {
-            return Literal1;
-        }
+public partial class SystemCollectionsICollection_Field
+    : System.Web.DynamicData.FieldTemplateUserControl
+{
+    public override Control DataControl
+    {
+        get { return Literal1; }
     }
 }

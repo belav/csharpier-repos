@@ -3,12 +3,12 @@ using System.IO;
 class Foo
 {
     ~Foo()
-	{
-		StreamWriter.Null.WriteLine("Finalize");
+    {
+        StreamWriter.Null.WriteLine("Finalize");
     }
-	
-    public static void Main ()
-	{
-		new Foo ();
-	}
+
+    public static void Main()
+    {
+        new Foo();
+    }
 }

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,72 +30,80 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-	[MarkupExtensionReturnType (typeof (Array))]
-	[ContentProperty ("Items")]
-	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyPresentationFramework_3_5)]
-	public class ArrayExtension : MarkupExtension
-	{
-		public ArrayExtension ()
-		{		
-			items = new ArrayList ();
-		}
+    [MarkupExtensionReturnType(typeof(Array))]
+    [ContentProperty("Items")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(Consts.AssemblyPresentationFramework_3_5)]
+    public class ArrayExtension : MarkupExtension
+    {
+        public ArrayExtension()
+        {
+            items = new ArrayList();
+        }
 
-		public ArrayExtension (Array elements)
-		{
-			if (elements == null)
-				throw new ArgumentNullException ("elements");
-			Type = elements.GetType ().GetElementType ();
-			items = new ArrayList (elements);
-		}
+        public ArrayExtension(Array elements)
+        {
+            if (elements == null)
+                throw new ArgumentNullException("elements");
+            Type = elements.GetType().GetElementType();
+            items = new ArrayList(elements);
+        }
 
-		public ArrayExtension (Type arrayType)
-		{
-			if (arrayType == null)
-				throw new ArgumentNullException ("arrayType");
-			Type = arrayType;
-			items = new ArrayList ();
-		}
+        public ArrayExtension(Type arrayType)
+        {
+            if (arrayType == null)
+                throw new ArgumentNullException("arrayType");
+            Type = arrayType;
+            items = new ArrayList();
+        }
 
-		[ConstructorArgument ("arrayType")]
-		public Type Type { get; set; }
+        [ConstructorArgument("arrayType")]
+        public Type Type { get; set; }
 
-		IList items;
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Content)]
-		public IList Items {
-			get { return items; }
-		}
+        IList items;
 
-		public void AddChild (Object value)
-		{
-			// null is allowed.
-			Items.Add (value);
-		}
-		
-		public void AddText (string text)
-		{
-			// null is allowed.
-			Items.Add (text);
-		}
-		
-		public override object ProvideValue (IServiceProvider serviceProvider)
-		{
-			if (Type == null)
-				throw new InvalidOperationException ("Type property must be set before calling ProvideValue method");
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public IList Items
+        {
+            get { return items; }
+        }
 
-			bool invalid = false;
-			foreach (var item in Items) {
-				if (item == null) {
-					if (Type.IsValueType)
-						invalid = true;
-				}
-				else if (!Type.IsAssignableFrom (item.GetType ()))
-					invalid = true;
-				if (invalid)
-					throw new InvalidOperationException (String.Format ("Item in the array must be an instance of '{0}'", Type));
-			}
-			Array a = Array.CreateInstance (Type, Items.Count);
-			Items.CopyTo (a, 0);
-			return a;
-		}
-	}
+        public void AddChild(Object value)
+        {
+            // null is allowed.
+            Items.Add(value);
+        }
+
+        public void AddText(string text)
+        {
+            // null is allowed.
+            Items.Add(text);
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            if (Type == null)
+                throw new InvalidOperationException(
+                    "Type property must be set before calling ProvideValue method"
+                );
+
+            bool invalid = false;
+            foreach (var item in Items)
+            {
+                if (item == null)
+                {
+                    if (Type.IsValueType)
+                        invalid = true;
+                }
+                else if (!Type.IsAssignableFrom(item.GetType()))
+                    invalid = true;
+                if (invalid)
+                    throw new InvalidOperationException(
+                        String.Format("Item in the array must be an instance of '{0}'", Type)
+                    );
+            }
+            Array a = Array.CreateInstance(Type, Items.Count);
+            Items.CopyTo(a, 0);
+            return a;
+        }
+    }
 }

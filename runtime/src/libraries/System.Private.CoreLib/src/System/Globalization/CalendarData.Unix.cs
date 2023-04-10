@@ -11,8 +11,11 @@ namespace System.Globalization
             IcuLoadCalendarDataFromSystem(localeName, calendarId);
 
 #pragma warning disable IDE0060
-        internal static int GetCalendarsCore(string localeName, bool useUserOverride, CalendarId[] calendars) =>
-            IcuGetCalendars(localeName, calendars);
+        internal static int GetCalendarsCore(
+            string localeName,
+            bool useUserOverride,
+            CalendarId[] calendars
+        ) => IcuGetCalendars(localeName, calendars);
 
         internal static int GetTwoDigitYearMax(CalendarId calendarId)
         {

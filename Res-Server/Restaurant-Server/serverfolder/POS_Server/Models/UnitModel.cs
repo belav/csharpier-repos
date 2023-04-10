@@ -18,7 +18,7 @@ namespace POS_Server.Models
         public Nullable<long> parentid { get; set; }
         public byte isActive { get; set; }
         public string notes { get; set; }
- 
+
         public string smallestUnit { get; set; }
 
         public Boolean canDelete { get; set; }

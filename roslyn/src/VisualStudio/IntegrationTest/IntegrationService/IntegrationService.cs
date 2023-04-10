@@ -25,11 +25,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         public string BaseUri { get; }
 
-        private readonly ConcurrentDictionary<string, ObjRef> _marshalledObjects = new ConcurrentDictionary<string, ObjRef>();
+        private readonly ConcurrentDictionary<string, ObjRef> _marshalledObjects =
+            new ConcurrentDictionary<string, ObjRef>();
 
         public IntegrationService()
         {
-            AppContext.SetSwitch("Switch.System.Diagnostics.IgnorePortablePDBsInStackTraces", false);
+            AppContext.SetSwitch(
+                "Switch.System.Diagnostics.IgnorePortablePDBsInStackTraces",
+                false
+            );
 
             PortName = GetPortName(Process.GetCurrentProcess().Id);
             BaseUri = "ipc://" + this.PortName;
@@ -63,18 +67,23 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             var resultType = result.GetType();
             var marshallableResult = (MarshalByRefObject)result;
             var objectUri = $"{resultType.FullName}_{Guid.NewGuid()}";
-            var marshalledObject = RemotingServices.Marshal(marshallableResult, objectUri, resultType);
+            var marshalledObject = RemotingServices.Marshal(
+                marshallableResult,
+                objectUri,
+                resultType
+            );
 
             if (!_marshalledObjects.TryAdd(objectUri, marshalledObject))
             {
-                throw new InvalidOperationException($"An object with the specified URI has already been marshalled. (URI: {objectUri})");
+                throw new InvalidOperationException(
+                    $"An object with the specified URI has already been marshalled. (URI: {objectUri})"
+                );
             }
 
             return objectUri;
         }
 
         // Ensure InProcComponents live forever
-        public override object? InitializeLifetimeService()
-            => null;
+        public override object? InitializeLifetimeService() => null;
     }
 }

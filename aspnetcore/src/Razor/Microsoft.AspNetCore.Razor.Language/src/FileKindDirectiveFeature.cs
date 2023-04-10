@@ -7,6 +7,4 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-class FileKindDirectiveFeature
-{
-}
+class FileKindDirectiveFeature { }

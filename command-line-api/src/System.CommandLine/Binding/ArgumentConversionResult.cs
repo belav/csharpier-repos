@@ -12,7 +12,11 @@ namespace System.CommandLine.Binding
         internal readonly string? ErrorMessage;
         internal ArgumentConversionResultType Result;
 
-        private ArgumentConversionResult(Argument argument, string error, ArgumentConversionResultType failure)
+        private ArgumentConversionResult(
+            Argument argument,
+            string error,
+            ArgumentConversionResultType failure
+        )
         {
             Argument = argument ?? throw new ArgumentNullException(nameof(argument));
             ErrorMessage = error ?? throw new ArgumentNullException(nameof(error));
@@ -36,14 +40,22 @@ namespace System.CommandLine.Binding
             Argument argument,
             Type expectedType,
             string value,
-            LocalizationResources localizationResources) :
-            this(argument, FormatErrorMessage(argument, expectedType, value, localizationResources), ArgumentConversionResultType.FailedType)
-        {
-        }
+            LocalizationResources localizationResources
+        )
+            : this(
+                argument,
+                FormatErrorMessage(argument, expectedType, value, localizationResources),
+                ArgumentConversionResultType.FailedType
+            ) { }
 
-        internal static ArgumentConversionResult Failure(Argument argument, string error, ArgumentConversionResultType reason) => new(argument, error, reason);
+        internal static ArgumentConversionResult Failure(
+            Argument argument,
+            string error,
+            ArgumentConversionResultType reason
+        ) => new(argument, error, reason);
 
-        public static ArgumentConversionResult Success(Argument argument, object? value) => new(argument, value);
+        public static ArgumentConversionResult Success(Argument argument, object? value) =>
+            new(argument, value);
 
         internal static ArgumentConversionResult None(Argument argument) => new(argument);
 
@@ -51,19 +63,30 @@ namespace System.CommandLine.Binding
             Argument argument,
             Type expectedType,
             string value,
-            LocalizationResources localizationResources)
+            LocalizationResources localizationResources
+        )
         {
-            if (argument.FirstParent?.Symbol is IdentifierSymbol identifierSymbol &&
-                argument.FirstParent.Next is null)
+            if (
+                argument.FirstParent?.Symbol is IdentifierSymbol identifierSymbol
+                && argument.FirstParent.Next is null
+            )
             {
                 var alias = identifierSymbol.GetLongestAlias(removePrefix: false);
 
                 switch (identifierSymbol)
                 {
                     case Command _:
-                        return localizationResources.ArgumentConversionCannotParseForCommand(value, alias, expectedType);
+                        return localizationResources.ArgumentConversionCannotParseForCommand(
+                            value,
+                            alias,
+                            expectedType
+                        );
                     case Option _:
-                        return localizationResources.ArgumentConversionCannotParseForOption(value, alias, expectedType);
+                        return localizationResources.ArgumentConversionCannotParseForOption(
+                            value,
+                            alias,
+                            expectedType
+                        );
                 }
             }
 

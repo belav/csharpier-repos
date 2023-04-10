@@ -22,8 +22,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 
     internal partial class UseExpressionBodyForLambdaCodeStyleProvider
     {
-        protected override async Task<ImmutableArray<CodeAction>> ComputeOpposingRefactoringsWhenAnalyzerActiveAsync(
-            Document document, TextSpan span, ExpressionBodyPreference option, CancellationToken cancellationToken)
+        protected override async Task<
+            ImmutableArray<CodeAction>
+        > ComputeOpposingRefactoringsWhenAnalyzerActiveAsync(
+            Document document,
+            TextSpan span,
+            ExpressionBodyPreference option,
+            CancellationToken cancellationToken
+        )
         {
             if (option == ExpressionBodyPreference.Never)
             {
@@ -31,7 +37,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 // the reverse of this is that we want to offer the refactoring to convert a
                 // block-body to an expression-body whenever possible.
                 return await ComputeRefactoringsAsync(
-                    document, span, ExpressionBodyPreference.WhenPossible, cancellationToken).ConfigureAwait(false);
+                        document,
+                        span,
+                        ExpressionBodyPreference.WhenPossible,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             else if (option == ExpressionBodyPreference.WhenPossible)
             {
@@ -39,7 +50,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 // trying to enforce that.  So the reverse of this is that we want to offer the
                 // refactoring to convert an expression-body to a block-body whenever possible.
                 return await ComputeRefactoringsAsync(
-                    document, span, ExpressionBodyPreference.Never, cancellationToken).ConfigureAwait(false);
+                        document,
+                        span,
+                        ExpressionBodyPreference.Never,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             else if (option == ExpressionBodyPreference.WhenOnSingleLine)
             {
@@ -54,10 +70,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 // Always offer to convert an expression to a block since the analyzer will never
                 // offer that. For this option setting.
                 var useBlockRefactorings = await ComputeRefactoringsAsync(
-                    document, span, ExpressionBodyPreference.Never, cancellationToken).ConfigureAwait(false);
+                        document,
+                        span,
+                        ExpressionBodyPreference.Never,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 var whenOnSingleLineRefactorings = await ComputeRefactoringsAsync(
-                    document, span, ExpressionBodyPreference.WhenOnSingleLine, cancellationToken).ConfigureAwait(false);
+                        document,
+                        span,
+                        ExpressionBodyPreference.WhenOnSingleLine,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (whenOnSingleLineRefactorings.Length > 0)
                 {
                     // this block lambda would be converted to an expression lambda based on the
@@ -69,7 +95,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 // not offer to convert it to an expression body.  So we should can offer that
                 // as a refactoring if possible.
                 var whenPossibleRefactorings = await ComputeRefactoringsAsync(
-                    document, span, ExpressionBodyPreference.WhenPossible, cancellationToken).ConfigureAwait(false);
+                        document,
+                        span,
+                        ExpressionBodyPreference.WhenPossible,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return useBlockRefactorings.AddRange(whenPossibleRefactorings);
             }
             else
@@ -78,26 +109,47 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             }
         }
 
-        protected override async Task<ImmutableArray<CodeAction>> ComputeAllRefactoringsWhenAnalyzerInactiveAsync(
-            Document document, TextSpan span, CancellationToken cancellationToken)
+        protected override async Task<
+            ImmutableArray<CodeAction>
+        > ComputeAllRefactoringsWhenAnalyzerInactiveAsync(
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
         {
             // If the analyzer is inactive, then we want to offer refactorings in any viable
             // direction.  So we want to offer to convert expression-bodies to block-bodies, and
             // vice-versa if applicable.
 
             var toExpressionBodyRefactorings = await ComputeRefactoringsAsync(
-                document, span, ExpressionBodyPreference.WhenPossible, cancellationToken).ConfigureAwait(false);
+                    document,
+                    span,
+                    ExpressionBodyPreference.WhenPossible,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var toBlockBodyRefactorings = await ComputeRefactoringsAsync(
-                document, span, ExpressionBodyPreference.Never, cancellationToken).ConfigureAwait(false);
+                    document,
+                    span,
+                    ExpressionBodyPreference.Never,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return toExpressionBodyRefactorings.AddRange(toBlockBodyRefactorings);
         }
 
         private static async Task<ImmutableArray<CodeAction>> ComputeRefactoringsAsync(
-            Document document, TextSpan span, ExpressionBodyPreference option, CancellationToken cancellationToken)
+            Document document,
+            TextSpan span,
+            ExpressionBodyPreference option,
+            CancellationToken cancellationToken
+        )
         {
-            var lambdaNode = await document.TryGetRelevantNodeAsync<LambdaExpressionSyntax>(span, cancellationToken).ConfigureAwait(false);
+            var lambdaNode = await document
+                .TryGetRelevantNodeAsync<LambdaExpressionSyntax>(span, cancellationToken)
+                .ConfigureAwait(false);
             if (lambdaNode == null)
             {
                 return ImmutableArray<CodeAction>.Empty;
@@ -109,31 +161,43 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             if (CanOfferUseExpressionBody(option, lambdaNode, root.GetLanguageVersion()))
             {
                 var title = UseExpressionBodyTitle.ToString();
-                result.Add(CodeAction.Create(
-                    title,
-                    c => UpdateDocumentAsync(
-                        document, root, lambdaNode, c),
-                    title));
+                result.Add(
+                    CodeAction.Create(
+                        title,
+                        c => UpdateDocumentAsync(document, root, lambdaNode, c),
+                        title
+                    )
+                );
             }
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (CanOfferUseBlockBody(semanticModel, option, lambdaNode, cancellationToken))
             {
                 var title = UseBlockBodyTitle.ToString();
-                result.Add(CodeAction.Create(
-                    title,
-                    c => UpdateDocumentAsync(
-                        document, root, lambdaNode, c),
-                    title));
+                result.Add(
+                    CodeAction.Create(
+                        title,
+                        c => UpdateDocumentAsync(document, root, lambdaNode, c),
+                        title
+                    )
+                );
             }
 
             return result.ToImmutable();
         }
 
         private static async Task<Document> UpdateDocumentAsync(
-            Document document, SyntaxNode root, LambdaExpressionSyntax declaration, CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode root,
+            LambdaExpressionSyntax declaration,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // We're only replacing a single declaration in the refactoring.  So pass 'declaration'
             // as both the 'original' and 'current' declaration.

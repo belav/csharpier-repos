@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-    
+namespace System.Web.Configuration
+{
     using System.Collections;
     using System.Collections.Specialized;
     using System.Diagnostics;
@@ -27,7 +27,8 @@ namespace System.Web.Configuration {
     // (3) execute a subsequence if a regex matches
     // (4) execute a subsequence and exit the block if a regex matches
     //
-    internal abstract class CapabilitiesRule {
+    internal abstract class CapabilitiesRule
+    {
         internal const int Use = 0;
         internal const int Assign = 1;
         internal const int Filter = 2;
@@ -35,10 +36,9 @@ namespace System.Web.Configuration {
 
         internal int _type;
 
-        internal virtual int Type {
-            get {
-                return _type;
-            }
+        internal virtual int Type
+        {
+            get { return _type; }
         }
 
         internal abstract void Evaluate(CapabilitiesState state);

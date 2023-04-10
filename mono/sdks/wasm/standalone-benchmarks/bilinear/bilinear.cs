@@ -33,8 +33,11 @@ public partial class Benchmark
     const int lengthB = 500;
     const double deltaB = (maxXB - minXB) / (double)(lengthB - 1);
 
-    //ref values 
-    double[] A, B, input, output;
+    //ref values
+    double[] A,
+        B,
+        input,
+        output;
 
     public Benchmark()
     {
@@ -45,24 +48,29 @@ public partial class Benchmark
     {
         A = new double[lengthA];
         B = new double[lengthB];
-        for (int i = 0; i < lengthA; i++) A[i] = Math.Cos(i * deltaA + minXA);
-        for (int i = 0; i < lengthB; i++) B[i] = Math.Cos(i * deltaB + minXB);
+        for (int i = 0; i < lengthA; i++)
+            A[i] = Math.Cos(i * deltaA + minXA);
+        for (int i = 0; i < lengthB; i++)
+            B[i] = Math.Cos(i * deltaB + minXB);
 
         //Init X values
         input = new double[inputVectorSize];
         double incr = (maxXA - minXA) / (double)(inputVectorSize - 3);
-        for (int i = 0; i < inputVectorSize; i++) input[i] = minXA + (i - 1) * incr;
+        for (int i = 0; i < inputVectorSize; i++)
+            input[i] = minXA + (i - 1) * incr;
     }
 
-    private static double[] BilinearInterpol(double[] x,
-                                             double[] z,
-                                             double[] A,
-                                             double minXA,
-                                             double maxXA,
-                                             double[] B,
-                                             double minXB,
-                                             double maxXB,
-                                             double weightB)
+    private static double[] BilinearInterpol(
+        double[] x,
+        double[] z,
+        double[] A,
+        double minXA,
+        double maxXA,
+        double[] B,
+        double minXB,
+        double maxXB,
+        double weightB
+    )
     {
         var weightA = 1.0 - weightB;
 
@@ -106,21 +114,23 @@ public partial class Benchmark
             var refBUpper = B[bPlusOne];
 
             // Finally, compute our result.
-            z[i] = weightA * (refALower + lambdaA * (refAUpper - refALower)) +
-                    weightB * (refBLower + lambdaB * (refBUpper - refBLower));
+            z[i] =
+                weightA * (refALower + lambdaA * (refAUpper - refALower))
+                + weightB * (refBLower + lambdaB * (refBUpper - refBLower));
         }
         return z;
     }
 
     private double[] BilinearInterpol_Vector(
-                                            double[] x,
-                                            double[] A,
-                                            double minXA,
-                                            double maxXA,
-                                            double[] B,
-                                            double minXB,
-                                            double maxXB,
-                                            double weightB)
+        double[] x,
+        double[] A,
+        double minXA,
+        double maxXA,
+        double[] B,
+        double minXB,
+        double maxXB,
+        double weightB
+    )
     {
         double[] z = new double[outputVectorSize];
 
@@ -150,7 +160,9 @@ public partial class Benchmark
 
             // Determine the largest a, such that A[i] = f(xA) and xA <= x[i].
             // This involves casting from double to int; here we use two Vector conversions.
-            Vector<int> a = Vector.ConvertToInt32(Vector.Narrow((currentX - vMinXA) * vInvDeltaA, Vector<double>.Zero));
+            Vector<int> a = Vector.ConvertToInt32(
+                Vector.Narrow((currentX - vMinXA) * vInvDeltaA, Vector<double>.Zero)
+            );
             a = Vector.Min(Vector.Max(a, Vector<int>.Zero), ALengthMinusOne);
             Vector<int> aPlusOne = Vector.Min(a + Vector<int>.One, ALengthMinusOne);
 
@@ -167,13 +179,17 @@ public partial class Benchmark
 
             // Now, we need to load up our reference points.
             // This is basically a "gather" operation, for which we use a temporary double array.
-            for (var j = 0; j < Vector<double>.Count; j++) doubleTemp[j] = A[a[j]];
+            for (var j = 0; j < Vector<double>.Count; j++)
+                doubleTemp[j] = A[a[j]];
             Vector<double> AVector = new Vector<double>(doubleTemp);
-            for (var j = 0; j < Vector<double>.Count; j++) doubleTemp[j] = A[aPlusOne[j]];
+            for (var j = 0; j < Vector<double>.Count; j++)
+                doubleTemp[j] = A[aPlusOne[j]];
             Vector<double> AVectorPlusOne = new Vector<double>(doubleTemp);
 
             // Now, do the all of the above for our B reference point.
-            Vector<int> b = Vector.ConvertToInt32(Vector.Narrow((currentX - vMinXB) * vInvDeltaB, Vector<double>.Zero));
+            Vector<int> b = Vector.ConvertToInt32(
+                Vector.Narrow((currentX - vMinXB) * vInvDeltaB, Vector<double>.Zero)
+            );
             b = Vector.Min(Vector.Max(b, Vector<int>.Zero), BLengthMinusOne);
             Vector<int> bPlusOne = Vector.Min(b + Vector<int>.One, BLengthMinusOne);
 
@@ -185,13 +201,16 @@ public partial class Benchmark
             Vector<double> currentXNormB = Vector.Max(vMinXB, Vector.Min(currentX, vMaxXB));
             Vector<double> lambdaB = (currentXNormB - xB) * vInvDeltaB;
 
-            for (var j = 0; j < Vector<double>.Count; j++) doubleTemp[j] = B[b[j]];
+            for (var j = 0; j < Vector<double>.Count; j++)
+                doubleTemp[j] = B[b[j]];
             Vector<double> BVector = new Vector<double>(doubleTemp);
-            for (var j = 0; j < Vector<double>.Count; j++) doubleTemp[j] = B[bPlusOne[j]];
+            for (var j = 0; j < Vector<double>.Count; j++)
+                doubleTemp[j] = B[bPlusOne[j]];
             Vector<double> BVectorPlusOne = new Vector<double>(doubleTemp);
 
-            Vector<double> newZ = vWeightA * (AVector + lambdaA * (AVectorPlusOne - AVector)) +
-                        vWeightB * (BVector + lambdaB * (BVectorPlusOne - BVector));
+            Vector<double> newZ =
+                vWeightA * (AVector + lambdaA * (AVectorPlusOne - AVector))
+                + vWeightB * (BVector + lambdaB * (BVectorPlusOne - BVector));
             newZ.CopyTo(z, i);
         }
         return z;
@@ -199,18 +218,24 @@ public partial class Benchmark
 
 #if !NETCOREAPP2_1 && !NETFRAMEWORK
     private static unsafe double[] BilinearInterpol_AVX(
-                                            double[] x,
-                                            double[] A,
-                                            double minXA,
-                                            double maxXA,
-                                            double[] B,
-                                            double minXB,
-                                            double maxXB,
-                                            double weightB)
+        double[] x,
+        double[] A,
+        double minXA,
+        double maxXA,
+        double[] B,
+        double minXB,
+        double maxXB,
+        double weightB
+    )
     {
         double[] z = new double[outputVectorSize];
 
-        fixed (double* pX = &x[0], pA = &A[0], pB = &B[0], pZ = &z[0])
+        fixed (
+            double* pX = &x[0],
+                pA = &A[0],
+                pB = &B[0],
+                pZ = &z[0]
+        )
         {
             Vector256<double> vWeightB = Vector256.Create(weightB);
             Vector256<double> vWeightA = Vector256.Create(1 - weightB);
@@ -240,38 +265,70 @@ public partial class Benchmark
 
                 // Determine the largest a, such that A[i] = f(xA) and xA <= x[i].
                 // This involves casting from double to int; here we use a Vector conversion.
-                Vector256<double> aDouble = Avx.Multiply(Avx.Subtract(currentX, vMinXA), vInvDeltaA);
+                Vector256<double> aDouble = Avx.Multiply(
+                    Avx.Subtract(currentX, vMinXA),
+                    vInvDeltaA
+                );
                 Vector128<int> a = Avx.ConvertToVector128Int32WithTruncation(aDouble);
                 a = Sse41.Min(Sse41.Max(a, Vector128<int>.Zero), ALengthMinusOne);
                 Vector128<int> aPlusOne = Sse41.Min(Sse2.Add(a, One), ALengthMinusOne);
 
                 // Now, get the reference input, xA, for our index a.
                 // This involves casting from  int to double.
-                Vector256<double> xA = Avx.Add(Avx.Multiply(Avx.ConvertToVector256Double(a), vDeltaA), vMinXA);
+                Vector256<double> xA = Avx.Add(
+                    Avx.Multiply(Avx.ConvertToVector256Double(a), vDeltaA),
+                    vMinXA
+                );
 
                 // Now, compute the lambda for our A reference point.
                 Vector256<double> currentXNormA = Avx.Max(vMinXA, Avx.Min(currentX, vMaxXA));
-                Vector256<double> lambdaA = Avx.Multiply(Avx.Subtract(currentXNormA, xA), vInvDeltaA);
+                Vector256<double> lambdaA = Avx.Multiply(
+                    Avx.Subtract(currentXNormA, xA),
+                    vInvDeltaA
+                );
 
                 // Now, we need to load up our reference points using Vector Gather operations.
                 Vector256<double> AVector = Avx2.GatherVector256(pA, a, 8);
                 Vector256<double> AVectorPlusOne = Avx2.GatherVector256(pA, aPlusOne, 8);
 
                 // Now, do the all of the above for our B reference point.
-                Vector256<double> bDouble = Avx.Multiply(Avx.Subtract(currentX, vMinXB), vInvDeltaB);
+                Vector256<double> bDouble = Avx.Multiply(
+                    Avx.Subtract(currentX, vMinXB),
+                    vInvDeltaB
+                );
                 Vector128<int> b = Avx.ConvertToVector128Int32WithTruncation(bDouble);
                 b = Sse41.Min(Sse41.Max(b, Vector128<int>.Zero), BLengthMinusOne);
                 Vector128<int> bPlusOne = Sse41.Min(Sse2.Add(b, One), BLengthMinusOne);
 
-                Vector256<double> xB = Avx.Add(Avx.Multiply(Avx.ConvertToVector256Double(b), vDeltaB), vMinXB);
+                Vector256<double> xB = Avx.Add(
+                    Avx.Multiply(Avx.ConvertToVector256Double(b), vDeltaB),
+                    vMinXB
+                );
                 Vector256<double> currentXNormB = Avx.Max(vMinXB, Avx.Min(currentX, vMaxXB));
-                Vector256<double> lambdaB = Avx.Multiply(Avx.Subtract(currentXNormB, xB), vInvDeltaB);
+                Vector256<double> lambdaB = Avx.Multiply(
+                    Avx.Subtract(currentXNormB, xB),
+                    vInvDeltaB
+                );
 
                 Vector256<double> BVector = Avx2.GatherVector256(pB, b, 8);
                 Vector256<double> BVectorPlusOne = Avx2.GatherVector256(pB, bPlusOne, 8);
 
-                Vector256<double> newZ = Avx.Add(Avx.Multiply(vWeightA, Avx.Add(AVector, Avx.Multiply(lambdaA, Avx.Subtract(AVectorPlusOne, AVector)))),
-                                             Avx.Multiply(vWeightB, Avx.Add(BVector, Avx.Multiply(lambdaB, Avx.Subtract(BVectorPlusOne, BVector)))));
+                Vector256<double> newZ = Avx.Add(
+                    Avx.Multiply(
+                        vWeightA,
+                        Avx.Add(
+                            AVector,
+                            Avx.Multiply(lambdaA, Avx.Subtract(AVectorPlusOne, AVector))
+                        )
+                    ),
+                    Avx.Multiply(
+                        vWeightB,
+                        Avx.Add(
+                            BVector,
+                            Avx.Multiply(lambdaB, Avx.Subtract(BVectorPlusOne, BVector))
+                        )
+                    )
+                );
                 Avx.Store(pZ + i, newZ);
             }
         }
@@ -290,7 +347,14 @@ public partial class Benchmark
         {
             if (Math.Abs(output[i] - vectorOutput[i]) > eps)
             {
-                Console.WriteLine("Failed at " + i + ": output is " + output[i] + ", vectorOutput is " + vectorOutput[i]);
+                Console.WriteLine(
+                    "Failed at "
+                        + i
+                        + ": output is "
+                        + output[i]
+                        + ", vectorOutput is "
+                        + vectorOutput[i]
+                );
                 return false;
             }
         }
@@ -309,7 +373,16 @@ public partial class Benchmark
 
     public double[] Interpol_Vector()
     {
-        double[] vectorOutput = BilinearInterpol_Vector(input, A, minXA, maxXA, B, minXB, maxXB, weightB);
+        double[] vectorOutput = BilinearInterpol_Vector(
+            input,
+            A,
+            minXA,
+            maxXA,
+            B,
+            minXB,
+            maxXB,
+            weightB
+        );
         return vectorOutput;
     }
 

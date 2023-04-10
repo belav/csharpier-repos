@@ -18,7 +18,10 @@ internal sealed class DynamicControllerEndpointSelector : IDisposable
             throw new ArgumentNullException(nameof(dataSource));
         }
 
-        _cache = new DataSourceDependentCache<ActionSelectionTable<Endpoint>>(dataSource, Initialize);
+        _cache = new DataSourceDependentCache<ActionSelectionTable<Endpoint>>(
+            dataSource,
+            Initialize
+        );
     }
 
     private ActionSelectionTable<Endpoint> Table => _cache.EnsureInitialized();

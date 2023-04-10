@@ -9,9 +9,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 /// <summary>
 /// Used for tracking validation state to customize validation behavior for a model object.
 /// </summary>
-public class ValidationStateDictionary :
-    IDictionary<object, ValidationStateEntry>,
-    IReadOnlyDictionary<object, ValidationStateEntry>
+public class ValidationStateDictionary
+    : IDictionary<object, ValidationStateEntry>,
+        IReadOnlyDictionary<object, ValidationStateEntry>
 {
     private readonly Dictionary<object, ValidationStateEntry> _inner;
 
@@ -31,11 +31,7 @@ public class ValidationStateDictionary :
             TryGetValue(key, out var entry);
             return entry;
         }
-
-        set
-        {
-            _inner[key] = value!;
-        }
+        set { _inner[key] = value!; }
     }
 
     /// <inheritdoc />
@@ -45,7 +41,8 @@ public class ValidationStateDictionary :
         set => this[key] = value;
     }
 
-    ValidationStateEntry IReadOnlyDictionary<object, ValidationStateEntry>.this[object key] => this[key]!;
+    ValidationStateEntry IReadOnlyDictionary<object, ValidationStateEntry>.this[object key] =>
+        this[key]!;
 
     /// <inheritdoc />
     public int Count => _inner.Count;
@@ -57,7 +54,8 @@ public class ValidationStateDictionary :
     public ICollection<object> Keys => ((IDictionary<object, ValidationStateEntry>)_inner).Keys;
 
     /// <inheritdoc />
-    public ICollection<ValidationStateEntry> Values => ((IDictionary<object, ValidationStateEntry>)_inner).Values;
+    public ICollection<ValidationStateEntry> Values =>
+        ((IDictionary<object, ValidationStateEntry>)_inner).Values;
 
     /// <inheritdoc />
     IEnumerable<object> IReadOnlyDictionary<object, ValidationStateEntry>.Keys =>

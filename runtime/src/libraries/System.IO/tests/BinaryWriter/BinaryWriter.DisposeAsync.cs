@@ -102,16 +102,28 @@ namespace System.IO.Tests
         private sealed class OverrideDisposeBinaryWriter : BinaryWriter
         {
             public bool DisposeInvoked;
-            public OverrideDisposeBinaryWriter(Stream output) : base(output) { }
+
+            public OverrideDisposeBinaryWriter(Stream output)
+                : base(output) { }
+
             protected override void Dispose(bool disposing) => DisposeInvoked = true;
         }
 
         private sealed class OverrideDisposeAndDisposeAsyncBinaryWriter : BinaryWriter
         {
-            public bool DisposeInvoked, DisposeAsyncInvoked;
-            public OverrideDisposeAndDisposeAsyncBinaryWriter(Stream output) : base(output) { }
+            public bool DisposeInvoked,
+                DisposeAsyncInvoked;
+
+            public OverrideDisposeAndDisposeAsyncBinaryWriter(Stream output)
+                : base(output) { }
+
             protected override void Dispose(bool disposing) => DisposeInvoked = true;
-            public override ValueTask DisposeAsync() { DisposeAsyncInvoked = true; return default; }
+
+            public override ValueTask DisposeAsync()
+            {
+                DisposeAsyncInvoked = true;
+                return default;
+            }
         }
     }
 }

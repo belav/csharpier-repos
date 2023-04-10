@@ -19,9 +19,7 @@ namespace System.ServiceModel.Channels
         Transaction flowedTransaction;
         const string PropertyName = "TransactionMessageProperty";
 
-        private TransactionMessageProperty()
-        {
-        }
+        private TransactionMessageProperty() { }
 
         public Transaction Transaction
         {
@@ -56,7 +54,6 @@ namespace System.ServiceModel.Channels
                 return null;
 
             return ((TransactionMessageProperty)message.Properties[PropertyName]).Transaction;
-
         }
 
         static TransactionMessageProperty GetPropertyAndThrowIfAlreadySet(Message message)
@@ -64,7 +61,8 @@ namespace System.ServiceModel.Channels
             if (message.Properties.ContainsKey(PropertyName))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FaultException(SR.GetString(SR.SFxTryAddMultipleTransactionsOnMessage)));
+                    new FaultException(SR.GetString(SR.SFxTryAddMultipleTransactionsOnMessage))
+                );
             }
 
             return new TransactionMessageProperty();
@@ -85,17 +83,13 @@ namespace System.ServiceModel.Channels
         }
     }
 
-
-
     class TransactionFlowProperty
     {
         Transaction flowedTransaction;
         List<RequestSecurityTokenResponse> issuedTokens;
         const string PropertyName = "TransactionFlowProperty";
 
-        private TransactionFlowProperty()
-        {
-        }
+        private TransactionFlowProperty() { }
 
         internal ICollection<RequestSecurityTokenResponse> IssuedTokens
         {
@@ -133,7 +127,9 @@ namespace System.ServiceModel.Channels
                 return null;
         }
 
-        static internal ICollection<RequestSecurityTokenResponse> TryGetIssuedTokens(Message message)
+        static internal ICollection<RequestSecurityTokenResponse> TryGetIssuedTokens(
+            Message message
+        )
         {
             TransactionFlowProperty property = TransactionFlowProperty.TryGet(message);
             if (property == null)
@@ -152,7 +148,6 @@ namespace System.ServiceModel.Channels
                 return null;
 
             return ((TransactionFlowProperty)message.Properties[PropertyName]).Transaction;
-
         }
 
         static TransactionFlowProperty GetPropertyAndThrowIfAlreadySet(Message message)
@@ -163,7 +158,9 @@ namespace System.ServiceModel.Channels
             {
                 if (property.flowedTransaction != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FaultException(SR.GetString(SR.SFxTryAddMultipleTransactionsOnMessage)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new FaultException(SR.GetString(SR.SFxTryAddMultipleTransactionsOnMessage))
+                    );
                 }
             }
             else

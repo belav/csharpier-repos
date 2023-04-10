@@ -20,70 +20,114 @@ namespace Microsoft.AspNetCore.E2ETesting;
 public static class WaitAssert
 {
     private static bool TestRunFailed;
-    public static TimeSpan DefaultTimeout = TimeSpan.FromSeconds(E2ETestOptions.Instance.DefaultWaitTimeoutInSeconds);
-    public static TimeSpan FailureTimeout = TimeSpan.FromSeconds(E2ETestOptions.Instance.DefaultAfterFailureWaitTimeoutInSeconds);
+    public static TimeSpan DefaultTimeout = TimeSpan.FromSeconds(
+        E2ETestOptions.Instance.DefaultWaitTimeoutInSeconds
+    );
+    public static TimeSpan FailureTimeout = TimeSpan.FromSeconds(
+        E2ETestOptions.Instance.DefaultAfterFailureWaitTimeoutInSeconds
+    );
 
-    public static void Equal<T>(this IWebDriver driver, T expected, Func<T> actual)
-        => WaitAssertCore(driver, () => Assert.Equal(expected, actual()));
+    public static void Equal<T>(this IWebDriver driver, T expected, Func<T> actual) =>
+        WaitAssertCore(driver, () => Assert.Equal(expected, actual()));
 
-    public static void NotEqual<T>(this IWebDriver driver, T expected, Func<T> actual)
-        => WaitAssertCore(driver, () => Assert.NotEqual(expected, actual()));
+    public static void NotEqual<T>(this IWebDriver driver, T expected, Func<T> actual) =>
+        WaitAssertCore(driver, () => Assert.NotEqual(expected, actual()));
 
-    public static void True(this IWebDriver driver, Func<bool> actual)
-        => WaitAssertCore(driver, () => Assert.True(actual()));
+    public static void True(this IWebDriver driver, Func<bool> actual) =>
+        WaitAssertCore(driver, () => Assert.True(actual()));
 
-    public static void True(this IWebDriver driver, Func<bool> actual, TimeSpan timeout)
-        => WaitAssertCore(driver, () => Assert.True(actual()), timeout);
+    public static void True(this IWebDriver driver, Func<bool> actual, TimeSpan timeout) =>
+        WaitAssertCore(driver, () => Assert.True(actual()), timeout);
 
-    public static void False(this IWebDriver driver, Func<bool> actual)
-        => WaitAssertCore(driver, () => Assert.False(actual()));
+    public static void False(this IWebDriver driver, Func<bool> actual) =>
+        WaitAssertCore(driver, () => Assert.False(actual()));
 
-    public static void Contains(this IWebDriver driver, string expectedSubstring, Func<string> actualString)
-        => WaitAssertCore(driver, () => Assert.Contains(expectedSubstring, actualString()));
+    public static void Contains(
+        this IWebDriver driver,
+        string expectedSubstring,
+        Func<string> actualString
+    ) => WaitAssertCore(driver, () => Assert.Contains(expectedSubstring, actualString()));
 
-    public static void Collection<T>(this IWebDriver driver, Func<IEnumerable<T>> actualValues, params Action<T>[] elementInspectors)
-        => WaitAssertCore(driver, () => Assert.Collection(actualValues(), elementInspectors));
+    public static void Collection<T>(
+        this IWebDriver driver,
+        Func<IEnumerable<T>> actualValues,
+        params Action<T>[] elementInspectors
+    ) => WaitAssertCore(driver, () => Assert.Collection(actualValues(), elementInspectors));
 
-    public static void Empty(this IWebDriver driver, Func<IEnumerable> actualValues)
-        => WaitAssertCore(driver, () => Assert.Empty(actualValues()));
+    public static void Empty(this IWebDriver driver, Func<IEnumerable> actualValues) =>
+        WaitAssertCore(driver, () => Assert.Empty(actualValues()));
 
-    public static void Single(this IWebDriver driver, Func<IEnumerable> actualValues)
-        => WaitAssertCore(driver, () => Assert.Single(actualValues()));
+    public static void Single(this IWebDriver driver, Func<IEnumerable> actualValues) =>
+        WaitAssertCore(driver, () => Assert.Single(actualValues()));
 
-    public static IWebElement Exists(this IWebDriver driver, By finder)
-        => Exists(driver, finder, default);
+    public static IWebElement Exists(this IWebDriver driver, By finder) =>
+        Exists(driver, finder, default);
 
-    public static TElement Exists<TElement>(this IWebDriver driver, Func<TElement> actual, TimeSpan timeout)
-        => WaitAssertCore(driver, actual, timeout);
+    public static TElement Exists<TElement>(
+        this IWebDriver driver,
+        Func<TElement> actual,
+        TimeSpan timeout
+    ) => WaitAssertCore(driver, actual, timeout);
 
-    public static void DoesNotExist(this IWebDriver driver, By finder, TimeSpan timeout = default)
-        => WaitAssertCore(driver, () =>
-        {
-            var elements = driver.FindElements(finder);
-            Assert.Empty(elements);
-        }, timeout);
+    public static void DoesNotExist(
+        this IWebDriver driver,
+        By finder,
+        TimeSpan timeout = default
+    ) =>
+        WaitAssertCore(
+            driver,
+            () =>
+            {
+                var elements = driver.FindElements(finder);
+                Assert.Empty(elements);
+            },
+            timeout
+        );
 
-    public static IWebElement Exists(this IWebDriver driver, By finder, TimeSpan timeout)
-        => WaitAssertCore(driver, () =>
-        {
-            var elements = driver.FindElements(finder);
-            Assert.NotEmpty(elements);
-            var result = elements[0];
-            return result;
-        }, timeout);
+    public static IWebElement Exists(this IWebDriver driver, By finder, TimeSpan timeout) =>
+        WaitAssertCore(
+            driver,
+            () =>
+            {
+                var elements = driver.FindElements(finder);
+                Assert.NotEmpty(elements);
+                var result = elements[0];
+                return result;
+            },
+            timeout
+        );
 
-    public static void Click(this IWebDriver driver, By selector)
-        => WaitAssertCore(driver, () =>
-        {
-            driver.FindElement(selector).Click();
-        });
+    public static void Click(this IWebDriver driver, By selector) =>
+        WaitAssertCore(
+            driver,
+            () =>
+            {
+                driver.FindElement(selector).Click();
+            }
+        );
 
-    private static void WaitAssertCore(IWebDriver driver, Action assertion, TimeSpan timeout = default)
+    private static void WaitAssertCore(
+        IWebDriver driver,
+        Action assertion,
+        TimeSpan timeout = default
+    )
     {
-        WaitAssertCore<object>(driver, () => { assertion(); return null; }, timeout);
+        WaitAssertCore<object>(
+            driver,
+            () =>
+            {
+                assertion();
+                return null;
+            },
+            timeout
+        );
     }
 
-    private static TResult WaitAssertCore<TResult>(IWebDriver driver, Func<TResult> assertion, TimeSpan timeout = default)
+    private static TResult WaitAssertCore<TResult>(
+        IWebDriver driver,
+        Func<TResult> assertion,
+        TimeSpan timeout = default
+    )
     {
         if (timeout == default)
         {
@@ -116,17 +160,29 @@ public static class WaitAssert
             // tests running concurrently might use the DefaultTimeout in their current assertion, which is fine.
             TestRunFailed = true;
 
-            var innerHtml = driver.FindElement(By.CssSelector(":first-child"))?.GetAttribute("innerHTML");
+            var innerHtml = driver
+                .FindElement(By.CssSelector(":first-child"))
+                ?.GetAttribute("innerHTML");
 
             var fileId = $"{Guid.NewGuid():N}.png";
-            var screenShotPath = Path.Combine(Path.GetFullPath(E2ETestOptions.Instance.ScreenShotsPath), fileId);
+            var screenShotPath = Path.Combine(
+                Path.GetFullPath(E2ETestOptions.Instance.ScreenShotsPath),
+                fileId
+            );
             var errors = driver.GetBrowserLogs(LogLevel.All).Select(c => c.ToString()).ToList();
 
             TakeScreenShot(driver, screenShotPath);
-            var exceptionInfo = lastException != null ? ExceptionDispatchInfo.Capture(lastException) :
-                CaptureException(() => assertion());
+            var exceptionInfo =
+                lastException != null
+                    ? ExceptionDispatchInfo.Capture(lastException)
+                    : CaptureException(() => assertion());
 
-            throw new BrowserAssertFailedException(errors, exceptionInfo.SourceException, screenShotPath, innerHtml);
+            throw new BrowserAssertFailedException(
+                errors,
+                exceptionInfo.SourceException,
+                screenShotPath,
+                innerHtml
+            );
         }
 
         return result;
@@ -147,7 +203,10 @@ public static class WaitAssert
 
     private static void TakeScreenShot(IWebDriver driver, string screenShotPath)
     {
-        if (driver is ITakesScreenshot takesScreenshot && E2ETestOptions.Instance.ScreenShotsPath != null)
+        if (
+            driver is ITakesScreenshot takesScreenshot
+            && E2ETestOptions.Instance.ScreenShotsPath != null
+        )
         {
             try
             {

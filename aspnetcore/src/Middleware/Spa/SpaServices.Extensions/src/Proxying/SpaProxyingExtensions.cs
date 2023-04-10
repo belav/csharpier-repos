@@ -21,13 +21,9 @@ public static class SpaProxyingExtensions
     /// </summary>
     /// <param name="spaBuilder">The <see cref="ISpaBuilder"/>.</param>
     /// <param name="baseUri">The target base URI to which requests should be proxied.</param>
-    public static void UseProxyToSpaDevelopmentServer(
-        this ISpaBuilder spaBuilder,
-        string baseUri)
+    public static void UseProxyToSpaDevelopmentServer(this ISpaBuilder spaBuilder, string baseUri)
     {
-        UseProxyToSpaDevelopmentServer(
-            spaBuilder,
-            new Uri(baseUri));
+        UseProxyToSpaDevelopmentServer(spaBuilder, new Uri(baseUri));
     }
 
     /// <summary>
@@ -37,13 +33,9 @@ public static class SpaProxyingExtensions
     /// </summary>
     /// <param name="spaBuilder">The <see cref="ISpaBuilder"/>.</param>
     /// <param name="baseUri">The target base URI to which requests should be proxied.</param>
-    public static void UseProxyToSpaDevelopmentServer(
-        this ISpaBuilder spaBuilder,
-        Uri baseUri)
+    public static void UseProxyToSpaDevelopmentServer(this ISpaBuilder spaBuilder, Uri baseUri)
     {
-        UseProxyToSpaDevelopmentServer(
-            spaBuilder,
-            () => Task.FromResult(baseUri));
+        UseProxyToSpaDevelopmentServer(spaBuilder, () => Task.FromResult(baseUri));
     }
 
     /// <summary>
@@ -55,7 +47,8 @@ public static class SpaProxyingExtensions
     /// <param name="baseUriTaskFactory">A callback that will be invoked on each request to supply a <see cref="Task"/> that resolves with the target base URI to which requests should be proxied.</param>
     public static void UseProxyToSpaDevelopmentServer(
         this ISpaBuilder spaBuilder,
-        Func<Task<Uri>> baseUriTaskFactory)
+        Func<Task<Uri>> baseUriTaskFactory
+    )
     {
         var applicationBuilder = spaBuilder.ApplicationBuilder;
         var applicationStoppingToken = GetStoppingToken(applicationBuilder);
@@ -67,23 +60,27 @@ public static class SpaProxyingExtensions
         // It's important not to time out the requests, as some of them might be to
         // server-sent event endpoints or similar, where it's expected that the response
         // takes an unlimited time and never actually completes
-        var neverTimeOutHttpClient =
-            SpaProxy.CreateHttpClientForProxy(Timeout.InfiniteTimeSpan);
+        var neverTimeOutHttpClient = SpaProxy.CreateHttpClientForProxy(Timeout.InfiniteTimeSpan);
 
         // Proxy all requests to the SPA development server
-        applicationBuilder.Run(async (context) =>
-        {
-            var didProxyRequest = await SpaProxy.PerformProxyRequest(
-                context, neverTimeOutHttpClient, baseUriTaskFactory(), applicationStoppingToken,
-                proxy404s: true);
-        });
+        applicationBuilder.Run(
+            async (context) =>
+            {
+                var didProxyRequest = await SpaProxy.PerformProxyRequest(
+                    context,
+                    neverTimeOutHttpClient,
+                    baseUriTaskFactory(),
+                    applicationStoppingToken,
+                    proxy404s: true
+                );
+            }
+        );
     }
 
     private static CancellationToken GetStoppingToken(IApplicationBuilder appBuilder)
     {
-        var applicationLifetime = appBuilder
-            .ApplicationServices
-            .GetRequiredService<IHostApplicationLifetime>();
+        var applicationLifetime =
+            appBuilder.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
         return applicationLifetime.ApplicationStopping;
     }
 }

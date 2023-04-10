@@ -26,7 +26,10 @@ namespace Microsoft.VisualBasic.Tests
 
         public static IEnumerable<object[]> InvalidBool_TestData()
         {
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { FloatEnum };
                 yield return new object[] { DoubleEnum };
@@ -42,7 +45,10 @@ namespace Microsoft.VisualBasic.Tests
             yield return new object[] { char.MaxValue };
             yield return new object[] { new DateTime(10) };
             yield return new object[] { new object() };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { CharEnum };
             }
@@ -159,7 +165,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, byte.MaxValue };
             yield return new object[] { false, byte.MinValue };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, byte.MinValue };
             }
@@ -340,7 +349,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, (sbyte)(-1) };
             yield return new object[] { false, (sbyte)0 };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, (sbyte)0 };
             }
@@ -514,7 +526,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, ushort.MaxValue };
             yield return new object[] { false, ushort.MinValue };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, ushort.MinValue };
             }
@@ -698,7 +713,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, (short)(-1) };
             yield return new object[] { false, (short)0 };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, (short)0 };
             }
@@ -876,7 +894,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, uint.MaxValue };
             yield return new object[] { false, uint.MinValue };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, uint.MinValue };
             }
@@ -1066,7 +1087,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, -1 };
             yield return new object[] { false, 0 };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, 0 };
             }
@@ -1252,7 +1276,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, ulong.MaxValue };
             yield return new object[] { false, ulong.MinValue };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, ulong.MinValue };
             }
@@ -1480,7 +1507,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, (long)(-1) };
             yield return new object[] { false, (long)0 };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, (long)0 };
             }
@@ -1563,8 +1593,16 @@ namespace Microsoft.VisualBasic.Tests
             yield return new object[] { "&o0", (float)0 };
             yield return new object[] { 1.1.ToString(), (float)1.1 };
             yield return new object[] { "18446744073709551616", 18446744073709551616.0f };
-            yield return new object[] { double.PositiveInfinity.ToString(), float.PositiveInfinity };
-            yield return new object[] { double.NegativeInfinity.ToString(), float.NegativeInfinity };
+            yield return new object[]
+            {
+                double.PositiveInfinity.ToString(),
+                float.PositiveInfinity
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity.ToString(),
+                float.NegativeInfinity
+            };
             yield return new object[] { double.NaN.ToString(), float.NaN };
         }
 
@@ -1706,7 +1744,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, (float)(-1) };
             yield return new object[] { false, (float)0 };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, (float)0 };
             }
@@ -1767,9 +1808,21 @@ namespace Microsoft.VisualBasic.Tests
             yield return new object[] { "&o0", (double)0 };
             yield return new object[] { 1.1.ToString(), (double)1.1 };
             yield return new object[] { "18446744073709551616", 18446744073709551616.0 };
-            yield return new object[] { "1844674407370955161618446744073709551616", 1844674407370955161618446744073709551616.0 };
-            yield return new object[] { double.PositiveInfinity.ToString(), double.PositiveInfinity };
-            yield return new object[] { double.NegativeInfinity.ToString(), double.NegativeInfinity };
+            yield return new object[]
+            {
+                "1844674407370955161618446744073709551616",
+                1844674407370955161618446744073709551616.0
+            };
+            yield return new object[]
+            {
+                double.PositiveInfinity.ToString(),
+                double.PositiveInfinity
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity.ToString(),
+                double.NegativeInfinity
+            };
             yield return new object[] { double.NaN.ToString(), double.NaN };
         }
 
@@ -1899,7 +1952,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, (double)(-1) };
             yield return new object[] { false, (double)0 };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, (double)0 };
             }
@@ -2095,7 +2151,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, (decimal)(-1) };
             yield return new object[] { false, (decimal)0 };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, (decimal)0 };
             }
@@ -2321,7 +2380,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, true };
             yield return new object[] { false, false };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, false };
             }
@@ -2622,8 +2684,16 @@ namespace Microsoft.VisualBasic.Tests
             yield return new object[] { (double)(-1), "-1" };
             yield return new object[] { (double)0, "0" };
             yield return new object[] { (double)1, "1" };
-            yield return new object[] { double.PositiveInfinity, double.PositiveInfinity.ToString() };
-            yield return new object[] { double.NegativeInfinity, double.NegativeInfinity.ToString() };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                double.PositiveInfinity.ToString()
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                double.NegativeInfinity.ToString()
+            };
             yield return new object[] { double.NaN, double.NaN.ToString() };
 
             // decimal.
@@ -2636,7 +2706,10 @@ namespace Microsoft.VisualBasic.Tests
             // bool.
             yield return new object[] { true, "True" };
             yield return new object[] { false, "False" };
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return new object[] { BoolEnum, "False" };
             }
@@ -2711,10 +2784,17 @@ namespace Microsoft.VisualBasic.Tests
             {
                 if (s_floatEnum == null)
                 {
-                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                        new AssemblyName("Name"),
+                        AssemblyBuilderAccess.RunAndCollect
+                    );
                     ModuleBuilder module = assembly.DefineDynamicModule("Name");
 
-                    EnumBuilder eb = module.DefineEnum("CharEnumType", TypeAttributes.Public, typeof(float));
+                    EnumBuilder eb = module.DefineEnum(
+                        "CharEnumType",
+                        TypeAttributes.Public,
+                        typeof(float)
+                    );
                     eb.DefineLiteral("A", 1.0f);
                     eb.DefineLiteral("B", 2.0f);
                     eb.DefineLiteral("C", 3.0f);
@@ -2734,10 +2814,17 @@ namespace Microsoft.VisualBasic.Tests
             {
                 if (s_doubleEnum == null)
                 {
-                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                        new AssemblyName("Name"),
+                        AssemblyBuilderAccess.RunAndCollect
+                    );
                     ModuleBuilder module = assembly.DefineDynamicModule("Name");
 
-                    EnumBuilder eb = module.DefineEnum("CharEnumType", TypeAttributes.Public, typeof(double));
+                    EnumBuilder eb = module.DefineEnum(
+                        "CharEnumType",
+                        TypeAttributes.Public,
+                        typeof(double)
+                    );
                     eb.DefineLiteral("A", 1.0);
                     eb.DefineLiteral("B", 2.0);
                     eb.DefineLiteral("C", 3.0);
@@ -2757,10 +2844,17 @@ namespace Microsoft.VisualBasic.Tests
             {
                 if (s_boolEnum == null)
                 {
-                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                        new AssemblyName("Name"),
+                        AssemblyBuilderAccess.RunAndCollect
+                    );
                     ModuleBuilder module = assembly.DefineDynamicModule("Name");
 
-                    EnumBuilder eb = module.DefineEnum("BoolEnumType", TypeAttributes.Public, typeof(bool));
+                    EnumBuilder eb = module.DefineEnum(
+                        "BoolEnumType",
+                        TypeAttributes.Public,
+                        typeof(bool)
+                    );
                     eb.DefineLiteral("False", false);
                     eb.DefineLiteral("True", true);
 
@@ -2779,10 +2873,17 @@ namespace Microsoft.VisualBasic.Tests
             {
                 if (s_charEnum == null)
                 {
-                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                        new AssemblyName("Name"),
+                        AssemblyBuilderAccess.RunAndCollect
+                    );
                     ModuleBuilder module = assembly.DefineDynamicModule("Name");
 
-                    EnumBuilder eb = module.DefineEnum("CharEnumType", TypeAttributes.Public, typeof(char));
+                    EnumBuilder eb = module.DefineEnum(
+                        "CharEnumType",
+                        TypeAttributes.Public,
+                        typeof(char)
+                    );
                     eb.DefineLiteral("A", 'A');
                     eb.DefineLiteral("B", 'B');
                     eb.DefineLiteral("C", 'C');
@@ -2802,10 +2903,17 @@ namespace Microsoft.VisualBasic.Tests
             {
                 if (s_intPtrEnum == null)
                 {
-                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                        new AssemblyName("Name"),
+                        AssemblyBuilderAccess.RunAndCollect
+                    );
                     ModuleBuilder module = assembly.DefineDynamicModule("Name");
 
-                    EnumBuilder eb = module.DefineEnum("CharEnumType", TypeAttributes.Public, typeof(IntPtr));
+                    EnumBuilder eb = module.DefineEnum(
+                        "CharEnumType",
+                        TypeAttributes.Public,
+                        typeof(IntPtr)
+                    );
 
                     s_intPtrEnum = Activator.CreateInstance(eb.CreateTypeInfo());
                 }
@@ -2822,10 +2930,17 @@ namespace Microsoft.VisualBasic.Tests
             {
                 if (s_uintPtrEnum == null)
                 {
-                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                        new AssemblyName("Name"),
+                        AssemblyBuilderAccess.RunAndCollect
+                    );
                     ModuleBuilder module = assembly.DefineDynamicModule("Name");
 
-                    EnumBuilder eb = module.DefineEnum("CharEnumType", TypeAttributes.Public, typeof(UIntPtr));
+                    EnumBuilder eb = module.DefineEnum(
+                        "CharEnumType",
+                        TypeAttributes.Public,
+                        typeof(UIntPtr)
+                    );
 
                     s_uintPtrEnum = Activator.CreateInstance(eb.CreateTypeInfo());
                 }
@@ -2840,7 +2955,7 @@ namespace Microsoft.VisualBasic.Tests
             {
                 Assert.Equal(expected.ToString(), actual.ToString());
             }
-            else  if (expected is float expectedFloat && actual is float actualFloat)
+            else if (expected is float expectedFloat && actual is float actualFloat)
             {
                 Assert.Equal(expected.ToString(), actual.ToString());
             }
@@ -2851,19 +2966,43 @@ namespace Microsoft.VisualBasic.Tests
         }
     }
 
-    public enum ByteEnum : byte { Value = 1 }
+    public enum ByteEnum : byte
+    {
+        Value = 1
+    }
 
-    public enum SByteEnum : sbyte { Value = 1 }
+    public enum SByteEnum : sbyte
+    {
+        Value = 1
+    }
 
-    public enum UShortEnum : ushort { Value = 1 }
+    public enum UShortEnum : ushort
+    {
+        Value = 1
+    }
 
-    public enum ShortEnum : short { Value = 1 }
+    public enum ShortEnum : short
+    {
+        Value = 1
+    }
 
-    public enum UIntEnum : uint { Value = 1 }
+    public enum UIntEnum : uint
+    {
+        Value = 1
+    }
 
-    public enum IntEnum : int { Value = 1 }
+    public enum IntEnum : int
+    {
+        Value = 1
+    }
 
-    public enum ULongEnum : ulong { Value = 1 }
+    public enum ULongEnum : ulong
+    {
+        Value = 1
+    }
 
-    public enum LongEnum : long { Value = 1 }
+    public enum LongEnum : long
+    {
+        Value = 1
+    }
 }

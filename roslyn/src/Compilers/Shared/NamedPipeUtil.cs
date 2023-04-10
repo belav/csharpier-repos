@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// The compiler needs to take advantage of features on named pipes which require target framework
-    /// specific APIs. This class is meant to provide a simple, universal interface on top of the 
+    /// specific APIs. This class is meant to provide a simple, universal interface on top of the
     /// multi-targeting code that is needed here.
     /// </summary>
     internal static class NamedPipeUtil
@@ -42,13 +42,23 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a client for the current user only.
         /// </summary>
-        internal static NamedPipeClientStream CreateClient(string serverName, string pipeName, PipeDirection direction, PipeOptions options)
-            => new NamedPipeClientStream(serverName, GetPipeNameOrPath(pipeName), direction, options | CurrentUserOption);
+        internal static NamedPipeClientStream CreateClient(
+            string serverName,
+            string pipeName,
+            PipeDirection direction,
+            PipeOptions options
+        ) =>
+            new NamedPipeClientStream(
+                serverName,
+                GetPipeNameOrPath(pipeName),
+                direction,
+                options | CurrentUserOption
+            );
 
         /// <summary>
-        /// Does the client of "pipeStream" have the same identity and elevation as we do? The <see cref="CreateClient"/> and 
-        /// <see cref="CreateServer(string, PipeDirection?)" /> methods will already guarantee that the identity of the client and server are the 
-        /// same. This method is attempting to validate that the elevation level is the same between both ends of the 
+        /// Does the client of "pipeStream" have the same identity and elevation as we do? The <see cref="CreateClient"/> and
+        /// <see cref="CreateServer(string, PipeDirection?)" /> methods will already guarantee that the identity of the client and server are the
+        /// same. This method is attempting to validate that the elevation level is the same between both ends of the
         /// named pipe (want to disallow low priv session sending compilation requests to an elevated one).
         /// </summary>
         internal static bool CheckClientElevationMatches(NamedPipeServerStream pipeStream)
@@ -59,17 +69,24 @@ namespace Microsoft.CodeAnalysis
                 var serverIdentity = getIdentity();
 
                 (string name, bool admin) clientIdentity = default;
-                pipeStream.RunAsClient(() => { clientIdentity = getIdentity(); });
+                pipeStream.RunAsClient(() =>
+                {
+                    clientIdentity = getIdentity();
+                });
 
-                return
-                    StringComparer.OrdinalIgnoreCase.Equals(serverIdentity.name, clientIdentity.name) &&
-                    serverIdentity.admin == clientIdentity.admin;
+                return StringComparer.OrdinalIgnoreCase.Equals(
+                        serverIdentity.name,
+                        clientIdentity.name
+                    )
+                    && serverIdentity.admin == clientIdentity.admin;
 
                 (string name, bool admin) getIdentity()
                 {
                     var currentIdentity = WindowsIdentity.GetCurrent();
                     var currentPrincipal = new WindowsPrincipal(currentIdentity);
-                    var elevatedToAdmin = currentPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
+                    var elevatedToAdmin = currentPrincipal.IsInRole(
+                        WindowsBuiltInRole.Administrator
+                    );
                     return (currentIdentity.Name, elevatedToAdmin);
                 }
 #pragma warning restore CA1416 // Validate platform compatibility
@@ -81,7 +98,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a server for the current user only
         /// </summary>
-        internal static NamedPipeServerStream CreateServer(string pipeName, PipeDirection? pipeDirection = null)
+        internal static NamedPipeServerStream CreateServer(
+            string pipeName,
+            PipeDirection? pipeDirection = null
+        )
         {
             var pipeOptions = PipeOptions.Asynchronous | PipeOptions.WriteThrough;
             return CreateServer(
@@ -91,7 +111,8 @@ namespace Microsoft.CodeAnalysis
                 PipeTransmissionMode.Byte,
                 pipeOptions,
                 PipeBufferSize,
-                PipeBufferSize);
+                PipeBufferSize
+            );
         }
 
 #if NET472
@@ -99,7 +120,7 @@ namespace Microsoft.CodeAnalysis
         const int s_currentUserOnlyValue = 0x20000000;
 
         /// <summary>
-        /// Mono supports CurrentUserOnly even though it's not exposed on the reference assemblies for net472. This 
+        /// Mono supports CurrentUserOnly even though it's not exposed on the reference assemblies for net472. This
         /// must be used because ACL security does not work.
         /// </summary>
         private static readonly PipeOptions CurrentUserOption = PlatformInformation.IsRunningOnMono
@@ -113,7 +134,8 @@ namespace Microsoft.CodeAnalysis
             PipeTransmissionMode transmissionMode,
             PipeOptions options,
             int inBufferSize,
-            int outBufferSize) =>
+            int outBufferSize
+        ) =>
             new NamedPipeServerStream(
                 GetPipeNameOrPath(pipeName),
                 direction,
@@ -123,7 +145,8 @@ namespace Microsoft.CodeAnalysis
                 inBufferSize,
                 outBufferSize,
                 CreatePipeSecurity(),
-                HandleInheritability.None);
+                HandleInheritability.None
+            );
 
         /// <summary>
         /// Check to ensure that the named pipe server we connected to is owned by the same
@@ -150,7 +173,7 @@ namespace Microsoft.CodeAnalysis
             if (PlatformInformation.IsRunningOnMono)
             {
                 // Pipe security and additional access rights constructor arguments
-                //  are not supported by Mono 
+                //  are not supported by Mono
                 // https://github.com/dotnet/roslyn/pull/30810
                 // https://github.com/mono/mono/issues/11406
                 return null;
@@ -159,8 +182,12 @@ namespace Microsoft.CodeAnalysis
             var security = new PipeSecurity();
             SecurityIdentifier identifier = WindowsIdentity.GetCurrent().Owner;
 
-            // Restrict access to just this account.  
-            PipeAccessRule rule = new PipeAccessRule(identifier, PipeAccessRights.ReadWrite | PipeAccessRights.CreateNewInstance, AccessControlType.Allow);
+            // Restrict access to just this account.
+            PipeAccessRule rule = new PipeAccessRule(
+                identifier,
+                PipeAccessRights.ReadWrite | PipeAccessRights.CreateNewInstance,
+                AccessControlType.Allow
+            );
             security.AddAccessRule(rule);
             security.SetOwner(identifier);
             return security;
@@ -185,7 +212,8 @@ namespace Microsoft.CodeAnalysis
             PipeTransmissionMode transmissionMode,
             PipeOptions options,
             int inBufferSize,
-            int outBufferSize) =>
+            int outBufferSize
+        ) =>
             new NamedPipeServerStream(
                 GetPipeNameOrPath(pipeName),
                 direction,
@@ -193,11 +221,11 @@ namespace Microsoft.CodeAnalysis
                 transmissionMode,
                 options | CurrentUserOption,
                 inBufferSize,
-                outBufferSize);
+                outBufferSize
+            );
 
 #else
 #error Unsupported configuration
 #endif
-
     }
 }

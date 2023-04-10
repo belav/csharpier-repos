@@ -14,6 +14,7 @@ namespace System.Collections.Frozen
     internal sealed class FullStringComparer : StringComparerBase
     {
         public override bool Equals(string? x, string? y) => string.Equals(x, y);
+
         public override int GetHashCode(string s) => GetHashCodeOrdinal(s.AsSpan());
     }
 }

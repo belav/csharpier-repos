@@ -10,7 +10,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
     {
         private class TestDerived : ECDiffieHellmanPublicKey
         {
-            public TestDerived(byte[] keyBlob) : base(keyBlob) { }
+            public TestDerived(byte[] keyBlob)
+                : base(keyBlob) { }
         }
 
         [Fact]

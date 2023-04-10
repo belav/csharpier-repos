@@ -26,13 +26,15 @@ namespace Castle.DynamicProxy.Tests.Classes
         {
             Console.WriteLine(
                 $"Before Await ClassWithAsynchronousMethod:Method ThreadId='{Thread.CurrentThread.ManagedThreadId}'.",
-                Thread.CurrentThread.ManagedThreadId);
+                Thread.CurrentThread.ManagedThreadId
+            );
 
             await Task.Delay(10).ConfigureAwait(false);
 
             Console.WriteLine(
                 $"After Await ClassWithAsynchronousMethod:Method ThreadId='{Thread.CurrentThread.ManagedThreadId}'.",
-                Thread.CurrentThread.ManagedThreadId);
+                Thread.CurrentThread.ManagedThreadId
+            );
         }
     }
 }

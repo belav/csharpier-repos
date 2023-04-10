@@ -21,7 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             _assemblyIdentities = new HashSet<AssemblyIdentity>(assemblyIdentities);
         }
 
-        public bool Includes(AssemblyIdentity assemblyIdentity)
-            => _assemblyIdentities.Contains(assemblyIdentity);
+        public bool Includes(AssemblyIdentity assemblyIdentity) =>
+            _assemblyIdentities.Contains(assemblyIdentity);
     }
 }

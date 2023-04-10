@@ -9,7 +9,10 @@ namespace System.Runtime.CompilerServices
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     internal sealed class RestrictedInternalsVisibleToAttribute : Attribute
     {
-        public RestrictedInternalsVisibleToAttribute(string assemblyName, params string[] allowedNamespaces)
+        public RestrictedInternalsVisibleToAttribute(
+            string assemblyName,
+            params string[] allowedNamespaces
+        )
         {
             AssemblyName = assemblyName;
             AllowedNamespaces = allowedNamespaces.ToImmutableArray();

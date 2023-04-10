@@ -14,7 +14,8 @@ public abstract class RazorSyntaxTree
         SyntaxNode root,
         RazorSourceDocument source,
         IEnumerable<RazorDiagnostic> diagnostics,
-        RazorParserOptions options)
+        RazorParserOptions options
+    )
     {
         if (root == null)
         {
@@ -36,7 +37,12 @@ public abstract class RazorSyntaxTree
             throw new ArgumentNullException(nameof(options));
         }
 
-        return new DefaultRazorSyntaxTree(root, source, new List<RazorDiagnostic>(diagnostics), options);
+        return new DefaultRazorSyntaxTree(
+            root,
+            source,
+            new List<RazorDiagnostic>(diagnostics),
+            options
+        );
     }
 
     public static RazorSyntaxTree Parse(RazorSourceDocument source)

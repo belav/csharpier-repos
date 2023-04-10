@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration.Internal {
+namespace System.Configuration.Internal
+{
     using System.Configuration.Internal;
     using System.Collections;
     using System.Collections.Specialized;
@@ -21,16 +22,19 @@ namespace System.Configuration.Internal {
     //
     // Event arguments for Configuration events.
     //
-    public sealed class InternalConfigEventArgs : EventArgs {
-        string  _configPath;
+    public sealed class InternalConfigEventArgs : EventArgs
+    {
+        string _configPath;
 
-        public InternalConfigEventArgs(string configPath) {
+        public InternalConfigEventArgs(string configPath)
+        {
             _configPath = configPath;
         }
 
-        public string ConfigPath {
-            get {return _configPath;}
-            set {_configPath = value;}
+        public string ConfigPath
+        {
+            get { return _configPath; }
+            set { _configPath = value; }
         }
     }
 }

@@ -16,7 +16,7 @@ public class VSTSTest
     static bool _done = false;
     static long _maxPrivate = 0;
     static object lockObject = new Object();
-        
+
     // each worker will hold *in the worst case scenario* 100 * 250k * 2 = 50MB
     // all 16 threads will hold in the worst case scenario 800MB
     static void Worker(object ctx)
@@ -27,21 +27,21 @@ public class VSTSTest
         {
             Thread.Sleep(rnd.Next(50, 100));
             s[i] = new string('x', rnd.Next(_minSize, _maxSize));
-     
-	    long _private = Process.GetCurrentProcess().PrivateMemorySize64;
-		
-	    lock (lockObject)
-	    {
-		if (_private > _maxPrivate)
-		    _maxPrivate = _private;
-	    }
+
+            long _private = Process.GetCurrentProcess().PrivateMemorySize64;
+
+            lock (lockObject)
+            {
+                if (_private > _maxPrivate)
+                    _maxPrivate = _private;
+            }
         }
-        
-	if (_count++ >= _maxCount)
-		_done = true;
-	
-	if (!_done)
-		ThreadPool.QueueUserWorkItem(Worker);
+
+        if (_count++ >= _maxCount)
+            _done = true;
+
+        if (!_done)
+            ThreadPool.QueueUserWorkItem(Worker);
     }
 
     static public void Allocate()
@@ -53,8 +53,8 @@ public class VSTSTest
     }
 
     public static void Main()
-    {		    
-        Allocate();    
+    {
+        Allocate();
         while (!_done)
         {
             Thread.Sleep(0);

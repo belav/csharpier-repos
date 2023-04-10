@@ -25,7 +25,7 @@ class ThreadStartNull
 
     private void ThreadWorker(Object o)
     {
-        if(null == o)
+        if (null == o)
             iRet = 100;
         else
             Console.WriteLine("Object was not null");

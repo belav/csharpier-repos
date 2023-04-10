@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,7 +31,8 @@ namespace Castle.DynamicProxy
             object proxy,
             IInterceptor[] interceptors,
             MethodInfo proxiedMethod,
-            object[] arguments)
+            object[] arguments
+        )
         {
             Debug.Assert(proxiedMethod != null);
             proxyObject = proxy;
@@ -75,8 +76,10 @@ namespace Castle.DynamicProxy
         {
             // it is ensured by the InvocationHelper that method will be closed
             var method = MethodInvocationTarget;
-            Debug.Assert(method == null || method.IsGenericMethodDefinition == false,
-                         "method == null || method.IsGenericMethodDefinition == false");
+            Debug.Assert(
+                method == null || method.IsGenericMethodDefinition == false,
+                "method == null || method.IsGenericMethodDefinition == false"
+            );
             return method;
         }
 
@@ -100,7 +103,7 @@ namespace Castle.DynamicProxy
         public void Proceed()
         {
             if (interceptors == null)
-                // not yet fully initialized? probably, an intercepted method is called while we are being deserialized
+            // not yet fully initialized? probably, an intercepted method is called while we are being deserialized
             {
                 InvokeMethodOnTarget();
                 return;
@@ -116,8 +119,9 @@ namespace Castle.DynamicProxy
                 else if (currentInterceptorIndex > interceptors.Length)
                 {
                     throw new InvalidOperationException(
-                        "Cannot proceed past the end of the interception pipeline. " +
-                        "This likely signifies a bug in the calling code.");
+                        "Cannot proceed past the end of the interception pipeline. "
+                            + "This likely signifies a bug in the calling code."
+                    );
                 }
                 else
                 {
@@ -163,11 +167,16 @@ namespace Castle.DynamicProxy
                 methodKindDescription = "method without target";
             }
 
-            var message = string.Format("This is a DynamicProxy2 error: {0} for method '{1}' which {2}. " +
-                                        "When calling {3} there is no implementation to 'proceed' to and " +
-                                        "it is the responsibility of the interceptor to mimic the implementation " +
-                                        "(set return value, out arguments etc)",
-                                        interceptorsMessage, Method, methodKindIs, methodKindDescription);
+            var message = string.Format(
+                "This is a DynamicProxy2 error: {0} for method '{1}' which {2}. "
+                    + "When calling {3} there is no implementation to 'proceed' to and "
+                    + "it is the responsibility of the interceptor to mimic the implementation "
+                    + "(set return value, out arguments etc)",
+                interceptorsMessage,
+                Method,
+                methodKindIs,
+                methodKindDescription
+            );
 
             throw new NotImplementedException(message);
         }
@@ -177,7 +186,9 @@ namespace Castle.DynamicProxy
             if (method.ContainsGenericParameters)
             {
                 Debug.Assert(genericMethodArguments != null);
-                return method.GetGenericMethodDefinition().MakeGenericMethod(genericMethodArguments);
+                return method
+                    .GetGenericMethodDefinition()
+                    .MakeGenericMethod(genericMethodArguments);
             }
             return method;
         }

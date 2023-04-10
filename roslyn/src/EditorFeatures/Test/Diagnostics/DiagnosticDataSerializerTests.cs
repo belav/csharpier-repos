@@ -33,10 +33,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         [Fact, Trait(Traits.Feature, Traits.Features.Diagnostics)]
         public async Task SerializationTest_Document()
         {
-            using var workspace = new TestWorkspace(composition: EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(TestPersistentStorageServiceFactory)));
+            using var workspace = new TestWorkspace(
+                composition: EditorTestCompositions.EditorFeatures.AddParts(
+                    typeof(TestPersistentStorageServiceFactory)
+                )
+            );
 
-            var document = workspace.CurrentSolution.AddProject("TestProject", "TestProject", LanguageNames.CSharp).AddDocument("TestDocument", "");
+            var document = workspace.CurrentSolution
+                .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
+                .AddDocument("TestDocument", "");
 
             var diagnostics = new[]
             {
@@ -46,15 +51,28 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     message: "test1 message",
                     enuMessageForBingSearch: "test1 message format",
                     severity: DiagnosticSeverity.Info,
-                    defaultSeverity:DiagnosticSeverity.Info,
+                    defaultSeverity: DiagnosticSeverity.Info,
                     isEnabledByDefault: false,
                     warningLevel: 1,
                     customTags: ImmutableArray<string>.Empty,
                     properties: ImmutableDictionary<string, string>.Empty,
                     document.Project.Id,
-                    new DiagnosticDataLocation(document.Id, new TextSpan(10, 20), "originalFile1", 30, 30, 40, 40, "mappedFile1", 10, 10, 20, 20),
-                    language: LanguageNames.CSharp),
-
+                    new DiagnosticDataLocation(
+                        document.Id,
+                        new TextSpan(10, 20),
+                        "originalFile1",
+                        30,
+                        30,
+                        40,
+                        40,
+                        "mappedFile1",
+                        10,
+                        10,
+                        20,
+                        20
+                    ),
+                    language: LanguageNames.CSharp
+                ),
                 new DiagnosticData(
                     id: "test2",
                     category: "Test",
@@ -65,31 +83,62 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     isEnabledByDefault: true,
                     warningLevel: 0,
                     customTags: ImmutableArray.Create("Test2"),
-                    properties: ImmutableDictionary<string, string>.Empty.Add("propertyKey", "propertyValue"),
+                    properties: ImmutableDictionary<string, string>.Empty.Add(
+                        "propertyKey",
+                        "propertyValue"
+                    ),
                     document.Project.Id,
-                    new DiagnosticDataLocation(document.Id, new TextSpan(30, 40), "originalFile2", 70, 70, 80, 80, "mappedFile2", 50, 50, 60, 60),
+                    new DiagnosticDataLocation(
+                        document.Id,
+                        new TextSpan(30, 40),
+                        "originalFile2",
+                        70,
+                        70,
+                        80,
+                        80,
+                        "mappedFile2",
+                        50,
+                        50,
+                        60,
+                        60
+                    ),
                     language: "VB",
                     title: "test2 title",
                     description: "test2 description",
-                    helpLink: "http://test2link"),
-
+                    helpLink: "http://test2link"
+                ),
                 new DiagnosticData(
                     id: "test3",
                     category: "Test",
                     message: "test3 message",
                     enuMessageForBingSearch: "test3 message format",
-                    severity:DiagnosticSeverity.Error,
+                    severity: DiagnosticSeverity.Error,
                     defaultSeverity: DiagnosticSeverity.Warning,
                     isEnabledByDefault: true,
                     warningLevel: 2,
                     customTags: ImmutableArray.Create("Test3", "Test3_2"),
-                    properties: ImmutableDictionary<string, string>.Empty.Add("p1Key", "p1Value").Add("p2Key", "p2Value"),
+                    properties: ImmutableDictionary<string, string>.Empty
+                        .Add("p1Key", "p1Value")
+                        .Add("p2Key", "p2Value"),
                     document.Project.Id,
-                    new DiagnosticDataLocation(document.Id, new TextSpan(50, 60), "originalFile3", 110, 110, 120, 120, "mappedFile3", 90, 90, 100, 100),
+                    new DiagnosticDataLocation(
+                        document.Id,
+                        new TextSpan(50, 60),
+                        "originalFile3",
+                        110,
+                        110,
+                        120,
+                        120,
+                        "mappedFile3",
+                        90,
+                        90,
+                        100,
+                        100
+                    ),
                     title: "test3 title",
                     description: "test3 description",
-                    helpLink: "http://test3link"),
-
+                    helpLink: "http://test3link"
+                ),
             }.ToImmutableArray();
 
             var utcTime = DateTime.UtcNow;
@@ -98,12 +147,33 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             var key = "document";
 
-            var persistentService = workspace.Services.GetRequiredService<IPersistentStorageService>();
-            var serializer = new CodeAnalysis.Workspaces.Diagnostics.DiagnosticDataSerializer(analyzerVersion, version);
+            var persistentService =
+                workspace.Services.GetRequiredService<IPersistentStorageService>();
+            var serializer = new CodeAnalysis.Workspaces.Diagnostics.DiagnosticDataSerializer(
+                analyzerVersion,
+                version
+            );
 
-            Assert.True(await serializer.SerializeAsync(persistentService, document.Project, document, key, diagnostics, CancellationToken.None).ConfigureAwait(false));
+            Assert.True(
+                await serializer
+                    .SerializeAsync(
+                        persistentService,
+                        document.Project,
+                        document,
+                        key,
+                        diagnostics,
+                        CancellationToken.None
+                    )
+                    .ConfigureAwait(false)
+            );
 
-            var recovered = await serializer.DeserializeAsync(persistentService, document.Project, document, key, CancellationToken.None);
+            var recovered = await serializer.DeserializeAsync(
+                persistentService,
+                document.Project,
+                document,
+                key,
+                CancellationToken.None
+            );
 
             AssertDiagnostics(diagnostics, recovered);
         }
@@ -111,10 +181,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         [Fact, Trait(Traits.Feature, Traits.Features.Diagnostics)]
         public async Task SerializationTest_Project()
         {
-            using var workspace = new TestWorkspace(composition: EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(TestPersistentStorageServiceFactory)));
+            using var workspace = new TestWorkspace(
+                composition: EditorTestCompositions.EditorFeatures.AddParts(
+                    typeof(TestPersistentStorageServiceFactory)
+                )
+            );
 
-            var document = workspace.CurrentSolution.AddProject("TestProject", "TestProject", LanguageNames.CSharp).AddDocument("TestDocument", "");
+            var document = workspace.CurrentSolution
+                .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
+                .AddDocument("TestDocument", "");
 
             var diagnostics = new[]
             {
@@ -132,8 +207,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     projectId: document.Project.Id,
                     language: LanguageNames.VisualBasic,
                     description: "test1 description",
-                    helpLink: "http://test1link"),
-
+                    helpLink: "http://test1link"
+                ),
                 new DiagnosticData(
                     id: "test2",
                     category: "Test",
@@ -145,8 +220,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     warningLevel: 0,
                     customTags: ImmutableArray.Create("Test2"),
                     properties: ImmutableDictionary<string, string>.Empty.Add("p1Key", "p2Value"),
-                    projectId: document.Project.Id),
-
+                    projectId: document.Project.Id
+                ),
                 new DiagnosticData(
                     id: "test3",
                     category: "Test",
@@ -157,11 +232,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     isEnabledByDefault: true,
                     warningLevel: 2,
                     customTags: ImmutableArray.Create("Test3", "Test3_2"),
-                    properties: ImmutableDictionary<string, string>.Empty.Add("p2Key", "p2Value").Add("p1Key", "p1Value"),
+                    properties: ImmutableDictionary<string, string>.Empty
+                        .Add("p2Key", "p2Value")
+                        .Add("p1Key", "p1Value"),
                     projectId: document.Project.Id,
                     description: "test3 description",
-                    helpLink: "http://test3link"),
-
+                    helpLink: "http://test3link"
+                ),
             }.ToImmutableArray();
 
             var utcTime = DateTime.UtcNow;
@@ -169,11 +246,32 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var version = VersionStamp.Create(utcTime.AddDays(1));
 
             var key = "project";
-            var persistentService = workspace.Services.GetRequiredService<IPersistentStorageService>();
-            var serializer = new CodeAnalysis.Workspaces.Diagnostics.DiagnosticDataSerializer(analyzerVersion, version);
+            var persistentService =
+                workspace.Services.GetRequiredService<IPersistentStorageService>();
+            var serializer = new CodeAnalysis.Workspaces.Diagnostics.DiagnosticDataSerializer(
+                analyzerVersion,
+                version
+            );
 
-            Assert.True(await serializer.SerializeAsync(persistentService, document.Project, document, key, diagnostics, CancellationToken.None).ConfigureAwait(false));
-            var recovered = await serializer.DeserializeAsync(persistentService, document.Project, document, key, CancellationToken.None);
+            Assert.True(
+                await serializer
+                    .SerializeAsync(
+                        persistentService,
+                        document.Project,
+                        document,
+                        key,
+                        diagnostics,
+                        CancellationToken.None
+                    )
+                    .ConfigureAwait(false)
+            );
+            var recovered = await serializer.DeserializeAsync(
+                persistentService,
+                document.Project,
+                document,
+                key,
+                CancellationToken.None
+            );
 
             AssertDiagnostics(diagnostics, recovered);
         }
@@ -184,15 +282,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
 #if DEBUG
             var source =
-@"class C
+                @"class C
 {
     static int F(string s) { return 1; }
     static int x = F(new { });
     static int y = F(new { A = 1 });
 }";
             var tree = SyntaxFactory.ParseSyntaxTree(source);
-            var options = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, concurrentBuild: false);
-            var compilation = CSharpCompilation.Create(GetUniqueName(), new[] { tree }, new[] { MscorlibRef }, options);
+            var options = new CSharpCompilationOptions(
+                OutputKind.DynamicallyLinkedLibrary,
+                concurrentBuild: false
+            );
+            var compilation = CSharpCompilation.Create(
+                GetUniqueName(),
+                new[] { tree },
+                new[] { MscorlibRef },
+                options
+            );
             var model = compilation.GetSemanticModel(tree);
 
             // Each call to GetDiagnostics will bind field initializers
@@ -203,10 +309,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             diagnostics1.Verify(
                 // (4,22): error CS1503: Argument 1: cannot convert from '<empty anonymous type>' to 'string'
                 //     static int x = F(new { });
-                Diagnostic(1503, "new { }").WithArguments("1", "<empty anonymous type>", "string").WithLocation(4, 22),
+                Diagnostic(1503, "new { }")
+                    .WithArguments("1", "<empty anonymous type>", "string")
+                    .WithLocation(4, 22),
                 // (5,22): error CS1503: Argument 1: cannot convert from '<anonymous type: int A>' to 'string'
                 //     static int y = F(new { A = 1 });
-                Diagnostic(1503, "new { A = 1 }").WithArguments("1", "<anonymous type: int A>", "string").WithLocation(5, 22));
+                Diagnostic(1503, "new { A = 1 }")
+                    .WithArguments("1", "<anonymous type: int A>", "string")
+                    .WithLocation(5, 22)
+            );
 
             Assert.NotSame(diagnostics1[0], diagnostics2[0]);
             Assert.NotSame(diagnostics1[1], diagnostics2[1]);
@@ -222,7 +333,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 #endif
         }
 
-        private static void AssertDiagnostics(ImmutableArray<DiagnosticData> items1, ImmutableArray<DiagnosticData> items2)
+        private static void AssertDiagnostics(
+            ImmutableArray<DiagnosticData> items1,
+            ImmutableArray<DiagnosticData> items2
+        )
         {
             Assert.Equal(items1.Length, items2.Length);
 
@@ -261,47 +375,69 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             Assert.Equal(item1.DataLocation?.MappedFilePath, item2.DataLocation?.MappedFilePath);
             Assert.Equal(item1.DataLocation?.MappedStartLine, item2.DataLocation?.MappedStartLine);
-            Assert.Equal(item1.DataLocation?.MappedStartColumn, item2.DataLocation?.MappedStartColumn);
+            Assert.Equal(
+                item1.DataLocation?.MappedStartColumn,
+                item2.DataLocation?.MappedStartColumn
+            );
             Assert.Equal(item1.DataLocation?.MappedEndLine, item2.DataLocation?.MappedEndLine);
             Assert.Equal(item1.DataLocation?.MappedEndColumn, item2.DataLocation?.MappedEndColumn);
 
-            Assert.Equal(item1.DataLocation?.OriginalFilePath, item2.DataLocation?.OriginalFilePath);
-            Assert.Equal(item1.DataLocation?.OriginalStartLine, item2.DataLocation?.OriginalStartLine);
-            Assert.Equal(item1.DataLocation?.OriginalStartColumn, item2.DataLocation?.OriginalStartColumn);
+            Assert.Equal(
+                item1.DataLocation?.OriginalFilePath,
+                item2.DataLocation?.OriginalFilePath
+            );
+            Assert.Equal(
+                item1.DataLocation?.OriginalStartLine,
+                item2.DataLocation?.OriginalStartLine
+            );
+            Assert.Equal(
+                item1.DataLocation?.OriginalStartColumn,
+                item2.DataLocation?.OriginalStartColumn
+            );
             Assert.Equal(item1.DataLocation?.OriginalEndLine, item2.DataLocation?.OriginalEndLine);
-            Assert.Equal(item1.DataLocation?.OriginalEndColumn, item2.DataLocation?.OriginalEndColumn);
+            Assert.Equal(
+                item1.DataLocation?.OriginalEndColumn,
+                item2.DataLocation?.OriginalEndColumn
+            );
 
             Assert.Equal(item1.Description, item2.Description);
             Assert.Equal(item1.HelpLink, item2.HelpLink);
         }
 
-        [ExportWorkspaceServiceFactory(typeof(IPersistentStorageService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+        [
+            ExportWorkspaceServiceFactory(typeof(IPersistentStorageService), ServiceLayer.Test),
+            Shared,
+            PartNotDiscoverable
+        ]
         public class TestPersistentStorageServiceFactory : IWorkspaceServiceFactory
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestPersistentStorageServiceFactory()
-            {
-            }
+            public TestPersistentStorageServiceFactory() { }
 
-            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-                => new Service();
+            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+                new Service();
 
             public class Service : IPersistentStorageService
             {
                 private readonly Storage _instance = new();
 
-                IPersistentStorage IPersistentStorageService.GetStorage(Solution solution)
-                    => _instance;
+                IPersistentStorage IPersistentStorageService.GetStorage(Solution solution) =>
+                    _instance;
 
-                ValueTask<IPersistentStorage> IPersistentStorageService.GetStorageAsync(Solution solution, CancellationToken cancellationToken)
-                    => new(_instance);
+                ValueTask<IPersistentStorage> IPersistentStorageService.GetStorageAsync(
+                    Solution solution,
+                    CancellationToken cancellationToken
+                ) => new(_instance);
 
                 internal class Storage : IPersistentStorage
                 {
                     private readonly Dictionary<object, Stream> _map = new();
 
-                    public Task<Stream> ReadStreamAsync(string name, CancellationToken cancellationToken = default)
+                    public Task<Stream> ReadStreamAsync(
+                        string name,
+                        CancellationToken cancellationToken = default
+                    )
                     {
                         var stream = _map[name];
                         stream.Position = 0;
@@ -309,7 +445,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         return Task.FromResult(stream);
                     }
 
-                    public Task<Stream> ReadStreamAsync(Project project, string name, CancellationToken cancellationToken = default)
+                    public Task<Stream> ReadStreamAsync(
+                        Project project,
+                        string name,
+                        CancellationToken cancellationToken = default
+                    )
                     {
                         var stream = _map[Tuple.Create(project, name)];
                         stream.Position = 0;
@@ -317,7 +457,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         return Task.FromResult(stream);
                     }
 
-                    public Task<Stream> ReadStreamAsync(Document document, string name, CancellationToken cancellationToken = default)
+                    public Task<Stream> ReadStreamAsync(
+                        Document document,
+                        string name,
+                        CancellationToken cancellationToken = default
+                    )
                     {
                         var stream = _map[Tuple.Create(document, name)];
                         stream.Position = 0;
@@ -325,7 +469,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         return Task.FromResult(stream);
                     }
 
-                    public Task<bool> WriteStreamAsync(string name, Stream stream, CancellationToken cancellationToken = default)
+                    public Task<bool> WriteStreamAsync(
+                        string name,
+                        Stream stream,
+                        CancellationToken cancellationToken = default
+                    )
                     {
                         _map[name] = new MemoryStream();
                         stream.CopyTo(_map[name]);
@@ -333,7 +481,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         return SpecializedTasks.True;
                     }
 
-                    public Task<bool> WriteStreamAsync(Project project, string name, Stream stream, CancellationToken cancellationToken = default)
+                    public Task<bool> WriteStreamAsync(
+                        Project project,
+                        string name,
+                        Stream stream,
+                        CancellationToken cancellationToken = default
+                    )
                     {
                         _map[Tuple.Create(project, name)] = new MemoryStream();
                         stream.CopyTo(_map[Tuple.Create(project, name)]);
@@ -341,7 +494,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         return SpecializedTasks.True;
                     }
 
-                    public Task<bool> WriteStreamAsync(Document document, string name, Stream stream, CancellationToken cancellationToken = default)
+                    public Task<bool> WriteStreamAsync(
+                        Document document,
+                        string name,
+                        Stream stream,
+                        CancellationToken cancellationToken = default
+                    )
                     {
                         _map[Tuple.Create(document, name)] = new MemoryStream();
                         stream.CopyTo(_map[Tuple.Create(document, name)]);
@@ -349,9 +507,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         return SpecializedTasks.True;
                     }
 
-                    public void Dispose()
-                    {
-                    }
+                    public void Dispose() { }
 
                     public ValueTask DisposeAsync()
                     {

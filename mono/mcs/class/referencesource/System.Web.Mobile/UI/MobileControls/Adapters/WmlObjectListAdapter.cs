@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="WmlObjectListAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -18,19 +18,26 @@ using System.Security.Permissions;
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
-
     /*
      * WmlObjectListAdapter provides WML rendering of Object List control.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class WmlObjectListAdapter : WmlControlAdapter
     {
         private const String _backToList = "__back";
@@ -45,10 +52,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.Control"]/*' />
         protected new ObjectList Control
         {
-            get
-            {
-                return (ObjectList)base.Control;
-            }
+            get { return (ObjectList)base.Control; }
         }
 
         /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.OnPreRender"]/*' />
@@ -70,12 +74,14 @@ namespace System.Web.UI.MobileControls.Adapters
                     break;
             }
 
-            if(Control.MobilePage.ActiveForm == Control.Form && 
-                Control.Visible && 
-                Control.ViewMode == ObjectListViewMode.Commands &&
-                Control.Items.Count > 0)
+            if (
+                Control.MobilePage.ActiveForm == Control.Form
+                && Control.Visible
+                && Control.ViewMode == ObjectListViewMode.Commands
+                && Control.Items.Count > 0
+            )
             {
-                Control.PreShowItemCommands (Control.SelectedIndex);
+                Control.PreShowItemCommands(Control.SelectedIndex);
             }
         }
 
@@ -142,13 +148,16 @@ namespace System.Web.UI.MobileControls.Adapters
 
             bool hasDefaultCommand = HasDefaultCommand();
             bool onlyHasDefaultCommand = OnlyHasDefaultCommand();
-            bool requiresSecondScreen = HasItemDetails() || (!onlyHasDefaultCommand && HasCommands());
+            bool requiresSecondScreen =
+                HasItemDetails() || (!onlyHasDefaultCommand && HasCommands());
             bool itemRequiresHyperlink = requiresSecondScreen || hasDefaultCommand;
 
             writer.EnterLayout(Style);
 
             int[] tableFieldIndices = null;
-            if (ShouldRenderAsTable() && (tableFieldIndices = Control.TableFieldIndices).Length != 0)
+            if (
+                ShouldRenderAsTable() && (tableFieldIndices = Control.TableFieldIndices).Length != 0
+            )
             {
                 writer.BeginCustomMarkup();
                 int fieldCount = tableFieldIndices.Length;
@@ -177,15 +186,21 @@ namespace System.Web.UI.MobileControls.Adapters
                         writer.Write("<td>");
                         if (field == 0 && itemRequiresHyperlink)
                         {
-                            RenderPostBackEvent(writer, 
-                                requiresSecondScreen ?
-                                    String.Format(CultureInfo.InvariantCulture, _showMoreFormatAnchor, item.Index) :
-                                    item.Index.ToString(CultureInfo.InvariantCulture),
+                            RenderPostBackEvent(
+                                writer,
+                                requiresSecondScreen
+                                    ? String.Format(
+                                        CultureInfo.InvariantCulture,
+                                        _showMoreFormatAnchor,
+                                        item.Index
+                                    )
+                                    : item.Index.ToString(CultureInfo.InvariantCulture),
                                 GetDefaultLabel(GoLabel),
                                 false,
                                 item[tableFieldIndices[0]],
                                 false,
-                                WmlPostFieldType.Raw);
+                                WmlPostFieldType.Raw
+                            );
                         }
                         else
                         {
@@ -209,15 +224,21 @@ namespace System.Web.UI.MobileControls.Adapters
                     ObjectListItem item = items[pageStart + i];
                     if (itemRequiresHyperlink)
                     {
-                        RenderPostBackEvent(writer, 
-                            requiresSecondScreen ?
-                                String.Format(CultureInfo.InvariantCulture, _showMoreFormatAnchor, item.Index) :
-                                item.Index.ToString(CultureInfo.InvariantCulture),
+                        RenderPostBackEvent(
+                            writer,
+                            requiresSecondScreen
+                                ? String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    _showMoreFormatAnchor,
+                                    item.Index
+                                )
+                                : item.Index.ToString(CultureInfo.InvariantCulture),
                             GetDefaultLabel(GoLabel),
                             false,
                             item[labelFieldIndex],
                             true,
-                            WmlPostFieldType.Raw);
+                            WmlPostFieldType.Raw
+                        );
                     }
                     else
                     {
@@ -235,12 +256,14 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             bool requiresDetails = HasItemDetails();
 
-            String detailsCommandText = Control.DetailsCommandText.Length == 0 ?
-                SR.GetString(SR.WmlObjectListAdapterDetails) :
-                Control.DetailsCommandText;
-            String softkeyLabel = detailsCommandText.Length <= Device.MaximumSoftkeyLabelLength ?
-                detailsCommandText :
-                null;
+            String detailsCommandText =
+                Control.DetailsCommandText.Length == 0
+                    ? SR.GetString(SR.WmlObjectListAdapterDetails)
+                    : Control.DetailsCommandText;
+            String softkeyLabel =
+                detailsCommandText.Length <= Device.MaximumSoftkeyLabelLength
+                    ? detailsCommandText
+                    : null;
             Style commandStyle = Control.CommandStyle;
             if (commandStyle.Alignment == Alignment.NotSet)
             {
@@ -249,15 +272,29 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.EnterStyle(commandStyle);
             if (requiresDetails)
             {
-                RenderPostBackEvent(writer, _showDetails,
-                        softkeyLabel, true, detailsCommandText, true, WmlPostFieldType.Raw);
+                RenderPostBackEvent(
+                    writer,
+                    _showDetails,
+                    softkeyLabel,
+                    true,
+                    detailsCommandText,
+                    true,
+                    WmlPostFieldType.Raw
+                );
             }
 
             ObjectListCommandCollection commands = Control.Commands;
             foreach (ObjectListCommand command in commands)
             {
-                RenderPostBackEvent(writer, command.Name, 
-                    GetDefaultLabel(GoLabel), false, command.Text, true, WmlPostFieldType.Raw);
+                RenderPostBackEvent(
+                    writer,
+                    command.Name,
+                    GetDefaultLabel(GoLabel),
+                    false,
+                    command.Text,
+                    true,
+                    WmlPostFieldType.Raw
+                );
             }
             writer.ExitStyle(commandStyle);
         }
@@ -265,12 +302,12 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.RenderItemDetails"]/*' />
         protected virtual void RenderItemDetails(WmlMobileTextWriter writer, ObjectListItem item)
         {
-            String backCommandText = Control.BackCommandText.Length == 0 ?
-                GetDefaultLabel(BackLabel) :
-                Control.BackCommandText;
-            String softkeyLabel = backCommandText.Length <= Device.MaximumSoftkeyLabelLength ?
-                backCommandText :
-                null;
+            String backCommandText =
+                Control.BackCommandText.Length == 0
+                    ? GetDefaultLabel(BackLabel)
+                    : Control.BackCommandText;
+            String softkeyLabel =
+                backCommandText.Length <= Device.MaximumSoftkeyLabelLength ? backCommandText : null;
 
             Style labelStyle = Control.LabelStyle;
             writer.EnterStyle(labelStyle);
@@ -284,7 +321,12 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 if (field.Visible)
                 {
-                    String displayText = String.Format(CultureInfo.InvariantCulture, "{0}: {1}", field.Title, item[fieldIndex]);
+                    String displayText = String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}: {1}",
+                        field.Title,
+                        item[fieldIndex]
+                    );
                     writer.RenderText(displayText, true);
                 }
                 fieldIndex++;
@@ -328,7 +370,9 @@ namespace System.Web.UI.MobileControls.Adapters
                         }
                         catch (System.FormatException)
                         {
-                            throw new Exception (SR.GetString(SR.ObjectListAdapter_InvalidPostedData));
+                            throw new Exception(
+                                SR.GetString(SR.ObjectListAdapter_InvalidPostedData)
+                            );
                         }
                         if (Control.SelectListItem(itemIndex, false))
                         {
@@ -378,7 +422,8 @@ namespace System.Web.UI.MobileControls.Adapters
         protected virtual bool ShouldRenderAsTable()
         {
             int avgFieldWidth = 10; // an arbitrary estimate.
-            return Device.ScreenCharactersHeight > 4 && VisibleTableFieldsCount * avgFieldWidth < Device.ScreenCharactersWidth;
+            return Device.ScreenCharactersHeight > 4
+                && VisibleTableFieldsCount * avgFieldWidth < Device.ScreenCharactersWidth;
         }
 
         private bool ShouldRenderTableHeaders()
@@ -387,10 +432,11 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         private BooleanOption _hasItemDetails = BooleanOption.NotSet;
+
         /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.HasItemDetails"]/*' />
         protected bool HasItemDetails()
         {
-            if(Control.Items.Count == 0)
+            if (Control.Items.Count == 0)
             {
                 return false;
             }
@@ -400,7 +446,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
                 int visibleFieldsInListView;
                 int[] tableFieldIndices;
-                if (ShouldRenderAsTable() && (tableFieldIndices = Control.TableFieldIndices).Length != 0)
+                if (
+                    ShouldRenderAsTable()
+                    && (tableFieldIndices = Control.TableFieldIndices).Length != 0
+                )
                 {
                     visibleFieldsInListView = 0;
                     for (int i = 0; i < tableFieldIndices.Length; i++)
@@ -413,10 +462,10 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
                 else
                 {
-                    visibleFieldsInListView = Control.AllFields[Control.LabelFieldIndex].Visible ?
-                                                    1 : 0;
+                    visibleFieldsInListView = Control.AllFields[Control.LabelFieldIndex].Visible
+                        ? 1
+                        : 0;
                 }
-
 
                 // Calculate the number of visible fields.
 
@@ -452,6 +501,7 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         private BooleanOption _onlyHasDefaultCommand = BooleanOption.NotSet;
+
         /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.OnlyHasDefaultCommand"]/*' />
         protected bool OnlyHasDefaultCommand()
         {
@@ -461,9 +511,17 @@ namespace System.Web.UI.MobileControls.Adapters
                 if (defaultCommand.Length > 0)
                 {
                     int commandCount = Control.Commands.Count;
-                    if (commandCount == 0 || 
-                        (commandCount == 1 && 
-                            String.Compare(defaultCommand, Control.Commands[0].Name, StringComparison.OrdinalIgnoreCase) == 0))
+                    if (
+                        commandCount == 0
+                        || (
+                            commandCount == 1
+                            && String.Compare(
+                                defaultCommand,
+                                Control.Commands[0].Name,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                    )
                     {
                         _onlyHasDefaultCommand = BooleanOption.True;
                     }
@@ -480,7 +538,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
             return _onlyHasDefaultCommand == BooleanOption.True;
         }
-        
+
         // This appears in both Html and Wml adapters, is used in
         // ShouldRenderAsTable().  In adapters rather than control
         // because specialized rendering method.
@@ -504,15 +562,5 @@ namespace System.Web.UI.MobileControls.Adapters
                 return _visibleTableFieldsCount;
             }
         }
-
-
     }
 }
-
-
-
-
-
-
-
-

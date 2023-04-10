@@ -33,25 +33,47 @@ namespace ILCompiler.DependencyAnalysis
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
             DependencyList dependencies = new DependencyList();
-            dependencies.Add(factory.TypeMetadata((MetadataType)_method.OwningType), "Owning type metadata");
+            dependencies.Add(
+                factory.TypeMetadata((MetadataType)_method.OwningType),
+                "Owning type metadata"
+            );
 
-            CustomAttributeBasedDependencyAlgorithm.AddDependenciesDueToCustomAttributes(ref dependencies, factory, ((EcmaMethod)_method));
+            CustomAttributeBasedDependencyAlgorithm.AddDependenciesDueToCustomAttributes(
+                ref dependencies,
+                factory,
+                ((EcmaMethod)_method)
+            );
 
             MethodSignature sig = _method.Signature;
             const string reason = "Method signature metadata";
-            TypeMetadataNode.GetMetadataDependencies(ref dependencies, factory, sig.ReturnType, reason);
+            TypeMetadataNode.GetMetadataDependencies(
+                ref dependencies,
+                factory,
+                sig.ReturnType,
+                reason
+            );
             foreach (TypeDesc paramType in sig)
             {
-                TypeMetadataNode.GetMetadataDependencies(ref dependencies, factory, paramType, reason);
+                TypeMetadataNode.GetMetadataDependencies(
+                    ref dependencies,
+                    factory,
+                    paramType,
+                    reason
+                );
             }
 
             if (_method is EcmaMethod ecmaMethod)
             {
-                DynamicDependencyAttributeAlgorithm.AddDependenciesDueToDynamicDependencyAttribute(ref dependencies, factory, ecmaMethod);
+                DynamicDependencyAttributeAlgorithm.AddDependenciesDueToDynamicDependencyAttribute(
+                    ref dependencies,
+                    factory,
+                    ecmaMethod
+                );
             }
 
             return dependencies;
         }
+
         protected override string GetName(NodeFactory factory)
         {
             return "Method metadata: " + _method.ToString();
@@ -67,7 +89,15 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

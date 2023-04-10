@@ -22,18 +22,29 @@ namespace Microsoft.CodeAnalysis.Classification
     [Export(typeof(IViewTaggerProvider))]
     [TagType(typeof(IClassificationTag))]
     [ContentType(ContentTypeNames.RoslynContentType)]
-    internal partial class SemanticClassificationViewTaggerProvider : AbstractSemanticOrEmbeddedClassificationViewTaggerProvider
+    internal partial class SemanticClassificationViewTaggerProvider
+        : AbstractSemanticOrEmbeddedClassificationViewTaggerProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public SemanticClassificationViewTaggerProvider(
             IThreadingContext threadingContext,
             ClassificationTypeMap typeMap,
             IGlobalOptionService globalOptions,
             [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, typeMap, globalOptions, visibilityTracker, listenerProvider, ClassificationType.Semantic)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                typeMap,
+                globalOptions,
+                visibilityTracker,
+                listenerProvider,
+                ClassificationType.Semantic
+            ) { }
     }
 }

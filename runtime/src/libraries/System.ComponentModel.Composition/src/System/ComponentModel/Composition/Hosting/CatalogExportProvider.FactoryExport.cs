@@ -17,7 +17,10 @@ namespace System.ComponentModel.Composition.Hosting
             private readonly ExportDefinition _factoryExportDefinition;
             private FactoryExportPartDefinition? _factoryExportPartDefinition;
 
-            public FactoryExport(ComposablePartDefinition partDefinition, ExportDefinition exportDefinition)
+            public FactoryExport(
+                ComposablePartDefinition partDefinition,
+                ExportDefinition exportDefinition
+            )
             {
                 _partDefinition = partDefinition;
                 _exportDefinition = exportDefinition;
@@ -34,18 +37,12 @@ namespace System.ComponentModel.Composition.Hosting
 
             protected ComposablePartDefinition UnderlyingPartDefinition
             {
-                get
-                {
-                    return _partDefinition;
-                }
+                get { return _partDefinition; }
             }
 
             protected ExportDefinition UnderlyingExportDefinition
             {
-                get
-                {
-                    return _exportDefinition;
-                }
+                get { return _exportDefinition; }
             }
 
             public abstract Export CreateExportProduct();
@@ -110,15 +107,22 @@ namespace System.ComponentModel.Composition.Hosting
                 {
                     if (definition != _definition.FactoryExportDefinition)
                     {
-                        throw ExceptionBuilder.CreateExportDefinitionNotOnThisComposablePart(nameof(definition));
+                        throw ExceptionBuilder.CreateExportDefinitionNotOnThisComposablePart(
+                            nameof(definition)
+                        );
                     }
 
                     return _export.Value;
                 }
 
-                public override void SetImport(ImportDefinition definition, IEnumerable<Export> exports)
+                public override void SetImport(
+                    ImportDefinition definition,
+                    IEnumerable<Export> exports
+                )
                 {
-                    throw ExceptionBuilder.CreateImportDefinitionNotOnThisComposablePart(nameof(definition));
+                    throw ExceptionBuilder.CreateImportDefinitionNotOnThisComposablePart(
+                        nameof(definition)
+                    );
                 }
 
                 public void Dispose()

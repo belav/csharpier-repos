@@ -35,9 +35,14 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </param>
         /// <returns>The <see cref="ServiceProvider"/>.</returns>
         [RequiresDynamicCode(ServiceProvider.RequiresDynamicCodeMessage)]
-        public static ServiceProvider BuildServiceProvider(this IServiceCollection services, bool validateScopes)
+        public static ServiceProvider BuildServiceProvider(
+            this IServiceCollection services,
+            bool validateScopes
+        )
         {
-            return services.BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = validateScopes });
+            return services.BuildServiceProvider(
+                new ServiceProviderOptions { ValidateScopes = validateScopes }
+            );
         }
 
         /// <summary>
@@ -50,7 +55,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </param>
         /// <returns>The <see cref="ServiceProvider"/>.</returns>
         [RequiresDynamicCode(ServiceProvider.RequiresDynamicCodeMessage)]
-        public static ServiceProvider BuildServiceProvider(this IServiceCollection services, ServiceProviderOptions options)
+        public static ServiceProvider BuildServiceProvider(
+            this IServiceCollection services,
+            ServiceProviderOptions options
+        )
         {
             if (services is null)
             {

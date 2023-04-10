@@ -25,7 +25,14 @@ namespace System.Net
                 // we don't support/parse a port specification at the end of an IPv4 address.
                 Span<ushort> numbers = stackalloc ushort[IPAddressParserStatics.IPv6AddressShorts];
                 numbers.Clear();
-                if (Ipv6StringToAddress(ipSpan, numbers, IPAddressParserStatics.IPv6AddressShorts, out uint scope))
+                if (
+                    Ipv6StringToAddress(
+                        ipSpan,
+                        numbers,
+                        IPAddressParserStatics.IPv6AddressShorts,
+                        out uint scope
+                    )
+                )
                 {
                     return new IPAddress(numbers, scope);
                 }
@@ -40,7 +47,10 @@ namespace System.Net
                 return null;
             }
 
-            throw new FormatException(SR.dns_bad_ip_address, new SocketException(SocketError.InvalidArgument));
+            throw new FormatException(
+                SR.dns_bad_ip_address,
+                new SocketException(SocketError.InvalidArgument)
+            );
         }
 
         internal static unsafe string IPv4AddressToString(uint address)
@@ -57,7 +67,11 @@ namespace System.Net
             destination.Append(addressString, charsWritten);
         }
 
-        internal static unsafe bool IPv4AddressToString(uint address, Span<char> formatted, out int charsWritten)
+        internal static unsafe bool IPv4AddressToString(
+            uint address,
+            Span<char> formatted,
+            out int charsWritten
+        )
         {
             if (formatted.Length < MaxIPv4StringLength)
             {
@@ -99,7 +113,12 @@ namespace System.Net
             return StringBuilderCache.GetStringAndRelease(buffer);
         }
 
-        internal static bool IPv6AddressToString(ushort[] address, uint scopeId, Span<char> destination, out int charsWritten)
+        internal static bool IPv6AddressToString(
+            ushort[] address,
+            uint scopeId,
+            Span<char> destination,
+            out int charsWritten
+        )
         {
             Debug.Assert(address != null);
             Debug.Assert(address.Length == IPAddressParserStatics.IPv6AddressShorts);
@@ -153,12 +172,21 @@ namespace System.Net
             return buffer;
         }
 
-        private static unsafe void FormatIPv4AddressNumber(int number, char* addressString, ref int offset)
+        private static unsafe void FormatIPv4AddressNumber(
+            int number,
+            char* addressString,
+            ref int offset
+        )
         {
             // Math.DivRem has no overload for byte, assert here for safety
             Debug.Assert(number < 256);
 
-            offset += number > 99 ? 3 : number > 9 ? 2 : 1;
+            offset +=
+                number > 99
+                    ? 3
+                    : number > 9
+                        ? 2
+                        : 1;
 
             int i = offset;
             do
@@ -175,7 +203,12 @@ namespace System.Net
 
             fixed (char* ipStringPtr = &MemoryMarshal.GetReference(ipSpan))
             {
-                tmpAddr = IPv4AddressHelper.ParseNonCanonical(ipStringPtr, 0, ref end, notImplicitFile: true);
+                tmpAddr = IPv4AddressHelper.ParseNonCanonical(
+                    ipStringPtr,
+                    0,
+                    ref end,
+                    notImplicitFile: true
+                );
             }
 
             if (tmpAddr != IPv4AddressHelper.Invalid && end == ipSpan.Length)
@@ -193,7 +226,12 @@ namespace System.Net
             }
         }
 
-        public static unsafe bool Ipv6StringToAddress(ReadOnlySpan<char> ipSpan, Span<ushort> numbers, int numbersLength, out uint scope)
+        public static unsafe bool Ipv6StringToAddress(
+            ReadOnlySpan<char> ipSpan,
+            Span<ushort> numbers,
+            int numbersLength,
+            out uint scope
+        )
         {
             Debug.Assert(numbers != null);
             Debug.Assert(numbersLength >= IPAddressParserStatics.IPv6AddressShorts);
@@ -212,7 +250,14 @@ namespace System.Net
 
                 if (scopeId?.Length > 1)
                 {
-                    if (uint.TryParse(scopeId.AsSpan(1), NumberStyles.None, CultureInfo.InvariantCulture, out scope))
+                    if (
+                        uint.TryParse(
+                            scopeId.AsSpan(1),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out scope
+                        )
+                    )
                     {
                         return true; // scopeId is a numeric value
                     }
@@ -238,10 +283,19 @@ namespace System.Net
         /// while also replacing the longest sequence of 0s found in that range with "::", as long
         /// as the sequence is more than one 0.
         /// </summary>
-        private static void AppendSections(ushort[] address, int fromInclusive, int toExclusive, StringBuilder buffer)
+        private static void AppendSections(
+            ushort[] address,
+            int fromInclusive,
+            int toExclusive,
+            StringBuilder buffer
+        )
         {
             // Find the longest sequence of zeros to be combined into a "::"
-            ReadOnlySpan<ushort> addressSpan = new ReadOnlySpan<ushort>(address, fromInclusive, toExclusive - fromInclusive);
+            ReadOnlySpan<ushort> addressSpan = new ReadOnlySpan<ushort>(
+                address,
+                fromInclusive,
+                toExclusive - fromInclusive
+            );
             (int zeroStart, int zeroEnd) = IPv6AddressHelper.FindCompressionRange(addressSpan);
             bool needsColon = false;
 

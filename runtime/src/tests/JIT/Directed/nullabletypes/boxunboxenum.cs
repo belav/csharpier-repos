@@ -4,7 +4,6 @@
 using System.Runtime.InteropServices;
 using System;
 
-
 internal class NullableTest1
 {
     private static bool BoxUnboxToNQ(Enum o)
@@ -45,8 +44,6 @@ internal class NullableTest1
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest2
 {
@@ -89,8 +86,6 @@ internal class NullableTest2
     }
 }
 
-
-
 internal class NullableTest3
 {
     private static bool BoxUnboxToNQ(Enum o)
@@ -132,8 +127,6 @@ internal class NullableTest3
     }
 }
 
-
-
 internal class Test_boxunboxenum
 {
     private static int Main()
@@ -154,4 +147,3 @@ internal class Test_boxunboxenum
         return 100;
     }
 }
-

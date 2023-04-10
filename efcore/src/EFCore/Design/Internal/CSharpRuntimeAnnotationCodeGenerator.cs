@@ -14,7 +14,9 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     ///     Initializes a new instance of this class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-    public CSharpRuntimeAnnotationCodeGenerator(CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies)
+    public CSharpRuntimeAnnotationCodeGenerator(
+        CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies
+    )
     {
         Dependencies = dependencies;
     }
@@ -25,16 +27,21 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     protected virtual CSharpRuntimeAnnotationCodeGeneratorDependencies Dependencies { get; }
 
     /// <inheritdoc />
-    public virtual void Generate(IModel model, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IModel model,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         var annotations = parameters.Annotations;
         if (!parameters.IsRuntime)
         {
             foreach (var (key, _) in annotations)
             {
-                if (CoreAnnotationNames.AllNames.Contains(key)
+                if (
+                    CoreAnnotationNames.AllNames.Contains(key)
                     && key != CoreAnnotationNames.ProductVersion
-                    && key != CoreAnnotationNames.FullChangeTrackingNotificationsRequired)
+                    && key != CoreAnnotationNames.FullChangeTrackingNotificationsRequired
+                )
                 {
                     annotations.Remove(key);
                 }
@@ -50,15 +57,20 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IEntityType entityType, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IEntityType entityType,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         var annotations = parameters.Annotations;
         if (!parameters.IsRuntime)
         {
             foreach (var (key, _) in annotations)
             {
-                if (CoreAnnotationNames.AllNames.Contains(key)
-                    && key != CoreAnnotationNames.DiscriminatorMappingComplete)
+                if (
+                    CoreAnnotationNames.AllNames.Contains(key)
+                    && key != CoreAnnotationNames.DiscriminatorMappingComplete
+                )
                 {
                     annotations.Remove(key);
                 }
@@ -69,7 +81,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IProperty property, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IProperty property,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -87,7 +102,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IServiceProperty property, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IServiceProperty property,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -105,7 +123,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IKey key, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IKey key,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -123,7 +144,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IForeignKey foreignKey, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IForeignKey foreignKey,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -141,7 +165,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(INavigation navigation, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        INavigation navigation,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -159,7 +186,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(ISkipNavigation navigation, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        ISkipNavigation navigation,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -177,7 +207,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IIndex index, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IIndex index,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -195,7 +228,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(ITrigger trigger, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        ITrigger trigger,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -213,7 +249,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(ITypeMappingConfiguration typeConfiguration, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        ITypeMappingConfiguration typeConfiguration,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -234,7 +273,9 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     ///     Generates code to create the given annotations using literals.
     /// </summary>
     /// <param name="parameters">Parameters used during code generation.</param>
-    protected virtual void GenerateSimpleAnnotations(CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    protected virtual void GenerateSimpleAnnotations(
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         foreach (var (name, value) in parameters.Annotations.OrderBy(a => a.Key))
         {
@@ -243,7 +284,11 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
                 AddNamespace(value as Type ?? value.GetType(), parameters.Namespaces);
             }
 
-            GenerateSimpleAnnotation(name, Dependencies.CSharpHelper.UnknownLiteral(value), parameters);
+            GenerateSimpleAnnotation(
+                name,
+                Dependencies.CSharpHelper.UnknownLiteral(value),
+                parameters
+            );
         }
     }
 
@@ -256,13 +301,12 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     protected virtual void GenerateSimpleAnnotation(
         string annotationName,
         string valueString,
-        CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (parameters.TargetName != "this")
         {
-            parameters.MainBuilder
-                .Append(parameters.TargetName)
-                .Append('.');
+            parameters.MainBuilder.Append(parameters.TargetName).Append('.');
         }
 
         parameters.MainBuilder

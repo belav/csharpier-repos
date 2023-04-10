@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,68 +33,82 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public sealed class TransformerInfo : ConfigurationElement
+    {
+        static ConfigurationProperty nameProp;
+        static ConfigurationProperty typeProp;
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static TransformerInfo()
+        {
+            nameProp = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                "",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            typeProp = new ConfigurationProperty(
+                "type",
+                typeof(string),
+                "",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired
+            );
+            properties = new ConfigurationPropertyCollection();
 
-	public sealed class TransformerInfo : ConfigurationElement
-	{
-		static ConfigurationProperty nameProp;
-		static ConfigurationProperty typeProp;
-		static ConfigurationPropertyCollection properties;
+            properties.Add(nameProp);
+            properties.Add(typeProp);
+        }
 
-		static TransformerInfo ()
-		{
-			nameProp = new ConfigurationProperty ("name", typeof (string), "",
-							      TypeDescriptor.GetConverter (typeof (string)),
-							      PropertyHelper.NonEmptyStringValidator,
-							      ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			typeProp = new ConfigurationProperty ("type", typeof (string), "",
-							      TypeDescriptor.GetConverter (typeof (string)),
-							      PropertyHelper.NonEmptyStringValidator,
-							      ConfigurationPropertyOptions.IsRequired);
-			properties = new ConfigurationPropertyCollection ();
+        public TransformerInfo(string name, string type)
+        {
+            this.Name = name;
+            this.Type = type;
+        }
 
-			properties.Add (nameProp);
-			properties.Add (typeProp);
-		}
+        public override bool Equals(object o)
+        {
+            TransformerInfo info = o as TransformerInfo;
+            return (Name == info.Name && Type == info.Type);
+        }
 
-		public TransformerInfo (string name, string type)
-		{
-			this.Name = name;
-			this.Type = type;
-		}
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode() + Type.GetHashCode();
+        }
 
-		public override bool Equals (object o)
-		{
-			TransformerInfo info = o as TransformerInfo;
-			return (Name == info.Name && Type == info.Type);
-		}
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "name",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Name
+        {
+            get { return (string)base[nameProp]; }
+            set { base[nameProp] = value; }
+        }
 
-		public override int GetHashCode ()
-		{
-			return Name.GetHashCode () + Type.GetHashCode ();
-		}
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "type",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string Type
+        {
+            get { return (string)base[typeProp]; }
+            set { base[typeProp] = value; }
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Name {
-			get { return (string) base [nameProp];}
-			set { base[nameProp] = value; }
-		}
-
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("type", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string Type {
-			get { return (string) base [typeProp];}
-			set { base[typeProp] = value; }
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-	}
-
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-
-

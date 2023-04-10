@@ -34,19 +34,24 @@ public class CosmosContainsTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (method.IsGenericMethod
+        if (
+            method.IsGenericMethod
             && method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains)
-            && ValidateValues(arguments[0]))
+            && ValidateValues(arguments[0])
+        )
         {
             return _sqlExpressionFactory.In(arguments[1], arguments[0], false);
         }
 
-        if (arguments.Count == 1
+        if (
+            arguments.Count == 1
             && method.IsContainsMethod()
             && instance != null
-            && ValidateValues(instance))
+            && ValidateValues(instance)
+        )
         {
             return _sqlExpressionFactory.In(arguments[0], instance, false);
         }
@@ -54,6 +59,6 @@ public class CosmosContainsTranslator : IMethodCallTranslator
         return null;
     }
 
-    private static bool ValidateValues(SqlExpression values)
-        => values is SqlConstantExpression || values is SqlParameterExpression;
+    private static bool ValidateValues(SqlExpression values) =>
+        values is SqlConstantExpression || values is SqlParameterExpression;
 }

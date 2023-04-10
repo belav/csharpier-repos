@@ -18,34 +18,27 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         private readonly ImmutableHashSet<string> _reasons;
 
         public InvocationReasons(string reason)
-            : this(ImmutableHashSet.Create(reason))
-        {
-        }
+            : this(ImmutableHashSet.Create(reason)) { }
 
-        public InvocationReasons(ImmutableHashSet<string> reasons)
-            => _reasons = reasons ?? ImmutableHashSet<string>.Empty;
+        public InvocationReasons(ImmutableHashSet<string> reasons) =>
+            _reasons = reasons ?? ImmutableHashSet<string>.Empty;
 
         public bool IsEmpty => _reasons.IsEmpty;
 
-        public bool Contains(string reason)
-            => _reasons.Contains(reason);
+        public bool Contains(string reason) => _reasons.Contains(reason);
 
-        public InvocationReasons With(InvocationReasons invocationReasons)
-            => new(_reasons.Union(invocationReasons._reasons));
+        public InvocationReasons With(InvocationReasons invocationReasons) =>
+            new(_reasons.Union(invocationReasons._reasons));
 
-        public InvocationReasons With(string reason)
-            => new(_reasons.Add(reason));
+        public InvocationReasons With(string reason) => new(_reasons.Add(reason));
 
-        public ImmutableHashSet<string>.Enumerator GetEnumerator()
-            => _reasons.GetEnumerator();
+        public ImmutableHashSet<string>.Enumerator GetEnumerator() => _reasons.GetEnumerator();
 
-        IEnumerator<string> IEnumerable<string>.GetEnumerator()
-            => _reasons.GetEnumerator();
+        IEnumerator<string> IEnumerable<string>.GetEnumerator() => _reasons.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => _reasons.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => _reasons.GetEnumerator();
 
-        public override string ToString()
-            => string.Join("|", _reasons ?? ImmutableHashSet<string>.Empty);
+        public override string ToString() =>
+            string.Join("|", _reasons ?? ImmutableHashSet<string>.Empty);
     }
 }

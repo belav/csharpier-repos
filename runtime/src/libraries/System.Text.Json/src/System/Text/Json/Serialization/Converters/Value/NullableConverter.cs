@@ -3,7 +3,8 @@
 
 namespace System.Text.Json.Serialization.Converters
 {
-    internal sealed class NullableConverter<T> : JsonConverter<T?> where T : struct
+    internal sealed class NullableConverter<T> : JsonConverter<T?>
+        where T : struct
     {
         internal override Type? ElementType => typeof(T);
         public override bool HandleNull => true;
@@ -19,7 +20,13 @@ namespace System.Text.Json.Serialization.Converters
             ConverterStrategy = elementConverter.ConverterStrategy;
         }
 
-        internal override bool OnTryRead(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options, scoped ref ReadStack state, out T? value)
+        internal override bool OnTryRead(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options,
+            scoped ref ReadStack state,
+            out T? value
+        )
         {
             if (!state.IsContinuation && reader.TokenType == JsonTokenType.Null)
             {
@@ -27,7 +34,11 @@ namespace System.Text.Json.Serialization.Converters
                 return true;
             }
 
-            state.Current.JsonPropertyInfo = state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+            state.Current.JsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
             if (_elementConverter.TryRead(ref reader, typeof(T), options, ref state, out T element))
             {
                 value = element;
@@ -38,7 +49,12 @@ namespace System.Text.Json.Serialization.Converters
             return false;
         }
 
-        internal override bool OnTryWrite(Utf8JsonWriter writer, T? value, JsonSerializerOptions options, ref WriteStack state)
+        internal override bool OnTryWrite(
+            Utf8JsonWriter writer,
+            T? value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             if (value is null)
             {
@@ -46,11 +62,19 @@ namespace System.Text.Json.Serialization.Converters
                 return true;
             }
 
-            state.Current.JsonPropertyInfo = state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+            state.Current.JsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
             return _elementConverter.TryWrite(writer, value.Value, options, ref state);
         }
 
-        public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override T? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType == JsonTokenType.Null)
             {
@@ -73,18 +97,30 @@ namespace System.Text.Json.Serialization.Converters
             }
         }
 
-        internal override T? ReadNumberWithCustomHandling(ref Utf8JsonReader reader, JsonNumberHandling numberHandling, JsonSerializerOptions options)
+        internal override T? ReadNumberWithCustomHandling(
+            ref Utf8JsonReader reader,
+            JsonNumberHandling numberHandling,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType == JsonTokenType.Null)
             {
                 return null;
             }
 
-            T value = _elementConverter.ReadNumberWithCustomHandling(ref reader, numberHandling, options);
+            T value = _elementConverter.ReadNumberWithCustomHandling(
+                ref reader,
+                numberHandling,
+                options
+            );
             return value;
         }
 
-        internal override void WriteNumberWithCustomHandling(Utf8JsonWriter writer, T? value, JsonNumberHandling handling)
+        internal override void WriteNumberWithCustomHandling(
+            Utf8JsonWriter writer,
+            T? value,
+            JsonNumberHandling handling
+        )
         {
             if (value is null)
             {

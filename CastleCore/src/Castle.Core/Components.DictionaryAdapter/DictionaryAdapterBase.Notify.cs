@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,7 @@ namespace Castle.Components.DictionaryAdapter
         private int suppressNotificationCount = 0;
 
         public event PropertyChangingEventHandler PropertyChanging;
-        public event PropertyChangedEventHandler  PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool CanNotify { get; set; }
 
@@ -51,7 +51,11 @@ namespace Castle.Components.DictionaryAdapter
             --suppressNotificationCount;
         }
 
-        protected bool NotifyPropertyChanging(PropertyDescriptor property, object oldValue, object newValue)
+        protected bool NotifyPropertyChanging(
+            PropertyDescriptor property,
+            object oldValue,
+            object newValue
+        )
         {
             if (property.SuppressNotifications || !ShouldNotify)
                 return true;
@@ -65,7 +69,11 @@ namespace Castle.Components.DictionaryAdapter
             return !args.Cancel;
         }
 
-        protected void NotifyPropertyChanged(PropertyDescriptor property, object oldValue, object newValue)
+        protected void NotifyPropertyChanged(
+            PropertyDescriptor property,
+            object oldValue,
+            object newValue
+        )
         {
             if (property.SuppressNotifications || !ShouldNotify)
                 return;
@@ -74,7 +82,10 @@ namespace Castle.Components.DictionaryAdapter
             if (propertyChanged == null)
                 return;
 
-            propertyChanged(this, new PropertyChangedEventArgsEx(property.PropertyName, oldValue, newValue));
+            propertyChanged(
+                this,
+                new PropertyChangedEventArgsEx(property.PropertyName, oldValue, newValue)
+            );
         }
 
         protected void NotifyPropertyChanged(string propertyName)
@@ -89,8 +100,11 @@ namespace Castle.Components.DictionaryAdapter
             propertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected TrackPropertyChangeScope TrackPropertyChange(PropertyDescriptor property, 
-                                                               object oldValue, object newValue)
+        protected TrackPropertyChangeScope TrackPropertyChange(
+            PropertyDescriptor property,
+            object oldValue,
+            object newValue
+        )
         {
             if (!ShouldNotify || property.SuppressNotifications)
                 return null;
@@ -131,23 +145,22 @@ namespace Castle.Components.DictionaryAdapter
 
             public TrackPropertyChangeScope(DictionaryAdapterBase adapter)
             {
-                this.adapter            = adapter;
+                this.adapter = adapter;
                 this.readOnlyProperties = adapter.This.Properties.Values
-                    .Where(
-                        pd => !pd.Property.CanWrite || pd.IsDynamicProperty
-                    )
-                    .ToDictionary(
-                        pd => pd,
-                        pd => GetEffectivePropertyValue(pd)
-                    );
+                    .Where(pd => !pd.Property.CanWrite || pd.IsDynamicProperty)
+                    .ToDictionary(pd => pd, pd => GetEffectivePropertyValue(pd));
             }
 
-            public TrackPropertyChangeScope(DictionaryAdapterBase adapter, PropertyDescriptor property, object existingValue)
+            public TrackPropertyChangeScope(
+                DictionaryAdapterBase adapter,
+                PropertyDescriptor property,
+                object existingValue
+            )
                 : this(adapter)
             {
-                this.property      = property;
+                this.property = property;
                 this.existingValue = existingValue;
-                existingValue      = adapter.GetProperty(property.PropertyName, true); // TODO: This looks unnecessary
+                existingValue = adapter.GetProperty(property.PropertyName, true); // TODO: This looks unnecessary
             }
 
             public void Dispose()
@@ -180,7 +193,7 @@ namespace Castle.Components.DictionaryAdapter
 
                 foreach (var readOnlyProperty in readOnlyProperties)
                 {
-                    var descriptor   = readOnlyProperty.Key;
+                    var descriptor = readOnlyProperty.Key;
                     var currentValue = GetEffectivePropertyValue(descriptor);
                     changed |= NotifyIfChanged(descriptor, readOnlyProperty.Value, currentValue);
                 }
@@ -189,7 +202,11 @@ namespace Castle.Components.DictionaryAdapter
                 return changed;
             }
 
-            private bool NotifyIfChanged(PropertyDescriptor descriptor, object oldValue, object newValue)
+            private bool NotifyIfChanged(
+                PropertyDescriptor descriptor,
+                object oldValue,
+                object newValue
+            )
             {
                 if (Equals(oldValue, newValue))
                     return false;

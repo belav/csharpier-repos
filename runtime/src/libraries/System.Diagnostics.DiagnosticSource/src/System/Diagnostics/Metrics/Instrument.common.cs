@@ -11,7 +11,8 @@ namespace System.Diagnostics.Metrics
     /// <remarks>
     /// This class supports only the following generic parameter types: <see cref="byte" />, <see cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double" />, and <see cref="decimal" />
     /// </remarks>
-    public abstract partial class Instrument<T> : Instrument where T : struct
+    public abstract partial class Instrument<T> : Instrument
+        where T : struct
     {
         /// <summary>
         /// Create the metrics instrument using the properties meter, name, description, and unit.
@@ -21,7 +22,8 @@ namespace System.Diagnostics.Metrics
         /// <param name="name">The instrument name. cannot be null.</param>
         /// <param name="unit">Optional instrument unit of measurements.</param>
         /// <param name="description">Optional instrument description.</param>
-        protected Instrument(Meter meter, string name, string? unit, string? description) : base(meter, name, unit, description)
+        protected Instrument(Meter meter, string name, string? unit, string? description)
+            : base(meter, name, unit, description)
         {
             ValidateTypeParameter<T>();
         }
@@ -30,19 +32,28 @@ namespace System.Diagnostics.Metrics
         /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to this instrument.
         /// </summary>
         /// <param name="measurement">The measurement value.</param>
-        protected void RecordMeasurement(T measurement) => RecordMeasurement(measurement, Instrument.EmptyTags.AsSpan());
+        protected void RecordMeasurement(T measurement) =>
+            RecordMeasurement(measurement, Instrument.EmptyTags.AsSpan());
 
         /// <summary>
         /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to this instrument.
         /// </summary>
         /// <param name="measurement">The measurement value.</param>
         /// <param name="tags">A span of key-value pair tags associated with the measurement.</param>
-        protected void RecordMeasurement(T measurement, ReadOnlySpan<KeyValuePair<string, object?>> tags)
+        protected void RecordMeasurement(
+            T measurement,
+            ReadOnlySpan<KeyValuePair<string, object?>> tags
+        )
         {
             DiagNode<ListenerSubscription>? current = _subscriptions.First;
             while (current is not null)
             {
-                current.Value.Listener.NotifyMeasurement(this, measurement, tags, current.Value.State);
+                current.Value.Listener.NotifyMeasurement(
+                    this,
+                    measurement,
+                    tags,
+                    current.Value.State
+                );
                 current = current.Next;
             }
         }

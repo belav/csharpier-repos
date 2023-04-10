@@ -14,7 +14,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem;
 namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
 {
     /// <summary>
-    /// Project context to initialize properties and items of a Workspace project created by <see cref="IWorkspaceProjectContextFactory"/>. 
+    /// Project context to initialize properties and items of a Workspace project created by <see cref="IWorkspaceProjectContextFactory"/>.
     /// </summary>
     /// <remarks>
     /// <see cref="IDisposable.Dispose"/> is safe to call on instances of this type on any thread.
@@ -49,13 +49,21 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         // References.
         void AddMetadataReference(string referencePath, MetadataReferenceProperties properties);
         void RemoveMetadataReference(string referencePath);
-        void AddProjectReference(IWorkspaceProjectContext project, MetadataReferenceProperties properties);
+        void AddProjectReference(
+            IWorkspaceProjectContext project,
+            MetadataReferenceProperties properties
+        );
         void RemoveProjectReference(IWorkspaceProjectContext project);
         void AddAnalyzerReference(string referencePath);
         void RemoveAnalyzerReference(string referencePath);
 
         // Files.
-        void AddSourceFile(string filePath, bool isInCurrentContext = true, IEnumerable<string> folderNames = null, SourceCodeKind sourceCodeKind = SourceCodeKind.Regular);
+        void AddSourceFile(
+            string filePath,
+            bool isInCurrentContext = true,
+            IEnumerable<string> folderNames = null,
+            SourceCodeKind sourceCodeKind = SourceCodeKind.Regular
+        );
         void RemoveSourceFile(string filePath);
         void AddAdditionalFile(string filePath, bool isInCurrentContext = true);
         void RemoveAdditionalFile(string filePath);

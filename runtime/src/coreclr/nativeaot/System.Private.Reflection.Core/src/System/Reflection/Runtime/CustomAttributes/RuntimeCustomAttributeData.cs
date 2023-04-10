@@ -28,7 +28,9 @@ namespace System.Reflection.Runtime.CustomAttributes
                     ReflectionTrace.CustomAttributeData_ConstructorArguments(this);
 #endif
 
-                return new ReadOnlyCollection<CustomAttributeTypedArgument>(GetConstructorArguments(throwIfMissingMetadata: true));
+                return new ReadOnlyCollection<CustomAttributeTypedArgument>(
+                    GetConstructorArguments(throwIfMissingMetadata: true)
+                );
             }
         }
 
@@ -43,7 +45,9 @@ namespace System.Reflection.Runtime.CustomAttributes
                     ReflectionTrace.CustomAttributeData_NamedArguments(this);
 #endif
 
-                return new ReadOnlyCollection<CustomAttributeNamedArgument>(GetNamedArguments(throwIfMissingMetadata: true));
+                return new ReadOnlyCollection<CustomAttributeNamedArgument>(
+                    GetNamedArguments(throwIfMissingMetadata: true)
+                );
             }
         }
 
@@ -52,14 +56,21 @@ namespace System.Reflection.Runtime.CustomAttributes
             try
             {
                 string ctorArgs = "";
-                IList<CustomAttributeTypedArgument> constructorArguments = GetConstructorArguments(throwIfMissingMetadata: false);
+                IList<CustomAttributeTypedArgument> constructorArguments = GetConstructorArguments(
+                    throwIfMissingMetadata: false
+                );
                 if (constructorArguments == null)
                     return LastResortToString;
                 for (int i = 0; i < constructorArguments.Count; i++)
-                    ctorArgs += string.Format(i == 0 ? "{0}" : ", {0}", ComputeTypedArgumentString(constructorArguments[i], typed: false));
+                    ctorArgs += string.Format(
+                        i == 0 ? "{0}" : ", {0}",
+                        ComputeTypedArgumentString(constructorArguments[i], typed: false)
+                    );
 
                 string namedArgs = "";
-                IList<CustomAttributeNamedArgument> namedArguments = GetNamedArguments(throwIfMissingMetadata: false);
+                IList<CustomAttributeNamedArgument> namedArguments = GetNamedArguments(
+                    throwIfMissingMetadata: false
+                );
                 if (namedArguments == null)
                     return LastResortToString;
                 for (int i = 0; i < namedArguments.Count; i++)
@@ -73,7 +84,8 @@ namespace System.Reflection.Runtime.CustomAttributes
                     namedArgs += string.Format(
                         i == 0 && ctorArgs.Length == 0 ? "{0} = {1}" : ", {0} = {1}",
                         namedArgument.MemberName,
-                        ComputeTypedArgumentString(namedArgument.TypedValue, typed));
+                        ComputeTypedArgumentString(namedArgument.TypedValue, typed)
+                    );
                 }
 
                 return string.Format("[{0}({1}{2})]", AttributeTypeString, ctorArgs, namedArgs);
@@ -85,11 +97,23 @@ namespace System.Reflection.Runtime.CustomAttributes
         }
 
         protected static ConstructorInfo ResolveAttributeConstructor(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type attributeType, Type[] parameterTypes)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type attributeType,
+            Type[] parameterTypes
+        )
         {
             int parameterCount = parameterTypes.Length;
-            foreach (ConstructorInfo candidate in attributeType.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+            foreach (
+                ConstructorInfo candidate in attributeType.GetConstructors(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly
+                )
+            )
             {
                 ParameterInfo[] candidateParameters = candidate.GetParametersNoCopy();
                 if (parameterCount != candidateParameters.Length)
@@ -112,17 +136,24 @@ namespace System.Reflection.Runtime.CustomAttributes
         //
         // If throwIfMissingMetadata is false, returns null rather than throwing a MissingMetadataException.
         //
-        internal abstract IList<CustomAttributeTypedArgument> GetConstructorArguments(bool throwIfMissingMetadata);
+        internal abstract IList<CustomAttributeTypedArgument> GetConstructorArguments(
+            bool throwIfMissingMetadata
+        );
 
         //
         // If throwIfMissingMetadata is false, returns null rather than throwing a MissingMetadataException.
         //
-        internal abstract IList<CustomAttributeNamedArgument> GetNamedArguments(bool throwIfMissingMetadata);
+        internal abstract IList<CustomAttributeNamedArgument> GetNamedArguments(
+            bool throwIfMissingMetadata
+        );
 
         //
         // Computes the ToString() value for a CustomAttributeTypedArgument struct.
         //
-        private static string ComputeTypedArgumentString(CustomAttributeTypedArgument cat, bool typed)
+        private static string ComputeTypedArgumentString(
+            CustomAttributeTypedArgument cat,
+            bool typed
+        )
         {
             Type argumentType = cat.ArgumentType;
             if (argumentType == null)
@@ -143,16 +174,23 @@ namespace System.Reflection.Runtime.CustomAttributes
 
             if (argumentType == typeof(Type))
                 return string.Format("typeof({0})", ((Type)value).FullName);
-
             else if (argumentType.IsArray)
             {
-                IList<CustomAttributeTypedArgument> array = value as IList<CustomAttributeTypedArgument>;
+                IList<CustomAttributeTypedArgument> array =
+                    value as IList<CustomAttributeTypedArgument>;
 
                 Type elementType = argumentType.GetElementType();
-                string result = string.Format(@"new {0}[{1}] {{ ", elementType.IsEnum ? elementType.FullName : elementType.Name, array.Count);
+                string result = string.Format(
+                    @"new {0}[{1}] {{ ",
+                    elementType.IsEnum ? elementType.FullName : elementType.Name,
+                    array.Count
+                );
 
                 for (int i = 0; i < array.Count; i++)
-                    result += string.Format(i == 0 ? "{0}" : ", {0}", ComputeTypedArgumentString(array[i], elementType != typeof(object)));
+                    result += string.Format(
+                        i == 0 ? "{0}" : ", {0}",
+                        ComputeTypedArgumentString(array[i], elementType != typeof(object))
+                    );
 
                 return result += " }";
             }
@@ -173,15 +211,18 @@ namespace System.Reflection.Runtime.CustomAttributes
         // Wrap a custom attribute argument (or an element of an array-typed custom attribute argument) in a CustomAttributeTypeArgument structure
         // for insertion into a CustomAttributeData value.
         //
-        protected CustomAttributeTypedArgument WrapInCustomAttributeTypedArgument(object value, Type argumentType)
+        protected CustomAttributeTypedArgument WrapInCustomAttributeTypedArgument(
+            object value,
+            Type argumentType
+        )
         {
             if (argumentType == typeof(object))
             {
                 // If the declared attribute type is System.Object, we must report the type based on the runtime value.
                 if (value == null)
-                    argumentType = typeof(string);  // Why is null reported as System.String? Because that's what the desktop CLR does.
+                    argumentType = typeof(string); // Why is null reported as System.String? Because that's what the desktop CLR does.
                 else if (value is Type)
-                    argumentType = typeof(Type);    // value.GetType() will not actually be System.Type - rather it will be some internal implementation type. We only want to report it as System.Type.
+                    argumentType = typeof(Type); // value.GetType() will not actually be System.Type - rather it will be some internal implementation type. We only want to report it as System.Type.
                 else
                     argumentType = value.GetType();
             }
@@ -192,13 +233,18 @@ namespace System.Reflection.Runtime.CustomAttributes
                 if (!argumentType.IsArray)
                     throw new BadImageFormatException();
                 Type reportedElementType = argumentType.GetElementType();
-                LowLevelListWithIList<CustomAttributeTypedArgument> elementTypedArguments = new LowLevelListWithIList<CustomAttributeTypedArgument>();
+                LowLevelListWithIList<CustomAttributeTypedArgument> elementTypedArguments =
+                    new LowLevelListWithIList<CustomAttributeTypedArgument>();
                 foreach (object elementValue in enumerableValue)
                 {
-                    CustomAttributeTypedArgument elementTypedArgument = WrapInCustomAttributeTypedArgument(elementValue, reportedElementType);
+                    CustomAttributeTypedArgument elementTypedArgument =
+                        WrapInCustomAttributeTypedArgument(elementValue, reportedElementType);
                     elementTypedArguments.Add(elementTypedArgument);
                 }
-                return new CustomAttributeTypedArgument(argumentType, new ReadOnlyCollection<CustomAttributeTypedArgument>(elementTypedArguments));
+                return new CustomAttributeTypedArgument(
+                    argumentType,
+                    new ReadOnlyCollection<CustomAttributeTypedArgument>(elementTypedArguments)
+                );
             }
             else
             {

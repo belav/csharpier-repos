@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
     internal readonly struct SourceLineUpdate
     {
         /// <summary>
-        /// Creates a SourceLineUpdate. 
+        /// Creates a SourceLineUpdate.
         /// </summary>
         /// <param name="oldLine">Line number before the update was made.</param>
         /// <param name="newLine">Line number after the update was made.</param>
@@ -26,9 +26,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// We expect that <paramref name="oldLine"/> and <paramref name="newLine"/> have the same value
         /// when the line delta is zero.
         /// </remarks>
-        public SourceLineUpdate(
-            int oldLine,
-            int newLine)
+        public SourceLineUpdate(int oldLine, int newLine)
         {
             if (oldLine < 0)
                 throw new ArgumentOutOfRangeException(nameof(oldLine));

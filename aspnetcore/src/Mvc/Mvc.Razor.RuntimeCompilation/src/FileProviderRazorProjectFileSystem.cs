@@ -13,7 +13,10 @@ internal sealed class FileProviderRazorProjectFileSystem : RazorProjectFileSyste
     private readonly RuntimeCompilationFileProvider _fileProvider;
     private readonly IWebHostEnvironment _hostingEnvironment;
 
-    public FileProviderRazorProjectFileSystem(RuntimeCompilationFileProvider fileProvider, IWebHostEnvironment hostingEnvironment)
+    public FileProviderRazorProjectFileSystem(
+        RuntimeCompilationFileProvider fileProvider,
+        IWebHostEnvironment hostingEnvironment
+    )
     {
         if (fileProvider == null)
         {
@@ -41,7 +44,13 @@ internal sealed class FileProviderRazorProjectFileSystem : RazorProjectFileSyste
         path = NormalizeAndEnsureValidPath(path);
         var fileInfo = FileProvider.GetFileInfo(path);
 
-        return new FileProviderRazorProjectItem(fileInfo, basePath: string.Empty, filePath: path, root: _hostingEnvironment.ContentRootPath, fileKind);
+        return new FileProviderRazorProjectItem(
+            fileInfo,
+            basePath: string.Empty,
+            filePath: path,
+            root: _hostingEnvironment.ContentRootPath,
+            fileKind
+        );
     }
 
     public override IEnumerable<RazorProjectItem> EnumerateItems(string path)
@@ -50,7 +59,11 @@ internal sealed class FileProviderRazorProjectFileSystem : RazorProjectFileSyste
         return EnumerateFiles(FileProvider.GetDirectoryContents(path), path, prefix: string.Empty);
     }
 
-    private IEnumerable<RazorProjectItem> EnumerateFiles(IDirectoryContents directory, string basePath, string prefix)
+    private IEnumerable<RazorProjectItem> EnumerateFiles(
+        IDirectoryContents directory,
+        string basePath,
+        string prefix
+    )
     {
         if (directory.Exists)
         {
@@ -59,18 +72,31 @@ internal sealed class FileProviderRazorProjectFileSystem : RazorProjectFileSyste
                 if (fileInfo.IsDirectory)
                 {
                     var relativePath = prefix + "/" + fileInfo.Name;
-                    var subDirectory = FileProvider.GetDirectoryContents(JoinPath(basePath, relativePath));
+                    var subDirectory = FileProvider.GetDirectoryContents(
+                        JoinPath(basePath, relativePath)
+                    );
                     var children = EnumerateFiles(subDirectory, basePath, relativePath);
                     foreach (var child in children)
                     {
                         yield return child;
                     }
                 }
-                else if (string.Equals(RazorFileExtension, Path.GetExtension(fileInfo.Name), StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(
+                        RazorFileExtension,
+                        Path.GetExtension(fileInfo.Name),
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     var filePath = prefix + "/" + fileInfo.Name;
 
-                    yield return new FileProviderRazorProjectItem(fileInfo, basePath, filePath: filePath, root: _hostingEnvironment.ContentRootPath);
+                    yield return new FileProviderRazorProjectItem(
+                        fileInfo,
+                        basePath,
+                        filePath: filePath,
+                        root: _hostingEnvironment.ContentRootPath
+                    );
                 }
             }
         }

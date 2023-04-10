@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,13 +24,22 @@ namespace Castle.DynamicProxy.Contributors
         private readonly InterfaceMapping map;
         private readonly bool onlyProxyVirtual;
 
-        public InterfaceMembersOnClassCollector(Type type, bool onlyProxyVirtual, InterfaceMapping map) : base(type)
+        public InterfaceMembersOnClassCollector(
+            Type type,
+            bool onlyProxyVirtual,
+            InterfaceMapping map
+        )
+            : base(type)
         {
             this.onlyProxyVirtual = onlyProxyVirtual;
             this.map = map;
         }
 
-        protected override MetaMethod GetMethodToGenerate(MethodInfo method, IProxyGenerationHook hook, bool isStandalone)
+        protected override MetaMethod GetMethodToGenerate(
+            MethodInfo method,
+            IProxyGenerationHook hook,
+            bool isStandalone
+        )
         {
             if (ProxyUtil.IsAccessibleMethod(method) == false)
             {
@@ -45,7 +54,13 @@ namespace Castle.DynamicProxy.Contributors
             var methodOnTarget = GetMethodOnTarget(method);
 
             var proxyable = AcceptMethod(method, onlyProxyVirtual, hook);
-            return new MetaMethod(method, methodOnTarget, isStandalone, proxyable, methodOnTarget.IsPrivate == false);
+            return new MetaMethod(
+                method,
+                methodOnTarget,
+                isStandalone,
+                proxyable,
+                methodOnTarget.IsPrivate == false
+            );
         }
 
         private MethodInfo GetMethodOnTarget(MethodInfo method)

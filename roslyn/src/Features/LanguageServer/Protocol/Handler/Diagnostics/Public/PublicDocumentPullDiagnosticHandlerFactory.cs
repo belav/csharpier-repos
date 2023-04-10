@@ -27,13 +27,21 @@ internal class PublicDocumentPullDiagnosticHandlerFactory : ILspServiceFactory
     public PublicDocumentPullDiagnosticHandlerFactory(
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
-        IGlobalOptionService globalOptions)
+        IGlobalOptionService globalOptions
+    )
     {
         _analyzerService = analyzerService;
         _editAndContinueDiagnosticUpdateSource = editAndContinueDiagnosticUpdateSource;
         _globalOptions = globalOptions;
     }
 
-    public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
-        => new PublicDocumentPullDiagnosticsHandler(_analyzerService, _editAndContinueDiagnosticUpdateSource, _globalOptions);
+    public ILspService CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    ) =>
+        new PublicDocumentPullDiagnosticsHandler(
+            _analyzerService,
+            _editAndContinueDiagnosticUpdateSource,
+            _globalOptions
+        );
 }

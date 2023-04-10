@@ -9,31 +9,31 @@ using TestLibrary;
 public class BFM_CharMarshaler
 {
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool Char_In([In]char c);
+    public static extern bool Char_In([In] char c);
 
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool Char_InByRef([In]ref char c);
+    public static extern bool Char_InByRef([In] ref char c);
 
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool Char_InOutByRef([In, Out]ref char c);
+    public static extern bool Char_InOutByRef([In, Out] ref char c);
 
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool CharBuffer_In_String([In]String s);
+    public static extern bool CharBuffer_In_String([In] String s);
 
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool CharBuffer_InByRef_String([In]ref String s);
+    public static extern bool CharBuffer_InByRef_String([In] ref String s);
 
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool CharBuffer_InOutByRef_String([In, Out]ref String s);
+    public static extern bool CharBuffer_InOutByRef_String([In, Out] ref String s);
 
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool CharBuffer_In_StringBuilder([In]StringBuilder s);
+    public static extern bool CharBuffer_In_StringBuilder([In] StringBuilder s);
 
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool CharBuffer_InByRef_StringBuilder([In]ref StringBuilder s);
+    public static extern bool CharBuffer_InByRef_StringBuilder([In] ref StringBuilder s);
 
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool CharBuffer_InOutByRef_StringBuilder([In, Out]ref StringBuilder s);
+    public static extern bool CharBuffer_InOutByRef_StringBuilder([In, Out] ref StringBuilder s);
 
     static String GetValidString()
     {
@@ -136,9 +136,15 @@ public class BFM_CharMarshaler
 
     static void testCharBufferStringBuilder()
     {
-        Assert.IsTrue(CharBuffer_In_StringBuilder(GetInvalidStringBuilder()), "Error location tcbsb1");
+        Assert.IsTrue(
+            CharBuffer_In_StringBuilder(GetInvalidStringBuilder()),
+            "Error location tcbsb1"
+        );
 
-        Assert.IsTrue(CharBuffer_In_StringBuilder(GetValidStringBuilder()), "Error location tcbsb2");
+        Assert.IsTrue(
+            CharBuffer_In_StringBuilder(GetValidStringBuilder()),
+            "Error location tcbsb2"
+        );
 
         StringBuilder cTemp = GetInvalidStringBuilder();
         StringBuilder cTempClone = cTemp;
@@ -172,7 +178,9 @@ public class BFM_CharMarshaler
     {
         if (System.Globalization.CultureInfo.CurrentCulture.Name != "en-US")
         {
-            Console.WriteLine("Non-US English platforms are not supported.\nPassing without running tests");
+            Console.WriteLine(
+                "Non-US English platforms are not supported.\nPassing without running tests"
+            );
 
             Console.WriteLine("--- Success");
             return 100;
@@ -182,9 +190,11 @@ public class BFM_CharMarshaler
         {
             runTest();
             return 100;
-        } catch (Exception e){
-            Console.WriteLine($"Test Failure: {e}"); 
-            return 101; 
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Test Failure: {e}");
+            return 101;
         }
     }
 }

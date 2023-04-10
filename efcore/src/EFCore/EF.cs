@@ -16,13 +16,17 @@ namespace Microsoft.EntityFrameworkCore;
 // ReSharper disable once InconsistentNaming
 public static partial class EF
 {
-    internal static readonly MethodInfo PropertyMethod
-        = typeof(EF).GetTypeInfo().GetDeclaredMethod(nameof(Property))!;
+    internal static readonly MethodInfo PropertyMethod = typeof(EF)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(Property))!;
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2060",
-        Justification = "EF.Property has no DynamicallyAccessedMembers annotations and is safe to construct.")]
-    internal static MethodInfo MakePropertyMethod(Type type)
-        => PropertyMethod.MakeGenericMethod(type);
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2060",
+        Justification = "EF.Property has no DynamicallyAccessedMembers annotations and is safe to construct."
+    )]
+    internal static MethodInfo MakePropertyMethod(Type type) =>
+        PropertyMethod.MakeGenericMethod(type);
 
     /// <summary>
     ///     This flag is set to <see langword="true" /> when code is being run from a design-time tool, such
@@ -59,8 +63,8 @@ public static partial class EF
     /// <returns>The value assigned to the property.</returns>
     public static TProperty Property<TProperty>(
         object entity,
-        [NotParameterized] string propertyName)
-        => throw new InvalidOperationException(CoreStrings.PropertyMethodInvoked);
+        [NotParameterized] string propertyName
+    ) => throw new InvalidOperationException(CoreStrings.PropertyMethodInvoked);
 
     /// <summary>
     ///     Provides CLR methods that get translated to database functions when used in LINQ to Entities queries.
@@ -74,6 +78,5 @@ public static partial class EF
     ///         See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    public static DbFunctions Functions
-        => DbFunctions.Instance;
+    public static DbFunctions Functions => DbFunctions.Instance;
 }

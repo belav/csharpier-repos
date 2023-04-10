@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Tools
             bool changesAreErrors,
             SourceFileMatcher fileMatcher,
             string? reportPath,
-            bool includeGeneratedFiles)
+            bool includeGeneratedFiles
+        )
         {
             WorkspaceFilePath = workspaceFilePath;
             WorkspaceType = workspaceType;
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Tools
             out bool changesAreErrors,
             out SourceFileMatcher fileMatcher,
             out string? reportPath,
-            out bool includeGeneratedFiles)
+            out bool includeGeneratedFiles
+        )
         {
             workspaceFilePath = WorkspaceFilePath;
             workspaceType = WorkspaceType;

@@ -126,7 +126,11 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Int64>();
                 int sizeOfoutArray = outArray.Length * Unsafe.SizeOf<Int64>();
-                if ((alignment != 16 && alignment != 8) || (alignment * 2) < sizeOfinArray1 || (alignment * 2) < sizeOfoutArray)
+                if (
+                    (alignment != 16 && alignment != 8)
+                    || (alignment * 2) < sizeOfinArray1
+                    || (alignment * 2) < sizeOfoutArray
+                )
                 {
                     throw new ArgumentException("Invalid value of alignment");
                 }
@@ -139,11 +143,17 @@ namespace JIT.HardwareIntrinsics.Arm
 
                 this.alignment = (ulong)alignment;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray1Ptr), ref Unsafe.As<Int64, byte>(ref inArray1[0]), (uint)sizeOfinArray1);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray1Ptr),
+                    ref Unsafe.As<Int64, byte>(ref inArray1[0]),
+                    (uint)sizeOfinArray1
+                );
             }
 
-            public void* inArray1Ptr => Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray1Ptr =>
+                Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outArrayPtr =>
+                Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -165,24 +175,39 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt64(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Int64>, byte>(ref testStruct._fld1), ref Unsafe.As<Int64, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Int64>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetInt64();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Int64>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<Int64, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Int64>>()
+                );
 
                 return testStruct;
             }
 
-            public void RunStructFldScenario(StoreSelectedScalarTest__StoreSelectedScalar_Vector128_Int64_1 testClass)
+            public void RunStructFldScenario(
+                StoreSelectedScalarTest__StoreSelectedScalar_Vector128_Int64_1 testClass
+            )
             {
                 AdvSimd.StoreSelectedScalar((Int64*)testClass._dataTable.outArrayPtr, _fld1, 1);
 
                 testClass.ValidateResult(_fld1, testClass._dataTable.outArrayPtr);
             }
 
-            public void RunStructFldScenario_Load(StoreSelectedScalarTest__StoreSelectedScalar_Vector128_Int64_1 testClass)
+            public void RunStructFldScenario_Load(
+                StoreSelectedScalarTest__StoreSelectedScalar_Vector128_Int64_1 testClass
+            )
             {
                 fixed (Vector128<Int64>* pFld1 = &_fld1)
                 {
-                    AdvSimd.StoreSelectedScalar((Int64*)testClass._dataTable.outArrayPtr, AdvSimd.LoadVector128((Int64*)(pFld1)), 1);
+                    AdvSimd.StoreSelectedScalar(
+                        (Int64*)testClass._dataTable.outArrayPtr,
+                        AdvSimd.LoadVector128((Int64*)(pFld1)),
+                        1
+                    );
 
                     testClass.ValidateResult(_fld1, testClass._dataTable.outArrayPtr);
                 }
@@ -191,7 +216,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Int64>>() / sizeof(Int64);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Int64>>() / sizeof(Int64);
         private static readonly int RetElementCount = 1;
         private static readonly byte ElementIndex = 1;
 
@@ -205,18 +231,35 @@ namespace JIT.HardwareIntrinsics.Arm
 
         static StoreSelectedScalarTest__StoreSelectedScalar_Vector128_Int64_1()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt64(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Int64>, byte>(ref _clsVar1), ref Unsafe.As<Int64, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Int64>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetInt64();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Int64>, byte>(ref _clsVar1),
+                ref Unsafe.As<Int64, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Int64>>()
+            );
         }
 
         public StoreSelectedScalarTest__StoreSelectedScalar_Vector128_Int64_1()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt64(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Int64>, byte>(ref _fld1), ref Unsafe.As<Int64, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Int64>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetInt64();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Int64>, byte>(ref _fld1),
+                ref Unsafe.As<Int64, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Int64>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt64(); }
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetInt64();
+            }
             _dataTable = new DataTable(_data1, new Int64[RetElementCount], LargestVectorSize);
         }
 
@@ -228,7 +271,11 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            AdvSimd.StoreSelectedScalar((Int64*)_dataTable.outArrayPtr, Unsafe.Read<Vector128<Int64>>(_dataTable.inArray1Ptr), 1);
+            AdvSimd.StoreSelectedScalar(
+                (Int64*)_dataTable.outArrayPtr,
+                Unsafe.Read<Vector128<Int64>>(_dataTable.inArray1Ptr),
+                1
+            );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
         }
@@ -237,7 +284,11 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            AdvSimd.StoreSelectedScalar((Int64*)_dataTable.outArrayPtr, AdvSimd.LoadVector128((Int64*)(_dataTable.inArray1Ptr)), 1);
+            AdvSimd.StoreSelectedScalar(
+                (Int64*)_dataTable.outArrayPtr,
+                AdvSimd.LoadVector128((Int64*)(_dataTable.inArray1Ptr)),
+                1
+            );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
         }
@@ -246,11 +297,20 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            typeof(AdvSimd).GetMethod(nameof(AdvSimd.StoreSelectedScalar), new Type[] { typeof(Int64*), typeof(Vector128<Int64>), typeof(byte) })
-                         .Invoke(null, new object[] {
-                                 Pointer.Box(_dataTable.outArrayPtr, typeof(Int64*)),
-                                 Unsafe.Read<Vector128<Int64>>(_dataTable.inArray1Ptr),
-                                 ElementIndex });
+            typeof(AdvSimd)
+                .GetMethod(
+                    nameof(AdvSimd.StoreSelectedScalar),
+                    new Type[] { typeof(Int64*), typeof(Vector128<Int64>), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Pointer.Box(_dataTable.outArrayPtr, typeof(Int64*)),
+                        Unsafe.Read<Vector128<Int64>>(_dataTable.inArray1Ptr),
+                        ElementIndex
+                    }
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
         }
@@ -259,11 +319,20 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            typeof(AdvSimd).GetMethod(nameof(AdvSimd.StoreSelectedScalar), new Type[] { typeof(Int64*), typeof(Vector128<Int64>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Pointer.Box(_dataTable.outArrayPtr, typeof(Int64*)),
-                                        AdvSimd.LoadVector128((Int64*)(_dataTable.inArray1Ptr)),
-                                        ElementIndex });
+            typeof(AdvSimd)
+                .GetMethod(
+                    nameof(AdvSimd.StoreSelectedScalar),
+                    new Type[] { typeof(Int64*), typeof(Vector128<Int64>), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Pointer.Box(_dataTable.outArrayPtr, typeof(Int64*)),
+                        AdvSimd.LoadVector128((Int64*)(_dataTable.inArray1Ptr)),
+                        ElementIndex
+                    }
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
         }
@@ -283,7 +352,11 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Int64>* pClsVar1 = &_clsVar1)
             {
-                AdvSimd.StoreSelectedScalar((Int64*)_dataTable.outArrayPtr, AdvSimd.LoadVector128((Int64*)(pClsVar1)), 1);
+                AdvSimd.StoreSelectedScalar(
+                    (Int64*)_dataTable.outArrayPtr,
+                    AdvSimd.LoadVector128((Int64*)(pClsVar1)),
+                    1
+                );
 
                 ValidateResult(_clsVar1, _dataTable.outArrayPtr);
             }
@@ -327,7 +400,11 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Int64>* pFld1 = &test._fld1)
             {
-                AdvSimd.StoreSelectedScalar((Int64*)_dataTable.outArrayPtr, AdvSimd.LoadVector128((Int64*)(pFld1)), 1);
+                AdvSimd.StoreSelectedScalar(
+                    (Int64*)_dataTable.outArrayPtr,
+                    AdvSimd.LoadVector128((Int64*)(pFld1)),
+                    1
+                );
 
                 ValidateResult(test._fld1, _dataTable.outArrayPtr);
             }
@@ -348,7 +425,11 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Int64>* pFld1 = &_fld1)
             {
-                AdvSimd.StoreSelectedScalar((Int64*)_dataTable.outArrayPtr, AdvSimd.LoadVector128((Int64*)(pFld1)), 1);
+                AdvSimd.StoreSelectedScalar(
+                    (Int64*)_dataTable.outArrayPtr,
+                    AdvSimd.LoadVector128((Int64*)(pFld1)),
+                    1
+                );
 
                 ValidateResult(_fld1, _dataTable.outArrayPtr);
             }
@@ -369,7 +450,11 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            AdvSimd.StoreSelectedScalar((Int64*)_dataTable.outArrayPtr, AdvSimd.LoadVector128((Int64*)(&test._fld1)), 1);
+            AdvSimd.StoreSelectedScalar(
+                (Int64*)_dataTable.outArrayPtr,
+                AdvSimd.LoadVector128((Int64*)(&test._fld1)),
+                1
+            );
 
             ValidateResult(test._fld1, _dataTable.outArrayPtr);
         }
@@ -411,13 +496,21 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(Vector128<Int64> op1, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Int64> op1,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Int64, byte>(ref inArray1[0]), op1);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int64, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result),(uint)(Unsafe.SizeOf<Int64>() * RetElementCount));
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int64, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)(Unsafe.SizeOf<Int64>() * RetElementCount)
+            );
 
             ValidateResult(inArray1, outArray[0], method);
         }
@@ -427,26 +520,44 @@ namespace JIT.HardwareIntrinsics.Arm
             Int64[] inArray1 = new Int64[Op1ElementCount];
             Int64[] outArray = new Int64[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int64, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(op1), (uint)Unsafe.SizeOf<Vector128<Int64>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int64, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)(Unsafe.SizeOf<Int64>() * RetElementCount));
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int64, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(op1),
+                (uint)Unsafe.SizeOf<Vector128<Int64>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int64, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)(Unsafe.SizeOf<Int64>() * RetElementCount)
+            );
 
             ValidateResult(inArray1, outArray[0], method);
         }
 
-        private void ValidateResult(Int64[] firstOp, Int64 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int64[] firstOp,
+            Int64 result,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
             if (firstOp[ElementIndex] != result)
             {
-                 succeeded = false;
+                succeeded = false;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(AdvSimd)}.{nameof(AdvSimd.StoreSelectedScalar)}<Int64>(Int64*, Vector128<Int64>, 1): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.StoreSelectedScalar)}<Int64>(Int64*, Vector128<Int64>, 1): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $" firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

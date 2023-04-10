@@ -14,7 +14,8 @@ namespace System.Reflection.Metadata.Tests
         {
             byte[] array = new byte[3] { 1, 2, 3 };
             byte[] arrayCopy = array;
-            ImmutableArray<byte> immutable = ImmutableByteArrayInterop.DangerousCreateFromUnderlyingArray(ref array);
+            ImmutableArray<byte> immutable =
+                ImmutableByteArrayInterop.DangerousCreateFromUnderlyingArray(ref array);
 
             // DangerousCreateFromUnderlyingArray clears the given parameter as a signal that
             // the mutable array should no longer be modified through mutable references.
@@ -34,7 +35,8 @@ namespace System.Reflection.Metadata.Tests
         public void DangerousCreateFromUnderlyingArrayNegativeTests()
         {
             byte[] array = null;
-            ImmutableArray<byte> immutable = ImmutableByteArrayInterop.DangerousCreateFromUnderlyingArray(ref array);
+            ImmutableArray<byte> immutable =
+                ImmutableByteArrayInterop.DangerousCreateFromUnderlyingArray(ref array);
 
             Assert.True(immutable.IsDefault);
         }

@@ -33,7 +33,10 @@ namespace Castle.DynamicProxy.Tests
         {
             var selector = new InterceptorSelector();
 
-            var proxy = generator.CreateClassProxy<Foo>(new ProxyGenerationOptions { Selector = selector }, new DoNothingInterceptor());
+            var proxy = generator.CreateClassProxy<Foo>(
+                new ProxyGenerationOptions { Selector = selector },
+                new DoNothingInterceptor()
+            );
             proxy.Method();
 
             Assert.AreEqual(typeof(Foo), selector.ReceivedType);
@@ -55,7 +58,11 @@ namespace Castle.DynamicProxy.Tests
         {
             var selector = new InterceptorSelector();
 
-            var proxy = generator.CreateClassProxyWithTarget<Foo>(new FooTarget(), new ProxyGenerationOptions { Selector = selector }, new DoNothingInterceptor());
+            var proxy = generator.CreateClassProxyWithTarget<Foo>(
+                new FooTarget(),
+                new ProxyGenerationOptions { Selector = selector },
+                new DoNothingInterceptor()
+            );
             proxy.Method();
 
             Assert.AreEqual(typeof(FooTarget), selector.ReceivedType);
@@ -77,7 +84,10 @@ namespace Castle.DynamicProxy.Tests
         {
             var selector = new InterceptorSelector();
 
-            var proxy = generator.CreateInterfaceProxyWithoutTarget<IFoo>(new ProxyGenerationOptions { Selector = selector }, new DoNothingInterceptor());
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IFoo>(
+                new ProxyGenerationOptions { Selector = selector },
+                new DoNothingInterceptor()
+            );
             proxy.Method();
 
             Assert.AreEqual(null, selector.ReceivedType);
@@ -99,7 +109,11 @@ namespace Castle.DynamicProxy.Tests
         {
             var selector = new InterceptorSelector();
 
-            var proxy = generator.CreateInterfaceProxyWithTarget<IFoo>(new FooTarget(), new ProxyGenerationOptions { Selector = selector }, new DoNothingInterceptor());
+            var proxy = generator.CreateInterfaceProxyWithTarget<IFoo>(
+                new FooTarget(),
+                new ProxyGenerationOptions { Selector = selector },
+                new DoNothingInterceptor()
+            );
             proxy.Method();
 
             Assert.AreEqual(typeof(FooTarget), selector.ReceivedType);
@@ -110,7 +124,10 @@ namespace Castle.DynamicProxy.Tests
         {
             var interceptor = new Interceptor();
 
-            var proxy = generator.CreateInterfaceProxyWithTarget<IFoo>(new FooTarget(), interceptor);
+            var proxy = generator.CreateInterfaceProxyWithTarget<IFoo>(
+                new FooTarget(),
+                interceptor
+            );
             proxy.Method();
 
             Assert.AreEqual(typeof(FooTarget), interceptor.ReceivedTargetType);
@@ -121,7 +138,11 @@ namespace Castle.DynamicProxy.Tests
         {
             var selector = new InterceptorSelector();
 
-            var proxy = generator.CreateInterfaceProxyWithTargetInterface<IFoo>(new FooTarget(), new ProxyGenerationOptions { Selector = selector }, new DoNothingInterceptor());
+            var proxy = generator.CreateInterfaceProxyWithTargetInterface<IFoo>(
+                new FooTarget(),
+                new ProxyGenerationOptions { Selector = selector },
+                new DoNothingInterceptor()
+            );
             proxy.Method();
 
             Assert.AreEqual(typeof(FooTarget), selector.ReceivedType);
@@ -132,7 +153,10 @@ namespace Castle.DynamicProxy.Tests
         {
             var interceptor = new Interceptor();
 
-            var proxy = generator.CreateInterfaceProxyWithTargetInterface<IFoo>(new FooTarget(), interceptor);
+            var proxy = generator.CreateInterfaceProxyWithTargetInterface<IFoo>(
+                new FooTarget(),
+                interceptor
+            );
             proxy.Method();
 
             Assert.AreEqual(typeof(FooTarget), interceptor.ReceivedTargetType);
@@ -150,9 +174,7 @@ namespace Castle.DynamicProxy.Tests
 
         public sealed class FooTarget : Foo
         {
-            public override void Method()
-            {
-            }
+            public override void Method() { }
         }
 
 #if FEATURE_SERIALIZATION
@@ -162,7 +184,11 @@ namespace Castle.DynamicProxy.Tests
         {
             public Type ReceivedType { get; private set; }
 
-            public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
+            public IInterceptor[] SelectInterceptors(
+                Type type,
+                MethodInfo method,
+                IInterceptor[] interceptors
+            )
             {
                 this.ReceivedType = type;
                 return interceptors;

@@ -65,7 +65,8 @@ public class SelectList : MultiSelectList
         IEnumerable items,
         string dataValueField,
         string dataTextField,
-        object selectedValue)
+        object selectedValue
+    )
         : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue))
     {
         if (items == null)
@@ -94,7 +95,8 @@ public class SelectList : MultiSelectList
         string dataValueField,
         string dataTextField,
         object selectedValue,
-        string dataGroupField)
+        string dataGroupField
+    )
         : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue), dataGroupField)
     {
         if (items == null)

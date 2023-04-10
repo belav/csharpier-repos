@@ -26,27 +26,28 @@
 using System;
 using System.ComponentModel;
 
+namespace System.Windows.Forms
+{
+    public class TreeViewCancelEventArgs : CancelEventArgs
+    {
+        private TreeNode node;
+        private TreeViewAction action;
 
-namespace System.Windows.Forms {
+        public TreeViewCancelEventArgs(TreeNode node, bool cancel, TreeViewAction action)
+            : base(cancel)
+        {
+            this.node = node;
+            this.action = action;
+        }
 
-	public class TreeViewCancelEventArgs : CancelEventArgs {
+        public TreeNode Node
+        {
+            get { return node; }
+        }
 
-		private TreeNode node;
-		private TreeViewAction action;
-
-		public TreeViewCancelEventArgs (TreeNode node, bool cancel, TreeViewAction action) : base (cancel)
-		{
-			this.node = node;
-			this.action = action;
-		}
-
-		public TreeNode Node {
-			get { return node; }
-		}
-
-		public TreeViewAction Action {
-			get { return action; }
-		}
-	}
+        public TreeViewAction Action
+        {
+            get { return action; }
+        }
+    }
 }
-

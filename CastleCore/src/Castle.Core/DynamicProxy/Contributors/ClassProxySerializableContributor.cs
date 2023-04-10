@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -38,12 +38,19 @@ namespace Castle.DynamicProxy.Contributors
         public ClassProxySerializableContributor(Type targetType, Type[] interfaces, string typeId)
             : base(targetType, interfaces, typeId)
         {
-            Debug.Assert(targetType.IsSerializable, "This contributor is intended for serializable types only.");
+            Debug.Assert(
+                targetType.IsSerializable,
+                "This contributor is intended for serializable types only."
+            );
         }
 
         public override void CollectElementsToProxy(IProxyGenerationHook hook, MetaType model)
         {
-            delegateToBaseGetObjectData = VerifyIfBaseImplementsGetObjectData(targetType, model, out var getObjectData);
+            delegateToBaseGetObjectData = VerifyIfBaseImplementsGetObjectData(
+                targetType,
+                model,
+                out var getObjectData
+            );
 
             // This contributor is going to add a `GetObjectData` method to the proxy type.
             // If a method with the same name and signature exists in the proxied class type,
@@ -62,7 +69,8 @@ namespace Castle.DynamicProxy.Contributors
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
                     null,
                     new[] { typeof(SerializationInfo), typeof(StreamingContext) },
-                    null);
+                    null
+                );
 
                 if (getObjectDataMethod != null)
                 {
@@ -82,22 +90,31 @@ namespace Castle.DynamicProxy.Contributors
             Constructor(@class);
         }
 
-        protected override void AddAddValueInvocation(ArgumentReference serializationInfo, MethodEmitter getObjectData,
-                                                      FieldReference field)
+        protected override void AddAddValueInvocation(
+            ArgumentReference serializationInfo,
+            MethodEmitter getObjectData,
+            FieldReference field
+        )
         {
             serializedFields.Add(field);
             base.AddAddValueInvocation(serializationInfo, getObjectData, field);
         }
 
-        protected override void CustomizeGetObjectData(CodeBuilder codebuilder, ArgumentReference serializationInfo,
-                                                       ArgumentReference streamingContext, ClassEmitter emitter)
+        protected override void CustomizeGetObjectData(
+            CodeBuilder codebuilder,
+            ArgumentReference serializationInfo,
+            ArgumentReference streamingContext,
+            ClassEmitter emitter
+        )
         {
             codebuilder.AddStatement(
                 new MethodInvocationExpression(
                     serializationInfo,
                     SerializationInfoMethods.AddValue_Bool,
                     new LiteralStringExpression("__delegateToBase"),
-                    new LiteralBoolExpression(delegateToBaseGetObjectData)));
+                    new LiteralBoolExpression(delegateToBaseGetObjectData)
+                )
+            );
 
             if (delegateToBaseGetObjectData == false)
             {
@@ -108,7 +125,10 @@ namespace Castle.DynamicProxy.Contributors
             EmitCallToBaseGetObjectData(codebuilder, serializationInfo, streamingContext);
         }
 
-        private void EmitCustomGetObjectData(CodeBuilder codebuilder, ArgumentReference serializationInfo)
+        private void EmitCustomGetObjectData(
+            CodeBuilder codebuilder,
+            ArgumentReference serializationInfo
+        )
         {
             var members = codebuilder.DeclareLocal(typeof(MemberInfo[]));
             var data = codebuilder.DeclareLocal(typeof(object[]));
@@ -116,42 +136,49 @@ namespace Castle.DynamicProxy.Contributors
             var getSerializableMembers = new MethodInvocationExpression(
                 null,
                 FormatterServicesMethods.GetSerializableMembers,
-                new TypeTokenExpression(targetType));
+                new TypeTokenExpression(targetType)
+            );
             codebuilder.AddStatement(new AssignStatement(members, getSerializableMembers));
 
             // Sort to keep order on both serialize and deserialize side the same, c.f DYNPROXY-ISSUE-127
-            var callSort = new MethodInvocationExpression(
-                null,
-                TypeUtilMethods.Sort,
-                members);
+            var callSort = new MethodInvocationExpression(null, TypeUtilMethods.Sort, members);
             codebuilder.AddStatement(new AssignStatement(members, callSort));
 
             var getObjectData = new MethodInvocationExpression(
                 null,
                 FormatterServicesMethods.GetObjectData,
                 SelfReference.Self,
-                members);
+                members
+            );
             codebuilder.AddStatement(new AssignStatement(data, getObjectData));
 
             var addValue = new MethodInvocationExpression(
                 serializationInfo,
                 SerializationInfoMethods.AddValue_Object,
                 new LiteralStringExpression("__data"),
-                data);
+                data
+            );
             codebuilder.AddStatement(addValue);
         }
 
-        private void EmitCallToBaseGetObjectData(CodeBuilder codebuilder, ArgumentReference serializationInfo,
-                                                 ArgumentReference streamingContext)
+        private void EmitCallToBaseGetObjectData(
+            CodeBuilder codebuilder,
+            ArgumentReference serializationInfo,
+            ArgumentReference streamingContext
+        )
         {
-            var baseGetObjectData = targetType.GetMethod("GetObjectData",
-                                                         new[] { typeof(SerializationInfo), typeof(StreamingContext) });
+            var baseGetObjectData = targetType.GetMethod(
+                "GetObjectData",
+                new[] { typeof(SerializationInfo), typeof(StreamingContext) }
+            );
 
             codebuilder.AddStatement(
                 new MethodInvocationExpression(
                     baseGetObjectData,
                     serializationInfo,
-                    streamingContext));
+                    streamingContext
+                )
+            );
         }
 
         private void Constructor(ClassEmitter emitter)
@@ -171,26 +198,36 @@ namespace Castle.DynamicProxy.Contributors
             var ctor = emitter.CreateConstructor(serializationInfo, streamingContext);
 
             ctor.CodeBuilder.AddStatement(
-                new ConstructorInvocationStatement(serializationConstructor,
-                                                   serializationInfo,
-                                                   streamingContext));
+                new ConstructorInvocationStatement(
+                    serializationConstructor,
+                    serializationInfo,
+                    streamingContext
+                )
+            );
 
             foreach (var field in serializedFields)
             {
-                var getValue = new MethodInvocationExpression(serializationInfo,
-                                                              SerializationInfoMethods.GetValue,
-                                                              new LiteralStringExpression(field.Reference.Name),
-                                                              new TypeTokenExpression(field.Reference.FieldType));
-                ctor.CodeBuilder.AddStatement(new AssignStatement(
-                                                  field,
-                                                  new ConvertExpression(field.Reference.FieldType,
-                                                                        typeof(object),
-                                                                        getValue)));
+                var getValue = new MethodInvocationExpression(
+                    serializationInfo,
+                    SerializationInfoMethods.GetValue,
+                    new LiteralStringExpression(field.Reference.Name),
+                    new TypeTokenExpression(field.Reference.FieldType)
+                );
+                ctor.CodeBuilder.AddStatement(
+                    new AssignStatement(
+                        field,
+                        new ConvertExpression(field.Reference.FieldType, typeof(object), getValue)
+                    )
+                );
             }
             ctor.CodeBuilder.AddStatement(new ReturnStatement());
         }
 
-        private bool VerifyIfBaseImplementsGetObjectData(Type baseType, MetaType model, out MetaMethod getObjectData)
+        private bool VerifyIfBaseImplementsGetObjectData(
+            Type baseType,
+            MetaType model,
+            out MetaMethod getObjectData
+        )
         {
             getObjectData = null;
 
@@ -207,7 +244,9 @@ namespace Castle.DynamicProxy.Contributors
 
             // If base type implements ISerializable, we have to make sure
             // the GetObjectData is marked as virtual
-            var getObjectDataMethod = baseType.GetInterfaceMap(typeof(ISerializable)).TargetMethods[0];
+            var getObjectDataMethod = baseType.GetInterfaceMap(typeof(ISerializable)).TargetMethods[
+                0
+            ];
             if (getObjectDataMethod.IsPrivate) //explicit interface implementation
             {
                 return false;
@@ -215,27 +254,31 @@ namespace Castle.DynamicProxy.Contributors
 
             if (!getObjectDataMethod.IsVirtual || getObjectDataMethod.IsFinal)
             {
-                var message = string.Format("The type {0} implements ISerializable, but GetObjectData is not marked as virtual. " +
-                                            "Dynamic Proxy needs types implementing ISerializable to mark GetObjectData as virtual " +
-                                            "to ensure correct serialization process.",
-                                            baseType.FullName);
+                var message = string.Format(
+                    "The type {0} implements ISerializable, but GetObjectData is not marked as virtual. "
+                        + "Dynamic Proxy needs types implementing ISerializable to mark GetObjectData as virtual "
+                        + "to ensure correct serialization process.",
+                    baseType.FullName
+                );
                 throw new ArgumentException(message);
             }
 
             getObjectData = model.FindMethod(getObjectDataMethod);
 
             serializationConstructor = baseType.GetConstructor(
-                BindingFlags.Instance | BindingFlags.Public |
-                BindingFlags.NonPublic,
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
                 null,
                 new[] { typeof(SerializationInfo), typeof(StreamingContext) },
-                null);
+                null
+            );
 
             if (serializationConstructor == null)
             {
-                var message = string.Format("The type {0} implements ISerializable, " +
-                                            "but failed to provide a deserialization constructor",
-                                            baseType.FullName);
+                var message = string.Format(
+                    "The type {0} implements ISerializable, "
+                        + "but failed to provide a deserialization constructor",
+                    baseType.FullName
+                );
                 throw new ArgumentException(message);
             }
 

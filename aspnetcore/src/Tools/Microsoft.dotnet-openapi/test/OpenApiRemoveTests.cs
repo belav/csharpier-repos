@@ -9,7 +9,8 @@ namespace Microsoft.DotNet.OpenApi.Remove.Tests;
 
 public class OpenApiRemoveTests : OpenApiTestBase
 {
-    public OpenApiRemoveTests(ITestOutputHelper output) : base(output) { }
+    public OpenApiRemoveTests(ITestOutputHelper output)
+        : base(output) { }
 
     [Fact]
     public async Task OpenApi_Remove_File()
@@ -34,7 +35,10 @@ public class OpenApiRemoveTests : OpenApiTestBase
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+            Assert.Contains(
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
             Assert.Contains($"<OpenApiReference Include=\"{nswagJsonFile}\"", content);
         }
 
@@ -50,7 +54,10 @@ public class OpenApiRemoveTests : OpenApiTestBase
         {
             var content = await reader.ReadToEndAsync();
             // Don't remove the package reference, they might have taken other dependencies on it
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+            Assert.Contains(
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
             Assert.DoesNotContain($"<OpenApiReference Include=\"{nswagJsonFile}\"", content);
         }
         Assert.False(File.Exists(Path.Combine(_tempDir.Root, nswagJsonFile)));
@@ -78,7 +85,10 @@ public class OpenApiRemoveTests : OpenApiTestBase
         {
             var content = await reader.ReadToEndAsync();
             // Don't remove the package reference, they might have taken other dependencies on it
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+            Assert.Contains(
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
         }
 
         var remove = GetApplication();
@@ -92,7 +102,10 @@ public class OpenApiRemoveTests : OpenApiTestBase
         using var removedReader = new StreamReader(removedCsprojStream);
         var removedContent = await removedReader.ReadToEndAsync();
         // Don't remove the package reference, they might have taken other dependencies on it
-        Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", removedContent);
+        Assert.Contains(
+            "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+            removedContent
+        );
         Assert.DoesNotContain($"<OpenApiReference", removedContent);
     }
 
@@ -100,19 +113,15 @@ public class OpenApiRemoveTests : OpenApiTestBase
     public async Task OpenApi_Remove_Project()
     {
         _tempDir
-           .WithCSharpProject("testproj")
-           .WithTargetFrameworks(TestTFM)
-           .Dir()
-           .WithContentFile("Startup.cs")
-           .Create();
+            .WithCSharpProject("testproj")
+            .WithTargetFrameworks(TestTFM)
+            .Dir()
+            .WithContentFile("Startup.cs")
+            .Create();
 
         using var refProj = new TemporaryDirectory();
         var refProjName = "refProj";
-        refProj
-            .WithCSharpProject(refProjName)
-            .WithTargetFrameworks(TestTFM)
-            .Dir()
-            .Create();
+        refProj.WithCSharpProject(refProjName).WithTargetFrameworks(TestTFM).Dir().Create();
 
         var app = GetApplication();
         var refProjFile = Path.Join(refProj.Root, $"{refProjName}.csproj");
@@ -121,11 +130,16 @@ public class OpenApiRemoveTests : OpenApiTestBase
         AssertNoErrors(run);
 
         // csproj contents
-        using (var csprojStream = new FileInfo(Path.Join(_tempDir.Root, "testproj.csproj")).OpenRead())
+        using (
+            var csprojStream = new FileInfo(Path.Join(_tempDir.Root, "testproj.csproj")).OpenRead()
+        )
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+            Assert.Contains(
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
             Assert.Contains($"<OpenApiProjectReference Include=\"{refProjFile}\"", content);
         }
 
@@ -135,11 +149,16 @@ public class OpenApiRemoveTests : OpenApiTestBase
         AssertNoErrors(run);
 
         // csproj contents
-        using (var csprojStream = new FileInfo(Path.Join(_tempDir.Root, "testproj.csproj")).OpenRead())
+        using (
+            var csprojStream = new FileInfo(Path.Join(_tempDir.Root, "testproj.csproj")).OpenRead()
+        )
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+            Assert.Contains(
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
             Assert.DoesNotContain($"<OpenApiProjectReference Include=\"{refProjFile}\"", content);
         }
     }
@@ -180,7 +199,10 @@ public class OpenApiRemoveTests : OpenApiTestBase
         {
             var content = await reader.ReadToEndAsync();
             // Don't remove the package reference, they might have taken other dependencies on it
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+            Assert.Contains(
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
             Assert.DoesNotContain($"<OpenApiReference Include=\"{nswagJsonFile}\"", content);
         }
         Assert.False(File.Exists(Path.Combine(_tempDir.Root, nswagJsonFile)));

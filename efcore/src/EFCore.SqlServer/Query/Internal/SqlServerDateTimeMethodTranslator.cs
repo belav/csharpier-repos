@@ -13,31 +13,120 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerDateTimeMethodTranslator : IMethodCallTranslator
 {
-    private readonly Dictionary<MethodInfo, string> _methodInfoDatePartMapping = new()
-    {
-        { typeof(DateTime).GetRuntimeMethod(nameof(DateTime.AddYears), new[] { typeof(int) })!, "year" },
-        { typeof(DateTime).GetRuntimeMethod(nameof(DateTime.AddMonths), new[] { typeof(int) })!, "month" },
-        { typeof(DateTime).GetRuntimeMethod(nameof(DateTime.AddDays), new[] { typeof(double) })!, "day" },
-        { typeof(DateTime).GetRuntimeMethod(nameof(DateTime.AddHours), new[] { typeof(double) })!, "hour" },
-        { typeof(DateTime).GetRuntimeMethod(nameof(DateTime.AddMinutes), new[] { typeof(double) })!, "minute" },
-        { typeof(DateTime).GetRuntimeMethod(nameof(DateTime.AddSeconds), new[] { typeof(double) })!, "second" },
-        { typeof(DateTime).GetRuntimeMethod(nameof(DateTime.AddMilliseconds), new[] { typeof(double) })!, "millisecond" },
-        { typeof(DateTimeOffset).GetRuntimeMethod(nameof(DateTimeOffset.AddYears), new[] { typeof(int) })!, "year" },
-        { typeof(DateTimeOffset).GetRuntimeMethod(nameof(DateTimeOffset.AddMonths), new[] { typeof(int) })!, "month" },
-        { typeof(DateTimeOffset).GetRuntimeMethod(nameof(DateTimeOffset.AddDays), new[] { typeof(double) })!, "day" },
-        { typeof(DateTimeOffset).GetRuntimeMethod(nameof(DateTimeOffset.AddHours), new[] { typeof(double) })!, "hour" },
-        { typeof(DateTimeOffset).GetRuntimeMethod(nameof(DateTimeOffset.AddMinutes), new[] { typeof(double) })!, "minute" },
-        { typeof(DateTimeOffset).GetRuntimeMethod(nameof(DateTimeOffset.AddSeconds), new[] { typeof(double) })!, "second" },
-        { typeof(DateTimeOffset).GetRuntimeMethod(nameof(DateTimeOffset.AddMilliseconds), new[] { typeof(double) })!, "millisecond" }
-    };
+    private readonly Dictionary<MethodInfo, string> _methodInfoDatePartMapping =
+        new()
+        {
+            {
+                typeof(DateTime).GetRuntimeMethod(
+                    nameof(DateTime.AddYears),
+                    new[] { typeof(int) }
+                )!,
+                "year"
+            },
+            {
+                typeof(DateTime).GetRuntimeMethod(
+                    nameof(DateTime.AddMonths),
+                    new[] { typeof(int) }
+                )!,
+                "month"
+            },
+            {
+                typeof(DateTime).GetRuntimeMethod(
+                    nameof(DateTime.AddDays),
+                    new[] { typeof(double) }
+                )!,
+                "day"
+            },
+            {
+                typeof(DateTime).GetRuntimeMethod(
+                    nameof(DateTime.AddHours),
+                    new[] { typeof(double) }
+                )!,
+                "hour"
+            },
+            {
+                typeof(DateTime).GetRuntimeMethod(
+                    nameof(DateTime.AddMinutes),
+                    new[] { typeof(double) }
+                )!,
+                "minute"
+            },
+            {
+                typeof(DateTime).GetRuntimeMethod(
+                    nameof(DateTime.AddSeconds),
+                    new[] { typeof(double) }
+                )!,
+                "second"
+            },
+            {
+                typeof(DateTime).GetRuntimeMethod(
+                    nameof(DateTime.AddMilliseconds),
+                    new[] { typeof(double) }
+                )!,
+                "millisecond"
+            },
+            {
+                typeof(DateTimeOffset).GetRuntimeMethod(
+                    nameof(DateTimeOffset.AddYears),
+                    new[] { typeof(int) }
+                )!,
+                "year"
+            },
+            {
+                typeof(DateTimeOffset).GetRuntimeMethod(
+                    nameof(DateTimeOffset.AddMonths),
+                    new[] { typeof(int) }
+                )!,
+                "month"
+            },
+            {
+                typeof(DateTimeOffset).GetRuntimeMethod(
+                    nameof(DateTimeOffset.AddDays),
+                    new[] { typeof(double) }
+                )!,
+                "day"
+            },
+            {
+                typeof(DateTimeOffset).GetRuntimeMethod(
+                    nameof(DateTimeOffset.AddHours),
+                    new[] { typeof(double) }
+                )!,
+                "hour"
+            },
+            {
+                typeof(DateTimeOffset).GetRuntimeMethod(
+                    nameof(DateTimeOffset.AddMinutes),
+                    new[] { typeof(double) }
+                )!,
+                "minute"
+            },
+            {
+                typeof(DateTimeOffset).GetRuntimeMethod(
+                    nameof(DateTimeOffset.AddSeconds),
+                    new[] { typeof(double) }
+                )!,
+                "second"
+            },
+            {
+                typeof(DateTimeOffset).GetRuntimeMethod(
+                    nameof(DateTimeOffset.AddMilliseconds),
+                    new[] { typeof(double) }
+                )!,
+                "millisecond"
+            }
+        };
 
-    private static readonly MethodInfo AtTimeZoneDateTimeOffsetMethodInfo = typeof(SqlServerDbFunctionsExtensions)
-        .GetRuntimeMethod(
-            nameof(SqlServerDbFunctionsExtensions.AtTimeZone), new[] { typeof(DbFunctions), typeof(DateTimeOffset), typeof(string) })!;
+    private static readonly MethodInfo AtTimeZoneDateTimeOffsetMethodInfo =
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.AtTimeZone),
+            new[] { typeof(DbFunctions), typeof(DateTimeOffset), typeof(string) }
+        )!;
 
-    private static readonly MethodInfo AtTimeZoneDateTimeMethodInfo = typeof(SqlServerDbFunctionsExtensions)
-        .GetRuntimeMethod(
-            nameof(SqlServerDbFunctionsExtensions.AtTimeZone), new[] { typeof(DbFunctions), typeof(DateTime), typeof(string) })!;
+    private static readonly MethodInfo AtTimeZoneDateTimeMethodInfo =
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.AtTimeZone),
+            new[] { typeof(DbFunctions), typeof(DateTime), typeof(string) }
+        )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
     private readonly IRelationalTypeMappingSource _typeMappingSource;
@@ -50,7 +139,8 @@ public class SqlServerDateTimeMethodTranslator : IMethodCallTranslator
     /// </summary>
     public SqlServerDateTimeMethodTranslator(
         ISqlExpressionFactory sqlExpressionFactory,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
     {
         _sqlExpressionFactory = sqlExpressionFactory;
         _typeMappingSource = typeMappingSource;
@@ -66,35 +156,44 @@ public class SqlServerDateTimeMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (_methodInfoDatePartMapping.TryGetValue(method, out var datePart)
-            && instance != null)
+        if (_methodInfoDatePartMapping.TryGetValue(method, out var datePart) && instance != null)
         {
             // DateAdd does not accept number argument outside of int range
             // AddYears/AddMonths take int argument so no need to check for range
-            if (datePart != "year"
+            if (
+                datePart != "year"
                 && datePart != "month"
                 && arguments[0] is SqlConstantExpression sqlConstant
                 && sqlConstant.Value is double doubleValue
-                && (doubleValue >= int.MaxValue
-                    || doubleValue <= int.MinValue))
+                && (doubleValue >= int.MaxValue || doubleValue <= int.MinValue)
+            )
             {
                 return null;
             }
 
             if (instance is SqlConstantExpression instanceConstant)
             {
-                instance = instanceConstant.ApplyTypeMapping(_typeMappingSource.FindMapping(typeof(DateTime), "datetime"));
+                instance = instanceConstant.ApplyTypeMapping(
+                    _typeMappingSource.FindMapping(typeof(DateTime), "datetime")
+                );
             }
 
             return _sqlExpressionFactory.Function(
                 "DATEADD",
-                new[] { _sqlExpressionFactory.Fragment(datePart), _sqlExpressionFactory.Convert(arguments[0], typeof(int)), instance },
+                new[]
+                {
+                    _sqlExpressionFactory.Fragment(datePart),
+                    _sqlExpressionFactory.Convert(arguments[0], typeof(int)),
+                    instance
+                },
                 nullable: true,
                 argumentsPropagateNullability: new[] { false, true, true },
                 instance.Type,
-                instance.TypeMapping);
+                instance.TypeMapping
+            );
         }
 
         if (method == AtTimeZoneDateTimeOffsetMethodInfo || method == AtTimeZoneDateTimeMethodInfo)
@@ -113,14 +212,20 @@ public class SqlServerDateTimeMethodTranslator : IMethodCallTranslator
                     case "datetimeoffset":
                         resultTypeMapping = operandTypeMapping;
                         break;
-                    case "datetime" or "datetime2" or "smalldatetime":
+                    case "datetime"
+                    or "datetime2"
+                    or "smalldatetime":
                         resultTypeMapping = _typeMappingSource.FindMapping(
-                            typeof(DateTimeOffset), "datetimeoffset", precision: operandTypeMapping.Precision);
+                            typeof(DateTimeOffset),
+                            "datetimeoffset",
+                            precision: operandTypeMapping.Precision
+                        );
                         break;
                     default:
                         Check.DebugAssert(
                             false,
-                            $"Unknown operand type mapping '{operandTypeMapping.StoreTypeNameBase}' when translating EF.Functions.AtTimeZone");
+                            $"Unknown operand type mapping '{operandTypeMapping.StoreTypeNameBase}' when translating EF.Functions.AtTimeZone"
+                        );
                         break;
                 }
             }
@@ -134,9 +239,13 @@ public class SqlServerDateTimeMethodTranslator : IMethodCallTranslator
 
             return new AtTimeZoneExpression(
                 operand,
-                _sqlExpressionFactory.ApplyTypeMapping(timeZone, _typeMappingSource.FindMapping("varchar")),
+                _sqlExpressionFactory.ApplyTypeMapping(
+                    timeZone,
+                    _typeMappingSource.FindMapping("varchar")
+                ),
                 typeof(DateTimeOffset),
-                resultTypeMapping);
+                resultTypeMapping
+            );
         }
 
         return null;

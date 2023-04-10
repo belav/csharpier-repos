@@ -58,11 +58,19 @@ internal abstract partial class FileResult
             if (logger.IsEnabled(LogLevel.Information))
             {
                 var fileResultType = fileResult.GetType().Name;
-                ExecutingFileResultWithNoFileName(logger, fileResultType, fileResult.FileDownloadName);
+                ExecutingFileResultWithNoFileName(
+                    logger,
+                    fileResultType,
+                    fileResult.FileDownloadName
+                );
             }
         }
 
-        public static void ExecutingFileResult(ILogger logger, FileResult fileResult, string fileName)
+        public static void ExecutingFileResult(
+            ILogger logger,
+            FileResult fileResult,
+            string fileName
+        )
         {
             if (logger.IsEnabled(LogLevel.Information))
             {
@@ -71,16 +79,31 @@ internal abstract partial class FileResult
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Executing {FileResultType}, sending file with download name '{FileDownloadName}'.",
             EventName = "ExecutingFileResultWithNoFileName",
-            SkipEnabledCheck = true)]
-        private static partial void ExecutingFileResultWithNoFileName(ILogger logger, string fileResultType, string fileDownloadName);
+            SkipEnabledCheck = true
+        )]
+        private static partial void ExecutingFileResultWithNoFileName(
+            ILogger logger,
+            string fileResultType,
+            string fileDownloadName
+        );
 
-        [LoggerMessage(2, LogLevel.Information,
+        [LoggerMessage(
+            2,
+            LogLevel.Information,
             "Executing {FileResultType}, sending file '{FileDownloadPath}' with download name '{FileDownloadName}'.",
             EventName = "ExecutingFileResult",
-            SkipEnabledCheck = true)]
-        private static partial void ExecutingFileResult(ILogger logger, string fileResultType, string fileDownloadPath, string fileDownloadName);
+            SkipEnabledCheck = true
+        )]
+        private static partial void ExecutingFileResult(
+            ILogger logger,
+            string fileResultType,
+            string fileDownloadPath,
+            string fileDownloadName
+        );
     }
 }

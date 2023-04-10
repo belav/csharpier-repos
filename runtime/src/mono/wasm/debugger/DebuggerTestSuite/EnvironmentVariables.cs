@@ -9,6 +9,10 @@ namespace DebuggerTests;
 
 internal static class EnvironmentVariables
 {
-    public static readonly string? DebuggerTestPath = Environment.GetEnvironmentVariable("DEBUGGER_TEST_PATH");
-    public static readonly string? TestLogPath      = Environment.GetEnvironmentVariable("TEST_LOG_PATH");
+    public static readonly string? DebuggerTestPath = Environment.GetEnvironmentVariable(
+        "DEBUGGER_TEST_PATH"
+    );
+    public static readonly string? TestLogPath = Environment.GetEnvironmentVariable(
+        "TEST_LOG_PATH"
+    );
 }

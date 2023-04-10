@@ -3,7 +3,6 @@
 
 namespace System.Management
 {
-
     internal sealed class IdentifierChangedEventArgs : EventArgs
     {
         internal IdentifierChangedEventArgs() { }
@@ -23,7 +22,6 @@ namespace System.Management
             get { return path; }
         }
     }
-
 
     /// <summary>
     ///    <para>Represents the virtual base class to hold event data for WMI events.</para>
@@ -69,7 +67,8 @@ namespace System.Management
         /// <param name="context">The operation context which is echoed back
         /// from the operation which triggered the event.</param>
         /// <param name="wmiObject">The newly arrived WmiObject.</param>
-        internal ObjectReadyEventArgs(object context, ManagementBaseObject wmiObject) : base(context)
+        internal ObjectReadyEventArgs(object context, ManagementBaseObject wmiObject)
+            : base(context)
         {
             this.wmiObject = wmiObject;
         }
@@ -83,10 +82,7 @@ namespace System.Management
         /// </value>
         public ManagementBaseObject NewObject
         {
-            get
-            {
-                return wmiObject;
-            }
+            get { return wmiObject; }
         }
     }
 
@@ -106,7 +102,12 @@ namespace System.Management
         /// <param name="status">The completion status of the operation.</param>
         /// <param name="wmiStatusObject">Additional status information
         /// encapsulated within a WmiObject. This may be null.</param>
-        internal CompletedEventArgs(object context, int status, ManagementBaseObject wmiStatusObject) : base(context)
+        internal CompletedEventArgs(
+            object context,
+            int status,
+            ManagementBaseObject wmiStatusObject
+        )
+            : base(context)
         {
             wmiObject = wmiStatusObject;
             this.status = status;
@@ -122,10 +123,7 @@ namespace System.Management
         /// </value>
         public ManagementBaseObject StatusObject
         {
-            get
-            {
-                return wmiObject;
-            }
+            get { return wmiObject; }
         }
 
         /// <summary>
@@ -137,10 +135,7 @@ namespace System.Management
         /// </value>
         public ManagementStatus Status
         {
-            get
-            {
-                return (ManagementStatus)status;
-            }
+            get { return (ManagementStatus)status; }
         }
     }
 
@@ -158,7 +153,8 @@ namespace System.Management
         /// from the operation which trigerred the event.</param>
         /// <param name="path">The WmiPath representing the identity of the
         /// object that has been put.</param>
-        internal ObjectPutEventArgs(object context, ManagementPath path) : base(context)
+        internal ObjectPutEventArgs(object context, ManagementPath path)
+            : base(context)
         {
             wmiPath = path;
         }
@@ -173,10 +169,7 @@ namespace System.Management
         /// </value>
         public ManagementPath Path
         {
-            get
-            {
-                return wmiPath;
-            }
+            get { return wmiPath; }
         }
     }
 
@@ -201,7 +194,8 @@ namespace System.Management
         /// always less than or equal to upperBound.</param>
         /// <param name="message">Optional additional information regarding
         /// operation progress.</param>
-        internal ProgressEventArgs(object context, int upperBound, int current, string message) : base(context)
+        internal ProgressEventArgs(object context, int upperBound, int current, string message)
+            : base(context)
         {
             this.upperBound = upperBound;
             this.current = current;
@@ -218,10 +212,7 @@ namespace System.Management
         /// </value>
         public int UpperBound
         {
-            get
-            {
-                return upperBound;
-            }
+            get { return upperBound; }
         }
 
         /// <summary>
@@ -234,10 +225,7 @@ namespace System.Management
         /// </value>
         public int Current
         {
-            get
-            {
-                return current;
-            }
+            get { return current; }
         }
 
         /// <summary>
@@ -249,10 +237,7 @@ namespace System.Management
         /// </value>
         public string Message
         {
-            get
-            {
-                return message ?? string.Empty;
-            }
+            get { return message ?? string.Empty; }
         }
     }
 
@@ -263,7 +248,8 @@ namespace System.Management
     {
         private readonly ManagementBaseObject eventObject;
 
-        internal EventArrivedEventArgs(object context, ManagementBaseObject eventObject) : base(context)
+        internal EventArrivedEventArgs(object context, ManagementBaseObject eventObject)
+            : base(context)
         {
             this.eventObject = eventObject;
         }
@@ -287,7 +273,8 @@ namespace System.Management
     {
         private readonly int status;
 
-        internal StoppedEventArgs(object context, int status) : base(context)
+        internal StoppedEventArgs(object context, int status)
+            : base(context)
         {
             this.status = status;
         }
@@ -301,11 +288,7 @@ namespace System.Management
         /// </value>
         public ManagementStatus Status
         {
-            get
-            {
-                return (ManagementStatus)status;
-            }
+            get { return (ManagementStatus)status; }
         }
     }
-
 }

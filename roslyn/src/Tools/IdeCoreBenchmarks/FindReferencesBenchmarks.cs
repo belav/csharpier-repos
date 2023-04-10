@@ -42,9 +42,14 @@ namespace IdeCoreBenchmarks
 
         private static void RestoreCompilerSolution()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
             var solutionPath = Path.Combine(roslynRoot, "Compilers.slnf");
-            var restoreOperation = Process.Start("dotnet", $"restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true {solutionPath}");
+            var restoreOperation = Process.Start(
+                "dotnet",
+                $"restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true {solutionPath}"
+            );
             restoreOperation.WaitForExit();
             if (restoreOperation.ExitCode != 0)
                 throw new ArgumentException($"Unable to restore {solutionPath}");
@@ -54,14 +59,19 @@ namespace IdeCoreBenchmarks
         {
             // QueryVisualStudioInstances returns Visual Studio installations on .NET Framework, and .NET Core SDK
             // installations on .NET Core. We use the one with the most recent version.
-            var msBuildInstance = MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(x => x.Version).First();
+            var msBuildInstance = MSBuildLocator
+                .QueryVisualStudioInstances()
+                .OrderByDescending(x => x.Version)
+                .First();
 
             MSBuildLocator.RegisterInstance(msBuildInstance);
         }
 
         private async Task LoadSolutionAsync()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
             var solutionPath = Path.Combine(roslynRoot, "Compilers.slnf");
 
             if (!File.Exists(solutionPath))
@@ -74,11 +84,14 @@ namespace IdeCoreBenchmarks
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
 
-            _workspace = MSBuildWorkspace.Create(new Dictionary<string, string>
+            _workspace = MSBuildWorkspace.Create(
+                new Dictionary<string, string>
                 {
                     // Use the latest language version to force the full set of available analyzers to run on the project.
                     { "LangVersion", "preview" },
-                }, services);
+                },
+                services
+            );
 
             if (_workspace == null)
                 throw new ArgumentException("Couldn't create workspace");
@@ -86,7 +99,11 @@ namespace IdeCoreBenchmarks
             Console.WriteLine("Opening roslyn.  Attach to: " + Process.GetCurrentProcess().Id);
 
             var start = DateTime.Now;
-            _solution = await _workspace.OpenSolutionAsync(solutionPath, progress: null, CancellationToken.None);
+            _solution = await _workspace.OpenSolutionAsync(
+                solutionPath,
+                progress: null,
+                CancellationToken.None
+            );
             Console.WriteLine("Finished opening roslyn: " + (DateTime.Now - start));
 
             // Force a storage instance to be created.  This makes it simple to go examine it prior to any operations we
@@ -95,7 +112,12 @@ namespace IdeCoreBenchmarks
             if (storageService == null)
                 throw new ArgumentException("Couldn't get storage service");
 
-            using (var storage = await storageService.GetStorageAsync(SolutionKey.ToSolutionKey(_workspace.CurrentSolution), CancellationToken.None))
+            using (
+                var storage = await storageService.GetStorageAsync(
+                    SolutionKey.ToSolutionKey(_workspace.CurrentSolution),
+                    CancellationToken.None
+                )
+            )
             {
                 Console.WriteLine("Sucessfully got persistent storage instance");
             }

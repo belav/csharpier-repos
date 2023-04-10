@@ -32,6 +32,7 @@ namespace hello_tryfinallyloop_leaves_cs
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         static public void inTry()
         {
             Console.WriteLine("in Try\n");
@@ -42,6 +43,7 @@ namespace hello_tryfinallyloop_leaves_cs
         {
             Console.WriteLine("in Finally\n");
         }
+
         [Fact]
         static public int TestEntryPoint()
         {
@@ -53,9 +55,9 @@ namespace hello_tryfinallyloop_leaves_cs
                 L:
                 Console.WriteLine("in loop, i = " + i);
                 i += 1;
-                if (i == 10) goto finish;
+                if (i == 10)
+                    goto finish;
                 goto L;
-
             }
             finally
             {
@@ -67,8 +69,6 @@ namespace hello_tryfinallyloop_leaves_cs
             testLog.StopRecording();
 
             return testLog.VerifyOutput();
-
         }
     }
 }
-

@@ -18,11 +18,12 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory : IWorkspaceServ
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public SymbolTreeInfoCacheServiceFactory(
-        IAsynchronousOperationListenerProvider listenerProvider)
+        IAsynchronousOperationListenerProvider listenerProvider
+    )
     {
         _listener = listenerProvider.GetListener(FeatureAttribute.SolutionCrawlerLegacy);
     }
 
-    public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-        => new SymbolTreeInfoCacheService(workspaceServices.Workspace, _listener);
+    public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+        new SymbolTreeInfoCacheService(workspaceServices.Workspace, _listener);
 }

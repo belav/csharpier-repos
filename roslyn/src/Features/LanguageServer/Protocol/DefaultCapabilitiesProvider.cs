@@ -19,15 +19,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer
     [Export(typeof(ExperimentalCapabilitiesProvider)), Shared]
     internal class ExperimentalCapabilitiesProvider : ICapabilitiesProvider
     {
-        private readonly ImmutableArray<Lazy<CompletionProvider, CompletionProviderMetadata>> _completionProviders;
+        private readonly ImmutableArray<
+            Lazy<CompletionProvider, CompletionProviderMetadata>
+        > _completionProviders;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public ExperimentalCapabilitiesProvider(
-            [ImportMany] IEnumerable<Lazy<CompletionProvider, CompletionProviderMetadata>> completionProviders)
+            [ImportMany]
+                IEnumerable<
+                Lazy<CompletionProvider, CompletionProviderMetadata>
+            > completionProviders
+        )
         {
             _completionProviders = completionProviders
-                .Where(lz => lz.Metadata.Language is LanguageNames.CSharp or LanguageNames.VisualBasic)
+                .Where(
+                    lz => lz.Metadata.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
+                )
                 .ToImmutableArray();
         }
 
@@ -44,30 +52,51 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
         public ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
-            var supportsVsExtensions = clientCapabilities is VSInternalClientCapabilities { SupportsVisualStudioExtensions: true };
-            var capabilities = supportsVsExtensions ? GetVSServerCapabilities() : new ServerCapabilities();
+            var supportsVsExtensions =
+                clientCapabilities
+                    is VSInternalClientCapabilities { SupportsVisualStudioExtensions: true };
+            var capabilities = supportsVsExtensions
+                ? GetVSServerCapabilities()
+                : new ServerCapabilities();
 
-            var commitCharacters = CompletionRules.Default.DefaultCommitCharacters.Select(c => c.ToString()).ToArray();
-            var triggerCharacters = _completionProviders.SelectMany(
-                lz => CommonCompletionUtilities.GetTriggerCharacters(lz.Value)).Distinct().Select(c => c.ToString()).ToArray();
+            var commitCharacters = CompletionRules.Default.DefaultCommitCharacters
+                .Select(c => c.ToString())
+                .ToArray();
+            var triggerCharacters = _completionProviders
+                .SelectMany(lz => CommonCompletionUtilities.GetTriggerCharacters(lz.Value))
+                .Distinct()
+                .Select(c => c.ToString())
+                .ToArray();
 
             capabilities.DefinitionProvider = true;
             capabilities.RenameProvider = true;
             capabilities.ImplementationProvider = true;
-            capabilities.CodeActionProvider = new CodeActionOptions { CodeActionKinds = new[] { CodeActionKind.QuickFix, CodeActionKind.Refactor }, ResolveProvider = true };
-            capabilities.CompletionProvider = new VisualStudio.LanguageServer.Protocol.CompletionOptions
+            capabilities.CodeActionProvider = new CodeActionOptions
             {
-                ResolveProvider = true,
-                AllCommitCharacters = commitCharacters,
-                TriggerCharacters = triggerCharacters,
+                CodeActionKinds = new[] { CodeActionKind.QuickFix, CodeActionKind.Refactor },
+                ResolveProvider = true
             };
+            capabilities.CompletionProvider =
+                new VisualStudio.LanguageServer.Protocol.CompletionOptions
+                {
+                    ResolveProvider = true,
+                    AllCommitCharacters = commitCharacters,
+                    TriggerCharacters = triggerCharacters,
+                };
 
-            capabilities.SignatureHelpProvider = new SignatureHelpOptions { TriggerCharacters = new[] { "(", "," } };
+            capabilities.SignatureHelpProvider = new SignatureHelpOptions
+            {
+                TriggerCharacters = new[] { "(", "," }
+            };
             capabilities.DocumentSymbolProvider = true;
             capabilities.WorkspaceSymbolProvider = true;
             capabilities.DocumentFormattingProvider = true;
             capabilities.DocumentRangeFormattingProvider = true;
-            capabilities.DocumentOnTypeFormattingProvider = new DocumentOnTypeFormattingOptions { FirstTriggerCharacter = "}", MoreTriggerCharacter = new[] { ";", "\n" } };
+            capabilities.DocumentOnTypeFormattingProvider = new DocumentOnTypeFormattingOptions
+            {
+                FirstTriggerCharacter = "}",
+                MoreTriggerCharacter = new[] { ";", "\n" }
+            };
             capabilities.ReferencesProvider = true;
             capabilities.FoldingRangeProvider = true;
             capabilities.ExecuteCommandProvider = new ExecuteCommandOptions();
@@ -89,7 +118,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 Range = true,
                 Legend = new SemanticTokensLegend
                 {
-                    TokenTypes = SemanticTokenTypes.AllTypes.Concat(SemanticTokensHelpers.RoslynCustomTokenTypes).ToArray(),
+                    TokenTypes = SemanticTokenTypes.AllTypes
+                        .Concat(SemanticTokensHelpers.RoslynCustomTokenTypes)
+                        .ToArray(),
                     TokenModifiers = new string[] { SemanticTokenModifiers.Static }
                 }
             };
@@ -107,14 +138,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return capabilities;
         }
 
-        private static VSServerCapabilities GetVSServerCapabilities()
-            => new VSInternalServerCapabilities
+        private static VSServerCapabilities GetVSServerCapabilities() =>
+            new VSInternalServerCapabilities
             {
-                OnAutoInsertProvider = new VSInternalDocumentOnAutoInsertOptions { TriggerCharacters = new[] { "'", "/", "\n" } },
+                OnAutoInsertProvider = new VSInternalDocumentOnAutoInsertOptions
+                {
+                    TriggerCharacters = new[] { "'", "/", "\n" }
+                },
                 DocumentHighlightProvider = true,
                 ProjectContextProvider = true,
                 BreakableRangeProvider = true,
-
                 // Diagnostic requests are only supported from PullDiagnosticsInProcLanguageClient.
                 SupportsDiagnosticRequests = false,
             };

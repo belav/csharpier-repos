@@ -8,21 +8,44 @@ namespace System.Security.Policy
     public sealed partial class ApplicationTrust : EvidenceBase, ISecurityEncodable
     {
         public ApplicationTrust() { }
+
         public ApplicationTrust(ApplicationIdentity identity) { }
+
 #if NETCOREAPP
-        [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CodeAccessSecurityMessage,
+            DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
 #endif
-        public ApplicationTrust(PermissionSet defaultGrantSet, IEnumerable<StrongName> fullTrustAssemblies) { }
+        public ApplicationTrust(
+            PermissionSet defaultGrantSet,
+            IEnumerable<StrongName> fullTrustAssemblies
+        ) { }
+
         public ApplicationIdentity ApplicationIdentity { get; set; }
         public PolicyStatement DefaultGrantSet { get; set; }
         public object ExtraInfo { get; set; }
+
 #if NETCOREAPP
-        [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CodeAccessSecurityMessage,
+            DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
 #endif
-        public IList<StrongName> FullTrustAssemblies { get { return default(IList<StrongName>); } }
+        public IList<StrongName> FullTrustAssemblies
+        {
+            get { return default(IList<StrongName>); }
+        }
         public bool IsApplicationTrustedToRun { get; set; }
         public bool Persist { get; set; }
+
         public void FromXml(SecurityElement element) { }
-        public SecurityElement ToXml() { return default(SecurityElement); }
+
+        public SecurityElement ToXml()
+        {
+            return default(SecurityElement);
+        }
     }
 }

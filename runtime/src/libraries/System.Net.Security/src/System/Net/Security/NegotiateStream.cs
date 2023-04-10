@@ -23,9 +23,12 @@ namespace System.Net.Security
     public partial class NegotiateStream : AuthenticatedStream
     {
         /// <summary>Set as the _exception when the instance is disposed.</summary>
-        private static readonly ExceptionDispatchInfo s_disposedSentinel = ExceptionDispatchInfo.Capture(new ObjectDisposedException(nameof(NegotiateStream), (string?)null));
+        private static readonly ExceptionDispatchInfo s_disposedSentinel =
+            ExceptionDispatchInfo.Capture(
+                new ObjectDisposedException(nameof(NegotiateStream), (string?)null)
+            );
 
-        private const int ERROR_TRUST_FAILURE = 1790;   // Used to serialize protectionLevel or impersonationLevel mismatch error to the remote side.
+        private const int ERROR_TRUST_FAILURE = 1790; // Used to serialize protectionLevel or impersonationLevel mismatch error to the remote side.
         private const int MaxReadFrameSize = 64 * 1024;
         private const int MaxWriteDataSize = 63 * 1024; // 1k for the framing and trailer that is always less as per SSPI.
         private const string DefaultPackage = NegotiationInfoClass.Negotiate;
@@ -59,11 +62,11 @@ namespace System.Net.Security
         /// </summary>
         private bool _remoteOk;
 
-        public NegotiateStream(Stream innerStream) : this(innerStream, false)
-        {
-        }
+        public NegotiateStream(Stream innerStream)
+            : this(innerStream, false) { }
 
-        public NegotiateStream(Stream innerStream, bool leaveInnerStreamOpen) : base(innerStream, leaveInnerStreamOpen)
+        public NegotiateStream(Stream innerStream, bool leaveInnerStreamOpen)
+            : base(innerStream, leaveInnerStreamOpen)
         {
             _readHeader = new byte[4];
             _readBuffer = Array.Empty<byte>();
@@ -95,136 +98,405 @@ namespace System.Net.Security
             }
         }
 
-        public virtual IAsyncResult BeginAuthenticateAsClient(AsyncCallback? asyncCallback, object? asyncState) =>
-            BeginAuthenticateAsClient((NetworkCredential)CredentialCache.DefaultCredentials, binding: null, string.Empty, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification,
-                                      asyncCallback, asyncState);
-
-        public virtual IAsyncResult BeginAuthenticateAsClient(NetworkCredential credential, string targetName, AsyncCallback? asyncCallback, object? asyncState) =>
-            BeginAuthenticateAsClient(credential, binding: null, targetName, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification,
-                                      asyncCallback, asyncState);
-
-        public virtual IAsyncResult BeginAuthenticateAsClient(NetworkCredential credential, ChannelBinding? binding, string targetName, AsyncCallback? asyncCallback, object? asyncState) =>
-            BeginAuthenticateAsClient(credential, binding, targetName, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification,
-                                      asyncCallback, asyncState);
+        public virtual IAsyncResult BeginAuthenticateAsClient(
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            BeginAuthenticateAsClient(
+                (NetworkCredential)CredentialCache.DefaultCredentials,
+                binding: null,
+                string.Empty,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification,
+                asyncCallback,
+                asyncState
+            );
 
         public virtual IAsyncResult BeginAuthenticateAsClient(
-            NetworkCredential credential, string targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel,
-            AsyncCallback? asyncCallback, object? asyncState) =>
-            BeginAuthenticateAsClient(credential, binding: null, targetName, requiredProtectionLevel, allowedImpersonationLevel,
-                                      asyncCallback, asyncState);
+            NetworkCredential credential,
+            string targetName,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            BeginAuthenticateAsClient(
+                credential,
+                binding: null,
+                targetName,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification,
+                asyncCallback,
+                asyncState
+            );
 
         public virtual IAsyncResult BeginAuthenticateAsClient(
-            NetworkCredential credential, ChannelBinding? binding, string targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel,
-            AsyncCallback? asyncCallback, object? asyncState) =>
-            TaskToApm.Begin(AuthenticateAsClientAsync(credential, binding, targetName, requiredProtectionLevel, allowedImpersonationLevel), asyncCallback, asyncState);
+            NetworkCredential credential,
+            ChannelBinding? binding,
+            string targetName,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            BeginAuthenticateAsClient(
+                credential,
+                binding,
+                targetName,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification,
+                asyncCallback,
+                asyncState
+            );
 
-        public virtual void EndAuthenticateAsClient(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
+        public virtual IAsyncResult BeginAuthenticateAsClient(
+            NetworkCredential credential,
+            string targetName,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel allowedImpersonationLevel,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            BeginAuthenticateAsClient(
+                credential,
+                binding: null,
+                targetName,
+                requiredProtectionLevel,
+                allowedImpersonationLevel,
+                asyncCallback,
+                asyncState
+            );
+
+        public virtual IAsyncResult BeginAuthenticateAsClient(
+            NetworkCredential credential,
+            ChannelBinding? binding,
+            string targetName,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel allowedImpersonationLevel,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            TaskToApm.Begin(
+                AuthenticateAsClientAsync(
+                    credential,
+                    binding,
+                    targetName,
+                    requiredProtectionLevel,
+                    allowedImpersonationLevel
+                ),
+                asyncCallback,
+                asyncState
+            );
+
+        public virtual void EndAuthenticateAsClient(IAsyncResult asyncResult) =>
+            TaskToApm.End(asyncResult);
 
         public virtual void AuthenticateAsServer() =>
-            AuthenticateAsServer((NetworkCredential)CredentialCache.DefaultCredentials, policy: null, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification);
+            AuthenticateAsServer(
+                (NetworkCredential)CredentialCache.DefaultCredentials,
+                policy: null,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification
+            );
 
         public virtual void AuthenticateAsServer(ExtendedProtectionPolicy? policy) =>
-            AuthenticateAsServer((NetworkCredential)CredentialCache.DefaultCredentials, policy, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification);
+            AuthenticateAsServer(
+                (NetworkCredential)CredentialCache.DefaultCredentials,
+                policy,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification
+            );
 
-        public virtual void AuthenticateAsServer(NetworkCredential credential, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel requiredImpersonationLevel) =>
-            AuthenticateAsServer(credential, policy: null, requiredProtectionLevel, requiredImpersonationLevel);
+        public virtual void AuthenticateAsServer(
+            NetworkCredential credential,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel requiredImpersonationLevel
+        ) =>
+            AuthenticateAsServer(
+                credential,
+                policy: null,
+                requiredProtectionLevel,
+                requiredImpersonationLevel
+            );
 
-        public virtual void AuthenticateAsServer(NetworkCredential credential, ExtendedProtectionPolicy? policy, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel requiredImpersonationLevel)
+        public virtual void AuthenticateAsServer(
+            NetworkCredential credential,
+            ExtendedProtectionPolicy? policy,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel requiredImpersonationLevel
+        )
         {
-            ValidateCreateContext(DefaultPackage, credential, string.Empty, policy, requiredProtectionLevel, requiredImpersonationLevel);
-            AuthenticateAsync<SyncReadWriteAdapter>(default(CancellationToken)).GetAwaiter().GetResult();
+            ValidateCreateContext(
+                DefaultPackage,
+                credential,
+                string.Empty,
+                policy,
+                requiredProtectionLevel,
+                requiredImpersonationLevel
+            );
+            AuthenticateAsync<SyncReadWriteAdapter>(default(CancellationToken))
+                .GetAwaiter()
+                .GetResult();
         }
 
-        public virtual IAsyncResult BeginAuthenticateAsServer(AsyncCallback? asyncCallback, object? asyncState) =>
-            BeginAuthenticateAsServer((NetworkCredential)CredentialCache.DefaultCredentials, policy: null, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification, asyncCallback, asyncState);
-
-        public virtual IAsyncResult BeginAuthenticateAsServer(ExtendedProtectionPolicy? policy, AsyncCallback? asyncCallback, object? asyncState) =>
-            BeginAuthenticateAsServer((NetworkCredential)CredentialCache.DefaultCredentials, policy, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification, asyncCallback, asyncState);
+        public virtual IAsyncResult BeginAuthenticateAsServer(
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            BeginAuthenticateAsServer(
+                (NetworkCredential)CredentialCache.DefaultCredentials,
+                policy: null,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification,
+                asyncCallback,
+                asyncState
+            );
 
         public virtual IAsyncResult BeginAuthenticateAsServer(
-            NetworkCredential credential, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel requiredImpersonationLevel,
-            AsyncCallback? asyncCallback, object? asyncState) =>
-            BeginAuthenticateAsServer(credential, policy: null, requiredProtectionLevel, requiredImpersonationLevel, asyncCallback, asyncState);
+            ExtendedProtectionPolicy? policy,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            BeginAuthenticateAsServer(
+                (NetworkCredential)CredentialCache.DefaultCredentials,
+                policy,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification,
+                asyncCallback,
+                asyncState
+            );
 
         public virtual IAsyncResult BeginAuthenticateAsServer(
-            NetworkCredential credential, ExtendedProtectionPolicy? policy, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel requiredImpersonationLevel,
-            AsyncCallback? asyncCallback, object? asyncState) =>
-            TaskToApm.Begin(AuthenticateAsServerAsync(credential, policy, requiredProtectionLevel, requiredImpersonationLevel), asyncCallback, asyncState);
+            NetworkCredential credential,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel requiredImpersonationLevel,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            BeginAuthenticateAsServer(
+                credential,
+                policy: null,
+                requiredProtectionLevel,
+                requiredImpersonationLevel,
+                asyncCallback,
+                asyncState
+            );
 
-        public virtual void EndAuthenticateAsServer(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
+        public virtual IAsyncResult BeginAuthenticateAsServer(
+            NetworkCredential credential,
+            ExtendedProtectionPolicy? policy,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel requiredImpersonationLevel,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            TaskToApm.Begin(
+                AuthenticateAsServerAsync(
+                    credential,
+                    policy,
+                    requiredProtectionLevel,
+                    requiredImpersonationLevel
+                ),
+                asyncCallback,
+                asyncState
+            );
+
+        public virtual void EndAuthenticateAsServer(IAsyncResult asyncResult) =>
+            TaskToApm.End(asyncResult);
 
         public virtual void AuthenticateAsClient() =>
-            AuthenticateAsClient((NetworkCredential)CredentialCache.DefaultCredentials, binding: null, string.Empty, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification);
+            AuthenticateAsClient(
+                (NetworkCredential)CredentialCache.DefaultCredentials,
+                binding: null,
+                string.Empty,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification
+            );
 
         public virtual void AuthenticateAsClient(NetworkCredential credential, string targetName) =>
-            AuthenticateAsClient(credential, binding: null, targetName, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification);
-
-        public virtual void AuthenticateAsClient(NetworkCredential credential, ChannelBinding? binding, string targetName) =>
-            AuthenticateAsClient(credential, binding, targetName, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification);
+            AuthenticateAsClient(
+                credential,
+                binding: null,
+                targetName,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification
+            );
 
         public virtual void AuthenticateAsClient(
-            NetworkCredential credential, string targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel) =>
-            AuthenticateAsClient(credential, binding: null, targetName, requiredProtectionLevel, allowedImpersonationLevel);
+            NetworkCredential credential,
+            ChannelBinding? binding,
+            string targetName
+        ) =>
+            AuthenticateAsClient(
+                credential,
+                binding,
+                targetName,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification
+            );
 
         public virtual void AuthenticateAsClient(
-            NetworkCredential credential, ChannelBinding? binding, string targetName, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel allowedImpersonationLevel)
+            NetworkCredential credential,
+            string targetName,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel allowedImpersonationLevel
+        ) =>
+            AuthenticateAsClient(
+                credential,
+                binding: null,
+                targetName,
+                requiredProtectionLevel,
+                allowedImpersonationLevel
+            );
+
+        public virtual void AuthenticateAsClient(
+            NetworkCredential credential,
+            ChannelBinding? binding,
+            string targetName,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel allowedImpersonationLevel
+        )
         {
-            ValidateCreateContext(DefaultPackage, isServer: false, credential, targetName, binding, requiredProtectionLevel, allowedImpersonationLevel);
-            AuthenticateAsync<SyncReadWriteAdapter>(default(CancellationToken)).GetAwaiter().GetResult();
+            ValidateCreateContext(
+                DefaultPackage,
+                isServer: false,
+                credential,
+                targetName,
+                binding,
+                requiredProtectionLevel,
+                allowedImpersonationLevel
+            );
+            AuthenticateAsync<SyncReadWriteAdapter>(default(CancellationToken))
+                .GetAwaiter()
+                .GetResult();
         }
 
         public virtual Task AuthenticateAsClientAsync() =>
-            AuthenticateAsClientAsync((NetworkCredential)CredentialCache.DefaultCredentials, binding: null, string.Empty, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification);
-
-        public virtual Task AuthenticateAsClientAsync(NetworkCredential credential, string targetName) =>
-            AuthenticateAsClientAsync(credential, binding: null, targetName, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification);
+            AuthenticateAsClientAsync(
+                (NetworkCredential)CredentialCache.DefaultCredentials,
+                binding: null,
+                string.Empty,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification
+            );
 
         public virtual Task AuthenticateAsClientAsync(
-            NetworkCredential credential, string targetName,
+            NetworkCredential credential,
+            string targetName
+        ) =>
+            AuthenticateAsClientAsync(
+                credential,
+                binding: null,
+                targetName,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification
+            );
+
+        public virtual Task AuthenticateAsClientAsync(
+            NetworkCredential credential,
+            string targetName,
             ProtectionLevel requiredProtectionLevel,
-            TokenImpersonationLevel allowedImpersonationLevel) =>
-            AuthenticateAsClientAsync(credential, binding: null, targetName, requiredProtectionLevel, allowedImpersonationLevel);
-
-        public virtual Task AuthenticateAsClientAsync(NetworkCredential credential, ChannelBinding? binding, string targetName) =>
-            AuthenticateAsClientAsync(credential, binding, targetName, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification);
+            TokenImpersonationLevel allowedImpersonationLevel
+        ) =>
+            AuthenticateAsClientAsync(
+                credential,
+                binding: null,
+                targetName,
+                requiredProtectionLevel,
+                allowedImpersonationLevel
+            );
 
         public virtual Task AuthenticateAsClientAsync(
-            NetworkCredential credential, ChannelBinding? binding, string targetName, ProtectionLevel requiredProtectionLevel,
-            TokenImpersonationLevel allowedImpersonationLevel)
+            NetworkCredential credential,
+            ChannelBinding? binding,
+            string targetName
+        ) =>
+            AuthenticateAsClientAsync(
+                credential,
+                binding,
+                targetName,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification
+            );
+
+        public virtual Task AuthenticateAsClientAsync(
+            NetworkCredential credential,
+            ChannelBinding? binding,
+            string targetName,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel allowedImpersonationLevel
+        )
         {
-            ValidateCreateContext(DefaultPackage, isServer: false, credential, targetName, binding, requiredProtectionLevel, allowedImpersonationLevel);
+            ValidateCreateContext(
+                DefaultPackage,
+                isServer: false,
+                credential,
+                targetName,
+                binding,
+                requiredProtectionLevel,
+                allowedImpersonationLevel
+            );
             return AuthenticateAsync<AsyncReadWriteAdapter>(default(CancellationToken));
         }
 
         public virtual Task AuthenticateAsServerAsync() =>
-            AuthenticateAsServerAsync((NetworkCredential)CredentialCache.DefaultCredentials, policy: null, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification);
+            AuthenticateAsServerAsync(
+                (NetworkCredential)CredentialCache.DefaultCredentials,
+                policy: null,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification
+            );
 
         public virtual Task AuthenticateAsServerAsync(ExtendedProtectionPolicy? policy) =>
-            AuthenticateAsServerAsync((NetworkCredential)CredentialCache.DefaultCredentials, policy, ProtectionLevel.EncryptAndSign, TokenImpersonationLevel.Identification);
-
-        public virtual Task AuthenticateAsServerAsync(NetworkCredential credential, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel requiredImpersonationLevel) =>
-            AuthenticateAsServerAsync(credential, policy: null, requiredProtectionLevel, requiredImpersonationLevel);
+            AuthenticateAsServerAsync(
+                (NetworkCredential)CredentialCache.DefaultCredentials,
+                policy,
+                ProtectionLevel.EncryptAndSign,
+                TokenImpersonationLevel.Identification
+            );
 
         public virtual Task AuthenticateAsServerAsync(
-            NetworkCredential credential, ExtendedProtectionPolicy? policy, ProtectionLevel requiredProtectionLevel, TokenImpersonationLevel requiredImpersonationLevel)
+            NetworkCredential credential,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel requiredImpersonationLevel
+        ) =>
+            AuthenticateAsServerAsync(
+                credential,
+                policy: null,
+                requiredProtectionLevel,
+                requiredImpersonationLevel
+            );
+
+        public virtual Task AuthenticateAsServerAsync(
+            NetworkCredential credential,
+            ExtendedProtectionPolicy? policy,
+            ProtectionLevel requiredProtectionLevel,
+            TokenImpersonationLevel requiredImpersonationLevel
+        )
         {
-            ValidateCreateContext(DefaultPackage, credential, string.Empty, policy, requiredProtectionLevel, requiredImpersonationLevel);
+            ValidateCreateContext(
+                DefaultPackage,
+                credential,
+                string.Empty,
+                policy,
+                requiredProtectionLevel,
+                requiredImpersonationLevel
+            );
             return AuthenticateAsync<AsyncReadWriteAdapter>(default(CancellationToken));
         }
 
         public override bool IsAuthenticated => IsAuthenticatedCore;
 
         [MemberNotNullWhen(true, nameof(_context))]
-        private bool IsAuthenticatedCore => _context != null && HandshakeComplete && _exception == null && _remoteOk;
+        private bool IsAuthenticatedCore =>
+            _context != null && HandshakeComplete && _exception == null && _remoteOk;
 
         public override bool IsMutuallyAuthenticated =>
-            IsAuthenticatedCore &&
-            !_context.IsNTLM && // suppressing for NTLM since SSPI does not return correct value in the context flags.
+            IsAuthenticatedCore
+            && !_context.IsNTLM
+            && // suppressing for NTLM since SSPI does not return correct value in the context flags.
             _context.IsMutualAuthFlag;
 
         public override bool IsEncrypted => IsAuthenticatedCore && _context.IsConfidentialityFlag;
 
-        public override bool IsSigned => IsAuthenticatedCore && (_context.IsIntegrityFlag || _context.IsConfidentialityFlag);
+        public override bool IsSigned =>
+            IsAuthenticatedCore && (_context.IsIntegrityFlag || _context.IsConfidentialityFlag);
 
         public override bool IsServer => _context != null && _context.IsServer;
 
@@ -238,13 +510,17 @@ namespace System.Net.Security
         }
 
         private TokenImpersonationLevel PrivateImpersonationLevel =>
-            _context!.IsDelegationFlag && _context.ProtocolName != NegotiationInfoClass.NTLM ? TokenImpersonationLevel.Delegation : // We should suppress the delegate flag in NTLM case.
-            _context.IsIdentifyFlag ? TokenImpersonationLevel.Identification :
-            TokenImpersonationLevel.Impersonation;
+            _context!.IsDelegationFlag && _context.ProtocolName != NegotiationInfoClass.NTLM
+                ? TokenImpersonationLevel.Delegation
+                : // We should suppress the delegate flag in NTLM case.
+                _context.IsIdentifyFlag
+                    ? TokenImpersonationLevel.Identification
+                    : TokenImpersonationLevel.Impersonation;
 
         private bool HandshakeComplete => _context!.IsCompleted && _context.IsValidContext;
 
-        private bool CanGetSecureStream => _context!.IsConfidentialityFlag || _context.IsIntegrityFlag;
+        private bool CanGetSecureStream =>
+            _context!.IsConfidentialityFlag || _context.IsIntegrityFlag;
 
         public virtual IIdentity RemoteIdentity
         {
@@ -288,14 +564,12 @@ namespace System.Net.Security
             set => throw new NotSupportedException(SR.net_noseek);
         }
 
-        public override void SetLength(long value) =>
-            InnerStream.SetLength(value);
+        public override void SetLength(long value) => InnerStream.SetLength(value);
 
         public override long Seek(long offset, SeekOrigin origin) =>
             throw new NotSupportedException(SR.net_noseek);
 
-        public override void Flush() =>
-            InnerStream.Flush();
+        public override void Flush() => InnerStream.Flush();
 
         public override Task FlushAsync(CancellationToken cancellationToken) =>
             InnerStream.FlushAsync(cancellationToken);
@@ -310,12 +584,20 @@ namespace System.Net.Security
                 return InnerStream.Read(buffer, offset, count);
             }
 
-            ValueTask<int> vt = ReadAsync<SyncReadWriteAdapter>(new Memory<byte>(buffer, offset, count), default(CancellationToken));
+            ValueTask<int> vt = ReadAsync<SyncReadWriteAdapter>(
+                new Memory<byte>(buffer, offset, count),
+                default(CancellationToken)
+            );
             Debug.Assert(vt.IsCompleted, "Should have completed synchroously with sync adapter");
             return vt.GetAwaiter().GetResult();
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -325,10 +607,17 @@ namespace System.Net.Security
                 return InnerStream.ReadAsync(buffer, offset, count, cancellationToken);
             }
 
-            return ReadAsync<AsyncReadWriteAdapter>(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return ReadAsync<AsyncReadWriteAdapter>(
+                    new Memory<byte>(buffer, offset, count),
+                    cancellationToken
+                )
+                .AsTask();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfFailed(authSuccessCheck: true);
             if (!CanGetSecureStream)
@@ -339,7 +628,10 @@ namespace System.Net.Security
             return ReadAsync<AsyncReadWriteAdapter>(buffer, cancellationToken);
         }
 
-        private async ValueTask<int> ReadAsync<TIOAdapter>(Memory<byte> buffer, CancellationToken cancellationToken)
+        private async ValueTask<int> ReadAsync<TIOAdapter>(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
             where TIOAdapter : IReadWriteAdapter
         {
             Debug.Assert(_context is not null);
@@ -365,7 +657,13 @@ namespace System.Net.Security
 
                 while (true)
                 {
-                    int readBytes = await ReadAllAsync(InnerStream, _readHeader, allowZeroRead: true, cancellationToken).ConfigureAwait(false);
+                    int readBytes = await ReadAllAsync(
+                            InnerStream,
+                            _readHeader,
+                            allowZeroRead: true,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (readBytes == 0)
                     {
                         return 0;
@@ -390,11 +688,20 @@ namespace System.Net.Security
                         _readBuffer = new byte[readBytes];
                     }
 
-                    readBytes = await ReadAllAsync(InnerStream, new Memory<byte>(_readBuffer, 0, readBytes), allowZeroRead: false, cancellationToken).ConfigureAwait(false);
+                    readBytes = await ReadAllAsync(
+                            InnerStream,
+                            new Memory<byte>(_readBuffer, 0, readBytes),
+                            allowZeroRead: false,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                     // Decrypt into internal buffer, change "readBytes" to count now _Decrypted Bytes_
                     // Decrypted data start from zero offset, the size can be shrunk after decryption.
-                    _readBufferCount = readBytes = _context.Decrypt(_readBuffer.AsSpan(0, readBytes), out _readBufferOffset);
+                    _readBufferCount = readBytes = _context.Decrypt(
+                        _readBuffer.AsSpan(0, readBytes),
+                        out _readBufferOffset
+                    );
                     if (readBytes == 0 && buffer.Length != 0)
                     {
                         // Read again.
@@ -422,10 +729,22 @@ namespace System.Net.Security
                 _readInProgress = 0;
             }
 
-            static async ValueTask<int> ReadAllAsync(Stream stream, Memory<byte> buffer, bool allowZeroRead, CancellationToken cancellationToken)
+            static async ValueTask<int> ReadAllAsync(
+                Stream stream,
+                Memory<byte> buffer,
+                bool allowZeroRead,
+                CancellationToken cancellationToken
+            )
             {
-                int read = await TIOAdapter.ReadAtLeastAsync(
-                    stream, buffer, buffer.Length, throwOnEndOfStream: false, cancellationToken).ConfigureAwait(false);
+                int read = await TIOAdapter
+                    .ReadAtLeastAsync(
+                        stream,
+                        buffer,
+                        buffer.Length,
+                        throwOnEndOfStream: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (read < buffer.Length)
                 {
                     if (read != 0 || !allowZeroRead)
@@ -449,11 +768,21 @@ namespace System.Net.Security
                 return;
             }
 
-            WriteAsync<SyncReadWriteAdapter>(new ReadOnlyMemory<byte>(buffer, offset, count), default(CancellationToken)).GetAwaiter().GetResult();
+            WriteAsync<SyncReadWriteAdapter>(
+                    new ReadOnlyMemory<byte>(buffer, offset, count),
+                    default(CancellationToken)
+                )
+                .GetAwaiter()
+                .GetResult();
         }
 
         /// <returns>A <see cref="Task"/> that represents the asynchronous read operation.</returns>
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -463,11 +792,17 @@ namespace System.Net.Security
                 return InnerStream.WriteAsync(buffer, offset, count, cancellationToken);
             }
 
-            return WriteAsync<AsyncReadWriteAdapter>(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken);
+            return WriteAsync<AsyncReadWriteAdapter>(
+                new ReadOnlyMemory<byte>(buffer, offset, count),
+                cancellationToken
+            );
         }
 
         /// <returns>A <see cref="ValueTask"/> that represents the asynchronous read operation.</returns>
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfFailed(authSuccessCheck: true);
             if (!CanGetSecureStream)
@@ -478,7 +813,10 @@ namespace System.Net.Security
             return new ValueTask(WriteAsync<AsyncReadWriteAdapter>(buffer, cancellationToken));
         }
 
-        private async Task WriteAsync<TIOAdapter>(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+        private async Task WriteAsync<TIOAdapter>(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken
+        )
             where TIOAdapter : IReadWriteAdapter
         {
             Debug.Assert(_context is not null);
@@ -496,14 +834,23 @@ namespace System.Net.Security
                     int encryptedBytes;
                     try
                     {
-                        encryptedBytes = _context.Encrypt(buffer.Slice(0, chunkBytes).Span, ref _writeBuffer);
+                        encryptedBytes = _context.Encrypt(
+                            buffer.Slice(0, chunkBytes).Span,
+                            ref _writeBuffer
+                        );
                     }
                     catch (Exception e)
                     {
                         throw new IOException(SR.net_io_encrypt, e);
                     }
 
-                    await TIOAdapter.WriteAsync(InnerStream, new ReadOnlyMemory<byte>(_writeBuffer, 0, encryptedBytes), cancellationToken).ConfigureAwait(false);
+                    await TIOAdapter
+                        .WriteAsync(
+                            InnerStream,
+                            new ReadOnlyMemory<byte>(_writeBuffer, 0, encryptedBytes),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     buffer = buffer.Slice(chunkBytes);
                 }
             }
@@ -517,17 +864,25 @@ namespace System.Net.Security
             }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? asyncCallback, object? asyncState) =>
-            TaskToApm.Begin(ReadAsync(buffer, offset, count), asyncCallback, asyncState);
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) => TaskToApm.Begin(ReadAsync(buffer, offset, count), asyncCallback, asyncState);
 
-        public override int EndRead(IAsyncResult asyncResult) =>
-            TaskToApm.End<int>(asyncResult);
+        public override int EndRead(IAsyncResult asyncResult) => TaskToApm.End<int>(asyncResult);
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? asyncCallback, object? asyncState) =>
-            TaskToApm.Begin(WriteAsync(buffer, offset, count), asyncCallback, asyncState);
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) => TaskToApm.Begin(WriteAsync(buffer, offset, count), asyncCallback, asyncState);
 
-        public override void EndWrite(IAsyncResult asyncResult) =>
-            TaskToApm.End(asyncResult);
+        public override void EndWrite(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
 
         private void ThrowIfExceptional()
         {
@@ -555,14 +910,18 @@ namespace System.Net.Security
             string servicePrincipalName,
             ExtendedProtectionPolicy? policy,
             ProtectionLevel protectionLevel,
-            TokenImpersonationLevel impersonationLevel)
+            TokenImpersonationLevel impersonationLevel
+        )
         {
             if (policy != null)
             {
                 // One of these must be set if EP is turned on
                 if (policy.CustomChannelBinding == null && policy.CustomServiceNames == null)
                 {
-                    throw new ArgumentException(SR.net_auth_must_specify_extended_protection_scheme, nameof(policy));
+                    throw new ArgumentException(
+                        SR.net_auth_must_specify_extended_protection_scheme,
+                        nameof(policy)
+                    );
                 }
 
                 _extendedProtectionPolicy = policy;
@@ -572,7 +931,15 @@ namespace System.Net.Security
                 _extendedProtectionPolicy = new ExtendedProtectionPolicy(PolicyEnforcement.Never);
             }
 
-            ValidateCreateContext(package, isServer: true, credential, servicePrincipalName, _extendedProtectionPolicy.CustomChannelBinding, protectionLevel, impersonationLevel);
+            ValidateCreateContext(
+                package,
+                isServer: true,
+                credential,
+                servicePrincipalName,
+                _extendedProtectionPolicy.CustomChannelBinding,
+                protectionLevel,
+                impersonationLevel
+            );
         }
 
         private void ValidateCreateContext(
@@ -582,7 +949,8 @@ namespace System.Net.Security
             string? servicePrincipalName,
             ChannelBinding? channelBinding,
             ProtectionLevel protectionLevel,
-            TokenImpersonationLevel impersonationLevel)
+            TokenImpersonationLevel impersonationLevel
+        )
         {
             if (!_canRetryAuthentication)
             {
@@ -609,7 +977,9 @@ namespace System.Net.Security
             _framer.WriteHeader.MessageId = FrameHeader.HandshakeId;
 
             _expectedProtectionLevel = protectionLevel;
-            _expectedImpersonationLevel = isServer ? impersonationLevel : TokenImpersonationLevel.None;
+            _expectedImpersonationLevel = isServer
+                ? impersonationLevel
+                : TokenImpersonationLevel.None;
 
             ContextFlagsPal flags = ContextFlagsPal.Connection;
 
@@ -625,7 +995,10 @@ namespace System.Net.Security
             else if (protectionLevel == ProtectionLevel.Sign)
             {
                 // Assuming user expects NT4 SP4 and above.
-                flags |= ContextFlagsPal.ReplayDetect | ContextFlagsPal.SequenceDetect | ContextFlagsPal.InitIntegrity;
+                flags |=
+                    ContextFlagsPal.ReplayDetect
+                    | ContextFlagsPal.SequenceDetect
+                    | ContextFlagsPal.InitIntegrity;
             }
 
             if (isServer)
@@ -635,8 +1008,11 @@ namespace System.Net.Security
                     flags |= ContextFlagsPal.AllowMissingBindings;
                 }
 
-                if (_extendedProtectionPolicy.PolicyEnforcement != PolicyEnforcement.Never &&
-                    _extendedProtectionPolicy.ProtectionScenario == ProtectionScenario.TrustedProxy)
+                if (
+                    _extendedProtectionPolicy.PolicyEnforcement != PolicyEnforcement.Never
+                    && _extendedProtectionPolicy.ProtectionScenario
+                        == ProtectionScenario.TrustedProxy
+                )
                 {
                     flags |= ContextFlagsPal.ProxyBindings;
                 }
@@ -664,7 +1040,14 @@ namespace System.Net.Security
 
             try
             {
-                _context = new NTAuthentication(isServer, package, credential, servicePrincipalName, flags, channelBinding!);
+                _context = new NTAuthentication(
+                    isServer,
+                    package,
+                    credential,
+                    servicePrincipalName,
+                    flags,
+                    channelBinding!
+                );
             }
             catch (Win32Exception e)
             {
@@ -700,14 +1083,19 @@ namespace System.Net.Security
             ThrowIfFailed(authSuccessCheck: false);
             if (Interlocked.Exchange(ref _authInProgress, 1) == 1)
             {
-                throw new InvalidOperationException(SR.Format(SR.net_io_invalidnestedcall, "authenticate"));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_io_invalidnestedcall, "authenticate")
+                );
             }
 
             try
             {
-                await (_context.IsServer ?
-                    ReceiveBlobAsync<TIOAdapter>(cancellationToken) : // server should listen for a client blob
-                    SendBlobAsync<TIOAdapter>(message: null, cancellationToken)).ConfigureAwait(false); // client should send the first blob
+                await (
+                    _context.IsServer
+                        ? ReceiveBlobAsync<TIOAdapter>(cancellationToken)
+                        : // server should listen for a client blob
+                        SendBlobAsync<TIOAdapter>(message: null, cancellationToken)
+                ).ConfigureAwait(false); // client should send the first blob
             }
             catch (Exception e)
             {
@@ -724,9 +1112,11 @@ namespace System.Net.Security
         {
             Debug.Assert(_context != null);
 
-            if (_context.IsKerberos ||
-                _extendedProtectionPolicy!.PolicyEnforcement == PolicyEnforcement.Never ||
-                _extendedProtectionPolicy.CustomServiceNames == null)
+            if (
+                _context.IsKerberos
+                || _extendedProtectionPolicy!.PolicyEnforcement == PolicyEnforcement.Never
+                || _extendedProtectionPolicy.CustomServiceNames == null
+            )
             {
                 return true;
             }
@@ -735,14 +1125,18 @@ namespace System.Net.Security
 
             if (string.IsNullOrEmpty(clientSpn))
             {
-                return _extendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.WhenSupported;
+                return _extendedProtectionPolicy.PolicyEnforcement
+                    == PolicyEnforcement.WhenSupported;
             }
 
             return _extendedProtectionPolicy.CustomServiceNames.Contains(clientSpn);
         }
 
         // Client authentication starts here, but server also loops through this method.
-        private async Task SendBlobAsync<TIOAdapter>(byte[]? message, CancellationToken cancellationToken)
+        private async Task SendBlobAsync<TIOAdapter>(
+            byte[]? message,
+            CancellationToken cancellationToken
+        )
             where TIOAdapter : IReadWriteAdapter
         {
             Debug.Assert(_context != null);
@@ -756,7 +1150,12 @@ namespace System.Net.Security
             if (exception != null)
             {
                 // Signal remote side on a failed attempt.
-                await SendAuthResetSignalAndThrowAsync<TIOAdapter>(message!, exception, cancellationToken).ConfigureAwait(false);
+                await SendAuthResetSignalAndThrowAsync<TIOAdapter>(
+                        message!,
+                        exception,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 Debug.Fail("Unreachable");
             }
 
@@ -764,7 +1163,9 @@ namespace System.Net.Security
             {
                 if (_context.IsServer && !CheckSpn())
                 {
-                    exception = new AuthenticationException(SR.net_auth_bad_client_creds_or_target_mismatch);
+                    exception = new AuthenticationException(
+                        SR.net_auth_bad_client_creds_or_target_mismatch
+                    );
                     int statusCode = ERROR_TRUST_FAILURE;
                     message = new byte[sizeof(long)];
 
@@ -774,13 +1175,24 @@ namespace System.Net.Security
                         statusCode = (int)((uint)statusCode >> 8);
                     }
 
-                    await SendAuthResetSignalAndThrowAsync<TIOAdapter>(message, exception, cancellationToken).ConfigureAwait(false);
+                    await SendAuthResetSignalAndThrowAsync<TIOAdapter>(
+                            message,
+                            exception,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     Debug.Fail("Unreachable");
                 }
 
                 if (PrivateImpersonationLevel < _expectedImpersonationLevel)
                 {
-                    exception = new AuthenticationException(SR.Format(SR.net_auth_context_expectation, _expectedImpersonationLevel.ToString(), PrivateImpersonationLevel.ToString()));
+                    exception = new AuthenticationException(
+                        SR.Format(
+                            SR.net_auth_context_expectation,
+                            _expectedImpersonationLevel.ToString(),
+                            PrivateImpersonationLevel.ToString()
+                        )
+                    );
                     int statusCode = ERROR_TRUST_FAILURE;
                     message = new byte[sizeof(long)];
 
@@ -790,15 +1202,30 @@ namespace System.Net.Security
                         statusCode = (int)((uint)statusCode >> 8);
                     }
 
-                    await SendAuthResetSignalAndThrowAsync<TIOAdapter>(message, exception, cancellationToken).ConfigureAwait(false);
+                    await SendAuthResetSignalAndThrowAsync<TIOAdapter>(
+                            message,
+                            exception,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     Debug.Fail("Unreachable");
                 }
 
-                ProtectionLevel result = _context.IsConfidentialityFlag ? ProtectionLevel.EncryptAndSign : _context.IsIntegrityFlag ? ProtectionLevel.Sign : ProtectionLevel.None;
+                ProtectionLevel result = _context.IsConfidentialityFlag
+                    ? ProtectionLevel.EncryptAndSign
+                    : _context.IsIntegrityFlag
+                        ? ProtectionLevel.Sign
+                        : ProtectionLevel.None;
 
                 if (result < _expectedProtectionLevel)
                 {
-                    exception = new AuthenticationException(SR.Format(SR.net_auth_context_expectation, result.ToString(), _expectedProtectionLevel.ToString()));
+                    exception = new AuthenticationException(
+                        SR.Format(
+                            SR.net_auth_context_expectation,
+                            result.ToString(),
+                            _expectedProtectionLevel.ToString()
+                        )
+                    );
                     int statusCode = ERROR_TRUST_FAILURE;
                     message = new byte[sizeof(long)];
 
@@ -808,7 +1235,12 @@ namespace System.Net.Security
                         statusCode = (int)((uint)statusCode >> 8);
                     }
 
-                    await SendAuthResetSignalAndThrowAsync<TIOAdapter>(message, exception, cancellationToken).ConfigureAwait(false);
+                    await SendAuthResetSignalAndThrowAsync<TIOAdapter>(
+                            message,
+                            exception,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     Debug.Fail("Unreachable");
                 }
 
@@ -832,7 +1264,9 @@ namespace System.Net.Security
             if (message != null)
             {
                 //even if we are completed, there could be a blob for sending.
-                await _framer!.WriteMessageAsync<TIOAdapter>(InnerStream, message, cancellationToken).ConfigureAwait(false);
+                await _framer!
+                    .WriteMessageAsync<TIOAdapter>(InnerStream, message, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             if (HandshakeComplete && _remoteOk)
@@ -850,7 +1284,9 @@ namespace System.Net.Security
         {
             Debug.Assert(_framer != null);
 
-            byte[]? message = await _framer.ReadMessageAsync<TIOAdapter>(InnerStream, cancellationToken).ConfigureAwait(false);
+            byte[]? message = await _framer
+                .ReadMessageAsync<TIOAdapter>(InnerStream, cancellationToken)
+                .ConfigureAwait(false);
             if (message == null)
             {
                 // This is an EOF otherwise we would get at least *empty* message but not a null one.
@@ -881,7 +1317,14 @@ namespace System.Net.Security
             }
             else if (_framer.ReadHeader.MessageId != FrameHeader.HandshakeId)
             {
-                throw new AuthenticationException(SR.Format(SR.net_io_header_id, nameof(FrameHeader.MessageId), _framer.ReadHeader.MessageId, FrameHeader.HandshakeId));
+                throw new AuthenticationException(
+                    SR.Format(
+                        SR.net_io_header_id,
+                        nameof(FrameHeader.MessageId),
+                        _framer.ReadHeader.MessageId,
+                        FrameHeader.HandshakeId
+                    )
+                );
             }
 
             // If we are done don't go into send.
@@ -889,7 +1332,14 @@ namespace System.Net.Security
             {
                 if (!_remoteOk)
                 {
-                    throw new AuthenticationException(SR.Format(SR.net_io_header_id, nameof(FrameHeader.MessageId), _framer.ReadHeader.MessageId, FrameHeader.HandshakeDoneId));
+                    throw new AuthenticationException(
+                        SR.Format(
+                            SR.net_io_header_id,
+                            nameof(FrameHeader.MessageId),
+                            _framer.ReadHeader.MessageId,
+                            FrameHeader.HandshakeDoneId
+                        )
+                    );
                 }
 
                 return;
@@ -901,14 +1351,23 @@ namespace System.Net.Security
 
         //  This is to reset auth state on the remote side.
         //  If this write succeeds we will allow auth retrying.
-        private async Task SendAuthResetSignalAndThrowAsync<TIOAdapter>(byte[] message, Exception exception, CancellationToken cancellationToken)
+        private async Task SendAuthResetSignalAndThrowAsync<TIOAdapter>(
+            byte[] message,
+            Exception exception,
+            CancellationToken cancellationToken
+        )
             where TIOAdapter : IReadWriteAdapter
         {
             _framer!.WriteHeader.MessageId = FrameHeader.HandshakeErrId;
 
             if (IsLogonDeniedException(exception))
             {
-                exception = new InvalidCredentialException(IsServer ? SR.net_auth_bad_client_creds : SR.net_auth_bad_client_creds_or_target_mismatch, exception);
+                exception = new InvalidCredentialException(
+                    IsServer
+                        ? SR.net_auth_bad_client_creds
+                        : SR.net_auth_bad_client_creds_or_target_mismatch,
+                    exception
+                );
             }
 
             if (!(exception is AuthenticationException))
@@ -916,7 +1375,9 @@ namespace System.Net.Security
                 exception = new AuthenticationException(SR.net_auth_SSPI, exception);
             }
 
-            await _framer.WriteMessageAsync<TIOAdapter>(InnerStream, message, cancellationToken).ConfigureAwait(false);
+            await _framer
+                .WriteMessageAsync<TIOAdapter>(InnerStream, message, cancellationToken)
+                .ConfigureAwait(false);
 
             _canRetryAuthentication = true;
             ExceptionDispatchInfo.Throw(exception);
@@ -929,7 +1390,11 @@ namespace System.Net.Security
         {
             Debug.Assert(_context != null);
 
-            byte[]? message = _context.GetOutgoingBlob(incomingBlob, false, out SecurityStatusPal statusCode);
+            byte[]? message = _context.GetOutgoingBlob(
+                incomingBlob,
+                false,
+                out SecurityStatusPal statusCode
+            );
 
             if (IsError(statusCode))
             {
@@ -957,14 +1422,16 @@ namespace System.Net.Security
             var e = new Win32Exception((int)error);
             throw e.NativeErrorCode switch
             {
-                (int)SecurityStatusPalErrorCode.LogonDenied => new InvalidCredentialException(SR.net_auth_bad_client_creds, e),
-                ERROR_TRUST_FAILURE => new AuthenticationException(SR.net_auth_context_expectation_remote, e),
+                (int)SecurityStatusPalErrorCode.LogonDenied
+                    => new InvalidCredentialException(SR.net_auth_bad_client_creds, e),
+                ERROR_TRUST_FAILURE
+                    => new AuthenticationException(SR.net_auth_context_expectation_remote, e),
                 _ => new AuthenticationException(SR.net_auth_alert, e)
             };
         }
 
         private static bool IsLogonDeniedException(Exception exception) =>
-            exception is Win32Exception win32exception &&
-            win32exception.NativeErrorCode == (int)SecurityStatusPalErrorCode.LogonDenied;
+            exception is Win32Exception win32exception
+            && win32exception.NativeErrorCode == (int)SecurityStatusPalErrorCode.LogonDenied;
     }
 }

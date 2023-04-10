@@ -27,6 +27,10 @@ namespace System.Runtime.InteropServices
         internal static extern void InternalSet(IntPtr handle, object? value);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern object? InternalCompareExchange(IntPtr handle, object? value, object? oldValue);
+        internal static extern object? InternalCompareExchange(
+            IntPtr handle,
+            object? value,
+            object? oldValue
+        );
     }
 }

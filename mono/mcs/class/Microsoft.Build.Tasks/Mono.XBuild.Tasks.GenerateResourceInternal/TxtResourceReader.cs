@@ -34,59 +34,59 @@ using System.IO;
 using System.Resources;
 using System.Text;
 
-namespace Mono.XBuild.Tasks.GenerateResourceInternal {
-	internal class TxtResourceReader : IResourceReader {
-		Hashtable data;
-		Stream s;
+namespace Mono.XBuild.Tasks.GenerateResourceInternal
+{
+    internal class TxtResourceReader : IResourceReader
+    {
+        Hashtable data;
+        Stream s;
 
-		public TxtResourceReader (Stream stream)
-		{
-			data = new Hashtable ();
-			s = stream;
-			Load ();
-		}
+        public TxtResourceReader(Stream stream)
+        {
+            data = new Hashtable();
+            s = stream;
+            Load();
+        }
 
-		public virtual void Close ()
-		{
-		}
+        public virtual void Close() { }
 
-		public IDictionaryEnumerator GetEnumerator()
-		{
-			return data.GetEnumerator ();
-		}
+        public IDictionaryEnumerator GetEnumerator()
+        {
+            return data.GetEnumerator();
+        }
 
-		void Load ()
-		{
-			StreamReader reader = new StreamReader (s);
-			string line, key, val;
-			int epos, line_num = 0;
-			while ((line = reader.ReadLine ()) != null) {
-				line_num++;
-				line = line.Trim ();
-				if (line.Length == 0 || line [0] == '#' ||
-				    line [0] == ';')
-					continue;
-				epos = line.IndexOf ('=');
-				if (epos < 0) 
-					throw new Exception ("Invalid format at line " + line_num);
-				key = line.Substring (0, epos);
-				val = line.Substring (epos + 1);
-				key = key.Trim ();
-				val = val.Trim ();
-				if (key.Length == 0) 
-					throw new Exception ("Key is empty at line " + line_num);
-				data.Add (key, val);
-			}
-		}
+        void Load()
+        {
+            StreamReader reader = new StreamReader(s);
+            string line,
+                key,
+                val;
+            int epos,
+                line_num = 0;
+            while ((line = reader.ReadLine()) != null)
+            {
+                line_num++;
+                line = line.Trim();
+                if (line.Length == 0 || line[0] == '#' || line[0] == ';')
+                    continue;
+                epos = line.IndexOf('=');
+                if (epos < 0)
+                    throw new Exception("Invalid format at line " + line_num);
+                key = line.Substring(0, epos);
+                val = line.Substring(epos + 1);
+                key = key.Trim();
+                val = val.Trim();
+                if (key.Length == 0)
+                    throw new Exception("Key is empty at line " + line_num);
+                data.Add(key, val);
+            }
+        }
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return ((IResourceReader) this).GetEnumerator();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IResourceReader)this).GetEnumerator();
+        }
 
-		void IDisposable.Dispose ()
-		{
-		}
-	}
+        void IDisposable.Dispose() { }
+    }
 }
-

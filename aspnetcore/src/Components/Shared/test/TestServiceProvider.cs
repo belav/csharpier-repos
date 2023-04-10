@@ -5,14 +5,11 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
 public class TestServiceProvider : IServiceProvider
 {
-    private readonly Dictionary<Type, Func<object>> _factories
-        = new Dictionary<Type, Func<object>>();
+    private readonly Dictionary<Type, Func<object>> _factories =
+        new Dictionary<Type, Func<object>>();
 
-    public object GetService(Type serviceType)
-        => _factories.TryGetValue(serviceType, out var factory)
-            ? factory()
-            : null;
+    public object GetService(Type serviceType) =>
+        _factories.TryGetValue(serviceType, out var factory) ? factory() : null;
 
-    internal void AddService<T>(T value)
-        => _factories.Add(typeof(T), () => value);
+    internal void AddService<T>(T value) => _factories.Add(typeof(T), () => value);
 }

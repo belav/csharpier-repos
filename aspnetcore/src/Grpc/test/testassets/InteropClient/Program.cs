@@ -27,7 +27,10 @@ public class Program
     {
         Console.WriteLine("Application started.");
 
-        var runtimeVersion = typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "Unknown";
+        var runtimeVersion =
+            typeof(object).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion ?? "Unknown";
         Console.WriteLine($"NetCoreAppVersion: {runtimeVersion}");
 
         InteropClient.Run(args);

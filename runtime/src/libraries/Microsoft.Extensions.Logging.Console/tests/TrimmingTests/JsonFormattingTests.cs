@@ -26,9 +26,16 @@ class Program
                 new[]
                 {
                     new KeyValuePair<string, string>("Logging:Console:FormatterName", "json"),
-                    new KeyValuePair<string, string>("Logging:Console:FormatterOptions:TimestampFormat", "dd/MM/yy"),
-                    new KeyValuePair<string, string>("Logging:Console:FormatterOptions:JsonWriterOptions:Indented", "true"),
-                })
+                    new KeyValuePair<string, string>(
+                        "Logging:Console:FormatterOptions:TimestampFormat",
+                        "dd/MM/yy"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Logging:Console:FormatterOptions:JsonWriterOptions:Indented",
+                        "true"
+                    ),
+                }
+            )
             .Build();
 
         services.AddLogging(logging =>
@@ -53,11 +60,15 @@ class Program
         }
 
         string consoleOutput = consoleWriter.GetOutput();
-        
+
         // ensure the output contains whitespace between the property and the value
-        if (!consoleOutput.Contains("""
+        if (
+            !consoleOutput.Contains(
+                """
             "Message": "Hello",
-            """))
+            """
+            )
+        )
         {
             return -1;
         }

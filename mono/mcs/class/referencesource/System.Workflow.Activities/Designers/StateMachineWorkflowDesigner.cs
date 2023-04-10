@@ -32,9 +32,7 @@ namespace System.Workflow.Activities
         /// <summary>
         /// Default constructor for the StateDesignerBase
         /// </summary>
-        public StateMachineWorkflowDesigner()
-        {
-        }
+        public StateMachineWorkflowDesigner() { }
 
         protected override void Initialize(Activity activity)
         {
@@ -50,10 +48,7 @@ namespace System.Workflow.Activities
 
         public override string Text
         {
-            get
-            {
-                return text;
-            }
+            get { return text; }
         }
 
         #endregion
@@ -82,8 +77,14 @@ namespace System.Workflow.Activities
                 minimumSize.Height = Math.Max(minimumSize.Height, MinSize.Height);
                 if (IsRootDesigner && InvokingDesigner == null)
                 {
-                    minimumSize.Width = Math.Max(minimumSize.Width, ParentView.ViewPortSize.Width - StateDesigner.Separator.Width * 2);
-                    minimumSize.Height = Math.Max(minimumSize.Height, ParentView.ViewPortSize.Height - StateDesigner.Separator.Height * 2);
+                    minimumSize.Width = Math.Max(
+                        minimumSize.Width,
+                        ParentView.ViewPortSize.Width - StateDesigner.Separator.Width * 2
+                    );
+                    minimumSize.Height = Math.Max(
+                        minimumSize.Height,
+                        ParentView.ViewPortSize.Height - StateDesigner.Separator.Height * 2
+                    );
                 }
 
                 return minimumSize;
@@ -139,27 +140,15 @@ namespace System.Workflow.Activities
         [Browsable(false)]
         public override string InitialStateDesignerImagePath
         {
-            get
-            {
-                return base.InitialStateDesignerImagePath;
-            }
-            set
-            {
-                base.InitialStateDesignerImagePath = value;
-            }
+            get { return base.InitialStateDesignerImagePath; }
+            set { base.InitialStateDesignerImagePath = value; }
         }
 
         [Browsable(false)]
         public override string CompletedStateDesignerImagePath
         {
-            get
-            {
-                return base.CompletedStateDesignerImagePath;
-            }
-            set
-            {
-                base.CompletedStateDesignerImagePath = value;
-            }
+            get { return base.CompletedStateDesignerImagePath; }
+            set { base.CompletedStateDesignerImagePath = value; }
         }
     }
     #endregion

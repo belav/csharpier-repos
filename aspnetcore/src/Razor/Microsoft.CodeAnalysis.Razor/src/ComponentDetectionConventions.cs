@@ -19,9 +19,8 @@ internal static class ComponentDetectionConventions
             throw new ArgumentNullException(nameof(icomponentSymbol));
         }
 
-        return
-            symbol.DeclaredAccessibility == Accessibility.Public &&
-            !symbol.IsAbstract &&
-            symbol.AllInterfaces.Contains(icomponentSymbol);
+        return symbol.DeclaredAccessibility == Accessibility.Public
+            && !symbol.IsAbstract
+            && symbol.AllInterfaces.Contains(icomponentSymbol);
     }
 }

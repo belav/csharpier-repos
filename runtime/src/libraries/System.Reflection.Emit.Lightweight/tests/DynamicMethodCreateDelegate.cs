@@ -22,13 +22,22 @@ namespace System.Reflection.Emit.Tests
         {
             int newId = 0;
 
-            FieldInfo field = typeof(IDClass).GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), new Type[] { typeof(IDClass), typeof(int) }, typeof(IDClass));
+            FieldInfo field = typeof(IDClass).GetField(
+                FieldName,
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                new Type[] { typeof(IDClass), typeof(int) },
+                typeof(IDClass)
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(typeof(IntDelegate), target);
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             Assert.Equal(instanceCallBack(newId), target.ID);
             Assert.Equal(newId, target.ID);
         }
@@ -40,13 +49,23 @@ namespace System.Reflection.Emit.Tests
             Module module = typeof(TestClass).GetTypeInfo().Module;
             int newId = 0;
 
-            FieldInfo field = typeof(IDClass).GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), new Type[] { typeof(IDClass), typeof(int) }, module, true);
+            FieldInfo field = typeof(IDClass).GetField(
+                FieldName,
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                new Type[] { typeof(IDClass), typeof(int) },
+                module,
+                true
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(typeof(IntDelegate), target);
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             Assert.Equal(instanceCallBack(newId), target.ID);
             Assert.Equal(newId, target.ID);
         }
@@ -57,12 +76,21 @@ namespace System.Reflection.Emit.Tests
         {
             int newId = 0;
 
-            FieldInfo field = typeof(IDClass).GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), new Type[] { typeof(IDClass), typeof(int) }, typeof(IDClass));
+            FieldInfo field = typeof(IDClass).GetField(
+                FieldName,
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                new Type[] { typeof(IDClass), typeof(int) },
+                typeof(IDClass)
+            );
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IDClassDelegate staticCallBack = (IDClassDelegate)method.CreateDelegate(typeof(IDClassDelegate));
+            IDClassDelegate staticCallBack = (IDClassDelegate)
+                method.CreateDelegate(typeof(IDClassDelegate));
             Assert.Equal(staticCallBack(target, newId), target.ID);
             Assert.Equal(newId, target.ID);
         }
@@ -74,13 +102,23 @@ namespace System.Reflection.Emit.Tests
             Module module = typeof(TestClass).GetTypeInfo().Module;
             int newId = 0;
 
-            FieldInfo field = typeof(IDClass).GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo field = typeof(IDClass).GetField(
+                FieldName,
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
 
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), new Type[] { typeof(IDClass), typeof(int) }, module, true);
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                new Type[] { typeof(IDClass), typeof(int) },
+                module,
+                true
+            );
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IDClassDelegate staticCallBack = (IDClassDelegate)method.CreateDelegate(typeof(IDClassDelegate));
+            IDClassDelegate staticCallBack = (IDClassDelegate)
+                method.CreateDelegate(typeof(IDClassDelegate));
             Assert.Equal(staticCallBack(target, newId), target.ID);
             Assert.Equal(newId, target.ID);
         }
@@ -89,22 +127,42 @@ namespace System.Reflection.Emit.Tests
         public void CreateDelegate_NoMethodBody_ThrowsInvalidOperationException()
         {
             IDClass target = new IDClass();
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), new Type[] { typeof(IDClass), typeof(int) }, typeof(IDClass));
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                new Type[] { typeof(IDClass), typeof(int) },
+                typeof(IDClass)
+            );
 
-            Assert.Throws<InvalidOperationException>(() => method.CreateDelegate(typeof(IntDelegate)));
-            Assert.Throws<InvalidOperationException>(() => method.CreateDelegate(typeof(IntDelegate), target));
+            Assert.Throws<InvalidOperationException>(
+                () => method.CreateDelegate(typeof(IntDelegate))
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => method.CreateDelegate(typeof(IntDelegate), target)
+            );
         }
 
         [Fact]
         public void CreateDelegate_InvalidTarget_ThrowsArgumentException()
         {
-            FieldInfo field = typeof(IDClass).GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), new Type[] { typeof(IDClass), typeof(int) }, typeof(IDClass));
+            FieldInfo field = typeof(IDClass).GetField(
+                FieldName,
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                new Type[] { typeof(IDClass), typeof(int) },
+                typeof(IDClass)
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => method.CreateDelegate(typeof(IntDelegate), "foo"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => method.CreateDelegate(typeof(IntDelegate), "foo")
+            );
         }
 
         [Theory]
@@ -113,14 +171,28 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(InvalidParamType))]
         public void CreateDelegate_DelegateTypeInvalid_ThrowsArgumentException(Type delegateType)
         {
-            FieldInfo field = typeof(IDClass).GetField(FieldName, BindingFlags.NonPublic | BindingFlags.Instance);
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), new Type[] { typeof(IDClass), typeof(int) }, typeof(IDClass));
+            FieldInfo field = typeof(IDClass).GetField(
+                FieldName,
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                new Type[] { typeof(IDClass), typeof(int) },
+                typeof(IDClass)
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => method.CreateDelegate(delegateType));
-            AssertExtensions.Throws<ArgumentException>(null, () => method.CreateDelegate(delegateType, new IDClass()));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => method.CreateDelegate(delegateType)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => method.CreateDelegate(delegateType, new IDClass())
+            );
         }
 
         /// <summary>
@@ -147,8 +219,11 @@ namespace System.Reflection.Emit.Tests
 
     public class IDSubClass : IDClass
     {
-        public IDSubClass(int id) : base(id) { }
-        public IDSubClass() : base() { }
+        public IDSubClass(int id)
+            : base(id) { }
+
+        public IDSubClass()
+            : base() { }
     }
 
     public delegate int IDClassDelegate(IDClass owner, int id);

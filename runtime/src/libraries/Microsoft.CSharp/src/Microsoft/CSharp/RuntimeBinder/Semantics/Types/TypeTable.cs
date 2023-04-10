@@ -26,7 +26,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 && EqualityComparer<TKey2>.Default.Equals(_pKey2, other._pKey2);
 
 #if DEBUG
-            [ExcludeFromCodeCoverage(Justification = "Typed overload should always be the method called")]
+            [ExcludeFromCodeCoverage(
+                Justification = "Typed overload should always be the method called"
+            )]
 #endif
             public override bool Equals(object obj)
             {
@@ -48,30 +50,52 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         // The RuntimeBinder uses a global lock when Binding that keeps these dictionary safe.
         // Two way hashes
-        private static readonly Dictionary<KeyPair<AggregateSymbol, KeyPair<AggregateType, TypeArray>>, AggregateType> s_aggregateTable =
-                new Dictionary<KeyPair<AggregateSymbol, KeyPair<AggregateType, TypeArray>>, AggregateType>();
+        private static readonly Dictionary<
+            KeyPair<AggregateSymbol, KeyPair<AggregateType, TypeArray>>,
+            AggregateType
+        > s_aggregateTable =
+            new Dictionary<
+                KeyPair<AggregateSymbol, KeyPair<AggregateType, TypeArray>>,
+                AggregateType
+            >();
 
         private static readonly Dictionary<KeyPair<CType, int>, ArrayType> s_arrayTable =
             new Dictionary<KeyPair<CType, int>, ArrayType>();
 
-        private static readonly Dictionary<KeyPair<CType, bool>, ParameterModifierType> s_parameterModifierTable =
-            new Dictionary<KeyPair<CType, bool>, ParameterModifierType>();
+        private static readonly Dictionary<
+            KeyPair<CType, bool>,
+            ParameterModifierType
+        > s_parameterModifierTable = new Dictionary<KeyPair<CType, bool>, ParameterModifierType>();
 
         // One way hashes
-        private static readonly Dictionary<CType, PointerType> s_pointerTable = new Dictionary<CType, PointerType>();
-        private static readonly Dictionary<CType, NullableType> s_nullableTable = new Dictionary<CType, NullableType>();
+        private static readonly Dictionary<CType, PointerType> s_pointerTable =
+            new Dictionary<CType, PointerType>();
+        private static readonly Dictionary<CType, NullableType> s_nullableTable =
+            new Dictionary<CType, NullableType>();
 
         private static KeyPair<TKey1, TKey2> MakeKey<TKey1, TKey2>(TKey1 key1, TKey2 key2) =>
             new KeyPair<TKey1, TKey2>(key1, key2);
 
-        public static AggregateType LookupAggregate(AggregateSymbol aggregate, AggregateType outer, TypeArray args)
+        public static AggregateType LookupAggregate(
+            AggregateSymbol aggregate,
+            AggregateType outer,
+            TypeArray args
+        )
         {
             RuntimeBinder.EnsureLockIsTaken();
-            s_aggregateTable.TryGetValue(MakeKey(aggregate, MakeKey(outer, args)), out AggregateType result);
+            s_aggregateTable.TryGetValue(
+                MakeKey(aggregate, MakeKey(outer, args)),
+                out AggregateType result
+            );
             return result;
         }
 
-        public static void InsertAggregate(AggregateSymbol aggregate, AggregateType outer, TypeArray args, AggregateType ats)
+        public static void InsertAggregate(
+            AggregateSymbol aggregate,
+            AggregateType outer,
+            TypeArray args,
+            AggregateType ats
+        )
         {
             RuntimeBinder.EnsureLockIsTaken();
             Debug.Assert(LookupAggregate(aggregate, outer, args) == null);
@@ -82,7 +106,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public static ArrayType LookupArray(CType elementType, int rankNum)
         {
             RuntimeBinder.EnsureLockIsTaken();
-            s_arrayTable.TryGetValue(new KeyPair<CType, int>(elementType, rankNum), out ArrayType result);
+            s_arrayTable.TryGetValue(
+                new KeyPair<CType, int>(elementType, rankNum),
+                out ArrayType result
+            );
             return result;
         }
 
@@ -96,15 +123,25 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public static ParameterModifierType LookupParameterModifier(CType elementType, bool isOut)
         {
             RuntimeBinder.EnsureLockIsTaken();
-            s_parameterModifierTable.TryGetValue(new KeyPair<CType, bool>(elementType, isOut), out ParameterModifierType result);
+            s_parameterModifierTable.TryGetValue(
+                new KeyPair<CType, bool>(elementType, isOut),
+                out ParameterModifierType result
+            );
             return result;
         }
 
-        public static void InsertParameterModifier(CType elementType, bool isOut, ParameterModifierType parameterModifier)
+        public static void InsertParameterModifier(
+            CType elementType,
+            bool isOut,
+            ParameterModifierType parameterModifier
+        )
         {
             RuntimeBinder.EnsureLockIsTaken();
             Debug.Assert(LookupParameterModifier(elementType, isOut) == null);
-            s_parameterModifierTable.Add(new KeyPair<CType, bool>(elementType, isOut), parameterModifier);
+            s_parameterModifierTable.Add(
+                new KeyPair<CType, bool>(elementType, isOut),
+                parameterModifier
+            );
         }
 
         public static PointerType LookupPointer(CType elementType)

@@ -10,10 +10,9 @@ namespace System.Runtime.Diagnostics
     class DiagnosticTraceSource : TraceSource
     {
         const string PropagateActivityValue = "propagateActivity";
+
         internal DiagnosticTraceSource(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         protected override string[] GetSupportedAttributes()
         {
@@ -25,7 +24,9 @@ namespace System.Runtime.Diagnostics
             get
             {
                 bool retval = false;
-                string attributeValue = this.Attributes[DiagnosticTraceSource.PropagateActivityValue];
+                string attributeValue = this.Attributes[
+                    DiagnosticTraceSource.PropagateActivityValue
+                ];
                 if (!string.IsNullOrEmpty(attributeValue))
                 {
                     if (!bool.TryParse(attributeValue, out retval))

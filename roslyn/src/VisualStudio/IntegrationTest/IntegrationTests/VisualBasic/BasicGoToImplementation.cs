@@ -18,9 +18,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGoToImplementation(VisualStudioInstanceFactory instanceFactory)
-                    : base(instanceFactory, nameof(BasicGoToImplementation))
-        {
-        }
+            : base(instanceFactory, nameof(BasicGoToImplementation)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.GoToImplementation)]
         public void SimpleGoToImplementation()
@@ -29,17 +27,22 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
             VisualStudio.SolutionExplorer.AddFile(project, "FileImplementation.vb");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileImplementation.vb");
             VisualStudio.Editor.SetText(
-@"Class Implementation
+                @"Class Implementation
   Implements IGoo
-End Class");
+End Class"
+            );
             VisualStudio.SolutionExplorer.AddFile(project, "FileInterface.vb");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileInterface.vb");
             VisualStudio.Editor.SetText(
-@"Interface IGoo 
-End Interface");
+                @"Interface IGoo 
+End Interface"
+            );
             VisualStudio.Editor.PlaceCaret("Interface IGoo");
             VisualStudio.Editor.GoToImplementation("FileImplementation.vb");
-            VisualStudio.Editor.Verify.TextContains(@"Class Implementation$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.TextContains(
+                @"Class Implementation$$",
+                assertCaretPosition: true
+            );
             Assert.False(VisualStudio.Shell.IsActiveTabProvisional());
         }
     }

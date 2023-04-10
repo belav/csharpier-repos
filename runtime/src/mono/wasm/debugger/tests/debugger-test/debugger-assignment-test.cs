@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace DebuggerTests
 {
     public class StepInTest<T>
@@ -204,13 +205,13 @@ namespace DebuggerTests
     {
         public unsafe static int Prepare()
         {
-            delegate*<int> value = &MONO_TYPE_FNPTR.Prepare;
+            delegate* <int> value = &MONO_TYPE_FNPTR.Prepare;
             return TestedMethod(value);
         }
 
-        public unsafe static int TestedMethod(delegate*<int> value)
+        public unsafe static int TestedMethod(delegate* <int> value)
         {
-            delegate*<int> r;
+            delegate* <int> r;
             r = value;
             return 0;
         }
@@ -220,7 +221,8 @@ namespace DebuggerTests
     {
         public unsafe static int Prepare()
         {
-            int a = 1; int* value = &a;
+            int a = 1;
+            int* value = &a;
             return TestedMethod(value);
         }
 

@@ -21,11 +21,8 @@ public class CosmosRuntimeModelConvention : RuntimeModelConvention
     ///     Creates a new instance of <see cref="CosmosRuntimeModelConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    public CosmosRuntimeModelConvention(
-        ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public CosmosRuntimeModelConvention(ProviderConventionSetBuilderDependencies dependencies)
+        : base(dependencies) { }
 
     /// <summary>
     ///     Updates the model annotations that will be set on the read-only object.
@@ -38,7 +35,8 @@ public class CosmosRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         IModel model,
         RuntimeModel runtimeModel,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessModelAnnotations(annotations, model, runtimeModel, runtime);
 
@@ -59,7 +57,8 @@ public class CosmosRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         IEntityType entityType,
         RuntimeEntityType runtimeEntityType,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessEntityTypeAnnotations(annotations, entityType, runtimeEntityType, runtime);
 

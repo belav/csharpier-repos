@@ -39,5 +39,6 @@ public interface IValueGeneratorCache
     ValueGenerator GetOrAdd(
         IProperty property,
         IEntityType entityType,
-        Func<IProperty, IEntityType, ValueGenerator> factory);
+        Func<IProperty, IEntityType, ValueGenerator> factory
+    );
 }

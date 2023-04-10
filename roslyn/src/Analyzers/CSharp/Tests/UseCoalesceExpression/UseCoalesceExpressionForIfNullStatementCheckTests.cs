@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseCoalesceExpressionForIfNullStatementCheckDiagnosticAnalyzer,
-        UseCoalesceExpressionForIfNullStatementCheckCodeFixProvider>;
+        UseCoalesceExpressionForIfNullStatementCheckCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseCoalesceExpression)]
     public class UseCoalesceExpressionForIfNullStatementCheckTests
@@ -198,11 +199,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
 
         [Fact]
@@ -222,11 +219,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
 
         [Fact]
@@ -271,11 +264,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
 
         [Fact]
@@ -297,11 +286,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
 
         [Fact]
@@ -324,11 +309,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
 
         [Fact]
@@ -349,11 +330,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
 
         [Fact]
@@ -379,11 +356,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
 
         [Fact]
@@ -403,11 +376,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
 
         [Fact]
@@ -427,11 +396,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
 
         [Fact]

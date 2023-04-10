@@ -131,11 +131,16 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Crc32).GetMethod(nameof(Crc32.ComputeCrc32), new Type[] { typeof(UInt32), typeof(Byte) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
-                                        Unsafe.ReadUnaligned<Byte>(ref Unsafe.As<Byte, byte>(ref _data2))
-                                     });
+            var result = typeof(Crc32)
+                .GetMethod(nameof(Crc32.ComputeCrc32), new Type[] { typeof(UInt32), typeof(Byte) })
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
+                        Unsafe.ReadUnaligned<Byte>(ref Unsafe.As<Byte, byte>(ref _data2))
+                    }
+                );
 
             ValidateResult(_data1, _data2, (UInt32)result);
         }
@@ -144,10 +149,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Crc32.ComputeCrc32(
-                _clsVar1,
-                _clsVar2
-            );
+            var result = Crc32.ComputeCrc32(_clsVar1, _clsVar2);
 
             ValidateResult(_clsVar1, _clsVar2, result);
         }
@@ -220,15 +222,23 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(UInt32 left, Byte right, UInt32 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt32 left,
+            Byte right,
+            UInt32 result,
+            [CallerMemberName] string method = ""
+        )
         {
             var isUnexpectedResult = false;
 
-            uint expectedResult = 0x169330BA; isUnexpectedResult = (expectedResult != result);
+            uint expectedResult = 0x169330BA;
+            isUnexpectedResult = (expectedResult != result);
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Crc32)}.{nameof(Crc32.ComputeCrc32)}<UInt32>(UInt32, Byte): ComputeCrc32 failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Crc32)}.{nameof(Crc32.ComputeCrc32)}<UInt32>(UInt32, Byte): ComputeCrc32 failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

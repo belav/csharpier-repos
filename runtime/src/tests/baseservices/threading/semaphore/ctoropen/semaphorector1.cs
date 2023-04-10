@@ -16,7 +16,8 @@ class CtorTest
         }
 
         // Get the args
-        int iCount = -1, mCount = -1;
+        int iCount = -1,
+            mCount = -1;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -35,7 +36,7 @@ class CtorTest
         CtorTest ct = new CtorTest();
         return ct.Run(iCount, mCount);
     }
-           
+
     private int Run(int iCount, int mCount)
     {
         // Testing basic scenario
@@ -45,22 +46,30 @@ class CtorTest
         {
             using (sem = new Semaphore(iCount, mCount))
             {
-                int iPrev = 0, count = iCount;
+                int iPrev = 0,
+                    count = iCount;
                 // Do a wait one if we can
                 if (iCount > 0)
                 {
-                   sem.WaitOne();
-                   count--;
+                    sem.WaitOne();
+                    count--;
                 }
                 iPrev = sem.Release();
 
                 if (iPrev == count)
-                   iRet = 100;
+                    iRet = 100;
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine("FAIL: CtorTest1(" + iCount + "," + mCount + ") - Unexpected exception thrown:  " + ex.ToString());
+            Console.WriteLine(
+                "FAIL: CtorTest1("
+                    + iCount
+                    + ","
+                    + mCount
+                    + ") - Unexpected exception thrown:  "
+                    + ex.ToString()
+            );
         }
         Console.WriteLine(100 == iRet ? "Test Passed" : "Test Failed");
         return iRet;

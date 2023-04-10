@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 #pragma warning disable EF1001 // Internal EF Core API usage.
-public class SqlServerCSharpRuntimeAnnotationCodeGenerator : RelationalCSharpRuntimeAnnotationCodeGenerator
+public class SqlServerCSharpRuntimeAnnotationCodeGenerator
+    : RelationalCSharpRuntimeAnnotationCodeGenerator
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -23,13 +24,15 @@ public class SqlServerCSharpRuntimeAnnotationCodeGenerator : RelationalCSharpRun
     /// </summary>
     public SqlServerCSharpRuntimeAnnotationCodeGenerator(
         CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies,
-        RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies relationalDependencies)
-        : base(dependencies, relationalDependencies)
-    {
-    }
+        RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies relationalDependencies
+    )
+        : base(dependencies, relationalDependencies) { }
 
     /// <inheritdoc />
-    public override void Generate(IModel model, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public override void Generate(
+        IModel model,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -45,7 +48,10 @@ public class SqlServerCSharpRuntimeAnnotationCodeGenerator : RelationalCSharpRun
     }
 
     /// <inheritdoc />
-    public override void Generate(IProperty property, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public override void Generate(
+        IProperty property,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -56,7 +62,8 @@ public class SqlServerCSharpRuntimeAnnotationCodeGenerator : RelationalCSharpRun
 
             if (!annotations.ContainsKey(SqlServerAnnotationNames.ValueGenerationStrategy))
             {
-                annotations[SqlServerAnnotationNames.ValueGenerationStrategy] = property.GetValueGenerationStrategy();
+                annotations[SqlServerAnnotationNames.ValueGenerationStrategy] =
+                    property.GetValueGenerationStrategy();
             }
         }
 
@@ -64,7 +71,10 @@ public class SqlServerCSharpRuntimeAnnotationCodeGenerator : RelationalCSharpRun
     }
 
     /// <inheritdoc />
-    public override void Generate(IIndex index, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public override void Generate(
+        IIndex index,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -79,7 +89,10 @@ public class SqlServerCSharpRuntimeAnnotationCodeGenerator : RelationalCSharpRun
     }
 
     /// <inheritdoc />
-    public override void Generate(IKey key, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public override void Generate(
+        IKey key,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -91,7 +104,10 @@ public class SqlServerCSharpRuntimeAnnotationCodeGenerator : RelationalCSharpRun
     }
 
     /// <inheritdoc />
-    public override void Generate(IEntityType entityType, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public override void Generate(
+        IEntityType entityType,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -108,7 +124,10 @@ public class SqlServerCSharpRuntimeAnnotationCodeGenerator : RelationalCSharpRun
     }
 
     /// <inheritdoc />
-    public override void Generate(IRelationalPropertyOverrides overrides, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public override void Generate(
+        IRelationalPropertyOverrides overrides,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {

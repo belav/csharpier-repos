@@ -7,5 +7,7 @@ internal interface IControllerPropertyActivator
 {
     void Activate(ControllerContext context, object controller);
 
-    Action<ControllerContext, object> GetActivatorDelegate(ControllerActionDescriptor actionDescriptor);
+    Action<ControllerContext, object> GetActivatorDelegate(
+        ControllerActionDescriptor actionDescriptor
+    );
 }

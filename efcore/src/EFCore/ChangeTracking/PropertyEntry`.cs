@@ -31,9 +31,7 @@ public class PropertyEntry<TEntity, TProperty> : PropertyEntry
     /// </summary>
     [EntityFrameworkInternal]
     public PropertyEntry(InternalEntityEntry internalEntry, string name)
-        : base(internalEntry, name)
-    {
-    }
+        : base(internalEntry, name) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,9 +41,7 @@ public class PropertyEntry<TEntity, TProperty> : PropertyEntry
     /// </summary>
     [EntityFrameworkInternal]
     public PropertyEntry(InternalEntityEntry internalEntry, IProperty property)
-        : base(internalEntry, property)
-    {
-    }
+        : base(internalEntry, property) { }
 
     /// <summary>
     ///     The <see cref="EntityEntry{TEntity}" /> to which this member belongs.
@@ -55,8 +51,7 @@ public class PropertyEntry<TEntity, TProperty> : PropertyEntry
     ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
     ///     examples.
     /// </remarks>
-    public new virtual EntityEntry<TEntity> EntityEntry
-        => new(InternalEntry);
+    public new virtual EntityEntry<TEntity> EntityEntry => new(InternalEntry);
 
     /// <summary>
     ///     Gets or sets the value currently assigned to this property. If the current value is set using this property,

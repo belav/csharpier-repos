@@ -43,9 +43,15 @@ internal sealed partial class RoslynSearchItemsSourceProvider
             _provider = provider;
         }
 
-        public override async Task PerformSearchAsync(ISearchQuery searchQuery, ISearchCallback searchCallback, CancellationToken cancellationToken)
+        public override async Task PerformSearchAsync(
+            ISearchQuery searchQuery,
+            ISearchCallback searchCallback,
+            CancellationToken cancellationToken
+        )
         {
-            using var token = _provider._asyncListener.BeginAsyncOperation(nameof(PerformSearchAsync));
+            using var token = _provider._asyncListener.BeginAsyncOperation(
+                nameof(PerformSearchAsync)
+            );
 
             try
             {
@@ -53,8 +59,12 @@ internal sealed partial class RoslynSearchItemsSourceProvider
                 if (string.IsNullOrWhiteSpace(searchValue))
                     return;
 
-                var includeTypeResults = searchQuery.FiltersStates.Any(f => f is { Key: "Types", Value: "True" });
-                var includeMembersResults = searchQuery.FiltersStates.Any(f => f is { Key: "Members", Value: "True" });
+                var includeTypeResults = searchQuery.FiltersStates.Any(
+                    f => f is { Key: "Types", Value: "True" }
+                );
+                var includeMembersResults = searchQuery.FiltersStates.Any(
+                    f => f is { Key: "Members", Value: "True" }
+                );
 
                 var kinds = (includeTypeResults, includeMembersResults) switch
                 {
@@ -75,13 +85,14 @@ internal sealed partial class RoslynSearchItemsSourceProvider
                     new RoslynNavigateToSearchCallback(_provider, searchCallback),
                     searchValue,
                     kinds,
-                    _provider._threadingContext.DisposalToken);
+                    _provider._threadingContext.DisposalToken
+                );
 
-                await searcher.SearchAsync(searchCurrentDocument, cancellationToken).ConfigureAwait(false);
+                await searcher
+                    .SearchAsync(searchCurrentDocument, cancellationToken)
+                    .ConfigureAwait(false);
             }
-            catch (Exception ex) when (FatalError.ReportAndCatchUnlessCanceled(ex))
-            {
-            }
+            catch (Exception ex) when (FatalError.ReportAndCatchUnlessCanceled(ex)) { }
         }
     }
 }

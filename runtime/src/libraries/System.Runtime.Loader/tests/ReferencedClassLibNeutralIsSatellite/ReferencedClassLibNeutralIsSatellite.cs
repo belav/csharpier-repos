@@ -4,7 +4,7 @@ using System;
 using System.Resources;
 using System.Globalization;
 
-[assembly:NeutralResourcesLanguage("es", UltimateResourceFallbackLocation.Satellite)]
+[assembly: NeutralResourcesLanguage("es", UltimateResourceFallbackLocation.Satellite)]
 
 namespace ReferencedClassLibNeutralIsSatellite
 {
@@ -14,7 +14,10 @@ namespace ReferencedClassLibNeutralIsSatellite
         {
             try
             {
-                ResourceManager rm = new ResourceManager("ReferencedClassLibNeutralIsSatellite.ReferencedStrings", typeof(Program).Assembly);
+                ResourceManager rm = new ResourceManager(
+                    "ReferencedClassLibNeutralIsSatellite.ReferencedStrings",
+                    typeof(Program).Assembly
+                );
 
                 CultureInfo ci = CultureInfo.CreateSpecificCulture(lang);
 

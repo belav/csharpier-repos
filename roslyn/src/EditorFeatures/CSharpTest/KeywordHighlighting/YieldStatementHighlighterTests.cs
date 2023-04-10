@@ -15,14 +15,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class YieldStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(YieldStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(YieldStatementHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     IEnumerable<int> Range(int min, int max)
     {
@@ -36,14 +35,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             [|yield return|] min++;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample1_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     IEnumerable<int> Range(int min, int max)
     {
@@ -57,14 +57,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             {|Cursor:[|yield return|]|} min++;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample1_3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     IEnumerable<int> Range(int min, int max)
     {
@@ -78,14 +79,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             yield return {|Cursor:min++|};
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample1_4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     IEnumerable<int> Range(int min, int max)
     {
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             [|yield return|] min++;{|Cursor:|}
         }
     }
-}");
+}"
+            );
         }
     }
 }

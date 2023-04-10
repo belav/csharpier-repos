@@ -11,13 +11,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
 {
     internal abstract class GraphicsTag : BrushTag
     {
-        protected GraphicsTag(IEditorFormatMap editorFormatMap) : base(editorFormatMap)
-        {
-        }
+        protected GraphicsTag(IEditorFormatMap editorFormatMap)
+            : base(editorFormatMap) { }
 
         /// <summary>
         /// This method allows corresponding adornment manager to ask for a graphical glyph.
         /// </summary>
-        public abstract GraphicsResult GetGraphics(IWpfTextView view, Geometry bounds, TextFormattingRunProperties format);
+        public abstract GraphicsResult GetGraphics(
+            IWpfTextView view,
+            Geometry bounds,
+            TextFormattingRunProperties format
+        );
     }
 }

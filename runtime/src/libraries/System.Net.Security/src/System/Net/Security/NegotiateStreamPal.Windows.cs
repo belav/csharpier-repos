@@ -29,21 +29,31 @@ namespace System.Net.Security
                 SecurityContextTokenHandle? token = null;
                 try
                 {
-                    SafeDeleteContext? securityContext = context.GetContext(out SecurityStatusPal status);
+                    SafeDeleteContext? securityContext = context.GetContext(
+                        out SecurityStatusPal status
+                    );
                     if (status.ErrorCode != SecurityStatusPalErrorCode.OK)
                     {
-                        throw new Win32Exception((int)SecurityStatusAdapterPal.GetInteropFromSecurityStatusPal(status));
+                        throw new Win32Exception(
+                            (int)SecurityStatusAdapterPal.GetInteropFromSecurityStatusPal(status)
+                        );
                     }
 
                     name = QueryContextAssociatedName(securityContext!);
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(context, $"NTAuthentication: The context is associated with [{name}]");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(
+                            context,
+                            $"NTAuthentication: The context is associated with [{name}]"
+                        );
 
                     // This will return a client token when conducted authentication on server side.
                     // This token can be used for impersonation. We use it to create a WindowsIdentity and hand it out to the server app.
-                    Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)SSPIWrapper.QuerySecurityContextToken(
-                        GlobalSSPI.SSPIAuth,
-                        securityContext!,
-                        out token);
+                    Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
+                        SSPIWrapper.QuerySecurityContextToken(
+                            GlobalSSPI.SSPIAuth,
+                            securityContext!,
+                            out token
+                        );
                     if (winStatus != Interop.SECURITY_STATUS.OK)
                     {
                         throw new Win32Exception((int)winStatus);
@@ -72,11 +82,17 @@ namespace System.Net.Security
 
         internal static void ValidateImpersonationLevel(TokenImpersonationLevel impersonationLevel)
         {
-            if (impersonationLevel != TokenImpersonationLevel.Identification &&
-                impersonationLevel != TokenImpersonationLevel.Impersonation &&
-                impersonationLevel != TokenImpersonationLevel.Delegation)
+            if (
+                impersonationLevel != TokenImpersonationLevel.Identification
+                && impersonationLevel != TokenImpersonationLevel.Impersonation
+                && impersonationLevel != TokenImpersonationLevel.Delegation
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(impersonationLevel), impersonationLevel.ToString(), SR.net_auth_supported_impl_levels);
+                throw new ArgumentOutOfRangeException(
+                    nameof(impersonationLevel),
+                    impersonationLevel.ToString(),
+                    SR.net_auth_supported_impl_levels
+                );
             }
         }
     }

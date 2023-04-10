@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,44 +54,47 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class PeerTransportSecurityElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty credential_type;
+    [MonoTODO]
+    public sealed partial class PeerTransportSecurityElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty credential_type;
 
-		static PeerTransportSecurityElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			credential_type = new ConfigurationProperty ("credentialType",
-				typeof (PeerTransportCredentialType), "Password", null/* FIXME: get converter for PeerTransportCredentialType*/, null,
-				ConfigurationPropertyOptions.None);
+        static PeerTransportSecurityElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            credential_type = new ConfigurationProperty(
+                "credentialType",
+                typeof(PeerTransportCredentialType),
+                "Password",
+                null /* FIXME: get converter for PeerTransportCredentialType*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (credential_type);
-		}
+            properties.Add(credential_type);
+        }
 
-		public PeerTransportSecurityElement ()
-		{
-		}
+        public PeerTransportSecurityElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "credentialType",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Password"
+        )]
+        public PeerTransportCredentialType CredentialType
+        {
+            get { return (PeerTransportCredentialType)base[credential_type]; }
+            set { base[credential_type] = value; }
+        }
 
-		[ConfigurationProperty ("credentialType",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "Password")]
-		public PeerTransportCredentialType CredentialType {
-			get { return (PeerTransportCredentialType) base [credential_type]; }
-			set { base [credential_type] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

@@ -21,20 +21,25 @@ namespace System.Threading.Tasks.Sources.Tests
             return vts;
         }
 
-        public static ManualResetValueTaskSource<T> Delay<T>(int delayMs, T result, Exception error = null)
+        public static ManualResetValueTaskSource<T> Delay<T>(
+            int delayMs,
+            T result,
+            Exception error = null
+        )
         {
             var vts = new ManualResetValueTaskSource<T>();
-            Task.Delay(delayMs).ContinueWith(_ =>
-            {
-                if (error != null)
+            Task.Delay(delayMs)
+                .ContinueWith(_ =>
                 {
-                    vts.SetException(error);
-                }
-                else
-                {
-                    vts.SetResult(result);
-                }
-            });
+                    if (error != null)
+                    {
+                        vts.SetException(error);
+                    }
+                    else
+                    {
+                        vts.SetResult(result);
+                    }
+                });
             return vts;
         }
     }

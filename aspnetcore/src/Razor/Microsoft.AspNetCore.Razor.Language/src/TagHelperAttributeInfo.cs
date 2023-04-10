@@ -10,7 +10,8 @@ internal class TagHelperAttributeInfo
         string parameterName,
         AttributeStructure attributeStructure,
         bool bound,
-        bool isDirectiveAttribute)
+        bool isDirectiveAttribute
+    )
     {
         Name = name;
         ParameterName = parameterName;

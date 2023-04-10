@@ -17,14 +17,18 @@ using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
@@ -33,9 +37,8 @@ public class MultiApplicationTests : IISFunctionalTestBase
     private PublishedApplication _publishedApplication;
     private PublishedApplication _rootApplication;
 
-    public MultiApplicationTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public MultiApplicationTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task RunsTwoOutOfProcessApps()
@@ -79,7 +82,8 @@ public class MultiApplicationTests : IISFunctionalTestBase
         var result = await DeployAsync(parameters);
 
         // Modify hosting model of other app to be the opposite
-        var otherApp = firstApp == HostingModel.InProcess ? HostingModel.OutOfProcess : HostingModel.InProcess;
+        var otherApp =
+            firstApp == HostingModel.InProcess ? HostingModel.OutOfProcess : HostingModel.InProcess;
         SetHostingModel(_publishedApplication.Path, otherApp);
 
         var result1 = await result.HttpClient.GetAsync("/app1/HelloWorld");
@@ -93,7 +97,11 @@ public class MultiApplicationTests : IISFunctionalTestBase
             Assert.Contains("500.34", await result2.Content.ReadAsStringAsync());
         }
 
-        EventLogHelpers.VerifyEventLogEvent(result, "Mixed hosting model is not supported.", Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            result,
+            "Mixed hosting model is not supported.",
+            Logger
+        );
     }
 
     private void SetHostingModel(string directory, HostingModel model)
@@ -115,8 +123,7 @@ public class MultiApplicationTests : IISFunctionalTestBase
             .RequiredElement("sites")
             .RequiredElement("site");
 
-        var application = siteElement
-            .RequiredElement("application");
+        var application = siteElement.RequiredElement("application");
 
         application.SetAttributeValue("path", "/app1");
 
@@ -130,14 +137,18 @@ public class MultiApplicationTests : IISFunctionalTestBase
 
         var newApplication = new XElement(application);
         newApplication.SetAttributeValue("path", "/app2");
-        newApplication.RequiredElement("virtualDirectory")
+        newApplication
+            .RequiredElement("virtualDirectory")
             .SetAttributeValue("physicalPath", destination.FullName);
 
         siteElement.Add(newApplication);
 
         // IIS Express requires root application to exist
 
-        _rootApplication = new PublishedApplication(Helpers.CreateEmptyApplication(config, contentRoot), Logger);
+        _rootApplication = new PublishedApplication(
+            Helpers.CreateEmptyApplication(config, contentRoot),
+            Logger
+        );
     }
 
     private static string GetWebConfigLocation(string siteRoot)

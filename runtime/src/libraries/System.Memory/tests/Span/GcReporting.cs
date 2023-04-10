@@ -20,8 +20,8 @@ namespace System.SpanTests
             object[] objects = new object[objectCount];
             Random rng = new Random();
             var delegateTestCore =
-                new DelegateTestCoreDelegate(DelegateTest_Core) +
-                new DelegateTestCoreDelegate(DelegateTest_Core);
+                new DelegateTestCoreDelegate(DelegateTest_Core)
+                + new DelegateTestCoreDelegate(DelegateTest_Core);
 
             for (int i = 0; i < iterationCount; i++)
             {
@@ -30,7 +30,11 @@ namespace System.SpanTests
             }
         }
 
-        private delegate void DelegateTestCoreDelegate(Span<int> span, object[] objects, Random rng);
+        private delegate void DelegateTestCoreDelegate(
+            Span<int> span,
+            object[] objects,
+            Random rng
+        );
 
         private static void DelegateTest_Core(Span<int> span, object[] objects, Random rng)
         {

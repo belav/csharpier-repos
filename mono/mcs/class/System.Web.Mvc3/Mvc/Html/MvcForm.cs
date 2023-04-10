@@ -1,25 +1,33 @@
-﻿namespace System.Web.Mvc.Html {
+﻿namespace System.Web.Mvc.Html
+{
     using System;
     using System.IO;
 
-    public class MvcForm : IDisposable {
-
+    public class MvcForm : IDisposable
+    {
         private bool _disposed;
         private readonly FormContext _originalFormContext;
         private readonly ViewContext _viewContext;
         private readonly TextWriter _writer;
 
-        [Obsolete("The recommended alternative is the constructor MvcForm(ViewContext viewContext).", true /* error */)]
-        public MvcForm(HttpResponseBase httpResponse) {
-            if (httpResponse == null) {
+        [Obsolete(
+            "The recommended alternative is the constructor MvcForm(ViewContext viewContext).",
+            true /* error */
+        )]
+        public MvcForm(HttpResponseBase httpResponse)
+        {
+            if (httpResponse == null)
+            {
                 throw new ArgumentNullException("httpResponse");
             }
 
             _writer = httpResponse.Output;
         }
 
-        public MvcForm(ViewContext viewContext) {
-            if (viewContext == null) {
+        public MvcForm(ViewContext viewContext)
+        {
+            if (viewContext == null)
+            {
                 throw new ArgumentNullException("viewContext");
             }
 
@@ -31,27 +39,33 @@
             viewContext.FormContext = new FormContext();
         }
 
-        public void Dispose() {
-            Dispose(true /* disposing */);
+        public void Dispose()
+        {
+            Dispose(
+                true /* disposing */
+            );
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing) {
-            if (!_disposed) {
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
                 _disposed = true;
                 _writer.Write("</form>");
 
                 // output client validation and restore the original form context
-                if (_viewContext != null) {
+                if (_viewContext != null)
+                {
                     _viewContext.OutputClientValidation();
                     _viewContext.FormContext = _originalFormContext;
                 }
             }
         }
 
-        public void EndForm() {
+        public void EndForm()
+        {
             Dispose(true);
         }
-
     }
 }

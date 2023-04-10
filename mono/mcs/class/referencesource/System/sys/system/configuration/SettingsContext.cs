@@ -4,13 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-    using  System.Collections;
-    using  System.Collections.Specialized;
-    using  System.Runtime.Serialization;
-    using  System.Configuration.Provider;
-    using  System.Globalization;
-    using  System.IO;
+namespace System.Configuration
+{
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Runtime.Serialization;
+    using System.Configuration.Provider;
+    using System.Globalization;
+    using System.IO;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Xml.Serialization;
     using System.ComponentModel;
@@ -18,6 +19,7 @@ namespace System.Configuration {
     [Serializable()]
     public class SettingsContext : Hashtable
     {
-        public SettingsContext() : base() { }
+        public SettingsContext()
+            : base() { }
     }
 }

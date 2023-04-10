@@ -61,18 +61,15 @@ public class Handler
             count++;
         }
 
-
         if (count < testcount)
         {
             Console.WriteLine("ConstructorTest Failed!");
             return false;
         }
 
-
         Console.WriteLine("ConstructorTest Passed!");
         return true;
     }
-
 
     // should throw InvalidOperationException if removing when Count == 0
     public bool RemoveTest()
@@ -101,7 +98,6 @@ public class Handler
         Console.WriteLine("RemoveTest Failed!");
         return false;
     }
-
 
     // should throw InvalidOperationException if adding when Count == int.MaxValue
     // unfortunately this test takes too long to run (~30 mins on a 1.8MHz machine)
@@ -138,7 +134,6 @@ public class Handler
         return false;
     }
 
-
     public bool RunTest()
     {
         int count = 0;
@@ -159,7 +154,6 @@ public class Handler
 
         return (count == _totalTestCount);
     }
-
 
     public static int Main()
     {

@@ -15,13 +15,16 @@ namespace System.Runtime.Loader.Tests
     {
         private const string TestAssembly = "System.Runtime.Loader.Test.Assembly";
         private const string TestAssembly2 = "System.Runtime.Loader.Test.Assembly2";
-        private const string TestAssemblyNotSupported = "System.Runtime.Loader.Test.AssemblyNotSupported";
+        private const string TestAssemblyNotSupported =
+            "System.Runtime.Loader.Test.AssemblyNotSupported";
 
         [Fact]
         public static void GetAssemblyNameTest_ValidAssembly()
         {
             var expectedName = typeof(AssemblyLoadContextTest).Assembly.GetName();
-            var actualAsmName = AssemblyLoadContext.GetAssemblyName("System.Runtime.Loader.Tests.dll");
+            var actualAsmName = AssemblyLoadContext.GetAssemblyName(
+                "System.Runtime.Loader.Tests.dll"
+            );
             Assert.Equal(expectedName.FullName, actualAsmName.FullName);
 
             // Verify that the AssemblyName returned by GetAssemblyName can be used to load an assembly. System.Runtime would
@@ -34,7 +37,9 @@ namespace System.Runtime.Loader.Tests
         [Fact]
         public static void GetAssemblyNameTest_AssemblyNotFound()
         {
-            Assert.Throws<FileNotFoundException>(() => AssemblyLoadContext.GetAssemblyName("Non.Existing.Assembly.dll"));
+            Assert.Throws<FileNotFoundException>(
+                () => AssemblyLoadContext.GetAssemblyName("Non.Existing.Assembly.dll")
+            );
         }
 
         [Fact]
@@ -47,7 +52,10 @@ namespace System.Runtime.Loader.Tests
         public static void LoadFromAssemblyPath_PartiallyQualifiedPath_ThrowsArgumentException()
         {
             string path = Path.Combine("foo", "bar.dll");
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>("assemblyPath", () => (new AssemblyLoadContext("alc")).LoadFromAssemblyPath(path));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                "assemblyPath",
+                () => (new AssemblyLoadContext("alc")).LoadFromAssemblyPath(path)
+            );
             Assert.Contains(path, ex.Message);
         }
 
@@ -55,7 +63,10 @@ namespace System.Runtime.Loader.Tests
         public static void LoadFromNativeImagePath_PartiallyQualifiedPath_ThrowsArgumentException()
         {
             string path = Path.Combine("foo", "bar.dll");
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>("nativeImagePath", () => (new AssemblyLoadContext("alc")).LoadFromNativeImagePath(path, null));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                "nativeImagePath",
+                () => (new AssemblyLoadContext("alc")).LoadFromNativeImagePath(path, null)
+            );
             Assert.Contains(path, ex.Message);
         }
 
@@ -64,13 +75,21 @@ namespace System.Runtime.Loader.Tests
         {
             string path = Path.Combine("foo", "bar.dll");
             string rootedPath = Path.GetFullPath(Guid.NewGuid().ToString("N"));
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>("assemblyPath", () => (new AssemblyLoadContext("alc")).LoadFromNativeImagePath(rootedPath, path));
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
+                "assemblyPath",
+                () => (new AssemblyLoadContext("alc")).LoadFromNativeImagePath(rootedPath, path)
+            );
             Assert.Contains(path, ex.Message);
         }
 
         [Fact]
         [PlatformSpecific(~(TestPlatforms.iOS | TestPlatforms.tvOS))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51893", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51893",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public static void LoadAssemblyByPath_ValidUserAssembly()
         {
             var asmName = new AssemblyName(TestAssembly);
@@ -86,7 +105,12 @@ namespace System.Runtime.Loader.Tests
 
         [Fact]
         [PlatformSpecific(~(TestPlatforms.iOS | TestPlatforms.tvOS))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51893", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51893",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public static void LoadAssemblyByStream_ValidUserAssembly()
         {
             var asmName = new AssemblyName(TestAssembly);

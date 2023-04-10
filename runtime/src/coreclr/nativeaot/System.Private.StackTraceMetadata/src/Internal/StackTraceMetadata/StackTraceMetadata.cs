@@ -34,13 +34,17 @@ namespace Internal.StackTraceMetadata
         internal static void Initialize()
         {
             _perModuleMethodNameResolverHashtable = new PerModuleMethodNameResolverHashtable();
-            RuntimeAugments.InitializeStackTraceMetadataSupport(new StackTraceMetadataCallbacksImpl());
+            RuntimeAugments.InitializeStackTraceMetadataSupport(
+                new StackTraceMetadataCallbacksImpl()
+            );
         }
 
         /// <summary>
         /// Locate the containing module for a method and try to resolve its name based on start address.
         /// </summary>
-        public static unsafe string GetMethodNameFromStartAddressIfAvailable(IntPtr methodStartAddress)
+        public static unsafe string GetMethodNameFromStartAddressIfAvailable(
+            IntPtr methodStartAddress
+        )
         {
             IntPtr moduleStartAddress = RuntimeAugments.GetOSModuleFromPointer(methodStartAddress);
             int rva = (int)((byte*)methodStartAddress - (byte*)moduleStartAddress);
@@ -48,17 +52,24 @@ namespace Internal.StackTraceMetadata
             {
                 if (handle.OsModuleBase == moduleStartAddress)
                 {
-                    string name = _perModuleMethodNameResolverHashtable.GetOrCreateValue(handle.GetIntPtrUNSAFE()).GetMethodNameFromRvaIfAvailable(rva);
+                    string name = _perModuleMethodNameResolverHashtable
+                        .GetOrCreateValue(handle.GetIntPtrUNSAFE())
+                        .GetMethodNameFromRvaIfAvailable(rva);
                     if (name != null)
                         return name;
                 }
             }
 
             // We haven't found information in the stack trace metadata tables, but maybe reflection will have this
-            if (IsReflectionExecutionAvailable() && ReflectionExecution.TryGetMethodMetadataFromStartAddress(methodStartAddress,
-                out MetadataReader reader,
-                out TypeDefinitionHandle typeHandle,
-                out MethodHandle methodHandle))
+            if (
+                IsReflectionExecutionAvailable()
+                && ReflectionExecution.TryGetMethodMetadataFromStartAddress(
+                    methodStartAddress,
+                    out MetadataReader reader,
+                    out TypeDefinitionHandle typeHandle,
+                    out MethodHandle methodHandle
+                )
+            )
             {
                 return MethodNameFormatter.FormatMethodName(reader, typeHandle, methodHandle);
             }
@@ -72,7 +83,8 @@ namespace Internal.StackTraceMetadata
         /// <summary>
         /// This hashtable supports mapping from module start addresses to per-module method name resolvers.
         /// </summary>
-        private sealed class PerModuleMethodNameResolverHashtable : LockFreeReaderHashtable<IntPtr, PerModuleMethodNameResolver>
+        private sealed class PerModuleMethodNameResolverHashtable
+            : LockFreeReaderHashtable<IntPtr, PerModuleMethodNameResolver>
         {
             /// <summary>
             /// Given a key, compute a hash code. This function must be thread safe.
@@ -105,7 +117,10 @@ namespace Internal.StackTraceMetadata
             /// Compare a value with another value. Return true if values are equal.
             /// This function must be thread safe.
             /// </summary>
-            protected override bool CompareValueToValue(PerModuleMethodNameResolver value1, PerModuleMethodNameResolver value2)
+            protected override bool CompareValueToValue(
+                PerModuleMethodNameResolver value1,
+                PerModuleMethodNameResolver value2
+            )
             {
                 return value1.ModuleAddress == value2.ModuleAddress;
             }
@@ -154,7 +169,10 @@ namespace Internal.StackTraceMetadata
             /// <summary>
             /// Publicly exposed module address property.
             /// </summary>
-            public IntPtr ModuleAddress { get { return _moduleAddress; } }
+            public IntPtr ModuleAddress
+            {
+                get { return _moduleAddress; }
+            }
 
             /// <summary>
             /// Construct the per-module resolver by looking up the necessary blobs.
@@ -171,34 +189,42 @@ namespace Internal.StackTraceMetadata
                     return;
                 }
 
-                NativeFormatModuleInfo nativeFormatModuleInfo = moduleInfo as NativeFormatModuleInfo;
+                NativeFormatModuleInfo nativeFormatModuleInfo =
+                    moduleInfo as NativeFormatModuleInfo;
                 if (nativeFormatModuleInfo == null)
                 {
                     // It is not a native format module
                     return;
                 }
 
-                byte *metadataBlob;
+                byte* metadataBlob;
                 uint metadataBlobSize;
 
-                byte *rvaToTokenMapBlob;
+                byte* rvaToTokenMapBlob;
                 uint rvaToTokenMapBlobSize;
 
-                if (nativeFormatModuleInfo.TryFindBlob(
+                if (
+                    nativeFormatModuleInfo.TryFindBlob(
                         (int)ReflectionMapBlob.EmbeddedMetadata,
                         out metadataBlob,
-                        out metadataBlobSize) &&
-                    nativeFormatModuleInfo.TryFindBlob(
+                        out metadataBlobSize
+                    )
+                    && nativeFormatModuleInfo.TryFindBlob(
                         (int)ReflectionMapBlob.BlobIdStackTraceMethodRvaToTokenMapping,
                         out rvaToTokenMapBlob,
-                        out rvaToTokenMapBlobSize))
+                        out rvaToTokenMapBlobSize
+                    )
+                )
                 {
-                    _metadataReader = new MetadataReader(new IntPtr(metadataBlob), (int)metadataBlobSize);
+                    _metadataReader = new MetadataReader(
+                        new IntPtr(metadataBlob),
+                        (int)metadataBlobSize
+                    );
 
                     // RVA to token map consists of pairs of integers (method RVA - token)
                     int rvaToTokenMapEntryCount = (int)(rvaToTokenMapBlobSize / (2 * sizeof(int)));
                     _methodRvaToTokenMap = new Dictionary<int, int>(rvaToTokenMapEntryCount);
-                    PopulateRvaToTokenMap(handle, (int *)rvaToTokenMapBlob, rvaToTokenMapEntryCount);
+                    PopulateRvaToTokenMap(handle, (int*)rvaToTokenMapBlob, rvaToTokenMapEntryCount);
                 }
             }
 
@@ -209,7 +235,11 @@ namespace Internal.StackTraceMetadata
             /// <param name="handle">Module to use to construct the mapping</param>
             /// <param name="rvaToTokenMap">List of RVA - token pairs</param>
             /// <param name="entryCount">Number of the RVA - token pairs in the list</param>
-            private unsafe void PopulateRvaToTokenMap(TypeManagerHandle handle, int *rvaToTokenMap, int entryCount)
+            private unsafe void PopulateRvaToTokenMap(
+                TypeManagerHandle handle,
+                int* rvaToTokenMap,
+                int entryCount
+            )
             {
                 for (int entryIndex = 0; entryIndex < entryCount; entryIndex++)
                 {
@@ -239,7 +269,10 @@ namespace Internal.StackTraceMetadata
                     return null;
                 }
 
-                return MethodNameFormatter.FormatMethodName(_metadataReader, Handle.FromIntToken(rawToken));
+                return MethodNameFormatter.FormatMethodName(
+                    _metadataReader,
+                    Handle.FromIntToken(rawToken)
+                );
             }
         }
     }

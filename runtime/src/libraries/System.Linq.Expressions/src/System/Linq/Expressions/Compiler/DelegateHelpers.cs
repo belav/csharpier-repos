@@ -18,7 +18,10 @@ namespace System.Linq.Expressions.Compiler
         /// We take the read-only collection of Expression explicitly to avoid allocating memory (an array
         /// of types) on lookup of delegate types.
         /// </summary>
-        internal static Type MakeCallSiteDelegate(ReadOnlyCollection<Expression> types, Type returnType)
+        internal static Type MakeCallSiteDelegate(
+            ReadOnlyCollection<Expression> types,
+            Type returnType
+        )
         {
             lock (_DelegateCache)
             {
@@ -115,13 +118,29 @@ namespace System.Linq.Expressions.Compiler
                 Type[] parameters = types.RemoveLast();
                 Type[] delegateCtorSignature = { typeof(object), typeof(IntPtr) };
 
-                const MethodAttributes ctorAttributes = MethodAttributes.RTSpecialName | MethodAttributes.HideBySig | MethodAttributes.Public;
-                const MethodImplAttributes implAttributes = MethodImplAttributes.Runtime | MethodImplAttributes.Managed;
-                const MethodAttributes invokeAttributes = MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual;
+                const MethodAttributes ctorAttributes =
+                    MethodAttributes.RTSpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.Public;
+                const MethodImplAttributes implAttributes =
+                    MethodImplAttributes.Runtime | MethodImplAttributes.Managed;
+                const MethodAttributes invokeAttributes =
+                    MethodAttributes.Public
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Virtual;
 
                 TypeBuilder builder = AssemblyGen.DefineDelegateType("Delegate" + types.Length);
-                builder.DefineConstructor(ctorAttributes, CallingConventions.Standard, delegateCtorSignature).SetImplementationFlags(implAttributes);
-                builder.DefineMethod("Invoke", invokeAttributes, returnType, parameters).SetImplementationFlags(implAttributes);
+                builder
+                    .DefineConstructor(
+                        ctorAttributes,
+                        CallingConventions.Standard,
+                        delegateCtorSignature
+                    )
+                    .SetImplementationFlags(implAttributes);
+                builder
+                    .DefineMethod("Invoke", invokeAttributes, returnType, parameters)
+                    .SetImplementationFlags(implAttributes);
                 return builder.CreateTypeInfo();
             }
             else

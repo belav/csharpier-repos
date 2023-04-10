@@ -15,7 +15,6 @@ namespace System.IdentityModel.Selectors
     //
     class ThrowOnMultipleAssignment<T>
     {
-
         string m_errorString;
         T m_value;
 
@@ -42,11 +41,9 @@ namespace System.IdentityModel.Selectors
         //
         public ThrowOnMultipleAssignment(string errorString)
         {
-
             IDT.DebugAssert(!String.IsNullOrEmpty(errorString), "Must have an error string");
 
             m_errorString = errorString;
         }
     }
 }
-

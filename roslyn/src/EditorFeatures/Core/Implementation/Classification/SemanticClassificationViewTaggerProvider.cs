@@ -35,24 +35,38 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
     [Export(typeof(IViewTaggerProvider))]
     [TagType(typeof(IClassificationTag))]
     [ContentType(ContentTypeNames.RoslynContentType)]
-    internal partial class SemanticClassificationViewTaggerProvider : AsynchronousViewTaggerProvider<IClassificationTag>
+    internal partial class SemanticClassificationViewTaggerProvider
+        : AsynchronousViewTaggerProvider<IClassificationTag>
     {
         private readonly ClassificationTypeMap _typeMap;
         private readonly IGlobalOptionService _globalOptions;
 
         // We want to track text changes so that we can try to only reclassify a method body if
         // all edits were contained within one.
-        protected override TaggerTextChangeBehavior TextChangeBehavior => TaggerTextChangeBehavior.TrackTextChanges;
-        protected override IEnumerable<Option2<bool>> Options => SpecializedCollections.SingletonEnumerable(InternalFeatureOnOffOptions.SemanticColorizer);
+        protected override TaggerTextChangeBehavior TextChangeBehavior =>
+            TaggerTextChangeBehavior.TrackTextChanges;
+        protected override IEnumerable<Option2<bool>> Options =>
+            SpecializedCollections.SingletonEnumerable(
+                InternalFeatureOnOffOptions.SemanticColorizer
+            );
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public SemanticClassificationViewTaggerProvider(
             IThreadingContext threadingContext,
             ClassificationTypeMap typeMap,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, globalOptions, listenerProvider.GetListener(FeatureAttribute.Classification))
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                globalOptions,
+                listenerProvider.GetListener(FeatureAttribute.Classification)
+            )
         {
             _typeMap = typeMap;
             _globalOptions = globalOptions;
@@ -60,13 +74,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
         protected override TaggerDelay EventChangeDelay => TaggerDelay.Short;
 
-        protected override ITaggerEventSource CreateEventSource(ITextView textView, ITextBuffer subjectBuffer)
+        protected override ITaggerEventSource CreateEventSource(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
         {
             this.AssertIsForeground();
 
             // Note: we don't listen for OnTextChanged.  They'll get reported by the ViewSpan changing and also the
-            // SemanticChange notification. 
-            // 
+            // SemanticChange notification.
+            //
             // Note: because we use frozen-partial documents for semantic classification, we may end up with incomplete
             // semantics (esp. during solution load).  Because of this, we also register to hear when the full
             // compilation is available so that reclassify and bring ourselves up to date.
@@ -76,10 +93,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 TaggerEventSources.OnViewSpanChanged(ThreadingContext, textView),
                 TaggerEventSources.OnWorkspaceChanged(subjectBuffer, this.AsyncListener),
                 TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, ClassificationOptions.Metadata.ClassifyReassignedVariables));
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    ClassificationOptions.Metadata.ClassifyReassignedVariables
+                )
+            );
         }
 
-        protected override IEnumerable<SnapshotSpan> GetSpansToTag(ITextView textView, ITextBuffer subjectBuffer)
+        protected override IEnumerable<SnapshotSpan> GetSpansToTag(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
         {
             this.AssertIsForeground();
 
@@ -96,7 +120,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         }
 
         protected override Task ProduceTagsAsync(
-            TaggerContext<IClassificationTag> context, CancellationToken cancellationToken)
+            TaggerContext<IClassificationTag> context,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(context.SpansToTag.IsSingle());
 
@@ -115,19 +141,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             // The LSP client will handle producing tags when running under the LSP editor.
             // Our tagger implementation should return nothing to prevent conflicts.
-            var workspaceContextService = document.Project.Solution.Workspace.Services.GetRequiredService<IWorkspaceContextService>();
+            var workspaceContextService =
+                document.Project.Solution.Workspace.Services.GetRequiredService<IWorkspaceContextService>();
             if (workspaceContextService?.IsInLspEditorContext() == true)
                 return Task.CompletedTask;
 
             // If the LSP semantic tokens feature flag is enabled, return nothing to prevent conflicts.
-            var isLspSemanticTokensEnabled = _globalOptions.GetOption(LspOptions.LspSemanticTokensFeatureFlag);
+            var isLspSemanticTokensEnabled = _globalOptions.GetOption(
+                LspOptions.LspSemanticTokensFeatureFlag
+            );
             if (isLspSemanticTokensEnabled)
             {
                 return Task.CompletedTask;
             }
 
             return SemanticClassificationUtilities.ProduceTagsAsync(
-                context, spanToTag, classificationService, _typeMap, cancellationToken);
+                context,
+                spanToTag,
+                classificationService,
+                _typeMap,
+                cancellationToken
+            );
         }
     }
 }

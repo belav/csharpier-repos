@@ -21,7 +21,12 @@ internal static unsafe class TokenBindingUtil
         // signature algorithm, key data). We'll strip off the token binding type and
         // return the remainder (starting with the hash algorithm) as an opaque blob.
         byte[] retVal = new byte[checked(pTokenBindingResultData->identifierSize - 1)];
-        Marshal.Copy((IntPtr)(&pTokenBindingResultData->identifierData->hashAlgorithm), retVal, 0, retVal.Length);
+        Marshal.Copy(
+            (IntPtr)(&pTokenBindingResultData->identifierData->hashAlgorithm),
+            retVal,
+            0,
+            retVal.Length
+        );
         return retVal;
     }
 
@@ -29,7 +34,10 @@ internal static unsafe class TokenBindingUtil
     /// Returns the 'provided' token binding identifier, optionally also returning the
     /// 'referred' token binding identifier. Returns null on failure.
     /// </summary>
-    public static byte[]? GetProvidedTokenIdFromBindingInfo(HTTP_REQUEST_TOKEN_BINDING_INFO* pTokenBindingInfo, out byte[]? referredId)
+    public static byte[]? GetProvidedTokenIdFromBindingInfo(
+        HTTP_REQUEST_TOKEN_BINDING_INFO* pTokenBindingInfo,
+        out byte[]? referredId
+    )
     {
         byte[]? providedId = null;
         referredId = null;
@@ -41,7 +49,8 @@ internal static unsafe class TokenBindingUtil
             pTokenBindingInfo->KeyType,
             pTokenBindingInfo->TlsUnique,
             pTokenBindingInfo->TlsUniqueSize,
-            out handle);
+            out handle
+        );
 
         // No match found or there was an error?
         if (status != 0 || handle == null || handle.IsInvalid)
@@ -52,11 +61,15 @@ internal static unsafe class TokenBindingUtil
         using (handle)
         {
             // Find the first 'provided' and 'referred' types.
-            TOKENBINDING_RESULT_LIST* pResultList = (TOKENBINDING_RESULT_LIST*)handle.DangerousGetHandle();
+            TOKENBINDING_RESULT_LIST* pResultList = (TOKENBINDING_RESULT_LIST*)
+                handle.DangerousGetHandle();
             for (int i = 0; i < pResultList->resultCount; i++)
             {
                 TOKENBINDING_RESULT_DATA* pThisResultData = &pResultList->resultData[i];
-                if (pThisResultData->identifierData->bindingType == TOKENBINDING_TYPE.TOKENBINDING_TYPE_PROVIDED)
+                if (
+                    pThisResultData->identifierData->bindingType
+                    == TOKENBINDING_TYPE.TOKENBINDING_TYPE_PROVIDED
+                )
                 {
                     if (providedId != null)
                     {
@@ -64,7 +77,10 @@ internal static unsafe class TokenBindingUtil
                     }
                     providedId = ExtractIdentifierBlob(pThisResultData);
                 }
-                else if (pThisResultData->identifierData->bindingType == TOKENBINDING_TYPE.TOKENBINDING_TYPE_REFERRED)
+                else if (
+                    pThisResultData->identifierData->bindingType
+                    == TOKENBINDING_TYPE.TOKENBINDING_TYPE_REFERRED
+                )
                 {
                     if (referredId != null)
                     {

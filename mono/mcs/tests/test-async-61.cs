@@ -3,24 +3,27 @@ using System;
 
 class X
 {
-        public static void Main ()
-        {
-                new X ().Foo ().Wait ();
-        }
+    public static void Main()
+    {
+        new X().Foo().Wait();
+    }
 
-        async Task Foo ()
+    async Task Foo()
+    {
+        await Task.Run(async () =>
         {
-                await Task.Run (async () => {
-                        for (var count = 1; count < 5; count++) {
-                                Invoke (() => {
-                                        Console.WriteLine ("{0}", count);
-                                });
-                        }
+            for (var count = 1; count < 5; count++)
+            {
+                Invoke(() =>
+                {
+                    Console.WriteLine("{0}", count);
                 });
-        }
+            }
+        });
+    }
 
-        void Invoke (Action a)
-        {
-                a ();
-        }
+    void Invoke(Action a)
+    {
+        a();
+    }
 }

@@ -16,6 +16,7 @@ public class Runtime_77886
     public static sbyte s_11;
     public static uint s_17;
     public static short s_18;
+
     public static int Main()
     {
         bool vr6 = default(bool);

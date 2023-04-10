@@ -31,24 +31,58 @@ namespace ILCompiler
         private NodeFactory _factory;
 
         private DependencyList _dependencies = new DependencyList();
-        public DependencyList Dependencies { get => _dependencies; }
+        public DependencyList Dependencies
+        {
+            get => _dependencies;
+        }
 
-        public DescriptorMarker(NodeFactory factory, Stream documentStream, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
-            : base(factory.TypeSystemContext, documentStream, xmlDocumentLocation, featureSwitchValues)
+        public DescriptorMarker(
+            NodeFactory factory,
+            Stream documentStream,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
+            : base(
+                factory.TypeSystemContext,
+                documentStream,
+                xmlDocumentLocation,
+                featureSwitchValues
+            )
         {
             _dependencies = new DependencyList();
             _factory = factory;
         }
 
-        public DescriptorMarker(NodeFactory factory, Stream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
-            : base(factory.TypeSystemContext, documentStream, resource, resourceAssembly, xmlDocumentLocation, featureSwitchValues)
+        public DescriptorMarker(
+            NodeFactory factory,
+            Stream documentStream,
+            ManifestResource resource,
+            ModuleDesc resourceAssembly,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
+            : base(
+                factory.TypeSystemContext,
+                documentStream,
+                resource,
+                resourceAssembly,
+                xmlDocumentLocation,
+                featureSwitchValues
+            )
         {
             _factory = factory;
         }
 
-        protected override AllowedAssemblies AllowedAssemblySelector { get => AllowedAssemblies.AnyAssembly; }
+        protected override AllowedAssemblies AllowedAssemblySelector
+        {
+            get => AllowedAssemblies.AnyAssembly;
+        }
 
-        protected override void ProcessAssembly(ModuleDesc assembly, XPathNavigator nav, bool warnOnUnresolvedTypes)
+        protected override void ProcessAssembly(
+            ModuleDesc assembly,
+            XPathNavigator nav,
+            bool warnOnUnresolvedTypes
+        )
         {
             if (GetTypePreserve(nav) == TypePreserve.All)
             {
@@ -67,7 +101,12 @@ namespace ILCompiler
 
         private void ProcessNamespaces(ModuleDesc assembly, XPathNavigator nav)
         {
-            foreach (XPathNavigator namespaceNav in nav.SelectChildren(NamespaceElementName, XmlNamespace))
+            foreach (
+                XPathNavigator namespaceNav in nav.SelectChildren(
+                    NamespaceElementName,
+                    XmlNamespace
+                )
+            )
             {
                 if (!ShouldProcessElement(namespaceNav))
                     continue;
@@ -92,9 +131,14 @@ namespace ILCompiler
 
         private void MarkAndPreserve(TypeDesc type, XPathNavigator nav, TypePreserve preserve)
         {
-            var bindingOptions = preserve switch {
-                TypePreserve.Methods => DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods,
-                TypePreserve.Fields => DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields,
+            var bindingOptions = preserve switch
+            {
+                TypePreserve.Methods
+                    => DynamicallyAccessedMemberTypes.PublicMethods
+                        | DynamicallyAccessedMemberTypes.NonPublicMethods,
+                TypePreserve.Fields
+                    => DynamicallyAccessedMemberTypes.PublicFields
+                        | DynamicallyAccessedMemberTypes.NonPublicFields,
                 TypePreserve.All => DynamicallyAccessedMemberTypes.All,
                 _ => DynamicallyAccessedMemberTypes.None,
             };
@@ -105,25 +149,60 @@ namespace ILCompiler
                 switch (member)
                 {
                     case MethodDesc m:
-                        RootingHelpers.TryGetDependenciesForReflectedMethod(ref _dependencies, _factory, m, reason);
+                        RootingHelpers.TryGetDependenciesForReflectedMethod(
+                            ref _dependencies,
+                            _factory,
+                            m,
+                            reason
+                        );
                         break;
                     case FieldDesc field:
-                        RootingHelpers.TryGetDependenciesForReflectedField(ref _dependencies, _factory, field, reason);
+                        RootingHelpers.TryGetDependenciesForReflectedField(
+                            ref _dependencies,
+                            _factory,
+                            field,
+                            reason
+                        );
                         break;
                     case MetadataType nestedType:
-                        RootingHelpers.TryGetDependenciesForReflectedType(ref _dependencies, _factory, nestedType, reason);
+                        RootingHelpers.TryGetDependenciesForReflectedType(
+                            ref _dependencies,
+                            _factory,
+                            nestedType,
+                            reason
+                        );
                         break;
                     case PropertyPseudoDesc property:
                         if (property.GetMethod != null)
-                            RootingHelpers.TryGetDependenciesForReflectedMethod(ref _dependencies, _factory, property.GetMethod, reason);
+                            RootingHelpers.TryGetDependenciesForReflectedMethod(
+                                ref _dependencies,
+                                _factory,
+                                property.GetMethod,
+                                reason
+                            );
                         if (property.SetMethod != null)
-                            RootingHelpers.TryGetDependenciesForReflectedMethod(ref _dependencies, _factory, property.SetMethod, reason);
+                            RootingHelpers.TryGetDependenciesForReflectedMethod(
+                                ref _dependencies,
+                                _factory,
+                                property.SetMethod,
+                                reason
+                            );
                         break;
                     case EventPseudoDesc @event:
                         if (@event.AddMethod != null)
-                            RootingHelpers.TryGetDependenciesForReflectedMethod(ref _dependencies, _factory, @event.AddMethod, reason);
+                            RootingHelpers.TryGetDependenciesForReflectedMethod(
+                                ref _dependencies,
+                                _factory,
+                                @event.AddMethod,
+                                reason
+                            );
                         if (@event.RemoveMethod != null)
-                            RootingHelpers.TryGetDependenciesForReflectedMethod(ref _dependencies, _factory, @event.RemoveMethod, reason);
+                            RootingHelpers.TryGetDependenciesForReflectedMethod(
+                                ref _dependencies,
+                                _factory,
+                                @event.RemoveMethod,
+                                reason
+                            );
                         break;
                     default:
                         Debug.Fail(member.GetType().ToString());
@@ -177,7 +256,12 @@ namespace ILCompiler
             if (!required)
                 return;
 
-            RootingHelpers.TryGetDependenciesForReflectedType(ref _dependencies, _factory, type, "member marked via descriptor");
+            RootingHelpers.TryGetDependenciesForReflectedType(
+                ref _dependencies,
+                _factory,
+                type,
+                "member marked via descriptor"
+            );
 
 #if false
             // Getting the dependencies of a nested type should mark the rest, this code is not needed
@@ -216,7 +300,12 @@ namespace ILCompiler
             _dependencies.Add(_factory.ReflectableField(field), "field kept due to descriptor");
         }
 
-        protected override void ProcessMethod(TypeDesc type, MethodDesc method, XPathNavigator nav, object? customData)
+        protected override void ProcessMethod(
+            TypeDesc type,
+            MethodDesc method,
+            XPathNavigator nav,
+            object? customData
+        )
         {
             /*if (_context.Annotations.IsMarked(method))
             {
@@ -228,15 +317,26 @@ namespace ILCompiler
             if (customData is bool required && !required)
             {
                 //TODO: Add a conditional dependency if the type is used also mark the method
-                _dependencies.Add(_factory.ReflectableMethod(method), "method kept due to descriptor");
+                _dependencies.Add(
+                    _factory.ReflectableMethod(method),
+                    "method kept due to descriptor"
+                );
             }
             else
             {
-                _dependencies.Add(_factory.ReflectableMethod(method), "method kept due to descriptor");
+                _dependencies.Add(
+                    _factory.ReflectableMethod(method),
+                    "method kept due to descriptor"
+                );
             }
         }
 
-        private void ProcessMethodIfNotNull(TypeDesc type, MethodDesc method, XPathNavigator nav, object? customData)
+        private void ProcessMethodIfNotNull(
+            TypeDesc type,
+            MethodDesc method,
+            XPathNavigator nav,
+            object? customData
+        )
         {
             if (method == null)
                 return;
@@ -254,7 +354,12 @@ namespace ILCompiler
             return null;
         }
 
-        protected override void ProcessEvent(TypeDesc type, EventPseudoDesc @event, XPathNavigator nav, object? customData)
+        protected override void ProcessEvent(
+            TypeDesc type,
+            EventPseudoDesc @event,
+            XPathNavigator nav,
+            object? customData
+        )
         {
             /*if (_context.Annotations.IsMarked(@event))
             {
@@ -266,7 +371,13 @@ namespace ILCompiler
             ProcessMethodIfNotNull(type, @event.RaiseMethod, nav, customData);
         }
 
-        protected override void ProcessProperty(TypeDesc type, PropertyPseudoDesc property, XPathNavigator nav, object? customData, bool fromSignature)
+        protected override void ProcessProperty(
+            TypeDesc type,
+            PropertyPseudoDesc property,
+            XPathNavigator nav,
+            object? customData,
+            bool fromSignature
+        )
         {
             string[] accessors = fromSignature ? GetAccessors(nav) : _accessorsAll;
 
@@ -313,7 +424,9 @@ namespace ILCompiler
             if (accessorsValue != null)
             {
                 string[] accessors = accessorsValue.Split(
-                    _accessorsSep, StringSplitOptions.RemoveEmptyEntries);
+                    _accessorsSep,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
 
                 if (accessors.Length > 0)
                 {
@@ -326,9 +439,23 @@ namespace ILCompiler
             return _accessorsAll;
         }
 
-        public static DependencyList GetDependencies(NodeFactory factory, Stream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
+        public static DependencyList GetDependencies(
+            NodeFactory factory,
+            Stream documentStream,
+            ManifestResource resource,
+            ModuleDesc resourceAssembly,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
         {
-            var descriptor = new DescriptorMarker(factory, documentStream, resource, resourceAssembly, xmlDocumentLocation, featureSwitchValues);
+            var descriptor = new DescriptorMarker(
+                factory,
+                documentStream,
+                resource,
+                resourceAssembly,
+                xmlDocumentLocation,
+                featureSwitchValues
+            );
             descriptor.ProcessXml(false);
             return descriptor.Dependencies;
         }

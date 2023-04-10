@@ -13,9 +13,7 @@ namespace System.Activities.Statements
 
     public sealed class CreateBookmarkScope : NativeActivity<BookmarkScope>
     {
-        public CreateBookmarkScope()
-        {
-        }
+        public CreateBookmarkScope() { }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {

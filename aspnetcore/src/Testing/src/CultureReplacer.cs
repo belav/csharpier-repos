@@ -21,11 +21,16 @@ public class CultureReplacer : IDisposable
     // We want to be able to find issues where the InvariantCulture is used, but a specific culture should be.
     //
     // UICulture => Language
-    [SuppressMessage("ApiDesign", "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads", Justification = "Required to maintain compatibility")]
-    public CultureReplacer(string culture = _defaultCultureName, string uiCulture = _defaultUICultureName)
-        : this(new CultureInfo(culture), new CultureInfo(uiCulture))
-    {
-    }
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads",
+        Justification = "Required to maintain compatibility"
+    )]
+    public CultureReplacer(
+        string culture = _defaultCultureName,
+        string uiCulture = _defaultUICultureName
+    )
+        : this(new CultureInfo(culture), new CultureInfo(uiCulture)) { }
 
     public CultureReplacer(CultureInfo culture, CultureInfo uiCulture)
     {
@@ -70,8 +75,10 @@ public class CultureReplacer : IDisposable
     {
         if (disposing)
         {
-            Assert.True(Environment.CurrentManagedThreadId == _threadId,
-                "The current thread is not the same as the thread invoking the constructor. This should never happen.");
+            Assert.True(
+                Environment.CurrentManagedThreadId == _threadId,
+                "The current thread is not the same as the thread invoking the constructor. This should never happen."
+            );
             CultureInfo.CurrentCulture = _originalCulture;
             CultureInfo.CurrentUICulture = _originalUICulture;
         }

@@ -16,8 +16,17 @@ namespace Moq
 
         private Func<object> getter;
 
-        public StubbedPropertyGetterSetup(Mock mock, LambdaExpression originalExpression, MethodInfo method, Func<object> getter)
-            : base(originalExpression: null, mock, new InvocationShape(originalExpression, method, noArguments))
+        public StubbedPropertyGetterSetup(
+            Mock mock,
+            LambdaExpression originalExpression,
+            MethodInfo method,
+            Func<object> getter
+        )
+            : base(
+                originalExpression: null,
+                mock,
+                new InvocationShape(originalExpression, method, noArguments)
+            )
         {
             this.getter = getter;
 
@@ -35,8 +44,6 @@ namespace Moq
             return true;
         }
 
-        protected override void VerifySelf()
-        {
-        }
+        protected override void VerifySelf() { }
     }
 }

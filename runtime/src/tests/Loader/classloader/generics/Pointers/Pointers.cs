@@ -9,9 +9,13 @@ using Xunit;
 
 unsafe class Pointers
 {
-    private struct Struct { public int Num; }
+    private struct Struct
+    {
+        public int Num;
+    }
 
-    private class Test<T> where T : unmanaged
+    private class Test<T>
+        where T : unmanaged
     {
         public T Pointer(T* pointer) => *pointer;
 
@@ -24,16 +28,18 @@ unsafe class Pointers
             return res;
         }
 
-        public void FunctionPointer(delegate*<T, void> func) => func(default);
+        public void FunctionPointer(delegate* <T, void> func) => func(default);
 
-        public void FunctionPointerArray(delegate*<T, void>[] array)
+        public void FunctionPointerArray(delegate* <T, void>[] array)
         {
             foreach (var func in array)
                 func(default);
         }
     }
 
-    private class TestTwoParams<T, U> where T : unmanaged where U : unmanaged
+    private class TestTwoParams<T, U>
+        where T : unmanaged
+        where U : unmanaged
     {
         public (T, U) Pointer(T* pointer1, U* pointer2) => (*pointer1, *pointer2);
 
@@ -50,13 +56,13 @@ unsafe class Pointers
             return (res1, res2);
         }
 
-        public void FunctionPointer(delegate*<T, void> func1, delegate*<U, void> func2)
+        public void FunctionPointer(delegate* <T, void> func1, delegate* <U, void> func2)
         {
             func1(default);
             func2(default);
         }
 
-        public void FunctionPointerArray(delegate*<T, void>[] array1, delegate*<U, void>[] array2)
+        public void FunctionPointerArray(delegate* <T, void>[] array1, delegate* <U, void>[] array2)
         {
             foreach (var func in array1)
                 func(default);
@@ -170,7 +176,6 @@ unsafe class Pointers
             Assert.Equal(2, s_takeIntCallCount);
             Assert.Equal(2, s_takeStructCallCount);
         }
-
     }
 
     [Fact]
@@ -184,8 +189,8 @@ unsafe class Pointers
     private static void FunctionPointerArrayImpl()
     {
         int length = 5;
-        delegate*<int, void>[] intFuncArray = new delegate*<int, void>[length];
-        delegate*<Struct, void>[] structFuncArray = new delegate*<Struct, void>[length];
+        delegate* <int, void>[] intFuncArray = new delegate* <int, void>[length];
+        delegate* <Struct, void>[] structFuncArray = new delegate* <Struct, void>[length];
         for (int i = 0; i < length; i++)
         {
             intFuncArray[i] = &TakeInt;
@@ -213,8 +218,10 @@ unsafe class Pointers
     }
 
     static int s_takeIntCallCount = 0;
+
     private static void TakeInt(int _) => s_takeIntCallCount++;
 
     static int s_takeStructCallCount = 0;
+
     private static void TakeStruct(Struct _) => s_takeStructCallCount++;
 }

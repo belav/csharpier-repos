@@ -36,12 +36,20 @@ namespace Internal.Cryptography
             return (byte[])(src.Clone());
         }
 
-        public static int GetPaddingSize(this SymmetricAlgorithm algorithm, CipherMode mode, int feedbackSizeInBits)
+        public static int GetPaddingSize(
+            this SymmetricAlgorithm algorithm,
+            CipherMode mode,
+            int feedbackSizeInBits
+        )
         {
             return (mode == CipherMode.CFB ? feedbackSizeInBits : algorithm.BlockSize) / 8;
         }
 
-        internal static bool TryCopyToDestination(this ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        internal static bool TryCopyToDestination(
+            this ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (source.TryCopyTo(destination))
             {

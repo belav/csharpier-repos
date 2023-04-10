@@ -11,14 +11,13 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 internal sealed class ConfigureClients : IConfigureOptions<ApiAuthorizationOptions>
 {
     private const string DefaultLocalSPARelativeRedirectUri = "/authentication/login-callback";
-    private const string DefaultLocalSPARelativePostLogoutRedirectUri = "/authentication/logout-callback";
+    private const string DefaultLocalSPARelativePostLogoutRedirectUri =
+        "/authentication/logout-callback";
 
     private readonly IConfiguration _configuration;
     private readonly ILogger<ConfigureClients> _logger;
 
-    public ConfigureClients(
-        IConfiguration configuration,
-        ILogger<ConfigureClients> logger)
+    public ConfigureClients(IConfiguration configuration, ILogger<ConfigureClients> logger)
     {
         _configuration = configuration;
         _logger = logger;
@@ -39,7 +38,11 @@ internal sealed class ConfigureClients : IConfigureOptions<ApiAuthorizationOptio
         {
             foreach (var kvp in data)
             {
-                _logger.LogInformation(LoggerEventIds.ConfiguringClient, "Configuring client '{ClientName}'.", kvp.Key);
+                _logger.LogInformation(
+                    LoggerEventIds.ConfiguringClient,
+                    "Configuring client '{ClientName}'.",
+                    kvp.Key
+                );
                 var name = kvp.Key;
                 var definition = kvp.Value;
 
@@ -55,7 +58,9 @@ internal sealed class ConfigureClients : IConfigureOptions<ApiAuthorizationOptio
                         yield return GetNativeApp(name);
                         break;
                     default:
-                        throw new InvalidOperationException($"Type '{definition.Profile}' is not supported.");
+                        throw new InvalidOperationException(
+                            $"Type '{definition.Profile}' is not supported."
+                        );
                 }
             }
         }
@@ -63,32 +68,46 @@ internal sealed class ConfigureClients : IConfigureOptions<ApiAuthorizationOptio
 
     private static Client GetSPA(string name, ClientDefinition definition)
     {
-        if (definition.RedirectUri == null ||
-            !Uri.TryCreate(definition.RedirectUri, UriKind.Absolute, out var redirectUri))
+        if (
+            definition.RedirectUri == null
+            || !Uri.TryCreate(definition.RedirectUri, UriKind.Absolute, out var redirectUri)
+        )
         {
-            throw new InvalidOperationException($"The redirect uri " +
-                $"'{definition.RedirectUri}' for '{name}' is invalid. " +
-                $"The redirect URI must be an absolute url.");
+            throw new InvalidOperationException(
+                $"The redirect uri "
+                    + $"'{definition.RedirectUri}' for '{name}' is invalid. "
+                    + $"The redirect URI must be an absolute url."
+            );
         }
 
-        if (definition.LogoutUri == null ||
-            !Uri.TryCreate(definition.LogoutUri, UriKind.Absolute, out var postLogouturi))
+        if (
+            definition.LogoutUri == null
+            || !Uri.TryCreate(definition.LogoutUri, UriKind.Absolute, out var postLogouturi)
+        )
         {
-            throw new InvalidOperationException($"The logout uri " +
-                $"'{definition.LogoutUri}' for '{name}' is invalid. " +
-                $"The logout URI must be an absolute url.");
+            throw new InvalidOperationException(
+                $"The logout uri "
+                    + $"'{definition.LogoutUri}' for '{name}' is invalid. "
+                    + $"The logout URI must be an absolute url."
+            );
         }
 
-        if (!string.Equals(
-            redirectUri.GetLeftPart(UriPartial.Authority),
-            postLogouturi.GetLeftPart(UriPartial.Authority),
-            StringComparison.Ordinal))
+        if (
+            !string.Equals(
+                redirectUri.GetLeftPart(UriPartial.Authority),
+                postLogouturi.GetLeftPart(UriPartial.Authority),
+                StringComparison.Ordinal
+            )
+        )
         {
-            throw new InvalidOperationException($"The redirect uri and the logout uri " +
-                $"for '{name}' have a different scheme, host or port.");
+            throw new InvalidOperationException(
+                $"The redirect uri and the logout uri "
+                    + $"for '{name}' have a different scheme, host or port."
+            );
         }
 
-        var client = ClientBuilder.SPA(name)
+        var client = ClientBuilder
+            .SPA(name)
             .WithRedirectUri(definition.RedirectUri)
             .WithLogoutRedirectUri(definition.LogoutUri)
             .WithAllowedOrigins(redirectUri.GetLeftPart(UriPartial.Authority))
@@ -99,8 +118,7 @@ internal sealed class ConfigureClients : IConfigureOptions<ApiAuthorizationOptio
 
     private static Client GetNativeApp(string name)
     {
-        var client = ClientBuilder.NativeApp(name)
-            .FromConfiguration();
+        var client = ClientBuilder.NativeApp(name).FromConfiguration();
         return client.Build();
     }
 
@@ -109,7 +127,9 @@ internal sealed class ConfigureClients : IConfigureOptions<ApiAuthorizationOptio
         var client = ClientBuilder
             .IdentityServerSPA(name)
             .WithRedirectUri(definition.RedirectUri ?? DefaultLocalSPARelativeRedirectUri)
-            .WithLogoutRedirectUri(definition.LogoutUri ?? DefaultLocalSPARelativePostLogoutRedirectUri)
+            .WithLogoutRedirectUri(
+                definition.LogoutUri ?? DefaultLocalSPARelativePostLogoutRedirectUri
+            )
             .WithAllowedOrigins()
             .FromConfiguration();
 

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -47,8 +47,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         internal static Exception AttributeConflict(string propertyName)
         {
-            var message = string.Format
-            (
+            var message = string.Format(
                 "The behaviors defined for property '{0}' are ambiguous or conflicting.",
                 propertyName
             );
@@ -57,8 +56,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         internal static Exception SeparateGetterSetterOnComplexType(string propertyName)
         {
-            var message = string.Format
-            (
+            var message = string.Format(
                 "Cannot apply getter/setter behaviors for property '{0}'.  Separate getters/setters are supported for simple types only.",
                 propertyName
             );
@@ -67,8 +65,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         internal static Exception XmlMetadataNotAvailable(Type clrType)
         {
-            var message = string.Format
-            (
+            var message = string.Format(
                 "XML metadata is not available for type '{0}'.",
                 clrType.FullName
             );
@@ -97,13 +94,15 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var message = string.Format(
                 "The given node cannot provide an underlying object of type {0}.",
-                typeof(T).FullName);
+                typeof(T).FullName
+            );
             return new NotSupportedException(message);
         }
 
         internal static Exception CursorNotMutable()
         {
-            var message = "The cursor does not support creation, removal, or modification of nodes.";
+            var message =
+                "The cursor does not support creation, removal, or modification of nodes.";
             return new NotSupportedException(message);
         }
 
@@ -139,8 +138,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         internal static Exception CannotSetAttribute(IXmlIdentity identity)
         {
-            var message = string.Format
-            (
+            var message = string.Format(
                 "Cannot set attribute on node '{0}'.",
                 identity.Name.ToString()
             );
@@ -149,8 +147,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         internal static Exception NotXmlKnownType(Type clrType)
         {
-            var message = string.Format
-            (
+            var message = string.Format(
                 "No XML type is defined for CLR type {0}.",
                 clrType.FullName
             );
@@ -159,11 +156,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         internal static Exception UnsupportedCollectionType(Type clrType)
         {
-            var message = string.Format
-            (
-                "Unsupported collection type: {0}.",
-                clrType.FullName
-            );
+            var message = string.Format("Unsupported collection type: {0}.", clrType.FullName);
             return new SerializationException(message);
         }
 
@@ -172,7 +165,6 @@ namespace Castle.Components.DictionaryAdapter.Xml
             var message = "The argument is not a valid collection type.";
             return new ArgumentException(message, paramName);
         }
-
 
         internal static Exception InvalidLocalName()
         {
@@ -196,7 +188,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var message = string.Format(
                 "The path '{0}' is not a creatable XPath expression.",
-                path.Path.Expression);
+                path.Path.Expression
+            );
             return new XPathException(message);
         }
 
@@ -204,15 +197,14 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var message = string.Format(
                 "Failed navigation to {0} element after creation.",
-                path.Expression);
+                path.Expression
+            );
             return new XPathException(message);
         }
 
         internal static Exception ObjectIdNotFound(string id)
         {
-            var message = string.Format(
-                "No object with ID '{0}' was present in the XML.",
-                id);
+            var message = string.Format("No object with ID '{0}' was present in the XML.", id);
             return new SerializationException(message);
         }
     }

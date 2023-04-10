@@ -30,14 +30,23 @@ internal readonly struct ForceAsyncAwaiter : ICriticalNotifyCompletion
 {
     private readonly Task _task;
 
-    internal ForceAsyncAwaiter(Task task) { _task = task; }
+    internal ForceAsyncAwaiter(Task task)
+    {
+        _task = task;
+    }
 
-    public ForceAsyncAwaiter GetAwaiter() { return this; }
+    public ForceAsyncAwaiter GetAwaiter()
+    {
+        return this;
+    }
 
     // The purpose of this type is to always force a continuation
     public bool IsCompleted => false;
 
-    public void GetResult() { _task.GetAwaiter().GetResult(); }
+    public void GetResult()
+    {
+        _task.GetAwaiter().GetResult();
+    }
 
     public void OnCompleted(Action action)
     {
@@ -54,14 +63,23 @@ internal readonly struct ForceAsyncAwaiter<T> : ICriticalNotifyCompletion
 {
     private readonly Task<T> _task;
 
-    internal ForceAsyncAwaiter(Task<T> task) { _task = task; }
+    internal ForceAsyncAwaiter(Task<T> task)
+    {
+        _task = task;
+    }
 
-    public ForceAsyncAwaiter<T> GetAwaiter() { return this; }
+    public ForceAsyncAwaiter<T> GetAwaiter()
+    {
+        return this;
+    }
 
     // The purpose of this type is to always force a continuation
     public bool IsCompleted => false;
 
-    public T GetResult() { return _task.GetAwaiter().GetResult(); }
+    public T GetResult()
+    {
+        return _task.GetAwaiter().GetResult();
+    }
 
     public void OnCompleted(Action action)
     {

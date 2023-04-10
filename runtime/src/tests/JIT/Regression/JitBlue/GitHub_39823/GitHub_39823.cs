@@ -22,7 +22,6 @@ public class Runtime_39823
         return 100;
     }
 
-
     public static unsafe int Main()
     {
         try

@@ -12,7 +12,11 @@ namespace System.Runtime.InteropServices.Marshalling
     /// </summary>
     [CLSCompliant(false)]
     [CustomMarshaller(typeof(string), MarshalMode.Default, typeof(BStrStringMarshaller))]
-    [CustomMarshaller(typeof(string), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
+    [CustomMarshaller(
+        typeof(string),
+        MarshalMode.ManagedToUnmanagedIn,
+        typeof(ManagedToUnmanagedIn)
+    )]
     public static unsafe class BStrStringMarshaller
     {
         /// <summary>
@@ -20,8 +24,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         /// <param name="managed">A managed string to convert.</param>
         /// <returns>The converted unmanaged string.</returns>
-        public static ushort* ConvertToUnmanaged(string? managed)
-            => (ushort*)Marshal.StringToBSTR(managed);
+        public static ushort* ConvertToUnmanaged(string? managed) =>
+            (ushort*)Marshal.StringToBSTR(managed);
 
         /// <summary>
         /// Converts an unmanaged string to a managed version.
@@ -40,8 +44,7 @@ namespace System.Runtime.InteropServices.Marshalling
         /// Frees the memory for the unmanaged string.
         /// </summary>
         /// <param name="unmanaged">The memory allocated for the unmanaged string.</param>
-        public static void Free(ushort* unmanaged)
-            => Marshal.FreeBSTR((IntPtr)unmanaged);
+        public static void Free(ushort* unmanaged) => Marshal.FreeBSTR((IntPtr)unmanaged);
 
         /// <summary>
         /// Custom marshaller to marshal a managed string as a ANSI unmanaged string.

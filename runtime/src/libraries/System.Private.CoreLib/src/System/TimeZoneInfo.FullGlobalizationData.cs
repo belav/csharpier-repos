@@ -7,12 +7,18 @@ namespace System
 {
     public sealed partial class TimeZoneInfo
     {
-        private static unsafe bool TryConvertIanaIdToWindowsId(string ianaId, bool allocate, out string? windowsId)
+        private static unsafe bool TryConvertIanaIdToWindowsId(
+            string ianaId,
+            bool allocate,
+            out string? windowsId
+        )
         {
-            if (GlobalizationMode.Invariant ||
-                GlobalizationMode.UseNls ||
-                ianaId is null ||
-                ianaId.AsSpan().IndexOfAny('\\', '\n', '\r') >= 0) // ICU uses these characters as a separator
+            if (
+                GlobalizationMode.Invariant
+                || GlobalizationMode.UseNls
+                || ianaId is null
+                || ianaId.AsSpan().IndexOfAny('\\', '\n', '\r') >= 0
+            ) // ICU uses these characters as a separator
             {
                 windowsId = null;
                 return false;
@@ -30,7 +36,12 @@ namespace System
             return false;
         }
 
-        private static unsafe bool TryConvertWindowsIdToIanaId(string windowsId, string? region, bool allocate,  out string? ianaId)
+        private static unsafe bool TryConvertWindowsIdToIanaId(
+            string windowsId,
+            string? region,
+            bool allocate,
+            out string? ianaId
+        )
         {
             // This functionality is not enabled in the browser for the sake of size reduction.
             if (GlobalizationMode.Invariant || GlobalizationMode.UseNls || windowsId is null)
@@ -55,7 +66,7 @@ namespace System
             // regionPtr will point at the region name encoded as ASCII.
             IntPtr regionPtr = IntPtr.Zero;
 
-             // Regions usually are 2 or 3 characters length.
+            // Regions usually are 2 or 3 characters length.
             const int MaxRegionNameLength = 11;
 
             // Ensure uppercasing the region as ICU require the region names be uppercased, otherwise ICU will assume default region and return unexpected result.
@@ -65,7 +76,9 @@ namespace System
                 int i = 0;
                 for (; i < region.Length && region[i] <= '\u007F'; i++)
                 {
-                    regionInAscii[i] = char.IsAsciiLetterLower(region[i]) ? (byte)((region[i] - 'a') + 'A') : (byte)region[i];
+                    regionInAscii[i] = char.IsAsciiLetterLower(region[i])
+                        ? (byte)((region[i] - 'a') + 'A')
+                        : (byte)region[i];
                 }
 
                 if (i >= region.Length)
@@ -89,6 +102,5 @@ namespace System
             ianaId = null;
             return false;
         }
-
     }
 }

@@ -15,7 +15,14 @@ struct VT
 {
     public static readonly int Size = Marshal.SizeOf<VT>();
 
-    public int F1, F2, F3, F4, F5, F6, F7, F8;
+    public int F1,
+        F2,
+        F3,
+        F4,
+        F5,
+        F6,
+        F7,
+        F8;
 }
 
 class P
@@ -26,11 +33,18 @@ class P
         Console.WriteLine("v1={0}", v1);
         return v1;
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     unsafe static int TestByPtr(VT* pVT)
     {
-        int v1, v2, v3, v4, v5, v6, v7, v8;
+        int v1,
+            v2,
+            v3,
+            v4,
+            v5,
+            v6,
+            v7,
+            v8;
         v1 = pVT->F1;
         v2 = pVT->F2;
         v3 = pVT->F3;
@@ -41,7 +55,7 @@ class P
         v8 = pVT->F8;
         return Do(v1);
     }
-    
+
     unsafe static int Main()
     {
         byte* pDataBytes = stackalloc byte[VT.Size];
@@ -58,5 +72,3 @@ class P
         return result + 99;
     }
 }
-
-

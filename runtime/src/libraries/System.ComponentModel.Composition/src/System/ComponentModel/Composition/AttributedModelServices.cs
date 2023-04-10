@@ -16,7 +16,9 @@ namespace System.ComponentModel.Composition
 {
     public static class AttributedModelServices
     {
-        public static TMetadataView GetMetadataView<TMetadataView>(IDictionary<string, object?> metadata)
+        public static TMetadataView GetMetadataView<TMetadataView>(
+            IDictionary<string, object?> metadata
+        )
         {
             Requires.NotNull(metadata, nameof(metadata));
 
@@ -30,7 +32,10 @@ namespace System.ComponentModel.Composition
             return AttributedModelDiscovery.CreatePart(attributedPart);
         }
 
-        public static ComposablePart CreatePart(object attributedPart, ReflectionContext reflectionContext)
+        public static ComposablePart CreatePart(
+            object attributedPart,
+            ReflectionContext reflectionContext
+        )
         {
             Requires.NotNull(attributedPart, nameof(attributedPart));
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
@@ -38,28 +43,45 @@ namespace System.ComponentModel.Composition
             return AttributedModelDiscovery.CreatePart(attributedPart, reflectionContext);
         }
 
-        public static ComposablePart CreatePart(ComposablePartDefinition partDefinition, object attributedPart)
+        public static ComposablePart CreatePart(
+            ComposablePartDefinition partDefinition,
+            object attributedPart
+        )
         {
             Requires.NotNull(partDefinition, nameof(partDefinition));
             Requires.NotNull(attributedPart, nameof(attributedPart));
 
-            var reflectionComposablePartDefinition = partDefinition as ReflectionComposablePartDefinition;
+            var reflectionComposablePartDefinition =
+                partDefinition as ReflectionComposablePartDefinition;
             if (reflectionComposablePartDefinition == null)
             {
-                throw ExceptionBuilder.CreateReflectionModelInvalidPartDefinition(nameof(partDefinition), partDefinition.GetType());
+                throw ExceptionBuilder.CreateReflectionModelInvalidPartDefinition(
+                    nameof(partDefinition),
+                    partDefinition.GetType()
+                );
             }
 
-            return AttributedModelDiscovery.CreatePart(reflectionComposablePartDefinition, attributedPart);
+            return AttributedModelDiscovery.CreatePart(
+                reflectionComposablePartDefinition,
+                attributedPart
+            );
         }
 
-        public static ComposablePartDefinition CreatePartDefinition(Type type, ICompositionElement? origin)
+        public static ComposablePartDefinition CreatePartDefinition(
+            Type type,
+            ICompositionElement? origin
+        )
         {
             Requires.NotNull(type, nameof(type));
 
             return AttributedModelServices.CreatePartDefinition(type, origin, false);
         }
 
-        public static ComposablePartDefinition CreatePartDefinition(Type type, ICompositionElement? origin, bool ensureIsDiscoverable)
+        public static ComposablePartDefinition CreatePartDefinition(
+            Type type,
+            ICompositionElement? origin,
+            bool ensureIsDiscoverable
+        )
         {
             Requires.NotNull(type, nameof(type));
             if (ensureIsDiscoverable)
@@ -93,7 +115,10 @@ namespace System.ComponentModel.Composition
             return AttributedModelServices.GetTypeIdentity(type);
         }
 
-        public static ComposablePart AddExportedValue<T>(this CompositionBatch batch, T exportedValue)
+        public static ComposablePart AddExportedValue<T>(
+            this CompositionBatch batch,
+            T exportedValue
+        )
         {
             Requires.NotNull(batch, nameof(batch));
 
@@ -102,7 +127,10 @@ namespace System.ComponentModel.Composition
             return batch.AddExportedValue<T>(contractName, exportedValue);
         }
 
-        public static void ComposeExportedValue<T>(this CompositionContainer container, T exportedValue)
+        public static void ComposeExportedValue<T>(
+            this CompositionContainer container,
+            T exportedValue
+        )
         {
             Requires.NotNull(container, nameof(container));
 
@@ -111,7 +139,11 @@ namespace System.ComponentModel.Composition
             container.Compose(batch);
         }
 
-        public static ComposablePart AddExportedValue<T>(this CompositionBatch batch, string contractName, T exportedValue)
+        public static ComposablePart AddExportedValue<T>(
+            this CompositionBatch batch,
+            string contractName,
+            T exportedValue
+        )
         {
             Requires.NotNull(batch, nameof(batch));
 
@@ -123,7 +155,11 @@ namespace System.ComponentModel.Composition
             return batch.AddExport(new Export(contractName, metadata, () => exportedValue));
         }
 
-        public static void ComposeExportedValue<T>(this CompositionContainer container, string contractName, T exportedValue)
+        public static void ComposeExportedValue<T>(
+            this CompositionContainer container,
+            string contractName,
+            T exportedValue
+        )
         {
             Requires.NotNull(container, nameof(container));
 
@@ -145,14 +181,18 @@ namespace System.ComponentModel.Composition
             return part;
         }
 
-        public static void ComposeParts(this CompositionContainer container, params object[] attributedParts)
+        public static void ComposeParts(
+            this CompositionContainer container,
+            params object[] attributedParts
+        )
         {
             Requires.NotNull(container, nameof(container));
             Requires.NotNullOrNullElements(attributedParts, nameof(attributedParts));
 
             CompositionBatch batch = new CompositionBatch(
                 attributedParts.Select(AttributedModelServices.CreatePart).ToArray(),
-                Enumerable.Empty<ComposablePart>());
+                Enumerable.Empty<ComposablePart>()
+            );
 
             container.Compose(batch);
         }
@@ -175,7 +215,10 @@ namespace System.ComponentModel.Composition
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="ICompositionService"/> has been disposed of.
         /// </exception>
-        public static ComposablePart SatisfyImportsOnce(this ICompositionService compositionService, object attributedPart)
+        public static ComposablePart SatisfyImportsOnce(
+            this ICompositionService compositionService,
+            object attributedPart
+        )
         {
             Requires.NotNull(compositionService, nameof(compositionService));
             Requires.NotNull(attributedPart, nameof(attributedPart));
@@ -206,13 +249,20 @@ namespace System.ComponentModel.Composition
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="ICompositionService"/> has been disposed of.
         /// </exception>
-        public static ComposablePart SatisfyImportsOnce(this ICompositionService compositionService, object attributedPart, ReflectionContext reflectionContext)
+        public static ComposablePart SatisfyImportsOnce(
+            this ICompositionService compositionService,
+            object attributedPart,
+            ReflectionContext reflectionContext
+        )
         {
             Requires.NotNull(compositionService, nameof(compositionService));
             Requires.NotNull(attributedPart, nameof(attributedPart));
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
 
-            ComposablePart part = AttributedModelServices.CreatePart(attributedPart, reflectionContext);
+            ComposablePart part = AttributedModelServices.CreatePart(
+                attributedPart,
+                reflectionContext
+            );
             compositionService.SatisfyImportsOnce(part);
 
             Debug.Assert(part != null);
@@ -290,12 +340,19 @@ namespace System.ComponentModel.Composition
         /// <returns>
         ///     <c>true</c> if the specified part imports the specified contract with the given cardinality; otherwise, <c>false</c>.
         /// </returns>
-        public static bool Imports(this ComposablePartDefinition part, Type contractType, ImportCardinality importCardinality)
+        public static bool Imports(
+            this ComposablePartDefinition part,
+            Type contractType,
+            ImportCardinality importCardinality
+        )
         {
             Requires.NotNull(part, nameof(part));
             Requires.NotNull(contractType, nameof(contractType));
 
-            return part.Imports(AttributedModelServices.GetContractName(contractType), importCardinality);
+            return part.Imports(
+                AttributedModelServices.GetContractName(contractType),
+                importCardinality
+            );
         }
 
         /// <summary>
@@ -307,7 +364,10 @@ namespace System.ComponentModel.Composition
         /// <returns>
         ///     <c>true</c> if the specified part imports the specified contract with the given cardinality; otherwise, <c>false</c>.
         /// </returns>
-        public static bool Imports<T>(this ComposablePartDefinition part, ImportCardinality importCardinality)
+        public static bool Imports<T>(
+            this ComposablePartDefinition part,
+            ImportCardinality importCardinality
+        )
         {
             Requires.NotNull(part, nameof(part));
 

@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
     {
         public readonly LanguageVersion LanguageVersion;
 
-        public CSharpCodeGenerationContextInfo(CodeGenerationContext context, CSharpCodeGenerationOptions options, LanguageVersion languageVersion)
+        public CSharpCodeGenerationContextInfo(
+            CodeGenerationContext context,
+            CSharpCodeGenerationOptions options,
+            LanguageVersion languageVersion
+        )
             : base(context)
         {
             Options = options;
@@ -21,13 +25,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         public new CSharpCodeGenerationOptions Options { get; }
 
-        protected override CodeGenerationOptions OptionsImpl
-            => Options;
+        protected override CodeGenerationOptions OptionsImpl => Options;
 
-        public new CSharpCodeGenerationContextInfo WithContext(CodeGenerationContext value)
-            => (Context == value) ? this : new(value, Options, LanguageVersion);
+        public new CSharpCodeGenerationContextInfo WithContext(CodeGenerationContext value) =>
+            (Context == value) ? this : new(value, Options, LanguageVersion);
 
-        protected override CodeGenerationContextInfo WithContextImpl(CodeGenerationContext value)
-            => WithContext(value);
+        protected override CodeGenerationContextInfo WithContextImpl(CodeGenerationContext value) =>
+            WithContext(value);
     }
 }

@@ -26,20 +26,19 @@ namespace POS_Server.Models
         public decimal purchasePrice { get; set; }
         public string cause { get; set; }
 
-
-      
         public Nullable<long> itemId { get; set; }
         public string itemName { get; set; }
-       
+
         public Nullable<long> lockedQuantity { get; set; }
         public Nullable<long> availableQuantity { get; set; }
         public Nullable<long> newLocked { get; set; }
-       
+
         public string invNumber { get; set; }
+
         //public Nullable<int> locationIdNew { get; set; }
         //public Nullable<int> locationIdOld { get; set; }
-  
-     
+
+
         public string unitName { get; set; }
         public Nullable<long> unitId { get; set; }
         public string barcode { get; set; }
@@ -49,7 +48,7 @@ namespace POS_Server.Models
         public Nullable<decimal> itemTax { get; set; }
         public Nullable<decimal> itemUnitPrice { get; set; }
         public Nullable<decimal> offerValue { get; set; }
-        public Nullable<decimal>  offerType { get; set; }
+        public Nullable<decimal> offerType { get; set; }
         public string offerCode { get; set; }
         public string offerName { get; set; }
         public Nullable<decimal> finalDiscount { get; set; }
@@ -57,8 +56,7 @@ namespace POS_Server.Models
 
         public int sequence { get; set; }
 
-        public  List<itemsTransferIngredientsModel> itemsIngredients { get; set; }
+        public List<itemsTransferIngredientsModel> itemsIngredients { get; set; }
         public List<ItemTransferModel> itemExtras { get; set; }
-
     }
 }

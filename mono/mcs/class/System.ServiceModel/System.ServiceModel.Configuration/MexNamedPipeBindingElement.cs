@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,22 +54,16 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public partial class MexNamedPipeBindingElement
-		 : MexBindingElement<CustomBinding>,  IBindingConfigurationElement
-	{
+    public partial class MexNamedPipeBindingElement
+        : MexBindingElement<CustomBinding>,
+            IBindingConfigurationElement
+    {
+        public MexNamedPipeBindingElement()
+            : this(String.Empty) { }
 
-		public MexNamedPipeBindingElement ()
-			: this (String.Empty) {
-		}
+        public MexNamedPipeBindingElement(string name)
+            : base(name) { }
 
-		public MexNamedPipeBindingElement (string name)
-			: base (name) {
-		}
-
-
-		// Properties
-
-
-	}
-
+        // Properties
+    }
 }

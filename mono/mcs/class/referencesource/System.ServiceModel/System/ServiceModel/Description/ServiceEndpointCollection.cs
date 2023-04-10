@@ -12,9 +12,7 @@ namespace System.ServiceModel.Description
 
     public class ServiceEndpointCollection : Collection<ServiceEndpoint>
     {
-        internal ServiceEndpointCollection()
-        {
-        }
+        internal ServiceEndpointCollection() { }
 
         public ServiceEndpoint Find(Type contractType)
         {
@@ -43,7 +41,11 @@ namespace System.ServiceModel.Description
 
             foreach (ServiceEndpoint endpoint in this)
             {
-                if (endpoint != null && endpoint.Contract.Name == contractName.Name && endpoint.Contract.Namespace == contractName.Namespace)
+                if (
+                    endpoint != null
+                    && endpoint.Contract.Name == contractName.Name
+                    && endpoint.Contract.Namespace == contractName.Namespace
+                )
                 {
                     return endpoint;
                 }
@@ -65,9 +67,12 @@ namespace System.ServiceModel.Description
 
             foreach (ServiceEndpoint endpoint in this)
             {
-                if (endpoint != null && endpoint.Contract.ContractType == contractType &&
-                    endpoint.Binding.Name == bindingName.Name &&
-                    endpoint.Binding.Namespace == bindingName.Namespace)
+                if (
+                    endpoint != null
+                    && endpoint.Contract.ContractType == contractType
+                    && endpoint.Binding.Name == bindingName.Name
+                    && endpoint.Binding.Namespace == bindingName.Namespace
+                )
                 {
                     return endpoint;
                 }
@@ -89,10 +94,13 @@ namespace System.ServiceModel.Description
 
             foreach (ServiceEndpoint endpoint in this)
             {
-                if (endpoint != null && endpoint.Contract.Name == contractName.Name &&
-                    endpoint.Contract.Namespace == contractName.Namespace &&
-                    endpoint.Binding.Name == bindingName.Name &&
-                    endpoint.Binding.Namespace == bindingName.Namespace)
+                if (
+                    endpoint != null
+                    && endpoint.Contract.Name == contractName.Name
+                    && endpoint.Contract.Namespace == contractName.Namespace
+                    && endpoint.Binding.Name == bindingName.Name
+                    && endpoint.Binding.Namespace == bindingName.Namespace
+                )
                 {
                     return endpoint;
                 }
@@ -150,7 +158,11 @@ namespace System.ServiceModel.Description
 
             foreach (ServiceEndpoint endpoint in this)
             {
-                if (endpoint != null && endpoint.Contract.Name == contractName.Name && endpoint.Contract.Namespace == contractName.Namespace)
+                if (
+                    endpoint != null
+                    && endpoint.Contract.Name == contractName.Name
+                    && endpoint.Contract.Namespace == contractName.Namespace
+                )
                 {
                     results.Add(endpoint);
                 }

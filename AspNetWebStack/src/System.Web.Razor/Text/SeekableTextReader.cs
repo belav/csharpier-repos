@@ -19,14 +19,10 @@ namespace System.Web.Razor.Text
         }
 
         public SeekableTextReader(TextReader source)
-            : this(source.ReadToEnd())
-        {
-        }
+            : this(source.ReadToEnd()) { }
 
         public SeekableTextReader(ITextBuffer buffer)
-            : this(buffer.ReadToEnd())
-        {
-        }
+            : this(buffer.ReadToEnd()) { }
 
         public SourceLocation Location
         {

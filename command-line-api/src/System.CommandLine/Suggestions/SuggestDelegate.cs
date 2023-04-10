@@ -12,5 +12,8 @@ namespace System.CommandLine.Suggestions
     /// <param name="parseResult">The parse result for which completions are being requested.</param>
     /// <param name="textToMatch">The text of the word to be completed, if any.</param>
     /// <returns>A list of suggestions.</returns>
-    public delegate IEnumerable<string> SuggestDelegate(ParseResult? parseResult, string? textToMatch);
+    public delegate IEnumerable<string> SuggestDelegate(
+        ParseResult? parseResult,
+        string? textToMatch
+    );
 }

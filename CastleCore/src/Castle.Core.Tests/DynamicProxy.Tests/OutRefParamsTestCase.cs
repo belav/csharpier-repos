@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -88,7 +88,7 @@ namespace Castle.DynamicProxy.Tests
 
             public virtual void MyMethodWithStruct(ref MyStruct s)
             {
-                s.Value = 2*s.Value;
+                s.Value = 2 * s.Value;
             }
         }
 
@@ -96,9 +96,14 @@ namespace Castle.DynamicProxy.Tests
         public void CanAffectValueOfOutParameter()
         {
             int i;
-            var interceptor =
-                new WithCallbackInterceptor(delegate(IInvocation invocation) { invocation.Arguments[0] = 5; });
-            var proxy = (IWithRefOut)generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
+            var interceptor = new WithCallbackInterceptor(
+                delegate(IInvocation invocation)
+                {
+                    invocation.Arguments[0] = 5;
+                }
+            );
+            var proxy = (IWithRefOut)
+                generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
             proxy.Do(out i);
             Assert.AreEqual(5, i);
         }
@@ -108,7 +113,8 @@ namespace Castle.DynamicProxy.Tests
         {
             int i;
             var interceptor = new WithCallbackInterceptor(delegate { });
-            var proxy = (IWithRefOut)generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
+            var proxy = (IWithRefOut)
+                generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
             proxy.Do(out i);
         }
 
@@ -118,12 +124,14 @@ namespace Castle.DynamicProxy.Tests
             var i = 3;
             var s1 = "2";
             string s2;
-            var interceptor = new WithCallbackInterceptor(delegate(IInvocation invocation)
-            {
-                invocation.Arguments[0] = 5;
-                invocation.Arguments[1] = "aaa";
-                invocation.Arguments[3] = "bbb";
-            });
+            var interceptor = new WithCallbackInterceptor(
+                delegate(IInvocation invocation)
+                {
+                    invocation.Arguments[0] = 5;
+                    invocation.Arguments[1] = "aaa";
+                    invocation.Arguments[3] = "bbb";
+                }
+            );
             var proxy = (MyClass)generator.CreateClassProxy(typeof(MyClass), interceptor);
             proxy.MyMethod(out i, ref s1, 1, out s2);
             Assert.AreEqual(5, i);
@@ -135,7 +143,10 @@ namespace Castle.DynamicProxy.Tests
         public void CanCreateProxyOfInterfaceWithOutParameter()
         {
             var interceptor = new KeepDataInterceptor();
-            var proxy = generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget(
+                typeof(IWithRefOut),
+                interceptor
+            );
             Assert.IsNotNull(proxy);
         }
 
@@ -143,9 +154,14 @@ namespace Castle.DynamicProxy.Tests
         public void CanCreateProxyWithRefParam()
         {
             var i = 3;
-            var interceptor =
-                new WithCallbackInterceptor(delegate(IInvocation invocation) { invocation.Arguments[0] = 5; });
-            var proxy = (IWithRefOut)generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
+            var interceptor = new WithCallbackInterceptor(
+                delegate(IInvocation invocation)
+                {
+                    invocation.Arguments[0] = 5;
+                }
+            );
+            var proxy = (IWithRefOut)
+                generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
             proxy.Did(ref i);
             Assert.AreEqual(5, i);
         }
@@ -154,7 +170,8 @@ namespace Castle.DynamicProxy.Tests
         public void CanCreateProxyWithStructRefParam()
         {
             var s = new MyStruct(10);
-            var proxy = (MyClass)generator.CreateClassProxy(typeof(MyClass), new StandardInterceptor());
+            var proxy = (MyClass)
+                generator.CreateClassProxy(typeof(MyClass), new StandardInterceptor());
             proxy.MyMethodWithStruct(ref s);
             Assert.AreEqual(20, s.Value);
         }
@@ -162,7 +179,9 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Exception_during_method_out_ref_arguments_set_class_proxy_caught_by_interceptor()
         {
-            var proxy = generator.CreateClassProxy<ClassHasMethodThrowException>(new ExceptionCatchInterceptor());
+            var proxy = generator.CreateClassProxy<ClassHasMethodThrowException>(
+                new ExceptionCatchInterceptor()
+            );
 
             var param1 = 1;
             var param2 = "1";
@@ -179,7 +198,9 @@ namespace Castle.DynamicProxy.Tests
         {
             var options = new ProxyGenerationOptions();
             options.AddMixinInstance(new ClassHasMethodThrowException());
-            var proxy = generator.CreateClassProxy<object>(options, new StandardInterceptor()) as IClassHasMethodThrowException;
+            var proxy =
+                generator.CreateClassProxy<object>(options, new StandardInterceptor())
+                as IClassHasMethodThrowException;
 
             var param1 = 1;
             var param2 = "1";
@@ -204,7 +225,9 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Exception_during_method_out_ref_arguments_set_class_proxy_uncaught()
         {
-            var proxy = generator.CreateClassProxy<ClassHasMethodThrowException>(new StandardInterceptor());
+            var proxy = generator.CreateClassProxy<ClassHasMethodThrowException>(
+                new StandardInterceptor()
+            );
 
             var param1 = 1;
             var param2 = "1";
@@ -229,7 +252,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Exception_during_method_out_ref_arguments_set_class_proxy_with_target_caught_by_interceptor()
         {
-            var proxy = generator.CreateClassProxyWithTarget(new ClassHasMethodThrowException(), new ExceptionCatchInterceptor());
+            var proxy = generator.CreateClassProxyWithTarget(
+                new ClassHasMethodThrowException(),
+                new ExceptionCatchInterceptor()
+            );
 
             var param1 = 1;
             var param2 = "1";
@@ -244,7 +270,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Exception_during_method_out_ref_arguments_set_class_proxy_with_target_uncaught()
         {
-            var proxy = generator.CreateClassProxyWithTarget(new ClassHasMethodThrowException(), new StandardInterceptor());
+            var proxy = generator.CreateClassProxyWithTarget(
+                new ClassHasMethodThrowException(),
+                new StandardInterceptor()
+            );
 
             var param1 = 1;
             var param2 = "1";
@@ -269,9 +298,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Exception_during_method_out_ref_arguments_set_interface_proxy_with_target_caught_by_interceptor()
         {
-            var proxy =
-                generator.CreateInterfaceProxyWithTarget<IClassHasMethodThrowException>(new ClassHasMethodThrowException(),
-                                                                                        new ExceptionCatchInterceptor());
+            var proxy = generator.CreateInterfaceProxyWithTarget<IClassHasMethodThrowException>(
+                new ClassHasMethodThrowException(),
+                new ExceptionCatchInterceptor()
+            );
 
             var param1 = 1;
             var param2 = "1";
@@ -288,7 +318,9 @@ namespace Castle.DynamicProxy.Tests
         {
             var proxy =
                 generator.CreateInterfaceProxyWithTargetInterface<IClassHasMethodThrowException>(
-                    new ClassHasMethodThrowException(), new ExceptionCatchInterceptor());
+                    new ClassHasMethodThrowException(),
+                    new ExceptionCatchInterceptor()
+                );
 
             var param1 = 1;
             var param2 = "1";
@@ -305,7 +337,9 @@ namespace Castle.DynamicProxy.Tests
         {
             var proxy =
                 generator.CreateInterfaceProxyWithTargetInterface<IClassHasMethodThrowException>(
-                    new ClassHasMethodThrowException(), new StandardInterceptor());
+                    new ClassHasMethodThrowException(),
+                    new StandardInterceptor()
+                );
 
             var param1 = 1;
             var param2 = "1";
@@ -330,9 +364,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Exception_during_method_out_ref_arguments_set_interface_proxy_with_target_uncaught()
         {
-            var proxy =
-                generator.CreateInterfaceProxyWithTarget<IClassHasMethodThrowException>(new ClassHasMethodThrowException(),
-                                                                                        new StandardInterceptor());
+            var proxy = generator.CreateInterfaceProxyWithTarget<IClassHasMethodThrowException>(
+                new ClassHasMethodThrowException(),
+                new StandardInterceptor()
+            );
 
             var param1 = 1;
             var param2 = "1";

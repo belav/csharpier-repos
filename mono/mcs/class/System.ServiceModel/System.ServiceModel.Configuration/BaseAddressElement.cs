@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,47 +54,47 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class BaseAddressElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty base_address;
+    public sealed class BaseAddressElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty base_address;
 
-		static BaseAddressElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			base_address = new ConfigurationProperty ("baseAddress",
-				typeof (string), null, new StringConverter (), new StringValidator (1, int.MaxValue, null),
-				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+        static BaseAddressElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            base_address = new ConfigurationProperty(
+                "baseAddress",
+                typeof(string),
+                null,
+                new StringConverter(),
+                new StringValidator(1, int.MaxValue, null),
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			properties.Add (base_address);
-		}
+            properties.Add(base_address);
+        }
 
-		public BaseAddressElement ()
-		{
-		}
+        public BaseAddressElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "baseAddress",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true
+        )]
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string BaseAddress
+        {
+            get { return (string)base[base_address]; }
+            set { base[base_address] = value; }
+        }
 
-		[ConfigurationProperty ("baseAddress",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		[StringValidator ( MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string BaseAddress {
-			get { return (string) base [base_address]; }
-			set { base [base_address] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

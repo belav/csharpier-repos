@@ -14,16 +14,17 @@ namespace Microsoft.CodeAnalysis.Host
     /// A service that enables storing and retrieving of information associated with solutions,
     /// projects or documents across runtime sessions.
     /// </summary>
-    [ExportWorkspaceServiceFactory(typeof(IPersistentStorageService), ServiceLayer.Default), Shared]
+    [
+        ExportWorkspaceServiceFactory(typeof(IPersistentStorageService), ServiceLayer.Default),
+        Shared
+    ]
     internal class PersistentStorageServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PersistentStorageServiceFactory()
-        {
-        }
+        public PersistentStorageServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => NoOpPersistentStorageService.Instance;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            NoOpPersistentStorageService.Instance;
     }
 }

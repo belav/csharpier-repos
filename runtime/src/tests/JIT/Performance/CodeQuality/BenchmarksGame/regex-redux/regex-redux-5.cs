@@ -32,7 +32,11 @@ namespace BenchmarksGame
         {
             int c = 0;
             var m = regex(r).Match(s);
-            while (m.Success) { c++; m = m.NextMatch(); }
+            while (m.Success)
+            {
+                c++;
+                m = m.NextMatch();
+            }
             return r + " " + c;
         }
 
@@ -94,7 +98,17 @@ namespace BenchmarksGame
             }
             else
             {
-                Task.WaitAll(variant1, variant2, variant3, variant4, variant5, variant6, variant7, variant8, variant9);
+                Task.WaitAll(
+                    variant1,
+                    variant2,
+                    variant3,
+                    variant4,
+                    variant5,
+                    variant6,
+                    variant7,
+                    variant8,
+                    variant9
+                );
             }
 
             return magicTask.Result;

@@ -15,21 +15,24 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests;
 public class ServerStreamingTests : IntegrationTestBase
 {
     public ServerStreamingTests(GrpcTestFixture<Startup> fixture, ITestOutputHelper outputHelper)
-        : base(fixture, outputHelper)
-    {
-    }
+        : base(fixture, outputHelper) { }
 
     [Fact]
     public async Task GetWithRouteParameter_WriteOne_SuccessResult()
     {
         // Arrange
-        async Task ServerStreamingMethod(HelloRequest request, IServerStreamWriter<HelloReply> writer, ServerCallContext context)
+        async Task ServerStreamingMethod(
+            HelloRequest request,
+            IServerStreamWriter<HelloReply> writer,
+            ServerCallContext context
+        )
         {
             await writer.WriteAsync(new HelloReply { Message = $"Hello {request.Name}!" });
         }
         var method = Fixture.DynamicGrpc.AddServerStreamingMethod<HelloRequest, HelloReply>(
             ServerStreamingMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello"));
+            Greeter.Descriptor.FindMethodByName("SayHello")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -47,7 +50,11 @@ public class ServerStreamingTests : IntegrationTestBase
     {
         // Arrange
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        async Task ServerStreamingMethod(HelloRequest request, IServerStreamWriter<HelloReply> writer, ServerCallContext context)
+        async Task ServerStreamingMethod(
+            HelloRequest request,
+            IServerStreamWriter<HelloReply> writer,
+            ServerCallContext context
+        )
         {
             await writer.WriteAsync(new HelloReply { Message = $"Hello {request.Name} 1!" });
             await tcs.Task;
@@ -55,12 +62,15 @@ public class ServerStreamingTests : IntegrationTestBase
         }
         var method = Fixture.DynamicGrpc.AddServerStreamingMethod<HelloRequest, HelloReply>(
             ServerStreamingMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello"));
+            Greeter.Descriptor.FindMethodByName("SayHello")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
         // Act 1
-        var response = await client.GetAsync("/v1/greeter/test", HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
+        var response = await client
+            .GetAsync("/v1/greeter/test", HttpCompletionOption.ResponseHeadersRead)
+            .DefaultTimeout();
         var responseStream = await response.Content.ReadAsStreamAsync();
         var streamReader = new StreamReader(responseStream);
 
@@ -84,20 +94,30 @@ public class ServerStreamingTests : IntegrationTestBase
     {
         // Arrange
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        async Task ServerStreamingMethod(HelloRequest request, IServerStreamWriter<HelloReply> writer, ServerCallContext context)
+        async Task ServerStreamingMethod(
+            HelloRequest request,
+            IServerStreamWriter<HelloReply> writer,
+            ServerCallContext context
+        )
         {
             await writer.WriteAsync(new HelloReply { Message = $"Hello {request.Name} 1!" });
             await tcs.Task;
-            await writer.WriteAsync(new HelloReply { Message = $"Hello {request.Name} 2!" }, new CancellationToken(canceled: true));
+            await writer.WriteAsync(
+                new HelloReply { Message = $"Hello {request.Name} 2!" },
+                new CancellationToken(canceled: true)
+            );
         }
         var method = Fixture.DynamicGrpc.AddServerStreamingMethod<HelloRequest, HelloReply>(
             ServerStreamingMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello"));
+            Greeter.Descriptor.FindMethodByName("SayHello")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
         // Act 1
-        var response = await client.GetAsync("/v1/greeter/test", HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
+        var response = await client
+            .GetAsync("/v1/greeter/test", HttpCompletionOption.ResponseHeadersRead)
+            .DefaultTimeout();
         var responseStream = await response.Content.ReadAsStreamAsync();
         var streamReader = new StreamReader(responseStream);
 

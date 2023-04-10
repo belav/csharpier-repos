@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 _data = data;
             }
 
-            private static object CreateToolTipContent(Workspace workspace, DiagnosticData diagnostic)
+            private static object CreateToolTipContent(
+                Workspace workspace,
+                DiagnosticData diagnostic
+            )
             {
                 Action? navigationAction = null;
                 string? tooltip = null;
@@ -32,14 +35,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     var helpLinkUri = diagnostic.GetValidHelpLinkUri();
                     if (helpLinkUri != null)
                     {
-                        navigationAction = new QuickInfoHyperLink(workspace, helpLinkUri).NavigationAction;
+                        navigationAction = new QuickInfoHyperLink(
+                            workspace,
+                            helpLinkUri
+                        ).NavigationAction;
                         tooltip = diagnostic.HelpLink;
                     }
                 }
 
                 var diagnosticIdTextRun = navigationAction is null
                     ? new ClassifiedTextRun(ClassificationTypeNames.Text, diagnostic.Id)
-                    : new ClassifiedTextRun(ClassificationTypeNames.Text, diagnostic.Id, navigationAction, tooltip);
+                    : new ClassifiedTextRun(
+                        ClassificationTypeNames.Text,
+                        diagnostic.Id,
+                        navigationAction,
+                        tooltip
+                    );
 
                 return new ContainerElement(
                     ContainerElementStyle.Wrapped,
@@ -47,25 +58,25 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         diagnosticIdTextRun,
                         new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
                         new ClassifiedTextRun(ClassificationTypeNames.WhiteSpace, " "),
-                        new ClassifiedTextRun(ClassificationTypeNames.Text, diagnostic.Message)));
+                        new ClassifiedTextRun(ClassificationTypeNames.Text, diagnostic.Message)
+                    )
+                );
             }
 
-            public override bool Equals(object? obj)
-                => Equals(obj as RoslynErrorTag);
+            public override bool Equals(object? obj) => Equals(obj as RoslynErrorTag);
 
             public bool Equals(RoslynErrorTag? other)
             {
-                return other != null &&
-                    this.ErrorType == other.ErrorType &&
-                    this._data.GetValidHelpLinkUri() == other._data.GetValidHelpLinkUri() &&
-                    this._data.Id == other._data.Id &&
-                    this._data.Message == other._data.Message;
+                return other != null
+                    && this.ErrorType == other.ErrorType
+                    && this._data.GetValidHelpLinkUri() == other._data.GetValidHelpLinkUri()
+                    && this._data.Id == other._data.Id
+                    && this._data.Message == other._data.Message;
             }
 
             // Intentionally throwing, we have never supported this facility, and there is no contract around placing
             // these tags in sets or maps.
-            public override int GetHashCode()
-                => throw new NotImplementedException();
+            public override int GetHashCode() => throw new NotImplementedException();
         }
     }
 }

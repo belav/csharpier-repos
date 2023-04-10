@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Algorithms
 {
-    // This contains renderers that only use Vector<double>'s and Vector<long> types. 
+    // This contains renderers that only use Vector<double>'s and Vector<long> types.
     internal class VectorDoubleRenderer : FractalRenderer
     {
         private const double limit = 4.0;
@@ -16,13 +16,17 @@ namespace Algorithms
         private static Vector<double> s_dummy = Vector<double>.One;
 
         public VectorDoubleRenderer(Action<int, int, int> dp, Func<bool> abortFunc)
-            : base(dp, abortFunc)
-        {
-        }
+            : base(dp, abortFunc) { }
 
         // Render the fractal on a single thread using raw Vector<double> data types
         // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in VectorFloat.cs
-        public void RenderSingleThreadedNoADT(float xminf, float xmaxf, float yminf, float ymaxf, float stepf)
+        public void RenderSingleThreadedNoADT(
+            float xminf,
+            float xmaxf,
+            float yminf,
+            float ymaxf,
+            float stepf
+        )
         {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
@@ -38,11 +42,19 @@ namespace Algorithms
 
             double y = ymin;
             int yp = 0;
-            for (Vector<double> vy = new Vector<double>(ymin); y <= ymax && !Abort; vy += vstep, y += step, yp++)
+            for (
+                Vector<double> vy = new Vector<double>(ymin);
+                y <= ymax && !Abort;
+                vy += vstep, y += step, yp++
+            )
             {
                 int xp = 0;
                 Vector<double> vxmaxd = new Vector<double>(xmax);
-                for (Vector<double> vx = vxmin; Vector.LessThanOrEqualAny(vx, vxmaxd); vx += vinc, xp += Vector<long>.Count)
+                for (
+                    Vector<double> vx = vxmin;
+                    Vector.LessThanOrEqualAny(vx, vxmaxd);
+                    vx += vinc, xp += Vector<long>.Count
+                )
                 {
                     Vector<double> accumx = vx;
                     Vector<double> accumy = vy;
@@ -58,8 +70,9 @@ namespace Algorithms
                         accumy = naccumy + vy;
                         viters += increment;
                         Vector<double> sqabs = accumx * accumx + accumy * accumy;
-                        Vector<long> vCond = Vector.LessThanOrEqual(sqabs, vlimit) &
-                            Vector.LessThanOrEqual(viters, vmax_iters);
+                        Vector<long> vCond =
+                            Vector.LessThanOrEqual(sqabs, vlimit)
+                            & Vector.LessThanOrEqual(viters, vmax_iters);
                         increment = increment & vCond;
                     } while (increment != Vector<long>.Zero);
 
@@ -70,7 +83,13 @@ namespace Algorithms
 
         // Render the fractal on a single thread using the ComplexVecDouble data type
         // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in VectorFloat.cs
-        public void RenderSingleThreadedWithADT(float xminf, float xmaxf, float yminf, float ymaxf, float stepf)
+        public void RenderSingleThreadedWithADT(
+            float xminf,
+            float xmaxf,
+            float yminf,
+            float ymaxf,
+            float stepf
+        )
         {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
@@ -87,10 +106,18 @@ namespace Algorithms
 
             double y = ymin;
             int yp = 0;
-            for (Vector<double> vy = new Vector<double>(ymin); y <= ymax && !Abort; vy += vstep, y += step, yp++)
+            for (
+                Vector<double> vy = new Vector<double>(ymin);
+                y <= ymax && !Abort;
+                vy += vstep, y += step, yp++
+            )
             {
                 int xp = 0;
-                for (Vector<double> vx = vxmin; Vector.LessThanOrEqualAny(vx, vxmax); vx += vinc, xp += Vector<long>.Count)
+                for (
+                    Vector<double> vx = vxmin;
+                    Vector.LessThanOrEqualAny(vx, vxmax);
+                    vx += vinc, xp += Vector<long>.Count
+                )
                 {
                     ComplexVecDouble num = new ComplexVecDouble(vx, vy);
                     ComplexVecDouble accum = num;
@@ -102,8 +129,9 @@ namespace Algorithms
                     {
                         accum = accum.square() + num;
                         viters += increment;
-                        Vector<long> vCond = Vector.LessThanOrEqual(accum.sqabs(), vlimit) &
-                            Vector.LessThanOrEqual(viters, vmax_iters);
+                        Vector<long> vCond =
+                            Vector.LessThanOrEqual(accum.sqabs(), vlimit)
+                            & Vector.LessThanOrEqual(viters, vmax_iters);
                         increment = increment & vCond;
                     } while (increment != Vector<long>.Zero);
 
@@ -114,7 +142,13 @@ namespace Algorithms
 
         // Render the fractal on multiple threads using raw Vector<double> data types
         // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in VectorFloat.cs
-        public void RenderMultiThreadedNoADT(float xminf, float xmaxf, float yminf, float ymaxf, float stepf)
+        public void RenderMultiThreadedNoADT(
+            float xminf,
+            float xmaxf,
+            float yminf,
+            float ymaxf,
+            float stepf
+        )
         {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
@@ -129,42 +163,57 @@ namespace Algorithms
             Vector<double> vstep = new Vector<double>(step);
             Vector<double> vxmin = VectorHelper.Create(i => xmin + step * i);
 
-            Parallel.For(0, (int)(((ymax - ymin) / step) + .5), (yp) =>
-            {
-                if (Abort)
-                    return;
-
-                Vector<double> vy = new Vector<double>(ymin + step * yp);
-                int xp = 0;
-                for (Vector<double> vx = vxmin; Vector.LessThanOrEqualAny(vx, vxmax); vx += vinc, xp += Vector<long>.Count)
+            Parallel.For(
+                0,
+                (int)(((ymax - ymin) / step) + .5),
+                (yp) =>
                 {
-                    Vector<double> accumx = vx;
-                    Vector<double> accumy = vy;
+                    if (Abort)
+                        return;
 
-                    Vector<long> viters = Vector<long>.Zero;
-                    Vector<long> increment = Vector<long>.One;
-
-                    do
+                    Vector<double> vy = new Vector<double>(ymin + step * yp);
+                    int xp = 0;
+                    for (
+                        Vector<double> vx = vxmin;
+                        Vector.LessThanOrEqualAny(vx, vxmax);
+                        vx += vinc, xp += Vector<long>.Count
+                    )
                     {
-                        Vector<double> naccumx = accumx * accumx - accumy * accumy;
-                        Vector<double> naccumy = accumx * accumy + accumx * accumy;
-                        accumx = naccumx + vx;
-                        accumy = naccumy + vy;
-                        viters += increment;
-                        Vector<double> sqabs = accumx * accumx + accumy * accumy;
-                        Vector<long> vCond = Vector.LessThanOrEqual(sqabs, vlimit) &
-                            Vector.LessThanOrEqual(viters, vmax_iters);
-                        increment = increment & vCond;
-                    } while (increment != Vector<long>.Zero);
+                        Vector<double> accumx = vx;
+                        Vector<double> accumy = vy;
 
-                    viters.ForEach((iter, elemNum) => DrawPixel(xp + elemNum, yp, (int)iter));
+                        Vector<long> viters = Vector<long>.Zero;
+                        Vector<long> increment = Vector<long>.One;
+
+                        do
+                        {
+                            Vector<double> naccumx = accumx * accumx - accumy * accumy;
+                            Vector<double> naccumy = accumx * accumy + accumx * accumy;
+                            accumx = naccumx + vx;
+                            accumy = naccumy + vy;
+                            viters += increment;
+                            Vector<double> sqabs = accumx * accumx + accumy * accumy;
+                            Vector<long> vCond =
+                                Vector.LessThanOrEqual(sqabs, vlimit)
+                                & Vector.LessThanOrEqual(viters, vmax_iters);
+                            increment = increment & vCond;
+                        } while (increment != Vector<long>.Zero);
+
+                        viters.ForEach((iter, elemNum) => DrawPixel(xp + elemNum, yp, (int)iter));
+                    }
                 }
-            });
+            );
         }
 
         // Render the fractal on multiple threads using the ComplexVecDouble data type
         // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in VectorFloat.cs
-        public void RenderMultiThreadedWithADT(float xminf, float xmaxf, float yminf, float ymaxf, float stepf)
+        public void RenderMultiThreadedWithADT(
+            float xminf,
+            float xmaxf,
+            float yminf,
+            float ymaxf,
+            float stepf
+        )
         {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
@@ -179,33 +228,42 @@ namespace Algorithms
             Vector<double> vstep = new Vector<double>(step);
             Vector<double> vxmin = VectorHelper.Create(i => xmin + step * i);
 
-            Parallel.For(0, (int)(((ymax - ymin) / step) + .5), (yp) =>
-            {
-                if (Abort)
-                    return;
-
-                Vector<double> vy = new Vector<double>(ymin + step * yp);
-                int xp = 0;
-                for (Vector<double> vx = vxmin; Vector.LessThanOrEqualAny(vx, vxmax); vx += vinc, xp += Vector<long>.Count)
+            Parallel.For(
+                0,
+                (int)(((ymax - ymin) / step) + .5),
+                (yp) =>
                 {
-                    ComplexVecDouble num = new ComplexVecDouble(vx, vy);
-                    ComplexVecDouble accum = num;
+                    if (Abort)
+                        return;
 
-                    Vector<long> viters = Vector<long>.Zero;
-                    Vector<long> increment = Vector<long>.One;
-
-                    do
+                    Vector<double> vy = new Vector<double>(ymin + step * yp);
+                    int xp = 0;
+                    for (
+                        Vector<double> vx = vxmin;
+                        Vector.LessThanOrEqualAny(vx, vxmax);
+                        vx += vinc, xp += Vector<long>.Count
+                    )
                     {
-                        accum = accum.square() + num;
-                        viters += increment;
-                        Vector<long> vCond = Vector.LessThanOrEqual(accum.sqabs(), vlimit) &
-                            Vector.LessThanOrEqual(viters, vmax_iters);
-                        increment = increment & vCond;
-                    } while (increment != Vector<long>.Zero);
+                        ComplexVecDouble num = new ComplexVecDouble(vx, vy);
+                        ComplexVecDouble accum = num;
 
-                    viters.ForEach((iter, elemNum) => DrawPixel(xp + elemNum, yp, (int)iter));
+                        Vector<long> viters = Vector<long>.Zero;
+                        Vector<long> increment = Vector<long>.One;
+
+                        do
+                        {
+                            accum = accum.square() + num;
+                            viters += increment;
+                            Vector<long> vCond =
+                                Vector.LessThanOrEqual(accum.sqabs(), vlimit)
+                                & Vector.LessThanOrEqual(viters, vmax_iters);
+                            increment = increment & vCond;
+                        } while (increment != Vector<long>.Zero);
+
+                        viters.ForEach((iter, elemNum) => DrawPixel(xp + elemNum, yp, (int)iter));
+                    }
                 }
-            });
+            );
         }
     }
 }

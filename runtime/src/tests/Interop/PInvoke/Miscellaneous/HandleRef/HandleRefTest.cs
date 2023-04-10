@@ -26,7 +26,8 @@ class HandleRefTest
 
     public unsafe static int Main()
     {
-        try{
+        try
+        {
             const int intManaged = 1000;
             const int intNative = 2000;
             const int intReturn = 3000;
@@ -62,7 +63,13 @@ class HandleRefTest
             *int4Ptr = intManaged;
             CollectableClass collectableClass = new CollectableClass(int4Ptr);
             HandleRef hr4 = new HandleRef(collectableClass, (IntPtr)int4Ptr);
-            Action gcCallback = () => { Console.WriteLine("GC callback now"); GC.Collect(2, GCCollectionMode.Forced); GC.WaitForPendingFinalizers(); GC.Collect(2, GCCollectionMode.Forced); };
+            Action gcCallback = () =>
+            {
+                Console.WriteLine("GC callback now");
+                GC.Collect(2, GCCollectionMode.Forced);
+                GC.WaitForPendingFinalizers();
+                GC.Collect(2, GCCollectionMode.Forced);
+            };
             Assert.Equal(intReturn, TestNoGC(hr4, gcCallback));
             Console.WriteLine("Native code finished");
 
@@ -70,7 +77,9 @@ class HandleRefTest
             Assert.Throws<MarshalDirectiveException>(() => InvalidMarshalPointer_Return());
 
             return 100;
-        } catch (Exception e){
+        }
+        catch (Exception e)
+        {
             Console.WriteLine($"Test Failure: {e}");
             return 101;
         }
@@ -83,6 +92,7 @@ class HandleRefTest
     unsafe class CollectableClass
     {
         int* PtrToChange;
+
         public CollectableClass(int* ptrToChange)
         {
             PtrToChange = ptrToChange;

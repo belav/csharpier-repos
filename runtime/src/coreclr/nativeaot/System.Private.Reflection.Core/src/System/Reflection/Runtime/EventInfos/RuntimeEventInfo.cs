@@ -52,15 +52,13 @@ namespace System.Reflection.Runtime.EventInfos
 
         public sealed override Type DeclaringType
         {
-            get
-            {
+            get {
 #if ENABLE_REFLECTION_TRACE
                 if (ReflectionTrace.Enabled)
                     ReflectionTrace.EventInfo_DeclaringType(this);
 #endif
 
-                return ContextTypeInfo;
-            }
+                return ContextTypeInfo; }
         }
 
         public sealed override MethodInfo[] GetOtherMethods(bool nonPublic)
@@ -72,44 +70,34 @@ namespace System.Reflection.Runtime.EventInfos
 
         public sealed override Module Module
         {
-            get
-            {
-                return DefiningTypeInfo.Module;
-            }
+            get { return DefiningTypeInfo.Module; }
         }
 
         public sealed override string Name
         {
-            get
-            {
+            get {
 #if ENABLE_REFLECTION_TRACE
                 if (ReflectionTrace.Enabled)
                     ReflectionTrace.EventInfo_Name(this);
 #endif
 
-                return MetadataName;
-            }
+                return MetadataName; }
         }
 
         public sealed override Type ReflectedType
         {
-            get
-            {
-                return ReflectedTypeInfo;
-            }
+            get { return ReflectedTypeInfo; }
         }
 
         public sealed override MethodInfo RaiseMethod
         {
-            get
-            {
+            get {
 #if ENABLE_REFLECTION_TRACE
                 if (ReflectionTrace.Enabled)
                     ReflectionTrace.EventInfo_RaiseMethod(this);
 #endif
 
-                return GetEventMethod(EventMethodSemantics.Fire);
-            }
+                return GetEventMethod(EventMethodSemantics.Fire); }
         }
 
         public sealed override MethodInfo RemoveMethod
@@ -146,18 +134,12 @@ namespace System.Reflection.Runtime.EventInfos
 
         string ITraceableTypeMember.MemberName
         {
-            get
-            {
-                return MetadataName;
-            }
+            get { return MetadataName; }
         }
 
         Type ITraceableTypeMember.ContainingType
         {
-            get
-            {
-                return ContextTypeInfo;
-            }
+            get { return ContextTypeInfo; }
         }
 
         protected RuntimeEventInfo WithDebugName()
@@ -208,7 +190,6 @@ namespace System.Reflection.Runtime.EventInfos
         /// Return the DefiningTypeInfo as a RuntimeTypeInfo (instead of as a format specific type info)
         /// </summary>
         protected abstract RuntimeTypeInfo DefiningTypeInfo { get; }
-
 
         protected readonly RuntimeTypeInfo ContextTypeInfo;
         protected readonly RuntimeTypeInfo ReflectedTypeInfo;

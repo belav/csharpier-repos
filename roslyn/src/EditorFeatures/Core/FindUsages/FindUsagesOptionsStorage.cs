@@ -9,7 +9,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
 {
     internal static class FindUsagesOptionsStorage
     {
-        public static FindUsagesOptions GetFindUsagesOptions(this IGlobalOptionService globalOptions, string language)
-            => new(ClassificationOptions: globalOptions.GetClassificationOptions(language));
+        public static FindUsagesOptions GetFindUsagesOptions(
+            this IGlobalOptionService globalOptions,
+            string language
+        ) => new(ClassificationOptions: globalOptions.GetClassificationOptions(language));
     }
 }

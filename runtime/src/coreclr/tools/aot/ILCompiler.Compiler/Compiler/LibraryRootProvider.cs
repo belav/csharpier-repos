@@ -47,7 +47,11 @@ namespace ILCompiler
             }
         }
 
-        private static void RootMethods(TypeDesc type, string reason, IRootingServiceProvider rootProvider)
+        private static void RootMethods(
+            TypeDesc type,
+            string reason,
+            IRootingServiceProvider rootProvider
+        )
         {
             foreach (MethodDesc method in type.GetAllMethods())
             {
@@ -86,7 +90,10 @@ namespace ILCompiler
             MethodSignature signature = method.Signature;
 
             // Vararg methods are not supported in .NET Core
-            if ((signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask) == MethodSignatureFlags.CallingConventionVarargs)
+            if (
+                (signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask)
+                == MethodSignatureFlags.CallingConventionVarargs
+            )
                 ThrowHelper.ThrowBadImageFormatException();
 
             CheckTypeCanBeUsedInSignature(signature.ReturnType);

@@ -47,12 +47,13 @@ public class AutobahnSpec
         File.WriteAllText(file, GetJson().ToString(Formatting.Indented));
     }
 
-    public JObject GetJson() => new JObject(
-        new JProperty("options", new JObject(
-            new JProperty("failByDrop", false))),
-        new JProperty("outdir", OutputDirectory),
-        new JProperty("servers", new JArray(Servers.Select(s => s.GetJson()).ToArray())),
-        new JProperty("cases", new JArray(Cases.ToArray())),
-        new JProperty("exclude-cases", new JArray(ExcludedCases.ToArray())),
-        new JProperty("exclude-agent-cases", new JObject()));
+    public JObject GetJson() =>
+        new JObject(
+            new JProperty("options", new JObject(new JProperty("failByDrop", false))),
+            new JProperty("outdir", OutputDirectory),
+            new JProperty("servers", new JArray(Servers.Select(s => s.GetJson()).ToArray())),
+            new JProperty("cases", new JArray(Cases.ToArray())),
+            new JProperty("exclude-cases", new JArray(ExcludedCases.ToArray())),
+            new JProperty("exclude-agent-cases", new JObject())
+        );
 }

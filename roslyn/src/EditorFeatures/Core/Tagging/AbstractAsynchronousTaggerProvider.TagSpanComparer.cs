@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         {
             private readonly IEqualityComparer<TTag> _tagComparer;
 
-            public TagSpanComparer(IEqualityComparer<TTag> tagComparer)
-                => _tagComparer = tagComparer;
+            public TagSpanComparer(IEqualityComparer<TTag> tagComparer) =>
+                _tagComparer = tagComparer;
 
             public bool Equals(ITagSpan<TTag> x, ITagSpan<TTag> y)
             {
@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 return _tagComparer.Equals(x.Tag, y.Tag);
             }
 
-            public int GetHashCode(ITagSpan<TTag> obj)
-                => obj.Span.GetHashCode() ^ _tagComparer.GetHashCode(obj.Tag);
+            public int GetHashCode(ITagSpan<TTag> obj) =>
+                obj.Span.GetHashCode() ^ _tagComparer.GetHashCode(obj.Tag);
         }
     }
 }

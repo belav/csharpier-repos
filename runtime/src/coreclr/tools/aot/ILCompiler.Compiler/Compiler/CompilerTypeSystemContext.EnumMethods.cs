@@ -31,9 +31,14 @@ namespace ILCompiler
         private sealed class EnumInfoHashtable : LockFreeReaderHashtable<TypeDesc, EnumInfo>
         {
             protected override int GetKeyHashCode(TypeDesc key) => key.GetHashCode();
+
             protected override int GetValueHashCode(EnumInfo value) => value.Type.GetHashCode();
-            protected override bool CompareKeyToValue(TypeDesc key, EnumInfo value) => key == value.Type;
-            protected override bool CompareValueToValue(EnumInfo v1, EnumInfo v2) => v1.Type == v2.Type;
+
+            protected override bool CompareKeyToValue(TypeDesc key, EnumInfo value) =>
+                key == value.Type;
+
+            protected override bool CompareValueToValue(EnumInfo v1, EnumInfo v2) =>
+                v1.Type == v2.Type;
 
             protected override EnumInfo CreateValueFromKey(TypeDesc key)
             {
@@ -43,7 +48,10 @@ namespace ILCompiler
 
         private EnumInfoHashtable _enumInfoHashtable = new EnumInfoHashtable();
 
-        public MethodDesc TryResolveConstrainedEnumMethod(TypeDesc enumType, MethodDesc virtualMethod)
+        public MethodDesc TryResolveConstrainedEnumMethod(
+            TypeDesc enumType,
+            MethodDesc virtualMethod
+        )
         {
             Debug.Assert(enumType.IsEnum);
 
@@ -69,7 +77,10 @@ namespace ILCompiler
             return resolvedMethod;
         }
 
-        protected virtual IEnumerable<MethodDesc> GetAllMethodsForEnum(TypeDesc enumType, bool virtualOnly)
+        protected virtual IEnumerable<MethodDesc> GetAllMethodsForEnum(
+            TypeDesc enumType,
+            bool virtualOnly
+        )
         {
             if (virtualOnly)
             {
@@ -78,7 +89,8 @@ namespace ILCompiler
                 yield break;
             }
 
-            _objectEqualsMethod ??= GetWellKnownType(WellKnownType.Object).GetMethod("Equals", null);
+            _objectEqualsMethod ??= GetWellKnownType(WellKnownType.Object)
+                .GetMethod("Equals", null);
 
             // If the classlib doesn't have Object.Equals, we don't need this.
             if (_objectEqualsMethod == null)
@@ -89,8 +101,14 @@ namespace ILCompiler
 
             if (enumType != enumTypeDefinition)
             {
-                yield return GetMethodForInstantiatedType(info.GetHashCodeMethod, (InstantiatedType)enumType);
-                yield return GetMethodForInstantiatedType(info.EqualsMethod, (InstantiatedType)enumType);
+                yield return GetMethodForInstantiatedType(
+                    info.GetHashCodeMethod,
+                    (InstantiatedType)enumType
+                );
+                yield return GetMethodForInstantiatedType(
+                    info.EqualsMethod,
+                    (InstantiatedType)enumType
+                );
             }
             else
             {

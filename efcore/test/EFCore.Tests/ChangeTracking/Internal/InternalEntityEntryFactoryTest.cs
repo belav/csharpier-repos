@@ -22,7 +22,11 @@ public class InternalEntityEntryFactoryTest
         var stateManager = contextServices.GetRequiredService<IStateManager>();
 
         var entity = new RedHook();
-        var entry = new InternalEntityEntry(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
+        var entry = new InternalEntityEntry(
+            stateManager,
+            (IEntityType)entityTypeBuilder.Metadata,
+            entity
+        );
 
         Assert.Same(stateManager, entry.StateManager);
         Assert.Same(entityTypeBuilder.Metadata, entry.EntityType);
@@ -44,7 +48,11 @@ public class InternalEntityEntryFactoryTest
         var stateManager = contextServices.GetRequiredService<IStateManager>();
 
         var entity = new RedHook();
-        var entry = new InternalEntityEntry(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
+        var entry = new InternalEntityEntry(
+            stateManager,
+            (IEntityType)entityTypeBuilder.Metadata,
+            entity
+        );
 
         Assert.Same(stateManager, entry.StateManager);
         Assert.Same(entityTypeBuilder.Metadata, entry.EntityType);

@@ -17,18 +17,25 @@ namespace System.ServiceModel.Channels
     {
         public static bool IsDefined(SecurityHeaderLayout value)
         {
-            return (value == SecurityHeaderLayout.Lax
-            || value == SecurityHeaderLayout.LaxTimestampFirst
-            || value == SecurityHeaderLayout.LaxTimestampLast
-            || value == SecurityHeaderLayout.Strict);
+            return (
+                value == SecurityHeaderLayout.Lax
+                || value == SecurityHeaderLayout.LaxTimestampFirst
+                || value == SecurityHeaderLayout.LaxTimestampLast
+                || value == SecurityHeaderLayout.Strict
+            );
         }
 
         public static void Validate(SecurityHeaderLayout value)
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(SecurityHeaderLayout)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(SecurityHeaderLayout)
+                    )
+                );
             }
         }
     }

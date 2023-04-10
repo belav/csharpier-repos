@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpRemoveUnnecessaryDiscardDesignationDiagnosticAnalyzer,
-        CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider>;
+        CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryDiscardDesignation)]
     public class RemoveUnnecessaryDiscardDesignationTests
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryDiscar
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -37,7 +39,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -58,7 +61,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -79,7 +83,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -90,7 +95,8 @@ class C
         };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -110,7 +116,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -118,7 +125,8 @@ class C
         if (o is int [|_|]) { }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -135,7 +143,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -146,7 +155,8 @@ class C
         };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -166,7 +176,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -177,7 +188,8 @@ class C
         };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -197,7 +209,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -208,7 +221,8 @@ class C
         };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(object o)
@@ -228,7 +242,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(object o)
@@ -248,7 +263,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(string o)
@@ -259,7 +275,8 @@ class C
         };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(string o)

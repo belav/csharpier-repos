@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.IProcessInitControl.cs
 //
 // Author:  Mike Kestner (mkestner@ximian.com)
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,17 +30,17 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
+namespace System.EnterpriseServices
+{
+    [Guid("72380d55-8d2b-43a3-8513-2b6ef31434e9")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport]
+    public interface IProcessInitControl
+    {
+        #region Methods
 
-	[Guid("72380d55-8d2b-43a3-8513-2b6ef31434e9")]
-	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport]
-	public interface IProcessInitControl {
+        void ResetInitializerTimeout(int dwSecondsRemaining);
 
-		#region Methods
-
-		void ResetInitializerTimeout (int dwSecondsRemaining);
-
-		#endregion
-	}
+        #endregion
+    }
 }

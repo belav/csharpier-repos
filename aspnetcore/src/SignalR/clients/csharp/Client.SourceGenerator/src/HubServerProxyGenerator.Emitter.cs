@@ -22,12 +22,14 @@ internal partial class HubServerProxyGenerator
 
         public void Emit()
         {
-            if (string.IsNullOrEmpty(_spec.GetterClassAccessibility) ||
-                string.IsNullOrEmpty(_spec.GetterMethodAccessibility) ||
-                string.IsNullOrEmpty(_spec.GetterClassName) ||
-                string.IsNullOrEmpty(_spec.GetterMethodName) ||
-                string.IsNullOrEmpty(_spec.GetterTypeParameterName) ||
-                string.IsNullOrEmpty(_spec.GetterHubConnectionParameterName))
+            if (
+                string.IsNullOrEmpty(_spec.GetterClassAccessibility)
+                || string.IsNullOrEmpty(_spec.GetterMethodAccessibility)
+                || string.IsNullOrEmpty(_spec.GetterClassName)
+                || string.IsNullOrEmpty(_spec.GetterMethodName)
+                || string.IsNullOrEmpty(_spec.GetterTypeParameterName)
+                || string.IsNullOrEmpty(_spec.GetterHubConnectionParameterName)
+            )
             {
                 return;
             }
@@ -50,14 +52,18 @@ internal partial class HubServerProxyGenerator
                 var fqIntfTypeName = classSpec.FullyQualifiedInterfaceTypeName;
                 var fqClassTypeName =
                     $"{_spec.GetterNamespace}.{_spec.GetterClassName}.{classSpec.ClassTypeName}";
-                getProxyBody.Append($@"
+                getProxyBody.Append(
+                    $@"
             if (typeof({_spec.GetterTypeParameterName}) == typeof({fqIntfTypeName}))
             {{
                 return ({_spec.GetterTypeParameterName}) ({fqIntfTypeName}) new {fqClassTypeName}({_spec.GetterHubConnectionParameterName});
-            }}");
+            }}"
+                );
             }
 
-            var getProxy = GeneratorHelpers.SourceFilePrefix() + $@"
+            var getProxy =
+                GeneratorHelpers.SourceFilePrefix()
+                + $@"
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace {_spec.GetterNamespace}
@@ -72,7 +78,10 @@ namespace {_spec.GetterNamespace}
     }}
 }}";
 
-            _context.AddSource("HubServerProxy.g.cs", SourceText.From(getProxy.ToString(), Encoding.UTF8));
+            _context.AddSource(
+                "HubServerProxy.g.cs",
+                SourceText.From(getProxy.ToString(), Encoding.UTF8)
+            );
         }
 
         private void EmitProxy(ClassSpec classSpec)
@@ -81,7 +90,9 @@ namespace {_spec.GetterNamespace}
 
             foreach (var methodSpec in classSpec.Methods)
             {
-                var signature = new StringBuilder($"public {methodSpec.FullyQualifiedReturnTypeName} {methodSpec.Name}(");
+                var signature = new StringBuilder(
+                    $"public {methodSpec.FullyQualifiedReturnTypeName} {methodSpec.Name}("
+                );
                 var callArgs = new StringBuilder("");
                 var signatureArgs = new StringBuilder("");
                 var first = true;
@@ -93,7 +104,9 @@ namespace {_spec.GetterNamespace}
                     }
 
                     first = false;
-                    signatureArgs.Append($"{argumentSpec.FullyQualifiedTypeName} {argumentSpec.Name}");
+                    signatureArgs.Append(
+                        $"{argumentSpec.FullyQualifiedTypeName} {argumentSpec.Name}"
+                    );
                     callArgs.Append($", {argumentSpec.Name}");
                 }
                 signature.Append(signatureArgs);
@@ -119,7 +132,8 @@ namespace {_spec.GetterNamespace}
                     {
                         if (methodSpec.InnerReturnTypeName is not null)
                         {
-                            prefix = $"new System.Threading.Tasks.ValueTask<{methodSpec.InnerReturnTypeName}>(";
+                            prefix =
+                                $"new System.Threading.Tasks.ValueTask<{methodSpec.InnerReturnTypeName}>(";
                         }
                         else
                         {
@@ -129,10 +143,12 @@ namespace {_spec.GetterNamespace}
                     }
 
                     // Bake it all together
-                    body = $"return {prefix}this.connection.{specificCall}(\"{methodSpec.Name}\"{callArgs}){suffix};";
+                    body =
+                        $"return {prefix}this.connection.{specificCall}(\"{methodSpec.Name}\"{callArgs}){suffix};";
                 }
 
-                var method = $@"
+                var method =
+                    $@"
         {signature}
         {{
             {body}
@@ -141,7 +157,9 @@ namespace {_spec.GetterNamespace}
                 methods.Append(method);
             }
 
-            var proxy = GeneratorHelpers.SourceFilePrefix() + $@"
+            var proxy =
+                GeneratorHelpers.SourceFilePrefix()
+                + $@"
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace {_spec.GetterNamespace}
@@ -160,19 +178,26 @@ namespace {_spec.GetterNamespace}
     }}
 }}";
 
-            _context.AddSource($"HubServerProxy.{classSpec.ClassTypeName}.g.cs", SourceText.From(proxy.ToString(), Encoding.UTF8));
+            _context.AddSource(
+                $"HubServerProxy.{classSpec.ClassTypeName}.g.cs",
+                SourceText.From(proxy.ToString(), Encoding.UTF8)
+            );
         }
 
         private static string GetSpecificCall(MethodSpec methodSpec)
         {
-            if (methodSpec.Stream.HasFlag(StreamSpec.ServerToClient) &&
-                !methodSpec.Stream.HasFlag(StreamSpec.AsyncEnumerable))
+            if (
+                methodSpec.Stream.HasFlag(StreamSpec.ServerToClient)
+                && !methodSpec.Stream.HasFlag(StreamSpec.AsyncEnumerable)
+            )
             {
                 return $"StreamAsChannelAsync<{methodSpec.InnerReturnTypeName}>";
             }
 
-            if (methodSpec.Stream.HasFlag(StreamSpec.ServerToClient) &&
-                methodSpec.Stream.HasFlag(StreamSpec.AsyncEnumerable))
+            if (
+                methodSpec.Stream.HasFlag(StreamSpec.ServerToClient)
+                && methodSpec.Stream.HasFlag(StreamSpec.AsyncEnumerable)
+            )
             {
                 return $"StreamAsync<{methodSpec.InnerReturnTypeName}>";
             }

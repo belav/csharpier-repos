@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ComponentRenameEvent.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using Microsoft.Win32;
     using System;
     using System.ComponentModel;
@@ -18,9 +19,16 @@ namespace System.ComponentModel.Design {
     /// </devdoc>
     [HostProtection(SharedState = true)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.InheritanceDemand, Name="FullTrust")]
-    [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Name="FullTrust")]
-    public class ComponentRenameEventArgs : EventArgs {
+    [System.Security.Permissions.PermissionSetAttribute(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Name = "FullTrust"
+    )]
+    [System.Security.Permissions.PermissionSetAttribute(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Name = "FullTrust"
+    )]
+    public class ComponentRenameEventArgs : EventArgs
+    {
         private object component;
         private string oldName;
         private string newName;
@@ -30,10 +38,9 @@ namespace System.ComponentModel.Design {
         ///       Gets or sets the component that is being renamed.
         ///    </para>
         /// </devdoc>
-        public object Component {
-            get {
-                return component;
-            }
+        public object Component
+        {
+            get { return component; }
         }
 
         /// <devdoc>
@@ -42,10 +49,9 @@ namespace System.ComponentModel.Design {
         ///       sets the name of the component before the rename.
         ///    </para>
         /// </devdoc>
-        public virtual string OldName {
-            get {
-                return oldName;
-            }
+        public virtual string OldName
+        {
+            get { return oldName; }
         }
 
         /// <devdoc>
@@ -54,10 +60,9 @@ namespace System.ComponentModel.Design {
         ///       sets the current name of the component.
         ///    </para>
         /// </devdoc>
-        public virtual string NewName {
-            get {
-                return newName;
-            }
+        public virtual string NewName
+        {
+            get { return newName; }
         }
 
         /// <devdoc>
@@ -66,7 +71,8 @@ namespace System.ComponentModel.Design {
         ///       class.
         ///    </para>
         /// </devdoc>
-        public ComponentRenameEventArgs(object component, string oldName, string newName) {
+        public ComponentRenameEventArgs(object component, string oldName, string newName)
+        {
             this.oldName = oldName;
             this.newName = newName;
             this.component = component;

@@ -24,11 +24,12 @@ public class AfterMapNestedObjects : AutoMapperSpecBase
         public InnerDTO Inner { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Inner, InnerDTO>();
-        cfg.CreateMap<Outer, OuterDTO>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Inner, InnerDTO>();
+            cfg.CreateMap<Outer, OuterDTO>();
+        });
 
     protected override void Because_of()
     {

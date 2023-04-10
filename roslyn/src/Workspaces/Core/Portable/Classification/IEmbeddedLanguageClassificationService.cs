@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             ClassificationOptions options,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         void AddEmbeddedLanguageClassifications(
             Project? project,
@@ -25,6 +26,7 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             ClassificationOptions options,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

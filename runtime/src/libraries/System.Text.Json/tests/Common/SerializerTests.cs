@@ -52,7 +52,8 @@ namespace System.Text.Json.Serialization.Tests
             string expectedJson,
             Type? expectedExceptionType = null,
             SerializedValueContext contexts = SerializedValueContext.All,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             Assert.True((contexts & SerializedValueContext.All) != SerializedValueContext.None);
 
@@ -62,7 +63,10 @@ namespace System.Text.Json.Serialization.Tests
             {
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(expectedExceptionType, () => Serializer.SerializeWrapper(value, options));
+                    await Assert.ThrowsAsync(
+                        expectedExceptionType,
+                        () => Serializer.SerializeWrapper(value, options)
+                    );
                 }
                 else
                 {
@@ -77,7 +81,10 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(expectedExceptionType, () => Serializer.SerializeWrapper(poco, options));
+                    await Assert.ThrowsAsync(
+                        expectedExceptionType,
+                        () => Serializer.SerializeWrapper(poco, options)
+                    );
                 }
                 else
                 {
@@ -86,7 +93,10 @@ namespace System.Text.Json.Serialization.Tests
                         : nameof(GenericPoco<TValue>.Property);
 
                     actualJson = await Serializer.SerializeWrapper(poco, options);
-                    JsonTestHelper.AssertJsonEqual($@"{{ ""{propertyName}"" : {expectedJson} }}", actualJson);
+                    JsonTestHelper.AssertJsonEqual(
+                        $@"{{ ""{propertyName}"" : {expectedJson} }}",
+                        actualJson
+                    );
                 }
             }
 
@@ -96,7 +106,10 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(expectedExceptionType, () => Serializer.SerializeWrapper(list, options));
+                    await Assert.ThrowsAsync(
+                        expectedExceptionType,
+                        () => Serializer.SerializeWrapper(list, options)
+                    );
                 }
                 else
                 {
@@ -112,7 +125,10 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(expectedExceptionType, () => Serializer.SerializeWrapper(dictionary, options));
+                    await Assert.ThrowsAsync(
+                        expectedExceptionType,
+                        () => Serializer.SerializeWrapper(dictionary, options)
+                    );
                 }
                 else
                 {
@@ -121,7 +137,10 @@ namespace System.Text.Json.Serialization.Tests
                         : key;
 
                     actualJson = await Serializer.SerializeWrapper(dictionary, options);
-                    JsonTestHelper.AssertJsonEqual($@"{{ ""{jsonKey}"" : {expectedJson} }}", actualJson);
+                    JsonTestHelper.AssertJsonEqual(
+                        $@"{{ ""{jsonKey}"" : {expectedJson} }}",
+                        actualJson
+                    );
                 }
             }
 
@@ -132,12 +151,18 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(expectedExceptionType, () => Serializer.SerializeWrapper(jsonObject, options));
+                    await Assert.ThrowsAsync(
+                        expectedExceptionType,
+                        () => Serializer.SerializeWrapper(jsonObject, options)
+                    );
                 }
                 else
                 {
                     actualJson = await Serializer.SerializeWrapper(jsonObject, options);
-                    JsonTestHelper.AssertJsonEqual($@"{{ ""{key}"" : {expectedJson} }}", actualJson);
+                    JsonTestHelper.AssertJsonEqual(
+                        $@"{{ ""{key}"" : {expectedJson} }}",
+                        actualJson
+                    );
                 }
             }
         }
@@ -149,7 +174,8 @@ namespace System.Text.Json.Serialization.Tests
         protected async Task TestMultiContextSerialization<TValue>(
             IEnumerable<(TValue Value, string ExpectedJson)> inputs,
             SerializedValueContext contexts = SerializedValueContext.All,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             inputs = inputs.ToList();
             string expectedJson = $"[{string.Join(", ", inputs.Select(x => x.ExpectedJson))}]";
@@ -159,7 +185,8 @@ namespace System.Text.Json.Serialization.Tests
                 expectedJson,
                 expectedExceptionType: null,
                 contexts,
-                options);
+                options
+            );
         }
 
         /// <summary>
@@ -172,20 +199,25 @@ namespace System.Text.Json.Serialization.Tests
             Type? expectedExceptionType = null,
             SerializedValueContext contexts = SerializedValueContext.All,
             JsonSerializerOptions? options = null,
-            IEqualityComparer<TValue>? equalityComparer = null)
+            IEqualityComparer<TValue>? equalityComparer = null
+        )
         {
             Assert.True((contexts & SerializedValueContext.All) != SerializedValueContext.None);
 
             string wrappedJson;
-            equalityComparer ??= expectedValue is IEquatable<TValue>
-                ? EqualityComparer<TValue>.Default
-                : new JsonEqualityComparer<TValue>();
+            equalityComparer ??=
+                expectedValue is IEquatable<TValue>
+                    ? EqualityComparer<TValue>.Default
+                    : new JsonEqualityComparer<TValue>();
 
             if (contexts.HasFlag(SerializedValueContext.RootValue))
             {
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(expectedExceptionType, () => Serializer.DeserializeWrapper<TValue>(json, options));
+                    await Assert.ThrowsAsync(
+                        expectedExceptionType,
+                        () => Serializer.DeserializeWrapper<TValue>(json, options)
+                    );
                 }
                 else
                 {
@@ -196,8 +228,7 @@ namespace System.Text.Json.Serialization.Tests
 
             if (contexts.HasFlag(SerializedValueContext.ObjectProperty))
             {
-                string propertyName =
-                    options?.PropertyNamingPolicy is JsonNamingPolicy policy
+                string propertyName = options?.PropertyNamingPolicy is JsonNamingPolicy policy
                     ? policy.ConvertName(nameof(GenericPoco<TValue>.Property))
                     : nameof(GenericPoco<TValue>.Property);
 
@@ -205,12 +236,17 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(expectedExceptionType, () => Serializer.DeserializeWrapper<GenericPoco<TValue>>(wrappedJson, options));
+                    await Assert.ThrowsAsync(
+                        expectedExceptionType,
+                        () =>
+                            Serializer.DeserializeWrapper<GenericPoco<TValue>>(wrappedJson, options)
+                    );
                 }
                 else
                 {
-
-                    GenericPoco<TValue> poco = await Serializer.DeserializeWrapper<GenericPoco<TValue>>(wrappedJson, options);
+                    GenericPoco<TValue> poco = await Serializer.DeserializeWrapper<
+                        GenericPoco<TValue>
+                    >(wrappedJson, options);
                     Assert.Equal(expectedValue, poco.Property, equalityComparer);
                 }
             }
@@ -221,11 +257,17 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(expectedExceptionType, () => Serializer.DeserializeWrapper<List<TValue>>(wrappedJson, options));
+                    await Assert.ThrowsAsync(
+                        expectedExceptionType,
+                        () => Serializer.DeserializeWrapper<List<TValue>>(wrappedJson, options)
+                    );
                 }
                 else
                 {
-                    List<TValue> list = await Serializer.DeserializeWrapper<List<TValue>>(wrappedJson, options);
+                    List<TValue> list = await Serializer.DeserializeWrapper<List<TValue>>(
+                        wrappedJson,
+                        options
+                    );
                     Assert.Equal(1, list.Count);
                     Assert.Equal(expectedValue, list[0], equalityComparer);
                 }
@@ -238,11 +280,20 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(expectedExceptionType, () => Serializer.DeserializeWrapper<Dictionary<string, TValue>>(wrappedJson, options));
+                    await Assert.ThrowsAsync(
+                        expectedExceptionType,
+                        () =>
+                            Serializer.DeserializeWrapper<Dictionary<string, TValue>>(
+                                wrappedJson,
+                                options
+                            )
+                    );
                 }
                 else
                 {
-                    Dictionary<string, TValue> dictionary = await Serializer.DeserializeWrapper<Dictionary<string, TValue>>(wrappedJson, options);
+                    Dictionary<string, TValue> dictionary = await Serializer.DeserializeWrapper<
+                        Dictionary<string, TValue>
+                    >(wrappedJson, options);
                     Assert.Equal(1, dictionary.Count);
                     Assert.True(dictionary.ContainsKey(key));
                     Assert.Equal(expectedValue, dictionary[key], equalityComparer);
@@ -256,16 +307,24 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(expectedExceptionType,
+                    await Assert.ThrowsAsync(
+                        expectedExceptionType,
                         async () =>
                         {
-                            JsonNode jsonNode = await Serializer.DeserializeWrapper<JsonNode>(wrappedJson, options);
+                            JsonNode jsonNode = await Serializer.DeserializeWrapper<JsonNode>(
+                                wrappedJson,
+                                options
+                            );
                             JsonSerializer.Deserialize<TValue>(jsonNode[key], options);
-                        });
+                        }
+                    );
                 }
                 else
                 {
-                    JsonNode jsonNode = await Serializer.DeserializeWrapper<JsonNode>(wrappedJson, options);
+                    JsonNode jsonNode = await Serializer.DeserializeWrapper<JsonNode>(
+                        wrappedJson,
+                        options
+                    );
                     TValue value = JsonSerializer.Deserialize<TValue>(jsonNode[key], options);
                     Assert.Equal(expectedValue, value, equalityComparer);
                 }
@@ -280,13 +339,21 @@ namespace System.Text.Json.Serialization.Tests
             IEnumerable<(string Json, TValue ExpectedValue)> inputs,
             SerializedValueContext contexts = SerializedValueContext.All,
             JsonSerializerOptions? options = null,
-            IEqualityComparer<TValue>? equalityComparer = null)
+            IEqualityComparer<TValue>? equalityComparer = null
+        )
         {
             inputs = inputs.ToList();
             List<TValue> expectedValues = inputs.Select(x => x.ExpectedValue).ToList();
             string json = $"[{string.Join(",", inputs.Select(x => x.Json))}]";
             var listEqualityComparer = new ListAssertionEqualityComparer<TValue>(equalityComparer);
-            await TestMultiContextDeserialization<List<TValue>>(json, expectedValues, expectedExceptionType: null, contexts, options, listEqualityComparer);
+            await TestMultiContextDeserialization<List<TValue>>(
+                json,
+                expectedValues,
+                expectedExceptionType: null,
+                contexts,
+                options,
+                listEqualityComparer
+            );
         }
 
         private class GenericPoco<T>
@@ -296,8 +363,11 @@ namespace System.Text.Json.Serialization.Tests
 
         private class JsonEqualityComparer<TValue> : IEqualityComparer<TValue>
         {
-            public bool Equals(TValue? x, TValue? y) => JsonSerializer.Serialize(x) == JsonSerializer.Serialize(y);
-            public int GetHashCode([DisallowNull] TValue obj) => JsonSerializer.Serialize(obj).GetHashCode();
+            public bool Equals(TValue? x, TValue? y) =>
+                JsonSerializer.Serialize(x) == JsonSerializer.Serialize(y);
+
+            public int GetHashCode([DisallowNull] TValue obj) =>
+                JsonSerializer.Serialize(obj).GetHashCode();
         }
 
         private class ListAssertionEqualityComparer<TValue> : IEqualityComparer<IList<TValue>>
@@ -315,7 +385,8 @@ namespace System.Text.Json.Serialization.Tests
                 return true;
             }
 
-            public int GetHashCode([DisallowNull] IList<TValue> obj) => throw new NotImplementedException();
+            public int GetHashCode([DisallowNull] IList<TValue> obj) =>
+                throw new NotImplementedException();
         }
     }
 }

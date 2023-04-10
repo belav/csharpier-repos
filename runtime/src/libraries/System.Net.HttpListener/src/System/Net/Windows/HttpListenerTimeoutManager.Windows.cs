@@ -79,15 +79,9 @@ namespace System.Net
         // Use TimeSpan.Zero to indicate that system defaults should be used.
         public TimeSpan EntityBody
         {
-            get
-            {
-                return GetTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.EntityBody);
-            }
+            get { return GetTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.EntityBody); }
             [SupportedOSPlatform("windows")]
-            set
-            {
-                SetTimespanTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.EntityBody, value);
-            }
+            set { SetTimespanTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.EntityBody, value); }
         }
 
         // The time, in seconds, allowed for the HTTP Server API to drain the entity body on a Keep-Alive connection.
@@ -101,14 +95,8 @@ namespace System.Net
         // Use TimeSpan.Zero to indicate that system defaults should be used.
         public TimeSpan DrainEntityBody
         {
-            get
-            {
-                return GetTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.DrainEntityBody);
-            }
-            set
-            {
-                SetTimespanTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.DrainEntityBody, value);
-            }
+            get { return GetTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.DrainEntityBody); }
+            set { SetTimespanTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.DrainEntityBody, value); }
         }
 
         // The time, in seconds, allowed for the request to remain in the request queue before the application picks
@@ -117,15 +105,9 @@ namespace System.Net
         // Use TimeSpan.Zero to indicate that system defaults should be used.
         public TimeSpan RequestQueue
         {
-            get
-            {
-                return GetTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.RequestQueue);
-            }
+            get { return GetTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.RequestQueue); }
             [SupportedOSPlatform("windows")]
-            set
-            {
-                SetTimespanTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.RequestQueue, value);
-            }
+            set { SetTimespanTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.RequestQueue, value); }
         }
 
         // The time, in seconds, allowed for an idle connection.  The default timer is 2 minutes.
@@ -135,14 +117,8 @@ namespace System.Net
         // Use TimeSpan.Zero to indicate that system defaults should be used.
         public TimeSpan IdleConnection
         {
-            get
-            {
-                return GetTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.IdleConnection);
-            }
-            set
-            {
-                SetTimespanTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.IdleConnection, value);
-            }
+            get { return GetTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.IdleConnection); }
+            set { SetTimespanTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.IdleConnection, value); }
         }
 
         // The time, in seconds, allowed for the HTTP Server API to parse the request header.  The default timer is
@@ -153,15 +129,9 @@ namespace System.Net
         // Use TimeSpan.Zero to indicate that system defaults should be used.
         public TimeSpan HeaderWait
         {
-            get
-            {
-                return GetTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.HeaderWait);
-            }
+            get { return GetTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.HeaderWait); }
             [SupportedOSPlatform("windows")]
-            set
-            {
-                SetTimespanTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.HeaderWait, value);
-            }
+            set { SetTimespanTimeout(Interop.HttpApi.HTTP_TIMEOUT_TYPE.HeaderWait, value); }
         }
 
         // The minimum send rate, in bytes-per-second, for the response. The default response send rate is 150

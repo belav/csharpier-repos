@@ -24,11 +24,10 @@ namespace POS_Server.Models
         public bool isFalls { get; set; }
         public string fallCause { get; set; }
 
-      
         public int sequence { get; set; }
-      
-        public int quantity { get; set; }  //realAmount
-      
+
+        public int quantity { get; set; } //realAmount
+
         public Boolean canDelete { get; set; }
         public string itemName { get; set; }
         public long itemId { get; set; }
@@ -40,7 +39,6 @@ namespace POS_Server.Models
         public string inventoryNum { get; set; }
         public Nullable<System.DateTime> inventoryDate { get; set; }
         public string itemType { get; set; }
-
 
         public Nullable<decimal> avgPurchasePrice { get; set; }
     }

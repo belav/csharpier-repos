@@ -5,17 +5,21 @@ using System.Xml;
 
 class T1
 {
-	static void Main(string[] args)
-	{
-		try {
-			System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
+    static void Main(string[] args)
+    {
+        try
+        {
+            System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
 
-			ConfigurationSection connStrings = config.ConnectionStrings;
+            ConfigurationSection connStrings = config.ConnectionStrings;
 
-			connStrings.SectionInformation.ProtectSection ("FooProvider");
-		}
-		catch (Exception e) {
-			Console.WriteLine (e.Message);
-		}
-	}
+            connStrings.SectionInformation.ProtectSection("FooProvider");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 }

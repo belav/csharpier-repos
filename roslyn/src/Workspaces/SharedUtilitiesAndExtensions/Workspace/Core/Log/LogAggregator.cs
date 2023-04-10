@@ -10,8 +10,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 {
     internal class LogAggregator : AbstractLogAggregator<LogAggregator.Counter>
     {
-        protected override Counter CreateCounter()
-            => new();
+        protected override Counter CreateCounter() => new();
 
         public void SetCount(object key, int count)
         {
@@ -45,8 +44,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         {
             private int _count;
 
-            public void SetCount(int count)
-                => _count = count;
+            public void SetCount(int count) => _count = count;
 
             public void IncreaseCount()
             {
@@ -62,8 +60,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 Interlocked.Add(ref _count, value);
             }
 
-            public int GetCount()
-                => _count;
+            public int GetCount() => _count;
         }
     }
 }

@@ -26,14 +26,12 @@ namespace System.IO.Tests
             try
             {
                 using SafeFileHandle handle = Interop.Kernel32.CreateFile(
-                            TestDirectory,
-                            dwDesiredAccess: 0,
-                            dwShareMode: FileShare.ReadWrite | FileShare.Delete,
-                            dwCreationDisposition: FileMode.Open,
-                            dwFlagsAndAttributes:
-                                OPEN_EXISTING |
-                                FILE_FLAG_BACKUP_SEMANTICS // Necessary to obtain a handle to a directory
-                            );
+                    TestDirectory,
+                    dwDesiredAccess: 0,
+                    dwShareMode: FileShare.ReadWrite | FileShare.Delete,
+                    dwCreationDisposition: FileMode.Open,
+                    dwFlagsAndAttributes: OPEN_EXISTING | FILE_FLAG_BACKUP_SEMANTICS // Necessary to obtain a handle to a directory
+                );
 
                 if (!handle.IsInvalid)
                 {
@@ -44,10 +42,7 @@ namespace System.IO.Tests
                     // Remove extended prefix
                     int skip = PathInternal.IsExtended(buffer) ? 4 : 0;
 
-                    return new string(
-                        buffer,
-                        skip,
-                        (int)result - skip);
+                    return new string(buffer, skip, (int)result - skip);
                 }
             }
             catch { }
@@ -59,7 +54,12 @@ namespace System.IO.Tests
         {
             fixed (char* bufPtr = buffer)
             {
-                return Interop.Kernel32.GetFinalPathNameByHandle(handle, bufPtr, (uint)buffer.Length, Interop.Kernel32.FILE_NAME_NORMALIZED);
+                return Interop.Kernel32.GetFinalPathNameByHandle(
+                    handle,
+                    bufPtr,
+                    (uint)buffer.Length,
+                    Interop.Kernel32.FILE_NAME_NORMALIZED
+                );
             }
         }
     }

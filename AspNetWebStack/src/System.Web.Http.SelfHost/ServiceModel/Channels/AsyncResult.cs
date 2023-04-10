@@ -9,7 +9,11 @@ using System.Web.Http.SelfHost.Properties;
 namespace System.Web.Http.SelfHost.ServiceModel.Channels
 {
     // AsyncResult starts acquired; Complete releases.
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Ported from WCF")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable",
+        Justification = "Ported from WCF"
+    )]
     internal abstract class AsyncResult : IAsyncResult
     {
         private static AsyncCallback _asyncCompletionWrapperCallback;
@@ -81,7 +85,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         // subclasses like TraceAsyncResult can use this to wrap the callback functionality in a scope
         protected Action<AsyncCallback, IAsyncResult> VirtualCallback { get; set; }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is propagated or FailFast")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is propagated or FailFast"
+        )]
         protected void Complete(bool didCompleteSynchronously)
         {
             if (_isCompleted)
@@ -107,7 +115,10 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             {
                 // If we completedSynchronously, then there's no chance that the manualResetEvent was created so
                 // we don't need to worry about a race
-                Contract.Assert(_manualResetEvent == null, "No ManualResetEvent should be created for a synchronous AsyncResult.");
+                Contract.Assert(
+                    _manualResetEvent == null,
+                    "No ManualResetEvent should be created for a synchronous AsyncResult."
+                );
                 _isCompleted = true;
             }
             else
@@ -141,7 +152,15 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
                 {
                     // String is not resourced because it occurs only in debug build, only with a fatal assert,
                     // and because it appears as an unused resource in a release build
-                    Contract.Assert(false, Error.Format("{0}{1}{2}", "Async Callback threw an exception.", Environment.NewLine, e.ToString()));
+                    Contract.Assert(
+                        false,
+                        Error.Format(
+                            "{0}{1}{2}",
+                            "Async Callback threw an exception.",
+                            Environment.NewLine,
+                            e.ToString()
+                        )
+                    );
                 }
 #pragma warning restore 1634
             }
@@ -153,7 +172,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             Complete(didCompleteSynchronously);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is propagated")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is propagated"
+        )]
         private static void AsyncCompletionWrapperCallback(IAsyncResult result)
         {
             if (result == null)
@@ -223,7 +246,9 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             _nextAsyncCompletion = callback;
             if (AsyncResult._asyncCompletionWrapperCallback == null)
             {
-                AsyncResult._asyncCompletionWrapperCallback = new AsyncCallback(AsyncCompletionWrapperCallback);
+                AsyncResult._asyncCompletionWrapperCallback = new AsyncCallback(
+                    AsyncCompletionWrapperCallback
+                );
             }
             return AsyncResult._asyncCompletionWrapperCallback;
         }
@@ -270,7 +295,9 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             callback = GetNextCompletion();
             if (callback == null)
             {
-                ThrowInvalidAsyncResult("Only call Check/SyncContinue once per async operation (once per PrepareAsyncCompletion).");
+                ThrowInvalidAsyncResult(
+                    "Only call Check/SyncContinue once per async operation (once per PrepareAsyncCompletion)."
+                );
             }
             return true;
         }
@@ -289,7 +316,10 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
                 throw Error.ArgumentNull("result");
             }
 
-            throw Error.InvalidOperation(SRResources.InvalidAsyncResultImplementation, result.GetType());
+            throw Error.InvalidOperation(
+                SRResources.InvalidAsyncResultImplementation,
+                result.GetType()
+            );
         }
 
         protected static void ThrowInvalidAsyncResult(string debugText)
@@ -304,7 +334,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             throw Error.InvalidOperation(message);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Existing API")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Existing API"
+        )]
         protected static TAsyncResult End<TAsyncResult>(IAsyncResult result)
             where TAsyncResult : AsyncResult
         {

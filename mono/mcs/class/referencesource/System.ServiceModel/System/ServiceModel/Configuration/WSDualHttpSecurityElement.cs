@@ -15,7 +15,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class WSDualHttpSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = WSDualHttpSecurity.DefaultMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            DefaultValue = WSDualHttpSecurity.DefaultMode
+        )]
         [ServiceModelEnumValidator(typeof(WSDualHttpSecurityModeHelper))]
         public WSDualHttpSecurityMode Mode
         {

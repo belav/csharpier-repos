@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,7 @@ namespace Castle.Components.DictionaryAdapter
         private int suppressEditingCount = 0;
         private Stack<Dictionary<string, Edit>> updates;
         private HashSet<IEditableObject> editDependencies;
-        
+
         struct Edit
         {
             public Edit(PropertyDescriptor property, object propertyValue)
@@ -33,6 +33,7 @@ namespace Castle.Components.DictionaryAdapter
                 Property = property;
                 PropertyValue = propertyValue;
             }
+
             public readonly PropertyDescriptor Property;
             public object PropertyValue;
         }
@@ -60,7 +61,8 @@ namespace Castle.Components.DictionaryAdapter
                 return This.Properties.Values
                     .Where(prop => typeof(IChangeTracking).IsAssignableFrom(prop.PropertyType))
                     .Select(prop => GetProperty(prop.PropertyName, true))
-                    .Cast<IChangeTracking>().Any(track => track != null && track.IsChanged);
+                    .Cast<IChangeTracking>()
+                    .Any(track => track != null && track.IsChanged);
             }
         }
 
@@ -96,7 +98,10 @@ namespace Castle.Components.DictionaryAdapter
                             foreach (var update in top.Values)
                             {
                                 var existing = update;
-                                existing.PropertyValue = GetProperty(existing.Property.PropertyName, true);
+                                existing.PropertyValue = GetProperty(
+                                    existing.Property.PropertyName,
+                                    true
+                                );
                             }
 
                             updates.Pop();
@@ -105,13 +110,11 @@ namespace Castle.Components.DictionaryAdapter
                             {
                                 var oldValue = update.PropertyValue;
                                 var newValue = GetProperty(update.Property.PropertyName, true);
-                                
+
                                 if (!object.Equals(oldValue, newValue))
                                 {
-
                                     NotifyPropertyChanging(update.Property, oldValue, newValue);
                                     NotifyPropertyChanged(update.Property, oldValue, newValue);
-
                                 }
                             }
                         }
@@ -128,12 +131,13 @@ namespace Castle.Components.DictionaryAdapter
                 {
                     var top = updates.Pop();
 
-                    if (top.Count > 0) foreach (var update in top.ToArray())
-                    {
-                        StoreProperty(null, update.Key, update.Value.PropertyValue);
-                    }
+                    if (top.Count > 0)
+                        foreach (var update in top.ToArray())
+                        {
+                            StoreProperty(null, update.Key, update.Value.PropertyValue);
+                        }
                 }
-                
+
                 if (editDependencies != null)
                 {
                     foreach (var editDependency in editDependencies.ToArray())
@@ -172,15 +176,16 @@ namespace Castle.Components.DictionaryAdapter
 
         protected bool GetEditedProperty(string propertyName, out object propertyValue)
         {
-            if (updates != null) foreach (var level in updates.ToArray())
-            {
-                Edit edit;
-                if (level.TryGetValue(propertyName, out edit))
+            if (updates != null)
+                foreach (var level in updates.ToArray())
                 {
-                    propertyValue = edit.PropertyValue;
-                    return true;
+                    Edit edit;
+                    if (level.TryGetValue(propertyName, out edit))
+                    {
+                        propertyValue = edit.PropertyValue;
+                        return true;
+                    }
                 }
-            }
             propertyValue = null;
             return false;
         }

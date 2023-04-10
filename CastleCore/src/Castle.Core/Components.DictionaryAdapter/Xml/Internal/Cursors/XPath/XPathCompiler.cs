@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -41,7 +41,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private static bool ParsePath(Tokenizer source, CompiledXPath path)
         {
-            for (CompiledXPathStep step = null;;)
+            for (CompiledXPathStep step = null; ; )
             {
                 if (!ParseStep(source, path, ref step))
                     return false;
@@ -54,10 +54,14 @@ namespace Castle.Components.DictionaryAdapter.Xml
             }
         }
 
-        private static bool ParseStep(Tokenizer source, CompiledXPath path, ref CompiledXPathStep step)
+        private static bool ParseStep(
+            Tokenizer source,
+            CompiledXPath path,
+            ref CompiledXPathStep step
+        )
         {
             var previous = step;
-            var start    = source.Index;
+            var start = source.Index;
 
             if (!ParseNodeCore(source, StepFactory, ref step))
                 return false;
@@ -77,7 +81,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return true;
         }
 
-        private static bool ParseNodeCore<TNode>(Tokenizer source, Func<TNode> factory, ref TNode node)
+        private static bool ParseNodeCore<TNode>(
+            Tokenizer source,
+            Func<TNode> factory,
+            ref TNode node
+        )
             where TNode : CompiledXPathNode
         {
             if (!Consume(source, Token.SelfReference))
@@ -122,7 +130,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private static bool ParseAndExpression(Tokenizer source, CompiledXPathNode parent)
         {
-            for (;;)
+            for (; ; )
             {
                 if (!ParseExpression(source, parent))
                     return false;
@@ -135,8 +143,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private static bool ParseExpression(Tokenizer source, CompiledXPathNode parent)
         {
-            var isLeftToRight
-                =  source.Token == Token.Name
+            var isLeftToRight =
+                source.Token == Token.Name
                 || source.Token == Token.AttributeStart
                 || source.Token == Token.SelfReference;
 
@@ -179,9 +187,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return true;
         }
 
-        private static bool ParseNestedPath(Tokenizer source, CompiledXPathNode parent, out CompiledXPathNode node)
+        private static bool ParseNestedPath(
+            Tokenizer source,
+            CompiledXPathNode parent,
+            out CompiledXPathNode node
+        )
         {
-            for (node = null;;)
+            for (node = null; ; )
             {
                 if (!ParseNode(source, parent, ref node))
                     return false;
@@ -201,7 +213,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return true;
         }
 
-        private static bool ParseNode(Tokenizer source, CompiledXPathNode parent, ref CompiledXPathNode node)
+        private static bool ParseNode(
+            Tokenizer source,
+            CompiledXPathNode parent,
+            ref CompiledXPathNode node
+        )
         {
             var previous = node;
 
@@ -223,11 +239,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             var start = source.Index;
 
             var parsed =
-                Consume(source, Token.StringLiteral) ||
-                (
-                    Consume(source, Token.VariableStart) &&
-                    ParseQualifiedName(source, null)
-                );
+                Consume(source, Token.StringLiteral)
+                || (Consume(source, Token.VariableStart) && ParseQualifiedName(source, null));
             if (!parsed)
                 return Try.Failure(out value);
 
@@ -238,7 +251,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private static bool ParseQualifiedName(Tokenizer source, CompiledXPathNode node)
         {
-            string nameA, nameB;
+            string nameA,
+                nameB;
 
             if (!ParseName(source, out nameA))
                 return false;
@@ -255,7 +269,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             if (node != null)
             {
-                node.Prefix    = nameA;
+                node.Prefix = nameA;
                 node.LocalName = nameB;
             }
             return true;
@@ -284,11 +298,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
             next.PreviousNode = previous;
         }
 
-        private static readonly Func<CompiledXPathNode>
-            NodeFactory = () => new CompiledXPathNode();
+        private static readonly Func<CompiledXPathNode> NodeFactory = () => new CompiledXPathNode();
 
-        private static readonly Func<CompiledXPathStep>
-            StepFactory = () => new CompiledXPathStep();
+        private static readonly Func<CompiledXPathStep> StepFactory = () => new CompiledXPathStep();
 
         private enum Token
         {
@@ -316,9 +328,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             private State state;
             private Token token;
-            private int   index;
-            private int   start;
-            private int   prior;
+            private int index;
+            private int start;
+            private int prior;
 
             public Tokenizer(string input)
             {
@@ -357,7 +369,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             {
                 prior = index;
 
-                for(;;)
+                for (; ; )
                 {
                     var c = ReadChar();
 
@@ -367,40 +379,79 @@ namespace Castle.Components.DictionaryAdapter.Xml
                             start = index;
                             switch (c)
                             {
-                                case '.':  token = Token.SelfReference;     return;
-                                case '/':  token = Token.StepSeparator;     return;
-                                case ':':  token = Token.NameSeparator;     return;
-                                case '@':  token = Token.AttributeStart;    return;
-                                case '$':  token = Token.VariableStart;     return;
-                                case '=':  token = Token.EqualsOperator;    return;
-                                case '[':  token = Token.PredicateStart;    return;
-                                case ']':  token = Token.PredicateEnd;      return;
-                                case '\0': token = Token.EndOfInput;        return;
-                                case '\'': state = State.SingleQuoteString; break;
-                                case '\"': state = State.DoubleQuoteString; break;
+                                case '.':
+                                    token = Token.SelfReference;
+                                    return;
+                                case '/':
+                                    token = Token.StepSeparator;
+                                    return;
+                                case ':':
+                                    token = Token.NameSeparator;
+                                    return;
+                                case '@':
+                                    token = Token.AttributeStart;
+                                    return;
+                                case '$':
+                                    token = Token.VariableStart;
+                                    return;
+                                case '=':
+                                    token = Token.EqualsOperator;
+                                    return;
+                                case '[':
+                                    token = Token.PredicateStart;
+                                    return;
+                                case ']':
+                                    token = Token.PredicateEnd;
+                                    return;
+                                case '\0':
+                                    token = Token.EndOfInput;
+                                    return;
+                                case '\'':
+                                    state = State.SingleQuoteString;
+                                    break;
+                                case '\"':
+                                    state = State.DoubleQuoteString;
+                                    break;
                                 default:
-                                    if      (IsNameStartChar(c)) { state = State.Name; }
-                                    else if (IsWhitespace(c))    { /* Ignore */ }
-                                    else                         { state = State.Failed; }
+                                    if (IsNameStartChar(c))
+                                    {
+                                        state = State.Name;
+                                    }
+                                    else if (IsWhitespace(c))
+                                    { /* Ignore */
+                                    }
+                                    else
+                                    {
+                                        state = State.Failed;
+                                    }
                                     break;
                             }
                             break;
 
                         case State.Name:
-                            if (IsNameChar(c)) { break; }
+                            if (IsNameChar(c))
+                            {
+                                break;
+                            }
                             RewindChar();
                             token = Token.Name;
                             state = State.Initial;
                             return;
 
                         case State.SingleQuoteString:
-                            if (c != '\'') { break; }
+                            if (c != '\'')
+                            {
+                                break;
+                            }
                             token = Token.StringLiteral;
                             state = State.Initial;
                             return;
-                        
+
                         case State.DoubleQuoteString:
-                            if (c != '\"') { break; }
+                            if (c != '\"')
+                            {
+                                break;
+                            }
                             token = Token.StringLiteral;
                             state = State.Initial;
                             return;
@@ -414,9 +465,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             private char ReadChar()
             {
-                return (++index < input.Length)
-                    ? input[index]
-                    : default(char); // EOF sentinel
+                return (++index < input.Length) ? input[index] : default(char); // EOF sentinel
             }
 
             private void RewindChar()

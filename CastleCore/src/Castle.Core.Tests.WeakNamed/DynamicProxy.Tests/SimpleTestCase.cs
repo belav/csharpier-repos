@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -44,7 +44,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Can_proxy_empty_interface_with_target()
         {
-            generator.CreateInterfaceProxyWithTarget<IEmptyInterface>(new EmptyTarget(), interceptor);
+            generator.CreateInterfaceProxyWithTarget<IEmptyInterface>(
+                new EmptyTarget(),
+                interceptor
+            );
         }
 
         [Test]
@@ -68,7 +71,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Can_proxy_single_method_interface_with_target()
         {
-            generator.CreateInterfaceProxyWithTarget<ISingleMethodInterface>(new SingleMethodTarget(), interceptor);
+            generator.CreateInterfaceProxyWithTarget<ISingleMethodInterface>(
+                new SingleMethodTarget(),
+                interceptor
+            );
         }
 
         [Test]
@@ -80,7 +86,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Can_proxy_single_method_class_with_target()
         {
-            generator.CreateClassProxyWithTarget<SingleMethodClass>(new SingleMethodTarget(), interceptor);
+            generator.CreateClassProxyWithTarget<SingleMethodClass>(
+                new SingleMethodTarget(),
+                interceptor
+            );
         }
 
         [Test]
@@ -92,31 +101,33 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Can_proxy_single_method_class_from_strongnamed_assembly_and_additional_interface_from_weaknamed_assembly()
         {
-            generator.CreateClassProxy(typeof(AbstractClassWithMethod), new[] { typeof(ISingleMethodInterface) }, interceptor);
+            generator.CreateClassProxy(
+                typeof(AbstractClassWithMethod),
+                new[] { typeof(ISingleMethodInterface) },
+                interceptor
+            );
         }
 
         [Test]
         public void Can_proxy_single_method_class_from_weaknamed_assembly_and_additional_interface_from_strongnamed_assembly()
         {
-            generator.CreateClassProxy(typeof(SingleMethodClass), new[] { typeof(IBase) }, interceptor);
+            generator.CreateClassProxy(
+                typeof(SingleMethodClass),
+                new[] { typeof(IBase) },
+                interceptor
+            );
         }
 
-        public interface IEmptyInterface
-        {
-        }
+        public interface IEmptyInterface { }
 
         public interface ISingleMethodInterface
         {
             void Method();
         }
 
-        public abstract class EmptyClass
-        {
-        }
+        public abstract class EmptyClass { }
 
-        public sealed class EmptyTarget : EmptyClass, IEmptyInterface
-        {
-        }
+        public sealed class EmptyTarget : EmptyClass, IEmptyInterface { }
 
         public abstract class SingleMethodClass
         {
@@ -125,9 +136,7 @@ namespace Castle.DynamicProxy.Tests
 
         public sealed class SingleMethodTarget : SingleMethodClass, ISingleMethodInterface
         {
-            public override void Method()
-            {
-            }
+            public override void Method() { }
         }
     }
 }

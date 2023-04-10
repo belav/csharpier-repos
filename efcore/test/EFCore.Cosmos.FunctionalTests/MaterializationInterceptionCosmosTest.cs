@@ -3,25 +3,26 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
-public class MaterializationInterceptionCosmosTest : MaterializationInterceptionTestBase,
-    IClassFixture<MaterializationInterceptionCosmosTest.MaterializationInterceptionCosmosFixture>
+public class MaterializationInterceptionCosmosTest
+    : MaterializationInterceptionTestBase,
+        IClassFixture<MaterializationInterceptionCosmosTest.MaterializationInterceptionCosmosFixture>
 {
     public MaterializationInterceptionCosmosTest(MaterializationInterceptionCosmosFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class MaterializationInterceptionCosmosFixture : SingletonInterceptorsFixtureBase
     {
-        protected override string StoreName
-            => "MaterializationInterception";
+        protected override string StoreName => "MaterializationInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => CosmosTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<ISingletonInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkCosmos(), injectedInterceptors);
+            IEnumerable<ISingletonInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkCosmos(),
+                injectedInterceptors
+            );
     }
 }

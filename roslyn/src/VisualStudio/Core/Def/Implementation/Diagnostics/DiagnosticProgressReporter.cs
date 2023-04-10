@@ -82,7 +82,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         public TaskCenterSolutionAnalysisProgressReporter(
             SVsTaskStatusCenterService taskStatusCenterService,
             IDiagnosticService diagnosticService,
-            VisualStudioWorkspace workspace)
+            VisualStudioWorkspace workspace
+        )
         {
             _taskCenterService = (IVsTaskStatusCenterService)taskStatusCenterService;
             _options = new TaskHandlerOptions()
@@ -97,7 +98,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             if (reporter.InProgress)
             {
                 // The reporter was already sending events before we were able to subscribe, so trigger an update to the task center.
-                OnSolutionCrawlerProgressChanged(this, new ProgressData(ProgressStatus.Started, pendingItemCount: null));
+                OnSolutionCrawlerProgressChanged(
+                    this,
+                    new ProgressData(ProgressStatus.Started, pendingItemCount: null)
+                );
             }
 
             reporter.ProgressChanged += OnSolutionCrawlerProgressChanged;
@@ -105,7 +109,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
         /// <summary>
         /// Retrieve and throttle solution crawler events to be sent to the progress reporter UI.
-        /// 
+        ///
         /// there is no concurrent call to this method since ISolutionCrawlerProgressReporter will serialize all
         /// events to preserve event ordering
         /// </summary>
@@ -123,8 +127,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 }
 
                 // Kick off task to update the UI after a delay to pick up any new events.
-                _intervalTask = Task.Delay(s_minimumInterval).ContinueWith(_ => ReportProgress(),
-                    CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                _intervalTask = Task.Delay(s_minimumInterval)
+                    .ContinueWith(
+                        _ => ReportProgress(),
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    );
             }
         }
 
@@ -135,8 +144,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 var data = _lastProgressData;
                 _intervalTask = null;
 
-                _updateUITask = _updateUITask.ContinueWith(_ => UpdateUI(data),
-                    CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                _updateUITask = _updateUITask.ContinueWith(
+                    _ => UpdateUI(data),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
             }
         }
 
@@ -166,16 +179,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 _taskHandler.RegisterTask(_taskCenterTask.Task);
             }
 
-            var statusMessage = progressData.Status == ProgressStatus.Paused
-                ? ServicesVSResources.Paused_0_tasks_in_queue
-                : ServicesVSResources.Evaluating_0_tasks_in_queue;
+            var statusMessage =
+                progressData.Status == ProgressStatus.Paused
+                    ? ServicesVSResources.Paused_0_tasks_in_queue
+                    : ServicesVSResources.Evaluating_0_tasks_in_queue;
 
-            _taskHandler.Progress.Report(new TaskProgressData
-            {
-                ProgressText = string.Format(statusMessage, _lastPendingItemCount),
-                CanBeCanceled = false,
-                PercentComplete = null,
-            });
+            _taskHandler.Progress.Report(
+                new TaskProgressData
+                {
+                    ProgressText = string.Format(statusMessage, _lastPendingItemCount),
+                    CanBeCanceled = false,
+                    PercentComplete = null,
+                }
+            );
         }
 
         private void StopTaskCenter()
@@ -191,4 +207,3 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         }
     }
 }
-

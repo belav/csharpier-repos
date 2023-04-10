@@ -19,11 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorErrorReportingServiceFactory()
-        {
-        }
+        public EditorErrorReportingServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => _singleton;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            _singleton;
     }
 }

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,10 +23,13 @@ namespace Castle.DynamicProxy.Tests
     using NUnit.Framework;
 
     [TestFixture]
-    public class ComInterfacesTests:BasePEVerifyTestCase
+    public class ComInterfacesTests : BasePEVerifyTestCase
     {
         [Test]
-        [Platform(Include = "Win,Mono", Reason = "`Marshal.Release` triggers a `PlatformNotSupportedException` with .NET Core on Linux.")]
+        [Platform(
+            Include = "Win,Mono",
+            Reason = "`Marshal.Release` triggers a `PlatformNotSupportedException` with .NET Core on Linux."
+        )]
         public void Marshal_Release_throws_when_called_with_IntPtr_Zero()
         {
             Assert.Catch<ArgumentException>(() => Marshal.Release(IntPtr.Zero));
@@ -42,8 +45,14 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [Test]
-        [Platform(Include = "Win", Reason = "Depends on OLE32.dll due to co-class instantiation, which is likely only available on Windows.")]
-        [Platform(Exclude = "NetCore", Reason = "Co-class instantiation is not supported by all versions of .NET Core, and can crash the test host.")]
+        [Platform(
+            Include = "Win",
+            Reason = "Depends on OLE32.dll due to co-class instantiation, which is likely only available on Windows."
+        )]
+        [Platform(
+            Exclude = "NetCore",
+            Reason = "Co-class instantiation is not supported by all versions of .NET Core, and can crash the test host."
+        )]
         public void Can_proxy_existing_com_object()
         {
             var command = new Command();

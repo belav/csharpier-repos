@@ -44,7 +44,11 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(destination.ToArray(), 0, (int)destination.Length);
+            string destinationString = Encoding.UTF8.GetString(
+                destination.ToArray(),
+                0,
+                (int)destination.Length
+            );
 
             Assert.Equal(sourceString, destinationString);
         }
@@ -77,7 +81,10 @@ namespace System.Net.Http.Functional.Tests
             // Use UTF-8 encoding to serialize a chinese string.
             string sourceString = "\u4f1a\u5458\u670d\u52a1";
 
-            var mediaTypeHeaderValue = new Headers.MediaTypeHeaderValue("application/custom", Encoding.UTF8.WebName);
+            var mediaTypeHeaderValue = new Headers.MediaTypeHeaderValue(
+                "application/custom",
+                Encoding.UTF8.WebName
+            );
 
             var content = new StringContent(sourceString, Encoding.UTF8, mediaTypeHeaderValue);
 
@@ -87,7 +94,11 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(destination.ToArray(), 0, (int)destination.Length);
+            string destinationString = Encoding.UTF8.GetString(
+                destination.ToArray(),
+                0,
+                (int)destination.Length
+            );
 
             Assert.Equal(sourceString, destinationString);
         }
@@ -98,7 +109,10 @@ namespace System.Net.Http.Functional.Tests
             // Use UTF-8 encoding to serialize a chinese string.
             string sourceString = "\u4f1a\u5458\u670d\u52a1";
 
-            var mediaTypeHeaderValue = new Headers.MediaTypeHeaderValue("application/custom", Encoding.UTF8.WebName);
+            var mediaTypeHeaderValue = new Headers.MediaTypeHeaderValue(
+                "application/custom",
+                Encoding.UTF8.WebName
+            );
 
             var content = new StringContent(sourceString, mediaTypeHeaderValue);
 
@@ -108,7 +122,11 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(destination.ToArray(), 0, (int)destination.Length);
+            string destinationString = Encoding.UTF8.GetString(
+                destination.ToArray(),
+                0,
+                (int)destination.Length
+            );
 
             Assert.Equal(sourceString, destinationString);
         }
@@ -128,7 +146,11 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(destination.ToArray(), 0, (int)destination.Length);
+            string destinationString = Encoding.UTF8.GetString(
+                destination.ToArray(),
+                0,
+                (int)destination.Length
+            );
 
             Assert.Equal(sourceString, destinationString);
         }

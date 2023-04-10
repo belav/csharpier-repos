@@ -16,7 +16,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <returns>The <see cref="MemoryCacheEntryOptions"/> so that additional calls can be chained.</returns>
         public static MemoryCacheEntryOptions SetPriority(
             this MemoryCacheEntryOptions options,
-            CacheItemPriority priority)
+            CacheItemPriority priority
+        )
         {
             options.Priority = priority;
             return options;
@@ -30,11 +31,16 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <returns>The <see cref="MemoryCacheEntryOptions"/> so that additional calls can be chained.</returns>
         public static MemoryCacheEntryOptions SetSize(
             this MemoryCacheEntryOptions options,
-            long size)
+            long size
+        )
         {
             if (size < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(size), size, $"{nameof(size)} must be non-negative.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(size),
+                    size,
+                    $"{nameof(size)} must be non-negative."
+                );
             }
 
             options.Size = size;
@@ -49,7 +55,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <returns>The <see cref="MemoryCacheEntryOptions"/> so that additional calls can be chained.</returns>
         public static MemoryCacheEntryOptions AddExpirationToken(
             this MemoryCacheEntryOptions options,
-            IChangeToken expirationToken)
+            IChangeToken expirationToken
+        )
         {
             ThrowHelper.ThrowIfNull(expirationToken);
 
@@ -65,7 +72,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <returns>The <see cref="MemoryCacheEntryOptions"/> so that additional calls can be chained.</returns>
         public static MemoryCacheEntryOptions SetAbsoluteExpiration(
             this MemoryCacheEntryOptions options,
-            TimeSpan relative)
+            TimeSpan relative
+        )
         {
             options.AbsoluteExpirationRelativeToNow = relative;
             return options;
@@ -79,7 +87,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <returns>The <see cref="MemoryCacheEntryOptions"/> so that additional calls can be chained.</returns>
         public static MemoryCacheEntryOptions SetAbsoluteExpiration(
             this MemoryCacheEntryOptions options,
-            DateTimeOffset absolute)
+            DateTimeOffset absolute
+        )
         {
             options.AbsoluteExpiration = absolute;
             return options;
@@ -94,7 +103,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <returns>The <see cref="MemoryCacheEntryOptions"/> so that additional calls can be chained.</returns>
         public static MemoryCacheEntryOptions SetSlidingExpiration(
             this MemoryCacheEntryOptions options,
-            TimeSpan offset)
+            TimeSpan offset
+        )
         {
             options.SlidingExpiration = offset;
             return options;
@@ -108,7 +118,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <returns>The <see cref="MemoryCacheEntryOptions"/> so that additional calls can be chained.</returns>
         public static MemoryCacheEntryOptions RegisterPostEvictionCallback(
             this MemoryCacheEntryOptions options,
-            PostEvictionDelegate callback)
+            PostEvictionDelegate callback
+        )
         {
             ThrowHelper.ThrowIfNull(callback);
 
@@ -125,15 +136,18 @@ namespace Microsoft.Extensions.Caching.Memory
         public static MemoryCacheEntryOptions RegisterPostEvictionCallback(
             this MemoryCacheEntryOptions options,
             PostEvictionDelegate callback,
-            object? state)
+            object? state
+        )
         {
             ThrowHelper.ThrowIfNull(callback);
 
-            options.PostEvictionCallbacks.Add(new PostEvictionCallbackRegistration()
-            {
-                EvictionCallback = callback,
-                State = state
-            });
+            options.PostEvictionCallbacks.Add(
+                new PostEvictionCallbackRegistration()
+                {
+                    EvictionCallback = callback,
+                    State = state
+                }
+            );
             return options;
         }
     }

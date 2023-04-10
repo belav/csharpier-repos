@@ -18,7 +18,10 @@ public class CustomDebugInfoReaderTests
     [InlineData(new byte[] { (byte)'a', 0x00, 0x00, 0x00 }, "a")]
     public void DecodeForwardIteratorRecord(byte[] bytes, string expected)
     {
-        Assert.Equal(expected, CustomDebugInfoReader.DecodeForwardIteratorRecord(bytes.ToImmutableArray()));
+        Assert.Equal(
+            expected,
+            CustomDebugInfoReader.DecodeForwardIteratorRecord(bytes.ToImmutableArray())
+        );
     }
 
     [Theory]
@@ -27,6 +30,8 @@ public class CustomDebugInfoReaderTests
     [InlineData(new byte[] { (byte)'a', 0x00, 0x00 })]
     public void DecodeForwardIteratorRecord_Invalid(byte[] bytes)
     {
-        Assert.Throws<InvalidOperationException>(() => CustomDebugInfoReader.DecodeForwardIteratorRecord(bytes.ToImmutableArray()));
+        Assert.Throws<InvalidOperationException>(
+            () => CustomDebugInfoReader.DecodeForwardIteratorRecord(bytes.ToImmutableArray())
+        );
     }
 }

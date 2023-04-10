@@ -19,20 +19,26 @@ namespace System.ServiceModel.Security.Tokens
     {
         public static bool IsDefined(SecurityTokenInclusionMode value)
         {
-            return (value == SecurityTokenInclusionMode.AlwaysToInitiator
-            || value == SecurityTokenInclusionMode.AlwaysToRecipient
-            || value == SecurityTokenInclusionMode.Never
-            || value == SecurityTokenInclusionMode.Once);
+            return (
+                value == SecurityTokenInclusionMode.AlwaysToInitiator
+                || value == SecurityTokenInclusionMode.AlwaysToRecipient
+                || value == SecurityTokenInclusionMode.Never
+                || value == SecurityTokenInclusionMode.Once
+            );
         }
 
         public static void Validate(SecurityTokenInclusionMode value)
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(SecurityTokenInclusionMode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(SecurityTokenInclusionMode)
+                    )
+                );
             }
         }
-
     }
 }

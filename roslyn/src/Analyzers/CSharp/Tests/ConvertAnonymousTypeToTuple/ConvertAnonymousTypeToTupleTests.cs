@@ -15,20 +15,25 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousTypeToTuple
 {
-    public partial class ConvertAnonymousTypeToTupleTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class ConvertAnonymousTypeToTupleTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public ConvertAnonymousTypeToTupleTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpConvertAnonymousTypeToTupleDiagnosticAnalyzer(), new CSharpConvertAnonymousTypeToTupleCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpConvertAnonymousTypeToTupleDiagnosticAnalyzer(),
+                new CSharpConvertAnonymousTypeToTupleCodeFixProvider()
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task ConvertSingleAnonymousType()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -37,7 +42,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -52,7 +58,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task NotOnEmptyAnonymousType()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class Test
 {
     void Method()
@@ -60,13 +67,15 @@ class Test
         var t1 = [||]new { };
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task NotOnSingleFieldAnonymousType()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class Test
 {
     void Method()
@@ -74,13 +83,15 @@ class Test
         var t1 = [||]new { a = 1 };
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task ConvertSingleAnonymousTypeWithInferredName()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -89,7 +100,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -104,7 +116,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task ConvertMultipleInstancesInSameMethod()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -114,7 +127,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -130,7 +144,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task ConvertMultipleInstancesAcrossMethods()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -146,7 +161,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -168,7 +184,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task OnlyConvertMatchingTypesInSameMethod()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -180,7 +197,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -198,7 +216,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task TestFixAllInSingleMethod()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -210,7 +229,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -228,7 +248,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task TestFixAllAcrossMethods()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -244,7 +265,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -266,7 +288,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task TestTrivia()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -275,7 +298,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -290,7 +314,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task TestFixAllNestedTypes()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -299,7 +324,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -314,7 +340,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task ConvertMultipleNestedInstancesInSameMethod()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -323,7 +350,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -338,7 +366,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task ConvertWithLambda1()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -351,7 +380,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -370,7 +400,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task ConvertWithLambda2()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -383,7 +414,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -402,7 +434,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task ConvertWithLocalFunction1()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -415,7 +448,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -434,7 +468,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task ConvertWithLocalFunction2()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -447,7 +482,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -466,7 +502,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
         public async Task TestIncompleteAnonymousType()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -475,7 +512,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()

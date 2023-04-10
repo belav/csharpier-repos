@@ -5,7 +5,5 @@ namespace System.ServiceModel.Channels
 {
     using System;
 
-    public interface IReplySessionChannel : IReplyChannel, ISessionChannel<IInputSession>
-    {
-    }
+    public interface IReplySessionChannel : IReplyChannel, ISessionChannel<IInputSession> { }
 }

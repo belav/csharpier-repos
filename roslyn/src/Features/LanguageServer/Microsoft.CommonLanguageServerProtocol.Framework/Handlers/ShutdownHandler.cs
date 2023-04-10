@@ -24,7 +24,10 @@ public class ShutdownHandler<TRequestContext> : INotificationHandler<TRequestCon
 
     public bool RequiresLSPSolution => true;
 
-    public async Task HandleNotificationAsync(TRequestContext requestContext, CancellationToken cancellationToken)
+    public async Task HandleNotificationAsync(
+        TRequestContext requestContext,
+        CancellationToken cancellationToken
+    )
     {
         await _lifeCycleManager.ShutdownAsync().ConfigureAwait(false);
     }

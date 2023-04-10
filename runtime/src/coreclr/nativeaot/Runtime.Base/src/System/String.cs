@@ -60,6 +60,7 @@ namespace System
 #else
         private const int POINTER_SIZE = 4;
 #endif
+
         //                                        m_pEEType    + m_stringLength
         internal const int FIRST_CHAR_OFFSET = POINTER_SIZE + sizeof(int);
 
@@ -73,10 +74,7 @@ namespace System
 
         public int Length
         {
-            get
-            {
-                return _stringLength;
-            }
+            get { return _stringLength; }
         }
     }
 }

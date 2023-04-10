@@ -85,7 +85,12 @@ namespace Internal.IntrinsicSupport
                 }
             }
 
-            bool success = RuntimeAugments.TypeLoaderCallbacks.TryGetConstructedGenericTypeForComponents(openComparerType, new RuntimeTypeHandle[] { comparerTypeArgument }, out comparerType);
+            bool success =
+                RuntimeAugments.TypeLoaderCallbacks.TryGetConstructedGenericTypeForComponents(
+                    openComparerType,
+                    new RuntimeTypeHandle[] { comparerTypeArgument },
+                    out comparerType
+                );
             if (!success)
             {
                 Environment.FailFast("Unable to create comparer");
@@ -100,17 +105,20 @@ namespace Internal.IntrinsicSupport
 
         // This one is an intrinsic that is used to make enum comparisons more efficient.
         [Intrinsic]
-        internal static bool EnumOnlyEquals<T>(T x, T y) where T : struct
+        internal static bool EnumOnlyEquals<T>(T x, T y)
+            where T : struct
         {
             return x.Equals(y);
         }
 
-        private static bool StructOnlyEqualsIEquatable<T>(T x, T y) where T : IEquatable<T>
+        private static bool StructOnlyEqualsIEquatable<T>(T x, T y)
+            where T : IEquatable<T>
         {
             return x.Equals(y);
         }
 
-        private static bool StructOnlyEqualsNullable<T>(Nullable<T> x, Nullable<T> y) where T : struct, IEquatable<T>
+        private static bool StructOnlyEqualsNullable<T>(Nullable<T> x, Nullable<T> y)
+            where T : struct, IEquatable<T>
         {
             if (x.HasValue)
             {

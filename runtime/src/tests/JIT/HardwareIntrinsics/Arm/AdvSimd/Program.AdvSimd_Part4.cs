@@ -10,10 +10,14 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
-                ["DuplicateSelectedScalarToVector128.Vector128.Single.2"] = DuplicateSelectedScalarToVector128_Vector128_Single_2,
-                ["DuplicateSelectedScalarToVector128.Vector128.UInt16.4"] = DuplicateSelectedScalarToVector128_Vector128_UInt16_4,
-                ["DuplicateSelectedScalarToVector128.Vector128.UInt32.2"] = DuplicateSelectedScalarToVector128_Vector128_UInt32_2,
+            TestList = new Dictionary<string, Action>()
+            {
+                ["DuplicateSelectedScalarToVector128.Vector128.Single.2"] =
+                    DuplicateSelectedScalarToVector128_Vector128_Single_2,
+                ["DuplicateSelectedScalarToVector128.Vector128.UInt16.4"] =
+                    DuplicateSelectedScalarToVector128_Vector128_UInt16_4,
+                ["DuplicateSelectedScalarToVector128.Vector128.UInt32.2"] =
+                    DuplicateSelectedScalarToVector128_Vector128_UInt32_2,
                 ["DuplicateToVector64.Byte"] = DuplicateToVector64_Byte,
                 ["DuplicateToVector64.Byte.31"] = DuplicateToVector64_Byte_31,
                 ["DuplicateToVector64.Int16"] = DuplicateToVector64_Int16,
@@ -65,24 +69,42 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["ExtractNarrowingLower.Vector64.SByte"] = ExtractNarrowingLower_Vector64_SByte,
                 ["ExtractNarrowingLower.Vector64.UInt16"] = ExtractNarrowingLower_Vector64_UInt16,
                 ["ExtractNarrowingLower.Vector64.UInt32"] = ExtractNarrowingLower_Vector64_UInt32,
-                ["ExtractNarrowingSaturateLower.Vector64.Byte"] = ExtractNarrowingSaturateLower_Vector64_Byte,
-                ["ExtractNarrowingSaturateLower.Vector64.Int16"] = ExtractNarrowingSaturateLower_Vector64_Int16,
-                ["ExtractNarrowingSaturateLower.Vector64.Int32"] = ExtractNarrowingSaturateLower_Vector64_Int32,
-                ["ExtractNarrowingSaturateLower.Vector64.SByte"] = ExtractNarrowingSaturateLower_Vector64_SByte,
-                ["ExtractNarrowingSaturateLower.Vector64.UInt16"] = ExtractNarrowingSaturateLower_Vector64_UInt16,
-                ["ExtractNarrowingSaturateLower.Vector64.UInt32"] = ExtractNarrowingSaturateLower_Vector64_UInt32,
-                ["ExtractNarrowingSaturateUnsignedLower.Vector64.Byte"] = ExtractNarrowingSaturateUnsignedLower_Vector64_Byte,
-                ["ExtractNarrowingSaturateUnsignedLower.Vector64.UInt16"] = ExtractNarrowingSaturateUnsignedLower_Vector64_UInt16,
-                ["ExtractNarrowingSaturateUnsignedLower.Vector64.UInt32"] = ExtractNarrowingSaturateUnsignedLower_Vector64_UInt32,
-                ["ExtractNarrowingSaturateUnsignedUpper.Vector128.Byte"] = ExtractNarrowingSaturateUnsignedUpper_Vector128_Byte,
-                ["ExtractNarrowingSaturateUnsignedUpper.Vector128.UInt16"] = ExtractNarrowingSaturateUnsignedUpper_Vector128_UInt16,
-                ["ExtractNarrowingSaturateUnsignedUpper.Vector128.UInt32"] = ExtractNarrowingSaturateUnsignedUpper_Vector128_UInt32,
-                ["ExtractNarrowingSaturateUpper.Vector128.Byte"] = ExtractNarrowingSaturateUpper_Vector128_Byte,
-                ["ExtractNarrowingSaturateUpper.Vector128.Int16"] = ExtractNarrowingSaturateUpper_Vector128_Int16,
-                ["ExtractNarrowingSaturateUpper.Vector128.Int32"] = ExtractNarrowingSaturateUpper_Vector128_Int32,
-                ["ExtractNarrowingSaturateUpper.Vector128.SByte"] = ExtractNarrowingSaturateUpper_Vector128_SByte,
-                ["ExtractNarrowingSaturateUpper.Vector128.UInt16"] = ExtractNarrowingSaturateUpper_Vector128_UInt16,
-                ["ExtractNarrowingSaturateUpper.Vector128.UInt32"] = ExtractNarrowingSaturateUpper_Vector128_UInt32,
+                ["ExtractNarrowingSaturateLower.Vector64.Byte"] =
+                    ExtractNarrowingSaturateLower_Vector64_Byte,
+                ["ExtractNarrowingSaturateLower.Vector64.Int16"] =
+                    ExtractNarrowingSaturateLower_Vector64_Int16,
+                ["ExtractNarrowingSaturateLower.Vector64.Int32"] =
+                    ExtractNarrowingSaturateLower_Vector64_Int32,
+                ["ExtractNarrowingSaturateLower.Vector64.SByte"] =
+                    ExtractNarrowingSaturateLower_Vector64_SByte,
+                ["ExtractNarrowingSaturateLower.Vector64.UInt16"] =
+                    ExtractNarrowingSaturateLower_Vector64_UInt16,
+                ["ExtractNarrowingSaturateLower.Vector64.UInt32"] =
+                    ExtractNarrowingSaturateLower_Vector64_UInt32,
+                ["ExtractNarrowingSaturateUnsignedLower.Vector64.Byte"] =
+                    ExtractNarrowingSaturateUnsignedLower_Vector64_Byte,
+                ["ExtractNarrowingSaturateUnsignedLower.Vector64.UInt16"] =
+                    ExtractNarrowingSaturateUnsignedLower_Vector64_UInt16,
+                ["ExtractNarrowingSaturateUnsignedLower.Vector64.UInt32"] =
+                    ExtractNarrowingSaturateUnsignedLower_Vector64_UInt32,
+                ["ExtractNarrowingSaturateUnsignedUpper.Vector128.Byte"] =
+                    ExtractNarrowingSaturateUnsignedUpper_Vector128_Byte,
+                ["ExtractNarrowingSaturateUnsignedUpper.Vector128.UInt16"] =
+                    ExtractNarrowingSaturateUnsignedUpper_Vector128_UInt16,
+                ["ExtractNarrowingSaturateUnsignedUpper.Vector128.UInt32"] =
+                    ExtractNarrowingSaturateUnsignedUpper_Vector128_UInt32,
+                ["ExtractNarrowingSaturateUpper.Vector128.Byte"] =
+                    ExtractNarrowingSaturateUpper_Vector128_Byte,
+                ["ExtractNarrowingSaturateUpper.Vector128.Int16"] =
+                    ExtractNarrowingSaturateUpper_Vector128_Int16,
+                ["ExtractNarrowingSaturateUpper.Vector128.Int32"] =
+                    ExtractNarrowingSaturateUpper_Vector128_Int32,
+                ["ExtractNarrowingSaturateUpper.Vector128.SByte"] =
+                    ExtractNarrowingSaturateUpper_Vector128_SByte,
+                ["ExtractNarrowingSaturateUpper.Vector128.UInt16"] =
+                    ExtractNarrowingSaturateUpper_Vector128_UInt16,
+                ["ExtractNarrowingSaturateUpper.Vector128.UInt32"] =
+                    ExtractNarrowingSaturateUpper_Vector128_UInt32,
                 ["ExtractNarrowingUpper.Vector128.Byte"] = ExtractNarrowingUpper_Vector128_Byte,
                 ["ExtractNarrowingUpper.Vector128.Int16"] = ExtractNarrowingUpper_Vector128_Int16,
                 ["ExtractNarrowingUpper.Vector128.Int32"] = ExtractNarrowingUpper_Vector128_Int32,

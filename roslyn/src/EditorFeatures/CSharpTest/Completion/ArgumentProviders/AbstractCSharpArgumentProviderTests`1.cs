@@ -16,9 +16,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         : AbstractArgumentProviderTests<TWorkspaceFixture>
         where TWorkspaceFixture : TestWorkspaceFixture, new()
     {
-        protected override (SyntaxNode argumentList, ImmutableArray<SyntaxNode> arguments) GetArgumentList(SyntaxToken token)
+        protected override (
+            SyntaxNode argumentList,
+            ImmutableArray<SyntaxNode> arguments
+        ) GetArgumentList(SyntaxToken token)
         {
-            var argumentList = token.GetRequiredParent().GetAncestorsOrThis<BaseArgumentListSyntax>().First();
+            var argumentList = token
+                .GetRequiredParent()
+                .GetAncestorsOrThis<BaseArgumentListSyntax>()
+                .First();
             return (argumentList, argumentList.Arguments.ToImmutableArray<SyntaxNode>());
         }
     }

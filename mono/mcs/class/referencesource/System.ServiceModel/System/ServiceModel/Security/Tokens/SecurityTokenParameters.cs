@@ -15,8 +15,10 @@ namespace System.ServiceModel.Security.Tokens
 
     public abstract class SecurityTokenParameters
     {
-        internal const SecurityTokenInclusionMode defaultInclusionMode = SecurityTokenInclusionMode.AlwaysToRecipient;
-        internal const SecurityTokenReferenceStyle defaultReferenceStyle = SecurityTokenReferenceStyle.Internal;
+        internal const SecurityTokenInclusionMode defaultInclusionMode =
+            SecurityTokenInclusionMode.AlwaysToRecipient;
+        internal const SecurityTokenReferenceStyle defaultReferenceStyle =
+            SecurityTokenReferenceStyle.Internal;
         internal const bool defaultRequireDerivedKeys = true;
 
         SecurityTokenInclusionMode inclusionMode = defaultInclusionMode;
@@ -42,10 +44,7 @@ namespace System.ServiceModel.Security.Tokens
 
         public SecurityTokenInclusionMode InclusionMode
         {
-            get
-            {
-                return this.inclusionMode;
-            }
+            get { return this.inclusionMode; }
             set
             {
                 SecurityTokenInclusionModeHelper.Validate(value);
@@ -55,10 +54,7 @@ namespace System.ServiceModel.Security.Tokens
 
         public SecurityTokenReferenceStyle ReferenceStyle
         {
-            get
-            {
-                return this.referenceStyle;
-            }
+            get { return this.referenceStyle; }
             set
             {
                 TokenReferenceStyleHelper.Validate(value);
@@ -68,14 +64,8 @@ namespace System.ServiceModel.Security.Tokens
 
         public bool RequireDerivedKeys
         {
-            get
-            {
-                return this.requireDerivedKeys;
-            }
-            set
-            {
-                this.requireDerivedKeys = value;
-            }
+            get { return this.requireDerivedKeys; }
+            set { this.requireDerivedKeys = value; }
         }
 
         internal protected abstract bool SupportsClientAuthentication { get; }
@@ -87,18 +77,33 @@ namespace System.ServiceModel.Security.Tokens
             SecurityTokenParameters result = this.CloneCore();
 
             if (result == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecurityTokenParametersCloneInvalidResult, this.GetType().ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SecurityTokenParametersCloneInvalidResult,
+                            this.GetType().ToString()
+                        )
+                    )
+                );
 
             return result;
         }
 
         protected abstract SecurityTokenParameters CloneCore();
 
-        internal protected abstract SecurityKeyIdentifierClause CreateKeyIdentifierClause(SecurityToken token, SecurityTokenReferenceStyle referenceStyle);
+        internal protected abstract SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        );
 
-        internal protected abstract void InitializeSecurityTokenRequirement(SecurityTokenRequirement requirement);
+        internal protected abstract void InitializeSecurityTokenRequirement(
+            SecurityTokenRequirement requirement
+        );
 
-        internal SecurityKeyIdentifierClause CreateKeyIdentifierClause<TExternalClause, TInternalClause>(SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+        internal SecurityKeyIdentifierClause CreateKeyIdentifierClause<
+            TExternalClause,
+            TInternalClause
+        >(SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
             where TExternalClause : SecurityKeyIdentifierClause
             where TInternalClause : SecurityKeyIdentifierClause
         {
@@ -110,8 +115,15 @@ namespace System.ServiceModel.Security.Tokens
             switch (referenceStyle)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(
-                        SR.GetString(SR.TokenDoesNotSupportKeyIdentifierClauseCreation, token.GetType().Name, referenceStyle)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.TokenDoesNotSupportKeyIdentifierClauseCreation,
+                                token.GetType().Name,
+                                referenceStyle
+                            )
+                        )
+                    );
                 case SecurityTokenReferenceStyle.External:
                     result = token.CreateKeyIdentifierClause<TExternalClause>();
                     break;
@@ -123,29 +135,48 @@ namespace System.ServiceModel.Security.Tokens
             return result;
         }
 
-        internal SecurityKeyIdentifierClause CreateGenericXmlTokenKeyIdentifierClause(SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+        internal SecurityKeyIdentifierClause CreateGenericXmlTokenKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        )
         {
             GenericXmlSecurityToken xmlToken = token as GenericXmlSecurityToken;
             if (xmlToken != null)
             {
-                if (referenceStyle == SecurityTokenReferenceStyle.Internal && xmlToken.InternalTokenReference != null)
+                if (
+                    referenceStyle == SecurityTokenReferenceStyle.Internal
+                    && xmlToken.InternalTokenReference != null
+                )
                     return xmlToken.InternalTokenReference;
 
-                if (referenceStyle == SecurityTokenReferenceStyle.External && xmlToken.ExternalTokenReference != null)
+                if (
+                    referenceStyle == SecurityTokenReferenceStyle.External
+                    && xmlToken.ExternalTokenReference != null
+                )
                     return xmlToken.ExternalTokenReference;
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.UnableToCreateTokenReference)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new MessageSecurityException(SR.GetString(SR.UnableToCreateTokenReference))
+            );
         }
 
-        internal protected virtual bool MatchesKeyIdentifierClause(SecurityToken token, SecurityKeyIdentifierClause keyIdentifierClause, SecurityTokenReferenceStyle referenceStyle)
+        internal protected virtual bool MatchesKeyIdentifierClause(
+            SecurityToken token,
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            SecurityTokenReferenceStyle referenceStyle
+        )
         {
             if (token == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("token");
 
             if (token is GenericXmlSecurityToken)
             {
-                return MatchesGenericXmlTokenKeyIdentifierClause(token, keyIdentifierClause, referenceStyle);
+                return MatchesGenericXmlTokenKeyIdentifierClause(
+                    token,
+                    keyIdentifierClause,
+                    referenceStyle
+                );
             }
 
             bool result;
@@ -153,8 +184,15 @@ namespace System.ServiceModel.Security.Tokens
             switch (referenceStyle)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(
-                        SR.GetString(SR.TokenDoesNotSupportKeyIdentifierClauseCreation, token.GetType().Name, referenceStyle)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.TokenDoesNotSupportKeyIdentifierClauseCreation,
+                                token.GetType().Name,
+                                referenceStyle
+                            )
+                        )
+                    );
                 case SecurityTokenReferenceStyle.External:
                     if (keyIdentifierClause is LocalIdKeyIdentifierClause)
                         result = false;
@@ -169,7 +207,11 @@ namespace System.ServiceModel.Security.Tokens
             return result;
         }
 
-        internal bool MatchesGenericXmlTokenKeyIdentifierClause(SecurityToken token, SecurityKeyIdentifierClause keyIdentifierClause, SecurityTokenReferenceStyle referenceStyle)
+        internal bool MatchesGenericXmlTokenKeyIdentifierClause(
+            SecurityToken token,
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            SecurityTokenReferenceStyle referenceStyle
+        )
         {
             if (token == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("token");
@@ -180,7 +222,10 @@ namespace System.ServiceModel.Security.Tokens
 
             if (xmlToken == null)
                 result = false;
-            else if (referenceStyle == SecurityTokenReferenceStyle.External && xmlToken.ExternalTokenReference != null)
+            else if (
+                referenceStyle == SecurityTokenReferenceStyle.External
+                && xmlToken.ExternalTokenReference != null
+            )
                 result = xmlToken.ExternalTokenReference.Matches(keyIdentifierClause);
             else if (referenceStyle == SecurityTokenReferenceStyle.Internal)
                 result = xmlToken.MatchesKeyIdentifierClause(keyIdentifierClause);
@@ -194,10 +239,30 @@ namespace System.ServiceModel.Security.Tokens
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "{0}:", this.GetType().ToString()));
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "InclusionMode: {0}", this.inclusionMode.ToString()));
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "ReferenceStyle: {0}", this.referenceStyle.ToString()));
-            sb.Append(String.Format(CultureInfo.InvariantCulture, "RequireDerivedKeys: {0}", this.requireDerivedKeys.ToString()));
+            sb.AppendLine(
+                String.Format(CultureInfo.InvariantCulture, "{0}:", this.GetType().ToString())
+            );
+            sb.AppendLine(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "InclusionMode: {0}",
+                    this.inclusionMode.ToString()
+                )
+            );
+            sb.AppendLine(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "ReferenceStyle: {0}",
+                    this.referenceStyle.ToString()
+                )
+            );
+            sb.Append(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "RequireDerivedKeys: {0}",
+                    this.requireDerivedKeys.ToString()
+                )
+            );
 
             return sb.ToString();
         }

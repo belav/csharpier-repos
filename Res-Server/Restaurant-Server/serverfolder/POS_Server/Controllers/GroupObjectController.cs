@@ -18,6 +18,7 @@ namespace POS_Server.Controllers
     public class GroupObjectController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller> get all Group
         [HttpPost]
         [Route("Get")]
@@ -25,163 +26,160 @@ namespace POS_Server.Controllers
         {
             //public string Get(string token)
             //{
-                //  public string Get(string token)
+            //  public string Get(string token)
 
-              token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
-                else
+            else
+            {
+                // bool canDelete = false;
+
+                //long mainBranchId = 0;
+                //long userId = 0;
+
+                //IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
+                //foreach (Claim c in claims)
+                //{
+                //    if (c.Type == "mainBranchId")
+                //    {
+                //        mainBranchId = long.Parse(c.Value);
+                //    }
+                //    else if (c.Type == "userId")
+                //    {
+                //        userId = long.Parse(c.Value);
+                //    }
+
+                //}
+
+
+                try
                 {
-                   // bool canDelete = false;
-
-                    //long mainBranchId = 0;
-                    //long userId = 0;
-
-                    //IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
-                    //foreach (Claim c in claims)
-                    //{
-                    //    if (c.Type == "mainBranchId")
-                    //    {
-                    //        mainBranchId = long.Parse(c.Value);
-                    //    }
-                    //    else if (c.Type == "userId")
-                    //    {
-                    //        userId = long.Parse(c.Value);
-                    //    }
-
-                    //}
-
-
-                    try
-                    {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var List = (from c in entity.groupObject
-                                    join o in entity.objects on c.objectId equals o.objectId
-                                  //  join p in entity.objects on o.parentObjectId equals p.objectId
-                                    select new
-                                    {
-                                        id = c.id,
-                                        groupId = c.groupId,
-                                        objectId = c.objectId,
-                                        notes = c.notes,
-                                        addOb = c.addOb,
-                                        updateOb = c.updateOb,
-                                        deleteOb = c.deleteOb,
-                                        showOb = c.showOb,
-                                        createDate = c.createDate,
-                                        updateDate = c.updateDate,
-                                        createUserId = c.createUserId,
-                                        updateUserId = c.updateUserId,
-                                        canDelete = true,
-                                        reportOb = c.reportOb,
-                                        levelOb = c.levelOb,
-                                       // parentObjectId = o.parentObjectId,
-                                        objectName = o.name,
-                                        parentObjectName=o.parentObjectName,
-                                        //parentObjectName = p.name,
-                                          o.objectType,
-                                        
-                                    }).ToList();
-
-
+                        var List = (
+                            from c in entity.groupObject
+                            join o in entity.objects on c.objectId equals o.objectId
+                            //  join p in entity.objects on o.parentObjectId equals p.objectId
+                            select new
+                            {
+                                id = c.id,
+                                groupId = c.groupId,
+                                objectId = c.objectId,
+                                notes = c.notes,
+                                addOb = c.addOb,
+                                updateOb = c.updateOb,
+                                deleteOb = c.deleteOb,
+                                showOb = c.showOb,
+                                createDate = c.createDate,
+                                updateDate = c.updateDate,
+                                createUserId = c.createUserId,
+                                updateUserId = c.updateUserId,
+                                canDelete = true,
+                                reportOb = c.reportOb,
+                                levelOb = c.levelOb,
+                                // parentObjectId = o.parentObjectId,
+                                objectName = o.name,
+                                parentObjectName = o.parentObjectName,
+                                //parentObjectName = p.name,
+                                o.objectType,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(List);
                     }
                 }
                 catch
-                    {
-                        return TokenManager.GenerateToken("0");
-                    }
+                {
+                    return TokenManager.GenerateToken("0");
                 }
-
-
-                //            var re = Request;
-                //            var headers = re.Headers;
-                //            string token = "";
-
-                //            if (headers.Contains("APIKey"))
-                //            {
-                //                token = headers.GetValues("APIKey").First();
-                //            }
-                //            Validation validation = new Validation();
-                //            bool valid = validation.CheckApiKey(token);
-
-                //            if (valid) // APIKey is valid
-                //            {
-                //                using (incposdbEntities entity = new incposdbEntities())
-                //                {
-                //                    var List = (from c in entity.groupObject
-                //                                join o in entity.objects on c.objectId equals o.objectId
-                //                                join p in entity.objects on o.parentObjectId equals p.objectId
-                //                                select new
-                //                                {
-                //                                    id = c.id,
-                //                                    groupId = c.groupId,
-                //                                    objectId = c.objectId,
-                //                                    notes = c.notes,
-                //                                    addOb = c.addOb,
-                //                                    updateOb = c.updateOb,
-                //                                    deleteOb = c.deleteOb,
-                //                                    showOb = c.showOb,
-
-                //                                    desc = c.objects.note,
-
-                //                                    createDate = c.createDate,
-                //                                    updateDate = c.updateDate,
-                //                                    createUserId = c.createUserId,
-                //                                    updateUserId = c.updateUserId,
-                //                                    canDelete = true,
-                //                                    reportOb = c.reportOb,
-                //                                    levelOb = c.levelOb,
-                //                                    parentObjectId = o.parentObjectId,
-                //                                    objectName = o.name,
-                //                                    parentObjectName=p.name,
-
-                //                                })
-                //                               .ToList();
-
-                //                    /*
-                //                     * 
-
-                //id
-                //groupId
-                //objectId
-                //notes
-                //addOb
-                //updateOb
-                //deleteOb
-                //showOb
-                //createDate
-                //updateDate
-                //createUserId
-                //updateUserId
-
-
-                //                     * */
-
-                //                    if (List == null)
-                //                        return NotFound();
-                //                    else
-                //                        return Ok(List);
-                //                }
-                //            }
-                //            //else
-                //                return NotFound();
             }
 
+            //            var re = Request;
+            //            var headers = re.Headers;
+            //            string token = "";
+
+            //            if (headers.Contains("APIKey"))
+            //            {
+            //                token = headers.GetValues("APIKey").First();
+            //            }
+            //            Validation validation = new Validation();
+            //            bool valid = validation.CheckApiKey(token);
+
+            //            if (valid) // APIKey is valid
+            //            {
+            //                using (incposdbEntities entity = new incposdbEntities())
+            //                {
+            //                    var List = (from c in entity.groupObject
+            //                                join o in entity.objects on c.objectId equals o.objectId
+            //                                join p in entity.objects on o.parentObjectId equals p.objectId
+            //                                select new
+            //                                {
+            //                                    id = c.id,
+            //                                    groupId = c.groupId,
+            //                                    objectId = c.objectId,
+            //                                    notes = c.notes,
+            //                                    addOb = c.addOb,
+            //                                    updateOb = c.updateOb,
+            //                                    deleteOb = c.deleteOb,
+            //                                    showOb = c.showOb,
+
+            //                                    desc = c.objects.note,
+
+            //                                    createDate = c.createDate,
+            //                                    updateDate = c.updateDate,
+            //                                    createUserId = c.createUserId,
+            //                                    updateUserId = c.updateUserId,
+            //                                    canDelete = true,
+            //                                    reportOb = c.reportOb,
+            //                                    levelOb = c.levelOb,
+            //                                    parentObjectId = o.parentObjectId,
+            //                                    objectName = o.name,
+            //                                    parentObjectName=p.name,
+
+            //                                })
+            //                               .ToList();
+
+            //                    /*
+            //                     *
+
+            //id
+            //groupId
+            //objectId
+            //notes
+            //addOb
+            //updateOb
+            //deleteOb
+            //showOb
+            //createDate
+            //updateDate
+            //createUserId
+            //updateUserId
 
 
-        // GET api/<controller>  Get medal By ID 
+            //                     * */
+
+            //                    if (List == null)
+            //                        return NotFound();
+            //                    else
+            //                        return Ok(List);
+            //                }
+            //            }
+            //            //else
+            //                return NotFound();
+        }
+
+        // GET api/<controller>  Get medal By ID
         [HttpPost]
         [Route("GetByID")]
         public string GetByID(string token)
         {
             // public string GetUsersByGroupId(string token)
-          token = TokenManager.readToken(HttpContext.Current.Request);var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -190,7 +188,6 @@ namespace POS_Server.Controllers
             {
                 long Id = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -198,112 +195,105 @@ namespace POS_Server.Controllers
                     {
                         Id = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var list = entity.groupObject
-                       .Where(c => c.id == Id)
-                       .Select(c => new
-                       {
-                           c.id,
-                           c.groupId,
-                           c.objectId,
-                           c.notes,
-                           c.addOb,
-                           c.updateOb,
-                           c.deleteOb,
-                           c.showOb,
-
-                           c.createDate,
-                           c.updateDate,
-                           c.createUserId,
-                           c.updateUserId,
-                           c.reportOb,
-                           c.levelOb,
-
-                       })
-                               .FirstOrDefault();
+                            .Where(c => c.id == Id)
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        c.id,
+                                        c.groupId,
+                                        c.objectId,
+                                        c.notes,
+                                        c.addOb,
+                                        c.updateOb,
+                                        c.deleteOb,
+                                        c.showOb,
+                                        c.createDate,
+                                        c.updateDate,
+                                        c.createUserId,
+                                        c.updateUserId,
+                                        c.reportOb,
+                                        c.levelOb,
+                                    }
+                            )
+                            .FirstOrDefault();
                         return TokenManager.GenerateToken(list);
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
             }
-                //var re = Request;
-                //var headers = re.Headers;
-                //string token = "";
-                //long cId = 0;
-                //if (headers.Contains("APIKey"))
-                //{
-                //    token = headers.GetValues("APIKey").First();
-                //}
-                //if (headers.Contains("Id"))
-                //{
-                //    cId = Convert.ToInt32(headers.GetValues("Id").First());
-                //}
-                //Validation validation = new Validation();
-                //bool valid = validation.CheckApiKey(token);
+            //var re = Request;
+            //var headers = re.Headers;
+            //string token = "";
+            //long cId = 0;
+            //if (headers.Contains("APIKey"))
+            //{
+            //    token = headers.GetValues("APIKey").First();
+            //}
+            //if (headers.Contains("Id"))
+            //{
+            //    cId = Convert.ToInt32(headers.GetValues("Id").First());
+            //}
+            //Validation validation = new Validation();
+            //bool valid = validation.CheckApiKey(token);
 
-                //if (valid)
-                //{
-                //    using (incposdbEntities entity = new incposdbEntities())
-                //    {
-                //        var list = entity.groupObject
-                //       .Where(c => c.id == cId)
-                //       .Select(c => new {
-                //           c.id,
-                //           c.groupId,
-                //           c.objectId,
-                //           c.notes,
-                //           c.addOb,
-                //           c.updateOb,
-                //           c.deleteOb,
-                //           c.showOb,
+            //if (valid)
+            //{
+            //    using (incposdbEntities entity = new incposdbEntities())
+            //    {
+            //        var list = entity.groupObject
+            //       .Where(c => c.id == cId)
+            //       .Select(c => new {
+            //           c.id,
+            //           c.groupId,
+            //           c.objectId,
+            //           c.notes,
+            //           c.addOb,
+            //           c.updateOb,
+            //           c.deleteOb,
+            //           c.showOb,
 
-                //           c.createDate,
-                //           c.updateDate,
-                //           c.createUserId,
-                //           c.updateUserId,
-                //           c.reportOb,
-                //           c.levelOb,
+            //           c.createDate,
+            //           c.updateDate,
+            //           c.createUserId,
+            //           c.updateUserId,
+            //           c.reportOb,
+            //           c.levelOb,
 
-                //       })
-                //       .FirstOrDefault();
+            //       })
+            //       .FirstOrDefault();
 
-                //        if (list == null)
-                //            return NotFound();
-                //        else
-                //            return Ok(list);
-                //    }
-                //}
-                //else
-                //    return NotFound();
-            }
+            //        if (list == null)
+            //            return NotFound();
+            //        else
+            //            return Ok(list);
+            //    }
+            //}
+            //else
+            //    return NotFound();
+        }
 
-
-        // add or update 
+        // add or update
         [HttpPost]
         [Route("Save")]
         public String Save(string token)
         {
-
             //string Object
             string message = "";
 
-
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -319,20 +309,20 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<groupObject>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<groupObject>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
-                 //   bondes tmpObject = null;
+                    //   bondes tmpObject = null;
 
 
                     try
                     {
-
                         if (newObject.groupId == 0 || newObject.groupId == null)
                         {
                             Nullable<long> id = null;
@@ -344,7 +334,6 @@ namespace POS_Server.Controllers
                             Nullable<long> id = null;
                             newObject.objectId = id;
                         }
-
 
                         if (newObject.updateUserId == 0 || newObject.updateUserId == null)
                         {
@@ -361,11 +350,9 @@ namespace POS_Server.Controllers
                             var sEntity = entity.Set<groupObject>();
                             if (newObject.id == 0)
                             {
-                                newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 newObject.updateUserId = newObject.createUserId;
-
-
 
                                 sEntity.Add(newObject);
                                 message = newObject.groupId.ToString();
@@ -373,8 +360,9 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-
-                                var tmps = entity.groupObject.Where(p => p.id == newObject.id).FirstOrDefault();
+                                var tmps = entity.groupObject
+                                    .Where(p => p.id == newObject.id)
+                                    .FirstOrDefault();
                                 tmps.id = newObject.id;
                                 tmps.groupId = newObject.groupId;
                                 tmps.objectId = newObject.objectId;
@@ -388,32 +376,25 @@ namespace POS_Server.Controllers
                                 tmps.levelOb = newObject.levelOb;
 
                                 tmps.createDate = newObject.createDate;
-                                tmps.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);// server current date
+                                tmps.updateDate = coctrlr.AddOffsetTodate(DateTime.Now); // server current date
                                 tmps.updateUserId = newObject.updateUserId;
                                 entity.SaveChanges();
                                 message = tmps.id.ToString();
                             }
-
-
                         }
                         //return message;
 
                         return TokenManager.GenerateToken(message);
-
                     }
                     catch
                     {
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
-            return TokenManager.GenerateToken(message);
-
+                return TokenManager.GenerateToken(message);
             }
-
 
             //var re = Request;
             //var headers = re.Headers;
@@ -425,7 +406,7 @@ namespace POS_Server.Controllers
             //}
             //Validation validation = new Validation();
             //bool valid = validation.CheckApiKey(token);
-            
+
             //if (valid)
             //{
             //    newObject = newObject.Replace("\\", string.Empty);
@@ -465,7 +446,7 @@ namespace POS_Server.Controllers
             //                Object.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
             //                Object.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
             //                Object.updateUserId = Object.createUserId;
-                    
+
 
 
             //                sEntity.Add(Object);
@@ -487,15 +468,15 @@ namespace POS_Server.Controllers
             //                //tmps.isActive = Object.isActive;
             //                tmps.reportOb = Object.reportOb;
             //                tmps.levelOb = Object.levelOb;
-                            
+
             //                tmps.createDate=Object.createDate;
             //                tmps.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);// server current date
             //                tmps.updateUserId = Object.updateUserId;
             //                entity.SaveChanges();
             //                message = tmps.id.ToString();
             //            }
-                       
-                       
+
+
             //        }
             //        return message; ;
             //    }
@@ -511,16 +492,13 @@ namespace POS_Server.Controllers
 
         [HttpPost]
         [Route("Delete")]
-        public string Delete( string token)
+        public string Delete(string token)
         {
-
             //long Id, long userId, bool final
             string message = "";
 
-
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -546,7 +524,6 @@ namespace POS_Server.Controllers
                     {
                         final = bool.Parse(c.Value);
                     }
-
                 }
 
                 if (final)
@@ -555,11 +532,10 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             groupObject Deleterow = entity.groupObject.Find(Id);
                             entity.groupObject.Remove(Deleterow);
-                            message= entity.SaveChanges().ToString();
-                          //  return Ok("OK");
+                            message = entity.SaveChanges().ToString();
+                            //  return Ok("OK");
                             return TokenManager.GenerateToken(message);
                         }
                     }
@@ -574,15 +550,13 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             groupObject Obj = entity.groupObject.Find(Id);
                             Obj.isActive = 0;
                             Obj.updateUserId = userId;
-                            Obj.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            Obj.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             //  return Ok("OK");
                             return TokenManager.GenerateToken(message);
-
                         }
                     }
                     catch
@@ -590,15 +564,7 @@ namespace POS_Server.Controllers
                         return TokenManager.GenerateToken("0");
                     }
                 }
-
-
-
-
-
             }
-
-
-
 
             //var re = Request;
             //var headers = re.Headers;
@@ -664,14 +630,12 @@ namespace POS_Server.Controllers
         [Route("AddGroupObjectList")]
         public string AddGroupObjectList(string token)
         {
-
             // string token newlist
 
             string message = "0";
 
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -690,15 +654,15 @@ namespace POS_Server.Controllers
                     {
                         newlist = c.Value.Replace("\\", string.Empty);
                         newlist = newlist.Trim('"');
-                        newListObj = JsonConvert.DeserializeObject<List<groupObject>>(newlist, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        newListObj = JsonConvert.DeserializeObject<List<groupObject>>(
+                            newlist,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "userId")
                     {
                         userId = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
@@ -711,13 +675,12 @@ namespace POS_Server.Controllers
                         {
                             for (int i = 0; i < newListObj.Count; i++)
                             {
-                                newListObj[i].createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                newListObj[i].updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newListObj[i].createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                newListObj[i].updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 entity.groupObject.Add(newListObj[i]);
                                 try
                                 {
                                     message = entity.SaveChanges().ToString();
-
                                 }
                                 catch
                                 {
@@ -734,60 +697,56 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-                //            var re = Request;
-                //            var headers = re.Headers;
-                //            string token = "";
-                //            if (headers.Contains("APIKey"))
-                //            {
-                //                token = headers.GetValues("APIKey").First();
-                //            }
-                //            Validation validation = new Validation();
-                //            bool valid = validation.CheckApiKey(token);
+            //            var re = Request;
+            //            var headers = re.Headers;
+            //            string token = "";
+            //            if (headers.Contains("APIKey"))
+            //            {
+            //                token = headers.GetValues("APIKey").First();
+            //            }
+            //            Validation validation = new Validation();
+            //            bool valid = validation.CheckApiKey(token);
 
-                //            newList = newList.Replace("\\", string.Empty);
-                //            newList = newList.Trim('"');
+            //            newList = newList.Replace("\\", string.Empty);
+            //            newList = newList.Trim('"');
 
-                //            List<groupObject> newListObj = JsonConvert.DeserializeObject<List<groupObject>>(newList, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+            //            List<groupObject> newListObj = JsonConvert.DeserializeObject<List<groupObject>>(newList, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
 
-                //            if (valid)
-                //            {
-                //                // delete old invoice items
-                //                using (incposdbEntities entity = new incposdbEntities())
-                //                {
-                //                    if (newListObj.Count > 0)
-                //                    {
-                //                        for(int i=0;i< newListObj.Count; i++)
-                //                        {
-                //                            newListObj[i].createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                //                            newListObj[i].updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                //entity.groupObject.Add(newListObj[i]);
-                //     try { entity.SaveChanges(); }
-                //                    catch { return false; }
-                //                        }
-
-
-                //                    }
-                //                    //entity.groupObject.AddRange(newListObj);
+            //            if (valid)
+            //            {
+            //                // delete old invoice items
+            //                using (incposdbEntities entity = new incposdbEntities())
+            //                {
+            //                    if (newListObj.Count > 0)
+            //                    {
+            //                        for(int i=0;i< newListObj.Count; i++)
+            //                        {
+            //                            newListObj[i].createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+            //                            newListObj[i].updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+            //entity.groupObject.Add(newListObj[i]);
+            //     try { entity.SaveChanges(); }
+            //                    catch { return false; }
+            //                        }
 
 
-                //                }
+            //                    }
+            //                    //entity.groupObject.AddRange(newListObj);
 
 
-                //            }
+            //                }
 
-                //            return true;
-            
 
+            //            }
+
+            //            return true;
         }
 
         [HttpPost]
         [Route("GetByGroupId")]
         public string GetByGroupId(string token)
         {
-
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -796,7 +755,6 @@ namespace POS_Server.Controllers
             {
                 long groupId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -804,58 +762,49 @@ namespace POS_Server.Controllers
                     {
                         groupId = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var List = (from c in entity.groupObject
-                                    join o in entity.objects on c.objectId equals o.objectId
-                                 //   join p in entity.objects on o.objectId equals p.parentObjectId
-                                    where c.groupId == groupId
-                                    select new GroupObjectModel
-                                    {
-                                        id = c.id,
-                                        groupId = c.groupId,
-                                        objectId = c.objectId,
-                                        notes = c.notes,
-                                        addOb = c.addOb,
-                                        updateOb = c.updateOb,
-                                        deleteOb = c.deleteOb,
-                                        showOb = c.showOb,
-
-                                        objectName = c.objects.name,
-                                      
-
-                                        createDate = c.createDate,
-                                        updateDate = c.updateDate,
-                                        createUserId = c.createUserId,
-                                        updateUserId = c.updateUserId,
-                                        canDelete = true,
-                                        reportOb = c.reportOb,
-                                        levelOb = c.levelOb,
-                                        // parentObjectId = o.parentObjectId,
-                                        parentObjectName=o.parentObjectName,
-
-                                    })
-                                               .ToList();
-
+                        var List = (
+                            from c in entity.groupObject
+                            join o in entity.objects on c.objectId equals o.objectId
+                            //   join p in entity.objects on o.objectId equals p.parentObjectId
+                            where c.groupId == groupId
+                            select new GroupObjectModel
+                            {
+                                id = c.id,
+                                groupId = c.groupId,
+                                objectId = c.objectId,
+                                notes = c.notes,
+                                addOb = c.addOb,
+                                updateOb = c.updateOb,
+                                deleteOb = c.deleteOb,
+                                showOb = c.showOb,
+                                objectName = c.objects.name,
+                                createDate = c.createDate,
+                                updateDate = c.updateDate,
+                                createUserId = c.createUserId,
+                                updateUserId = c.updateUserId,
+                                canDelete = true,
+                                reportOb = c.reportOb,
+                                levelOb = c.levelOb,
+                                // parentObjectId = o.parentObjectId,
+                                parentObjectName = o.parentObjectName,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(List);
                     }
-                    }
+                }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
-
 
             //var re = Request;
             //var headers = re.Headers;
@@ -919,79 +868,74 @@ namespace POS_Server.Controllers
         [Route("GetUserpermission")]
         public string GetUserpermission(string token)
         {
-
             //public string GetByGroupId(string token)long userId
             //{
 
 
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
-                else
+            else
+            {
+                long userId = 0;
+
+                IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
+                foreach (Claim c in claims)
                 {
-                    long userId = 0;
-
-
-                    IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
-                    foreach (Claim c in claims)
+                    if (c.Type == "userId")
                     {
-                        if (c.Type == "userId")
-                        {
                         userId = long.Parse(c.Value);
-                        }
-
-
                     }
+                }
 
-                    // DateTime cmpdate = DateTime.Now.AddDays(newdays);
-                    try
-                    {
+                // DateTime cmpdate = DateTime.Now.AddDays(newdays);
+                try
+                {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = (from GO in entity.groupObject
-                                    join U in entity.users on GO.groupId equals U.groupId
-                                    join G in entity.groups on GO.groupId equals G.groupId
-                                    join O in entity.objects on GO.objectId equals O.objectId
-                                  //  join POO in entity.objects on O.parentObjectId equals POO.objectId into JP
+                        var list = (
+                            from GO in entity.groupObject
+                            join U in entity.users on GO.groupId equals U.groupId
+                            join G in entity.groups on GO.groupId equals G.groupId
+                            join O in entity.objects on GO.objectId equals O.objectId
+                            //  join POO in entity.objects on O.parentObjectId equals POO.objectId into JP
 
-                                   // from PO in JP.DefaultIfEmpty()
-                                    where (U.userId == userId && G.isActive == 1 )
-                                    select new
-                                    {
-                                        //group object
-                                        GO.id,
-                                        GO.groupId,
-                                        GO.objectId,
-                                        GO.addOb,
-                                        GO.updateOb,
-                                        GO.deleteOb,
-                                        GO.showOb,
-                                        GO.reportOb,
-                                        GO.levelOb,
-                                        //group 
-                                        GroupName = G.name,
-                                        //object
-                                        ObjectName = O.name,
-                                      //  O.parentObjectId,
-                                        O.objectType,
-                                        //  parentObjectName = PO.name,
-                                        parentObjectName = O.parentObjectName,
-
-                                    }).ToList();
-
+                            // from PO in JP.DefaultIfEmpty()
+                            where (U.userId == userId && G.isActive == 1)
+                            select new
+                            {
+                                //group object
+                                GO.id,
+                                GO.groupId,
+                                GO.objectId,
+                                GO.addOb,
+                                GO.updateOb,
+                                GO.deleteOb,
+                                GO.showOb,
+                                GO.reportOb,
+                                GO.levelOb,
+                                //group
+                                GroupName = G.name,
+                                //object
+                                ObjectName = O.name,
+                                //  O.parentObjectId,
+                                O.objectType,
+                                //  parentObjectName = PO.name,
+                                parentObjectName = O.parentObjectName,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(list);
                     }
-                    }
-                catch
-                    {
-                        return TokenManager.GenerateToken("0");
-                    }
-
                 }
+                catch
+                {
+                    return TokenManager.GenerateToken("0");
+                }
+            }
 
             //    var re = Request;
             //var headers = re.Headers;
@@ -1029,7 +973,7 @@ namespace POS_Server.Controllers
             //                        GO.showOb,
             //                        GO.reportOb,
             //                        GO.levelOb,
-            //                        //group 
+            //                        //group
             //                        GroupName = G.name,
             //                        //object
             //                        ObjectName = O.name,
@@ -1049,11 +993,8 @@ namespace POS_Server.Controllers
             //}
             //else
             //    return NotFound();
-
-
         }
 
         //
-
     }
 }

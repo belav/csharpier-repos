@@ -13,8 +13,13 @@ namespace Internal.Reflection.Execution
 {
     static class NativeFormatEnumInfo
     {
-        public static void GetEnumValuesAndNames(MetadataReader reader, TypeDefinitionHandle typeDefHandle,
-            out object[] unsortedBoxedValues, out string[] unsortedNames, out bool isFlags)
+        public static void GetEnumValuesAndNames(
+            MetadataReader reader,
+            TypeDefinitionHandle typeDefHandle,
+            out object[] unsortedBoxedValues,
+            out string[] unsortedNames,
+            out bool isFlags
+        )
         {
             TypeDefinition typeDef = reader.GetTypeDefinition(typeDefHandle);
 

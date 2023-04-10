@@ -11,7 +11,8 @@ namespace Microsoft.Interop
 {
     internal class NoPreserveSigMarshallingGeneratorFactory : IMarshallingGeneratorFactory
     {
-        private static readonly HResultExceptionMarshaller s_hResultException = new HResultExceptionMarshaller();
+        private static readonly HResultExceptionMarshaller s_hResultException =
+            new HResultExceptionMarshaller();
         private readonly IMarshallingGeneratorFactory _inner;
 
         public NoPreserveSigMarshallingGeneratorFactory(IMarshallingGeneratorFactory inner)

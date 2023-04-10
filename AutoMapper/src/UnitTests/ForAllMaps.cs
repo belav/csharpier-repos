@@ -10,6 +10,7 @@ public class ForAllMaps : AutoMapperSpecBase
     {
         public int Number { get; set; }
     }
+
     class Destination
     {
         public int Number { get; set; }
@@ -19,6 +20,7 @@ public class ForAllMaps : AutoMapperSpecBase
     {
         public int Number { get; set; }
     }
+
     class Destination1
     {
         public int Number { get; set; }
@@ -28,6 +30,7 @@ public class ForAllMaps : AutoMapperSpecBase
     {
         public int Number { get; set; }
     }
+
     class Destination2
     {
         public int Number { get; set; }
@@ -35,19 +38,27 @@ public class ForAllMaps : AutoMapperSpecBase
 
     public class MinusOneResolver : IValueResolver<object, object, object>
     {
-        public object Resolve(object source, object dest, object destMember, ResolutionContext context)
+        public object Resolve(
+            object source,
+            object dest,
+            object destMember,
+            ResolutionContext context
+        )
         {
             return -1;
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-        cfg.CreateMap<Source1, Destination1>();
-        cfg.CreateMap<Source2, Destination2>();
-        cfg.ForAllMaps((tm, map) => map.ForMember("Number", o => o.MapFrom<MinusOneResolver>()));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+            cfg.CreateMap<Source1, Destination1>();
+            cfg.CreateMap<Source2, Destination2>();
+            cfg.ForAllMaps(
+                (tm, map) => map.ForMember("Number", o => o.MapFrom<MinusOneResolver>())
+            );
+        });
 
     protected override void Because_of()
     {
@@ -64,11 +75,11 @@ public class ForAllMaps : AutoMapperSpecBase
         _destination2.Number.ShouldBe(-1);
     }
 }
+
 public class ForAllMapsWithConstructors : AutoMapperSpecBase
 {
-    class Source
-    {
-    }
+    class Source { }
+
     class Destination
     {
         public Destination(int first, int second)
@@ -76,14 +87,18 @@ public class ForAllMapsWithConstructors : AutoMapperSpecBase
             First = first;
             Second = second;
         }
+
         public int First { get; }
         public int Second { get; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
-    {
-        cfg.ForAllMaps((_, c) => c.ForCtorParam("second", o => o.MapFrom(s => 2)));
-        cfg.CreateMap<Source, Destination>().ForCtorParam("first", o => o.MapFrom(s => 1));
-    });
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.ForAllMaps((_, c) => c.ForCtorParam("second", o => o.MapFrom(s => 2)));
+            cfg.CreateMap<Source, Destination>().ForCtorParam("first", o => o.MapFrom(s => 1));
+        });
+
     [Fact]
     public void Should_map_ok()
     {

@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IKeyValueIndexFactory GetKeyValueIndexFactory(IKey key)
-            => _factories.GetOrAdd(key, Create);
+        public virtual IKeyValueIndexFactory GetKeyValueIndexFactory(IKey key) =>
+            _factories.GetOrAdd(key, Create);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,15 +33,17 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IKeyValueIndexFactory Create(IKey key)
-            => (IKeyValueIndexFactory)typeof(KeyValueIndexFactorySource).GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateFactory))!
-                .MakeGenericMethod(key.GetKeyType())
-                .Invoke(null, new object[] { key })!;
+        public virtual IKeyValueIndexFactory Create(IKey key) =>
+            (IKeyValueIndexFactory)
+                typeof(KeyValueIndexFactorySource)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod(nameof(CreateFactory))!
+                    .MakeGenericMethod(key.GetKeyType())
+                    .Invoke(null, new object[] { key })!;
 
         [UsedImplicitly]
         private static IKeyValueIndexFactory CreateFactory<TKey>(IKey key)
-            where TKey : notnull
-            => new KeyValueIndexFactory<TKey>(key.GetPrincipalKeyValueFactory<TKey>());
+            where TKey : notnull =>
+            new KeyValueIndexFactory<TKey>(key.GetPrincipalKeyValueFactory<TKey>());
     }
 }
