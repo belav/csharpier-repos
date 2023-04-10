@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
             if (
-                ContainingSymbol is SynthesizedMethodBaseSymbol{
+                ContainingSymbol is SynthesizedMethodBaseSymbol
+                {
                     InheritsBaseMethodAttributes: true
                 }
             )

@@ -203,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     );
                     break;
 
-                case PrefixUnaryExpressionSyntax{
+                case PrefixUnaryExpressionSyntax
+                {
                     RawKind: (int)SyntaxKind.AddressOfExpression,
                     Operand: var operand
                 }:
@@ -331,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Assert.Empty(semanticInfo.CandidateSymbols);
 
                 if (
-                    typeSyntax is FunctionPointerTypeSyntax{
+                    typeSyntax is FunctionPointerTypeSyntax
+                    {
                         ParameterList: { Parameters: var paramSyntaxes }
                     }
                 )

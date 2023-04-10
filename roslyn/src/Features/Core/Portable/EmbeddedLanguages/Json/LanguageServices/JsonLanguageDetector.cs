@@ -174,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
                         .GetAnySymbol();
                     if (
                         symbol
-                            is IMethodSymbol{
+                            is IMethodSymbol
+                            {
                                 DeclaredAccessibility: Accessibility.Public,
                                 IsStatic: true
                             }

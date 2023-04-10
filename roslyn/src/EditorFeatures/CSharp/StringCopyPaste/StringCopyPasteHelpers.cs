@@ -158,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             stringExpression is LiteralExpressionSyntax literalExpression
                 && literalExpression.Token.IsVerbatimStringLiteral()
             || stringExpression
-                is InterpolatedStringExpressionSyntax{
+                is InterpolatedStringExpressionSyntax
+                {
                     StringStartToken.RawKind: (int)SyntaxKind.InterpolatedVerbatimStringStartToken
                 };
 
@@ -169,10 +170,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
         public static bool IsAnyMultiLineRawStringExpression(ExpressionSyntax expression) =>
             expression
-                is LiteralExpressionSyntax{
+                is LiteralExpressionSyntax
+                    {
                         Token.RawKind: (int)SyntaxKind.MultiLineRawStringLiteralToken
                     }
-                    or InterpolatedStringExpressionSyntax{
+                    or InterpolatedStringExpressionSyntax
+                    {
                         StringStartToken.RawKind: (int)
                             SyntaxKind.InterpolatedMultiLineRawStringStartToken
                     };
@@ -300,7 +303,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             // that nothing else may flow down to them.
 
             if (
-                expression is LiteralExpressionSyntax{
+                expression is LiteralExpressionSyntax
+                {
                     RawKind: (int)SyntaxKind.StringLiteralExpression,
                     Token.RawKind: (int)SyntaxKind.StringLiteralToken
                         or (int)SyntaxKind.SingleLineRawStringLiteralToken
@@ -312,7 +316,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             }
 
             if (
-                expression is InterpolatedStringExpressionSyntax{
+                expression is InterpolatedStringExpressionSyntax
+                {
                     StringStartToken.RawKind: (int)SyntaxKind.InterpolatedStringStartToken
                         or (int)SyntaxKind.InterpolatedVerbatimStringStartToken
                         or (int)SyntaxKind.InterpolatedSingleLineRawStringStartToken

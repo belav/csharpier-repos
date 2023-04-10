@@ -199,7 +199,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         {
             if (
                 e.OriginalSource
-                    is ContextMenu{
+                    is ContextMenu
+                    {
                         DataContext: InheritanceMarginGlyphViewModel inheritanceMarginViewModel
                     }
                 && inheritanceMarginViewModel.MenuItemViewModels.Any(

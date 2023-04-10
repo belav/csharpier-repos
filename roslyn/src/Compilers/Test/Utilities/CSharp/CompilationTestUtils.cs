@@ -499,7 +499,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     // the expression.
                     switch (expression)
                     {
-                        case PostfixUnaryExpressionSyntax{
+                        case PostfixUnaryExpressionSyntax
+                        {
                             RawKind: (int)SyntaxKind.SuppressNullableWarningExpression,
                             Operand: { } operand
                         }:

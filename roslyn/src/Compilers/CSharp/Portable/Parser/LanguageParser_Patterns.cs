@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 case SimpleNameSyntax s:
                     type = s;
                     return true;
-                case MemberAccessExpressionSyntax{
+                case MemberAccessExpressionSyntax
+                {
                     Expression: var expr,
                     OperatorToken: { Kind: SyntaxKind.DotToken } dotToken,
                     Name: var simpleName
@@ -584,8 +585,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 case SimpleNameSyntax s:
                     expr = s;
                     return true;
-                case QualifiedNameSyntax{ Left: var left, dotToken: var dotToken, Right: var right }
-                    when (permitTypeArguments || right is not GenericNameSyntax):
+                case QualifiedNameSyntax
+                {
+                    Left: var left,
+                    dotToken: var dotToken,
+                    Right: var right
+                } when (permitTypeArguments || right is not GenericNameSyntax):
                     var newLeft = ConvertTypeToExpression(
                         left,
                         out var leftExpr,

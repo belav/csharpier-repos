@@ -442,7 +442,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
 
         switch (fromSqlExpression.Arguments)
         {
-            case ConstantExpression{
+            case ConstantExpression
+            {
                 Value: CompositeRelationalParameter compositeRelationalParameter
             }:
             {

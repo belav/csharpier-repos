@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         {
             if (
                 parameter.ContainingSymbol
-                    is IMethodSymbol{
+                    is IMethodSymbol
+                    {
                         AssociatedAnonymousDelegate.DelegateInvokeMethod: { } invokeMethod
                     }
                 && parameter.Ordinal < invokeMethod.Parameters.Length
@@ -250,7 +251,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 var declaredSymbol = semanticModel.GetDeclaredSymbol(current);
 
                 if (
-                    declaredSymbol is IMethodSymbol{
+                    declaredSymbol is IMethodSymbol
+                    {
                         MethodKind: not MethodKind.AnonymousFunction
                     } method
                 )

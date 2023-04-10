@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             if (
                 node
                 is not PrefixUnaryExpressionSyntax
-                (SyntaxKind.LogicalNotExpression){
+                (SyntaxKind.LogicalNotExpression)
+                {
                     Operand: ParenthesizedExpressionSyntax parenthesizedExpression
                 }
             )
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var isKeywordLocation = parenthesizedExpression.Expression switch
             {
                 // Look for the form: !(x is Y y) and !(x is const)
-                IsPatternExpressionSyntax{
+                IsPatternExpressionSyntax
+                {
                     Pattern: DeclarationPatternSyntax or ConstantPatternSyntax
                 } isPattern
                     => isPattern.IsKeyword.GetLocation(),

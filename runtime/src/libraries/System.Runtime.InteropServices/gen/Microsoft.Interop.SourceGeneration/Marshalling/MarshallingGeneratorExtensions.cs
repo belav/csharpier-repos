@@ -164,7 +164,8 @@ namespace Microsoft.Interop
             // ICustomMarshaller marshalling requires additional information that we throw away earlier since it's unsupported,
             // so explicitly do not resurface a [MarshalAs(UnmanagdType.CustomMarshaler)] attribute.
             if (
-                info.MarshallingAttributeInfo is MarshalAsInfo{
+                info.MarshallingAttributeInfo is MarshalAsInfo
+                {
                     UnmanagedType: not UnmanagedType.CustomMarshaler
                 } marshalAs
             )
@@ -217,7 +218,10 @@ namespace Microsoft.Interop
                         )
                         && defaultMarshallerData.CollectionElementMarshallingInfo
                             is NoMarshallingInfo
-                                or MarshalAsInfo{ UnmanagedType: not UnmanagedType.CustomMarshaler }
+                                or MarshalAsInfo
+                                {
+                                    UnmanagedType: not UnmanagedType.CustomMarshaler
+                                }
                     )
                     {
                         countInfo = collectionMarshalling.ElementCountInfo;

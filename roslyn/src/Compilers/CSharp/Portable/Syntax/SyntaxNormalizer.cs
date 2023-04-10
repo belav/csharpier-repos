@@ -421,7 +421,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             [NotNullWhen(true)] SyntaxNode? node
         ) =>
             node
-                is AccessorListSyntax{
+                is AccessorListSyntax
+                {
                     Parent: PropertyDeclarationSyntax { Initializer: not null }
                 };
 

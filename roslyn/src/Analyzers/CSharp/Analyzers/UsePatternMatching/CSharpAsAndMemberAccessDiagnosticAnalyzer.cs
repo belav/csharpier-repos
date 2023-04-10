@@ -166,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     // similar to the binary cases above.
 
                     if (
-                        isPatternExpression.Pattern is ConstantPatternSyntax{
+                        isPatternExpression.Pattern is ConstantPatternSyntax
+                        {
                             Expression: var expression1
                         }
                     )
@@ -187,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                         return true;
                     }
                     else if (
-                        isPatternExpression.Pattern is UnaryPatternSyntax{
+                        isPatternExpression.Pattern is UnaryPatternSyntax
+                        {
                             Pattern: ConstantPatternSyntax { Expression: var expression2 }
                         }
                     )

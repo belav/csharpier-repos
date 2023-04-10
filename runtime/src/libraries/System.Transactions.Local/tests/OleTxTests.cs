@@ -717,7 +717,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
             catch (Exception e)
                 when (e
                         is TransactionManagerCommunicationException
-                            or TransactionException{
+                            or TransactionException
+                            {
                                 InnerException: TransactionManagerCommunicationException
                             }
                 )

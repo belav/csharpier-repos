@@ -258,7 +258,8 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
             }
 
             if (
-                current.Parent is TArgumentSyntax{
+                current.Parent is TArgumentSyntax
+                {
                     Parent: TArgumentListSyntax { Parent: TExpressionSyntax argumentParent }
                 }
             )

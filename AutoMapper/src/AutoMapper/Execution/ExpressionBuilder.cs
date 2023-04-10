@@ -410,14 +410,16 @@ public static class ExpressionBuilder
         {
             var member = expression switch
             {
-                MemberExpression{
+                MemberExpression
+                {
                     Expression: Expression target,
                     Member: MemberInfo propertyOrField
                 }
                     => new Member(expression, propertyOrField, target),
                 MethodCallExpression { Method: var instanceMethod, Object: Expression target }
                     => new Member(expression, instanceMethod, target),
-                MethodCallExpression{
+                MethodCallExpression
+                {
                     Method: var extensionMethod,
                     Arguments: { Count: > 0 } arguments
                 } when extensionMethod.Has<ExtensionAttribute>()

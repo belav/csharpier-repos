@@ -482,7 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
             // Add synthesized properties for record primary constructors that are not backed by an existing field
             // or property.
             if (
-                memberDeclaration is RecordDeclarationSyntax{
+                memberDeclaration is RecordDeclarationSyntax
+                {
                     ParameterList: { Parameters.Count: > 0 } parameterList
                 } recordDeclaration
             )

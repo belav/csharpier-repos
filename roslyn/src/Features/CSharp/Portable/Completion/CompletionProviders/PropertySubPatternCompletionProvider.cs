@@ -277,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             {
                 return
                     token.Parent
-                        is PropertyPatternClauseSyntax{
+                        is PropertyPatternClauseSyntax
+                        {
                             Parent: PatternSyntax
                         } propertyPatternClause
                     ? (propertyPatternClause, null)
@@ -309,7 +310,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 if (
                     memberAccess is
-                    { Parent.Parent: SubpatternSyntax{ Parent: PropertyPatternClauseSyntax found } }
+                    {
+                        Parent.Parent: SubpatternSyntax
+                        {
+                            Parent: PropertyPatternClauseSyntax found
+                        }
+                    }
                 )
                 {
                     propertyPatternClause = found;

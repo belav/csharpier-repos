@@ -833,7 +833,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             .Any(
                                 static x =>
                                     x
-                                        is IMethodSymbol{
+                                        is IMethodSymbol
+                                        {
                                             Name: nameof(Task.ConfigureAwait),
                                             Parameters: { Length: 1 } parameters
                                         }

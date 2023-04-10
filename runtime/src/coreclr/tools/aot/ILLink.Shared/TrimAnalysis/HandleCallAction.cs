@@ -861,7 +861,8 @@ namespace ILLink.Shared.TrimAnalysis
                                 // since All applies recursively to all nested type (see MarkStep.MarkEntireType).
                                 // Otherwise we only mark the nested type itself, nothing on it, so the return value has no annotation on it.
                                 if (
-                                    value is ValueWithDynamicallyAccessedMembers{
+                                    value is ValueWithDynamicallyAccessedMembers
+                                    {
                                         DynamicallyAccessedMemberTypes: DynamicallyAccessedMemberTypes.All
                                     }
                                 )

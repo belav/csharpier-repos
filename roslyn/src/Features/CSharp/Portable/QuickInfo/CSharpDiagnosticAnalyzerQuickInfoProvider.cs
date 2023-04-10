@@ -125,8 +125,10 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             // https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.suppressmessageattribute
             var suppressMessageCheckIdArgument = token.GetAncestor<AttributeArgumentSyntax>() switch
             {
-                AttributeArgumentSyntax{
-                    Parent: AttributeArgumentListSyntax{
+                AttributeArgumentSyntax
+                {
+                    Parent: AttributeArgumentListSyntax
+                    {
                         Arguments: var arguments,
                         Parent: AttributeSyntax { Name: var attributeName }
                     }

@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 }
 
                 if (
-                    current is IMethodSymbol{
+                    current is IMethodSymbol
+                    {
                         MethodKind: not MethodKind.AnonymousFunction
                             and not MethodKind.LocalFunction
                     } method

@@ -903,7 +903,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         DeconstructionVariablePendingInference { VariableSymbol: var symbol }
                             => symbol,
-                        BoundLocal{
+                        BoundLocal
+                        {
                             DeclarationKind: BoundLocalDeclarationKind.WithExplicitType
                                 or BoundLocalDeclarationKind.WithInferredType,
                             LocalSymbol: var symbol

@@ -661,7 +661,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static bool IsEventAccessor([NotNullWhen(returnValue: true)] this ISymbol? symbol) =>
             symbol
-                is IMethodSymbol{
+                is IMethodSymbol
+                {
                     MethodKind: MethodKind.EventAdd
                         or MethodKind.EventRaise
                         or MethodKind.EventRemove

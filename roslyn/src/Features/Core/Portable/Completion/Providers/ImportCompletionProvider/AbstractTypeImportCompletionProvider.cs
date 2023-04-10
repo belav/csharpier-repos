@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     cancellationToken
                 );
                 if (
-                    symbol is IAliasSymbol{
+                    symbol is IAliasSymbol
+                    {
                         Target: ITypeSymbol { TypeKind: not TypeKind.Error } target
                     }
                 )

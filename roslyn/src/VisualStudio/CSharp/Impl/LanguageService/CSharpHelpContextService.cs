@@ -469,7 +469,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             else if (token.ValueText is "notnull" or "unmanaged")
             {
                 if (
-                    token.Parent is IdentifierNameSyntax{
+                    token.Parent is IdentifierNameSyntax
+                    {
                         Parent: TypeConstraintSyntax { Parent: TypeParameterConstraintClauseSyntax }
                     }
                 )

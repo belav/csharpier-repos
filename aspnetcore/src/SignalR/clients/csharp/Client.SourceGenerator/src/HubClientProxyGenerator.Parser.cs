@@ -17,7 +17,8 @@ internal sealed partial class HubClientProxyGenerator
     {
         internal static bool IsSyntaxTargetForAttribute(SyntaxNode node) =>
             node
-                is AttributeSyntax{
+                is AttributeSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier: { Text: "HubClientProxy" } },
                     Parent: { Parent: MethodDeclarationSyntax { Parent: ClassDeclarationSyntax } }
                 };

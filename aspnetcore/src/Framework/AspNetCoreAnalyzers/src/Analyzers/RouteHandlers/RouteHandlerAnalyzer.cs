@@ -134,7 +134,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                                     )
                                     : null;
                             if (
-                                methodOperation is ILocalFunctionOperation{
+                                methodOperation is ILocalFunctionOperation
+                                {
                                     Body: not null
                                 } localFunction
                             )

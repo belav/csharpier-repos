@@ -160,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
 
             if (
                 assignmentStatement
-                is not ExpressionStatementSyntax{
+                is not ExpressionStatementSyntax
+                {
                     Expression: AssignmentExpressionSyntax
                     (SyntaxKind.SimpleAssignmentExpression) assignment
                 }

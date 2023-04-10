@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis
                         static (element, symbol) => IsSymbolReferencedByOperation(element, symbol),
                         symbol
                     ),
-                IForEachLoopOperation{
+                IForEachLoopOperation
+                {
                     LoopControlVariable: IVariableDeclaratorOperation variableDeclarator
                 }
                     => variableDeclarator.Symbol.Equals(symbol),

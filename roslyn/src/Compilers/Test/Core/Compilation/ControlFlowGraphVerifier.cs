@@ -1273,9 +1273,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     (CSharpSyntaxNode)reference.Syntax
                 );
                 return referenceSyntax.Parent
-                        is CSharp.Syntax.AssignmentExpressionSyntax{
+                        is CSharp.Syntax.AssignmentExpressionSyntax
+                        {
                             RawKind: (int)CSharp.SyntaxKind.SimpleAssignmentExpression,
-                            Parent: InitializerExpressionSyntax{
+                            Parent: InitializerExpressionSyntax
+                            {
                                 Parent: CSharp.Syntax.ObjectCreationExpressionSyntax
                             },
                             Left: var left
@@ -1299,7 +1301,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 #pragma warning disable IDE0055 // Fix formatting
                 return containingArgument
                         is {
-                            Parent: IObjectCreationOperation{
+                            Parent: IObjectCreationOperation
+                            {
                                 Parent: IFlowCaptureOperation,
                                 Constructor.ContainingType: INamedTypeSymbol ctorContainingType,
                                 Arguments: { Length: >= 3 } arguments,
@@ -1325,7 +1328,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 #pragma warning disable IDE0055 // Fix formatting
                 return reference
                         is {
-                            Parent: IInvocationOperation{
+                            Parent: IInvocationOperation
+                            {
                                 Instance: { } instance,
                                 TargetMethod:
                                 {
@@ -1824,7 +1828,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 while (
                     syntax.Parent
                         is CSharp.Syntax.ParenthesizedExpressionSyntax
-                            or PostfixUnaryExpressionSyntax{
+                            or PostfixUnaryExpressionSyntax
+                            {
                                 OperatorToken: { RawKind: (int)CSharp.SyntaxKind.ExclamationToken }
                             }
                 )
@@ -2657,9 +2662,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private static bool IsTopLevelMainMethod([NotNullWhen(true)] this ISymbol? symbol)
         {
             return symbol
-                is IMethodSymbol{
+                is IMethodSymbol
+                {
                     Name: WellKnownMemberNames.TopLevelStatementsEntryPointMethodName,
-                    ContainingType: INamedTypeSymbol{
+                    ContainingType: INamedTypeSymbol
+                    {
                         Name: WellKnownMemberNames.TopLevelStatementsEntryPointTypeName,
                         ContainingType: null,
                         ContainingNamespace: { IsGlobalNamespace: true }

@@ -528,7 +528,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             )
             {
                 if (
-                    token.Parent.Parent is ParameterSyntax{
+                    token.Parent.Parent is ParameterSyntax
+                    {
                         Parent: ParameterListSyntax { Parent: RecordDeclarationSyntax }
                     }
                 )
@@ -678,7 +679,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                         {
                             return targetToken.Parent switch
                             {
-                                FromClauseSyntax{
+                                FromClauseSyntax
+                                {
                                     Parent: QueryExpressionSyntax queryExpression
                                 } fromClause
                                     => queryExpression.FromClause == fromClause,

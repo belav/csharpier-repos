@@ -2341,7 +2341,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Slice(int, int), Substring(int, int)
                 BoundImplicitIndexerAccess { IndexerOrSliceAccess: BoundCall call } => call.Method,
                 // this[int]
-                BoundImplicitIndexerAccess{ IndexerOrSliceAccess: BoundIndexerAccess indexerAccess }
+                BoundImplicitIndexerAccess
+                {
+                    IndexerOrSliceAccess: BoundIndexerAccess indexerAccess
+                }
                     => indexerAccess.Indexer,
                 // array[Index]
                 BoundImplicitIndexerAccess { IndexerOrSliceAccess: BoundArrayAccess } => null,

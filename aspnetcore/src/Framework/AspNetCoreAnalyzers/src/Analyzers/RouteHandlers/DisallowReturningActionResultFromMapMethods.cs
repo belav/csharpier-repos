@@ -125,7 +125,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
     {
         if (
             returnType
-            is not INamedTypeSymbol{
+            is not INamedTypeSymbol
+            {
                 Name: "Task" or "ValueTask",
                 IsGenericType: true,
                 TypeArguments: { Length: 1 }

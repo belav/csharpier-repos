@@ -255,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             if (
-                s_fileTypeOrdinalPattern.Match(generatedName) is Match{
+                s_fileTypeOrdinalPattern.Match(generatedName) is Match
+                {
                     Success: true,
                     Groups: var groups,
                     Index: var index,

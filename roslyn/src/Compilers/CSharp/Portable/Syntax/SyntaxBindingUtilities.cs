@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             || node.IsKind(SyntaxKind.AwaitExpression)
             || node
                 is CommonForEachStatementSyntax { AwaitKeyword.RawKind: not 0 }
-                    or VariableDeclaratorSyntax{
+                    or VariableDeclaratorSyntax
+                    {
                         Parent.Parent: UsingStatementSyntax { AwaitKeyword.RawKind: not 0 }
                             or LocalDeclarationStatementSyntax { AwaitKeyword.RawKind: not 0 }
                     }
@@ -23,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
         public static bool BindsToTryStatement(SyntaxNode node) =>
             node
-                is VariableDeclaratorSyntax{
+                is VariableDeclaratorSyntax
+                    {
                         Parent.Parent: UsingStatementSyntax { }
                             or LocalDeclarationStatementSyntax { UsingKeyword.RawKind: not 0 }
                     }

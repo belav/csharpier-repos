@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 {
                     Kind: OperationKind.MethodReference,
                     Parent.Kind: OperationKind.DelegateCreation,
-                    Parent.Parent: IConversionOperation{
+                    Parent.Parent: IConversionOperation
+                    {
                         Type.SpecialType: SpecialType.System_Object
                     } conversionOperation
                 }
@@ -497,7 +498,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             // if the new code would have the same conversion as well.
             if (
                 originalConversionOperation.Parent
-                    is IConversionOperation{
+                    is IConversionOperation
+                    {
                         Conversion.IsUserDefined: true
                     } originalParentConversion
                 && originalParentConversion.GetConversion().IsImplicit
@@ -802,7 +804,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             );
             if (
                 rewrittenOperation
-                is not IUnaryOperation{
+                is not IUnaryOperation
+                {
                     OperatorKind: UnaryOperatorKind.BitwiseNegation
                 } unaryOperation
             )
@@ -1558,11 +1561,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         {
             if (
                 originalMemberSymbol
-                    is not IMethodSymbol{
+                    is not IMethodSymbol
+                    {
                         MethodKind: MethodKind.DelegateInvoke
                     } originalMethodSymbol
                 || rewrittenMemberSymbol
-                    is not IMethodSymbol{
+                    is not IMethodSymbol
+                    {
                         MethodKind: MethodKind.DelegateInvoke
                     } rewrittenMethodSymbol
             )

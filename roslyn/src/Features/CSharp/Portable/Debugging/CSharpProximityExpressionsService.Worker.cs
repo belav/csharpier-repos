@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 else if (
                     block is null
                     && _parentStatement.Parent
-                        is GlobalStatementSyntax{
+                        is GlobalStatementSyntax
+                        {
                             Parent: CompilationUnitSyntax compilationUnit
                         } globalStatement
                     && compilationUnit.Members.FirstOrDefault() == globalStatement

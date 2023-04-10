@@ -1957,7 +1957,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         !ContainingSymbol.RequiresInstanceReceiver()
                         || ContainingSymbol
-                            is MethodSymbol{
+                            is MethodSymbol
+                            {
                                 MethodKind: MethodKind.Constructor
                                     or MethodKind.DelegateInvoke
                                     or MethodKind.LambdaMethod

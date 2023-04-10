@@ -324,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             // get indentation based on its previous indentation
             if (
                 indentationData
-                is not AdjustedIndentationData{
+                is not AdjustedIndentationData
+                {
                     BaseIndentationData: var baseIndentationData,
                     Adjustment: var totalAdjustment
                 }

@@ -850,7 +850,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(
                 !binder.InAttributeArgument
                     || this
-                        is MethodSymbol{
+                        is MethodSymbol
+                        {
                             MethodKind: MethodKind.LambdaMethod or MethodKind.LocalFunction
                         },
                 "Possible cycle in attribute binding"

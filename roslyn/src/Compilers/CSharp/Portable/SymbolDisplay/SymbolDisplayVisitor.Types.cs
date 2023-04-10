@@ -212,8 +212,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     & SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes
                 ) != 0
                 && symbol
-                    is Symbols.PublicModel.Symbol{
-                        UnderlyingSymbol: NamedTypeSymbol{
+                    is Symbols.PublicModel.Symbol
+                    {
+                        UnderlyingSymbol: NamedTypeSymbol
+                        {
                             AssociatedFileIdentifier: { } identifier
                         } internalSymbol
                     }

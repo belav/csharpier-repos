@@ -623,7 +623,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             // This could be group by entity type
             if (
                 remappedKeySelector
-                is not EntityShaperExpression{
+                is not EntityShaperExpression
+                {
                     ValueBufferExpression: ProjectionBindingExpression pbe
                 } ese
             )
@@ -1776,7 +1777,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 );
                 var translation = visitor._sqlTranslator.Translate(setter);
                 if (
-                    translation is SqlBinaryExpression{
+                    translation is SqlBinaryExpression
+                    {
                         OperatorType: ExpressionType.Equal,
                         Left: ColumnExpression column
                     } sqlBinaryExpression
@@ -2173,7 +2175,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
                 if (
                     source
-                        is MethodCallExpression{
+                        is MethodCallExpression
+                        {
                             Method: MethodInfo { IsGenericMethod: true }
                         } sourceMethodCall
                     && sourceMethodCall.Method.GetGenericMethodDefinition()
@@ -2187,7 +2190,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 var asQueryableMethodCallExpression = default(MethodCallExpression);
                 if (
                     source
-                        is MethodCallExpression{
+                        is MethodCallExpression
+                        {
                             Method: MethodInfo { IsGenericMethod: true }
                         } maybeAsQueryableMethodCall
                     && maybeAsQueryableMethodCall.Method.GetGenericMethodDefinition()
@@ -2298,8 +2302,10 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 // JSON_QUERY($[0]).Property
                 if (
                     expression
-                        is MemberExpression{
-                            Expression: RelationalEntityShaperExpression{
+                        is MemberExpression
+                        {
+                            Expression: RelationalEntityShaperExpression
+                            {
                                 ValueBufferExpression: JsonQueryExpression memberJqe
                             }
                         } memberExpression
@@ -2318,7 +2324,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     var subquery = mcne.Subquery;
                     if (
                         subquery
-                            is MethodCallExpression{
+                            is MethodCallExpression
+                            {
                                 Method: MethodInfo { IsGenericMethod: true }
                             } selectMethodCall
                         && selectMethodCall.Method.GetGenericMethodDefinition()
@@ -2333,7 +2340,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
                     if (
                         subquery
-                            is MethodCallExpression{
+                            is MethodCallExpression
+                            {
                                 Method: MethodInfo { IsGenericMethod: true }
                             } asQueryableMethodCall
                         && asQueryableMethodCall.Method.GetGenericMethodDefinition()
@@ -2359,7 +2367,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 expression = StripIncludes(expression);
                 if (
                     expression
-                        is RelationalEntityShaperExpression{
+                        is RelationalEntityShaperExpression
+                        {
                             ValueBufferExpression: JsonQueryExpression reseJqe
                         }
                     && JsonQueryExpressionIsRootedIn(reseJqe, baselineJsonQuery)

@@ -4536,7 +4536,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(
                         argument
                             is BoundUnconvertedInterpolatedString
-                                or BoundBinaryOperator{
+                                or BoundBinaryOperator
+                                {
                                     IsUnconvertedInterpolatedStringAddition: true
                                 }
                     );
@@ -7242,7 +7243,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     foreach (var argument in arguments)
                     {
                         if (
-                            argument is BoundConversion{
+                            argument is BoundConversion
+                            {
                                 Conversion.IsInterpolatedStringHandler: true,
                                 Operand: var operand
                             }

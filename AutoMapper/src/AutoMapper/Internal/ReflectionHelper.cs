@@ -131,7 +131,8 @@ public static class ReflectionHelper
         {
             switch (expressionToCheck)
             {
-                case MemberExpression{
+                case MemberExpression
+                {
                     Member: var member,
                     Expression: { NodeType: ExpressionType.Parameter or ExpressionType.Convert }
                 }:

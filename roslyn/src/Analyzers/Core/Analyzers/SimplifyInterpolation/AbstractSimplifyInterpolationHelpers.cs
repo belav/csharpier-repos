@@ -129,7 +129,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                 {
                     if (
                         invocation.Arguments[0].Value
-                            is ILiteralOperation{
+                            is ILiteralOperation
+                            {
                                 ConstantValue: { HasValue: true, Value: string value }
                             } literal
                         && FindType<System.IFormattable>(expression.SemanticModel)
@@ -245,8 +246,10 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                 .FirstOrDefault();
 
             return Unwrap(interpolatedStringOperation?.Parent, towardsParent: true)
-                    is IArgumentOperation{
-                        Parent: IInvocationOperation{
+                    is IArgumentOperation
+                    {
+                        Parent: IInvocationOperation
+                        {
                             TargetMethod:
                             {
                                 Name: nameof(FormattableString.Invariant),

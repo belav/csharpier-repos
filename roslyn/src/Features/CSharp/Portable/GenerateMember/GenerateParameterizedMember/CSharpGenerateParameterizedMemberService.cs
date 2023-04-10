@@ -167,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                 {
                     var info = Document.SemanticModel.GetTypeInfo(type, cancellationToken);
                     if (
-                        info.Type is ITypeParameterSymbol{
+                        info.Type is ITypeParameterSymbol
+                        {
                             TypeParameterKind: TypeParameterKind.Method
                         } typeParameter
                     )

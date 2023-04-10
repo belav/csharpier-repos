@@ -303,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (symbol.IsPartialDefinition())
             {
                 if (
-                    symbol is MethodSymbol{
+                    symbol is MethodSymbol
+                    {
                         PartialImplementationPart: MethodSymbol implementationPart
                     }
                 )

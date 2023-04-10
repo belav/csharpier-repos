@@ -1383,7 +1383,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // Tuple literals can contain unbound lambdas or switch expressions.
                                 _ = BindToNaturalType(argument, diagnostics);
                                 break;
-                            case BoundUnconvertedSwitchExpression{
+                            case BoundUnconvertedSwitchExpression
+                            {
                                 Type: { } naturalType
                             } switchExpr:
                                 _ = ConvertSwitchExpression(
@@ -1393,7 +1394,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     diagnostics
                                 );
                                 break;
-                            case BoundUnconvertedConditionalOperator{
+                            case BoundUnconvertedConditionalOperator
+                            {
                                 Type: { } naturalType
                             } conditionalExpr:
                                 _ = ConvertConditionalExpression(

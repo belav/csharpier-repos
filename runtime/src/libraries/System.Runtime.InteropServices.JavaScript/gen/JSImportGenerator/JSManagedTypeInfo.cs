@@ -123,7 +123,8 @@ namespace Microsoft.Interop.JavaScript
                     };
 
                 //nullable
-                case INamedTypeSymbol{
+                case INamedTypeSymbol
+                {
                     ConstructedFrom.SpecialType: SpecialType.System_Nullable_T
                 } nullable:
                     if (

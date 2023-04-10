@@ -389,8 +389,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 // `ref readonly y = ref x`.  In that case, because 'y' can't be written to, this would not
                 // be a write of 'x'.
                 if (
-                    refParent.Parent is EqualsValueClauseSyntax{
-                        Parent: VariableDeclaratorSyntax{
+                    refParent.Parent is EqualsValueClauseSyntax
+                    {
+                        Parent: VariableDeclaratorSyntax
+                        {
                             Parent: VariableDeclarationSyntax { Type: { } variableDeclarationType }
                         }
                     }
@@ -434,7 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 var symbol = semanticModel.GetSymbolInfo(memberAccess, cancellationToken).Symbol;
                 if (
                     symbol
-                        is IMethodSymbol{
+                        is IMethodSymbol
+                        {
                             MethodKind: MethodKind.ReducedExtension,
                             ReducedFrom: IMethodSymbol reducedFrom
                         }

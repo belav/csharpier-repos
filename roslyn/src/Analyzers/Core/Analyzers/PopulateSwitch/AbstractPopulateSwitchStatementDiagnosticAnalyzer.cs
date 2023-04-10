@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                     }
                     else if (
                         clause
-                            is IPatternCaseClauseOperation{
+                            is IPatternCaseClauseOperation
+                            {
                                 Guard: null,
                                 Pattern: IConstantPatternOperation constantPattern
                             }

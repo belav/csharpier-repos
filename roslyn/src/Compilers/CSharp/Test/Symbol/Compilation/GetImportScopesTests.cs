@@ -56,7 +56,8 @@ using System;";
         Assert.Single(scopes.Single().Imports);
         Assert.True(
             scopes.Single().Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(System)
                 }
@@ -82,7 +83,8 @@ using System;
         Assert.Single(scopes.Single().Imports);
         Assert.True(
             scopes.Single().Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(System)
                 }
@@ -124,7 +126,8 @@ return;";
         Assert.Single(scopes.Single().Imports);
         Assert.True(
             scopes.Single().Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(System)
                 }
@@ -163,7 +166,8 @@ return /*pos*/;";
         Assert.Single(scopes.Single().Imports);
         Assert.True(
             scopes.Single().Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(System)
                 }
@@ -194,7 +198,8 @@ using Microsoft;
                 .Imports.Any(
                     i =>
                         i.NamespaceOrType
-                            is INamespaceSymbol{
+                            is INamespaceSymbol
+                            {
                                 ContainingNamespace.IsGlobalNamespace: true,
                                 Name: nameof(System)
                             }
@@ -206,7 +211,8 @@ using Microsoft;
                 .Imports.Any(
                     i =>
                         i.NamespaceOrType
-                            is INamespaceSymbol{
+                            is INamespaceSymbol
+                            {
                                 ContainingNamespace.IsGlobalNamespace: true,
                                 Name: nameof(Microsoft)
                             }
@@ -218,7 +224,8 @@ using Microsoft;
                 .Imports.Any(
                     i =>
                         i.DeclaringSyntaxReference!.GetSyntax()
-                            is UsingDirectiveSyntax{
+                            is UsingDirectiveSyntax
+                            {
                                 Name: IdentifierNameSyntax { Identifier.Text: nameof(System) }
                             }
                 )
@@ -229,7 +236,8 @@ using Microsoft;
                 .Imports.Any(
                     i =>
                         i.DeclaringSyntaxReference!.GetSyntax()
-                            is UsingDirectiveSyntax{
+                            is UsingDirectiveSyntax
+                            {
                                 Name: IdentifierNameSyntax { Identifier.Text: nameof(Microsoft) }
                             }
                 )
@@ -261,14 +269,16 @@ namespace N
         Assert.Single(scopes.Single().Imports);
         Assert.True(
             scopes.Single().Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(System)
                 }
         );
         Assert.True(
             scopes.Single().Imports.Single().DeclaringSyntaxReference!.GetSyntax()
-                is UsingDirectiveSyntax{
+                is UsingDirectiveSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.Text: nameof(System) }
                 }
         );
@@ -296,27 +306,31 @@ namespace N
         Assert.Single(scopes[1].Imports);
         Assert.True(
             scopes[0].Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(Microsoft)
                 }
         );
         Assert.True(
             scopes[0].Imports.Single().DeclaringSyntaxReference!.GetSyntax()
-                is UsingDirectiveSyntax{
+                is UsingDirectiveSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.Text: nameof(Microsoft) }
                 }
         );
         Assert.True(
             scopes[1].Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(System)
                 }
         );
         Assert.True(
             scopes[1].Imports.Single().DeclaringSyntaxReference!.GetSyntax()
-                is UsingDirectiveSyntax{
+                is UsingDirectiveSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.Text: nameof(System) }
                 }
         );
@@ -347,27 +361,31 @@ namespace Outer
         Assert.Single(scopes[1].Imports);
         Assert.True(
             scopes[0].Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(Microsoft)
                 }
         );
         Assert.True(
             scopes[0].Imports.Single().DeclaringSyntaxReference!.GetSyntax()
-                is UsingDirectiveSyntax{
+                is UsingDirectiveSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.Text: nameof(Microsoft) }
                 }
         );
         Assert.True(
             scopes[1].Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(System)
                 }
         );
         Assert.True(
             scopes[1].Imports.Single().DeclaringSyntaxReference!.GetSyntax()
-                is UsingDirectiveSyntax{
+                is UsingDirectiveSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.Text: nameof(System) }
                 }
         );
@@ -390,7 +408,8 @@ using S = System;";
             scopes.Single().Aliases.Single()
                 is {
                     Name: "S",
-                    Target: INamespaceSymbol{
+                    Target: INamespaceSymbol
+                    {
                         ContainingNamespace.IsGlobalNamespace: true,
                         Name: nameof(System)
                     }
@@ -461,7 +480,8 @@ return;";
             scopes.Single().Aliases.Single()
                 is {
                     Name: "S",
-                    Target: INamespaceSymbol{
+                    Target: INamespaceSymbol
+                    {
                         ContainingNamespace.IsGlobalNamespace: true,
                         Name: nameof(System)
                     }
@@ -534,7 +554,8 @@ using M = Microsoft;
                         a
                             is {
                                 Name: "S",
-                                Target: INamespaceSymbol{
+                                Target: INamespaceSymbol
+                                {
                                     ContainingNamespace.IsGlobalNamespace: true,
                                     Name: nameof(System)
                                 }
@@ -549,7 +570,8 @@ using M = Microsoft;
                         a
                             is {
                                 Name: "M",
-                                Target: INamespaceSymbol{
+                                Target: INamespaceSymbol
+                                {
                                     ContainingNamespace.IsGlobalNamespace: true,
                                     Name: nameof(Microsoft)
                                 }
@@ -562,7 +584,8 @@ using M = Microsoft;
                 .Aliases.Any(
                     a =>
                         a.DeclaringSyntaxReferences.Single().GetSyntax()
-                            is UsingDirectiveSyntax{
+                            is UsingDirectiveSyntax
+                            {
                                 Name: IdentifierNameSyntax { Identifier.Text: nameof(System) }
                             }
                 )
@@ -573,7 +596,8 @@ using M = Microsoft;
                 .Aliases.Any(
                     a =>
                         a.DeclaringSyntaxReferences.Single().GetSyntax()
-                            is UsingDirectiveSyntax{
+                            is UsingDirectiveSyntax
+                            {
                                 Name: IdentifierNameSyntax { Identifier.Text: nameof(Microsoft) }
                             }
                 )
@@ -607,7 +631,8 @@ namespace N
             scopes.Single().Aliases.Single()
                 is {
                     Name: "S",
-                    Target: INamespaceSymbol{
+                    Target: INamespaceSymbol
+                    {
                         ContainingNamespace.IsGlobalNamespace: true,
                         Name: nameof(System)
                     }
@@ -615,7 +640,8 @@ namespace N
         );
         Assert.True(
             scopes.Single().Aliases.Single().DeclaringSyntaxReferences.Single().GetSyntax()
-                is UsingDirectiveSyntax{
+                is UsingDirectiveSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.Text: nameof(System) }
                 }
         );
@@ -645,7 +671,8 @@ namespace N
             scopes[0].Aliases.Single()
                 is {
                     Name: "M",
-                    Target: INamespaceSymbol{
+                    Target: INamespaceSymbol
+                    {
                         ContainingNamespace.IsGlobalNamespace: true,
                         Name: nameof(Microsoft)
                     }
@@ -653,7 +680,8 @@ namespace N
         );
         Assert.True(
             scopes[0].Aliases.Single().DeclaringSyntaxReferences.Single().GetSyntax()
-                is UsingDirectiveSyntax{
+                is UsingDirectiveSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.Text: nameof(Microsoft) }
                 }
         );
@@ -661,7 +689,8 @@ namespace N
             scopes[1].Aliases.Single()
                 is {
                     Name: "S",
-                    Target: INamespaceSymbol{
+                    Target: INamespaceSymbol
+                    {
                         ContainingNamespace.IsGlobalNamespace: true,
                         Name: nameof(System)
                     }
@@ -669,7 +698,8 @@ namespace N
         );
         Assert.True(
             scopes[1].Aliases.Single().DeclaringSyntaxReferences.Single().GetSyntax()
-                is UsingDirectiveSyntax{
+                is UsingDirectiveSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.Text: nameof(System) }
                 }
         );
@@ -1013,14 +1043,16 @@ global using M = Microsoft;";
 
         Assert.True(
             scopes.Single().Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(System)
                 }
         );
         Assert.True(
             scopes.Single().Imports.Single().DeclaringSyntaxReference!.GetSyntax()
-                is UsingDirectiveSyntax{
+                is UsingDirectiveSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.Text: nameof(System) }
                 }
         );
@@ -1049,7 +1081,8 @@ class C
         Assert.Single(scopes.Single().Imports);
         Assert.True(
             scopes.Single().Imports.Single().NamespaceOrType
-                is INamespaceSymbol{
+                is INamespaceSymbol
+                {
                     ContainingNamespace.IsGlobalNamespace: true,
                     Name: nameof(System)
                 }
@@ -1104,7 +1137,8 @@ class C
                 .Imports.Any(
                     i =>
                         i.NamespaceOrType
-                            is INamespaceSymbol{
+                            is INamespaceSymbol
+                            {
                                 ContainingNamespace.IsGlobalNamespace: true,
                                 Name: nameof(System)
                             }
@@ -1116,7 +1150,8 @@ class C
                 .Imports.Any(
                     i =>
                         i.DeclaringSyntaxReference!.GetSyntax()
-                            is UsingDirectiveSyntax{
+                            is UsingDirectiveSyntax
+                            {
                                 Name: IdentifierNameSyntax { Identifier.Text: nameof(System) }
                             }
                 )
@@ -1127,7 +1162,8 @@ class C
                 .Imports.Any(
                     i =>
                         i.NamespaceOrType
-                            is INamespaceSymbol{
+                            is INamespaceSymbol
+                            {
                                 ContainingNamespace.IsGlobalNamespace: false,
                                 Name: nameof(System.IO)
                             }
@@ -1139,9 +1175,12 @@ class C
                 .Imports.Any(
                     i =>
                         i.DeclaringSyntaxReference!.GetSyntax()
-                            is UsingDirectiveSyntax{
-                                Name: QualifiedNameSyntax{
-                                    Right: IdentifierNameSyntax{
+                            is UsingDirectiveSyntax
+                            {
+                                Name: QualifiedNameSyntax
+                                {
+                                    Right: IdentifierNameSyntax
+                                    {
                                         Identifier.Text: nameof(System.IO)
                                     }
                                 }
@@ -1158,7 +1197,8 @@ class C
                         i
                             is {
                                 Name: "M",
-                                Target: INamespaceSymbol{
+                                Target: INamespaceSymbol
+                                {
                                     ContainingNamespace.IsGlobalNamespace: true,
                                     Name: nameof(Microsoft)
                                 }
@@ -1171,7 +1211,8 @@ class C
                 .Aliases.Any(
                     i =>
                         i.DeclaringSyntaxReferences.Single().GetSyntax()
-                            is UsingDirectiveSyntax{
+                            is UsingDirectiveSyntax
+                            {
                                 Name: IdentifierNameSyntax { Identifier.Text: nameof(Microsoft) }
                             }
                 )
@@ -1184,7 +1225,8 @@ class C
                         i
                             is {
                                 Name: "T",
-                                Target: INamespaceSymbol{
+                                Target: INamespaceSymbol
+                                {
                                     ContainingNamespace.IsGlobalNamespace: false,
                                     Name: nameof(System.Threading)
                                 }
@@ -1197,9 +1239,12 @@ class C
                 .Aliases.Any(
                     i =>
                         i.DeclaringSyntaxReferences.Single().GetSyntax()
-                            is UsingDirectiveSyntax{
-                                Name: QualifiedNameSyntax{
-                                    Right: IdentifierNameSyntax{
+                            is UsingDirectiveSyntax
+                            {
+                                Name: QualifiedNameSyntax
+                                {
+                                    Right: IdentifierNameSyntax
+                                    {
                                         Identifier.Text: nameof(System.Threading)
                                     }
                                 }

@@ -116,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             cancellationToken.ThrowIfCancellationRequested();
 
             var (invokedExpression, invokeName) = invocationExpression.Expression
-                is MemberAccessExpressionSyntax{
+                is MemberAccessExpressionSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.ValueText: nameof(Action.Invoke) }
                 } memberAccessExpression
                 ? (memberAccessExpression.Expression, memberAccessExpression.Name)
@@ -179,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             var parentBlock = (BlockSyntax)localDeclarationStatement.GetRequiredParent();
 
             var invokeName = invocationExpression.Expression
-                is MemberAccessExpressionSyntax{
+                is MemberAccessExpressionSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.ValueText: nameof(Action.Invoke) }
                 } memberAccessExpression
                 ? memberAccessExpression.Name

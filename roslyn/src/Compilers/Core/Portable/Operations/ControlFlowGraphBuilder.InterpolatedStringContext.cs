@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             Debug.Assert(_currentInterpolatedStringHandlerCreationContext != null);
             Debug.Assert(
                 placeholderOperation
-                    is IInstanceReferenceOperation{
+                    is IInstanceReferenceOperation
+                        {
                             ReferenceKind: InstanceReferenceKind.InterpolatedStringHandler
                         }
                         or IInterpolatedStringHandlerArgumentPlaceholderOperation

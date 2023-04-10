@@ -693,7 +693,8 @@ namespace Microsoft.Interop.Analyzers
                         { Parent: InvocationExpressionSyntax invocationInScope }
                             => invocationInScope,
                         {
-                            Parent: MemberAccessExpressionSyntax{
+                            Parent: MemberAccessExpressionSyntax
+                            {
                                 Parent: InvocationExpressionSyntax invocationOnType
                             }
                         }

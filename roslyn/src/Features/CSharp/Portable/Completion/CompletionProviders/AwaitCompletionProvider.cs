@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             if (
                 parent
-                    is QualifiedNameSyntax{
+                    is QualifiedNameSyntax
+                    {
                         Parent: LocalFunctionStatementSyntax localFunction
                     } qualifiedName
                 && localFunction.ReturnType == qualifiedName

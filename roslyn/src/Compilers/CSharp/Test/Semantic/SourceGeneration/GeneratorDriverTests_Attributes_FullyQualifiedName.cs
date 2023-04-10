@@ -864,7 +864,8 @@ class C
             step =>
                 Assert.True(
                     step.Outputs.Single().Value
-                        is MethodDeclarationSyntax{
+                        is MethodDeclarationSyntax
+                        {
                             Identifier.ValueText: "M",
                             Body: null,
                             ExpressionBody: null
@@ -1249,7 +1250,8 @@ class C
             step =>
                 Assert.True(
                     step.Outputs.Single().Value
-                        is AccessorDeclarationSyntax{
+                        is AccessorDeclarationSyntax
+                        {
                             RawKind: (int)SyntaxKind.GetAccessorDeclaration
                         }
                 )

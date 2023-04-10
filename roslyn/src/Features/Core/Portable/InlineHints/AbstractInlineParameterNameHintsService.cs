@@ -304,7 +304,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             if (
                 parameter
                 is not {
-                    ContainingSymbol: IMethodSymbol{
+                    ContainingSymbol: IMethodSymbol
+                    {
                         MethodKind: MethodKind.Ordinary or MethodKind.LocalFunction
                     } method
                 }

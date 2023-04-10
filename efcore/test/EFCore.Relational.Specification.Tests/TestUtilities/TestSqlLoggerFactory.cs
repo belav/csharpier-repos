@@ -306,7 +306,8 @@ public class TestSqlLoggerFactory : ListLoggerFactory
                         // Node should be pointing at the AssertSql identifier. Go up and find the text span for the entire method invocation.
                         if (
                             node
-                            is not IdentifierNameSyntax{
+                            is not IdentifierNameSyntax
+                            {
                                 Parent: InvocationExpressionSyntax invocation
                             }
                         )

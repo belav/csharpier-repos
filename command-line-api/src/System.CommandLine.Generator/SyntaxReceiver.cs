@@ -21,7 +21,8 @@ namespace System.CommandLine.Generator
         {
             if (
                 context.Node
-                is not InvocationExpressionSyntax{
+                is not InvocationExpressionSyntax
+                {
                     Expression: MemberAccessExpressionSyntax memberAccess
                 } invocationExpression
             )
@@ -64,7 +65,8 @@ namespace System.CommandLine.Generator
 
             //Check for model binding condition
             if (
-                invokeMethodSymbol.TypeArguments[0] is INamedTypeSymbol{
+                invokeMethodSymbol.TypeArguments[0] is INamedTypeSymbol
+                {
                     TypeArguments: { Length: > 0 }
                 } namedDelegateType
             )
@@ -270,7 +272,8 @@ namespace System.CommandLine.Generator
         {
             ITypeSymbol? returnType = null;
             if (
-                delegateType is INamedTypeSymbol{
+                delegateType is INamedTypeSymbol
+                {
                     DelegateInvokeMethod: { ReturnsVoid: false } delegateInvokeMethod
                 }
             )

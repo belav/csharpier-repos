@@ -222,8 +222,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
             if (
                 name is IdentifierNameSyntax { Identifier.Text: "args" }
                 && symbol
-                    is IParameterSymbol{
-                        ContainingSymbol: IMethodSymbol{
+                    is IParameterSymbol
+                    {
+                        ContainingSymbol: IMethodSymbol
+                        {
                             Name: WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
                         }
                     }

@@ -286,7 +286,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             static bool IsImplicitlyImplementable(ISymbol member, ISymbol within)
             {
                 if (
-                    member is IMethodSymbol{
+                    member is IMethodSymbol
+                    {
                         IsStatic: true,
                         IsAbstract: true,
                         MethodKind: MethodKind.UserDefinedOperator
@@ -789,7 +790,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool IsEqualsObject(ISymbol member)
         {
             return member
-                is IMethodSymbol{
+                is IMethodSymbol
+                {
                     Name: nameof(Equals),
                     IsStatic: false,
                     ContainingType.SpecialType: SpecialType.System_Object,

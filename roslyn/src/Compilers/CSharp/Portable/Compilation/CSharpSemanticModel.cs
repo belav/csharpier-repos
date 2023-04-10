@@ -2777,13 +2777,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                 }
                 else if (
-                    boundExpr is BoundConvertedSwitchExpression{
+                    boundExpr is BoundConvertedSwitchExpression
+                    {
                         WasTargetTyped: true
                     } convertedSwitch
                 )
                 {
                     if (
-                        highestBoundExpr is BoundConversion{
+                        highestBoundExpr is BoundConversion
+                        {
                             ConversionKind: ConversionKind.SwitchExpression,
                             Conversion: var convertedSwitchConversion
                         }
@@ -2808,7 +2810,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else if (boundExpr is BoundConditionalOperator { WasTargetTyped: true } cond)
                 {
                     if (
-                        highestBoundExpr is BoundConversion{
+                        highestBoundExpr is BoundConversion
+                        {
                             ConversionKind: ConversionKind.ConditionalExpression
                         }
                     )
@@ -2908,7 +2911,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
                 else if (
-                    boundExpr is BoundConversion{
+                    boundExpr is BoundConversion
+                    {
                         ConversionKind: ConversionKind.MethodGroup,
                         Conversion: var exprConversion,
                         Type: { TypeKind: TypeKind.FunctionPointer },
@@ -4245,7 +4249,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 .FirstOrDefault();
             return (
                 local
-                    is SourceLocalSymbol{
+                    is SourceLocalSymbol
+                    {
                         DeclarationKind: LocalDeclarationKind.ForEachIterationVariable
                     } sourceLocal
                     ? GetAdjustedLocalSymbol(sourceLocal)
@@ -4550,7 +4555,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.EventAccess
                     when boundNodeForSyntacticParent
-                        is BoundEventAssignmentOperator{
+                        is BoundEventAssignmentOperator
+                        {
                             ResultKind: LookupResultKind.Viable
                         } parentOperator
                         && boundNode.ExpressionSymbol is Symbol accessSymbol

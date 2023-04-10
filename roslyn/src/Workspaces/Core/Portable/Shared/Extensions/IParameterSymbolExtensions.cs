@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 parameter is
                 {
                     DeclaringSyntaxReferences.Length: > 0,
-                    ContainingSymbol: IMethodSymbol{
+                    ContainingSymbol: IMethodSymbol
+                    {
                         MethodKind: MethodKind.Constructor,
                         DeclaringSyntaxReferences.Length: > 0,
                         ContainingType: { IsRecord: true } containingType,
@@ -102,7 +103,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     {
                         if (
                             member
-                                is IPropertySymbol{ DeclaringSyntaxReferences.Length: > 0 } property
+                                is IPropertySymbol
+                                {
+                                    DeclaringSyntaxReferences.Length: > 0
+                                } property
                             && property.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken)
                                 == parameterSyntax
                         )

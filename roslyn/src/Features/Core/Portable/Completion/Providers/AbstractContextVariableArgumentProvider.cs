@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 );
                 while (
                     enclosingSymbol
-                        is IMethodSymbol{
+                        is IMethodSymbol
+                        {
                             MethodKind: MethodKind.LocalFunction or MethodKind.AnonymousFunction
                         } method
                 )

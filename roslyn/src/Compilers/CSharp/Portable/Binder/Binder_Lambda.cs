@@ -366,7 +366,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 .SkipScoped(out _)
                 .SkipRefInLocalOrReturn(diagnostics, out RefKind refKind);
             if (
-                syntax is IdentifierNameSyntax{
+                syntax is IdentifierNameSyntax
+                {
                     Identifier.RawContextualKind: (int)SyntaxKind.VarKeyword
                 }
             )

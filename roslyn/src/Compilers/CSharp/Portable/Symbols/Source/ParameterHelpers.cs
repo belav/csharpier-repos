@@ -1289,7 +1289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return conversion
                             is {
                                 Conversion.IsObjectCreation: true,
-                                Operand: BoundObjectCreationExpression{
+                                Operand: BoundObjectCreationExpression
+                                {
                                     WasTargetTyped: true
                                 } operand
                             }

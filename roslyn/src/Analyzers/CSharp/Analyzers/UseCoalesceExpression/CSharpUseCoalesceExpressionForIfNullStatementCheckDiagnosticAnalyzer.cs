@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UseCoalesceExpression
         {
             if (
                 condition is BinaryExpressionSyntax
-                (SyntaxKind.EqualsExpression){
+                (SyntaxKind.EqualsExpression)
+                {
                     Right: LiteralExpressionSyntax(SyntaxKind.NullLiteralExpression)
                 } binary
             )
@@ -55,8 +56,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UseCoalesceExpression
                 return true;
             }
             else if (
-                condition is IsPatternExpressionSyntax{
-                    Pattern: ConstantPatternSyntax{
+                condition is IsPatternExpressionSyntax
+                {
+                    Pattern: ConstantPatternSyntax
+                    {
                         Expression: LiteralExpressionSyntax(SyntaxKind.NullLiteralExpression)
                     }
                 } isPattern

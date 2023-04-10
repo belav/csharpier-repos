@@ -583,11 +583,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     switch (node)
                     {
                         // These are the forms worth optimizing.
-                        case BoundTestDecisionDagNode{
+                        case BoundTestDecisionDagNode
+                        {
                             WhenFalse: BoundTestDecisionDagNode test2
                         } test1:
                             return canDispatch(test1, test2);
-                        case BoundTestDecisionDagNode{
+                        case BoundTestDecisionDagNode
+                        {
                             WhenTrue: BoundTestDecisionDagNode test2
                         } test1:
                             return canDispatch(test1, test2);
@@ -752,7 +754,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             sd.Cases.Concat(cases),
                             sd.Otherwise
                         );
-                    case ValueDispatchNode.RelationalDispatch{
+                    case ValueDispatchNode.RelationalDispatch
+                    {
                         Operator: var op,
                         Value: var value,
                         WhenTrue: var whenTrue,

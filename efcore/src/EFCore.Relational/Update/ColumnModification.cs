@@ -94,7 +94,8 @@ public class ColumnModification : IColumnModification
         (UseParameter && UseCurrentValue)
         || (
             Column
-            is IStoreStoredProcedureParameter{
+            is IStoreStoredProcedureParameter
+                {
                     Direction: ParameterDirection.Output or ParameterDirection.InputOutput
                 }
                 or IStoreStoredProcedureReturnValue

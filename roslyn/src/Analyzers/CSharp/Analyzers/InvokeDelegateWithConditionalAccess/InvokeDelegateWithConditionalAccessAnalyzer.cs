@@ -197,8 +197,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                 // expr.Invoke(...);
                 if (
                     invocationExpression.Expression
-                        is MemberAccessExpressionSyntax{
-                            Name: IdentifierNameSyntax{
+                        is MemberAccessExpressionSyntax
+                        {
+                            Name: IdentifierNameSyntax
+                            {
                                 Identifier.ValueText: nameof(Action.Invoke)
                             }
                         } memberAccessExpression
@@ -309,7 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             var invocationName = invocationExpression.Expression switch
             {
                 IdentifierNameSyntax identifier => identifier,
-                MemberAccessExpressionSyntax{
+                MemberAccessExpressionSyntax
+                {
                     Name: IdentifierNameSyntax { Identifier.ValueText: nameof(Action.Invoke) },
                     Expression: IdentifierNameSyntax identifier
                 }

@@ -88,7 +88,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
         private static bool ShouldOfferRefactoring(Project project) =>
             project
                 is {
-                    ParseOptions: CSharpParseOptions{ LanguageVersion: >= LanguageVersion.CSharp8 },
+                    ParseOptions: CSharpParseOptions
+                    {
+                        LanguageVersion: >= LanguageVersion.CSharp8
+                    },
                     CompilationOptions.NullableContextOptions: NullableContextOptions.Disable,
                 };
 

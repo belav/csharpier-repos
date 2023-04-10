@@ -230,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             case BoundLocal { LocalSymbol: { RefKind: RefKind.None } localSymbol }:
                                 symbol = localSymbol;
                                 break;
-                            case BoundParameter{
+                            case BoundParameter
+                            {
                                 ParameterSymbol: { RefKind: RefKind.None } parameterSymbol
                             }:
                                 symbol = parameterSymbol;

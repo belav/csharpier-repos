@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static bool IsCopyConstructor(Symbol member)
         {
             if (
-                member is MethodSymbol{
+                member is MethodSymbol
+                {
                     ContainingType.IsRecordStruct: false,
                     MethodKind: MethodKind.Constructor
                 } method

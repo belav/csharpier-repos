@@ -345,7 +345,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !node.Operator.Kind.IsDynamic()
                 && node.LeftConversion
-                    is BoundConversion{ Conversion: { IsIdentity: false, Exists: true } conversion }
+                    is BoundConversion
+                    {
+                        Conversion: { IsIdentity: false, Exists: true } conversion
+                    }
             )
             {
                 // Need to represent the implicit conversion as a node in order to be able to produce correct diagnostics.

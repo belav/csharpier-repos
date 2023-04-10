@@ -80,8 +80,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 // With parenthesis:    variable span is of type `Span<byte>`.
                 // Without parenthesis: variable span is of type `byte*` which can only be used in unsafe context.
                 if (
-                    nodeParent is EqualsValueClauseSyntax{
-                        Parent: VariableDeclaratorSyntax{
+                    nodeParent is EqualsValueClauseSyntax
+                    {
+                        Parent: VariableDeclaratorSyntax
+                        {
                             Parent: VariableDeclarationSyntax varDecl
                         }
                     }
