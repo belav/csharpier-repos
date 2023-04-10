@@ -48,8 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 .ConfigureAwait(false);
             if (
                 semanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken)
-                is not INamedTypeSymbol
-                {
+                is not INamedTypeSymbol{
                     // if type is an interface we don't want to refactor
                     TypeKind: TypeKind.Class or TypeKind.Struct,
                     // no need to convert if it's already a record
@@ -293,8 +292,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 typeDeclaration.Members.FirstOrDefault(
                     member =>
                         member
-                            is OperatorDeclarationSyntax
-                            {
+                            is OperatorDeclarationSyntax{
                                 OperatorToken.RawKind: (int)SyntaxKind.EqualsEqualsToken
                             }
                 );
@@ -302,8 +300,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 typeDeclaration.Members.FirstOrDefault(
                     member =>
                         member
-                            is OperatorDeclarationSyntax
-                            {
+                            is OperatorDeclarationSyntax{
                                 OperatorToken.RawKind: (int)SyntaxKind.ExclamationEqualsToken
                             }
                 );

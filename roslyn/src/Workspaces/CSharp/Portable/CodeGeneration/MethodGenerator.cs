@@ -321,8 +321,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 if (
                     parameter.Type
-                    is not ITypeParameterSymbol
-                    {
+                    is not ITypeParameterSymbol{
                         NullableAnnotation: NullableAnnotation.Annotated
                     } typeParameter
                 )

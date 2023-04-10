@@ -602,8 +602,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return VisitExpression(hatExpression.Operand);
             }
             else if (
-                unloweredExpr is BoundConversion
-                {
+                unloweredExpr is BoundConversion{
                     Operand: { Type: { SpecialType: SpecialType.System_Int32 } } operand
                 }
             )
@@ -615,8 +614,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (
                 unloweredExpr
-                    is BoundObjectCreationExpression
-                    {
+                    is BoundObjectCreationExpression{
                         Constructor: MethodSymbol constructor,
                         Arguments: { Length: 2 } arguments,
                         ArgsToParamsOpt: { IsDefaultOrEmpty: true },

@@ -70,14 +70,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundTupleExpression t:
                     tuple = t;
                     return true;
-                case BoundConversion
-                {
+                case BoundConversion{
                     Conversion: { Kind: ConversionKind.Identity },
                     Operand: var o
                 }:
                     return IsLikeTupleExpression(o, out tuple);
-                case BoundConversion
-                {
+                case BoundConversion{
                     Conversion: { Kind: ConversionKind.ImplicitTupleLiteral },
                     Operand: var o
                 }:
@@ -152,8 +150,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             if (
-                expr is BoundConversion
-                {
+                expr is BoundConversion{
                     ConversionKind: ConversionKind.ImplicitTuple,
                     Conversion: var conversion
                 } boundConversion
@@ -307,8 +304,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundObjectCreationExpression { Arguments: { Length: 0 }, Type: { } eType } _
                     when eType.IsNullableType():
                     return new BoundLiteral(expr.Syntax, ConstantValue.Null, expr.Type);
-                case BoundObjectCreationExpression
-                {
+                case BoundObjectCreationExpression{
                     Arguments: { Length: 1 },
                     Type: { } eType
                 } creation when eType.IsNullableType():
@@ -607,8 +603,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case BoundConversion { Conversion: { IsIdentity: true }, Operand: var o }:
                         return makeNullableHasValue(o);
-                    case BoundConversion
-                    {
+                    case BoundConversion{
                         Conversion:
                         { IsNullable: true, UnderlyingConversions: var underlying } conversion,
                         Operand: var o
@@ -657,8 +652,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case BoundConversion { Conversion: { IsIdentity: true }, Operand: var o }:
                     return MakeValueOrDefaultTemp(o, temps, effects);
-                case BoundConversion
-                {
+                case BoundConversion{
                     Conversion: { IsNullable: true, UnderlyingConversions: var nested },
                     Operand: var o
                 } conv

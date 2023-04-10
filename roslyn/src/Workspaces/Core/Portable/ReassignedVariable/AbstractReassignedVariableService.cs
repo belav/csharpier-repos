@@ -169,8 +169,7 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
 
                 // If we're on an accessor parameter. Map up to the matching parameter for the property/indexer.
                 if (
-                    methodOrProperty is IMethodSymbol
-                    {
+                    methodOrProperty is IMethodSymbol{
                         MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet
                     } method
                 )
@@ -333,8 +332,7 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                 // Special case for property parameters.  When we bind to references, we'll bind to the parameters on
                 // the accessor methods.  We need to map these back to the property parameter to see if we have a hit.
                 if (
-                    localOrParameter is IParameterSymbol
-                    {
+                    localOrParameter is IParameterSymbol{
                         ContainingSymbol: IPropertySymbol property
                     } parameter
                 )
@@ -361,8 +359,7 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                 // Special case for property parameters.  When we bind to references, we'll bind to the parameters on
                 // the accessor methods.  We need to map these back to the property parameter to see if we have a hit.
                 if (
-                    localOrParameter is IParameterSymbol
-                    {
+                    localOrParameter is IParameterSymbol{
                         ContainingSymbol: IPropertySymbol property
                     } parameter
                 )

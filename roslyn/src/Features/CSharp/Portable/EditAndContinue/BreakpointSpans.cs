@@ -903,8 +903,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         internal static TextSpan GetEnvelope(SyntaxNode declaration)
         {
             if (
-                declaration is VariableDeclaratorSyntax
-                {
+                declaration is VariableDeclaratorSyntax{
                     Parent.Parent: BaseFieldDeclarationSyntax fieldDeclaration
                 } variableDeclarator
             )

@@ -121,8 +121,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
             {
                 var operationAssigmnent = (IAssignmentOperation)context.Operation;
                 if (
-                    operationAssigmnent.Target is IInstanceReferenceOperation
-                    {
+                    operationAssigmnent.Target is IInstanceReferenceOperation{
                         ReferenceKind: InstanceReferenceKind.ContainingTypeInstance
                     }
                 )

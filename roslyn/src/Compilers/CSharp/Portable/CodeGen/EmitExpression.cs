@@ -2065,8 +2065,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 receiver
                 is BoundLocal { LocalSymbol.IsKnownToReferToTempIfReferenceType: true }
                     or BoundComplexConditionalReceiver
-                    or BoundConditionalReceiver
-                    {
+                    or BoundConditionalReceiver{
                         Type: { IsReferenceType: false, IsValueType: false }
                     }
             )

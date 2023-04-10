@@ -41,13 +41,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         && methodSymbol.Parameters.First().Type.SpecialType
                             == SpecialType.System_Object
                         && GetBlockOfMethodBody(methodBodyOperation)
-                            is IBlockOperation
-                            {
+                            is IBlockOperation{
                                 Operations: [
-                                    IReturnOperation
-                                    {
-                                        ReturnedValue: IInvocationOperation
-                                        {
+                                    IReturnOperation{
+                                        ReturnedValue: IInvocationOperation{
                                             Instance: IInstanceReferenceOperation,
                                             TargetMethod: IMethodSymbol { Name: nameof(Equals) },
                                             Arguments: [
@@ -137,8 +134,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             // or
             // public static operator ==(C c1, object? c2) => c1.Equals(c2);
             return GetBlockOfMethodBody(operation)
-                    is IBlockOperation
-                    {
+                    is IBlockOperation{
                         // look for only one operation, a return operation that consists of an equals invocation
                         Operations: [IReturnOperation { ReturnedValue: IOperation returnedValue }]
                     }
@@ -157,13 +153,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             // => !(operand);
             if (
                 GetBlockOfMethodBody(operation)
-                is not IBlockOperation
-                {
+                is not IBlockOperation{
                     Operations: [
-                        IReturnOperation
-                        {
-                            ReturnedValue: IUnaryOperation
-                            {
+                        IReturnOperation{
+                            ReturnedValue: IUnaryOperation{
                                 OperatorKind: UnaryOperatorKind.Not,
                                 Operand: IOperation operand
                             }
@@ -185,8 +178,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             // but we need to make sure that the operands are parameter references
             if (
                 operand
-                is not IBinaryOperation
-                {
+                is not IBinaryOperation{
                     OperatorKind: BinaryOperatorKind.Equals,
                     LeftOperand: IOperation leftOperand,
                     RightOperand: IOperation rightOperand,
@@ -280,10 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 assignment =>
                     assignment switch
                     {
-                        IPropertyReferenceOperation
-                        {
-                            Instance: IParameterReferenceOperation
-                            {
+                        IPropertyReferenceOperation{
+                            Instance: IParameterReferenceOperation{
                                 Parameter: IParameterSymbol referencedParameter
                             },
                             Property: IPropertySymbol referencedProperty
@@ -291,10 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                             => referencedParameter.Equals(parameter)
                                 ? referencedProperty.GetBackingFieldIfAny()
                                 : null,
-                        IFieldReferenceOperation
-                        {
-                            Instance: IParameterReferenceOperation
-                            {
+                        IFieldReferenceOperation{
+                            Instance: IParameterReferenceOperation{
                                 Parameter: IParameterSymbol referencedParameter
                             },
                             Field: IFieldSymbol referencedField
@@ -352,8 +340,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             );
 
             if (
-                operation.Initializer is IInvocationOperation
-                {
+                operation.Initializer is IInvocationOperation{
                     Arguments: ImmutableArray<IArgumentOperation> args
                 }
             )
@@ -443,8 +430,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             // the only time we want to actually make a change is if they use the default no-param constructor,
             // and a block initializer.
             if (
-                operation is IObjectCreationOperation
-                {
+                operation is IObjectCreationOperation{
                     Arguments: ImmutableArray<IArgumentOperation> { IsEmpty: true },
                     Initializer: IObjectOrCollectionInitializerOperation initializer,
                     Constructor: IMethodSymbol { IsImplicitlyDeclared: true }
@@ -459,10 +445,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 foreach (var assignment in initializer.Initializers)
                 {
                     if (
-                        assignment is ISimpleAssignmentOperation
-                        {
-                            Target: IPropertyReferenceOperation
-                            {
+                        assignment is ISimpleAssignmentOperation{
+                            Target: IPropertyReferenceOperation{
                                 Property: IPropertySymbol property
                             },
                             Value: IOperation { Syntax: ExpressionSyntax syntax }
@@ -524,10 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             {
                 if (
                     operation
-                        is IExpressionStatementOperation
-                        {
-                            Operation: ISimpleAssignmentOperation
-                            {
+                        is IExpressionStatementOperation{
+                            Operation: ISimpleAssignmentOperation{
                                 Target: IOperation assignee,
                                 Value: IOperation assignment
                             }
@@ -537,14 +519,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 {
                     ISymbol? symbol = assignee switch
                     {
-                        IFieldReferenceOperation
-                        {
+                        IFieldReferenceOperation{
                             Instance: IInstanceReferenceOperation,
                             Field: IFieldSymbol field
                         }
                             => field,
-                        IPropertyReferenceOperation
-                        {
+                        IPropertyReferenceOperation{
                             Instance: IInstanceReferenceOperation,
                             Property: IPropertySymbol property
                         }
@@ -698,22 +678,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             assignedVariable = null;
             if (
                 operation
-                    is IVariableDeclarationGroupOperation
-                    {
+                    is IVariableDeclarationGroupOperation{
                         Declarations: [
-                            IVariableDeclarationOperation
-                            {
+                            IVariableDeclarationOperation{
                                 Declarators: [
-                                    IVariableDeclaratorOperation
-                                    {
+                                    IVariableDeclaratorOperation{
                                         Symbol: ILocalSymbol castOther,
-                                        Initializer: IVariableInitializerOperation
-                                        {
-                                            Value: IConversionOperation
-                                            {
+                                        Initializer: IVariableInitializerOperation{
+                                            Value: IConversionOperation{
                                                 IsImplicit: false,
-                                                Operand: IParameterReferenceOperation
-                                                {
+                                                Operand: IParameterReferenceOperation{
                                                     Parameter: IParameterSymbol referencedParameter1
                                                 }
                                             }
@@ -762,8 +736,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             // must be called on one of the parameters
             if (
                 operation
-                is not IInvocationOperation
-                {
+                is not IInvocationOperation{
                     TargetMethod.Name: nameof(Equals),
                     Instance: IOperation instance,
                     Arguments: [IArgumentOperation { Value: IOperation arg }]
@@ -843,10 +816,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         private static bool ReturnsFalseImmediately(IEnumerable<IOperation> operation)
         {
             return operation.FirstOrDefault()
-                is IReturnOperation
-                {
-                    ReturnedValue: ILiteralOperation
-                    {
+                is IReturnOperation{
+                    ReturnedValue: ILiteralOperation{
                         ConstantValue.HasValue: true,
                         ConstantValue.Value: false,
                     }
@@ -879,8 +850,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 // using DeMorgans law. We recurse to see any members accessed
                 (
                     _,
-                    IUnaryOperation
-                    {
+                    IUnaryOperation{
                         OperatorKind: UnaryOperatorKind.Not,
                         Operand: IOperation newCondition
                     }
@@ -932,8 +902,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 // e.g: return A == other.A;
                 (
                     true,
-                    IBinaryOperation
-                    {
+                    IBinaryOperation{
                         OperatorKind: BinaryOperatorKind.Equals,
                         LeftOperand: IMemberReferenceOperation leftMemberReference,
                         RightOperand: IMemberReferenceOperation rightMemberReference,
@@ -950,8 +919,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 // e.g: return !(A != other.A);
                 (
                     false,
-                    IBinaryOperation
-                    {
+                    IBinaryOperation{
                         OperatorKind: BinaryOperatorKind.NotEquals,
                         LeftOperand: IMemberReferenceOperation leftMemberReference,
                         RightOperand: IMemberReferenceOperation rightMemberReference,
@@ -967,8 +935,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 // equals invocation, something like: A.Equals(other.A)
                 (
                     true,
-                    IInvocationOperation
-                    {
+                    IInvocationOperation{
                         TargetMethod.Name: nameof(Equals),
                         Instance: IMemberReferenceOperation invokedOn,
                         Arguments: [IMemberReferenceOperation arg]
@@ -1007,8 +974,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             {
                 (
                     _,
-                    IUnaryOperation
-                    {
+                    IUnaryOperation{
                         OperatorKind: UnaryOperatorKind.Not,
                         Operand: IOperation newCondition
                     }
@@ -1023,8 +989,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     ),
                 (
                     true,
-                    IBinaryOperation
-                    {
+                    IBinaryOperation{
                         OperatorKind: BinaryOperatorKind.ConditionalAnd,
                         LeftOperand: IOperation leftOperation,
                         RightOperand: IOperation rightOperation,
@@ -1040,8 +1005,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     ),
                 (
                     false,
-                    IBinaryOperation
-                    {
+                    IBinaryOperation{
                         OperatorKind: BinaryOperatorKind.ConditionalOr,
                         LeftOperand: IOperation leftOperation,
                         RightOperand: IOperation rightOperation,
@@ -1084,8 +1048,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
                 if (
                     isPattern
-                        is IDeclarationPatternOperation
-                        {
+                        is IDeclarationPatternOperation{
                             DeclaredSymbol: ISymbol otherVar,
                             MatchedType: INamedTypeSymbol matchedType,
                         }
@@ -1128,10 +1091,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         ) =>
             statementsToCheck.FirstOrDefault() switch
             {
-                IReturnOperation
-                {
-                    ReturnedValue: ILiteralOperation
-                    {
+                IReturnOperation{
+                    ReturnedValue: ILiteralOperation{
                         ConstantValue.HasValue: true,
                         ConstantValue.Value: true,
                     }
@@ -1146,8 +1107,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         otherObject: otherC,
                         builder: builder
                     ),
-                IConditionalOperation
-                {
+                IConditionalOperation{
                     Condition: IOperation condition,
                     WhenTrue: IOperation whenTrue,
                     WhenFalse: var whenFalse,
@@ -1242,8 +1202,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             // we require the if statement (with or without a cast) to be the first operation in the body
             if (
                 bodyOps.FirstOrDefault()
-                is not IConditionalOperation
-                {
+                is not IConditionalOperation{
                     Condition: IOperation condition,
                     WhenTrue: IOperation whenTrue,
                     WhenFalse: var whenFalse,
@@ -1290,11 +1249,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             else
             {
                 if (
-                    condition is IIsPatternOperation
-                    {
+                    condition is IIsPatternOperation{
                         Value: IParameterReferenceOperation parameterReference,
-                        Pattern: INegatedPatternOperation
-                        {
+                        Pattern: INegatedPatternOperation{
                             Pattern: ITypePatternOperation typePattern
                         }
                     }

@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.NamingStyles
             if (
                 symbol.IsKind(SymbolKind.Parameter)
                 && symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
-                    is ParameterSyntax
-                    {
+                    is ParameterSyntax{
                         Parent: ParameterListSyntax { Parent: RecordDeclarationSyntax }
                     }
             )

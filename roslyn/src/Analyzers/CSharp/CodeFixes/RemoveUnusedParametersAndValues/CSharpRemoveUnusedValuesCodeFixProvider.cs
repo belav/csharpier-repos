@@ -159,8 +159,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                 parent is AssignmentExpressionSyntax assignment
                 && assignment.Right is ImplicitObjectCreationExpressionSyntax implicitObjectCreation
                 && newNameNode
-                    is IdentifierNameSyntax
-                    {
+                    is IdentifierNameSyntax{
                         Identifier.ValueText: AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
                     }
                 && semanticModel.GetTypeInfo(implicitObjectCreation).Type is { } type

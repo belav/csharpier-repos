@@ -1433,24 +1433,18 @@ namespace System.Net.Tests
                             // is passed back through the WebResponse without being wrapped.)
                             Assert.True(
                                 e
-                                    is WebException
-                                    {
-                                        InnerException: HttpRequestException
-                                        {
-                                            InnerException: IOException
-                                            {
-                                                InnerException: SocketException
-                                                {
+                                    is WebException{
+                                        InnerException: HttpRequestException{
+                                            InnerException: IOException{
+                                                InnerException: SocketException{
                                                     SocketErrorCode: SocketError.TimedOut
                                                 }
                                             }
                                         }
                                     }
                                     || e
-                                        is IOException
-                                        {
-                                            InnerException: SocketException
-                                            {
+                                        is IOException{
+                                            InnerException: SocketException{
                                                 SocketErrorCode: SocketError.TimedOut
                                             }
                                         },

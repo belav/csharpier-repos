@@ -665,8 +665,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 methodArgumentInfo.Arguments.All(
                     arg =>
                         arg
-                            is not BoundConversion
-                            {
+                            is not BoundConversion{
                                 ConversionKind: ConversionKind.InterpolatedStringHandler
                             }
                 )

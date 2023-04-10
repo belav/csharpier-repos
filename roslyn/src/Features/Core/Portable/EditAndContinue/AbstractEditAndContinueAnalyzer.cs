@@ -5155,8 +5155,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             // We store the containing symbol in NewSymbol of the edit for later use.
             if (
-                symbol is IMethodSymbol
-                {
+                symbol is IMethodSymbol{
                     MethodKind: MethodKind.Ordinary
                         or MethodKind.Constructor
                         or MethodKind.EventAdd
@@ -6275,8 +6274,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             // Most symbol types will automatically have an edit added, so we just need to handle a few
             if (
-                newSymbol is INamedTypeSymbol
-                {
+                newSymbol is INamedTypeSymbol{
                     DelegateInvokeMethod: not null and var newDelegateInvokeMethod
                 } newDelegateType
             )
@@ -6438,8 +6436,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             // attributes applied on parameters of a delegate are applied to both Invoke and BeginInvoke methods
             if (
-                newContainingSymbol.ContainingSymbol is INamedTypeSymbol
-                {
+                newContainingSymbol.ContainingSymbol is INamedTypeSymbol{
                     TypeKind: TypeKind.Delegate
                 } newContainingDelegateType
             )
@@ -7349,8 +7346,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             oldCtor = oldModel.GetDeclaredSymbol(oldDeclaration, cancellationToken);
                             Contract.ThrowIfFalse(
                                 oldCtor
-                                    is IMethodSymbol
-                                    {
+                                    is IMethodSymbol{
                                         MethodKind: MethodKind.Constructor
                                             or MethodKind.StaticConstructor
                                     }
@@ -8896,8 +8892,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         private static bool IsGlobalMain(ISymbol symbol) =>
             symbol
-                is IMethodSymbol
-                {
+                is IMethodSymbol{
                     Name: WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
                 };
 

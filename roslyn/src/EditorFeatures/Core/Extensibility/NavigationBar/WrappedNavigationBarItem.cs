@@ -56,8 +56,7 @@ namespace Microsoft.CodeAnalysis.Editor
             {
                 // For a regular symbol we want to select it if the user puts their caret in any of the spans of it in this file.
                 if (
-                    underlyingItem is RoslynNavigationBarItem.SymbolItem
-                    {
+                    underlyingItem is RoslynNavigationBarItem.SymbolItem{
                         Location.InDocumentInfo.spans: var symbolSpans
                     }
                 )

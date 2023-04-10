@@ -254,8 +254,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                 {
                     var syntax = local.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken);
                     if (
-                        syntax is VariableDeclaratorSyntax
-                        {
+                        syntax is VariableDeclaratorSyntax{
                             Parent: VariableDeclarationSyntax { Variables.Count: 1 } declaration
                         }
                     )
@@ -266,8 +265,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                     return TryGetParameterTypeSyntax(parameter, cancellationToken);
                 }
                 else if (
-                    symbol is IFieldSymbol
-                    {
+                    symbol is IFieldSymbol{
                         IsImplicitlyDeclared: false,
                         DeclaringSyntaxReferences.Length: > 0
                     } field
@@ -276,8 +274,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                     // implicitly declared fields don't have DeclaringSyntaxReferences so filter them out
                     var syntax = field.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken);
                     if (
-                        syntax is VariableDeclaratorSyntax
-                        {
+                        syntax is VariableDeclaratorSyntax{
                             Parent: VariableDeclarationSyntax { Variables.Count: 1 } declaration
                         }
                     )
@@ -287,10 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                         return tupleElement.Type;
                 }
                 else if (
-                    symbol is IFieldSymbol
-                    {
-                        CorrespondingTupleField: IFieldSymbol
-                        {
+                    symbol is IFieldSymbol{
+                        CorrespondingTupleField: IFieldSymbol{
                             Locations: [{ IsInSource: true } location]
                         }
                     }
@@ -360,10 +355,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             // string x;
             // Unassigned value that's not marked as null
             if (
-                node is VariableDeclaratorSyntax
-                {
-                    Parent: VariableDeclarationSyntax
-                    {
+                node is VariableDeclaratorSyntax{
+                    Parent: VariableDeclarationSyntax{
                         Parent: FieldDeclarationSyntax,
                         Variables.Count: 1
                     } declarationSyntax

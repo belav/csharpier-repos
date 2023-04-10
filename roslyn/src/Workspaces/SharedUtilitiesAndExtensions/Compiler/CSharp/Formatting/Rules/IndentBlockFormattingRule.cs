@@ -257,8 +257,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     return;
                 case PropertyPatternClauseSyntax propertyPatternClause:
                     if (
-                        propertyPatternClause.Parent is RecursivePatternSyntax
-                        {
+                        propertyPatternClause.Parent is RecursivePatternSyntax{
                             Parent: { } recursivePatternParent
                         }
                     )

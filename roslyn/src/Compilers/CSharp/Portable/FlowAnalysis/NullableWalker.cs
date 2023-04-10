@@ -4386,13 +4386,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (LambdaSymbol l, NamedTypeSymbol n) _ when n.IsDelegateType()
                     => AreLambdaAndNewDelegateSimilar(l, n),
                 (
-                    FieldSymbol
-                    {
+                    FieldSymbol{
                         ContainingType: { IsTupleType: true },
                         TupleElementIndex: var oi
                     } originalField,
-                    FieldSymbol
-                    {
+                    FieldSymbol{
                         ContainingType: { IsTupleType: true },
                         TupleElementIndex: var ui
                     } updatedField

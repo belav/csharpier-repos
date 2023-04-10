@@ -410,8 +410,7 @@ public class QueryableMethodNormalizingExpressionVisitor : ExpressionVisitor
                     {
                         while (
                             innerArgument
-                                is UnaryExpression
-                                {
+                                is UnaryExpression{
                                     NodeType: ExpressionType.Convert
                                         or ExpressionType.ConvertChecked
                                         or ExpressionType.TypeAs

@@ -214,8 +214,7 @@ using System.Reflection;
                         }
 
                         if (
-                            symbol.ContainingSymbol is IMethodSymbol
-                            {
+                            symbol.ContainingSymbol is IMethodSymbol{
                                 IsStatic: true,
                                 IsPartialDefinition: true
                             }

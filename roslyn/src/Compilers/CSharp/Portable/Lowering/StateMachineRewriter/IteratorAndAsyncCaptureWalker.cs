@@ -261,8 +261,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundParameter { ParameterSymbol: var symbol }:
                     CaptureVariable(symbol, syntax);
                     break;
-                case BoundFieldAccess
-                {
+                case BoundFieldAccess{
                     FieldSymbol: { IsStatic: false, ContainingType: { IsValueType: true } },
                     ReceiverOpt: BoundExpression receiver
                 }:
@@ -376,10 +375,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node is
                 {
                     IsRef: true,
-                    Left: BoundLocal
-                    {
-                        LocalSymbol: LocalSymbol { IsCompilerGenerated: true } local
-                    }
+                    Left: BoundLocal{ LocalSymbol: LocalSymbol { IsCompilerGenerated: true } local }
                 }
             )
                 _boundRefLocalInitializers[local] = node.Right;

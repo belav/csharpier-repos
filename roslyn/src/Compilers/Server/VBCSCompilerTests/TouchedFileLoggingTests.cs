@@ -174,8 +174,7 @@ End Class
             expectedReads.AddRange(cmd.Arguments.MetadataReferences.Select(r => r.Reference));
 
             if (
-                cmd.Arguments is VisualBasicCommandLineArguments
-                {
+                cmd.Arguments is VisualBasicCommandLineArguments{
                     DefaultCoreLibraryReference: { } reference
                 }
             )

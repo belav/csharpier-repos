@@ -576,8 +576,7 @@ namespace Mono.Linker.Dataflow
                             {
                                 if (
                                     instr.Operand
-                                        is MethodReference
-                                        {
+                                        is MethodReference{
                                             DeclaringType: GenericInstanceType typeRef
                                         }
                                     && compilerGeneratedType == context.TryResolve(typeRef)
@@ -593,8 +592,7 @@ namespace Mono.Linker.Dataflow
                             {
                                 if (
                                     instr.Operand
-                                        is FieldReference
-                                        {
+                                        is FieldReference{
                                             DeclaringType: GenericInstanceType typeRef
                                         }
                                     && compilerGeneratedType == context.TryResolve(typeRef)

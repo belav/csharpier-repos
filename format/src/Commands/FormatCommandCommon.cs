@@ -390,8 +390,7 @@ namespace Microsoft.CodeAnalysis.Tools
             var currentDirectory = Environment.CurrentDirectory;
 
             if (
-                parseResult.GetValue<string>(SlnOrProjectArgument) is string
-                {
+                parseResult.GetValue<string>(SlnOrProjectArgument) is string{
                     Length: > 0
                 } slnOrProject
             )

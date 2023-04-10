@@ -213,8 +213,7 @@ internal sealed class ApiResponseTypeProvider
                         // error type for 4xx client errors if no response type is specified..
                         var setByDefault =
                             metadataAttribute
-                                is ProducesResponseTypeAttribute
-                                {
+                                is ProducesResponseTypeAttribute{
                                     IsResponseTypeSetByDefault: true
                                 };
                         apiResponseType.Type = setByDefault

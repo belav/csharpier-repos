@@ -279,8 +279,7 @@ namespace ILLink.RoslynAnalyzer
                             if (
                                 !typeParam.HasConstructorConstraint
                                 || typeArg
-                                    is not INamedTypeSymbol
-                                    {
+                                    is not INamedTypeSymbol{
                                         InstanceConstructors: { } typeArgCtors
                                     }
                             )

@@ -712,8 +712,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
                         // Returning null here means that all the names on the right were convertible to a property pattern.
                         return null;
 
-                    case MemberAccessExpressionSyntax(SimpleMemberAccessExpression)
-                    {
+                    case MemberAccessExpressionSyntax(SimpleMemberAccessExpression){
                         Name: IdentifierNameSyntax name
                     } memberAccess
                         when canConvertToSubpattern(name, arg)

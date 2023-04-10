@@ -1430,8 +1430,7 @@ static T G<T>(T t, Func<T, Task<T>> f)
 
             Assert.True(
                 import.NamespaceOrType
-                    is INamespaceSymbol
-                    {
+                    is INamespaceSymbol{
                         Name: "System",
                         ContainingNamespace.IsGlobalNamespace: true
                     }

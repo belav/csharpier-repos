@@ -137,8 +137,7 @@ public sealed class HeaderDictionaryAddFixer : CodeFixProvider
         );
 
         if (
-            diagnosticTarget is InvocationExpressionSyntax
-            {
+            diagnosticTarget is InvocationExpressionSyntax{
                 Expression: MemberAccessExpressionSyntax { Name.Identifier: { } identifierToken }
             } invocationExpression
         )
@@ -190,8 +189,7 @@ public sealed class HeaderDictionaryAddFixer : CodeFixProvider
         );
 
         if (
-            diagnosticTarget is InvocationExpressionSyntax
-            {
+            diagnosticTarget is InvocationExpressionSyntax{
                 Expression: MemberAccessExpressionSyntax memberAccessExpression,
                 ArgumentList.Arguments: { Count: 2 } arguments
             }

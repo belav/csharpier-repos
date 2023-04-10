@@ -748,8 +748,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 if (
                                     stateWhenNotNullOpt is { } stateWhenNotNull
                                     && t.Input.Source
-                                        is BoundDagTypeEvaluation
-                                        {
+                                        is BoundDagTypeEvaluation{
                                             Input: { IsOriginalInput: true }
                                         }
                                 )
@@ -807,8 +806,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 var (tempSlot, tempType) = tempSlotAndType;
                                 var tempState = GetState(ref this.State, tempSlot);
                                 if (
-                                    variableAccess is BoundLocal
-                                    {
+                                    variableAccess is BoundLocal{
                                         LocalSymbol: SourceLocalSymbol local
                                     } boundLocal
                                 )

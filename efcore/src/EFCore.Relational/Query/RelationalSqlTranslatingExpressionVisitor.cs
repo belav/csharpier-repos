@@ -479,8 +479,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
 
                     static Expression RemoveConvert(Expression e) =>
                         e
-                            is UnaryExpression
-                            {
+                            is UnaryExpression{
                                 NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked
                             } unary
                             ? RemoveConvert(unary.Operand)
@@ -705,8 +704,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             type = null;
             if (
                 expression
-                    is not UnaryExpression
-                    {
+                    is not UnaryExpression{
                         NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked
                     } unaryExpression
                 || unaryExpression.Operand is not ConstantExpression constantExpression

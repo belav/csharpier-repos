@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                 return true;
 
             if (
-                token.Parent?.Parent is InterpolatedStringExpressionSyntax
-                {
+                token.Parent?.Parent is InterpolatedStringExpressionSyntax{
                     StringStartToken.RawKind: (int)
                         SyntaxKind.InterpolatedMultiLineRawStringStartToken
                 }

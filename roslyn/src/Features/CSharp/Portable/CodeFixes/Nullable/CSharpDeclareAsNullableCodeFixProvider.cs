@@ -389,10 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             // Unassigned value that's not marked as null
             if (
                 node
-                    is VariableDeclaratorSyntax
-                    {
-                        Parent: VariableDeclarationSyntax
-                        {
+                    is VariableDeclaratorSyntax{
+                        Parent: VariableDeclarationSyntax{
                             Parent: FieldDeclarationSyntax _
                         } declarationSyntax
                     }

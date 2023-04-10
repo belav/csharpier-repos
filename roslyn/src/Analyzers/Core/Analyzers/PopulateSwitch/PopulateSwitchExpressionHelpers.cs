@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             foreach (var arm in operation.Arms)
             {
                 if (
-                    arm.Pattern is IConstantPatternOperation
-                    {
+                    arm.Pattern is IConstantPatternOperation{
                         Value.ConstantValue: { HasValue: true, Value: null }
                     }
                 )
@@ -105,8 +104,7 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         )
         {
             if (
-                operation is IConstantPatternOperation
-                {
+                operation is IConstantPatternOperation{
                     Value.ConstantValue: { HasValue: true, Value: not null and var value }
                 }
             )

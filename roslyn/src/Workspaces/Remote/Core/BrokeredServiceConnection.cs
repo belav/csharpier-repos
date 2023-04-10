@@ -506,8 +506,7 @@ namespace Microsoft.CodeAnalysis.Remote
         // TODO: we need https://github.com/microsoft/vs-streamjsonrpc/issues/468 to be implemented in order to check for IOException subtypes.
         private static bool IsRemoteIOException(Exception exception) =>
             exception
-                is RemoteInvocationException
-                {
+                is RemoteInvocationException{
                     ErrorData: CommonErrorData { TypeName: "System.IO.IOException" }
                 };
 

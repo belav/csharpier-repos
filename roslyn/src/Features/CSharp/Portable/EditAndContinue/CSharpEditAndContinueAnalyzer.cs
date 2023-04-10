@@ -298,8 +298,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             if (
-                node is PropertyDeclarationSyntax
-                {
+                node is PropertyDeclarationSyntax{
                     ExpressionBody: var propertyExpressionBody and not null
                 }
             )
@@ -308,8 +307,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             if (
-                node is IndexerDeclarationSyntax
-                {
+                node is IndexerDeclarationSyntax{
                     ExpressionBody: var indexerExpressionBody and not null
                 }
             )
@@ -1526,8 +1524,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
         internal override bool IsRecordPrimaryConstructorParameter(SyntaxNode declaration) =>
             declaration
-                is ParameterSyntax
-                {
+                is ParameterSyntax{
                     Parent: ParameterListSyntax { Parent: RecordDeclarationSyntax }
                 };
 
@@ -1571,10 +1568,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             isFirstAccessor = false;
             if (
                 declaration
-                    is AccessorDeclarationSyntax
-                    {
-                        Parent: AccessorListSyntax
-                        {
+                    is AccessorDeclarationSyntax{
+                        Parent: AccessorListSyntax{
                             Parent: PropertyDeclarationSyntax property
                         } list
                     }
@@ -3223,10 +3218,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 IMethodSymbol { MethodKind: MethodKind.Destructor } => RudeEditKind.Insert,
 
                 // Inserting operator to an existing type is not allowed.
-                IMethodSymbol
-                {
-                    MethodKind: MethodKind.Conversion or MethodKind.UserDefinedOperator
-                }
+                IMethodSymbol{ MethodKind: MethodKind.Conversion or MethodKind.UserDefinedOperator }
                     => RudeEditKind.InsertOperator,
 
                 // Inserting a method that explictly implements an interface method into an existing type is not allowed.

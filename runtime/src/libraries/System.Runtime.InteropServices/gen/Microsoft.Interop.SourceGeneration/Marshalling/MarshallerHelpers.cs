@@ -339,8 +339,7 @@ namespace Microsoft.Interop
             if (elementMarshallingInfo is NativeLinearCollectionMarshallingInfo nestedCollection)
             {
                 if (
-                    nestedCollection.ElementCountInfo is CountElementCountInfo
-                    {
+                    nestedCollection.ElementCountInfo is CountElementCountInfo{
                         ElementInfo: TypePositionInfo nestedCountElement
                     }
                 )

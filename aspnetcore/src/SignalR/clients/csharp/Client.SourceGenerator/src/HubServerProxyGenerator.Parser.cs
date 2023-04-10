@@ -17,8 +17,7 @@ internal partial class HubServerProxyGenerator
     {
         internal static bool IsSyntaxTargetForAttribute(SyntaxNode node) =>
             node
-                is AttributeSyntax
-                {
+                is AttributeSyntax{
                     Name: IdentifierNameSyntax { Identifier: { Text: "HubServerProxy" } },
                     Parent: { Parent: MethodDeclarationSyntax { Parent: ClassDeclarationSyntax } }
                 };
@@ -349,8 +348,7 @@ internal partial class HubServerProxyGenerator
                         methodSpec.InnerReturnTypeName = b.TypeArguments[0].ToString();
                     }
                     else if (
-                        member.ReturnType is INamedTypeSymbol
-                        {
+                        member.ReturnType is INamedTypeSymbol{
                             Arity: 1,
                             Name: "IAsyncEnumerable"
                         } c

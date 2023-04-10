@@ -51,8 +51,7 @@ internal static class SyntaxNodeExtensions
     )
     {
         if (
-            node is InitializerExpressionSyntax
-            {
+            node is InitializerExpressionSyntax{
                 Parent: BaseObjectCreationExpressionSyntax
                     or ArrayCreationExpressionSyntax
                     or ImplicitArrayCreationExpressionSyntax

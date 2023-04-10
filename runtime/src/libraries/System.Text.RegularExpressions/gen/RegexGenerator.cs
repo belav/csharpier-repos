@@ -343,8 +343,7 @@ namespace System.Text.RegularExpressions.Generator
         )
         {
             if (
-                method.MethodSyntax.SyntaxTree.Options is CSharpParseOptions
-                {
+                method.MethodSyntax.SyntaxTree.Options is CSharpParseOptions{
                     LanguageVersion: <= LanguageVersion.CSharp10
                 }
             )

@@ -29,8 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 // has to be `(expr as T)`
                 if (
                     asExpression.Parent
-                    is not ParenthesizedExpressionSyntax
-                    {
+                    is not ParenthesizedExpressionSyntax{
                         // Has to be `(expr as T)?...`
                         Parent: ConditionalAccessExpressionSyntax parentConditionalAccess
                     }

@@ -484,8 +484,7 @@ internal abstract partial class AbstractRecommendationService<TSyntaxContext>
                     // information provided to answer that question accurately.
                     var originalMember = member.GetOriginalUnreducedDefinition();
                     if (
-                        originalMember is IMethodSymbol
-                        {
+                        originalMember is IMethodSymbol{
                             Parameters: [{ Type: ITypeParameterSymbol parameterType }, ..]
                         }
                     )

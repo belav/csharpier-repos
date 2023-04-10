@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                 // For example, in `var (x, y) = (0, "")`, we should `int` for `x` and `string` for `y`.
                 // It's redundant to show `(int, string)` for `var`
                 if (
-                    node is DeclarationExpressionSyntax
-                    {
+                    node is DeclarationExpressionSyntax{
                         Type.IsVar: true,
                         Designation: not ParenthesizedVariableDesignationSyntax
                     } declarationExpression
@@ -77,8 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                         );
                 }
                 else if (
-                    node is SingleVariableDesignationSyntax
-                    {
+                    node is SingleVariableDesignationSyntax{
                         Parent: not DeclarationPatternSyntax and not DeclarationExpressionSyntax
                     } variableDesignation
                 )

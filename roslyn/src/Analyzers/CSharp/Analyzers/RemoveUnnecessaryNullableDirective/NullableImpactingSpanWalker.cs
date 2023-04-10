@@ -170,11 +170,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
                     return;
                 }
                 else if (
-                    symbolInfo.Symbol is INamedTypeSymbol
-                    {
-                        IsValueType: true,
-                        IsGenericType: false
-                    }
+                    symbolInfo.Symbol is INamedTypeSymbol{ IsValueType: true, IsGenericType: false }
                 )
                 {
                     return;

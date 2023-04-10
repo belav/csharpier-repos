@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMemberStatic
             if (
                 node.IsKind(SyntaxKind.VariableDeclarator)
                 && node.Parent
-                    is VariableDeclarationSyntax
-                    {
+                    is VariableDeclarationSyntax{
                         Parent: FieldDeclarationSyntax or EventFieldDeclarationSyntax
                     }
             )

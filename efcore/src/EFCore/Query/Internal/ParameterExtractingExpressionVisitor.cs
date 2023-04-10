@@ -482,8 +482,7 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
                 parameterName = methodCallExpression.Method.Name;
                 break;
 
-            case UnaryExpression
-            {
+            case UnaryExpression{
                 NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked
             } unaryExpression
                 when (unaryExpression.Type.UnwrapNullableType() == unaryExpression.Operand.Type):

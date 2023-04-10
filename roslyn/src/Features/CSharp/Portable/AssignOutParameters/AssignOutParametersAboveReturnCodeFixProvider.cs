@@ -75,8 +75,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             var generator = editor.Generator;
 
             if (
-                exprOrStatement is LocalFunctionStatementSyntax
-                {
+                exprOrStatement is LocalFunctionStatementSyntax{
                     ExpressionBody: { } localFunctionExpressionBody
                 }
             )

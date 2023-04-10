@@ -47,15 +47,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 case IBinaryOperation { OperatorKind: NotEquals } op:
                     return Not.TryCreate(ParseConstantPattern(op));
 
-                case IBinaryOperation
-                {
+                case IBinaryOperation{
                     OperatorKind: ConditionalOr,
                     Syntax: BinaryExpressionSyntax syntax
                 } op:
                     return ParseBinaryPattern(op, isDisjunctive: true, syntax.OperatorToken);
 
-                case IBinaryOperation
-                {
+                case IBinaryOperation{
                     OperatorKind: ConditionalAnd,
                     Syntax: BinaryExpressionSyntax syntax
                 } op:

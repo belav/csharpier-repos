@@ -4212,10 +4212,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return source.IsPointerOrFunctionPointer()
                 && destination
-                    is PointerTypeSymbol
-                    {
-                        PointedAtType: { SpecialType: SpecialType.System_Void }
-                    };
+                    is PointerTypeSymbol{ PointedAtType: { SpecialType: SpecialType.System_Void } };
         }
 
         internal bool HasImplicitPointerConversion(

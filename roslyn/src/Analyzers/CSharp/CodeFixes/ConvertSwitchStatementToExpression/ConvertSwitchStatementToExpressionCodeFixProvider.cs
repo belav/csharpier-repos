@@ -133,8 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     // If we are removing the declarator statement entirely, transfer its leading trivia to the
                     // expression-statement are converting to.
                     if (
-                        declaratorToRemoveNode.Parent is VariableDeclarationSyntax
-                        {
+                        declaratorToRemoveNode.Parent is VariableDeclarationSyntax{
                             Parent: LocalDeclarationStatementSyntax declStatement,
                             Variables.Count: 1
                         }

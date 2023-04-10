@@ -133,8 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 var whenNotNull = conditionalAccessExpression.WhenNotNull;
 
                 if (
-                    whenNotNull is MemberBindingExpressionSyntax
-                    {
+                    whenNotNull is MemberBindingExpressionSyntax{
                         Name: IdentifierNameSyntax identifierName
                     }
                 )

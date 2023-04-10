@@ -415,10 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
                 wasAwaited = true;
                 expression = awaitExpression.Expression;
                 if (
-                    expression is InvocationExpressionSyntax
-                    {
-                        Expression: MemberAccessExpressionSyntax
-                        {
+                    expression is InvocationExpressionSyntax{
+                        Expression: MemberAccessExpressionSyntax{
                             Name.Identifier.ValueText: nameof(Task.ConfigureAwait),
                             Expression: var underlying
                         }

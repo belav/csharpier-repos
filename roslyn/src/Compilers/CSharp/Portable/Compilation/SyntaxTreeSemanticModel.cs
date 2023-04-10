@@ -225,8 +225,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             ? GetOrAddModel(node)
                             : null;
                     break;
-                case RecordDeclarationSyntax
-                {
+                case RecordDeclarationSyntax{
                     ParameterList: { },
                     PrimaryConstructorBaseTypeIfClass: { }
                 } recordDeclaration
@@ -3334,8 +3333,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     break;
 
-                case PrimaryConstructorBaseTypeSyntax
-                {
+                case PrimaryConstructorBaseTypeSyntax{
                     Parent: BaseListSyntax { Parent: RecordDeclarationSyntax recordDeclaration }
                 } baseType
                     when recordDeclaration.PrimaryConstructorBaseTypeIfClass == declaredNode

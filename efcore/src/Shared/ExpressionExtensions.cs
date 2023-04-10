@@ -31,8 +31,7 @@ internal static class ExpressionExtensions
         convertedType = null;
         while (
             expression
-                is UnaryExpression
-                {
+                is UnaryExpression{
                     NodeType: ExpressionType.Convert
                         or ExpressionType.ConvertChecked
                         or ExpressionType.TypeAs

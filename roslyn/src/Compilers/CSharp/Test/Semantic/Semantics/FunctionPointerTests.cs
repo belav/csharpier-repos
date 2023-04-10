@@ -155,8 +155,7 @@ unsafe class C
                 var typeInfo = model.GetTypeInfo(initializer1);
                 Assert.True(
                     typeInfo.ConvertedType
-                        is IPointerTypeSymbol
-                        {
+                        is IPointerTypeSymbol{
                             PointedAtType: { SpecialType: SpecialType.System_Void }
                         }
                 );

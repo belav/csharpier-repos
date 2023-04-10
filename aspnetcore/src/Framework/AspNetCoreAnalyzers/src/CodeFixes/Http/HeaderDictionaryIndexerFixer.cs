@@ -78,8 +78,7 @@ public class HeaderDictionaryIndexerFixer : CodeFixProvider
         }
 
         if (
-            param is ElementAccessExpressionSyntax
-            {
+            param is ElementAccessExpressionSyntax{
                 Expression: { } expression
             } elementAccessExpressionSyntax
         )

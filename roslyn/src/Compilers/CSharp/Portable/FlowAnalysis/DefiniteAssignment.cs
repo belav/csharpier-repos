@@ -112,8 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return _requireOutParamsAssigned
                     && !this._emptyStructTypeCache._dev12CompilerCompatibility
                     && CurrentSymbol
-                        is MethodSymbol
-                        {
+                        is MethodSymbol{
                             MethodKind: MethodKind.Constructor,
                             ContainingType.TypeKind: TypeKind.Struct
                         };
@@ -842,8 +841,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void NoteRecordParameterReadIfNeeded(Symbol symbol)
         {
             if (
-                symbol is ParameterSymbol
-                {
+                symbol is ParameterSymbol{
                     ContainingSymbol: SynthesizedRecordConstructor
                 } parameter
             )
@@ -1012,8 +1010,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && type.IsReferenceType
                 && type.SpecialType != SpecialType.System_String
                 && type
-                    is not ArrayTypeSymbol
-                    {
+                    is not ArrayTypeSymbol{
                         IsSZArray: true,
                         ElementType.SpecialType: SpecialType.System_Byte
                     }
@@ -1398,8 +1395,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(
                     CurrentSymbol
-                        is MethodSymbol
-                        {
+                        is MethodSymbol{
                             MethodKind: MethodKind.Constructor,
                             ContainingType.TypeKind: TypeKind.Struct
                         }
@@ -1462,8 +1458,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var symbolName = hasAssociatedProperty ? associatedSymbol.Name : fieldSymbol.Name;
                 if (
                     CurrentSymbol
-                    is not MethodSymbol
-                    {
+                    is not MethodSymbol{
                         MethodKind: MethodKind.Constructor,
                         ContainingType.TypeKind: TypeKind.Struct
                     }
@@ -1997,8 +1992,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             if (
-                parameter is SourceComplexParameterSymbolBase
-                {
+                parameter is SourceComplexParameterSymbolBase{
                     ContainingSymbol: LocalFunctionSymbol or LambdaSymbol
                 } sourceComplexParam
             )

@@ -149,8 +149,7 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     {
         if (
             methodCallExpression
-                is MethodCallExpression
-                {
+                is MethodCallExpression{
                     Method: MethodInfo { IsGenericMethod: true }
                 } genericMethodCall
             && genericMethodCall.Method.GetGenericMethodDefinition() == EnumerableMethods.ElementAt

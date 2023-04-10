@@ -279,8 +279,7 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                     }
 
                     if (
-                        catchClause.Declaration.Type is QualifiedNameSyntax
-                        {
+                        catchClause.Declaration.Type is QualifiedNameSyntax{
                             Left: IdentifierNameSyntax { Identifier.ValueText: nameof(System) },
                             Right: IdentifierNameSyntax { Identifier.ValueText: nameof(Exception) },
                         }

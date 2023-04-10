@@ -446,8 +446,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 p =>
                     p
                         is BoundLiteral
-                            or BoundStringInsert
-                            {
+                            or BoundStringInsert{
                                 Value.Type.SpecialType: SpecialType.System_String,
                                 Alignment: null,
                                 Format: null
@@ -943,8 +942,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 if (
-                    nonOutConstructorCall is BoundObjectCreationExpression
-                    {
+                    nonOutConstructorCall is BoundObjectCreationExpression{
                         ResultKind: LookupResultKind.Viable
                     }
                 )
@@ -1349,10 +1347,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 #pragma warning disable format
                         or {
                             IsParams: true,
-                            Type: ArrayTypeSymbol
-                            {
-                                ElementType: NamedTypeSymbol
-                                {
+                            Type: ArrayTypeSymbol{
+                                ElementType: NamedTypeSymbol{
                                     IsInterpolatedStringHandlerType: true
                                 }
                             },

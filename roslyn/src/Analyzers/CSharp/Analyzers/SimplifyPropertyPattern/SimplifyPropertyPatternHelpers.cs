@@ -27,8 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
                     is {
                         Parent: PropertyPatternClauseSyntax,
                         ExpressionColon: { } outer,
-                        Pattern: RecursivePatternSyntax
-                        {
+                        Pattern: RecursivePatternSyntax{
                             Type: null,
                             PositionalPatternClause: null,
                             Designation: null,

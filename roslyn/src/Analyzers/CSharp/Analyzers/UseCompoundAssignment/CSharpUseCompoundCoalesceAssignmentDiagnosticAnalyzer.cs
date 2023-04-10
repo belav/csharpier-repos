@@ -129,8 +129,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
                 : ifStatement.Statement;
 
             assignment = whenTrue
-                is ExpressionStatementSyntax
-                {
+                is ExpressionStatementSyntax{
                     Expression: AssignmentExpressionSyntax
                     (SyntaxKind.SimpleAssignmentExpression) assignmentTemp
                 }
@@ -243,8 +242,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             testedExpression = null;
             if (
                 condition is BinaryExpressionSyntax
-                (SyntaxKind.EqualsExpression)
-                {
+                (SyntaxKind.EqualsExpression){
                     Right: LiteralExpressionSyntax(SyntaxKind.NullLiteralExpression)
                 } binaryExpression
             )
@@ -263,10 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
                     testedExpression = binaryExpression.Left;
             }
             else if (
-                condition is IsPatternExpressionSyntax
-                {
-                    Pattern: ConstantPatternSyntax
-                    {
+                condition is IsPatternExpressionSyntax{
+                    Pattern: ConstantPatternSyntax{
                         Expression: LiteralExpressionSyntax(SyntaxKind.NullLiteralExpression)
                     }
                 } isPattern
@@ -276,8 +272,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
                 testedExpression = isPattern.Expression;
             }
             else if (
-                condition is InvocationExpressionSyntax
-                {
+                condition is InvocationExpressionSyntax{
                     ArgumentList.Arguments.Count: 2
                 } invocation
             )

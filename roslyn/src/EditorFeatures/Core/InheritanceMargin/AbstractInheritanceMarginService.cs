@@ -137,8 +137,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                 symbol
                 is IEventSymbol
                     or IPropertySymbol
-                    or IMethodSymbol
-                    {
+                    or IMethodSymbol{
                         MethodKind: MethodKind.Ordinary
                             or MethodKind.ExplicitInterfaceImplementation
                             or MethodKind.UserDefinedOperator

@@ -1479,8 +1479,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 if (
-                    memberSyntax is BaseMethodDeclarationSyntax
-                    {
+                    memberSyntax is BaseMethodDeclarationSyntax{
                         ParameterList: { ParameterCount: > 0 }
                     } baseMethodDeclSyntax
                 )
@@ -1491,8 +1490,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 if (
-                    memberSyntax is RecordDeclarationSyntax
-                    {
+                    memberSyntax is RecordDeclarationSyntax{
                         ParameterList: { ParameterCount: > 0 }
                     }
                 )
@@ -1664,8 +1662,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder getBinder(BaseTypeDeclarationSyntax baseTypeDeclaration)
             {
                 if (
-                    baseTypeDeclaration is RecordDeclarationSyntax
-                    {
+                    baseTypeDeclaration is RecordDeclarationSyntax{
                         SemicolonToken: { RawKind: (int)SyntaxKind.SemicolonToken }
                     } recordDeclaration
                 )

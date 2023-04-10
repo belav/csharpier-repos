@@ -2403,8 +2403,7 @@ namespace Microsoft.CodeAnalysis.Operations
         )
         {
             if (
-                boundBinaryOperatorBase is BoundBinaryOperator
-                {
+                boundBinaryOperatorBase is BoundBinaryOperator{
                     InterpolatedStringHandlerData: not null
                 } binary
             )
@@ -4017,8 +4016,7 @@ namespace Microsoft.CodeAnalysis.Operations
                                 var methodName = part switch
                                 {
                                     BoundCall { Method.Name: var name } => name,
-                                    BoundDynamicInvocation
-                                    {
+                                    BoundDynamicInvocation{
                                         Expression: BoundMethodGroup { Name: var name }
                                     }
                                         => name,

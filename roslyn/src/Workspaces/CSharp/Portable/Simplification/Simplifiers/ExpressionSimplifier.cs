@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             issueSpan = default;
 
             if (
-                expression is MemberAccessExpressionSyntax
-                {
+                expression is MemberAccessExpressionSyntax{
                     Expression.RawKind: (int)SyntaxKind.ThisExpression
                 } memberAccessExpression
             )

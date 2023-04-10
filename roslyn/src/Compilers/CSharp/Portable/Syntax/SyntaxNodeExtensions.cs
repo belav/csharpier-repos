@@ -306,8 +306,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             )
                             || (
                                 current.Parent
-                                    is VariableDeclarationSyntax
-                                    {
+                                    is VariableDeclarationSyntax{
                                         Parent: LocalDeclarationStatementSyntax
                                     } variableDeclaration
                                 && variableDeclaration.Type == current

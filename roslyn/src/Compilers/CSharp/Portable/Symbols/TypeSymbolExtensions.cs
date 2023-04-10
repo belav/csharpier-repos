@@ -572,8 +572,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(type is FunctionPointerTypeSymbol || type.IsDelegateType());
             if (
-                type is FunctionPointerTypeSymbol
-                {
+                type is FunctionPointerTypeSymbol{
                     Signature: { Parameters: var functionPointerParameters }
                 }
             )
@@ -1549,8 +1548,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static bool IsSpanChar(this TypeSymbol type)
         {
             return type
-                    is NamedTypeSymbol
-                    {
+                    is NamedTypeSymbol{
                         ContainingNamespace:
                         { Name: "System", ContainingNamespace: { IsGlobalNamespace: true } },
                         MetadataName: "Span`1",
@@ -1562,8 +1560,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static bool IsReadOnlySpanChar(this TypeSymbol type)
         {
             return type
-                    is NamedTypeSymbol
-                    {
+                    is NamedTypeSymbol{
                         ContainingNamespace:
                         { Name: "System", ContainingNamespace: { IsGlobalNamespace: true } },
                         MetadataName: "ReadOnlySpan`1",
@@ -1575,8 +1572,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static bool IsSpanOrReadOnlySpanChar(this TypeSymbol type)
         {
             return type
-                    is NamedTypeSymbol
-                    {
+                    is NamedTypeSymbol{
                         ContainingNamespace:
                         { Name: "System", ContainingNamespace: { IsGlobalNamespace: true } },
                         MetadataName: "ReadOnlySpan`1" or "Span`1",
@@ -2487,8 +2483,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             type = type.OriginalDefinition;
             return type
-                    is NamedTypeSymbol
-                    {
+                    is NamedTypeSymbol{
                         Name: "INumberBase",
                         IsInterface: true,
                         Arity: 1,

@@ -1949,10 +1949,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 // is a legal type).
                 if (
                     patternSyntax
-                        is ConstantPatternSyntax
-                        {
-                            Expression: CastExpressionSyntax
-                            {
+                        is ConstantPatternSyntax{
+                            Expression: CastExpressionSyntax{
                                 Expression: IdentifierNameSyntax
                             } castExpression
                         }
@@ -2683,8 +2681,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
             while (
                 enclosingSymbol
-                    is IMethodSymbol
-                    {
+                    is IMethodSymbol{
                         MethodKind: MethodKind.LocalFunction or MethodKind.AnonymousFunction
                     } method
             )
@@ -3724,8 +3721,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 )
                 {
                     if (
-                        token.Parent.Parent is ArgumentSyntax
-                        {
+                        token.Parent.Parent is ArgumentSyntax{
                             RefOrOutKeyword.RawKind: (int)SyntaxKind.OutKeyword
                         }
                     )
