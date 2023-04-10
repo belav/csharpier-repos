@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// CORS extension methods for <see cref="IEndpointConventionBuilder"/>.
 /// </summary>

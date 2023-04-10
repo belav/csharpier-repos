@@ -6,6 +6,7 @@ using AngleSharp.Dom.Html;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 
+
 public class ForgotPassword : DefaultUIPage
 {
     private readonly IHtmlFormElement _forgotPasswordForm;

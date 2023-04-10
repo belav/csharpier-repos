@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
+
 /// <summary>
 /// A named policy.
 /// </summary>

@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
+
 public class HttpConnectionManagerTests : LoggedTest
 {
     // This test causes MemoryPoolBlocks to be finalized which in turn causes an assert failure in debug builds.

@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
+
 public class ResponseDrainingTests : TestApplicationErrorLoggerLoggedTest
 {
     public static TheoryData<ListenOptions> ConnectionMiddlewareData =>

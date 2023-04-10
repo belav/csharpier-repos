@@ -21,6 +21,7 @@ using Grpc.Core;
 
 namespace Grpc.Shared.Server;
 
+
 internal static class BindMethodFinder
 {
     private const BindingFlags BindMethodBindingFlags = BindingFlags.Public | BindingFlags.Static;

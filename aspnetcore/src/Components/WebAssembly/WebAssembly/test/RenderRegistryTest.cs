@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering;
 
+
 public class RenderRegistryTest
 {
     [Fact]

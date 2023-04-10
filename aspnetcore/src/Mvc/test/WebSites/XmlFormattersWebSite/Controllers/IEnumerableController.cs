@@ -6,6 +6,7 @@ using XmlFormattersWebSite.Models;
 
 namespace XmlFormattersWebSite.Controllers;
 
+
 public class IEnumerableController : Controller
 {
     public IEnumerable<int> ValueTypes()

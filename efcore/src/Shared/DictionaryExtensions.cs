@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
+
 [DebuggerStepThrough]
 internal static class DictionaryExtensions
 {

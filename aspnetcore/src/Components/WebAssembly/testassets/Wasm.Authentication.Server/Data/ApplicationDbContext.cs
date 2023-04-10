@@ -9,6 +9,7 @@ using Wasm.Authentication.Server.Models;
 
 namespace Wasm.Authentication.Server.Data;
 
+
 public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 {
     public ApplicationDbContext(

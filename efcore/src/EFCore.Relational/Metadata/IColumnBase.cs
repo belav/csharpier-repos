@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents a column-like object in a table-like object.
 /// </summary>

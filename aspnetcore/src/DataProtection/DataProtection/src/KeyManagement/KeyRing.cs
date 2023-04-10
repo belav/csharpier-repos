@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
+
 /// <summary>
 /// A basic implementation of <see cref="IKeyRing"/>.
 /// </summary>

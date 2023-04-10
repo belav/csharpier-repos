@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 public class SqlServerValueGenerationStrategyConventionTest
 {
     [ConditionalFact]

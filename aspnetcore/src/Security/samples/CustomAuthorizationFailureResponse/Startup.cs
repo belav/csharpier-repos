@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CustomAuthorizationFailureResponse;
 
+
 public class Startup
 {
     public const string CustomForbiddenMessage = "Some info about the error";

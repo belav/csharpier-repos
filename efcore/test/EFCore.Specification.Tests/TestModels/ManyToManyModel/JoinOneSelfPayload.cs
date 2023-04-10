@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
+
 public class JoinOneSelfPayload
 {
     public virtual int LeftId { get; set; }

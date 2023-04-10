@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class DuplicateExtensionMethods : AutoMapperSpecBase
 {
     public class Outlay

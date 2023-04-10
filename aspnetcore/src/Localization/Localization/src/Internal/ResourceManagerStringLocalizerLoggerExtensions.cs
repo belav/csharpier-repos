@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Localization.Internal;
 
+
 internal static class ResourceManagerStringLocalizerLoggerExtensions
 {
     private static readonly Action<

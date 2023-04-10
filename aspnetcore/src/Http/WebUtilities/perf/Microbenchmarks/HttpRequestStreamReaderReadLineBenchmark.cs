@@ -7,6 +7,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
+
 public class HttpRequestStreamReaderReadLineBenchmark
 {
     private MemoryStream _stream;

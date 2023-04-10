@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents an index on a set of properties.
 /// </summary>

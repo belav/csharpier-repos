@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 
+
 internal sealed class DefaultTempDataSerializer : TempDataSerializer
 {
     public override IDictionary<string, object> Deserialize(byte[] value)

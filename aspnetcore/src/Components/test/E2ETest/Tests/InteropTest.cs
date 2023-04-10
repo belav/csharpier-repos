@@ -11,6 +11,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 public class InteropTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
     public InteropTest(

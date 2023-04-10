@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class RazorDiagnostic : IEquatable<RazorDiagnostic>, IFormattable
 {
     internal static readonly RazorDiagnostic[] EmptyArray = Array.Empty<RazorDiagnostic>();

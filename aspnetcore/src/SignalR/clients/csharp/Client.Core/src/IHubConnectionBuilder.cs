@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
+
 /// <summary>
 /// A builder abstraction for configuring <see cref="HubConnection"/> instances.
 /// </summary>

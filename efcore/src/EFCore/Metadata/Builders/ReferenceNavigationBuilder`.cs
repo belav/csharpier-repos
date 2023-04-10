@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+
 /// <summary>
 ///     Provides a simple API for configuring a relationship where configuration began on an end of the
 ///     relationship with a reference that points to an instance of another entity type.

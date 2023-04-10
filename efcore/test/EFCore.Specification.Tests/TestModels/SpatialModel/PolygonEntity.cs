@@ -5,6 +5,7 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel;
 
+
 public class PolygonEntity
 {
     public Guid Id { get; set; }

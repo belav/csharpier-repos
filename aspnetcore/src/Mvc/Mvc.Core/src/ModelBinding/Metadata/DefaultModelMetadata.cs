@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
+
 /// <summary>
 /// A default <see cref="ModelMetadata"/> implementation.
 /// </summary>

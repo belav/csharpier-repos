@@ -6,6 +6,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 internal readonly struct FileResultInfo
 {
     public string ContentType { get; init; }

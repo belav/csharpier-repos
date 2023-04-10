@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable UnusedMember.Local
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 public class ValueGeneratorConventionTest
 {
     private class SampleEntity

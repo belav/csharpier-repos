@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Represents the result of an identity operation.
 /// </summary>

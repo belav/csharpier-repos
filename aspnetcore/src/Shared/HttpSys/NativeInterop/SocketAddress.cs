@@ -11,6 +11,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
+
 // a little perf app measured these times when comparing the internal
 // buffer implemented as a managed byte[] or unmanaged memory IntPtr
 // that's why we use byte[]

@@ -13,6 +13,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
     public VirtualizationTest(

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
+
 public class HelloWorldWithPageModelHandler : PageModel
 {
     public string Message { get; set; }

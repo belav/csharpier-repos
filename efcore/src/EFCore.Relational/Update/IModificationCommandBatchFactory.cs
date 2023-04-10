@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 /// <summary>
 ///     <para>
 ///         A service for creating <see cref="ModificationCommandBatch" /> instances.

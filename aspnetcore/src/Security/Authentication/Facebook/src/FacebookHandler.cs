@@ -15,6 +15,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Facebook;
 
+
 /// <summary>
 /// Authentication handler for Facebook's OAuth based authentication.
 /// </summary>

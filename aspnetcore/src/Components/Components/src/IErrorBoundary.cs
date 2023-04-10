@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components;
 
+
 // Purpose of this interface, instead of just using ErrorBoundaryBase directly:
 //
 // [1] It keeps clear what is fundamental to an error boundary from the Renderer's perspective.

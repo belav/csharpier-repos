@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public class DefaultRazorEngineBuilderTest
 {
     [Fact]

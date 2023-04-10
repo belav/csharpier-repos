@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
+
 internal sealed class HttpResponsePipeWriter : PipeWriter
 {
     private readonly IHttpResponseControl _pipeControl;

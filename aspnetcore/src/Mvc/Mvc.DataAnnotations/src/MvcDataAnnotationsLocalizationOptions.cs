@@ -7,6 +7,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 /// <summary>
 /// Provides programmatic configuration for DataAnnotations localization in the MVC framework.
 /// </summary>

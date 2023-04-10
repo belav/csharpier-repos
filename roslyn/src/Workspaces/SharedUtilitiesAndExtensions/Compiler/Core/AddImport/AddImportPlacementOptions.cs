@@ -16,6 +16,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.AddImport;
 
+
 [DataContract]
 internal sealed record class AddImportPlacementOptions
 {

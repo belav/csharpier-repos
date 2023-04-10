@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// Type that provides access to an <see cref="ActionContext"/>.
 /// </summary>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite;
 
+
 public class TestStringParserTests
 {
     [Fact]

@@ -5,6 +5,7 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
+
 public class PagedBufferedTextWriterTest
 {
     private static readonly char[] Content;

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extensions methods for configuring MVC via an <see cref="IMvcBuilder"/>.
 /// </summary>

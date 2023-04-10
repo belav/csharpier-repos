@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public static class TagHelperConventions
 {
     public static readonly string DefaultKind = "ITagHelper";

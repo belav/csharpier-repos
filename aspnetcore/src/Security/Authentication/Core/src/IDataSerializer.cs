@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Contract for serialzing authentication data.
 /// </summary>

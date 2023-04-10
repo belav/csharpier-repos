@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// IApplicationBuilder extensions for the WelcomePageMiddleware.
 /// </summary>

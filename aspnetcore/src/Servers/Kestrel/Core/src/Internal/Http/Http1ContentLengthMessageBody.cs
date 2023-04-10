@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
+
 internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
 {
     private ReadResult _readResult;

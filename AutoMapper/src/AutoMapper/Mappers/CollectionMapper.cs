@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 namespace AutoMapper.Internal.Mappers;
+
 using static ReflectionHelper;
 
 public class CollectionMapper : IObjectMapper

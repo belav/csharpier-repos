@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Update.Internal;
 
+
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="CommandBatchPreparer" />

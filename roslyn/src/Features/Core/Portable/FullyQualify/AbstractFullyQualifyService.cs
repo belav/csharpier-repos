@@ -25,6 +25,7 @@ using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify;
 
+
 internal abstract partial class AbstractFullyQualifyService<TSimpleNameSyntax>
     : IFullyQualifyService
     where TSimpleNameSyntax : SyntaxNode

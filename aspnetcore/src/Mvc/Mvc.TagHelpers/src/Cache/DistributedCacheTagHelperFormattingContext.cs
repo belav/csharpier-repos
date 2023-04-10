@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
+
 /// <summary>
 /// Represents an object containing the information to serialize with <see cref="IDistributedCacheTagHelperFormatter" />.
 /// </summary>

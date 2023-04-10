@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
+
 public class JsonResultWithSystemTextJsonController : Controller
 {
     private static readonly JsonSerializerOptions _customSerializerSettings;

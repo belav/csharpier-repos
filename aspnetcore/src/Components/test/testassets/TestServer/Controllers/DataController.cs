@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TestServer.Controllers;
 
+
 [EnableCors("AllowAll")]
 [Route("api/[controller]")]
 public class DataController : Controller

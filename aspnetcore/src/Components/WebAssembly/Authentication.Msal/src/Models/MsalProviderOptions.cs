@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.Authentication.WebAssembly.Msal.Models;
 
+
 /// <summary>
 /// Authentication provider options for the msal.js authentication provider.
 /// </summary>

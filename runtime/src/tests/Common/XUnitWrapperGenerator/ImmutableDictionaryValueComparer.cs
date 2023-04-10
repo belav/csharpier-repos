@@ -8,6 +8,7 @@ using System.Text;
 
 namespace XUnitWrapperGenerator;
 
+
 internal class ImmutableDictionaryValueComparer<TKey, TValue>
     : IEqualityComparer<ImmutableDictionary<TKey, TValue>>
     where TKey : notnull

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 /// <summary>
 /// Reads an object from a request body with a text format.
 /// </summary>

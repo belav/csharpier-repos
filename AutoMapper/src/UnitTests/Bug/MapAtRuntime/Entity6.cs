@@ -1,5 +1,6 @@
 ﻿namespace OmmitedDatabaseModel3;
 
+
 public class Entity6 : BaseEntity
 {
     public Entity6()

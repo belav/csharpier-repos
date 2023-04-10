@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.Bug;
 
+
 public class SequenceContainsNoElementsTest : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>

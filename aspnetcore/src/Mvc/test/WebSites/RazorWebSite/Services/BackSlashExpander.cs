@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorWebSite;
 
+
 public class BackSlashExpander : IViewLocationExpander
 {
     public void PopulateValues(ViewLocationExpanderContext context) { }

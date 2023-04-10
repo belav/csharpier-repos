@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         An expression that represents creation of a grouping element in <see cref="ShapedQueryExpression.ShaperExpression" />.

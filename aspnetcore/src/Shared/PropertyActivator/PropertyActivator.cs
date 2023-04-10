@@ -9,6 +9,7 @@ using System.Reflection;
 
 namespace Microsoft.Extensions.Internal;
 
+
 internal sealed class PropertyActivator<TContext>
 {
     private readonly Func<TContext, object> _valueAccessor;

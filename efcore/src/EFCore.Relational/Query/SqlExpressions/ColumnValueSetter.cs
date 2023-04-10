@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
+
 /// <summary>
 ///     <para>
 ///         An object that represents a column = value construct in a SET clause of UPDATE command in SQL tree.

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
+
 public interface IFactoryService
 {
     IFakeService FakeService { get; }

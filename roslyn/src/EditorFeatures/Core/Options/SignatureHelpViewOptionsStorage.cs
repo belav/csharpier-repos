@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.Options;
 
+
 internal sealed class SignatureHelpViewOptionsStorage
 {
     public static readonly PerLanguageOption2<bool> ShowSignatureHelp =

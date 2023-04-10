@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
+
 public class Rodney
 {
     public string Id { get; set; } = null!;

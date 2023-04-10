@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class TestCosmosExecutionStrategy : CosmosExecutionStrategy
 {
     protected static new readonly int DefaultMaxRetryCount = 10;

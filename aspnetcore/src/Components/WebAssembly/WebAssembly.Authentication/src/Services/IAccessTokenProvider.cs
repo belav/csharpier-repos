@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 /// <summary>
 /// Represents a contract for services capable of provisioning access tokens for an application.
 /// </summary>

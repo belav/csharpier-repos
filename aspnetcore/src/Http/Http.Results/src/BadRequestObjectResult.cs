@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 internal sealed class BadRequestObjectResult : ObjectResult
 {
     public BadRequestObjectResult(object? error)

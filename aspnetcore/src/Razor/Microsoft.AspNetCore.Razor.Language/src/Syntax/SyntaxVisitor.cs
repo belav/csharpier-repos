@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 /// <summary>
 /// Represents a <see cref="SyntaxNode"/> visitor that visits only the single SyntaxNode
 /// passed into its Visit method and produces

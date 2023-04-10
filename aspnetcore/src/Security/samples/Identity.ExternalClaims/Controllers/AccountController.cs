@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity.ExternalClaims.Controllers;
 
+
 [Route("[controller]/[action]")]
 public class AccountController : Controller
 {

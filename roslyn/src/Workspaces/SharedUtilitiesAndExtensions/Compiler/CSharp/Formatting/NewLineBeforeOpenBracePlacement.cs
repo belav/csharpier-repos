@@ -6,6 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.CSharp.Formatting;
 
+
 [Flags]
 internal enum NewLineBeforeOpenBracePlacement
 {

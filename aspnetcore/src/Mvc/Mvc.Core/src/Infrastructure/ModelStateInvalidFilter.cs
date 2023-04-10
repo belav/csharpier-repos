@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// A <see cref="IActionFilter"/> that responds to invalid <see cref="ActionContext.ModelState"/>. This filter is
 /// added to all types and actions annotated with <see cref="ApiControllerAttribute"/>.

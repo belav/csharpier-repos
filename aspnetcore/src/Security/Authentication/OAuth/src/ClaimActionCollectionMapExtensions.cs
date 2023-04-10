@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Extension methods for <see cref="ClaimActionCollection"/>.
 /// </summary>

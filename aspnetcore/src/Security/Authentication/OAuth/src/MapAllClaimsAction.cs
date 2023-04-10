@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
+
 /// <summary>
 /// A ClaimAction that selects all top level values from the json user data and adds them as Claims.
 /// This excludes duplicate sets of names and values.

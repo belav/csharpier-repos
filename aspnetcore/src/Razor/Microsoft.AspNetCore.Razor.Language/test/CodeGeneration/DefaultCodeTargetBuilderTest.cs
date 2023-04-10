@@ -5,6 +5,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 public class DefaultCodeTargetBuilderTest
 {
     [Fact]

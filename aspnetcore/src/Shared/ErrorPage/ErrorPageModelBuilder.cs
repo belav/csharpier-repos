@@ -13,6 +13,7 @@ using Microsoft.Extensions.StackTrace.Sources;
 
 namespace Microsoft.AspNetCore.Hosting.Views;
 
+
 internal static class ErrorPageModelBuilder
 {
     public static ErrorPageModel CreateErrorPageModel(

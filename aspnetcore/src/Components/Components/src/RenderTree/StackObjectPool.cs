@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
+
 // This is a very simple object pool that requires Get and Return calls to be
 // balanced as in a stack. It retains up to 'maxPreservedItems' instances in
 // memory, then for any further requests it supplies untracked instances.

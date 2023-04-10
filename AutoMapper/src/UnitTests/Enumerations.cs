@@ -3,6 +3,7 @@ using AutoMapper.UnitTests;
 
 namespace AutoMapper.Tests;
 
+
 public class InvalidStringToEnum : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() => new(_ => { });

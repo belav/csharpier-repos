@@ -5,6 +5,7 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     <para>
 ///         Represents the mapping between a .NET <see cref="sbyte" /> type and a database type.

@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents a scalar property of an entity type.
 /// </summary>

@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod;
 
+
 [DataContract]
 internal readonly record struct ExtractMethodOptions
 {

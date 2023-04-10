@@ -7,6 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace LocalizationWebsite;
 
+
 public class StartupContentLanguageHeader
 {
     public void ConfigureServices(IServiceCollection services)

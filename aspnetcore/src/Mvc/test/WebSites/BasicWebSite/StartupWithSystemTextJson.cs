@@ -3,6 +3,7 @@
 
 namespace BasicWebSite;
 
+
 public class StartupWithSystemTextJson
 {
     public void ConfigureServices(IServiceCollection services)

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
+
 internal sealed class RuntimeCompilationFileProvider
 {
     private readonly MvcRazorRuntimeCompilationOptions _options;

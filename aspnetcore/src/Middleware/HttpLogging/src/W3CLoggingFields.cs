@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 /// <summary>
 /// Flags used to control which parts of the
 /// request and response are logged in W3C format.

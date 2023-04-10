@@ -7,6 +7,7 @@ using Microsoft.Extensions.Http;
 
 namespace Polly;
 
+
 /// <summary>
 /// Extension methods for <see cref="HttpRequestMessage"/> Polly integration.
 /// </summary>

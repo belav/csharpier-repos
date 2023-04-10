@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     <para>
 ///         Represents an entity type in an <see cref="IConventionModel" />.

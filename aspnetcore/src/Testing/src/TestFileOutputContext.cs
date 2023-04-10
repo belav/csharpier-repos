@@ -9,6 +9,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 /// <summary>
 /// Provides access to file storage for the running test. Get access by
 /// implementing <see cref="ITestMethodLifecycle"/>, and accessing <see cref="TestContext.FileOutput"/>.

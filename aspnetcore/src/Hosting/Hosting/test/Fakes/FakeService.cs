@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
+
 public class FakeService : IFakeEveryService, IDisposable
 {
     public bool Disposed { get; private set; }

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 /// <summary>
 ///     Converts a <see cref="Guid" /> to and from an array of <see cref="byte" />.
 /// </summary>

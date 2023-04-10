@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 public class ModelValidationResultComparer : IEqualityComparer<ModelValidationResult>
 {
     public static readonly ModelValidationResultComparer Instance =

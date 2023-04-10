@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     Represents a property accessor lambda code fragment.
 /// </summary>

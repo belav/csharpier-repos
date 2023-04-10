@@ -12,6 +12,7 @@
 
 namespace System.Runtime.CompilerServices;
 
+
 /// <summary>
 /// Indicates a type should be replaced rather than updated when applying metadata updates.
 /// </summary>

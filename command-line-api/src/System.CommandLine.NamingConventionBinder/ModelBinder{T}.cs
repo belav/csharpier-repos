@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 
 namespace System.CommandLine.NamingConventionBinder;
 
+
 /// <inheritdoc />
 public class ModelBinder<TModel> : ModelBinder
 {

@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
+
 public class PreserveComponentStateBenchmark
 {
     private readonly PersistComponentStateTagHelper _tagHelper =

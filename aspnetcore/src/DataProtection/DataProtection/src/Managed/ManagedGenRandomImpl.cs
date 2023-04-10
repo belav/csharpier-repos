@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 
 namespace Microsoft.AspNetCore.DataProtection.Managed;
 
+
 internal sealed unsafe class ManagedGenRandomImpl : IManagedGenRandom
 {
 #if NETSTANDARD2_0 || NETFRAMEWORK

@@ -10,6 +10,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
+
 public class DefaultModelMetadataTest
 {
     [Fact]

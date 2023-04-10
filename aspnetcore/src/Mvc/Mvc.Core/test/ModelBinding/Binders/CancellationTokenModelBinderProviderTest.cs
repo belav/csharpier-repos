@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+
 public class CancellationTokenModelBinderProviderTest
 {
     [Theory]

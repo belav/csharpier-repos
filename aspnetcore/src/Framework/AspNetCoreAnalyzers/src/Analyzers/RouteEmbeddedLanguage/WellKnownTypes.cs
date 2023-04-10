@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
+
 internal sealed class WellKnownTypes
 {
     /// <summary>

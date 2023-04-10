@@ -1,5 +1,6 @@
 ﻿namespace OmmitedDTOModel3;
 
+
 public class EntityDTO4 : BaseEntity
 {
     public Guid Entity3Id { get; set; }

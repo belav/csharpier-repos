@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 #pragma warning disable CS0618 // Type or member is obsolete
 internal class DefaultRazorIntermediateNodeLoweringPhase
     : RazorEnginePhaseBase,

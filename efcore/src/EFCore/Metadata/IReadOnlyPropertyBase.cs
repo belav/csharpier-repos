@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Base type for navigations and properties.
 /// </summary>

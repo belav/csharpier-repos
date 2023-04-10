@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class UsingEngineInsideMap : AutoMapperSpecBase
 {
     private Dest _dest;

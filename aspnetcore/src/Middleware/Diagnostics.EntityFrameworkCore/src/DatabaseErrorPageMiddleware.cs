@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Captures synchronous and asynchronous database related exceptions from the pipeline that may be resolved using Entity Framework
 ///     migrations. When these exceptions occur an HTML response with details of possible actions to resolve the issue is generated.

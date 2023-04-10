@@ -8,6 +8,7 @@ using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAs
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 // We're purposely lean on tests here because the functionality is well covered by
 // integration tests, and is mostly implemented by the base class.
 public class DefaultDocumentClassifierPassTest : RazorProjectEngineTestBase

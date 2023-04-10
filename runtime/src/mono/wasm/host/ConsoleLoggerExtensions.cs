@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.AppHost;
 
+
 internal static class ConsoleLoggerExtensions
 {
     public static ILoggingBuilder AddPassThroughConsole(this ILoggingBuilder builder) =>

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 // ReSharper disable VirtualMemberCallInConstructor
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class NonSharedModelTestBase : IDisposable, IAsyncLifetime
 {
     public static IEnumerable<object[]> IsAsyncData = new[]

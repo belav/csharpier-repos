@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Server.IISIntegration;
 
+
 internal sealed class AuthenticationHandler : IAuthenticationHandler
 {
     private WindowsPrincipal? _user;

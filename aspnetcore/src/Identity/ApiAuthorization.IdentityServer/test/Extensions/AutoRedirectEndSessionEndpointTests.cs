@@ -17,6 +17,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 public class AutoRedirectEndSessionEndpointTests
 {
     [Fact]

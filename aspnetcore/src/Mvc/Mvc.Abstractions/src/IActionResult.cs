@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// Defines a contract that represents the result of an action method.
 /// </summary>

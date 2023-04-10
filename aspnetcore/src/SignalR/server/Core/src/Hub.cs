@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// A base class for a SignalR hub.
 /// </summary>

@@ -8,6 +8,7 @@ using Xunit.Sdk;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class NorthwindMiscellaneousQuerySqlServerTest
     : NorthwindMiscellaneousQueryRelationalTestBase<
         NorthwindQuerySqlServerFixture<NoopModelCustomizer>

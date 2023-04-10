@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// Represents an implementation of the HTTP Context class.
 /// </summary>

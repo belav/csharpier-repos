@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 /// <summary>
 /// Represents the result of an authentication operation.
 /// </summary>

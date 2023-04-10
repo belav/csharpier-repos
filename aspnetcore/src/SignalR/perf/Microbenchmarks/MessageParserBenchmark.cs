@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
+
 public class MessageParserBenchmark
 {
     private byte[] _binaryInput;

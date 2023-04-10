@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
+
 internal sealed class SiteConfigurationProvider
 {
     public static IConfiguration GetAzureLoggingConfiguration(IWebAppContext context)

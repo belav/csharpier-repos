@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Default implementation of <see cref="IPersonalDataProtector"/> that uses <see cref="ILookupProtectorKeyRing"/>
 /// and <see cref="ILookupProtector"/> to protect data with a payload format of {keyId}:{protectedData}

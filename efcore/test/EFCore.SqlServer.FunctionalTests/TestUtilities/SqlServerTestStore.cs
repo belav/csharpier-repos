@@ -9,6 +9,7 @@ using Microsoft.Data.SqlClient;
 // ReSharper disable SuggestBaseTypeForParameter
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class SqlServerTestStore : RelationalTestStore
 {
     public const int CommandTimeout = 300;

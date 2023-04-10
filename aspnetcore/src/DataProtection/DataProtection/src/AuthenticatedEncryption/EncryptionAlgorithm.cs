@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
+
 /// <summary>
 /// Specifies a symmetric encryption algorithm to use for providing confidentiality
 /// to protected payloads.

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
+
 public class Mission
 {
     public int Id { get; set; }

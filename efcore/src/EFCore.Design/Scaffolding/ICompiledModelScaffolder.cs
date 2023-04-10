@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
+
 /// <summary>
 ///     Used to scaffold a compiled model from a model.
 /// </summary>

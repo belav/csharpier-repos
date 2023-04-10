@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity.InMemory;
 
 namespace Identity.DefaultUI.WebSite;
 
+
 public class PocoUserStartup : StartupBase<PocoUser, IdentityDbContext>
 {
     public PocoUserStartup(IConfiguration configuration)

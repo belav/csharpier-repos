@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 internal static class PageBinderFactory
 {
     internal static readonly Func<PageContext, object, Task> NullPropertyBinder = (

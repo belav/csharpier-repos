@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Classification;
 
+
 internal static class ClassificationOptionsStorage
 {
     public static ClassificationOptions GetClassificationOptions(

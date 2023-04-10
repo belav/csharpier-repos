@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public sealed class TagHelperIntermediateNode : IntermediateNode
 {
     public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();

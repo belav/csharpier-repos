@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 public class DefaultTagHelperOptimizationPassTest
 {
     [Fact]

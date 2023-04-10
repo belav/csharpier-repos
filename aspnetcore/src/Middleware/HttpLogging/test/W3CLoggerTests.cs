@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 public class W3CLoggerTests
 {
     readonly DateTime _timestampOne = new DateTime(2021, 01, 02, 03, 04, 05);

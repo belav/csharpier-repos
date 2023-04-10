@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Rewrite.UrlActions;
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
+
 internal sealed class CookieActionFactory
 {
     /// <summary>

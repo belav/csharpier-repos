@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 internal class GenericTypeNameRewriter : TypeNameRewriter
 {
     private readonly Dictionary<string, string> _bindings;

@@ -5,6 +5,7 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authentication.Core.Test;
 
+
 public class AuthenticationTicketTests
 {
     [Fact]

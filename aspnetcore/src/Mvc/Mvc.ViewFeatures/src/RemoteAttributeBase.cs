@@ -17,6 +17,7 @@ using Resources = Microsoft.AspNetCore.Mvc.ViewFeatures.Resources;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// A <see cref="ValidationAttribute"/> which configures Unobtrusive validation to send an Ajax request to the
 /// web site. The invoked endpoint should return JSON indicating whether the value is valid.

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
+
 public class BaseInheritanceRelationshipEntity
 {
     public int Id { get; set; }

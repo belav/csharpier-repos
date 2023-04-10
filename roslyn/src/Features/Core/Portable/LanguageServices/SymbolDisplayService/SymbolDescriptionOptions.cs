@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.QuickInfo;
 
 namespace Microsoft.CodeAnalysis.LanguageService;
 
+
 [DataContract]
 internal readonly record struct SymbolDescriptionOptions
 {

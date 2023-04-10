@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.Components.Server.BlazorPack;
 
+
 internal sealed class BlazorPackHubProtocolWorker : MessagePackHubProtocolWorker
 {
     protected override object DeserializeObject(

@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace System.CommandLine.Help;
 
+
 public partial class HelpBuilder
 {
     /// <summary>

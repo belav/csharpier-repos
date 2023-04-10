@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Tests;
 
+
 public class HttpsConnectionAdapterOptionsTests
 {
     [Fact]

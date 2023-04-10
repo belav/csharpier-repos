@@ -3,6 +3,7 @@
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 public enum WasmHost
 {
     Chrome,

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
+
 /// <summary>
 /// Encapsulates a string or <see cref="IHtmlContent"/> value.
 /// </summary>

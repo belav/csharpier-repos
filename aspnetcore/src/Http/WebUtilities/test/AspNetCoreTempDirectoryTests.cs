@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 public class AspNetCoreTempDirectoryTests
 {
     [Fact]

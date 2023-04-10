@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
+
 public class ResponseHeaderTests : TestApplicationErrorLoggerLoggedTest
 {
     [Fact]

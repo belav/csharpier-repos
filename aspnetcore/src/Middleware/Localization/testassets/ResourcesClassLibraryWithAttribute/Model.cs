@@ -3,4 +3,5 @@
 
 namespace Alternate.Namespace;
 
+
 public class Model { }

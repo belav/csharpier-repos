@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class StatementChunkGenerator : SpanChunkGenerator
 {
     public override string ToString()

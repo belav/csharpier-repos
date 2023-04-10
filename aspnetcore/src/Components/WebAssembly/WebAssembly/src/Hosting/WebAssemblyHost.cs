@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 /// <summary>
 /// A host object for Blazor running under WebAssembly. Use <see cref="WebAssemblyHostBuilder"/>
 /// to initialize a <see cref="WebAssemblyHost"/>.

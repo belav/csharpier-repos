@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Defines metadata for an event with more than six parameters such that it has to have
 ///     special handling.

@@ -6,6 +6,7 @@ using System.Xml;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 /// <summary>
 /// Contains methods which are used by Xml input formatters.
 /// </summary>

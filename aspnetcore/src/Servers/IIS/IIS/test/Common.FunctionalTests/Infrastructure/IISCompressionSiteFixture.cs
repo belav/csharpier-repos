@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
+
 public class IISCompressionSiteFixture : IISTestSiteFixture
 {
     public IISCompressionSiteFixture()

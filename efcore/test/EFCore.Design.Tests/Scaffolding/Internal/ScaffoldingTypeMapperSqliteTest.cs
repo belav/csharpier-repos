@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class ScaffoldingTypeMapperSqliteTest
 {
     // Native type cases...

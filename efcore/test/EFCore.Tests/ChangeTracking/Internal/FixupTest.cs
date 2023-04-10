@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 // ReSharper disable AccessToDisposedClosure
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
+
 public class FixupTest
 {
     [ConditionalTheory]

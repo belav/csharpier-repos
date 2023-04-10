@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class WriteThenCloseConnectionHandler : ConnectionHandler
 {
     public override async Task OnConnectedAsync(ConnectionContext connection)

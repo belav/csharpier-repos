@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultDocumentClassifierPass : DocumentClassifierPassBase
 {
     public override int Order => DefaultFeatureOrder;

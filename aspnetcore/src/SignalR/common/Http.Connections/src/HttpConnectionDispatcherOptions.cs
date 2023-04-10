@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
+
 /// <summary>
 /// Options used to configure the HTTP connection dispatcher.
 /// </summary>

@@ -6,6 +6,7 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.TestHost;
 
+
 internal sealed class ResponseBodyPipeWriter : PipeWriter
 {
     private readonly Func<Task> _onFirstWriteAsync;

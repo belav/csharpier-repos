@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+
 /// <summary>
 /// An <see cref="IResult"/> that returns a Found (302), Moved Permanently (301), Temporary Redirect (307),
 /// or Permanent Redirect (308) response with a Location header.

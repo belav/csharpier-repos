@@ -5,6 +5,7 @@ using System.Runtime.Versioning;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
+
 /// <summary>
 /// Repesents configurable options for <see cref="BrowserFileStream"/> with Blazor Server.
 /// </summary>

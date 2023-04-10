@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class CollectionsNullability : AutoMapperSpecBase
 {
     Holder _destination;

@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure.EmbeddedSyntax;
 
+
 /// <summary>
 /// Root of the embedded language syntax hierarchy.  EmbeddedSyntaxNodes are very similar to
 /// Roslyn Red-Nodes in concept, though there are differences for ease of implementation.

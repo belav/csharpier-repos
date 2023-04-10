@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing.Template;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
+
 /// <summary>
 /// Represents a parsed route template with default values and constraints.
 /// Use <see cref="RoutePatternFactory"/> to create <see cref="RoutePattern"/>

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public class Team
 {
     public class TeamProxy : Team, IF1Proxy

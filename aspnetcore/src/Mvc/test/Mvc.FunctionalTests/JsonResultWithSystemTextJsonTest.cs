@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class JsonResultWithSystemTextJsonTest
     : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithSystemTextJson>>
 {

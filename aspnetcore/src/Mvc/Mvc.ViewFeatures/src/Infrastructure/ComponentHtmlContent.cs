@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 internal class ComponentHtmlContent : IHtmlContent
 {
     private readonly IEnumerable<string> _preamble;

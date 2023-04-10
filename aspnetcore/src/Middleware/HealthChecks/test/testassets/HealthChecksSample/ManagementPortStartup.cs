@@ -3,6 +3,7 @@
 
 namespace HealthChecksSample;
 
+
 // Pass in `--scenario port` at the command line to run this sample.
 public class ManagementPortStartup
 {

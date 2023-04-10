@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 public class RazorFileHierarchyTest
 {
     [Fact]

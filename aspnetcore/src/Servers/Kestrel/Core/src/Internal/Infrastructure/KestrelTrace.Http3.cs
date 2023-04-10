@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
+
 internal sealed partial class KestrelTrace : ILogger
 {
     public void Http3ConnectionError(string connectionId, Http3ConnectionErrorException ex)

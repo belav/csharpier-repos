@@ -6,6 +6,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Optional base class for components that represent a layout.
 /// Alternatively, components may implement <see cref="IComponent"/> directly

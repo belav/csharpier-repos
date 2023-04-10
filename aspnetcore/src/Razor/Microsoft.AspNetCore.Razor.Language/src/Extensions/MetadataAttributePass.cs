@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 // Optimization pass is the best choice for this class. It's not an optimization, but it also doesn't add semantically
 // meaningful information.
 internal class MetadataAttributePass : IntermediateNodePassBase, IRazorOptimizationPass

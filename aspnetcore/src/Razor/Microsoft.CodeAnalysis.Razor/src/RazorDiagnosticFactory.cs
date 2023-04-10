@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 internal static class RazorDiagnosticFactory
 {
     private const string DiagnosticPrefix = "RZ";

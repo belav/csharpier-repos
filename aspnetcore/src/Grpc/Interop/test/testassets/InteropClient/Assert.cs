@@ -20,6 +20,7 @@ using System.Collections;
 
 namespace InteropTestsClient;
 
+
 internal static class Assert
 {
     public static void IsTrue(bool condition)

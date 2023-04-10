@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class ExpectedFilteredInclude<TEntity, TIncluded> : ExpectedInclude<TEntity>
 {
     public Func<IEnumerable<TIncluded>, IEnumerable<TIncluded>> IncludeFilter { get; }

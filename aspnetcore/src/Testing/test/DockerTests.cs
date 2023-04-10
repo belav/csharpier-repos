@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 public class DockerTests
 {
     [ConditionalFact]

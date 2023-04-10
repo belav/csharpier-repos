@@ -17,6 +17,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 public class CustomElementsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
     protected IWebElement app;

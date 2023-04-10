@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
+
 /// <summary>
 /// Represents a configured authenticated encryption mechanism which uses
 /// managed <see cref="System.Security.Cryptography.SymmetricAlgorithm"/> and

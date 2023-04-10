@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Indentation;
 
+
 internal static class IndentationOptionsStorage
 {
     public static async Task<IndentationOptions> GetIndentationOptionsAsync(

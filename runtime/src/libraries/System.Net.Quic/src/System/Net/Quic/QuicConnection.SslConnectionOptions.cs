@@ -10,6 +10,7 @@ using static Microsoft.Quic.MsQuic;
 
 namespace System.Net.Quic;
 
+
 public partial class QuicConnection
 {
     private readonly struct SslConnectionOptions

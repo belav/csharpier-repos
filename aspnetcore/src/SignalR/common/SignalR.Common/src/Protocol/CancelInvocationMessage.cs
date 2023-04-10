@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
+
 /// <summary>
 /// The <see cref="CancelInvocationMessage"/> represents a cancellation of a streaming method.
 /// </summary>

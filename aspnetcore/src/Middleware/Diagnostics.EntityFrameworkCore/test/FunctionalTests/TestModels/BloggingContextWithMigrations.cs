@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
+
 public class BloggingContextWithMigrations : BloggingContext
 {
     public BloggingContextWithMigrations(DbContextOptions options)

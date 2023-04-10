@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// A base class for infrastructure that implements ASP.NET Core MVC's support for
 /// <see cref="CompatibilityVersion"/>. This is framework infrastructure and should not be used

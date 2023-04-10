@@ -17,6 +17,7 @@ using Resources = Microsoft.AspNetCore.Mvc.ViewFeatures.Test.Resources;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public class RemoteAttributeBaseTest
 {
     // Null or empty property names are invalid. (Those containing just whitespace are legal.)

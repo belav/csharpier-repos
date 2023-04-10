@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
+
 [Produces("text/xml")]
 [Route("ApiExplorerResponseContentTypeOverrideOnAction")]
 public class ApiExplorerResponseContentTypeOverrideOnActionController : Controller

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.BenchmarkDotNet.Runner;
 
+
 internal partial class Program
 {
     static partial void BeforeMain(string[] args)

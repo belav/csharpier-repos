@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal;
 
+
 internal sealed class HttpsConnectionMiddleware
 {
     private const string EnableWindows81Http2 =

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 internal class DefaultRazorIntermediateNodeBuilder : IntermediateNodeBuilder
 {
     private readonly List<IntermediateNode> _stack;

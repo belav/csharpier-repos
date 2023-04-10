@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 internal sealed class MiddlewareItem
 {
     public MiddlewareItem(IInvocationOperation operation)

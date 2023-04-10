@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HtmlGenerationWebSite.Controllers;
 
+
 public class CheckViewData : Controller
 {
     public IActionResult AtViewModel()

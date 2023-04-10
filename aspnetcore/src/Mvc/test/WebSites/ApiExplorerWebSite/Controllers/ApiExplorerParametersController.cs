@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ApiExplorerWebSite.Controllers;
 
+
 [Route("ApiExplorerParameters/[action]")]
 public class ApiExplorerParametersController : Controller
 {

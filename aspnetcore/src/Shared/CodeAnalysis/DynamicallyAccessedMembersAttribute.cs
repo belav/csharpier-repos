@@ -7,6 +7,7 @@
 
 namespace System.Diagnostics.CodeAnalysis;
 
+
 /// <summary>
 /// Indicates that certain members on a specified <see cref="Type"/> are accessed dynamically,
 /// for example through <see cref="System.Reflection"/>.

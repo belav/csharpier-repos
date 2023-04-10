@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 /// <summary>
 /// Represents the options for provisioning an access token on behalf of a user.
 /// </summary>

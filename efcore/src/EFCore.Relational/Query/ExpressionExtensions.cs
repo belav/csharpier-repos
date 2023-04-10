@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         Extension methods for <see cref="Expression" /> types.

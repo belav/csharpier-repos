@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class NorthwindAggregateOperatorsQueryInMemoryTest
     : NorthwindAggregateOperatorsQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
 {

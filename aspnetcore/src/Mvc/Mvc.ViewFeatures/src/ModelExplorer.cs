@@ -7,6 +7,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 /// <summary>
 /// Associates a model object with it's corresponding <see cref="ModelMetadata"/>.
 /// </summary>

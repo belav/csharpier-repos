@@ -7,6 +7,7 @@ using BenchmarkDotNet.Configs;
 
 namespace BenchmarkDotNet.Attributes;
 
+
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Assembly)]
 internal class AspNetCoreBenchmarkAttribute : Attribute, IConfigSource
 {

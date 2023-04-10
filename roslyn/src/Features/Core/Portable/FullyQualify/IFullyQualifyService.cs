@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify;
 
+
 [DataContract]
 internal readonly struct FullyQualifyFixData
 {

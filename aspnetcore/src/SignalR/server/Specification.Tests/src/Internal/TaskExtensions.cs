@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 // Copied from https://github.com/dotnet/extensions/blob/master/src/TestingUtils/Microsoft.AspNetCore.Testing/src/TaskExtensions.cs
 // Required because Microsoft.AspNetCore.Testing is not shipped
 internal static class TaskExtensions

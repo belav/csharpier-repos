@@ -5,6 +5,7 @@ using System.Transactions;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     The <see cref="DiagnosticSource" /> event payload for
 ///     <see cref="RelationalEventId" /> transaction enlisted events.

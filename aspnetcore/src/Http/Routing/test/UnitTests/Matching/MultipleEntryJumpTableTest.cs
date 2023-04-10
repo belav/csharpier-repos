@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 public abstract class MultipleEntryJumpTableTest
 {
     internal abstract JumpTable CreateTable(

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 
+
 /// <summary>
 /// Infrastructure class which allows an <see cref="IAuthorizationRequirement"/> to
 /// be its own <see cref="IAuthorizationHandler"/>.

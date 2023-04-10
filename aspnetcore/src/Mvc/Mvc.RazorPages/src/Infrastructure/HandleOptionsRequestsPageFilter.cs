@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 /// <summary>
 /// A filter that handles OPTIONS requests page when no handler method is available.
 /// <para>

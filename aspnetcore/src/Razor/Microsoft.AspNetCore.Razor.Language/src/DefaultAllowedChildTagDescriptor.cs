@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultAllowedChildTagDescriptor : AllowedChildTagDescriptor
 {
     public DefaultAllowedChildTagDescriptor(

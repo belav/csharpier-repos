@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+
 /// <summary>
 /// An <see cref="IModelBinder"/> for simple types.
 /// </summary>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
+
 internal class DefaultRazorCompiledItem : RazorCompiledItem
 {
     private object[] _metadata;

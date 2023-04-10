@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
+
 public class HubConnectionStartBenchmark
 {
     private HubConnection _hubConnection;

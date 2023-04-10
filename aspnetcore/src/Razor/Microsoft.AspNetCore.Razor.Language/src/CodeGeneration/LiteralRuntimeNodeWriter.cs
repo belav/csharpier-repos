@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 internal class LiteralRuntimeNodeWriter : RuntimeNodeWriter
 {
     public override string WriteCSharpExpressionMethod { get; set; } = "WriteLiteral";

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 public class DpapiXmlEncryptionTests
 {
     [ConditionalTheory]

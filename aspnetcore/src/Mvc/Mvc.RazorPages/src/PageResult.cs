@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 /// <summary>
 /// An <see cref="ActionResult"/> that renders a Razor Page.
 /// </summary>

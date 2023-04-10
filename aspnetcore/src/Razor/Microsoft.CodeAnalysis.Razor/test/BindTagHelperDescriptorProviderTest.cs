@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 public class BindTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTestBase
 {
     [Fact]

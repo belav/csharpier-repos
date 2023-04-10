@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class RequiredAttributeDescriptor : IEquatable<RequiredAttributeDescriptor>
 {
     public string Name { get; protected set; }

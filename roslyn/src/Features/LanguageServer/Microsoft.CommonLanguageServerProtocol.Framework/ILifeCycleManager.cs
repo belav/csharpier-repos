@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
+
 /// <summary>
 /// An optional component to run additional logic when LSP shutdown and exit are called,
 /// for example logging messages, cleaning up custom resources, etc.

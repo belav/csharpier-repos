@@ -5,6 +5,7 @@ using Google.Protobuf;
 
 namespace SocialWeather.Protobuf;
 
+
 public class ProtobufWeatherStreamFormatter : IStreamFormatter<SocialWeather.WeatherReport>
 {
     public Task<SocialWeather.WeatherReport> ReadAsync(Stream stream)

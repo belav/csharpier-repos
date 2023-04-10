@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
+
 /// <summary>
 /// A ClaimAction that selects a top level value from the json user data with the given key name and adds it as a Claim.
 /// This no-ops if the key is not found or the value is empty.

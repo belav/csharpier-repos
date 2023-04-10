@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
+
 /// <summary>
 /// An <see cref="IBindingMetadataProvider"/> for <see cref="DataMemberAttribute.IsRequired"/>.
 /// </summary>

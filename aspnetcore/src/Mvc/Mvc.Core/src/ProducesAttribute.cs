@@ -10,6 +10,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// A filter that specifies the expected <see cref="System.Type"/> the action will return and the supported
 /// response content types. The <see cref="ContentTypes"/> value is used to set

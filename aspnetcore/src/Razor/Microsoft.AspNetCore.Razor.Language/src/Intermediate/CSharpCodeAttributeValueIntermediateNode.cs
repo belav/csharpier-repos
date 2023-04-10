@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public sealed class CSharpCodeAttributeValueIntermediateNode : IntermediateNode
 {
     public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();

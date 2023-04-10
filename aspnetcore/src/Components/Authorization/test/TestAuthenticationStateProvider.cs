@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
+
 public class TestAuthenticationStateProvider : AuthenticationStateProvider
 {
     public Task<AuthenticationState> CurrentAuthStateTask { get; set; }

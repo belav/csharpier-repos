@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Factory for finding and creating <see cref="ParameterBinding" /> instances.
 /// </summary>

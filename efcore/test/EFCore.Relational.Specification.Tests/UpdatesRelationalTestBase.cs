@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFixture>
     where TFixture : UpdatesRelationalTestBase<TFixture>.UpdatesRelationalFixture
 {

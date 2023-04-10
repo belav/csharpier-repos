@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator;
 
+
 /// <summary>
 /// Factory for creating lightweight <see cref="IUIThreadOperationContext"/>s that can sit in the editor in a
 /// unobtrusive fashion unlike the Threaded-Wait-Dialog.  Features can use this to indicate to users that work

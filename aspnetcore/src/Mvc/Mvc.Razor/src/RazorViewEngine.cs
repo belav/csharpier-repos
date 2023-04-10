@@ -14,6 +14,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 /// <summary>
 /// Default implementation of <see cref="IRazorViewEngine"/>.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
+
 [Flags]
 internal enum StreamCompletionFlags
 {

@@ -1,5 +1,6 @@
 namespace Benchmark;
 
+
 public class BenchEngine
 {
     private readonly IObjectToObjectMapper _mapper;

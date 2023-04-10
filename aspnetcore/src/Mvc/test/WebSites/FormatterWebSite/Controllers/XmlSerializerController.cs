@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace FormatterWebSite;
 
+
 public class XmlSerializerController : Controller
 {
     public override void OnActionExecuted(ActionExecutedContext context)

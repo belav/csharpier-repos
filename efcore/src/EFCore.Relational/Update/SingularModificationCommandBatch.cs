@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 /// <summary>
 ///     <para>
 ///         An implementation of <see cref="AffectedCountModificationCommandBatch" /> that does not

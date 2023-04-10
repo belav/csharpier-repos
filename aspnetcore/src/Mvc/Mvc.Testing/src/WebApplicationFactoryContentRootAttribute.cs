@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.Testing;
 
+
 /// <summary>
 /// Metadata that <see cref="WebApplicationFactory{TEntryPoint}"/> uses to find out the content
 /// root for the web application represented by <c>TEntryPoint</c>.

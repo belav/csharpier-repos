@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 // Segments are treated as all-or-none. We should never output a partial segment.
 // If we add any subsegment of this segment to the generated URI, we have to add
 // the complete match. For example, if the subsegment is "{p1}-{p2}.xml" and we

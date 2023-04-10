@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 /// <summary>
 ///     A collection that stays in sync with entities of a given type being tracked by
 ///     a <see cref="DbContext" />. Call <see cref="DbSet{TEntity}.Local" /> to obtain a

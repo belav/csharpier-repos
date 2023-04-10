@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components;
 
+
 internal static class DomWrapperInterop
 {
     private const string Prefix = "Blazor._internal.domWrapper.";

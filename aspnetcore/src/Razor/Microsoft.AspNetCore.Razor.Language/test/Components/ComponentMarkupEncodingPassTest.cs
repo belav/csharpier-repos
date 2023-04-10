@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 public class ComponentMarkupEncodingPassTest
 {
     public ComponentMarkupEncodingPassTest()

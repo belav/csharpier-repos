@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.Configuration;
 
+
 /// <summary>
 /// Member configuration options
 /// </summary>

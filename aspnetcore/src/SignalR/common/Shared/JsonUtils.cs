@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 internal static class JsonUtils
 {
     internal static JsonTextReader CreateJsonTextReader(TextReader textReader)

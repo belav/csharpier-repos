@@ -3,6 +3,7 @@
 
 namespace FunctionalTests;
 
+
 public class ComplexObject
 {
     public string String { get; set; }

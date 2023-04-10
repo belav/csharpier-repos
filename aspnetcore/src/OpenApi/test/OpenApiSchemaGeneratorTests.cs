@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.OpenApi;
 
 namespace Microsoft.AspNetCore.OpenApi.Tests;
 
+
 public class OpenApiSchemaGeneratorTests
 {
     [Theory]

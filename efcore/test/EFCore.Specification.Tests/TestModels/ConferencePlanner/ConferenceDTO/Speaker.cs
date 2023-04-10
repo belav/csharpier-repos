@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner.ConferenceDTO;
 
+
 public class Speaker
 {
     public int Id { get; set; }

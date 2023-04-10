@@ -7,6 +7,7 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authorization;
 
+
 /// <summary>
 /// Encapsulates a failure result of <see cref="IAuthorizationService.AuthorizeAsync(ClaimsPrincipal, object, IEnumerable{IAuthorizationRequirement})"/>.
 /// </summary>

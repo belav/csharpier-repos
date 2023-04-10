@@ -9,6 +9,7 @@ using Wasm.Authentication.Server.Models;
 
 namespace Wasm.Authentication.Server.Controllers;
 
+
 [ApiController]
 [Authorize]
 public class PreferencesController : ControllerBase

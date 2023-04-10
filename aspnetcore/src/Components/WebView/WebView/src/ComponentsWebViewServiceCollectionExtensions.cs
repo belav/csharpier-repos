@@ -10,6 +10,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extensions for adding component webview services to the <see cref="IServiceCollection"/>.
 /// </summary>

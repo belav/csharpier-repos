@@ -3,6 +3,7 @@
 
 namespace IISSample;
 
+
 public class Startup
 {
     public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory)

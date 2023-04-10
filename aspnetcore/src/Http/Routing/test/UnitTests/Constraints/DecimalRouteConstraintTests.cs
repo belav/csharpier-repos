@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Microsoft.AspNetCore.Routing.Tests;
 
+
 public class DecimalRouteConstraintTests
 {
     public static IEnumerable<object[]> GetDecimalObject

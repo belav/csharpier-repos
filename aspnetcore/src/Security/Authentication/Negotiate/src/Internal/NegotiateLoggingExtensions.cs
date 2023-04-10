@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
+
 internal static partial class NegotiateLoggingExtensions
 {
     [LoggerMessage(

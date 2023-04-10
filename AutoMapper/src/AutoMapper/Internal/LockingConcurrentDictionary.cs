@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 
 namespace AutoMapper.Internal;
 
+
 public readonly struct LockingConcurrentDictionary<TKey, TValue>
 {
     private readonly Func<TKey, Lazy<TValue>> _valueFactory;

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
+
 /// <summary>
 /// Middleware that exposes a health checks response with a URL endpoint.
 /// </summary>

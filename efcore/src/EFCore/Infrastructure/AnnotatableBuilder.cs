@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     <para>
 ///         A base type with a simple API surface for configuring a <see cref="ConventionAnnotatable" />.

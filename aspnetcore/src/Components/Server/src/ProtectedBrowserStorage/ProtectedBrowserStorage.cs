@@ -8,6 +8,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
+
 /// <summary>
 /// Provides mechanisms for storing and retrieving data in the browser storage.
 /// </summary>

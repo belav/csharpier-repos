@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+
 /// <summary>
 /// An <see cref="IModelBinder"/> which binds models from the request headers when a model
 /// has the binding source <see cref="BindingSource.Header"/>.

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     <para>
 ///         A class that supports annotations. Annotations allow for arbitrary metadata to be stored on an object.

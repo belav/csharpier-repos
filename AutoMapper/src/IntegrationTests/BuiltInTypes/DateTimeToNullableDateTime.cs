@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.BuiltInTypes;
 
+
 public class DateTimeToNullableDateTime
     : IntegrationTest<DateTimeToNullableDateTime.DatabaseInitializer>
 {

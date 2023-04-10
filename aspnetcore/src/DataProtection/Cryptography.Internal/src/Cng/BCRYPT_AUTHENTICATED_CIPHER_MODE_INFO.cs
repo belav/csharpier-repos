@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
+
 // http://msdn.microsoft.com/en-us/library/windows/desktop/cc562981(v=vs.85).aspx
 [StructLayout(LayoutKind.Sequential)]
 internal unsafe struct BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO

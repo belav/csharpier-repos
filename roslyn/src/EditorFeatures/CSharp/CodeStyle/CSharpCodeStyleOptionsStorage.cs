@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeStyle;
 
+
 internal static class CSharpCodeStyleOptionsStorage
 {
     [ExportLanguageService(typeof(ICodeStyleOptionsStorage), LanguageNames.CSharp), Shared]

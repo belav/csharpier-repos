@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     The exception that is thrown when the action failed more times than the configured limit.
 /// </summary>

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FormatterWebSite;
 
+
 // A System.Security.Principal.SecurityIdentifier like type that works on xplat
 public class RecursiveIdentifier : IValidatableObject
 {

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that finds foreign key properties for relationships based on their names, ignoring case:
 ///     * [navigation property name][principal key property name]

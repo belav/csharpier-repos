@@ -12,6 +12,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public static class IntermediateNodeVerifier
 {
     public static void Verify(IntermediateNode node, string[] baseline)

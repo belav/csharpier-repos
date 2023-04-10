@@ -6,6 +6,7 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
+
 internal sealed class Http3FrameReader
 {
     /* https://quicwg.org/base-drafts/draft-ietf-quic-http.html#frame-layout

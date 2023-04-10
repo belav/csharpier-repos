@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
+
 internal sealed class DotNetStreamReferenceJsonConverter : JsonConverter<DotNetStreamReference>
 {
     private static readonly JsonEncodedText DotNetStreamRefKey = JsonEncodedText.Encode(

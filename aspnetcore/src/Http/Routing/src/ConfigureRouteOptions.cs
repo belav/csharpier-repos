@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 internal sealed class ConfigureRouteOptions : IConfigureOptions<RouteOptions>
 {
     private readonly ICollection<EndpointDataSource> _dataSources;

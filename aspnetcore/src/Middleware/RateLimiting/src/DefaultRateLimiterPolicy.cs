@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
+
 internal sealed class DefaultRateLimiterPolicy : IRateLimiterPolicy<DefaultKeyType>
 {
     private readonly Func<HttpContext, RateLimitPartition<DefaultKeyType>> _partitioner;

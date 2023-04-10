@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
+
 /// <summary>
 /// An <see cref="IViewComponentResult"/> which writes an <see cref="IHtmlContent"/> when executed.
 /// </summary>

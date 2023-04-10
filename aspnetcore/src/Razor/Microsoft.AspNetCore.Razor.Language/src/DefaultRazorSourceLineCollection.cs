@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultRazorSourceLineCollection : RazorSourceLineCollection
 {
     private readonly RazorSourceDocument _document;

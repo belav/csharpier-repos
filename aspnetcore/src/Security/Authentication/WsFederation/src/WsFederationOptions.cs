@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens.Saml2;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 /// <summary>
 /// Configuration options for <see cref="WsFederationHandler"/>
 /// </summary>

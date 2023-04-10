@@ -5,6 +5,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
+
 /// <summary>
 /// Extension methods for <see cref="IHtmlLocalizer"/>.
 /// </summary>

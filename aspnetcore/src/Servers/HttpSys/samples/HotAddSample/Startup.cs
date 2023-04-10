@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HotAddSample;
 
+
 // This sample shows how to dynamically add or remove prefixes for the underlying server.
 // Be careful not to remove the prefix you're currently accessing because the connection
 // will be reset before the end of the request.

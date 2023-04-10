@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class TPCInheritanceQuerySqlServerFixtureBase : TPCInheritanceQueryFixture
 {
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     A service for generating migration identifiers from names and names from identifiers.
 /// </summary>

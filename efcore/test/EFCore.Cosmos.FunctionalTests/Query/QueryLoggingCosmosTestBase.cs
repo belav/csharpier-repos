@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class QueryLoggingCosmosTestBase
 {
     protected QueryLoggingCosmosTestBase(NorthwindQueryCosmosFixture<NoopModelCustomizer> fixture)

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 /// <summary>
 /// A filter that will use the format value in the route data or query string to set the content type on an
 /// <see cref="ObjectResult"/> returned from an action.

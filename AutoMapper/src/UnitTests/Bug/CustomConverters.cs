@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class NullableTypeConverter : AutoMapperSpecBase
 {
     Destination _destination;

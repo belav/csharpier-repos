@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class SharedTypeQuerySqlServerTest : SharedTypeQueryRelationalTestBase
 {
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 
+
 /// <summary>
 ///     Base class for all Migrations operations that can be performed against a database.
 /// </summary>

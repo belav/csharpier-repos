@@ -7,6 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// HttpRequest extensions for working with request trailing headers.
 /// </summary>

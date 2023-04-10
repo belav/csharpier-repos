@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 public class ModelBinderAttributeTest
 {
     [Fact]

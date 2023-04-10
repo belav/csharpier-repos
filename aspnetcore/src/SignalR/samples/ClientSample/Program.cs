@@ -8,6 +8,7 @@ using Microsoft.Extensions.CommandLineUtils;
 
 namespace ClientSample;
 
+
 public class Program
 {
     public static void Main(string[] args)

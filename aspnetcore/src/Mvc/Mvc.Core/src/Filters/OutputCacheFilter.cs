@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 /// <summary>
 /// An <see cref="IActionFilter"/> which sets the appropriate headers related to output caching.
 /// </summary>

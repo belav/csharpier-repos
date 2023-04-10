@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
+
 public class JwtStore
 {
     private const string FileName = "user-jwts.json";

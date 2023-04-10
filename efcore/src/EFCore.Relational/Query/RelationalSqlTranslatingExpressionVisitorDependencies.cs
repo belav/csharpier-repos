@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="RelationalSqlTranslatingExpressionVisitorFactory" />

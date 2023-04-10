@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 public class ModelMetadataProviderExtensionsTest
 {
     [Fact]

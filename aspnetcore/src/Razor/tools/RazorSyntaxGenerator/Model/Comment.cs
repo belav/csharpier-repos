@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 
 namespace RazorSyntaxGenerator;
 
+
 public class Comment
 {
     [XmlAnyElement]

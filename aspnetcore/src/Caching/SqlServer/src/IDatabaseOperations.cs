@@ -7,6 +7,7 @@ using Microsoft.Extensions.Caching.Distributed;
 
 namespace Microsoft.Extensions.Caching.SqlServer;
 
+
 internal interface IDatabaseOperations
 {
     byte[]? GetCacheItem(string key);

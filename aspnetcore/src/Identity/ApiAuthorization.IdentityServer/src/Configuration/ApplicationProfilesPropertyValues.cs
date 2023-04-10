@@ -5,6 +5,7 @@ using Duende.IdentityServer.Models;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 /// <summary>
 /// Constants for special values defined for specific <see cref="ApplicationProfilesPropertyNames" /> keys.
 /// </summary>

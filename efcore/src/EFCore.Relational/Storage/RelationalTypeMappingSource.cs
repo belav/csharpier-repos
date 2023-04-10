@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 #pragma warning disable 1574, CS0419 // Ambiguous reference in cref attribute
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     <para>
 ///         The base class for relational type mapping source. Relational providers

@@ -12,6 +12,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering;
 
+
 /// <summary>
 /// Provides mechanisms for rendering <see cref="IComponent"/> instances in a
 /// web browser, dispatching events to them, and refreshing the UI as required.

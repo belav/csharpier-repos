@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class UpdatesInMemoryTestBase<TFixture> : UpdatesTestBase<TFixture>
     where TFixture : UpdatesInMemoryTestBase<TFixture>.UpdatesInMemoryFixtureBase
 {

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authorization.Test.TestObjects;
 
+
 public class TestAuthenticationService : IAuthenticationService
 {
     public bool ChallengeCalled => ChallengeCount > 0;

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     An <see cref="IExecutionStrategy" /> implementation for retrying failed executions on SQL Server.
 /// </summary>

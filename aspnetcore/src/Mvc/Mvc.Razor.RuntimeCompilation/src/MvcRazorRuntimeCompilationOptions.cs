@@ -7,6 +7,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
+
 /// <summary>
 /// Used to configure razor compilation.
 /// </summary>

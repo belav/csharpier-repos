@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ApplicationModelWebSite;
 
+
 public class HomeController : Controller
 {
     public string GetCommonDescription()

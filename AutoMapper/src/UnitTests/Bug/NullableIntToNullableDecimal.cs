@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class NullableIntToNullableDecimal : AutoMapperSpecBase
 {
     private Destination _destination;

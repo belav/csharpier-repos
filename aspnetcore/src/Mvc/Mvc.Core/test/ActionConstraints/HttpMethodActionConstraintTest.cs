@@ -8,6 +8,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.ActionConstraints;
 
+
 public class HttpMethodActionConstraintTest
 {
     public static TheoryData AcceptCaseInsensitiveData = new TheoryData<IEnumerable<string>, string>

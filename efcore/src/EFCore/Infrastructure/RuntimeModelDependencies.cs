@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="IReadOnlyModel" />

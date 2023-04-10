@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultRazorParserOptionsBuilder : RazorParserOptionsBuilder
 {
     private bool _designTime;

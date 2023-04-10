@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
+
 internal class HeaderUserIdProvider : IUserIdProvider
 {
     public static readonly string HeaderName = "Super-Insecure-UserName";

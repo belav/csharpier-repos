@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     SQL Server specific extension methods for <see cref="MigrationBuilder" />.
 /// </summary>

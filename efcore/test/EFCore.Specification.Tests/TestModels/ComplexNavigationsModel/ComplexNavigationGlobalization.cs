@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
+
 public class ComplexNavigationGlobalization
 {
     public string Text { get; set; }

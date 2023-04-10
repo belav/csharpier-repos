@@ -1,5 +1,6 @@
 namespace AutoMapper.Internal.Mappers;
 
+
 /// <summary>
 /// Mapping execution strategy, as a chain of responsibility
 /// </summary>

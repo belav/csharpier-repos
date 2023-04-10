@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
+
 internal sealed class ReflectionServiceInvokerResolver<TService> : IServiceInvokerResolver<TService>
     where TService : class
 {

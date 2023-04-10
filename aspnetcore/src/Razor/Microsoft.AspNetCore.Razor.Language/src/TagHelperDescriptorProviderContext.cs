@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class TagHelperDescriptorProviderContext
 {
     public virtual bool ExcludeHidden { get; set; }

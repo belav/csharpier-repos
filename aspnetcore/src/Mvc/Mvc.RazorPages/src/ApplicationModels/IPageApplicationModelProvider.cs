@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 /// <summary>
 /// Builds or modifies an <see cref="PageApplicationModelProviderContext"/> for Razor Page discovery.
 /// </summary>

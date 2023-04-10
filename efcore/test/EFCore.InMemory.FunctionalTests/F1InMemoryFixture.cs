@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class F1InMemoryFixture : F1InMemoryFixtureBase<byte[]> { }
 
 public class F1ULongInMemoryFixture : F1InMemoryFixtureBase<ulong> { }

@@ -5,6 +5,7 @@ using System.CommandLine.Binding;
 
 namespace System.CommandLine.NamingConventionBinder;
 
+
 internal class DelegateValueSource : IValueSource
 {
     private readonly Func<BindingContext?, object?> _getValue;

@@ -12,6 +12,7 @@ using Xunit.Abstractions;
 
 namespace Templates.Test.Helpers;
 
+
 public class ProjectFactoryFixture : IDisposable
 {
     private const string LetterChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

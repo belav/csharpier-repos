@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// Implements an interface for registering external methods that provide
 /// custom IResult instances.

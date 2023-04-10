@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class TestRelationalTransactionFactory : IRelationalTransactionFactory
 {
     public TestRelationalTransactionFactory(RelationalTransactionFactoryDependencies dependencies)

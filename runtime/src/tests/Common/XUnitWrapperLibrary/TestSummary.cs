@@ -8,6 +8,7 @@ using System.Text;
 
 namespace XUnitWrapperLibrary;
 
+
 public class TestSummary
 {
     readonly record struct TestResult(

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class TestCulture
 {
     public string Culture { get; set; }

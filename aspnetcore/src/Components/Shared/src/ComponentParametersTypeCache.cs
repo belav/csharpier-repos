@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 internal sealed class ComponentParametersTypeCache
 {
     private readonly ConcurrentDictionary<Key, Type?> _typeToKeyLookUp = new();

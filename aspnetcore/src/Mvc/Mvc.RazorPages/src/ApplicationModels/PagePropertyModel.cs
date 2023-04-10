@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 /// <summary>
 /// Represents a property in a <see cref="PageApplicationModel"/>.
 /// </summary>

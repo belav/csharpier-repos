@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
+
 /// <summary>
 ///     Used to generate C# for creating <see cref="MigrationOperation" /> objects.
 /// </summary>

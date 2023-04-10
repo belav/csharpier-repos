@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 public class ChallengeResultTest
 {
     [Fact]

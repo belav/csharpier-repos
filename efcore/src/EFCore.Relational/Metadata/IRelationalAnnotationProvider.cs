@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     A service typically implemented by database providers that gives access to annotations
 ///     used by relational EF Core components on various elements of the <see cref="IRelationalModel" />.

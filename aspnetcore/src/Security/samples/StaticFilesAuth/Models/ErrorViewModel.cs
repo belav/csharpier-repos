@@ -5,6 +5,7 @@ using System;
 
 namespace StaticFilesAuth.Models;
 
+
 public class ErrorViewModel
 {
     public string RequestId { get; set; }

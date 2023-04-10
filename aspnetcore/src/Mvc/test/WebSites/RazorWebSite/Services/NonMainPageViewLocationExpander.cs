@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace RazorWebSite;
 
+
 public class NonMainPageViewLocationExpander : IViewLocationExpander
 {
     public void PopulateValues(ViewLocationExpanderContext context) { }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 public class ProductValidatorAttribute : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)

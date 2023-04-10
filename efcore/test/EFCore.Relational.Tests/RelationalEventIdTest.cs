@@ -14,6 +14,7 @@ using IsolationLevel = System.Data.IsolationLevel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class RelationalEventIdTest : EventIdTestBase
 {
     [ConditionalFact]

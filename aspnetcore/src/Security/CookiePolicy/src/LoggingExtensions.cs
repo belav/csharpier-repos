@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
+
 internal static partial class LoggingExtensions
 {
     [LoggerMessage(1, LogLevel.Trace, "Needs consent: {needsConsent}.", EventName = "NeedsConsent")]

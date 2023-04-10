@@ -5,6 +5,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
+
 public static class XElementExtensions
 {
     public static XElement RequiredElement(this XElement element, string name)

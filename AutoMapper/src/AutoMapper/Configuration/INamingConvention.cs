@@ -1,5 +1,6 @@
 namespace AutoMapper;
 
+
 /// <summary>
 /// Defines a naming convention strategy
 /// </summary>

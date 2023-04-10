@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 internal partial class MarkupTextLiteralSyntax
 {
     protected override string GetDebuggerDisplay()

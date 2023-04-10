@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
+
 public class FakeResponseFeature : HttpResponseFeature
 {
     List<Tuple<Func<object, Task>, object>> _onCompletedCallbacks =

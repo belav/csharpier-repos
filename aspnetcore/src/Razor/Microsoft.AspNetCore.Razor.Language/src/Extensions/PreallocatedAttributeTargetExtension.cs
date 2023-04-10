@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 internal class PreallocatedAttributeTargetExtension : IPreallocatedAttributeTargetExtension
 {
     public string TagHelperAttributeTypeName { get; set; } =

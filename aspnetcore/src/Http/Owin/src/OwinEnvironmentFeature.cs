@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Owin;
 
+
 /// <summary>
 /// Default implementation of <see cref="IOwinEnvironmentFeature"/>.
 /// </summary>

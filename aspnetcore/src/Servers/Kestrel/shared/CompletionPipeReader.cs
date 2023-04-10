@@ -7,6 +7,7 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Connections;
 
+
 internal sealed class CompletionPipeReader : PipeReader
 {
     private readonly PipeReader _inner;

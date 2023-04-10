@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ApplicationModelWebSite;
 
+
 public class ControllerLicenseConvention : IControllerModelConvention
 {
     public void Apply(ControllerModel controller)

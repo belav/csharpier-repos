@@ -19,6 +19,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
+
 /// <summary>
 /// Provides methods that receive incoming calls from JS to .NET.
 /// </summary>

@@ -15,6 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.BrowserTesting;
 
+
 public class BrowserTestBase : LoggedTest, IAsyncLifetime
 {
     private static readonly bool _isCIEnvironment =

@@ -5,6 +5,7 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
+
 public class ArrayBuilderTest
 {
     private readonly TestArrayPool<int> ArrayPool = new TestArrayPool<int>();

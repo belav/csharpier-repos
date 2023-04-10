@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that configures the Unicode based on the <see cref="UnicodeAttribute" /> applied on the property.
 /// </summary>

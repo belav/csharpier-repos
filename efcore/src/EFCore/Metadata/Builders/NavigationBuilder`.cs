@@ -5,6 +5,7 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+
 /// <summary>
 ///     Provides a simple API for configuring a <see cref="IMutableNavigation" /> or a <see cref="IMutableSkipNavigation" />.
 /// </summary>

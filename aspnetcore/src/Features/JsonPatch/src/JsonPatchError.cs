@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.JsonPatch.Operations;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
+
 /// <summary>
 /// Captures error message and the related entity and the operation that caused it.
 /// </summary>

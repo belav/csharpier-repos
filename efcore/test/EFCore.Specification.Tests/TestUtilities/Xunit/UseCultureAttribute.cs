@@ -6,6 +6,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 
+
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public sealed class UseCultureAttribute : BeforeAfterTestAttribute
 {

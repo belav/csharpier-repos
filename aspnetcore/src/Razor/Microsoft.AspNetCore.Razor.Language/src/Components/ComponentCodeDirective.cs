@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 public static class ComponentCodeDirective
 {
     public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(

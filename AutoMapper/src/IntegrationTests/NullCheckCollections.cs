@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests;
 
+
 public class NullCheckCollectionsFirstOrDefault
     : IntegrationTest<NullCheckCollectionsFirstOrDefault.DatabaseInitializer>
 {

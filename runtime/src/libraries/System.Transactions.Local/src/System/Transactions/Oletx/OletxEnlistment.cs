@@ -8,6 +8,7 @@ using System.Transactions.DtcProxyShim;
 
 namespace System.Transactions.Oletx;
 
+
 internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
 {
     internal enum OletxEnlistmentState

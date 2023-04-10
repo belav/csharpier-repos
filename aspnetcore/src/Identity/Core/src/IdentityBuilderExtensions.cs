@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Helper functions for configuring identity services.
 /// </summary>

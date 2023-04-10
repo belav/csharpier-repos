@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Entity Framework LINQ related extension methods.
 /// </summary>

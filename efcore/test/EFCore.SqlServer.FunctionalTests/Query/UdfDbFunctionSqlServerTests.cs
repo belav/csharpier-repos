@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class UdfDbFunctionSqlServerTests
     : UdfDbFunctionTestBase<UdfDbFunctionSqlServerTests.SqlServer>
 {

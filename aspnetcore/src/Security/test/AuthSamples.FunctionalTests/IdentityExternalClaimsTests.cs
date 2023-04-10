@@ -9,6 +9,7 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
+
 public class IdentityExternalClaimsTests
     : IClassFixture<WebApplicationFactory<Identity.ExternalClaims.Startup>>
 {

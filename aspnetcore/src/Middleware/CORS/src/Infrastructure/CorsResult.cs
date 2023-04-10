@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
+
 /// <summary>
 /// Results returned by <see cref="ICorsService"/>.
 /// </summary>

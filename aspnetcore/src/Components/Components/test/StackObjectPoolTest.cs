@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
+
 public class StackObjectPoolTest
 {
     [Fact]

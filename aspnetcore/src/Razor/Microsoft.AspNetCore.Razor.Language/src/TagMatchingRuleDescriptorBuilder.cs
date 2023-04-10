@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class TagMatchingRuleDescriptorBuilder
 {
     public abstract string TagName { get; set; }

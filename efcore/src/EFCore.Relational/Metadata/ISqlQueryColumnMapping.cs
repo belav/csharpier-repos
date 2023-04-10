@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents property mapping to a SQL query column.
 /// </summary>

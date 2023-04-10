@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
+
 /// <summary>
 ///     <para>
 ///         An expression that represents a CROSS APPLY in a SQL tree.

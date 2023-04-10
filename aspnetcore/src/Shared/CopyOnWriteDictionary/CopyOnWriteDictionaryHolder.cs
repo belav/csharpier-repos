@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Extensions.Internal;
 
+
 internal struct CopyOnWriteDictionaryHolder<TKey, TValue>
     where TKey : notnull
 {

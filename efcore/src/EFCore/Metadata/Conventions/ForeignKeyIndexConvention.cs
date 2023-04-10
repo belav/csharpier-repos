@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that creates indexes on foreign key properties unless they are already covered by existing indexes or keys.
 /// </summary>

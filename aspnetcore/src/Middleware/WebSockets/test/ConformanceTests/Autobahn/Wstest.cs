@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn;
 
+
 /// <summary>
 /// Wrapper around the Autobahn Test Suite's "wstest" app.
 /// </summary>

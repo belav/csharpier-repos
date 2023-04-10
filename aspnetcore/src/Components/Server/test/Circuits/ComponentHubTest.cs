@@ -14,6 +14,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
+
 public class ComponentHubTest
 {
     [Fact]

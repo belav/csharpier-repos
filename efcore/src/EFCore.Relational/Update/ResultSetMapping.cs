@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 /// <summary>
 ///     <para>
 ///         Indicates what kind of impact on the result set a given command will have.

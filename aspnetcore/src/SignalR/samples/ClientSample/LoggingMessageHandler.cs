@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ClientSample;
 
+
 internal class LoggingMessageHandler : DelegatingHandler
 {
     private readonly ILogger<LoggingMessageHandler> _logger;

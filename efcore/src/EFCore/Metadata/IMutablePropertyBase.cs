@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Base type for navigation and scalar properties.
 /// </summary>

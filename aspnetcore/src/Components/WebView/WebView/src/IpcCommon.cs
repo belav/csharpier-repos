@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.WebView;
 
+
 internal sealed class IpcCommon
 {
     private const string _ipcMessagePrefix = "__bwv:";

@@ -1,5 +1,6 @@
 ﻿namespace OmmitedDatabaseModel3WithCollections;
 
+
 public class Entity24 : BaseEntity
 {
     public Guid Entity3Id { get; set; }

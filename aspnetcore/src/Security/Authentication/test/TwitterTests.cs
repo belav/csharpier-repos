@@ -18,6 +18,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
+
 public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
 {
     protected override string DefaultScheme => TwitterDefaults.AuthenticationScheme;

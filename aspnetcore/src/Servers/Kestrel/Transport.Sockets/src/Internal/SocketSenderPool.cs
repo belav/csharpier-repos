@@ -6,6 +6,7 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal;
 
+
 internal sealed class SocketSenderPool : IDisposable
 {
     private const int MaxQueueSize = 1024; // REVIEW: Is this good enough?

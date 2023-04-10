@@ -3,6 +3,7 @@
 
 namespace HtmlGenerationWebSite.Models;
 
+
 public class WeirdModel
 {
     public string Field = "Hello, Field World!";

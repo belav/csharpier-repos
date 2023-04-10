@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Connections;
 
 namespace SignalRSamples;
 
+
 internal class ConnectionList : IReadOnlyCollection<ConnectionContext>
 {
     private readonly ConcurrentDictionary<string, ConnectionContext> _connections =

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal enum CSharpKeyword
 {
     Await,

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class ComplexNavigationsQuerySqliteFixture : ComplexNavigationsQueryRelationalFixtureBase
 {
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;

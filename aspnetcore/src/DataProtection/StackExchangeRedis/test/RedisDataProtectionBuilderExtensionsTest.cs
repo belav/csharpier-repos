@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis;
 
+
 public class RedisDataProtectionBuilderExtensionsTest
 {
     [Fact]

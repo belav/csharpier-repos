@@ -3,6 +3,7 @@
 
 namespace Microsoft.DotNet.Cli.CommandLine;
 
+
 public class CommandLineApplicationTests
 {
     [Fact]

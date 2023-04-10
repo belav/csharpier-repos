@@ -3,6 +3,7 @@
 
 namespace RazorWebSite;
 
+
 public class InjectedHelper
 {
     public string Greet(Person person)

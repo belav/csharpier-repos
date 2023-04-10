@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
+
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="StateManager" />

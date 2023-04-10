@@ -6,6 +6,7 @@ using EFCommand = Microsoft.EntityFrameworkCore.Tools.Commands.RootCommand;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
+
 public class CommandsTest
 {
     [Fact]

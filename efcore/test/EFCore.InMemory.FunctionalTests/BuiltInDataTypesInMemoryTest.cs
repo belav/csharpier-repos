@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class BuiltInDataTypesInMemoryTest
     : BuiltInDataTypesTestBase<BuiltInDataTypesInMemoryTest.BuiltInDataTypesInMemoryFixture>
 {

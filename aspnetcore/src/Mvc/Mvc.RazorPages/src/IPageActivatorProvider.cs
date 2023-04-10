@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 /// <summary>
 /// Provides methods to create a Razor page.
 /// </summary>

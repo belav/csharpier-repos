@@ -12,6 +12,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests;
 
+
 public class ServerStreamingTests : IntegrationTestBase
 {
     public ServerStreamingTests(GrpcTestFixture<Startup> fixture, ITestOutputHelper outputHelper)

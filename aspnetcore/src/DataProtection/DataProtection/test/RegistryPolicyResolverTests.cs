@@ -11,6 +11,7 @@ using Microsoft.Win32;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 public class RegistryPolicyResolverTests
 {
     [ConditionalFact]

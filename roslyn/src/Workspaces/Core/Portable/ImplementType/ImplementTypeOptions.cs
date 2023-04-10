@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.ImplementType;
 
+
 [DataContract]
 internal readonly record struct ImplementTypeOptions
 {

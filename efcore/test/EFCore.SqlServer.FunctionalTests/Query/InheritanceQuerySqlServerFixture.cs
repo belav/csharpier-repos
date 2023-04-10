@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class InheritanceQuerySqlServerFixture : InheritanceQueryRelationalFixture
 {
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SpaServices.Util;
 
+
 internal static class LoggerFinder
 {
     public static ILogger GetOrCreateLogger(IApplicationBuilder appBuilder, string logCategoryName)

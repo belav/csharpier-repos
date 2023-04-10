@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that configures the non-nullable navigations to principal entity type as required.
 /// </summary>

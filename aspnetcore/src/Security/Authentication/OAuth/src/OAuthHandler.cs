@@ -16,6 +16,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth;
 
+
 /// <summary>
 /// An authentication handler that supports OAuth.
 /// </summary>

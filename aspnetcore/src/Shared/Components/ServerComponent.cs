@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 // The DTO that we data-protect and include into any
 // generated component marker and that allows the client
 // to bootstrap a blazor server-side application.

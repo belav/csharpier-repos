@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 internal sealed class DefaultPageLoader : PageLoader
 {
     private readonly IViewCompilerProvider _viewCompilerProvider;

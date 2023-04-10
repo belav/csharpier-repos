@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// A <see cref="StatusCodeResult"/> that when executed will produce a 204 No Content response.
 /// </summary>

@@ -1,5 +1,6 @@
 namespace AutoMapper.Internal.Mappers;
 
+
 public class UnderlyingTypeEnumMapper : IObjectMapper
 {
     public bool IsMatch(TypePair context) =>

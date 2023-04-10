@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 public static class TagHelperDescriptorProviderContextExtensions
 {
     public static Compilation GetCompilation(this TagHelperDescriptorProviderContext context)

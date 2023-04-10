@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 internal class TestDataAttribute : Attribute
 {

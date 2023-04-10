@@ -9,6 +9,7 @@ using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpCodeFixVerifier<
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
+
 public class RouteParameterUnusedParameterFixerTest
 {
     [Fact]

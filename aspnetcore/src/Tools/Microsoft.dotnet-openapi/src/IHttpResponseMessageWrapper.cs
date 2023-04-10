@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.DotNet.OpenApi;
 
+
 public interface IHttpResponseMessageWrapper : IDisposable
 {
     Task<Stream> Stream { get; }

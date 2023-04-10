@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 /// <summary>
 /// Information about the current routing path.
 /// </summary>

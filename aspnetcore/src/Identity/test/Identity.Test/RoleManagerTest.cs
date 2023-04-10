@@ -5,6 +5,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 public class RoleManagerTest
 {
     [Fact]

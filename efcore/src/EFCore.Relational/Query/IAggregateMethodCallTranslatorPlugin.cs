@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     Represents plugin for <see cref="IAggregateMethodCallTranslator" />.
 /// </summary>

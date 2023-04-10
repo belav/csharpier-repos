@@ -7,6 +7,7 @@ using Index = Microsoft.EntityFrameworkCore.Metadata.Internal.Index;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 public class RelationalIndexExtensionsTest
 {
     [ConditionalFact]

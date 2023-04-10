@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 public class EnumerableWrapperProviderFactoryTest
 {
     public static TheoryData<Type, object, Type> EnumerableOfTInterfaceData

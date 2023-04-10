@@ -6,6 +6,7 @@ using System.Transactions.DtcProxyShim.DtcInterfaces;
 
 namespace System.Transactions.DtcProxyShim;
 
+
 internal sealed class Phase0EnlistmentShim
 {
     private Phase0NotifyShim _phase0NotifyShim;

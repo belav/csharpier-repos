@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Sections;
 
+
 internal sealed class SectionRegistry
 {
     private readonly Dictionary<string, ISectionContentSubscriber> _subscribersByName = new();

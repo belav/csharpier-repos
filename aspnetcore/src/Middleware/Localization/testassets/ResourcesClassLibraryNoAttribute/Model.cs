@@ -3,4 +3,5 @@
 
 namespace ResourcesClassLibraryNoAttribute;
 
+
 public class Model { }

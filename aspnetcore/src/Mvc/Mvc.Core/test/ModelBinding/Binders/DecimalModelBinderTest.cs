@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+
 public class DecimalModelBinderTest : FloatingPointTypeModelBinderTest<decimal>
 {
     protected override decimal Twelve => 12M;

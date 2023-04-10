@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public abstract class RelationalTestHelpers : TestHelpers
 {
     protected virtual EntityFrameworkDesignServicesBuilder CreateEntityFrameworkDesignServicesBuilder(

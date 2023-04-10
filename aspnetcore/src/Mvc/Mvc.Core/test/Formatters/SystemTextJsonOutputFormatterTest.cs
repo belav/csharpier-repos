@@ -11,6 +11,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
 {
     protected override TextOutputFormatter GetOutputFormatter()

@@ -7,6 +7,7 @@ using RazorPagesWebSite.Components;
 
 namespace RazorPagesWebSite;
 
+
 public class ViewDataToViewComponentPage : PageModel
 {
     [ViewData]

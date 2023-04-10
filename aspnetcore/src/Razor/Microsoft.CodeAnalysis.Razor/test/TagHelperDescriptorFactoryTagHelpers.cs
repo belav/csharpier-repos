@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.CodeAnalysis.Razor.Workspaces.Test;
 
+
 public enum CustomEnum
 {
     FirstValue,

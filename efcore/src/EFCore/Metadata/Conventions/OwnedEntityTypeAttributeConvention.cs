@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that configures the entity types that have the <see cref="OwnedAttribute" /> as owned.
 /// </summary>

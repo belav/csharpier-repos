@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 internal sealed partial class DefaultHubProtocolResolver : IHubProtocolResolver
 {
     private readonly ILogger<DefaultHubProtocolResolver> _logger;

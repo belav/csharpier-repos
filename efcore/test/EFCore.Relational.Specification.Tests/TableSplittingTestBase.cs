@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.TestModels.TransportationModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class TableSplittingTestBase : NonSharedModelTestBase
 {
     protected TableSplittingTestBase(ITestOutputHelper testOutputHelper)

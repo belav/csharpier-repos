@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="RelationalParameterBasedSqlProcessorFactory" />

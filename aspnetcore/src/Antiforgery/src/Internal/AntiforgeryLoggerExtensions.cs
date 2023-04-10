@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 internal static partial class AntiforgeryLoggerExtensions
 {
     [LoggerMessage(

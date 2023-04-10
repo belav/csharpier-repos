@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents a lookup based on <see cref="StoreObjectIdentifier" /> keys.
 /// </summary>

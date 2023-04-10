@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     <para>
 ///         Contains placeholders for caching of <see cref="EventDefinitionBase" />.

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 [StructLayout(LayoutKind.Auto)]
 internal readonly struct SyntaxTriviaList
     : IEquatable<SyntaxTriviaList>,

@@ -6,6 +6,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 internal static class CacheHeaderSettings
 {
     internal static void SetCacheHeaders(StaticFileResponseContext ctx)

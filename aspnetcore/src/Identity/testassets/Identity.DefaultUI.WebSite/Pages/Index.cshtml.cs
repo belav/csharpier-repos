@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Identity.DefaultUI.WebSite.Pages;
 
+
 [AllowAnonymous]
 public class IndexModel : PageModel
 {

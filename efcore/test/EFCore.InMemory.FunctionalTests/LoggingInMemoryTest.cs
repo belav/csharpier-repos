@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class LoggingInMemoryTest : LoggingTestBase
 {
     protected override DbContextOptionsBuilder CreateOptionsBuilder(IServiceCollection services) =>

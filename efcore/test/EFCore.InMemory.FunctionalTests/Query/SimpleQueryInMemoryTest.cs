@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class SimpleQueryInMemoryTest : SimpleQueryTestBase
 {
     public override async Task Multiple_nested_reference_navigations(bool async)

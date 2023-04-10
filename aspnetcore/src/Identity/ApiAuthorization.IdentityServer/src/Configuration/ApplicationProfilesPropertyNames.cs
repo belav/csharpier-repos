@@ -5,6 +5,7 @@ using Duende.IdentityServer.Models;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 /// <summary>
 /// Constants used for storing information about application profiles in the <see cref="Client.Properties"/> or <see cref="Resource.Properties"/>
 /// of a <see cref="Client"/> or <see cref="ApiResource"/> respectively.

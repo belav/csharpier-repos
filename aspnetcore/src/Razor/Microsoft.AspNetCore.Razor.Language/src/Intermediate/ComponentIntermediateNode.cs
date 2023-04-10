@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public sealed class ComponentIntermediateNode : IntermediateNode
 {
     public IEnumerable<ComponentAttributeIntermediateNode> Attributes =>

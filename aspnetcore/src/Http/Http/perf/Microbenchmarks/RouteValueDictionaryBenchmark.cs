@@ -5,6 +5,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 public class RouteValueDictionaryBenchmark
 {
     private RouteValueDictionary _arrayValues;

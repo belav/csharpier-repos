@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 // for more info.
 namespace Microsoft.CodeAnalysis.CSharp.Symbols;
 
+
 internal static class GeneratedNameParser
 {
     /// <summary>

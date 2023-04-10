@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
+
 internal abstract class ResourceCounter
 {
     public abstract bool TryLockOne();

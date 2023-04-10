@@ -7,6 +7,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.StaticFiles.Infrastructure;
 
+
 /// <summary>
 /// Options common to several middleware components
 /// </summary>

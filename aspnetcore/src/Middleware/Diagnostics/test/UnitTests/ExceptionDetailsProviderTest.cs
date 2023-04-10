@@ -10,6 +10,7 @@ using Microsoft.Extensions.StackTrace.Sources;
 
 namespace Microsoft.Extensions.Internal;
 
+
 public class ExceptionDetailsProviderTest
 {
     public static TheoryData RelativePathsData

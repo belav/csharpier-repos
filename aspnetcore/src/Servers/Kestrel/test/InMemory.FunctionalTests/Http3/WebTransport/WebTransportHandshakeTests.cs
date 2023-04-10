@@ -14,6 +14,7 @@ using Http3SettingType = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
+
 public class WebTransportHandshakeTests : Http3TestBase
 {
     [Fact]

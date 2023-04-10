@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class NorthwindQueryInMemoryFixture<TModelCustomizer>
     : NorthwindQueryFixtureBase<TModelCustomizer>
     where TModelCustomizer : IModelCustomizer, new()

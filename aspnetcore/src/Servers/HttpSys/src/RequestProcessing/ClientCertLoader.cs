@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 // This class is used to load the client certificate on-demand.  Because client certs are optional, all
 // failures are handled internally and reported via ClientCertException or ClientCertError.
 internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposable

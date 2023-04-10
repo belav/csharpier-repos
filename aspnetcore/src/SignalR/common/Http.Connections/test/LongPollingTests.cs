@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
+
 public class LongPollingTests : VerifiableLoggedTest
 {
     [Fact]

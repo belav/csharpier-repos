@@ -6,6 +6,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
+
 internal sealed class HeapAllocHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
     private static readonly IntPtr ProcessHeap = UnsafeNclNativeMethods.GetProcessHeap();

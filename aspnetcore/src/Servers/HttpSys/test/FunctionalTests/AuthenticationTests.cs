@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 public class AuthenticationTests
 {
     private static bool AllowAnoymous = true;

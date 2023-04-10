@@ -5,6 +5,7 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultRazorProjectItem : RazorProjectItem
 {
     private readonly string _fileKind;

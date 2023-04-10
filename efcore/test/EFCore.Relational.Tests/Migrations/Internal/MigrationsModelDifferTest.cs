@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Migrations.Internal;
 
+
 public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
 {
     [ConditionalFact]

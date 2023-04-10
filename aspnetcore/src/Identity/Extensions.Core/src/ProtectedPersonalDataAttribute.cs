@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Used to indicate that a something is considered personal data and should be protected.
 /// </summary>

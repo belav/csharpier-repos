@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents the return value of a stored procedure.
 /// </summary>

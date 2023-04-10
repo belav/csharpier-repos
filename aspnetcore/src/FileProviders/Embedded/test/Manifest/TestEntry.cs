@@ -7,6 +7,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
+
 class TestEntry
 {
     public bool IsFile => ResourcePath != null;

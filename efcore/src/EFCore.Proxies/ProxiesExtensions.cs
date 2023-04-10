@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Proxies.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Extension methods related to use of proxies with Entity Framework Core.
 /// </summary>

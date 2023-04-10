@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class CompositeKeysQueryFixtureBase
     : SharedStoreFixtureBase<CompositeKeysContext>,
         IQueryFixtureBase

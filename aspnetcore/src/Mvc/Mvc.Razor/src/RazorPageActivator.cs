@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 /// <inheritdoc />
 public class RazorPageActivator : IRazorPageActivator
 {

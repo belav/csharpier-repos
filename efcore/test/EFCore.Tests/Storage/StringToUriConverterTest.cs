@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class StringToUriConverterTest
 {
     private static readonly StringToUriConverter _stringToUri = new();

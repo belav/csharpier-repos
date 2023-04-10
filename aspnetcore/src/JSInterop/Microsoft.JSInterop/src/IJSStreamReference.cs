@@ -3,6 +3,7 @@
 
 namespace Microsoft.JSInterop;
 
+
 /// <summary>
 /// Represents a reference to JavaScript data to be consumed through a <see cref="Stream"/>.
 /// </summary>

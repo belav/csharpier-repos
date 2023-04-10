@@ -7,6 +7,7 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 internal sealed class DefaultAntiforgeryTokenSerializer : IAntiforgeryTokenSerializer
 {
     private const string Purpose = "Microsoft.AspNetCore.Antiforgery.AntiforgeryToken.v1";

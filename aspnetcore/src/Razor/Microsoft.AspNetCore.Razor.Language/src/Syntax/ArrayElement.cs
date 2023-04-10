@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 internal struct ArrayElement<T>
 {
     public T Value;

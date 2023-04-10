@@ -9,6 +9,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing.Tests;
 
+
 public class DefaultInlineConstraintResolverTest
 {
     private readonly IInlineConstraintResolver _constraintResolver;

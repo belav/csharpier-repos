@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.Test;
 
 namespace Microsoft.AspNetCore.Identity.InMemory;
 
+
 public class InMemoryStore<TUser, TRole>
     : InMemoryUserStore<TUser>,
         IUserRoleStore<TUser>,

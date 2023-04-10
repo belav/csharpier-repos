@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Event arguments for the <see cref="DbContext.SaveChangesFailed" /> event.
 /// </summary>

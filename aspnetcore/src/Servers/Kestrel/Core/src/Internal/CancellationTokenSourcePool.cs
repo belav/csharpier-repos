@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
+
 internal sealed class CancellationTokenSourcePool
 {
     private const int MaxQueueSize = 1024;

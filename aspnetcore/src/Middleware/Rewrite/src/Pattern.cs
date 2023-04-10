@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 internal sealed class Pattern
 {
     public IList<PatternSegment> PatternSegments { get; }

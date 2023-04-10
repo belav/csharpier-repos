@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public static class IntermediateNodeSerializer
 {
     public static string Serialize(IntermediateNode node)

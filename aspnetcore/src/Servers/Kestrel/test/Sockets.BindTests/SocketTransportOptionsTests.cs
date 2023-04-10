@@ -19,6 +19,7 @@ using Xunit;
 
 namespace Sockets.BindTests;
 
+
 public class SocketTransportOptionsTests : LoggedTestBase
 {
     private async Task VerifySocketTransportCallsCreateBoundListenSocketAsync(

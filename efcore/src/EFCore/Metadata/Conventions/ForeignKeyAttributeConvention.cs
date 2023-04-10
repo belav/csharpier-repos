@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that configures the foreign key properties associated with a navigation property
 ///     based on the <see cref="ForeignKeyAttribute" /> specified on the properties or the navigation properties.

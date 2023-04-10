@@ -5,6 +5,7 @@ using Microsoft.DotNet.Cli.CommandLine;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
+
 internal abstract class EFCommandBase : CommandBase
 {
     public override void Configure(CommandLineApplication command)

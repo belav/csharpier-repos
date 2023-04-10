@@ -18,6 +18,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods for configuring Identity Server.
 /// </summary>

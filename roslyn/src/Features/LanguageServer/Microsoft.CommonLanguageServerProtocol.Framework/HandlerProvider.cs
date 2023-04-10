@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
+
 /// <inheritdoc/>
 internal class HandlerProvider : IHandlerProvider
 {

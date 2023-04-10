@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class QueryableExtensionsTest
 {
     [ConditionalFact]

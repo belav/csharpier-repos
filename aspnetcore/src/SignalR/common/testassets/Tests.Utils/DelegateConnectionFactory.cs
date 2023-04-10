@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class DelegateConnectionFactory : IConnectionFactory
 {
     private readonly Func<EndPoint, ValueTask<ConnectionContext>> _connectDelegate;

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
+
 /// <summary>
 /// The basic implementation of <see cref="IKey"/>, where the incoming XML element
 /// hasn't yet been fully processed.

@@ -7,6 +7,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 internal static class ProgressEventArgsReader
 {
     private static readonly JsonEncodedText LengthComputable = JsonEncodedText.Encode(

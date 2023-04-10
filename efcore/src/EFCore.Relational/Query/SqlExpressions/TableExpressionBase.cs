@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
+
 /// <summary>
 ///     <para>
 ///         An expression that represents a table source in a SQL tree.

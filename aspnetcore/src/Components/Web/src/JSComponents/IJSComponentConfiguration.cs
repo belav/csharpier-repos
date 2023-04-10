@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 /// <summary>
 /// Configures options for allowing JavaScript to add root components dynamically.
 /// </summary>

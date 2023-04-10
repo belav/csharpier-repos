@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 /// <summary>
 /// Enum declaring the allowed values for the verbosity level when http.sys reject requests due to throttling.
 /// </summary>

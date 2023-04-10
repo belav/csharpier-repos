@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
+
 public class Http1OutputProducerTests : IDisposable
 {
     private readonly MemoryPool<byte> _memoryPool;

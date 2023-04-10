@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 internal static class HubReflectionHelper
 {
     private static readonly Type[] _excludeInterfaces = new[] { typeof(IDisposable) };

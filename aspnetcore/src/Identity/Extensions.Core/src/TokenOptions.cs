@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Options for user tokens.
 /// </summary>

@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 internal sealed class LinearSearchJumpTable : JumpTable
 {
     private readonly int _defaultDestination;

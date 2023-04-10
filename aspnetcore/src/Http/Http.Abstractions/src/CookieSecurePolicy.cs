@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// Determines how cookie security properties are set.
 /// </summary>

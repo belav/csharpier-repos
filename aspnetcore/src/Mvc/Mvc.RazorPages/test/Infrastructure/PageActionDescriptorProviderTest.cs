@@ -9,6 +9,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 public class PageActionDescriptorProviderTest
 {
     [Fact]

@@ -3,6 +3,7 @@
 
 namespace FormatterWebSite.Models;
 
+
 public class BaseModel
 {
     public string BaseProperty { get; set; }

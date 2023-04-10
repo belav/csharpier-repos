@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests;
 
+
 public abstract class IntegrationTest<TInitializer> : AutoMapperSpecBase, IAsyncLifetime
     where TInitializer : IInitializer, new()
 {

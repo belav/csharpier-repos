@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Builder.Extensions;
 
+
 /// <summary>
 /// Represents a middleware that extracts the specified path base from request path and postpend it to the request path base.
 /// </summary>

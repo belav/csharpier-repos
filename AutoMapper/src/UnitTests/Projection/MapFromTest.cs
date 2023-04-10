@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Projection.MapFromTest;
 
+
 public class CustomMapFromExpressionTest
 {
     [Fact]

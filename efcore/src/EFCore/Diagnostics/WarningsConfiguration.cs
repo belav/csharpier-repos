@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Represents configuration for which warnings should be thrown, logged, or ignored.
 ///     by database providers or extensions. These options are set using <see cref="WarningsConfigurationBuilder" />.

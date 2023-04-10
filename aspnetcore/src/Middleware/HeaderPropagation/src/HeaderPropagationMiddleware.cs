@@ -8,6 +8,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HeaderPropagation;
 
+
 /// <summary>
 /// A Middleware for propagating headers to an <see cref="HttpClient"/>.
 /// </summary>

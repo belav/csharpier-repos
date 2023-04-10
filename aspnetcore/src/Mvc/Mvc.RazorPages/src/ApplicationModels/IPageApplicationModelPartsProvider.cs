@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 /// <summary>
 /// Provides parts that are used to construct a <see cref="PageApplicationModel" /> instance
 /// </summary>

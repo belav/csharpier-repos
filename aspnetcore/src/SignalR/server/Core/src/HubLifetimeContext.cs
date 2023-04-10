@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Context for the hub lifetime events <see cref="Hub.OnConnectedAsync"/> and <see cref="Hub.OnDisconnectedAsync(Exception)"/>.
 /// </summary>

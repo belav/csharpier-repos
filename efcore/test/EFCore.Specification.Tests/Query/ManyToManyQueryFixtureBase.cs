@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class ManyToManyQueryFixtureBase
     : SharedStoreFixtureBase<ManyToManyContext>,
         IQueryFixtureBase

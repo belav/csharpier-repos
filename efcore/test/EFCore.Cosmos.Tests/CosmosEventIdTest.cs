@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class CosmosEventIdTest : EventIdTestBase
 {
     [ConditionalFact]

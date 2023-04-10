@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
+
 public class InternalEntityEntryFactoryTest
 {
     [ConditionalFact]

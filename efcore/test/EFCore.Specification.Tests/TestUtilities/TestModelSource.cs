@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class TestModelSource : ModelSource
 {
     private readonly Action<ModelConfigurationBuilder> _configureConventions;

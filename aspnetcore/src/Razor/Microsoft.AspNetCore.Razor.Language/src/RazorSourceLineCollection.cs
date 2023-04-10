@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class RazorSourceLineCollection
 {
     public abstract int Count { get; }

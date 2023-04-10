@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 internal sealed class HttpNavigationManager : NavigationManager, IHostEnvironmentNavigationManager
 {
     void IHostEnvironmentNavigationManager.Initialize(string baseUri, string uri) =>

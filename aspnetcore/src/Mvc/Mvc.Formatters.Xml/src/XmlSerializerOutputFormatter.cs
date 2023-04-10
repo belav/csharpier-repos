@@ -16,6 +16,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 /// <summary>
 /// This class handles serialization of objects
 /// to XML using <see cref="XmlSerializer"/>

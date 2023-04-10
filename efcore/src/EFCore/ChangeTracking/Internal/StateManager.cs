@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
+
 // This is lower-level change tracking services used by the ChangeTracker and other parts of the system
 /// <summary>
 ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

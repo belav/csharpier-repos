@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace CreateDefaultBuilderOfTApp;
 
+
 public class Program
 {
     static void Main(string[] args)

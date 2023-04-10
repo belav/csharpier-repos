@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Allows interception of query expression trees and resulting compiled delegates.
 /// </summary>

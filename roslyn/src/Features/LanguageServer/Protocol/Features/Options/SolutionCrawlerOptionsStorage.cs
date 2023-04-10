@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler;
 
+
 internal static class SolutionCrawlerOptionsStorage
 {
     /// <summary>

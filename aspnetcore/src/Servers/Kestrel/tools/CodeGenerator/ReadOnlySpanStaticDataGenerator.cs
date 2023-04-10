@@ -6,6 +6,7 @@ using System.Text;
 
 namespace CodeGenerator;
 
+
 public static class ReadOnlySpanStaticDataGenerator
 {
     public static string GenerateFile(

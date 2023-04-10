@@ -3,6 +3,7 @@
 
 namespace Microsoft.Authentication.WebAssembly.Msal.Models;
 
+
 /// <summary>
 /// Cache options for the msal.js cache.
 /// </summary>

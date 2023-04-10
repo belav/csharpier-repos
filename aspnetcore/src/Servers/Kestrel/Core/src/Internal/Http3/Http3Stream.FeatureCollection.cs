@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
+
 internal partial class Http3Stream
     : IHttpResetFeature,
         IHttpMinRequestBodyDataRateFeature,

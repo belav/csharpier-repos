@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Middleware that performs authentication.
 /// </summary>

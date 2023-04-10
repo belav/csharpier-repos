@@ -13,6 +13,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+
 public class TypedResultsTests
 {
     [Fact]

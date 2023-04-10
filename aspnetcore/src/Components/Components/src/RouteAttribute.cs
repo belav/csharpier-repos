@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Indicates that the associated component should match the specified route template pattern.
 /// </summary>

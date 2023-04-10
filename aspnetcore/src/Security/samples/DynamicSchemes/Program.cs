@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AuthSamples.DynamicSchemes;
 
+
 public class Program
 {
     public static void Main(string[] args)

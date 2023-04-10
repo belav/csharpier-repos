@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     <para>
 ///         The relational type mapping source. Type mappings describe how a provider maps CLR types/values to database types/values.

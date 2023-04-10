@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 
+
 /// <summary>
 /// A helper class to provide a useful <see cref="IAuthorizationRequirement"/> which
 /// contains a name.

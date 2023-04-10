@@ -7,6 +7,7 @@ using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAs
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 public class InheritsDirectivePassTest : RazorProjectEngineTestBase
 {
     protected override RazorLanguageVersion Version => RazorLanguageVersion.Latest;

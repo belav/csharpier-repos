@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 /// <summary>
 /// Represents a single contact point on a touch-sensitive device.
 /// The contact point is commonly a finger or stylus and the device may be a touchscreen or trackpad.

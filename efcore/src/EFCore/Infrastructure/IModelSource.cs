@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     <para>
 ///         Produces an <see cref="IModel" /> based on a context. This is typically implemented by database providers to ensure that any

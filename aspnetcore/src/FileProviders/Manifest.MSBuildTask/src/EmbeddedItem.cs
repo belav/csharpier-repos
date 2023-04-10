@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task;
 
+
 public class EmbeddedItem : IEquatable<EmbeddedItem>
 {
     public string ManifestFilePath { get; set; }

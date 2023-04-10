@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
+
 /// <summary>
 ///     Generates <see cref="Guid" /> values using <see cref="Guid.NewGuid()" />.
 ///     The generated values are non-temporary, meaning they will be saved to the database.

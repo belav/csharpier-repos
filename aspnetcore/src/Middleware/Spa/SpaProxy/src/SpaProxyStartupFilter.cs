@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SpaProxy;
 
+
 internal sealed class SpaProxyStartupFilter : IStartupFilter
 {
     private readonly SpaProxyLaunchManager _spaProxyLaunchManager;

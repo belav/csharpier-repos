@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
+
 /// <summary>
 /// Captures synchronous and asynchronous exceptions from the pipeline and generates error responses.
 /// </summary>

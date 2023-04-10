@@ -16,6 +16,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
+
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
 {

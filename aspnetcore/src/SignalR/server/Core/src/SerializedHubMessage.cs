@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Represents a serialization cache for a single message.
 /// </summary>

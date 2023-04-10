@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DynamicSchemes.Pages;
 
+
 public class ContactModel : PageModel
 {
     public string Message { get; set; }

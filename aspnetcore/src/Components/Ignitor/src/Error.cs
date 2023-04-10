@@ -4,6 +4,7 @@
 #nullable enable
 namespace Ignitor;
 
+
 public class Error
 {
     public string? Stack { get; set; }

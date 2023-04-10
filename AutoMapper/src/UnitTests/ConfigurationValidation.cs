@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.ConfigurationValidation;
 
+
 public class ConstructorMappingValidation : NonValidatingSpecBase
 {
     public class Destination

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HtmlGenerationWebSite.Models;
 
+
 public class Person
 {
     [HiddenInput(DisplayValue = false)]

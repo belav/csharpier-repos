@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class NonLoadingNavigationsManyToManyLoadSqliteTest
     : ManyToManyLoadTestBase<NonLoadingNavigationsManyToManyLoadSqliteTest.NonLoadingNavigationsManyToManyLoadSqliteFixture>
 {

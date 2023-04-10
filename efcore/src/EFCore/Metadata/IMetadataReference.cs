@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents a reference to a metadata object. If the metadata object instance is replaced
 ///     this will be updated with the new object.

@@ -10,6 +10,7 @@ using Http2HeadersEnumerator = Microsoft.AspNetCore.Server.Kestrel.Core.Tests.Ht
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class Http2HeadersEnumeratorBenchmark
 {
     private Http2HeadersEnumerator _enumerator;

@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// The exception thrown from a hub when an error occurs.
 /// </summary>

@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests;
 
+
 public class CustomProjectionStringToString
     : IntegrationTest<CustomProjectionStringToString.DatabaseInitializer>
 {

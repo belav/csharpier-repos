@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging.Console;
 
 namespace ServerComparison.TestSites;
 
+
 public static class Program
 {
     public static void Main(string[] args)

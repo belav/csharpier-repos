@@ -6,6 +6,7 @@
 
 namespace System.Runtime.InteropServices.JavaScript;
 
+
 [System.AttributeUsageAttribute(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
 [Versioning.SupportedOSPlatformAttribute("browser")]
 public sealed class JSImportAttribute : Attribute

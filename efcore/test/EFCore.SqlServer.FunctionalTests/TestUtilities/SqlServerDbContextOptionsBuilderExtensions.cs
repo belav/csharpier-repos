@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public static class SqlServerDbContextOptionsBuilderExtensions
 {
     public static SqlServerDbContextOptionsBuilder ApplyConfiguration(

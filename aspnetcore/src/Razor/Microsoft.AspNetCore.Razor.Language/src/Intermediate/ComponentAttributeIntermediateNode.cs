@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public sealed class ComponentAttributeIntermediateNode : IntermediateNode
 {
     public ComponentAttributeIntermediateNode() { }

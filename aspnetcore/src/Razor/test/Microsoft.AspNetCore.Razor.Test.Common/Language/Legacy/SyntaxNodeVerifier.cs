@@ -12,6 +12,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 public static class SyntaxNodeVerifier
 {
     internal static void Verify(SyntaxNode node, string[] baseline)

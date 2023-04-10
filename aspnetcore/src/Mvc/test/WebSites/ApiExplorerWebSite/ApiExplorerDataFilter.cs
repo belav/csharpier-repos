@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ApiExplorerWebSite;
 
+
 /// <summary>
 /// A resource filter that looks up and serializes Api Explorer data for the action.
 ///

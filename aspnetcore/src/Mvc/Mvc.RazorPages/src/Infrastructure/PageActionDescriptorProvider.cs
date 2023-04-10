@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 /// <summary>
 /// A <see cref="IActionDescriptorProvider"/> for PageActions
 /// </summary>

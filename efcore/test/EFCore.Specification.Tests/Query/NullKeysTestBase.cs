@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class NullKeysTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : NullKeysTestBase<TFixture>.NullKeysFixtureBase, new()
 {

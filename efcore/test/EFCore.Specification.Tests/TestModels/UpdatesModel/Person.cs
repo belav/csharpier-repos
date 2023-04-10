@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
+
 public class Person
 {
     protected Person()

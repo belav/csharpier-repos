@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
+
 public class Docker
 {
     private static readonly string _exeSuffix = OperatingSystem.IsWindows() ? ".exe" : string.Empty;

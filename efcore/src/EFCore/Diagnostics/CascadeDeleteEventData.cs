@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     A <see cref="DiagnosticSource" /> event payload class for events that indicate
 ///     an entity is being deleted because its parent entity has been deleted.

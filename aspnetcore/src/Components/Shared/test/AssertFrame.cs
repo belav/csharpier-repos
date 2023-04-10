@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
+
 internal static class AssertFrame
 {
     public static void Sequence(RenderTreeFrame frame, int? sequence = null)

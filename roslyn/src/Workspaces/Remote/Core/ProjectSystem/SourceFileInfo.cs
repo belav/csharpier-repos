@@ -6,4 +6,5 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Remote.ProjectSystem;
 
+
 internal readonly record struct SourceFileInfo(string FilePath, IReadOnlyList<string> FolderNames);

@@ -6,6 +6,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
+
 /// <summary>
 /// Represents the close action for a stream.
 /// </summary>

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Components.WebView;
 
+
 public class StaticContentProviderTests
 {
     [Fact]

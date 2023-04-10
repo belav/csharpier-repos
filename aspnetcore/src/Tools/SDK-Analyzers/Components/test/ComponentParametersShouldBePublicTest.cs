@@ -7,6 +7,7 @@ using TestHelper;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
+
 public class ComponentParametersShouldBePublicTest : DiagnosticVerifier
 {
     [Fact]

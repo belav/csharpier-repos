@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class RelationalTestHelpers : TestHelpers
 {
     protected RelationalTestHelpers() { }

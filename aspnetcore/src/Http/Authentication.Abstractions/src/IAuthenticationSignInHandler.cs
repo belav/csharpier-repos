@@ -5,6 +5,7 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Used to determine if a handler supports SignIn.
 /// </summary>

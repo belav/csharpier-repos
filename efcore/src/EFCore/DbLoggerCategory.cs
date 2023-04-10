@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     An API for getting logger categories in an Intellisense/tab-completion friendly manner.
 /// </summary>

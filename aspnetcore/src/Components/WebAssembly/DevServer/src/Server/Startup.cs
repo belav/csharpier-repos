@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.DevServer.Server;
 
+
 internal sealed class Startup
 {
     public Startup(IConfiguration configuration)

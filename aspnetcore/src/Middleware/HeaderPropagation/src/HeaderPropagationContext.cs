@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HeaderPropagation;
 
+
 /// <summary>
 /// A context object for <see cref="HeaderPropagationEntry.ValueFilter"/> delegates.
 /// </summary>

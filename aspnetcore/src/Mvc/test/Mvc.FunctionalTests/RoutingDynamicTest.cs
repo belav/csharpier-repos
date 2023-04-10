@@ -9,6 +9,7 @@ using RoutingWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class RoutingDynamicTest : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForDynamic>>
 {
     public RoutingDynamicTest(MvcTestFixture<RoutingWebSite.StartupForDynamic> fixture)

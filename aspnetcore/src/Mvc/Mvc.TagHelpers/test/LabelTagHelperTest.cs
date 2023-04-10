@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class LabelTagHelperTest
 {
     // Model (List<Model> or Model instance), container type (Model or NestModel), model accessor,

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
+
 public class MvcViewDocumentClassifierPass : DocumentClassifierPassBase
 {
     private readonly bool _useConsolidatedMvcViews;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class TestRelationalMigrationSqlGenerator : MigrationsSqlGenerator
 {
     public TestRelationalMigrationSqlGenerator(MigrationsSqlGeneratorDependencies dependencies)

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ServerComparison.TestSites;
 
+
 public class StartupResponseCompression
 {
     public void ConfigureServices(IServiceCollection services)

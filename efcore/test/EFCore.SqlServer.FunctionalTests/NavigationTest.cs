@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class NavigationTest : IClassFixture<NavigationTestFixture>
 {
     [ConditionalFact]

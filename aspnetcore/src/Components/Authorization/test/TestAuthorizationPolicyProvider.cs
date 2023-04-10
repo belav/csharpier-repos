@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
+
 public class TestAuthorizationPolicyProvider : IAuthorizationPolicyProvider
 {
     private readonly AuthorizationOptions options = new AuthorizationOptions();

@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Ignitor;
 
+
 public class RenderBatchReaderTest
 {
     static readonly object NullStringMarker = new object();

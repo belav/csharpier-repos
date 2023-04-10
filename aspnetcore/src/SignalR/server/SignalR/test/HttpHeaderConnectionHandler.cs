@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http.Connections.Features;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class HttpHeaderConnectionHandler : ConnectionHandler
 {
     public override async Task OnConnectedAsync(ConnectionContext connection)

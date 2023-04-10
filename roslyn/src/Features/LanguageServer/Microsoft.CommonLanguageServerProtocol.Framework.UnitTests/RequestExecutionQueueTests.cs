@@ -16,6 +16,7 @@ using static Microsoft.CommonLanguageServerProtocol.Framework.UnitTests.HandlerP
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.UnitTests;
 
+
 public class RequestExecutionQueueTests
 {
     private class MockServer : AbstractLanguageServer<TestRequestContext>

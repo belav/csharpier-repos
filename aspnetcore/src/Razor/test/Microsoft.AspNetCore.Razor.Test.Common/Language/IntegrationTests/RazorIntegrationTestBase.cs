@@ -19,6 +19,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public class RazorIntegrationTestBase
 {
     internal const string ArbitraryWindowsPath = "x:\\dir\\subdir\\Test";

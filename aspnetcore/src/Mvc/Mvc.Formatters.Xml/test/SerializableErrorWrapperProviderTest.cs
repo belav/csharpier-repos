@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 public class SerializableErrorWrapperProviderTest
 {
     [Theory]

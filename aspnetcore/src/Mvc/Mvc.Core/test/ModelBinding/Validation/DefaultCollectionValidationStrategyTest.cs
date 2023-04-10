@@ -5,6 +5,7 @@ using System.Collections;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
+
 public class DefaultCollectionValidationStrategyTest
 {
     [Fact]

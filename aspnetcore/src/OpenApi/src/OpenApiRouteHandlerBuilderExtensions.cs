@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Microsoft.AspNetCore.OpenApi;
 
+
 /// <summary>
 /// Extension methods for annotating OpenAPI descriptions on an <see cref="Endpoint" />.
 /// </summary>

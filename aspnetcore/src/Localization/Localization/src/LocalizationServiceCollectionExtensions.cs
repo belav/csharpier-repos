@@ -7,6 +7,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods for setting up localization services in an <see cref="IServiceCollection" />.
 /// </summary>

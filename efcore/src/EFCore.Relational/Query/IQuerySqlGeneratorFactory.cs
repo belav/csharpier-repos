@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     A factory for creating <see cref="QuerySqlGenerator" /> instances.
 /// </summary>

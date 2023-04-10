@@ -7,6 +7,7 @@ using ExpressionExtensions = Microsoft.EntityFrameworkCore.Query.ExpressionExten
 
 namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 
+
 /// <summary>
 ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
 ///     the same compatibility standards as public APIs. It may be changed or removed without notice in

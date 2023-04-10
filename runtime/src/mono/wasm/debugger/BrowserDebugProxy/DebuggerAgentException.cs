@@ -7,6 +7,7 @@ using System;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 public class DebuggerAgentException : Exception
 {
     public DebuggerAgentException(string message)

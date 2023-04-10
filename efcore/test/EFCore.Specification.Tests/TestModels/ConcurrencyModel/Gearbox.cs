@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public class Gearbox
 {
     public class GearboxProxy : Gearbox, IF1Proxy

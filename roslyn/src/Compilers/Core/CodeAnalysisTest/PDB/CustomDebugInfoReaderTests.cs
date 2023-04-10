@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
+
 public class CustomDebugInfoReaderTests
 {
     [Theory]

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 public class NoopUserStore : IUserStore<PocoUser>
 {
     public Task<string> GetUserIdAsync(

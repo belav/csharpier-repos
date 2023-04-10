@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
+
 public class ChangeDetectorTest
 {
     [ConditionalFact]

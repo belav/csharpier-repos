@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.StoredProcedureUpdateModel;
 
+
 public class TpcParent
 {
     public int Id { get; set; }

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     Represents an operation that should be performed when the ownership value for a foreign key is changed.
 /// </summary>

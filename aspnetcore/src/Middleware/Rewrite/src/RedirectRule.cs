@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Rewrite.Logging;
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 internal sealed class RedirectRule : IRule
 {
     private readonly TimeSpan _regexTimeout = TimeSpan.FromSeconds(1);

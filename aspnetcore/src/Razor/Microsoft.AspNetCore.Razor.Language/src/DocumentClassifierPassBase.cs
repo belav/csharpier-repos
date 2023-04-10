@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class DocumentClassifierPassBase
     : IntermediateNodePassBase,
         IRazorDocumentClassifierPass

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Rewrite.UrlActions;
 
+
 internal sealed class RedirectAction : UrlAction
 {
     public int StatusCode { get; }

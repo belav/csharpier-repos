@@ -7,6 +7,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 /// <summary>
 /// Shared logic for parsing tokens from route values and querystring values.
 /// </summary>

@@ -12,6 +12,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 public class GroupTest
 {
     private EndpointDataSource GetEndpointDataSource(IEndpointRouteBuilder endpointRouteBuilder)

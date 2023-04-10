@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 /// <summary>
 /// Default values related to WsFederation authentication handler
 /// </summary>

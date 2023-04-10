@@ -9,6 +9,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
+
 public class ManagedAuthenticatedEncryptorFactoryTest
 {
     [Fact]

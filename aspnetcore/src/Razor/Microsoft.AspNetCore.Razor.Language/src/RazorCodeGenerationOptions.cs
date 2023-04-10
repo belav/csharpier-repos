@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class RazorCodeGenerationOptions
 {
     public static RazorCodeGenerationOptions CreateDefault()

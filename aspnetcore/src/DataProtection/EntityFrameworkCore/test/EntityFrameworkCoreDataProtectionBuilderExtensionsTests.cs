@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.Test;
 
+
 public class EntityFrameworkCoreDataProtectionBuilderExtensionsTests
 {
     [Fact]

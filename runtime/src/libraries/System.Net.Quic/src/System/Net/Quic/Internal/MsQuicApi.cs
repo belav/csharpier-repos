@@ -14,6 +14,7 @@ using Microsoft.Win32;
 
 namespace System.Net.Quic;
 
+
 internal sealed unsafe partial class MsQuicApi
 {
     private static readonly Version MinWindowsVersion = new Version(10, 0, 20145, 1000);

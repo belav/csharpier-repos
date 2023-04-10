@@ -8,6 +8,7 @@ using Grpc.Shared;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.CallHandlers;
 
+
 internal sealed class CallHandlerDescriptorInfo
 {
     public CallHandlerDescriptorInfo(

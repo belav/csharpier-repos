@@ -18,6 +18,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Authorization.Test;
 
+
 public class AuthorizationMiddlewareTests
 {
     [Fact]

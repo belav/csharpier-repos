@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Adds support for SignInAsync
 /// </summary>

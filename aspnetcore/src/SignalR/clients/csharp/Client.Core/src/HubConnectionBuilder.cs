@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
+
 /// <summary>
 /// A builder for configuring <see cref="HubConnection"/> instances.
 /// </summary>

@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Formatters;
 
+
 public partial class BinaryMessageFormatterTests
 {
     [Fact]

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods for setting up antiforgery services in an <see cref="IServiceCollection" />.
 /// </summary>

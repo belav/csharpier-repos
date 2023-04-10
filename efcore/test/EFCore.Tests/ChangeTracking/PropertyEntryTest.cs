@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 public class PropertyEntryTest
 {
     [ConditionalFact]

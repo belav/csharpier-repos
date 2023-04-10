@@ -9,6 +9,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
+
 internal sealed class ResponseCachingContext
 {
     private DateTimeOffset? _responseDate;

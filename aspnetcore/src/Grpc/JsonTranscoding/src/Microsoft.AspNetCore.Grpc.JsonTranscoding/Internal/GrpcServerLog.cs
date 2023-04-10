@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
+
 internal static partial class GrpcServerLog
 {
     [LoggerMessage(

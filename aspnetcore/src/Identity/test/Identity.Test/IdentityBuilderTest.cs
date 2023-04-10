@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 public class IdentityBuilderTest
 {
     [Fact]

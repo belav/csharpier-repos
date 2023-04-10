@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 public class XmlDataContractSerializerMvcOptionsSetupTest
 {
     [Fact]

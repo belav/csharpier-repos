@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class GuidToStringConverterTest
 {
     private static readonly GuidToStringConverter _guidToString = new();

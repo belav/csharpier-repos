@@ -15,6 +15,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public class ContentViewComponentResultTest
 {
     [Fact]

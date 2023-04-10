@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
+
 [DebuggerDisplay("{_state,nq}")]
 internal sealed class RendererSynchronizationContext : SynchronizationContext
 {

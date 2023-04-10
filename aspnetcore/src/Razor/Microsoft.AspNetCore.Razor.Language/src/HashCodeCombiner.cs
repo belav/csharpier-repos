@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.Extensions.Internal;
 
+
 internal struct HashCodeCombiner
 {
     private long _combinedHash64;

@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
+
 internal static class ConditionEvaluator
 {
     public static MatchResults Evaluate(

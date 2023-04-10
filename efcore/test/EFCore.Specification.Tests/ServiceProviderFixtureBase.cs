@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class ServiceProviderFixtureBase : FixtureBase
 {
     public IServiceProvider ServiceProvider { get; }

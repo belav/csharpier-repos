@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
+
 /// <summary>
 /// Configuration options for <see cref="CertificateValidationCache"/>
 /// </summary>

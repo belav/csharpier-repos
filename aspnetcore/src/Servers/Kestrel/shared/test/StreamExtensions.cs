@@ -7,6 +7,7 @@ using Xunit;
 
 namespace System.IO;
 
+
 public static class StreamExtensions
 {
     /// <summary>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
+
 [Route("ApiExplorerResponseTypeWithoutAttribute/[Action]")]
 public class ApiExplorerResponseTypeWithoutAttributeController : Controller
 {

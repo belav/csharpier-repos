@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Server;
 
+
 internal interface IServerComponentDeserializer
 {
     bool TryDeserializeComponentDescriptorCollection(

@@ -5,6 +5,7 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
+
 public class TestViewBufferScope : IViewBufferScope
 {
     public IList<ViewBufferValue[]> CreatedBuffers { get; } = new List<ViewBufferValue[]>();

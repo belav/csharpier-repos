@@ -5,6 +5,7 @@ using System.ComponentModel;
 
 namespace Microsoft.AspNetCore.DataProtection.Infrastructure;
 
+
 /// <summary>
 /// Provides information used to discriminate applications.
 /// </summary>

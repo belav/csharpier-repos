@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 internal sealed class HostingRequestStartingLog : IReadOnlyList<KeyValuePair<string, object?>>
 {
     private const string OriginalFormat =

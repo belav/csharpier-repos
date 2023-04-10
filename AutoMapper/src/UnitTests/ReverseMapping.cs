@@ -2,6 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace AutoMapper.UnitTests;
 
+
 public class ReverseMapWithStaticField : AutoMapperSpecBase
 {
     class Source

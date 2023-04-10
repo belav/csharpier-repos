@@ -6,6 +6,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 /// <summary>
 /// Generates the view for a directory
 /// </summary>

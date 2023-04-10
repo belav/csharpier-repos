@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
+
 internal sealed class WebAssemblyErrorBoundaryLogger : IErrorBoundaryLogger
 {
     private readonly ILogger<ErrorBoundary> _errorBoundaryLogger;

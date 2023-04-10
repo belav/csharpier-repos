@@ -7,6 +7,7 @@ using Microsoft.Extensions.Caching.Distributed;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
+
 /// <summary>
 /// An implementation of this interface provides a service to process
 /// the content or fetches it from cache for distributed cache tag helpers.

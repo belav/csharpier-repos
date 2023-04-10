@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class LazyCollectionMapping
 {
     public class OneTimeEnumerator<T> : IEnumerable<T>

@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
+
 /// <summary>
 /// Manages the parts and features of an MVC application.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
+
 public static class ViewComponentTagHelperMetadata
 {
     /// <summary>

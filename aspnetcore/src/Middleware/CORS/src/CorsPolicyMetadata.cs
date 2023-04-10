@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Microsoft.AspNetCore.Cors;
 
+
 /// <summary>
 /// Metadata that provides a CORS policy.
 /// </summary>

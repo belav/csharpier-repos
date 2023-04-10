@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public static class ErrorUtilities
 {
     public static void ThrowInvalidRequestLine()

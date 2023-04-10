@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 public class EventCallbackTest
 {
     [Fact]

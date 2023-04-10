@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VersioningWebSite;
 
+
 // Scenario:
 // This is a controller for the V1 (unconstrained) version
 // of the service. The v2 version will be in a controller

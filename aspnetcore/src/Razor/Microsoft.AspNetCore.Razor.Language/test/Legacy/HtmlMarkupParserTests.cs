@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy;
 
+
 public class HtmlMarkupParserTests
 {
     private static readonly SyntaxToken doubleHyphenToken = SyntaxFactory.Token(

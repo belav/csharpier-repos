@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 public class VectorizedILEmitTrieJumpTableTest : ILEmitTreeJumpTableTestBase
 {
     // We can still run the vectorized implementation on 32 bit, we just

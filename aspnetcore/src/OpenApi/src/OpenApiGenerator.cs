@@ -22,6 +22,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Microsoft.AspNetCore.OpenApi;
 
+
 /// <summary>
 /// Defines a set of methods for generating OpenAPI definitions for endpoints.
 /// </summary>

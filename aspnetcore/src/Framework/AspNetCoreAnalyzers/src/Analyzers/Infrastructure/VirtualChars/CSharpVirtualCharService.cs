@@ -17,6 +17,7 @@ using Microsoft.CodeAnalysis.Utilities;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
+
 internal class CSharpVirtualCharService : AbstractVirtualCharService
 {
     public static readonly IVirtualCharService Instance = new CSharpVirtualCharService();

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests;
 
+
 public class DelegateTests
 {
     private static readonly string _expectedResponseString = "Hello from delegatee";

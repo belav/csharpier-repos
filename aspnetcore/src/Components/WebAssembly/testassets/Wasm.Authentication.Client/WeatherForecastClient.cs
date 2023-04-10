@@ -7,6 +7,7 @@ using Wasm.Authentication.Shared;
 
 namespace Wasm.Authentication.Client;
 
+
 public class WeatherForecastClient : IDisposable
 {
     private readonly HttpClient _client;

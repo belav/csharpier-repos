@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 /// <summary>
 /// Used to hold per-request state.
 /// </summary>

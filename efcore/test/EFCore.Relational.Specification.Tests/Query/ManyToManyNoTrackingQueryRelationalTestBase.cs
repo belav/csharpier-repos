@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class ManyToManyNoTrackingQueryRelationalTestBase<TFixture>
     : ManyToManyNoTrackingQueryTestBase<TFixture>
     where TFixture : ManyToManyQueryFixtureBase, new()

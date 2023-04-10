@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.Extensions.Localization;
 
+
 /// <summary>
 /// Provides the location of resources for an Assembly.
 /// </summary>

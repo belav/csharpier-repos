@@ -13,6 +13,7 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator;
 
+
 /// <summary>
 /// A default implementation of the background work indicator which simply defers to a threaded-wait-dialog to
 /// indicator that background work is happening.

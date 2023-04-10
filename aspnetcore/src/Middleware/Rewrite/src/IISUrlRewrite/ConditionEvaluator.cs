@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 internal static class ConditionEvaluator
 {
     public static MatchResults Evaluate(

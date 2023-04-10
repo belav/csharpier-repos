@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Base event arguments for the <see cref="O:DbContext.SaveChanges" /> and <see cref="O:DbContext.SaveChangesAsync" /> events.
 /// </summary>

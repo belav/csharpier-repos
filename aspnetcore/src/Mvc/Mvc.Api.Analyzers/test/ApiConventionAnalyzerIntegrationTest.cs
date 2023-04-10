@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
+
 public class ApiConventionAnalyzerIntegrationTest
 {
     private MvcDiagnosticAnalyzerRunner Executor { get; } =

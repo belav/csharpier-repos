@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class TestLogger<TCategory, TDefinitions>
     : TestLogger<TDefinitions>,
         IDiagnosticsLogger<TCategory>

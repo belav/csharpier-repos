@@ -3,6 +3,7 @@
 
 namespace Microsoft.Net.Http.Headers;
 
+
 public class MediaTypeHeaderValueComparerTests
 {
     public static IEnumerable<object[]> SortValues

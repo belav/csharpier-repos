@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Provides a simple API surface for configuring a <see cref="IMutableModel" /> that defines the shape of your
 ///     entities, the relationships between them, and how they map to the database.

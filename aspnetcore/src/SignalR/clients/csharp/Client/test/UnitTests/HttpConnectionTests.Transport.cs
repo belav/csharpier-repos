@@ -21,6 +21,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
+
 public partial class HttpConnectionTests
 {
     public class Transport : VerifiableLoggedTest

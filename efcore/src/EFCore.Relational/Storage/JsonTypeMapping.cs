@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     <para>
 ///         Represents the mapping between a <see cref="JsonElement" /> type and a database type.

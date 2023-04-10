@@ -5,6 +5,7 @@ using System.Runtime.ExceptionServices;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 /// <summary>
 /// A context for resource filters, specifically <see cref="IResourceFilter.OnResourceExecuted"/> calls.
 /// </summary>

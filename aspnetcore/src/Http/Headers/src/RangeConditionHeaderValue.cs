@@ -7,6 +7,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
+
 /// <summary>
 /// Represents an <c>If-Range</c> header value which can either be a date/time or an entity-tag value.
 /// </summary>

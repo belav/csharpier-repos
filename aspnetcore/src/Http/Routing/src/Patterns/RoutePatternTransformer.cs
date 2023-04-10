@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
+
 /// <summary>
 /// A singleton service that provides transformations on <see cref="RoutePattern"/>.
 /// </summary>

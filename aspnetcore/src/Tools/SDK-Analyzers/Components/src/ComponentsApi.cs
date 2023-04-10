@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
+
 // Constants for type and method names used in code-generation
 // Keep these in sync with the actual definitions
 internal static class ComponentsApi

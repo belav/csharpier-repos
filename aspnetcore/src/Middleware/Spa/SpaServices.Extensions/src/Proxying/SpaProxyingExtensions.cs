@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Extension methods for proxying requests to a local SPA development server during
 /// development. Not for use in production applications.

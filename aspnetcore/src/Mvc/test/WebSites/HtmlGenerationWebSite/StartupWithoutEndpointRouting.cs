@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HtmlGenerationWebSite;
 
+
 public class StartupWithoutEndpointRouting : Startup
 {
     public override void Configure(IApplicationBuilder app)

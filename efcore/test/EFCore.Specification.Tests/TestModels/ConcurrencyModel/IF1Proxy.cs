@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public interface IF1Proxy
 {
     public bool CreatedCalled { get; set; }

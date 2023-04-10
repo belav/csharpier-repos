@@ -5,6 +5,7 @@ using System.Net;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class IPAddressToBytesConverterTest
 {
     private static readonly IPAddressToBytesConverter _ipAddressToBytes = new();

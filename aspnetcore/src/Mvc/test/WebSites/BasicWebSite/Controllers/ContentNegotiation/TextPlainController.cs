@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
+
 public class TextPlainController : Controller
 {
     public Task<string> ReturnTaskOfString()

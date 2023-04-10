@@ -7,6 +7,7 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
+
 internal class SyntaxTrivia : GreenNode
 {
     internal SyntaxTrivia(SyntaxKind kind, string text)

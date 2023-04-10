@@ -13,6 +13,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 public class PropertyBaseTest
 {
     private const string Property = "Foo";

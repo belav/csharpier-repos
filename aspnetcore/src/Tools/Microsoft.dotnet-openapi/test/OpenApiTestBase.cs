@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.OpenApi.Tests;
 
+
 public class OpenApiTestBase : IDisposable
 {
     protected readonly TemporaryDirectory _tempDir;

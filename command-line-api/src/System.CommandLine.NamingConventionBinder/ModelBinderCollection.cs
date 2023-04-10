@@ -6,6 +6,7 @@ using System.CommandLine.Binding;
 
 namespace System.CommandLine.NamingConventionBinder;
 
+
 internal class ModelBinderCollection
 {
     private readonly Dictionary<Type, ModelBinder> _modelBindersByValueDescriptor = new();

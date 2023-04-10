@@ -15,6 +15,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
+
 public class EventTests
 {
     [Fact]

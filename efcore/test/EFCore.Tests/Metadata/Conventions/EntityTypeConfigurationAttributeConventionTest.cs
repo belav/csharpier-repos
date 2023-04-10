@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 public class EntityTypeConfigurationAttributeConventionTest
 {
     [ConditionalFact]

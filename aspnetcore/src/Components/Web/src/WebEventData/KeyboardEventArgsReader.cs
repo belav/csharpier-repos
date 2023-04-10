@@ -7,6 +7,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 internal static class KeyboardEventArgsReader
 {
     private static readonly JsonEncodedText Key = JsonEncodedText.Encode("key");

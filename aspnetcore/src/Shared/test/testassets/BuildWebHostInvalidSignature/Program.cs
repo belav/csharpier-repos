@@ -5,6 +5,7 @@ using MockHostTypes;
 
 namespace BuildWebHostInvalidSignature;
 
+
 public class Program
 {
     static void Main(string[] args) { }

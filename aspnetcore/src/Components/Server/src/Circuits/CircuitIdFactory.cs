@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+
 // This is a singleton instance
 // Generates strong cryptographic ids for circuits that are protected with authenticated encryption.
 internal sealed class CircuitIdFactory

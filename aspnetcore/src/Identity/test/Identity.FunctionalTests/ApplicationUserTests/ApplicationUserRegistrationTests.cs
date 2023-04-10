@@ -6,6 +6,7 @@ using Identity.DefaultUI.WebSite.Data;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.IdentityUserTests;
 
+
 public class ApplicationUserRegistrationTests
     : RegistrationTests<ApplicationUserStartup, ApplicationDbContext>
 {

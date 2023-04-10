@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
+
 internal static class TextLineExtensions
 {
     public static int? GetFirstNonWhitespaceOffset(this TextLine line)

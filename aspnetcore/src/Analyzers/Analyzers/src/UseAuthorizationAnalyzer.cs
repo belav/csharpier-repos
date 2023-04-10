@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 internal sealed class UseAuthorizationAnalyzer
 {
     private readonly StartupAnalysis _context;

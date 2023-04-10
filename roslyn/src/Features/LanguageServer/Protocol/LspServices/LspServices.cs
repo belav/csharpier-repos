@@ -12,6 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
+
 internal class LspServices : ILspServices
 {
     private readonly ImmutableDictionary<

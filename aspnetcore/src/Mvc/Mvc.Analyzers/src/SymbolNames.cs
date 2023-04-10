@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
+
 internal static class SymbolNames
 {
     public const string AllowAnonymousAttribute =

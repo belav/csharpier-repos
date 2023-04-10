@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class InheritForPath : AutoMapperSpecBase
 {
     public class RootModel

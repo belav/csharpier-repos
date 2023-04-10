@@ -3,4 +3,5 @@
 
 namespace LocalizationWebsite.Models;
 
+
 public class Customer { }

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 /// <summary>
 /// Provides information about the hosting environment an application is running in.
 /// </summary>

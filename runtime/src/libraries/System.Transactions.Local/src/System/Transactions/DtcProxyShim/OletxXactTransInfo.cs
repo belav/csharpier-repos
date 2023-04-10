@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Transactions.DtcProxyShim;
 
+
 [ComVisible(false)]
 [StructLayout(LayoutKind.Sequential)]
 internal struct OletxXactTransInfo

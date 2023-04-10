@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 public class RevalidatingServerAuthenticationStateProviderTest
 {
     [Fact]

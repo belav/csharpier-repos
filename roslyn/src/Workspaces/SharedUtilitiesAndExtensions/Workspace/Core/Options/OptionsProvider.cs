@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis;
 
+
 internal interface OptionsProvider<TOptions>
 {
     ValueTask<TOptions> GetOptionsAsync(

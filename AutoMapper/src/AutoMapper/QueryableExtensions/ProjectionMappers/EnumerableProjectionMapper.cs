@@ -1,4 +1,5 @@
 namespace AutoMapper.QueryableExtensions.Impl;
+
 using static ReflectionHelper;
 
 [EditorBrowsable(EditorBrowsableState.Never)]

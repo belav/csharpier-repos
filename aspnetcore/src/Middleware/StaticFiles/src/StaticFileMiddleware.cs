@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 /// <summary>
 /// Enables serving static files for a given request path
 /// </summary>

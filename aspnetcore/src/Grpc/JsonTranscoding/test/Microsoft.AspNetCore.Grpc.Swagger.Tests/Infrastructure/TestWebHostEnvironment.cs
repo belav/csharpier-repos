@@ -6,6 +6,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.Infrastructure;
 
+
 internal class TestWebHostEnvironment : IWebHostEnvironment
 {
     public IFileProvider WebRootFileProvider { get; set; }

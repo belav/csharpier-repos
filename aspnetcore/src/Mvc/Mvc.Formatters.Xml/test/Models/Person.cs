@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 public class Person
 {
     public int Id { get; set; }

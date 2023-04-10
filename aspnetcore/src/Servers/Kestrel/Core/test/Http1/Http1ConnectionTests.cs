@@ -19,6 +19,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
+
 public class Http1ConnectionTests : Http1ConnectionTestsBase
 {
     [Fact]

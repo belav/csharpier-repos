@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal static class Checksum
 {
     public static string BytesToString(byte[] bytes)

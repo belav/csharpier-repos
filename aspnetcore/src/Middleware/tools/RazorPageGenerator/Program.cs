@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace RazorPageGenerator;
 
+
 public class Program
 {
     public static int Main(string[] args)

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 /// <summary>
 /// Provides configuration for Razor Pages.
 /// </summary>

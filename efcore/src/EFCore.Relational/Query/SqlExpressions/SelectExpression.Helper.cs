@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
+
 public sealed partial class SelectExpression
 {
     private sealed class EntityShaperNullableMarkingExpressionVisitor : ExpressionVisitor

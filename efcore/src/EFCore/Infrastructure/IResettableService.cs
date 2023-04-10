@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     <para>
 ///         This interface must be implemented by any service that needs to be reset between

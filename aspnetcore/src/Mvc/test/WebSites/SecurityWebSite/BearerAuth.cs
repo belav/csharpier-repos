@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace SecurityWebSite;
 
+
 public static class BearerAuth
 {
     static BearerAuth()

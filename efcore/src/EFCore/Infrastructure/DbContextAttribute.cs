@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     Identifies the <see cref="DbContext" /> that a class belongs to. For example, this attribute is used
 ///     to identify which context a migration applies to.

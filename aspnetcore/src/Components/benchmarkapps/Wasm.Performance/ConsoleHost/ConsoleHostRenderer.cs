@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Wasm.Performance.ConsoleHost;
 
+
 internal sealed class ConsoleHostRenderer : Renderer
 {
     public ConsoleHostRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory)

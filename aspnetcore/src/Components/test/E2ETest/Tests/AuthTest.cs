@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 [Collection("auth")] // Because auth uses cookies, this can't run in parallel with other auth tests
 public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {

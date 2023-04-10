@@ -11,6 +11,7 @@ using HostedBlazorWebassemblyApp.Shared;
 
 namespace HostedBlazorWebassemblyApp.Client.Data;
 
+
 public class HttpWeatherForecastService : IWeatherForecastService
 {
     public HttpWeatherForecastService(HttpClient client)

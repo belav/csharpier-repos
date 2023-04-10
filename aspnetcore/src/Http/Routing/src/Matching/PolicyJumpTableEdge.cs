@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 /// <summary>
 /// Represents an entry in a <see cref="PolicyJumpTable"/>.
 /// </summary>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
+
 internal interface IClientLanguageServerManager : ILspService
 {
     Task<TResponse> SendRequestAsync<TParams, TResponse>(

@@ -11,6 +11,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.WebSockets.Tests;
 
+
 public class Http2WebSocketTests
 {
     [Fact]

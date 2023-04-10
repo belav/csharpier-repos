@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
+
 public class GearsOfWarContext : PoolableDbContext
 {
     public GearsOfWarContext(DbContextOptions options)

@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
+
 public class FormattedClassification
 {
     public string ClassificationName { get; }

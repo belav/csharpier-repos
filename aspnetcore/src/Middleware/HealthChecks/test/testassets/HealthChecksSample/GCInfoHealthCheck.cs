@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace HealthChecksSample;
 
+
 // This is an example of a custom health check that implements IHealthCheck.
 //
 // This example also shows a technique for authoring a health check that needs to be registered

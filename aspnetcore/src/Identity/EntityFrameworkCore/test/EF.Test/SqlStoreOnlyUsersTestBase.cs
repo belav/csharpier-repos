@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
+
 public abstract class SqlStoreOnlyUsersTestBase<TUser, TKey>
     : UserManagerSpecificationTestBase<TUser, TKey>,
         IClassFixture<ScratchDatabaseFixture>

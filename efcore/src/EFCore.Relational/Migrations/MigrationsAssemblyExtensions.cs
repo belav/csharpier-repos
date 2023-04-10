@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     Extension methods for <see cref="IMigrationsAssembly" />.
 /// </summary>

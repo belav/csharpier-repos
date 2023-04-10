@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.LanguageServer;
 
 namespace Microsoft.CodeAnalysis.EditorFeatures.Cocoa.Lsp;
 
+
 /// <summary>
 /// Implementation of the workspace registration service exported to be included in the VSMac composition.
 /// </summary>

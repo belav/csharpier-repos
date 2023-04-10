@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     Signals that custom LINQ operator parameter should not be parameterized during query compilation.
 /// </summary>

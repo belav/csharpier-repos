@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Extension methods for the HSTS middleware.
 /// </summary>

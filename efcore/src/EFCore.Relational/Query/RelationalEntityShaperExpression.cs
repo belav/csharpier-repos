@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         An expression that represents creation of an entity instance for a relational provider in

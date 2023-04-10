@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 internal class ComponentInjectIntermediateNode : ExtensionIntermediateNode
 {
     private static readonly IList<string> _injectedPropertyModifiers = new[]

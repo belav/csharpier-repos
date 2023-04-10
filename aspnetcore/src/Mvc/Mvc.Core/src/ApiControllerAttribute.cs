@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// Indicates that a type and all derived types are used to serve HTTP API responses.
 /// <para>

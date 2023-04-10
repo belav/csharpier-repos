@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.HeaderPropagation;
 
+
 /// <summary>
 /// Define the configuration of an header for the <see cref="HeaderPropagationMessageHandler"/>.
 /// </summary>

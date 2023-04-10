@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
+
 public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
 {
     private static void DetectMisplacedLambdaAttribute(

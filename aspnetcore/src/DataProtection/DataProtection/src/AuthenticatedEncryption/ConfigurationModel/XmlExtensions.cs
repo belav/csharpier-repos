@@ -6,6 +6,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
+
 /// <summary>
 /// Data protection extensions for <see cref="XElement"/>.
 /// </summary>

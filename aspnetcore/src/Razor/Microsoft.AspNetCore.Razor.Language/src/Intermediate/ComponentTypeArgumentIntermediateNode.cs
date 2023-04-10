@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public sealed class ComponentTypeArgumentIntermediateNode : IntermediateNode
 {
     public ComponentTypeArgumentIntermediateNode(TagHelperPropertyIntermediateNode propertyNode)

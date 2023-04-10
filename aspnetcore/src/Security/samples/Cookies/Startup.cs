@@ -16,6 +16,7 @@ using Microsoft.Extensions.Options;
 
 namespace AuthSamples.Cookies;
 
+
 public class Startup
 {
     public const string CookieScheme = "YourSchemeName";

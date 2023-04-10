@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
+
 public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
 {
     [Fact]

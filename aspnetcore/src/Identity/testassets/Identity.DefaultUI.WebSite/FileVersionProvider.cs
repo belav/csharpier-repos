@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Identity.DefaultUI.WebSite;
 
+
 /// <summary>
 /// Provides version hash for a specified file.
 /// </summary>

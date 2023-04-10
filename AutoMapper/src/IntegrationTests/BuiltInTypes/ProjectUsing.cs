@@ -9,6 +9,7 @@ using Xunit;
 
 namespace AutoMapper.IntegrationTests.BuiltInTypes;
 
+
 public class ProjectUsingWithNullables : AutoMapperSpecBase, IAsyncLifetime
 {
     public class MyProfile : Profile

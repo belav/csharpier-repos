@@ -3,6 +3,7 @@
 
 namespace Nerdbank.Streams;
 
+
 internal static class Requires
 {
     internal static void NotNull(object arg, string paramName)

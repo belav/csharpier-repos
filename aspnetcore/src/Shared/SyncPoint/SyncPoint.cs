@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 public class SyncPoint
 {
     private readonly TaskCompletionSource _atSyncPoint = new TaskCompletionSource(

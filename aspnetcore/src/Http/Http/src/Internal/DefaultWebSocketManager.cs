@@ -7,6 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 internal sealed class DefaultWebSocketManager : WebSocketManager
 {
     // Lambdas hoisted to static readonly fields to improve inlining https://github.com/dotnet/roslyn/issues/13624

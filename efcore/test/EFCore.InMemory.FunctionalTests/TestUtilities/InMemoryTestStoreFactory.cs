@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class InMemoryTestStoreFactory : ITestStoreFactory
 {
     public static InMemoryTestStoreFactory Instance { get; } = new();

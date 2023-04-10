@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
+
 internal class TestFileLoggerProvider : FileLoggerProvider
 {
     internal ManualIntervalControl IntervalControl { get; } = new ManualIntervalControl();

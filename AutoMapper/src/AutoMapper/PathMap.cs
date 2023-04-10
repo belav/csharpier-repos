@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper;
 
+
 [DebuggerDisplay("{DestinationExpression}")]
 [EditorBrowsable(EditorBrowsableState.Never)]
 public class PathMap : MemberMap

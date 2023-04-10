@@ -6,6 +6,7 @@ using Xunit.Abstractions;
 
 namespace Wasm.Build.Tests;
 
+
 public class RunCommand : DotNetCommand
 {
     public RunCommand(BuildEnvironment buildEnv, ITestOutputHelper _testOutput, string label = "")

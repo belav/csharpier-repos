@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 internal sealed class StringLoggerFactory : ILoggerFactory
 {
     private readonly StringBuilder _log = new StringBuilder();

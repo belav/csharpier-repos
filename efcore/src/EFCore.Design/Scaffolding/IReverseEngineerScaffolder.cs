@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
+
 /// <summary>
 ///     Used to scaffold a model from a database schema.
 /// </summary>

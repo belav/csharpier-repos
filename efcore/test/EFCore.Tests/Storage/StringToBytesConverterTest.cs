@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class StringToBytesConverterTest
 {
     private static readonly StringToBytesConverter _stringToUtf8Converter = new(Encoding.UTF8);

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Class used by <see cref="IHubProtocol"/>s to get the <see cref="Type"/>(s) expected by the hub message being deserialized.
 /// </summary>

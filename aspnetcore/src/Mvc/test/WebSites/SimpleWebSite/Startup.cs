@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace SimpleWebSite;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

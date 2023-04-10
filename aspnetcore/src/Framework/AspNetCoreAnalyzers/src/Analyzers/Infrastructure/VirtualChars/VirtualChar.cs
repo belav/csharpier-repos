@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
+
 /// <summary>
 /// <see cref="VirtualChar"/> provides a uniform view of a language's string token characters regardless if they
 /// were written raw in source, or are the production of a language escape sequence.  For example, in C#, in a

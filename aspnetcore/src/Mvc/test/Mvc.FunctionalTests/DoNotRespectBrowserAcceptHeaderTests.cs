@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 /// <summary>
 /// These tests are for scenarios when <see cref="MvcOptions.RespectBrowserAcceptHeader"/> is <c>False</c>, which is the default.
 /// </summary>

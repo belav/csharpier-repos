@@ -9,6 +9,7 @@ using System.IO;
 
 namespace Microsoft.Extensions.Internal;
 
+
 internal static class ProcessExtensions
 {
     private static readonly TimeSpan _defaultTimeout = TimeSpan.FromSeconds(30);

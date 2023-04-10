@@ -7,6 +7,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests;
 
+
 public class ContentEncodingNegotiatorTests
 {
     [Fact]

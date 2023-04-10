@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace BasicTestApp.AuthTest;
 
+
 // This is intended to be similar to the authentication stateprovider included by default
 // with the client-side Blazor "Hosted in ASP.NET Core" template
 public class ServerAuthenticationStateProvider : AuthenticationStateProvider

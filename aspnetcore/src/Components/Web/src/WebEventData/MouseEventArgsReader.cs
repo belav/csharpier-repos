@@ -7,6 +7,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 internal static class MouseEventArgsReader
 {
     private static readonly JsonEncodedText Detail = JsonEncodedText.Encode("detail");

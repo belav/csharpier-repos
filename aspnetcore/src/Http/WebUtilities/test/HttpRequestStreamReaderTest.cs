@@ -7,6 +7,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
+
 public class HttpRequestStreamReaderTest
 {
     private static readonly char[] CharData = new char[]

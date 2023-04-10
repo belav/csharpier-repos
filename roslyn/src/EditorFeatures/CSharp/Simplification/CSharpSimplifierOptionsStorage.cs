@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification;
 
+
 internal static class CSharpSimplifierOptionsStorage
 {
     [ExportLanguageService(typeof(ISimplifierOptionsStorage), LanguageNames.CSharp), Shared]

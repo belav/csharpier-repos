@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 public class HtmlAttributeTest : ParserTestBase
 {
     [Fact]

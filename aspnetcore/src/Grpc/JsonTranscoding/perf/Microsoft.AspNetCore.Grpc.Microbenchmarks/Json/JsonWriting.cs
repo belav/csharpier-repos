@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
 namespace Microsoft.AspNetCore.Grpc.Microbenchmarks.Json;
 
+
 public class JsonWriting
 {
     private HelloRequest _request = default!;

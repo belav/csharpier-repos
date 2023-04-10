@@ -21,6 +21,7 @@ using ComponentsWebAssembly_CSharp.Server.Models;
 
 namespace ComponentsWebAssembly_CSharp;
 
+
 public class Program
 {
     public static void Main(string[] args)

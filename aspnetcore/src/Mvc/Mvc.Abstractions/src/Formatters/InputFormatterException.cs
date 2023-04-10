@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 /// <summary>
 /// Exception thrown by <see cref="IInputFormatter"/> when the input is not in an expected format.
 /// </summary>

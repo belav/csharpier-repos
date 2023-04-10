@@ -3,6 +3,7 @@ using AutoMapper.Configuration.Conventions;
 
 namespace AutoMapper;
 
+
 public interface IProfileConfiguration
 {
     bool? FieldMappingEnabled { get; }

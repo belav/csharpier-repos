@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 internal readonly struct MemberExpressionCacheKey
 {
     public MemberExpressionCacheKey(Type modelType, MemberExpression memberExpression)

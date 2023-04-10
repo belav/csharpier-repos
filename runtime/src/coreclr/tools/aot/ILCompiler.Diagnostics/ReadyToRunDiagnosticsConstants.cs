@@ -3,6 +3,7 @@
 
 namespace Internal.ReadyToRunDiagnosticsConstants;
 
+
 public enum PerfMapPseudoRVAToken : uint
 {
     OutputSignature = 0xFFFFFFFF,

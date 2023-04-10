@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 internal static partial class MvcCoreLoggerExtensions
 {
     public const string ActionFilter = "Action Filter";

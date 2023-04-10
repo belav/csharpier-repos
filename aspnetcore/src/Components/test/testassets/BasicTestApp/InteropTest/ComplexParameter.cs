@@ -3,6 +3,7 @@
 
 namespace BasicTestApp.InteropTest;
 
+
 public class ComplexParameter
 {
     public int Id { get; set; }

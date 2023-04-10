@@ -6,6 +6,7 @@ using Microsoft.Extensions.HotReload;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload;
 
+
 public class WebAssemblyHotReloadTest
 {
     [Fact]

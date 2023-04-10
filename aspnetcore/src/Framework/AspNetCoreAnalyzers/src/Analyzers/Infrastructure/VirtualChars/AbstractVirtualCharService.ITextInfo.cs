@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
+
 internal abstract partial class AbstractVirtualCharService
 {
     /// <summary>

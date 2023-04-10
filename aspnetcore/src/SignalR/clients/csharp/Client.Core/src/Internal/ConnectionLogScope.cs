@@ -8,6 +8,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Internal;
 
+
 internal sealed class ConnectionLogScope : IReadOnlyList<KeyValuePair<string, object?>>
 {
     // Name chosen so as not to collide with Kestrel's "ConnectionId"

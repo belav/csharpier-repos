@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace SecurityWebSite;
 
+
 public class StartupWithGlobalAuthFilter
 {
     public void ConfigureServices(IServiceCollection services)

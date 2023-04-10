@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class RazorProjectEngineTestBase
 {
     protected abstract RazorLanguageVersion Version { get; }

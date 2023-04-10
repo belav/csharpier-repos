@@ -7,6 +7,7 @@ using Microsoft.Extensions.Caching.Memory;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class DbContextOptionsTest
 {
     [ConditionalFact]

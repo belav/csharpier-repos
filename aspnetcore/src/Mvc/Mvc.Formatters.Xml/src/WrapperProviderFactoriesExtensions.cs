@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 /// <summary>
 /// Extension methods for <see cref="IWrapperProviderFactory"/>.
 /// </summary>

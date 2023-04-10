@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.Extensions.Logging;
 
+
 internal static partial class LoggingExtensions
 {
     [LoggerMessage(

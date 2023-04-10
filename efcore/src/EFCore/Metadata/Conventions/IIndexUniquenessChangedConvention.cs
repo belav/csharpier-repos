@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     Represents an operation that should be performed when the uniqueness for an index is changed.
 /// </summary>

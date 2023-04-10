@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 internal class NavigationLockInterop
 {
     private const string Prefix = "Blazor._internal.NavigationLock.";

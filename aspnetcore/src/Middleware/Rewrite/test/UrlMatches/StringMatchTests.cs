@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Rewrite.UrlMatches;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlMatches;
 
+
 public class StringMatchTests
 {
     [Theory]

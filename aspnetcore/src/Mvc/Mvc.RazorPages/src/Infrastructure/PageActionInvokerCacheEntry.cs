@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 internal sealed class PageActionInvokerCacheEntry
 {
     public PageActionInvokerCacheEntry(

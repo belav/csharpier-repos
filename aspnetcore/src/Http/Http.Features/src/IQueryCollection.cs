@@ -5,6 +5,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 ///     Represents the HttpRequest query string collection
 /// </summary>

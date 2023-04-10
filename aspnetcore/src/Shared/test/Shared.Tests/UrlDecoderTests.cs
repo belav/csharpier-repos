@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Shared.Tests;
 
+
 public class UrlDecoderTests
 {
     [Theory]

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Negotiate.Server;
 
+
 public class Program
 {
     public static async Task Main(string[] args)

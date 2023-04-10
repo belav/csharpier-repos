@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.DataProtection.SP800_108;
 
 namespace Microsoft.AspNetCore.DataProtection.Managed;
 
+
 // An encryptor which does Encrypt(CBC) + HMAC using SymmetricAlgorithm and HashAlgorithm.
 // The payloads produced by this encryptor should be compatible with the payloads
 // produced by the CNG-based Encrypt(CBC) + HMAC authenticated encryptor.

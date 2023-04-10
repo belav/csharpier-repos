@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
+
 public class AppendOrderByIdentityExpressionMutator : ExpressionMutator
 {
     public AppendOrderByIdentityExpressionMutator(DbContext context)

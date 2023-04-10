@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 /// <summary>
 /// Specifies events which the <see cref="WsFederationHandler"></see> invokes to enable developer control over the authentication process. />
 /// </summary>

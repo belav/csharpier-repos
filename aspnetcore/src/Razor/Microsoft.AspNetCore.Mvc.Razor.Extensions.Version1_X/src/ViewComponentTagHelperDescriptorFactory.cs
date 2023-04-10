@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
+
 internal class ViewComponentTagHelperDescriptorFactory
 {
     private readonly INamedTypeSymbol _viewComponentAttributeSymbol;

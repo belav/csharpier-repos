@@ -8,6 +8,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class TempDataInCookiesUsingCookieConsentTest
     : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithCookieTempDataProviderAndCookieConsent>>
 {

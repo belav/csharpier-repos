@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// A base class that creates a service provider scope.
 /// </summary>

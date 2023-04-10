@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.Bug;
 
+
 public class One
 {
     public IEnumerable<string> Stuff { get; set; }

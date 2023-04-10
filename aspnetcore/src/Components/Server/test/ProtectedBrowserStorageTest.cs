@@ -12,6 +12,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
+
 public class ProtectedBrowserStorageTest
 {
     [Fact]

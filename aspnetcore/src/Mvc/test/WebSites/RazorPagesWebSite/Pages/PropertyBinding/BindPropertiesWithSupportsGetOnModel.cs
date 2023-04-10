@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
+
 [BindProperties(SupportsGet = true)]
 public class BindPropertiesWithSupportsGetOnModel : PageModel
 {

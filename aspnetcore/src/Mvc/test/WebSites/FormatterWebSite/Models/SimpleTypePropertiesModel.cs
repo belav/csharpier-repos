@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FormatterWebSite;
 
+
 public class SimpleTypePropertiesModel
 {
     [Range(2, 8)]

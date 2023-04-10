@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// Information for producing client errors. This type is used to configure client errors
 /// produced by consumers of <see cref="ApiBehaviorOptions.ClientErrorMapping"/>.

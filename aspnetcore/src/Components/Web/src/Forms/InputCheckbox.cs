@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
+
 /* This is exactly equivalent to a .razor file containing:
  *
  *    @inherits InputBase<bool>

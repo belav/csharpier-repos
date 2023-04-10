@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SecurityWebSite.Controllers;
 
+
 [Authorize] // requires any authenticated user (aka the application cookie typically)
 public class AuthorizedController : ControllerBase
 {

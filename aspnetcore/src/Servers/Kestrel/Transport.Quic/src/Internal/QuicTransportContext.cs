@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 
+
 internal sealed class QuicTransportContext
 {
     public QuicTransportContext(ILogger log, QuicTransportOptions options)

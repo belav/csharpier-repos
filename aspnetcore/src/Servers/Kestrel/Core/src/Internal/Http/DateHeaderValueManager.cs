@@ -7,6 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
+
 /// <summary>
 /// Manages the generation of the date header value.
 /// </summary>

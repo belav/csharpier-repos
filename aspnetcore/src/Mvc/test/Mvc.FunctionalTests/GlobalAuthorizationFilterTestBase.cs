@@ -6,6 +6,7 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public abstract class GlobalAuthorizationFilterTestBase
     : IClassFixture<MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilter>>
 {

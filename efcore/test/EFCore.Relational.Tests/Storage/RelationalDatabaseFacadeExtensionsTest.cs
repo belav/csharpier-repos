@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class RelationalDatabaseFacadeExtensionsTest
 {
     [ConditionalTheory]

@@ -13,6 +13,7 @@ using Microsoft.OData.Edm;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class ODataQueryTestFixtureInitializer
 {
     public static (

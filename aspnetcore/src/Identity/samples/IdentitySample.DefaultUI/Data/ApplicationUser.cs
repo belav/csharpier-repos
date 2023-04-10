@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace IdentitySample.DefaultUI.Data;
 
+
 public class ApplicationUser : IdentityUser
 {
     [ProtectedPersonalData]

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
+
 /// <summary>
 ///     <para>
 ///         An expression that represents projecting a scalar SQL value from a subquery.

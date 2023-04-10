@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Combines <see cref="ILogger" /> and <see cref="DiagnosticSource" />
 ///     for use by all EF Core logging so that events can be sent to both <see cref="ILogger" />

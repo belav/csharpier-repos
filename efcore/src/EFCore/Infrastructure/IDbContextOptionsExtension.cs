@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     <para>
 ///         Interface for extensions that are stored in <see cref="DbContextOptions.Extensions" />.

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 public class RazorRuntimeCompilationMvcCoreBuilderExtensionsTest
 {
     [Fact]

@@ -8,6 +8,7 @@ using Microsoft.DotNet.Openapi.Tools;
 
 namespace Microsoft.DotNet.OpenApi;
 
+
 public class Program
 {
     public static int Main(string[] args)

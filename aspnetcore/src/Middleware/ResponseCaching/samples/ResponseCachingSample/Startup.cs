@@ -5,6 +5,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace ResponseCachingSample;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
+
 /// <summary>
 /// Represents an append blob, a type of blob where blocks of data are always committed to the end of the blob.
 /// </summary>

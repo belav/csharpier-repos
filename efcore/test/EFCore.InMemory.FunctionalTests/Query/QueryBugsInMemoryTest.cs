@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
 {
     #region Bug9849

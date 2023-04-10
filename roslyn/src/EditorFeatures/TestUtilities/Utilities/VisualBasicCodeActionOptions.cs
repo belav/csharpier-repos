@@ -19,6 +19,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Simplification;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities;
 
+
 internal static class VisualBasicCodeActionOptions
 {
     public static CodeActionOptions Default =

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     <para>
 ///         A parameter in an <see cref="IRelationalCommand" />. Note that this interface just represents a

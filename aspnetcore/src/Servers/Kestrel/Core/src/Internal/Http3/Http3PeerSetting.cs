@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
+
 internal readonly struct Http3PeerSetting
 {
     public Http3PeerSetting(Http3SettingType parameter, uint value)

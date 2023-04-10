@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests;
 
+
 public class Nullable_conversion_operator : NonValidatingSpecBase
 {
     public class QueryableValue<T>

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
+
 public class HtmlHelperPasswordTest
 {
     public static TheoryData<object> HtmlAttributeData

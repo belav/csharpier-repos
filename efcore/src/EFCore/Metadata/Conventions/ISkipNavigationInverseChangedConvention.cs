@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     Represents an operation that should be performed when a skip navigation inverse is changed.
 /// </summary>

@@ -18,6 +18,7 @@ using STOP_COMPLETE_DATA = Microsoft.Quic.QUIC_LISTENER_EVENT._Anonymous_e__Unio
 
 namespace System.Net.Quic;
 
+
 /// <summary>
 /// Represents a listener that listens for incoming QUIC connections, see <see href="https://www.rfc-editor.org/rfc/rfc9000.html#name-connections">RFC 9000: Connections</see> for more details.
 /// <see cref="QuicListener" /> allows accepting multiple <see cref="QuicConnection" />.

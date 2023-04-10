@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Localization;
 
+
 /// <summary>
 /// Determines the culture information for a request via the value of a cookie.
 /// </summary>

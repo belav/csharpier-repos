@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 internal static class SigningKeysLoader
 {
     public static X509Certificate2 LoadFromFile(

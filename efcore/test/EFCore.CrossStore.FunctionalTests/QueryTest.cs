@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class QueryTest
 {
     public static IEnumerable<object[]> IsAsyncData = new[]

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <inheritdoc />
 public partial class RelationalShapedQueryCompilingExpressionVisitor
     : ShapedQueryCompilingExpressionVisitor

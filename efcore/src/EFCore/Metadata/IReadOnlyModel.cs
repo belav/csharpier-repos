@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Metadata about the shape of entities, the relationships between them, and how they map to
 ///     the database. A model is typically created by overriding the

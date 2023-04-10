@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.DevServer.Server;
 
+
 // This project is a CLI tool, so we don't expect anyone to reference it
 // as a runtime library. As such we consider it reasonable to mark the
 // following method as public purely so the E2E tests project can invoke it.

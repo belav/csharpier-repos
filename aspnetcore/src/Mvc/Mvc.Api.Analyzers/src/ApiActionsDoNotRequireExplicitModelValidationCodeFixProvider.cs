@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
+
 [ExportCodeFixProvider(LanguageNames.CSharp)]
 [Shared]
 public class ApiActionsDoNotRequireExplicitModelValidationCheckCodeFixProvider : CodeFixProvider

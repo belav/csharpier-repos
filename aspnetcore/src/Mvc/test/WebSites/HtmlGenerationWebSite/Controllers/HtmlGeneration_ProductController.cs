@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HtmlGenerationWebSite.Controllers;
 
+
 public class HtmlGeneration_ProductController : Controller
 {
     public IActionResult Index()

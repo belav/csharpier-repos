@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class SystemTextJsonInputFormatterTest
     : JsonInputFormatterTestBase<FormatterWebSite.StartupWithJsonFormatter>
 {

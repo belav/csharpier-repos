@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
+
 // The size of the enum is defined by the protocol. Do not change it. If you need more than 255 items,
 // add an additional enum.
 internal enum GroupAction : byte

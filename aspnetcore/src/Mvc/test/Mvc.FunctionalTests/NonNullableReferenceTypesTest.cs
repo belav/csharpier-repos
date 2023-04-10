@@ -7,6 +7,7 @@ using AngleSharp.Parser.Html;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class NonNullableReferenceTypesTest
     : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {

@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 /// <summary>
 /// A user account.
 /// </summary>

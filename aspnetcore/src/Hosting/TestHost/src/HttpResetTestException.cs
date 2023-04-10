@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.TestHost;
 
+
 /// <summary>
 /// Used to surface to the test client that the application invoked <see cref="IHttpResetFeature.Reset"/>
 /// </summary>

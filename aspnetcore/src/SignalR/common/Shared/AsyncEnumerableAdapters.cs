@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 // True-internal because this is a weird and tricky class to use :)
 internal static class AsyncEnumerableAdapters
 {

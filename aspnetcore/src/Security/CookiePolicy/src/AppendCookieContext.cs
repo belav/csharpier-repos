@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.CookiePolicy;
 
+
 /// <summary>
 /// Context for <see cref="CookiePolicyOptions.OnAppendCookie"/> that allows changes to the cookie prior to being appended.
 /// </summary>

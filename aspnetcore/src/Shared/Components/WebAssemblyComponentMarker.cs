@@ -7,6 +7,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 internal struct WebAssemblyComponentMarker
 {
     public const string ClientMarkerType = "webassembly";

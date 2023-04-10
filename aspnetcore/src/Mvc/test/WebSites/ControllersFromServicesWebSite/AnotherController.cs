@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControllersFromServicesWebSite;
 
+
 [Route("/[controller]")]
 public class AnotherController : Controller
 {

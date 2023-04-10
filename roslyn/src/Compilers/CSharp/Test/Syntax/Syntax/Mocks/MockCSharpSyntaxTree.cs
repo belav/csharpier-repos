@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests;
 
+
 internal class MockCSharpSyntaxTree : CSharpSyntaxTree
 {
     private readonly SourceText _sourceText;

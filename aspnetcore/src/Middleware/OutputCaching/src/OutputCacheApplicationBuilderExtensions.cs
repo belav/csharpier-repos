@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.OutputCaching;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Extension methods for adding the <see cref="OutputCacheMiddleware"/> to an application.
 /// </summary>

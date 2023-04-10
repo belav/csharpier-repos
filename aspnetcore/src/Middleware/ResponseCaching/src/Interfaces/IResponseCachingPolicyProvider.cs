@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
+
 internal interface IResponseCachingPolicyProvider
 {
     /// <summary>

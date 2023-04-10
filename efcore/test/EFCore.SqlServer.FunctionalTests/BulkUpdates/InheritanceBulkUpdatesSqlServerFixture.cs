@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
+
 public class InheritanceBulkUpdatesSqlServerFixture : InheritanceBulkUpdatesRelationalFixture
 {
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;

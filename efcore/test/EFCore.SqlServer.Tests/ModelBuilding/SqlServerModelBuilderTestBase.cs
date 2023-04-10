@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
+
 public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
 {
     public abstract class SqlServerNonRelationship : RelationalNonRelationshipTestBase

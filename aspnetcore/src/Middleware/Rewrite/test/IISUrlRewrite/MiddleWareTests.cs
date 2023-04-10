@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite;
 
+
 public class MiddlewareTests
 {
     [Fact]

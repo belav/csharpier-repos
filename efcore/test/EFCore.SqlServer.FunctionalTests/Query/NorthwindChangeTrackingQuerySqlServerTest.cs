@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class NorthwindChangeTrackingQuerySqlServerTest
     : NorthwindChangeTrackingQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {

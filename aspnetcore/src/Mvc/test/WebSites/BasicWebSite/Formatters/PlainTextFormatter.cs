@@ -7,6 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace BasicWebSite.Formatters;
 
+
 public class PlainTextFormatter : TextOutputFormatter
 {
     public PlainTextFormatter()

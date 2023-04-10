@@ -16,6 +16,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
+
 /// <summary>
 /// A <see cref="CodeAction"/> that adds one or more <c>ProducesResponseType</c> attributes on the action.
 /// 1) It get status codes from ProducesResponseType, ProducesDefaultResponseType, and conventions applied to the action to get the declared metadata.

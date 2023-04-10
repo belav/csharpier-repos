@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorWebSite;
 
+
 public class FlushPoint : Controller
 {
     public IActionResult PageWithLayout()

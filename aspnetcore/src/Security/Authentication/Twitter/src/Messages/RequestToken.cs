@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
+
 /// <summary>
 /// The Twitter request token obtained from the request token endpoint.
 /// </summary>

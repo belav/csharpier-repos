@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting.Tests.Fakes;
 
+
 internal class GenericWebHost : IWebHost
 {
     private readonly IHost _host;

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 /// <summary>
 /// Represents a <see cref="ViewDataDictionary"/> for a specific model type.
 /// </summary>

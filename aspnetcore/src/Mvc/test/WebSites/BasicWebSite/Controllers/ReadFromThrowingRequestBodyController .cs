@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
+
 public class ReadFromThrowingRequestBodyController : Controller
 {
     [ValidateAntiForgeryToken]

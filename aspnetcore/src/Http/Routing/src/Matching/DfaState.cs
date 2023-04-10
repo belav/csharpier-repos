@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 [DebuggerDisplay("{DebuggerToString(),nq}")]
 internal readonly struct DfaState
 {

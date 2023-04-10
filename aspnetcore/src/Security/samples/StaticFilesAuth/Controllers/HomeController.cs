@@ -11,6 +11,7 @@ using StaticFilesAuth.Models;
 
 namespace StaticFilesAuth.Controllers;
 
+
 public class HomeController : Controller
 {
     public IActionResult Index()

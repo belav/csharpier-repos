@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 // ReSharper disable UnusedMember.Local
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 public class ClrCollectionAccessorFactoryTest
 {
     [ConditionalFact]

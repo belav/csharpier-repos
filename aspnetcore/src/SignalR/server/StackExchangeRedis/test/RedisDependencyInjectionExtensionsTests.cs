@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
+
 public class RedisDependencyInjectionExtensionsTests
 {
     // No need to go too deep with these tests, or we're just testing StackExchange.Redis again :). It's the one doing the parsing.

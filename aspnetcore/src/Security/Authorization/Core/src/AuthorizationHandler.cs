@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization;
 
+
 /// <summary>
 /// Base class for authorization handlers that need to be called for a specific requirement type.
 /// </summary>

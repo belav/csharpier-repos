@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that ensures that <see cref="IReadOnlyDbFunction.Schema" /> is populated for database functions which
 ///     have <see cref="IReadOnlyDbFunction.IsBuiltIn" /> flag set to <see langword="false" />.

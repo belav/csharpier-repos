@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
+
 public class Thing : IThing
 {
     public string Hello()

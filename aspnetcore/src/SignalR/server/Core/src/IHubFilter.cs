@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// The filter abstraction for hub method invocations.
 /// </summary>

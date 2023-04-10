@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 public class DataProtectionCommonExtensionsTests
 {
     [Theory]

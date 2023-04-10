@@ -3,6 +3,7 @@
 
 namespace ErrorPageMiddlewareWebSite;
 
+
 public class Startup
 {
     // Set up application services

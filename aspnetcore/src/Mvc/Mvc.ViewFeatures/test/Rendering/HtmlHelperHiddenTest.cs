@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
+
 public class HtmlHelperHiddenTest
 {
     public static TheoryData<object, string> HiddenWithAttributesData

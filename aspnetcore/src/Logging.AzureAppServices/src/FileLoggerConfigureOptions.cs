@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
+
 internal sealed class FileLoggerConfigureOptions
     : BatchLoggerConfigureOptions,
         IConfigureOptions<AzureFileLoggerOptions>

@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
+
 /// <summary>
 /// Helper service that takes the raw text of a string token and produces the individual
 /// characters that raw string token represents (i.e. with escapes collapsed).  The difference

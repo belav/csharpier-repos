@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 internal sealed class BuildServiceProviderAnalyzer
 {
     private readonly StartupAnalysis _context;

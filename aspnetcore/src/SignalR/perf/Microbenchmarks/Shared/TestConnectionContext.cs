@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared;
 
+
 public class TestConnectionContext : ConnectionContext
 {
     public override string ConnectionId { get; set; }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class TestODataController : ODataController
 {
     [NonAction]

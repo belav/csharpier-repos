@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
+
 public class MaxRequestLineSizeTests : LoggedTest
 {
     [Theory]

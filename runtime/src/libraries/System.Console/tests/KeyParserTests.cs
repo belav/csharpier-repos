@@ -9,6 +9,7 @@ using Xunit;
 
 namespace System.Tests;
 
+
 public class KeyParserTests
 {
     private static readonly TerminalData[] Terminals =

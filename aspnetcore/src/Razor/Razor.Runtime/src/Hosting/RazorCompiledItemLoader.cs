@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
+
 /// <summary>
 /// A loader implementation that can load <see cref="RazorCompiledItem"/> objects from an
 /// <see cref="Assembly"/> using reflection.

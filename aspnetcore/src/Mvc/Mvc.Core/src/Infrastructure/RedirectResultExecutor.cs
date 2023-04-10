@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// A <see cref="IActionResultExecutor{VirtualFileResult}"/> for <see cref="RedirectResult"/>.
 /// </summary>

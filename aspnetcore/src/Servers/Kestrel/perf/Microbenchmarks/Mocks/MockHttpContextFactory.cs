@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class MockHttpContextFactory : IHttpContextFactory
 {
     private readonly object _lock = new object();

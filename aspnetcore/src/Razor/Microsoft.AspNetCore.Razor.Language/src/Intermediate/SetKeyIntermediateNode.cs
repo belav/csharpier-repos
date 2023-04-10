@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public sealed class SetKeyIntermediateNode : IntermediateNode
 {
     public SetKeyIntermediateNode(IntermediateToken keyValueToken)

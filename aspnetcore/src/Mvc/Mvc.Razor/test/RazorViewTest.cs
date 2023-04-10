@@ -16,6 +16,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 public class RazorViewTest
 {
     private const string LayoutPath = "~/Shared/_Layout.cshtml";

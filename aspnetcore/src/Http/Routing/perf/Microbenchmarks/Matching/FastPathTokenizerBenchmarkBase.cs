@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 public abstract class FastPathTokenizerBenchmarkBase
 {
     internal unsafe void NaiveBaseline(string path, PathSegment* segments, int maxCount)

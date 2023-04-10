@@ -1,4 +1,5 @@
 namespace AutoMapper;
+
 using Features;
 using Internal.Mappers;
 using QueryableExtensions.Impl;

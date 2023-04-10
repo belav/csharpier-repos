@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Identity.ExternalClaims.Data.Migrations;
 
+
 [DbContext(typeof(ApplicationDbContext))]
 partial class ApplicationDbContextModelSnapshot : ModelSnapshot
 {

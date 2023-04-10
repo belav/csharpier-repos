@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
+
 /// <summary>
 /// Automatic (on-type) formatting options.
 /// </summary>

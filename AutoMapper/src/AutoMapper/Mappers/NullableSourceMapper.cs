@@ -1,5 +1,6 @@
 namespace AutoMapper.Internal.Mappers;
 
+
 public class NullableSourceMapper : IObjectMapper
 {
     public bool IsMatch(TypePair context) => context.SourceType.IsNullableType();

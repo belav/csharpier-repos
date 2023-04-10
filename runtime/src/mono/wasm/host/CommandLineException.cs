@@ -7,6 +7,7 @@ using System;
 
 namespace Microsoft.WebAssembly.AppHost;
 
+
 public class CommandLineException : Exception
 {
     public CommandLineException() { }

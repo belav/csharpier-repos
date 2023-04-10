@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
+
 internal sealed class ConfigureClientScopes : IPostConfigureOptions<ApiAuthorizationOptions>
 {
     private const char DefaultClientListSeparator = ' ';

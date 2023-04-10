@@ -12,6 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis;
 
+
 public readonly struct GeneratorAttributeSyntaxContext
 {
     /// <summary>

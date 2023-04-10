@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 internal sealed class ConflictObjectResult : ObjectResult
 {
     public ConflictObjectResult(object? error)

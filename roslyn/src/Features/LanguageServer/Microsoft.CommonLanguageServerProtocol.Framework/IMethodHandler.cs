@@ -4,6 +4,7 @@
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
+
 /// <summary>
 /// Top level type for LSP request handler.
 /// </summary>

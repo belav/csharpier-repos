@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 internal static class ViewPath
 {
     public static string NormalizePath(string path)

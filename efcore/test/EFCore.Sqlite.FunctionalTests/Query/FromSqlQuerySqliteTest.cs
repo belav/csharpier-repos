@@ -5,6 +5,7 @@ using Microsoft.Data.Sqlite;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class FromSqlQuerySqliteTest
     : FromSqlQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
 {

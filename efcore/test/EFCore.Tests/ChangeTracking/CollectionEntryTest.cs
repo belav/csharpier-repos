@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 public class CollectionEntryTest
 {
     [ConditionalFact]

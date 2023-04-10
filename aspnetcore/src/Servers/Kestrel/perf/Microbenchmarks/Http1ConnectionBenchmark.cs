@@ -16,6 +16,7 @@ using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMe
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class Http1ConnectionBenchmark
 {
     private readonly HttpParser<Adapter> _parser = new HttpParser<Adapter>();

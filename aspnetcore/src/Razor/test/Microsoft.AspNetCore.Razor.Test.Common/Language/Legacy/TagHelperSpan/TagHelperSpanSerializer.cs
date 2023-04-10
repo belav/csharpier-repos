@@ -6,6 +6,7 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class TagHelperSpanSerializer
 {
     internal static string Serialize(RazorSyntaxTree syntaxTree)

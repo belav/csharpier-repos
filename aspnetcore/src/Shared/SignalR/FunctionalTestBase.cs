@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class FunctionalTestBase : VerifiableLoggedTest
 {
     private readonly Func<WriteContext, bool> _globalExpectedErrorsFilter;

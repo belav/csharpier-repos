@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 internal sealed class AntiforgeryOptionsSetup : IConfigureOptions<AntiforgeryOptions>
 {
     private readonly DataProtectionOptions _dataProtectionOptions;

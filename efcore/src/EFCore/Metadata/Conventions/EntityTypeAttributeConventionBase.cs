@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A base type for conventions that perform configuration based on an attribute specified on an entity type.
 /// </summary>

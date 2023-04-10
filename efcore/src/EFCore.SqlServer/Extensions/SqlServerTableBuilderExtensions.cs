@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     SQL Server specific extension methods for <see cref="TableBuilder" />.
 /// </summary>

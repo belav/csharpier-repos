@@ -6,6 +6,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
+
 /// <summary>
 /// Allows subscribing to events raised during cookie authentication.
 /// </summary>

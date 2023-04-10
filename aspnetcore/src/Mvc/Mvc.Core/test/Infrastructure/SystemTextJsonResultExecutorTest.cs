@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 public class SystemTextJsonResultExecutorTest : JsonResultExecutorTestBase
 {
     protected override IActionResultExecutor<JsonResult> CreateExecutor(

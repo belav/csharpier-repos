@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
+
 /// <summary>
 /// When applied, the cached content will be different for every provided value.
 /// </summary>

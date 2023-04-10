@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Provides an abstraction for the storage and management of user email addresses.
 /// </summary>

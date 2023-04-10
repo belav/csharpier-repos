@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.Extensions.Logging.Testing;
 
+
 public class TestSink : ITestSink
 {
     private ConcurrentQueue<BeginScopeContext> _scopes;

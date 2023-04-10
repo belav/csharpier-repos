@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Benchmarks;
 
+
 public class StartupUsingRouter
 {
     private static readonly byte[] _helloWorldPayload = Encoding.UTF8.GetBytes("Hello, World!");

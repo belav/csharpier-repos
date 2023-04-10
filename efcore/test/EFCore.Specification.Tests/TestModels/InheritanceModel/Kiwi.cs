@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
+
 public class Kiwi : Bird
 {
     public Island FoundOn { get; set; }

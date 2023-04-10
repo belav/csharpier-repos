@@ -5,6 +5,7 @@ using System.Collections;
 
 namespace Microsoft.AspNetCore.Mvc.Diagnostics;
 
+
 /// <summary>
 /// A base class that for an event.
 /// </summary>

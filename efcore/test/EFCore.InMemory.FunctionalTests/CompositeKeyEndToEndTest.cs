@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class CompositeKeyEndToEndTest
 {
     [ConditionalFact]

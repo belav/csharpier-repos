@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class ManyToManyQuerySqliteTest
     : ManyToManyQueryRelationalTestBase<ManyToManyQuerySqliteFixture>
 {

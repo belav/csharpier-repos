@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+
 /// <summary>
 /// An <see cref="IResult"/> that on execution will write an object to the response
 /// with status code Accepted (202) and Location header.

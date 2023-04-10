@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 /// <summary>
 /// An <see cref="IXmlEncryptor"/> that encrypts XML by using Windows DPAPI.
 /// </summary>

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 public class SqliteHistoryRepositoryTest
 {
     private static string EOL => Environment.NewLine;

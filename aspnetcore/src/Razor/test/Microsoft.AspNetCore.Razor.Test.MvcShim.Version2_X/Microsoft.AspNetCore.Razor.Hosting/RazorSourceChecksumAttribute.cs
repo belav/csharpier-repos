@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
+
 /// <summary>
 /// Specifies the checksum of a source file that contributed to a compiled item.
 /// </summary>

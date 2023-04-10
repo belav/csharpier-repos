@@ -14,6 +14,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// The default implementation of <see cref="OutputFormatterSelector"/>.
 /// </summary>

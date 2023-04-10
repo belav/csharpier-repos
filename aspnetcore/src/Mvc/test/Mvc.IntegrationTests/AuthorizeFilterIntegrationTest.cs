@@ -19,6 +19,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 public class AuthorizeFilterIntegrationTest
 {
     // This is a test for security, because we can't assume that any IAuthorizationPolicyProvider other than

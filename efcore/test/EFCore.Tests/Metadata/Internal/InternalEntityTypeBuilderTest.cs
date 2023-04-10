@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 public class InternalEntityTypeBuilderTest
 {
     [ConditionalFact]

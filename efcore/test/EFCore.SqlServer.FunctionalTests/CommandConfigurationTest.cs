@@ -6,6 +6,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class CommandConfigurationTest
     : IClassFixture<CommandConfigurationTest.CommandConfigurationFixture>
 {

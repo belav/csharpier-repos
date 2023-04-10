@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests;
 
+
 public static class ResettableBooleanCompletionSourceTests
 {
     private static readonly StackPolicy _testQueue = TestUtils.CreateStackPolicy(8);

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Connections;
 
+
 /// <summary>
 /// Enumerates the <see cref="FileHandleEndPoint"/> types.
 /// </summary>

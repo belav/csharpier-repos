@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
+
 // This class tests both the properties and the output of hash algorithms.
 // It only tests the properties of the encryption algorithms.
 // Output of the encryption and key derivatoin functions are tested by other projects.

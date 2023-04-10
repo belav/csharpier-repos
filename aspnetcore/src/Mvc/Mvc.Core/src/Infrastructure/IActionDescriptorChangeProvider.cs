@@ -8,6 +8,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// Provides a way to signal invalidation of the cached collection of <see cref="Abstractions.ActionDescriptor" /> from an
 /// <see cref="IActionDescriptorCollectionProvider"/>.

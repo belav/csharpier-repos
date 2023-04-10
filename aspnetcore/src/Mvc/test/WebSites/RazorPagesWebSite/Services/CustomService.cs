@@ -3,6 +3,7 @@
 
 namespace CustomNamespace;
 
+
 public static class CustomService
 {
     public static string Value => nameof(CustomService);

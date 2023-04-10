@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// A filter that prevents execution of the StatusCodePages middleware.
 /// </summary>

@@ -19,6 +19,7 @@ using KestrelHttpVersion = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Htt
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests;
 
+
 public class SocketTransportTests : LoggedTestBase
 {
     [Fact]

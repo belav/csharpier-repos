@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 /// <summary>
 ///     <para>
 ///         A base class for the <see cref="IUpdateSqlGenerator" /> service that is typically inherited from by database providers.

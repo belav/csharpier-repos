@@ -10,6 +10,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 /// <summary>
 /// Helpful extension methods for data protection APIs.
 /// </summary>

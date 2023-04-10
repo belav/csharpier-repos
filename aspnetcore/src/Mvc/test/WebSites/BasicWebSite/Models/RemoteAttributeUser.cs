@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Models;
 
+
 public class RemoteAttributeUser
 {
     public int Id { get; set; }

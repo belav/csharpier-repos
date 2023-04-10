@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 public class ProblemDetailsClientErrorFactoryTest
 {
     [Fact]

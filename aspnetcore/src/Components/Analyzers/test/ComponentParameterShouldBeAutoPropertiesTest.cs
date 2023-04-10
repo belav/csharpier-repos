@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Components.Analyzers.Tests;
 
+
 public class ComponentParameterShouldBeAutoPropertiesTest : DiagnosticVerifier
 {
     [Fact]

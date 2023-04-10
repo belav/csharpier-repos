@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace PhotinoTestApp;
 
+
 class Program
 {
     [STAThread]

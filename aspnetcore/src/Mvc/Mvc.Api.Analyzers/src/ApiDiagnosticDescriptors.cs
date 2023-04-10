@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
+
 [System.Diagnostics.CodeAnalysis.SuppressMessage(
     "MicrosoftCodeAnalysisReleaseTracking",
     "RS2008:Enable analyzer release tracking"

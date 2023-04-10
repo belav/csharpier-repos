@@ -10,6 +10,7 @@ using System.ComponentModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class DbSetTest
 {
     [ConditionalFact]

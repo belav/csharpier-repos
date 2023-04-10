@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 internal class TestSecurityTokenValidator : ISecurityTokenValidator
 {
     public bool CanValidateToken => true;

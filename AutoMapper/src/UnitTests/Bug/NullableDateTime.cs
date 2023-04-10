@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class NullableDateTimeMapFromArray : AutoMapperSpecBase
 {
     public class Source

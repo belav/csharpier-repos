@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// Defines an interface for a service which can execute a particular kind of <see cref="IActionResult"/> by
 /// manipulating the <see cref="HttpResponse"/>.

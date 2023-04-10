@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
+
 /// <summary>
 /// Exposes a set of types from an <see cref="ApplicationPart"/>.
 /// </summary>

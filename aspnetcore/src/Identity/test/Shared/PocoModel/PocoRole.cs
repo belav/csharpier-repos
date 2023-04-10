@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 /// <summary>
 ///     Represents a Role entity
 /// </summary>

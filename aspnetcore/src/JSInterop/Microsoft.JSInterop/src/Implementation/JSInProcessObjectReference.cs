@@ -6,6 +6,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop.Implementation;
 
+
 /// <summary>
 /// Implements functionality for <see cref="IJSInProcessObjectReference"/>.
 /// </summary>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 internal sealed class DynamicPageEndpointSelector : IDisposable
 {
     private readonly EndpointDataSource _dataSource;

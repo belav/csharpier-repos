@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure.EmbeddedSyntax;
 
+
 internal static class EmbeddedSyntaxHelpers
 {
     public static TextSpan GetSpan<TSyntaxKind>(

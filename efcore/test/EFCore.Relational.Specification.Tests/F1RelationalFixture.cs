@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class F1RelationalFixture<TRowVersion> : F1FixtureBase<TRowVersion>
 {
     public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;

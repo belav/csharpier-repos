@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
+
 /// <summary>
 /// An interface for handlers of methods which do not return a response and receive no parameters.
 /// </summary>

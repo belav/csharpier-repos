@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.DataProtection.Repositories;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
+
 /// <summary>
 /// The basic interface for implementing a key escrow sink.
 /// </summary>

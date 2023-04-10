@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 /// <summary>
 /// Represents options to pass down to configure the oidc-client.js library used when using a standard OpenID Connect (OIDC) flow.
 /// </summary>

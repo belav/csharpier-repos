@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     A struct representing facets of <see cref="DbSet{TEntity}" /> property defined on DbContext derived type.
 /// </summary>

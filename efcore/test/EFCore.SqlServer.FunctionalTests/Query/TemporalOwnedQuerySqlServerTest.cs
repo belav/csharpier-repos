@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 [SqlServerCondition(SqlServerCondition.SupportsTemporalTablesCascadeDelete)]
 public class TemporalOwnedQuerySqlServerTest
     : OwnedQueryRelationalTestBase<TemporalOwnedQuerySqlServerTest.TemporalOwnedQuerySqlServerFixture>

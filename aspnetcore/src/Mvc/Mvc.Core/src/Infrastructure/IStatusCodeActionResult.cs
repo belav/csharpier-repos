@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// Represents an <see cref="IActionResult"/> that when executed will
 /// produce an HTTP response with the specified <see cref="StatusCode"/>.

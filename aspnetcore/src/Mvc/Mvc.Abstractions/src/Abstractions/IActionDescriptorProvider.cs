@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Abstractions;
 
+
 /// <summary>
 /// Defines a contract for specifying <see cref="ActionDescriptor"/> instances.
 /// </summary>

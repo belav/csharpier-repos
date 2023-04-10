@@ -10,6 +10,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 /// <summary>
 /// A model for configuring controllers.
 /// </summary>

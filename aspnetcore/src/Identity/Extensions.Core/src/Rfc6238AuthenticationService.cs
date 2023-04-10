@@ -11,6 +11,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 internal static class Rfc6238AuthenticationService
 {
     private static readonly TimeSpan _timestep = TimeSpan.FromMinutes(3);

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public class Chassis
 {
     public class ChassisProxy : Chassis, IF1Proxy

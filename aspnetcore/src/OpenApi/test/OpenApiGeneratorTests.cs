@@ -19,6 +19,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Microsoft.AspNetCore.OpenApi.Tests;
 
+
 public class OpenApiOperationGeneratorTests
 {
     [Fact]

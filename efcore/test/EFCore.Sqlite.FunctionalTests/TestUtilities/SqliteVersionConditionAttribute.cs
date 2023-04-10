@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 #nullable enable
 
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]

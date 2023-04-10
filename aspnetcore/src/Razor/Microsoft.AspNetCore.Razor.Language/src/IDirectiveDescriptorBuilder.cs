@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// A builder interface for configuring a <see cref="DirectiveDescriptor"/>.
 /// </summary>

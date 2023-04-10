@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
+
 /// <summary>
 /// Base class for the Entity Framework database context used for identity.
 /// </summary>

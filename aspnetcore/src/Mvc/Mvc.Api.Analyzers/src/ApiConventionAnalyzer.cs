@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
+
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class ApiConventionAnalyzer : DiagnosticAnalyzer
 {

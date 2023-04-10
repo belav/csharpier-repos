@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.TestObjects;
 
+
 internal class CapturingConstraint : IRouteConstraint
 {
     public IDictionary<string, object> Values { get; private set; }

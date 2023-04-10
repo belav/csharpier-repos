@@ -3,4 +3,5 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
+
 public class NestedCollectionDerived : NestedCollectionBase { }

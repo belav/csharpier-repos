@@ -9,6 +9,7 @@ using Interop = Microsoft.AspNetCore.Components.Web.BrowserNavigationManagerInte
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+
 /// <summary>
 /// A Server-Side Blazor implementation of <see cref="NavigationManager"/>.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 /// <summary>
 ///     Contains information on an available <see cref="ValueConverter" /> including a factory to
 ///     create an instance.

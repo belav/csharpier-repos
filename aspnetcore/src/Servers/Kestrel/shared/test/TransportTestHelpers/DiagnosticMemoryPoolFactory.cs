@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 
+
 public class DiagnosticMemoryPoolFactory
 {
     private readonly bool _allowLateReturn;

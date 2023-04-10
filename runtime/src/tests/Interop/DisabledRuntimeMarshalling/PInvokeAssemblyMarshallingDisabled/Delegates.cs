@@ -8,6 +8,7 @@ using static DisabledRuntimeMarshallingNative;
 
 namespace DisabledRuntimeMarshalling.PInvokeAssemblyMarshallingDisabled;
 
+
 public unsafe class DelegatesFromExternalAssembly
 {
     [Fact]

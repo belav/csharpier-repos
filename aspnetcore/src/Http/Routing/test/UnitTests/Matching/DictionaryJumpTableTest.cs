@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 public class DictionaryJumpTableTest : MultipleEntryJumpTableTest
 {
     internal override JumpTable CreateTable(

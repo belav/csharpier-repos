@@ -11,6 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote;
 
+
 /// <summary>
 /// Stores solution snapshots available to remote services.
 /// </summary>

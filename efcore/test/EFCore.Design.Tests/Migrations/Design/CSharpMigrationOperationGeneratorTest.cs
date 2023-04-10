@@ -9,6 +9,7 @@ using NetTopologySuite.Geometries;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
+
 public class CSharpMigrationOperationGeneratorTest
 {
     private static readonly string _eol = Environment.NewLine;

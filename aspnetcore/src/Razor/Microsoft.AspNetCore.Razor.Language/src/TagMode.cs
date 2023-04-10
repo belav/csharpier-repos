@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// The mode in which an element should render.
 /// </summary>

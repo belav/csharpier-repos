@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace SampleStartups;
 
+
 public class StartupHelloWorld : StartupBase
 {
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

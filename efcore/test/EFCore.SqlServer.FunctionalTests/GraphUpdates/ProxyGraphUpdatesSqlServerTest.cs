@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class ProxyGraphUpdatesSqlServerTest
 {
     public abstract class ProxyGraphUpdatesSqlServerTestBase<TFixture>

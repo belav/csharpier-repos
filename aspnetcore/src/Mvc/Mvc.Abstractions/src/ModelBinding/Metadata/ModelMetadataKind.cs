@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
+
 /// <summary>
 /// Enumeration for the kinds of <see cref="ModelMetadata"/>
 /// </summary>

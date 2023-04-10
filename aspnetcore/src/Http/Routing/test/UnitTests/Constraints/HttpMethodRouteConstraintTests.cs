@@ -6,6 +6,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
+
 public class HttpMethodRouteConstraintTests
 {
     [Theory]

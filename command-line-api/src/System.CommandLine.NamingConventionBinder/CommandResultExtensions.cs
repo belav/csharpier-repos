@@ -5,6 +5,7 @@ using System.CommandLine.Parsing;
 
 namespace System.CommandLine.NamingConventionBinder;
 
+
 internal static class CommandResultExtensions
 {
     internal static bool TryGetValueForArgument(

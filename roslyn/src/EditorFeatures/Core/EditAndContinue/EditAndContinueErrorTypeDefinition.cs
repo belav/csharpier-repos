@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue;
 
+
 internal static class EditAndContinueErrorTypeDefinition
 {
     public const string Name = "Edit and Continue";

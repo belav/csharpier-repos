@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
+
 public class ModelBuilderGenericTest : ModelBuilderTest
 {
     [ConditionalFact]

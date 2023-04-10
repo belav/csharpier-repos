@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public class DefaultRazorProjectItemTest
 {
     private static string TestFolder { get; } =

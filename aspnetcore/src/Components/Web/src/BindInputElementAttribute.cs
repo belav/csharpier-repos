@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Configures options for binding subtypes of an HTML <c>input</c> element.
 /// </summary>

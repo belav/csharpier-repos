@@ -7,6 +7,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public class MediaTypeAssert
 {
     public static void Equal(string left, string right)

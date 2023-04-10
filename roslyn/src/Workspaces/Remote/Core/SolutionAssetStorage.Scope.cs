@@ -13,6 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote;
 
+
 internal partial class SolutionAssetStorage
 {
     internal sealed partial class Scope : IDisposable

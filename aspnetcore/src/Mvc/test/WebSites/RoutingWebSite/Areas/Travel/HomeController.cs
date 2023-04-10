@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite.Travel;
 
+
 [Area("Travel")]
 public class HomeController : Controller
 {

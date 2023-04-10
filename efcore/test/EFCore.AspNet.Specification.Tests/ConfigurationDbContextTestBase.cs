@@ -8,6 +8,7 @@ using IdentityServer4.EntityFramework.Stores;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : ConfigurationDbContextTestBase<TFixture>.ConfigurationDbContextFixtureBase
 {

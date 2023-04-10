@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal enum SyntaxKind : byte
 {
     #region Nodes

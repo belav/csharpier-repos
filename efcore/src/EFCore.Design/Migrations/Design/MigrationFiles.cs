@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
+
 /// <summary>
 ///     Represents the file generated for a migration.
 /// </summary>

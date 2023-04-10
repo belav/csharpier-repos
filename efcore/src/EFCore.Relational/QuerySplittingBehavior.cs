@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Indicates how the related collections in a query should be loaded from database.
 /// </summary>

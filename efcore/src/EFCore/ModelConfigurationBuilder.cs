@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Provides a simple API surface for setting defaults and configuring conventions before they run.
 /// </summary>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorWebSite.Controllers;
 
+
 public class ViewEngineController : Controller
 {
     public IActionResult ViewWithoutLayout()

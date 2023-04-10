@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// This attribute specifies the metadata class to associate with a data model class.
 /// </summary>

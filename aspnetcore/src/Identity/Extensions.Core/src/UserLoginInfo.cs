@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Represents login information and source for a user record.
 /// </summary>

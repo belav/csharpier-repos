@@ -10,6 +10,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
+
 /// <summary>
 /// Represents the <c>Set-Cookie</c> header.
 /// <para>

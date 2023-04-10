@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.DataProtection.Internal;
 
+
 internal sealed class DataProtectionHostedService : IHostedService
 {
     private readonly IKeyRingProvider _keyRingProvider;

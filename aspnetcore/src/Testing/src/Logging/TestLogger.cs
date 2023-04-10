@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.Extensions.Logging.Testing;
 
+
 public class TestLogger : ILogger
 {
     private object _scope;

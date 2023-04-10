@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class TestIndexComparer : IEqualityComparer<IReadOnlyIndex>, IComparer<IReadOnlyIndex>
 {
     private readonly bool _compareAnnotations;

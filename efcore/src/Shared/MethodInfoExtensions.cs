@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace System.Reflection;
 
+
 internal static class MethodInfoExtensions
 {
     public static bool IsContainsMethod(this MethodInfo method) =>

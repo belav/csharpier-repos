@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.Localization;
 
+
 /// <summary>
 /// Represents a service that provides localized strings.
 /// </summary>

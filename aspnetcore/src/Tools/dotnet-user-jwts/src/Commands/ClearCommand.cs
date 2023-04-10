@@ -6,6 +6,7 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
+
 internal sealed class ClearCommand
 {
     public static void Register(ProjectCommandLineApplication app)

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 internal sealed class HubMethodDescriptor
 {
     private static readonly MethodInfo MakeCancelableAsyncEnumeratorMethod =

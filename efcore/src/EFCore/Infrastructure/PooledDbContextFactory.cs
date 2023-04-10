@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     A factory returning pooled <see cref="DbContext" /> instances. Disposing the instance returned by this factory returns
 ///     them to the internal pooling mechanism.

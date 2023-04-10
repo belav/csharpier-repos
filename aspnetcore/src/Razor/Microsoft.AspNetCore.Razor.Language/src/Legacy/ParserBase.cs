@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal abstract class ParserBase
 {
     public ParserBase(ParserContext context)

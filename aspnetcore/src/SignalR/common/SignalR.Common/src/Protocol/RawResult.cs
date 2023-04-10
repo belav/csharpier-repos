@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
+
 /// <summary>
 /// Type returned to <see cref="IHubProtocol"/> implementations to let them know the object being deserialized should be
 /// stored as raw serialized bytes in the format of the protocol being used.

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 /// <summary>
 /// Constructs a <see cref="CompiledPageActionDescriptor"/> from an <see cref="PageApplicationModel"/>.
 /// </summary>

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 internal abstract class AssemblyIdentityEqualityComparer : IEqualityComparer<AssemblyIdentity>
 {
     public static readonly AssemblyIdentityEqualityComparer NameAndVersion =

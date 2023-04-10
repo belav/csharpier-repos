@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace ControllersFromServicesClassLibrary;
 
+
 public class ConstructorInjectionController
 {
     public ConstructorInjectionController(

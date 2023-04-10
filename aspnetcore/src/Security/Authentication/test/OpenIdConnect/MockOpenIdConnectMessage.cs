@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
+
 internal class MockOpenIdConnectMessage : OpenIdConnectMessage
 {
     public string TestAuthorizeEndpoint { get; set; }

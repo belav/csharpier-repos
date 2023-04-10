@@ -10,6 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 [Collection("ErrorNotification")] // When the clientside and serverside tests run together it seems to cause failures, possibly due to connection lose on exception.
 public class ErrorNotificationTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {

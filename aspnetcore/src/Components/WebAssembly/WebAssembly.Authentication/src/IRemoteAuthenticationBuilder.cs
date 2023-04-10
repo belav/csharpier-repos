@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// An interface for configuring remote authentication services.
 /// </summary>

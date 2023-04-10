@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.OAuth;
 
+
 /// <summary>
 /// <see cref="AuthenticationProperties"/> for an OAuth challenge.
 /// </summary>

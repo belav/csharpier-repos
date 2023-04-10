@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class DirectiveTokenDescriptor
 {
     public abstract DirectiveTokenKind Kind { get; }

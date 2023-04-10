@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
+
 internal static class CompilationFailedExceptionFactory
 {
     // error CS0234: The type or namespace name 'C' does not exist in the namespace 'N' (are you missing

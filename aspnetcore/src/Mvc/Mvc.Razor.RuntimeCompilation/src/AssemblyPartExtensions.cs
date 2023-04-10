@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
+
 /// <summary>
 /// Static class that adds methods to <see cref="AssemblyPart"/>.
 /// </summary>

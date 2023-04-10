@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.Tree;
 
+
 internal readonly struct OutboundMatchResult
 {
     public OutboundMatchResult(OutboundMatch match, bool isFallbackMatch)

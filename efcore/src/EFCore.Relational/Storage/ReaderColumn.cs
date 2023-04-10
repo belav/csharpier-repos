@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     <para>
 ///         An expected column in the relational data reader.

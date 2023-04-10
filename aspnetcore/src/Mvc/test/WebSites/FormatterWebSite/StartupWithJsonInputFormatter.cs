@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FormatterWebSite;
 
+
 public class StartupWithJsonFormatter
 {
     public void ConfigureServices(IServiceCollection services)

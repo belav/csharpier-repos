@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class EFCollections : AutoMapperSpecBase
 {
     private Dest _dest;

@@ -3,6 +3,7 @@
 
 namespace OpenQA.Selenium;
 
+
 public static class WebElementExtensions
 {
     // see: https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/214

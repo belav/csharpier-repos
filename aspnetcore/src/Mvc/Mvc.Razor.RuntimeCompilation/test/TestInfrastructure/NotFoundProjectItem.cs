@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class NotFoundProjectItem : RazorProjectItem
 {
     public NotFoundProjectItem(string basePath, string path)

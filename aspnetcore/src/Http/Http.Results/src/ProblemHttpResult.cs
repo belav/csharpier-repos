@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+
 /// <summary>
 /// An <see cref="IResult"/> that on execution will write Problem Details
 /// HTTP API responses based on <see href="https://tools.ietf.org/html/rfc7807"/>

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Caching.StackExchangeRedis;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods for setting up Redis distributed cache related services in an <see cref="IServiceCollection" />.
 /// </summary>

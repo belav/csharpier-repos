@@ -6,6 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities;
 
+
 /// <summary>
 /// This is a marker attribute used to define that all tests in this assembly
 /// should run in a single partition without other assemblies due to state sharing concerns.

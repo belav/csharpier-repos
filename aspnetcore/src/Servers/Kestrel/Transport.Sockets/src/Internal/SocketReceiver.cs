@@ -6,6 +6,7 @@ using System.Net.Sockets;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal;
 
+
 internal sealed class SocketReceiver : SocketAwaitableEventArgs
 {
     public SocketReceiver(PipeScheduler ioScheduler)

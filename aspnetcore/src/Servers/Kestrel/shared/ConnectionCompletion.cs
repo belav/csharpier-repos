@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Connections;
 
+
 internal static class ConnectionCompletion
 {
     public static Task FireOnCompletedAsync(

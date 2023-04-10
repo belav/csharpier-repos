@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 
+
 public class DefaultTempDataSerializerTest : TempDataSerializerTestBase
 {
     protected override TempDataSerializer GetTempDataSerializer() =>

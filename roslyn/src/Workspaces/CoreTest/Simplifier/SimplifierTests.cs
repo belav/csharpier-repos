@@ -20,6 +20,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Simplification;
 
+
 [UseExportProvider]
 [Trait(Traits.Feature, Traits.Features.Simplification)]
 public class SimplifierTests

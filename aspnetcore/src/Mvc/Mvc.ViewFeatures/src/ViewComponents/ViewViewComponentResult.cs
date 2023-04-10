@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
+
 /// <summary>
 /// A <see cref="IViewComponentResult"/> that renders a partial view when executed.
 /// </summary>

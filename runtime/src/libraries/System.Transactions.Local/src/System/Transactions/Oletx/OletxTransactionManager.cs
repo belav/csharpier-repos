@@ -8,6 +8,7 @@ using System.Transactions.DtcProxyShim;
 
 namespace System.Transactions.Oletx;
 
+
 internal sealed class OletxTransactionManager
 {
     private IsolationLevel _isolationLevelProperty;

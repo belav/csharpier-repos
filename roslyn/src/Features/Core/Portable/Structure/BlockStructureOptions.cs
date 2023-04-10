@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.Structure;
 
+
 [DataContract]
 internal sealed record class BlockStructureOptions
 {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public static class RequiredAttributeDescriptorExtensions
 {
     public static bool IsDirectiveAttribute(this RequiredAttributeDescriptor descriptor)

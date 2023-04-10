@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 public class ByteArrayModelBinderIntegrationTest
 {
     private class Person

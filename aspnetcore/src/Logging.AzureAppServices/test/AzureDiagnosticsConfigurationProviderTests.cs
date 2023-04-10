@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
+
 public class AzureDiagnosticsConfigurationProviderTests
 {
     [Fact]

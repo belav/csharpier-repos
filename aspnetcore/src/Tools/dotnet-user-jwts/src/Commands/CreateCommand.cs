@@ -9,6 +9,7 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
+
 internal sealed class CreateCommand
 {
     private static readonly string[] _dateTimeFormats = new[]

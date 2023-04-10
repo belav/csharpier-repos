@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 
 namespace ResponseCompressionSample;
 
+
 public class CustomCompressionProvider : ICompressionProvider
 {
     public string EncodingName => "custom";

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.ViewEngines;
 
+
 /// <summary>
 /// Specifies the contract for a view.
 /// </summary>

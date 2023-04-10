@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class OwnedEntityQuerySqlServerTest : OwnedEntityQueryRelationalTestBase
 {
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;

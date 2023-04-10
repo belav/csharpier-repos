@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Contains the options used by the <see cref="PolicySchemeHandler"/>.
 /// </summary>

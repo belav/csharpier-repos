@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VersioningWebSite;
 
+
 // Scenario:
 // Controller without any kind of specific version handling.
 // New versions of the API will be exposed in a different controller.

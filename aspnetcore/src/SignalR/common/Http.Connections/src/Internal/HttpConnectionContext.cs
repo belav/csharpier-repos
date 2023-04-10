@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
+
 internal sealed partial class HttpConnectionContext
     : ConnectionContext,
         IConnectionIdFeature,

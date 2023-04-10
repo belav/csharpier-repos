@@ -6,6 +6,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 public class ModelTest
 {
     [ConditionalFact]

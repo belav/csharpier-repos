@@ -22,6 +22,7 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue;
 
+
 [Export(typeof(IFeedbackDiagnosticFileProvider))]
 internal sealed class EditAndContinueFeedbackDiagnosticFileProvider
     : IFeedbackDiagnosticFileProvider

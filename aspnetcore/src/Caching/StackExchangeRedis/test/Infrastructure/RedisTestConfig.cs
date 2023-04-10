@@ -10,6 +10,7 @@ using Microsoft.Extensions.Caching.Distributed;
 
 namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 
+
 public static class RedisTestConfig
 {
     internal const string RedisServerExeName = "redis-server.exe";

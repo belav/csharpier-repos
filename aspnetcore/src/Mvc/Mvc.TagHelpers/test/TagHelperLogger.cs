@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class TagHelperLogger<T> : ILogger<T>
 {
     public List<LoggerData> Logged { get; } = new List<LoggerData>();

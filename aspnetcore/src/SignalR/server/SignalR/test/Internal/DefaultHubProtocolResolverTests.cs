@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Common.Protocol.Tests;
 
+
 public class DefaultHubProtocolResolverTests
 {
     [Theory]

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
+
 /// <summary>
 /// A type which can evaluate a policy for a particular <see cref="HttpContext"/>.
 /// </summary>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FormatterWebSite;
 
+
 public class ValidationController : Controller
 {
     [HttpPost]

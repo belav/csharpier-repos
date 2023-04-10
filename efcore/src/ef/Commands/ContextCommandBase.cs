@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
+
 internal class ContextCommandBase : ProjectCommandBase
 {
     protected CommandOption? Context { get; private set; }

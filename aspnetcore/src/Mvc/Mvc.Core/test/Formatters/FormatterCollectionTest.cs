@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 public class FormatterCollectionTest
 {
     [Fact]

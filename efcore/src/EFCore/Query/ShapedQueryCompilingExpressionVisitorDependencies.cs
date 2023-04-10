@@ -5,6 +5,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="ShapedQueryCompilingExpressionVisitor" />

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
+
 public class SimpleObject
 {
     public List<SimpleObject> SimpleObjectList { get; set; }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 
+
 /// <summary>
 /// The basic interface for accessing a read-only keyring.
 /// </summary>

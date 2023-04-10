@@ -8,6 +8,7 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Html.Test;
 
+
 public class HtmlContentBuilderExtensionsTest
 {
     [Fact]

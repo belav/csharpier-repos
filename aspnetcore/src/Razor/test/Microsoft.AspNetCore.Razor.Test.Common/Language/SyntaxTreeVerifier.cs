@@ -10,6 +10,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 // Verifies recursively that a syntax tree has no gaps in terms of position/location.
 internal class SyntaxTreeVerifier
 {

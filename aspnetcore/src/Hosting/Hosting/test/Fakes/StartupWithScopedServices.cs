@@ -6,6 +6,7 @@ using static Microsoft.AspNetCore.Hosting.Tests.StartupManagerTests;
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
+
 public class StartupWithScopedServices
 {
     public DisposableService DisposableService { get; set; }

@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Completion;
 
+
 internal static class CompletionOptionsStorage
 {
     public static CompletionOptions GetCompletionOptions(

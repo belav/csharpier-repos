@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Configuration options for the WebSocketMiddleware.
 /// </summary>

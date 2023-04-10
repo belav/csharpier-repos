@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 /// <summary>
 /// A context object for <see cref="RewriteMiddleware"/>
 /// </summary>

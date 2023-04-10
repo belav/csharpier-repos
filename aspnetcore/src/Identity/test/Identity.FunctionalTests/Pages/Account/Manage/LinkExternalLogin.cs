@@ -6,6 +6,7 @@ using AngleSharp.Dom.Html;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage;
 
+
 public class LinkExternalLogin : DefaultUIPage
 {
     private readonly IHtmlFormElement _linkLoginForm;

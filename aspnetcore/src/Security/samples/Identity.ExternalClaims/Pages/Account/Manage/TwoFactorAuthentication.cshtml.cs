@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity.ExternalClaims.Pages.Account.Manage;
 
+
 public class TwoFactorAuthenticationModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;

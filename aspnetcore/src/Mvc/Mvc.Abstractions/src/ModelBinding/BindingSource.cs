@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 /// <summary>
 /// A metadata object representing a source of data for model binding.
 /// </summary>

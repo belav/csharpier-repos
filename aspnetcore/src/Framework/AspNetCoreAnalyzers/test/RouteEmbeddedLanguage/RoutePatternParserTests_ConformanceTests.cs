@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
+
 // These tests are mirrored from routing's RoutePatternParameterParserTest.cs
 public partial class RoutePatternParserTests
 {

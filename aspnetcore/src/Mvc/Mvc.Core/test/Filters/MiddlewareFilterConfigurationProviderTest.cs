@@ -9,6 +9,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 public class MiddlewareFilterConfigurationProviderTest
 {
     [Theory]

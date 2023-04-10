@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 internal sealed class InputParser
 {
     private const char Colon = ':';

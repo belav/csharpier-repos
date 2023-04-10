@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// <see cref="IApplicationBuilder" /> extension methods to add and configure <see cref="WebSocketMiddleware" />.
 /// </summary>

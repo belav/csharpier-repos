@@ -11,6 +11,7 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.Caching.SqlConfig.Tools;
 
+
 public class Program
 {
     private string _connectionString;

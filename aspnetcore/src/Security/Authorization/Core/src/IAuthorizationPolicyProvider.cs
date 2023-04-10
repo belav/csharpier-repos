@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization;
 
+
 /// <summary>
 /// A type which can provide a <see cref="AuthorizationPolicy"/> for a particular name.
 /// </summary>

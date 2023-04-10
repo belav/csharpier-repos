@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Simplification;
 
+
 internal static class SimplifierOptionsStorage
 {
     public static ValueTask<SimplifierOptions> GetSimplifierOptionsAsync(

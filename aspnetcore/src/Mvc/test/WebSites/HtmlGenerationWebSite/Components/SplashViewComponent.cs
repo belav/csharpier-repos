@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MvcSample.Web.Components;
 
+
 public class SplashViewComponent : ViewComponent
 {
     public IViewComponentResult Invoke()

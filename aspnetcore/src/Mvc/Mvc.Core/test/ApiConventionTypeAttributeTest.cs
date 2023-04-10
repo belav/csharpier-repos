@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public class ApiConventionTypeAttributeTest
 {
     [Fact]

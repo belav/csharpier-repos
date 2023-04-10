@@ -8,6 +8,7 @@ using System.Data;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
+
 public class RelationalModelBuilderTest : ModelBuilderTest
 {
     public abstract class RelationalNonRelationshipTestBase : NonRelationshipTestBase

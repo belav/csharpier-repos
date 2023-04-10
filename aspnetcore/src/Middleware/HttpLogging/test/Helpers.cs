@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 internal static class Helpers
 {
     public static void DisposeDirectory(string path)

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests.Infrastructure;
 
+
 internal class ForwardingLoggerProvider : ILoggerProvider
 {
     private readonly LogMessage _logAction;

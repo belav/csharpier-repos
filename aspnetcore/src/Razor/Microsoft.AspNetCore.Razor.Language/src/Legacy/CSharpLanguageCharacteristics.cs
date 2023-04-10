@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class CSharpLanguageCharacteristics : LanguageCharacteristics<CSharpTokenizer>
 {
     private static readonly Dictionary<SyntaxKind, string> _tokenSamples = new Dictionary<

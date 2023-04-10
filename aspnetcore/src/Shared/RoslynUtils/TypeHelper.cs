@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace System.Runtime.CompilerServices;
 
+
 internal static class TypeHelper
 {
     /// <summary>

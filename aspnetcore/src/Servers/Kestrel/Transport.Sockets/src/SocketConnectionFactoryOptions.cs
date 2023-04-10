@@ -5,6 +5,7 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets;
 
+
 /// <summary>
 /// Options for <see cref="SocketConnectionContextFactory"/>.
 /// </summary>

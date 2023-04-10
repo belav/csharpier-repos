@@ -8,6 +8,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods for configuring MVC view and data annotations localization services.
 /// </summary>

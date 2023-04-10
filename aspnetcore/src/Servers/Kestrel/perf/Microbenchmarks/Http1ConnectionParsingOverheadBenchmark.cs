@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class Http1ConnectionParsingOverheadBenchmark
 {
     private const int InnerLoopCount = 512;

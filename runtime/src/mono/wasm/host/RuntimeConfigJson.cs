@@ -9,6 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.WebAssembly.AppHost;
 
+
 internal sealed record RuntimeConfig(RuntimeOptions RuntimeOptions);
 
 internal sealed record RuntimeOptions(WasmHostProperties WasmHostProperties);

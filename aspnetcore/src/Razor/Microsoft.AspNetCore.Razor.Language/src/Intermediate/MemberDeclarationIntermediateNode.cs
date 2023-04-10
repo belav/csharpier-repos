@@ -3,4 +3,5 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public abstract class MemberDeclarationIntermediateNode : IntermediateNode { }

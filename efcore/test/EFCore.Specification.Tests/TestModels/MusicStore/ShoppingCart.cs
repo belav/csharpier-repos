@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore;
 
+
 public class ShoppingCart
 {
     private readonly MusicStoreContext _dbContext;

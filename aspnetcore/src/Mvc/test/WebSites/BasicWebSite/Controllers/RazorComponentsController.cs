@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
+
 public class RazorComponentsController : Controller
 {
     private static readonly WeatherRow[] _weatherData = new[]

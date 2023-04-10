@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.AspNetCore.Analyzers.WebApplicationBuilder;
 
+
 public partial class UseTopLevelRouteRegistrationsInsteadOfUseEndpointsTest
 {
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new WebApplicationBuilderAnalyzer());

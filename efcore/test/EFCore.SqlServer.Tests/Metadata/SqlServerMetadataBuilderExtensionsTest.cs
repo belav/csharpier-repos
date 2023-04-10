@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 public class SqlServerMetadataBuilderExtensionsTest
 {
     private IConventionModelBuilder CreateBuilder() => new InternalModelBuilder(new Model());

@@ -6,6 +6,7 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 public static class HelixHelper
 {
     public static bool OnHelix() => !string.IsNullOrEmpty(GetTargetHelixQueue());

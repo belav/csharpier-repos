@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
+
 /// <summary>
 /// A context for <see cref="JwtBearerEvents.OnMessageReceived"/>.
 /// </summary>

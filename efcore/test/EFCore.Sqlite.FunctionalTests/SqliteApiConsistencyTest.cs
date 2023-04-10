@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class SqliteApiConsistencyTest
     : ApiConsistencyTestBase<SqliteApiConsistencyTest.SqliteApiConsistencyFixture>
 {

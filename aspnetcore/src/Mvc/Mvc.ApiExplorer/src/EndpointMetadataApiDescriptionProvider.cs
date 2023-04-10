@@ -20,6 +20,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
 {
     private readonly EndpointDataSource _endpointDataSource;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
+
 /// <summary>
 /// Options used to change behavior of how connections are handled.
 /// </summary>

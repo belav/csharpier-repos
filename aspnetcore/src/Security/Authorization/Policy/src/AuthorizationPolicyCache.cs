@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Authorization.Policy;
 
+
 internal sealed class AuthorizationPolicyCache : IDisposable
 {
     // Caches AuthorizationPolicy instances

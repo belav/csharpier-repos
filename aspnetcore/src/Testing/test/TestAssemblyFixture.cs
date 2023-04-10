@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 public class TestAssemblyFixture
 {
     public int Count { get; set; }

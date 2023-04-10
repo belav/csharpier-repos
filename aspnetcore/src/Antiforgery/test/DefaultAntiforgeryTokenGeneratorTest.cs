@@ -10,6 +10,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Antiforgery.Internal;
 
+
 public class DefaultAntiforgeryTokenGeneratorProviderTest
 {
     [Fact]

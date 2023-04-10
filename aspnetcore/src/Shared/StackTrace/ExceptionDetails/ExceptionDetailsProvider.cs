@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.StackTrace.Sources;
 
+
 internal sealed class ExceptionDetailsProvider
 {
     private readonly IFileProvider _fileProvider;

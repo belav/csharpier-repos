@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class TagHelperComponentTagHelperTest : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>
 {
     private static readonly Assembly _resourcesAssembly = typeof(TagHelperComponentTagHelperTest)

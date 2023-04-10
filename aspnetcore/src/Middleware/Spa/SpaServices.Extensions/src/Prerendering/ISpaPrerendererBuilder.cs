@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SpaServices.Prerendering;
 
+
 /// <summary>
 /// Represents the ability to build a Single Page Application (SPA) on demand
 /// so that it can be prerendered. This is only intended to be used at development

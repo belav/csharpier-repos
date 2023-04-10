@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 /// <summary>
 /// The <see cref="DataTransferItem"/> object represents one drag data item.
 /// During a drag operation, each drag event has a dataTransfer property which contains a list of drag data items.

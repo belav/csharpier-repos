@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
+
 public class ServerSentEventsTests : VerifiableLoggedTest
 {
     [Fact]

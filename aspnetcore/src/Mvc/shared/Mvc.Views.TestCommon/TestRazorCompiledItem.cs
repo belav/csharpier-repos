@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
+
 public class TestRazorCompiledItem : RazorCompiledItem
 {
     public static RazorCompiledItem CreateForPage(string identifier, object[] metadata = null)

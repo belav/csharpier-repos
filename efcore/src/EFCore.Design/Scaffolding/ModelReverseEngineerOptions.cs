@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
+
 /// <summary>
 ///     Represents the options to use while reverse engineering a model from the database.
 /// </summary>

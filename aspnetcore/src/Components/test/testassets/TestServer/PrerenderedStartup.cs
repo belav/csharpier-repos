@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 namespace TestServer;
 
+
 public class PrerenderedStartup
 {
     public PrerenderedStartup(IConfiguration configuration)

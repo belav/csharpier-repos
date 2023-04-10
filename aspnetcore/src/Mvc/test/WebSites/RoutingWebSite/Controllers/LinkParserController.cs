@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace RoutingWebSite.Controllers;
 
+
 public class LinkParserController : Controller
 {
     private readonly LinkParser _linkParser;

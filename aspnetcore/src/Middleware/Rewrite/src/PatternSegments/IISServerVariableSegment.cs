@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
+
 internal sealed class IISServerVariableSegment : PatternSegment
 {
     private readonly string _variableName;

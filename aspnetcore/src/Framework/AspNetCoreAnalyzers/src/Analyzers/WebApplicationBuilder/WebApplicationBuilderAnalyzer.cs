@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.WebApplicationBuilder;
 
+
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class WebApplicationBuilderAnalyzer : DiagnosticAnalyzer
 {

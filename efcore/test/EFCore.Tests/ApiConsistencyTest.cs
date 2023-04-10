@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class ApiConsistencyTest : ApiConsistencyTestBase<ApiConsistencyTest.ApiConsistencyFixture>
 {
     public ApiConsistencyTest(ApiConsistencyFixture fixture)

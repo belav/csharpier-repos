@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authorization.Policy;
 
+
 /// <summary>
 /// The result of <see cref="IPolicyEvaluator.AuthorizeAsync(AuthorizationPolicy, Authentication.AuthenticateResult, Http.HttpContext, object?)"/>.
 /// </summary>

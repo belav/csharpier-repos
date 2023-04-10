@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.Common;
 
+
 public static class TestUriHelper
 {
     public static Uri BuildTestUri(ServerType serverType)

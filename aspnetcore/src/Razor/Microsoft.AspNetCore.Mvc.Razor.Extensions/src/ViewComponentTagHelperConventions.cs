@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
+
 public static class ViewComponentTagHelperConventions
 {
     public static readonly string Kind = "MVC.ViewComponent";

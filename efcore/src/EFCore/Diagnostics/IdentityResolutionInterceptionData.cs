@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     A parameter object passed to <see cref="IIdentityResolutionInterceptor" /> methods.
 /// </summary>

@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public class DefaultRazorIntermediateNodeBuilderTest
 {
     [Fact]

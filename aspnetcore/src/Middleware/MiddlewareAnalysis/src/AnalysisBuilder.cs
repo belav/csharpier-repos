@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.MiddlewareAnalysis;
 
+
 /// <summary>
 /// An <see cref="IApplicationBuilder"/> decorator used by <see cref="AnalysisStartupFilter"/>
 /// to add <see cref="AnalysisMiddleware"/> before and after each other middleware in the pipeline.

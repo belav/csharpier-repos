@@ -5,6 +5,7 @@ using PhotinoNET;
 
 namespace Microsoft.AspNetCore.Components.WebView.Photino;
 
+
 internal class PhotinoDispatcher : Dispatcher
 {
     private readonly PhotinoSynchronizationContext _context;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// A context abstraction for a hub.
 /// </summary>

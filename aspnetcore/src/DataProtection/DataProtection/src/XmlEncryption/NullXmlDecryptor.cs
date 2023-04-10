@@ -7,6 +7,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 /// <summary>
 /// An <see cref="IXmlDecryptor"/> that decrypts XML elements with a null decryptor.
 /// </summary>

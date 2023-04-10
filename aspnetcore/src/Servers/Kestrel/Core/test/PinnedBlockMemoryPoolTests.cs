@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Internal.Test;
 
+
 public class PinnedBlockMemoryPoolTests : MemoryPoolTests
 {
     protected override MemoryPool<byte> CreatePool() => new PinnedBlockMemoryPool();

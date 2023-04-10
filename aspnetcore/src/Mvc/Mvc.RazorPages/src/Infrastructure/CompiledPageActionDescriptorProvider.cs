@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 /// <summary>
 /// A <see cref="IActionDescriptorProvider"/> for build-time compiled Razor Pages.
 /// </summary>

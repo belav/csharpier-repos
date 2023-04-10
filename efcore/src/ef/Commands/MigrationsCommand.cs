@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
+
 internal class MigrationsCommand : HelpCommandBase
 {
     public override void Configure(CommandLineApplication command)

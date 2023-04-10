@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
+
 /// <summary>
 /// This Context can be used to be informed when an 'AuthorizationCode' is redeemed for tokens at the token endpoint.
 /// </summary>

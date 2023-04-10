@@ -6,6 +6,7 @@ using System.Threading.Channels;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 // Use a Channel instead of a SemaphoreSlim so that we can potentially save task allocations (ValueTask!)
 // Additionally initial perf results show faster RPS when using Channel instead of SemaphoreSlim
 internal sealed class ChannelBasedSemaphore

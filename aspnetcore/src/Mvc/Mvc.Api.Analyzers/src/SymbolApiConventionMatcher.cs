@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
+
 internal static class SymbolApiConventionMatcher
 {
     internal static bool IsMatch(

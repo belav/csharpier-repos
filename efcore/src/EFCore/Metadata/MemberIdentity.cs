@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents the identity of an entity type member, can be based on <see cref="MemberInfo" /> or just the name.
 /// </summary>

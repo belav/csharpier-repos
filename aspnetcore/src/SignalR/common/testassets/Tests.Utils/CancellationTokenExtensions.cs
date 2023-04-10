@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public static class CancellationTokenExtensions
 {
     public static Task WaitForCancellationAsync(this CancellationToken token)

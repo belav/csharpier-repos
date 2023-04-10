@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 // Integration tests for component directives
 public class ComponentDirectiveIntegrationTest : RazorIntegrationTestBase
 {

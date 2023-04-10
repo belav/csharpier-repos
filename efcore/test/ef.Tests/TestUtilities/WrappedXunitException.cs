@@ -5,6 +5,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
+
 internal class WrappedXunitException : XunitException
 {
     public WrappedXunitException(WrappedException ex)

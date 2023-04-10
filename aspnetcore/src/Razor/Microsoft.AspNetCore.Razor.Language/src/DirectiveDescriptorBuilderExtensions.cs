@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public static class DirectiveDescriptorBuilderExtensions
 {
     public static IDirectiveDescriptorBuilder AddMemberToken(

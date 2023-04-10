@@ -7,6 +7,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests.Infrastructure;
 
+
 public delegate void LogMessage(
     LogLevel logLevel,
     string categoryName,

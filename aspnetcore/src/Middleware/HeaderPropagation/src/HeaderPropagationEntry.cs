@@ -5,6 +5,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HeaderPropagation;
 
+
 /// <summary>
 /// Define the configuration of a header for the <see cref="HeaderPropagationMiddleware"/>.
 /// </summary>

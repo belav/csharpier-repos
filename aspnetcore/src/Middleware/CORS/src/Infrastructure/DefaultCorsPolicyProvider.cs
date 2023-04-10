@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
+
 /// <inheritdoc />
 public class DefaultCorsPolicyProvider : ICorsPolicyProvider
 {

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 public class ObservableHashSetTest
 {
     private static readonly Random _random = new();

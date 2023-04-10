@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class SuppressChecksumOptionsFeature
     : RazorEngineFeatureBase,
         IConfigureRazorCodeGenerationOptionsFeature

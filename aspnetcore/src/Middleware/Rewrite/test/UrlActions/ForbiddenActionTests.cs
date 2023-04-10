@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Rewrite.UrlActions;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlActions;
 
+
 public class ForbiddenActionTests
 {
     [Fact]

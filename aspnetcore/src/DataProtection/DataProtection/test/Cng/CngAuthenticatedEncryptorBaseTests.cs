@@ -5,6 +5,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.DataProtection.Cng.Internal;
 
+
 public unsafe class CngAuthenticatedEncryptorBaseTests
 {
     [Fact]

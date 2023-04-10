@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 
+
 /// <summary>
 ///     Represents a migration operation on a table.
 /// </summary>

@@ -9,6 +9,7 @@ using StreamJsonRpc;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.Example;
 
+
 public class ExampleLanguageServer : AbstractLanguageServer<ExampleRequestContext>
 {
     public ExampleLanguageServer(JsonRpc jsonRpc, ILspLogger logger)

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class DesignTimeTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : DesignTimeTestBase<TFixture>.DesignTimeFixtureBase
 {

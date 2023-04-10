@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue;
 
+
 internal interface IActiveStatementTrackingService : IWorkspaceService
 {
     ValueTask StartTrackingAsync(

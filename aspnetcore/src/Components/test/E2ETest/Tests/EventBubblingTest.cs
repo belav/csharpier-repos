@@ -10,6 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 public class EventBubblingTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
     // Note that currently we only support custom events if they have bubble:true.

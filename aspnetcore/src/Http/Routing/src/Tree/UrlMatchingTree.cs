@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing.Template;
 
 namespace Microsoft.AspNetCore.Routing.Tree;
 
+
 /// <summary>
 /// A tree part of a <see cref="TreeRouter"/>.
 /// </summary>

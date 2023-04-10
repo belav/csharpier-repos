@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControllersFromServicesClassLibrary;
 
+
 public class NestedControllerOwner
 {
     public class NestedController : Controller

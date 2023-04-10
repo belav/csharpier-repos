@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 internal class TestHttp1Connection : Http1Connection
 {
     public TestHttp1Connection(HttpConnectionContext context)

@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.Bug;
 
+
 public class When_mapping_for_derived_class_is_duplicated : NonValidatingSpecBase
 {
     public class ModelObject

@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public sealed class MethodDeclarationIntermediateNode : MemberDeclarationIntermediateNode
 {
     public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();

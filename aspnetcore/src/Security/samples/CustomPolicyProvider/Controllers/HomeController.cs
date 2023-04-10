@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomPolicyProvider.Controllers;
 
+
 // Sample actions to demonstrate the use of the [MinimumAgeAuthorize] attribute
 [Controller]
 public class HomeController : Controller

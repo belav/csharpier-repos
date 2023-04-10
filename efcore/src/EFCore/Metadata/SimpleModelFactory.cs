@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     <para>
 ///         Creates instances of <see cref="IMutableModel" /> that have no conventions. This is useful when

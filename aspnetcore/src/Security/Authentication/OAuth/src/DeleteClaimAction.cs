@@ -7,6 +7,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
+
 /// <summary>
 /// A ClaimAction that deletes all claims from the given ClaimsIdentity with the given ClaimType.
 /// </summary>

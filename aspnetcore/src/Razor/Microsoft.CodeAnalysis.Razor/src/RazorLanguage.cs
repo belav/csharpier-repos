@@ -3,6 +3,7 @@
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 public static class RazorLanguage
 {
     public const string Name = "Razor";

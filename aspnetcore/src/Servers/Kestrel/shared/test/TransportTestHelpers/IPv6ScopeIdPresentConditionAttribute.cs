@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 
+
 public class IPv6ScopeIdPresentConditionAttribute : Attribute, ITestCondition
 {
     private static readonly Lazy<bool> _ipv6ScopeIdPresent = new Lazy<bool>(

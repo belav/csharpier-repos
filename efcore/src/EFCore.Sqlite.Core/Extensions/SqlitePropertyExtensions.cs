@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Extension methods for <see cref="IProperty" /> for SQLite metadata.
 /// </summary>

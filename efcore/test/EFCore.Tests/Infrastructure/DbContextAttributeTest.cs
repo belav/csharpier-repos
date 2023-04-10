@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 public class DbContextAttributeTest
 {
     [ConditionalFact]

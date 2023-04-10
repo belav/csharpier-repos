@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Localization.Routing;
 
 namespace BasicWebSite;
 
+
 public class LocalizationPipeline
 {
     public void Configure(IApplicationBuilder applicationBuilder)

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
+
 /// <summary>
 /// An interface which can be used to identify a type which provides metadata needed for enabling CORS support.
 /// </summary>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CustomPolicyProvider;
 
+
 // This attribute derives from the [Authorize] attribute, adding
 // the ability for a user to specify an 'age' paratmer. Since authorization
 // policies are looked up from the policy provider only by string, this

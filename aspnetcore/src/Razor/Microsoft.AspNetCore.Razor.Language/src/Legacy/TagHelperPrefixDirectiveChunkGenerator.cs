@@ -9,6 +9,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class TagHelperPrefixDirectiveChunkGenerator : SpanChunkGenerator
 {
     public TagHelperPrefixDirectiveChunkGenerator(

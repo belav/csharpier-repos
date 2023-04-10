@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 internal sealed class ResponseStream : Stream
 {
     private readonly Stream _innerStream;

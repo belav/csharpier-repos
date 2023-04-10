@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
+
 /// <summary>
 ///     An expression that represents a projection in <see cref="SelectExpression" />.
 /// </summary>

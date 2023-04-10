@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 internal sealed class ConfigureContainerBuilder
 {
     public ConfigureContainerBuilder(MethodInfo? configureContainerMethod)

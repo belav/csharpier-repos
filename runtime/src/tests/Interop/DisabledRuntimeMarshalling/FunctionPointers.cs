@@ -8,6 +8,7 @@ using static DisabledRuntimeMarshallingNative;
 
 namespace DisabledRuntimeMarshalling;
 
+
 public unsafe class FunctionPointers
 {
     [Fact]

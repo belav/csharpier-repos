@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 /// <summary>
 /// Represents options to use when configuring the <see cref="System.Security.Claims.ClaimsPrincipal"/> for a user.
 /// </summary>

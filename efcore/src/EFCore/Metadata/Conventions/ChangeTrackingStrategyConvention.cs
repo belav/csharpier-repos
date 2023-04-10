@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that sets a flag on the model to always skip detecting changes if no entity type is using the
 ///     <see cref="ChangeTrackingStrategy.Snapshot" /> strategy.

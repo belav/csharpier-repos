@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+
 /// <summary>
 ///     Provides a simple API surface for setting discriminator values from conventions.
 /// </summary>

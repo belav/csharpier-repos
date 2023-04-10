@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Session;
 
+
 internal static class CookieProtection
 {
     internal static string Protect(IDataProtector protector, string data)

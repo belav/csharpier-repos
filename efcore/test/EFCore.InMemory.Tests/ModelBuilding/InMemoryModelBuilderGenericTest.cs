@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
+
 public class InMemoryModelBuilderGenericTest : ModelBuilderGenericTest
 {
     public class InMemoryGenericNonRelationship : GenericNonRelationship

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 internal class TestRedisServerIsAvailableAttribute : Attribute, ITestCondition
 {
     public bool IsMet => !string.IsNullOrEmpty(TestRedisServer.GetConnectionString());

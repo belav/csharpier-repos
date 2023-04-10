@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 // Generated from https://github.com/Azure/azure-rest-api-specs
 public class MatcherAzureBenchmark : MatcherAzureBenchmarkBase
 {

@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 public class RefTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTestBase
 {
     [Fact]

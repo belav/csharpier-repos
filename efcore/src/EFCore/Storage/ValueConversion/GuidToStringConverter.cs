@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 /// <summary>
 ///     Converts a <see cref="Guid" /> to and from a <see cref="string" /> using the
 ///     standard "8-4-4-4-12" format./>.

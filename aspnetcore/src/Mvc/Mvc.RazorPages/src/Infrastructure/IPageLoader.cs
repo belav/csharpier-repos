@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 /// <summary>
 /// Creates a <see cref="CompiledPageActionDescriptor"/> from a <see cref="PageActionDescriptor"/>.
 /// </summary>

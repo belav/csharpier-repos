@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
+
 /// <summary>
 /// Creates and manages the lifetime of <see cref="T:ViewBufferValue[]"/> instances.
 /// </summary>

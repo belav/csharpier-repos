@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Provides access to the normal system clock with precision in seconds.
 /// </summary>

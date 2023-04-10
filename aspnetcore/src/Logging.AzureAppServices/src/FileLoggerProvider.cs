@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
+
 /// <summary>
 /// A <see cref="BatchingLoggerProvider"/> which writes out to a file.
 /// </summary>

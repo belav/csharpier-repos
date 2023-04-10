@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 /// <summary>
 /// A <see cref="DefaultBindingMetadataProvider"/> that represents an empty model.
 /// </summary>

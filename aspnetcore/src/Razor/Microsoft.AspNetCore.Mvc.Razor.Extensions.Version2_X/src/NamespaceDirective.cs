@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
+
 public static class NamespaceDirective
 {
     private static readonly char[] Separators = new char[] { '\\', '/' };

@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Formatting;
 
 namespace TestHelper;
 
+
 /// <summary>
 /// Superclass of all Unit tests made for diagnostics with codefixes.
 /// Contains methods used to verify correctness of codefixes

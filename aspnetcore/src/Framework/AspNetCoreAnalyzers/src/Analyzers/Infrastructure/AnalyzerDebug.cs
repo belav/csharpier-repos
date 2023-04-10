@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure;
 
+
 // Debug.Assert is missing nullable annotation in netstandard2.0
 internal static class AnalyzerDebug
 {

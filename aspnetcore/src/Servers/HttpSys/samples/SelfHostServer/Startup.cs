@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace SelfHostServer;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

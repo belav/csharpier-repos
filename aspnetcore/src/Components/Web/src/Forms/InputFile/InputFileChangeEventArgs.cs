@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
+
 /// <summary>
 /// Supplies information about an <see cref="InputFile.OnChange"/> event being raised.
 /// </summary>

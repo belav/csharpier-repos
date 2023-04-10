@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 public class NumericClientModelValidatorTest
 {
     [Fact]

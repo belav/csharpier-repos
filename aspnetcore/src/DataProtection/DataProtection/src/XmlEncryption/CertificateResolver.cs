@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 /// <summary>
 /// A default implementation of <see cref="ICertificateResolver"/> that looks in the current user
 /// and local machine certificate stores.

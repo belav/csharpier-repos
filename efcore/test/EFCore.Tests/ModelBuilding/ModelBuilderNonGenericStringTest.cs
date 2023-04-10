@@ -9,6 +9,7 @@ using Xunit.Sdk;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
+
 public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
 {
     public class NonGenericStringOwnedTypes : OwnedTypesTestBase

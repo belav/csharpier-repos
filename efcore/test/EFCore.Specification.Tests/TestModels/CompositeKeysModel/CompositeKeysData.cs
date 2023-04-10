@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel;
 
+
 public abstract class CompositeKeysData : ISetSource
 {
     public IReadOnlyList<CompositeOne> CompositeOnes { get; }

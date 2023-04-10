@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing.Matching;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 public class LinkParserEndpointNameExtensionsTest : LinkParserTestBase
 {
     [Fact]

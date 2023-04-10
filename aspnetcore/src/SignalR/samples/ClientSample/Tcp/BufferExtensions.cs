@@ -8,6 +8,7 @@ using System.Text;
 
 namespace System;
 
+
 public static class BufferExtensions
 {
     public static ArraySegment<byte> GetArray(this Memory<byte> memory)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.CommandLine.NamingConventionBinder;
 
+
 /// <summary>
 /// Provides methods for creating and working with command handlers that use naming conventions to bind parameters and model properties.
 /// </summary>

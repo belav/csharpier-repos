@@ -12,6 +12,7 @@ using Xunit.Abstractions;
 
 namespace Templates.Mvc.Test;
 
+
 public class WebApiTemplateTest : LoggedTest
 {
     public WebApiTemplateTest(ProjectFactoryFixture factoryFixture)

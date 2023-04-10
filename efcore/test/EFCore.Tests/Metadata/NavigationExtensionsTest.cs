@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 public class NavigationExtensionsTest
 {
     [ConditionalFact]

@@ -15,6 +15,7 @@ using static Microsoft.AspNetCore.HttpSys.Internal.UnsafeNclNativeMethods;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 internal sealed class Response
 {
     // Support is assumed until we get an error and turn it off.

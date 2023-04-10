@@ -21,6 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Options;
 
+
 internal static class CodeActionOptionsStorage
 {
     public static Provider CreateProvider(this IGlobalOptionService globalOptions) =>

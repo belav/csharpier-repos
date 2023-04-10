@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
+
 /// <summary>
 /// Represents the individual characters that raw string token represents (i.e. with escapes collapsed).
 /// The difference between this and the result from token.ValueText is that for each collapsed character

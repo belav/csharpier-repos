@@ -5,6 +5,7 @@ using System.Text.Json;
 
 namespace Microsoft.JSInterop.Implementation;
 
+
 /// <summary>
 /// Used by JsonConverters to read or write a <see cref="IJSObjectReference"/> instance.
 /// <para>

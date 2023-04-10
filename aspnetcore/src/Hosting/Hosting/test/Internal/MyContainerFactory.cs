@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting.Tests.Internal;
 
+
 public class MyContainerFactory : IServiceProviderFactory<MyContainer>
 {
     public MyContainer CreateBuilder(IServiceCollection services)

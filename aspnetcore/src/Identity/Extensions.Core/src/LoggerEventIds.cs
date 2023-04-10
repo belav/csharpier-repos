@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Identity.Core;
 
+
 internal static class LoggerEventIds
 {
     public static readonly EventId RoleValidationFailed = new EventId(0, "RoleValidationFailed");

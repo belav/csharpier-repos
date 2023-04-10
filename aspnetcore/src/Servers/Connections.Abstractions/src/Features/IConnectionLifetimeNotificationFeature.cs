@@ -5,6 +5,7 @@ using System.Threading;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
+
 /// <summary>
 /// Enables graceful termination of the connection.
 /// </summary>

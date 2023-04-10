@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     <para>
 ///         Provides access to <see cref="IDatabaseFacadeDependencies" /> for providers and extensions.

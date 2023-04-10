@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     A facade for design-time operations.
 /// </summary>

@@ -6,6 +6,7 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
+
 internal class SyntaxToken : RazorSyntaxNode
 {
     private readonly GreenNode _leadingTrivia;

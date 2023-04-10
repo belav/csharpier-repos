@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
+
 /// <summary>
 /// A ClaimAction that selects a second level value from the json user data with the given top level key
 /// name and second level sub key name and add it as a Claim.

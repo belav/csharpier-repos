@@ -29,6 +29,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 
+
 public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 {
     private const int MaxRetries = 10;

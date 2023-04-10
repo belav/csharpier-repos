@@ -8,6 +8,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
+
 internal static class RoutePatternParser
 {
     private const char Separator = '/';

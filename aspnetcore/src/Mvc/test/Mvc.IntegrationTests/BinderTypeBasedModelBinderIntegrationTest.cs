@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 public class BinderTypeBasedModelBinderIntegrationTest
 {
     [Fact]

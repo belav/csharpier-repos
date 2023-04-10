@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Represents a segment of UI content, implemented as a delegate that
 /// writes the content to a <see cref="RenderTreeBuilder"/>.

@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
+
 public static class DbUtil
 {
     public static IServiceCollection ConfigureDbServices<TContext>(

@@ -13,6 +13,7 @@ using System.Security.Principal;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
+
 [RequiresUnreferencedCode(
     "Negotiate authentication uses types that cannot be statically analyzed."
 )]

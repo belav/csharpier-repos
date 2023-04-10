@@ -8,6 +8,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Reflection;
 
+
 internal static class ComponentProperties
 {
     internal const BindingFlags BindablePropertyFlags =

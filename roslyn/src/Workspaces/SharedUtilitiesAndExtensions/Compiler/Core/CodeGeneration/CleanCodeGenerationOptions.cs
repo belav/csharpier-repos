@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration;
 
+
 [DataContract]
 internal readonly record struct CleanCodeGenerationOptions
 {

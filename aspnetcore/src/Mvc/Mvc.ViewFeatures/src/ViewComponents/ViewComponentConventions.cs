@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
+
 /// <summary>
 /// Static class that adds standard view component convention methods. This class cannot be inherited.
 /// </summary>

@@ -12,6 +12,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
+
 [Method(Methods.ShutdownName)]
 internal class ShutdownHandler : ILspServiceNotificationHandler
 {

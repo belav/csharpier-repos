@@ -3,6 +3,7 @@
 
 namespace MockHostTypes;
 
+
 public class HostBuilder : IHostBuilder
 {
     public IHost Build() => new Host();

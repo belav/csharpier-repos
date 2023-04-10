@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
+
 /// <summary>
 /// Specifies the name of a Razor extension as defined by the Razor SDK.
 /// </summary>

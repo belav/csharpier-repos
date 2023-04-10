@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 internal sealed class StartupMethods
 {
     public StartupMethods(

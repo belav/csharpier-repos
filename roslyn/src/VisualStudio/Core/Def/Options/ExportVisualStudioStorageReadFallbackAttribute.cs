@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Options;
 
+
 /// <summary>
 /// Use this attribute to declare a custom fallback reader for an option stored in Visual Studio storage.
 /// </summary>

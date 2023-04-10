@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace Microsoft.AspNetCore.Authorization.Test;
 
+
 public class ClaimsAuthorizationRequirementTests
 {
     public ClaimsAuthorizationRequirement CreateRequirement(

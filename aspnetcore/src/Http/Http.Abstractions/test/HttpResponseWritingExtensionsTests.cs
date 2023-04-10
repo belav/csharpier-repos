@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 public class HttpResponseWritingExtensionsTests
 {
     [Fact]

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 internal sealed class DefaultApiAuthorizationOptionsConfiguration
     : IPostConfigureOptions<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
 {

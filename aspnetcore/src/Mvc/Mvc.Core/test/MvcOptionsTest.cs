@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public class MvcOptionsTest
 {
     [Fact]

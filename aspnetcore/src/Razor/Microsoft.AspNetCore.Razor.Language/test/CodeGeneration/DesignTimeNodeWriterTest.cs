@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 public class DesignTimeNodeWriterTest : RazorProjectEngineTestBase
 {
     protected override RazorLanguageVersion Version => RazorLanguageVersion.Latest;

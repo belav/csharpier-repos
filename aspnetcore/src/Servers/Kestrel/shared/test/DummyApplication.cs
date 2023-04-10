@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 public class DummyApplication : IHttpApplication<HttpContext>
 {
     private readonly RequestDelegate _requestDelegate;

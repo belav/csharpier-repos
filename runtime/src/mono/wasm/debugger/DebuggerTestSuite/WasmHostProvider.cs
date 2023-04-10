@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DebuggerTests;
 
+
 internal abstract class WasmHostProvider : IDisposable
 {
     protected ILogger _logger;

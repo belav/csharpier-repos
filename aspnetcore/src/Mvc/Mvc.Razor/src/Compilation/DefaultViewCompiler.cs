@@ -10,6 +10,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
+
 /// <summary>
 /// Caches the result of runtime compilation of Razor files for the duration of the application lifetime.
 /// </summary>

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Analyzers.Infrastructure;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.EmbeddedSyntax;
 
+
 internal readonly struct EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNode, TDerivedNode>
     where TSyntaxKind : struct
     where TSyntaxNode : EmbeddedSyntaxNode<TSyntaxKind, TSyntaxNode>

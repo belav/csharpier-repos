@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.MiddlewareAnalysis;
 
+
 /// <summary>
 /// An <see cref="IStartupFilter"/> that configures the middleware pipeline to log to a <see cref="System.Diagnostics.DiagnosticSource"/>
 /// when middleware starts, finishes and throws.

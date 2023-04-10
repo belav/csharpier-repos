@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 [ModelMetadataType(typeof(Product))]
 public class ProductViewModel
 {

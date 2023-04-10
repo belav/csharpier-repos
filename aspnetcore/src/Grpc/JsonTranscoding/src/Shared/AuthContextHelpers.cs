@@ -22,6 +22,7 @@ using Grpc.Core;
 
 namespace Grpc.Shared;
 
+
 internal static class AuthContextHelpers
 {
     public static AuthContext CreateAuthContext(X509Certificate2 clientCertificate)

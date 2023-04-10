@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authorization;
 
+
 /// <summary>
 /// Determines whether an authorization request was successful or not.
 /// </summary>

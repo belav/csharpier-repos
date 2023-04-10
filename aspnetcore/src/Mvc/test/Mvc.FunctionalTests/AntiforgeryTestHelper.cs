@@ -6,6 +6,7 @@ using AngleSharp.Parser.Html;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public static class AntiforgeryTestHelper
 {
     public static string RetrieveAntiforgeryToken(string htmlContent) =>

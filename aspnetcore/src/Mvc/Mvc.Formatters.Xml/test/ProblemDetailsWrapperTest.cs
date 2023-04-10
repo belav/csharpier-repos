@@ -7,6 +7,7 @@ using System.Xml;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 public class ProblemDetailsWrapperTest
 {
     [Fact]

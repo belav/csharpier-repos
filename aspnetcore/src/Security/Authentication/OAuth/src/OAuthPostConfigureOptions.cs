@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Used to setup defaults for the OAuthOptions.
 /// </summary>

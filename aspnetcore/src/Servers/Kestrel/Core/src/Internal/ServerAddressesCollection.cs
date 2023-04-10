@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
+
 internal sealed class ServerAddressesCollection : ICollection<string>
 {
     private readonly List<string> _addresses = new List<string>();

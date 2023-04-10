@@ -8,6 +8,7 @@ using PhotinoNET;
 
 namespace Microsoft.AspNetCore.Components.WebView.Photino;
 
+
 internal class PhotinoWebViewManager : WebViewManager
 {
     private readonly PhotinoWindow _window;

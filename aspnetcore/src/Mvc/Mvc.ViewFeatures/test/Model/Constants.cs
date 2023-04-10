@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Model;
 
+
 public static class Constants
 {
     public const int WoodstockYear = 1969;

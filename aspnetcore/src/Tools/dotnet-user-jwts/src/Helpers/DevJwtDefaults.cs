@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
+
 internal static class DevJwtsDefaults
 {
     public static string Scheme => "Bearer";

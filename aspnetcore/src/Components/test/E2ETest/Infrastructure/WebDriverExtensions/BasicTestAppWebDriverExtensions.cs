@@ -7,6 +7,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Microsoft.AspNetCore.Components.E2ETest;
 
+
 internal static class BasicTestAppWebDriverExtensions
 {
     public static IWebElement MountTestComponent<TComponent>(this IWebDriver browser)

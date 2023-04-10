@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Server.IntegrationTesting;
 
 namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn;
 
+
 public class AutobahnExpectations
 {
     private readonly Dictionary<string, Expectation> _expectations =

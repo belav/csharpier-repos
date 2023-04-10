@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// A provider abstraction for configuring the "User ID" for a connection.
 /// </summary>

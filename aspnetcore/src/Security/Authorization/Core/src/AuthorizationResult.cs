@@ -6,6 +6,7 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authorization;
 
+
 /// <summary>
 /// Encapsulates the result of <see cref="IAuthorizationService.AuthorizeAsync(ClaimsPrincipal, object, IEnumerable{IAuthorizationRequirement})"/>.
 /// </summary>

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ClientSample;
 
+
 internal class HubSample
 {
     internal static void Register(CommandLineApplication app)

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     Service which helps with various aspects of navigation expansion extensibility.
 /// </summary>

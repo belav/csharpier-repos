@@ -14,6 +14,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
+
 public class HtmlHelperSelectTest
 {
     private static readonly SelectListGroup GroupOne = new SelectListGroup { Name = "Group One", };

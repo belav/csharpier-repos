@@ -19,6 +19,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 /// <summary>
 /// A builder for configuring and creating a <see cref="WebAssemblyHost"/>.
 /// </summary>

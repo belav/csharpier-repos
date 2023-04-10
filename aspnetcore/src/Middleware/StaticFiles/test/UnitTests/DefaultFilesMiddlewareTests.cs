@@ -11,6 +11,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 public class DefaultFilesMiddlewareTests
 {
     [Fact]

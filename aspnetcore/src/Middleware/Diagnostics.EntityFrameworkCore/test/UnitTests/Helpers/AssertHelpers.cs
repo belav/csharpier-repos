@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests.Helpers;
 
+
 public static class AssertHelpers
 {
     public static void DisplaysScaffoldFirstMigration(Type contextType, string content)

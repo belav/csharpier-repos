@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
+
 public class LoggerBuilderExtensionsTests
 {
     private IWebAppContext _appContext;

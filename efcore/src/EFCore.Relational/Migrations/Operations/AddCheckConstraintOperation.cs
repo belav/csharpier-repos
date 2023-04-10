@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 
+
 /// <summary>
 ///     A <see cref="MigrationOperation" /> for creating a new check constraint.
 /// </summary>

@@ -12,6 +12,7 @@ using static Microsoft.Extensions.DependencyInjection.ServiceDescriptor;
 
 namespace Microsoft.Extensions.Logging;
 
+
 /// <summary>
 /// Extension methods for adding Azure diagnostics logger.
 /// </summary>

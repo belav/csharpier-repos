@@ -8,6 +8,7 @@ using static Microsoft.AspNetCore.HttpLogging.MediaTypeOptions;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 internal static class MediaTypeHelpers
 {
     private static readonly List<Encoding> SupportedEncodings = new List<Encoding>()

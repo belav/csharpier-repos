@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods for configuring MVC data annotations localization.
 /// </summary>

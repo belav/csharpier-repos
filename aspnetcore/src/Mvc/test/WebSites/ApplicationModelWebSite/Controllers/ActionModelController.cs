@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ApplicationModelWebSite;
 
+
 // This controller uses an reflected model attribute to change an action name, and thus
 // the URL.
 public class ActionModelController : Controller

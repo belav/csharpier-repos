@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 public partial class ModelValidatorTest
 {
     [ConditionalFact]

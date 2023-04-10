@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.DataProtection.Internal;
 
+
 internal static class ContainerUtils
 {
     private static readonly Lazy<bool> _isContainer = new Lazy<bool>(IsProcessRunningInContainer);

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
+
 /// <summary>
 ///     Base type for model code generators that use templates.
 /// </summary>

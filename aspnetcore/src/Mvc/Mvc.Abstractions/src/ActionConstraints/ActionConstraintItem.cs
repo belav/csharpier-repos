@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ActionConstraints;
 
+
 /// <summary>
 /// Represents an <see cref="IActionConstraintMetadata"/> with or without a corresponding
 /// <see cref="IActionConstraint"/>.

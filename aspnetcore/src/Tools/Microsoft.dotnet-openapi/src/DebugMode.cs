@@ -8,6 +8,7 @@ using System.Threading;
 
 namespace Microsoft.DotNet.OpenApi;
 
+
 internal static class DebugMode
 {
     public static void HandleDebugSwitch(ref string[] args)

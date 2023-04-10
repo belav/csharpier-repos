@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class AttributeMatcherTest
 {
     private static readonly Func<Mode, Mode, int> Compare = (a, b) => a - b;

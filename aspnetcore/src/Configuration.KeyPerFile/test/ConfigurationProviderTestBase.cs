@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Configuration.Test;
 
+
 public abstract class ConfigurationProviderTestBase
 {
     [Fact]

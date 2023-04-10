@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Testing.Handlers;
 
 namespace Microsoft.AspNetCore.Mvc.Testing;
 
+
 /// <summary>
 /// The default options to use to when creating
 /// <see cref="HttpClient"/> instances by calling

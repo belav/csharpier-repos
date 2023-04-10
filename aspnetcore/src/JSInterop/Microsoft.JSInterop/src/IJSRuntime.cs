@@ -6,6 +6,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop;
 
+
 /// <summary>
 /// Represents an instance of a JavaScript runtime to which calls may be dispatched.
 /// </summary>

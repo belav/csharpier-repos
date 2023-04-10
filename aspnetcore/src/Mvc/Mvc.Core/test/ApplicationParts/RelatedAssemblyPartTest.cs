@@ -7,6 +7,7 @@ using System.Runtime.Loader;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
+
 public class RelatedAssemblyPartTest
 {
     private static readonly string AssemblyDirectory = Path.GetTempPath()

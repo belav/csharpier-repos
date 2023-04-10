@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cryptography.SafeHandles;
 
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
+
 /// <summary>
 /// Provides cached CNG algorithm provider instances, as calling BCryptOpenAlgorithmProvider is expensive.
 /// Callers should use caution never to dispose of the algorithm provider instances returned by this type.

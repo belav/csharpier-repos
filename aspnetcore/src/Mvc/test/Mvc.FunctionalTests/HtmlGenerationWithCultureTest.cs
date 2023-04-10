@@ -17,6 +17,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class HtmlGenerationWithCultureTest
     : LoggedTest,
         IClassFixture<MvcTestFixture<StartupWithCultureReplace>>

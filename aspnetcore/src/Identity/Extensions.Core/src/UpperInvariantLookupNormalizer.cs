@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Implements <see cref="ILookupNormalizer"/> by converting keys to their upper cased invariant culture representation.
 /// </summary>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace CustomBasePathApp;
 
+
 public class Program
 {
     public static async Task Main(string[] args)

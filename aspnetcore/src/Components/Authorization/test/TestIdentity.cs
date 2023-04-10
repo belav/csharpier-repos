@@ -5,6 +5,7 @@ using System.Security.Principal;
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
+
 public class TestIdentity : IIdentity
 {
     public string AuthenticationType => "Test";

@@ -22,6 +22,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
+
 public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
 {
     protected override string DefaultScheme => JwtBearerDefaults.AuthenticationScheme;

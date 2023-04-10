@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
+
 public class StringConcatWithSelfExpressionMutator : ExpressionMutator
 {
     private readonly ExpressionFinder _expressionFinder = new();

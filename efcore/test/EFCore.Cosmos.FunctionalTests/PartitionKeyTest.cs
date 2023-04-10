@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
+
 public class PartitionKeyTest : IClassFixture<PartitionKeyTest.CosmosPartitionKeyFixture>
 {
     private const string DatabaseName = nameof(PartitionKeyTest);

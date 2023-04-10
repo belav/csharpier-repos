@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
+
 public class ValueGeneratorCacheTest
 {
     [ConditionalFact]

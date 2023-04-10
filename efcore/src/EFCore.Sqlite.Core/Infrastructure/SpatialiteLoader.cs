@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     Finds and loads SpatiaLite.
 /// </summary>

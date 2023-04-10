@@ -6,6 +6,7 @@ using System.Text.Encodings.Web;
 
 namespace Microsoft.AspNetCore.Html;
 
+
 /// <summary>
 /// An <see cref="IHtmlContentBuilder"/> implementation using an in memory list.
 /// </summary>

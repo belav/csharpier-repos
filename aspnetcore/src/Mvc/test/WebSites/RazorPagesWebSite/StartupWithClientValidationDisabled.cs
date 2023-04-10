@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorPagesWebSite;
 
+
 public class StartupWithClientValidationDisabled
 {
     public void ConfigureServices(IServiceCollection services)

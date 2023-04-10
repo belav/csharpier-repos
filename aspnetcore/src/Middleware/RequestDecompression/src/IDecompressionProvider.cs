@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.RequestDecompression;
 
+
 /// <summary>
 /// Provides a specific decompression implementation to decompress HTTP request bodies.
 /// </summary>

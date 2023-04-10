@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
+
 public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGenericTest
 {
     public class NonGenericStringOneToOneType : OneToOneTestBase

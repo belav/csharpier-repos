@@ -12,6 +12,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Identity.InMemory.Test;
 
+
 public class ControllerTest
 {
     [Theory]

@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     Represents a fluent API method call.
 /// </summary>

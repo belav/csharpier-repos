@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
+
 internal sealed class DotNetObjectReferenceJsonConverterFactory : JsonConverterFactory
 {
     public DotNetObjectReferenceJsonConverterFactory(JSRuntime jsRuntime)

@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
+
 internal static class SymbolExtensions
 {
     public static bool HasAttribute(this ISymbol symbol, INamedTypeSymbol attributeType)

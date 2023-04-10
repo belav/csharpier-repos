@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 public class ApiConventionApplicationModelConventionTest
 {
     [Fact]

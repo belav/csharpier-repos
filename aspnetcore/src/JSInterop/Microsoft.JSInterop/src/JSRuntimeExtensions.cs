@@ -7,6 +7,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop;
 
+
 /// <summary>
 /// Extensions for <see cref="IJSRuntime"/>.
 /// </summary>

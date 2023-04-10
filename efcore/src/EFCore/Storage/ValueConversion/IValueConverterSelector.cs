@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 /// <summary>
 ///     A registry of <see cref="ValueConverterInfo" /> that can be used to find
 ///     the preferred converter to use to convert to and from a given model type

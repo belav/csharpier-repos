@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
+
 public abstract partial class Renderer
 {
     internal static partial class Log

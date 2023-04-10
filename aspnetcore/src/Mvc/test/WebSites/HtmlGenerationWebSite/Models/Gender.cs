@@ -3,6 +3,7 @@
 
 namespace HtmlGenerationWebSite.Models;
 
+
 public enum Gender
 {
     Male,

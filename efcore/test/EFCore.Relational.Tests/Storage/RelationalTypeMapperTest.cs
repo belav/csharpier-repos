@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class RelationalTypeMapperTest : RelationalTypeMapperTestBase
 {
     [ConditionalFact]

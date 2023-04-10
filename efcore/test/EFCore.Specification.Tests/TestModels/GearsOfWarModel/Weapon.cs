@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
+
 public class Weapon
 {
     // auto generated key (sequence) TODO: make nullable when issue #478 is fixed

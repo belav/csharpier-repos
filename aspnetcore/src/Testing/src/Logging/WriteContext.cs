@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.Extensions.Logging.Testing;
 
+
 public class WriteContext
 {
     public LogLevel LogLevel { get; set; }

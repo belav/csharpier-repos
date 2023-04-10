@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
+
 internal sealed class LoggingConnectionMiddleware
 {
     private readonly ConnectionDelegate _next;

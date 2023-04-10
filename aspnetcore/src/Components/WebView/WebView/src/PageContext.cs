@@ -10,6 +10,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.WebView;
 
+
 /// <summary>
 /// Represents the services that are scoped to a single page load. Grouping them like this
 /// means we don't have to check that each of them are available individually.

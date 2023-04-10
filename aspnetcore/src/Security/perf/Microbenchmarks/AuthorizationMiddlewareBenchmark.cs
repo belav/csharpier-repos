@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Security;
 
+
 public class AuthorizationMiddlewareBenchmark
 {
     private AuthorizationMiddleware _authorizationMiddleware;

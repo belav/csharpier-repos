@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// Performs necessary modifications to the <see cref="Intermediate.DocumentIntermediateNode"/> to complete and
 /// optimize code generation.

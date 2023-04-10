@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
+
 public class FormatFilterController : Controller
 {
     [Produces("application/FormatFilterController")]

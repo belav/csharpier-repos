@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class FiltersTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {
     public FiltersTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)

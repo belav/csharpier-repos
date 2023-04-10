@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Class to configure the <see cref="HubOptions"/> for a specific <typeparamref name="THub"/>.
 /// </summary>

@@ -4,6 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.EditAndContinue;
 
+
 internal static class EditAndContinueUIContext
 {
     /// <summary>

@@ -33,6 +33,7 @@ using Newtonsoft.Json.Linq;
 
 namespace InteropTestsClient;
 
+
 public class InteropClient : IDisposable
 {
     internal const string CompressionRequestAlgorithmMetadataKey = "grpc-internal-encoding-request";

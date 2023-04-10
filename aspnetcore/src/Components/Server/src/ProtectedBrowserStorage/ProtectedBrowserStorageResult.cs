@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
+
 /// <summary>
 /// Contains the result of a protected browser storage operation.
 /// </summary>

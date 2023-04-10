@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
+
 public class TPTInheritanceBulkUpdatesSqliteTest
     : TPTInheritanceBulkUpdatesTestBase<TPTInheritanceBulkUpdatesSqliteFixture>
 {

@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Localization;
 
+
 public class ResourceManagerStringLocalizerTest
 {
     [Fact]

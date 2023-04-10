@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace TestHelper;
 
+
 /// <summary>
 /// Diagnostic Producer class with extra methods dealing with applying codefixes
 /// All methods are static

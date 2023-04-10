@@ -6,6 +6,7 @@ using ProtoTest;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : GrpcTestBase<TFixture>.GrpcFixtureBase
 {

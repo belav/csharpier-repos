@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CorsWebSite;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

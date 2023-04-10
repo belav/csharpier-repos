@@ -6,6 +6,7 @@ using Microsoft.Win32;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
+
 public class TestRegistryKey : IDisposable
 {
     private readonly RegistryKey _baseHive;

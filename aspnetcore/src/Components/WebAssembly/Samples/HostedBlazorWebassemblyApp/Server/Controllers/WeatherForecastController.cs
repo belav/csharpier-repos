@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HostedBlazorWebassemblyApp.Server.Controllers;
 
+
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase

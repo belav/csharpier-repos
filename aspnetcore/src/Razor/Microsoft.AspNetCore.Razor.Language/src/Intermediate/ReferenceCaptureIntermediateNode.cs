@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public sealed class ReferenceCaptureIntermediateNode : IntermediateNode
 {
     public ReferenceCaptureIntermediateNode(IntermediateToken identifierToken)

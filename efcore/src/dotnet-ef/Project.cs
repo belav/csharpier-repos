@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
+
 internal class Project
 {
     private readonly string _file;

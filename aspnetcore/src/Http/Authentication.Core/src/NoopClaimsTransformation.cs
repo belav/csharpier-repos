@@ -5,6 +5,7 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Default claims transformation is a no-op.
 /// </summary>

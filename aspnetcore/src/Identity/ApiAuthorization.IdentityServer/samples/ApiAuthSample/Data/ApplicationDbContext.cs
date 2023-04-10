@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace ApiAuthSample.Data;
 
+
 public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 {
     public ApplicationDbContext(

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 public class LifetimeNotImplemented : IHostApplicationLifetime
 {
     public CancellationToken ApplicationStarted

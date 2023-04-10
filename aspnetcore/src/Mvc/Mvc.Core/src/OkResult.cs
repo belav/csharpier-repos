@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// An <see cref="StatusCodeResult"/> that when executed will produce an empty
 /// <see cref="StatusCodes.Status200OK"/> response.

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
+
 #pragma warning disable CA1852 // Seal internal types
 internal class RazorReferenceManager
 #pragma warning restore CA1852 // Seal internal types

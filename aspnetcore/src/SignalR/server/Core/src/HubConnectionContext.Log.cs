@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 public partial class HubConnectionContext
 {
     private static partial class Log

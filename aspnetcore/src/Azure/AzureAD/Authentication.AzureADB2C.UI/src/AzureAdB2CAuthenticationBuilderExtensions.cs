@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Extension methods to add Azure Active Directory B2C Authentication to your application.
 /// </summary>

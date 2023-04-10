@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class ManyToManyQueryInMemoryFixture : ManyToManyQueryFixtureBase
 {
     protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;

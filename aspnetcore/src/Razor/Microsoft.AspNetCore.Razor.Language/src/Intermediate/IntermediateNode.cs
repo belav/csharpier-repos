@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 [DebuggerDisplay("{DebuggerToString(),nq}")]
 public abstract class IntermediateNode
 {

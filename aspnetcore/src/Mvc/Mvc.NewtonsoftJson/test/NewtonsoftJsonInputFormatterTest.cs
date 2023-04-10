@@ -17,6 +17,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
 {
     private readonly ObjectPoolProvider _objectPoolProvider = new DefaultObjectPoolProvider();

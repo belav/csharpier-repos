@@ -3,6 +3,7 @@
 
 namespace FormatterWebSite;
 
+
 public class DerivedDummyClass : DummyClass
 {
     public int SampleIntInDerived { get; set; }

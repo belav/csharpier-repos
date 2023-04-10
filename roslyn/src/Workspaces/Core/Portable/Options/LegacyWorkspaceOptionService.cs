@@ -13,6 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Options;
 
+
 [Export(typeof(ILegacyGlobalOptionService)), Shared]
 internal sealed class LegacyGlobalOptionService : ILegacyGlobalOptionService
 {

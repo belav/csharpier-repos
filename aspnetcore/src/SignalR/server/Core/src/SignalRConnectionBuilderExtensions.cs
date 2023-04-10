@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR.Internal;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Extension methods for <see cref="IConnectionBuilder"/>.
 /// </summary>

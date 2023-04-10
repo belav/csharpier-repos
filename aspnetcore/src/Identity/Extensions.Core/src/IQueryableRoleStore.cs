@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Provides an abstraction for querying roles in a Role store.
 /// </summary>

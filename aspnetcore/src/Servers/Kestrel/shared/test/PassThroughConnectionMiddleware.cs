@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 public class PassThroughConnectionMiddleware
 {
     private readonly ConnectionDelegate _next;

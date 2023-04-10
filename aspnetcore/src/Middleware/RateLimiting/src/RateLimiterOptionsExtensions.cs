@@ -5,6 +5,7 @@ using System.Threading.RateLimiting;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
+
 /// <summary>
 /// Extension methods for the RateLimiting middleware options.
 /// </summary>

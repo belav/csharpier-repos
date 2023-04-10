@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Completion;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
+
 public partial class FrameworkParametersCompletionProviderTests
 {
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new RoutePatternAnalyzer());

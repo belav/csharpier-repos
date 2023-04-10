@@ -8,6 +8,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.Extensions.Configuration;
 
+
 /// <summary>
 /// Extension methods for registering <see cref="KeyPerFileConfigurationProvider"/> with <see cref="IConfigurationBuilder"/>.
 /// </summary>

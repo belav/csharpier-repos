@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class PhysicalAddressToStringConverterTest
 {
     private static readonly PhysicalAddressToStringConverter _physicalAddressToString = new();

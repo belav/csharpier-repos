@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 /// <summary>
 /// A <see cref="IRazorEngineFeature"/> that can calculate the identifier for a <see cref="RazorSourceDocument"/>.
 /// </summary>

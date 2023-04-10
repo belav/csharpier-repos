@@ -5,6 +5,7 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 // This implementation is temporary, in the future we'll want to have
 // a more performant/properly designed routing set of abstractions.
 // To be more precise these are some things we are scoping out:

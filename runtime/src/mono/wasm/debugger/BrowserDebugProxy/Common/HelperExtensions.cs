@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 internal static class HelperExtensions
 {
     private const int MaxLogMessageLineLength = 65536;

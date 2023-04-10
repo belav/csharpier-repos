@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Associates an event argument type with an event attribute name.
 /// </summary>

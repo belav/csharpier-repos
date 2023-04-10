@@ -5,6 +5,7 @@ using Microsoft.JSInterop;
 
 namespace TestContentPackage;
 
+
 public static class MyPrompt
 {
     public static ValueTask<string> Show(IJSRuntime jsRuntime, string message)

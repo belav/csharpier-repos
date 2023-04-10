@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class CSharpTokenizer : Tokenizer
 {
     private readonly Dictionary<char, Func<SyntaxKind>> _operatorHandlers;

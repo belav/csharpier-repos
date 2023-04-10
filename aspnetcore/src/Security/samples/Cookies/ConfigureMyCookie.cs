@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace AuthSamples.Cookies;
 
+
 internal class ConfigureMyCookie : IConfigureNamedOptions<CookieAuthenticationOptions>
 {
     // You can inject services here

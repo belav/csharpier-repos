@@ -15,6 +15,7 @@ using Microsoft.Extensions.CommandLineUtils;
 
 namespace Microsoft.DotNet.OpenApi.Commands;
 
+
 internal abstract class BaseCommand : CommandLineApplication
 {
     protected string WorkingDirectory;

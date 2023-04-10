@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
+
 public class StartupWithConfigureServicesNotResolved
 {
     public StartupWithConfigureServicesNotResolved() { }

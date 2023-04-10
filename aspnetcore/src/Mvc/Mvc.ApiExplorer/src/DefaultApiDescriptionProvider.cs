@@ -16,6 +16,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 /// <summary>
 /// Implements a provider of <see cref="ApiDescription"/> for actions represented
 /// by <see cref="ControllerActionDescriptor"/>.

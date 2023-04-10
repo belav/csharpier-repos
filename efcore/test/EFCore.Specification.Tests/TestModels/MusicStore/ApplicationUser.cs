@@ -5,4 +5,5 @@ using Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore;
 
+
 public class ApplicationUser : IdentityUser { }

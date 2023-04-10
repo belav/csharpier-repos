@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// An <see cref="ActionResult"/> that returns a Found (302)
 /// or Moved Permanently (301) response with a Location header.

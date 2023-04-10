@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class Ef6GroupBySqlServerTest
     : Ef6GroupByTestBase<Ef6GroupBySqlServerTest.Ef6GroupBySqlServerFixture>
 {

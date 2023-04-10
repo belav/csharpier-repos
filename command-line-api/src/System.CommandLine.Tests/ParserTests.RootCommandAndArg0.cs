@@ -8,6 +8,7 @@ using Xunit;
 
 namespace System.CommandLine.Tests;
 
+
 public partial class ParserTests
 {
     public partial class RootCommandAndArg0

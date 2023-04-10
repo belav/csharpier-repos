@@ -10,6 +10,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
+
 public static class MockHubConnection
 {
     public static Mock<HubConnection> Get()

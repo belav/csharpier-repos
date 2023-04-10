@@ -11,6 +11,7 @@ using static Microsoft.AspNetCore.OpenApi.Tests.OpenApiOperationGeneratorTests;
 
 namespace Microsoft.AspNetCore.OpenApi.Tests;
 
+
 public class OpenApiRouteHandlerBuilderExtensionTests
 {
     [Fact]

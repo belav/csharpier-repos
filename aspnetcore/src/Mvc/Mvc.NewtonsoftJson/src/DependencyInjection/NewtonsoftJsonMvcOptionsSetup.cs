@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Sets up JSON formatter options for <see cref="MvcOptions"/>.
 /// </summary>

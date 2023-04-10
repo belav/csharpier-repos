@@ -10,6 +10,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
+
 /// <summary>
 /// An <see cref="IViewLocalizer"/> implementation that derives the resource location from the executing view's
 /// file path.

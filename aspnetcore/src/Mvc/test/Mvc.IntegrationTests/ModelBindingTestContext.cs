@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 public class ModelBindingTestContext : ControllerContext
 {
     public IModelMetadataProvider MetadataProvider { get; set; }

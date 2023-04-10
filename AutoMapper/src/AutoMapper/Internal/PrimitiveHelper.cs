@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace AutoMapper.Internal;
 
+
 [EditorBrowsable(EditorBrowsableState.Never)]
 public static class PrimitiveHelper
 {

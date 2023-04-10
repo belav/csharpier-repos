@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test;
 
+
 public class ModelBindingResultTest
 {
     [Fact]

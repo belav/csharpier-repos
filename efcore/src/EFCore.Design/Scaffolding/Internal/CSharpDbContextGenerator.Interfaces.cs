@@ -3,4 +3,5 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
+
 partial class CSharpDbContextGenerator : ITextTransformation { }

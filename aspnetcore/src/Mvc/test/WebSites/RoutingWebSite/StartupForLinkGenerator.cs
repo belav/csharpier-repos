@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace RoutingWebSite;
 
+
 // A very basic routing configuration for LinkGenerator tests
 public class StartupForLinkGenerator
 {

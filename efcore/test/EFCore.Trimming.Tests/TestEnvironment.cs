@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace EFCore.Trimming.Tests;
 
+
 public static class TestEnvironment
 {
     public static IConfiguration Config { get; } =

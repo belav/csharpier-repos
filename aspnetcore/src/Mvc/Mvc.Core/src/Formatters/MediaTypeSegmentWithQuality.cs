@@ -5,6 +5,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 /// <summary>
 /// A media type with its associated quality.
 /// </summary>

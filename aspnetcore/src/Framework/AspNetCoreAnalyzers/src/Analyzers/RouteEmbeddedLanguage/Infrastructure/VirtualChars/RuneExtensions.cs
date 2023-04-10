@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure.VirtualChars;
 
+
 internal static class Extensions
 {
     public static bool TryGetEscapeCharacter(this VirtualChar ch, out char escapedChar) =>

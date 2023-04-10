@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     A <see cref="IIdentityResolutionInterceptor" /> that ignores the new instance and retains property values from the existing
 ///     tracked instance.

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 public static class HelixConstants
 {
     public const string Windows10Arm64 = "Windows.10.Arm64v8.Open;";

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR.Internal;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
+
 public class TypedClientBuilderBenchmark
 {
     private static readonly IClientProxy Dummy = new DummyProxy();

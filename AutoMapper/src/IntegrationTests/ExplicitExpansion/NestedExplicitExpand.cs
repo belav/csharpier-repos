@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
+
 public class NestedExplicitExpand : IntegrationTest<NestedExplicitExpand.DatabaseInitializer>
 {
     protected override MapperConfiguration CreateConfiguration() =>

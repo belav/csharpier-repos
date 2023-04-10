@@ -7,6 +7,7 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Html;
 
+
 public class HtmlFormattableStringTest
 {
     [Fact]

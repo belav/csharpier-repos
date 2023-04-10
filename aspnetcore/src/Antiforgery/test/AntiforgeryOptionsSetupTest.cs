@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Antiforgery.Internal;
 
+
 public class AntiforgeryOptionsSetupTest
 {
     [Theory]

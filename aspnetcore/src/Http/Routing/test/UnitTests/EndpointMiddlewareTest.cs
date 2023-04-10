@@ -10,6 +10,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 public class EndpointMiddlewareTest
 {
     private readonly IOptions<RouteOptions> RouteOptions = Options.Create(new RouteOptions());

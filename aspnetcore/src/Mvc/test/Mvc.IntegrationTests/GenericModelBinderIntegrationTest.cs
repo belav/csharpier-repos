@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 // Integration tests targeting the behavior of the GenericModelBinder and related classes
 // with other model binders.
 public class GenericModelBinderIntegrationTest

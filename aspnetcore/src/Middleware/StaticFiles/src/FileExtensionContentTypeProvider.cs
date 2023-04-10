@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 /// <summary>
 /// Provides a mapping between file extensions and MIME types.
 /// </summary>

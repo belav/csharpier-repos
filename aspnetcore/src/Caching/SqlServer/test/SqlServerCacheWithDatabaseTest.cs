@@ -16,6 +16,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Caching.SqlServer;
 
+
 public class SqlServerCacheWithDatabaseTest
 {
     // These tests are disabled by default. To run them, run the "run-db-tests.ps1" script

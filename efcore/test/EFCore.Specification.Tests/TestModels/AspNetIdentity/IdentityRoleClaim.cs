@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
+
 public class IdentityRoleClaim<TKey>
     where TKey : IEquatable<TKey>
 {

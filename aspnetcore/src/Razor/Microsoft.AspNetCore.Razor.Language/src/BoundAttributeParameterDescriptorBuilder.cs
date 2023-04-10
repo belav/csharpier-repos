@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class BoundAttributeParameterDescriptorBuilder
 {
     public abstract string Name { get; set; }

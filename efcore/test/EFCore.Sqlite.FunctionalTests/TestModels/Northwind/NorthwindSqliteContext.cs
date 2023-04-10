@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
+
 public class NorthwindSqliteContext : NorthwindRelationalContext
 {
     public NorthwindSqliteContext(DbContextOptions options)

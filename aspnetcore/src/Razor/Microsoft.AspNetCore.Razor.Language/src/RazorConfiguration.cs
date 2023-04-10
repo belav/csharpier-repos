@@ -9,6 +9,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class RazorConfiguration : IEquatable<RazorConfiguration>
 {
     public static readonly RazorConfiguration Default = new DefaultRazorConfiguration(

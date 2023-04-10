@@ -8,6 +8,7 @@ using IsolationLevel = System.Data.IsolationLevel;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class RelationalDatabaseFacadeExtensionsTest
 {
     [ConditionalFact]

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
+
 internal sealed class ConfigureStaticFilesOptions : IPostConfigureOptions<StaticFileOptions>
 {
     public ConfigureStaticFilesOptions(IWebHostEnvironment environment)

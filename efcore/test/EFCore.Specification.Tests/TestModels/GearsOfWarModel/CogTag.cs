@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
+
 public class CogTag
 {
     // auto generated key (identity for now)

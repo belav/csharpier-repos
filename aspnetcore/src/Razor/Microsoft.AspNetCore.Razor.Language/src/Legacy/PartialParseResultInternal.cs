@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 // Flags:
 //  Provisional, ContextChanged, Accepted, Rejected
 //  000001 1  - Rejected,

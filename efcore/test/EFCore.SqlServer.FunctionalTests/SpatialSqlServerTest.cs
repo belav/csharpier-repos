@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class SpatialSqlServerTest : SpatialTestBase<SpatialSqlServerFixture>
 {
     public SpatialSqlServerTest(SpatialSqlServerFixture fixture)

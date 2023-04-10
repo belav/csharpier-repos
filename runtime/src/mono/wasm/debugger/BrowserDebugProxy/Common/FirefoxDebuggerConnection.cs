@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 #nullable enable
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 internal sealed class FirefoxDebuggerConnection : WasmDebuggerConnection
 {
     public TcpClient TcpClient { get; init; }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 /// <summary>
 /// An <see cref="IViewEngine"/> used to render pages that use the Razor syntax.
 /// </summary>

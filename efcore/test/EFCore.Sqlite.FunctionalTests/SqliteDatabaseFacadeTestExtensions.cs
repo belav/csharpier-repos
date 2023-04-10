@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public static class SqliteDatabaseFacadeTestExtensions
 {
     public static void EnsureClean(this DatabaseFacade databaseFacade) =>

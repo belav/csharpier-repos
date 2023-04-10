@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class F1FixtureBase<TRowVersion> : SharedStoreFixtureBase<F1Context>
 {
     protected override string StoreName => "F1Test";

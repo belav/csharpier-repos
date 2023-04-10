@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
+
 /// <summary>
 /// A policy that sets the cache key prefix using the specified value.
 /// </summary>

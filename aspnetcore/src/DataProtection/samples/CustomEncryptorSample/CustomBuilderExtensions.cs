@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace CustomEncryptorSample;
 
+
 public static class CustomBuilderExtensions
 {
     public static IDataProtectionBuilder UseXmlEncryptor(

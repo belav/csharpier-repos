@@ -18,6 +18,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 internal sealed class AutoRedirectEndSessionEndpoint : IEndpointHandler
 {
     private readonly ILogger _logger;

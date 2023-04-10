@@ -5,6 +5,7 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Http.Features.Authentication;
 
+
 /// <summary>
 /// Default implementation for <see cref="IHttpAuthenticationFeature"/>.
 /// </summary>

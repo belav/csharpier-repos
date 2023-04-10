@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class RelationalConnectionTest
 {
     [ConditionalFact]

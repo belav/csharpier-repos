@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 public class SqlServerMemoryOptimizedTablesConventionTest
 {
     [ConditionalFact]

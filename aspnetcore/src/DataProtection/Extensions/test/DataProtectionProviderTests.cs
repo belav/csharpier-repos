@@ -19,6 +19,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 public class DataProtectionProviderTests
 {
     [Fact]

@@ -14,6 +14,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Internal;
 
+
 public class AccountControllerTests
 {
     [Fact]

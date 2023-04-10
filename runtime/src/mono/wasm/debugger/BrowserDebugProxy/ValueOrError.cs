@@ -7,6 +7,7 @@ using System;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 public struct ValueOrError<TValue>
 {
     public TValue? Value { get; init; }

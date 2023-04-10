@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
+
 /// <summary>
 /// Discovers controllers from a list of <see cref="ApplicationPart"/> instances.
 /// </summary>

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
+
 public class CustomConvertersCosmosTest
     : CustomConvertersTestBase<CustomConvertersCosmosTest.CustomConvertersCosmosFixture>
 {

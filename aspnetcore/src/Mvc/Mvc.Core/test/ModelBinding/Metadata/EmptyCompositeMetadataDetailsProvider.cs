@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
+
 internal class EmptyCompositeMetadataDetailsProvider : DefaultCompositeMetadataDetailsProvider
 {
     public EmptyCompositeMetadataDetailsProvider()

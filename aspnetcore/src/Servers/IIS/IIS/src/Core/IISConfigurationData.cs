@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.Marshalling;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
+
 [NativeMarshalling(typeof(Marshaller))]
 [StructLayout(LayoutKind.Sequential)]
 internal struct IISConfigurationData

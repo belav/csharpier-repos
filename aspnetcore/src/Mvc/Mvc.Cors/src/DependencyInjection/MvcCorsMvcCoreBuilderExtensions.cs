@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extensions for configuring CORS using an <see cref="IMvcCoreBuilder"/>.
 /// </summary>

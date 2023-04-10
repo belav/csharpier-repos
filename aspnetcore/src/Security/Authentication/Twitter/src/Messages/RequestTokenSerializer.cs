@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
+
 /// <summary>
 /// Serializes and deserializes Twitter request and access tokens so that they can be used by other application components.
 /// </summary>

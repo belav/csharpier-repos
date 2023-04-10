@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
+
 public class BroadcastBenchmark
 {
     private const string TestGroupName = "TestGroup";

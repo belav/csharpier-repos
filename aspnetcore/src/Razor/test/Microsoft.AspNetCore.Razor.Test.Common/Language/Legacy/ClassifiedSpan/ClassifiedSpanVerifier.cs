@@ -9,6 +9,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class ClassifiedSpanVerifier
 {
     internal static void Verify(RazorSyntaxTree syntaxTree, string[] baseline)

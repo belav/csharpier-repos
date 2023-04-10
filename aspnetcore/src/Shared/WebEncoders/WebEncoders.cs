@@ -14,8 +14,10 @@ using Microsoft.Extensions.WebEncoders.Sources;
 #if WebEncoders_In_WebUtilities
 namespace Microsoft.AspNetCore.WebUtilities;
 
+
 #else
 namespace Microsoft.Extensions.Internal;
+
 
 #endif
 /// <summary>

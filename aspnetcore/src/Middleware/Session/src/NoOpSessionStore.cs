@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Session;
 
+
 internal sealed class NoOpSessionStore : IDistributedSessionStore
 {
     public void SetValue(EncodedKey key, byte[] value) { }

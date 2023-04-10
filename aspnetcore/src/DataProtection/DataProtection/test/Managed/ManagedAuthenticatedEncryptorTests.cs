@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.DataProtection.Managed;
 
+
 public class ManagedAuthenticatedEncryptorTests
 {
     [Fact]

@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 
 namespace System.CommandLine;
 
+
 /// <summary>
 /// Indicates that a command line configuration is invalid.
 /// </summary>

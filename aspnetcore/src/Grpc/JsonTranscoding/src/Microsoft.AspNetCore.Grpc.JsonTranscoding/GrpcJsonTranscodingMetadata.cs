@@ -6,6 +6,7 @@ using Google.Protobuf.Reflection;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding;
 
+
 /// <summary>
 /// Metadata for a gRPC JSON transcoding endpoint.
 /// </summary>

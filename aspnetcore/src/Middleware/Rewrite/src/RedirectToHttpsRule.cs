@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Rewrite.Logging;
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 internal sealed class RedirectToHttpsRule : IRule
 {
     public int? SSLPort { get; set; }

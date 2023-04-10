@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// An opinionated abstraction for implementing <see cref="IAuthenticationHandler"/>.
 /// </summary>

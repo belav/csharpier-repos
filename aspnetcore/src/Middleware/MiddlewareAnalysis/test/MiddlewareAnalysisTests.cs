@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.MiddlewareAnalysis;
 
+
 public class MiddlewareAnalysisTests
 {
     [Fact]

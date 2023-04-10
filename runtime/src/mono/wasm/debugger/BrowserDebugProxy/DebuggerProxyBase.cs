@@ -7,6 +7,7 @@ using System;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 public abstract class DebuggerProxyBase
 {
     public RunLoopExitState? ExitState { get; set; }

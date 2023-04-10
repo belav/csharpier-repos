@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Context passed for redirect events.
 /// </summary>

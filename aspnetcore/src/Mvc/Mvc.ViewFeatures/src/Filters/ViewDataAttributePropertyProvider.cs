@@ -6,6 +6,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
+
 internal static class ViewDataAttributePropertyProvider
 {
     public static IReadOnlyList<LifecycleProperty> GetViewDataProperties(Type type)

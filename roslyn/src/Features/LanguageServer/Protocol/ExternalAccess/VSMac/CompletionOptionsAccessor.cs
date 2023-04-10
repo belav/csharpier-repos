@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.ExternalAccess.VSMac;
 
+
 internal static class CompletionOptionsAccessor
 {
     public static PerLanguageOption2<bool?> ShowItemsFromUnimportedNamespaces =>

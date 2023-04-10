@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public class DefaultRazorProjectFileSystemTest
 {
     private static string TestFolder { get; } =

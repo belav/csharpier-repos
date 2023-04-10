@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class TargetISet : AutoMapperSpecBase
 {
     Destination _destination;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class ToSqlQuerySqliteTest : ToSqlQueryTestBase
 {
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;

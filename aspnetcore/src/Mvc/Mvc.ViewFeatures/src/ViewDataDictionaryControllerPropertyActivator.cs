@@ -8,6 +8,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 /// <summary>
 /// Represents a <see cref="IControllerActivatorProvider"/> for a view data dictionary controller.
 /// </summary>

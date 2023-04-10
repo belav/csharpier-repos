@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class ExistingArrays : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>

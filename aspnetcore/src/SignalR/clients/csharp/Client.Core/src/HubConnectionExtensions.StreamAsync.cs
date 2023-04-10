@@ -8,6 +8,7 @@ using System.Threading;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
+
 /// <summary>
 /// Extension methods for <see cref="HubConnectionExtensions"/>.
 /// </summary>

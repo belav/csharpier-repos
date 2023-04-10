@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 // Integration tests for extension methods on IHealthCheckBuilder
 //
 // We test the longest overload of each 'family' of Add...Check methods, since they chain to each other.

@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions;
 
+
 [ExportCSharpVisualBasicLspServiceFactory(typeof(CodeActionsCache)), Shared]
 internal class CodeActionsCacheFactory : ILspServiceFactory
 {

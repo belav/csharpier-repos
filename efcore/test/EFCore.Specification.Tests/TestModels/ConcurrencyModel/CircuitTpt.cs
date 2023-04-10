@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public abstract class CircuitTpt
 {
     public int Id { get; set; }

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Http;
 
+
 /// <summary>
 /// Specifies a value for the 'credentials' option on outbound HTTP requests.
 /// </summary>

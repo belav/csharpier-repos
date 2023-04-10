@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
+
 [Method(Methods.InitializedName)]
 internal class InitializedHandler : ILspServiceNotificationHandler<InitializedParams>
 {

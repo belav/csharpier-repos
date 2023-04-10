@@ -7,6 +7,7 @@ using AngleSharp.Parser.Html;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
+
 public class HtmlAssert
 {
     public static IHtmlFormElement HasForm(IHtmlDocument document)

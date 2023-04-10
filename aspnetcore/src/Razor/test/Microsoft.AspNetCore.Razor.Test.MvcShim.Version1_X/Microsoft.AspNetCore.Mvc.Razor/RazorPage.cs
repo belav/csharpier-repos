@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 public abstract class RazorPage : IRazorPage
 {
     public ViewContext ViewContext { get; set; }

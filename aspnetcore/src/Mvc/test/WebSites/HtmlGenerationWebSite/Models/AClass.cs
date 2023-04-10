@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HtmlGenerationWebSite.Models;
 
+
 public class AClass
 {
     public DayOfWeek DayOfWeek { get; set; }

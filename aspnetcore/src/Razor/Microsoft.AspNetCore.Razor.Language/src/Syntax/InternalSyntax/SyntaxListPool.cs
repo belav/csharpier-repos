@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
+
 internal class SyntaxListPool
 {
     private ArrayElement<SyntaxListBuilder>[] _freeList = new ArrayElement<SyntaxListBuilder>[10];

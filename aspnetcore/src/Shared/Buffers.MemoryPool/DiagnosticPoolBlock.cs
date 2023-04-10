@@ -9,6 +9,7 @@ using System.Threading;
 
 namespace System.Buffers;
 
+
 /// <summary>
 /// Block tracking object used by the byte buffer memory pool. A slab is a large allocation which is divided into smaller blocks. The
 /// individual blocks are then treated as independent array segments.

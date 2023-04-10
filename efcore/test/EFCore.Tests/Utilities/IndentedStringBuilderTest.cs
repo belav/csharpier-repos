@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
+
 public class IndentedStringBuilderTest
 {
     private static readonly string EOL = Environment.NewLine;

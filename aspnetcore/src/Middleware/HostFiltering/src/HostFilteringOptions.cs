@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.HostFiltering;
 
+
 /// <summary>
 /// Options for the HostFiltering middleware
 /// </summary>

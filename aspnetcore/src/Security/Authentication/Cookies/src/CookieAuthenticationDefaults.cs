@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
+
 /// <summary>
 /// Default values related to cookie-based authentication handler
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.ObjectPool;
 
+
 /// <summary>
 /// A provider of <see cref="ObjectPool{T}"/> instances.
 /// </summary>

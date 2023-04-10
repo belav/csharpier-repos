@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Extensions.Internal;
 
+
 internal sealed class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TValue>
     where TKey : notnull
 {

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 public class ActionParameterIntegrationTest
 {
     private class Address

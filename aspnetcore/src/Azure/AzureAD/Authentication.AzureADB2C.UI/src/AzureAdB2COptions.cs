@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
+
 /// <summary>
 /// Options for configuring authentication using Azure Active Directory B2C.
 /// </summary>

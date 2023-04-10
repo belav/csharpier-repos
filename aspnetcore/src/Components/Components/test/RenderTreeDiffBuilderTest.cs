@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.Test;
 
+
 public class RenderTreeDiffBuilderTest : IDisposable
 {
     private readonly Renderer renderer;

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Localization.Test;
 
+
 public class MvcLocalizationMvcCoreBuilderExtensionsTest
 {
     public static TheoryData<IMvcCoreBuilder> MvcCoreBuilderExtensionsData()

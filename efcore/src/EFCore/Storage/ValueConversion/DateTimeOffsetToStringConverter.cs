@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 /// <summary>
 ///     Converts <see cref="DateTimeOffset" /> to and from strings.
 /// </summary>

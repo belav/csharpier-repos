@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
+
 /// <summary>
 /// Part of the <see cref="NegotiationResponse"/> that represents an individual transport and the trasfer formats the transport supports.
 /// </summary>

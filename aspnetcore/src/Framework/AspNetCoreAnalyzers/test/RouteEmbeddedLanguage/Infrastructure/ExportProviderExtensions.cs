@@ -13,6 +13,7 @@ using Microsoft.VisualStudio.Composition;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
+
 internal static class ExportProviderExtensions
 {
     public static CompositionContext AsCompositionContext(this ExportProvider exportProvider)

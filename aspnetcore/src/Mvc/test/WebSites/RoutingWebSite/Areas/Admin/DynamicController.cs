@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite.Areas.Admin;
 
+
 [Area("Admin")]
 public class DynamicController : Controller
 {

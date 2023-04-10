@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Microsoft.AspNetCore.OpenApi;
 
+
 internal static class OpenApiSchemaGenerator
 {
     private static readonly Dictionary<Type, (string, string?)> simpleTypesAndFormats =

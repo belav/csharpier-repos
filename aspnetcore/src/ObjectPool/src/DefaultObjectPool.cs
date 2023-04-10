@@ -7,6 +7,7 @@ using System.Threading;
 
 namespace Microsoft.Extensions.ObjectPool;
 
+
 /// <summary>
 /// Default implementation of <see cref="ObjectPool{T}"/>.
 /// </summary>

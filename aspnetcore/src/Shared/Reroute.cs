@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 internal static class RerouteHelper
 {
     internal const string GlobalRouteBuilderKey = "__GlobalEndpointRouteBuilder";

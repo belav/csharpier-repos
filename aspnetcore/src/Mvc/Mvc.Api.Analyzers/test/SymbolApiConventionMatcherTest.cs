@@ -6,6 +6,7 @@ using static Microsoft.AspNetCore.Mvc.Api.Analyzers.SymbolApiConventionMatcher;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
+
 public class SymbolApiConventionMatcherTest
 {
     private static readonly string BaseTypeName = typeof(Base).FullName;

@@ -8,6 +8,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
+
 internal sealed class DotNetObjectReferenceJsonConverter<
     [DynamicallyAccessedMembers(JSInvokable)] TValue
 > : JsonConverter<DotNetObjectReference<TValue>>

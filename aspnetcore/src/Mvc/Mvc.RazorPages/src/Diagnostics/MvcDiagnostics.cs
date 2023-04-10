@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.Diagnostics;
 
+
 /// <summary>
 /// An <see cref="EventData"/> that occurs before a handler method is called.
 /// </summary>

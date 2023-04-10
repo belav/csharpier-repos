@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 
+
 internal sealed partial class QuicConnectionContext
     : IProtocolErrorCodeFeature,
         ITlsConnectionFeature

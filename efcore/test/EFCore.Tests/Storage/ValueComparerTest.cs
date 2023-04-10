@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class ValueComparerTest
 {
     protected class FakeValueComparer : ValueComparer<double>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+
 public class CancellationTokenModelBinderTests
 {
     [Fact]

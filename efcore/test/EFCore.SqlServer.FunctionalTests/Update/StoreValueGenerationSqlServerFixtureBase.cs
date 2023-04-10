@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 #nullable enable
 
 public abstract class StoreValueGenerationSqlServerFixtureBase : StoreValueGenerationFixtureBase

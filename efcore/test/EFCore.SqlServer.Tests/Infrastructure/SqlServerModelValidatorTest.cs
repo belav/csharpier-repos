@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 public class SqlServerModelValidatorTest : RelationalModelValidatorTest
 {
     public override void Detects_duplicate_columns_in_derived_types_with_different_types()

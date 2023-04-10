@@ -14,6 +14,7 @@ using Xunit.Sdk;
 
 namespace ServerComparison.FunctionalTests;
 
+
 public class NtlmAuthenticationTests : LoggedTest
 {
     public NtlmAuthenticationTests(ITestOutputHelper output)

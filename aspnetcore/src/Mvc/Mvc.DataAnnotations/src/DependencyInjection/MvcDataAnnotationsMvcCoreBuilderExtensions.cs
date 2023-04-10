@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extensions for configuring MVC data annotations using an <see cref="IMvcBuilder"/>.
 /// </summary>

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
+
 [DebuggerStepThrough]
 internal static class EnumerableExtensions
 {

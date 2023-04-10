@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class BuildFileResult
 {
     public BuildFileResult(string targetPath)

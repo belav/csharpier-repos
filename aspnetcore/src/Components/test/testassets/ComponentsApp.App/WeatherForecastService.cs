@@ -3,6 +3,7 @@
 
 namespace ComponentsApp;
 
+
 public abstract class WeatherForecastService
 {
     public abstract Task<WeatherForecast[]> GetForecastAsync(DateTime startDate);

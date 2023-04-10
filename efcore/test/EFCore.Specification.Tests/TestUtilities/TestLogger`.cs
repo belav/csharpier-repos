@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class TestLogger<TDefinitions> : TestLogger
     where TDefinitions : LoggingDefinitions, new()
 {

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Server;
 
+
 /// <summary>
 /// Class for the target picker ui.
 /// </summary>

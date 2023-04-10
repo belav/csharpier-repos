@@ -7,6 +7,7 @@ using Google.Rpc;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
+
 internal sealed class DescriptorRegistry
 {
     private readonly object _lock = new object();

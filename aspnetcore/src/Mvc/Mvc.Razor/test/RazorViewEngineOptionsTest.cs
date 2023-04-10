@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 public class RazorViewEngineOptionsTest
 {
     [Fact]

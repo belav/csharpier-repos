@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class UpdatesInMemoryFixtureBase : UpdatesFixtureBase
 {
     protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;

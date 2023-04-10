@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 internal sealed class ProblemDetailsJsonConverter : JsonConverter<ProblemDetails>
 {
     private static readonly JsonEncodedText Type = JsonEncodedText.Encode("type");

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
+
 /// <summary>
 /// Enum representing certificate types.
 /// </summary>

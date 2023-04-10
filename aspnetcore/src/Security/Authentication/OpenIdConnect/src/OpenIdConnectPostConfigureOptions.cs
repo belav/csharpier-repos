@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
+
 /// <summary>
 /// Used to setup defaults for all <see cref="OpenIdConnectOptions"/>.
 /// </summary>

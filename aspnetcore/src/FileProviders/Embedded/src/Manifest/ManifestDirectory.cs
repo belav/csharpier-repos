@@ -7,6 +7,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
+
 internal class ManifestDirectory : ManifestEntry
 {
     protected ManifestDirectory(string name, ManifestEntry[] children)

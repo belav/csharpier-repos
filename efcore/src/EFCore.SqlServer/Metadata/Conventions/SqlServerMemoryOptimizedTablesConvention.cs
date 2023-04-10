@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that configures indexes as non-clustered for memory-optimized tables.
 /// </summary>

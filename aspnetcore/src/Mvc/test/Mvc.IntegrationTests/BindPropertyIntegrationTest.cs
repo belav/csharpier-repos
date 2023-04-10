@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 // Integration tests for binding top level models with [BindProperty]
 public class BindPropertyIntegrationTest
 {

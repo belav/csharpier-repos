@@ -7,6 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
+
 internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProvider
 {
     public bool AttemptResponseCaching(ResponseCachingContext context)

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
 {
     private static readonly HashSet<char> InvalidNonWhitespaceNameCharacters = new HashSet<char>(

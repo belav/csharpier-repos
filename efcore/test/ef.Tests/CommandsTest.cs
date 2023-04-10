@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Commands;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
+
 public class CommandsTest
 {
     [Fact]

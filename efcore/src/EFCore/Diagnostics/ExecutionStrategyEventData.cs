@@ -5,6 +5,7 @@ using System.Data.Common;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     The <see cref="DiagnosticSource" /> event payload for
 ///     <see cref="CoreEventId" /> execution strategy events.

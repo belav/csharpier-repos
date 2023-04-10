@@ -10,6 +10,7 @@ using Roslyn.Utilities;
 
 namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim;
 
+
 internal sealed class TestEvaluationData : EvaluationData
 {
     public string ProjectFilePath { get; }

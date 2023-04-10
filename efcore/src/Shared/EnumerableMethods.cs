@@ -7,6 +7,7 @@ using System.Collections;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 internal static class EnumerableMethods
 {
     //public static MethodInfo AggregateWithoutSeed { get; }

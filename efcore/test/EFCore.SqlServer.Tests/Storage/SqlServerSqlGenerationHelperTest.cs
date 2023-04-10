@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class SqlServerSqlGenerationHelperTest
 {
     [ConditionalFact]

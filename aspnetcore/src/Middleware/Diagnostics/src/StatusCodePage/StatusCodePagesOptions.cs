@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Options for <see cref="StatusCodePagesMiddleware"/>.
 /// </summary>

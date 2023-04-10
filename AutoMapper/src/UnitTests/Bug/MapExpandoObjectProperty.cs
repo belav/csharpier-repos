@@ -2,6 +2,7 @@ using System.Dynamic;
 
 namespace AutoMapper.UnitTests.Bug;
 
+
 public class MapExpandoObjectProperty : AutoMapperSpecBase
 {
     class From

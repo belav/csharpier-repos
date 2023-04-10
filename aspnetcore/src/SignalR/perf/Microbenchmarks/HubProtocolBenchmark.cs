@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
+
 public class HubProtocolBenchmark
 {
     private IHubProtocol _hubProtocol;

@@ -6,6 +6,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
+
 /// <summary>
 /// Metadata for JsonProperty.
 /// </summary>

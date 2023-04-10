@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
+
 public class RoutePatternWriterTests
 {
     [Theory]

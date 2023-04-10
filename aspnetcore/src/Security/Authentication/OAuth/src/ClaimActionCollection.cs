@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
+
 /// <summary>
 /// A collection of ClaimActions used when mapping user data to Claims.
 /// </summary>

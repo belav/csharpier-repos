@@ -9,6 +9,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2;
 
+
 /// <summary>
 /// Implements Pbkdf2 using <see cref="Rfc2898DeriveBytes"/>.
 /// </summary>

@@ -11,6 +11,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 public class DataAnnotationsModelValidatorTest
 {
     private static readonly ModelMetadataProvider _metadataProvider =

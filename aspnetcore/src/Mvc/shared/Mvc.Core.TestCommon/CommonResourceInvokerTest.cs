@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public abstract class CommonResourceInvokerTest
 {
     protected static readonly TestResult Result = new TestResult();

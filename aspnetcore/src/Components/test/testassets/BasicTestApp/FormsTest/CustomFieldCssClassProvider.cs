@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Forms;
 
 namespace BasicTestApp.FormsTest;
 
+
 // For E2E testing, this is a rough example of a field CSS class provider that looks for
 // a custom attribute defining CSS class names. It isn't very efficient (it does reflection
 // and allocates on every invocation) but is sufficient for testing purposes.

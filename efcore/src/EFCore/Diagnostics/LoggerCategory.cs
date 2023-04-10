@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Generic helper class used to implement the <see cref="Name" /> property.
 /// </summary>

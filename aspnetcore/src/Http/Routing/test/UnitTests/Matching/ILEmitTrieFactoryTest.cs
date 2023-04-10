@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 public class ILEmitTrieFactoryTest
 {
     // We never vectorize on 32bit, so that's part of the test.

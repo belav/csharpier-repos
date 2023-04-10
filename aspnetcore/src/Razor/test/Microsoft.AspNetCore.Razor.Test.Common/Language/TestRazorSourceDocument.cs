@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public static class TestRazorSourceDocument
 {
     public static RazorSourceDocument CreateResource(

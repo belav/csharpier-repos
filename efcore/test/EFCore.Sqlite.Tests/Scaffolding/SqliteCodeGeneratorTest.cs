@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
+
 public class SqliteCodeGeneratorTest
 {
     [ConditionalFact]

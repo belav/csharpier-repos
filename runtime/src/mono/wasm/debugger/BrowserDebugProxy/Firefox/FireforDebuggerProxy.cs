@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 public class FirefoxDebuggerProxy : DebuggerProxyBase
 {
     private static TcpListener? s_tcpListener;

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 /// <summary>
 /// A default <see cref="IAntiforgeryAdditionalDataProvider"/> implementation.
 /// </summary>

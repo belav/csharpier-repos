@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class ValueConverters
 {
     public class When_specifying_value_converter_for_matching_member : AutoMapperSpecBase

@@ -8,6 +8,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 internal static class ResponseContentTypeHelper
 {
     /// <summary>

@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
+
 public class FileLoggerTests : IDisposable
 {
     DateTimeOffset _timestampOne = new DateTimeOffset(2016, 05, 04, 03, 02, 01, TimeSpan.Zero);

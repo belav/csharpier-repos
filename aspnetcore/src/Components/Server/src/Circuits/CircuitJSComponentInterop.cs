@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Web.Infrastructure;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+
 internal sealed class CircuitJSComponentInterop : JSComponentInterop
 {
     private readonly CircuitOptions _circuitOptions;

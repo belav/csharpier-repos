@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 internal class TestLogger<TCategory> : ILogger<TCategory>, IDisposable
 {
     public IDisposable BeginScope<TState>(TState state)

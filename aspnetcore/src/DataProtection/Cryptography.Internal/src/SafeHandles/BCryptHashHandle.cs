@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Cryptography.SafeHandles;
 
+
 internal sealed unsafe class BCryptHashHandle : BCryptHandle
 {
     private BCryptAlgorithmHandle? _algProviderHandle;

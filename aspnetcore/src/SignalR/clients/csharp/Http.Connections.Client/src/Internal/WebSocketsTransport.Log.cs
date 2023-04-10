@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
+
 internal sealed partial class WebSocketsTransport
 {
     private static partial class Log

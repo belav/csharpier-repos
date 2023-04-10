@@ -8,6 +8,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 [DebuggerDisplay("{" + nameof(DebuggerToString) + "(),nq}")]
 internal class LocationTagged<TValue> : IFormattable
 {

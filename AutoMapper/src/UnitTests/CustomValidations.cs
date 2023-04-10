@@ -3,6 +3,7 @@ using AutoMapper.Internal.Mappers;
 
 namespace AutoMapper.UnitTests;
 
+
 public class CustomValidations
 {
     public class Source { }

@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class InternalUsageDiagnosticAnalyzerTest : DiagnosticAnalyzerTestBase
 {
     [ConditionalFact]

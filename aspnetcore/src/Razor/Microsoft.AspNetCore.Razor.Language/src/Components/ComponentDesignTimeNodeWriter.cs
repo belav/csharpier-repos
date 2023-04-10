@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 // Based on the DesignTimeNodeWriter from Razor repo.
 internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
 {

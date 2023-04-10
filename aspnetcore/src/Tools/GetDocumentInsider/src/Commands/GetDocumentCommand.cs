@@ -13,6 +13,7 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
+
 internal sealed class GetDocumentCommand : ProjectCommandBase
 {
     private CommandOption _fileListPath;

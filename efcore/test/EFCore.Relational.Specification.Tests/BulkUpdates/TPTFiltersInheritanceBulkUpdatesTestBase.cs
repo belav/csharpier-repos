@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
+
 public abstract class TPTFiltersInheritanceBulkUpdatesTestBase<TFixture>
     : FiltersInheritanceBulkUpdatesTestBase<TFixture>
     where TFixture : TPTInheritanceBulkUpdatesFixture, new()

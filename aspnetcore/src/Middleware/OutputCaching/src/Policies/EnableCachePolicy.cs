@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
+
 /// <summary>
 /// A policy that enables caching
 /// </summary>

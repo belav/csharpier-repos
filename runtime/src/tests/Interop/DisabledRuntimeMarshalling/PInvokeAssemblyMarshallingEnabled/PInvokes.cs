@@ -8,6 +8,7 @@ using static DisabledRuntimeMarshallingNative;
 
 namespace DisabledRuntimeMarshalling.PInvokeAssemblyMarshallingEnabled;
 
+
 public class PInvokes
 {
     public static bool IsWindowsX86Process =>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Server.IIS.Core;
 
 namespace Microsoft.AspNetCore.Server.IIS;
 
+
 internal static partial class NativeMethods
 {
     internal const int HR_OK = 0;

@@ -2,6 +2,7 @@ using AutoMapper.Execution;
 
 namespace AutoMapper.UnitTests;
 
+
 public class PrimitiveExtensionsTester
 {
     interface Interface

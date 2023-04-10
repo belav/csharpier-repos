@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Update.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 public class SqlServerUpdateSqlGeneratorTest : UpdateSqlGeneratorTestBase
 {
     protected override IUpdateSqlGenerator CreateSqlGenerator() =>

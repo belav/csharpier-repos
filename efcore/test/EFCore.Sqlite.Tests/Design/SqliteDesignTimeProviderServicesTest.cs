@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 public class SqliteDesignTimeProviderServicesTest : DesignTimeProviderServicesTest
 {
     protected override Assembly GetRuntimeAssembly() => typeof(SqliteRelationalConnection).Assembly;

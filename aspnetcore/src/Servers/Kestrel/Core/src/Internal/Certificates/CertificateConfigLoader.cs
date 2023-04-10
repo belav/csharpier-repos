@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Certificates;
 
+
 internal sealed class CertificateConfigLoader : ICertificateConfigLoader
 {
     public CertificateConfigLoader(IHostEnvironment hostEnvironment, ILogger<KestrelServer> logger)

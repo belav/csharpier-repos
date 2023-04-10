@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 /// <summary>
 /// A <see cref="TextInputFormatter"/> for JSON content that uses <see cref="JsonSerializer"/>.
 /// </summary>

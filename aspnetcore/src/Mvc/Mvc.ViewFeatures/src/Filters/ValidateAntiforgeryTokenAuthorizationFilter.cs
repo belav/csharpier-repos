@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
+
 internal partial class ValidateAntiforgeryTokenAuthorizationFilter
     : IAsyncAuthorizationFilter,
         IAntiforgeryPolicy

@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
+
 internal static class MvcShim
 {
     public static readonly string AssemblyName =

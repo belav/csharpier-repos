@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
+
 public class ChunkedResponseTests : LoggedTest
 {
     [Fact]

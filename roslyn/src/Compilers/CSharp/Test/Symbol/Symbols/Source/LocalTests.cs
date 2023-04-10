@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests;
 
+
 public class LocalTests : SemanticModelTestBase
 {
     [WorkItem(59709, "https://github.com/dotnet/roslyn/issues/59709")]

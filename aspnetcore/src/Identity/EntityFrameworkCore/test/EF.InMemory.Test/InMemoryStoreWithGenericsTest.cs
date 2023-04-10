@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test;
 
+
 public class InMemoryEFUserStoreTestWithGenerics
     : IdentitySpecificationTestBase<IdentityUserWithGenerics, MyIdentityRole, string>,
         IClassFixture<InMemoryDatabaseFixture>

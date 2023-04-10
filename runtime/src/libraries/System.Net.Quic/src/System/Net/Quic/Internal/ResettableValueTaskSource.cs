@@ -11,6 +11,7 @@ using System.Threading.Tasks.Sources;
 
 namespace System.Net.Quic;
 
+
 internal sealed class ResettableValueTaskSource : IValueTaskSource
 {
     // None -> [TryGetValueTask] -> Awaiting -> [TrySetResult|TrySetException(final: false)] -> Ready -> [GetResult] -> None

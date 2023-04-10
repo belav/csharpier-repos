@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public interface ICity
 {
     public string Name { get; set; }

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Certificates.Generation;
 
+
 internal enum ImportCertificateResult
 {
     Succeeded = 1,

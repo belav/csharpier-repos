@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
+
 internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
 {
     private sealed partial class PullDiagnosticsTaggerProvider

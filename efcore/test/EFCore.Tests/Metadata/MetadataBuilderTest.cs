@@ -8,6 +8,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 public class MetadataBuilderTest
 {
     [ConditionalFact]

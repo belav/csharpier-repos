@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
+
 /// <summary>
 /// The upgrade stream uses the raw connection stream instead of going through the RequestBodyPipe. This
 /// removes the redundant copy from the transport pipe to the body pipe.

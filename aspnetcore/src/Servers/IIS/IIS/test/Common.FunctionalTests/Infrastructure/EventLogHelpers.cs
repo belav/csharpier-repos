@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
+
 public class EventLogHelpers
 {
     public static void VerifyEventLogEvent(

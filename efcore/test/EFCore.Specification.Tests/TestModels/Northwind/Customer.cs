@@ -9,6 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
+
 public class Customer : IComparable<Customer>
 {
     public Customer() { }

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.HttpsPolicy;
 
+
 /// <summary>
 /// Options for the Hsts Middleware
 /// </summary>

@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 public class TestModelMetadataProvider : DefaultModelMetadataProvider
 {
     private static DataAnnotationsMetadataProvider CreateDefaultDataAnnotationsProvider(

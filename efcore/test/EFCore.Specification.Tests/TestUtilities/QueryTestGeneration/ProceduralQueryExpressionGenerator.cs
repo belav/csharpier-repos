@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
+
 public class ProceduralQueryExpressionGenerator
 {
     private readonly List<ExpressionMutator> _mutators;

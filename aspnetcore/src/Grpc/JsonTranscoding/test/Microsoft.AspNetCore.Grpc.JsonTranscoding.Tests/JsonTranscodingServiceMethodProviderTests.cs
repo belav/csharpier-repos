@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 
+
 public class JsonTranscodingServiceMethodProviderTests
 {
     [Fact]

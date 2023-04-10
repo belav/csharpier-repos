@@ -7,6 +7,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// The state for the components and services of a components application.
 /// </summary>

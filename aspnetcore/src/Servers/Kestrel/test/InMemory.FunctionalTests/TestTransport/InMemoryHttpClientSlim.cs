@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 
+
 /// <summary>
 /// Lightweight version of HttpClient implemented on top of an arbitrary Stream.
 /// </summary>

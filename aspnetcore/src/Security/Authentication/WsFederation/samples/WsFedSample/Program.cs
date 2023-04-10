@@ -7,6 +7,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace WsFedSample;
 
+
 public class Program
 {
     public static Task Main(string[] args)

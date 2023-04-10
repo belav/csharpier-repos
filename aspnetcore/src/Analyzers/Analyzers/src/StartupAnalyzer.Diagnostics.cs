@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 public partial class StartupAnalyzer : DiagnosticAnalyzer
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage(

@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Mappers;
 
+
 public class ConstructorMapperTests : AutoMapperSpecBase
 {
     class Destination

@@ -15,6 +15,7 @@ using static Microsoft.CodeAnalysis.Editor.UnitTests.Classification.FormattedCla
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
+
 public class RoutePatternClassifierTests
 {
     private readonly ITestOutputHelper _output;

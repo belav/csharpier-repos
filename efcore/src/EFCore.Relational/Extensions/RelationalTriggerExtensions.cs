@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Trigger extension methods for relational database metadata.
 /// </summary>

@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.DocumentHighlighting;
 
+
 internal static class HighlightingOptionsStorage
 {
     public static HighlightingOptions GetHighlightingOptions(

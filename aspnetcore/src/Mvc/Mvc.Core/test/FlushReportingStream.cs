@@ -5,6 +5,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public static class FlushReportingStream
 {
     public static Stream GetThrowingStream()

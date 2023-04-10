@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 /// <summary>
 /// Entity type for a user's token
 /// </summary>

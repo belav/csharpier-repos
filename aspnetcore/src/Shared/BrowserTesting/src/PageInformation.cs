@@ -9,6 +9,7 @@ using Microsoft.Playwright;
 
 namespace Microsoft.AspNetCore.BrowserTesting;
 
+
 public class PageInformation : IDisposable
 {
     private readonly IPage _page;

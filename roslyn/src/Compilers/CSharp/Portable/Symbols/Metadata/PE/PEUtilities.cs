@@ -6,6 +6,7 @@ using System.Reflection.Metadata;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 
+
 internal static class PEUtilities
 {
     internal static DiagnosticInfo? DeriveCompilerFeatureRequiredAttributeDiagnostic(

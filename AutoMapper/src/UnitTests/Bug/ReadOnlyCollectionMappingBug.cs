@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 // Bug #511
 // https://github.com/AutoMapper/AutoMapper/issues/511
 public class ReadOnlyCollectionMappingBug

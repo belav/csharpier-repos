@@ -11,6 +11,7 @@ using Microsoft.WebAssembly.Diagnostics;
 
 namespace Microsoft.WebAssembly.AppHost;
 
+
 internal sealed class RunConfiguration
 {
     public WasmHost Host { get; init; }

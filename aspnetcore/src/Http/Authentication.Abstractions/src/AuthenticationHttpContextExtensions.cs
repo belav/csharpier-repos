@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Extension methods to expose Authentication on HttpContext.
 /// </summary>

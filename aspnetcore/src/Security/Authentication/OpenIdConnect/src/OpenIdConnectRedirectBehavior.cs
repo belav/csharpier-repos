@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
+
 /// <summary>
 /// Lists the different authentication methods used to
 /// redirect the user agent to the identity provider.

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 /// <summary>
 /// Supplies information about an error event that is being raised.
 /// </summary>

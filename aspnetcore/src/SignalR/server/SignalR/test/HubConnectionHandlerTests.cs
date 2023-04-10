@@ -30,6 +30,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 {
     [Fact]

@@ -3,6 +3,7 @@
 
 namespace System;
 
+
 internal static class StringHelpers
 {
     public static T ParseValueOrDefault<T>(

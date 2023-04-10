@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
+
 public class Http3QPackEncoderTests
 {
     [Fact]

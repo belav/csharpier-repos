@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class QueryTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : class, IQueryFixtureBase, new()
 {

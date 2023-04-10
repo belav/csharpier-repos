@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Test;
 
+
 public class DirectiveTokenEditHandlerTest
 {
     [Theory]

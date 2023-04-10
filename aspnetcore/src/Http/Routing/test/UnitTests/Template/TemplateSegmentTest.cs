@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
+
 public class TemplateSegmentTest
 {
     [Fact]

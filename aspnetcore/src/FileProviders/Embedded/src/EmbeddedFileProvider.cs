@@ -12,6 +12,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders;
 
+
 /// <summary>
 /// Looks up files using embedded resources in the specified assembly.
 /// This file provider is case sensitive.

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authorization.Test;
 
+
 public class DefaultAuthorizationServiceTests
 {
     private IAuthorizationService BuildAuthorizationService(

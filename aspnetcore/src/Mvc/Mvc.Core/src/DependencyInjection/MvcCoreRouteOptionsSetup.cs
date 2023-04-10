@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Sets up MVC default options for <see cref="RouteOptions"/>.
 /// </summary>

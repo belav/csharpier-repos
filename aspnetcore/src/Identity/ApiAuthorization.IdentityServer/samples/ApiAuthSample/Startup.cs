@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace ApiAuthSample;
 
+
 public class Startup
 {
     public Startup(IConfiguration configuration)

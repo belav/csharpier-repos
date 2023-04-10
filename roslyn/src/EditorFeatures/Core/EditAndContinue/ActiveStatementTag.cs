@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue;
 
+
 internal sealed class ActiveStatementTag : TextMarkerTag
 {
     internal const string TagId = "RoslynActiveStatementTag";

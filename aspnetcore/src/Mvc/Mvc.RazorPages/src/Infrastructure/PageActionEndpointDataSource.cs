@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 internal sealed class PageActionEndpointDataSource : ActionEndpointDataSourceBase
 {
     private readonly ActionEndpointFactory _endpointFactory;

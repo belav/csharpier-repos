@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public class F1Context : PoolableDbContext
 {
     public F1Context(DbContextOptions options)

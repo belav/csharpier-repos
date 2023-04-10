@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BasicWebSite;
 
+
 public class TraceResourceFilter : IResourceFilter
 {
     public void OnResourceExecuted(ResourceExecutedContext context) { }

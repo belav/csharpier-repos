@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
+
 public class EphemeralXmlRepositoryTests
 {
     [Fact]

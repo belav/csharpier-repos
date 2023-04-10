@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
+
 /// <summary>
 /// </summary>
 /// <remarks>This is not actually stateless, but we need to be sure it doesn't re-construct each time it is retrieved

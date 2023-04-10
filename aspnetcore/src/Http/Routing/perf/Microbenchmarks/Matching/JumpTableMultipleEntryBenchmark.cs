@@ -5,6 +5,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 public class JumpTableMultipleEntryBenchmark
 {
     private string[] _strings;

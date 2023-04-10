@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
+
 public class HtmlHelperValueExtensionsTest
 {
     [Fact]

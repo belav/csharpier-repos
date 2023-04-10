@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 public abstract class LinkGeneratorTestBase
 {
     protected HttpContext CreateHttpContext(object ambientValues = null)

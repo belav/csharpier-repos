@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Transactions.DtcProxyShim.DtcInterfaces;
 
+
 // https://docs.microsoft.com/previous-versions/windows/desktop/ms686489(v=vs.85)
 [
     ComImport,

@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Http.Metadata;
 
+
 /// <summary>
 /// Represents the information accessible during endpoint creation by types that implement <see cref="IEndpointMetadataProvider"/>.
 /// </summary>

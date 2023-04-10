@@ -9,6 +9,7 @@ using Xunit.Sdk;
 
 namespace OpenQA.Selenium;
 
+
 // Used to report errors when we find errors in the browser. This is useful
 // because the underlying assert probably doesn't provide good information in that
 // case.

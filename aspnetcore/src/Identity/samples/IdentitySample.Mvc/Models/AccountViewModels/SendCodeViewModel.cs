@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IdentitySample.Models.AccountViewModels;
 
+
 public class SendCodeViewModel
 {
     public string SelectedProvider { get; set; }

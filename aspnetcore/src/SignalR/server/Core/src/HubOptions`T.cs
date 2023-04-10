@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Options used to configure the specified hub type instances. These options override globally set options.
 /// </summary>

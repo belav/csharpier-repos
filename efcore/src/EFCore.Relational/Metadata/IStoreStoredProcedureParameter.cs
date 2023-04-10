@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents a parameter in a stored procedure.
 /// </summary>

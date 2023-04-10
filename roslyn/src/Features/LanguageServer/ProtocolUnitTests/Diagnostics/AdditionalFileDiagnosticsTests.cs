@@ -19,6 +19,7 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics;
 
+
 public class AdditionalFileDiagnosticsTests : AbstractPullDiagnosticTestsBase
 {
     public AdditionalFileDiagnosticsTests(ITestOutputHelper testOutputHelper)

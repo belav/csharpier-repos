@@ -7,6 +7,7 @@ using static Microsoft.AspNetCore.Components.BindConverter;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Contains extension methods for two-way binding using <see cref="EventCallback"/>. For internal use only.
 /// </summary>

@@ -6,6 +6,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
+
 /// <summary>
 /// Defines *all* the logger messages produced by response caching
 /// </summary>

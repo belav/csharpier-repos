@@ -4,4 +4,5 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
+
 public class CompiledRazorAssemblyApplicationPartFactory { }

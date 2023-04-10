@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
+
 internal class ComponentAnalyzerDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
 {
     public ComponentAnalyzerDiagnosticAnalyzerRunner(DiagnosticAnalyzer analyzer)

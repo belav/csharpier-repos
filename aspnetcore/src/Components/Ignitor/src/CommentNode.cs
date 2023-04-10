@@ -3,4 +3,5 @@
 
 namespace Ignitor;
 
+
 internal class LogicalContainerNode : ContainerNode { }

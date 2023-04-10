@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Identity.ExternalClaims.Pages.Account.Manage;
 
+
 public class SetPasswordModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;

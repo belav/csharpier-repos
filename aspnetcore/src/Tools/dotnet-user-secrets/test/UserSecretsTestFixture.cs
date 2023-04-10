@@ -8,6 +8,7 @@ using System.IO;
 
 namespace Microsoft.Extensions.Configuration.UserSecrets.Tests;
 
+
 public class UserSecretsTestFixture : IDisposable
 {
     private Stack<Action> _disposables = new Stack<Action>();

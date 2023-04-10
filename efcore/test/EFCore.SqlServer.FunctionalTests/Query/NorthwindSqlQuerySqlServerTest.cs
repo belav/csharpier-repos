@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class NorthwindSqlQuerySqlServerTest
     : NorthwindSqlQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {

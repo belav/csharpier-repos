@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
+
 public class ImplicitManyToManyA
 {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]

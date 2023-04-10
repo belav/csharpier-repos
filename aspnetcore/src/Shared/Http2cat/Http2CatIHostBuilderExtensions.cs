@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.Hosting;
 
+
 internal static class Http2CatIHostBuilderExtensions
 {
     public static IHostBuilder UseHttp2Cat(

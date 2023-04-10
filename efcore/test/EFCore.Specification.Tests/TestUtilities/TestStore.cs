@@ -5,6 +5,7 @@ using System.Transactions;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public abstract class TestStore : IDisposable
 {
     private static readonly TestStoreIndex _globalTestStoreIndex = new();

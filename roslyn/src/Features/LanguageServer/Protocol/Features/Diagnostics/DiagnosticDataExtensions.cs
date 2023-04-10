@@ -14,6 +14,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Features.Diagnostics;
 
+
 internal static class DiagnosticDataExtensions
 {
     internal static bool TryGetUnnecessaryDataLocations(

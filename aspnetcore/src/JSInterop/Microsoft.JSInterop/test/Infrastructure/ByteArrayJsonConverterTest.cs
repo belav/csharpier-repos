@@ -5,6 +5,7 @@ using System.Text.Json;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
+
 public class ByteArrayJsonConverterTest
 {
     private readonly JSRuntime JSRuntime;

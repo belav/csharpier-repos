@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace HtmlGenerationWebSite;
 
+
 public class SignalTokenProviderService<TKey> : ISignalTokenProviderService<TKey>
 {
     private readonly ConcurrentDictionary<object, ChangeTokenInfo> _changeTokens =

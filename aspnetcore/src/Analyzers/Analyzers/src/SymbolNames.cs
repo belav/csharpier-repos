@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 internal static class SymbolNames
 {
     public const string ConfigureServicesMethodPrefix = "Configure";

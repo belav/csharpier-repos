@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http.Features.Authentication;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 internal sealed class StandardFeatureCollection : IFeatureCollection
 {
     private static readonly Func<RequestContext, object> _identityFunc = ReturnIdentity;

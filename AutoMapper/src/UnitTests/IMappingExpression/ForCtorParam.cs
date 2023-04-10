@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class ForCtorParam_MapFrom_String : AutoMapperSpecBase
 {
     public class Destination

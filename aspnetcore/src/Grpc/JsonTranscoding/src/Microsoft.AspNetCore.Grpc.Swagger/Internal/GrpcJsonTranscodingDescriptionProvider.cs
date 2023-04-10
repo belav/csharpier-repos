@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Internal;
 
+
 internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionProvider
 {
     private readonly EndpointDataSource _endpointDataSource;

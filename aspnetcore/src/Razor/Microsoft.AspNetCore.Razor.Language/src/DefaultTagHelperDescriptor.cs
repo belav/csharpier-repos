@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultTagHelperDescriptor : TagHelperDescriptor
 {
     public DefaultTagHelperDescriptor(

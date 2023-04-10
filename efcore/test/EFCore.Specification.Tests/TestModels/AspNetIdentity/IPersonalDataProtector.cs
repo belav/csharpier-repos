@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
+
 public interface IPersonalDataProtector
 {
     string Protect(string data);

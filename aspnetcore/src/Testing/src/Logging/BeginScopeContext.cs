@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.Logging.Testing;
 
+
 public class BeginScopeContext
 {
     public object Scope { get; set; }

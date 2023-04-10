@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// Represents data used to build an <c>ApiDescription</c>, stored as part of the
 /// <see cref="Abstractions.ActionDescriptor.Properties"/>.

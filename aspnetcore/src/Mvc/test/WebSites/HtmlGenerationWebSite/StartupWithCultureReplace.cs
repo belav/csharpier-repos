@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace HtmlGenerationWebSite;
 
+
 public class StartupWithCultureReplace
 {
     private readonly Startup Startup = new Startup();

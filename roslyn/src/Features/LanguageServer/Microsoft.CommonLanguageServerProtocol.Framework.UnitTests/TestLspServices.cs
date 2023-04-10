@@ -10,6 +10,7 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.UnitTests;
 
+
 internal class TestLspServices : ILspServices
 {
     private readonly bool _supportsGetRegisteredServices;

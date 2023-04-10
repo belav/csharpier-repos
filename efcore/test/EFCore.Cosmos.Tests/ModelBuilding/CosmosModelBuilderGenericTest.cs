@@ -7,6 +7,7 @@ using Xunit.Sdk;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
+
 public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
 {
     public class CosmosGenericNonRelationship : GenericNonRelationship

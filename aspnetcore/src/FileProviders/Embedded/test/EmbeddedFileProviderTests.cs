@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Tests;
 
+
 public class EmbeddedFileProviderTests
 {
     private static readonly string Namespace = typeof(EmbeddedFileProviderTests).Namespace;

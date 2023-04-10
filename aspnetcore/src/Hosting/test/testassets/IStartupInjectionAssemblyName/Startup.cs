@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IStartupInjectionAssemblyName;
 
+
 public class Startup : IStartup
 {
     public void Configure(IApplicationBuilder app) { }

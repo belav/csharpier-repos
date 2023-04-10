@@ -34,6 +34,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Tests;
 
+
 public class WebApplicationTests
 {
     [Fact]

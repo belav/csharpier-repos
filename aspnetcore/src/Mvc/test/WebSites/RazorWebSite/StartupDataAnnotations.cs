@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Localization;
 
 namespace RazorWebSite;
 
+
 public class StartupDataAnnotations
 {
     // This method gets called by the runtime. Use this method to add services to the container.

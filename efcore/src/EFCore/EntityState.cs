@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     The state in which an entity is being tracked by a context.
 /// </summary>

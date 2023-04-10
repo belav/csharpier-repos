@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class RemoteAttributeValidationTest
     : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {

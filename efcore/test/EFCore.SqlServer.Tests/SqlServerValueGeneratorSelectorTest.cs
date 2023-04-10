@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 // ReSharper disable UnusedMember.Local
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class SqlServerValueGeneratorSelectorTest
 {
     [ConditionalFact]

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authorization;
 
+
 /// <summary>
 /// Used to configure authorization
 /// </summary>

@@ -1,5 +1,6 @@
 namespace AutoMapper.Internal;
 
+
 [EditorBrowsable(EditorBrowsableState.Never)]
 public static class ReflectionHelper
 {

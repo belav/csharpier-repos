@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Relational database specific extension methods for <see cref="EntityTypeBuilder" />.
 /// </summary>

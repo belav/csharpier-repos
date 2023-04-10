@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Provides an abstraction for querying and managing URI navigation.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Describes the binding from many EF model properties, dependency injection services, or metadata types to
 ///     a new array of objects suitable for passing to a general purpose factory method such as is often used for

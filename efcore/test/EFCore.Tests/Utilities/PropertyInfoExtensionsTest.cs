@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
+
 public class PropertyInfoExtensionsTest
 {
     [ConditionalFact]

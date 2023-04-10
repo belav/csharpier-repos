@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
+
 /// <summary>
 /// Represents a type that provides HTML-aware localization for views.
 /// </summary>

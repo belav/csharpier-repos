@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 // This is under the NodeServices namespace because post 2.1 it will be moved to that package
 namespace Microsoft.AspNetCore.NodeServices.Npm;
 
+
 /// <summary>
 /// Executes the <c>script</c> entries defined in a <c>package.json</c> file,
 /// capturing any output written to stdio.

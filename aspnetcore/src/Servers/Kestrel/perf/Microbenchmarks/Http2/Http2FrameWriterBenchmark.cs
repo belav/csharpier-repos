@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class Http2FrameWriterBenchmark
 {
     private MemoryPool<byte> _memoryPool;

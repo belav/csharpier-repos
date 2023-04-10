@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 internal interface IAntiforgeryTokenStore
 {
     string? GetCookieToken(HttpContext httpContext);

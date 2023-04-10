@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 public class RequestDelegateEndpointRouteBuilderExtensionsTest
 {
     private EndpointDataSource GetBuilderEndpointDataSource(

@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeWriterHelpers;
 
+
 /// <summary>
 /// Wraps a PipeWriter so you can start appending more data to the pipe prior to the previous flush completing.
 /// </summary>

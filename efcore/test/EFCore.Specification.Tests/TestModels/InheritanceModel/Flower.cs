@@ -3,4 +3,5 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
+
 public abstract class Flower : Plant { }

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace SampleStartups;
 
+
 public class StartupFullControl
 {
     public static Task Main(string[] args)

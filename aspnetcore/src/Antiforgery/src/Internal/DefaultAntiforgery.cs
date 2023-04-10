@@ -10,6 +10,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 /// <summary>
 /// Provides access to the antiforgery system, which provides protection against
 /// Cross-site Request Forgery (XSRF, also called CSRF) attacks.

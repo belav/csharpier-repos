@@ -3,6 +3,7 @@
 
 namespace System.CommandLine.Tests.Utility;
 
+
 public static class Process
 {
     public static int RunToCompletion(

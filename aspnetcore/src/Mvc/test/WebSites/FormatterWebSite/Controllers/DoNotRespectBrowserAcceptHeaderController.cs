@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FormatterWebSite.Controllers;
 
+
 public class DoNotRespectBrowserAcceptHeaderController : Controller
 {
     [HttpGet]

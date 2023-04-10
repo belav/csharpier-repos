@@ -7,6 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 /// <summary>
 /// Used to specify mapping between the URL Format and corresponding media type.
 /// </summary>

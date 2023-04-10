@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 internal sealed partial class EndpointMiddleware
 {
     internal const string AuthorizationMiddlewareInvokedKey =

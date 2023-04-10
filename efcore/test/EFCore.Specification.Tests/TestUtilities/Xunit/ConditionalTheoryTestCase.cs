@@ -5,6 +5,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 
+
 public sealed class ConditionalTheoryTestCase : XunitTheoryTestCase
 {
     [Obsolete(

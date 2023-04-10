@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 /// <summary>
 /// Provides programmatic configuration for the antiforgery token system.
 /// </summary>

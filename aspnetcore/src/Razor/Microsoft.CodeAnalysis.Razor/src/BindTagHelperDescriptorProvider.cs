@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
 {
     // Run after the component tag helper provider, because we need to see the results.

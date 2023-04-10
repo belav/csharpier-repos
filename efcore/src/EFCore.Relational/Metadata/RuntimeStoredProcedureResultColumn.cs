@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 /// <summary>
 ///     Represents a stored procedure result column.
 /// </summary>

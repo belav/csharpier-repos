@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 internal sealed class TemplateSegment
 {
     public TemplateSegment(string template, string segment, bool isParameter)

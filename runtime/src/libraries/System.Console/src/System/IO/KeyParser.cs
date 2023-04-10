@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace System.IO;
 
+
 internal static class KeyParser
 {
     private const char Escape = '\u001B';

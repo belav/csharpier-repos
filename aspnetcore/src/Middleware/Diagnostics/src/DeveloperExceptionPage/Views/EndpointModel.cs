@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Diagnostics.RazorViews;
 
+
 internal sealed class EndpointModel
 {
     public string? DisplayName { get; set; }

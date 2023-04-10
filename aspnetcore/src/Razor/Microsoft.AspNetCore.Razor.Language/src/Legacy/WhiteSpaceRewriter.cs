@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class WhitespaceRewriter : SyntaxRewriter
 {
     public override SyntaxNode Visit(SyntaxNode node)

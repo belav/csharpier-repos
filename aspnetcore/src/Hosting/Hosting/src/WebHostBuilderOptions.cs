@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.Hosting;
 
+
 /// <summary>
 /// Builder options for use with ConfigureWebHost.
 /// </summary>

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
+
 public class CustomerQuery
 {
     public string CompanyName { get; set; }

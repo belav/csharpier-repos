@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.NullBehavior;
 
+
 public class NullToExistingValue : AutoMapperSpecBase
 {
     private record Person

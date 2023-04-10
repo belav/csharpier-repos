@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 public class PageViewLocationExpanderTest
 {
     [Fact]

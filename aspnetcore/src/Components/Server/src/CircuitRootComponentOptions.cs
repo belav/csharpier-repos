@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
+
 /// <summary>
 /// Options for root components within the circuit.
 /// </summary>

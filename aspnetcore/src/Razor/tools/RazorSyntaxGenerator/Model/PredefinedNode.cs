@@ -3,4 +3,5 @@
 
 namespace RazorSyntaxGenerator;
 
+
 public class PredefinedNode : TreeType { }

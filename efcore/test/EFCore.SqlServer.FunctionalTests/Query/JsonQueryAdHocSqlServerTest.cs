@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class JsonQueryAdHocSqlServerTest : JsonQueryAdHocTestBase
 {
     public JsonQueryAdHocSqlServerTest(ITestOutputHelper testOutputHelper)

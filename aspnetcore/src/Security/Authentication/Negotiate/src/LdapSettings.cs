@@ -6,6 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
+
 /// <summary>
 /// Options class for configuring LDAP connections on Linux
 /// </summary>

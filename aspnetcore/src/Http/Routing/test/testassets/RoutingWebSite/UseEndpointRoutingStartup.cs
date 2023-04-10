@@ -5,6 +5,7 @@ using System.Text;
 
 namespace RoutingWebSite;
 
+
 public class UseEndpointRoutingStartup
 {
     private static readonly byte[] _plainTextPayload = Encoding.UTF8.GetBytes("Plain text!");

@@ -14,6 +14,7 @@ using StackExchange.Redis;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
+
 public class RedisHubLifetimeManagerBenchmark
 {
     private RedisHubLifetimeManager<TestHub> _manager1;

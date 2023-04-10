@@ -9,6 +9,7 @@ using static Microsoft.AspNetCore.Http.Features.QueryFeature;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 [CategoriesColumn]
 public class QueryCollectionBenchmarks

@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class IncludeInheritance : AutoMapperSpecBase
 {
     DestinationLevel2 _destination;

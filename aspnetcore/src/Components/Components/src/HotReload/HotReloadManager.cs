@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.HotReload;
 
 namespace Microsoft.AspNetCore.Components.HotReload;
 
+
 internal sealed class HotReloadManager
 {
     public static readonly HotReloadManager Default = new();

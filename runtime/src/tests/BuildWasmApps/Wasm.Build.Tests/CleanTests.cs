@@ -13,6 +13,7 @@ using Xunit.Sdk;
 
 namespace Wasm.Build.Tests;
 
+
 public class CleanTests : NativeRebuildTestsBase
 {
     public CleanTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)

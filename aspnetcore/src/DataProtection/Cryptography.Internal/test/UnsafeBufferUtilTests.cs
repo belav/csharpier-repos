@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Cryptography;
 
+
 public unsafe class UnsafeBufferUtilTests
 {
     [Fact]

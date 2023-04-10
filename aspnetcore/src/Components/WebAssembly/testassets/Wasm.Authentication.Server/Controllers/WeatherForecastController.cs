@@ -7,6 +7,7 @@ using Wasm.Authentication.Shared;
 
 namespace Wasm.Authentication.Server.Controllers;
 
+
 [ApiController]
 [Authorize]
 [Route("[controller]")]

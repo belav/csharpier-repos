@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Provides default implementation of validation functions for security stamps.
 /// </summary>

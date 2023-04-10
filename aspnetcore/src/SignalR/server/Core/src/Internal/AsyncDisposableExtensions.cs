@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 internal static class AsyncDisposableExtensions
 {
     // Does a light up check to see if a type is IAsyncDisposable and calls DisposeAsync if it is

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SecurityWebSite.Controllers;
 
+
 [IgnoreAntiforgeryToken]
 public class IgnoreAntiforgeryController : Controller
 {

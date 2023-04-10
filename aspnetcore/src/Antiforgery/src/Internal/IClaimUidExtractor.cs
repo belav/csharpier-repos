@@ -5,6 +5,7 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 /// <summary>
 /// This interface can extract unique identifers for a <see cref="ClaimsPrincipal"/>.
 /// </summary>

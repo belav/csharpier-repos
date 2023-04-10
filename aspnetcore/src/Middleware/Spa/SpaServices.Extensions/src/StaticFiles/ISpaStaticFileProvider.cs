@@ -5,6 +5,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.SpaServices.StaticFiles;
 
+
 /// <summary>
 /// Represents a service that can provide static files to be served for a Single Page
 /// Application (SPA).

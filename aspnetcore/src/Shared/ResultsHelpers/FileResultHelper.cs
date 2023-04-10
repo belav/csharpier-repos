@@ -14,6 +14,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 internal static partial class FileResultHelper
 {
     private const string AcceptRangeHeaderValue = "bytes";

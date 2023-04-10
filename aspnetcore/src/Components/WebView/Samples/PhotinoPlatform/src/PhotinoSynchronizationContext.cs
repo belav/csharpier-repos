@@ -8,6 +8,7 @@ using PhotinoNET;
 
 namespace Microsoft.AspNetCore.Components.WebView.Photino;
 
+
 // Most UI platforms have a built-in SyncContext/Dispatcher, e.g., Windows Forms and WPF, which WebView
 // can normally use directly. However, Photino currently doesn't.
 //

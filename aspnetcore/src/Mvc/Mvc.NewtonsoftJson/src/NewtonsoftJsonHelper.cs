@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
+
 /// <summary>
 /// Newtonsoft.Json based implementation of <see cref="IJsonHelper"/>.
 /// </summary>

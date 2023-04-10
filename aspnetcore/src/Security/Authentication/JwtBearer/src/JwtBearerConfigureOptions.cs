@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 internal sealed class JwtBearerConfigureOptions : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly IAuthenticationConfigurationProvider _authenticationConfigurationProvider;

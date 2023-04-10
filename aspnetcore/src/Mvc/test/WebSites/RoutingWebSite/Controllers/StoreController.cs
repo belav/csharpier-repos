@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
+
 // This controller contains only actions with individual attribute routes.
 public class StoreController : Controller
 {

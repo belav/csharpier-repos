@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class TagHelperSpanVisitor : SyntaxWalker
 {
     private readonly RazorSourceDocument _source;

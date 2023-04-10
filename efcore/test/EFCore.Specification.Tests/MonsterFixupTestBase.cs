@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.TestModels;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, IDisposable
     where TFixture : MonsterFixupTestBase<TFixture>.MonsterFixupFixtureBase, new()
 {

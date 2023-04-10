@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cryptography.Cng;
 
 namespace Microsoft.AspNetCore.DataProtection.SP800_108;
 
+
 /// <summary>
 /// Provides an implementation of the SP800-108-CTR-HMACSHA512 key derivation function.
 /// This class assumes at least Windows 7 / Server 2008 R2.

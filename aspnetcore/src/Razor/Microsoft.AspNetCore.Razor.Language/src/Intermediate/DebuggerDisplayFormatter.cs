@@ -5,6 +5,7 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 internal class DebuggerDisplayFormatter : IntermediateNodeFormatterBase
 {
     public DebuggerDisplayFormatter()

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Configures the navigation property on the dependent side of a relationship
 ///     to indicate how a delete operation is applied to dependent entities

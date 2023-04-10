@@ -10,6 +10,7 @@ using Index = Microsoft.EntityFrameworkCore.Metadata.Internal.Index;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 public class IndexAttributeConventionTest
 {
     #region IndexAttribute

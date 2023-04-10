@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 internal sealed class DefaultAuthenticationConfigurationProvider
     : IAuthenticationConfigurationProvider
 {

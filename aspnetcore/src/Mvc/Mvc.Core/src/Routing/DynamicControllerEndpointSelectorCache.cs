@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
+
 #pragma warning disable CA1852 // Seal internal types
 internal class DynamicControllerEndpointSelectorCache
 #pragma warning restore CA1852 // Seal internal types

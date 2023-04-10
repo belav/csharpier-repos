@@ -3,4 +3,5 @@
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
+
 public record SigningKey(string Id, string Issuer, string Value, int Length) { }

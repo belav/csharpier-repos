@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 /// <summary>
 /// Represents visibility metadata for an <c>ApiDescription</c>.
 /// </summary>

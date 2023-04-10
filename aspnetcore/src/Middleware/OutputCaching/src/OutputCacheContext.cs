@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
+
 /// <summary>
 /// Represent the current cache context for the request.
 /// </summary>

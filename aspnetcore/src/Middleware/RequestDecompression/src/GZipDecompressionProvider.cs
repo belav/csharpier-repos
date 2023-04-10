@@ -5,6 +5,7 @@ using System.IO.Compression;
 
 namespace Microsoft.AspNetCore.RequestDecompression;
 
+
 /// <summary>
 /// GZip decompression provider.
 /// </summary>

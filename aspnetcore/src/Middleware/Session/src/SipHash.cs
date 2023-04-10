@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Session;
 
+
 // A byte[] equality comparer based on the SipHash-2-4 algorithm. Key differences:
 // (a) we output 32-bit hashes instead of 64-bit hashes, and
 // (b) we don't care about endianness since hashes are used only in hash tables

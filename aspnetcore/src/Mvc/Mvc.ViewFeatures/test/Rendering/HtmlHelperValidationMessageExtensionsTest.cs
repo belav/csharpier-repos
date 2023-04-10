@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.Core;
 
+
 /// <summary>
 /// Test the ValidationMessage extensions in <see cref="HtmlHelperValidationExtensions" /> class.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
+
 public class FiltersInheritanceBulkUpdatesSqliteFixture : InheritanceBulkUpdatesSqliteFixture
 {
     protected override bool EnableFilters => true;

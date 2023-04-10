@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Core.Test;
 
+
 public class AuthenticationSchemeProviderTests
 {
     [Fact]

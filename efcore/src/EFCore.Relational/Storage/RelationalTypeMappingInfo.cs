@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     Describes metadata needed to decide on a relational type mapping for
 ///     a property, type, or provider-specific relational type name.

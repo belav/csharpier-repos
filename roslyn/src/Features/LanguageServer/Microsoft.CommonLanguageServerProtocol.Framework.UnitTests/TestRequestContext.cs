@@ -4,4 +4,5 @@
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.UnitTests;
 
+
 public class TestRequestContext { }

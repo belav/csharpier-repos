@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Negotiate.Server;
 
+
 public class Startup
 {
     public Startup(IConfiguration configuration)

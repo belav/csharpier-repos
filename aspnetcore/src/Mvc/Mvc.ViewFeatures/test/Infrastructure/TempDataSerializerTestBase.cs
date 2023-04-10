@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 
+
 public abstract class TempDataSerializerTestBase
 {
     [Fact]

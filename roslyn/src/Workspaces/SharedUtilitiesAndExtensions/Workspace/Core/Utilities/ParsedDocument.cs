@@ -14,6 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis;
 
+
 /// <summary>
 /// Represents a <see cref="Document"/> content that has been parsed.
 /// </summary>

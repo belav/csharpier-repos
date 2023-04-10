@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 /// <summary>
 /// A component that supplies route data corresponding to the current navigation state.
 /// </summary>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
+
 [Route("ApiExplorerVoid/[action]")]
 [ApiController]
 public class ApiExplorerVoidController : Controller

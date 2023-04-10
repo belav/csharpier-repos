@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace Microsoft.AspNetCore.Authorization;
 
+
 /// <summary>
 /// Used for building policies.
 /// </summary>

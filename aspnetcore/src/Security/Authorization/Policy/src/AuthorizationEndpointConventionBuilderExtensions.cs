@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Authorization extension methods for <see cref="IEndpointConventionBuilder"/>.
 /// </summary>

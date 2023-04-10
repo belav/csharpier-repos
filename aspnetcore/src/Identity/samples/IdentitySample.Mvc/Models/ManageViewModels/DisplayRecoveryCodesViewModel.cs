@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IdentitySample.Models.ManageViewModels;
 
+
 public class DisplayRecoveryCodesViewModel
 {
     [Required]

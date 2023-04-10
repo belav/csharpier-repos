@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControllersFromServicesClassLibrary;
 
+
 public class Inventory : ResourcesController
 {
     [HttpGet]

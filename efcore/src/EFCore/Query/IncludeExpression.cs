@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         An expression that represents include operation in <see cref="ShapedQueryExpression.ShaperExpression" />.

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.WebTransport;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.WebTransport;
 
+
 internal sealed class WebTransportStream
     : ConnectionContext,
         IStreamDirectionFeature,

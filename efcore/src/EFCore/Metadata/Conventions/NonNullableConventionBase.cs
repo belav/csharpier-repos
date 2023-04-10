@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A base type for conventions that configure model aspects based on whether the member type
 ///     is a non-nullable reference type.

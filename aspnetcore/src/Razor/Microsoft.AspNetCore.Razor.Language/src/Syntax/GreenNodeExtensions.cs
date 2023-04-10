@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 internal static class GreenNodeExtensions
 {
     internal static InternalSyntax.SyntaxList<T> ToGreenList<T>(this SyntaxNode node)

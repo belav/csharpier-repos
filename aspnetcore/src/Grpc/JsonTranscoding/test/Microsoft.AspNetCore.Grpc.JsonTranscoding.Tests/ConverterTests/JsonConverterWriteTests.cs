@@ -16,6 +16,7 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.ConverterTests;
 
+
 public class JsonConverterWriteTests
 {
     private readonly ITestOutputHelper _output;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 /// <summary>
 ///     Extension methods for <see cref="ValueComparer" />.
 /// </summary>

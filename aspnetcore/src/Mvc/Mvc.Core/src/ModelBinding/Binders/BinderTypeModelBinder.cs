@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+
 /// <summary>
 /// An <see cref="IModelBinder"/> for models which specify an <see cref="IModelBinder"/> using
 /// <see cref="BindingInfo.BinderType"/>.

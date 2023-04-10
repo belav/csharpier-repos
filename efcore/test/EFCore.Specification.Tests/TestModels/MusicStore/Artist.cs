@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore;
 
+
 public class Artist
 {
     public int ArtistId { get; set; }

@@ -27,6 +27,7 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 
+
 public class ServerStreamingServerCallHandlerTests : LoggedTest
 {
     public ServerStreamingServerCallHandlerTests(ITestOutputHelper output)

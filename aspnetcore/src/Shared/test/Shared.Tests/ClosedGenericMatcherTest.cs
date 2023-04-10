@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Internal;
 
+
 public class ClosedGenericMatcherTest
 {
     // queryType, interfaceType, expectedResult

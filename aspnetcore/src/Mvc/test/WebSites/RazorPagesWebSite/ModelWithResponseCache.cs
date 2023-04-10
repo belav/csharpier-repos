@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
+
 [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Client)]
 public class ModelWithResponseCache : PageModel
 {

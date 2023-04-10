@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
+
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 public class RazorViewAttribute : Attribute
 {

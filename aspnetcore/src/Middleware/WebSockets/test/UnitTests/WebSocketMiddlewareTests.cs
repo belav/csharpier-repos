@@ -10,6 +10,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
+
 public class WebSocketMiddlewareTests : LoggedTest
 {
     [Fact]

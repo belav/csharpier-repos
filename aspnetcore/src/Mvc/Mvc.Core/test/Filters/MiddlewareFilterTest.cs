@@ -19,6 +19,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 public class MiddlewareFilterTest
 {
     private readonly TestController _controller = new TestController();

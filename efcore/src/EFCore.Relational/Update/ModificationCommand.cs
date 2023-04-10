@@ -12,6 +12,7 @@ using ITableMapping = Microsoft.EntityFrameworkCore.Metadata.ITableMapping;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 /// <summary>
 ///     <para>
 ///         Represents a conceptual command to the database to insert/update/delete a row.

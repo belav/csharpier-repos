@@ -11,6 +11,7 @@ using System.Text;
 
 namespace TestLibrary;
 
+
 public static class CoreClrConfigurationDetection
 {
     public static bool IsJitStress =>

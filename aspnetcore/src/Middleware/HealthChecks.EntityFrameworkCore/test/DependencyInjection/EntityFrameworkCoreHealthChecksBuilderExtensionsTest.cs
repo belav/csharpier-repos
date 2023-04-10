@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 public class EntityFrameworkCoreHealthChecksBuilderExtensionsTest
 {
     [Fact]

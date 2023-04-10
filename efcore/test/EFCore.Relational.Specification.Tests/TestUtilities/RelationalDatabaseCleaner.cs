@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public abstract class RelationalDatabaseCleaner
 {
     protected abstract IDatabaseModelFactory CreateDatabaseModelFactory(

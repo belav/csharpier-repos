@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
+
 public class BloggingContextWithSnapshotThatThrows : BloggingContext
 {
     public BloggingContextWithSnapshotThatThrows(DbContextOptions options)

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal;
 
+
 internal sealed partial class SocketConnection : TransportConnection
 {
     private static readonly int MinAllocBufferSize = PinnedBlockMemoryPool.BlockSize / 2;

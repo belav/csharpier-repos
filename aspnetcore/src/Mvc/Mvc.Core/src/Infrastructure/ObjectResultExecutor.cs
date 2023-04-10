@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// Executes an <see cref="ObjectResult"/> to write to the response.
 /// </summary>

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class FileResultTests : IClassFixture<MvcTestFixture<FilesWebSite.Startup>>
 {
     public FileResultTests(MvcTestFixture<FilesWebSite.Startup> fixture)

@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 // ReSharper disable UnusedMember.Local
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Event IDs for events that correspond to messages logged to an <see cref="ILogger" />
 ///     and events sent to a <see cref="DiagnosticSource" />.

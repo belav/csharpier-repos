@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
+
 /// <summary>
 /// Represents the Status code pages feature.
 /// </summary>

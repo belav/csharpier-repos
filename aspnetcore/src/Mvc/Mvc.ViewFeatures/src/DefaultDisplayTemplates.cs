@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 internal static class DefaultDisplayTemplates
 {
     public static IHtmlContent BooleanTemplate(IHtmlHelper htmlHelper)

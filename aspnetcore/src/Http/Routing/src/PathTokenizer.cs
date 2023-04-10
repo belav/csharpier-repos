@@ -10,6 +10,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 internal struct PathTokenizer : IReadOnlyList<StringSegment>
 {
     private readonly string _path;

@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.Completion;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
+
 internal static class CompletionTestHelpers
 {
     public static async Task<CompletionResult> GetCompletionsAndServiceAsync(

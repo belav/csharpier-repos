@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth;
 
+
 public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
 {
     protected override string DefaultScheme => OAuthDefaults.DisplayName;

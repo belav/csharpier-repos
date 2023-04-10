@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+
 /// <summary>
 /// Represents an <see cref="IResult"/> that when executed will
 /// produce an HTTP response with the No Unauthorized (401) status code.

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// A context abstraction for accessing information about the hub caller connection.
 /// </summary>

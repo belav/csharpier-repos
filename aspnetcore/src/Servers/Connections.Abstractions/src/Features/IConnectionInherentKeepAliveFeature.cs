@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
+
 /// <summary>
 /// Indicates if the connection transport has an "inherent keep-alive", which means that the transport will automatically
 /// inform the client that it is still present.

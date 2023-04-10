@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public class ComponentGenericTypeIntegrationTest : RazorIntegrationTestBase
 {
     private readonly CSharpSyntaxTree GenericContextComponent = Parse(

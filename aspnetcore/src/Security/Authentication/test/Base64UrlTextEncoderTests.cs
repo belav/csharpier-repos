@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 public class Base64UrlTextEncoderTests
 {
     [Fact]

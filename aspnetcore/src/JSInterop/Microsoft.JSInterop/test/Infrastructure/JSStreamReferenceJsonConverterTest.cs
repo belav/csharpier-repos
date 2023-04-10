@@ -6,6 +6,7 @@ using Microsoft.JSInterop.Implementation;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
+
 public class JSStreamReferenceJsonConverterTest
 {
     private readonly JSRuntime JSRuntime = new TestJSRuntime();

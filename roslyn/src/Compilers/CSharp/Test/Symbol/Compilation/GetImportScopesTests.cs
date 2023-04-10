@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests;
 
+
 public class GetImportScopesTests : SemanticModelTestBase
 {
     private ImmutableArray<IImportScope> GetImportsScopes(string text)

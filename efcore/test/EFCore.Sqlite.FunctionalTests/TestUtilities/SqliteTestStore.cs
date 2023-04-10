@@ -5,6 +5,7 @@ using Microsoft.Data.Sqlite;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class SqliteTestStore : RelationalTestStore
 {
     public const int CommandTimeout = 30;

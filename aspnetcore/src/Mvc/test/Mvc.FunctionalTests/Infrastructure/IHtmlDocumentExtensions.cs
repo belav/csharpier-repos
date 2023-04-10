@@ -6,6 +6,7 @@ using AngleSharp.Dom.Html;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public static class IHtmlDocumentExtensions
 {
     public static IElement RequiredQuerySelector(this IHtmlDocument document, string selector)

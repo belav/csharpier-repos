@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 public class WebAssemblyHostTest
 {
     private static readonly JsonSerializerOptions JsonOptions = new();

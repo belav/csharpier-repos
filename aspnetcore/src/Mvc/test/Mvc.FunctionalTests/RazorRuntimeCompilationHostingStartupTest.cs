@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class RazorRuntimeCompilationHostingStartupTest
     : IClassFixture<MvcTestFixture<RazorBuildWebSite.StartupWithHostingStartup>>
 {

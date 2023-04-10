@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
+
 public class PageDirectiveTest
 {
     [Fact]

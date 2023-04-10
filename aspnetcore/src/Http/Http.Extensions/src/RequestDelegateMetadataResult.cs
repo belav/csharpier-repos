@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// The metadata inferred by <see cref="RequestDelegateFactory.InferMetadata(System.Reflection.MethodInfo, Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions?)"/>.
 /// <see cref="RequestDelegateFactoryOptions.EndpointBuilder"/> will be automatically populated with this metadata if provided.

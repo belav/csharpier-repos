@@ -6,6 +6,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultRazorDiagnostic : RazorDiagnostic
 {
     internal DefaultRazorDiagnostic(

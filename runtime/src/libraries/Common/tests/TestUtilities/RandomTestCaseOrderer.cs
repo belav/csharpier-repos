@@ -11,6 +11,7 @@ using Xunit.Sdk;
 
 namespace TestUtilities;
 
+
 // Based on https://github.com/xunit/xunit/blob/v2/src/xunit.execution/Sdk/DefaultTestCaseOrderer.cs
 
 public class RandomTestCaseOrderer : ITestCaseOrderer

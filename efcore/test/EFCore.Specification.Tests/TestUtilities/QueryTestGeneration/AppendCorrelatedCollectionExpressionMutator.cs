@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
+
 public class AppendCorrelatedCollectionExpressionMutator : ExpressionMutator
 {
     public AppendCorrelatedCollectionExpressionMutator(DbContext context)

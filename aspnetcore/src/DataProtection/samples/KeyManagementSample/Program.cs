@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace KeyManagementSample;
 
+
 public class Program
 {
     public static void Main(string[] args)

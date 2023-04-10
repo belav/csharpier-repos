@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
+
 internal sealed class DefaultKeyTypeEqualityComparer : IEqualityComparer<DefaultKeyType>
 {
     public bool Equals(DefaultKeyType x, DefaultKeyType y)

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 /// <summary>
 /// An unconditionally-successful model binder.
 /// </summary>

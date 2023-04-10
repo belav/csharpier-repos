@@ -10,6 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 public class WebAssemblyConfigurationTest
     : ServerTestBase<BlazorWasmTestAppFixture<BasicTestApp.Program>>
 {

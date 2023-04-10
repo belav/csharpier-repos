@@ -12,6 +12,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
+
 public class HotReloadTest : ServerTestBase<BasicTestAppServerSiteFixture<HotReloadStartup>>
 {
     public HotReloadTest(

@@ -8,6 +8,7 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
+
 internal sealed class JsonConverterFactoryForEnum : JsonConverterFactory
 {
     private readonly JsonContext _context;

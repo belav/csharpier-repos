@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 public abstract class RazorPage : RazorPageBase
 {
     public override void EndContext() { }

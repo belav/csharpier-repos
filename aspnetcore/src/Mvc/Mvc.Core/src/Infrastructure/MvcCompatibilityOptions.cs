@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// An options type for configuring the application <see cref="Mvc.CompatibilityVersion"/>.
 /// </summary>

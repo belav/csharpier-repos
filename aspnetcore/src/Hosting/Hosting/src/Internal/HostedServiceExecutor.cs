@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 internal sealed class HostedServiceExecutor
 {
     private readonly IEnumerable<IHostedService> _services;

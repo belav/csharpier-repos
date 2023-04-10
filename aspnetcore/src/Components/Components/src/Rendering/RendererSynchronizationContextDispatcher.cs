@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
+
 internal sealed class RendererSynchronizationContextDispatcher : Dispatcher
 {
     private readonly RendererSynchronizationContext _context;

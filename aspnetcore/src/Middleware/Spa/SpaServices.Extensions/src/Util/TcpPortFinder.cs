@@ -6,6 +6,7 @@ using System.Net.Sockets;
 
 namespace Microsoft.AspNetCore.SpaServices.Util;
 
+
 internal static class TcpPortFinder
 {
     public static int FindAvailablePort()

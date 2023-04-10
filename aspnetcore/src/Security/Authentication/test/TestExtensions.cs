@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 public static class TestExtensions
 {
     public const string CookieAuthenticationScheme = "External";

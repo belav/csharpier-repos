@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 public class DataTypeClientModelValidatorProviderTest
 {
     private readonly IModelMetadataProvider _metadataProvider =

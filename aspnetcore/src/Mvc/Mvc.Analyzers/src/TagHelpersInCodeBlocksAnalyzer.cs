@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
+
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class TagHelpersInCodeBlocksAnalyzer : DiagnosticAnalyzer
 {

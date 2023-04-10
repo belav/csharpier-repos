@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
+
 public class Http2FrameWriterTests
 {
     private readonly MemoryPool<byte> _dirtyMemoryPool;

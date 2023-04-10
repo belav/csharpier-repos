@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.TestHost;
 
 namespace Microsoft.AspNetCore.Builder.Extensions;
 
+
 public class UsePathBaseExtensionsTests
 {
     [Theory]

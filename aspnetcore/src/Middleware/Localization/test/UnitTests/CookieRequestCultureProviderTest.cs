@@ -14,6 +14,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.Extensions.Localization;
 
+
 public class CookieRequestCultureProviderTest
 {
     [Fact]

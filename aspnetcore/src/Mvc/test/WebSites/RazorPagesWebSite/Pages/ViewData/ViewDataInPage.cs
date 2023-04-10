@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
+
 public class ViewDataInPage : PageModel
 {
     [ViewData]

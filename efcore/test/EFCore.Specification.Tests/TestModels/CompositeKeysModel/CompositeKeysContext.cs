@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel;
 
+
 public class CompositeKeysContext : PoolableDbContext
 {
     public CompositeKeysContext(DbContextOptions options)

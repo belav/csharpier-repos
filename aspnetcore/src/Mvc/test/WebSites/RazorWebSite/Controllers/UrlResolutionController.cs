@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorWebSite.Controllers;
 
+
 public class UrlResolutionController : Controller
 {
     public IActionResult Index()

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
+
 public class PagesPropertyInjectionPass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     protected override void ExecuteCore(

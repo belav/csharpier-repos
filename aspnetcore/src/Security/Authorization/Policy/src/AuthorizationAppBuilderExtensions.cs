@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Extension methods to add authorization capabilities to an HTTP application pipeline.
 /// </summary>

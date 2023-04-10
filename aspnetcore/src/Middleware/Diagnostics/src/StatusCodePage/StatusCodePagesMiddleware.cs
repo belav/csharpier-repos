@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
+
 /// <summary>
 /// A middleware for generating the response body of error status codes with no body.
 /// </summary>

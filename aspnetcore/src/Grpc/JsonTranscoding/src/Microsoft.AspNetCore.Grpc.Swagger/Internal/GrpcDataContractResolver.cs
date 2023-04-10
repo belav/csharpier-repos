@@ -12,6 +12,7 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Internal;
 
+
 internal sealed class GrpcDataContractResolver : ISerializerDataContractResolver
 {
     private readonly ISerializerDataContractResolver _innerContractResolver;

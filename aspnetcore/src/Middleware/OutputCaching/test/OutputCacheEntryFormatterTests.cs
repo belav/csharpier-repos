@@ -7,6 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.OutputCaching.Tests;
 
+
 public class OutputCacheEntryFormatterTests
 {
     private static CachedResponseBody EmptyResponseBody = new(new List<byte[]>(), 0);

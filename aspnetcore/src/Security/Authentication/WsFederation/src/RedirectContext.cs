@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Protocols.WsFederation;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 /// <summary>
 /// When a user configures the <see cref="WsFederationHandler"/> to be notified prior to redirecting to an IdentityProvider
 /// an instance of <see cref="RedirectContext"/> is passed to the 'RedirectToAuthenticationEndpoint' or 'RedirectToEndSessionEndpoint' events.

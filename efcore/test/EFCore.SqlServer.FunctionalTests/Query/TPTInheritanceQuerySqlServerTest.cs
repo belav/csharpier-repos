@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class TPTInheritanceQuerySqlServerTest
     : TPTInheritanceQueryTestBase<TPTInheritanceQuerySqlServerFixture>
 {

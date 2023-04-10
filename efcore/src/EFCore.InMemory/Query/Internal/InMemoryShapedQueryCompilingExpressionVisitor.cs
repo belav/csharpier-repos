@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
 
+
 public partial class InMemoryShapedQueryCompilingExpressionVisitor
     : ShapedQueryCompilingExpressionVisitor
 {

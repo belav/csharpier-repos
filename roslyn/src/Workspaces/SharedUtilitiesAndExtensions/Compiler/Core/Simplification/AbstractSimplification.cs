@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Simplification;
 
+
 internal abstract class AbstractSimplification : ISimplification
 {
     public abstract SimplifierOptions DefaultOptions { get; }

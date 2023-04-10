@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
+
 /// <summary>
 /// A context for <see cref="JwtBearerEvents.OnTokenValidated"/>.
 /// </summary>

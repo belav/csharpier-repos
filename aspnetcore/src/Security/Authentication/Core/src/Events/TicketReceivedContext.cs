@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Provides context information to handler providers.
 /// </summary>

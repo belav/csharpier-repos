@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.JsonPatch.Operations;
 
+
 public enum OperationType
 {
     Add,

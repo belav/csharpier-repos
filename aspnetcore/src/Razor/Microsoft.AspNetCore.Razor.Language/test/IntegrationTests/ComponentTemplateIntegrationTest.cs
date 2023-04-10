@@ -5,6 +5,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public class ComponentTemplateIntegrationTest : RazorIntegrationTestBase
 {
     internal override string FileKind => FileKinds.Component;

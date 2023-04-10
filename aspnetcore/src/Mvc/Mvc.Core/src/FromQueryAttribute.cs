@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// Specifies that a parameter or property should be bound using the request query string.
 /// </summary>

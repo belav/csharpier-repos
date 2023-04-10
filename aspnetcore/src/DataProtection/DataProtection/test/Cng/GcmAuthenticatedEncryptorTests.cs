@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.DataProtection.Cng;
 
+
 public class GcmAuthenticatedEncryptorTests
 {
     [ConditionalFact]

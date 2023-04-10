@@ -7,6 +7,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 [SqlServerCondition(SqlServerCondition.SupportsTemporalTablesCascadeDelete)]
 public class TemporalGearsOfWarQuerySqlServerTest
     : GearsOfWarQueryRelationalTestBase<TemporalGearsOfWarQuerySqlServerFixture>

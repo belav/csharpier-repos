@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ApiExplorerWebSite;
 
+
 // Enables ApiExplorer for controllers that haven't explicitly configured it.
 // This is part of the test that validates that ApiExplorer can be configured via
 // convention

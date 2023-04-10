@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
+
 public class DbContextHealthCheckTest
 {
     // Just testing healthy here since it would be complicated to simulate a failure. All of that logic lives in EF anyway.

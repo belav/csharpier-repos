@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class TPTGearsOfWarQuerySqlServerFixture : TPTGearsOfWarQueryRelationalFixture
 {
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;

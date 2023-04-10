@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
+
 public class OrderDetail : IComparable<OrderDetail>
 {
     private int? _orderId;

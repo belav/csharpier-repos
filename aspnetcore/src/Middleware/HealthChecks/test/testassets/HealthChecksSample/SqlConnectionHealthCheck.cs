@@ -6,6 +6,7 @@ using Microsoft.Data.SqlClient;
 
 namespace HealthChecksSample;
 
+
 public class SqlConnectionHealthCheck : DbConnectionHealthCheck
 {
     private static readonly string DefaultTestQuery = "Select 1";

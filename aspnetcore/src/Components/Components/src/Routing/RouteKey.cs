@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 internal readonly struct RouteKey : IEquatable<RouteKey>
 {
     public readonly Assembly? AppAssembly;

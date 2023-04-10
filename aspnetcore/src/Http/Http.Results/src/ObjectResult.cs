@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 internal partial class ObjectResult : IResult
 {
     /// <summary>

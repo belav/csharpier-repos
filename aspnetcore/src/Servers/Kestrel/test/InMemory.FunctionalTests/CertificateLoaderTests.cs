@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
+
 public class CertificateLoaderTests : LoggedTest
 {
     [Theory]

@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 /// <summary>
 /// <see cref="ITagHelper"/> implementation targeting &lt;script&gt; elements that supports fallback src paths.
 /// </summary>

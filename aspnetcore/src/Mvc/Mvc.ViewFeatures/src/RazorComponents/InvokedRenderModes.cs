@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 internal sealed class InvokedRenderModes
 {
     public InvokedRenderModes(Mode mode)

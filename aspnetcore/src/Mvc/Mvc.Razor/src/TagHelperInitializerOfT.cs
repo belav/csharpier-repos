@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 /// <inheritdoc />
 public class TagHelperInitializer<TTagHelper> : ITagHelperInitializer<TTagHelper>
     where TTagHelper : ITagHelper

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 internal static class EventIds
 {
     public static EventId UserCannotSignInWithoutConfirmedEmail = new EventId(

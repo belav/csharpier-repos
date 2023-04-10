@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 
 namespace SampleApp;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services) { }

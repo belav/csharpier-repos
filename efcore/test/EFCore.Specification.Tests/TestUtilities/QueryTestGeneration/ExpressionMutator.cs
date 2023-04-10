@@ -5,6 +5,7 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
+
 public abstract class ExpressionMutator
 {
     protected static MethodInfo IncludeMethodInfo;

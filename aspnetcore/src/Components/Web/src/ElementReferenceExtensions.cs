@@ -5,6 +5,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Static class that adds extension methods to <see cref="ElementReference"/>.
 /// </summary>

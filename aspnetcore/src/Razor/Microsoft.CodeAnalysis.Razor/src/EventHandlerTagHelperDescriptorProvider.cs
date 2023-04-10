@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorProvider
 {
     public int Order { get; set; }

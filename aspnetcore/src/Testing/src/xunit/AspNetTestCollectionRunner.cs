@@ -10,6 +10,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 public class AspNetTestCollectionRunner : XunitTestCollectionRunner
 {
     private readonly IDictionary<Type, object> _assemblyFixtureMappings;

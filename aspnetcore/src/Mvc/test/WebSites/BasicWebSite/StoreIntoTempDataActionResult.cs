@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace BasicWebSite;
 
+
 public class StoreIntoTempDataActionResult : IActionResult
 {
     public Task ExecuteResultAsync(ActionContext context)

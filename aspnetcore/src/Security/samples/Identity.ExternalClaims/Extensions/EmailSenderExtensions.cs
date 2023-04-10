@@ -10,6 +10,7 @@ using Identity.ExternalClaims.Services;
 
 namespace Identity.ExternalClaims.Services;
 
+
 public static class EmailSenderExtensions
 {
     public static Task SendEmailConfirmationAsync(

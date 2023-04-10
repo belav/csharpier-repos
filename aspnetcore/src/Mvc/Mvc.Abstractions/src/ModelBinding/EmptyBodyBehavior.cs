@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 /// <summary>
 /// Determines the behavior for processing empty bodies during input formatting.
 /// </summary>

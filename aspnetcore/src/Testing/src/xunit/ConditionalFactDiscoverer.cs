@@ -7,6 +7,7 @@ using Xunit.Sdk;
 // Do not change this namespace without changing the usage in ConditionalFactAttribute
 namespace Microsoft.AspNetCore.Testing;
 
+
 internal sealed class ConditionalFactDiscoverer : FactDiscoverer
 {
     private readonly IMessageSink _diagnosticMessageSink;

@@ -12,6 +12,7 @@ using System.Threading;
 
 namespace Microsoft.WebAssembly.AppHost;
 
+
 public class WasmAppHost
 {
     internal delegate Task<int> HostHandler(

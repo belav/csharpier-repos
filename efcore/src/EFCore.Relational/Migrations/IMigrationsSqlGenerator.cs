@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     A service for generating <see cref="MigrationCommand" /> objects that can
 ///     then be executed or scripted from a list of <see cref="MigrationOperation" />s.

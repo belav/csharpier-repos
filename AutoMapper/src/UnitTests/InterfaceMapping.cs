@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.InterfaceMapping;
 
+
 public class InterfaceInheritance : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>

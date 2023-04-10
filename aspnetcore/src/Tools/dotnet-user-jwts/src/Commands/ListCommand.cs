@@ -7,6 +7,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
+
 internal sealed class ListCommand
 {
     public static void Register(ProjectCommandLineApplication app)

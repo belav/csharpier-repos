@@ -5,6 +5,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
+
 internal sealed class GenericHeaderParser<T> : BaseHeaderParser<T>
 {
     internal delegate int GetParsedValueLengthDelegate(

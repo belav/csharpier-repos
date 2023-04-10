@@ -3,6 +3,7 @@
 
 namespace Wasm.Performance.Driver;
 
+
 sealed class BenchmarkResult
 {
     /// <summary>The result of executing scenario benchmarks</summary>

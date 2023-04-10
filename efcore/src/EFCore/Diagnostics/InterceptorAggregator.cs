@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Abstract base class for implementations of the <see cref="IInterceptorAggregator" /> service.
 /// </summary>

@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
+
 public class BatchingLoggerProviderTests
 {
     private DateTimeOffset _timestampOne = new DateTimeOffset(

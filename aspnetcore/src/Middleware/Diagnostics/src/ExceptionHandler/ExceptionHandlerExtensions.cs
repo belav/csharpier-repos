@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Extension methods for enabling <see cref="ExceptionHandlerExtensions"/>.
 /// </summary>

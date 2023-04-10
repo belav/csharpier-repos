@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
+
 /// <summary>
 /// A <see cref="IViewComponentActivator"/> that retrieves view components as services from the request's
 /// <see cref="IServiceProvider"/>.

@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.ObjectPool;
 
+
 /// <summary>
 /// A pool of objects.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 /// <summary>
 ///     Specifies value comparison for arrays where each element pair is compared.
 ///     A new array is constructed when snapshotting.

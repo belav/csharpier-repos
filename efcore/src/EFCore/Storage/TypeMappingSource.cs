@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     <para>
 ///         The base class for non-relational type mapping. Non-relational providers

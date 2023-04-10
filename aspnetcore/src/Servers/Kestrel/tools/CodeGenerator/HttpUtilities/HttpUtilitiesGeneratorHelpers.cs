@@ -7,6 +7,7 @@ using System.Text;
 
 namespace CodeGenerator.HttpUtilities;
 
+
 internal sealed class HttpUtilitiesGeneratorHelpers
 {
     public sealed class ShiftInfo<TMask>

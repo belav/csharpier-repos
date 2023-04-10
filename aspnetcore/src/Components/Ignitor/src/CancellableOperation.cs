@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 #nullable enable
 namespace Ignitor;
 
+
 internal class CancellableOperation<TResult>
 {
     public CancellableOperation(TimeSpan? timeout, CancellationToken cancellationToken)

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that adds etag metadata on the concurrency token, if present.
 /// </summary>

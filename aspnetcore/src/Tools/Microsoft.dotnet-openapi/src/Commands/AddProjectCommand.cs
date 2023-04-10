@@ -9,6 +9,7 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.DotNet.OpenApi.Commands;
 
+
 internal sealed class AddProjectCommand : BaseCommand
 {
     private const string CommandName = "project";

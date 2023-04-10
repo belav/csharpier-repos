@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace VersioningWebSite;
 
+
 public class VersionDeleteAttribute : VersionRouteAttribute, IActionHttpMethodProvider
 {
     public VersionDeleteAttribute(string template)

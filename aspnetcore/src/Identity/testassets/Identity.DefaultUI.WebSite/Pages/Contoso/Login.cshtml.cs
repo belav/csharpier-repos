@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 
 namespace Identity.DefaultUI.WebSite.Pages;
 
+
 [AllowAnonymous]
 public class LoginModel : PageModel
 {

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Http.Tests;
 
+
 public class BindingAddressTests
 {
     [Theory]

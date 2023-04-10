@@ -13,6 +13,7 @@ using Moq;
 #nullable enable
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
+
 public class DatabaseDeveloperPageExceptionFilterTests
 {
     [Fact]

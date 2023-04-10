@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 // A cache for root component types
 internal sealed class RootComponentTypeCache
 {

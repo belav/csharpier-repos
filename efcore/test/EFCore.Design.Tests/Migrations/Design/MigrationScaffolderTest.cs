@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore.Update.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
+
 public class MigrationsScaffolderTest
 {
     [ConditionalFact]

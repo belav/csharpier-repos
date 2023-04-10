@@ -21,6 +21,7 @@ using System.Numerics;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools.Tests;
 
+
 public class UserJwtsTests : IClassFixture<UserJwtsTestFixture>
 {
     private readonly TestConsole _console;

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class CustomersController : TestODataController, IDisposable
 {
     private readonly NorthwindODataContext _context;

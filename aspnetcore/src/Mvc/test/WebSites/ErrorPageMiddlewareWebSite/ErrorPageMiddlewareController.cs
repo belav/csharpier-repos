@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ErrorPageMiddlewareWebSite;
 
+
 public class ErrorPageMiddlewareController : Controller
 {
     [HttpGet("/CompilationFailure")]

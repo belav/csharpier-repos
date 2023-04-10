@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
+
 public class ModelDirectiveTest : RazorProjectEngineTestBase
 {
     protected override RazorLanguageVersion Version => RazorLanguageVersion.Version_1_1;

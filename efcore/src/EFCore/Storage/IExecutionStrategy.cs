@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     A strategy that is used to execute a command or query against the database, possibly with logic to retry when a
 ///     failure occurs.

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
+
 public class TypeExtensionsTest
 {
     [ConditionalFact]

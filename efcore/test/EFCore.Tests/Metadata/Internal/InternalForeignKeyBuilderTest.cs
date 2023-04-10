@@ -9,6 +9,7 @@ using System.Collections;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 public class InternalForeignKeyBuilderTest
 {
     [ConditionalFact]

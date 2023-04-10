@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace TagHelpersWebSite.TagHelpers;
 
+
 [HtmlTargetElement("*")]
 public class PrettyTagHelper : TagHelper
 {

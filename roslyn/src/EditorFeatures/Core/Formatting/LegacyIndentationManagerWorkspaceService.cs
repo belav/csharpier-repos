@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
+
 [ExportWorkspaceService(typeof(ILegacyIndentationManagerWorkspaceService)), Shared]
 internal sealed class LegacyIndentationManagerWorkspaceService
     : ILegacyIndentationManagerWorkspaceService

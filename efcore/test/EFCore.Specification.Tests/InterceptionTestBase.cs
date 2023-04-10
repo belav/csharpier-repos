@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class InterceptionTestBase
 {
     protected InterceptionTestBase(InterceptionFixtureBase fixture)

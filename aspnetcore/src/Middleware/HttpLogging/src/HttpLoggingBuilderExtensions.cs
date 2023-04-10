@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.HttpLogging;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Extension methods for the HttpLogging middleware.
 /// </summary>

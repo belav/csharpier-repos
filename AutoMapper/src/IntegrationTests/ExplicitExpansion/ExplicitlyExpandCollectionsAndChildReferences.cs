@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
+
 public class ExplicitlyExpandCollectionsAndChildReferences
     : IntegrationTest<ExplicitlyExpandCollectionsAndChildReferences.DatabaseInitializer>
 {

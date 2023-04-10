@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Hosting.Server;
 
+
 /// <summary>
 /// Used by servers to advertise if they support integrated Windows authentication, if it's enabled, and it's scheme.
 /// </summary>

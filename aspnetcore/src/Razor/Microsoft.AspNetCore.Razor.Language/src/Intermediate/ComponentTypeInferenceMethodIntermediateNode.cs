@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 /// <summary>
 /// Represents a type-inference thunk that is used by the generated component code.
 /// </summary>

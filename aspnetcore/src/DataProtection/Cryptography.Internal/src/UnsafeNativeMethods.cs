@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Cryptography.SafeHandles;
 
 namespace Microsoft.AspNetCore.Cryptography;
 
+
 [SuppressUnmanagedCodeSecurity]
 internal static unsafe partial class UnsafeNativeMethods
 {

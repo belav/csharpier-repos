@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace System.CommandLine.NamingConventionBinder;
 
+
 /// <inheritdoc />
 public abstract class HandlerDescriptor : IMethodDescriptor
 {

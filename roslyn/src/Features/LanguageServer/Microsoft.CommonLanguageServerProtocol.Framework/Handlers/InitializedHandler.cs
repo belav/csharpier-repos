@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.Handlers;
 
+
 [LanguageServerEndpoint("initialized")]
 public class InitializedHandler<TRequest, TRequestContext>
     : INotificationHandler<TRequest, TRequestContext>

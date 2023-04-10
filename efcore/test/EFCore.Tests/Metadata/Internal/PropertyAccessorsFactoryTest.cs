@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 public class PropertyAccessorsFactoryTest
 {
     [ConditionalFact]

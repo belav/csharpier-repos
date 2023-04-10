@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public class TagHelpersIntegrationTest : IntegrationTestBase
 {
     [Fact]

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 
+
 internal sealed class ConcurrencyLimiterEventSource : EventSource
 {
     public static readonly ConcurrencyLimiterEventSource Log = new ConcurrencyLimiterEventSource();

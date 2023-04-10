@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SpaProxy;
 
+
 internal sealed class SpaDevelopmentServerOptions
 {
     public string ServerUrl { get; set; } = "";

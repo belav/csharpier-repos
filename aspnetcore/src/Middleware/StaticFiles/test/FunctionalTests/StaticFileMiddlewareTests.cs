@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 public class StaticFileMiddlewareTests : LoggedTest
 {
     [Fact]

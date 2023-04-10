@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 /// <summary>
 ///     Provides access to change tracking and loading information for a collection
 ///     navigation property that associates this entity to a collection of another entities.

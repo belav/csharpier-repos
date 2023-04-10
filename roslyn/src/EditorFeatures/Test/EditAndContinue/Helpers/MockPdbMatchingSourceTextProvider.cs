@@ -11,6 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests;
 
+
 internal class MockPdbMatchingSourceTextProvider : IPdbMatchingSourceTextProvider
 {
     public Func<

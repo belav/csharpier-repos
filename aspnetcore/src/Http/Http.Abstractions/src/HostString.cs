@@ -7,6 +7,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// Represents the host portion of a URI can be used to construct URI's properly formatted and encoded for use in
 /// HTTP headers.

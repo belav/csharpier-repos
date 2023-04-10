@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
+
 internal sealed class TwitterError
 {
     public int Code { get; set; }

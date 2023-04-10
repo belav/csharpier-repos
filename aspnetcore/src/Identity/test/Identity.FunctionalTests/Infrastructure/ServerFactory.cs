@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
+
 public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
     where TStartup : class
     where TContext : DbContext

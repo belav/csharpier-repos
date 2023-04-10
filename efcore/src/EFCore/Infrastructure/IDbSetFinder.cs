@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     A service for finding <see cref="DbSet{TEntity}" /> properties on a type that inherits from <see cref="DbContext" />.
 /// </summary>

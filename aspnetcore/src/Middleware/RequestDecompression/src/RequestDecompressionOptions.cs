@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.RequestDecompression;
 
+
 /// <summary>
 /// Options for the HTTP request decompression middleware.
 /// </summary>

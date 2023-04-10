@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class SqlServerDatabaseSourceTest
 {
     [ConditionalFact]

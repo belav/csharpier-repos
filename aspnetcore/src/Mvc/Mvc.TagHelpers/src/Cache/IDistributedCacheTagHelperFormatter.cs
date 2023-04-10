@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
+
 /// <summary>
 /// An implementation of this interface provides a service to
 /// serialize html fragments for being store by <see cref="IDistributedCacheTagHelperStorage" />

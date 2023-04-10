@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 public interface IMetadataReferenceFeature : IRazorEngineFeature
 {
     IReadOnlyList<MetadataReference> References { get; }

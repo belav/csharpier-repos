@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CorsWebSite;
 
+
 [Route("NonCors/[action]")]
 public class CustomerController : Controller
 {

@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Represents the link between a user and a role.
 /// </summary>

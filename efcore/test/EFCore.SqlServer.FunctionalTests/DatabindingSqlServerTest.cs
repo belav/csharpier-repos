@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class DataBindingSqlServerTest : DataBindingTestBase<F1SqlServerFixture>
 {
     public DataBindingSqlServerTest(F1SqlServerFixture fixture)

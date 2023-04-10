@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     A <see cref="IParameterBindingFactory" /> for binding to the <see cref="ILazyLoader" /> service.
 /// </summary>

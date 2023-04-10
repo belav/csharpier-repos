@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class SqlServerNorthwindTestStoreFactory : SqlServerTestStoreFactory
 {
     public const string Name = "Northwind";

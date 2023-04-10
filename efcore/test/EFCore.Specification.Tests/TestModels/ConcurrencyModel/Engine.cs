@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public class Engine
 {
     public class EngineProxy : Engine, IF1Proxy

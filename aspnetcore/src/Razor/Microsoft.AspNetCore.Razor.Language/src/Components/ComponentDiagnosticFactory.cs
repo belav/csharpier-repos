@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 internal static class ComponentDiagnosticFactory
 {
     private const string DiagnosticPrefix = "RZ";

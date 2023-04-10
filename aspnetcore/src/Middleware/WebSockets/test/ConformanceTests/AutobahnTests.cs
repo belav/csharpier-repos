@@ -10,6 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.WebSockets.ConformanceTest;
 
+
 public class AutobahnTests : LoggedTest
 {
     private static readonly TimeSpan TestTimeout = TimeSpan.FromMinutes(3);

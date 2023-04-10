@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 internal sealed class NonInvokingSingleClientProxy : ISingleClientProxy
 {
     private readonly IClientProxy _clientProxy;

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Abstraction used to manage named keys used to protect lookups.
 /// </summary>

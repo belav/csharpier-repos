@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.SpaServices.AngularCli;
 
+
 /// <summary>
 /// Extension methods for enabling Angular CLI middleware support.
 /// </summary>

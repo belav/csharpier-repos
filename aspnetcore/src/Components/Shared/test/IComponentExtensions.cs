@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
+
 public static class IComponentExtensions
 {
     public static void SetParameters(

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
+
 /// <summary>
 /// Constants related to the SignalR hub protocol.
 /// </summary>

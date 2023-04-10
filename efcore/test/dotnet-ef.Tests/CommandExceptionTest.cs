@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
+
 public class CommandExceptionTest
 {
     [Fact]

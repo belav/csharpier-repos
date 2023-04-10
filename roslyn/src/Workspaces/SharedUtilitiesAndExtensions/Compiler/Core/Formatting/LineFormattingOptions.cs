@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
+
 [DataContract]
 internal sealed record class LineFormattingOptions
 {

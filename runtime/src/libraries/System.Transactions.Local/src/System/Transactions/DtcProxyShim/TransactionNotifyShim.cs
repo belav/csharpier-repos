@@ -5,6 +5,7 @@ using System.Transactions.DtcProxyShim.DtcInterfaces;
 
 namespace System.Transactions.DtcProxyShim;
 
+
 internal sealed class TransactionNotifyShim : NotificationShimBase, ITransactionOutcomeEvents
 {
     internal TransactionNotifyShim(DtcProxyShimFactory shimFactory, object? enlistmentIdentifier)

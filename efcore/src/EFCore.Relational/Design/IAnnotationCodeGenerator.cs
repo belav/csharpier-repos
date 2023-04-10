@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     Implemented by database providers to control which annotations need to
 ///     have code generated (as opposed to being handled by convention) and then to generate

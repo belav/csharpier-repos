@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 // Integration tests targeting the behavior of the KeyValuePairModelBinder with other model binders.
 public class KeyValuePairModelBinderIntegrationTest
 {

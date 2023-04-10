@@ -22,6 +22,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 public class ControllerActionInvokerTest : CommonResourceInvokerTest
 {
     #region Diagnostics

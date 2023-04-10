@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
+
 #pragma warning disable CA1852 // Seal internal types
 internal class ValidationStack
 #pragma warning restore CA1852 // Seal internal types

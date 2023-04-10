@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StaticFilesAuth.Controllers;
 
+
 public class AccountController : Controller
 {
     [HttpGet]

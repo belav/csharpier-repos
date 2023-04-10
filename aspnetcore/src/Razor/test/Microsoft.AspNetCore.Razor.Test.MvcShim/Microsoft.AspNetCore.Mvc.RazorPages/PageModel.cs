@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 public abstract class PageModel
 {
     public IUrlHelper Url { get; set; }

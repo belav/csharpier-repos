@@ -4,6 +4,7 @@
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
+
 public interface IInitializeManager<TRequest, TResponse>
 {
     /// <summary>

@@ -7,6 +7,7 @@ using System.Net.Http.HPack;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+
 internal static class HPackHeaderWriter
 {
     /// <summary>

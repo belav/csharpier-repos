@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace IdentitySample.Models.ManageViewModels;
 
+
 public class IndexViewModel
 {
     public bool HasPassword { get; set; }

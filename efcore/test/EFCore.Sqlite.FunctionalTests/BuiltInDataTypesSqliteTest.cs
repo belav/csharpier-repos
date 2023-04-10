@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Internal;
 // ReSharper disable ParameterOnlyUsedForPreconditionCheck.Local
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class BuiltInDataTypesSqliteTest
     : BuiltInDataTypesTestBase<BuiltInDataTypesSqliteTest.BuiltInDataTypesSqliteFixture>
 {

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+
 /// <summary>
 ///     Allows further configuration of model data.
 /// </summary>

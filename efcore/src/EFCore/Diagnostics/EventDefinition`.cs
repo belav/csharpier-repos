@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Defines metadata for an event with one parameter and a cached delegate to log the
 ///     event with reduced allocations.

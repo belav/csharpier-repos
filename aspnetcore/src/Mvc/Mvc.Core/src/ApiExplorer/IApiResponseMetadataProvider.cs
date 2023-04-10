@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 /// <summary>
 /// Provides a return type, status code and a set of possible content types returned by a
 /// successful execution of the action.

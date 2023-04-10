@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class DataAnnotationInMemoryTest
     : DataAnnotationTestBase<DataAnnotationInMemoryTest.DataAnnotationInMemoryFixture>
 {

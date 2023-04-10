@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding;
 
+
 /// <summary>
 /// Options used to configure gRPC JSON transcoding service instances.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
+
 public class Eagle : Bird
 {
     public Eagle()

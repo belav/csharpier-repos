@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
+
 public abstract class ViewFeatureAnalyzerBase : DiagnosticAnalyzer
 {
     public ViewFeatureAnalyzerBase(DiagnosticDescriptor diagnosticDescriptor)

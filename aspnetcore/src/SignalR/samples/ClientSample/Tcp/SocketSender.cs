@@ -12,6 +12,7 @@ using System.Text;
 
 namespace ClientSample;
 
+
 public class SocketSender
 {
     private readonly Socket _socket;

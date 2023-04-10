@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// Default implementation for <see cref="IMiddlewareFactory"/>.
 /// </summary>

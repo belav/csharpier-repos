@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Protocols.WsFederation;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 /// <summary>
 /// The context object used in for <see cref="WsFederationEvents.AuthenticationFailed"/>.
 /// </summary>

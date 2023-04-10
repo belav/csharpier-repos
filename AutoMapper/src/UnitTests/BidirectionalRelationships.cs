@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.BidirectionalRelationships;
 
+
 public class RecursiveMappingWithStruct : AutoMapperSpecBase
 {
     private ParentDto _dto;

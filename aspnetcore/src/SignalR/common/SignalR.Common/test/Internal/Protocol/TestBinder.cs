@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
+
 public class TestBinder : IInvocationBinder
 {
     private readonly Type[] _paramTypes;

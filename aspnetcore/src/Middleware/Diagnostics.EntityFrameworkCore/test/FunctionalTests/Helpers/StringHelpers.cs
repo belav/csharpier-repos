@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.FunctionalTests.Helpers;
 
+
 public class StringsHelpers
 {
     public static string GetResourceString(string stringName, params object[] parameters)

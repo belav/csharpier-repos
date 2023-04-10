@@ -10,6 +10,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 
+
 /// <summary>
 /// Default implementation of <see cref="ITagHelperComponentPropertyActivator"/>.
 /// </summary>

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 public abstract class EventIdTestBase
 {
     public void TestEventLogging(

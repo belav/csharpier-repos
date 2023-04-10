@@ -9,6 +9,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders;
 
+
 /// <summary>
 /// An embedded file provider that uses a manifest compiled in the assembly to
 /// reconstruct the original paths of the embedded files when they were embedded

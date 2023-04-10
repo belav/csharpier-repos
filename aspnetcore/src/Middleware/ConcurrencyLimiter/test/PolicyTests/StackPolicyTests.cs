@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests;
 
+
 public class StackPolicyTests
 {
     [Fact]

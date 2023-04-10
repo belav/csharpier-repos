@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite;
 
+
 public class RewriteTokenizerTest
 {
     [Fact]

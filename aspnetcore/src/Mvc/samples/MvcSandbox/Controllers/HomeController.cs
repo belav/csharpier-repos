@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MvcSandbox.Controllers;
 
+
 public class HomeController : Controller
 {
     [ModelBinder]

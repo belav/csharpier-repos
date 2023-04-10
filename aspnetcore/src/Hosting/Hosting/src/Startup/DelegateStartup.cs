@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 /// <summary>
 /// Used for initializing services and middlewares used by an application.
 /// </summary>

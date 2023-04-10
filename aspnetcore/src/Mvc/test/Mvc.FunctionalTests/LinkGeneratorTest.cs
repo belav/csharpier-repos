@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 // Functional tests for MVC's scenarios with LinkGenerator (2.2+ only)
 public class LinkGeneratorTest
     : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForLinkGenerator>>

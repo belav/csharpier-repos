@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.Components.Server.BlazorPack;
 
+
 /// <summary>
 /// Implements the SignalR Hub Protocol using MessagePack with limited type support.
 /// </summary>

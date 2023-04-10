@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.MetadataAsSource;
 
+
 internal static class MetadataAsSourceOptionsStorage
 {
     public static MetadataAsSourceOptions GetMetadataAsSourceOptions(

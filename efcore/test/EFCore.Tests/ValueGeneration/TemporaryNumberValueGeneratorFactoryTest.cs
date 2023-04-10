@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
+
 public class TemporaryNumberValueGeneratorFactoryTest
 {
     private static readonly IModel _model = BuildModel();

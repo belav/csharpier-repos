@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
+
 public class HtmlPageContext
 {
     private readonly IDictionary<string, object> _properties;

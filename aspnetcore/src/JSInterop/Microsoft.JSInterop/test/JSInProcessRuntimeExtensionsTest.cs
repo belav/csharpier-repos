@@ -6,6 +6,7 @@ using Moq;
 
 namespace Microsoft.JSInterop;
 
+
 public class JSInProcessRuntimeExtensionsTest
 {
     [Fact]

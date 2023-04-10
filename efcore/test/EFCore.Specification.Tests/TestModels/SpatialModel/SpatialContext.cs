@@ -5,6 +5,7 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel;
 
+
 public class SpatialContext : PoolableDbContext
 {
     public SpatialContext(DbContextOptions options)

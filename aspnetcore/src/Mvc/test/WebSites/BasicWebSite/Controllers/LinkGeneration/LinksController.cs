@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers.LinkGeneration;
 
+
 public class LinksController : Controller
 {
     public IActionResult Index(string view)

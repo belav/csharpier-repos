@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
+
 [ExportAspNetCoreEmbeddedLanguageDocumentHighlighter(name: "Route", language: LanguageNames.CSharp)]
 internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHighlighter
 {

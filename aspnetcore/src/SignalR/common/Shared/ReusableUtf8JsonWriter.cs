@@ -8,6 +8,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 internal sealed class ReusableUtf8JsonWriter
 {
     [ThreadStatic]

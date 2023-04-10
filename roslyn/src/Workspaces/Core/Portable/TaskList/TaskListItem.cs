@@ -8,6 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.TaskList;
 
+
 /// <summary>
 /// Serialization type used to pass information to/from OOP and VS.
 /// </summary>

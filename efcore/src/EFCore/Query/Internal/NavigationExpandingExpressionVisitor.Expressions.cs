@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
 
+
 public partial class NavigationExpandingExpressionVisitor
 {
     private sealed class EntityReference : Expression, IPrintableExpression

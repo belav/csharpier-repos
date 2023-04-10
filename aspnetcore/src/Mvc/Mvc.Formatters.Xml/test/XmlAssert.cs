@@ -6,6 +6,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 /// <summary>
 /// Xunit assertions related to Xml content.
 /// </summary>

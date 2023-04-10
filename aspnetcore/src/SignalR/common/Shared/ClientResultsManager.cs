@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 // Common type used by our HubLifetimeManager implementations to manage client results.
 // Handles cancellation, cleanup, and completion, so any bugs or improvements can be made in a single place
 internal sealed class ClientResultsManager : IInvocationBinder

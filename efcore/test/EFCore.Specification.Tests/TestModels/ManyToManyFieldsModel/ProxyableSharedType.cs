@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel;
 
+
 public class ProxyableSharedType
 {
     private readonly Dictionary<string, object> _keyValueStore = new();

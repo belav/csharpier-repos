@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 internal static class EndpointFactory
 {
     public static RouteEndpoint CreateRouteEndpoint(

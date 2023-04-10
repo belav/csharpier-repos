@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Owin;
 
+
 internal static class Utilities
 {
     internal static string RemoveQuestionMark(string queryString)

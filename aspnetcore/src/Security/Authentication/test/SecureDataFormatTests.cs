@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authentication.DataHandler;
 
+
 public class SecureDataFormatTests
 {
     public SecureDataFormatTests()

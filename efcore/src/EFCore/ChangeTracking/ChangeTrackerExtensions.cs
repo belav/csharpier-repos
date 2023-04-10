@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Extension methods for <see cref="ChangeTracker" />.
 /// </summary>

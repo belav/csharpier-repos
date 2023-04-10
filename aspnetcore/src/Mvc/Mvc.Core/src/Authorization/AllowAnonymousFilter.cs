@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Authorization;
 
+
 /// <summary>
 /// An implementation of <see cref="IAllowAnonymousFilter"/>
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// A bound event handler delegate.
 /// </summary>

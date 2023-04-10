@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Allows interception of identity resolution conflicts when the <see cref="DbContext" /> starts tracking new entity
 ///     instances.

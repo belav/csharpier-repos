@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Facebook;
 
+
 /// <summary>
 /// Configuration options for <see cref="FacebookHandler"/>.
 /// </summary>

@@ -7,6 +7,7 @@ using Microsoft.Data.SqlClient;
 
 namespace Microsoft.Extensions.Caching.SqlServer;
 
+
 internal static class SqlParameterCollectionExtensions
 {
     // For all values where the length is less than the below value, try setting the size of the

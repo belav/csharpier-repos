@@ -9,6 +9,7 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
+
 public class CustomAuthorizationFailureResponseTests
     : IClassFixture<WebApplicationFactory<CustomAuthorizationFailureResponse.Startup>>
 {

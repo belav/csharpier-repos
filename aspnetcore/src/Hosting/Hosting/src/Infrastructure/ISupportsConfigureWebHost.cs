@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting.Infrastructure;
 
+
 /// <summary>
 /// An interface implemented by IWebHostBuilders that handle <see cref="GenericHostWebHostBuilderExtensions.ConfigureWebHost(IHostBuilder, Action{IWebHostBuilder})"/>
 /// directly.

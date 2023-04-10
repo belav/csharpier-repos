@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
+
 /// <summary>
 /// Reconfigures the NegotiateOptions to defer to the integrated server authentication if present.
 /// </summary>

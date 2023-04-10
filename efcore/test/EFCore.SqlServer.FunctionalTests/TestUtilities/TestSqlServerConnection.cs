@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class TestSqlServerConnection : SqlServerConnection
 {
     public TestSqlServerConnection(RelationalConnectionDependencies dependencies)

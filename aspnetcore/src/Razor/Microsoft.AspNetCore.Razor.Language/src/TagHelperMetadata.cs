@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public static class TagHelperMetadata
 {
     public static class Common

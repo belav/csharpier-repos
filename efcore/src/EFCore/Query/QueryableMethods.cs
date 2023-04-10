@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     A class that provides reflection metadata for translatable LINQ methods.
 /// </summary>

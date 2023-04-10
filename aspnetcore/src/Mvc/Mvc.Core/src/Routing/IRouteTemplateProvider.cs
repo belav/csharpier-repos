@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
+
 /// <summary>
 /// Interface for attributes which can supply a route template for attribute routing.
 /// </summary>

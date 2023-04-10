@@ -6,6 +6,7 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class MvcSandboxTest : IClassFixture<MvcTestFixture<MvcSandbox.Startup>>
 {
     public MvcSandboxTest(MvcTestFixture<MvcSandbox.Startup> fixture)

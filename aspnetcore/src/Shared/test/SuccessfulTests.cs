@@ -6,6 +6,7 @@ using Xunit;
 
 namespace AlwaysTestTests;
 
+
 /// <summary>
 /// Tests for every test assembly to ensure quarantined and unquarantined runs report at least one test execution.
 /// </summary>

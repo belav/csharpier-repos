@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace ClientSample;
 
+
 public class SocketAwaitable : ICriticalNotifyCompletion
 {
     private static readonly Action _callbackCompleted = () => { };

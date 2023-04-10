@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.JsonQuery;
 
+
 public class JsonEntityInheritanceBase
 {
     public int Id { get; set; }

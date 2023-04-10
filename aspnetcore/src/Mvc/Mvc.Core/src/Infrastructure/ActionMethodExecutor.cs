@@ -10,6 +10,7 @@ using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 internal abstract class ActionMethodExecutor
 {
     private static readonly ActionMethodExecutor[] Executors = new ActionMethodExecutor[]

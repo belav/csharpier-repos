@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace WebAssembly.JSInterop;
 
+
 /// <summary>
 /// Methods that map to the functions compiled into the Mono WebAssembly runtime,
 /// as defined by 'mono_add_internal_call' calls in driver.c.

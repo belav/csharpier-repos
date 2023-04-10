@@ -7,6 +7,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Antiforgery.Internal;
 
+
 public class DefaultAntiforgeryTokenStoreTest
 {
     private readonly string _cookieName = "cookie-name";

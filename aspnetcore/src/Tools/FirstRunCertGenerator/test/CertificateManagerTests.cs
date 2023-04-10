@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Certificates.Generation.Tests;
 
+
 public class CertificateManagerTests : IClassFixture<CertFixture>
 {
     private readonly CertFixture _fixture;

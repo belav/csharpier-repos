@@ -15,6 +15,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+
 public class ComplexObjectModelBinderTest
 {
     private static readonly IModelMetadataProvider _metadataProvider =

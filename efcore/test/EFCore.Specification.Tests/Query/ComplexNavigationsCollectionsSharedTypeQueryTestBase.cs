@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class ComplexNavigationsCollectionsSharedTypeQueryTestBase<TFixture>
     : ComplexNavigationsCollectionsQueryTestBase<TFixture>
     where TFixture : ComplexNavigationsSharedTypeQueryFixtureBase, new()

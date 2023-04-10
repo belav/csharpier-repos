@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.InMemory.Diagnostics.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class InMemoryTestHelpers : TestHelpers
 {
     protected InMemoryTestHelpers() { }

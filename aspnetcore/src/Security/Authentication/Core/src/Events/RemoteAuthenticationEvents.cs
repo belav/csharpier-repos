@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Allows subscribing to events raised during remote authentication.
 /// </summary>

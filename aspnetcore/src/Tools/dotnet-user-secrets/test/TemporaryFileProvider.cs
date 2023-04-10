@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Microsoft.Extensions.SecretManager.Tools.Tests;
 
+
 internal class TemporaryFileProvider : IDisposable
 {
     public TemporaryFileProvider()

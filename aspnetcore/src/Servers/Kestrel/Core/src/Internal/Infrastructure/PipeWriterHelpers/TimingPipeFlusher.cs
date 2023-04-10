@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeWriterHelpers;
 
+
 /// <summary>
 /// This wraps PipeWriter.FlushAsync() in a way that allows multiple awaiters making it safe to call from publicly
 /// exposed Stream implementations while also tracking response data rate.

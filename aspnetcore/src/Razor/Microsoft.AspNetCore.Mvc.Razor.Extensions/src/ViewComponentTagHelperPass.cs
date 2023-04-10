@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
+
 public class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     // Run after the default taghelper pass

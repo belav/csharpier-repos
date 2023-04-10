@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.Metadata;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// Specifies a summary in <see cref="Endpoint.Metadata"/>.
 /// </summary>

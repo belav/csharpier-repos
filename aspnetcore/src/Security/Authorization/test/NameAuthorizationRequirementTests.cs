@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace Microsoft.AspNetCore.Authorization.Test;
 
+
 public class NameAuthorizationRequirementTests
 {
     public NameAuthorizationRequirement CreateRequirement(string requiredName)

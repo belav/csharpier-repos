@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Enum used by <see cref="CommandEventData" />, and subclasses to indicate the
 ///     source of the <see cref="DbCommand" /> being used to execute the command.

@@ -3,6 +3,7 @@
 
 namespace Microsoft.Authentication.WebAssembly.Msal;
 
+
 /// <summary>
 /// Authentication options for the underlying msal.js library handling the authentication.
 /// </summary>

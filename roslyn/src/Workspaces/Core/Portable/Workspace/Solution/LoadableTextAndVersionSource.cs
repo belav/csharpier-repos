@@ -11,6 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis;
 
+
 internal sealed class LoadableTextAndVersionSource : ITextAndVersionSource
 {
     private sealed class LazyValueWithOptions

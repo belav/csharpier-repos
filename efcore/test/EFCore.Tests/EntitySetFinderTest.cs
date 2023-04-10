@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class DbSetFinderTest
 {
     [ConditionalFact]

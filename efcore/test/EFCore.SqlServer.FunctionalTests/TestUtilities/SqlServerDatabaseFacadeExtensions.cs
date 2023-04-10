@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public static class SqlServerDatabaseFacadeExtensions
 {
     public static void EnsureClean(this DatabaseFacade databaseFacade) =>

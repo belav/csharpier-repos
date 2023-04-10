@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention which ensures that all sequences in the model have unique names
 ///     within a schema when truncated to the maximum identifier length for the model.

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Localization;
 
 namespace LocalizationWebsite;
 
+
 public class StartupGetAllStrings
 {
     public void ConfigureServices(IServiceCollection services)

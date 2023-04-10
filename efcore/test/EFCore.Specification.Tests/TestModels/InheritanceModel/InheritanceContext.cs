@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
+
 public class InheritanceContext : PoolableDbContext
 {
     public InheritanceContext(DbContextOptions options)

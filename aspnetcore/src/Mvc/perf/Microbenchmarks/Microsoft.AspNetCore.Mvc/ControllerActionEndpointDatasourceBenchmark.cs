@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
+
 public class ControllerActionEndpointDataSourceBenchmark
 {
     private const string DefaultRoute = "{Controller=Home}/{Action=Index}/{id?}";

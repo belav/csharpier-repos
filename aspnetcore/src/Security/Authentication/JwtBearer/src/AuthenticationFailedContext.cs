@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
+
 /// <summary>
 /// A <see cref="ResultContext{TOptions}"/> when authentication has failed.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace HtmlGenerationWebSite.Models;
 
+
 public class ViewModel
 {
     public int Integer { get; set; } = 23;

@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class RelationalDataReaderTest
 {
     [ConditionalTheory]

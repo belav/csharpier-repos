@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers.ActionConstraints;
 
+
 [Route("ConsumesAttribute_WithFallbackActionController/[action]")]
 public class ConsumesAttribute_WithFallbackActionController : Controller
 {

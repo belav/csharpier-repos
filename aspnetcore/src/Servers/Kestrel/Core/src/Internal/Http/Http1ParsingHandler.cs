@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
+
 internal readonly struct Http1ParsingHandler : IHttpRequestLineHandler, IHttpHeadersHandler
 {
     public readonly Http1Connection Connection;

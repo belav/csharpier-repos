@@ -10,6 +10,7 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
+
 public class CookiesTests : IClassFixture<WebApplicationFactory<Cookies.Startup>>
 {
     public CookiesTests(WebApplicationFactory<Cookies.Startup> fixture) =>

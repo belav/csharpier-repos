@@ -5,6 +5,7 @@ using Microsoft.Extensions.Caching.Distributed;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
+
 /// <summary>
 /// An implementation of this interface provides a service to
 /// cache distributed html fragments from the &lt;distributed-cache&gt;

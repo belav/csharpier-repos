@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
+
 public class CSharpEntityTypeGeneratorTest : ModelCodeGeneratorTestBase
 {
     public CSharpEntityTypeGeneratorTest(

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     A builder API designed for database providers to use when implementing <see cref="IDesignTimeServices" />.
 /// </summary>

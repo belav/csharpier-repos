@@ -39,6 +39,7 @@ using BlazorServerWeb_CSharp.Data;
 
 namespace BlazorServerWeb_CSharp;
 
+
 public class Program
 {
     public static void Main(string[] args)

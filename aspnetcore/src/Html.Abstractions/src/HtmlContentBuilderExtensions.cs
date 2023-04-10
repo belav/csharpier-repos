@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Html;
 
+
 /// <summary>
 /// Extension methods for <see cref="IHtmlContentBuilder"/>.
 /// </summary>

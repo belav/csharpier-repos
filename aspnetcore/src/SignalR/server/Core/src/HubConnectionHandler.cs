@@ -13,6 +13,7 @@ using Log = Microsoft.AspNetCore.SignalR.HubConnectionHandlerLog;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Handles incoming connections and implements the SignalR Hub Protocol.
 /// </summary>

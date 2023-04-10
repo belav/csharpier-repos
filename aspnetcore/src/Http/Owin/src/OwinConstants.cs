@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Owin;
 
+
 internal static class OwinConstants
 {
     #region OWIN v1.0.0 - 3.2.1. Request Data

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 public class SqlServerMetadataExtensionsTest
 {
     [ConditionalFact]

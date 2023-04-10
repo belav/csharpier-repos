@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.EntityFrameworkCore.Internal;
 
+
 internal sealed class LegacyReferenceEqualityComparer : IEqualityComparer<object>, IEqualityComparer
 {
     private LegacyReferenceEqualityComparer() { }

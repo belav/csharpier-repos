@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
+
 internal sealed class KeyDefinition
 {
     public string Type { get; set; }

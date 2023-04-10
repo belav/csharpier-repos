@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
+
 public class NonParameterConstraintController : Controller
 {
     private readonly TestResponseGenerator _generator;

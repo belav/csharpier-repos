@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
+
 internal static class HandshakeHelpers
 {
     public static IEnumerable<KeyValuePair<string, string>> GenerateResponseHeaders(string key)

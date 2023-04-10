@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Configures options for binding specific element types.
 /// </summary>

@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
+
 public partial class HttpConnectionTests
 {
     private static HttpConnection CreateConnection(

@@ -18,6 +18,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class TestableHtmlGenerator : DefaultHtmlGenerator
 {
     private readonly IDictionary<string, object> _validationAttributes;

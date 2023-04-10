@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Represents all the options you can use to configure the identity system.
 /// </summary>

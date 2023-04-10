@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 internal sealed class AcceptedAtRouteResult : ObjectResult
 {
     /// <summary>

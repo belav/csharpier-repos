@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IIS.Microbenchmarks;
 
+
 [AspNetCoreBenchmark]
 public class PlaintextBenchmark
 {

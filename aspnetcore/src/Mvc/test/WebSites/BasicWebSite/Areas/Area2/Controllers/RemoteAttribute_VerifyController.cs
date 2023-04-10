@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Ares.Area2.Controllers;
 
+
 [Area("Area2")]
 [Route("[area]/[controller]/[action]")]
 public class RemoteAttribute_VerifyController : Controller

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 internal struct ComponentParameter
 {
     public string Name { get; set; }

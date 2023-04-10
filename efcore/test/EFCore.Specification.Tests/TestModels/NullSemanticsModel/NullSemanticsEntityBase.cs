@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.NullSemanticsModel;
 
+
 public abstract class NullSemanticsEntityBase
 {
     public int Id { get; set; }

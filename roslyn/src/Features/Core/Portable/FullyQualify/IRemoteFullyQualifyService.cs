@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify;
 
+
 internal interface IRemoteFullyQualifyService
 {
     ValueTask<FullyQualifyFixData?> GetFixDataAsync(

@@ -7,6 +7,7 @@ using IOPath = System.IO.Path;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class BuildReference
 {
     private BuildReference(

@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class NestedMappingProjectionsExplicitExpanding : AutoMapperSpecBase
 {
     Fu _destination;

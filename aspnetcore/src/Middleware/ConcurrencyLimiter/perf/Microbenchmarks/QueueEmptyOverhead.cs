@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter.Microbenchmarks;
 
+
 public class QueueEmptyOverhead
 {
     private const int _numRequests = 20000;

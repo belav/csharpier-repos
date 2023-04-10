@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class CollectionWhere : AutoMapperSpecBase
 {
     private Destination _destination;

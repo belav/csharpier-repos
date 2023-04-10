@@ -11,6 +11,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 internal sealed class AspNetTestRunner : XunitTestRunner
 {
     private readonly TestOutputHelper _testOutputHelper;

@@ -8,6 +8,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class BytesToStringBenchmark
 {
     private const int Iterations = 50;

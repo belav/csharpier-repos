@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 public class CosmosTransactionManagerTest
 {
     [ConditionalFact]

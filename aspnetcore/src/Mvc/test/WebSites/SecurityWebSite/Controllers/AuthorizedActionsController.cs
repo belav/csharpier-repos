@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SecurityWebSite.Controllers;
 
+
 public class AuthorizedActionsController : ControllerBase
 {
     [AllowAnonymous]

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 public class HttpLoggingServicesExtensionsTests
 {
     [Fact]

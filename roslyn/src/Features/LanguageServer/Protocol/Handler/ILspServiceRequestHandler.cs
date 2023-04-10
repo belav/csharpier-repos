@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
+
 internal interface ILspServiceRequestHandler<TRequest, TResponse>
     : ILspService,
         IRequestHandler<TRequest, TResponse, RequestContext>,

@@ -14,6 +14,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.Web.Rendering;
 
+
 public class RemoteRendererTest
 {
     // Nothing should exceed the timeout in a successful run of the the tests, this is just here to catch

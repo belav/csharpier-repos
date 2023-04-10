@@ -9,6 +9,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 public class ValidationAttributeAdapterOfTAttributeTest
 {
     [Fact]

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultDocumentClassifierPassFeature : RazorEngineFeatureBase
 {
     public IList<

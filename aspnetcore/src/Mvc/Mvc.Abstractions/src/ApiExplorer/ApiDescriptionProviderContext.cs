@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 /// <summary>
 /// A context object for <see cref="ApiDescription"/> providers.
 /// </summary>

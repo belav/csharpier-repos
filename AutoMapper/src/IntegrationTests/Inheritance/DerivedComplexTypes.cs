@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.Inheritance;
 
+
 public class DerivedComplexTypes : IntegrationTest<DerivedComplexTypes.DatabaseInitializer>
 {
     [ComplexType]

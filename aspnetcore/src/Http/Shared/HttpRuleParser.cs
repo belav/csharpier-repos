@@ -8,6 +8,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
+
 internal static class HttpRuleParser
 {
     private static readonly bool[] TokenChars = CreateTokenChars();

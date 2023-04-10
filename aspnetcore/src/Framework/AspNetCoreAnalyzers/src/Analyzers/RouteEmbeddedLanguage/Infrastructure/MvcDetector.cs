@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
+
 internal static class MvcDetector
 {
     private const string ControllerTypeNameSuffix = "Controller";

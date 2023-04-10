@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 internal delegate Task PageHandlerBinderDelegate(
     PageContext pageContext,
     IDictionary<string, object?> arguments

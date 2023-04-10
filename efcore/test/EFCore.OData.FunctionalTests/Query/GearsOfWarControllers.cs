@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class GearsController : TestODataController, IDisposable
 {
     private readonly GearsOfWarODataContext _context;

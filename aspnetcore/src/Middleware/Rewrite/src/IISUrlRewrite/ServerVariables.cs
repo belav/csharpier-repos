@@ -6,6 +6,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 internal static class ServerVariables
 {
     /// <summary>

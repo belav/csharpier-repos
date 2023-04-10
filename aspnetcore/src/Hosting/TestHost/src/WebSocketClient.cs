@@ -11,6 +11,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.TestHost;
 
+
 /// <summary>
 /// Provides a client for connecting over WebSockets to a test server.
 /// </summary>

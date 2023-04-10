@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CustomPolicyProvider;
 
+
 // This class contains logic for determining whether MinimumAgeRequirements in authorization
 // policies are satisfied or not
 internal class MinimumAgeAuthorizationHandler : AuthorizationHandler<MinimumAgeRequirement>

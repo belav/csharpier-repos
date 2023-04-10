@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 /// <summary>
 /// Serializes <see cref="IEnumerable{T}"/> types by delegating them through a concrete implementation.
 /// </summary>

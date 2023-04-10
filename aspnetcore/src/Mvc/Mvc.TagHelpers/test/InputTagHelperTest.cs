@@ -13,6 +13,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class InputTagHelperTest
 {
     public static TheoryData<TagHelperAttributeList, string> MultiAttributeCheckBoxData

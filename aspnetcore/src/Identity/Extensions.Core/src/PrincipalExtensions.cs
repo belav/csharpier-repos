@@ -3,6 +3,7 @@
 
 namespace System.Security.Claims;
 
+
 /// <summary>
 /// Claims related extensions for <see cref="ClaimsPrincipal"/>.
 /// </summary>

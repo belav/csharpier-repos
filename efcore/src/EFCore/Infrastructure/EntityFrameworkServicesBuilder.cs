@@ -15,6 +15,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     A builder API designed for database providers to use when registering services.
 /// </summary>

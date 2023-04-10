@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
+
 /// <summary>
 /// Used with protocols that require the Extended CONNECT handshake such as HTTP/2 WebSockets and WebTransport.
 /// https://www.rfc-editor.org/rfc/rfc8441#section-4

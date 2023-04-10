@@ -15,6 +15,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 public class XmlSerializerOutputFormatterTest
 {
     public class DummyClass

@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 public class ChangeTrackerTest
 {
     [ConditionalTheory]

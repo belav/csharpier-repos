@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 
+
 /// <summary>
 /// An <see cref="IXmlRepository"/> backed by an EntityFrameworkCore datastore.
 /// </summary>

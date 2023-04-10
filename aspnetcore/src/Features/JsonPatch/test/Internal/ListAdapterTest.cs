@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
+
 public class ListAdapterTest
 {
     [Fact]

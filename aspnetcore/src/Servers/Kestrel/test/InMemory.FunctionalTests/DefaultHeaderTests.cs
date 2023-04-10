@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
+
 public class DefaultHeaderTests : LoggedTest
 {
     [Fact]

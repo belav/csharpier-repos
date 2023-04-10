@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration.Memory;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 public class WebAssemblyHostConfigurationTest
 {
     [Fact]

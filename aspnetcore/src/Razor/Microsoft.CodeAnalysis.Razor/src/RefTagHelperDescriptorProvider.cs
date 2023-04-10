@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 internal class RefTagHelperDescriptorProvider : ITagHelperDescriptorProvider
 {
     // Run after the component tag helper provider, because later we may want component-type-specific variants of this

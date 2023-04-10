@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
+
 /// <summary>
 /// Configures an <see cref="ApplicationPart" /> that contains controllers, as well as Razor views and Pages.
 /// <para>

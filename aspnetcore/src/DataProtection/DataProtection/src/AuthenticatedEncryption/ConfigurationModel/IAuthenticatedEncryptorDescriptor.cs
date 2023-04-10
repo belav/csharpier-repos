@@ -5,6 +5,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
+
 /// <summary>
 /// A self-contained descriptor that wraps all information (including secret key
 /// material) necessary to create an instance of an <see cref="IAuthenticatedEncryptor"/>.

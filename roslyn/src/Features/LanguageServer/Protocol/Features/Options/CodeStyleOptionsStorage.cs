@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.CodeStyle;
 
+
 internal static class CodeStyleOptionsStorage
 {
     public static IdeCodeStyleOptions GetCodeStyleOptions(

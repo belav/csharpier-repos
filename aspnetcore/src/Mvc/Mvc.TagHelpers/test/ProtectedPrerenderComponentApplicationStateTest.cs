@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.DataProtection;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class ProtectedPrerenderComponentApplicationStateTest
 {
     private static readonly IDataProtectionProvider _provider =

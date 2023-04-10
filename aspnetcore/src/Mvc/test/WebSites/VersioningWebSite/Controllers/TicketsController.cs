@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VersioningWebSite;
 
+
 // Scenario
 // V1 of the API is read-only and unconstrained
 // V2 of the API is constrained

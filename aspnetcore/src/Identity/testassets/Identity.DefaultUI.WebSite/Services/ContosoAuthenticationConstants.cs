@@ -3,6 +3,7 @@
 
 namespace Identity.DefaultUI.WebSite;
 
+
 public static class ContosoAuthenticationConstants
 {
     public const string Scheme = "Contoso";

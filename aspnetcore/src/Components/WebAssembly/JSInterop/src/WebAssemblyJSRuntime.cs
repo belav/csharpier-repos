@@ -8,6 +8,7 @@ using WebAssembly.JSInterop;
 
 namespace Microsoft.JSInterop.WebAssembly;
 
+
 /// <summary>
 /// Provides methods for invoking JavaScript functions for applications running
 /// on the Mono WebAssembly runtime.

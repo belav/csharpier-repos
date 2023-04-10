@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 internal sealed class DevToolsDebuggerConnection : WasmDebuggerConnection
 {
     public WebSocket WebSocket { get; init; }

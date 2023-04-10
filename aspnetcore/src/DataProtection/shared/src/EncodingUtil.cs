@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 internal static class EncodingUtil
 {
     // UTF8 encoding that fails on invalid chars

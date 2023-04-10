@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class DesignExceptionTest
 {
     [ConditionalFact]

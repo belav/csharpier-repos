@@ -7,6 +7,7 @@ using Grpc.Core;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
+
 internal sealed class HttpContextStreamWriter<TResponse> : IServerStreamWriter<TResponse>
     where TResponse : class
 {

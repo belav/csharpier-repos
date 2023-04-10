@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules;
 
+
 public class MiddlewareTests
 {
     [Fact]

@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
+
 public class MaxKeyLengthSchemaTest : IClassFixture<ScratchDatabaseFixture>
 {
     private readonly ApplicationBuilder _builder;

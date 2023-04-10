@@ -15,6 +15,7 @@ using MethodOptions = Grpc.Shared.Server.MethodOptions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 
+
 public class JsonTranscodingServerCallContextTests
 {
     [Fact]

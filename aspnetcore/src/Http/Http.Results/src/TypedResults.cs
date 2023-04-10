@@ -14,6 +14,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// A typed factory for <see cref="IResult"/> types in <see cref="Microsoft.AspNetCore.Http.HttpResults"/>.
 /// </summary>

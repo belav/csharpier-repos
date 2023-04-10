@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class CompositeKeysQueryInMemoryTest
     : CompositeKeysQueryTestBase<CompositeKeysQueryInMemoryFixture>
 {

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class TPTTableSplittingSqliteTest : TPTTableSplittingTestBase
 {
     public TPTTableSplittingSqliteTest(ITestOutputHelper testOutputHelper)

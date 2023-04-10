@@ -9,6 +9,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 public class W3CLoggingMiddlewareTests
 {
     [Fact]

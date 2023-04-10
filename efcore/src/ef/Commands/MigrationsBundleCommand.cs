@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
+
 internal partial class MigrationsBundleCommand
 {
     protected override void Validate()

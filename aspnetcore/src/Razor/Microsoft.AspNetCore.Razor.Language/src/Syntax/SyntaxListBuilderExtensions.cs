@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 internal static class SyntaxListBuilderExtensions
 {
     public static SyntaxList<SyntaxNode> ToList(this SyntaxListBuilder builder)

@@ -14,6 +14,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Certificates.Generation;
 
+
 internal abstract class CertificateManager
 {
     internal const int CurrentAspNetCoreCertificateVersion = 2;

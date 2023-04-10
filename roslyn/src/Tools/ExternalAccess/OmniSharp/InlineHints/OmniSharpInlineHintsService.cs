@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.InlineHints;
 
+
 internal static class OmniSharpInlineHintsService
 {
     public static async Task<ImmutableArray<OmniSharpInlineHint>> GetInlineHintsAsync(

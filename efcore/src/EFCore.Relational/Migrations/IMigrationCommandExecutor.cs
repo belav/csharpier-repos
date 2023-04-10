@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     A service for executing migration commands against a database.
 /// </summary>

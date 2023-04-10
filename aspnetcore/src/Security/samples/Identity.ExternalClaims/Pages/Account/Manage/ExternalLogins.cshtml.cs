@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Identity.ExternalClaims.Pages.Account.Manage;
 
+
 public class ExternalLoginsModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;

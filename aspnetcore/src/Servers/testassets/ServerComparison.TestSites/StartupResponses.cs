@@ -8,6 +8,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace ServerComparison.TestSites;
 
+
 public class StartupResponses
 {
     public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)

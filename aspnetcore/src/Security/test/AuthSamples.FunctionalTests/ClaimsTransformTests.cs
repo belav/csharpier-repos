@@ -9,6 +9,7 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
+
 public class ClaimsTransformTests : IClassFixture<WebApplicationFactory<ClaimsTransformer.Startup>>
 {
     public ClaimsTransformTests(WebApplicationFactory<ClaimsTransformer.Startup> fixture)

@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that configures a JSON element name for the navigation property mapped to json
 ///     based on the <see cref="JsonPropertyNameAttribute" /> attribute.

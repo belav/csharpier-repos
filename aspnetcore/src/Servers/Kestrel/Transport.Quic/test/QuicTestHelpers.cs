@@ -23,6 +23,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Tests;
 
+
 internal static class QuicTestHelpers
 {
     private static readonly byte[] TestData = Encoding.UTF8.GetBytes("Hello world");

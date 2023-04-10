@@ -7,6 +7,7 @@ using Microsoft.Extensions.Caching.SqlServer;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods for setting up Microsoft SQL Server distributed cache services in an <see cref="IServiceCollection" />.
 /// </summary>

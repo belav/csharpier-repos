@@ -8,6 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api;
 
+
 internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider
     : IUnitTestingIncrementalAnalyzerProvider
 {

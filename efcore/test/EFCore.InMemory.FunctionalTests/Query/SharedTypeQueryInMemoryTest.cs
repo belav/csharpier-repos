@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class SharedTypeQueryInMemoryTest : SharedTypeQueryTestBase
 {
     protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;

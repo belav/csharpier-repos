@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class StringSourceDocument : RazorSourceDocument
 {
     private readonly string _content;

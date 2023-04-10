@@ -11,6 +11,7 @@ using Microsoft.Extensions.CommandLineUtils;
 
 namespace Microsoft.DotNet.OpenApi;
 
+
 internal sealed class Application : CommandLineApplication
 {
     static Application()

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
+
 public abstract class InternalEntityEntryTestBase<
     TSomeEntity,
     TSomeSimpleEntityBase,

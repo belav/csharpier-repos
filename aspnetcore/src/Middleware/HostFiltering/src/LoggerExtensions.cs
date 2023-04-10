@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.HostFiltering;
 
+
 internal static partial class LoggerExtensions
 {
     [LoggerMessage(

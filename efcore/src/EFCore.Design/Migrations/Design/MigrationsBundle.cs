@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Tools;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
+
 /// <summary>
 ///     Defines the entry point for Migrations bundles.
 /// </summary>

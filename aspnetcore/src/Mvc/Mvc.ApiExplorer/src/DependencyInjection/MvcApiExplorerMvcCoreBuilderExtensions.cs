@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extensions for configuring ApiExplorer using an <see cref="IMvcCoreBuilder"/>.
 /// </summary>

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 
+
 internal static class KestrelBadHttpRequestException
 {
     [StackTraceHidden]

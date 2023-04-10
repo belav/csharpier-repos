@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 /// <summary>
 /// The <see cref="DataTransfer"/> object is used to hold the data that is being dragged during a drag and drop operation.
 /// It may hold one or more <see cref="DataTransferItem"/>, each of one or more data types.

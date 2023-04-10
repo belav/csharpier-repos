@@ -25,6 +25,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
+
 public class Http2ConnectionTests : Http2TestBase
 {
     [Fact]

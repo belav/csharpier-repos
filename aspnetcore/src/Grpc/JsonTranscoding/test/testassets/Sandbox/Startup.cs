@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Server;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

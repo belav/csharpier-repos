@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
+
 internal sealed class WrappingStream : Stream
 {
     private Stream _inner;

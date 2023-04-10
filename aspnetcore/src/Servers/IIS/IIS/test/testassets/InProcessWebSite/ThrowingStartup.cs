@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace TestSite;
 
+
 public class ThrowingStartup
 {
     public void Configure(IApplicationBuilder app)

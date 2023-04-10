@@ -30,6 +30,7 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 
+
 public class UnaryServerCallHandlerTests : LoggedTest
 {
     public UnaryServerCallHandlerTests(ITestOutputHelper output)

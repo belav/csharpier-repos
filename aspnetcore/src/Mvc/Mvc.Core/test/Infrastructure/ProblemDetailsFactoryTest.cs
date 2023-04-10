@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 public class ProblemDetailsFactoryTest
 {
     private readonly ProblemDetailsFactory Factory = GetProblemDetails();

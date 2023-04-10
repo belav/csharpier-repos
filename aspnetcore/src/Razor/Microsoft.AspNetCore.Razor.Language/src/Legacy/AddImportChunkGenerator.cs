@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class AddImportChunkGenerator : SpanChunkGenerator
 {
     public AddImportChunkGenerator(string usingContent, string parsedNamespace, bool isStatic)

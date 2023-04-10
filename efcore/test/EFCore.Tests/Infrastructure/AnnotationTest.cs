@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 public class AnnotationTest
 {
     [ConditionalFact]

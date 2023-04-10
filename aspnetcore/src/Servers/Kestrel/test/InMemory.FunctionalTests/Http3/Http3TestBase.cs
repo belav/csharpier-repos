@@ -36,6 +36,7 @@ using static Microsoft.AspNetCore.Server.Kestrel.Core.Tests.Http2TestBase;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
+
 public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable
 {
     protected static readonly int MaxRequestHeaderFieldSize = 16 * 1024;

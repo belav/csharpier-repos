@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class ExpressionPrinterTest
 {
     private readonly ExpressionPrinter _expressionPrinter = new();

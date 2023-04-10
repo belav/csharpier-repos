@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 public static class Helpers
 {
     public static string GetAddress(IHost server)

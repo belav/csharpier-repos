@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 internal static class ViewDataDictionaryFactory
 {
     public static Func<

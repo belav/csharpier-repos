@@ -10,6 +10,7 @@ using System.Text.Json;
 // ReSharper disable StaticMemberInGenericType
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : ValueConvertersEndToEndTestBase<TFixture>.ValueConvertersEndToEndFixtureBase,
         new()

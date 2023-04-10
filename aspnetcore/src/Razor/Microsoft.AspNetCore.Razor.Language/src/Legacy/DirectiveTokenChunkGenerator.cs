@@ -7,6 +7,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class DirectiveTokenChunkGenerator : SpanChunkGenerator
 {
     private static readonly Type Type = typeof(DirectiveTokenChunkGenerator);

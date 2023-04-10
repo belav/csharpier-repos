@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Responsible for validation of two factor identity cookie security stamp.
 /// </summary>

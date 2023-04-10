@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// A default implementation of <see cref="IActionResult"/>.
 /// </summary>

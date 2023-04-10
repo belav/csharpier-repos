@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class NorthwindQueryTaggingQueryInMemoryTest
     : NorthwindQueryTaggingQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
 {

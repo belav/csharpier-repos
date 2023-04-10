@@ -7,6 +7,7 @@ using System.Reflection.Emit;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 internal static class TypedClientBuilder<T>
 {
     private const string ClientModuleName = "Microsoft.AspNetCore.SignalR.TypedClientBuilder";

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     <para>
 ///         A command template to populate an <see cref="IRelationalCommand" /> or create a <see cref="DbCommand" />

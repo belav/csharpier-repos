@@ -5,6 +5,7 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
+
 internal sealed class CachedResponseBody
 {
     public CachedResponseBody(List<byte[]> segments, long length)

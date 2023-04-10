@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.ResponseCompression;
 
+
 /// <summary>
 /// This is a placeholder for the CompressionProviderCollection that allows creating the given type via
 /// an <see cref="IServiceProvider" />.

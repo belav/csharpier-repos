@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments;
 
+
 public class LiteralSegmentTests
 {
     [Fact]

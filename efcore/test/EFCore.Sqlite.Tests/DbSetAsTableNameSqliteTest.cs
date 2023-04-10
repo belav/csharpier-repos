@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class DbSetAsTableNameSqliteTest : DbSetAsTableNameTest
 {
     protected override string GetTableName<TEntity>(DbContext context) =>

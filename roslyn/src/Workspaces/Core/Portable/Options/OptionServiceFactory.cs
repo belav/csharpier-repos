@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Options;
 
+
 [ExportWorkspaceService(typeof(ILegacyWorkspaceOptionService)), Shared]
 internal sealed class LegacyWorkspaceOptionService : ILegacyWorkspaceOptionService
 {

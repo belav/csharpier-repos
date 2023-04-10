@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 public class OpaqueUpgradeTests
 {
     [ConditionalFact]

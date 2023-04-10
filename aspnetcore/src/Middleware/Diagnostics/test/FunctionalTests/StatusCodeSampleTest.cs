@@ -11,6 +11,7 @@ using System.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
+
 public class StatusCodeSampleTest : IClassFixture<TestFixture<StatusCodePagesSample.Startup>>
 {
     public StatusCodeSampleTest(TestFixture<StatusCodePagesSample.Startup> fixture)

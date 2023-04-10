@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class CannotConvertEnumToNullable
 {
     public enum DummyTypes : int

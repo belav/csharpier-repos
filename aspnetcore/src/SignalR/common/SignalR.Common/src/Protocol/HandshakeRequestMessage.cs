@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
+
 /// <summary>
 /// A handshake request message.
 /// </summary>

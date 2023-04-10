@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
+
 internal sealed class ManifestSinkDirectory : ManifestDirectory
 {
     private ManifestSinkDirectory()

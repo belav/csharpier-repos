@@ -9,6 +9,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 public class PerformanceTest
     : ServerTestBase<BlazorWasmTestAppFixture<Wasm.Performance.TestApp.Program>>
 {

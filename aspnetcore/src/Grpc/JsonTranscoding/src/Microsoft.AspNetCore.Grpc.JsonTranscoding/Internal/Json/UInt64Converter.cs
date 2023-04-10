@@ -8,6 +8,7 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
+
 internal sealed class UInt64Converter : SettingsConverterBase<ulong>
 {
     public UInt64Converter(JsonContext context)

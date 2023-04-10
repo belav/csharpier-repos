@@ -5,6 +5,7 @@ using System.Net.NetworkInformation;
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 /// <summary>
 ///     Converts a <see cref="PhysicalAddress" /> to and from a <see cref="byte" />.
 /// </summary>

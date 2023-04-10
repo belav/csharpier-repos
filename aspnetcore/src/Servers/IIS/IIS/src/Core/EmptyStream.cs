@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
+
 internal sealed class EmptyStream : ReadOnlyStream
 {
     private readonly IHttpBodyControlFeature _bodyControl;

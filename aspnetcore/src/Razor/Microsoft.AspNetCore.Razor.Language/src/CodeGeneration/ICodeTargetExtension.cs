@@ -3,4 +3,5 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 public interface ICodeTargetExtension { }

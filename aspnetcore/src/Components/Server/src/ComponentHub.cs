@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
+
 // Some notes about our expectations for error handling:
 //
 // In general, we need to prevent any client from interacting with a circuit that's in an unpredictable

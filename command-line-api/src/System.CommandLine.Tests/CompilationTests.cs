@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace System.CommandLine.Tests;
 
+
 public class CompilationTests
 {
     private readonly ITestOutputHelper _output;

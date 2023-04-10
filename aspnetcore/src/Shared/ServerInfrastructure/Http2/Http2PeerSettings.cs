@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+
 internal sealed class Http2PeerSettings
 {
     // Note these are protocol defaults, not Kestrel defaults.

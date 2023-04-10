@@ -10,6 +10,7 @@ using System.IO;
 
 namespace Ignitor;
 
+
 internal static class NodeSerializer
 {
     public static string Serialize(ElementHive hive)

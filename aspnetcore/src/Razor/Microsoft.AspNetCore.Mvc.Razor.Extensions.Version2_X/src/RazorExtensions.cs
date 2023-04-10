@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Razor;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
+
 public static class RazorExtensions
 {
     public static void Register(RazorProjectEngineBuilder builder)

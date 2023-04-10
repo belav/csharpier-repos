@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorPagesWebSite;
 
+
 public class CustomActionResult : IActionResult
 {
     public Task ExecuteResultAsync(ActionContext context)

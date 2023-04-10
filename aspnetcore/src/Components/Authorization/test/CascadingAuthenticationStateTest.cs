@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
+
 public class CascadingAuthenticationStateTest
 {
     [Fact]

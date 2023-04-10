@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class MaxExecutionPlanDepth : AutoMapperSpecBase
 {
     class Source

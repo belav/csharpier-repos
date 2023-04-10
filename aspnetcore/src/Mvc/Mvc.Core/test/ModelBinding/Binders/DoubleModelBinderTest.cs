@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+
 public class DoubleModelBinderTest : FloatingPointTypeModelBinderTest<double>
 {
     protected override double Twelve => 12.0;

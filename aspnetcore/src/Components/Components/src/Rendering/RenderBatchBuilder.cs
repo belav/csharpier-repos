@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
+
 /// <summary>
 /// Collects the data produced by the rendering system during the course
 /// of rendering a single batch. This tracks both the final output data

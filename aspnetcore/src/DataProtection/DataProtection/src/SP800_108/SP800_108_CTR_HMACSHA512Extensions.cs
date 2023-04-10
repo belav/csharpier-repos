@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Cryptography;
 
 namespace Microsoft.AspNetCore.DataProtection.SP800_108;
 
+
 internal static unsafe class SP800_108_CTR_HMACSHA512Extensions
 {
     public static void DeriveKeyWithContextHeader(

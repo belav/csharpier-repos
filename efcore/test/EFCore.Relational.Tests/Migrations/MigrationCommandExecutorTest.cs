@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 public class MigrationCommandExecutorTest
 {
     [ConditionalTheory]

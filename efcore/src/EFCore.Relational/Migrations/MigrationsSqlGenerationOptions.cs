@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     The options to use when generating SQL for migrations.
 /// </summary>

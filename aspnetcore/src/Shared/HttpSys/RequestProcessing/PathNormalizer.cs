@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
+
 internal static class PathNormalizer
 {
     private const byte ByteSlash = (byte)'/';

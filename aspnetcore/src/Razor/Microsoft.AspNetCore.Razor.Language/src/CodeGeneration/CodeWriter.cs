@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 public sealed class CodeWriter
 {
     private static readonly char[] NewLineCharacters = { '\r', '\n' };

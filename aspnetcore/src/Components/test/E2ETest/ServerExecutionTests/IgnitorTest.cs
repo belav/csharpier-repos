@@ -16,6 +16,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 // Base class for Ignitor-based tests.
 public abstract class IgnitorTest<TStartup>
     : IClassFixture<BasicTestAppServerSiteFixture<TStartup>>,

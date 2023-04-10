@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite.Admin;
 
+
 [Area("Admin")]
 [Route("[area]/Users")]
 public class UserManagementController : Controller

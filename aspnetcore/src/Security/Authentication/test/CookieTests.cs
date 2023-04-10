@@ -19,6 +19,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
+
 public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions>
 {
     private readonly TestClock _clock = new TestClock();

@@ -12,6 +12,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class SelectTagHelperTest
 {
     // Model (List<Model> or Model instance), container type (Model or NestModel), model accessor,

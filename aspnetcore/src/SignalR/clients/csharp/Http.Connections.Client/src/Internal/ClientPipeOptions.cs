@@ -5,6 +5,7 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
+
 internal static class ClientPipeOptions
 {
     public static PipeOptions DefaultOptions = new PipeOptions(

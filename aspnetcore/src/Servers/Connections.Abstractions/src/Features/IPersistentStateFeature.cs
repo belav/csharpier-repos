@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
+
 /// <summary>
 /// Provides access to a key/value collection that can be used to persist state between connections and requests.
 /// Whether a transport supports persisting state depends on the implementation. The transport must support

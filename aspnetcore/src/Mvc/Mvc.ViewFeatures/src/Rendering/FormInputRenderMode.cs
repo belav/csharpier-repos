@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
+
 /// <summary>
 /// Used for configuring how form inputs should be rendered with respect to
 /// the current locale.

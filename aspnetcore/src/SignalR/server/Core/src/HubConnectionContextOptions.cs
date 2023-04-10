@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Options used to configure <see cref="HubConnectionContext"/>.
 /// </summary>

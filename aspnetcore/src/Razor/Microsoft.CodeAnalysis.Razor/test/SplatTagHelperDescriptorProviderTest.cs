@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 public class SplatTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTestBase
 {
     [Fact]

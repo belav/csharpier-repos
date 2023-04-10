@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="AnnotationCodeGenerator" />

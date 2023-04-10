@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
+
 public class ConcurrencyDetectorDisabledCosmosTest
     : ConcurrencyDetectorDisabledTestBase<ConcurrencyDetectorDisabledCosmosTest.ConcurrencyDetectorCosmosFixture>
 {

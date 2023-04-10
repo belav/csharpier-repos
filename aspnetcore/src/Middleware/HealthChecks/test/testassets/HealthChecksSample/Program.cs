@@ -3,6 +3,7 @@
 
 namespace HealthChecksSample;
 
+
 public class Program
 {
     private static readonly Dictionary<string, Type> _scenarios;

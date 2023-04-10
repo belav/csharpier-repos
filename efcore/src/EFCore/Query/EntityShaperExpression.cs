@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         An expression that represents creation of an entity instance in <see cref="ShapedQueryExpression.ShaperExpression" />.

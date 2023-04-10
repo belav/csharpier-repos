@@ -3,6 +3,7 @@
 
 namespace SimpleWebSite.Controllers;
 
+
 public class HomeController
 {
     public IDictionary<string, string> Index()

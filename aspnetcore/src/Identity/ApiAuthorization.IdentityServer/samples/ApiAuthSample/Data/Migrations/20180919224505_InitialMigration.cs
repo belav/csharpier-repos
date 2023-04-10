@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ApiAuthSample.Data.Migrations;
 
+
 public partial class InitialMigration : Migration
 {
     protected override void Up(MigrationBuilder migrationBuilder)

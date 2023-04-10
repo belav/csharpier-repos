@@ -6,6 +6,7 @@ using System.IO;
 
 namespace Microsoft.Extensions.FileProviders;
 
+
 internal class TestFileInfo : IFileInfo
 {
     private readonly string _name;

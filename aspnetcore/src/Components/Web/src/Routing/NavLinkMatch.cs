@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 /// <summary>
 /// Modifies the URL matching behavior for a <see cref="NavLink"/>.
 /// </summary>

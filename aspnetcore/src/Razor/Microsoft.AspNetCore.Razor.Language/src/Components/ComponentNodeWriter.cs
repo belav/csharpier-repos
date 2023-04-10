@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 internal abstract class ComponentNodeWriter : IntermediateNodeWriter, ITemplateTargetExtension
 {
     protected abstract void BeginWriteAttribute(CodeRenderingContext context, string key);

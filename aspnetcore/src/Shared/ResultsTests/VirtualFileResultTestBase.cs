@@ -20,6 +20,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 public abstract class VirtualFileResultTestBase
 {
     protected abstract Task ExecuteAsync(

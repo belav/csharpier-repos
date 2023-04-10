@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     Allows SQLite specific configuration to be performed on <see cref="DbContextOptions" />.
 /// </summary>

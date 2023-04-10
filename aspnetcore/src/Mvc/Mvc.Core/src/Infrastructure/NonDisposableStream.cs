@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// Stream that delegates to an inner stream.
 /// This Stream is present so that the inner stream is not closed

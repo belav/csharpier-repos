@@ -20,6 +20,7 @@ using Grpc.Core;
 
 namespace InteropTestsClient;
 
+
 /// <summary>
 /// Extension methods that simplify work with gRPC streaming calls.
 /// </summary>

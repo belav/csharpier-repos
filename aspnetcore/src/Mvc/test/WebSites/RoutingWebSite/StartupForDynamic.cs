@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace RoutingWebSite;
 
+
 // For by tests for dynamic routing to pages/controllers
 public class StartupForDynamic
 {

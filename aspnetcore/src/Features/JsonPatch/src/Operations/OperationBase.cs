@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.JsonPatch.Operations;
 
+
 public class OperationBase
 {
     private string _op;

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite.Pages;
 
+
 [AsyncTestAuthorizationFilter]
 [SyncTestAuthorizationFilter]
 public class ShortCircuitAtAuthFilterPageModel : PageModel

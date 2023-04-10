@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor;
 
+
 internal static class BraceMatchingOptionsStorage
 {
     public static BraceMatchingOptions GetBraceMatchingOptions(

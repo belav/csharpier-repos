@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 /// <summary>
 /// Allows consumers to perform cleanup during a graceful shutdown.
 /// <para>

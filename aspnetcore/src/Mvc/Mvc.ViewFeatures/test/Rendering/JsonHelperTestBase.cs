@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
+
 public abstract class JsonHelperTestBase
 {
     protected abstract IJsonHelper GetJsonHelper();

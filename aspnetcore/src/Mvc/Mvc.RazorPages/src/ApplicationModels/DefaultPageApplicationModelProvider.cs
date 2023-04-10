@@ -13,6 +13,7 @@ using Resources = Microsoft.AspNetCore.Mvc.RazorPages.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 internal sealed class DefaultPageApplicationModelProvider : IPageApplicationModelProvider
 {
     private const string ModelPropertyName = "Model";

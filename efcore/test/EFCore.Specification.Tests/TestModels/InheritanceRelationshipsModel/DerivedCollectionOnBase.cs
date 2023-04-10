@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
+
 public class DerivedCollectionOnBase : BaseCollectionOnBase
 {
     public int DerivedProperty { get; set; }

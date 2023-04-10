@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 /// <summary>
 /// Allows providing or validating additional custom data for antiforgery tokens.
 /// For example, the developer could use this to supply a nonce when the token is

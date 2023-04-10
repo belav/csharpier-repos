@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class UrlResolutionTest
     : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>,
         IClassFixture<MvcEncodedTestFixture<RazorWebSite.Startup>>

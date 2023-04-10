@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Specification.Tests;
 
+
 /// <summary>
 /// Base test class for lifetime manager implementations that support server scale-out.
 /// </summary>

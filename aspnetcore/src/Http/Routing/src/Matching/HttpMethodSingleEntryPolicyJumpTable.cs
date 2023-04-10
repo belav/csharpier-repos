@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 internal sealed class HttpMethodSingleEntryPolicyJumpTable : PolicyJumpTable
 {
     private readonly int _exitDestination;

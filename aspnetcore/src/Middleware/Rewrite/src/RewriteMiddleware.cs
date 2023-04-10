@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 /// <summary>
 /// Represents a middleware that rewrites urls
 /// </summary>

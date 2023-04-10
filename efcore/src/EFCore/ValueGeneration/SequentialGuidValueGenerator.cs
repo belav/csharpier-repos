@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
+
 /// <summary>
 ///     Generates sequential <see cref="Guid" /> values optimized for use in Microsoft SQL server clustered
 ///     keys or indexes, yielding better performance than random values. This is the default generator for

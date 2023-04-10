@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 internal static class StartupFacts
 {
     public static bool IsStartupClass(StartupSymbols symbols, INamedTypeSymbol type)

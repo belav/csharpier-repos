@@ -7,6 +7,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Hosting.FunctionalTests;
 
+
 public class WebHostBuilderTests : LoggedTest
 {
     public WebHostBuilderTests(ITestOutputHelper output)

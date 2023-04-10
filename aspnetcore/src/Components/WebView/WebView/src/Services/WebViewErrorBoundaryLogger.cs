@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.WebView.Services;
 
+
 internal sealed class WebViewErrorBoundaryLogger : IErrorBoundaryLogger
 {
     private readonly ILogger<ErrorBoundary> _errorBoundaryLogger;

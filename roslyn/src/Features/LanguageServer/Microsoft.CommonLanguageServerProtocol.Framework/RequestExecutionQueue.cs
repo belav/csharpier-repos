@@ -11,6 +11,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
+
 /// <summary>
 /// Coordinates the exectution of LSP messages to ensure correct results are sent back.
 /// </summary>

@@ -23,6 +23,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
+
 public class HubProtocolVersionTestsCollection
     : ICollectionFixture<InProcessTestServer<VersionStartup>>
 {

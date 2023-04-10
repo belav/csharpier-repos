@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.Caching.SqlServer;
 
+
 internal static class Columns
 {
     public static class Names

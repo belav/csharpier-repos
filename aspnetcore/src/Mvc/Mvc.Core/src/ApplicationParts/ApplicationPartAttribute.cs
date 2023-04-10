@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
+
 /// <summary>
 /// Specifies an assembly to be added as an <see cref="ApplicationPart" />.
 /// <para>

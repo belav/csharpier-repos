@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 
+
 internal static class HttpContextDatabaseContextDetailsExtensions
 {
     public static async ValueTask<DatabaseContextDetails?> GetContextDetailsAsync(

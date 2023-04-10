@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
+
 /// <summary>
 ///     A simple model for a database foreign key constraint used when reverse engineering an existing database.
 /// </summary>

@@ -10,6 +10,7 @@ using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
+
 internal sealed class MvcAttributeRouteHandler : IRouter
 {
     private readonly IActionInvokerFactory _actionInvokerFactory;

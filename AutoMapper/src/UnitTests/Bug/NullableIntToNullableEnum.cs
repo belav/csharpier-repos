@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class NullableIntToNullableEnum : AutoMapperSpecBase
 {
     Destination _destination;

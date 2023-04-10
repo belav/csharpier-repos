@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 internal class Condition
 {
     public Condition(Pattern input, UrlMatch match)

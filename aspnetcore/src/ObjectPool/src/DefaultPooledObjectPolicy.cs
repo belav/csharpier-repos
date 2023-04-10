@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.ObjectPool;
 
+
 /// <summary>
 /// Default implementation for <see cref="PooledObjectPolicy{T}"/>.
 /// </summary>

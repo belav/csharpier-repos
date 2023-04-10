@@ -9,6 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Options;
 
+
 internal static class PublicOptionFactory
 {
 #if CODE_STYLE

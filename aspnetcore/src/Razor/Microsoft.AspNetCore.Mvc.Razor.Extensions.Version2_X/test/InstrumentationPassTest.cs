@@ -8,6 +8,7 @@ using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAs
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
+
 public class InstrumentationPassTest
 {
     [Fact]

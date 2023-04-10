@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal class TagHelperAttributeNode
 {
     public TagHelperAttributeNode(

@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.MappingInheritance;
 
+
 public class IncludeBaseShouldNotCreateMaps : AutoMapperSpecBase
 {
     public abstract class BaseBaseSource { }

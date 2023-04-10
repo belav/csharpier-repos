@@ -20,6 +20,7 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 public class WebHostBuilderTests
 {
     [Theory]

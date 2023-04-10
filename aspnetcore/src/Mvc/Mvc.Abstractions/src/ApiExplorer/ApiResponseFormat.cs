@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 /// <summary>
 /// Possible format for an <see cref="ApiResponseType"/>.
 /// </summary>

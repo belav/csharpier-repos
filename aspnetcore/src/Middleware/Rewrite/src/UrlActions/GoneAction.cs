@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Rewrite.UrlActions;
 
+
 internal sealed class GoneAction : UrlAction
 {
     public override void ApplyAction(

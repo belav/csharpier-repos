@@ -8,6 +8,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class HPackDecoderBenchmark
 {
     // Indexed Header Field Representation - Dynamic Table - Index 62 (first index in dynamic table)

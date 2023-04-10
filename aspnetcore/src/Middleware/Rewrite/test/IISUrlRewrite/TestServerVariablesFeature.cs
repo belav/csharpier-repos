@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.IISUrlRewrite;
 
+
 public class TestServerVariablesFeature : IServerVariablesFeature
 {
     private readonly Dictionary<string, string> _variables;

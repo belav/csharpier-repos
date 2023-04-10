@@ -9,6 +9,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// API conventions to be applied to an assembly containing MVC controllers or a single controller.
 /// <para>

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SocialWeather.Pipe;
 
+
 public class PipeWeatherStreamFormatter : IStreamFormatter<WeatherReport>
 {
     public async Task<WeatherReport> ReadAsync(Stream stream)

@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
 {
     private const string DatabaseName = "SqlServerEndToEndTest";

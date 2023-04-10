@@ -7,6 +7,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : QueryFilterFuncletizationFixtureBase, new()
 {

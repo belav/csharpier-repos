@@ -7,6 +7,7 @@ using Microsoft.Quic;
 
 namespace System.Net.Quic;
 
+
 /// <summary>
 /// Helper class to convert managed data into QUIC_BUFFER* consumable by MsQuic.
 /// It also allows reuse with repeated Reset/Initialize calls, e.g. new, Initialize, (use), Reset, Initialize, (use), Reset, Initialize, (use), Dispose.

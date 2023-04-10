@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents a property on an entity type that represents an
 ///     injected service from the <see cref="DbContext" />.

@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Simplification;
 
+
 internal interface ISimplification
 {
     SimplifierOptions DefaultOptions { get; }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Localization;
 
+
 /// <summary>
 /// Represents a provider for determining the culture information of an <see cref="HttpRequest"/>.
 /// </summary>

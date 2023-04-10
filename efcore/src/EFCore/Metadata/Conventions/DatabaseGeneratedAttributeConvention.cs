@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that configures a property as <see cref="ValueGenerated.OnAdd" /> if
 ///     <see cref="DatabaseGeneratedOption.Identity" /> is specified, <see cref="ValueGenerated.OnAddOrUpdate" /> if

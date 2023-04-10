@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 internal sealed class UrlDecoder
 {
     /// <summary>

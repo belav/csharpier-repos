@@ -2,6 +2,7 @@
 using System.Globalization;
 
 namespace AutoMapper.UnitTests.Mappers;
+
 using static TypeDescriptor;
 
 public class When_specifying_mapping_with_the_BCL_type_converter_class : NonValidatingSpecBase

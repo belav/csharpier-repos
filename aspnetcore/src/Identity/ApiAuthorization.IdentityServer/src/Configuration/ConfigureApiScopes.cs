@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
+
 internal sealed class ConfigureApiScopes : IPostConfigureOptions<ApiAuthorizationOptions>
 {
     public void PostConfigure(string name, ApiAuthorizationOptions options)

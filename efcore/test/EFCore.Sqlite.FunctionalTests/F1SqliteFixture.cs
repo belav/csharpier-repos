@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class F1ULongSqliteFixture : F1SqliteFixtureBase<ulong?>
 {
     protected override string StoreName => "F1ULongTest";

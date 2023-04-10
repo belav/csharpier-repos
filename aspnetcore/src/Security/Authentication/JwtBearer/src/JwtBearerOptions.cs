@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
+
 /// <summary>
 /// Options class provides information needed to control Bearer Authentication handler behavior
 /// </summary>

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
+
 internal sealed partial class HttpConnectionDispatcher
 {
     internal static partial class Log

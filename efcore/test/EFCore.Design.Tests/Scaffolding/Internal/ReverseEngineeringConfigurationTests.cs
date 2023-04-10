@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
+
 public class ReverseEngineeringConfigurationTests
 {
     [ConditionalFact]

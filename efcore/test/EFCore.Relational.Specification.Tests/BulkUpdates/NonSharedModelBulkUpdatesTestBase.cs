@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
+
 public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
 {
     protected override string StoreName => "NonSharedModelBulkUpdatesTests";

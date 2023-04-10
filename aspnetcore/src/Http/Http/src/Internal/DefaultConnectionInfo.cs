@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 internal sealed class DefaultConnectionInfo : ConnectionInfo
 {
     // Lambdas hoisted to static readonly fields to improve inlining https://github.com/dotnet/roslyn/issues/13624

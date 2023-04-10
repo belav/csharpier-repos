@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth;
 
+
 /// <summary>
 /// Response from an provider for an OAuth token request.
 /// </summary>

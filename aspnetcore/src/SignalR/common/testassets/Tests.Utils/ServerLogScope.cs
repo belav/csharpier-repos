@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class ServerLogScope : IDisposable
 {
     private readonly InProcessTestServer _serverFixture;

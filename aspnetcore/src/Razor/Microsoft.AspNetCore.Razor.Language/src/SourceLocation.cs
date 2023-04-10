@@ -7,6 +7,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// A location in a Razor file.
 /// </summary>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
+
 /// <summary>
 /// Generates and validates antiforgery tokens.
 /// </summary>

@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 public class CSharpTokenizerTest : CSharpTokenizerTestBase
 {
     private new SyntaxToken IgnoreRemaining => (SyntaxToken)base.IgnoreRemaining;

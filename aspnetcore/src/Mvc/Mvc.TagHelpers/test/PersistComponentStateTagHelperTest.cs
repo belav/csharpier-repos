@@ -18,6 +18,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class PersistComponentStateTagHelperTest
 {
     private static readonly IDataProtectionProvider _ephemeralProvider =

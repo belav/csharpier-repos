@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
+
 /// <inheritdoc />
 internal sealed class BlobAppendReferenceWrapper : ICloudAppendBlob
 {

@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics;
 
+
 internal abstract class AbstractDocumentDiagnosticSource<TDocument> : IDiagnosticSource
     where TDocument : TextDocument
 {

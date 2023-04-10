@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
+
 internal sealed class CorsApplicationModelProvider : IApplicationModelProvider
 {
     private readonly MvcOptions _mvcOptions;

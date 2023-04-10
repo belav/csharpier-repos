@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration;
 
+
 internal static class CSharpCodeGenerationOptionsStorage
 {
     [ExportLanguageService(typeof(ICodeGenerationOptionsStorage), LanguageNames.CSharp), Shared]

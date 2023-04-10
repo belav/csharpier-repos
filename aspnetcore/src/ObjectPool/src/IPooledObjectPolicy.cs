@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.ObjectPool;
 
+
 /// <summary>
 /// Represents a policy for managing pooled objects.
 /// </summary>

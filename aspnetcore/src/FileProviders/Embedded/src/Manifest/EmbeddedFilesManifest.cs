@@ -9,6 +9,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
+
 internal sealed class EmbeddedFilesManifest
 {
     private static readonly char[] _invalidFileNameChars = Path.GetInvalidFileNameChars()

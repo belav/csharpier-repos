@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.Classification;
 
+
 [DataContract]
 internal readonly record struct ClassificationOptions
 {

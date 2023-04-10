@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
+
 internal static class AttributeAuthorizeDataCache
 {
     private static readonly ConcurrentDictionary<Type, IAuthorizeData[]?> _cache = new();

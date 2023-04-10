@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
+
 internal abstract class ReadOnlyStream : Stream
 {
     public override bool CanRead => true;

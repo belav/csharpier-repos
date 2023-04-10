@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite;
 
+
 // TODO add more of these
 public class UrlRewriteApplicationTests
 {

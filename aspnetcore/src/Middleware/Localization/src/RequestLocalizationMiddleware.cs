@@ -11,6 +11,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Localization;
 
+
 /// <summary>
 /// Enables automatic setting of the culture for <see cref="HttpRequest"/>s based on information
 /// sent by the client in headers and logic provided by the application.

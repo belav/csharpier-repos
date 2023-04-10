@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
+
 /// <summary>
 /// A metadata object containing the checksum of a source file that contributed to a compiled item.
 /// </summary>

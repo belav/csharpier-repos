@@ -6,6 +6,7 @@ using System.Net;
 
 namespace Microsoft.AspNetCore.Connections;
 
+
 /// <summary>
 /// Represents a Named Pipe endpoint.
 /// </summary>

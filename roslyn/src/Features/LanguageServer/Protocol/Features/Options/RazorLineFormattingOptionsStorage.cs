@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
+
 /// <summary>
 /// Formatting options for Razor design-time documents.
 /// </summary>

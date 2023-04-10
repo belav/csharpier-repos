@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 // ReSharper disable ConvertToAutoProperty
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 public class EntityMaterializerSourceTest
 {
     private readonly DbContext _fakeContext = new(new DbContextOptions<DbContext>());

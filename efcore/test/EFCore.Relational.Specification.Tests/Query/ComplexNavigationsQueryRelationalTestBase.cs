@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class ComplexNavigationsQueryRelationalTestBase<TFixture>
     : ComplexNavigationsQueryTestBase<TFixture>
     where TFixture : ComplexNavigationsQueryFixtureBase, new()

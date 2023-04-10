@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
+
 internal sealed class ByteArrayJsonConverter : JsonConverter<byte[]>
 {
     // Unique identifier for serializing byte arrays.

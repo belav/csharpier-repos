@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
+
 /// <summary>
 /// An implementation of this interface can update how the current request is cached.
 /// </summary>

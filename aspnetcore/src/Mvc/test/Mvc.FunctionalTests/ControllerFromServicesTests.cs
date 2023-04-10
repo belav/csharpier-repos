@@ -6,6 +6,7 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class ControllerFromServicesTest
     : IClassFixture<MvcTestFixture<ControllersFromServicesWebSite.Startup>>
 {

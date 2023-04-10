@@ -3,6 +3,7 @@
 
 namespace Microsoft.JSInterop;
 
+
 /// <summary>
 /// Identifies a .NET method as allowing invocation from JavaScript code.
 /// Any method marked with this attribute may receive arbitrary parameter values

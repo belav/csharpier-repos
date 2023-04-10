@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
+
 public class InputTextTest
 {
     [Fact]

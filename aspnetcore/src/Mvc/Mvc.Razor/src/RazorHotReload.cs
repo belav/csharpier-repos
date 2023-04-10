@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 internal sealed class RazorHotReload
 {
     private readonly RazorCompiledItemFeatureProvider? _razorCompiledItemFeatureProvider;

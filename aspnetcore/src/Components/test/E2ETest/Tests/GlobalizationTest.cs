@@ -12,6 +12,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.Tests;
 
+
 public abstract class GlobalizationTest<TServerFixture> : ServerTestBase<TServerFixture>
     where TServerFixture : ServerFixture
 {

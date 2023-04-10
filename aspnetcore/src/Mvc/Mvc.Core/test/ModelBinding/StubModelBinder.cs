@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 public class StubModelBinder : IModelBinder
 {
     private readonly Func<ModelBindingContext, Task> _callback;

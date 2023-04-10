@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents a stored procedure in a model in
 ///     the form that can be mutated while the model is being built.

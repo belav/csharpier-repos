@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 internal enum RedirectType
 {
     Permanent = StatusCodes.Status301MovedPermanently,

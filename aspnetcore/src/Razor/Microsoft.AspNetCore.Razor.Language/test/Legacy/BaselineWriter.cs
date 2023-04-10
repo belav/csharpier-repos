@@ -6,6 +6,7 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 public static class BaselineWriter
 {
     private static readonly object baselineLock = new object();

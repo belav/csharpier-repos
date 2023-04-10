@@ -19,6 +19,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
+
 public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
 {
     public static TheoryData<RequestDelegate> EchoAppRequestDelegates =>

@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities;
 
+
 public static class EncodingTestHelpers
 {
     public static IEnumerable<Encoding?> GetEncodings()

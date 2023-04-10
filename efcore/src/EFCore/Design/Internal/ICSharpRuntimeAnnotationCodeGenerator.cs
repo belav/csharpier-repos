@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Design.Internal;
 
+
 /// <summary>
 ///     Implemented by database providers to generate the code for annotations.
 /// </summary>

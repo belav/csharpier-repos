@@ -2,6 +2,7 @@ using AutoMapper;
 
 namespace Benchmark.Flattening;
 
+
 static class Config
 {
     public static readonly IMapper Mapper = CreateMapper();

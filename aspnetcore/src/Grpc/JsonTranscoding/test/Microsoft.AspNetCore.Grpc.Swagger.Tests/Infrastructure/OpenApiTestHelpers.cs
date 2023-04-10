@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.Infrastructure;
 
+
 internal static class OpenApiTestHelpers
 {
     public static OpenApiDocument GetOpenApiDocument<TService>(ITestOutputHelper testOutputHelper)

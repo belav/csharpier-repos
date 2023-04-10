@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Extensions.Localization;
 
+
 /// <summary>
 /// A locale specific string.
 /// </summary>

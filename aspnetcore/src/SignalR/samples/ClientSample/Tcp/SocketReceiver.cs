@@ -9,6 +9,7 @@ using System.Text;
 
 namespace ClientSample;
 
+
 public class SocketReceiver
 {
     private readonly Socket _socket;

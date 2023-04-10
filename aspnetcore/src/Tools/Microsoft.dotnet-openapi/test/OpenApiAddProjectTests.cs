@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.OpenApi.Add.Tests;
 
+
 public class OpenApiAddProjectTests : OpenApiTestBase
 {
     public OpenApiAddProjectTests(ITestOutputHelper output)

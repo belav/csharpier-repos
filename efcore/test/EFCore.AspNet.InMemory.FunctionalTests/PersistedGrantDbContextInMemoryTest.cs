@@ -5,6 +5,7 @@ using IdentityServer4.EntityFramework.DbContexts;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class PersistedGrantDbContextInMemoryTest
     : PersistedGrantDbContextTestBase<PersistedGrantDbContextInMemoryTest.PersistedGrantDbContextInMemoryFixture>
 {

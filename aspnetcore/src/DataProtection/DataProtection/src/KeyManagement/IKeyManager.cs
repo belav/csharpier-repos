@@ -8,6 +8,7 @@ using System.Threading;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
+
 /// <summary>
 /// The basic interface for performing key management operations.
 /// </summary>

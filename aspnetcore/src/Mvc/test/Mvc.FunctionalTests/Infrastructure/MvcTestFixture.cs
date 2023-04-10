@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class MvcTestFixture<TStartup> : WebApplicationFactory<TStartup>
     where TStartup : class
 {

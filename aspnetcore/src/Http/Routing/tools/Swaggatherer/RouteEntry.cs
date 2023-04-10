@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing.Template;
 
 namespace Swaggatherer;
 
+
 internal sealed class RouteEntry
 {
     public RouteTemplate Template { get; set; }

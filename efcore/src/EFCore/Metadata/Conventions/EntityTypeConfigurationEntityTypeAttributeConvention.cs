@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that applies the entity type configuration specified in <see cref="EntityTypeConfigurationAttribute" />.
 /// </summary>

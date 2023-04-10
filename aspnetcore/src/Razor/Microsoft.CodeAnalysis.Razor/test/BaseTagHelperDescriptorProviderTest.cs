@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 public abstract class TagHelperDescriptorProviderTestBase
 {
     static TagHelperDescriptorProviderTestBase()

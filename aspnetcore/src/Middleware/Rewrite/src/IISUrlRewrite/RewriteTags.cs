@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 internal static class RewriteTags
 {
     public const string Action = "action";

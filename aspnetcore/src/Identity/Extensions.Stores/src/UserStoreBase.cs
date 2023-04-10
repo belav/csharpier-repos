@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Represents a new instance of a persistence store for the specified user type.
 /// </summary>

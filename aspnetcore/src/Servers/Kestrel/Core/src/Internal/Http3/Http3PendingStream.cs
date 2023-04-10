@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
+
 internal sealed class Http3PendingStream
 {
     private ConnectionAbortedException? _abortedException;

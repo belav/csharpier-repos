@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.HostFiltering;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Extension methods for the HostFiltering middleware.
 /// </summary>

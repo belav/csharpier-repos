@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.CodeStyle;
 
+
 internal interface ICodeStyleService : ILanguageService
 {
     IdeCodeStyleOptions DefaultOptions { get; }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
+
 public class HeaderUtilitiesBenchmark
 {
     [Benchmark]

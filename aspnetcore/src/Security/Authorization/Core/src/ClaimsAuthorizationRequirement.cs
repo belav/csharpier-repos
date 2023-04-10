@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 
+
 /// <summary>
 /// Implements an <see cref="IAuthorizationHandler"/> and <see cref="IAuthorizationRequirement"/>
 /// which requires at least one instance of the specified claim type, and, if allowed values are specified,

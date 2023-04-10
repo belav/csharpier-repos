@@ -5,6 +5,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 /// <summary>
 /// The basic interface for decrypting an XML element.
 /// </summary>

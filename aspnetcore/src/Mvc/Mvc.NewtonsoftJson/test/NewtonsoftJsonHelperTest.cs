@@ -10,6 +10,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
+
 public class NewtonsoftJsonHelperTest : JsonHelperTestBase
 {
     [Fact]

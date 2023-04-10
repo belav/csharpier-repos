@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeWrite
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
+
 #pragma warning disable CA1852 // Seal internal types
 internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
 #pragma warning restore CA1852 // Seal internal types

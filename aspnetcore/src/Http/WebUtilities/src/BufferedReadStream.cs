@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
+
 /// <summary>
 /// A Stream that wraps another stream and allows reading lines.
 /// The data is buffered in memory.

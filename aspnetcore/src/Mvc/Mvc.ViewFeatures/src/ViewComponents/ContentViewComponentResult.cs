@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
+
 /// <summary>
 /// An <see cref="IViewComponentResult"/> which writes text when executed.
 /// </summary>

@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.BuiltInTypes;
 
+
 public class ByteArrayColumns : IntegrationTest<ByteArrayColumns.DatabaseInitializer>
 {
     public class Customer

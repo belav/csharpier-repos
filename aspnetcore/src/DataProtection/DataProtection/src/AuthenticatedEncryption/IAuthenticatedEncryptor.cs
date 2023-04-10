@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
+
 /// <summary>
 /// The basic interface for providing an authenticated encryption and decryption routine.
 /// </summary>

@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
+
 [DebuggerStepThrough]
 internal static class Check
 {

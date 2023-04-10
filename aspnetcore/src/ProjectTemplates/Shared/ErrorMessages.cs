@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Templates.Test.Helpers;
 
+
 internal static class ErrorMessages
 {
     public static string GetFailedProcessMessage(

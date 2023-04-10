@@ -6,6 +6,7 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.Core.Rendering;
 
+
 public class TagBuilderTest
 {
     public static TheoryData<TagRenderMode, string> RenderingTestingData

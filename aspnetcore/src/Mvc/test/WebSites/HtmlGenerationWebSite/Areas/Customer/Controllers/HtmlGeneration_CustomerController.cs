@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HtmlGenerationWebSite.Areas.Customer.Controllers;
 
+
 [Area("Customer")]
 public class HtmlGeneration_CustomerController : Controller
 {

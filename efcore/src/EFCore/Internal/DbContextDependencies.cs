@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Internal;
 
+
 /// <summary>
 ///     Service dependencies parameter class for <see cref="DbContext" />
 /// </summary>

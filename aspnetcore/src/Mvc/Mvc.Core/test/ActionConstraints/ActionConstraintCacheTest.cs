@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ActionConstraints;
 
+
 public class ActionConstraintCacheTest
 {
     [Fact]

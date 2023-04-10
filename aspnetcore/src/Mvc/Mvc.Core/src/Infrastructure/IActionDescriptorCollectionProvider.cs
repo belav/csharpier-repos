@@ -7,6 +7,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// Provides the currently cached collection of <see cref="Abstractions.ActionDescriptor"/>.
 /// </summary>

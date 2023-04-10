@@ -10,6 +10,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 // See the native HTTP_SERVER_AUTHENTICATION_INFO structure documentation for additional information.
 // http://msdn.microsoft.com/en-us/library/windows/desktop/aa364638(v=vs.85).aspx
 

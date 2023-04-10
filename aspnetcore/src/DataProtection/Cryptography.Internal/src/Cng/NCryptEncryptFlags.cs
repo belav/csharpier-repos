@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
+
 [Flags]
 internal enum NCryptEncryptFlags
 {

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 public class AggregatesTest
 {
     [ConditionalFact]

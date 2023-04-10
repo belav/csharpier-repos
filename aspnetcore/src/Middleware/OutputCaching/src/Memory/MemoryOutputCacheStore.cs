@@ -6,6 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Microsoft.AspNetCore.OutputCaching.Memory;
 
+
 internal sealed class MemoryOutputCacheStore : IOutputCacheStore
 {
     private readonly MemoryCache _cache;

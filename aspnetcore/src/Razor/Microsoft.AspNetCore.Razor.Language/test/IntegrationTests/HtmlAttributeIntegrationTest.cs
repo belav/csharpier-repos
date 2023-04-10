@@ -5,6 +5,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public class HtmlAttributeIntegrationTest : IntegrationTestBase
 {
     [Fact]

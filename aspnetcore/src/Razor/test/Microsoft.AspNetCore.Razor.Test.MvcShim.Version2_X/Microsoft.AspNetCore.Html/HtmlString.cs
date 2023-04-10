@@ -7,6 +7,7 @@ using System.Text.Encodings.Web;
 
 namespace Microsoft.AspNetCore.Html;
 
+
 /// <summary>
 /// An <see cref="IHtmlContent"/> implementation that wraps an HTML encoded <see cref="string"/>.
 /// </summary>

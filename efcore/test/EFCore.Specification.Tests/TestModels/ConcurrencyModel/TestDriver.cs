@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public class TestDriver : Driver
 {
     public class TestDriverProxy : TestDriver, IF1Proxy

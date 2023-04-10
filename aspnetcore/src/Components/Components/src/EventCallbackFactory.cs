@@ -5,6 +5,7 @@ using System.ComponentModel;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// A factory for creating <see cref="EventCallback"/> and <see cref="EventCallback{T}"/>
 /// instances.

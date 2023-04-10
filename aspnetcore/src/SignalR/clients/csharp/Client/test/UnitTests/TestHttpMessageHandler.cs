@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
+
 delegate Task<HttpResponseMessage> RequestDelegate(
     HttpRequestMessage requestMessage,
     CancellationToken cancellationToken

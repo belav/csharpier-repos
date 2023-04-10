@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 internal static class ProblemDetailsDefaults
 {
     public static readonly Dictionary<int, (string Type, string Title)> Defaults =

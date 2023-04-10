@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 public class ModelExplorerExtensionsTest
 {
     public static TheoryData<object, Type, string> SimpleDisplayTextData

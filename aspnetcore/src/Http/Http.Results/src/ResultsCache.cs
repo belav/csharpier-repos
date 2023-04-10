@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 internal static partial class ResultsCache
 {
     public static NotFound NotFound { get; } = new();

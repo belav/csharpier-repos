@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     Convention that converts accesses of <see cref="DbSet{TEntity}" /> inside query filters and defining queries into
 ///     <see cref="EntityQueryRootExpression" />.

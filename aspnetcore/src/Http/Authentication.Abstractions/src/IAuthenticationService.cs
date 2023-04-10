@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Used to provide authentication.
 /// </summary>

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
+
 internal abstract class MessageBody
 {
     private static readonly MessageBody _zeroContentLengthClose = new ZeroContentLengthMessageBody(

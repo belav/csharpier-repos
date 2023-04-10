@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 /// <summary>
 /// Extension method to add Azure AppServices integration to the app.
 /// </summary>

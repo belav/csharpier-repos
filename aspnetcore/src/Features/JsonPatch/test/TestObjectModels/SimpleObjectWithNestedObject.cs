@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
+
 public class SimpleObjectWithNestedObject
 {
     public int IntegerValue { get; set; }

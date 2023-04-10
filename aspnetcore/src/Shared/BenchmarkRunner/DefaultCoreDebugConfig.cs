@@ -9,6 +9,7 @@ using BenchmarkDotNet.Validators;
 
 namespace BenchmarkDotNet.Attributes;
 
+
 internal sealed class DefaultCoreDebugConfig : ManualConfig
 {
     public DefaultCoreDebugConfig()

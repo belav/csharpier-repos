@@ -8,6 +8,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
+
 public class UrlHelperTest : UrlHelperTestBase
 {
     protected override IServiceProvider CreateServices()

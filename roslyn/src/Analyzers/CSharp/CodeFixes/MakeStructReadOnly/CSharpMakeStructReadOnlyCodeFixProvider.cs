@@ -17,6 +17,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeStructReadOnly;
 
+
 [
     ExportCodeFixProvider(
         LanguageNames.CSharp,

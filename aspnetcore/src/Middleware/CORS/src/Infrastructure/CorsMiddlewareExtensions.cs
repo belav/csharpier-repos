@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// The <see cref="IApplicationBuilder"/> extensions for adding CORS middleware support.
 /// </summary>

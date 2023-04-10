@@ -5,6 +5,7 @@ using Microsoft.Extensions.CommandLineUtils;
 
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
+
 internal sealed class ClearCommand : ICommand
 {
     public static void Configure(CommandLineApplication command, CommandLineOptions options)

@@ -7,4 +7,5 @@ using System;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 public record RunLoopExitState(RunLoopStopReason reason, Exception? exception) { }

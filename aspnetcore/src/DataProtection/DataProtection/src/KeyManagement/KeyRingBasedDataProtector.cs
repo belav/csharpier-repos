@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
+
 internal sealed unsafe class KeyRingBasedDataProtector : IDataProtector, IPersistedDataProtector
 {
     // This magic header identifies a v0 protected data blob. It's the high 28 bits of the SHA1 hash of

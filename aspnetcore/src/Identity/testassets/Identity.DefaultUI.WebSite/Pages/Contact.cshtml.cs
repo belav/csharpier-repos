@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Identity.DefaultUI.WebSite.Pages;
 
+
 public class ContactModel : PageModel
 {
     public string Message { get; set; }

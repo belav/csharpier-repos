@@ -8,6 +8,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 // Each of these tests makes two requests, because we want each test to verify that the data is
 // PER-REQUEST and does not linger around to impact the next request.
 public abstract class RequestServicesTestBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>>

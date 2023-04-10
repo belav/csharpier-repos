@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     A <see cref="DiagnosticSource" /> event payload class for events that have
 ///     a property that has been uniquified.

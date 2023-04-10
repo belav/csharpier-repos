@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A builder for building conventions for SQL Server.
 /// </summary>

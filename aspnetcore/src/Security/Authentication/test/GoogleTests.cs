@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Authentication.Google;
 
+
 public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
 {
     protected override string DefaultScheme => GoogleDefaults.AuthenticationScheme;

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// An <see cref="ObjectResult"/> that when executed will produce a Unauthorized (401) response.
 /// </summary>

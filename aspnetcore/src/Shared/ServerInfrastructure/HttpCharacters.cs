@@ -5,6 +5,7 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 internal static class HttpCharacters
 {
     // ALPHA and DIGIT https://tools.ietf.org/html/rfc5234#appendix-B.1

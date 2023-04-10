@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     Generates the SQL in <see cref="MigrationCommand" /> objects that can
 ///     then be executed or scripted from a list of <see cref="MigrationOperation" />s.

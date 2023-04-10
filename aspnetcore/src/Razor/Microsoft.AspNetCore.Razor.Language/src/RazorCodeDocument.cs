@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class RazorCodeDocument
 {
     public static RazorCodeDocument Create(RazorSourceDocument source)

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 internal sealed class GroupManager<THub> : IGroupManager
     where THub : Hub
 {

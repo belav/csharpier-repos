@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
+
 public class InjectTargetExtension : IInjectTargetExtension
 {
     private const string RazorInjectAttribute =

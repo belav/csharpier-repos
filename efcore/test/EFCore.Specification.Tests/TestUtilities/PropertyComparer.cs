@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class PropertyComparer : IEqualityComparer<IReadOnlyProperty>, IComparer<IReadOnlyProperty>
 {
     private readonly bool _compareAnnotations;

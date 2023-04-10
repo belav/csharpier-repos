@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 /// <summary>
 /// test logger.
 /// </summary>

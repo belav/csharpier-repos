@@ -21,6 +21,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Identity.ExternalClaims;
 
+
 public class Startup
 {
     public Startup(IConfiguration configuration)

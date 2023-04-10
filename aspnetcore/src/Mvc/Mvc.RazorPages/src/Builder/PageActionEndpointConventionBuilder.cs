@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Builds conventions that will be used for customization of <see cref="EndpointBuilder"/> instances.
 /// </summary>

@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
+
 public class UserStoreTest
     : IdentitySpecificationTestBase<IdentityUser, IdentityRole>,
         IClassFixture<ScratchDatabaseFixture>

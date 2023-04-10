@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 /// <summary>
 /// Inserts the <see cref="CultureReplacerMiddleware"/> at the beginning of the pipeline.
 /// </summary>

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 #nullable enable
 
 public abstract class StoreGeneratedTestBase<TFixture> : IClassFixture<TFixture>

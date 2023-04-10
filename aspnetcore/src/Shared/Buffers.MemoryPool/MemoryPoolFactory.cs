@@ -3,6 +3,7 @@
 
 namespace System.Buffers;
 
+
 internal static class PinnedBlockMemoryPoolFactory
 {
     public static MemoryPool<byte> Create()

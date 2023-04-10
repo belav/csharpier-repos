@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
+
 internal static class RouteStringSyntaxDetector
 {
     private static readonly EmbeddedLanguageCommentDetector _commentDetector =

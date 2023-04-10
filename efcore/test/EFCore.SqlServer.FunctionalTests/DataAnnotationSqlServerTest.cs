@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Diagnostics.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class DataAnnotationSqlServerTest
     : DataAnnotationRelationalTestBase<DataAnnotationSqlServerTest.DataAnnotationSqlServerFixture>
 {

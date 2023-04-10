@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
+
 public class UnidirectionalJoinOneToBranch
 {
     public virtual int UnidirectionalEntityOneId { get; set; }

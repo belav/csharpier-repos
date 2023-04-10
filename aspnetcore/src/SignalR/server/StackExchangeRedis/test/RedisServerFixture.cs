@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
+
 public class RedisServerFixture<TStartup> : IAsyncLifetime
     where TStartup : class
 {

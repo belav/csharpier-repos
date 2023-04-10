@@ -16,6 +16,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 public class RemoteAuthenticatorCoreTests
 {
     private const string _action = nameof(

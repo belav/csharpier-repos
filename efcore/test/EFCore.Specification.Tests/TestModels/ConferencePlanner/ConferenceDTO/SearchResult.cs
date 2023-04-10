@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner.ConferenceDTO;
 
+
 public class SearchResult
 {
     public SearchResultType Type { get; set; }

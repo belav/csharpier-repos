@@ -18,6 +18,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.ResponseCompression.Tests;
 
+
 public class ResponseCompressionMiddlewareTest
 {
     private const string TextPlain = "text/plain";

@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 public class SqlServerBuilderExtensionsTest
 {
     [ConditionalFact]

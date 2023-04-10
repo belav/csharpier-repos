@@ -1,5 +1,6 @@
 ﻿namespace OmmitedDTOModel3WithCollections;
 
+
 public class EntityDTO19 : BaseEntity
 {
     public Guid Entity25Id { get; set; }

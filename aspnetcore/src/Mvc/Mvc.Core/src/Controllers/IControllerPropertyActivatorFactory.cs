@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
+
 internal interface IControllerPropertyActivator
 {
     void Activate(ControllerContext context, object controller);

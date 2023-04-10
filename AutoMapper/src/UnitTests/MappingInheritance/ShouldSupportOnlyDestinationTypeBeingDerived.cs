@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.MappingInheritance;
 
+
 public class AsWithMissingMap : NonValidatingSpecBase
 {
     interface TInterface

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 public class SqlServerDesignTimeProviderServicesTest : DesignTimeProviderServicesTest
 {
     protected override Assembly GetRuntimeAssembly() => typeof(SqlServerConnection).Assembly;

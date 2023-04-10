@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
+
 /// <summary>
 /// Options for Azure diagnostics blob logging.
 /// </summary>

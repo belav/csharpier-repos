@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 /// <summary>
 /// Provides services for locating <see cref="X509Certificate2"/> instances.
 /// </summary>

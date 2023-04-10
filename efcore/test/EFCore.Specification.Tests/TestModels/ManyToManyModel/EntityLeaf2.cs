@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
+
 public class EntityLeaf2 : EntityBranch2
 {
     public virtual bool? IsBrown { get; set; }

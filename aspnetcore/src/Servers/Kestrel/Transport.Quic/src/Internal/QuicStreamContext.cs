@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 
+
 internal partial class QuicStreamContext : TransportConnection, IPooledStream, IDisposable
 {
     private static readonly ConnectionAbortedException SendGracefullyCompletedException =

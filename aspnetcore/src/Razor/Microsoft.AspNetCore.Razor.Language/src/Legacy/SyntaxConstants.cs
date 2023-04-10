@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal static class SyntaxConstants
 {
     public const string TextTagName = "text";

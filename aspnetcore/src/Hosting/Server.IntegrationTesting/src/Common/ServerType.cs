@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
+
 public enum ServerType
 {
     None,

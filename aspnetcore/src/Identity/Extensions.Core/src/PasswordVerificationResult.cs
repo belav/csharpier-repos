@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Specifies the results for password verification.
 /// </summary>

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
+
 public class AddWebSocketsTests
 {
     [Fact]

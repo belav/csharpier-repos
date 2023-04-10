@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
+
 [Area("Travel")]
 [Route("ContosoCorp/Trains")]
 public class RailController

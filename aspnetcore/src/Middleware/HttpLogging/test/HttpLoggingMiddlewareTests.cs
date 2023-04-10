@@ -12,6 +12,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 public class HttpLoggingMiddlewareTests : LoggedTest
 {
     public static TheoryData BodyData

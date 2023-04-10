@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
+
 public static class FunctionalTestsServiceCollectionExtensions
 {
     public static IServiceCollection SetupTestDatabase<TContext>(

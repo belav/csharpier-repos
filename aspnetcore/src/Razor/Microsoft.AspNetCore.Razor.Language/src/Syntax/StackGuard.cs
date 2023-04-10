@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 internal static class StackGuard
 {
     public const int MaxUncheckedRecursionDepth = 20;

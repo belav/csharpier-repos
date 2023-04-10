@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public abstract class TestLoggerBase
 {
     public LogLevel EnabledFor { get; set; }

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Allows interception of the <see cref="O:DbContext.SaveChanges" /> and <see cref="O:DbContext.SaveChangesAync" /> methods.
 /// </summary>

@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Used to protect/unprotect lookups with a specific key.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Abstract base class for <see cref="IDbTransactionInterceptor" /> for use when implementing a subset
 ///     of the interface methods.

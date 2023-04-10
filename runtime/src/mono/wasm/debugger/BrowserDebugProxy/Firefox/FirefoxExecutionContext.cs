@@ -7,6 +7,7 @@ using System.Threading;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 internal sealed class FirefoxExecutionContext : ExecutionContext
 {
     public string? ActorName { get; set; }

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         Implemented by database providers to generate the query string for <see cref="EntityFrameworkQueryableExtensions.ToQueryString" />.

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RoutingWebSite.Pages;
 
+
 public class LGAnotherPageModel : PageModel
 {
     private readonly LinkGenerator _linkGenerator;

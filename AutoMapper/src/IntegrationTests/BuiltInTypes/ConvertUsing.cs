@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.BuiltInTypes;
 
+
 public class ConvertUsingWithNullables
     : IntegrationTest<ConvertUsingWithNullables.DatabaseInitializer>
 {

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class TestAuthHandler : IAuthorizationHandler
 {
     public Task HandleAsync(AuthorizationHandlerContext context)

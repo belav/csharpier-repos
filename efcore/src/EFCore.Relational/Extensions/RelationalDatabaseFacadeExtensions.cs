@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Extension methods for the <see cref="DatabaseFacade" /> returned from <see cref="DbContext.Database" />
 ///     that can be used only with relational database providers.

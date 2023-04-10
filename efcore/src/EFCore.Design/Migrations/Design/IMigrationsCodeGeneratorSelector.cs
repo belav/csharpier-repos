@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
+
 /// <summary>
 ///     Selects an <see cref="IMigrationsCodeGenerator" /> service for a given programming language.
 /// </summary>

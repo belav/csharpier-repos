@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Storage;
 
 namespace Microsoft.CodeAnalysis.Host;
 
+
 internal static class WorkspaceConfigurationOptionsStorage
 {
     public static WorkspaceConfigurationOptions GetWorkspaceConfigurationOptions(

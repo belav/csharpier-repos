@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
+
 /// <summary>
 /// Enables legacy APIs to access indentation inference editor APIs from workspace.
 /// https://github.com/dotnet/roslyn/issues/61109

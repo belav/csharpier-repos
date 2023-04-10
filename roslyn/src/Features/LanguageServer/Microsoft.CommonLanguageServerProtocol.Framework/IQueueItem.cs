@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
+
 /// <summary>
 /// An item to be queued for execution.
 /// </summary>

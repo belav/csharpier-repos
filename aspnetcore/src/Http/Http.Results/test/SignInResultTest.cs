@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 public class SignInResultTest
 {
     [Fact]

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 // Most functionality is covered by WebHostBuilderTests for compat. Only GenericHost specific functionality is covered here.
 public class GenericWebHostBuilderTests
 {

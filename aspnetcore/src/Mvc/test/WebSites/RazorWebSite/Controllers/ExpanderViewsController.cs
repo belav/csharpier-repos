@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorWebSite.Controllers;
 
+
 public class ExpanderViewsController : Controller
 {
     // This result discovers the Index.cshtml from /View but the partial is executed from /Shared-Views

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Cryptography.Internal;
 
 namespace Microsoft.AspNetCore.Cryptography.SafeHandles;
 
+
 /// <summary>
 /// Represents a handle to a BCrypt algorithm provider from which keys and hashes can be created.
 /// </summary>

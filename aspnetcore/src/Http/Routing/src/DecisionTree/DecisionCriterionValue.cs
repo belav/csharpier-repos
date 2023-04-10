@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.DecisionTree;
 
+
 internal readonly struct DecisionCriterionValue
 {
     private readonly object _value;

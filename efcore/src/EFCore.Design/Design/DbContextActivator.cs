@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     Used to instantiate <see cref="DbContext" /> types at design time.
 /// </summary>

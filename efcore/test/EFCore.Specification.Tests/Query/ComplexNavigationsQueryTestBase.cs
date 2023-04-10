@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 #pragma warning disable RCS1155 // Use StringComparison when comparing strings.
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : ComplexNavigationsQueryFixtureBase, new()
 {

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 /// <summary>
 /// A delegate that asynchronously returns an <see cref="ResultExecutedContext"/> indicating the action result or
 /// the next result filter has executed.

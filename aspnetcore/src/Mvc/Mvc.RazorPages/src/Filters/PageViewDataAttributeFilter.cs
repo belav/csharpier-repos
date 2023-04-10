@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 internal sealed class PageViewDataAttributeFilter : IPageFilter, IViewDataValuesProviderFeature
 {
     public PageViewDataAttributeFilter(IReadOnlyList<LifecycleProperty> properties)

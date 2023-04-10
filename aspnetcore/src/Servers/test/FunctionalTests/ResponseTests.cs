@@ -18,6 +18,7 @@ using Xunit.Sdk;
 
 namespace ServerComparison.FunctionalTests;
 
+
 public class ResponseTests : LoggedTest
 {
     public ResponseTests(ITestOutputHelper output)

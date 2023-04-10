@@ -9,6 +9,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.Extensions.Configuration.KeyPerFile.Test;
 
+
 public class ConfigurationProviderCommandLineTest : ConfigurationProviderTestBase
 {
     protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(

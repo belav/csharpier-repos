@@ -1,5 +1,6 @@
 namespace BlazorServerWeb_CSharp.Data;
 
+
 public class WeatherForecast
 {
     public DateOnly Date { get; set; }

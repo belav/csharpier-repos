@@ -8,6 +8,7 @@ using Microsoft.Build.Utilities;
 
 namespace RepoTasks;
 
+
 public class GenerateGuid : Microsoft.Build.Utilities.Task
 {
     [Output]

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Authorization;
 
+
 /// <summary>
 /// A middleware that enables authorization capabilities.
 /// </summary>

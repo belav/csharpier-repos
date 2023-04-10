@@ -6,6 +6,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 public class NavigationEntryTest
 {
     [ConditionalFact]

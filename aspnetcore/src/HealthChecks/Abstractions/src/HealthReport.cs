@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
+
 /// <summary>
 /// Represents the result of executing a group of <see cref="IHealthCheck"/> instances.
 /// </summary>

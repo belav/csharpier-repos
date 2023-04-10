@@ -6,6 +6,7 @@ using Mvc.RoutingWebSite.Infrastructure;
 
 namespace Mvc.RoutingWebSite.Controllers;
 
+
 public class ConventionalControllerWithMetadata : Controller
 {
     [Metadata("C")]

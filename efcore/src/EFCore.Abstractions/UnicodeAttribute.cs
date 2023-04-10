@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Configures the property as capable of persisting unicode characters.
 /// </summary>

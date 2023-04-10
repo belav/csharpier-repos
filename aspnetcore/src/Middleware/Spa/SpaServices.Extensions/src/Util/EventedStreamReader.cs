@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.AspNetCore.NodeServices.Util;
 
+
 /// <summary>
 /// Wraps a <see cref="StreamReader"/> to expose an evented API, issuing notifications
 /// when the stream emits partial lines, completed lines, or finally closes.

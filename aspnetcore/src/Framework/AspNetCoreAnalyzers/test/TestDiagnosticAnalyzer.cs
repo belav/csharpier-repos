@@ -17,6 +17,7 @@ using Microsoft.VisualStudio.Composition;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
 {
     public TestDiagnosticAnalyzerRunner(DiagnosticAnalyzer analyzer)

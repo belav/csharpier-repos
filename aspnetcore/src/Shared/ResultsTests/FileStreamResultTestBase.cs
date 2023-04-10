@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 public abstract class FileStreamResultTestBase
 {
     protected abstract Task ExecuteAsync(

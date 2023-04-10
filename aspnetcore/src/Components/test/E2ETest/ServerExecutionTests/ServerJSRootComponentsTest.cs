@@ -10,6 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
+
 public class ServerJSRootComponentsTest : JSRootComponentsTest
 {
     public ServerJSRootComponentsTest(

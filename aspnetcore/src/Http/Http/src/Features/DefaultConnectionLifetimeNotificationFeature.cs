@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Connections.Features;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
+
 /// <summary>
 /// Default implementation of <see cref="IConnectionLifetimeNotificationFeature"/>.
 /// </summary>

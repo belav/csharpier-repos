@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.UseNullPropagation;
 
+
 internal abstract partial class AbstractUseNullPropagationDiagnosticAnalyzer<
     TSyntaxKind,
     TExpressionSyntax,

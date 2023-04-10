@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     Represents options managed by the relational database providers.
 ///     These options are set using <see cref="DbContextOptionsBuilder" />.

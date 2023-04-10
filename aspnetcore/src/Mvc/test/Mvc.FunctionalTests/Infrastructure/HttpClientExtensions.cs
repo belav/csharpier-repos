@@ -9,6 +9,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public static class HttpClientExtensions
 {
     public static async Task<IHtmlDocument> GetHtmlDocumentAsync(

@@ -11,6 +11,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
+
 public class DefaultControllerActivatorTest
 {
     [Theory]

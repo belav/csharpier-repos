@@ -13,6 +13,7 @@ using System.Threading;
 
 namespace PrepareTests;
 
+
 internal class TestDiscovery
 {
     public static bool RunDiscovery(string repoRootDirectory, string dotnetPath, bool isUnix)

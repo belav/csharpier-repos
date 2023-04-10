@@ -8,6 +8,7 @@ using BasicWebSite.Models;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class HttpActionResultTests
     : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithSystemTextJson>>
 {

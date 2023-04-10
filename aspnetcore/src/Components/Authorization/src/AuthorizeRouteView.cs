@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
+
 /// <summary>
 /// Combines the behaviors of <see cref="AuthorizeView"/> and <see cref="RouteView"/>,
 /// so that it displays the page matching the specified route but only if the user

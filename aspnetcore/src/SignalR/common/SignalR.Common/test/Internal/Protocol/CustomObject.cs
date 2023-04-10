@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
+
 public class CustomObject : IEquatable<CustomObject>
 {
     // Not intended to be a full set of things, just a smattering of sample serializations

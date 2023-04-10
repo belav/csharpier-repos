@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity.UI;
 
+
 internal enum UIFramework
 {
     // The default framework for a given release must be 0.

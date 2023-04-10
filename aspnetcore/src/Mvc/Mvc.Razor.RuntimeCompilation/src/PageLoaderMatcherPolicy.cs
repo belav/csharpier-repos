@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 internal sealed class PageLoaderMatcherPolicy : MatcherPolicy, IEndpointSelectorPolicy
 {
     private PageLoader? _loader;

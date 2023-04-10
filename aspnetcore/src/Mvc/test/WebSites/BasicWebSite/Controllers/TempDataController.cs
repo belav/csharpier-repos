@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
+
 public class TempDataController : Controller
 {
     public IActionResult Index()

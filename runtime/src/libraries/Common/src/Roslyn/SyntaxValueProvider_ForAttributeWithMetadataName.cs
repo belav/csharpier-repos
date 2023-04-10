@@ -14,6 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
 
+
 internal readonly struct GeneratorAttributeSyntaxContext
 {
     /// <summary>

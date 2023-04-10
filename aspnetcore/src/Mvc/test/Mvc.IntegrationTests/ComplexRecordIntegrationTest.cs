@@ -13,6 +13,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 // A clone of ComplexTypeIntegrationTestBase performed using record types
 public class ComplexRecordIntegrationTest
 {

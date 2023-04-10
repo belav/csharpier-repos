@@ -9,6 +9,7 @@ using Xunit.Abstractions;
 
 namespace Templates.Test;
 
+
 public class EmptyWebTemplateTest : LoggedTest
 {
     public EmptyWebTemplateTest(ProjectFactoryFixture projectFactory)

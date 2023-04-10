@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Wasm.Build.Tests;
 
+
 public class NonWasmTemplateBuildTests : BuildTestBase
 {
     public NonWasmTemplateBuildTests(

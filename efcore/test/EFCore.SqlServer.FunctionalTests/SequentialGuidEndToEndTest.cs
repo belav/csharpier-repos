@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class SequentialGuidEndToEndTest : IDisposable
 {
     [ConditionalFact]

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// Use to configure optional properties for creating a <see cref="RazorSourceDocument"/>.
 /// </summary>

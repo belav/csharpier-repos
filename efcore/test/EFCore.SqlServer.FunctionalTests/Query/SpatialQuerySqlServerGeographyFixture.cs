@@ -8,6 +8,7 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class SpatialQuerySqlServerGeographyFixture : SpatialQuerySqlServerFixture
 {
     private NtsGeometryServices _geometryServices;

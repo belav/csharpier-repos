@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Update.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     SQL Server-specific implementation of <see cref="MigrationsSqlGenerator" />.
 /// </summary>

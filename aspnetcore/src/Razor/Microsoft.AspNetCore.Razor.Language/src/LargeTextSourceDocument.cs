@@ -9,6 +9,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class LargeTextSourceDocument : RazorSourceDocument
 {
     private readonly List<char[]> _chunks;

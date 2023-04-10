@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization.Policy;
 
 namespace SecurityWebSite;
 
+
 public class CountingPolicyEvaluator : PolicyEvaluator
 {
     public int AuthorizeCount { get; private set; }

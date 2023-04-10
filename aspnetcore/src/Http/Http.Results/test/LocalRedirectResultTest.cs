@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 public class LocalRedirectResultTest
 {
     [Fact]

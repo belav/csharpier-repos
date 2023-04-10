@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views;
 
+
 internal abstract class BaseView
 {
     /// <summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
+
 public abstract class NorthwindBulkUpdatesFixture<TModelCustomizer>
     : NorthwindQueryRelationalFixture<TModelCustomizer>,
         IBulkUpdatesFixtureBase

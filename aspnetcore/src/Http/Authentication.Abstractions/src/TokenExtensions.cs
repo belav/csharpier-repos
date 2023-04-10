@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Extension methods for storing authentication tokens in <see cref="AuthenticationProperties"/>.
 /// </summary>

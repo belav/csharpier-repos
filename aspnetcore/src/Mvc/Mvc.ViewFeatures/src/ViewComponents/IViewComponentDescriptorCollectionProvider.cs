@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
+
 /// <summary>
 /// Provides the currently cached collection of <see cref="ViewComponentDescriptor"/>.
 /// </summary>

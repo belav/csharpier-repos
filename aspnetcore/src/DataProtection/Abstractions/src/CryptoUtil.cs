@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 internal static class CryptoUtil
 {
     // This isn't a typical Debug.Fail; an error always occurs, even in retail builds.

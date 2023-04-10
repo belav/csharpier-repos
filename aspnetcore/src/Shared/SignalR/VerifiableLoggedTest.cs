@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class VerifiableLoggedTest : LoggedTest
 {
     public VerifiableLoggedTest()

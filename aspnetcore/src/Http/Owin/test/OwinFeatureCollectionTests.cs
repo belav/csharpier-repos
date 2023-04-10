@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Owin;
 
+
 public class OwinHttpEnvironmentTests
 {
     private T Get<T>(IFeatureCollection features)

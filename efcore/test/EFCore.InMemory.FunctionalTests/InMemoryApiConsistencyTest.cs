@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class InMemoryApiConsistencyTest
     : ApiConsistencyTestBase<InMemoryApiConsistencyTest.InMemoryApiConsistencyFixture>
 {

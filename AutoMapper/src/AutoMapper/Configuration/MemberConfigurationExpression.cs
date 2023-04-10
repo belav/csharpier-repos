@@ -1,5 +1,6 @@
 namespace AutoMapper.Configuration;
 
+
 public interface IPropertyMapConfiguration
 {
     void Configure(TypeMap typeMap);

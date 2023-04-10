@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis;
 
+
 public static class TestCompilation
 {
     private static readonly ConcurrentDictionary<

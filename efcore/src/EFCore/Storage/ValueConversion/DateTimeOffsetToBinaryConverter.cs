@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 /// <summary>
 ///     Converts <see cref="DateTime" /> to and from binary representation in a long.
 ///     The DateTime is truncated beyond 0.1 millisecond precision.

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 /// <summary>
 /// Supplies information about a progress event that is being raised.
 /// </summary>

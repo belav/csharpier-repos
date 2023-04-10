@@ -6,6 +6,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 public class ActionResultTypeMapperTest
 {
     [Fact]

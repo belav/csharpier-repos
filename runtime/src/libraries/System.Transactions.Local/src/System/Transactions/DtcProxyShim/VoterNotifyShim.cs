@@ -7,6 +7,7 @@ using System.Transactions.Oletx;
 
 namespace System.Transactions.DtcProxyShim;
 
+
 internal sealed class VoterNotifyShim : NotificationShimBase, ITransactionVoterNotifyAsync2
 {
     internal VoterNotifyShim(DtcProxyShimFactory shimFactory, object enlistmentIdentifier)

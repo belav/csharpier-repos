@@ -9,6 +9,7 @@ using Xunit.Abstractions;
 
 namespace Templates.Items.Test;
 
+
 public class BlazorServerTest
 {
     public BlazorServerTest(ProjectFactoryFixture projectFactory, ITestOutputHelper output)

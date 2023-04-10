@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
+
 public static class ActualApiResponseMetadataFactory
 {
     /// <summary>

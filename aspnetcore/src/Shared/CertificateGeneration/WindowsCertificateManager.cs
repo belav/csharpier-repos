@@ -10,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.Certificates.Generation;
 
+
 [SupportedOSPlatform("windows")]
 internal sealed class WindowsCertificateManager : CertificateManager
 {

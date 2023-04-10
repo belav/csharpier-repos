@@ -6,6 +6,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
+
 /// <summary>
 /// The basic interface for storing and retrieving XML elements.
 /// </summary>

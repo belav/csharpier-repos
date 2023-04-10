@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal;
 // ReSharper disable UnusedMember.Local
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class InMemoryValueGeneratorSelectorTest
 {
     [ConditionalFact]

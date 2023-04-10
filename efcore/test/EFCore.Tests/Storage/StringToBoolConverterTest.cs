@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class StringToBoolConverterTest
 {
     private static readonly StringToBoolConverter _stringToBool = new();

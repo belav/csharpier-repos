@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// Sets up default options for <see cref="MvcOptions"/>.
 /// </summary>

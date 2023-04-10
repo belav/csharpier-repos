@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.QuickInfo;
 
+
 [DataContract]
 internal readonly record struct QuickInfoOptions
 {

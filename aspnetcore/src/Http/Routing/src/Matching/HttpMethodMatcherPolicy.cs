@@ -9,6 +9,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 /// <summary>
 /// An <see cref="MatcherPolicy"/> that implements filtering and selection by
 /// the HTTP method of a request.

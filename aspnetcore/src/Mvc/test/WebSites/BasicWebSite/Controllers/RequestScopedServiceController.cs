@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite;
 
+
 [Route("RequestScopedService/[action]")]
 public class RequestScopedServiceController : Controller
 {

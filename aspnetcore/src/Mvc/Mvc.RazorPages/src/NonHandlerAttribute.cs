@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 /// <summary>
 /// Specifies that the targeted method is not a page handler method.
 /// </summary>

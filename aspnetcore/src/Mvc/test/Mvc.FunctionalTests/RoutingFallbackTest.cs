@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class RoutingFallbackTest : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForFallback>>
 {
     public RoutingFallbackTest(MvcTestFixture<RoutingWebSite.StartupForFallback> fixture)

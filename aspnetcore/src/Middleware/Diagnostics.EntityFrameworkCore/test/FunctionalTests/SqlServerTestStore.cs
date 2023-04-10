@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
+
 public class SqlTestStore : IDisposable
 {
     public static SqlTestStore CreateScratch() => new SqlTestStore($"D{Guid.NewGuid()}");

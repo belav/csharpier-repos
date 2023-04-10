@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Specifies options for password requirements.
 /// </summary>

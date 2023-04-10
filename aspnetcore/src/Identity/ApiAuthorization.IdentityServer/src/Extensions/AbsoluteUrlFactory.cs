@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 internal sealed class AbsoluteUrlFactory : IAbsoluteUrlFactory
 {
     public AbsoluteUrlFactory(IHttpContextAccessor httpContextAccessor)

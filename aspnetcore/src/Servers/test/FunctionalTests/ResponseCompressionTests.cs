@@ -23,6 +23,7 @@ using Xunit.Sdk;
 
 namespace ServerComparison.FunctionalTests;
 
+
 public class ResponseCompressionTests : LoggedTest
 {
     // NGinx's default min size is 20 bytes

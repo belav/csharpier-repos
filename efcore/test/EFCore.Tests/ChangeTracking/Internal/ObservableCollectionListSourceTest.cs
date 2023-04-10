@@ -5,6 +5,7 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
+
 public class ObservableCollectionListSourceTest
 {
     [ConditionalFact]

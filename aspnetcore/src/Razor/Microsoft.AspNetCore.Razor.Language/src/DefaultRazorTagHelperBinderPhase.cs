@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultRazorTagHelperBinderPhase : RazorEnginePhaseBase, IRazorTagHelperBinderPhase
 {
     protected override void ExecuteCore(RazorCodeDocument codeDocument)

@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.BuiltInTypes;
 
+
 public class EnumToUnderlyingType : IntegrationTest<EnumToUnderlyingType.DatabaseInitializer>
 {
     public class Customer

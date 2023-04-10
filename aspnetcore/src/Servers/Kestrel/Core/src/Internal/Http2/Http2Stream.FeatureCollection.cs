@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+
 internal partial class Http2Stream
     : IHttp2StreamIdFeature,
         IHttpMinRequestBodyDataRateFeature,

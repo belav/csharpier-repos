@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FormatterWebSite.Controllers;
 
+
 public class PolymorphicBinder : IModelBinder
 {
     public Task BindModelAsync(ModelBindingContext bindingContext)

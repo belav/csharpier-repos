@@ -3,6 +3,7 @@
 
 namespace Ignitor;
 
+
 public readonly struct CapturedAttachComponentCall
 {
     public CapturedAttachComponentCall(int componentId, string selector)

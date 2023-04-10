@@ -5,6 +5,7 @@ using Microsoft.DotNet.Cli.CommandLine;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
+
 public class MigrationsBundleTest
 {
     [ConditionalFact]

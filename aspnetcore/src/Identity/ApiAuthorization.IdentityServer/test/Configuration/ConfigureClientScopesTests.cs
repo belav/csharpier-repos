@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
+
 public class ConfigureClientScopesTests
 {
     [Fact]

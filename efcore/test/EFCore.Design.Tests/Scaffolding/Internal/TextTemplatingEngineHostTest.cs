@@ -9,6 +9,7 @@ using Engine = Mono.TextTemplating.TemplatingEngine;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
+
 [PlatformSkipCondition(
     TestUtilities.Xunit.TestPlatform.Linux | TestUtilities.Xunit.TestPlatform.Mac,
     SkipReason = "CI time out"

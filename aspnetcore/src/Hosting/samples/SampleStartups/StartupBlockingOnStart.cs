@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace SampleStartups;
 
+
 public class StartupBlockingOnStart : StartupBase
 {
     public override void ConfigureServices(IServiceCollection services)

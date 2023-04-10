@@ -44,6 +44,7 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
+
 // Source here is from https://github.com/protocolbuffers/protobuf
 // Most of this code will be replaced over time with optimized implementations.
 internal static class Legacy

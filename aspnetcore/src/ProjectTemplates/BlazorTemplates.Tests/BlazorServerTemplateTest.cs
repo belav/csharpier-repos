@@ -16,6 +16,7 @@ using Xunit.Abstractions;
 
 namespace BlazorTemplates.Tests;
 
+
 public class BlazorServerTemplateTest : BlazorTemplateTest
 {
     public BlazorServerTemplateTest(ProjectFactoryFixture projectFactory)

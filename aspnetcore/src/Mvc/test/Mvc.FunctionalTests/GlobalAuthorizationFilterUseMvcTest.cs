@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class GlobalAuthorizationFilterUseMvcTest
     : GlobalAuthorizationFilterTestBase,
         IClassFixture<

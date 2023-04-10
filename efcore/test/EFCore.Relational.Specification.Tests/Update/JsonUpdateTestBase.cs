@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.JsonQuery;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : JsonUpdateFixtureBase, new()
 {

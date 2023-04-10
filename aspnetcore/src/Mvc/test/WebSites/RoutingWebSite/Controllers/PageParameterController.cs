@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite.Controllers;
 
+
 public class PageParameterController : Controller
 {
     // We've had issues with using 'page' as a parameter in tandem with conventional

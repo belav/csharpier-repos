@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 /// <summary>
 /// Provides methods to activate properties on a <see cref="IRazorPage"/> instance.
 /// </summary>

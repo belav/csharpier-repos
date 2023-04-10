@@ -8,6 +8,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.Logging.Testing.Tests;
 
+
 public class TestTestOutputHelper : ITestOutputHelper
 {
     private StringBuilder _output = new StringBuilder();

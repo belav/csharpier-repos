@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
+
 internal sealed class BodyControl
 {
     private static readonly ThrowingWasUpgradedWriteOnlyStream _throwingResponseStream =

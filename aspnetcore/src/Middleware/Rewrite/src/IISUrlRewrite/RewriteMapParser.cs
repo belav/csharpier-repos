@@ -6,6 +6,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 internal static class RewriteMapParser
 {
     public static IISRewriteMapCollection? Parse(XElement xmlRoot)

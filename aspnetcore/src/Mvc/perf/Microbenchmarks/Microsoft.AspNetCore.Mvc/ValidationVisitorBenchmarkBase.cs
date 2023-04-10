@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
+
 public abstract class ValidationVisitorBenchmarkBase
 {
     protected const int Iterations = 4;

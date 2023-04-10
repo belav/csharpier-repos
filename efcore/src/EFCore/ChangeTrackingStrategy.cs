@@ -5,6 +5,7 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Indicates how the context detects changes to properties for an instance of the entity type.
 /// </summary>

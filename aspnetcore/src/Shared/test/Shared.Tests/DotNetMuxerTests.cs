@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.CommandLineUtils;
 
+
 public class DotNetMuxerTests
 {
     [Fact]

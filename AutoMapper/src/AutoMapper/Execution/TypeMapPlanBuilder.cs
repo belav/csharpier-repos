@@ -1,5 +1,6 @@
 namespace AutoMapper.Execution;
 
+
 public struct TypeMapPlanBuilder
 {
     private static readonly MethodInfo MappingError = typeof(TypeMapPlanBuilder).GetStaticMethod(

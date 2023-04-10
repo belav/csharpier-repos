@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     A <see cref="DbSet{TEntity}" /> can be used to query and save instances of <typeparamref name="TEntity" />.
 ///     LINQ queries against a <see cref="DbSet{TEntity}" /> will be translated into queries against the database.

@@ -14,6 +14,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
+
 public class CorsMiddlewareTests
 {
     private const string OriginUrl = "http://api.example.com";

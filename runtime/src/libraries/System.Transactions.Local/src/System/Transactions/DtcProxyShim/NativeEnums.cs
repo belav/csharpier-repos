@@ -3,6 +3,7 @@
 
 namespace System.Transactions.DtcProxyShim;
 
+
 internal enum ShimNotificationType
 {
     None = 0,

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+
 #pragma warning disable CA1852 // Seal internal types
 internal partial class RemoteRenderer : WebRenderer
 #pragma warning restore CA1852 // Seal internal types

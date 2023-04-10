@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis;
 
+
 /// <summary>
 /// Options used to load <see cref="SourceText"/>.
 /// </summary>

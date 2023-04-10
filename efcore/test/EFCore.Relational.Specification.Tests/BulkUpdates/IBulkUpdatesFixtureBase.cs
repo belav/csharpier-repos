@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
+
 public interface IBulkUpdatesFixtureBase : IQueryFixtureBase
 {
     Action<DatabaseFacade, IDbContextTransaction> GetUseTransaction() => UseTransaction;

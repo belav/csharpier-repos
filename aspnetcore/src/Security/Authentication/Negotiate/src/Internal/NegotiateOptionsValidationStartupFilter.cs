@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate.Internal;
 
+
 internal sealed class NegotiateOptionsValidationStartupFilter : IStartupFilter
 {
     private readonly string _authenticationScheme;

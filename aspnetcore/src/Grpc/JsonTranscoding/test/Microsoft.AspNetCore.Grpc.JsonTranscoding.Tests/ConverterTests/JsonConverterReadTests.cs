@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.ConverterTests;
 
+
 public class JsonConverterReadTests
 {
     private readonly ITestOutputHelper _output;

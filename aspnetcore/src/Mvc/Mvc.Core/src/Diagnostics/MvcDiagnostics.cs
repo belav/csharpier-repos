@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.Diagnostics;
 
+
 /// <summary>
 /// An <see cref="EventData"/> that occurs before an action.
 /// </summary>

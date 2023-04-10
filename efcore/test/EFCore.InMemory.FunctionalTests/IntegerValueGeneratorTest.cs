@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class IntegerValueGeneratorTest
 {
     [ConditionalFact]

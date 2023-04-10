@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 public sealed class HttpEventSourceListener : EventListener
 {
     private readonly StringBuilder _messageBuilder = new StringBuilder();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Metadata;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 internal static class ResultsOfTHelper
 {
     private static readonly MethodInfo PopulateMetadataMethod = typeof(ResultsOfTHelper).GetMethod(

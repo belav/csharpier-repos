@@ -16,6 +16,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
+
 internal abstract class SyntaxFormattingOptions
 {
     [DataContract]

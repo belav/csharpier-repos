@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// A base class for building an new <see cref="Endpoint"/>.
 /// </summary>

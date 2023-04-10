@@ -11,6 +11,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
+
 /// <summary>
 /// A descriptor for an action of a controller.
 /// </summary>

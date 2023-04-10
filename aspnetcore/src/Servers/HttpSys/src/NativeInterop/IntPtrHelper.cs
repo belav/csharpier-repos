@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 internal static class IntPtrHelper
 {
     internal static IntPtr Add(IntPtr a, int b)

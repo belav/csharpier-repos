@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     <para>
 ///         A class that exposes annotations that can be modified. Annotations allow for arbitrary metadata to be

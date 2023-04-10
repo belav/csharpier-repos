@@ -7,6 +7,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     <para>
 ///         Represents options managed by the core of Entity Framework, as opposed to those managed

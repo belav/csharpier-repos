@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal static class RazorSyntaxTreeExtensions
 {
     public static IReadOnlyList<ClassifiedSpanInternal> GetClassifiedSpans(

@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.Extensions.RazorViews;
 
+
 internal sealed class AttributeValue
 {
     public AttributeValue(string prefix, object value, bool literal)

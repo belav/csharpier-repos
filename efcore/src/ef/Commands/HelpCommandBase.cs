@@ -5,6 +5,7 @@ using Microsoft.DotNet.Cli.CommandLine;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
+
 internal class HelpCommandBase : EFCommandBase
 {
     private CommandLineApplication? _command;

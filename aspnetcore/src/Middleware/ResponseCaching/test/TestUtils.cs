@@ -21,6 +21,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.ResponseCaching.Tests;
 
+
 internal class TestUtils
 {
     static TestUtils()

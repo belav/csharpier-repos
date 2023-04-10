@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     A service representing an assembly containing EF Core Migrations.
 /// </summary>

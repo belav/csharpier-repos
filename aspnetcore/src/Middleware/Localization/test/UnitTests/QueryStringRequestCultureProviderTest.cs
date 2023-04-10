@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.Extensions.Localization;
 
+
 public class QueryStringRequestCultureProviderTest
 {
     [Fact]

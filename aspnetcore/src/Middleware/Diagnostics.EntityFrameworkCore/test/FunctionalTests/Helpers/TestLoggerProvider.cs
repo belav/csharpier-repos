@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.FunctionalTests.Helpers;
 
+
 public class TestLoggerProvider : ILoggerProvider
 {
     private readonly TestLogger _logger = new TestLogger();

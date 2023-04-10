@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.ReplaceConditionalWithStatements;
 
 namespace Microsoft.CodeAnalysis.CSharp.ReplaceConditionalWithStatements;
 
+
 [
     ExportCodeRefactoringProvider(
         LanguageNames.CSharp,

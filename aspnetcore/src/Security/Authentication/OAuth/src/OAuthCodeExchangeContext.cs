@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.OAuth;
 
+
 /// <summary>
 /// Contains information used to perform the code exchange.
 /// </summary>

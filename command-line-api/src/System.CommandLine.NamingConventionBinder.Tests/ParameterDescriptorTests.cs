@@ -8,6 +8,7 @@ using Xunit;
 
 namespace System.CommandLine.NamingConventionBinder.Tests;
 
+
 public class ParameterDescriptorTests
 {
     [Theory]

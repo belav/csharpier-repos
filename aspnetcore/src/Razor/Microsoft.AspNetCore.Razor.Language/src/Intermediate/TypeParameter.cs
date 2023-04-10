@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public sealed class TypeParameter
 {
     public string ParameterName { get; set; }

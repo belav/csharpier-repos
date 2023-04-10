@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.CallHandlers;
 
+
 internal abstract class ServerCallHandlerBase<TService, TRequest, TResponse>
     where TService : class
     where TRequest : class

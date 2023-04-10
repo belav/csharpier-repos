@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 internal sealed class EndpointModelMetadata : ModelMetadata
 {
     public EndpointModelMetadata(ModelMetadataIdentity identity)

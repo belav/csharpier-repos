@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class InMemoryTestStore : TestStore
 {
     public InMemoryTestStore(string name = null, bool shared = true)

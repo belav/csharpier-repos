@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// An attribute that enables binding for all properties the decorated controller or Razor Page model defines.
 /// </summary>

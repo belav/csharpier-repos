@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
+
 public class IdentityUser : IdentityUser<string>
 {
     public IdentityUser()

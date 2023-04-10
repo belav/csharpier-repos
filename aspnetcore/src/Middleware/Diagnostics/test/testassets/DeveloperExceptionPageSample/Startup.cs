@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace DeveloperExceptionPageSample;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

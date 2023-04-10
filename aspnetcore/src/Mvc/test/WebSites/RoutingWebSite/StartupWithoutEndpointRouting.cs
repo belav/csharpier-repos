@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace RoutingWebSite;
 
+
 public class StartupWithoutEndpointRouting : Startup
 {
     public override void Configure(IApplicationBuilder app)

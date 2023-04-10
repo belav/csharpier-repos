@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http.Abstractions;
 
+
 public class QueryStringTests
 {
     [Fact]

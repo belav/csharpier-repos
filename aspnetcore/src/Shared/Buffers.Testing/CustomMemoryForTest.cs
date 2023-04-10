@@ -3,6 +3,7 @@
 
 namespace System.Buffers;
 
+
 internal sealed class CustomMemoryForTest<T> : IMemoryOwner<T>
 {
     private bool _disposed;

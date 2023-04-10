@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
 {
     public const string ComponentDocumentKind = "component.1.0";

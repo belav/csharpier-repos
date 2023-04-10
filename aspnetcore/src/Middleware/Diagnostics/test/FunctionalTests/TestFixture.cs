@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
+
 public class TestFixture<TStartup> : IDisposable
 {
     private readonly TestServer _server;

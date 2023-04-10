@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Connections.Features;
 
 namespace Microsoft.AspNetCore.Connections;
 
+
 /// <summary>
 /// Encapsulates all information about an individual connection.
 /// </summary>

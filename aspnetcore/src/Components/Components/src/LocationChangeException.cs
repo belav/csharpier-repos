@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// An exception thrown when <see cref="NavigationManager.LocationChanged"/> throws an exception.
 /// </summary>

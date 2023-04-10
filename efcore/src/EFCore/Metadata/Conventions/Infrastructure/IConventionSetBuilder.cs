@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 
+
 /// <summary>
 ///     <para>
 ///         A service on the EF internal service provider that creates the <see cref="ConventionSet" />

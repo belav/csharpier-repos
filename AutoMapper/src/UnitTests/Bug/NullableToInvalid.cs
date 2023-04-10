@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.Bug;
 
+
 public class NullableToInvalid : NonValidatingSpecBase
 {
     public class Source

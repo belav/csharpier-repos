@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
+
 public class UrlHelperBaseTest
 {
     public static TheoryData GeneratePathFromRoute_HandlesLeadingAndTrailingSlashesData =>

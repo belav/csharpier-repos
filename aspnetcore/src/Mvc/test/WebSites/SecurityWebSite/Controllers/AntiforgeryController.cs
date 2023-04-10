@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SecurityWebSite.Controllers;
 
+
 [AutoValidateAntiforgeryToken]
 public class AntiforgeryController : Controller
 {

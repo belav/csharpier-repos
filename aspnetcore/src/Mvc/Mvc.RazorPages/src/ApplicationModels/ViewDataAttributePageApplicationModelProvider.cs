@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 internal sealed class ViewDataAttributePageApplicationModelProvider : IPageApplicationModelProvider
 {
     /// <inheritdoc />

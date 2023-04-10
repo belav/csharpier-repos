@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace FormatterWebSite;
 
+
 public class InfinitelyRecursiveModel
 {
     [JsonConverter(typeof(StringIdentifierConverter))]

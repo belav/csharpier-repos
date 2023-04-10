@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 internal static class RedirectToWwwHelper
 {
     private const string Localhost = "localhost";

@@ -13,6 +13,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities;
 
+
 internal static class GlobalOptionsExtensions
 {
     /// <summary>

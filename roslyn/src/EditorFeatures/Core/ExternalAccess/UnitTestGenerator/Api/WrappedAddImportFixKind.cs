@@ -4,6 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTestGenerator.Api;
 
+
 internal enum WrappedAddImportFixKind
 {
     ProjectSymbol,

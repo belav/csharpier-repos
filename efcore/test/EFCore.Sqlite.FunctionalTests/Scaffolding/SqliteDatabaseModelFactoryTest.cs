@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
+
 public class SqliteDatabaseModelFactoryTest
     : IClassFixture<SqliteDatabaseModelFactoryTest.SqliteDatabaseModelFixture>
 {

@@ -6,6 +6,7 @@ using Microsoft.JSInterop.Infrastructure;
 
 namespace Microsoft.JSInterop.Tests;
 
+
 public class JSObjectReferenceTest
 {
     [Fact]

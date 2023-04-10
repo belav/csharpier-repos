@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
+
 public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
 {
     public class GenericOneToOneType : OneToOneTestBase

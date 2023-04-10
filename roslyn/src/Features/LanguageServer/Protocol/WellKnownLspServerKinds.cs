@@ -6,6 +6,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
+
 internal enum WellKnownLspServerKinds
 {
     /// <summary>

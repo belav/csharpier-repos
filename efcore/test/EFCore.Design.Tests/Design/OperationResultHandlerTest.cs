@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 public class OperationResultHandlerTest
 {
     [ConditionalFact]

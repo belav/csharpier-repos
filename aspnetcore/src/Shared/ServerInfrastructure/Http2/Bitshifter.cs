@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+
 // Mimics BinaryPrimitives with oddly sized units
 internal static class Bitshifter
 {

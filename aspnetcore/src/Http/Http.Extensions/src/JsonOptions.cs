@@ -8,6 +8,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Http.Json;
 
+
 /// <summary>
 /// Options to configure JSON serialization settings for <see cref="HttpRequestJsonExtensions"/>
 /// and <see cref="HttpResponseJsonExtensions"/>.

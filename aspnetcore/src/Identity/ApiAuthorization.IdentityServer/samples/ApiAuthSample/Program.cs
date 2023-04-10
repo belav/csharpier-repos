@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace ApiAuthSample;
 
+
 public class Program
 {
     public static void Main(string[] args)

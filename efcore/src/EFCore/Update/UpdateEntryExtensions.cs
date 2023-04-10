@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 /// <summary>
 ///     Extension methods for <see cref="IUpdateEntry" />.
 /// </summary>

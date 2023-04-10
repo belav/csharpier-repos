@@ -22,6 +22,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 public class RazorPageTest
 {
     private readonly RenderAsyncDelegate _nullRenderAsyncDelegate = () => Task.FromResult(0);

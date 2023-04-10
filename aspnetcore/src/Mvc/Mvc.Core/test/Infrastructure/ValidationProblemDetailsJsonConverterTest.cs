@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 public class ValidationProblemDetailsJsonConverterTest
 {
     private static JsonSerializerOptions JsonSerializerOptions =>

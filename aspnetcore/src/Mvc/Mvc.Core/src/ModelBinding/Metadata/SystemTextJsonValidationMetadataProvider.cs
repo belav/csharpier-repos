@@ -9,6 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
+
 /// <summary>
 /// An implementation of <see cref="IDisplayMetadataProvider"/> and <see cref="IValidationMetadataProvider"/> for
 /// the System.Text.Json.Serialization attribute classes.

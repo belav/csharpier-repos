@@ -5,6 +5,7 @@ using System.Net.Http.QPack;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack;
 
+
 //   The size of the dynamic table is the sum of the size of its entries.
 //   The size of an entry is the sum of its name's length in bytes (as
 //   defined in Section 4.1.2), its value's length in bytes, and 32.

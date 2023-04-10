@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace RoutingWebSite;
 
+
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 public class HttpMergeAttribute : Attribute, IActionHttpMethodProvider, IRouteTemplateProvider
 {

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel;
 
+
 public class Vehicle
 {
     public string Name { get; set; }

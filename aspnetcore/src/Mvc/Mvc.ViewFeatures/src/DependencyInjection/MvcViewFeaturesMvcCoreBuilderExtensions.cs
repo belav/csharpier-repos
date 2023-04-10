@@ -26,6 +26,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Static class that adds extension methods to <see cref="IMvcCoreBuilder"/>. This class cannot be inherited.
 /// </summary>

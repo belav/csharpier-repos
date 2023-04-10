@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// Extension methods to <see cref="IRazorEngineBuilder" />.
 /// </summary>

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.Diagnostics;
 
+
 /// <summary>
 /// An <see cref="EventData"/> that occurs before a view page.
 /// </summary>

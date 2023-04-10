@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 // ReSharper disable PossibleMultipleEnumeration
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : ProxyGraphUpdatesTestBase<TFixture>.ProxyGraphUpdatesFixtureBase, new()
 {

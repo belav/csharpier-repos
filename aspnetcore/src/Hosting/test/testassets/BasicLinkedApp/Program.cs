@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BasicLinkedApp;
 
+
 public class Program
 {
     public static void Main(string[] args)

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
+
 internal static class KeyEscrowServiceProviderExtensions
 {
     /// <summary>

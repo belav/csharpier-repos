@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class GearsOfWarQuerySqliteTest
     : GearsOfWarQueryRelationalTestBase<GearsOfWarQuerySqliteFixture>
 {

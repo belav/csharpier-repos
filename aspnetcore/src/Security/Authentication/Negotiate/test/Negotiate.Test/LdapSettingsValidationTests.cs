@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate.Test;
 
+
 public class LdapSettingsValidationTests
 {
     [Fact]

@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 internal static class CancellationTokenUtils
 {
     // Similar to CreateLinkedTokenSource except it will not allocate a new internal LinkedCancellationTokenSource in the case where

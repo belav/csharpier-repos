@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class NewtonsoftJsonOutputFormatterTest
     : JsonOutputFormatterTestBase<FormatterWebSite.Startup>
 {

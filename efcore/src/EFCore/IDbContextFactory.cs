@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Defines a factory for creating <see cref="DbContext" /> instances.
 /// </summary>

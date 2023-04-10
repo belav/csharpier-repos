@@ -3,6 +3,7 @@
 
 namespace Wasm.Authentication.Server.Models;
 
+
 public class UserPreference
 {
     public string Id { get; set; }

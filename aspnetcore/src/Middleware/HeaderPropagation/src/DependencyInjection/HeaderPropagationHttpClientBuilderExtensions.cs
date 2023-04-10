@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// <see cref="IHttpClientBuilder"/> extension methods for <see cref="HeaderPropagationMiddleware"/> which propagates request headers to an <see cref="System.Net.Http.HttpClient"/>.
 /// </summary>

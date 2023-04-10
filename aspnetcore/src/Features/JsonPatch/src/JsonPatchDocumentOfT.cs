@@ -16,6 +16,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
+
 // Implementation details: the purpose of this type of patch document is to ensure we can do type-checking
 // when producing a JsonPatchDocument.  However, we cannot send this "typed" over the wire, as that would require
 // including type data in the JsonPatchDocument serialized as JSON (to allow for correct deserialization) - that's

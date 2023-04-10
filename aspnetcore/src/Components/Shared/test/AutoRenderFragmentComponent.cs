@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
+
 public class AutoRenderFragmentComponent : AutoRenderComponent
 {
     private readonly RenderFragment _renderFragment;

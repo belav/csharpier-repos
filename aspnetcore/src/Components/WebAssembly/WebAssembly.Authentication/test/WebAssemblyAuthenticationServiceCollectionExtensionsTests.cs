@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
 {
     private static readonly JsonSerializerOptions JsonOptions = new();

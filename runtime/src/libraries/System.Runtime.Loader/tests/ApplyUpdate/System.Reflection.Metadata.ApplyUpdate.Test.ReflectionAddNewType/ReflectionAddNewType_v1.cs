@@ -4,6 +4,7 @@ using System;
 
 namespace System.Reflection.Metadata.ApplyUpdate.Test.ReflectionAddNewType;
 
+
 public interface IExistingInterface
 {
     public string ItfMethod(int i);

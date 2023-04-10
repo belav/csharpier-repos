@@ -12,6 +12,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 public class TestMvcOptions : IOptions<MvcOptions>
 {
     public TestMvcOptions()

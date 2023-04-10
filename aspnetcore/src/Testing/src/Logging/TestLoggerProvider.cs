@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.Logging.Testing;
 
+
 public class TestLoggerProvider : ILoggerProvider
 {
     private readonly ITestSink _sink;

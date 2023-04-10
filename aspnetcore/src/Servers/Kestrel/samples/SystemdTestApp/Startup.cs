@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace SystemdTestApp;
 
+
 public class Startup
 {
     public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)

@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
+
 internal readonly record struct OptionsTestInfo(
     IOption2 Option,
     string? ContainingAssemblyLanguage,

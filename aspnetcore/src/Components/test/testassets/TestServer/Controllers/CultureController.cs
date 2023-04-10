@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Components.TestServer.Controllers;
 
+
 [Route("[controller]/[action]")]
 public class CultureController : Controller
 {

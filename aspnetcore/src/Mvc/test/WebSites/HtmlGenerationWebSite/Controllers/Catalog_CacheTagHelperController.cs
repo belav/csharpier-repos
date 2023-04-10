@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HtmlGenerationWebSite.Controllers;
 
+
 public class Catalog_CacheTagHelperController : Controller
 {
     [HttpGet("/catalog")]

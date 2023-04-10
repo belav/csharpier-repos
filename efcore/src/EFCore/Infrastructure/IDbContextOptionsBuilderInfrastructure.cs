@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     <para>
 ///         Explicitly implemented by <see cref="DbContextOptionsBuilder" /> to hide methods that are used by database provider

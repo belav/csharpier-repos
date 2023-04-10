@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public class ComponentDeclarationRazorIntegrationTest : RazorIntegrationTestBase
 {
     public ComponentDeclarationRazorIntegrationTest()

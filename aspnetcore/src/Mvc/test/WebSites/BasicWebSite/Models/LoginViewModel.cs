@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BasicWebSite.Models;
 
+
 public class LoginViewModel
 {
     [Required]

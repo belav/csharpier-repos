@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner;
 
+
 public class Attendee : ConferenceDTO.Attendee
 {
     public virtual ICollection<SessionAttendee> SessionsAttendees { get; set; }

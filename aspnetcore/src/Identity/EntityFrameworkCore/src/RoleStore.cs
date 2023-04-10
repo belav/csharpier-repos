@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
+
 /// <summary>
 /// Creates a new instance of a persistence store for roles.
 /// </summary>

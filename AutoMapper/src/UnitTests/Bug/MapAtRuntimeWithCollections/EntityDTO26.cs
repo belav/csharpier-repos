@@ -1,5 +1,6 @@
 ﻿namespace OmmitedDTOModel3WithCollections;
 
+
 public class EntityDTO26 : BaseEntity
 {
     public EntityDTO26()

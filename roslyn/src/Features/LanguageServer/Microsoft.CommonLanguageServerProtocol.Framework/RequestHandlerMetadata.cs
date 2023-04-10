@@ -6,4 +6,5 @@ using System;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
+
 public record RequestHandlerMetadata(string MethodName, Type? RequestType, Type? ResponseType);

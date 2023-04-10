@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 /// <summary>
 /// Helpful extension methods for data protection APIs.
 /// </summary>

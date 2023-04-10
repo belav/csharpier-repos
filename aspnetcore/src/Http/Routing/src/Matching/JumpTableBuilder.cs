@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 internal static class JumpTableBuilder
 {
     public const int InvalidDestination = -1;

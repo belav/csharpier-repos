@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.HotReload;
 
+
 internal sealed class UpdateDelta
 {
     public Guid ModuleId { get; set; }

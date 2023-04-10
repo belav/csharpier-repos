@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 // ReSharper disable UnusedMember.Local
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
+
 public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture>
 {
     private const string DatabaseName = "CosmosEndToEndTest";

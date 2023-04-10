@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace HelixTestRunner;
 
+
 public class HelixTestRunnerOptions
 {
     public static HelixTestRunnerOptions Parse(string[] args)

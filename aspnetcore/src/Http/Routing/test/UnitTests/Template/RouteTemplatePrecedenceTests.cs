@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
+
 public class RouteTemplatePrecedenceTests : RoutePrecedenceTestsBase
 {
     protected override decimal ComputeMatched(string template)

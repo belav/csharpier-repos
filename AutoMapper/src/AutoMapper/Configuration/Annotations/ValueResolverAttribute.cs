@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.Configuration.Annotations;
 
+
 /// <summary>
 /// Map destination member using a custom value resolver.
 /// Use with <see cref="SourceMemberAttribute" /> to specify an <see cref="IMemberValueResolver{TSource,TDestination,TSourceMember,TDestMember}" /> type.

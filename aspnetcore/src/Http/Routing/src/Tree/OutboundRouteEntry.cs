@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing.Template;
 
 namespace Microsoft.AspNetCore.Routing.Tree;
 
+
 /// <summary>
 /// Used to build a <see cref="TreeRouter"/>. Represents a URL template that will be used to generate
 /// outgoing URLs.

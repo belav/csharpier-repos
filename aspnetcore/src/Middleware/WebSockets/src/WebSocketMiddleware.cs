@@ -13,6 +13,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.WebSockets;
 
+
 /// <summary>
 /// Enables accepting WebSocket requests by adding a <see cref="IHttpWebSocketFeature"/>
 /// to the <see cref="HttpContext"/> if the request is a valid WebSocket request.

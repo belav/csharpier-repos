@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SpaServices.AngularCli;
 
+
 internal static class AngularCliMiddleware
 {
     private const string LogCategoryName = "Microsoft.AspNetCore.SpaServices";

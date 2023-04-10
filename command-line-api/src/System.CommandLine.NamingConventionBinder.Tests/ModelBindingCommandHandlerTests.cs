@@ -16,6 +16,7 @@ using Xunit;
 
 namespace System.CommandLine.NamingConventionBinder.Tests;
 
+
 public partial class ModelBindingCommandHandlerTests
 {
     [Theory]

@@ -6,6 +6,7 @@ using RoutingSample.Web.HelloExtension;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 public static class HelloAppBuilderExtensions
 {
     public static IApplicationBuilder UseHello(this IApplicationBuilder app, string greeter)

@@ -8,6 +8,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch.Adapters;
 
+
 /// <inheritdoc />
 public class ObjectAdapter : IObjectAdapterWithTest
 {

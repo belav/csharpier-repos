@@ -6,6 +6,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
+
 internal static unsafe class SecretExtensions
 {
     /// <summary>

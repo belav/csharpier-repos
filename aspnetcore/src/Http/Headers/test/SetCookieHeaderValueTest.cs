@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.Net.Http.Headers;
 
+
 public class SetCookieHeaderValueTest
 {
     public static TheoryData<SetCookieHeaderValue, string> SetCookieHeaderDataSet

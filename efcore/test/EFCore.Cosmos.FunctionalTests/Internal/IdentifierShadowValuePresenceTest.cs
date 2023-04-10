@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Internal;
 
+
 public class IdentifierShadowValuePresenceTest
 {
     [ConditionalFact]

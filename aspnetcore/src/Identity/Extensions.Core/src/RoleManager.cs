@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Provides the APIs for managing roles in a persistence store.
 /// </summary>

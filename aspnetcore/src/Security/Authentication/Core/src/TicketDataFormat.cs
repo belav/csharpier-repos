@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.DataProtection;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// A <see cref="SecureDataFormat{TData}"/> instance to secure
 /// <see cref="AuthenticationTicket"/>.

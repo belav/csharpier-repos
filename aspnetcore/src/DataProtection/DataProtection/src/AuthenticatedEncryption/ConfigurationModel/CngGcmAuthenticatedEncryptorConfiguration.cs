@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
+
 /// <summary>
 /// Represents a configured authenticated encryption mechanism which uses
 /// Windows CNG algorithms in GCM encryption + authentication modes.

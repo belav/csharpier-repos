@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// A collection of constants for
 /// <see href="http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml" >HTTP status codes</see >.

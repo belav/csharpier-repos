@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
+
 public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
 {
     public static readonly string RazorPageDocumentKind = "mvc.1.0.razor-page";

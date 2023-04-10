@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 public class CommonFilterTest
 {
     // This is used as a 'common' test method for ActionFilterAttribute and Controller

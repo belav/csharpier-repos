@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 public class ValidatableObjectAdapterTest
 {
     private static readonly ModelMetadataProvider _metadataProvider =

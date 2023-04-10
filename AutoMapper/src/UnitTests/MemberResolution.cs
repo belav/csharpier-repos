@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.MemberResolution;
 
+
 public class When_multiple_source_members_match_postfix : AutoMapperSpecBase
 {
     class Order

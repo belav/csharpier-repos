@@ -6,6 +6,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
+
 public class QueryFixupTest
 {
     [ConditionalFact]

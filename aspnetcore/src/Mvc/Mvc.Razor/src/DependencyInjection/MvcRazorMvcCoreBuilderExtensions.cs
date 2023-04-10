@@ -18,6 +18,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Static class that adds RazorViewEngine methods to <see cref="IMvcCoreBuilder"/>.
 /// </summary>

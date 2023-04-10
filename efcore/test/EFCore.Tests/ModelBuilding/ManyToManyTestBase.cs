@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
+
 public abstract partial class ModelBuilderTest
 {
     public abstract class ManyToManyTestBase : ModelBuilderTestBase

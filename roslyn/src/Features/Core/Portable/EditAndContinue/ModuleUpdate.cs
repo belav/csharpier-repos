@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.EditAndContinue.Contracts;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue;
 
+
 [DataContract]
 internal readonly record struct ModuleUpdate(
     [property: DataMember(Order = 0)] Guid Module,

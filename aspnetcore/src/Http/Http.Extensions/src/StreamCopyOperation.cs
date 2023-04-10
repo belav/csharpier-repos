@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Extensions;
 
+
 // FYI: In most cases the source will be a FileStream and the destination will be to the network.
 /// <summary>
 /// Provides APIs to copy a range of bytes from a source <see cref="Stream"/> to a destination <see cref="Stream"/>.

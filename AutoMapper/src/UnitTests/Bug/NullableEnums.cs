@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class NullableEnums : AutoMapperSpecBase
 {
     public class Src

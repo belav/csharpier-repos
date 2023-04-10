@@ -5,6 +5,7 @@ using Microsoft.Extensions.Identity.Core;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Service to enable localization for application facing identity errors.
 /// </summary>

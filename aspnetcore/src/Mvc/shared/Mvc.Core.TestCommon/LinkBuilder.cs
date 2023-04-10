@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public class LinkBuilder
 {
     public LinkBuilder(string url)

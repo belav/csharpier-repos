@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace System.Net.Quic;
 
+
 /// <summary>
 /// Shared options for both client (outbound) and server (inbound) <see cref="QuicConnection" />.
 /// </summary>

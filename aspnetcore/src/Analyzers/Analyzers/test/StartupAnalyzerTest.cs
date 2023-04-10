@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Testing;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 public class StartupAnalyzerTest
 {
     public StartupAnalyzerTest()

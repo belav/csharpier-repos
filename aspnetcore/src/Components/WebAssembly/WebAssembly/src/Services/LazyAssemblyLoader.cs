@@ -8,6 +8,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
+
 /// <summary>
 /// Provides a service for loading assemblies at runtime in a browser context.
 ///

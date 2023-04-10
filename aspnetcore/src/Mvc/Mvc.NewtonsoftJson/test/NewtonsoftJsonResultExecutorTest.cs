@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
+
 public class NewtonsoftJsonResultExecutorTest : JsonResultExecutorTestBase
 {
     protected override IActionResultExecutor<JsonResult> CreateExecutor(

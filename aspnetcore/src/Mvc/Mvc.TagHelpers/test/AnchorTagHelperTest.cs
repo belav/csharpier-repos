@@ -11,6 +11,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class AnchorTagHelperTest
 {
     [Fact]

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 public class AzureADB2CAuthenticationBuilderExtensionsTests
 {
     [Fact]

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 /// <summary>
 /// A factory for producing <see cref="CompiledPageActionDescriptor"/> given a <see cref="PageActionDescriptor"/>.
 /// </summary>

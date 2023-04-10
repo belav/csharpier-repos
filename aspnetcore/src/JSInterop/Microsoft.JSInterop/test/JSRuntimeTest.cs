@@ -9,6 +9,7 @@ using Microsoft.JSInterop.Infrastructure;
 
 namespace Microsoft.JSInterop;
 
+
 public class JSRuntimeTest
 {
     [Fact]

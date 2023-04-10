@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.Extensions.Caching.SqlServer;
 
+
 internal sealed class SqlQueries
 {
     private const string TableInfoFormat =

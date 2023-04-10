@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 internal static class ServerComponentSerializationSettings
 {
     public const string DataProtectionProviderPurpose =

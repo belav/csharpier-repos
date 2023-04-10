@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 /// <summary>
 ///     Event arguments for the <see cref="ChangeTracker.DetectedAllChanges" /> event.
 /// </summary>

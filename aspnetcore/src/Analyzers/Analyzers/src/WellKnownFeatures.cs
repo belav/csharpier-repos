@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 internal static class WellKnownFeatures
 {
     public const string SignalR = nameof(SignalR);

@@ -3,6 +3,7 @@ using System.IO;
 
 namespace System.CommandLine;
 
+
 internal static class Validate
 {
     internal static void FileExists(ArgumentResult result)

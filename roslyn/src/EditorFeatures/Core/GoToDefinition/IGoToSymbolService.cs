@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.GoToDefinition;
 
+
 internal interface IGoToSymbolService : ILanguageService
 {
     Task GetSymbolsAsync(GoToSymbolContext context);

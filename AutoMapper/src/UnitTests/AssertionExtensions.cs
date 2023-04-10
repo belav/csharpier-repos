@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public static class AssertionExtensions
 {
     public static void ShouldContain(this IEnumerable items, object item) =>

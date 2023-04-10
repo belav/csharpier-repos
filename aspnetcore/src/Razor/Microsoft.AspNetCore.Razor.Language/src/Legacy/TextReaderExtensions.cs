@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal static class TextReaderExtensions
 {
     public static string ReadUntil(this TextReader reader, char terminator)

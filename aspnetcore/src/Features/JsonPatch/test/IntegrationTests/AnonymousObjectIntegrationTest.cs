@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests;
 
+
 public class AnonymousObjectIntegrationTest
 {
     [Fact]

@@ -8,6 +8,7 @@ using System.Text.Encodings.Web;
 
 namespace Microsoft.AspNetCore.Html;
 
+
 /// <summary>
 /// An <see cref="IHtmlContent"/> implementation of composite string formatting
 /// (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd(v=vs.110).aspx"/>) which HTML encodes

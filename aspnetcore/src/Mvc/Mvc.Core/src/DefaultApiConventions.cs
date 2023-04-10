@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// Default api conventions.
 /// </summary>

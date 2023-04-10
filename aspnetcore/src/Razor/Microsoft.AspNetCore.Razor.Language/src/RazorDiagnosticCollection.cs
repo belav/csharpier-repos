@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public sealed class RazorDiagnosticCollection : IList<RazorDiagnostic>
 {
     private readonly List<RazorDiagnostic> _inner;

@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.Extensions.Localization;
 
+
 /// <summary>
 /// Represents a factory that creates <see cref="IStringLocalizer"/> instances.
 /// </summary>

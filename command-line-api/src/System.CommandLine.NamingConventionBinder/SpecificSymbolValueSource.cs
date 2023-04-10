@@ -5,6 +5,7 @@ using System.CommandLine.Binding;
 
 namespace System.CommandLine.NamingConventionBinder;
 
+
 internal class SpecificSymbolValueSource : IValueSource
 {
     public SpecificSymbolValueSource(IValueDescriptor valueDescriptor)

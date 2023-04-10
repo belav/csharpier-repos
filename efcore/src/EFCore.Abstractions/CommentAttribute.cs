@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Marks a class, property or field with a comment to be set on the corresponding database table or column.
 /// </summary>

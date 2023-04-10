@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace System.Reflection;
 
+
 internal static class EntityFrameworkMemberInfoExtensions
 {
     public static Type GetMemberType(this MemberInfo memberInfo) =>

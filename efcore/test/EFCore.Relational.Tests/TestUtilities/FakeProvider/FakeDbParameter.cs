@@ -5,6 +5,7 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
+
 public class FakeDbParameter : DbParameter
 {
     public override string ParameterName { get; set; }

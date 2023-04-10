@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing;
 
+
 public class RawInterpolatedStringLiteralParsingTests : CSharpTestBase
 {
     #region Single Line

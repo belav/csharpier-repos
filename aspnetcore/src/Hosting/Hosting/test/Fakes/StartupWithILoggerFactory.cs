@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
+
 public class StartupWithILoggerFactory
 {
     public ILoggerFactory ConstructorLoggerFactory { get; set; }

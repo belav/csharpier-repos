@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptorBuilder
 {
     private static readonly IReadOnlyDictionary<string, string> PrimitiveDisplayTypeNameLookups =

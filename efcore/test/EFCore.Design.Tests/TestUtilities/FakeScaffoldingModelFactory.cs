@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class FakeScaffoldingModelFactory : RelationalScaffoldingModelFactory
 {
     public FakeScaffoldingModelFactory(

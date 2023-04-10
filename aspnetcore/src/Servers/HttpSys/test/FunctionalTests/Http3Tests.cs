@@ -16,6 +16,7 @@ using Xunit;
 // I don't know if the client supports the HTTP/2 altsvc frame.
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 [MsQuicSupported] // Required by HttpClient
 [HttpSysHttp3Supported]
 public class Http3Tests

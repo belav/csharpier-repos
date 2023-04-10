@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal static class TagHelperMatchingConventions
 {
     public const string ElementCatchAllName = "*";

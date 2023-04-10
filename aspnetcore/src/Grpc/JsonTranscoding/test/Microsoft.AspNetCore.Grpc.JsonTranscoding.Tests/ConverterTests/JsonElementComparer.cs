@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.ConverterTests;
 
+
 public class JsonElementComparer : IEqualityComparer<JsonElement>
 {
     public JsonElementComparer()

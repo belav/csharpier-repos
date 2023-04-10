@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 public class NoContentFormatterTests
 {
     public static IEnumerable<object[]> OutputFormatterContextValues_CanWriteType

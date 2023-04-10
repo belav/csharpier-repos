@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.CustomMapping;
 
+
 public class NullableConverter : AutoMapperSpecBase
 {
     public enum GreekLetters

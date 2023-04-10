@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
+
 /// <summary>
 /// Defines the policy for Cross-Origin requests based on the CORS specifications.
 /// </summary>

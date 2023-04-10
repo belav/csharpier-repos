@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
+
 /// <summary>
 /// A <see cref="Stream"/> which throws on calls to write after the stream was upgraded
 /// </summary>

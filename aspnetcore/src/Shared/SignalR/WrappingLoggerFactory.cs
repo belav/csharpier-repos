@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 /// <summary>
 /// A logger factory that will prepend the current SignalR connection ID to the message.
 /// </summary>

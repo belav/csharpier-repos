@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class CollectionMapperMapsIEnumerableToISetIncorrectly
 {
     public class TypeWithStringProperty

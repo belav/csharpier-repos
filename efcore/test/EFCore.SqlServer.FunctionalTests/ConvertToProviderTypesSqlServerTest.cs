@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 [SqlServerCondition(SqlServerCondition.IsNotSqlAzure)]
 public class ConvertToProviderTypesSqlServerTest
     : ConvertToProviderTypesTestBase<ConvertToProviderTypesSqlServerTest.ConvertToProviderTypesSqlServerFixture>

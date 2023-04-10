@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 /// <summary>
 ///     Extends <see cref="ObservableCollection{T}" /> and adds an explicit implementation of <see cref="IListSource" />.
 /// </summary>

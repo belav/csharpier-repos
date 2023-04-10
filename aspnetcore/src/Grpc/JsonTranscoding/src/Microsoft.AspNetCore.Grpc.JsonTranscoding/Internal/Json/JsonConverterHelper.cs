@@ -16,6 +16,7 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
+
 internal static class JsonConverterHelper
 {
     internal const int WrapperValueFieldNumber = Int32Value.ValueFieldNumber;

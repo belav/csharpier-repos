@@ -11,6 +11,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+
 /// <summary>
 /// <see cref="CircuitRegistry"/> manages the lifetime of a <see cref="CircuitHost"/>.
 /// </summary>

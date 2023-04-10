@@ -8,6 +8,7 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal partial class ParserContext
 {
     public ParserContext(RazorSourceDocument source, RazorParserOptions options)

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 public abstract class DocumentWriter
 {
     public static DocumentWriter CreateDefault(

@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
+
 public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosFixture>
 {
     private const string DatabaseName = "EmbeddedDocumentsTest";

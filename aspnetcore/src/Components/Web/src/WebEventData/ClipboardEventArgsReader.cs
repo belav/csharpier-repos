@@ -7,6 +7,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 internal static class ClipboardEventArgsReader
 {
     private static readonly JsonEncodedText TypeKey = JsonEncodedText.Encode("type");

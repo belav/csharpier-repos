@@ -5,6 +5,7 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
+
 public class FakeDbCommand : DbCommand
 {
     private readonly FakeCommandExecutor _commandExecutor;

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys.Listener;
 
+
 internal static class Utilities
 {
     internal static readonly int WriteRetryLimit = 1000;

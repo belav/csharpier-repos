@@ -6,6 +6,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 /// <summary>
 /// Options for HttpLogging to configure which encoding to use for each media type.
 /// </summary>

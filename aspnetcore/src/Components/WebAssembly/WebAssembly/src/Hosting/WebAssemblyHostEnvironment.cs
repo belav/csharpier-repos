@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 internal sealed class WebAssemblyHostEnvironment : IWebAssemblyHostEnvironment
 {
     public WebAssemblyHostEnvironment(string environment, string baseAddress)

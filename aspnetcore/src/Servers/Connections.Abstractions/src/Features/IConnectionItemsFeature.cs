@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
+
 /// <summary>
 /// A bag of items associated with a given connection.
 /// </summary>

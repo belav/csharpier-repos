@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class IgnoreShouldBeInheritedIfConventionCannotMap
 {
     public class BaseDomain { }

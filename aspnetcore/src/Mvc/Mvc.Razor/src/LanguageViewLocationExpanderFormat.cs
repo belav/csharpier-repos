@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 /// <summary>
 /// Specifies the localized view format for <see cref="LanguageViewLocationExpander"/>.
 /// </summary>

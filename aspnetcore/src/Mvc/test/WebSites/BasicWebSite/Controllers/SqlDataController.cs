@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite;
 
+
 [NonController]
 public class SqlDataController
 {

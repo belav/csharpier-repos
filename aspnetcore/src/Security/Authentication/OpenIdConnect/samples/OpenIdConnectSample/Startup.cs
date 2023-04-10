@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace OpenIdConnectSample;
 
+
 public class Startup
 {
     public Startup(IConfiguration config, IWebHostEnvironment env)

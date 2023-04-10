@@ -10,6 +10,7 @@ using Polly.Registry;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extensions methods for configuring <see cref="PolicyHttpMessageHandler"/> message handlers as part of
 /// and <see cref="HttpClient"/> message handler pipeline.

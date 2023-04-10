@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 internal sealed class ConfigureSigningCredentials : IConfigureOptions<ApiAuthorizationOptions>
 {
     // We need to cast the underlying int value of the EphemeralKeySet to X509KeyStorageFlags

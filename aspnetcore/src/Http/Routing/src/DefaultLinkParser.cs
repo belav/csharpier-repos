@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
 {
     private readonly ParameterPolicyFactory _parameterPolicyFactory;

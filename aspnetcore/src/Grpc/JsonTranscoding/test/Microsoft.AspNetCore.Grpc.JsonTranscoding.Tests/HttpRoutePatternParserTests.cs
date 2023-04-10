@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 
+
 public class HttpRoutePatternParserTests
 {
     [Fact]

@@ -6,6 +6,7 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public static class TestProject
 {
     public static string GetProjectDirectory(string directoryHint)

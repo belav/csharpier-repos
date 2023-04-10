@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Provides methods to create a claims principal for a given user.
 /// </summary>

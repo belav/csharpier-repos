@@ -13,6 +13,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.HotReload;
 
+
 internal sealed class HotReloadService : IActionDescriptorChangeProvider, IDisposable
 {
     private readonly DefaultModelMetadataProvider? _modelMetadataProvider;

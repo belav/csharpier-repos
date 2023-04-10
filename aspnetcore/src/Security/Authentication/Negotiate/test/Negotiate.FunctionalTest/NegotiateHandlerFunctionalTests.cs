@@ -18,6 +18,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
+
 // In theory this would work on Linux and Mac, but the client would require explicit credentials.
 [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
 public class NegotiateHandlerFunctionalTests : LoggedTest

@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 internal sealed class HubGroupList
     : IReadOnlyCollection<ConcurrentDictionary<string, HubConnectionContext>>
 {

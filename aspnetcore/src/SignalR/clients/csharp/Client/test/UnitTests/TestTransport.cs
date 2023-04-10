@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
+
 public class TestTransport : ITransport
 {
     private readonly Func<Task> _stopHandler;

@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 /// <summary>
 /// A per-request authentication handler for the WsFederation.
 /// </summary>

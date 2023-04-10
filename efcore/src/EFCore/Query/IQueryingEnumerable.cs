@@ -5,6 +5,7 @@ using System.Collections;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         Interface that can be implemented by a database provider's <see cref="IEnumerable" /> implementation to

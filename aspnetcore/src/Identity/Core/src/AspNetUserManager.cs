@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Provides the APIs for managing user in a persistence store.
 /// </summary>

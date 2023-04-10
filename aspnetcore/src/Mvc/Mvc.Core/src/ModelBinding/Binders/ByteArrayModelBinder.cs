@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+
 /// <summary>
 /// ModelBinder to bind byte Arrays.
 /// </summary>

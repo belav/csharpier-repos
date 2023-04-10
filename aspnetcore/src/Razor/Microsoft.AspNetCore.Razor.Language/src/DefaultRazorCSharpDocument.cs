@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultRazorCSharpDocument : RazorCSharpDocument
 {
     private readonly string _generatedCode;

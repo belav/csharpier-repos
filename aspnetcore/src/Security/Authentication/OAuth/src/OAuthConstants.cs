@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.OAuth;
 
+
 /// <summary>
 /// Constants used in the OAuth protocol
 /// </summary>

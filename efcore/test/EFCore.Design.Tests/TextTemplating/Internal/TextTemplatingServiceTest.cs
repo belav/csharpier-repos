@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TextTemplating;
 
 namespace Microsoft.EntityFrameworkCore.TextTemplating.Internal;
 
+
 [PlatformSkipCondition(TestPlatform.Linux, SkipReason = "CI time out")]
 public class TextTemplatingServiceTest
 {

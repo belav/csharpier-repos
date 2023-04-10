@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 public class InputFileTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>, IDisposable
 {
     private string _tempDirectory;

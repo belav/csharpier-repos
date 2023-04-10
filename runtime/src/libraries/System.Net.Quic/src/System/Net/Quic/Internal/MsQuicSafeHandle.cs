@@ -6,6 +6,7 @@ using Microsoft.Quic;
 
 namespace System.Net.Quic;
 
+
 internal unsafe class MsQuicSafeHandle : SafeHandle
 {
     // The index must correspond to SafeHandleType enum value and the value must correspond to MsQuic logging abbreviation string.

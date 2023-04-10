@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
+
 /// <summary>
 /// Contains information about the login session as well as the user <see cref="System.Security.Claims.ClaimsIdentity"/>.
 /// </summary>

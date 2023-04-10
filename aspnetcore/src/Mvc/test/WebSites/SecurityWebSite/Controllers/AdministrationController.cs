@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SecurityWebSite.Controllers;
 
+
 // This controller is secured through the globally added authorize filter which
 // allows only authenticated users.
 public class AdministrationController : Controller

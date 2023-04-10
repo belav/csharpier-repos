@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 /// <summary>
 /// Contract for contextualizing a property activated by a view with the <see cref="ViewContext"/>.
 /// </summary>

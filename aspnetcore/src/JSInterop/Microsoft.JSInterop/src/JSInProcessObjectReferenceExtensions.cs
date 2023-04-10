@@ -6,6 +6,7 @@ using Microsoft.JSInterop.Infrastructure;
 
 namespace Microsoft.JSInterop;
 
+
 /// <summary>
 /// Extension methods for <see cref="IJSInProcessObjectReference"/>.
 /// </summary>

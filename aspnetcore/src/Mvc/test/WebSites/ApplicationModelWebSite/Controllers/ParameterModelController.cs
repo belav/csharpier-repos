@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ApplicationModelWebSite;
 
+
 // This controller uses a reflected model attribute to change a parameter's binder metadata.
 //
 // This could be accomplished by simply making an attribute that implements IBinderMetadata, but

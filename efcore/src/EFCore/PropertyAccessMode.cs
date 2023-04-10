@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Pass a value from this enum to <see cref="ModelBuilder.UsePropertyAccessMode" />,
 ///     <see cref="EntityTypeBuilder.UsePropertyAccessMode" />, or

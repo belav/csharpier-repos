@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Protocols.WsFederation;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 /// <summary>
 /// This Context can be used to be informed when an 'AuthorizationCode' is redeemed for tokens at the token endpoint.
 /// </summary>

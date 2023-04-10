@@ -5,6 +5,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
+
 internal sealed class BrowserFileStream : Stream
 {
     private long _position;

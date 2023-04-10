@@ -13,6 +13,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.WebSockets.Microbenchmarks;
 
+
 public class ResponseCachingBenchmark
 {
     private static readonly string _cacheControl =

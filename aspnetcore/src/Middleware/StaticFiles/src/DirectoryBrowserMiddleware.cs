@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 /// <summary>
 /// Enables directory browsing
 /// </summary>

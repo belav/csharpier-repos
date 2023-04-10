@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite.Startup>>
 {
     public XmlOutputFormatterTests(MvcTestFixture<FormatterWebSite.Startup> fixture)

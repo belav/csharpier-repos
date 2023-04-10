@@ -3,6 +3,7 @@ using OmmitedDTOModel3;
 
 namespace AutoMapper.UnitTests;
 
+
 public class MapAtRuntime : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>

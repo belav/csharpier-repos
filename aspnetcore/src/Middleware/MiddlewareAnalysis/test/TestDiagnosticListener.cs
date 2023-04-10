@@ -6,6 +6,7 @@ using Microsoft.Extensions.DiagnosticAdapter;
 
 namespace Microsoft.AspNetCore.MiddlewareAnalysis;
 
+
 public class TestDiagnosticListener
 {
     public IList<string> MiddlewareStarting { get; } = new List<string>();

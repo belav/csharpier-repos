@@ -10,6 +10,7 @@ using System.Xml;
 
 namespace RazorSyntaxGenerator;
 
+
 internal class SourceWriter : AbstractFileWriter
 {
     private SourceWriter(TextWriter writer, Tree tree)

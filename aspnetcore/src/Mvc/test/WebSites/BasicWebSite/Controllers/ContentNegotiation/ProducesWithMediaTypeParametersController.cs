@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
+
 public class ProducesWithMediaTypeParametersController : Controller
 {
     public override void OnActionExecuted(ActionExecutedContext context)

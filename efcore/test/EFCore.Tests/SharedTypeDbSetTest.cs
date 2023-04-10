@@ -5,6 +5,7 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class SharedTypeDbSetTest
 {
     [ConditionalFact]

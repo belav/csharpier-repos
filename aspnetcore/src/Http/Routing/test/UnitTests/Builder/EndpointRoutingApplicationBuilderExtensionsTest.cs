@@ -15,6 +15,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 public class EndpointRoutingApplicationBuilderExtensionsTest
 {
     [Fact]

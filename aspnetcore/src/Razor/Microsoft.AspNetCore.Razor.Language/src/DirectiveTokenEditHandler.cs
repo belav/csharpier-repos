@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DirectiveTokenEditHandler : SpanEditHandler
 {
     public DirectiveTokenEditHandler(

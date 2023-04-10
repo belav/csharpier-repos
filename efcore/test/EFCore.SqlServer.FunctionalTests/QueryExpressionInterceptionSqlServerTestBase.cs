@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class QueryExpressionInterceptionSqlServerTestBase
     : QueryExpressionInterceptionTestBase
 {

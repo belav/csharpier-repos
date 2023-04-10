@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Session;
 
+
 /// <summary>
 /// An <see cref="ISessionStore"/> backed by an <see cref="IDistributedCache"/>.
 /// </summary>

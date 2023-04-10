@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
+
 public class RequestHeadersTimeoutTests : LoggedTest
 {
     private static readonly TimeSpan RequestHeadersTimeout = TimeSpan.FromSeconds(10);

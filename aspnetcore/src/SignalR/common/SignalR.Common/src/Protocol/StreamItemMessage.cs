@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
+
 /// <summary>
 /// Represents a single item of an active stream.
 /// </summary>

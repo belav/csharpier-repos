@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewEngines;
 
+
 /// <summary>
 /// Defines the contract for a view engine.
 /// </summary>

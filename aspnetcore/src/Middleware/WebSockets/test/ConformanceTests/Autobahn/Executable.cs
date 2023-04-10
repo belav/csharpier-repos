@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn;
 
+
 public class Executable
 {
     private static readonly string _exeSuffix = OperatingSystem.IsWindows() ? ".exe" : string.Empty;

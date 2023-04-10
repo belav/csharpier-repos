@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 internal sealed class FilterDescriptorOrderComparer : IComparer<FilterDescriptor>
 {
     public static FilterDescriptorOrderComparer Comparer { get; } =

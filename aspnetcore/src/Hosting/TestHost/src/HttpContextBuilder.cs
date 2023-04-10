@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.TestHost;
 
+
 internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFeature
 {
     private readonly ApplicationWrapper _application;

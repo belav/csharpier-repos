@@ -9,6 +9,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// <see cref="IHealthChecksBuilder"/> extension methods for Entity Framework Core.
 /// </summary>

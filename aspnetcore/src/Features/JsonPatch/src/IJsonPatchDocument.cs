@@ -7,6 +7,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
+
 public interface IJsonPatchDocument
 {
     IContractResolver ContractResolver { get; set; }

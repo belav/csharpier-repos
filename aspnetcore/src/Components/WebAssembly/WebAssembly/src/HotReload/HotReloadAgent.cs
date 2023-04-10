@@ -11,6 +11,7 @@ using System.Reflection.Metadata;
 
 namespace Microsoft.Extensions.HotReload;
 
+
 internal sealed class HotReloadAgent : IDisposable
 {
     /// Flags for hot reload handler Types like MVC's HotReloadService.

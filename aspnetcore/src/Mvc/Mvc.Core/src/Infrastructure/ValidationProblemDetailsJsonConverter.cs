@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 internal sealed class ValidationProblemDetailsJsonConverter
     : JsonConverter<ValidationProblemDetails>
 {

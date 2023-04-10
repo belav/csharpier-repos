@@ -3,6 +3,7 @@
 
 namespace System.IO;
 
+
 /// <summary>
 /// <para>Represents the Unix filesystem permissions.</para>
 /// <para>This enumeration supports a bitwise combination of its member values.</para>

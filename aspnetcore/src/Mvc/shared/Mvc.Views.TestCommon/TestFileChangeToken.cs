@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.Primitives;
 
+
 public class TestFileChangeToken : IChangeToken
 {
     public TestFileChangeToken(string filter = "")

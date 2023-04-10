@@ -9,6 +9,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
+
 /// <summary>
 /// Writes to the HTTP response <see cref="Stream"/> using the supplied <see cref="System.Text.Encoding"/>.
 /// It does not write the BOM and also does not close the stream.

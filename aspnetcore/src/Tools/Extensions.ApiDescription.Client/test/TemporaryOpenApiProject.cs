@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.Extensions.Tools.Internal;
 
+
 public class TemporaryOpenApiProject : TemporaryCSharpProject
 {
     public TemporaryOpenApiProject(string name, TemporaryDirectory directory, string sdk)

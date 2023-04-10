@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// A <see cref="IConfigureOptions{TOptions}"/> implementation which will add the
 /// data contract serializer formatters to <see cref="MvcOptions"/>.

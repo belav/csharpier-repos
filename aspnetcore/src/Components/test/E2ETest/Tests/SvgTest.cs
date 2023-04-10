@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 public class SvgTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
     public SvgTest(

@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 /// <summary>
 ///     <para>
 ///         Represents an update, insert, or delete operation for a single column. <see cref="IReadOnlyModificationCommand" />

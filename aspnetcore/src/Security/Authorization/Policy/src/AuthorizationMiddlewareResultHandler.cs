@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authorization.Policy;
 
+
 /// <summary>
 /// Default implementation for <see cref="IAuthorizationMiddlewareResultHandler"/>.
 /// </summary>

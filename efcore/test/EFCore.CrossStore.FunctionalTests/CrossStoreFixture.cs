@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class CrossStoreFixture : FixtureBase
 {
     public DbContextOptions CreateOptions(TestStore testStore) =>

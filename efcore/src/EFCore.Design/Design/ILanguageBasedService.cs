@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     Represents a service that gets resolved based on the programming language it supports.
 /// </summary>

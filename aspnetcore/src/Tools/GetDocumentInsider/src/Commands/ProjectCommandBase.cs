@@ -6,6 +6,7 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
+
 internal abstract class ProjectCommandBase : HelpCommandBase
 {
     public ProjectCommandBase(IConsole console)

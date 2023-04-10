@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
+
 internal static class Constants
 {
     public const int MaxExceptionDetailSize = 128;

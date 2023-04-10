@@ -11,6 +11,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
+
 public class CngCbcAuthenticatedEncryptorFactoryTest
 {
     [Fact]

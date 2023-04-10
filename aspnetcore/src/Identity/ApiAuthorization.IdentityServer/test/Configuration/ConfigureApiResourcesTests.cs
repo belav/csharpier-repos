@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 public class ConfigureApiResourcesTests
 {
     [Fact]

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace CookieSessionSample;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

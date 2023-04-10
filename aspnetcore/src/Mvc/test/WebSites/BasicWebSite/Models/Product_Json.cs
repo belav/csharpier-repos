@@ -3,4 +3,5 @@
 
 namespace BasicWebSite.Models;
 
+
 public class Product_Json : Product { }

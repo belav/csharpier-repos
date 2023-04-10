@@ -9,6 +9,7 @@ using StackExchange.Redis.Profiling;
 
 namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 
+
 /// <summary>
 /// Configuration options for <see cref="RedisCache"/>.
 /// </summary>

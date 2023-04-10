@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.TestObjects;
 
+
 public class UpperCaseParameterTransform : IOutboundParameterTransformer
 {
     public string TransformOutbound(object value)

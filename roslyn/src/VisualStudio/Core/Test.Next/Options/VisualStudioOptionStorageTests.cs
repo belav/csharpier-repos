@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
+
 public class VisualStudioOptionStorageTests
 {
     [Fact]

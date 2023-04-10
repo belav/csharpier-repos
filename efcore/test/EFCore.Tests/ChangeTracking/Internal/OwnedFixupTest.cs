@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
+
 public class OwnedFixupTest
 {
     private class Thing

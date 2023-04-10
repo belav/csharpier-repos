@@ -7,6 +7,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public sealed class SourceMapping : IEquatable<SourceMapping>
 {
     public SourceMapping(SourceSpan originalSpan, SourceSpan generatedSpan)

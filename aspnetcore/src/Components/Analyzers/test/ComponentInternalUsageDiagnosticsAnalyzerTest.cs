@@ -6,6 +6,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
+
 public class ComponentInternalUsageDiagnosticsAnalyzerTest : AnalyzerTestBase
 {
     public ComponentInternalUsageDiagnosticsAnalyzerTest()

@@ -21,6 +21,7 @@ using Grpc.Net.Client;
 
 namespace InteropTestsClient;
 
+
 public interface IChannelWrapper
 {
     ChannelBase Channel { get; }

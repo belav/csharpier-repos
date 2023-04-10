@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 // We use this type to capture calls to the IWebHostBuilder so the we can properly order calls to
 // to GenericHostWebHostBuilder.
 internal sealed class HostingStartupWebHostBuilder

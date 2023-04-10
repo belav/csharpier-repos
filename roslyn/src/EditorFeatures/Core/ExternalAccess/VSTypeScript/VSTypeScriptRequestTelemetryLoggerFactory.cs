@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.LanguageServer.Handler;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
+
 [
     ExportLspServiceFactory(
         typeof(RequestTelemetryLogger),

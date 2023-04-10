@@ -5,6 +5,7 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public abstract class RelationalTestStore : TestStore
 {
     public virtual string ConnectionString { get; protected set; }

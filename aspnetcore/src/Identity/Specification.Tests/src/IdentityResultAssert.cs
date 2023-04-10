@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 /// <summary>
 /// Helper for tests to validate identity results.
 /// </summary>

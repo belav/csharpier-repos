@@ -10,6 +10,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Components.WebView;
 
+
 /// <summary>
 /// Manages activities within a web view that hosts Razor components. Platform authors
 /// should subclass this to wire up the abstract and protected methods to the APIs of

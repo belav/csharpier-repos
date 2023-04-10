@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     <para>
 ///         Represents operations backed by compiled delegates that support setting the value

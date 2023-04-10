@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 /// <summary>
 ///     <para>
 ///         A factory for key values based on the foreign key values taken from various forms of entity data.

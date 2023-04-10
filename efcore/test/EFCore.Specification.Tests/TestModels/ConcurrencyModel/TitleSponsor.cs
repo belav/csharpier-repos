@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public class TitleSponsor : Sponsor
 {
     public class TitleSponsorProxy : TitleSponsor, IF1Proxy

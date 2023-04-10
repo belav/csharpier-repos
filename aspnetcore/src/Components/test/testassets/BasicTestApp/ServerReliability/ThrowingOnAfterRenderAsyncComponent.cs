@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace BasicTestApp.ServerReliability;
 
+
 public class ThrowingOnAfterRenderAsyncComponent : IComponent, IHandleAfterRender
 {
     public void Attach(RenderHandle renderHandle)

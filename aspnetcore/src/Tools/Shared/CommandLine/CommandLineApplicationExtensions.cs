@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.CommandLineUtils;
 
+
 internal static class CommandLineApplicationExtensions
 {
     public static CommandOption HelpOption(this CommandLineApplication app) =>

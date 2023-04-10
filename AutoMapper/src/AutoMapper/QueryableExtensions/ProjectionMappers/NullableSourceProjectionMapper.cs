@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.QueryableExtensions.Impl;
 
+
 internal class NullableSourceProjectionMapper : IProjectionMapper
 {
     public Expression Project(

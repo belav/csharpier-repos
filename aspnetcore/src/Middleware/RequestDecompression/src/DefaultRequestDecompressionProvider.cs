@@ -9,6 +9,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.RequestDecompression;
 
+
 /// <inheritdoc />
 internal sealed partial class DefaultRequestDecompressionProvider : IRequestDecompressionProvider
 {

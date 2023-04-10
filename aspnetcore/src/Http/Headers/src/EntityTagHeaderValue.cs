@@ -7,6 +7,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
+
 /// <summary>
 /// Represents an entity-tag (<c>etag</c>) header value.
 /// </summary>

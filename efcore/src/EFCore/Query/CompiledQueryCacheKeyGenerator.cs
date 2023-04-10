@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <inheritdoc />
 public class CompiledQueryCacheKeyGenerator : ICompiledQueryCacheKeyGenerator
 {

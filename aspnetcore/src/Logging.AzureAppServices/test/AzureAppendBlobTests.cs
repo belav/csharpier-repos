@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
+
 public class AzureAppendBlobTests
 {
     public string _containerUrl = "https://host/container?query=1";

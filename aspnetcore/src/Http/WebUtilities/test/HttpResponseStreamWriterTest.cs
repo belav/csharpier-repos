@@ -7,6 +7,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
+
 public class HttpResponseStreamWriterTest
 {
     private const int DefaultCharacterChunkSize = HttpResponseStreamWriter.DefaultBufferSize;

@@ -9,6 +9,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+
 public class RemoteJSRuntimeTest
 {
     [Fact]

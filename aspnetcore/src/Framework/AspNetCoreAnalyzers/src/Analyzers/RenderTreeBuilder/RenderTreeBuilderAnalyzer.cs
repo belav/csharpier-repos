@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Analyzers.RenderTreeBuilder;
 
+
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public partial class RenderTreeBuilderAnalyzer : DiagnosticAnalyzer
 {

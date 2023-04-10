@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity.UI;
 
+
 [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
 internal sealed class IdentityDefaultUIAttribute : Attribute
 {

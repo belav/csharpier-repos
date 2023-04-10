@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Options used to configure a <see cref="JsonHubProtocol"/> instance.
 /// </summary>

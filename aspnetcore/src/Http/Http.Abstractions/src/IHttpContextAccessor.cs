@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// Provides access to the current <see cref="HttpContext"/>, if one is available.
 /// </summary>

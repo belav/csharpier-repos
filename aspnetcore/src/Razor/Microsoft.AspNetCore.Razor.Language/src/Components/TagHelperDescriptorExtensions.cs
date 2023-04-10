@@ -8,6 +8,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 internal static class TagHelperDescriptorExtensions
 {
     public static bool IsAnyComponentDocumentTagHelper(this TagHelperDescriptor tagHelper)

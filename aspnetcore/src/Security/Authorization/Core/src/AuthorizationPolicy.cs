@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization;
 
+
 /// <summary>
 /// Represents a collection of authorization requirements and the scheme or
 /// schemes they are evaluated against, all of which must succeed

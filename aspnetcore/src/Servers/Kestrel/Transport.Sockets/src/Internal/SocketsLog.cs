@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal;
 
+
 internal static partial class SocketsLog
 {
     // Reserved: Event ID 3, EventName = ConnectionRead

@@ -8,6 +8,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.Extensions.Logging.Testing.Tests;
 
+
 public class LogValuesAssertTest
 {
     public static TheoryData<

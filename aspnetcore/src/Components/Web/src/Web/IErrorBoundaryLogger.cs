@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 // The reason this abstraction exists is that logging behaviors differ across hosting platforms.
 // For example, Blazor Server logs to both the server and client, whereas WebAssembly has only one log.
 

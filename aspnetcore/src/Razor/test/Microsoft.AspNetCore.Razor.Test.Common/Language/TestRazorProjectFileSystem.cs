@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class TestRazorProjectFileSystem : DefaultRazorProjectFileSystem
 {
     public static new RazorProjectFileSystem Empty = new TestRazorProjectFileSystem();

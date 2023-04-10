@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 internal class SyntaxTrivia : SyntaxNode
 {
     internal SyntaxTrivia(GreenNode green, SyntaxNode parent, int position)

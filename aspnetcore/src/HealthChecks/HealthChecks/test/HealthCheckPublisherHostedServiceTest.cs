@@ -17,6 +17,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
+
 public class HealthCheckPublisherHostedServiceTest
 {
     private static class DefaultHealthCheckEventIds

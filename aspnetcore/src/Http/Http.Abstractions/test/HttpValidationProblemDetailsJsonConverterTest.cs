@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Json;
 
 namespace Microsoft.AspNetCore.Http.Abstractions.Tests;
 
+
 public class HttpValidationProblemDetailsJsonConverterTest
 {
     private static JsonSerializerOptions JsonSerializerOptions =>

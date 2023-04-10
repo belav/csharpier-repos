@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
+
 /// <summary>
 /// A default implementation of <see cref="ICompositeMetadataDetailsProvider"/>.
 /// </summary>

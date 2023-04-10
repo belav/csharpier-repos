@@ -19,6 +19,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public class MvcCoreServiceCollectionExtensionsTest
 {
     // Some MVC services can be registered multiple times, for example, 'IConfigureOptions<MvcOptions>' can

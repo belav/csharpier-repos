@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+
 public class RedirectResultTests : RedirectResultTestBase
 {
     [Fact]

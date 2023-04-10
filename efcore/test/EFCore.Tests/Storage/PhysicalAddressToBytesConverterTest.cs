@@ -5,6 +5,7 @@ using System.Net.NetworkInformation;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class PhysicalAddressToBytesConverterTest
 {
     private static readonly PhysicalAddressToBytesConverter _physicalAddressToBytes = new();

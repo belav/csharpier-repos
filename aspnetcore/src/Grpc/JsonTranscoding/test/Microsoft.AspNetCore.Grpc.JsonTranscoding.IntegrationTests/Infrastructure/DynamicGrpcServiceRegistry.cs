@@ -18,6 +18,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests.Infrastructure;
 
+
 /// <summary>
 /// Used by tests to add new service methods.
 /// </summary>

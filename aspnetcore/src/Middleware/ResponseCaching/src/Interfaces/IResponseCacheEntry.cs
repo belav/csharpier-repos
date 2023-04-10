@@ -3,4 +3,5 @@
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
+
 internal interface IResponseCacheEntry { }

@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that configures the default model <see cref="SqlServerValueGenerationStrategy" /> as
 ///     <see cref="SqlServerValueGenerationStrategy.IdentityColumn" />.

@@ -10,6 +10,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 public class MaxLengthAttributeAdapterTest
 {
     [Fact]

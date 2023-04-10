@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CustomAuthorizationFailureResponse.Authorization.Handlers;
 
+
 public class SampleWithFailureReasonRequirementHandler
     : AuthorizationHandler<SampleFailReasonRequirement>
 {

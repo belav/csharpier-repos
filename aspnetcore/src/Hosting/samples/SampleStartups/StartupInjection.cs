@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace SampleStartups;
 
+
 public class StartupInjection : IHostingStartup
 {
     public void Configure(IWebHostBuilder builder)

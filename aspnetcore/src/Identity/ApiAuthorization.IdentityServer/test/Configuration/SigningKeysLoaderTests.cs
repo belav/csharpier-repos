@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
+
 public class SigningKeysLoaderTests
 {
     // We need to cast the underlying int value of the EphemeralKeySet to X509KeyStorageFlags

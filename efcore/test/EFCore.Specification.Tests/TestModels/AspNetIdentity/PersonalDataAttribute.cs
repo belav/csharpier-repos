@@ -3,4 +3,5 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
+
 public class PersonalDataAttribute : Attribute { }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Facebook;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods to configure Facebook OAuth authentication.
 /// </summary>

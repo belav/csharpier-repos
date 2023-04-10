@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
+
 public class UnidirectionalJoinTwoToThree
 {
     public virtual int TwoId { get; set; }

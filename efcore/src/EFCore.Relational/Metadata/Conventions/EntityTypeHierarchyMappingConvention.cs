@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that removes discriminators from non-TPH entity types and unmaps the inherited properties for TPT entity types.
 /// </summary>

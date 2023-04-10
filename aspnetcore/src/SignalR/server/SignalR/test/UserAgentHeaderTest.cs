@@ -9,6 +9,7 @@ using Constants = Microsoft.AspNetCore.Http.Connections.Client.Internal.Constant
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
+
 public class UserAgentHeaderTest
 {
     [Theory]

@@ -12,6 +12,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : LazyLoadProxyTestBase<TFixture>.LoadFixtureBase
 {

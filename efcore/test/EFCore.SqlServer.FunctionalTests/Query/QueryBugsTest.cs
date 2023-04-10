@@ -24,6 +24,7 @@ using Newtonsoft.Json.Linq;
 // ReSharper disable UnusedMember.Local
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class QueryBugsTest : NonSharedModelTestBase
 {
     // ReSharper disable once UnusedParameter.Local

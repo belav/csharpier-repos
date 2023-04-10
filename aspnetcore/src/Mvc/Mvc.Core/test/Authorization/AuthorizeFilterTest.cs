@@ -16,6 +16,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Authorization;
 
+
 public class AuthorizeFilterTest
 {
     private readonly ActionContext ActionContext = new ActionContext(

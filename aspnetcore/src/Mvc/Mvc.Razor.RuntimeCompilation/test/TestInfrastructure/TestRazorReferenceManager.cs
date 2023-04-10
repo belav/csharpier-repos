@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
+
 internal class TestRazorReferenceManager : RazorReferenceManager
 {
     public TestRazorReferenceManager()

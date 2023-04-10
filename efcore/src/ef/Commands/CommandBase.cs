@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
+
 internal abstract class CommandBase
 {
     public virtual void Configure(CommandLineApplication command)

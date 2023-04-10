@@ -16,6 +16,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 public class RouteTest
 {
     private static readonly RequestDelegate NullHandler = (c) => Task.CompletedTask;

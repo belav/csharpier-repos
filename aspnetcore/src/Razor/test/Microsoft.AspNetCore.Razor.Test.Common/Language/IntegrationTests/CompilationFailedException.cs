@@ -9,6 +9,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public class CompilationFailedException : XunitException
 {
     public CompilationFailedException(Compilation compilation, Diagnostic[] diagnostics)

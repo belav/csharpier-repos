@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Routing.DecisionTree;
 
+
 internal sealed class DecisionCriterion<TItem>
 {
     public string Key { get; set; }

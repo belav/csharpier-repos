@@ -11,6 +11,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 public class CertificateXmlEncryptorTests
 {
     [Fact]

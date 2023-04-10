@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.StaticFiles.Infrastructure;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Options for serving static files
 /// </summary>

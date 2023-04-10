@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
+
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class ComponentParameterUsageAnalyzer : DiagnosticAnalyzer
 {

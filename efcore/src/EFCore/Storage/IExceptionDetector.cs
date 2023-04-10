@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     Used by EF internal code and database providers to detect various types of exceptions.
 /// </summary>

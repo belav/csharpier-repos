@@ -15,6 +15,7 @@ using System.Reflection.Metadata;
 
 namespace Microsoft.Extensions.Internal;
 
+
 internal sealed class PropertyHelper
 {
     private const BindingFlags DeclaredOnlyLookup =

@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace NativeIISSample;
 
+
 public class Startup
 {
     private readonly IAuthenticationSchemeProvider _authSchemeProvider;

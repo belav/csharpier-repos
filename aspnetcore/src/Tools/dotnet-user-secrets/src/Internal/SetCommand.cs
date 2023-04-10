@@ -9,6 +9,7 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
+
 internal sealed class SetCommand
 {
     public static void Configure(

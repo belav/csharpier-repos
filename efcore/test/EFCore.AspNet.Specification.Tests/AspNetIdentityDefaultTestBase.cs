@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class AspNetIdentityDefaultTestBase<TFixture>
     : AspNetIdentityTestBase<
         TFixture,

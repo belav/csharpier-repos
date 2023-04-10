@@ -18,6 +18,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
+
 internal static class JsonRequestHelpers
 {
     public const string JsonContentType = "application/json";

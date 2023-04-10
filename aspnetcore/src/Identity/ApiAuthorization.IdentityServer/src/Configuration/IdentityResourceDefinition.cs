@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 internal sealed class IdentityResourceDefinition : ResourceDefinition
 {
     public IdentityResourceDefinition()

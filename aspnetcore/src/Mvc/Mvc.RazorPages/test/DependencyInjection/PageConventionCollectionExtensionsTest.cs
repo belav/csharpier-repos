@@ -13,6 +13,7 @@ using Moq;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 public class PageConventionCollectionExtensionsTest
 {
     [Fact]

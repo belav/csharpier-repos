@@ -1,5 +1,6 @@
 namespace AutoMapper.UnitTests.MappingInheritance;
 
+
 public class IncludeBaseWithNonGenericUsage : AutoMapperSpecBase
 {
     class Source : SourceBase<string> { }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 internal static class ActionAttributeRouteModel
 {
     public static IEnumerable<SelectorModel> FlattenSelectors(ActionModel actionModel)

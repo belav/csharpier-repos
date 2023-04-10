@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class StoreGeneratedInMemoryTest
 {
     [ConditionalFact]

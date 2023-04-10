@@ -7,6 +7,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace HtmlGenerationWebSite;
 
+
 public class Startup
 {
     // Set up application services

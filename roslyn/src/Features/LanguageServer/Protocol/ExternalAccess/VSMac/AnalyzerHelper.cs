@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.ExternalAccess.VSMac;
 
+
 internal static class AnalyzerHelper
 {
     public static DiagnosticData CreateAnalyzerLoadFailureDiagnostic(

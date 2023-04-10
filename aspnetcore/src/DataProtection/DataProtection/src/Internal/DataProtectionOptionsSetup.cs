@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.DataProtection.Internal;
 
+
 internal sealed class DataProtectionOptionsSetup : IConfigureOptions<DataProtectionOptions>
 {
     private readonly IServiceProvider _services;

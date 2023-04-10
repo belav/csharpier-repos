@@ -19,6 +19,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 public class DefaultHtmlGeneratorTest
 {
     [Theory]

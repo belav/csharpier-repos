@@ -8,4 +8,5 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.JsonPatch.Test.Adapters;
 
+
 public class TestDynamicObject : DynamicObject { }

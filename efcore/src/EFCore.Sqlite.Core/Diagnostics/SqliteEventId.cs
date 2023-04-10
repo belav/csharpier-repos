@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Diagnostics.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     Event IDs for SQLite events that correspond to messages logged to an <see cref="ILogger" />
 ///     and events sent to a <see cref="DiagnosticSource" />.

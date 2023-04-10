@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public abstract class ComponentCodeGenerationTestBase : RazorBaselineIntegrationTestBase
 {
     private RazorConfiguration _configuration;

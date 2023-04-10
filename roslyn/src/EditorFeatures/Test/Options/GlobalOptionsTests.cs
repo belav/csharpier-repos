@@ -38,6 +38,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
+
 [UseExportProvider]
 public class GlobalOptionsTests
 {

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Connections;
 
+
 /// <summary>
 /// The default implementation for the <see cref="ConnectionContext"/>.
 /// </summary>

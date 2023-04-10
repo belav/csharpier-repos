@@ -9,6 +9,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
+
 public class ServerAuthTest : AuthTest
 {
     public ServerAuthTest(

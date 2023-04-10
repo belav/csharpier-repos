@@ -6,6 +6,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
+
 /// <summary>
 /// Helper class which provides <see cref="JsonSerializerSettings"/>.
 /// </summary>

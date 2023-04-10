@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 internal sealed class HttpValidationProblemDetailsJsonConverter
     : JsonConverter<HttpValidationProblemDetails>
 {

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
+
 [Route("/{controller:slugify}")]
 public class EndpointRoutingController : Controller
 {

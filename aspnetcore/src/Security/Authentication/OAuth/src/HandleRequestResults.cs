@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.OAuth;
 
+
 internal static class HandleRequestResults
 {
     internal static HandleRequestResult InvalidState = HandleRequestResult.Fail(

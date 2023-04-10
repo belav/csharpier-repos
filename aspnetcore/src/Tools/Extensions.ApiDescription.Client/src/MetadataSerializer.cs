@@ -8,6 +8,7 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.Extensions.ApiDescription.Client;
 
+
 /// <summary>
 /// Utility methods to serialize and deserialize <see cref="ITaskItem"/> metadata.
 /// </summary>

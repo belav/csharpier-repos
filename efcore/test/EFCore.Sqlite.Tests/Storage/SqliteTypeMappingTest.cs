@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class SqliteTypeMappingTest : RelationalTypeMappingTest
 {
     private class YouNoTinyContext : DbContext

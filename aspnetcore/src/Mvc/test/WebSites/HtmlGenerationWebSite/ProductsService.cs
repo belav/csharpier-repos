@@ -6,6 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace HtmlGenerationWebSite;
 
+
 public class ProductsService
 {
     private readonly IMemoryCache _memoryCache;

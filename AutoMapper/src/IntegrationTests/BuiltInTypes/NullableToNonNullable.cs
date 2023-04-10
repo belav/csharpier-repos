@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.BuiltInTypes;
 
+
 public class NullableLongToLong : IntegrationTest<NullableLongToLong.DatabaseInitializer>
 {
     public class Customer

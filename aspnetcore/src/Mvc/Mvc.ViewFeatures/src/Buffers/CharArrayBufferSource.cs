@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
+
 internal sealed class CharArrayBufferSource : ICharBufferSource
 {
     public static readonly CharArrayBufferSource Instance = new CharArrayBufferSource();

@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class HubConnectionHandlerTestUtils
 {
     public static Type GetConnectionHandlerType(Type hubType)

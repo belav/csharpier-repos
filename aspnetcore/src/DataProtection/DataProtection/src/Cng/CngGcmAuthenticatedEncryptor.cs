@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.DataProtection.SP800_108;
 
 namespace Microsoft.AspNetCore.DataProtection.Cng;
 
+
 // GCM is defined in NIST SP 800-38D (http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf).
 // Heed closely the uniqueness requirements called out in Sec. 8: the probability that the GCM encryption
 // routine is ever invoked on two or more distinct sets of input data with the same (key, IV) shall not

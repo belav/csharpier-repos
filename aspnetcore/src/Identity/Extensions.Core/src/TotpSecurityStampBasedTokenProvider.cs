@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Represents a token provider that generates time-based codes using the user's security stamp.
 /// </summary>

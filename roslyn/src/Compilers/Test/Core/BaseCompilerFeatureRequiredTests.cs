@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
+
 public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : CommonTestBase
     where TCompilation : Compilation
 {

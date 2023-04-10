@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 /// <summary>
 /// Represents an <see cref="Endpoint"/> that can be used in URL matching or URL generation.
 /// </summary>

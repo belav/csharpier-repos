@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ErrorPageMiddlewareWebSite;
 
+
 public class AggregateExceptionController : Controller
 {
     [HttpGet("/AggregateException")]

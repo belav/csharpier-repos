@@ -13,6 +13,7 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
+
 [
     ExportStatelessLspService(
         typeof(IRequestExecutionQueueProvider<RequestContext>),

@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace Microsoft.Extensions.ObjectPool;
 
+
 internal sealed class DisposableObjectPool<T> : DefaultObjectPool<T>, IDisposable
     where T : class
 {

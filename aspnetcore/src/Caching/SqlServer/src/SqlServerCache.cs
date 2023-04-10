@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Caching.SqlServer;
 
+
 /// <summary>
 /// Distributed cache implementation using Microsoft SQL Server database.
 /// </summary>

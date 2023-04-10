@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner.ConferenceDTO;
 
+
 public class SessionResponse : Session
 {
     public Track Track { get; set; }

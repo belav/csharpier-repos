@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Connections;
 
 namespace SocialWeather;
 
+
 public class SocialWeatherConnectionHandler : ConnectionHandler
 {
     private readonly PersistentConnectionLifeTimeManager _lifetimeManager;

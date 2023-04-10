@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 public class RouteKeyTest
 {
     [Fact]

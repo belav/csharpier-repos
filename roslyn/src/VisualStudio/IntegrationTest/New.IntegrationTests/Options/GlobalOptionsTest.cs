@@ -23,6 +23,7 @@ using Xunit;
 
 namespace Roslyn.VisualStudio.NewIntegrationTests.Options;
 
+
 public sealed class GlobalOptionsTest : AbstractIntegrationTest
 {
     public GlobalOptionsTest() { }

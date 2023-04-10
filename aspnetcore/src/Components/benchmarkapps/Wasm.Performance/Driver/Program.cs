@@ -13,6 +13,7 @@ using DevHostServerProgram = Microsoft.AspNetCore.Components.WebAssembly.DevServ
 
 namespace Wasm.Performance.Driver;
 
+
 public class Program
 {
     internal static TaskCompletionSource<BenchmarkResult> BenchmarkResultTask;

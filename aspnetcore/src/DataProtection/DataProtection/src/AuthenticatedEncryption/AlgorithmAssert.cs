@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cryptography;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
+
 internal static class AlgorithmAssert
 {
     // Our analysis re: IV collision resistance for CBC only holds if we're working with block ciphers

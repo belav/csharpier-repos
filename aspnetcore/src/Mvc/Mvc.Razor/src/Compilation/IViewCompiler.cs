@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
+
 /// <summary>
 /// Represents a view compiler.
 /// </summary>

@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.JsonQuery;
 
+
 public class JsonOwnedCustomNameRoot
 {
     [JsonPropertyName("CustomName")]

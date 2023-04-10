@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 // Razor.Language doesn't reference Microsoft.CodeAnalysis.CSharp so we
 // need some indirection.
 internal abstract class TypeNameRewriter

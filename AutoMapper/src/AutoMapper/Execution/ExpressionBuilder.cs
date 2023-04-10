@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 
 namespace AutoMapper.Execution;
+
 using static Internal.ReflectionHelper;
 
 [EditorBrowsable(EditorBrowsableState.Never)]

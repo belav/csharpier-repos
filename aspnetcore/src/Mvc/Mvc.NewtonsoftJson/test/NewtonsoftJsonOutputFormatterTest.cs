@@ -15,6 +15,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 public class NewtonsoftJsonOutputFormatterTest : JsonOutputFormatterTestBase
 {
     protected override TextOutputFormatter GetOutputFormatter()

@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class ConfigurationRules : NonValidatingSpecBase
 {
     public class Source { }

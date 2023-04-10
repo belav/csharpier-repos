@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 public class AdaptiveCapacityDictionaryBenchmark
 {
     private AdaptiveCapacityDictionary<string, string> _smallCapDict;

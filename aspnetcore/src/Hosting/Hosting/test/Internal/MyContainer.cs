@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting.Tests.Internal;
 
+
 public class MyContainer : IServiceProvider
 {
     private IServiceProvider _inner;

@@ -5,6 +5,7 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class DirectivesTest : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>
 {
     public DirectivesTest(MvcTestFixture<RazorWebSite.Startup> fixture)

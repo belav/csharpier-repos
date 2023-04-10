@@ -8,6 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis;
 
+
 /// <summary>
 /// Well known encodings. Used to distinguish serialized encodings with BOM and without BOM.
 /// </summary>

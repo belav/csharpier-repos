@@ -6,6 +6,7 @@ using System.Text;
 
 namespace ResultsOfTGenerator;
 
+
 public class Program
 {
     private const int TYPE_ARG_COUNT = 6;

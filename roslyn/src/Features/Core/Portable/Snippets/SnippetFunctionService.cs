@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis;
 
+
 internal abstract class SnippetFunctionService : ILanguageService
 {
     /// <summary>

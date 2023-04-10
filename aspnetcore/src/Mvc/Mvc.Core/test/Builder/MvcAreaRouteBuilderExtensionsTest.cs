@@ -9,6 +9,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 public class MvcAreaRouteBuilderExtensionsTest
 {
     [Fact]

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Implements the standard Identity password hashing.
 /// </summary>

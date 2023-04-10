@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 internal static class Constants
 {
     internal const string ServerCapabilitiesKey = "server.Capabilities";

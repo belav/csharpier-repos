@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 
+
 /// <summary>
 ///     A SQL Server-specific <see cref="MigrationOperation" /> to create a database.
 /// </summary>

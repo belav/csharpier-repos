@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace CodeGenerator.HttpUtilities;
 
+
 public class HttpUtilities
 {
     public static string GeneratedFile()

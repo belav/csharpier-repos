@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public static class QueryTestExtensions
 {
     public static TResult Maybe<TSource, TResult>(

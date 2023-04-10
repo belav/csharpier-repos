@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
+
 public class NorthwindContext : PoolableDbContext
 {
     public NorthwindContext(DbContextOptions options)

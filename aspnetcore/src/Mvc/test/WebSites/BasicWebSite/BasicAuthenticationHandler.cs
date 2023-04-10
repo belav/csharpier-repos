@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace BasicWebSite;
 
+
 public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     public BasicAuthenticationHandler(

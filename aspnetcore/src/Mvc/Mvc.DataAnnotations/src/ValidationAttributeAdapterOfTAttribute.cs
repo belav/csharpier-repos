@@ -8,6 +8,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 /// <summary>
 /// An implementation of <see cref="IClientModelValidator"/> which understands data annotation attributes.
 /// </summary>

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 // This comparer is tightly coupled with the logic of ExpressionHelper.GetExpressionText.
 // It is not designed to accurately compare any two arbitrary LambdaExpressions.
 internal sealed class LambdaExpressionComparer : IEqualityComparer<LambdaExpression>

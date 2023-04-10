@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
+
 public class TeamSponsor
 {
     public class TeamSponsorProxy : TeamSponsor, IF1Proxy

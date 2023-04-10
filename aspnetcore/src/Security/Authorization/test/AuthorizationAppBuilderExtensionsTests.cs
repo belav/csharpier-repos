@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authorization.Test;
 
+
 public class AuthorizationAppBuilderExtensionsTests
 {
     [Fact]

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControllersFromServicesWebSite.Components;
 
+
 public class ComponentFromServicesViewComponent : ViewComponent
 {
     private readonly ValueService _value;

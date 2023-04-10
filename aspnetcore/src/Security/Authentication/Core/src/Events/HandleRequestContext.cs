@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Base context type for handling authentication request.
 /// </summary>

@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 /// <summary>
 /// An <see cref="IDictionary{String, Object}"/> type to hold a small amount of items (10 or less in the common case).
 /// </summary>

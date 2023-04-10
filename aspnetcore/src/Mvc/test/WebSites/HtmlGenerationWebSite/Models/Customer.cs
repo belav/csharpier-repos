@@ -3,6 +3,7 @@
 
 namespace HtmlGenerationWebSite.Models;
 
+
 public class Customer : Person
 {
     public string Key { get; set; }

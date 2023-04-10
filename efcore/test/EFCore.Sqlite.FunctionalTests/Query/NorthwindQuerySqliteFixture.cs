@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class NorthwindQuerySqliteFixture<TModelCustomizer>
     : NorthwindQueryRelationalFixture<TModelCustomizer>
     where TModelCustomizer : IModelCustomizer, new()

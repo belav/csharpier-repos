@@ -6,6 +6,7 @@ using AngleSharp.Dom.Html;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
+
 public static class HttpClientExtensions
 {
     public static Task<HttpResponseMessage> SendAsync(

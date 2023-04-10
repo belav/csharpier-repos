@@ -6,6 +6,7 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
+
 internal static class ChunkWriter
 {
     public static int BeginChunkBytes(int dataCount, Span<byte> span)

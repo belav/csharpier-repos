@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Represents a relationship where a foreign key composed of properties on the dependent entity type
 ///     references a corresponding primary or alternate key on the principal entity type.

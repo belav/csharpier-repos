@@ -7,6 +7,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 /// <summary>
 /// Provides access to contextual information about the running tests. Get access by
 /// implementing <see cref="ITestMethodLifecycle"/>.

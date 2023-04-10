@@ -5,6 +5,7 @@ using System.Security.Claims;
 
 namespace BasicWebSite;
 
+
 internal static class ConfigureAuthPoliciesExtensions
 {
     public static void ConfigureBaseWebSiteAuthPolicies(this IServiceCollection services)

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Internal;
 
+
 public class RelationalScaffoldingModelFactoryTest
 {
     private readonly IScaffoldingModelFactory _factory;

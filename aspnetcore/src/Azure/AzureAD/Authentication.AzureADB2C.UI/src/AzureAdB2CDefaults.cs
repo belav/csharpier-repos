@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
+
 /// <summary>
 /// Constants for different Azure Active Directory B2C authentication components.
 /// </summary>

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
+
 public class TemporaryBinaryValueGeneratorTest
 {
     [ConditionalFact]

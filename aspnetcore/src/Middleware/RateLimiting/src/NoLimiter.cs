@@ -5,6 +5,7 @@ using System.Threading.RateLimiting;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
+
 internal sealed class NoLimiter<TResource> : PartitionedRateLimiter<TResource>
 {
     public override int GetAvailablePermits(TResource resourceID)

@@ -12,6 +12,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 public class WebAssemblyHostBuilderTest
 {
     private static readonly JsonSerializerOptions JsonOptions = new();

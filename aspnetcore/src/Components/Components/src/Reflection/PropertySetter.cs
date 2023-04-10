@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Components.Reflection;
 
+
 internal sealed class PropertySetter
 {
     private static readonly MethodInfo CallPropertySetterOpenGenericMethod =

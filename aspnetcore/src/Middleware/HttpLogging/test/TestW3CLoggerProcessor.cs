@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 internal sealed class TestW3CLoggerProcessor : W3CLoggerProcessor
 {
     private int _writeCount = 0;

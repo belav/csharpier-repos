@@ -5,6 +5,7 @@ using System.Net.Sockets;
 
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
+
 internal sealed class IsIPV6Segment : PatternSegment
 {
     public override string? Evaluate(

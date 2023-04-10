@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 /// <summary>
 ///     Converts enum values to and from their underlying numeric representation.
 /// </summary>

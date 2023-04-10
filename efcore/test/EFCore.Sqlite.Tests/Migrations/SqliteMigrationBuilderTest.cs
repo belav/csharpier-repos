@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 public class SqliteMigrationBuilderTest
 {
     [ConditionalFact]

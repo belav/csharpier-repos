@@ -5,6 +5,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <Summary>
 /// A stream that pulls each chunk on demand using JavaScript interop. This implementation is used for
 /// WebAssembly and WebView applications.

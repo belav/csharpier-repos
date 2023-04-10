@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
+
 public class MembersToExpandExpressions : AutoMapperSpecBase, IAsyncLifetime
 {
     public class SourceDeepInner

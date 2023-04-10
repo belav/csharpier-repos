@@ -3,6 +3,7 @@
 
 namespace Wasm.Prerendered.Server;
 
+
 public class Program
 {
     public static void Main(string[] args)

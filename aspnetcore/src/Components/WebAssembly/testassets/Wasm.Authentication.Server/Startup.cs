@@ -10,6 +10,7 @@ using Wasm.Authentication.Server.Models;
 
 namespace Wasm.Authentication.Server;
 
+
 public class Startup
 {
     public Startup(IConfiguration configuration)

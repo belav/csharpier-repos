@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 /// <summary>
 /// Defines methods that are used for creating <see cref="IRazorPage"/> instances at a given path.
 /// </summary>

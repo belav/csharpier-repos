@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Represents a login and its associated provider for a user.
 /// </summary>

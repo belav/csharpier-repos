@@ -17,6 +17,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
+
 /// <summary>
 /// Authentication handler for Twitter's OAuth based authentication.
 /// </summary>

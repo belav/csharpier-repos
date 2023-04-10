@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 public static class NamespaceDirective
 {
     public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(

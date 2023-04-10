@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 
+
 internal sealed class RoutePatternOptions
 {
     private RoutePatternOptions() { }

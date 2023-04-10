@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 internal static class ApiConventionMatcher
 {
     internal static bool IsMatch(MethodInfo methodInfo, MethodInfo conventionMethod)

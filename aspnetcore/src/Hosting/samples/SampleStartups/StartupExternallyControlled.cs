@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace SampleStartups;
 
+
 public class StartupExternallyControlled : StartupBase
 {
     private IHost _host;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public interface IExtensionIntermediateNodeVisitor<TNode>
     where TNode : ExtensionIntermediateNode
 {

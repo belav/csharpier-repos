@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Builder.Extensions;
 
+
 public class UseExtensionsTests
 {
     [Fact]

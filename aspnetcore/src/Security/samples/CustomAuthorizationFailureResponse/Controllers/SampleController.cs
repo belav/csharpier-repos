@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomAuthorizationFailureResponse.Controllers;
 
+
 [ApiController]
 [Route("api/[controller]")]
 public class SampleController : ControllerBase

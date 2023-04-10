@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Connections;
 
+
 /// <summary>
 /// Options used to configure a per connection callback for TLS configuration.
 /// </summary>

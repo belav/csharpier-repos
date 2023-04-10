@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public interface IConfigureRazorCodeGenerationOptionsFeature : IRazorEngineFeature
 {
     int Order { get; }

@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
+
 internal sealed class DateTimeSegment : PatternSegment
 {
     private readonly DateTimePortion _portion;

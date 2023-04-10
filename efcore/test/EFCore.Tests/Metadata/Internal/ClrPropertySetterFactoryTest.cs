@@ -7,6 +7,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 public class ClrPropertySetterFactoryTest
 {
     [ConditionalFact]

@@ -6,6 +6,7 @@ using System.Xml;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 /// <summary>
 /// Internal implementation details of <see cref="CertificateXmlEncryptor"/> for unit testing.
 /// </summary>

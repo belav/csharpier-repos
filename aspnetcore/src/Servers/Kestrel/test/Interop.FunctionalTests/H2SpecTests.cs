@@ -19,6 +19,7 @@ using Xunit.Abstractions;
 
 namespace Interop.FunctionalTests;
 
+
 public class H2SpecTests : LoggedTest
 {
     [SkipOnArchitecture(Architecture.Arm64, Architecture.X86)] // The h2spec executable is an x64-binary

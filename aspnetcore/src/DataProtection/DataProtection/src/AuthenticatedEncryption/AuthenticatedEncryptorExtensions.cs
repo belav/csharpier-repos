@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cryptography;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
+
 internal static class AuthenticatedEncryptorExtensions
 {
     public static byte[] Encrypt(

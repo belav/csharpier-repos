@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
+
 internal static class DevJwtCliHelpers
 {
     public static string GetOrSetUserSecretsId(string projectFilePath)

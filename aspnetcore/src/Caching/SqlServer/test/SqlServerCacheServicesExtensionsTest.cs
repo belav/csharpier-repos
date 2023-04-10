@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Caching.SqlServer;
 
+
 public class SqlServerCacheServicesExtensionsTest
 {
     [Fact]

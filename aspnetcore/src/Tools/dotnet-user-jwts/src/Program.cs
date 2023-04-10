@@ -6,6 +6,7 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
+
 public class Program
 {
     private readonly IConsole _console;

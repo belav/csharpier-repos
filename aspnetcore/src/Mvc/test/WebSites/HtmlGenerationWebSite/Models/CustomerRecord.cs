@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HtmlGenerationWebSite.Models;
 
+
 public record CustomerRecord(
     [Range(1, 100)] int Number,
     string Name,

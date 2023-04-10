@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
+
 public class OptimisticConcurrencyCosmosTest
     : OptimisticConcurrencyTestBase<F1CosmosFixture<byte[]>, byte[]>
 {

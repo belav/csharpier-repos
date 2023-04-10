@@ -15,6 +15,7 @@ using Microsoft.Playwright;
 
 namespace Wasm.Build.Tests.Blazor;
 
+
 public class BuildPublishTests : BuildTestBase
 {
     public BuildPublishTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)

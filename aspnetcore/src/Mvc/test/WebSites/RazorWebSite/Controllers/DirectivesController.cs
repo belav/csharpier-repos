@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorWebSite;
 
+
 public class DirectivesController : Controller
 {
     public IActionResult ViewInheritsInjectAndUsingsFromViewImports()

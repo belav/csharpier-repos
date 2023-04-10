@@ -4,6 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.ColorSchemes;
 
+
 internal enum ColorSchemeName
 {
     None = 0,

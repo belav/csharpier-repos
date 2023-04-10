@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 /// <summary>
 /// Converts <see cref="RemoteUserAccount" /> into a <see cref="ClaimsPrincipal"/>.
 /// </summary>

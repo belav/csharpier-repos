@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that manipulates temporal settings for an entity mapped to a temporal table.
 /// </summary>

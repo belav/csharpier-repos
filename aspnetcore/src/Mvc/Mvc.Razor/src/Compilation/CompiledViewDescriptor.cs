@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
+
 /// <summary>
 /// Represents a compiled Razor View or Page.
 /// </summary>

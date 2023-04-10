@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
+
 public class ViewComponentTypeVisitorTest
 {
     private static readonly Assembly _assembly = typeof(ViewComponentTypeVisitorTest)

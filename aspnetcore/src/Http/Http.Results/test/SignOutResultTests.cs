@@ -9,6 +9,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+
 public class SignOutResultTests
 {
     [Fact]

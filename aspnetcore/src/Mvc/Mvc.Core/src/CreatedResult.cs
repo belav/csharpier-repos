@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// An <see cref="ActionResult"/> that returns a Created (201) response with a Location header.
 /// </summary>

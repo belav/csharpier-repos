@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 /// <summary>
 /// A context for result filters, specifically <see cref="IResultFilter.OnResultExecuting"/> and
 /// <see cref="IAsyncResultFilter.OnResultExecutionAsync"/> calls.

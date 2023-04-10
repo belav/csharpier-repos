@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 public class DefaultDocumentWriterTest
 {
     [Fact] // This test covers the whole process including actual hashing.

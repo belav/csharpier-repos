@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
+
 internal sealed class ManifestFileInfo : IFileInfo
 {
     private long? _length;

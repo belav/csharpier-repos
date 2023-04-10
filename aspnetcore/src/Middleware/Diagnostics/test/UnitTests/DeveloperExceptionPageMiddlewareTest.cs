@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
+
 public class DeveloperExceptionPageMiddlewareTest
 {
     [Fact]

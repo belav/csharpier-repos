@@ -6,6 +6,7 @@ using Microsoft.Extensions.StackTrace.Sources;
 
 namespace Microsoft.AspNetCore.Diagnostics.RazorViews;
 
+
 /// <summary>
 /// Holds data to be displayed on the compilation error page.
 /// </summary>

@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
 
+
 public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
 {
     abstract class EntityBase

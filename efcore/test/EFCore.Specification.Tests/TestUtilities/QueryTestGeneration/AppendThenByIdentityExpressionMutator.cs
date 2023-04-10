@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
+
 public class AppendThenByIdentityExpressionMutator : ExpressionMutator
 {
     public AppendThenByIdentityExpressionMutator(DbContext context)

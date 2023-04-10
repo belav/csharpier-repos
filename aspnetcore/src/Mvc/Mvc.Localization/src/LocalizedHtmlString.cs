@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
+
 /// <summary>
 /// An <see cref="IHtmlContent"/> with localized content.
 /// </summary>

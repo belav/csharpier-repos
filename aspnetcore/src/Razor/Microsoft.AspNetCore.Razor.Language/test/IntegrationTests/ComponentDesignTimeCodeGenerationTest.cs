@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public class ComponentDesignTimeCodeGenerationTest : ComponentCodeGenerationTestBase
 {
     internal override bool DesignTime => true;

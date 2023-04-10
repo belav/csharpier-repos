@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.OutputCaching;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// A set of endpoint extension methods.
 /// </summary>

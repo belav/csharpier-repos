@@ -5,6 +5,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
+
 public class SyntaxTokenCacheTest
 {
     // Regression test for https://github.com/dotnet/aspnetcore/issues/27154

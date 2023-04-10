@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Routing.Template.Tests;
 
+
 public class TemplateRouteParserTests
 {
     [Fact]

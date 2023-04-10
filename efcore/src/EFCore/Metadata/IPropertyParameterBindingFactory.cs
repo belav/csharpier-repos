@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Finds a <see cref="ParameterBinding" /> specifically for some form of property
 ///     (that is, some <see cref="IPropertyBase" />) of the model.

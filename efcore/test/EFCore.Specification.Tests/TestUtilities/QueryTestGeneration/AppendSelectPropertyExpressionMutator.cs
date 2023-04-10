@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
+
 public class AppendSelectPropertyExpressionMutator : ExpressionMutator
 {
     private bool HasValidPropertyToSelect(Expression expression) =>

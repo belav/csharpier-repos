@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity.ExternalClaims.Pages.Account.Manage;
 
+
 public class EnableAuthenticatorModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;

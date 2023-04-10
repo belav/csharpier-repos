@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 /// <summary>
 /// Provides correct escaping for Path and PathBase values when needed to reconstruct a request or redirect URI string
 /// </summary>

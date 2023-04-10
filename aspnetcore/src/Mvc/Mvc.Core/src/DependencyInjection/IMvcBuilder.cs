@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// An interface for configuring MVC services.
 /// </summary>

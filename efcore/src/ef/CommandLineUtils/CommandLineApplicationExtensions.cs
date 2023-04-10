@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.DotNet.Cli.CommandLine;
 
+
 internal static class CommandLineApplicationExtensions
 {
     public static CommandOption Option(

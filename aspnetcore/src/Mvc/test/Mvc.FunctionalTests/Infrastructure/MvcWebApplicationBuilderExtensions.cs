@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public static class MvcWebApplicationBuilderExtensions
 {
     /// <summary>

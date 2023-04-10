@@ -14,6 +14,7 @@ using Xunit.Sdk;
 
 namespace Templates.Blazor.Test;
 
+
 public class EmptyBlazorServerTemplateTest : BlazorTemplateTest
 {
     public EmptyBlazorServerTemplateTest(ProjectFactoryFixture projectFactory)

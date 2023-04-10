@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
+
 internal class ManualIntervalControl
 {
     private TaskCompletionSource<object> _pauseCompletionSource =

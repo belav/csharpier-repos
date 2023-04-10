@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.DataProtection;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// An implementation for <see cref="ISecureDataFormat{TData}"/>.
 /// </summary>

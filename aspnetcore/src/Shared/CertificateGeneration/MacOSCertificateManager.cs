@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.AspNetCore.Certificates.Generation;
 
+
 internal sealed class MacOSCertificateManager : CertificateManager
 {
     // User keychain. Guard with quotes when using in command lines since users may have set

@@ -9,6 +9,7 @@ using System.Transactions.DtcProxyShim;
 
 namespace System.Transactions.Oletx;
 
+
 internal sealed class OletxResourceManager
 {
     internal Guid ResourceManagerIdentifier;

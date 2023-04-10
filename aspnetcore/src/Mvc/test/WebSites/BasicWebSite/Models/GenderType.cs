@@ -3,6 +3,7 @@
 
 namespace BasicWebSite.Models;
 
+
 public enum GenderType
 {
     Male,

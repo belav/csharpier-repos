@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSamples.Cookies.Controllers;
 
+
 public class AccountController : Controller
 {
     [HttpGet]

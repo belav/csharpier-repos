@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class TagMatchingRuleDescriptor : IEquatable<TagMatchingRuleDescriptor>
 {
     private int? _hashCode;

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 
+
 /// <summary>
 /// An <see cref="IDeveloperPageExceptionFilter"/> that captures database-related exceptions that can be resolved by using Entity Framework migrations.
 /// When these exceptions occur, an HTML response with details about possible actions to resolve the issue is generated.

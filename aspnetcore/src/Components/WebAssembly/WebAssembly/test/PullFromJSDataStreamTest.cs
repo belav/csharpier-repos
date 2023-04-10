@@ -8,6 +8,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 public class PullFromJSDataStreamTest
 {
     private static readonly TestJSRuntime _jsRuntime = new();

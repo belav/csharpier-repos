@@ -10,6 +10,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+
 /// <summary>
 /// A <see cref="IResult" /> that on execution writes the file specified
 /// using a virtual path to the response using mechanisms provided by the host.

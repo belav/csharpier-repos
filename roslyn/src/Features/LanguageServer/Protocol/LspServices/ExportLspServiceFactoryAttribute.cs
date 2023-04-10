@@ -9,6 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
+
 /// <summary>
 /// Exports an <see cref="ILspServiceFactory"/> that is used by LSP server instances
 /// to create new instances of the <see cref="ILspService"/> each time an LSP server is started.

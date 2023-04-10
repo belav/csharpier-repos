@@ -5,6 +5,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 internal static class MediaTypeHeaderValues
 {
     public static readonly MediaTypeHeaderValue ApplicationJson = MediaTypeHeaderValue

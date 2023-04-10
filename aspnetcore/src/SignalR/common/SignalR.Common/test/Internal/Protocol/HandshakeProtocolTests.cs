@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
+
 public class HandshakeProtocolTests
 {
     [Theory]

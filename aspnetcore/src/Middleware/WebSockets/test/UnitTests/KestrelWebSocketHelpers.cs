@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
+
 public class KestrelWebSocketHelpers
 {
     public static IAsyncDisposable CreateServer(

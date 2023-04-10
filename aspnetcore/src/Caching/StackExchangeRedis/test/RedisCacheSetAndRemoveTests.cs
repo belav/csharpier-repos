@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 
+
 public class RedisCacheSetAndRemoveTests
 {
     private const string SkipReason =

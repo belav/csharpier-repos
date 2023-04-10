@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.MappingInheritance;
 
+
 public class ApplyIncludeBaseRecursively : AutoMapperSpecBase
 {
     ViewModel _destination;

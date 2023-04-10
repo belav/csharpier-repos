@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.TestHost;
 
+
 public class RequestBuilderTests
 {
     [Fact]

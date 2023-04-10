@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task;
 
+
 public class GenerateEmbeddedResourcesManifestTest
 {
     [Fact]

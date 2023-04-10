@@ -3,6 +3,7 @@ using AutoMapper.Internal.Mappers;
 
 namespace AutoMapper.UnitTests.ArraysAndLists;
 
+
 public class When_mapping_to_Existing_IEnumerable : AutoMapperSpecBase
 {
     public class Source

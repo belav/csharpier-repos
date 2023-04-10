@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ApiExplorerWebSite;
 
+
 // Disables ApiExplorer for a specific controller type.
 // This is part of the test that validates that ApiExplorer can be configured via
 // convention

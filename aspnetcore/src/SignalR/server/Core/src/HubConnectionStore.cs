@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Stores <see cref="HubConnectionContext"/>s by ID.
 /// </summary>

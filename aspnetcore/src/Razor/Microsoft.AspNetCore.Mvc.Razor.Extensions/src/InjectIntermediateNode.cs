@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
+
 public class InjectIntermediateNode : ExtensionIntermediateNode
 {
     public string TypeName { get; set; }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
+
 [Route("ApiExplorerApiController/[action]")]
 [ApiController]
 [EndpointGroupName("GroupNameOnController")]

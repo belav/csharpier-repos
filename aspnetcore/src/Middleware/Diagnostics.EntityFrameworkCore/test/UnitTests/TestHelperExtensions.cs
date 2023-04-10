@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.Tests;
 
+
 public static class TestHelperExtensions
 {
     public static IServiceCollection AddProviderServices(this IServiceCollection serviceCollection)

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 
+
 /// <summary>
 /// Configuration options for <see cref="MicrosoftAccountHandler"/>.
 /// </summary>

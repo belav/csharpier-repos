@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.BuiltInTypes;
 
+
 public class ProjectEnumerableOfIntToHashSet
     : IntegrationTest<ProjectEnumerableOfIntToHashSet.DatabaseInitializer>
 {

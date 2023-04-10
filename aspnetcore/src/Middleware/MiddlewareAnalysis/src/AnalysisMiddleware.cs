@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.MiddlewareAnalysis;
 
+
 /// <summary>
 /// Middleware that is inserted before and after each other middleware in the pipeline by <see cref="AnalysisBuilder"/>
 /// to log to a <see cref="DiagnosticSource"/> when other middleware starts, finishes and throws.

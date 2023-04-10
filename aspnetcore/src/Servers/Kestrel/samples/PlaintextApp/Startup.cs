@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace PlaintextApp;
 
+
 public class Startup
 {
     private static readonly byte[] _helloWorldBytes = Encoding.UTF8.GetBytes("Hello, World!");

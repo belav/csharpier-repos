@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 internal sealed class NullRouter : IRouter
 {
     public static readonly NullRouter Instance = new NullRouter();

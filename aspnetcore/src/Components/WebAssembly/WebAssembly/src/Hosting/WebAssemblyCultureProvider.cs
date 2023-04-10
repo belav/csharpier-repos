@@ -9,6 +9,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 [UnconditionalSuppressMessage(
     "ReflectionAnalysis",
     "IL2026",

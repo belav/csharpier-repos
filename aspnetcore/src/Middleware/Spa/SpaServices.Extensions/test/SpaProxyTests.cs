@@ -14,6 +14,7 @@ using Moq.Protected;
 
 namespace Microsoft.AspNetCore.SpaServices.Extensions.Tests;
 
+
 public class SpaProxyTests
 {
     private static (HttpContext, HttpClient) GetHttpContextAndClient(

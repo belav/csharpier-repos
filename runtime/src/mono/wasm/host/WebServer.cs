@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.WebAssembly.AppHost;
 
+
 public class WebServer
 {
     internal static async Task<(ServerURLs, IWebHost)> StartAsync(

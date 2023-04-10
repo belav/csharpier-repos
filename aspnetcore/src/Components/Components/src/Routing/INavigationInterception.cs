@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 /// <summary>
 /// Contract to setup navigation interception on the client.
 /// </summary>

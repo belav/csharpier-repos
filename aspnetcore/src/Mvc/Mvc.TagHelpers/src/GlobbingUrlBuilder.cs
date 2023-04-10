@@ -10,6 +10,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 /// <summary>
 /// Utility methods for <see cref="AspNetCore.Razor.TagHelpers.ITagHelper"/>'s that support
 /// attributes containing file globbing patterns.

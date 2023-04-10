@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace XmlFormattersWebSite;
 
+
 public class Address
 {
     [Required]

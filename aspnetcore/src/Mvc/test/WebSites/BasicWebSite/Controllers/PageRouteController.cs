@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
+
 // Verifies that we can use the "page" token in routing in a controller only (no Razor Pages) application
 // without affecting view lookups.
 public class PageRouteController : Controller

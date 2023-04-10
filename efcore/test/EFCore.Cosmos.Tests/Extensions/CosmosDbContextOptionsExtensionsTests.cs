@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class CosmosDbContextOptionsExtensionsTests
 {
     [ConditionalFact]

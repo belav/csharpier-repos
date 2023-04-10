@@ -7,6 +7,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
+
 public class DefaultRazorPageFactoryProviderTest
 {
     [Fact]

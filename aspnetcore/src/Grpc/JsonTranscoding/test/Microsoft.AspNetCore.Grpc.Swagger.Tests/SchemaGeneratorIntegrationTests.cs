@@ -11,6 +11,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests;
 
+
 public class SchemaGeneratorIntegrationTests
 {
     private (OpenApiSchema Schema, SchemaRepository SchemaRepository) GenerateSchema(

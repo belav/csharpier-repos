@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 
 namespace Microsoft.AspNetCore.Components.E2ETest;
 
+
 internal static class WebDriverExtensions
 {
     public static void Navigate(

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
+
 /// <summary>
 /// A service which can be used to check the status of <see cref="IHealthCheck"/> instances
 /// registered in the application.

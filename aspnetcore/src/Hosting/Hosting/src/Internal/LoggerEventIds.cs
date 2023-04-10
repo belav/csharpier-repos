@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 internal static class LoggerEventIds
 {
     public const int RequestStarting = 1;

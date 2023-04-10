@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class MissingMapping : AutoMapperSpecBase
 {
     public class Source

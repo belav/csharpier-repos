@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
+
 internal sealed class HtmlRenderer : Renderer
 {
     private static readonly HashSet<string> SelfClosingElements = new HashSet<string>(

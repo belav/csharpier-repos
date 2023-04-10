@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Provides extension methods used for configuring an application to
 /// host a client-side Single Page Application (SPA).

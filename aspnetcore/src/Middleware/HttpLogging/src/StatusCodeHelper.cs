@@ -6,6 +6,7 @@ using System.Net;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 internal static class StatusCodeHelper
 {
     public static string ToStatusString(int statusCode)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization;
 
+
 /// <summary>
 /// Extension methods for <see cref="IAuthorizationService"/>.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class RelationalComplianceTestBase : ComplianceTestBase
 {
     protected override IEnumerable<Type> GetBaseTestClasses() =>

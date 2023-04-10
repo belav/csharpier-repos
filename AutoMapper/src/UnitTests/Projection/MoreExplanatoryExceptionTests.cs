@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
 
+
 public class MoreExplanatoryExceptionTests
 {
     [Fact]

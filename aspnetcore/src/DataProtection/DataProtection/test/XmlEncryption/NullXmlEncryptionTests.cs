@@ -5,6 +5,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 public class NullXmlEncryptionTests
 {
     [Fact]

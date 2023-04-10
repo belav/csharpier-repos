@@ -9,6 +9,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.Logging.Testing;
 
+
 public class XunitLoggerProvider : ILoggerProvider
 {
     private readonly ITestOutputHelper _output;

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.SecretManager.Tools;
 
+
 public class Program
 {
     private readonly IConsole _console;

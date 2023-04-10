@@ -7,6 +7,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 /// <summary>
 /// A validation adapter that is used to map <see cref="DataTypeAttribute"/>'s to a single client side validation
 /// rule.

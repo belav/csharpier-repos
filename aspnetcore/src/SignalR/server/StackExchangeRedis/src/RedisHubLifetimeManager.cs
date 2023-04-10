@@ -16,6 +16,7 @@ using StackExchange.Redis;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis;
 
+
 /// <summary>
 /// The Redis scaleout provider for multi-server support.
 /// </summary>

@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.BrowserTesting;
 
+
 [Flags]
 public enum BrowserKind
 {

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ResponseCompression;
 
+
 /// <summary>
 /// Options for the GzipCompressionProvider
 /// </summary>

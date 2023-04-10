@@ -20,6 +20,7 @@ using Microsoft.CodeAnalysis.OrganizeImports;
 
 namespace Microsoft.CodeAnalysis.CodeCleanup;
 
+
 [DataContract]
 internal sealed record class CodeCleanupOptions
 {

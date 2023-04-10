@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite.Areas.Order;
 
+
 [Area("Order")]
 [Route("Order/[action]", Name = "[area]_[action]")]
 public class OrderController : Controller

@@ -10,6 +10,7 @@ using Resources = Microsoft.AspNetCore.Mvc.ViewFeatures.Resources;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// A <see cref="RemoteAttributeBase"/> for controllers which configures Unobtrusive validation to send an Ajax request to the
 /// web site. The invoked action should return JSON indicating whether the value is valid.

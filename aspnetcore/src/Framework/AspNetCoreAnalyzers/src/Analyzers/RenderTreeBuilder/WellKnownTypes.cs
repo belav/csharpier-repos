@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.RenderTreeBuilder;
 
+
 internal sealed class WellKnownTypes
 {
     public static bool TryCreate(

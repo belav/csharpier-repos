@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class DefaultTransportFactoryTests
 {
     private const HttpTransportType AllTransportTypes =

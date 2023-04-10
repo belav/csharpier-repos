@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 /// <summary>
 /// Provides an interface for extending the middleware pipeline with new
 /// Configure methods. Can be used to add defaults to the beginning or

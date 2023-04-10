@@ -19,6 +19,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
+
 internal class TestConnection : ConnectionContext, IConnectionInherentKeepAliveFeature
 {
     private readonly bool _autoHandshake;

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Certificate;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods to add Certificate authentication capabilities to an HTTP application pipeline.
 /// </summary>

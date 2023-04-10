@@ -13,6 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.NavigateTo;
 
+
 internal sealed partial class RoslynSearchItemsSourceProvider
 {
     /// <summary>

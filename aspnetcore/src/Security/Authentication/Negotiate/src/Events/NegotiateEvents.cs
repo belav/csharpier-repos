@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
+
 /// <summary>
 /// Specifies events which the <see cref="NegotiateHandler"/> invokes to enable developer control over the authentication process.
 /// </summary>

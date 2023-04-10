@@ -5,6 +5,7 @@ using System.Collections;
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 internal sealed class ConditionCollection : IEnumerable<Condition>
 {
     private readonly List<Condition> _conditions = new List<Condition>();

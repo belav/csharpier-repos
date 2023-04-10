@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.Configuration.Annotations;
 
+
 /// <summary>
 /// Ignore this member for configuration validation and skip during mapping.
 /// </summary>

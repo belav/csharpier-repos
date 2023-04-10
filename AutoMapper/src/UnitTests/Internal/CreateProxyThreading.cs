@@ -2,6 +2,7 @@
 
 namespace AutoMapper.UnitTests;
 
+
 public class CreateProxyThreading
 {
     [Fact]

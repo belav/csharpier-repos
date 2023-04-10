@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CustomEncryptorSample;
 
+
 public class CustomXmlDecryptor : IXmlDecryptor
 {
     private readonly ILogger _logger;

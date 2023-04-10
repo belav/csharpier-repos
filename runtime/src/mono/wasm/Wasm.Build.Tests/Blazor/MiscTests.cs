@@ -9,6 +9,7 @@ using Xunit.Abstractions;
 
 namespace Wasm.Build.Tests.Blazor;
 
+
 public class MiscTests : BuildTestBase
 {
     public MiscTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)

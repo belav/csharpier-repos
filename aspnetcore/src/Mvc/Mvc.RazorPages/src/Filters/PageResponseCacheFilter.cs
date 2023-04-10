@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 /// <summary>
 /// A <see cref="IPageFilter"/> which sets the appropriate headers related to response caching.
 /// </summary>

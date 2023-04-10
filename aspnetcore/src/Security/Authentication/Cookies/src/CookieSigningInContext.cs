@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
+
 /// <summary>
 /// Context object passed to the <see cref="CookieAuthenticationEvents.SigningIn(CookieSigningInContext)"/>.
 /// </summary>

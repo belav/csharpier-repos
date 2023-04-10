@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
+
 internal sealed class Http3PeerSettings
 {
     // Note these are protocol defaults, not Kestrel defaults.

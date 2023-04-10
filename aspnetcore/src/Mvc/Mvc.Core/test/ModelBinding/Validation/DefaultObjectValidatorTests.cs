@@ -12,6 +12,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
+
 public class DefaultObjectValidatorTests
 {
     private readonly MvcOptions _options = new MvcOptions();

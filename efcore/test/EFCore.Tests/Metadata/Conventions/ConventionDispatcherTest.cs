@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 public class ConventionDispatcherTest
 {
     // TODO: Use public API to add conventions, issue #214

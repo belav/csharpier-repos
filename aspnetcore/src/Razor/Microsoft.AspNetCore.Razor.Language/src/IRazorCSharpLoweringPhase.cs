@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// Generates C# code using the intermediate node document.
 /// </summary>

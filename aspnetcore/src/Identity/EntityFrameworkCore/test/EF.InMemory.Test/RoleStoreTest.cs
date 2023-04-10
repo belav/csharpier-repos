@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test;
 
+
 public class RoleStoreTest : IClassFixture<InMemoryDatabaseFixture>
 {
     private readonly InMemoryDatabaseFixture _fixture;

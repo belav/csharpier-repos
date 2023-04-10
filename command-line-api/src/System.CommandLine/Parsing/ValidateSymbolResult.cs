@@ -3,6 +3,7 @@
 
 namespace System.CommandLine.Parsing;
 
+
 /// <summary>
 /// A delegate used to validate symbol results during parsing.
 /// </summary>

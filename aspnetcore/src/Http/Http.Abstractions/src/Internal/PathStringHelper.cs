@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 internal static class PathStringHelper
 {
     // uint[] bits uses 1 cache line (Array info + 16 bytes)

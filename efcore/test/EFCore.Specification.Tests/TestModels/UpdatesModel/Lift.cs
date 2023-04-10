@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
+
 public class Lift
 {
     public int Id { get; set; }

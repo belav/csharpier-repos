@@ -11,6 +11,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+
 internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, string>>
 {
     private enum HeadersType : byte

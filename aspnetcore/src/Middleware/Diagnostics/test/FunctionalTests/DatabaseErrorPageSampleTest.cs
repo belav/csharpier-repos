@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
+
 public class DatabaseErrorPageSampleTest
     : IClassFixture<TestFixture<DatabaseErrorPageSample.Startup>>
 {

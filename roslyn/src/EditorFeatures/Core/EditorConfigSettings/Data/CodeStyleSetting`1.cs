@@ -11,6 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
 
+
 internal sealed class CodeStyleSetting<T> : CodeStyleSetting
     where T : notnull
 {

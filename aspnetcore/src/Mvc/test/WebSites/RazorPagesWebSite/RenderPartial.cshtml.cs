@@ -7,6 +7,7 @@ using RazorPagesWebSite.Models;
 
 namespace RazorPagesWebSite;
 
+
 public class RenderPartialWithModel : PageModel
 {
     public string Text { get; set; } = $"Hello from {nameof(RenderPartialWithModel)}";

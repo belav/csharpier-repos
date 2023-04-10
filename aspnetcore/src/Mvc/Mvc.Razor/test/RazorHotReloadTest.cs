@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 public class RazorHotReloadTest
 {
     [Fact]

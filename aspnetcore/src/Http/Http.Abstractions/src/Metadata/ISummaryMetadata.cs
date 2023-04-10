@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Metadata;
 
+
 /// <summary>
 /// Defines a contract used to specify a summary in <see cref="Endpoint.Metadata"/>.
 /// </summary>

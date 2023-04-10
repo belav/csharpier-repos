@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
+
 /// <summary>
 /// Represents the optgroup HTML element and its attributes.
 /// In a select list, multiple groups with the same name are supported.

@@ -9,6 +9,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Web.Virtualization;
 
+
 /// <summary>
 /// Provides functionality for rendering a virtualized list of items.
 /// </summary>

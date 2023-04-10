@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 internal static partial class HttpLoggingExtensions
 {
     public static void RequestLog(this ILogger logger, HttpRequestLog requestLog) =>

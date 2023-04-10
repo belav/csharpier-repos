@@ -8,6 +8,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
+
 /// <summary>
 /// An implementation of <see cref="IDisplayMetadataProvider"/> and <see cref="IValidationMetadataProvider"/> for
 /// the Newtonsoft.Json attribute classes.

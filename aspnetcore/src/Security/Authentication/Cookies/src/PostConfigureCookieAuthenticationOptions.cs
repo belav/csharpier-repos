@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
+
 /// <summary>
 /// Used to setup defaults for all <see cref="CookieAuthenticationOptions"/>.
 /// </summary>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class LoggingSqlServerTest
     : LoggingRelationalTestBase<SqlServerDbContextOptionsBuilder, SqlServerOptionsExtension>
 {

@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
+
 public class CompiledCSharpCode
 {
     public CompiledCSharpCode(Compilation baseCompilation, RazorCodeDocument codeDocument)

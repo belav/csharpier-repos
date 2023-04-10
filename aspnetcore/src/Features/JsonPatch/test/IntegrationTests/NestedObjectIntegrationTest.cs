@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests;
 
+
 public class NestedObjectIntegrationTest
 {
     [Fact]

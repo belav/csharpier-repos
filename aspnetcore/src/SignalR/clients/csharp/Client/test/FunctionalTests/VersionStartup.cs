@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
+
 public class VersionStartup
 {
     public void ConfigureServices(IServiceCollection services)

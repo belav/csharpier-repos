@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
+
 public class CosmosApiConsistencyTest
     : ApiConsistencyTestBase<CosmosApiConsistencyTest.CosmosApiConsistencyFixture>
 {

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
+
 internal sealed class OutputCacheOptionsSetup : IConfigureOptions<OutputCacheOptions>
 {
     private readonly IServiceProvider _services;

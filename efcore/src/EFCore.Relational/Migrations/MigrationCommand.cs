@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     Represents a command ready to be sent to the database to migrate it.
 /// </summary>

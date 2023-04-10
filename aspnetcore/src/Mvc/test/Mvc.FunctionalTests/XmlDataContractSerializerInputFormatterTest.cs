@@ -10,6 +10,7 @@ using XmlFormattersWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class XmlDataContractSerializerInputFormatterTest : IClassFixture<MvcTestFixture<Startup>>
 {
     public XmlDataContractSerializerInputFormatterTest(MvcTestFixture<Startup> fixture)

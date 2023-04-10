@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public sealed class HtmlAttributeIntermediateNode : IntermediateNode
 {
     public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();

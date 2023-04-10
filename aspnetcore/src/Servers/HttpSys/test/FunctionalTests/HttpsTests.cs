@@ -19,6 +19,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 public class HttpsTests
 {
     private static readonly X509Certificate2 _x509Certificate2 = TestResources.GetTestCertificate(

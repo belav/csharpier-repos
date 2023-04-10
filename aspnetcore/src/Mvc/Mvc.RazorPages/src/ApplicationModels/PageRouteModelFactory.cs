@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 internal sealed partial class PageRouteModelFactory
 {
     private static readonly string IndexFileName = "Index" + RazorViewEngine.ViewExtension;

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.Localization.Test;
 
+
 public class TestStringLocalizer : IStringLocalizer
 {
     private CultureInfo _culture { get; set; }

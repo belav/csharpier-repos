@@ -7,6 +7,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace BasicWebSite.Services;
 
+
 public class WeatherForecastService
 {
     private readonly HttpClient _httpClient;

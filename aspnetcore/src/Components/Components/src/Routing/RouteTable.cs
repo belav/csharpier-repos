@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 internal sealed class RouteTable
 {
     public RouteTable(RouteEntry[] routes)

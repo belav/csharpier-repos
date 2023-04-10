@@ -15,6 +15,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 public class DefaultPageLoaderTest
 {
     private readonly IOptions<RazorPagesOptions> RazorPagesOptions = Options.Create(

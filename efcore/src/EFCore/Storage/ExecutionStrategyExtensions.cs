@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Extension methods for <see cref="IExecutionStrategy" />
 /// </summary>

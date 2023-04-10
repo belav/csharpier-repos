@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 namespace RazorPagesWebSite;
 
+
 [PageModel]
 public class HelloWorldWithPageModelAttributeModel
 {

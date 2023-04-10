@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 /// <summary>
 ///     <para>
 ///         Represents a set of indexed values. Typically used to represent a row of data returned from a database.

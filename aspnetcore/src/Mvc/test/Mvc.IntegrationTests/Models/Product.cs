@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 [ProductValidator]
 public class Product
 {

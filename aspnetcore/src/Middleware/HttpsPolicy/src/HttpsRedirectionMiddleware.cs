@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.HttpsPolicy;
 
+
 /// <summary>
 /// Middleware that redirects non-HTTPS requests to an HTTPS URL.
 /// </summary>

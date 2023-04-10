@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class PrerenderComponentApplicationStoreTest
 {
     [Fact]

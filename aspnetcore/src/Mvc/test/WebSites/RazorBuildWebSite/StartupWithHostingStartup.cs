@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace RazorBuildWebSite;
 
+
 public class StartupWithHostingStartup
 {
     public void ConfigureServices(IServiceCollection services)

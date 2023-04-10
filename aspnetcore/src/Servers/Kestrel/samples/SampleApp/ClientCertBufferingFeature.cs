@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace SampleApp;
 
+
 internal static class ClientCertBufferingExtensions
 {
     // Buffers HTTP/1.x request bodies received over TLS (https) if a client certificate needs to be negotiated.

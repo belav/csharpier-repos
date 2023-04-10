@@ -9,6 +9,7 @@ using System.Text;
 
 namespace Ignitor;
 
+
 public static class RenderBatchReader
 {
     private const int ReferenceFrameSize = 20;

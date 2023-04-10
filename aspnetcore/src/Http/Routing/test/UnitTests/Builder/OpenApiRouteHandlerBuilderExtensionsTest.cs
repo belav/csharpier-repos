@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.AspNetCore.Routing.Builder;
 
+
 public class OpenApiRouteHandlerBuilderExtensionsTest
 {
     [Fact]

@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.NavigateTo;
 
+
 internal static class OmniSharpNavigateToSearcher
 {
     public delegate Task OmniSharpNavigateToCallback(

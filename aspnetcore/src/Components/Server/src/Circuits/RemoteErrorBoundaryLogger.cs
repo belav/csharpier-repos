@@ -8,6 +8,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+
 internal sealed partial class RemoteErrorBoundaryLogger : IErrorBoundaryLogger
 {
     private readonly ILogger _logger;

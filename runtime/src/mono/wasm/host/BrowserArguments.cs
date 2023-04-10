@@ -9,6 +9,7 @@ using Mono.Options;
 
 namespace Microsoft.WebAssembly.AppHost;
 
+
 internal sealed class BrowserArguments
 {
     public string? HTMLPath { get; private set; }

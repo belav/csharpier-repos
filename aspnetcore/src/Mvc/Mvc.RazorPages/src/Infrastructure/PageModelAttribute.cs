@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 /// <summary>
 /// An attribute for base classes for page models. Applying this attribute to a type
 /// marks all subclasses of that type as page model types.

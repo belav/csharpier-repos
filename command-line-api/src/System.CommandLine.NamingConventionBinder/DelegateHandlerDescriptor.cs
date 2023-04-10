@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace System.CommandLine.NamingConventionBinder;
 
+
 internal class DelegateHandlerDescriptor : HandlerDescriptor
 {
     private readonly Delegate _handlerDelegate;

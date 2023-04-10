@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis;
 
+
 internal static class CodeAnalysisExtensions
 {
     public static bool HasAttribute(

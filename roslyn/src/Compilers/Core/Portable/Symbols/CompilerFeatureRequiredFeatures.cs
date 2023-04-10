@@ -6,6 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis;
 
+
 [Flags]
 internal enum CompilerFeatureRequiredFeatures
 {

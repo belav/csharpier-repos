@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
+
 internal sealed class LoggingMultiplexedConnectionMiddleware
 {
     private readonly MultiplexedConnectionDelegate _multiplexedNext;

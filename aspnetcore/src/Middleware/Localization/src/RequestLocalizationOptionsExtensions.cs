@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Localization;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Extension methods for the <see cref="RequestLocalizationOptions"/>.
 /// </summary>

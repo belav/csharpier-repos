@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Describes the binding of a <see cref="IEntityType" />, which may or may not also have and associated
 ///     <see cref="IServiceProperty" />, to a parameter in a constructor, factory method, or similar.

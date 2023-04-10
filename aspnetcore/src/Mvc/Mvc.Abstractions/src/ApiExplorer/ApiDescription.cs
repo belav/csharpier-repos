@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 /// <summary>
 /// Represents an API exposed by this application.
 /// </summary>

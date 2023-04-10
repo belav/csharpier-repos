@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// An attribute that causes validation of antiforgery tokens for all unsafe HTTP methods. An antiforgery
 /// token is required for HTTP methods other than GET, HEAD, OPTIONS, and TRACE.

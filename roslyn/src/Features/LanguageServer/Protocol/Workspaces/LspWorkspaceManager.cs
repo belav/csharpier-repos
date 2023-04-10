@@ -20,6 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
+
 /// <summary>
 /// Manages the registered workspaces and corresponding LSP solutions for an LSP server.
 /// This type is tied to a particular server.

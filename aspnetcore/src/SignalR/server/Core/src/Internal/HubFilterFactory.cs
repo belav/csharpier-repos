@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
+
 internal sealed class HubFilterFactory : IHubFilter
 {
     private readonly ObjectFactory _objectFactory;

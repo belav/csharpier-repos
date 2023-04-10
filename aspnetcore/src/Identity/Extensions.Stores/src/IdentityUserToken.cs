@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Represents an authentication token for a user.
 /// </summary>

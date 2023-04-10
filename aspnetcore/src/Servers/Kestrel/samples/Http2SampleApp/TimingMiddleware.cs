@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Http2SampleApp;
 
+
 // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
 public class TimingMiddleware
 {

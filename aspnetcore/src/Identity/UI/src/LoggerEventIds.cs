@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.UI;
 
+
 /// <summary>
 /// Static class that exposes logging event ids.
 /// </summary>

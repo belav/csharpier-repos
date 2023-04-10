@@ -9,6 +9,7 @@ using System.Text;
 
 namespace Microsoft.Extensions.StackTrace.Sources;
 
+
 internal sealed class MethodDisplayInfo
 {
     public MethodDisplayInfo(

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 /// <summary>
 /// An abstract filter that runs asynchronously after an action has thrown an <see cref="Exception"/>. Subclasses
 /// must override <see cref="OnException"/> or <see cref="OnExceptionAsync"/> but not both.

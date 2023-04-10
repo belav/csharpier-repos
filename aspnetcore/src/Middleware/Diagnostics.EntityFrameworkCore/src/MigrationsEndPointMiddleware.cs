@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 
+
 /// <summary>
 /// Processes requests to execute migrations operations. The middleware will listen for requests to the path configured in the supplied options.
 /// </summary>

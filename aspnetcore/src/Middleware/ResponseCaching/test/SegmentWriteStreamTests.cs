@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.ResponseCaching.Tests;
 
+
 public class SegmentWriteStreamTests
 {
     private static readonly byte[] WriteData = new byte[]

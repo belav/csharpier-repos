@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
+
 internal sealed partial class HttpConnectionManager
 {
     // TODO: Consider making this configurable? At least for testing?

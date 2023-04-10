@@ -13,6 +13,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch.Test.Adapters;
 
+
 public class AdapterFactoryTests
 {
     [Fact]

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Property extension methods for SQL Server-specific metadata.
 /// </summary>

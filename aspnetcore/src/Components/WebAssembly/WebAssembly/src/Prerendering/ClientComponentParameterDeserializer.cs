@@ -7,6 +7,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 internal sealed class WebAssemblyComponentParameterDeserializer
 {
     private readonly ComponentParametersTypeCache _parametersCache;

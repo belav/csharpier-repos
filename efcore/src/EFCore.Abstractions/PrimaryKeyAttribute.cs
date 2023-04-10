@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Specifies a primary key for the entity type mapped to this CLR type.
 /// </summary>

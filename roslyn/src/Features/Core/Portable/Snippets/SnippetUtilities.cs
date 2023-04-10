@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis;
 
+
 internal class SnippetUtilities
 {
     public static bool TryGetWordOnLeft(

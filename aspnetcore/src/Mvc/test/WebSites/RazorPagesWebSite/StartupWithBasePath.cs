@@ -6,6 +6,7 @@ using RazorPagesWebSite.Conventions;
 
 namespace RazorPagesWebSite;
 
+
 public class StartupWithBasePath
 {
     private readonly IWebHostEnvironment _hostingEnvironment;

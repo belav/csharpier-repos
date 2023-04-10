@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// Indicates the class and all subclasses are view components. Optionally specifies a view component's name. If
 /// defining a base class for multiple view components, associate this attribute with that base.

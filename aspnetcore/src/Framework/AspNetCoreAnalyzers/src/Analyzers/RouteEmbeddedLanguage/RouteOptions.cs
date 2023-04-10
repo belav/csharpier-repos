@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
+
 [Flags]
 internal enum RouteOptions
 {

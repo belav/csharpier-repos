@@ -4,6 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.Host;
 
+
 internal interface IWorkpacePartialSolutionsTestHook : IWorkspaceService
 {
     bool IsPartialSolutionDisabled { get; set; }

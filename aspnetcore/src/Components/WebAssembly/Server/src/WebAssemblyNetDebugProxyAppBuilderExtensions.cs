@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Server;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Provides infrastructure for debugging Blazor WebAssembly applications.
 /// </summary>

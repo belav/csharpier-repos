@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.NullSemanticsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class NullSemanticsQuerySqlServerTest
     : NullSemanticsQueryTestBase<NullSemanticsQuerySqlServerFixture>
 {

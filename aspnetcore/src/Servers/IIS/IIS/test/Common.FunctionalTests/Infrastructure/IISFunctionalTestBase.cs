@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 
+
 public class IISFunctionalTestBase : FunctionalTestsBase
 {
     protected static readonly TimeSpan RetryDelay = TimeSpan.FromMilliseconds(100);

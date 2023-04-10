@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+
 internal interface ICircuitHandleRegistry
 {
     CircuitHandle GetCircuitHandle(IDictionary<object, object?> circuitHandles, object circuitKey);

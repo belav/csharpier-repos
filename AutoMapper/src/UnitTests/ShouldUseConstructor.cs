@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class ShouldUseConstructorInternal : NonValidatingSpecBase
 {
     class Destination

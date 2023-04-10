@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 
 namespace RazorSyntaxGenerator;
 
+
 [XmlRoot]
 public class Tree
 {

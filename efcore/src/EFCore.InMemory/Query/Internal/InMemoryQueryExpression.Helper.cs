@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
 
+
 public partial class InMemoryQueryExpression
 {
     private sealed class ResultEnumerable : IEnumerable<ValueBuffer>

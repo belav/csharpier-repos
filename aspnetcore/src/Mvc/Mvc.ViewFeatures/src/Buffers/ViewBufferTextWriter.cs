@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
+
 /// <summary>
 /// <para>
 /// A <see cref="TextWriter"/> that is backed by a unbuffered writer (over the Response stream) and/or a

@@ -25,6 +25,7 @@ using System.Runtime.CompilerServices;
 
 namespace AutoMapper.QueryableExtensions;
 
+
 /// <summary>
 /// Expression visitor for making member access null-safe.
 /// </summary>

@@ -6,6 +6,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 /// <summary>
 /// Defines a mapping between a root <see cref="IComponent"/> and a DOM element selector.
 /// </summary>

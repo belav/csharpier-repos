@@ -16,6 +16,7 @@ using Templates.Test.Helpers;
 
 namespace BlazorTemplates.Tests;
 
+
 public class BlazorWasmTemplateTest : BlazorTemplateTest
 {
     public BlazorWasmTemplateTest(ProjectFactoryFixture projectFactory)

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 internal class ComponentCssScopePass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     // Runs after components/bind, since it's preferable for the auto-generated attribute to appear later

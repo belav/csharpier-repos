@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 public class RouteTableFactoryTests
 {
     [Fact]

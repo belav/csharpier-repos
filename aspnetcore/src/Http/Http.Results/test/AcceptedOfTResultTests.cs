@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+
 public class AcceptedOfTResultTests
 {
     [Fact]

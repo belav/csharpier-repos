@@ -7,6 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 public class ResponseContentTypeHelperTest
 {
     public static TheoryData<MediaTypeHeaderValue, string, string> ResponseContentTypeData

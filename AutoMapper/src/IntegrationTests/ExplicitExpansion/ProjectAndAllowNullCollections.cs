@@ -2,6 +2,7 @@
 
 namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
+
 public class ProjectAndAllowNullCollections
     : IntegrationTest<ProjectAndAllowNullCollections.DatabaseInitializer>
 {

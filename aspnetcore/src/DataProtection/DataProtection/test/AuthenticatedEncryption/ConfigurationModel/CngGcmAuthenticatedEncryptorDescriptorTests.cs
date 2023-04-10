@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
+
 public class CngGcmAuthenticatedEncryptorDescriptorTests
 {
     [Fact]

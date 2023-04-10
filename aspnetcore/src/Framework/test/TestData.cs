@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore;
 
+
 public static class TestData
 {
     public static List<string> ListedSharedFxAssemblies;

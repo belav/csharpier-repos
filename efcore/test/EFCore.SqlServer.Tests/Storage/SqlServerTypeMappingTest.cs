@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class SqlServerTypeMappingTest : RelationalTypeMappingTest
 {
     [ConditionalTheory]

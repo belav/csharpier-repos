@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
+
 public class InternalMixedEntityEntryTest
     : InternalEntityEntryTestBase<
         InternalMixedEntityEntryTest.SomeEntity,

@@ -9,6 +9,7 @@ using Xunit;
 
 namespace System.CommandLine.NamingConventionBinder.Tests;
 
+
 public class HandlerDescriptorTests
 {
     public class FromDelegate

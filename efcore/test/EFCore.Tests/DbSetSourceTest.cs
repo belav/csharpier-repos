@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class DbSetSourceTest
 {
     [ConditionalFact]

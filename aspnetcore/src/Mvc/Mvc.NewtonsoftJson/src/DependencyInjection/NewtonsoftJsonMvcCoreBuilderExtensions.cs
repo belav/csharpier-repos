@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods for adding Newtonsoft.Json to <see cref="MvcCoreBuilder"/>.
 /// </summary>

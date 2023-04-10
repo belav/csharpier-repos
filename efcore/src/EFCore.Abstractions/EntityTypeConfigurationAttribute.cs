@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     Specifies the configuration type for the entity type.
 /// </summary>

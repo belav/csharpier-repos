@@ -17,6 +17,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 public class XmlDataContractSerializerOutputFormatterTest
 {
     [DataContract(Name = "DummyClass", Namespace = "")]

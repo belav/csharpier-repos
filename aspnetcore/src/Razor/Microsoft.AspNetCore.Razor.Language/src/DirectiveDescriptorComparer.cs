@@ -8,6 +8,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DirectiveDescriptorComparer : IEqualityComparer<DirectiveDescriptor>
 {
     public static readonly DirectiveDescriptorComparer Default = new DirectiveDescriptorComparer();

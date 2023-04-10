@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
+
 public interface ILspLogger
 {
     void LogStartContext(string message, params object[] @params);

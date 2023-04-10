@@ -5,6 +5,7 @@ using System.Net;
 
 namespace Microsoft.AspNetCore.Connections;
 
+
 /// <summary>
 /// Defines an interface that determines whether the listener factory supports binding to the specified <see cref="EndPoint"/>.
 /// </summary>

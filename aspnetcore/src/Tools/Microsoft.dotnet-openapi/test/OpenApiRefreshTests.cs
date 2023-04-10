@@ -6,6 +6,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.OpenApi.Refresh.Tests;
 
+
 public class OpenApiRefreshTests : OpenApiTestBase
 {
     public OpenApiRefreshTests(ITestOutputHelper output)

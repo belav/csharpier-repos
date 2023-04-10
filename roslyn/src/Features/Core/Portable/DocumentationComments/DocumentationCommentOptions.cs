@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Formatting;
 
 namespace Microsoft.CodeAnalysis.DocumentationComments;
 
+
 [DataContract]
 internal readonly record struct DocumentationCommentOptions
 {

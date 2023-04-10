@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.ObjectPool;
 
+
 public class ThreadingTest
 {
     private CancellationTokenSource _cts = default!;

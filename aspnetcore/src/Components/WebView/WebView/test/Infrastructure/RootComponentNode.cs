@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.WebView.Document;
 
+
 internal class RootComponentNode : ComponentNode
 {
     public RootComponentNode(int componentId, string selector)

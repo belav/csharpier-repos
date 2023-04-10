@@ -7,6 +7,7 @@ using RoutingSandbox.Framework;
 
 namespace RoutingSandbox;
 
+
 public class UseEndpointRoutingStartup
 {
     private static readonly byte[] _plainTextPayload = Encoding.UTF8.GetBytes("Plain text!");

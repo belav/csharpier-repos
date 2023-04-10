@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 
+
 internal partial struct VirtualCharSequence
 {
     /// <summary>

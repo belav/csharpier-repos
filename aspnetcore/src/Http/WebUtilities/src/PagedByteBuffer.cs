@@ -6,6 +6,7 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
+
 internal sealed class PagedByteBuffer : IDisposable
 {
     internal const int PageSize = 1024;

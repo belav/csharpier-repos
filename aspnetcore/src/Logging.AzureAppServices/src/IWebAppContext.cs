@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
+
 /// <summary>
 /// Represents an Azure WebApp context
 /// </summary>

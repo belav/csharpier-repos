@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class ExplicitMapperCreation : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>

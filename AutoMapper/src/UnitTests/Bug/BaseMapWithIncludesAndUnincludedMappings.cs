@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
+
 public class BaseMapWithIncludesAndUnincludedMappings
 {
     public class ADTO

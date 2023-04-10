@@ -2,6 +2,7 @@ using AutoMapper.Features;
 
 namespace AutoMapper.Configuration;
 
+
 [EditorBrowsable(EditorBrowsableState.Never)]
 public abstract class TypeMapConfiguration
 {

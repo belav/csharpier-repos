@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace ControllersFromServicesClassLibrary;
 
+
 public class QueryValueService
 {
     private readonly HttpContext _context;

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Razor.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
+
 /// <summary>
 /// Exposes one or more <see cref="RazorCompiledItem"/> instances from an <see cref="ApplicationPart"/>.
 /// </summary>

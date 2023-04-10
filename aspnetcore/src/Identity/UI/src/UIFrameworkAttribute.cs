@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity.UI;
 
+
 /// <summary>
 /// The UIFramework Identity UI will use on the application.
 /// </summary>

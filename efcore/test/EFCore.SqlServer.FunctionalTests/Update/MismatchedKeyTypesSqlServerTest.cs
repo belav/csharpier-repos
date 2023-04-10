@@ -7,6 +7,7 @@ using System.Transactions;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 public class MismatchedKeyTypesSqlServerTest
     : IClassFixture<MismatchedKeyTypesSqlServerTest.MismatchedKeyTypesSqlServerFixture>
 {

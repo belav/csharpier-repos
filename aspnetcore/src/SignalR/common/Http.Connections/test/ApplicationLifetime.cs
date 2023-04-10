@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
+
 public class TestApplicationLifetime : IHostApplicationLifetime
 {
     private readonly CancellationTokenSource _startedSource = new CancellationTokenSource();

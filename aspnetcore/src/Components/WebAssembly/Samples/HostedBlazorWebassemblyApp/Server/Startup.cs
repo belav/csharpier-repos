@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace HostedBlazorWebassemblyApp.Server;
 
+
 public class Startup
 {
     public Startup(IConfiguration configuration)

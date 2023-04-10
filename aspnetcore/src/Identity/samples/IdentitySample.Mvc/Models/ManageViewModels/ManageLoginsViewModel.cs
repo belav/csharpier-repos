@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace IdentitySample.Models.ManageViewModels;
 
+
 public class ManageLoginsViewModel
 {
     public IList<UserLoginInfo> CurrentLogins { get; set; }

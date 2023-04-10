@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 internal static class Http2CatIServiceCollectionExtensions
 {
     public static IServiceCollection UseHttp2Cat(

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
+
 /// <summary>
 /// Sets up <see cref="ConnectionOptions"/>.
 /// </summary>

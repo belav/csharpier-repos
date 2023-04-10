@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
+
 public class CorsServiceTests
 {
     [Fact]

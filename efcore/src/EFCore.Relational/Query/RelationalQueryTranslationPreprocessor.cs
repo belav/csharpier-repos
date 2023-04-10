@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <inheritdoc />
 public class RelationalQueryTranslationPreprocessor : QueryTranslationPreprocessor
 {

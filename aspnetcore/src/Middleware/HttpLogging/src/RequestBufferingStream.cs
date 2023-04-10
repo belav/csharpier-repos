@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 internal sealed class RequestBufferingStream : BufferingStream
 {
     private readonly Encoding _encoding;

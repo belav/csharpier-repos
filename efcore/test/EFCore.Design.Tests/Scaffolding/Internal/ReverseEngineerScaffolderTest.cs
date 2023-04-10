@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
+
 public class ReverseEngineerScaffolderTest
 {
     [ConditionalFact]

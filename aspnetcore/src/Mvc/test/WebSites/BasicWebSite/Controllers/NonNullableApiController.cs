@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
+
 [ApiController]
 [Route("api/NonNullable")]
 public class NonNullableApiController : ControllerBase

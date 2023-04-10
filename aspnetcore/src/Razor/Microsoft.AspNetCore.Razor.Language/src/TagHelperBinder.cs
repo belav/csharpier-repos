@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// Enables retrieval of <see cref="TagHelperBinding"/>'s.
 /// </summary>

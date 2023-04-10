@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
+
 public class CustomLoggerFactory : ILoggerFactory
 {
     public void CustomConfigureMethod() { }

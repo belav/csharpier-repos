@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 public class DefaultPageHandlerMethodSelectorTest
 {
     [Fact]

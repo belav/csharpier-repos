@@ -5,6 +5,7 @@ using System.Collections;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
+
 /// <summary>
 ///     <para>
 ///         An expression that represents a constant in a SQL tree.

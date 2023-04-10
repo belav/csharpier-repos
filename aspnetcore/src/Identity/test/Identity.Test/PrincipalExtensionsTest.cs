@@ -5,6 +5,7 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 public class ClaimsIdentityExtensionsTest
 {
     public const string ExternalAuthenticationScheme = "TestExternalAuth";

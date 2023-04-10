@@ -9,6 +9,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests;
 
+
 public class IntegrationTestBase : IClassFixture<GrpcTestFixture<Startup>>, IDisposable
 {
     private HttpClient? _channel;

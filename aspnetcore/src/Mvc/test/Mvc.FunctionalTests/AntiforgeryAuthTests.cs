@@ -7,6 +7,7 @@ using SecurityWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class AntiforgeryAuthTests : IClassFixture<MvcTestFixture<Startup>>
 {
     public AntiforgeryAuthTests(MvcTestFixture<Startup> fixture)

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class TPTGearsOfWarQuerySqliteFixture : TPTGearsOfWarQueryRelationalFixture
 {
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;

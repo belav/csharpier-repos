@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+
 /// <summary>
 ///     Provides a simple API for configuring an <see cref="IMutableIndex" />.
 /// </summary>

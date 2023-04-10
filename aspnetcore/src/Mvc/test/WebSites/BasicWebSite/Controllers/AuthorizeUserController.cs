@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite;
 
+
 [Authorize("Api")]
 public class AuthorizeUserController : Controller
 {

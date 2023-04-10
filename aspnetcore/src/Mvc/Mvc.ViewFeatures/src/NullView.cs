@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 internal sealed class NullView : IView
 {
     public static readonly NullView Instance = new NullView();

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+
 /* https://tools.ietf.org/html/rfc7540#section-6.9
     +-+-------------------------------------------------------------+
     |R|              Window Size Increment (31)                     |

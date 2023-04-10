@@ -5,6 +5,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 public class SourceLocationTrackerTest
 {
     private static readonly SourceLocation TestStartLocation = new SourceLocation(10, 42, 45);

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 
+
 public class AspNetSiteServerFixture : WebHostServerFixture
 {
     public delegate IHost BuildWebHost(string[] args);

@@ -9,6 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTestGenerator.Api;
 
+
 internal sealed class WrappedAddImportFixData
 {
     internal readonly AddImportFixData Underlying;

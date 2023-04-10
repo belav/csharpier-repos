@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace Microsoft.Extensions.Internal;
 
+
 internal struct ValueStopwatch
 {
     private static readonly double TimestampToTicks =

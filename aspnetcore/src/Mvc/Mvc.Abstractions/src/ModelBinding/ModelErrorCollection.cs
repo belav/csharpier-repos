@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 /// <summary>
 /// A collection of <see cref="ModelError"/> instances.
 /// </summary>

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// PolicySchemes are used to redirect authentication methods to another scheme.
 /// </summary>

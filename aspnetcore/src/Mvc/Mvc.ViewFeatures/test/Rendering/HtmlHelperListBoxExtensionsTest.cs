@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.Core;
 
+
 public class HtmlHelperListBoxExtensionsTest
 {
     private static readonly List<SelectListItem> BasicSelectList = new List<SelectListItem>

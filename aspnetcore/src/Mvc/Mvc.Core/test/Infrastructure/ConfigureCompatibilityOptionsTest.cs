@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 #pragma warning disable ASP5001 // Type or member is obsolete
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 [System.Obsolete]
 public class ConfigureCompatibilityOptionsTest
 {

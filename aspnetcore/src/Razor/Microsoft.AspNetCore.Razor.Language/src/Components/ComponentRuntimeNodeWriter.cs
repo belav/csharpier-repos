@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 /// <summary>
 /// Generates the C# code corresponding to Razor source document contents.
 /// </summary>

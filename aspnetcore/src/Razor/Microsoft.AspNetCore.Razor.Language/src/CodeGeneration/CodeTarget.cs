@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 public abstract class CodeTarget
 {
     public static CodeTarget CreateDefault(

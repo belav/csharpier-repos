@@ -7,6 +7,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 internal sealed class EndpointMetadataConvention : IActionModelConvention
 {
     private static readonly MethodInfo PopulateMetadataForEndpointMethod =

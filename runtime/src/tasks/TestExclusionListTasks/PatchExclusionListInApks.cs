@@ -11,6 +11,7 @@ using Microsoft.Build.Utilities;
 
 namespace TestExclusionListTasks;
 
+
 public class PatchExclusionListInApks : Task
 {
     [Required]

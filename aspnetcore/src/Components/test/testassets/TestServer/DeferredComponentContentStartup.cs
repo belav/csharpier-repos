@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace TestServer;
 
+
 public class DeferredComponentContentStartup
 {
     // This method gets called by the runtime. Use this method to add services to the container.

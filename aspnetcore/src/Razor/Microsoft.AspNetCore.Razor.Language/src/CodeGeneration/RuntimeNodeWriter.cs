@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 public class RuntimeNodeWriter : IntermediateNodeWriter
 {
     public virtual string WriteCSharpExpressionMethod { get; set; } = "Write";

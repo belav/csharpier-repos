@@ -18,6 +18,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
+
 public class RedisHubLifetimeManagerTests : ScaleoutHubLifetimeManagerTests<TestRedisServer>
 {
     private TestRedisServer _server;

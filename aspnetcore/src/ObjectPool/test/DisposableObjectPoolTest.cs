@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.ObjectPool;
 
+
 public class DisposableObjectPoolTest
 {
     [Fact]

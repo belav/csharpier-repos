@@ -3,6 +3,7 @@
 
 namespace ClassLibraryWithPortablePdbs;
 
+
 public class ExceptionType
 {
     public static void StaticMethodThatThrows()

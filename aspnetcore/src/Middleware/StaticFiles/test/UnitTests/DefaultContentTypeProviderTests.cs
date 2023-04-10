@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 public class DefaultContentTypeProviderTests
 {
     [Fact]

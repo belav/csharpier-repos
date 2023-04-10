@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class HubFilterTests : VerifiableLoggedTest
 {
     [Fact]

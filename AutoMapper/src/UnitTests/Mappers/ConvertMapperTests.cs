@@ -2,6 +2,7 @@
 
 namespace AutoMapper.UnitTests.Mappers;
 
+
 public class ConvertMapperTests : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() => new(c => { });

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CorsWebSite.Controllers;
 
+
 [AllRequestsBlockingAuthorizationFilter]
 [EnableCors("AllowAll")]
 [Route("api/store/[action]")]

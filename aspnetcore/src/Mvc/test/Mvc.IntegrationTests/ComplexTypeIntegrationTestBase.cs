@@ -13,6 +13,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 // Integration tests targeting the behavior of the ComplexTypeModelBinder and related classes
 // with other model binders.
 public abstract class ComplexTypeIntegrationTestBase

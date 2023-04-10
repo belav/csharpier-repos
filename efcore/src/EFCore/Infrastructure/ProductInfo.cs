@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     Helper class for finding the version of Entity Framework Core being used.
 /// </summary>

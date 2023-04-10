@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 // Represents the serialized invocation to a component.
 // We serialize this marker into a comment in the generated
 // HTML.

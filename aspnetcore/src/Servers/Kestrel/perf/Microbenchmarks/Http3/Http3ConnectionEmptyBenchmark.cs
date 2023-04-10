@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class Http3ConnectionEmptyBenchmark : Http3ConnectionBenchmarkBase
 {
     [Params(0, 128, 1024)]

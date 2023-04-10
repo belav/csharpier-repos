@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
+
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="UpdateSqlGenerator" />

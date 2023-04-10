@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     <para>
 ///         Extension methods for <see cref="IInfrastructure{T}" />.

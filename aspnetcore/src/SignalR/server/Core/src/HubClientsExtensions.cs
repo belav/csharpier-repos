@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// Extension methods for <see cref="IHubClients{T}"/>.
 /// </summary>

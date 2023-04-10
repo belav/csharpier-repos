@@ -6,6 +6,7 @@ using Microsoft.JSInterop;
 
 namespace BasicTestApp.CustomEventTypesNamespace;
 
+
 [EventHandler("ontestevent", typeof(TestEventArgs), true, true)]
 [EventHandler("onkeydown.testvariant", typeof(TestKeyDownEventArgs), true, true)]
 [EventHandler("onkeydown.yetanother", typeof(YetAnotherCustomKeyboardEventArgs), true, true)]

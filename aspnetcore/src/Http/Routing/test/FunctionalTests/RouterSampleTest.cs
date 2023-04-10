@@ -9,6 +9,7 @@ using RoutingWebSite;
 
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
+
 public class RouterSampleTest : IDisposable
 {
     private readonly HttpClient _client;

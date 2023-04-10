@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
+
 public class RegisterConfirmation : DefaultUIPage
 {
     private readonly IHtmlAnchorElement _confirmLink;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 public class NoopRoleStore : IRoleStore<PocoRole>
 {
     public Task<IdentityResult> CreateAsync(

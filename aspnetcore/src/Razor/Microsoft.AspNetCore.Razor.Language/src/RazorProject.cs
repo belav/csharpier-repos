@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// An abstraction for working with a project containing Razor files.
 /// </summary>

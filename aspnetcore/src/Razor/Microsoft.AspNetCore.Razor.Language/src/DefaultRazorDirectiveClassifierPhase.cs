@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultRazorDirectiveClassifierPhase
     : RazorEnginePhaseBase,
         IRazorDirectiveClassifierPhase

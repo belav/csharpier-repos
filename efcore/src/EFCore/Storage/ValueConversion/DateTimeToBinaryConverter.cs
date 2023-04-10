@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 /// <summary>
 ///     Converts <see cref="DateTime" /> using <see cref="DateTime.ToBinary" />. This
 ///     will preserve the <see cref="DateTimeKind" />.

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 public class ComponentApplicationLifetimeTest
 {
     [Fact]

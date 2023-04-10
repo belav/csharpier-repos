@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel;
 
+
 public class GeoPointEntity
 {
     public Guid Id { get; set; }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TagHelpersWebSite;
 
+
 public class MyHtmlContent : IHtmlContent
 {
     private IHtmlHelper Html { get; }

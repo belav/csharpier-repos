@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
+
 // We use a middleware so that we can use DI.
 internal sealed partial class CircuitDisconnectMiddleware
 {

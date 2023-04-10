@@ -8,6 +8,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 internal sealed class MinLengthAttributeAdapter : AttributeAdapterBase<MinLengthAttribute>
 {
     private readonly string _min;

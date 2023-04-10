@@ -7,6 +7,7 @@ using System.Collections;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal;
 
+
 public partial class CosmosShapedQueryCompilingExpressionVisitor
 {
     private sealed class InExpressionValuesExpandingExpressionVisitor : ExpressionVisitor

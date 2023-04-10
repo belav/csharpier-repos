@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
+
 internal static partial class LoggingExtensions
 {
     [LoggerMessage(0, LogLevel.Debug, "No client certificate found.", EventName = "NoCertificate")]

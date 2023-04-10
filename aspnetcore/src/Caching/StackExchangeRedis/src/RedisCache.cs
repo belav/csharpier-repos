@@ -13,6 +13,7 @@ using StackExchange.Redis;
 
 namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 
+
 /// <summary>
 /// Distributed cache implementation using Redis.
 /// <para>Uses <c>StackExchange.Redis</c> as the Redis client.</para>

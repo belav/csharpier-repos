@@ -9,6 +9,7 @@ using System.Threading;
 
 namespace Microsoft.Extensions.Internal;
 
+
 internal class SingleThreadedSynchronizationContext : SynchronizationContext
 {
     private readonly BlockingCollection<(SendOrPostCallback Callback, object? State)> _queue =

@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
+
 internal static class ApiControllerFacts
 {
     public static bool IsApiControllerAction(

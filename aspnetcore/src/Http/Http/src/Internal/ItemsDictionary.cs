@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Http;
 
+
 internal sealed class ItemsDictionary : IDictionary<object, object?>
 {
     private IDictionary<object, object?>? _items;

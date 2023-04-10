@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
+
 internal static partial class SendUtils
 {
     public static async Task SendMessages(

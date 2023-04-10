@@ -6,6 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Options;
 
+
 /// <summary>
 /// Specifies that the option should be stored into a roamed profile across machines.
 /// </summary>

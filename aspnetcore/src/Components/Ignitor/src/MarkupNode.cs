@@ -3,6 +3,7 @@
 
 namespace Ignitor;
 
+
 public class MarkupNode : Node
 {
     public MarkupNode(string markupContent)

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace SocialWeather.Json;
 
+
 public class JsonStreamFormatter<T> : IStreamFormatter<T>
 {
     private readonly JsonSerializer _serializer = new JsonSerializer();

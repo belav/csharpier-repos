@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class RequestParsingData
 {
     public const int InnerLoopCount = 512;

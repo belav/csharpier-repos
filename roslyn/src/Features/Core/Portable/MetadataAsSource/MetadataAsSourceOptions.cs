@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.MetadataAsSource;
 
+
 /// <summary>
 /// Options for metadata as source navigation
 /// </summary>

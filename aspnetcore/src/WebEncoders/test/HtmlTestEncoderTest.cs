@@ -5,6 +5,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.WebEncoders.Testing;
 
+
 public class HtmlTestEncoderTest
 {
     [Theory]

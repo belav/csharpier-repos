@@ -10,6 +10,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class ViewEngineTests : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>
 {
     private static readonly Assembly _assembly = typeof(ViewEngineTests).GetTypeInfo().Assembly;

@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 internal static class ArraySegmentExtensions
 {
     public static byte[] AsStandaloneArray(this ArraySegment<byte> arraySegment)

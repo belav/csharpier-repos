@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     Options set at the <see cref="IServiceProvider" /> singleton level to control core options.
 /// </summary>

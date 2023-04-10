@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
+
 internal sealed class ReflectedNegotiateStateFactory : INegotiateStateFactory
 {
     [RequiresUnreferencedCode(

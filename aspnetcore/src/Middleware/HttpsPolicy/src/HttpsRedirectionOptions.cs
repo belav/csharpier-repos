@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.HttpsPolicy;
 
+
 /// <summary>
 /// Options for the HTTPS Redirection Middleware.
 /// </summary>

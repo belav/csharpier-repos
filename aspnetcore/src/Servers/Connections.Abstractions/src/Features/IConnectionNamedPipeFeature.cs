@@ -5,6 +5,7 @@ using System.IO.Pipes;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
+
 /// <summary>
 /// Provides access to the connection's underlying <see cref="NamedPipeServerStream"/>.
 /// </summary>

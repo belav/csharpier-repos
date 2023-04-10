@@ -7,6 +7,7 @@ using Microsoft.Extensions.Localization;
 
 namespace LocalizationSample;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

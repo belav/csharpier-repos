@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.NavigateTo;
 
+
 internal readonly record struct OmniSharpNavigateToSearchResult(
     string AdditionalInformation,
     string Kind,

@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Formatting.Rules;
 
+
 internal static class FormattingRuleUtilities
 {
     public static ImmutableArray<AbstractFormattingRule> GetFormattingRules(

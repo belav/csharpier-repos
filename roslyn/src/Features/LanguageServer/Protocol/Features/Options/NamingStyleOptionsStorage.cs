@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CodeStyle;
 
+
 internal static class NamingStyleOptionsStorage
 {
     public static NamingStylePreferences GetNamingStylePreferences(

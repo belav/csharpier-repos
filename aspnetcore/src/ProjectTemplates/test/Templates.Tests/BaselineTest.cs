@@ -15,6 +15,7 @@ using Xunit.Abstractions;
 
 namespace Templates.Test;
 
+
 public class BaselineTest : LoggedTest
 {
     private static readonly string BaselineDefinitionFileResourceName =

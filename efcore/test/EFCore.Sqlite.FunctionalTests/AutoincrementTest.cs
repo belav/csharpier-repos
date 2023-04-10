@@ -5,6 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class AutoincrementTest : IClassFixture<AutoincrementTest.AutoincrementFixture>
 {
     public AutoincrementTest(AutoincrementFixture fixture)

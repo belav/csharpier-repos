@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace RazorPagesWebSite;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

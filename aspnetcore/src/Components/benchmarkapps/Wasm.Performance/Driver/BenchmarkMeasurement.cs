@@ -3,6 +3,7 @@
 
 namespace Wasm.Performance.Driver;
 
+
 internal sealed class BenchmarkMeasurement
 {
     public DateTime Timestamp { get; internal set; }

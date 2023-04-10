@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeStyle;
 
+
 [ExportLanguageService(typeof(ICodeStyleService), LanguageNames.CSharp), Shared]
 internal sealed class CSharpCodeStyleService : ICodeStyleService
 {

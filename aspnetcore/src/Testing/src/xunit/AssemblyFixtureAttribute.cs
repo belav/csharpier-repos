@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 public class AssemblyFixtureAttribute : Attribute
 {

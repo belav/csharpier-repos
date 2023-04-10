@@ -17,6 +17,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 // These tests cover the logic included in ViewResult.ExecuteResultAsync - see ViewResultExecutorTest
 // and ViewExecutorTest for more comprehensive tests.
 public class ViewResultTest

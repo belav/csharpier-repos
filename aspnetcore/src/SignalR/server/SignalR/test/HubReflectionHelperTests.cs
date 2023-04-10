@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class HubReflectionHelperTests
 {
     [Fact]

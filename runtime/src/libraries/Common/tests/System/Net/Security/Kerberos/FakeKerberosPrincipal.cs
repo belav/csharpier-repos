@@ -10,6 +10,7 @@ using Kerberos.NET.Server;
 
 namespace System.Net.Security.Kerberos;
 
+
 class FakeKerberosPrincipal : IKerberosPrincipal
 {
     private readonly byte[] _password;

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.OutputCaching.Policies;
 
 namespace Microsoft.AspNetCore.OutputCaching.Tests;
 
+
 public class OutputCachePoliciesTests
 {
     [Fact]

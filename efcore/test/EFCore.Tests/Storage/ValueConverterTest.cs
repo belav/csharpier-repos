@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class ValueConverterTest
 {
     [ConditionalTheory]

@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
+
 public class ViewComponentTagHelperPassTest
 {
     [Fact]

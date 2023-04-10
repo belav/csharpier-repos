@@ -15,6 +15,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.Extensions.StackTrace.Sources;
 
+
 internal sealed class StackTraceHelper
 {
     [UnconditionalSuppressMessage(

@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Internal;
 
+
 /// <summary>
 /// An empty scope without any logic
 /// </summary>

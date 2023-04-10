@@ -9,6 +9,7 @@ using Xunit.Sdk;
 // Do not change this namespace without changing the usage in ConditionalTheoryAttribute
 namespace Microsoft.AspNetCore.Testing;
 
+
 internal sealed class ConditionalTheoryDiscoverer : TheoryDiscoverer
 {
     public ConditionalTheoryDiscoverer(IMessageSink diagnosticMessageSink)

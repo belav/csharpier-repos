@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 public class DisallowOptionsRequestsPageFilterTest
 {
     [Fact]

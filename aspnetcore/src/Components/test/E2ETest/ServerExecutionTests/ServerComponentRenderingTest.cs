@@ -10,6 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
+
 // By inheriting from ComponentRenderingTest, this test class also copies
 // all the test cases shared with client-side rendering
 

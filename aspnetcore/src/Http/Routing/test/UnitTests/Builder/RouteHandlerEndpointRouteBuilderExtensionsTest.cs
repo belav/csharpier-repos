@@ -15,6 +15,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
 {
     private RouteEndpointDataSource GetBuilderEndpointDataSource(

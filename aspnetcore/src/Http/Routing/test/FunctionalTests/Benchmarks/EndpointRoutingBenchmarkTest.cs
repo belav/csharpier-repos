@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
+
 public class EndpointRoutingBenchmarkTest : IDisposable
 {
     private readonly HttpClient _client;

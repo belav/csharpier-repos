@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public class MvcDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
 {
     public MvcDiagnosticAnalyzerRunner(DiagnosticAnalyzer analyzer)

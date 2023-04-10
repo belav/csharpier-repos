@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Html;
 
+
 /// <summary>
 /// Defines a contract for <see cref="IHtmlContent"/> instances made up of several components which
 /// can be copied into an <see cref="IHtmlContentBuilder"/>.

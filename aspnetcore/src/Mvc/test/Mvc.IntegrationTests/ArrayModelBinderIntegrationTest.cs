@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 // Integration tests targeting the behavior of the ArrayModelBinder with other model binders.
 public class ArrayModelBinderIntegrationTest
 {

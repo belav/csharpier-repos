@@ -21,6 +21,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 public class ParameterBinderTest
 {
     private static readonly IOptions<MvcOptions> _optionsAccessor = Options.Create(

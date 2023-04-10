@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Connections;
 
+
 /// <summary>
 /// Represents the possible transfer formats.
 /// </summary>

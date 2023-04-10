@@ -11,6 +11,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 /// <summary>
 /// Middleware that logs HTTP requests and HTTP responses.
 /// </summary>

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 #pragma warning disable RCS1102 // Make class static.
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class CommandConfigurationTests
 {
     public class CommandTimeout

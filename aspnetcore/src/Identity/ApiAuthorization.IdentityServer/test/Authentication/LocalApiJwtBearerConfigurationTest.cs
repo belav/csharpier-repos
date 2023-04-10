@@ -17,6 +17,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 public class IdentityServerJwtBearerOptionsConfigurationTest
 {
     [Fact]

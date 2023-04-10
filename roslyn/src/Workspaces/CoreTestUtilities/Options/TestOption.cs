@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
+
 internal class TestOption : IOption
 {
     public string Feature { get; set; } = "test";

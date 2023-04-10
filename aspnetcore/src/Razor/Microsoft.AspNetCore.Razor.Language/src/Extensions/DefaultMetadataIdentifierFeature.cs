@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 // The default scheme for identifiers matches MVC's view engine paths:
 // 1. Normalize backslash to forward-slash
 // 2. Always include leading slash

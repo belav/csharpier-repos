@@ -20,6 +20,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
+
 public class ControllerBinderDelegateProviderTest
 {
     private static readonly MvcOptions _options = new MvcOptions();

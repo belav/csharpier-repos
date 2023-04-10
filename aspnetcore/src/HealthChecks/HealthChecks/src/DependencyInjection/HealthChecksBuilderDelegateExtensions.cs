@@ -10,6 +10,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Provides extension methods for registering delegates with the <see cref="IHealthChecksBuilder"/>.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 public class KeyTest
 {
     [ConditionalFact]

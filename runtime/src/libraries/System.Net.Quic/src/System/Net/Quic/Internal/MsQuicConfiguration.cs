@@ -10,6 +10,7 @@ using static Microsoft.Quic.MsQuic;
 
 namespace System.Net.Quic;
 
+
 internal static class MsQuicConfiguration
 {
     private static bool HasPrivateKey(this X509Certificate certificate) =>

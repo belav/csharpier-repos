@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
+
 public class CSharpModelGeneratorTest
 {
     [ConditionalFact]

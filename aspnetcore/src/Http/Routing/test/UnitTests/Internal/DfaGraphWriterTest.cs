@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Routing.Internal;
 
+
 public class DfaGraphWriterTest
 {
     private DfaGraphWriter CreateGraphWriter()

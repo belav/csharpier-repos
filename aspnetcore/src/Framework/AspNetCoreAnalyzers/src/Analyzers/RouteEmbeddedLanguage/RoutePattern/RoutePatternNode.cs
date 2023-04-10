@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure.Embedd
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.RoutePattern;
 
+
 internal abstract class RoutePatternNode : EmbeddedSyntaxNode<RoutePatternKind, RoutePatternNode>
 {
     protected RoutePatternNode(RoutePatternKind kind)

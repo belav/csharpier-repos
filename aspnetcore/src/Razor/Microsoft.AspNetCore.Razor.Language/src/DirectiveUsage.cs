@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// The way a directive can be used. The usage determines how many, and where directives can exist per file.
 /// </summary>

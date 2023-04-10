@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 public partial class ResultsOfTTests
 {
     private readonly ITestOutputHelper _output;

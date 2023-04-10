@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 public class PasswordHasherTest
 {
     // Password used in these tests

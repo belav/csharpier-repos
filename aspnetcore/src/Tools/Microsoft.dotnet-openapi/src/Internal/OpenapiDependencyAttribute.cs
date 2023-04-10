@@ -8,6 +8,7 @@ using Microsoft.DotNet.OpenApi;
 
 namespace Microsoft.DotNet.Openapi.Tools.Internal;
 
+
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 internal sealed class OpenApiDependencyAttribute : Attribute
 {

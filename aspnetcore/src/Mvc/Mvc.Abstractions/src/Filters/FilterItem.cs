@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+
 /// <summary>
 /// Used to associate executable filters with <see cref="IFilterMetadata"/> instances
 /// as part of <see cref="FilterProviderContext"/>. An <see cref="IFilterProvider"/> should

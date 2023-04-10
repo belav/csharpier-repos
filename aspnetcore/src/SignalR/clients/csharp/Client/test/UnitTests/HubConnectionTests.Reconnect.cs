@@ -21,6 +21,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
+
 public partial class HubConnectionTests
 {
     public class Reconnect : VerifiableLoggedTest

@@ -10,6 +10,7 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.AspNetCore.Mvc.Testing.Tasks;
 
+
 /// <summary>
 /// Generate a JSON file mapping assemblies to content root paths.
 /// </summary>

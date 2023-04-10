@@ -11,6 +11,7 @@ using static Microsoft.AspNetCore.HttpLogging.MediaTypeOptions;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
+
 /// <summary>
 /// Stream that buffers reads
 /// </summary>

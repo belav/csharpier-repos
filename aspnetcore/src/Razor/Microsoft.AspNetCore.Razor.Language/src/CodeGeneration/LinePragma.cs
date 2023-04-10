@@ -7,6 +7,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 public readonly struct LinePragma : IEquatable<LinePragma>
 {
     public LinePragma(int startLineIndex, int lineCount, string filePath)

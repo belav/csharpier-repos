@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client;
 
+
 public partial class HttpConnection
 {
     internal static partial class Log

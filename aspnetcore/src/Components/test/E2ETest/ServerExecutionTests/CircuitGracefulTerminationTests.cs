@@ -14,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
+
 public class CircuitGracefulTerminationTests
     : ServerTestBase<BasicTestAppServerSiteFixture<ServerStartup>>,
         IDisposable

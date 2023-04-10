@@ -13,6 +13,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.CookiePolicy.Test;
 
+
 public class CookieConsentTests
 {
     [Fact]

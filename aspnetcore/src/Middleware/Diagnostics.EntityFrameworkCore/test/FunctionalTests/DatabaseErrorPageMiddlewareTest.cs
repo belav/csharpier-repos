@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
+
 public class DatabaseErrorPageMiddlewareTest
 {
     [Fact]

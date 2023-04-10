@@ -19,6 +19,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Identity.InMemory;
 
+
 public class FunctionalTest
 {
     const string TestPassword = "[PLACEHOLDER]-1a";

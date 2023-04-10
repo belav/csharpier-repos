@@ -8,6 +8,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract partial class GraphUpdatesTestBase<TFixture>
     where TFixture : GraphUpdatesTestBase<TFixture>.GraphUpdatesFixtureBase, new()
 {

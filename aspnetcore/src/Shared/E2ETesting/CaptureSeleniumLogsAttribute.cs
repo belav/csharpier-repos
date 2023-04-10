@@ -9,6 +9,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.E2ETesting;
 
+
 // This has to use BeforeAfterTestAttribute because running the log capture
 // in the BrowserFixture.Dispose method is too late, and we can't add logging
 // to the test.

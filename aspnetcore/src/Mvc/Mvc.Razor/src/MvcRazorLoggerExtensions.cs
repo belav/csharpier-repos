@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 internal static class MvcRazorLoggerExtensions
 {
     private static readonly double TimestampToTicks =

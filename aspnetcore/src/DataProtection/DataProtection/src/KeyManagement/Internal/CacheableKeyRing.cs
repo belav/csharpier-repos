@@ -8,6 +8,7 @@ using System.Threading;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 
+
 /// <summary>
 /// Wraps both a keyring and its expiration policy.
 /// </summary>

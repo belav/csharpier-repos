@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
+
 /// <summary>
 /// Represents a part of a route pattern.
 /// </summary>

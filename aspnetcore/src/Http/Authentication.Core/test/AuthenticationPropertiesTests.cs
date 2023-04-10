@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication.Core.Test;
 
+
 public class AuthenticationPropertiesTests
 {
     [Fact]

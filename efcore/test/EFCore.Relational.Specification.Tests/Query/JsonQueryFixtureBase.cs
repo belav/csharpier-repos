@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.JsonQuery;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class JsonQueryFixtureBase
     : SharedStoreFixtureBase<JsonQueryContext>,
         IQueryFixtureBase

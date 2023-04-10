@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class TPCGearsOfWarQueryRelationalTestBase<TFixture>
     : GearsOfWarQueryRelationalTestBase<TFixture>
     where TFixture : TPCGearsOfWarQueryRelationalFixture, new()

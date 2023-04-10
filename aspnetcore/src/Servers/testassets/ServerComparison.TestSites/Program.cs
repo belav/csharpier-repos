@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ServerComparison.TestSites;
 
+
 public static class Program
 {
     public static void Main(string[] args)

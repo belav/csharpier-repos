@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
+
 // This controller is reachable via traditional routing.
 public class AntiforgeryController : Controller
 {

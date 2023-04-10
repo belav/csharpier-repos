@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace SignalRSamples.Hubs;
 
+
 public class Streaming : Hub
 {
     public async IAsyncEnumerable<int> AsyncEnumerableCounter(int count, double delay)

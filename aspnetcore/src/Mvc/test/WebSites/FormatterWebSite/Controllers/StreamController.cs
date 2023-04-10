@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FormatterWebSite;
 
+
 public class StreamController : Controller
 {
     [HttpGet]

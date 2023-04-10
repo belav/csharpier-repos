@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 internal interface IAcceptFailureReports
 {
     void ReportTestFailure();

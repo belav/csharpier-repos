@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace BasicWebSite;
 
+
 public class ManagerHandler : AuthorizationHandler<OperationAuthorizationRequirement>
 {
     protected override Task HandleRequirementAsync(

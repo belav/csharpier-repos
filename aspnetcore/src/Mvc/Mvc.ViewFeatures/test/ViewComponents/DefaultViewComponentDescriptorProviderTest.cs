@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
+
 public class DefaultViewComponentDescriptorProviderTest
 {
     [Theory]

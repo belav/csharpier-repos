@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.WebSockets.Tests;
 
+
 public class HandshakeTests
 {
     [Fact]

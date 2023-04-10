@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 /// <summary>
 ///     A DbContext instance represents a session with the database and can be used to query and save
 ///     instances of your entities. DbContext is a combination of the Unit Of Work and Repository patterns.

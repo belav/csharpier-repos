@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.StackTrace.Sources;
 
+
 /// <summary>
 /// Contains details for individual exception messages.
 /// </summary>

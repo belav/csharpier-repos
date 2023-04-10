@@ -8,6 +8,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace RazorBuildWebSite;
 
+
 public class UpdateableFileProvider : IFileProvider
 {
     public CancellationTokenSource _pagesTokenSource = new CancellationTokenSource();

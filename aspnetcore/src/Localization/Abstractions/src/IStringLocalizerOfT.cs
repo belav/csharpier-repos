@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.Localization;
 
+
 /// <summary>
 /// Represents an <see cref="IStringLocalizer"/> that provides strings for <typeparamref name="T"/>.
 /// </summary>

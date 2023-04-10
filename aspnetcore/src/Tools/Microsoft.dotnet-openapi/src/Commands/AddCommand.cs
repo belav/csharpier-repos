@@ -6,6 +6,7 @@ using Microsoft.DotNet.Openapi.Tools;
 
 namespace Microsoft.DotNet.OpenApi.Commands;
 
+
 internal sealed class AddCommand : BaseCommand
 {
     private const string CommandName = "add";

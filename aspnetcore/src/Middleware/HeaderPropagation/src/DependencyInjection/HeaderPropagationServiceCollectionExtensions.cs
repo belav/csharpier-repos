@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// <see cref="IServiceCollection"/> extension methods for <see cref="HeaderPropagationMiddleware"/> which propagates request headers to an <see cref="System.Net.Http.HttpClient"/>.
 /// </summary>

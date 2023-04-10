@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 public class HelperResult : IHtmlContent
 {
     public HelperResult(Func<TextWriter, Task> asyncAction) { }

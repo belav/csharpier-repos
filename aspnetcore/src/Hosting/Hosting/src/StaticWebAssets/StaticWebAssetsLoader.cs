@@ -10,6 +10,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Hosting.StaticWebAssets;
 
+
 /// <summary>
 /// Loader for static web assets
 /// </summary>

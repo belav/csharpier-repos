@@ -25,6 +25,7 @@ using HttpConnectionOptions = Microsoft.AspNetCore.Http.Connections.Client.HttpC
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class EndToEndTestsCollection : ICollectionFixture<InProcessTestServer<Startup>>
 {
     public const string Name = nameof(EndToEndTestsCollection);

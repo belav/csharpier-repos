@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 // ReSharper disable StringStartsWithIsCultureSpecific
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class DatabaseErrorLogStateTest
 {
     [ConditionalFact]

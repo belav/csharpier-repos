@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// Defines the contract to convert a type to an <see cref="IActionResult"/> during action invocation.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 internal sealed class UnauthorizedResult : StatusCodeResult
 {
     public UnauthorizedResult()

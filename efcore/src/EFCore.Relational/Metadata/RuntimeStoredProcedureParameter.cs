@@ -5,6 +5,7 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+
 /// <summary>
 ///     Represents a stored procedure parameter.
 /// </summary>

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
+
 /// <summary>
 ///     A service typically implemented by database providers to reverse engineer a database into
 ///     a <see cref="DatabaseModel" />.

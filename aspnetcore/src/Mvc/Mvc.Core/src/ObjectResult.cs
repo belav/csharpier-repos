@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// An <see cref="ActionResult"/> that on execution will write an object to the response
 /// using mechanisms provided by the host.

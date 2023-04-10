@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 public class EventCallbackFactoryBinderExtensionsTest
 {
     [Fact]

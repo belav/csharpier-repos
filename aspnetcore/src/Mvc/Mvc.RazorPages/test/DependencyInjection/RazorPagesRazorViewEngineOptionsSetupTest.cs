@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 public class RazorPagesRazorViewEngineOptionsSetupTest
 {
     [Fact]

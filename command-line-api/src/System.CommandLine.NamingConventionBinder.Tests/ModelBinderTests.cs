@@ -13,6 +13,7 @@ using Xunit;
 
 namespace System.CommandLine.NamingConventionBinder.Tests;
 
+
 public class ModelBinderTests
 {
     [Theory]

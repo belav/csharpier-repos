@@ -5,6 +5,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
+
 public class MediaTypeHeaderValueTest
 {
     [Fact]

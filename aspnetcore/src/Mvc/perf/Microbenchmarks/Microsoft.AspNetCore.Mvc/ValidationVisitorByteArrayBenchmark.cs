@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
+
 public class ValidationVisitorByteArrayBenchmark : ValidationVisitorBenchmarkBase
 {
     public override object Model { get; } = new byte[30];

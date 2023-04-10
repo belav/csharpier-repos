@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 /// <summary>
 /// The state associated with a candidate in a <see cref="CandidateSet"/>.
 /// </summary>

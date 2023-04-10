@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class RazorBuildTest : IClassFixture<MvcTestFixture<RazorBuildWebSite.Startup>>
 {
     public RazorBuildTest(MvcTestFixture<RazorBuildWebSite.Startup> fixture)

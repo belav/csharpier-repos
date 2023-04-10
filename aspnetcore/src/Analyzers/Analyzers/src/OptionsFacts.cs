@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 internal static class OptionsFacts
 {
     public static bool IsEndpointRoutingExplicitlyDisabled(OptionsAnalysis analysis)

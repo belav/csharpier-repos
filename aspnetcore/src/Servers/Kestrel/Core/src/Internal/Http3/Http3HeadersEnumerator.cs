@@ -8,6 +8,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
+
 internal sealed class Http3HeadersEnumerator : IEnumerator<KeyValuePair<string, string>>
 {
     private enum HeadersType : byte

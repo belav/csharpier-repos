@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
+
 internal sealed class LoggingHandler : DelegatingHandler
 {
     private readonly ILogger _logger;

@@ -14,6 +14,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure;
 
+
 public class DefaultTagHelperActivatorTest
 {
     [Fact]

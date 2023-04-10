@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
+
 public abstract class InheritanceBulkUpdatesRelationalFixture : InheritanceBulkUpdatesFixtureBase
 {
     public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;

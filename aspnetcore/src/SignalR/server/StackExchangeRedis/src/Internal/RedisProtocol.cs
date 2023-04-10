@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
+
 internal sealed class RedisProtocol
 {
     private readonly DefaultHubMessageSerializer _messageSerializer;

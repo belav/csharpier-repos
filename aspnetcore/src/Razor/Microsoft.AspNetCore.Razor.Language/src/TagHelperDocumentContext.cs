@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 /// <summary>
 /// The binding information for Tag Helpers resulted to a <see cref="RazorCodeDocument"/>. Represents the
 /// Tag Helper information after processing by directives.

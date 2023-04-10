@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 /// <summary>
 /// Methods for loading JavaScript from assembly embedded resources.
 /// </summary>

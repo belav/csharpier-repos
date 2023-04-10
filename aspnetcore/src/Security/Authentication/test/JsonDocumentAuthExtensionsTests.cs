@@ -5,6 +5,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication.Test;
 
+
 public class JsonDocumentAuthExtensionsTests
 {
     [Theory]

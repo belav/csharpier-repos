@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
+
 public class NegotiateProtocolTests
 {
     [Theory]

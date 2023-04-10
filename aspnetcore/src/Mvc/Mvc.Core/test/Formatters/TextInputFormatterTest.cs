@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 public class TextInputFormatterTest
 {
     [Fact]

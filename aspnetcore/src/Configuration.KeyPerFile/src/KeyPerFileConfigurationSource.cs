@@ -6,6 +6,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.Extensions.Configuration.KeyPerFile;
 
+
 /// <summary>
 /// An <see cref="IConfigurationSource"/> used to configure <see cref="KeyPerFileConfigurationProvider"/>.
 /// </summary>

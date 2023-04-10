@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing.Tree;
 
+
 // A decision tree that matches link generation entries based on route data.
 [DebuggerDisplay("{DebuggerDisplayString,nq}")]
 internal sealed class LinkGenerationDecisionTree

@@ -5,6 +5,7 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class GeometryComparer : IEqualityComparer<Geometry>
 {
     public static GeometryComparer Instance { get; } = new();

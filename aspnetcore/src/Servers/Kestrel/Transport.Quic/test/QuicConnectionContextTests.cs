@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Tests;
 
+
 [Collection(nameof(NoParallelCollection))]
 public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 {

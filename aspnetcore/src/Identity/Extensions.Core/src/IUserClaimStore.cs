@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Provides an abstraction for a store of claims for a user.
 /// </summary>

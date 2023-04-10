@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis;
 
 namespace XUnitWrapperGenerator;
 
+
 interface ITestInfo
 {
     string TestNameExpression { get; }

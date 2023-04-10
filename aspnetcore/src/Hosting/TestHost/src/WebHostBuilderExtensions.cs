@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.TestHost;
 
+
 /// <summary>
 /// Contains extensions for configuring the <see cref="IWebHostBuilder" /> instance.
 /// </summary>

@@ -13,6 +13,7 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.EditorFeatures.Cocoa.Lsp;
 
+
 /// <summary>
 /// Wraps the external access <see cref="IVSMacLspLoggerFactory"/> and exports it
 /// as an <see cref="ILspServiceLoggerFactory"/> for inclusion in the vsmac composition.

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.JsonQuery;
 
+
 public class JsonQueryContext : DbContext
 {
     public JsonQueryContext(DbContextOptions options)

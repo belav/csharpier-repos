@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Names for well-known relational model annotations. Applications should not use these names
 ///     directly, but should instead use the extension methods on metadata objects.

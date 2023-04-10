@@ -16,6 +16,7 @@ using RazorPagesClassLibrary;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class TestingInfrastructureTests
     : IClassFixture<WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting>>
 {

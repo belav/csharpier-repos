@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 internal static class SpecializedCollections
 {
     public static IEnumerator<T> EmptyEnumerator<T>()

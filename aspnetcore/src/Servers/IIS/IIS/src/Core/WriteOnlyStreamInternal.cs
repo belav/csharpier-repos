@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
+
 /// <summary>
 /// A <see cref="Stream"/> which only allows for writes.
 /// </summary>

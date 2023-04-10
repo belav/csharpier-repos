@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// Specifies the type returned by default by controllers annotated with <see cref="ApiControllerAttribute"/>.
 /// <para>

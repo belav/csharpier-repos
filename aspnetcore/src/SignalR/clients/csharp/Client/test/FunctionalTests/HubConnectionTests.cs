@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
+
 public class HubConnectionTestsCollection : ICollectionFixture<InProcessTestServer<Startup>>
 {
     public const string Name = nameof(HubConnectionTestsCollection);

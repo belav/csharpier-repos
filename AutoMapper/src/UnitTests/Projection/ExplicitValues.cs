@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
 
+
 public class ExplicitValues : AutoMapperSpecBase
 {
     private List<Dest> _dests;

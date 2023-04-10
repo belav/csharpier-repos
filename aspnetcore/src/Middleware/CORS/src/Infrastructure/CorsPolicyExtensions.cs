@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
+
 internal static class CorsPolicyExtensions
 {
     private const string _WildcardSubdomain = "*.";

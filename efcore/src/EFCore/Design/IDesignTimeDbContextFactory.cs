@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     A factory for creating derived <see cref="DbContext" /> instances. Implement this interface to enable
 ///     design-time services for context types that do not have a public default constructor. At design-time,

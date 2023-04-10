@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     Extension methods for adding Entity Framework Core design-time services to an
 ///     <see cref="IServiceCollection" />.

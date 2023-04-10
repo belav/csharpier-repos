@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.CodeStyle;
 
 namespace Microsoft.VisualStudio.LanguageServices.Options;
 
+
 [ExportVisualStudioStorageReadFallback(NamingStyleOptions.NamingPreferencesOptionName), Shared]
 internal sealed class NamingPreferencesReadFallback : IVisualStudioStorageReadFallback
 {

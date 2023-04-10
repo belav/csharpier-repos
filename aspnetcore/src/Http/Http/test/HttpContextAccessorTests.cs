@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http;
 
+
 public class HttpContextAccessorTests
 {
     [Fact]

@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
+
 public class ProtectedBrowserStorageInjectionTest
     : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {

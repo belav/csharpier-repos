@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
+
 internal class ComponentCodeTarget : CodeTarget
 {
     private readonly RazorCodeGenerationOptions _options;

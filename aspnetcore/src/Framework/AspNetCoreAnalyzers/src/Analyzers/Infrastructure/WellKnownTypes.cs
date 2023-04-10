@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.App.Analyzers.Infrastructure;
 
+
 internal enum WellKnownType
 {
     Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder,

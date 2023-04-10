@@ -20,6 +20,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 public class WsFederationTest
 {
     [Fact]

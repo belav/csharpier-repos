@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Authentication.Facebook;
 
+
 public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
 {
     protected override string DefaultScheme => FacebookDefaults.AuthenticationScheme;

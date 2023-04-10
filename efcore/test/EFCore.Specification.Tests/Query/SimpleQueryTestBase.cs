@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 {
     protected override string StoreName => "SimpleQueryTests";

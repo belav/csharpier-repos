@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Authentication;
 
+
 public class LocalApiPolicySchemeForwardSelectorTests
 {
     [Theory]

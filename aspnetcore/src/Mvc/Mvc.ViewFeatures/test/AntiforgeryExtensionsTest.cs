@@ -7,6 +7,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 /// <summary>
 /// Extension methods for <see cref="IAntiforgery"/>.
 /// </summary>

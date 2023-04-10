@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.HeaderPropagation;
 
+
 /// <summary>
 /// Provides configuration for the <see cref="HeaderPropagationMiddleware"/>.
 /// </summary>

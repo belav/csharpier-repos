@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Microsoft.AspNetCore.Rewrite.UrlActions;
 
+
 internal sealed class RewriteAction : UrlAction
 {
     public RuleResult Result { get; }

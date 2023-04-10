@@ -6,6 +6,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
+
 public class BrowserFileTest
 {
     [Fact]

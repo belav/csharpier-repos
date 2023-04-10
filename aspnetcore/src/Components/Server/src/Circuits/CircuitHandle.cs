@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+
 // Used to isolate a circuit from a CircuitHost.
 //
 // We can't refer to Hub.Items from a CircuitHost - but we want need to be

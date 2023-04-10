@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class SqlServerValueGenerationStrategyThrowTest
     : SqlServerValueGenerationConflictTest<SqlServerValueGenerationStrategyThrowTest.ThrowContext>
 {

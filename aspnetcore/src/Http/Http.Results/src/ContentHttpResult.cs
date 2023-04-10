@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+
 /// <summary>
 /// An <see cref="ContentHttpResult"/> that when executed
 /// will produce a response with content.

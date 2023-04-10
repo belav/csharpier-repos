@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public class TestRazorProject : RazorProject
 {
     private readonly Dictionary<string, RazorProjectItem> _lookup;

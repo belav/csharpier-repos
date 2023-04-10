@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 // The tests interact with global state and should never be run in parallel
 [Collection("DesignTimeFlagTest")]
 public class DesignTimeFlagTest

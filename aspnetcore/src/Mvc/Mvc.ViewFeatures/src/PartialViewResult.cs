@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 /// <summary>
 /// Represents an <see cref="ActionResult"/> that renders a partial view to the response.
 /// </summary>

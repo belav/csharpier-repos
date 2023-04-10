@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
+
 /// <summary>
 ///     Enables configuring design-time services. Tools will automatically discover implementations of this
 ///     interface that are in the startup assembly.

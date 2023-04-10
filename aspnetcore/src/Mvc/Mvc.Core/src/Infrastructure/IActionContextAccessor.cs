@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// Defines an interface for exposing an <see cref="ActionContext"/>.
 /// </summary>

@@ -13,6 +13,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.ResponseCompression;
 
+
 /// <inheritdoc />
 public class ResponseCompressionProvider : IResponseCompressionProvider
 {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public struct IntermediateNodeReference
 {
     public IntermediateNodeReference(IntermediateNode parent, IntermediateNode node)

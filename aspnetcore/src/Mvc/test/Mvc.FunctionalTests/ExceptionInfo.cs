@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 /// <summary>
 /// Information about an exception that occurred on the server side of a functional
 /// test.

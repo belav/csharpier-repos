@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 /// <summary>
 /// Specifies the contracts for a view location expander that is used by <see cref="RazorViewEngine"/> instances to
 /// determine search paths for a view.

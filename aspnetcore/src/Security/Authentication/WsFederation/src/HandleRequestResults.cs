@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 internal static class HandleRequestResults
 {
     internal static HandleRequestResult NoMessage = HandleRequestResult.Fail("No message.");

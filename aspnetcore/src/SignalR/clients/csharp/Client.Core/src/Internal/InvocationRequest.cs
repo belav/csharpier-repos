@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Internal;
 
+
 internal abstract partial class InvocationRequest : IDisposable
 {
     private readonly CancellationTokenRegistration _cancellationTokenRegistration;

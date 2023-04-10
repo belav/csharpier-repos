@@ -15,6 +15,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Test;
 
+
 public class ControllerTest
 {
     public static IEnumerable<object[]> PublicNormalMethodsFromController

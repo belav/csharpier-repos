@@ -13,6 +13,7 @@ using HPackHeaderWriter = Microsoft.AspNetCore.Server.Kestrel.Core.Tests.HPackHe
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 internal static class PipeWriterHttp2FrameExtensions
 {
     public static void WriteSettings(this PipeWriter writer, Http2PeerSettings clientSettings)

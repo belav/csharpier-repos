@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 public class SuccessfulModel
 {
     [ModelBinder(typeof(SuccessfulModelBinder))]

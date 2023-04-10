@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
+
 public class LG1Controller : Controller
 {
     private readonly LinkGenerator _linkGenerator;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class ListDiagnosticSource : DiagnosticSource
 {
     public ListDiagnosticSource(List<Tuple<string, object>> diagnosticList)

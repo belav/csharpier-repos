@@ -5,6 +5,7 @@ using System.Net;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class IPAddressToStringConverterTest
 {
     private static readonly IPAddressToStringConverter _ipAddressToString = new();

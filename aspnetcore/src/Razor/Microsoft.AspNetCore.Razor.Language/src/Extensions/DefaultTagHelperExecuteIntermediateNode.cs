@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 public sealed class DefaultTagHelperExecuteIntermediateNode : ExtensionIntermediateNode
 {
     public override IntermediateNodeCollection Children { get; } =

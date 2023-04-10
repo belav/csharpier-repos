@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CorsMiddlewareWebSite;
 
+
 public class EchoMiddleware
 {
     /// <summary>

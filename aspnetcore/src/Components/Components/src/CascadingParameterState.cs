@@ -10,6 +10,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 internal readonly struct CascadingParameterState
 {
     private static readonly ConcurrentDictionary<

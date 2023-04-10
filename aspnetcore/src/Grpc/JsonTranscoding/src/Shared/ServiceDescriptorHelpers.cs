@@ -30,6 +30,7 @@ using Type = System.Type;
 
 namespace Grpc.Shared;
 
+
 internal static class ServiceDescriptorHelpers
 {
     private static readonly HashSet<string> WellKnownTypeNames = new HashSet<string>

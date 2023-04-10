@@ -3,6 +3,7 @@
 
 namespace System.Net.Quic;
 
+
 /// <summary>
 /// Represents type of the stream.
 /// </summary>

@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace TestServer;
 
+
 // Used for E2E tests that verify different overloads of MapFallbackToClientSideBlazor.
 public class StartupWithMapFallbackToClientSideBlazor
 {

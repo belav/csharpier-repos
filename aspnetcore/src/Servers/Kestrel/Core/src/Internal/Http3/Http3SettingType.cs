@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
+
 internal enum Http3SettingType : long
 {
     // https://quicwg.org/base-drafts/draft-ietf-quic-qpack.html#section-5

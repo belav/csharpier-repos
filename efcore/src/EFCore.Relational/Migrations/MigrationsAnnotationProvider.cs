@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     A base class inherited by database providers that gives access to annotations used by EF Core Migrations
 ///     when generating removal operations for various elements of the <see cref="IRelationalModel" />.

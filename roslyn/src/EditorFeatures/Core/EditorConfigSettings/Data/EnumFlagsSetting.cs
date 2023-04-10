@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
 
+
 internal sealed class EnumFlagsSetting<TOptionValue> : Setting
     where TOptionValue : struct, Enum
 {

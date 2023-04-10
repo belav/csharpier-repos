@@ -6,6 +6,7 @@ using System.Globalization;
 
 namespace Microsoft.Extensions.Caching.SqlConfig.Tools;
 
+
 internal sealed class SqlQueries
 {
     private const string CreateTableFormat =

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
+
 internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTargetExtension
 {
     private static readonly string[] PublicModifiers = new[] { "public" };

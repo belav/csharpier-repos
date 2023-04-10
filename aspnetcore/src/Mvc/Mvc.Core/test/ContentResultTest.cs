@@ -15,6 +15,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public class ContentResultTest
 {
     private static readonly int DefaultCharacterChunkSize =

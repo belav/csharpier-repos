@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
+
 public class StringToTimeSpanConverterTest
 {
     private static readonly StringToTimeSpanConverter _stringToTimeSpan = new();

@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public abstract class DiagnosticAnalyzerTestBase
 {
     private static readonly string[] _usings = { "System", "Microsoft.EntityFrameworkCore" };

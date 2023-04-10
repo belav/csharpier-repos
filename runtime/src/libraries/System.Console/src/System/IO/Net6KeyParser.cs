@@ -3,6 +3,7 @@
 
 namespace System.IO;
 
+
 internal static class Net6KeyParser
 {
     internal static ConsoleKeyInfo Parse(

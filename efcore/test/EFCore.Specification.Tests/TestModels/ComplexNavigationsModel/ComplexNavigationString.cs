@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
+
 public class ComplexNavigationString
 {
     public string DefaultText { get; set; }

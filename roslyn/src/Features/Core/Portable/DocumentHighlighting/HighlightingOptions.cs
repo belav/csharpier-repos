@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.DocumentHighlighting;
 
+
 [DataContract]
 internal readonly record struct HighlightingOptions
 {

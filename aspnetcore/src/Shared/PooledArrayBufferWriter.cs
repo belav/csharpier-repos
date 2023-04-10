@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace System.Buffers;
 
+
 internal sealed class PooledArrayBufferWriter<T> : IBufferWriter<T>, IDisposable
 {
     private T[] _rentedBuffer;

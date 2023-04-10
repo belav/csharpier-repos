@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
+
 // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375370(v=vs.85).aspx
 [StructLayout(LayoutKind.Sequential)]
 internal unsafe struct BCryptBufferDesc

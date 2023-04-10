@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     Parameter object for <see cref="IEntityMaterializerSource" />.
 /// </summary>

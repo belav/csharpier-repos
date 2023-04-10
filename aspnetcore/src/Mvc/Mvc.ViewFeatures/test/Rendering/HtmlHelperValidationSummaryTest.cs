@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
+
 public class HtmlHelperValidationSummaryTest
 {
     // Message, HTML attributes, tag -> expected result.

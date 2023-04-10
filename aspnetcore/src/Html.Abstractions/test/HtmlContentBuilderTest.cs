@@ -7,6 +7,7 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.Extensions.Internal;
 
+
 public class HtmlContentBuilderTest
 {
     [Fact]

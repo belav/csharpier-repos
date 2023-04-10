@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : F1FixtureBase<byte[]>, new()
 {

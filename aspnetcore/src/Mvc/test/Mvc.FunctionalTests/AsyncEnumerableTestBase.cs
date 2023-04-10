@@ -9,6 +9,7 @@ using FormatterWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class AsyncEnumerableTestBase : IClassFixture<MvcTestFixture<StartupWithJsonFormatter>>
 {
     public AsyncEnumerableTestBase(MvcTestFixture<StartupWithJsonFormatter> fixture)

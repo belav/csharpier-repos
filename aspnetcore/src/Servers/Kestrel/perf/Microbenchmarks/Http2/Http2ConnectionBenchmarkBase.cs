@@ -18,6 +18,7 @@ using Http2HeadersEnumerator = Microsoft.AspNetCore.Server.Kestrel.Core.Tests.Ht
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public abstract class Http2ConnectionBenchmarkBase
 {
     private MemoryPool<byte> _memoryPool;

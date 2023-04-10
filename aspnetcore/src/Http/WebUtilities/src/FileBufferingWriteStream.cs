@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
+
 /// <summary>
 /// A <see cref="Stream"/> that buffers content to be written to disk. Use <see cref="DrainBufferAsync(Stream, CancellationToken)" />
 /// to write buffered content to a target <see cref="Stream" />.

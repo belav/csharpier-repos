@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public abstract class IntermediateNodeVisitor
 {
     public virtual void Visit(IntermediateNode node)

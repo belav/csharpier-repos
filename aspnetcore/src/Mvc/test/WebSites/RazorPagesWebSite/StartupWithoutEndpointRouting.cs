@@ -7,6 +7,7 @@ using RazorPagesWebSite.Conventions;
 
 namespace RazorPagesWebSite;
 
+
 public class StartupWithoutEndpointRouting
 {
     public void ConfigureServices(IServiceCollection services)

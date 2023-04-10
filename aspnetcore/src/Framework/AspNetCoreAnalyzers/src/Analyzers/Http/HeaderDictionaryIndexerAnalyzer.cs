@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Analyzers.Http;
 
+
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public partial class HeaderDictionaryIndexerAnalyzer : DiagnosticAnalyzer
 {

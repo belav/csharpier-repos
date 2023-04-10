@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+
 /// <summary>
 /// This examines a directory path and determines if there is a default file present.
 /// If so the file name is appended to the path and execution continues.

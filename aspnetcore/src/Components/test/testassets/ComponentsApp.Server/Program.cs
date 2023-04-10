@@ -5,6 +5,7 @@ using Microsoft.AspNetCore;
 
 namespace ComponentsApp.Server;
 
+
 public class Program
 {
     public static void Main(string[] args)

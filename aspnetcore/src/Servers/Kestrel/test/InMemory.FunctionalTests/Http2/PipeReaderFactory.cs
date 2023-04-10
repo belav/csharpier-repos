@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2;
 
+
 internal class PipeReaderFactory
 {
     private static readonly Action<object> _cancelReader = state =>

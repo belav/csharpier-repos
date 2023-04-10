@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore;
 
+
 public class MusicStoreContext : IdentityDbContext<ApplicationUser>
 {
     public MusicStoreContext(DbContextOptions<MusicStoreContext> options)

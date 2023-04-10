@@ -10,6 +10,7 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.Remote.ProjectSystem;
 
+
 [RpcMarshalable]
 internal interface IWorkspaceProject : IAsyncDisposable
 {

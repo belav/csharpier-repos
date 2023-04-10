@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class OptimisticConcurrencyULongInMemoryTest
     : OptimisticConcurrencyInMemoryTestBase<F1ULongInMemoryFixture, ulong>
 {

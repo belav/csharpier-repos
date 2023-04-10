@@ -5,6 +5,7 @@ using Microsoft.Quic;
 
 namespace System.Net.Quic;
 
+
 internal struct ReceiveBuffers
 {
     private const int MaxBufferedBytes = 64 * 1024;

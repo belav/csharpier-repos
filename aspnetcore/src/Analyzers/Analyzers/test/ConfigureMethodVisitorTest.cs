@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 public class ConfigureMethodVisitorTest
 {
     [Fact]

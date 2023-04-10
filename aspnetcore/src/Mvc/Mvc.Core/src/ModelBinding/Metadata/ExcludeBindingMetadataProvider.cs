@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
+
 /// <summary>
 /// An <see cref="IBindingMetadataProvider"/> which configures <see cref="ModelMetadata.IsBindingAllowed"/> to
 /// <c>false</c> for matching types.

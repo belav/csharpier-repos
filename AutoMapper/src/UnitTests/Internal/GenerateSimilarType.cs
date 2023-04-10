@@ -2,6 +2,7 @@
 
 namespace AutoMapper.UnitTests;
 
+
 public class GenerateSimilarType
 {
     public partial class Article

@@ -6,6 +6,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 /// <summary>
 /// Wraps an <see cref="XElement"/> that contains a blob of encrypted XML
 /// and information about the class which can be used to decrypt it.

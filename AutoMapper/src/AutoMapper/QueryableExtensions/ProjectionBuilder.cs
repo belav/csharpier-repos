@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
 namespace AutoMapper.QueryableExtensions.Impl;
+
 using ParameterBag = IDictionary<string, object>;
 using TypePairCount = Dictionary<ProjectionRequest, int>;
 

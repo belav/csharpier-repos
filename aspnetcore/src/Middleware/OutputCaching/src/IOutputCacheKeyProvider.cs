@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
+
 internal interface IOutputCacheKeyProvider
 {
     /// <summary>

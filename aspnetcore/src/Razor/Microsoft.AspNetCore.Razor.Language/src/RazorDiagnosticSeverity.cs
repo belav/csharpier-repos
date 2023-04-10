@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public enum RazorDiagnosticSeverity
 {
     // Purposely using the same value as Roslyn here.

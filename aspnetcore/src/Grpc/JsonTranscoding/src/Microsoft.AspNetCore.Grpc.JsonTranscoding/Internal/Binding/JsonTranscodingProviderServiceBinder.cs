@@ -18,6 +18,7 @@ using MethodOptions = global::Grpc.Shared.Server.MethodOptions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
+
 internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : ServiceBinderBase
     where TService : class
 {

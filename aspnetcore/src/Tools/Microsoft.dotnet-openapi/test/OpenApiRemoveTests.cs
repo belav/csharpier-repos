@@ -7,6 +7,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.OpenApi.Remove.Tests;
 
+
 public class OpenApiRemoveTests : OpenApiTestBase
 {
     public OpenApiRemoveTests(ITestOutputHelper output)

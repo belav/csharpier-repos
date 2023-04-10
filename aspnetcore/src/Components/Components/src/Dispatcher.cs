@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Sections;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Dispatches external actions to be executed on the context of a <see cref="Renderer"/>.
 /// </summary>

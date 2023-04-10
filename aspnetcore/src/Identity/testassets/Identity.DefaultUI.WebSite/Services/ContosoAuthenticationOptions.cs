@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace Identity.DefaultUI.WebSite;
 
+
 public class ContosoAuthenticationOptions : AuthenticationSchemeOptions
 {
     public ContosoAuthenticationOptions()

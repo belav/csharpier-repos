@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ServerComparison.TestSites;
 
+
 public class Startup
 {
     public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)

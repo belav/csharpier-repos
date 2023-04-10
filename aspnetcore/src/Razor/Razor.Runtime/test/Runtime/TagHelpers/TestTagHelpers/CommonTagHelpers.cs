@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
+
 public class Valid_PlainTagHelper : TagHelper { }
 
 public class Valid_InheritedTagHelper : Valid_PlainTagHelper { }

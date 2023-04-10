@@ -8,6 +8,7 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class MvcEncodedTestFixture<TStartup> : MvcTestFixture<TStartup>
     where TStartup : class
 {

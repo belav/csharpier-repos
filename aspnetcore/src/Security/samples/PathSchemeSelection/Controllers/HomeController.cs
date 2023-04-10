@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSamples.PathSchemeSelection.Controllers;
 
+
 public class HomeController : Controller
 {
     public IActionResult Index()

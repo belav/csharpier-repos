@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.DataProtection.Managed;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 /// <summary>
 /// Represents a secret value stored in memory.
 /// </summary>

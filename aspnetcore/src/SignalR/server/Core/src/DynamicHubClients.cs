@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SignalR.Internal;
 
 namespace Microsoft.AspNetCore.SignalR;
 
+
 /// <summary>
 /// A class that provides <c>dynamic</c> access to connections, including the one that sent the current invocation.
 /// </summary>

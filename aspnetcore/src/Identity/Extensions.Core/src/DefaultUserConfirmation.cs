@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Default implementation of <see cref="IUserConfirmation{TUser}"/>.
 /// </summary>

@@ -8,6 +8,7 @@ using System.Reflection;
 
 namespace System.CommandLine.NamingConventionBinder;
 
+
 /// <summary>
 /// Creates instances of a specified type by binding properties and constructor parameters from command line input.
 /// </summary>

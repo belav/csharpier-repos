@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class SqlServerSequenceValueGeneratorTest
 {
     [ConditionalTheory]

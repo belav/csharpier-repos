@@ -18,6 +18,7 @@ using Microsoft.WebAssembly.Diagnostics;
 
 namespace Microsoft.WebAssembly.AppHost;
 
+
 internal sealed class BrowserHost
 {
     private readonly ILogger _logger;

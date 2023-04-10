@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
+
 /// <summary>
 ///     A builder for creating a list of <see cref="MigrationCommand" />s that can then be
 ///     executed to migrate a database.

@@ -8,6 +8,7 @@ using System.Text;
 
 namespace System;
 
+
 internal static partial class TermInfo
 {
     /// <summary>Provides a terminfo database.</summary>

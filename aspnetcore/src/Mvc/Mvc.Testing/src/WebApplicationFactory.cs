@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.Testing;
 
+
 /// <summary>
 /// Factory for bootstrapping an application in memory for functional end to end tests.
 /// </summary>

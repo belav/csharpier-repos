@@ -16,6 +16,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class HeaderCollectionBenchmark
 {
     private const int InnerLoopCount = 1024 * 1024;

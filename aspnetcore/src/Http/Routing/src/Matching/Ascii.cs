@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
+
 internal static class Ascii
 {
     // case-sensitive equality comparison when we KNOW that 'a' is in the ASCII range

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace ComponentsApp.Server;
 
+
 public class DefaultWeatherForecastService : WeatherForecastService
 {
     private readonly IWebHostEnvironment _hostingEnvironment;

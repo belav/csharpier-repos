@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
+
 public static class ParameterBinderExtensions
 {
     public static Task<ModelBindingResult> BindModelAsync(

@@ -1,5 +1,6 @@
 namespace AutoMapper;
 
+
 /// <summary>
 /// Context information regarding resolution of a destination value
 /// </summary>

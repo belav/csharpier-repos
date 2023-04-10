@@ -3,6 +3,7 @@
 
 namespace HelixTestRunner;
 
+
 public class ProcessResult
 {
     public ProcessResult(string standardOutput, string standardError, int exitCode)

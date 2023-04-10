@@ -3,6 +3,7 @@
 
 namespace HtmlGenerationWebSite.Models;
 
+
 public class ProductRecommendations
 {
     public ProductRecommendations(params Product[] products)

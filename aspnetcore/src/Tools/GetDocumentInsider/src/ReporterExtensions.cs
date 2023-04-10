@@ -7,6 +7,7 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool;
 
+
 internal static class ReporterExtensions
 {
     public static bool PrefixOutput { get; set; }

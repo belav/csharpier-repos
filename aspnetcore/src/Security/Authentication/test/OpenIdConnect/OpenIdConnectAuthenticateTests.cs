@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
+
 public class OpenIdConnectAuthenticateTests
 {
     [Fact]

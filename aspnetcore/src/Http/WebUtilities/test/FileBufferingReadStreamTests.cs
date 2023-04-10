@@ -7,6 +7,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
+
 public class FileBufferingReadStreamTests
 {
     private Stream MakeStream(int size)

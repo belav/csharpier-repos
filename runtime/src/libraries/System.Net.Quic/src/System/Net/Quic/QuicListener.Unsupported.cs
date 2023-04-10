@@ -3,6 +3,7 @@
 
 namespace System.Net.Quic;
 
+
 public sealed partial class QuicListener
 {
     public static bool IsSupported => false;

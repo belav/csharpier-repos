@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 internal static class TagHelperTargetAssemblyExtensions
 {
     private static readonly object TargetAssemblyKey = new object();

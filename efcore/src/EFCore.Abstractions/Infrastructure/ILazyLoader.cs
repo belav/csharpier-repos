@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     A service that can be injected into entities to give them the capability
 ///     of loading navigation properties automatically the first time they are accessed.

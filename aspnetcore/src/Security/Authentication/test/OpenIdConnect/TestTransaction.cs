@@ -6,6 +6,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
+
 internal class TestTransaction
 {
     public HttpRequestMessage Request { get; set; }

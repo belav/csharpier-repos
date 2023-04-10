@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
+
 /// <summary>
 /// <see cref="AuthenticationProperties"/> for an OpenId Connect challenge.
 /// </summary>

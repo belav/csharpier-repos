@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 public class CSharpCodeWriterTest
 {
     // The length of the newline string written by writer.WriteLine.

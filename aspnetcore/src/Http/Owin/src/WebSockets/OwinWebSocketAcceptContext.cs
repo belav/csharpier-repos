@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Owin;
 
+
 /// <summary>
 /// OWIN WebSocket accept context.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.OAuth;
 
+
 /// <summary>
 /// Default implementation.
 /// </summary>

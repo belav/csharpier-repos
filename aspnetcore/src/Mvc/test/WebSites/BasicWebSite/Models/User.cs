@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BasicWebSite.Models;
 
+
 [DisplayColumn("Name")]
 public class User
 {

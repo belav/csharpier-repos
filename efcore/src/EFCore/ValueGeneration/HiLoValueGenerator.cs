@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
+
 /// <summary>
 ///     Acts as a <see cref="ValueGenerator" />  by requesting a block of values from the
 ///     underlying database and returning them one by one. Will ask the underlying

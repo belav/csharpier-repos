@@ -10,6 +10,7 @@ using Microsoft.Playwright;
 
 namespace Microsoft.AspNetCore.BrowserTesting;
 
+
 public class BrowserManagerConfiguration
 {
     public BrowserManagerConfiguration(IConfiguration configuration)

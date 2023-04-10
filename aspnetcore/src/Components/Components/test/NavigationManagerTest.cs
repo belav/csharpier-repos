@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Microsoft.AspNetCore.Components;
 
+
 public class NavigationManagerTest
 {
     // Nothing should exceed the timeout in a successful run of the the tests, this is just here to catch

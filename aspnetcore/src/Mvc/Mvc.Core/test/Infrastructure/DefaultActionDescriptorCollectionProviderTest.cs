@@ -8,6 +8,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 public class DefaultActionDescriptorCollectionProviderTest
 {
     [Fact]

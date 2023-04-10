@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 internal sealed class DefaultClientRequestParametersProvider : IClientRequestParametersProvider
 {
     public DefaultClientRequestParametersProvider(

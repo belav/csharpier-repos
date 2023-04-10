@@ -16,6 +16,7 @@ using Xunit;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.UnitTests;
 
+
 public partial class ExampleTests
 {
     [Fact]

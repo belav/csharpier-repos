@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class SpatialInMemoryFixture : SpatialFixtureBase
 {
     protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;

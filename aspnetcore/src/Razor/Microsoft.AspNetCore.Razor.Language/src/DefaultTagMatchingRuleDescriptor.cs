@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultTagMatchingRuleDescriptor : TagMatchingRuleDescriptor
 {
     public DefaultTagMatchingRuleDescriptor(

@@ -7,6 +7,7 @@ using FileNode = Microsoft.AspNetCore.Razor.Language.VirtualRazorProjectFileSyst
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public class VirtualRazorProjectFileSystemTest
 {
     [Fact]

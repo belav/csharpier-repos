@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal;
 
+
 public partial class CosmosShapedQueryCompilingExpressionVisitor
 {
     private sealed class JObjectInjectingExpressionVisitor : ExpressionVisitor

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
+
 // https://github.com/dotnet/arcade/pull/2033
 [System.Runtime.InteropServices.StructLayoutAttribute(
     System.Runtime.InteropServices.LayoutKind.Explicit

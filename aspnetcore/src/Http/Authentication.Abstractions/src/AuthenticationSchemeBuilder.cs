@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Used to build <see cref="AuthenticationScheme"/>s.
 /// </summary>

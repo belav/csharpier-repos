@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 internal abstract class SpanChunkGenerator : ISpanChunkGenerator
 {
     private static readonly int TypeHashCode = typeof(SpanChunkGenerator).GetHashCode();

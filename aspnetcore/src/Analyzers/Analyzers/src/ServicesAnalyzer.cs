@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 internal sealed class ServicesAnalyzer
 {
     private readonly StartupAnalysisBuilder _context;

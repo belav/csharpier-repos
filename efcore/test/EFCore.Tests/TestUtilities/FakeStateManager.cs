@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class FakeStateManager : IStateManager
 {
     public IEnumerable<InternalEntityEntry> InternalEntries { get; set; }

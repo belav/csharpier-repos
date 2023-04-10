@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
+
 /// <summary>
 /// Interface that exposes the ability to create an <see cref="IViewComponentInvoker"/>.
 /// </summary>

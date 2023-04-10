@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Defines how to create an entity instance through the binding of EF model properties to, for
 ///     example, constructor parameters or parameters of a factory method.

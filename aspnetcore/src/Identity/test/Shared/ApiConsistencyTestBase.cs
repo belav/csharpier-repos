@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
+
 public abstract class ApiConsistencyTestBase
 {
     [Fact]

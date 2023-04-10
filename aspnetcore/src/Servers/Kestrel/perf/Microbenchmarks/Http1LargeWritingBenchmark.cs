@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 public class Http1LargeWritingBenchmark
 {
     private TestHttp1Connection _http1Connection;

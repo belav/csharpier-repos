@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 
 namespace NegotiateAuthSample;
 
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

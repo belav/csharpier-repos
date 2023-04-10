@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel;
 
+
 public class CompositeTwo
 {
     public string Id1 { get; set; }

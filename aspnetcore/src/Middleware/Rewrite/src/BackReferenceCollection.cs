@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 internal sealed class BackReferenceCollection
 {
     private readonly List<string> _backReferences = new List<string>();

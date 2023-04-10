@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.SqlAzure.Model;
 
 namespace Microsoft.EntityFrameworkCore.SqlAzure;
 
+
 public class BatchingSqlAzureFixture : SqlAzureFixture
 {
     public AdventureWorksContext CreateContext(int maxBatchSize)

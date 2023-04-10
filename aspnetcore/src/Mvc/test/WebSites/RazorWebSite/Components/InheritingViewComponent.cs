@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorWebSite.Components;
 
+
 [ViewComponent(Name = "InheritingViewComponent")]
 public class InheritingViewComponent : ViewComponent
 {

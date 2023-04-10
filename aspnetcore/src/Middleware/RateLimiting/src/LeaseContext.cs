@@ -5,6 +5,7 @@ using System.Threading.RateLimiting;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
+
 internal struct LeaseContext : IDisposable
 {
     public RequestRejectionReason? RequestRejectionReason { get; init; }

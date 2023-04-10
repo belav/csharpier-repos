@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Server.HttpSys;
 
 namespace NegotiateAuthSample;
 
+
 public class Program
 {
     public static void Main(string[] args)

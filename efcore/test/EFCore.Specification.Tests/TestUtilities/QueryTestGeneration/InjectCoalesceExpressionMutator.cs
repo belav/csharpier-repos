@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
+
 public class InjectCoalesceExpressionMutator : ExpressionMutator
 {
     private readonly ExpressionFinder _expressionFinder = new();

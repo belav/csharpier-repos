@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 
+
 public partial class ConventionDispatcher
 {
     private sealed class DelayedConventionScope : ConventionScope

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 /// <summary>
 ///     <para>
 ///         An expression that represents materialization of a collection navigation in <see cref="ShapedQueryExpression.ShaperExpression" />.

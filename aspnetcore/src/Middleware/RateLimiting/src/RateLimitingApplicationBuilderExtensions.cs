@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
+
 /// <summary>
 /// Extension methods for the RateLimiting middleware.
 /// </summary>

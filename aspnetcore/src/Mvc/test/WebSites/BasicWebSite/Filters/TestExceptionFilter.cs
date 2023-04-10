@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BasicWebSite.Filters;
 
+
 public class TestExceptionFilter : ExceptionFilterAttribute
 {
     public override void OnException(ExceptionContext context)

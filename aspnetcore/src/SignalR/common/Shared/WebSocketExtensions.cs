@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.WebSockets;
 
+
 internal static class WebSocketExtensions
 {
     public static ValueTask SendAsync(

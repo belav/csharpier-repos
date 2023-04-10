@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
+
 public class SetTempDataOnPageModelAndRedirect : PageModel
 {
     public IActionResult OnGet(string message)

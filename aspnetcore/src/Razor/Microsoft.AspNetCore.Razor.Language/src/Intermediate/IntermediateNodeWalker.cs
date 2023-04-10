@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 public abstract class IntermediateNodeWalker : IntermediateNodeVisitor
 {
     private readonly List<IntermediateNode> _ancestors = new List<IntermediateNode>();

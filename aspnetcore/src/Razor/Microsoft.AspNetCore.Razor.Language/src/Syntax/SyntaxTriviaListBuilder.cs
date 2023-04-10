@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 internal class SyntaxTriviaListBuilder
 {
     private SyntaxTrivia[] _nodes;

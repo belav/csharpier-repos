@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Wasm.Authentication.Server.Controllers;
 
+
 public class OidcConfigurationController : Controller
 {
     public OidcConfigurationController(

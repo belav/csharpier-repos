@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.TestHost.Tests;
 
+
 public class ResponseBodyTests
 {
     [Fact]

@@ -8,6 +8,7 @@ using System.Diagnostics.Tracing;
 
 namespace Microsoft.AspNetCore.Testing.Tracing;
 
+
 public class CollectingEventListener : EventListener
 {
     private readonly ConcurrentQueue<EventWrittenEventArgs> _events =

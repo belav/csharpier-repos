@@ -7,6 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Options;
 
+
 /// <summary>
 /// Specifies that the option is stored in setting storage of the client.
 /// </summary>

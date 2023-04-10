@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.OrganizeImports;
 
+
 internal static class OrganizeImportsOptionsStorage
 {
     public static ValueTask<OrganizeImportsOptions> GetOrganizeImportsOptionsAsync(

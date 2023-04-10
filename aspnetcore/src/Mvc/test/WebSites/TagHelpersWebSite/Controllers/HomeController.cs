@@ -6,6 +6,7 @@ using TagHelpersWebSite.Models;
 
 namespace TagHelpersWebSite.Controllers;
 
+
 public class HomeController : Controller
 {
     public IActionResult Index(bool approved = false)

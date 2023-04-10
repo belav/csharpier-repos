@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 public class HostingEventSourceTests
 {
     [Fact]

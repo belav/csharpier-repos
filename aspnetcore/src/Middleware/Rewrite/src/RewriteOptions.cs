@@ -7,6 +7,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 /// <summary>
 /// Options for the <see cref="RewriteMiddleware"/>
 /// </summary>

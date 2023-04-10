@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.App.Analyzers.Infrastructure;
 
+
 internal sealed class RouteUsageCache
 {
     private static readonly BoundedCacheWithFactory<

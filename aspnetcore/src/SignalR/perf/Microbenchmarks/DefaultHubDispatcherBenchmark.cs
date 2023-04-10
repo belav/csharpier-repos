@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
+
 public class DefaultHubDispatcherBenchmark
 {
     private DefaultHubDispatcher<TestHub> _dispatcher;

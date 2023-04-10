@@ -9,6 +9,7 @@ using Microsoft.Playwright;
 
 namespace Microsoft.AspNetCore.BrowserTesting;
 
+
 public class ContextInformation
 {
     private readonly ILoggerFactory _factory;

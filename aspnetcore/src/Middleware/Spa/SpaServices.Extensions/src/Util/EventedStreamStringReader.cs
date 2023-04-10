@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.NodeServices.Util;
 
+
 /// <summary>
 /// Captures the completed-line notifications from a <see cref="EventedStreamReader"/>,
 /// combining the data into a single <see cref="string"/>.

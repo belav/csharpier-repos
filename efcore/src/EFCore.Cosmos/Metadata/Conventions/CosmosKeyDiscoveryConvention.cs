@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that finds primary key property for the entity type based on the names
 ///     and adds the partition key to it if present.

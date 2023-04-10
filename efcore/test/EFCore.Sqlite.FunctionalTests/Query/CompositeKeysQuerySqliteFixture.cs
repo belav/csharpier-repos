@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class CompositeKeysQuerySqliteFixture : CompositeKeysQueryRelationalFixtureBase
 {
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;

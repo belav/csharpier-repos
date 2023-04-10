@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
+
 /// <summary>
 /// Used to query, grant, and withdraw user consent regarding the storage of user
 /// information related to site activity and functionality.

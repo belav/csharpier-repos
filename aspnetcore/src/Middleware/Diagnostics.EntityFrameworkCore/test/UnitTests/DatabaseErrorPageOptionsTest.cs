@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
+
 public class DatabaseErrorPageOptionsTest
 {
     [Fact]

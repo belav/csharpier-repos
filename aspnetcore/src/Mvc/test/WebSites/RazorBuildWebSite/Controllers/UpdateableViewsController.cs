@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorBuildWebSite;
 
+
 public class UpdateableViewsController : Controller
 {
     public IActionResult Index() => View();

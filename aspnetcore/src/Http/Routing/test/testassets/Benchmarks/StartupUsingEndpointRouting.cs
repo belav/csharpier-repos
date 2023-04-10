@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Benchmarks;
 
+
 public class StartupUsingEndpointRouting
 {
     private static readonly byte[] _helloWorldPayload = Encoding.UTF8.GetBytes("Hello, World!");

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 internal static class HostingStartupConfigurationExtensions
 {
     public static IConfiguration GetBaseConfiguration()

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods for the request localization middleware.
 /// </summary>

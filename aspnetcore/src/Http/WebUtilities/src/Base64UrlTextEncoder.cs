@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
+
 /// <summary>
 /// Encodes and decodes using base64 url encoding.
 /// </summary>

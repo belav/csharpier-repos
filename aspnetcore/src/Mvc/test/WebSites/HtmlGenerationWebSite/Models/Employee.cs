@@ -3,6 +3,7 @@
 
 namespace HtmlGenerationWebSite.Models;
 
+
 public class Employee : Person
 {
     public string Address { get; set; }

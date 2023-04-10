@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class RelationalOptionsExtensionTest
 {
     private const string ConnectionString = "Fraggle=Rock";

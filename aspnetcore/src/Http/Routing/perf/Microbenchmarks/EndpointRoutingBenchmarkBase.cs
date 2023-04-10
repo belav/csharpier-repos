@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 public abstract class EndpointRoutingBenchmarkBase
 {
     private protected RouteEndpoint[] Endpoints;

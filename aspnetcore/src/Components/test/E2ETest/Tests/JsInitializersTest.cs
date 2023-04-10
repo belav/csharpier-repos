@@ -10,6 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
+
 public class JsInitializersTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
     public JsInitializersTest(

@@ -18,6 +18,7 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics;
 
+
 public class WorkspaceProjectDiagnosticsTests : AbstractPullDiagnosticTestsBase
 {
     public WorkspaceProjectDiagnosticsTests(ITestOutputHelper testOutputHelper)

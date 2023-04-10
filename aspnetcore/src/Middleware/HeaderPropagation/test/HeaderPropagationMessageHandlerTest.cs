@@ -7,6 +7,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HeaderPropagation.Tests;
 
+
 public class HeaderPropagationMessageHandlerTest
 {
     public HeaderPropagationMessageHandlerTest()

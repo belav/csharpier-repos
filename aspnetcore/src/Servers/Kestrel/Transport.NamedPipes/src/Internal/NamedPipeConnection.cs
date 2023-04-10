@@ -11,6 +11,7 @@ using PipeOptions = System.IO.Pipelines.PipeOptions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Internal;
 
+
 internal sealed class NamedPipeConnection : TransportConnection, IConnectionNamedPipeFeature
 {
     private const int MinAllocBufferSize = 4096;

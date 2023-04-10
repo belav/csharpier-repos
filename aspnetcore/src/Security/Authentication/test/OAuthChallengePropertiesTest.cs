@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.Test;
 
+
 public class OAuthChallengePropertiesTest
 {
     [Fact]

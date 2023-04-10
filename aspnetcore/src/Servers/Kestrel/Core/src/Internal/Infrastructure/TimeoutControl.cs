@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
+
 internal sealed class TimeoutControl : ITimeoutControl, IConnectionTimeoutFeature
 {
     private readonly ITimeoutHandler _timeoutHandler;

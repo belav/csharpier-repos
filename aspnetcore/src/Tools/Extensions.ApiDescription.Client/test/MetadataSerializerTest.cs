@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.ApiDescription.Client;
 
+
 // ItemSpec values always have '\\' converted to '/' on input when running on non-Windows. It is not possible to
 // retrieve the original (unconverted) item spec value. In other respects, item spec values are treated identically
 // to custom metadata values.

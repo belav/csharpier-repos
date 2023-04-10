@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Navigation;
 
 namespace Microsoft.CodeAnalysis.GoToDefinition;
 
+
 internal interface IGoToDefinitionService : ILanguageService
 {
     /// <inheritdoc cref="CodeAnalysis.GoToDefinition.IFindDefinitionService.FindDefinitionsAsync(Document, int, CancellationToken)"/>

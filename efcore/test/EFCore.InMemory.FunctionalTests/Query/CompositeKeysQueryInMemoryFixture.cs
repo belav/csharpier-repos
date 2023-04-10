@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class CompositeKeysQueryInMemoryFixture : CompositeKeysQueryFixtureBase
 {
     protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;

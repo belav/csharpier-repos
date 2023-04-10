@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Provides the default validation of roles.
 /// </summary>

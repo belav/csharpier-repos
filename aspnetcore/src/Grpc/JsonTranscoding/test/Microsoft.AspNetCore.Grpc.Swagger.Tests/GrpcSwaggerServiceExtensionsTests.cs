@@ -13,6 +13,7 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests;
 
+
 public class GrpcSwaggerServiceExtensionsTests
 {
     [Fact]

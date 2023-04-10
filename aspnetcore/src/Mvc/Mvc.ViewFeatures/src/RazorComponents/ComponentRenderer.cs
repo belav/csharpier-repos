@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 internal sealed class ComponentRenderer : IComponentRenderer
 {
     private static readonly object ComponentSequenceKey = new object();

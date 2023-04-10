@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class InheritanceRelationshipsQueryRelationalTestBase<TFixture>
     : InheritanceRelationshipsQueryTestBase<TFixture>
     where TFixture : InheritanceRelationshipsQueryRelationalFixture, new()

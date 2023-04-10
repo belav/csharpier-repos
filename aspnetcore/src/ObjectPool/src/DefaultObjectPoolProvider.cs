@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.Extensions.ObjectPool;
 
+
 /// <summary>
 /// The default <see cref="ObjectPoolProvider"/>.
 /// </summary>

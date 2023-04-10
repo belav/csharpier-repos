@@ -6,6 +6,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 
+
 public static class XunitTestCaseExtensions
 {
     private static readonly ConcurrentDictionary<string, List<IAttributeInfo>> _typeAttributes =

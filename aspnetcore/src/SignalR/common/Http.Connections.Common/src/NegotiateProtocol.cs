@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
+
 /// <summary>
 /// The protocol for reading and writing negotiate requests and responses.
 /// </summary>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing.Internal;
 
 namespace RoutingWebSite;
 
+
 // This controller is reachable via traditional routing.
 public class DebugController : Controller
 {

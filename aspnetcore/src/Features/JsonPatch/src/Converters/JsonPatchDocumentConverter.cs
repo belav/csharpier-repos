@@ -10,6 +10,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch.Converters;
 
+
 public class JsonPatchDocumentConverter : JsonConverter
 {
     internal static DefaultContractResolver DefaultContractResolver { get; } = new();

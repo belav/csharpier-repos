@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Abstracts the system clock to facilitate testing.
 /// </summary>

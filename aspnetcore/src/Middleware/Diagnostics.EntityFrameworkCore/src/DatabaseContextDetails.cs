@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 
+
 internal sealed class DatabaseContextDetails
 {
     public Type Type { get; }

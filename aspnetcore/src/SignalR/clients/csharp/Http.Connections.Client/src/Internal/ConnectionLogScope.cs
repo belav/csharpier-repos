@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
+
 internal sealed class ConnectionLogScope : IReadOnlyList<KeyValuePair<string, object?>>
 {
     // Name chosen so as not to collide with Kestrel's "ConnectionId"

@@ -5,6 +5,7 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders;
 
+
 /// <summary>
 ///     A builder for <see cref="ColumnOperation" /> operations.
 /// </summary>

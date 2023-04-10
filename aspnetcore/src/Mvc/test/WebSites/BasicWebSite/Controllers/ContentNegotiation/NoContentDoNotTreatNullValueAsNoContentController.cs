@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
+
 public class NoContentDoNotTreatNullValueAsNoContentController : Controller
 {
     public override void OnActionExecuted(ActionExecutedContext context)

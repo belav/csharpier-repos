@@ -13,6 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeStyle;
 
+
 [DataContract]
 internal sealed class CSharpIdeCodeStyleOptions
     : IdeCodeStyleOptions,

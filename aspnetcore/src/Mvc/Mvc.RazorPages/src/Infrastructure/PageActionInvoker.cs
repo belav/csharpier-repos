@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
 {
     private readonly IPageHandlerMethodSelector _selector;

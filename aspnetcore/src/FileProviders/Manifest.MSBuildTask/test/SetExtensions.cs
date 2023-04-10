@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task;
 
+
 internal static class SetExtensions
 {
     public static Entry AddRange(this Entry source, params Entry[] elements)

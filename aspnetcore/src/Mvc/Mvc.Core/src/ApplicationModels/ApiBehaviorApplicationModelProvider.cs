@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 internal sealed class ApiBehaviorApplicationModelProvider : IApplicationModelProvider
 {
     public ApiBehaviorApplicationModelProvider(

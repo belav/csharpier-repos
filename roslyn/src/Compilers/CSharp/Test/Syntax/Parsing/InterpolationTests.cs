@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing;
 
+
 public class InterpolationTests
 {
     [Fact]

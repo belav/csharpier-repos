@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 internal class LegacySectionTargetExtension : ISectionTargetExtension
 {
     private const string DefaultWriterName = "__razor_section_writer";

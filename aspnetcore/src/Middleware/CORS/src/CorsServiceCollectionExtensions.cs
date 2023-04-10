@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+
 /// <summary>
 /// Extension methods for setting up cross-origin resource sharing services in an <see cref="IServiceCollection" />.
 /// </summary>

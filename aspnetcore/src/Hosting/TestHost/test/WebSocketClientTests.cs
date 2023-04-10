@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.TestHost.Tests;
 
+
 public class WebSocketClientTests
 {
     [Theory]

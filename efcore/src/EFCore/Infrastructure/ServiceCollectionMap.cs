@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     Provides a map over a <see cref="IServiceCollection" /> that allows <see cref="ServiceDescriptor" />
 ///     entries to be conditionally added or re-written without requiring linear scans of the service

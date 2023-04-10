@@ -6,6 +6,7 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
+
 /// <summary>
 /// Default implementation of <see cref="IResponseCookiesFeature"/>.
 /// </summary>

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 #pragma warning disable CA1852 // Seal internal types
 internal class CompiledPageRouteModelProvider : IPageRouteModelProvider
 #pragma warning restore CA1852 // Seal internal types

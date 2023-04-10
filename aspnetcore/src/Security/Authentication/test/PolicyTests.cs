@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 public class PolicyTests
 {
     [Fact]

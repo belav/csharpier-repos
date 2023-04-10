@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace XUnitWrapperGenerator;
 
+
 [Generator]
 public sealed class XUnitWrapperGenerator : IIncrementalGenerator
 {

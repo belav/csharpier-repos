@@ -17,6 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.EditorFeatures.Intents;
 
+
 [IntentProvider(WellKnownIntents.Rename, LanguageNames.CSharp), Shared]
 internal class RenameIntentProvider : IIntentProvider
 {

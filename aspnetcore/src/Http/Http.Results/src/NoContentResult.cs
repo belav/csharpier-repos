@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 internal class NoContentResult : StatusCodeResult
 {
     public NoContentResult()

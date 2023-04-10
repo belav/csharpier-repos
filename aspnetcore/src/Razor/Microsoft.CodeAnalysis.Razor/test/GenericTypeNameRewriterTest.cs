@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 public class GenericTypeNameRewriterTest
 {
     [Theory]

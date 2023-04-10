@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : MusicStoreTestBase<TFixture>.MusicStoreFixtureBase, new()
 {

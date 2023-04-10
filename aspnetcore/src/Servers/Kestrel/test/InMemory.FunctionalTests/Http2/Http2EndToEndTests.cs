@@ -17,6 +17,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2;
 
+
 public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
 {
     [Fact]

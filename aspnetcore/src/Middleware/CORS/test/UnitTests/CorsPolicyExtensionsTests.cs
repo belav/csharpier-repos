@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
+
 public sealed class CorsPolicyExtensionsTest
 {
     [Fact]

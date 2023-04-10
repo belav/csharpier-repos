@@ -12,6 +12,7 @@ using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
+
 internal sealed class AttributeRoute : IRouter
 {
     private readonly IActionDescriptorCollectionProvider _actionDescriptorCollectionProvider;

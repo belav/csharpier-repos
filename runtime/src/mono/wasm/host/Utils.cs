@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.AppHost;
 
+
 #nullable enable
 
 public class Utils

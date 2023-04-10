@@ -5,6 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 [Flags]
 internal enum BalancingModes
 {

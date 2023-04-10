@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Interface implemented by components that receive notification that they have been rendered.
 /// </summary>

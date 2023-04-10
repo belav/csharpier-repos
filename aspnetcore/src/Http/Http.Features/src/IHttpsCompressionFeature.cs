@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
+
 /// <summary>
 /// Configures response compression behavior for HTTPS on a per-request basis.
 /// </summary>

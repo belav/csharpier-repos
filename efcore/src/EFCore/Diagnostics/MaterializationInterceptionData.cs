@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     A parameter object passed to <see cref="IMaterializationInterceptor" /> methods containing data about the instance
 ///     being materialized.

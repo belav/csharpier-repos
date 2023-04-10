@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class SqlServerTestStoreFactory : RelationalTestStoreFactory
 {
     public static SqlServerTestStoreFactory Instance { get; } = new();

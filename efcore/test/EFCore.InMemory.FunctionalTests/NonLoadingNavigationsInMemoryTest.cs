@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class NonLoadingNavigationsInMemoryTest
     : LoadTestBase<NonLoadingNavigationsInMemoryTest.NonLoadingNavigationsInMemoryFixture>
 {

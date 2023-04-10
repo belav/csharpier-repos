@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+
 public interface IViewComponentHelper
 {
     Task<IHtmlContent> InvokeAsync(string name, object arguments);

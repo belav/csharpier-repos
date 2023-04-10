@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ComponentsApp.Server;
 
+
 [ApiController]
 public class ReloadController : ControllerBase
 {

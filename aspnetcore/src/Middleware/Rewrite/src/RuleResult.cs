@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 /// <summary>
 /// An enum representing the result of a rule.
 /// </summary>

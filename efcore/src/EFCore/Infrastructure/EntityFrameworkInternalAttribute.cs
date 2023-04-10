@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     Marks an API as internal to Entity Framework Core. These APIs are not subject to
 ///     the same compatibility standards as public APIs. It may be changed or removed without notice in

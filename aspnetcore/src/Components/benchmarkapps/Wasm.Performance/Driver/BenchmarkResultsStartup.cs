@@ -5,6 +5,7 @@ using System.Text.Json;
 
 namespace Wasm.Performance.Driver;
 
+
 public class BenchmarkDriverStartup
 {
     public void ConfigureServices(IServiceCollection services)

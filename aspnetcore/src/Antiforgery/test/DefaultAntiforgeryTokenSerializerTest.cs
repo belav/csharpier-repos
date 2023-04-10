@@ -7,6 +7,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Antiforgery.Internal;
 
+
 public class DefaultAntiforgeryTokenSerializerTest
 {
     private static readonly Mock<IDataProtectionProvider> _dataProtector = GetDataProtector();

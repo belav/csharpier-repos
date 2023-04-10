@@ -6,6 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Microsoft.AspNetCore.OutputCaching.Tests;
 
+
 public class MemoryOutputCacheStoreTests
 {
     [Fact]

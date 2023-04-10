@@ -12,8 +12,10 @@ using ComponentsWebAssembly_CSharp;
 #if (Hosted)
 namespace ComponentsWebAssembly_CSharp.Client;
 
+
 #else
 namespace ComponentsWebAssembly_CSharp;
+
 
 #endif
 

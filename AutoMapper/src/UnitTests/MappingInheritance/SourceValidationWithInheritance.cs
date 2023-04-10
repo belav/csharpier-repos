@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class SourceValidationWithInheritance : AutoMapperSpecBase
 {
     public abstract class FormElement2

@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 /// <summary>
 ///     Specifies custom value snapshotting and comparison for
 ///     CLR types that cannot be compared with <see cref="object.Equals(object, object)" />

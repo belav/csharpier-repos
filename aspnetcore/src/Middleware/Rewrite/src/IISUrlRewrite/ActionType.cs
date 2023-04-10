@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 internal enum ActionType
 {
     None,

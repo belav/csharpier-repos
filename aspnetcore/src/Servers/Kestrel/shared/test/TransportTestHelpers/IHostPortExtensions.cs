@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting;
 
+
 public static class IHostPortExtensions
 {
     public static int GetPort(this IHost host)

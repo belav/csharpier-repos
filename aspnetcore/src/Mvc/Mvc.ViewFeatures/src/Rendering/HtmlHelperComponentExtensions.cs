@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
+
 /// <summary>
 /// Extensions for rendering components.
 /// </summary>

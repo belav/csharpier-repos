@@ -3,6 +3,7 @@
 
 namespace Microsoft.Extensions.FileProviders;
 
+
 public class TestDirectoryFileInfo : IFileInfo
 {
     public bool IsDirectory => true;

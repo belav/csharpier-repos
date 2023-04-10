@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore;
 
+
 public class OrderDetail
 {
     public int OrderDetailId { get; set; }

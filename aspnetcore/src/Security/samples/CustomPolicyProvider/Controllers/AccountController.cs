@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomPolicyProvider.Controllers;
 
+
 public class AccountController : Controller
 {
     [HttpGet]

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
+
 /// <summary>
 /// An <see cref="IXmlEncryptor"/> that encrypts XML elements with a null encryptor.
 /// </summary>

@@ -5,6 +5,7 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Routing;
 
+
 public class UriBuildingContextTest
 {
     [Fact]

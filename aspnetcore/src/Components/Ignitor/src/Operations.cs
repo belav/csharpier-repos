@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 #nullable enable
 namespace Ignitor;
 
+
 public sealed class Operations
 {
     public ConcurrentQueue<CapturedAttachComponentCall> AttachComponent { get; } =

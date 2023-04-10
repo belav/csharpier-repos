@@ -5,6 +5,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace CodeGenerator;
 
+
 public static class Http2Connection
 {
     public static string GenerateFile()

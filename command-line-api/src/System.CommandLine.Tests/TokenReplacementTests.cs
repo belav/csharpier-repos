@@ -8,6 +8,7 @@ using Xunit;
 
 namespace System.CommandLine.Tests;
 
+
 public class TokenReplacementTests
 {
     [Fact]

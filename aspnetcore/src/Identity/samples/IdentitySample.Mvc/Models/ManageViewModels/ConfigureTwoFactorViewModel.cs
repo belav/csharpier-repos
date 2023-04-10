@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IdentitySample.Models.ManageViewModels;
 
+
 public class ConfigureTwoFactorViewModel
 {
     public string SelectedProvider { get; set; }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Tests;
 
+
 internal class EventRaisingResourceCounter : ResourceCounter
 {
     private readonly ResourceCounter _wrapped;

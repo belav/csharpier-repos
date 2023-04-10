@@ -19,6 +19,7 @@ using Xunit;
 
 namespace Interop.FunctionalTests;
 
+
 [SkipIfChromeUnavailable]
 public class ChromeTests : LoggedTest
 {

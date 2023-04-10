@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
+
 public class InjectTargetExtensionTest
 {
     [Fact]

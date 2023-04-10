@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public abstract class TestHelpers
 {
     public DbContextOptions CreateOptions(IModel model, IServiceProvider serviceProvider = null)

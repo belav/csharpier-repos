@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
+
 internal sealed class ManifestFile : ManifestEntry
 {
     public ManifestFile(string name, string resourcePath)

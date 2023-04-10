@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
+
 internal static class MvcFacts
 {
     public static bool IsController(

@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Testing.Verifiers;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
+
 internal sealed class StartupCSharpAnalyzerTest : CSharpAnalyzerTest<StartupAnalyzer, XUnitVerifier>
 {
     public StartupCSharpAnalyzerTest(

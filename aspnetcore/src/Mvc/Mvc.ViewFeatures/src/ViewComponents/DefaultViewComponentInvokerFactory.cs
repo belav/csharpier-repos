@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
+
 internal sealed class DefaultViewComponentInvokerFactory : IViewComponentInvokerFactory
 {
     private readonly IViewComponentFactory _viewComponentFactory;

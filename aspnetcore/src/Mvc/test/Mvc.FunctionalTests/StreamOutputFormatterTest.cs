@@ -5,6 +5,7 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class StreamOutputFormatterTest : IClassFixture<MvcTestFixture<FormatterWebSite.Startup>>
 {
     public StreamOutputFormatterTest(MvcTestFixture<FormatterWebSite.Startup> fixture)

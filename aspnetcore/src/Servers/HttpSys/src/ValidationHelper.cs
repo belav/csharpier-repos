@@ -5,6 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+
 internal static class ValidationHelper
 {
     public static string ExceptionMessage(Exception exception)

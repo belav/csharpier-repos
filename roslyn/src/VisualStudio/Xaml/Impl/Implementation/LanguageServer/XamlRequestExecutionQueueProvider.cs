@@ -20,6 +20,7 @@ using StreamJsonRpc;
 
 namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageServer;
 
+
 [ExportStatelessXamlLspService(typeof(IRequestExecutionQueueProvider<RequestContext>)), Shared]
 internal sealed class XamlRequestExecutionQueueProvider
     : IRequestExecutionQueueProvider<RequestContext>

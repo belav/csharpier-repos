@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Tools.Commands;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
+
 internal static class Program
 {
     private static int Main(string[] args)

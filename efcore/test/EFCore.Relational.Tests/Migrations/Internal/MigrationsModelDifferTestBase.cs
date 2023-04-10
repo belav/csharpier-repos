@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Update.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Internal;
 
+
 public abstract class MigrationsModelDifferTestBase
 {
     protected void Execute(

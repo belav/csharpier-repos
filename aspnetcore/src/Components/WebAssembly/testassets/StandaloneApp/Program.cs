@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace StandaloneApp;
 
+
 public class Program
 {
     public static async Task Main(string[] args)

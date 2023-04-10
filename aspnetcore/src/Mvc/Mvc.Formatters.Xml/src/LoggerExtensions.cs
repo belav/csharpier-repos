@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
+
 internal static class LoggerExtensions
 {
     private static readonly Action<ILogger, string, Exception> _failedToCreateXmlSerializer;

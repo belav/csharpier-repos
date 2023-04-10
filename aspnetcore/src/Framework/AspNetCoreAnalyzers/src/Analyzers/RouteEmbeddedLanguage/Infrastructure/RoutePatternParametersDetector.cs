@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
+
 internal static class RoutePatternParametersDetector
 {
     public static ImmutableArray<ParameterSymbol> ResolvedParameters(

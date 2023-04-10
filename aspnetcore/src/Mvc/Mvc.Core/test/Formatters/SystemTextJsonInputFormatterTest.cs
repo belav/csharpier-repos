@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase
 {
     [Fact]

@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// An exception which indicates multiple matches in action selection.
 /// </summary>

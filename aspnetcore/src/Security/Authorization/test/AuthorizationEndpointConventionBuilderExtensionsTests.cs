@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Authorization.Test;
 
+
 public class AuthorizationEndpointConventionBuilderExtensionsTests
 {
     [Fact]

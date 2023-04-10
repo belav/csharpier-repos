@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
+
 internal class DbContextCommand : HelpCommandBase
 {
     public override void Configure(CommandLineApplication command)

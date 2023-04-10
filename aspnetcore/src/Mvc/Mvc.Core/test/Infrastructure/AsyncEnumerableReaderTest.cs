@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 public class AsyncEnumerableReaderTest
 {
     [Theory]

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 internal sealed class EndpointParameterDescriptor
     : ParameterDescriptor,
         IParameterInfoParameterDescriptor

@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class DefaultRequiredAttributeDescriptorBuilder : RequiredAttributeDescriptorBuilder
 {
     private readonly DefaultTagMatchingRuleDescriptorBuilder _parent;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
+
 // from bcrypt.h
 internal enum BCryptKeyDerivationBufferType
 {

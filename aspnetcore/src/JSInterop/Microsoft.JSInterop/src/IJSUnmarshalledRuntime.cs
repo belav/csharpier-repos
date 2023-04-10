@@ -3,6 +3,7 @@
 
 namespace Microsoft.JSInterop;
 
+
 /// <summary>
 /// Represents an instance of a JavaScript runtime to which calls may be dispatched without JSON marshalling.
 /// Not all JavaScript runtimes support this capability. Currently it is only supported on WebAssembly and for

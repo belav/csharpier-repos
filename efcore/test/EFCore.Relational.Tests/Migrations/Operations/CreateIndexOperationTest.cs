@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 
+
 public class CreateIndexOperationTest
 {
     [ConditionalFact]

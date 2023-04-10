@@ -8,6 +8,7 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Connections;
 
+
 /// <summary>
 /// <see cref="IConnectionBuilder"/> extensions.
 /// </summary>

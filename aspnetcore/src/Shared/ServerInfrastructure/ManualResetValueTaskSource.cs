@@ -8,6 +8,7 @@ using System.Threading.Tasks.Sources;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
+
 internal sealed class ManualResetValueTaskSource<T> : IValueTaskSource<T>, IValueTaskSource
 {
     private ManualResetValueTaskSourceCore<T> _core; // mutable struct; do not make this readonly

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.Google;
 
+
 /// <summary>
 /// Default values for Google authentication
 /// </summary>

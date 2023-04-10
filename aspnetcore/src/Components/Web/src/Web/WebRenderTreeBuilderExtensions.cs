@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 /// <summary>
 /// Provides methods for building a collection of <see cref="RenderTreeFrame"/> entries.
 /// </summary>

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
+
 internal sealed class RedisChannels
 {
     private readonly string _prefix;

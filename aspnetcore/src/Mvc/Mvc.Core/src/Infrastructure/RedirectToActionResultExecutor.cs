@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// A <see cref="IActionResultExecutor{RedirectToActionResult}"/> for <see cref="RedirectToActionResult"/>.
 /// </summary>

@@ -6,6 +6,7 @@ using System.Transactions.Oletx;
 
 namespace System.Transactions.DtcProxyShim;
 
+
 internal sealed class Phase0NotifyShim : NotificationShimBase, ITransactionPhase0NotifyAsync
 {
     internal Phase0NotifyShim(DtcProxyShimFactory shimFactory, object enlistmentIdentifier)

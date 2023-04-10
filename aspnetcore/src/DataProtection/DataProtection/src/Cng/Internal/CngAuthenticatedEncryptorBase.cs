@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
 namespace Microsoft.AspNetCore.DataProtection.Cng.Internal;
 
+
 /// <summary>
 /// Base class used for all CNG-related authentication encryption operations.
 /// </summary>

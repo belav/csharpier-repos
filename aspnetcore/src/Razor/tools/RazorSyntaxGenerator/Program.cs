@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 
 namespace RazorSyntaxGenerator;
 
+
 public class Program
 {
     public static int Main(string[] args)

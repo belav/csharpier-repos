@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 internal abstract class PatternSegment
 {
     public abstract string? Evaluate(

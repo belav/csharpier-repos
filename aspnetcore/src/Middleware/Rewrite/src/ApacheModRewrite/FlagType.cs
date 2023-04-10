@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
+
 internal enum FlagType
 {
     EscapeBackreference,

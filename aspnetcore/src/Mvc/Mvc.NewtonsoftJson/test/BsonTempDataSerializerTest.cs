@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
+
 public class BsonTempDataSerializerTest : TempDataSerializerTestBase
 {
     protected override TempDataSerializer GetTempDataSerializer() => new BsonTempDataSerializer();

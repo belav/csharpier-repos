@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
+
 public class RazorPagesTest
     : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
 {

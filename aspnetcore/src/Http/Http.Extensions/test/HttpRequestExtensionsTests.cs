@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Http.Extensions.Tests;
 
+
 public class HttpRequestExtensionsTests
 {
     [Theory]

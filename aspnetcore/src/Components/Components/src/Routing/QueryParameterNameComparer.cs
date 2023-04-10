@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 internal sealed class QueryParameterNameComparer
     : IComparer<ReadOnlyMemory<char>>,
         IEqualityComparer<ReadOnlyMemory<char>>

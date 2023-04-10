@@ -22,6 +22,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
+
 /// <summary>
 /// A per-request authentication handler for the OpenIdConnectAuthenticationMiddleware.
 /// </summary>

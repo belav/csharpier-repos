@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.Tools.Internal;
 
+
 public class TestConsole : IConsole
 {
     private event ConsoleCancelEventHandler _cancelKeyPress = default!;

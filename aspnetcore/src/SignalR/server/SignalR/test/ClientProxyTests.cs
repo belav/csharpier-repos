@@ -12,6 +12,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 public class ClientHubProxyTests
 {
     public class FakeHub : Hub { }

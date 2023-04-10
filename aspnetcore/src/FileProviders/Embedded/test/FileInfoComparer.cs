@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.FileProviders;
 
+
 internal class FileInfoComparer : IEqualityComparer<IFileInfo>
 {
     public static FileInfoComparer Instance { get; set; } = new FileInfoComparer();

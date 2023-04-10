@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
+
 internal abstract class SyntaxList : GreenNode
 {
     internal SyntaxList()

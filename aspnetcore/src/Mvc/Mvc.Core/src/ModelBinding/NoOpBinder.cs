@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 internal sealed class NoOpBinder : IModelBinder
 {
     public static readonly IModelBinder Instance = new NoOpBinder();

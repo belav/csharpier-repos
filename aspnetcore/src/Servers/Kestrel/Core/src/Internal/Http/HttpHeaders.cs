@@ -13,6 +13,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
+
 internal abstract partial class HttpHeaders : IHeaderDictionary
 {
     protected long _bits;

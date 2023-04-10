@@ -1,5 +1,6 @@
 namespace AutoMapper;
 
+
 /// <summary>
 /// Configuration for profile-specific maps
 /// </summary>

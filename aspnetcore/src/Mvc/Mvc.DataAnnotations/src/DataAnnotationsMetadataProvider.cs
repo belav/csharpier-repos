@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
+
 /// <summary>
 /// An implementation of <see cref="IBindingMetadataProvider"/> and <see cref="IDisplayMetadataProvider"/> for
 /// the System.ComponentModel.DataAnnotations attribute classes.

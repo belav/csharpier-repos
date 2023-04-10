@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
+
 /// <summary>
 /// Implements policy for resolving the default key from a candidate keyring.
 /// </summary>

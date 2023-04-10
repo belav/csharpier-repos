@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Extension methods on <see cref="IEndpointRouteBuilder"/> to add routes to <see cref="Hub"/>s.
 /// </summary>

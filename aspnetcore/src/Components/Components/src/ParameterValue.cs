@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components;
 
+
 /// <summary>
 /// Represents a single parameter supplied to an <see cref="IComponent"/>
 /// by its parent in the render tree.

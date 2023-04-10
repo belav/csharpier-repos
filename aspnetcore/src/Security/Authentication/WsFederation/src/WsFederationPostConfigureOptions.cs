@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Protocols.WsFederation;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
+
 /// <summary>
 /// Used to setup defaults for all <see cref="WsFederationOptions"/>.
 /// </summary>

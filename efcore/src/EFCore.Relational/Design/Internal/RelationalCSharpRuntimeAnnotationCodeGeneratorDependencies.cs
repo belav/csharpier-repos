@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Design.Internal;
 
+
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="RelationalCSharpRuntimeAnnotationCodeGenerator" />

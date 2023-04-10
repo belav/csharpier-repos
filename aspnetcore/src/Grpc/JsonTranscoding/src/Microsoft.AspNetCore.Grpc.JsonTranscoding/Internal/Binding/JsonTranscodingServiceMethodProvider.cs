@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
+
 internal sealed partial class JsonTranscodingServiceMethodProvider<TService>
     : IServiceMethodProvider<TService>
     where TService : class

@@ -5,6 +5,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 public class MouseEventArgsReaderTest
 {
     [Fact]

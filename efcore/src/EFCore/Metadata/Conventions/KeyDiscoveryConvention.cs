@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that finds primary key property for the entity type based on the names, ignoring case:
 ///     * Id

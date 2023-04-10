@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics;
 
+
 /// <summary>
 /// Wrapper around a source for diagnostics (e.g. a <see cref="Project"/> or <see cref="Document"/>)
 /// so that we can share per file diagnostic reporting code in <see cref="AbstractPullDiagnosticHandler{TDiagnosticsParams, TReport, TReturn}"/>

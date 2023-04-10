@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CodeDefinitionWindow;
 
+
 internal record struct CodeDefinitionWindowLocation(
     string DisplayName,
     string FilePath,

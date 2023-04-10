@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+
 /// <summary>
 /// Result of <see cref="IRazorPageFactoryProvider.CreateFactory(string)"/>.
 /// </summary>

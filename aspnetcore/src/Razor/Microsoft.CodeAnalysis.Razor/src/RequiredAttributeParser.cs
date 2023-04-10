@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
+
 // Internal for testing
 internal static class RequiredAttributeParser
 {

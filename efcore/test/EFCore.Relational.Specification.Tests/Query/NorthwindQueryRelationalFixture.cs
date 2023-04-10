@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class NorthwindQueryRelationalFixture<TModelCustomizer>
     : NorthwindQueryFixtureBase<TModelCustomizer>
     where TModelCustomizer : IModelCustomizer, new()

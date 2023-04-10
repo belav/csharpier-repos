@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
+
 // Integration tests for the default configuration of ModelMetadata and Validation providers
 public class DefaultModelValidatorProviderTest
 {

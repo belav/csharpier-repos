@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
+
 public enum HtmlAttributeValueStyle
 {
     DoubleQuotes,

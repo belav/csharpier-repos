@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 /// <summary>
 ///     An <see cref="EventSource" /> emitting Entity Framework performance counter data.
 /// </summary>

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public abstract class RazorExtensionInitializer
 {
     public abstract void Initialize(RazorProjectEngineBuilder builder);

@@ -7,6 +7,7 @@ using Xunit.Sdk;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class NorthwindMiscellaneousQuerySqliteTest
     : NorthwindMiscellaneousQueryRelationalTestBase<
         NorthwindQuerySqliteFixture<NoopModelCustomizer>

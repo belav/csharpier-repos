@@ -6,6 +6,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Rewrite;
 
+
 /// <summary>
 /// Extensions for adding Apache mod_rewrite rules to <see cref="RewriteOptions"/>
 /// </summary>

@@ -15,6 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
+
 public class Http1ConnectionTestsBase : LoggedTest, IDisposable
 {
     internal IDuplexPipe _transport;

@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class SpatialQueryRelationalFixture : SpatialQueryFixtureBase
 {
     public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;

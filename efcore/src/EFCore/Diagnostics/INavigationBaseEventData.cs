@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
+
 /// <summary>
 ///     A common interface for event payload classes that have an <see cref="INavigationBase" />.
 /// </summary>

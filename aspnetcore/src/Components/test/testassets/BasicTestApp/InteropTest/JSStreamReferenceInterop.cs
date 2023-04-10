@@ -6,6 +6,7 @@ using Microsoft.JSInterop;
 
 namespace BasicTestApp.InteropTest;
 
+
 public class JSStreamReferenceInterop
 {
     [JSInvokable]

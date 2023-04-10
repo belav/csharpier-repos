@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
+
 /// <summary>
 /// State for the Challenge event.
 /// </summary>

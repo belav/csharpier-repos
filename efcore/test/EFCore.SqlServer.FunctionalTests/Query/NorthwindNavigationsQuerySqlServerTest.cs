@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class NorthwindNavigationsQuerySqlServerTest
     : NorthwindNavigationsQueryRelationalTestBase<
         NorthwindQuerySqlServerFixture<NoopModelCustomizer>

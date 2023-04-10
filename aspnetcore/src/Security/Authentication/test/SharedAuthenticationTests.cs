@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 public abstract class SharedAuthenticationTests<TOptions>
     where TOptions : AuthenticationSchemeOptions
 {

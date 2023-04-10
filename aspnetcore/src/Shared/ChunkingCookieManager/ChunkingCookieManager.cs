@@ -17,6 +17,7 @@ using Microsoft.Net.Http.Headers;
 #if SECURITY
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
+
 /// <summary>
 /// This handles cookies that are limited by per cookie length. It breaks down long cookies for responses, and reassembles them
 /// from requests.
@@ -25,6 +26,7 @@ public class ChunkingCookieManager : ICookieManager
 {
 #else
 namespace Microsoft.AspNetCore.Internal;
+
 
 /// <summary>
 /// This handles cookies that are limited by per cookie length. It breaks down long cookies for responses, and reassembles them

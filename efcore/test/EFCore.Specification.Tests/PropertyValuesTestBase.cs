@@ -8,6 +8,7 @@ using System.Globalization;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : PropertyValuesTestBase<TFixture>.PropertyValuesFixtureBase, new()
 {

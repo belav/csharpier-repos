@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests;
 
+
 public class AddProfiles : AutoMapperSpecBase
 {
     public class Source { }

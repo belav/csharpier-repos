@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
+
 /// <summary>
 /// Default values used by Negotiate authentication.
 /// </summary>

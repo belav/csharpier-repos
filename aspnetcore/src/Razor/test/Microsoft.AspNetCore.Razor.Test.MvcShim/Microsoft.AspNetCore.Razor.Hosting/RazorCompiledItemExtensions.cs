@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
+
 /// <summary>
 /// Extension methods for <see cref="RazorCompiledItem"/>.
 /// </summary>

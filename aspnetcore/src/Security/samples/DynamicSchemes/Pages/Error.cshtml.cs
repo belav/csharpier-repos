@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DynamicSchemes.Pages;
 
+
 public class ErrorModel : PageModel
 {
     public string RequestId { get; set; }

@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 #pragma warning disable IDE0052 // Remove unread private members
 namespace Microsoft.EntityFrameworkCore;
 
+
 public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : WithConstructorsTestBase<TFixture>.WithConstructorsFixtureBase, new()
 {

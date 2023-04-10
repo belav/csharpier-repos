@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public abstract class TPTInheritanceQueryFixture : InheritanceQueryFixtureBase
 {
     protected override string StoreName => "TPTInheritanceTest";

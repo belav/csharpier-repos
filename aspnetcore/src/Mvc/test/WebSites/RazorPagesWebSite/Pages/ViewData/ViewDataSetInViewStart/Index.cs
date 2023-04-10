@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite.ViewDataSetInViewStart;
 
+
 public class Index : PageModel
 {
     [ViewData]

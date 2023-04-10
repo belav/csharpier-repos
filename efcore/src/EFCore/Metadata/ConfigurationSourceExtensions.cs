@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
+
 /// <summary>
 ///     Provides extension methods for <see cref="ConfigurationSource" />
 /// </summary>

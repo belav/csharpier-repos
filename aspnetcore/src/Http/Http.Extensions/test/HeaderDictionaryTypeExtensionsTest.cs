@@ -5,6 +5,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http.Headers;
 
+
 public class HeaderDictionaryTypeExtensionsTest
 {
     [Fact]

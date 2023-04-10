@@ -5,6 +5,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.Tools.Internal;
 
+
 public class TestReporter : IReporter
 {
     private readonly ITestOutputHelper _output;

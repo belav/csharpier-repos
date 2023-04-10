@@ -8,6 +8,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 /// <summary>
 /// Represents the request to the identity provider for logging in or provisioning a token.
 /// </summary>

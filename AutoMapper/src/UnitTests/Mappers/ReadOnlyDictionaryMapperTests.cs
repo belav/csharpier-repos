@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Mappers.ReadOnlyDictionaryMapper;
 
+
 public class When_mapping_to_interface_readonly_dictionary : AutoMapperSpecBase
 {
     public class Source

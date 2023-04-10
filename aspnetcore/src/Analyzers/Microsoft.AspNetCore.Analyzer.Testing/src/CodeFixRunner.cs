@@ -15,6 +15,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Analyzer.Testing;
 
+
 public class CodeFixRunner
 {
     public static CodeFixRunner Default { get; } = new CodeFixRunner();

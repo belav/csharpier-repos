@@ -19,6 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator;
 
+
 internal partial class WpfBackgroundWorkIndicatorFactory
 {
     /// <summary>

@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Authorization;
 
+
 /// <summary>
 /// An implementation of <see cref="IAsyncAuthorizationFilter"/> which applies a specific
 /// <see cref="AuthorizationPolicy"/>. MVC recognizes the <see cref="AuthorizeAttribute"/> and adds an instance of

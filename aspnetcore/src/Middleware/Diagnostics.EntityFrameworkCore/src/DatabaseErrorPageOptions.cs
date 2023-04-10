@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.AspNetCore.Builder;
 
+
 /// <summary>
 /// Options for the <see cref="DatabaseErrorPageMiddleware"/>.
 /// </summary>

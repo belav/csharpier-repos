@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
+
 internal partial class MigrationsAddCommand : ContextCommandBase
 {
     private CommandArgument? _name;

@@ -5,6 +5,7 @@ using System.Net.WebSockets;
 
 namespace Microsoft.AspNetCore.TestHost;
 
+
 internal sealed class TestWebSocket : WebSocket
 {
     private readonly ReceiverSenderBuffer _receiveBuffer;

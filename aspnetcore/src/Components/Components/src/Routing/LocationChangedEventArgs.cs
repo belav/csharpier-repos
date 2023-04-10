@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+
 /// <summary>
 /// <see cref="EventArgs" /> for <see cref="NavigationManager.LocationChanged" />.
 /// </summary>

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
+
 public class CustomPocoTest
 {
     public class User<TKey>

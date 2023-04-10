@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication;
 
+
 /// <summary>
 /// Extension methods to configure authentication for existing APIs coexisting with an Authorization Server.
 /// </summary>

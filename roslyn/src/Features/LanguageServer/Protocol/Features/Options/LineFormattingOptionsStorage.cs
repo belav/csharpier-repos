@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
+
 internal static class LineFormattingOptionsStorage
 {
     public static ValueTask<LineFormattingOptions> GetLineFormattingOptionsAsync(

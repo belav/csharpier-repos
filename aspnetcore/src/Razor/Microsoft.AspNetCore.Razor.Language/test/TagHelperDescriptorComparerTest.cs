@@ -11,6 +11,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 public class TagHelperDescriptorComparerTest
 {
     private static readonly TestFile TagHelpersTestFile = TestFile.Create(

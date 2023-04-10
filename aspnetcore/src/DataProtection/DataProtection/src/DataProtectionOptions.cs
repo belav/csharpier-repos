@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 /// <summary>
 /// Provides global options for the Data Protection system.
 /// </summary>

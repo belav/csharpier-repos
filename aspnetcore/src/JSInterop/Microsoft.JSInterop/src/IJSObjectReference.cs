@@ -6,6 +6,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop;
 
+
 /// <summary>
 /// Represents a reference to a JavaScript object.
 /// </summary>

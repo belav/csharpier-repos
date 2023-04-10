@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CodeActions;
 
+
 internal readonly struct CSharpCodeFixOptionsProvider
 {
     /// <summary>

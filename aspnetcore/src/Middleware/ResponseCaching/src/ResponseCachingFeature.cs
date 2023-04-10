@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
+
 /// Default implementation for <see cref="IResponseCachingFeature" />
 public class ResponseCachingFeature : IResponseCachingFeature
 {

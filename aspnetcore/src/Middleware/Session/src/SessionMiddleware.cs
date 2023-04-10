@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Session;
 
+
 /// <summary>
 /// Enables the session state for the application.
 /// </summary>

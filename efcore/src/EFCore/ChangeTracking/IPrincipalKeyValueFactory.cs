@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
+
 /// <summary>
 ///     <para>
 ///         Represents a factory for key values based on the primary/principal key values taken from various forms of entity data.

@@ -3,6 +3,7 @@
 
 namespace Logging.W3C.Sample;
 
+
 public class Program
 {
     public static void Main(string[] args)

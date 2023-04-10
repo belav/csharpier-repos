@@ -14,6 +14,7 @@ using BenchmarkDotNet.Validators;
 
 namespace BenchmarkDotNet.Attributes;
 
+
 internal sealed class FirstRequestConfig : ManualConfig
 {
     public FirstRequestConfig()

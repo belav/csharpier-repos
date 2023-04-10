@@ -5,6 +5,7 @@
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+
 /// <summary>
 /// Specifies the default status code associated with an <see cref="ActionResult"/>.
 /// </summary>

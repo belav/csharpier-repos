@@ -6,6 +6,7 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 /// <summary>
 /// Helpful XML-based assertions.
 /// </summary>

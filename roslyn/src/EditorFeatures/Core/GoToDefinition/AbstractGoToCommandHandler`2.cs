@@ -27,6 +27,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GoToDefinition;
 
+
 internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArgs>
     : ICommandHandler<TCommandArgs>
     where TLanguageService : class, ILanguageService

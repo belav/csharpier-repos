@@ -7,6 +7,7 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
+
 internal static class ErrorEventArgsReader
 {
     private static readonly JsonEncodedText Message = JsonEncodedText.Encode("message");

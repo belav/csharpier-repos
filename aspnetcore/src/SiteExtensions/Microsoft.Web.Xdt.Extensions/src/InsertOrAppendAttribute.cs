@@ -7,6 +7,7 @@ using Microsoft.Web.XmlTransform;
 
 namespace Microsoft.Web.Xdt.Extensions;
 
+
 /// <summary>
 /// Insert or append to the given attribute
 /// </summary>

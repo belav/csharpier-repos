@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
+
 [Authorize]
 public class AuthConnectionHandler : ConnectionHandler
 {

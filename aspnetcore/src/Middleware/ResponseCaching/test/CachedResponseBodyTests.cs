@@ -7,6 +7,7 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.ResponseCaching.Tests;
 
+
 public class CachedResponseBodyTests
 {
     private readonly int _timeout = Debugger.IsAttached ? -1 : 5000;

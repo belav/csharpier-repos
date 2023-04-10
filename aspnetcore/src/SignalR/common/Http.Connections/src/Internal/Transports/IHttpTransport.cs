@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports;
 
+
 internal interface IHttpTransport
 {
     /// <summary>

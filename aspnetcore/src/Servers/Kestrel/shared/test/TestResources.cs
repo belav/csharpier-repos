@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.Testing;
 
+
 public static class TestResources
 {
     private static readonly string _baseDir = Path.Combine(

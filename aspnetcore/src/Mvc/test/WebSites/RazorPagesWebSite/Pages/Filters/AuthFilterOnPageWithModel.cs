@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite.Pages.Filters;
 
+
 [SkipStatusCodePages]
 public class AuthFilterOnPageWithModel : PageModel
 {

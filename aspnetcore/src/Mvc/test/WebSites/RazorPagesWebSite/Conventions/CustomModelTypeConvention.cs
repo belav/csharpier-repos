@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace RazorPagesWebSite.Conventions;
 
+
 internal class CustomModelTypeConvention : IPageApplicationModelConvention
 {
     public void Apply(PageApplicationModel model)

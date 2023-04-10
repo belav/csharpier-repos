@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral;
 
+
 internal sealed class SplitStringLiteralOptions
 {
     public static Option2<bool> Enabled =

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
+
 /// <summary>
 /// Context object passed to the CookieAuthenticationEvents OnCheckSlidingExpiration method.
 /// </summary>

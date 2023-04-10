@@ -15,6 +15,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+
 public class FormatFilterTests
 {
     public enum FormatSource

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
+
 public class LevelOneController : TestODataController, IDisposable
 {
     private readonly ComplexNavigationsODataContext _context;

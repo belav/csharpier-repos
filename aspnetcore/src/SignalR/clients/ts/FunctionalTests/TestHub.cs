@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace FunctionalTests;
 
+
 public class CustomObject
 {
     public string Name { get; set; }

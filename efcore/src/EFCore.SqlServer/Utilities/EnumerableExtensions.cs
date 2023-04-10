@@ -5,6 +5,7 @@
 
 namespace System.Collections.Generic;
 
+
 [DebuggerStepThrough]
 internal static class EnumerableExtensions
 {

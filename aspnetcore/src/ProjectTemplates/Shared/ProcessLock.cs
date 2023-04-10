@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Templates.Test.Helpers;
 
+
 public class ProcessLock
 {
     public static readonly ProcessLock DotNetNewLock = new ProcessLock("dotnet-new");

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
+
 internal sealed class UrlSegment : PatternSegment
 {
     private readonly UriMatchPart _uriMatchPart;

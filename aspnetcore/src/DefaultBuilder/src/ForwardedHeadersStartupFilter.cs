@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore;
 
+
 internal sealed class ForwardedHeadersStartupFilter : IStartupFilter
 {
     private readonly IConfiguration _configuration;

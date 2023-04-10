@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
+
 internal static class ErrorMessageHelper
 {
     internal static string BuildErrorMessage(

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+
 internal sealed class NotFoundObjectResult : ObjectResult
 {
     public NotFoundObjectResult(object? value)

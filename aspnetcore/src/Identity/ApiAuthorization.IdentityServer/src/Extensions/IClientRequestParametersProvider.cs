@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
+
 /// <summary>
 /// Generates oauth/openID parameter values for configured clients.
 /// </summary>

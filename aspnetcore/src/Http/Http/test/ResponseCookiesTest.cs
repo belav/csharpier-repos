@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Http.Tests;
 
+
 public class ResponseCookiesTest
 {
     private IFeatureCollection MakeFeatures(IHeaderDictionary headers)

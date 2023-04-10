@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.Core;
 
+
 /// <summary>
 /// Test the <see cref="HtmlHelperLabelExtensions" /> class.
 /// </summary>

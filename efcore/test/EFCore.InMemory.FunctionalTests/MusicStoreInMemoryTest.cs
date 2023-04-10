@@ -3,6 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class MusicStoreInMemoryTest
     : MusicStoreTestBase<MusicStoreInMemoryTest.MusicStoreInMemoryFixture>
 {

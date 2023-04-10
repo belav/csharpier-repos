@@ -1,5 +1,6 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
 
+
 public class ParameterizedQueriesTests_with_anonymous_object_and_factory : AutoMapperSpecBase
 {
     private Dest[] _dests;

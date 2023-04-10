@@ -10,6 +10,7 @@ using Wasm.Authentication.Server.Models;
 
 namespace Wasm.Authentication.Server.Controllers;
 
+
 [Authorize]
 public class RolesController : Controller
 {

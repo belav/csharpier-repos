@@ -5,6 +5,7 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
+
 public class TestRelationalTypeMappingSource : RelationalTypeMappingSource
 {
     private static readonly RelationalTypeMapping _string = new StringTypeMapping(

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
+
 public static class InjectDirective
 {
     public static readonly DirectiveDescriptor Directive = DirectiveDescriptor.CreateDirective(

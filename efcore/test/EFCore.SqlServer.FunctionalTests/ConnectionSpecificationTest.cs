@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 namespace Microsoft.EntityFrameworkCore;
 
+
 public class ConnectionSpecificationTest
 {
     [ConditionalFact]

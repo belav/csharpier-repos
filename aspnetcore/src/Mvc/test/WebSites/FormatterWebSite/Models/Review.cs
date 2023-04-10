@@ -3,6 +3,7 @@
 
 namespace FormatterWebSite;
 
+
 public class Review
 {
     public double Rating { get; set; }

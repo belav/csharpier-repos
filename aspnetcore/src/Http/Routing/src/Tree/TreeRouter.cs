@@ -10,6 +10,7 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.AspNetCore.Routing.Tree;
 
+
 /// <summary>
 /// An <see cref="IRouter"/> implementation for attribute routing.
 /// </summary>

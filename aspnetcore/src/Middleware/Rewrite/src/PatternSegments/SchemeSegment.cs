@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
+
 internal sealed class SchemeSegment : PatternSegment
 {
     public override string? Evaluate(

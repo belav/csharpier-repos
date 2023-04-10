@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Hosting.Tests;
 
+
 public class StartupManagerTests
 {
     [Fact]

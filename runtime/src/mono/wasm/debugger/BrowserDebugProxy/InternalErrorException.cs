@@ -7,6 +7,7 @@ using System;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
+
 public class InternalErrorException : Exception
 {
     public InternalErrorException(string message)

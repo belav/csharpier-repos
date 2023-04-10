@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
+
 internal sealed class MockTimeoutControl : ITimeoutControl
 {
     public TimeoutReason TimerReason { get; } = TimeoutReason.KeepAlive;

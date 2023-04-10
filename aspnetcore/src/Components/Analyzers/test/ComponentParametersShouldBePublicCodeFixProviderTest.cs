@@ -8,6 +8,7 @@ using TestHelper;
 
 namespace Microsoft.AspNetCore.Components.Analyzers.Test;
 
+
 public class ComponentParametersShouldBePublicCodeFixProviderTest : CodeFixVerifier
 {
     [Fact]

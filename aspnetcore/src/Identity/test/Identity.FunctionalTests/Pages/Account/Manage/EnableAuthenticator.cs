@@ -7,6 +7,7 @@ using AngleSharp.Dom.Html;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage;
 
+
 internal class EnableAuthenticator : DefaultUIPage
 {
     public const string AuthenticatorKey =

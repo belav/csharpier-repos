@@ -6,6 +6,7 @@ using Google.Protobuf.Reflection;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
+
 internal interface IServiceInvokerResolver<TService>
     where TService : class
 {

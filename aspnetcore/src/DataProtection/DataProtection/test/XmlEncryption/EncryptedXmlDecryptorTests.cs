@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.DataProtection.Test.XmlEncryption;
 
+
 public class EncryptedXmlDecryptorTests
 {
     [Fact]

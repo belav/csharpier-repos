@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Localization;
 
+
 internal static partial class RequestCultureProviderLoggerExtensions
 {
     [LoggerMessage(

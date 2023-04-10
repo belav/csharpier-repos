@@ -9,6 +9,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
+
 public class HtmlHelperPartialExtensionsTest
 {
     // Func<IHtmlHelper, IHtmlContent>, expected Model, expected ViewDataDictionary

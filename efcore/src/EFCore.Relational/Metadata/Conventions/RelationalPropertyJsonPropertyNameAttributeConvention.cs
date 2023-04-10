@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
+
 /// <summary>
 ///     A convention that configures JSON property name based on the applied <see cref="JsonPropertyNameAttribute" />.
 /// </summary>

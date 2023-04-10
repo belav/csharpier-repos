@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Routing.Internal;
 
+
 /// <summary>
 /// <para>
 /// A singleton service that can be used to write the route table as a state machine

@@ -18,6 +18,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
+
 class TestInput : IDisposable
 {
     private readonly MemoryPool<byte> _memoryPool;

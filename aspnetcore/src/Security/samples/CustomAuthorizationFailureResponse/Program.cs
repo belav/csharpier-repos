@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace CustomAuthorizationFailureResponse;
 
+
 public class Program
 {
     public static void Main(string[] args)

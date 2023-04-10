@@ -15,6 +15,7 @@ using Xunit;
 // This namespace intentionally matches the default assembly namespace.
 namespace Microsoft.Extensions.Localization.Tests;
 
+
 public class TestResourceManagerStringLocalizerFactory : ResourceManagerStringLocalizerFactory
 {
     private ResourceLocationAttribute _resourceLocationAttribute;

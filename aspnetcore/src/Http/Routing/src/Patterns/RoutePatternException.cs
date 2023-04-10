@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
+
 /// <summary>
 /// An exception that is thrown for error constructing a <see cref="RoutePattern"/>.
 /// </summary>

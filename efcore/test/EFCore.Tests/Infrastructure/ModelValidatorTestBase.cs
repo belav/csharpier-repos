@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable MemberHidesStaticFromOuterClass
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 public abstract class ModelValidatorTestBase
 {
     protected virtual void SetBaseType(

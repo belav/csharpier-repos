@@ -14,6 +14,7 @@ using BenchmarkDotNet.Validators;
 
 namespace BenchmarkDotNet.Attributes;
 
+
 internal sealed class DefaultCoreConfig : ManualConfig
 {
     public DefaultCoreConfig()

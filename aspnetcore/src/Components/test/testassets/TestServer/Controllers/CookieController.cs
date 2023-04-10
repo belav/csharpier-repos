@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TestServer.Controllers;
 
+
 [Route("api/[controller]/[action]")]
 [EnableCors("AllowAll")] // Only because the test client apps runs on a different origin
 public class CookieController : Controller

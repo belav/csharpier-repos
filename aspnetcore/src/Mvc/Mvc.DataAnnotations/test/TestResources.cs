@@ -6,6 +6,7 @@ using Resources = Microsoft.AspNetCore.Mvc.DataAnnotations.Test.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 // Wrap resources to make them available as public properties for [Display]. That attribute does not support
 // internal properties.
 public static class TestResources

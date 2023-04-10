@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace Microsoft.EntityFrameworkCore.Extensions;
 
+
 public static class HttpContentExtensions
 {
     public static async Task<T> ReadAsObject<T>(this HttpContent content)

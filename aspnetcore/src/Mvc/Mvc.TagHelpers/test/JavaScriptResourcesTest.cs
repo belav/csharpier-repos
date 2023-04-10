@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
 public class JavaScriptResourcesTest
 {
     [Fact]

@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
+
 internal class ReflectionOperationExecutor : OperationExecutorBase
 {
     private readonly object _executor;

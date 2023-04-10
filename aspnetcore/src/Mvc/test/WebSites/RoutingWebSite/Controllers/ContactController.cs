@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
+
 // This controller is reachable via traditional routing.
 public class ContactController : Controller
 {

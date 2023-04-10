@@ -16,6 +16,7 @@ using Microsoft.Win32;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
+
 /// <summary>
 /// A type which allows reading policy from the system registry.
 /// </summary>

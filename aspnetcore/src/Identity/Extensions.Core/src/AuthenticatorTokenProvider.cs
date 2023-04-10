@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
+
 /// <summary>
 /// Used for authenticator code verification.
 /// </summary>

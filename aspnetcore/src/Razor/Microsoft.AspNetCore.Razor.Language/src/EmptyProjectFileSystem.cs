@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
+
 internal class EmptyProjectFileSystem : RazorProjectFileSystem
 {
     public override IEnumerable<RazorProjectItem> EnumerateItems(string basePath)

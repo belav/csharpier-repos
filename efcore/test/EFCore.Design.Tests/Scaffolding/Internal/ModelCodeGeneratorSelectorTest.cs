@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
+
 public class ModelCodeGeneratorSelectorTest
 {
     [ConditionalFact]
